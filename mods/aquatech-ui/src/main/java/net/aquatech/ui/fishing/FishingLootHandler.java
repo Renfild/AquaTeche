@@ -308,6 +308,9 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:blockresource/untreated_peat", Items.BROWN_DYE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.SAND, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.GRAVEL, 2 + random.nextInt(3)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "good_old_rod" -> {
@@ -316,6 +319,8 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/yttrium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.GRAVEL, 2 + random.nextInt(3)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "bamboo_rod" -> {
@@ -324,6 +329,8 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.BAMBOO, 2 + random.nextInt(4)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.SAND, 2 + random.nextInt(3)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "slimed_rod" -> {
