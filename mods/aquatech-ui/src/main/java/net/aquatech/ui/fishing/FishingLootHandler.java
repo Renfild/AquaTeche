@@ -304,6 +304,7 @@ public class FishingLootHandler {
         switch (rodId) {
             case "humble_rod" -> { // Tier 1: Humble Rod (Primal / Starter Resource Rod)
                 maybeAdd(pool, random, 0.60f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.50f, new ItemStack(Items.STRING, 2 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:raw_latex", Items.SLIME_BALL, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3)));
@@ -315,6 +316,7 @@ public class FishingLootHandler {
             }
             case "bamboo_rod" -> { // Tier 2: Bamboo Rod (Organic & Rubber)
                 maybeAdd(pool, random, 0.60f, getModItem("industrialupgrade:raw_latex", Items.SLIME_BALL, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.STRING, 2 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.60f, new ItemStack(Items.BAMBOO, 2 + random.nextInt(4)));
                 maybeAdd(pool, random, 0.50f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
