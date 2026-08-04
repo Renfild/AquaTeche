@@ -325,6 +325,7 @@ public class FishingLootHandler {
             case "good_old_rod" -> { // Tier 3: Good Old Rod (Early LV / Iron & Tin)
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.50f, new ItemStack(Items.REDSTONE, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.LAPIS_LAZULI, 2 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/yttrium", Items.IRON_ORE, 1));
@@ -356,6 +357,8 @@ public class FishingLootHandler {
             }
             case "starcatcher_rod" -> { // Tier 7: StarCatcher Rod (MV Gold & Tungsten & Sapphire)
                 maybeAdd(pool, random, 0.50f, new ItemStack(Items.GOLD_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.LAPIS_LAZULI, 2 + random.nextInt(4)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.LAPIS_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/tungsten", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/chromium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:preciousgem/sapphire_gem", Items.LAPIS_LAZULI, 1));
@@ -363,6 +366,8 @@ public class FishingLootHandler {
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "azure_crystal_rod" -> { // Tier 8: Azure Crystal Rod (MV Crystals)
+                maybeAdd(pool, random, 0.55f, new ItemStack(Items.LAPIS_LAZULI, 3 + random.nextInt(5)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.LAPIS_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.AMETHYST_SHARD, 2 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:preciousgem/sapphire_gem", Items.LAPIS_LAZULI, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:preciousgem/topaz_gem", Items.AMETHYST_SHARD, 1 + random.nextInt(2)));
