@@ -1,0 +1,90 @@
+{
+  "id": "circuit_case",
+  "displayName": "§d§lCircuit Crate",
+  "iconItemId": "industrialupgrade:crafting_elements/crafting_273_element",
+  "price": 900,
+  "pityThreshold": 12,
+  "pityRarity": "EPIC",
+  "items": [
+    {
+      "itemId": "industrialupgrade:crafting_elements/crafting_272_element",
+      "count": 4,
+      "weight": 28.0,
+      "rarity": "COMMON",
+      "displayName": "§7Electronic Circuit ×4",
+      "command": ""
+    },
+    {
+      "itemId": "industrialupgrade:crafting_elements/crafting_272_element",
+      "count": 8,
+      "weight": 18.0,
+      "rarity": "UNCOMMON",
+      "displayName": "§aElectronic Circuit ×8",
+      "command": "/aquatech grantxp %player% 50"
+    },
+    {
+      "itemId": "industrialupgrade:crafting_elements/crafting_273_element",
+      "count": 2,
+      "weight": 16.0,
+      "rarity": "UNCOMMON",
+      "displayName": "§aAdvanced Circuit ×2",
+      "command": "/aquatech grantxp %player% 70"
+    },
+    {
+      "itemId": "industrialupgrade:crafting_elements/crafting_273_element",
+      "count": 4,
+      "weight": 12.0,
+      "rarity": "RARE",
+      "displayName": "§9Advanced Circuit ×4",
+      "command": "/aquatech grantxp %player% 120"
+    },
+    {
+      "itemId": "industrialupgrade:crafting_elements/crafting_40_element",
+      "count": 2,
+      "weight": 8.0,
+      "rarity": "RARE",
+      "displayName": "§9IU Crafting Element ×2",
+      "command": "/aquatech grantxp %player% 100"
+    },
+    {
+      "itemId": "industrialupgrade:crafting_elements/crafting_290_element",
+      "count": 8,
+      "weight": 8.0,
+      "rarity": "RARE",
+      "displayName": "§9Sticky Resin ×8",
+      "command": "/aquatech grantxp %player% 80"
+    },
+    {
+      "itemId": "industrialupgrade:cable/tin_cable",
+      "count": 64,
+      "weight": 6.0,
+      "rarity": "EPIC",
+      "displayName": "§5Tin Cable ×64",
+      "command": "/aquatech grantxp %player% 150"
+    },
+    {
+      "itemId": "ae2:logic_processor",
+      "count": 4,
+      "weight": 3.0,
+      "rarity": "EPIC",
+      "displayName": "§5AE2 Logic Processor ×4",
+      "command": "/aquatech grantxp %player% 180"
+    },
+    {
+      "itemId": "ae2:engineering_processor",
+      "count": 2,
+      "weight": 1.5,
+      "rarity": "LEGENDARY",
+      "displayName": "§6AE2 Engineering Processor ×2",
+      "command": "/aquatech grantxp %player% 250"
+    },
+    {
+      "itemId": "ae2:calculation_processor",
+      "count": 2,
+      "weight": 1.0,
+      "rarity": "LEGENDARY",
+      "displayName": "§6AE2 Calculation Processor ×2",
+      "command": "/aquatech grantxp %player% 250"
+    }
+  ]
+}

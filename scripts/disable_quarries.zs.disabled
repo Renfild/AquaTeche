@@ -1,0 +1,21 @@
+# AquaTech — disable Simply Quarries + Industrial Upgrade quarry crafts
+# CraftTweaker 1.20.1 / Forge
+# After change: /reload  (или рестарт). Смотри logs/crafttweaker.log
+
+print("[AquaTech] Disabling quarry crafts (Simply Quarries jar parked; IU quarries blocked)...");
+
+// Весь Simply Quarries (если jar вдруг вернули)
+craftingTable.removeByModid("simplyquarries");
+
+// Любые crafting-рецепты, у которых в id есть "quarry"
+// (Quantum/Steam/Petrol/Earth quarry из Industrial Upgrade и т.п.)
+craftingTable.removeByRegex(".*quarry.*");
+recipes.removeByRegex(".*quarry.*");
+
+// Доп. IU id без слова quarry в path
+craftingTable.removeByName("industrialupgrade:petrol_quarry");
+craftingTable.removeByName("industrialupgrade:petrol_quarry_item");
+craftingTable.removeByName("industrialupgrade:quarry_vein");
+craftingTable.removeByName("industrialupgrade:quarry_vein_item");
+
+print("[AquaTech] Quarry crafts disabled.");

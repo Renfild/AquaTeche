@@ -1,0 +1,151 @@
+package net.aquatech.ui.client;
+
+import com.mojang.blaze3d.platform.InputConstants;
+import net.aquatech.ui.AquaTechUI;
+import net.aquatech.ui.client.bubble.ChatBubbleManager;
+import net.aquatech.ui.client.gui.OceanSkillTreeScreen;
+import net.aquatech.ui.client.hud.RhythmHookOverlay;
+import net.aquatech.ui.client.tab.OceanTabOverlay;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.MovementInputUpdateEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.glfw.GLFW;
+
+@Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+public final class ClientEvents {
+
+    public static final KeyMapping KEY_SKILL_TREE = new KeyMapping(
+            "key.aquatech_ui.skill_tree",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_K,
+            "key.categories.aquatech_ui"
+    );
+
+    private ClientEvents() {
+    }
+
+    public static void registerOverlays(RegisterGuiOverlaysEvent event) {
+        event.registerAboveAll(
+                "ocean_hud",
+                (gui, graphics, partialTick, screenWidth, screenHeight) ->
+                        net.aquatech.ui.client.hud.OceanHudOverlay.render(graphics, partialTick)
+        );
+        event.registerAboveAll(
+                "ocean_tab",
+                (gui, graphics, partialTick, screenWidth, screenHeight) -> {
+                    if (ClientUiState.tabOpen()) {
+                        OceanTabOverlay.render(graphics, partialTick);
+                    }
+                }
+        );
+        event.registerAboveAll(
+                "rhythm_hook",
+                (gui, graphics, partialTick, screenWidth, screenHeight) ->
+                        net.aquatech.ui.client.hud.RhythmHookOverlay.render(graphics, partialTick)
+        );
+    }
+
+    @SubscribeEvent
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) {
+            return;
+        }
+        ClientUiState.tick();
+        ChatBubbleManager.tick();
+        net.aquatech.ui.client.hud.RhythmHookOverlay.tick();
+        StarCatcherToastSuppressor.tick();
+
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.options == null) {
+            ClientUiState.setTabOpen(false);
+            return;
+        }
+
+        if (RhythmHookOverlay.isActive()) {
+            ClientUiState.setTabOpen(false);
+            return;
+        }
+
+        // Handle Keybind 'K' for Skill Tree
+        while (KEY_SKILL_TREE.consumeClick()) {
+            if (mc.screen == null) {
+                mc.setScreen(new OceanSkillTreeScreen());
+            }
+        }
+
+        boolean wasOpen = ClientUiState.tabOpen();
+        int tabKey = mc.options.keyPlayerList.getKey().getValue();
+        boolean tabHeld = mc.screen == null
+                && InputConstants.isKeyDown(mc.getWindow().getWindow(), tabKey);
+        ClientUiState.setTabOpen(tabHeld);
+
+        mc.options.keyPlayerList.setDown(false);
+        if (wasOpen && !tabHeld) {
+            OceanTabOverlay.resetScroll();
+        }
+    }
+
+    // InputEvent.Key is NOT cancelable on Forge 1.20.1 — keys are suppressed in
+    // RhythmHookOverlay.suppressVanillaInput() + onMovementInput instead.
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onMouseButton(InputEvent.MouseButton.Pre event) {
+        if (!RhythmHookOverlay.isActive()) return;
+        // Cancel all mouse events so vanilla doesn't use/attack; overlay reads RMB via GLFW.
+        event.setCanceled(true);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onMouseScroll(InputEvent.MouseScrollingEvent event) {
+        if (RhythmHookOverlay.isActive()) {
+            event.setCanceled(true);
+            return;
+        }
+        if (!ClientUiState.tabOpen()) {
+            return;
+        }
+        OceanTabOverlay.scroll(event.getScrollDelta());
+        event.setCanceled(true);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onMovementInput(MovementInputUpdateEvent event) {
+        if (!RhythmHookOverlay.isActive()) return;
+        event.getInput().up = false;
+        event.getInput().down = false;
+        event.getInput().left = false;
+        event.getInput().right = false;
+        event.getInput().jumping = false;
+        event.getInput().shiftKeyDown = false;
+        event.getInput().forwardImpulse = 0f;
+        event.getInput().leftImpulse = 0f;
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onOverlayPre(RenderGuiOverlayEvent.Pre event) {
+        ResourceLocation id = event.getOverlay().id();
+        if (VanillaGuiOverlay.PLAYER_LIST.type().equals(id)) {
+            Minecraft.getInstance().gui.getTabList().setVisible(false);
+            event.setCanceled(true);
+        }
+        if (VanillaGuiOverlay.SCOREBOARD.type().equals(id)) {
+            event.setCanceled(true);
+        }
+        // Мини-игра: нижние тексты (имя предмета / record overlay) налезают на UI
+        if (RhythmHookOverlay.isActive()
+                && (VanillaGuiOverlay.ITEM_NAME.type().equals(id)
+                || VanillaGuiOverlay.RECORD_OVERLAY.type().equals(id))) {
+            event.setCanceled(true);
+        }
+    }
+}

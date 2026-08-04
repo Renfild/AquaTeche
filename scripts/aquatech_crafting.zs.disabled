@@ -1,0 +1,394 @@
+// AquaTech: Ocean Horizon - Comprehensive Custom CraftTweaker Recipes
+import crafttweaker.api.item.IItemStack;
+
+print("===============================================");
+print("   Loading AquaTech: Ocean Horizon Custom Recipes");
+print("===============================================");
+
+// --------------------------------------------------
+// 1. CREATE MOD CUSTOM RECIPES
+// --------------------------------------------------
+// Water Wheel
+craftingTable.remove(<item:create:water_wheel>);
+craftingTable.addShaped("aquatech_water_wheel", <item:create:water_wheel>, [
+    [<tag:items:minecraft:planks>, <item:minecraft:iron_nugget>, <tag:items:minecraft:planks>],
+    [<item:minecraft:iron_nugget>, <item:minecraft:water_bucket>, <item:minecraft:iron_nugget>],
+    [<tag:items:minecraft:planks>, <item:minecraft:iron_nugget>, <tag:items:minecraft:planks>]
+]);
+
+// Mechanical Press
+craftingTable.remove(<item:create:mechanical_press>);
+craftingTable.addShaped("aquatech_mechanical_press", <item:create:mechanical_press>, [
+    [<item:create:shaft>, <item:create:andesite_casing>, <item:create:shaft>],
+    [<item:minecraft:iron_ingot>, <item:minecraft:iron_block>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:cobblestone>, <item:minecraft:smooth_stone>, <item:minecraft:cobblestone>]
+]);
+
+// Mechanical Mixer
+craftingTable.remove(<item:create:mechanical_mixer>);
+craftingTable.addShaped("aquatech_mechanical_mixer", <item:create:mechanical_mixer>, [
+    [<item:create:cogwheel>, <item:create:andesite_casing>, <item:create:cogwheel>],
+    [<item:create:shaft>, <item:create:whisk>, <item:create:shaft>],
+    [<item:minecraft:iron_ingot>, <item:create:basin>, <item:minecraft:iron_ingot>]
+]);
+
+// Mechanical Saw
+craftingTable.remove(<item:create:mechanical_saw>);
+craftingTable.addShaped("aquatech_mechanical_saw", <item:create:mechanical_saw>, [
+    [<item:minecraft:iron_ingot>, <item:create:iron_sheet>, <item:minecraft:iron_ingot>],
+    [<item:create:iron_sheet>, <item:create:andesite_casing>, <item:create:iron_sheet>],
+    [<item:create:shaft>, <item:create:shaft>, <item:create:shaft>]
+]);
+
+// Mechanical Drill
+craftingTable.remove(<item:create:mechanical_drill>);
+craftingTable.addShaped("aquatech_mechanical_drill", <item:create:mechanical_drill>, [
+    [<item:minecraft:iron_block>, <item:create:iron_sheet>, <item:minecraft:iron_block>],
+    [<item:create:iron_sheet>, <item:create:andesite_casing>, <item:create:iron_sheet>],
+    [<item:create:shaft>, <item:create:shaft>, <item:create:shaft>]
+]);
+
+// --------------------------------------------------
+// 2. ENDER IO CUSTOM RECIPES
+// --------------------------------------------------
+// Energy Conduit
+craftingTable.remove(<item:enderio:energy_conduit>);
+craftingTable.addShaped("aquatech_energy_conduit", <item:enderio:energy_conduit> * 8, [
+    [<item:enderio:conduit_binder>, <item:enderio:conduit_binder>, <item:enderio:conduit_binder>],
+    [<item:minecraft:copper_ingot>, <item:minecraft:redstone>, <item:minecraft:copper_ingot>],
+    [<item:enderio:conduit_binder>, <item:enderio:conduit_binder>, <item:enderio:conduit_binder>]
+]);
+
+// Primitive Alloy Smelter
+craftingTable.remove(<item:enderio:primitive_alloy_smelter>);
+craftingTable.addShaped("aquatech_primitive_alloy_smelter", <item:enderio:primitive_alloy_smelter>, [
+    [<item:minecraft:furnace>, <item:minecraft:iron_ingot>, <item:minecraft:furnace>],
+    [<item:minecraft:iron_ingot>, <item:minecraft:cauldron>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:smooth_stone>, <item:minecraft:smooth_stone>, <item:minecraft:smooth_stone>]
+]);
+
+// Stirling Generator
+craftingTable.remove(<item:enderio:stirling_generator>);
+craftingTable.addShaped("aquatech_stirling_generator", <item:enderio:stirling_generator>, [
+    [<item:minecraft:smooth_stone>, <item:minecraft:furnace>, <item:minecraft:smooth_stone>],
+    [<item:minecraft:iron_ingot>, <item:enderio:basic_capacitor>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:piston>, <item:minecraft:redstone_block>, <item:minecraft:piston>]
+]);
+
+// --------------------------------------------------
+// 3. INDUSTRIAL FOREGOING CUSTOM RECIPES
+// --------------------------------------------------
+// Fluid Extractor
+craftingTable.remove(<item:industrialforegoing:fluid_extractor>);
+craftingTable.addShaped("aquatech_fluid_extractor", <item:industrialforegoing:fluid_extractor>, [
+    [<item:minecraft:iron_ingot>, <item:minecraft:piston>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:redstone_block>, <item:minecraft:water_bucket>, <item:minecraft:redstone_block>],
+    [<item:minecraft:iron_ingot>, <item:minecraft:iron_ingot>, <item:minecraft:iron_ingot>]
+]);
+
+// Latex Processing Unit
+craftingTable.remove(<item:industrialforegoing:latex_processing_unit>);
+craftingTable.addShaped("aquatech_latex_processing_unit", <item:industrialforegoing:latex_processing_unit>, [
+    [<item:minecraft:iron_ingot>, <item:minecraft:furnace>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:water_bucket>, <item:industrialforegoing:machine_frame_pity>, <item:minecraft:water_bucket>],
+    [<item:minecraft:redstone>, <item:minecraft:redstone>, <item:minecraft:redstone>]
+]);
+
+// Plant Gatherer
+craftingTable.remove(<item:industrialforegoing:plant_gatherer>);
+craftingTable.addShaped("aquatech_plant_gatherer", <item:industrialforegoing:plant_gatherer>, [
+    [<item:minecraft:iron_axe>, <item:minecraft:iron_hoe>, <item:minecraft:iron_axe>],
+    [<item:minecraft:iron_ingot>, <item:industrialforegoing:machine_frame_pity>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:chest>, <item:minecraft:redstone_block>, <item:minecraft:chest>]
+]);
+
+// --------------------------------------------------
+// 4. THERMAL EXPANSION CUSTOM RECIPES
+// --------------------------------------------------
+// Induction Smelter
+craftingTable.remove(<item:thermal:machine_smelter>);
+craftingTable.addShaped("aquatech_induction_smelter", <item:thermal:machine_smelter>, [
+    [<item:minecraft:iron_ingot>, <item:thermal:rf_coil>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:copper_ingot>, <item:minecraft:blast_furnace>, <item:minecraft:copper_ingot>],
+    [<item:thermal:invar_ingot>, <item:thermal:redstone_servo>, <item:thermal:invar_ingot>]
+]);
+
+// Pulverizer
+craftingTable.remove(<item:thermal:machine_pulverizer>);
+craftingTable.addShaped("aquatech_pulverizer", <item:thermal:machine_pulverizer>, [
+    [<item:minecraft:piston>, <item:minecraft:flint>, <item:minecraft:piston>],
+    [<item:minecraft:copper_ingot>, <item:thermal:rf_coil>, <item:minecraft:copper_ingot>],
+    [<item:thermal:invar_ingot>, <item:thermal:redstone_servo>, <item:thermal:invar_ingot>]
+]);
+
+// --------------------------------------------------
+// 5. APPLIED ENERGISTICS 2 CUSTOM RECIPES
+// --------------------------------------------------
+// ME Controller
+craftingTable.remove(<item:ae2:controller>);
+craftingTable.addShaped("aquatech_me_controller", <item:ae2:controller>, [
+    [<item:ae2:smooth_sky_stone_block>, <item:ae2:fluix_crystal>, <item:ae2:smooth_sky_stone_block>],
+    [<item:ae2:fluix_crystal>, <item:ae2:engineering_processor>, <item:ae2:fluix_crystal>],
+    [<item:ae2:smooth_sky_stone_block>, <item:ae2:fluix_crystal>, <item:ae2:smooth_sky_stone_block>]
+]);
+
+// ME Drive
+craftingTable.remove(<item:ae2:drive>);
+craftingTable.addShaped("aquatech_me_drive", <item:ae2:drive>, [
+    [<item:minecraft:iron_ingot>, <item:ae2:engineering_processor>, <item:minecraft:iron_ingot>],
+    [<item:ae2:fluix_glass_cable>, <item:ae2:engineering_processor>, <item:ae2:fluix_glass_cable>],
+    [<item:minecraft:iron_ingot>, <item:ae2:engineering_processor>, <item:minecraft:iron_ingot>]
+]);
+
+// --------------------------------------------------
+// 6. VALKYRIEN SKIES / EUREKA CUSTOM RECIPES
+// --------------------------------------------------
+// Ship Helm
+craftingTable.remove(<item:vs_eureka:oak_ship_helm>);
+craftingTable.addShaped("aquatech_ship_helm", <item:vs_eureka:oak_ship_helm>, [
+    [<tag:items:minecraft:logs>, <item:minecraft:compass>, <tag:items:minecraft:logs>],
+    [<item:minecraft:iron_ingot>, <item:create:water_wheel>, <item:minecraft:iron_ingot>],
+    [<tag:items:minecraft:logs>, <item:minecraft:iron_ingot>, <tag:items:minecraft:logs>]
+]);
+
+// Ship Engine
+craftingTable.remove(<item:vs_eureka:engine>);
+craftingTable.addShaped("aquatech_ship_engine", <item:vs_eureka:engine>, [
+    [<item:minecraft:iron_ingot>, <item:create:steam_engine>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:blast_furnace>, <item:minecraft:fire_charge>, <item:minecraft:blast_furnace>],
+    [<item:minecraft:smooth_stone>, <item:minecraft:iron_block>, <item:minecraft:smooth_stone>]
+]);
+
+// --------------------------------------------------
+// 7. KICKSTARTER BOAT (starter resource vessel)
+// --------------------------------------------------
+// Craft / reclaim the named Kickstarter chest boat from salvaged parts
+craftingTable.addShaped("aquatech_kickstarter_boat",
+    <item:minecraft:oak_chest_boat>.withTag({
+        display: {
+            Name: "{\"text\":\"Лодка Кикстартера\",\"color\":\"aqua\",\"italic\":false,\"bold\":true}",
+            Lore: [
+                "{\"text\":\"Твой первый корабль после Катастрофы\",\"color\":\"gray\",\"italic\":false}",
+                "{\"text\":\"Лови дерево, камень и обломки удочкой\",\"color\":\"dark_aqua\",\"italic\":false}"
+            ]
+        }
+    }),
+    [
+        [<item:minecraft:oak_planks>, <item:minecraft:chest>, <item:minecraft:oak_planks>],
+        [<item:minecraft:oak_planks>, <item:minecraft:fishing_rod>, <item:minecraft:oak_planks>],
+        [<item:minecraft:kelp>, <item:minecraft:string>, <item:minecraft:kelp>]
+    ]
+);
+
+// --------------------------------------------------
+// 8. AQUATECH CUSTOM RESOURCE FISHING RODS & AUTO-FISHER
+// --------------------------------------------------
+// Novice Fishing Rod (Starter Skyblock Rod)
+craftingTable.addShaped("aquatech_novice_fishing_rod", <item:aquatech_ui:novice_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:stick>, <item:minecraft:kelp>],
+    [<item:minecraft:air>, <item:minecraft:stick>, <item:minecraft:string>],
+    [<item:minecraft:oak_planks>, <item:minecraft:air>, <item:minecraft:string>]
+]);
+
+// Iron Fishing Rod
+craftingTable.addShaped("aquatech_iron_fishing_rod", <item:aquatech_ui:iron_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:iron_ingot>, <item:aquatech_ui:novice_fishing_rod>],
+    [<item:minecraft:air>, <item:create:shaft>, <item:minecraft:string>],
+    [<item:minecraft:iron_ingot>, <item:minecraft:air>, <item:minecraft:chain>]
+]);
+
+// Gold Fishing Rod
+craftingTable.addShaped("aquatech_gold_fishing_rod", <item:aquatech_ui:gold_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:gold_ingot>, <item:aquatech_ui:iron_fishing_rod>],
+    [<item:minecraft:air>, <item:farmersdelight:canvas>, <item:minecraft:string>],
+    [<item:minecraft:gold_ingot>, <item:minecraft:air>, <item:minecraft:gold_nugget>]
+]);
+
+// Kinetic Fishing Rod (Create integration)
+craftingTable.addShaped("aquatech_kinetic_fishing_rod", <item:aquatech_ui:kinetic_fishing_rod>, [
+    [<item:minecraft:air>, <item:create:andesite_casing>, <item:aquatech_ui:iron_fishing_rod>],
+    [<item:minecraft:air>, <item:create:shaft>, <item:create:cogwheel>],
+    [<item:create:andesite_alloy>, <item:minecraft:air>, <item:create:brass_sheet>]
+]);
+
+// Thermal Fishing Rod (Thermal Expansion integration)
+craftingTable.addShaped("aquatech_thermal_fishing_rod", <item:aquatech_ui:thermal_fishing_rod>, [
+    [<item:minecraft:air>, <item:thermal:rf_coil>, <item:aquatech_ui:iron_fishing_rod>],
+    [<item:minecraft:air>, <item:thermal:redstone_servo>, <item:minecraft:string>],
+    [<item:thermal:invar_ingot>, <item:minecraft:air>, <item:minecraft:copper_ingot>]
+]);
+
+// Diamond Fishing Rod (Ender IO / AE2 integration)
+craftingTable.addShaped("aquatech_diamond_fishing_rod", <item:aquatech_ui:diamond_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:diamond>, <item:aquatech_ui:gold_fishing_rod>],
+    [<item:minecraft:air>, <item:enderio:conduit_binder>, <item:minecraft:lapis_block>],
+    [<item:minecraft:diamond>, <item:minecraft:air>, <item:ae2:fluix_crystal>]
+]);
+
+// Emerald Fishing Rod (Mystical Agriculture integration)
+craftingTable.addShaped("aquatech_emerald_fishing_rod", <item:aquatech_ui:emerald_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:emerald>, <item:aquatech_ui:diamond_fishing_rod>],
+    [<item:minecraft:air>, <item:mysticalagriculture:inferium_essence>, <item:minecraft:experience_bottle>],
+    [<item:minecraft:emerald_block>, <item:minecraft:air>, <item:minecraft:experience_bottle>]
+]);
+
+// Prismarine Fishing Rod (Aquaculture / Ocean integration)
+craftingTable.addShaped("aquatech_prismarine_fishing_rod", <item:aquatech_ui:prismarine_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:prismarine_crystals>, <item:aquatech_ui:emerald_fishing_rod>],
+    [<item:minecraft:air>, <item:minecraft:prismarine_shard>, <item:minecraft:sea_lantern>],
+    [<item:minecraft:prismarine_shard>, <item:minecraft:air>, <item:minecraft:heart_of_the_sea>]
+]);
+
+// Netherite Fishing Rod
+craftingTable.addShaped("aquatech_netherite_fishing_rod", <item:aquatech_ui:netherite_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:netherite_scrap>, <item:aquatech_ui:diamond_fishing_rod>],
+    [<item:minecraft:air>, <item:minecraft:blaze_rod>, <item:minecraft:magma_cream>],
+    [<item:minecraft:netherite_ingot>, <item:minecraft:air>, <item:minecraft:blaze_rod>]
+]);
+
+// Ender Fishing Rod (AE2 integration)
+craftingTable.addShaped("aquatech_ender_fishing_rod", <item:aquatech_ui:ender_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:ender_pearl>, <item:aquatech_ui:netherite_fishing_rod>],
+    [<item:minecraft:air>, <item:minecraft:shulker_shell>, <item:ae2:engineering_processor>],
+    [<item:minecraft:ender_eye>, <item:minecraft:air>, <item:minecraft:end_stone>]
+]);
+
+// Abyssal Fishing Rod (Mekanism / Apotheosis endgame integration)
+craftingTable.addShaped("aquatech_abyssal_fishing_rod", <item:aquatech_ui:abyssal_fishing_rod>, [
+    [<item:minecraft:air>, <item:minecraft:echo_shard>, <item:aquatech_ui:ender_fishing_rod>],
+    [<item:minecraft:air>, <item:minecraft:nether_star>, <item:minecraft:heart_of_the_sea>],
+    [<item:mekanism:ultimate_control_circuit>, <item:minecraft:air>, <item:minecraft:echo_shard>]
+]);
+
+// --------------------------------------------------
+// 9. AQUATECH LURES, MACHINE UPGRADES & OCEAN FILTER
+// --------------------------------------------------
+// Magnetic Lure
+craftingTable.addShaped("aquatech_magnetic_lure", <item:aquatech_ui:magnetic_lure> * 4, [
+    [<item:minecraft:iron_ingot>, <item:minecraft:redstone>, <item:minecraft:iron_ingot>],
+    [<item:minecraft:copper_ingot>, <item:minecraft:string>, <item:minecraft:copper_ingot>],
+    [<item:minecraft:air>, <item:minecraft:iron_nugget>, <item:minecraft:air>]
+]);
+
+// Kinetic Lure
+craftingTable.addShaped("aquatech_kinetic_lure", <item:aquatech_ui:kinetic_lure> * 4, [
+    [<item:create:andesite_alloy>, <item:minecraft:kelp>, <item:create:andesite_alloy>],
+    [<item:create:cogwheel>, <item:minecraft:string>, <item:create:shaft>],
+    [<item:minecraft:air>, <item:create:andesite_alloy>, <item:minecraft:air>]
+]);
+
+// Thermal Lure
+craftingTable.addShaped("aquatech_thermal_lure", <item:aquatech_ui:thermal_lure> * 4, [
+    [<item:minecraft:copper_ingot>, <item:minecraft:redstone>, <item:minecraft:copper_ingot>],
+    [<item:thermal:rf_coil>, <item:minecraft:string>, <item:thermal:redstone_servo>],
+    [<item:minecraft:air>, <item:thermal:invar_ingot>, <item:minecraft:air>]
+]);
+
+// Abyssal Lure
+craftingTable.addShaped("aquatech_abyssal_lure", <item:aquatech_ui:abyssal_lure> * 2, [
+    [<item:minecraft:echo_shard>, <item:minecraft:prismarine_crystals>, <item:minecraft:echo_shard>],
+    [<item:minecraft:heart_of_the_sea>, <item:minecraft:string>, <item:minecraft:heart_of_the_sea>],
+    [<item:minecraft:air>, <item:minecraft:nether_star>, <item:minecraft:air>]
+]);
+
+// Speed Upgrade Module
+craftingTable.addShaped("aquatech_speed_upgrade", <item:aquatech_ui:speed_upgrade>, [
+    [<item:create:cogwheel>, <item:minecraft:redstone>, <item:create:cogwheel>],
+    [<item:minecraft:gold_ingot>, <item:create:andesite_casing>, <item:minecraft:gold_ingot>],
+    [<item:minecraft:redstone>, <item:minecraft:gold_ingot>, <item:minecraft:redstone>]
+]);
+
+// Energy Efficiency Module
+craftingTable.addShaped("aquatech_efficiency_upgrade", <item:aquatech_ui:efficiency_upgrade>, [
+    [<item:thermal:rf_coil>, <item:minecraft:copper_ingot>, <item:thermal:rf_coil>],
+    [<item:minecraft:redstone>, <item:thermal:invar_ingot>, <item:minecraft:redstone>],
+    [<item:minecraft:copper_ingot>, <item:minecraft:redstone>, <item:minecraft:copper_ingot>]
+]);
+
+// Double Hook Module
+craftingTable.addShaped("aquatech_double_hook_upgrade", <item:aquatech_ui:double_hook_upgrade>, [
+    [<item:minecraft:diamond>, <item:aquatech_ui:iron_fishing_rod>, <item:minecraft:diamond>],
+    [<item:minecraft:iron_block>, <item:minecraft:chest>, <item:minecraft:iron_block>],
+    [<item:minecraft:diamond>, <item:minecraft:iron_block>, <item:minecraft:diamond>]
+]);
+
+// Mesh Filter
+craftingTable.addShaped("aquatech_mesh_filter", <item:aquatech_ui:mesh_filter>, [
+    [<item:minecraft:string>, <item:minecraft:iron_nugget>, <item:minecraft:string>],
+    [<item:minecraft:iron_nugget>, <item:minecraft:string>, <item:minecraft:iron_nugget>],
+    [<item:minecraft:string>, <item:minecraft:iron_nugget>, <item:minecraft:string>]
+]);
+
+// Ocean Filter Machine
+craftingTable.addShaped("aquatech_ocean_filter", <item:aquatech_ui:ocean_filter>, [
+    [<item:minecraft:iron_block>, <item:aquatech_ui:mesh_filter>, <item:minecraft:iron_block>],
+    [<item:create:andesite_casing>, <item:thermal:rf_coil>, <item:create:andesite_casing>],
+    [<item:minecraft:smooth_stone>, <item:minecraft:chest>, <item:minecraft:smooth_stone>]
+]);
+
+// --------------------------------------------------
+// 10. SEABED DREDGER, DRILL BIT, GOGGLES & MAGNET
+// --------------------------------------------------
+// Dredger Drill Bit
+craftingTable.addShaped("aquatech_dredger_drill_bit", <item:aquatech_ui:dredger_drill_bit>, [
+    [<item:minecraft:diamond>, <item:create:mechanical_drill>, <item:minecraft:diamond>],
+    [<item:minecraft:obsidian>, <item:thermal:invar_ingot>, <item:minecraft:obsidian>],
+    [<item:minecraft:netherite_scrap>, <item:minecraft:diamond>, <item:minecraft:netherite_scrap>]
+]);
+
+// Sonar Goggles
+craftingTable.addShaped("aquatech_sonar_goggles", <item:aquatech_ui:sonar_goggles>, [
+    [<item:minecraft:prismarine_crystals>, <item:minecraft:leather_helmet>, <item:minecraft:prismarine_crystals>],
+    [<item:minecraft:heart_of_the_sea>, <item:minecraft:glass>, <item:minecraft:heart_of_the_sea>],
+    [<item:minecraft:gold_ingot>, <item:minecraft:redstone>, <item:minecraft:gold_ingot>]
+]);
+
+// Abyssal Magnet
+craftingTable.addShaped("aquatech_abyssal_magnet", <item:aquatech_ui:abyssal_magnet>, [
+    [<item:minecraft:iron_block>, <item:minecraft:echo_shard>, <item:minecraft:copper_block>],
+    [<item:minecraft:redstone_block>, <item:aquatech_ui:abyssal_lure>, <item:minecraft:redstone_block>],
+    [<item:minecraft:iron_block>, <item:minecraft:heart_of_the_sea>, <item:minecraft:copper_block>]
+]);
+
+// Seabed Dredger Machine
+craftingTable.addShaped("aquatech_seabed_dredger", <item:aquatech_ui:seabed_dredger>, [
+    [<item:minecraft:obsidian>, <item:aquatech_ui:dredger_drill_bit>, <item:minecraft:obsidian>],
+    [<item:create:mechanical_drill>, <item:thermal:machine_smelter>, <item:create:mechanical_drill>],
+    [<item:minecraft:netherite_ingot>, <item:ae2:controller>, <item:minecraft:netherite_ingot>]
+]);
+
+
+// Kelp Bio Pellet (gated)
+craftingTable.removeByName("aquatech_ui:kelp_bio_pellet");
+craftingTable.addShaped("aquatech_kelp_bio_pellet", <item:aquatech_ui:kelp_bio_pellet> * 4, [
+    [<item:minecraft:dried_kelp_block>, <item:minecraft:dried_kelp_block>, <item:minecraft:dried_kelp_block>],
+    [<item:minecraft:dried_kelp_block>, <item:minecraft:redstone_block>, <item:minecraft:dried_kelp_block>],
+    [<item:minecraft:dried_kelp_block>, <item:minecraft:dried_kelp_block>, <item:minecraft:dried_kelp_block>]
+]);
+
+// Hydro-Thermal Energy Reactor
+craftingTable.addShaped("aquatech_hydro_reactor", <item:aquatech_ui:hydro_reactor>, [
+    [<item:minecraft:prismarine_bricks>, <item:minecraft:heart_of_the_sea>, <item:minecraft:prismarine_bricks>],
+    [<item:thermal:dynamo_stirling>, <item:aquatech_ui:abyssal_fishing_rod>, <item:thermal:dynamo_stirling>],
+    [<item:minecraft:netherite_block>, <item:thermal:rf_coil>, <item:minecraft:netherite_block>]
+]);
+
+// Ocean Relic Altar
+craftingTable.addShaped("aquatech_ocean_altar", <item:aquatech_ui:ocean_altar>, [
+    [<item:minecraft:echo_shard>, <item:minecraft:heart_of_the_sea>, <item:minecraft:echo_shard>],
+    [<item:minecraft:prismarine_shard>, <item:minecraft:crying_obsidian>, <item:minecraft:prismarine_shard>],
+    [<item:minecraft:obsidian>, <item:minecraft:nether_star>, <item:minecraft:obsidian>]
+]);
+
+// Ocean Guide Book (Encyclopedia)
+craftingTable.addShapeless("aquatech_ocean_guide_book", <item:aquatech_ui:ocean_guide_book>, [
+    <item:minecraft:book>, <item:minecraft:kelp>
+]);
+
+print("===============================================");
+print("   AquaTech: All Core Ocean Features & Recipes OK!");
+print("===============================================");
+
+
+
+

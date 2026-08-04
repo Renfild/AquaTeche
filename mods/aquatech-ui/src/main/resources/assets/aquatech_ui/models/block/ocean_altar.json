@@ -1,0 +1,346 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "aquatech_ui:block/ocean_altar_side",
+    "bottom": "aquatech_ui:block/ocean_altar_bottom",
+    "top": "aquatech_ui:block/ocean_altar_top",
+    "side": "aquatech_ui:block/ocean_altar_side",
+    "front": "aquatech_ui:block/ocean_altar_front"
+  },
+  "elements": [
+    {
+      "comment": "Altar Base",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        4,
+        16
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#bottom",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#top"
+        },
+        "north": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "comment": "NW Pillar",
+      "from": [
+        1,
+        4,
+        1
+      ],
+      "to": [
+        4,
+        14,
+        4
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            2,
+            4,
+            12
+          ],
+          "texture": "#side"
+        },
+        "south": {
+          "uv": [
+            1,
+            2,
+            4,
+            12
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            1,
+            2,
+            4,
+            12
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            1,
+            2,
+            4,
+            12
+          ],
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "comment": "NE Pillar",
+      "from": [
+        12,
+        4,
+        1
+      ],
+      "to": [
+        15,
+        14,
+        4
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            2,
+            15,
+            12
+          ],
+          "texture": "#side"
+        },
+        "south": {
+          "uv": [
+            12,
+            2,
+            15,
+            12
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            12,
+            2,
+            15,
+            12
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            12,
+            2,
+            15,
+            12
+          ],
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "comment": "SW Pillar",
+      "from": [
+        1,
+        4,
+        12
+      ],
+      "to": [
+        4,
+        14,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            2,
+            4,
+            12
+          ],
+          "texture": "#side"
+        },
+        "south": {
+          "uv": [
+            1,
+            2,
+            4,
+            12
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            1,
+            2,
+            4,
+            12
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            1,
+            2,
+            4,
+            12
+          ],
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "comment": "SE Pillar",
+      "from": [
+        12,
+        4,
+        12
+      ],
+      "to": [
+        15,
+        14,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            2,
+            15,
+            12
+          ],
+          "texture": "#side"
+        },
+        "south": {
+          "uv": [
+            12,
+            2,
+            15,
+            12
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            12,
+            2,
+            15,
+            12
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            12,
+            2,
+            15,
+            12
+          ],
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "comment": "Central Altar Bowl",
+      "from": [
+        4,
+        6,
+        4
+      ],
+      "to": [
+        12,
+        12,
+        12
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#top"
+        },
+        "north": {
+          "uv": [
+            4,
+            4,
+            12,
+            10
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            4,
+            4,
+            12,
+            10
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            4,
+            4,
+            12,
+            10
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            4,
+            4,
+            12,
+            10
+          ],
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

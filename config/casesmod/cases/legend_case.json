@@ -1,0 +1,114 @@
+{
+  "id": "legend_case",
+  "displayName": "§c§l§nOcean Legend Crate",
+  "iconItemId": "aquatech_ui:abyssal_fishing_rod",
+  "price": 5000,
+  "pityThreshold": 8,
+  "pityRarity": "EPIC",
+  "items": [
+    {
+      "itemId": "industrialupgrade:machines/spectral_solar_panel",
+      "count": 1,
+      "weight": 14.0,
+      "rarity": "COMMON",
+      "displayName": "§7Spectral Solar Panel",
+      "command": ""
+    },
+    {
+      "itemId": "industrialupgrade:machines/singular_solar_panel",
+      "count": 1,
+      "weight": 12.0,
+      "rarity": "UNCOMMON",
+      "displayName": "§aSingular Solar Panel",
+      "command": "/aquatech grantxp %player% 100"
+    },
+    {
+      "itemId": "industrialupgrade:machines/proton_solar_panel",
+      "count": 1,
+      "weight": 10.0,
+      "rarity": "UNCOMMON",
+      "displayName": "§aProtonic Solar Panel",
+      "command": "/aquatech grantxp %player% 120"
+    },
+    {
+      "itemId": "aquatech_ui:thermal_fishing_rod",
+      "count": 1,
+      "weight": 10.0,
+      "rarity": "RARE",
+      "displayName": "§9Thermal Fishing Rod",
+      "command": "/aquatech grantxp %player% 150"
+    },
+    {
+      "itemId": "aquatech_ui:ender_fishing_rod",
+      "count": 1,
+      "weight": 8.0,
+      "rarity": "RARE",
+      "displayName": "§9Ender Fishing Rod",
+      "command": "/aquatech grantxp %player% 180"
+    },
+    {
+      "itemId": "aquatech_ui:abyssal_lure",
+      "count": 1,
+      "weight": 8.0,
+      "rarity": "RARE",
+      "displayName": "§9Abyssal Lure",
+      "command": "/aquatech grantxp %player% 160"
+    },
+    {
+      "itemId": "aquatech_ui:sonar_goggles",
+      "count": 1,
+      "weight": 7.0,
+      "rarity": "EPIC",
+      "displayName": "§5Sonar Goggles",
+      "command": "/aquatech grantxp %player% 220"
+    },
+    {
+      "itemId": "industrialupgrade:machines/photonic_solar_panel",
+      "count": 1,
+      "weight": 6.0,
+      "rarity": "EPIC",
+      "displayName": "§5Photonic Solar Panel",
+      "command": "/aquatech grantxp %player% 300"
+    },
+    {
+      "itemId": "industrialupgrade:machines/graviton_solar_panel",
+      "count": 1,
+      "weight": 4.0,
+      "rarity": "EPIC",
+      "displayName": "§5Graviton Solar Panel",
+      "command": "/aquatech grantxp %player% 350"
+    },
+    {
+      "itemId": "aquatech_ui:abyssal_fishing_rod",
+      "count": 1,
+      "weight": 3.0,
+      "rarity": "LEGENDARY",
+      "displayName": "§6Abyssal Fishing Rod",
+      "command": "/aquatech grantxp %player% 400"
+    },
+    {
+      "itemId": "aquatech_ui:neptune_trident",
+      "count": 1,
+      "weight": 1.5,
+      "rarity": "LEGENDARY",
+      "displayName": "§6Neptune Trident",
+      "command": "/aquatech grantxp %player% 500"
+    },
+    {
+      "itemId": "industrialupgrade:admpanel/admpanel",
+      "count": 1,
+      "weight": 0.8,
+      "rarity": "LEGENDARY",
+      "displayName": "§a§lAdmin Solar Panel",
+      "command": "/aquatech grantxp %player% 750"
+    },
+    {
+      "itemId": "minecraft:nether_star",
+      "count": 1,
+      "weight": 0.7,
+      "rarity": "LEGENDARY",
+      "displayName": "§6Nether Star",
+      "command": "/aquatech grantxp %player% 300"
+    }
+  ]
+}

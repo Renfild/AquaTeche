@@ -1,0 +1,26 @@
+{
+  "display": {
+    "title": "\u041a\u0430\u043c\u0435\u043d\u043d\u044b\u0439 \u0412\u0435\u043a",
+    "description": [
+      "\u0412\u044b\u043b\u043e\u0432\u0438\u0442\u0435 \u0438\u043b\u0438 \u0441\u043e\u0431\u0435\u0440\u0438\u0442\u0435 \u0431\u0443\u043b\u044b\u0436\u043d\u0438\u043a."
+    ],
+    "icon": "minecraft:cobblestone"
+  },
+  "dependencies": [
+    "q3_planks"
+  ],
+  "tasks": {
+    "task_1": {
+      "type": "heracles:item",
+      "tag": "forge:cobblestone",
+      "amount": 16
+    }
+  },
+  "rewards": {
+    "reward_1": {
+      "type": "heracles:item",
+      "item": "minecraft:stone_pickaxe",
+      "count": 1
+    }
+  }
+}

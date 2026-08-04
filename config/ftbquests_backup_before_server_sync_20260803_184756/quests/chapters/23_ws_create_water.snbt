@@ -1,0 +1,2987 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "23_ws_create_water"
+	group: "0AC7A00000000005"
+	icon: "create_aquatic_ambitions:mechanical_conduit"
+	id: "WS230000CH"
+	order_index: 23
+	quest_links: [ ]
+	quests: [
+		{
+			x: -4.62d
+			y: 0.0d
+			id: "WS230001Q"
+			title: "I·1  Осколки"
+			icon: "minecraft:prismarine_shard"
+			subtitle: "✦ ГАЙД МОДА · Сырьё под channeling."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 1/57&r",
+				"",
+				"&bCreate&r крутит валы; &bAquatic Ambitions&r добавляет &eокеанскую автоматизацию&r (mechanical conduit, сплавы призмарина).",
+				"",
+				"&6Как играть:&r",
+				"1) Вода как источник: &ewater wheel / hose pulley / pump&r.",
+				"2) &efluid pipe + tank&r — логистика жидкостей.",
+				"3) &eMechanical Conduit&r — сердце аддона (channeling/процессы у воды).",
+				"4) Крафт &eprismarine alloy&r из осколков/раковин аддона.",
+				"5) Связка с атоллом: медь Create + вода = фермы без стражей.",
+				"",
+				"&7Ponder (ПКМ с гаечным ключом Create / журнал) объясняет схемы. Ветка опциональна.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"",
+				"&a▶ Задача:&r Сырьё под channeling.",
+				"&7Предмет:&r &fminecraft:prismarine_shard&r",
+				"",
+				"Осколки — сырьё сплава и ванильного призмарина.",
+				"Рыбалка AquaTech / aquatic ambitions channeling.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× minecraft:prismarine_shard  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 280
+			optional: true
+			tasks: [{
+				id: "WS230001T"
+				type: "item"
+				item: "minecraft:prismarine_shard"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230001R"
+					type: "item"
+					item: "minecraft:prismarine_shard"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS230001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 0.0d
+			id: "WS230002Q"
+			title: "I·2  Кристаллы"
+			icon: "minecraft:prismarine_crystals"
+			subtitle: "Свечение и рецепты."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 2/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Свечение и рецепты.",
+				"&7Предмет:&r &fminecraft:prismarine_crystals&r",
+				"",
+				"Кристаллы — свет и рецепты sea lantern.",
+				"Часто вместе с shard в луте.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× minecraft:prismarine_crystals  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230001Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230002T"
+				type: "item"
+				item: "minecraft:prismarine_crystals"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230002R"
+					type: "item"
+					item: "minecraft:prismarine_crystals"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS230002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 0.0d
+			id: "WS230003Q"
+			title: "I·3  Сердце моря"
+			icon: "minecraft:heart_of_the_sea"
+			subtitle: "Основа кондуита."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 3/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Основа кондуита.",
+				"&7Предмет:&r &fminecraft:heart_of_the_sea&r",
+				"",
+				"Сердце нужно для ванильного conduit и части рецептов.",
+				"Держи рядом nautilus shell.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× minecraft:nautilus_shell  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230002Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230003T"
+				type: "item"
+				item: "minecraft:heart_of_the_sea"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230003R"
+					type: "item"
+					item: "minecraft:nautilus_shell"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 0.0d
+			id: "WS230004Q"
+			title: "I·4  Copper Casing"
+			icon: "create:copper_casing"
+			subtitle: "Корпус Create у воды."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 4/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Корпус Create у воды.",
+				"&7Предмет:&r &fcreate:copper_casing&r",
+				"",
+				"Медный корпус Create — база водных машин.",
+				"Крафт: casing + медь (JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create:copper_casing  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230003Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230004T"
+				type: "item"
+				item: "create:copper_casing"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230004R"
+					type: "item"
+					item: "create:copper_casing"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS230004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 0.0d
+			id: "WS230005Q"
+			title: "I·5  Fluid Pipe"
+			icon: "create:fluid_pipe"
+			subtitle: "Трубы жидкости."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 5/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Трубы жидкости.",
+				"&7Предмет:&r &fcreate:fluid_pipe&r",
+				"",
+				"Труба жидкости. Соединяй pump → tank → spout.",
+				"Smart pipe фильтрует тип жидкости.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× create:fluid_pipe  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS230004Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230005T"
+				type: "item"
+				item: "create:fluid_pipe"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230005R"
+					type: "item"
+					item: "create:fluid_pipe"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS230005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 0.0d
+			id: "WS230006Q"
+			title: "I·6  Mechanical Pump"
+			icon: "create:mechanical_pump"
+			subtitle: "Качай воду/растворы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 6/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Качай воду/растворы.",
+				"&7Предмет:&r &fcreate:mechanical_pump&r",
+				"",
+				"Насос гонит жидкость по трубам при вращении вала.",
+				"Подключи kinetic (water wheel / motor).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:mechanical_pump  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230005Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230006T"
+				type: "item"
+				item: "create:mechanical_pump"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230006R"
+					type: "item"
+					item: "create:mechanical_pump"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 1.93d
+			id: "WS230007Q"
+			title: "I·7  Spout"
+			icon: "create:spout"
+			subtitle: "Розлив в мире."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 7/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Розлив в мире.",
+				"&7Предмет:&r &fcreate:spout&r",
+				"",
+				"Наливает жидкость в мир/ёмкости под собой.",
+				"Ставь над basin или блоками заполнения.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:spout  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230006Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230007T"
+				type: "item"
+				item: "create:spout"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230007R"
+					type: "item"
+					item: "create:spout"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 1.93d
+			id: "WS230008Q"
+			title: "I·8  Hose Pulley"
+			icon: "create:hose_pulley"
+			subtitle: "Забор воды океана."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 8/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Забор воды океана.",
+				"&7Предмет:&r &fcreate:hose_pulley&r",
+				"",
+				"Забирает/возвращает огромные объёмы воды океана.",
+				"Идеален для атолла: не таскай вёдрами.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:hose_pulley  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230007Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230008T"
+				type: "item"
+				item: "create:hose_pulley"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230008R"
+					type: "item"
+					item: "create:hose_pulley"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS230008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 1.93d
+			id: "WS230009Q"
+			title: "I·9  Portable Fluid IO"
+			icon: "create:portable_fluid_interface"
+			subtitle: "Жидкости на контрабанде судов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 9/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Жидкости на контрабанде судов.",
+				"&7Предмет:&r &fcreate:portable_fluid_interface&r",
+				"",
+				"Интерфейс жидкостей для поездов/контрабанды судов.",
+				"На контрактных линиях Create.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:portable_fluid_interface  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230008Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230009T"
+				type: "item"
+				item: "create:portable_fluid_interface"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230009R"
+					type: "item"
+					item: "create:portable_fluid_interface"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS230009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 1.93d
+			id: "WS230010Q"
+			title: "I·10  Fluid Tank"
+			icon: "create:fluid_tank"
+			subtitle: "◆ Вехи · Старт · Буфер жидкости."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 10/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Буфер жидкости.",
+				"&7Предмет:&r &fcreate:fluid_tank&r",
+				"",
+				"Буфер. Ставь башни танков.",
+				"Смотри уровень в GUI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× create:fluid_tank  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230009Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230010T"
+				type: "item"
+				item: "create:fluid_tank"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230010R"
+					type: "item"
+					item: "create:fluid_tank"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS230010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 1.93d
+			id: "WS230011Q"
+			title: "I·11  Smart Fluid Pipe"
+			icon: "create:smart_fluid_pipe"
+			subtitle: "Фильтр жидкостей."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 11/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Фильтр жидкостей.",
+				"&7Предмет:&r &fcreate:smart_fluid_pipe&r",
+				"",
+				"Труба жидкости. Соединяй pump → tank → spout.",
+				"Smart pipe фильтрует тип жидкости.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create:smart_fluid_pipe  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230010Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230011T"
+				type: "item"
+				item: "create:smart_fluid_pipe"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230011R"
+					type: "item"
+					item: "create:smart_fluid_pipe"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS230011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 1.93d
+			id: "WS230012Q"
+			title: "I·12  Mechanical Conduit"
+			icon: "create_aquatic_ambitions:mechanical_conduit"
+			subtitle: "◆ Вехи · Старт · Сердце водной автоматизации."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 12/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сердце водной автоматизации.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:mechanical_conduit&r",
+				"",
+				"Ключевой блок Aquatic Ambitions.",
+				"Читай Ponder/JEI: channeling, cage-эффекты, рецепты кораллов/меди.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create_aquatic_ambitions:mechanical_conduit  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230011Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230012T"
+				type: "item"
+				item: "create_aquatic_ambitions:mechanical_conduit"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230012R"
+					type: "item"
+					item: "create_aquatic_ambitions:mechanical_conduit"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS230012X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 3.5d
+			id: "WS230013Q"
+			title: "II·13  Кальциевый порошок"
+			icon: "create_aquatic_ambitions:calcium_rich_powder"
+			subtitle: "Побочный продукт океана."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 13/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Побочный продукт океана.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:calcium_rich_powder&r",
+				"",
+				"Побочный порошок океанических процессов.",
+				"Идёт в дальнейшие рецепты аддона (JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× create_aquatic_ambitions:calcium_rich_powder  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230012Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230013T"
+				type: "item"
+				item: "create_aquatic_ambitions:calcium_rich_powder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230013R"
+					type: "item"
+					item: "create_aquatic_ambitions:calcium_rich_powder"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230013X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 3.5d
+			id: "WS230014Q"
+			title: "II·14  Suspicious Rock"
+			icon: "create_aquatic_ambitions:suspicious_rock"
+			subtitle: "Странный осадок дна."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 14/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Странный осадок дна.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:suspicious_rock&r",
+				"",
+				"Осадок дна из процессов аддона.",
+				"Переработай по JEI — не выкидывай стопки.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create_aquatic_ambitions:suspicious_rock  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230013Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230014T"
+				type: "item"
+				item: "create_aquatic_ambitions:suspicious_rock"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230014R"
+					type: "item"
+					item: "create_aquatic_ambitions:suspicious_rock"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230014X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 3.5d
+			id: "WS230015Q"
+			title: "II·15  Nautilus Shard"
+			icon: "create_aquatic_ambitions:nautilus_shard"
+			subtitle: "Осколок наутилуса."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 15/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Осколок наутилуса.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:nautilus_shard&r",
+				"",
+				"Осколок наутилуса из линии аддона.",
+				"Путь к возобновляемым shell.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create_aquatic_ambitions:nautilus_shard  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS230014Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230015T"
+				type: "item"
+				item: "create_aquatic_ambitions:nautilus_shard"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230015R"
+					type: "item"
+					item: "create_aquatic_ambitions:nautilus_shard"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS230015X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 3.5d
+			id: "WS230016Q"
+			title: "II·16  Колючая раковина"
+			icon: "create_aquatic_ambitions:spiky_shell"
+			subtitle: "Материал сплавов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 16/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Материал сплавов.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:spiky_shell&r",
+				"",
+				"Колючая раковина — крафт сплавов/трезубца в аддоне.",
+				"Копи пачкой перед alloy.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create_aquatic_ambitions:spiky_shell  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230015Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230016T"
+				type: "item"
+				item: "create_aquatic_ambitions:spiky_shell"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230016R"
+					type: "item"
+					item: "create_aquatic_ambitions:spiky_shell"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS230016X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 3.5d
+			id: "WS230017Q"
+			title: "II·17  Prismarine Alloy"
+			icon: "create_aquatic_ambitions:prismarine_alloy"
+			subtitle: "Океанский сплав."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 17/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Океанский сплав.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:prismarine_alloy&r",
+				"",
+				"Океанский сплав Create AA.",
+				"Rod/block — детали и склад. Замена «морского железа».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create_aquatic_ambitions:prismarine_alloy  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230016Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230017T"
+				type: "item"
+				item: "create_aquatic_ambitions:prismarine_alloy"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230017R"
+					type: "item"
+					item: "create_aquatic_ambitions:prismarine_alloy"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS230017X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 3.5d
+			id: "WS230018Q"
+			title: "II·18  Стержень сплава"
+			icon: "create_aquatic_ambitions:prismarine_alloy_rod"
+			subtitle: "Деталь механизмов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 18/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Деталь механизмов.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:prismarine_alloy_rod&r",
+				"",
+				"Океанский сплав Create AA.",
+				"Rod/block — детали и склад. Замена «морского железа».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create_aquatic_ambitions:prismarine_alloy_rod  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230017Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230018T"
+				type: "item"
+				item: "create_aquatic_ambitions:prismarine_alloy_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230018R"
+					type: "item"
+					item: "create_aquatic_ambitions:prismarine_alloy_rod"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS230018X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 5.43d
+			id: "WS230019Q"
+			title: "II·19  Блок сплава"
+			icon: "create_aquatic_ambitions:prismarine_alloy_block"
+			subtitle: "Склад и витрина."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 19/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Склад и витрина.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:prismarine_alloy_block&r",
+				"",
+				"Океанский сплав Create AA.",
+				"Rod/block — детали и склад. Замена «морского железа».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create_aquatic_ambitions:prismarine_alloy_block  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230018Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230019T"
+				type: "item"
+				item: "create_aquatic_ambitions:prismarine_alloy_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230019R"
+					type: "item"
+					item: "create_aquatic_ambitions:prismarine_alloy_block"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS230019X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 5.43d
+			id: "WS230020Q"
+			title: "II·20  Propeller"
+			icon: "create:propeller"
+			subtitle: "◆ Вехи · Основа · Поток воздуха/воды у ферм."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 20/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Поток воздуха/воды у ферм.",
+				"&7Предмет:&r &fcreate:propeller&r",
+				"",
+				"Пропеллер + fan дают поток воздуха/обдув.",
+				"Нужен для сушки/каналов Create.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× create:propeller  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230019Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230020T"
+				type: "item"
+				item: "create:propeller"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230020R"
+					type: "item"
+					item: "create:propeller"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230020X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 5.43d
+			id: "WS230021Q"
+			title: "II·21  Encased Fan"
+			icon: "create:encased_fan"
+			subtitle: "Обдув линий."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 21/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Обдув линий.",
+				"&7Предмет:&r &fcreate:encased_fan&r",
+				"",
+				"Вентилятор в корпусе — контролируемый поток.",
+				"Крути валом с нужной стороны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:encased_fan  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230020Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230021T"
+				type: "item"
+				item: "create:encased_fan"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230021R"
+					type: "item"
+					item: "create:encased_fan"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS230021X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 5.43d
+			id: "WS230022Q"
+			title: "II·22  Water Wheel"
+			icon: "create:water_wheel"
+			subtitle: "Энергия прилива."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 22/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Энергия прилива.",
+				"&7Предмет:&r &fcreate:water_wheel&r",
+				"",
+				"Колесо от течения. Ставь в поток/корабль.",
+				"Large wheel — больше stress capacity.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:water_wheel  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230021Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230022T"
+				type: "item"
+				item: "create:water_wheel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230022R"
+					type: "item"
+					item: "create:water_wheel"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230022X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 5.43d
+			id: "WS230023Q"
+			title: "II·23  Large Water Wheel"
+			icon: "create:large_water_wheel"
+			subtitle: "◆ Вехи · Основа · Больше крутящего момента."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 23/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Больше крутящего момента.",
+				"&7Предмет:&r &fcreate:large_water_wheel&r",
+				"",
+				"Колесо от течения. Ставь в поток/корабль.",
+				"Large wheel — больше stress capacity.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:large_water_wheel  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230022Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230023T"
+				type: "item"
+				item: "create:large_water_wheel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230023R"
+					type: "item"
+					item: "create:large_water_wheel"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS230023X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 5.43d
+			id: "WS230024Q"
+			title: "III·24  Whisk"
+			icon: "create:whisk"
+			subtitle: "Смешивание растворов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 24/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Смешивание растворов.",
+				"&7Предмет:&r &fcreate:whisk&r",
+				"",
+				"Венчик для mixer.",
+				"Крафт отдельно, вставь в mechanical mixer.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:whisk  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230023Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230024T"
+				type: "item"
+				item: "create:whisk"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230024R"
+					type: "item"
+					item: "create:whisk"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS230024X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 7.0d
+			id: "WS230025Q"
+			title: "III·25  Mixer"
+			icon: "create:mechanical_mixer"
+			subtitle: "Миксер у канала."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 25/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Миксер у канала.",
+				"&7Предмет:&r &fcreate:mechanical_mixer&r",
+				"",
+				"Миксер + basin = смешивание/компаунд.",
+				"Крути сверху над basin.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:mechanical_mixer  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS230024Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230025T"
+				type: "item"
+				item: "create:mechanical_mixer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230025R"
+					type: "item"
+					item: "create:mechanical_mixer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS230025X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 7.0d
+			id: "WS230026Q"
+			title: "III·26  Basin"
+			icon: "create:basin"
+			subtitle: "Чаша процессов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 26/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Чаша процессов.",
+				"&7Предмет:&r &fcreate:basin&r",
+				"",
+				"Чаша под mixer/spout.",
+				"Держи пустой вход для рецептов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:basin  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230025Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230026T"
+				type: "item"
+				item: "create:basin"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230026R"
+					type: "item"
+					item: "create:basin"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230026X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 7.0d
+			id: "WS230027Q"
+			title: "III·27  Ванильный кондуит"
+			icon: "minecraft:conduit"
+			subtitle: "Сравни с mechanical."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 27/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сравни с mechanical.",
+				"&7Предмет:&r &fminecraft:conduit&r",
+				"",
+				"Ванильный кондуит для сравнения с mechanical.",
+				"Эффекты в воде вокруг рамки.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× minecraft:sea_lantern  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230026Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230027T"
+				type: "item"
+				item: "minecraft:conduit"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230027R"
+					type: "item"
+					item: "minecraft:sea_lantern"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS230027X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 7.0d
+			id: "WS230028Q"
+			title: "III·28  Морской огурец"
+			icon: "minecraft:sea_pickle"
+			subtitle: "Свет и декор фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 28/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Свет и декор фермы.",
+				"&7Предмет:&r &fminecraft:sea_pickle&r",
+				"",
+				"Свет и декор подводной фермы.",
+				"Ставится на коралл под водой.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× minecraft:sea_pickle  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230027Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230028T"
+				type: "item"
+				item: "minecraft:sea_pickle"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230028R"
+					type: "item"
+					item: "minecraft:sea_pickle"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS230028X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 7.0d
+			id: "WS230029Q"
+			title: "III·29  Коралл"
+			icon: "minecraft:tube_coral_block"
+			subtitle: "Живая ферма кораллов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 29/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Живая ферма кораллов.",
+				"&7Предмет:&r &fminecraft:tube_coral_block&r",
+				"",
+				"Кораллы можно автоматизировать через AA channeling.",
+				"Живые блоки — для ферм и декора атолла.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× minecraft:tube_coral_block  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230028Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230029T"
+				type: "item"
+				item: "minecraft:tube_coral_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230029R"
+					type: "item"
+					item: "minecraft:tube_coral_block"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS230029X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 7.0d
+			id: "WS230030Q"
+			title: "III·30  Капстоун воды"
+			icon: "create_aquatic_ambitions:prismarine_alloy_block"
+			subtitle: "◆ Вехи · Цех · Закрепи сплавную линию."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 30/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Закрепи сплавную линию.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:prismarine_alloy_block&r",
+				"",
+				"Океанский сплав Create AA.",
+				"Rod/block — детали и склад. Замена «морского железа».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× create_aquatic_ambitions:prismarine_alloy  &8+&r  &b120 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230029Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230030T"
+				type: "item"
+				item: "create_aquatic_ambitions:prismarine_alloy_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230030R"
+					type: "item"
+					item: "create_aquatic_ambitions:prismarine_alloy"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "WS230030X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 8.93d
+			id: "WS230031Q"
+			title: "III·31  Андезитовый сплав"
+			icon: "create:andesite_alloy"
+			subtitle: "База Create."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 31/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r База Create.",
+				"&7Предмет:&r &fcreate:andesite_alloy&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× create:andesite_alloy  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230030Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230031T"
+				type: "item"
+				item: "create:andesite_alloy"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230031R"
+					type: "item"
+					item: "create:andesite_alloy"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS230031X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 8.93d
+			id: "WS230032Q"
+			title: "III·32  Andesite Casing"
+			icon: "create:andesite_casing"
+			subtitle: "Корпус кинетики."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 32/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Корпус кинетики.",
+				"&7Предмет:&r &fcreate:andesite_casing&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× create:andesite_casing  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230031Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230032T"
+				type: "item"
+				item: "create:andesite_casing"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230032R"
+					type: "item"
+					item: "create:andesite_casing"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS230032X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 8.93d
+			id: "WS230033Q"
+			title: "III·33  Вал"
+			icon: "create:shaft"
+			subtitle: "Передача вращения."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 33/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Передача вращения.",
+				"&7Предмет:&r &fcreate:shaft&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× create:shaft  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230032Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230033T"
+				type: "item"
+				item: "create:shaft"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230033R"
+					type: "item"
+					item: "create:shaft"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS230033X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 8.93d
+			id: "WS230034Q"
+			title: "III·34  Шестерня"
+			icon: "create:cogwheel"
+			subtitle: "Передача."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 34/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Передача.",
+				"&7Предмет:&r &fcreate:cogwheel&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× create:cogwheel  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230033Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230034T"
+				type: "item"
+				item: "create:cogwheel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230034R"
+					type: "item"
+					item: "create:cogwheel"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS230034X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 8.93d
+			id: "WS230035Q"
+			title: "IV·35  Большая шестерня"
+			icon: "create:large_cogwheel"
+			subtitle: "◆ Вехи · Мастерство · Редукция."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 35/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Редукция.",
+				"&7Предмет:&r &fcreate:large_cogwheel&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create:large_cogwheel  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230034Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230035T"
+				type: "item"
+				item: "create:large_cogwheel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230035R"
+					type: "item"
+					item: "create:large_cogwheel"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS230035X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 8.93d
+			id: "WS230036Q"
+			title: "IV·36  Gearbox"
+			icon: "create:gearbox"
+			subtitle: "Поворот вала."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 36/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Поворот вала.",
+				"&7Предмет:&r &fcreate:gearbox&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× create:gearbox  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230035Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230036T"
+				type: "item"
+				item: "create:gearbox"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230036R"
+					type: "item"
+					item: "create:gearbox"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230036X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 10.5d
+			id: "WS230037Q"
+			title: "IV·37  Clutch"
+			icon: "create:clutch"
+			subtitle: "Сцепление."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 37/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сцепление.",
+				"&7Предмет:&r &fcreate:clutch&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:clutch  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230036Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230037T"
+				type: "item"
+				item: "create:clutch"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230037R"
+					type: "item"
+					item: "create:clutch"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230037X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 10.5d
+			id: "WS230038Q"
+			title: "IV·38  Gearshift"
+			icon: "create:gearshift"
+			subtitle: "Реверс."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 38/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Реверс.",
+				"&7Предмет:&r &fcreate:gearshift&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:gearshift  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230037Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230038T"
+				type: "item"
+				item: "create:gearshift"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230038R"
+					type: "item"
+					item: "create:gearshift"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230038X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 10.5d
+			id: "WS230039Q"
+			title: "IV·39  Ремень"
+			icon: "create:belt_connector"
+			subtitle: "Логистика предметов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 39/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Логистика предметов.",
+				"&7Предмет:&r &fcreate:belt_connector&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× create:belt_connector  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230038Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230039T"
+				type: "item"
+				item: "create:belt_connector"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230039R"
+					type: "item"
+					item: "create:belt_connector"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS230039X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 10.5d
+			id: "WS230040Q"
+			title: "IV·40  Funnel"
+			icon: "create:andesite_funnel"
+			subtitle: "◆ Вехи · Мастерство · Ввод/вывод на ленту."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 40/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ввод/вывод на ленту.",
+				"&7Предмет:&r &fcreate:andesite_funnel&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create:andesite_funnel  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230039Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230040T"
+				type: "item"
+				item: "create:andesite_funnel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230040R"
+					type: "item"
+					item: "create:andesite_funnel"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS230040X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 10.5d
+			id: "WS230041Q"
+			title: "IV·41  Chute"
+			icon: "create:chute"
+			subtitle: "Вертикальный сброс."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 41/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Вертикальный сброс.",
+				"&7Предмет:&r &fcreate:chute&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create:chute  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230040Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230041T"
+				type: "item"
+				item: "create:chute"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230041R"
+					type: "item"
+					item: "create:chute"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS230041X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 10.5d
+			id: "WS230042Q"
+			title: "IV·42  Item Drain"
+			icon: "create:item_drain"
+			subtitle: "Слив жидкостей из предметов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 42/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Слив жидкостей из предметов.",
+				"&7Предмет:&r &fcreate:item_drain&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:item_drain  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230041Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230042T"
+				type: "item"
+				item: "create:item_drain"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230042R"
+					type: "item"
+					item: "create:item_drain"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS230042X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 12.43d
+			id: "WS230043Q"
+			title: "IV·43  Item Vault"
+			icon: "create:item_vault"
+			subtitle: "Склад Create."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 43/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Склад Create.",
+				"&7Предмет:&r &fcreate:item_vault&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× create:item_vault  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230042Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230043T"
+				type: "item"
+				item: "create:item_vault"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230043R"
+					type: "item"
+					item: "create:item_vault"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS230043X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 12.43d
+			id: "WS230044Q"
+			title: "IV·44  Медный лист"
+			icon: "create:copper_sheet"
+			subtitle: "Листовой металл."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 44/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Листовой металл.",
+				"&7Предмет:&r &fcreate:copper_sheet&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× create:copper_sheet  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230043Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230044T"
+				type: "item"
+				item: "create:copper_sheet"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230044R"
+					type: "item"
+					item: "create:copper_sheet"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS230044X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 12.43d
+			id: "WS230045Q"
+			title: "IV·45  Латунь"
+			icon: "create:brass_ingot"
+			subtitle: "Продвинутый сплав."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 45/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Продвинутый сплав.",
+				"&7Предмет:&r &fcreate:brass_ingot&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× create:brass_ingot  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS230044Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230045T"
+				type: "item"
+				item: "create:brass_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230045R"
+					type: "item"
+					item: "create:brass_ingot"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS230045X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 12.43d
+			id: "WS230046Q"
+			title: "V·46  Brass Casing"
+			icon: "create:brass_casing"
+			subtitle: "◆ Вехи · Финал · Умные машины."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 46/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Умные машины.",
+				"&7Предмет:&r &fcreate:brass_casing&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create:brass_casing  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230045Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230046T"
+				type: "item"
+				item: "create:brass_casing"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230046R"
+					type: "item"
+					item: "create:brass_casing"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS230046X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 12.43d
+			id: "WS230047Q"
+			title: "V·47  Precision Mechanism"
+			icon: "create:precision_mechanism"
+			subtitle: "Точная механика."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 47/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Точная механика.",
+				"&7Предмет:&r &fcreate:precision_mechanism&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× create:precision_mechanism  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230046Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230047T"
+				type: "item"
+				item: "create:precision_mechanism"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230047R"
+					type: "item"
+					item: "create:precision_mechanism"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS230047X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 12.43d
+			id: "WS230048Q"
+			title: "V·48  Electron Tube"
+			icon: "create:electron_tube"
+			subtitle: "Электроника Create."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 48/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Электроника Create.",
+				"&7Предмет:&r &fcreate:electron_tube&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create:electron_tube  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230047Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230048T"
+				type: "item"
+				item: "create:electron_tube"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230048R"
+					type: "item"
+					item: "create:electron_tube"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS230048X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 14.0d
+			id: "WS230049Q"
+			title: "V·49  Mechanical Arm"
+			icon: "create:mechanical_arm"
+			subtitle: "Роборука."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 49/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Роборука.",
+				"&7Предмет:&r &fcreate:mechanical_arm&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:mechanical_arm  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230048Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230049T"
+				type: "item"
+				item: "create:mechanical_arm"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230049R"
+					type: "item"
+					item: "create:mechanical_arm"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS230049X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 14.0d
+			id: "WS230050Q"
+			title: "V·50  Deployer"
+			icon: "create:deployer"
+			subtitle: "◆ Вехи · Финал · ПКМ-автомат."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 50/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r ПКМ-автомат.",
+				"&7Предмет:&r &fcreate:deployer&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:deployer  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS230049Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230050T"
+				type: "item"
+				item: "create:deployer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230050R"
+					type: "item"
+					item: "create:deployer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS230050X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 14.0d
+			id: "WS230051Q"
+			title: "V·51  Press"
+			icon: "create:mechanical_press"
+			subtitle: "Штамп."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 51/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Штамп.",
+				"&7Предмет:&r &fcreate:mechanical_press&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:mechanical_press  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230050Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230051T"
+				type: "item"
+				item: "create:mechanical_press"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230051R"
+					type: "item"
+					item: "create:mechanical_press"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS230051X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 14.0d
+			id: "WS230052Q"
+			title: "V·52  Millstone"
+			icon: "create:millstone"
+			subtitle: "Помол."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 52/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Помол.",
+				"&7Предмет:&r &fcreate:millstone&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:millstone  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230051Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230052T"
+				type: "item"
+				item: "create:millstone"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230052R"
+					type: "item"
+					item: "create:millstone"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS230052X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 14.0d
+			id: "WS230053Q"
+			title: "V·53  Blaze Burner"
+			icon: "create:blaze_burner"
+			subtitle: "Нагрев надпечи."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 53/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Нагрев надпечи.",
+				"&7Предмет:&r &fcreate:blaze_burner&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× create:blaze_burner  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230052Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230053T"
+				type: "item"
+				item: "create:blaze_burner"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230053R"
+					type: "item"
+					item: "create:blaze_burner"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS230053X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 14.0d
+			id: "WS230054Q"
+			title: "V·54  Prismarine Rod"
+			icon: "create_aquatic_ambitions:prismarine_rod"
+			subtitle: "Стержень аддона."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 54/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Стержень аддона.",
+				"&7Предмет:&r &fcreate_aquatic_ambitions:prismarine_rod&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× create_aquatic_ambitions:prismarine_rod  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230053Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230054T"
+				type: "item"
+				item: "create_aquatic_ambitions:prismarine_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230054R"
+					type: "item"
+					item: "create_aquatic_ambitions:prismarine_rod"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS230054X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 15.93d
+			id: "WS230055Q"
+			title: "V·55  Ламинария"
+			icon: "minecraft:kelp"
+			subtitle: "Водоросли фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 55/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Водоросли фермы.",
+				"&7Предмет:&r &fminecraft:kelp&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 32× minecraft:kelp  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS230054Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230055T"
+				type: "item"
+				item: "minecraft:kelp"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230055R"
+					type: "item"
+					item: "minecraft:kelp"
+					count: 32
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS230055X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 15.93d
+			id: "WS230056Q"
+			title: "V·56  Блок сушёной ламинарии"
+			icon: "minecraft:dried_kelp_block"
+			subtitle: "Топливо/склад."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 56/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топливо/склад.",
+				"&7Предмет:&r &fminecraft:dried_kelp_block&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× minecraft:dried_kelp_block  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS230055Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230056T"
+				type: "item"
+				item: "minecraft:dried_kelp_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230056R"
+					type: "item"
+					item: "minecraft:dried_kelp_block"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS230056X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 16.28d
+			id: "WS230057Q"
+			title: "V·57  Раковина наутилуса"
+			icon: "minecraft:nautilus_shell"
+			subtitle: "★ КАПСТОУН · Под conduit."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 57/57&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Под conduit.",
+				"&7Предмет:&r &fminecraft:nautilus_shell&r",
+				"",
+				"Create + вода: сначала &eкинетика (wheel/pump)&r, потом блоки Aquatic Ambitions.",
+				"Открой &ePonder&r у блока и JEI — схемы важнее «угадай крафт».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× minecraft:nautilus_shell  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			shape: "gear"
+			size: 1.55d
+			min_width: 280
+			dependencies: ["WS230056Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS230057T"
+				type: "item"
+				item: "minecraft:nautilus_shell"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS230057R"
+					type: "item"
+					item: "minecraft:nautilus_shell"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS230057X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Create + Aquatic Ambitions: кинетика у воды, conduit, prismarine alloy, насосы океана."
+	title: "Мастерская · Create Water"
+}

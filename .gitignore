@@ -1,0 +1,53 @@
+# Build / IDE
+.gradle/
+build/
+bin/
+.idea/
+*.out
+*.class
+*.log
+
+# Nested mod builds
+mods/aquatech-ui/build/
+mods/aquatech-ui/.gradle/
+mods/casesmod/build/
+mods/casesmod/.gradle/
+
+# Runtime / exports (keep local, don't commit noise)
+server/
+client/
+dist/
+*.zip
+*.rar
+*.jar
+!mods/aquatech-ui/**/*.jar
+tools/*.zip
+
+# Python / temp clutter
+__pycache__/
+*.pyc
+.pytest_cache/
+_mod_dl_cache/
+_mod_download/
+_parked_mods_*/
+_backup_*/
+_tmp_*/
+scratch/
+img/
+art_source/
+extracted_elements_png/
+balance-minigame-icons/
+casesmod-fixed-source_*/
+aquatech-ui/
+modlist/
+scripts_crafttweaker_archived/
+
+# Parked jars inside mods/
+mods/_parked_*/
+mods/*.zip
+mods/*.rar
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store

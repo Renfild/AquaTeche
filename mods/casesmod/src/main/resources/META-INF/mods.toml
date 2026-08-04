@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://example.com"
+
+[[mods]]
+modId="casesmod"
+version="1.0.0"
+displayName="Cases, Kits, Warps & Quests"
+authors="You"
+description='''Кастомное меню сервера: кейсы с анимацией, донат-меню, киты, варпы и квесты.
+Полностью настраивается через JSON-конфиги в /config/casesmod/'''
+
+[[dependencies.casesmod]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.casesmod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.20.2)"
+    ordering="NONE"
+    side="BOTH"

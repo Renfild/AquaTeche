@@ -1,0 +1,19 @@
+{
+  "id": "free_case",
+  "displayName": "§aPrimitive Crate",
+  "keyItemId": "",
+  "keyDisplayName": "",
+  "iconItemId": "minecraft:oak_log",
+  "items": [
+    { "itemId": "minecraft:oak_log", "count": 32, "weight": 28.0, "rarity": "COMMON", "displayName": "§7Дуб ×32", "command": "" },
+    { "itemId": "minecraft:bread", "count": 16, "weight": 22.0, "rarity": "COMMON", "displayName": "§7Хлеб ×16", "command": "" },
+    { "itemId": "industrialupgrade:itemingots/copper_ingot", "count": 8, "weight": 18.0, "rarity": "COMMON", "displayName": "§7Медь ×8", "command": "" },
+    { "itemId": "industrialupgrade:itemingots/tin_ingot", "count": 8, "weight": 14.0, "rarity": "UNCOMMON", "displayName": "§aОлово ×8", "command": "" },
+    { "itemId": "industrialupgrade:raw_latex", "count": 8, "weight": 10.0, "rarity": "UNCOMMON", "displayName": "§aЛатекс ×8", "command": "" },
+    { "itemId": "aquatech_ui:magnetic_lure", "count": 1, "weight": 5.0, "rarity": "RARE", "displayName": "§9Магнитная наживка", "command": "/aquatech grantxp %player% 25" },
+    { "itemId": "industrialupgrade:itemplates/bronze_plate", "count": 4, "weight": 3.0, "rarity": "EPIC", "displayName": "§5Бронз. пластины ×4", "command": "/aquatech grantxp %player% 50" }
+  ],
+  "pityThreshold": 15,
+  "pityRarity": "RARE",
+  "price": 0
+}

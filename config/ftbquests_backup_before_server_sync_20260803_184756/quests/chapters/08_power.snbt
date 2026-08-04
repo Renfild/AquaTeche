@@ -1,0 +1,1163 @@
+{
+	id: "08_power"
+	group: "0AC7A00000000003"
+	order_index: 7
+	filename: "08_power"
+	title: "VIII. Энергия · Сплавы и ток"
+	icon: "enderio:energy_conduit"
+	default_quest_shape: "rsquare"
+	default_hide_dependency_lines: false
+	quest_links: []
+	quests: [
+		{
+			x: -7.2d
+			y: -3.6d
+			id: "q_8_1"
+			title: "1. Связующее"
+			icon: "enderio:conduit_binder"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Клей кондуитов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_7_50"]
+			tasks: [{
+				id: "t_8_1"
+				type: "item"
+				item: "enderio:conduit_binder"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_1"
+				type: "item"
+				item: "enderio:conduit_binder"
+				count: 16
+			}]
+		},
+		{
+			x: -5.6d
+			y: -3.6d
+			id: "q_8_2"
+			title: "2. Энергокондуит"
+			icon: "enderio:energy_conduit"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Ток по атоллам."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_1"]
+			tasks: [{
+				id: "t_8_2"
+				type: "item"
+				item: "enderio:energy_conduit"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_2"
+				type: "item"
+				item: "enderio:energy_conduit"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: -3.6d
+			id: "q_8_3"
+			title: "3. Предметный кондуит"
+			icon: "enderio:item_conduit"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Предметы по трубам."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_2"]
+			tasks: [{
+				id: "t_8_3"
+				type: "item"
+				item: "enderio:item_conduit"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_3"
+				type: "item"
+				item: "enderio:item_conduit"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: -3.6d
+			id: "q_8_4"
+			title: "4. Жидкостный кондуит"
+			icon: "enderio:fluid_conduit"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Жидкости без Create."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_3"]
+			tasks: [{
+				id: "t_8_4"
+				type: "item"
+				item: "enderio:fluid_conduit"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_4"
+				type: "item"
+				item: "enderio:fluid_conduit"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: -3.6d
+			id: "q_8_5"
+			title: "5. Редстоун-кондуит"
+			icon: "enderio:redstone_conduit"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Сигналы в кабеле."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_4"]
+			tasks: [{
+				id: "t_8_5"
+				type: "item"
+				item: "enderio:redstone_conduit"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_5"
+				type: "item"
+				item: "enderio:redstone_conduit"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: -3.6d
+			id: "q_8_6"
+			title: "6. Базовый конденсатор"
+			icon: "enderio:basic_capacitor"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Сердце машин EIO."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_5"]
+			tasks: [{
+				id: "t_8_6"
+				type: "item"
+				item: "enderio:basic_capacitor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_6"
+				type: "item"
+				item: "enderio:basic_capacitor"
+				count: 4
+			}]
+		},
+		{
+			x: 2.4d
+			y: -3.6d
+			id: "q_8_7"
+			title: "7. Двойной конденсатор"
+			icon: "enderio:double_layer_capacitor"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Больше ёмкости."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_6"]
+			tasks: [{
+				id: "t_8_7"
+				type: "item"
+				item: "enderio:double_layer_capacitor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_7"
+				type: "item"
+				item: "enderio:double_layer_capacitor"
+				count: 2
+			}]
+		},
+		{
+			x: 4.0d
+			y: -3.6d
+			id: "q_8_8"
+			title: "8. Восьмеричный конденсатор"
+			icon: "enderio:octadic_capacitor"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Топовая ёмкость."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_7"]
+			tasks: [{
+				id: "t_8_8"
+				type: "item"
+				item: "enderio:octadic_capacitor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_8"
+				type: "item"
+				item: "enderio:octadic_capacitor"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: -3.6d
+			id: "q_8_9"
+			title: "9. Примитивная плавильня"
+			icon: "enderio:primitive_alloy_smelter"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Первые сплавы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_8"]
+			tasks: [{
+				id: "t_8_9"
+				type: "item"
+				item: "enderio:primitive_alloy_smelter"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_9"
+				type: "item"
+				item: "enderio:primitive_alloy_smelter"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: -3.6d
+			id: "q_8_10"
+			title: "10. Плавильня сплавов"
+			icon: "enderio:alloy_smelter"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Авто-сплавы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_9"]
+			tasks: [{
+				id: "t_8_10"
+				type: "item"
+				item: "enderio:alloy_smelter"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_10"
+				type: "item"
+				item: "enderio:alloy_smelter"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: -1.8d
+			id: "q_8_11"
+			title: "11. SAG Mill"
+			icon: "enderio:sag_mill"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Дробление руд."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_10"]
+			tasks: [{
+				id: "t_8_11"
+				type: "item"
+				item: "enderio:sag_mill"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_11"
+				type: "item"
+				item: "enderio:sag_mill"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: -1.8d
+			id: "q_8_12"
+			title: "12. Генератор Стирлинга"
+			icon: "enderio:stirling_generator"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Жги топливо — получи RF."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_11"]
+			tasks: [{
+				id: "t_8_12"
+				type: "item"
+				item: "enderio:stirling_generator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_12"
+				type: "item"
+				item: "enderio:stirling_generator"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: -1.8d
+			id: "q_8_13"
+			title: "13. Электрическая сталь"
+			icon: "enderio:electrical_steel_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Базовый сплав EIO."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_12"]
+			tasks: [{
+				id: "t_8_13"
+				type: "item"
+				item: "enderio:electrical_steel_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_13"
+				type: "item"
+				item: "enderio:electrical_steel_ingot"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: -1.8d
+			id: "q_8_14"
+			title: "14. Энергетический сплав"
+			icon: "enderio:energetic_alloy_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Светится силой."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_13"]
+			tasks: [{
+				id: "t_8_14"
+				type: "item"
+				item: "enderio:energetic_alloy_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_14"
+				type: "item"
+				item: "enderio:energetic_alloy_ingot"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: -1.8d
+			id: "q_8_15"
+			title: "15. Вибрантовый сплав"
+			icon: "enderio:vibrant_alloy_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Яркая проводимость."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_14"]
+			tasks: [{
+				id: "t_8_15"
+				type: "item"
+				item: "enderio:vibrant_alloy_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_15"
+				type: "item"
+				item: "enderio:vibrant_alloy_ingot"
+				count: 4
+			}]
+		},
+		{
+			x: 0.8d
+			y: -1.8d
+			id: "q_8_16"
+			title: "16. Редстоун-сплав"
+			icon: "enderio:redstone_alloy_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Сигнальный металл."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_15"]
+			tasks: [{
+				id: "t_8_16"
+				type: "item"
+				item: "enderio:redstone_alloy_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_16"
+				type: "item"
+				item: "enderio:redstone_alloy_ingot"
+				count: 8
+			}]
+		},
+		{
+			x: 2.4d
+			y: -1.8d
+			id: "q_8_17"
+			title: "17. Проводящий сплав"
+			icon: "enderio:conductive_alloy_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Ток в металле."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_16"]
+			tasks: [{
+				id: "t_8_17"
+				type: "item"
+				item: "enderio:conductive_alloy_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_17"
+				type: "item"
+				item: "enderio:conductive_alloy_ingot"
+				count: 8
+			}]
+		},
+		{
+			x: 4.0d
+			y: -1.8d
+			id: "q_8_18"
+			title: "18. Пульсирующий сплав"
+			icon: "enderio:pulsating_alloy_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Ритм энергии."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_17"]
+			tasks: [{
+				id: "t_8_18"
+				type: "item"
+				item: "enderio:pulsating_alloy_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_18"
+				type: "item"
+				item: "enderio:pulsating_alloy_ingot"
+				count: 4
+			}]
+		},
+		{
+			x: 5.6d
+			y: -1.8d
+			id: "q_8_19"
+			title: "19. Тёмная сталь"
+			icon: "enderio:dark_steel_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Прочность тьмы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_18"]
+			tasks: [{
+				id: "t_8_19"
+				type: "item"
+				item: "enderio:dark_steel_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_19"
+				type: "item"
+				item: "enderio:dark_steel_ingot"
+				count: 8
+			}]
+		},
+		{
+			x: 7.2d
+			y: -1.8d
+			id: "q_8_20"
+			title: "20. Соулариум"
+			icon: "enderio:soularium_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Металл душ."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_19"]
+			tasks: [{
+				id: "t_8_20"
+				type: "item"
+				item: "enderio:soularium_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_20"
+				type: "item"
+				item: "enderio:soularium_ingot"
+				count: 4
+			}]
+		},
+		{
+			x: -7.2d
+			y: 0.0d
+			id: "q_8_21"
+			title: "21. Эндер-сталь"
+			icon: "enderio:end_steel_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Сталь Края."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_20"]
+			tasks: [{
+				id: "t_8_21"
+				type: "item"
+				item: "enderio:end_steel_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_21"
+				type: "item"
+				item: "enderio:end_steel_ingot"
+				count: 4
+			}]
+		},
+		{
+			x: -5.6d
+			y: 0.0d
+			id: "q_8_22"
+			title: "22. Вакуумный сундук"
+			icon: "enderio:vacuum_chest"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Всасывай дроп."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_21"]
+			tasks: [{
+				id: "t_8_22"
+				type: "item"
+				item: "enderio:vacuum_chest"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_22"
+				type: "item"
+				item: "enderio:vacuum_chest"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 0.0d
+			id: "q_8_23"
+			title: "23. Автокрафтер"
+			icon: "enderio:crafter"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Крафт по шаблону."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_22"]
+			tasks: [{
+				id: "t_8_23"
+				type: "item"
+				item: "enderio:crafter"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_23"
+				type: "item"
+				item: "enderio:crafter"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 0.0d
+			id: "q_8_24"
+			title: "24. Импульсная воронка"
+			icon: "enderio:impulse_hopper"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Умный перенос."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_23"]
+			tasks: [{
+				id: "t_8_24"
+				type: "item"
+				item: "enderio:impulse_hopper"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_24"
+				type: "item"
+				item: "enderio:impulse_hopper"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 0.0d
+			id: "q_8_25"
+			title: "25. Ключ Yeta"
+			icon: "enderio:yeta_wrench"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Настройка EIO."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_24"]
+			tasks: [{
+				id: "t_8_25"
+				type: "item"
+				item: "enderio:yeta_wrench"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_25"
+				type: "item"
+				item: "enderio:yeta_wrench"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 0.0d
+			id: "q_8_26"
+			title: "26. Осмий"
+			icon: "mekanism:ingot_osmium"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Сердце Mekanism."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_25"]
+			tasks: [{
+				id: "t_8_26"
+				type: "item"
+				item: "mekanism:ingot_osmium"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_26"
+				type: "item"
+				item: "mekanism:ingot_osmium"
+				count: 8
+			}]
+		},
+		{
+			x: 2.4d
+			y: 0.0d
+			id: "q_8_27"
+			title: "27. Олово Mekanism"
+			icon: "mekanism:ingot_tin"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Сплавы механизма."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_26"]
+			tasks: [{
+				id: "t_8_27"
+				type: "item"
+				item: "mekanism:ingot_tin"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_27"
+				type: "item"
+				item: "mekanism:ingot_tin"
+				count: 8
+			}]
+		},
+		{
+			x: 4.0d
+			y: 0.0d
+			id: "q_8_28"
+			title: "28. Свинец"
+			icon: "mekanism:ingot_lead"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Защита и сплавы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_27"]
+			tasks: [{
+				id: "t_8_28"
+				type: "item"
+				item: "mekanism:ingot_lead"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_28"
+				type: "item"
+				item: "mekanism:ingot_lead"
+				count: 8
+			}]
+		},
+		{
+			x: 5.6d
+			y: 0.0d
+			id: "q_8_29"
+			title: "29. Уран"
+			icon: "mekanism:ingot_uranium"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Ядерный путь."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_28"]
+			tasks: [{
+				id: "t_8_29"
+				type: "item"
+				item: "mekanism:ingot_uranium"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_29"
+				type: "item"
+				item: "mekanism:ingot_uranium"
+				count: 4
+			}]
+		},
+		{
+			x: 7.2d
+			y: 0.0d
+			id: "q_8_30"
+			title: "30. Стальной корпус"
+			icon: "mekanism:steel_casing"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Рама машин Mek."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_29"]
+			tasks: [{
+				id: "t_8_30"
+				type: "item"
+				item: "mekanism:steel_casing"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_30"
+				type: "item"
+				item: "mekanism:steel_casing"
+				count: 4
+			}]
+		},
+		{
+			x: -7.2d
+			y: 1.8d
+			id: "q_8_31"
+			title: "31. Базовая схема"
+			icon: "mekanism:basic_control_circuit"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Мозг машин."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_30"]
+			tasks: [{
+				id: "t_8_31"
+				type: "item"
+				item: "mekanism:basic_control_circuit"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_31"
+				type: "item"
+				item: "mekanism:basic_control_circuit"
+				count: 4
+			}]
+		},
+		{
+			x: -5.6d
+			y: 1.8d
+			id: "q_8_32"
+			title: "32. Насыщенный сплав"
+			icon: "mekanism:alloy_infused"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Улучшение tier I."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_31"]
+			tasks: [{
+				id: "t_8_32"
+				type: "item"
+				item: "mekanism:alloy_infused"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_32"
+				type: "item"
+				item: "mekanism:alloy_infused"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: 1.8d
+			id: "q_8_33"
+			title: "33. Металлургический инфузер"
+			icon: "mekanism:metallurgic_infuser"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Легирование."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_32"]
+			tasks: [{
+				id: "t_8_33"
+				type: "item"
+				item: "mekanism:metallurgic_infuser"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_33"
+				type: "item"
+				item: "mekanism:metallurgic_infuser"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 1.8d
+			id: "q_8_34"
+			title: "34. Камера обогащения"
+			icon: "mekanism:enrichment_chamber"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Улучшение руд."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_33"]
+			tasks: [{
+				id: "t_8_34"
+				type: "item"
+				item: "mekanism:enrichment_chamber"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_34"
+				type: "item"
+				item: "mekanism:enrichment_chamber"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 1.8d
+			id: "q_8_35"
+			title: "35. Дробитель"
+			icon: "mekanism:crusher"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Пыль из блоков."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_34"]
+			tasks: [{
+				id: "t_8_35"
+				type: "item"
+				item: "mekanism:crusher"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_35"
+				type: "item"
+				item: "mekanism:crusher"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 1.8d
+			id: "q_8_36"
+			title: "36. Энергоплавильня"
+			icon: "mekanism:energized_smelter"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Электро-печь."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_35"]
+			tasks: [{
+				id: "t_8_36"
+				type: "item"
+				item: "mekanism:energized_smelter"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_36"
+				type: "item"
+				item: "mekanism:energized_smelter"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 1.8d
+			id: "q_8_37"
+			title: "37. Энергокуб"
+			icon: "mekanism:basic_energy_cube"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Хранилище FE."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_36"]
+			tasks: [{
+				id: "t_8_37"
+				type: "item"
+				item: "mekanism:basic_energy_cube"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_37"
+				type: "item"
+				item: "mekanism:basic_energy_cube"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 1.8d
+			id: "q_8_38"
+			title: "38. Универсальный кабель"
+			icon: "mekanism:basic_universal_cable"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Провод Mekanism."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_37"]
+			tasks: [{
+				id: "t_8_38"
+				type: "item"
+				item: "mekanism:basic_universal_cable"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_38"
+				type: "item"
+				item: "mekanism:basic_universal_cable"
+				count: 8
+			}]
+		},
+		{
+			x: 5.6d
+			y: 1.8d
+			id: "q_8_39"
+			title: "39. Теплогенератор"
+			icon: "mekanismgenerators:heat_generator"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Первый ток Mekanism."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_38"]
+			tasks: [{
+				id: "t_8_39"
+				type: "item"
+				item: "mekanismgenerators:heat_generator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_39"
+				type: "item"
+				item: "mekanismgenerators:heat_generator"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 1.8d
+			id: "q_8_40"
+			title: "40. Солнечный генератор"
+			icon: "mekanismgenerators:solar_generator"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Свет над океаном."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_39"]
+			tasks: [{
+				id: "t_8_40"
+				type: "item"
+				item: "mekanismgenerators:solar_generator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_40"
+				type: "item"
+				item: "mekanismgenerators:solar_generator"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: 3.6d
+			id: "q_8_41"
+			title: "41. Продвинутая панель"
+			icon: "mekanismgenerators:advanced_solar_generator"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Больше солнца."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_40"]
+			tasks: [{
+				id: "t_8_41"
+				type: "item"
+				item: "mekanismgenerators:advanced_solar_generator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_41"
+				type: "item"
+				item: "mekanismgenerators:advanced_solar_generator"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: 3.6d
+			id: "q_8_42"
+			title: "42. Ветрогенератор"
+			icon: "mekanismgenerators:wind_generator"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Ветер горизонта."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_41"]
+			tasks: [{
+				id: "t_8_42"
+				type: "item"
+				item: "mekanismgenerators:wind_generator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_42"
+				type: "item"
+				item: "mekanismgenerators:wind_generator"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 3.6d
+			id: "q_8_43"
+			title: "43. Биогенератор"
+			icon: "mekanismgenerators:bio_generator"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Жги органику."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_42"]
+			tasks: [{
+				id: "t_8_43"
+				type: "item"
+				item: "mekanismgenerators:bio_generator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_43"
+				type: "item"
+				item: "mekanismgenerators:bio_generator"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 3.6d
+			id: "q_8_44"
+			title: "44. Газовый генератор"
+			icon: "mekanismgenerators:gas_burning_generator"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Гори топливом газа."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_43"]
+			tasks: [{
+				id: "t_8_44"
+				type: "item"
+				item: "mekanismgenerators:gas_burning_generator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_44"
+				type: "item"
+				item: "mekanismgenerators:gas_burning_generator"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 3.6d
+			id: "q_8_45"
+			title: "45. Солнечная панель EIO"
+			icon: "enderio:solar_panel_basic"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Дневной ток."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_44"]
+			tasks: [{
+				id: "t_8_45"
+				type: "item"
+				item: "enderio:solar_panel_basic"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_45"
+				type: "item"
+				item: "enderio:solar_panel_basic"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 3.6d
+			id: "q_8_46"
+			title: "46. Якорь телепорта"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Сеть якорей."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_45"]
+			tasks: [{
+				id: "t_8_46"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_46"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 2
+			}]
+		},
+		{
+			x: 2.4d
+			y: 3.6d
+			id: "q_8_47"
+			title: "47. Посох путешествий"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Прыжки по якорям."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_46"]
+			tasks: [{
+				id: "t_8_47"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_47"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 3.6d
+			id: "q_8_48"
+			title: "48. Вейстоун"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Камень быстрых путей."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_47"]
+			tasks: [{
+				id: "t_8_48"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_48"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 3.6d
+			id: "q_8_49"
+			title: "49. Камень варпа"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Личный телепорт."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_48"]
+			tasks: [{
+				id: "t_8_49"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_49"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 3.6d
+			id: "q_8_50"
+			title: "50. Осмиевая пыль"
+			icon: "mekanism:dust_osmium"
+			subtitle: "Электрификация атолла: Ender IO и первые шаги Mekanism. Пыль для инфузии."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_8_49"]
+			tasks: [{
+				id: "t_8_50"
+				type: "item"
+				item: "mekanism:dust_osmium"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_8_50"
+				type: "item"
+				item: "mekanism:dust_osmium"
+				count: 8
+			}]
+		}
+	]
+}

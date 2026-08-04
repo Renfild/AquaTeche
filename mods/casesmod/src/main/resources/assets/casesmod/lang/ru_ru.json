@@ -1,0 +1,11 @@
+{
+  "item.casesmod.menu_opener": "Меню сервера",
+  "subtitles.casesmod.case_tick": "Вращение ленты кейса",
+  "subtitles.casesmod.anticipation": "Нарастающее напряжение",
+  "subtitles.casesmod.reveal": "Кейс открыт",
+  "subtitles.casesmod.reveal_epic": "Выпал эпический приз",
+  "subtitles.casesmod.reveal_legendary": "Выпал легендарный приз",
+  "itemGroup.casesmod.main": "Кейсы / Киты / Варпы",
+  "key.categories.casesmod": "CasesMod",
+  "key.casesmod.open_menu": "Открыть меню сервера"
+}

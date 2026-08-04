@@ -1,0 +1,222 @@
+# AquaTech rank prefixes (Oraxen glyphs)
+# Placeholders: :aq_owner: etc. LP prefixes use the raw glyph char.
+
+aq_owner:
+  texture: aquatech/ranks/owner
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_owner:"
+      - ":owner:"
+    permission: "oraxen.glyph.aq_owner"
+
+aq_admin:
+  texture: aquatech/ranks/admin
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_admin:"
+      - ":admin:"
+    permission: "oraxen.glyph.aq_admin"
+
+aq_dev:
+  texture: aquatech/ranks/dev
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_dev:"
+      - ":dev:"
+    permission: "oraxen.glyph.aq_dev"
+
+aq_mod:
+  texture: aquatech/ranks/mod
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_mod:"
+      - ":mod:"
+    permission: "oraxen.glyph.aq_mod"
+
+aq_staff:
+  texture: aquatech/ranks/staff
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_staff:"
+      - ":staff:"
+    permission: "oraxen.glyph.aq_staff"
+
+aq_helper:
+  texture: aquatech/ranks/helper
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_helper:"
+      - ":helper:"
+    permission: "oraxen.glyph.aq_helper"
+
+aq_manager:
+  texture: aquatech/ranks/manager
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_manager:"
+      - ":manager:"
+    permission: "oraxen.glyph.aq_manager"
+
+aq_magnate:
+  texture: aquatech/ranks/magnate
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_magnate:"
+      - ":magnate:"
+    permission: "oraxen.glyph.aq_magnate"
+
+aq_mvp:
+  texture: aquatech/ranks/mvp
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_mvp:"
+      - ":mvp:"
+    permission: "oraxen.glyph.aq_mvp"
+
+aq_vipplus:
+  texture: aquatech/ranks/vipplus
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_vipplus:"
+      - ":vipplus:"
+    permission: "oraxen.glyph.aq_vipplus"
+
+aq_vip:
+  texture: aquatech/ranks/vip
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_vip:"
+      - ":vip:"
+    permission: "oraxen.glyph.aq_vip"
+
+aq_streamer:
+  texture: aquatech/ranks/streamer
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_streamer:"
+      - ":streamer:"
+    permission: "oraxen.glyph.aq_streamer"
+
+aq_twitch:
+  texture: aquatech/ranks/twitch
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_twitch:"
+      - ":twitch:"
+    permission: "oraxen.glyph.aq_twitch"
+
+aq_youtuber:
+  texture: aquatech/ranks/youtuber
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_youtuber:"
+      - ":youtuber:"
+    permission: "oraxen.glyph.aq_youtuber"
+
+aq_artist:
+  texture: aquatech/ranks/artist
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_artist:"
+      - ":artist:"
+    permission: "oraxen.glyph.aq_artist"
+
+aq_builder:
+  texture: aquatech/ranks/builder
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_builder:"
+      - ":builder:"
+    permission: "oraxen.glyph.aq_builder"
+
+aq_friend:
+  texture: aquatech/ranks/friend
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_friend:"
+      - ":friend:"
+    permission: "oraxen.glyph.aq_friend"
+
+aq_trainee:
+  texture: aquatech/ranks/trainee
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_trainee:"
+      - ":trainee:"
+    permission: "oraxen.glyph.aq_trainee"
+
+aq_player:
+  texture: aquatech/ranks/player
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_player:"
+      - ":player:"
+    permission: "oraxen.glyph.aq_player"
+
+aq_npc:
+  texture: aquatech/ranks/npc
+  ascent: 7
+  height: 8
+  char: ""
+  chat:
+    placeholders:
+      - ":aq_npc:"
+      - ":npc:"
+    permission: "oraxen.glyph.aq_npc"

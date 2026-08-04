@@ -1,0 +1,23 @@
+{
+  "display": {
+    "title": "\u041f\u0435\u0440\u0432\u044b\u0439 \u0412\u0435\u0440\u0441\u0442\u0430\u043a",
+    "description": [
+      "\u0421\u043a\u0440\u0430\u0444\u0442\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0442\u0430\u043a \u0438\u0437 \u0432\u044b\u043b\u043e\u0432\u043b\u0435\u043d\u043d\u043e\u0439 \u0434\u0440\u0435\u0432\u0435\u0441\u0438\u043d\u044b."
+    ],
+    "icon": "minecraft:crafting_table"
+  },
+  "tasks": {
+    "task_1": {
+      "type": "heracles:item",
+      "item": "minecraft:crafting_table",
+      "count": 1
+    }
+  },
+  "rewards": {
+    "reward_1": {
+      "type": "heracles:item",
+      "item": "minecraft:stone_pickaxe",
+      "count": 1
+    }
+  }
+}

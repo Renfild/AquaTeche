@@ -1,0 +1,1163 @@
+{
+	id: "12_dreadnought"
+	group: "0AC7A00000000004"
+	order_index: 11
+	filename: "12_dreadnought"
+	title: "XII. Дредноут · Флагман океана"
+	icon: "vs_eureka:oak_ship_helm"
+	default_quest_shape: "rsquare"
+	default_hide_dependency_lines: false
+	quest_links: []
+	quests: [
+		{
+			x: -7.2d
+			y: -3.6d
+			id: "q_12_1"
+			title: "1. Штурвал"
+			icon: "vs_eureka:oak_ship_helm"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Сердце дредноута."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_50"]
+			tasks: [{
+				id: "t_12_1"
+				type: "item"
+				item: "vs_eureka:oak_ship_helm"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_1"
+				type: "item"
+				item: "vs_eureka:oak_ship_helm"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: -3.6d
+			id: "q_12_2"
+			title: "2. Судовой двигатель"
+			icon: "vs_eureka:engine"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Тяга в небеса."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_1"]
+			tasks: [{
+				id: "t_12_2"
+				type: "item"
+				item: "vs_eureka:engine"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_2"
+				type: "item"
+				item: "vs_eureka:engine"
+				count: 2
+			}]
+		},
+		{
+			x: -4.0d
+			y: -3.6d
+			id: "q_12_3"
+			title: "3. Балласт"
+			icon: "vs_eureka:ballast"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Осадка и баланс."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_2"]
+			tasks: [{
+				id: "t_12_3"
+				type: "item"
+				item: "vs_eureka:ballast"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_3"
+				type: "item"
+				item: "vs_eureka:ballast"
+				count: 4
+			}]
+		},
+		{
+			x: -2.4d
+			y: -3.6d
+			id: "q_12_4"
+			title: "4. Поплавок"
+			icon: "vs_eureka:floater"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Плавучесть корпуса."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_3"]
+			tasks: [{
+				id: "t_12_4"
+				type: "item"
+				item: "vs_eureka:floater"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_4"
+				type: "item"
+				item: "vs_eureka:floater"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: -3.6d
+			id: "q_12_5"
+			title: "5. Баллон"
+			icon: "vs_eureka:balloon"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Подъёмная сила."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_4"]
+			tasks: [{
+				id: "t_12_5"
+				type: "item"
+				item: "vs_eureka:balloon"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_5"
+				type: "item"
+				item: "vs_eureka:balloon"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: -3.6d
+			id: "q_12_6"
+			title: "6. Якорь"
+			icon: "vs_eureka:anchor"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Удержи флагман."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_5"]
+			tasks: [{
+				id: "t_12_6"
+				type: "item"
+				item: "vs_eureka:anchor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_6"
+				type: "item"
+				item: "vs_eureka:anchor"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: -3.6d
+			id: "q_12_7"
+			title: "7. Сборщик кораблей"
+			icon: "valkyrienskies:ship_assembler"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Собери физику корпуса."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_6"]
+			tasks: [{
+				id: "t_12_7"
+				type: "item"
+				item: "valkyrienskies:ship_assembler"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_7"
+				type: "item"
+				item: "valkyrienskies:ship_assembler"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: -3.6d
+			id: "q_12_8"
+			title: "8. Незерит корпуса"
+			icon: "minecraft:netherite_ingot"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Броня флагмана."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_7"]
+			tasks: [{
+				id: "t_12_8"
+				type: "item"
+				item: "minecraft:netherite_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_8"
+				type: "item"
+				item: "minecraft:netherite_ingot"
+				count: 4
+			}]
+		},
+		{
+			x: 5.6d
+			y: -3.6d
+			id: "q_12_9"
+			title: "9. Незеритовый блок"
+			icon: "minecraft:netherite_block"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Ядро палубы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_8"]
+			tasks: [{
+				id: "t_12_9"
+				type: "item"
+				item: "minecraft:netherite_block"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_9"
+				type: "item"
+				item: "minecraft:netherite_block"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: -3.6d
+			id: "q_12_10"
+			title: "10. Фонари палубы"
+			icon: "minecraft:sea_lantern"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Свет дредноута."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_9"]
+			tasks: [{
+				id: "t_12_10"
+				type: "item"
+				item: "minecraft:sea_lantern"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_10"
+				type: "item"
+				item: "minecraft:sea_lantern"
+				count: 8
+			}]
+		},
+		{
+			x: -7.2d
+			y: -1.8d
+			id: "q_12_11"
+			title: "11. Обшивка призмарина"
+			icon: "minecraft:dark_prismarine"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Морская броня."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_10"]
+			tasks: [{
+				id: "t_12_11"
+				type: "item"
+				item: "minecraft:dark_prismarine"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_11"
+				type: "item"
+				item: "minecraft:dark_prismarine"
+				count: 32
+			}]
+		},
+		{
+			x: -5.6d
+			y: -1.8d
+			id: "q_12_12"
+			title: "12. Призмариновый кирпич"
+			icon: "minecraft:prismarine_bricks"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Палубный настил."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_11"]
+			tasks: [{
+				id: "t_12_12"
+				type: "item"
+				item: "minecraft:prismarine_bricks"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_12"
+				type: "item"
+				item: "minecraft:prismarine_bricks"
+				count: 32
+			}]
+		},
+		{
+			x: -4.0d
+			y: -1.8d
+			id: "q_12_13"
+			title: "13. Железный каркас"
+			icon: "minecraft:iron_block"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Силовой набор."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_12"]
+			tasks: [{
+				id: "t_12_13"
+				type: "item"
+				item: "minecraft:iron_block"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_13"
+				type: "item"
+				item: "minecraft:iron_block"
+				count: 16
+			}]
+		},
+		{
+			x: -2.4d
+			y: -1.8d
+			id: "q_12_14"
+			title: "14. Медная обшивка"
+			icon: "minecraft:copper_block"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Патина времени."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_13"]
+			tasks: [{
+				id: "t_12_14"
+				type: "item"
+				item: "minecraft:copper_block"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_14"
+				type: "item"
+				item: "minecraft:copper_block"
+				count: 16
+			}]
+		},
+		{
+			x: -0.8d
+			y: -1.8d
+			id: "q_12_15"
+			title: "15. Паровые машины"
+			icon: "create:steam_engine"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Силовая установка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_14"]
+			tasks: [{
+				id: "t_12_15"
+				type: "item"
+				item: "create:steam_engine"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_15"
+				type: "item"
+				item: "create:steam_engine"
+				count: 4
+			}]
+		},
+		{
+			x: 0.8d
+			y: -1.8d
+			id: "q_12_16"
+			title: "16. Подшипники башен"
+			icon: "create:mechanical_bearing"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Вращающиеся орудия."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_15"]
+			tasks: [{
+				id: "t_12_16"
+				type: "item"
+				item: "create:mechanical_bearing"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_16"
+				type: "item"
+				item: "create:mechanical_bearing"
+				count: 2
+			}]
+		},
+		{
+			x: 2.4d
+			y: -1.8d
+			id: "q_12_17"
+			title: "17. МЭ на борту"
+			icon: "ae2:controller"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Цифровой трюм."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_16"]
+			tasks: [{
+				id: "t_12_17"
+				type: "item"
+				item: "ae2:controller"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_17"
+				type: "item"
+				item: "ae2:controller"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: -1.8d
+			id: "q_12_18"
+			title: "18. Терминал капитана"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Сеть с мостика."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_17"]
+			tasks: [{
+				id: "t_12_18"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_18"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: -1.8d
+			id: "q_12_19"
+			title: "19. Ветряки мачт"
+			icon: "mekanismgenerators:wind_generator"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Чистая энергия в рейсе."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_18"]
+			tasks: [{
+				id: "t_12_19"
+				type: "item"
+				item: "mekanismgenerators:wind_generator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_19"
+				type: "item"
+				item: "mekanismgenerators:wind_generator"
+				count: 2
+			}]
+		},
+		{
+			x: 7.2d
+			y: -1.8d
+			id: "q_12_20"
+			title: "20. Энергоячейки"
+			icon: "thermal:energy_cell"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Буфер похода."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_19"]
+			tasks: [{
+				id: "t_12_20"
+				type: "item"
+				item: "thermal:energy_cell"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_20"
+				type: "item"
+				item: "thermal:energy_cell"
+				count: 2
+			}]
+		},
+		{
+			x: -7.2d
+			y: 0.0d
+			id: "q_12_21"
+			title: "21. Рюкзак капитана"
+			icon: "sophisticatedbackpacks:backpack"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Личный трюм."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_20"]
+			tasks: [{
+				id: "t_12_21"
+				type: "item"
+				item: "sophisticatedbackpacks:backpack"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_21"
+				type: "item"
+				item: "sophisticatedbackpacks:backpack"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: 0.0d
+			id: "q_12_22"
+			title: "22. Золотой сундук"
+			icon: "sophisticatedstorage:gold_chest"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Казна флагмана."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_21"]
+			tasks: [{
+				id: "t_12_22"
+				type: "item"
+				item: "sophisticatedstorage:gold_chest"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_22"
+				type: "item"
+				item: "sophisticatedstorage:gold_chest"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 0.0d
+			id: "q_12_23"
+			title: "23. Монеты"
+			icon: "lightmanscurrency:coinpile_iron"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Экономика порта."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_22"]
+			tasks: [{
+				id: "t_12_23"
+				type: "item"
+				item: "lightmanscurrency:coinpile_iron"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_23"
+				type: "item"
+				item: "lightmanscurrency:coinpile_iron"
+				count: 4
+			}]
+		},
+		{
+			x: -2.4d
+			y: 0.0d
+			id: "q_12_24"
+			title: "24. Вейстоун на палубе"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Возврат домой."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_23"]
+			tasks: [{
+				id: "t_12_24"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_24"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 0.0d
+			id: "q_12_25"
+			title: "25. Маяк"
+			icon: "minecraft:beacon"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Сигнал флота."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_24"]
+			tasks: [{
+				id: "t_12_25"
+				type: "item"
+				item: "minecraft:beacon"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_25"
+				type: "item"
+				item: "minecraft:beacon"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 0.0d
+			id: "q_12_26"
+			title: "26. Проводник носа"
+			icon: "minecraft:conduit"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Власть над водой."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_25"]
+			tasks: [{
+				id: "t_12_26"
+				type: "item"
+				item: "minecraft:conduit"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_26"
+				type: "item"
+				item: "minecraft:conduit"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 0.0d
+			id: "q_12_27"
+			title: "27. Элитры"
+			icon: "minecraft:elytra"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Личный полёт с борта."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_26"]
+			tasks: [{
+				id: "t_12_27"
+				type: "item"
+				item: "minecraft:elytra"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_27"
+				type: "item"
+				item: "minecraft:elytra"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 0.0d
+			id: "q_12_28"
+			title: "28. Ракеты"
+			icon: "minecraft:firework_rocket"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Ускорение элитр."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_27"]
+			tasks: [{
+				id: "t_12_28"
+				type: "item"
+				item: "minecraft:firework_rocket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_28"
+				type: "item"
+				item: "minecraft:firework_rocket"
+				count: 16
+			}]
+		},
+		{
+			x: 5.6d
+			y: 0.0d
+			id: "q_12_29"
+			title: "29. Звезда Незера"
+			icon: "minecraft:nether_star"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Реактор символа."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_28"]
+			tasks: [{
+				id: "t_12_29"
+				type: "item"
+				item: "minecraft:nether_star"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_29"
+				type: "item"
+				item: "minecraft:nether_star"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 0.0d
+			id: "q_12_30"
+			title: "30. Яйцо дракона"
+			icon: "minecraft:dragon_egg"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Трофей края света."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_29"]
+			tasks: [{
+				id: "t_12_30"
+				type: "item"
+				item: "minecraft:dragon_egg"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_30"
+				type: "item"
+				item: "minecraft:dragon_egg"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: 1.8d
+			id: "q_12_31"
+			title: "31. Тотем"
+			icon: "minecraft:totem_of_undying"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Бессмертие капитана."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_30"]
+			tasks: [{
+				id: "t_12_31"
+				type: "item"
+				item: "minecraft:totem_of_undying"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_31"
+				type: "item"
+				item: "minecraft:totem_of_undying"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: 1.8d
+			id: "q_12_32"
+			title: "32. Зачарованное яблоко"
+			icon: "minecraft:enchanted_golden_apple"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Аварийный паёк."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_31"]
+			tasks: [{
+				id: "t_12_32"
+				type: "item"
+				item: "minecraft:enchanted_golden_apple"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_32"
+				type: "item"
+				item: "minecraft:enchanted_golden_apple"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 1.8d
+			id: "q_12_33"
+			title: "33. Мифический материал"
+			icon: "apotheosis:mythic_material"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Apotheosis сила."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_32"]
+			tasks: [{
+				id: "t_12_33"
+				type: "item"
+				item: "apotheosis:mythic_material"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_33"
+				type: "item"
+				item: "apotheosis:mythic_material"
+				count: 2
+			}]
+		},
+		{
+			x: -2.4d
+			y: 1.8d
+			id: "q_12_34"
+			title: "34. Трезубец флагмана"
+			icon: "minecraft:trident"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Оружие абордажа."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_33"]
+			tasks: [{
+				id: "t_12_34"
+				type: "item"
+				item: "minecraft:trident"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_34"
+				type: "item"
+				item: "minecraft:trident"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 1.8d
+			id: "q_12_35"
+			title: "35. Клинок капитана"
+			icon: "aquamirae:shatterblade"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Легенда глубин на борту."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_34"]
+			tasks: [{
+				id: "t_12_35"
+				type: "item"
+				item: "aquamirae:shatterblade"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_35"
+				type: "item"
+				item: "aquamirae:shatterblade"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 1.8d
+			id: "q_12_36"
+			title: "36. Капитанская труба"
+			icon: "minecraft:spyglass"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Обзор горизонта."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_35"]
+			tasks: [{
+				id: "t_12_36"
+				type: "item"
+				item: "minecraft:spyglass"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_36"
+				type: "item"
+				item: "minecraft:spyglass"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 1.8d
+			id: "q_12_37"
+			title: "37. Компас мостика"
+			icon: "minecraft:compass"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Курс домой."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_36"]
+			tasks: [{
+				id: "t_12_37"
+				type: "item"
+				item: "minecraft:compass"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_37"
+				type: "item"
+				item: "minecraft:compass"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 1.8d
+			id: "q_12_38"
+			title: "38. Хронометр"
+			icon: "minecraft:clock"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Время рейса."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_37"]
+			tasks: [{
+				id: "t_12_38"
+				type: "item"
+				item: "minecraft:clock"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_38"
+				type: "item"
+				item: "minecraft:clock"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 1.8d
+			id: "q_12_39"
+			title: "39. Карта мира"
+			icon: "minecraft:map"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Отметь атомы друзей."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_38"]
+			tasks: [{
+				id: "t_12_39"
+				type: "item"
+				item: "minecraft:map"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_39"
+				type: "item"
+				item: "minecraft:map"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 1.8d
+			id: "q_12_40"
+			title: "40. Вахтенный журнал"
+			icon: "minecraft:writable_book"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Пиши историю флота."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_39"]
+			tasks: [{
+				id: "t_12_40"
+				type: "item"
+				item: "minecraft:writable_book"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_40"
+				type: "item"
+				item: "minecraft:writable_book"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: 3.6d
+			id: "q_12_41"
+			title: "41. Бирка"
+			icon: "minecraft:name_tag"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Имя дредноута."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_40"]
+			tasks: [{
+				id: "t_12_41"
+				type: "item"
+				item: "minecraft:name_tag"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_41"
+				type: "item"
+				item: "minecraft:name_tag"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: 3.6d
+			id: "q_12_42"
+			title: "42. Колокол"
+			icon: "minecraft:bell"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Смена вахты."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_41"]
+			tasks: [{
+				id: "t_12_42"
+				type: "item"
+				item: "minecraft:bell"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_42"
+				type: "item"
+				item: "minecraft:bell"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 3.6d
+			id: "q_12_43"
+			title: "43. Якорь возрождения"
+			icon: "minecraft:respawn_anchor"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Точка в Незере."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_42"]
+			tasks: [{
+				id: "t_12_43"
+				type: "item"
+				item: "minecraft:respawn_anchor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_43"
+				type: "item"
+				item: "minecraft:respawn_anchor"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 3.6d
+			id: "q_12_44"
+			title: "44. Магнетит"
+			icon: "minecraft:lodestone"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Компас на флагман."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_43"]
+			tasks: [{
+				id: "t_12_44"
+				type: "item"
+				item: "minecraft:lodestone"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_44"
+				type: "item"
+				item: "minecraft:lodestone"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 3.6d
+			id: "q_12_45"
+			title: "45. Компас возврата"
+			icon: "minecraft:recovery_compass"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Путь к смерти и назад."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_44"]
+			tasks: [{
+				id: "t_12_45"
+				type: "item"
+				item: "minecraft:recovery_compass"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_45"
+				type: "item"
+				item: "minecraft:recovery_compass"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 3.6d
+			id: "q_12_46"
+			title: "46. Кристалл Энда"
+			icon: "minecraft:end_crystal"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Опасная мощь."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_45"]
+			tasks: [{
+				id: "t_12_46"
+				type: "item"
+				item: "minecraft:end_crystal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_46"
+				type: "item"
+				item: "minecraft:end_crystal"
+				count: 2
+			}]
+		},
+		{
+			x: 2.4d
+			y: 3.6d
+			id: "q_12_47"
+			title: "47. Шалкеровый ящик"
+			icon: "minecraft:shulker_box"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Трюм-карман."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_46"]
+			tasks: [{
+				id: "t_12_47"
+				type: "item"
+				item: "minecraft:shulker_box"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_47"
+				type: "item"
+				item: "minecraft:shulker_box"
+				count: 2
+			}]
+		},
+		{
+			x: 4.0d
+			y: 3.6d
+			id: "q_12_48"
+			title: "48. Незеритовая кираса"
+			icon: "minecraft:netherite_chestplate"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Доспех адмирала."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_47"]
+			tasks: [{
+				id: "t_12_48"
+				type: "item"
+				item: "minecraft:netherite_chestplate"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_48"
+				type: "item"
+				item: "minecraft:netherite_chestplate"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 3.6d
+			id: "q_12_49"
+			title: "49. Незеритовый меч"
+			icon: "minecraft:netherite_sword"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Клинок адмирала."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_48"]
+			tasks: [{
+				id: "t_12_49"
+				type: "item"
+				item: "minecraft:netherite_sword"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_49"
+				type: "item"
+				item: "minecraft:netherite_sword"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 3.6d
+			id: "q_12_50"
+			title: "50. Незеритовая кирка"
+			icon: "minecraft:netherite_pickaxe"
+			subtitle: "Собери левитирующий флагман Eureka — символ AquaTech. Строй и ломай везде."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_12_49"]
+			tasks: [{
+				id: "t_12_50"
+				type: "item"
+				item: "minecraft:netherite_pickaxe"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_12_50"
+				type: "item"
+				item: "minecraft:netherite_pickaxe"
+				count: 1
+			}]
+		}
+	]
+}

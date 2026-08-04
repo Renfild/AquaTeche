@@ -1,0 +1,25 @@
+# AquaTech + StarCatcher rods — примеры (CraftTweaker)
+# Переименуй в aquatech_starcatcher_rods.zs и /reload
+#
+# ВАЖНО: новые *предметы* удочек только через мод StarCatcher (Java).
+# Datapack/CraftTweaker могут: крафты, теги, выдача, маппинг лута AquaTech (см. FishingRodCompat.java).
+
+# Базовая удочка StarCatcher (если убрали ванильный крафт)
+# craftingTable.addShaped("aquatech_sc_rod", <item:starcatcher:starcatcher_rod>, [
+#     [<item:minecraft:air>, <item:minecraft:air>, <item:minecraft:stick>],
+#     [<item:minecraft:air>, <item:minecraft:stick>, <item:starcatcher:starcatcher_twine>],
+#     [<item:minecraft:stick>, <item:starcatcher:hook>, <item:starcatcher:bobber>]
+# ]);
+
+# Скин humble_rod через smithing (оригинал в data/starcatcher/recipes/humble_rod.json)
+# Тип: starcatcher:smithing_rod_skin — template + любая удочка из тега starcatcher:rods + addition
+
+# Выдача стартовой удочки (пример для квеста/команды — не автозагрузка):
+# <item:starcatcher:humble_rod>.withTag({});
+
+# Тег starcatcher:rods — список всех удочек мода (см. data/starcatcher/tags/items/rods.json)
+# Добавить кастомную удочку в тег через datapack:
+# kubejs/data/starcatcher/tags/items/rods.json  → values: ["starcatcher:my_custom_rod"]
+
+# Маппинг «удочка → тир лута AquaTech (IU-ресурсы)»:
+# mods/aquatech-ui/.../fishing/FishingRodCompat.java

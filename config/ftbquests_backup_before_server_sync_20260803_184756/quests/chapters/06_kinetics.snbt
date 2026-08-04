@@ -1,0 +1,1163 @@
+{
+	id: "06_kinetics"
+	group: "0AC7A00000000003"
+	order_index: 5
+	filename: "06_kinetics"
+	title: "VI. Кинетика · Течения"
+	icon: "create:water_wheel"
+	default_quest_shape: "rsquare"
+	default_hide_dependency_lines: false
+	quest_links: []
+	quests: [
+		{
+			x: -7.2d
+			y: -3.6d
+			id: "q_6_1"
+			title: "1. Ключ"
+			icon: "create:wrench"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Язык инженера Create."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_5_50"]
+			tasks: [{
+				id: "t_6_1"
+				type: "item"
+				item: "create:wrench"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_1"
+				type: "item"
+				item: "create:wrench"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: -3.6d
+			id: "q_6_2"
+			title: "2. Очки"
+			icon: "create:goggles"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Видь стресс сети."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_1"]
+			tasks: [{
+				id: "t_6_2"
+				type: "item"
+				item: "create:goggles"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_2"
+				type: "item"
+				item: "create:goggles"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: -3.6d
+			id: "q_6_3"
+			title: "3. Андезитовый сплав"
+			icon: "create:andesite_alloy"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Кровь кинетики."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_2"]
+			tasks: [{
+				id: "t_6_3"
+				type: "item"
+				item: "create:andesite_alloy"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_3"
+				type: "item"
+				item: "create:andesite_alloy"
+				count: 16
+			}]
+		},
+		{
+			x: -2.4d
+			y: -3.6d
+			id: "q_6_4"
+			title: "4. Вал"
+			icon: "create:shaft"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Передача вращения."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_3"]
+			tasks: [{
+				id: "t_6_4"
+				type: "item"
+				item: "create:shaft"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_4"
+				type: "item"
+				item: "create:shaft"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: -3.6d
+			id: "q_6_5"
+			title: "5. Шестерня"
+			icon: "create:cogwheel"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Зубчатая связь."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_4"]
+			tasks: [{
+				id: "t_6_5"
+				type: "item"
+				item: "create:cogwheel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_5"
+				type: "item"
+				item: "create:cogwheel"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: -3.6d
+			id: "q_6_6"
+			title: "6. Большая шестерня"
+			icon: "create:large_cogwheel"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Крупный узел."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_5"]
+			tasks: [{
+				id: "t_6_6"
+				type: "item"
+				item: "create:large_cogwheel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_6"
+				type: "item"
+				item: "create:large_cogwheel"
+				count: 4
+			}]
+		},
+		{
+			x: 2.4d
+			y: -3.6d
+			id: "q_6_7"
+			title: "7. Андезитовый корпус"
+			icon: "create:andesite_casing"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Основа машин."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_6"]
+			tasks: [{
+				id: "t_6_7"
+				type: "item"
+				item: "create:andesite_casing"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_7"
+				type: "item"
+				item: "create:andesite_casing"
+				count: 8
+			}]
+		},
+		{
+			x: 4.0d
+			y: -3.6d
+			id: "q_6_8"
+			title: "8. Ручной привод"
+			icon: "create:hand_crank"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Первый оборот вручную."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_7"]
+			tasks: [{
+				id: "t_6_8"
+				type: "item"
+				item: "create:hand_crank"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_8"
+				type: "item"
+				item: "create:hand_crank"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: -3.6d
+			id: "q_6_9"
+			title: "9. Водяное колесо"
+			icon: "create:water_wheel"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Сила течений океана."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_8"]
+			tasks: [{
+				id: "t_6_9"
+				type: "item"
+				item: "create:water_wheel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_9"
+				type: "item"
+				item: "create:water_wheel"
+				count: 2
+			}]
+		},
+		{
+			x: 7.2d
+			y: -3.6d
+			id: "q_6_10"
+			title: "10. Большое колесо"
+			icon: "create:large_water_wheel"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Мощь прилива."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_9"]
+			tasks: [{
+				id: "t_6_10"
+				type: "item"
+				item: "create:large_water_wheel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_10"
+				type: "item"
+				item: "create:large_water_wheel"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: -1.8d
+			id: "q_6_11"
+			title: "11. Редуктор"
+			icon: "create:gearbox"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Поворот оси."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_10"]
+			tasks: [{
+				id: "t_6_11"
+				type: "item"
+				item: "create:gearbox"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_11"
+				type: "item"
+				item: "create:gearbox"
+				count: 2
+			}]
+		},
+		{
+			x: -5.6d
+			y: -1.8d
+			id: "q_6_12"
+			title: "12. Сцепление"
+			icon: "create:clutch"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Отключай вал."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_11"]
+			tasks: [{
+				id: "t_6_12"
+				type: "item"
+				item: "create:clutch"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_12"
+				type: "item"
+				item: "create:clutch"
+				count: 2
+			}]
+		},
+		{
+			x: -4.0d
+			y: -1.8d
+			id: "q_6_13"
+			title: "13. Реверс"
+			icon: "create:gearshift"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Меняй направление."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_12"]
+			tasks: [{
+				id: "t_6_13"
+				type: "item"
+				item: "create:gearshift"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_13"
+				type: "item"
+				item: "create:gearshift"
+				count: 2
+			}]
+		},
+		{
+			x: -2.4d
+			y: -1.8d
+			id: "q_6_14"
+			title: "14. Жернов"
+			icon: "create:millstone"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Дроби ресурсы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_13"]
+			tasks: [{
+				id: "t_6_14"
+				type: "item"
+				item: "create:millstone"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_14"
+				type: "item"
+				item: "create:millstone"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: -1.8d
+			id: "q_6_15"
+			title: "15. Пресс"
+			icon: "create:mechanical_press"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Листы и компакты."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_14"]
+			tasks: [{
+				id: "t_6_15"
+				type: "item"
+				item: "create:mechanical_press"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_15"
+				type: "item"
+				item: "create:mechanical_press"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: -1.8d
+			id: "q_6_16"
+			title: "16. Чаша"
+			icon: "create:basin"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Смешивание."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_15"]
+			tasks: [{
+				id: "t_6_16"
+				type: "item"
+				item: "create:basin"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_16"
+				type: "item"
+				item: "create:basin"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: -1.8d
+			id: "q_6_17"
+			title: "17. Миксер"
+			icon: "create:mechanical_mixer"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Авто-смеси."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_16"]
+			tasks: [{
+				id: "t_6_17"
+				type: "item"
+				item: "create:mechanical_mixer"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_17"
+				type: "item"
+				item: "create:mechanical_mixer"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: -1.8d
+			id: "q_6_18"
+			title: "18. Депо"
+			icon: "create:depot"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Точка предметов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_17"]
+			tasks: [{
+				id: "t_6_18"
+				type: "item"
+				item: "create:depot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_18"
+				type: "item"
+				item: "create:depot"
+				count: 2
+			}]
+		},
+		{
+			x: 5.6d
+			y: -1.8d
+			id: "q_6_19"
+			title: "19. Лента"
+			icon: "create:belt_connector"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Конвейер атолла."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_18"]
+			tasks: [{
+				id: "t_6_19"
+				type: "item"
+				item: "create:belt_connector"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_19"
+				type: "item"
+				item: "create:belt_connector"
+				count: 4
+			}]
+		},
+		{
+			x: 7.2d
+			y: -1.8d
+			id: "q_6_20"
+			title: "20. Желоб"
+			icon: "create:chute"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Вертикальный сброс."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_19"]
+			tasks: [{
+				id: "t_6_20"
+				type: "item"
+				item: "create:chute"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_20"
+				type: "item"
+				item: "create:chute"
+				count: 4
+			}]
+		},
+		{
+			x: -7.2d
+			y: 0.0d
+			id: "q_6_21"
+			title: "21. Воронка"
+			icon: "create:andesite_funnel"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Ввод на ленту."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_20"]
+			tasks: [{
+				id: "t_6_21"
+				type: "item"
+				item: "create:andesite_funnel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_21"
+				type: "item"
+				item: "create:andesite_funnel"
+				count: 4
+			}]
+		},
+		{
+			x: -5.6d
+			y: 0.0d
+			id: "q_6_22"
+			title: "22. Туннель"
+			icon: "create:andesite_tunnel"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Разделение потоков."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_21"]
+			tasks: [{
+				id: "t_6_22"
+				type: "item"
+				item: "create:andesite_tunnel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_22"
+				type: "item"
+				item: "create:andesite_tunnel"
+				count: 2
+			}]
+		},
+		{
+			x: -4.0d
+			y: 0.0d
+			id: "q_6_23"
+			title: "23. Вентилятор"
+			icon: "create:encased_fan"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Обдув и фермы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_22"]
+			tasks: [{
+				id: "t_6_23"
+				type: "item"
+				item: "create:encased_fan"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_23"
+				type: "item"
+				item: "create:encased_fan"
+				count: 2
+			}]
+		},
+		{
+			x: -2.4d
+			y: 0.0d
+			id: "q_6_24"
+			title: "24. Пила"
+			icon: "create:mechanical_saw"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Авто-лес."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_23"]
+			tasks: [{
+				id: "t_6_24"
+				type: "item"
+				item: "create:mechanical_saw"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_24"
+				type: "item"
+				item: "create:mechanical_saw"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 0.0d
+			id: "q_6_25"
+			title: "25. Бур"
+			icon: "create:mechanical_drill"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Авто-камень."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_24"]
+			tasks: [{
+				id: "t_6_25"
+				type: "item"
+				item: "create:mechanical_drill"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_25"
+				type: "item"
+				item: "create:mechanical_drill"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 0.0d
+			id: "q_6_26"
+			title: "26. Жнец"
+			icon: "create:mechanical_harvester"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Авто-ферма."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_25"]
+			tasks: [{
+				id: "t_6_26"
+				type: "item"
+				item: "create:mechanical_harvester"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_26"
+				type: "item"
+				item: "create:mechanical_harvester"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 0.0d
+			id: "q_6_27"
+			title: "27. Плуг"
+			icon: "create:mechanical_plough"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Готовь почву."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_26"]
+			tasks: [{
+				id: "t_6_27"
+				type: "item"
+				item: "create:mechanical_plough"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_27"
+				type: "item"
+				item: "create:mechanical_plough"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 0.0d
+			id: "q_6_28"
+			title: "28. Установщик"
+			icon: "create:deployer"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Рука механизма."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_27"]
+			tasks: [{
+				id: "t_6_28"
+				type: "item"
+				item: "create:deployer"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_28"
+				type: "item"
+				item: "create:deployer"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 0.0d
+			id: "q_6_29"
+			title: "29. Интерфейс хранения"
+			icon: "create:portable_storage_interface"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Связь с контрапшеном."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_28"]
+			tasks: [{
+				id: "t_6_29"
+				type: "item"
+				item: "create:portable_storage_interface"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_29"
+				type: "item"
+				item: "create:portable_storage_interface"
+				count: 2
+			}]
+		},
+		{
+			x: 7.2d
+			y: 0.0d
+			id: "q_6_30"
+			title: "30. Медный корпус"
+			icon: "create:copper_casing"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Жидкостные машины."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_29"]
+			tasks: [{
+				id: "t_6_30"
+				type: "item"
+				item: "create:copper_casing"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_30"
+				type: "item"
+				item: "create:copper_casing"
+				count: 4
+			}]
+		},
+		{
+			x: -7.2d
+			y: 1.8d
+			id: "q_6_31"
+			title: "31. Труба"
+			icon: "create:fluid_pipe"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Потоки жидкостей."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_30"]
+			tasks: [{
+				id: "t_6_31"
+				type: "item"
+				item: "create:fluid_pipe"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_31"
+				type: "item"
+				item: "create:fluid_pipe"
+				count: 8
+			}]
+		},
+		{
+			x: -5.6d
+			y: 1.8d
+			id: "q_6_32"
+			title: "32. Помпа"
+			icon: "create:mechanical_pump"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Качай воду океана."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_31"]
+			tasks: [{
+				id: "t_6_32"
+				type: "item"
+				item: "create:mechanical_pump"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_32"
+				type: "item"
+				item: "create:mechanical_pump"
+				count: 2
+			}]
+		},
+		{
+			x: -4.0d
+			y: 1.8d
+			id: "q_6_33"
+			title: "33. Резервуар"
+			icon: "create:fluid_tank"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Запас жидкости."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_32"]
+			tasks: [{
+				id: "t_6_33"
+				type: "item"
+				item: "create:fluid_tank"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_33"
+				type: "item"
+				item: "create:fluid_tank"
+				count: 2
+			}]
+		},
+		{
+			x: -2.4d
+			y: 1.8d
+			id: "q_6_34"
+			title: "34. Диспенсер жидкости"
+			icon: "create:spout"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Розлив."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_33"]
+			tasks: [{
+				id: "t_6_34"
+				type: "item"
+				item: "create:spout"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_34"
+				type: "item"
+				item: "create:spout"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 1.8d
+			id: "q_6_35"
+			title: "35. Слив предметов"
+			icon: "create:item_drain"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Осуши вёдра."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_34"]
+			tasks: [{
+				id: "t_6_35"
+				type: "item"
+				item: "create:item_drain"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_35"
+				type: "item"
+				item: "create:item_drain"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 1.8d
+			id: "q_6_36"
+			title: "36. Вентиль"
+			icon: "create:fluid_valve"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Перекрывай трубы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_35"]
+			tasks: [{
+				id: "t_6_36"
+				type: "item"
+				item: "create:fluid_valve"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_36"
+				type: "item"
+				item: "create:fluid_valve"
+				count: 2
+			}]
+		},
+		{
+			x: 2.4d
+			y: 1.8d
+			id: "q_6_37"
+			title: "37. Шланговый подъёмник"
+			icon: "create:hose_pulley"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Забор из моря."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_36"]
+			tasks: [{
+				id: "t_6_37"
+				type: "item"
+				item: "create:hose_pulley"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_37"
+				type: "item"
+				item: "create:hose_pulley"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 1.8d
+			id: "q_6_38"
+			title: "38. Медный лист"
+			icon: "create:copper_sheet"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Штамповка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_37"]
+			tasks: [{
+				id: "t_6_38"
+				type: "item"
+				item: "create:copper_sheet"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_38"
+				type: "item"
+				item: "create:copper_sheet"
+				count: 8
+			}]
+		},
+		{
+			x: 5.6d
+			y: 1.8d
+			id: "q_6_39"
+			title: "39. Железный лист"
+			icon: "create:iron_sheet"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Корпуса."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_38"]
+			tasks: [{
+				id: "t_6_39"
+				type: "item"
+				item: "create:iron_sheet"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_39"
+				type: "item"
+				item: "create:iron_sheet"
+				count: 8
+			}]
+		},
+		{
+			x: 7.2d
+			y: 1.8d
+			id: "q_6_40"
+			title: "40. Золотой лист"
+			icon: "create:golden_sheet"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Декор и схемы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_39"]
+			tasks: [{
+				id: "t_6_40"
+				type: "item"
+				item: "create:golden_sheet"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_40"
+				type: "item"
+				item: "create:golden_sheet"
+				count: 4
+			}]
+		},
+		{
+			x: -7.2d
+			y: 3.6d
+			id: "q_6_41"
+			title: "41. Цинк"
+			icon: "create:zinc_ingot"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Путь к латуни."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_40"]
+			tasks: [{
+				id: "t_6_41"
+				type: "item"
+				item: "create:zinc_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_41"
+				type: "item"
+				item: "create:zinc_ingot"
+				count: 8
+			}]
+		},
+		{
+			x: -5.6d
+			y: 3.6d
+			id: "q_6_42"
+			title: "42. Латунь"
+			icon: "create:brass_ingot"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Точная механика."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_41"]
+			tasks: [{
+				id: "t_6_42"
+				type: "item"
+				item: "create:brass_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_42"
+				type: "item"
+				item: "create:brass_ingot"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: 3.6d
+			id: "q_6_43"
+			title: "43. Латунный лист"
+			icon: "create:brass_sheet"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Продвинутые детали."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_42"]
+			tasks: [{
+				id: "t_6_43"
+				type: "item"
+				item: "create:brass_sheet"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_43"
+				type: "item"
+				item: "create:brass_sheet"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: 3.6d
+			id: "q_6_44"
+			title: "44. Латунный корпус"
+			icon: "create:brass_casing"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Умные машины."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_43"]
+			tasks: [{
+				id: "t_6_44"
+				type: "item"
+				item: "create:brass_casing"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_44"
+				type: "item"
+				item: "create:brass_casing"
+				count: 4
+			}]
+		},
+		{
+			x: -0.8d
+			y: 3.6d
+			id: "q_6_45"
+			title: "45. Розовый кварц"
+			icon: "create:rose_quartz"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Электроника Create."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_44"]
+			tasks: [{
+				id: "t_6_45"
+				type: "item"
+				item: "create:rose_quartz"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_45"
+				type: "item"
+				item: "create:rose_quartz"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: 3.6d
+			id: "q_6_46"
+			title: "46. Полированный кварц"
+			icon: "create:polished_rose_quartz"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Чистый сигнал."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_45"]
+			tasks: [{
+				id: "t_6_46"
+				type: "item"
+				item: "create:polished_rose_quartz"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_46"
+				type: "item"
+				item: "create:polished_rose_quartz"
+				count: 4
+			}]
+		},
+		{
+			x: 2.4d
+			y: 3.6d
+			id: "q_6_47"
+			title: "47. Электронная лампа"
+			icon: "create:electron_tube"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Логика машин."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_46"]
+			tasks: [{
+				id: "t_6_47"
+				type: "item"
+				item: "create:electron_tube"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_47"
+				type: "item"
+				item: "create:electron_tube"
+				count: 4
+			}]
+		},
+		{
+			x: 4.0d
+			y: 3.6d
+			id: "q_6_48"
+			title: "48. Точный механизм"
+			icon: "create:precision_mechanism"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Ключ к автокрафту."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_47"]
+			tasks: [{
+				id: "t_6_48"
+				type: "item"
+				item: "create:precision_mechanism"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_48"
+				type: "item"
+				item: "create:precision_mechanism"
+				count: 2
+			}]
+		},
+		{
+			x: 5.6d
+			y: 3.6d
+			id: "q_6_49"
+			title: "49. Латунная воронка"
+			icon: "create:brass_funnel"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Фильтры потока."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_48"]
+			tasks: [{
+				id: "t_6_49"
+				type: "item"
+				item: "create:brass_funnel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_49"
+				type: "item"
+				item: "create:brass_funnel"
+				count: 4
+			}]
+		},
+		{
+			x: 7.2d
+			y: 3.6d
+			id: "q_6_50"
+			title: "50. Латунный туннель"
+			icon: "create:brass_tunnel"
+			subtitle: "Океан крутит колёса Create — первая настоящая индустрия. Умное разделение."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_6_49"]
+			tasks: [{
+				id: "t_6_50"
+				type: "item"
+				item: "create:brass_tunnel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_6_50"
+				type: "item"
+				item: "create:brass_tunnel"
+				count: 2
+			}]
+		}
+	]
+}

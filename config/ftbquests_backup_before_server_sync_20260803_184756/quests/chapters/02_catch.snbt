@@ -1,0 +1,1163 @@
+{
+	id: "02_catch"
+	group: "0AC7A00000000001"
+	order_index: 1
+	filename: "02_catch"
+	title: "II. Улов · Море кормит"
+	icon: "aquaculture:iron_fishing_rod"
+	default_quest_shape: "rsquare"
+	default_hide_dependency_lines: false
+	quest_links: []
+	quests: [
+		{
+			x: -7.2d
+			y: -3.6d
+			id: "q_2_1"
+			title: "1. Железная удочка"
+			icon: "aquaculture:iron_fishing_rod"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Aquaculture: прочнее ванильной."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_50"]
+			tasks: [{
+				id: "t_2_1"
+				type: "item"
+				item: "aquaculture:iron_fishing_rod"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_1"
+				type: "item"
+				item: "aquaculture:iron_fishing_rod"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: -3.6d
+			id: "q_2_2"
+			title: "2. Железный крючок"
+			icon: "aquaculture:iron_hook"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Крючок держит крупный улов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_1"]
+			tasks: [{
+				id: "t_2_2"
+				type: "item"
+				item: "aquaculture:iron_hook"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_2"
+				type: "item"
+				item: "aquaculture:iron_hook"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: -3.6d
+			id: "q_2_3"
+			title: "3. Червь"
+			icon: "aquaculture:worm"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Наживка с атома."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_2"]
+			tasks: [{
+				id: "t_2_3"
+				type: "item"
+				item: "aquaculture:worm"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_3"
+				type: "item"
+				item: "aquaculture:worm"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: -3.6d
+			id: "q_2_4"
+			title: "4. Треска"
+			icon: "minecraft:cod"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Простая рыба — начало рациона."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_3"]
+			tasks: [{
+				id: "t_2_4"
+				type: "item"
+				item: "minecraft:cod"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_4"
+				type: "item"
+				item: "minecraft:cod"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: -3.6d
+			id: "q_2_5"
+			title: "5. Лосось"
+			icon: "minecraft:salmon"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Жирнее трески."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_4"]
+			tasks: [{
+				id: "t_2_5"
+				type: "item"
+				item: "minecraft:salmon"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_5"
+				type: "item"
+				item: "minecraft:salmon"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: -3.6d
+			id: "q_2_6"
+			title: "6. Тропическая рыба"
+			icon: "minecraft:tropical_fish"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Краски тёплых течений."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_5"]
+			tasks: [{
+				id: "t_2_6"
+				type: "item"
+				item: "minecraft:tropical_fish"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_6"
+				type: "item"
+				item: "minecraft:tropical_fish"
+				count: 4
+			}]
+		},
+		{
+			x: 2.4d
+			y: -3.6d
+			id: "q_2_7"
+			title: "7. Иглобрюх"
+			icon: "minecraft:pufferfish"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Опасна, но ценна для зелий."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_6"]
+			tasks: [{
+				id: "t_2_7"
+				type: "item"
+				item: "minecraft:pufferfish"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_7"
+				type: "item"
+				item: "minecraft:pufferfish"
+				count: 2
+			}]
+		},
+		{
+			x: 4.0d
+			y: -3.6d
+			id: "q_2_8"
+			title: "8. Жареная треска"
+			icon: "minecraft:cooked_cod"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Сытость после шторма."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_7"]
+			tasks: [{
+				id: "t_2_8"
+				type: "item"
+				item: "minecraft:cooked_cod"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_8"
+				type: "item"
+				item: "minecraft:cooked_cod"
+				count: 8
+			}]
+		},
+		{
+			x: 5.6d
+			y: -3.6d
+			id: "q_2_9"
+			title: "9. Жареный лосось"
+			icon: "minecraft:cooked_salmon"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Сила на стройку."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_8"]
+			tasks: [{
+				id: "t_2_9"
+				type: "item"
+				item: "minecraft:cooked_salmon"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_9"
+				type: "item"
+				item: "minecraft:cooked_salmon"
+				count: 8
+			}]
+		},
+		{
+			x: 7.2d
+			y: -3.6d
+			id: "q_2_10"
+			title: "10. Сырое филе"
+			icon: "aquaculture:fish_fillet_raw"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Разделка улова."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_9"]
+			tasks: [{
+				id: "t_2_10"
+				type: "item"
+				item: "aquaculture:fish_fillet_raw"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_10"
+				type: "item"
+				item: "aquaculture:fish_fillet_raw"
+				count: 8
+			}]
+		},
+		{
+			x: -7.2d
+			y: -1.8d
+			id: "q_2_11"
+			title: "11. Жареное филе"
+			icon: "aquaculture:fish_fillet_cooked"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Чистый белок океана."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_10"]
+			tasks: [{
+				id: "t_2_11"
+				type: "item"
+				item: "aquaculture:fish_fillet_cooked"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_11"
+				type: "item"
+				item: "aquaculture:fish_fillet_cooked"
+				count: 8
+			}]
+		},
+		{
+			x: -5.6d
+			y: -1.8d
+			id: "q_2_12"
+			title: "12. Щупальца"
+			icon: "oceansdelight:tentacles"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Ocean's Delight с глубин."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_11"]
+			tasks: [{
+				id: "t_2_12"
+				type: "item"
+				item: "oceansdelight:tentacles"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_12"
+				type: "item"
+				item: "oceansdelight:tentacles"
+				count: 4
+			}]
+		},
+		{
+			x: -4.0d
+			y: -1.8d
+			id: "q_2_13"
+			title: "13. Нарезанные щупальца"
+			icon: "oceansdelight:cut_tentacles"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Готовь морскую кухню."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_12"]
+			tasks: [{
+				id: "t_2_13"
+				type: "item"
+				item: "oceansdelight:cut_tentacles"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_13"
+				type: "item"
+				item: "oceansdelight:cut_tentacles"
+				count: 4
+			}]
+		},
+		{
+			x: -2.4d
+			y: -1.8d
+			id: "q_2_14"
+			title: "14. Краб"
+			icon: "crabbersdelight:crab"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Crabber's Delight — клешни удачи."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_13"]
+			tasks: [{
+				id: "t_2_14"
+				type: "item"
+				item: "crabbersdelight:crab"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_14"
+				type: "item"
+				item: "crabbersdelight:crab"
+				count: 4
+			}]
+		},
+		{
+			x: -0.8d
+			y: -1.8d
+			id: "q_2_15"
+			title: "15. Варёный краб"
+			icon: "crabbersdelight:cooked_crab"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Пир на атоме."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_14"]
+			tasks: [{
+				id: "t_2_15"
+				type: "item"
+				item: "crabbersdelight:cooked_crab"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_15"
+				type: "item"
+				item: "crabbersdelight:cooked_crab"
+				count: 4
+			}]
+		},
+		{
+			x: 0.8d
+			y: -1.8d
+			id: "q_2_16"
+			title: "16. Земляные черви"
+			icon: "fishofthieves:earthworms"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Fish of Thieves наживка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_15"]
+			tasks: [{
+				id: "t_2_16"
+				type: "item"
+				item: "fishofthieves:earthworms"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_16"
+				type: "item"
+				item: "fishofthieves:earthworms"
+				count: 8
+			}]
+		},
+		{
+			x: 2.4d
+			y: -1.8d
+			id: "q_2_17"
+			title: "17. Запасная удочка"
+			icon: "minecraft:fishing_rod"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Всегда держи вторую."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_16"]
+			tasks: [{
+				id: "t_2_17"
+				type: "item"
+				item: "minecraft:fishing_rod"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_17"
+				type: "item"
+				item: "minecraft:fishing_rod"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: -1.8d
+			id: "q_2_18"
+			title: "18. Кувшинка"
+			icon: "minecraft:lily_pad"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Плавающая площадка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_17"]
+			tasks: [{
+				id: "t_2_18"
+				type: "item"
+				item: "minecraft:lily_pad"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_18"
+				type: "item"
+				item: "minecraft:lily_pad"
+				count: 4
+			}]
+		},
+		{
+			x: 5.6d
+			y: -1.8d
+			id: "q_2_19"
+			title: "19. Морской огурец"
+			icon: "minecraft:sea_pickle"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Свет под водой."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_18"]
+			tasks: [{
+				id: "t_2_19"
+				type: "item"
+				item: "minecraft:sea_pickle"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_19"
+				type: "item"
+				item: "minecraft:sea_pickle"
+				count: 4
+			}]
+		},
+		{
+			x: 7.2d
+			y: -1.8d
+			id: "q_2_20"
+			title: "20. Морская трава"
+			icon: "minecraft:seagrass"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Корм и декор дна."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_19"]
+			tasks: [{
+				id: "t_2_20"
+				type: "item"
+				item: "minecraft:seagrass"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_20"
+				type: "item"
+				item: "minecraft:seagrass"
+				count: 8
+			}]
+		},
+		{
+			x: -7.2d
+			y: 0.0d
+			id: "q_2_21"
+			title: "21. Чернильный мешок"
+			icon: "minecraft:ink_sac"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Чернила кальмаров."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_20"]
+			tasks: [{
+				id: "t_2_21"
+				type: "item"
+				item: "minecraft:ink_sac"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_21"
+				type: "item"
+				item: "minecraft:ink_sac"
+				count: 8
+			}]
+		},
+		{
+			x: -5.6d
+			y: 0.0d
+			id: "q_2_22"
+			title: "22. Светящиеся чернила"
+			icon: "minecraft:glow_ink_sac"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Светящиеся таблички."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_21"]
+			tasks: [{
+				id: "t_2_22"
+				type: "item"
+				item: "minecraft:glow_ink_sac"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_22"
+				type: "item"
+				item: "minecraft:glow_ink_sac"
+				count: 4
+			}]
+		},
+		{
+			x: -4.0d
+			y: 0.0d
+			id: "q_2_23"
+			title: "23. Осколок призмарина"
+			icon: "minecraft:prismarine_shard"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Обломки храмов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_22"]
+			tasks: [{
+				id: "t_2_23"
+				type: "item"
+				item: "minecraft:prismarine_shard"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_23"
+				type: "item"
+				item: "minecraft:prismarine_shard"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: 0.0d
+			id: "q_2_24"
+			title: "24. Кристаллы призмарина"
+			icon: "minecraft:prismarine_crystals"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Свет храмов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_23"]
+			tasks: [{
+				id: "t_2_24"
+				type: "item"
+				item: "minecraft:prismarine_crystals"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_24"
+				type: "item"
+				item: "minecraft:prismarine_crystals"
+				count: 4
+			}]
+		},
+		{
+			x: -0.8d
+			y: 0.0d
+			id: "q_2_25"
+			title: "25. Раковина наутилуса"
+			icon: "minecraft:nautilus_shell"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Ключ к проводнику."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_24"]
+			tasks: [{
+				id: "t_2_25"
+				type: "item"
+				item: "minecraft:nautilus_shell"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_25"
+				type: "item"
+				item: "minecraft:nautilus_shell"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 0.0d
+			id: "q_2_26"
+			title: "26. Щиток"
+			icon: "minecraft:scute"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Панцирь черепахи."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_25"]
+			tasks: [{
+				id: "t_2_26"
+				type: "item"
+				item: "minecraft:scute"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_26"
+				type: "item"
+				item: "minecraft:scute"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 0.0d
+			id: "q_2_27"
+			title: "27. Черепаший шлем"
+			icon: "minecraft:turtle_helmet"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Дыхание у поверхности."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_26"]
+			tasks: [{
+				id: "t_2_27"
+				type: "item"
+				item: "minecraft:turtle_helmet"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_27"
+				type: "item"
+				item: "minecraft:turtle_helmet"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 0.0d
+			id: "q_2_28"
+			title: "28. Трезубец"
+			icon: "minecraft:trident"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Оружие утопленников."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_27"]
+			tasks: [{
+				id: "t_2_28"
+				type: "item"
+				item: "minecraft:trident"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_28"
+				type: "item"
+				item: "minecraft:trident"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 0.0d
+			id: "q_2_29"
+			title: "29. Золотая удочка"
+			icon: "aquaculture:gold_fishing_rod"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Удача клева."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_28"]
+			tasks: [{
+				id: "t_2_29"
+				type: "item"
+				item: "aquaculture:gold_fishing_rod"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_29"
+				type: "item"
+				item: "aquaculture:gold_fishing_rod"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 0.0d
+			id: "q_2_30"
+			title: "30. Алмазная удочка"
+			icon: "aquaculture:diamond_fishing_rod"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Вершина рыбалки."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_29"]
+			tasks: [{
+				id: "t_2_30"
+				type: "item"
+				item: "aquaculture:diamond_fishing_rod"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_30"
+				type: "item"
+				item: "aquaculture:diamond_fishing_rod"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: 1.8d
+			id: "q_2_31"
+			title: "31. Нептуниевый самородок"
+			icon: "aquaculture:neptunium_nugget"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Металл глубин."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_30"]
+			tasks: [{
+				id: "t_2_31"
+				type: "item"
+				item: "aquaculture:neptunium_nugget"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_31"
+				type: "item"
+				item: "aquaculture:neptunium_nugget"
+				count: 4
+			}]
+		},
+		{
+			x: -5.6d
+			y: 1.8d
+			id: "q_2_32"
+			title: "32. Нептуниевый слиток"
+			icon: "aquaculture:neptunium_ingot"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Ковка океана."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_31"]
+			tasks: [{
+				id: "t_2_32"
+				type: "item"
+				item: "aquaculture:neptunium_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_32"
+				type: "item"
+				item: "aquaculture:neptunium_ingot"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 1.8d
+			id: "q_2_33"
+			title: "33. Нептуниевая удочка"
+			icon: "aquaculture:neptunium_fishing_rod"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Легендарный инструмент улова."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_32"]
+			tasks: [{
+				id: "t_2_33"
+				type: "item"
+				item: "aquaculture:neptunium_fishing_rod"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_33"
+				type: "item"
+				item: "aquaculture:neptunium_fishing_rod"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 1.8d
+			id: "q_2_34"
+			title: "34. Миска"
+			icon: "minecraft:bowl"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Основа супов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_33"]
+			tasks: [{
+				id: "t_2_34"
+				type: "item"
+				item: "minecraft:bowl"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_34"
+				type: "item"
+				item: "minecraft:bowl"
+				count: 4
+			}]
+		},
+		{
+			x: -0.8d
+			y: 1.8d
+			id: "q_2_35"
+			title: "35. Крабовые котлеты"
+			icon: "crabbersdelight:crab_cakes"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Пиршество Crabber's Delight."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_34"]
+			tasks: [{
+				id: "t_2_35"
+				type: "item"
+				item: "crabbersdelight:crab_cakes"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_35"
+				type: "item"
+				item: "crabbersdelight:crab_cakes"
+				count: 2
+			}]
+		},
+		{
+			x: 0.8d
+			y: 1.8d
+			id: "q_2_36"
+			title: "36. Подозрительное рагу"
+			icon: "minecraft:suspicious_stew"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Эффект в миске."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_35"]
+			tasks: [{
+				id: "t_2_36"
+				type: "item"
+				item: "minecraft:suspicious_stew"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_36"
+				type: "item"
+				item: "minecraft:suspicious_stew"
+				count: 2
+			}]
+		},
+		{
+			x: 2.4d
+			y: 1.8d
+			id: "q_2_37"
+			title: "37. Мёд"
+			icon: "minecraft:honey_bottle"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Сладость среди соли."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_36"]
+			tasks: [{
+				id: "t_2_37"
+				type: "item"
+				item: "minecraft:honey_bottle"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_37"
+				type: "item"
+				item: "minecraft:honey_bottle"
+				count: 2
+			}]
+		},
+		{
+			x: 4.0d
+			y: 1.8d
+			id: "q_2_38"
+			title: "38. Сахар"
+			icon: "minecraft:sugar"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Из тростника и свёклы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_37"]
+			tasks: [{
+				id: "t_2_38"
+				type: "item"
+				item: "minecraft:sugar"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_38"
+				type: "item"
+				item: "minecraft:sugar"
+				count: 8
+			}]
+		},
+		{
+			x: 5.6d
+			y: 1.8d
+			id: "q_2_39"
+			title: "39. Бумага"
+			icon: "minecraft:paper"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Карты и книги квестов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_38"]
+			tasks: [{
+				id: "t_2_39"
+				type: "item"
+				item: "minecraft:paper"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_39"
+				type: "item"
+				item: "minecraft:paper"
+				count: 8
+			}]
+		},
+		{
+			x: 7.2d
+			y: 1.8d
+			id: "q_2_40"
+			title: "40. Карта"
+			icon: "minecraft:map"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Пустая карта горизонтов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_39"]
+			tasks: [{
+				id: "t_2_40"
+				type: "item"
+				item: "minecraft:map"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_40"
+				type: "item"
+				item: "minecraft:map"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: 3.6d
+			id: "q_2_41"
+			title: "41. Книга и перо"
+			icon: "minecraft:writable_book"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Веди журнал Катастрофы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_40"]
+			tasks: [{
+				id: "t_2_41"
+				type: "item"
+				item: "minecraft:writable_book"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_41"
+				type: "item"
+				item: "minecraft:writable_book"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: 3.6d
+			id: "q_2_42"
+			title: "42. Книга"
+			icon: "minecraft:book"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Знания выживших."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_41"]
+			tasks: [{
+				id: "t_2_42"
+				type: "item"
+				item: "minecraft:book"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_42"
+				type: "item"
+				item: "minecraft:book"
+				count: 4
+			}]
+		},
+		{
+			x: -4.0d
+			y: 3.6d
+			id: "q_2_43"
+			title: "43. Бутылочка"
+			icon: "minecraft:glass_bottle"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Для зелий и медуз."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_42"]
+			tasks: [{
+				id: "t_2_43"
+				type: "item"
+				item: "minecraft:glass_bottle"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_43"
+				type: "item"
+				item: "minecraft:glass_bottle"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: 3.6d
+			id: "q_2_44"
+			title: "44. Ведро воды"
+			icon: "minecraft:water_bucket"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Аквариум на атоме."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_43"]
+			tasks: [{
+				id: "t_2_44"
+				type: "item"
+				item: "minecraft:water_bucket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_44"
+				type: "item"
+				item: "minecraft:water_bucket"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 3.6d
+			id: "q_2_45"
+			title: "45. Ведро с аксолотлем"
+			icon: "minecraft:axolotl_bucket"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Маленький друг глубин."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_44"]
+			tasks: [{
+				id: "t_2_45"
+				type: "item"
+				item: "minecraft:axolotl_bucket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_45"
+				type: "item"
+				item: "minecraft:axolotl_bucket"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 3.6d
+			id: "q_2_46"
+			title: "46. Ведро с треской"
+			icon: "minecraft:cod_bucket"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Живой запас."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_45"]
+			tasks: [{
+				id: "t_2_46"
+				type: "item"
+				item: "minecraft:cod_bucket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_46"
+				type: "item"
+				item: "minecraft:cod_bucket"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 3.6d
+			id: "q_2_47"
+			title: "47. Ведро с лососем"
+			icon: "minecraft:salmon_bucket"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Живой запас."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_46"]
+			tasks: [{
+				id: "t_2_47"
+				type: "item"
+				item: "minecraft:salmon_bucket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_47"
+				type: "item"
+				item: "minecraft:salmon_bucket"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 3.6d
+			id: "q_2_48"
+			title: "48. Ведро с иглобрюхом"
+			icon: "minecraft:pufferfish_bucket"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Осторожно — раздувается."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_47"]
+			tasks: [{
+				id: "t_2_48"
+				type: "item"
+				item: "minecraft:pufferfish_bucket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_48"
+				type: "item"
+				item: "minecraft:pufferfish_bucket"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 3.6d
+			id: "q_2_49"
+			title: "49. Ведро с тропической"
+			icon: "minecraft:tropical_fish_bucket"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Краски океана дома."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_48"]
+			tasks: [{
+				id: "t_2_49"
+				type: "item"
+				item: "minecraft:tropical_fish_bucket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_49"
+				type: "item"
+				item: "minecraft:tropical_fish_bucket"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 3.6d
+			id: "q_2_50"
+			title: "50. Проводник"
+			icon: "minecraft:conduit"
+			subtitle: "Океан отдаёт рыбу, крючки и нептуний. Стань рыбаком Горизонта. Сердце подводной базы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_49"]
+			tasks: [{
+				id: "t_2_50"
+				type: "item"
+				item: "minecraft:conduit"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_2_50"
+				type: "item"
+				item: "minecraft:conduit"
+				count: 1
+			}]
+		}
+	]
+}

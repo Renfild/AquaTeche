@@ -1,0 +1,1162 @@
+{
+	id: "01_kickstarter"
+	group: "0AC7A00000000001"
+	order_index: 0
+	filename: "01_kickstarter"
+	title: "I. Катастрофа · Лодка Кикстартера"
+	icon: "minecraft:oak_chest_boat"
+	default_quest_shape: "rsquare"
+	default_hide_dependency_lines: false
+	quest_links: []
+	quests: [
+		{
+			x: -7.2d
+			y: -3.6d
+			id: "q_1_1"
+			title: "1. Лодка Кикстартера"
+			icon: "minecraft:oak_chest_boat"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Сядь в лодку — это твой первый корабль после потопа."
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [{
+				id: "t_1_1"
+				type: "item"
+				item: "minecraft:oak_chest_boat"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_1"
+				type: "item"
+				item: "minecraft:oak_chest_boat"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: -3.6d
+			id: "q_1_2"
+			title: "2. Удочка выжившего"
+			icon: "minecraft:fishing_rod"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Единственный способ добыть ресурсы с пустоты океана."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_1"]
+			tasks: [{
+				id: "t_1_2"
+				type: "item"
+				item: "minecraft:fishing_rod"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_2"
+				type: "item"
+				item: "minecraft:fishing_rod"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: -3.6d
+			id: "q_1_3"
+			title: "3. Плавающие палки"
+			icon: "minecraft:stick"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Вылови обломки — палки держат первые крафты."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_2"]
+			tasks: [{
+				id: "t_1_3"
+				type: "item"
+				item: { id: "itemfilters:tag", Count: 1b, tag: { value: "forge:rods/wooden" } }
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_3"
+				type: "item"
+				item: "minecraft:stick"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: -3.6d
+			id: "q_1_4"
+			title: "4. Доски из волн"
+			icon: "minecraft:oak_planks"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Дерево тонет редко — береги каждую доску."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_3"]
+			tasks: [{
+				id: "t_1_4"
+				type: "item"
+				item: { id: "itemfilters:tag", Count: 1b, tag: { value: "minecraft:planks" } }
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_4"
+				type: "item"
+				item: "minecraft:oak_planks"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: -3.6d
+			id: "q_1_5"
+			title: "5. Камень со дна"
+			icon: "minecraft:cobblestone"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Булыжник — кости затонувших городов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_4"]
+			tasks: [{
+				id: "t_1_5"
+				type: "item"
+				item: { id: "itemfilters:tag", Count: 1b, tag: { value: "forge:cobblestone" } }
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_5"
+				type: "item"
+				item: "minecraft:cobblestone"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: -3.6d
+			id: "q_1_6"
+			title: "6. Горсть земли"
+			icon: "minecraft:dirt"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Земля дороже золота, когда вокруг только вода."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_5"]
+			tasks: [{
+				id: "t_1_6"
+				type: "item"
+				item: "minecraft:dirt"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_6"
+				type: "item"
+				item: "minecraft:dirt"
+				count: 4
+			}]
+		},
+		{
+			x: 2.4d
+			y: -3.6d
+			id: "q_1_7"
+			title: "7. Саженец надежды"
+			icon: "minecraft:oak_sapling"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Посади жизнь на атоме — без дерева нет будущего."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_6"]
+			tasks: [{
+				id: "t_1_7"
+				type: "item"
+				item: "minecraft:oak_sapling"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_7"
+				type: "item"
+				item: "minecraft:oak_sapling"
+				count: 2
+			}]
+		},
+		{
+			x: 4.0d
+			y: -3.6d
+			id: "q_1_8"
+			title: "8. Костная мука"
+			icon: "minecraft:bone_meal"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Ускорь рост — океан не ждёт."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_7"]
+			tasks: [{
+				id: "t_1_8"
+				type: "item"
+				item: "minecraft:bone_meal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_8"
+				type: "item"
+				item: "minecraft:bone_meal"
+				count: 4
+			}]
+		},
+		{
+			x: 5.6d
+			y: -3.6d
+			id: "q_1_9"
+			title: "9. Верстак на волнах"
+			icon: "minecraft:crafting_table"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Собери верстак — первый очаг цивилизации."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_8"]
+			tasks: [{
+				id: "t_1_9"
+				type: "item"
+				item: "minecraft:crafting_table"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_9"
+				type: "item"
+				item: "minecraft:crafting_table"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: -3.6d
+			id: "q_1_10"
+			title: "10. Сундук запасов"
+			icon: "minecraft:chest"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Храни улов — шторм ничего не прощает."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_9"]
+			tasks: [{
+				id: "t_1_10"
+				type: "item"
+				item: "minecraft:chest"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_10"
+				type: "item"
+				item: "minecraft:chest"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: -1.8d
+			id: "q_1_11"
+			title: "11. Бревно"
+			icon: "minecraft:oak_log"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Настоящее бревно — редкий трофей рыбалки."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_10"]
+			tasks: [{
+				id: "t_1_11"
+				type: "item"
+				item: { id: "itemfilters:tag", Count: 1b, tag: { value: "minecraft:logs" } }
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_11"
+				type: "item"
+				item: "minecraft:oak_log"
+				count: 4
+			}]
+		},
+		{
+			x: -5.6d
+			y: -1.8d
+			id: "q_1_12"
+			title: "12. Деревянная кирка"
+			icon: "minecraft:wooden_pickaxe"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Даже на атоме нужна кирка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_11"]
+			tasks: [{
+				id: "t_1_12"
+				type: "item"
+				item: "minecraft:wooden_pickaxe"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_12"
+				type: "item"
+				item: "minecraft:wooden_pickaxe"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: -1.8d
+			id: "q_1_13"
+			title: "13. Деревянный топор"
+			icon: "minecraft:wooden_axe"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Руби осторожно — дерево растёт медленно."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_12"]
+			tasks: [{
+				id: "t_1_13"
+				type: "item"
+				item: "minecraft:wooden_axe"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_13"
+				type: "item"
+				item: "minecraft:wooden_axe"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: -1.8d
+			id: "q_1_14"
+			title: "14. Печь"
+			icon: "minecraft:furnace"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Огонь над бездной — тепло и плавка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_13"]
+			tasks: [{
+				id: "t_1_14"
+				type: "item"
+				item: "minecraft:furnace"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_14"
+				type: "item"
+				item: "minecraft:furnace"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: -1.8d
+			id: "q_1_15"
+			title: "15. Древесный уголь"
+			icon: "minecraft:charcoal"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Уголь из бревен — топливо без шахт."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_14"]
+			tasks: [{
+				id: "t_1_15"
+				type: "item"
+				item: "minecraft:charcoal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_15"
+				type: "item"
+				item: "minecraft:charcoal"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: -1.8d
+			id: "q_1_16"
+			title: "16. Факел"
+			icon: "minecraft:torch"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Свет на атоме — защита от ночи."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_15"]
+			tasks: [{
+				id: "t_1_16"
+				type: "item"
+				item: "minecraft:torch"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_16"
+				type: "item"
+				item: "minecraft:torch"
+				count: 8
+			}]
+		},
+		{
+			x: 2.4d
+			y: -1.8d
+			id: "q_1_17"
+			title: "17. Ламинария"
+			icon: "minecraft:kelp"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Морская зелень кормит и вяжет."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_16"]
+			tasks: [{
+				id: "t_1_17"
+				type: "item"
+				item: "minecraft:kelp"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_17"
+				type: "item"
+				item: "minecraft:kelp"
+				count: 8
+			}]
+		},
+		{
+			x: 4.0d
+			y: -1.8d
+			id: "q_1_18"
+			title: "18. Сушёная ламинария"
+			icon: "minecraft:dried_kelp"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Сухой паёк на долгий день."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_17"]
+			tasks: [{
+				id: "t_1_18"
+				type: "item"
+				item: "minecraft:dried_kelp"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_18"
+				type: "item"
+				item: "minecraft:dried_kelp"
+				count: 8
+			}]
+		},
+		{
+			x: 5.6d
+			y: -1.8d
+			id: "q_1_19"
+			title: "19. Нить"
+			icon: "minecraft:string"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Нити из сетей утопленников."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_18"]
+			tasks: [{
+				id: "t_1_19"
+				type: "item"
+				item: "minecraft:string"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_19"
+				type: "item"
+				item: "minecraft:string"
+				count: 4
+			}]
+		},
+		{
+			x: 7.2d
+			y: -1.8d
+			id: "q_1_20"
+			title: "20. Хлеб"
+			icon: "minecraft:bread"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Не голодай — сила нужна для стройки."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_19"]
+			tasks: [{
+				id: "t_1_20"
+				type: "item"
+				item: "minecraft:bread"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_20"
+				type: "item"
+				item: "minecraft:bread"
+				count: 8
+			}]
+		},
+		{
+			x: -7.2d
+			y: 0.0d
+			id: "q_1_21"
+			title: "21. Песок"
+			icon: "minecraft:sand"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Песок с мели — стекло и стройка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_20"]
+			tasks: [{
+				id: "t_1_21"
+				type: "item"
+				item: "minecraft:sand"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_21"
+				type: "item"
+				item: "minecraft:sand"
+				count: 8
+			}]
+		},
+		{
+			x: -5.6d
+			y: 0.0d
+			id: "q_1_22"
+			title: "22. Стекло"
+			icon: "minecraft:glass"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Окно в горизонт."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_21"]
+			tasks: [{
+				id: "t_1_22"
+				type: "item"
+				item: "minecraft:glass"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_22"
+				type: "item"
+				item: "minecraft:glass"
+				count: 4
+			}]
+		},
+		{
+			x: -4.0d
+			y: 0.0d
+			id: "q_1_23"
+			title: "23. Глина"
+			icon: "minecraft:clay_ball"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Глина с илистого дна."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_22"]
+			tasks: [{
+				id: "t_1_23"
+				type: "item"
+				item: "minecraft:clay_ball"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_23"
+				type: "item"
+				item: "minecraft:clay_ball"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: 0.0d
+			id: "q_1_24"
+			title: "24. Кирпич"
+			icon: "minecraft:brick"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Обожжённый кирпич крепит платформу."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_23"]
+			tasks: [{
+				id: "t_1_24"
+				type: "item"
+				item: "minecraft:brick"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_24"
+				type: "item"
+				item: "minecraft:brick"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: 0.0d
+			id: "q_1_25"
+			title: "25. Лестница"
+			icon: "minecraft:ladder"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Спуск к воде безопаснее прыжка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_24"]
+			tasks: [{
+				id: "t_1_25"
+				type: "item"
+				item: "minecraft:ladder"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_25"
+				type: "item"
+				item: "minecraft:ladder"
+				count: 4
+			}]
+		},
+		{
+			x: 0.8d
+			y: 0.0d
+			id: "q_1_26"
+			title: "26. Подмости"
+			icon: "minecraft:scaffolding"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Расширяй атом вверх и вширь."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_25"]
+			tasks: [{
+				id: "t_1_26"
+				type: "item"
+				item: "minecraft:scaffolding"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_26"
+				type: "item"
+				item: "minecraft:scaffolding"
+				count: 8
+			}]
+		},
+		{
+			x: 2.4d
+			y: 0.0d
+			id: "q_1_27"
+			title: "27. Бочка"
+			icon: "minecraft:barrel"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Морской склад компактнее сундука."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_26"]
+			tasks: [{
+				id: "t_1_27"
+				type: "item"
+				item: "minecraft:barrel"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_27"
+				type: "item"
+				item: "minecraft:barrel"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 0.0d
+			id: "q_1_28"
+			title: "28. Костёр"
+			icon: "minecraft:campfire"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Дым над водой — знак жизни."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_27"]
+			tasks: [{
+				id: "t_1_28"
+				type: "item"
+				item: "minecraft:campfire"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_28"
+				type: "item"
+				item: "minecraft:campfire"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 0.0d
+			id: "q_1_29"
+			title: "29. Самородок железа"
+			icon: "minecraft:iron_nugget"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Мелкое железо из обломков."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_28"]
+			tasks: [{
+				id: "t_1_29"
+				type: "item"
+				item: "minecraft:iron_nugget"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_29"
+				type: "item"
+				item: "minecraft:iron_nugget"
+				count: 9
+			}]
+		},
+		{
+			x: 7.2d
+			y: 0.0d
+			id: "q_1_30"
+			title: "30. Слиток железа"
+			icon: "minecraft:iron_ingot"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Первый металл эпохи Кикстартера."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_29"]
+			tasks: [{
+				id: "t_1_30"
+				type: "item"
+				item: { id: "itemfilters:tag", Count: 1b, tag: { value: "forge:ingots/iron" } }
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_30"
+				type: "item"
+				item: "minecraft:iron_ingot"
+				count: 2
+			}]
+		},
+		{
+			x: -7.2d
+			y: 1.8d
+			id: "q_1_31"
+			title: "31. Ведро"
+			icon: "minecraft:bucket"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Вода — и враг, и ресурс."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_30"]
+			tasks: [{
+				id: "t_1_31"
+				type: "item"
+				item: "minecraft:bucket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_31"
+				type: "item"
+				item: "minecraft:bucket"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: 1.8d
+			id: "q_1_32"
+			title: "32. Ведро воды"
+			icon: "minecraft:water_bucket"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Контролируй стихию."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_31"]
+			tasks: [{
+				id: "t_1_32"
+				type: "item"
+				item: "minecraft:water_bucket"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_32"
+				type: "item"
+				item: "minecraft:water_bucket"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 1.8d
+			id: "q_1_33"
+			title: "33. Каменная кирка"
+			icon: "minecraft:stone_pickaxe"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Камень прочнее дерева."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_32"]
+			tasks: [{
+				id: "t_1_33"
+				type: "item"
+				item: "minecraft:stone_pickaxe"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_33"
+				type: "item"
+				item: "minecraft:stone_pickaxe"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 1.8d
+			id: "q_1_34"
+			title: "34. Каменный топор"
+			icon: "minecraft:stone_axe"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Быстрее валить ростки."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_33"]
+			tasks: [{
+				id: "t_1_34"
+				type: "item"
+				item: "minecraft:stone_axe"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_34"
+				type: "item"
+				item: "minecraft:stone_axe"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 1.8d
+			id: "q_1_35"
+			title: "35. Ножницы"
+			icon: "minecraft:shears"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Срезай листву и шерсть."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_34"]
+			tasks: [{
+				id: "t_1_35"
+				type: "item"
+				item: "minecraft:shears"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_35"
+				type: "item"
+				item: "minecraft:shears"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 1.8d
+			id: "q_1_36"
+			title: "36. Кровать"
+			icon: "minecraft:white_bed"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Точка возрождения на атоме."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_35"]
+			tasks: [{
+				id: "t_1_36"
+				type: "item"
+				item: "minecraft:white_bed"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_36"
+				type: "item"
+				item: "minecraft:white_bed"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 1.8d
+			id: "q_1_37"
+			title: "37. Компас"
+			icon: "minecraft:compass"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Ориентир в бесконечной воде."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_36"]
+			tasks: [{
+				id: "t_1_37"
+				type: "item"
+				item: "minecraft:compass"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_37"
+				type: "item"
+				item: "minecraft:compass"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 1.8d
+			id: "q_1_38"
+			title: "38. Часы"
+			icon: "minecraft:clock"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Время приливов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_37"]
+			tasks: [{
+				id: "t_1_38"
+				type: "item"
+				item: "minecraft:clock"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_38"
+				type: "item"
+				item: "minecraft:clock"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 1.8d
+			id: "q_1_39"
+			title: "39. Подзорная труба"
+			icon: "minecraft:spyglass"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Ищи чужие атомы на горизонте."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_38"]
+			tasks: [{
+				id: "t_1_39"
+				type: "item"
+				item: "minecraft:spyglass"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_39"
+				type: "item"
+				item: "minecraft:spyglass"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 1.8d
+			id: "q_1_40"
+			title: "40. Медь"
+			icon: "minecraft:copper_ingot"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Медь сверкает в солёной воде."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_39"]
+			tasks: [{
+				id: "t_1_40"
+				type: "item"
+				item: { id: "itemfilters:tag", Count: 1b, tag: { value: "forge:ingots/copper" } }
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_40"
+				type: "item"
+				item: "minecraft:copper_ingot"
+				count: 4
+			}]
+		},
+		{
+			x: -7.2d
+			y: 3.6d
+			id: "q_1_41"
+			title: "41. Фонарь"
+			icon: "minecraft:lantern"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Тёплый свет вместо факела."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_40"]
+			tasks: [{
+				id: "t_1_41"
+				type: "item"
+				item: "minecraft:lantern"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_41"
+				type: "item"
+				item: "minecraft:lantern"
+				count: 2
+			}]
+		},
+		{
+			x: -5.6d
+			y: 3.6d
+			id: "q_1_42"
+			title: "42. Гладкий камень"
+			icon: "minecraft:smooth_stone"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Основа механизмов будущего."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_41"]
+			tasks: [{
+				id: "t_1_42"
+				type: "item"
+				item: "minecraft:smooth_stone"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_42"
+				type: "item"
+				item: "minecraft:smooth_stone"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: 3.6d
+			id: "q_1_43"
+			title: "43. Котёл"
+			icon: "minecraft:cauldron"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Сбор дождя и варка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_42"]
+			tasks: [{
+				id: "t_1_43"
+				type: "item"
+				item: "minecraft:cauldron"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_43"
+				type: "item"
+				item: "minecraft:cauldron"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 3.6d
+			id: "q_1_44"
+			title: "44. Наковальня"
+			icon: "minecraft:anvil"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Чини инструменты Кикстартера."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_43"]
+			tasks: [{
+				id: "t_1_44"
+				type: "item"
+				item: "minecraft:anvil"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_44"
+				type: "item"
+				item: "minecraft:anvil"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 3.6d
+			id: "q_1_45"
+			title: "45. Точило"
+			icon: "minecraft:grindstone"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Сними лишние чары."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_44"]
+			tasks: [{
+				id: "t_1_45"
+				type: "item"
+				item: "minecraft:grindstone"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_45"
+				type: "item"
+				item: "minecraft:grindstone"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 3.6d
+			id: "q_1_46"
+			title: "46. Камнерез"
+			icon: "minecraft:stonecutter"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Точная обработка камня."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_45"]
+			tasks: [{
+				id: "t_1_46"
+				type: "item"
+				item: "minecraft:stonecutter"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_46"
+				type: "item"
+				item: "minecraft:stonecutter"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 3.6d
+			id: "q_1_47"
+			title: "47. Решётка"
+			icon: "minecraft:iron_bars"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Ограждение над бездной."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_46"]
+			tasks: [{
+				id: "t_1_47"
+				type: "item"
+				item: "minecraft:iron_bars"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_47"
+				type: "item"
+				item: "minecraft:iron_bars"
+				count: 8
+			}]
+		},
+		{
+			x: 4.0d
+			y: 3.6d
+			id: "q_1_48"
+			title: "48. Цепь"
+			icon: "minecraft:chain"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Связь платформ."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_47"]
+			tasks: [{
+				id: "t_1_48"
+				type: "item"
+				item: "minecraft:chain"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_48"
+				type: "item"
+				item: "minecraft:chain"
+				count: 4
+			}]
+		},
+		{
+			x: 5.6d
+			y: 3.6d
+			id: "q_1_49"
+			title: "49. Лёгкая лодка"
+			icon: "minecraft:oak_boat"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Запасной корпус на всякий случай."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_48"]
+			tasks: [{
+				id: "t_1_49"
+				type: "item"
+				item: "minecraft:oak_boat"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_49"
+				type: "item"
+				item: "minecraft:oak_boat"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 3.6d
+			id: "q_1_50"
+			title: "50. Сердце моря"
+			icon: "minecraft:heart_of_the_sea"
+			subtitle: "Мир ушёл под воду. У тебя атом из нескольких блоков и Лодка Кикстартера. Легенда: оно зовёт к глубинным руинам."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_1_49"]
+			tasks: [{
+				id: "t_1_50"
+				type: "item"
+				item: "minecraft:heart_of_the_sea"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_1_50"
+				type: "item"
+				item: "minecraft:heart_of_the_sea"
+				count: 1
+			}]
+		}
+	]
+}

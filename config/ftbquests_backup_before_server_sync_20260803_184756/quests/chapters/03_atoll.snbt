@@ -1,0 +1,1163 @@
+{
+	id: "03_atoll"
+	group: "0AC7A00000000002"
+	order_index: 2
+	filename: "03_atoll"
+	title: "III. Атолл · Расширение атома"
+	icon: "minecraft:grass_block"
+	default_quest_shape: "rsquare"
+	default_hide_dependency_lines: false
+	quest_links: []
+	quests: [
+		{
+			x: -7.2d
+			y: -3.6d
+			id: "q_3_1"
+			title: "1. Дёрн"
+			icon: "minecraft:grass_block"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Зелень на призме."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_2_50"]
+			tasks: [{
+				id: "t_3_1"
+				type: "item"
+				item: "minecraft:grass_block"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_1"
+				type: "item"
+				item: "minecraft:grass_block"
+				count: 4
+			}]
+		},
+		{
+			x: -5.6d
+			y: -3.6d
+			id: "q_3_2"
+			title: "2. Каменистая земля"
+			icon: "minecraft:coarse_dirt"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Стойкая почва."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_1"]
+			tasks: [{
+				id: "t_3_2"
+				type: "item"
+				item: "minecraft:coarse_dirt"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_2"
+				type: "item"
+				item: "minecraft:coarse_dirt"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: -3.6d
+			id: "q_3_3"
+			title: "3. Корневая земля"
+			icon: "minecraft:rooted_dirt"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Корни держат атолл."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_2"]
+			tasks: [{
+				id: "t_3_3"
+				type: "item"
+				item: "minecraft:rooted_dirt"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_3"
+				type: "item"
+				item: "minecraft:rooted_dirt"
+				count: 4
+			}]
+		},
+		{
+			x: -2.4d
+			y: -3.6d
+			id: "q_3_4"
+			title: "4. Грязь"
+			icon: "minecraft:mud"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Ил после прилива."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_3"]
+			tasks: [{
+				id: "t_3_4"
+				type: "item"
+				item: "minecraft:mud"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_4"
+				type: "item"
+				item: "minecraft:mud"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: -3.6d
+			id: "q_3_5"
+			title: "5. Семена пшеницы"
+			icon: "minecraft:wheat_seeds"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Первая грядка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_4"]
+			tasks: [{
+				id: "t_3_5"
+				type: "item"
+				item: "minecraft:wheat_seeds"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_5"
+				type: "item"
+				item: "minecraft:wheat_seeds"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: -3.6d
+			id: "q_3_6"
+			title: "6. Пшеница"
+			icon: "minecraft:wheat"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Урожай над водой."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_5"]
+			tasks: [{
+				id: "t_3_6"
+				type: "item"
+				item: "minecraft:wheat"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_6"
+				type: "item"
+				item: "minecraft:wheat"
+				count: 16
+			}]
+		},
+		{
+			x: 2.4d
+			y: -3.6d
+			id: "q_3_7"
+			title: "7. Сноп сена"
+			icon: "minecraft:hay_block"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Корм и компактное хранение."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_6"]
+			tasks: [{
+				id: "t_3_7"
+				type: "item"
+				item: "minecraft:hay_block"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_7"
+				type: "item"
+				item: "minecraft:hay_block"
+				count: 4
+			}]
+		},
+		{
+			x: 4.0d
+			y: -3.6d
+			id: "q_3_8"
+			title: "8. Морковь"
+			icon: "minecraft:carrot"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Оранжевый урожай."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_7"]
+			tasks: [{
+				id: "t_3_8"
+				type: "item"
+				item: "minecraft:carrot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_8"
+				type: "item"
+				item: "minecraft:carrot"
+				count: 8
+			}]
+		},
+		{
+			x: 5.6d
+			y: -3.6d
+			id: "q_3_9"
+			title: "9. Картофель"
+			icon: "minecraft:potato"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Сытный клубень."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_8"]
+			tasks: [{
+				id: "t_3_9"
+				type: "item"
+				item: "minecraft:potato"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_9"
+				type: "item"
+				item: "minecraft:potato"
+				count: 8
+			}]
+		},
+		{
+			x: 7.2d
+			y: -3.6d
+			id: "q_3_10"
+			title: "10. Печёный картофель"
+			icon: "minecraft:baked_potato"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Простой ужин."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_9"]
+			tasks: [{
+				id: "t_3_10"
+				type: "item"
+				item: "minecraft:baked_potato"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_10"
+				type: "item"
+				item: "minecraft:baked_potato"
+				count: 8
+			}]
+		},
+		{
+			x: -7.2d
+			y: -1.8d
+			id: "q_3_11"
+			title: "11. Семена свёклы"
+			icon: "minecraft:beetroot_seeds"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Ещё одна культура."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_10"]
+			tasks: [{
+				id: "t_3_11"
+				type: "item"
+				item: "minecraft:beetroot_seeds"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_11"
+				type: "item"
+				item: "minecraft:beetroot_seeds"
+				count: 8
+			}]
+		},
+		{
+			x: -5.6d
+			y: -1.8d
+			id: "q_3_12"
+			title: "12. Свёкла"
+			icon: "minecraft:beetroot"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Для супа."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_11"]
+			tasks: [{
+				id: "t_3_12"
+				type: "item"
+				item: "minecraft:beetroot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_12"
+				type: "item"
+				item: "minecraft:beetroot"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: -1.8d
+			id: "q_3_13"
+			title: "13. Семена тыквы"
+			icon: "minecraft:pumpkin_seeds"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Большие плоды."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_12"]
+			tasks: [{
+				id: "t_3_13"
+				type: "item"
+				item: "minecraft:pumpkin_seeds"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_13"
+				type: "item"
+				item: "minecraft:pumpkin_seeds"
+				count: 4
+			}]
+		},
+		{
+			x: -2.4d
+			y: -1.8d
+			id: "q_3_14"
+			title: "14. Тыква"
+			icon: "minecraft:pumpkin"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Свет и еда."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_13"]
+			tasks: [{
+				id: "t_3_14"
+				type: "item"
+				item: "minecraft:pumpkin"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_14"
+				type: "item"
+				item: "minecraft:pumpkin"
+				count: 2
+			}]
+		},
+		{
+			x: -0.8d
+			y: -1.8d
+			id: "q_3_15"
+			title: "15. Семена арбуза"
+			icon: "minecraft:melon_seeds"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Сладкая вода в мякоти."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_14"]
+			tasks: [{
+				id: "t_3_15"
+				type: "item"
+				item: "minecraft:melon_seeds"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_15"
+				type: "item"
+				item: "minecraft:melon_seeds"
+				count: 4
+			}]
+		},
+		{
+			x: 0.8d
+			y: -1.8d
+			id: "q_3_16"
+			title: "16. Долька арбуза"
+			icon: "minecraft:melon_slice"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Освежение."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_15"]
+			tasks: [{
+				id: "t_3_16"
+				type: "item"
+				item: "minecraft:melon_slice"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_16"
+				type: "item"
+				item: "minecraft:melon_slice"
+				count: 8
+			}]
+		},
+		{
+			x: 2.4d
+			y: -1.8d
+			id: "q_3_17"
+			title: "17. Тростник"
+			icon: "minecraft:sugar_cane"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Сахар и бумага с края атома."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_16"]
+			tasks: [{
+				id: "t_3_17"
+				type: "item"
+				item: "minecraft:sugar_cane"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_17"
+				type: "item"
+				item: "minecraft:sugar_cane"
+				count: 8
+			}]
+		},
+		{
+			x: 4.0d
+			y: -1.8d
+			id: "q_3_18"
+			title: "18. Бамбук"
+			icon: "minecraft:bamboo"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Быстрый каркас."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_17"]
+			tasks: [{
+				id: "t_3_18"
+				type: "item"
+				item: "minecraft:bamboo"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_18"
+				type: "item"
+				item: "minecraft:bamboo"
+				count: 8
+			}]
+		},
+		{
+			x: 5.6d
+			y: -1.8d
+			id: "q_3_19"
+			title: "19. Кактус"
+			icon: "minecraft:cactus"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Зелёная защита."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_18"]
+			tasks: [{
+				id: "t_3_19"
+				type: "item"
+				item: "minecraft:cactus"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_19"
+				type: "item"
+				item: "minecraft:cactus"
+				count: 2
+			}]
+		},
+		{
+			x: 7.2d
+			y: -1.8d
+			id: "q_3_20"
+			title: "20. Дуб"
+			icon: "minecraft:oak_sapling"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Тень и брёвна."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_19"]
+			tasks: [{
+				id: "t_3_20"
+				type: "item"
+				item: "minecraft:oak_sapling"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_20"
+				type: "item"
+				item: "minecraft:oak_sapling"
+				count: 4
+			}]
+		},
+		{
+			x: -7.2d
+			y: 0.0d
+			id: "q_3_21"
+			title: "21. Ель"
+			icon: "minecraft:spruce_sapling"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Хвоя над волнами."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_20"]
+			tasks: [{
+				id: "t_3_21"
+				type: "item"
+				item: "minecraft:spruce_sapling"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_21"
+				type: "item"
+				item: "minecraft:spruce_sapling"
+				count: 4
+			}]
+		},
+		{
+			x: -5.6d
+			y: 0.0d
+			id: "q_3_22"
+			title: "22. Берёза"
+			icon: "minecraft:birch_sapling"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Белые стволы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_21"]
+			tasks: [{
+				id: "t_3_22"
+				type: "item"
+				item: "minecraft:birch_sapling"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_22"
+				type: "item"
+				item: "minecraft:birch_sapling"
+				count: 4
+			}]
+		},
+		{
+			x: -4.0d
+			y: 0.0d
+			id: "q_3_23"
+			title: "23. Тропики"
+			icon: "minecraft:jungle_sapling"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Густая крона."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_22"]
+			tasks: [{
+				id: "t_3_23"
+				type: "item"
+				item: "minecraft:jungle_sapling"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_23"
+				type: "item"
+				item: "minecraft:jungle_sapling"
+				count: 2
+			}]
+		},
+		{
+			x: -2.4d
+			y: 0.0d
+			id: "q_3_24"
+			title: "24. Тёмный дуб"
+			icon: "minecraft:dark_oak_sapling"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Массивная древесина."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_23"]
+			tasks: [{
+				id: "t_3_24"
+				type: "item"
+				item: "minecraft:dark_oak_sapling"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_24"
+				type: "item"
+				item: "minecraft:dark_oak_sapling"
+				count: 2
+			}]
+		},
+		{
+			x: -0.8d
+			y: 0.0d
+			id: "q_3_25"
+			title: "25. Компостер"
+			icon: "minecraft:composter"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Отходы в костную муку."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_24"]
+			tasks: [{
+				id: "t_3_25"
+				type: "item"
+				item: "minecraft:composter"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_25"
+				type: "item"
+				item: "minecraft:composter"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 0.0d
+			id: "q_3_26"
+			title: "26. Горшок"
+			icon: "minecraft:flower_pot"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Декор атома."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_25"]
+			tasks: [{
+				id: "t_3_26"
+				type: "item"
+				item: "minecraft:flower_pot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_26"
+				type: "item"
+				item: "minecraft:flower_pot"
+				count: 2
+			}]
+		},
+		{
+			x: 2.4d
+			y: 0.0d
+			id: "q_3_27"
+			title: "27. Ступени"
+			icon: "minecraft:oak_stairs"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Архитектура края."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_26"]
+			tasks: [{
+				id: "t_3_27"
+				type: "item"
+				item: "minecraft:oak_stairs"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_27"
+				type: "item"
+				item: "minecraft:oak_stairs"
+				count: 8
+			}]
+		},
+		{
+			x: 4.0d
+			y: 0.0d
+			id: "q_3_28"
+			title: "28. Плиты"
+			icon: "minecraft:oak_slab"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Экономия дерева."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_27"]
+			tasks: [{
+				id: "t_3_28"
+				type: "item"
+				item: "minecraft:oak_slab"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_28"
+				type: "item"
+				item: "minecraft:oak_slab"
+				count: 16
+			}]
+		},
+		{
+			x: 5.6d
+			y: 0.0d
+			id: "q_3_29"
+			title: "29. Забор"
+			icon: "minecraft:oak_fence"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Не упади в пустоту."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_28"]
+			tasks: [{
+				id: "t_3_29"
+				type: "item"
+				item: "minecraft:oak_fence"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_29"
+				type: "item"
+				item: "minecraft:oak_fence"
+				count: 8
+			}]
+		},
+		{
+			x: 7.2d
+			y: 0.0d
+			id: "q_3_30"
+			title: "30. Дверь"
+			icon: "minecraft:oak_door"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Дом начинается с двери."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_29"]
+			tasks: [{
+				id: "t_3_30"
+				type: "item"
+				item: "minecraft:oak_door"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_30"
+				type: "item"
+				item: "minecraft:oak_door"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: 1.8d
+			id: "q_3_31"
+			title: "31. Люк"
+			icon: "minecraft:oak_trapdoor"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Спуск к лодке."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_30"]
+			tasks: [{
+				id: "t_3_31"
+				type: "item"
+				item: "minecraft:oak_trapdoor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_31"
+				type: "item"
+				item: "minecraft:oak_trapdoor"
+				count: 2
+			}]
+		},
+		{
+			x: -5.6d
+			y: 1.8d
+			id: "q_3_32"
+			title: "32. Оконное стекло"
+			icon: "minecraft:glass_pane"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Вид на горизонт."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_31"]
+			tasks: [{
+				id: "t_3_32"
+				type: "item"
+				item: "minecraft:glass_pane"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_32"
+				type: "item"
+				item: "minecraft:glass_pane"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: 1.8d
+			id: "q_3_33"
+			title: "33. Шерсть"
+			icon: "minecraft:white_wool"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Кровать и декор."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_32"]
+			tasks: [{
+				id: "t_3_33"
+				type: "item"
+				item: "minecraft:white_wool"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_33"
+				type: "item"
+				item: "minecraft:white_wool"
+				count: 8
+			}]
+		},
+		{
+			x: -2.4d
+			y: 1.8d
+			id: "q_3_34"
+			title: "34. Картина"
+			icon: "minecraft:painting"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Искусство выживших."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_33"]
+			tasks: [{
+				id: "t_3_34"
+				type: "item"
+				item: "minecraft:painting"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_34"
+				type: "item"
+				item: "minecraft:painting"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 1.8d
+			id: "q_3_35"
+			title: "35. Рамка"
+			icon: "minecraft:item_frame"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Витрина трофеев."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_34"]
+			tasks: [{
+				id: "t_3_35"
+				type: "item"
+				item: "minecraft:item_frame"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_35"
+				type: "item"
+				item: "minecraft:item_frame"
+				count: 2
+			}]
+		},
+		{
+			x: 0.8d
+			y: 1.8d
+			id: "q_3_36"
+			title: "36. Стойка для брони"
+			icon: "minecraft:armor_stand"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Храни доспехи."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_35"]
+			tasks: [{
+				id: "t_3_36"
+				type: "item"
+				item: "minecraft:armor_stand"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_36"
+				type: "item"
+				item: "minecraft:armor_stand"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 1.8d
+			id: "q_3_37"
+			title: "37. Ткацкий станок"
+			icon: "minecraft:loom"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Знамена атолла."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_36"]
+			tasks: [{
+				id: "t_3_37"
+				type: "item"
+				item: "minecraft:loom"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_37"
+				type: "item"
+				item: "minecraft:loom"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 1.8d
+			id: "q_3_38"
+			title: "38. Картографский стол"
+			icon: "minecraft:cartography_table"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Карты маршрутов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_37"]
+			tasks: [{
+				id: "t_3_38"
+				type: "item"
+				item: "minecraft:cartography_table"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_38"
+				type: "item"
+				item: "minecraft:cartography_table"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 1.8d
+			id: "q_3_39"
+			title: "39. Кузнечный стол"
+			icon: "minecraft:smithing_table"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Улучшения позже."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_38"]
+			tasks: [{
+				id: "t_3_39"
+				type: "item"
+				item: "minecraft:smithing_table"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_39"
+				type: "item"
+				item: "minecraft:smithing_table"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 1.8d
+			id: "q_3_40"
+			title: "40. Стол лучника"
+			icon: "minecraft:fletching_table"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Стрелы на защиту."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_39"]
+			tasks: [{
+				id: "t_3_40"
+				type: "item"
+				item: "minecraft:fletching_table"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_40"
+				type: "item"
+				item: "minecraft:fletching_table"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: 3.6d
+			id: "q_3_41"
+			title: "41. Плавильня"
+			icon: "minecraft:blast_furnace"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Быстрая плавка руд."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_40"]
+			tasks: [{
+				id: "t_3_41"
+				type: "item"
+				item: "minecraft:blast_furnace"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_41"
+				type: "item"
+				item: "minecraft:blast_furnace"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: 3.6d
+			id: "q_3_42"
+			title: "42. Коптильня"
+			icon: "minecraft:smoker"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Быстрая еда."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_41"]
+			tasks: [{
+				id: "t_3_42"
+				type: "item"
+				item: "minecraft:smoker"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_42"
+				type: "item"
+				item: "minecraft:smoker"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 3.6d
+			id: "q_3_43"
+			title: "43. Воронка"
+			icon: "minecraft:hopper"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Логистика улова."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_42"]
+			tasks: [{
+				id: "t_3_43"
+				type: "item"
+				item: "minecraft:hopper"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_43"
+				type: "item"
+				item: "minecraft:hopper"
+				count: 2
+			}]
+		},
+		{
+			x: -2.4d
+			y: 3.6d
+			id: "q_3_44"
+			title: "44. Выбрасыватель"
+			icon: "minecraft:dropper"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Простая автоматика."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_43"]
+			tasks: [{
+				id: "t_3_44"
+				type: "item"
+				item: "minecraft:dropper"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_44"
+				type: "item"
+				item: "minecraft:dropper"
+				count: 2
+			}]
+		},
+		{
+			x: -0.8d
+			y: 3.6d
+			id: "q_3_45"
+			title: "45. Раздатчик"
+			icon: "minecraft:dispenser"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Защита периметра."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_44"]
+			tasks: [{
+				id: "t_3_45"
+				type: "item"
+				item: "minecraft:dispenser"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_45"
+				type: "item"
+				item: "minecraft:dispenser"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 3.6d
+			id: "q_3_46"
+			title: "46. Наблюдатель"
+			icon: "minecraft:observer"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Датчик роста фермы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_45"]
+			tasks: [{
+				id: "t_3_46"
+				type: "item"
+				item: "minecraft:observer"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_46"
+				type: "item"
+				item: "minecraft:observer"
+				count: 2
+			}]
+		},
+		{
+			x: 2.4d
+			y: 3.6d
+			id: "q_3_47"
+			title: "47. Редстоун"
+			icon: "minecraft:redstone"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Кровь механизмов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_46"]
+			tasks: [{
+				id: "t_3_47"
+				type: "item"
+				item: "minecraft:redstone"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_47"
+				type: "item"
+				item: "minecraft:redstone"
+				count: 8
+			}]
+		},
+		{
+			x: 4.0d
+			y: 3.6d
+			id: "q_3_48"
+			title: "48. Поршень"
+			icon: "minecraft:piston"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Движение блоков."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_47"]
+			tasks: [{
+				id: "t_3_48"
+				type: "item"
+				item: "minecraft:piston"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_48"
+				type: "item"
+				item: "minecraft:piston"
+				count: 2
+			}]
+		},
+		{
+			x: 5.6d
+			y: 3.6d
+			id: "q_3_49"
+			title: "49. Слизь"
+			icon: "minecraft:slime_ball"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Липкие поршни."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_48"]
+			tasks: [{
+				id: "t_3_49"
+				type: "item"
+				item: "minecraft:slime_ball"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_49"
+				type: "item"
+				item: "minecraft:slime_ball"
+				count: 4
+			}]
+		},
+		{
+			x: 7.2d
+			y: 3.6d
+			id: "q_3_50"
+			title: "50. Железный блок"
+			icon: "minecraft:iron_block"
+			subtitle: "Из точки в атолл: земля, ферма, дом над бездной. Сердце укрепления."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_3_49"]
+			tasks: [{
+				id: "t_3_50"
+				type: "item"
+				item: "minecraft:iron_block"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_3_50"
+				type: "item"
+				item: "minecraft:iron_block"
+				count: 1
+			}]
+		}
+	]
+}

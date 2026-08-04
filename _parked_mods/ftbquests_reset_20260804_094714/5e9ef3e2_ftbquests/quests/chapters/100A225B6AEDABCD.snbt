@@ -1,0 +1,618 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "100A225B6AEDABCD"
+	group: "127FCDB3BF44B5FC"
+	icon: "industrialupgrade:connect_item"
+	id: "100A225B6AEDABCD"
+	images: [
+		{
+			height: 7.0d
+			image: "kubejs:textures/quests/vulcan.png"
+			rotation: 0.0d
+			width: 7.8d
+			x: 7.5d
+			y: -4.5d
+		}
+		{
+			height: 2.0d
+			image: "kubejs:textures/quests/dirt_mecha.png"
+			rotation: 0.0d
+			width: 3.2d
+			x: 7.571428571428555d
+			y: 2.0420918367346985d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:item/volcano_hazmat_helmet"
+			rotation: 0.0d
+			width: 1.0d
+			x: 10.0d
+			y: -6.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:item/volcano_hazmat_chestplate"
+			rotation: 0.0d
+			width: 1.0d
+			x: 10.0d
+			y: -5.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:item/volcano_hazmat_leggings"
+			rotation: 0.0d
+			width: 1.0d
+			x: 10.0d
+			y: -4.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:item/volcano_rubber_boots"
+			rotation: 0.0d
+			width: 1.0d
+			x: 10.0d
+			y: -3.0d
+		}
+	]
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest1.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest1.description2}"
+			]
+			id: "76442A8922CC31EB"
+			rewards: [{
+				id: "400BD9D281A2E64C"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "1A48E7AF30F454D7"
+					item: "industrialupgrade:tools/multiblock_planner"
+					optional_task: true
+					type: "item"
+				}
+				{
+					id: "7574221B53BE1306"
+					item: "industrialupgrade:tools/multiblock_deplanner"
+					type: "item"
+				}
+			]
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest2.description1}"
+				"{ftbquests.chapter.100A225B6AEDABCD.quest2.description2}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest2.description3}"
+			]
+			id: "14ACFA97FCB9EF7C"
+			rewards: [{
+				id: "60456BE43D07B66D"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "3C1BF83FD76E5272"
+				item: {
+					Count: 1
+					id: "industrialupgrade:facadeitem"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest3.description1}"]
+			id: "26B76375A1FDE7DD"
+			rewards: [{
+				id: "695C75FB87643DDE"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "347AC5176FDFD689"
+					item: {
+						Count: 1
+						id: "industrialupgrade:energy/magnet"
+						tag: { }
+					}
+					type: "item"
+				}
+				{
+					id: "057A9880115BF07E"
+					item: {
+						Count: 1
+						id: "industrialupgrade:energy/impmagnet"
+						tag: { }
+					}
+					type: "item"
+				}
+			]
+			x: 1.0d
+			y: 0.0d
+		}
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest4.description1}"
+				"{ftbquests.chapter.100A225B6AEDABCD.quest4.description2}"
+			]
+			id: "2F2D8348EC25E12E"
+			rewards: [{
+				id: "6158C3517532249D"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "6CAAC444D63D1068"
+				item: {
+					Count: 1
+					id: "industrialupgrade:sensor/sensor"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: 1.0d
+			y: -1.0d
+		}
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest5.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest5.description2}"
+			]
+			id: "084E82239021C469"
+			rewards: [{
+				id: "4FAA6EA7713E6761"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "64129E3AD79126A1"
+				item: "industrialupgrade:connect_item"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest6.description1}"]
+			id: "122C82BAFDBD5CBC"
+			rewards: [{
+				id: "23B703573B2E0DBE"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4DFC8905D2D27987"
+				item: {
+					Count: 1
+					id: "industrialupgrade:bags/lead_box"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest7.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest7.description2}"
+				"{ftbquests.chapter.100A225B6AEDABCD.quest7.description3}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest7.description4}"
+				"{@pagebreak}"
+			]
+			id: "17C5211A1466D638"
+			rewards: [{
+				id: "532B26410B449A59"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5F8288151D828E02"
+				item: {
+					Count: 1
+					id: "industrialupgrade:energy/molot"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest8.description1}"]
+			id: "2DB062BF44BF7F22"
+			rewards: [{
+				id: "0A36BA798161C526"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "3221EDB5EDC9A916"
+				item: "industrialupgrade:pollution_device"
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest9.description1}"]
+			id: "5BC94F2E1797A6FA"
+			rewards: [{
+				id: "7FA7A13D4E882A31"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7E57FF8FBFE2E07A"
+				item: "sophisticatedbackpacks:backpack"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -0.5d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest10.description1}"]
+			id: "002311B194E5CA08"
+			rewards: [{
+				id: "0229B73347840772"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "093C1159226711AA"
+					item: "ironchest:iron_chest"
+					type: "item"
+				}
+				{
+					id: "600D5740B279880F"
+					item: "ironfurnaces:iron_furnace"
+					type: "item"
+				}
+			]
+			title: "{ftbquests.chapter.100A225B6AEDABCD.quest10.title}"
+			x: -2.0d
+			y: -0.5d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest11.description1}"]
+			id: "1B3C1498A8DE5914"
+			rewards: [{
+				id: "6FC112D48544DA92"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "04770CD3571581BA"
+				item: "waystones:waystone"
+				type: "item"
+			}]
+			x: -1.0d
+			y: -0.5d
+		}
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest12.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest12.description2}"
+			]
+			id: "01E4930C0BAA6324"
+			rewards: [{
+				id: "3FB49292BEDFE6F8"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "671F6E984F01D323"
+					item: "pipez:item_pipe"
+					type: "item"
+				}
+				{
+					id: "420D1F1640F65149"
+					item: "pipez:fluid_pipe"
+					type: "item"
+				}
+				{
+					id: "213B659FBA5AB844"
+					item: "pipez:wrench"
+					type: "item"
+				}
+			]
+			x: -2.0d
+			y: 0.5d
+		}
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest13.description1}"
+				"{ftbquests.chapter.100A225B6AEDABCD.quest13.description2}"
+				"{ftbquests.chapter.100A225B6AEDABCD.quest13.description3}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest13.description4}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest13.description5}"
+			]
+			icon: "industrialupgrade:blockbasalts/basalt_magma"
+			id: "4671525C8B08D3C5"
+			shape: "square"
+			size: 1.5d
+			tasks: [{
+				id: "381A97FEB29F6AC7"
+				type: "checkmark"
+			}]
+			title: "{ftbquests.chapter.100A225B6AEDABCD.quest13.title}"
+			x: 7.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["4671525C8B08D3C5"]
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest14.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest14.description2}"
+			]
+			id: "24514C81B201AE1A"
+			optional: true
+			shape: "square"
+			size: 1.1d
+			tasks: [{
+				id: "63F2BA406CC0CB1A"
+				item: {
+					Count: 1
+					id: "industrialupgrade:itemcell/itemcell"
+					tag: {
+						Fluid: {
+							Amount: 1000
+							FluidName: "industrialupgrade:iufluidpahoehoe_lava"
+						}
+					}
+				}
+				match_nbt: true
+				type: "item"
+			}]
+			x: 8.8d
+			y: -4.4d
+		}
+		{
+			dependencies: ["4671525C8B08D3C5"]
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest15.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest15.description2}"
+			]
+			id: "67DED05FDCD28CCC"
+			shape: "square"
+			size: 1.1d
+			tasks: [
+				{
+					id: "7D0DC72AD3CA7F9B"
+					item: "industrialupgrade:blockbasalts/basalt"
+					type: "item"
+				}
+				{
+					id: "05E36362F808AA93"
+					item: "industrialupgrade:blockbasalts/basalt_magma"
+					type: "item"
+				}
+				{
+					id: "5D84B3D4F035EFDA"
+					item: "industrialupgrade:blockbasalts/basalt_smooth"
+					type: "item"
+				}
+			]
+			x: 6.05d
+			y: -4.4d
+		}
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest16.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest16.description2}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest16.description3}"
+				"{ftbquests.chapter.100A225B6AEDABCD.quest16.description4}"
+			]
+			id: "1D900197A58756AD"
+			rewards: [{
+				id: "1C677867AAA0CEF4"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "6DCCA9E93B544CF4"
+				item: {
+					Count: 1
+					id: "industrialupgrade:energy/iron_hammer"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "{ftbquests.chapter.100A225B6AEDABCD.quest16.title}"
+			x: -4.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["1D900197A58756AD"]
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest17.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest17.description2}"
+			]
+			id: "29D6A9624F412D36"
+			rewards: [{
+				id: "52374DEEB58F3727"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7790C4C32BB575FC"
+				item: {
+					Count: 1
+					id: "industrialupgrade:energy/steel_hammer"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "{ftbquests.chapter.100A225B6AEDABCD.quest17.title}"
+			x: -3.0d
+			y: -5.0d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest18.description1}"]
+			id: "5B4E1F342A72526D"
+			rewards: [{
+				id: "65873C59B123066A"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "26E65233135C0E02"
+					item: {
+						Count: 1
+						id: "industrialupgrade:ruby_pickaxe"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "4D3AD29EE1DB8D5F"
+					item: {
+						Count: 1
+						id: "industrialupgrade:topaz_pickaxe"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "424CDE9DC8C2E98B"
+					item: {
+						Count: 1
+						id: "industrialupgrade:sapphire_pickaxe"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			x: -1.5d
+			y: -5.0d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest19.description1}"]
+			id: "6F2D7074EA78261C"
+			rewards: [{
+				id: "16F3742CEA953344"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0BDBA0F3E6958D55"
+				item: "industrialupgrade:itemcell/itemcell"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -2.0d
+		}
+		{
+			description: [
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description1}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description2}"
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description3}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description4}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description5}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description6}"
+				"{@pagebreak}"
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description7}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description8}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description9}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description10}"
+				""
+				"{ftbquests.chapter.100A225B6AEDABCD.quest20.description11}"
+			]
+			id: "4A3784C6AF34B27F"
+			shape: "rsquare"
+			size: 1.2d
+			tasks: [{
+				id: "0C9E6DFA9EF0F275"
+				title: "{ftbquests.chapter.100A225B6AEDABCD.quest20.task_909285097951261301.title}"
+				type: "checkmark"
+			}]
+			x: 7.557142857142857d
+			y: 0.9339285714285737d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest21.description1}"]
+			id: "10C12824EA94599A"
+			rewards: [{
+				id: "71D8238904D8BB3B"
+				item: "kubejs:coin"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "2E80126276CB2F8B"
+					item: "industrialupgrade:basemachine3/energy_trash"
+					type: "item"
+				}
+				{
+					id: "0BD479A2B7E23ADF"
+					item: "industrialupgrade:basemachine3/fluid_trash"
+					type: "item"
+				}
+				{
+					id: "3F1A00D7A2C68836"
+					item: "industrialupgrade:basemachine3/item_trash"
+					type: "item"
+				}
+			]
+			x: 1.0d
+			y: -2.0d
+		}
+		{
+			description: ["{ftbquests.chapter.100A225B6AEDABCD.quest22.description1}"]
+			id: "7D1BC825709905EB"
+			tasks: [{
+				id: "4FD878F03139C635"
+				item: "jecalculation:item_calculator_craft"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -1.5d
+		}
+	]
+	title: "{ftbquests.chapter.100A225B6AEDABCD.title}"
+}

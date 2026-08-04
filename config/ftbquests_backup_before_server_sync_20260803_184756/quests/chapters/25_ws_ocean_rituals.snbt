@@ -1,0 +1,3091 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "25_ws_ocean_rituals"
+	group: "0AC7A00000000005"
+	icon: "aquatech_ui:ocean_altar"
+	id: "WS250000CH"
+	order_index: 25
+	quest_links: [ ]
+	quests: [
+		{
+			x: -4.62d
+			y: 0.0d
+			id: "WS250001Q"
+			title: "I·1  Океанский алтарь"
+			icon: "aquatech_ui:ocean_altar"
+			subtitle: "✦ ГАЙД МОДА · Поставь алтарь AquaTech."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 1/59&r",
+				"",
+				"&bРитуалы Океана&r связывают блоки AquaTech с магией.",
+				"&eOcean Altar&r и &eAbyssal Portal&r — якоря. &bBotania&r даёт ману, &bArs Nouveau&r — source и заклинания.",
+				"",
+				"&6Порядок:&r",
+				"1) Поставь алтарь и портал на атолле.",
+				"2) Botania: Pure Daisy → livingrock/wood → mana pool → manasteel / runes.",
+				"3) Ars: source gem → jar → spell book → pedestal / apparatus / brazier.",
+				"4) Клади подношения у алтаря (квесты — checklist предметов).",
+				"",
+				"&7Книги: Lexicon (Botania) и spell book (Ars) — внутриигровые гайды. Ветка опциональна.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"",
+				"&a▶ Задача:&r Поставь алтарь AquaTech.",
+				"&7Предмет:&r &faquatech_ui:ocean_altar&r",
+				"",
+				"Алтарь AquaTech — ритуальный якорь флота.",
+				"Поставь на виду у гавани; дальше квесты принесут ману/source.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× aquatech_ui:ocean_altar  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 280
+			optional: true
+			tasks: [{
+				id: "WS250001T"
+				type: "item"
+				item: "aquatech_ui:ocean_altar"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250001R"
+					type: "item"
+					item: "aquatech_ui:ocean_altar"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS250001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 0.0d
+			id: "WS250002Q"
+			title: "I·2  Абиссальный портал"
+			icon: "aquatech_ui:abyssal_portal"
+			subtitle: "Рамка бездны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 2/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Рамка бездны.",
+				"&7Предмет:&r &faquatech_ui:abyssal_portal&r",
+				"",
+				"Портал бездны — рамка эстетики/прогресса глубин.",
+				"Строй по рецепту JEI; не путай с ванильным portal.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× aquatech_ui:abyssal_portal  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250001Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250002T"
+				type: "item"
+				item: "aquatech_ui:abyssal_portal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250002R"
+					type: "item"
+					item: "aquatech_ui:abyssal_portal"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS250002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 0.0d
+			id: "WS250003Q"
+			title: "I·3  Энциклопедия"
+			icon: "aquatech_ui:ocean_guide_book"
+			subtitle: "Перечитай главы о горизонте."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 3/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Перечитай главы о горизонте.",
+				"&7Предмет:&r &faquatech_ui:ocean_guide_book&r",
+				"",
+				"Энциклопедия Океана — лор и команды Horizon.",
+				"ПКМ: листань главы про daily/season.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× aquatech_ui:ocean_guide_book  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250002Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250003T"
+				type: "item"
+				item: "aquatech_ui:ocean_guide_book"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250003R"
+					type: "item"
+					item: "aquatech_ui:ocean_guide_book"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS250003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 0.0d
+			id: "WS250004Q"
+			title: "I·4  Лексикон"
+			icon: "botania:lexicon"
+			subtitle: "Книга Botania."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 4/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Книга Botania.",
+				"&7Предмет:&r &fbotania:lexicon&r",
+				"",
+				"Книга Botania. ПКМ открывает гайд по цветкам и мане.",
+				"Держи в хотбаре у daisy.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:lexicon  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250003Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250004T"
+				type: "item"
+				item: "botania:lexicon"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250004R"
+					type: "item"
+					item: "botania:lexicon"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS250004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 0.0d
+			id: "WS250005Q"
+			title: "I·5  Pure Daisy"
+			icon: "botania:pure_daisy"
+			subtitle: "Начало живой флоры."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 5/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Начало живой флоры.",
+				"&7Предмет:&r &fbotania:pure_daisy&r",
+				"",
+				"Ставится на траву/землю, превращает соседние блоки в livingrock/wood.",
+				"Круг из гладкого камня/брёвен вокруг — классика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:pure_daisy  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS250004Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250005T"
+				type: "item"
+				item: "botania:pure_daisy"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250005R"
+					type: "item"
+					item: "botania:pure_daisy"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS250005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 0.0d
+			id: "WS250006Q"
+			title: "I·6  Livingrock"
+			icon: "botania:livingrock"
+			subtitle: "Живой камень у алтаря."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 6/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Живой камень у алтаря.",
+				"&7Предмет:&r &fbotania:livingrock&r",
+				"",
+				"Живой камень — база пулов и аптекаря.",
+				"Копи блоки daisy-процессом.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× botania:livingrock  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250005Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250006T"
+				type: "item"
+				item: "botania:livingrock"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250006R"
+					type: "item"
+					item: "botania:livingrock"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS250006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 1.93d
+			id: "WS250007Q"
+			title: "I·7  Livingwood"
+			icon: "botania:livingwood_log"
+			subtitle: "Живое дерево ритуала."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 7/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Живое дерево ритуала.",
+				"&7Предмет:&r &fbotania:livingwood_log&r",
+				"",
+				"Живое дерево — прутья, spreader, декорации.",
+				"Twig — палки для рун/жезлов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× botania:livingwood_log  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250006Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250007T"
+				type: "item"
+				item: "botania:livingwood_log"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250007R"
+					type: "item"
+					item: "botania:livingwood_log"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS250007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 1.93d
+			id: "WS250008Q"
+			title: "I·8  Ветвь livingwood"
+			icon: "botania:livingwood_twig"
+			subtitle: "Жезлы и руны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 8/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Жезлы и руны.",
+				"&7Предмет:&r &fbotania:livingwood_twig&r",
+				"",
+				"Живое дерево — прутья, spreader, декорации.",
+				"Twig — палки для рун/жезлов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× botania:livingwood_twig  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250007Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250008T"
+				type: "item"
+				item: "botania:livingwood_twig"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250008R"
+					type: "item"
+					item: "botania:livingwood_twig"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS250008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 1.93d
+			id: "WS250009Q"
+			title: "I·9  Пруд маны"
+			icon: "botania:mana_pool"
+			subtitle: "Хранилище маны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 9/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Хранилище маны.",
+				"&7Предмет:&r &fbotania:mana_pool&r",
+				"",
+				"Хранит ману. Spreader переливает в устройства.",
+				"Diluted pool — маленький буфер для старта.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:mana_pool  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250008Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250009T"
+				type: "item"
+				item: "botania:mana_pool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250009R"
+					type: "item"
+					item: "botania:mana_pool"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS250009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 1.93d
+			id: "WS250010Q"
+			title: "I·10  Разбавленный пруд"
+			icon: "botania:diluted_pool"
+			subtitle: "◆ Вехи · Старт · Малый буфер маны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 10/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Малый буфер маны.",
+				"&7Предмет:&r &fbotania:diluted_pool&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:diluted_pool  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250009Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250010T"
+				type: "item"
+				item: "botania:diluted_pool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250010R"
+					type: "item"
+					item: "botania:diluted_pool"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS250010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 1.93d
+			id: "WS250011Q"
+			title: "I·11  Spreader"
+			icon: "botania:mana_spreader"
+			subtitle: "Передача маны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 11/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Передача маны.",
+				"&7Предмет:&r &fbotania:mana_spreader&r",
+				"",
+				"Стреляет маной в pool/получателей.",
+				"Крути ориентацию; нужен импульс редстоуна/цветов-генераторов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:mana_spreader  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250010Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250011T"
+				type: "item"
+				item: "botania:mana_spreader"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250011R"
+					type: "item"
+					item: "botania:mana_spreader"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS250011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 1.93d
+			id: "WS250012Q"
+			title: "I·12  Планшет маны"
+			icon: "botania:mana_tablet"
+			subtitle: "Переносной запас."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 12/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Переносной запас.",
+				"&7Предмет:&r &fbotania:mana_tablet&r",
+				"",
+				"Перенос маны в кармане.",
+				"Заряжай от pool.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:mana_tablet  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250011Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250012T"
+				type: "item"
+				item: "botania:mana_tablet"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250012R"
+					type: "item"
+					item: "botania:mana_tablet"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS250012X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 3.5d
+			id: "WS250013Q"
+			title: "II·13  Манасталь"
+			icon: "botania:manasteel_ingot"
+			subtitle: "◆ Вехи · Основа · Металл маны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 13/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Металл маны.",
+				"&7Предмет:&r &fbotania:manasteel_ingot&r",
+				"",
+				"Сплав маны. Слитки/блоки — крафт брони и инструментов Botania.",
+				"Нужна мана в pool при крафте (смотри JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× botania:manasteel_ingot  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250012Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250013T"
+				type: "item"
+				item: "botania:manasteel_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250013R"
+					type: "item"
+					item: "botania:manasteel_ingot"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS250013X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 3.5d
+			id: "WS250014Q"
+			title: "II·14  Блок манастали"
+			icon: "botania:manasteel_block"
+			subtitle: "Склад."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 14/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Склад.",
+				"&7Предмет:&r &fbotania:manasteel_block&r",
+				"",
+				"Сплав маны. Слитки/блоки — крафт брони и инструментов Botania.",
+				"Нужна мана в pool при крафте (смотри JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:manasteel_block  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250013Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250014T"
+				type: "item"
+				item: "botania:manasteel_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250014R"
+					type: "item"
+					item: "botania:manasteel_block"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS250014X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 3.5d
+			id: "WS250015Q"
+			title: "II·15  Апотекарий"
+			icon: "botania:apothecary_livingrock"
+			subtitle: "Лепестковые рецепты."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 15/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Лепестковые рецепты.",
+				"&7Предмет:&r &fbotania:apothecary_livingrock&r",
+				"",
+				"Живой камень — база пулов и аптекаря.",
+				"Копи блоки daisy-процессом.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:apothecary_livingrock  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS250014Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250015T"
+				type: "item"
+				item: "botania:apothecary_livingrock"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250015R"
+					type: "item"
+					item: "botania:apothecary_livingrock"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS250015X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 3.5d
+			id: "WS250016Q"
+			title: "II·16  Белый лепесток"
+			icon: "botania:white_petal"
+			subtitle: "Сырьё флоры."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 16/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сырьё флоры.",
+				"&7Предмет:&r &fbotania:white_petal&r",
+				"",
+				"Лепестки из мистических цветов Botania.",
+				"Круши цветы; цвета нужны для рун и птиц.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× botania:white_petal  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250015Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250016T"
+				type: "item"
+				item: "botania:white_petal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250016R"
+					type: "item"
+					item: "botania:white_petal"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS250016X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 3.5d
+			id: "WS250017Q"
+			title: "II·17  Синий лепесток"
+			icon: "botania:blue_petal"
+			subtitle: "Цвет океана."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 17/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Цвет океана.",
+				"&7Предмет:&r &fbotania:blue_petal&r",
+				"",
+				"Лепестки из мистических цветов Botania.",
+				"Круши цветы; цвета нужны для рун и птиц.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× botania:blue_petal  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250016Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250017T"
+				type: "item"
+				item: "botania:blue_petal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250017R"
+					type: "item"
+					item: "botania:blue_petal"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS250017X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 3.5d
+			id: "WS250018Q"
+			title: "II·18  Руна воды"
+			icon: "botania:rune_water"
+			subtitle: "Ритуал прилива."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 18/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ритуал прилива.",
+				"&7Предмет:&r &fbotania:rune_water&r",
+				"",
+				"Руны крафтятся на руническом алтаре (JEI).",
+				"Rune of Water — тематика океана.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:rune_water  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250017Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250018T"
+				type: "item"
+				item: "botania:rune_water"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250018R"
+					type: "item"
+					item: "botania:rune_water"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250018X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 5.43d
+			id: "WS250019Q"
+			title: "II·19  Руна земли"
+			icon: "botania:rune_earth"
+			subtitle: "Ритуал атолла."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 19/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ритуал атолла.",
+				"&7Предмет:&r &fbotania:rune_earth&r",
+				"",
+				"Руны крафтятся на руническом алтаре (JEI).",
+				"Rune of Water — тематика океана.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:rune_earth  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250018Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250019T"
+				type: "item"
+				item: "botania:rune_earth"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250019R"
+					type: "item"
+					item: "botania:rune_earth"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250019X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 5.43d
+			id: "WS250020Q"
+			title: "II·20  Source Gem"
+			icon: "ars_nouveau:source_gem"
+			subtitle: "◆ Вехи · Основа · Кристалл источника."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 20/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Кристалл источника.",
+				"&7Предмет:&r &fars_nouveau:source_gem&r",
+				"",
+				"Кристалл источника Ars. Добыча/крафт — JEI.",
+				"Копи: топливо имбьюмента и аппаратов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× ars_nouveau:source_gem  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250019Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250020T"
+				type: "item"
+				item: "ars_nouveau:source_gem"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250020R"
+					type: "item"
+					item: "ars_nouveau:source_gem"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS250020X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 5.43d
+			id: "WS250021Q"
+			title: "II·21  Source Jar"
+			icon: "ars_nouveau:source_jar"
+			subtitle: "Хранилище source."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 21/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Хранилище source.",
+				"&7Предмет:&r &fars_nouveau:source_jar&r",
+				"",
+				"Банка копит source рядом с source links/crops.",
+				"Ставь у фермы magebloom.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:source_jar  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250020Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250021T"
+				type: "item"
+				item: "ars_nouveau:source_jar"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250021R"
+					type: "item"
+					item: "ars_nouveau:source_jar"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS250021X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 5.43d
+			id: "WS250022Q"
+			title: "II·22  Magebloom"
+			icon: "ars_nouveau:magebloom"
+			subtitle: "Магический цветок."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 22/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Магический цветок.",
+				"&7Предмет:&r &fars_nouveau:magebloom&r",
+				"",
+				"Цветок маны Ars. Fiber — ткань брони/блоков.",
+				"Выращивай как культуру.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× ars_nouveau:magebloom  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250021Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250022T"
+				type: "item"
+				item: "ars_nouveau:magebloom"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250022R"
+					type: "item"
+					item: "ars_nouveau:magebloom"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS250022X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 5.43d
+			id: "WS250023Q"
+			title: "II·23  Волокно Magebloom"
+			icon: "ars_nouveau:magebloom_fiber"
+			subtitle: "Ткань чар."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 23/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ткань чар.",
+				"&7Предмет:&r &fars_nouveau:magebloom_fiber&r",
+				"",
+				"Цветок маны Ars. Fiber — ткань брони/блоков.",
+				"Выращивай как культуру.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× ars_nouveau:magebloom_fiber  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250022Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250023T"
+				type: "item"
+				item: "ars_nouveau:magebloom_fiber"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250023R"
+					type: "item"
+					item: "ars_nouveau:magebloom_fiber"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS250023X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 5.43d
+			id: "WS250024Q"
+			title: "II·24  Книга новичка"
+			icon: "ars_nouveau:novice_spell_book"
+			subtitle: "◆ Вехи · Основа · Первые заклинания."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 24/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Первые заклинания.",
+				"&7Предмет:&r &fars_nouveau:novice_spell_book&r",
+				"",
+				"Книга заклинаний. Novice → Apprentice.",
+				"Открой GUI, собирай глифы (scribe's table).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:novice_spell_book  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250023Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250024T"
+				type: "item"
+				item: "ars_nouveau:novice_spell_book"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250024R"
+					type: "item"
+					item: "ars_nouveau:novice_spell_book"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS250024X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 7.0d
+			id: "WS250025Q"
+			title: "III·25  Книга ученика"
+			icon: "ars_nouveau:apprentice_spell_book"
+			subtitle: "Следующий тир."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 25/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Следующий тир.",
+				"&7Предмет:&r &fars_nouveau:apprentice_spell_book&r",
+				"",
+				"Книга заклинаний. Novice → Apprentice.",
+				"Открой GUI, собирай глифы (scribe's table).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:apprentice_spell_book  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS250024Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250025T"
+				type: "item"
+				item: "ars_nouveau:apprentice_spell_book"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250025R"
+					type: "item"
+					item: "ars_nouveau:apprentice_spell_book"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250025X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 7.0d
+			id: "WS250026Q"
+			title: "III·26  Пьедестал"
+			icon: "ars_nouveau:arcane_pedestal"
+			subtitle: "Подношения у алтаря."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 26/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Подношения у алтаря.",
+				"&7Предмет:&r &fars_nouveau:arcane_pedestal&r",
+				"",
+				"Пьедесталы вокруг apparatus/ритуала.",
+				"Клади ингредиенты по схеме JEI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× ars_nouveau:arcane_pedestal  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250025Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250026T"
+				type: "item"
+				item: "ars_nouveau:arcane_pedestal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250026R"
+					type: "item"
+					item: "ars_nouveau:arcane_pedestal"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250026X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 7.0d
+			id: "WS250027Q"
+			title: "III·27  Imbuement Chamber"
+			icon: "ars_nouveau:imbuement_chamber"
+			subtitle: "Насыщение предметов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 27/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Насыщение предметов.",
+				"&7Предмет:&r &fars_nouveau:imbuement_chamber&r",
+				"",
+				"Камера насыщения предметов source.",
+				"Подведи source jars кабель/линками.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:imbuement_chamber  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250026Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250027T"
+				type: "item"
+				item: "ars_nouveau:imbuement_chamber"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250027R"
+					type: "item"
+					item: "ars_nouveau:imbuement_chamber"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS250027X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 7.0d
+			id: "WS250028Q"
+			title: "III·28  Enchanting Apparatus"
+			icon: "ars_nouveau:enchanting_apparatus"
+			subtitle: "Аппарат чар."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 28/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Аппарат чар.",
+				"&7Предмет:&r &fars_nouveau:enchanting_apparatus&r",
+				"",
+				"Главный крафт-аппарат Ars.",
+				"Педэсталы + source = сложные рецепты.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:enchanting_apparatus  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250027Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250028T"
+				type: "item"
+				item: "ars_nouveau:enchanting_apparatus"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250028R"
+					type: "item"
+					item: "ars_nouveau:enchanting_apparatus"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS250028X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 7.0d
+			id: "WS250029Q"
+			title: "III·29  Ритуальная жаровня"
+			icon: "ars_nouveau:ritual_brazier"
+			subtitle: "Огонь ритуала."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 29/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Огонь ритуала.",
+				"&7Предмет:&r &fars_nouveau:ritual_brazier&r",
+				"",
+				"Жаровня ритуалов. Клади ritual item, активируй.",
+				"Cloudshaping и др. — смотри JEI список ритуалов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:ritual_brazier  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250028Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250029T"
+				type: "item"
+				item: "ars_nouveau:ritual_brazier"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250029R"
+					type: "item"
+					item: "ars_nouveau:ritual_brazier"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS250029X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 7.0d
+			id: "WS250030Q"
+			title: "III·30  Капстоун ритуала"
+			icon: "ars_nouveau:ritual_cloudshaping"
+			subtitle: "◆ Вехи · Цех · Облачный ритуал у алтаря океана."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 30/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Облачный ритуал у алтаря океана.",
+				"&7Предмет:&r &fars_nouveau:ritual_cloudshaping&r",
+				"",
+				"Капстоун: проведи ритуал у алтаря океана.",
+				"Нужны source и правильный ritual item на brazier.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× ars_nouveau:source_gem  &8+&r  &b140 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250029Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250030T"
+				type: "item"
+				item: "ars_nouveau:ritual_cloudshaping"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250030R"
+					type: "item"
+					item: "ars_nouveau:source_gem"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "WS250030X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 8.93d
+			id: "WS250031Q"
+			title: "III·31  Floral Fertilizer"
+			icon: "botania:fertilizer"
+			subtitle: "Краситель цветов Botania."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 31/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Краситель цветов Botania.",
+				"&7Предмет:&r &fbotania:fertilizer&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× botania:fertilizer  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250030Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250031T"
+				type: "item"
+				item: "botania:fertilizer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250031R"
+					type: "item"
+					item: "botania:fertilizer"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS250031X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 8.93d
+			id: "WS250032Q"
+			title: "III·32  Белый мистический цветок"
+			icon: "botania:white_mystical_flower"
+			subtitle: "Источник лепестков."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 32/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Источник лепестков.",
+				"&7Предмет:&r &fbotania:white_mystical_flower&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× botania:white_mystical_flower  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250031Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250032T"
+				type: "item"
+				item: "botania:white_mystical_flower"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250032R"
+					type: "item"
+					item: "botania:white_mystical_flower"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS250032X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 8.93d
+			id: "WS250033Q"
+			title: "III·33  Синий мистический цветок"
+			icon: "botania:blue_mystical_flower"
+			subtitle: "Цвет океана."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 33/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Цвет океана.",
+				"&7Предмет:&r &fbotania:blue_mystical_flower&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× botania:blue_mystical_flower  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250032Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250033T"
+				type: "item"
+				item: "botania:blue_mystical_flower"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250033R"
+					type: "item"
+					item: "botania:blue_mystical_flower"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS250033X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 8.93d
+			id: "WS250034Q"
+			title: "III·34  Бирюзовый цветок"
+			icon: "botania:cyan_mystical_flower"
+			subtitle: "Палитра атолла."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 34/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Палитра атолла.",
+				"&7Предмет:&r &fbotania:cyan_mystical_flower&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× botania:cyan_mystical_flower  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250033Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250034T"
+				type: "item"
+				item: "botania:cyan_mystical_flower"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250034R"
+					type: "item"
+					item: "botania:cyan_mystical_flower"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS250034X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 8.93d
+			id: "WS250035Q"
+			title: "III·35  Endoflame"
+			icon: "botania:endoflame"
+			subtitle: "Генератор маны (уголь)."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 35/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Генератор маны (уголь).",
+				"&7Предмет:&r &fbotania:endoflame&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:endoflame  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS250034Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250035T"
+				type: "item"
+				item: "botania:endoflame"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250035R"
+					type: "item"
+					item: "botania:endoflame"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS250035X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 8.93d
+			id: "WS250036Q"
+			title: "IV·36  Hydroangeas"
+			icon: "botania:hydroangeas"
+			subtitle: "◆ Вехи · Мастерство · Мана из воды."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 36/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Мана из воды.",
+				"&7Предмет:&r &fbotania:hydroangeas&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:hydroangeas  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250035Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250036T"
+				type: "item"
+				item: "botania:hydroangeas"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250036R"
+					type: "item"
+					item: "botania:hydroangeas"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS250036X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 10.5d
+			id: "WS250037Q"
+			title: "IV·37  Thermalily"
+			icon: "botania:thermalily"
+			subtitle: "Мана из лавы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 37/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Мана из лавы.",
+				"&7Предмет:&r &fbotania:thermalily&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:thermalily  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250036Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250037T"
+				type: "item"
+				item: "botania:thermalily"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250037R"
+					type: "item"
+					item: "botania:thermalily"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS250037X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 10.5d
+			id: "WS250038Q"
+			title: "IV·38  Rosa Arcana"
+			icon: "botania:rosa_arcana"
+			subtitle: "Мана из XP."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 38/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Мана из XP.",
+				"&7Предмет:&r &fbotania:rosa_arcana&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:rosa_arcana  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250037Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250038T"
+				type: "item"
+				item: "botania:rosa_arcana"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250038R"
+					type: "item"
+					item: "botania:rosa_arcana"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS250038X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 10.5d
+			id: "WS250039Q"
+			title: "IV·39  Runic Altar"
+			icon: "botania:runic_altar"
+			subtitle: "Крафт рун."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 39/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Крафт рун.",
+				"&7Предмет:&r &fbotania:runic_altar&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:runic_altar  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250038Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250039T"
+				type: "item"
+				item: "botania:runic_altar"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250039R"
+					type: "item"
+					item: "botania:runic_altar"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250039X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 10.5d
+			id: "WS250040Q"
+			title: "IV·40  Руна маны"
+			icon: "botania:rune_mana"
+			subtitle: "◆ Вехи · Мастерство · Базовая руна."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 40/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Базовая руна.",
+				"&7Предмет:&r &fbotania:rune_mana&r",
+				"",
+				"Руны крафтятся на руническом алтаре (JEI).",
+				"Rune of Water — тематика океана.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:rune_mana  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250039Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250040T"
+				type: "item"
+				item: "botania:rune_mana"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250040R"
+					type: "item"
+					item: "botania:rune_mana"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS250040X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 10.5d
+			id: "WS250041Q"
+			title: "IV·41  Руна огня"
+			icon: "botania:rune_fire"
+			subtitle: "Стихия жара."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 41/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Стихия жара.",
+				"&7Предмет:&r &fbotania:rune_fire&r",
+				"",
+				"Руны крафтятся на руническом алтаре (JEI).",
+				"Rune of Water — тематика океана.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:rune_fire  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250040Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250041T"
+				type: "item"
+				item: "botania:rune_fire"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250041R"
+					type: "item"
+					item: "botania:rune_fire"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250041X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 10.5d
+			id: "WS250042Q"
+			title: "IV·42  Руна воздуха"
+			icon: "botania:rune_air"
+			subtitle: "Стихия ветра."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 42/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Стихия ветра.",
+				"&7Предмет:&r &fbotania:rune_air&r",
+				"",
+				"Руны крафтятся на руническом алтаре (JEI).",
+				"Rune of Water — тематика океана.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:rune_air  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250041Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250042T"
+				type: "item"
+				item: "botania:rune_air"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250042R"
+					type: "item"
+					item: "botania:rune_air"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250042X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 12.43d
+			id: "WS250043Q"
+			title: "IV·43  Terrasteel"
+			icon: "botania:terrasteel_ingot"
+			subtitle: "Продвинутый металл."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 43/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Продвинутый металл.",
+				"&7Предмет:&r &fbotania:terrasteel_ingot&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× botania:terrasteel_ingot  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250042Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250043T"
+				type: "item"
+				item: "botania:terrasteel_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250043R"
+					type: "item"
+					item: "botania:terrasteel_ingot"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS250043X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 12.43d
+			id: "WS250044Q"
+			title: "IV·44  Mana Pylon"
+			icon: "botania:mana_pylon"
+			subtitle: "Усиление маны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 44/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Усиление маны.",
+				"&7Предмет:&r &fbotania:mana_pylon&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:mana_pylon  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250043Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250044T"
+				type: "item"
+				item: "botania:mana_pylon"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250044R"
+					type: "item"
+					item: "botania:mana_pylon"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS250044X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 12.43d
+			id: "WS250045Q"
+			title: "IV·45  Alchemy Catalyst"
+			icon: "botania:alchemy_catalyst"
+			subtitle: "Алхимия в pool."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 45/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Алхимия в pool.",
+				"&7Предмет:&r &fbotania:alchemy_catalyst&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:alchemy_catalyst  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS250044Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250045T"
+				type: "item"
+				item: "botania:alchemy_catalyst"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250045R"
+					type: "item"
+					item: "botania:alchemy_catalyst"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS250045X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 12.43d
+			id: "WS250046Q"
+			title: "IV·46  Sourcestone"
+			icon: "ars_nouveau:sourcestone"
+			subtitle: "Блок source."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 46/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Блок source.",
+				"&7Предмет:&r &fars_nouveau:sourcestone&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× ars_nouveau:sourcestone  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250045Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250046T"
+				type: "item"
+				item: "ars_nouveau:sourcestone"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250046R"
+					type: "item"
+					item: "ars_nouveau:sourcestone"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS250046X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 12.43d
+			id: "WS250047Q"
+			title: "IV·47  Sourceberry"
+			icon: "ars_nouveau:sourceberry_bush"
+			subtitle: "◆ Вехи · Мастерство · Ягоды source."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 47/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ягоды source.",
+				"&7Предмет:&r &fars_nouveau:sourceberry_bush&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× ars_nouveau:sourceberry_bush  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250046Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250047T"
+				type: "item"
+				item: "ars_nouveau:sourceberry_bush"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250047R"
+					type: "item"
+					item: "ars_nouveau:sourceberry_bush"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS250047X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 12.43d
+			id: "WS250048Q"
+			title: "V·48  Agronomic Sourcelink"
+			icon: "ars_nouveau:agronomic_sourcelink"
+			subtitle: "Source с фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 48/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Source с фермы.",
+				"&7Предмет:&r &fars_nouveau:agronomic_sourcelink&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:agronomic_sourcelink  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250047Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250048T"
+				type: "item"
+				item: "ars_nouveau:agronomic_sourcelink"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250048R"
+					type: "item"
+					item: "ars_nouveau:agronomic_sourcelink"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS250048X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 14.0d
+			id: "WS250049Q"
+			title: "V·49  Volcanic Sourcelink"
+			icon: "ars_nouveau:volcanic_sourcelink"
+			subtitle: "Source с лавы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 49/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Source с лавы.",
+				"&7Предмет:&r &fars_nouveau:volcanic_sourcelink&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:volcanic_sourcelink  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250048Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250049T"
+				type: "item"
+				item: "ars_nouveau:volcanic_sourcelink"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250049R"
+					type: "item"
+					item: "ars_nouveau:volcanic_sourcelink"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS250049X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 14.0d
+			id: "WS250050Q"
+			title: "V·50  Scribe's Table"
+			icon: "ars_nouveau:scribes_table"
+			subtitle: "◆ Вехи · Финал · Сборка глифов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 50/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сборка глифов.",
+				"&7Предмет:&r &fars_nouveau:scribes_table&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:scribes_table  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS250049Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250050T"
+				type: "item"
+				item: "ars_nouveau:scribes_table"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250050R"
+					type: "item"
+					item: "ars_nouveau:scribes_table"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250050X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 14.0d
+			id: "WS250051Q"
+			title: "V·51  Blank Glyph"
+			icon: "ars_nouveau:blank_glyph"
+			subtitle: "Пустой глиф."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 51/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Пустой глиф.",
+				"&7Предмет:&r &fars_nouveau:blank_glyph&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× ars_nouveau:blank_glyph  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250050Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250051T"
+				type: "item"
+				item: "ars_nouveau:blank_glyph"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250051R"
+					type: "item"
+					item: "ars_nouveau:blank_glyph"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS250051X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 14.0d
+			id: "WS250052Q"
+			title: "V·52  Blank Parchment"
+			icon: "ars_nouveau:blank_parchment"
+			subtitle: "Свитки."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 52/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Свитки.",
+				"&7Предмет:&r &fars_nouveau:blank_parchment&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× ars_nouveau:blank_parchment  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250051Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250052T"
+				type: "item"
+				item: "ars_nouveau:blank_parchment"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250052R"
+					type: "item"
+					item: "ars_nouveau:blank_parchment"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS250052X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 14.0d
+			id: "WS250053Q"
+			title: "V·53  Magebloom Crop"
+			icon: "ars_nouveau:magebloom_crop"
+			subtitle: "Посев магии."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 53/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Посев магии.",
+				"&7Предмет:&r &fars_nouveau:magebloom_crop&r",
+				"",
+				"Цветок маны Ars. Fiber — ткань брони/блоков.",
+				"Выращивай как культуру.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× ars_nouveau:magebloom_crop  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250052Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250053T"
+				type: "item"
+				item: "ars_nouveau:magebloom_crop"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250053R"
+					type: "item"
+					item: "ars_nouveau:magebloom_crop"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS250053X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 14.0d
+			id: "WS250054Q"
+			title: "V·54  Книга архимага"
+			icon: "ars_nouveau:archmage_spell_book"
+			subtitle: "Топ книга заклинаний."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 54/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ книга заклинаний.",
+				"&7Предмет:&r &fars_nouveau:archmage_spell_book&r",
+				"",
+				"Книга заклинаний. Novice → Apprentice.",
+				"Открой GUI, собирай глифы (scribe's table).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:archmage_spell_book  &8+&r  &b110 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250053Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250054T"
+				type: "item"
+				item: "ars_nouveau:archmage_spell_book"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250054R"
+					type: "item"
+					item: "ars_nouveau:archmage_spell_book"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "WS250054X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 15.93d
+			id: "WS250055Q"
+			title: "V·55  Spell Turret"
+			icon: "ars_nouveau:basic_spell_turret"
+			subtitle: "Турель заклинаний."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 55/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Турель заклинаний.",
+				"&7Предмет:&r &fars_nouveau:basic_spell_turret&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:basic_spell_turret  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS250054Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250055T"
+				type: "item"
+				item: "ars_nouveau:basic_spell_turret"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250055R"
+					type: "item"
+					item: "ars_nouveau:basic_spell_turret"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS250055X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 15.93d
+			id: "WS250056Q"
+			title: "V·56  Source Relay"
+			icon: "ars_nouveau:relay"
+			subtitle: "Передача source."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 56/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Передача source.",
+				"&7Предмет:&r &fars_nouveau:relay&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× ars_nouveau:relay  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250055Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250056T"
+				type: "item"
+				item: "ars_nouveau:relay"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250056R"
+					type: "item"
+					item: "ars_nouveau:relay"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS250056X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 15.93d
+			id: "WS250057Q"
+			title: "V·57  Wixie Charm"
+			icon: "ars_nouveau:wixie_charm"
+			subtitle: "Автокрафт Ars."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 57/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Автокрафт Ars.",
+				"&7Предмет:&r &fars_nouveau:wixie_charm&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:wixie_charm  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250056Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250057T"
+				type: "item"
+				item: "ars_nouveau:wixie_charm"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250057R"
+					type: "item"
+					item: "ars_nouveau:wixie_charm"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS250057X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 15.93d
+			id: "WS250058Q"
+			title: "V·58  Starbuncle Charm"
+			icon: "ars_nouveau:starbuncle_charm"
+			subtitle: "Логистика Ars."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 58/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Логистика Ars.",
+				"&7Предмет:&r &fars_nouveau:starbuncle_charm&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× ars_nouveau:starbuncle_charm  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS250057Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250058T"
+				type: "item"
+				item: "ars_nouveau:starbuncle_charm"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250058R"
+					type: "item"
+					item: "ars_nouveau:starbuncle_charm"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS250058X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 16.28d
+			id: "WS250059Q"
+			title: "V·59  Fabulous Pool"
+			icon: "botania:fabulous_pool"
+			subtitle: "★ КАПСТОУН · Красивый пруд маны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 59/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Красивый пруд маны.",
+				"&7Предмет:&r &fbotania:fabulous_pool&r",
+				"",
+				"Ритуал = алтарь AquaTech + магия Botania/Ars. Книги модов объяснят детали лучше квеста.",
+				"Собери предмет из задачи и прочитай тултип/JEI — куда он ставится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:fabulous_pool  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			shape: "gear"
+			size: 1.55d
+			min_width: 280
+			dependencies: ["WS250058Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS250059T"
+				type: "item"
+				item: "botania:fabulous_pool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS250059R"
+					type: "item"
+					item: "botania:fabulous_pool"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS250059X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "AquaTech алтарь/портал + Botania (мана) + Ars Nouveau (source). Ритуал = сборка, не новый код."
+	title: "Мастерская · Ритуалы Океана"
+}

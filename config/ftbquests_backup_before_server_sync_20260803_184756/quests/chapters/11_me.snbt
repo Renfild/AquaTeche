@@ -1,0 +1,1163 @@
+{
+	id: "11_me"
+	group: "0AC7A00000000004"
+	order_index: 10
+	filename: "11_me"
+	title: "XI. МЭ · Цифра океана"
+	icon: "ae2:controller"
+	default_quest_shape: "rsquare"
+	default_hide_dependency_lines: false
+	quest_links: []
+	quests: [
+		{
+			x: -7.2d
+			y: -3.6d
+			id: "q_11_1"
+			title: "1. Истинный кварц"
+			icon: "ae2:certus_quartz_crystal"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Кристалл сети."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_10_50"]
+			tasks: [{
+				id: "t_11_1"
+				type: "item"
+				item: "ae2:certus_quartz_crystal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_1"
+				type: "item"
+				item: "ae2:certus_quartz_crystal"
+				count: 16
+			}]
+		},
+		{
+			x: -5.6d
+			y: -3.6d
+			id: "q_11_2"
+			title: "2. Заряженный кварц"
+			icon: "ae2:charged_certus_quartz_crystal"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Искра флюикса."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_1"]
+			tasks: [{
+				id: "t_11_2"
+				type: "item"
+				item: "ae2:charged_certus_quartz_crystal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_2"
+				type: "item"
+				item: "ae2:charged_certus_quartz_crystal"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: -3.6d
+			id: "q_11_3"
+			title: "3. Флюикс"
+			icon: "ae2:fluix_crystal"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Кровь МЭ."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_2"]
+			tasks: [{
+				id: "t_11_3"
+				type: "item"
+				item: "ae2:fluix_crystal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_3"
+				type: "item"
+				item: "ae2:fluix_crystal"
+				count: 16
+			}]
+		},
+		{
+			x: -2.4d
+			y: -3.6d
+			id: "q_11_4"
+			title: "4. Флюикс-пыль"
+			icon: "ae2:fluix_dust"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Порошок сети."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_3"]
+			tasks: [{
+				id: "t_11_4"
+				type: "item"
+				item: "ae2:fluix_dust"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_4"
+				type: "item"
+				item: "ae2:fluix_dust"
+				count: 16
+			}]
+		},
+		{
+			x: -0.8d
+			y: -3.6d
+			id: "q_11_5"
+			title: "5. Кремний"
+			icon: "ae2:silicon"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Основа процессоров."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_4"]
+			tasks: [{
+				id: "t_11_5"
+				type: "item"
+				item: "ae2:silicon"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_5"
+				type: "item"
+				item: "ae2:silicon"
+				count: 16
+			}]
+		},
+		{
+			x: 0.8d
+			y: -3.6d
+			id: "q_11_6"
+			title: "6. Логический процессор"
+			icon: "ae2:logic_processor"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Мозг I."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_5"]
+			tasks: [{
+				id: "t_11_6"
+				type: "item"
+				item: "ae2:logic_processor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_6"
+				type: "item"
+				item: "ae2:logic_processor"
+				count: 4
+			}]
+		},
+		{
+			x: 2.4d
+			y: -3.6d
+			id: "q_11_7"
+			title: "7. Вычислительный процессор"
+			icon: "ae2:calculation_processor"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Мозг II."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_6"]
+			tasks: [{
+				id: "t_11_7"
+				type: "item"
+				item: "ae2:calculation_processor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_7"
+				type: "item"
+				item: "ae2:calculation_processor"
+				count: 4
+			}]
+		},
+		{
+			x: 4.0d
+			y: -3.6d
+			id: "q_11_8"
+			title: "8. Инженерный процессор"
+			icon: "ae2:engineering_processor"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Мозг III."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_7"]
+			tasks: [{
+				id: "t_11_8"
+				type: "item"
+				item: "ae2:engineering_processor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_8"
+				type: "item"
+				item: "ae2:engineering_processor"
+				count: 4
+			}]
+		},
+		{
+			x: 5.6d
+			y: -3.6d
+			id: "q_11_9"
+			title: "9. Высекатель"
+			icon: "ae2:inscriber"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Печать схем."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_8"]
+			tasks: [{
+				id: "t_11_9"
+				type: "item"
+				item: "ae2:inscriber"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_9"
+				type: "item"
+				item: "ae2:inscriber"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: -3.6d
+			id: "q_11_10"
+			title: "10. Зарядник"
+			icon: "ae2:charger"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Заряд кварца."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_9"]
+			tasks: [{
+				id: "t_11_10"
+				type: "item"
+				item: "ae2:charger"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_10"
+				type: "item"
+				item: "ae2:charger"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: -1.8d
+			id: "q_11_11"
+			title: "11. Приёмник энергии"
+			icon: "ae2:energy_acceptor"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Ввод FE в МЭ."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_10"]
+			tasks: [{
+				id: "t_11_11"
+				type: "item"
+				item: "ae2:energy_acceptor"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_11"
+				type: "item"
+				item: "ae2:energy_acceptor"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: -1.8d
+			id: "q_11_12"
+			title: "12. Вибрационная камера"
+			icon: "ae2:vibration_chamber"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Жги — заряжай сеть."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_11"]
+			tasks: [{
+				id: "t_11_12"
+				type: "item"
+				item: "ae2:vibration_chamber"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_12"
+				type: "item"
+				item: "ae2:vibration_chamber"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: -1.8d
+			id: "q_11_13"
+			title: "13. Стеклянный кабель"
+			icon: "ae2:fluix_glass_cable"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Нервы сети."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_12"]
+			tasks: [{
+				id: "t_11_13"
+				type: "item"
+				item: "ae2:fluix_glass_cable"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_13"
+				type: "item"
+				item: "ae2:fluix_glass_cable"
+				count: 16
+			}]
+		},
+		{
+			x: -2.4d
+			y: -1.8d
+			id: "q_11_14"
+			title: "14. Закрытый кабель"
+			icon: "ae2:fluix_covered_cable"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Эстетика линий."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_13"]
+			tasks: [{
+				id: "t_11_14"
+				type: "item"
+				item: "ae2:fluix_covered_cable"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_14"
+				type: "item"
+				item: "ae2:fluix_covered_cable"
+				count: 8
+			}]
+		},
+		{
+			x: -0.8d
+			y: -1.8d
+			id: "q_11_15"
+			title: "15. Умный кабель"
+			icon: "ae2:fluix_smart_cable"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Видимый канал."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_14"]
+			tasks: [{
+				id: "t_11_15"
+				type: "item"
+				item: "ae2:fluix_smart_cable"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_15"
+				type: "item"
+				item: "ae2:fluix_smart_cable"
+				count: 8
+			}]
+		},
+		{
+			x: 0.8d
+			y: -1.8d
+			id: "q_11_16"
+			title: "16. Плотный кабель"
+			icon: "ae2:fluix_covered_dense_cable"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Толстый канал."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_15"]
+			tasks: [{
+				id: "t_11_16"
+				type: "item"
+				item: "ae2:fluix_covered_dense_cable"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_16"
+				type: "item"
+				item: "ae2:fluix_covered_dense_cable"
+				count: 4
+			}]
+		},
+		{
+			x: 2.4d
+			y: -1.8d
+			id: "q_11_17"
+			title: "17. МЭ Контроллер"
+			icon: "ae2:controller"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Сердце цифры."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_16"]
+			tasks: [{
+				id: "t_11_17"
+				type: "item"
+				item: "ae2:controller"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_17"
+				type: "item"
+				item: "ae2:controller"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: -1.8d
+			id: "q_11_18"
+			title: "18. Накопитель"
+			icon: "ae2:drive"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Слоты ячеек."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_17"]
+			tasks: [{
+				id: "t_11_18"
+				type: "item"
+				item: "ae2:drive"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_18"
+				type: "item"
+				item: "ae2:drive"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: -1.8d
+			id: "q_11_19"
+			title: "19. МЭ Сундук"
+			icon: "ae2:chest"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Простой доступ."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_18"]
+			tasks: [{
+				id: "t_11_19"
+				type: "item"
+				item: "ae2:chest"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_19"
+				type: "item"
+				item: "ae2:chest"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: -1.8d
+			id: "q_11_20"
+			title: "20. Компонент 1k"
+			icon: "ae2:cell_component_1k"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Малый объём."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_19"]
+			tasks: [{
+				id: "t_11_20"
+				type: "item"
+				item: "ae2:cell_component_1k"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_20"
+				type: "item"
+				item: "ae2:cell_component_1k"
+				count: 2
+			}]
+		},
+		{
+			x: -7.2d
+			y: 0.0d
+			id: "q_11_21"
+			title: "21. Компонент 4k"
+			icon: "ae2:cell_component_4k"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Средний объём."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_20"]
+			tasks: [{
+				id: "t_11_21"
+				type: "item"
+				item: "ae2:cell_component_4k"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_21"
+				type: "item"
+				item: "ae2:cell_component_4k"
+				count: 2
+			}]
+		},
+		{
+			x: -5.6d
+			y: 0.0d
+			id: "q_11_22"
+			title: "22. Компонент 16k"
+			icon: "ae2:cell_component_16k"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Большой объём."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_21"]
+			tasks: [{
+				id: "t_11_22"
+				type: "item"
+				item: "ae2:cell_component_16k"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_22"
+				type: "item"
+				item: "ae2:cell_component_16k"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 0.0d
+			id: "q_11_23"
+			title: "23. Компонент 64k"
+			icon: "ae2:cell_component_64k"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Огромный объём."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_22"]
+			tasks: [{
+				id: "t_11_23"
+				type: "item"
+				item: "ae2:cell_component_64k"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_23"
+				type: "item"
+				item: "ae2:cell_component_64k"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 0.0d
+			id: "q_11_24"
+			title: "24. Ячейка 1k"
+			icon: "ae2:item_storage_cell_1k"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Первое цифровое хранилище."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_23"]
+			tasks: [{
+				id: "t_11_24"
+				type: "item"
+				item: "ae2:item_storage_cell_1k"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_24"
+				type: "item"
+				item: "ae2:item_storage_cell_1k"
+				count: 1
+			}]
+		},
+		{
+			x: -0.8d
+			y: 0.0d
+			id: "q_11_25"
+			title: "25. Ячейка 4k"
+			icon: "ae2:item_storage_cell_4k"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Больше слотов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_24"]
+			tasks: [{
+				id: "t_11_25"
+				type: "item"
+				item: "ae2:item_storage_cell_4k"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_25"
+				type: "item"
+				item: "ae2:item_storage_cell_4k"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 0.0d
+			id: "q_11_26"
+			title: "26. Ячейка 16k"
+			icon: "ae2:item_storage_cell_16k"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Склад флота."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_25"]
+			tasks: [{
+				id: "t_11_26"
+				type: "item"
+				item: "ae2:item_storage_cell_16k"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_26"
+				type: "item"
+				item: "ae2:item_storage_cell_16k"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 0.0d
+			id: "q_11_27"
+			title: "27. Ячейка 64k"
+			icon: "ae2:item_storage_cell_64k"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Океан предметов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_26"]
+			tasks: [{
+				id: "t_11_27"
+				type: "item"
+				item: "ae2:item_storage_cell_64k"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_27"
+				type: "item"
+				item: "ae2:item_storage_cell_64k"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 0.0d
+			id: "q_11_28"
+			title: "28. Терминал"
+			icon: "ae2:terminal"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Окно в сеть."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_27"]
+			tasks: [{
+				id: "t_11_28"
+				type: "item"
+				item: "ae2:terminal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_28"
+				type: "item"
+				item: "ae2:terminal"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 0.0d
+			id: "q_11_29"
+			title: "29. Крафт-терминал"
+			icon: "ae2:crafting_terminal"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Крафт из сети."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_28"]
+			tasks: [{
+				id: "t_11_29"
+				type: "item"
+				item: "ae2:crafting_terminal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_29"
+				type: "item"
+				item: "ae2:crafting_terminal"
+				count: 1
+			}]
+		},
+		{
+			x: 7.2d
+			y: 0.0d
+			id: "q_11_30"
+			title: "30. Терминал шаблонов"
+			icon: "ae2:pattern_encoding_terminal"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Запись рецептов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_29"]
+			tasks: [{
+				id: "t_11_30"
+				type: "item"
+				item: "ae2:pattern_encoding_terminal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_30"
+				type: "item"
+				item: "ae2:pattern_encoding_terminal"
+				count: 1
+			}]
+		},
+		{
+			x: -7.2d
+			y: 1.8d
+			id: "q_11_31"
+			title: "31. Терминал доступа"
+			icon: "ae2:pattern_access_terminal"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Контроль автокрафта."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_30"]
+			tasks: [{
+				id: "t_11_31"
+				type: "item"
+				item: "ae2:pattern_access_terminal"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_31"
+				type: "item"
+				item: "ae2:pattern_access_terminal"
+				count: 1
+			}]
+		},
+		{
+			x: -5.6d
+			y: 1.8d
+			id: "q_11_32"
+			title: "32. Пустой шаблон"
+			icon: "ae2:blank_pattern"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Запиши рецепт."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_31"]
+			tasks: [{
+				id: "t_11_32"
+				type: "item"
+				item: "ae2:blank_pattern"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_32"
+				type: "item"
+				item: "ae2:blank_pattern"
+				count: 8
+			}]
+		},
+		{
+			x: -4.0d
+			y: 1.8d
+			id: "q_11_33"
+			title: "33. Интерфейс"
+			icon: "ae2:interface"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Мост мир↔сеть."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_32"]
+			tasks: [{
+				id: "t_11_33"
+				type: "item"
+				item: "ae2:interface"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_33"
+				type: "item"
+				item: "ae2:interface"
+				count: 2
+			}]
+		},
+		{
+			x: -2.4d
+			y: 1.8d
+			id: "q_11_34"
+			title: "34. Поставщик шаблонов"
+			icon: "ae2:pattern_provider"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Автокрафт узел."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_33"]
+			tasks: [{
+				id: "t_11_34"
+				type: "item"
+				item: "ae2:pattern_provider"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_34"
+				type: "item"
+				item: "ae2:pattern_provider"
+				count: 2
+			}]
+		},
+		{
+			x: -0.8d
+			y: 1.8d
+			id: "q_11_35"
+			title: "35. Молекулярный сборщик"
+			icon: "ae2:molecular_assembler"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Крафт из шаблона."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_34"]
+			tasks: [{
+				id: "t_11_35"
+				type: "item"
+				item: "ae2:molecular_assembler"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_35"
+				type: "item"
+				item: "ae2:molecular_assembler"
+				count: 2
+			}]
+		},
+		{
+			x: 0.8d
+			y: 1.8d
+			id: "q_11_36"
+			title: "36. Блок автокрафта"
+			icon: "ae2:crafting_unit"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. CPU стек."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_35"]
+			tasks: [{
+				id: "t_11_36"
+				type: "item"
+				item: "ae2:crafting_unit"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_36"
+				type: "item"
+				item: "ae2:crafting_unit"
+				count: 4
+			}]
+		},
+		{
+			x: 2.4d
+			y: 1.8d
+			id: "q_11_37"
+			title: "37. Ускоритель крафта"
+			icon: "ae2:crafting_accelerator"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Быстрее сборка."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_36"]
+			tasks: [{
+				id: "t_11_37"
+				type: "item"
+				item: "ae2:crafting_accelerator"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_37"
+				type: "item"
+				item: "ae2:crafting_accelerator"
+				count: 2
+			}]
+		},
+		{
+			x: 4.0d
+			y: 1.8d
+			id: "q_11_38"
+			title: "38. Крафт-хранилище 1k"
+			icon: "ae2:1k_crafting_storage"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Буфер рецептов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_37"]
+			tasks: [{
+				id: "t_11_38"
+				type: "item"
+				item: "ae2:1k_crafting_storage"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_38"
+				type: "item"
+				item: "ae2:1k_crafting_storage"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 1.8d
+			id: "q_11_39"
+			title: "39. Шина импорта"
+			icon: "ae2:import_bus"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. В сеть."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_38"]
+			tasks: [{
+				id: "t_11_39"
+				type: "item"
+				item: "ae2:import_bus"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_39"
+				type: "item"
+				item: "ae2:import_bus"
+				count: 2
+			}]
+		},
+		{
+			x: 7.2d
+			y: 1.8d
+			id: "q_11_40"
+			title: "40. Шина экспорта"
+			icon: "ae2:export_bus"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Из сети."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_39"]
+			tasks: [{
+				id: "t_11_40"
+				type: "item"
+				item: "ae2:export_bus"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_40"
+				type: "item"
+				item: "ae2:export_bus"
+				count: 2
+			}]
+		},
+		{
+			x: -7.2d
+			y: 3.6d
+			id: "q_11_41"
+			title: "41. Шина хранилища"
+			icon: "ae2:storage_bus"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Внешний сундук как МЭ."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_40"]
+			tasks: [{
+				id: "t_11_41"
+				type: "item"
+				item: "ae2:storage_bus"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_41"
+				type: "item"
+				item: "ae2:storage_bus"
+				count: 2
+			}]
+		},
+		{
+			x: -5.6d
+			y: 3.6d
+			id: "q_11_42"
+			title: "42. Плоскость уничтожения"
+			icon: "ae2:annihilation_plane"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Ломай в сеть."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_41"]
+			tasks: [{
+				id: "t_11_42"
+				type: "item"
+				item: "ae2:annihilation_plane"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_42"
+				type: "item"
+				item: "ae2:annihilation_plane"
+				count: 1
+			}]
+		},
+		{
+			x: -4.0d
+			y: 3.6d
+			id: "q_11_43"
+			title: "43. Плоскость формирования"
+			icon: "ae2:formation_plane"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Ставь из сети."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_42"]
+			tasks: [{
+				id: "t_11_43"
+				type: "item"
+				item: "ae2:formation_plane"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_43"
+				type: "item"
+				item: "ae2:formation_plane"
+				count: 1
+			}]
+		},
+		{
+			x: -2.4d
+			y: 3.6d
+			id: "q_11_44"
+			title: "44. Эмиттер уровня"
+			icon: "ae2:level_emitter"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Сигнал запасов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_43"]
+			tasks: [{
+				id: "t_11_44"
+				type: "item"
+				item: "ae2:level_emitter"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_44"
+				type: "item"
+				item: "ae2:level_emitter"
+				count: 2
+			}]
+		},
+		{
+			x: -0.8d
+			y: 3.6d
+			id: "q_11_45"
+			title: "45. Энергоячейка МЭ"
+			icon: "ae2:energy_cell"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Буфер сети."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_44"]
+			tasks: [{
+				id: "t_11_45"
+				type: "item"
+				item: "ae2:energy_cell"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_45"
+				type: "item"
+				item: "ae2:energy_cell"
+				count: 1
+			}]
+		},
+		{
+			x: 0.8d
+			y: 3.6d
+			id: "q_11_46"
+			title: "46. Плотная энергоячейка"
+			icon: "ae2:dense_energy_cell"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Большой буфер."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_45"]
+			tasks: [{
+				id: "t_11_46"
+				type: "item"
+				item: "ae2:dense_energy_cell"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_46"
+				type: "item"
+				item: "ae2:dense_energy_cell"
+				count: 1
+			}]
+		},
+		{
+			x: 2.4d
+			y: 3.6d
+			id: "q_11_47"
+			title: "47. Беспроводной приёмник"
+			icon: "ae2:wireless_receiver"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Эфирный доступ."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_46"]
+			tasks: [{
+				id: "t_11_47"
+				type: "item"
+				item: "ae2:wireless_receiver"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_47"
+				type: "item"
+				item: "ae2:wireless_receiver"
+				count: 1
+			}]
+		},
+		{
+			x: 4.0d
+			y: 3.6d
+			id: "q_11_48"
+			title: "48. Беспроводной терминал"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. МЭ с палубы."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_47"]
+			tasks: [{
+				id: "t_11_48"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_48"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1
+			}]
+		},
+		{
+			x: 5.6d
+			y: 3.6d
+			id: "q_11_49"
+			title: "49. Квантовое кольцо"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Дальняя связь."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_48"]
+			tasks: [{
+				id: "t_11_49"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_49"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 2
+			}]
+		},
+		{
+			x: 7.2d
+			y: 3.6d
+			id: "q_11_50"
+			title: "50. Квантовая связь"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Вещество в код. Applied Energistics хранит флот ресурсов. Мост островов."
+			shape: "rsquare"
+			size: 1.0d
+			dependencies: ["q_11_49"]
+			tasks: [{
+				id: "t_11_50"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [{
+				id: "r_11_50"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1
+			}]
+		}
+	]
+}

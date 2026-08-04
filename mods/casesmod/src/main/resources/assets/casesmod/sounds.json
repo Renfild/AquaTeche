@@ -1,0 +1,30 @@
+{
+  "case_tick": {
+    "subtitle": "subtitles.casesmod.case_tick",
+    "sounds": [{ "name": "casesmod:case_tick", "stream": false }]
+  },
+  "anticipation_riser": {
+    "subtitle": "subtitles.casesmod.anticipation",
+    "sounds": [{ "name": "casesmod:anticipation_riser", "stream": false }]
+  },
+  "reveal_common": {
+    "subtitle": "subtitles.casesmod.reveal",
+    "sounds": [{ "name": "casesmod:reveal_common", "stream": false }]
+  },
+  "reveal_uncommon": {
+    "subtitle": "subtitles.casesmod.reveal",
+    "sounds": [{ "name": "casesmod:reveal_uncommon", "stream": false }]
+  },
+  "reveal_rare": {
+    "subtitle": "subtitles.casesmod.reveal",
+    "sounds": [{ "name": "casesmod:reveal_rare", "stream": false }]
+  },
+  "reveal_epic": {
+    "subtitle": "subtitles.casesmod.reveal_epic",
+    "sounds": [{ "name": "casesmod:reveal_epic", "stream": false }]
+  },
+  "reveal_legendary": {
+    "subtitle": "subtitles.casesmod.reveal_legendary",
+    "sounds": [{ "name": "casesmod:reveal_legendary", "stream": false }]
+  }
+}
