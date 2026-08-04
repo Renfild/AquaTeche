@@ -6,22 +6,27 @@ ServerEvents.recipes((event) => {
 
   if (!Platform.isLoaded('starcatcher')) return
 
-  // ---------- 1. Humble Rod (Copper / Starter) ----------
+  // ---------- 1. Bamboo Rod (Tier 1: Starter Resource Rod) ----------
+  event.remove({ output: 'starcatcher:bamboo_rod' })
+  event.shaped('starcatcher:bamboo_rod', ['  B', ' SB', 'S  '], {
+    B: 'minecraft:bamboo',
+    S: 'minecraft:string',
+  }).id('aquatech:bamboo_rod_craft')
+
+  // Fallback if no bamboo: craft bamboo rod using sticks + string
+  event.shaped('starcatcher:bamboo_rod', ['  W', ' SW', 'S  '], {
+    W: 'minecraft:stick',
+    S: 'minecraft:string',
+  }).id('aquatech:bamboo_rod_from_sticks_craft')
+
+  // ---------- 2. Humble Rod (Simple Rod) ----------
   event.remove({ output: 'starcatcher:humble_rod' })
-  event.shaped('starcatcher:humble_rod', ['  C', ' SC', 'S  '], {
-    C: 'minecraft:copper_ingot',
+  event.shaped('starcatcher:humble_rod', ['  S', ' W ', 'W  '], {
+    W: 'minecraft:stick',
     S: 'minecraft:string',
   }).id('aquatech:humble_rod_craft')
 
-  // ---------- 2. Bamboo Rod (Tier 2: Bamboo & Rubber) ----------
-  event.remove({ output: 'starcatcher:bamboo_rod' })
-  event.shaped('starcatcher:bamboo_rod', ['  B', ' RB', 'R H'], {
-    B: 'minecraft:bamboo',
-    R: 'industrialupgrade:raw_latex',
-    H: 'starcatcher:humble_rod',
-  }).id('aquatech:bamboo_rod_craft')
-
-  // ---------- 3. Good Old Rod (Tier 3: Iron & Tin Plates) ----------
+  // ---------- 3. Good Old Rod (Tier 2: Iron & Tin Plates) ----------
   event.remove({ output: 'starcatcher:good_old_rod' })
   event.shaped('starcatcher:good_old_rod', ['  P', ' BP', 'C B'], {
     P: 'industrialupgrade:itemplates/iron_plate',

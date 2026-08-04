@@ -323,14 +323,22 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.30f, new ItemStack(Items.GRAVEL, 2 + random.nextInt(3)));
                 pickFromPool(list, pool, random, 1, 3);
             }
+            case "humble_rod" -> {
+                maybeAdd(pool, random, 0.60f, new ItemStack(Items.COD, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.50f, new ItemStack(Items.OAK_LOG, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.KELP, 4 + random.nextInt(5)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+                pickFromPool(list, pool, random, 1, 3);
+            }
             case "bamboo_rod" -> {
+                maybeAdd(pool, random, 0.55f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:raw_latex", Items.SLIME_BALL, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.BAMBOO, 2 + random.nextInt(4)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.35f, new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.30f, new ItemStack(Items.SAND, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.GRAVEL, 2 + random.nextInt(3)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "slimed_rod" -> {
