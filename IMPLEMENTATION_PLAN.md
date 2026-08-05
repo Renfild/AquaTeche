@@ -133,3 +133,25 @@
 | **2026-08-04** | `v1.1.0` | Antigravity AI | Интеграция 12 удочек StarCatcher в `FishingRodCompat` и `FishingLootHandler`. Добавление улова руд и сплавов Industrial Upgrade. | `FishingRodCompat.java`, `FishingLootHandler.java` |
 | **2026-08-04** | `v1.2.0` | Antigravity AI | Разработка ступенчатой цепочки рецептов KubeJS (`20_aquatech_rod_crafts.js`) для 12 удочек StarCatcher. | `kubejs/server_scripts/20_aquatech_rod_crafts.js` |
 | **2026-08-04** | `v1.3.0` | Antigravity AI | Создание глобального мастера-плана реализации (`IMPLEMENTATION_PLAN.md`) с ТЗ и правилом постоянной актуализации. | `IMPLEMENTATION_PLAN.md`, `implementation_plan.md` |
+| **2026-08-05** | `v1.4.0` | Antigravity AI | Подготовка к TikTok: 3D-анимация `AutoFisherRenderer`, цветные подсказки удова, обновление `ru_ru.json` / `en_us.json`. | `AutoFisherRenderer.java`, `ModBusClientEvents.java`, `ru_ru.json`, `en_us.json` |
+| **2026-08-05** | `v1.5.0` | Antigravity AI | Добавление подписей удочек для всех ванильных и IU руд в `FishingOreTooltips.java` и удаление устаревших описаний жилок IU. | `FishingOreTooltips.java`, `IMPLEMENTATION_PLAN.md` |
+| **2026-08-05** | `v1.5.1` | Antigravity AI | Удаление 3D-анимации левитирующей удочки и частиц брызг над `AutoFisherBlockEntity` по запросу. | `AutoFisherRenderer.java`, `IMPLEMENTATION_PLAN.md` |
+| **2026-08-05** | `v1.6.0` | Antigravity AI | Полное удаление предмета «Тризубец Нептуна» (`neptune_trident`) из мода `aquatech_ui`, дропов, Алтаря Океана, креативной вкладки и кейсов. | `ModItems.java`, `OceanAltarBlockEntity.java`, `FishingLootHandler.java`, `legend_case.json` |
+| **2026-08-05** | `v1.7.0` | Antigravity AI | Полная очистка старых квестов (`ftbquests`), бэкапов квестов, паркованных модов (`_parked_mods`) и временных папок (`_tmp_*`) для создания новой ветки квестов «с нуля». | `config/ftbquests`, `server/config/ftbquests`, `_parked_mods` |
+| **2026-08-05** | `v1.7.1` | Antigravity AI | Расширен фильтр `FishingOreTooltips` для полного вырезания строк подсказок жилок IU (`жилу`, `ищите камни`, `добывается только`, `[Shift]`) и форматирования названий удочек. | `FishingOreTooltips.java`, `IMPLEMENTATION_PLAN.md` |
+| **2026-08-05** | `v1.7.2` | Antigravity AI | Установлен приоритет `EventPriority.LOWEST` в `FishingOreTooltips`, добавлен нечеткий поиск материалов по ID руд и импортирован логотип `aquatech_logo.png` в KubeJS текстуры для квестов. | `FishingOreTooltips.java`, `kubejs/assets/kubejs/textures/` |
+| **2026-08-05** | `v1.7.3` | Antigravity AI | Восстановлена привязка 20 PNG-иконок префиксов/рангов из папки «Пак красивых префиксов» в битовая мапу шрифтов `minecraft/font/default.json`, LuckPerms и ресурсы мода `aquatech_ui`. | `tools/install_aquatech_rank_prefixes.py`, `default.json`, `aquatech_ui-1.0.0.jar` |
+| **2026-08-05** | `v1.7.4` | Antigravity AI | Добавлены расширенные двойные пробелы между всеми словами подписей в `FishingOreTooltips.java` для устранения визуального слипания слов при юникод-шрифте. | `FishingOreTooltips.java`, `aquatech_ui-1.0.0.jar` |
+| **2026-08-05** | `v1.7.5` | Antigravity AI | Отвязаны бинды клавиш `I` (Industrial Upgrade) и `O` (Avaritia config) в `options.txt`, добавлен перехват `ClientChatReceivedEvent` для глушения приветственного сообщения IU в чате при входе. | `options.txt`, `ClientEvents.java`, `aquatech_ui-1.0.0.jar` |
+| **2026-08-05** | `v1.7.6` | Antigravity AI | Стандартизирована единая энергосистема FE (Forge Energy) для механизмов AquaTech, Draconic Evolution, Avaritia и AE2; обновлены тексты интерфейса с EU/t на FE/t. | `ru_ru.json`, `en_us.json`, `aquatech_ui-1.0.0.jar` |
+
+
+
+
+
+
+
+
+
+
+

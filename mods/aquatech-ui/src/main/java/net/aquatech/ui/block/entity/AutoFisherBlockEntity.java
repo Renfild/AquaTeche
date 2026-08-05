@@ -268,6 +268,30 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         outputOptional.invalidate();
     }
 
+    public ItemStackHandler getItemHandler() {
+        return itemHandler;
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = super.getUpdateTag();
+        saveAdditional(tag);
+        return tag;
+    }
+
+    @Nullable
+    @Override
+    public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> getUpdatePacket() {
+        return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void onDataPacket(net.minecraft.network.Connection net, net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket pkt) {
+        if (pkt.getTag() != null) {
+            load(pkt.getTag());
+        }
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
@@ -284,3 +308,4 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         progress = tag.getInt("Progress");
     }
 }
+

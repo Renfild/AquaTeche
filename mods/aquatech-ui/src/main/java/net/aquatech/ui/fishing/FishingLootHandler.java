@@ -289,7 +289,6 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.06f, new ItemStack(Items.NETHER_STAR, 1));
                 maybeAdd(pool, random, 0.10f, new ItemStack(Items.HEART_OF_THE_SEA, 1));
                 maybeAdd(pool, random, 0.08f, new ItemStack(Items.NETHERITE_SCRAP, 1));
-                maybeAdd(pool, random, 0.01f, new ItemStack(ModItems.NEPTUNE_TRIDENT.get()));
                 pickFromPool(list, pool, random, 1, 3);
             }
         }
@@ -297,7 +296,11 @@ public class FishingLootHandler {
         rollIuResources(type, list, random);
         keepRandomStacks(list, random, 1, 3);
         scaleLootToRodRange(list, type, random);
+        return list;
+    }
+
     private static List<ItemStack> rollStarCatcherRodLoot(String rodId, RandomSource random) {
+
         List<ItemStack> list = new ArrayList<>();
         List<ItemStack> pool = new ArrayList<>();
 

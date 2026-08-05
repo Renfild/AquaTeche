@@ -87,11 +87,11 @@
       "command": "/aquatech grantxp %player% 400"
     },
     {
-      "itemId": "aquatech_ui:neptune_trident",
+      "itemId": "aquatech_ui:abyssal_magnet",
       "count": 1,
       "weight": 1.5,
       "rarity": "LEGENDARY",
-      "displayName": "§6Neptune Trident",
+      "displayName": "§6Abyssal Resource Magnet",
       "command": "/aquatech grantxp %player% 500"
     },
     {

@@ -94,7 +94,7 @@ public class OceanAltarBlockEntity extends BlockEntity implements MenuProvider {
                 for (int i = 0; i < 4; i++) {
                     entity.itemHandler.getStackInSlot(i).shrink(1);
                 }
-                entity.itemHandler.setStackInSlot(4, new ItemStack(ModItems.NEPTUNE_TRIDENT.get()));
+                entity.itemHandler.setStackInSlot(4, new ItemStack(ModItems.ABYSSAL_MAGNET.get()));
                 entity.progress = 0;
                 level.playSound(null, pos, SoundEvents.CONDUIT_ACTIVATE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 entity.setChanged();

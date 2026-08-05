@@ -68,9 +68,6 @@ public class ModItems {
     public static final RegistryObject<Item> KELP_BIO_PELLET = ITEMS.register("kelp_bio_pellet",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> NEPTUNE_TRIDENT = ITEMS.register("neptune_trident",
-            () -> new net.aquatech.ui.item.NeptuneTridentItem(new Item.Properties()));
-
     public static final RegistryObject<Item> OCEAN_GUIDE_BOOK = ITEMS.register("ocean_guide_book",
             () -> new net.aquatech.ui.item.OceanGuideBookItem(new Item.Properties()));
 

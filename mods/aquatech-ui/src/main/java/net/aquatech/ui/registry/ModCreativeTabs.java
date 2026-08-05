@@ -35,7 +35,6 @@ public class ModCreativeTabs {
                         output.accept(ModItems.OCEAN_ALTAR_ITEM.get());
                         output.accept(ModItems.ABYSSAL_PORTAL_ITEM.get());
                         output.accept(ModItems.KELP_BIO_PELLET.get());
-                        output.accept(ModItems.NEPTUNE_TRIDENT.get());
                         output.accept(ModItems.OCEAN_GUIDE_BOOK.get());
                     })
                     .build());

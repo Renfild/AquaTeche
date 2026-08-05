@@ -147,8 +147,8 @@ dependencies {
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
 
-    // Placebo — utility library by Shadows-of-Fire (required for Apotheosis and related mods)
-    implementation fg.deobf("shadows.placebo:placebo:${placebo_version}")
+    // Placebo — utility library by Shadows-of-Fire (optional)
+    // implementation fg.deobf("shadows.placebo:placebo:${placebo_version}")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

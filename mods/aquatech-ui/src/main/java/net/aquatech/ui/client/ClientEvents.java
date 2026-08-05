@@ -148,4 +148,18 @@ public final class ClientEvents {
             event.setCanceled(true);
         }
     }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onClientChatReceived(net.minecraftforge.client.event.ClientChatReceivedEvent event) {
+        if (event.getMessage() == null) return;
+        String text = event.getMessage().getString().toLowerCase();
+        if (text.contains("промышленная модернизация")
+                || text.contains("industrial upgrade")
+                || text.contains("нажмите i")
+                || text.contains("press i to open")
+                || text.contains("руководство industrial")
+                || text.contains("industrialupgrade")) {
+            event.setCanceled(true);
+        }
+    }
 }
