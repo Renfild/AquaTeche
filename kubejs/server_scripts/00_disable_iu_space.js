@@ -42,15 +42,16 @@ if (IU_SPACE_DISABLED) {
 
   PlayerEvents.loggedIn((event) => {
     try {
-      const p = event.player
-      const dim = String(p.level.dimension)
+      let playerEntity = event.player
+      if (!playerEntity || !playerEntity.level) return
+      let dim = String(playerEntity.level.dimension)
       if (!dim.startsWith('industrialupgrade:')) return
 
-      const overworld = event.server.getLevel('minecraft:overworld')
+      let overworld = event.server.getLevel('minecraft:overworld')
       if (!overworld) return
-      const spawn = overworld.sharedSpawnPos
-      p.teleportTo(overworld, spawn.x + 0.5, spawn.y, spawn.z + 0.5, p.yaw, p.pitch)
-      p.tell(Text.gold('[AquaTech] Космос IU временно выключен — возврат в Overworld.'))
+      let spawn = overworld.sharedSpawnPos
+      playerEntity.teleportTo(overworld, spawn.x + 0.5, spawn.y, spawn.z + 0.5, playerEntity.yaw, playerEntity.pitch)
+      playerEntity.tell(Text.gold('[AquaTech] Космос IU временно выключен — возврат в Overworld.'))
     } catch (e) {
       console.error('[AquaTech] IU space rescue failed: ' + e)
     }
