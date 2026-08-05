@@ -4,10 +4,11 @@ import com.casesmod.CasesMod;
 import com.casesmod.network.packets.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class NetworkHandler {
-    private static final String PROTOCOL_VERSION = "6";
+    private static final String PROTOCOL_VERSION = "7";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(CasesMod.MOD_ID, "main"),
             () -> PROTOCOL_VERSION,
@@ -15,63 +16,102 @@ public class NetworkHandler {
             PROTOCOL_VERSION::equals
     );
 
-    private static int id = 0;
-    private static int next() { return id++; }
+    private static int packetId = 0;
+    private static int id() { return packetId++; }
 
     public static void register() {
-        CHANNEL.registerMessage(next(), OpenCaseC2SPacket.class,
-                OpenCaseC2SPacket::encode, OpenCaseC2SPacket::decode, OpenCaseC2SPacket::handle);
+        CHANNEL.messageBuilder(OpenCaseC2SPacket.class, id())
+                .encoder(OpenCaseC2SPacket::encode)
+                .decoder(OpenCaseC2SPacket::decode)
+                .consumerMainThread(OpenCaseC2SPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), CaseResultS2CPacket.class,
-                CaseResultS2CPacket::encode, CaseResultS2CPacket::decode, CaseResultS2CPacket::handle);
+        CHANNEL.messageBuilder(CaseResultS2CPacket.class, id())
+                .encoder(CaseResultS2CPacket::encode)
+                .decoder(CaseResultS2CPacket::decode)
+                .consumerMainThread(CaseResultS2CPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), ClaimKitC2SPacket.class,
-                ClaimKitC2SPacket::encode, ClaimKitC2SPacket::decode, ClaimKitC2SPacket::handle);
+        CHANNEL.messageBuilder(ClaimKitC2SPacket.class, id())
+                .encoder(ClaimKitC2SPacket::encode)
+                .decoder(ClaimKitC2SPacket::decode)
+                .consumerMainThread(ClaimKitC2SPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), TeleportWarpC2SPacket.class,
-                TeleportWarpC2SPacket::encode, TeleportWarpC2SPacket::decode, TeleportWarpC2SPacket::handle);
+        CHANNEL.messageBuilder(TeleportWarpC2SPacket.class, id())
+                .encoder(TeleportWarpC2SPacket::encode)
+                .decoder(TeleportWarpC2SPacket::decode)
+                .consumerMainThread(TeleportWarpC2SPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), ClaimQuestC2SPacket.class,
-                ClaimQuestC2SPacket::encode, ClaimQuestC2SPacket::decode, ClaimQuestC2SPacket::handle);
+        CHANNEL.messageBuilder(ClaimQuestC2SPacket.class, id())
+                .encoder(ClaimQuestC2SPacket::encode)
+                .decoder(ClaimQuestC2SPacket::decode)
+                .consumerMainThread(ClaimQuestC2SPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), OpenMenuS2CPacket.class,
-                OpenMenuS2CPacket::encode, OpenMenuS2CPacket::decode, OpenMenuS2CPacket::handle);
+        CHANNEL.messageBuilder(OpenMenuS2CPacket.class, id())
+                .encoder(OpenMenuS2CPacket::encode)
+                .decoder(OpenMenuS2CPacket::decode)
+                .consumerMainThread(OpenMenuS2CPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), BalanceSyncS2CPacket.class,
-                BalanceSyncS2CPacket::encode, BalanceSyncS2CPacket::decode, BalanceSyncS2CPacket::handle);
+        CHANNEL.messageBuilder(BalanceSyncS2CPacket.class, id())
+                .encoder(BalanceSyncS2CPacket::encode)
+                .decoder(BalanceSyncS2CPacket::decode)
+                .consumerMainThread(BalanceSyncS2CPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), RecentWinsSyncS2CPacket.class,
-                RecentWinsSyncS2CPacket::encode, RecentWinsSyncS2CPacket::decode, RecentWinsSyncS2CPacket::handle);
+        CHANNEL.messageBuilder(RecentWinsSyncS2CPacket.class, id())
+                .encoder(RecentWinsSyncS2CPacket::encode)
+                .decoder(RecentWinsSyncS2CPacket::decode)
+                .consumerMainThread(RecentWinsSyncS2CPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), CaseListSyncS2CPacket.class,
-                CaseListSyncS2CPacket::encode, CaseListSyncS2CPacket::decode, CaseListSyncS2CPacket::handle);
+        CHANNEL.messageBuilder(CaseListSyncS2CPacket.class, id())
+                .encoder(CaseListSyncS2CPacket::encode)
+                .decoder(CaseListSyncS2CPacket::decode)
+                .consumerMainThread(CaseListSyncS2CPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), MenuCatalogSyncS2CPacket.class,
-                MenuCatalogSyncS2CPacket::encode, MenuCatalogSyncS2CPacket::decode, MenuCatalogSyncS2CPacket::handle);
+        CHANNEL.messageBuilder(MenuCatalogSyncS2CPacket.class, id())
+                .encoder(MenuCatalogSyncS2CPacket::encode)
+                .decoder(MenuCatalogSyncS2CPacket::decode)
+                .consumerMainThread(MenuCatalogSyncS2CPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), RequestOpenMenuC2SPacket.class,
-                RequestOpenMenuC2SPacket::encode, RequestOpenMenuC2SPacket::decode, RequestOpenMenuC2SPacket::handle);
+        CHANNEL.messageBuilder(RequestOpenMenuC2SPacket.class, id())
+                .encoder(RequestOpenMenuC2SPacket::encode)
+                .decoder(RequestOpenMenuC2SPacket::decode)
+                .consumerMainThread(RequestOpenMenuC2SPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), C2SSellFishPacket.class,
-                C2SSellFishPacket::encode, C2SSellFishPacket::decode, C2SSellFishPacket::handle);
+        CHANNEL.messageBuilder(C2SSellFishPacket.class, id())
+                .encoder(C2SSellFishPacket::encode)
+                .decoder(C2SSellFishPacket::decode)
+                .consumerMainThread(C2SSellFishPacket::handle)
+                .add();
 
-        CHANNEL.registerMessage(next(), OpenFishMarketS2CPacket.class,
-                OpenFishMarketS2CPacket::encode, OpenFishMarketS2CPacket::decode, OpenFishMarketS2CPacket::handle);
+        CHANNEL.messageBuilder(OpenFishMarketS2CPacket.class, id())
+                .encoder(OpenFishMarketS2CPacket::encode)
+                .decoder(OpenFishMarketS2CPacket::decode)
+                .consumerMainThread(OpenFishMarketS2CPacket::handle)
+                .add();
     }
 
     /** Открыть меню: баланс + кейсы + киты/варпы/квесты. */
     public static void openMenuFor(net.minecraft.server.level.ServerPlayer player) {
         long balance = com.casesmod.data.CurrencyManager.INSTANCE.getBalance(player.getUUID());
-        CHANNEL.send(net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player),
                 new OpenMenuS2CPacket(balance));
         syncPlayerCatalog(player);
     }
 
     /** Персональный снимок кейсов/китов/варпов/квестов одному игроку. */
     public static void syncPlayerCatalog(net.minecraft.server.level.ServerPlayer player) {
-        CHANNEL.send(net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player),
                 CaseListSyncS2CPacket.buildForPlayer(player));
-        CHANNEL.send(net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player),
                 MenuCatalogSyncS2CPacket.forPlayer(player));
     }
 
@@ -90,6 +130,6 @@ public class NetworkHandler {
     public static void broadcastRecentWins(net.minecraft.server.MinecraftServer server) {
         if (server == null) return;
         var packet = new RecentWinsSyncS2CPacket(com.casesmod.data.RecentWinsManager.INSTANCE.getAll());
-        CHANNEL.send(net.minecraftforge.network.PacketDistributor.ALL.noArg(), packet);
+        CHANNEL.send(PacketDistributor.ALL.noArg(), packet);
     }
 }
