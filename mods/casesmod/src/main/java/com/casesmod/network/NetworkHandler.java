@@ -51,6 +51,9 @@ public class NetworkHandler {
 
         CHANNEL.registerMessage(next(), RequestOpenMenuC2SPacket.class,
                 RequestOpenMenuC2SPacket::encode, RequestOpenMenuC2SPacket::decode, RequestOpenMenuC2SPacket::handle);
+
+        CHANNEL.registerMessage(next(), C2SSellFishPacket.class,
+                C2SSellFishPacket::encode, C2SSellFishPacket::decode, C2SSellFishPacket::handle);
     }
 
     /** Открыть меню: баланс + кейсы + киты/варпы/квесты. */

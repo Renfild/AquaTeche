@@ -105,10 +105,17 @@ $aquatech = Resolve-Jar @(
   "$root\server\mods\aquatech_ui-1.0.0.jar"
 )
 
+$casesmod = Resolve-Jar @(
+  "$root\mods\casesmod\build\libs\casesmod-1.0.0.jar",
+  "$root\mods\casesmod-1.0.0.jar",
+  "$root\server\mods\casesmod-1.0.0.jar"
+)
+
 Copy-Mod $kubejs $modTargets "kubejs-*.jar"
 Copy-Mod $rhino $modTargets "rhino-*.jar"
 Copy-Mod $rg $modTargets "recipe_generator*.jar"
 Copy-Mod $blueprint $modTargets "blueprint-*.jar"
+if ($casesmod) { Copy-Mod $casesmod $modTargets "casesmod-*.jar" }
 if ($probe) { Copy-Mod $probe $clientOnlyMods "ProbeJS*.jar" }
 if ($aquatech) {
   # clean nested source junk in CF mods
