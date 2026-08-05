@@ -111,11 +111,17 @@ $casesmod = Resolve-Jar @(
   "$root\server\mods\casesmod-1.0.0.jar"
 )
 
+$easynpc = Resolve-Jar @(
+  "$cache\easy_npc-forge-1.20.1-7.6.0.jar",
+  "$root\mods\easy_npc-forge-1.20.1-7.6.0.jar"
+)
+
 Copy-Mod $kubejs $modTargets "kubejs-*.jar"
 Copy-Mod $rhino $modTargets "rhino-*.jar"
 Copy-Mod $rg $modTargets "recipe_generator*.jar"
 Copy-Mod $blueprint $modTargets "blueprint-*.jar"
 if ($casesmod) { Copy-Mod $casesmod $modTargets "casesmod-*.jar" }
+if ($easynpc) { Copy-Mod $easynpc $modTargets "easy_npc-*.jar" }
 if ($probe) { Copy-Mod $probe $clientOnlyMods "ProbeJS*.jar" }
 if ($aquatech) {
   # clean nested source junk in CF mods

@@ -54,6 +54,9 @@ public class NetworkHandler {
 
         CHANNEL.registerMessage(next(), C2SSellFishPacket.class,
                 C2SSellFishPacket::encode, C2SSellFishPacket::decode, C2SSellFishPacket::handle);
+
+        CHANNEL.registerMessage(next(), OpenFishMarketS2CPacket.class,
+                OpenFishMarketS2CPacket::encode, OpenFishMarketS2CPacket::decode, OpenFishMarketS2CPacket::handle);
     }
 
     /** Открыть меню: баланс + кейсы + киты/варпы/квесты. */
