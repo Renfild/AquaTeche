@@ -112,8 +112,8 @@ $casesmod = Resolve-Jar @(
 )
 
 $easynpc = Resolve-Jar @(
-  "$cache\easy_npc-forge-1.20.1-7.6.0.jar",
-  "$root\mods\easy_npc-forge-1.20.1-7.6.0.jar"
+  "$cache\easy_npc-forge-1.20.1-6.10.1.jar",
+  "$root\mods\easy_npc-forge-1.20.1-6.10.1.jar"
 )
 
 Copy-Mod $kubejs $modTargets "kubejs-*.jar"
