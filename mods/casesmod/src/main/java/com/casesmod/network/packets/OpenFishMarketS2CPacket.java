@@ -1,7 +1,5 @@
 package com.casesmod.network.packets;
 
-import com.casesmod.client.gui.FishMarketScreen;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
@@ -26,12 +24,8 @@ public class OpenFishMarketS2CPacket {
 
     public static void handle(OpenFishMarketS2CPacket msg, Supplier<NetworkEvent.Context> ctxSupplier) {
         NetworkEvent.Context ctx = ctxSupplier.get();
-        ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.player != null) {
-                mc.setScreen(new FishMarketScreen());
-            }
-        }));
+        ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
+                com.casesmod.client.ClientPacketHandler.openFishMarket()));
         ctx.setPacketHandled(true);
     }
 }
