@@ -147,6 +147,7 @@
 | **2026-08-06** | `v1.8.0` | Antigravity AI | Обновлен GUI Рынка Рыбы (`fish_market.png`), открытие сделано через NPC, исправлен сборщик `reobfJar` под Java 17 (фикс `NoSuchFieldError`), добавлены русские варпы, `/casesmod listwarps` и команды добавления денег/привилегий в кейсы (`/casesmod addcasemoney`, `/casesmod addcasecmd`). | `FishMarketScreen.java`, `MainMenuScreen.java`, `MenuCommands.java`, `casesmod/build.gradle` |
 | **2026-08-06** | `v1.8.1` | Antigravity AI | Обновлена типографика GUI Рынка Рыбы: текст кнопок заменен с черного/капса на яркий белый без теней (`dropShadow = false`), отключены синие прямоугольники при наведении (`GuiHotspot`), отформатирован баланс («9 855 979 дублонов»). | `FishMarketScreen.java`, `GuiHotspot.java` |
 | **2026-08-06** | `v1.8.2` | Antigravity AI | Обновлена финальная текстура `fish_market.png` GUI Скупщика Рыбы, пересобрана JAR и задеплоена во все клиентские и серверные директории. | `fish_market.png`, `casesmod-1.0.0.jar` |
+| **2026-08-06** | `v1.8.3` | Antigravity AI | Выровнена идеальная центровка текста по оси X (`X = 125`) для всех 4 полей GUI Рынка в соответствии с рамками текстуры `fish_market.png`. | `FishMarketScreen.java` |
 
 
 
