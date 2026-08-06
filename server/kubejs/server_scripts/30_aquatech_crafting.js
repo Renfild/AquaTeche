@@ -84,48 +84,93 @@ ServerEvents.recipes((event) => {
     }).id('aquatech:magmaforged_rod')
   }
 
-  // ---------- Upgrades & Catch Multipliers (Rate Mods) ----------
-  event.shaped('aquatech_ui:rate_x2', [' C ', 'RMR', ' C '], {
-    C: 'minecraft:copper_ingot',
-    R: 'minecraft:redstone',
-    M: 'industrialupgrade:itemplates/iron_plate',
+  // ---------- Upgrades & Catch Multipliers (Rate Mods - Single Recipe per Tier) ----------
+  event.remove({ output: 'aquatech_ui:rate_x2' })
+  event.remove({ output: 'aquatech_ui:rate_x4' })
+  event.remove({ output: 'aquatech_ui:rate_x8' })
+  event.remove({ output: 'aquatech_ui:rate_x16' })
+  event.remove({ output: 'aquatech_ui:rate_x32' })
+  event.remove({ output: 'aquatech_ui:rate_x64' })
+
+  // x2 Rate Mod (Botania Mana String + Mana Steel + IU Copper/Iron Plates)
+  event.shaped('aquatech_ui:rate_x2', ['SCS', 'PMP', 'SCS'], {
+    S: 'botania:mana_string',
+    C: 'industrialupgrade:itemplates/copper_plate',
+    P: 'industrialupgrade:itemplates/iron_plate',
+    M: 'botania:manasteel_ingot',
   }).id('aquatech:rate_x2')
 
-  event.shaped('aquatech_ui:rate_x4', [' S ', 'RMR', ' S '], {
+  // x4 Rate Mod (Botania Mana Pearl/Diamond + IU Silver + Synthetic Rubber)
+  event.shaped('aquatech_ui:rate_x4', ['PSP', 'RMR', 'PSP'], {
+    P: 'botania:mana_pearl',
     S: 'industrialupgrade:baseore/silver',
     R: 'aquatech_ui:rate_x2',
-    M: 'industrialupgrade:synthetic_rubber',
+    M: 'botania:mana_diamond',
   }).id('aquatech:rate_x4')
 
-  event.shaped('aquatech_ui:rate_x8', [' T ', 'RMR', ' T '], {
-    T: 'industrialupgrade:baseore/titanium',
+  // x8 Rate Mod (Botania Elementium/Pixie Dust + IU Titanium + Electronic Circuit)
+  event.shaped('aquatech_ui:rate_x8', ['EDE', 'RCR', 'EDE'], {
+    E: 'botania:elementium_ingot',
+    D: 'botania:pixie_dust',
     R: 'aquatech_ui:rate_x4',
-    M: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic circuit
+    C: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic circuit
   }).id('aquatech:rate_x8')
 
-  event.shaped('aquatech_ui:rate_x16', [' S ', 'RMR', ' S '], {
-    S: 'industrialupgrade:alloyingot/stainless_steel',
+  // x16 Rate Mod (Botania Terrasteel/Dragonstone + IU Stainless Steel + Advanced Circuit)
+  event.shaped('aquatech_ui:rate_x16', ['TDT', 'RCR', 'TDT'], {
+    T: 'botania:terrasteel_ingot',
+    D: 'botania:dragonstone',
     R: 'aquatech_ui:rate_x8',
-    M: 'industrialupgrade:crafting_elements/crafting_273_element', // Advanced circuit
+    C: 'industrialupgrade:crafting_elements/crafting_273_element', // Advanced circuit
   }).id('aquatech:rate_x16')
 
-  // Endgame Rate x32
-  event.shaped('aquatech_ui:rate_x32', ['INI', 'RQR', 'PNP'], {
-    I: 'industrialupgrade:alloyingot/inconel',
-    N: 'minecraft:nether_star',
-    R: 'aquatech_ui:rate_x16',
-    Q: 'industrialupgrade:crafting_elements/crafting_274_element', // Quantum processor
-    P: 'industrialupgrade:baseore/platinum',
-  }).id('aquatech:rate_x32')
+  // Endgame Rate x32 (Avaritia 9x9 Extreme Crafting Table)
+  event.custom({
+    type: 'avaritia:extreme_crafting',
+    pattern: [
+      ' CCCCC  ',
+      'C GGG C ',
+      'CGTRTGC ',
+      'CGTQTGC ',
+      'CRQQQRC ',
+      'CGTQTGC ',
+      'CGTRTGC ',
+      'C GGG C ',
+      ' CCCCC  ',
+    ],
+    key: {
+      'C': { item: 'avaritia:crystal_matrix_ingot' },
+      'G': { item: 'botania:gaia_ingot' },
+      'T': { item: 'botania:terrasteel_ingot' },
+      'R': { item: 'aquatech_ui:rate_x16' },
+      'Q': { item: 'industrialupgrade:crafting_elements/crafting_274_element' }, // Quantum processor
+    },
+    result: { item: 'aquatech_ui:rate_x32' },
+  }).id('aquatech:rate_x32_extreme')
 
-  // True Endgame Rate x64
-  event.shaped('aquatech_ui:rate_x64', ['NON', 'RQR', 'BOB'], {
-    N: 'minecraft:nether_star',
-    O: 'industrialupgrade:alloyingot/osmiridium',
-    R: 'aquatech_ui:rate_x32',
-    Q: 'industrialupgrade:asteroidore/asteroid_adamantium_ore',
-    B: 'minecraft:netherite_block',
-  }).id('aquatech:rate_x64')
+  // True Endgame Rate x64 (Avaritia 9x9 Extreme Crafting Table)
+  event.custom({
+    type: 'avaritia:extreme_crafting',
+    pattern: [
+      ' NNNNN  ',
+      'N SSS N ',
+      'NSXRXSN ',
+      'NSXQXSN ',
+      'NRQQQRN ',
+      'NSXQXSN ',
+      'NSXRXSN ',
+      'N SSS N ',
+      ' NNNNN  ',
+    ],
+    key: {
+      'N': { item: 'avaritia:neutronium_ingot' },
+      'S': { item: 'avaritia:singularity' },
+      'X': { item: 'industrialupgrade:alloyingot/osmiridium' },
+      'R': { item: 'aquatech_ui:rate_x32' },
+      'Q': { item: 'industrialupgrade:asteroidore/asteroid_adamantium_ore' },
+    },
+    result: { item: 'aquatech_ui:rate_x64' },
+  }).id('aquatech:rate_x64_extreme')
 
   event.shaped('aquatech_ui:speed_upgrade', ['IRI', 'GRG', 'RGR'], {
     I: 'minecraft:iron_ingot',

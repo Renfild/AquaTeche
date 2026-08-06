@@ -499,23 +499,15 @@ public class FishingLootHandler {
 
     private static void rollIuBasics(List<ItemStack> list, RandomSource random, int tier) {
         float m = 1.0f + tier * 0.04f;
-        // Soft chance extras — ores / mats only (final keepRandomStacks trims)
-        addIuChance(list, random, 0.22f * m, "industrialupgrade:raw_latex", Items.SLIME_BALL, 1);
-        addIuChance(list, random, 0.18f * m, "industrialupgrade:sapling/rubber_sapling", Items.OAK_SAPLING, 1);
         if (random.nextFloat() < 0.18f * m) list.add(new ItemStack(Items.IRON_ORE, 1));
-        addIuChance(list, random, 0.14f * m, "industrialupgrade:blockresource/untreated_peat", Items.BROWN_DYE, 1);
-        addIuChance(list, random, 0.12f * m, "industrialupgrade:blockresource/peat", Items.COAL, 1);
         if (random.nextFloat() < 0.16f * m) list.add(new ItemStack(Items.COPPER_ORE, 1));
         addIuChance(list, random, 0.14f * m, "industrialupgrade:classicore/tin", Items.IRON_ORE, 1);
-        if (tier >= AquaTechFishingRodItem.RodType.GOLD.ordinal()) {
-            addIuChance(list, random, 0.14f, "industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 1);
-        }
         if (tier >= AquaTechFishingRodItem.RodType.IRON.ordinal()) {
             rollStarterTerrainAndOres(list, random);
         }
     }
 
-    /** Mid-tier extras — starcatcher (GOLD)+; ores / gems / lava. */
+    /** Mid-tier extras — starcatcher (GOLD)+; ores / gems. */
     private static void rollGoldTierExtras(List<ItemStack> list, RandomSource random) {
         String[] mids = {
                 "industrialupgrade:baseore/tungsten",
@@ -529,19 +521,13 @@ public class FishingLootHandler {
         }
         if (random.nextFloat() < 0.22f) list.add(new ItemStack(Items.GOLD_ORE, 1));
         if (random.nextFloat() < 0.22f) list.add(new ItemStack(Items.COPPER_ORE, 1));
-        if (random.nextFloat() < 0.22f) list.add(new ItemStack(Items.FLINT, 1 + random.nextInt(2)));
         addIuChance(list, random, 0.16f, "industrialupgrade:preciousgem/sapphire_gem", Items.LAPIS_LAZULI, 1);
         addIuChance(list, random, 0.16f, "industrialupgrade:preciousgem/topaz_gem", Items.AMETHYST_SHARD, 1);
-        if (random.nextFloat() < 0.12f) list.add(new ItemStack(Items.LAVA_BUCKET, 1));
     }
 
-    /** Soft terrain / early IU ore chances — first resource rod+. */
+    /** Soft early IU ore chances — first resource rod+. */
     private static void rollStarterTerrainAndOres(List<ItemStack> list, RandomSource random) {
-        if (random.nextFloat() < 0.18f) list.add(new ItemStack(Items.CLAY_BALL, 1 + random.nextInt(2)));
-        if (random.nextFloat() < 0.16f) list.add(new ItemStack(Items.GRAVEL, 1 + random.nextInt(2)));
-        if (random.nextFloat() < 0.16f) list.add(new ItemStack(Items.SAND, 1 + random.nextInt(2)));
-        if (random.nextFloat() < 0.16f) list.add(new ItemStack(Items.COBBLESTONE, 2 + random.nextInt(2)));
-        if (random.nextFloat() < 0.16f) list.add(new ItemStack(Items.REDSTONE, 1 + random.nextInt(2)));
+        if (random.nextFloat() < 0.16f) list.add(new ItemStack(Items.REDSTONE_ORE, 1));
         if (random.nextFloat() < 0.14f) {
             Item[] ores = {Items.IRON_ORE, Items.COPPER_ORE, Items.COAL_ORE, Items.REDSTONE_ORE};
             list.add(new ItemStack(ores[random.nextInt(ores.length)], 1));
@@ -553,9 +539,6 @@ public class FishingLootHandler {
         addIuChance(list, random, 0.12f, "industrialupgrade:baseore2/barium", Items.IRON_ORE, 1);
         addIuChance(list, random, 0.12f, "industrialupgrade:baseore2/thallium", Items.IRON_ORE, 1);
         addIuChance(list, random, 0.04f, "industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1);
-        if (random.nextFloat() < 0.14f) list.add(new ItemStack(Items.OAK_LOG, 1 + random.nextInt(2)));
-        if (random.nextFloat() < 0.12f) list.add(new ItemStack(Items.OAK_SAPLING, 1));
-        if (random.nextFloat() < 0.14f) list.add(new ItemStack(Items.DIRT, 1 + random.nextInt(2)));
     }
 
     /** Ore-only metal rolls — never ingots / raw. */
@@ -611,56 +594,15 @@ public class FishingLootHandler {
     }
 
     private static void rollIuEarly(List<ItemStack> list, RandomSource random, float chanceMult) {
-        // kept for binary compat of any callers — redirect
         rollIuBasics(list, random, Math.round((chanceMult - 1.0f) / 0.08f));
     }
 
     private static void rollIuBeesAndRubber(List<ItemStack> list, RandomSource random, int tier) {
-        float beeChance = tier >= AquaTechFishingRodItem.RodType.DIAMOND.ordinal() ? 0.22f : 0.10f;
-        addIuChance(list, random, beeChance, "industrialupgrade:jar_bee/bees", Items.HONEYCOMB, 1);
-        if (random.nextFloat() < beeChance * 0.7f) {
-            String[] bees = {
-                    "industrialupgrade:jar_bee/forest_bee",
-                    "industrialupgrade:jar_bee/plains_bee",
-                    "industrialupgrade:jar_bee/swamp_bee",
-                    "industrialupgrade:jar_bee/tropical_bee",
-                    "industrialupgrade:jar_bee/winter_bee"
-            };
-            addIuChance(list, random, 1.0f, bees[random.nextInt(bees.length)], Items.HONEYCOMB, 1);
-        }
-        addIuChance(list, random, 0.35f, "industrialupgrade:crafting_elements/crafting_290_element", Items.SLIME_BALL, 1 + random.nextInt(2));
-        addIuChance(list, random, 0.30f, "industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 1 + random.nextInt(2));
-        addIuChance(list, random, 0.20f, "industrialupgrade:cultivated_peat", Items.COAL, 1 + random.nextInt(2));
-        if (tier >= AquaTechFishingRodItem.RodType.PRISMARINE.ordinal()) {
-            addIuChance(list, random, 0.12f, "industrialupgrade:tools/latex_pipette", Items.GLASS_BOTTLE, 1);
-            addIuChance(list, random, 0.10f, "industrialupgrade:sensor/sensor_oil", Items.COMPASS, 1);
-        }
+        // Disabled — fishing drops ores exclusively
     }
 
     private static void rollIuOil(List<ItemStack> list, RandomSource random, int tier) {
-        // Diamond–Prismarine: crude; Thermal+: more crude + blackoil; Abyssal: refined
-        float crudeChance = tier >= AquaTechFishingRodItem.RodType.THERMAL.ordinal() ? 0.22f : 0.12f;
-        if (tier >= AquaTechFishingRodItem.RodType.ENDER.ordinal()) crudeChance = 0.28f;
-        if (tier >= AquaTechFishingRodItem.RodType.ABYSSAL.ordinal()) crudeChance = 0.35f;
-
-        String[] crude = {
-                "industrialupgrade:bucket/sour_light_oil",
-                "industrialupgrade:bucket/sweet_medium_oil",
-                "industrialupgrade:bucket/sour_medium_oil",
-                "industrialupgrade:bucket/sweet_heavy_oil",
-                "industrialupgrade:bucket/sour_heavy_oil"
-        };
-        if (random.nextFloat() < crudeChance) {
-            list.add(getModItem(crude[random.nextInt(crude.length)], Items.LAVA_BUCKET, 1));
-        }
-        if (tier >= AquaTechFishingRodItem.RodType.THERMAL.ordinal()) {
-            addIuChance(list, random, 0.14f, "industrialupgrade:bucket/blackoil", Items.LAVA_BUCKET, 1);
-            addIuChance(list, random, 0.08f, "industrialupgrade:bucket/industrialoil", Items.LAVA_BUCKET, 1);
-        }
-        if (tier >= AquaTechFishingRodItem.RodType.ABYSSAL.ordinal()) {
-            addIuChance(list, random, 0.12f, "industrialupgrade:bucket/motoroil", Items.LAVA_BUCKET, 1);
-            addIuChance(list, random, 0.10f, "industrialupgrade:bucket/industrialoil", Items.LAVA_BUCKET, 1);
-        }
+        // Disabled — fishing drops ores exclusively
     }
 
     private static void rollIuMinerals(List<ItemStack> list, RandomSource random, int tier) {
