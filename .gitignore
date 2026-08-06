@@ -22,7 +22,7 @@ dist/
 !mods/aquatech-ui/**/*.jar
 tools/*.zip
 
-# Server specific exclusions (track server configs/scripts/mods, ignore heavy world backups & logs)
+# Server specific exclusions (track server configs/scripts/mods/cores, ignore heavy world backups & logs)
 server/logs/
 server/crash-reports/
 server/world_backup_*/
@@ -32,6 +32,7 @@ server/*.log
 server/java17/
 server/java21/
 server/libraries/
+!server/*.jar
 
 # Python / temp clutter
 __pycache__/
