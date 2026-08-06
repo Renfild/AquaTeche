@@ -3,6 +3,8 @@ package net.aquatech.ui.capability;
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.registry.ModItems;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -41,25 +43,28 @@ public class CapabilityEvents {
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer serverPlayer)) return;
+        net.aquatech.ui.network.NetworkHandler.markJoined(serverPlayer);
+        MinecraftServer server = serverPlayer.getServer();
+        if (server == null) return;
 
-        serverPlayer.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
-            // 1. Sync skill tree state to client on every login.
-            net.aquatech.ui.network.NetworkHandler.CHANNEL.send(
-                    net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> serverPlayer),
-                    new net.aquatech.ui.network.S2CSyncSkillsPacket(cap));
+        server.tell(new TickTask(server.getTickCount() + net.aquatech.ui.network.NetworkHandler.LOGIN_READY_DELAY_TICKS, () -> {
+            if (serverPlayer.hasDisconnected()) return;
+            if (!net.aquatech.ui.network.NetworkHandler.canReceivePlayPackets(serverPlayer)) return;
 
-            // 2. Fail-safe starter kit — granted exactly once if the player has not
-            //    received it yet (guards against the Essentials kit: tools bug and
-            //    re-grants after a server migration).
-            if (!cap.isStarterKitReceived()) {
-                grantStarterKit(serverPlayer);
-                cap.markStarterKitReceived();
-                // Re-sync so the client sees the updated flag immediately.
+            serverPlayer.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
                 net.aquatech.ui.network.NetworkHandler.CHANNEL.send(
                         net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> serverPlayer),
                         new net.aquatech.ui.network.S2CSyncSkillsPacket(cap));
-            }
-        });
+
+                if (!cap.isStarterKitReceived()) {
+                    grantStarterKit(serverPlayer);
+                    cap.markStarterKitReceived();
+                    net.aquatech.ui.network.NetworkHandler.CHANNEL.send(
+                            net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> serverPlayer),
+                            new net.aquatech.ui.network.S2CSyncSkillsPacket(cap));
+                }
+            });
+        }));
     }
 
     // -------------------------------------------------------------------------

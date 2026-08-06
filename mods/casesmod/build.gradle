@@ -34,6 +34,10 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
 jar {
     manifest {
         attributes([
@@ -45,4 +49,5 @@ jar {
             'Implementation-Vendor' : 'casesmod'
         ])
     }
+    finalizedBy 'reobfJar'
 }

@@ -57,12 +57,15 @@ public class OpenCaseC2SPacket {
             CaseItem won = rollWithPity(def, player);
             if (won == null) return;
 
-            // Приз сразу падает в инвентарь; если инвентарь полон — выпадает на землю рядом с игроком.
-            ResourceLocation itemLoc = new ResourceLocation(won.itemId);
-            Item item = BuiltInRegistries.ITEM.get(itemLoc);
-            ItemStack reward = new ItemStack(item, won.count);
-            if (!player.getInventory().add(reward)) {
-                player.drop(reward, false);
+            if (won.itemId != null && !won.itemId.isEmpty() && !won.itemId.equals("minecraft:air") && !won.itemId.equals("air")) {
+                ResourceLocation itemLoc = new ResourceLocation(won.itemId);
+                Item item = BuiltInRegistries.ITEM.get(itemLoc);
+                if (item != null && item != net.minecraft.world.item.Items.AIR) {
+                    ItemStack reward = new ItemStack(item, won.count);
+                    if (!player.getInventory().add(reward)) {
+                        player.drop(reward, false);
+                    }
+                }
             }
             if (won.command != null && !won.command.isEmpty()) {
                 String cmd = won.command.replace("%player%", player.getGameProfile().getName());
