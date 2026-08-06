@@ -46,10 +46,9 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
     public static final int MAX_RECEIVE = 1000;
     public static final int ENERGY_PER_TICK = 25;
     public static final int MAX_PROGRESS = 100;
-    /** Rod=0, output 1..4 (2×2), upgrade=5, rate=6. */
+    /** Rod=0, output 1..4 (2×2), upgrade=5. */
     public static final int UPGRADE_SLOT = 5;
-    public static final int RATE_SLOT = 6;
-    public static final int SLOT_COUNT = 7;
+    public static final int SLOT_COUNT = 6;
 
     private final CustomEnergyStorage energyStorage = new CustomEnergyStorage(CAPACITY, MAX_RECEIVE, 0);
     private final LazyOptional<IEnergyStorage> energyOptional = LazyOptional.of(() -> energyStorage);
@@ -68,7 +67,6 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             }
             if (slot >= 1 && slot <= 4) return true; // output
             if (slot == UPGRADE_SLOT) return stack.getItem() instanceof UpgradeItem;
-            if (slot == RATE_SLOT) return stack.getItem() instanceof net.aquatech.ui.item.RateModItem;
             return false;
         }
     };
@@ -103,10 +101,12 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> energyStorage.getEnergyStored();
-                    case 1 -> energyStorage.getMaxEnergyStored();
-                    case 2 -> progress;
-                    case 3 -> MAX_PROGRESS;
+                    case 0 -> energyStorage.getEnergyStored() & 0xFFFF;
+                    case 1 -> (energyStorage.getEnergyStored() >> 16) & 0xFFFF;
+                    case 2 -> energyStorage.getMaxEnergyStored() & 0xFFFF;
+                    case 3 -> (energyStorage.getMaxEnergyStored() >> 16) & 0xFFFF;
+                    case 4 -> progress;
+                    case 5 -> MAX_PROGRESS;
                     default -> 0;
                 };
             }
@@ -114,14 +114,13 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> energyStorage.setEnergy(value);
-                    case 2 -> progress = value;
+                    case 4 -> progress = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 4;
+                return 6;
             }
         };
     }
@@ -188,12 +187,7 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         List<ItemStack> loot;
         AquaTechFishingRodItem.RodType rodType = FishingRodCompat.resolveRodType(rodStack);
         int rodRate = FishingLootHandler.readRateMultiplier(rodStack);
-        int machineRate = 1;
-        ItemStack rateStack = itemHandler.getStackInSlot(RATE_SLOT);
-        if (rateStack.getItem() instanceof net.aquatech.ui.item.RateModItem rate) {
-            machineRate = rate.getMultiplier();
-        }
-        int effectiveRate = Math.max(rodRate, machineRate);
+        int effectiveRate = Math.max(1, rodRate);
 
         if (rodType != null) {
             loot = FishingLootHandler.generateLoot(rodType, level.getRandom(), rodStack, nearby, effectiveRate);

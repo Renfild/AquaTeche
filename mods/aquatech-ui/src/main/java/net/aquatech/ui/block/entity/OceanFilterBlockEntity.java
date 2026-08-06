@@ -98,10 +98,12 @@ public class OceanFilterBlockEntity extends BlockEntity implements MenuProvider 
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> energyStorage.getEnergyStored();
-                    case 1 -> energyStorage.getMaxEnergyStored();
-                    case 2 -> progress;
-                    case 3 -> MAX_PROGRESS;
+                    case 0 -> energyStorage.getEnergyStored() & 0xFFFF;
+                    case 1 -> (energyStorage.getEnergyStored() >> 16) & 0xFFFF;
+                    case 2 -> energyStorage.getMaxEnergyStored() & 0xFFFF;
+                    case 3 -> (energyStorage.getMaxEnergyStored() >> 16) & 0xFFFF;
+                    case 4 -> progress;
+                    case 5 -> MAX_PROGRESS;
                     default -> 0;
                 };
             }
@@ -109,14 +111,13 @@ public class OceanFilterBlockEntity extends BlockEntity implements MenuProvider 
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> energyStorage.setEnergy(value);
-                    case 2 -> progress = value;
+                    case 4 -> progress = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 4;
+                return 6;
             }
         };
     }

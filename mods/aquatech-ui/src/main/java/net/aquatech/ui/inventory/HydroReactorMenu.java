@@ -24,7 +24,7 @@ public class HydroReactorMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public HydroReactorMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(6));
     }
 
     public HydroReactorMenu(int containerId, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -55,27 +55,31 @@ public class HydroReactorMenu extends AbstractContainerMenu {
     }
 
     public boolean isBurning() {
-        return data.get(2) > 0;
+        return data.get(4) > 0;
     }
 
     public int getScaledBurn() {
-        int burn = this.data.get(2);
-        int maxBurn = this.data.get(3);
+        int burn = this.data.get(4);
+        int maxBurn = this.data.get(5);
         return maxBurn != 0 && burn != 0 ? burn * 24 / maxBurn : 0;
     }
 
     public int getScaledEnergy() {
-        int energy = this.data.get(0);
-        int maxEnergy = this.data.get(1);
+        int energy = getEnergy();
+        int maxEnergy = getMaxEnergy();
         return maxEnergy != 0 && energy != 0 ? energy * 52 / maxEnergy : 0;
     }
 
     public int getEnergy() {
-        return this.data.get(0);
+        int low = this.data.get(0) & 0xFFFF;
+        int high = this.data.get(1) & 0xFFFF;
+        return (high << 16) | low;
     }
 
     public int getMaxEnergy() {
-        return this.data.get(1);
+        int low = this.data.get(2) & 0xFFFF;
+        int high = this.data.get(3) & 0xFFFF;
+        return (high << 16) | low;
     }
 
     @Override
