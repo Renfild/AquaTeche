@@ -1,1 +1,8 @@
 server/*.jar filter=lfs diff=lfs merge=lfs -text
+server/java17/jdk-17.0.10+7/lib/src.zip filter=lfs diff=lfs merge=lfs -text
+server/java21/jdk-21.0.7+6/lib/modules filter=lfs diff=lfs merge=lfs -text
+server/java21/jdk-21.0.7+6/lib/src.zip filter=lfs diff=lfs merge=lfs -text
+server/libraries/net/minecraft/server/1.20.1/server-1.20.1.jar filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.dll filter=lfs diff=lfs merge=lfs -text
+server/java17/jdk-17.0.10+7/lib/modules filter=lfs diff=lfs merge=lfs -text
