@@ -144,6 +144,7 @@
 | **2026-08-05** | `v1.7.4` | Antigravity AI | Добавлены расширенные двойные пробелы между всеми словами подписей в `FishingOreTooltips.java` для устранения визуального слипания слов при юникод-шрифте. | `FishingOreTooltips.java`, `aquatech_ui-1.0.0.jar` |
 | **2026-08-05** | `v1.7.5` | Antigravity AI | Отвязаны бинды клавиш `I` (Industrial Upgrade) и `O` (Avaritia config) в `options.txt`, добавлен перехват `ClientChatReceivedEvent` для глушения приветственного сообщения IU в чате при входе. | `options.txt`, `ClientEvents.java`, `aquatech_ui-1.0.0.jar` |
 | **2026-08-05** | `v1.7.6` | Antigravity AI | Стандартизирована единая энергосистема FE (Forge Energy) для механизмов AquaTech, Draconic Evolution, Avaritia и AE2; обновлены тексты интерфейса с EU/t на FE/t. | `ru_ru.json`, `en_us.json`, `aquatech_ui-1.0.0.jar` |
+| **2026-08-06** | `v1.8.0` | Antigravity AI | Обновлен GUI Рынка Рыбы (`fish_market.png`), открытие сделано через NPC, исправлен сборщик `reobfJar` под Java 17 (фикс `NoSuchFieldError`), добавлены русские варпы, `/casesmod listwarps` и команды добавления денег/привилегий в кейсы (`/casesmod addcasemoney`, `/casesmod addcasecmd`). | `FishMarketScreen.java`, `MainMenuScreen.java`, `MenuCommands.java`, `casesmod/build.gradle` |
 
 
 
