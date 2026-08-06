@@ -1,0 +1,9 @@
+name: skipper
+permissions:
+- aquatech.horizon.skipper
+- essentials.sethome.multiple.skipper
+parents:
+- sailor
+prefixes:
+- " ":
+    priority: 40

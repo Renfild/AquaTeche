@@ -1,0 +1,12 @@
+name: legend
+permissions:
+- aquatech.horizon.legend
+- essentials.fly
+- essentials.hat
+- essentials.nick
+- essentials.sethome.multiple.legend
+parents:
+- default
+prefixes:
+- " ":
+    priority: 50

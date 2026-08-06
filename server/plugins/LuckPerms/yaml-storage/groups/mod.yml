@@ -1,0 +1,11 @@
+name: mod
+permissions:
+- essentials.ban
+- essentials.kick
+- essentials.mute
+- essentials.tp
+parents:
+- default
+prefixes:
+- " ":
+    priority: 60

@@ -1,0 +1,8 @@
+name: npc
+permissions:
+- permission: aquatech.rank.npc
+parents:
+- default
+prefixes:
+- " ":
+    priority: 5

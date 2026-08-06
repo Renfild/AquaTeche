@@ -1,0 +1,40 @@
+# AquaTech ajLeaderboards — Horizon Route boards
+# Run as op once (creates boards):
+#
+#   /ajlb add statistic_fish_caught alltime
+#   /ajlb add statistic_fish_caught daily
+#   /ajlb add statistic_play_one_minute alltime
+#   /ajlb add statistic_walk_on_water_one_cm alltime
+#   /ajlb add statistic_swim_one_cm alltime
+#
+# Hologram / sign placeholders (example top-1 fish):
+#   %ajlb_lb_statistic_fish_caught_alltime_1_name%
+#   %ajlb_lb_statistic_fish_caught_alltime_1_value%
+#
+# Recommended harbor podium:
+#   1) Улов за всё время
+#   2) Улов за сутки (гонка контрактов)
+#   3) Время в игре
+#   4) Плавание / ходьба по воде
+
+boards_planned:
+  - id: statistic_fish_caught
+    board: alltime
+    title: "Улов флота"
+  - id: statistic_fish_caught
+    board: daily
+    title: "Улов суток"
+  - id: statistic_play_one_minute
+    board: alltime
+    title: "Вахта"
+  - id: statistic_swim_one_cm
+    board: alltime
+    title: "Глубины"
+  - id: statistic_walk_on_water_one_cm
+    board: alltime
+    title: "По волнам"
+
+notes: |
+  Cosmetics ranks (sailor→legend) are LuckPerms-only.
+  VIP is convenience/cosmetics — no fishing power, no FE multipliers.
+  Weekend storm: /aquatech storm on|off

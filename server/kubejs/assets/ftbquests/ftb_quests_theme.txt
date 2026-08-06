@@ -1,0 +1,237 @@
+[*]
+# AquaTech ocean theme — soft deep-water palette for FTB Quests
+background:          ftblibrary:textures/gui/background_squares.png; color=#B41A3A5C; tile_size=64
+chapter_panel_background: ftblibrary:textures/gui/background_squares.png; color=#E80E2438; tile_size=64
+key_reference_background: ftblibrary:textures/gui/background_squares.png; color=#D0142A42; tile_size=64
+extra_quest_shapes:  diamond, pentagon, hexagon, octagon, heart, gear
+
+text_color:          #E8F4FF
+hover_text_color:    #7FDBFF
+disabled_text_color: #6B8499
+
+widget_border:     #1A5F7A
+widget_background: #66081428
+symbol_in:         #3DDC97
+symbol_out:        #1A8A5C
+
+button:                hollow_rectangle:{{widget_border}}
+panel:                 {{container_slot}}
+disabled_button:       hollow_rectangle:{{widget_border}}
+hover_button:          {{button}} + {{widget_background}}; padding=1
+context_menu:          hollow_rectangle:{{widget_border}}; round_edges + {{background}}; color=#A61A3A5C; padding=1
+scroll_bar_background: {{widget_background}}
+scroll_bar:            {{button}} + {{widget_background}}; padding=1
+container_slot:        {{button}}; padding=-1
+text_box:              part:minecraft:textures/gui/container/enchanting_table.png; pos=0,185,108,19; corner=6
+
+icon:                 none
+check_icon:           builtin
+add_icon:             builtin
+alert_icon:           ftbquests:textures/gui/alert.png
+support_icon:         ftblibrary:textures/icons/support.png
+wiki_icon:            ftbquests:textures/gui/info.png
+wiki_url:             -
+pin_icon_on:          ftbquests:textures/gui/pin.png; color=#7FDBFF
+pin_icon_off:         ftbquests:textures/gui/pin.png; color=#8AA4B8
+editor_icon_on:       ftbquests:textures/gui/editor.png; color=#7FDBFF
+editor_icon_off:      ftbquests:textures/gui/editor.png; color=#8AA4B8
+hidden_icon:          ftbquests:textures/gui/hidden.png; color=#8AA4B8
+link_icon:            ftbquests:textures/gui/link.png; color=#8AA4B8
+save_icon:            ftbquests:textures/gui/save.png
+settings_icon:        ftbquests:textures/gui/settings.png
+prefs_icon:           ftblibrary:icons/player
+close_icon:           ftbquests:textures/gui/close.png
+emergency_items_icon: ftbquests:textures/gui/emergency_items.png; color=#A8E6FF
+guide_icon:           ftbquests:textures/gui/guide.png; color=#57C5B6
+modpack_icon:         ftbquests:textures/item/book.png
+reward_table_icon:    ftblibrary:icons/money_bag
+shop_icon:            ftbquests:textures/gui/shop.png; color=#57C5B6
+collect_rewards_icon: ftbquests:textures/gui/collect_rewards.png; color=#57C5B6
+delete_icon:          ftblibrary:icons/remove
+reload_icon:          ftblibrary:icons/refresh
+download_icon:        ftblibrary:icons/down
+edit_icon:            ftblibrary:icons/settings
+move_up_icon:         ftblibrary:icons/up
+move_down_icon:       ftblibrary:icons/down
+left_arrow:           ftblibrary:icons/left
+right_arrow:          ftblibrary:icons/right
+
+full_screen_quest:                  0
+tasks_text_color:                   #7FDBFF
+rewards_text_color:                 #FFD166
+quest_view_background:              {{context_menu}}
+quest_view_border:                  {{widget_border}}
+quest_view_title:                   #A8E6FF
+quest_completed_color:              #C83DDC97
+quest_started_color:                #C87FDBFF
+quest_not_started_color:            #96E8F4FF
+quest_locked_color:                 #FF5A7080
+dependency_line_texture:            ftbquests:textures/gui/dependency.png
+dependency_line_completed_color:    #3DDC97
+dependency_line_uncompleted_color:  #B47A3A4A
+dependency_line_requires_color:     #57C5B6
+dependency_line_required_for_color: #FFD166
+dependency_line_selected_speed:     1.0
+dependency_line_unselected_speed:   0.0
+dependency_line_thickness:          0.18
+quest_spacing:                      1.0
+pinned_quest_size:                  0.75
+selected_chapter_highlight_1:       #407FDBFF
+selected_chapter_highlight_2:       #2057C5B6
+
+checkmark_task_active:   ftblibrary:icons/accept
+checkmark_task_inactive: ftblibrary:icons/accept_gray
+
+# Optional manual tags
+[#ocean]
+quest_started_color:     #C800C8FF
+quest_completed_color:   #C800E5A8
+[#abyss]
+quest_started_color:     #C89B5DE0
+quest_completed_color:   #C8E056A0
+
+# --- Per-theme quest outline colors (add tag without # on quests/chapters via script) ---
+[#horizon]
+quest_started_color:     #C8FFD166
+quest_completed_color:   #C8FF9F1C
+dependency_line_completed_color: #FFD166
+
+[#catastrophe]
+quest_started_color:     #C8FF6B6B
+quest_completed_color:   #C8C92A2A
+dependency_line_completed_color: #E03131
+
+[#catch]
+quest_started_color:     #C84DABF7
+quest_completed_color:   #C81C7ED6
+dependency_line_completed_color: #339AF0
+
+[#atoll]
+quest_started_color:     #C869DB7C
+quest_completed_color:   #C82F9E44
+dependency_line_completed_color: #40C057
+
+[#roost]
+quest_started_color:     #C8FFC078
+quest_completed_color:   #C8F08C00
+dependency_line_completed_color: #FD7E14
+
+[#swarm]
+quest_started_color:     #C8FFE066
+quest_completed_color:   #C8FAB005
+dependency_line_completed_color: #FCC419
+
+[#kinetics]
+quest_started_color:     #C874C0FC
+quest_completed_color:   #C81C7ED6
+dependency_line_completed_color: #4DABF7
+
+[#steam]
+quest_started_color:     #C8ADB5BD
+quest_completed_color:   #C8495057
+dependency_line_completed_color: #868E96
+
+[#power]
+quest_started_color:     #C8FF6B6B
+quest_completed_color:   #C8E03131
+dependency_line_completed_color: #FA5252
+
+[#industry]
+quest_started_color:     #C8FFA94D
+quest_completed_color:   #C8E8590C
+dependency_line_completed_color: #FD7E14
+
+[#depths]
+quest_started_color:     #C83BC9DB
+quest_completed_color:   #C80B7285
+dependency_line_completed_color: #15AABF
+
+[#me]
+quest_started_color:     #C8B197FC
+quest_completed_color:   #C87043D6
+dependency_line_completed_color: #9775FA
+
+[#dreadnought]
+quest_started_color:     #C8E599F7
+quest_completed_color:   #C89C36B5
+dependency_line_completed_color: #CC5DE8
+
+[#ws_bees]
+quest_started_color:     #C8FFE066
+quest_completed_color:   #C8F59F00
+dependency_line_completed_color: #FAB005
+
+[#ws_roost]
+quest_started_color:     #C8FFC9C9
+quest_completed_color:   #C8FA5252
+dependency_line_completed_color: #FF8787
+
+[#ws_mystical]
+quest_started_color:     #C8B2F2BB
+quest_completed_color:   #C837B24D
+dependency_line_completed_color: #51CF66
+
+[#ws_create]
+quest_started_color:     #C8A5D8FF
+quest_completed_color:   #C81C7ED6
+dependency_line_completed_color: #4DABF7
+
+[#ws_atoll]
+quest_started_color:     #C896F2D7
+quest_completed_color:   #C80CA678
+dependency_line_completed_color: #20C997
+
+[#ws_rituals]
+quest_started_color:     #C874C0FC
+quest_completed_color:   #C8364FC7
+dependency_line_completed_color: #5C7CFA
+
+[#ws_mek]
+quest_started_color:     #C8FFA8A8
+quest_completed_color:   #C8C92A2A
+dependency_line_completed_color: #FF6B6B
+
+[#ws_ae2]
+quest_started_color:     #C8D0BFFF
+quest_completed_color:   #C87950F2
+dependency_line_completed_color: #9775FA
+
+[#ws_thermal]
+quest_started_color:     #C8FFD8A8
+quest_completed_color:   #C8E67700
+dependency_line_completed_color: #FF922B
+
+[#ws_if]
+quest_started_color:     #C8C3FAE8
+quest_completed_color:     #C812B886
+dependency_line_completed_color: #20C997
+
+[#ws_apoth]
+quest_started_color:     #C8E5DBFF
+quest_completed_color:   #C87950F2
+dependency_line_completed_color: #B197FC
+
+[#ws_enderio]
+quest_started_color:     #C8B2F2BB
+quest_completed_color:   #C837B24D
+dependency_line_completed_color: #69DB7C
+
+[#ws_avaritia]
+quest_started_color:     #C8FFC9C9
+quest_completed_color:   #C8FA0000
+dependency_line_completed_color: #FF6B6B
+
+[#ws_draconic]
+quest_started_color:     #C8E599F7
+quest_completed_color:   #C89C36B5
+dependency_line_completed_color: #DA77F2
+
+[#ws_botania]
+quest_started_color:     #C8D8F5A2
+quest_completed_color:   #C874B816
+dependency_line_completed_color: #94D82D
+
+[#ws_iu]
+quest_started_color:     #C8FFEC99
+quest_completed_color:   #C8F08C00
+dependency_line_completed_color: #FCC419

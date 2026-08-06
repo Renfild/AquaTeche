@@ -1,0 +1,20 @@
+{
+  "criteria": {
+    "catch": {
+      "trigger": "minecraft:fishing_rod_hooked",
+      "conditions": {
+        "rod": {
+          "items": [
+            "minecraft:fishing_rod"
+          ]
+        },
+        "entity": {
+          "type": "minecraft:item"
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "aqrod:catch/main"
+  }
+}

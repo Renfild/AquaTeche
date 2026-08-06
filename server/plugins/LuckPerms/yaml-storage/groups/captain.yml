@@ -1,0 +1,10 @@
+name: captain
+permissions:
+- aquatech.horizon.captain
+- essentials.fly
+- essentials.sethome.multiple.captain
+parents:
+- skipper
+prefixes:
+- " ":
+    priority: 45

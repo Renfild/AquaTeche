@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "item": "industrialupgrade:book/guide_book",
+      "count": 1
+    },
+    {
+      "item": "industrialupgrade:forge_hammer",
+      "count": 1
+    },
+    {
+      "item": "industrialupgrade:tools/treetap",
+      "count": 1
+    },
+    {
+      "item": "industrialupgrade:cutter",
+      "count": 1
+    },
+    {
+      "item": "aquatech_ui:novice_fishing_rod",
+      "count": 1
+    },
+    {
+      "item": "minecraft:oak_chest_boat",
+      "count": 1
+    },
+    {
+      "item": "minecraft:bread",
+      "count": 16
+    },
+    {
+      "item": "minecraft:oak_sapling",
+      "count": 4
+    },
+    {
+      "item": "minecraft:oak_log",
+      "count": 16
+    },
+    {
+      "item": "minecraft:bone_meal",
+      "count": 8
+    },
+    {
+      "item": "minecraft:torch",
+      "count": 16
+    },
+    {
+      "item": "ftbquests:book",
+      "count": 1
+    }
+  ]
+}

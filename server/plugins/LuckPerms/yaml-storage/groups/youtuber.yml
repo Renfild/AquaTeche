@@ -1,0 +1,8 @@
+name: youtuber
+permissions:
+- permission: aquatech.rank.youtuber
+parents:
+- default
+prefixes:
+- " ":
+    priority: 34

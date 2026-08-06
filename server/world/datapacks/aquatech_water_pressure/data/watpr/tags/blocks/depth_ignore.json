@@ -1,0 +1,13 @@
+{
+    "values": [
+        "minecraft:water",
+        "#minecraft:ice",
+        "#minecraft:snow",
+        "minecraft:prismarine",
+        "minecraft:dark_prismarine",
+        "minecraft:prismarine_bricks",
+        "minecraft:sea_lantern",
+        "minecraft:wet_sponge",
+        "#minecraft:coral_blocks"
+    ]
+}

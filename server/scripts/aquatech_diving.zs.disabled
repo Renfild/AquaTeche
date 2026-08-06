@@ -1,0 +1,15 @@
+// AquaTech: Ocean Horizon - Deep Diving Progression
+// Removes vanilla shortcuts for surviving underwater so players must rely on
+// crafted diving gear (Hybrid Aquatic's Diving / Reinforced Diving suits) and
+// armor + toughness to push past the Water Pressure depth limit.
+import crafttweaker.api.recipe.Brewing;
+
+print("===============================================");
+print("   AquaTech: Loading Deep Diving tweaks");
+print("===============================================");
+
+// No more brewing your way to infinite underwater breathing.
+// (Vanilla Respiration/Aqua Affinity/Depth Strider enchants are blocked separately
+// via the Enchantment Disable Tag datapack.)
+brewing.removeRecipeByOutputPotion(<potion:minecraft:water_breathing>);
+brewing.removeRecipeByOutputPotion(<potion:minecraft:long_water_breathing>);

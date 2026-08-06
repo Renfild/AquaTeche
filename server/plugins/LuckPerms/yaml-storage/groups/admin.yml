@@ -1,0 +1,9 @@
+name: admin
+permissions:
+- worldedit.*
+- worldguard.*
+parents:
+- mod
+prefixes:
+- " ":
+    priority: 80

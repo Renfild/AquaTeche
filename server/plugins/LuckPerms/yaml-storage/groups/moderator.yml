@@ -1,0 +1,8 @@
+name: moderator
+permissions:
+- essentials.spawn
+parents:
+- default
+prefixes:
+- " ":
+    priority: 60

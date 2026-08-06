@@ -1,0 +1,28 @@
+#
+# AquaTech Harbor guide hologram
+# Place with: /dh create harbor_guide
+# Or load this file into plugins/DecentHolograms/holograms/
+#
+location: world:0.500:102.000:-16.500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '&b&l≋ ГАВАНЬ ГОРИЗОНТА ≋'
+    height: 0.3
+  - content: '&7Маршрут флота · статус · ежедневки'
+    height: 0.25
+  - content: '&f/aquatech horizon &8— твой Горизонт'
+    height: 0.25
+  - content: '&f/aquatech daily &8— контракт дня'
+    height: 0.25
+  - content: '&f/aquatech season &8— уровень сезона'
+    height: 0.25
+  - content: '&e/warp pier &7· &emarket &7· &eatoll &7· &espawn'
+    height: 0.25
+  - content: '&9Шторм выходного: &f/aquatech storm status'
+    height: 0.25

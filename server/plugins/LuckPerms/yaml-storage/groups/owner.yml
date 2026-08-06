@@ -1,0 +1,8 @@
+name: owner
+permissions:
+- '*'
+parents:
+- admin
+prefixes:
+- " ":
+    priority: 100

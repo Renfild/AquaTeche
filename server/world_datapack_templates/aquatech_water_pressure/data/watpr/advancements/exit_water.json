@@ -1,0 +1,21 @@
+{
+	"criteria": {
+		"requirement": {
+			"trigger": "minecraft:enter_block",
+			"conditions": {
+				"player": [
+					{
+						"condition": "minecraft:inverted",
+						"term": {
+							"condition": "minecraft:reference",
+							"name": "watpr:water"
+						}
+					}
+				]
+			}
+		}
+	},
+	"rewards": {
+		"function": "watpr:exit_water"
+	}
+}

@@ -1,0 +1,10 @@
+# Requires: world name matching server (default "world")
+# After placing, run: /ess reload  OR restart
+# Then fine-tune with /setwarp <name> while standing there.
+
+world: world
+x: 0.5
+y: 100.0
+z: 0.5
+yaw: 0.0
+pitch: 0.0

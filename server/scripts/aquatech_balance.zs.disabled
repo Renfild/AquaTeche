@@ -1,0 +1,50 @@
+# AquaTech progression balance — gate expensive Roost / Mystical Agriculture shortcuts
+# so the quest spine stays the recommended cheapest path.
+# CraftTweaker 1.20.1 / Forge
+
+print("[AquaTech] Loading aquatech_balance.zs");
+
+// --- Mystical Agriculture: late ores gated behind Industry / Power machines ---
+craftingTable.removeByName("mysticalagriculture:essence/minecraft/netherite_ingot");
+craftingTable.removeByName("mysticalagriculture:essence/common/netherite_ingot");
+craftingTable.removeByName("mysticalagriculture:essence/mekanism/uranium_ingot");
+craftingTable.removeByName("mysticalagriculture:essence/common/uranium_ingot");
+craftingTable.removeByName("mysticalagriculture:essence/mekanism/uranium");
+
+craftingTable.addShaped("aquatech_ma_netherite_gated", <item:minecraft:netherite_ingot>, [
+    [<item:mysticalagriculture:netherite_essence>, <item:mysticalagriculture:netherite_essence>, <item:mysticalagriculture:netherite_essence>],
+    [<item:mysticalagriculture:netherite_essence>, <item:industrialforegoing:machine_frame_pity>, <item:mysticalagriculture:netherite_essence>],
+    [<item:mysticalagriculture:netherite_essence>, <item:minecraft:diamond>, <item:mysticalagriculture:netherite_essence>]
+]);
+
+craftingTable.addShaped("aquatech_ma_uranium_gated", <item:mekanism:ingot_uranium> * 2, [
+    [<item:mysticalagriculture:uranium_essence>, <item:mysticalagriculture:uranium_essence>, <item:mysticalagriculture:uranium_essence>],
+    [<item:mysticalagriculture:uranium_essence>, <item:mekanism:steel_casing>, <item:mysticalagriculture:uranium_essence>],
+    [<item:mysticalagriculture:uranium_essence>, <item:mysticalagriculture:uranium_essence>, <item:mysticalagriculture:uranium_essence>]
+]);
+
+// --- Chicken Roost: netherite / uranium chickens need Create brass + high-tier food ---
+craftingTable.remove(<item:chicken_roost:c_netherite>);
+craftingTable.remove(<item:chicken_roost:c_uranium>);
+
+craftingTable.addShaped("aquatech_roost_netherite_chicken", <item:chicken_roost:c_netherite>, [
+    [<item:chicken_roost:chicken_essence_tier_7>, <item:minecraft:netherite_scrap>, <item:chicken_roost:chicken_essence_tier_7>],
+    [<item:create:brass_ingot>, <item:chicken_roost:chicken_food_tier_7>, <item:create:brass_ingot>],
+    [<item:chicken_roost:chicken_essence_tier_7>, <item:minecraft:netherite_scrap>, <item:chicken_roost:chicken_essence_tier_7>]
+]);
+
+craftingTable.addShaped("aquatech_roost_uranium_chicken", <item:chicken_roost:c_uranium>, [
+    [<item:chicken_roost:chicken_essence_tier_8>, <item:mekanism:ingot_steel>, <item:chicken_roost:chicken_essence_tier_8>],
+    [<item:create:brass_ingot>, <item:chicken_roost:chicken_food_tier_8>, <item:create:brass_ingot>],
+    [<item:chicken_roost:chicken_essence_tier_8>, <item:mekanism:ingot_uranium>, <item:chicken_roost:chicken_essence_tier_8>]
+]);
+
+// --- Soft Create gate: mechanical arm after brass (does not remove alloy basin path) ---
+craftingTable.remove(<item:create:mechanical_arm>);
+craftingTable.addShaped("aquatech_mechanical_arm_gated", <item:create:mechanical_arm>, [
+    [<item:create:brass_sheet>, <item:create:brass_sheet>, <item:create:brass_hand>],
+    [<item:create:brass_sheet>, <item:create:precision_mechanism>, <item:create:brass_sheet>],
+    [<item:create:andesite_alloy>, <item:create:brass_casing>, <item:create:andesite_alloy>]
+]);
+
+print("[AquaTech] Balance gates loaded.");

@@ -1,0 +1,2 @@
+# LuckPerms UUID lookup cache
+2102d9ae-dcb0-3598-8846-c4e76d4134fd:xietoru

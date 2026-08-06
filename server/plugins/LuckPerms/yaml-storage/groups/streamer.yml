@@ -1,0 +1,8 @@
+name: streamer
+permissions:
+- permission: aquatech.rank.streamer
+parents:
+- default
+prefixes:
+- " ":
+    priority: 35

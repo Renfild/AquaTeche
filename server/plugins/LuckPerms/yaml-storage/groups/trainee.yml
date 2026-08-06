@@ -1,0 +1,8 @@
+name: trainee
+permissions:
+- permission: aquatech.rank.trainee
+parents:
+- default
+prefixes:
+- " ":
+    priority: 18

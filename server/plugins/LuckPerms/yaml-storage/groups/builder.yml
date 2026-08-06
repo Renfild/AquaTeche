@@ -1,0 +1,8 @@
+name: builder
+permissions:
+- permission: aquatech.rank.builder
+parents:
+- default
+prefixes:
+- " ":
+    priority: 28

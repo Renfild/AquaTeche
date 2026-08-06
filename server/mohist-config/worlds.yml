@@ -1,0 +1,152 @@
+worlds:
+  world:
+    worldborder: 5.9999968E7
+    difficulty: HARD
+  triton:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  haumea:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  makemake:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  DIM1:
+    worldborder: 5.9999968E7
+  DIM-1:
+    worldborder: 5.9999968E7
+  alfheim:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: mythicbotany
+  deimos:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  neptune:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  phobos:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  europe:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  miranda:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  jupiter:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  pluto:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  mars:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  enceladus:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  mercury:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  saturn:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  dione:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  umbriel:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  earth:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  moon:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  oberon:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  rhea:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  charon:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  titan:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  ariel:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  venus:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  titania:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  uranus:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  io:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  ceres:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  eris:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  proteus:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  ganymede:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  asteroid:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  tethys:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  callisto:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade
+  mimas:
+    worldborder: 5.9999968E7
+    ismods: true
+    modName: industrialupgrade

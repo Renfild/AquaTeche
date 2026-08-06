@@ -1,0 +1,80 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:oak_log",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:spruce_log",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:birch_log",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:oak_planks",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cobblestone",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:dirt",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stick",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:string",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bone",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wheat_seeds",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_nugget",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:raw_iron",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cod",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:salmon",
+          "weight": 10
+        }
+      ]
+    }
+  ]
+}

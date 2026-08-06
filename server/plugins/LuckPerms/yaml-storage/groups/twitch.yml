@@ -1,0 +1,8 @@
+name: twitch
+permissions:
+- permission: aquatech.rank.twitch
+parents:
+- default
+prefixes:
+- " ":
+    priority: 34

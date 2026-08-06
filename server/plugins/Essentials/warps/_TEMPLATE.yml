@@ -1,0 +1,18 @@
+# AquaTech Horizon Route — Essentials warps
+# Run AFTER the server world has a spawn (or set coordinates manually).
+# Usage (as op in-game, standing at each location):
+#   /setwarp spawn
+#   /setwarp pier
+#   /setwarp market
+#   /setwarp atoll
+#   /setwarp harbor
+#
+# Or place these YAML files into plugins/Essentials/warps/ and edit x/y/z.
+
+world: world
+# Placeholder near world spawn — REPLACE after first boot
+x: 0.5
+y: 100.0
+z: 0.5
+yaw: 0.0
+pitch: 0.0

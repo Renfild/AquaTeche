@@ -1,0 +1,4 @@
+server: global
+storage-method: YAML
+split-storage:
+  enabled: false

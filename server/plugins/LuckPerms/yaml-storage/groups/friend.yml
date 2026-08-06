@@ -1,0 +1,8 @@
+name: friend
+permissions:
+- permission: aquatech.rank.friend
+parents:
+- default
+prefixes:
+- " ":
+    priority: 22

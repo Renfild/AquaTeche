@@ -1,0 +1,20 @@
+name: default
+permissions:
+- permission: essentials.spawn
+- permission: essentials.kit
+- permission: essentials.kit.starter
+- permission: essentials.home
+- permission: essentials.sethome
+- permission: essentials.delhome
+- permission: essentials.tpa
+- permission: essentials.tpaccept
+- permission: essentials.tpdeny
+- permission: essentials.pay
+- permission: essentials.balance
+- permission: essentials.msg
+- permission: essentials.r
+- permission: ftbquests.open
+parents:
+prefixes:
+- " ":
+    priority: 10

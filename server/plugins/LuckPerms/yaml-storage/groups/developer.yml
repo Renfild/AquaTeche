@@ -1,0 +1,9 @@
+name: developer
+permissions:
+- essentials.*
+- luckperms.*
+parents:
+- default
+prefixes:
+- " ":
+    priority: 75

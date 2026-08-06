@@ -13,8 +13,7 @@ mods/aquatech-ui/.gradle/
 mods/casesmod/build/
 mods/casesmod/.gradle/
 
-# Runtime / exports (keep local, don't commit noise)
-server/
+# Runtime / exports
 client/
 dist/
 *.zip
@@ -22,6 +21,17 @@ dist/
 *.jar
 !mods/aquatech-ui/**/*.jar
 tools/*.zip
+
+# Server specific exclusions (track server configs/scripts/mods, ignore heavy world backups & logs)
+server/logs/
+server/crash-reports/
+server/world_backup_*/
+server/_backup_*/
+server/*.zip
+server/*.log
+server/java17/
+server/java21/
+server/libraries/
 
 # Python / temp clutter
 __pycache__/

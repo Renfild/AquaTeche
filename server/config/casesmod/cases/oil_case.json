@@ -1,0 +1,90 @@
+{
+  "id": "oil_case",
+  "displayName": "§6§lOil Baron Crate",
+  "iconItemId": "industrialupgrade:bucket/blackoil",
+  "price": 1200,
+  "pityThreshold": 12,
+  "pityRarity": "EPIC",
+  "items": [
+    {
+      "itemId": "industrialupgrade:bucket/sour_light_oil",
+      "count": 2,
+      "weight": 20.0,
+      "rarity": "COMMON",
+      "displayName": "§7Sour Light Oil ×2",
+      "command": ""
+    },
+    {
+      "itemId": "industrialupgrade:bucket/sweet_medium_oil",
+      "count": 2,
+      "weight": 18.0,
+      "rarity": "COMMON",
+      "displayName": "§7Sweet Medium Oil ×2",
+      "command": ""
+    },
+    {
+      "itemId": "industrialupgrade:bucket/sour_medium_oil",
+      "count": 2,
+      "weight": 14.0,
+      "rarity": "UNCOMMON",
+      "displayName": "§aSour Medium Oil ×2",
+      "command": "/aquatech grantxp %player% 40"
+    },
+    {
+      "itemId": "industrialupgrade:bucket/sweet_heavy_oil",
+      "count": 2,
+      "weight": 12.0,
+      "rarity": "UNCOMMON",
+      "displayName": "§aSweet Heavy Oil ×2",
+      "command": "/aquatech grantxp %player% 50"
+    },
+    {
+      "itemId": "industrialupgrade:bucket/sour_heavy_oil",
+      "count": 2,
+      "weight": 10.0,
+      "rarity": "RARE",
+      "displayName": "§9Sour Heavy Oil ×2",
+      "command": "/aquatech grantxp %player% 80"
+    },
+    {
+      "itemId": "industrialupgrade:bucket/blackoil",
+      "count": 4,
+      "weight": 10.0,
+      "rarity": "RARE",
+      "displayName": "§9Fuel Oil ×4",
+      "command": "/aquatech grantxp %player% 100"
+    },
+    {
+      "itemId": "industrialupgrade:bucket/industrialoil",
+      "count": 2,
+      "weight": 8.0,
+      "rarity": "EPIC",
+      "displayName": "§5Industrial Oil ×2",
+      "command": "/aquatech grantxp %player% 160"
+    },
+    {
+      "itemId": "industrialupgrade:bucket/motoroil",
+      "count": 2,
+      "weight": 5.0,
+      "rarity": "EPIC",
+      "displayName": "§5Motor Oil ×2",
+      "command": "/aquatech grantxp %player% 180"
+    },
+    {
+      "itemId": "industrialupgrade:sensor/sensor_oil",
+      "count": 1,
+      "weight": 2.0,
+      "rarity": "LEGENDARY",
+      "displayName": "§6Oil Sensor",
+      "command": "/aquatech grantxp %player% 220"
+    },
+    {
+      "itemId": "industrialupgrade:basemachine3/wireless_oil_pump",
+      "count": 1,
+      "weight": 1.0,
+      "rarity": "LEGENDARY",
+      "displayName": "§6Wireless Oil Pump",
+      "command": "/aquatech grantxp %player% 400"
+    }
+  ]
+}

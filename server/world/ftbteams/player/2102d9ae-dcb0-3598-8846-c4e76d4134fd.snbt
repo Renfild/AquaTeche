@@ -1,0 +1,17 @@
+{
+	id: "2102d9ae-dcb0-3598-8846-c4e76d4134fd"
+	type: "player"
+	player_name: "xietoru"
+	ranks: {
+		2102d9ae-dcb0-3598-8846-c4e76d4134fd: "owner"
+	}
+	properties: {
+		"ftbteams:display_name": "xietoru"
+		"ftbteams:description": ""
+		"ftbteams:color": "#59FDFF"
+		"ftbteams:free_to_join": 0b
+		"ftbteams:max_msg_history_size": 1000
+	}
+	message_history: [ ]
+	extra: { }
+}

@@ -1,0 +1,8 @@
+name: helper
+permissions:
+- permission: aquatech.rank.helper
+parents:
+- default
+prefixes:
+- " ":
+    priority: 50

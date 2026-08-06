@@ -1,0 +1,18 @@
+{
+	"criteria": {
+		"requirement": {
+			"trigger": "minecraft:enter_block",
+			"conditions": {
+				"player": [
+					{
+						"condition": "reference",
+						"name": "watpr:water"
+					}
+				]
+			}
+		}
+	},
+	"rewards": {
+		"function": "watpr:enter_water"
+	}
+}

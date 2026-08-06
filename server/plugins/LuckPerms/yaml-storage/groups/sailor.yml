@@ -1,0 +1,9 @@
+name: sailor
+permissions:
+- aquatech.horizon.sailor
+- essentials.sethome.multiple.sailor
+parents:
+- default
+prefixes:
+- " ":
+    priority: 10

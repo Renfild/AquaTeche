@@ -1,0 +1,18 @@
+
+["Fishing Loot Configuration"]
+	#If true, vanilla loot will drop along with custom loot
+	#If false, only custom loot from config will drop
+	keepVanillaLoot = true
+	#Weight of vanilla fishing loot (only used when keepVanillaLoot = true)
+	#Higher value = more vanilla fish, lower value = more custom loot
+	#Default: 100 (approximately 50/50 with default custom weights)
+	#Range: 1 ~ 10000
+	vanillaWeight = 100
+	#List of fishing items in format: 'modid:item_id,weight,minCount,maxCount'
+	#Examples:
+	#  'minecraft:diamond,5,1,3' - diamonds with weight 5, from 1 to 3 items
+	#  'minecraft:iron_ingot,20,1,5' - iron ingots with weight 20, from 1 to 5 items
+	#  'minecraft:golden_apple,2,1,1' - golden apple with weight 2, 1 item
+	#Weight determines drop chance (higher weight = higher chance)
+	customLootItems = ["minecraft:iron_ingot,15,1,3", "minecraft:gold_nugget,10,2,5", "minecraft:emerald,3,1,1", "minecraft:diamond,1,1,1", "minecraft:enchanted_book,2,1,1", "minecraft:name_tag,2,1,1"]
+

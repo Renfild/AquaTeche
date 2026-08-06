@@ -1,0 +1,49 @@
+# AquaTech: Ocean Horizon - custom animations
+# Used via %animation:Name% in config.yml / groups.yml / users.yml
+
+aqua_title:
+  change-interval: 400
+  texts:
+  - '&b&lAQUATECH &8⋆ &f&lOCEAN HORIZON'
+  - '&3&lAQUATECH &8⋆ &f&lOCEAN HORIZON'
+  - '&9&lAQUATECH &8⋆ &f&lOCEAN HORIZON'
+  - '&3&lAQUATECH &8⋆ &f&lOCEAN HORIZON'
+
+depth_pulse:
+  change-interval: 500
+  texts:
+  - '&b✦ &3AQUATECH &8⋆ &bOCEAN &r'
+  - '&3✦ &bAQUATECH &8⋆ &3OCEAN &r'
+  - '&9✦ &3AQUATECH &8⋆ &9OCEAN &r'
+  - '&3✦ &bAQUATECH &8⋆ &3OCEAN &r'
+
+wave:
+  change-interval: 300
+  texts:
+  - '&9~&3≈&b~&3≈&9~&3≈&b~&3≈'
+  - '&3~&b≈&3~&9≈&3~&b≈&3~&9≈'
+  - '&b~&3≈&9~&3≈&b~&3≈&9~&3≈'
+  - '&3~&9≈&b~&3≈&9~&b≈&3~&9≈'
+
+bubbles:
+  change-interval: 450
+  texts:
+  - '&b°&3 &9o&3 &b°'
+  - '&3°&b o&9 &3°'
+  - '&9°&3 &bo&3 &9°'
+  - '&3°&9 &3o&b &3°'
+
+tip:
+  change-interval: 4000
+  texts:
+  - '&7Совет &8» &fЛови рыбу удочкой на плоту, чтобы добыть первые ресурсы'
+  - '&7Совет &8» &fКрафти &bDiving Suit&f, чтобы нырять глубже без урона'
+  - '&7Совет &8» &fДавление растёт с глубиной — броня и прочность защищают'
+  - '&7Совет &8» &fОткрывай сюжет через &e/ftbquests'
+  - '&7Совет &8» &fРедкие руды прячутся глубоко — рыбалка выгоднее на старте'
+
+online_pulse:
+  change-interval: 600
+  texts:
+  - '&b%online%'
+  - '&3%online%'

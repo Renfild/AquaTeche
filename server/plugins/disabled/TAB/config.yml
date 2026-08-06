@@ -1,0 +1,148 @@
+header-footer:
+  enabled: false
+  designs:
+    default:
+      display-condition: ''
+      header:
+      - ''
+      - '  %animation:aqua_title%  '
+      - '  %animation:wave%  '
+      - '  &8◈ &7Игроков онлайн: &b%animation:online_pulse%  &8| &7Мир: &b%world%  '
+      - ''
+      footer:
+      - ''
+      - '  %animation:tip%  '
+      - '  &8TPS: &a%tps%  &8| &8Пинг: &a%ping%мс  &8| &c❤ &f%health%  '
+      - '  &8▸ &7bk.aquatech.net  '
+      - ''
+
+tablist-name-formatting:
+  enabled: false
+  disable-condition: '%world%=disabledworld'
+
+groups:
+  owner:
+    tabprefix: '&c&l✦ &r'
+    tabsuffix: ''
+    tagprefix: '&c&l[OWNER] &r'
+    tagsuffix: ''
+  admin:
+    tabprefix: '&4&l⚑ &r'
+    tabsuffix: ''
+    tagprefix: '&4&l[ADMIN] &r'
+    tagsuffix: ''
+  developer:
+    tabprefix: '&b&l⚙ &r'
+    tabsuffix: ''
+    tagprefix: '&b&l[DEV] &r'
+    tagsuffix: ''
+  mod:
+    tabprefix: '&9&l⚐ &r'
+    tabsuffix: ''
+    tagprefix: '&9&l[MOD] &r'
+    tagsuffix: ''
+  vip:
+    tabprefix: '&e&l★ &r'
+    tabsuffix: ''
+    tagprefix: '&e&l[VIP] &r'
+    tagsuffix: ''
+  default:
+    tabprefix: '&8● &r'
+    tabsuffix: ''
+    tagprefix: '&7[Player] &r'
+    tagsuffix: ''
+  _OTHER_:
+    tabprefix: '&8● &r'
+    tabsuffix: ''
+    tagprefix: '&7[Player] &r'
+    tagsuffix: ''
+
+scoreboard:
+  enabled: false
+  toggle-command: /sb
+  remember-toggle-choice: false
+  hidden-by-default: false
+  scoreboards:
+    default:
+      title: '%animation:depth_pulse%'
+      lines:
+      - '%animation:wave%'
+      - '  &7Ник &8» &f%player%'
+      - '  &7Ранг &8» %luckperms_prefix%&r'
+      - '&8  ─────────────────'
+      - '  &7Здоровье &8» &c❤ %health%'
+      - '  &7Мир &8» &b%world%'
+      - '&8  ─────────────────'
+      - '  &7Онлайн &8» &b%online%'
+      - '  &7TPS &8» &a%tps%'
+      - '  &7Пинг &8» &a%ping%мс'
+      - '&8  ─────────────────'
+      - '%animation:bubbles%'
+      - '  &8bk.aquatech.net'
+
+bossbar:
+  enabled: false
+
+prevent-spectator-effect:
+  enabled: false
+
+debug: false
+use-online-uuid-in-tablist: true
+permission-refresh-interval: 1000
+compensate-for-packetevents-bug: false
+assign-groups-by-permissions: false
+
+primary-group-finding-list:
+- owner
+- admin
+- developer
+- mod
+- vip
+- default
+
+belowname-objective:
+  enabled: false
+  fancy-value: '&c❤ %health%'
+  fancy-value-default: NPC
+
+placeholders:
+  register-tab-expansion: false
+
+global-playerlist:
+  update-latency: false
+  enabled: false
+
+playerlist-objective:
+  title: TAB
+  value: ''
+  render-type: INTEGER
+  enabled: false
+
+config-version: 5
+
+components:
+  minimessage-support: true
+  disable-shadow-for-heads: true
+
+proxy-support:
+  enabled: false
+
+layout:
+  enabled: false
+
+mysql:
+  enabled: false
+
+per-world-playerlist:
+  enabled: false
+
+ping-spoof:
+  enabled: false
+
+scoreboard-teams:
+  enabled: true
+  enable-collision: false
+  invisible-nametags: false
+  can-see-friendly-invisibles: false
+  disable-condition: '%world%=disabledworld'
+  sorting-types: []

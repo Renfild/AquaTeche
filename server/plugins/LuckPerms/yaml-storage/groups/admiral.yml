@@ -1,0 +1,11 @@
+name: admiral
+permissions:
+- aquatech.horizon.admiral
+- essentials.fly
+- essentials.nick
+- essentials.sethome.multiple.admiral
+parents:
+- default
+prefixes:
+- " ":
+    priority: 45

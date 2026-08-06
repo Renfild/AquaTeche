@@ -1,0 +1,100 @@
+#priority 90
+#reloadable
+/*
+  AquaTech — deny TP / flight / infinite gens that break ocean-raft survival.
+  Industrial Upgrade remains the tech core. Alfheim (world_seed) stays legal.
+  IU item IDs must use nested registry paths (see IU jar models).
+*/
+
+import crafttweaker.api.item.IItemStack;
+
+// ===== Teleport / long-range mobility =====
+craftingTable.remove(<item:industrialupgrade:basemachine3/teleporter_iu>);
+craftingTable.remove(<item:industrialupgrade:tools/frequency_transmitter>);
+
+craftingTable.remove(<item:draconicevolution:dislocator>);
+craftingTable.remove(<item:draconicevolution:advanced_dislocator>);
+craftingTable.remove(<item:draconicevolution:player_dislocator>);
+craftingTable.remove(<item:draconicevolution:player_dislocator_unbound>);
+craftingTable.remove(<item:draconicevolution:p2p_dislocator>);
+craftingTable.remove(<item:draconicevolution:p2p_dislocator_unbound>);
+craftingTable.remove(<item:draconicevolution:dislocator_pedestal>);
+craftingTable.remove(<item:draconicevolution:dislocator_receptacle>);
+
+craftingTable.remove(<item:botania:flugel_eye>);
+craftingTable.remove(<item:botania:lens_warp>);
+craftingTable.remove(<item:botania:ender_hand>);
+// Alfheim portal (world_seed) intentionally kept
+
+craftingTable.remove(<item:avaritia:endest_pearl>);
+
+craftingTable.remove(<item:ae2:quantum_ring>);
+craftingTable.remove(<item:ae2:quantum_link>);
+craftingTable.remove(<item:ae2:quantum_entangled_singularity>);
+craftingTable.remove(<item:ae2:spatial_io_port>);
+craftingTable.remove(<item:ae2:spatial_anchor>);
+craftingTable.remove(<item:ae2:spatial_pylon>);
+craftingTable.removeByRegex("ae2:.*spatial.*");
+
+craftingTable.remove(<item:avaritia_armor:crystal_helmet>);
+craftingTable.remove(<item:avaritia_armor:crystal_chestplate>);
+craftingTable.remove(<item:avaritia_armor:crystal_leggings>);
+craftingTable.remove(<item:avaritia_armor:crystal_boots>);
+craftingTable.remove(<item:avaritia_armor:crystal_core>);
+
+// ===== Flight =====
+craftingTable.remove(<item:industrialupgrade:armour/jetpack>);
+craftingTable.remove(<item:industrialupgrade:armour/advjetpack>);
+craftingTable.remove(<item:industrialupgrade:armour/impjetpack>);
+craftingTable.remove(<item:industrialupgrade:armour/perjetpack>);
+
+craftingTable.remove(<item:draconicevolution:item_wyvern_flight>);
+craftingTable.remove(<item:draconicevolution:item_draconic_flight>);
+craftingTable.remove(<item:draconicevolution:item_chaotic_flight>);
+craftingTable.remove(<item:draconicevolution:wyvern_flight_module>);
+craftingTable.remove(<item:draconicevolution:draconic_flight_module>);
+craftingTable.remove(<item:draconicevolution:chaotic_flight_module>);
+
+craftingTable.remove(<item:botania:flight_tiara>);
+craftingTable.remove(<item:botania:cloud_pendant>);
+craftingTable.remove(<item:botania:super_cloud_pendant>);
+
+craftingTable.remove(<item:avaritia:infinity_elytra>);
+craftingTable.remove(<item:avaritia:infinity_umbrella>);
+
+// ===== Infinite / creative / world-breakers =====
+craftingTable.removeByRegex("industrialupgrade:creative_.*");
+craftingTable.removeByRegex("ae2:creative_.*");
+craftingTable.removeByRegex("avaritia:infinity_.*");
+
+craftingTable.remove(<item:avaritia:neutron_collector>);
+craftingTable.remove(<item:avaritia:dense_neutron_collector>);
+craftingTable.remove(<item:avaritia:denser_neutron_collector>);
+craftingTable.remove(<item:avaritia:densest_neutron_collector>);
+
+craftingTable.remove(<item:botanicalextramachinery:catalyst_mana_infinity>);
+craftingTable.remove(<item:botanicalextramachinery:catalyst_living_rock_infinity>);
+craftingTable.remove(<item:botanicalextramachinery:catalyst_seed_infinity>);
+craftingTable.remove(<item:botanicalextramachinery:catalyst_stone_infinity>);
+craftingTable.remove(<item:botanicalextramachinery:catalyst_water_infinity>);
+craftingTable.remove(<item:botanicalextramachinery:catalyst_wood_infinity>);
+
+craftingTable.remove(<item:quantumgenerators:qg/phsp_gen>);
+craftingTable.remove(<item:quantumgenerators:qg/nsp_gen>);
+craftingTable.remove(<item:quantumgenerators:qg/bsp_gen>);
+craftingTable.remove(<item:quantumgenerators:qg/adsp_gen>);
+craftingTable.remove(<item:quantumgenerators:qg/grasp_gen>);
+craftingTable.remove(<item:quantumgenerators:qg/kvsp_gen>);
+
+craftingTable.remove(<item:industrialupgrade:quantum_miner>);
+craftingTable.remove(<item:industrialupgrade:nuclear_bomb>);
+
+craftingTable.remove(<item:botania:laputa_shard>);
+craftingTable.remove(<item:botania:astrolabe>);
+craftingTable.remove(<item:botania:black_hole_talisman>);
+
+craftingTable.remove(<item:draconicevolution:celestial_manipulator>);
+craftingTable.remove(<item:draconicevolution:creative_capacitor>);
+craftingTable.remove(<item:draconicevolution:creative_op_capacitor>);
+
+println("[AquaTech] IU ocean-raft nerfs loaded (TP / flight / infinite gens; Alfheim kept).");

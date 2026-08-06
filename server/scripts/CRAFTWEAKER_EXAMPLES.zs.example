@@ -1,0 +1,64 @@
+# AquaTech — примеры своих крафтов (CraftTweaker 1.20.1)
+# Файл можно копировать/править. Не загружается сам по себе как «пример»:
+# переименуй в .zs без .example ИЛИ копируй куски в свой .zs
+#
+# Документация: https://docs.blamejared.com/1.20.1/
+#
+# Где лежат скрипты: папка scripts/ у корня инстанса (рядом с mods/).
+# После правок: /reload  или перезапуск. Лог: logs/crafttweaker.log
+#
+# Ниже — ШПАРГАЛКА (закомментировано, чтобы не ломать пакет).
+
+/*
+import crafttweaker.api.item.IItemStack;
+
+// ========== 1) УДАЛИТЬ крафт ==========
+// По предмету-результату (все shaped/shapeless на верстаке для этого выхода):
+craftingTable.remove(<item:minecraft:stick>);
+
+// По id рецепта (точный):
+craftingTable.removeByName("minecraft:stick");
+
+// Все рецепты мода на верстаке:
+craftingTable.removeByModid("simplyquarries");
+
+// По regex id:
+craftingTable.removeByRegex(".*quarry.*");
+
+// ========== 2) ДОБАВИТЬ shaped (форма имеет значение) ==========
+// Имя рецепта должно быть уникальным (обычно с префиксом пака).
+craftingTable.addShaped("aquatech_example_boat", <item:minecraft:oak_boat>, [
+    [<item:minecraft:air>, <item:minecraft:air>, <item:minecraft:air>],
+    [<item:minecraft:oak_planks>, <item:minecraft:air>, <item:minecraft:oak_planks>],
+    [<item:minecraft:oak_planks>, <item:minecraft:oak_planks>, <item:minecraft:oak_planks>]
+]);
+
+// ========== 3) ДОБАВИТЬ shapeless (порядок не важен) ==========
+craftingTable.addShapeless("aquatech_example_flint", <item:minecraft:flint> * 2, [
+    <item:minecraft:gravel>,
+    <item:minecraft:gravel>
+]);
+
+// ========== 4) Теги ==========
+craftingTable.addShaped("aquatech_example_chest", <item:minecraft:chest>, [
+    [<tag:items:minecraft:planks>, <tag:items:minecraft:planks>, <tag:items:minecraft:planks>],
+    [<tag:items:minecraft:planks>, <item:minecraft:air>, <tag:items:minecraft:planks>],
+    [<tag:items:minecraft:planks>, <tag:items:minecraft:planks>, <tag:items:minecraft:planks>]
+]);
+
+// ========== 5) Заменить чужой крафт на свой ==========
+craftingTable.remove(<item:create:water_wheel>);
+craftingTable.addShaped("aquatech_water_wheel", <item:create:water_wheel>, [
+    [<tag:items:minecraft:planks>, <item:minecraft:iron_nugget>, <tag:items:minecraft:planks>],
+    [<item:minecraft:iron_nugget>, <item:minecraft:water_bucket>, <item:minecraft:iron_nugget>],
+    [<tag:items:minecraft:planks>, <item:minecraft:iron_nugget>, <tag:items:minecraft:planks>]
+]);
+
+// ========== 6) Как узнать id предмета ==========
+// В игре с JEI: наведи на предмет → R (рецепты) / U (использование).
+// Или F3+H → в тултипе видно minecraft:stick.
+// В скрипте: <item:modid:path>
+// NBT: <item:minecraft:diamond_sword>.withTag({Damage: 0})
+
+print("[AquaTech] example file — раскомментируй куски в своём .zs");
+*/

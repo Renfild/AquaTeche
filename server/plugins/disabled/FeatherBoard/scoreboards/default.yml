@@ -1,0 +1,60 @@
+﻿settings:
+  priority: 50
+  assigning: 'PERMISSION'
+  prevent-override: true
+
+title:
+  frames:
+  - '&b&l✦ AQUATECH &8⋆ &3OCEAN'
+  - '&3&l✦ AQUATECH &8⋆ &bOCEAN'
+  - '&9&l✦ AQUATECH &8⋆ &3OCEAN'
+  interval: 8
+  random: false
+
+lines:
+  - frames:
+    - '&8&m-------------------------------'
+    interval: 40
+    random: false
+  - frames:
+    - '&7Игрок &8» &f%player_name%'
+    interval: 10
+    random: false
+  - frames:
+    - '&7Ранг &8» &f%vault_primary_group%'
+    interval: 20
+    random: false
+  - frames:
+    - '&7Мир &8» &b%player_world%'
+    interval: 20
+    random: false
+  - frames:
+    - '&7Онлайн &8» &b%server_online%'
+    interval: 10
+    random: false
+  - frames:
+    - '&7TPS &8» %server_tps_1_colored%'
+    interval: 10
+    random: false
+  - frames:
+    - '&7Пинг &8» &a%player_ping%мс'
+    interval: 10
+    random: false
+  - frames:
+    - '&7HP &8» &c%player_health_rounded%'
+    interval: 10
+    random: false
+  - frames:
+    - '&8&m-------------------------------'
+    interval: 40
+    random: false
+  - frames:
+    - '<scroll width="29">&7Совет: улучшай &bУдочку Ресурсов &7до X тира для более редкого улова</scroll>'
+    - '<scroll width="29">&7Совет: океанское дно опасно, подготовь броню и ресурсы заранее</scroll>'
+    - '<scroll width="29">&7Совет: /ftbquests откроет сюжет и награды прогрессии</scroll>'
+    interval: 2
+    random: false
+  - frames:
+    - '&8bk.aquatech.net'
+    interval: 20
+    random: false

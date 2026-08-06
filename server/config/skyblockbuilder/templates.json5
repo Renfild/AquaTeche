@@ -1,0 +1,52 @@
+{
+  "defaultOffset": 0,
+  
+  // Lobby hub at world spawn (ops manage); player islands use ocean_raft_4x4
+  "spawn": {
+    "name": "lobby",
+    "desc": "AquaTech lobby raft",
+    "file": "ocean_raft_4x4.nbt",
+    "spawns": "raft",
+    "offset": [ 0, 0, 0 ],
+    "surroundingMargin": 0,
+    "surroundingBlocks": "default"
+  },
+  
+  "spawns": {
+    "raft": {
+      "south": [
+        [ 2, 1, 2 ]
+      ],
+      "north": [],
+      "west": [],
+      "east": []
+    },
+    "default": {
+      "south": [
+        [ 2, 1, 2 ]
+      ],
+      "north": [],
+      "west": [],
+      "east": []
+    }
+  },
+  
+  "spreads": {
+    "default": []
+  },
+  
+  "surroundingBlocks": {
+    "default": []
+  },
+  
+  "templates": [
+    {
+      "name": "ocean_raft_4x4",
+      "desc": "AquaTech starter 4x4 oak raft",
+      "file": "ocean_raft_4x4.nbt",
+      "spawns": "raft",
+      "surroundingBlocks": "default",
+      "spreads": "default"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+name: horizon
+groups:
+- default
+- sailor
+- skipper
+- captain
+- admiral
+- legend

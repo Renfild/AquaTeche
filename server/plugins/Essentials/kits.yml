@@ -1,0 +1,16 @@
+kits:
+  starter:
+    delay: 86400
+    items:
+    - oak_chest_boat 1 name:&b&lЛодка_Кикстартера lore:&7Твой_первый_корабль_после_Катастрофы|&3Лови_дерево,_камень_и_обломки_удочкой
+    - aquatech_ui:novice_fishing_rod 1 name:&b&lУдочка_новичка lore:&7AquaTech_·_навыки_и_снасти|&3Открой_книгу_квестов
+    - bread 12
+    - oak_sapling 4
+    - bone_meal 8
+    - torch 16
+    - lightmanscurrency:coin_copper 8
+    - ftbquests:book 1
+    - aquatech_ui:ocean_guide_book 1
+  xq:
+    delay: 10000
+    items: []

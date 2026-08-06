@@ -1,0 +1,23 @@
+
+[general]
+	serverDomain = "bk.aquatech.net"
+	serverName = "AquaTech Ocean Horizon"
+	#Range: 5 ~ 200
+	syncIntervalTicks = 20
+	#Range: 20 ~ 600
+	bubbleDurationTicks = 100
+	tips = "Sovet: uluchshaj Udochku Resursov|Sovet: okeanskoe dno opasno — gotov bronju|Sovet: /ftbquests otkroet sjuzhet|Sovet: rybalka — glavnyj istochnik resursov"
+	#Веса групп LuckPerms для сортировки TAB и выбора главного ранга.
+	#Формат: groupId=weight. Добавь свои привилегии сюда.
+	rankWeights = ["owner=100", "admin=80", "developer=75", "mod=60", "admiral=45", "vip=40", "legend=50", "captain=30", "skipper=25", "sailor=20", "default=10"]
+
+[storm]
+	#Авто-шторм каждую пятницу–воскресенье по stormTimezone
+	autoStormEnabled = true
+	#Часовой пояс расписания шторма (IANA), например Europe/Moscow
+	stormTimezone = "Europe/Moscow"
+
+[fishing]
+	#Rhythm Hook mini-game on AquaTech rod catch (false = instant loot)
+	tideTensionEnabled = true
+
