@@ -8,7 +8,7 @@ ServerEvents.recipes((event) => {
 
   // ---------- 1. Bamboo Rod (Tier 1: Starter Resource Rod) ----------
   event.remove({ output: 'starcatcher:bamboo_rod' })
-  event.shaped('starcatcher:bamboo_rod', [' C B', ' SB', 'S  '], {
+  event.shaped('starcatcher:bamboo_rod', [' CB', ' SB', 'S  '], {
     B: 'minecraft:bamboo',
     S: 'minecraft:string',
     C: 'minecraft:copper_ingot',

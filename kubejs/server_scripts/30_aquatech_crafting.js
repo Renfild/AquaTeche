@@ -126,15 +126,15 @@ ServerEvents.recipes((event) => {
 
   // Endgame Rate x32 (Avaritia 9x9 Extreme Crafting Table)
   event.custom({
-    type: 'avaritia:extreme_crafting',
+    type: 'avaritia:shaped_table',
     pattern: [
       ' CCCCC  ',
       'C GGG C ',
-      'CGTRTGC ',
-      'CGTQTGC ',
-      'CRQQQRC ',
-      'CGTQTGC ',
-      'CGTRTGC ',
+      'CGTRTGC',
+      'CGTQTGC',
+      'CRQQQRC',
+      'CGTQTGC',
+      'CGTRTGC',
       'C GGG C ',
       ' CCCCC  ',
     ],
@@ -143,22 +143,22 @@ ServerEvents.recipes((event) => {
       'G': { item: 'botania:gaia_ingot' },
       'T': { item: 'botania:terrasteel_ingot' },
       'R': { item: 'aquatech_ui:rate_x16' },
-      'Q': { item: 'industrialupgrade:crafting_elements/crafting_274_element' }, // Quantum processor
+      'Q': { item: 'industrialupgrade:crafting_elements/crafting_274_element' },
     },
     result: { item: 'aquatech_ui:rate_x32' },
   }).id('aquatech:rate_x32_extreme')
 
   // True Endgame Rate x64 (Avaritia 9x9 Extreme Crafting Table)
   event.custom({
-    type: 'avaritia:extreme_crafting',
+    type: 'avaritia:shaped_table',
     pattern: [
       ' NNNNN  ',
       'N SSS N ',
-      'NSXRXSN ',
-      'NSXQXSN ',
-      'NRQQQRN ',
-      'NSXQXSN ',
-      'NSXRXSN ',
+      'NSXRXSN',
+      'NSXQXSN',
+      'NRQQQRN',
+      'NSXQXSN',
+      'NSXRXSN',
       'N SSS N ',
       ' NNNNN  ',
     ],
