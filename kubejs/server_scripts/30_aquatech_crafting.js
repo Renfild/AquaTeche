@@ -84,7 +84,49 @@ ServerEvents.recipes((event) => {
     }).id('aquatech:magmaforged_rod')
   }
 
-  // ---------- Upgrades / machines ----------
+  // ---------- Upgrades & Catch Multipliers (Rate Mods) ----------
+  event.shaped('aquatech_ui:rate_x2', [' C ', 'RMR', ' C '], {
+    C: 'minecraft:copper_ingot',
+    R: 'minecraft:redstone',
+    M: 'industrialupgrade:itemplates/iron_plate',
+  }).id('aquatech:rate_x2')
+
+  event.shaped('aquatech_ui:rate_x4', [' S ', 'RMR', ' S '], {
+    S: 'industrialupgrade:baseore/silver',
+    R: 'aquatech_ui:rate_x2',
+    M: 'industrialupgrade:synthetic_rubber',
+  }).id('aquatech:rate_x4')
+
+  event.shaped('aquatech_ui:rate_x8', [' T ', 'RMR', ' T '], {
+    T: 'industrialupgrade:baseore/titanium',
+    R: 'aquatech_ui:rate_x4',
+    M: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic circuit
+  }).id('aquatech:rate_x8')
+
+  event.shaped('aquatech_ui:rate_x16', [' S ', 'RMR', ' S '], {
+    S: 'industrialupgrade:alloyingot/stainless_steel',
+    R: 'aquatech_ui:rate_x8',
+    M: 'industrialupgrade:crafting_elements/crafting_273_element', // Advanced circuit
+  }).id('aquatech:rate_x16')
+
+  // Endgame Rate x32
+  event.shaped('aquatech_ui:rate_x32', ['INI', 'RQR', 'PNP'], {
+    I: 'industrialupgrade:alloyingot/inconel',
+    N: 'minecraft:nether_star',
+    R: 'aquatech_ui:rate_x16',
+    Q: 'industrialupgrade:crafting_elements/crafting_274_element', // Quantum processor
+    P: 'industrialupgrade:baseore/platinum',
+  }).id('aquatech:rate_x32')
+
+  // True Endgame Rate x64
+  event.shaped('aquatech_ui:rate_x64', ['NON', 'RQR', 'BOB'], {
+    N: 'minecraft:nether_star',
+    O: 'industrialupgrade:alloyingot/osmiridium',
+    R: 'aquatech_ui:rate_x32',
+    Q: 'industrialupgrade:asteroidore/asteroid_adamantium_ore',
+    B: 'minecraft:netherite_block',
+  }).id('aquatech:rate_x64')
+
   event.shaped('aquatech_ui:speed_upgrade', ['IRI', 'GRG', 'RGR'], {
     I: 'minecraft:iron_ingot',
     R: 'minecraft:redstone',

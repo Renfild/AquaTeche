@@ -65,9 +65,31 @@ public class FishingLootHandler {
         awardCatch(player, rodItem.getRodType(), rodStack, lootScale, 70);
     }
 
+    public static boolean isForbiddenLoot(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) return false;
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (id == null) return false;
+        String ns = id.getNamespace();
+        String path = id.getPath();
+        if ("avaritia".equals(ns) || "avaritia_armor".equals(ns)) return true;
+        if (path.contains("inferno") || path.contains("infernal") || path.contains("crystal_core")
+                || path.contains("crystal_matrix") || path.contains("crystal_pattern") || path.contains("crystal_helmet")
+                || path.contains("crystal_chestplate") || path.contains("crystal_leggings") || path.contains("crystal_boots")) {
+            return true;
+        }
+        return false;
+    }
+
     public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem.RodType type,
                                   ItemStack rodStack, float lootScale, int quality) {
+        // Consume rod durability on catch
+        if (rodStack != null && !rodStack.isEmpty() && rodStack.isDamageableItem()) {
+            rodStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
+        }
+
         List<ItemStack> customDrops = generateLoot(type, player.getRandom(), rodStack, player);
+        customDrops.removeIf(FishingLootHandler::isForbiddenLoot);
+
         if (lootScale < 0.99f || lootScale > 1.01f) {
             for (ItemStack drop : customDrops) {
                 int scaled = Math.max(1, Math.round(drop.getCount() * lootScale));
@@ -76,7 +98,10 @@ public class FishingLootHandler {
         }
         // Perfect reel: small bonus treasure
         if (quality >= 90 && player.getRandom().nextFloat() < 0.35f) {
-            customDrops.add(rareTreasure(player.getRandom()));
+            ItemStack bonus = rareTreasure(player.getRandom());
+            if (!isForbiddenLoot(bonus)) {
+                customDrops.add(bonus);
+            }
         }
 
         // Copies for event (before inventory mutates stacks)
