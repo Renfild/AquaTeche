@@ -32,7 +32,7 @@ server_modlist_whitelist:
 max-bees-in-hive: 3
 enchantment-table-book-animation-tick: false
 networkmanager:
-  debug: false
+  debug: true
   intercept: []
 threadpriority:
   server_thread: 8

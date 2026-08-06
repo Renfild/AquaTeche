@@ -95,33 +95,28 @@ public class AquaTechFishingRodItem extends FishingRodItem {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         AtomicBoolean shift = new AtomicBoolean(false);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> shift.set(ClientItemActions.hasShiftDown()));
-        tooltipComponents.add(Component.literal("§bIU-ресурсы и нефть — с улова AquaTech (без кирки)."));
+        tooltipComponents.add(Component.literal("§bДобыча руд и минералов океана (без кирки)."));
         if (shift.get()) {
-            tooltipComponents.add(Component.literal("§eТАБЛИЦА УЛОВА (0% рыбного мусора):"));
+            tooltipComponents.add(Component.literal("§eТАБЛИЦА УЛОВА (100% Руды и Металлы):"));
             switch (this.rodType) {
                 case NOVICE -> {
-                    tooltipComponents.add(Component.literal("§7• Рыба/дерево/ламинария + IU медь/олово/латекс"));
-                    tooltipComponents.add(Component.literal("§7• Торф, селитра, кальций, саженец гевеи (шанс)"));
+                    tooltipComponents.add(Component.literal("§7• Руда меди, олова, железа и угля"));
                 }
                 case IRON -> {
-                    tooltipComponents.add(Component.literal("§7• IU пластины + олово/медь"));
-                    tooltipComponents.add(Component.literal("§7• Торф/селитра/гевея — чаще, чем у новичка"));
+                    tooltipComponents.add(Component.literal("§7• Руда титана, иттрия, шпинели, стронция, бария, таллия"));
                 }
                 case GOLD -> {
-                    tooltipComponents.add(Component.literal("§7• Бронза, синтетический каучук"));
-                    tooltipComponents.add(Component.literal("§7• Банки пчёл IU (редко) + смола"));
+                    tooltipComponents.add(Component.literal("§7• Руда вольфрама, хрома, алюминия, серебра, никеля"));
+                    tooltipComponents.add(Component.literal("§7• Кристаллы сапфира и топаза"));
                 }
                 case DIAMOND, EMERALD, NETHERITE, PRISMARINE -> {
-                    tooltipComponents.add(Component.literal("§7• Нефть IU (вёдра crude) — замена станка-качалки"));
-                    tooltipComponents.add(Component.literal("§7• Пчёлы, смола, каучук, торф культивированный"));
+                    tooltipComponents.add(Component.literal("§7• Алмазы, изумруды, незеритовый лом, призмарин"));
                 }
                 case THERMAL, KINETIC, ENDER -> {
-                    tooltipComponents.add(Component.literal("§7• Больше crude + мазут/industrial oil"));
-                    tooltipComponents.add(Component.literal("§7• Минеральные кристаллы IU (редко)"));
+                    tooltipComponents.add(Component.literal("§7• Редстоун, кварц, золотая руда, эндер-жемчуг"));
                 }
                 case ABYSSAL -> {
-                    tooltipComponents.add(Component.literal("§7• Motor oil + широкий набор минералов IU"));
-                    tooltipComponents.add(Component.literal("§7• Эхо/реликвии бездны"));
+                    tooltipComponents.add(Component.literal("§7• Иридий, осмий, полоний, платина, осколки эхо"));
                 }
             }
             int lo = RodLootRanges.min(this.rodType);

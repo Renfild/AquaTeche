@@ -200,62 +200,44 @@ public class FishingLootHandler {
             case NOVICE -> {
                 // Raft survival — chance pool, ores only
                 List<ItemStack> pool = new ArrayList<>();
-                pool.add(new ItemStack(Items.COD, 2 + random.nextInt(3)));
-                pool.add(new ItemStack(Items.OAK_LOG, 2 + random.nextInt(3)));
-                pool.add(new ItemStack(Items.KELP, 4 + random.nextInt(5)));
-                if (random.nextFloat() < 0.55f) pool.add(new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
-                if (random.nextFloat() < 0.40f) {
+                if (random.nextFloat() < 0.65f) pool.add(new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+                if (random.nextFloat() < 0.50f) {
                     pool.add(getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 }
-                if (random.nextFloat() < 0.35f) {
-                    pool.add(getModItem("industrialupgrade:raw_latex", Items.SLIME_BALL, 1 + random.nextInt(2)));
-                }
+                if (random.nextFloat() < 0.45f) pool.add(new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
+                if (random.nextFloat() < 0.40f) pool.add(new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case IRON -> {
-                // Chance pool — ores / blocks, never all at once
+                // Chance pool — ores only
                 List<ItemStack> pool = new ArrayList<>();
-                maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.30f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.28f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.28f, getModItem("industrialupgrade:baseore2/yttrium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.28f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.28f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.26f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.26f, getModItem("industrialupgrade:baseore2/thallium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.06f, getModItem("industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:sapling/rubber_sapling", Items.OAK_SAPLING, 1));
-                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:raw_latex", Items.SLIME_BALL, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.40f, new ItemStack(Items.OAK_LOG, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.35f, new ItemStack(Items.OAK_SAPLING, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.40f, new ItemStack(Items.DIRT, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.30f, new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.28f, new ItemStack(Items.GRAVEL, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.28f, new ItemStack(Items.SAND, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.30f, new ItemStack(Items.COBBLESTONE, 2 + random.nextInt(4)));
-                maybeAdd(pool, random, 0.32f, new ItemStack(Items.REDSTONE, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.22f, new ItemStack(Items.REDSTONE_ORE, 1));
-                maybeAdd(pool, random, 0.22f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/yttrium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:baseore2/thallium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.10f, getModItem("industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.REDSTONE_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case GOLD -> {
                 List<ItemStack> pool = new ArrayList<>();
-                maybeAdd(pool, random, 0.32f, getModItem("industrialupgrade:baseore/tungsten", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.32f, getModItem("industrialupgrade:baseore/chromium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.32f, getModItem("industrialupgrade:baseore/aluminium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.35f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.32f, new ItemStack(Items.GOLD_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.32f, getModItem("industrialupgrade:baseore/silver", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.32f, getModItem("industrialupgrade:baseore/nickel", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.40f, new ItemStack(Items.FLINT, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.28f, getModItem("industrialupgrade:preciousgem/sapphire_gem", Items.LAPIS_LAZULI, 1));
-                maybeAdd(pool, random, 0.28f, getModItem("industrialupgrade:preciousgem/topaz_gem", Items.AMETHYST_SHARD, 1));
-                maybeAdd(pool, random, 0.16f, getModItem("industrialupgrade:blockpreciousore/sapphire_ore", Items.LAPIS_ORE, 1));
-                maybeAdd(pool, random, 0.16f, getModItem("industrialupgrade:blockpreciousore/topaz_ore", Items.AMETHYST_BLOCK, 1));
-                maybeAdd(pool, random, 0.18f, new ItemStack(Items.LAVA_BUCKET, 1));
-                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:sapling/rubber_sapling", Items.OAK_SAPLING, 1));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/tungsten", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/chromium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/aluminium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.GOLD_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/silver", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/nickel", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:preciousgem/sapphire_gem", Items.LAPIS_LAZULI, 1));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:preciousgem/topaz_gem", Items.AMETHYST_SHARD, 1));
+                maybeAdd(pool, random, 0.25f, getModItem("industrialupgrade:blockpreciousore/sapphire_ore", Items.LAPIS_ORE, 1));
+                maybeAdd(pool, random, 0.25f, getModItem("industrialupgrade:blockpreciousore/topaz_ore", Items.AMETHYST_BLOCK, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case DIAMOND -> {
@@ -331,58 +313,48 @@ public class FishingLootHandler {
 
         switch (rodId) {
             case "humble_rod" -> { // Tier 1: Humble Rod (Primal / Starter Resource Rod)
-                maybeAdd(pool, random, 0.60f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.50f, new ItemStack(Items.STRING, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:raw_latex", Items.SLIME_BALL, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.40f, new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.35f, new ItemStack(Items.SAND, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.35f, new ItemStack(Items.GRAVEL, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.50f, new ItemStack(Items.COBBLESTONE, 2 + random.nextInt(4)));
-                maybeAdd(pool, random, 0.50f, new ItemStack(Items.OAK_LOG, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.65f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "bamboo_rod" -> { // Tier 2: Bamboo Rod (Organic & Rubber)
-                maybeAdd(pool, random, 0.60f, getModItem("industrialupgrade:raw_latex", Items.SLIME_BALL, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.45f, new ItemStack(Items.STRING, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.60f, new ItemStack(Items.BAMBOO, 2 + random.nextInt(4)));
-                maybeAdd(pool, random, 0.50f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.50f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+            case "bamboo_rod" -> { // Tier 2: Bamboo Rod (Early Resource Rod)
+                maybeAdd(pool, random, 0.60f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.55f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.55f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "good_old_rod" -> { // Tier 3: Good Old Rod (Early LV / Iron & Tin)
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.50f, new ItemStack(Items.REDSTONE, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.35f, new ItemStack(Items.LAPIS_LAZULI, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.50f, new ItemStack(Items.REDSTONE_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.LAPIS_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/yttrium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/thallium", Items.IRON_ORE, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "naturalist_rod" -> { // Tier 4: Naturalist Rod (LV Eco & Peat)
-                maybeAdd(pool, random, 0.55f, getModItem("industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:sapling/rubber_sapling", Items.OAK_SAPLING, 1));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:blockresource/untreated_peat", Items.BROWN_DYE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1));
+            case "naturalist_rod" -> { // Tier 4: Naturalist Rod (LV Ores & Spinel)
+                maybeAdd(pool, random, 0.55f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "slimed_rod" -> { // Tier 5: Slimed Rod (LV Polymer & Slime)
-                maybeAdd(pool, random, 0.60f, new ItemStack(Items.SLIME_BALL, 2 + random.nextInt(3)));
-                maybeAdd(pool, random, 0.55f, getModItem("industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1));
+            case "slimed_rod" -> { // Tier 5: Slimed Rod (LV Ores & Polonium)
+                maybeAdd(pool, random, 0.55f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "iceborn_rod" -> { // Tier 6: Iceborn Rod (MV Silver & Aluminium)
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore/aluminium", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/silver", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/zinc", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:itemcoolupgrade/azote", Items.SNOWBALL, 1));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "starcatcher_rod" -> { // Tier 7: StarCatcher Rod (MV Gold & Tungsten & Sapphire)
@@ -417,26 +389,23 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.OBSIDIAN, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:alloyingot/stainless_steel", Items.IRON_INGOT, 1));
-                maybeAdd(pool, random, 0.30f, new ItemStack(Items.LAVA_BUCKET, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "lush_glowberry_rod" -> { // Tier 11: Lush Glowberry Rod (HV Platinum & Ocean)
+            case "lush_glowberry_rod" -> { // Tier 11: Lush Glowberry Rod (HV Platinum & Ocean Crystals)
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.PRISMARINE_SHARD, 2 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.50f, new ItemStack(Items.PRISMARINE_CRYSTALS, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:synthetic_rubber", Items.DRIED_KELP, 2 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/platinum", Items.GOLD_ORE, 1));
                 maybeAdd(pool, random, 0.20f, new ItemStack(Items.HEART_OF_THE_SEA, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "magmaforged_rod" -> { // Tier 12: Magmaforged Rod (EV Nuclear & Oil)
+            case "magmaforged_rod" -> { // Tier 12: Magmaforged Rod (EV Nuclear & Alloy Ores)
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.QUARTZ, 2 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:crushed/uranium", Items.RAW_GOLD, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.NETHERITE_SCRAP, 1));
-                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:bucket/sour_light_oil", Items.LAVA_BUCKET, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:alloyingot/inconel", Items.NETHERITE_SCRAP, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "alpha_rod" -> { // Tier 13: Alpha Rod (Quantum Endgame)
+            case "alpha_rod" -> { // Tier 13: Alpha Rod (Quantum Endgame Ores)
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore/iridium", Items.DIAMOND, 1));
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore1/osmium", Items.GOLD_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/polonium", Items.EMERALD, 1));
