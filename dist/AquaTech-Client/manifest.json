@@ -1,0 +1,465 @@
+{
+  "version": "1.0.0",
+  "mc_version": "1.20.1",
+  "forge_version": "47.4.0",
+  "server_ip": "katherine-hydro.tun.ply.gg",
+  "server_port": 25565,
+  "files": [
+    {
+      "path": "mods/AI-Improvements-1.20-0.5.2.jar",
+      "md5": "9a6776ce2deab597d198e8755daa56ff",
+      "size": 29553,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/AI-Improvements-1.20-0.5.2.jar"
+    },
+    {
+      "path": "mods/alexscaves-2.0.2.jar",
+      "md5": "6c8793ee5e1aa852fdb430a9cdaccdc5",
+      "size": 74871657,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/alexscaves-2.0.2.jar"
+    },
+    {
+      "path": "mods/alexsmobs-1.22.9.jar",
+      "md5": "504050d1f2e2c3019b6f53377ca354c6",
+      "size": 26350793,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/alexsmobs-1.22.9.jar"
+    },
+    {
+      "path": "mods/appliedenergistics2-forge-15.4.10.jar",
+      "md5": "69e47ebd80184d34176cebeb6233a234",
+      "size": 8495956,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/appliedenergistics2-forge-15.4.10.jar"
+    },
+    {
+      "path": "mods/aquatech_ui-1.0.0.jar",
+      "md5": "0c74a7c90620591b4affd9fee42446ef",
+      "size": 565065,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/aquatech_ui-1.0.0.jar"
+    },
+    {
+      "path": "mods/architectury-9.2.14-forge.jar",
+      "md5": "76b40d407b6bf0257dd1dab6d3d395d5",
+      "size": 580602,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/architectury-9.2.14-forge.jar"
+    },
+    {
+      "path": "mods/avaritia_armor-0.1.3.jar",
+      "md5": "9f3cbcf31955a869367a48633be8506b",
+      "size": 128582,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/avaritia_armor-0.1.3.jar"
+    },
+    {
+      "path": "mods/BetterQuestPopup-1.20.1-forge-1.0.1.jar",
+      "md5": "9444aa52f2869b429402c8d06e1cffea",
+      "size": 177843,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/BetterQuestPopup-1.20.1-forge-1.0.1.jar"
+    },
+    {
+      "path": "mods/blueprint-1.20.1-7.1.4.jar",
+      "md5": "024008848618628f9f37f7af1018ae58",
+      "size": 1165189,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/blueprint-1.20.1-7.1.4.jar"
+    },
+    {
+      "path": "mods/Botania-1.20.1-454-FORGE.jar",
+      "md5": "ae678d80027133366933844f32ac92ef",
+      "size": 12211755,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/Botania-1.20.1-454-FORGE.jar"
+    },
+    {
+      "path": "mods/botanicalextramachinery-1.20.1-1.1.2.jar",
+      "md5": "07c9678c5cd865e25406c11ab4d8ca3c",
+      "size": 1685838,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/botanicalextramachinery-1.20.1-1.1.2.jar"
+    },
+    {
+      "path": "mods/BotanicalMachinery-1.20.1-3.0.10.jar",
+      "md5": "92049b9f7b92359751d363e5215cc28b",
+      "size": 250613,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/BotanicalMachinery-1.20.1-3.0.10.jar"
+    },
+    {
+      "path": "mods/BrandonsCore-1.20.1-3.2.1.302-universal.jar",
+      "md5": "eab7f3e470ed31562bd3c6abb0fda6ce",
+      "size": 1358270,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/BrandonsCore-1.20.1-3.2.1.302-universal.jar"
+    },
+    {
+      "path": "mods/canary-mc1.20.1-0.3.3.jar",
+      "md5": "1bd8bdb43c190ddc671c5ea0bf3b8cb1",
+      "size": 594191,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/canary-mc1.20.1-0.3.3.jar"
+    },
+    {
+      "path": "mods/casesmod-1.0.0.jar",
+      "md5": "5fe7813fbcb5eabc88ee3b822bf1b0d6",
+      "size": 263251,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/casesmod-1.0.0.jar"
+    },
+    {
+      "path": "mods/citadel-2.6.3-1.20.1.jar",
+      "md5": "da80c09b998d829b6d580e5be76dcc7b",
+      "size": 3185275,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/citadel-2.6.3-1.20.1.jar"
+    },
+    {
+      "path": "mods/Clumps-forge-1.20.1-12.0.0.4.jar",
+      "md5": "7a71806a1167d866608fc2e8c7d62041",
+      "size": 20300,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/Clumps-forge-1.20.1-12.0.0.4.jar"
+    },
+    {
+      "path": "mods/CodeChickenLib-1.20.1-4.4.0.528-universal.jar",
+      "md5": "cd77cb33d92407fd0b5bf0b79d58af69",
+      "size": 1473536,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/CodeChickenLib-1.20.1-4.4.0.528-universal.jar"
+    },
+    {
+      "path": "mods/curios-forge-5.14.1+1.20.1.jar",
+      "md5": "2fdcc97cbc66c4b2492b407c792e7159",
+      "size": 398066,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/curios-forge-5.14.1+1.20.1.jar"
+    },
+    {
+      "path": "mods/Draconic-Evolution-1.20.1-3.1.2.621-universal.jar",
+      "md5": "3cc3a649bfe7cebd88b87d5aa9d25a83",
+      "size": 5934411,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/Draconic-Evolution-1.20.1-3.1.2.621-universal.jar"
+    },
+    {
+      "path": "mods/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
+      "md5": "f8df69d0af455b6f47acb88ab747d1a3",
+      "size": 402345,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar"
+    },
+    {
+      "path": "mods/easy_npc-forge-1.20.1-6.0.21.jar",
+      "md5": "c5d8b5be8ca1ef7aaa68062d7b99ae1e",
+      "size": 1542835,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/easy_npc-forge-1.20.1-6.0.21.jar"
+    },
+    {
+      "path": "mods/entityculling-forge-1.10.5-mc1.20.1.jar",
+      "md5": "f54a5baa0a9613d13ad0e781d245338b",
+      "size": 1590221,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/entityculling-forge-1.10.5-mc1.20.1.jar"
+    },
+    {
+      "path": "mods/eventwrapper-forge-1.20.1-1.1.4.jar",
+      "md5": "2b508479fcae9f5bf32c92537191a8cb",
+      "size": 1564001,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/eventwrapper-forge-1.20.1-1.1.4.jar"
+    },
+    {
+      "path": "mods/extrabotany-forge-1.20.1-1.9.2.jar",
+      "md5": "3b9af457e51a64ea449fe412cd98ae94",
+      "size": 3869675,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/extrabotany-forge-1.20.1-1.9.2.jar"
+    },
+    {
+      "path": "mods/FastSuite-1.20.1-5.1.2.jar",
+      "md5": "efca8ff65bbf93e3a0f776998ee181e9",
+      "size": 26600,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/FastSuite-1.20.1-5.1.2.jar"
+    },
+    {
+      "path": "mods/ferritecore-6.0.1-forge.jar",
+      "md5": "f52f538207a4829d7060550092ce2383",
+      "size": 123034,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ferritecore-6.0.1-forge.jar"
+    },
+    {
+      "path": "mods/ftb-library-forge-2001.2.5.jar",
+      "md5": "c6fbbd29fd928a9c41f1e960fa15eddd",
+      "size": 791175,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ftb-library-forge-2001.2.5.jar"
+    },
+    {
+      "path": "mods/ftb-quests-forge-2001.4.8.jar",
+      "md5": "2068242f5f386d56a9a32ff2798b941d",
+      "size": 1155034,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ftb-quests-forge-2001.4.8.jar"
+    },
+    {
+      "path": "mods/ftb-teams-forge-2001.3.0.jar",
+      "md5": "31acf433df9d13282fa12bd6974c44f9",
+      "size": 247666,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ftb-teams-forge-2001.3.0.jar"
+    },
+    {
+      "path": "mods/ftbquestprecisionlocalizer-1.20.1-forge-2.2.0.jar",
+      "md5": "345a4da434da401aaa0fd4f1c3005c7c",
+      "size": 27596,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ftbquestprecisionlocalizer-1.20.1-forge-2.2.0.jar"
+    },
+    {
+      "path": "mods/ftbquestsentityvis-1.6.0-1.20.1-forge.jar",
+      "md5": "b2b041f869272e4d0eedcdd3950152a0",
+      "size": 142508,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ftbquestsentityvis-1.6.0-1.20.1-forge.jar"
+    },
+    {
+      "path": "mods/ftbquestsfreezefix-forge-1.0.0-1.20.1.jar",
+      "md5": "b099b839fe37c312e99800dff56988ec",
+      "size": 163803,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ftbquestsfreezefix-forge-1.0.0-1.20.1.jar"
+    },
+    {
+      "path": "mods/FTBQuestsOptimizer-forge-2.1.0-1.20.1.jar",
+      "md5": "50b88102b7279d626e858b958f5a34c9",
+      "size": 12817,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/FTBQuestsOptimizer-forge-2.1.0-1.20.1.jar"
+    },
+    {
+      "path": "mods/geckolib-forge-1.20.1-4.8.4.jar",
+      "md5": "1b8bd851bc57e2b87e285b98a7d92c76",
+      "size": 1038209,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/geckolib-forge-1.20.1-4.8.4.jar"
+    },
+    {
+      "path": "mods/guideme-20.1.15.jar",
+      "md5": "0d892c2b4af52459ac6a639040374916",
+      "size": 9414827,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/guideme-20.1.15.jar"
+    },
+    {
+      "path": "mods/ImmediatelyFast-1.2.4+1.20.1.jar",
+      "md5": "db69eb0eae650e6e26694c56f7132e9f",
+      "size": 625873,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ImmediatelyFast-1.2.4+1.20.1.jar"
+    },
+    {
+      "path": "mods/IndustrialUpgrade-1.20.1-3.4.0.11.jar",
+      "md5": "26f8ffb7206d91ab9903afc53350cb5b",
+      "size": 36704188,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/IndustrialUpgrade-1.20.1-3.4.0.11.jar"
+    },
+    {
+      "path": "mods/item-filters-forge-2001.1.0-build.55.jar",
+      "md5": "3febb5502de0c31819d5580babf9b3dc",
+      "size": 103624,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/item-filters-forge-2001.1.0-build.55.jar"
+    },
+    {
+      "path": "mods/Jade-1.20.1-Forge-11.13.3.jar",
+      "md5": "a53aade6b5915ebe8357abb68cf1f778",
+      "size": 553487,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/Jade-1.20.1-Forge-11.13.3.jar"
+    },
+    {
+      "path": "mods/jei-1.20.1-forge-15.21.0.144.jar",
+      "md5": "8d94a9630b8cb5f4e977b3f601932ea4",
+      "size": 1425745,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/jei-1.20.1-forge-15.21.0.144.jar"
+    },
+    {
+      "path": "mods/kubejs-forge-2001.6.5-build.26.jar",
+      "md5": "64ee6615f19fb9b2b11fee8b7385eaaf",
+      "size": 1658792,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/kubejs-forge-2001.6.5-build.26.jar"
+    },
+    {
+      "path": "mods/LibX-1.20.1-5.0.14.jar",
+      "md5": "3c0c0cdac0482e1f78a28614bebce36a",
+      "size": 1258082,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/LibX-1.20.1-5.0.14.jar"
+    },
+    {
+      "path": "mods/modernfix-forge-5.27.66+mc1.20.1.jar",
+      "md5": "61c184687d2cd6c770a033f310ea55fc",
+      "size": 1002234,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/modernfix-forge-5.27.66+mc1.20.1.jar"
+    },
+    {
+      "path": "mods/MythicBotany-1.20.1-4.0.4.jar",
+      "md5": "6c2b6b72de2b8641bd1ca82556b62ae2",
+      "size": 2233413,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/MythicBotany-1.20.1-4.0.4.jar"
+    },
+    {
+      "path": "mods/packetfixer-3.3.2-forge-1.20.1.jar",
+      "md5": "494234194e4ce530719281d558510cf5",
+      "size": 188661,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/packetfixer-3.3.2-forge-1.20.1.jar"
+    },
+    {
+      "path": "mods/Patchouli-1.20.1-85-FORGE.jar",
+      "md5": "78bd223d069fa9491e940d99a8f426b3",
+      "size": 642732,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/Patchouli-1.20.1-85-FORGE.jar"
+    },
+    {
+      "path": "mods/powerutils-1.8.jar",
+      "md5": "d425a1a35746fc2b81222011caebb2df",
+      "size": 71203,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/powerutils-1.8.jar"
+    },
+    {
+      "path": "mods/ProbeJSLegacy-1.20.1-6.2.0.jar",
+      "md5": "351c3f914217925726deb82e0bfb7759",
+      "size": 1112193,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ProbeJSLegacy-1.20.1-6.2.0.jar"
+    },
+    {
+      "path": "mods/productivebees-1.20.1-12.6.0.jar",
+      "md5": "3c579549fd279857a66c78b096d31fba",
+      "size": 4956306,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/productivebees-1.20.1-12.6.0.jar"
+    },
+    {
+      "path": "mods/quantumgenerators-1.7.jar",
+      "md5": "0160a2e4d135bf0b626d8d58bd93034b",
+      "size": 159554,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/quantumgenerators-1.7.jar"
+    },
+    {
+      "path": "mods/Re-Avaritia-forge-1.20.1-1.4.1-release.jar",
+      "md5": "44f2748b9c9d4a6c11c1e12a47dea424",
+      "size": 3510667,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/Re-Avaritia-forge-1.20.1-1.4.1-release.jar"
+    },
+    {
+      "path": "mods/recipe_generator-1.1.0_beta-forge-1.20.1.jar",
+      "md5": "39210fa05cefe70341fdda65db12a7a8",
+      "size": 986397,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/recipe_generator-1.1.0_beta-forge-1.20.1.jar"
+    },
+    {
+      "path": "mods/rhino-forge-2001.2.3-build.10.jar",
+      "md5": "59387620b0ef6becbff02c7c1636ad3e",
+      "size": 1798244,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/rhino-forge-2001.2.3-build.10.jar"
+    },
+    {
+      "path": "mods/simplyquarries-1.7.jar",
+      "md5": "3f6f11fd1e1ccace1800eb1c53a329a9",
+      "size": 136253,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/simplyquarries-1.7.jar"
+    },
+    {
+      "path": "mods/SkyblockBuilder-1.20.1-5.1.33.jar",
+      "md5": "8252a2fddf53425f689184290714d2ca",
+      "size": 454033,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/SkyblockBuilder-1.20.1-5.1.33.jar"
+    },
+    {
+      "path": "mods/starcatcher-2.3.19-FORGE-1.20.1.jar",
+      "md5": "b9d7d6bbcd201738961342a35d8b2355",
+      "size": 6975581,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/starcatcher-2.3.19-FORGE-1.20.1.jar"
+    },
+    {
+      "path": "config/packetfixer.properties",
+      "md5": "daeb0ae1fa1a1af50a8a02c5ee92555c",
+      "size": 539,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/packetfixer.properties"
+    },
+    {
+      "path": "kubejs/assets/ftbquests/ftb_quests_theme.txt",
+      "md5": "944969a2273df4ac190de3f307f83f20",
+      "size": 8141,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/ftb_quests_theme.txt"
+    },
+    {
+      "path": "kubejs/assets/kubejs/textures/aquatechlogo.png",
+      "md5": "164d3faeb16d044153081ff2d460dbee",
+      "size": 9861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/aquatechlogo.png"
+    },
+    {
+      "path": "kubejs/assets/kubejs/textures/logo/aquatechlogo.png",
+      "md5": "164d3faeb16d044153081ff2d460dbee",
+      "size": 9861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/aquatechlogo.png"
+    },
+    {
+      "path": "kubejs/assets/kubejs/textures/quests/aquatechlogo.png",
+      "md5": "164d3faeb16d044153081ff2d460dbee",
+      "size": 9861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/aquatechlogo.png"
+    },
+    {
+      "path": "kubejs/client_scripts/add_fishing_resource_tooltips.js",
+      "md5": "2196f4107d17b63880e9d8ebaf51b54b",
+      "size": 1692,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/add_fishing_resource_tooltips.js"
+    },
+    {
+      "path": "kubejs/client_scripts/remove_fishing_tooltips.js",
+      "md5": "8a32082abe25d339c8321607939ae033",
+      "size": 616,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/remove_fishing_tooltips.js"
+    },
+    {
+      "path": "kubejs/client_scripts/rename_starcatcher_rods.js",
+      "md5": "c1374ba9357ab2d75730c139a82ab84f",
+      "size": 1499,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/rename_starcatcher_rods.js"
+    },
+    {
+      "path": "kubejs/server_scripts/00_disable_iu_space.js",
+      "md5": "c5326b046bc354e45fac4d5c318376c9",
+      "size": 2570,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/00_disable_iu_space.js"
+    },
+    {
+      "path": "kubejs/server_scripts/00_disable_quarries.js",
+      "md5": "9bd7ba41d8ccdd232229e671d06bc4aa",
+      "size": 2273,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/00_disable_quarries.js"
+    },
+    {
+      "path": "kubejs/server_scripts/10_aquatech_iu_nerf.js",
+      "md5": "feb522c3442f3b32b725c4ff389d150f",
+      "size": 1959,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/10_aquatech_iu_nerf.js"
+    },
+    {
+      "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
+      "md5": "e1cf8b4e4e60b04fd0631f798c665625",
+      "size": 6108,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/20_aquatech_rod_crafts.js"
+    },
+    {
+      "path": "kubejs/server_scripts/30_aquatech_crafting.js",
+      "md5": "856260d20ece6c0b25445faf1867f79c",
+      "size": 13848,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/30_aquatech_crafting.js"
+    },
+    {
+      "path": "kubejs/server_scripts/40_aquatech_diving.js",
+      "md5": "25ce571f899ee987bfecfa64de08ef14",
+      "size": 1137,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/40_aquatech_diving.js"
+    },
+    {
+      "path": "kubejs/server_scripts/40_aquatech_fishing_drops.js",
+      "md5": "a13b60329c83b27b820633a5a6525bb3",
+      "size": 5249,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/40_aquatech_fishing_drops.js"
+    },
+    {
+      "path": "kubejs/server_scripts/50_remove_avaritia_fishing_loot.js",
+      "md5": "f63fd03ba4dd06662b15267dd21d5011",
+      "size": 198,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/50_remove_avaritia_fishing_loot.js"
+    },
+    {
+      "path": "kubejs/server_scripts/60_disable_phantoms.js",
+      "md5": "6e4af6053e794d55bd7ba2fa80c4f29b",
+      "size": 256,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/60_disable_phantoms.js"
+    },
+    {
+      "path": "kubejs/startup_scripts/additions.js",
+      "md5": "e3166114982743e5738f94f545355486",
+      "size": 484,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/additions.js"
+    },
+    {
+      "path": "kubejs/startup_scripts/disable_iu_space.js",
+      "md5": "243abbe82b6c5996b450a8cbacfa66bc",
+      "size": 966,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/modpack-latest/disable_iu_space.js"
+    }
+  ]
+}
