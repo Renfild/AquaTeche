@@ -56,9 +56,6 @@ public class ModItems {
     public static final RegistryObject<Item> SEABED_DREDGER_ITEM = ITEMS.register("seabed_dredger",
             () -> new BlockItem(ModBlocks.SEABED_DREDGER.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> HYDRO_REACTOR_ITEM = ITEMS.register("hydro_reactor",
-            () -> new BlockItem(ModBlocks.HYDRO_REACTOR.get(), new Item.Properties()));
-
     public static final RegistryObject<Item> OCEAN_ALTAR_ITEM = ITEMS.register("ocean_altar",
             () -> new BlockItem(ModBlocks.OCEAN_ALTAR.get(), new Item.Properties()));
 

@@ -11,10 +11,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 
-/** При входе игрока на сервер отправляет снимок ленты последних выигрышей после завершения handshake. */
+/** РџСЂРё РІС…РѕРґРµ РёРіСЂРѕРєР° РЅР° СЃРµСЂРІРµСЂ РѕС‚РїСЂР°РІР»СЏРµС‚ СЃРЅРёРјРѕРє Р»РµРЅС‚С‹ РїРѕСЃР»РµРґРЅРёС… РІС‹РёРіСЂС‹С€РµР№ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ handshake. */
 @Mod.EventBusSubscriber(modid = "casesmod")
 public class PlayerSyncHandler {
-    private static final int LOGIN_SYNC_DELAY_TICKS = 80;
+    private static final int LOGIN_SYNC_DELAY_TICKS = 100;
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
@@ -29,3 +29,4 @@ public class PlayerSyncHandler {
         }));
     }
 }
+

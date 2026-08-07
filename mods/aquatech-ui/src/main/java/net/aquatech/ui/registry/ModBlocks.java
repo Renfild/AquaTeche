@@ -3,7 +3,6 @@ package net.aquatech.ui.registry;
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.block.AbyssalPortalBlock;
 import net.aquatech.ui.block.AutoFisherBlock;
-import net.aquatech.ui.block.HydroReactorBlock;
 import net.aquatech.ui.block.OceanAltarBlock;
 import net.aquatech.ui.block.OceanFilterBlock;
 import net.aquatech.ui.block.SeabedDredgerBlock;
@@ -27,9 +26,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SEABED_DREDGER = BLOCKS.register("seabed_dredger",
             () -> new SeabedDredgerBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
-
-    public static final RegistryObject<Block> HYDRO_REACTOR = BLOCKS.register("hydro_reactor",
-            () -> new HydroReactorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion().lightLevel(state -> 8)));
 
     public static final RegistryObject<Block> OCEAN_ALTAR = BLOCKS.register("ocean_altar",
             () -> new OceanAltarBlock(BlockBehaviour.Properties.copy(Blocks.PRISMARINE).noOcclusion().lightLevel(state -> 6)));

@@ -25,9 +25,11 @@ public final class MachineUpgrades {
         return typeInSlot(handler, slot) == type;
     }
 
-    /** Progress increment per tick: 1 normally, 2 with SPEED. */
+    /** Progress increment per tick: 4 with SPEED_X4, 2 with SPEED, 1 normally. */
     public static int progressPerTick(ItemStackHandler handler, int upgradeSlot) {
-        return has(handler, upgradeSlot, UpgradeItem.UpgradeType.SPEED) ? 2 : 1;
+        if (has(handler, upgradeSlot, UpgradeItem.UpgradeType.SPEED_X4)) return 4;
+        if (has(handler, upgradeSlot, UpgradeItem.UpgradeType.SPEED)) return 2;
+        return 1;
     }
 
     /** FE cost multiplier: 0.5 with EFFICIENCY, else 1.0. */
@@ -37,9 +39,5 @@ public final class MachineUpgrades {
 
     public static int energyCost(ItemStackHandler handler, int upgradeSlot, int baseCost) {
         return Math.max(1, Math.round(baseCost * energyCostFactor(handler, upgradeSlot)));
-    }
-
-    public static boolean doubleOutput(ItemStackHandler handler, int upgradeSlot) {
-        return has(handler, upgradeSlot, UpgradeItem.UpgradeType.DOUBLE_HOOK);
     }
 }

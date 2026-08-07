@@ -19,6 +19,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -155,23 +158,30 @@ public class SeabedDredgerBlockEntity extends BlockEntity implements MenuProvide
         return false;
     }
 
+    private ItemStack getModItem(String regName, Item fallback, int count) {
+        ResourceLocation loc = new ResourceLocation(regName);
+        Item item = BuiltInRegistries.ITEM.get(loc);
+        if (item != null && item != Items.AIR) {
+            return new ItemStack(item, count);
+        }
+        return new ItemStack(fallback, count);
+    }
+
     private void doDredgeOperation(Level level, ItemStack bitStack) {
         List<ItemStack> dredgedLoot = new ArrayList<>();
         float rng = level.getRandom().nextFloat();
 
-        // Early/mid loot only — no free diamond ore / netherite / echo
-        if (rng < 0.55f) dredgedLoot.add(new ItemStack(Items.SAND, 2 + level.getRandom().nextInt(4)));
-        if (rng < 0.45f) dredgedLoot.add(new ItemStack(Items.GRAVEL, 2 + level.getRandom().nextInt(3)));
-        if (rng < 0.35f) dredgedLoot.add(new ItemStack(Items.CLAY_BALL, 2 + level.getRandom().nextInt(3)));
-        if (rng < 0.25f) dredgedLoot.add(new ItemStack(Items.PRISMARINE_SHARD, 1 + level.getRandom().nextInt(2)));
-        if (rng < 0.12f) dredgedLoot.add(new ItemStack(Items.RAW_IRON, 1));
-        if (rng < 0.06f) dredgedLoot.add(new ItemStack(Items.RAW_GOLD, 1));
+        if (rng < 0.65f) dredgedLoot.add(new ItemStack(Items.SAND, 2 + level.getRandom().nextInt(4)));
+        if (rng < 0.50f) dredgedLoot.add(new ItemStack(Items.QUARTZ, 1 + level.getRandom().nextInt(3)));
+        if (rng < 0.40f) dredgedLoot.add(getModItem("ae2:certus_quartz_crystal", Items.QUARTZ, 1 + level.getRandom().nextInt(2)));
+        if (rng < 0.25f) dredgedLoot.add(getModItem("ae2:charged_certus_quartz_crystal", Items.QUARTZ, 1));
+        if (rng < 0.35f) dredgedLoot.add(getModItem("ae2:sky_stone_block", Items.STONE, 1 + level.getRandom().nextInt(2)));
+        if (rng < 0.30f) dredgedLoot.add(getModItem("ae2:sky_dust", Items.SAND, 1 + level.getRandom().nextInt(2)));
+        if (rng < 0.20f) dredgedLoot.add(getModItem("ae2:fluix_crystal", Items.QUARTZ, 1));
         if (dredgedLoot.isEmpty()) dredgedLoot.add(new ItemStack(Items.SAND, 3));
 
-        boolean doubleOut = MachineUpgrades.doubleOutput(itemHandler, UPGRADE_SLOT);
         for (ItemStack drop : dredgedLoot) {
             insertIntoOutput(drop);
-            if (doubleOut && level.getRandom().nextFloat() < 0.5f) insertIntoOutput(drop.copy());
         }
 
         if (bitStack.isDamageableItem()) {

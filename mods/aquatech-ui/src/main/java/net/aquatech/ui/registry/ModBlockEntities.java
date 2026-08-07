@@ -23,9 +23,6 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<SeabedDredgerBlockEntity>> SEABED_DREDGER = BLOCK_ENTITIES.register("seabed_dredger",
             () -> BlockEntityType.Builder.of(SeabedDredgerBlockEntity::new, ModBlocks.SEABED_DREDGER.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<net.aquatech.ui.block.entity.HydroReactorBlockEntity>> HYDRO_REACTOR = BLOCK_ENTITIES.register("hydro_reactor",
-            () -> BlockEntityType.Builder.of(net.aquatech.ui.block.entity.HydroReactorBlockEntity::new, ModBlocks.HYDRO_REACTOR.get()).build(null));
-
     public static final RegistryObject<BlockEntityType<net.aquatech.ui.block.entity.OceanAltarBlockEntity>> OCEAN_ALTAR = BLOCK_ENTITIES.register("ocean_altar",
             () -> BlockEntityType.Builder.of(net.aquatech.ui.block.entity.OceanAltarBlockEntity::new, ModBlocks.OCEAN_ALTAR.get()).build(null));
 

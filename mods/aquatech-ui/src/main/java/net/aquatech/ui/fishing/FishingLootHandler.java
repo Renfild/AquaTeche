@@ -198,7 +198,18 @@ public class FishingLootHandler {
         List<ItemStack> list = new ArrayList<>();
         switch (type) {
             case NOVICE -> {
-                // Raft survival — chance pool, ores only
+                // 100% guaranteed survival block drop for raft building
+                ItemStack guaranteedStarter;
+                float rStart = random.nextFloat();
+                if (rStart < 0.20f) guaranteedStarter = new ItemStack(Items.COBBLESTONE, 2 + random.nextInt(3));
+                else if (rStart < 0.40f) guaranteedStarter = new ItemStack(Items.DIRT, 2 + random.nextInt(2));
+                else if (rStart < 0.60f) guaranteedStarter = new ItemStack(Items.OAK_SAPLING, 1);
+                else if (rStart < 0.75f) guaranteedStarter = new ItemStack(Items.GRAVEL, 2 + random.nextInt(2));
+                else if (rStart < 0.88f) guaranteedStarter = new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3));
+                else guaranteedStarter = new ItemStack(Items.SAND, 2 + random.nextInt(2));
+                list.add(guaranteedStarter);
+
+                // Plus ores & botania seeds pool
                 List<ItemStack> pool = new ArrayList<>();
                 if (random.nextFloat() < 0.65f) pool.add(new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
                 if (random.nextFloat() < 0.50f) {
@@ -206,14 +217,21 @@ public class FishingLootHandler {
                 }
                 if (random.nextFloat() < 0.45f) pool.add(new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 if (random.nextFloat() < 0.40f) pool.add(new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
-                pickFromPool(list, pool, random, 1, 3);
+                if (random.nextFloat() < 0.40f) pool.add(new ItemStack(Items.WHEAT_SEEDS, 1 + random.nextInt(2)));
+                if (random.nextFloat() < 0.35f) pool.add(new ItemStack(Items.BONE_MEAL, 1 + random.nextInt(2)));
+                if (random.nextFloat() < 0.30f) {
+                    pool.add(getModItem("botania:fertilizer", Items.BONE_MEAL, 1 + random.nextInt(2)));
+                }
+                pickFromPool(list, pool, random, 1, 2);
             }
             case IRON -> {
-                // Chance pool — ores only
+                // Chance pool — ores & botania items
                 List<ItemStack> pool = new ArrayList<>();
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.COPPER_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.35f, getModItem("botania:fertilizer", Items.BONE_MEAL, 2 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.WHEAT_SEEDS, 1 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/yttrium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1));

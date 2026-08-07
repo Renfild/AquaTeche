@@ -195,12 +195,8 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             loot = List.of(new ItemStack(Items.COD, 1));
         }
 
-        boolean doubleOut = MachineUpgrades.doubleOutput(itemHandler, UPGRADE_SLOT);
         for (ItemStack drop : loot) {
             insertIntoOutput(drop);
-            if (doubleOut && level.getRandom().nextFloat() < 0.5f) {
-                insertIntoOutput(drop.copy());
-            }
         }
 
         // Durability: always consume when fishing resources

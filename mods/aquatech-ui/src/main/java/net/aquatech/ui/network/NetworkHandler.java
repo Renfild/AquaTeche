@@ -19,7 +19,7 @@ public class NetworkHandler {
 
     private static final String PROTOCOL_VERSION = "6";
     /** Mohist reports isAcceptingMessages=true too early — gate custom S2C by join tick. */
-    public static final int LOGIN_READY_DELAY_TICKS = 100;
+    public static final int LOGIN_READY_DELAY_TICKS = 10;
     private static final Map<UUID, Integer> JOIN_TICK = new ConcurrentHashMap<>();
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(

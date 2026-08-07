@@ -9,10 +9,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-/** При входе игрока синкаем каталог меню после завершения handshake. */
+/** РџСЂРё РІС…РѕРґРµ РёРіСЂРѕРєР° СЃРёРЅРєР°РµРј РєР°С‚Р°Р»РѕРі РјРµРЅСЋ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ handshake. */
 @Mod.EventBusSubscriber(modid = CasesMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class PlayerJoinSync {
-    private static final int LOGIN_SYNC_DELAY_TICKS = 80;
+    private static final int LOGIN_SYNC_DELAY_TICKS = 100;
 
     private PlayerJoinSync() {}
 
@@ -27,3 +27,4 @@ public final class PlayerJoinSync {
         }));
     }
 }
+

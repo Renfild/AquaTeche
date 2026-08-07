@@ -163,21 +163,49 @@ public class OceanFilterBlockEntity extends BlockEntity implements MenuProvider 
         return false;
     }
 
+    private static final String[] BOTANIA_PETALS = {
+            "botania:petal_white", "botania:petal_red", "botania:petal_blue", "botania:petal_yellow",
+            "botania:petal_green", "botania:petal_purple", "botania:petal_cyan", "botania:petal_lime",
+            "botania:petal_pink", "botania:petal_orange", "botania:petal_magenta", "botania:petal_brown",
+            "botania:petal_black", "botania:petal_gray", "botania:petal_light_gray", "botania:petal_light_blue"
+    };
+
+    private static final String[] BOTANIA_FLOWERS = {
+            "botania:mystical_flower_white", "botania:mystical_flower_red", "botania:mystical_flower_blue",
+            "botania:mystical_flower_yellow", "botania:mystical_flower_green", "botania:mystical_flower_purple",
+            "botania:mystical_flower_cyan", "botania:mystical_flower_pink", "botania:mystical_flower_orange"
+    };
+
+    private ItemStack getModItem(String regName, Item fallback, int count) {
+        ResourceLocation loc = new ResourceLocation(regName);
+        Item item = BuiltInRegistries.ITEM.get(loc);
+        if (item != null && item != Items.AIR) {
+            return new ItemStack(item, count);
+        }
+        return new ItemStack(fallback, count);
+    }
+
     private void doFilterOperation(Level level, ItemStack filterStack) {
         List<ItemStack> filteredLoot = new ArrayList<>();
         float rng = level.getRandom().nextFloat();
 
-        if (rng < 0.40f) filteredLoot.add(new ItemStack(Items.RAW_IRON, 1 + level.getRandom().nextInt(2)));
-        if (rng < 0.30f) filteredLoot.add(new ItemStack(Items.RAW_COPPER, 2 + level.getRandom().nextInt(3)));
-        if (rng < 0.20f) filteredLoot.add(new ItemStack(Items.CLAY_BALL, 2 + level.getRandom().nextInt(4)));
-        if (rng < 0.50f) filteredLoot.add(new ItemStack(Items.KELP, 1 + level.getRandom().nextInt(3)));
-        if (filteredLoot.isEmpty()) filteredLoot.add(new ItemStack(Items.SAND, 2));
+        if (rng < 0.85f) {
+            String randPetal = BOTANIA_PETALS[level.getRandom().nextInt(BOTANIA_PETALS.length)];
+            filteredLoot.add(getModItem(randPetal, Items.POPPY, 1 + level.getRandom().nextInt(3)));
+        }
+        if (rng < 0.60f) {
+            String randFlower = BOTANIA_FLOWERS[level.getRandom().nextInt(BOTANIA_FLOWERS.length)];
+            filteredLoot.add(getModItem(randFlower, Items.DANDELION, 1 + level.getRandom().nextInt(2)));
+        }
+        if (rng < 0.40f) {
+            filteredLoot.add(getModItem("botania:fertilizer", Items.BONE_MEAL, 1 + level.getRandom().nextInt(2)));
+        }
+        if (filteredLoot.isEmpty()) {
+            filteredLoot.add(new ItemStack(Items.KELP, 2));
+        }
 
         for (ItemStack drop : filteredLoot) {
             insertIntoOutput(drop);
-            if (MachineUpgrades.doubleOutput(itemHandler, UPGRADE_SLOT) && level.getRandom().nextFloat() < 0.5f) {
-                insertIntoOutput(drop.copy());
-            }
         }
 
         // Damage Mesh Filter
