@@ -1,5 +1,5 @@
 // KubeJS Client Script: Strip obsolete "drops from fishing" tooltips from Avaritia / Botania / Re-Avaritia items
-ClientEvents.tooltip((event) => {
+ItemEvents.tooltip((event) => {
   const targetMods = ['avaritia', 're_avaritia', 'botania'];
   
   targetMods.forEach((modId) => {
