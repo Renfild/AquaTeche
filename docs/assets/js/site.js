@@ -122,7 +122,7 @@
       const note = document.createElement("div");
       note.className = "notice-banner inline";
       const page = form.id === "register-form" ? "register.html" : "login.html";
-      note.innerHTML = `<a href="${CANONICAL}/${page}">Продолжить</a>`;
+      note.innerHTML = `<a href="${CANONICAL}/${page}">Войти или зарегистрироваться</a>`;
       form.before(note);
     });
   }
@@ -190,7 +190,7 @@
         <div class="container footer-grid">
           <div>
             <div class="brand" style="margin-bottom:0.8rem"><span class="brand-mark"></span>AquaTech</div>
-            <p style="color:var(--muted);margin:0;max-width:28rem">Океанский модпак Minecraft 1.20.1 Forge + Mohist. Лаунчер, сборка и сервер — в одном проекте.</p>
+            <p style="color:var(--muted);margin:0;max-width:28rem">Minecraft 1.20.1 Forge + Mohist. Лаунчер качает сборку, сервер в океане.</p>
           </div>
           <div>
             <h4>Игра</h4>
@@ -493,30 +493,29 @@
         slug: "vip",
         title: "VIP",
         price_rub: 149,
-        description:
-          "Базовая поддержка сервера. Префикс и удобства на AquaTech; покупка на сайте временно закрыта.",
-        perks: ["Префикс VIP в чате", "+1 дом /sethome", "Цветной ник", "Приоритет в очереди входа"],
+        description: "Префикс, цветной ник, +1 дом. Купить на сайте пока нельзя.",
+        perks: ["Префикс VIP в чате", "+1 дом /sethome", "Цветной ник", "Приоритет в очереди"],
       },
       {
         slug: "premium",
         title: "Premium",
         price_rub: 299,
-        description: "Всё из VIP плюс ежедневный кейс на сервере. Оплата на сайте пока недоступна.",
-        perks: ["Всё из VIP", "Кейс в день (на сервере)", "Приоритет входа", "Доп. слот варпа"],
+        description: "Всё из VIP, кейс в день на сервере, приоритет входа.",
+        perks: ["Всё из VIP", "Кейс в день (в игре)", "Приоритет входа", "Доп. слот варпа"],
       },
       {
         slug: "deluxe",
         title: "Deluxe",
         price_rub: 599,
-        description: "Бонусы к улову и рамка профиля. Покупка через сайт отключена до оплаты.",
+        description: "Бонус к улову и рамка профиля. Оплата на сайте выключена.",
         perks: ["Всё из Premium", "Рамка профиля", "Бонус к улову", "Бейдж Deluxe"],
       },
       {
         slug: "ultimate",
         title: "Ultimate",
         price_rub: 1199,
-        description: "Максимальный ранг. Онлайн-оплата будет позже — сейчас только витрина.",
-        perks: ["Всё из Deluxe", "Бейдж Ultimate", "Максимум домов", "Приоритетная поддержка"],
+        description: "Максимум привилегий на сервере. Оплата на сайте позже.",
+        perks: ["Всё из Deluxe", "Бейдж Ultimate", "Максимум домов", "Приоритет в поддержке"],
       },
     ],
     case: [
@@ -524,21 +523,21 @@
         slug: "ocean",
         title: "Океанский кейс",
         price_rub: 0,
-        description: "Базовый кейс с монетами. Открытие на сайте отключено — крутится в игре (F4 / casesmod).",
-        perks: ["AquaCoins", "Расходники", "Шанс на мелкий буст"],
+        description: "Монеты и расходники. Открывается в игре (F4).",
+        perks: ["AquaCoins", "Расходники", "Мелкий буст"],
       },
       {
         slug: "fisher",
         title: "Кейс рыбака",
         price_rub: 0,
-        description: "Награды под рыбалку StarCatcher. Сайтовая рулетка выключена.",
-        perks: ["Ресурсы улова", "Шанс на буст удочки", "Монеты"],
+        description: "Лут под StarCatcher. Рулетки на сайте нет.",
+        perks: ["Ресурсы улова", "Буст удочки", "Монеты"],
       },
       {
         slug: "depth",
         title: "Глубинный кейс",
         price_rub: 0,
-        description: "Редкая косметика и пробные привилегии. Только на сервере.",
+        description: "Редкая косметика и пробные привилегии. Только сервер.",
         perks: ["Рамка профиля", "Пробная привилегия", "Крупный запас монет"],
       },
     ],
@@ -559,7 +558,7 @@
     root.querySelectorAll("button[disabled]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-        toast("Покупки временно отключены");
+        toast("Покупки выключены");
       });
     });
   }

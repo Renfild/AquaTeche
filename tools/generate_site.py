@@ -28,21 +28,21 @@ SHELL = """<!DOCTYPE html>
 </html>
 """
 
-PAGES: dict[str, tuple[str, str, str]] = {}
+PAGES: dict[str, tuple[str, str, str, str]] = {}
 
 PAGES["index.html"] = (
     "home",
-    "AquaTech — океанский Minecraft 1.20.1",
-    "Официальный сайт AquaTech: лаунчер, удочки StarCatcher, кейсы, донат и профили игроков.",
+    "AquaTech · океанский Minecraft 1.20.1",
+    "Лаунчер AquaTech, сервер 1.20.1 Forge, удочки StarCatcher, кейсы и донат.",
     """
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="container hero-inner">
-      <div class="eyebrow">Океанский модпак · 1.20.1 Forge</div>
-      <h1>AquaTech — <span>глубины и неизведанность</span></h1>
-      <p class="hero-lead">Спавн на плоту посреди океана, 12 удочек StarCatcher, авторыбалка, кейсы и индустриальный прогресс. Скачай лаунчер — сборка приедет сама.</p>
+      <div class="eyebrow">Модпак · Minecraft 1.20.1 Forge</div>
+      <h1>AquaTech</h1>
+      <p class="hero-lead">Спавн на плоту в океане. Двенадцать удочек StarCatcher, авторыбалка, кейсы и индустриальные моды. Скачай лаунчер (~5 МБ), сборка подтянется сама.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" data-download href="#">Скачать лаунчер · ~5 МБ</a>
+        <a class="btn btn-primary" data-download href="#">Скачать лаунчер</a>
         <a class="btn btn-secondary" href="register.html">Регистрация</a>
         <a class="btn btn-ghost" href="store.html">Магазин</a>
       </div>
@@ -60,29 +60,29 @@ PAGES["index.html"] = (
     <div class="container">
       <div class="section-head">
         <div>
-          <h2>Что тебя ждёт</h2>
-          <p>Не обложка — полноценный проект: сайт, лаунчер, сборка и сервер связаны вместе.</p>
+          <h2>На сервере</h2>
+          <p>Один мир-океан, свой лаунчер и сайт с профилями.</p>
         </div>
-        <a class="btn btn-secondary" href="start.html">Как начать</a>
+        <a class="btn btn-secondary" href="start.html">Как зайти</a>
       </div>
       <div class="grid-3">
         <a class="card card-link" href="rods.html">
           <div class="feature-art rods"></div>
-          <span class="tag">Прогрессия</span>
-          <h3>12 удочек StarCatcher</h3>
-          <p>От бамбука до легендарных удилищ с ресурсными пулами AquaTech.</p>
+          <span class="tag">Удочки</span>
+          <h3>StarCatcher</h3>
+          <p>Бамбук в начале, дальше руды и индустриальный лут из пулов AquaTech.</p>
         </a>
         <a class="card card-link" href="cases.html">
           <div class="feature-art cases"></div>
-          <span class="tag gold">Награды</span>
-          <h3>Кейсы и привилегии</h3>
-          <p>Крути кейсы, копи AquaCoins и открывай VIP–Ultimate на сервере.</p>
+          <span class="tag gold">Кейсы</span>
+          <h3>Награды в игре</h3>
+          <p>Кейсы крутятся на сервере (F4). На сайте только состав.</p>
         </a>
         <a class="card card-link" href="top.html">
           <div class="feature-art tech"></div>
-          <span class="tag">Сообщество</span>
-          <h3>Топы и профили</h3>
-          <p>Онлайн, монеты, лайки — смотри лидеров и оформляй свой профиль.</p>
+          <span class="tag">Игроки</span>
+          <h3>Топы</h3>
+          <p>Рейтинг по лайкам и монетам. Профиль можно оформить после входа.</p>
         </a>
       </div>
     </div>
@@ -94,26 +94,26 @@ PAGES["index.html"] = (
         <div class="section-head">
           <div>
             <h2>Новости</h2>
-            <p>Обновления лаунчера, сборки и сервера.</p>
+            <p>Что менялось в лаунчере и на сервере.</p>
           </div>
         </div>
         <div class="news-list">
           <a class="news-item" href="news.html">
             <time>8 августа 2026</time>
-            <h3>Лаунчер 2.9.8 и CDN сборки</h3>
-            <p>Маленький bootstrap ~5 МБ, обновления модов через jsDelivr + GitHub Releases.</p>
+            <h3>Лаунчер 2.9.9</h3>
+            <p>Маленький exe ~5 МБ. Моды и сборка качаются при запуске.</p>
           </a>
           <a class="news-item" href="news.html">
             <time>Июль 2026</time>
-            <h3>StarCatcher loot-таблицы</h3>
-            <p>Полная прогрессия ресурсных удочек и совместимость с авторыбалкой.</p>
+            <h3>Лут StarCatcher</h3>
+            <p>Таблицы улова для всех тиров удочек, в том числе с авторыбалкой.</p>
           </a>
         </div>
       </div>
       <div class="card">
         <span class="tag">Сервер</span>
-        <h3>AquaTech Ocean Skyblock</h3>
-        <p style="margin:.6rem 0 1rem;color:var(--muted)">Один основной мир: океан, плот 4×4, индустриальные моды и кастомный UI.</p>
+        <h3>AquaTech Ocean</h3>
+        <p style="margin:.6rem 0 1rem;color:var(--muted)">Океанский skyblock: плот 4×4, Forge 1.20.1, Mohist. Заходи по IP ниже.</p>
         <div class="ip-box" data-copy-ip style="width:100%;justify-content:space-between">
           <div>
             <small>ПОДКЛЮЧЕНИЕ</small>
@@ -133,34 +133,34 @@ PAGES["index.html"] = (
 
 PAGES["start.html"] = (
     "start",
-    "Начать игру — AquaTech",
-    "Скачай лаунчер AquaTech для Windows и зайди на сервер.",
+    "Начать игру · AquaTech",
+    "Скачай лаунчер AquaTech и зайди на сервер.",
     """
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Старт</div>
-      <h1>Начни приключение на AquaTech</h1>
-      <p>Лаунчер сам скачает сборку. Тебе нужен только Windows и ~5 МБ на первый файл.</p>
+      <h1>Как зайти</h1>
+      <p>Нужен Windows и ~5 МБ под первый файл. Остальное лаунчер скачает сам.</p>
       <div class="banner"></div>
     </div>
   </section>
   <section class="section" style="padding-top:1rem">
     <div class="container grid-2">
       <div class="card">
-        <h3>1. Скачай лаунчер</h3>
-        <p style="color:var(--muted);margin:.6rem 0 1rem">AquaTech.exe — маленький bootstrap. Полный лаунчер установится в %LOCALAPPDATA%\\AquaTech.</p>
+        <h3>1. Лаунчер</h3>
+        <p style="color:var(--muted);margin:.6rem 0 1rem">AquaTech.exe ставит приложение в %LOCALAPPDATA%\\AquaTech и тянет моды.</p>
         <a class="btn btn-primary" data-download href="#">Скачать для Windows</a>
       </div>
       <div class="card">
-        <h3>2. Войди и играй</h3>
+        <h3>2. Игра</h3>
         <ul class="perk-list">
-          <li>Укажи ник в лаунчере</li>
+          <li>Впиши ник в лаунчере</li>
           <li>Дождись синхронизации модов</li>
-          <li>Жми «Играть» — авто-вход на сервер</li>
-          <li>IP: katherine-hydro.tun.ply.gg:31279</li>
+          <li>Жми «Играть» (вход на сервер сам)</li>
+          <li>IP вручную: katherine-hydro.tun.ply.gg:31279</li>
         </ul>
         <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
-          <a class="btn btn-secondary" href="register.html">Создать профиль на сайте</a>
+          <a class="btn btn-secondary" href="register.html">Профиль на сайте</a>
           <button class="btn btn-ghost" type="button" data-copy-ip>Скопировать IP</button>
         </div>
       </div>
@@ -171,15 +171,15 @@ PAGES["start.html"] = (
 
 PAGES["store.html"] = (
     "store",
-    "Магазин — AquaTech",
-    "Витрина привилегий VIP–Ultimate на сервере AquaTech. Покупка на сайте временно отключена.",
+    "Магазин · AquaTech",
+    "Привилегии VIP–Ultimate на сервере AquaTech. Покупка на сайте пока выключена.",
     """
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Магазин</div>
       <h1>Привилегии</h1>
-      <p>Ранги сервера AquaTech. Ниже — состав и цены. Онлайн-оплата на сайте пока выключена.</p>
-      <div class="notice-banner inline">Покупки временно отключены. Донат будет доступен после подключения оплаты.</div>
+      <p>Состав рангов и цены. Купить на сайте пока нельзя.</p>
+      <div class="notice-banner inline">Покупки выключены. Оплату подключим позже.</div>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -190,15 +190,15 @@ PAGES["store.html"] = (
 
 PAGES["cases.html"] = (
     "cases",
-    "Кейсы — AquaTech",
-    "Витрина кейсов AquaTech. Открытие на сайте отключено — кейсы крутятся в игре.",
+    "Кейсы · AquaTech",
+    "Состав кейсов AquaTech. Открывать их нужно в игре.",
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Награды</div>
-      <h1>Кейсы</h1>
-      <p>Состав кейсов для сервера. Сайтовая рулетка отключена — открывай кейсы в игре (меню F4 / casesmod).</p>
-      <div class="notice-banner inline">Открытие кейсов на сайте запрещено. Используй игровые механики на сервере.</div>
+      <div class="eyebrow">Кейсы</div>
+      <h1>Что внутри</h1>
+      <p>Сайт только показывает состав. Открывай кейсы в игре: F4 / casesmod.</p>
+      <div class="notice-banner inline">На сайте кейсы не открываются.</div>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -213,7 +213,7 @@ RODS = [
     ("T3", "Good Old Rod", "Железо, редстоун, лазурит, редкие руды IU."),
     ("T4", "Fine Rod", "Золото, алмазы, продвинутые руды."),
     ("T5", "Excellent Rod", "Плотные руды и индустриальный лут."),
-    ("T6+", "Легендарные", "Верхние тиры StarCatcher — максимум глубин."),
+    ("T6+", "Легендарные", "Верхние тиры StarCatcher с самым жирным пулом."),
 ]
 
 rod_cards = "\n".join(
@@ -227,14 +227,14 @@ rod_cards = "\n".join(
 
 PAGES["rods.html"] = (
     "rods",
-    "Удочки StarCatcher — AquaTech",
-    "Прогрессия 12 удочек StarCatcher на сервере AquaTech.",
+    "Удочки StarCatcher · AquaTech",
+    "Прогрессия удочек StarCatcher на AquaTech.",
     f"""
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">StarCatcher</div>
       <h1>Удочки и лут</h1>
-      <p>Ресурсные удочки отменяют ванильный улов и крутят пулы AquaTech. Полная таблица — в документации репозитория.</p>
+      <p>Ванильный улов выключен. Каждая удочка крутит свой пул ресурсов AquaTech.</p>
       <div class="banner" style="background:radial-gradient(circle at 30% 40%, rgba(245,197,66,.3), transparent 35%), linear-gradient(145deg,#164e63,#0f766e,#083344)"></div>
     </div>
   </section>
@@ -248,14 +248,14 @@ PAGES["rods.html"] = (
 
 PAGES["top.html"] = (
     "top",
-    "Топы игроков — AquaTech",
-    "Рейтинги игроков AquaTech по онлайну, монетам и лайкам.",
+    "Топы игроков · AquaTech",
+    "Рейтинги игроков AquaTech.",
     """
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Рейтинги</div>
-      <h1>Топы игроков</h1>
-      <p>Лидеры по лайкам, монетам и времени в игре.</p>
+      <h1>Топы</h1>
+      <p>Кто сколько наиграл, кто накопил монет, кого лайкнули.</p>
       <div class="banner"></div>
       <div class="tabs">
         <button class="tab active" type="button" data-top-tab="playtime">По онлайну</button>
@@ -270,32 +270,32 @@ PAGES["top.html"] = (
 
 PAGES["news.html"] = (
     "news",
-    "Новости — AquaTech",
-    "Новости и обновления проекта AquaTech.",
+    "Новости · AquaTech",
+    "Новости AquaTech.",
     """
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Блог</div>
-      <h1>Новости и обновления</h1>
-      <p>Лаунчер, сборка, сайт и сервер.</p>
+      <h1>Новости</h1>
+      <p>Лаунчер, сборка, сервер.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
     <div class="container news-list">
       <article class="news-item">
         <time>8 августа 2026</time>
-        <h3>Портал AquaTech и лаунчер 2.9.8</h3>
-        <p>Сайт пересобран как полноценный портал: профили, топы, магазин, удочки. Лаунчер качает сборку с CDN.</p>
+        <h3>Лаунчер 2.9.9 и сайт</h3>
+        <p>Профили и магазин на сайте. Лаунчер качает сборку при старте.</p>
       </article>
       <article class="news-item">
         <time>Август 2026</time>
         <h3>Playit только для игры</h3>
-        <p>IP туннеля — только для входа на сервер. Обновления модов больше не идут через Playit.</p>
+        <p>Туннель нужен для входа на сервер. Моды с него больше не тянем.</p>
       </article>
       <article class="news-item">
         <time>Июль 2026</time>
-        <h3>Авторыбалка и StarCatcher</h3>
-        <p>Совместимость aquatech_ui с прогрессией удочек и кастомными пулами лута.</p>
+        <h3>Авторыбалка + StarCatcher</h3>
+        <p>aquatech_ui работает с прогрессией удочек и кастомными пулами.</p>
       </article>
     </div>
   </section>
@@ -304,26 +304,26 @@ PAGES["news.html"] = (
 
 PAGES["profile.html"] = (
     "profile",
-    "Профиль игрока — AquaTech",
-    "Профиль игрока AquaTech: статистика, лайки и кастомизация.",
+    "Профиль игрока · AquaTech",
+    "Профиль игрока AquaTech.",
     """
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Профиль</div>
-      <h1>Страница игрока</h1>
-      <p>Статистика, био и оформление. Свой профиль можно править после входа.</p>
+      <h1>Игрок</h1>
+      <p>Статы, био, тема оформления. Свой профиль правится после входа.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
     <div class="container profile-layout">
       <div id="profile-root"></div>
       <div class="card">
-        <h3>Быстрые ссылки</h3>
+        <h3>Ссылки</h3>
         <ul class="perk-list">
-          <li><a href="top.html">Топы игроков</a></li>
-          <li><a href="players.html">Поиск игроков</a></li>
-          <li><a href="store.html">Магазин привилегий</a></li>
-          <li><a href="start.html">Скачать лаунчер</a></li>
+          <li><a href="top.html">Топы</a></li>
+          <li><a href="players.html">Поиск</a></li>
+          <li><a href="store.html">Магазин</a></li>
+          <li><a href="start.html">Лаунчер</a></li>
         </ul>
       </div>
     </div>
@@ -333,14 +333,14 @@ PAGES["profile.html"] = (
 
 PAGES["login.html"] = (
     "login",
-    "Вход — AquaTech",
+    "Вход · AquaTech",
     "Вход в профиль AquaTech.",
     """
   <section class="page-hero">
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Вход</h1>
-      <p>Войди с ником Minecraft (латиница, цифры, _).</p>
+      <p>Ник Minecraft: латиница, цифры, _.</p>
       <form class="card form" id="login-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="••••" required /></div>
@@ -354,14 +354,14 @@ PAGES["login.html"] = (
 
 PAGES["register.html"] = (
     "register",
-    "Регистрация — AquaTech",
-    "Создай профиль на сайте AquaTech.",
+    "Регистрация · AquaTech",
+    "Регистрация на сайте AquaTech.",
     """
   <section class="page-hero">
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Регистрация</h1>
-      <p>Ник: 3–16 символов (A–Z, 0–9, _). Пароль от 4 символов.</p>
+      <p>Ник 3–16 символов (A–Z, 0–9, _). Пароль от 4.</p>
       <form class="card form" id="register-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required minlength="4" /></div>
@@ -375,17 +375,17 @@ PAGES["register.html"] = (
 
 PAGES["players.html"] = (
     "players",
-    "Поиск игроков — AquaTech",
-    "Найди игрока AquaTech по нику.",
+    "Поиск игроков · AquaTech",
+    "Поиск игроков AquaTech.",
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Сообщество</div>
-      <h1>Поиск игроков</h1>
-      <p>Найди игрока по нику и открой его профиль.</p>
+      <div class="eyebrow">Игроки</div>
+      <h1>Поиск</h1>
+      <p>Введи ник, открой профиль.</p>
       <div class="field" style="margin-top:1.25rem;max-width:420px">
         <label>Ник</label>
-        <input id="player-search" placeholder="Начни вводить…" />
+        <input id="player-search" placeholder="Ник…" />
       </div>
       <div class="top-list" id="player-results" style="margin-top:1.25rem"></div>
     </div>
@@ -395,20 +395,20 @@ PAGES["players.html"] = (
 
 PAGES["rules.html"] = (
     "rules",
-    "Правила — AquaTech",
-    "Правила сообщества AquaTech.",
+    "Правила · AquaTech",
+    "Правила AquaTech.",
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Сообщество</div>
-      <h1>Правила</h1>
+      <div class="eyebrow">Правила</div>
+      <h1>На сервере</h1>
       <div class="card" style="margin-top:1.25rem">
         <ol class="perk-list" style="list-style:decimal;padding-left:1.2rem">
-          <li>Не читерь и не используй дюпы.</li>
-          <li>Не мешай другим на спавне и в чужих базах.</li>
-          <li>Не оскорбляй игроков в чате.</li>
-          <li>Реклама других серверов запрещена.</li>
-          <li>Администрация может откатить гриф и выдать мут/бан.</li>
+          <li>Читы и дюпы запрещены.</li>
+          <li>Не мешай на спавне и в чужих базах.</li>
+          <li>Без оскорблений в чате.</li>
+          <li>Чужие сервера в чате не рекламируй.</li>
+          <li>Админы могут откатить гриф и выдать мут/бан.</li>
         </ol>
       </div>
     </div>
@@ -422,7 +422,6 @@ def main() -> None:
         html = SHELL.format(page=page, title=title, desc=desc, body=body)
         (DOCS / name).write_text(html, encoding="utf-8")
         print("wrote", name)
-    # Keep root index in sync with docs home for non-Pages previews
     (ROOT / "index.html").write_text((DOCS / "index.html").read_text(encoding="utf-8"), encoding="utf-8")
     print("synced root index.html")
 

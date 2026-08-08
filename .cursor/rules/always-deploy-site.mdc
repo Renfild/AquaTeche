@@ -1,0 +1,23 @@
+---
+description: After site/portal changes, always deploy and smoke-check
+alwaysApply: true
+---
+
+# Always deploy the site after portal changes
+
+Whenever you finish changes that players see on the web portal (anything under `docs/`, `functions/`, `worker/`, `migrations/`, `tools/generate_site.py`, `wrangler.toml`, `wrangler.worker.toml`), **deploy and verify** before ending the turn.
+
+## Steps
+
+1. Regenerate HTML if copy/layout changed: `python tools/generate_site.py`
+2. Commit only portal-related files (ask first if commit policy is unclear; if the user said «заливай» / deploy, commit + push is implied).
+3. Push `main` so Cloudflare Workers Builds runs `wrangler deploy -c wrangler.worker.toml`.
+4. Smoke-check live host: `https://aquatech.santcrail.workers.dev/`
+   - home loads, header/auth shell works
+   - `/api/catalog` returns 200
+   - login/register pages show player copy (no pages.dev / D1 / workers.dev marketing jargon)
+5. Prefer workers.dev for player links; `*.pages.dev` may be blocked on some networks.
+
+## Copy
+
+Strip AI-slop from player-facing text (anti-ai-slop-writing skill). Keep store/case descriptions short and concrete.

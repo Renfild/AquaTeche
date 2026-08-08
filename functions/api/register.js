@@ -35,9 +35,9 @@ export async function onRequestPost(context) {
   const userId = created.id;
   await env.DB.prepare(
     `INSERT INTO profiles (user_id, bio, badges_json)
-     VALUES (?, 'Исследователь глубин AquaTech.', ?)`
+     VALUES (?, 'Новый игрок AquaTech.', ?)`
   )
-    .bind(userId, JSON.stringify(["Новичок глубин", "Зарегистрирован"]))
+    .bind(userId, JSON.stringify(["Новичок", "С сайта"]))
     .run();
 
   const sid = newSessionId();
