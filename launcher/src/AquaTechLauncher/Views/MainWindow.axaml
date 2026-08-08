@@ -1,0 +1,191 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AquaTechLauncher.ViewModels"
+        x:Class="AquaTechLauncher.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/aquatech.ico"
+        Title="AquaTech"
+        Width="980" Height="640"
+        MinWidth="980" MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        Background="#061018"
+        FontFamily="Segoe UI">
+
+  <Window.Styles>
+    <Style Selector="Button.nav">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="#8BA0B0"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Left"/>
+      <Setter Property="Padding" Value="14,10"/>
+      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="FontSize" Value="13"/>
+    </Style>
+    <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#132836"/>
+      <Setter Property="Foreground" Value="#E6EEF4"/>
+    </Style>
+    <Style Selector="Button.nav.active">
+      <Setter Property="Background" Value="#132836"/>
+      <Setter Property="Foreground" Value="#E6EEF4"/>
+    </Style>
+    <Style Selector="TextBox.field">
+      <Setter Property="Background" Value="#0A141C"/>
+      <Setter Property="Foreground" Value="#E6EEF4"/>
+      <Setter Property="BorderBrush" Value="#1A2C3C"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="Padding" Value="12,10"/>
+      <Setter Property="CaretBrush" Value="#3DB8C5"/>
+    </Style>
+  </Window.Styles>
+
+  <Grid ColumnDefinitions="208,*">
+    <!-- Sidebar -->
+    <Border Grid.Column="0" Background="#0A1520" Padding="0">
+      <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="18,22,18,8" Spacing="2">
+          <TextBlock Text="AQUATECH" FontSize="18" FontWeight="SemiBold" Foreground="#E6EEF4"/>
+          <TextBlock Text="Launcher" FontSize="11" Foreground="#5A7080"/>
+        </StackPanel>
+
+        <Border DockPanel.Dock="Top" Background="#132836" CornerRadius="8" Margin="14,10,14,18" Padding="10,7">
+          <TextBlock Text="{Binding ServerChip}" FontSize="10" Foreground="#3DB8C5" TextWrapping="Wrap"/>
+        </Border>
+
+        <StackPanel DockPanel.Dock="Top" Margin="10,0" Spacing="2">
+          <Button Classes="nav" Content="Игра" Command="{Binding ShowPlayCommand}"
+                  Classes.active="{Binding IsPlayPage}"/>
+          <Button Classes="nav" Content="Настройки" Command="{Binding ShowSettingsCommand}"
+                  Classes.active="{Binding IsSettingsPage}"/>
+          <Button Classes="nav" Content="Активность" Command="{Binding ShowLogCommand}"
+                  Classes.active="{Binding IsLogPage}"/>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Bottom" Margin="18,16" Spacing="2" VerticalAlignment="Bottom">
+          <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#5A7080"/>
+          <TextBlock Text="{Binding McLabel}" FontSize="10" Foreground="#5A7080"/>
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <!-- Pages -->
+    <Panel Grid.Column="1">
+      <!-- Play -->
+      <DockPanel IsVisible="{Binding IsPlayPage}">
+        <Border DockPanel.Dock="Top" Height="180" Background="#0C1620">
+          <StackPanel VerticalAlignment="Center" Margin="36,0" Spacing="8">
+            <TextBlock Text="AQUATECH" FontSize="42" FontWeight="SemiBold" Foreground="#E6EEF4"/>
+            <TextBlock Text="Minecraft 1.20.1  ·  впиши ник и жми Играть" FontSize="12" Foreground="#8BA0B0"/>
+          </StackPanel>
+        </Border>
+
+        <ScrollViewer>
+          <StackPanel Margin="36,22,36,20" Spacing="16">
+            <StackPanel Spacing="6">
+              <TextBlock Text="НИКНЕЙМ" FontSize="10" Foreground="#5A7080"/>
+              <TextBox Classes="field" Text="{Binding Username}" Watermark="никнейм"/>
+            </StackPanel>
+
+            <Border Background="#101C28" CornerRadius="10" Padding="18,14">
+              <StackPanel Spacing="8">
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Text="AquaTech Ocean" FontSize="18" FontWeight="SemiBold" Foreground="#E6EEF4"/>
+                  <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="{Binding ServerStatus}" FontSize="11" Foreground="#8BA0B0" VerticalAlignment="Center"/>
+                    <TextBlock Text="●" FontSize="12" Foreground="{Binding ServerDot}" VerticalAlignment="Center"/>
+                  </StackPanel>
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Text="{Binding ServerAddress}" FontSize="13" Foreground="#3DB8C5" VerticalAlignment="Center"/>
+                  <Button Grid.Column="1" Content="Скопировать IP" Command="{Binding CopyIpCommand}"
+                          Background="#0A141C" Foreground="#E6EEF4" Padding="14,8" CornerRadius="8"/>
+                </Grid>
+              </StackPanel>
+            </Border>
+
+            <Grid ColumnDefinitions="*,12,*">
+              <Button Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
+                      IsEnabled="{Binding ActionsEnabled}"
+                      Background="{Binding PlayButtonBg}" Foreground="#061018"
+                      FontWeight="SemiBold" FontSize="16" Height="52" CornerRadius="12"
+                      HorizontalContentAlignment="Center"/>
+              <Button Grid.Column="2" Content="{Binding UpdateButtonText}" Command="{Binding UpdateCommand}"
+                      IsEnabled="{Binding ActionsEnabled}"
+                      Background="#101C28" Foreground="#E6EEF4"
+                      FontWeight="SemiBold" FontSize="14" Height="52" CornerRadius="12"
+                      HorizontalContentAlignment="Center"/>
+            </Grid>
+
+            <StackPanel Spacing="8">
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="#8BA0B0"/>
+                <TextBlock Grid.Column="1" Text="{Binding PctText}" FontSize="12" Foreground="#3DB8C5"/>
+              </Grid>
+              <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="6"
+                           Foreground="#3DB8C5" Background="#0A121A"/>
+            </StackPanel>
+
+            <TextBlock Text="Сборка обновится сама при запуске. После старта лаунчер свернётся в панель задач."
+                       FontSize="11" Foreground="#5A7080" TextWrapping="Wrap"/>
+          </StackPanel>
+        </ScrollViewer>
+      </DockPanel>
+
+      <!-- Settings -->
+      <ScrollViewer IsVisible="{Binding IsSettingsPage}">
+        <StackPanel Margin="36,28" Spacing="16" MaxWidth="720" HorizontalAlignment="Left">
+          <TextBlock Text="Настройки" FontSize="22" FontWeight="SemiBold" Foreground="#E6EEF4"/>
+          <TextBlock Text="Папка игры, память и источник обновлений сборки." FontSize="12" Foreground="#8BA0B0"/>
+
+          <Border Background="#101C28" CornerRadius="10" Padding="24,22">
+            <StackPanel Spacing="14">
+              <StackPanel Spacing="6">
+                <TextBlock Text="ОПЕРАТИВКА" FontSize="10" Foreground="#5A7080"/>
+                <TextBox Classes="field" Text="{Binding RamText}"/>
+              </StackPanel>
+              <StackPanel Spacing="6">
+                <TextBlock Text="ПАПКА ИГРЫ" FontSize="10" Foreground="#5A7080"/>
+                <Grid ColumnDefinitions="*,8,Auto">
+                  <TextBox Classes="field" Text="{Binding GameDir}"/>
+                  <Button Grid.Column="2" Content="⋯" Command="{Binding BrowseGameDirCommand}"
+                          Width="44" Height="40" Background="#0A141C" Foreground="#E6EEF4" CornerRadius="8"/>
+                </Grid>
+              </StackPanel>
+              <StackPanel Spacing="6">
+                <TextBlock Text="URL ОБНОВЛЕНИЙ" FontSize="10" Foreground="#5A7080"/>
+                <TextBox Classes="field" Text="{Binding UpdateUrl}"/>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+          <TextBlock Text="Манифест сборки: сайт AquaTech (моды качаются с GitHub Releases)."
+                     FontSize="11" Foreground="#5A7080" TextWrapping="Wrap"/>
+        </StackPanel>
+      </ScrollViewer>
+
+      <!-- Log -->
+      <DockPanel IsVisible="{Binding IsLogPage}" Margin="36,28">
+        <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,12">
+          <TextBlock Text="Активность" FontSize="22" FontWeight="SemiBold" Foreground="#E6EEF4"/>
+          <TextBlock Grid.Column="1" Text="лог установки и синхронизации" FontSize="12"
+                     Foreground="#5A7080" VerticalAlignment="Bottom"/>
+        </Grid>
+        <Border Background="#0C1620" BorderBrush="#1A2C3C" BorderThickness="1" CornerRadius="8" Padding="4">
+          <ListBox ItemsSource="{Binding LogLines}" Background="Transparent" BorderThickness="0">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:LogLine">
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="8,2">
+                  <TextBlock Text="{Binding Time}" FontFamily="Consolas" FontSize="11" Foreground="#5A7080"/>
+                  <TextBlock Text="{Binding Text}" FontFamily="Consolas" FontSize="11"
+                             Foreground="{Binding Color}" TextWrapping="Wrap"/>
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </Border>
+      </DockPanel>
+    </Panel>
+  </Grid>
+</Window>

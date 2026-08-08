@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.11"
+TAG = "client-2.9.12"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -51,7 +51,7 @@ def main() -> None:
             sys.exit(f"missing {f}")
 
     man = {
-        "version": "2.9.11",
+        "version": "2.9.12",
         "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
@@ -60,17 +60,16 @@ def main() -> None:
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## AquaTech Client 2.9.11\n\n"
-        "- Launcher: centered window, server online ping, copy IP, minimize after play\n"
-        "- Player-facing copy cleanup on play screen\n"
-        "- Bootstrap close fix kept from 2.9.10\n"
+        "## AquaTech Client 2.9.12\n\n"
+        "- Launcher rewritten in .NET 9 Avalonia (same Go bootstrap + pack CDN)\n"
+        "- Play / Settings / Log UI with server ping, copy IP, minimize after launch\n"
     )
 
     payload = json.dumps(
         {
             "tag_name": TAG,
             "target_commitish": "main",
-            "name": "AquaTech Client 2.9.11",
+            "name": "AquaTech Client 2.9.12",
             "body": body,
             "draft": True,
             "prerelease": False,

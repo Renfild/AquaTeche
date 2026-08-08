@@ -100,8 +100,8 @@ PAGES["index.html"] = (
         <div class="news-list">
           <a class="news-item" href="news.html">
             <time>8 августа 2026</time>
-            <h3>Лаунчер 2.9.11</h3>
-            <p>Статус сервера в лаунчере, копирование IP, окно по центру. После «Играть» сворачивается.</p>
+            <h3>Лаунчер 2.9.12</h3>
+            <p>Новый лаунчер на Avalonia: пинг сервера, копирование IP, сворачивание после запуска.</p>
           </a>
           <a class="news-item" href="news.html">
             <time>Июль 2026</time>
@@ -284,8 +284,8 @@ PAGES["news.html"] = (
     <div class="container news-list">
       <article class="news-item">
         <time>8 августа 2026</time>
-        <h3>Лаунчер 2.9.11</h3>
-        <p>Пинг сервера и копирование IP в лаунчере. Установщик закрывается сам; квесты в книге на месте.</p>
+        <h3>Лаунчер 2.9.12</h3>
+        <p>Лаунчер переписан на Avalonia. Пинг, копирование IP, сворачивание после «Играть».</p>
       </article>
       <article class="news-item">
         <time>Август 2026</time>
