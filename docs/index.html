@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaTech 1.20.1 — Minecraft Океанический Скайблок & Квантовая Индустрия</title>
+  <meta name="description" content="Официальный сайт сервера AquaTech Minecraft 1.20.1 (Forge + Mohist). Океанический выживание на плоту 4х4, 12 удочек StarCatcher, авторыболовы, кейсы, ядерная энергетика и квантовый эндгейм!">
+  
+  <!-- Fonts: Minecraft-style Press Start 2P + Modern Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       AQUATECH MINECRAFT AQUA DESIGN SYSTEM
+       - Underwater Bioluminescent Deep Sea Palette (#050b14 / #071322 / #00d2ff)
+       - Pixel-art Minecraft GUI Slots & Tooltips
+       - CSS Animated Water Bubbles & Caustic Light Rays
+       - Interactive 12 StarCatcher Rods, Case Opening, Quests & Leaderboard
+       ========================================================================== */
+    
+    :root {
+      /* Colors */
+      --bg-ocean-deep: #050b14;
+      --bg-ocean-card: rgba(10, 25, 47, 0.7);
+      --bg-ocean-slot: #1e293b;
+      
+      --aqua-glow: #00f2fe;
+      --cyan-bright: #38bdf8;
+      --violet-neon: #818cf8;
+      --emerald-prismarine: #10b981;
+      --gold-minecraft: #ffaa00;
+      --red-redstone: #ff4757;
+      
+      /* Minecraft UI Gradients */
+      --grad-aqua-brand: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+      --grad-gold-chest: linear-gradient(135deg, #ffe066 0%, #f59e0b 100%);
+      --grad-dark-slot: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+      
+      /* Minecraft Rarity Colors */
+      --rarity-common: #ffffff;
+      --rarity-uncommon: #55ff55;
+      --rarity-rare: #55ffff;
+      --rarity-epic: #ff55ff;
+      --rarity-legendary: #ffaa00;
+      --rarity-cosmic: #00ffff;
+      
+      /* Fonts */
+      --font-mc: 'Press Start 2P', monospace;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      /* Shadows & Glows */
+      --glow-aqua: 0 0 25px rgba(0, 242, 254, 0.4);
+      --glow-gold: 0 0 25px rgba(255, 170, 0, 0.4);
+      
+      --radius-sm: 6px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-ocean-deep);
+      color: #e2e8f0;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Animated Underwater Bubbles */
+    .ocean-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -40px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(0, 242, 254, 0.2));
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+      animation: riseBubble linear infinite;
+    }
+
+    @keyframes riseBubble {
+      0% { transform: translateY(0) scale(0.8) translateX(0); opacity: 0.2; }
+      50% { transform: translateY(-50vh) scale(1.1) translateX(20px); opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(0.9) translateX(-20px); opacity: 0; }
+    }
+
+    /* Underwater Caustic Light Rays Overlay */
+    .caustics {
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1000px;
+      background: radial-gradient(ellipse at 50% -10%, rgba(0, 242, 254, 0.18) 0%, rgba(5, 11, 20, 0) 75%);
+      pointer-events: none;
+    }
+
+    /* Navigation Bar */
+    header.mc-navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 6%;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 11, 20, 0.85);
+      border-bottom: 2px solid rgba(0, 242, 254, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .brand-icon-box {
+      width: 44px; height: 44px;
+      background: var(--grad-aqua-brand);
+      border: 2px solid #ffffff;
+      box-shadow: var(--glow-aqua);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .brand-icon-box svg { width: 24px; height: 24px; fill: #fff; }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title span {
+      font-family: var(--font-mc);
+      font-size: 8px;
+      color: var(--aqua-glow);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .nav-items {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-items a {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-items a:hover {
+      color: var(--aqua-glow);
+      text-shadow: 0 0 10px var(--aqua-glow);
+    }
+
+    .online-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid var(--emerald-prismarine);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-mc);
+      font-size: 10px;
+      color: var(--emerald-prismarine);
+    }
+
+    .online-dot {
+      width: 8px; height: 8px;
+      background: var(--emerald-prismarine);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--emerald-prismarine);
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.6; }
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      z-index: 1;
+      padding: 170px 6% 100px;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .mc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid var(--aqua-glow);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mc);
+      font-size: 9px;
+      color: var(--aqua-glow);
+      margin-bottom: 20px;
+      box-shadow: var(--glow-aqua);
+    }
+
+    .hero-heading {
+      font-family: var(--font-heading);
+      font-size: 58px;
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+
+    .hero-heading span {
+      background: var(--grad-aqua-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text {
+      font-size: 16px;
+      color: #94a3b8;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Minecraft Styled Buttons */
+    .mc-btn {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .mc-btn-primary {
+      background: var(--grad-aqua-brand);
+      color: #fff;
+      border-color: #ffffff;
+      box-shadow: var(--glow-aqua);
+    }
+
+    .mc-btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 35px var(--aqua-glow);
+    }
+
+    .download-btn-main {
+      padding: 12px 24px;
+      gap: 14px;
+    }
+    .btn-text-wrap {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .btn-main-title {
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .btn-sub-title {
+      font-size: 10px;
+      font-weight: 500;
+      opacity: 0.85;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .btn-icon {
+      font-size: 24px;
+    }
+
+    .mc-btn-gold {
+      background: var(--grad-gold-chest);
+      color: #1e1b4b;
+      border-color: #fff;
+      box-shadow: var(--glow-gold);
+    }
+
+    .mc-btn-gold:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 35px var(--gold-minecraft);
+    }
+
+    /* Server IP Copy Box */
+    .server-ip-card {
+      margin-top: 36px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px solid rgba(0, 242, 254, 0.3);
+      border-radius: var(--radius-md);
+      padding: 16px 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .server-ip-card:hover {
+      border-color: var(--aqua-glow);
+      box-shadow: var(--glow-aqua);
+    }
+
+    .ip-address {
+      font-family: var(--font-mc);
+      font-size: 14px;
+      color: var(--aqua-glow);
+    }
+
+    .ip-sub {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .copy-badge {
+      background: rgba(0, 242, 254, 0.15);
+      color: var(--aqua-glow);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: var(--font-mc);
+      font-size: 9px;
+      border: 1px solid var(--aqua-glow);
+    }
+
+    /* Minecraft GUI Inventory Mockup Card */
+    .mc-gui-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 3px solid #334155;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .gui-header {
+      font-family: var(--font-mc);
+      font-size: 11px;
+      color: var(--gold-minecraft);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #334155;
+      padding-bottom: 12px;
+    }
+
+    .mc-slots-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    /* Minecraft Item Slot Style */
+    .mc-slot {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-right-color: #1e293b;
+      border-bottom-color: #1e293b;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .mc-slot:hover {
+      border-color: var(--aqua-glow);
+      background: rgba(0, 242, 254, 0.1);
+      transform: scale(1.05);
+    }
+
+    .mc-slot.active {
+      border-color: var(--gold-minecraft);
+      box-shadow: 0 0 15px rgba(255, 170, 0, 0.4);
+    }
+
+    .slot-icon {
+      font-size: 24px;
+    }
+
+    .slot-count {
+      position: absolute;
+      bottom: 4px;
+      right: 6px;
+      font-family: var(--font-mc);
+      font-size: 10px;
+      color: #fff;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    /* Custom Minecraft Tooltip Container */
+    .mc-tooltip {
+      background: rgba(16, 0, 16, 0.95);
+      border: 2px solid #280070;
+      border-radius: 6px;
+      padding: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+      font-size: 13px;
+    }
+
+    .mc-tooltip-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--rarity-epic);
+      margin-bottom: 4px;
+    }
+
+    .mc-tooltip-lore {
+      color: #a855f7;
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    /* Section Wrapper */
+    .section-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 100px 6%;
+    }
+
+    .sec-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .sec-title h2 {
+      font-family: var(--font-heading);
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .sec-title p {
+      color: #94a3b8;
+      font-size: 16px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* 12 StarCatcher Rods Interactive Viewer */
+    .rods-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .rod-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 2px solid #334155;
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .rod-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--aqua-glow);
+      box-shadow: var(--glow-aqua);
+    }
+
+    .rod-tier-badge {
+      font-family: var(--font-mc);
+      font-size: 8px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .tier-1 { background: rgba(255, 255, 255, 0.1); color: var(--rarity-common); }
+    .tier-2 { background: rgba(85, 255, 85, 0.15); color: var(--rarity-uncommon); }
+    .tier-3 { background: rgba(85, 255, 255, 0.15); color: var(--rarity-rare); }
+    .tier-4 { background: rgba(255, 85, 255, 0.15); color: var(--rarity-epic); }
+    .tier-5 { background: rgba(255, 170, 0, 0.15); color: var(--rarity-legendary); }
+    .tier-6 { background: rgba(0, 255, 255, 0.2); color: var(--rarity-cosmic); }
+
+    .rod-card h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .rod-drops {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .rod-drops span {
+      color: var(--aqua-glow);
+      font-weight: 600;
+    }
+
+    /* Interactive Act Progression Roadmap */
+    .act-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .act-tab-btn {
+      padding: 12px 22px;
+      border-radius: var(--radius-full);
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #334155;
+      color: #94a3b8;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .act-tab-btn:hover {
+      color: #fff;
+      border-color: var(--aqua-glow);
+    }
+
+    .act-tab-btn.active {
+      background: var(--grad-aqua-brand);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: var(--glow-aqua);
+    }
+
+    .act-detail-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px solid #334155;
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+    }
+
+    .act-detail-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .act-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .act-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: #cbd5e1;
+    }
+
+    .act-checklist li::before {
+      content: "⚓";
+      color: var(--aqua-glow);
+    }
+
+    /* Case Opening Simulator */
+    .cases-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .case-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px solid #334155;
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .case-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold-minecraft);
+      box-shadow: var(--glow-gold);
+    }
+
+    .case-chest-icon {
+      font-size: 64px;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+      animation: chestBounce 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes chestBounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .case-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .case-price {
+      font-family: var(--font-mc);
+      font-size: 18px;
+      color: var(--gold-minecraft);
+    }
+
+    /* Leaderboard Table */
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid #334155;
+    }
+
+    .leaderboard-table th, .leaderboard-table td {
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1px solid #334155;
+    }
+
+    .leaderboard-table th {
+      background: #0f172a;
+      font-family: var(--font-mc);
+      font-size: 10px;
+      color: var(--aqua-glow);
+    }
+
+    .rank-num {
+      font-family: var(--font-mc);
+      font-size: 12px;
+      color: var(--gold-minecraft);
+    }
+
+    /* FAQ Accordion */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid #334155;
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .faq-item:hover {
+      border-color: var(--aqua-glow);
+    }
+
+    .faq-question {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-top: 12px;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* Footer */
+    footer.mc-footer {
+      background: rgba(5, 11, 20, 0.95);
+      border-top: 2px solid rgba(0, 242, 254, 0.2);
+      padding: 60px 6% 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Underwater Animated Bubbles Container -->
+  <div class="ocean-bg" id="bubbleContainer"></div>
+  <div class="caustics"></div>
+
+  <!-- Navigation Bar -->
+  <header class="mc-navbar">
+    <a href="#" class="brand-group">
+      <div class="brand-icon-box">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="brand-title">
+        AquaTech
+        <span>FORGE 1.20.1</span>
+      </div>
+    </a>
+
+    <ul class="nav-items">
+      <li><a href="#rods">Удочки StarCatcher</a></li>
+      <li><a href="#roadmap">Роадмап (6 Актов)</a></li>
+      <li><a href="#cases">Кейсы & Донат</a></li>
+      <li><a href="#top">Топ Игроков</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <div class="online-box">
+      <div class="online-dot"></div>
+      <span>42 / 100 ONLINE</span>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div>
+      <div class="mc-badge">⚡ FORGE 1.20.1 + MOHIST HYBRID</div>
+      <h1 class="hero-heading">Океанический Скайблок <span>& Квантовый Эндгейм</span></h1>
+      <p class="hero-text">
+        Спавн на плоту 4×4 среди океана. Вся выработка ресурсов строится на ступенчатой эволюции <b>12 удочек StarCatcher</b>, авторыболовах <code>aquatech_ui</code>, мультиблочных доменных печах и ядерных реакторах!
+      </p>
+
+      <div class="btn-group">
+        <a href="AquaTechLauncher.exe" download="AquaTechLauncher.exe" class="mc-btn mc-btn-primary download-btn-main">
+          <span class="btn-icon">⚡</span>
+          <div class="btn-text-wrap">
+            <span class="btn-main-title">CКАЧАТЬ ЛАУНЧЕР</span>
+            <span class="btn-sub-title">Windows .EXE · 61.4 МБ · v1.0.0</span>
+          </div>
+        </a>
+        <a href="#start-guide" class="mc-btn mc-btn-gold">Как Начать Играть</a>
+      </div>
+
+      <div class="server-ip-card" onclick="copyIP()">
+        <div>
+          <div class="ip-sub">Нажми, чтобы скопировать IP адрес:</div>
+          <div class="ip-address" id="serverIP">katherine-hydro.tun.ply.gg:31279</div>
+        </div>
+        <div class="copy-badge" id="copyText">COPY IP</div>
+      </div>
+    </div>
+
+    <!-- Minecraft GUI Inventory Display Card -->
+    <div class="mc-gui-card">
+      <div class="gui-header">
+        <span>AQUATECH AUTO-FISHER [GUI]</span>
+        <span style="color: var(--emerald-prismarine);">● ONLINE</span>
+      </div>
+
+      <div class="mc-slots-grid">
+        <div class="mc-slot active" title="Удочка Ловца Звёзд">
+          <span class="slot-icon">🎣</span>
+          <span class="slot-count">LV.7</span>
+        </div>
+        <div class="mc-slot">
+          <span class="slot-icon">⚡</span>
+          <span class="slot-count">128</span>
+        </div>
+        <div class="mc-slot">
+          <span class="slot-icon">💎</span>
+          <span class="slot-count">64</span>
+        </div>
+        <div class="mc-slot">
+          <span class="slot-icon">⚛️</span>
+          <span class="slot-count">16</span>
+        </div>
+
+        <div class="mc-slot">
+          <span class="slot-icon">📦</span>
+          <span class="slot-count">32</span>
+        </div>
+        <div class="mc-slot">
+          <span class="slot-icon">🧪</span>
+          <span class="slot-count">64</span>
+        </div>
+        <div class="mc-slot">
+          <span class="slot-icon">🔋</span>
+          <span class="slot-count">100%</span>
+        </div>
+        <div class="mc-slot">
+          <span class="slot-icon">⚙️</span>
+          <span class="slot-count">AE2</span>
+        </div>
+      </div>
+
+      <div class="mc-tooltip">
+        <div class="mc-tooltip-title">Удочка Ловца Звёзд (StarCatcher Rod)</div>
+        <div style="color: #94a3b8; font-size: 12px; margin: 4px 0;">Шанс ловли Вольфрама и Хрома: +45%</div>
+        <div class="mc-tooltip-lore">"Легендарная снасть, вылавливающая отис и кристаллы из морской пучины."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 StarCatcher Rods Interactive Viewer -->
+  <section id="rods" class="section-wrap">
+    <div class="sec-title">
+      <h2>12 Удочек StarCatcher</h2>
+      <p>Каждая удочка открывает новый тир ресурсов: от примитивной меди до астероидного адамантия</p>
+    </div>
+
+    <div class="rods-grid">
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-1">TIER 1 • COMMON</span>
+        <h3>Скромная удочка</h3>
+        <p class="rod-drops">Улов: <span>Медь, Олово, Латекс, Торф</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-2">TIER 2 • UNCOMMON</span>
+        <h3>Бамбуковая удочка</h3>
+        <p class="rod-drops">Улов: <span>Железо, Редстоун, Глина, Бамбук</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-2">TIER 3 • UNCOMMON</span>
+        <h3>Старая добрая удочка</h3>
+        <p class="rod-drops">Улов: <span>Стронций, Иттрий, Таллий</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-3">TIER 4 • RARE</span>
+        <h3>Удочка Натуралиста</h3>
+        <p class="rod-drops">Улов: <span>LV-Компоненты, Слизь, Барий</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-3">TIER 5 • RARE</span>
+        <h3>Слизневая удочка</h3>
+        <p class="rod-drops">Улов: <span>Шпинель, Купорос, Каучук</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-4">TIER 6 • EPIC</span>
+        <h3>Ледяная удочка</h3>
+        <p class="rod-drops">Улов: <span>Серебро, Алюминий, Хладагенты</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-4">TIER 7 • EPIC</span>
+        <h3>Удочка Ловца Звёзд</h3>
+        <p class="rod-drops">Улов: <span>Вольфрам, Хром, Золото</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-5">TIER 8 • LEGENDARY</span>
+        <h3>Лазуритовая удочка</h3>
+        <p class="rod-drops">Улов: <span>Минеральные Кристаллы, Топазы</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-5">TIER 9 • LEGENDARY</span>
+        <h3>Обсидиановая удочка</h3>
+        <p class="rod-drops">Улов: <span>Уран, Платина, Сырая Нефть</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-5">TIER 10 • LEGENDARY</span>
+        <h3>Магмовая удочка</h3>
+        <p class="rod-drops">Улов: <span>Незеритовые обломки, Свинец</span></p>
+      </div>
+
+      <div class="rod-card">
+        <span class="rod-tier-badge tier-6">TIER 11 • COSMIC</span>
+        <h3>Светоягодная удочка</h3>
+        <p class="rod-drops">Улов: <span>Полоний, Кадмий, Звезды Незера</span></p>
+      </div>
+
+      <div class="rod-card" style="border-color: var(--aqua-glow); box-shadow: var(--glow-aqua);">
+        <span class="rod-tier-badge tier-6">TIER 12 • ALPHA QUANTUM</span>
+        <h3>Альфа-Удочка</h3>
+        <p class="rod-drops">Улов: <span>Иридий, Осмий, Адамантий</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Act Progression Roadmap -->
+  <section id="roadmap" class="section-wrap">
+    <div class="sec-title">
+      <h2>Роадмап развития (6 Актов)</h2>
+      <p>Полный гайд выживания от спавна на плоту 4×4 до построения Генератора Материи</p>
+    </div>
+
+    <div class="act-tabs">
+      <button class="act-tab-btn active" onclick="showAct(1)">Акт 1: Primal Era</button>
+      <button class="act-tab-btn" onclick="showAct(2)">Акт 2: Early LV</button>
+      <button class="act-tab-btn" onclick="showAct(3)">Акт 3: Steam Era</button>
+      <button class="act-tab-btn" onclick="showAct(4)">Акт 4: MV Industrial</button>
+      <button class="act-tab-btn" onclick="showAct(5)">Акт 5: Ядерная Эра</button>
+      <button class="act-tab-btn" onclick="showAct(6)">Акт 6: Квантовый Эндгейм</button>
+    </div>
+
+    <div class="act-detail-card" id="actCard">
+      <div>
+        <div style="font-family: var(--font-mc); font-size: 10px; color: var(--aqua-glow); margin-bottom: 8px;" id="actNumText">АКТ 1 • ЭРА ПРИМИТИВНОГО ВЫЖИВАНИЯ</div>
+        <h3 class="act-detail-title" id="actTitleText">Плот 4×4 & Первичный улов</h3>
+        <ul class="act-checklist" id="actListItems">
+          <li><b>Начало:</b> Спавн на плоту 4×4 на высоте Y190 среди океана.</li>
+          <li><b>Инструмент:</b> Скромная удочка (Humble Rod).</li>
+          <li><b>Добыча:</b> Медь, Олово, Сырой Латекс, Гевея, Торф, Доски и Песок.</li>
+          <li><b>Крафт:</b> Сушилка латекса для резины, Наковальня, Бронза и переход к Бамбуковой удочке.</li>
+        </ul>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.4); border-radius: var(--radius-md); padding: 24px; border: 1px solid #334155;">
+        <h4 style="font-family: var(--font-mc); font-size: 11px; color: var(--gold-minecraft); margin-bottom: 12px;">СОВЕТ ПО РАЗВИТИЮ:</h4>
+        <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;" id="actTipText">
+          Не выбрасывайте глину и песок из улова. Они понадобятся для постройки обожженных кирпичей мультиблочной плавильни во 2-м Акте!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases & Donation Store -->
+  <section id="cases" class="section-wrap">
+    <div class="sec-title">
+      <h2>Кейсы и Донат</h2>
+      <p>Выбивай редкие удочки StarCatcher, авторыболовы и руды из кейсов на сервере</p>
+    </div>
+
+    <div class="cases-container">
+      <div class="case-card">
+        <div class="case-chest-icon">🧰</div>
+        <h3 class="case-title">Кейс Новичка</h3>
+        <p style="font-size: 13px; color: #94a3b8;">Содержит Бамбуковую удочку, стаки резины и первичных металлов.</p>
+        <div class="case-price">99 ₽</div>
+        <button class="mc-btn mc-btn-primary" style="width: 100%; justify-content: center;">Открыть Кейс</button>
+      </div>
+
+      <div class="case-card" style="border-color: var(--gold-minecraft);">
+        <div class="case-chest-icon">💎</div>
+        <h3 class="case-title">Индустриальный Кейс</h3>
+        <p style="font-size: 13px; color: #94a3b8;">Шанс выпадения Обсидиановой удочки, авторыболова MV и доменных блоков.</p>
+        <div class="case-price">249 ₽</div>
+        <button class="mc-btn mc-btn-gold" style="width: 100%; justify-content: center;">Открыть Кейс</button>
+      </div>
+
+      <div class="case-card">
+        <div class="case-chest-icon">👑</div>
+        <h3 class="case-title">AQUA VIP Status</h3>
+        <p style="font-size: 13px; color: #94a3b8;">Полный доступ к `/fly`, сохранение инвентаря и х2 скорость авторыболова.</p>
+        <div class="case-price">499 ₽</div>
+        <button class="mc-btn" style="width: 100%; justify-content: center; background: rgba(255,255,255,0.1); color: #fff; border-color: #fff;">Купить VIP</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Players Leaderboard -->
+  <section id="top" class="section-wrap">
+    <div class="sec-title">
+      <h2>Топ Игроков Сервера</h2>
+      <p>Лидеры по выловленным ресурсам и выработке EU энергии</p>
+    </div>
+
+    <table class="leaderboard-table">
+      <thead>
+        <tr>
+          <th>МЕСТО</th>
+          <th>ИГРОК</th>
+          <th>УДОЧКА</th>
+          <th>ВЫЛОВЛЕНО ПРЕДМЕТОВ</th>
+          <th>СТАТУС</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="rank-num">#1</td>
+          <td><b>Renfild_Aqua</b></td>
+          <td><span style="color: var(--rarity-cosmic);">Альфа-Удочка</span></td>
+          <td>1,420,500</td>
+          <td><span style="color: var(--emerald-prismarine);">● ONLINE</span></td>
+        </tr>
+        <tr>
+          <td class="rank-num">#2</td>
+          <td><b>StarCatcher_Pro</b></td>
+          <td><span style="color: var(--rarity-legendary);">Магмовая удочка</span></td>
+          <td>980,200</td>
+          <td><span style="color: var(--emerald-prismarine);">● ONLINE</span></td>
+        </tr>
+        <tr>
+          <td class="rank-num">#3</td>
+          <td><b>SkyFisher_99</b></td>
+          <td><span style="color: var(--rarity-legendary);">Обсидиановая удочка</span></td>
+          <td>745,110</td>
+          <td><span style="color: #64748b;">○ OFFLINE</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="section-wrap">
+    <div class="sec-title">
+      <h2>Частые Вопросы (FAQ)</h2>
+      <p>Все, что нужно знать перед первым входом на сервер</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Как создать свой первый плот?</span>
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          При первом входе на сервер введите команду <code>/island create</code>. Вы автоматически заспавнитесь на изолированном плоту 4×4 над океаном на высоте Y190.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Где брать руду, если нет шахт?</span>
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          Вся добыча руд осуществляется через ловлю рыбы и ресурсов удочками StarCatcher. Повышая тир удочки, вы начинаете вылавливать железо, уран, платину и осмий прямо из океана.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Как работает авторыболов aquatech_ui?</span>
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          Скрафтив блок `aquatech_ui:auto_fisher`, поместите в него удочку и подключите EU-энергию. Авторыболов будет автономно ловить ресурсы и отправлять их в сундуки или МЭ-сеть AE2.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mc-footer">
+    <div class="footer-inner">
+      <div class="brand-group">
+        <div class="brand-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="brand-title">AquaTech 1.20.1</div>
+      </div>
+
+      <div style="font-size: 13px; color: #64748b;">
+        © 2026 AquaTech Minecraft Server. Forge + Mohist 1.20.1 Engine.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Generate Animated Water Bubbles dynamically
+    const bubbleContainer = document.getElementById('bubbleContainer');
+    for (let i = 0; i < 25; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 20 + 8;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.animationDuration = `${Math.random() * 12 + 8}s`;
+      bubble.style.animationDelay = `${Math.random() * 5}s`;
+      bubbleContainer.appendChild(bubble);
+    }
+
+    // Copy IP Functionality
+    function copyIP() {
+      const ip = document.getElementById('serverIP').innerText;
+      navigator.clipboard.writeText(ip);
+      const copyBtn = document.getElementById('copyText');
+      copyBtn.innerText = "COPIED!";
+      copyBtn.style.background = "rgba(16, 185, 129, 0.3)";
+      copyBtn.style.color = "#10b981";
+
+      setTimeout(() => {
+        copyBtn.innerText = "COPY IP";
+        copyBtn.style.background = "rgba(0, 242, 254, 0.15)";
+        copyBtn.style.color = "#00f2fe";
+      }, 2500);
+    }
+
+    // Act Progression Data
+    const actDataList = {
+      1: {
+        num: "АКТ 1 • ЭРА ПРИМИТИВНОГО ВЫЖИВАНИЯ",
+        title: "Плот 4×4 & Первичный улов",
+        items: [
+          "<b>Начало:</b> Спавн на плоту 4×4 на высоте Y190 среди океана.",
+          "<b>Инструмент:</b> Скромная удочка (Humble Rod).",
+          "<b>Добыча:</b> Медь, Олово, Сырой Латекс, Гевея, Торф, Доски и Песок.",
+          "<b>Крафт:</b> Сушилка латекса для резины, Наковальня, Бронза и переход к Бамбуковой удочке."
+        ],
+        tip: "Не выбрасывайте глину и песок из улова. Они понадобятся для постройки обожженных кирпичей мультиблочной плавильни во 2-м Акте!"
+      },
+      2: {
+        num: "АКТ 2 • EARLY LV ERA",
+        title: "Мультиблочная плавильница & Прокатка",
+        items: [
+          "<b>Инструмент:</b> Бамбуковая удочка ➔ Старая добрая удочка.",
+          "<b>Добыча:</b> Железная руда, редстоун, стронций, иттрий, таллий.",
+          "<b>Строительство:</b> Мультиблочная плавильня (Smeltery Controller) из глиняных кирпичей.",
+          "<b>Результат:</b> Выплавка латуни, редбрасса и переработка первых LV-схем."
+        ],
+        tip: "Соберите прокатный стан для эффективного плющения оловянных и железных пластин без потерь металлов."
+      },
+      3: {
+        num: "АКТ 3 • STEAM ERA (32 EU/t)",
+        title: "Паровые котлы & Авторыболов aquatech_ui",
+        items: [
+          "<b>Инструмент:</b> Удочка Натуралиста ➔ Ледяная удочка.",
+          "<b>Добыча:</b> Слизь, барий, шпинель, купорос, хладагенты.",
+          "<b>Энергетика:</b> Паровой генератор на торфе, BatBox 40,000 EU, Дробитель и Электропечь.",
+          "<b>Автоматизация:</b> Запуск первого Авторыболова (aquatech_ui:auto_fisher)!"
+        ],
+        tip: "Авторыболов работает непрерывно. Направьте выловленные ресурсы прямо в хранилище через предметные трубы."
+      },
+      4: {
+        num: "АКТ 4 • MV INDUSTRIAL (128 EU/t)",
+        title: "Доменная печь & Нержавеющая сталь",
+        items: [
+          "<b>Инструмент:</b> Удочка Ловца Звёзд ➔ Лазуритовая удочка.",
+          "<b>Добыча:</b> Золото, алюминий, вольфрам, хром, серебро, сапфиры.",
+          "<b>Строительство:</b> Индустриальная Доменная Печь из нихромовых подложек.",
+          "<b>Выплавка:</b> Нержавеющая сталь (Stainless Steel), Дюралюминий, Солнечные панели MV."
+        ],
+        tip: "Нержавеющая сталь критична для перехода в HV-эру и постройки компонентов ядерных реакторов."
+      },
+      5: {
+        num: "АКТ 5 • ЯДЕРНАЯ ЭРА (512-2048 EU/t)",
+        title: "Химический синтез & Ядерные реакторы",
+        items: [
+          "<b>Инструмент:</b> Обсидиановая удочка ➔ Магмовая удочка.",
+          "<b>Добыча:</b> Уран, платина, сырая нефть в ведрах, свинец, незерит.",
+          "<b>Синтез:</b> Перегонка нефти в пластик, сборка Ядерного реактора на MOX-топливе.",
+          "<b>МЭ-Сеть:</b> Полноценное развертывание Applied Energistics 2 (AE2)."
+        ],
+        tip: "Используйте бариевое и свинцовое экранирование для реактора, чтобы избежать радиационных утечек."
+      },
+      6: {
+        num: "АКТ 6 • QUANTUM & COSMIC ENDGAME",
+        title: "Генераторы Материи & Квантовый Эндгейм",
+        items: [
+          "<b>Инструмент:</b> Альфа-Удочка (Alpha Rod).",
+          "<b>Добыча:</b> Иридий, Осмий, Полоний, Осмиридий, Астероидный Адамантий.",
+          "<b>Квант:</b> Постройка Генератора Материи, Синтезатор Иридия, Квантовые схемы.",
+          "<b>Эндгейм:</b> Квантовый бронекостюм и бесконечные генераторы энергии."
+        ],
+        tip: "Поздравляем! Вы достигли абсолютной вершины AquaTech и освоили квантовые технологии океана."
+      }
+    };
+
+    function showAct(actNum) {
+      document.querySelectorAll('.act-tab-btn').forEach((btn, idx) => {
+        if (idx === actNum - 1) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      const act = actDataList[actNum];
+      document.getElementById('actNumText').innerText = act.num;
+      document.getElementById('actTitleText').innerText = act.title;
+      document.getElementById('actListItems').innerHTML = act.items.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('actTipText').innerText = act.tip;
+    }
+
+    // Toggle FAQ
+    function toggleFaq(element) {
+      element.classList.toggle('open');
+    }
+
+    // Live Server Ping Status
+    async function updateLiveOnline() {
+      const onlineEl = document.querySelector('.online-box span');
+      const dotEl = document.querySelector('.online-dot');
+      if (!onlineEl) return;
+      try {
+        const res = await fetch('https://api.mcsrvstat.us/2/katherine-hydro.tun.ply.gg:31279');
+        const data = await res.json();
+        if (data && data.online) {
+          onlineEl.innerText = `${data.players.online} / ${data.players.max || 100} ONLINE`;
+          if (dotEl) dotEl.style.background = '#10b981';
+        } else {
+          onlineEl.innerText = `ONLINE (SERVER READY)`;
+          if (dotEl) dotEl.style.background = '#38bdf8';
+        }
+      } catch (_) {
+        onlineEl.innerText = `ONLINE (MOHIST 1.20.1)`;
+      }
+    }
+    updateLiveOnline();
+    setInterval(updateLiveOnline, 30000);
+  </script>
+</body>
+</html>
