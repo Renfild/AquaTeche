@@ -437,6 +437,29 @@
     });
   }
 
+  function initReveal() {
+    const nodes = document.querySelectorAll(".reveal");
+    if (!nodes.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      nodes.forEach((n) => n.classList.add("in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    nodes.forEach((n) => io.observe(n));
+    // hero is above fold — show immediately
+    document.querySelectorAll(".hero .reveal").forEach((n) => n.classList.add("in"));
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     renderHeader();
     renderFooter();
@@ -447,6 +470,7 @@
     initAuth();
     initCases();
     initStore();
+    initReveal();
   });
 
   window.AquaTechSite = { IP, DOWNLOAD, toast, copyIP };
