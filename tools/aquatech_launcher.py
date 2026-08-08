@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.2"
+LAUNCHER_VER   = "2.9.4"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -42,14 +42,15 @@ LOCAL_SYNC_FALLBACKS = (
     "http://127.0.0.1:8080",
 )
 
-# Manifest / pack mirrors (website first, then GitHub raw docs).
+# Manifest / pack mirrors (website first, then jsDelivr / GitHub raw).
 PACK_CDN_MIRRORS = (
     DEFAULT_UPDATE_URL,
+    "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
     "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
 )
 
 # Optional GitHub fallback (often 404 if repo/path missing — pack sync prefers update_url / local).
-GITHUB_RAW     = "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack"
+GITHUB_RAW     = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 MANIFEST_URL   = f"{GITHUB_RAW}/manifest.json"
 GITHUB_RELEASE = "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.2"
 PACK_FOLDERS   = ("mods", "config", "kubejs", "resourcepacks")
