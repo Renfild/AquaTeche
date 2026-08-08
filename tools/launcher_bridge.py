@@ -41,8 +41,16 @@ class LauncherEngine:
                 cfg.update(json.loads(L.CONFIG_PATH.read_text("utf-8")))
         except Exception:
             pass
-        if not cfg.get("update_url"):
-            cfg["update_url"] = L.resolve_update_base(cfg) or L.DEFAULT_UPDATE_URL
+        cfg["update_url"] = L.normalize_update_url(cfg.get("update_url"))
+        if "sync_url" in cfg and (
+            "tun.ply.gg" in str(cfg.get("sync_url") or "").lower()
+            or "playit" in str(cfg.get("sync_url") or "").lower()
+        ):
+            cfg.pop("sync_url", None)
+        try:
+            L.CONFIG_PATH.write_text(json.dumps(cfg, indent=2), encoding="utf-8")
+        except Exception:
+            pass
         return cfg
 
     def save_cfg(self, patch: dict | None = None) -> dict:
@@ -52,14 +60,16 @@ class LauncherEngine:
             if "game_dir" in patch:
                 self.cfg["game_dir"] = str(patch["game_dir"]).strip()
             if "update_url" in patch:
-                self.cfg["update_url"] = str(patch["update_url"]).strip().rstrip("/")
+                self.cfg["update_url"] = L.normalize_update_url(
+                    str(patch["update_url"]).strip().rstrip("/")
+                )
             if "ram_mb" in patch:
                 try:
                     self.cfg["ram_mb"] = int(patch["ram_mb"])
                 except Exception:
                     pass
         try:
-            L.CONFIG_PATH.write_text(json.dumps(self.cfg, indent=2), "utf-8")
+            L.CONFIG_PATH.write_text(json.dumps(self.cfg, indent=2), encoding="utf-8")
         except Exception:
             pass
         return dict(self.cfg)

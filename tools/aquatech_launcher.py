@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.4"
+LAUNCHER_VER   = "2.9.6"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -494,15 +494,31 @@ def _pack_looks_ready(game_dir: Path) -> bool:
     return n >= PACK_READY_MIN_JARS
 
 
+def normalize_update_url(url: str | None) -> str:
+    """Drop mistaken Playit/Minecraft host from pack CDN field; keep real http(s) CDNs."""
+    u = (url or "").strip().rstrip("/")
+    if not u:
+        return DEFAULT_UPDATE_URL
+    low = u.lower()
+    # Common mistake: game server IP/port pasted into «URL обновлений»
+    if "tun.ply.gg" in low or "playit" in low:
+        return DEFAULT_UPDATE_URL
+    if SERVER_IP.lower() in low:
+        return DEFAULT_UPDATE_URL
+    if not (low.startswith("http://") or low.startswith("https://")):
+        return DEFAULT_UPDATE_URL
+    return u
+
+
 def resolve_update_base(cfg: dict | None = None, *, allow_local_fallback: bool = True) -> str:
     """CDN base URL for friends (no trailing slash). Website pack folder or sync server."""
     candidates: list[str] = []
     if cfg and cfg.get("update_url"):
-        candidates.append(str(cfg["update_url"]).strip())
+        candidates.append(normalize_update_url(str(cfg["update_url"])))
     for p in (_app_dir() / "update_url.txt", _app_dir().parent / "update_url.txt"):
         try:
             if p.is_file():
-                candidates.append(p.read_text("utf-8").strip().splitlines()[0])
+                candidates.append(normalize_update_url(p.read_text("utf-8").strip().splitlines()[0]))
         except OSError:
             pass
     if DEFAULT_UPDATE_URL:
@@ -1835,20 +1851,28 @@ class AquaTechLauncher(tk.Tk):
                 cfg.update(json.loads(CONFIG_PATH.read_text("utf-8")))
         except Exception:
             pass
-        if not cfg.get("update_url"):
-            cfg["update_url"] = resolve_update_base(cfg) or DEFAULT_UPDATE_URL
+        cfg["update_url"] = normalize_update_url(cfg.get("update_url"))
+        # Drop legacy sync_url pointing at Playit tunnels
+        if "sync_url" in cfg and ("tun.ply.gg" in str(cfg.get("sync_url") or "").lower() or "playit" in str(cfg.get("sync_url") or "").lower()):
+            cfg.pop("sync_url", None)
         return cfg
 
     def _save_cfg(self):
         self._cfg["username"] = self._e_nick.get().strip()
         self._cfg["game_dir"] = self._e_dir.get().strip()
-        self._cfg["update_url"] = self._e_update.get().strip().rstrip("/")
+        self._cfg["update_url"] = normalize_update_url(self._e_update.get().strip().rstrip("/"))
         try:
             self._cfg["ram_mb"] = int(self._e_ram.get().replace("MB", "").replace("GB", "000").strip())
         except Exception:
             pass
         try:
             CONFIG_PATH.write_text(json.dumps(self._cfg, indent=2), "utf-8")
+        except Exception:
+            pass
+        # Keep UI field in sync after migration
+        try:
+            self._e_update.delete(0, "end")
+            self._e_update.insert(0, self._cfg.get("update_url", "") or "")
         except Exception:
             pass
 
