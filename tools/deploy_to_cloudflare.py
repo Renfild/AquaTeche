@@ -17,20 +17,14 @@ def main() -> int:
         print("missing docs/", file=sys.stderr)
         return 1
     env = os.environ.copy()
-    cmd = [
-        "npx",
-        "-y",
-        "wrangler",
-        "pages",
-        "deploy",
-        str(DOCS),
-        "--project-name",
-        PROJECT,
-        "--commit-dirty=true",
-    ]
+    # Windows: run through cmd so npx.cmd resolves
+    cmdline = (
+        f'npx -y wrangler pages deploy "{DOCS}" '
+        f'--project-name {PROJECT} --commit-dirty=true'
+    )
     print("Deploying", DOCS, "->", PROJECT)
-    print(" ", " ".join(cmd))
-    res = subprocess.run(cmd, cwd=str(ROOT), env=env)
+    print(" ", cmdline)
+    res = subprocess.run(cmdline, cwd=str(ROOT), env=env, shell=True)
     if res.returncode == 0:
         print("OK https://aquatech-7gs.pages.dev")
     return res.returncode
