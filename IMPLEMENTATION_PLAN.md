@@ -119,6 +119,35 @@
   * Распространение сгенерированного `.jar` по 7 директориям (сервер, клиент, CurseForge).
 * **Этап 6.2: Скрипт деплоя скриптов `deploy_runtime.ps1`.**
   * Синхронизация папок `kubejs/`, модов `rhino`, `recipe_generator` и `blueprint` между всеми инстансами.
+* **Этап 6.3: Клиентский лаунчер + онлайн-обновления пака (актуально).**
+  * Лаунчер: `dist/releases/AquaTechLauncher.exe` (исходник `tools/aquatech_launcher.py`, сейчас **v2.3.0**).
+  * Пак для синка: `dist/AquaTech-Client` (+ копия рядом с exe в `dist/releases/AquaTech-Client`).
+  * Краткая инструкция: `КАК_ОБНОВЛЯТЬ_СБОРКУ.txt` (копия также на Рабочем столе: `AquaTech_КАК_ОБНОВЛЯТЬ_СБОРКУ.txt`).
+
+#### 🔄 Как обновлять клиентскую сборку (чеклист)
+
+**Ты (локально):**
+1. Меняешь моды / kubejs / конфиги (CurseForge или `server/`).
+2. `python C:\Users\xieto\Desktop\AquaTech\tools\publish_client_pack.py`  
+   → пересобирает `dist/AquaTech-Client` + `manifest.json` (MD5).
+3. Запускаешь `dist\releases\AquaTechLauncher.exe`  
+   → в логе: «Локальная сборка: …\AquaTech-Client»  
+   → качает/копирует только изменённые файлы.
+
+**Друзья — онлайн (без zip):**
+1. После правок снова `publish_client_pack.py`.
+2. `start_sync_server.bat` (HTTP на порту **8080**, раздаёт `dist/AquaTech-Client`).
+3. Playit.gg: отдельный **TCP → 8080** (игра 25565 — другой тоннель).
+4. Друзьям в лаунчере поле **«URL обновлений»** = публичный Playit URL  
+   (или `update_url.txt` рядом с exe).
+5. Кнопка **«Обновить»** или **«Играть»** — синк по MD5.
+
+**Друзья — разово без сети:** скопировать папку `dist\releases\` целиком  
+(`AquaTechLauncher.exe` + `AquaTech-Client\`).
+
+**Опционально позже (GitHub):**  
+`gh release upload modpack-latest dist/AquaTech-Client/mods/*.jar --clobber`  
++ запушить `manifest.json` в репо.
 
 ---
 
@@ -153,6 +182,7 @@
 | **2026-08-06** | `v1.9.0` | Antigravity AI | Удалены предметы Avaritia из дропа рыбалки, усложнен крафт удочек, добавлены эндгейм-крафты Умножителей улова (x32, x64), добавлена трата прочности удочек. | `FishingLootHandler.java`, `20_aquatech_rod_crafts.js`, `30_aquatech_crafting.js` |
 | **2026-08-06** | `v1.9.1` | Antigravity AI | Удален отдельный слот умножителей улова в Авто-Рыболове. Авторыболов скейлится только от умножителя в удочке; запрещена укладка RateMod в авторыболов (разрешены только модули). Исправлен баг отрицательной энергии (`-15536 FE`) через 32-битный ContainerData сплит. | `AutoFisherBlockEntity.java`, `AutoFisherMenu.java`, `HydroReactorBlockEntity.java`, `HydroReactorMenu.java`, `OceanFilterBlockEntity.java`, `OceanFilterMenu.java`, `SeabedDredgerBlockEntity.java`, `SeabedDredgerMenu.java` |
 | **2026-08-07** | `v2.0.0` | Antigravity AI | **Глобальное обновление баланса и механизмов:**<br>1. Установлен мод **Extended Crafting** (`ExtendedCrafting-1.20.1-6.0.10.jar`) и библиотека `Cucumber-1.20.1-7.0.16.jar`. В KubeJS настроены верстаки 9×9 Ultimate Table для `rate_x32`, `rate_x64` и Административной Панели.<br>2. Удален гидрореактор (`hydro_reactor`), переименован `ocean_filter` в «Ботанический Экстрактор Цветов» (вылов лепестков и цветов Botania), в `seabed_dredger` добавлен Небесный Камень AE2 (`ae2:sky_stone_block`).<br>3. Добавлен `ae2_press_case.json` за 399 монет с прессами AE2, удален `free_case.json`. В KubeJS добавлены рецепты размножения прессов (Пресс + Блок Железа = 2 Пресса) и их взаимозаменяемости.<br>4. В улов удочек 1 тира (`bamboo_rod`, `humble_rod`, `fishing_rod`) добавлен 100% улов Булыжника и стартовых блоков; в улов 2 тира добавлен Титан (45%).<br>5. Вычищены ошибки KubeJS (удалены ссылки на несуществующие айди `aquatech_ui:*_rod` и `double_hook_upgrade`), удалены старые 3×3 Java-рецепты для рейтов х32/х64 из мода. | `ExtendedCrafting-1.20.1-6.0.10.jar`, `Cucumber-1.20.1-7.0.16.jar`, `30_aquatech_crafting.js`, `FishingLootHandler.java`, `FishingRodCompat.java`, `SeabedDredgerBlockEntity.java`, `OceanFilterBlockEntity.java`, `ae2_press_case.json`, `IMPLEMENTATION_PLAN.md` |
+| **2026-08-07** | `v2.1.0` | Composer | Клиентский лаунчер: локальный пак + MD5-синк, кнопка «Обновить», CDN через `start_sync_server` + Playit :8080, UI v2.3.0. Зафиксирован чеклист обновления сборки в ТЗ-6.3 и `КАК_ОБНОВЛЯТЬ_СБОРКУ.txt`. | `tools/aquatech_launcher.py`, `tools/publish_client_pack.py`, `tools/start_sync_server.py`, `IMPLEMENTATION_PLAN.md`, `КАК_ОБНОВЛЯТЬ_СБОРКУ.txt` |
 
 
 

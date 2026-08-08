@@ -32,54 +32,34 @@ if (Test-Path $manifestSrc) {
     Write-Host "  OK  manifest.json -> dist\AquaTech-Client\manifest.json" -ForegroundColor Green
 }
 
-# Step 4: Copy onedir launcher into releases (+ zip for friends)
+# Step 4: Copy standalone onefile EXE into releases
 New-Item -ItemType Directory -Force -Path $releasesDir | Out-Null
-$bundleSrc = "$root\dist\AquaTechLauncher"
-$bundleDst = "$releasesDir\AquaTechLauncher"
-$zipDst = "$releasesDir\AquaTechLauncher.zip"
+$onefileExe = "$root\dist\AquaTechLauncher.exe"
+$releaseExe = "$releasesDir\AquaTechLauncher.exe"
 
-if (Test-Path "$bundleSrc\AquaTechLauncher.exe") {
-    if (Test-Path $bundleDst) {
-        Remove-Item $bundleDst -Recurse -Force
-    }
-    Copy-Item $bundleSrc $bundleDst -Recurse -Force
-    # Python zip avoids Compress-Archive file-lock issues on Windows
-    python -c @"
-import zipfile, pathlib
-src = pathlib.Path(r'$bundleDst')
-dst = pathlib.Path(r'$zipDst')
-if dst.exists():
-    dst.unlink()
-with zipfile.ZipFile(dst, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as z:
-    for p in src.rglob('*'):
-        if p.is_file():
-            z.write(p, p.relative_to(src).as_posix())
-print('zip', dst.stat().st_size)
-"@
-    $exe = Get-Item "$bundleDst\AquaTechLauncher.exe"
+if (Test-Path $onefileExe) {
+    Copy-Item $onefileExe $releaseExe -Force
+    $desktopExe = "C:\Users\xieto\Desktop\AquaTechLauncher.exe"
+    Copy-Item $onefileExe $desktopExe -Force
+    $exe = Get-Item $desktopExe
+    $sizeMb = [math]::Round($exe.Length / 1MB, 2)
     Write-Host ""
-    Write-Host "[4/4] Launcher ready (onedir)!" -ForegroundColor Green
-    Write-Host "  Folder: $bundleDst" -ForegroundColor White
-    Write-Host "  EXE:    $($exe.FullName)  ($($exe.LastWriteTime))" -ForegroundColor White
-    Write-Host "  Zip:    $zipDst" -ForegroundColor White
-} elseif (Test-Path "$root\dist\AquaTechLauncher.exe") {
-    # Legacy onefile leftover
-    Copy-Item "$root\dist\AquaTechLauncher.exe" "$releasesDir\AquaTechLauncher.exe" -Force
-    Write-Host "[WARN] Found legacy onefile exe - prefer onedir rebuild via AquaTechLauncher.spec" -ForegroundColor Yellow
+    Write-Host "[4/4] Single Standalone EXE Launcher Ready!" -ForegroundColor Green
+    Write-Host "  Desktop: $desktopExe" -ForegroundColor Yellow
+    Write-Host "  Releases: $releaseExe" -ForegroundColor White
+    Write-Host "  EXE Size: $sizeMb MB" -ForegroundColor White
+    Write-Host "  Updated:  $($exe.LastWriteTime)" -ForegroundColor White
+} elseif (Test-Path "$root\dist\AquaTechLauncher\AquaTechLauncher.exe") {
+    Copy-Item "$root\dist\AquaTechLauncher\AquaTechLauncher.exe" $releaseExe -Force
+    Write-Host "[4/4] Copied EXE to $releaseExe" -ForegroundColor Green
 } else {
-    Write-Host "[WARN] AquaTechLauncher not found. Run PyInstaller first!" -ForegroundColor Red
-    Write-Host "  Command: python -m PyInstaller --noconfirm --clean AquaTechLauncher.spec" -ForegroundColor DarkGray
+    Write-Host "[WARN] AquaTechLauncher.exe not found. Run PyInstaller first!" -ForegroundColor Red
 }
 
 Write-Host ""
 Write-Host "==================================================" -ForegroundColor Cyan
 Write-Host "  Deploy Complete!" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "  YOU:  publish_client_pack.py + start_sync_server.bat" -ForegroundColor White
-Write-Host "        + Playit tunnel to sync port 8765" -ForegroundColor White
-Write-Host "  FRIENDS: unpack AquaTechLauncher.zip, run AquaTechLauncher.exe" -ForegroundColor White
-Write-Host "           put Playit URL into update_url field," -ForegroundColor White
-Write-Host "           click Update once, then Play" -ForegroundColor White
-Write-Host "==================================================" -ForegroundColor Cyan
+Write-Host "  Single File EXE for Players:" -ForegroundColor White
+Write-Host "  $releaseExe" -ForegroundColor Yellow
 Write-Host "==================================================" -ForegroundColor Cyan
 Write-Host ""

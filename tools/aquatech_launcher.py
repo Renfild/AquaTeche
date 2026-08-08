@@ -1316,6 +1316,7 @@ def ensure_assets(game_dir: Path, ver: dict, log=None) -> str:
             Path(__file__).resolve().parent / f"{index_id}.json",
         ]:
             if cand.exists() and cand.stat().st_size > 100_000:
+                index_path.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(cand, index_path)
                 break
 
@@ -1464,6 +1465,28 @@ def ensure_assets(game_dir: Path, ver: dict, log=None) -> str:
     return index_id
 
 
+def ensure_default_russian_options(game_dir: Path):
+    """Ensure options.txt defaults to Russian language (ru_ru) on launcher start."""
+    options_file = game_dir / "options.txt"
+    if not options_file.exists():
+        try:
+            options_file.write_text("lang:ru_ru\n", encoding="utf-8")
+        except OSError:
+            pass
+        return
+
+    try:
+        content = options_file.read_text(encoding="utf-8", errors="ignore")
+        if "lang:" not in content:
+            content += "\nlang:ru_ru\n"
+            options_file.write_text(content, encoding="utf-8")
+        elif "lang:en_us" in content:
+            content = content.replace("lang:en_us", "lang:ru_ru")
+            options_file.write_text(content, encoding="utf-8")
+    except Exception:
+        pass
+
+
 def build_launch_cmd(
     game_dir: Path,
     username: str,
@@ -1474,6 +1497,7 @@ def build_launch_cmd(
     auto_join: str | None = None,
 ) -> list[str]:
     """Build the full Forge launch command (merged inheritsFrom + natives + assets)."""
+    ensure_default_russian_options(game_dir)
     ver_json, ver_id = find_forge_json(game_dir)
     if not ver_json:
         raise FileNotFoundError("Forge version JSON not found — run Forge install first")
@@ -1724,8 +1748,8 @@ def spawn_minecraft(cmd: list[str], game_dir: Path) -> subprocess.Popen:
 
     flags = 0
     if os.name == "nt":
-        # New process group so Ctrl+C / launcher signals do not kill Minecraft.
-        flags = 0x00000200  # CREATE_NEW_PROCESS_GROUP
+        # New process group + no console window for smooth seamless launch
+        flags = 0x00000200 | 0x08000000  # CREATE_NEW_PROCESS_GROUP | CREATE_NO_WINDOW
 
     return subprocess.Popen(
         cmd,
@@ -2375,6 +2399,25 @@ class AquaTechLauncher(tk.Tk):
             self._log_line(f"❌ Ошибка запуска: {ex}", "err")
             self.after(0, lambda: self._done(False))
 
+def _get_gh_token() -> str:
+    candidates = [
+        _bundle_dir() / ".gh_token",
+        _app_dir() / ".gh_token",
+        Path(__file__).resolve().parent / ".gh_token",
+        Path(__file__).resolve().parent.parent / ".gh_token",
+        Path(r"C:\Users\xieto\Desktop\AquaTech\.gh_token"),
+    ]
+    for p in candidates:
+        if p.is_file():
+            try:
+                tok = p.read_text(encoding="utf-8").strip()
+                if tok:
+                    return tok
+            except Exception:
+                pass
+    return ""
+
+
     # ── Download helper with browser-like headers (avoids CDN 403) ─────────
     def _download_url(self, url: str, dest_path: Path, reporthook=None):
         headers = {
@@ -2388,13 +2431,9 @@ class AquaTechLauncher(tk.Tk):
             "Connection": "close",
         }
         if "github" in url.lower() or "githubusercontent.com" in url.lower():
-            tf = _app_dir() / ".gh_token"
-            if not tf.exists():
-                tf = Path(r"C:\Users\xieto\Desktop\AquaTech\.gh_token")
-            if tf.exists():
-                t = tf.read_text(encoding="utf-8").strip()
-                if t:
-                    headers["Authorization"] = f"token {t}"
+            t = _get_gh_token()
+            if t:
+                headers["Authorization"] = f"token {t}"
         req = urllib.request.Request(url, headers=headers)
         tmp = dest_path.with_suffix(dest_path.suffix + ".part")
         try:
@@ -2658,13 +2697,9 @@ class AquaTechLauncher(tk.Tk):
             nonlocal manifest, source
             try:
                 headers = {"User-Agent": f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}"}
-                tf = _app_dir() / ".gh_token"
-                if not tf.exists():
-                    tf = Path(r"C:\Users\xieto\Desktop\AquaTech\.gh_token")
-                if tf.exists():
-                    t = tf.read_text(encoding="utf-8").strip()
-                    if t:
-                        headers["Authorization"] = f"token {t}"
+                t = _get_gh_token()
+                if t:
+                    headers["Authorization"] = f"token {t}"
                 req = urllib.request.Request(MANIFEST_URL, headers=headers)
                 with urllib.request.urlopen(req, timeout=10) as r:
                     if r.status >= 400:
@@ -2693,13 +2728,13 @@ class AquaTechLauncher(tk.Tk):
         if prefer_remote:
             ok = try_cdn(include_local_fallbacks=True) or try_local() or try_github()
         else:
-            # Play: local first; remote URL once; localhost fallbacks only if nothing configured
+            # Play: local first; remote URL once; GitHub fallback
             ok = try_local()
             if not ok:
                 if configured_remote:
-                    ok = try_cdn(include_local_fallbacks=_is_loopback_url(base or ""))
+                    ok = try_cdn(include_local_fallbacks=_is_loopback_url(base or "")) or try_github()
                 else:
-                    ok = try_cdn(include_local_fallbacks=True)
+                    ok = try_cdn(include_local_fallbacks=True) or try_github()
 
         if not ok or not manifest:
             if _pack_looks_ready(game_dir):
