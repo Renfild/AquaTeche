@@ -1,0 +1,19 @@
+# Used by the Workers Builds project that still runs: npx wrangler deploy
+# Dashboard Deploy command:
+#   npx wrangler deploy -c wrangler.worker.toml
+#
+# Serves the same static site from docs/ (does not break Pages wrangler.toml).
+name = "aquatech"
+compatibility_date = "2026-08-08"
+workers_dev = true
+
+[assets]
+directory = "./docs"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
+
+[vars]
+PROJECT_NAME = "AquaTech"
+MINECRAFT_VERSION = "1.20.1"
+FORGE_VERSION = "47.4.0"
+SERVER_ADDRESS = "katherine-hydro.tun.ply.gg:31279"

@@ -1,7 +1,5 @@
-﻿# Cloudflare Pages project "aquatech" → https://aquatech-7gs.pages.dev
-#
-# Dashboard Builds: leave Build/Deploy commands EMPTY.
-# Output is taken from pages_build_output_dir below.
+﻿# Cloudflare Pages only (aquatech-7gs.pages.dev)
+# Build/Deploy commands in dashboard: EMPTY
 name = "aquatech"
 pages_build_output_dir = "docs"
 compatibility_date = "2026-08-08"
