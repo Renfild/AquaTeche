@@ -2,9 +2,7 @@
   const IP = "katherine-hydro.tun.ply.gg:31279";
   const DOWNLOAD =
     "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.9/AquaTech.exe";
-  /** Primary site: workers.dev (pages.dev is blocked in some networks, e.g. BY). */
   const CANONICAL = "https://aquatech.santcrail.workers.dev";
-  const PAGES_MIRROR = "https://aquatech-7gs.pages.dev";
   const STORAGE_USER = "aquatech_user";
   const API_BASE = "";
 
@@ -110,22 +108,7 @@
   }
 
   function showApiBanner() {
-    if ($("#api-mirror-banner")) return;
-    if (isMirrorHost()) {
-      const el = document.createElement("div");
-      el.id = "api-mirror-banner";
-      el.className = "notice-banner";
-      el.innerHTML = `Зеркало только для чтения. Регистрация, вход и профили: <a href="${CANONICAL}/">aquatech.santcrail.workers.dev</a>`;
-      document.body.prepend(el);
-      return;
-    }
-    if (location.hostname.includes("pages.dev")) {
-      const el = document.createElement("div");
-      el.id = "api-mirror-banner";
-      el.className = "notice-banner";
-      el.innerHTML = `Если сайт не открывается у друзей — используй <a href="${CANONICAL}/">workers.dev</a> (pages.dev часто режется провайдером).`;
-      document.body.prepend(el);
-    }
+    /* no player-facing infra banners */
   }
 
   function lockAuthForms() {
@@ -138,7 +121,8 @@
       });
       const note = document.createElement("div");
       note.className = "notice-banner inline";
-      note.innerHTML = `На этом зеркале аккаунты не работают. Открой <a href="${CANONICAL}/${form.id === "register-form" ? "register.html" : "login.html"}">основной сайт</a>.`;
+      const page = form.id === "register-form" ? "register.html" : "login.html";
+      note.innerHTML = `<a href="${CANONICAL}/${page}">Продолжить</a>`;
       form.before(note);
     });
   }
@@ -225,9 +209,6 @@
           <div>
             <h4>Проект</h4>
             <a href="rules.html">Правила</a>
-            <a href="${CANONICAL}/">Основной сайт</a>
-            <a href="https://renfild.github.io/AquaTeche/">Зеркало (GH Pages)</a>
-            <a href="${PAGES_MIRROR}/">Pages.dev</a>
             <a href="${DOWNLOAD}">AquaTech.exe</a>
           </div>
         </div>
@@ -362,7 +343,7 @@
       profile = demo
         ? {
             nick: demo.nick,
-            bio: "Демо-профиль (API недоступен).",
+            bio: "Профиль временно недоступен.",
             theme: "ocean",
             privilege: demo.privilege,
             coins: demo.coins,
@@ -370,7 +351,7 @@
             fish: demo.fish,
             playtime: demo.playtime,
             views: 0,
-            badges: ["Демо"],
+            badges: [],
           }
         : null;
     }
@@ -457,7 +438,6 @@
         location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
       } catch (err) {
         if (apiAvailable === false || isMirrorHost()) {
-          toast("Открой основной сайт для входа");
           location.href = `${CANONICAL}/login.html`;
           return;
         }
@@ -480,7 +460,6 @@
         location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
       } catch (err) {
         if (apiAvailable === false || isMirrorHost()) {
-          toast("Открой основной сайт для регистрации");
           location.href = `${CANONICAL}/register.html`;
           return;
         }

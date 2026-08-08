@@ -255,7 +255,7 @@ PAGES["top.html"] = (
     <div class="container">
       <div class="eyebrow">Рейтинги</div>
       <h1>Топы игроков</h1>
-      <p>Топы по лайкам и монетам из базы профилей сайта.</p>
+      <p>Лидеры по лайкам, монетам и времени в игре.</p>
       <div class="banner"></div>
       <div class="tabs">
         <button class="tab active" type="button" data-top-tab="playtime">По онлайну</button>
@@ -311,7 +311,7 @@ PAGES["profile.html"] = (
     <div class="container">
       <div class="eyebrow">Профиль</div>
       <h1>Страница игрока</h1>
-      <p>Профиль из базы сайта: био, тема, статистика. Редактирование — после входа.</p>
+      <p>Статистика, био и оформление. Свой профиль можно править после входа.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -340,7 +340,7 @@ PAGES["login.html"] = (
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Вход</h1>
-      <p>Ник Minecraft (латиница). Аккаунты работают на основном сайте <code>aquatech.santcrail.workers.dev</code> — зеркало GH Pages без API.</p>
+      <p>Войди с ником Minecraft (латиница, цифры, _).</p>
       <form class="card form" id="login-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="••••" required /></div>
@@ -361,7 +361,7 @@ PAGES["register.html"] = (
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Регистрация</h1>
-      <p>Ник: 3–16 символов (A–Z, 0–9, _), пароль от 4. Регистрируйся на <code>aquatech.santcrail.workers.dev</code>, не на зеркале GitHub.</p>
+      <p>Ник: 3–16 символов (A–Z, 0–9, _). Пароль от 4 символов.</p>
       <form class="card form" id="register-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required minlength="4" /></div>
@@ -382,7 +382,7 @@ PAGES["players.html"] = (
     <div class="container">
       <div class="eyebrow">Сообщество</div>
       <h1>Поиск игроков</h1>
-      <p>Игроки из базы сайта. На зеркале GH Pages список может быть недоступен.</p>
+      <p>Найди игрока по нику и открой его профиль.</p>
       <div class="field" style="margin-top:1.25rem;max-width:420px">
         <label>Ник</label>
         <input id="player-search" placeholder="Начни вводить…" />
