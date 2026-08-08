@@ -4,6 +4,14 @@
 ServerEvents.recipes((event) => {
   console.log('[AquaTech] Loading AquaTech crafting recipes...')
 
+
+
+  // ---------- Botania Floral Fertilizer & Seeds ----------
+  if (Platform.isLoaded('botania')) {
+    event.shapeless(Item.of('botania:fertilizer', 2), ['minecraft:bone_meal', 'minecraft:dirt']).id('aquatech:floral_fertilizer_dirt')
+    event.shapeless(Item.of('botania:fertilizer', 2), ['minecraft:bone_meal', 'minecraft:kelp']).id('aquatech:floral_fertilizer_kelp')
+  }
+
   // ---------- AE2 (installed) ----------
   if (Platform.isLoaded('ae2')) {
     event.remove({ output: 'ae2:controller' })
@@ -19,6 +27,33 @@ ServerEvents.recipes((event) => {
       E: 'ae2:engineering_processor',
       C: 'ae2:fluix_glass_cable',
     }).id('aquatech:me_drive')
+
+    // ---------- AE2 Inscriber Presses Duplication & Conversion ----------
+    // Use unique name (Rhino: "const presses" redeclares and aborts the whole recipes event)
+    let ae2InscriberPresses = [
+      'ae2:logic_processor_press',
+      'ae2:calculation_processor_press',
+      'ae2:engineering_processor_press',
+      'ae2:silicon_press',
+      'ae2:name_press',
+    ]
+
+    // 1. Duplication: 1x Press + 1x Iron Block -> 2x Same Press
+    ae2InscriberPresses.forEach((press) => {
+      let idName = press.split(':')[1]
+      event.shapeless(Item.of(press, 2), [press, 'minecraft:iron_block']).id(`aquatech:duplicate_${idName}`)
+    })
+
+    // 2. Conversion: 1x Any Press -> 1x Any Other Press
+    ae2InscriberPresses.forEach((targetPress) => {
+      let targetId = targetPress.split(':')[1]
+      ae2InscriberPresses.forEach((sourcePress) => {
+        if (sourcePress !== targetPress) {
+          let sourceId = sourcePress.split(':')[1]
+          event.shapeless(targetPress, [sourcePress]).id(`aquatech:convert_${sourceId}_to_${targetId}`)
+        }
+      })
+    })
   }
 
   // ---------- Kickstarter boat ----------
@@ -42,49 +77,11 @@ ServerEvents.recipes((event) => {
     }
   ).id('aquatech:kickstarter_boat')
 
-  // ---------- StarCatcher resource rods (AquaTech IU loot) ----------
-  // Fish-only rods stay vanilla SC loot; these five are craftable progression.
-  if (Platform.isLoaded('starcatcher')) {
-    event.shaped('starcatcher:naturalist_rod', [' IS', ' SR', 'S C'], {
-      I: 'minecraft:iron_ingot',
-      S: 'minecraft:stick',
-      R: 'minecraft:string',
-      C: 'minecraft:copper_ingot',
-    }).id('aquatech:naturalist_rod')
+  // ---------- StarCatcher rods ----------
+  // Full progression lives in 20_aquatech_rod_crafts.js (remove+chain).
+  // Do NOT add duplicate 3x3 crafts here — they bypass the IU progression.
 
-    event.shaped('starcatcher:starcatcher_rod', [' GS', ' SR', 'S N'], {
-      G: 'minecraft:gold_ingot',
-      S: 'minecraft:stick',
-      R: 'starcatcher:naturalist_rod',
-      N: 'minecraft:gold_nugget',
-    }).id('aquatech:starcatcher_rod')
-
-    event.shaped('starcatcher:obsidian_rod', [' DO', ' SR', 'S P'], {
-      D: 'minecraft:diamond',
-      O: 'minecraft:obsidian',
-      S: 'minecraft:stick',
-      R: 'starcatcher:starcatcher_rod',
-      P: 'minecraft:prismarine_shard',
-    }).id('aquatech:obsidian_rod')
-
-    event.shaped('starcatcher:lush_glowberry_rod', [' BG', ' SR', 'S C'], {
-      B: 'minecraft:glow_berries',
-      G: 'minecraft:sea_lantern',
-      S: 'minecraft:stick',
-      R: 'starcatcher:obsidian_rod',
-      C: 'minecraft:prismarine_crystals',
-    }).id('aquatech:lush_glowberry_rod')
-
-    event.shaped('starcatcher:magmaforged_rod', [' MN', ' SR', 'B M'], {
-      M: 'minecraft:magma_block',
-      N: 'minecraft:netherite_scrap',
-      S: 'minecraft:blaze_rod',
-      R: 'starcatcher:lush_glowberry_rod',
-      B: 'minecraft:nether_brick',
-    }).id('aquatech:magmaforged_rod')
-  }
-
-  // ---------- Upgrades & Catch Multipliers (Rate Mods - Single Recipe per Tier) ----------
+  // ---------- Upgrades & Catch Multipliers (Rate Mods) ----------
   event.remove({ output: 'aquatech_ui:rate_x2' })
   event.remove({ output: 'aquatech_ui:rate_x4' })
   event.remove({ output: 'aquatech_ui:rate_x8' })
@@ -92,7 +89,7 @@ ServerEvents.recipes((event) => {
   event.remove({ output: 'aquatech_ui:rate_x32' })
   event.remove({ output: 'aquatech_ui:rate_x64' })
 
-  // x2 Rate Mod (Botania Mana String + Mana Steel + IU Copper/Iron Plates)
+  // x2–x16: normal 3×3
   event.shaped('aquatech_ui:rate_x2', ['SCS', 'PMP', 'SCS'], {
     S: 'botania:mana_string',
     C: 'industrialupgrade:itemplates/copper_plate',
@@ -100,7 +97,6 @@ ServerEvents.recipes((event) => {
     M: 'botania:manasteel_ingot',
   }).id('aquatech:rate_x2')
 
-  // x4 Rate Mod (Botania Mana Pearl/Diamond + IU Silver + Synthetic Rubber)
   event.shaped('aquatech_ui:rate_x4', ['PSP', 'RMR', 'PSP'], {
     P: 'botania:mana_pearl',
     S: 'industrialupgrade:baseore/silver',
@@ -108,132 +104,131 @@ ServerEvents.recipes((event) => {
     M: 'botania:mana_diamond',
   }).id('aquatech:rate_x4')
 
-  // x8 Rate Mod (Botania Elementium/Pixie Dust + IU Titanium + Electronic Circuit)
   event.shaped('aquatech_ui:rate_x8', ['EDE', 'RCR', 'EDE'], {
     E: 'botania:elementium_ingot',
     D: 'botania:pixie_dust',
     R: 'aquatech_ui:rate_x4',
-    C: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic circuit
+    C: 'industrialupgrade:crafting_elements/crafting_272_element',
   }).id('aquatech:rate_x8')
 
-  // x16 Rate Mod (Botania Terrasteel/Dragonstone + IU Stainless Steel + Advanced Circuit)
   event.shaped('aquatech_ui:rate_x16', ['TDT', 'RCR', 'TDT'], {
     T: 'botania:terrasteel_ingot',
     D: 'botania:dragonstone',
     R: 'aquatech_ui:rate_x8',
-    C: 'industrialupgrade:crafting_elements/crafting_273_element', // Advanced circuit
+    C: 'industrialupgrade:crafting_elements/crafting_273_element',
   }).id('aquatech:rate_x16')
 
-  // Endgame Rate x32 (Avaritia 9x9 Extreme Crafting Table)
-  event.custom({
-    type: 'avaritia:shaped_table',
-    pattern: [
-      ' CCCCC  ',
-      'C GGG C ',
-      'CGTRTGC',
-      'CGTQTGC',
-      'CRQQQRC',
-      'CGTQTGC',
-      'CGTRTGC',
-      'C GGG C ',
-      ' CCCCC  ',
-    ],
-    key: {
-      'C': { item: 'avaritia:crystal_matrix_ingot' },
-      'G': { item: 'botania:gaia_ingot' },
-      'T': { item: 'botania:terrasteel_ingot' },
-      'R': { item: 'aquatech_ui:rate_x16' },
-      'Q': { item: 'industrialupgrade:crafting_elements/crafting_274_element' },
-    },
-    result: { item: 'aquatech_ui:rate_x32' },
-  }).id('aquatech:rate_x32_extreme')
+  // x32 / x64 — ONLY ExtendedCrafting Ultimate Crafting Table (Tier 4)
+  event.remove({ output: 'aquatech_ui:rate_x32' })
+  event.remove({ output: 'aquatech_ui:rate_x64' })
+  event.remove({ output: 'industrialupgrade:rate_x32' })
+  event.remove({ output: 'industrialupgrade:rate_x64' })
 
-  // True Endgame Rate x64 (Avaritia 9x9 Extreme Crafting Table)
-  event.custom({
-    type: 'avaritia:shaped_table',
-    pattern: [
-      ' NNNNN  ',
-      'N SSS N ',
-      'NSXRXSN',
-      'NSXQXSN',
-      'NRQQQRN',
-      'NSXQXSN',
-      'NSXRXSN',
-      'N SSS N ',
-      ' NNNNN  ',
-    ],
-    key: {
-      'N': { item: 'avaritia:neutronium_ingot' },
-      'S': { item: 'avaritia:singularity' },
-      'X': { item: 'industrialupgrade:alloyingot/osmiridium' },
-      'R': { item: 'aquatech_ui:rate_x32' },
-      'Q': { item: 'industrialupgrade:asteroidore/asteroid_adamantium_ore' },
-    },
-    result: { item: 'aquatech_ui:rate_x64' },
-  }).id('aquatech:rate_x64_extreme')
+  let rateX32Pattern = [
+    ' CCCCCCC ',
+    'CGGGGGGGC',
+    'CGTTRTTGC',
+    'CGTTQTTGC',
+    'CGRQQQRGC',
+    'CGTTQTTGC',
+    'CGTTRTTGC',
+    'CGGGGGGGC',
+    ' CCCCCCC ',
+  ]
+  let rateX32Key = {
+    C: { item: 'avaritia:crystal_matrix_ingot' },
+    G: { item: 'botania:gaia_ingot' },
+    T: { item: 'botania:terrasteel_ingot' },
+    R: { item: 'aquatech_ui:rate_x16' },
+    Q: { item: 'industrialupgrade:crafting_elements/crafting_274_element' },
+  }
 
+  let rateX64Pattern = [
+    ' NNNNNNN ',
+    'NSSSSSSSN',
+    'NSXXRXXSN',
+    'NSXXQXXSN',
+    'NSRQQQRSN',
+    'NSXXQXXSN',
+    'NSXXRXXSN',
+    'NSSSSSSSN',
+    ' NNNNNNN ',
+  ]
+  let rateX64Key = {
+    N: { item: 'avaritia:neutron_ingot' },
+    S: { item: 'avaritia:eternal_singularity' },
+    X: { item: 'industrialupgrade:alloyingot/osmiridium' },
+    R: { item: 'aquatech_ui:rate_x32' },
+    Q: { item: 'industrialupgrade:asteroidore/asteroid_adamantium_ore' },
+  }
+
+  if (Platform.isLoaded('extendedcrafting')) {
+    // Ultimate Table Tier 4 = 9×9
+    event.custom({
+      type: 'extendedcrafting:shaped_table',
+      pattern: rateX32Pattern,
+      key: rateX32Key,
+      result: { item: 'aquatech_ui:rate_x32', count: 1 },
+    }).id('aquatech:rate_x32_extendedcrafting')
+
+    event.custom({
+      type: 'extendedcrafting:shaped_table',
+      pattern: rateX64Pattern,
+      key: rateX64Key,
+      result: { item: 'aquatech_ui:rate_x64', count: 1 },
+    }).id('aquatech:rate_x64_extendedcrafting')
+  }
+
+  // Keep Re-Avaritia's own Extreme Table recipe (7×7 tier-3) — do not replace with a cheap 3×3.
   event.shaped('aquatech_ui:speed_upgrade', ['IRI', 'GRG', 'RGR'], {
     I: 'minecraft:iron_ingot',
     R: 'minecraft:redstone',
     G: 'minecraft:gold_ingot',
   }).id('aquatech:speed_upgrade')
 
-  event.shaped('aquatech_ui:efficiency_upgrade', ['CRC', 'RIR', 'CRC'], {
-    C: 'minecraft:copper_ingot',
-    R: 'minecraft:redstone',
-    I: 'minecraft:iron_ingot',
-  }).id('aquatech:efficiency_upgrade')
-
-  event.shaped('aquatech_ui:double_hook_upgrade', ['DRD', 'BCB', 'DBD'], {
+  event.shaped('aquatech_ui:speed_x4_upgrade', ['DRD', 'BCB', 'DBD'], {
     D: 'minecraft:diamond',
     R: 'starcatcher:starcatcher_rod',
     B: 'minecraft:iron_block',
     C: 'minecraft:chest',
-  }).id('aquatech:double_hook_upgrade')
+  }).id('aquatech:speed_x4_upgrade')
 
   event.shaped('aquatech_ui:mesh_filter', ['SNS', 'NSN', 'SNS'], {
     S: 'minecraft:string',
     N: 'minecraft:iron_nugget',
   }).id('aquatech:mesh_filter')
 
-  event.shaped('aquatech_ui:ocean_filter', ['BMB', 'IRI', 'SCS'], {
-    B: 'minecraft:iron_block',
-    M: 'aquatech_ui:mesh_filter',
-    I: 'minecraft:iron_ingot',
-    R: 'minecraft:redstone_block',
-    S: 'minecraft:smooth_stone',
-    C: 'minecraft:chest',
-  }).id('aquatech:ocean_filter')
-
-  event.shaped('aquatech_ui:dredger_drill_bit', ['DID', 'OIO', 'NDN'], {
-    D: 'minecraft:diamond',
-    I: 'minecraft:iron_block',
-    O: 'minecraft:obsidian',
-    N: 'minecraft:netherite_scrap',
-  }).id('aquatech:dredger_drill_bit')
-
   event.shaped('aquatech_ui:sonar_goggles', ['PLP', 'HGH', 'XRX'], {
     P: 'minecraft:prismarine_crystals',
     L: 'minecraft:leather_helmet',
     H: 'minecraft:heart_of_the_sea',
-    G: 'minecraft:glass',
-    X: 'minecraft:gold_ingot',
-    R: 'minecraft:redstone',
+    G: 'minecraft:glass_pane',
+    X: 'industrialupgrade:crafting_elements/crafting_273_element',
+    R: 'minecraft:redstone_block',
   }).id('aquatech:sonar_goggles')
 
-  event.shaped('aquatech_ui:abyssal_magnet', ['IEC', 'RHR', 'ICI'], {
-    I: 'minecraft:iron_block',
-    E: 'minecraft:echo_shard',
-    C: 'minecraft:copper_block',
-    R: 'minecraft:redstone_block',
-    H: 'minecraft:heart_of_the_sea',
+  event.shaped('aquatech_ui:abyssal_magnet', ['NDN', 'MEM', ' S '], {
+    N: 'minecraft:netherite_ingot',
+    D: 'minecraft:diamond_block',
+    M: 'minecraft:echo_shard',
+    E: 'minecraft:ender_eye',
+    S: 'minecraft:nether_star',
   }).id('aquatech:abyssal_magnet')
 
-  event.shaped('aquatech_ui:seabed_dredger', ['ODO', 'IDI', 'NCN'], {
-    O: 'minecraft:obsidian',
-    D: 'aquatech_ui:dredger_drill_bit',
+  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SGS'], {
     I: 'minecraft:iron_block',
-    N: 'minecraft:netherite_ingot',
+    F: 'starcatcher:humble_rod',
+    R: 'minecraft:redstone_block',
+    C: 'minecraft:chest',
+    S: 'minecraft:smooth_stone',
+    G: 'industrialupgrade:crafting_elements/crafting_272_element',
+  }).id('aquatech:auto_fisher')
+
+  event.shaped('aquatech_ui:seabed_dredger', ['DBD', 'RCR', 'SSS'], {
+    D: 'aquatech_ui:dredger_drill_bit',
+    B: 'minecraft:iron_block',
+    R: 'industrialupgrade:crafting_elements/crafting_273_element',
+    S: 'minecraft:smooth_stone',
     C: 'minecraft:chest',
   }).id('aquatech:seabed_dredger')
 
@@ -243,14 +238,12 @@ ServerEvents.recipes((event) => {
     R: 'minecraft:redstone_block',
   }).id('aquatech:kelp_bio_pellet')
 
-  event.shaped('aquatech_ui:hydro_reactor', ['PHP', 'FAF', 'NRN'], {
-    P: 'minecraft:prismarine_bricks',
-    H: 'minecraft:heart_of_the_sea',
-    F: 'minecraft:furnace',
-    A: 'aquatech_ui:abyssal_fishing_rod',
-    N: 'minecraft:netherite_block',
-    R: 'minecraft:redstone_block',
-  }).id('aquatech:hydro_reactor')
+  // hydro_reactor removed from ModBlocks — do not craft dead IDs
+  event.remove({ id: 'aquatech:hydro_reactor' })
+  event.remove({ id: 'aquatech_ui:hydro_reactor' })
+  event.remove({ output: 'aquatech_ui:hydro_reactor' })
+  event.remove({ id: 'aquatech_ui:double_hook_upgrade' })
+  event.remove({ output: 'aquatech_ui:double_hook_upgrade' })
 
   event.shaped('aquatech_ui:ocean_altar', ['EHE', 'PCP', 'ONO'], {
     E: 'minecraft:echo_shard',
@@ -263,5 +256,57 @@ ServerEvents.recipes((event) => {
 
   event.shapeless('aquatech_ui:ocean_guide_book', ['minecraft:book', 'minecraft:kelp']).id('aquatech:ocean_guide_book')
 
-  console.log('[AquaTech] AquaTech crafting recipes loaded.')
+  // =========================================================================
+  // ENDGAME: Administrative Solar Panel (IU admpanel) — 9×9 only
+  // Note: machines/admin_solar_panel is a different IU item ("Diffractive").
+  // =========================================================================
+  if (Platform.isLoaded('industrialupgrade') && Platform.isLoaded('avaritia')) {
+    event.remove({ output: 'industrialupgrade:admpanel/admpanel' })
+    event.remove({ id: 'aquatech:admin_solar_panel_endgame' })
+
+    let adminPattern = [
+      ' ICCCCCC ',
+      'ISSSSSSSI',
+      'CSXRXRXSC',
+      'CSXQXQXSC',
+      'CRQPAPQRC',
+      'CSXQXQXSC',
+      'CSXRXRXSC',
+      'ISSSSSSSI',
+      ' CCCCCCC ',
+    ]
+    let adminKey = {
+      I: { item: 'avaritia:infinity_ingot' },
+      C: { item: 'avaritia:crystal_matrix_ingot' },
+      // plain singularity needs NBT — use eternal
+      S: { item: 'avaritia:eternal_singularity' },
+      X: { item: 'industrialupgrade:alloyingot/osmiridium' },
+      R: { item: 'aquatech_ui:rate_x64' },
+      Q: { item: 'industrialupgrade:crafting_elements/crafting_274_element' },
+      P: { item: 'starcatcher:alpha_rod' },
+      A: { item: 'industrialupgrade:machines/photonic_solar_panel' },
+    }
+    let adminResult = { item: 'industrialupgrade:admpanel/admpanel', count: 1 }
+
+    event.custom({
+      type: 'avaritia:shaped_table',
+      tier: 4,
+      category: 'misc',
+      pattern: adminPattern,
+      key: adminKey,
+      result: adminResult,
+      show_notification: true,
+    }).id('aquatech:admin_solar_panel_extreme')
+
+    if (Platform.isLoaded('extendedcrafting')) {
+      event.custom({
+        type: 'extendedcrafting:shaped_table',
+        pattern: adminPattern,
+        key: adminKey,
+        result: adminResult,
+      }).id('aquatech:admin_solar_panel_extendedcrafting')
+    }
+  }
+
+  console.log('[AquaTech] Crafting recipes loaded.')
 })
