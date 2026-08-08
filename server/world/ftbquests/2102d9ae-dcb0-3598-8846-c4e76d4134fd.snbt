@@ -4,22 +4,9 @@
 	name: ""
 	lock: false
 	rewards_blocked: false
-	task_progress: {
-		4F6681AF3D5E9E92: 1L
-	}
-	started: {
-		0000000000000001: 1786031169892L
-		302044E7FDA5161B: 1786031169892L
-		4F6681AF3D5E9E92: 1786031169892L
-		2B49D5775833DDB5: 1786031169892L
-	}
-	completed: {
-		0000000000000000: 1786031169894L
-		0000000000000001: 1786031169894L
-		302044E7FDA5161B: 1786031169894L
-		4F6681AF3D5E9E92: 1786031169894L
-		2B49D5775833DDB5: 1786031169894L
-	}
+	task_progress: { }
+	started: { }
+	completed: { }
 	repeatable: { }
 	completion_count: { }
 	claimed_rewards: { }

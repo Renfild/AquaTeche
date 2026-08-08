@@ -1,7 +1,7 @@
 {
   "id": "legend_case",
   "displayName": "§c§l§nOcean Legend Crate",
-  "iconItemId": "aquatech_ui:abyssal_fishing_rod",
+  "iconItemId": "starcatcher:alpha_rod",
   "price": 5000,
   "pityThreshold": 8,
   "pityRarity": "EPIC",
@@ -31,27 +31,27 @@
       "command": "/aquatech grantxp %player% 120"
     },
     {
-      "itemId": "aquatech_ui:thermal_fishing_rod",
+      "itemId": "starcatcher:magmaforged_rod",
       "count": 1,
       "weight": 10.0,
       "rarity": "RARE",
-      "displayName": "§9Thermal Fishing Rod",
+      "displayName": "§9Magmaforged Rod",
       "command": "/aquatech grantxp %player% 150"
     },
     {
-      "itemId": "aquatech_ui:ender_fishing_rod",
+      "itemId": "starcatcher:lush_glowberry_rod",
       "count": 1,
       "weight": 8.0,
       "rarity": "RARE",
-      "displayName": "§9Ender Fishing Rod",
+      "displayName": "§9Lush Glowberry Rod",
       "command": "/aquatech grantxp %player% 180"
     },
     {
-      "itemId": "aquatech_ui:abyssal_lure",
+      "itemId": "aquatech_ui:rate_x8",
       "count": 1,
       "weight": 8.0,
       "rarity": "RARE",
-      "displayName": "§9Abyssal Lure",
+      "displayName": "§9Rate ×8",
       "command": "/aquatech grantxp %player% 160"
     },
     {
@@ -79,11 +79,11 @@
       "command": "/aquatech grantxp %player% 350"
     },
     {
-      "itemId": "aquatech_ui:abyssal_fishing_rod",
+      "itemId": "starcatcher:alpha_rod",
       "count": 1,
       "weight": 3.0,
       "rarity": "LEGENDARY",
-      "displayName": "§6Abyssal Fishing Rod",
+      "displayName": "§6Alpha Rod",
       "command": "/aquatech grantxp %player% 400"
     },
     {

@@ -2,6 +2,12 @@ worlds:
   world:
     worldborder: 5.9999968E7
     difficulty: HARD
+    seed: -2234131073375614624
+    environment: NORMAL
+    name: world
+    info: -/-
+    mohist: false
+    keepspawninmemory: true
   triton:
     worldborder: 5.9999968E7
     ismods: true

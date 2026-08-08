@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AquaTech</title>
+  <link rel="stylesheet" href="/assets/app.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="side">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <div class="brand-name">AquaTech</div>
+          <div class="brand-ver" id="ver">…</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-page="play">Игра</button>
+        <button class="nav-btn" data-page="settings">Настройки</button>
+        <button class="nav-btn" data-page="log">Активность</button>
+      </nav>
+      <div class="side-foot">
+        <div class="server" id="server">—</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="page active" id="page-play">
+        <div class="hero">
+          <p class="eyebrow">Океанский модпак · 1.20.1 Forge</p>
+          <h1>AquaTech</h1>
+          <p class="lede">Впереди тебя ждут лишь глубины и их неизведанность.</p>
+          <div class="play-row">
+            <label class="field nick">
+              <span>Ник</span>
+              <input id="nick" maxlength="16" placeholder="Steve" autocomplete="username" />
+            </label>
+            <button class="btn-play" id="btn-play">Играть</button>
+            <button class="btn-ghost" id="btn-update">Обновить</button>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress"><i id="bar"></i></div>
+            <div class="progress-meta">
+              <span id="status">Готов</span>
+              <span id="pct">0%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <h2>Настройки</h2>
+        <label class="field">
+          <span>Папка игры</span>
+          <div class="dir-row">
+            <input id="game-dir" />
+            <button class="btn-ghost sm" id="btn-browse-dir">Выбрать папку 📁</button>
+          </div>
+        </label>
+        <label class="field">
+          <span>URL обновлений (sync / Playit)</span>
+          <input id="update-url" placeholder="http://katherine-hydro.tun.ply.gg:31279" />
+        </label>
+        <label class="field ram">
+          <span>RAM (МБ)</span>
+          <input id="ram" type="number" min="2048" max="32768" step="512" />
+        </label>
+        <button class="btn-ghost" id="btn-save">Сохранить</button>
+        <p class="hint">По умолчанию CDN обновлений: http://katherine-hydro.tun.ply.gg:31279</p>
+      </section>
+
+      <section class="page" id="page-log">
+        <h2>Активность</h2>
+        <div class="log" id="log"></div>
+      </section>
+    </main>
+  </div>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

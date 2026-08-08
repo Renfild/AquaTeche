@@ -20,19 +20,19 @@ player_modlist_blacklist:
   list: []
 server_modlist_whitelist:
   enable: false
-  list: '[kuma_api, geckolib, sophisticatedstorage, jei, naturalist, obscure_api,
-    sophisticatedcore, waystones, fragmentum, placebo, modernfix, citadel, alexsmobs,
-    artifacts, lightmanscurrency, sophisticatedbackpacks, midnightlib, apotheosis,
-    guideme, railways, balm, blueprint, cloth_config, forge, embeddium, rubidium,
-    minecraft, upgrade_aquatic, cofh_core, thermal, farmersdelight, alexscaves, thermal_innovation,
-    mousetweaks, jade, ae2, fishofthieves, kotlinforforge, curios, mekanism, mekanismgenerators,
-    flywheel, ponder, create, reliquary, attributeslib, thermal_foundation, thermal_expansion,
-    oceansdelight, architectury, appleskin, ferritecore, yet_another_config_lib_v3,
-    aquaculture, valkyrienskies, vs_eureka, crabbersdelight, expandability, aquamirae]'
+  list: '[easy_npc, rhino, ftbquestprecisionlocalizer, geckolib, tinymultiblocklib,
+    casesmod, productivelib, jei, selling_bin, neobackports, fastsuite, clumps, placebo,
+    modernfix, citadel, alexsmobs, libx, guideme, blueprint, forge, eventwrapper,
+    mythicbotany, minecraft, recipe_generator, extraquests, alexscaves, botanicalextramachinery,
+    avaritia, jade, ae2, botania, curios, patchouli, aquatech_ui, extralib, avaritia_armor,
+    industrialupgrade, powerutils, canary, quantumgenerators, architectury, kubejs,
+    ftblibrary, itemfilters, ftbteams, ftbquests, ftbxmodcompat, ferritecore, extrabotany,
+    aiimprovements, libtooltips, starcatcher, productivebees, packetfixer, ftbquestsentityvis,
+    codechickenlib, brandonscore, draconicevolution, botanicalmachinery, ftbquestsfreezefix]'
 max-bees-in-hive: 3
 enchantment-table-book-animation-tick: false
 networkmanager:
-  debug: true
+  debug: false
   intercept: []
 threadpriority:
   server_thread: 8
@@ -72,7 +72,7 @@ events:
   explosion: false
 forge:
   bukkitpermissionshandler: true
-worldmanage: false
+worldmanage: true
 velocity:
   enabled: false
   onlineMode: false

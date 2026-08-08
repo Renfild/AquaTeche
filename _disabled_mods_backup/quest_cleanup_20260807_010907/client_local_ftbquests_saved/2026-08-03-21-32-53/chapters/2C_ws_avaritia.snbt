@@ -1,0 +1,1957 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "diamond"
+	filename: "2C_ws_avaritia"
+	group: "0AC7A00000000005"
+	icon: "minecraft:nether_star"
+	id: "0839F7F718D935C2"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 1/37&r"
+				""
+				"&bRe:Avaritia&r — классический &eэндгейм бесконечности&r для 1.20.1."
+				"Аддон &eAvaritia: Armor&r добавляет Crystal/Blaze-броню поверх базы."
+				""
+				"&6Путь:&r"
+				"1) &ediamond lattice&r → &ecrystal matrix&r."
+				"2) &eExtreme Crafting Table&r (через compressed tables)."
+				"3) &eNeutron Collector&r → pile → nugget → ingot."
+				"4) &eNeutron Compressor&r → сингулярности → &einfinity catalyst&r → &einfinity ingot&r."
+				"5) Броня/инструменты Infinity + Extreme Smithing."
+				""
+				"&cЭто очень дорогая ветка.&r JEI обязателен. Мастерская &aопциональна&r."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				""
+				"&a▶ Задача:&r Каркас кристальной матрицы."
+				"&7Предмет:&r &favaritia:diamond_lattice&r"
+				""
+				"Решётка — старт матрицы. Крафт из алмазов (JEI)."
+				"Копи пачками перед Extreme Table."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× avaritia:diamond_lattice  &8+&r  &b40 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			icon: "avaritia:diamond_lattice"
+			id: "16C1485CA3C0B5AA"
+			min_width: 280
+			optional: true
+			rewards: [
+				{
+					count: 4
+					id: "270851A27D6BB43D"
+					item: "avaritia:diamond_lattice"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "675CACE93A27E483"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "hexagon"
+			size: 1.35d
+			subtitle: "✦ ГАЙД МОДА · Каркас кристальной матрицы."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "1CFAF1C14713D869"
+				item: "avaritia:diamond_lattice"
+				type: "item"
+			}]
+			title: "I·1  Алмазная решётка"
+			x: -4.62d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 2/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Слиток матрицы."
+				"&7Предмет:&r &favaritia:crystal_matrix_ingot&r"
+				""
+				"Матрица — конструкционный металл Avaritia."
+				"Ingot и block идут в extreme-рецепты."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× avaritia:crystal_matrix_ingot  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:crystal_matrix_ingot"
+			id: "15D9C7D4676341E0"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "4826790D3C5C84E4"
+					item: "avaritia:crystal_matrix_ingot"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "5508A7F54049F099"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Слиток матрицы."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "7763280E699DF291"
+				item: "avaritia:crystal_matrix_ingot"
+				type: "item"
+			}]
+			title: "I·2  Crystal Matrix Ingot"
+			x: -2.78d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 3/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Блок матрицы."
+				"&7Предмет:&r &favaritia:crystal_matrix&r"
+				""
+				"Матрица — конструкционный металл Avaritia."
+				"Ingot и block идут в extreme-рецепты."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:crystal_matrix  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:crystal_matrix"
+			id: "66E00C430B799ACB"
+			min_width: 280
+			rewards: [
+				{
+					id: "52D3A2DF0080A301"
+					item: "avaritia:crystal_matrix"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "5A9B972163297FFB"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Блок матрицы."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "60D1606CDBC9E252"
+				item: "avaritia:crystal_matrix"
+				type: "item"
+			}]
+			title: "I·3  Crystal Matrix Block"
+			x: -0.93d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 4/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Сжатый верстак."
+				"&7Предмет:&r &favaritia:compressed_crafting_table&r"
+				""
+				"Сжатые верстаки — ступени к Extreme Table."
+				"Double compressed → extreme."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:compressed_crafting_table  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:compressed_crafting_table"
+			id: "36B539A36EF34435"
+			min_width: 280
+			rewards: [
+				{
+					id: "1ADF228CAFF36961"
+					item: "avaritia:compressed_crafting_table"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "2E62502F0C43A1E4"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Сжатый верстак."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "667CD93B6DC91362"
+				item: "avaritia:compressed_crafting_table"
+				type: "item"
+			}]
+			title: "I·4  Compressed Table"
+			x: 0.93d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 5/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Двойное сжатие."
+				"&7Предмет:&r &favaritia:double_compressed_crafting_table&r"
+				""
+				"Сжатые верстаки — ступени к Extreme Table."
+				"Double compressed → extreme."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:double_compressed_crafting_table  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:double_compressed_crafting_table"
+			id: "4AA94706CF6ACCD5"
+			min_width: 280
+			rewards: [
+				{
+					id: "0B8E42760E35D981"
+					item: "avaritia:double_compressed_crafting_table"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "5730E482CEEE4D00"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Двойное сжатие."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "30206702653F4600"
+				item: "avaritia:double_compressed_crafting_table"
+				type: "item"
+			}]
+			title: "I·5  Double Compressed"
+			x: 2.78d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 6/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r 9×9 крафт Avaritia."
+				"&7Предмет:&r &favaritia:extreme_crafting_table&r"
+				""
+				"Верстак 9×9. Все топ-рецепты Avaritia здесь."
+				"Ставь на видном месте цеха."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:extreme_crafting_table  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:extreme_crafting_table"
+			id: "358039E0FD944034"
+			min_width: 280
+			rewards: [
+				{
+					id: "3D240307CA965B74"
+					item: "avaritia:extreme_crafting_table"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "6A46D6AD78EB604C"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "9×9 крафт Avaritia."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "424256FA5776B352"
+				item: "avaritia:extreme_crafting_table"
+				type: "item"
+			}]
+			title: "I·6  Extreme Crafting Table"
+			x: 4.62d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 7/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Собирает нейтроний из пустоты."
+				"&7Предмет:&r &favaritia:neutron_collector&r"
+				""
+				"Собирает нейтроний со временем (без шахты)."
+				"Dense/Denser/Densest — быстрее."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:neutron_collector  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:neutron_collector"
+			id: "6789E549500AB9D6"
+			min_width: 280
+			rewards: [
+				{
+					id: "6550D5A27AEE8754"
+					item: "avaritia:neutron_collector"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "146EC9C23C75D3D6"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Собирает нейтроний из пустоты."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "184CB9E7D780C0C6"
+				item: "avaritia:neutron_collector"
+				type: "item"
+			}]
+			title: "I·7  Neutron Collector"
+			x: 4.62d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 8/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Пыль нейтрония."
+				"&7Предмет:&r &favaritia:neutron_pile&r"
+				""
+				"Пыль нейтрония. Крафт в nugget/ingot."
+				"Копи стопки — bottleneck ветки."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 16× avaritia:neutron_pile  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:neutron_pile"
+			id: "0C092235D71F7868"
+			min_width: 280
+			rewards: [
+				{
+					count: 16
+					id: "0F5B8C7AF81C0B9B"
+					item: "avaritia:neutron_pile"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "4590F9F20D22530C"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Старт · Пыль нейтрония."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "6C7CBB4C26EAD057"
+				item: "avaritia:neutron_pile"
+				type: "item"
+			}]
+			title: "I·8  Neutron Pile"
+			x: 2.78d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 9/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Самородки."
+				"&7Предмет:&r &favaritia:neutron_nugget&r"
+				""
+				"Самородки из pile."
+				"9 nugget → ingot (JEI)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 8× avaritia:neutron_nugget  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:neutron_nugget"
+			id: "7DF84B21DC895FED"
+			min_width: 280
+			rewards: [
+				{
+					count: 8
+					id: "6480179D4BC8B133"
+					item: "avaritia:neutron_nugget"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "55251F47E3BD6A89"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Самородки."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "517BCDA366B55F5C"
+				item: "avaritia:neutron_nugget"
+				type: "item"
+			}]
+			title: "II·9  Neutron Nugget"
+			x: 0.93d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 10/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Слиток нейтрония."
+				"&7Предмет:&r &favaritia:neutron_ingot&r"
+				""
+				"Слиток нейтрония — основа компрессора и Infinity."
+				"Блок neutron — склад."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× avaritia:neutron_ingot  &8+&r  &b75 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:neutron_ingot"
+			id: "25C41C9970F5A88B"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "1606369A1CB94B81"
+					item: "avaritia:neutron_ingot"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "6774AD1A82AC2973"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Основа · Слиток нейтрония."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "000F8BBA46527F5D"
+				item: "avaritia:neutron_ingot"
+				type: "item"
+			}]
+			title: "II·10  Neutronium Ingot"
+			x: -0.93d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 11/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Блок нейтрония."
+				"&7Предмет:&r &favaritia:neutron&r"
+				""
+				"Avaritia: всё через &eExtreme Crafting Table&r и JEI."
+				"Иди по стрелкам: матрица → нейтроний → сингулярности → Infinity."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:neutron  &8+&r  &b85 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:neutron"
+			id: "52A62DD7C53C0201"
+			min_width: 280
+			rewards: [
+				{
+					id: "6BB4C5C6B27B2D03"
+					item: "avaritia:neutron"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "325D62DA4CC1E81C"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Блок нейтрония."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "2DB9DD45B0251482"
+				item: "avaritia:neutron"
+				type: "item"
+			}]
+			title: "II·11  Neutronium Block"
+			x: -2.78d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 12/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Сжимает в сингулярности."
+				"&7Предмет:&r &favaritia:neutron_compressor&r"
+				""
+				"Жмёт ресурсы в сингулярности."
+				"Смотри JEI: сколько входного стака нужно."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:neutron_compressor  &8+&r  &b90 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:neutron_compressor"
+			id: "0BC08DB5BF753179"
+			min_width: 280
+			rewards: [
+				{
+					id: "46B1744A8AADC94F"
+					item: "avaritia:neutron_compressor"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "2716DEDC9018069C"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Сжимает в сингулярности."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "767B4793B76DA4EA"
+				item: "avaritia:neutron_compressor"
+				type: "item"
+			}]
+			title: "II·12  Neutron Compressor"
+			x: -4.62d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 13/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Быстрее сбор."
+				"&7Предмет:&r &favaritia:dense_neutron_collector&r"
+				""
+				"Собирает нейтроний со временем (без шахты)."
+				"Dense/Denser/Densest — быстрее."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:dense_neutron_collector  &8+&r  &b85 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:dense_neutron_collector"
+			id: "62FD65D8C3F82CF7"
+			min_width: 280
+			rewards: [
+				{
+					id: "7922979F5AA95E48"
+					item: "avaritia:dense_neutron_collector"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "0C263831F3F34572"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Быстрее сбор."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "0E20DA68083F1585"
+				item: "avaritia:dense_neutron_collector"
+				type: "item"
+			}]
+			title: "II·13  Dense Collector"
+			x: -4.62d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 14/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Для катализатора."
+				"&7Предмет:&r &favaritia:record_fragment&r"
+				""
+				"Осколки пластинок для catalyst/еды эндгейма."
+				"Ломай пластинки по рецепту."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× avaritia:record_fragment  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:record_fragment"
+			id: "77FEB8452C0434CC"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "6877F1E9F5ED225D"
+					item: "avaritia:record_fragment"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "62EC7D6309EBAB7B"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Для катализатора."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "343B7C78EDD8C875"
+				item: "avaritia:record_fragment"
+				type: "item"
+			}]
+			title: "II·14  Осколок пластинки"
+			x: -2.78d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 15/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Еда эндгейма."
+				"&7Предмет:&r &favaritia:ultimate_stew&r"
+				""
+				"Еда эндгейма. Extreme-крафт."
+				"Держи в бою рядом с meatballs."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× avaritia:ultimate_stew  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:ultimate_stew"
+			id: "463F26E1D7459798"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "55312224E3389C6E"
+					item: "avaritia:ultimate_stew"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "3E01C9031781D57D"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Основа · Еда эндгейма."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "154BADCFD4B479FF"
+				item: "avaritia:ultimate_stew"
+				type: "item"
+			}]
+			title: "II·15  Ultimate Stew"
+			x: -0.93d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 16/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Космические фрикадельки."
+				"&7Предмет:&r &favaritia:cosmic_meatballs&r"
+				""
+				"Космические фрикадельки — бафф/еда."
+				"Рецепт на Extreme Table."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× avaritia:cosmic_meatballs  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:cosmic_meatballs"
+			id: "37D1F967ABDECB80"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "2F886AE6A413E988"
+					item: "avaritia:cosmic_meatballs"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "0584E3E45BFC5282"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Космические фрикадельки."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "335155642BAFECC6"
+				item: "avaritia:cosmic_meatballs"
+				type: "item"
+			}]
+			title: "III·16  Cosmic Meatballs"
+			x: 0.93d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 17/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Топливо звёзд."
+				"&7Предмет:&r &favaritia:star_fuel&r"
+				""
+				"Звёздное топливо для крафтов/генерации."
+				"Смотри JEI применения."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× avaritia:star_fuel  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:star_fuel"
+			id: "53C4958CD28D7642"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "6A34C36713890BDC"
+					item: "avaritia:star_fuel"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "4D1A7BF0EC87D311"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Топливо звёзд."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "59216983BA1EA652"
+				item: "avaritia:star_fuel"
+				type: "item"
+			}]
+			title: "III·17  Star Fuel"
+			x: 2.78d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 18/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Сжатый ресурс (любая)."
+				"&7Предмет:&r &favaritia:singularity&r"
+				""
+				"Сингулярность ресурса. Eternal — сборная."
+				"Нужны для Infinity Catalyst."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:singularity  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:singularity"
+			id: "7BA15FFC0B4662E0"
+			min_width: 280
+			rewards: [
+				{
+					id: "46F156E13B5EFDB6"
+					item: "avaritia:singularity"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "71C3427A88FDBF29"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Сжатый ресурс (любая)."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "1CD9F7995F6408B3"
+				item: "avaritia:singularity"
+				type: "item"
+			}]
+			title: "III·18  Сингулярность"
+			x: 4.62d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 19/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Вечная сингулярность."
+				"&7Предмет:&r &favaritia:eternal_singularity&r"
+				""
+				"Сингулярность ресурса. Eternal — сборная."
+				"Нужны для Infinity Catalyst."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:eternal_singularity  &8+&r  &b110 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:eternal_singularity"
+			id: "640233FE7D940087"
+			min_width: 280
+			rewards: [
+				{
+					id: "0AB4107E64B2F756"
+					item: "avaritia:eternal_singularity"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "1E654113463821F9"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Вечная сингулярность."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "0D544D0C7C598392"
+				item: "avaritia:eternal_singularity"
+				type: "item"
+			}]
+			title: "III·19  Eternal Singularity"
+			x: 4.62d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 20/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Катализатор бесконечности."
+				"&7Предмет:&r &favaritia:infinity_catalyst&r"
+				""
+				"Ключ к Infinity Ingot."
+				"Самый «вкусный» mid-end крафт ветки."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_catalyst  &8+&r  &b120 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:infinity_catalyst"
+			id: "50D2B355BE50B297"
+			min_width: 280
+			rewards: [
+				{
+					id: "51AF41603ABE2A77"
+					item: "avaritia:infinity_catalyst"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "40CA626AA6B7284F"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Цех · Катализатор бесконечности."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "35691AF9DFCF7290"
+				item: "avaritia:infinity_catalyst"
+				type: "item"
+			}]
+			title: "III·20  Infinity Catalyst"
+			x: 2.78d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 21/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Слиток бесконечности."
+				"&7Предмет:&r &favaritia:infinity_ingot&r"
+				""
+				"Слиток бесконечности. Броня и инструменты."
+				"Копи через catalyst + neutronium."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_ingot  &8+&r  &b130 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:infinity_ingot"
+			id: "0FDF4532FF1C7A50"
+			min_width: 280
+			rewards: [
+				{
+					id: "294029936A678D31"
+					item: "avaritia:infinity_ingot"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 130"
+					elevate_perms: true
+					id: "285F3C3E82422EC0"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Слиток бесконечности."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "6A49A12E7436A79B"
+				item: "avaritia:infinity_ingot"
+				type: "item"
+			}]
+			title: "III·21  Infinity Ingot"
+			x: 0.93d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 22/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Самородки Infinity."
+				"&7Предмет:&r &favaritia:infinity_nugget&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× avaritia:infinity_nugget  &8+&r  &b100 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:infinity_nugget"
+			id: "611C19D5249116A7"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "51FDE97659A6DE24"
+					item: "avaritia:infinity_nugget"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "43DCE40257F5C4F7"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Самородки Infinity."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "3E759D27AD876BAD"
+				item: "avaritia:infinity_nugget"
+				type: "item"
+			}]
+			title: "III·22  Infinity Nugget"
+			x: -0.93d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 23/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ковка Infinity."
+				"&7Предмет:&r &favaritia:extreme_smithing_table&r"
+				""
+				"Ковка/апгрейд Infinity-экипировки."
+				"Рядом с Extreme Table."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:extreme_smithing_table  &8+&r  &b110 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:extreme_smithing_table"
+			id: "5F39D1FB32C1394A"
+			min_width: 280
+			rewards: [
+				{
+					id: "187285DA50FBC222"
+					item: "avaritia:extreme_smithing_table"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "5882350C18059EB1"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Мастерство · Ковка Infinity."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "55E40DECC11D36F6"
+				item: "avaritia:extreme_smithing_table"
+				type: "item"
+			}]
+			title: "IV·23  Extreme Smithing"
+			x: -2.78d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 24/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ядро усиления."
+				"&7Предмет:&r &favaritia:enhancement_core&r"
+				""
+				"Ядро усиления (аддон-линия)."
+				"JEI покажет рецепты апгрейда."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:enhancement_core  &8+&r  &b100 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:enhancement_core"
+			id: "2623A9985728B72C"
+			min_width: 280
+			rewards: [
+				{
+					id: "065185BE47333585"
+					item: "avaritia:enhancement_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "0250EBBB492213AB"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ядро усиления."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "126E95F847028D9C"
+				item: "avaritia:enhancement_core"
+				type: "item"
+			}]
+			title: "IV·24  Enhancement Core"
+			x: -4.62d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 25/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Кирка без дна."
+				"&7Предмет:&r &favaritia:infinity_pickaxe&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_pickaxe  &8+&r  &b140 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				id: "avaritia:infinity_pickaxe"
+				tag: {
+					mode: { }
+				}
+			}
+			id: "3B1DA35DD75B296A"
+			min_width: 280
+			rewards: [
+				{
+					id: "3E7DA593951697D7"
+					item: "avaritia:infinity_pickaxe"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "014AF92DE3EE002A"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Кирка без дна."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "1BB2DC60039E84C7"
+				item: "avaritia:infinity_pickaxe"
+				type: "item"
+			}]
+			title: "IV·25  Infinity Pickaxe"
+			x: -4.62d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 26/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Клинок конца споров."
+				"&7Предмет:&r &favaritia:infinity_sword&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_sword  &8+&r  &b150 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				id: "avaritia:infinity_sword"
+				tag: {
+					mode: { }
+				}
+			}
+			id: "0E0B3A42AA4F0660"
+			min_width: 280
+			rewards: [
+				{
+					id: "32D289A26620F041"
+					item: "avaritia:infinity_sword"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 150"
+					elevate_perms: true
+					id: "583C7D93A2527235"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Клинок конца споров."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "0A67DA92934ADAAF"
+				item: "avaritia:infinity_sword"
+				type: "item"
+			}]
+			title: "IV·26  Infinity Sword"
+			x: -2.78d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 27/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Шлем бесконечности."
+				"&7Предмет:&r &favaritia:infinity_helmet&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_helmet  &8+&r  &b140 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:infinity_helmet"
+			id: "5A4B2D7DD47A8C0C"
+			min_width: 280
+			rewards: [
+				{
+					id: "70A89B41CD86D53B"
+					item: "avaritia:infinity_helmet"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "35B810A762F278FB"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Шлем бесконечности."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "06B41E83460221BE"
+				item: "avaritia:infinity_helmet"
+				type: "item"
+			}]
+			title: "IV·27  Infinity Helmet"
+			x: -0.93d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 28/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Нагрудник."
+				"&7Предмет:&r &favaritia:infinity_chestplate&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_chestplate  &8+&r  &b150 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:infinity_chestplate"
+			id: "055CB1BAF02AFFB1"
+			min_width: 280
+			rewards: [
+				{
+					id: "70E26A0B6FD28819"
+					item: "avaritia:infinity_chestplate"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 150"
+					elevate_perms: true
+					id: "48B3AAE59DB26BC2"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Нагрудник."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "767257246ECA9312"
+				item: "avaritia:infinity_chestplate"
+				type: "item"
+			}]
+			title: "IV·28  Infinity Chestplate"
+			x: 0.93d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 29/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Поножи."
+				"&7Предмет:&r &favaritia:infinity_pants&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_pants  &8+&r  &b140 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:infinity_pants"
+			id: "36DBFB480BCC8A77"
+			min_width: 280
+			rewards: [
+				{
+					id: "26981BA4E5BED67C"
+					item: "avaritia:infinity_pants"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "00725A9D51BA8654"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Поножи."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "2A350F101A474F02"
+				item: "avaritia:infinity_pants"
+				type: "item"
+			}]
+			title: "IV·29  Infinity Pants"
+			x: 2.78d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 30/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Сапоги."
+				"&7Предмет:&r &favaritia:infinity_boots&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_boots  &8+&r  &b140 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:infinity_boots"
+			id: "1AB8502D01BA8AE4"
+			min_width: 280
+			rewards: [
+				{
+					id: "572B735B90738CA3"
+					item: "avaritia:infinity_boots"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "04E7D2F179C88EE8"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Финал · Сапоги."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "29B4C26369B3B989"
+				item: "avaritia:infinity_boots"
+				type: "item"
+			}]
+			title: "V·30  Infinity Boots"
+			x: 4.62d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 31/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Лук без дна."
+				"&7Предмет:&r &favaritia:infinity_bow&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_bow  &8+&r  &b145 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				id: "avaritia:infinity_bow"
+				tag: {
+					mode: { }
+				}
+			}
+			id: "29CFD10E33C4F98E"
+			min_width: 280
+			rewards: [
+				{
+					id: "51FB8DBE2EE45D08"
+					item: "avaritia:infinity_bow"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 145"
+					elevate_perms: true
+					id: "0CDE7B9D0F206A31"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Лук без дна."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "1C2EC87E4A65E8ED"
+				item: "avaritia:infinity_bow"
+				type: "item"
+			}]
+			title: "V·31  Infinity Bow"
+			x: 4.62d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 32/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Тотем бесконечности."
+				"&7Предмет:&r &favaritia:infinity_totem&r"
+				""
+				"Предмет Infinity — финал. Заряжай/настраивай по тултипу."
+				"Не теряй в пустоте океана."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_totem  &8+&r  &b130 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				id: "avaritia:infinity_totem"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "03289564DB5C4E22"
+			min_width: 280
+			rewards: [
+				{
+					id: "0FBEC44C29CE739B"
+					item: {
+						Count: 1
+						id: "avaritia:infinity_totem"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 130"
+					elevate_perms: true
+					id: "48D3482E5DF4E250"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Тотем бесконечности."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "3A44F347A6028C19"
+				item: {
+					Count: 1
+					id: "avaritia:infinity_totem"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "V·32  Infinity Totem"
+			x: 2.78d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 33/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Сжатый сундук."
+				"&7Предмет:&r &favaritia:compressed_chest&r"
+				""
+				"Сжатый сундук — склад эндгейма."
+				"QoL для сингулярностей."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:compressed_chest  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:compressed_chest"
+			id: "413CB0538CFF6A25"
+			min_width: 280
+			rewards: [
+				{
+					id: "4461E531EB8BA076"
+					item: "avaritia:compressed_chest"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "19A5E2549740A468"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Сжатый сундук."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "03CDFDB86E341CD0"
+				item: "avaritia:compressed_chest"
+				type: "item"
+			}]
+			title: "V·33  Compressed Chest"
+			x: 0.93d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 34/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ядро Crystal-брони."
+				"&7Предмет:&r &favaritia_armor:crystal_core&r"
+				""
+				"Аддон-броня Crystal/Blaze поверх Avaritia."
+				"Smithing templates в JEI."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia_armor:crystal_core  &8+&r  &b90 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia_armor:crystal_core"
+			id: "5404BE63B6D84A75"
+			min_width: 280
+			rewards: [
+				{
+					id: "0BD5C16430EAC81E"
+					item: "avaritia_armor:crystal_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "3E6A172CD0DD9298"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ядро Crystal-брони."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "3830710CB782D408"
+				item: "avaritia_armor:crystal_core"
+				type: "item"
+			}]
+			title: "V·34  Crystal Core (Armor)"
+			x: -0.93d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 35/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Аддон-броня Avaritia."
+				"&7Предмет:&r &favaritia_armor:crystal_helmet&r"
+				""
+				"Аддон-броня Crystal/Blaze поверх Avaritia."
+				"Smithing templates в JEI."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia_armor:crystal_helmet  &8+&r  &b100 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				id: "avaritia_armor:crystal_helmet"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "50CAED1816B30031"
+			min_width: 280
+			rewards: [
+				{
+					id: "06DBBE54817AD9F1"
+					item: {
+						Count: 1
+						id: "avaritia_armor:crystal_helmet"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "10ECA65C417F4856"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Аддон-броня Avaritia."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "60CC73A64D2A6CAC"
+				item: {
+					Count: 1
+					id: "avaritia_armor:crystal_helmet"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "V·35  Crystal Helmet"
+			x: -2.78d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 36/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Нагрудник Crystal."
+				"&7Предмет:&r &favaritia_armor:crystal_chestplate&r"
+				""
+				"Аддон-броня Crystal/Blaze поверх Avaritia."
+				"Smithing templates в JEI."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia_armor:crystal_chestplate  &8+&r  &b110 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				id: "avaritia_armor:crystal_chestplate"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "176C3DBF3AE7EC9D"
+			min_width: 280
+			rewards: [
+				{
+					id: "45CF0E8BDF261D73"
+					item: {
+						Count: 1
+						id: "avaritia_armor:crystal_chestplate"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "0B107128A07717A8"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Нагрудник Crystal."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "77C90329CFC935DB"
+				item: {
+					Count: 1
+					id: "avaritia_armor:crystal_chestplate"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "V·36  Crystal Chestplate"
+			x: -4.62d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 37/37&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Infinity-линия собрана."
+				"&7Предмет:&r &favaritia:infinity_catalyst&r"
+				""
+				"Ключ к Infinity Ingot."
+				"Самый «вкусный» mid-end крафт ветки."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× avaritia:infinity_ingot  &8+&r  &b200 Aqua XP&r"
+				""
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "avaritia:infinity_catalyst"
+			id: "1B4E93AA230BF356"
+			min_width: 280
+			rewards: [
+				{
+					id: "4385A9E9BCA16298"
+					item: "avaritia:infinity_ingot"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 200"
+					elevate_perms: true
+					id: "76D8B15FB82CF0F4"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "gear"
+			size: 1.55d
+			subtitle: "★ КАПСТОУН · Infinity-линия собрана."
+			tags: ["ws_avaritia"]
+			tasks: [{
+				id: "111605CE6AEDAA7A"
+				item: "avaritia:infinity_catalyst"
+				type: "item"
+			}]
+			title: "V·37  Капстоун Avaritia"
+			x: -4.62d
+			y: 10.85d
+		}
+	]
+	title: "Мастерская · Avaritia"
+}

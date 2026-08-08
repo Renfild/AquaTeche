@@ -1,0 +1,93 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "7D2835D587AABDAB"
+	group: ""
+	id: "7D2835D587AABDAB"
+	images: [{
+		height: 2.0d
+		image: "kubejs:textures/quests/aquatechlogo.png"
+		rotation: 0.0d
+		width: 5.0d
+		x: -1.5d
+		y: -2.0d
+	}]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Мир под водой. Суши нет. Твой источник ресурсов — удочки и океан."
+			]
+			entity_vis_size: 1.0f
+			id: "1BEDD68EFAD565F6"
+			rewards: [{
+				command: "/say Hi, @p!"
+				id: "2AE575864149181A"
+				type: "command"
+			}]
+			tasks: [{
+				id: "7889C9A4847A6FD4"
+				title: "Вступление"
+				type: "checkmark"
+			}]
+			x: -1.5d
+			y: -0.5d
+		}
+		{
+			entity_vis_size: 1.0f
+			id: "17AA45F8E0EFA0DB"
+			rewards: [{
+				command: "/say Hi, @p!"
+				id: "32CA1307C7851542"
+				type: "command"
+			}]
+			tasks: [{
+				id: "012A92C26362F303"
+				title: "Дискорд"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: -0.5d
+		}
+		{
+			description: [
+				"SHIFT+удочка = таблица вылова. Умножители x2..x64 дают больше ресурсов."
+			]
+			entity_vis_size: 1.0f
+			id: "4E0C4D44F804F8D7"
+			rewards: [{
+				command: "/say Hi, @p!"
+				id: "5504F26F18E7C038"
+				type: "command"
+			}]
+			tasks: [{
+				id: "477E8FB02F9DE540"
+				title: "Рыбалка"
+				type: "checkmark"
+			}]
+			x: -3.0d
+			y: -0.5d
+		}
+		{
+			description: [
+				"Продавай рыбу NPC за Дублоны. Используй их для кейсов и торговли."
+			]
+			entity_vis_size: 1.0f
+			id: "74B58CD30A570FBA"
+			rewards: [{
+				command: "/say Hi, @p!"
+				id: "404994BF8FE5F977"
+				type: "command"
+			}]
+			tasks: [{
+				id: "3C848335777E73F3"
+				title: "Экономика"
+				type: "checkmark"
+			}]
+			x: -1.5d
+			y: 1.0d
+		}
+	]
+	title: "Информация"
+}

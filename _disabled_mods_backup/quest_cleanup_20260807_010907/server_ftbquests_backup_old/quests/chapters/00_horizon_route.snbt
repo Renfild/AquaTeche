@@ -1,0 +1,334 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "00_horizon_route"
+	group: "0AC7A00000000000"
+	icon: "minecraft:nautilus_shell"
+	id: "2DEC65DABA6CC33A"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			entity_vis_size: 1.0f
+			icon: "aquatech_ui:ocean_guide_book"
+			id: "61B150464A9A68AB"
+			rewards: [
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "77F87F4CE22297E1"
+					silent: true
+					type: "command"
+				}
+				{
+					count: 2
+					id: "333CC9E1FBAC480C"
+					item: "minecraft:nautilus_shell"
+					type: "item"
+				}
+			]
+			shape: "circle"
+			size: 1.3d
+			subtitle: "Добро пожаловать на Маршрут Горизонта — дорогу, по которой флот ведёт каждого выжившего. Открой Энциклопедию Океана (книга из стартового набора) и прочитай хотя бы одну главу."
+			tasks: [{
+				id: "14B539479EC62292"
+				item: "aquatech_ui:ocean_guide_book"
+				type: "item"
+			}]
+			title: "H0 · Лоцман"
+			x: -10.0d
+			y: 0.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			icon: "ftbquests:book"
+			id: "7082237318FDCC5E"
+			rewards: [{
+				command: "/aquatech grantxp @p 15"
+				elevate_perms: true
+				id: "64AD03E98E40AAB7"
+				silent: true
+				type: "command"
+			}]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Открой книгу квестов FTB (из кита или /ftbquests). Акт I · Катастрофа — твой сюжет. Маршрут Горизонта — статус и ежедневки."
+			tasks: [{
+				id: "357440C57A367671"
+				title: "Открыть FTB Quests"
+				type: "checkmark"
+			}]
+			title: "H0 · Судовой журнал"
+			x: -8.0d
+			y: 0.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			icon: {
+				Count: 1b
+				id: "aquatech_ui:novice_fishing_rod"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "3E4DA9801ECB563D"
+			rewards: [
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "104CDDEB6BE26C01"
+					silent: true
+					type: "command"
+				}
+				{
+					count: 4
+					id: "0BBAC5FAAFE160A3"
+					item: "lightmanscurrency:coin_copper"
+					type: "item"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Поймай первые ресурсы удочкой AquaTech. Рыбалка здесь заменяет шахту."
+			tasks: [{
+				id: "43E2A801B3040C67"
+				title: "Поймать что угодно удочкой AquaTech"
+				type: "checkmark"
+			}]
+			title: "H0 · Первый заброс"
+			x: -6.0d
+			y: 0.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			icon: "minecraft:knowledge_book"
+			id: "0B072EDB25548737"
+			rewards: [
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "1382905C6044BE8E"
+					silent: true
+					type: "command"
+				}
+				{
+					command: "/aquatech promote @p 1"
+					elevate_perms: true
+					id: "1836E06F3C135D7F"
+					silent: true
+					type: "command"
+				}
+				{
+					count: 3
+					id: "690CB5DF7EECBCD6"
+					item: "minecraft:nautilus_shell"
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.4d
+			subtitle: "Нажми K — Созвездия Океана. Изучи любой стартовый узел ветки (нужно 1 очко). Команды: /aquatech daily · horizon · season. Варпы: /warp pier · market · harbor (после настройки админом)."
+			tasks: [{
+				id: "5C9A93E4A01AAAB9"
+				title: "Открыть K и прочитать подсказку"
+				type: "checkmark"
+			}]
+			title: "H1 · Матрос"
+			x: -4.0d
+			y: 0.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			icon: "minecraft:nautilus_shell"
+			id: "6BDA31BD3F092381"
+			rewards: [
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "6C21A11ECD2E911E"
+					silent: true
+					type: "command"
+				}
+				{
+					count: 2
+					id: "714303A073B76948"
+					item: "minecraft:nautilus_shell"
+					type: "item"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Каждый день новый Флотский контракт. Напиши /aquatech daily, выполни условие, сдай повторной командой. Жетоны Прилива копят сезон."
+			tasks: [{
+				id: "2FFA5ABB2288D9BF"
+				title: "Сдать хотя бы один /aquatech daily"
+				type: "checkmark"
+			}]
+			title: "H1 · Контракт дня"
+			x: -2.2d
+			y: 0.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			icon: "aquatech_ui:auto_fisher"
+			id: "42B2C0C631030EA1"
+			rewards: [
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "58A5D48C1E7EA8F8"
+					silent: true
+					type: "command"
+				}
+				{
+					command: "/aquatech promote @p 2"
+					elevate_perms: true
+					id: "1F1AAAF7DA6A9887"
+					silent: true
+					type: "command"
+				}
+				{
+					count: 5
+					id: "2319A545A0F17BD6"
+					item: "minecraft:nautilus_shell"
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.4d
+			subtitle: "Заверши Акт II (капстоун Атолла) и поставь Авто-Рыболова или Гидро-Реактор. Шкипер ведёт цех, а не только удочку."
+			tasks: [{
+				id: "55E0DFCC4FAA9F36"
+				item: "aquatech_ui:auto_fisher"
+				type: "item"
+			}]
+			title: "H2 · Шкипер"
+			x: 0.77d
+			y: 0.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			icon: {
+				Count: 1b
+				id: "aquatech_ui:sonar_goggles"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "7EE0CA11AD4248CF"
+			rewards: [
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "247BF40F64313D2A"
+					silent: true
+					type: "command"
+				}
+				{
+					command: "/aquatech promote @p 4"
+					elevate_perms: true
+					id: "75354E8DA93988DE"
+					silent: true
+					type: "command"
+				}
+				{
+					count: 12
+					id: "06D2CEC34B167A91"
+					item: "minecraft:nautilus_shell"
+					type: "item"
+				}
+			]
+			shape: "hexagon"
+			size: 1.5d
+			subtitle: "Глубины пройдены (капстоун Depths). Адмирал знает давление, сонар и рейды."
+			tasks: [{
+				id: "1654CA73723EF585"
+				item: {
+					Count: 1b
+					id: "aquatech_ui:sonar_goggles"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "H4 · Адмирал"
+			x: 3.19d
+			y: 0.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			icon: {
+				Count: 1b
+				id: "aquatech_ui:neptune_trident"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "22026AADD6EB2770"
+			rewards: [
+				{
+					command: "/aquatech grantxp @p 200"
+					elevate_perms: true
+					id: "474E334383D30534"
+					silent: true
+					type: "command"
+				}
+				{
+					command: "/aquatech promote @p 5"
+					elevate_perms: true
+					id: "0F98D89F7A71EA77"
+					silent: true
+					type: "command"
+				}
+				{
+					count: 20
+					id: "223EB053B27574C3"
+					item: "minecraft:nautilus_shell"
+					type: "item"
+				}
+			]
+			shape: "gear"
+			size: 1.8d
+			subtitle: "Капстоун Horizon Raids + Тризубец Нептуна. Легенда Горизонта — редкий титул сезона."
+			tasks: [{
+				id: "31E6B33B537C3837"
+				item: {
+					Count: 1b
+					id: "aquatech_ui:neptune_trident"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "H5 · Легенда Горизонта"
+			x: 5.6899999999999995d
+			y: 0.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			icon: "minecraft:writable_book"
+			id: "467AC16E33A208DF"
+			optional: true
+			rewards: [{
+				command: "/aquatech grantxp @p 50"
+				elevate_perms: true
+				id: "3E471B059FB87283"
+				silent: true
+				type: "command"
+			}]
+			shape: "diamond"
+			size: 0.9d
+			subtitle: "Опционально: напиши /aquatech season и /aquatech horizon. В выходные админ включает /aquatech storm on — редкий улов ×2."
+			tasks: [{
+				id: "78DF750F96426FC4"
+				title: "Проверить сезон и шторм"
+				type: "checkmark"
+			}]
+			title: "Сезон и Шторм"
+			x: -0.9900000000000001d
+			y: 0.0d
+		}
+	]
+}

@@ -54,13 +54,13 @@ pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
+    a.binaries,
+    a.datas,
     [],
-    exclude_binaries=True,
     name='AquaTechLauncher',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    # UPX can corrupt embedded JARs — keep Forge installer intact
     upx=False,
     console=False,
     disable_windowed_traceback=False,
@@ -69,11 +69,4 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon='tools\\aquatech.ico',
-)
-
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.datas,
-    name='AquaTechLauncher',
 )

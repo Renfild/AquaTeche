@@ -1,0 +1,27 @@
+---
+description: Always rebuild AquaTechLauncher after pack/mod/launcher updates
+alwaysApply: true
+---
+
+# Always rebuild the launcher after updates
+
+Whenever you finish an AquaTech update that players/clients should get — mods, kubejs, configs, launcher code, icons, sync logic, or `publish_client_pack` — **always rebuild and deploy the launcher before ending the task**.
+
+## Required steps (do not skip)
+
+1. If pack content changed: run `python tools/publish_client_pack.py` (or at least sync jars + `manifest.json` into `dist/AquaTech-Client` and `dist/releases/AquaTech-Client`).
+2. Rebuild the **onedir** bundle (faster cold start than onefile):
+   ```powershell
+   python -m PyInstaller --noconfirm --clean AquaTechLauncher.spec
+   Remove-Item dist\releases\AquaTechLauncher -Recurse -Force -ErrorAction SilentlyContinue
+   Copy-Item dist\AquaTechLauncher dist\releases\AquaTechLauncher -Recurse -Force
+   Compress-Archive -Path dist\releases\AquaTechLauncher\* -DestinationPath dist\releases\AquaTechLauncher.zip -Force
+   ```
+3. Confirm `dist\releases\AquaTechLauncher\AquaTechLauncher.exe` has a fresh timestamp.
+4. Tell the user the launcher was rebuilt and where it is (`dist\releases\AquaTechLauncher\` or the zip). Friends run the `.exe` inside the folder (do not ship a lone onefile exe).
+
+## Do not
+
+- End a client-facing update with only source/`server/mods` changes and an old exe.
+- Assume a cached PyInstaller build is enough — use `--clean` when unsure.
+- Go back to onefile unless explicitly requested (onefile re-extracts to TEMP every launch → Defender → very slow).

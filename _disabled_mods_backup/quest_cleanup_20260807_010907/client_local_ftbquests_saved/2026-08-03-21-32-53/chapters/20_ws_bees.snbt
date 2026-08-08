@@ -1,0 +1,2743 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "hexagon"
+	filename: "20_ws_bees"
+	group: "0AC7A00000000005"
+	icon: "minecraft:beehive"
+	id: "0AC4C02ED4986AFA"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 1/55&r"
+				""
+				"&bProductive Bees&r — мод про &eпромышленных пчёл&r."
+				"В отличие от ванильного улья, здесь пчёлы производят &eсоты с ресурсами&r (руды, эссенции и т.д.)."
+				""
+				"&6Как играть:&r"
+				"1) Поймай пчелу в &ecage&r (клетку)."
+				"2) Поставь &eadvanced beehive&r + цветы рядом."
+				"3) Соты переработай в &ecentrifuge&r."
+				"4) &eGenes / incubator / breeding&r — селекция редких линий."
+				"5) &eUpgrades&r в улей ускоряют выход."
+				""
+				"&7JEI (R) по любому блоку мода покажет рецепт. Это &aопциональная&r мастерская — сюжет не блокирует."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				""
+				"&a▶ Задача:&r Собери соты для стартовых лакомств."
+				"&7Предмет:&r &fminecraft:honeycomb&r"
+				""
+				"Соты — топливо всей ветки. Добывай с ульев (шелк-тач) или через comb-items после центрифуги."
+				"Следующий шаг обычно — honey treat или centrifuge."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 8× minecraft:honeycomb  &8+&r  &b20 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:honeycomb"
+			id: "1D4A86CC4C17BE97"
+			min_width: 280
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "6438DD2F2492463E"
+					item: "minecraft:honeycomb"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "4FFB6D59B0A5A86F"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "hexagon"
+			size: 1.35d
+			subtitle: "✦ ГАЙД МОДА · Собери соты для стартовых лакомств."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "5B51F8E2BD21D087"
+				item: "minecraft:honeycomb"
+				type: "item"
+			}]
+			title: "I·1  Соты мастера"
+			x: -4.62d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 2/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Жидкое топливо роя."
+				"&7Предмет:&r &fminecraft:honey_bottle&r"
+				""
+				"Мёд — еда и топливо. Бутылки крафтятся из сот/блока мёда."
+				"Позже мёд кормит honey generator."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 8× minecraft:honey_bottle  &8+&r  &b20 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "minecraft:honey_bottle"
+			id: "558A8A75AF40B02B"
+			min_width: 280
+			rewards: [
+				{
+					count: 8
+					id: "3C01E5F14C9A31B0"
+					item: "minecraft:honey_bottle"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "126C1D681BAB549D"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Жидкое топливо роя."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "2A5EC31A0CB145C4"
+				item: "minecraft:honey_bottle"
+				type: "item"
+			}]
+			title: "I·2  Бутылка мёда"
+			x: -2.78d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 3/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Приручай и корми пчёл treats."
+				"&7Предмет:&r &fproductivebees:honey_treat&r"
+				""
+				"Treats — «лакомства» для пчёл Productive Bees."
+				"Крафт в JEI. Корми пчёл / используй при разведении (смотри тултип)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× productivebees:honey_treat  &8+&r  &b30 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:honey_treat"
+			id: "7E7A765E5F23B129"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "6CED6C5AA5FCAE0D"
+					item: "productivebees:honey_treat"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "71DFF04E252562F6"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Приручай и корми пчёл treats."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "7AB8909EA67E07E2"
+				item: "productivebees:honey_treat"
+				type: "item"
+			}]
+			title: "I·3  Медовое лакомство"
+			x: -0.93d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 4/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Переноси пчёл между ульями."
+				"&7Предмет:&r &fproductivebees:bee_cage&r"
+				""
+				"Клетка переносит пчелу между ульями без потери."
+				"ПКМ по пчеле — поймать, ПКМ по улью — посадить."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× productivebees:bee_cage  &8+&r  &b30 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:bee_cage"
+			id: "16C95AC9BC3C7946"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "454CB1AF62FC98EB"
+					item: "productivebees:bee_cage"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "26E3A6FDF6B51F47"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Переноси пчёл между ульями."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "4B3B837B2C70AEEC"
+				item: "productivebees:bee_cage"
+				type: "item"
+			}]
+			title: "I·4  Клетка пчелы"
+			x: 0.93d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 5/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Надёжный транспорт редких пчёл."
+				"&7Предмет:&r &fproductivebees:sturdy_bee_cage&r"
+				""
+				"Клетка переносит пчелу между ульями без потери."
+				"ПКМ по пчеле — поймать, ПКМ по улью — посадить."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:sturdy_bee_cage  &8+&r  &b40 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:sturdy_bee_cage"
+			id: "3A7A0F995C0B4137"
+			min_width: 280
+			rewards: [
+				{
+					id: "76B3E985C43F550F"
+					item: "productivebees:sturdy_bee_cage"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "74DA6D9AE9C86EFF"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Надёжный транспорт редких пчёл."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "2EC3D001FAA93BD4"
+				item: "productivebees:sturdy_bee_cage"
+				type: "item"
+			}]
+			title: "I·5  Крепкая клетка"
+			x: 2.78d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 6/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r База до advanced."
+				"&7Предмет:&r &fminecraft:beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× minecraft:beehive  &8+&r  &b25 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "minecraft:beehive"
+			id: "1A5717908AD55643"
+			min_width: 280
+			rewards: [
+				{
+					id: "642514B65BC9E4CB"
+					item: "minecraft:beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "003464FBFB75CEDC"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "База до advanced."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "4759B77D4B1D73A0"
+				item: "minecraft:beehive"
+				type: "item"
+			}]
+			title: "I·6  Ванильный улей"
+			x: 4.62d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 7/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Дикий старт линии oak."
+				"&7Предмет:&r &fproductivebees:oak_wood_nest&r"
+				""
+				"Гнездо — «дикий» старт: привлекает/держит пчёл определённой линии."
+				"Ставь рядом с цветами; потом переселяй в advanced hive."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:oak_wood_nest  &8+&r  &b30 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:oak_wood_nest"
+			id: "0779D0CA5F804AE7"
+			min_width: 280
+			rewards: [
+				{
+					id: "047084F059EF6019"
+					item: "productivebees:oak_wood_nest"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "67196C88D66774E5"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Дикий старт линии oak."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "3E071B2EDB285184"
+				item: "productivebees:oak_wood_nest"
+				type: "item"
+			}]
+			title: "I·7  Дубовое гнездо"
+			x: 4.62d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 8/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Advanced hive — сердце мастерской."
+				"&7Предмет:&r &fproductivebees:advanced_oak_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_oak_beehive  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_oak_beehive"
+			id: "09F6B3A9C15FA03E"
+			min_width: 280
+			rewards: [
+				{
+					id: "2BFC63BC339A81DD"
+					item: "productivebees:advanced_oak_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "2AA1E0486BF3790D"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Advanced hive — сердце мастерской."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "57A9A7285289E25B"
+				item: "productivebees:advanced_oak_beehive"
+				type: "item"
+			}]
+			title: "I·8  Продвинутый улей"
+			x: 2.78d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 9/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Разнообразие корпусов."
+				"&7Предмет:&r &fproductivebees:advanced_birch_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_birch_beehive  &8+&r  &b40 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_birch_beehive"
+			id: "1DDC6128709BEF85"
+			min_width: 280
+			rewards: [
+				{
+					id: "690003671F2F3143"
+					item: "productivebees:advanced_birch_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "5F4728E5D4381D72"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Разнообразие корпусов."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "77FE390C82651BCA"
+				item: "productivebees:advanced_birch_beehive"
+				type: "item"
+			}]
+			title: "I·9  Берёзовый улей"
+			x: 0.93d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 10/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ещё один advanced hive."
+				"&7Предмет:&r &fproductivebees:advanced_spruce_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_spruce_beehive  &8+&r  &b40 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_spruce_beehive"
+			id: "2DB0FB67B4FAE28C"
+			min_width: 280
+			rewards: [
+				{
+					id: "22392737600EA3E7"
+					item: "productivebees:advanced_spruce_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "24AC385874B46D85"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Старт · Ещё один advanced hive."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "20D44186923331FF"
+				item: "productivebees:advanced_spruce_beehive"
+				type: "item"
+			}]
+			title: "I·10  Еловый улей"
+			x: -0.93d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 11/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Расширь вместимость улья."
+				"&7Предмет:&r &fproductivebees:expansion_box_oak&r"
+				""
+				"Expansion Box крепится к advanced hive и увеличивает вместимость."
+				"Дерево бокса должно совпадать с типом улья (oak к oak)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:expansion_box_oak  &8+&r  &b45 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:expansion_box_oak"
+			id: "213A32E1F10AD3EC"
+			min_width: 280
+			rewards: [
+				{
+					id: "57768C3EBA42AB4D"
+					item: "productivebees:expansion_box_oak"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "0621AB5A01B7EE9A"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Расширь вместимость улья."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "77B3967C14C0A601"
+				item: "productivebees:expansion_box_oak"
+				type: "item"
+			}]
+			title: "I·11  Expansion Box"
+			x: -2.78d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 12/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Корми рой централизованно."
+				"&7Предмет:&r &fproductivebees:feeder&r"
+				""
+				"Feeder автоматически кормит пчёл цветами/treats из инвентаря блока."
+				"Поставь рядом с ульем и заполни слоты."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:feeder  &8+&r  &b40 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:feeder"
+			id: "64D067A5989B12D7"
+			min_width: 280
+			rewards: [
+				{
+					id: "6F180A2EB66E37C9"
+					item: "productivebees:feeder"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "10F9A79B5611C350"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Основа · Корми рой централизованно."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "76B4BBC17D7C80F3"
+				item: "productivebees:feeder"
+				type: "item"
+			}]
+			title: "II·12  Кормушка"
+			x: -4.62d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 13/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Жми соты в эссенции и продукты."
+				"&7Предмет:&r &fproductivebees:centrifuge&r"
+				""
+				"Центрифуга жмёт соты → продукты + побочки."
+				"Powered/Heated версии быстрее и для «тяжёлых» сот. Подведи энергию, если нужно."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:centrifuge  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:centrifuge"
+			id: "159F599764EF71C7"
+			min_width: 280
+			rewards: [
+				{
+					id: "7105229FD4E8C522"
+					item: "productivebees:centrifuge"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "03718731552A2A6E"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Жми соты в эссенции и продукты."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "216F4BC4A2BEA7C0"
+				item: "productivebees:centrifuge"
+				type: "item"
+			}]
+			title: "II·13  Центрифуга"
+			x: -4.62d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 14/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ускорь переработку энергией."
+				"&7Предмет:&r &fproductivebees:powered_centrifuge&r"
+				""
+				"Центрифуга жмёт соты → продукты + побочки."
+				"Powered/Heated версии быстрее и для «тяжёлых» сот. Подведи энергию, если нужно."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:powered_centrifuge  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:powered_centrifuge"
+			id: "4E421312D9859CA7"
+			min_width: 280
+			rewards: [
+				{
+					id: "73C30075EFBB11C4"
+					item: "productivebees:powered_centrifuge"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "51E06763A8D767B8"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ускорь переработку энергией."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "536BEE0073AD89F9"
+				item: "productivebees:powered_centrifuge"
+				type: "item"
+			}]
+			title: "II·14  Силовая центрифуга"
+			x: -2.78d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 15/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Высокотемпературная переработка."
+				"&7Предмет:&r &fproductivebees:heated_centrifuge&r"
+				""
+				"Центрифуга жмёт соты → продукты + побочки."
+				"Powered/Heated версии быстрее и для «тяжёлых» сот. Подведи энергию, если нужно."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:heated_centrifuge  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:heated_centrifuge"
+			id: "336A1A70262675CB"
+			min_width: 280
+			rewards: [
+				{
+					id: "74C308C34227D2BF"
+					item: "productivebees:heated_centrifuge"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "7E8DDD92AEE58931"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Высокотемпературная переработка."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "27E75897B35C9F66"
+				item: "productivebees:heated_centrifuge"
+				type: "item"
+			}]
+			title: "II·15  Нагретая центрифуга"
+			x: -0.93d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 16/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Разлей продукты роя."
+				"&7Предмет:&r &fproductivebees:bottler&r"
+				""
+				"Bottler разливает жидкие продукты роя в вёдра/бутылки."
+				"Соедини трубами/логистикой с выходом центрифуги."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:bottler  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:bottler"
+			id: "7490D5508AE33F1E"
+			min_width: 280
+			rewards: [
+				{
+					id: "010BE897BBFA818C"
+					item: "productivebees:bottler"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "3651C7F18F3AEF78"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Разлей продукты роя."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "3C75E1044B149801"
+				item: "productivebees:bottler"
+				type: "item"
+			}]
+			title: "II·16  Bottler"
+			x: 0.93d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 17/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Выращивай гены и линии пчёл."
+				"&7Предмет:&r &fproductivebees:incubator&r"
+				""
+				"Инкубатор выращивает пчёл/гены из образцов."
+				"Смотри JEI: какие входы (gene bottle, eggs) принимает твоя версия."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:incubator  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:incubator"
+			id: "4606041A6F118CC3"
+			min_width: 280
+			rewards: [
+				{
+					id: "4E892ED47E76CD0B"
+					item: "productivebees:incubator"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "7C8BD59E4E847E06"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Выращивай гены и линии пчёл."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "1458C23D74CD5AF2"
+				item: "productivebees:incubator"
+				type: "item"
+			}]
+			title: "II·17  Инкубатор"
+			x: 2.78d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 18/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Селекция пород."
+				"&7Предмет:&r &fproductivebees:breeding_chamber&r"
+				""
+				"Breeding Chamber — селекция: две пчелы → потомство с шансом новых черт."
+				"Нужны treats и подходящие родители (JEI/квики)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:breeding_chamber  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:breeding_chamber"
+			id: "7CE7688AEF69FEC3"
+			min_width: 280
+			rewards: [
+				{
+					id: "25B9A7A7CD5AD264"
+					item: "productivebees:breeding_chamber"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "0D96472800EB5634"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Селекция пород."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "51D1224FE6FB171F"
+				item: "productivebees:breeding_chamber"
+				type: "item"
+			}]
+			title: "II·18  Камера разведения"
+			x: 4.62d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 19/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Сырой генетический материал."
+				"&7Предмет:&r &fproductivebees:gene&r"
+				""
+				"Гены — данные черты пчелы. Храни в bottle, индексируй, комбинируй."
+				"Gene Indexer помогает не потерять коллекцию."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× productivebees:gene  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:gene"
+			id: "57632A03F2862F92"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "2A7716E442682F8D"
+					item: "productivebees:gene"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "3754EC0B2818EE2D"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Сырой генетический материал."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "6DA49D5D6816846E"
+				item: "productivebees:gene"
+				type: "item"
+			}]
+			title: "II·19  Ген"
+			x: 4.62d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 20/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Храни генетический материал."
+				"&7Предмет:&r &fproductivebees:gene_bottle&r"
+				""
+				"Гены — данные черты пчелы. Храни в bottle, индексируй, комбинируй."
+				"Gene Indexer помогает не потерять коллекцию."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× productivebees:gene_bottle  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:gene_bottle"
+			id: "76512CF969791ECA"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "7FD73BE78A9A36BE"
+					item: "productivebees:gene_bottle"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "085163FB78E1A6EE"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Основа · Храни генетический материал."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "4DE2F952CF2915F1"
+				item: "productivebees:gene_bottle"
+				type: "item"
+			}]
+			title: "II·20  Бутыль гена"
+			x: 2.78d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 21/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Каталогизируй рой как инженер."
+				"&7Предмет:&r &fproductivebees:gene_indexer&r"
+				""
+				"Гены — данные черты пчелы. Храни в bottle, индексируй, комбинируй."
+				"Gene Indexer помогает не потерять коллекцию."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:gene_indexer  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:gene_indexer"
+			id: "584C6224CCE40879"
+			min_width: 280
+			rewards: [
+				{
+					id: "24346FECF02D64DB"
+					item: "productivebees:gene_indexer"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "4CE47B9AE5277178"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Каталогизируй рой как инженер."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "2207B221EC737DF4"
+				item: "productivebees:gene_indexer"
+				type: "item"
+			}]
+			title: "II·21  Индексатор генов"
+			x: 0.93d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 23/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Энергия из мёда."
+				"&7Предмет:&r &fproductivebees:honey_generator&r"
+				""
+				"Гены — данные черты пчелы. Храни в bottle, индексируй, комбинируй."
+				"Gene Indexer помогает не потерять коллекцию."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:honey_generator  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:honey_generator"
+			id: "44E867F0D8BE6844"
+			min_width: 280
+			rewards: [
+				{
+					id: "3E93E7D386B85838"
+					item: "productivebees:honey_generator"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "66291985FFBD56A4"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Цех · Энергия из мёда."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "65B28222F606EBA7"
+				item: "productivebees:honey_generator"
+				type: "item"
+			}]
+			title: "III·23  Медовой генератор"
+			x: -2.78d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 24/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Больше выхода с улья."
+				"&7Предмет:&r &fproductivebees:upgrade_productivity&r"
+				""
+				"Апгрейды вставляются в advanced hive (GUI улья)."
+				"Productivity = больше выхода, Time = быстрее циклы, Simulator = работа без «живых» пчёл в мире."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:upgrade_productivity  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_productivity"
+			id: "686C6A0AC9C87577"
+			min_width: 280
+			rewards: [
+				{
+					id: "3C4BB45A6E5E8EC3"
+					item: "productivebees:upgrade_productivity"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "20D07CE47CEDBE39"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Больше выхода с улья."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "1B76C58BB40481F1"
+				item: "productivebees:upgrade_productivity"
+				type: "item"
+			}]
+			title: "III·24  Upgrade · Productivity"
+			x: -4.62d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 25/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Быстрее циклы улья."
+				"&7Предмет:&r &fproductivebees:upgrade_time&r"
+				""
+				"Апгрейды вставляются в advanced hive (GUI улья)."
+				"Productivity = больше выхода, Time = быстрее циклы, Simulator = работа без «живых» пчёл в мире."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:upgrade_time  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_time"
+			id: "00EEBDADDCE2CBD3"
+			min_width: 280
+			rewards: [
+				{
+					id: "6337045F06677219"
+					item: "productivebees:upgrade_time"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "35396B0EC6EC7E8E"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Быстрее циклы улья."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "0CB2D8C4F8573B13"
+				item: "productivebees:upgrade_time"
+				type: "item"
+			}]
+			title: "III·25  Upgrade · Time"
+			x: -4.62d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 26/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Блочные соты."
+				"&7Предмет:&r &fproductivebees:upgrade_comb_block&r"
+				""
+				"Апгрейды вставляются в advanced hive (GUI улья)."
+				"Productivity = больше выхода, Time = быстрее циклы, Simulator = работа без «живых» пчёл в мире."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:upgrade_comb_block  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_comb_block"
+			id: "2F498D6F1A6504A8"
+			min_width: 280
+			rewards: [
+				{
+					id: "21EAA4DC92AC8178"
+					item: "productivebees:upgrade_comb_block"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "7CB589D86CA4F2F7"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Блочные соты."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "1EB7B22AEF697C56"
+				item: "productivebees:upgrade_comb_block"
+				type: "item"
+			}]
+			title: "III·26  Upgrade · Comb Block"
+			x: -2.78d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 27/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Симуляция без пчёл в мире."
+				"&7Предмет:&r &fproductivebees:upgrade_simulator&r"
+				""
+				"Апгрейды вставляются в advanced hive (GUI улья)."
+				"Productivity = больше выхода, Time = быстрее циклы, Simulator = работа без «живых» пчёл в мире."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:upgrade_simulator  &8+&r  &b90 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_simulator"
+			id: "479377316DEA939D"
+			min_width: 280
+			rewards: [
+				{
+					id: "1EEAFBF3D0D1C875"
+					item: "productivebees:upgrade_simulator"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "44864BFCC3098EFC"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Симуляция без пчёл в мире."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "69F21C7CFC1E5B95"
+				item: "productivebees:upgrade_simulator"
+				type: "item"
+			}]
+			title: "III·27  Upgrade · Simulator"
+			x: -0.93d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 28/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Экзотика атолла."
+				"&7Предмет:&r &fproductivebees:advanced_bamboo_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_bamboo_beehive  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_bamboo_beehive"
+			id: "7BBCBE92953E5E2F"
+			min_width: 280
+			rewards: [
+				{
+					id: "7B0F769A8D1C6A89"
+					item: "productivebees:advanced_bamboo_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "0042DF8076C920C0"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Экзотика атолла."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "2185FD8F41E0A8DA"
+				item: "productivebees:advanced_bamboo_beehive"
+				type: "item"
+			}]
+			title: "III·28  Бамбуковый улей"
+			x: 0.93d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 29/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Склад и декор."
+				"&7Предмет:&r &fminecraft:honey_block&r"
+				""
+				"Блок мёда — склад и декор. Крафт из бутылок/сот."
+				"Можно снова разобрать на ресурс."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 8× minecraft:honey_block  &8+&r  &b40 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "minecraft:honey_block"
+			id: "66ACD709C5394F35"
+			min_width: 280
+			rewards: [
+				{
+					count: 8
+					id: "760BF714C2848039"
+					item: "minecraft:honey_block"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "7459683FD895E7F1"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Склад и декор."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "596C4EAD8CA5E7FA"
+				item: "minecraft:honey_block"
+				type: "item"
+			}]
+			title: "III·29  Медовой блок"
+			x: 2.78d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 30/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Закрепи нагретую линию переработки."
+				"&7Предмет:&r &fproductivebees:heated_centrifuge&r"
+				""
+				"Центрифуга жмёт соты → продукты + побочки."
+				"Powered/Heated версии быстрее и для «тяжёлых» сот. Подведи энергию, если нужно."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 16× productivebees:honey_treat  &8+&r  &b120 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:heated_centrifuge"
+			id: "129A99D11CF43060"
+			min_width: 280
+			rewards: [
+				{
+					count: 16
+					id: "2C0BB98FB065C04C"
+					item: "productivebees:honey_treat"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "4E2A42D45DB50EBF"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Цех · Закрепи нагретую линию переработки."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "4D1B9026386C7E16"
+				item: "productivebees:heated_centrifuge"
+				type: "item"
+			}]
+			title: "III·30  Капстоун роя"
+			x: 4.62d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 31/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Побочный продукт сот."
+				"&7Предмет:&r &fproductivebees:wax&r"
+				""
+				"Воск — побочка центрифуги/сот. Нужен в крафтах и декоре."
+				"Копи блоки воска на складе роя."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 16× productivebees:wax  &8+&r  &b35 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:wax"
+			id: "28FF6DE8B3AB9FFA"
+			min_width: 280
+			rewards: [
+				{
+					count: 16
+					id: "093ABF7C6EFC2C6E"
+					item: "productivebees:wax"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "1CE5BAEEAC2C81CC"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Побочный продукт сот."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "4C7B2CBD7A420F1D"
+				item: "productivebees:wax"
+				type: "item"
+			}]
+			title: "III·31  Воск"
+			x: 4.62d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 32/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Склад воска."
+				"&7Предмет:&r &fproductivebees:wax_block&r"
+				""
+				"Воск — побочка центрифуги/сот. Нужен в крафтах и декоре."
+				"Копи блоки воска на складе роя."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× productivebees:wax_block  &8+&r  &b40 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:wax_block"
+			id: "1DE676A8589414C1"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "04DC48BED31E8B3C"
+					item: "productivebees:wax_block"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "06FB5B7770805B22"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Склад воска."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "538FCD36C1A80B46"
+				item: "productivebees:wax_block"
+				type: "item"
+			}]
+			title: "III·32  Блок воска"
+			x: 2.78d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 33/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Автолов пчёл."
+				"&7Предмет:&r &fproductivebees:catcher&r"
+				""
+				"Catcher автоматически ловит пчёл в зоне."
+				"Ставь у гнезд/цветов, забирай cage из GUI."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:catcher  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:catcher"
+			id: "7C36A5400752C779"
+			min_width: 280
+			rewards: [
+				{
+					id: "501E553F97BAE1EE"
+					item: "productivebees:catcher"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "5E72FB77D2C46449"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Цех · Автолов пчёл."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "310E9BD1ADEC6C99"
+				item: "productivebees:catcher"
+				type: "item"
+			}]
+			title: "III·33  Catcher"
+			x: 0.93d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 34/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Хранение образца."
+				"&7Предмет:&r &fproductivebees:jar_oak&r"
+				""
+				"Банка хранит пчелу как образец/декор."
+				"Альтернатива cage для коллекции."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× productivebees:jar_oak  &8+&r  &b45 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:jar_oak"
+			id: "6FD51EE9AFDCFA71"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "2707C16688948D12"
+					item: "productivebees:jar_oak"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "1E74911764459BC7"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Хранение образца."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "37C577C8AFCCA465"
+				item: "productivebees:jar_oak"
+				type: "item"
+			}]
+			title: "IV·34  Банка пчелы"
+			x: -0.93d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 35/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Линия milky."
+				"&7Предмет:&r &fproductivebees:honeycomb_milky&r"
+				""
+				"Соты — топливо всей ветки. Добывай с ульев (шелк-тач) или через comb-items после центрифуги."
+				"Следующий шаг обычно — honey treat или centrifuge."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× productivebees:honeycomb_milky  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:honeycomb_milky"
+			id: "62BDA5402AE05346"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "066BF48B007F7FF8"
+					item: "productivebees:honeycomb_milky"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "3B9C258434408C5D"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Линия milky."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "3979E72C1B874737"
+				item: "productivebees:honeycomb_milky"
+				type: "item"
+			}]
+			title: "IV·35  Молочные соты"
+			x: -2.78d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 36/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Линия ghostly."
+				"&7Предмет:&r &fproductivebees:honeycomb_ghostly&r"
+				""
+				"Соты — топливо всей ветки. Добывай с ульев (шелк-тач) или через comb-items после центрифуги."
+				"Следующий шаг обычно — honey treat или centrifuge."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× productivebees:honeycomb_ghostly  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:honeycomb_ghostly"
+			id: "35F7314402C1D32E"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "7AA455F7F3AC9814"
+					item: "productivebees:honeycomb_ghostly"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "303B5F49BDC0D318"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Линия ghostly."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "7A0222A403CC922D"
+				item: "productivebees:honeycomb_ghostly"
+				type: "item"
+			}]
+			title: "IV·36  Призрачные соты"
+			x: -4.62d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 37/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Линия powdery."
+				"&7Предмет:&r &fproductivebees:honeycomb_powdery&r"
+				""
+				"Соты — топливо всей ветки. Добывай с ульев (шелк-тач) или через comb-items после центрифуги."
+				"Следующий шаг обычно — honey treat или centrifuge."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× productivebees:honeycomb_powdery  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:honeycomb_powdery"
+			id: "4CC026A69A6ABE51"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "66252FE654AA079F"
+					item: "productivebees:honeycomb_powdery"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "03B98F0309BEE1C2"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Линия powdery."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "6439D7969FAA8738"
+				item: "productivebees:honeycomb_powdery"
+				type: "item"
+			}]
+			title: "IV·37  Порошковые соты"
+			x: -4.62d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 38/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Jungle advanced."
+				"&7Предмет:&r &fproductivebees:advanced_jungle_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_jungle_beehive  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_jungle_beehive"
+			id: "532049B826C4754C"
+			min_width: 280
+			rewards: [
+				{
+					id: "56055DFF6823AEC6"
+					item: "productivebees:advanced_jungle_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "60FE18A54D5E3D97"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Jungle advanced."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "5941A04DF479C21A"
+				item: "productivebees:advanced_jungle_beehive"
+				type: "item"
+			}]
+			title: "IV·38  Тропический улей"
+			x: -2.78d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 39/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Dark oak advanced."
+				"&7Предмет:&r &fproductivebees:advanced_dark_oak_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_dark_oak_beehive  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_dark_oak_beehive"
+			id: "32FD003D40DFBDC5"
+			min_width: 280
+			rewards: [
+				{
+					id: "161C7B11C3C1280E"
+					item: "productivebees:advanced_dark_oak_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "61A8E20C2EBBB55F"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Dark oak advanced."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "7D89C6F94CD8AE71"
+				item: "productivebees:advanced_dark_oak_beehive"
+				type: "item"
+			}]
+			title: "IV·39  Тёмный улей"
+			x: -0.93d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 40/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Mangrove hive."
+				"&7Предмет:&r &fproductivebees:advanced_mangrove_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_mangrove_beehive  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_mangrove_beehive"
+			id: "62570337A3068A00"
+			min_width: 280
+			rewards: [
+				{
+					id: "3C06218FE07B3ECF"
+					item: "productivebees:advanced_mangrove_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "679264BE324DA737"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Мастерство · Mangrove hive."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "2FBA8CF23347899A"
+				item: "productivebees:advanced_mangrove_beehive"
+				type: "item"
+			}]
+			title: "IV·40  Мангровый улей"
+			x: 0.93d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 41/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Nether линия."
+				"&7Предмет:&r &fproductivebees:advanced_crimson_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_crimson_beehive  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_crimson_beehive"
+			id: "6CF938A2E80CC769"
+			min_width: 280
+			rewards: [
+				{
+					id: "15E343F153464A4C"
+					item: "productivebees:advanced_crimson_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "2B57D918AD47B477"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Nether линия."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "24102754B1E777A1"
+				item: "productivebees:advanced_crimson_beehive"
+				type: "item"
+			}]
+			title: "IV·41  Багровый улей"
+			x: 2.78d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 42/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Warped линия."
+				"&7Предмет:&r &fproductivebees:advanced_warped_beehive&r"
+				""
+				"Ванильный улей — мост к advanced-версии мода."
+				"Можно начать с него, затем апгрейднуть до advanced oak."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:advanced_warped_beehive  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:advanced_warped_beehive"
+			id: "6352A9D3E4CE2350"
+			min_width: 280
+			rewards: [
+				{
+					id: "5BCDE5CB10F35D3C"
+					item: "productivebees:advanced_warped_beehive"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "294774574947B6FC"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Warped линия."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "4A9FC313844209F3"
+				item: "productivebees:advanced_warped_beehive"
+				type: "item"
+			}]
+			title: "IV·42  Искажённый улей"
+			x: 4.62d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 43/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Редкий nest."
+				"&7Предмет:&r &fproductivebees:end_stone_nest&r"
+				""
+				"Спец-гнёзда (end stone, glowstone…) — редкие линии."
+				"Потом переселяй в advanced hive."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:end_stone_nest  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:end_stone_nest"
+			id: "3FB3FB16ABE314FD"
+			min_width: 280
+			rewards: [
+				{
+					id: "2915A4DFC93585C4"
+					item: "productivebees:end_stone_nest"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "3654A2CDF01E957A"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Редкий nest."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "6E449966785011ED"
+				item: "productivebees:end_stone_nest"
+				type: "item"
+			}]
+			title: "IV·43  Гнездо Энда"
+			x: 4.62d
+			y: 12.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 44/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Glowstone nest."
+				"&7Предмет:&r &fproductivebees:glowstone_nest&r"
+				""
+				"Спец-гнёзда (end stone, glowstone…) — редкие линии."
+				"Потом переселяй в advanced hive."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:glowstone_nest  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:glowstone_nest"
+			id: "43C3C8BD74F02A20"
+			min_width: 280
+			rewards: [
+				{
+					id: "502C85EF582083A5"
+					item: "productivebees:glowstone_nest"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "7313C2A4CC00F1DC"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Мастерство · Glowstone nest."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "23FD2FAD725B3CC9"
+				item: "productivebees:glowstone_nest"
+				type: "item"
+			}]
+			title: "IV·44  Гнездо свечения"
+			x: 2.78d
+			y: 12.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 45/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Дикая линия."
+				"&7Предмет:&r &fproductivebees:gravel_nest&r"
+				""
+				"Спец-гнёзда (end stone, glowstone…) — редкие линии."
+				"Потом переселяй в advanced hive."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:gravel_nest  &8+&r  &b45 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:gravel_nest"
+			id: "2F517D52F08DFF26"
+			min_width: 280
+			rewards: [
+				{
+					id: "28A852C406D40495"
+					item: "productivebees:gravel_nest"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "40DEF7ED662FC662"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Дикая линия."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "1C070CCFA9CFE336"
+				item: "productivebees:gravel_nest"
+				type: "item"
+			}]
+			title: "V·45  Гравийное гнездо"
+			x: 0.93d
+			y: 12.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 46/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r База апгрейдов."
+				"&7Предмет:&r &fproductivebees:upgrade_base&r"
+				""
+				"Апгрейды вставляются в advanced hive (GUI улья)."
+				"Productivity = больше выхода, Time = быстрее циклы, Simulator = работа без «живых» пчёл в мире."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× productivebees:upgrade_base  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_base"
+			id: "4D70DB14110EFB2D"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "15D448043A383BB9"
+					item: "productivebees:upgrade_base"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "695022C2295EB9D9"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "База апгрейдов."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "16E37CDA2853AB16"
+				item: "productivebees:upgrade_base"
+				type: "item"
+			}]
+			title: "V·46  Upgrade Base"
+			x: -0.93d
+			y: 12.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 47/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Селекция быстрее."
+				"&7Предмет:&r &fproductivebees:upgrade_breeding&r"
+				""
+				"Breeding Chamber — селекция: две пчелы → потомство с шансом новых черт."
+				"Нужны treats и подходящие родители (JEI/квики)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:upgrade_breeding  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_breeding"
+			id: "1D760CB3F3C59FA3"
+			min_width: 280
+			rewards: [
+				{
+					id: "5CA13FBE5E5C78EB"
+					item: "productivebees:upgrade_breeding"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "702921EF0354C6AA"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Селекция быстрее."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "0DD591AEFD852EEA"
+				item: "productivebees:upgrade_breeding"
+				type: "item"
+			}]
+			title: "V·47  Upgrade · Breeding"
+			x: -2.78d
+			y: 12.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 48/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Фильтр выхода."
+				"&7Предмет:&r &fproductivebees:upgrade_filter&r"
+				""
+				"Апгрейды вставляются в advanced hive (GUI улья)."
+				"Productivity = больше выхода, Time = быстрее циклы, Simulator = работа без «живых» пчёл в мире."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:upgrade_filter  &8+&r  &b65 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_filter"
+			id: "2AA5E8A9FD3BB075"
+			min_width: 280
+			rewards: [
+				{
+					id: "6D509C7C47BEC7DE"
+					item: "productivebees:upgrade_filter"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "5FCD334408AB6806"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Фильтр выхода."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "25CA3A469B4049D1"
+				item: "productivebees:upgrade_filter"
+				type: "item"
+			}]
+			title: "V·48  Upgrade · Filter"
+			x: -4.62d
+			y: 12.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 49/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Сэмплер генов."
+				"&7Предмет:&r &fproductivebees:upgrade_bee_sampler&r"
+				""
+				"Апгрейды вставляются в advanced hive (GUI улья)."
+				"Productivity = больше выхода, Time = быстрее циклы, Simulator = работа без «живых» пчёл в мире."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:upgrade_bee_sampler  &8+&r  &b75 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_bee_sampler"
+			id: "092DC83C0EF474BB"
+			min_width: 280
+			rewards: [
+				{
+					id: "3F74710D311F60AB"
+					item: "productivebees:upgrade_bee_sampler"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "2343963190D93459"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Сэмплер генов."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "546C5EF00C3162DA"
+				item: "productivebees:upgrade_bee_sampler"
+				type: "item"
+			}]
+			title: "V·49  Upgrade · Sampler"
+			x: -4.62d
+			y: 14.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 50/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Пчёлы не телепортятся."
+				"&7Предмет:&r &fproductivebees:upgrade_anti_teleport&r"
+				""
+				"Апгрейды вставляются в advanced hive (GUI улья)."
+				"Productivity = больше выхода, Time = быстрее циклы, Simulator = работа без «живых» пчёл в мире."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:upgrade_anti_teleport  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:upgrade_anti_teleport"
+			id: "648B706EB55A22CC"
+			min_width: 280
+			rewards: [
+				{
+					id: "7CDB654D68BD245C"
+					item: "productivebees:upgrade_anti_teleport"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "674A9955FA2D1756"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Финал · Пчёлы не телепортятся."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "43D274ADDB8467F2"
+				item: "productivebees:upgrade_anti_teleport"
+				type: "item"
+			}]
+			title: "V·50  Upgrade · Anti-TP"
+			x: -2.78d
+			y: 14.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 51/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Treats под гены."
+				"&7Предмет:&r &fproductivebees:honey_treat_genetic&r"
+				""
+				"Treats — «лакомства» для пчёл Productive Bees."
+				"Крафт в JEI. Корми пчёл / используй при разведении (смотри тултип)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× productivebees:honey_treat_genetic  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:honey_treat_genetic"
+			id: "78EEC6137298A245"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "30A6F7F2FE317A82"
+					item: "productivebees:honey_treat_genetic"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "0607CE1F6A2F219B"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Treats под гены."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "13D29FF42478A5C2"
+				item: "productivebees:honey_treat_genetic"
+				type: "item"
+			}]
+			title: "V·51  Генное лакомство"
+			x: -0.93d
+			y: 14.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 52/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Редкий продукт."
+				"&7Предмет:&r &fproductivebees:amber&r"
+				""
+				"Янтарь роя — редкий продукт/материал."
+				"Рецепт и применение — JEI."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× productivebees:amber  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:amber"
+			id: "78B9EBE7B2D3A219"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "45887A0EE2A7D274"
+					item: "productivebees:amber"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "2344F4CFB25B38CB"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Редкий продукт."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "23929E69B9A1FF6E"
+				item: "productivebees:amber"
+				type: "item"
+			}]
+			title: "V·52  Янтарь роя"
+			x: 0.93d
+			y: 14.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 53/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Расширение birch."
+				"&7Предмет:&r &fproductivebees:expansion_box_birch&r"
+				""
+				"Expansion Box крепится к advanced hive и увеличивает вместимость."
+				"Дерево бокса должно совпадать с типом улья (oak к oak)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:expansion_box_birch  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:expansion_box_birch"
+			id: "0803E8C962F51925"
+			min_width: 280
+			rewards: [
+				{
+					id: "5367480E864775A3"
+					item: "productivebees:expansion_box_birch"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "0145203FFD4E60AF"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Расширение birch."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "4B17EDA322769606"
+				item: "productivebees:expansion_box_birch"
+				type: "item"
+			}]
+			title: "V·53  Expansion Birch"
+			x: 2.78d
+			y: 14.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 54/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Расширение spruce."
+				"&7Предмет:&r &fproductivebees:expansion_box_spruce&r"
+				""
+				"Expansion Box крепится к advanced hive и увеличивает вместимость."
+				"Дерево бокса должно совпадать с типом улья (oak к oak)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× productivebees:expansion_box_spruce  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "productivebees:expansion_box_spruce"
+			id: "28EE8F2E293DD7B4"
+			min_width: 280
+			rewards: [
+				{
+					id: "3009682083AF5D9A"
+					item: "productivebees:expansion_box_spruce"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "70173AC8A18E27CD"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Расширение spruce."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "0D11707580ED4035"
+				item: "productivebees:expansion_box_spruce"
+				type: "item"
+			}]
+			title: "V·54  Expansion Spruce"
+			x: 4.62d
+			y: 14.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 55/55&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Склад сот ванили."
+				"&7Предмет:&r &fminecraft:honeycomb_block&r"
+				""
+				"Соты — топливо всей ветки. Добывай с ульев (шелк-тач) или через comb-items после центрифуги."
+				"Следующий шаг обычно — honey treat или centrifuge."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 8× minecraft:honeycomb_block  &8+&r  &b40 Aqua XP&r"
+				""
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "minecraft:honeycomb_block"
+			id: "0301D4AC01C6C8FD"
+			min_width: 280
+			rewards: [
+				{
+					count: 8
+					id: "7DDD76C854372969"
+					item: "minecraft:honeycomb_block"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "39ED8EC11132BD10"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "gear"
+			size: 1.55d
+			subtitle: "★ КАПСТОУН · Склад сот ванили."
+			tags: ["ws_bees"]
+			tasks: [{
+				id: "4D99FB7B613CEA35"
+				item: "minecraft:honeycomb_block"
+				type: "item"
+			}]
+			title: "V·55  Блок сот"
+			x: 4.62d
+			y: 16.28d
+		}
+	]
+	title: "Мастерская · Рой"
+}

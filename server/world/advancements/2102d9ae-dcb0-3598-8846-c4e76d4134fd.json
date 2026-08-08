@@ -4188,7 +4188,43 @@
   },
   "watpr:exit_water": {
     "criteria": {
-      "requirement": "2026-08-06 18:41:54 +0300"
+      "requirement": "2026-08-07 10:02:00 +0300"
+    },
+    "done": true
+  },
+  "avaritia:main/extreme_crafting_table": {
+    "criteria": {
+      "main": "2026-08-06 20:05:58 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/compressed_crafting_table": {
+    "criteria": {
+      "has_crafting_table": "2026-08-07 09:12:50 +0300"
+    },
+    "done": true
+  },
+  "minecraft:story/root": {
+    "criteria": {
+      "crafting_table": "2026-08-07 09:12:50 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/compressed_crafting_table_from_double_compressed_crafting_table": {
+    "criteria": {
+      "has_double_compressed_crafting_table": "2026-08-07 09:13:41 +0300"
+    },
+    "done": true
+  },
+  "avaritia:recipes/misc/sculk_crafting_table": {
+    "criteria": {
+      "has_block": "2026-08-07 09:13:41 +0300"
+    },
+    "done": true
+  },
+  "minecraft:adventure/sleep_in_bed": {
+    "criteria": {
+      "slept_in_bed": "2026-08-07 09:34:15 +0300"
     },
     "done": true
   },

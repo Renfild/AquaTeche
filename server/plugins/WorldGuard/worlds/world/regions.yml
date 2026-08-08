@@ -16,7 +16,7 @@ regions:
         members: {}
         flags: {other-explosion: deny, creeper-explosion: deny, use: allow, greeting: §bAquaTech
                 §7· Стартовый атолл. Открой FTB Quests (книга) и начни Act I., passthrough: deny,
-            tnt: deny, chest-access: allow, pvp: deny, mob-spawning: deny, farewell: §7Удачи
+            chest-access: allow, tnt: deny, pvp: deny, mob-spawning: deny, farewell: §7Удачи
                 за горизонтом.}
         owners: {}
         type: cuboid
@@ -25,7 +25,7 @@ regions:
         min: {x: 54, y: 189, z: 139}
         max: {x: 75, y: 194, z: 175}
         members: {}
-        flags: {}
+        flags: {damage-animals: deny, pvp: deny}
         owners:
             unique-ids: [2102d9ae-dcb0-3598-8846-c4e76d4134fd]
         type: cuboid

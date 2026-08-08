@@ -1,0 +1,2257 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "octagon"
+	filename: "2D_ws_draconic"
+	group: "0AC7A00000000005"
+	icon: "minecraft:dragon_egg"
+	id: "6257BE81A4FDD0AC"
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 1/40&r"
+				""
+				"&bDraconic Evolution&r — эндгейм энергия и снаряжение."
+				"Нужны &eBrandon's Core&r и &eCodeChicken Lib&r (уже в паке)."
+				""
+				"&6Путь:&r"
+				"1) Добывай &edraconia&r → dust/ingot/core."
+				"2) Собери &ecrafting core + injectors&r — fusion-крафт."
+				"3) Сеть энергии: &erelay / IO crystal / energy core + pylons&r."
+				"4) Тиры: Wyvern → Awakened → Chaotic."
+				"5) Модули вставляются в инструменты/броню."
+				""
+				"&eInfo Tablet&r — внутриигровой гайд. Ветка &aопциональна&r и очень дорогая."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				""
+				"&a▶ Задача:&r Гайд DE в игре."
+				"&7Предмет:&r &fdraconicevolution:info_tablet&r"
+				""
+				"Открой ПКМ — энциклопедия DE."
+				"Читай главы про fusion и energy core."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:info_tablet  &8+&r  &b30 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:info_tablet"
+			id: "37CABEA5E4DF7EAB"
+			min_width: 280
+			optional: true
+			rewards: [
+				{
+					id: "43C980100DC593F3"
+					item: "draconicevolution:info_tablet"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "0B7C9DE8C270560B"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "hexagon"
+			size: 1.35d
+			subtitle: "✦ ГАЙД МОДА · Гайд DE в игре."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "2FCC20A4B92D5D68"
+				item: "draconicevolution:info_tablet"
+				type: "item"
+			}]
+			title: "I·1  Info Tablet"
+			x: -4.62d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 2/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Пыль руды."
+				"&7Предмет:&r &fdraconicevolution:draconium_dust&r"
+				""
+				"Пыль с руды (overworld/nether/end/deepslate)."
+				"Плавь в ingot."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 16× draconicevolution:draconium_dust  &8+&r  &b40 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:draconium_dust"
+			id: "277D0BC2F8ACC123"
+			min_width: 280
+			rewards: [
+				{
+					count: 16
+					id: "2C77358B7875CD41"
+					item: "draconicevolution:draconium_dust"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "48B1075008F19D2A"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Пыль руды."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "02194DF008BEDFA2"
+				item: "draconicevolution:draconium_dust"
+				type: "item"
+			}]
+			title: "I·2  Draconium Dust"
+			x: -2.78d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 3/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Слиток."
+				"&7Предмет:&r &fdraconicevolution:draconium_ingot&r"
+				""
+				"Базовый слиток. Крафт ядер и блоков."
+				"Копи до fusion."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 8× draconicevolution:draconium_ingot  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:draconium_ingot"
+			id: "2F452394736B017E"
+			min_width: 280
+			rewards: [
+				{
+					count: 8
+					id: "29C9DD973D7D2231"
+					item: "draconicevolution:draconium_ingot"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "555CB83062C5E933"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Слиток."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "5D2966D0999F7F0A"
+				item: "draconicevolution:draconium_ingot"
+				type: "item"
+			}]
+			title: "I·3  Draconium Ingot"
+			x: -0.93d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 4/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Блок склада."
+				"&7Предмет:&r &fdraconicevolution:draconium_block&r"
+				""
+				"Draconic Evolution: &eInfo Tablet&r + fusion crafting + энергосеть."
+				"Тиры строго по порядку: Draconium → Wyvern → Awakened → Chaotic."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× draconicevolution:draconium_block  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:draconium_block"
+			id: "735546740D767628"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "3862DE3B1A3C1116"
+					item: "draconicevolution:draconium_block"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "3A9478A7F30C60A0"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Блок склада."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "3E2A5B7AB10DB181"
+				item: "draconicevolution:draconium_block"
+				type: "item"
+			}]
+			title: "I·4  Draconium Block"
+			x: 0.93d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 5/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ядро T1."
+				"&7Предмет:&r &fdraconicevolution:draconium_core&r"
+				""
+				"Ядро T1. База всех крафтов выше."
+				"Нужно пачками."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× draconicevolution:draconium_core  &8+&r  &b60 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:draconium_core"
+			id: "7C756DEE32083367"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "70001501B6F0F52F"
+					item: "draconicevolution:draconium_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "1BCE787BCB71FB0E"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Ядро T1."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "53CEA58FED54A95B"
+				item: "draconicevolution:draconium_core"
+				type: "item"
+			}]
+			title: "I·5  Draconium Core"
+			x: 2.78d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 6/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ядро T2."
+				"&7Предмет:&r &fdraconicevolution:wyvern_core&r"
+				""
+				"Ядро T2. Fusion из draconium cores."
+				"Открывает wyvern-снаряжение."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:wyvern_core  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:wyvern_core"
+			id: "11BA009DA46F2E7A"
+			min_width: 280
+			rewards: [
+				{
+					id: "3DACD637BD10C73A"
+					item: "draconicevolution:wyvern_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "046F330B60B6A491"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ядро T2."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "44B6EE0A4587A748"
+				item: "draconicevolution:wyvern_core"
+				type: "item"
+			}]
+			title: "I·6  Wyvern Core"
+			x: 4.62d
+			y: 0.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 7/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r База модулей."
+				"&7Предмет:&r &fdraconicevolution:module_core&r"
+				""
+				"Пустой модуль под апгрейды оружия/брони."
+				"Крафт конкретных item_wyvern_* / chaotic_*."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× draconicevolution:module_core  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:module_core"
+			id: "024A0AB2F6B3EBD5"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "20914F26D4814033"
+					item: "draconicevolution:module_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "603BBC9F51DFF02B"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "База модулей."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "7D4C70DD4D3E9A39"
+				item: "draconicevolution:module_core"
+				type: "item"
+			}]
+			title: "I·7  Module Core"
+			x: 4.62d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r"
+				"&8Шаг 8/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Инжектор крафта."
+				"&7Предмет:&r &fdraconicevolution:basic_crafting_injector&r"
+				""
+				"Инжекторы вокруг Crafting Core."
+				"Тир инжектора = тир рецепта."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:basic_crafting_injector  &8+&r  &b65 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:basic_crafting_injector"
+			id: "22C8D8D7E9BCE73E"
+			min_width: 280
+			rewards: [
+				{
+					id: "0FC4A20BBB2EE0A8"
+					item: "draconicevolution:basic_crafting_injector"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "5DD5F896289750BF"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Инжектор крафта."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "4BF90123C32B8536"
+				item: "draconicevolution:basic_crafting_injector"
+				type: "item"
+			}]
+			title: "I·8  Basic Injector"
+			x: 2.78d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 9/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Сердце fusion-крафта."
+				"&7Предмет:&r &fdraconicevolution:crafting_core&r"
+				""
+				"Центр fusion: положи рецепт, подай энергию."
+				"Смотри структуру в Info Tablet."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:crafting_core  &8+&r  &b75 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:crafting_core"
+			id: "1A36C5FCFFE074F9"
+			min_width: 280
+			rewards: [
+				{
+					id: "24821F4132DD80D9"
+					item: "draconicevolution:crafting_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "63D92F2A6545F4C1"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Основа · Сердце fusion-крафта."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "61803D33E6A654C4"
+				item: "draconicevolution:crafting_core"
+				type: "item"
+			}]
+			title: "II·9  Crafting Core"
+			x: 0.93d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 10/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Связка кристаллов сети."
+				"&7Предмет:&r &fdraconicevolution:crystal_binder&r"
+				""
+				"Связывает кристальную энергосеть."
+				"ПКМ по кристаллам/ядрам."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:crystal_binder  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:crystal_binder"
+			id: "469845FCF3C330D8"
+			min_width: 280
+			rewards: [
+				{
+					id: "7E370F54EC53B319"
+					item: "draconicevolution:crystal_binder"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "0EA250173540B152"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Основа · Связка кристаллов сети."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "2320AB0FA565FF66"
+				item: "draconicevolution:crystal_binder"
+				type: "item"
+			}]
+			title: "II·10  Crystal Binder"
+			x: -0.93d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 11/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Передача энергии."
+				"&7Предмет:&r &fdraconicevolution:basic_relay_crystal&r"
+				""
+				"Передаёт RF/FE между узлами."
+				"Строй линии как кабели."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× draconicevolution:basic_relay_crystal  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:basic_relay_crystal"
+			id: "64201D1D04D2470A"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "4470BA3FC45BFEB6"
+					item: "draconicevolution:basic_relay_crystal"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "7F85894E2E06E8AD"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Передача энергии."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "3AC4ED8B08CD7312"
+				item: "draconicevolution:basic_relay_crystal"
+				type: "item"
+			}]
+			title: "II·11  Relay Crystal"
+			x: -2.78d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 12/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ввод/вывод энергии."
+				"&7Предмет:&r &fdraconicevolution:basic_io_crystal&r"
+				""
+				"Точка ввода/вывода энергии в машины."
+				"Ориентация важна."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× draconicevolution:basic_io_crystal  &8+&r  &b55 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:basic_io_crystal"
+			id: "75E1D8DB79518111"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "5ADC2643203D0B12"
+					item: "draconicevolution:basic_io_crystal"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "3DC9F54CF48B801F"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ввод/вывод энергии."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "69AF8AFAF5C7A7F5"
+				item: "draconicevolution:basic_io_crystal"
+				type: "item"
+			}]
+			title: "II·12  IO Crystal"
+			x: -4.62d
+			y: 1.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 13/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Буфер энергии DE."
+				"&7Предмет:&r &fdraconicevolution:energy_core&r"
+				""
+				"Огромный буфер. Ставь стабилизаторы вокруг."
+				"Pylon качает энергию внутрь/наружу."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:energy_core  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:energy_core"
+			id: "025143E42F88EDA0"
+			min_width: 280
+			rewards: [
+				{
+					id: "2A622820546273B5"
+					item: "draconicevolution:energy_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "4B74327B03215D0B"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Буфер энергии DE."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "74ABAE3E1DBAD96A"
+				item: "draconicevolution:energy_core"
+				type: "item"
+			}]
+			title: "II·13  Energy Core"
+			x: -4.62d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 14/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Стабилизация ядра."
+				"&7Предмет:&r &fdraconicevolution:energy_core_stabilizer&r"
+				""
+				"Огромный буфер. Ставь стабилизаторы вокруг."
+				"Pylon качает энергию внутрь/наружу."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× draconicevolution:energy_core_stabilizer  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:energy_core_stabilizer"
+			id: "6525AC56EE8C8799"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "2D774ED39603170F"
+					item: "draconicevolution:energy_core_stabilizer"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "222A84619B942C9A"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Стабилизация ядра."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "63219199A0F21B30"
+				item: "draconicevolution:energy_core_stabilizer"
+				type: "item"
+			}]
+			title: "II·14  Stabilizer"
+			x: -2.78d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 15/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Пилон ввода/вывода."
+				"&7Предмет:&r &fdraconicevolution:energy_pylon&r"
+				""
+				"Пилон IO для Energy Core."
+				"Настраивается Crystal Binder."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 2× draconicevolution:energy_pylon  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:energy_pylon"
+			id: "1FE243CB1B4F2742"
+			min_width: 280
+			rewards: [
+				{
+					count: 2
+					id: "18E34E681B9ED9EE"
+					item: "draconicevolution:energy_pylon"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "12B55061997E643A"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Пилон ввода/вывода."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "313773EEC745E3AC"
+				item: "draconicevolution:energy_pylon"
+				type: "item"
+			}]
+			title: "II·15  Energy Pylon"
+			x: -0.93d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r"
+				"&8Шаг 16/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Стартовый генератор."
+				"&7Предмет:&r &fdraconicevolution:generator&r"
+				""
+				"Ранний генератор DE."
+				"Пока нет реактора — хватит."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:generator  &8+&r  &b50 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:generator"
+			id: "7A452B2329424764"
+			min_width: 280
+			rewards: [
+				{
+					id: "5BBB971FEB8CB066"
+					item: "draconicevolution:generator"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "04D7ADD903C5CC23"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Стартовый генератор."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "78288510C57F7125"
+				item: "draconicevolution:generator"
+				type: "item"
+			}]
+			title: "II·16  DE Generator"
+			x: 0.93d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 17/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ферма мобов DE."
+				"&7Предмет:&r &fdraconicevolution:grinder&r"
+				""
+				"Убийца мобов с энергией."
+				"Ферма + дроп."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:grinder  &8+&r  &b65 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:grinder"
+			id: "772B8973001FA24B"
+			min_width: 280
+			rewards: [
+				{
+					id: "01BEAB1D6E18AAF5"
+					item: "draconicevolution:grinder"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "78E1D6F5E49461D5"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Цех · Ферма мобов DE."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "7890A359680C681A"
+				item: "draconicevolution:grinder"
+				type: "item"
+			}]
+			title: "III·17  Grinder"
+			x: 2.78d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 18/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Умный сундук."
+				"&7Предмет:&r &fdraconicevolution:draconium_chest&r"
+				""
+				"Сундук с авто-плавкой/сортировкой (версия зависима)."
+				"JEI/тултип."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:draconium_chest  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:draconium_chest"
+			id: "2A02256B086DE94D"
+			min_width: 280
+			rewards: [
+				{
+					id: "7E5D080290599A00"
+					item: "draconicevolution:draconium_chest"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "462052EF5A943B6C"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Умный сундук."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "70578F00A313D2A1"
+				item: "draconicevolution:draconium_chest"
+				type: "item"
+			}]
+			title: "III·18  Draconium Chest"
+			x: 4.62d
+			y: 3.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 19/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Энергоядро T2."
+				"&7Предмет:&r &fdraconicevolution:wyvern_energy_core&r"
+				""
+				"Огромный буфер. Ставь стабилизаторы вокруг."
+				"Pylon качает энергию внутрь/наружу."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:wyvern_energy_core  &8+&r  &b85 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:wyvern_energy_core"
+			id: "1407162147E9F5FD"
+			min_width: 280
+			rewards: [
+				{
+					id: "546183E82AE78AA0"
+					item: "draconicevolution:wyvern_energy_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "22EB9865A55DDABA"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Энергоядро T2."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "33DF18BC5D2CAAF4"
+				item: "draconicevolution:wyvern_energy_core"
+				type: "item"
+			}]
+			title: "III·19  Wyvern Energy Core"
+			x: 4.62d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 20/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ёмкость T2."
+				"&7Предмет:&r &fdraconicevolution:wyvern_capacitor&r"
+				""
+				"Тир виверны: инструменты, броня, capacitor, injector."
+				"Модули wyvern_* усиливают."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:wyvern_capacitor  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				ForgeCaps: {
+					Parent: {
+						energy: {
+							energy: 0
+						}
+						module_host: {
+							modules: [ ]
+							properties: {
+								charge_armor: {
+									hud: 1b
+								}
+								charge_curios: {
+									hud: 1b
+								}
+								charge_held_item: {
+									hud: 1b
+								}
+								charge_hot_bar: {
+									hud: 1b
+								}
+								charge_main: {
+									hud: 1b
+								}
+							}
+							provider_id: [I;
+								-193687613
+								860768983
+								-1959696753
+								-370767324
+							]
+						}
+					}
+				}
+				id: "draconicevolution:wyvern_capacitor"
+				tag: { }
+			}
+			id: "09D66299D5C77EC6"
+			min_width: 280
+			rewards: [
+				{
+					id: "1F469383293FF44A"
+					item: "draconicevolution:wyvern_capacitor"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "41BB0095391F2034"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Цех · Ёмкость T2."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "7BD9566F7E40EF2C"
+				item: "draconicevolution:wyvern_capacitor"
+				type: "item"
+			}]
+			title: "III·20  Wyvern Capacitor"
+			x: 2.78d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 21/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Инжектор T2."
+				"&7Предмет:&r &fdraconicevolution:wyvern_crafting_injector&r"
+				""
+				"Инжекторы вокруг Crafting Core."
+				"Тир инжектора = тир рецепта."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:wyvern_crafting_injector  &8+&r  &b90 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:wyvern_crafting_injector"
+			id: "4C90333DF57F5FA1"
+			min_width: 280
+			rewards: [
+				{
+					id: "1D4238D279D78A83"
+					item: "draconicevolution:wyvern_crafting_injector"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "74115523E4A44506"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Инжектор T2."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "3F83086603A61CD0"
+				item: "draconicevolution:wyvern_crafting_injector"
+				type: "item"
+			}]
+			title: "III·21  Wyvern Injector"
+			x: 0.93d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 22/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Кирка виверны."
+				"&7Предмет:&r &fdraconicevolution:wyvern_pickaxe&r"
+				""
+				"Тир виверны: инструменты, броня, capacitor, injector."
+				"Модули wyvern_* усиливают."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:wyvern_pickaxe  &8+&r  &b95 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				ForgeCaps: {
+					Parent: {
+						energy: {
+							energy: 0
+						}
+						module_host: {
+							modules: [ ]
+							properties: {
+								mining_speed: {
+									hud: 1b
+									value: 1.0d
+								}
+							}
+							provider_id: [I;
+								55517849
+								684215969
+								-1741667046
+								795635539
+							]
+						}
+					}
+				}
+				id: "draconicevolution:wyvern_pickaxe"
+				tag: { }
+			}
+			id: "1F9CC4F74692644D"
+			min_width: 280
+			rewards: [
+				{
+					id: "219CA977A005D2BC"
+					item: "draconicevolution:wyvern_pickaxe"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "605BA5F816651BC3"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Кирка виверны."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "4844141CB650AE86"
+				item: "draconicevolution:wyvern_pickaxe"
+				type: "item"
+			}]
+			title: "III·22  Wyvern Pickaxe"
+			x: -0.93d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 23/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Клинок виверны."
+				"&7Предмет:&r &fdraconicevolution:wyvern_sword&r"
+				""
+				"Тир виверны: инструменты, броня, capacitor, injector."
+				"Модули wyvern_* усиливают."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:wyvern_sword  &8+&r  &b95 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				ForgeCaps: {
+					Parent: {
+						energy: {
+							energy: 0
+						}
+						module_host: {
+							modules: [ ]
+							properties: { }
+							provider_id: [I;
+								967568304
+								-1663612155
+								-1257844281
+								-141070614
+							]
+						}
+					}
+				}
+				id: "draconicevolution:wyvern_sword"
+				tag: { }
+			}
+			id: "439744E60C89A861"
+			min_width: 280
+			rewards: [
+				{
+					id: "3B4EC4187840F349"
+					item: "draconicevolution:wyvern_sword"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "500934202A6127EB"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Клинок виверны."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "157F1A6B2D8CC3A6"
+				item: "draconicevolution:wyvern_sword"
+				type: "item"
+			}]
+			title: "III·23  Wyvern Sword"
+			x: -2.78d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r"
+				"&8Шаг 24/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Броня виверны."
+				"&7Предмет:&r &fdraconicevolution:wyvern_chestpiece&r"
+				""
+				"Тир виверны: инструменты, броня, capacitor, injector."
+				"Модули wyvern_* усиливают."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:wyvern_chestpiece  &8+&r  &b100 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				ForgeCaps: {
+					Parent: {
+						energy: {
+							energy: 0
+						}
+						module_host: {
+							modules: [ ]
+							properties: { }
+							provider_id: [I;
+								-1442138843
+								-445493367
+								-1593372400
+								-1600625863
+							]
+						}
+					}
+				}
+				id: "draconicevolution:wyvern_chestpiece"
+				tag: { }
+			}
+			id: "385B30ADFBF068C5"
+			min_width: 280
+			rewards: [
+				{
+					id: "4429B01C86827388"
+					item: "draconicevolution:wyvern_chestpiece"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "001DDEF619D062C5"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Цех · Броня виверны."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "6DA075E39D967B8C"
+				item: "draconicevolution:wyvern_chestpiece"
+				type: "item"
+			}]
+			title: "III·24  Wyvern Chestpiece"
+			x: -4.62d
+			y: 5.43d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 25/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Зона копания."
+				"&7Предмет:&r &fdraconicevolution:item_wyvern_aoe&r"
+				""
+				"Тир виверны: инструменты, броня, capacitor, injector."
+				"Модули wyvern_* усиливают."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:item_wyvern_aoe  &8+&r  &b70 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:item_wyvern_aoe"
+			id: "7359B9492F1844C7"
+			min_width: 280
+			rewards: [
+				{
+					id: "72FAAB34E0CA6DC7"
+					item: "draconicevolution:item_wyvern_aoe"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "12E0C98BDDE55C86"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Зона копания."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "1DEA328BFE5DDF40"
+				item: "draconicevolution:item_wyvern_aoe"
+				type: "item"
+			}]
+			title: "IV·25  Модуль AoE"
+			x: -4.62d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 26/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Полёт виверны."
+				"&7Предмет:&r &fdraconicevolution:item_wyvern_flight&r"
+				""
+				"Тир виверны: инструменты, броня, capacitor, injector."
+				"Модули wyvern_* усиливают."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:item_wyvern_flight  &8+&r  &b85 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:item_wyvern_flight"
+			id: "7634984CEDA4DBC1"
+			min_width: 280
+			rewards: [
+				{
+					id: "00B60DD34E7B79CD"
+					item: "draconicevolution:item_wyvern_flight"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "11B4742477A5FC25"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Полёт виверны."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "2B30C3E4AF0DE277"
+				item: "draconicevolution:item_wyvern_flight"
+				type: "item"
+			}]
+			title: "IV·26  Модуль полёта"
+			x: -2.78d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 27/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Пробуждённый слиток."
+				"&7Предмет:&r &fdraconicevolution:awakened_draconium_ingot&r"
+				""
+				"Базовый слиток. Крафт ядер и блоков."
+				"Копи до fusion."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× draconicevolution:awakened_draconium_ingot  &8+&r  &b110 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:awakened_draconium_ingot"
+			id: "5CEB84E26FBEE797"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "514E5FAFCE596752"
+					item: "draconicevolution:awakened_draconium_ingot"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "4EEAC6A8404903CC"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Пробуждённый слиток."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "571FE8A37F7EC1EF"
+				item: "draconicevolution:awakened_draconium_ingot"
+				type: "item"
+			}]
+			title: "IV·27  Awakened Ingot"
+			x: -0.93d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 28/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ядро T3."
+				"&7Предмет:&r &fdraconicevolution:awakened_core&r"
+				""
+				"Пробуждённый тир после wyvern fusion."
+				"Нужен dragon/heart прогресс (смотри Tablet)."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:awakened_core  &8+&r  &b120 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:awakened_core"
+			id: "61B008ED4F67C915"
+			min_width: 280
+			rewards: [
+				{
+					id: "43A97C4586B4C882"
+					item: "draconicevolution:awakened_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "5D3C59406E0607E1"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ядро T3."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "029D30DEA700189B"
+				item: "draconicevolution:awakened_core"
+				type: "item"
+			}]
+			title: "IV·28  Awakened Core"
+			x: 0.93d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 29/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Инжектор T3."
+				"&7Предмет:&r &fdraconicevolution:awakened_crafting_injector&r"
+				""
+				"Инжекторы вокруг Crafting Core."
+				"Тир инжектора = тир рецепта."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:awakened_crafting_injector  &8+&r  &b120 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:awakened_crafting_injector"
+			id: "56DE4D14202B71EB"
+			min_width: 280
+			rewards: [
+				{
+					id: "779A38ABB572B382"
+					item: "draconicevolution:awakened_crafting_injector"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "2E5F34B72395123D"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Инжектор T3."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "7153DC39564877B3"
+				item: "draconicevolution:awakened_crafting_injector"
+				type: "item"
+			}]
+			title: "IV·29  Awakened Injector"
+			x: 2.78d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 30/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Энергоядро T3."
+				"&7Предмет:&r &fdraconicevolution:draconic_energy_core&r"
+				""
+				"Огромный буфер. Ставь стабилизаторы вокруг."
+				"Pylon качает энергию внутрь/наружу."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:draconic_energy_core  &8+&r  &b115 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:draconic_energy_core"
+			id: "5BA2C4FD0667299F"
+			min_width: 280
+			rewards: [
+				{
+					id: "6361715CADB4E9DA"
+					item: "draconicevolution:draconic_energy_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 115"
+					elevate_perms: true
+					id: "3B9AE84541843BC4"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Мастерство · Энергоядро T3."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "3173E2AECFF5B1F5"
+				item: "draconicevolution:draconic_energy_core"
+				type: "item"
+			}]
+			title: "IV·30  Draconic Energy Core"
+			x: 4.62d
+			y: 7.0d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 31/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Кирка дракона."
+				"&7Предмет:&r &fdraconicevolution:draconic_pickaxe&r"
+				""
+				"Draconic (T3) снаряжение и энергия."
+				"Сильнее wyvern, слабее chaotic."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:draconic_pickaxe  &8+&r  &b125 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				ForgeCaps: {
+					Parent: {
+						energy: {
+							energy: 0
+						}
+						module_host: {
+							modules: [ ]
+							properties: {
+								mining_speed: {
+									hud: 1b
+									value: 1.0d
+								}
+							}
+							provider_id: [I;
+								-1381980476
+								-2060105957
+								-2055664141
+								-956369506
+							]
+						}
+					}
+				}
+				id: "draconicevolution:draconic_pickaxe"
+				tag: { }
+			}
+			id: "55FE8EDE37AE10C7"
+			min_width: 280
+			rewards: [
+				{
+					id: "0835CC28193DD920"
+					item: "draconicevolution:draconic_pickaxe"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 125"
+					elevate_perms: true
+					id: "6148ECA901CE0502"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Кирка дракона."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "13C9BBEF23DD011A"
+				item: "draconicevolution:draconic_pickaxe"
+				type: "item"
+			}]
+			title: "IV·31  Draconic Pickaxe"
+			x: 4.62d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r"
+				"&8Шаг 32/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Клинок дракона."
+				"&7Предмет:&r &fdraconicevolution:draconic_sword&r"
+				""
+				"Draconic (T3) снаряжение и энергия."
+				"Сильнее wyvern, слабее chaotic."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:draconic_sword  &8+&r  &b125 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				ForgeCaps: {
+					Parent: {
+						energy: {
+							energy: 0
+						}
+						module_host: {
+							modules: [ ]
+							properties: { }
+							provider_id: [I;
+								-1934582547
+								316490257
+								-1564056486
+								-41832931
+							]
+						}
+					}
+				}
+				id: "draconicevolution:draconic_sword"
+				tag: { }
+			}
+			id: "172A1C5AB54AC800"
+			min_width: 280
+			rewards: [
+				{
+					id: "29E750BE8F42A0B4"
+					item: "draconicevolution:draconic_sword"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 125"
+					elevate_perms: true
+					id: "25E08D3E05C579C8"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "diamond"
+			size: 1.25d
+			subtitle: "◆ Вехи · Мастерство · Клинок дракона."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "4676F88640EE2266"
+				item: "draconicevolution:draconic_sword"
+				type: "item"
+			}]
+			title: "IV·32  Draconic Sword"
+			x: 2.78d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 33/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Броня дракона."
+				"&7Предмет:&r &fdraconicevolution:draconic_chestpiece&r"
+				""
+				"Draconic (T3) снаряжение и энергия."
+				"Сильнее wyvern, слабее chaotic."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:draconic_chestpiece  &8+&r  &b130 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				ForgeCaps: {
+					Parent: {
+						energy: {
+							energy: 0
+						}
+						module_host: {
+							modules: [ ]
+							properties: { }
+							provider_id: [I;
+								697091554
+								-833927186
+								-1120980297
+								2082116359
+							]
+						}
+					}
+				}
+				id: "draconicevolution:draconic_chestpiece"
+				tag: { }
+			}
+			id: "79823470EACB7371"
+			min_width: 280
+			rewards: [
+				{
+					id: "13D5EC76A02D684F"
+					item: "draconicevolution:draconic_chestpiece"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 130"
+					elevate_perms: true
+					id: "210E7B2B8FB3E414"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Броня дракона."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "40FDDF59CA3C6410"
+				item: "draconicevolution:draconic_chestpiece"
+				type: "item"
+			}]
+			title: "V·33  Draconic Chestpiece"
+			x: 0.93d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 34/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Телепорт DE."
+				"&7Предмет:&r &fdraconicevolution:dislocator&r"
+				""
+				"Телепорты DE. Advanced — точки сохранения."
+				"Не путай с ender pearl."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:dislocator  &8+&r  &b80 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				id: "draconicevolution:dislocator"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "15E1CCE2C9D33974"
+			min_width: 280
+			rewards: [
+				{
+					id: "70D2D45BD976F18D"
+					item: {
+						Count: 1
+						id: "draconicevolution:dislocator"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "1FA0A8B9F4AF1667"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Телепорт DE."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "7C877B5A14A47CDB"
+				item: {
+					Count: 1
+					id: "draconicevolution:dislocator"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "V·34  Dislocator"
+			x: -0.93d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 35/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Умный телепорт."
+				"&7Предмет:&r &fdraconicevolution:advanced_dislocator&r"
+				""
+				"Телепорты DE. Advanced — точки сохранения."
+				"Не путай с ender pearl."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:advanced_dislocator  &8+&r  &b100 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				id: "draconicevolution:advanced_dislocator"
+				tag: { }
+			}
+			id: "6640E0601E06CAE8"
+			min_width: 280
+			rewards: [
+				{
+					id: "7C4DCAC85FEF445E"
+					item: "draconicevolution:advanced_dislocator"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "05407064F94B9C5B"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "circle"
+			size: 1.1d
+			subtitle: "Умный телепорт."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "4536627FD54D6CBD"
+				item: "draconicevolution:advanced_dislocator"
+				type: "item"
+			}]
+			title: "V·35  Advanced Dislocator"
+			x: -2.78d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 36/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Осколок хаоса."
+				"&7Предмет:&r &fdraconicevolution:chaos_shard&r"
+				""
+				"Хаос с Chaos Guardian / осколков."
+				"Ведёт к Chaotic Core."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:chaos_shard  &8+&r  &b140 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:chaos_shard"
+			id: "382522CFFFBAA8A0"
+			min_width: 280
+			rewards: [
+				{
+					id: "784BEB577F520090"
+					item: "draconicevolution:chaos_shard"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "7A39CBF4310800E2"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Осколок хаоса."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "040202AD96C46C21"
+				item: "draconicevolution:chaos_shard"
+				type: "item"
+			}]
+			title: "V·36  Chaos Shard"
+			x: -4.62d
+			y: 8.93d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 37/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ядро T4."
+				"&7Предмет:&r &fdraconicevolution:chaotic_core&r"
+				""
+				"Тир 4. Реактор и топ-снаряжение."
+				"Осторожно с реактором — взрывы."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:chaotic_core  &8+&r  &b160 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:chaotic_core"
+			id: "7332BCA24065A002"
+			min_width: 280
+			rewards: [
+				{
+					id: "69E6BDE5B301F6E3"
+					item: "draconicevolution:chaotic_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 160"
+					elevate_perms: true
+					id: "71DA9A8C59E09C0E"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ядро T4."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "19D430236292F0A1"
+				item: "draconicevolution:chaotic_core"
+				type: "item"
+			}]
+			title: "V·37  Chaotic Core"
+			x: -4.62d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 38/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Ядро реактора."
+				"&7Предмет:&r &fdraconicevolution:reactor_core&r"
+				""
+				"Реактор DE: core + stabilizers + injector."
+				"Читай Tablet дважды перед запуском."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:reactor_core  &8+&r  &b150 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:reactor_core"
+			id: "72C0C03A33830C97"
+			min_width: 280
+			rewards: [
+				{
+					id: "0CEBFB1A119AD38C"
+					item: "draconicevolution:reactor_core"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 150"
+					elevate_perms: true
+					id: "1EA11EC46D917AAB"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ядро реактора."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "5AB514F77620A67F"
+				item: "draconicevolution:reactor_core"
+				type: "item"
+			}]
+			title: "V·38  Reactor Core"
+			x: -2.78d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 39/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Стабилизатор реактора."
+				"&7Предмет:&r &fdraconicevolution:reactor_stabilizer&r"
+				""
+				"Держит Energy Core стабильным."
+				"Схема — в планшете."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 1× draconicevolution:reactor_stabilizer  &8+&r  &b155 Aqua XP&r"
+				""
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: "draconicevolution:reactor_stabilizer"
+			id: "4661F7F0D8AA19B4"
+			min_width: 280
+			rewards: [
+				{
+					id: "5D0160D8C81D98B3"
+					item: "draconicevolution:reactor_stabilizer"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 155"
+					elevate_perms: true
+					id: "5F34B4F6FB7643CC"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Стабилизатор реактора."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "55B590A17D4B1A2D"
+				item: "draconicevolution:reactor_stabilizer"
+				type: "item"
+			}]
+			title: "V·39  Reactor Stabilizer"
+			x: -0.93d
+			y: 10.5d
+		}
+		{
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r"
+				"&8Шаг 40/40&r"
+				""
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке."
+				""
+				"&a▶ Задача:&r Хаотическая кирка — финал ветки."
+				"&7Предмет:&r &fdraconicevolution:chaotic_pickaxe&r"
+				""
+				"Тир 4. Реактор и топ-снаряжение."
+				"Осторожно с реактором — взрывы."
+				""
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r"
+				"&6Награда:&r 4× draconicevolution:awakened_draconium_ingot  &8+&r  &b200 Aqua XP&r"
+				""
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: false
+			icon: {
+				Count: 1
+				ForgeCaps: {
+					Parent: {
+						energy: {
+							energy: 0
+						}
+						module_host: {
+							modules: [ ]
+							properties: {
+								mining_speed: {
+									hud: 1b
+									value: 1.0d
+								}
+							}
+							provider_id: [I;
+								-356041291
+								551833431
+								-1103395130
+								-1364136139
+							]
+						}
+					}
+				}
+				id: "draconicevolution:chaotic_pickaxe"
+				tag: { }
+			}
+			id: "49AEC65CE326CAF4"
+			min_width: 280
+			rewards: [
+				{
+					count: 4
+					id: "4541693230BE170B"
+					item: "draconicevolution:awakened_draconium_ingot"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 200"
+					elevate_perms: true
+					id: "2DEFA14D4A1006F6"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "gear"
+			size: 1.55d
+			subtitle: "★ КАПСТОУН · Хаотическая кирка — финал ветки."
+			tags: ["ws_draconic"]
+			tasks: [{
+				id: "78F6077351B911C8"
+				item: "draconicevolution:chaotic_pickaxe"
+				type: "item"
+			}]
+			title: "V·40  Капстоун DE"
+			x: 0.93d
+			y: 10.85d
+		}
+	]
+	title: "Мастерская · Draconic Evolution"
+}
