@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.2"
+TAG = "client-2.9.3"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -50,28 +50,27 @@ def main() -> None:
         if not f.is_file():
             sys.exit(f"missing {f}")
 
-    # Keep docs manifest in sync before/after upload
     man = {
-        "version": "2.9.2",
+        "version": "2.9.3",
         "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
+        "pack_cdn": "https://aquatech-7gs.pages.dev/pack",
     }
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (REL / "bootstrap.json").write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## AquaTech Client (LoliLand-style)\n\n"
-        "1. Скачай **AquaTech.exe** (~5 МБ)\n"
-        "2. Запусти — bootstrap сам скачает лаунчер в `%LOCALAPPDATA%\\AquaTech`\n"
-        "3. Дальше обновления подтягиваются автоматически\n"
+        "## AquaTech Client 2.9.3\n\n"
+        "- **AquaTech.exe** — маленький bootstrap (как LoliLand)\n"
+        "- Сборка модов: сайт `https://aquatech-7gs.pages.dev/pack` + GitHub Release `pack-2.9.2`\n"
+        "- IP сервера игры: katherine-hydro.tun.ply.gg:31279 (только для входа в Minecraft)\n"
     )
 
     payload = json.dumps(
         {
             "tag_name": TAG,
             "target_commitish": "main",
-            "name": "AquaTech Client 2.9.2",
+            "name": "AquaTech Client 2.9.3",
             "body": body,
             "draft": True,
             "prerelease": False,

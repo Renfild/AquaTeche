@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.0"
+LAUNCHER_VER   = "2.9.2"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -26,11 +26,12 @@ FORGE_LANG_PROVIDERS = (
     "mclanguage",
 )
 SERVER_IP      = "katherine-hydro.tun.ply.gg"
-SERVER_PORT    = "25565"
+SERVER_PORT    = "31279"
 # Warm Play: skip slow CDN cascade when enough mods already on disk
 PACK_READY_MIN_JARS = 40
-# CDN for friends. Override in UI / update_url.txt next to exe (Playit tunnel).
-DEFAULT_UPDATE_URL = ""
+# Pack CDN for friends — website hosts manifest.json; jars download from GitHub Releases URLs inside it.
+# (Playit is only the Minecraft server IP, not the modpack CDN.)
+DEFAULT_UPDATE_URL = "https://aquatech-7gs.pages.dev/pack"
 # If nothing configured — try local sync server (start_sync_server.py default 8765).
 # Avoid 8080 first: NVIDIA Broadcast often binds it and returns bogus 404.
 LOCAL_SYNC_FALLBACKS = (
@@ -41,10 +42,16 @@ LOCAL_SYNC_FALLBACKS = (
     "http://127.0.0.1:8080",
 )
 
+# Manifest / pack mirrors (website first, then GitHub raw docs).
+PACK_CDN_MIRRORS = (
+    DEFAULT_UPDATE_URL,
+    "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
+)
+
 # Optional GitHub fallback (often 404 if repo/path missing — pack sync prefers update_url / local).
-GITHUB_RAW     = "https://raw.githubusercontent.com/Renfild/AquaTeche/main/dist/AquaTech-Client"
+GITHUB_RAW     = "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack"
 MANIFEST_URL   = f"{GITHUB_RAW}/manifest.json"
-GITHUB_RELEASE = "https://github.com/Renfild/AquaTeche/releases/download/v1.0.0"
+GITHUB_RELEASE = "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.2"
 PACK_FOLDERS   = ("mods", "config", "kubejs", "resourcepacks")
 # Player-local files kept even if not in pack manifest (LoliLand-style sync)
 SYNC_KEEP_NAMES = {
@@ -487,7 +494,7 @@ def _pack_looks_ready(game_dir: Path) -> bool:
 
 
 def resolve_update_base(cfg: dict | None = None, *, allow_local_fallback: bool = True) -> str:
-    """CDN base URL for friends (no trailing slash). Sync server or GitHub raw."""
+    """CDN base URL for friends (no trailing slash). Website pack folder or sync server."""
     candidates: list[str] = []
     if cfg and cfg.get("update_url"):
         candidates.append(str(cfg["update_url"]).strip())
@@ -499,10 +506,15 @@ def resolve_update_base(cfg: dict | None = None, *, allow_local_fallback: bool =
             pass
     if DEFAULT_UPDATE_URL:
         candidates.append(DEFAULT_UPDATE_URL.strip())
+    candidates.extend(PACK_CDN_MIRRORS)
     if allow_local_fallback:
         candidates.extend(LOCAL_SYNC_FALLBACKS)
+    seen: set[str] = set()
     for raw in candidates:
         base = (raw or "").strip().rstrip("/")
+        if not base or base in seen:
+            continue
+        seen.add(base)
         if base.startswith("http://") or base.startswith("https://"):
             return base
     return ""
@@ -597,10 +609,13 @@ def apply_manifest_sync(
             else:
                 if download_url is None:
                     return False
-                if source == "cdn" and base:
-                    url = f"{base}/{rel}"
-                else:
-                    url = item.get("url") or f"{GITHUB_RAW}/{rel}"
+                # Prefer per-file CDN URL from manifest (GitHub Releases).
+                # `base` is only where manifest.json lives (website), not the jars.
+                url = (item.get("url") or "").strip()
+                if not url and source == "cdn" and base:
+                    url = f"{base.rstrip('/')}/{rel}"
+                if not url:
+                    url = f"{GITHUB_RAW}/{rel}"
                 download_url(url, local)
             if md5:
                 got = md5_file(local).lower()
@@ -2107,7 +2122,7 @@ class AquaTechLauncher(tk.Tk):
 
         tk.Label(
             wrap,
-            text="Пример URL: http://katherine-hydro.tun.ply.gg:XXXX  (Playit TCP → sync :8765)",
+            text="Манифест сборки: сайт AquaTech (моды качаются с GitHub Releases).",
             font=FONT_CHIP, fg=C_DIM, bg=C_BG, anchor="w",
         ).pack(fill="x", pady=(14, 0))
 
