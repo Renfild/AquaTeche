@@ -1,24 +1,10 @@
-﻿# AquaTech site → https://aquatech-7gs.pages.dev (Workers/Pages project "aquatech")
+﻿# Cloudflare Pages project "aquatech" → https://aquatech-7gs.pages.dev
 #
-# Cloudflare → Settings → Builds:
-#   Build command:                          (EMPTY)
-#   Deploy command:                         (EMPTY)  # runs: npx wrangler deploy
-#   Non-production branch deploy command:   (EMPTY)
-#   Path / Root directory:                  (EMPTY)  # NOT "docs"
-#
-# Static files come from [assets].directory below (repo root must be Renfild/AquaTeche).
+# Dashboard Builds: leave Build/Deploy commands EMPTY.
+# Output is taken from pages_build_output_dir below.
 name = "aquatech"
-compatibility_date = "2026-08-08"
-workers_dev = true
-
-# Classic Pages output hint (Git Pages UI "Build output directory")
 pages_build_output_dir = "docs"
-
-# Workers Builds / `wrangler deploy` static assets
-[assets]
-directory = "./docs"
-not_found_handling = "404-page"
-html_handling = "auto-trailing-slash"
+compatibility_date = "2026-08-08"
 
 [vars]
 PROJECT_NAME = "AquaTech"
