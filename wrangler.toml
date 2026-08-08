@@ -1,4 +1,14 @@
-﻿name = "aquatech"
+﻿# Cloudflare Pages project: aquatech → https://aquatech-7gs.pages.dev
+#
+# Dashboard → Settings → Builds:
+#   Build command:        (leave EMPTY)
+#   Deploy command:       (leave EMPTY)  ← never "npx wrangler deploy"
+#   Non-production deploy:(leave EMPTY)
+#   Build output directory: docs
+#
+# "npx wrangler deploy" is for Workers and fails with:
+#   Could not detect a directory containing static files
+name = "aquatech"
 pages_build_output_dir = "docs"
 compatibility_date = "2026-08-08"
 
