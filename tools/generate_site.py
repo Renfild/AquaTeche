@@ -340,7 +340,7 @@ PAGES["login.html"] = (
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Вход</h1>
-      <p>Войди в аккаунт сайта (ник Minecraft, латиница). Данные хранятся в базе Cloudflare D1.</p>
+      <p>Ник Minecraft (латиница). Аккаунты работают на основном сайте <code>aquatech.santcrail.workers.dev</code> — зеркало GH Pages без API.</p>
       <form class="card form" id="login-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="••••" required /></div>
@@ -361,7 +361,7 @@ PAGES["register.html"] = (
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Регистрация</h1>
-      <p>Создай профиль сайта. Ник: 3–16 символов (A–Z, 0–9, _). Пароль от 4 символов.</p>
+      <p>Ник: 3–16 символов (A–Z, 0–9, _), пароль от 4. Регистрируйся на <code>aquatech.santcrail.workers.dev</code>, не на зеркале GitHub.</p>
       <form class="card form" id="register-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required minlength="4" /></div>

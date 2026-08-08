@@ -2,7 +2,9 @@
   const IP = "katherine-hydro.tun.ply.gg:31279";
   const DOWNLOAD =
     "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.9/AquaTech.exe";
-  const CANONICAL = "https://aquatech-7gs.pages.dev";
+  /** Primary site: workers.dev (pages.dev is blocked in some networks, e.g. BY). */
+  const CANONICAL = "https://aquatech.santcrail.workers.dev";
+  const PAGES_MIRROR = "https://aquatech-7gs.pages.dev";
   const STORAGE_USER = "aquatech_user";
   const API_BASE = "";
 
@@ -68,7 +70,12 @@
 
   function isMirrorHost() {
     const h = location.hostname || "";
-    return h.includes("github.io");
+    return h.includes("github.io") || h.includes("jsdelivr.net");
+  }
+
+  function isCanonicalHost() {
+    const h = location.hostname || "";
+    return h.includes("santcrail.workers.dev") || h.includes("pages.dev");
   }
 
   async function api(path, opts = {}) {
@@ -103,13 +110,37 @@
   }
 
   function showApiBanner() {
-    if (!isMirrorHost()) return;
     if ($("#api-mirror-banner")) return;
-    const el = document.createElement("div");
-    el.id = "api-mirror-banner";
-    el.className = "notice-banner";
-    el.innerHTML = `Это зеркало GitHub Pages без API. Аккаунты и каталог работают на <a href="${CANONICAL}/">основном сайте</a>.`;
-    document.body.prepend(el);
+    if (isMirrorHost()) {
+      const el = document.createElement("div");
+      el.id = "api-mirror-banner";
+      el.className = "notice-banner";
+      el.innerHTML = `Зеркало только для чтения. Регистрация, вход и профили: <a href="${CANONICAL}/">aquatech.santcrail.workers.dev</a>`;
+      document.body.prepend(el);
+      return;
+    }
+    if (location.hostname.includes("pages.dev")) {
+      const el = document.createElement("div");
+      el.id = "api-mirror-banner";
+      el.className = "notice-banner";
+      el.innerHTML = `Если сайт не открывается у друзей — используй <a href="${CANONICAL}/">workers.dev</a> (pages.dev часто режется провайдером).`;
+      document.body.prepend(el);
+    }
+  }
+
+  function lockAuthForms() {
+    if (!isMirrorHost()) return;
+    ["login-form", "register-form"].forEach((id) => {
+      const form = document.getElementById(id);
+      if (!form) return;
+      form.querySelectorAll("input,button").forEach((el) => {
+        el.disabled = true;
+      });
+      const note = document.createElement("div");
+      note.className = "notice-banner inline";
+      note.innerHTML = `На этом зеркале аккаунты не работают. Открой <a href="${CANONICAL}/${form.id === "register-form" ? "register.html" : "login.html"}">основной сайт</a>.`;
+      form.before(note);
+    });
   }
 
   function renderHeader() {
@@ -194,8 +225,9 @@
           <div>
             <h4>Проект</h4>
             <a href="rules.html">Правила</a>
-            <a href="https://renfild.github.io/AquaTeche/">Зеркало (GH Pages)</a>
             <a href="${CANONICAL}/">Основной сайт</a>
+            <a href="https://renfild.github.io/AquaTeche/">Зеркало (GH Pages)</a>
+            <a href="${PAGES_MIRROR}/">Pages.dev</a>
             <a href="${DOWNLOAD}">AquaTech.exe</a>
           </div>
         </div>
@@ -422,8 +454,9 @@
         toast("Вход выполнен");
         location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
       } catch (err) {
-        if (apiAvailable === false) {
-          toast("API недоступен на этом зеркале — открой основной сайт");
+        if (apiAvailable === false || isMirrorHost()) {
+          toast("Открой основной сайт для входа");
+          location.href = `${CANONICAL}/login.html`;
           return;
         }
         toast(err.message || "Ошибка входа");
@@ -444,8 +477,9 @@
         toast("Аккаунт создан");
         location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
       } catch (err) {
-        if (apiAvailable === false) {
-          toast("API недоступен на этом зеркале — открой основной сайт");
+        if (apiAvailable === false || isMirrorHost()) {
+          toast("Открой основной сайт для регистрации");
+          location.href = `${CANONICAL}/register.html`;
           return;
         }
         toast(err.message || "Ошибка регистрации");
@@ -582,7 +616,8 @@
 
   document.addEventListener("DOMContentLoaded", async () => {
     showApiBanner();
-    await refreshSession();
+    lockAuthForms();
+    if (isCanonicalHost()) await refreshSession();
     renderHeader();
     renderFooter();
     wireCommon();
