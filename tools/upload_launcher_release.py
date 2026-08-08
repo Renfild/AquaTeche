@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+"""Upload AquaTechLauncher.zip: draft → upload → publish (immutable releases)."""
+from __future__ import annotations
+
+import json
+import sys
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+REPO = "Renfild/AquaTeche"
+TAG = "launcher-2.9.0"
+ZIP = ROOT / "dist" / "releases" / "AquaTechLauncher.zip"
+
+
+def token() -> str:
+    t = (ROOT / ".gh_token").read_text(encoding="utf-8").strip()
+    if not t:
+        sys.exit("missing .gh_token")
+    return t
+
+
+def api(method: str, url: str, data: bytes | None = None, content_type: str | None = None):
+    headers = {
+        "Authorization": f"token {token()}",
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "AquaTechUploader",
+    }
+    if content_type:
+        headers["Content-Type"] = content_type
+    req = urllib.request.Request(url, data=data, headers=headers, method=method)
+    try:
+        with urllib.request.urlopen(req, timeout=600) as r:
+            body = r.read()
+            return r.status, json.loads(body) if body else {}
+    except urllib.error.HTTPError as e:
+        err = e.read().decode("utf-8", "replace")
+        raise SystemExit(f"HTTP {e.code} {url}: {err[:800]}") from e
+
+
+def main() -> None:
+    if not ZIP.is_file():
+        sys.exit(f"missing {ZIP}")
+
+    body = (
+        "## Скачать лаунчер AquaTech\n\n"
+        "1. Скачай **AquaTechLauncher.zip**\n"
+        "2. Распакуй ZIP целиком\n"
+        "3. Запусти **AquaTechLauncher.exe** внутри папки\n\n"
+        "Нужна вся папка (`_internal` рядом с exe).\n"
+    )
+
+    _, releases = api("GET", f"https://api.github.com/repos/{REPO}/releases")
+    rel = next((r for r in releases if r.get("tag_name") == TAG), None)
+
+    if rel and not rel.get("draft"):
+        print(f"published release {TAG} already exists id={rel['id']} — use a new tag")
+        sys.exit(2)
+
+    if not rel:
+        payload = json.dumps(
+            {
+                "tag_name": TAG,
+                "target_commitish": "main",
+                "name": "AquaTech Launcher 2.9.0",
+                "body": body,
+                "draft": True,
+                "prerelease": False,
+            }
+        ).encode()
+        _, rel = api(
+            "POST",
+            f"https://api.github.com/repos/{REPO}/releases",
+            data=payload,
+            content_type="application/json",
+        )
+        print("draft created", rel["id"])
+    else:
+        print("using existing draft", rel["id"])
+
+    release_id = rel["id"]
+    _, rel = api("GET", f"https://api.github.com/repos/{REPO}/releases/{release_id}")
+    assets = {a["name"]: a for a in (rel.get("assets") or [])}
+    for stale in list(assets):
+        if stale.startswith("AquaTechLauncher"):
+            print("delete", stale)
+            api(
+                "DELETE",
+                f"https://api.github.com/repos/{REPO}/releases/assets/{assets[stale]['id']}",
+            )
+
+    name = "AquaTechLauncher.zip"
+    print(f"upload {name} ({ZIP.stat().st_size / 1024 / 1024:.1f} MB)…")
+    data = ZIP.read_bytes()
+    _, uploaded = api(
+        "POST",
+        f"https://uploads.github.com/repos/{REPO}/releases/{release_id}/assets?name={name}",
+        data=data,
+        content_type="application/octet-stream",
+    )
+    print("uploaded", uploaded.get("browser_download_url"))
+
+    # publish
+    _, published = api(
+        "PATCH",
+        f"https://api.github.com/repos/{REPO}/releases/{release_id}",
+        data=json.dumps(
+            {
+                "draft": False,
+                "make_latest": "true",
+                "name": "AquaTech Launcher 2.9.0",
+                "body": body,
+            }
+        ).encode(),
+        content_type="application/json",
+    )
+    print("published", published.get("html_url"))
+    print(f"https://github.com/{REPO}/releases/download/{TAG}/{name}")
+
+
+if __name__ == "__main__":
+    main()
