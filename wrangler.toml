@@ -1,16 +1,24 @@
-﻿# Cloudflare Pages project: aquatech → https://aquatech-7gs.pages.dev
+﻿# AquaTech site → https://aquatech-7gs.pages.dev (Workers/Pages project "aquatech")
 #
-# Dashboard → Settings → Builds:
-#   Build command:        (leave EMPTY)
-#   Deploy command:       (leave EMPTY)  ← never "npx wrangler deploy"
-#   Non-production deploy:(leave EMPTY)
-#   Build output directory: docs
+# Cloudflare → Settings → Builds:
+#   Build command:                          (EMPTY)
+#   Deploy command:                         (EMPTY)  # runs: npx wrangler deploy
+#   Non-production branch deploy command:   (EMPTY)
+#   Path / Root directory:                  (EMPTY)  # NOT "docs"
 #
-# "npx wrangler deploy" is for Workers and fails with:
-#   Could not detect a directory containing static files
+# Static files come from [assets].directory below (repo root must be Renfild/AquaTeche).
 name = "aquatech"
-pages_build_output_dir = "docs"
 compatibility_date = "2026-08-08"
+workers_dev = true
+
+# Classic Pages output hint (Git Pages UI "Build output directory")
+pages_build_output_dir = "docs"
+
+# Workers Builds / `wrangler deploy` static assets
+[assets]
+directory = "./docs"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
 
 [vars]
 PROJECT_NAME = "AquaTech"
