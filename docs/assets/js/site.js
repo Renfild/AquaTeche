@@ -251,7 +251,7 @@
   function playerRows(players, mode) {
     return players
       .map((p, i) => {
-        const hours = p.playtime_hours ?? parseInt(String(p.playtime || "0"), 10) || 0;
+        const hours = p.playtime_hours ?? (parseInt(String(p.playtime || "0"), 10) || 0);
         const playtime = p.playtime || `${hours} ч`;
         const stat =
           mode === "coins"
