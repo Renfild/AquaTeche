@@ -63,3 +63,7 @@ Desktop.ini
 .gh_token
 *.token
 secrets.json
+
+# Orphan gitlink (no .gitmodules) — breaks Cloudflare Pages submodule update
+tools/Custom-Nameplates/
+
