@@ -17,10 +17,10 @@
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Регистрация</h1>
-      <p>Создай профиль, чтобы лайкать игроков и оформлять страницу.</p>
+      <p>Создай профиль сайта. Ник: 3–16 символов (A–Z, 0–9, _). Пароль от 4 символов.</p>
       <form class="card form" id="register-form" style="margin-top:1.25rem">
-        <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required /></div>
-        <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required /></div>
+        <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
+        <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required minlength="4" /></div>
         <button class="btn btn-primary" type="submit">Создать аккаунт</button>
         <a class="btn btn-ghost" href="login.html">Уже есть аккаунт? Войти</a>
       </form>

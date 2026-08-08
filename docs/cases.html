@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Кейсы — AquaTech</title>
-  <meta name="description" content="Открывай кейсы AquaTech и получай награды." />
+  <meta name="description" content="Витрина кейсов AquaTech. Открытие на сайте отключено — кейсы крутятся в игре." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -16,39 +16,14 @@
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Награды</div>
-      <h1>Кейсы AquaTech</h1>
-      <p>Демо-рулетка на сайте. На сервере кейсы выдаются через игровые механики и донат.</p>
+      <h1>Кейсы</h1>
+      <p>Состав кейсов для сервера. Сайтовая рулетка отключена — открывай кейсы в игре (меню F4 / casesmod).</p>
+      <div class="notice-banner inline">Открытие кейсов на сайте запрещено. Используй игровые механики на сервере.</div>
     </div>
   </section>
   <section class="section" style="padding-top:0">
-    <div class="container grid-3">
-      <div class="card">
-        <div class="feature-art cases"></div>
-        <h3>Океанский кейс</h3>
-        <p style="color:var(--muted)">Базовые награды и AquaCoins.</p>
-        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-open-case="Океанский кейс" type="button">Открыть</button>
-      </div>
-      <div class="card">
-        <div class="feature-art rods"></div>
-        <h3>Кейс рыбака</h3>
-        <p style="color:var(--muted)">Шанс на буст удочек и ресурсы.</p>
-        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-open-case="Кейс рыбака" type="button">Открыть</button>
-      </div>
-      <div class="card">
-        <div class="feature-art tech"></div>
-        <h3>Глубинный кейс</h3>
-        <p style="color:var(--muted)">Редкие привилегии и рамки профиля.</p>
-        <button class="btn btn-primary" style="margin-top:1rem;width:100%" data-open-case="Глубинный кейс" type="button">Открыть</button>
-      </div>
-    </div>
+    <div class="container catalog-grid" id="cases-root"></div>
   </section>
-  <div class="modal" id="case-modal">
-    <div class="modal-card">
-      <h3>Результат</h3>
-      <p id="case-result" style="color:var(--muted)">…</p>
-      <button class="btn btn-secondary" style="margin-top:1rem" data-close-modal type="button">Закрыть</button>
-    </div>
-  </div>
 
   <div id="site-footer"></div>
   <script src="assets/js/site.js"></script>

@@ -59,10 +59,13 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
-# Secrets â€” never commit!
+# Secrets — never commit!
 .gh_token
+.cf_token
+.cloudflare_token
 *.token
 secrets.json
+node_modules/
 
 # Orphan gitlink (no .gitmodules) — breaks Cloudflare Pages submodule update
 tools/Custom-Nameplates/

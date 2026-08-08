@@ -2,8 +2,9 @@
   const IP = "katherine-hydro.tun.ply.gg:31279";
   const DOWNLOAD =
     "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.9/AquaTech.exe";
+  const CANONICAL = "https://aquatech-7gs.pages.dev";
   const STORAGE_USER = "aquatech_user";
-  const STORAGE_PROFILES = "aquatech_profiles";
+  const API_BASE = "";
 
   const NAV = [
     { href: "index.html", label: "Главная", id: "home" },
@@ -16,17 +17,15 @@
   ];
 
   const DEMO_PLAYERS = [
-    { nick: "WebTest", privilege: "Deluxe", playtime: "128 ч", coins: 4200, likes: 86, fish: 1840 },
-    { nick: "OceanKing", privilege: "Ultimate", playtime: "210 ч", coins: 9800, likes: 214, fish: 4021 },
-    { nick: "StarCatcher", privilege: "Premium", playtime: "96 ч", coins: 2100, likes: 61, fish: 990 },
-    { nick: "HydroForge", privilege: "VIP", playtime: "74 ч", coins: 900, likes: 33, fish: 640 },
-    { nick: "DepthWalker", privilege: "Игрок", playtime: "58 ч", coins: 350, likes: 18, fish: 410 },
-    { nick: "Renfild", privilege: "Ultimate", playtime: "301 ч", coins: 15000, likes: 502, fish: 8120 },
-    { nick: "AquaNova", privilege: "Premium", playtime: "112 ч", coins: 2600, likes: 77, fish: 1204 },
-    { nick: "TideBaron", privilege: "Deluxe", playtime: "143 ч", coins: 5100, likes: 95, fish: 2011 },
-    { nick: "KelpCraft", privilege: "VIP", playtime: "41 ч", coins: 420, likes: 12, fish: 280 },
-    { nick: "SonarFox", privilege: "Игрок", playtime: "27 ч", coins: 120, likes: 5, fish: 150 },
+    { nick: "WebTest", privilege: "Deluxe", playtime: "128 ч", playtime_hours: 128, coins: 4200, likes: 86, fish: 1840 },
+    { nick: "OceanKing", privilege: "Ultimate", playtime: "210 ч", playtime_hours: 210, coins: 9800, likes: 214, fish: 4021 },
+    { nick: "StarCatcher", privilege: "Premium", playtime: "96 ч", playtime_hours: 96, coins: 2100, likes: 61, fish: 990 },
+    { nick: "HydroForge", privilege: "VIP", playtime: "74 ч", playtime_hours: 74, coins: 900, likes: 33, fish: 640 },
+    { nick: "DepthWalker", privilege: "Игрок", playtime: "58 ч", playtime_hours: 58, coins: 350, likes: 18, fish: 410 },
+    { nick: "Renfild", privilege: "Ultimate", playtime: "301 ч", playtime_hours: 301, coins: 15000, likes: 502, fish: 8120 },
   ];
+
+  let apiAvailable = null;
 
   function $(sel, root = document) {
     return root.querySelector(sel);
@@ -49,54 +48,51 @@
     else localStorage.setItem(STORAGE_USER, JSON.stringify(user));
   }
 
-  function profiles() {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_PROFILES) || "{}");
-    } catch {
-      return {};
-    }
-  }
-
-  function saveProfiles(map) {
-    localStorage.setItem(STORAGE_PROFILES, JSON.stringify(map));
-  }
-
-  function ensureProfile(nick) {
-    const map = profiles();
-    if (!map[nick]) {
-      map[nick] = {
-        nick,
-        bio: "Исследователь глубин AquaTech.",
-        theme: "ocean",
-        glow: "#2de2e6",
-        views: Math.floor(40 + Math.random() * 400),
-        likes: Math.floor(5 + Math.random() * 120),
-        playtime: `${Math.floor(10 + Math.random() * 200)} ч`,
-        fish: Math.floor(50 + Math.random() * 3000),
-        coins: Math.floor(100 + Math.random() * 5000),
-        privilege: "Игрок",
-        badges: ["Новичок глубин"],
-      };
-      saveProfiles(map);
-    }
-    return map[nick];
-  }
-
   function skinUrl(nick) {
     return `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/64`;
   }
 
-  function toast(text) {
-    let el = $(".toast");
+  function toast(msg) {
+    let el = $("#toast");
     if (!el) {
       el = document.createElement("div");
+      el.id = "toast";
       el.className = "toast";
       document.body.appendChild(el);
     }
-    el.textContent = text;
+    el.textContent = msg;
     el.classList.add("show");
     clearTimeout(toast._t);
-    toast._t = setTimeout(() => el.classList.remove("show"), 2200);
+    toast._t = setTimeout(() => el.classList.remove("show"), 2600);
+  }
+
+  function isMirrorHost() {
+    const h = location.hostname || "";
+    return h.includes("github.io");
+  }
+
+  async function api(path, opts = {}) {
+    const url = `${API_BASE}${path}`;
+    try {
+      const res = await fetch(url, {
+        credentials: "include",
+        headers: { "content-type": "application/json", ...(opts.headers || {}) },
+        ...opts,
+      });
+      const data = await res.json().catch(() => ({}));
+      apiAvailable = true;
+      if (!res.ok) {
+        const err = new Error(data.error || `HTTP ${res.status}`);
+        err.status = res.status;
+        err.data = data;
+        throw err;
+      }
+      return data;
+    } catch (e) {
+      if (e.status) throw e;
+      apiAvailable = false;
+      throw e;
+    }
   }
 
   function copyIP() {
@@ -104,6 +100,16 @@
       () => toast("IP скопирован"),
       () => toast(IP)
     );
+  }
+
+  function showApiBanner() {
+    if (!isMirrorHost()) return;
+    if ($("#api-mirror-banner")) return;
+    const el = document.createElement("div");
+    el.id = "api-mirror-banner";
+    el.className = "notice-banner";
+    el.innerHTML = `Это зеркало GitHub Pages без API. Аккаунты и каталог работают на <a href="${CANONICAL}/">основном сайте</a>.`;
+    document.body.prepend(el);
   }
 
   function renderHeader() {
@@ -150,7 +156,12 @@
     $("[data-menu]", mount)?.addEventListener("click", () => {
       $("#mobile-nav", mount)?.classList.toggle("open");
     });
-    $("[data-logout]", mount)?.addEventListener("click", () => {
+    $("[data-logout]", mount)?.addEventListener("click", async () => {
+      try {
+        await api("/api/logout", { method: "POST", body: "{}" });
+      } catch {
+        /* offline / mirror */
+      }
       setUser(null);
       location.href = "index.html";
     });
@@ -183,8 +194,8 @@
           <div>
             <h4>Проект</h4>
             <a href="rules.html">Правила</a>
-            <a href="https://renfild.github.io/AquaTeche/">Зеркало сайта (GH Pages)</a>
-            <a href="login.html">Войти</a>
+            <a href="https://renfild.github.io/AquaTeche/">Зеркало (GH Pages)</a>
+            <a href="${CANONICAL}/">Основной сайт</a>
             <a href="${DOWNLOAD}">AquaTech.exe</a>
           </div>
         </div>
@@ -205,32 +216,59 @@
     });
   }
 
+  function playerRows(players, mode) {
+    return players
+      .map((p, i) => {
+        const hours = p.playtime_hours ?? parseInt(String(p.playtime || "0"), 10) || 0;
+        const playtime = p.playtime || `${hours} ч`;
+        const stat =
+          mode === "coins"
+            ? `${Number(p.coins || 0).toLocaleString("ru-RU")} ¤`
+            : mode === "likes"
+              ? `${p.likes || 0} ❤`
+              : mode === "fish"
+                ? `${p.fish || 0} 🐟`
+                : playtime;
+        return `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
+            <div class="rank">${i + 1}</div>
+            <img src="${skinUrl(p.nick)}" alt="">
+            <div class="meta"><strong>${p.nick}</strong><span>${p.privilege || "Игрок"}</span></div>
+            <div class="stat">${stat}</div>
+          </a>`;
+      })
+      .join("");
+  }
+
+  async function loadPlayers(sort = "likes", q = "") {
+    try {
+      const qs = new URLSearchParams({ sort, limit: "40" });
+      if (q) qs.set("q", q);
+      const data = await api(`/api/players?${qs}`);
+      return data.players || [];
+    } catch {
+      let list = [...DEMO_PLAYERS];
+      if (q) {
+        const qq = q.toLowerCase();
+        list = list.filter((p) => p.nick.toLowerCase().includes(qq));
+      }
+      list.sort((a, b) => {
+        if (sort === "coins") return b.coins - a.coins;
+        if (sort === "fish") return b.fish - a.fish;
+        if (sort === "playtime") return b.playtime_hours - a.playtime_hours;
+        return b.likes - a.likes;
+      });
+      return list;
+    }
+  }
+
   function initTop() {
     const root = $("#top-root");
     if (!root) return;
-    let mode = "playtime";
-    const render = () => {
-      const sorted = [...DEMO_PLAYERS].sort((a, b) => {
-        if (mode === "coins") return b.coins - a.coins;
-        if (mode === "likes") return b.likes - a.likes;
-        return parseInt(b.playtime) - parseInt(a.playtime);
-      });
-      root.innerHTML = sorted
-        .map((p, i) => {
-          const stat =
-            mode === "coins"
-              ? `${p.coins.toLocaleString("ru-RU")} ¤`
-              : mode === "likes"
-                ? `${p.likes} ❤`
-                : p.playtime;
-          return `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
-            <div class="rank">${i + 1}</div>
-            <img src="${skinUrl(p.nick)}" alt="">
-            <div class="meta"><strong>${p.nick}</strong><span>${p.privilege}</span></div>
-            <div class="stat">${stat}</div>
-          </a>`;
-        })
-        .join("");
+    let mode = "likes";
+    const render = async () => {
+      root.innerHTML = `<p class="muted-line">Загрузка…</p>`;
+      const players = await loadPlayers(mode === "playtime" ? "playtime" : mode);
+      root.innerHTML = playerRows(players, mode) || `<p class="muted-line">Пока нет игроков в базе.</p>`;
     };
     document.querySelectorAll("[data-top-tab]").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -246,193 +284,267 @@
     const input = $("#player-search");
     const list = $("#player-results");
     if (!input || !list) return;
-    const draw = () => {
-      const q = input.value.trim().toLowerCase();
-      const items = DEMO_PLAYERS.filter((p) => !q || p.nick.toLowerCase().includes(q));
-      list.innerHTML = items
-        .map(
-          (p) => `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
+    let t = 0;
+    const draw = async () => {
+      list.innerHTML = `<p class="muted-line">Загрузка…</p>`;
+      const players = await loadPlayers("likes", input.value.trim());
+      list.innerHTML =
+        players
+          .map(
+            (p) => `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
             <div class="rank">·</div>
             <img src="${skinUrl(p.nick)}" alt="">
-            <div class="meta"><strong>${p.nick}</strong><span>${p.privilege} · ${p.playtime}</span></div>
-            <div class="stat">${p.likes} ❤</div>
+            <div class="meta"><strong>${p.nick}</strong><span>${p.privilege || "Игрок"} · ${p.playtime || (p.playtime_hours || 0) + " ч"}</span></div>
+            <div class="stat">${p.likes || 0} ❤</div>
           </a>`
-        )
-        .join("");
+          )
+          .join("") || `<p class="muted-line">Никого не найдено.</p>`;
     };
-    input.addEventListener("input", draw);
+    input.addEventListener("input", () => {
+      clearTimeout(t);
+      t = setTimeout(draw, 200);
+    });
     draw();
   }
 
-  function initProfile() {
+  async function initProfile() {
     const root = $("#profile-root");
     if (!root) return;
     const params = new URLSearchParams(location.search);
     const user = getUser();
-    const nick = params.get("u") || user?.nick || "WebTest";
-    const demo = DEMO_PLAYERS.find((p) => p.nick.toLowerCase() === nick.toLowerCase());
-    const profile = Object.assign(
-      ensureProfile(nick),
-      demo
+    const nick = params.get("u") || user?.nick;
+    if (!nick) {
+      root.innerHTML = `<div class="panel"><p class="muted-line">Укажи ник в адресе или <a href="login.html">войди</a>.</p></div>`;
+      return;
+    }
+
+    root.innerHTML = `<p class="muted-line">Загрузка профиля…</p>`;
+    let profile = null;
+    try {
+      const data = await api(`/api/profiles/${encodeURIComponent(nick)}`);
+      profile = data.profile;
+    } catch {
+      const demo = DEMO_PLAYERS.find((p) => p.nick.toLowerCase() === nick.toLowerCase());
+      profile = demo
         ? {
+            nick: demo.nick,
+            bio: "Демо-профиль (API недоступен).",
+            theme: "ocean",
             privilege: demo.privilege,
-            playtime: demo.playtime,
             coins: demo.coins,
             likes: demo.likes,
             fish: demo.fish,
+            playtime: demo.playtime,
+            views: 0,
+            badges: ["Демо"],
           }
-        : {}
-    );
-    profile.views = (profile.views || 0) + 1;
-    const map = profiles();
-    map[nick] = profile;
-    saveProfiles(map);
+        : null;
+    }
 
-    const isOwner = user && user.nick.toLowerCase() === nick.toLowerCase();
+    if (!profile) {
+      root.innerHTML = `<div class="panel"><p class="muted-line">Игрок не найден.</p></div>`;
+      return;
+    }
+
+    const mine = user && user.nick.toLowerCase() === profile.nick.toLowerCase();
+    const theme = profile.theme || "ocean";
     root.innerHTML = `
-      <div class="profile-cover ${profile.theme || "ocean"}" style="box-shadow:0 0 0 1px ${profile.glow || "var(--aqua)"}, 0 20px 60px rgba(0,0,0,.45)">
+      <div class="profile-cover ${theme}">
         <div class="profile-identity">
-          <img class="profile-avatar" src="${skinUrl(nick)}" alt="">
+          <img class="profile-avatar" src="${skinUrl(profile.nick)}" alt="">
           <div>
-            <h1>${nick}</h1>
-            <p>${profile.privilege || "Игрок"} · ${profile.views} просмотров · ${profile.likes} лайков</p>
+            <h1>${profile.nick}</h1>
+            <p>${profile.privilege || "Игрок"} · ${profile.bio || ""}</p>
           </div>
         </div>
       </div>
       <div class="stats-row" style="margin-top:1rem">
-        <div class="stat-card"><strong>${profile.playtime}</strong><span>Онлайн</span></div>
-        <div class="stat-card"><strong>${profile.fish}</strong><span>Улов</span></div>
-        <div class="stat-card"><strong>${Number(profile.coins).toLocaleString("ru-RU")}</strong><span>Монеты</span></div>
-        <div class="stat-card"><strong>${profile.likes}</strong><span>Лайки</span></div>
+        <div class="stat-card"><strong>${profile.likes || 0}</strong><span>лайки</span></div>
+        <div class="stat-card"><strong>${profile.fish || 0}</strong><span>улов</span></div>
+        <div class="stat-card"><strong>${Number(profile.coins || 0).toLocaleString("ru-RU")}</strong><span>монеты</span></div>
+        <div class="stat-card"><strong>${profile.views || 0}</strong><span>просмотры</span></div>
       </div>
-      <div class="card" style="margin-top:1rem">
-        <h3>О игроке</h3>
-        <p style="margin:.5rem 0 0;color:var(--muted)">${profile.bio || ""}</p>
-        <div class="badge-grid" style="margin-top:1rem">
-          ${(profile.badges || []).map((b) => `<span class="badge">${b}</span>`).join("")}
-          ${profile.privilege && profile.privilege !== "Игрок" ? `<span class="badge">${profile.privilege}</span>` : ""}
-        </div>
-        <div style="margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap">
-          <button class="btn btn-aqua" type="button" data-like>Лайк профилю</button>
-          ${isOwner ? "" : `<a class="btn btn-secondary" href="login.html">Это не вы? Войти</a>`}
+      <div class="panel" style="margin-top:1rem">
+        <h3>Бейджи</h3>
+        <div class="badge-grid" style="margin-top:.6rem">
+          ${(profile.badges || []).map((b) => `<span class="badge">${b}</span>`).join("") || '<span class="muted-line">Пока пусто</span>'}
         </div>
       </div>
       ${
-        isOwner
-          ? `<div class="card" style="margin-top:1rem">
-              <h3>Кастомизация профиля</h3>
-              <form class="form" id="profile-edit">
-                <div class="field"><label>Био</label><textarea name="bio" rows="3">${profile.bio || ""}</textarea></div>
-                <div class="field"><label>Обложка</label>
-                  <select name="theme">
-                    <option value="ocean">Океан</option>
-                    <option value="deep">Глубина</option>
-                    <option value="storm">Шторм</option>
-                    <option value="abyss">Бездна</option>
-                  </select>
-                </div>
-                <div class="field"><label>Свечение</label><input name="glow" type="color" value="${profile.glow || "#2de2e6"}"></div>
-                <button class="btn btn-primary" type="submit">Сохранить</button>
-              </form>
-            </div>`
+        mine
+          ? `<form class="panel form" id="profile-edit" style="margin-top:1rem">
+              <h3>Редактировать</h3>
+              <div class="field"><label>О себе</label><textarea name="bio" rows="3">${profile.bio || ""}</textarea></div>
+              <div class="field"><label>Тема</label>
+                <select name="theme">
+                  ${["ocean", "deep", "storm", "abyss"]
+                    .map((t) => `<option value="${t}" ${t === theme ? "selected" : ""}>${t}</option>`)
+                    .join("")}
+                </select>
+              </div>
+              <button class="btn btn-primary" type="submit">Сохранить</button>
+            </form>`
           : ""
       }`;
 
-    const themeSelect = root.querySelector('select[name="theme"]');
-    if (themeSelect) themeSelect.value = profile.theme || "ocean";
-
-    root.querySelector("[data-like]")?.addEventListener("click", () => {
-      profile.likes += 1;
-      map[nick] = profile;
-      saveProfiles(map);
-      toast("Лайк отправлен");
-      initProfile();
-    });
-
-    $("#profile-edit")?.addEventListener("submit", (e) => {
+    const form = $("#profile-edit");
+    form?.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target);
-      profile.bio = String(fd.get("bio") || "");
-      profile.theme = String(fd.get("theme") || "ocean");
-      profile.glow = String(fd.get("glow") || "#2de2e6");
-      if (!profile.badges.includes("Кастомизатор")) profile.badges.push("Кастомизатор");
-      map[nick] = profile;
-      saveProfiles(map);
-      toast("Профиль сохранён");
-      initProfile();
+      const fd = new FormData(form);
+      try {
+        await api(`/api/profiles/${encodeURIComponent(profile.nick)}`, {
+          method: "PATCH",
+          body: JSON.stringify({ bio: fd.get("bio"), theme: fd.get("theme") }),
+        });
+        toast("Профиль сохранён");
+        location.reload();
+      } catch (err) {
+        toast(err.message || "Не удалось сохранить");
+      }
     });
   }
 
   function initAuth() {
     const login = $("#login-form");
     const reg = $("#register-form");
-    login?.addEventListener("submit", (e) => {
+
+    login?.addEventListener("submit", async (e) => {
       e.preventDefault();
       const fd = new FormData(login);
       const nick = String(fd.get("nick") || "").trim();
-      if (!nick || nick.length < 3) return toast("Введите ник (от 3 символов)");
-      ensureProfile(nick);
-      setUser({ nick });
-      toast(`Добро пожаловать, ${nick}`);
-      location.href = `profile.html?u=${encodeURIComponent(nick)}`;
+      const password = String(fd.get("password") || "");
+      try {
+        const data = await api("/api/login", {
+          method: "POST",
+          body: JSON.stringify({ nick, password }),
+        });
+        setUser(data.user);
+        toast("Вход выполнен");
+        location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
+      } catch (err) {
+        if (apiAvailable === false) {
+          toast("API недоступен на этом зеркале — открой основной сайт");
+          return;
+        }
+        toast(err.message || "Ошибка входа");
+      }
     });
-    reg?.addEventListener("submit", (e) => {
+
+    reg?.addEventListener("submit", async (e) => {
       e.preventDefault();
       const fd = new FormData(reg);
       const nick = String(fd.get("nick") || "").trim();
-      const pass = String(fd.get("password") || "");
-      if (!nick || nick.length < 3) return toast("Ник от 3 символов");
-      if (pass.length < 4) return toast("Пароль от 4 символов");
-      const p = ensureProfile(nick);
-      p.badges = ["Новичок глубин", "Зарегистрирован"];
-      const map = profiles();
-      map[nick] = p;
-      saveProfiles(map);
-      setUser({ nick });
-      toast("Аккаунт создан");
-      location.href = `profile.html?u=${encodeURIComponent(nick)}`;
-    });
-  }
-
-  function initCases() {
-    const modal = $("#case-modal");
-    const result = $("#case-result");
-    if (!modal) return;
-    const loot = [
-      "VIP на 7 дней",
-      "500 AquaCoins",
-      "Ключ от кейса ×2",
-      "Premium на 3 дня",
-      "Скин-рамка Ocean",
-      "1000 AquaCoins",
-      "Deluxe пробный день",
-    ];
-    document.querySelectorAll("[data-open-case]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const name = btn.dataset.openCase || "Кейс";
-        modal.classList.add("open");
-        result.textContent = "Крутим…";
-        setTimeout(() => {
-          const item = loot[Math.floor(Math.random() * loot.length)];
-          result.textContent = `${name}: ${item}`;
-        }, 700);
-      });
-    });
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal || e.target.closest("[data-close-modal]")) modal.classList.remove("open");
-    });
-  }
-
-  function initStore() {
-    document.querySelectorAll("[data-buy]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const user = getUser();
-        if (!user) {
-          toast("Сначала войдите в аккаунт");
-          location.href = "login.html";
+      const password = String(fd.get("password") || "");
+      try {
+        const data = await api("/api/register", {
+          method: "POST",
+          body: JSON.stringify({ nick, password }),
+        });
+        setUser(data.user);
+        toast("Аккаунт создан");
+        location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
+      } catch (err) {
+        if (apiAvailable === false) {
+          toast("API недоступен на этом зеркале — открой основной сайт");
           return;
         }
-        toast(`Заявка на ${btn.dataset.buy} для ${user.nick} принята (демо)`);
+        toast(err.message || "Ошибка регистрации");
+      }
+    });
+  }
+
+  function catalogCard(item, kind) {
+    const perks = (item.perks || [])
+      .map((p) => `<li>${p}</li>`)
+      .join("");
+    const price =
+      kind === "store"
+        ? `<div class="price">${item.price_rub} ₽ <small>/ мес</small></div>`
+        : `<div class="price" style="color:var(--muted);font-size:1rem">Только на сервере</div>`;
+    const btnLabel = kind === "store" ? "Купить — скоро" : "Открыть — скоро";
+    return `<div class="card catalog-card">
+      <span class="tag ${item.slug === "deluxe" || item.slug === "ultimate" || item.slug === "depth" ? "gold" : ""}">${item.title}</span>
+      <h3>${item.title}</h3>
+      <p style="color:var(--muted);margin:.55rem 0 0">${item.description}</p>
+      <ul class="perk-list">${perks}</ul>
+      ${price}
+      <button class="btn btn-secondary btn-disabled" style="margin-top:1rem" type="button" disabled title="Покупки отключены">${btnLabel}</button>
+    </div>`;
+  }
+
+  const FALLBACK_CATALOG = {
+    store: [
+      {
+        slug: "vip",
+        title: "VIP",
+        price_rub: 149,
+        description:
+          "Базовая поддержка сервера. Префикс и удобства на AquaTech; покупка на сайте временно закрыта.",
+        perks: ["Префикс VIP в чате", "+1 дом /sethome", "Цветной ник", "Приоритет в очереди входа"],
+      },
+      {
+        slug: "premium",
+        title: "Premium",
+        price_rub: 299,
+        description: "Всё из VIP плюс ежедневный кейс на сервере. Оплата на сайте пока недоступна.",
+        perks: ["Всё из VIP", "Кейс в день (на сервере)", "Приоритет входа", "Доп. слот варпа"],
+      },
+      {
+        slug: "deluxe",
+        title: "Deluxe",
+        price_rub: 599,
+        description: "Бонусы к улову и рамка профиля. Покупка через сайт отключена до оплаты.",
+        perks: ["Всё из Premium", "Рамка профиля", "Бонус к улову", "Бейдж Deluxe"],
+      },
+      {
+        slug: "ultimate",
+        title: "Ultimate",
+        price_rub: 1199,
+        description: "Максимальный ранг. Онлайн-оплата будет позже — сейчас только витрина.",
+        perks: ["Всё из Deluxe", "Бейдж Ultimate", "Максимум домов", "Приоритетная поддержка"],
+      },
+    ],
+    case: [
+      {
+        slug: "ocean",
+        title: "Океанский кейс",
+        price_rub: 0,
+        description: "Базовый кейс с монетами. Открытие на сайте отключено — крутится в игре (F4 / casesmod).",
+        perks: ["AquaCoins", "Расходники", "Шанс на мелкий буст"],
+      },
+      {
+        slug: "fisher",
+        title: "Кейс рыбака",
+        price_rub: 0,
+        description: "Награды под рыбалку StarCatcher. Сайтовая рулетка выключена.",
+        perks: ["Ресурсы улова", "Шанс на буст удочки", "Монеты"],
+      },
+      {
+        slug: "depth",
+        title: "Глубинный кейс",
+        price_rub: 0,
+        description: "Редкая косметика и пробные привилегии. Только на сервере.",
+        perks: ["Рамка профиля", "Пробная привилегия", "Крупный запас монет"],
+      },
+    ],
+  };
+
+  async function initCatalog(kind) {
+    const root = kind === "store" ? $("#store-root") : $("#cases-root");
+    if (!root) return;
+    root.innerHTML = `<p class="muted-line">Загрузка каталога…</p>`;
+    let items = [];
+    try {
+      const data = await api(`/api/catalog?kind=${kind}`);
+      items = data.items || [];
+    } catch {
+      items = FALLBACK_CATALOG[kind] || [];
+    }
+    root.innerHTML = items.map((it) => catalogCard(it, kind)).join("");
+    root.querySelectorAll("button[disabled]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        toast("Покупки временно отключены");
       });
     });
   }
@@ -456,11 +568,21 @@
       { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
     nodes.forEach((n) => io.observe(n));
-    // hero is above fold — show immediately
     document.querySelectorAll(".hero .reveal").forEach((n) => n.classList.add("in"));
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  async function refreshSession() {
+    try {
+      const data = await api("/api/me");
+      if (data.user) setUser(data.user);
+    } catch {
+      /* not logged in or no API */
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    showApiBanner();
+    await refreshSession();
     renderHeader();
     renderFooter();
     wireCommon();
@@ -468,10 +590,10 @@
     initPlayers();
     initProfile();
     initAuth();
-    initCases();
-    initStore();
+    initCatalog("store");
+    initCatalog("case");
     initReveal();
   });
 
-  window.AquaTechSite = { IP, DOWNLOAD, toast, copyIP };
+  window.AquaTechSite = { IP, DOWNLOAD, CANONICAL, toast, copyIP, api };
 })();

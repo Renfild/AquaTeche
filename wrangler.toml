@@ -1,5 +1,6 @@
-﻿# Cloudflare Pages only (aquatech-7gs.pages.dev)
+# Cloudflare Pages (aquatech-7gs.pages.dev)
 # Build/Deploy commands in dashboard: EMPTY
+# D1: run python tools/setup_d1.py (needs CLOUDFLARE_API_TOKEN or .cf_token)
 name = "aquatech"
 pages_build_output_dir = "docs"
 compatibility_date = "2026-08-08"
@@ -9,3 +10,10 @@ PROJECT_NAME = "AquaTech"
 MINECRAFT_VERSION = "1.20.1"
 FORGE_VERSION = "47.4.0"
 SERVER_ADDRESS = "katherine-hydro.tun.ply.gg:31279"
+PURCHASES_ENABLED = "false"
+SITE_CANONICAL = "https://aquatech-7gs.pages.dev"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "aquatech"
+database_id = "15b52652-9374-4b2a-9fa9-cf0c5e7e8352"

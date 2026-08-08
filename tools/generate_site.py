@@ -172,64 +172,18 @@ PAGES["start.html"] = (
 PAGES["store.html"] = (
     "store",
     "Магазин — AquaTech",
-    "Привилегии VIP, Premium, Deluxe и Ultimate на сервере AquaTech.",
+    "Витрина привилегий VIP–Ultimate на сервере AquaTech. Покупка на сайте временно отключена.",
     """
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Магазин</div>
-      <h1>Привилегии сервера</h1>
-      <p>Поддержи проект и получи бонусы на сервере. Оплата пока в демо-режиме — заявка сохраняется на ник из профиля.</p>
+      <h1>Привилегии</h1>
+      <p>Ранги сервера AquaTech. Ниже — состав и цены. Онлайн-оплата на сайте пока выключена.</p>
+      <div class="notice-banner inline">Покупки временно отключены. Донат будет доступен после подключения оплаты.</div>
     </div>
   </section>
   <section class="section" style="padding-top:0">
-    <div class="container grid-3">
-      <div class="card">
-        <span class="tag">VIP</span>
-        <h3>VIP</h3>
-        <ul class="perk-list">
-          <li>Префикс в чате</li>
-          <li>+1 дом /sethome</li>
-          <li>Цветной ник</li>
-        </ul>
-        <div class="price">149 ₽ <small>/ мес</small></div>
-        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-buy="VIP" type="button">Купить</button>
-      </div>
-      <div class="card">
-        <span class="tag">Premium</span>
-        <h3>Premium</h3>
-        <ul class="perk-list">
-          <li>Всё из VIP</li>
-          <li>Кейс в день</li>
-          <li>Приоритет входа</li>
-        </ul>
-        <div class="price">299 ₽ <small>/ мес</small></div>
-        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-buy="Premium" type="button">Купить</button>
-      </div>
-      <div class="card">
-        <span class="tag gold">Deluxe</span>
-        <h3>Deluxe</h3>
-        <ul class="perk-list">
-          <li>Всё из Premium</li>
-          <li>Рамка профиля</li>
-          <li>Бонус к улову</li>
-        </ul>
-        <div class="price">599 ₽ <small>/ мес</small></div>
-        <button class="btn btn-primary" style="margin-top:1rem;width:100%" data-buy="Deluxe" type="button">Купить</button>
-      </div>
-    </div>
-    <div class="container" style="margin-top:1rem">
-      <div class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
-        <div>
-          <span class="tag gold">Ultimate</span>
-          <h3 style="margin:.4rem 0">Ultimate</h3>
-          <p style="margin:0;color:var(--muted)">Максимум привилегий, уникальный бейдж профиля и поддержка разработки AquaTech.</p>
-        </div>
-        <div style="text-align:right">
-          <div class="price" style="margin:0">1199 ₽ <small>/ мес</small></div>
-          <button class="btn btn-aqua" style="margin-top:.8rem" data-buy="Ultimate" type="button">Купить Ultimate</button>
-        </div>
-      </div>
-    </div>
+    <div class="container catalog-grid" id="store-root"></div>
   </section>
 """,
 )
@@ -237,44 +191,19 @@ PAGES["store.html"] = (
 PAGES["cases.html"] = (
     "cases",
     "Кейсы — AquaTech",
-    "Открывай кейсы AquaTech и получай награды.",
+    "Витрина кейсов AquaTech. Открытие на сайте отключено — кейсы крутятся в игре.",
     """
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Награды</div>
-      <h1>Кейсы AquaTech</h1>
-      <p>Демо-рулетка на сайте. На сервере кейсы выдаются через игровые механики и донат.</p>
+      <h1>Кейсы</h1>
+      <p>Состав кейсов для сервера. Сайтовая рулетка отключена — открывай кейсы в игре (меню F4 / casesmod).</p>
+      <div class="notice-banner inline">Открытие кейсов на сайте запрещено. Используй игровые механики на сервере.</div>
     </div>
   </section>
   <section class="section" style="padding-top:0">
-    <div class="container grid-3">
-      <div class="card">
-        <div class="feature-art cases"></div>
-        <h3>Океанский кейс</h3>
-        <p style="color:var(--muted)">Базовые награды и AquaCoins.</p>
-        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-open-case="Океанский кейс" type="button">Открыть</button>
-      </div>
-      <div class="card">
-        <div class="feature-art rods"></div>
-        <h3>Кейс рыбака</h3>
-        <p style="color:var(--muted)">Шанс на буст удочек и ресурсы.</p>
-        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-open-case="Кейс рыбака" type="button">Открыть</button>
-      </div>
-      <div class="card">
-        <div class="feature-art tech"></div>
-        <h3>Глубинный кейс</h3>
-        <p style="color:var(--muted)">Редкие привилегии и рамки профиля.</p>
-        <button class="btn btn-primary" style="margin-top:1rem;width:100%" data-open-case="Глубинный кейс" type="button">Открыть</button>
-      </div>
-    </div>
+    <div class="container catalog-grid" id="cases-root"></div>
   </section>
-  <div class="modal" id="case-modal">
-    <div class="modal-card">
-      <h3>Результат</h3>
-      <p id="case-result" style="color:var(--muted)">…</p>
-      <button class="btn btn-secondary" style="margin-top:1rem" data-close-modal type="button">Закрыть</button>
-    </div>
-  </div>
 """,
 )
 
@@ -326,7 +255,7 @@ PAGES["top.html"] = (
     <div class="container">
       <div class="eyebrow">Рейтинги</div>
       <h1>Топы игроков</h1>
-      <p>Демо-данные сайта. Позже подключим живой API сервера.</p>
+      <p>Топы по лайкам и монетам из базы профилей сайта.</p>
       <div class="banner"></div>
       <div class="tabs">
         <button class="tab active" type="button" data-top-tab="playtime">По онлайну</button>
@@ -382,7 +311,7 @@ PAGES["profile.html"] = (
     <div class="container">
       <div class="eyebrow">Профиль</div>
       <h1>Страница игрока</h1>
-      <p>Кастомизируй обложку и свечение. Лайки и просмотры считаются локально в браузере (демо).</p>
+      <p>Профиль из базы сайта: био, тема, статистика. Редактирование — после входа.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -411,10 +340,10 @@ PAGES["login.html"] = (
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Вход</h1>
-      <p>Демо-авторизация в браузере. Ник станет твоим профилем на сайте.</p>
+      <p>Войди в аккаунт сайта (ник Minecraft, латиница). Данные хранятся в базе Cloudflare D1.</p>
       <form class="card form" id="login-form" style="margin-top:1.25rem">
-        <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required /></div>
-        <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="••••" /></div>
+        <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
+        <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="••••" required /></div>
         <button class="btn btn-primary" type="submit">Войти</button>
         <a class="btn btn-ghost" href="register.html">Нет аккаунта? Регистрация</a>
       </form>
@@ -432,10 +361,10 @@ PAGES["register.html"] = (
     <div class="container auth-shell">
       <div class="eyebrow">Аккаунт</div>
       <h1>Регистрация</h1>
-      <p>Создай профиль, чтобы лайкать игроков и оформлять страницу.</p>
+      <p>Создай профиль сайта. Ник: 3–16 символов (A–Z, 0–9, _). Пароль от 4 символов.</p>
       <form class="card form" id="register-form" style="margin-top:1.25rem">
-        <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required /></div>
-        <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required /></div>
+        <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
+        <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required minlength="4" /></div>
         <button class="btn btn-primary" type="submit">Создать аккаунт</button>
         <a class="btn btn-ghost" href="login.html">Уже есть аккаунт? Войти</a>
       </form>
@@ -453,7 +382,7 @@ PAGES["players.html"] = (
     <div class="container">
       <div class="eyebrow">Сообщество</div>
       <h1>Поиск игроков</h1>
-      <p>Открой профиль любого игрока из демо-списка.</p>
+      <p>Игроки из базы сайта. На зеркале GH Pages список может быть недоступен.</p>
       <div class="field" style="margin-top:1.25rem;max-width:420px">
         <label>Ник</label>
         <input id="player-search" placeholder="Начни вводить…" />
