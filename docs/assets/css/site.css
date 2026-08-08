@@ -923,3 +923,66 @@ button { cursor: pointer; border: 0; background: none; }
 }
 
 .muted-line { color: var(--muted); margin: 0.5rem 0; }
+
+.admin-layout {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .admin-layout { grid-template-columns: 1fr 1fr; }
+}
+
+.admin-check {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--text);
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-table th,
+.admin-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.55rem 0.4rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+.admin-table th {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-table input,
+.admin-table textarea {
+  width: 100%;
+  min-width: 5rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(2, 10, 18, 0.55);
+  color: inherit;
+  font: inherit;
+}
+
+.admin-table textarea { min-width: 12rem; resize: vertical; }
+
+.admin-table input[type="checkbox"] {
+  width: auto;
+  min-width: 0;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Админка · AquaTech</title>
+  <meta name="description" content="Панель администратора AquaTech." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body data-page="admin">
+  <div id="site-header"></div>
+  
+  <section class="page-hero">
+    <div class="container">
+      <div class="eyebrow">Служебное</div>
+      <h1>Админка</h1>
+      <p id="admin-gate">Проверяем доступ…</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0" id="admin-root" hidden>
+    <div class="container admin-layout">
+      <div class="card">
+        <h3>Настройки</h3>
+        <label class="admin-check">
+          <input type="checkbox" id="admin-purchases" />
+          Покупки на сайте включены
+        </label>
+        <button class="btn btn-secondary" type="button" id="admin-save-settings" style="margin-top:1rem">Сохранить</button>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="section-head" style="margin-bottom:1rem">
+          <div>
+            <h3 style="margin:0">Игроки</h3>
+            <p style="margin:.35rem 0 0">Поиск и правка привилегии / статов</p>
+          </div>
+          <div class="field" style="margin:0;min-width:220px">
+            <label>Ник</label>
+            <input id="admin-user-q" placeholder="поиск…" />
+          </div>
+        </div>
+        <div id="admin-users" class="admin-table-wrap"></div>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="section-head" style="margin-bottom:1rem">
+          <div>
+            <h3 style="margin:0">Каталог</h3>
+            <p style="margin:.35rem 0 0">Магазин и кейсы</p>
+          </div>
+          <button class="btn btn-ghost" type="button" id="admin-short-copy">Короткие тексты по умолчанию</button>
+        </div>
+        <div id="admin-catalog" class="admin-table-wrap"></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

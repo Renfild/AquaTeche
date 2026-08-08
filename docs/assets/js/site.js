@@ -147,7 +147,8 @@
           <div class="header-actions">
             ${
               user
-                ? `<a class="btn btn-secondary" href="profile.html?u=${encodeURIComponent(user.nick)}">${user.nick}</a>
+                ? `${user.is_admin ? '<a class="btn btn-ghost" href="admin.html">Админка</a>' : ""}
+                   <a class="btn btn-secondary" href="profile.html?u=${encodeURIComponent(user.nick)}">${user.nick}</a>
                    <button class="btn btn-ghost" type="button" data-logout>Выйти</button>`
                 : `<a class="btn btn-ghost btn-hide-desktop" href="login.html">Войти</a>
                    <a class="btn btn-secondary" href="login.html">Войти</a>
@@ -163,6 +164,7 @@
             ${nav}
             <a href="players.html">Поиск игроков</a>
             <a href="rules.html">Правила</a>
+            ${user?.is_admin ? '<a href="admin.html">Админка</a>' : ""}
             ${user ? "" : '<a href="register.html">Регистрация</a>'}
           </div>
         </div>
@@ -190,7 +192,7 @@
         <div class="container footer-grid">
           <div>
             <div class="brand" style="margin-bottom:0.8rem"><span class="brand-mark"></span>AquaTech</div>
-            <p style="color:var(--muted);margin:0;max-width:28rem">Minecraft 1.20.1 Forge + Mohist. Лаунчер качает сборку, сервер в океане.</p>
+            <p style="color:var(--muted);margin:0;max-width:28rem">Океанский сервер. Скачай лаунчер и заходи.</p>
           </div>
           <div>
             <h4>Игра</h4>
@@ -209,10 +211,10 @@
           <div>
             <h4>Проект</h4>
             <a href="rules.html">Правила</a>
-            <a href="${DOWNLOAD}">AquaTech.exe</a>
+            <a href="${DOWNLOAD}">Скачать лаунчер</a>
           </div>
         </div>
-        <div class="container footer-copy">© 2026 AquaTech · Minecraft Forge 1.20.1 + Mohist</div>
+        <div class="container footer-copy">© 2026 AquaTech</div>
       </footer>`;
   }
 
@@ -594,6 +596,187 @@
     }
   }
 
+  function esc(s) {
+    return String(s ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  async function initAdmin() {
+    if (pageId() !== "admin") return;
+    const gate = $("#admin-gate");
+    const root = $("#admin-root");
+    if (!gate || !root) return;
+
+    try {
+      await api("/api/admin/me");
+    } catch (err) {
+      gate.innerHTML =
+        err.status === 401 || !getUser()
+          ? `Нужен <a href="login.html">вход</a> под админ-ником.`
+          : "Нет доступа к админке.";
+      return;
+    }
+
+    gate.textContent = "Доступ есть. Правь каталог и игроков ниже.";
+    root.hidden = false;
+
+    const purchases = $("#admin-purchases");
+    try {
+      const st = await api("/api/admin/settings");
+      if (purchases) purchases.checked = !!st.settings?.purchases_enabled;
+    } catch {
+      /* settings optional */
+    }
+
+    $("#admin-save-settings")?.addEventListener("click", async () => {
+      try {
+        await api("/api/admin/settings", {
+          method: "PATCH",
+          body: JSON.stringify({ purchases_enabled: !!purchases?.checked }),
+        });
+        toast("Настройки сохранены");
+      } catch (err) {
+        toast(err.message || "Не удалось сохранить");
+      }
+    });
+
+    async function loadUsers() {
+      const box = $("#admin-users");
+      if (!box) return;
+      const q = ($("#admin-user-q")?.value || "").trim();
+      box.innerHTML = `<p class="muted-line">Загрузка…</p>`;
+      try {
+        const data = await api(`/api/admin/users?q=${encodeURIComponent(q)}`);
+        const rows = data.users || [];
+        if (!rows.length) {
+          box.innerHTML = `<p class="muted-line">Никого не нашли.</p>`;
+          return;
+        }
+        box.innerHTML = `<table class="admin-table"><thead><tr>
+          <th>Ник</th><th>Ранг</th><th>Монеты</th><th>Лайки</th><th>Рыба</th><th>Часы</th><th></th>
+        </tr></thead><tbody>
+        ${rows
+          .map(
+            (u) => `<tr data-nick="${esc(u.nick)}">
+          <td><strong>${esc(u.nick)}</strong>${u.is_admin ? ' <span class="tag">admin</span>' : ""}</td>
+          <td><input data-f="privilege" value="${esc(u.privilege)}" /></td>
+          <td><input data-f="coins" type="number" min="0" value="${esc(u.coins)}" /></td>
+          <td><input data-f="likes" type="number" min="0" value="${esc(u.likes)}" /></td>
+          <td><input data-f="fish" type="number" min="0" value="${esc(u.fish)}" /></td>
+          <td><input data-f="playtime_hours" type="number" min="0" value="${esc(u.playtime_hours)}" /></td>
+          <td><button class="btn btn-secondary" type="button" data-save-user>OK</button></td>
+        </tr>`
+          )
+          .join("")}
+        </tbody></table>`;
+        box.querySelectorAll("[data-save-user]").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const tr = btn.closest("tr");
+            const nick = tr?.dataset.nick;
+            if (!nick) return;
+            const body = {};
+            tr.querySelectorAll("[data-f]").forEach((inp) => {
+              const key = inp.getAttribute("data-f");
+              body[key] = inp.type === "number" ? Number(inp.value) : inp.value;
+            });
+            try {
+              await api(`/api/admin/users/${encodeURIComponent(nick)}`, {
+                method: "PATCH",
+                body: JSON.stringify(body),
+              });
+              toast(`Сохранено: ${nick}`);
+            } catch (err) {
+              toast(err.message || "Ошибка");
+            }
+          });
+        });
+      } catch (err) {
+        box.innerHTML = `<p class="muted-line">${esc(err.message || "Ошибка загрузки")}</p>`;
+      }
+    }
+
+    async function loadCatalog() {
+      const box = $("#admin-catalog");
+      if (!box) return;
+      box.innerHTML = `<p class="muted-line">Загрузка…</p>`;
+      try {
+        const data = await api("/api/admin/catalog");
+        const rows = data.items || [];
+        box.innerHTML = `<table class="admin-table"><thead><tr>
+          <th>Slug</th><th>Название</th><th>Цена</th><th>Описание</th><th>Perks (\\n)</th><th>Вкл</th><th></th>
+        </tr></thead><tbody>
+        ${rows
+          .map(
+            (it) => `<tr data-id="${it.id}">
+          <td>${esc(it.slug)}<div class="muted-line">${esc(it.kind)}</div></td>
+          <td><input data-f="title" value="${esc(it.title)}" /></td>
+          <td><input data-f="price_rub" type="number" min="0" value="${esc(it.price_rub)}" /></td>
+          <td><textarea data-f="description" rows="3">${esc(it.description)}</textarea></td>
+          <td><textarea data-f="perks" rows="3">${esc((it.perks || []).join("\n"))}</textarea></td>
+          <td><input data-f="enabled" type="checkbox" ${it.enabled ? "checked" : ""} /></td>
+          <td><button class="btn btn-secondary" type="button" data-save-item>OK</button></td>
+        </tr>`
+          )
+          .join("")}
+        </tbody></table>`;
+        box.querySelectorAll("[data-save-item]").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const tr = btn.closest("tr");
+            const id = tr?.dataset.id;
+            if (!id) return;
+            const body = {};
+            tr.querySelectorAll("[data-f]").forEach((inp) => {
+              const key = inp.getAttribute("data-f");
+              if (key === "enabled") body.enabled = inp.checked;
+              else if (key === "perks")
+                body.perks = String(inp.value)
+                  .split(/\r?\n/)
+                  .map((s) => s.trim())
+                  .filter(Boolean);
+              else if (key === "price_rub") body.price_rub = Number(inp.value);
+              else body[key] = inp.value;
+            });
+            try {
+              await api(`/api/admin/catalog/${id}`, {
+                method: "PATCH",
+                body: JSON.stringify(body),
+              });
+              toast("Каталог сохранён");
+            } catch (err) {
+              toast(err.message || "Ошибка");
+            }
+          });
+        });
+      } catch (err) {
+        box.innerHTML = `<p class="muted-line">${esc(err.message || "Ошибка загрузки")}</p>`;
+      }
+    }
+
+    let userTimer;
+    $("#admin-user-q")?.addEventListener("input", () => {
+      clearTimeout(userTimer);
+      userTimer = setTimeout(loadUsers, 280);
+    });
+    $("#admin-short-copy")?.addEventListener("click", async () => {
+      try {
+        await api("/api/admin/catalog", {
+          method: "POST",
+          body: JSON.stringify({ action: "short_copy" }),
+        });
+        toast("Короткие тексты записаны");
+        await loadCatalog();
+      } catch (err) {
+        toast(err.message || "Ошибка");
+      }
+    });
+
+    await loadUsers();
+    await loadCatalog();
+  }
+
   document.addEventListener("DOMContentLoaded", async () => {
     showApiBanner();
     lockAuthForms();
@@ -607,6 +790,7 @@
     initAuth();
     initCatalog("store");
     initCatalog("case");
+    await initAdmin();
     initReveal();
   });
 

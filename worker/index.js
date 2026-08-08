@@ -16,6 +16,18 @@ import {
   onRequestGet as profileGet,
   onRequestPatch as profilePatch,
 } from "../functions/api/profiles/[nick].js";
+import { onRequestGet as adminMeGet } from "../functions/api/admin/me.js";
+import {
+  onRequestGet as adminSettingsGet,
+  onRequestPatch as adminSettingsPatch,
+} from "../functions/api/admin/settings.js";
+import {
+  onRequestGet as adminCatalogGet,
+  onRequestPost as adminCatalogPost,
+} from "../functions/api/admin/catalog.js";
+import { onRequestPatch as adminCatalogPatch } from "../functions/api/admin/catalog/[id].js";
+import { onRequestGet as adminUsersGet } from "../functions/api/admin/users.js";
+import { onRequestPatch as adminUserPatch } from "../functions/api/admin/users/[nick].js";
 
 function ctx(request, env, params = {}) {
   return { request, env, params };
@@ -40,6 +52,25 @@ async function handleApi(request, env) {
   if (path === "/api/purchase") {
     if (method === "POST") return purchasePost(ctx(request, env));
     if (method === "GET") return purchaseGet(ctx(request, env));
+  }
+
+  if (path === "/api/admin/me" && method === "GET") return adminMeGet(ctx(request, env));
+  if (path === "/api/admin/settings") {
+    if (method === "GET") return adminSettingsGet(ctx(request, env));
+    if (method === "PATCH") return adminSettingsPatch(ctx(request, env));
+  }
+  if (path === "/api/admin/catalog") {
+    if (method === "GET") return adminCatalogGet(ctx(request, env));
+    if (method === "POST") return adminCatalogPost(ctx(request, env));
+  }
+  const catalogId = path.match(/^\/api\/admin\/catalog\/(\d+)$/);
+  if (catalogId && method === "PATCH") {
+    return adminCatalogPatch(ctx(request, env, { id: catalogId[1] }));
+  }
+  if (path === "/api/admin/users" && method === "GET") return adminUsersGet(ctx(request, env));
+  const adminUser = path.match(/^\/api\/admin\/users\/([^/]+)$/);
+  if (adminUser && method === "PATCH") {
+    return adminUserPatch(ctx(request, env, { nick: decodeURIComponent(adminUser[1]) }));
   }
 
   const profileMatch = path.match(/^\/api\/profiles\/([^/]+)$/);

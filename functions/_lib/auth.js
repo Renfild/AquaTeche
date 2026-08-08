@@ -64,6 +64,15 @@ export function getSessionId(request) {
  * @param {import('@cloudflare/workers-types').D1Database} db
  * @param {Request} request
  */
+export function adminNickSet(env) {
+  return new Set(
+    String(env?.ADMIN_NICKS || "")
+      .split(",")
+      .map((s) => s.trim().toLowerCase())
+      .filter(Boolean)
+  );
+}
+
 export async function requireUser(db, request) {
   const sid = getSessionId(request);
   if (!sid) return null;
@@ -82,6 +91,38 @@ export async function requireUser(db, request) {
     return null;
   }
   return { id: row.id, nick: row.nick, sessionId: sid };
+}
+
+/** Cookie session + ADMIN_NICKS env and/or users.is_admin. */
+export async function requireAdmin(db, request, env) {
+  const user = await requireUser(db, request);
+  if (!user) return null;
+  if (adminNickSet(env).has(String(user.nick).toLowerCase())) {
+    return { ...user, is_admin: true };
+  }
+  try {
+    const row = await db
+      .prepare("SELECT is_admin FROM users WHERE id = ?")
+      .bind(user.id)
+      .first();
+    if (Number(row?.is_admin) === 1) return { ...user, is_admin: true };
+  } catch {
+    /* is_admin column missing until migration */
+  }
+  return null;
+}
+
+export async function userIsAdmin(db, nick, env) {
+  if (adminNickSet(env).has(String(nick || "").toLowerCase())) return true;
+  try {
+    const row = await db
+      .prepare("SELECT is_admin FROM users WHERE nick = ? COLLATE NOCASE")
+      .bind(nick)
+      .first();
+    return Number(row?.is_admin) === 1;
+  } catch {
+    return false;
+  }
 }
 
 export function normalizeNick(nick) {

@@ -18,6 +18,7 @@ FORGE_VERSION = "47.4.0"
 SERVER_ADDRESS = "katherine-hydro.tun.ply.gg:31279"
 PURCHASES_ENABLED = "false"
 SITE_CANONICAL = "https://aquatech.santcrail.workers.dev"
+ADMIN_NICKS = "Renfild"
 
 [[d1_databases]]
 binding = "DB"

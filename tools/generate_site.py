@@ -33,14 +33,14 @@ PAGES: dict[str, tuple[str, str, str, str]] = {}
 PAGES["index.html"] = (
     "home",
     "AquaTech · океанский Minecraft 1.20.1",
-    "Лаунчер AquaTech, сервер 1.20.1 Forge, удочки StarCatcher, кейсы и донат.",
+    "Океанский Minecraft: удочки StarCatcher, кейсы, сервер AquaTech.",
     """
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="container hero-inner">
-      <div class="eyebrow">Модпак · Minecraft 1.20.1 Forge</div>
+      <div class="eyebrow">Minecraft 1.20.1</div>
       <h1>AquaTech</h1>
-      <p class="hero-lead">Спавн на плоту в океане. Двенадцать удочек StarCatcher, авторыбалка, кейсы и индустриальные моды. Скачай лаунчер (~5 МБ), сборка подтянется сама.</p>
+      <p class="hero-lead">Спавн на плоту в океане. Двенадцать удочек StarCatcher, авторыбалка, кейсы и индустриальные моды. Скачай лаунчер и заходи.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" data-download href="#">Скачать лаунчер</a>
         <a class="btn btn-secondary" href="register.html">Регистрация</a>
@@ -61,7 +61,7 @@ PAGES["index.html"] = (
       <div class="section-head">
         <div>
           <h2>На сервере</h2>
-          <p>Один мир-океан, свой лаунчер и сайт с профилями.</p>
+          <p>Один мир-океан. Рыбалка, кейсы, прогрессия.</p>
         </div>
         <a class="btn btn-secondary" href="start.html">Как зайти</a>
       </div>
@@ -101,7 +101,7 @@ PAGES["index.html"] = (
           <a class="news-item" href="news.html">
             <time>8 августа 2026</time>
             <h3>Лаунчер 2.9.9</h3>
-            <p>Маленький exe ~5 МБ. Моды и сборка качаются при запуске.</p>
+            <p>Обновили лаунчер. Скачал и заходишь на сервер.</p>
           </a>
           <a class="news-item" href="news.html">
             <time>Июль 2026</time>
@@ -113,7 +113,7 @@ PAGES["index.html"] = (
       <div class="card">
         <span class="tag">Сервер</span>
         <h3>AquaTech Ocean</h3>
-        <p style="margin:.6rem 0 1rem;color:var(--muted)">Океанский skyblock: плот 4×4, Forge 1.20.1, Mohist. Заходи по IP ниже.</p>
+        <p style="margin:.6rem 0 1rem;color:var(--muted)">Океанский skyblock, плот 4×4. Заходи по IP ниже.</p>
         <div class="ip-box" data-copy-ip style="width:100%;justify-content:space-between">
           <div>
             <small>ПОДКЛЮЧЕНИЕ</small>
@@ -140,7 +140,7 @@ PAGES["start.html"] = (
     <div class="container">
       <div class="eyebrow">Старт</div>
       <h1>Как зайти</h1>
-      <p>Нужен Windows и ~5 МБ под первый файл. Остальное лаунчер скачает сам.</p>
+      <p>Нужен Windows. Скачай лаунчер, впиши ник и жми «Играть».</p>
       <div class="banner"></div>
     </div>
   </section>
@@ -148,15 +148,15 @@ PAGES["start.html"] = (
     <div class="container grid-2">
       <div class="card">
         <h3>1. Лаунчер</h3>
-        <p style="color:var(--muted);margin:.6rem 0 1rem">AquaTech.exe ставит приложение в %LOCALAPPDATA%\\AquaTech и тянет моды.</p>
+        <p style="color:var(--muted);margin:.6rem 0 1rem">Скачай и запусти. Дальше всё поставится само.</p>
         <a class="btn btn-primary" data-download href="#">Скачать для Windows</a>
       </div>
       <div class="card">
         <h3>2. Игра</h3>
         <ul class="perk-list">
           <li>Впиши ник в лаунчере</li>
-          <li>Дождись синхронизации модов</li>
-          <li>Жми «Играть» (вход на сервер сам)</li>
+          <li>Дождись загрузки</li>
+          <li>Жми «Играть»</li>
           <li>IP вручную: katherine-hydro.tun.ply.gg:31279</li>
         </ul>
         <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
@@ -197,7 +197,7 @@ PAGES["cases.html"] = (
     <div class="container">
       <div class="eyebrow">Кейсы</div>
       <h1>Что внутри</h1>
-      <p>Сайт только показывает состав. Открывай кейсы в игре: F4 / casesmod.</p>
+      <p>Сайт только показывает состав. Открывай кейсы в игре (F4).</p>
       <div class="notice-banner inline">На сайте кейсы не открываются.</div>
     </div>
   </section>
@@ -277,7 +277,7 @@ PAGES["news.html"] = (
     <div class="container">
       <div class="eyebrow">Блог</div>
       <h1>Новости</h1>
-      <p>Лаунчер, сборка, сервер.</p>
+      <p>Что нового на сервере и в лаунчере.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -285,17 +285,17 @@ PAGES["news.html"] = (
       <article class="news-item">
         <time>8 августа 2026</time>
         <h3>Лаунчер 2.9.9 и сайт</h3>
-        <p>Профили и магазин на сайте. Лаунчер качает сборку при старте.</p>
+        <p>На сайте профили и магазин. Лаунчер обновили под текущую сборку.</p>
       </article>
       <article class="news-item">
         <time>Август 2026</time>
-        <h3>Playit только для игры</h3>
-        <p>Туннель нужен для входа на сервер. Моды с него больше не тянем.</p>
+        <h3>Подключение к серверу</h3>
+        <p>Заходи по IP с сайта. Отдельный туннель для модов больше не нужен.</p>
       </article>
       <article class="news-item">
         <time>Июль 2026</time>
         <h3>Авторыбалка + StarCatcher</h3>
-        <p>aquatech_ui работает с прогрессией удочек и кастомными пулами.</p>
+        <p>Удочки с кастомным лутом и авторыбалкой на сервере.</p>
       </article>
     </div>
   </section>
@@ -410,6 +410,56 @@ PAGES["rules.html"] = (
           <li>Чужие сервера в чате не рекламируй.</li>
           <li>Админы могут откатить гриф и выдать мут/бан.</li>
         </ol>
+      </div>
+    </div>
+  </section>
+""",
+)
+
+PAGES["admin.html"] = (
+    "admin",
+    "Админка · AquaTech",
+    "Панель администратора AquaTech.",
+    """
+  <section class="page-hero">
+    <div class="container">
+      <div class="eyebrow">Служебное</div>
+      <h1>Админка</h1>
+      <p id="admin-gate">Проверяем доступ…</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0" id="admin-root" hidden>
+    <div class="container admin-layout">
+      <div class="card">
+        <h3>Настройки</h3>
+        <label class="admin-check">
+          <input type="checkbox" id="admin-purchases" />
+          Покупки на сайте включены
+        </label>
+        <button class="btn btn-secondary" type="button" id="admin-save-settings" style="margin-top:1rem">Сохранить</button>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="section-head" style="margin-bottom:1rem">
+          <div>
+            <h3 style="margin:0">Игроки</h3>
+            <p style="margin:.35rem 0 0">Поиск и правка привилегии / статов</p>
+          </div>
+          <div class="field" style="margin:0;min-width:220px">
+            <label>Ник</label>
+            <input id="admin-user-q" placeholder="поиск…" />
+          </div>
+        </div>
+        <div id="admin-users" class="admin-table-wrap"></div>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="section-head" style="margin-bottom:1rem">
+          <div>
+            <h3 style="margin:0">Каталог</h3>
+            <p style="margin:.35rem 0 0">Магазин и кейсы</p>
+          </div>
+          <button class="btn btn-ghost" type="button" id="admin-short-copy">Короткие тексты по умолчанию</button>
+        </div>
+        <div id="admin-catalog" class="admin-table-wrap"></div>
       </div>
     </div>
   </section>

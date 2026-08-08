@@ -1,8 +1,8 @@
-import { bad, json } from "../_lib/http.js";
-import { getSetting, purchasesEnabled } from "../_lib/settings.js";
+import { bad, json, readJson } from "../../_lib/http.js";
+import { requireAdmin } from "../../_lib/auth.js";
+import { setSetting } from "../../_lib/settings.js";
 
-/** Short player-facing copy until admin saves DB texts (catalog_from_db=1). */
-const COPY = {
+const SHORT = {
   vip: {
     description: "Префикс, цветной ник, +1 дом. Купить на сайте пока нельзя.",
     perks: ["Префикс VIP в чате", "+1 дом /sethome", "Цветной ник", "Приоритет в очереди"],
@@ -33,47 +33,59 @@ const COPY = {
   },
 };
 
+function parsePerks(raw) {
+  try {
+    const v = JSON.parse(raw || "[]");
+    return Array.isArray(v) ? v.map(String) : [];
+  } catch {
+    return [];
+  }
+}
+
+function mapRow(row) {
+  return {
+    id: row.id,
+    kind: row.kind,
+    slug: row.slug,
+    title: row.title,
+    price_rub: row.price_rub,
+    description: row.description,
+    perks: parsePerks(row.perks_json),
+    enabled: Number(row.enabled) === 1,
+    sort_order: row.sort_order,
+  };
+}
+
 export async function onRequestGet(context) {
   const { request, env } = context;
   if (!env.DB) return bad("База не подключена", 503);
+  const admin = await requireAdmin(env.DB, request, env);
+  if (!admin) return bad("Нет доступа", 403);
 
-  const url = new URL(request.url);
-  const kind = url.searchParams.get("kind"); // store | case | null
-  const fromDb = (await getSetting(env.DB, "catalog_from_db", "0")) === "1";
+  const res = await env.DB.prepare(
+    `SELECT id, kind, slug, title, price_rub, description, perks_json, enabled, sort_order
+     FROM catalog_items ORDER BY kind ASC, sort_order ASC, id ASC`
+  ).all();
 
-  let sql = `SELECT id, kind, slug, title, price_rub, description, perks_json, enabled, sort_order
-             FROM catalog_items WHERE enabled = 1`;
-  const binds = [];
-  if (kind === "store" || kind === "case") {
-    sql += " AND kind = ?";
-    binds.push(kind);
+  return json({ ok: true, items: (res.results || []).map(mapRow) });
+}
+
+/** Apply short default copy to all known slugs. */
+export async function onRequestPost(context) {
+  const { request, env } = context;
+  if (!env.DB) return bad("База не подключена", 503);
+  const admin = await requireAdmin(env.DB, request, env);
+  if (!admin) return bad("Нет доступа", 403);
+  const body = await readJson(request);
+  if (body?.action !== "short_copy") return bad("Неизвестное действие");
+
+  for (const [slug, copy] of Object.entries(SHORT)) {
+    await env.DB.prepare(
+      `UPDATE catalog_items SET description = ?, perks_json = ? WHERE slug = ?`
+    )
+      .bind(copy.description, JSON.stringify(copy.perks), slug)
+      .run();
   }
-  sql += " ORDER BY sort_order ASC, id ASC";
-
-  const stmt = env.DB.prepare(sql);
-  const res = await (binds.length ? stmt.bind(...binds) : stmt).all();
-  const items = (res.results || []).map((row) => {
-    let perks = [];
-    try {
-      perks = JSON.parse(row.perks_json || "[]");
-    } catch {
-      perks = [];
-    }
-    const override = fromDb ? null : COPY[row.slug];
-    return {
-      id: row.id,
-      kind: row.kind,
-      slug: row.slug,
-      title: row.title,
-      price_rub: row.price_rub,
-      description: override?.description || row.description,
-      perks: override?.perks || perks,
-    };
-  });
-
-  return json({
-    ok: true,
-    purchases_enabled: await purchasesEnabled(env),
-    items,
-  });
+  await setSetting(env.DB, "catalog_from_db", "1");
+  return onRequestGet(context);
 }
