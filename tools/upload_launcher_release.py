@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload AquaTechLauncher.exe: draft → upload → publish (immutable releases)."""
+"""Publish LoliLand-style client: AquaTech.exe + AquaTechLauncher.zip."""
 from __future__ import annotations
 
 import json
@@ -10,10 +10,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "launcher-2.9.1"
-EXE = ROOT / "dist" / "releases" / "AquaTechLauncher.exe"
-if not EXE.is_file():
-    EXE = ROOT / "dist" / "AquaTechLauncher.exe"
+TAG = "client-2.9.2"
+REL = ROOT / "dist" / "releases"
+DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
+
+FILES = [
+    REL / "AquaTech.exe",
+    REL / "AquaTechLauncher.zip",
+]
 
 
 def token() -> str:
@@ -42,19 +46,32 @@ def api(method: str, url: str, data: bytes | None = None, content_type: str | No
 
 
 def main() -> None:
-    if not EXE.is_file():
-        sys.exit(f"missing {EXE}")
+    for f in FILES:
+        if not f.is_file():
+            sys.exit(f"missing {f}")
+
+    # Keep docs manifest in sync before/after upload
+    man = {
+        "version": "2.9.2",
+        "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
+        "launcher_exe": "AquaTechLauncher.exe",
+        "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
+    }
+    DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (REL / "bootstrap.json").write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## Скачать лаунчер AquaTech\n\n"
-        "Скачай **AquaTechLauncher.exe** и запусти — как у LoliLand, один файл.\n"
+        "## AquaTech Client (LoliLand-style)\n\n"
+        "1. Скачай **AquaTech.exe** (~5 МБ)\n"
+        "2. Запусти — bootstrap сам скачает лаунчер в `%LOCALAPPDATA%\\AquaTech`\n"
+        "3. Дальше обновления подтягиваются автоматически\n"
     )
 
     payload = json.dumps(
         {
             "tag_name": TAG,
             "target_commitish": "main",
-            "name": "AquaTech Launcher 2.9.1",
+            "name": "AquaTech Client 2.9.2",
             "body": body,
             "draft": True,
             "prerelease": False,
@@ -66,35 +83,26 @@ def main() -> None:
         data=payload,
         content_type="application/json",
     )
-    print("draft", rel["id"])
     release_id = rel["id"]
+    print("draft", release_id)
 
-    name = "AquaTechLauncher.exe"
-    print(f"upload {name} ({EXE.stat().st_size / 1024 / 1024:.1f} MB)…")
-    data = EXE.read_bytes()
-    _, uploaded = api(
-        "POST",
-        f"https://uploads.github.com/repos/{REPO}/releases/{release_id}/assets?name={name}",
-        data=data,
-        content_type="application/octet-stream",
-    )
-    print("uploaded", uploaded.get("browser_download_url"))
+    for path in FILES:
+        print(f"upload {path.name} ({path.stat().st_size / 1024 / 1024:.2f} MB)…")
+        api(
+            "POST",
+            f"https://uploads.github.com/repos/{REPO}/releases/{release_id}/assets?name={path.name}",
+            data=path.read_bytes(),
+            content_type="application/octet-stream",
+        )
 
     _, published = api(
         "PATCH",
         f"https://api.github.com/repos/{REPO}/releases/{release_id}",
-        data=json.dumps(
-            {
-                "draft": False,
-                "make_latest": "true",
-                "name": "AquaTech Launcher 2.9.1",
-                "body": body,
-            }
-        ).encode(),
+        data=json.dumps({"draft": False, "make_latest": "true"}).encode(),
         content_type="application/json",
     )
     print("published", published.get("html_url"))
-    print(f"https://github.com/{REPO}/releases/download/{TAG}/{name}")
+    print(f"https://github.com/{REPO}/releases/download/{TAG}/AquaTech.exe")
 
 
 if __name__ == "__main__":

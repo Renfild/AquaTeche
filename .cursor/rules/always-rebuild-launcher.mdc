@@ -1,31 +1,43 @@
 ---
-description: Always rebuild AquaTechLauncher after pack/mod/launcher updates
+description: Always rebuild AquaTech launcher bootstrap + payload after updates
 alwaysApply: true
 ---
 
 # Always rebuild the launcher after updates
 
-Whenever you finish an AquaTech update that players/clients should get — mods, kubejs, configs, launcher code, icons, sync logic, or `publish_client_pack` — **always rebuild and deploy the launcher before ending the task**.
+Whenever you finish an AquaTech update that players/clients should get — mods, kubejs, configs, launcher code, icons, sync logic, or `publish_client_pack` — **rebuild the LoliLand-style client** before ending.
 
-## Required steps (do not skip)
+## Architecture
 
-1. If pack content changed: run `python tools/publish_client_pack.py` (or at least sync jars + `manifest.json` into `dist/AquaTech-Client` and `dist/releases/AquaTech-Client`).
-2. Rebuild the **onefile** exe (LoliLand-style: one downloadable `.exe`):
+- **`AquaTech.exe`** (~5 MB Go bootstrap) — what the website links to (like LoliLand.exe)
+- **`AquaTechLauncher.zip`** (onedir) — downloaded by bootstrap into `%LOCALAPPDATA%\AquaTech\app`
+- **`docs/bootstrap.json`** — version + zip URL (bootstrap reads from GitHub raw `main`)
+
+## Required steps
+
+1. Pack content: `python tools/publish_client_pack.py` if needed.
+2. Rebuild onedir payload:
    ```powershell
    python -m PyInstaller --noconfirm --clean AquaTechLauncher.spec
-   Copy-Item dist\AquaTechLauncher.exe dist\releases\AquaTechLauncher.exe -Force
+   Remove-Item dist\releases\AquaTechLauncher -Recurse -Force -ErrorAction SilentlyContinue
+   Copy-Item dist\AquaTechLauncher dist\releases\AquaTechLauncher -Recurse -Force
+   python -c "import zipfile,pathlib; s=pathlib.Path('dist/releases/AquaTechLauncher'); d=pathlib.Path('dist/releases/AquaTechLauncher.zip');
+   d.unlink(missing_ok=True); z=zipfile.ZipFile(d,'w',zipfile.ZIP_DEFLATED);
+   [z.write(p,p.relative_to(s).as_posix()) for p in s.rglob('*') if p.is_file()]; z.close()"
    ```
-3. Confirm `dist\releases\AquaTechLauncher.exe` has a fresh timestamp.
-4. Upload to GitHub Releases for the site button (immutable releases → draft → upload → publish):
+3. Rebuild bootstrap (portable Go under `tools/_go` if needed):
+   ```powershell
+   $env:CGO_ENABLED=0
+   & tools\_go\bin\go.exe build -C bootstrap -ldflags="-H windowsgui -s -w" -o dist\releases\AquaTech.exe .
+   ```
+4. Bump version in `tools/upload_launcher_release.py` + `docs/bootstrap.json`, then:
    ```powershell
    python tools/upload_launcher_release.py
    ```
-   Then point `docs/index.html` download href at the new tag’s `AquaTechLauncher.exe` if the tag changed.
-5. Tell the user the launcher was rebuilt and the download URL.
+5. Update site download href to the new `AquaTech.exe` release URL and push `main`.
 
 ## Do not
 
-- End a client-facing update with only source/`server/mods` changes and an old exe.
-- Assume a cached PyInstaller build is enough — use `--clean` when unsure.
-- Ship only a ZIP when the site promises a single `.exe` download.
-- Embed `.gh_token` or secrets into the PyInstaller datas.
+- Ship only the fat 60MB PyInstaller exe as the website download.
+- Embed `.gh_token` into PyInstaller datas.
+- Point bootstrap at an immutable empty release tag without assets.

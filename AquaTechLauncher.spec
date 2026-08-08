@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# onefile: one .exe download like LoliLand (friends unpack nothing)
+# onedir payload for AquaTech.exe bootstrap (extracted to %LOCALAPPDATA%\AquaTech\app)
 
 a = Analysis(
     ['tools\\aquatech_launcher.py'],
@@ -35,9 +35,8 @@ pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.datas,
     [],
+    exclude_binaries=True,
     name='AquaTechLauncher',
     debug=False,
     bootloader_ignore_signals=False,
@@ -50,4 +49,11 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon='tools\\aquatech.ico',
+)
+
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.datas,
+    name='AquaTechLauncher',
 )

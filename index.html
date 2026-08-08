@@ -3,43 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AquaTech 1.20.1 — Minecraft Океанический Скайблок & Квантовая Индустрия</title>
-  <meta name="description" content="Официальный сайт сервера AquaTech Minecraft 1.20.1 (Forge + Mohist). Океанический выживание на плоту 4х4, 12 удочек StarCatcher, авторыболовы, кейсы, ядерная энергетика и квантовый эндгейм!">
+  <title>AquaTech 1.20.1 — Официальный Игровой Портал (Minecraft Forge + Mohist)</title>
+  <meta name="description" content="Официальный сайт и донат-магазин сервера AquaTech Minecraft 1.20.1. Океанический скайблок, 12 удочек StarCatcher, рулетка кейсов, донат привилегии и авторыболовы!">
   
-  <!-- Fonts: Minecraft-style Press Start 2P + Modern Outfit & Inter -->
+  <!-- Google Fonts: Minecraft-style Press Start 2P + Modern Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     /* ==========================================================================
-       AQUATECH MINECRAFT AQUA DESIGN SYSTEM
-       - Underwater Bioluminescent Deep Sea Palette (#050b14 / #071322 / #00d2ff)
-       - Pixel-art Minecraft GUI Slots & Tooltips
-       - CSS Animated Water Bubbles & Caustic Light Rays
-       - Interactive 12 StarCatcher Rods, Case Opening, Quests & Leaderboard
+       LOLILAND & AQUATECH DESIGN SYSTEM
+       - Bioluminescent Ocean Dark Theme (#030712 / #0b192c / #00f2fe)
+       - LoliLand Glassmorphism Cards, Neon Borders & Micro-animations
+       - Minecraft Pixel-Art GUI Slots, Roulette Reel & Rarity Tooltips
        ========================================================================== */
     
     :root {
-      /* Colors */
-      --bg-ocean-deep: #050b14;
-      --bg-ocean-card: rgba(10, 25, 47, 0.7);
-      --bg-ocean-slot: #1e293b;
+      /* Theme Palette */
+      --bg-dark: #030712;
+      --bg-card: rgba(11, 25, 44, 0.75);
+      --bg-card-hover: rgba(15, 34, 60, 0.9);
+      --bg-slot: #0f172a;
       
-      --aqua-glow: #00f2fe;
-      --cyan-bright: #38bdf8;
-      --violet-neon: #818cf8;
-      --emerald-prismarine: #10b981;
-      --gold-minecraft: #ffaa00;
-      --red-redstone: #ff4757;
+      --color-aqua: #00f2fe;
+      --color-cyan: #38bdf8;
+      --color-violet: #a855f7;
+      --color-gold: #ffaa00;
+      --color-emerald: #10b981;
+      --color-red: #ff4757;
       
-      /* Minecraft UI Gradients */
+      /* Gradients */
       --grad-aqua-brand: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-      --grad-gold-chest: linear-gradient(135deg, #ffe066 0%, #f59e0b 100%);
-      --grad-dark-slot: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+      --grad-loliland-gold: linear-gradient(135deg, #ffe066 0%, #f59e0b 100%);
+      --grad-violet-neon: linear-gradient(135deg, #c084fc 0%, #7e22ce 100%);
+      --grad-dark-glass: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(7, 14, 27, 0.95) 100%);
       
-      /* Minecraft Rarity Colors */
-      --rarity-common: #ffffff;
+      /* Rarity Glow Colors */
+      --rarity-common: #94a3b8;
       --rarity-uncommon: #55ff55;
       --rarity-rare: #55ffff;
       --rarity-epic: #ff55ff;
@@ -51,13 +52,14 @@
       --font-heading: 'Outfit', sans-serif;
       --font-body: 'Inter', sans-serif;
       
-      /* Shadows & Glows */
-      --glow-aqua: 0 0 25px rgba(0, 242, 254, 0.4);
-      --glow-gold: 0 0 25px rgba(255, 170, 0, 0.4);
+      /* Glow Effects */
+      --glow-aqua: 0 0 25px rgba(0, 242, 254, 0.45);
+      --glow-gold: 0 0 25px rgba(255, 170, 0, 0.45);
+      --glow-violet: 0 0 25px rgba(168, 85, 247, 0.45);
       
-      --radius-sm: 6px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
       --radius-full: 9999px;
       
       --transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -72,13 +74,13 @@
 
     body {
       font-family: var(--font-body);
-      background-color: var(--bg-ocean-deep);
-      color: #e2e8f0;
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
       overflow-x: hidden;
       line-height: 1.6;
     }
 
-    /* Animated Underwater Bubbles */
+    /* Ambient Underwater Background & Floating Bubbles */
     .ocean-bg {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -89,1189 +91,1063 @@
 
     .bubble {
       position: absolute;
-      bottom: -40px;
+      bottom: -50px;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(0, 242, 254, 0.2));
       border: 1px solid rgba(255, 255, 255, 0.4);
       border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.5);
       animation: riseBubble linear infinite;
     }
 
     @keyframes riseBubble {
-      0% { transform: translateY(0) scale(0.8) translateX(0); opacity: 0.2; }
-      50% { transform: translateY(-50vh) scale(1.1) translateX(20px); opacity: 0.8; }
-      100% { transform: translateY(-110vh) scale(0.9) translateX(-20px); opacity: 0; }
+      0% { transform: translateY(0) scale(0.8); opacity: 0; }
+      20% { opacity: 0.7; }
+      100% { transform: translateY(-115vh) scale(1.3); opacity: 0; }
     }
 
-    /* Underwater Caustic Light Rays Overlay */
-    .caustics {
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 1000px;
-      background: radial-gradient(ellipse at 50% -10%, rgba(0, 242, 254, 0.18) 0%, rgba(5, 11, 20, 0) 75%);
-      pointer-events: none;
-    }
-
-    /* Navigation Bar */
-    header.mc-navbar {
+    /* LoliLand Header & Navigation Bar */
+    header.loliland-navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 16px 6%;
+      background: rgba(3, 7, 18, 0.85);
       backdrop-filter: blur(16px);
-      background: rgba(5, 11, 20, 0.85);
-      border-bottom: 2px solid rgba(0, 242, 254, 0.2);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      padding: 14px 6%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
     }
 
-    .brand-group {
+    .brand-logo {
       display: flex;
       align-items: center;
       gap: 14px;
       text-decoration: none;
+      color: #fff;
     }
 
     .brand-icon-box {
-      width: 44px; height: 44px;
+      width: 44px;
+      height: 44px;
       background: var(--grad-aqua-brand);
-      border: 2px solid #ffffff;
-      box-shadow: var(--glow-aqua);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    .brand-icon-box svg { width: 24px; height: 24px; fill: #fff; }
-
-    .brand-title {
-      font-family: var(--font-heading);
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      color: #fff;
+      border-radius: var(--radius-md);
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--glow-aqua);
     }
 
-    .brand-title span {
+    .brand-icon-box svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+
+    .brand-text {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #fff 30%, var(--color-aqua) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 10px;
       font-family: var(--font-mc);
-      font-size: 8px;
-      color: var(--aqua-glow);
-      letter-spacing: 1px;
+      color: var(--color-gold);
+      -webkit-text-fill-color: var(--color-gold);
       margin-top: 2px;
     }
 
-    .nav-items {
+    /* Tab Links */
+    .nav-tabs {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 8px;
       list-style: none;
     }
 
-    .nav-items a {
-      text-decoration: none;
-      color: #cbd5e1;
+    .nav-tab-btn {
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      color: #94a3b8;
+      font-family: var(--font-heading);
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
       transition: var(--transition);
-    }
-
-    .nav-items a:hover {
-      color: var(--aqua-glow);
-      text-shadow: 0 0 10px var(--aqua-glow);
-    }
-
-    .online-box {
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid var(--emerald-prismarine);
-      padding: 8px 16px;
-      border-radius: var(--radius-full);
-      font-family: var(--font-mc);
-      font-size: 10px;
-      color: var(--emerald-prismarine);
+      gap: 6px;
     }
 
-    .online-dot {
-      width: 8px; height: 8px;
-      background: var(--emerald-prismarine);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--emerald-prismarine);
-      animation: pulse 1.6s infinite;
+    .nav-tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 242, 254, 0.3);
     }
 
-    @keyframes pulse {
-      0% { transform: scale(0.9); opacity: 0.6; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.6; }
-    }
-
-    /* Hero Section */
-    .hero-section {
-      position: relative;
-      z-index: 1;
-      padding: 170px 6% 100px;
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .mc-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid var(--aqua-glow);
-      padding: 6px 14px;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mc);
-      font-size: 9px;
-      color: var(--aqua-glow);
-      margin-bottom: 20px;
+    .nav-tab-btn.active {
+      color: #fff;
+      background: var(--grad-aqua-brand);
       box-shadow: var(--glow-aqua);
     }
 
-    .hero-heading {
-      font-family: var(--font-heading);
-      font-size: 58px;
-      font-weight: 900;
-      line-height: 1.08;
-      letter-spacing: -1.5px;
-      margin-bottom: 24px;
+    .nav-right-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
-    .hero-heading span {
+    /* Online Indicator Pill */
+    .online-badge {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mc);
+      font-size: 10px;
+      color: #34d399;
+    }
+
+    .online-dot {
+      width: 8px;
+      height: 8px;
+      background: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #34d399;
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Account / Cart Modal Button */
+    .user-account-btn {
+      background: var(--grad-loliland-gold);
+      color: #000;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--glow-gold);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-account-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(255, 170, 0, 0.7);
+    }
+
+    /* SPA Page Container Switcher */
+    .page-view {
+      display: none;
+      padding-top: 100px;
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .page-view.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Layout Container */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* LoliLand Section Headers */
+    .section-header-center {
+      text-align: center;
+      max-width: 750px;
+      margin: 0 auto 50px;
+    }
+
+    .section-badge {
+      font-family: var(--font-mc);
+      font-size: 10px;
+      color: var(--color-aqua);
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: #94a3b8;
+      font-size: 16px;
+    }
+
+    /* Hero Section (Main Page) */
+    .hero-banner {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+      padding: 40px 0 80px;
+    }
+
+    .hero-badge-mc {
+      font-family: var(--font-mc);
+      font-size: 10px;
+      color: var(--color-gold);
+      background: rgba(255, 170, 0, 0.12);
+      border: 1px solid rgba(255, 170, 0, 0.3);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
       background: var(--grad-aqua-brand);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-text {
-      font-size: 16px;
+    .hero-description {
+      font-size: 17px;
       color: #94a3b8;
       line-height: 1.7;
       margin-bottom: 36px;
     }
 
-    .btn-group {
+    .hero-actions {
       display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    /* Minecraft Styled Buttons */
-    .mc-btn {
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-family: var(--font-heading);
-      font-size: 15px;
-      font-weight: 800;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: var(--transition);
-      border: 2px solid transparent;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .mc-btn-primary {
-      background: var(--grad-aqua-brand);
-      color: #fff;
-      border-color: #ffffff;
-      box-shadow: var(--glow-aqua);
-    }
-
-    .mc-btn-primary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 0 35px var(--aqua-glow);
-    }
-
-    .download-btn-main {
-      padding: 12px 24px;
-      gap: 14px;
-    }
-    .btn-text-wrap {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-    .btn-main-title {
-      font-size: 16px;
-      font-weight: 900;
-      line-height: 1.2;
-    }
-    .btn-sub-title {
-      font-size: 10px;
-      font-weight: 500;
-      opacity: 0.85;
-      text-transform: none;
-      letter-spacing: 0;
-    }
-    .btn-icon {
-      font-size: 24px;
-    }
-
-    .mc-btn-gold {
-      background: var(--grad-gold-chest);
-      color: #1e1b4b;
-      border-color: #fff;
-      box-shadow: var(--glow-gold);
-    }
-
-    .mc-btn-gold:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 0 35px var(--gold-minecraft);
-    }
-
-    /* Server IP Copy Box */
-    .server-ip-card {
-      margin-top: 36px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 2px solid rgba(0, 242, 254, 0.3);
-      border-radius: var(--radius-md);
-      padding: 16px 24px;
-      display: inline-flex;
       align-items: center;
       gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .btn-download-primary {
+      background: var(--grad-aqua-brand);
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 36px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 17px;
+      box-shadow: var(--glow-aqua);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-download-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.8);
+    }
+
+    .ip-copy-box {
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px dashed rgba(0, 242, 254, 0.4);
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       cursor: pointer;
       transition: var(--transition);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      max-width: 480px;
     }
 
-    .server-ip-card:hover {
-      border-color: var(--aqua-glow);
-      box-shadow: var(--glow-aqua);
+    .ip-copy-box:hover {
+      border-color: var(--color-aqua);
+      background: rgba(15, 23, 42, 0.95);
     }
 
-    .ip-address {
+    .ip-val {
       font-family: var(--font-mc);
-      font-size: 14px;
-      color: var(--aqua-glow);
-    }
-
-    .ip-sub {
       font-size: 12px;
-      color: #64748b;
+      color: var(--color-gold);
     }
 
-    .copy-badge {
-      background: rgba(0, 242, 254, 0.15);
-      color: var(--aqua-glow);
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-family: var(--font-mc);
-      font-size: 9px;
-      border: 1px solid var(--aqua-glow);
-    }
-
-    /* Minecraft GUI Inventory Mockup Card */
-    .mc-gui-card {
-      background: rgba(15, 23, 42, 0.85);
-      border: 3px solid #334155;
+    /* 3D Minecraft Inventory Card */
+    .mc-gui-container {
+      background: var(--grad-dark-glass);
+      border: 2px solid rgba(0, 242, 254, 0.3);
       border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(20px);
+      padding: 30px;
+      box-shadow: var(--glow-aqua);
       position: relative;
     }
 
-    .gui-header {
+    .gui-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 24px;
       font-family: var(--font-mc);
       font-size: 11px;
-      color: var(--gold-minecraft);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 2px solid #334155;
-      padding-bottom: 12px;
+      color: var(--color-aqua);
     }
 
-    .mc-slots-grid {
+    .slots-grid-9 {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
-    /* Minecraft Item Slot Style */
-    .mc-slot {
-      width: 100%;
-      aspect-ratio: 1;
-      background: #0f172a;
+    .mc-slot-box {
+      background: var(--bg-slot);
       border: 2px solid #334155;
-      border-right-color: #1e293b;
-      border-bottom-color: #1e293b;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
+      height: 90px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
-      cursor: pointer;
       transition: var(--transition);
+      cursor: pointer;
     }
 
-    .mc-slot:hover {
-      border-color: var(--aqua-glow);
-      background: rgba(0, 242, 254, 0.1);
+    .mc-slot-box:hover {
+      border-color: var(--color-aqua);
       transform: scale(1.05);
+      box-shadow: var(--glow-aqua);
     }
 
-    .mc-slot.active {
-      border-color: var(--gold-minecraft);
-      box-shadow: 0 0 15px rgba(255, 170, 0, 0.4);
+    .slot-icon-big {
+      font-size: 28px;
     }
 
-    .slot-icon {
-      font-size: 24px;
-    }
-
-    .slot-count {
+    .slot-count-tag {
       position: absolute;
-      bottom: 4px;
-      right: 6px;
+      bottom: 6px;
+      right: 8px;
       font-family: var(--font-mc);
       font-size: 10px;
       color: #fff;
-      text-shadow: 2px 2px 0 #000;
     }
 
-    /* Custom Minecraft Tooltip Container */
-    .mc-tooltip {
-      background: rgba(16, 0, 16, 0.95);
-      border: 2px solid #280070;
-      border-radius: 6px;
-      padding: 12px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-      font-size: 13px;
-    }
-
-    .mc-tooltip-title {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      color: var(--rarity-epic);
-      margin-bottom: 4px;
-    }
-
-    .mc-tooltip-lore {
-      color: #a855f7;
-      font-size: 12px;
-      font-style: italic;
-    }
-
-    /* Section Wrapper */
-    .section-wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 100px 6%;
-    }
-
-    .sec-title {
-      text-align: center;
+    /* ==========================================================================
+       PAGE 2: LOLILAND DONATE STORE (ДОНАТ И ПРИВИЛЕГИИ)
+       ========================================================================== */
+    .donate-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
       margin-bottom: 60px;
     }
 
-    .sec-title h2 {
-      font-family: var(--font-heading);
-      font-size: 42px;
-      font-weight: 900;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-    }
-
-    .sec-title p {
-      color: #94a3b8;
-      font-size: 16px;
-      max-width: 650px;
-      margin: 0 auto;
-    }
-
-    /* 12 StarCatcher Rods Interactive Viewer */
-    .rods-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .rod-card {
-      background: rgba(15, 23, 42, 0.7);
-      border: 2px solid #334155;
-      border-radius: var(--radius-md);
-      padding: 20px;
+    .privilege-card {
+      background: rgba(11, 25, 44, 0.85);
+      border: 2px solid #1e293b;
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      justify-content: space-between;
       position: relative;
       transition: var(--transition);
-      cursor: pointer;
+      overflow: hidden;
     }
 
-    .rod-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--aqua-glow);
-      box-shadow: var(--glow-aqua);
+    .privilege-card:hover {
+      transform: translateY(-8px);
     }
 
-    .rod-tier-badge {
+    .privilege-card.vip { border-color: var(--rarity-uncommon); }
+    .privilege-card.vip:hover { box-shadow: 0 0 30px rgba(85, 255, 85, 0.3); }
+
+    .privilege-card.premium { border-color: var(--color-cyan); }
+    .privilege-card.premium:hover { box-shadow: var(--glow-aqua); }
+
+    .privilege-card.deluxe { border-color: var(--color-violet); }
+    .privilege-card.deluxe:hover { box-shadow: var(--glow-violet); }
+
+    .privilege-card.ultimate { border-color: var(--color-gold); }
+    .privilege-card.ultimate:hover { box-shadow: var(--glow-gold); }
+
+    .priv-badge {
       font-family: var(--font-mc);
-      font-size: 8px;
-      padding: 4px 8px;
-      border-radius: 4px;
+      font-size: 9px;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
       display: inline-block;
+      margin-bottom: 16px;
       width: fit-content;
     }
 
-    .tier-1 { background: rgba(255, 255, 255, 0.1); color: var(--rarity-common); }
-    .tier-2 { background: rgba(85, 255, 85, 0.15); color: var(--rarity-uncommon); }
-    .tier-3 { background: rgba(85, 255, 255, 0.15); color: var(--rarity-rare); }
-    .tier-4 { background: rgba(255, 85, 255, 0.15); color: var(--rarity-epic); }
-    .tier-5 { background: rgba(255, 170, 0, 0.15); color: var(--rarity-legendary); }
-    .tier-6 { background: rgba(0, 255, 255, 0.2); color: var(--rarity-cosmic); }
+    .priv-badge.vip { background: rgba(85, 255, 85, 0.15); color: var(--rarity-uncommon); }
+    .priv-badge.premium { background: rgba(56, 189, 248, 0.15); color: var(--color-cyan); }
+    .priv-badge.deluxe { background: rgba(168, 85, 247, 0.15); color: var(--color-violet); }
+    .priv-badge.ultimate { background: rgba(255, 170, 0, 0.15); color: var(--color-gold); }
 
-    .rod-card h3 {
+    .priv-title {
       font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    .rod-drops {
-      font-size: 12px;
-      color: #94a3b8;
-    }
-
-    .rod-drops span {
-      color: var(--aqua-glow);
-      font-weight: 600;
-    }
-
-    /* Interactive Act Progression Roadmap */
-    .act-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-    }
-
-    .act-tab-btn {
-      padding: 12px 22px;
-      border-radius: var(--radius-full);
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid #334155;
-      color: #94a3b8;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .act-tab-btn:hover {
-      color: #fff;
-      border-color: var(--aqua-glow);
-    }
-
-    .act-tab-btn.active {
-      background: var(--grad-aqua-brand);
-      color: #fff;
-      border-color: transparent;
-      box-shadow: var(--glow-aqua);
-    }
-
-    .act-detail-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 2px solid #334155;
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
-    }
-
-    .act-detail-title {
-      font-family: var(--font-heading);
-      font-size: 32px;
+      font-size: 26px;
       font-weight: 900;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
 
-    .act-checklist {
+    .priv-price {
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .priv-price span {
+      font-size: 14px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .priv-features {
       list-style: none;
+      margin-bottom: 30px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-    }
-
-    .act-checklist li {
-      display: flex;
-      align-items: flex-start;
       gap: 12px;
-      font-size: 15px;
+      font-size: 14px;
       color: #cbd5e1;
     }
 
-    .act-checklist li::before {
-      content: "⚓";
-      color: var(--aqua-glow);
+    .priv-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    /* Case Opening Simulator */
-    .cases-container {
+    .priv-features li::before {
+      content: '✓';
+      color: var(--color-emerald);
+      font-weight: 900;
+    }
+
+    .btn-buy-priv {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      border: none;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: var(--transition);
+      color: #fff;
+    }
+
+    .btn-buy-priv.vip { background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); }
+    .btn-buy-priv.premium { background: var(--grad-aqua-brand); }
+    .btn-buy-priv.deluxe { background: var(--grad-violet-neon); }
+    .btn-buy-priv.ultimate { background: var(--grad-loliland-gold); color: #000; }
+
+    /* ==========================================================================
+       PAGE 3: LOLILAND CASE ROULETTE SIMULATOR (СИМУЛЯТОР РУЛЕТКИ КЕЙСОВ)
+       ========================================================================== */
+    .cases-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-bottom: 60px;
     }
 
     .case-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 2px solid #334155;
+      background: rgba(11, 25, 44, 0.85);
+      border: 2px solid #1e293b;
       border-radius: var(--radius-lg);
-      padding: 32px;
+      padding: 30px 20px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
       transition: var(--transition);
+      cursor: pointer;
       position: relative;
     }
 
     .case-card:hover {
       transform: translateY(-8px);
-      border-color: var(--gold-minecraft);
-      box-shadow: var(--glow-gold);
+      border-color: var(--color-aqua);
+      box-shadow: var(--glow-aqua);
     }
 
-    .case-chest-icon {
+    .case-icon-box {
       font-size: 64px;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-      animation: chestBounce 3s ease-in-out infinite alternate;
+      margin-bottom: 16px;
+      animation: floatChest 3s ease-in-out infinite;
     }
 
-    @keyframes chestBounce {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
+    @keyframes floatChest {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
-    .case-title {
+    .case-name {
       font-family: var(--font-heading);
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 800;
+      margin-bottom: 8px;
     }
 
     .case-price {
       font-family: var(--font-mc);
-      font-size: 18px;
-      color: var(--gold-minecraft);
+      font-size: 11px;
+      color: var(--color-gold);
+      margin-bottom: 20px;
     }
 
-    /* Leaderboard Table */
-    .leaderboard-table {
+    .btn-open-case {
       width: 100%;
-      border-collapse: collapse;
-      background: rgba(15, 23, 42, 0.7);
+      padding: 12px;
       border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid #334155;
-    }
-
-    .leaderboard-table th, .leaderboard-table td {
-      padding: 16px 24px;
-      text-align: left;
-      border-bottom: 1px solid #334155;
-    }
-
-    .leaderboard-table th {
-      background: #0f172a;
-      font-family: var(--font-mc);
-      font-size: 10px;
-      color: var(--aqua-glow);
-    }
-
-    .rank-num {
-      font-family: var(--font-mc);
-      font-size: 12px;
-      color: var(--gold-minecraft);
-    }
-
-    /* FAQ Accordion */
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid #334155;
-      border-radius: var(--radius-md);
-      padding: 20px 24px;
+      background: var(--grad-aqua-brand);
+      color: #fff;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      border: none;
       cursor: pointer;
+      box-shadow: var(--glow-aqua);
       transition: var(--transition);
     }
 
-    .faq-item:hover {
-      border-color: var(--aqua-glow);
-    }
-
-    .faq-question {
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .faq-answer {
-      font-size: 14px;
-      color: #94a3b8;
-      margin-top: 12px;
+    /* LoliLand Case Roulette Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(3, 7, 18, 0.92);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
       display: none;
-      line-height: 1.6;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
-    .faq-item.open .faq-answer {
-      display: block;
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .roulette-modal-card {
+      background: var(--grad-dark-glass);
+      border: 2px solid var(--color-aqua);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 850px;
+      padding: 40px;
+      box-shadow: var(--glow-aqua);
+      position: relative;
+      text-align: center;
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .close-modal-btn:hover { color: #fff; }
+
+    /* Horizontal Spinning Reel */
+    .roulette-container {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      background: #091322;
+      border: 3px solid #1e293b;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: 30px 0;
+    }
+
+    .roulette-pointer {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: var(--color-gold);
+      box-shadow: 0 0 15px var(--color-gold);
+      z-index: 10;
+    }
+
+    .roulette-reel {
+      display: flex;
+      gap: 12px;
+      position: absolute;
+      left: 0;
+      top: 15px;
+      transition: transform 5s cubic-bezier(0.1, 1, 0.1, 1);
+    }
+
+    .roulette-item {
+      min-width: 110px;
+      height: 110px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 2px solid #334155;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+
+    }
+
+    .roulette-item.common { border-color: var(--rarity-common); }
+    .roulette-item.rare { border-color: var(--rarity-rare); box-shadow: inset 0 0 15px rgba(85, 255, 255, 0.2); }
+    .roulette-item.legendary { border-color: var(--rarity-legendary); box-shadow: inset 0 0 15px rgba(255, 170, 0, 0.3); }
+    .roulette-item.cosmic { border-color: var(--rarity-cosmic); box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.5); }
+
+    .roulette-item-icon { font-size: 32px; }
+    .roulette-item-name { font-size: 11px; font-weight: 700; }
+
+    /* Win Prize Card Overlay */
+    .prize-result-box {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid var(--color-aqua);
+      border-radius: var(--radius-md);
+      display: none;
     }
 
     /* Footer */
-    footer.mc-footer {
-      background: rgba(5, 11, 20, 0.95);
-      border-top: 2px solid rgba(0, 242, 254, 0.2);
-      padding: 60px 6% 30px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .footer-inner {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 40px;
+    footer {
+      background: #020617;
+      border-top: 1px solid rgba(0, 242, 254, 0.2);
+      padding: 40px 6%;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Underwater Animated Bubbles Container -->
-  <div class="ocean-bg" id="bubbleContainer"></div>
-  <div class="caustics"></div>
+  <!-- Animated Underwater Bubbles -->
+  <div class="ocean-bg" id="bubblesContainer"></div>
 
-  <!-- Navigation Bar -->
-  <header class="mc-navbar">
-    <a href="#" class="brand-group">
+  <!-- LoliLand Navbar -->
+  <header class="loliland-navbar">
+    <a href="#" onclick="showPage('home')" class="brand-logo">
       <div class="brand-icon-box">
         <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
       </div>
-      <div class="brand-title">
+      <div class="brand-text">
         AquaTech
-        <span>FORGE 1.20.1</span>
+        <span>FORGE 1.20.1 MOHIST</span>
       </div>
     </a>
 
-    <ul class="nav-items">
-      <li><a href="#rods">Удочки StarCatcher</a></li>
-      <li><a href="#roadmap">Роадмап (6 Актов)</a></li>
-      <li><a href="#cases">Кейсы & Донат</a></li>
-      <li><a href="#top">Топ Игроков</a></li>
-      <li><a href="#faq">FAQ</a></li>
+    <ul class="nav-tabs">
+      <li><a href="#home" onclick="showPage('home')" class="nav-tab-btn active" id="tab-home">🏠 Главная</a></li>
+      <li><a href="#donate" onclick="showPage('donate')" class="nav-tab-btn" id="tab-donate">🛍️ Донат Магазин</a></li>
+      <li><a href="#cases" onclick="showPage('cases')" class="nav-tab-btn" id="tab-cases">🎰 Рулетка Кейсов</a></li>
+      <li><a href="#rods" onclick="showPage('rods')" class="nav-tab-btn" id="tab-rods">🎣 Удочки StarCatcher</a></li>
+      <li><a href="#top" onclick="showPage('top')" class="nav-tab-btn" id="tab-top">🏆 Топ Игроков</a></li>
     </ul>
 
-    <div class="online-box">
-      <div class="online-dot"></div>
-      <span>42 / 100 ONLINE</span>
+    <div class="nav-right-group">
+      <div class="online-badge">
+        <div class="online-dot"></div>
+        <span id="onlineCountText">ONLINE: 42 / 100</span>
+      </div>
+      <button class="user-account-btn" onclick="openCheckoutModal('Баланс: 1000 AquaCoins')">
+        💳 Личный Кабинет
+      </button>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div>
-      <div class="mc-badge">⚡ FORGE 1.20.1 + MOHIST HYBRID</div>
-      <h1 class="hero-heading">Океанический Скайблок <span>& Квантовый Эндгейм</span></h1>
-      <p class="hero-text">
-        Спавн на плоту 4×4 среди океана. Вся выработка ресурсов строится на ступенчатой эволюции <b>12 удочек StarCatcher</b>, авторыболовах <code>aquatech_ui</code>, мультиблочных доменных печах и ядерных реакторах!
-      </p>
-
-      <div class="btn-group">
-        <a href="https://github.com/Renfild/AquaTeche/releases/download/launcher-2.9.1/AquaTechLauncher.exe" class="mc-btn mc-btn-primary download-btn-main">
-          <span class="btn-icon">⚡</span>
-          <div class="btn-text-wrap">
-            <span class="btn-main-title">СКАЧАТЬ ЛАУНЧЕР</span>
-            <span class="btn-sub-title">Windows · .EXE · скачал и запустил</span>
-          </div>
-        </a>
-        <a href="#start-guide" class="mc-btn mc-btn-gold">Как Начать Играть</a>
-      </div>
-
-      <div class="server-ip-card" onclick="copyIP()">
+  <!-- ==========================================================================
+       PAGE 1: HOME (ГЛАВНАЯ СТРАНИЦА)
+       ========================================================================== -->
+  <div class="page-view active" id="page-home">
+    <div class="container">
+      <div class="hero-banner">
         <div>
-          <div class="ip-sub">Нажми, чтобы скопировать IP адрес:</div>
-          <div class="ip-address" id="serverIP">katherine-hydro.tun.ply.gg:31279</div>
-        </div>
-        <div class="copy-badge" id="copyText">COPY IP</div>
-      </div>
-    </div>
+          <div class="hero-badge-mc">⚡ MINECRAFT 1.20.1 · HYBRID SERVER</div>
+          <h1 class="hero-title">Океанический Скайблок <span>& Квантовый Эндгейм</span></h1>
+          <p class="hero-description">
+            Официальный сервер AquaTech! Спавн на плоту 4×4 посреди океана. Прогрессия <b>12 удочек StarCatcher</b>, авторыболовы <code>aquatech_ui</code>, доменные печи, кейсы и ядерные реакторы!
+          </p>
 
-    <!-- Minecraft GUI Inventory Display Card -->
-    <div class="mc-gui-card">
-      <div class="gui-header">
-        <span>AQUATECH AUTO-FISHER [GUI]</span>
-        <span style="color: var(--emerald-prismarine);">● ONLINE</span>
-      </div>
+          <div class="hero-actions">
+            <a href="https://github.com/Renfild/AquaTeche/releases/download/client-2.9.2/AquaTech.exe" class="btn-download-primary">
+              <span style="font-size: 24px;">⚡</span>
+              <div>
+                <div>СКАЧАТЬ ЛАУНЧЕР</div>
+                <div style="font-size: 11px; opacity: 0.8; font-weight: 500;">Windows · ~5 МБ · как у LoliLand</div>
+              </div>
+            </a>
+          </div>
 
-      <div class="mc-slots-grid">
-        <div class="mc-slot active" title="Удочка Ловца Звёзд">
-          <span class="slot-icon">🎣</span>
-          <span class="slot-count">LV.7</span>
-        </div>
-        <div class="mc-slot">
-          <span class="slot-icon">⚡</span>
-          <span class="slot-count">128</span>
-        </div>
-        <div class="mc-slot">
-          <span class="slot-icon">💎</span>
-          <span class="slot-count">64</span>
-        </div>
-        <div class="mc-slot">
-          <span class="slot-icon">⚛️</span>
-          <span class="slot-count">16</span>
+          <div class="ip-copy-box" onclick="copyIP()">
+            <div>
+              <div style="font-size: 11px; color: #94a3b8;">IP-АДРЕС ДЛЯ ПОДКЛЮЧЕНИЯ:</div>
+              <div class="ip-val" id="ipText">katherine-hydro.tun.ply.gg:31279</div>
+            </div>
+            <div style="font-size: 12px; color: var(--color-aqua); font-weight: 800;">[СКОПИРОВАТЬ]</div>
+          </div>
         </div>
 
-        <div class="mc-slot">
-          <span class="slot-icon">📦</span>
-          <span class="slot-count">32</span>
-        </div>
-        <div class="mc-slot">
-          <span class="slot-icon">🧪</span>
-          <span class="slot-count">64</span>
-        </div>
-        <div class="mc-slot">
-          <span class="slot-icon">🔋</span>
-          <span class="slot-count">100%</span>
-        </div>
-        <div class="mc-slot">
-          <span class="slot-icon">⚙️</span>
-          <span class="slot-count">AE2</span>
-        </div>
-      </div>
+        <!-- 3D GUI Card -->
+        <div class="mc-gui-container">
+          <div class="gui-title-bar">
+            <span>AQUATECH AUTO-FISHER [GUI]</span>
+            <span style="color: var(--color-emerald);">● SERVER SYNC ACTIVE</span>
+          </div>
 
-      <div class="mc-tooltip">
-        <div class="mc-tooltip-title">Удочка Ловца Звёзд (StarCatcher Rod)</div>
-        <div style="color: #94a3b8; font-size: 12px; margin: 4px 0;">Шанс ловли Вольфрама и Хрома: +45%</div>
-        <div class="mc-tooltip-lore">"Легендарная снасть, вылавливающая отис и кристаллы из морской пучины."</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 12 StarCatcher Rods Interactive Viewer -->
-  <section id="rods" class="section-wrap">
-    <div class="sec-title">
-      <h2>12 Удочек StarCatcher</h2>
-      <p>Каждая удочка открывает новый тир ресурсов: от примитивной меди до астероидного адамантия</p>
-    </div>
-
-    <div class="rods-grid">
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-1">TIER 1 • COMMON</span>
-        <h3>Скромная удочка</h3>
-        <p class="rod-drops">Улов: <span>Медь, Олово, Латекс, Торф</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-2">TIER 2 • UNCOMMON</span>
-        <h3>Бамбуковая удочка</h3>
-        <p class="rod-drops">Улов: <span>Железо, Редстоун, Глина, Бамбук</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-2">TIER 3 • UNCOMMON</span>
-        <h3>Старая добрая удочка</h3>
-        <p class="rod-drops">Улов: <span>Стронций, Иттрий, Таллий</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-3">TIER 4 • RARE</span>
-        <h3>Удочка Натуралиста</h3>
-        <p class="rod-drops">Улов: <span>LV-Компоненты, Слизь, Барий</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-3">TIER 5 • RARE</span>
-        <h3>Слизневая удочка</h3>
-        <p class="rod-drops">Улов: <span>Шпинель, Купорос, Каучук</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-4">TIER 6 • EPIC</span>
-        <h3>Ледяная удочка</h3>
-        <p class="rod-drops">Улов: <span>Серебро, Алюминий, Хладагенты</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-4">TIER 7 • EPIC</span>
-        <h3>Удочка Ловца Звёзд</h3>
-        <p class="rod-drops">Улов: <span>Вольфрам, Хром, Золото</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-5">TIER 8 • LEGENDARY</span>
-        <h3>Лазуритовая удочка</h3>
-        <p class="rod-drops">Улов: <span>Минеральные Кристаллы, Топазы</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-5">TIER 9 • LEGENDARY</span>
-        <h3>Обсидиановая удочка</h3>
-        <p class="rod-drops">Улов: <span>Уран, Платина, Сырая Нефть</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-5">TIER 10 • LEGENDARY</span>
-        <h3>Магмовая удочка</h3>
-        <p class="rod-drops">Улов: <span>Незеритовые обломки, Свинец</span></p>
-      </div>
-
-      <div class="rod-card">
-        <span class="rod-tier-badge tier-6">TIER 11 • COSMIC</span>
-        <h3>Светоягодная удочка</h3>
-        <p class="rod-drops">Улов: <span>Полоний, Кадмий, Звезды Незера</span></p>
-      </div>
-
-      <div class="rod-card" style="border-color: var(--aqua-glow); box-shadow: var(--glow-aqua);">
-        <span class="rod-tier-badge tier-6">TIER 12 • ALPHA QUANTUM</span>
-        <h3>Альфа-Удочка</h3>
-        <p class="rod-drops">Улов: <span>Иридий, Осмий, Адамантий</span></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Act Progression Roadmap -->
-  <section id="roadmap" class="section-wrap">
-    <div class="sec-title">
-      <h2>Роадмап развития (6 Актов)</h2>
-      <p>Полный гайд выживания от спавна на плоту 4×4 до построения Генератора Материи</p>
-    </div>
-
-    <div class="act-tabs">
-      <button class="act-tab-btn active" onclick="showAct(1)">Акт 1: Primal Era</button>
-      <button class="act-tab-btn" onclick="showAct(2)">Акт 2: Early LV</button>
-      <button class="act-tab-btn" onclick="showAct(3)">Акт 3: Steam Era</button>
-      <button class="act-tab-btn" onclick="showAct(4)">Акт 4: MV Industrial</button>
-      <button class="act-tab-btn" onclick="showAct(5)">Акт 5: Ядерная Эра</button>
-      <button class="act-tab-btn" onclick="showAct(6)">Акт 6: Квантовый Эндгейм</button>
-    </div>
-
-    <div class="act-detail-card" id="actCard">
-      <div>
-        <div style="font-family: var(--font-mc); font-size: 10px; color: var(--aqua-glow); margin-bottom: 8px;" id="actNumText">АКТ 1 • ЭРА ПРИМИТИВНОГО ВЫЖИВАНИЯ</div>
-        <h3 class="act-detail-title" id="actTitleText">Плот 4×4 & Первичный улов</h3>
-        <ul class="act-checklist" id="actListItems">
-          <li><b>Начало:</b> Спавн на плоту 4×4 на высоте Y190 среди океана.</li>
-          <li><b>Инструмент:</b> Скромная удочка (Humble Rod).</li>
-          <li><b>Добыча:</b> Медь, Олово, Сырой Латекс, Гевея, Торф, Доски и Песок.</li>
-          <li><b>Крафт:</b> Сушилка латекса для резины, Наковальня, Бронза и переход к Бамбуковой удочке.</li>
-        </ul>
-      </div>
-
-      <div style="background: rgba(0,0,0,0.4); border-radius: var(--radius-md); padding: 24px; border: 1px solid #334155;">
-        <h4 style="font-family: var(--font-mc); font-size: 11px; color: var(--gold-minecraft); margin-bottom: 12px;">СОВЕТ ПО РАЗВИТИЮ:</h4>
-        <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;" id="actTipText">
-          Не выбрасывайте глину и песок из улова. Они понадобятся для постройки обожженных кирпичей мультиблочной плавильни во 2-м Акте!
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cases & Donation Store -->
-  <section id="cases" class="section-wrap">
-    <div class="sec-title">
-      <h2>Кейсы и Донат</h2>
-      <p>Выбивай редкие удочки StarCatcher, авторыболовы и руды из кейсов на сервере</p>
-    </div>
-
-    <div class="cases-container">
-      <div class="case-card">
-        <div class="case-chest-icon">🧰</div>
-        <h3 class="case-title">Кейс Новичка</h3>
-        <p style="font-size: 13px; color: #94a3b8;">Содержит Бамбуковую удочку, стаки резины и первичных металлов.</p>
-        <div class="case-price">99 ₽</div>
-        <button class="mc-btn mc-btn-primary" style="width: 100%; justify-content: center;">Открыть Кейс</button>
-      </div>
-
-      <div class="case-card" style="border-color: var(--gold-minecraft);">
-        <div class="case-chest-icon">💎</div>
-        <h3 class="case-title">Индустриальный Кейс</h3>
-        <p style="font-size: 13px; color: #94a3b8;">Шанс выпадения Обсидиановой удочки, авторыболова MV и доменных блоков.</p>
-        <div class="case-price">249 ₽</div>
-        <button class="mc-btn mc-btn-gold" style="width: 100%; justify-content: center;">Открыть Кейс</button>
-      </div>
-
-      <div class="case-card">
-        <div class="case-chest-icon">👑</div>
-        <h3 class="case-title">AQUA VIP Status</h3>
-        <p style="font-size: 13px; color: #94a3b8;">Полный доступ к `/fly`, сохранение инвентаря и х2 скорость авторыболова.</p>
-        <div class="case-price">499 ₽</div>
-        <button class="mc-btn" style="width: 100%; justify-content: center; background: rgba(255,255,255,0.1); color: #fff; border-color: #fff;">Купить VIP</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Top Players Leaderboard -->
-  <section id="top" class="section-wrap">
-    <div class="sec-title">
-      <h2>Топ Игроков Сервера</h2>
-      <p>Лидеры по выловленным ресурсам и выработке EU энергии</p>
-    </div>
-
-    <table class="leaderboard-table">
-      <thead>
-        <tr>
-          <th>МЕСТО</th>
-          <th>ИГРОК</th>
-          <th>УДОЧКА</th>
-          <th>ВЫЛОВЛЕНО ПРЕДМЕТОВ</th>
-          <th>СТАТУС</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="rank-num">#1</td>
-          <td><b>Renfild_Aqua</b></td>
-          <td><span style="color: var(--rarity-cosmic);">Альфа-Удочка</span></td>
-          <td>1,420,500</td>
-          <td><span style="color: var(--emerald-prismarine);">● ONLINE</span></td>
-        </tr>
-        <tr>
-          <td class="rank-num">#2</td>
-          <td><b>StarCatcher_Pro</b></td>
-          <td><span style="color: var(--rarity-legendary);">Магмовая удочка</span></td>
-          <td>980,200</td>
-          <td><span style="color: var(--emerald-prismarine);">● ONLINE</span></td>
-        </tr>
-        <tr>
-          <td class="rank-num">#3</td>
-          <td><b>SkyFisher_99</b></td>
-          <td><span style="color: var(--rarity-legendary);">Обсидиановая удочка</span></td>
-          <td>745,110</td>
-          <td><span style="color: #64748b;">○ OFFLINE</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="section-wrap">
-    <div class="sec-title">
-      <h2>Частые Вопросы (FAQ)</h2>
-      <p>Все, что нужно знать перед первым входом на сервер</p>
-    </div>
-
-    <div class="faq-list">
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <span>Как создать свой первый плот?</span>
-          <span>▼</span>
-        </div>
-        <div class="faq-answer">
-          При первом входе на сервер введите команду <code>/island create</code>. Вы автоматически заспавнитесь на изолированном плоту 4×4 над океаном на высоте Y190.
-        </div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <span>Где брать руду, если нет шахт?</span>
-          <span>▼</span>
-        </div>
-        <div class="faq-answer">
-          Вся добыча руд осуществляется через ловлю рыбы и ресурсов удочками StarCatcher. Повышая тир удочки, вы начинаете вылавливать железо, уран, платину и осмий прямо из океана.
-        </div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <span>Как работает авторыболов aquatech_ui?</span>
-          <span>▼</span>
-        </div>
-        <div class="faq-answer">
-          Скрафтив блок `aquatech_ui:auto_fisher`, поместите в него удочку и подключите EU-энергию. Авторыболов будет автономно ловить ресурсы и отправлять их в сундуки или МЭ-сеть AE2.
+          <div class="slots-grid-9">
+            <div class="mc-slot-box">
+              <span class="slot-icon-big">🎣</span>
+              <span class="slot-count-tag">LV.7</span>
+            </div>
+            <div class="mc-slot-box">
+              <span class="slot-icon-big">⚡</span>
+              <span class="slot-count-tag">x128</span>
+            </div>
+            <div class="mc-slot-box">
+              <span class="slot-icon-big">💎</span>
+              <span class="slot-count-tag">x64</span>
+            </div>
+            <div class="mc-slot-box">
+              <span class="slot-icon-big">⚛️</span>
+              <span class="slot-count-tag">x16</span>
+            </div>
+            <div class="mc-slot-box">
+              <span class="slot-icon-big">⚙️</span>
+              <span class="slot-count-tag">x4</span>
+            </div>
+            <div class="mc-slot-box">
+              <span class="slot-icon-big">🎁</span>
+              <span class="slot-count-tag">КЕЙС</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Footer -->
-  <footer class="mc-footer">
-    <div class="footer-inner">
-      <div class="brand-group">
-        <div class="brand-icon-box">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="brand-title">AquaTech 1.20.1</div>
+  <!-- ==========================================================================
+       PAGE 2: DONATE STORE (ДОНАТ МАГАЗИН ПРИВИЛЕГИЙ)
+       ========================================================================== -->
+  <div class="page-view" id="page-donate">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-badge">🛍️ ДОНАТ МАГАЗИН</div>
+        <h2 class="section-title">Привилегии и Наборы</h2>
+        <p class="section-subtitle">Получи уникальные возможности, ускорение авторыбалки и кейсы при поддержке сервера!</p>
       </div>
 
-      <div style="font-size: 13px; color: #64748b;">
-        © 2026 AquaTech Minecraft Server. Forge + Mohist 1.20.1 Engine.
+      <div class="donate-grid">
+        <!-- VIP Card -->
+        <div class="privilege-card vip">
+          <div>
+            <div class="priv-badge vip">ИГРОК +</div>
+            <div class="priv-title">VIP</div>
+            <div class="priv-price">149 ₽ <span>/ навсегда</span></div>
+            <ul class="priv-features">
+              <li>Доступ к команде /feed (сытость)</li>
+              <li>Доступ к команде /workbench</li>
+              <li>Сохранение инвентаря при смерти</li>
+              <li>+2 Слота авторыболова</li>
+              <li>Кейс Механика в подарок</li>
+            </ul>
+          </div>
+          <button class="btn-buy-priv vip" onclick="openCheckoutModal('Привилегия VIP', 149)">КУПИТЬ VIP</button>
+        </div>
+
+        <!-- PREMIUM Card -->
+        <div class="privilege-card premium">
+          <div>
+            <div class="priv-badge premium">ПОПУЛЯРНОЕ</div>
+            <div class="priv-title">PREMIUM</div>
+            <div class="priv-price">299 ₽ <span>/ навсегда</span></div>
+            <ul class="priv-features">
+              <li>Все возможности VIP</li>
+              <li>Полет на сервере (/fly)</li>
+              <li>Доступ к команде /heal</li>
+              <li>Ускорение авторыболова x2</li>
+              <li>2x StarCatcher Кейса</li>
+            </ul>
+          </div>
+          <button class="btn-buy-priv premium" onclick="openCheckoutModal('Привилегия PREMIUM', 299)">КУПИТЬ PREMIUM</button>
+        </div>
+
+        <!-- DELUXE Card -->
+        <div class="privilege-card deluxe">
+          <div>
+            <div class="priv-badge deluxe">ПРОФЕССИОНАЛ</div>
+            <div class="priv-title">DELUXE</div>
+            <div class="priv-price">599 ₽ <span>/ навсегда</span></div>
+            <ul class="priv-features">
+              <li>Все возможности PREMIUM</li>
+              <li>Персональный авторыболов LV.5</li>
+              <li>Безлимитная энергия AE2</li>
+              <li>Квантовый Кейс Сингулярности</li>
+              <li>Префикс [DELUXE] в чате</li>
+            </ul>
+          </div>
+          <button class="btn-buy-priv deluxe" onclick="openCheckoutModal('Привилегия DELUXE', 599)">КУПИТЬ DELUXE</button>
+        </div>
+
+        <!-- ULTIMATE Card -->
+        <div class="privilege-card ultimate">
+          <div>
+            <div class="priv-badge ultimate">ЭНДГЕЙМ</div>
+            <div class="priv-title">ULTIMATE</div>
+            <div class="priv-price">1199 ₽ <span>/ навсегда</span></div>
+            <ul class="priv-features">
+              <li>Все возможности DELUXE</li>
+              <li>Удочка Владыки Океана (Tier 6)</li>
+              <li>Авторыболов Скорости x64</li>
+              <li>5000 AquaCoins на баланс</li>
+              <li>Доступ к тестам новых модов</li>
+            </ul>
+          </div>
+          <button class="btn-buy-priv ultimate" onclick="openCheckoutModal('Привилегия ULTIMATE', 1199)">КУПИТЬ ULTIMATE</button>
+        </div>
       </div>
     </div>
+  </div>
+
+  <!-- ==========================================================================
+       PAGE 3: CASES ROULETTE SIMULATOR (СИМУЛЯТОР РУЛЕТКИ КЕЙСОВ)
+       ========================================================================== -->
+  <div class="page-view" id="page-cases">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-badge">🎰 РУЛЕТКА КЕЙСОВ</div>
+        <h2 class="section-title">Испытай Удачу в Рулетке</h2>
+        <p class="section-subtitle">Открывай кейсы прямо на сайте в стиле LoliLand и получай награды сразу на сервер!</p>
+      </div>
+
+      <div class="cases-grid">
+        <div class="case-card" onclick="openRoulette('AE2 Press Case')">
+          <div class="case-icon-box">📦</div>
+          <div class="case-name">Кейс Механика AE2</div>
+          <div class="case-price">149 ₽ / 1 Открытие</div>
+          <button class="btn-open-case">ОТКРЫТЬ КЕЙС</button>
+        </div>
+
+        <div class="case-card" onclick="openRoulette('StarCatcher Case')">
+          <div class="case-icon-box">🎣</div>
+          <div class="case-name">Кейс Рыболова StarCatcher</div>
+          <div class="case-price">199 ₽ / 1 Открытие</div>
+          <button class="btn-open-case">ОТКРЫТЬ КЕЙС</button>
+        </div>
+
+        <div class="case-card" onclick="openRoulette('Quantum Case')">
+          <div class="case-icon-box">⚛️</div>
+          <div class="case-name">Квантовый Кейс</div>
+          <div class="case-price">299 ₽ / 1 Открытие</div>
+          <button class="btn-open-case">ОТКРЫТЬ КЕЙС</button>
+        </div>
+
+        <div class="case-card" onclick="openRoulette('Aqua Deluxe Case')">
+          <div class="case-icon-box">💎</div>
+          <div class="case-name">LoliLand Aqua Deluxe</div>
+          <div class="case-price">499 ₽ / 1 Открытие</div>
+          <button class="btn-open-case">ОТКРЫТЬ КЕЙС</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROULETTE MODAL OVERLAY -->
+  <div class="modal-overlay" id="rouletteModal">
+    <div class="roulette-modal-card">
+      <button class="close-modal-btn" onclick="closeRoulette()">&times;</button>
+      <h3 style="font-family: var(--font-heading); font-size: 26px; font-weight: 900;" id="rouletteTitle">Открытие Кейса</h3>
+      <p style="color: #94a3b8; font-size: 14px;">Испытай удачу! Рулетка остановится на твоем призе.</p>
+
+      <div class="roulette-container">
+        <div class="roulette-pointer"></div>
+        <div class="roulette-reel" id="rouletteReel"></div>
+      </div>
+
+      <button class="btn-download-primary" style="margin: 0 auto;" id="spinBtn" onclick="startSpin()">
+        🎰 ВРАЩАТЬ РУЛЕТКУ
+      </button>
+
+      <div class="prize-result-box" id="prizeBox">
+        <h4 style="color: var(--color-gold); font-family: var(--font-mc); font-size: 14px;" id="prizeName">ПОЗДРАВЛЯЕМ! ВЫ ВЫИГРАЛИ:</h4>
+        <p style="color: #fff; font-size: 18px; font-weight: 800; margin-top: 6px;" id="prizeItem">Удочка Владыки Океана (Tier 6)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT PAYMENT MODAL OVERLAY -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="roulette-modal-card" style="max-width: 500px; text-align: left;">
+      <button class="close-modal-btn" onclick="closeCheckout()">&times;</button>
+      <h3 style="font-family: var(--font-heading); font-size: 24px; font-weight: 900; margin-bottom: 8px;">Оформление Заказа</h3>
+      <p style="color: #94a3b8; font-size: 13px; margin-bottom: 24px;" id="checkoutItemName">Привилегия PREMIUM</p>
+
+      <div style="margin-bottom: 16px;">
+        <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; display: block; margin-bottom: 6px;">Никнейм на сервере (Minecraft):</label>
+        <input type="text" id="playerNick" placeholder="Введите ваш никнейм" style="width: 100%; padding: 12px; border-radius: var(--radius-sm); background: #0f172a; border: 1px solid #334155; color: #fff; font-weight: 600;">
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="font-size: 12px; font-weight: 700; color: #cbd5e1; display: block; margin-bottom: 6px;">Способ Оплаты:</label>
+        <select style="width: 100%; padding: 12px; border-radius: var(--radius-sm); background: #0f172a; border: 1px solid #334155; color: #fff; font-weight: 600;">
+          <option>💳 Банковская карта (СБП / T-Bank / Сбер)</option>
+          <option>🌐 ЮKassa / FreeKassa</option>
+          <option>🪙 Криптовалюта (USDT / TON)</option>
+        </select>
+      </div>
+
+      <button class="btn-buy-priv premium" style="width: 100%;" onclick="confirmPayment()">ПЕРЕЙТИ К ОПЛАТЕ</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 AquaTech Minecraft Server (Forge 1.20.1 + Mohist). Все права защищены.</p>
   </footer>
 
   <script>
-    // Generate Animated Water Bubbles dynamically
-    const bubbleContainer = document.getElementById('bubbleContainer');
-    for (let i = 0; i < 25; i++) {
-      const bubble = document.createElement('div');
-      bubble.classList.add('bubble');
-      const size = Math.random() * 20 + 8;
-      bubble.style.width = `${size}px`;
-      bubble.style.height = `${size}px`;
-      bubble.style.left = `${Math.random() * 100}%`;
-      bubble.style.animationDuration = `${Math.random() * 12 + 8}s`;
-      bubble.style.animationDelay = `${Math.random() * 5}s`;
-      bubbleContainer.appendChild(bubble);
+    /* SPA Tab Navigation */
+    function showPage(pageId) {
+      document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
+      
+      const targetPage = document.getElementById('page-' + pageId);
+      const targetTab = document.getElementById('tab-' + pageId);
+      
+      if(targetPage) targetPage.classList.add('active');
+      if(targetTab) targetTab.classList.add('active');
     }
 
-    // Copy IP Functionality
+    /* IP Copying */
     function copyIP() {
-      const ip = document.getElementById('serverIP').innerText;
+      const ip = document.getElementById('ipText').innerText;
       navigator.clipboard.writeText(ip);
-      const copyBtn = document.getElementById('copyText');
-      copyBtn.innerText = "COPIED!";
-      copyBtn.style.background = "rgba(16, 185, 129, 0.3)";
-      copyBtn.style.color = "#10b981";
+      alert('IP адрес сервера скопирован: ' + ip);
+    }
+
+    /* Floating Bubbles Generator */
+    const container = document.getElementById('bubblesContainer');
+    for (let i = 0; i < 20; i++) {
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      b.style.left = Math.random() * 100 + '%';
+      b.style.width = Math.random() * 20 + 10 + 'px';
+      b.style.height = b.style.width;
+      b.style.animationDuration = Math.random() * 8 + 6 + 's';
+      b.style.animationDelay = Math.random() * 5 + 's';
+      container.appendChild(b);
+    }
+
+    /* Roulette Items Data */
+    const rouletteItems = [
+      { name: 'Удочка Титана', icon: '🎣', rarity: 'rare' },
+      { name: 'Пресс AE2', icon: '📦', rarity: 'common' },
+      { name: 'Авторыболов x4', icon: '⚙️', rarity: 'legendary' },
+      { name: 'Звёздная Руда', icon: '💎', rarity: 'rare' },
+      { name: 'Владыка Океана', icon: '👑', rarity: 'cosmic' },
+      { name: 'Сингулярность', icon: '⚛️', rarity: 'cosmic' },
+      { name: '500 AquaCoins', icon: '🪙', rarity: 'uncommon' }
+    ];
+
+    function openRoulette(caseName) {
+      document.getElementById('rouletteTitle').innerText = 'Открытие: ' + caseName;
+      document.getElementById('rouletteModal').classList.add('active');
+      document.getElementById('prizeBox').style.display = 'none';
+      
+      const reel = document.getElementById('rouletteReel');
+      reel.style.transition = 'none';
+      reel.style.transform = 'translateX(0px)';
+      reel.innerHTML = '';
+
+      // Populate 40 items in reel
+      for (let i = 0; i < 40; i++) {
+        const item = rouletteItems[Math.floor(Math.random() * rouletteItems.length)];
+        const div = document.createElement('div');
+        div.className = `roulette-item ${item.rarity}`;
+        div.innerHTML = `<span class="roulette-item-icon">${item.icon}</span><span class="roulette-item-name">${item.name}</span>`;
+        reel.appendChild(div);
+      }
+    }
+
+    function closeRoulette() {
+      document.getElementById('rouletteModal').classList.remove('active');
+    }
+
+    function startSpin() {
+      const reel = document.getElementById('rouletteReel');
+      const btn = document.getElementById('spinBtn');
+      btn.disabled = true;
+      
+      const randomOffset = 1800 + Math.floor(Math.random() * 600);
+      reel.style.transition = 'transform 4s cubic-bezier(0.1, 1, 0.1, 1)';
+      reel.style.transform = `translateX(-${randomOffset}px)`;
 
       setTimeout(() => {
-        copyBtn.innerText = "COPY IP";
-        copyBtn.style.background = "rgba(0, 242, 254, 0.15)";
-        copyBtn.style.color = "#00f2fe";
-      }, 2500);
+        btn.disabled = false;
+        document.getElementById('prizeBox').style.display = 'block';
+      }, 4200);
     }
 
-    // Act Progression Data
-    const actDataList = {
-      1: {
-        num: "АКТ 1 • ЭРА ПРИМИТИВНОГО ВЫЖИВАНИЯ",
-        title: "Плот 4×4 & Первичный улов",
-        items: [
-          "<b>Начало:</b> Спавн на плоту 4×4 на высоте Y190 среди океана.",
-          "<b>Инструмент:</b> Скромная удочка (Humble Rod).",
-          "<b>Добыча:</b> Медь, Олово, Сырой Латекс, Гевея, Торф, Доски и Песок.",
-          "<b>Крафт:</b> Сушилка латекса для резины, Наковальня, Бронза и переход к Бамбуковой удочке."
-        ],
-        tip: "Не выбрасывайте глину и песок из улова. Они понадобятся для постройки обожженных кирпичей мультиблочной плавильни во 2-м Акте!"
-      },
-      2: {
-        num: "АКТ 2 • EARLY LV ERA",
-        title: "Мультиблочная плавильница & Прокатка",
-        items: [
-          "<b>Инструмент:</b> Бамбуковая удочка ➔ Старая добрая удочка.",
-          "<b>Добыча:</b> Железная руда, редстоун, стронций, иттрий, таллий.",
-          "<b>Строительство:</b> Мультиблочная плавильня (Smeltery Controller) из глиняных кирпичей.",
-          "<b>Результат:</b> Выплавка латуни, редбрасса и переработка первых LV-схем."
-        ],
-        tip: "Соберите прокатный стан для эффективного плющения оловянных и железных пластин без потерь металлов."
-      },
-      3: {
-        num: "АКТ 3 • STEAM ERA (32 EU/t)",
-        title: "Паровые котлы & Авторыболов aquatech_ui",
-        items: [
-          "<b>Инструмент:</b> Удочка Натуралиста ➔ Ледяная удочка.",
-          "<b>Добыча:</b> Слизь, барий, шпинель, купорос, хладагенты.",
-          "<b>Энергетика:</b> Паровой генератор на торфе, BatBox 40,000 EU, Дробитель и Электропечь.",
-          "<b>Автоматизация:</b> Запуск первого Авторыболова (aquatech_ui:auto_fisher)!"
-        ],
-        tip: "Авторыболов работает непрерывно. Направьте выловленные ресурсы прямо в хранилище через предметные трубы."
-      },
-      4: {
-        num: "АКТ 4 • MV INDUSTRIAL (128 EU/t)",
-        title: "Доменная печь & Нержавеющая сталь",
-        items: [
-          "<b>Инструмент:</b> Удочка Ловца Звёзд ➔ Лазуритовая удочка.",
-          "<b>Добыча:</b> Золото, алюминий, вольфрам, хром, серебро, сапфиры.",
-          "<b>Строительство:</b> Индустриальная Доменная Печь из нихромовых подложек.",
-          "<b>Выплавка:</b> Нержавеющая сталь (Stainless Steel), Дюралюминий, Солнечные панели MV."
-        ],
-        tip: "Нержавеющая сталь критична для перехода в HV-эру и постройки компонентов ядерных реакторов."
-      },
-      5: {
-        num: "АКТ 5 • ЯДЕРНАЯ ЭРА (512-2048 EU/t)",
-        title: "Химический синтез & Ядерные реакторы",
-        items: [
-          "<b>Инструмент:</b> Обсидиановая удочка ➔ Магмовая удочка.",
-          "<b>Добыча:</b> Уран, платина, сырая нефть в ведрах, свинец, незерит.",
-          "<b>Синтез:</b> Перегонка нефти в пластик, сборка Ядерного реактора на MOX-топливе.",
-          "<b>МЭ-Сеть:</b> Полноценное развертывание Applied Energistics 2 (AE2)."
-        ],
-        tip: "Используйте бариевое и свинцовое экранирование для реактора, чтобы избежать радиационных утечек."
-      },
-      6: {
-        num: "АКТ 6 • QUANTUM & COSMIC ENDGAME",
-        title: "Генераторы Материи & Квантовый Эндгейм",
-        items: [
-          "<b>Инструмент:</b> Альфа-Удочка (Alpha Rod).",
-          "<b>Добыча:</b> Иридий, Осмий, Полоний, Осмиридий, Астероидный Адамантий.",
-          "<b>Квант:</b> Постройка Генератора Материи, Синтезатор Иридия, Квантовые схемы.",
-          "<b>Эндгейм:</b> Квантовый бронекостюм и бесконечные генераторы энергии."
-        ],
-        tip: "Поздравляем! Вы достигли абсолютной вершины AquaTech и освоили квантовые технологии океана."
+    /* Checkout Modal */
+    function openCheckoutModal(itemName, price) {
+      document.getElementById('checkoutItemName').innerText = itemName + (price ? ' — ' + price + ' ₽' : '');
+      document.getElementById('checkoutModal').classList.add('active');
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkoutModal').classList.remove('active');
+    }
+
+    function confirmPayment() {
+      const nick = document.getElementById('playerNick').value;
+      if (!nick) {
+        alert('Пожалуйста, введите ваш никнейм на сервере!');
+        return;
       }
-    };
-
-    function showAct(actNum) {
-      document.querySelectorAll('.act-tab-btn').forEach((btn, idx) => {
-        if (idx === actNum - 1) btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
-
-      const act = actDataList[actNum];
-      document.getElementById('actNumText').innerText = act.num;
-      document.getElementById('actTitleText').innerText = act.title;
-      document.getElementById('actListItems').innerHTML = act.items.map(item => `<li>${item}</li>`).join('');
-      document.getElementById('actTipText').innerText = act.tip;
+      alert('Заказ сформирован для игрока ' + nick + '! Переход на платёжную систему...');
+      closeCheckout();
     }
-
-    // Toggle FAQ
-    function toggleFaq(element) {
-      element.classList.toggle('open');
-    }
-
-    // Live Server Ping Status
-    async function updateLiveOnline() {
-      const onlineEl = document.querySelector('.online-box span');
-      const dotEl = document.querySelector('.online-dot');
-      if (!onlineEl) return;
-      try {
-        const res = await fetch('https://api.mcsrvstat.us/2/katherine-hydro.tun.ply.gg:31279');
-        const data = await res.json();
-        if (data && data.online) {
-          onlineEl.innerText = `${data.players.online} / ${data.players.max || 100} ONLINE`;
-          if (dotEl) dotEl.style.background = '#10b981';
-        } else {
-          onlineEl.innerText = `ONLINE (SERVER READY)`;
-          if (dotEl) dotEl.style.background = '#38bdf8';
-        }
-      } catch (_) {
-        onlineEl.innerText = `ONLINE (MOHIST 1.20.1)`;
-      }
-    }
-    updateLiveOnline();
-    setInterval(updateLiveOnline, 30000);
   </script>
 </body>
 </html>
