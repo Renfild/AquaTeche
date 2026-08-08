@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.7"
+LAUNCHER_VER   = "2.9.8"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -43,14 +43,13 @@ LOCAL_SYNC_FALLBACKS = (
     "http://127.0.0.1:8080",
 )
 
-# Manifest / pack mirrors (fast GitHub CDNs first; Pages last — can hang on SSL).
+# Manifest / pack mirrors (fast GitHub CDNs only — Pages.dev SSL often hangs on Windows).
 PACK_CDN_MIRRORS = (
     DEFAULT_UPDATE_URL,
     "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
-    "https://aquatech-7gs.pages.dev/pack",
 )
 CLIENT_DOWNLOAD_URL = (
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.7/AquaTech.exe"
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.8/AquaTech.exe"
 )
 
 # Optional GitHub fallback (often 404 if repo/path missing — pack sync prefers update_url / local).
@@ -518,22 +517,32 @@ def normalize_update_url(url: str | None) -> str:
 
 
 def _fetch_json_hard(url: str, timeout: float, headers: dict | None = None) -> dict:
-    """urlopen with a hard wall-clock deadline (Windows SSL can ignore socket timeout)."""
+    """urlopen with a hard wall-clock deadline (Windows SSL can ignore socket timeout).
+
+    Important: do not use ``with ThreadPoolExecutor(...)`` here — on timeout the
+    context manager calls ``shutdown(wait=True)`` and can hang forever on a stuck
+    SSL handshake thread.
+    """
     hdrs = dict(headers or {})
     hdrs.setdefault("User-Agent", f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}")
+    box: dict[str, object] = {}
 
-    def _do() -> dict:
-        req = urllib.request.Request(url, headers=hdrs)
-        with urllib.request.urlopen(req, timeout=max(1.0, timeout)) as r:
-            return json.loads(r.read())
-
-    with ThreadPoolExecutor(max_workers=1) as pool:
-        fut = pool.submit(_do)
+    def _do() -> None:
         try:
-            return fut.result(timeout=timeout + 0.5)
-        except Exception:
-            fut.cancel()
-            raise
+            req = urllib.request.Request(url, headers=hdrs)
+            with urllib.request.urlopen(req, timeout=max(1.0, timeout)) as r:
+                box["ok"] = json.loads(r.read())
+        except Exception as ex:
+            box["err"] = ex
+
+    t = threading.Thread(target=_do, daemon=True)
+    t.start()
+    t.join(timeout=timeout + 0.75)
+    if "ok" in box:
+        return box["ok"]  # type: ignore[return-value]
+    if "err" in box:
+        raise box["err"]  # type: ignore[misc]
+    raise TimeoutError(f"CDN timeout after {timeout:.1f}s: {url}")
 
 
 def resolve_update_base(cfg: dict | None = None, *, allow_local_fallback: bool = True) -> str:
@@ -2489,26 +2498,6 @@ class AquaTechLauncher(tk.Tk):
             self._log_line(f"❌ Ошибка запуска: {ex}", "err")
             self.after(0, lambda: self._done(False))
 
-def _get_gh_token() -> str:
-    candidates = [
-        _bundle_dir() / ".gh_token",
-        _app_dir() / ".gh_token",
-        Path(__file__).resolve().parent / ".gh_token",
-        Path(__file__).resolve().parent.parent / ".gh_token",
-        Path(r"C:\Users\xieto\Desktop\AquaTech\.gh_token"),
-    ]
-    for p in candidates:
-        if p.is_file():
-            try:
-                tok = p.read_text(encoding="utf-8").strip()
-                if tok:
-                    return tok
-            except Exception:
-                pass
-    return ""
-
-
-    # ── Download helper with browser-like headers (avoids CDN 403) ─────────
     def _download_url(self, url: str, dest_path: Path, reporthook=None):
         headers = {
             "User-Agent": (
@@ -2860,6 +2849,28 @@ def _get_gh_token() -> str:
                 "ok" if m.startswith("✓") else ("warn" if m.startswith("⚠️") else ("dim" if m.startswith("🗑") else "info")),
             ),
         )
+
+
+def _get_gh_token() -> str:
+    candidates = [
+        _bundle_dir() / ".gh_token",
+        _app_dir() / ".gh_token",
+        Path(__file__).resolve().parent / ".gh_token",
+        Path(__file__).resolve().parent.parent / ".gh_token",
+        Path(r"C:\Users\xieto\Desktop\AquaTech\.gh_token"),
+    ]
+    for p in candidates:
+        if p.is_file():
+            try:
+                tok = p.read_text(encoding="utf-8").strip()
+                if tok:
+                    return tok
+            except Exception:
+                pass
+    return ""
+
+
+    # ── Download helper with browser-like headers (avoids CDN 403) ─────────
 
 
 # ─── Entry ────────────────────────────────────────────────────────────────────

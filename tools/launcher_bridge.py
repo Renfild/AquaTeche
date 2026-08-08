@@ -144,13 +144,17 @@ class LauncherEngine:
                 L.AquaTechLauncher._download_url(self, url, dest_path, reporthook)
 
         shim = Shim()
-        shim._install_forge = types.MethodType(L.AquaTechLauncher._install_forge, shim)
-        shim._install_java = types.MethodType(L.AquaTechLauncher._install_java, shim)
-        shim._sync_files = types.MethodType(L.AquaTechLauncher._sync_files, shim)
-        shim._run_all = types.MethodType(L.AquaTechLauncher._run_all, shim)
-        shim._copy_forge_from_minecraft = types.MethodType(
-            L.AquaTechLauncher._copy_forge_from_minecraft, shim
-        )
+        for name in (
+            "_install_forge",
+            "_install_java",
+            "_sync_files",
+            "_run_all",
+            "_copy_forge_from_minecraft",
+        ):
+            fn = getattr(L.AquaTechLauncher, name, None)
+            if fn is None:
+                raise RuntimeError(f"AquaTechLauncher.{name} missing — broken build")
+            setattr(shim, name, types.MethodType(fn, shim))
         return shim
 
     def start_play(self) -> tuple[bool, str]:
@@ -176,9 +180,10 @@ class LauncherEngine:
             except Exception as ex:
                 self.log(f"Критическая ошибка: {ex}", "err")
                 self.state = "error"
+            finally:
                 self._running = False
 
-        threading.Thread(target=work, daemon=True).start()
+        threading.Thread(target=work, daemon=True, name="aquatech-play").start()
         return True, "ok"
 
     def start_update(self) -> tuple[bool, str]:
@@ -200,9 +205,13 @@ class LauncherEngine:
                 shim._done_update(True)
             except Exception as ex:
                 self.log(f"Ошибка обновления: {ex}", "err")
-                shim._done_update(False)
+                try:
+                    shim._done_update(False)
+                except Exception:
+                    self.state = "error"
+                    self._running = False
 
-        threading.Thread(target=work, daemon=True).start()
+        threading.Thread(target=work, daemon=True, name="aquatech-update").start()
         return True, "ok"
 
 
@@ -271,44 +280,51 @@ class ApiHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         path = urlparse(self.path).path
-        body = self._read_json()
-        if path == "/api/browse_dir":
-            import tkinter as tk
-            from tkinter import filedialog
-            res = {"ok": False, "dir": ""}
-            done = threading.Event()
+        try:
+            body = self._read_json()
+            if path == "/api/browse_dir":
+                import tkinter as tk
+                from tkinter import filedialog
+                res = {"ok": False, "dir": ""}
+                done = threading.Event()
 
-            def open_dialog():
-                try:
-                    root = tk.Tk()
-                    root.withdraw()
-                    root.attributes("-topmost", True)
-                    selected = filedialog.askdirectory(title="Выберите папку для AquaTech")
-                    root.destroy()
-                    if selected:
-                        res["ok"] = True
-                        res["dir"] = selected
-                except Exception:
-                    pass
-                done.set()
+                def open_dialog():
+                    try:
+                        root = tk.Tk()
+                        root.withdraw()
+                        root.attributes("-topmost", True)
+                        selected = filedialog.askdirectory(title="Выберите папку для AquaTech")
+                        root.destroy()
+                        if selected:
+                            res["ok"] = True
+                            res["dir"] = selected
+                    except Exception:
+                        pass
+                    done.set()
 
-            threading.Thread(target=open_dialog, daemon=True).start()
-            done.wait(timeout=60.0)
-            return self._json(200, res)
-        if path == "/api/config":
-            cfg = ENGINE.save_cfg(body)
-            return self._json(200, {"ok": True, "cfg": cfg})
-        if path == "/api/play":
-            if body:
-                ENGINE.save_cfg(body)
-            ok, msg = ENGINE.start_play()
-            return self._json(200 if ok else 400, {"ok": ok, "message": msg})
-        if path == "/api/update":
-            if body:
-                ENGINE.save_cfg(body)
-            ok, msg = ENGINE.start_update()
-            return self._json(200 if ok else 400, {"ok": ok, "message": msg})
-        self._json(404, {"error": "not found"})
+                threading.Thread(target=open_dialog, daemon=True).start()
+                done.wait(timeout=60.0)
+                return self._json(200, res)
+            if path == "/api/config":
+                cfg = ENGINE.save_cfg(body)
+                return self._json(200, {"ok": True, "cfg": cfg})
+            if path == "/api/play":
+                if body:
+                    ENGINE.save_cfg(body)
+                ok, msg = ENGINE.start_play()
+                return self._json(200 if ok else 400, {"ok": ok, "message": msg})
+            if path == "/api/update":
+                if body:
+                    ENGINE.save_cfg(body)
+                ok, msg = ENGINE.start_update()
+                return self._json(200 if ok else 400, {"ok": ok, "message": msg})
+            self._json(404, {"error": "not found"})
+        except Exception as ex:
+            try:
+                ENGINE.log(f"API error: {ex}", "err")
+            except Exception:
+                pass
+            self._json(500, {"ok": False, "message": str(ex)})
 
     def _static(self, name: str, content_type: str | None):
         base = ui_dir().resolve()
