@@ -16,7 +16,7 @@ SHELL = """<!DOCTYPE html>
   <meta name="description" content="{desc}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body data-page="{page}">
@@ -38,14 +38,15 @@ PAGES["index.html"] = (
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="container hero-inner">
-      <div class="eyebrow reveal">Minecraft 1.20.1</div>
-      <h1 class="reveal reveal-delay-1">AquaTech <span>глубины</span></h1>
-      <p class="hero-lead reveal reveal-delay-2">Океанский скайблок: плот, удочки StarCatcher, кейсы и индустриальные моды.</p>
-      <div class="hero-actions reveal reveal-delay-3">
-        <a class="btn btn-primary" data-download href="#">Скачать лаунчер</a>
-        <a class="btn btn-secondary" href="start.html">Как начать</a>
+      <div class="eyebrow">Океанский модпак · 1.20.1 Forge</div>
+      <h1>AquaTech — <span>глубины и неизведанность</span></h1>
+      <p class="hero-lead">Спавн на плоту посреди океана, 12 удочек StarCatcher, авторыбалка, кейсы и индустриальный прогресс. Скачай лаунчер — сборка приедет сама.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-download href="#">Скачать лаунчер · ~5 МБ</a>
+        <a class="btn btn-secondary" href="register.html">Регистрация</a>
+        <a class="btn btn-ghost" href="store.html">Магазин</a>
       </div>
-      <div class="ip-box reveal reveal-delay-3" data-copy-ip>
+      <div class="ip-box" data-copy-ip>
         <div>
           <small>IP СЕРВЕРА</small>
           <strong>katherine-hydro.tun.ply.gg:31279</strong>
@@ -57,25 +58,31 @@ PAGES["index.html"] = (
 
   <section class="section">
     <div class="container">
-      <div class="section-head reveal">
-        <h2>Разделы</h2>
-        <p>Сайт, лаунчер и сервер — один проект.</p>
+      <div class="section-head">
+        <div>
+          <h2>Что тебя ждёт</h2>
+          <p>Не обложка — полноценный проект: сайт, лаунчер, сборка и сервер связаны вместе.</p>
+        </div>
+        <a class="btn btn-secondary" href="start.html">Как начать</a>
       </div>
-      <div class="grid-3 reveal">
+      <div class="grid-3">
         <a class="card card-link" href="rods.html">
+          <div class="feature-art rods"></div>
           <span class="tag">Прогрессия</span>
-          <h3>Удочки StarCatcher</h3>
-          <p>12 тиров с ресурсными пулами.</p>
+          <h3>12 удочек StarCatcher</h3>
+          <p>От бамбука до легендарных удилищ с ресурсными пулами AquaTech.</p>
         </a>
         <a class="card card-link" href="cases.html">
+          <div class="feature-art cases"></div>
           <span class="tag gold">Награды</span>
-          <h3>Кейсы</h3>
-          <p>Награды и привилегии на сервере.</p>
+          <h3>Кейсы и привилегии</h3>
+          <p>Крути кейсы, копи AquaCoins и открывай VIP–Ultimate на сервере.</p>
         </a>
         <a class="card card-link" href="top.html">
+          <div class="feature-art tech"></div>
           <span class="tag">Сообщество</span>
           <h3>Топы и профили</h3>
-          <p>Рейтинги и страницы игроков.</p>
+          <p>Онлайн, монеты, лайки — смотри лидеров и оформляй свой профиль.</p>
         </a>
       </div>
     </div>
@@ -83,27 +90,30 @@ PAGES["index.html"] = (
 
   <section class="section" style="padding-top:0">
     <div class="container grid-2">
-      <div class="reveal">
+      <div>
         <div class="section-head">
-          <h2>Новости</h2>
+          <div>
+            <h2>Новости</h2>
+            <p>Обновления лаунчера, сборки и сервера.</p>
+          </div>
         </div>
         <div class="news-list">
           <a class="news-item" href="news.html">
             <time>8 августа 2026</time>
-            <h3>Лаунчер 2.9.8</h3>
-            <p>Bootstrap ~5 МБ, сборка с CDN.</p>
+            <h3>Лаунчер 2.9.8 и CDN сборки</h3>
+            <p>Маленький bootstrap ~5 МБ, обновления модов через jsDelivr + GitHub Releases.</p>
           </a>
           <a class="news-item" href="news.html">
             <time>Июль 2026</time>
-            <h3>Лут удочек</h3>
-            <p>Таблицы StarCatcher и авторыбалка.</p>
+            <h3>StarCatcher loot-таблицы</h3>
+            <p>Полная прогрессия ресурсных удочек и совместимость с авторыбалкой.</p>
           </a>
         </div>
       </div>
-      <div class="panel reveal">
+      <div class="card">
         <span class="tag">Сервер</span>
-        <h3>Ocean Skyblock</h3>
-        <p style="margin:.5rem 0 1rem;color:var(--muted)">Океан, плот 4×4, кастомный UI.</p>
+        <h3>AquaTech Ocean Skyblock</h3>
+        <p style="margin:.6rem 0 1rem;color:var(--muted)">Один основной мир: океан, плот 4×4, индустриальные моды и кастомный UI.</p>
         <div class="ip-box" data-copy-ip style="width:100%;justify-content:space-between">
           <div>
             <small>ПОДКЛЮЧЕНИЕ</small>
@@ -111,9 +121,9 @@ PAGES["index.html"] = (
           </div>
           <div class="copy">COPY</div>
         </div>
-        <div style="margin-top:1rem;display:flex;gap:.55rem;flex-wrap:wrap">
-          <a class="btn btn-primary" href="start.html">Начать</a>
-          <a class="btn btn-ghost" href="players.html">Игроки</a>
+        <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+          <a class="btn btn-aqua" href="start.html">Начать игру</a>
+          <a class="btn btn-secondary" href="players.html">Игроки</a>
         </div>
       </div>
     </div>
@@ -129,27 +139,28 @@ PAGES["start.html"] = (
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Старт</div>
-      <h1>Начать игру</h1>
-      <p>Скачай лаунчер для Windows — сборка подтянется сама.</p>
+      <h1>Начни приключение на AquaTech</h1>
+      <p>Лаунчер сам скачает сборку. Тебе нужен только Windows и ~5 МБ на первый файл.</p>
       <div class="banner"></div>
     </div>
   </section>
   <section class="section" style="padding-top:1rem">
     <div class="container grid-2">
-      <div class="panel">
-        <h3>1. Лаунчер</h3>
-        <p style="color:var(--muted);margin:.55rem 0 1rem">AquaTech.exe (~5 МБ). Установка в %LOCALAPPDATA%\\AquaTech.</p>
-        <a class="btn btn-primary" data-download href="#">Скачать</a>
+      <div class="card">
+        <h3>1. Скачай лаунчер</h3>
+        <p style="color:var(--muted);margin:.6rem 0 1rem">AquaTech.exe — маленький bootstrap. Полный лаунчер установится в %LOCALAPPDATA%\\AquaTech.</p>
+        <a class="btn btn-primary" data-download href="#">Скачать для Windows</a>
       </div>
-      <div class="panel">
-        <h3>2. Вход</h3>
+      <div class="card">
+        <h3>2. Войди и играй</h3>
         <ul class="perk-list">
-          <li>Ник в лаунчере</li>
-          <li>Синхронизация модов</li>
-          <li>«Играть» — вход на сервер</li>
+          <li>Укажи ник в лаунчере</li>
+          <li>Дождись синхронизации модов</li>
+          <li>Жми «Играть» — авто-вход на сервер</li>
           <li>IP: katherine-hydro.tun.ply.gg:31279</li>
         </ul>
-        <div style="margin-top:1rem">
+        <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+          <a class="btn btn-secondary" href="register.html">Создать профиль на сайте</a>
           <button class="btn btn-ghost" type="button" data-copy-ip>Скопировать IP</button>
         </div>
       </div>
@@ -166,8 +177,8 @@ PAGES["store.html"] = (
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Магазин</div>
-      <h1>Привилегии</h1>
-      <p>VIP–Ultimate на сервере. Оплата пока демо — заявка на ник из профиля.</p>
+      <h1>Привилегии сервера</h1>
+      <p>Поддержи проект и получи бонусы на сервере. Оплата пока в демо-режиме — заявка сохраняется на ник из профиля.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -181,7 +192,7 @@ PAGES["store.html"] = (
           <li>Цветной ник</li>
         </ul>
         <div class="price">149 ₽ <small>/ мес</small></div>
-        <button class="btn btn-secondary" style="margin-top:1rem" data-buy="VIP" type="button">Купить</button>
+        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-buy="VIP" type="button">Купить</button>
       </div>
       <div class="card">
         <span class="tag">Premium</span>
@@ -192,7 +203,7 @@ PAGES["store.html"] = (
           <li>Приоритет входа</li>
         </ul>
         <div class="price">299 ₽ <small>/ мес</small></div>
-        <button class="btn btn-secondary" style="margin-top:1rem" data-buy="Premium" type="button">Купить</button>
+        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-buy="Premium" type="button">Купить</button>
       </div>
       <div class="card">
         <span class="tag gold">Deluxe</span>
@@ -203,19 +214,19 @@ PAGES["store.html"] = (
           <li>Бонус к улову</li>
         </ul>
         <div class="price">599 ₽ <small>/ мес</small></div>
-        <button class="btn btn-primary" style="margin-top:1rem" data-buy="Deluxe" type="button">Купить</button>
+        <button class="btn btn-primary" style="margin-top:1rem;width:100%" data-buy="Deluxe" type="button">Купить</button>
       </div>
     </div>
-    <div class="container" style="margin-top:1.5rem">
-      <div class="panel" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+    <div class="container" style="margin-top:1rem">
+      <div class="card" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
         <div>
           <span class="tag gold">Ultimate</span>
-          <h3 style="margin:.35rem 0">Ultimate</h3>
-          <p style="margin:0;color:var(--muted)">Полный набор привилегий и бейдж профиля.</p>
+          <h3 style="margin:.4rem 0">Ultimate</h3>
+          <p style="margin:0;color:var(--muted)">Максимум привилегий, уникальный бейдж профиля и поддержка разработки AquaTech.</p>
         </div>
-        <div>
+        <div style="text-align:right">
           <div class="price" style="margin:0">1199 ₽ <small>/ мес</small></div>
-          <button class="btn btn-primary" style="margin-top:.75rem" data-buy="Ultimate" type="button">Купить</button>
+          <button class="btn btn-aqua" style="margin-top:.8rem" data-buy="Ultimate" type="button">Купить Ultimate</button>
         </div>
       </div>
     </div>
@@ -231,26 +242,29 @@ PAGES["cases.html"] = (
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Награды</div>
-      <h1>Кейсы</h1>
-      <p>Демо на сайте. На сервере — через игру и донат.</p>
+      <h1>Кейсы AquaTech</h1>
+      <p>Демо-рулетка на сайте. На сервере кейсы выдаются через игровые механики и донат.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
     <div class="container grid-3">
       <div class="card">
-        <h3>Океанский</h3>
-        <p style="color:var(--muted)">Базовые награды.</p>
-        <button class="btn btn-secondary" style="margin-top:1rem" data-open-case="Океанский кейс" type="button">Открыть</button>
+        <div class="feature-art cases"></div>
+        <h3>Океанский кейс</h3>
+        <p style="color:var(--muted)">Базовые награды и AquaCoins.</p>
+        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-open-case="Океанский кейс" type="button">Открыть</button>
       </div>
       <div class="card">
-        <h3>Рыбак</h3>
-        <p style="color:var(--muted)">Бусты и ресурсы.</p>
-        <button class="btn btn-secondary" style="margin-top:1rem" data-open-case="Кейс рыбака" type="button">Открыть</button>
+        <div class="feature-art rods"></div>
+        <h3>Кейс рыбака</h3>
+        <p style="color:var(--muted)">Шанс на буст удочек и ресурсы.</p>
+        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" data-open-case="Кейс рыбака" type="button">Открыть</button>
       </div>
       <div class="card">
-        <h3>Глубинный</h3>
-        <p style="color:var(--muted)">Редкие награды.</p>
-        <button class="btn btn-primary" style="margin-top:1rem" data-open-case="Глубинный кейс" type="button">Открыть</button>
+        <div class="feature-art tech"></div>
+        <h3>Глубинный кейс</h3>
+        <p style="color:var(--muted)">Редкие привилегии и рамки профиля.</p>
+        <button class="btn btn-primary" style="margin-top:1rem;width:100%" data-open-case="Глубинный кейс" type="button">Открыть</button>
       </div>
     </div>
   </section>
@@ -274,7 +288,7 @@ RODS = [
 ]
 
 rod_cards = "\n".join(
-    f"""      <div class="card reveal">
+    f"""      <div class="card">
         <div class="rod-tier">{t}</div>
         <h3 style="margin:.35rem 0">{n}</h3>
         <p style="margin:0;color:var(--muted)">{d}</p>
