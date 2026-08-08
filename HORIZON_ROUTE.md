@@ -50,10 +50,10 @@ Track LP: `horizon` (`/lp track info horizon`).
 
 ## Варпы
 
-`spawn` · `pier` · `market` · `atoll` · `harbor`
+Два основных: `spawn` · `shop` (casesmod F4 + Essentials).
 
-Файлы-заготовки в `server/plugins/Essentials/warps/`.  
-**Обязательно** на точке в мире: `/setwarp <имя>`.
+Файлы в `server/plugins/Essentials/warps/`.  
+При необходимости: `/setwarp spawn` и `/setwarp shop` на точке.
 
 ## FTB
 
@@ -70,7 +70,7 @@ Daily даёт Aqua XP и XP сезона (`/aquatech season`).
 1. Перезапуск сервера (мод + LP groups/track + FTB chapter)
 2. `/lp sync` · `/lp track info horizon`
 3. `/aquatech storm status` — проверить AUTO / Пт–Вс
-4. На точках мира: `/setwarp spawn|pier|market|atoll|harbor`
+4. На точках мира: `/setwarp spawn` и `/setwarp shop` (если нужно обновить координаты)
 5. DecentHolograms: `/dh reload` · поправить `harbor_guide` координаты
 6. `/ajlb add …` по `server/plugins/ajLeaderboards/AQUATECH_BOARDS.yml`
 7. Тест: `/aquatech daily` сдаёт контракт → XP

@@ -183,8 +183,8 @@
           <div>
             <h4>Проект</h4>
             <a href="rules.html">Правила</a>
+            <a href="https://renfild.github.io/AquaTeche/">Зеркало сайта (GH Pages)</a>
             <a href="login.html">Войти</a>
-            <a href="register.html">Регистрация</a>
             <a href="${DOWNLOAD}">AquaTech.exe</a>
           </div>
         </div>

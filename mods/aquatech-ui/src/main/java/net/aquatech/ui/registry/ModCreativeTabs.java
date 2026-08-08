@@ -16,7 +16,7 @@ public class ModCreativeTabs {
     public static final RegistryObject<CreativeModeTab> AQUATECH_TAB = CREATIVE_MODE_TABS.register("aquatech_tab",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("creativetab.aquatech_tab"))
-                    .icon(() -> new ItemStack(ModItems.OCEAN_GUIDE_BOOK.get()))
+                    .icon(() -> new ItemStack(ModItems.AUTO_FISHER_ITEM.get()))
                     .displayItems((parameters, output) -> {
                         for (var entry : ModItems.RATE_MODS.values()) {
                             output.accept(entry.get());
@@ -34,7 +34,6 @@ public class ModCreativeTabs {
                         output.accept(ModItems.OCEAN_ALTAR_ITEM.get());
                         output.accept(ModItems.ABYSSAL_PORTAL_ITEM.get());
                         output.accept(ModItems.KELP_BIO_PELLET.get());
-                        output.accept(ModItems.OCEAN_GUIDE_BOOK.get());
                     })
                     .build());
 

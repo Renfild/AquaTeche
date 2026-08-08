@@ -65,9 +65,6 @@ public class ModItems {
     public static final RegistryObject<Item> KELP_BIO_PELLET = ITEMS.register("kelp_bio_pellet",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> OCEAN_GUIDE_BOOK = ITEMS.register("ocean_guide_book",
-            () -> new net.aquatech.ui.item.OceanGuideBookItem(new Item.Properties()));
-
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

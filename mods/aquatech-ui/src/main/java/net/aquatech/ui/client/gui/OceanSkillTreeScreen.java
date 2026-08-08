@@ -489,7 +489,7 @@ public class OceanSkillTreeScreen extends Screen {
                         net.minecraft.client.resources.sounds.SimpleSoundInstance
                                 .forUI(SoundEvents.UI_BUTTON_CLICK, 1f));
                 NetworkHandler.CHANNEL.sendToServer(new C2SUnlockSkillPacket(hit.id));
-                return true;
+                    return true;
             }
         }
         return super.mouseClicked(mx, my, btn);

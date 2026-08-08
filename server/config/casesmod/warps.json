@@ -20,16 +20,5 @@
     "z": 50.0,
     "yaw": 0.0,
     "pitch": 0.0
-  },
-  {
-    "id": "fishmarket",
-    "dimension": "minecraft:overworld",
-    "x": 64.04465602090272,
-    "y": 190.0,
-    "z": 157.21956542357506,
-    "yaw": 178.95303,
-    "pitch": 3.2996883,
-    "iconItemId": "minecraft:cod",
-    "displayName": "Рынок Рыбы"
   }
 ]

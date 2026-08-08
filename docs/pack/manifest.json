@@ -4,7 +4,7 @@
   "forge_version": "47.4.0",
   "server_ip": "katherine-hydro.tun.ply.gg",
   "server_port": 31279,
-  "cdn": "https://aquatech-7gs.pages.dev/pack",
+  "cdn": "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
   "files": [
     {
       "path": "mods/AI-Improvements-1.20-0.5.2.jar",

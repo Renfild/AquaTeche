@@ -10,7 +10,6 @@ kits:
     - torch 16
     - lightmanscurrency:coin_copper 8
     - ftbquests:book 1
-    - aquatech_ui:ocean_guide_book 1
   xq:
     delay: 10000
     items: []

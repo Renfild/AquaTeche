@@ -1,9 +1,8 @@
 package net.aquatech.ui.client;
 
-import net.aquatech.ui.client.gui.OceanGuideBookScreen;
+import net.aquatech.ui.capability.AquaSkillCapability;
 import net.aquatech.ui.client.gui.OceanSkillTreeScreen;
 import net.aquatech.ui.client.hud.RhythmHookOverlay;
-import net.aquatech.ui.capability.AquaSkillCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
@@ -13,10 +12,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public final class ClientItemActions {
     private ClientItemActions() {
-    }
-
-    public static void openGuideBook() {
-        Minecraft.getInstance().setScreen(new OceanGuideBookScreen());
     }
 
     public static boolean hasShiftDown() {

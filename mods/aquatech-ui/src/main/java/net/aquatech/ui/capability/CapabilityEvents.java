@@ -1,22 +1,16 @@
 package net.aquatech.ui.capability;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.registry.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CapabilityEvents {
@@ -71,15 +65,7 @@ public class CapabilityEvents {
     // Starter kit contents (mirrors server/plugins/Essentials/kits.yml)
     // -------------------------------------------------------------------------
     private static void grantStarterKit(ServerPlayer player) {
-        List<ItemStack> items = new ArrayList<>();
-        // Light once-kit: SB starter_inventory already gives IU tools + rod.
-        // Only ensure guide book is present for first login (dedupe with SB).
-        items.add(new ItemStack(ModItems.OCEAN_GUIDE_BOOK.get()));
-
-        for (ItemStack stack : items) {
-            if (!player.getInventory().add(stack)) {
-                player.drop(stack, false);
-            }
-        }
+        // Starter gear comes from Skyblock/Essentials kit + FTB quest book.
+        // Ocean guide book removed from aquatech_ui.
     }
 }
