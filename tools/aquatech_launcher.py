@@ -5,14 +5,14 @@ AquaTech Launcher
 - Syncs pack from local AquaTech-Client or update URL (sync server) — no CurseForge needed
 """
 
-import os, sys, json, hashlib, subprocess, threading, urllib.request, zipfile, shutil, time, platform, math, random
+import os, sys, json, hashlib, subprocess, threading, urllib.request, zipfile, shutil, time, platform, math, random, socket
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.10"
+LAUNCHER_VER   = "2.9.11"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -49,7 +49,7 @@ PACK_CDN_MIRRORS = (
     "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
 )
 CLIENT_DOWNLOAD_URL = (
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.9/AquaTech.exe"
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.11/AquaTech.exe"
 )
 
 # Optional GitHub fallback (often 404 if repo/path missing — pack sync prefers update_url / local).
@@ -1960,9 +1960,20 @@ class AquaTechLauncher(tk.Tk):
         self._apply_window_icon()
 
         self._build()
+        self.after(0, self._center_window)
         self.after(20, self._fade_in)
         self.after(40, self._anim_banner)
         self.after(40, self._anim_progress)
+        self.after(200, self._refresh_server_status)
+
+    def _center_window(self):
+        """Center on the primary monitor (custom-launcher UX from typical MC launchers)."""
+        self.update_idletasks()
+        sw = self.winfo_screenwidth()
+        sh = self.winfo_screenheight()
+        x = max(0, (sw - WIN_W) // 2)
+        y = max(0, (sh - WIN_H) // 2)
+        self.geometry(f"{WIN_W}x{WIN_H}+{x}+{y}")
 
     def _apply_window_icon(self):
         """Taskbar / title-bar icon (exe icon is set via PyInstaller .ico)."""
@@ -2187,7 +2198,7 @@ class AquaTechLauncher(tk.Tk):
         )
         self._banner.create_text(
             38, 128,
-            text=f"Minecraft {MC_VER}  ·  Forge и assets ставятся сами  ·  сервер {SERVER_IP}",
+            text=f"Minecraft {MC_VER}  ·  впиши ник и жми Играть",
             font=FONT_SUB, fill=C_MUTED, anchor="w", tags="fg",
         )
         self._banner.create_line(36, HERO_H - 18, main_w - 36, HERO_H - 18, fill=C_LINE, width=1, tags="fg")
@@ -2195,15 +2206,44 @@ class AquaTechLauncher(tk.Tk):
         body = tk.Frame(parent, bg=C_BG)
         body.pack(fill="both", expand=True, padx=36, pady=(22, 20))
 
-        # Nick
+        # Nick (auth in main window — same idea as modern custom launchers)
         nick_wrap = tk.Frame(body, bg=C_BG)
         nick_wrap.pack(fill="x")
         self._e_nick = self._field(nick_wrap, "Никнейм", bg=C_BG)
         self._e_nick.insert(0, self._cfg.get("username", ""))
 
+        # Server card (status + IP) — inspired by server panel UX in custom MC launchers
+        server_card = tk.Frame(body, bg=C_CARD, padx=18, pady=14)
+        server_card.pack(fill="x", pady=(16, 0))
+        row1 = tk.Frame(server_card, bg=C_CARD)
+        row1.pack(fill="x")
+        tk.Label(
+            row1, text="AquaTech Ocean", font=FONT_TITLE, fg=C_TEXT, bg=C_CARD, anchor="w",
+        ).pack(side="left")
+        self._server_dot = tk.Label(row1, text="●", font=("Segoe UI", 11), fg=C_DIM, bg=C_CARD)
+        self._server_dot.pack(side="right", padx=(8, 0))
+        self._server_status = tk.Label(
+            row1, text="Проверяем сервер…", font=FONT_CHIP, fg=C_MUTED, bg=C_CARD, anchor="e",
+        )
+        self._server_status.pack(side="right")
+        row2 = tk.Frame(server_card, bg=C_CARD)
+        row2.pack(fill="x", pady=(8, 0))
+        tk.Label(
+            row2,
+            text=f"{SERVER_IP}:{SERVER_PORT}",
+            font=FONT_STATUS,
+            fg=C_ACCENT,
+            bg=C_CARD,
+            anchor="w",
+        ).pack(side="left")
+        SoftButton(
+            row2, "Скопировать IP", self._copy_server_ip, primary=False,
+            height=36, radius=10, font=FONT_CHIP,
+        ).pack(side="right")
+
         # Actions
         btn_row = tk.Frame(body, bg=C_BG)
-        btn_row.pack(fill="x", pady=(6, 0))
+        btn_row.pack(fill="x", pady=(16, 0))
         self._btn = SoftButton(
             btn_row, "Играть", self._on_play, primary=True,
             height=56, radius=12, font=FONT_BTN_XL,
@@ -2235,7 +2275,7 @@ class AquaTechLauncher(tk.Tk):
 
         tip = tk.Label(
             body,
-            text="Подсказка: укажи URL обновлений во вкладке Настройки, чтобы тянуть моды со sync-сервера.",
+            text="Сборка обновится сама при запуске. После старта лаунчер свернётся в панель задач.",
             font=FONT_CHIP, fg=C_DIM, bg=C_BG, anchor="w", wraplength=680, justify="left",
         )
         tip.pack(fill="x", pady=(18, 0))
@@ -2400,15 +2440,57 @@ class AquaTechLauncher(tk.Tk):
         self._show_page("log")
         threading.Thread(target=self._worker_update, daemon=True).start()
 
+    def _copy_server_ip(self):
+        ip = f"{SERVER_IP}:{SERVER_PORT}"
+        try:
+            self.clipboard_clear()
+            self.clipboard_append(ip)
+            self._status_lbl.configure(text="IP скопирован")
+        except tk.TclError:
+            messagebox.showinfo("AquaTech", ip)
+
+    def _refresh_server_status(self):
+        def work():
+            host = (self._cfg.get("server_host") or SERVER_IP).strip()
+            try:
+                port = int(str(self._cfg.get("server_port") or SERVER_PORT).strip())
+            except ValueError:
+                port = int(SERVER_PORT)
+            online = False
+            ms = None
+            try:
+                t0 = time.perf_counter()
+                with socket.create_connection((host, port), timeout=2.5):
+                    online = True
+                ms = int((time.perf_counter() - t0) * 1000)
+            except OSError:
+                online = False
+            self.after(0, lambda: self._apply_server_status(online, ms))
+
+        threading.Thread(target=work, daemon=True).start()
+
+    def _apply_server_status(self, online: bool, ms):
+        if not hasattr(self, "_server_status"):
+            return
+        if online:
+            self._server_status.configure(text=f"Онлайн · {ms} мс" if ms is not None else "Онлайн")
+            self._server_dot.configure(fg="#3DDB8A")
+        else:
+            self._server_status.configure(text="Недоступен")
+            self._server_dot.configure(fg=C_RED)
+        self.after(45000, self._refresh_server_status)
+
     def _done(self, ok: bool, close: bool = False):
         self._running = False
         if ok:
             self._set_busy(False)
             self._btn.set_text("В игре")
-            # Never auto-close: exiting the launcher used to kill Minecraft on Windows
-            # when stdout/stderr were redirected to parent-owned log files.
+            # Never destroy: closing used to kill Minecraft when logs were parent-owned.
+            # Minimize instead (common custom-launcher behavior after Play).
             if close:
                 self.after(2500, self.destroy)
+            else:
+                self.after(600, self.iconify)
         else:
             self._btn.set_enabled(True)
             self._btn.set_text("Ошибка — ещё раз")
