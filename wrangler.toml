@@ -1,5 +1,5 @@
-name = "aquatech"
-pages_build_output_dir = "."
+﻿name = "aquatech"
+pages_build_output_dir = "docs"
 compatibility_date = "2026-08-08"
 
 [vars]
