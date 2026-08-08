@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload AquaTechLauncher.zip: draft → upload → publish (immutable releases)."""
+"""Upload AquaTechLauncher.exe: draft → upload → publish (immutable releases)."""
 from __future__ import annotations
 
 import json
@@ -10,8 +10,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "launcher-2.9.0"
-ZIP = ROOT / "dist" / "releases" / "AquaTechLauncher.zip"
+TAG = "launcher-2.9.1"
+EXE = ROOT / "dist" / "releases" / "AquaTechLauncher.exe"
+if not EXE.is_file():
+    EXE = ROOT / "dist" / "AquaTechLauncher.exe"
 
 
 def token() -> str:
@@ -40,59 +42,36 @@ def api(method: str, url: str, data: bytes | None = None, content_type: str | No
 
 
 def main() -> None:
-    if not ZIP.is_file():
-        sys.exit(f"missing {ZIP}")
+    if not EXE.is_file():
+        sys.exit(f"missing {EXE}")
 
     body = (
         "## Скачать лаунчер AquaTech\n\n"
-        "1. Скачай **AquaTechLauncher.zip**\n"
-        "2. Распакуй ZIP целиком\n"
-        "3. Запусти **AquaTechLauncher.exe** внутри папки\n\n"
-        "Нужна вся папка (`_internal` рядом с exe).\n"
+        "Скачай **AquaTechLauncher.exe** и запусти — как у LoliLand, один файл.\n"
     )
 
-    _, releases = api("GET", f"https://api.github.com/repos/{REPO}/releases")
-    rel = next((r for r in releases if r.get("tag_name") == TAG), None)
-
-    if rel and not rel.get("draft"):
-        print(f"published release {TAG} already exists id={rel['id']} — use a new tag")
-        sys.exit(2)
-
-    if not rel:
-        payload = json.dumps(
-            {
-                "tag_name": TAG,
-                "target_commitish": "main",
-                "name": "AquaTech Launcher 2.9.0",
-                "body": body,
-                "draft": True,
-                "prerelease": False,
-            }
-        ).encode()
-        _, rel = api(
-            "POST",
-            f"https://api.github.com/repos/{REPO}/releases",
-            data=payload,
-            content_type="application/json",
-        )
-        print("draft created", rel["id"])
-    else:
-        print("using existing draft", rel["id"])
-
+    payload = json.dumps(
+        {
+            "tag_name": TAG,
+            "target_commitish": "main",
+            "name": "AquaTech Launcher 2.9.1",
+            "body": body,
+            "draft": True,
+            "prerelease": False,
+        }
+    ).encode()
+    _, rel = api(
+        "POST",
+        f"https://api.github.com/repos/{REPO}/releases",
+        data=payload,
+        content_type="application/json",
+    )
+    print("draft", rel["id"])
     release_id = rel["id"]
-    _, rel = api("GET", f"https://api.github.com/repos/{REPO}/releases/{release_id}")
-    assets = {a["name"]: a for a in (rel.get("assets") or [])}
-    for stale in list(assets):
-        if stale.startswith("AquaTechLauncher"):
-            print("delete", stale)
-            api(
-                "DELETE",
-                f"https://api.github.com/repos/{REPO}/releases/assets/{assets[stale]['id']}",
-            )
 
-    name = "AquaTechLauncher.zip"
-    print(f"upload {name} ({ZIP.stat().st_size / 1024 / 1024:.1f} MB)…")
-    data = ZIP.read_bytes()
+    name = "AquaTechLauncher.exe"
+    print(f"upload {name} ({EXE.stat().st_size / 1024 / 1024:.1f} MB)…")
+    data = EXE.read_bytes()
     _, uploaded = api(
         "POST",
         f"https://uploads.github.com/repos/{REPO}/releases/{release_id}/assets?name={name}",
@@ -101,7 +80,6 @@ def main() -> None:
     )
     print("uploaded", uploaded.get("browser_download_url"))
 
-    # publish
     _, published = api(
         "PATCH",
         f"https://api.github.com/repos/{REPO}/releases/{release_id}",
@@ -109,7 +87,7 @@ def main() -> None:
             {
                 "draft": False,
                 "make_latest": "true",
-                "name": "AquaTech Launcher 2.9.0",
+                "name": "AquaTech Launcher 2.9.1",
                 "body": body,
             }
         ).encode(),

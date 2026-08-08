@@ -1,16 +1,13 @@
 # -*- mode: python ; coding: utf-8 -*-
-# onedir: much faster cold start than onefile (no unpack to %TEMP% + Defender rescan each launch)
+# onefile: one .exe download like LoliLand (friends unpack nothing)
 
 a = Analysis(
     ['tools\\aquatech_launcher.py'],
     pathex=['tools'],
     binaries=[],
     datas=[
-        # Forge installer (fallback) + prebuilt runtime (fast path — skips 5min processors)
         ('tools\\forge-1.20.1-47.4.0-installer.jar', '.'),
         ('tools\\forge-runtime-1.20.1-47.4.0.zip', '.'),
-        ('tools\\5.json', '.'),
-        ('.gh_token', '.'),
         ('tools\\aquatech.ico', '.'),
         ('launcher_ui', 'launcher_ui'),
     ],
@@ -24,27 +21,11 @@ a = Analysis(
     hooksconfig={},
     runtime_hooks=[],
     excludes=[
-        'PyQt5',
-        'PyQt6',
-        'PySide2',
-        'PySide6',
-        'gi',
-        'gtk',
-        'qtpy',
-        'cefpython3',
-        # Heavy unused deps that hooks sometimes pull in — bloat + slow import
-        'numpy',
-        'scipy',
-        'pandas',
-        'matplotlib',
-        'PIL',
-        'Pillow',
-        'cv2',
-        'torch',
-        'tensorflow',
-        'IPython',
-        'notebook',
-        'pytest',
+        'PyQt5', 'PyQt6', 'PySide2', 'PySide6',
+        'gi', 'gtk', 'qtpy', 'cefpython3',
+        'numpy', 'scipy', 'pandas', 'matplotlib',
+        'PIL', 'Pillow', 'cv2', 'torch', 'tensorflow',
+        'IPython', 'notebook', 'pytest',
     ],
     noarchive=False,
     optimize=0,
