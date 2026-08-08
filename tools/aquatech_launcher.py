@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.6"
+LAUNCHER_VER   = "2.9.7"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -29,9 +29,10 @@ SERVER_IP      = "katherine-hydro.tun.ply.gg"
 SERVER_PORT    = "31279"
 # Warm Play: skip slow CDN cascade when enough mods already on disk
 PACK_READY_MIN_JARS = 40
-# Pack CDN for friends — website hosts manifest.json; jars download from GitHub Releases URLs inside it.
+# Pack CDN for friends — manifest.json mirrors; jars download from GitHub Releases URLs inside it.
 # (Playit is only the Minecraft server IP, not the modpack CDN.)
-DEFAULT_UPDATE_URL = "https://aquatech-7gs.pages.dev/pack"
+# Prefer jsDelivr/raw: Cloudflare Pages (pages.dev) often hangs SSL from some networks.
+DEFAULT_UPDATE_URL = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 # If nothing configured — try local sync server (start_sync_server.py default 8765).
 # Avoid 8080 first: NVIDIA Broadcast often binds it and returns bogus 404.
 LOCAL_SYNC_FALLBACKS = (
@@ -42,11 +43,14 @@ LOCAL_SYNC_FALLBACKS = (
     "http://127.0.0.1:8080",
 )
 
-# Manifest / pack mirrors (website first, then jsDelivr / GitHub raw).
+# Manifest / pack mirrors (fast GitHub CDNs first; Pages last — can hang on SSL).
 PACK_CDN_MIRRORS = (
     DEFAULT_UPDATE_URL,
-    "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
     "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
+    "https://aquatech-7gs.pages.dev/pack",
+)
+CLIENT_DOWNLOAD_URL = (
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.7/AquaTech.exe"
 )
 
 # Optional GitHub fallback (often 404 if repo/path missing — pack sync prefers update_url / local).
@@ -505,13 +509,35 @@ def normalize_update_url(url: str | None) -> str:
         return DEFAULT_UPDATE_URL
     if SERVER_IP.lower() in low:
         return DEFAULT_UPDATE_URL
+    # Pages.dev often stalls SSL — steer saved configs to a working mirror
+    if "pages.dev" in low:
+        return DEFAULT_UPDATE_URL
     if not (low.startswith("http://") or low.startswith("https://")):
         return DEFAULT_UPDATE_URL
     return u
 
 
+def _fetch_json_hard(url: str, timeout: float, headers: dict | None = None) -> dict:
+    """urlopen with a hard wall-clock deadline (Windows SSL can ignore socket timeout)."""
+    hdrs = dict(headers or {})
+    hdrs.setdefault("User-Agent", f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}")
+
+    def _do() -> dict:
+        req = urllib.request.Request(url, headers=hdrs)
+        with urllib.request.urlopen(req, timeout=max(1.0, timeout)) as r:
+            return json.loads(r.read())
+
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        fut = pool.submit(_do)
+        try:
+            return fut.result(timeout=timeout + 0.5)
+        except Exception:
+            fut.cancel()
+            raise
+
+
 def resolve_update_base(cfg: dict | None = None, *, allow_local_fallback: bool = True) -> str:
-    """CDN base URL for friends (no trailing slash). Website pack folder or sync server."""
+    """CDN base URL for friends (no trailing slash). Prefer jsDelivr over flaky Pages."""
     candidates: list[str] = []
     if cfg and cfg.get("update_url"):
         candidates.append(normalize_update_url(str(cfg["update_url"])))
@@ -573,6 +599,7 @@ def apply_manifest_sync(
     verify_hash: bool = False,
     download_url=None,
     log=None,
+    progress=None,
 ) -> tuple[int, int, int]:
     """Apply pack manifest to game_dir. Returns (updated, failed, deleted).
 
@@ -583,6 +610,13 @@ def apply_manifest_sync(
         if log:
             log(msg)
 
+    def _progress(pct: float):
+        if progress:
+            try:
+                progress(pct)
+            except Exception:
+                pass
+
     files = manifest.get("files") or []
     if not files:
         _log("⚠️  Манифест пустой — нечего синхронизировать")
@@ -592,11 +626,19 @@ def apply_manifest_sync(
     deleted = purge_pack_extras(game_dir, wanted, log=lambda m: _log(m))
 
     jobs = []
+    checked = 0
+    total_files = len(files)
+    if verify_hash:
+        _log(f"🔎 Проверяем хеши ({total_files} файлов)…")
+        _progress(5)
     for item in files:
         rel = item["path"].replace("\\", "/").lstrip("/")
         md5 = (item.get("md5") or "").lower()
         local = game_dir / rel.replace("/", os.sep)
         expect = int(item.get("size") or 0)
+        checked += 1
+        if verify_hash and checked % 25 == 0:
+            _progress(5 + 25 * (checked / max(1, total_files)))
         if local.exists():
             same_size = (not expect) or local.stat().st_size == expect
             if same_size and not verify_hash:
@@ -609,10 +651,13 @@ def apply_manifest_sync(
 
     if not jobs:
         _log(f"✓ Сборка актуальна ({len(files)} файлов)" + (f", удалено {deleted}" if deleted else ""))
+        _progress(100)
         return 0, 0, deleted
 
     _log(f"⚡ Обновляем {len(jobs)}/{len(files)} файлов…")
+    _progress(35)
     updated = failed = 0
+    done = 0
 
     def one(job):
         item, rel, md5, local, expect = job
@@ -662,11 +707,16 @@ def apply_manifest_sync(
                 updated += 1
             else:
                 failed += 1
+            done += 1
+            if done == 1 or done % 5 == 0 or done == len(jobs):
+                _progress(35 + 60 * (done / max(1, len(jobs))))
+                _log(f"↓ {done}/{len(jobs)}…")
 
     if failed:
         _log(f"✓ Синхронизация: {updated} ок, {failed} ошибок" + (f", −{deleted}" if deleted else ""))
     else:
         _log(f"✓ Синхронизация: {updated}/{len(files)}" + (f", удалено {deleted}" if deleted else ""))
+    _progress(100)
     return updated, failed, deleted
 
 
@@ -2694,12 +2744,11 @@ def _get_gh_token() -> str:
             url = f"{cand.rstrip('/')}/manifest.json"
             self._log_line(f"🌐 CDN: {url}", "info")
             try:
-                req = urllib.request.Request(
+                manifest = _fetch_json_hard(
                     url,
+                    timeout,
                     headers={"User-Agent": f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}"},
                 )
-                with urllib.request.urlopen(req, timeout=timeout) as r:
-                    manifest = json.loads(r.read())
                 source = "cdn"
                 base = cand.rstrip("/")
                 return True
@@ -2711,14 +2760,24 @@ def _get_gh_token() -> str:
             bases: list[str] = []
             if base:
                 bases.append(base.rstrip("/"))
+            for m in PACK_CDN_MIRRORS:
+                b = m.rstrip("/")
+                if b not in bases:
+                    bases.append(b)
             if include_local_fallbacks:
                 for fb in LOCAL_SYNC_FALLBACKS:
                     b = fb.rstrip("/")
                     if b not in bases:
                         bases.append(b)
-            for cand in bases:
-                # Loopback dead ports must fail fast; remote (Playit) gets a bit more
-                timeout = 0.6 if _is_loopback_url(cand) else (8.0 if prefer_remote else 3.0)
+            for i, cand in enumerate(bases):
+                # Loopback dead ports must fail fast; Pages gets a hard short deadline
+                if _is_loopback_url(cand):
+                    timeout = 0.6
+                elif "pages.dev" in cand.lower():
+                    timeout = 2.5
+                else:
+                    timeout = 5.0 if prefer_remote else 3.0
+                self._set_pct(2 + min(12, i * 2))
                 if try_one(cand, timeout):
                     return True
             return False
@@ -2740,11 +2799,7 @@ def _get_gh_token() -> str:
                 t = _get_gh_token()
                 if t:
                     headers["Authorization"] = f"token {t}"
-                req = urllib.request.Request(MANIFEST_URL, headers=headers)
-                with urllib.request.urlopen(req, timeout=10) as r:
-                    if r.status >= 400:
-                        return False
-                    manifest = json.loads(r.read())
+                manifest = _fetch_json_hard(MANIFEST_URL, 8.0, headers=headers)
                 source = "github"
                 self._log_line("🌐 Сборка с GitHub", "info")
                 return True
@@ -2799,6 +2854,7 @@ def _get_gh_token() -> str:
             base=base or "",
             verify_hash=prefer_remote,
             download_url=self._download_url,
+            progress=self._set_pct,
             log=lambda m: self._log_line(
                 m,
                 "ok" if m.startswith("✓") else ("warn" if m.startswith("⚠️") else ("dim" if m.startswith("🗑") else "info")),
