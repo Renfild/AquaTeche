@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Топы игроков — AquaTech</title>
+  <meta name="description" content="Рейтинги игроков AquaTech по онлайну, монетам и лайкам." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body data-page="top">
+  <div id="site-header"></div>
+  
+  <section class="page-hero">
+    <div class="container">
+      <div class="eyebrow">Рейтинги</div>
+      <h1>Топы игроков</h1>
+      <p>Демо-данные сайта. Позже подключим живой API сервера.</p>
+      <div class="banner"></div>
+      <div class="tabs">
+        <button class="tab active" type="button" data-top-tab="playtime">По онлайну</button>
+        <button class="tab" type="button" data-top-tab="coins">По монетам</button>
+        <button class="tab" type="button" data-top-tab="likes">По лайкам</button>
+      </div>
+      <div class="top-list" id="top-root"></div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

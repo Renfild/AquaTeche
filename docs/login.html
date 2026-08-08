@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Вход — AquaTech</title>
+  <meta name="description" content="Вход в профиль AquaTech." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body data-page="login">
+  <div id="site-header"></div>
+  
+  <section class="page-hero">
+    <div class="container auth-shell">
+      <div class="eyebrow">Аккаунт</div>
+      <h1>Вход</h1>
+      <p>Демо-авторизация в браузере. Ник станет твоим профилем на сайте.</p>
+      <form class="card form" id="login-form" style="margin-top:1.25rem">
+        <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required /></div>
+        <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="••••" /></div>
+        <button class="btn btn-primary" type="submit">Войти</button>
+        <a class="btn btn-ghost" href="register.html">Нет аккаунта? Регистрация</a>
+      </form>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
