@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.8"
+LAUNCHER_VER   = "2.9.9"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -49,7 +49,7 @@ PACK_CDN_MIRRORS = (
     "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
 )
 CLIENT_DOWNLOAD_URL = (
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.8/AquaTech.exe"
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.9/AquaTech.exe"
 )
 
 # Optional GitHub fallback (often 404 if repo/path missing — pack sync prefers update_url / local).
@@ -1391,8 +1391,20 @@ def ensure_libraries_and_natives(game_dir: Path, ver: dict, natives_dir: Path, l
     return cp
 
 
+def _asset_object_path(objects_dir: Path, objects: dict, name: str) -> Path | None:
+    meta = objects.get(name)
+    if not meta:
+        return None
+    h = meta["hash"]
+    return objects_dir / h[:2] / h
+
+
 def ensure_assets(game_dir: Path, ver: dict, log=None) -> str:
-    """Download Minecraft assets fast: parallel + BMCLAPI, critical first, rest in background."""
+    """Download Minecraft assets fast: parallel + BMCLAPI.
+
+    Lang/textures first, then sounds — all must finish before launch.
+    Starting the game while sounds still download leaves audio silent until restart.
+    """
     assets_dir = game_dir / "assets"
     assets_dir.mkdir(parents=True, exist_ok=True)
     index = ver.get("assetIndex") or {}
@@ -1437,18 +1449,37 @@ def ensure_assets(game_dir: Path, ver: dict, log=None) -> str:
 
     if not index_path.exists():
         if log:
-            log("⚠️  Нет asset index — игра может стартовать без звуков/иконок")
-        return index_id
-
-    # Warm path: skip scanning ~3k objects every launch (slow on HDD + Defender)
-    ready_marker = assets_dir / "indexes" / f"{index_id}.aquatech_ready"
-    if ready_marker.exists():
-        if log:
-            log(f"✓ assets готовы (кэш {index_id})")
+            log("⚠️  Нет asset index — игра может стартовать без звуков/языка")
         return index_id
 
     idx = json.loads(index_path.read_text(encoding="utf-8"))
     objects = idx.get("objects") or {}
+    ready_marker = assets_dir / "indexes" / f"{index_id}.aquatech_ready"
+
+    # Spot-check language + sounds — warm marker alone is not enough
+    must_have = (
+        "minecraft/lang/ru_ru.json",
+        "minecraft/sounds.json",
+    )
+    spot_ok = True
+    for name in must_have:
+        p = _asset_object_path(objects_dir, objects, name)
+        if p is None or not p.exists() or p.stat().st_size < 8:
+            spot_ok = False
+            break
+
+    if ready_marker.exists() and spot_ok:
+        if log:
+            log(f"✓ assets готовы (кэш {index_id})")
+        return index_id
+    if ready_marker.exists() and not spot_ok:
+        try:
+            ready_marker.unlink(missing_ok=True)
+        except OSError:
+            pass
+        if log:
+            log("⚠️  assets неполные (язык/звуки) — докачиваем…")
+
     missing = []  # (name, hash, dest, expect)
     for name, meta in objects.items():
         h = meta["hash"]
@@ -1499,13 +1530,12 @@ def ensure_assets(game_dir: Path, ver: dict, log=None) -> str:
                 dest.unlink(missing_ok=True)
         return False
 
-    def _download_batch(batch, label: str, progress_log=True) -> tuple[int, int]:
+    def _download_batch(batch, label: str) -> tuple[int, int]:
         if not batch:
             return 0, 0
         total = len(batch)
-        use_log = log if progress_log else None
-        if use_log:
-            use_log(f"⚡ {label}: {total} файлов × {ASSET_WORKERS} потоков…")
+        if log:
+            log(f"⚡ {label}: {total} файлов × {ASSET_WORKERS} потоков…")
         ok = fail = 0
         done = 0
         with ThreadPoolExecutor(max_workers=ASSET_WORKERS) as pool:
@@ -1516,35 +1546,38 @@ def ensure_assets(game_dir: Path, ver: dict, log=None) -> str:
                 else:
                     fail += 1
                 done += 1
-                if use_log and (done % 200 == 0 or done == total):
-                    use_log(f"   {label} {done}/{total}")
+                if log and (done % 200 == 0 or done == total):
+                    log(f"   {label} {done}/{total}")
         return ok, fail
 
-    # 1) Critical — wait (lang/icons), usually seconds
-    c_ok, c_fail = _download_batch(critical, "assets (важные)")
+    # 1) Critical — lang/icons/textures (needed for Russian UI)
+    c_ok, c_fail = _download_batch(critical, "assets (язык/текстуры)")
     if log and critical:
         log(f"✓ важные assets: {c_ok}" + (f", ошибок {c_fail}" if c_fail else ""))
 
-    # 2) Rest (mostly sounds) — background so Play isn't blocked for minutes
+    ru_path = _asset_object_path(objects_dir, objects, "minecraft/lang/ru_ru.json")
+    if ru_path is None or not ru_path.exists():
+        if log:
+            log("⚠️  Нет ru_ru.json — язык в игре будет английский. Повтори обновление.")
+
+    # 2) Sounds + rest — MUST finish before launch (otherwise mute until restart)
     if rest:
         if log:
-            log(f"⚡ Остальные assets ({len(rest)}) качаются в фоне — можно играть")
-
-        def _bg():
+            log(f"🔊 Качаем звуки и остальные assets ({len(rest)}) — дождись конца, иначе тишина")
+        r_ok, r_fail = _download_batch(rest, "assets (звуки)")
+        if log:
+            log(f"✓ звуки/assets: {r_ok}" + (f", ошибок {r_fail}" if r_fail else ""))
+        try:
+            (assets_dir / ".aquatech_assets_bg.txt").write_text(
+                f"ok={r_ok} fail={r_fail}\n", encoding="utf-8"
+            )
+        except OSError:
+            pass
+        if r_fail == 0:
             try:
-                # no UI log from this thread (tk not thread-safe)
-                r_ok, r_fail = _download_batch(rest, "assets (фон)", progress_log=False)
-                marker = assets_dir / ".aquatech_assets_bg.txt"
-                marker.write_text(f"ok={r_ok} fail={r_fail}\n", encoding="utf-8")
-                if r_fail == 0:
-                    ready_marker.write_text(str(len(objects)), encoding="utf-8")
-            except Exception as e:
-                try:
-                    (assets_dir / ".aquatech_assets_bg.txt").write_text(f"err={e}\n", encoding="utf-8")
-                except Exception:
-                    pass
-
-        threading.Thread(target=_bg, daemon=True, name="AquaTechAssetsBG").start()
+                ready_marker.write_text(str(len(objects)), encoding="utf-8")
+            except OSError:
+                pass
     else:
         try:
             ready_marker.write_text(str(len(objects)), encoding="utf-8")
@@ -1557,24 +1590,72 @@ def ensure_assets(game_dir: Path, ver: dict, log=None) -> str:
 
 
 def ensure_default_russian_options(game_dir: Path):
-    """Ensure options.txt defaults to Russian language (ru_ru) on launcher start."""
+    """Force Russian UI + fix silent/wrong OpenAL device in options.txt."""
     options_file = game_dir / "options.txt"
-    if not options_file.exists():
-        try:
-            options_file.write_text("lang:ru_ru\n", encoding="utf-8")
-        except OSError:
-            pass
-        return
-
+    defaults = {
+        "lang": "ru_ru",
+        "soundCategory_master": "1.0",
+        "soundCategory_music": "1.0",
+        "soundCategory_record": "1.0",
+        "soundCategory_weather": "1.0",
+        "soundCategory_block": "1.0",
+        "soundCategory_hostile": "1.0",
+        "soundCategory_neutral": "1.0",
+        "soundCategory_player": "1.0",
+        "soundCategory_ambient": "1.0",
+        "soundCategory_voice": "1.0",
+    }
     try:
-        content = options_file.read_text(encoding="utf-8", errors="ignore")
-        if "lang:" not in content:
-            content += "\nlang:ru_ru\n"
-            options_file.write_text(content, encoding="utf-8")
-        elif "lang:en_us" in content:
-            content = content.replace("lang:en_us", "lang:ru_ru")
-            options_file.write_text(content, encoding="utf-8")
-    except Exception:
+        kv: dict[str, str] = {}
+        order: list[str] = []
+        if options_file.exists():
+            for line in options_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+                if ":" not in line:
+                    continue
+                key, _, val = line.partition(":")
+                key = key.strip()
+                if not key:
+                    continue
+                if key not in kv:
+                    order.append(key)
+                kv[key] = val.strip()
+
+        changed = False
+        for key, val in defaults.items():
+            if key == "lang":
+                if kv.get(key) != val:
+                    kv[key] = val
+                    if key not in order:
+                        order.append(key)
+                    changed = True
+            elif key not in kv:
+                kv[key] = val
+                order.append(key)
+                changed = True
+
+        # Wrong OpenAL output (e.g. microphone) => no game audio until restart
+        sd = (kv.get("soundDevice") or "").strip().strip('"')
+        sd_l = sd.lower()
+        bad_device = (
+            not sd
+            or "microphone" in sd_l
+            or "mic (" in sd_l
+            or "микрофон" in sd_l
+            or "fifine" in sd_l
+            or "\ufffd" in sd  # mojibake from broken encoding
+        )
+        if "soundDevice" in kv and bad_device:
+            kv["soundDevice"] = ""
+            changed = True
+        elif "soundDevice" not in kv:
+            kv["soundDevice"] = ""
+            order.append("soundDevice")
+            changed = True
+
+        if changed or not options_file.exists():
+            text = "\n".join(f"{k}:{kv[k]}" for k in order if k in kv) + "\n"
+            options_file.write_text(text, encoding="utf-8")
+    except OSError:
         pass
 
 
