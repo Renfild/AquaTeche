@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.9"
+TAG = "client-2.9.10"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -51,7 +51,7 @@ def main() -> None:
             sys.exit(f"missing {f}")
 
     man = {
-        "version": "2.9.9",
+        "version": "2.9.10",
         "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
@@ -60,10 +60,9 @@ def main() -> None:
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## AquaTech Client 2.9.9\n\n"
-        "- Fix: wait for sound assets before launch (no mute until restart)\n"
-        "- Fix: force Russian language (ru_ru) in options.txt\n"
-        "- AquaTech.exe bootstrap + pack CDN / pack-2.9.2\n"
+        "## AquaTech Client 2.9.10\n\n"
+        "- Fix: bootstrap installer window closes after launching the launcher\n"
+        "- FTB quests: ocean spine (6 acts) + workshops\n"
         "- Server IP: katherine-hydro.tun.ply.gg:31279\n"
     )
 
@@ -71,7 +70,7 @@ def main() -> None:
         {
             "tag_name": TAG,
             "target_commitish": "main",
-            "name": "AquaTech Client 2.9.9",
+            "name": "AquaTech Client 2.9.10",
             "body": body,
             "draft": True,
             "prerelease": False,

@@ -1,0 +1,337 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "04_mv"
+	group: "0AC7A00000000001"
+	icon: "starcatcher:starcatcher_rod"
+	id: "AQ040000CH"
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			x: -3.2d
+			y: 0.0d
+			id: "AQ040001Q"
+			title: "Вольфрам"
+			icon: "industrialupgrade:baseore/tungsten"
+			subtitle: "Тяжёлый металл MV."
+			description: [
+				"Тяжёлый металл MV."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			tasks: [{
+				id: "AQ040001T"
+				type: "item"
+				item: "industrialupgrade:baseore/tungsten"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040001R"
+					type: "item"
+					item: "industrialupgrade:baseore/tungsten"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "AQ040001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: 0.0d
+			id: "AQ040002Q"
+			title: "Хром"
+			icon: "industrialupgrade:baseore/chromium"
+			subtitle: "Для нержавейки и удочек."
+			description: [
+				"Для нержавейки и удочек."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ040001Q"]
+			tasks: [{
+				id: "AQ040002T"
+				type: "item"
+				item: "industrialupgrade:baseore/chromium"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040002R"
+					type: "item"
+					item: "industrialupgrade:baseore/chromium"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "AQ040002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: 0.0d
+			id: "AQ040003Q"
+			title: "Продвинутая схема"
+			icon: "industrialupgrade:crafting_elements/crafting_273_element"
+			subtitle: "Advanced Circuit для MV."
+			description: [
+				"Advanced Circuit для MV."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ040002Q"]
+			tasks: [{
+				id: "AQ040003T"
+				type: "item"
+				item: "industrialupgrade:crafting_elements/crafting_273_element"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040003R"
+					type: "item"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "AQ040003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: 0.0d
+			id: "AQ040004Q"
+			title: "Сапфир"
+			icon: "industrialupgrade:preciousgem/sapphire_gem"
+			subtitle: "Кристалл для Ловца Звёзд."
+			description: [
+				"Кристалл для Ловца Звёзд."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ040003Q"]
+			tasks: [{
+				id: "AQ040004T"
+				type: "item"
+				item: "industrialupgrade:preciousgem/sapphire_gem"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040004R"
+					type: "item"
+					item: "industrialupgrade:preciousgem/sapphire_gem"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "AQ040004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 3.2d
+			y: 0.0d
+			id: "AQ040005Q"
+			title: "Удочка Ловца Звёзд"
+			icon: "starcatcher:starcatcher_rod"
+			subtitle: "Именной тир StarCatcher."
+			description: [
+				"Именной тир StarCatcher."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ040004Q"]
+			tasks: [{
+				id: "AQ040005T"
+				type: "item"
+				item: "starcatcher:starcatcher_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040005R"
+					type: "item"
+					item: "starcatcher:starcatcher_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "AQ040005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -3.2d
+			y: -1.5d
+			id: "AQ040006Q"
+			title: "Топаз"
+			icon: "industrialupgrade:preciousgem/topaz_gem"
+			subtitle: "Для лазуритовой удочки."
+			description: [
+				"Для лазуритовой удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ040005Q"]
+			tasks: [{
+				id: "AQ040006T"
+				type: "item"
+				item: "industrialupgrade:preciousgem/topaz_gem"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040006R"
+					type: "item"
+					item: "industrialupgrade:preciousgem/topaz_gem"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "AQ040006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: -1.5d
+			id: "AQ040007Q"
+			title: "Золотая пластина"
+			icon: "industrialupgrade:itemplates/gold_plate"
+			subtitle: "Обвязка лазуритовой."
+			description: [
+				"Обвязка лазуритовой."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ040006Q"]
+			tasks: [{
+				id: "AQ040007T"
+				type: "item"
+				item: "industrialupgrade:itemplates/gold_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040007R"
+					type: "item"
+					item: "industrialupgrade:itemplates/gold_plate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "AQ040007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: -1.5d
+			id: "AQ040008Q"
+			title: "Лазуритовая удочка"
+			icon: "starcatcher:azure_crystal_rod"
+			subtitle: "Капстоун акта IV."
+			description: [
+				"Капстоун акта IV."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ040007Q"]
+			tasks: [{
+				id: "AQ040008T"
+				type: "item"
+				item: "starcatcher:azure_crystal_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040008R"
+					type: "item"
+					item: "starcatcher:azure_crystal_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "AQ040008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: -1.5d
+			id: "AQ040009Q"
+			title: "Нержавеющая сталь"
+			icon: "industrialupgrade:alloyingot/stainless_steel"
+			subtitle: "Сплав домны — дальше HV."
+			description: [
+				"Сплав домны — дальше HV."
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 260
+			dependencies: ["AQ040008Q"]
+			tasks: [{
+				id: "AQ040009T"
+				type: "item"
+				item: "industrialupgrade:alloyingot/stainless_steel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ040009R"
+					type: "item"
+					item: "industrialupgrade:alloyingot/stainless_steel"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "AQ040009X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Вольфрам, хром, продвинутые схемы и удочка Ловца Звёзд."
+	title: "Акт IV · Домна и звёзды"
+}

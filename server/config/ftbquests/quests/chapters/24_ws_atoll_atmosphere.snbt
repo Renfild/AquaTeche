@@ -1,0 +1,3088 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "24_ws_atoll_atmosphere"
+	group: "0AC7A00000000005"
+	icon: "supplementaries:planter"
+	id: "WS240000CH"
+	order_index: 24
+	quest_links: [ ]
+	quests: [
+		{
+			x: -4.62d
+			y: 0.0d
+			id: "WS240001Q"
+			title: "I·1  Стеклянная рамка"
+			icon: "quark:glass_item_frame"
+			subtitle: "✦ ГАЙД МОДА · Витрины улова."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 1/59&r",
+				"",
+				"&bQuark&r и &bSupplementaries&r — QoL и атмосфера.",
+				"&eAmendments&r (отдельный мод) держит настенные фонари, подвесные горшки/флаги и черепа со свечами.",
+				"",
+				"&6Зачем:&r сделать гавань читаемой и удобной: склад, свет, трубы item pipe, рюкзак, указатели.",
+				"Это &aне&r промышленный тир — можно проходить в любой момент после берега.",
+				"",
+				"&7Многие блоки ставятся ПКМ, настройки — в GUI. JEI покажет крафты.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"",
+				"&a▶ Задача:&r Витрины улова.",
+				"&7Предмет:&r &fquark:glass_item_frame&r",
+				"",
+				"Рамки витрин без палки сзади — чистый вид стенда улова.",
+				"Glowing-версия светится в темноте.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× quark:glass_item_frame  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 280
+			optional: true
+			tasks: [{
+				id: "WS240001T"
+				type: "item"
+				item: "quark:glass_item_frame"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240001R"
+					type: "item"
+					item: "quark:glass_item_frame"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 0.0d
+			id: "WS240002Q"
+			title: "I·2  Светящаяся рамка"
+			icon: "quark:glowing_glass_item_frame"
+			subtitle: "Ночные витрины."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 2/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ночные витрины.",
+				"&7Предмет:&r &fquark:glowing_glass_item_frame&r",
+				"",
+				"Рамки витрин без палки сзади — чистый вид стенда улова.",
+				"Glowing-версия светится в темноте.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× quark:glowing_glass_item_frame  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240001Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240002T"
+				type: "item"
+				item: "quark:glowing_glass_item_frame"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240002R"
+					type: "item"
+					item: "quark:glowing_glass_item_frame"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 0.0d
+			id: "WS240003Q"
+			title: "I·3  Труба Quark"
+			icon: "quark:pipe"
+			subtitle: "Простые item pipes."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 3/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Простые item pipes.",
+				"&7Предмет:&r &fquark:pipe&r",
+				"",
+				"Простые item-трубы Quark без Create.",
+				"Encased — тот же pipe в обшивке.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× quark:pipe  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240002Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240003T"
+				type: "item"
+				item: "quark:pipe"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240003R"
+					type: "item"
+					item: "quark:pipe"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 0.0d
+			id: "WS240004Q"
+			title: "I·4  Encased Pipe"
+			icon: "quark:encased_pipe"
+			subtitle: "Эстетичные трубы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 4/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Эстетичные трубы.",
+				"&7Предмет:&r &fquark:encased_pipe&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× quark:encased_pipe  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240003Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240004T"
+				type: "item"
+				item: "quark:encased_pipe"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240004R"
+					type: "item"
+					item: "quark:encased_pipe"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 0.0d
+			id: "WS240005Q"
+			title: "I·5  Ящик Quark"
+			icon: "quark:crate"
+			subtitle: "Компактное хранение."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 5/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Компактное хранение.",
+				"&7Предмет:&r &fquark:crate&r",
+				"",
+				"Сжатое хранение еды/урожая.",
+				"Apple/potato crate — складывай стаки компактно.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× quark:crate  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS240004Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240005T"
+				type: "item"
+				item: "quark:crate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240005R"
+					type: "item"
+					item: "quark:crate"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 0.0d
+			id: "WS240006Q"
+			title: "I·6  Ящик яблок"
+			icon: "quark:apple_crate"
+			subtitle: "Склад еды."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 6/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Склад еды.",
+				"&7Предмет:&r &fquark:apple_crate&r",
+				"",
+				"Сжатое хранение еды/урожая.",
+				"Apple/potato crate — складывай стаки компактно.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quark:apple_crate  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240005Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240006T"
+				type: "item"
+				item: "quark:apple_crate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240006R"
+					type: "item"
+					item: "quark:apple_crate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 1.93d
+			id: "WS240007Q"
+			title: "I·7  Ящик картошки"
+			icon: "quark:potato_crate"
+			subtitle: "Склад фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 7/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Склад фермы.",
+				"&7Предмет:&r &fquark:potato_crate&r",
+				"",
+				"Сжатое хранение еды/урожая.",
+				"Apple/potato crate — складывай стаки компактно.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quark:potato_crate  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240006Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240007T"
+				type: "item"
+				item: "quark:potato_crate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240007R"
+					type: "item"
+					item: "quark:potato_crate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 1.93d
+			id: "WS240008Q"
+			title: "I·8  Железный стержень"
+			icon: "quark:iron_rod"
+			subtitle: "Деталь Quark."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 8/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Деталь Quark.",
+				"&7Предмет:&r &fquark:iron_rod&r",
+				"",
+				"Стержень для крафтов Quark.",
+				"Частый ингредиент декора/механик.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× quark:iron_rod  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240007Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240008T"
+				type: "item"
+				item: "quark:iron_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240008R"
+					type: "item"
+					item: "quark:iron_rod"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 1.93d
+			id: "WS240009Q"
+			title: "I·9  Рюкзак"
+			icon: "quark:backpack"
+			subtitle: "Удобство исследователя."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 9/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Удобство исследователя.",
+				"&7Предмет:&r &fquark:backpack&r",
+				"",
+				"Рюкзак Quark — доп. инвентарь в путешествиях.",
+				"Открой клавишей из настроек Quark.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quark:backpack  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240008Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240009T"
+				type: "item"
+				item: "quark:backpack"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240009R"
+					type: "item"
+					item: "quark:backpack"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS240009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 1.93d
+			id: "WS240010Q"
+			title: "I·10  Счёты"
+			icon: "quark:abacus"
+			subtitle: "◆ Вехи · Старт · QoL подсчёт стаков."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 10/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r QoL подсчёт стаков.",
+				"&7Предмет:&r &fquark:abacus&r",
+				"",
+				"Счёты считают предметы в зоне/инвентаре (QoL).",
+				"Удобно при сортировке склада.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quark:abacus  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240009Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240010T"
+				type: "item"
+				item: "quark:abacus"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240010R"
+					type: "item"
+					item: "quark:abacus"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 1.93d
+			id: "WS240011Q"
+			title: "I·11  Мастерок"
+			icon: "quark:trowel"
+			subtitle: "Быстрая укладка блоков."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 11/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Быстрая укладка блоков.",
+				"&7Предмет:&r &fquark:trowel&r",
+				"",
+				"Мастерок кладёт случайный блок из хотбара — быстрый декор.",
+				"Бери палитру блоков в панели.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quark:trowel  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240010Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240011T"
+				type: "item"
+				item: "quark:trowel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240011R"
+					type: "item"
+					item: "quark:trowel"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 1.93d
+			id: "WS240012Q"
+			title: "I·12  Табурет"
+			icon: "quark:white_stool"
+			subtitle: "Мебель гавани."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 12/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Мебель гавани.",
+				"&7Предмет:&r &fquark:white_stool&r",
+				"",
+				"Мебель. Сядь ПКМ. Цвета — для зон гавани.",
+				"Не даёт баффов — только атмосфера.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× quark:white_stool  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240011Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240012T"
+				type: "item"
+				item: "quark:white_stool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240012R"
+					type: "item"
+					item: "quark:white_stool"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240012X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 3.5d
+			id: "WS240013Q"
+			title: "II·13  Синий табурет"
+			icon: "quark:blue_stool"
+			subtitle: "◆ Вехи · Основа · Цвет флота."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 13/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Цвет флота.",
+				"&7Предмет:&r &fquark:blue_stool&r",
+				"",
+				"Мебель. Сядь ПКМ. Цвета — для зон гавани.",
+				"Не даёт баффов — только атмосфера.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× quark:blue_stool  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240012Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240013T"
+				type: "item"
+				item: "quark:blue_stool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240013R"
+					type: "item"
+					item: "quark:blue_stool"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240013X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 3.5d
+			id: "WS240014Q"
+			title: "II·14  Дубовый сундук Quark"
+			icon: "quark:oak_chest"
+			subtitle: "Вариант склада."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 14/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Вариант склада.",
+				"&7Предмет:&r &fquark:oak_chest&r",
+				"",
+				"Варианты сундуков Quark под дерево.",
+				"Ставь в тон с помостом атолла.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× quark:oak_chest  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240013Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240014T"
+				type: "item"
+				item: "quark:oak_chest"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240014R"
+					type: "item"
+					item: "quark:oak_chest"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240014X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 3.5d
+			id: "WS240015Q"
+			title: "II·15  Лестница Quark"
+			icon: "quark:oak_ladder"
+			subtitle: "Вертикаль атолла."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 15/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Вертикаль атолла.",
+				"&7Предмет:&r &fquark:oak_ladder&r",
+				"",
+				"Лестницы без лишней возни — вертикаль базы.",
+				"Ставь цепочкой вверх.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× quark:oak_ladder  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS240014Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240015T"
+				type: "item"
+				item: "quark:oak_ladder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240015R"
+					type: "item"
+					item: "quark:oak_ladder"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240015X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 3.5d
+			id: "WS240016Q"
+			title: "II·16  Рамочное стекло"
+			icon: "quark:black_framed_glass"
+			subtitle: "Окна мастерской."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 16/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Окна мастерской.",
+				"&7Предмет:&r &fquark:black_framed_glass&r",
+				"",
+				"Стекло в рамке — окна цеха/каюты.",
+				"Pane-версия для тонких перегородок.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× quark:black_framed_glass  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240015Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240016T"
+				type: "item"
+				item: "quark:black_framed_glass"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240016R"
+					type: "item"
+					item: "quark:black_framed_glass"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240016X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 3.5d
+			id: "WS240017Q"
+			title: "II·17  Кашпо"
+			icon: "supplementaries:planter"
+			subtitle: "Зелень на платформе."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 17/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Зелень на платформе.",
+				"&7Предмет:&r &fsupplementaries:planter&r",
+				"",
+				"Кашпо Supplementaries — зелень на платформе над водой.",
+				"Земля внутри, сажай саженцы/цветы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× supplementaries:planter  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240016Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240017T"
+				type: "item"
+				item: "supplementaries:planter"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240017R"
+					type: "item"
+					item: "supplementaries:planter"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240017X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 3.5d
+			id: "WS240018Q"
+			title: "II·18  Кран"
+			icon: "supplementaries:faucet"
+			subtitle: "Вода и эстетика труб."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 18/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Вода и эстетика труб.",
+				"&7Предмет:&r &fsupplementaries:faucet&r",
+				"",
+				"Кран сливает жидкости из бочек/ёмкостей.",
+				"Круто смотрится на пирсе рядом с Create pipes.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× supplementaries:faucet  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240017Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240018T"
+				type: "item"
+				item: "supplementaries:faucet"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240018R"
+					type: "item"
+					item: "supplementaries:faucet"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240018X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 5.43d
+			id: "WS240019Q"
+			title: "II·19  Банка"
+			icon: "supplementaries:jar"
+			subtitle: "Декор полок."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 19/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Декор полок.",
+				"&7Предмет:&r &fsupplementaries:jar&r",
+				"",
+				"Банка — декор и светлячки/предметы внутри.",
+				"Cage — клетка для мобов/декора.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× supplementaries:jar  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240018Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240019T"
+				type: "item"
+				item: "supplementaries:jar"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240019R"
+					type: "item"
+					item: "supplementaries:jar"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240019X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 5.43d
+			id: "WS240020Q"
+			title: "II·20  Клетка Suppl."
+			icon: "supplementaries:cage"
+			subtitle: "◆ Вехи · Основа · Декор/мобы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 20/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Декор/мобы.",
+				"&7Предмет:&r &fsupplementaries:cage&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:cage  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240019Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240020T"
+				type: "item"
+				item: "supplementaries:cage"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240020R"
+					type: "item"
+					item: "supplementaries:cage"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240020X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 5.43d
+			id: "WS240021Q"
+			title: "II·21  Светильник"
+			icon: "supplementaries:sconce"
+			subtitle: "Тёплый свет пирса."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 21/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тёплый свет пирса.",
+				"&7Предмет:&r &fsupplementaries:sconce&r",
+				"",
+				"Настенный свет. Soul — «абиссальный» холодный оттенок.",
+				"Brass lantern — латунный вайб Create.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× supplementaries:sconce  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240020Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240021T"
+				type: "item"
+				item: "supplementaries:sconce"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240021R"
+					type: "item"
+					item: "supplementaries:sconce"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240021X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 5.43d
+			id: "WS240022Q"
+			title: "II·22  Soul Sconce"
+			icon: "supplementaries:sconce_soul"
+			subtitle: "Холодный свет бездны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 22/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Холодный свет бездны.",
+				"&7Предмет:&r &fsupplementaries:sconce_soul&r",
+				"",
+				"Настенный свет. Soul — «абиссальный» холодный оттенок.",
+				"Brass lantern — латунный вайб Create.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× supplementaries:sconce_soul  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240021Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240022T"
+				type: "item"
+				item: "supplementaries:sconce_soul"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240022R"
+					type: "item"
+					item: "supplementaries:sconce_soul"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240022X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 5.43d
+			id: "WS240023Q"
+			title: "II·23  Латунный фонарь"
+			icon: "supplementaries:brass_lantern"
+			subtitle: "Create-вайб освещения."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 23/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Create-вайб освещения.",
+				"&7Предмет:&r &fsupplementaries:brass_lantern&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× supplementaries:brass_lantern  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240022Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240023T"
+				type: "item"
+				item: "supplementaries:brass_lantern"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240023R"
+					type: "item"
+					item: "supplementaries:brass_lantern"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240023X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 5.43d
+			id: "WS240024Q"
+			title: "II·24  Подсвечник"
+			icon: "supplementaries:candle_holder"
+			subtitle: "◆ Вехи · Основа · Уют каюты."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 24/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Уют каюты.",
+				"&7Предмет:&r &fsupplementaries:candle_holder&r",
+				"",
+				"Подсвечники — уют каюты без факельного спама.",
+				"Цветные варианты под интерьер.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× supplementaries:candle_holder  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240023Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240024T"
+				type: "item"
+				item: "supplementaries:candle_holder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240024R"
+					type: "item"
+					item: "supplementaries:candle_holder"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240024X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 7.0d
+			id: "WS240025Q"
+			title: "III·25  Шестерня-блок"
+			icon: "supplementaries:cog_block"
+			subtitle: "Декор под Create."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 25/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Декор под Create.",
+				"&7Предмет:&r &fsupplementaries:cog_block&r",
+				"",
+				"Декоративная шестерня под Create.",
+				"Не кинетика — только вид.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× supplementaries:cog_block  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS240024Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240025T"
+				type: "item"
+				item: "supplementaries:cog_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240025R"
+					type: "item"
+					item: "supplementaries:cog_block"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240025X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 7.0d
+			id: "WS240026Q"
+			title: "III·26  Меха"
+			icon: "supplementaries:bellows"
+			subtitle: "Декор/редстоун."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 26/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Декор/редстоун.",
+				"&7Предмет:&r &fsupplementaries:bellows&r",
+				"",
+				"Меха: декор и редстоун-взаимодействия.",
+				"Смотри JEI/тултип для сигнала.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:bellows  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240025Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240026T"
+				type: "item"
+				item: "supplementaries:bellows"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240026R"
+					type: "item"
+					item: "supplementaries:bellows"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240026X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 7.0d
+			id: "WS240027Q"
+			title: "III·27  Песочные часы"
+			icon: "supplementaries:hourglass"
+			subtitle: "Таймеры на пирсе."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 27/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Таймеры на пирсе.",
+				"&7Предмет:&r &fsupplementaries:hourglass&r",
+				"",
+				"Песочные часы — таймер/декор.",
+				"Можно использовать в схемах (версия зависима).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:hourglass  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240026Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240027T"
+				type: "item"
+				item: "supplementaries:hourglass"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240027R"
+					type: "item"
+					item: "supplementaries:hourglass"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240027X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 7.0d
+			id: "WS240028Q"
+			title: "III·28  Урна"
+			icon: "supplementaries:urn"
+			subtitle: "Декор гавани."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 28/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Декор гавани.",
+				"&7Предмет:&r &fsupplementaries:urn&r",
+				"",
+				"Урна — декор и мелкий лут при ломании иногда.",
+				"Ставь у алтаря/пирса.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× supplementaries:urn  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240027Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240028T"
+				type: "item"
+				item: "supplementaries:urn"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240028R"
+					type: "item"
+					item: "supplementaries:urn"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240028X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 7.0d
+			id: "WS240029Q"
+			title: "III·29  Верёвка"
+			icon: "supplementaries:rope"
+			subtitle: "Такелаж."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 29/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Такелаж.",
+				"&7Предмет:&r &fsupplementaries:rope&r",
+				"",
+				"Верёвки — такелаж, спуск, декор мачт.",
+				"Крафт из ниток (JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× supplementaries:rope  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240028Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240029T"
+				type: "item"
+				item: "supplementaries:rope"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240029R"
+					type: "item"
+					item: "supplementaries:rope"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240029X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 7.0d
+			id: "WS240030Q"
+			title: "III·30  Указатель"
+			icon: "supplementaries:sign_post"
+			subtitle: "◆ Вехи · Цех · Навигация по атоллу — капстоун."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 30/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Навигация по атоллу — капстоун.",
+				"&7Предмет:&r &fsupplementaries:sign_post&r",
+				"",
+				"Указатели направлений по атоллу.",
+				"Подпиши варпы: market / pier / roost / bees.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× supplementaries:sign_post  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240029Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240030T"
+				type: "item"
+				item: "supplementaries:sign_post"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240030R"
+					type: "item"
+					item: "supplementaries:sign_post"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS240030X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 8.93d
+			id: "WS240031Q"
+			title: "III·31  Бутылка облака"
+			icon: "quark:bottled_cloud"
+			subtitle: "QoL Quark."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 31/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r QoL Quark.",
+				"&7Предмет:&r &fquark:bottled_cloud&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× quark:bottled_cloud  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240030Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240031T"
+				type: "item"
+				item: "quark:bottled_cloud"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240031R"
+					type: "item"
+					item: "quark:bottled_cloud"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240031X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 8.93d
+			id: "WS240032Q"
+			title: "III·32  Кормушка Quark"
+			icon: "quark:feeding_trough"
+			subtitle: "Животные у пирса."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 32/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Животные у пирса.",
+				"&7Предмет:&r &fquark:feeding_trough&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quark:feeding_trough  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240031Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240032T"
+				type: "item"
+				item: "quark:feeding_trough"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240032R"
+					type: "item"
+					item: "quark:feeding_trough"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240032X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 8.93d
+			id: "WS240033Q"
+			title: "III·33  Решётка"
+			icon: "quark:grate"
+			subtitle: "Пол над водой."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 33/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Пол над водой.",
+				"&7Предмет:&r &fquark:grate&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× quark:grate  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240032Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240033T"
+				type: "item"
+				item: "quark:grate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240033R"
+					type: "item"
+					item: "quark:grate"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240033X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 8.93d
+			id: "WS240034Q"
+			title: "III·34  Железная плита"
+			icon: "quark:iron_plate"
+			subtitle: "Обшивка цеха."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 34/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Обшивка цеха.",
+				"&7Предмет:&r &fquark:iron_plate&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× quark:iron_plate  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240033Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240034T"
+				type: "item"
+				item: "quark:iron_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240034R"
+					type: "item"
+					item: "quark:iron_plate"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240034X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 8.93d
+			id: "WS240035Q"
+			title: "III·35  Ржавая плита"
+			icon: "quark:rusty_iron_plate"
+			subtitle: "Индустриальный декор."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 35/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Индустриальный декор.",
+				"&7Предмет:&r &fquark:rusty_iron_plate&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× quark:rusty_iron_plate  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS240034Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240035T"
+				type: "item"
+				item: "quark:rusty_iron_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240035R"
+					type: "item"
+					item: "quark:rusty_iron_plate"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240035X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 8.93d
+			id: "WS240036Q"
+			title: "IV·36  Обсидиановая плита"
+			icon: "quark:obsidian_pressure_plate"
+			subtitle: "◆ Вехи · Мастерство · Тяжёлый редстоун."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 36/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тяжёлый редстоун.",
+				"&7Предмет:&r &fquark:obsidian_pressure_plate&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quark:obsidian_pressure_plate  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240035Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240036T"
+				type: "item"
+				item: "quark:obsidian_pressure_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240036R"
+					type: "item"
+					item: "quark:obsidian_pressure_plate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240036X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 10.5d
+			id: "WS240037Q"
+			title: "IV·37  Корунд"
+			icon: "quark:red_corundum"
+			subtitle: "Кристалл Quark."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 37/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Кристалл Quark.",
+				"&7Предмет:&r &fquark:red_corundum&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× quark:red_corundum  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240036Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240037T"
+				type: "item"
+				item: "quark:red_corundum"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240037R"
+					type: "item"
+					item: "quark:red_corundum"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240037X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 10.5d
+			id: "WS240038Q"
+			title: "IV·38  Синий корунд"
+			icon: "quark:blue_corundum"
+			subtitle: "Цвет океана."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 38/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Цвет океана.",
+				"&7Предмет:&r &fquark:blue_corundum&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× quark:blue_corundum  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240037Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240038T"
+				type: "item"
+				item: "quark:blue_corundum"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240038R"
+					type: "item"
+					item: "quark:blue_corundum"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240038X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 10.5d
+			id: "WS240039Q"
+			title: "IV·39  Myalite"
+			icon: "quark:myalite"
+			subtitle: "Камень Энда Quark."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 39/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Камень Энда Quark.",
+				"&7Предмет:&r &fquark:myalite&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× quark:myalite  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240038Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240039T"
+				type: "item"
+				item: "quark:myalite"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240039R"
+					type: "item"
+					item: "quark:myalite"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS240039X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 10.5d
+			id: "WS240040Q"
+			title: "IV·40  Duskbound"
+			icon: "quark:duskbound_block"
+			subtitle: "◆ Вехи · Мастерство · Тёмный декор."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 40/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тёмный декор.",
+				"&7Предмет:&r &fquark:duskbound_block&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× quark:duskbound_block  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240039Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240040T"
+				type: "item"
+				item: "quark:duskbound_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240040R"
+					type: "item"
+					item: "quark:duskbound_block"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240040X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 10.5d
+			id: "WS240041Q"
+			title: "IV·41  Саженец цветения"
+			icon: "quark:blue_blossom_sapling"
+			subtitle: "Деревья Quark."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 41/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Деревья Quark.",
+				"&7Предмет:&r &fquark:blue_blossom_sapling&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× quark:blue_blossom_sapling  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240040Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240041T"
+				type: "item"
+				item: "quark:blue_blossom_sapling"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240041R"
+					type: "item"
+					item: "quark:blue_blossom_sapling"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240041X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 10.5d
+			id: "WS240042Q"
+			title: "IV·42  Древний том"
+			icon: "quark:ancient_tome"
+			subtitle: "Усиление чар."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 42/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Усиление чар.",
+				"&7Предмет:&r &fquark:ancient_tome&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quark:ancient_tome  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240041Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240042T"
+				type: "item"
+				item: "quark:ancient_tome"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240042R"
+					type: "item"
+					item: "quark:ancient_tome"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS240042X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 12.43d
+			id: "WS240043Q"
+			title: "IV·43  Синий навес"
+			icon: "supplementaries:awning_blue"
+			subtitle: "Тень на пирсе."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 43/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тень на пирсе.",
+				"&7Предмет:&r &fsupplementaries:awning_blue&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× supplementaries:awning_blue  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240042Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240043T"
+				type: "item"
+				item: "supplementaries:awning_blue"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240043R"
+					type: "item"
+					item: "supplementaries:awning_blue"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240043X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 12.43d
+			id: "WS240044Q"
+			title: "IV·44  Доска"
+			icon: "supplementaries:blackboard"
+			subtitle: "Заметки экипажа."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 44/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Заметки экипажа.",
+				"&7Предмет:&r &fsupplementaries:blackboard&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:blackboard  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240043Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240044T"
+				type: "item"
+				item: "supplementaries:blackboard"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240044R"
+					type: "item"
+					item: "supplementaries:blackboard"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240044X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 12.43d
+			id: "WS240045Q"
+			title: "IV·45  Глобус"
+			icon: "supplementaries:globe"
+			subtitle: "Навигация каюты."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 45/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Навигация каюты.",
+				"&7Предмет:&r &fsupplementaries:globe&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:globe  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS240044Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240045T"
+				type: "item"
+				item: "supplementaries:globe"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240045R"
+					type: "item"
+					item: "supplementaries:globe"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240045X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 12.43d
+			id: "WS240046Q"
+			title: "IV·46  Высотомер"
+			icon: "supplementaries:altimeter"
+			subtitle: "QoL высоты."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 46/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r QoL высоты.",
+				"&7Предмет:&r &fsupplementaries:altimeter&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:altimeter  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240045Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240046T"
+				type: "item"
+				item: "supplementaries:altimeter"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240046R"
+					type: "item"
+					item: "supplementaries:altimeter"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240046X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 12.43d
+			id: "WS240047Q"
+			title: "IV·47  Бамбуковые шипы"
+			icon: "supplementaries:bamboo_spikes"
+			subtitle: "◆ Вехи · Мастерство · Защита пирса."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 47/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Защита пирса.",
+				"&7Предмет:&r &fsupplementaries:bamboo_spikes&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× supplementaries:bamboo_spikes  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240046Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240047T"
+				type: "item"
+				item: "supplementaries:bamboo_spikes"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240047R"
+					type: "item"
+					item: "supplementaries:bamboo_spikes"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240047X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 12.43d
+			id: "WS240048Q"
+			title: "V·48  Блок кремня"
+			icon: "supplementaries:flint_block"
+			subtitle: "Склад/декор."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 48/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Склад/декор.",
+				"&7Предмет:&r &fsupplementaries:flint_block&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× supplementaries:flint_block  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240047Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240048T"
+				type: "item"
+				item: "supplementaries:flint_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240048R"
+					type: "item"
+					item: "supplementaries:flint_block"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240048X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 14.0d
+			id: "WS240049Q"
+			title: "V·49  Сахарный куб"
+			icon: "supplementaries:sugar_cube"
+			subtitle: "Склад сахара."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 49/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Склад сахара.",
+				"&7Предмет:&r &fsupplementaries:sugar_cube&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× supplementaries:sugar_cube  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240048Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240049T"
+				type: "item"
+				item: "supplementaries:sugar_cube"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240049R"
+					type: "item"
+					item: "supplementaries:sugar_cube"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240049X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 14.0d
+			id: "WS240050Q"
+			title: "V·50  Подарок"
+			icon: "supplementaries:present"
+			subtitle: "◆ Вехи · Финал · Упаковка лута."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 50/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Упаковка лута.",
+				"&7Предмет:&r &fsupplementaries:present&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× supplementaries:present  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS240049Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240050T"
+				type: "item"
+				item: "supplementaries:present"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240050R"
+					type: "item"
+					item: "supplementaries:present"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS240050X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 14.0d
+			id: "WS240051Q"
+			title: "V·51  Сейф"
+			icon: "supplementaries:safe"
+			subtitle: "Защищённый склад."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 51/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Защищённый склад.",
+				"&7Предмет:&r &fsupplementaries:safe&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:safe  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240050Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240051T"
+				type: "item"
+				item: "supplementaries:safe"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240051R"
+					type: "item"
+					item: "supplementaries:safe"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS240051X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 14.0d
+			id: "WS240052Q"
+			title: "V·52  Замок-блок"
+			icon: "supplementaries:lock_block"
+			subtitle: "Контроль доступа."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 52/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Контроль доступа.",
+				"&7Предмет:&r &fsupplementaries:lock_block&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:lock_block  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240051Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240052T"
+				type: "item"
+				item: "supplementaries:lock_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240052R"
+					type: "item"
+					item: "supplementaries:lock_block"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS240052X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 14.0d
+			id: "WS240053Q"
+			title: "V·53  Ключ"
+			icon: "supplementaries:key"
+			subtitle: "К сейфу/замку."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 53/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r К сейфу/замку.",
+				"&7Предмет:&r &fsupplementaries:key&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:key  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240052Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240053T"
+				type: "item"
+				item: "supplementaries:key"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240053R"
+					type: "item"
+					item: "supplementaries:key"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240053X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 14.0d
+			id: "WS240054Q"
+			title: "V·54  Доска объявлений"
+			icon: "supplementaries:notice_board"
+			subtitle: "Квесты экипажа."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 54/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Квесты экипажа.",
+				"&7Предмет:&r &fsupplementaries:notice_board&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:notice_board  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240053Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240054T"
+				type: "item"
+				item: "supplementaries:notice_board"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240054R"
+					type: "item"
+					item: "supplementaries:notice_board"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS240054X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 15.93d
+			id: "WS240055Q"
+			title: "V·55  Синий флаг"
+			icon: "supplementaries:flag_blue"
+			subtitle: "Флаг флота."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 55/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Флаг флота.",
+				"&7Предмет:&r &fsupplementaries:flag_blue&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:flag_blue  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS240054Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240055T"
+				type: "item"
+				item: "supplementaries:flag_blue"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240055R"
+					type: "item"
+					item: "supplementaries:flag_blue"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240055X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 15.93d
+			id: "WS240056Q"
+			title: "V·56  Флюгер"
+			icon: "supplementaries:wind_vane"
+			subtitle: "Ветер на мачте."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 56/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ветер на мачте.",
+				"&7Предмет:&r &fsupplementaries:wind_vane&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:wind_vane  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240055Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240056T"
+				type: "item"
+				item: "supplementaries:wind_vane"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240056R"
+					type: "item"
+					item: "supplementaries:wind_vane"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS240056X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 15.93d
+			id: "WS240057Q"
+			title: "V·57  Crystal Display"
+			icon: "supplementaries:crystal_display"
+			subtitle: "Цифры/декор."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 57/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Цифры/декор.",
+				"&7Предмет:&r &fsupplementaries:crystal_display&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× supplementaries:crystal_display  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240056Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240057T"
+				type: "item"
+				item: "supplementaries:crystal_display"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240057R"
+					type: "item"
+					item: "supplementaries:crystal_display"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS240057X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 15.93d
+			id: "WS240058Q"
+			title: "V·58  Фонарь"
+			icon: "minecraft:lantern"
+			subtitle: "Свет гавани."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 58/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Свет гавани.",
+				"&7Предмет:&r &fminecraft:lantern&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× minecraft:lantern  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS240057Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240058T"
+				type: "item"
+				item: "minecraft:lantern"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240058R"
+					type: "item"
+					item: "minecraft:lantern"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS240058X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 16.28d
+			id: "WS240059Q"
+			title: "V·59  Soul Lantern"
+			icon: "minecraft:soul_lantern"
+			subtitle: "★ КАПСТОУН · Холодный свет."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 59/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Холодный свет.",
+				"&7Предмет:&r &fminecraft:soul_lantern&r",
+				"",
+				"Атмосфера атолла: крафт в JEI, ставь для удобства и красоты.",
+				"Силу не ищи здесь — это комфорт базы. Amendments дополняет фонари/горшки/флаги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× minecraft:soul_lantern  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			shape: "gear"
+			size: 1.55d
+			min_width: 280
+			dependencies: ["WS240058Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS240059T"
+				type: "item"
+				item: "minecraft:soul_lantern"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS240059R"
+					type: "item"
+					item: "minecraft:soul_lantern"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS240059X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Quark + Supplementaries (+ Amendments): уют атолла без боевой силы. Декор, трубы, свет, указатели."
+	title: "Мастерская · Атмосфера атолла"
+}

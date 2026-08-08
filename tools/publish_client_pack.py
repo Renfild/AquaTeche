@@ -19,7 +19,7 @@ ROOT = Path(r"C:\Users\xieto\Desktop\AquaTech")
 CF = Path(r"C:\Users\xieto\curseforge\minecraft\Instances\AquaTech")
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
-PACK_TAG = "pack-2.9.2"
+PACK_TAG = "pack-2.9.3"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://aquatech-7gs.pages.dev/pack"
 
@@ -116,7 +116,7 @@ def write_manifest() -> Path:
             )
 
     manifest = {
-        "version": "2.9.2",
+        "version": "2.9.3",
         "mc_version": "1.20.1",
         "forge_version": "47.4.0",
         "server_ip": "katherine-hydro.tun.ply.gg",
@@ -149,6 +149,14 @@ def main() -> int:
                 shutil.copy2(cand, PACK / "mods" / name)
                 print(f"OK force {name}")
                 break
+    # Repo quest tree wins over CurseForge instance (live FTB was wiped).
+    repo_ftb = ROOT / "config" / "ftbquests"
+    if repo_ftb.is_dir():
+        dst_ftb = PACK / "config" / "ftbquests"
+        if dst_ftb.exists():
+            shutil.rmtree(dst_ftb)
+        shutil.copytree(repo_ftb, dst_ftb)
+        print(f"OK overlay ftbquests from repo -> {dst_ftb}")
     write_manifest()
     print()
     print("=== Online updates (LoliLand-style) ===")

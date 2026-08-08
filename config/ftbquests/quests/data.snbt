@@ -1,10 +1,10 @@
 {
 	default_reward_team: false
 	default_quest_disable_jei: false
-	default_quest_shape: ""
+	default_quest_shape: "rsquare"
 	default_consume_items: false
 	lock_quests_on_shutdown: false
 	title: "AquaTech"
-	icon: "minecraft:oak_log"
-	version: 13
+	icon: "starcatcher:starcatcher_rod"
+	version: 14
 }

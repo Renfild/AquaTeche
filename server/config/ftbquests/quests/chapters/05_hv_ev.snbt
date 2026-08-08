@@ -1,0 +1,517 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "05_hv_ev"
+	group: "0AC7A00000000001"
+	icon: "starcatcher:obsidian_rod"
+	id: "AQ050000CH"
+	order_index: 5
+	quest_links: [ ]
+	quests: [
+		{
+			x: -3.2d
+			y: 0.0d
+			id: "AQ050001Q"
+			title: "Титан"
+			icon: "industrialupgrade:baseore/titanium"
+			subtitle: "Каркас акульей удочки."
+			description: [
+				"Каркас акульей удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			tasks: [{
+				id: "AQ050001T"
+				type: "item"
+				item: "industrialupgrade:baseore/titanium"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050001R"
+					type: "item"
+					item: "industrialupgrade:baseore/titanium"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "AQ050001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: 0.0d
+			id: "AQ050002Q"
+			title: "Кобальт"
+			icon: "industrialupgrade:baseore/cobalt"
+			subtitle: "Второй металл акулы."
+			description: [
+				"Второй металл акулы."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050001Q"]
+			tasks: [{
+				id: "AQ050002T"
+				type: "item"
+				item: "industrialupgrade:baseore/cobalt"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050002R"
+					type: "item"
+					item: "industrialupgrade:baseore/cobalt"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "AQ050002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: 0.0d
+			id: "AQ050003Q"
+			title: "Удочка акульего зуба"
+			icon: "starcatcher:sharktooth_rod"
+			subtitle: "Титан + кобальт + алмаз."
+			description: [
+				"Титан + кобальт + алмаз."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050002Q"]
+			tasks: [{
+				id: "AQ050003T"
+				type: "item"
+				item: "starcatcher:sharktooth_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050003R"
+					type: "item"
+					item: "starcatcher:sharktooth_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "AQ050003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: 0.0d
+			id: "AQ050004Q"
+			title: "Плачущий обсидиан"
+			icon: "minecraft:crying_obsidian"
+			subtitle: "Для обсидиановой удочки."
+			description: [
+				"Для обсидиановой удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050003Q"]
+			tasks: [{
+				id: "AQ050004T"
+				type: "item"
+				item: "minecraft:crying_obsidian"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050004R"
+					type: "item"
+					item: "minecraft:crying_obsidian"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "AQ050004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 3.2d
+			y: 0.0d
+			id: "AQ050005Q"
+			title: "Схема HV"
+			icon: "industrialupgrade:crafting_elements/crafting_274_element"
+			subtitle: "Высокоуровневая электроника."
+			description: [
+				"Высокоуровневая электроника."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050004Q"]
+			tasks: [{
+				id: "AQ050005T"
+				type: "item"
+				item: "industrialupgrade:crafting_elements/crafting_274_element"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050005R"
+					type: "item"
+					item: "industrialupgrade:crafting_elements/crafting_274_element"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "AQ050005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -3.2d
+			y: -1.5d
+			id: "AQ050006Q"
+			title: "Обсидиановая удочка"
+			icon: "starcatcher:obsidian_rod"
+			subtitle: "Нержавейка и обсидиан."
+			description: [
+				"Нержавейка и обсидиан."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050005Q"]
+			tasks: [{
+				id: "AQ050006T"
+				type: "item"
+				item: "starcatcher:obsidian_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050006R"
+					type: "item"
+					item: "starcatcher:obsidian_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "AQ050006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: -1.5d
+			id: "AQ050007Q"
+			title: "Сердце моря"
+			icon: "minecraft:heart_of_the_sea"
+			subtitle: "Редкий компонент светоягодной."
+			description: [
+				"Редкий компонент светоягодной."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050006Q"]
+			tasks: [{
+				id: "AQ050007T"
+				type: "item"
+				item: "minecraft:heart_of_the_sea"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050007R"
+					type: "item"
+					item: "minecraft:heart_of_the_sea"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "AQ050007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: -1.5d
+			id: "AQ050008Q"
+			title: "Платина"
+			icon: "industrialupgrade:baseore/platinum"
+			subtitle: "Драгметалл HV."
+			description: [
+				"Драгметалл HV."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050007Q"]
+			tasks: [{
+				id: "AQ050008T"
+				type: "item"
+				item: "industrialupgrade:baseore/platinum"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050008R"
+					type: "item"
+					item: "industrialupgrade:baseore/platinum"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "AQ050008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: -1.5d
+			id: "AQ050009Q"
+			title: "Светоягодная удочка"
+			icon: "starcatcher:lush_glowberry_rod"
+			subtitle: "Море + платина."
+			description: [
+				"Море + платина."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050008Q"]
+			tasks: [{
+				id: "AQ050009T"
+				type: "item"
+				item: "starcatcher:lush_glowberry_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050009R"
+					type: "item"
+					item: "starcatcher:lush_glowberry_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 130"
+					elevate_perms: true
+					id: "AQ050009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 3.2d
+			y: -1.5d
+			id: "AQ050010Q"
+			title: "Дроблёный уран"
+			icon: "industrialupgrade:crushed/uranium"
+			subtitle: "Топливо и магмовая удочка."
+			description: [
+				"Топливо и магмовая удочка."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050009Q"]
+			tasks: [{
+				id: "AQ050010T"
+				type: "item"
+				item: "industrialupgrade:crushed/uranium"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050010R"
+					type: "item"
+					item: "industrialupgrade:crushed/uranium"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "AQ050010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -3.2d
+			y: -3.0d
+			id: "AQ050011Q"
+			title: "Звезда Незера"
+			icon: "minecraft:nether_star"
+			subtitle: "Капстоун перед альфой."
+			description: [
+				"Капстоун перед альфой."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050010Q"]
+			tasks: [{
+				id: "AQ050011T"
+				type: "item"
+				item: "minecraft:nether_star"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050011R"
+					type: "item"
+					item: "minecraft:nether_star"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "AQ050011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: -3.0d
+			id: "AQ050012Q"
+			title: "Магмовая удочка"
+			icon: "starcatcher:magmaforged_rod"
+			subtitle: "Уран, инконель, незерит."
+			description: [
+				"Уран, инконель, незерит."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050011Q"]
+			tasks: [{
+				id: "AQ050012T"
+				type: "item"
+				item: "starcatcher:magmaforged_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050012R"
+					type: "item"
+					item: "starcatcher:magmaforged_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 150"
+					elevate_perms: true
+					id: "AQ050012X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: -3.0d
+			id: "AQ050013Q"
+			title: "ME-контроллер"
+			icon: "ae2:controller"
+			subtitle: "Сердце склада AE2."
+			description: [
+				"Сердце склада AE2."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ050012Q"]
+			tasks: [{
+				id: "AQ050013T"
+				type: "item"
+				item: "ae2:controller"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050013R"
+					type: "item"
+					item: "ae2:controller"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "AQ050013X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: -3.0d
+			id: "AQ050014Q"
+			title: "ME-накопитель"
+			icon: "ae2:drive"
+			subtitle: "Диски для сети."
+			description: [
+				"Диски для сети."
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 260
+			dependencies: ["AQ050013Q"]
+			tasks: [{
+				id: "AQ050014T"
+				type: "item"
+				item: "ae2:drive"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ050014R"
+					type: "item"
+					item: "ae2:drive"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "AQ050014X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Титан, уран, обсидиан и сеть Applied Energistics."
+	title: "Акт V · Нефть, ядро и AE2"
+}

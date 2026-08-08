@@ -1,0 +1,229 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "02_early_lv"
+	group: "0AC7A00000000001"
+	icon: "starcatcher:naturalist_rod"
+	id: "AQ020000CH"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			x: -3.2d
+			y: 0.0d
+			id: "AQ020001Q"
+			title: "Железо"
+			icon: "minecraft:iron_ingot"
+			subtitle: "Вылови руду и переплавь."
+			description: [
+				"Вылови руду и переплавь."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			tasks: [{
+				id: "AQ020001T"
+				type: "item"
+				item: "minecraft:iron_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ020001R"
+					type: "item"
+					item: "minecraft:iron_ingot"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "AQ020001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: 0.0d
+			id: "AQ020002Q"
+			title: "Редстоун"
+			icon: "minecraft:redstone"
+			subtitle: "Нужен для схем и плавильни."
+			description: [
+				"Нужен для схем и плавильни."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ020001Q"]
+			tasks: [{
+				id: "AQ020002T"
+				type: "item"
+				item: "minecraft:redstone"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ020002R"
+					type: "item"
+					item: "minecraft:redstone"
+					count: 32
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "AQ020002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: 0.0d
+			id: "AQ020003Q"
+			title: "Бронзовая пластина"
+			icon: "industrialupgrade:itemplates/bronze_plate"
+			subtitle: "Сплав меди и олова."
+			description: [
+				"Сплав меди и олова."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ020002Q"]
+			tasks: [{
+				id: "AQ020003T"
+				type: "item"
+				item: "industrialupgrade:itemplates/bronze_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ020003R"
+					type: "item"
+					item: "industrialupgrade:itemplates/bronze_plate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "AQ020003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: 0.0d
+			id: "AQ020004Q"
+			title: "Шпинель"
+			icon: "industrialupgrade:baseore/spinel"
+			subtitle: "Редкий улов для натуралиста."
+			description: [
+				"Редкий улов для натуралиста."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ020003Q"]
+			tasks: [{
+				id: "AQ020004T"
+				type: "item"
+				item: "industrialupgrade:baseore/spinel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ020004R"
+					type: "item"
+					item: "industrialupgrade:baseore/spinel"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "AQ020004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 3.2d
+			y: 0.0d
+			id: "AQ020005Q"
+			title: "Электронная схема"
+			icon: "industrialupgrade:crafting_elements/crafting_272_element"
+			subtitle: "LV-схема: основа машин."
+			description: [
+				"LV-схема: основа машин."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ020004Q"]
+			tasks: [{
+				id: "AQ020005T"
+				type: "item"
+				item: "industrialupgrade:crafting_elements/crafting_272_element"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ020005R"
+					type: "item"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "AQ020005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -3.2d
+			y: -1.5d
+			id: "AQ020006Q"
+			title: "Удочка натуралиста"
+			icon: "starcatcher:naturalist_rod"
+			subtitle: "Капстоун акта II: схема + бронза + шпинель."
+			description: [
+				"Капстоун акта II: схема + бронза + шпинель."
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 260
+			dependencies: ["AQ020005Q"]
+			tasks: [{
+				id: "AQ020006T"
+				type: "item"
+				item: "starcatcher:naturalist_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ020006R"
+					type: "item"
+					item: "starcatcher:naturalist_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "AQ020006X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Железо из улова, бронза, первые электронные схемы."
+	title: "Акт II · Плавильня и схемы"
+}

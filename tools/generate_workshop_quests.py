@@ -921,15 +921,18 @@ def chapter_snbt(ch: dict) -> str:
 """
 
 
-def update_chapter_groups(path: Path) -> None:
-    text = path.read_text(encoding="utf-8")
-    if WS_GROUP in text:
+def ensure_workshop_group(path: Path) -> None:
+    if path.exists() and WS_GROUP in path.read_text(encoding="utf-8"):
         return
-    needle = '\t\t{ id: "0AC7A00000000004", title: "Акт IV · Горизонт" }'
-    insert = needle + f'\n\t\t{{ id: "{WS_GROUP}", title: "{WS_GROUP_TITLE}" }}'
-    if needle not in text:
-        raise SystemExit(f"chapter_groups pattern not found: {path}")
-    path.write_text(text.replace(needle, insert), encoding="utf-8")
+    # Spine generator owns the full groups file; only bootstrap if missing.
+    if not path.exists() or "chapter_groups: [ ]" in path.read_text(encoding="utf-8"):
+        path.write_text(
+            "{\n\tchapter_groups: [\n"
+            f'\t\t{{ id: "0AC7A00000000001", title: "Сюжет · Океан" }}\n'
+            f'\t\t{{ id: "{WS_GROUP}", title: "{WS_GROUP_TITLE}" }}\n'
+            "\t]\n}\n",
+            encoding="utf-8",
+        )
 
 
 def main() -> None:
@@ -939,8 +942,7 @@ def main() -> None:
         chapters_dir = out / "chapters"
         chapters_dir.mkdir(parents=True, exist_ok=True)
         groups = out / "chapter_groups.snbt"
-        if groups.exists():
-            update_chapter_groups(groups)
+        ensure_workshop_group(groups)
         for ch in CHAPTERS:
             (chapters_dir / f"{ch['filename']}.snbt").write_text(chapter_snbt(ch), encoding="utf-8")
             print("wrote", ch["filename"], len(ch["quests"]), "quests")

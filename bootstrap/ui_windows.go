@@ -55,6 +55,7 @@ const (
 	WM_USER           = 0x0400
 	WM_SETSTATUS      = WM_USER + 1
 	WM_SETPROGRESS    = WM_USER + 2
+	WM_APP_CLOSE      = WM_USER + 3
 	IDC_ARROW         = 32512
 	COLOR_WINDOW      = 5
 	MB_OK             = 0x00000000
@@ -214,8 +215,13 @@ func (ui *progressUI) wndProc(hwnd syscall.Handle, msg uint32, wParam, lParam ui
 
 		procEndPaint.Call(uintptr(hwnd), uintptr(unsafe.Pointer(&ps)))
 		return 0
+	case WM_APP_CLOSE:
+		// Destroy on the UI thread that owns the HWND.
+		procDestroyWindow.Call(uintptr(hwnd))
+		return 0
 	case WM_CLOSE:
-		// ignore close during install — user can wait
+		// Same path as finished install: tear down from the UI thread.
+		procDestroyWindow.Call(uintptr(hwnd))
 		return 0
 	case WM_DESTROY:
 		procKillTimer.Call(uintptr(hwnd), 1)
@@ -242,11 +248,14 @@ func (ui *progressUI) SetProgress(p int) {
 }
 
 func (ui *progressUI) Close() {
-	if ui.hwnd != 0 {
-		procDestroyWindow.Call(uintptr(ui.hwnd))
-		ui.hwnd = 0
-		<-ui.done
+	hwnd := ui.hwnd
+	if hwnd == 0 {
+		return
 	}
+	// DestroyWindow must run on the UI thread; PostMessage from the worker.
+	procPostMessageW.Call(uintptr(hwnd), WM_APP_CLOSE, 0, 0)
+	<-ui.done
+	ui.hwnd = 0
 }
 
 func msgBox(title, text string) {

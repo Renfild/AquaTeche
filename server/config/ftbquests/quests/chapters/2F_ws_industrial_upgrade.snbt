@@ -1,0 +1,4098 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "2F_ws_industrial_upgrade"
+	group: "0AC7A00000000005"
+	icon: "industrialupgrade:forge_hammer"
+	id: "WS2F0000CH"
+	order_index: 35
+	quest_links: [ ]
+	quests: [
+		{
+			x: -4.62d
+			y: 0.0d
+			id: "WS2F0001Q"
+			title: "I·1  Книга-гайд IU"
+			icon: "industrialupgrade:book/guide_book"
+			subtitle: "✦ ГАЙД МОДА · Открой guide book — это карта всего мода."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 1/77&r",
+				"",
+				"&bIndustrial Upgrade (IU)&r — &eядро технической сборки AquaTech&r.",
+				"Ты на &eличном плоту 4×4&r: рыбалка кормит IU-ресурсы, плот расширяешь сам.",
+				"Эта мастерская — &eпошаговый гайд&r. Иди строго по стрелкам.",
+				"",
+				"&6Пять эпох:&r",
+				"&eI Примитив&r — молот, наковальня, бронза, пластины, treetap, кабели руками.",
+				"&eII Пар&r — паровые машины (дробилка/компрессор) без электросети.",
+				"&eIII Электрика&r — Machine Block, генератор, BatBox, мацератор, кабели EU.",
+				"&eIV Завод&r — rolling/cutting/extruder, Advanced Circuit, CESU/MFE/MFSU.",
+				"&eV Энергия&r — солнечные панели, Power Utilities (мост RF/FE), Quantum Generators.",
+				"",
+				"&cКарьеры (Simply Quarries / IU quarry)&r в паке &cотключены&r KubeJS — руду бери жилами + Ore Scanner, Roost, фермы, &eрыбалкой&r.",
+				"&aТрансформаторы / взрывы от напряжения&r в паке &aотключены&r (industrialupgrade-common.toml) — можно вести кабель от генератора к машинам без цепочки LV→MV→HV.",
+				"&cТелепорты / джетпаки / creative-батареи&r вырезаны — выживание на воде без читерского перемещения.",
+				"",
+				"&6Как пользоваться IU:&r",
+				"1) Открой &eguide book&r и JEI (R) по каждому блоку.",
+				"2) Машины ставь на &eсвоём острове&r, подводи &eкабель&r от генератора/BatBox.",
+				"3) Ключ &ewrench&r — поворот и съём машин.",
+				"4) Не прыгай тиры крафта: без схем и мотора mid-game не соберёшь.",
+				"",
+				"&7Сюжетный spine ведёт к океану; &aэта ветка — основной тех-путь&r завода на плоту.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"",
+				"&a▶ Задача:&r Открой guide book — это карта всего мода.",
+				"&7Предмет:&r &findustrialupgrade:book/guide_book&r",
+				"",
+				"Guide Book IU — внутриигровой учебник. ПКМ открывает оглавление.",
+				"Читай главы эпохи, которую сейчас проходишь (примитив/пар/EU).",
+				"Если застрял на крафте — сначала книга, потом JEI (R).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:book/guide_book  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 280
+			optional: true
+			tasks: [{
+				id: "WS2F0001T"
+				type: "item"
+				item: "industrialupgrade:book/guide_book"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0001R"
+					type: "item"
+					item: "industrialupgrade:book/guide_book"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS2F0001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 0.0d
+			id: "WS2F0002Q"
+			title: "I·2  Кузнечный молот"
+			icon: "industrialupgrade:forge_hammer"
+			subtitle: "Этап I · Примитив. Молот штампует пластины."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 2/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Этап I · Примитив. Молот штампует пластины.",
+				"&7Предмет:&r &findustrialupgrade:forge_hammer&r",
+				"",
+				"Кузнечный молот — инструмент эпохи I.",
+				"Нужна &eнаковальня IU&r: клади слиток, бей молотом → пластина.",
+				"Без пластин не будет кабелей и корпусов. Скрафти молот первым делом после книги.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:forge_hammer  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0001Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0002T"
+				type: "item"
+				item: "industrialupgrade:forge_hammer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0002R"
+					type: "item"
+					item: "industrialupgrade:forge_hammer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS2F0002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 0.0d
+			id: "WS2F0003Q"
+			title: "I·3  Наковальня IU"
+			icon: "industrialupgrade:block_anvil/block_anvil"
+			subtitle: "Ставь наковальню: молот + слиток → пластина."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 3/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ставь наковальню: молот + слиток → пластина.",
+				"&7Предмет:&r &findustrialupgrade:block_anvil/block_anvil&r",
+				"",
+				"Наковальня IU — рабочее место примитива.",
+				"Поставь блок, возьми forge hammer, обрабатывай слитки в пластины.",
+				"Strong Anvil позже — для тяжёлых операций, но старт хватает обычной.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:block_anvil/block_anvil  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0002Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0003T"
+				type: "item"
+				item: "industrialupgrade:block_anvil/block_anvil"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0003R"
+					type: "item"
+					item: "industrialupgrade:block_anvil/block_anvil"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS2F0003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 0.0d
+			id: "WS2F0004Q"
+			title: "I·4  Кусачки"
+			icon: "industrialupgrade:cutter"
+			subtitle: "Режут пластины в кабели (с резиной/изоляцией)."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 4/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Режут пластины в кабели (с резиной/изоляцией).",
+				"&7Предмет:&r &findustrialupgrade:cutter&r",
+				"",
+				"Кусачки режут пластины в &eкабели&r (часто нужна резина/изоляция — смотри JEI).",
+				"Держи cutter в руке и следуй рецепту кабеля в JEI.",
+				"Этап I–III: cutter = твой «станок» пока нет electric cutting.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:cutter  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0003Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0004T"
+				type: "item"
+				item: "industrialupgrade:cutter"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0004R"
+					type: "item"
+					item: "industrialupgrade:cutter"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS2F0004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 0.0d
+			id: "WS2F0005Q"
+			title: "I·5  Добыватель смолы"
+			icon: "industrialupgrade:tools/treetap"
+			subtitle: "ПКМ по резиновому дереву → latex/смола."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 5/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r ПКМ по резиновому дереву → latex/смола.",
+				"&7Предмет:&r &findustrialupgrade:tools/treetap&r",
+				"",
+				"Treetap капает &elatex/смолу&r с резиновых деревьев IU.",
+				"Найди/вырасти rubber sapling, ПКМ treetap по стволу.",
+				"Latex → резина → изоляция кабелей. Без этого электросеть болеет короткими замыканиями/не крафтится.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:tools/treetap  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2F0004Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0005T"
+				type: "item"
+				item: "industrialupgrade:tools/treetap"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0005R"
+					type: "item"
+					item: "industrialupgrade:tools/treetap"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS2F0005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 0.0d
+			id: "WS2F0006Q"
+			title: "I·6  Гаечный ключ IU"
+			icon: "industrialupgrade:energy/wrench"
+			subtitle: "Крутит/снимает машины без ломания."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 6/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Крутит/снимает машины без ломания.",
+				"&7Предмет:&r &findustrialupgrade:energy/wrench&r",
+				"",
+				"Wrench IU крутит стороны машин и снимает их аккуратно.",
+				"Всегда носи в хотбаре на заводе — как гаечный ключ Create, но для IU.",
+				"Ломать киркой машины = потерять ориентацию/иногда дроп; лучше wrench.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:energy/wrench  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0005Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0006T"
+				type: "item"
+				item: "industrialupgrade:energy/wrench"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0006R"
+					type: "item"
+					item: "industrialupgrade:energy/wrench"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS2F0006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 1.93d
+			id: "WS2F0007Q"
+			title: "I·7  Медь IU"
+			icon: "industrialupgrade:itemingots/copper_ingot"
+			subtitle: "Слиток меди (своя руда/переработка IU)."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 7/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Слиток меди (своя руда/переработка IU).",
+				"&7Предмет:&r &findustrialupgrade:itemingots/copper_ingot&r",
+				"",
+				"Медь IU — своя линия руд/слитков (не путай только с ванилью, если крафт IU).",
+				"Копи слитки: пластины, кабели, бронза.",
+				"Ore Scanner поможет найти жилы меди на атолле.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× industrialupgrade:itemingots/copper_ingot  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0006Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0007T"
+				type: "item"
+				item: "industrialupgrade:itemingots/copper_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0007R"
+					type: "item"
+					item: "industrialupgrade:itemingots/copper_ingot"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS2F0007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 1.93d
+			id: "WS2F0008Q"
+			title: "I·8  Олово IU"
+			icon: "industrialupgrade:itemingots/tin_ingot"
+			subtitle: "Нужно для бронзы и кабелей."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 8/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Нужно для бронзы и кабелей.",
+				"&7Предмет:&r &findustrialupgrade:itemingots/tin_ingot&r",
+				"",
+				"Олово — второй металл бронзы и тонких кабелей.",
+				"Без олова бронзовый век IU не стартует.",
+				"Добывай жилы / переработку пыли в печи IU.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× industrialupgrade:itemingots/tin_ingot  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0007Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0008T"
+				type: "item"
+				item: "industrialupgrade:itemingots/tin_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0008R"
+					type: "item"
+					item: "industrialupgrade:itemingots/tin_ingot"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS2F0008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 1.93d
+			id: "WS2F0009Q"
+			title: "I·9  Бронза"
+			icon: "industrialupgrade:itemingots/bronze_ingot"
+			subtitle: "Медь+олово. Металл примитивного века."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 9/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Медь+олово. Металл примитивного века.",
+				"&7Предмет:&r &findustrialupgrade:itemingots/bronze_ingot&r",
+				"",
+				"Бронза = медь + олово (рецепт в JEI / alloy smelter позже).",
+				"На старте плавь вручную/в ванили, потом перенеси в Alloy Smelter.",
+				"Бронзовые пластины — дешёвые детали корпусов эпохи I–II.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× industrialupgrade:itemingots/bronze_ingot  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0008Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0009T"
+				type: "item"
+				item: "industrialupgrade:itemingots/bronze_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0009R"
+					type: "item"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS2F0009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 1.93d
+			id: "WS2F0010Q"
+			title: "I·10  Бронзовая пластина"
+			icon: "industrialupgrade:itemplates/bronze_plate"
+			subtitle: "◆ Вехи · Примитив · Молот + наковальня (или rolling позже)."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 10/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Молот + наковальня (или rolling позже).",
+				"&7Предмет:&r &findustrialupgrade:itemplates/bronze_plate&r",
+				"",
+				"Бронза = медь + олово (рецепт в JEI / alloy smelter позже).",
+				"На старте плавь вручную/в ванили, потом перенеси в Alloy Smelter.",
+				"Бронзовые пластины — дешёвые детали корпусов эпохи I–II.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:itemplates/bronze_plate  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0009Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0010T"
+				type: "item"
+				item: "industrialupgrade:itemplates/bronze_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0010R"
+					type: "item"
+					item: "industrialupgrade:itemplates/bronze_plate"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS2F0010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 1.93d
+			id: "WS2F0011Q"
+			title: "I·11  Железная пластина"
+			icon: "industrialupgrade:itemplates/iron_plate"
+			subtitle: "База корпусов и механизмов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 11/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r База корпусов и механизмов.",
+				"&7Предмет:&r &findustrialupgrade:itemplates/iron_plate&r",
+				"",
+				"Пластины — универсальная деталь IU (корпуса, кабели, обшивки).",
+				"Способы: молот+наковальня → пар/rolling → compressor.",
+				"Копи пачками: один станок съедает стопки пластин за час.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:itemplates/iron_plate  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0010Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0011T"
+				type: "item"
+				item: "industrialupgrade:itemplates/iron_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0011R"
+					type: "item"
+					item: "industrialupgrade:itemplates/iron_plate"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS2F0011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 1.93d
+			id: "WS2F0012Q"
+			title: "I·12  Медная пластина"
+			icon: "industrialupgrade:itemplates/copper_plate"
+			subtitle: "Под кабели и детали."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 12/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Под кабели и детали.",
+				"&7Предмет:&r &findustrialupgrade:itemplates/copper_plate&r",
+				"",
+				"Пластины — универсальная деталь IU (корпуса, кабели, обшивки).",
+				"Способы: молот+наковальня → пар/rolling → compressor.",
+				"Копи пачками: один станок съедает стопки пластин за час.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:itemplates/copper_plate  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0011Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0012T"
+				type: "item"
+				item: "industrialupgrade:itemplates/copper_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0012R"
+					type: "item"
+					item: "industrialupgrade:itemplates/copper_plate"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS2F0012X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 3.5d
+			id: "WS2F0013Q"
+			title: "I·13  Оловянная пластина"
+			icon: "industrialupgrade:itemplates/tin_plate"
+			subtitle: "Детали и сплавы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 13/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Детали и сплавы.",
+				"&7Предмет:&r &findustrialupgrade:itemplates/tin_plate&r",
+				"",
+				"Пластины — универсальная деталь IU (корпуса, кабели, обшивки).",
+				"Способы: молот+наковальня → пар/rolling → compressor.",
+				"Копи пачками: один станок съедает стопки пластин за час.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:itemplates/tin_plate  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0012Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0013T"
+				type: "item"
+				item: "industrialupgrade:itemplates/tin_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0013R"
+					type: "item"
+					item: "industrialupgrade:itemplates/tin_plate"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS2F0013X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 3.5d
+			id: "WS2F0014Q"
+			title: "I·14  Сырой латекс"
+			icon: "industrialupgrade:raw_latex"
+			subtitle: "С treetap. Путь к резине/изоляции."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Примитив&r",
+				"&8Шаг 14/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r С treetap. Путь к резине/изоляции.",
+				"&7Предмет:&r &findustrialupgrade:raw_latex&r",
+				"",
+				"Сырой латекс с дерева. Переработай в резину (extractor/рецепты JEI).",
+				"Запас latex = запас изолированных кабелей.",
+				"Авто-сбор latex появится позже; на старте — treetap руками.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:raw_latex  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0013Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0014T"
+				type: "item"
+				item: "industrialupgrade:raw_latex"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0014R"
+					type: "item"
+					item: "industrialupgrade:raw_latex"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS2F0014X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 3.5d
+			id: "WS2F0015Q"
+			title: "II·15  Синтетическая резина"
+			icon: "industrialupgrade:synthetic_rubber"
+			subtitle: "◆ Вехи · Пар · Изоляция кабелей и сапоги."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 15/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Изоляция кабелей и сапоги.",
+				"&7Предмет:&r &findustrialupgrade:synthetic_rubber&r",
+				"",
+				"Резина для изоляции и резиновых сапог.",
+				"Крафт из latex/химии IU — смотри JEI.",
+				"Перед длинными кабельными линиями сделай стопку резины.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:synthetic_rubber  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0014Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0015T"
+				type: "item"
+				item: "industrialupgrade:synthetic_rubber"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0015R"
+					type: "item"
+					item: "industrialupgrade:synthetic_rubber"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS2F0015X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 3.5d
+			id: "WS2F0016Q"
+			title: "II·16  Паровой корпус"
+			icon: "industrialupgrade:blockresource/steam_machine"
+			subtitle: "Этап II · Пар. Корпус паровых машин."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 16/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Этап II · Пар. Корпус паровых машин.",
+				"&7Предмет:&r &findustrialupgrade:blockresource/steam_machine&r",
+				"",
+				"Этап II: паровой корпус — база паровых станков.",
+				"Пар позволяет дробить/жать металл &eдо&r полноценной электросети.",
+				"Сначала парогенератор + вода, потом потребители пара.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:blockresource/steam_machine  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0015Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0016T"
+				type: "item"
+				item: "industrialupgrade:blockresource/steam_machine"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0016R"
+					type: "item"
+					item: "industrialupgrade:blockresource/steam_machine"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS2F0016X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 3.5d
+			id: "WS2F0017Q"
+			title: "II·17  Паровой генератор"
+			icon: "industrialupgrade:basemachine3/steam_generator"
+			subtitle: "Пар → энергия. Нужна вода + топливо/котёл."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 17/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Пар → энергия. Нужна вода + топливо/котёл.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/steam_generator&r",
+				"",
+				"Делает пар (и/или энергию — смотри GUI) из топлива и воды.",
+				"Подведи воду вёдрами/трубами, положи топливо, читай шкалы в GUI.",
+				"Если машины не крутятся — нет пара или не та сторона ввода (wrench).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/steam_generator  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0016Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0017T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/steam_generator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0017R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/steam_generator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0017X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 3.5d
+			id: "WS2F0018Q"
+			title: "II·18  Паровая дробилка"
+			icon: "industrialupgrade:basemachine3/steam_macerator"
+			subtitle: "Дробит руду без электричества."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 18/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Дробит руду без электричества.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/steam_macerator&r",
+				"",
+				"Паровая дробилка: руда → пыль без EU.",
+				"Идеальный мост: пока нет генератора EU, уже множь руду.",
+				"Выход пыли потом плавь в слитки / компрессуй.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/steam_macerator  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0017Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0018T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/steam_macerator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0018R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/steam_macerator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0018X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 5.43d
+			id: "WS2F0019Q"
+			title: "II·19  Паровой компрессор"
+			icon: "industrialupgrade:basemachine3/steam_compressor"
+			subtitle: "Сжимает пыль/пластины паром."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 19/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сжимает пыль/пластины паром.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/steam_compressor&r",
+				"",
+				"Сжимает материалы паром (блоки, пластины — по JEI).",
+				"Ставь рядом с парогенератором, проверяй стороны ввода/вывода.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/steam_compressor  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0018Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0019T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/steam_compressor"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0019R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/steam_compressor"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0019X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 5.43d
+			id: "WS2F0020Q"
+			title: "II·20  Паровой экстрактор"
+			icon: "industrialupgrade:basemachine3/steam_extractor"
+			subtitle: "◆ Вехи · Пар · Вытяжка материалов на пару."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 20/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Вытяжка материалов на пару.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/steam_extractor&r",
+				"",
+				"Паровая вытяжка аналог electric extractor.",
+				"Нужен для резины/материалов без электричества.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/steam_extractor  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0019Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0020T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/steam_extractor"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0020R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/steam_extractor"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0020X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 5.43d
+			id: "WS2F0021Q"
+			title: "II·21  Паровой прокат"
+			icon: "industrialupgrade:basemachine3/steam_rolling"
+			subtitle: "Пластины паром — быстрее молота."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 21/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Пластины паром — быстрее молота.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/steam_rolling&r",
+				"",
+				"Прокат на пару: слитки → пластины быстрее молота.",
+				"Как только есть стабильный пар — забудь ручной молот для масс-продакшна.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/steam_rolling  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0020Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0021T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/steam_rolling"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0021R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/steam_rolling"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2F0021X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 5.43d
+			id: "WS2F0022Q"
+			title: "II·22  Паровая резка"
+			icon: "industrialupgrade:basemachine3/steam_cutting"
+			subtitle: "Резка деталей на пару."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 22/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Резка деталей на пару.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/steam_cutting&r",
+				"",
+				"Резка заготовок паром. Готовит детали под крафты машин.",
+				"JEI покажет, что именно режется на этом тире.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/steam_cutting  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0021Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0022T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/steam_cutting"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0022R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/steam_cutting"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0022X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 5.43d
+			id: "WS2F0023Q"
+			title: "II·23  Паровой экструдер"
+			icon: "industrialupgrade:basemachine3/steam_extruder"
+			subtitle: "Профили/детали давлением пара."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 23/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Профили/детали давлением пара.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/steam_extruder&r",
+				"",
+				"Экструдер давлением пара — профили/стержни/детали.",
+				"Часто нужен для моторов и сложных крафтов эпохи II–III.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/steam_extruder  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0022Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0023T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/steam_extruder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0023R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/steam_extruder"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0023X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 5.43d
+			id: "WS2F0024Q"
+			title: "II·24  Усиленная наковальня"
+			icon: "industrialupgrade:block_strong_anvil/block_strong_anvil"
+			subtitle: "Тяжёлая обработка металла."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 24/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тяжёлая обработка металла.",
+				"&7Предмет:&r &findustrialupgrade:block_strong_anvil/block_strong_anvil&r",
+				"",
+				"Industrial Upgrade: открой предмет в &eJEI (R)&r и главу Guide Book той же эпохи.",
+				"Порядок эпох: Примитив → Пар → Электрика → Завод → Энергия. Не прыгай через схемы/моторы.",
+				"Карьеры в паке отключены — руда через Scanner, жилы, Roost и фермы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:block_strong_anvil/block_strong_anvil  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0023Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0024T"
+				type: "item"
+				item: "industrialupgrade:block_strong_anvil/block_strong_anvil"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0024R"
+					type: "item"
+					item: "industrialupgrade:block_strong_anvil/block_strong_anvil"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2F0024X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 7.0d
+			id: "WS2F0025Q"
+			title: "II·25  Доменный блок"
+			icon: "industrialupgrade:blastfurnace/blast_furnace_main"
+			subtitle: "Ядро доменной печи (многоблочная)."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 25/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ядро доменной печи (многоблочная).",
+				"&7Предмет:&r &findustrialupgrade:blastfurnace/blast_furnace_main&r",
+				"",
+				"Домна — &eмногоблок&r. Main + parts по схеме из книги/JEI.",
+				"Даёт сталь и высокотемпературную металлургию.",
+				"Не пытайся ставить один блок — нужна правильная рамка.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:blastfurnace/blast_furnace_main  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2F0024Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0025T"
+				type: "item"
+				item: "industrialupgrade:blastfurnace/blast_furnace_main"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0025R"
+					type: "item"
+					item: "industrialupgrade:blastfurnace/blast_furnace_main"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0025X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 7.0d
+			id: "WS2F0026Q"
+			title: "II·26  Часть домны"
+			icon: "industrialupgrade:blastfurnace/blast_furnace_part"
+			subtitle: "Стены/части структуры домны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 26/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Стены/части структуры домны.",
+				"&7Предмет:&r &findustrialupgrade:blastfurnace/blast_furnace_part&r",
+				"",
+				"Домна — &eмногоблок&r. Main + parts по схеме из книги/JEI.",
+				"Даёт сталь и высокотемпературную металлургию.",
+				"Не пытайся ставить один блок — нужна правильная рамка.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:blastfurnace/blast_furnace_part  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0025Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0026T"
+				type: "item"
+				item: "industrialupgrade:blastfurnace/blast_furnace_part"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0026R"
+					type: "item"
+					item: "industrialupgrade:blastfurnace/blast_furnace_part"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS2F0026X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 7.0d
+			id: "WS2F0027Q"
+			title: "II·27  Сталь IU"
+			icon: "industrialupgrade:itemingots/steel_ingot"
+			subtitle: "Из домны/сплавов — тир выше железа."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 27/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Из домны/сплавов — тир выше железа.",
+				"&7Предмет:&r &findustrialupgrade:itemingots/steel_ingot&r",
+				"",
+				"Сталь — металл после домны/высокотира.",
+				"Пластины стали идут в прочные корпуса и mid-game детали.",
+				"Без стали Advanced-тир будет дорогим и кривым.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:itemingots/steel_ingot  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0026Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0027T"
+				type: "item"
+				item: "industrialupgrade:itemingots/steel_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0027R"
+					type: "item"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0027X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 7.0d
+			id: "WS2F0028Q"
+			title: "II·28  Стальная пластина"
+			icon: "industrialupgrade:itemplates/steel_plate"
+			subtitle: "Прочные корпуса."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 28/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Прочные корпуса.",
+				"&7Предмет:&r &findustrialupgrade:itemplates/steel_plate&r",
+				"",
+				"Пластины — универсальная деталь IU (корпуса, кабели, обшивки).",
+				"Способы: молот+наковальня → пар/rolling → compressor.",
+				"Копи пачками: один станок съедает стопки пластин за час.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:itemplates/steel_plate  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0027Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0028T"
+				type: "item"
+				item: "industrialupgrade:itemplates/steel_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0028R"
+					type: "item"
+					item: "industrialupgrade:itemplates/steel_plate"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0028X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 7.0d
+			id: "WS2F0029Q"
+			title: "II·29  Machine Block"
+			icon: "industrialupgrade:blockresource/machine"
+			subtitle: "Этап III · Электрика. Базовый корпус машин."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Пар&r",
+				"&8Шаг 29/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Этап III · Электрика. Базовый корпус машин.",
+				"&7Предмет:&r &findustrialupgrade:blockresource/machine&r",
+				"",
+				"Industrial Upgrade: открой предмет в &eJEI (R)&r и главу Guide Book той же эпохи.",
+				"Порядок эпох: Примитив → Пар → Электрика → Завод → Энергия. Не прыгай через схемы/моторы.",
+				"Карьеры в паке отключены — руда через Scanner, жилы, Roost и фермы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× industrialupgrade:blockresource/machine  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0028Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0029T"
+				type: "item"
+				item: "industrialupgrade:blockresource/machine"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0029R"
+					type: "item"
+					item: "industrialupgrade:blockresource/machine"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2F0029X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 7.0d
+			id: "WS2F0030Q"
+			title: "III·30  Медный кабель"
+			icon: "industrialupgrade:cable/copper_cable"
+			subtitle: "◆ Вехи · Электрика · Первая проводка EU. Режь пластины cutter’ом."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 30/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Первая проводка EU. Режь пластины cutter’ом.",
+				"&7Предмет:&r &findustrialupgrade:cable/copper_cable&r",
+				"",
+				"Кабели EU переносят энергию. Толщина/металл = лимит тока.",
+				"Медь/олово — старт; золото/железо/glass — дальше.",
+				"В AquaTech &aвзрывы от напряжения отключены&r — трансформаторы не обязательны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× industrialupgrade:cable/copper_cable  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0029Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0030T"
+				type: "item"
+				item: "industrialupgrade:cable/copper_cable"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0030R"
+					type: "item"
+					item: "industrialupgrade:cable/copper_cable"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS2F0030X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 8.93d
+			id: "WS2F0031Q"
+			title: "III·31  Оловянный кабель"
+			icon: "industrialupgrade:cable/tin_cable"
+			subtitle: "Дешёвая линия малой мощности."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 31/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Дешёвая линия малой мощности.",
+				"&7Предмет:&r &findustrialupgrade:cable/tin_cable&r",
+				"",
+				"Кабели EU переносят энергию. Толщина/металл = лимит тока.",
+				"Медь/олово — старт; золото/железо/glass — дальше.",
+				"В AquaTech &aвзрывы от напряжения отключены&r — трансформаторы не обязательны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× industrialupgrade:cable/tin_cable  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0030Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0031T"
+				type: "item"
+				item: "industrialupgrade:cable/tin_cable"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0031R"
+					type: "item"
+					item: "industrialupgrade:cable/tin_cable"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS2F0031X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 8.93d
+			id: "WS2F0032Q"
+			title: "III·32  Золотой кабель"
+			icon: "industrialupgrade:cable/gold_cable"
+			subtitle: "Средняя пропускная способность."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 32/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Средняя пропускная способность.",
+				"&7Предмет:&r &findustrialupgrade:cable/gold_cable&r",
+				"",
+				"Кабели EU переносят энергию. Толщина/металл = лимит тока.",
+				"Медь/олово — старт; золото/железо/glass — дальше.",
+				"В AquaTech &aвзрывы от напряжения отключены&r — трансформаторы не обязательны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:cable/gold_cable  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0031Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0032T"
+				type: "item"
+				item: "industrialupgrade:cable/gold_cable"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0032R"
+					type: "item"
+					item: "industrialupgrade:cable/gold_cable"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0032X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 8.93d
+			id: "WS2F0033Q"
+			title: "III·33  Железный кабель"
+			icon: "industrialupgrade:cable/iron_cable"
+			subtitle: "Выше ток — смотри потери/изоляцию."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 33/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Выше ток — смотри потери/изоляцию.",
+				"&7Предмет:&r &findustrialupgrade:cable/iron_cable&r",
+				"",
+				"Кабели EU переносят энергию. Толщина/металл = лимит тока.",
+				"Медь/олово — старт; золото/железо/glass — дальше.",
+				"В AquaTech &aвзрывы от напряжения отключены&r — трансформаторы не обязательны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:cable/iron_cable  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0032Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0033T"
+				type: "item"
+				item: "industrialupgrade:cable/iron_cable"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0033R"
+					type: "item"
+					item: "industrialupgrade:cable/iron_cable"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0033X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 8.93d
+			id: "WS2F0034Q"
+			title: "III·34  Стекловолоконный кабель"
+			icon: "industrialupgrade:cable/glass_cable"
+			subtitle: "Дальняя передача с малыми потерями."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 34/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Дальняя передача с малыми потерями.",
+				"&7Предмет:&r &findustrialupgrade:cable/glass_cable&r",
+				"",
+				"Кабели EU переносят энергию. Толщина/металл = лимит тока.",
+				"Медь/олово — старт; золото/железо/glass — дальше.",
+				"В AquaTech &aвзрывы от напряжения отключены&r — трансформаторы не обязательны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:cable/glass_cable  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0033Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0034T"
+				type: "item"
+				item: "industrialupgrade:cable/glass_cable"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0034R"
+					type: "item"
+					item: "industrialupgrade:cable/glass_cable"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS2F0034X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 8.93d
+			id: "WS2F0035Q"
+			title: "III·35  Electronic Circuit"
+			icon: "industrialupgrade:crafting_elements/crafting_272_element"
+			subtitle: "Базовая схема. Крафт в JEI/книге."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 35/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Базовая схема. Крафт в JEI/книге.",
+				"&7Предмет:&r &findustrialupgrade:crafting_elements/crafting_272_element&r",
+				"",
+				"Electronic Circuit — базовая электроника.",
+				"Крафт из пластин/кабелей/красной пыли (точный рецепт — JEI).",
+				"Почти каждая электромашина просит эту схему. Копи десятками.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× industrialupgrade:crafting_elements/crafting_272_element  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2F0034Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0035T"
+				type: "item"
+				item: "industrialupgrade:crafting_elements/crafting_272_element"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0035R"
+					type: "item"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0035X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 8.93d
+			id: "WS2F0036Q"
+			title: "III·36  Electric Motor"
+			icon: "industrialupgrade:crafting_elements/crafting_276_element"
+			subtitle: "Мотор для машин и генераторов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 36/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Мотор для машин и генераторов.",
+				"&7Предмет:&r &findustrialupgrade:crafting_elements/crafting_276_element&r",
+				"",
+				"Electric Motor — сердце генераторов и станков.",
+				"Нужны катушки + металл. Без мотора генератор не собрать.",
+				"Делай моторы пачкой вместе со схемами.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× industrialupgrade:crafting_elements/crafting_276_element  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0035Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0036T"
+				type: "item"
+				item: "industrialupgrade:crafting_elements/crafting_276_element"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0036R"
+					type: "item"
+					item: "industrialupgrade:crafting_elements/crafting_276_element"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS2F0036X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 10.5d
+			id: "WS2F0037Q"
+			title: "III·37  Катушка (Coil)"
+			icon: "industrialupgrade:crafting_elements/crafting_294_element"
+			subtitle: "Обмотка для моторов/трансформаторов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 37/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Обмотка для моторов/трансформаторов.",
+				"&7Предмет:&r &findustrialupgrade:crafting_elements/crafting_294_element&r",
+				"",
+				"Coil (катушка) — обмотка из кабеля/железа.",
+				"Идёт в моторы и трансформаторы.",
+				"Намотай запас, пока режешь кабель.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× industrialupgrade:crafting_elements/crafting_294_element  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0036Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0037T"
+				type: "item"
+				item: "industrialupgrade:crafting_elements/crafting_294_element"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0037R"
+					type: "item"
+					item: "industrialupgrade:crafting_elements/crafting_294_element"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2F0037X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 10.5d
+			id: "WS2F0038Q"
+			title: "III·38  Machine Casing"
+			icon: "industrialupgrade:crafting_elements/crafting_137_element"
+			subtitle: "Обшивка корпуса машины."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 38/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Обшивка корпуса машины.",
+				"&7Предмет:&r &findustrialupgrade:crafting_elements/crafting_137_element&r",
+				"",
+				"Machine Casing — обшивка корпуса.",
+				"Улучшенные casing (138–140) — для высоких тиров.",
+				"Смотри JEI: какой casing в каком крафте машины.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× industrialupgrade:crafting_elements/crafting_137_element  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0037Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0038T"
+				type: "item"
+				item: "industrialupgrade:crafting_elements/crafting_137_element"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0038R"
+					type: "item"
+					item: "industrialupgrade:crafting_elements/crafting_137_element"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS2F0038X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 10.5d
+			id: "WS2F0039Q"
+			title: "III·39  Re-Battery"
+			icon: "industrialupgrade:battery/re_battery"
+			subtitle: "Переносной аккумулятор EU."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 39/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Переносной аккумулятор EU.",
+				"&7Предмет:&r &findustrialupgrade:battery/re_battery&r",
+				"",
+				"Re-Battery заряжается от BatBox/генератора, питает инструменты.",
+				"Положи в зарядный слот BatBox, дождись заполнения шкалы.",
+				"Advanced Battery — больше ёмкости для поля.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:battery/re_battery  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0038Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0039T"
+				type: "item"
+				item: "industrialupgrade:battery/re_battery"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0039R"
+					type: "item"
+					item: "industrialupgrade:battery/re_battery"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2F0039X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 10.5d
+			id: "WS2F0040Q"
+			title: "III·40  BatBox"
+			icon: "industrialupgrade:wiring_storage/batbox_iu"
+			subtitle: "◆ Вехи · Электрика · Малый стационарный буфер энергии."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 40/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Малый стационарный буфер энергии.",
+				"&7Предмет:&r &findustrialupgrade:wiring_storage/batbox_iu&r",
+				"",
+				"BatBox — маленький буфер EU на старте сети.",
+				"Кабель от генератора → BatBox → кабель к машинам.",
+				"Не хватает буфера — ставь CESU → MFE → MFSU по мере роста завода.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:wiring_storage/batbox_iu  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0039Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0040T"
+				type: "item"
+				item: "industrialupgrade:wiring_storage/batbox_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0040R"
+					type: "item"
+					item: "industrialupgrade:wiring_storage/batbox_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2F0040X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 10.5d
+			id: "WS2F0041Q"
+			title: "III·41  Генератор IU"
+			icon: "industrialupgrade:basemachine3/generator_iu"
+			subtitle: "Уголь/топливо → EU. Первый ток."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 41/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Уголь/топливо → EU. Первый ток.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/generator_iu&r",
+				"",
+				"Генератор жжёт уголь/топливо → EU.",
+				"Это твой первый «ток». Потом добавишь гео/воду/солнце.",
+				"Ставь рядом с BatBox, не тяни километровый кабель на старте.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/generator_iu  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0040Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0041T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/generator_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0041R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/generator_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0041X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 10.5d
+			id: "WS2F0042Q"
+			title: "III·42  Электропечь IU"
+			icon: "industrialupgrade:simplemachine/furnace_iu"
+			subtitle: "Плавка на EU быстрее ванили."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 42/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Плавка на EU быстрее ванили.",
+				"&7Предмет:&r &findustrialupgrade:simplemachine/furnace_iu&r",
+				"",
+				"Электропечь плавит быстрее и на EU.",
+				"Подключи кабель, положи руду/пыль, забери слитки.",
+				"Связка macerator → furnace — классика удвоения руды.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:simplemachine/furnace_iu  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0041Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0042T"
+				type: "item"
+				item: "industrialupgrade:simplemachine/furnace_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0042R"
+					type: "item"
+					item: "industrialupgrade:simplemachine/furnace_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS2F0042X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 12.43d
+			id: "WS2F0043Q"
+			title: "III·43  Macerator"
+			icon: "industrialupgrade:simplemachine/macerator_iu"
+			subtitle: "Руда → пыль (больше выхода)."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 43/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Руда → пыль (больше выхода).",
+				"&7Предмет:&r &findustrialupgrade:simplemachine/macerator_iu&r",
+				"",
+				"Дробилка: 1 руда → 2 пыли (обычно).",
+				"Пыль плавь в furnace_iu. Это сердце этапа III.",
+				"Combined Macerator позже ещё сильнее.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:simplemachine/macerator_iu  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0042Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0043T"
+				type: "item"
+				item: "industrialupgrade:simplemachine/macerator_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0043R"
+					type: "item"
+					item: "industrialupgrade:simplemachine/macerator_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0043X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 12.43d
+			id: "WS2F0044Q"
+			title: "III·44  Compressor"
+			icon: "industrialupgrade:compressor/compressor"
+			subtitle: "Пыль/слитки → пластины/блоки."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 44/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Пыль/слитки → пластины/блоки.",
+				"&7Предмет:&r &findustrialupgrade:compressor/compressor&r",
+				"",
+				"Жмёт пыль/слитки в пластины и блоки по JEI.",
+				"Замена молота на потоке. Питай EU.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:compressor/compressor  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0043Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0044T"
+				type: "item"
+				item: "industrialupgrade:compressor/compressor"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0044R"
+					type: "item"
+					item: "industrialupgrade:compressor/compressor"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0044X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 12.43d
+			id: "WS2F0045Q"
+			title: "III·45  Extractor"
+			icon: "industrialupgrade:simplemachine/extractor_iu"
+			subtitle: "◆ Вехи · Электрика · Вытяжка (резина и др.)."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Электрика&r",
+				"&8Шаг 45/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Вытяжка (резина и др.).",
+				"&7Предмет:&r &findustrialupgrade:simplemachine/extractor_iu&r",
+				"",
+				"Extractor вытягивает продукты (резина и др.).",
+				"Держи рядом с latex/химией.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:simplemachine/extractor_iu  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0044Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0045T"
+				type: "item"
+				item: "industrialupgrade:simplemachine/extractor_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0045R"
+					type: "item"
+					item: "industrialupgrade:simplemachine/extractor_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0045X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 12.43d
+			id: "WS2F0046Q"
+			title: "IV·46  Прокатный стан"
+			icon: "industrialupgrade:moremachine2/rolling"
+			subtitle: "Этап IV · Завод. Пластины автоматом."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 46/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Этап IV · Завод. Пластины автоматом.",
+				"&7Предмет:&r &findustrialupgrade:moremachine2/rolling&r",
+				"",
+				"Электро-прокат: массовые пластины.",
+				"Этап IV — убери ручной труд с металла.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:moremachine2/rolling  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0045Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0046T"
+				type: "item"
+				item: "industrialupgrade:moremachine2/rolling"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0046R"
+					type: "item"
+					item: "industrialupgrade:moremachine2/rolling"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2F0046X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 12.43d
+			id: "WS2F0047Q"
+			title: "IV·47  Резательный станок"
+			icon: "industrialupgrade:moremachine2/cutting"
+			subtitle: "Точная резка деталей."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 47/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Точная резка деталей.",
+				"&7Предмет:&r &findustrialupgrade:moremachine2/cutting&r",
+				"",
+				"Электро-резка деталей для сложных крафтов.",
+				"Смотри JEI, какие пластины режутся в какие части.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:moremachine2/cutting  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0046Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0047T"
+				type: "item"
+				item: "industrialupgrade:moremachine2/cutting"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0047R"
+					type: "item"
+					item: "industrialupgrade:moremachine2/cutting"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2F0047X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 12.43d
+			id: "WS2F0048Q"
+			title: "IV·48  Экструдер"
+			icon: "industrialupgrade:moremachine2/extruder"
+			subtitle: "Профили и заготовки."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 48/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Профили и заготовки.",
+				"&7Предмет:&r &findustrialupgrade:moremachine2/extruder&r",
+				"",
+				"Экструдер — профили/стержни под моторы и трубы.",
+				"Часто узкое место перед Advanced-тиром.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:moremachine2/extruder  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0047Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0048T"
+				type: "item"
+				item: "industrialupgrade:moremachine2/extruder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0048R"
+					type: "item"
+					item: "industrialupgrade:moremachine2/extruder"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2F0048X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 14.0d
+			id: "WS2F0049Q"
+			title: "IV·49  Alloy Smelter"
+			icon: "industrialupgrade:basemachine/alloy_smelter"
+			subtitle: "Сплавы (бронза и выше) в машине."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 49/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сплавы (бронза и выше) в машине.",
+				"&7Предмет:&r &findustrialupgrade:basemachine/alloy_smelter&r",
+				"",
+				"Сплавлятор делает бронзу и спец.сплавы без угадайки в верстаке.",
+				"Подай два металла по рецепту JEI + EU.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine/alloy_smelter  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0048Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0049T"
+				type: "item"
+				item: "industrialupgrade:basemachine/alloy_smelter"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0049R"
+					type: "item"
+					item: "industrialupgrade:basemachine/alloy_smelter"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2F0049X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 14.0d
+			id: "WS2F0050Q"
+			title: "IV·50  Combined Macerator"
+			icon: "industrialupgrade:moremachine1/comb_macerator"
+			subtitle: "◆ Вехи · Завод · Усиленное дробление руд."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 50/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Усиленное дробление руд.",
+				"&7Предмет:&r &findustrialupgrade:moremachine1/comb_macerator&r",
+				"",
+				"Дробилка: 1 руда → 2 пыли (обычно).",
+				"Пыль плавь в furnace_iu. Это сердце этапа III.",
+				"Combined Macerator позже ещё сильнее.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:moremachine1/comb_macerator  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0049Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0050T"
+				type: "item"
+				item: "industrialupgrade:moremachine1/comb_macerator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0050R"
+					type: "item"
+					item: "industrialupgrade:moremachine1/comb_macerator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS2F0050X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 14.0d
+			id: "WS2F0051Q"
+			title: "IV·51  Advanced Machine Block"
+			icon: "industrialupgrade:blockresource/advanced_machine"
+			subtitle: "Корпус тира Advanced."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 51/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Корпус тира Advanced.",
+				"&7Предмет:&r &findustrialupgrade:blockresource/advanced_machine&r",
+				"",
+				"Advanced Machine Block — корпус mid-game машин.",
+				"Крафт дороже: нужны схемы/пластины выше. Готовь заранее.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:blockresource/advanced_machine  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0050Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0051T"
+				type: "item"
+				item: "industrialupgrade:blockresource/advanced_machine"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0051R"
+					type: "item"
+					item: "industrialupgrade:blockresource/advanced_machine"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS2F0051X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 14.0d
+			id: "WS2F0052Q"
+			title: "IV·52  Advanced Circuit"
+			icon: "industrialupgrade:crafting_elements/crafting_273_element"
+			subtitle: "Схема тира 2. Нужна для апгрейдов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 52/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Схема тира 2. Нужна для апгрейдов.",
+				"&7Предмет:&r &findustrialupgrade:crafting_elements/crafting_273_element&r",
+				"",
+				"Advanced Circuit — электроника тира 2.",
+				"Нужна для CESU+/продвинутых машин и панелей.",
+				"Не экономь: без неё этап IV–V встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× industrialupgrade:crafting_elements/crafting_273_element  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0051Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0052T"
+				type: "item"
+				item: "industrialupgrade:crafting_elements/crafting_273_element"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0052R"
+					type: "item"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2F0052X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 14.0d
+			id: "WS2F0053Q"
+			title: "IV·53  Advanced Battery"
+			icon: "industrialupgrade:battery/advanced_re_battery"
+			subtitle: "Ёмче переносной буфер."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 53/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ёмче переносной буфер.",
+				"&7Предмет:&r &findustrialupgrade:battery/advanced_re_battery&r",
+				"",
+				"Re-Battery заряжается от BatBox/генератора, питает инструменты.",
+				"Положи в зарядный слот BatBox, дождись заполнения шкалы.",
+				"Advanced Battery — больше ёмкости для поля.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:battery/advanced_re_battery  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0052Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0053T"
+				type: "item"
+				item: "industrialupgrade:battery/advanced_re_battery"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0053R"
+					type: "item"
+					item: "industrialupgrade:battery/advanced_re_battery"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2F0053X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 14.0d
+			id: "WS2F0054Q"
+			title: "IV·54  CESU"
+			icon: "industrialupgrade:wiring_storage/cesu_iu"
+			subtitle: "Средний энергобуфер."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 54/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Средний энергобуфер.",
+				"&7Предмет:&r &findustrialupgrade:wiring_storage/cesu_iu&r",
+				"",
+				"CESU — буфер больше BatBox. Ставь как «аккумулятор цеха».",
+				"Кабели толще, генерация стабильнее.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:wiring_storage/cesu_iu  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0053Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0054T"
+				type: "item"
+				item: "industrialupgrade:wiring_storage/cesu_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0054R"
+					type: "item"
+					item: "industrialupgrade:wiring_storage/cesu_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS2F0054X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 15.93d
+			id: "WS2F0055Q"
+			title: "IV·55  MFE"
+			icon: "industrialupgrade:wiring_storage/mfe_iu"
+			subtitle: "Большой энергобуфер."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 55/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Большой энергобуфер.",
+				"&7Предмет:&r &findustrialupgrade:wiring_storage/mfe_iu&r",
+				"",
+				"MFE — большой буфер. Нужен под солнечные фермы и несколько линий.",
+				"Следи за напряжением трансформаторами.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:wiring_storage/mfe_iu  &8+&r  &b95 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2F0054Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0055T"
+				type: "item"
+				item: "industrialupgrade:wiring_storage/mfe_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0055R"
+					type: "item"
+					item: "industrialupgrade:wiring_storage/mfe_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "WS2F0055X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 15.93d
+			id: "WS2F0056Q"
+			title: "IV·56  MFSU"
+			icon: "industrialupgrade:wiring_storage/mfsu_iu"
+			subtitle: "Очень большой буфер завода."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 56/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Очень большой буфер завода.",
+				"&7Предмет:&r &findustrialupgrade:wiring_storage/mfsu_iu&r",
+				"",
+				"MFSU — главный склад EU завода.",
+				"Капстоун буферизации перед квант-генерацией.",
+				"Один MFSU + панели = спокойная ночь на атолле.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:wiring_storage/mfsu_iu  &8+&r  &b110 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0055Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0056T"
+				type: "item"
+				item: "industrialupgrade:wiring_storage/mfsu_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0056R"
+					type: "item"
+					item: "industrialupgrade:wiring_storage/mfsu_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "WS2F0056X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 15.93d
+			id: "WS2F0057Q"
+			title: "IV·57  Трансформатор"
+			icon: "industrialupgrade:transformer_iu/lv"
+			subtitle: "Меняет напряжение линии EU."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 57/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Меняет напряжение линии EU.",
+				"&7Предмет:&r &findustrialupgrade:transformer_iu/lv&r",
+				"",
+				"Трансформатор меняет напряжение/пакет EU между тирами кабелей.",
+				"Ставь между генератором высокого тира и слабыми машинами.",
+				"Неправильный тир = взрыв кабеля/машины. Читай GUI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:transformer_iu/lv  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0056Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0057T"
+				type: "item"
+				item: "industrialupgrade:transformer_iu/lv"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0057R"
+					type: "item"
+					item: "industrialupgrade:transformer_iu/lv"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2F0057X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 15.93d
+			id: "WS2F0058Q"
+			title: "IV·58  Ore Scanner"
+			icon: "industrialupgrade:basemachine3/scanner_iu"
+			subtitle: "Сканер рудных жил IU (стартовый гаджет)."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 58/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сканер рудных жил IU (стартовый гаджет).",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/scanner_iu&r",
+				"",
+				"Ore Scanner показывает жилы IU. Это замена карьеров в нашем паке.",
+				"Заряжай/используй по тултипу, ищи медь/олово/редкие руды.",
+				"Advanced Scanner — дальше и точнее.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/scanner_iu  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0057Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0058T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/scanner_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0058R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/scanner_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2F0058X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 15.93d
+			id: "WS2F0059Q"
+			title: "IV·59  Advanced Scanner"
+			icon: "industrialupgrade:basemachine3/adv_scanner"
+			subtitle: "Лучше сканирует жилы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 59/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Лучше сканирует жилы.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/adv_scanner&r",
+				"",
+				"Ore Scanner показывает жилы IU. Это замена карьеров в нашем паке.",
+				"Заряжай/используй по тултипу, ищи медь/олово/редкие руды.",
+				"Advanced Scanner — дальше и точнее.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/adv_scanner  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0058Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0059T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/adv_scanner"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0059R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/adv_scanner"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2F0059X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 15.93d
+			id: "WS2F0060Q"
+			title: "IV·60  Пластиковая пластина"
+			icon: "industrialupgrade:synthetic_plate"
+			subtitle: "◆ Вехи · Завод · Химия/переработка → пластик."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Завод&r",
+				"&8Шаг 60/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Химия/переработка → пластик.",
+				"&7Предмет:&r &findustrialupgrade:synthetic_plate&r",
+				"",
+				"Пластины — универсальная деталь IU (корпуса, кабели, обшивки).",
+				"Способы: молот+наковальня → пар/rolling → compressor.",
+				"Копи пачками: один станок съедает стопки пластин за час.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialupgrade:synthetic_plate  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0059Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0060T"
+				type: "item"
+				item: "industrialupgrade:synthetic_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0060R"
+					type: "item"
+					item: "industrialupgrade:synthetic_plate"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS2F0060X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 17.5d
+			id: "WS2F0061Q"
+			title: "V·61  Electronics Assembler"
+			icon: "industrialupgrade:electronics_assembler/electronics_assembler"
+			subtitle: "Сборка схем и электроники."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 61/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сборка схем и электроники.",
+				"&7Предмет:&r &findustrialupgrade:electronics_assembler/electronics_assembler&r",
+				"",
+				"Сборщик электроники: схемы, платы, микросхемы.",
+				"Подай заготовки по JEI, забери готовые circuit.",
+				"Сердце этапа IV для нано/квант схем.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:electronics_assembler/electronics_assembler  &8+&r  &b95 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0060Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0061T"
+				type: "item"
+				item: "industrialupgrade:electronics_assembler/electronics_assembler"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0061R"
+					type: "item"
+					item: "industrialupgrade:electronics_assembler/electronics_assembler"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "WS2F0061X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 17.5d
+			id: "WS2F0062Q"
+			title: "V·62  Mini Solar Panel"
+			icon: "industrialupgrade:basemachine3/minipanel"
+			subtitle: "Этап V · Энергия. Маленькая панель."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 62/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Этап V · Энергия. Маленькая панель.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/minipanel&r",
+				"",
+				"Солнечные панели IU дают EU днём.",
+				"Ставь на открытом небе. Тиры: mini → low → advanced → hybrid → …",
+				"Ночью нужен буфер (MFSU) или другой генератор.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/minipanel  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0061Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0062T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/minipanel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0062R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/minipanel"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2F0062X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 17.5d
+			id: "WS2F0063Q"
+			title: "V·63  Low Solar Panel"
+			icon: "industrialupgrade:basemachine3/solar_iu"
+			subtitle: "Слабая дневная генерация."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 63/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Слабая дневная генерация.",
+				"&7Предмет:&r &findustrialupgrade:basemachine3/solar_iu&r",
+				"",
+				"Industrial Upgrade: открой предмет в &eJEI (R)&r и главу Guide Book той же эпохи.",
+				"Порядок эпох: Примитив → Пар → Электрика → Завод → Энергия. Не прыгай через схемы/моторы.",
+				"Карьеры в паке отключены — руда через Scanner, жилы, Roost и фермы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:basemachine3/solar_iu  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0062Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0063T"
+				type: "item"
+				item: "industrialupgrade:basemachine3/solar_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0063R"
+					type: "item"
+					item: "industrialupgrade:basemachine3/solar_iu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2F0063X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 17.5d
+			id: "WS2F0064Q"
+			title: "V·64  Advanced Solar Panel"
+			icon: "industrialupgrade:machines/advanced_solar_paneliu"
+			subtitle: "Серьёзная солнечная станция."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 64/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Серьёзная солнечная станция.",
+				"&7Предмет:&r &findustrialupgrade:machines/advanced_solar_paneliu&r",
+				"",
+				"Machine Block — «камень» всех электромашин IU.",
+				"Скрафти пачку заранее, прежде чем собирать линию переработки.",
+				"Advanced Machine Block — следующий тир корпуса.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:machines/advanced_solar_paneliu  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0063Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0064T"
+				type: "item"
+				item: "industrialupgrade:machines/advanced_solar_paneliu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0064R"
+					type: "item"
+					item: "industrialupgrade:machines/advanced_solar_paneliu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS2F0064X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 17.5d
+			id: "WS2F0065Q"
+			title: "V·65  Hybrid Solar Panel"
+			icon: "industrialupgrade:machines/hybrid_solar_paneliu"
+			subtitle: "Сильнее Advanced."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 65/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сильнее Advanced.",
+				"&7Предмет:&r &findustrialupgrade:machines/hybrid_solar_paneliu&r",
+				"",
+				"Machine Block — «камень» всех электромашин IU.",
+				"Скрафти пачку заранее, прежде чем собирать линию переработки.",
+				"Advanced Machine Block — следующий тир корпуса.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:machines/hybrid_solar_paneliu  &8+&r  &b110 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2F0064Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0065T"
+				type: "item"
+				item: "industrialupgrade:machines/hybrid_solar_paneliu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0065R"
+					type: "item"
+					item: "industrialupgrade:machines/hybrid_solar_paneliu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "WS2F0065X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 17.5d
+			id: "WS2F0066Q"
+			title: "V·66  Solarite Plate"
+			icon: "industrialupgrade:itemsunnarium/sunnarium_plate"
+			subtitle: "Материал топ-панелей."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 66/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Материал топ-панелей.",
+				"&7Предмет:&r &findustrialupgrade:itemsunnarium/sunnarium_plate&r",
+				"",
+				"Пластины — универсальная деталь IU (корпуса, кабели, обшивки).",
+				"Способы: молот+наковальня → пар/rolling → compressor.",
+				"Копи пачками: один станок съедает стопки пластин за час.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× industrialupgrade:itemsunnarium/sunnarium_plate  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0065Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0066T"
+				type: "item"
+				item: "industrialupgrade:itemsunnarium/sunnarium_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0066R"
+					type: "item"
+					item: "industrialupgrade:itemsunnarium/sunnarium_plate"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS2F0066X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 19.43d
+			id: "WS2F0067Q"
+			title: "V·67  Energy Crystal"
+			icon: "industrialupgrade:battery/energy_crystal"
+			subtitle: "Кристалл энергии mid-game."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 67/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Кристалл энергии mid-game.",
+				"&7Предмет:&r &findustrialupgrade:battery/energy_crystal&r",
+				"",
+				"Energy Crystal — mid-tier энергоячейка/компонент.",
+				"Нужен в крафтах буферов и брони/инструментов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:battery/energy_crystal  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0066Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0067T"
+				type: "item"
+				item: "industrialupgrade:battery/energy_crystal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0067R"
+					type: "item"
+					item: "industrialupgrade:battery/energy_crystal"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2F0067X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 19.43d
+			id: "WS2F0068Q"
+			title: "V·68  Lapotron Crystal"
+			icon: "industrialupgrade:battery/lapotron_crystal"
+			subtitle: "Топ-кристалл энергии."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 68/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ-кристалл энергии.",
+				"&7Предмет:&r &findustrialupgrade:battery/lapotron_crystal&r",
+				"",
+				"Lapotron Crystal — топ-ячейка энергии IU.",
+				"Дорогая, но открывает MFSU-уровень и эндгейм питание.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:battery/lapotron_crystal  &8+&r  &b110 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0067Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0068T"
+				type: "item"
+				item: "industrialupgrade:battery/lapotron_crystal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0068R"
+					type: "item"
+					item: "industrialupgrade:battery/lapotron_crystal"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "WS2F0068X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 19.43d
+			id: "WS2F0069Q"
+			title: "V·69  Power Converter"
+			icon: "powerutils:power_utilities"
+			subtitle: "Аддон: EU ↔ RF/FE/TE. Мост к Create/Mek."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 69/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Аддон: EU ↔ RF/FE/TE. Мост к Create/Mek.",
+				"&7Предмет:&r &fpowerutils:power_utilities&r",
+				"",
+				"Power Utilities — блок-конвертер EU ↔ RF/FE/TE.",
+				"Поставь рядом с BatBox/MFSU IU и кабелем Create/Thermal/Mek.",
+				"Вставляй module_fe / module_rf под нужную сеть. Без модуля мост не поймёт формат.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× powerutils:power_utilities  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0068Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0069T"
+				type: "item"
+				item: "powerutils:power_utilities"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0069R"
+					type: "item"
+					item: "powerutils:power_utilities"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS2F0069X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 19.43d
+			id: "WS2F0070Q"
+			title: "V·70  Модуль FE"
+			icon: "powerutils:module_fe"
+			subtitle: "◆ Вехи · Энергия · Вставь в конвертер под Forge Energy."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 70/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Вставь в конвертер под Forge Energy.",
+				"&7Предмет:&r &fpowerutils:module_fe&r",
+				"",
+				"Модуль определяет, во что конвертировать энергию.",
+				"FE — Forge Energy (многие моды 1.20), RF — классика Thermal и др.",
+				"Один конвертер — один основной режим; читай GUI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× powerutils:module_fe  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2F0069Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0070T"
+				type: "item"
+				item: "powerutils:module_fe"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0070R"
+					type: "item"
+					item: "powerutils:module_fe"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS2F0070X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 19.43d
+			id: "WS2F0071Q"
+			title: "V·71  Модуль RF"
+			icon: "powerutils:module_rf"
+			subtitle: "Конвертация в RF-сети."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 71/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Конвертация в RF-сети.",
+				"&7Предмет:&r &fpowerutils:module_rf&r",
+				"",
+				"Модуль определяет, во что конвертировать энергию.",
+				"FE — Forge Energy (многие моды 1.20), RF — классика Thermal и др.",
+				"Один конвертер — один основной режим; читай GUI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× powerutils:module_rf  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0070Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0071T"
+				type: "item"
+				item: "powerutils:module_rf"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0071R"
+					type: "item"
+					item: "powerutils:module_rf"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS2F0071X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 19.43d
+			id: "WS2F0072Q"
+			title: "V·72  Photonic Q-Generator"
+			icon: "quantumgenerators:phsp_gen"
+			subtitle: "Аддон Quantum Generators: фотонный ген."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 72/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Аддон Quantum Generators: фотонный ген.",
+				"&7Предмет:&r &fquantumgenerators:phsp_gen&r",
+				"",
+				"Photonic Quantum Generator (аддон) — мощная генка вместо простых панелей.",
+				"Крафт тяжёлый (схемы/ядра). Настраивай выход в GUI.",
+				"Карьеры не нужны — это про энергию, не про руду.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quantumgenerators:phsp_gen  &8+&r  &b120 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0071Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0072T"
+				type: "item"
+				item: "quantumgenerators:phsp_gen"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0072R"
+					type: "item"
+					item: "quantumgenerators:phsp_gen"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "WS2F0072X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 21.0d
+			id: "WS2F0073Q"
+			title: "V·73  Neutron Q-Generator"
+			icon: "quantumgenerators:nsp_gen"
+			subtitle: "Квантовый ген выше фотонного."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 73/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Квантовый ген выше фотонного.",
+				"&7Предмет:&r &fquantumgenerators:nsp_gen&r",
+				"",
+				"Neutron Quantum Generator — тир выше фотонного.",
+				"Ставь когда фотонный уже не тянет завод.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quantumgenerators:nsp_gen  &8+&r  &b130 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0072Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0073T"
+				type: "item"
+				item: "quantumgenerators:nsp_gen"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0073R"
+					type: "item"
+					item: "quantumgenerators:nsp_gen"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 130"
+					elevate_perms: true
+					id: "WS2F0073X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 21.0d
+			id: "WS2F0074Q"
+			title: "V·74  Quark Q-Generator"
+			icon: "quantumgenerators:kvsp_gen"
+			subtitle: "Топ линейки квант-генераторов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 74/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ линейки квант-генераторов.",
+				"&7Предмет:&r &fquantumgenerators:kvsp_gen&r",
+				"",
+				"Quark Quantum Generator — верх линейки аддона.",
+				"Эндгейм энергия IU. Держи MFSU и правильные кабели.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× quantumgenerators:kvsp_gen  &8+&r  &b150 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0073Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0074T"
+				type: "item"
+				item: "quantumgenerators:kvsp_gen"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0074R"
+					type: "item"
+					item: "quantumgenerators:kvsp_gen"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 150"
+					elevate_perms: true
+					id: "WS2F0074X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 21.0d
+			id: "WS2F0075Q"
+			title: "V·75  Nano Circuit"
+			icon: "industrialupgrade:circuit/nanocircuit"
+			subtitle: "Наносхема — электроника выше Advanced."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 75/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Наносхема — электроника выше Advanced.",
+				"&7Предмет:&r &findustrialupgrade:circuit/nanocircuit&r",
+				"",
+				"Nano Circuit — электроника после Advanced.",
+				"Собирай в Electronics Assembler / по JEI.",
+				"Нужна для нано-машин и сильных апгрейдов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:circuit/nanocircuit  &8+&r  &b120 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2F0074Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0075T"
+				type: "item"
+				item: "industrialupgrade:circuit/nanocircuit"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0075R"
+					type: "item"
+					item: "industrialupgrade:circuit/nanocircuit"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "WS2F0075X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 21.0d
+			id: "WS2F0076Q"
+			title: "V·76  Quantum Circuit"
+			icon: "industrialupgrade:circuit/quantumcircuit"
+			subtitle: "Квантовая схема эндгейма IU."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 76/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Квантовая схема эндгейма IU.",
+				"&7Предмет:&r &findustrialupgrade:circuit/quantumcircuit&r",
+				"",
+				"Quantum Circuit — эндгейм электроника IU.",
+				"Без неё квант-генераторы и топ-панели не собрать.",
+				"Капстоун «мозга» завода перед финалом ветки.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:circuit/quantumcircuit  &8+&r  &b140 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2F0075Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0076T"
+				type: "item"
+				item: "industrialupgrade:circuit/quantumcircuit"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0076R"
+					type: "item"
+					item: "industrialupgrade:circuit/quantumcircuit"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "WS2F0076X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 21.35d
+			id: "WS2F0077Q"
+			title: "V·77  Капстоун IU"
+			icon: "industrialupgrade:wiring_storage/mfsu_iu"
+			subtitle: "★ КАПСТОУН · Завод с MFSU + солнечной/квант-генерацией готов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Энергия&r",
+				"&8Шаг 77/77&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Завод с MFSU + солнечной/квант-генерацией готов.",
+				"&7Предмет:&r &findustrialupgrade:wiring_storage/mfsu_iu&r",
+				"",
+				"MFSU — главный склад EU завода.",
+				"Капстоун буферизации перед квант-генерацией.",
+				"Один MFSU + панели = спокойная ночь на атолле.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialupgrade:machines/advanced_solar_paneliu  &8+&r  &b200 Aqua XP&r",
+				"",
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			shape: "gear"
+			size: 1.55d
+			min_width: 280
+			dependencies: ["WS2F0076Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2F0077T"
+				type: "item"
+				item: "industrialupgrade:wiring_storage/mfsu_iu"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2F0077R"
+					type: "item"
+					item: "industrialupgrade:machines/advanced_solar_paneliu"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 200"
+					elevate_perms: true
+					id: "WS2F0077X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Industrial Upgrade гайд: I Примитив → II Пар → III Электрика → IV Завод → V Энергия. Карьеры отключены паком."
+	title: "Мастерская · Industrial Upgrade"
+}

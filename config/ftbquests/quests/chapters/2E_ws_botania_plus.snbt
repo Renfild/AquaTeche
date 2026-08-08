@@ -1,0 +1,2310 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "2E_ws_botania_plus"
+	group: "0AC7A00000000005"
+	icon: "mythicbotany:alfsteel_ingot"
+	id: "WS2E0000CH"
+	order_index: 34
+	quest_links: [ ]
+	quests: [
+		{
+			x: -4.62d
+			y: 0.0d
+			id: "WS2E0001Q"
+			title: "I·1  Лексикон снова"
+			icon: "botania:lexicon"
+			subtitle: "✦ ГАЙД МОДА · Книга Botania под рукой."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 1/44&r",
+				"",
+				"&bBotania+&r собирает аддоны флоры в одну мастерскую.",
+				"",
+				"&6Три слоя:&r",
+				"1) &eMythicBotany&r — Mana Infuser, Alfsteel, руны миров, Alfheim.",
+				"2) &eBotanical Machinery&r — механические daisy/altar/pool + фабрики.",
+				"3) &eBotanical Extra Machinery&r — тиры пулов/маркетов и катализаторы.",
+				"4) &eExtraBotany&r — новые цветы, слитки (aerialite→orichalcos), оружие.",
+				"",
+				"Базовая Botania уже в «Ритуалах Океана». Здесь — &aрасширение&r.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"",
+				"&a▶ Задача:&r Книга Botania под рукой.",
+				"&7Предмет:&r &fbotania:lexicon&r",
+				"",
+				"Лексикон нужен и для аддонов — главы дописываются.",
+				"Держи в хотбаре.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botania:lexicon  &8+&r  &b25 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 280
+			optional: true
+			tasks: [{
+				id: "WS2E0001T"
+				type: "item"
+				item: "botania:lexicon"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0001R"
+					type: "item"
+					item: "botania:lexicon"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "WS2E0001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 0.0d
+			id: "WS2E0002Q"
+			title: "I·2  Mana Infuser"
+			icon: "mythicbotany:mana_infuser"
+			subtitle: "Инфузия → Alfsteel."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 2/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Инфузия → Alfsteel.",
+				"&7Предмет:&r &fmythicbotany:mana_infuser&r",
+				"",
+				"Mythic: инфузия террастали/ресурсов в Alfsteel.",
+				"Под ним — структура из shimmerrock/gold (JEI/lexicon).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:mana_infuser  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0001Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0002T"
+				type: "item"
+				item: "mythicbotany:mana_infuser"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0002R"
+					type: "item"
+					item: "mythicbotany:mana_infuser"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2E0002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 0.0d
+			id: "WS2E0003Q"
+			title: "I·3  Alfsteel Ingot"
+			icon: "mythicbotany:alfsteel_ingot"
+			subtitle: "Слиток альвов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 3/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Слиток альвов.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_ingot&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× mythicbotany:alfsteel_ingot  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0002Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0003T"
+				type: "item"
+				item: "mythicbotany:alfsteel_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0003R"
+					type: "item"
+					item: "mythicbotany:alfsteel_ingot"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2E0003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 0.0d
+			id: "WS2E0004Q"
+			title: "I·4  Alfsteel Nugget"
+			icon: "mythicbotany:alfsteel_nugget"
+			subtitle: "Мелочь альвов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 4/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Мелочь альвов.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_nugget&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× mythicbotany:alfsteel_nugget  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0003Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0004T"
+				type: "item"
+				item: "mythicbotany:alfsteel_nugget"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0004R"
+					type: "item"
+					item: "mythicbotany:alfsteel_nugget"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2E0004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 0.0d
+			id: "WS2E0005Q"
+			title: "I·5  Alfsteel Block"
+			icon: "mythicbotany:alfsteel_block"
+			subtitle: "Блок склада."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 5/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Блок склада.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_block&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfsteel_block  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2E0004Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0005T"
+				type: "item"
+				item: "mythicbotany:alfsteel_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0005R"
+					type: "item"
+					item: "mythicbotany:alfsteel_block"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2E0005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 0.0d
+			id: "WS2E0006Q"
+			title: "I·6  Alfsteel Pylon"
+			icon: "mythicbotany:alfsteel_pylon"
+			subtitle: "Пилон альвов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 6/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Пилон альвов.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_pylon&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfsteel_pylon  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0005Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0006T"
+				type: "item"
+				item: "mythicbotany:alfsteel_pylon"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0006R"
+					type: "item"
+					item: "mythicbotany:alfsteel_pylon"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS2E0006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 1.93d
+			id: "WS2E0007Q"
+			title: "I·7  Alfsteel Pick"
+			icon: "mythicbotany:alfsteel_pick"
+			subtitle: "Кирка альвов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 7/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Кирка альвов.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_pick&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfsteel_pick  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0006Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0007T"
+				type: "item"
+				item: "mythicbotany:alfsteel_pick"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0007R"
+					type: "item"
+					item: "mythicbotany:alfsteel_pick"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2E0007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 1.93d
+			id: "WS2E0008Q"
+			title: "I·8  Alfsteel Sword"
+			icon: "mythicbotany:alfsteel_sword"
+			subtitle: "Клинок альвов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 8/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Клинок альвов.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_sword&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfsteel_sword  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0007Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0008T"
+				type: "item"
+				item: "mythicbotany:alfsteel_sword"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0008R"
+					type: "item"
+					item: "mythicbotany:alfsteel_sword"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2E0008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 1.93d
+			id: "WS2E0009Q"
+			title: "I·9  Alfsteel Helmet"
+			icon: "mythicbotany:alfsteel_helmet"
+			subtitle: "Шлем."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 9/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Шлем.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_helmet&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfsteel_helmet  &8+&r  &b95 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0008Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0009T"
+				type: "item"
+				item: "mythicbotany:alfsteel_helmet"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0009R"
+					type: "item"
+					item: "mythicbotany:alfsteel_helmet"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "WS2E0009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 1.93d
+			id: "WS2E0010Q"
+			title: "II·10  Alfsteel Chestplate"
+			icon: "mythicbotany:alfsteel_chestplate"
+			subtitle: "◆ Вехи · Основа · Нагрудник."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 10/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Нагрудник.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_chestplate&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfsteel_chestplate  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2E0009Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0010T"
+				type: "item"
+				item: "mythicbotany:alfsteel_chestplate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0010R"
+					type: "item"
+					item: "mythicbotany:alfsteel_chestplate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS2E0010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 1.93d
+			id: "WS2E0011Q"
+			title: "II·11  Alfsteel Leggings"
+			icon: "mythicbotany:alfsteel_leggings"
+			subtitle: "Поножи."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 11/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Поножи.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_leggings&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfsteel_leggings  &8+&r  &b95 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0010Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0011T"
+				type: "item"
+				item: "mythicbotany:alfsteel_leggings"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0011R"
+					type: "item"
+					item: "mythicbotany:alfsteel_leggings"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "WS2E0011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 1.93d
+			id: "WS2E0012Q"
+			title: "II·12  Alfsteel Boots"
+			icon: "mythicbotany:alfsteel_boots"
+			subtitle: "Сапоги."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 12/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сапоги.",
+				"&7Предмет:&r &fmythicbotany:alfsteel_boots&r",
+				"",
+				"Металл альвов. Броня и пилоны сильнее террастали.",
+				"Крафт через Mana Infuser.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfsteel_boots  &8+&r  &b95 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0011Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0012T"
+				type: "item"
+				item: "mythicbotany:alfsteel_boots"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0012R"
+					type: "item"
+					item: "mythicbotany:alfsteel_boots"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "WS2E0012X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 3.5d
+			id: "WS2E0013Q"
+			title: "II·13  Mana Collector"
+			icon: "mythicbotany:mana_collector"
+			subtitle: "Сбор маны Mythic."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 13/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сбор маны Mythic.",
+				"&7Предмет:&r &fmythicbotany:mana_collector&r",
+				"",
+				"Собирает ману для Mythic-устройств.",
+				"Ставь у генераторов маны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:mana_collector  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0012Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0013T"
+				type: "item"
+				item: "mythicbotany:mana_collector"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0013R"
+					type: "item"
+					item: "mythicbotany:mana_collector"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2E0013X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 3.5d
+			id: "WS2E0014Q"
+			title: "II·14  Руна Midgard"
+			icon: "mythicbotany:midgard_rune"
+			subtitle: "Скандинавская руна."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 14/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Скандинавская руна.",
+				"&7Предмет:&r &fmythicbotany:midgard_rune&r",
+				"",
+				"Руны миров (Midgard, Alfheim…). Крафт на руническом алтаре/holder.",
+				"Нужны для ритуалов Mythic.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:midgard_rune  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0013Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0014T"
+				type: "item"
+				item: "mythicbotany:midgard_rune"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0014R"
+					type: "item"
+					item: "mythicbotany:midgard_rune"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2E0014X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 3.5d
+			id: "WS2E0015Q"
+			title: "II·15  Руна Alfheim"
+			icon: "mythicbotany:alfheim_rune"
+			subtitle: "Руна альвов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 15/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Руна альвов.",
+				"&7Предмет:&r &fmythicbotany:alfheim_rune&r",
+				"",
+				"Руны миров (Midgard, Alfheim…). Крафт на руническом алтаре/holder.",
+				"Нужны для ритуалов Mythic.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:alfheim_rune  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2E0014Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0015T"
+				type: "item"
+				item: "mythicbotany:alfheim_rune"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0015R"
+					type: "item"
+					item: "mythicbotany:alfheim_rune"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2E0015X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 3.5d
+			id: "WS2E0016Q"
+			title: "II·16  Руна Helheim"
+			icon: "mythicbotany:helheim_rune"
+			subtitle: "Тёмная руна."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 16/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тёмная руна.",
+				"&7Предмет:&r &fmythicbotany:helheim_rune&r",
+				"",
+				"Руны миров (Midgard, Alfheim…). Крафт на руническом алтаре/holder.",
+				"Нужны для ритуалов Mythic.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:helheim_rune  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0015Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0016T"
+				type: "item"
+				item: "mythicbotany:helheim_rune"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0016R"
+					type: "item"
+					item: "mythicbotany:helheim_rune"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2E0016X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 3.5d
+			id: "WS2E0017Q"
+			title: "II·17  Руна Asgard"
+			icon: "mythicbotany:asgard_rune"
+			subtitle: "Высшая руна."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 17/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Высшая руна.",
+				"&7Предмет:&r &fmythicbotany:asgard_rune&r",
+				"",
+				"Руны миров (Midgard, Alfheim…). Крафт на руническом алтаре/holder.",
+				"Нужны для ритуалов Mythic.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:asgard_rune  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0016Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0017T"
+				type: "item"
+				item: "mythicbotany:asgard_rune"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0017R"
+					type: "item"
+					item: "mythicbotany:asgard_rune"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2E0017X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 3.5d
+			id: "WS2E0018Q"
+			title: "II·18  Fimbultyr Tablet"
+			icon: "mythicbotany:fimbultyr_tablet"
+			subtitle: "◆ Вехи · Основа · Скрижаль мифа."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 18/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Скрижаль мифа.",
+				"&7Предмет:&r &fmythicbotany:fimbultyr_tablet&r",
+				"",
+				"Скрижаль — ключ к позднему контенту Mythic.",
+				"Смотри lexicon/JEI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× mythicbotany:fimbultyr_tablet  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2E0017Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0018T"
+				type: "item"
+				item: "mythicbotany:fimbultyr_tablet"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0018R"
+					type: "item"
+					item: "mythicbotany:fimbultyr_tablet"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS2E0018X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 5.43d
+			id: "WS2E0019Q"
+			title: "III·19  Mechanical Daisy"
+			icon: "botanicalmachinery:mechanical_daisy"
+			subtitle: "Авто-daisy."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 19/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Авто-daisy.",
+				"&7Предмет:&r &fbotanicalmachinery:mechanical_daisy&r",
+				"",
+				"Механическая версия блока Botania. Питай маной/энергией по тултипу.",
+				"Автоматизируй daisy→altar→pool.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:mechanical_daisy  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0018Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0019T"
+				type: "item"
+				item: "botanicalmachinery:mechanical_daisy"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0019R"
+					type: "item"
+					item: "botanicalmachinery:mechanical_daisy"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2E0019X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 5.43d
+			id: "WS2E0020Q"
+			title: "III·20  Mechanical Apothecary"
+			icon: "botanicalmachinery:mechanical_apothecary"
+			subtitle: "◆ Вехи · Цех · Авто-апотекарий."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 20/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Авто-апотекарий.",
+				"&7Предмет:&r &fbotanicalmachinery:mechanical_apothecary&r",
+				"",
+				"Механическая версия блока Botania. Питай маной/энергией по тултипу.",
+				"Автоматизируй daisy→altar→pool.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:mechanical_apothecary  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2E0019Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0020T"
+				type: "item"
+				item: "botanicalmachinery:mechanical_apothecary"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0020R"
+					type: "item"
+					item: "botanicalmachinery:mechanical_apothecary"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2E0020X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 5.43d
+			id: "WS2E0021Q"
+			title: "III·21  Mechanical Runic Altar"
+			icon: "botanicalmachinery:mechanical_runic_altar"
+			subtitle: "Авто-руны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 21/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Авто-руны.",
+				"&7Предмет:&r &fbotanicalmachinery:mechanical_runic_altar&r",
+				"",
+				"Механическая версия блока Botania. Питай маной/энергией по тултипу.",
+				"Автоматизируй daisy→altar→pool.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:mechanical_runic_altar  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0020Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0021T"
+				type: "item"
+				item: "botanicalmachinery:mechanical_runic_altar"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0021R"
+					type: "item"
+					item: "botanicalmachinery:mechanical_runic_altar"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2E0021X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 5.43d
+			id: "WS2E0022Q"
+			title: "III·22  Mechanical Mana Pool"
+			icon: "botanicalmachinery:mechanical_mana_pool"
+			subtitle: "Авто-пул."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 22/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Авто-пул.",
+				"&7Предмет:&r &fbotanicalmachinery:mechanical_mana_pool&r",
+				"",
+				"Механическая версия блока Botania. Питай маной/энергией по тултипу.",
+				"Автоматизируй daisy→altar→pool.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:mechanical_mana_pool  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0021Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0022T"
+				type: "item"
+				item: "botanicalmachinery:mechanical_mana_pool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0022R"
+					type: "item"
+					item: "botanicalmachinery:mechanical_mana_pool"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2E0022X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 5.43d
+			id: "WS2E0023Q"
+			title: "III·23  Mechanical Brewery"
+			icon: "botanicalmachinery:mechanical_brewery"
+			subtitle: "Авто-варево."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 23/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Авто-варево.",
+				"&7Предмет:&r &fbotanicalmachinery:mechanical_brewery&r",
+				"",
+				"Механическая версия блока Botania. Питай маной/энергией по тултипу.",
+				"Автоматизируй daisy→altar→pool.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:mechanical_brewery  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0022Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0023T"
+				type: "item"
+				item: "botanicalmachinery:mechanical_brewery"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0023R"
+					type: "item"
+					item: "botanicalmachinery:mechanical_brewery"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2E0023X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 5.43d
+			id: "WS2E0024Q"
+			title: "III·24  Mechanical Infuser"
+			icon: "botanicalmachinery:mechanical_mana_infuser"
+			subtitle: "Авто-инфузия."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 24/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Авто-инфузия.",
+				"&7Предмет:&r &fbotanicalmachinery:mechanical_mana_infuser&r",
+				"",
+				"Mythic: инфузия террастали/ресурсов в Alfsteel.",
+				"Под ним — структура из shimmerrock/gold (JEI/lexicon).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:mechanical_mana_infuser  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0023Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0024T"
+				type: "item"
+				item: "botanicalmachinery:mechanical_mana_infuser"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0024R"
+					type: "item"
+					item: "botanicalmachinery:mechanical_mana_infuser"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS2E0024X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 7.0d
+			id: "WS2E0025Q"
+			title: "III·25  Alfheim Market"
+			icon: "botanicalmachinery:alfheim_market"
+			subtitle: "Обмен с альвами."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 25/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Обмен с альвами.",
+				"&7Предмет:&r &fbotanicalmachinery:alfheim_market&r",
+				"",
+				"Обмен ресурсами с альвами без походов.",
+				"JEI покажет курсы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:alfheim_market  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS2E0024Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0025T"
+				type: "item"
+				item: "botanicalmachinery:alfheim_market"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0025R"
+					type: "item"
+					item: "botanicalmachinery:alfheim_market"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2E0025X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 7.0d
+			id: "WS2E0026Q"
+			title: "III·26  Agglomeration Factory"
+			icon: "botanicalmachinery:industrial_agglomeration_factory"
+			subtitle: "Авто-террасталь."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 26/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Авто-террасталь.",
+				"&7Предмет:&r &fbotanicalmachinery:industrial_agglomeration_factory&r",
+				"",
+				"Фабрика террастали/слияния без ручной пластины.",
+				"Подай ману и материалы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:industrial_agglomeration_factory  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0025Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0026T"
+				type: "item"
+				item: "botanicalmachinery:industrial_agglomeration_factory"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0026R"
+					type: "item"
+					item: "botanicalmachinery:industrial_agglomeration_factory"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2E0026X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 7.0d
+			id: "WS2E0027Q"
+			title: "IV·27  Mana Battery"
+			icon: "botanicalmachinery:mana_battery"
+			subtitle: "◆ Вехи · Мастерство · Буфер маны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 27/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Буфер маны.",
+				"&7Предмет:&r &fbotanicalmachinery:mana_battery&r",
+				"",
+				"Буфер маны для машин.",
+				"Свяжи с pool/battery сетью.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalmachinery:mana_battery  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2E0026Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0027T"
+				type: "item"
+				item: "botanicalmachinery:mana_battery"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0027R"
+					type: "item"
+					item: "botanicalmachinery:mana_battery"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2E0027X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 7.0d
+			id: "WS2E0028Q"
+			title: "IV·28  Mana Emerald"
+			icon: "botanicalmachinery:mana_emerald"
+			subtitle: "Изумруд маны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 28/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Изумруд маны.",
+				"&7Предмет:&r &fbotanicalmachinery:mana_emerald&r",
+				"",
+				"Предмет-буфер/валюта маны в Botanical Machinery.",
+				"Крафт и заряд — JEI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× botanicalmachinery:mana_emerald  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0027Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0028T"
+				type: "item"
+				item: "botanicalmachinery:mana_emerald"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0028R"
+					type: "item"
+					item: "botanicalmachinery:mana_emerald"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2E0028X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 7.0d
+			id: "WS2E0029Q"
+			title: "IV·29  Base Mana Pool+"
+			icon: "botanicalextramachinery:base_mana_pool"
+			subtitle: "Тир пула Extra."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 29/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тир пула Extra.",
+				"&7Предмет:&r &fbotanicalextramachinery:base_mana_pool&r",
+				"",
+				"Тиры пулов Extra Machinery: base→advanced→ultimate.",
+				"Больше буфер и скорость.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalextramachinery:base_mana_pool  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0028Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0029T"
+				type: "item"
+				item: "botanicalextramachinery:base_mana_pool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0029R"
+					type: "item"
+					item: "botanicalextramachinery:base_mana_pool"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2E0029X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 7.0d
+			id: "WS2E0030Q"
+			title: "IV·30  Advanced Mana Pool+"
+			icon: "botanicalextramachinery:advanced_mana_pool"
+			subtitle: "◆ Вехи · Мастерство · Продвинутый пул."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 30/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Продвинутый пул.",
+				"&7Предмет:&r &fbotanicalextramachinery:advanced_mana_pool&r",
+				"",
+				"Тиры пулов Extra Machinery: base→advanced→ultimate.",
+				"Больше буфер и скорость.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalextramachinery:advanced_mana_pool  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2E0029Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0030T"
+				type: "item"
+				item: "botanicalextramachinery:advanced_mana_pool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0030R"
+					type: "item"
+					item: "botanicalextramachinery:advanced_mana_pool"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2E0030X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 8.93d
+			id: "WS2E0031Q"
+			title: "IV·31  Ultimate Mana Pool+"
+			icon: "botanicalextramachinery:ultimate_mana_pool"
+			subtitle: "Топ пул."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 31/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ пул.",
+				"&7Предмет:&r &fbotanicalextramachinery:ultimate_mana_pool&r",
+				"",
+				"Тиры пулов Extra Machinery: base→advanced→ultimate.",
+				"Больше буфер и скорость.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalextramachinery:ultimate_mana_pool  &8+&r  &b110 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0030Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0031T"
+				type: "item"
+				item: "botanicalextramachinery:ultimate_mana_pool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0031R"
+					type: "item"
+					item: "botanicalextramachinery:ultimate_mana_pool"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "WS2E0031X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 8.93d
+			id: "WS2E0032Q"
+			title: "IV·32  Catalyst Speed"
+			icon: "botanicalextramachinery:catalyst_speed"
+			subtitle: "Ускорение машин."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 32/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ускорение машин.",
+				"&7Предмет:&r &fbotanicalextramachinery:catalyst_speed&r",
+				"",
+				"Катализаторы ускоряют/меняют машины Extra.",
+				"Speed — первый полезный.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalextramachinery:catalyst_speed  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0031Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0032T"
+				type: "item"
+				item: "botanicalextramachinery:catalyst_speed"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0032R"
+					type: "item"
+					item: "botanicalextramachinery:catalyst_speed"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS2E0032X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 8.93d
+			id: "WS2E0033Q"
+			title: "IV·33  Upgrade Flower 4×"
+			icon: "botanicalextramachinery:upgrade_flower_4x"
+			subtitle: "Больше цветов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 33/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Больше цветов.",
+				"&7Предмет:&r &fbotanicalextramachinery:upgrade_flower_4x&r",
+				"",
+				"Множители цветов на машинах.",
+				"4× → … → 64× по прогрессии.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× botanicalextramachinery:upgrade_flower_4x  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0032Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0033T"
+				type: "item"
+				item: "botanicalextramachinery:upgrade_flower_4x"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0033R"
+					type: "item"
+					item: "botanicalextramachinery:upgrade_flower_4x"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS2E0033X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 8.93d
+			id: "WS2E0034Q"
+			title: "IV·34  Spirit Fuel"
+			icon: "extrabotany:spirit_fuel"
+			subtitle: "Топливо ExtraBotany."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 34/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топливо ExtraBotany.",
+				"&7Предмет:&r &fextrabotany:spirit_fuel&r",
+				"",
+				"Spirit fuel/fragment — ресурсы ExtraBotany.",
+				"Топливо крафтов и боссов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× extrabotany:spirit_fuel  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0033Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0034T"
+				type: "item"
+				item: "extrabotany:spirit_fuel"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0034R"
+					type: "item"
+					item: "extrabotany:spirit_fuel"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS2E0034X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 8.93d
+			id: "WS2E0035Q"
+			title: "IV·35  Spirit Fragment"
+			icon: "extrabotany:spirit_fragment"
+			subtitle: "◆ Вехи · Мастерство · Осколок духа."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 35/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Осколок духа.",
+				"&7Предмет:&r &fextrabotany:spirit_fragment&r",
+				"",
+				"Spirit fuel/fragment — ресурсы ExtraBotany.",
+				"Топливо крафтов и боссов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× extrabotany:spirit_fragment  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2E0034Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0035T"
+				type: "item"
+				item: "extrabotany:spirit_fragment"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0035R"
+					type: "item"
+					item: "extrabotany:spirit_fragment"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS2E0035X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 8.93d
+			id: "WS2E0036Q"
+			title: "V·36  Annoying Flower"
+			icon: "extrabotany:annoyingflower"
+			subtitle: "Цветок ExtraBotany."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 36/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Цветок ExtraBotany.",
+				"&7Предмет:&r &fextrabotany:annoyingflower&r",
+				"",
+				"Цветок ExtraBotany (еда→мана и т.п.).",
+				"Тултип/lexicon.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× extrabotany:annoyingflower  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0035Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0036T"
+				type: "item"
+				item: "extrabotany:annoyingflower"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0036R"
+					type: "item"
+					item: "extrabotany:annoyingflower"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2E0036X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 10.5d
+			id: "WS2E0037Q"
+			title: "V·37  Bellflower"
+			icon: "extrabotany:bellflower"
+			subtitle: "Колокольчик."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 37/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Колокольчик.",
+				"&7Предмет:&r &fextrabotany:bellflower&r",
+				"",
+				"Ещё один генератор/утилита Extra.",
+				"Ставь по правилам цветка.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× extrabotany:bellflower  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0036Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0037T"
+				type: "item"
+				item: "extrabotany:bellflower"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0037R"
+					type: "item"
+					item: "extrabotany:bellflower"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS2E0037X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 10.5d
+			id: "WS2E0038Q"
+			title: "V·38  Aerialite"
+			icon: "extrabotany:aerialite_ingot"
+			subtitle: "Слиток неба."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 38/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Слиток неба.",
+				"&7Предмет:&r &fextrabotany:aerialite_ingot&r",
+				"",
+				"Ранний слиток ExtraBotany.",
+				"Путь к hammer/экипировке.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× extrabotany:aerialite_ingot  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0037Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0038T"
+				type: "item"
+				item: "extrabotany:aerialite_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0038R"
+					type: "item"
+					item: "extrabotany:aerialite_ingot"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS2E0038X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 10.5d
+			id: "WS2E0039Q"
+			title: "V·39  Shadowium"
+			icon: "extrabotany:shadowium_ingot"
+			subtitle: "Теневой слиток."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 39/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Теневой слиток.",
+				"&7Предмет:&r &fextrabotany:shadowium_ingot&r",
+				"",
+				"Теневой металл.",
+				"Комбинируется с photonium.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× extrabotany:shadowium_ingot  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0038Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0039T"
+				type: "item"
+				item: "extrabotany:shadowium_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0039R"
+					type: "item"
+					item: "extrabotany:shadowium_ingot"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS2E0039X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 10.5d
+			id: "WS2E0040Q"
+			title: "V·40  Photonium"
+			icon: "extrabotany:photonium_ingot"
+			subtitle: "◆ Вехи · Финал · Световой слиток."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 40/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Световой слиток.",
+				"&7Предмет:&r &fextrabotany:photonium_ingot&r",
+				"",
+				"Световой металл.",
+				"Пара к shadowium.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× extrabotany:photonium_ingot  &8+&r  &b95 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS2E0039Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0040T"
+				type: "item"
+				item: "extrabotany:photonium_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0040R"
+					type: "item"
+					item: "extrabotany:photonium_ingot"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "WS2E0040X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 10.5d
+			id: "WS2E0041Q"
+			title: "V·41  Orichalcos"
+			icon: "extrabotany:orichalcos_ingot"
+			subtitle: "Топ-слиток Extra."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 41/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ-слиток Extra.",
+				"&7Предмет:&r &fextrabotany:orichalcos_ingot&r",
+				"",
+				"Топ-слиток ExtraBotany.",
+				"Оружие и эндгейм крафты.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× extrabotany:orichalcos_ingot  &8+&r  &b120 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0040Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0041T"
+				type: "item"
+				item: "extrabotany:orichalcos_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0041R"
+					type: "item"
+					item: "extrabotany:orichalcos_ingot"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "WS2E0041X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 10.5d
+			id: "WS2E0042Q"
+			title: "V·42  Hero Medal"
+			icon: "extrabotany:hero_medal"
+			subtitle: "Медаль героя."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 42/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Медаль героя.",
+				"&7Предмет:&r &fextrabotany:hero_medal&r",
+				"",
+				"Медаль героя — прогресс/крафт Extra.",
+				"Смотри JEI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× extrabotany:hero_medal  &8+&r  &b110 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0041Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0042T"
+				type: "item"
+				item: "extrabotany:hero_medal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0042R"
+					type: "item"
+					item: "extrabotany:hero_medal"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "WS2E0042X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 12.43d
+			id: "WS2E0043Q"
+			title: "V·43  Excalibur"
+			icon: "extrabotany:excalibur"
+			subtitle: "Клинок ExtraBotany."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 43/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Клинок ExtraBotany.",
+				"&7Предмет:&r &fextrabotany:excalibur&r",
+				"",
+				"Легендарный клинок ExtraBotany.",
+				"Капстоун боевой линии.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× extrabotany:excalibur  &8+&r  &b140 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS2E0042Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0043T"
+				type: "item"
+				item: "extrabotany:excalibur"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0043R"
+					type: "item"
+					item: "extrabotany:excalibur"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "WS2E0043X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 12.78d
+			id: "WS2E0044Q"
+			title: "V·44  Капстоун Botania+"
+			icon: "extrabotany:orichalcos_ingot"
+			subtitle: "★ КАПСТОУН · Закрепи orichalcos-линию."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 44/44&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Закрепи orichalcos-линию.",
+				"&7Предмет:&r &fextrabotany:orichalcos_ingot&r",
+				"",
+				"Топ-слиток ExtraBotany.",
+				"Оружие и эндгейм крафты.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× extrabotany:orichalcos_ingot  &8+&r  &b200 Aqua XP&r",
+				"",
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			shape: "gear"
+			size: 1.55d
+			min_width: 280
+			dependencies: ["WS2E0043Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS2E0044T"
+				type: "item"
+				item: "extrabotany:orichalcos_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS2E0044R"
+					type: "item"
+					item: "extrabotany:orichalcos_ingot"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 200"
+					elevate_perms: true
+					id: "WS2E0044X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Аддоны Botania: MythicBotany (Alfsteel) + Botanical Machinery (+Extra) + ExtraBotany."
+	title: "Мастерская · Botania+"
+}

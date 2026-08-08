@@ -1,0 +1,445 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "01_primal"
+	group: "0AC7A00000000001"
+	icon: "starcatcher:bamboo_rod"
+	id: "AQ010000CH"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			x: -3.2d
+			y: 0.0d
+			id: "AQ010001Q"
+			title: "Доски палубы"
+			icon: "minecraft:oak_planks"
+			subtitle: "Расширь плот 4×4 дубовыми досками."
+			description: [
+				"Расширь плот 4×4 дубовыми досками."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			tasks: [{
+				id: "AQ010001T"
+				type: "item"
+				item: "minecraft:oak_planks"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010001R"
+					type: "item"
+					item: "minecraft:oak_planks"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "AQ010001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: 0.0d
+			id: "AQ010002Q"
+			title: "Палки"
+			icon: "minecraft:stick"
+			subtitle: "Базовый крафт и удочки."
+			description: [
+				"Базовый крафт и удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010001Q"]
+			tasks: [{
+				id: "AQ010002T"
+				type: "item"
+				item: "minecraft:stick"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010002R"
+					type: "item"
+					item: "minecraft:stick"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 15"
+					elevate_perms: true
+					id: "AQ010002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: 0.0d
+			id: "AQ010003Q"
+			title: "Нитки"
+			icon: "minecraft:string"
+			subtitle: "Леска для удочек."
+			description: [
+				"Леска для удочек."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010002Q"]
+			tasks: [{
+				id: "AQ010003T"
+				type: "item"
+				item: "minecraft:string"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010003R"
+					type: "item"
+					item: "minecraft:string"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "AQ010003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: 0.0d
+			id: "AQ010004Q"
+			title: "Бамбук"
+			icon: "minecraft:bamboo"
+			subtitle: "Каркас первой удочки StarCatcher."
+			description: [
+				"Каркас первой удочки StarCatcher."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010003Q"]
+			tasks: [{
+				id: "AQ010004T"
+				type: "item"
+				item: "minecraft:bamboo"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010004R"
+					type: "item"
+					item: "minecraft:bamboo"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 25"
+					elevate_perms: true
+					id: "AQ010004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 3.2d
+			y: 0.0d
+			id: "AQ010005Q"
+			title: "Медь"
+			icon: "minecraft:copper_ingot"
+			subtitle: "Вылови и переплавь медь."
+			description: [
+				"Вылови и переплавь медь."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010004Q"]
+			tasks: [{
+				id: "AQ010005T"
+				type: "item"
+				item: "minecraft:copper_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010005R"
+					type: "item"
+					item: "minecraft:copper_ingot"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "AQ010005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -3.2d
+			y: -1.5d
+			id: "AQ010006Q"
+			title: "Бамбуковая удочка"
+			icon: "starcatcher:bamboo_rod"
+			subtitle: "Стартовая удочка цепочки StarCatcher."
+			description: [
+				"Стартовая удочка цепочки StarCatcher."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010005Q"]
+			tasks: [{
+				id: "AQ010006T"
+				type: "item"
+				item: "starcatcher:bamboo_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010006R"
+					type: "item"
+					item: "starcatcher:bamboo_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "AQ010006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: -1.5d
+			id: "AQ010007Q"
+			title: "Медная пластина"
+			icon: "industrialupgrade:itemplates/copper_plate"
+			subtitle: "Пластины для скромной удочки."
+			description: [
+				"Пластины для скромной удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010006Q"]
+			tasks: [{
+				id: "AQ010007T"
+				type: "item"
+				item: "industrialupgrade:itemplates/copper_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010007R"
+					type: "item"
+					item: "industrialupgrade:itemplates/copper_plate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "AQ010007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: -1.5d
+			id: "AQ010008Q"
+			title: "Скромная удочка"
+			icon: "starcatcher:humble_rod"
+			subtitle: "Второй тир: медь + бамбуковая."
+			description: [
+				"Второй тир: медь + бамбуковая."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010007Q"]
+			tasks: [{
+				id: "AQ010008T"
+				type: "item"
+				item: "starcatcher:humble_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010008R"
+					type: "item"
+					item: "starcatcher:humble_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "AQ010008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: -1.5d
+			id: "AQ010009Q"
+			title: "Синтетическая резина"
+			icon: "industrialupgrade:synthetic_rubber"
+			subtitle: "Высуши латекс и получи резину."
+			description: [
+				"Высуши латекс и получи резину."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010008Q"]
+			tasks: [{
+				id: "AQ010009T"
+				type: "item"
+				item: "industrialupgrade:synthetic_rubber"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010009R"
+					type: "item"
+					item: "industrialupgrade:synthetic_rubber"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "AQ010009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 3.2d
+			y: -1.5d
+			id: "AQ010010Q"
+			title: "Железная пластина"
+			icon: "industrialupgrade:itemplates/iron_plate"
+			subtitle: "Нужна для старой доброй удочки."
+			description: [
+				"Нужна для старой доброй удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010009Q"]
+			tasks: [{
+				id: "AQ010010T"
+				type: "item"
+				item: "industrialupgrade:itemplates/iron_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010010R"
+					type: "item"
+					item: "industrialupgrade:itemplates/iron_plate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "AQ010010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -3.2d
+			y: -3.0d
+			id: "AQ010011Q"
+			title: "Оловянная пластина"
+			icon: "industrialupgrade:itemplates/tin_plate"
+			subtitle: "Второй металл ранней эпохи."
+			description: [
+				"Второй металл ранней эпохи."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ010010Q"]
+			tasks: [{
+				id: "AQ010011T"
+				type: "item"
+				item: "industrialupgrade:itemplates/tin_plate"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010011R"
+					type: "item"
+					item: "industrialupgrade:itemplates/tin_plate"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "AQ010011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: -3.0d
+			id: "AQ010012Q"
+			title: "Старая добрая удочка"
+			icon: "starcatcher:good_old_rod"
+			subtitle: "Капстоун акта I: железо, олово и резина."
+			description: [
+				"Капстоун акта I: железо, олово и резина."
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 260
+			dependencies: ["AQ010011Q"]
+			tasks: [{
+				id: "AQ010012T"
+				type: "item"
+				item: "starcatcher:good_old_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ010012R"
+					type: "item"
+					item: "starcatcher:good_old_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "AQ010012X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Расширь плот, собери медь и латекс, собери первую цепочку удочек."
+	title: "Акт I · Плот и первый улов"
+}

@@ -100,8 +100,8 @@ PAGES["index.html"] = (
         <div class="news-list">
           <a class="news-item" href="news.html">
             <time>8 августа 2026</time>
-            <h3>Лаунчер 2.9.9</h3>
-            <p>Обновили лаунчер. Скачал и заходишь на сервер.</p>
+            <h3>Лаунчер 2.9.10</h3>
+            <p>Установщик закрывается сам после запуска. В книге квестов снова сюжет.</p>
           </a>
           <a class="news-item" href="news.html">
             <time>Июль 2026</time>
@@ -284,8 +284,8 @@ PAGES["news.html"] = (
     <div class="container news-list">
       <article class="news-item">
         <time>8 августа 2026</time>
-        <h3>Лаунчер 2.9.9 и сайт</h3>
-        <p>На сайте профили и магазин. Лаунчер обновили под текущую сборку.</p>
+        <h3>Лаунчер 2.9.10 и квесты</h3>
+        <p>Установщик больше не зависает. В FTB снова сюжет по удочкам и мастерские.</p>
       </article>
       <article class="news-item">
         <time>Август 2026</time>

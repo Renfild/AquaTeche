@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.9"
+LAUNCHER_VER   = "2.9.10"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -55,7 +55,7 @@ CLIENT_DOWNLOAD_URL = (
 # Optional GitHub fallback (often 404 if repo/path missing — pack sync prefers update_url / local).
 GITHUB_RAW     = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 MANIFEST_URL   = f"{GITHUB_RAW}/manifest.json"
-GITHUB_RELEASE = "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.2"
+GITHUB_RELEASE = "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3"
 PACK_FOLDERS   = ("mods", "config", "kubejs", "resourcepacks")
 # Player-local files kept even if not in pack manifest (LoliLand-style sync)
 SYNC_KEEP_NAMES = {

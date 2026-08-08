@@ -1,0 +1,337 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "03_steam_lv"
+	group: "0AC7A00000000001"
+	icon: "aquatech_ui:auto_fisher"
+	id: "AQ030000CH"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			x: -3.2d
+			y: 0.0d
+			id: "AQ030001Q"
+			title: "Слизь"
+			icon: "minecraft:slime_ball"
+			subtitle: "Вылови или добудь для слизневой удочки."
+			description: [
+				"Вылови или добудь для слизневой удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			tasks: [{
+				id: "AQ030001T"
+				type: "item"
+				item: "minecraft:slime_ball"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030001R"
+					type: "item"
+					item: "minecraft:slime_ball"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "AQ030001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: 0.0d
+			id: "AQ030002Q"
+			title: "Блок слизи"
+			icon: "minecraft:slime_block"
+			subtitle: "Компонент слизневой удочки."
+			description: [
+				"Компонент слизневой удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ030001Q"]
+			tasks: [{
+				id: "AQ030002T"
+				type: "item"
+				item: "minecraft:slime_block"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030002R"
+					type: "item"
+					item: "minecraft:slime_block"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "AQ030002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: 0.0d
+			id: "AQ030003Q"
+			title: "Барий"
+			icon: "industrialupgrade:baseore2/barium"
+			subtitle: "Улов среднего тира."
+			description: [
+				"Улов среднего тира."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ030002Q"]
+			tasks: [{
+				id: "AQ030003T"
+				type: "item"
+				item: "industrialupgrade:baseore2/barium"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030003R"
+					type: "item"
+					item: "industrialupgrade:baseore2/barium"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "AQ030003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: 0.0d
+			id: "AQ030004Q"
+			title: "Стронций"
+			icon: "industrialupgrade:baseore2/strontium"
+			subtitle: "Улов среднего тира."
+			description: [
+				"Улов среднего тира."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ030003Q"]
+			tasks: [{
+				id: "AQ030004T"
+				type: "item"
+				item: "industrialupgrade:baseore2/strontium"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030004R"
+					type: "item"
+					item: "industrialupgrade:baseore2/strontium"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "AQ030004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 3.2d
+			y: 0.0d
+			id: "AQ030005Q"
+			title: "Слизневая удочка"
+			icon: "starcatcher:slimed_rod"
+			subtitle: "Тир после натуралиста."
+			description: [
+				"Тир после натуралиста."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ030004Q"]
+			tasks: [{
+				id: "AQ030005T"
+				type: "item"
+				item: "starcatcher:slimed_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030005R"
+					type: "item"
+					item: "starcatcher:slimed_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "AQ030005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -3.2d
+			y: -1.5d
+			id: "AQ030006Q"
+			title: "Серебро"
+			icon: "industrialupgrade:baseore/silver"
+			subtitle: "Для ледяной удочки."
+			description: [
+				"Для ледяной удочки."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ030005Q"]
+			tasks: [{
+				id: "AQ030006T"
+				type: "item"
+				item: "industrialupgrade:baseore/silver"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030006R"
+					type: "item"
+					item: "industrialupgrade:baseore/silver"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "AQ030006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -1.6d
+			y: -1.5d
+			id: "AQ030007Q"
+			title: "Алюминий"
+			icon: "industrialupgrade:baseore/aluminium"
+			subtitle: "Лёгкий металл LV/MV."
+			description: [
+				"Лёгкий металл LV/MV."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ030006Q"]
+			tasks: [{
+				id: "AQ030007T"
+				type: "item"
+				item: "industrialupgrade:baseore/aluminium"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030007R"
+					type: "item"
+					item: "industrialupgrade:baseore/aluminium"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "AQ030007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.0d
+			y: -1.5d
+			id: "AQ030008Q"
+			title: "Ледяная удочка"
+			icon: "starcatcher:iceborn_rod"
+			subtitle: "Серебро, алюминий, хладагент."
+			description: [
+				"Серебро, алюминий, хладагент."
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 260
+			dependencies: ["AQ030007Q"]
+			tasks: [{
+				id: "AQ030008T"
+				type: "item"
+				item: "starcatcher:iceborn_rod"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030008R"
+					type: "item"
+					item: "starcatcher:iceborn_rod"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "AQ030008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 1.6d
+			y: -1.5d
+			id: "AQ030009Q"
+			title: "Авторыболов"
+			icon: "aquatech_ui:auto_fisher"
+			subtitle: "Ставь на плот — ловит без тебя."
+			description: [
+				"Ставь на плот — ловит без тебя."
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 260
+			dependencies: ["AQ030008Q"]
+			tasks: [{
+				id: "AQ030009T"
+				type: "item"
+				item: "aquatech_ui:auto_fisher"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "AQ030009R"
+					type: "item"
+					item: "aquatech_ui:auto_fisher"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "AQ030009X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Первое электричество, BatBox и автоматический улов."
+	title: "Акт III · Пар, EU и авторыбалка"
+}
