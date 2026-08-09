@@ -134,7 +134,7 @@
           <a class="brand" href="index.html"><span class="brand-mark"></span>AquaTech</a>
           <nav class="nav-desktop">${nav}</nav>
           <div class="header-spacer"></div>
-          <div class="online-pill" title="Онлайн на сервере"><span class="dot"></span><span data-online">—</span> онлайн</div>
+          <div class="online-pill" title="Онлайн на сервере"><span class="dot"></span><span data-online>—</span> онлайн</div>
           <div class="header-actions">
             ${
               user
@@ -225,13 +225,14 @@
     if (!pills.length) return;
     try {
       const data = await api("/api/server-status");
-      const n = data.online ? Number(data.players_online || 0) : 0;
+      const online = !!data.online;
+      const n = Number(data.players_online || 0) || 0;
       pills.forEach((el) => {
         el.textContent = String(n);
       });
       document.querySelectorAll(".online-pill").forEach((el) => {
-        el.classList.toggle("is-offline", !data.online);
-        el.title = data.online
+        el.classList.toggle("is-offline", !online);
+        el.title = online
           ? `Онлайн на сервере: ${n}${data.players_max ? " / " + data.players_max : ""}`
           : "Сервер сейчас недоступен";
       });
