@@ -58,7 +58,7 @@ def main() -> int:
         return proc.returncode
 
     print("OK: CLOUDFLARE_API_TOKEN set for Renfild/AquaTeche")
-    print("Next: push to main (or Actions → Deploy Worker → Run workflow)")
+    print("Next: push to main (or Actions > Deploy Worker > Run workflow)")
     return 0
 
 
