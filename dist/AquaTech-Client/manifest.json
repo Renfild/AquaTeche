@@ -3263,8 +3263,8 @@
     },
     {
       "path": "config/ftbquests/quests/chapter_groups.snbt",
-      "md5": "435253f86b4101f82bd4f97053fa709d",
-      "size": 156,
+      "md5": "c5f774921259dde74e51707b22733d2c",
+      "size": 95,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapter_groups.snbt",
       "asset": "config__ftbquests__quests__chapter_groups.snbt"
     },
@@ -3316,118 +3316,6 @@
       "size": 4917,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__06_quantum.snbt",
       "asset": "config__ftbquests__quests__chapters__06_quantum.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/20_ws_bees.snbt",
-      "md5": "2a3f4778660bde74bbc62d7c84ea2719",
-      "size": 92884,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__20_ws_bees.snbt",
-      "asset": "config__ftbquests__quests__chapters__20_ws_bees.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/21_ws_roost.snbt",
-      "md5": "7c8859bdbdd83a416b393ad0edd51cd4",
-      "size": 91019,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__21_ws_roost.snbt",
-      "asset": "config__ftbquests__quests__chapters__21_ws_roost.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/22_ws_mystical.snbt",
-      "md5": "9d02decaf584a03fadb76cdf9d2df513",
-      "size": 93578,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__22_ws_mystical.snbt",
-      "asset": "config__ftbquests__quests__chapters__22_ws_mystical.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/23_ws_create_water.snbt",
-      "md5": "00d26d6dbfb471f1c3522ad4655c8b9e",
-      "size": 92608,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__23_ws_create_water.snbt",
-      "asset": "config__ftbquests__quests__chapters__23_ws_create_water.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/24_ws_atoll_atmosphere.snbt",
-      "md5": "a33cc3db59096f9567085dbb9da8b099",
-      "size": 96336,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__24_ws_atoll_atmosphere.snbt",
-      "asset": "config__ftbquests__quests__chapters__24_ws_atoll_atmosphere.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/25_ws_ocean_rituals.snbt",
-      "md5": "bc5739ee78b7a16bbe8f847648715d66",
-      "size": 96771,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__25_ws_ocean_rituals.snbt",
-      "asset": "config__ftbquests__quests__chapters__25_ws_ocean_rituals.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/26_ws_mek.snbt",
-      "md5": "3041d025c745cdd0154d27b7ea53474e",
-      "size": 92733,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__26_ws_mek.snbt",
-      "asset": "config__ftbquests__quests__chapters__26_ws_mek.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/27_ws_ae2.snbt",
-      "md5": "7c682eea2eef66e3e97475942dd035e5",
-      "size": 102515,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__27_ws_ae2.snbt",
-      "asset": "config__ftbquests__quests__chapters__27_ws_ae2.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/28_ws_thermal.snbt",
-      "md5": "5ef14878f8ea9724386c937cad3503bc",
-      "size": 125032,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__28_ws_thermal.snbt",
-      "asset": "config__ftbquests__quests__chapters__28_ws_thermal.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/29_ws_if.snbt",
-      "md5": "cf8da6d922a82b156c9179a3135a3745",
-      "size": 98491,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__29_ws_if.snbt",
-      "asset": "config__ftbquests__quests__chapters__29_ws_if.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/2A_ws_apotheosis.snbt",
-      "md5": "488b370acd1a4e06aa9cbc80b12a96b3",
-      "size": 88482,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__2A_ws_apotheosis.snbt",
-      "asset": "config__ftbquests__quests__chapters__2A_ws_apotheosis.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/2B_ws_enderio.snbt",
-      "md5": "0dbb334a4d5c731c2170ca03dc300dff",
-      "size": 104799,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__2B_ws_enderio.snbt",
-      "asset": "config__ftbquests__quests__chapters__2B_ws_enderio.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/2C_ws_avaritia.snbt",
-      "md5": "8c5f5a8c1a919bdaedf2ab27f9c2de30",
-      "size": 59103,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__2C_ws_avaritia.snbt",
-      "asset": "config__ftbquests__quests__chapters__2C_ws_avaritia.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/2D_ws_draconic.snbt",
-      "md5": "123b6199aaf7d55c985a9dfb32004160",
-      "size": 64521,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__2D_ws_draconic.snbt",
-      "asset": "config__ftbquests__quests__chapters__2D_ws_draconic.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/2E_ws_botania_plus.snbt",
-      "md5": "4e36c07bcc2d27158be329f345ba39f2",
-      "size": 70369,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__2E_ws_botania_plus.snbt",
-      "asset": "config__ftbquests__quests__chapters__2E_ws_botania_plus.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/2F_ws_industrial_upgrade.snbt",
-      "md5": "e6fa2bb27f88573640e43d89b81c4d51",
-      "size": 143674,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/config__ftbquests__quests__chapters__2F_ws_industrial_upgrade.snbt",
-      "asset": "config__ftbquests__quests__chapters__2F_ws_industrial_upgrade.snbt"
     },
     {
       "path": "config/ftbquestsentityvis/client.toml",

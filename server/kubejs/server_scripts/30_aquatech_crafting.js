@@ -88,8 +88,10 @@ ServerEvents.recipes((event) => {
   event.remove({ output: 'aquatech_ui:rate_x16' })
   event.remove({ output: 'aquatech_ui:rate_x32' })
   event.remove({ output: 'aquatech_ui:rate_x64' })
+  event.remove({ output: 'industrialupgrade:rate_x32' })
+  event.remove({ output: 'industrialupgrade:rate_x64' })
 
-  // x2–x16: normal 3×3
+  // x2–x16: normal 3×3 workbench
   event.shaped('aquatech_ui:rate_x2', ['SCS', 'PMP', 'SCS'], {
     S: 'botania:mana_string',
     C: 'industrialupgrade:itemplates/copper_plate',
@@ -118,12 +120,8 @@ ServerEvents.recipes((event) => {
     C: 'industrialupgrade:crafting_elements/crafting_273_element',
   }).id('aquatech:rate_x16')
 
-  // x32 / x64 — ONLY ExtendedCrafting Ultimate Crafting Table (Tier 4)
-  event.remove({ output: 'aquatech_ui:rate_x32' })
-  event.remove({ output: 'aquatech_ui:rate_x64' })
-  event.remove({ output: 'industrialupgrade:rate_x32' })
-  event.remove({ output: 'industrialupgrade:rate_x64' })
-
+  // x32 / x64 — ONLY 9×9 (ExtendedCrafting). No vanilla workbench crafts.
+  // event.remove(output) above already stripped any 3×3; re-add 9×9 only.
   let rateX32Pattern = [
     ' CCCCCCC ',
     'CGGGGGGGC',
@@ -163,9 +161,10 @@ ServerEvents.recipes((event) => {
   }
 
   if (Platform.isLoaded('extendedcrafting')) {
-    // Ultimate Table Tier 4 = 9×9
+    // tier 4 = Ultimate 9×9 only (without tier JEI/tables may treat it as basic)
     event.custom({
       type: 'extendedcrafting:shaped_table',
+      tier: 4,
       pattern: rateX32Pattern,
       key: rateX32Key,
       result: { item: 'aquatech_ui:rate_x32', count: 1 },
@@ -173,10 +172,13 @@ ServerEvents.recipes((event) => {
 
     event.custom({
       type: 'extendedcrafting:shaped_table',
+      tier: 4,
       pattern: rateX64Pattern,
       key: rateX64Key,
       result: { item: 'aquatech_ui:rate_x64', count: 1 },
     }).id('aquatech:rate_x64_extendedcrafting')
+  } else {
+    console.log('[AquaTech] extendedcrafting missing — rate_x32/x64 uncraftable')
   }
 
   // Keep Re-Avaritia's own Extreme Table recipe (7×7 tier-3) — do not replace with a cheap 3×3.
@@ -254,7 +256,8 @@ ServerEvents.recipes((event) => {
     N: 'minecraft:nether_star',
   }).id('aquatech:ocean_altar')
 
-  event.shapeless('aquatech_ui:ocean_guide_book', ['minecraft:book', 'minecraft:kelp']).id('aquatech:ocean_guide_book')
+  event.remove({ id: 'aquatech:ocean_guide_book' })
+  event.remove({ output: 'aquatech_ui:ocean_guide_book' })
 
   // =========================================================================
   // ENDGAME: Administrative Solar Panel (IU admpanel) — 9×9 only

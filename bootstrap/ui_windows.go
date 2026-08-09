@@ -3,6 +3,7 @@ package main
 import (
 	"runtime"
 	"syscall"
+	"time"
 	"unsafe"
 )
 
@@ -217,10 +218,12 @@ func (ui *progressUI) wndProc(hwnd syscall.Handle, msg uint32, wParam, lParam ui
 		return 0
 	case WM_APP_CLOSE:
 		// Destroy on the UI thread that owns the HWND.
+		procShowWindow.Call(uintptr(hwnd), 0)
 		procDestroyWindow.Call(uintptr(hwnd))
 		return 0
 	case WM_CLOSE:
 		// Same path as finished install: tear down from the UI thread.
+		procShowWindow.Call(uintptr(hwnd), 0)
 		procDestroyWindow.Call(uintptr(hwnd))
 		return 0
 	case WM_DESTROY:
@@ -252,9 +255,12 @@ func (ui *progressUI) Close() {
 	if hwnd == 0 {
 		return
 	}
-	// DestroyWindow must run on the UI thread; PostMessage from the worker.
+	procShowWindow.Call(uintptr(hwnd), 0)
 	procPostMessageW.Call(uintptr(hwnd), WM_APP_CLOSE, 0, 0)
-	<-ui.done
+	select {
+	case <-ui.done:
+	case <-time.After(500 * time.Millisecond):
+	}
 	ui.hwnd = 0
 }
 

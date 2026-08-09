@@ -10,6 +10,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -149,11 +150,13 @@ func main() {
 	if err := startDetached(exe, filepath.Dir(exe)); err != nil {
 		msgBox("AquaTech", "Не удалось запустить лаунчер:\n"+err.Error())
 		ui.Close()
+		os.Exit(1)
 		return
 	}
 	ui.SetProgress(100)
-	time.Sleep(250 * time.Millisecond)
+	time.Sleep(100 * time.Millisecond)
 	ui.Close()
+	os.Exit(0)
 }
 
 func resolveURL(man *manifest) string {
@@ -314,9 +317,18 @@ func findLauncher(root, name string) string {
 func startDetached(exe, dir string) error {
 	cmd := exec.Command(exe)
 	cmd.Dir = dir
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		CreationFlags: syscall.CREATE_NEW_PROCESS_GROUP | 0x00000008, // DETACHED_PROCESS
+	}
 	cmd.Stdout = nil
 	cmd.Stderr = nil
-	return cmd.Start()
+	if err := cmd.Start(); err != nil {
+		return err
+	}
+	if cmd.Process != nil {
+		_ = cmd.Process.Release()
+	}
+	return nil
 }
 
 func copyFile(src, dst string) error {
