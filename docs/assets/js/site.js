@@ -1,7 +1,7 @@
 (() => {
   const IP = "katherine-hydro.tun.ply.gg:31279";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.14/AquaTech.exe";
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.15/AquaTech.exe";
   const CANONICAL = "https://aquatech.santcrail.workers.dev";
   const STORAGE_USER = "aquatech_user";
   const API_BASE = "";

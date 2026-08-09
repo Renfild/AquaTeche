@@ -73,6 +73,16 @@ public static class HttpDownload
         return await resp.Content.ReadAsStringAsync(ct);
     }
 
+    public static async Task<string> PostJsonAsync(string url, string jsonBody, CancellationToken ct = default)
+    {
+        using var content = new StringContent(jsonBody, System.Text.Encoding.UTF8, "application/json");
+        using var resp = await Client.PostAsync(url, content, ct);
+        var body = await resp.Content.ReadAsStringAsync(ct);
+        if (!resp.IsSuccessStatusCode)
+            throw new HttpRequestException($"HTTP {(int)resp.StatusCode}: {body}");
+        return body;
+    }
+
     public static string Md5File(string path)
     {
         using var fs = File.OpenRead(path);

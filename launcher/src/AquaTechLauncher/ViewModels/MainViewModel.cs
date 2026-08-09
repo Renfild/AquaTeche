@@ -16,7 +16,9 @@ public partial class MainViewModel : ViewModelBase
     private readonly PlayOrchestrator _orch = new();
     private LauncherConfig _cfg = LauncherConfig.Load();
     private bool _busy;
-    private CancellationTokenSource? _pingCts;
+    private bool? _tcpOnline;
+    private int? _tcpMs;
+    private int? _portalPlayers;
 
     public MainViewModel()
     {
@@ -26,7 +28,7 @@ public partial class MainViewModel : ViewModelBase
         VersionLabel = $"v{LauncherConstants.Version}";
         McLabel = $"Minecraft {LauncherConstants.McVersion}";
         ServerAddress = $"{LauncherConstants.ServerHost}:{LauncherConstants.ServerPort}";
-        OnlinePlayersText = "Онлайн: …";
+        OnlinePlayersText = "Проверяем…";
         TopPlayersText = "Топ загружается…";
         _ = StartupAsync();
     }
@@ -39,10 +41,9 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private string _pctText = "0%";
     [ObservableProperty] private double _progress;
     [ObservableProperty] private string _playButtonText = "Играть";
-    [ObservableProperty] private string _updateButtonText = "Обновить";
     [ObservableProperty] private bool _actionsEnabled = true;
     [ObservableProperty] private string _serverStatus = "Проверяем сервер…";
-    [ObservableProperty] private IBrush _serverDot = Brush("#5A7080");
+    [ObservableProperty] private IBrush _serverDot = Brush("#A78BFA");
     [ObservableProperty] private string _serverAddress = "";
     [ObservableProperty] private string _versionLabel = "";
     [ObservableProperty] private string _mcLabel = "";
@@ -91,32 +92,6 @@ public partial class MainViewModel : ViewModelBase
         {
             UiLog($"Критическая ошибка: {ex.Message}", "err");
             PlayButtonText = "Ошибка — ещё раз";
-            ActionsEnabled = true;
-        }
-        finally
-        {
-            _busy = false;
-        }
-    }
-
-    [RelayCommand]
-    private async Task UpdateAsync()
-    {
-        if (_busy) return;
-        SaveCfgFromUi();
-        SetBusy(true, "Обновление…");
-        Page = "log";
-        try
-        {
-            await Task.Run(() => _orch.UpdateAsync(_cfg, UiLog, UiProgress));
-            UpdateButtonText = "Обновить";
-            PlayButtonText = "Играть";
-            ActionsEnabled = true;
-        }
-        catch (Exception ex)
-        {
-            UiLog($"Ошибка обновления: {ex.Message}", "err");
-            UpdateButtonText = "Ошибка обновления";
             ActionsEnabled = true;
         }
         finally
@@ -187,16 +162,7 @@ public partial class MainViewModel : ViewModelBase
     {
         _busy = busy;
         ActionsEnabled = !busy;
-        if (busy)
-        {
-            PlayButtonText = playText ?? "Подготовка…";
-            UpdateButtonText = "Обновить";
-        }
-        else
-        {
-            PlayButtonText = "Играть";
-            UpdateButtonText = "Обновить";
-        }
+        PlayButtonText = busy ? (playText ?? "Подготовка…") : "Играть";
     }
 
     private void SaveCfgFromUi()
@@ -230,40 +196,59 @@ public partial class MainViewModel : ViewModelBase
         });
     }
 
+    private void ApplyUnifiedStatus()
+    {
+        // TCP ping is the truth for "can we reach the server" (Playit tunnels often
+        // fail Minecraft query APIs while TCP connect still works).
+        if (_tcpOnline == true)
+        {
+            ServerStatus = _tcpMs is null ? "Онлайн" : $"Онлайн · {_tcpMs} мс";
+            ServerDot = Brush("#34D399");
+            OnlinePlayersText = _portalPlayers is > 0
+                ? $"Онлайн · {_portalPlayers} игр."
+                : (_tcpMs is null ? "Сервер онлайн" : $"Онлайн · {_tcpMs} мс");
+        }
+        else if (_tcpOnline == false)
+        {
+            ServerStatus = "Недоступен";
+            ServerDot = Brush("#FB7185");
+            OnlinePlayersText = "Сервер оффлайн";
+        }
+        else
+        {
+            ServerStatus = "Проверяем сервер…";
+            ServerDot = Brush("#A78BFA");
+            OnlinePlayersText = "Проверяем…";
+        }
+    }
+
     private async Task RefreshPingLoopAsync()
     {
-        _pingCts = new CancellationTokenSource();
-        var ct = _pingCts.Token;
-        while (!ct.IsCancellationRequested)
+        var ct = CancellationToken.None;
+        while (true)
         {
             try
             {
                 var (online, ms) = await ServerPing.PingAsync(_cfg.EffectiveHost, _cfg.EffectivePort);
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
-                    if (online)
-                    {
-                        ServerStatus = ms is null ? "Онлайн" : $"Онлайн · {ms} мс";
-                        ServerDot = Brush("#34D399");
-                    }
-                    else
-                    {
-                        ServerStatus = "Недоступен";
-                        ServerDot = Brush("#FB7185");
-                    }
+                    _tcpOnline = online;
+                    _tcpMs = ms;
+                    ApplyUnifiedStatus();
                 });
             }
             catch
             {
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
-                    ServerStatus = "Недоступен";
-                    ServerDot = Brush("#FB7185");
+                    _tcpOnline = false;
+                    _tcpMs = null;
+                    ApplyUnifiedStatus();
                 });
             }
 
-            try { await Task.Delay(45000, ct); }
-            catch (OperationCanceledException) { break; }
+            try { await Task.Delay(20000, ct); }
+            catch { break; }
         }
     }
 
@@ -281,14 +266,8 @@ public partial class MainViewModel : ViewModelBase
 
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
-                    if (status == null)
-                        OnlinePlayersText = "Онлайн: —";
-                    else if (!status.Online)
-                        OnlinePlayersText = "Сервер оффлайн";
-                    else
-                        OnlinePlayersText = status.PlayersMax > 0
-                            ? $"Онлайн: {status.PlayersOnline}/{status.PlayersMax}"
-                            : $"Онлайн: {status.PlayersOnline}";
+                    _portalPlayers = status is { Online: true } ? status.PlayersOnline : null;
+                    ApplyUnifiedStatus();
 
                     if (top.Count == 0)
                         TopPlayersText = "Топ: пока нет данных с портала.";
@@ -303,7 +282,6 @@ public partial class MainViewModel : ViewModelBase
             {
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
-                    OnlinePlayersText = "Онлайн: —";
                     TopPlayersText = "Топ временно недоступен.";
                 });
             }
@@ -331,9 +309,9 @@ public partial class MainViewModel : ViewModelBase
     {
         "ok" => Brush("#34D399"),
         "err" => Brush("#FB7185"),
-        "warn" => Brush("#F5C542"),
-        "dim" => Brush("#6A8496"),
-        _ => Brush("#2DE2E6"),
+        "warn" => Brush("#F9A8D4"),
+        "dim" => Brush("#C4B5FD"),
+        _ => Brush("#E879F9"),
     };
 }
 

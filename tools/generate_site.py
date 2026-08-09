@@ -100,8 +100,8 @@ PAGES["index.html"] = (
         <div class="news-list">
           <a class="news-item" href="news.html">
             <time>8 августа 2026</time>
-            <h3>Лаунчер 2.9.14</h3>
-            <p>Новый glass UI, автообновление лаунчера, онлайн с сервера и топы из базы — без фейковых цифр.</p>
+            <h3>Лаунчер 2.9.15</h3>
+            <p>Мягкий pink-glass UI, одна кнопка «Играть» с автообновлением сборки, ник синхронизируется с сайтом.</p>
           </a>
           <a class="news-item" href="news.html">
             <time>Июль 2026</time>
@@ -284,8 +284,8 @@ PAGES["news.html"] = (
     <div class="container news-list">
       <article class="news-item">
         <time>8 августа 2026</time>
-        <h3>Лаунчер 2.9.14</h3>
-        <p>Glass UI, автообновление, реальный онлайн и топы с портала. CDN сборки вшит в лаунчер.</p>
+        <h3>Лаунчер 2.9.15</h3>
+        <p>Pink-glass UI, автообновление при «Играть», единый статус сервера, синхронизация ника с порталом.</p>
       </article>
       <article class="news-item">
         <time>Август 2026</time>

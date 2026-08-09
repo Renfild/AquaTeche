@@ -17,98 +17,110 @@
   <Window.Styles>
     <Style Selector="Button.nav">
       <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="Foreground" Value="#A8C0D0"/>
+      <Setter Property="Foreground" Value="#D4C2E8"/>
       <Setter Property="HorizontalAlignment" Value="Stretch"/>
       <Setter Property="HorizontalContentAlignment" Value="Left"/>
       <Setter Property="Padding" Value="14,11"/>
-      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="CornerRadius" Value="14"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="FontSize" Value="13"/>
       <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
       <Setter Property="Background" Value="#33FFFFFF"/>
-      <Setter Property="Foreground" Value="#F5FBFF"/>
+      <Setter Property="Foreground" Value="#FFF5FB"/>
     </Style>
     <Style Selector="Button.nav.active">
-      <Setter Property="Background" Value="#402DE2E6"/>
-      <Setter Property="Foreground" Value="#F5FBFF"/>
+      <Setter Property="Background" Value="#55C084FC"/>
+      <Setter Property="Foreground" Value="#FFF8FF"/>
     </Style>
     <Style Selector="TextBox.field">
-      <Setter Property="Background" Value="#28101828"/>
-      <Setter Property="Foreground" Value="#F5FBFF"/>
-      <Setter Property="BorderBrush" Value="#55FFFFFF"/>
+      <Setter Property="Background" Value="#33FFFFFF"/>
+      <Setter Property="Foreground" Value="#FFF5FB"/>
+      <Setter Property="BorderBrush" Value="#66F0ABFC"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="CornerRadius" Value="16"/>
       <Setter Property="Padding" Value="14,12"/>
-      <Setter Property="CaretBrush" Value="#2DE2E6"/>
+      <Setter Property="CaretBrush" Value="#F9A8D4"/>
     </Style>
     <Style Selector="Button.glass">
-      <Setter Property="Background" Value="#28FFFFFF"/>
-      <Setter Property="Foreground" Value="#F5FBFF"/>
-      <Setter Property="BorderBrush" Value="#66FFFFFF"/>
+      <Setter Property="Background" Value="#2EFFFFFF"/>
+      <Setter Property="Foreground" Value="#FFF5FB"/>
+      <Setter Property="BorderBrush" Value="#77FBCFE8"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="CornerRadius" Value="16"/>
       <Setter Property="Padding" Value="16,10"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
     <Style Selector="Button.glass:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#44FFFFFF"/>
+      <Setter Property="Background" Value="#48FFFFFF"/>
     </Style>
     <Style Selector="Button.play">
-      <Setter Property="Foreground" Value="#021018"/>
+      <Setter Property="Foreground" Value="#2E1065"/>
       <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="CornerRadius" Value="16"/>
+      <Setter Property="CornerRadius" Value="18"/>
       <Setter Property="FontWeight" Value="Bold"/>
       <Setter Property="FontSize" Value="16"/>
-      <Setter Property="Height" Value="54"/>
+      <Setter Property="Height" Value="56"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
     <Style Selector="Button.play:pointerover /template/ ContentPresenter">
       <Setter Property="Opacity" Value="0.92"/>
     </Style>
     <Style Selector="Border.glass-panel">
-      <Setter Property="Background" Value="#2A0E2436"/>
-      <Setter Property="BorderBrush" Value="#55A8D8E8"/>
+      <Setter Property="Background" Value="#36FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#66F9A8D4"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="CornerRadius" Value="18"/>
-      <Setter Property="BoxShadow" Value="0 18 40 0 #66000000"/>
+      <Setter Property="CornerRadius" Value="22"/>
+      <Setter Property="BoxShadow" Value="0 18 40 0 #55000000"/>
     </Style>
   </Window.Styles>
 
   <Panel>
-    <!-- Atmosphere -->
     <ExperimentalAcrylicBorder IsHitTestVisible="False">
       <ExperimentalAcrylicBorder.Material>
         <ExperimentalAcrylicMaterial
           BackgroundSource="Digger"
-          TintColor="#041018"
-          TintOpacity="0.82"
-          MaterialOpacity="0.72"/>
+          TintColor="#1A0B2E"
+          TintOpacity="0.78"
+          MaterialOpacity="0.7"/>
       </ExperimentalAcrylicBorder.Material>
     </ExperimentalAcrylicBorder>
     <Border IsHitTestVisible="False">
       <Border.Background>
         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-          <GradientStop Color="#332DE2E6" Offset="0"/>
-          <GradientStop Color="#00000000" Offset="0.45"/>
-          <GradientStop Color="#22F5C542" Offset="1"/>
+          <GradientStop Color="#66C084FC" Offset="0"/>
+          <GradientStop Color="#44F472B6" Offset="0.45"/>
+          <GradientStop Color="#33FB7185" Offset="1"/>
         </LinearGradientBrush>
+      </Border.Background>
+    </Border>
+    <Border IsHitTestVisible="False" Opacity="0.55">
+      <Border.Background>
+        <RadialGradientBrush Center="85%,15%" GradientOrigin="85%,15%" RadiusX="0.55" RadiusY="0.55">
+          <GradientStop Color="#88F9A8D4" Offset="0"/>
+          <GradientStop Color="#00FFFFFF" Offset="1"/>
+        </RadialGradientBrush>
       </Border.Background>
     </Border>
 
     <Grid ColumnDefinitions="220,*" Margin="14">
-      <!-- Sidebar glass -->
       <Border Classes="glass-panel" Margin="0,0,10,0" Padding="0">
         <DockPanel>
           <StackPanel DockPanel.Dock="Top" Margin="18,22,18,8" Spacing="2">
-            <TextBlock Text="AQUATECH" FontSize="20" FontWeight="Bold" Foreground="#F5FBFF"
+            <TextBlock Text="AQUATECH" FontSize="20" FontWeight="Bold" Foreground="#FFF5FB"
                        LetterSpacing="1"/>
-            <TextBlock Text="Launcher" FontSize="11" Foreground="#8BA8BC"/>
+            <TextBlock Text="Launcher" FontSize="11" Foreground="#E9D5FF"/>
           </StackPanel>
 
-          <Border DockPanel.Dock="Top" Background="#332DE2E6" CornerRadius="12" Margin="14,12,14,16" Padding="12,9">
-            <TextBlock Text="AquaTech Ocean" FontSize="12" FontWeight="SemiBold" Foreground="#E8FBFF"/>
+          <Border DockPanel.Dock="Top" CornerRadius="14" Margin="14,12,14,16" Padding="12,9">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+                <GradientStop Color="#66C084FC" Offset="0"/>
+                <GradientStop Color="#66F472B6" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock Text="AquaTech Ocean" FontSize="12" FontWeight="SemiBold" Foreground="#FFF8FF"/>
           </Border>
 
           <StackPanel DockPanel.Dock="Top" Margin="10,0" Spacing="4">
@@ -121,30 +133,28 @@
           </StackPanel>
 
           <StackPanel DockPanel.Dock="Bottom" Margin="18,16" Spacing="4" VerticalAlignment="Bottom">
-            <TextBlock Text="{Binding OnlinePlayersText}" FontSize="11" Foreground="#67E8F9"/>
-            <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#6A8496"/>
-            <TextBlock Text="{Binding McLabel}" FontSize="10" Foreground="#6A8496"/>
+            <TextBlock Text="{Binding OnlinePlayersText}" FontSize="11" Foreground="#FBCFE8"/>
+            <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#C4B5FD"/>
+            <TextBlock Text="{Binding McLabel}" FontSize="10" Foreground="#C4B5FD"/>
           </StackPanel>
         </DockPanel>
       </Border>
 
-      <!-- Main -->
       <Panel Grid.Column="1">
-        <!-- Play -->
         <DockPanel IsVisible="{Binding IsPlayPage}">
           <Border DockPanel.Dock="Top" Classes="glass-panel" Height="150" Margin="0,0,0,12" Padding="28,0">
             <StackPanel VerticalAlignment="Center" Spacing="6">
-              <TextBlock Text="AQUATECH" FontSize="40" FontWeight="Bold" Foreground="#F5FBFF"
+              <TextBlock Text="AQUATECH" FontSize="40" FontWeight="Bold" Foreground="#FFF5FB"
                          LetterSpacing="2"/>
               <TextBlock Text="Minecraft 1.20.1  ·  впиши ник и жми Играть"
-                         FontSize="12" Foreground="#9FB6C9"/>
+                         FontSize="12" Foreground="#E9D5FF"/>
             </StackPanel>
           </Border>
 
           <ScrollViewer>
             <StackPanel Spacing="14">
               <StackPanel Spacing="6">
-                <TextBlock Text="НИКНЕЙМ" FontSize="10" FontWeight="SemiBold" Foreground="#7A96A8"
+                <TextBlock Text="НИКНЕЙМ" FontSize="10" FontWeight="SemiBold" Foreground="#E9D5FF"
                            LetterSpacing="1"/>
                 <TextBox Classes="field" Text="{Binding Username}" Watermark="никнейм"/>
               </StackPanel>
@@ -152,66 +162,60 @@
               <Border Classes="glass-panel" Padding="18,14">
                 <StackPanel Spacing="10">
                   <Grid ColumnDefinitions="*,Auto">
-                    <TextBlock Text="AquaTech Ocean" FontSize="18" FontWeight="SemiBold" Foreground="#F5FBFF"/>
+                    <TextBlock Text="AquaTech Ocean" FontSize="18" FontWeight="SemiBold" Foreground="#FFF5FB"/>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
-                      <TextBlock Text="{Binding ServerStatus}" FontSize="11" Foreground="#9FB6C9" VerticalAlignment="Center"/>
+                      <TextBlock Text="{Binding ServerStatus}" FontSize="11" Foreground="#E9D5FF" VerticalAlignment="Center"/>
                       <TextBlock Text="●" FontSize="12" Foreground="{Binding ServerDot}" VerticalAlignment="Center"/>
                     </StackPanel>
                   </Grid>
                   <Grid ColumnDefinitions="*,Auto">
-                    <TextBlock Text="{Binding ServerAddress}" FontSize="13" Foreground="#2DE2E6" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ServerAddress}" FontSize="13" Foreground="#F9A8D4" VerticalAlignment="Center"/>
                     <Button Grid.Column="1" Classes="glass" Content="Скопировать IP" Command="{Binding CopyIpCommand}"/>
                   </Grid>
-                  <TextBlock Text="{Binding TopPlayersText}" FontSize="11" Foreground="#8BA8BC" TextWrapping="Wrap"/>
+                  <TextBlock Text="{Binding TopPlayersText}" FontSize="11" Foreground="#D8B4FE" TextWrapping="Wrap"/>
                 </StackPanel>
               </Border>
 
-              <Grid ColumnDefinitions="*,12,*">
-                <Button Classes="play" Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
-                        IsEnabled="{Binding ActionsEnabled}">
-                  <Button.Background>
-                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                      <GradientStop Color="#2DE2E6" Offset="0"/>
-                      <GradientStop Color="#67E8F9" Offset="0.55"/>
-                      <GradientStop Color="#A5F3FC" Offset="1"/>
-                    </LinearGradientBrush>
-                  </Button.Background>
-                </Button>
-                <Button Grid.Column="2" Classes="glass" Content="{Binding UpdateButtonText}"
-                        Command="{Binding UpdateCommand}" IsEnabled="{Binding ActionsEnabled}"
-                        Height="54" FontSize="14" HorizontalContentAlignment="Center"/>
-              </Grid>
+              <Button Classes="play" Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
+                      IsEnabled="{Binding ActionsEnabled}" HorizontalAlignment="Stretch">
+                <Button.Background>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Color="#E879F9" Offset="0"/>
+                    <GradientStop Color="#F472B6" Offset="0.5"/>
+                    <GradientStop Color="#FB7185" Offset="1"/>
+                  </LinearGradientBrush>
+                </Button.Background>
+              </Button>
 
               <StackPanel Spacing="8">
                 <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="#9FB6C9"/>
-                  <TextBlock Grid.Column="1" Text="{Binding PctText}" FontSize="12" Foreground="#2DE2E6"/>
+                  <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="#E9D5FF"/>
+                  <TextBlock Grid.Column="1" Text="{Binding PctText}" FontSize="12" Foreground="#F9A8D4"/>
                 </Grid>
                 <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="7"
-                             Foreground="#2DE2E6" Background="#22000000" CornerRadius="4"/>
+                             Foreground="#F472B6" Background="#22000000" CornerRadius="4"/>
               </StackPanel>
 
-              <TextBlock Text="Сборка и лаунчер обновляются сами. После старта окно свернётся в панель задач."
-                         FontSize="11" Foreground="#6A8496" TextWrapping="Wrap"/>
+              <TextBlock Text="При «Играть» сборка обновится сама, ник синхронизируется с сайтом. После старта окно свернётся."
+                         FontSize="11" Foreground="#C4B5FD" TextWrapping="Wrap"/>
             </StackPanel>
           </ScrollViewer>
         </DockPanel>
 
-        <!-- Settings -->
         <ScrollViewer IsVisible="{Binding IsSettingsPage}">
           <StackPanel Spacing="16" MaxWidth="720" HorizontalAlignment="Left">
-            <TextBlock Text="Настройки" FontSize="24" FontWeight="Bold" Foreground="#F5FBFF"/>
-            <TextBlock Text="Память и папка игры. Обновления сборки вшиты в лаунчер."
-                       FontSize="12" Foreground="#9FB6C9"/>
+            <TextBlock Text="Настройки" FontSize="24" FontWeight="Bold" Foreground="#FFF5FB"/>
+            <TextBlock Text="Память и папка игры. Сборка обновляется при запуске."
+                       FontSize="12" Foreground="#E9D5FF"/>
 
             <Border Classes="glass-panel" Padding="24,22">
               <StackPanel Spacing="14">
                 <StackPanel Spacing="6">
-                  <TextBlock Text="ОПЕРАТИВКА" FontSize="10" FontWeight="SemiBold" Foreground="#7A96A8"/>
+                  <TextBlock Text="ОПЕРАТИВКА" FontSize="10" FontWeight="SemiBold" Foreground="#E9D5FF"/>
                   <TextBox Classes="field" Text="{Binding RamText}"/>
                 </StackPanel>
                 <StackPanel Spacing="6">
-                  <TextBlock Text="ПАПКА ИГРЫ" FontSize="10" FontWeight="SemiBold" Foreground="#7A96A8"/>
+                  <TextBlock Text="ПАПКА ИГРЫ" FontSize="10" FontWeight="SemiBold" Foreground="#E9D5FF"/>
                   <Grid ColumnDefinitions="*,8,Auto">
                     <TextBox Classes="field" Text="{Binding GameDir}"/>
                     <Button Grid.Column="2" Classes="glass" Content="⋯" Command="{Binding BrowseGameDirCommand}"
@@ -223,19 +227,18 @@
           </StackPanel>
         </ScrollViewer>
 
-        <!-- Log -->
         <DockPanel IsVisible="{Binding IsLogPage}">
           <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,12">
-            <TextBlock Text="Активность" FontSize="24" FontWeight="Bold" Foreground="#F5FBFF"/>
+            <TextBlock Text="Активность" FontSize="24" FontWeight="Bold" Foreground="#FFF5FB"/>
             <TextBlock Grid.Column="1" Text="лог установки и синхронизации" FontSize="12"
-                       Foreground="#6A8496" VerticalAlignment="Bottom"/>
+                       Foreground="#C4B5FD" VerticalAlignment="Bottom"/>
           </Grid>
           <Border Classes="glass-panel" Padding="6">
             <ListBox ItemsSource="{Binding LogLines}" Background="Transparent" BorderThickness="0">
               <ListBox.ItemTemplate>
                 <DataTemplate x:DataType="vm:LogLine">
                   <StackPanel Orientation="Horizontal" Spacing="8" Margin="8,2">
-                    <TextBlock Text="{Binding Time}" FontFamily="Consolas" FontSize="11" Foreground="#6A8496"/>
+                    <TextBlock Text="{Binding Time}" FontFamily="Consolas" FontSize="11" Foreground="#C4B5FD"/>
                     <TextBlock Text="{Binding Text}" FontFamily="Consolas" FontSize="11"
                                Foreground="{Binding Color}" TextWrapping="Wrap"/>
                   </StackPanel>

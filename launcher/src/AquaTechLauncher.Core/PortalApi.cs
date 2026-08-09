@@ -69,4 +69,22 @@ public static class PortalApi
             return [];
         }
     }
+
+    public static async Task<(bool Ok, bool Created, string Message)> EnsureNickAsync(string nick, CancellationToken ct = default)
+    {
+        try
+        {
+            var body = JsonSerializer.Serialize(new { nick });
+            var json = await HttpDownload.PostJsonAsync(
+                $"{LauncherConstants.PortalApiBase}/api/launcher/ensure-nick", body, ct);
+            using var doc = JsonDocument.Parse(json);
+            var created = doc.RootElement.TryGetProperty("created", out var c) && c.GetBoolean();
+            var name = doc.RootElement.TryGetProperty("nick", out var n) ? n.GetString() ?? nick : nick;
+            return (true, created, created ? $"Ник {name} зарегистрирован на сайте" : $"Ник {name} уже на сайте");
+        }
+        catch (Exception ex)
+        {
+            return (false, false, ex.Message);
+        }
+    }
 }
