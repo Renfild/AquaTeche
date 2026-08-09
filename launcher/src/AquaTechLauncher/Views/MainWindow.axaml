@@ -61,6 +61,8 @@
       <Setter Property="CornerRadius" Value="12"/>
       <Setter Property="Padding" Value="16,10"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
       <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
       <Setter Property="Transitions">
         <Transitions>
@@ -84,7 +86,9 @@
       <Setter Property="FontWeight" Value="Bold"/>
       <Setter Property="FontSize" Value="16"/>
       <Setter Property="Height" Value="54"/>
+      <Setter Property="Padding" Value="0"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
       <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
       <Setter Property="Transitions">
         <Transitions>
@@ -105,8 +109,9 @@
       <Setter Property="FontWeight" Value="Bold"/>
       <Setter Property="FontSize" Value="15"/>
       <Setter Property="Height" Value="48"/>
-      <Setter Property="Padding" Value="28,0"/>
+      <Setter Property="Padding" Value="0"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
       <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
       <Setter Property="Transitions">
         <Transitions>
@@ -119,6 +124,24 @@
     </Style>
     <Style Selector="Button.auth:pressed">
       <Setter Property="RenderTransform" Value="scale(0.96)"/>
+    </Style>
+    <Style Selector="Button.play /template/ ContentPresenter">
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button.auth /template/ ContentPresenter">
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button.glass /template/ ContentPresenter">
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
     <Style Selector="Border.panel">
       <Setter Property="Background" Value="#1A1E27"/>
@@ -271,7 +294,7 @@
                    HorizontalAlignment="Center" IsVisible="{Binding AuthChecking}"/>
 
         <Button Classes="auth" Content="Авторизоваться" Command="{Binding BeginAuthCommand}"
-                HorizontalAlignment="Center" IsVisible="{Binding !ShowLoginForm}"
+                HorizontalAlignment="Stretch" MinWidth="280" IsVisible="{Binding !ShowLoginForm}"
                 IsEnabled="{Binding !AuthChecking}">
           <Button.Background>
             <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
@@ -291,9 +314,9 @@
             <TextBox Classes="field" Text="{Binding LoginPassword}" PasswordChar="•" Watermark="пароль"/>
           </StackPanel>
           <TextBlock Text="{Binding AuthError}" FontSize="12" Foreground="#EF4444" TextWrapping="Wrap"
-                     MinHeight="18"/>
+                     MinHeight="18" TextAlignment="Center" HorizontalAlignment="Stretch"/>
           <Button Classes="auth" Content="Войти" Command="{Binding SubmitLoginCommand}"
-                  IsEnabled="{Binding !AuthBusy}" HorizontalAlignment="Stretch">
+                  IsEnabled="{Binding !AuthBusy}" HorizontalAlignment="Stretch" MinWidth="280">
             <Button.Background>
               <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                 <GradientStop Color="#3B82F6" Offset="0"/>
@@ -302,7 +325,7 @@
             </Button.Background>
           </Button>
           <Button Classes="glass" Content="Регистрация на сайте" Command="{Binding OpenRegisterCommand}"
-                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                  HorizontalAlignment="Stretch"/>
         </StackPanel>
       </StackPanel>
     </Border>

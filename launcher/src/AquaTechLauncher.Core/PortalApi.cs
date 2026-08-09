@@ -67,7 +67,7 @@ public static class PortalApi
         try
         {
             var payload = JsonSerializer.Serialize(new { nick, password });
-            var json = await HttpDownload.PostJsonAsync(
+            var (json, cookieSession) = await HttpDownload.PostJsonAsync(
                 $"{LauncherConstants.PortalApiBase}/api/login", payload, ct);
             using var doc = JsonDocument.Parse(json);
             if (!doc.RootElement.TryGetProperty("ok", out var okEl) || !okEl.GetBoolean())
@@ -76,6 +76,10 @@ public static class PortalApi
             var session = doc.RootElement.TryGetProperty("session", out var s)
                 ? s.GetString()
                 : null;
+            if (string.IsNullOrWhiteSpace(session))
+                session = cookieSession;
+            if (string.IsNullOrWhiteSpace(session))
+                session = HttpDownload.GetPortalSession();
             if (string.IsNullOrWhiteSpace(userNick) || string.IsNullOrWhiteSpace(session))
                 return (false, null, null, "Лаунчер не получил сессию — обнови сайт");
             HttpDownload.SetPortalSession(session);
