@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.12"
+TAG = "client-2.9.13"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -51,7 +51,7 @@ def main() -> None:
             sys.exit(f"missing {f}")
 
     man = {
-        "version": "2.9.12",
+        "version": "2.9.13",
         "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
@@ -60,9 +60,9 @@ def main() -> None:
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## AquaTech Client 2.9.12\n\n"
-        "- Launcher rewritten in .NET 9 Avalonia (same Go bootstrap + pack CDN)\n"
-        "- Play / Settings / Log UI with server ping, copy IP, minimize after launch\n"
+        "## AquaTech Client 2.9.13\n\n"
+        "- Bootstrapper self-close fix + detached window process creation\n"
+        "- Launcher .NET 9 Avalonia + server ping, auto-updates & quest sync\n"
     )
 
     payload = json.dumps(
