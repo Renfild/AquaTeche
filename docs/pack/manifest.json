@@ -3879,8 +3879,8 @@
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "19753205f2f8dddc1a7acf2c5070a52d",
-      "size": 11412,
+      "md5": "396ddebfb205de650492d72c997ce75d",
+      "size": 11403,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3/kubejs__server_scripts__30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
