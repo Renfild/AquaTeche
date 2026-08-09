@@ -17,6 +17,9 @@ public sealed class LauncherConfig
     [JsonPropertyName("update_url")]
     public string UpdateUrl { get; set; } = LauncherConstants.DefaultUpdateUrl;
 
+    [JsonPropertyName("portal_session")]
+    public string? PortalSession { get; set; }
+
     [JsonPropertyName("server_host")]
     public string? ServerHost { get; set; }
 

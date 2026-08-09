@@ -35,7 +35,11 @@ export async function onRequestPost(context) {
     .run();
 
   return json(
-    { ok: true, user: { nick: user.nick } },
+    {
+      ok: true,
+      user: { nick: user.nick },
+      ...(request.headers.get("x-aquatech-launcher") === "1" ? { session: sid } : {}),
+    },
     200,
     { "set-cookie": sessionCookie(sid) }
   );

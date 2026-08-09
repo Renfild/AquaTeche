@@ -47,11 +47,6 @@ public sealed class PlayOrchestrator
         await SyncPackAsync(cfg, verifyHash: false, skipIfReady: false, log, p => progress(30 + p * 0.55), ct);
         progress(88);
 
-        log("Синхронизируем ник с сайтом…", "info");
-        var (ok, _, msg) = await PortalApi.EnsureNickAsync(username, ct);
-        log(msg, ok ? "ok" : "warn");
-        progress(90);
-
         log("Собираем classpath / natives / assets…", "info");
         var autoJoin = $"{cfg.EffectiveHost}:{cfg.EffectivePort}";
         var cmd = await _launch.BuildAsync(gameDir, username, cfg.RamMb, java, autoJoin, m => log(m, "dim"), ct);

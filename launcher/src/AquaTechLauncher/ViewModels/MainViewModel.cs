@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -23,13 +24,15 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         Username = _cfg.Username;
+        LoginNick = _cfg.Username;
         RamText = $"{_cfg.RamMb} MB";
         GameDir = _cfg.GameDir;
         VersionLabel = $"v{LauncherConstants.Version}";
         McLabel = $"Minecraft {LauncherConstants.McVersion}";
         ServerAddress = $"{LauncherConstants.ServerHost}:{LauncherConstants.ServerPort}";
         OnlinePlayersText = "Проверяем…";
-        TopPlayersText = "Топ загружается…";
+        NeedsAuth = true;
+        AuthChecking = true;
         _ = StartupAsync();
     }
 
@@ -43,12 +46,18 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private string _playButtonText = "Играть";
     [ObservableProperty] private bool _actionsEnabled = true;
     [ObservableProperty] private string _serverStatus = "Проверяем сервер…";
-    [ObservableProperty] private IBrush _serverDot = Brush("#A78BFA");
+    [ObservableProperty] private IBrush _serverDot = Brush("#64748B");
     [ObservableProperty] private string _serverAddress = "";
     [ObservableProperty] private string _versionLabel = "";
     [ObservableProperty] private string _mcLabel = "";
     [ObservableProperty] private string _onlinePlayersText = "";
-    [ObservableProperty] private string _topPlayersText = "";
+    [ObservableProperty] private bool _needsAuth = true;
+    [ObservableProperty] private bool _authChecking;
+    [ObservableProperty] private bool _showLoginForm;
+    [ObservableProperty] private string _loginNick = "";
+    [ObservableProperty] private string _loginPassword = "";
+    [ObservableProperty] private string _authError = "";
+    [ObservableProperty] private bool _authBusy;
 
     public ObservableCollection<LogLine> LogLines { get; } = [];
 
@@ -63,19 +72,85 @@ public partial class MainViewModel : ViewModelBase
         OnPropertyChanged(nameof(IsLogPage));
     }
 
-    [RelayCommand] private void ShowPlay() => Page = "play";
-    [RelayCommand] private void ShowSettings() => Page = "settings";
-    [RelayCommand] private void ShowLog() => Page = "log";
+    [RelayCommand]
+    private void ShowPlay()
+    {
+        if (NeedsAuth) return;
+        Page = "play";
+    }
+
+    [RelayCommand]
+    private void ShowSettings()
+    {
+        if (NeedsAuth) return;
+        Page = "settings";
+    }
+
+    [RelayCommand]
+    private void ShowLog()
+    {
+        if (NeedsAuth) return;
+        Page = "log";
+    }
+
+    [RelayCommand]
+    private void BeginAuth()
+    {
+        UiSounds.Play(UiSounds.Kind.Auth);
+        ShowLoginForm = true;
+        AuthError = "";
+    }
+
+    [RelayCommand]
+    private void OpenRegister()
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = $"{LauncherConstants.PortalApiBase}/register.html",
+                UseShellExecute = true,
+            });
+        }
+        catch
+        {
+            AuthError = "Не удалось открыть сайт регистрации";
+        }
+    }
+
+    [RelayCommand]
+    private async Task SubmitLoginAsync()
+    {
+        if (AuthBusy) return;
+        AuthBusy = true;
+        AuthError = "";
+        UiSounds.Play(UiSounds.Kind.Auth);
+        try
+        {
+            var (ok, nick, session, err) = await PortalApi.LoginAsync(LoginNick.Trim(), LoginPassword);
+            if (!ok || nick == null || session == null)
+            {
+                AuthError = string.IsNullOrWhiteSpace(err) ? "Не удалось войти" : err;
+                return;
+            }
+            EnterApp(nick, session);
+        }
+        finally
+        {
+            AuthBusy = false;
+        }
+    }
 
     [RelayCommand]
     private async Task PlayAsync()
     {
-        if (_busy) return;
+        if (_busy || NeedsAuth) return;
+        UiSounds.Play(UiSounds.Kind.Play);
         SaveCfgFromUi();
         if (string.IsNullOrWhiteSpace(_cfg.Username))
         {
-            StatusText = "Введи никнейм";
-            Page = "play";
+            StatusText = "Нет ника — войди заново";
+            NeedsAuth = true;
             return;
         }
 
@@ -103,6 +178,7 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private async Task CopyIpAsync()
     {
+        UiSounds.Play(UiSounds.Kind.Copy);
         var ip = $"{LauncherConstants.ServerHost}:{LauncherConstants.ServerPort}";
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop
             && desktop.MainWindow?.Clipboard is { } clip)
@@ -128,10 +204,55 @@ public partial class MainViewModel : ViewModelBase
             GameDir = path;
     }
 
+    private void EnterApp(string nick, string session)
+    {
+        Username = nick;
+        LoginNick = nick;
+        LoginPassword = "";
+        _cfg.Username = nick;
+        _cfg.PortalSession = session;
+        _cfg.Save();
+        HttpDownload.SetPortalSession(session);
+        NeedsAuth = false;
+        AuthChecking = false;
+        ShowLoginForm = false;
+        AuthError = "";
+        StatusText = "Готов к запуску";
+    }
+
     private async Task StartupAsync()
     {
+        AuthChecking = true;
+        NeedsAuth = true;
+        try
+        {
+            var (ok, nick, session, _) = await PortalApi.TryRestoreSessionAsync(_cfg.PortalSession);
+            if (ok && nick != null && session != null)
+            {
+                EnterApp(nick, session);
+            }
+            else
+            {
+                _cfg.PortalSession = null;
+                _cfg.Save();
+                HttpDownload.SetPortalSession(null);
+                NeedsAuth = true;
+            }
+        }
+        catch
+        {
+            NeedsAuth = true;
+        }
+        finally
+        {
+            AuthChecking = false;
+        }
+
         _ = RefreshPingLoopAsync();
         _ = RefreshPortalStatsLoopAsync();
+
+        if (NeedsAuth) return;
+
         try
         {
             UiLog("Проверяем обновление лаунчера…", "dim");
@@ -198,33 +319,30 @@ public partial class MainViewModel : ViewModelBase
 
     private void ApplyUnifiedStatus()
     {
-        // TCP ping is the truth for "can we reach the server" (Playit tunnels often
-        // fail Minecraft query APIs while TCP connect still works).
         if (_tcpOnline == true)
         {
             ServerStatus = _tcpMs is null ? "Онлайн" : $"Онлайн · {_tcpMs} мс";
-            ServerDot = Brush("#34D399");
+            ServerDot = Brush("#22C55E");
             OnlinePlayersText = _portalPlayers is > 0
-                ? $"Онлайн · {_portalPlayers} игр."
+                ? $"Онлайн · {_portalPlayers}"
                 : (_tcpMs is null ? "Сервер онлайн" : $"Онлайн · {_tcpMs} мс");
         }
         else if (_tcpOnline == false)
         {
             ServerStatus = "Недоступен";
-            ServerDot = Brush("#FB7185");
+            ServerDot = Brush("#EF4444");
             OnlinePlayersText = "Сервер оффлайн";
         }
         else
         {
             ServerStatus = "Проверяем сервер…";
-            ServerDot = Brush("#A78BFA");
+            ServerDot = Brush("#64748B");
             OnlinePlayersText = "Проверяем…";
         }
     }
 
     private async Task RefreshPingLoopAsync()
     {
-        var ct = CancellationToken.None;
         while (true)
         {
             try
@@ -247,7 +365,7 @@ public partial class MainViewModel : ViewModelBase
                 });
             }
 
-            try { await Task.Delay(20000, ct); }
+            try { await Task.Delay(20000); }
             catch { break; }
         }
     }
@@ -258,32 +376,16 @@ public partial class MainViewModel : ViewModelBase
         {
             try
             {
-                var statusTask = PortalApi.FetchServerStatusAsync();
-                var topTask = PortalApi.FetchTopPlayersAsync("likes", 5);
-                await Task.WhenAll(statusTask, topTask);
-                var status = statusTask.Result;
-                var top = topTask.Result;
-
+                var status = await PortalApi.FetchServerStatusAsync();
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     _portalPlayers = status is { Online: true } ? status.PlayersOnline : null;
                     ApplyUnifiedStatus();
-
-                    if (top.Count == 0)
-                        TopPlayersText = "Топ: пока нет данных с портала.";
-                    else
-                    {
-                        var bits = top.Take(5).Select(p => $"{p.Nick} ({p.Likes}❤)");
-                        TopPlayersText = "Топ: " + string.Join(" · ", bits);
-                    }
                 });
             }
             catch
             {
-                await Dispatcher.UIThread.InvokeAsync(() =>
-                {
-                    TopPlayersText = "Топ временно недоступен.";
-                });
+                /* keep TCP status */
             }
 
             try { await Task.Delay(60000); }
@@ -307,11 +409,11 @@ public partial class MainViewModel : ViewModelBase
 
     private static IBrush TagBrush(string tag) => tag switch
     {
-        "ok" => Brush("#34D399"),
-        "err" => Brush("#FB7185"),
-        "warn" => Brush("#F9A8D4"),
-        "dim" => Brush("#C4B5FD"),
-        _ => Brush("#E879F9"),
+        "ok" => Brush("#22C55E"),
+        "err" => Brush("#EF4444"),
+        "warn" => Brush("#F59E0B"),
+        "dim" => Brush("#94A3B8"),
+        _ => Brush("#06B6D4"),
     };
 }
 

@@ -1,36 +1,12 @@
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace AquaTechLauncher.Core;
 
 public sealed class PortalStats
 {
-    [JsonPropertyName("online")]
     public bool Online { get; set; }
-
-    [JsonPropertyName("players_online")]
     public int PlayersOnline { get; set; }
-
-    [JsonPropertyName("players_max")]
     public int PlayersMax { get; set; }
-}
-
-public sealed class PortalPlayer
-{
-    [JsonPropertyName("nick")]
-    public string Nick { get; set; } = "";
-
-    [JsonPropertyName("privilege")]
-    public string? Privilege { get; set; }
-
-    [JsonPropertyName("likes")]
-    public int Likes { get; set; }
-
-    [JsonPropertyName("playtime_hours")]
-    public int PlaytimeHours { get; set; }
-
-    [JsonPropertyName("fish")]
-    public int Fish { get; set; }
 }
 
 public static class PortalApi
@@ -40,7 +16,14 @@ public static class PortalApi
         try
         {
             var json = await HttpDownload.GetStringAsync($"{LauncherConstants.PortalApiBase}/api/server-status", ct);
-            return JsonSerializer.Deserialize<PortalStats>(json);
+            using var doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+            return new PortalStats
+            {
+                Online = root.TryGetProperty("online", out var o) && o.GetBoolean(),
+                PlayersOnline = root.TryGetProperty("players_online", out var po) ? po.GetInt32() : 0,
+                PlayersMax = root.TryGetProperty("players_max", out var pm) ? pm.GetInt32() : 0,
+            };
         }
         catch
         {
@@ -48,43 +31,64 @@ public static class PortalApi
         }
     }
 
-    public static async Task<IReadOnlyList<PortalPlayer>> FetchTopPlayersAsync(string sort = "likes", int limit = 5, CancellationToken ct = default)
+    public static async Task<(bool Ok, string? Nick, string? Session, string Error)> TryRestoreSessionAsync(
+        string? sessionId, CancellationToken ct = default)
     {
+        if (string.IsNullOrWhiteSpace(sessionId))
+            return (false, null, null, "no session");
+        HttpDownload.SetPortalSession(sessionId);
         try
         {
-            var json = await HttpDownload.GetStringAsync(
-                $"{LauncherConstants.PortalApiBase}/api/players?sort={Uri.EscapeDataString(sort)}&limit={limit}", ct);
-            using var doc = JsonDocument.Parse(json);
-            if (!doc.RootElement.TryGetProperty("players", out var arr)) return [];
-            var list = new List<PortalPlayer>();
-            foreach (var el in arr.EnumerateArray())
+            var (status, body) = await HttpDownload.GetRawAsync($"{LauncherConstants.PortalApiBase}/api/me", ct);
+            if (status != 200)
             {
-                var p = el.Deserialize<PortalPlayer>();
-                if (p != null && !string.IsNullOrWhiteSpace(p.Nick)) list.Add(p);
+                HttpDownload.SetPortalSession(null);
+                return (false, null, null, "expired");
             }
-            return list;
-        }
-        catch
-        {
-            return [];
-        }
-    }
-
-    public static async Task<(bool Ok, bool Created, string Message)> EnsureNickAsync(string nick, CancellationToken ct = default)
-    {
-        try
-        {
-            var body = JsonSerializer.Serialize(new { nick });
-            var json = await HttpDownload.PostJsonAsync(
-                $"{LauncherConstants.PortalApiBase}/api/launcher/ensure-nick", body, ct);
-            using var doc = JsonDocument.Parse(json);
-            var created = doc.RootElement.TryGetProperty("created", out var c) && c.GetBoolean();
-            var name = doc.RootElement.TryGetProperty("nick", out var n) ? n.GetString() ?? nick : nick;
-            return (true, created, created ? $"Ник {name} зарегистрирован на сайте" : $"Ник {name} уже на сайте");
+            using var doc = JsonDocument.Parse(body);
+            var nick = doc.RootElement.GetProperty("user").GetProperty("nick").GetString();
+            if (string.IsNullOrWhiteSpace(nick))
+            {
+                HttpDownload.SetPortalSession(null);
+                return (false, null, null, "bad me");
+            }
+            return (true, nick, sessionId, "");
         }
         catch (Exception ex)
         {
-            return (false, false, ex.Message);
+            HttpDownload.SetPortalSession(null);
+            return (false, null, null, ex.Message);
+        }
+    }
+
+    public static async Task<(bool Ok, string? Nick, string? Session, string Error)> LoginAsync(
+        string nick, string password, CancellationToken ct = default)
+    {
+        try
+        {
+            var payload = JsonSerializer.Serialize(new { nick, password });
+            var json = await HttpDownload.PostJsonAsync(
+                $"{LauncherConstants.PortalApiBase}/api/login", payload, ct);
+            using var doc = JsonDocument.Parse(json);
+            if (!doc.RootElement.TryGetProperty("ok", out var okEl) || !okEl.GetBoolean())
+                return (false, null, null, "login failed");
+            var userNick = doc.RootElement.GetProperty("user").GetProperty("nick").GetString();
+            var session = doc.RootElement.TryGetProperty("session", out var s)
+                ? s.GetString()
+                : null;
+            if (string.IsNullOrWhiteSpace(userNick) || string.IsNullOrWhiteSpace(session))
+                return (false, null, null, "Лаунчер не получил сессию — обнови сайт");
+            HttpDownload.SetPortalSession(session);
+            return (true, userNick, session, "");
+        }
+        catch (HttpRequestException ex)
+        {
+            if (ex.Message.Contains("401")) return (false, null, null, "Неверный логин или пароль");
+            return (false, null, null, ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return (false, null, null, ex.Message);
         }
     }
 }

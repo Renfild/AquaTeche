@@ -1,18 +1,26 @@
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace AquaTechLauncher.Core;
 
 public static class HttpDownload
 {
     private static readonly HttpClient Client = CreateClient();
+    private static string? PortalSession;
 
     private static HttpClient CreateClient()
     {
         var c = new HttpClient { Timeout = TimeSpan.FromMinutes(10) };
         c.DefaultRequestHeaders.UserAgent.ParseAdd($"Mozilla/5.0 AquaTechLauncher/{LauncherConstants.Version}");
         c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+        c.DefaultRequestHeaders.TryAddWithoutValidation("X-AquaTech-Launcher", "1");
         return c;
+    }
+
+    public static void SetPortalSession(string? sessionId)
+    {
+        PortalSession = string.IsNullOrWhiteSpace(sessionId) ? null : sessionId.Trim();
     }
 
     public static async Task DownloadAsync(string url, string destPath, CancellationToken ct = default)
@@ -21,7 +29,8 @@ public static class HttpDownload
         var tmp = destPath + ".part";
         try
         {
-            using var resp = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, ct);
+            using var req = new HttpRequestMessage(HttpMethod.Get, url);
+            using var resp = await Client.SendAsync(req, HttpCompletionOption.ResponseHeadersRead, ct);
             resp.EnsureSuccessStatusCode();
             await using var src = await resp.Content.ReadAsStreamAsync(ct);
             await using var dst = File.Create(tmp);
@@ -68,19 +77,39 @@ public static class HttpDownload
 
     public static async Task<string> GetStringAsync(string url, CancellationToken ct = default)
     {
-        using var resp = await Client.GetAsync(url, ct);
+        using var req = new HttpRequestMessage(HttpMethod.Get, url);
+        AttachSession(req);
+        using var resp = await Client.SendAsync(req, ct);
         resp.EnsureSuccessStatusCode();
         return await resp.Content.ReadAsStringAsync(ct);
     }
 
+    public static async Task<(int Status, string Body)> GetRawAsync(string url, CancellationToken ct = default)
+    {
+        using var req = new HttpRequestMessage(HttpMethod.Get, url);
+        AttachSession(req);
+        using var resp = await Client.SendAsync(req, ct);
+        return ((int)resp.StatusCode, await resp.Content.ReadAsStringAsync(ct));
+    }
+
     public static async Task<string> PostJsonAsync(string url, string jsonBody, CancellationToken ct = default)
     {
-        using var content = new StringContent(jsonBody, System.Text.Encoding.UTF8, "application/json");
-        using var resp = await Client.PostAsync(url, content, ct);
+        using var req = new HttpRequestMessage(HttpMethod.Post, url)
+        {
+            Content = new StringContent(jsonBody, Encoding.UTF8, "application/json"),
+        };
+        AttachSession(req);
+        using var resp = await Client.SendAsync(req, ct);
         var body = await resp.Content.ReadAsStringAsync(ct);
         if (!resp.IsSuccessStatusCode)
             throw new HttpRequestException($"HTTP {(int)resp.StatusCode}: {body}");
         return body;
+    }
+
+    private static void AttachSession(HttpRequestMessage req)
+    {
+        if (!string.IsNullOrEmpty(PortalSession))
+            req.Headers.TryAddWithoutValidation("Cookie", $"at_session={PortalSession}");
     }
 
     public static string Md5File(string path)
