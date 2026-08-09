@@ -44,7 +44,7 @@ public sealed class PlayOrchestrator
         progress(30);
 
         log("Синхронизируем сборку…", "info");
-        await SyncPackAsync(cfg, verifyHash: false, skipIfReady: false, log, p => progress(30 + p * 0.55), ct);
+        await SyncPackAsync(cfg, verifyHash: true, skipIfReady: false, log, p => progress(30 + p * 0.55), ct);
         progress(88);
 
         log("Собираем classpath / natives / assets…", "info");
@@ -104,12 +104,12 @@ public sealed class PlayOrchestrator
         var man = await _sync.FetchManifestAsync(cfg.UpdateUrl, m => log(m, "info"), ct);
         var (updated, failed, deleted) = await _sync.ApplyAsync(
             cfg.GameDir, man, verifyHash, m => log(m, "info"), progress, ct);
-        if (failed > 0 && updated == 0 && !ManifestSync.PackLooksReady(cfg.GameDir))
-            throw new IOException($"Синхронизация не удалась ({failed} ошибок)");
         if (failed > 0)
-            log($"Часть файлов не скачалась ({failed}), обновлено {updated}", "warn");
-        else if (deleted > 0 || updated > 0)
+            throw new IOException($"Синхронизация не удалась ({failed} ошибок). Проверь интернет и нажми Играть ещё раз.");
+        if (deleted > 0 || updated > 0)
             log($"Синхронизация ок: +{updated}, −{deleted}", "ok");
+        else
+            log($"Сборка актуальна ({man.Files.Count} файлов)", "ok");
     }
 
     private static void DumpTail(string path, Action<string, string> log)
