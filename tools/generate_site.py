@@ -100,7 +100,7 @@ PAGES["index.html"] = (
         <div class="news-list">
           <a class="news-item" href="news.html">
             <time>8 августа 2026</time>
-            <h3>Лаунчер 2.9.17</h3>
+            <h3>Лаунчер 2.9.18</h3>
             <p>Экран входа, тёмный UI, клики со звуком. Регистрация на сайте, в лаунчере — только авторизация.</p>
           </a>
           <a class="news-item" href="news.html">
@@ -284,7 +284,7 @@ PAGES["news.html"] = (
     <div class="container news-list">
       <article class="news-item">
         <time>8 августа 2026</time>
-        <h3>Лаунчер 2.9.17</h3>
+        <h3>Лаунчер 2.9.18</h3>
         <p>Полноэкранный вход, палитра v2, анимации кнопок и мягкие звуки клика.</p>
       </article>
       <article class="news-item">

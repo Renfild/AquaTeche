@@ -12,6 +12,7 @@
         FontFamily="Segoe UI Variable Display, Segoe UI">
 
   <Window.Styles>
+    <!-- Idle/hover/pressed must share the same TransformOperations shape or transitions glitch -->
     <Style Selector="Button.nav">
       <Setter Property="Background" Value="Transparent"/>
       <Setter Property="Foreground" Value="#94A3B8"/>
@@ -23,6 +24,7 @@
       <Setter Property="FontSize" Value="13"/>
       <Setter Property="BorderThickness" Value="0"/>
       <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
       <Setter Property="Transitions">
         <Transitions>
           <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
@@ -31,14 +33,14 @@
       </Setter>
     </Style>
     <Style Selector="Button.nav:pointerover">
-      <Setter Property="RenderTransform" Value="translateY(-1px)"/>
+      <Setter Property="RenderTransform" Value="translateY(-1px) scale(1)"/>
     </Style>
     <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
       <Setter Property="Background" Value="#1A1E27"/>
       <Setter Property="Foreground" Value="#E2E8F0"/>
     </Style>
     <Style Selector="Button.nav:pressed">
-      <Setter Property="RenderTransform" Value="scale(0.96)"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.96)"/>
     </Style>
     <Style Selector="Button.nav.active">
       <Setter Property="Background" Value="#1A1E27"/>
@@ -64,6 +66,7 @@
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
       <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
       <Setter Property="Transitions">
         <Transitions>
           <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
@@ -71,13 +74,13 @@
       </Setter>
     </Style>
     <Style Selector="Button.glass:pointerover">
-      <Setter Property="RenderTransform" Value="translateY(-1px)"/>
+      <Setter Property="RenderTransform" Value="translateY(-1px) scale(1)"/>
     </Style>
     <Style Selector="Button.glass:pointerover /template/ ContentPresenter">
       <Setter Property="Background" Value="#222733"/>
     </Style>
     <Style Selector="Button.glass:pressed">
-      <Setter Property="RenderTransform" Value="scale(0.96)"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.96)"/>
     </Style>
     <Style Selector="Button.play">
       <Setter Property="Foreground" Value="#0F172A"/>
@@ -90,6 +93,7 @@
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
       <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
       <Setter Property="Transitions">
         <Transitions>
           <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
@@ -97,10 +101,10 @@
       </Setter>
     </Style>
     <Style Selector="Button.play:pointerover">
-      <Setter Property="RenderTransform" Value="translateY(-1px)"/>
+      <Setter Property="RenderTransform" Value="translateY(-1px) scale(1)"/>
     </Style>
     <Style Selector="Button.play:pressed">
-      <Setter Property="RenderTransform" Value="scale(0.96)"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.96)"/>
     </Style>
     <Style Selector="Button.auth">
       <Setter Property="Foreground" Value="#0F172A"/>
@@ -113,6 +117,7 @@
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
       <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
       <Setter Property="Transitions">
         <Transitions>
           <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
@@ -120,10 +125,10 @@
       </Setter>
     </Style>
     <Style Selector="Button.auth:pointerover">
-      <Setter Property="RenderTransform" Value="translateY(-1px)"/>
+      <Setter Property="RenderTransform" Value="translateY(-1px) scale(1)"/>
     </Style>
     <Style Selector="Button.auth:pressed">
-      <Setter Property="RenderTransform" Value="scale(0.96)"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.96)"/>
     </Style>
     <Style Selector="Button.play /template/ ContentPresenter">
       <Setter Property="HorizontalAlignment" Value="Stretch"/>
