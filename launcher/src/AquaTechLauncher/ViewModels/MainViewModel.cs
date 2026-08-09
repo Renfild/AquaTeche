@@ -23,32 +23,31 @@ public partial class MainViewModel : ViewModelBase
         Username = _cfg.Username;
         RamText = $"{_cfg.RamMb} MB";
         GameDir = _cfg.GameDir;
-        UpdateUrl = _cfg.UpdateUrl;
-        ServerChip = LauncherConstants.ServerHost;
         VersionLabel = $"v{LauncherConstants.Version}";
         McLabel = $"Minecraft {LauncherConstants.McVersion}";
         ServerAddress = $"{LauncherConstants.ServerHost}:{LauncherConstants.ServerPort}";
-        _ = RefreshPingLoopAsync();
+        OnlinePlayersText = "Онлайн: …";
+        TopPlayersText = "Топ загружается…";
+        _ = StartupAsync();
     }
 
     [ObservableProperty] private string _page = "play";
     [ObservableProperty] private string _username = "";
     [ObservableProperty] private string _ramText = "4096 MB";
     [ObservableProperty] private string _gameDir = "";
-    [ObservableProperty] private string _updateUrl = "";
     [ObservableProperty] private string _statusText = "Готов к запуску";
     [ObservableProperty] private string _pctText = "0%";
     [ObservableProperty] private double _progress;
     [ObservableProperty] private string _playButtonText = "Играть";
     [ObservableProperty] private string _updateButtonText = "Обновить";
     [ObservableProperty] private bool _actionsEnabled = true;
-    [ObservableProperty] private IBrush _playButtonBg = Brush("#2A9AAB");
     [ObservableProperty] private string _serverStatus = "Проверяем сервер…";
     [ObservableProperty] private IBrush _serverDot = Brush("#5A7080");
-    [ObservableProperty] private string _serverChip = "";
     [ObservableProperty] private string _serverAddress = "";
     [ObservableProperty] private string _versionLabel = "";
     [ObservableProperty] private string _mcLabel = "";
+    [ObservableProperty] private string _onlinePlayersText = "";
+    [ObservableProperty] private string _topPlayersText = "";
 
     public ObservableCollection<LogLine> LogLines { get; } = [];
 
@@ -63,14 +62,9 @@ public partial class MainViewModel : ViewModelBase
         OnPropertyChanged(nameof(IsLogPage));
     }
 
-    [RelayCommand]
-    private void ShowPlay() => Page = "play";
-
-    [RelayCommand]
-    private void ShowSettings() => Page = "settings";
-
-    [RelayCommand]
-    private void ShowLog() => Page = "log";
+    [RelayCommand] private void ShowPlay() => Page = "play";
+    [RelayCommand] private void ShowSettings() => Page = "settings";
+    [RelayCommand] private void ShowLog() => Page = "log";
 
     [RelayCommand]
     private async Task PlayAsync()
@@ -97,7 +91,6 @@ public partial class MainViewModel : ViewModelBase
         {
             UiLog($"Критическая ошибка: {ex.Message}", "err");
             PlayButtonText = "Ошибка — ещё раз";
-            PlayButtonBg = Brush("#E06B6B");
             ActionsEnabled = true;
         }
         finally
@@ -118,7 +111,6 @@ public partial class MainViewModel : ViewModelBase
             await Task.Run(() => _orch.UpdateAsync(_cfg, UiLog, UiProgress));
             UpdateButtonText = "Обновить";
             PlayButtonText = "Играть";
-            PlayButtonBg = Brush("#2A9AAB");
             ActionsEnabled = true;
         }
         catch (Exception ex)
@@ -161,6 +153,36 @@ public partial class MainViewModel : ViewModelBase
             GameDir = path;
     }
 
+    private async Task StartupAsync()
+    {
+        _ = RefreshPingLoopAsync();
+        _ = RefreshPortalStatsLoopAsync();
+        try
+        {
+            UiLog("Проверяем обновление лаунчера…", "dim");
+            var (updated, msg) = await LauncherSelfUpdate.CheckAndApplyAsync(m => UiLog(m, "info"), UiProgress);
+            if (updated)
+            {
+                UiLog($"Перезапуск на v{msg}…", "ok");
+                Dispatcher.UIThread.Post(() =>
+                {
+                    if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                        desktop.Shutdown();
+                });
+                return;
+            }
+            if (!string.IsNullOrWhiteSpace(msg))
+                UiLog(msg, "dim");
+            StatusText = "Готов к запуску";
+            Progress = 0;
+            PctText = "0%";
+        }
+        catch (Exception ex)
+        {
+            UiLog($"Автообновление: {ex.Message}", "warn");
+        }
+    }
+
     private void SetBusy(bool busy, string? playText = null)
     {
         _busy = busy;
@@ -173,7 +195,6 @@ public partial class MainViewModel : ViewModelBase
         else
         {
             PlayButtonText = "Играть";
-            PlayButtonBg = Brush("#2A9AAB");
             UpdateButtonText = "Обновить";
         }
     }
@@ -182,11 +203,10 @@ public partial class MainViewModel : ViewModelBase
     {
         _cfg.Username = Username.Trim();
         _cfg.GameDir = string.IsNullOrWhiteSpace(GameDir) ? LauncherConstants.GameDirDefault : GameDir.Trim();
-        _cfg.UpdateUrl = LauncherConfig.NormalizeUpdateUrl(UpdateUrl);
+        _cfg.UpdateUrl = LauncherConstants.DefaultUpdateUrl;
         var ramRaw = new string(RamText.Where(char.IsDigit).ToArray());
         _cfg.RamMb = int.TryParse(ramRaw, out var ram) && ram >= 1024 ? ram : 4096;
         RamText = $"{_cfg.RamMb} MB";
-        UpdateUrl = _cfg.UpdateUrl;
         GameDir = _cfg.GameDir;
         _cfg.Save();
     }
@@ -224,12 +244,12 @@ public partial class MainViewModel : ViewModelBase
                     if (online)
                     {
                         ServerStatus = ms is null ? "Онлайн" : $"Онлайн · {ms} мс";
-                        ServerDot = Brush("#3DDB8A");
+                        ServerDot = Brush("#34D399");
                     }
                     else
                     {
                         ServerStatus = "Недоступен";
-                        ServerDot = Brush("#E06B6B");
+                        ServerDot = Brush("#FB7185");
                     }
                 });
             }
@@ -238,12 +258,58 @@ public partial class MainViewModel : ViewModelBase
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     ServerStatus = "Недоступен";
-                    ServerDot = Brush("#E06B6B");
+                    ServerDot = Brush("#FB7185");
                 });
             }
 
             try { await Task.Delay(45000, ct); }
             catch (OperationCanceledException) { break; }
+        }
+    }
+
+    private async Task RefreshPortalStatsLoopAsync()
+    {
+        while (true)
+        {
+            try
+            {
+                var statusTask = PortalApi.FetchServerStatusAsync();
+                var topTask = PortalApi.FetchTopPlayersAsync("likes", 5);
+                await Task.WhenAll(statusTask, topTask);
+                var status = statusTask.Result;
+                var top = topTask.Result;
+
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    if (status == null)
+                        OnlinePlayersText = "Онлайн: —";
+                    else if (!status.Online)
+                        OnlinePlayersText = "Сервер оффлайн";
+                    else
+                        OnlinePlayersText = status.PlayersMax > 0
+                            ? $"Онлайн: {status.PlayersOnline}/{status.PlayersMax}"
+                            : $"Онлайн: {status.PlayersOnline}";
+
+                    if (top.Count == 0)
+                        TopPlayersText = "Топ: пока нет данных с портала.";
+                    else
+                    {
+                        var bits = top.Take(5).Select(p => $"{p.Nick} ({p.Likes}❤)");
+                        TopPlayersText = "Топ: " + string.Join(" · ", bits);
+                    }
+                });
+            }
+            catch
+            {
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    OnlinePlayersText = "Онлайн: —";
+                    TopPlayersText = "Топ временно недоступен.";
+                });
+            }
+
+            try { await Task.Delay(60000); }
+            catch { break; }
         }
     }
 
@@ -263,11 +329,11 @@ public partial class MainViewModel : ViewModelBase
 
     private static IBrush TagBrush(string tag) => tag switch
     {
-        "ok" => Brush("#5ED9A0"),
-        "err" => Brush("#E06B6B"),
-        "warn" => Brush("#D4A35C"),
-        "dim" => Brush("#5A7080"),
-        _ => Brush("#3DB8C5"),
+        "ok" => Brush("#34D399"),
+        "err" => Brush("#FB7185"),
+        "warn" => Brush("#F5C542"),
+        "dim" => Brush("#6A8496"),
+        _ => Brush("#2DE2E6"),
     };
 }
 

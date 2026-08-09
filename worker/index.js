@@ -8,6 +8,7 @@ import { onRequestPost as logoutPost } from "../functions/api/logout.js";
 import { onRequestGet as meGet } from "../functions/api/me.js";
 import { onRequestGet as playersGet } from "../functions/api/players.js";
 import { onRequestGet as catalogGet } from "../functions/api/catalog.js";
+import { onRequestGet as serverStatusGet } from "../functions/api/server-status.js";
 import {
   onRequestGet as purchaseGet,
   onRequestPost as purchasePost,
@@ -49,6 +50,7 @@ async function handleApi(request, env) {
   if (path === "/api/me" && method === "GET") return meGet(ctx(request, env));
   if (path === "/api/players" && method === "GET") return playersGet(ctx(request, env));
   if (path === "/api/catalog" && method === "GET") return catalogGet(ctx(request, env));
+  if (path === "/api/server-status" && method === "GET") return serverStatusGet(ctx(request, env));
   if (path === "/api/purchase") {
     if (method === "POST") return purchasePost(ctx(request, env));
     if (method === "GET") return purchaseGet(ctx(request, env));

@@ -8,184 +8,243 @@
         Width="980" Height="640"
         MinWidth="980" MinHeight="640"
         WindowStartupLocation="CenterScreen"
-        Background="#061018"
-        FontFamily="Segoe UI">
+        TransparencyLevelHint="AcrylicBlur,Blur,Transparent"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome"
+        FontFamily="Segoe UI Variable Display, Segoe UI">
 
   <Window.Styles>
     <Style Selector="Button.nav">
       <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="Foreground" Value="#8BA0B0"/>
+      <Setter Property="Foreground" Value="#A8C0D0"/>
       <Setter Property="HorizontalAlignment" Value="Stretch"/>
       <Setter Property="HorizontalContentAlignment" Value="Left"/>
-      <Setter Property="Padding" Value="14,10"/>
-      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="Padding" Value="14,11"/>
+      <Setter Property="CornerRadius" Value="12"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="FontSize" Value="13"/>
+      <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#132836"/>
-      <Setter Property="Foreground" Value="#E6EEF4"/>
+      <Setter Property="Background" Value="#33FFFFFF"/>
+      <Setter Property="Foreground" Value="#F5FBFF"/>
     </Style>
     <Style Selector="Button.nav.active">
-      <Setter Property="Background" Value="#132836"/>
-      <Setter Property="Foreground" Value="#E6EEF4"/>
+      <Setter Property="Background" Value="#402DE2E6"/>
+      <Setter Property="Foreground" Value="#F5FBFF"/>
     </Style>
     <Style Selector="TextBox.field">
-      <Setter Property="Background" Value="#0A141C"/>
-      <Setter Property="Foreground" Value="#E6EEF4"/>
-      <Setter Property="BorderBrush" Value="#1A2C3C"/>
+      <Setter Property="Background" Value="#28101828"/>
+      <Setter Property="Foreground" Value="#F5FBFF"/>
+      <Setter Property="BorderBrush" Value="#55FFFFFF"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="CornerRadius" Value="8"/>
-      <Setter Property="Padding" Value="12,10"/>
-      <Setter Property="CaretBrush" Value="#3DB8C5"/>
+      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="Padding" Value="14,12"/>
+      <Setter Property="CaretBrush" Value="#2DE2E6"/>
+    </Style>
+    <Style Selector="Button.glass">
+      <Setter Property="Background" Value="#28FFFFFF"/>
+      <Setter Property="Foreground" Value="#F5FBFF"/>
+      <Setter Property="BorderBrush" Value="#66FFFFFF"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="Padding" Value="16,10"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style Selector="Button.glass:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#44FFFFFF"/>
+    </Style>
+    <Style Selector="Button.play">
+      <Setter Property="Foreground" Value="#021018"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="CornerRadius" Value="16"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="Height" Value="54"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button.play:pointerover /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.92"/>
+    </Style>
+    <Style Selector="Border.glass-panel">
+      <Setter Property="Background" Value="#2A0E2436"/>
+      <Setter Property="BorderBrush" Value="#55A8D8E8"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="18"/>
+      <Setter Property="BoxShadow" Value="0 18 40 0 #66000000"/>
     </Style>
   </Window.Styles>
 
-  <Grid ColumnDefinitions="208,*">
-    <!-- Sidebar -->
-    <Border Grid.Column="0" Background="#0A1520" Padding="0">
-      <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Margin="18,22,18,8" Spacing="2">
-          <TextBlock Text="AQUATECH" FontSize="18" FontWeight="SemiBold" Foreground="#E6EEF4"/>
-          <TextBlock Text="Launcher" FontSize="11" Foreground="#5A7080"/>
-        </StackPanel>
-
-        <Border DockPanel.Dock="Top" Background="#132836" CornerRadius="8" Margin="14,10,14,18" Padding="10,7">
-          <TextBlock Text="{Binding ServerChip}" FontSize="10" Foreground="#3DB8C5" TextWrapping="Wrap"/>
-        </Border>
-
-        <StackPanel DockPanel.Dock="Top" Margin="10,0" Spacing="2">
-          <Button Classes="nav" Content="Игра" Command="{Binding ShowPlayCommand}"
-                  Classes.active="{Binding IsPlayPage}"/>
-          <Button Classes="nav" Content="Настройки" Command="{Binding ShowSettingsCommand}"
-                  Classes.active="{Binding IsSettingsPage}"/>
-          <Button Classes="nav" Content="Активность" Command="{Binding ShowLogCommand}"
-                  Classes.active="{Binding IsLogPage}"/>
-        </StackPanel>
-
-        <StackPanel DockPanel.Dock="Bottom" Margin="18,16" Spacing="2" VerticalAlignment="Bottom">
-          <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#5A7080"/>
-          <TextBlock Text="{Binding McLabel}" FontSize="10" Foreground="#5A7080"/>
-        </StackPanel>
-      </DockPanel>
+  <Panel>
+    <!-- Atmosphere -->
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial
+          BackgroundSource="Digger"
+          TintColor="#041018"
+          TintOpacity="0.82"
+          MaterialOpacity="0.72"/>
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+    <Border IsHitTestVisible="False">
+      <Border.Background>
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+          <GradientStop Color="#332DE2E6" Offset="0"/>
+          <GradientStop Color="#00000000" Offset="0.45"/>
+          <GradientStop Color="#22F5C542" Offset="1"/>
+        </LinearGradientBrush>
+      </Border.Background>
     </Border>
 
-    <!-- Pages -->
-    <Panel Grid.Column="1">
-      <!-- Play -->
-      <DockPanel IsVisible="{Binding IsPlayPage}">
-        <Border DockPanel.Dock="Top" Height="180" Background="#0C1620">
-          <StackPanel VerticalAlignment="Center" Margin="36,0" Spacing="8">
-            <TextBlock Text="AQUATECH" FontSize="42" FontWeight="SemiBold" Foreground="#E6EEF4"/>
-            <TextBlock Text="Minecraft 1.20.1  ·  впиши ник и жми Играть" FontSize="12" Foreground="#8BA0B0"/>
+    <Grid ColumnDefinitions="220,*" Margin="14">
+      <!-- Sidebar glass -->
+      <Border Classes="glass-panel" Margin="0,0,10,0" Padding="0">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top" Margin="18,22,18,8" Spacing="2">
+            <TextBlock Text="AQUATECH" FontSize="20" FontWeight="Bold" Foreground="#F5FBFF"
+                       LetterSpacing="1"/>
+            <TextBlock Text="Launcher" FontSize="11" Foreground="#8BA8BC"/>
           </StackPanel>
-        </Border>
 
-        <ScrollViewer>
-          <StackPanel Margin="36,22,36,20" Spacing="16">
-            <StackPanel Spacing="6">
-              <TextBlock Text="НИКНЕЙМ" FontSize="10" Foreground="#5A7080"/>
-              <TextBox Classes="field" Text="{Binding Username}" Watermark="никнейм"/>
-            </StackPanel>
+          <Border DockPanel.Dock="Top" Background="#332DE2E6" CornerRadius="12" Margin="14,12,14,16" Padding="12,9">
+            <TextBlock Text="AquaTech Ocean" FontSize="12" FontWeight="SemiBold" Foreground="#E8FBFF"/>
+          </Border>
 
-            <Border Background="#101C28" CornerRadius="10" Padding="18,14">
-              <StackPanel Spacing="8">
-                <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="AquaTech Ocean" FontSize="18" FontWeight="SemiBold" Foreground="#E6EEF4"/>
-                  <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
-                    <TextBlock Text="{Binding ServerStatus}" FontSize="11" Foreground="#8BA0B0" VerticalAlignment="Center"/>
-                    <TextBlock Text="●" FontSize="12" Foreground="{Binding ServerDot}" VerticalAlignment="Center"/>
-                  </StackPanel>
-                </Grid>
-                <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="{Binding ServerAddress}" FontSize="13" Foreground="#3DB8C5" VerticalAlignment="Center"/>
-                  <Button Grid.Column="1" Content="Скопировать IP" Command="{Binding CopyIpCommand}"
-                          Background="#0A141C" Foreground="#E6EEF4" Padding="14,8" CornerRadius="8"/>
-                </Grid>
-              </StackPanel>
-            </Border>
-
-            <Grid ColumnDefinitions="*,12,*">
-              <Button Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
-                      IsEnabled="{Binding ActionsEnabled}"
-                      Background="{Binding PlayButtonBg}" Foreground="#061018"
-                      FontWeight="SemiBold" FontSize="16" Height="52" CornerRadius="12"
-                      HorizontalContentAlignment="Center"/>
-              <Button Grid.Column="2" Content="{Binding UpdateButtonText}" Command="{Binding UpdateCommand}"
-                      IsEnabled="{Binding ActionsEnabled}"
-                      Background="#101C28" Foreground="#E6EEF4"
-                      FontWeight="SemiBold" FontSize="14" Height="52" CornerRadius="12"
-                      HorizontalContentAlignment="Center"/>
-            </Grid>
-
-            <StackPanel Spacing="8">
-              <Grid ColumnDefinitions="*,Auto">
-                <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="#8BA0B0"/>
-                <TextBlock Grid.Column="1" Text="{Binding PctText}" FontSize="12" Foreground="#3DB8C5"/>
-              </Grid>
-              <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="6"
-                           Foreground="#3DB8C5" Background="#0A121A"/>
-            </StackPanel>
-
-            <TextBlock Text="Сборка обновится сама при запуске. После старта лаунчер свернётся в панель задач."
-                       FontSize="11" Foreground="#5A7080" TextWrapping="Wrap"/>
+          <StackPanel DockPanel.Dock="Top" Margin="10,0" Spacing="4">
+            <Button Classes="nav" Content="Игра" Command="{Binding ShowPlayCommand}"
+                    Classes.active="{Binding IsPlayPage}"/>
+            <Button Classes="nav" Content="Настройки" Command="{Binding ShowSettingsCommand}"
+                    Classes.active="{Binding IsSettingsPage}"/>
+            <Button Classes="nav" Content="Активность" Command="{Binding ShowLogCommand}"
+                    Classes.active="{Binding IsLogPage}"/>
           </StackPanel>
-        </ScrollViewer>
-      </DockPanel>
 
-      <!-- Settings -->
-      <ScrollViewer IsVisible="{Binding IsSettingsPage}">
-        <StackPanel Margin="36,28" Spacing="16" MaxWidth="720" HorizontalAlignment="Left">
-          <TextBlock Text="Настройки" FontSize="22" FontWeight="SemiBold" Foreground="#E6EEF4"/>
-          <TextBlock Text="Папка игры, память и источник обновлений сборки." FontSize="12" Foreground="#8BA0B0"/>
+          <StackPanel DockPanel.Dock="Bottom" Margin="18,16" Spacing="4" VerticalAlignment="Bottom">
+            <TextBlock Text="{Binding OnlinePlayersText}" FontSize="11" Foreground="#67E8F9"/>
+            <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#6A8496"/>
+            <TextBlock Text="{Binding McLabel}" FontSize="10" Foreground="#6A8496"/>
+          </StackPanel>
+        </DockPanel>
+      </Border>
 
-          <Border Background="#101C28" CornerRadius="10" Padding="24,22">
-            <StackPanel Spacing="14">
-              <StackPanel Spacing="6">
-                <TextBlock Text="ОПЕРАТИВКА" FontSize="10" Foreground="#5A7080"/>
-                <TextBox Classes="field" Text="{Binding RamText}"/>
-              </StackPanel>
-              <StackPanel Spacing="6">
-                <TextBlock Text="ПАПКА ИГРЫ" FontSize="10" Foreground="#5A7080"/>
-                <Grid ColumnDefinitions="*,8,Auto">
-                  <TextBox Classes="field" Text="{Binding GameDir}"/>
-                  <Button Grid.Column="2" Content="⋯" Command="{Binding BrowseGameDirCommand}"
-                          Width="44" Height="40" Background="#0A141C" Foreground="#E6EEF4" CornerRadius="8"/>
-                </Grid>
-              </StackPanel>
-              <StackPanel Spacing="6">
-                <TextBlock Text="URL ОБНОВЛЕНИЙ" FontSize="10" Foreground="#5A7080"/>
-                <TextBox Classes="field" Text="{Binding UpdateUrl}"/>
-              </StackPanel>
+      <!-- Main -->
+      <Panel Grid.Column="1">
+        <!-- Play -->
+        <DockPanel IsVisible="{Binding IsPlayPage}">
+          <Border DockPanel.Dock="Top" Classes="glass-panel" Height="150" Margin="0,0,0,12" Padding="28,0">
+            <StackPanel VerticalAlignment="Center" Spacing="6">
+              <TextBlock Text="AQUATECH" FontSize="40" FontWeight="Bold" Foreground="#F5FBFF"
+                         LetterSpacing="2"/>
+              <TextBlock Text="Minecraft 1.20.1  ·  впиши ник и жми Играть"
+                         FontSize="12" Foreground="#9FB6C9"/>
             </StackPanel>
           </Border>
 
-          <TextBlock Text="Манифест сборки: сайт AquaTech (моды качаются с GitHub Releases)."
-                     FontSize="11" Foreground="#5A7080" TextWrapping="Wrap"/>
-        </StackPanel>
-      </ScrollViewer>
+          <ScrollViewer>
+            <StackPanel Spacing="14">
+              <StackPanel Spacing="6">
+                <TextBlock Text="НИКНЕЙМ" FontSize="10" FontWeight="SemiBold" Foreground="#7A96A8"
+                           LetterSpacing="1"/>
+                <TextBox Classes="field" Text="{Binding Username}" Watermark="никнейм"/>
+              </StackPanel>
 
-      <!-- Log -->
-      <DockPanel IsVisible="{Binding IsLogPage}" Margin="36,28">
-        <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,12">
-          <TextBlock Text="Активность" FontSize="22" FontWeight="SemiBold" Foreground="#E6EEF4"/>
-          <TextBlock Grid.Column="1" Text="лог установки и синхронизации" FontSize="12"
-                     Foreground="#5A7080" VerticalAlignment="Bottom"/>
-        </Grid>
-        <Border Background="#0C1620" BorderBrush="#1A2C3C" BorderThickness="1" CornerRadius="8" Padding="4">
-          <ListBox ItemsSource="{Binding LogLines}" Background="Transparent" BorderThickness="0">
-            <ListBox.ItemTemplate>
-              <DataTemplate x:DataType="vm:LogLine">
-                <StackPanel Orientation="Horizontal" Spacing="8" Margin="8,2">
-                  <TextBlock Text="{Binding Time}" FontFamily="Consolas" FontSize="11" Foreground="#5A7080"/>
-                  <TextBlock Text="{Binding Text}" FontFamily="Consolas" FontSize="11"
-                             Foreground="{Binding Color}" TextWrapping="Wrap"/>
+              <Border Classes="glass-panel" Padding="18,14">
+                <StackPanel Spacing="10">
+                  <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="AquaTech Ocean" FontSize="18" FontWeight="SemiBold" Foreground="#F5FBFF"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                      <TextBlock Text="{Binding ServerStatus}" FontSize="11" Foreground="#9FB6C9" VerticalAlignment="Center"/>
+                      <TextBlock Text="●" FontSize="12" Foreground="{Binding ServerDot}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                  </Grid>
+                  <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{Binding ServerAddress}" FontSize="13" Foreground="#2DE2E6" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Classes="glass" Content="Скопировать IP" Command="{Binding CopyIpCommand}"/>
+                  </Grid>
+                  <TextBlock Text="{Binding TopPlayersText}" FontSize="11" Foreground="#8BA8BC" TextWrapping="Wrap"/>
                 </StackPanel>
-              </DataTemplate>
-            </ListBox.ItemTemplate>
-          </ListBox>
-        </Border>
-      </DockPanel>
-    </Panel>
-  </Grid>
+              </Border>
+
+              <Grid ColumnDefinitions="*,12,*">
+                <Button Classes="play" Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
+                        IsEnabled="{Binding ActionsEnabled}">
+                  <Button.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                      <GradientStop Color="#2DE2E6" Offset="0"/>
+                      <GradientStop Color="#67E8F9" Offset="0.55"/>
+                      <GradientStop Color="#A5F3FC" Offset="1"/>
+                    </LinearGradientBrush>
+                  </Button.Background>
+                </Button>
+                <Button Grid.Column="2" Classes="glass" Content="{Binding UpdateButtonText}"
+                        Command="{Binding UpdateCommand}" IsEnabled="{Binding ActionsEnabled}"
+                        Height="54" FontSize="14" HorizontalContentAlignment="Center"/>
+              </Grid>
+
+              <StackPanel Spacing="8">
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="#9FB6C9"/>
+                  <TextBlock Grid.Column="1" Text="{Binding PctText}" FontSize="12" Foreground="#2DE2E6"/>
+                </Grid>
+                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="7"
+                             Foreground="#2DE2E6" Background="#22000000" CornerRadius="4"/>
+              </StackPanel>
+
+              <TextBlock Text="Сборка и лаунчер обновляются сами. После старта окно свернётся в панель задач."
+                         FontSize="11" Foreground="#6A8496" TextWrapping="Wrap"/>
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
+
+        <!-- Settings -->
+        <ScrollViewer IsVisible="{Binding IsSettingsPage}">
+          <StackPanel Spacing="16" MaxWidth="720" HorizontalAlignment="Left">
+            <TextBlock Text="Настройки" FontSize="24" FontWeight="Bold" Foreground="#F5FBFF"/>
+            <TextBlock Text="Память и папка игры. Обновления сборки вшиты в лаунчер."
+                       FontSize="12" Foreground="#9FB6C9"/>
+
+            <Border Classes="glass-panel" Padding="24,22">
+              <StackPanel Spacing="14">
+                <StackPanel Spacing="6">
+                  <TextBlock Text="ОПЕРАТИВКА" FontSize="10" FontWeight="SemiBold" Foreground="#7A96A8"/>
+                  <TextBox Classes="field" Text="{Binding RamText}"/>
+                </StackPanel>
+                <StackPanel Spacing="6">
+                  <TextBlock Text="ПАПКА ИГРЫ" FontSize="10" FontWeight="SemiBold" Foreground="#7A96A8"/>
+                  <Grid ColumnDefinitions="*,8,Auto">
+                    <TextBox Classes="field" Text="{Binding GameDir}"/>
+                    <Button Grid.Column="2" Classes="glass" Content="⋯" Command="{Binding BrowseGameDirCommand}"
+                            Width="48" Height="44" Padding="0" HorizontalContentAlignment="Center"/>
+                  </Grid>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+
+        <!-- Log -->
+        <DockPanel IsVisible="{Binding IsLogPage}">
+          <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,12">
+            <TextBlock Text="Активность" FontSize="24" FontWeight="Bold" Foreground="#F5FBFF"/>
+            <TextBlock Grid.Column="1" Text="лог установки и синхронизации" FontSize="12"
+                       Foreground="#6A8496" VerticalAlignment="Bottom"/>
+          </Grid>
+          <Border Classes="glass-panel" Padding="6">
+            <ListBox ItemsSource="{Binding LogLines}" Background="Transparent" BorderThickness="0">
+              <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:LogLine">
+                  <StackPanel Orientation="Horizontal" Spacing="8" Margin="8,2">
+                    <TextBlock Text="{Binding Time}" FontFamily="Consolas" FontSize="11" Foreground="#6A8496"/>
+                    <TextBlock Text="{Binding Text}" FontFamily="Consolas" FontSize="11"
+                               Foreground="{Binding Color}" TextWrapping="Wrap"/>
+                  </StackPanel>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </Border>
+        </DockPanel>
+      </Panel>
+    </Grid>
+  </Panel>
 </Window>

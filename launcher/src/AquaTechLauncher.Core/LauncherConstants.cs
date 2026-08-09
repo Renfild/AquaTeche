@@ -2,7 +2,7 @@ namespace AquaTechLauncher.Core;
 
 public static class LauncherConstants
 {
-    public const string Version = "2.9.12";
+    public const string Version = "2.9.14";
     public const string McVersion = "1.20.1";
     public const string ForgeVersion = "47.4.0";
     public const string McpVersion = "20230612.114412";
@@ -12,6 +12,10 @@ public static class LauncherConstants
     public const string ServerHost = "katherine-hydro.tun.ply.gg";
     public const int ServerPort = 31279;
     public const int PackReadyMinJars = 40;
+
+    public const string PortalApiBase = "https://aquatech.santcrail.workers.dev";
+    public const string BootstrapManifestUrl =
+        "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json";
 
     public const string DefaultUpdateUrl =
         "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack";

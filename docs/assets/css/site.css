@@ -108,6 +108,11 @@ button { cursor: pointer; border: 0; background: none; }
   box-shadow: 0 0 10px var(--ok);
 }
 
+.online-pill.is-offline .dot {
+  background: var(--danger);
+  box-shadow: 0 0 10px var(--danger);
+}
+
 .nav-desktop {
   display: none;
   gap: 0.35rem;

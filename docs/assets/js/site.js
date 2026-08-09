@@ -1,7 +1,7 @@
 (() => {
   const IP = "katherine-hydro.tun.ply.gg:31279";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.13/AquaTech.exe";
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.14/AquaTech.exe";
   const CANONICAL = "https://aquatech.santcrail.workers.dev";
   const STORAGE_USER = "aquatech_user";
   const API_BASE = "";
@@ -14,15 +14,6 @@
     { href: "rods.html", label: "Удочки", id: "rods" },
     { href: "top.html", label: "Топы", id: "top" },
     { href: "news.html", label: "Новости", id: "news" },
-  ];
-
-  const DEMO_PLAYERS = [
-    { nick: "WebTest", privilege: "Deluxe", playtime: "128 ч", playtime_hours: 128, coins: 4200, likes: 86, fish: 1840 },
-    { nick: "OceanKing", privilege: "Ultimate", playtime: "210 ч", playtime_hours: 210, coins: 9800, likes: 214, fish: 4021 },
-    { nick: "StarCatcher", privilege: "Premium", playtime: "96 ч", playtime_hours: 96, coins: 2100, likes: 61, fish: 990 },
-    { nick: "HydroForge", privilege: "VIP", playtime: "74 ч", playtime_hours: 74, coins: 900, likes: 33, fish: 640 },
-    { nick: "DepthWalker", privilege: "Игрок", playtime: "58 ч", playtime_hours: 58, coins: 350, likes: 18, fish: 410 },
-    { nick: "Renfild", privilege: "Ultimate", playtime: "301 ч", playtime_hours: 301, coins: 15000, likes: 502, fish: 8120 },
   ];
 
   let apiAvailable = null;
@@ -143,7 +134,7 @@
           <a class="brand" href="index.html"><span class="brand-mark"></span>AquaTech</a>
           <nav class="nav-desktop">${nav}</nav>
           <div class="header-spacer"></div>
-          <div class="online-pill" title="Онлайн на сервере"><span class="dot"></span><span data-online>42</span> онлайн</div>
+          <div class="online-pill" title="Онлайн на сервере"><span class="dot"></span><span data-online">—</span> онлайн</div>
           <div class="header-actions">
             ${
               user
@@ -225,10 +216,30 @@
     document.querySelectorAll("[data-download]").forEach((el) => {
       el.setAttribute("href", DOWNLOAD);
     });
-    const online = Math.floor(28 + Math.random() * 40);
-    document.querySelectorAll("[data-online]").forEach((el) => {
-      el.textContent = String(online);
-    });
+    refreshOnlinePill();
+    setInterval(refreshOnlinePill, 60000);
+  }
+
+  async function refreshOnlinePill() {
+    const pills = document.querySelectorAll("[data-online]");
+    if (!pills.length) return;
+    try {
+      const data = await api("/api/server-status");
+      const n = data.online ? Number(data.players_online || 0) : 0;
+      pills.forEach((el) => {
+        el.textContent = String(n);
+      });
+      document.querySelectorAll(".online-pill").forEach((el) => {
+        el.classList.toggle("is-offline", !data.online);
+        el.title = data.online
+          ? `Онлайн на сервере: ${n}${data.players_max ? " / " + data.players_max : ""}`
+          : "Сервер сейчас недоступен";
+      });
+    } catch {
+      pills.forEach((el) => {
+        el.textContent = "—";
+      });
+    }
   }
 
   function playerRows(players, mode) {
@@ -257,25 +268,10 @@
   }
 
   async function loadPlayers(sort = "likes", q = "") {
-    try {
-      const qs = new URLSearchParams({ sort, limit: "40" });
-      if (q) qs.set("q", q);
-      const data = await api(`/api/players?${qs}`);
-      return data.players || [];
-    } catch {
-      let list = [...DEMO_PLAYERS];
-      if (q) {
-        const qq = q.toLowerCase();
-        list = list.filter((p) => p.nick.toLowerCase().includes(qq));
-      }
-      list.sort((a, b) => {
-        if (sort === "coins") return b.coins - a.coins;
-        if (sort === "fish") return b.fish - a.fish;
-        if (sort === "playtime") return b.playtime_hours - a.playtime_hours;
-        return b.likes - a.likes;
-      });
-      return list;
-    }
+    const qs = new URLSearchParams({ sort, limit: "40" });
+    if (q) qs.set("q", q);
+    const data = await api(`/api/players?${qs}`);
+    return data.players || [];
   }
 
   function initTop() {
@@ -284,8 +280,12 @@
     let mode = "likes";
     const render = async () => {
       root.innerHTML = `<p class="muted-line">Загрузка…</p>`;
-      const players = await loadPlayers(mode === "playtime" ? "playtime" : mode);
-      root.innerHTML = playerRows(players, mode) || `<p class="muted-line">Пока нет игроков в базе.</p>`;
+      try {
+        const players = await loadPlayers(mode === "playtime" ? "playtime" : mode);
+        root.innerHTML = playerRows(players, mode) || `<p class="muted-line">Пока нет игроков в базе.</p>`;
+      } catch {
+        root.innerHTML = `<p class="muted-line">Не удалось загрузить топ. Обнови страницу.</p>`;
+      }
     };
     document.querySelectorAll("[data-top-tab]").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -304,18 +304,22 @@
     let t = 0;
     const draw = async () => {
       list.innerHTML = `<p class="muted-line">Загрузка…</p>`;
-      const players = await loadPlayers("likes", input.value.trim());
-      list.innerHTML =
-        players
-          .map(
-            (p) => `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
+      try {
+        const players = await loadPlayers("likes", input.value.trim());
+        list.innerHTML =
+          players
+            .map(
+              (p) => `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
             <div class="rank">·</div>
             <img src="${skinUrl(p.nick)}" alt="">
             <div class="meta"><strong>${p.nick}</strong><span>${p.privilege || "Игрок"} · ${p.playtime || (p.playtime_hours || 0) + " ч"}</span></div>
             <div class="stat">${p.likes || 0} ❤</div>
           </a>`
-          )
-          .join("") || `<p class="muted-line">Никого не найдено.</p>`;
+            )
+            .join("") || `<p class="muted-line">Никого не найдено.</p>`;
+      } catch {
+        list.innerHTML = `<p class="muted-line">Не удалось загрузить список.</p>`;
+      }
     };
     input.addEventListener("input", () => {
       clearTimeout(t);
@@ -341,21 +345,7 @@
       const data = await api(`/api/profiles/${encodeURIComponent(nick)}`);
       profile = data.profile;
     } catch {
-      const demo = DEMO_PLAYERS.find((p) => p.nick.toLowerCase() === nick.toLowerCase());
-      profile = demo
-        ? {
-            nick: demo.nick,
-            bio: "Профиль временно недоступен.",
-            theme: "ocean",
-            privilege: demo.privilege,
-            coins: demo.coins,
-            likes: demo.likes,
-            fish: demo.fish,
-            playtime: demo.playtime,
-            views: 0,
-            badges: [],
-          }
-        : null;
+      profile = null;
     }
 
     if (!profile) {

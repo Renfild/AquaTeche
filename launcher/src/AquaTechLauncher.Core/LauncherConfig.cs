@@ -39,7 +39,7 @@ public sealed class LauncherConfig
         {
             /* keep defaults */
         }
-        cfg.UpdateUrl = NormalizeUpdateUrl(cfg.UpdateUrl);
+        cfg.UpdateUrl = LauncherConstants.DefaultUpdateUrl;
         if (string.IsNullOrWhiteSpace(cfg.GameDir))
             cfg.GameDir = LauncherConstants.GameDirDefault;
         if (cfg.RamMb < 1024) cfg.RamMb = 4096;
@@ -48,22 +48,16 @@ public sealed class LauncherConfig
 
     public void Save()
     {
-        UpdateUrl = NormalizeUpdateUrl(UpdateUrl);
+        UpdateUrl = LauncherConstants.DefaultUpdateUrl;
         var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(LauncherConstants.ConfigPath, json);
     }
 
     public static string NormalizeUpdateUrl(string? url)
     {
-        var u = (url ?? "").Trim().TrimEnd('/');
-        if (string.IsNullOrWhiteSpace(u))
-            return LauncherConstants.DefaultUpdateUrl;
-        var low = u.ToLowerInvariant();
-        if (low.Contains("tun.ply.gg") || low.Contains("playit") || low.Contains("pages.dev"))
-            return LauncherConstants.DefaultUpdateUrl;
-        if (low.Contains(LauncherConstants.ServerHost.ToLowerInvariant()))
-            return LauncherConstants.DefaultUpdateUrl;
-        return u;
+        // Pack CDN is baked into the launcher; ignore user/config overrides that point at tunnels.
+        _ = url;
+        return LauncherConstants.DefaultUpdateUrl;
     }
 
     public string EffectiveHost =>
