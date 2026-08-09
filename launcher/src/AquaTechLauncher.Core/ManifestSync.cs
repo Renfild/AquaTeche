@@ -29,6 +29,24 @@ public sealed class PackFileEntry
 
 public sealed class ManifestSync
 {
+    /// <summary>True when local file is missing or does not match size/hash rules.</summary>
+    public static bool NeedsDownload(string localPath, PackFileEntry item, bool verifyHash)
+    {
+        if (!File.Exists(localPath))
+            return true;
+        var sameSize = item.Size <= 0 || new FileInfo(localPath).Length == item.Size;
+        if (!sameSize)
+            return true;
+        if (!verifyHash)
+            return false;
+        if (string.IsNullOrEmpty(item.Md5))
+            return false;
+        return !string.Equals(
+            HttpDownload.Md5File(localPath),
+            item.Md5,
+            StringComparison.OrdinalIgnoreCase);
+    }
+
     public async Task<(int Updated, int Failed, int Deleted)> ApplyAsync(
         string gameDir,
         PackManifest manifest,
@@ -47,7 +65,6 @@ public sealed class ManifestSync
         var wanted = new HashSet<string>(
             files.Select(f => f.Path.Replace('\\', '/').TrimStart('/')),
             StringComparer.OrdinalIgnoreCase);
-        var deleted = PurgeExtras(gameDir, wanted, log);
 
         var jobs = new List<PackFileEntry>();
         var checkedN = 0;
@@ -66,23 +83,16 @@ public sealed class ManifestSync
             if (verifyHash && checkedN % 25 == 0)
                 progress?.Invoke(5 + 25.0 * checkedN / files.Count);
 
-            if (File.Exists(local))
-            {
-                var sameSize = item.Size <= 0 || new FileInfo(local).Length == item.Size;
-                if (sameSize && !verifyHash) continue;
-                if (sameSize && !string.IsNullOrEmpty(item.Md5) &&
-                    HttpDownload.Md5File(local) == item.Md5!.ToLowerInvariant())
-                    continue;
-                if (sameSize && string.IsNullOrEmpty(item.Md5) && !verifyHash) continue;
-            }
-            jobs.Add(item);
+            if (NeedsDownload(local, item, verifyHash))
+                jobs.Add(item);
         }
 
         if (jobs.Count == 0)
         {
-            log?.Invoke($"Сборка актуальна ({files.Count} файлов)" + (deleted > 0 ? $", удалено {deleted}" : ""));
+            var deletedOnly = PurgeExtras(gameDir, wanted, log);
+            log?.Invoke($"Сборка актуальна ({files.Count} файлов)" + (deletedOnly > 0 ? $", удалено {deletedOnly}" : ""));
             progress?.Invoke(100);
-            return (0, 0, deleted);
+            return (0, 0, deletedOnly);
         }
 
         log?.Invoke($"Обновляем {jobs.Count}/{files.Count} файлов…");
@@ -114,6 +124,12 @@ public sealed class ManifestSync
             }
         });
         await Task.WhenAll(tasks);
+
+        var deleted = 0;
+        if (failed == 0)
+            deleted = PurgeExtras(gameDir, wanted, log);
+        else
+            log?.Invoke("Purge пропущен — есть ошибки загрузки");
 
         log?.Invoke(failed > 0
             ? $"Синхронизация: {updated} ок, {failed} ошибок" + (deleted > 0 ? $", −{deleted}" : "")
@@ -197,6 +213,12 @@ public sealed class ManifestSync
                 var name = System.IO.Path.GetFileName(file);
                 if (LauncherConstants.SyncKeepNames.Contains(name)) continue;
                 if (wanted.Contains(rel)) continue;
+                // Path-based parked skip (folder or name)
+                if (rel.Contains("_parked", StringComparison.OrdinalIgnoreCase))
+                {
+                    try { File.Delete(file); deleted++; } catch { /* ignore */ }
+                    continue;
+                }
                 try
                 {
                     File.Delete(file);

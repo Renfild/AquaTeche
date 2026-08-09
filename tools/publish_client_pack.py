@@ -3,9 +3,8 @@
 Usage:
   python tools/publish_client_pack.py
 
-Friends get updates from:
-  https://aquatech-7gs.pages.dev/pack/manifest.json
-  (each file URL points at GitHub Release pack-2.9.2)
+Pack version is PACK_TAG below (keep in sync with upload_pack_release.py).
+Source of truth: server/mods + client-only jars from dist/AquaTech-Client (never CurseForge first).
 """
 from __future__ import annotations
 
@@ -15,22 +14,34 @@ import shutil
 import sys
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\xieto\Desktop\AquaTech")
-CF = Path(r"C:\Users\xieto\curseforge\minecraft\Instances\AquaTech")
+ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
-PACK_TAG = "pack-2.9.3"
+SERVER_MODS = ROOT / "server" / "mods"
+PACK_TAG = "pack-2.9.4"
+PACK_VERSION = "2.9.4"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
-SITE_PACK = "https://aquatech-7gs.pages.dev/pack"
-
-SOURCES = [
-    CF,
-    ROOT / "client",
-    ROOT / "dist" / "AquaTech-Client",
-]
+SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
 FOLDERS = ["mods", "config", "kubejs", "resourcepacks"]
-SKIP_NAME_PARTS = ("_disabled", "_parked", ".disabled")
+SKIP_PATH_PARTS = ("_disabled", "_parked", ".disabled", "/players/", "quest_progress")
+# Client-only jars (not on dedicated server) — copy from previous pack or client/ if present
+CLIENT_ONLY_PREFIXES = (
+    "embeddium",
+    "oculus",
+    "entityculling",
+    "dynamic-fps",
+    "immediatelyfast",
+    "betterquestpopup",
+    "certain_questing",
+)
+# Never pull these from client/ — server copy wins (and may differ by patch version)
+SERVER_OWNED_PREFIXES = (
+    "ftb-",
+    "aquatech_ui",
+    "casesmod",
+    "packetfixer",
+)
 
 
 def md5_file(p: Path) -> str:
@@ -42,52 +53,104 @@ def md5_file(p: Path) -> str:
 
 
 def asset_name(rel: str) -> str:
-    """Stable GitHub Release asset name for a pack-relative path."""
     rel = rel.replace("\\", "/").lstrip("/")
     folder = rel.split("/", 1)[0] if "/" in rel else ""
     if folder == "mods":
         name = Path(rel).name
     else:
         name = rel.replace("/", "__")
-    # Spaces break GitHub asset URLs; keep '+' (already used on pack-2.9.2 uploads).
     return name.replace(" ", "_")
 
 
-def pick_source() -> Path:
-    for s in SOURCES:
-        if (s / "mods").is_dir() and any((s / "mods").glob("*.jar")):
-            return s
-    raise SystemExit("No source pack with mods/ found")
+def should_skip(rel: str) -> bool:
+    low = rel.replace("\\", "/").lower()
+    return any(x in low for x in SKIP_PATH_PARTS)
 
 
-def sync_folder(src_root: Path, folder: str) -> None:
-    src = src_root / folder
-    dst = PACK / folder
-    if not src.exists():
-        return
+def sync_config_kube_resources() -> None:
+    """Prefer repo roots, fall back to existing pack."""
+    mapping = {
+        "config": [ROOT / "config", ROOT / "server" / "config", PACK / "config"],
+        "kubejs": [ROOT / "kubejs", ROOT / "server" / "kubejs", PACK / "kubejs"],
+        "resourcepacks": [ROOT / "resourcepacks", PACK / "resourcepacks"],
+    }
+    for folder, cands in mapping.items():
+        src = next((c for c in cands if c.is_dir()), None)
+        dst = PACK / folder
+        if src is None:
+            print(f"skip missing {folder}")
+            continue
+        if dst.exists() and dst.resolve() != src.resolve():
+            shutil.rmtree(dst)
+        if dst.resolve() != src.resolve():
+            shutil.copytree(
+                src,
+                dst,
+                ignore=shutil.ignore_patterns("*.tmp", "*.log", ".git", "__pycache__"),
+            )
+        # Drop player progress / parked
+        for path in list(dst.rglob("*")):
+            if not path.is_file():
+                continue
+            rel = path.relative_to(PACK).as_posix()
+            if should_skip(rel):
+                path.unlink(missing_ok=True)
+        print(f"OK {folder}: {src} -> {dst}")
+
+
+def sync_mods() -> None:
+    dst = PACK / "mods"
     if dst.exists():
         shutil.rmtree(dst)
-    shutil.copytree(
-        src,
-        dst,
-        ignore=shutil.ignore_patterns("*.tmp", "*.log", ".git", "__pycache__"),
-    )
-    if folder == "mods":
-        for jar in list(dst.glob("*.jar")) + list(dst.rglob("*.jar")):
-            name = jar.name.lower()
-            rel = jar.relative_to(dst).as_posix().lower()
-            if any(x in name for x in SKIP_NAME_PARTS) or rel.startswith("disabled/") or "/disabled/" in f"/{rel}":
-                jar.unlink(missing_ok=True)
-        # drop empty disabled dirs
-        for d in sorted(dst.rglob("*"), reverse=True):
-            if d.is_dir():
-                try:
-                    next(d.iterdir())
-                except StopIteration:
-                    d.rmdir()
-                except OSError:
-                    pass
-    print(f"OK {folder}: {src} -> {dst}")
+    dst.mkdir(parents=True)
+
+    if not SERVER_MODS.is_dir():
+        raise SystemExit(f"missing {SERVER_MODS}")
+
+    for jar in SERVER_MODS.glob("*.jar"):
+        if should_skip(jar.name):
+            continue
+        shutil.copy2(jar, dst / jar.name)
+
+    # Client-only from previous pack / client/
+    extras_roots = [PACK.parent / "AquaTech-Client" / "mods", ROOT / "client" / "mods", ROOT / "mods"]
+    # PACK was wiped mods — use client and mods folders
+    for root in (ROOT / "client" / "mods", ROOT / "mods"):
+        if not root.is_dir():
+            continue
+        for jar in root.glob("*.jar"):
+            low = jar.name.lower()
+            if should_skip(low):
+                continue
+            if any(low.startswith(p) or p in low for p in SERVER_OWNED_PREFIXES):
+                continue
+            if "1.20.4" in low:
+                continue
+            if not any(low.startswith(p) or p in low for p in CLIENT_ONLY_PREFIXES):
+                continue
+            # Skip if server already shipped a jar with same mod family prefix
+            family = low.split("-")[0]
+            if any(x.name.lower().startswith(family) for x in dst.glob("*.jar")):
+                continue
+            target = dst / jar.name
+            if not target.exists():
+                shutil.copy2(jar, target)
+                print(f"OK client-only {jar.name}")
+
+    # Force first-party from server (after bump script)
+    for name in ("aquatech_ui-1.0.1.jar", "casesmod-1.0.1.jar", "packetfixer-3.3.2-forge-1.20.1.jar"):
+        cand = SERVER_MODS / name
+        if cand.is_file():
+            shutil.copy2(cand, dst / name)
+            print(f"OK force {name}")
+
+    # Remove parked leftovers
+    for jar in list(dst.rglob("*.jar")):
+        rel = jar.relative_to(PACK).as_posix()
+        if should_skip(rel):
+            jar.unlink(missing_ok=True)
+
+    print(f"OK mods: {len(list(dst.glob('*.jar')))} jars")
 
 
 def write_manifest() -> Path:
@@ -104,6 +167,8 @@ def write_manifest() -> Path:
             if path.stat().st_size <= 0:
                 continue
             rel = path.relative_to(PACK).as_posix()
+            if should_skip(rel):
+                continue
             aname = asset_name(rel)
             files.append(
                 {
@@ -116,7 +181,7 @@ def write_manifest() -> Path:
             )
 
     manifest = {
-        "version": "2.9.3",
+        "version": PACK_VERSION,
         "mc_version": "1.20.1",
         "forge_version": "47.4.0",
         "server_ip": "katherine-hydro.tun.ply.gg",
@@ -133,23 +198,13 @@ def write_manifest() -> Path:
     out2.write_text(text, encoding="utf-8")
     (DOCS_PACK / "manifest.json").write_text(text, encoding="utf-8")
     print(f"OK manifest: {len(files)} files -> {out1}")
-    print(f"OK site manifest -> {DOCS_PACK / 'manifest.json'}")
     return out1
 
 
 def main() -> int:
-    src = pick_source()
-    print(f"Source pack: {src}")
     PACK.mkdir(parents=True, exist_ok=True)
-    for folder in FOLDERS:
-        sync_folder(src, folder)
-    for name in ("aquatech_ui-1.0.0.jar", "casesmod-1.0.0.jar", "packetfixer-3.3.2-forge-1.20.1.jar"):
-        for cand in (ROOT / "server" / "mods" / name, ROOT / "mods" / name, CF / "mods" / name):
-            if cand.exists():
-                shutil.copy2(cand, PACK / "mods" / name)
-                print(f"OK force {name}")
-                break
-    # Repo quest tree wins over CurseForge instance (live FTB was wiped).
+    sync_mods()
+    sync_config_kube_resources()
     repo_ftb = ROOT / "config" / "ftbquests"
     if repo_ftb.is_dir():
         dst_ftb = PACK / "config" / "ftbquests"
@@ -159,10 +214,9 @@ def main() -> int:
         print(f"OK overlay ftbquests from repo -> {dst_ftb}")
     write_manifest()
     print()
-    print("=== Online updates (LoliLand-style) ===")
-    print(f"1) Upload jars: python tools/upload_pack_release.py")
-    print(f"2) Push docs/pack/manifest.json to GitHub (Pages serves {SITE_PACK})")
-    print("3) Friends: launcher DEFAULT CDN is the website — no Playit needed for mods")
+    print(f"=== Pack {PACK_TAG} ===")
+    print("1) python tools/upload_pack_release.py")
+    print("2) git push docs/pack/manifest.json")
     return 0
 
 

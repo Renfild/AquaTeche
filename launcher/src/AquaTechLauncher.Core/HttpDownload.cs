@@ -142,7 +142,7 @@ public static class HttpDownload
         return (body, fromHeader ?? fromJar);
     }
 
-    internal static string? ExtractSessionFromSetCookie(HttpResponseMessage resp)
+    public static string? ExtractSessionFromSetCookie(HttpResponseMessage resp)
     {
         IEnumerable<string>? values = null;
         if (resp.Headers.TryGetValues("Set-Cookie", out var h))

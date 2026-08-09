@@ -42,6 +42,7 @@ public sealed class LauncherConfig
         {
             /* keep defaults */
         }
+        cfg.PortalSession = SessionStore.Unprotect(cfg.PortalSession);
         cfg.UpdateUrl = LauncherConstants.DefaultUpdateUrl;
         if (string.IsNullOrWhiteSpace(cfg.GameDir))
             cfg.GameDir = LauncherConstants.GameDirDefault;
@@ -52,13 +53,22 @@ public sealed class LauncherConfig
     public void Save()
     {
         UpdateUrl = LauncherConstants.DefaultUpdateUrl;
-        var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+        var wire = new LauncherConfig
+        {
+            Username = Username,
+            GameDir = GameDir,
+            RamMb = RamMb,
+            UpdateUrl = UpdateUrl,
+            PortalSession = SessionStore.Protect(PortalSession),
+            ServerHost = ServerHost,
+            ServerPort = ServerPort,
+        };
+        var json = JsonSerializer.Serialize(wire, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(LauncherConstants.ConfigPath, json);
     }
 
     public static string NormalizeUpdateUrl(string? url)
     {
-        // Pack CDN is baked into the launcher; ignore user/config overrides that point at tunnels.
         _ = url;
         return LauncherConstants.DefaultUpdateUrl;
     }

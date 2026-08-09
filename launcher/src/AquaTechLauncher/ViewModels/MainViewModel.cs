@@ -102,6 +102,20 @@ public partial class MainViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    private void Logout()
+    {
+        _cfg.PortalSession = null;
+        _cfg.Save();
+        HttpDownload.SetPortalSession(null);
+        LoginPassword = "";
+        NeedsAuth = true;
+        ShowLoginForm = false;
+        AuthError = "";
+        StatusText = "Вышли из аккаунта";
+        UiLog("Сессия сброшена", "warn");
+    }
+
+    [RelayCommand]
     private void OpenRegister()
     {
         try

@@ -9,7 +9,8 @@ import urllib.error
 import urllib.request
 
 BASE = "https://aquatech.santcrail.workers.dev"
-UA = {"User-Agent": "AquaTechLauncher/2.9.17", "X-AquaTech-Launcher": "1"}
+UA = {"User-Agent": "AquaTechLauncher/2.9.20", "X-AquaTech-Launcher": "1"}
+
 
 
 def post_login(nick: str, password: str) -> tuple[int, dict, str | None]:

@@ -52,6 +52,7 @@ async function handleApi(request, env) {
   if (path === "/api/players" && method === "GET") return playersGet(ctx(request, env));
   if (path === "/api/catalog" && method === "GET") return catalogGet(ctx(request, env));
   if (path === "/api/server-status" && method === "GET") return serverStatusGet(ctx(request, env));
+  // ensure-nick intentionally returns 410 (open signup footgun)
   if (path === "/api/launcher/ensure-nick" && method === "POST") return launcherEnsureNickPost(ctx(request, env));
   if (path === "/api/purchase") {
     if (method === "POST") return purchasePost(ctx(request, env));

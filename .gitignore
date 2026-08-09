@@ -63,6 +63,7 @@ Desktop.ini
 .gh_token
 .cf_token
 .cloudflare_token
+cf_token.txt
 *.token
 secrets.json
 node_modules/

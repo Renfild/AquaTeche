@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaTechLauncher.Core", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaTechLauncher", "src\AquaTechLauncher\AquaTechLauncher.csproj", "{72BDE2BE-3E54-4165-B9B4-13C8FBDD311D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaTechLauncher.Core.Tests", "src\AquaTechLauncher.Core.Tests\AquaTechLauncher.Core.Tests.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{72BDE2BE-3E54-4165-B9B4-13C8FBDD311D}.Release|x64.Build.0 = Release|Any CPU
 		{72BDE2BE-3E54-4165-B9B4-13C8FBDD311D}.Release|x86.ActiveCfg = Release|Any CPU
 		{72BDE2BE-3E54-4165-B9B4-13C8FBDD311D}.Release|x86.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8AAED553-D91B-46D8-8296-548DD2E96E1E} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{72BDE2BE-3E54-4165-B9B4-13C8FBDD311D} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal

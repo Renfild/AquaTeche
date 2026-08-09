@@ -15,6 +15,12 @@ public sealed class BootstrapManifest
 
     [JsonPropertyName("launcher_exe")]
     public string LauncherExe { get; set; } = "AquaTechLauncher.exe";
+
+    [JsonPropertyName("launcher_zip_md5")]
+    public string? LauncherZipMd5 { get; set; }
+
+    [JsonPropertyName("launcher_zip_size")]
+    public long? LauncherZipSize { get; set; }
 }
 
 /// <summary>
@@ -48,7 +54,6 @@ public static class LauncherSelfUpdate
         var root = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AquaTech");
         var appDir = Path.Combine(root, "app");
-        // Only self-replace when we are running from the installed bootstrap app dir.
         var exeDir = Path.GetDirectoryName(Environment.ProcessPath) ?? AppContext.BaseDirectory;
         var installed = PathsEqual(exeDir, appDir)
                         || PathsEqual(exeDir, Path.Combine(appDir, "AquaTechLauncher"));
@@ -63,6 +68,13 @@ public static class LauncherSelfUpdate
         log?.Invoke($"Скачиваем лаунчер v{man.Version}…");
         progress?.Invoke(10);
         await HttpDownload.DownloadAsync(man.LauncherZip, zipPath, ct);
+        progress?.Invoke(55);
+
+        if (!VerifyZip(zipPath, man, out var verifyErr))
+        {
+            try { File.Delete(zipPath); } catch { /* ignore */ }
+            return (false, verifyErr);
+        }
         progress?.Invoke(70);
 
         var stage = Path.Combine(root, "app_new");
@@ -89,6 +101,7 @@ public static class LauncherSelfUpdate
 
         var bat = Path.Combine(root, "apply_update.cmd");
         var pid = Environment.ProcessId;
+        var appOld = Path.Combine(root, "app_old");
         File.WriteAllText(bat, $"""
             @echo off
             :wait
@@ -97,9 +110,18 @@ public static class LauncherSelfUpdate
               timeout /t 1 /nobreak >NUL
               goto wait
             )
-            rmdir /s /q "{appDir}"
+            if exist "{appOld}" rmdir /s /q "{appOld}"
+            if exist "{appDir}" ren "{appDir}" "app_old"
             mkdir "{appDir}"
             xcopy /e /y /q "{src}\*" "{appDir}\"
+            if errorlevel 1 (
+              if exist "{appOld}" (
+                rmdir /s /q "{appDir}"
+                ren "{appOld}" "app"
+              )
+              exit /b 1
+            )
+            if exist "{appOld}" rmdir /s /q "{appOld}"
             rmdir /s /q "{stage}"
             start "" "{Path.Combine(appDir, exeName)}"
             del "%~f0"
@@ -117,7 +139,33 @@ public static class LauncherSelfUpdate
         return (true, man.Version);
     }
 
-    private static bool VersionsEqual(string a, string b) =>
+    public static bool VerifyZip(string zipPath, BootstrapManifest man, out string error)
+    {
+        error = "";
+        if (!File.Exists(zipPath))
+        {
+            error = "Zip обновления не скачался";
+            return false;
+        }
+        var len = new FileInfo(zipPath).Length;
+        if (man.LauncherZipSize is > 0 && len != man.LauncherZipSize.Value)
+        {
+            error = $"Размер zip не совпал ({len} ≠ {man.LauncherZipSize})";
+            return false;
+        }
+        if (!string.IsNullOrWhiteSpace(man.LauncherZipMd5))
+        {
+            var got = HttpDownload.Md5File(zipPath);
+            if (!got.Equals(man.LauncherZipMd5.Trim(), StringComparison.OrdinalIgnoreCase))
+            {
+                error = $"MD5 zip не совпал ({got})";
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static bool VersionsEqual(string a, string b) =>
         string.Equals(a.Trim(), b.Trim(), StringComparison.OrdinalIgnoreCase);
 
     private static bool PathsEqual(string a, string b)

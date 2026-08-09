@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Finish pack-2.9.2 draft: upload missing sanitized assets, then publish."""
+"""Resume pack upload for the draft/latest release matching PACK_TAG from publish_client_pack."""
 from __future__ import annotations
 
 import json
@@ -11,9 +11,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-RELEASE_ID = 367195122
 PACK = ROOT / "dist" / "AquaTech-Client"
 MANIFEST = PACK / "manifest.json"
+
+# Keep in sync with publish_client_pack.PACK_TAG
+PACK_TAG = "pack-2.9.4"
 
 
 def token() -> str:
@@ -34,33 +36,43 @@ def api(method, url, data=None, content_type=None, timeout=900):
         return json.loads(body) if body else {}
 
 
+def find_release():
+    rels = api("GET", f"https://api.github.com/repos/{REPO}/releases?per_page=20")
+    for r in rels:
+        if r.get("tag_name") == PACK_TAG:
+            return r
+    raise SystemExit(f"no release {PACK_TAG} — run upload_pack_release.py first")
+
+
 def main() -> None:
-    # refresh pack without disabled jars + sanitized names
-    import subprocess, sys
+    import subprocess
+    import sys
+
     subprocess.check_call([sys.executable, str(ROOT / "tools" / "publish_client_pack.py")])
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    rel = api("GET", f"https://api.github.com/repos/{REPO}/releases/{RELEASE_ID}")
+    rel = find_release()
+    rid = rel["id"]
     have = {a["name"] for a in rel.get("assets") or []}
-    print("have", len(have), "manifest", len(man["files"]))
+    print("release", PACK_TAG, "id", rid, "have", len(have), "manifest", len(man["files"]))
 
-    upload_url = f"https://uploads.github.com/repos/{REPO}/releases/{RELEASE_ID}/assets"
+    upload_url = f"https://uploads.github.com/repos/{REPO}/releases/{rid}/assets"
     missing = []
     for item in man["files"]:
         aname = item["asset"]
         if aname in have:
             continue
-        local = PACK / item["path"].replace("/", "\\")
-        if not local.is_file():
-            print("SKIP missing local", item["path"])
-            continue
-        missing.append((aname, local))
+        missing.append(item)
 
-    print("to upload", len(missing))
-    for aname, local in missing:
-        print("UPLOAD", aname, f"({local.stat().st_size/1024/1024:.1f} MB)")
-        data = local.read_bytes()
+    print("missing", len(missing))
+    for item in missing:
+        aname = item["asset"]
+        path = PACK / item["path"]
+        if not path.is_file():
+            print("SKIP missing file", path)
+            continue
+        data = path.read_bytes()
         q = urllib.parse.urlencode({"name": aname})
-        for attempt in range(5):
+        for attempt in range(3):
             try:
                 api(
                     "POST",
@@ -68,25 +80,22 @@ def main() -> None:
                     data=data,
                     content_type="application/octet-stream",
                 )
-                print("  OK", aname)
+                print("uploaded", aname)
                 break
-            except urllib.error.HTTPError as e:
-                err = e.read().decode("utf-8", "replace")
-                print("  fail", e.code, err[:200])
-                time.sleep(2 * (attempt + 1))
+            except Exception as e:
+                print("retry", aname, e)
+                time.sleep(2)
         else:
-            raise SystemExit(f"could not upload {aname}")
+            raise SystemExit(f"failed {aname}")
 
-    published = api(
-        "PATCH",
-        f"https://api.github.com/repos/{REPO}/releases/{RELEASE_ID}",
-        data=json.dumps({"draft": False, "make_latest": False}).encode(),
-        content_type="application/json",
-    )
-    print("published", published.get("html_url"))
-    # verify a known jar
-    sample = next(f for f in man["files"] if f["path"].endswith("aquatech_ui-1.0.0.jar"))
-    print("sample url", sample["url"])
+    if rel.get("draft"):
+        api(
+            "PATCH",
+            f"https://api.github.com/repos/{REPO}/releases/{rid}",
+            data=json.dumps({"draft": False}).encode(),
+            content_type="application/json",
+        )
+        print("published", PACK_TAG)
 
 
 if __name__ == "__main__":

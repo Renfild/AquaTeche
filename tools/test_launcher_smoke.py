@@ -1,4 +1,8 @@
-"""Local smoke tests for AquaTech launcher (Forge + sync). Run before sending exe to friends.
+"""Local smoke tests for the LEGACY Python launcher (tools/aquatech_launcher.py).
+
+Prefer C# coverage:
+  dotnet test launcher/src/AquaTechLauncher.Core.Tests
+  python tools/smoke_portal_and_versions.py
 
   python tools/test_launcher_smoke.py
 """
@@ -11,6 +15,8 @@ import sys
 import time
 import urllib.request
 from pathlib import Path
+
+print("NOTE: test_launcher_smoke.py targets legacy aquatech_launcher.py — C# is the shipped client.")
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))

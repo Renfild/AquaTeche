@@ -175,7 +175,9 @@
             <Button Classes="nav" Content="Активность" Command="{Binding ShowLogCommand}" Classes.active="{Binding IsLogPage}"/>
           </StackPanel>
 
-          <StackPanel DockPanel.Dock="Bottom" Margin="18,16" Spacing="4" VerticalAlignment="Bottom">
+          <StackPanel DockPanel.Dock="Bottom" Margin="18,16" Spacing="6" VerticalAlignment="Bottom">
+            <Button Classes="glass" Content="Выйти" Command="{Binding LogoutCommand}"
+                    HorizontalAlignment="Stretch" Padding="12,8"/>
             <TextBlock Text="{Binding OnlinePlayersText}" FontSize="11" Foreground="#06B6D4"/>
             <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#64748B"/>
             <TextBlock Text="{Binding McLabel}" FontSize="10" Foreground="#64748B"/>

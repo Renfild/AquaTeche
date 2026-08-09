@@ -2,6 +2,7 @@
 """Publish LoliLand-style client: AquaTech.exe + AquaTechLauncher.zip."""
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 import urllib.error
@@ -10,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.19"
+TAG = "client-2.9.20"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -25,6 +26,14 @@ def token() -> str:
     if not t:
         sys.exit("missing .gh_token")
     return t
+
+
+def md5_file(p: Path) -> str:
+    h = hashlib.md5()
+    with open(p, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def api(method: str, url: str, data: bytes | None = None, content_type: str | None = None):
@@ -50,26 +59,30 @@ def main() -> None:
         if not f.is_file():
             sys.exit(f"missing {f}")
 
+    zip_path = REL / "AquaTechLauncher.zip"
     man = {
-        "version": "2.9.19",
+        "version": "2.9.20",
         "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
+        "launcher_zip_md5": md5_file(zip_path),
+        "launcher_zip_size": zip_path.stat().st_size,
         "pack_cdn": "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
     }
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## AquaTech Client 2.9.19\n\n"
-        "- Play always MD5-verifies pack files; fail hard if any download fails\n"
-        "- Fixes stale aquatech_ui (same version string, different jar) registry desync\n"
+        "## AquaTech Client 2.9.20\n\n"
+        "- Pack sync: download+verify before purge\n"
+        "- Self-update verifies zip MD5/size; atomic app_old swap\n"
+        "- DPAPI session storage + logout\n"
     )
 
     payload = json.dumps(
         {
             "tag_name": TAG,
             "target_commitish": "main",
-            "name": "AquaTech Client 2.9.19",
+            "name": "AquaTech Client 2.9.20",
             "body": body,
             "draft": True,
             "prerelease": False,
@@ -85,7 +98,7 @@ def main() -> None:
     print("draft", release_id)
 
     for path in FILES:
-        print(f"upload {path.name} ({path.stat().st_size / 1024 / 1024:.2f} MB)вЂ¦")
+        print(f"upload {path.name} ({path.stat().st_size / 1024 / 1024:.2f} MB)…")
         api(
             "POST",
             f"https://uploads.github.com/repos/{REPO}/releases/{release_id}/assets?name={path.name}",
@@ -105,4 +118,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

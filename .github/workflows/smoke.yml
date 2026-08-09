@@ -1,0 +1,27 @@
+name: Smoke
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+      - name: Build launcher
+        run: dotnet build launcher/AquaTechLauncher.sln -c Release
+      - name: Unit tests
+        run: dotnet test launcher/src/AquaTechLauncher.Core.Tests/AquaTechLauncher.Core.Tests.csproj -c Release
+
+  portal-http:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Portal + version smoke
+        run: python tools/smoke_portal_and_versions.py
