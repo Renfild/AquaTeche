@@ -1,8 +1,10 @@
 # Workers Builds / wrangler deploy (reachable *.workers.dev when pages.dev is blocked)
-# Dashboard deploy: npx wrangler deploy -c wrangler.worker.toml
+# CI: .github/workflows/deploy-worker.yml (needs CLOUDFLARE_API_TOKEN secret)
+# Local: python tools/deploy_to_cloudflare.py worker
 name = "aquatech"
 main = "worker/index.js"
 compatibility_date = "2026-08-08"
+account_id = "b855fc404ea390174024f1d249cb1964"
 workers_dev = true
 
 [assets]

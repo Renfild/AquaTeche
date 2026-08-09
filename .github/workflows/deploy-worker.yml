@@ -1,0 +1,44 @@
+name: Deploy Worker
+
+# Portal (docs + Worker API) → aquatech.santcrail.workers.dev on every relevant push.
+# Needs repo secret CLOUDFLARE_API_TOKEN (Workers Edit). One-time:
+#   python tools/set_github_cf_secret.py
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "functions/**"
+      - "worker/**"
+      - "migrations/**"
+      - "wrangler.worker.toml"
+      - "wrangler.toml"
+      - ".github/workflows/deploy-worker.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Cloudflare token secret
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ] || [ "${#TOKEN}" -lt 30 ]; then
+            echo "::error::Missing CLOUDFLARE_API_TOKEN. Run: python tools/set_github_cf_secret.py (with a real .cf_token), then re-run this workflow."
+            exit 1
+          fi
+
+      - name: Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: b855fc404ea390174024f1d249cb1964
+          command: deploy -c wrangler.worker.toml
+
+      - name: Live smoke (strict)
+        env:
+          STRICT_LIVE_DEPLOY: "1"
+        run: python tools/smoke_portal_and_versions.py

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Deploy docs/ portal.
+"""Deploy docs/ portal to Cloudflare.
 
-Pages (preferred): push to main — Cloudflare Pages reads wrangler.toml
-Worker Builds fallback:
-  npx wrangler deploy -c wrangler.worker.toml
+Preferred path: push to main → GitHub Action deploy-worker.yml
+(requires CLOUDFLARE_API_TOKEN secret; one-time: python tools/set_github_cf_secret.py).
+
+Manual:
+  python tools/deploy_to_cloudflare.py worker
 """
 from __future__ import annotations
 
