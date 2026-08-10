@@ -16,13 +16,29 @@ ServerEvents.recipes((event) => {
       C: 'minecraft:copper_ingot',
     }).id('aquatech:bamboo_rod_craft')
 
-    // Simple Humble Rod
+    // Simple Humble Rod (copper ingots, not plates)
     event.remove({ output: 'starcatcher:humble_rod' })
     event.shaped('starcatcher:humble_rod', ['  S', ' PB', 'P  '], {
-      P: 'industrialupgrade:itemplates/copper_plate',
+      P: 'minecraft:copper_ingot',
       B: 'starcatcher:bamboo_rod',
       S: 'minecraft:string',
     }).id('aquatech:humble_rod_craft')
+
+    // Fish-only: Bone Rod
+    event.remove({ output: 'starcatcher:boner_rod' })
+    event.shaped('starcatcher:boner_rod', [' BB', ' SB', 'S  '], {
+      B: 'minecraft:bone',
+      S: 'minecraft:string',
+    }).id('aquatech:boner_rod_craft')
+
+    // Fish-only: Sky Rod
+    event.remove({ output: 'starcatcher:sky_rod' })
+    event.shaped('starcatcher:sky_rod', [' PF', ' SG', 'S  '], {
+      P: 'minecraft:phantom_membrane',
+      F: 'minecraft:feather',
+      G: 'minecraft:gold_ingot',
+      S: 'minecraft:string',
+    }).id('aquatech:sky_rod_craft')
 
     // Good Old Rod
     event.remove({ output: 'starcatcher:good_old_rod' })

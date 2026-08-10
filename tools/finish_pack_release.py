@@ -15,7 +15,7 @@ PACK = ROOT / "dist" / "AquaTech-Client"
 MANIFEST = PACK / "manifest.json"
 
 # Keep in sync with publish_client_pack.PACK_TAG
-PACK_TAG = "pack-2.9.5"
+PACK_TAG = "pack-2.9.6"
 
 
 def token() -> str:

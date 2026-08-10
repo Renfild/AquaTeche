@@ -19,6 +19,14 @@ $kubeTargets = @(
   "$root\dist\AquaTech-Client\kubejs",
   "$cf\kubejs"
 )
+# Live Mohist host (Lodestone) — must stay in sync with pack kubejs
+$lodestoneKube = Get-ChildItem "$env:USERPROFILE\.lodestone\instances" -Directory -EA SilentlyContinue |
+  Where-Object { $_.Name -like 'AquaTech*' } |
+  Sort-Object LastWriteTime -Descending |
+  Select-Object -First 1
+if ($lodestoneKube) {
+  $kubeTargets += (Join-Path $lodestoneKube.FullName "kubejs")
+}
 
 $clientOnlyMods = @(
   "$root\client\mods",
@@ -100,12 +108,18 @@ $probe = Resolve-Jar @(
   "$root\client\mods\ProbeJSLegacy-1.20.1-6.2.0.jar"
 )
 $aquatech = Resolve-Jar @(
+  "$root\server\mods\aquatech_ui-1.0.1.jar",
+  "$root\mods\aquatech-ui\build\libs\aquatech_ui-1.0.1.jar",
+  "$root\mods\aquatech_ui-1.0.1.jar",
   "$root\mods\aquatech-ui\build\libs\aquatech_ui-1.0.0.jar",
   "$root\mods\aquatech_ui-1.0.0.jar",
   "$root\server\mods\aquatech_ui-1.0.0.jar"
 )
 
 $casesmod = Resolve-Jar @(
+  "$root\server\mods\casesmod-1.0.1.jar",
+  "$root\mods\casesmod\build\libs\casesmod-1.0.1.jar",
+  "$root\mods\casesmod-1.0.1.jar",
   "$root\mods\casesmod\build\libs\casesmod-1.0.0.jar",
   "$root\mods\casesmod-1.0.0.jar",
   "$root\server\mods\casesmod-1.0.0.jar"

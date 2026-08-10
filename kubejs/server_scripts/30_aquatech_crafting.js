@@ -120,8 +120,14 @@ ServerEvents.recipes((event) => {
     C: 'industrialupgrade:crafting_elements/crafting_273_element',
   }).id('aquatech:rate_x16')
 
-  // x32 / x64 — ONLY 9×9 (ExtendedCrafting). No vanilla workbench crafts.
-  // event.remove(output) above already stripped any 3×3; re-add 9×9 only.
+  // x32 / x64 — ONLY Avaritia Extreme Crafting Table (9×9). No vanilla 3×3.
+  event.remove({ id: 'aquatech:rate_x32' })
+  event.remove({ id: 'aquatech:rate_x64' })
+  event.remove({ id: 'aquatech:rate_x32_extendedcrafting' })
+  event.remove({ id: 'aquatech:rate_x64_extendedcrafting' })
+  event.remove({ id: 'aquatech:rate_x32_extreme' })
+  event.remove({ id: 'aquatech:rate_x64_extreme' })
+
   let rateX32Pattern = [
     ' CCCCCCC ',
     'CGGGGGGGC',
@@ -160,25 +166,26 @@ ServerEvents.recipes((event) => {
     Q: { item: 'industrialupgrade:asteroidore/asteroid_adamantium_ore' },
   }
 
-  if (Platform.isLoaded('extendedcrafting')) {
-    // tier 4 = Ultimate 9×9 only (without tier JEI/tables may treat it as basic)
+  if (Platform.isLoaded('avaritia')) {
     event.custom({
-      type: 'extendedcrafting:shaped_table',
+      type: 'avaritia:shaped_table',
       tier: 4,
+      category: 'misc',
       pattern: rateX32Pattern,
       key: rateX32Key,
       result: { item: 'aquatech_ui:rate_x32', count: 1 },
-    }).id('aquatech:rate_x32_extendedcrafting')
+    }).id('aquatech:rate_x32_extreme')
 
     event.custom({
-      type: 'extendedcrafting:shaped_table',
+      type: 'avaritia:shaped_table',
       tier: 4,
+      category: 'misc',
       pattern: rateX64Pattern,
       key: rateX64Key,
       result: { item: 'aquatech_ui:rate_x64', count: 1 },
-    }).id('aquatech:rate_x64_extendedcrafting')
+    }).id('aquatech:rate_x64_extreme')
   } else {
-    console.log('[AquaTech] extendedcrafting missing — rate_x32/x64 uncraftable')
+    console.log('[AquaTech] avaritia missing — rate_x32/x64 uncraftable')
   }
 
   // Keep Re-Avaritia's own Extreme Table recipe (7×7 tier-3) — do not replace with a cheap 3×3.
