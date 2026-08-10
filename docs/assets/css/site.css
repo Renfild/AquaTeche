@@ -447,7 +447,7 @@ button:focus-visible,
   position: absolute;
   left: -10%;
   right: -10%;
-  bottom: 28%;
+  bottom: 14%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(126, 233, 242, 0.35), transparent);
   box-shadow: 0 0 40px 8px rgba(34, 211, 238, 0.12);
@@ -498,7 +498,7 @@ button:focus-visible,
 }
 
 .hero-inner {
-  padding: 7.5rem 0 4.25rem;
+  padding: 7.5rem 0 7rem;
 }
 
 .eyebrow {
@@ -528,8 +528,9 @@ button:focus-visible,
   max-width: 34rem;
   color: #c5d8e6;
   font-size: 1.1rem;
-  margin: 0 0 1.75rem;
-  line-height: 1.55;
+  margin: 0 0 2.1rem;
+  line-height: 1.6;
+  padding-bottom: 0.35rem;
 }
 
 .hero-actions {

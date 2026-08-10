@@ -17,7 +17,7 @@ SHELL = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260810d" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260810e" />
 </head>
 <body data-page="{page}">
   <a class="skip-link" href="#main">К содержимому</a>
