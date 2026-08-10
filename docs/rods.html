@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Удочки StarCatcher · AquaTech</title>
-  <meta name="description" content="Прогрессия удочек StarCatcher на AquaTech." />
+  <title>Удочки и лут · AquaTech</title>
+  <meta name="description" content="Шансы дропа ресурсных удочек StarCatcher на AquaTech." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260810f" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260810g" />
 </head>
 <body data-page="rods">
   <a class="skip-link" href="#main">К содержимому</a>
@@ -19,42 +19,357 @@
     <div class="container">
       <div class="eyebrow">StarCatcher</div>
       <h1>Удочки и лут</h1>
-      <p>Ванильный улов выключен. Каждая удочка крутит свой пул ресурсов AquaTech.</p>
+      <p>Ванильный улов выключен. Ресурсные удочки крутят пулы AquaTech; множители ×2…×64 умножают количество.</p>
       <div class="banner" style="background:radial-gradient(circle at 30% 40%, rgba(245,197,66,.3), transparent 35%), linear-gradient(145deg,#164e63,#0f766e,#083344)"></div>
     </div>
   </section>
-  <section class="section" style="padding-top:1rem">
-    <div class="container rod-grid">
-      <div class="card">
-        <div class="rod-tier">T1</div>
-        <h3 style="margin:.35rem 0">Bamboo Rod</h3>
-        <p style="margin:0;color:var(--muted)">Старт: булыжник, земля, саженцы, медь.</p>
-      </div>
-      <div class="card">
-        <div class="rod-tier">T2</div>
-        <h3 style="margin:.35rem 0">Humble Rod</h3>
-        <p style="margin:0;color:var(--muted)">Медь, олово, железо, уголь, титан.</p>
-      </div>
-      <div class="card">
-        <div class="rod-tier">T3</div>
-        <h3 style="margin:.35rem 0">Good Old Rod</h3>
-        <p style="margin:0;color:var(--muted)">Железо, редстоун, лазурит, редкие руды IU.</p>
-      </div>
-      <div class="card">
-        <div class="rod-tier">T4</div>
-        <h3 style="margin:.35rem 0">Fine Rod</h3>
-        <p style="margin:0;color:var(--muted)">Золото, алмазы, продвинутые руды.</p>
-      </div>
-      <div class="card">
-        <div class="rod-tier">T5</div>
-        <h3 style="margin:.35rem 0">Excellent Rod</h3>
-        <p style="margin:0;color:var(--muted)">Плотные руды и индустриальный лут.</p>
-      </div>
-      <div class="card">
-        <div class="rod-tier">T6+</div>
-        <h3 style="margin:.35rem 0">Легендарные</h3>
-        <p style="margin:0;color:var(--muted)">Верхние тиры StarCatcher с самым жирным пулом.</p>
-      </div>
+
+  <section class="section section-tight">
+    <div class="container">
+      <h2 class="loot-section-title">Как считается улов</h2>
+      <ul class="loot-rules">
+        <li>Каждый предмет в пуле сначала кидает свой шанс.</li>
+        <li>Из успешно прошедших случайно оставляют 1–3 стака (у T1 доп. пула — 1–2).</li>
+        <li>Кол-во в стаке — диапазон из таблицы; множитель удочки его умножает.</li>
+        <li>Avaritia / inferno / crystal_* из улова вырезаны.</li>
+        <li>Костяная и небесная — только рыба StarCatcher, без ресурсного пула.</li>
+      </ul>
+      <nav class="loot-jump" aria-label="Тиры удочек">
+        <a href="#t1">T1</a><a href="#t2">T2</a><a href="#t3">T3</a><a href="#t4">T4</a>
+        <a href="#t5">T5</a><a href="#t6">T6</a><a href="#t7">T7</a><a href="#t8">T8</a>
+        <a href="#t9">T9</a><a href="#t10">T10</a><a href="#t11">T11</a><a href="#t12">T12</a>
+        <a href="#t13">T13</a><a href="#fish">Рыба</a><a href="#treasure">Treasure</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container loot-stack">
+      <article class="loot-block" id="t1">
+        <header class="loot-head">
+          <div class="rod-tier">T1</div>
+          <h2>Бамбуковая / ванильная</h2>
+          <p>Сначала один гарантированный дроп по весам, потом доп. пул (из прошедших — 1–2 стака).</p>
+        </header>
+        <h3 class="loot-sub">Гарантия (один из)</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>18%</td><td>Булыжник</td><td>2–4</td></tr>
+            <tr><td>16%</td><td>Земля</td><td>2–4</td></tr>
+            <tr><td>14%</td><td>Глина</td><td>2–4</td></tr>
+            <tr><td>10%</td><td>Саженец дуба</td><td>1–2</td></tr>
+            <tr><td>10%</td><td>Резиновый саженец</td><td>1</td></tr>
+            <tr><td>10%</td><td>Гравий</td><td>2–3</td></tr>
+            <tr><td>10%</td><td>Песок</td><td>2–3</td></tr>
+            <tr><td>12%</td><td>Саженец берёзы</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="loot-sub">Доп. пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>50%</td><td>Булыжник</td><td>1–3</td></tr>
+            <tr><td>45%</td><td>Земля</td><td>1–3</td></tr>
+            <tr><td>45%</td><td>Глина</td><td>1–3</td></tr>
+            <tr><td>35%</td><td>Саженец дуба</td><td>1</td></tr>
+            <tr><td>25%</td><td>Саженец берёзы</td><td>1</td></tr>
+            <tr><td>35%</td><td>Резиновый саженец</td><td>1</td></tr>
+            <tr><td>30%</td><td>Сырой латекс</td><td>1–2</td></tr>
+            <tr><td>25%</td><td>Необработанный торф</td><td>1</td></tr>
+            <tr><td>40%</td><td>Гравий</td><td>1–2</td></tr>
+            <tr><td>35%</td><td>Песок</td><td>1–2</td></tr>
+            <tr><td>40%</td><td>Медная руда</td><td>1</td></tr>
+            <tr><td>30%</td><td>Оловянная руда</td><td>1</td></tr>
+            <tr><td>22%</td><td>Титановая руда</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t2">
+        <header class="loot-head">
+          <div class="rod-tier">T2</div>
+          <h2>Скромная</h2>
+          <p>Из прошедших шансов берут 1–3 стака.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>45%</td><td>Булыжник</td><td>1–2</td></tr>
+            <tr><td>35%</td><td>Глина</td><td>1–2</td></tr>
+            <tr><td>65%</td><td>Медная руда</td><td>1–2</td></tr>
+            <tr><td>50%</td><td>Оловянная руда</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Железная руда</td><td>1–2</td></tr>
+            <tr><td>40%</td><td>Угольная руда</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Титановая руда</td><td>1–2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t3">
+        <header class="loot-head">
+          <div class="rod-tier">T3</div>
+          <h2>Старая добрая</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>55%</td><td>Железная руда</td><td>1–2</td></tr>
+            <tr><td>50%</td><td>Редстоуновая руда</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Лазуритовая руда</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Оловянная руда</td><td>1–2</td></tr>
+            <tr><td>40%</td><td>Стронций</td><td>1</td></tr>
+            <tr><td>40%</td><td>Иттрий</td><td>1</td></tr>
+            <tr><td>35%</td><td>Таллий</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t4">
+        <header class="loot-head">
+          <div class="rod-tier">T4</div>
+          <h2>Натуралиста</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>55%</td><td>Шпинель</td><td>1–2</td></tr>
+            <tr><td>50%</td><td>Барий</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Оловянная руда</td><td>1–2</td></tr>
+            <tr><td>40%</td><td>Железная руда</td><td>1–2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t5">
+        <header class="loot-head">
+          <div class="rod-tier">T5</div>
+          <h2>Слизневая</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>55%</td><td>Шпинель</td><td>1–2</td></tr>
+            <tr><td>50%</td><td>Барий</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Полоний</td><td>1–2</td></tr>
+            <tr><td>40%</td><td>Железная руда</td><td>1–2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t6">
+        <header class="loot-head">
+          <div class="rod-tier">T6</div>
+          <h2>Ледяная</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>50%</td><td>Алюминий</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Серебро</td><td>1</td></tr>
+            <tr><td>45%</td><td>Цинк</td><td>1</td></tr>
+            <tr><td>40%</td><td>Железная руда</td><td>1–2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t7">
+        <header class="loot-head">
+          <div class="rod-tier">T7</div>
+          <h2>Ловец Звёзд</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>50%</td><td>Золотая руда</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Лазурит</td><td>2–5</td></tr>
+            <tr><td>35%</td><td>Лазуритовая руда</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Вольфрам</td><td>1</td></tr>
+            <tr><td>45%</td><td>Хром</td><td>1</td></tr>
+            <tr><td>40%</td><td>Сапфир</td><td>1</td></tr>
+            <tr><td>40%</td><td>Топаз</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t8">
+        <header class="loot-head">
+          <div class="rod-tier">T8</div>
+          <h2>Лазурный кристалл</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>55%</td><td>Лазурит</td><td>3–7</td></tr>
+            <tr><td>40%</td><td>Лазуритовая руда</td><td>1–2</td></tr>
+            <tr><td>55%</td><td>Аметист</td><td>2–4</td></tr>
+            <tr><td>50%</td><td>Сапфир</td><td>1–2</td></tr>
+            <tr><td>50%</td><td>Топаз</td><td>1–2</td></tr>
+            <tr><td>40%</td><td>Руда сапфира</td><td>1</td></tr>
+            <tr><td>40%</td><td>Кристалл</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t9">
+        <header class="loot-head">
+          <div class="rod-tier">T9</div>
+          <h2>Акулий клык</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>50%</td><td>Титан</td><td>1</td></tr>
+            <tr><td>45%</td><td>Кобальт</td><td>1</td></tr>
+            <tr><td>45%</td><td>Марганец</td><td>1</td></tr>
+            <tr><td>45%</td><td>Никель</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t10">
+        <header class="loot-head">
+          <div class="rod-tier">T10</div>
+          <h2>Обсидиановая</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>55%</td><td>Алмаз</td><td>1</td></tr>
+            <tr><td>55%</td><td>Обсидиан</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Титан</td><td>1</td></tr>
+            <tr><td>40%</td><td>Нержавеющая сталь</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t11">
+        <header class="loot-head">
+          <div class="rod-tier">T11</div>
+          <h2>Светящаяся ягода</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>55%</td><td>Осколок призмарина</td><td>2–4</td></tr>
+            <tr><td>50%</td><td>Кристаллы призмарина</td><td>1–2</td></tr>
+            <tr><td>40%</td><td>Платина</td><td>1</td></tr>
+            <tr><td>20%</td><td>Сердце моря</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t12">
+        <header class="loot-head">
+          <div class="rod-tier">T12</div>
+          <h2>Магматическая</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>55%</td><td>Кварц</td><td>2–4</td></tr>
+            <tr><td>50%</td><td>Дроблёный уран</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Незеритовый лом</td><td>1</td></tr>
+            <tr><td>40%</td><td>Инконель</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="loot-block" id="t13">
+        <header class="loot-head">
+          <div class="rod-tier">T13</div>
+          <h2>Альфа</h2>
+          <p>1–3 стака из прошедших.</p>
+        </header>
+        <h3 class="loot-sub">Пул</h3>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>50%</td><td>Иридий</td><td>1</td></tr>
+            <tr><td>50%</td><td>Осмий</td><td>1</td></tr>
+            <tr><td>40%</td><td>Полоний</td><td>1</td></tr>
+            <tr><td>40%</td><td>Осмиридий</td><td>1</td></tr>
+            <tr><td>30%</td><td>Адамантиевая руда</td><td>1</td></tr>
+            <tr><td>20%</td><td>Звезда Незера</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="loot-block" id="fish">
+        <header class="loot-head">
+          <div class="rod-tier">Рыба</div>
+          <h2>Костяная и небесная</h2>
+          <p>Ресурсный пул AquaTech не крутится — улов как у StarCatcher по умолчанию (рыба).</p>
+        </header>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Удочка</th><th>Поведение</th></tr></thead>
+            <tbody>
+              <tr><td>Костяная</td><td>Рыба StarCatcher</td></tr>
+              <tr><td>Небесная</td><td>Рыба StarCatcher</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="loot-block" id="treasure">
+        <header class="loot-head">
+          <div class="rod-tier">Бонус</div>
+          <h2>Treasure поверх улова</h2>
+          <p>Взвешенный бросок: perfect reel (quality ≥ 90) — 35%; навык rare loot / шторм Horizon; полная луна — 18%.</p>
+        </header>
+        <div class="loot-table-wrap">
+          <table class="loot-table">
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
+            <tbody>
+            <tr><td>35%</td><td>Осколок призмарина</td><td>1–2</td></tr>
+            <tr><td>20%</td><td>Кристаллы призмарина</td><td>1–2</td></tr>
+            <tr><td>15%</td><td>Золотая руда</td><td>1</td></tr>
+            <tr><td>12%</td><td>Изумруд</td><td>1</td></tr>
+            <tr><td>10%</td><td>Алмаз</td><td>1</td></tr>
+            <tr><td>5%</td><td>Раковина наутилуса</td><td>1</td></tr>
+            <tr><td>3%</td><td>Сердце моря</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
     </div>
   </section>
 
