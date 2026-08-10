@@ -1,26 +1,17 @@
-# AquaTech plugins — что было сломано (2026-08-07)
+﻿# AquaTech plugins — FAWE / WorldEdit (2026-08-10)
 
-## Причины
-1. FancyNpcs-2.0.11 — Paper-plugin (`PluginMeta`). На этом Mohist класса нет → плагин не грузится.
-   NPC делай через мод Easy NPC (уже в mods/).
-2. Стоял обычный WorldEdit 7.2.15 — на Mohist падает PaperweightAdapter → // команды мёртвые.
-   WorldGuard без нормального WorldEdit тоже страдает.
-3. FAWE 2.11.x требует Java 21, сервер на Java 17 → FAWE лежал в disabled.
-4. ViaVersion / SkinsRestorer были в plugins/disabled/.
+## /wand ошибка BlockTypes + TypeProperty
+На Mohist + модах FAWE 2.8.3 падает при инициализации BlockTypes:
+  IllegalArgumentException: WorldEdit needs an update to support TypeProperty
+После этого любой //wand / selection даёт NoClassDefFoundError: BlockTypes.
 
-## Что сделано
-- FancyNpcs → plugins/disabled/ (несовместим)
-- worldedit-bukkit → disabled
-- Установлен FastAsyncWorldEdit 2.8.3 (Java 17 + 1.20.1, provides WorldEdit)
-- Восстановлены ViaVersion.jar и SkinsRestorer.jar
-- DiscordSRV оставлен в disabled (нужен токен бота в конфиге)
+Фикс: bytecode-патч PaperweightAdapter$1 (tools/patch_fawe_typeproperty.py) —
+неизвестные property (TypeProperty) мапятся как IntegerProperty вместо throw.
+Патченый jar: plugins/FastAsyncWorldEdit.jar
+Бэкап до патча: FastAsyncWorldEdit.jar.pre-typeproperty.bak
 
-## После фикса
-Перезапусти сервер. В логе жди:
-  Enabling FastAsyncWorldEdit v2.8.3
-  Enabling WorldGuard ...
-  Enabling ViaVersion ...
-  Enabling SkinsRestorer ...
-НЕ должно быть: Could not load FancyNpcs / PluginMeta
+После замены jar — полный рестарт Mohist в Lodestone.
 
-Проверка в игре: /plugins  и  //wand (нужны права)
+## KubeJS ForgeEvents / empty recipe
+40_aquatech_fishing_drops.js — stub (loot в aquatech_ui), ForgeEvents только в startup_scripts.
+Рецепты с пустым result — Item.exists + без NBT в Item.of для лодки.

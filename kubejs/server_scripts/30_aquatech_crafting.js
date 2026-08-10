@@ -57,25 +57,14 @@ ServerEvents.recipes((event) => {
   }
 
   // ---------- Kickstarter boat ----------
-  event.shaped(
-    Item.of('minecraft:oak_chest_boat', {
-      display: {
-        Name: '{"text":"Лодка Кикстартера","color":"aqua","italic":false,"bold":true}',
-        Lore: [
-          '{"text":"Твой первый корабль после Катастрофы","color":"gray","italic":false}',
-          '{"text":"Лови дерево, камень и обломки удочкой","color":"dark_aqua","italic":false}',
-        ],
-      },
-    }),
-    ['PCP', 'PFP', 'KSK'],
-    {
-      P: 'minecraft:oak_planks',
-      C: 'minecraft:chest',
-      F: 'starcatcher:humble_rod',
-      K: 'minecraft:kelp',
-      S: 'minecraft:string',
-    }
-  ).id('aquatech:kickstarter_boat')
+  // Plain item — NBT display names break Item.of on some KubeJS/Rhino builds (empty result).
+  event.shaped('minecraft:oak_chest_boat', ['PCP', 'PFP', 'KSK'], {
+    P: 'minecraft:oak_planks',
+    C: 'minecraft:chest',
+    F: 'starcatcher:humble_rod',
+    K: 'minecraft:kelp',
+    S: 'minecraft:string',
+  }).id('aquatech:kickstarter_boat')
 
   // ---------- StarCatcher rods ----------
   // Full progression lives in 20_aquatech_rod_crafts.js (remove+chain).
@@ -242,10 +231,12 @@ ServerEvents.recipes((event) => {
   }).id('aquatech:seabed_dredger')
 
   event.remove({ id: 'aquatech_ui:kelp_bio_pellet' })
-  event.shaped(Item.of('aquatech_ui:kelp_bio_pellet', 4), ['KKK', 'KRK', 'KKK'], {
-    K: 'minecraft:dried_kelp_block',
-    R: 'minecraft:redstone_block',
-  }).id('aquatech:kelp_bio_pellet')
+  if (Item.exists('aquatech_ui:kelp_bio_pellet')) {
+    event.shaped(Item.of('aquatech_ui:kelp_bio_pellet', 4), ['KKK', 'KRK', 'KKK'], {
+      K: 'minecraft:dried_kelp_block',
+      R: 'minecraft:redstone_block',
+    }).id('aquatech:kelp_bio_pellet')
+  }
 
   // hydro_reactor removed from ModBlocks — do not craft dead IDs
   event.remove({ id: 'aquatech:hydro_reactor' })
@@ -254,14 +245,16 @@ ServerEvents.recipes((event) => {
   event.remove({ id: 'aquatech_ui:double_hook_upgrade' })
   event.remove({ output: 'aquatech_ui:double_hook_upgrade' })
 
-  event.shaped('aquatech_ui:ocean_altar', ['EHE', 'PCP', 'ONO'], {
-    E: 'minecraft:echo_shard',
-    H: 'minecraft:heart_of_the_sea',
-    P: 'minecraft:prismarine_shard',
-    C: 'minecraft:crying_obsidian',
-    O: 'minecraft:obsidian',
-    N: 'minecraft:nether_star',
-  }).id('aquatech:ocean_altar')
+  if (Item.exists('aquatech_ui:ocean_altar')) {
+    event.shaped('aquatech_ui:ocean_altar', ['EHE', 'PCP', 'ONO'], {
+      E: 'minecraft:echo_shard',
+      H: 'minecraft:heart_of_the_sea',
+      P: 'minecraft:prismarine_shard',
+      C: 'minecraft:crying_obsidian',
+      O: 'minecraft:obsidian',
+      N: 'minecraft:nether_star',
+    }).id('aquatech:ocean_altar')
+  }
 
   event.remove({ id: 'aquatech:ocean_guide_book' })
   event.remove({ output: 'aquatech_ui:ocean_guide_book' })
