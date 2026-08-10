@@ -2,13 +2,15 @@
   const IP = "katherine-hydro.tun.ply.gg:31279";
   const DOWNLOAD =
     "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.20/AquaTech.exe";
+  /* portal ui build: nav-cta + online nowrap */
   const CANONICAL = "https://aquatech.santcrail.workers.dev";
   const STORAGE_USER = "aquatech_user";
+  const STORAGE_SOUND = "aquatech_sound";
   const API_BASE = "";
 
   const NAV = [
     { href: "index.html", label: "Главная", id: "home" },
-    { href: "start.html", label: "Начать игру", id: "start" },
+    { href: "start.html", label: "Начать игру", id: "start", cta: true },
     { href: "store.html", label: "Магазин", id: "store" },
     { href: "cases.html", label: "Кейсы", id: "cases" },
     { href: "rods.html", label: "Удочки", id: "rods" },
@@ -16,7 +18,40 @@
     { href: "news.html", label: "Новости", id: "news" },
   ];
 
+  const COPY_FIELDS = [
+    { key: "hero_eyebrow", label: "Hero · eyebrow", long: false },
+    { key: "hero_title", label: "Hero · заголовок", long: false },
+    { key: "hero_lead", label: "Hero · текст", long: true },
+    { key: "features_title", label: "Секция · заголовок", long: false },
+    { key: "features_lead", label: "Секция · подзаголовок", long: false },
+    { key: "join_title", label: "Join · заголовок", long: false },
+    { key: "join_body", label: "Join · текст", long: true },
+    { key: "footer_blurb", label: "Футер", long: true },
+    { key: "news_page_lead", label: "Новости · lead", long: false },
+  ];
+
+  const FALLBACK_NEWS = [
+    {
+      title: "Лаунчер 2.9.20",
+      body: "Полноэкранный вход, палитра v2, анимации кнопок и мягкие звуки клика.",
+      published_at: "2026-08-08",
+    },
+    {
+      title: "Подключение к серверу",
+      body: "Заходи по IP с сайта. Отдельный туннель для модов больше не нужен.",
+      published_at: "2026-08-01",
+    },
+    {
+      title: "Авторыбалка + StarCatcher",
+      body: "Удочки с кастомным лутом и авторыбалкой на сервере.",
+      published_at: "2026-07-15",
+    },
+  ];
+
   let apiAvailable = null;
+  let audioCtx = null;
+  let soundOn = localStorage.getItem(STORAGE_SOUND) !== "0";
+  let reduceMotion = false;
 
   function $(sel, root = document) {
     return root.querySelector(sel);
@@ -53,8 +88,154 @@
     }
     el.textContent = msg;
     el.classList.add("show");
+    playTone("ok");
     clearTimeout(toast._t);
     toast._t = setTimeout(() => el.classList.remove("show"), 2600);
+  }
+
+  function ensureAudio() {
+    if (!soundOn || reduceMotion) return null;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!audioCtx) audioCtx = new AC();
+    if (audioCtx.state === "suspended") audioCtx.resume().catch(() => {});
+    return audioCtx;
+  }
+
+  function playTone(kind = "click") {
+    const ctx = ensureAudio();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    if (kind === "hover") {
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(660, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.015, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
+      osc.start(now);
+      osc.stop(now + 0.08);
+      return;
+    }
+    if (kind === "ok") {
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(520, now);
+      osc.frequency.exponentialRampToValueAtTime(780, now + 0.08);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.04, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+      osc.start(now);
+      osc.stop(now + 0.2);
+      return;
+    }
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(420, now);
+    osc.frequency.exponentialRampToValueAtTime(280, now + 0.06);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.035, now + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+    osc.start(now);
+    osc.stop(now + 0.14);
+  }
+
+  function wireSounds() {
+    reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.addEventListener(
+      "pointerdown",
+      (e) => {
+        const t = e.target.closest(".btn, .ip-box, .tile, .news-item, .menu-btn, .sound-toggle, .tab");
+        if (!t) return;
+        playTone("click");
+      },
+      true
+    );
+    let hoverAt = 0;
+    document.addEventListener(
+      "pointerover",
+      (e) => {
+        const t = e.target.closest(".btn, .tile, .news-item");
+        if (!t || reduceMotion) return;
+        const now = performance.now();
+        if (now - hoverAt < 80) return;
+        hoverAt = now;
+        playTone("hover");
+      },
+      true
+    );
+  }
+
+  function formatNewsDate(raw) {
+    const s = String(raw || "").trim();
+    if (!s) return "";
+    const m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return s;
+    const months = [
+      "января",
+      "февраля",
+      "марта",
+      "апреля",
+      "мая",
+      "июня",
+      "июля",
+      "августа",
+      "сентября",
+      "октября",
+      "ноября",
+      "декабря",
+    ];
+    const day = Number(m[3]);
+    const month = months[Number(m[2]) - 1] || m[2];
+    return `${day} ${month} ${m[1]}`;
+  }
+
+  function renderNewsList(root, items, { link = false, limit = 40 } = {}) {
+    if (!root) return;
+    const rows = (items || []).slice(0, limit);
+    if (!rows.length) {
+      root.innerHTML = `<p class="muted-line">Пока пусто.</p>`;
+      return;
+    }
+    root.innerHTML = rows
+      .map((n, i) => {
+        const inner = `<time>${esc(formatNewsDate(n.published_at))}</time>
+          <h3>${esc(n.title)}</h3>
+          <p>${esc(n.body)}</p>`;
+        const delay = `style="--d:${(0.04 * i).toFixed(2)}s"`;
+        if (link) {
+          return `<a class="news-item reveal" href="news.html" ${delay}>${inner}</a>`;
+        }
+        return `<article class="news-item reveal" ${delay}>${inner}</article>`;
+      })
+      .join("");
+    initReveal();
+  }
+
+  function applySiteCopy(copy) {
+    if (!copy) return;
+    document.querySelectorAll("[data-site]").forEach((el) => {
+      const key = el.getAttribute("data-site");
+      if (key && copy[key]) el.textContent = copy[key];
+    });
+  }
+
+  async function loadSiteContent() {
+    const homeNews = $("[data-news-home]");
+    const pageNews = $("[data-news-page]");
+    try {
+      const data = await api("/api/site");
+      applySiteCopy(data.copy || {});
+      if (homeNews) renderNewsList(homeNews, data.news || [], { link: true, limit: 4 });
+      if (pageNews) {
+        const full = await api("/api/news");
+        renderNewsList(pageNews, full.news || data.news || [], { link: false });
+      }
+    } catch {
+      if (homeNews) renderNewsList(homeNews, FALLBACK_NEWS, { link: true, limit: 2 });
+      if (pageNews) renderNewsList(pageNews, FALLBACK_NEWS, { link: false });
+    }
   }
 
   function isMirrorHost() {
@@ -123,10 +304,15 @@
     if (!mount) return;
     const user = getUser();
     const active = pageId();
-    const nav = NAV.map(
-      (n) =>
-        `<a href="${n.href}" class="${n.id === active ? "active" : ""}">${n.label}</a>`
-    ).join("");
+    const nav = NAV.map((n) => {
+      const classes = [
+        n.id === active ? "active" : "",
+        n.cta ? "nav-cta" : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+      return `<a href="${n.href}" class="${classes}">${n.label}</a>`;
+    }).join("");
 
     mount.innerHTML = `
       <div class="site-header">
@@ -134,7 +320,8 @@
           <a class="brand" href="index.html"><span class="brand-mark"></span>AquaTech</a>
           <nav class="nav-desktop">${nav}</nav>
           <div class="header-spacer"></div>
-          <div class="online-pill" title="Онлайн на сервере"><span class="dot"></span><span data-online>—</span> онлайн</div>
+          <div class="online-pill" title="Онлайн на сервере"><span class="dot"></span><span data-online aria-live="polite">…</span></div>
+          <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="${soundOn ? "true" : "false"}" title="Звуки интерфейса">${soundOn ? "Звук" : "Без звука"}</button>
           <div class="header-actions">
             ${
               user
@@ -143,7 +330,7 @@
                    <button class="btn btn-ghost" type="button" data-logout>Выйти</button>`
                 : `<a class="btn btn-ghost btn-hide-desktop" href="login.html">Войти</a>
                    <a class="btn btn-secondary" href="login.html">Войти</a>
-                   <a class="btn btn-primary" href="start.html">Начать игру</a>`
+                   <a class="btn btn-primary btn-show-mobile" href="start.html">Начать игру</a>`
             }
             <button class="menu-btn" type="button" aria-label="Меню" data-menu>
               <span></span><span></span><span></span>
@@ -164,6 +351,16 @@
     $("[data-menu]", mount)?.addEventListener("click", () => {
       $("#mobile-nav", mount)?.classList.toggle("open");
     });
+    $("[data-sound-toggle]", mount)?.addEventListener("click", () => {
+      soundOn = !soundOn;
+      localStorage.setItem(STORAGE_SOUND, soundOn ? "1" : "0");
+      const btn = $("[data-sound-toggle]", mount);
+      if (btn) {
+        btn.setAttribute("aria-pressed", soundOn ? "true" : "false");
+        btn.textContent = soundOn ? "Звук" : "Без звука";
+      }
+      if (soundOn) playTone("ok");
+    });
     $("[data-logout]", mount)?.addEventListener("click", async () => {
       try {
         await api("/api/logout", { method: "POST", body: "{}" });
@@ -183,7 +380,7 @@
         <div class="container footer-grid">
           <div>
             <div class="brand" style="margin-bottom:0.8rem"><span class="brand-mark"></span>AquaTech</div>
-            <p style="color:var(--muted);margin:0;max-width:28rem">Океанский сервер. Скачай лаунчер и заходи.</p>
+            <p style="color:var(--muted);margin:0;max-width:28rem" data-site="footer_blurb">Океанский сервер. Скачай лаунчер и заходи.</p>
           </div>
           <div>
             <h4>Игра</h4>
@@ -228,7 +425,7 @@
       const online = !!data.online;
       const n = Number(data.players_online || 0) || 0;
       pills.forEach((el) => {
-        el.textContent = String(n);
+        el.textContent = online ? `${n} онлайн` : "оффлайн";
       });
       document.querySelectorAll(".online-pill").forEach((el) => {
         el.classList.toggle("is-offline", !online);
@@ -238,7 +435,10 @@
       });
     } catch {
       pills.forEach((el) => {
-        el.textContent = "—";
+        el.textContent = "нет данных";
+      });
+      document.querySelectorAll(".online-pill").forEach((el) => {
+        el.classList.add("is-offline");
       });
     }
   }
@@ -611,15 +811,28 @@
       return;
     }
 
-    gate.textContent = "Доступ есть. Правь каталог и игроков ниже.";
+    gate.textContent = "Доступ есть. Тексты, новости, каталог и игроки ниже.";
     root.hidden = false;
 
     const purchases = $("#admin-purchases");
+    let siteCopy = {};
     try {
       const st = await api("/api/admin/settings");
       if (purchases) purchases.checked = !!st.settings?.purchases_enabled;
+      siteCopy = st.copy || {};
     } catch {
       /* settings optional */
+    }
+
+    const copyBox = $("#admin-copy");
+    if (copyBox) {
+      copyBox.innerHTML = COPY_FIELDS.map((f) => {
+        const val = esc(siteCopy[f.key] || "");
+        if (f.long) {
+          return `<div class="field"><label>${esc(f.label)}</label><textarea data-copy="${f.key}" rows="3">${val}</textarea></div>`;
+        }
+        return `<div class="field"><label>${esc(f.label)}</label><input data-copy="${f.key}" value="${val}" /></div>`;
+      }).join("");
     }
 
     $("#admin-save-settings")?.addEventListener("click", async () => {
@@ -634,6 +847,121 @@
       }
     });
 
+    $("#admin-save-copy")?.addEventListener("click", async () => {
+      const copy = {};
+      document.querySelectorAll("[data-copy]").forEach((el) => {
+        copy[el.getAttribute("data-copy")] = el.value;
+      });
+      try {
+        await api("/api/admin/settings", {
+          method: "PATCH",
+          body: JSON.stringify({ copy }),
+        });
+        toast("Тексты сайта сохранены");
+      } catch (err) {
+        toast(err.message || "Не удалось сохранить тексты");
+      }
+    });
+
+    async function loadNewsAdmin() {
+      const box = $("#admin-news");
+      if (!box) return;
+      box.innerHTML = `<p class="muted-line">Загрузка…</p>`;
+      try {
+        const data = await api("/api/admin/news");
+        const rows = data.news || [];
+        if (!rows.length) {
+          box.innerHTML = `<p class="muted-line">Новостей нет.</p>`;
+          return;
+        }
+        box.innerHTML = `<table class="admin-table"><thead><tr>
+          <th>Дата</th><th>Заголовок</th><th>Текст</th><th>Вкл</th><th></th>
+        </tr></thead><tbody>
+        ${rows
+          .map(
+            (n) => `<tr data-id="${n.id}">
+          <td><input data-f="published_at" type="date" value="${esc(String(n.published_at || "").slice(0, 10))}" /></td>
+          <td><input data-f="title" value="${esc(n.title)}" /></td>
+          <td><textarea data-f="body" rows="3">${esc(n.body)}</textarea></td>
+          <td><input data-f="published" type="checkbox" ${n.published ? "checked" : ""} /></td>
+          <td style="white-space:nowrap">
+            <button class="btn btn-secondary" type="button" data-save-news>OK</button>
+            <button class="btn btn-ghost" type="button" data-del-news>Удалить</button>
+          </td>
+        </tr>`
+          )
+          .join("")}
+        </tbody></table>`;
+
+        box.querySelectorAll("[data-save-news]").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const tr = btn.closest("tr");
+            const id = tr?.dataset.id;
+            if (!id) return;
+            const body = {};
+            tr.querySelectorAll("[data-f]").forEach((inp) => {
+              const key = inp.getAttribute("data-f");
+              if (key === "published") body.published = inp.checked;
+              else body[key] = inp.value;
+            });
+            try {
+              await api(`/api/admin/news/${id}`, {
+                method: "PATCH",
+                body: JSON.stringify(body),
+              });
+              toast("Новость сохранена");
+            } catch (err) {
+              toast(err.message || "Ошибка");
+            }
+          });
+        });
+        box.querySelectorAll("[data-del-news]").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const tr = btn.closest("tr");
+            const id = tr?.dataset.id;
+            if (!id || !confirm("Удалить новость?")) return;
+            try {
+              await api(`/api/admin/news/${id}`, { method: "DELETE" });
+              toast("Удалено");
+              await loadNewsAdmin();
+            } catch (err) {
+              toast(err.message || "Ошибка");
+            }
+          });
+        });
+      } catch (err) {
+        box.innerHTML = `<p class="muted-line">${esc(err.message || "Ошибка загрузки")}</p>`;
+      }
+    }
+
+    const newsForm = $("#admin-news-form");
+    if (newsForm) {
+      const dateInp = newsForm.querySelector('[name="published_at"]');
+      if (dateInp && !dateInp.value) dateInp.value = new Date().toISOString().slice(0, 10);
+      newsForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const fd = new FormData(newsForm);
+        try {
+          await api("/api/admin/news", {
+            method: "POST",
+            body: JSON.stringify({
+              title: fd.get("title"),
+              body: fd.get("body"),
+              published_at: fd.get("published_at"),
+              published: !!fd.get("published"),
+            }),
+          });
+          newsForm.reset();
+          if (dateInp) dateInp.value = new Date().toISOString().slice(0, 10);
+          const pub = newsForm.querySelector('[name="published"]');
+          if (pub) pub.checked = true;
+          toast("Новость добавлена");
+          await loadNewsAdmin();
+        } catch (err) {
+          toast(err.message || "Не удалось добавить");
+        }
+      });
+    }
     async function loadUsers() {
       const box = $("#admin-users");
       if (!box) return;
@@ -764,23 +1092,27 @@
       }
     });
 
+    await loadNewsAdmin();
     await loadUsers();
     await loadCatalog();
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
+    reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     showApiBanner();
     lockAuthForms();
     if (isCanonicalHost()) await refreshSession();
     renderHeader();
     renderFooter();
     wireCommon();
+    wireSounds();
     initTop();
     initPlayers();
     initProfile();
     initAuth();
     initCatalog("store");
     initCatalog("case");
+    await loadSiteContent();
     await initAdmin();
     initReveal();
   });

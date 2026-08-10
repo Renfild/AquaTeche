@@ -1,5 +1,5 @@
 {
-  "version": "2.9.4",
+  "version": "2.9.5",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "katherine-hydro.tun.ply.gg",
@@ -10,749 +10,742 @@
       "path": "mods/AI-Improvements-1.20-0.5.2.jar",
       "md5": "9a6776ce2deab597d198e8755daa56ff",
       "size": 29553,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/AI-Improvements-1.20-0.5.2.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/AI-Improvements-1.20-0.5.2.jar",
       "asset": "AI-Improvements-1.20-0.5.2.jar"
     },
     {
       "path": "mods/alexscaves-2.0.2.jar",
       "md5": "6c8793ee5e1aa852fdb430a9cdaccdc5",
       "size": 74871657,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/alexscaves-2.0.2.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/alexscaves-2.0.2.jar",
       "asset": "alexscaves-2.0.2.jar"
     },
     {
       "path": "mods/alexsmobs-1.22.9.jar",
       "md5": "504050d1f2e2c3019b6f53377ca354c6",
       "size": 26350793,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/alexsmobs-1.22.9.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/alexsmobs-1.22.9.jar",
       "asset": "alexsmobs-1.22.9.jar"
     },
     {
       "path": "mods/appliedenergistics2-forge-15.4.10.jar",
       "md5": "69e47ebd80184d34176cebeb6233a234",
       "size": 8495956,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/appliedenergistics2-forge-15.4.10.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/appliedenergistics2-forge-15.4.10.jar",
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
       "path": "mods/aquatech_ui-1.0.1.jar",
       "md5": "d08172d60df92082fa5b55d2b7cea87e",
       "size": 548975,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/aquatech_ui-1.0.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/aquatech_ui-1.0.1.jar",
       "asset": "aquatech_ui-1.0.1.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
       "md5": "76b40d407b6bf0257dd1dab6d3d395d5",
       "size": 580602,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/architectury-9.2.14-forge.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/architectury-9.2.14-forge.jar",
       "asset": "architectury-9.2.14-forge.jar"
     },
     {
       "path": "mods/avaritia_armor-0.1.3.jar",
       "md5": "9f3cbcf31955a869367a48633be8506b",
       "size": 128582,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/avaritia_armor-0.1.3.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/avaritia_armor-0.1.3.jar",
       "asset": "avaritia_armor-0.1.3.jar"
     },
     {
       "path": "mods/BetterQuestPopup-1.20.1-forge-1.0.1.jar",
       "md5": "9444aa52f2869b429402c8d06e1cffea",
       "size": 177843,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/BetterQuestPopup-1.20.1-forge-1.0.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/BetterQuestPopup-1.20.1-forge-1.0.1.jar",
       "asset": "BetterQuestPopup-1.20.1-forge-1.0.1.jar"
     },
     {
       "path": "mods/blueprint-1.20.1-7.1.4.jar",
       "md5": "024008848618628f9f37f7af1018ae58",
       "size": 1165189,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/blueprint-1.20.1-7.1.4.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/blueprint-1.20.1-7.1.4.jar",
       "asset": "blueprint-1.20.1-7.1.4.jar"
     },
     {
       "path": "mods/Botania-1.20.1-454-FORGE.jar",
       "md5": "ae678d80027133366933844f32ac92ef",
       "size": 12211755,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/Botania-1.20.1-454-FORGE.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/Botania-1.20.1-454-FORGE.jar",
       "asset": "Botania-1.20.1-454-FORGE.jar"
     },
     {
       "path": "mods/botanicalextramachinery-1.20.1-1.1.2.jar",
       "md5": "07c9678c5cd865e25406c11ab4d8ca3c",
       "size": 1685838,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/botanicalextramachinery-1.20.1-1.1.2.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/botanicalextramachinery-1.20.1-1.1.2.jar",
       "asset": "botanicalextramachinery-1.20.1-1.1.2.jar"
     },
     {
       "path": "mods/BotanicalMachinery-1.20.1-3.0.10.jar",
       "md5": "92049b9f7b92359751d363e5215cc28b",
       "size": 250613,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/BotanicalMachinery-1.20.1-3.0.10.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/BotanicalMachinery-1.20.1-3.0.10.jar",
       "asset": "BotanicalMachinery-1.20.1-3.0.10.jar"
     },
     {
       "path": "mods/BrandonsCore-1.20.1-3.2.1.302-universal.jar",
       "md5": "eab7f3e470ed31562bd3c6abb0fda6ce",
       "size": 1358270,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/BrandonsCore-1.20.1-3.2.1.302-universal.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/BrandonsCore-1.20.1-3.2.1.302-universal.jar",
       "asset": "BrandonsCore-1.20.1-3.2.1.302-universal.jar"
     },
     {
       "path": "mods/canary-mc1.20.1-0.3.3.jar",
       "md5": "1bd8bdb43c190ddc671c5ea0bf3b8cb1",
       "size": 594191,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/canary-mc1.20.1-0.3.3.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/canary-mc1.20.1-0.3.3.jar",
       "asset": "canary-mc1.20.1-0.3.3.jar"
     },
     {
       "path": "mods/casesmod-1.0.1.jar",
       "md5": "32f4cea0ea8d715e31df52e4694e6818",
       "size": 261330,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/casesmod-1.0.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/casesmod-1.0.1.jar",
       "asset": "casesmod-1.0.1.jar"
     },
     {
       "path": "mods/citadel-2.6.3-1.20.1.jar",
       "md5": "da80c09b998d829b6d580e5be76dcc7b",
       "size": 3185275,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/citadel-2.6.3-1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/citadel-2.6.3-1.20.1.jar",
       "asset": "citadel-2.6.3-1.20.1.jar"
     },
     {
       "path": "mods/Clumps-forge-1.20.1-12.0.0.4.jar",
       "md5": "7a71806a1167d866608fc2e8c7d62041",
       "size": 20300,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/Clumps-forge-1.20.1-12.0.0.4.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/Clumps-forge-1.20.1-12.0.0.4.jar",
       "asset": "Clumps-forge-1.20.1-12.0.0.4.jar"
     },
     {
       "path": "mods/CodeChickenLib-1.20.1-4.4.0.528-universal.jar",
       "md5": "cd77cb33d92407fd0b5bf0b79d58af69",
       "size": 1473536,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/CodeChickenLib-1.20.1-4.4.0.528-universal.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/CodeChickenLib-1.20.1-4.4.0.528-universal.jar",
       "asset": "CodeChickenLib-1.20.1-4.4.0.528-universal.jar"
     },
     {
       "path": "mods/Cucumber-1.20.1-7.0.16.jar",
       "md5": "d7d34a7584041977e493198a666c2db4",
       "size": 271462,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/Cucumber-1.20.1-7.0.16.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/Cucumber-1.20.1-7.0.16.jar",
       "asset": "Cucumber-1.20.1-7.0.16.jar"
     },
     {
       "path": "mods/curios-forge-5.14.1+1.20.1.jar",
       "md5": "2fdcc97cbc66c4b2492b407c792e7159",
       "size": 398066,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/curios-forge-5.14.1+1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/curios-forge-5.14.1+1.20.1.jar",
       "asset": "curios-forge-5.14.1+1.20.1.jar"
     },
     {
       "path": "mods/Draconic-Evolution-1.20.1-3.1.2.621-universal.jar",
       "md5": "3cc3a649bfe7cebd88b87d5aa9d25a83",
       "size": 5934411,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/Draconic-Evolution-1.20.1-3.1.2.621-universal.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/Draconic-Evolution-1.20.1-3.1.2.621-universal.jar",
       "asset": "Draconic-Evolution-1.20.1-3.1.2.621-universal.jar"
     },
     {
       "path": "mods/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
       "md5": "f8df69d0af455b6f47acb88ab747d1a3",
       "size": 402345,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
       "asset": "dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar"
     },
     {
       "path": "mods/easy_npc-forge-1.20.1-6.0.21.jar",
       "md5": "c5d8b5be8ca1ef7aaa68062d7b99ae1e",
       "size": 1542835,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/easy_npc-forge-1.20.1-6.0.21.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/easy_npc-forge-1.20.1-6.0.21.jar",
       "asset": "easy_npc-forge-1.20.1-6.0.21.jar"
     },
     {
       "path": "mods/embeddium-0.3.31+mc1.20.1.jar",
       "md5": "1dfb2ee49ce9ad5d484ff3eea0d628b7",
       "size": 1320675,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/embeddium-0.3.31+mc1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/embeddium-0.3.31+mc1.20.1.jar",
       "asset": "embeddium-0.3.31+mc1.20.1.jar"
     },
     {
       "path": "mods/entityculling-forge-1.10.5-mc1.20.1.jar",
       "md5": "f54a5baa0a9613d13ad0e781d245338b",
       "size": 1590221,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/entityculling-forge-1.10.5-mc1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/entityculling-forge-1.10.5-mc1.20.1.jar",
       "asset": "entityculling-forge-1.10.5-mc1.20.1.jar"
     },
     {
       "path": "mods/eventwrapper-forge-1.20.1-1.1.4.jar",
       "md5": "2b508479fcae9f5bf32c92537191a8cb",
       "size": 1564001,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/eventwrapper-forge-1.20.1-1.1.4.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/eventwrapper-forge-1.20.1-1.1.4.jar",
       "asset": "eventwrapper-forge-1.20.1-1.1.4.jar"
     },
     {
       "path": "mods/ExtendedCrafting-1.20.1-6.0.10.jar",
       "md5": "bed137d7f6e73fe8a45727b604b713ca",
       "size": 657943,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ExtendedCrafting-1.20.1-6.0.10.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ExtendedCrafting-1.20.1-6.0.10.jar",
       "asset": "ExtendedCrafting-1.20.1-6.0.10.jar"
     },
     {
       "path": "mods/extrabotany-forge-1.20.1-1.9.2.jar",
       "md5": "3b9af457e51a64ea449fe412cd98ae94",
       "size": 3869675,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/extrabotany-forge-1.20.1-1.9.2.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/extrabotany-forge-1.20.1-1.9.2.jar",
       "asset": "extrabotany-forge-1.20.1-1.9.2.jar"
     },
     {
       "path": "mods/ExtraLib-3.0.12-1.20.1-Forge.jar",
       "md5": "d39247099373c237c13bedbff1c5d3d2",
       "size": 7988934,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ExtraLib-3.0.12-1.20.1-Forge.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ExtraLib-3.0.12-1.20.1-Forge.jar",
       "asset": "ExtraLib-3.0.12-1.20.1-Forge.jar"
     },
     {
       "path": "mods/ExtraQuests-1.7.0-1.20.1-Forge.jar",
       "md5": "ba0a3c75f7490b2b549d3e268bce4782",
       "size": 40767,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ExtraQuests-1.7.0-1.20.1-Forge.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ExtraQuests-1.7.0-1.20.1-Forge.jar",
       "asset": "ExtraQuests-1.7.0-1.20.1-Forge.jar"
     },
     {
       "path": "mods/FastSuite-1.20.1-5.1.2.jar",
       "md5": "efca8ff65bbf93e3a0f776998ee181e9",
       "size": 26600,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/FastSuite-1.20.1-5.1.2.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/FastSuite-1.20.1-5.1.2.jar",
       "asset": "FastSuite-1.20.1-5.1.2.jar"
     },
     {
       "path": "mods/ferritecore-6.0.1-forge.jar",
       "md5": "f52f538207a4829d7060550092ce2383",
       "size": 123034,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ferritecore-6.0.1-forge.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ferritecore-6.0.1-forge.jar",
       "asset": "ferritecore-6.0.1-forge.jar"
     },
     {
       "path": "mods/ftb-library-forge-2001.2.13.jar",
       "md5": "9de2c76938392445e735a98b352da9d4",
       "size": 780558,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ftb-library-forge-2001.2.13.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ftb-library-forge-2001.2.13.jar",
       "asset": "ftb-library-forge-2001.2.13.jar"
     },
     {
       "path": "mods/ftb-quests-forge-2001.4.22.jar",
       "md5": "a05a49243da4a2505413d74e13102b16",
       "size": 1255469,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ftb-quests-forge-2001.4.22.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ftb-quests-forge-2001.4.22.jar",
       "asset": "ftb-quests-forge-2001.4.22.jar"
     },
     {
       "path": "mods/ftb-teams-forge-2001.3.0.jar",
       "md5": "31acf433df9d13282fa12bd6974c44f9",
       "size": 247666,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ftb-teams-forge-2001.3.0.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ftb-teams-forge-2001.3.0.jar",
       "asset": "ftb-teams-forge-2001.3.0.jar"
     },
     {
       "path": "mods/ftb-xmod-compat-forge-2.1.3.jar",
       "md5": "6d01bd4bc73c6ce36d0d91c56bb27772",
       "size": 129725,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ftb-xmod-compat-forge-2.1.3.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ftb-xmod-compat-forge-2.1.3.jar",
       "asset": "ftb-xmod-compat-forge-2.1.3.jar"
     },
     {
       "path": "mods/ftbquestprecisionlocalizer-1.20.1-forge-2.2.0.jar",
       "md5": "345a4da434da401aaa0fd4f1c3005c7c",
       "size": 27596,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ftbquestprecisionlocalizer-1.20.1-forge-2.2.0.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ftbquestprecisionlocalizer-1.20.1-forge-2.2.0.jar",
       "asset": "ftbquestprecisionlocalizer-1.20.1-forge-2.2.0.jar"
     },
     {
       "path": "mods/ftbquestsentityvis-1.6.0-1.20.1-forge.jar",
       "md5": "b2b041f869272e4d0eedcdd3950152a0",
       "size": 142508,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ftbquestsentityvis-1.6.0-1.20.1-forge.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ftbquestsentityvis-1.6.0-1.20.1-forge.jar",
       "asset": "ftbquestsentityvis-1.6.0-1.20.1-forge.jar"
     },
     {
       "path": "mods/ftbquestsfreezefix-forge-1.0.0-1.20.1.jar",
       "md5": "b099b839fe37c312e99800dff56988ec",
       "size": 163803,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ftbquestsfreezefix-forge-1.0.0-1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/ftbquestsfreezefix-forge-1.0.0-1.20.1.jar",
       "asset": "ftbquestsfreezefix-forge-1.0.0-1.20.1.jar"
     },
     {
       "path": "mods/geckolib-forge-1.20.1-4.8.4.jar",
       "md5": "1b8bd851bc57e2b87e285b98a7d92c76",
       "size": 1038209,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/geckolib-forge-1.20.1-4.8.4.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/geckolib-forge-1.20.1-4.8.4.jar",
       "asset": "geckolib-forge-1.20.1-4.8.4.jar"
     },
     {
       "path": "mods/guideme-20.1.15.jar",
       "md5": "0d892c2b4af52459ac6a639040374916",
       "size": 9414827,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/guideme-20.1.15.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/guideme-20.1.15.jar",
       "asset": "guideme-20.1.15.jar"
-    },
-    {
-      "path": "mods/ImmediatelyFast-1.2.4+1.20.1.jar",
-      "md5": "db69eb0eae650e6e26694c56f7132e9f",
-      "size": 625873,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/ImmediatelyFast-1.2.4+1.20.1.jar",
-      "asset": "ImmediatelyFast-1.2.4+1.20.1.jar"
     },
     {
       "path": "mods/IndustrialUpgrade-1.20.1-3.4.0.11.jar",
       "md5": "26f8ffb7206d91ab9903afc53350cb5b",
       "size": 36704188,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/IndustrialUpgrade-1.20.1-3.4.0.11.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/IndustrialUpgrade-1.20.1-3.4.0.11.jar",
       "asset": "IndustrialUpgrade-1.20.1-3.4.0.11.jar"
     },
     {
       "path": "mods/item-filters-forge-2001.1.0-build.55.jar",
       "md5": "3febb5502de0c31819d5580babf9b3dc",
       "size": 103624,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/item-filters-forge-2001.1.0-build.55.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/item-filters-forge-2001.1.0-build.55.jar",
       "asset": "item-filters-forge-2001.1.0-build.55.jar"
     },
     {
       "path": "mods/Jade-1.20.1-Forge-11.13.3.jar",
       "md5": "a53aade6b5915ebe8357abb68cf1f778",
       "size": 553487,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/Jade-1.20.1-Forge-11.13.3.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/Jade-1.20.1-Forge-11.13.3.jar",
       "asset": "Jade-1.20.1-Forge-11.13.3.jar"
     },
     {
       "path": "mods/jei-1.20.1-forge-15.21.0.144.jar",
       "md5": "8d94a9630b8cb5f4e977b3f601932ea4",
       "size": 1425745,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/jei-1.20.1-forge-15.21.0.144.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/jei-1.20.1-forge-15.21.0.144.jar",
       "asset": "jei-1.20.1-forge-15.21.0.144.jar"
     },
     {
       "path": "mods/kubejs-forge-2001.6.5-build.26.jar",
       "md5": "64ee6615f19fb9b2b11fee8b7385eaaf",
       "size": 1658792,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs-forge-2001.6.5-build.26.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs-forge-2001.6.5-build.26.jar",
       "asset": "kubejs-forge-2001.6.5-build.26.jar"
     },
     {
       "path": "mods/LibX-1.20.1-5.0.14.jar",
       "md5": "3c0c0cdac0482e1f78a28614bebce36a",
       "size": 1258082,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/LibX-1.20.1-5.0.14.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/LibX-1.20.1-5.0.14.jar",
       "asset": "LibX-1.20.1-5.0.14.jar"
     },
     {
       "path": "mods/modernfix-forge-5.27.66+mc1.20.1.jar",
       "md5": "61c184687d2cd6c770a033f310ea55fc",
       "size": 1002234,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/modernfix-forge-5.27.66+mc1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/modernfix-forge-5.27.66+mc1.20.1.jar",
       "asset": "modernfix-forge-5.27.66+mc1.20.1.jar"
     },
     {
       "path": "mods/MythicBotany-1.20.1-4.0.4.jar",
       "md5": "6c2b6b72de2b8641bd1ca82556b62ae2",
       "size": 2233413,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/MythicBotany-1.20.1-4.0.4.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/MythicBotany-1.20.1-4.0.4.jar",
       "asset": "MythicBotany-1.20.1-4.0.4.jar"
     },
     {
       "path": "mods/oculus-mc1.20.1-1.7.0.jar",
       "md5": "45b96133bb46cc61dd9778bd4fca741d",
       "size": 2831148,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/oculus-mc1.20.1-1.7.0.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/oculus-mc1.20.1-1.7.0.jar",
       "asset": "oculus-mc1.20.1-1.7.0.jar"
     },
     {
       "path": "mods/packetfixer-3.3.2-forge-1.20.1.jar",
       "md5": "494234194e4ce530719281d558510cf5",
       "size": 188661,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/packetfixer-3.3.2-forge-1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/packetfixer-3.3.2-forge-1.20.1.jar",
       "asset": "packetfixer-3.3.2-forge-1.20.1.jar"
     },
     {
       "path": "mods/Patchouli-1.20.1-85-FORGE.jar",
       "md5": "78bd223d069fa9491e940d99a8f426b3",
       "size": 642732,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/Patchouli-1.20.1-85-FORGE.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/Patchouli-1.20.1-85-FORGE.jar",
       "asset": "Patchouli-1.20.1-85-FORGE.jar"
     },
     {
       "path": "mods/Placebo-1.20.1-8.6.3.jar",
       "md5": "13133ab9989e8474931cd7a86bd19cc5",
       "size": 282474,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/Placebo-1.20.1-8.6.3.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/Placebo-1.20.1-8.6.3.jar",
       "asset": "Placebo-1.20.1-8.6.3.jar"
     },
     {
       "path": "mods/powerutils-1.8.jar",
       "md5": "d425a1a35746fc2b81222011caebb2df",
       "size": 71203,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/powerutils-1.8.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/powerutils-1.8.jar",
       "asset": "powerutils-1.8.jar"
     },
     {
       "path": "mods/productivebees-1.20.1-12.6.0.jar",
       "md5": "3c579549fd279857a66c78b096d31fba",
       "size": 4956306,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/productivebees-1.20.1-12.6.0.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/productivebees-1.20.1-12.6.0.jar",
       "asset": "productivebees-1.20.1-12.6.0.jar"
     },
     {
       "path": "mods/quantumgenerators-1.7.jar",
       "md5": "0160a2e4d135bf0b626d8d58bd93034b",
       "size": 159554,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/quantumgenerators-1.7.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/quantumgenerators-1.7.jar",
       "asset": "quantumgenerators-1.7.jar"
     },
     {
       "path": "mods/Re-Avaritia-forge-1.20.1-1.4.1-release.jar",
       "md5": "44f2748b9c9d4a6c11c1e12a47dea424",
       "size": 3510667,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/Re-Avaritia-forge-1.20.1-1.4.1-release.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/Re-Avaritia-forge-1.20.1-1.4.1-release.jar",
       "asset": "Re-Avaritia-forge-1.20.1-1.4.1-release.jar"
     },
     {
       "path": "mods/recipe_generator-1.1.0_beta-forge-1.20.1.jar",
       "md5": "39210fa05cefe70341fdda65db12a7a8",
       "size": 986397,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/recipe_generator-1.1.0_beta-forge-1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/recipe_generator-1.1.0_beta-forge-1.20.1.jar",
       "asset": "recipe_generator-1.1.0_beta-forge-1.20.1.jar"
     },
     {
       "path": "mods/rhino-forge-2001.2.3-build.10.jar",
       "md5": "59387620b0ef6becbff02c7c1636ad3e",
       "size": 1798244,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/rhino-forge-2001.2.3-build.10.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/rhino-forge-2001.2.3-build.10.jar",
       "asset": "rhino-forge-2001.2.3-build.10.jar"
     },
     {
       "path": "mods/starcatcher-2.3.19-FORGE-1.20.1.jar",
       "md5": "b9d7d6bbcd201738961342a35d8b2355",
       "size": 6975581,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/starcatcher-2.3.19-FORGE-1.20.1.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/starcatcher-2.3.19-FORGE-1.20.1.jar",
       "asset": "starcatcher-2.3.19-FORGE-1.20.1.jar"
     },
     {
       "path": "config/aquatech_rank_glyphs.properties",
       "md5": "49e4b122d9c8b00e42ab990daedac84e",
       "size": 379,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__aquatech_rank_glyphs.properties",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__aquatech_rank_glyphs.properties",
       "asset": "config__aquatech_rank_glyphs.properties"
     },
     {
       "path": "config/aquatech_ui-common.toml",
       "md5": "2eb1b406b00665f280c76f112df48564",
       "size": 856,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__aquatech_ui-common.toml",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__aquatech_ui-common.toml",
       "asset": "config__aquatech_ui-common.toml"
     },
     {
       "path": "config/industrialupgrade-common.toml",
       "md5": "7a6582be6c4cad2961deb3df8c45bafd",
       "size": 102588,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__industrialupgrade-common.toml",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__industrialupgrade-common.toml",
       "asset": "config__industrialupgrade-common.toml"
     },
     {
       "path": "config/packetfixer.properties",
       "md5": "2af31aa45bdf6a41619d2bbe9ca69a0f",
       "size": 296,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__packetfixer.properties",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__packetfixer.properties",
       "asset": "config__packetfixer.properties"
     },
     {
       "path": "config/casesmod/balances.json",
       "md5": "c6cda2d0a820fdaa7d3cd6f8fe3c05d0",
       "size": 49,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__balances.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__balances.json",
       "asset": "config__casesmod__balances.json"
     },
     {
       "path": "config/casesmod/kits.json",
       "md5": "8e66d1dab1ead6cc36689975d4425bfe",
       "size": 1769,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__kits.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__kits.json",
       "asset": "config__casesmod__kits.json"
     },
     {
       "path": "config/casesmod/kit_cooldowns.json",
       "md5": "72d5bb7cc71625a657aa406c0684f6d7",
       "size": 128,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__kit_cooldowns.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__kit_cooldowns.json",
       "asset": "config__casesmod__kit_cooldowns.json"
     },
     {
       "path": "config/casesmod/pity.json",
       "md5": "5c9a9e6ac109ae1850b3e1c4a016bb33",
       "size": 171,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__pity.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__pity.json",
       "asset": "config__casesmod__pity.json"
     },
     {
       "path": "config/casesmod/quests.json",
       "md5": "9c3415c62682906687268537e95e19c7",
       "size": 7,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__quests.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__quests.json",
       "asset": "config__casesmod__quests.json"
     },
     {
       "path": "config/casesmod/warps.json",
       "md5": "ad5dba3477f22d72993c64972d746a2d",
       "size": 472,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__warps.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__warps.json",
       "asset": "config__casesmod__warps.json"
     },
     {
       "path": "config/casesmod/cases/ae2_press_case.json",
       "md5": "adb42b6116965ab07c78abd5a007e46e",
       "size": 1122,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__ae2_press_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__ae2_press_case.json",
       "asset": "config__casesmod__cases__ae2_press_case.json"
     },
     {
       "path": "config/casesmod/cases/bee_case.json",
       "md5": "6ada17a9c5b539e67939468594e5227d",
       "size": 2193,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__bee_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__bee_case.json",
       "asset": "config__casesmod__cases__bee_case.json"
     },
     {
       "path": "config/casesmod/cases/circuit_case.json",
       "md5": "4c3e63c86d3499d1a0ea21ebd7a568ca",
       "size": 2700,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__circuit_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__circuit_case.json",
       "asset": "config__casesmod__cases__circuit_case.json"
     },
     {
       "path": "config/casesmod/cases/common_case.json",
       "md5": "f173c65940408262fc5ffb32905b5c92",
       "size": 1746,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__common_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__common_case.json",
       "asset": "config__casesmod__cases__common_case.json"
     },
     {
       "path": "config/casesmod/cases/donate_case.json",
       "md5": "c1a2b2793941daf6253ad7da367c3941",
       "size": 2038,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__donate_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__donate_case.json",
       "asset": "config__casesmod__cases__donate_case.json"
     },
     {
       "path": "config/casesmod/cases/legend_case.json",
       "md5": "bf9b3bc902c84b3e65e36bf908ad0ef0",
       "size": 3229,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__legend_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__legend_case.json",
       "asset": "config__casesmod__cases__legend_case.json"
     },
     {
       "path": "config/casesmod/cases/oil_case.json",
       "md5": "529c965111ae4829591bae545b18d59b",
       "size": 2544,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__oil_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__oil_case.json",
       "asset": "config__casesmod__cases__oil_case.json"
     },
     {
       "path": "config/casesmod/cases/panel_case.json",
       "md5": "1c4773812ce24336c476a4d004a8dec7",
       "size": 3415,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__panel_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__panel_case.json",
       "asset": "config__casesmod__cases__panel_case.json"
     },
     {
       "path": "config/casesmod/cases/plate_case.json",
       "md5": "a5924c7b7d3c1ce801a8d8260ceb6a9f",
       "size": 2519,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__casesmod__cases__plate_case.json",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__casesmod__cases__plate_case.json",
       "asset": "config__casesmod__cases__plate_case.json"
     },
     {
       "path": "config/ftbquests/quests/chapter_groups.snbt",
       "md5": "c5f774921259dde74e51707b22733d2c",
       "size": 95,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__ftbquests__quests__chapter_groups.snbt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__ftbquests__quests__chapter_groups.snbt",
       "asset": "config__ftbquests__quests__chapter_groups.snbt"
     },
     {
       "path": "config/ftbquests/quests/data.snbt",
       "md5": "e4e7a5b1df02965e482d7eb3848fe657",
       "size": 239,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__ftbquests__quests__data.snbt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__ftbquests__quests__data.snbt",
       "asset": "config__ftbquests__quests__data.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/01_primal.snbt",
       "md5": "6229b2a4c8da0197a64dcf3230d6623b",
       "size": 9583,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__ftbquests__quests__chapters__01_primal.snbt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__ftbquests__quests__chapters__01_primal.snbt",
       "asset": "config__ftbquests__quests__chapters__01_primal.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/02_early_lv.snbt",
       "md5": "5879d4e3361a3aa9eb9ea4e0b28458ad",
       "size": 5032,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__ftbquests__quests__chapters__02_early_lv.snbt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__ftbquests__quests__chapters__02_early_lv.snbt",
       "asset": "config__ftbquests__quests__chapters__02_early_lv.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/03_steam_lv.snbt",
       "md5": "1375f3fdccc25cdb23eb84ec48dbaf61",
       "size": 7123,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__ftbquests__quests__chapters__03_steam_lv.snbt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__ftbquests__quests__chapters__03_steam_lv.snbt",
       "asset": "config__ftbquests__quests__chapters__03_steam_lv.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/04_mv.snbt",
       "md5": "06116db4543afc9b2a3aa239752fb143",
       "size": 7313,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__ftbquests__quests__chapters__04_mv.snbt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__ftbquests__quests__chapters__04_mv.snbt",
       "asset": "config__ftbquests__quests__chapters__04_mv.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/05_hv_ev.snbt",
       "md5": "bb2909356df55e230cf0324e068b2a31",
       "size": 10801,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__ftbquests__quests__chapters__05_hv_ev.snbt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__ftbquests__quests__chapters__05_hv_ev.snbt",
       "asset": "config__ftbquests__quests__chapters__05_hv_ev.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/06_quantum.snbt",
       "md5": "34cea166e9b7d29075d3b1ae1242b4a9",
       "size": 4917,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/config__ftbquests__quests__chapters__06_quantum.snbt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/config__ftbquests__quests__chapters__06_quantum.snbt",
       "asset": "config__ftbquests__quests__chapters__06_quantum.snbt"
     },
     {
       "path": "kubejs/assets/ftbquests/ftb_quests_theme.txt",
       "md5": "944969a2273df4ac190de3f307f83f20",
       "size": 8141,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__assets__ftbquests__ftb_quests_theme.txt",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__assets__ftbquests__ftb_quests_theme.txt",
       "asset": "kubejs__assets__ftbquests__ftb_quests_theme.txt"
     },
     {
       "path": "kubejs/assets/kubejs/textures/aquatechlogo.png",
       "md5": "164d3faeb16d044153081ff2d460dbee",
       "size": 9861,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__assets__kubejs__textures__aquatechlogo.png",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__assets__kubejs__textures__aquatechlogo.png",
       "asset": "kubejs__assets__kubejs__textures__aquatechlogo.png"
     },
     {
       "path": "kubejs/assets/kubejs/textures/logo/aquatechlogo.png",
       "md5": "164d3faeb16d044153081ff2d460dbee",
       "size": 9861,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__assets__kubejs__textures__logo__aquatechlogo.png",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__assets__kubejs__textures__logo__aquatechlogo.png",
       "asset": "kubejs__assets__kubejs__textures__logo__aquatechlogo.png"
     },
     {
       "path": "kubejs/assets/kubejs/textures/quests/aquatechlogo.png",
       "md5": "164d3faeb16d044153081ff2d460dbee",
       "size": 9861,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__assets__kubejs__textures__quests__aquatechlogo.png",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__assets__kubejs__textures__quests__aquatechlogo.png",
       "asset": "kubejs__assets__kubejs__textures__quests__aquatechlogo.png"
     },
     {
       "path": "kubejs/client_scripts/add_fishing_resource_tooltips.js",
       "md5": "5f23d81695065921a20663909a06af21",
       "size": 1717,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__client_scripts__add_fishing_resource_tooltips.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__client_scripts__add_fishing_resource_tooltips.js",
       "asset": "kubejs__client_scripts__add_fishing_resource_tooltips.js"
     },
     {
       "path": "kubejs/client_scripts/remove_fishing_tooltips.js",
       "md5": "8a32082abe25d339c8321607939ae033",
       "size": 616,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__client_scripts__remove_fishing_tooltips.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__client_scripts__remove_fishing_tooltips.js",
       "asset": "kubejs__client_scripts__remove_fishing_tooltips.js"
     },
     {
       "path": "kubejs/client_scripts/rename_starcatcher_rods.js",
       "md5": "c1374ba9357ab2d75730c139a82ab84f",
       "size": 1499,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__client_scripts__rename_starcatcher_rods.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__client_scripts__rename_starcatcher_rods.js",
       "asset": "kubejs__client_scripts__rename_starcatcher_rods.js"
     },
     {
       "path": "kubejs/server_scripts/00_disable_iu_space.js",
       "md5": "c5326b046bc354e45fac4d5c318376c9",
       "size": 2570,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__00_disable_iu_space.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__00_disable_iu_space.js",
       "asset": "kubejs__server_scripts__00_disable_iu_space.js"
     },
     {
       "path": "kubejs/server_scripts/00_disable_quarries.js",
       "md5": "9bd7ba41d8ccdd232229e671d06bc4aa",
       "size": 2273,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__00_disable_quarries.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__00_disable_quarries.js",
       "asset": "kubejs__server_scripts__00_disable_quarries.js"
     },
     {
       "path": "kubejs/server_scripts/10_aquatech_iu_nerf.js",
       "md5": "feb522c3442f3b32b725c4ff389d150f",
       "size": 1959,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__10_aquatech_iu_nerf.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__10_aquatech_iu_nerf.js",
       "asset": "kubejs__server_scripts__10_aquatech_iu_nerf.js"
     },
     {
       "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
       "md5": "e1cf8b4e4e60b04fd0631f798c665625",
       "size": 6108,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__20_aquatech_rod_crafts.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__20_aquatech_rod_crafts.js",
       "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
       "md5": "396ddebfb205de650492d72c997ce75d",
       "size": 11403,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__30_aquatech_crafting.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
     {
       "path": "kubejs/server_scripts/40_aquatech_diving.js",
       "md5": "25ce571f899ee987bfecfa64de08ef14",
       "size": 1137,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__40_aquatech_diving.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__40_aquatech_diving.js",
       "asset": "kubejs__server_scripts__40_aquatech_diving.js"
     },
     {
       "path": "kubejs/server_scripts/40_aquatech_fishing_drops.js",
       "md5": "26de030a7c244e84fab04036ba28081e",
       "size": 414,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__40_aquatech_fishing_drops.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__40_aquatech_fishing_drops.js",
       "asset": "kubejs__server_scripts__40_aquatech_fishing_drops.js"
     },
     {
       "path": "kubejs/server_scripts/50_remove_avaritia_fishing_loot.js",
       "md5": "f63fd03ba4dd06662b15267dd21d5011",
       "size": 198,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__50_remove_avaritia_fishing_loot.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__50_remove_avaritia_fishing_loot.js",
       "asset": "kubejs__server_scripts__50_remove_avaritia_fishing_loot.js"
     },
     {
       "path": "kubejs/server_scripts/60_disable_phantoms.js",
       "md5": "6e4af6053e794d55bd7ba2fa80c4f29b",
       "size": 256,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__server_scripts__60_disable_phantoms.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__server_scripts__60_disable_phantoms.js",
       "asset": "kubejs__server_scripts__60_disable_phantoms.js"
     },
     {
       "path": "kubejs/startup_scripts/additions.js",
       "md5": "e3166114982743e5738f94f545355486",
       "size": 484,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__startup_scripts__additions.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__startup_scripts__additions.js",
       "asset": "kubejs__startup_scripts__additions.js"
     },
     {
       "path": "kubejs/startup_scripts/disable_iu_space.js",
       "md5": "243abbe82b6c5996b450a8cbacfa66bc",
       "size": 966,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/kubejs__startup_scripts__disable_iu_space.js",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/kubejs__startup_scripts__disable_iu_space.js",
       "asset": "kubejs__startup_scripts__disable_iu_space.js"
     },
     {
       "path": "resourcepacks/HavenQuestingTheme-1.20.1-1.0.0.zip",
       "md5": "ed0fd8c0dd9cb4c278873becdab4980a",
       "size": 5050028,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.4/resourcepacks__HavenQuestingTheme-1.20.1-1.0.0.zip",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.5/resourcepacks__HavenQuestingTheme-1.20.1-1.0.0.zip",
       "asset": "resourcepacks__HavenQuestingTheme-1.20.1-1.0.0.zip"
     }
   ]

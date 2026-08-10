@@ -7,39 +7,28 @@
   <meta name="description" content="Новости AquaTech." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body data-page="news">
+  <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
+  <main id="main">
   
   <section class="page-hero">
     <div class="container">
       <div class="eyebrow">Блог</div>
       <h1>Новости</h1>
-      <p>Что нового на сервере и в лаунчере.</p>
+      <p data-site="news_page_lead">Что нового на сервере и в лаунчере.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
-    <div class="container news-list">
-      <article class="news-item">
-        <time>8 августа 2026</time>
-        <h3>Лаунчер 2.9.20</h3>
-        <p>Полноэкранный вход, палитра v2, анимации кнопок и мягкие звуки клика.</p>
-      </article>
-      <article class="news-item">
-        <time>Август 2026</time>
-        <h3>Подключение к серверу</h3>
-        <p>Заходи по IP с сайта. Отдельный туннель для модов больше не нужен.</p>
-      </article>
-      <article class="news-item">
-        <time>Июль 2026</time>
-        <h3>Авторыбалка + StarCatcher</h3>
-        <p>Удочки с кастомным лутом и авторыбалкой на сервере.</p>
-      </article>
+    <div class="container news-list" id="news-root" data-news-page>
+      <p class="muted-line">Загрузка…</p>
     </div>
   </section>
 
+  </main>
   <div id="site-footer"></div>
   <script src="assets/js/site.js"></script>
 </body>

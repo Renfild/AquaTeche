@@ -1,6 +1,7 @@
 import { bad, json, readJson } from "../../_lib/http.js";
 import { requireAdmin } from "../../_lib/auth.js";
 import { getSetting, purchasesEnabled, setSetting } from "../../_lib/settings.js";
+import { getSiteCopy, patchSiteCopy } from "../../_lib/siteCopy.js";
 
 export async function onRequestGet(context) {
   const { request, env } = context;
@@ -13,6 +14,7 @@ export async function onRequestGet(context) {
       purchases_enabled: await purchasesEnabled(env),
       catalog_from_db: (await getSetting(env.DB, "catalog_from_db", "0")) === "1",
     },
+    copy: await getSiteCopy(env.DB),
   });
 }
 
@@ -30,6 +32,9 @@ export async function onRequestPatch(context) {
   if ("catalog_from_db" in body) {
     await setSetting(env.DB, "catalog_from_db", body.catalog_from_db ? "1" : "0");
   }
+  if (body.copy && typeof body.copy === "object") {
+    await patchSiteCopy(env.DB, body.copy);
+  }
 
   return json({
     ok: true,
@@ -37,5 +42,6 @@ export async function onRequestPatch(context) {
       purchases_enabled: await purchasesEnabled(env),
       catalog_from_db: (await getSetting(env.DB, "catalog_from_db", "0")) === "1",
     },
+    copy: await getSiteCopy(env.DB),
   });
 }

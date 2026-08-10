@@ -16,12 +16,15 @@ SHELL = """<!DOCTYPE html>
   <meta name="description" content="{desc}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body data-page="{page}">
+  <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
+  <main id="main">
   {body}
+  </main>
   <div id="site-footer"></div>
   <script src="assets/js/site.js"></script>
 </body>
@@ -36,50 +39,55 @@ PAGES["index.html"] = (
     "Океанский Minecraft: удочки StarCatcher, кейсы, сервер AquaTech.",
     """
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-caustic"></div>
+      <div class="hero-horizon"></div>
+      <div class="hero-wave"></div>
+      <div class="hero-spark"></div>
+    </div>
     <div class="container hero-inner">
-      <div class="eyebrow">Minecraft 1.20.1</div>
-      <h1>AquaTech</h1>
-      <p class="hero-lead">Спавн на плоту в океане. Двенадцать удочек StarCatcher, авторыбалка, кейсы и индустриальные моды. Скачай лаунчер и заходи.</p>
-      <div class="hero-actions">
+      <p class="eyebrow reveal" data-site="hero_eyebrow">Minecraft 1.20.1 · океанский skyblock</p>
+      <h1 class="reveal" style="--d:.06s" data-site="hero_title">AquaTech</h1>
+      <p class="hero-lead reveal" style="--d:.12s" data-site="hero_lead">Спавн на плоту. Двенадцать удочек StarCatcher, авторыбалка, кейсы и индустриальные моды. Скачай лаунчер и заходи.</p>
+      <div class="hero-actions reveal" style="--d:.18s">
         <a class="btn btn-primary" data-download href="#">Скачать лаунчер</a>
         <a class="btn btn-secondary" href="register.html">Регистрация</a>
         <a class="btn btn-ghost" href="store.html">Магазин</a>
       </div>
-      <div class="ip-box" data-copy-ip>
+      <button class="ip-box reveal" style="--d:.24s" type="button" data-copy-ip>
         <div>
           <small>IP СЕРВЕРА</small>
           <strong>katherine-hydro.tun.ply.gg:31279</strong>
         </div>
-        <div class="copy">СКОПИРОВАТЬ</div>
-      </div>
+        <span class="copy">Скопировать</span>
+      </button>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div>
-          <h2>На сервере</h2>
-          <p>Один мир-океан. Рыбалка, кейсы, прогрессия.</p>
+          <h2 data-site="features_title">На сервере</h2>
+          <p data-site="features_lead">Один мир-океан. Рыбалка, кейсы, прогрессия.</p>
         </div>
         <a class="btn btn-secondary" href="start.html">Как зайти</a>
       </div>
       <div class="grid-3">
-        <a class="card card-link" href="rods.html">
-          <div class="feature-art rods"></div>
+        <a class="tile reveal" href="rods.html" style="--d:.05s">
+          <div class="feature-art rods" aria-hidden="true"></div>
           <span class="tag">Удочки</span>
           <h3>StarCatcher</h3>
           <p>Бамбук в начале, дальше руды и индустриальный лут из пулов AquaTech.</p>
         </a>
-        <a class="card card-link" href="cases.html">
-          <div class="feature-art cases"></div>
+        <a class="tile reveal" href="cases.html" style="--d:.1s">
+          <div class="feature-art cases" aria-hidden="true"></div>
           <span class="tag gold">Кейсы</span>
           <h3>Награды в игре</h3>
           <p>Кейсы крутятся на сервере (F4). На сайте только состав.</p>
         </a>
-        <a class="card card-link" href="top.html">
-          <div class="feature-art tech"></div>
+        <a class="tile reveal" href="top.html" style="--d:.15s">
+          <div class="feature-art tech" aria-hidden="true"></div>
           <span class="tag">Игроки</span>
           <h3>Топы</h3>
           <p>Рейтинг по лайкам и монетам. Профиль можно оформить после входа.</p>
@@ -88,44 +96,35 @@ PAGES["index.html"] = (
     </div>
   </section>
 
-  <section class="section" style="padding-top:0">
+  <section class="section section-tight">
     <div class="container grid-2">
-      <div>
+      <div class="reveal">
         <div class="section-head">
           <div>
             <h2>Новости</h2>
             <p>Что менялось в лаунчере и на сервере.</p>
           </div>
         </div>
-        <div class="news-list">
-          <a class="news-item" href="news.html">
-            <time>8 августа 2026</time>
-            <h3>Лаунчер 2.9.20</h3>
-            <p>Экран входа, тёмный UI, клики со звуком. Регистрация на сайте, в лаунчере — только авторизация.</p>
-          </a>
-          <a class="news-item" href="news.html">
-            <time>Июль 2026</time>
-            <h3>Лут StarCatcher</h3>
-            <p>Таблицы улова для всех тиров удочек, в том числе с авторыбалкой.</p>
-          </a>
+        <div class="news-list" id="home-news" data-news-home>
+          <p class="muted-line">Загрузка новостей…</p>
         </div>
       </div>
-      <div class="card">
+      <aside class="join-panel reveal" style="--d:.08s">
         <span class="tag">Сервер</span>
-        <h3>AquaTech Ocean</h3>
-        <p style="margin:.6rem 0 1rem;color:var(--muted)">Океанский skyblock, плот 4×4. Заходи по IP ниже.</p>
-        <div class="ip-box" data-copy-ip style="width:100%;justify-content:space-between">
+        <h3 data-site="join_title">AquaTech Ocean</h3>
+        <p data-site="join_body">Океанский skyblock, плот 4×4. Заходи по IP ниже.</p>
+        <button class="ip-box ip-box-block" type="button" data-copy-ip>
           <div>
             <small>ПОДКЛЮЧЕНИЕ</small>
             <strong>katherine-hydro.tun.ply.gg:31279</strong>
           </div>
-          <div class="copy">COPY</div>
-        </div>
-        <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+          <span class="copy">Скопировать</span>
+        </button>
+        <div class="join-actions">
           <a class="btn btn-aqua" href="start.html">Начать игру</a>
           <a class="btn btn-secondary" href="players.html">Игроки</a>
         </div>
-      </div>
+      </aside>
     </div>
   </section>
 """,
@@ -277,26 +276,12 @@ PAGES["news.html"] = (
     <div class="container">
       <div class="eyebrow">Блог</div>
       <h1>Новости</h1>
-      <p>Что нового на сервере и в лаунчере.</p>
+      <p data-site="news_page_lead">Что нового на сервере и в лаунчере.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
-    <div class="container news-list">
-      <article class="news-item">
-        <time>8 августа 2026</time>
-        <h3>Лаунчер 2.9.20</h3>
-        <p>Полноэкранный вход, палитра v2, анимации кнопок и мягкие звуки клика.</p>
-      </article>
-      <article class="news-item">
-        <time>Август 2026</time>
-        <h3>Подключение к серверу</h3>
-        <p>Заходи по IP с сайта. Отдельный туннель для модов больше не нужен.</p>
-      </article>
-      <article class="news-item">
-        <time>Июль 2026</time>
-        <h3>Авторыбалка + StarCatcher</h3>
-        <p>Удочки с кастомным лутом и авторыбалкой на сервере.</p>
-      </article>
+    <div class="container news-list" id="news-root" data-news-page>
+      <p class="muted-line">Загрузка…</p>
     </div>
   </section>
 """,
@@ -437,6 +422,32 @@ PAGES["admin.html"] = (
           Покупки на сайте включены
         </label>
         <button class="btn btn-secondary" type="button" id="admin-save-settings" style="margin-top:1rem">Сохранить</button>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="section-head" style="margin-bottom:1rem">
+          <div>
+            <h3 style="margin:0">Тексты сайта</h3>
+            <p style="margin:.35rem 0 0">Главная, join-блок, футер, lead новостей</p>
+          </div>
+          <button class="btn btn-secondary" type="button" id="admin-save-copy">Сохранить тексты</button>
+        </div>
+        <div class="admin-copy-grid" id="admin-copy"></div>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="section-head" style="margin-bottom:1rem">
+          <div>
+            <h3 style="margin:0">Новости</h3>
+            <p style="margin:.35rem 0 0">Публикации на главной и /news</p>
+          </div>
+        </div>
+        <form class="admin-news-form" id="admin-news-form">
+          <div class="field"><label>Заголовок</label><input name="title" required maxlength="160" placeholder="Лаунчер 2.9.21" /></div>
+          <div class="field"><label>Дата</label><input name="published_at" type="date" required /></div>
+          <div class="field" style="grid-column:1/-1"><label>Текст</label><textarea name="body" rows="3" required maxlength="4000" placeholder="Что изменилось…"></textarea></div>
+          <label class="admin-check" style="align-self:end"><input type="checkbox" name="published" checked /> Опубликовано</label>
+          <button class="btn btn-primary" type="submit">Добавить</button>
+        </form>
+        <div id="admin-news" class="admin-table-wrap" style="margin-top:1rem"></div>
       </div>
       <div class="card" style="grid-column:1/-1">
         <div class="section-head" style="margin-bottom:1rem">

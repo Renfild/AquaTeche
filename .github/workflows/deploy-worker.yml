@@ -43,10 +43,8 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: b855fc404ea390174024f1d249cb1964
           command: deploy -c wrangler.worker.toml
-        # Pages-only tokens fail here; keep Pages green and surface Workers Edit gap.
-        continue-on-error: true
 
       - name: Live smoke
         env:
-          STRICT_LIVE_DEPLOY: "0"
+          STRICT_LIVE_DEPLOY: "1"
         run: python tools/smoke_portal_and_versions.py

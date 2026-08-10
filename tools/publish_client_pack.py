@@ -18,22 +18,21 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.4"
-PACK_VERSION = "2.9.4"
+PACK_TAG = "pack-2.9.5"
+PACK_VERSION = "2.9.5"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
 FOLDERS = ["mods", "config", "kubejs", "resourcepacks"]
 SKIP_PATH_PARTS = ("_disabled", "_parked", ".disabled", "/players/", "quest_progress")
 # Client-only jars (not on dedicated server) — copy from previous pack or client/ if present
+# ImmediatelyFast 1.2.4 crashes with Oculus 1.7 (IrisCompat ImmediateState) — omit until a compatible build.
 CLIENT_ONLY_PREFIXES = (
     "embeddium",
     "oculus",
     "entityculling",
     "dynamic-fps",
-    "immediatelyfast",
     "betterquestpopup",
-    "certain_questing",
 )
 # Never pull these from client/ — server copy wins (and may differ by patch version)
 SERVER_OWNED_PREFIXES = (

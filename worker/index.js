@@ -30,6 +30,16 @@ import {
 import { onRequestPatch as adminCatalogPatch } from "../functions/api/admin/catalog/[id].js";
 import { onRequestGet as adminUsersGet } from "../functions/api/admin/users.js";
 import { onRequestPatch as adminUserPatch } from "../functions/api/admin/users/[nick].js";
+import {
+  onRequestGet as adminNewsGet,
+  onRequestPost as adminNewsPost,
+} from "../functions/api/admin/news.js";
+import {
+  onRequestPatch as adminNewsPatch,
+  onRequestDelete as adminNewsDelete,
+} from "../functions/api/admin/news/[id].js";
+import { onRequestGet as newsGet } from "../functions/api/news.js";
+import { onRequestGet as siteGet } from "../functions/api/site.js";
 
 function ctx(request, env, params = {}) {
   return { request, env, params };
@@ -52,6 +62,8 @@ async function handleApi(request, env) {
   if (path === "/api/players" && method === "GET") return playersGet(ctx(request, env));
   if (path === "/api/catalog" && method === "GET") return catalogGet(ctx(request, env));
   if (path === "/api/server-status" && method === "GET") return serverStatusGet(ctx(request, env));
+  if (path === "/api/news" && method === "GET") return newsGet(ctx(request, env));
+  if (path === "/api/site" && method === "GET") return siteGet(ctx(request, env));
   // ensure-nick intentionally returns 410 (open signup footgun)
   if (path === "/api/launcher/ensure-nick" && method === "POST") return launcherEnsureNickPost(ctx(request, env));
   if (path === "/api/purchase") {
@@ -76,6 +88,16 @@ async function handleApi(request, env) {
   const adminUser = path.match(/^\/api\/admin\/users\/([^/]+)$/);
   if (adminUser && method === "PATCH") {
     return adminUserPatch(ctx(request, env, { nick: decodeURIComponent(adminUser[1]) }));
+  }
+  if (path === "/api/admin/news") {
+    if (method === "GET") return adminNewsGet(ctx(request, env));
+    if (method === "POST") return adminNewsPost(ctx(request, env));
+  }
+  const adminNews = path.match(/^\/api\/admin\/news\/(\d+)$/);
+  if (adminNews) {
+    const params = { id: adminNews[1] };
+    if (method === "PATCH") return adminNewsPatch(ctx(request, env, params));
+    if (method === "DELETE") return adminNewsDelete(ctx(request, env, params));
   }
 
   const profileMatch = path.match(/^\/api\/profiles\/([^/]+)$/);

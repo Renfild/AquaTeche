@@ -7,11 +7,13 @@
   <meta name="description" content="Панель администратора AquaTech." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body data-page="admin">
+  <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
+  <main id="main">
   
   <section class="page-hero">
     <div class="container">
@@ -29,6 +31,32 @@
           Покупки на сайте включены
         </label>
         <button class="btn btn-secondary" type="button" id="admin-save-settings" style="margin-top:1rem">Сохранить</button>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="section-head" style="margin-bottom:1rem">
+          <div>
+            <h3 style="margin:0">Тексты сайта</h3>
+            <p style="margin:.35rem 0 0">Главная, join-блок, футер, lead новостей</p>
+          </div>
+          <button class="btn btn-secondary" type="button" id="admin-save-copy">Сохранить тексты</button>
+        </div>
+        <div class="admin-copy-grid" id="admin-copy"></div>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="section-head" style="margin-bottom:1rem">
+          <div>
+            <h3 style="margin:0">Новости</h3>
+            <p style="margin:.35rem 0 0">Публикации на главной и /news</p>
+          </div>
+        </div>
+        <form class="admin-news-form" id="admin-news-form">
+          <div class="field"><label>Заголовок</label><input name="title" required maxlength="160" placeholder="Лаунчер 2.9.21" /></div>
+          <div class="field"><label>Дата</label><input name="published_at" type="date" required /></div>
+          <div class="field" style="grid-column:1/-1"><label>Текст</label><textarea name="body" rows="3" required maxlength="4000" placeholder="Что изменилось…"></textarea></div>
+          <label class="admin-check" style="align-self:end"><input type="checkbox" name="published" checked /> Опубликовано</label>
+          <button class="btn btn-primary" type="submit">Добавить</button>
+        </form>
+        <div id="admin-news" class="admin-table-wrap" style="margin-top:1rem"></div>
       </div>
       <div class="card" style="grid-column:1/-1">
         <div class="section-head" style="margin-bottom:1rem">
@@ -56,6 +84,7 @@
     </div>
   </section>
 
+  </main>
   <div id="site-footer"></div>
   <script src="assets/js/site.js"></script>
 </body>
