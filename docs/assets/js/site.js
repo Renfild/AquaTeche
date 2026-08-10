@@ -19,15 +19,76 @@
   ];
 
   const COPY_FIELDS = [
-    { key: "hero_eyebrow", label: "Hero · eyebrow", long: false },
-    { key: "hero_title", label: "Hero · заголовок", long: false },
-    { key: "hero_lead", label: "Hero · текст", long: true },
-    { key: "features_title", label: "Секция · заголовок", long: false },
-    { key: "features_lead", label: "Секция · подзаголовок", long: false },
-    { key: "join_title", label: "Join · заголовок", long: false },
-    { key: "join_body", label: "Join · текст", long: true },
-    { key: "footer_blurb", label: "Футер", long: true },
-    { key: "news_page_lead", label: "Новости · lead", long: false },
+    { group: "Главная", key: "hero_eyebrow", label: "Hero · eyebrow", long: false },
+    { group: "Главная", key: "hero_title", label: "Hero · заголовок", long: false },
+    { group: "Главная", key: "hero_lead", label: "Hero · текст", long: true },
+    { group: "Главная", key: "features_title", label: "Секция · заголовок", long: false },
+    { group: "Главная", key: "features_lead", label: "Секция · подзаголовок", long: false },
+    { group: "Главная", key: "tile_rods_tag", label: "Плитка удочки · тег", long: false },
+    { group: "Главная", key: "tile_rods_title", label: "Плитка удочки · заголовок", long: false },
+    { group: "Главная", key: "tile_rods_body", label: "Плитка удочки · текст", long: true },
+    { group: "Главная", key: "tile_cases_tag", label: "Плитка кейсы · тег", long: false },
+    { group: "Главная", key: "tile_cases_title", label: "Плитка кейсы · заголовок", long: false },
+    { group: "Главная", key: "tile_cases_body", label: "Плитка кейсы · текст", long: true },
+    { group: "Главная", key: "tile_top_tag", label: "Плитка топы · тег", long: false },
+    { group: "Главная", key: "tile_top_title", label: "Плитка топы · заголовок", long: false },
+    { group: "Главная", key: "tile_top_body", label: "Плитка топы · текст", long: true },
+    { group: "Главная", key: "home_news_title", label: "Новости дома · заголовок", long: false },
+    { group: "Главная", key: "home_news_lead", label: "Новости дома · lead", long: false },
+    { group: "Главная", key: "join_title", label: "Join · заголовок", long: false },
+    { group: "Главная", key: "join_body", label: "Join · текст", long: true },
+    { group: "Главная", key: "footer_blurb", label: "Футер", long: true },
+    { group: "Старт", key: "start_eyebrow", label: "Eyebrow", long: false },
+    { group: "Старт", key: "start_title", label: "Заголовок", long: false },
+    { group: "Старт", key: "start_lead", label: "Lead", long: true },
+    { group: "Старт", key: "start_step1_title", label: "Шаг 1 · заголовок", long: false },
+    { group: "Старт", key: "start_step1_body", label: "Шаг 1 · текст", long: true },
+    { group: "Старт", key: "start_step2_title", label: "Шаг 2 · заголовок", long: false },
+    { group: "Старт", key: "start_step2_1", label: "Шаг 2 · пункт 1", long: false },
+    { group: "Старт", key: "start_step2_2", label: "Шаг 2 · пункт 2", long: false },
+    { group: "Старт", key: "start_step2_3", label: "Шаг 2 · пункт 3", long: false },
+    { group: "Старт", key: "start_step2_4", label: "Шаг 2 · пункт 4", long: false },
+    { group: "Магазин", key: "store_eyebrow", label: "Eyebrow", long: false },
+    { group: "Магазин", key: "store_title", label: "Заголовок", long: false },
+    { group: "Магазин", key: "store_lead", label: "Lead", long: true },
+    { group: "Магазин", key: "store_notice", label: "Баннер", long: true },
+    { group: "Кейсы", key: "cases_eyebrow", label: "Eyebrow", long: false },
+    { group: "Кейсы", key: "cases_title", label: "Заголовок", long: false },
+    { group: "Кейсы", key: "cases_lead", label: "Lead", long: true },
+    { group: "Кейсы", key: "cases_notice", label: "Баннер", long: true },
+    { group: "Удочки", key: "rods_eyebrow", label: "Eyebrow", long: false },
+    { group: "Удочки", key: "rods_title", label: "Заголовок", long: false },
+    { group: "Удочки", key: "rods_lead", label: "Lead", long: true },
+    { group: "Удочки", key: "rods_rules_title", label: "Правила улова · заголовок", long: false },
+    { group: "Удочки", key: "rods_rule_1", label: "Правило 1", long: true },
+    { group: "Удочки", key: "rods_rule_2", label: "Правило 2", long: true },
+    { group: "Удочки", key: "rods_rule_3", label: "Правило 3", long: true },
+    { group: "Удочки", key: "rods_rule_4", label: "Правило 4", long: true },
+    { group: "Топы", key: "top_eyebrow", label: "Eyebrow", long: false },
+    { group: "Топы", key: "top_title", label: "Заголовок", long: false },
+    { group: "Топы", key: "top_lead", label: "Lead", long: true },
+    { group: "Новости", key: "news_eyebrow", label: "Eyebrow", long: false },
+    { group: "Новости", key: "news_title", label: "Заголовок", long: false },
+    { group: "Новости", key: "news_page_lead", label: "Lead", long: true },
+    { group: "Профиль", key: "profile_eyebrow", label: "Eyebrow", long: false },
+    { group: "Профиль", key: "profile_title", label: "Заголовок", long: false },
+    { group: "Профиль", key: "profile_lead", label: "Lead", long: true },
+    { group: "Вход", key: "login_eyebrow", label: "Eyebrow", long: false },
+    { group: "Вход", key: "login_title", label: "Заголовок", long: false },
+    { group: "Вход", key: "login_lead", label: "Lead", long: false },
+    { group: "Регистрация", key: "register_eyebrow", label: "Eyebrow", long: false },
+    { group: "Регистрация", key: "register_title", label: "Заголовок", long: false },
+    { group: "Регистрация", key: "register_lead", label: "Lead", long: false },
+    { group: "Поиск", key: "players_eyebrow", label: "Eyebrow", long: false },
+    { group: "Поиск", key: "players_title", label: "Заголовок", long: false },
+    { group: "Поиск", key: "players_lead", label: "Lead", long: false },
+    { group: "Правила", key: "rules_eyebrow", label: "Eyebrow", long: false },
+    { group: "Правила", key: "rules_title", label: "Заголовок", long: false },
+    { group: "Правила", key: "rules_1", label: "Пункт 1", long: true },
+    { group: "Правила", key: "rules_2", label: "Пункт 2", long: true },
+    { group: "Правила", key: "rules_3", label: "Пункт 3", long: true },
+    { group: "Правила", key: "rules_4", label: "Пункт 4", long: true },
+    { group: "Правила", key: "rules_5", label: "Пункт 5", long: true },
   ];
 
   const FALLBACK_NEWS = [
@@ -826,12 +887,17 @@
 
     const copyBox = $("#admin-copy");
     if (copyBox) {
+      let lastGroup = "";
       copyBox.innerHTML = COPY_FIELDS.map((f) => {
         const val = esc(siteCopy[f.key] || "");
-        if (f.long) {
-          return `<div class="field"><label>${esc(f.label)}</label><textarea data-copy="${f.key}" rows="3">${val}</textarea></div>`;
+        const field = f.long
+          ? `<div class="field"><label>${esc(f.label)}</label><textarea data-copy="${f.key}" rows="3">${val}</textarea></div>`
+          : `<div class="field"><label>${esc(f.label)}</label><input data-copy="${f.key}" value="${val}" /></div>`;
+        if (f.group && f.group !== lastGroup) {
+          lastGroup = f.group;
+          return `<h4 class="admin-copy-group">${esc(f.group)}</h4>${field}`;
         }
-        return `<div class="field"><label>${esc(f.label)}</label><input data-copy="${f.key}" value="${val}" /></div>`;
+        return field;
       }).join("");
     }
 

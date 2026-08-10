@@ -76,21 +76,21 @@ PAGES["index.html"] = (
       <div class="grid-3">
         <a class="tile reveal" href="rods.html" style="--d:.05s">
           <div class="feature-art rods" aria-hidden="true"></div>
-          <span class="tag">Удочки</span>
-          <h3>StarCatcher</h3>
-          <p>Бамбук в начале, дальше руды и индустриальный лут из пулов AquaTech.</p>
+          <span class="tag" data-site="tile_rods_tag">Удочки</span>
+          <h3 data-site="tile_rods_title">StarCatcher</h3>
+          <p data-site="tile_rods_body">Бамбук в начале, дальше руды и индустриальный лут из пулов AquaTech.</p>
         </a>
         <a class="tile reveal" href="cases.html" style="--d:.1s">
           <div class="feature-art cases" aria-hidden="true"></div>
-          <span class="tag gold">Кейсы</span>
-          <h3>Награды в игре</h3>
-          <p>Кейсы крутятся на сервере (F4). На сайте только состав.</p>
+          <span class="tag gold" data-site="tile_cases_tag">Кейсы</span>
+          <h3 data-site="tile_cases_title">Награды в игре</h3>
+          <p data-site="tile_cases_body">Кейсы крутятся на сервере (F4). На сайте только состав.</p>
         </a>
         <a class="tile reveal" href="top.html" style="--d:.15s">
           <div class="feature-art tech" aria-hidden="true"></div>
-          <span class="tag">Игроки</span>
-          <h3>Топы</h3>
-          <p>Рейтинг по лайкам и монетам. Профиль можно оформить после входа.</p>
+          <span class="tag" data-site="tile_top_tag">Игроки</span>
+          <h3 data-site="tile_top_title">Топы</h3>
+          <p data-site="tile_top_body">Рейтинг по лайкам и монетам. Профиль можно оформить после входа.</p>
         </a>
       </div>
     </div>
@@ -101,8 +101,8 @@ PAGES["index.html"] = (
       <div class="reveal">
         <div class="section-head">
           <div>
-            <h2>Новости</h2>
-            <p>Что менялось в лаунчере и на сервере.</p>
+            <h2 data-site="home_news_title">Новости</h2>
+            <p data-site="home_news_lead">Что менялось в лаунчере и на сервере.</p>
           </div>
         </div>
         <div class="news-list" id="home-news" data-news-home>
@@ -137,26 +137,26 @@ PAGES["start.html"] = (
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Старт</div>
-      <h1>Как зайти</h1>
-      <p>Нужен Windows. Скачай лаунчер, впиши ник и жми «Играть».</p>
+      <div class="eyebrow" data-site="start_eyebrow">Старт</div>
+      <h1 data-site="start_title">Как зайти</h1>
+      <p data-site="start_lead">Нужен Windows. Скачай лаунчер, впиши ник и жми «Играть».</p>
       <div class="banner"></div>
     </div>
   </section>
   <section class="section" style="padding-top:1rem">
     <div class="container grid-2">
       <div class="card">
-        <h3>1. Лаунчер</h3>
-        <p style="color:var(--muted);margin:.6rem 0 1rem">Скачай и запусти. Дальше всё поставится само.</p>
+        <h3 data-site="start_step1_title">1. Лаунчер</h3>
+        <p style="color:var(--muted);margin:.6rem 0 1rem" data-site="start_step1_body">Скачай и запусти. Дальше всё поставится само.</p>
         <a class="btn btn-primary" data-download href="#">Скачать для Windows</a>
       </div>
       <div class="card">
-        <h3>2. Игра</h3>
+        <h3 data-site="start_step2_title">2. Игра</h3>
         <ul class="perk-list">
-          <li>Впиши ник в лаунчере</li>
-          <li>Дождись загрузки</li>
-          <li>Жми «Играть»</li>
-          <li>IP вручную: katherine-hydro.tun.ply.gg:31279</li>
+          <li data-site="start_step2_1">Впиши ник в лаунчере</li>
+          <li data-site="start_step2_2">Дождись загрузки</li>
+          <li data-site="start_step2_3">Жми «Играть»</li>
+          <li data-site="start_step2_4">IP вручную: katherine-hydro.tun.ply.gg:31279</li>
         </ul>
         <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
           <a class="btn btn-secondary" href="register.html">Профиль на сайте</a>
@@ -175,10 +175,10 @@ PAGES["store.html"] = (
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Магазин</div>
-      <h1>Привилегии</h1>
-      <p>Состав рангов и цены. Купить на сайте пока нельзя.</p>
-      <div class="notice-banner inline">Покупки выключены. Оплату подключим позже.</div>
+      <div class="eyebrow" data-site="store_eyebrow">Магазин</div>
+      <h1 data-site="store_title">Привилегии</h1>
+      <p data-site="store_lead">Состав рангов и цены. Купить на сайте пока нельзя.</p>
+      <div class="notice-banner inline" data-site="store_notice">Покупки выключены. Оплату подключим позже.</div>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -194,10 +194,10 @@ PAGES["cases.html"] = (
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Кейсы</div>
-      <h1>Что внутри</h1>
-      <p>Сайт только показывает состав. Открывай кейсы в игре (F4).</p>
-      <div class="notice-banner inline">На сайте кейсы не открываются.</div>
+      <div class="eyebrow" data-site="cases_eyebrow">Кейсы</div>
+      <h1 data-site="cases_title">Что внутри</h1>
+      <p data-site="cases_lead">Сайт только показывает состав. Открывай кейсы в игре (F4).</p>
+      <div class="notice-banner inline" data-site="cases_notice">На сайте кейсы не открываются.</div>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -498,22 +498,21 @@ PAGES["rods.html"] = (
     f"""
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">StarCatcher</div>
-      <h1>Удочки и лут</h1>
-      <p>Ванильный улов выключен. Ресурсные удочки крутят пулы AquaTech; множители ×2…×64 умножают количество.</p>
+      <div class="eyebrow" data-site="rods_eyebrow">StarCatcher</div>
+      <h1 data-site="rods_title">Удочки и лут</h1>
+      <p data-site="rods_lead">Ванильный улов выключен. Ресурсные удочки крутят пулы AquaTech; множители ×2…×64 умножают количество.</p>
       <div class="banner" style="background:radial-gradient(circle at 30% 40%, rgba(245,197,66,.3), transparent 35%), linear-gradient(145deg,#164e63,#0f766e,#083344)"></div>
     </div>
   </section>
 
   <section class="section section-tight">
     <div class="container">
-      <h2 class="loot-section-title">Как считается улов</h2>
+      <h2 class="loot-section-title" data-site="rods_rules_title">Как считается улов</h2>
       <ul class="loot-rules">
-        <li>Каждый предмет в пуле сначала кидает свой шанс.</li>
-        <li>Из успешно прошедших случайно оставляют 1–3 стака (у T1 доп. пула — 1–2).</li>
-        <li>Кол-во в стаке — диапазон из таблицы; множитель удочки его умножает.</li>
-        <li>Avaritia / inferno / crystal_* из улова вырезаны.</li>
-        <li>Костяная и небесная — только рыба StarCatcher, без ресурсного пула.</li>
+        <li data-site="rods_rule_1">Каждый предмет в пуле сначала кидает свой шанс.</li>
+        <li data-site="rods_rule_2">Из успешно прошедших случайно оставляют 1–3 стака (у T1 доп. пула — 1–2).</li>
+        <li data-site="rods_rule_3">Кол-во в стаке — диапазон из таблицы; множитель удочки его умножает.</li>
+        <li data-site="rods_rule_4">Костяная и небесная — только рыба StarCatcher, без ресурсного пула.</li>
       </ul>
       <nav class="loot-jump" aria-label="Тиры удочек">
         <a href="#t1">T1</a><a href="#t2">T2</a><a href="#t3">T3</a><a href="#t4">T4</a>
@@ -573,9 +572,9 @@ PAGES["top.html"] = (
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Рейтинги</div>
-      <h1>Топы</h1>
-      <p>Кто сколько наиграл, кто накопил монет, кого лайкнули.</p>
+      <div class="eyebrow" data-site="top_eyebrow">Рейтинги</div>
+      <h1 data-site="top_title">Топы</h1>
+      <p data-site="top_lead">Кто сколько наиграл, кто накопил монет, кого лайкнули.</p>
       <div class="banner"></div>
       <div class="tabs">
         <button class="tab active" type="button" data-top-tab="playtime">По онлайну</button>
@@ -595,8 +594,8 @@ PAGES["news.html"] = (
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Блог</div>
-      <h1>Новости</h1>
+      <div class="eyebrow" data-site="news_eyebrow">Блог</div>
+      <h1 data-site="news_title">Новости</h1>
       <p data-site="news_page_lead">Что нового на сервере и в лаунчере.</p>
     </div>
   </section>
@@ -615,9 +614,9 @@ PAGES["profile.html"] = (
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Профиль</div>
-      <h1>Игрок</h1>
-      <p>Статы, био, тема оформления. Свой профиль правится после входа.</p>
+      <div class="eyebrow" data-site="profile_eyebrow">Профиль</div>
+      <h1 data-site="profile_title">Игрок</h1>
+      <p data-site="profile_lead">Статы, био, тема оформления. Свой профиль правится после входа.</p>
     </div>
   </section>
   <section class="section" style="padding-top:0">
@@ -644,9 +643,9 @@ PAGES["login.html"] = (
     """
   <section class="page-hero">
     <div class="container auth-shell">
-      <div class="eyebrow">Аккаунт</div>
-      <h1>Вход</h1>
-      <p>Ник Minecraft: латиница, цифры, _.</p>
+      <div class="eyebrow" data-site="login_eyebrow">Аккаунт</div>
+      <h1 data-site="login_title">Вход</h1>
+      <p data-site="login_lead">Ник Minecraft: латиница, цифры, _.</p>
       <form class="card form" id="login-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="••••" required /></div>
@@ -665,9 +664,9 @@ PAGES["register.html"] = (
     """
   <section class="page-hero">
     <div class="container auth-shell">
-      <div class="eyebrow">Аккаунт</div>
-      <h1>Регистрация</h1>
-      <p>Ник 3–16 символов (A–Z, 0–9, _). Пароль от 4.</p>
+      <div class="eyebrow" data-site="register_eyebrow">Аккаунт</div>
+      <h1 data-site="register_title">Регистрация</h1>
+      <p data-site="register_lead">Ник 3–16 символов (A–Z, 0–9, _). Пароль от 4.</p>
       <form class="card form" id="register-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required minlength="4" /></div>
@@ -686,9 +685,9 @@ PAGES["players.html"] = (
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Игроки</div>
-      <h1>Поиск</h1>
-      <p>Введи ник, открой профиль.</p>
+      <div class="eyebrow" data-site="players_eyebrow">Игроки</div>
+      <h1 data-site="players_title">Поиск</h1>
+      <p data-site="players_lead">Введи ник, открой профиль.</p>
       <div class="field" style="margin-top:1.25rem;max-width:420px">
         <label>Ник</label>
         <input id="player-search" placeholder="Ник…" />
@@ -706,15 +705,15 @@ PAGES["rules.html"] = (
     """
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Правила</div>
-      <h1>На сервере</h1>
+      <div class="eyebrow" data-site="rules_eyebrow">Правила</div>
+      <h1 data-site="rules_title">На сервере</h1>
       <div class="card" style="margin-top:1.25rem">
         <ol class="perk-list" style="list-style:decimal;padding-left:1.2rem">
-          <li>Читы и дюпы запрещены.</li>
-          <li>Не мешай на спавне и в чужих базах.</li>
-          <li>Без оскорблений в чате.</li>
-          <li>Чужие сервера в чате не рекламируй.</li>
-          <li>Админы могут откатить гриф и выдать мут/бан.</li>
+          <li data-site="rules_1">Читы и дюпы запрещены.</li>
+          <li data-site="rules_2">Не мешай на спавне и в чужих базах.</li>
+          <li data-site="rules_3">Без оскорблений в чате.</li>
+          <li data-site="rules_4">Чужие сервера в чате не рекламируй.</li>
+          <li data-site="rules_5">Админы могут откатить гриф и выдать мут/бан.</li>
         </ol>
       </div>
     </div>
@@ -748,7 +747,7 @@ PAGES["admin.html"] = (
         <div class="section-head" style="margin-bottom:1rem">
           <div>
             <h3 style="margin:0">Тексты сайта</h3>
-            <p style="margin:.35rem 0 0">Главная, join-блок, футер, lead новостей</p>
+            <p style="margin:.35rem 0 0">Каждая строка с data-site: герои страниц, плитки, правила, удочки</p>
           </div>
           <button class="btn btn-secondary" type="button" id="admin-save-copy">Сохранить тексты</button>
         </div>

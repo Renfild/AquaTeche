@@ -213,13 +213,16 @@ ServerEvents.recipes((event) => {
     S: 'minecraft:nether_star',
   }).id('aquatech:abyssal_magnet')
 
-  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SGS'], {
-    I: 'minecraft:iron_block',
-    F: 'starcatcher:humble_rod',
+  // One auto-fisher craft (also clears jar datapack duplicate)
+  event.remove({ output: 'aquatech_ui:auto_fisher' })
+  event.remove({ id: 'aquatech_ui:auto_fisher' })
+  event.remove({ id: 'aquatech:auto_fisher' })
+  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SSS'], {
+    I: 'minecraft:iron_ingot',
+    F: 'minecraft:fishing_rod',
     R: 'minecraft:redstone_block',
     C: 'minecraft:chest',
     S: 'minecraft:smooth_stone',
-    G: 'industrialupgrade:crafting_elements/crafting_272_element',
   }).id('aquatech:auto_fisher')
 
   event.shaped('aquatech_ui:seabed_dredger', ['DBD', 'RCR', 'SSS'], {

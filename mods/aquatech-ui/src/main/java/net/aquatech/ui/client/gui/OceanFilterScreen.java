@@ -1,7 +1,6 @@
 package net.aquatech.ui.client.gui;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.client.render.MachineGuiFx;
 import net.aquatech.ui.inventory.OceanFilterMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -13,7 +12,11 @@ public class OceanFilterScreen extends AbstractAquaMachineScreen<OceanFilterMenu
     private static final ResourceLocation TEXTURE = new ResourceLocation(AquaTechUI.MOD_ID, "textures/gui/ocean_filter.png");
 
     public OceanFilterScreen(OceanFilterMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title, TEXTURE, true, 8, 18, 10, 52);
+        // Left energy well baked into texture (~x=3..12)
+        super(menu, playerInventory, title, TEXTURE, true, 3, 17, 8, 50);
+        this.drawLabels = false;
+        this.drawAmbientFx = false;
+        this.inventoryLabelY = 74;
     }
 
     @Override
@@ -24,9 +27,8 @@ public class OceanFilterScreen extends AbstractAquaMachineScreen<OceanFilterMenu
     @Override
     protected void renderMachineOverlays(GuiGraphics guiGraphics, int x, int y, float t, boolean active) {
         blitEnergy(guiGraphics, x, y, menu.getScaledEnergy(), t);
-        MachineGuiFx.turbine(guiGraphics, x + 55, y + 34, t, active);
         if (active) {
-            blitProgressArrow(guiGraphics, x, y, 70, 35, menu.getScaledProgress(), t);
+            blitProgressArrow(guiGraphics, x, y, 52, 35, menu.getScaledProgress(), t);
         }
     }
 

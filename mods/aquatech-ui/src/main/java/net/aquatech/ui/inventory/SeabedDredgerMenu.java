@@ -18,6 +18,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
+/**
+ * Slot layout matches {@code textures/gui/seabed_dredger.png}:
+ * drill (27,19), upgrade (27,55), outputs 3×3 at (77,19). Middle cyan well is decorative.
+ */
 public class SeabedDredgerMenu extends AbstractContainerMenu {
 
     public final SeabedDredgerBlockEntity blockEntity;
@@ -34,7 +38,7 @@ public class SeabedDredgerMenu extends AbstractContainerMenu {
         this.data = data;
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 26, 35) {
+            this.addSlot(new SlotItemHandler(handler, 0, 27, 19) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     return stack.is(ModItems.DREDGER_DRILL_BIT.get());
@@ -44,7 +48,7 @@ public class SeabedDredgerMenu extends AbstractContainerMenu {
             for (int row = 0; row < 3; row++) {
                 for (int col = 0; col < 3; col++) {
                     int slotIndex = 1 + row * 3 + col;
-                    this.addSlot(new SlotItemHandler(handler, slotIndex, 98 + col * 18, 17 + row * 18) {
+                    this.addSlot(new SlotItemHandler(handler, slotIndex, 77 + col * 18, 19 + row * 18) {
                         @Override
                         public boolean mayPlace(ItemStack stack) {
                             return false;
@@ -53,7 +57,7 @@ public class SeabedDredgerMenu extends AbstractContainerMenu {
                 }
             }
 
-            this.addSlot(new SlotItemHandler(handler, SeabedDredgerBlockEntity.UPGRADE_SLOT, 50, 58) {
+            this.addSlot(new SlotItemHandler(handler, SeabedDredgerBlockEntity.UPGRADE_SLOT, 27, 55) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     return stack.getItem() instanceof UpgradeItem;

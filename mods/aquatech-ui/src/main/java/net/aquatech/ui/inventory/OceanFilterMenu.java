@@ -18,6 +18,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
+/**
+ * Slot layout matches {@code textures/gui/ocean_filter.png}:
+ * mesh (27,23), upgrade (27,47), outputs 3×2 at (79,23).
+ */
 public class OceanFilterMenu extends AbstractContainerMenu {
 
     public final OceanFilterBlockEntity blockEntity;
@@ -34,17 +38,17 @@ public class OceanFilterMenu extends AbstractContainerMenu {
         this.data = data;
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 26, 35) {
+            this.addSlot(new SlotItemHandler(handler, 0, 27, 23) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     return stack.is(ModItems.MESH_FILTER.get());
                 }
             });
 
-            for (int row = 0; row < 3; row++) {
+            for (int row = 0; row < 2; row++) {
                 for (int col = 0; col < 3; col++) {
                     int slotIndex = 1 + row * 3 + col;
-                    this.addSlot(new SlotItemHandler(handler, slotIndex, 98 + col * 18, 17 + row * 18) {
+                    this.addSlot(new SlotItemHandler(handler, slotIndex, 79 + col * 18, 23 + row * 24) {
                         @Override
                         public boolean mayPlace(ItemStack stack) {
                             return false;
@@ -53,7 +57,7 @@ public class OceanFilterMenu extends AbstractContainerMenu {
                 }
             }
 
-            this.addSlot(new SlotItemHandler(handler, OceanFilterBlockEntity.UPGRADE_SLOT, 62, 58) {
+            this.addSlot(new SlotItemHandler(handler, OceanFilterBlockEntity.UPGRADE_SLOT, 27, 47) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     return stack.getItem() instanceof UpgradeItem;
@@ -102,8 +106,9 @@ public class OceanFilterMenu extends AbstractContainerMenu {
             ItemStack stackInSlot = slot.getItem();
             sourceStack = stackInSlot.copy();
 
-            if (index < 11) {
-                if (!this.moveItemStackTo(stackInSlot, 11, 47, true)) {
+            // machine: mesh + 6 outs + upgrade = 8 visible slots in menu order 0..7
+            if (index < 8) {
+                if (!this.moveItemStackTo(stackInSlot, 8, 44, true)) {
                     return ItemStack.EMPTY;
                 }
             } else if (stackInSlot.is(ModItems.MESH_FILTER.get())) {
@@ -111,7 +116,7 @@ public class OceanFilterMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             } else if (stackInSlot.getItem() instanceof UpgradeItem) {
-                if (!this.moveItemStackTo(stackInSlot, 10, 11, false)) {
+                if (!this.moveItemStackTo(stackInSlot, 7, 8, false)) {
                     return ItemStack.EMPTY;
                 }
             } else {

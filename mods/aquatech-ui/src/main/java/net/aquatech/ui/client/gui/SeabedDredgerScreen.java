@@ -12,7 +12,10 @@ public class SeabedDredgerScreen extends AbstractAquaMachineScreen<SeabedDredger
     private static final ResourceLocation TEXTURE = new ResourceLocation(AquaTechUI.MOD_ID, "textures/gui/seabed_dredger.png");
 
     public SeabedDredgerScreen(SeabedDredgerMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title, TEXTURE, true, 8, 18, 10, 52);
+        super(menu, playerInventory, title, TEXTURE, true, 3, 17, 8, 50);
+        this.drawLabels = false;
+        this.drawAmbientFx = false;
+        this.inventoryLabelY = 74;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class SeabedDredgerScreen extends AbstractAquaMachineScreen<SeabedDredger
     protected void renderMachineOverlays(GuiGraphics guiGraphics, int x, int y, float t, boolean active) {
         blitEnergy(guiGraphics, x, y, menu.getScaledEnergy(), t);
         if (active) {
-            blitProgressArrow(guiGraphics, x, y, 70, 35, menu.getScaledProgress(), t);
+            blitProgressArrow(guiGraphics, x, y, 50, 36, menu.getScaledProgress(), t);
         }
     }
 

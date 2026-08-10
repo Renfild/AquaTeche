@@ -1545,6 +1545,18 @@ button:focus-visible,
   .admin-copy-grid { grid-template-columns: 1fr 1fr; }
 }
 
+.admin-copy-group {
+  grid-column: 1 / -1;
+  margin: 0.75rem 0 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.admin-copy-group:first-child {
+  margin-top: 0;
+}
+
 .admin-copy-grid .field textarea {
   min-height: 4.5rem;
 }

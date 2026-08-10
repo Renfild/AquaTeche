@@ -62,8 +62,7 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             if (slot == 0) {
-                // StarCatcher rods extend Item, not FishingRodItem
-                return FishingRodCompat.isResourceRod(stack);
+                return FishingRodCompat.isSupportedRod(stack);
             }
             if (slot >= 1 && slot <= 4) return true; // output
             if (slot == UPGRADE_SLOT) return stack.getItem() instanceof UpgradeItem;
@@ -131,7 +130,7 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         entity.refreshSkillCache(level, pos);
         Player nearby = entity.cachedNearby;
         ItemStack rodStack = entity.itemHandler.getStackInSlot(0);
-        boolean hasValidRod = !rodStack.isEmpty() && FishingRodCompat.isResourceRod(rodStack);
+        boolean hasValidRod = !rodStack.isEmpty() && FishingRodCompat.isSupportedRod(rodStack);
         int baseCost = MachineUpgrades.energyCost(entity.itemHandler, UPGRADE_SLOT, ENERGY_PER_TICK);
         int cost = Math.max(1, Math.round(baseCost * entity.cachedEnergyFactor));
         boolean hasEnergy = entity.energyStorage.getEnergyStored() >= cost;
@@ -199,7 +198,13 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             insertIntoOutput(drop);
         }
 
-        // Durability: always consume when fishing resources
+        wearRod(rodStack);
+    }
+
+    /** Vanilla damageable rods + StarCatcher (no maxDamage) pack-side wear. */
+    private void wearRod(ItemStack rodStack) {
+        if (rodStack.isEmpty()) return;
+
         if (rodStack.isDamageableItem()) {
             rodStack.setDamageValue(rodStack.getDamageValue() + 1);
             if (rodStack.getDamageValue() >= rodStack.getMaxDamage()) {
@@ -207,7 +212,32 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             } else {
                 itemHandler.setStackInSlot(0, rodStack);
             }
+            return;
         }
+
+        CompoundTag tag = rodStack.getOrCreateTag();
+        int wear = tag.getInt("AquaFisherWear") + 1;
+        int max = packMaxWear(rodStack);
+        if (wear >= max) {
+            itemHandler.setStackInSlot(0, ItemStack.EMPTY);
+            return;
+        }
+        tag.putInt("AquaFisherWear", wear);
+        // Show a fake durability bar via Damage/DamageMax for clients that read NBT
+        tag.putInt("Damage", wear);
+        tag.putInt("aquatech_ui:af_max", max);
+        itemHandler.setStackInSlot(0, rodStack);
+    }
+
+    private static int packMaxWear(ItemStack rod) {
+        String path = FishingRodCompat.getRodId(rod);
+        if (path == null) return 64;
+        return switch (path) {
+            case "bamboo_rod", "good_old_rod", "humble_rod", "sky_rod", "boner_rod" -> 64;
+            case "naturalist_rod", "starcatcher_rod", "slimed_rod" -> 128;
+            case "iceborn_rod", "obsidian_rod", "sharktooth_rod", "azure_crystal_rod" -> 192;
+            default -> 256;
+        };
     }
 
     private void insertIntoOutput(ItemStack stackToInsert) {

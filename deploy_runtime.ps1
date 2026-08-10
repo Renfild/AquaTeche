@@ -108,9 +108,9 @@ $probe = Resolve-Jar @(
   "$root\client\mods\ProbeJSLegacy-1.20.1-6.2.0.jar"
 )
 $aquatech = Resolve-Jar @(
-  "$root\server\mods\aquatech_ui-1.0.1.jar",
-  "$root\mods\aquatech-ui\build\libs\aquatech_ui-1.0.1.jar",
-  "$root\mods\aquatech_ui-1.0.1.jar",
+  "$root\server\mods\aquatech_ui-1.0.3.jar",
+  "$root\mods\aquatech-ui\build\libs\aquatech_ui-1.0.3.jar",
+  "$root\mods\aquatech_ui-1.0.3.jar",
   "$root\mods\aquatech-ui\build\libs\aquatech_ui-1.0.0.jar",
   "$root\mods\aquatech_ui-1.0.0.jar",
   "$root\server\mods\aquatech_ui-1.0.0.jar"

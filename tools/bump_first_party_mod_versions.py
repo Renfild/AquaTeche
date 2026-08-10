@@ -39,7 +39,7 @@ def bump_jar(src: Path, new_ver: str, dest: Path) -> None:
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     pairs = [
-        ("aquatech_ui", "1.0.1"),
+        (\"aquatech_ui\", \"1.0.3\"),
         ("casesmod", "1.0.1"),
     ]
     targets = [

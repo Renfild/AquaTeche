@@ -88,7 +88,7 @@ calculation:
 debugging:
   trace-unflushed-sessions: false
 
-wand-item: minecraft:wooden_axe
+wand-item: minecraft:blaze_rod
 shell-save-type:
 no-double-slash: false
 no-op-permissions: false

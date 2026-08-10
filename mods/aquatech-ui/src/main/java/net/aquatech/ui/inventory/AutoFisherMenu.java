@@ -47,8 +47,7 @@ public class AutoFisherMenu extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(handler, 0, 14, 33) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
-                    // StarCatcher rods are plain Items, not FishingRodItem
-                    return FishingRodCompat.isResourceRod(stack);
+                    return FishingRodCompat.isSupportedRod(stack);
                 }
             });
 
@@ -120,7 +119,7 @@ public class AutoFisherMenu extends AbstractContainerMenu {
                 if (!this.moveItemStackTo(stackInSlot, machineSlots, machineSlots + 36, true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (FishingRodCompat.isResourceRod(stackInSlot)) {
+            } else if (FishingRodCompat.isSupportedRod(stackInSlot)) {
                 if (!this.moveItemStackTo(stackInSlot, 0, 1, false)) return ItemStack.EMPTY;
             } else if (stackInSlot.getItem() instanceof UpgradeItem) {
                 if (!this.moveItemStackTo(stackInSlot, AutoFisherBlockEntity.UPGRADE_SLOT, AutoFisherBlockEntity.UPGRADE_SLOT + 1, false)) {

@@ -161,7 +161,7 @@ public class SeabedDredgerBlockEntity extends BlockEntity implements MenuProvide
     private ItemStack getModItem(String regName, Item fallback, int count) {
         ResourceLocation loc = new ResourceLocation(regName);
         Item item = BuiltInRegistries.ITEM.get(loc);
-        if (item != null && item != Items.AIR) {
+        if (item != Items.AIR && BuiltInRegistries.ITEM.getKey(item).equals(loc)) {
             return new ItemStack(item, count);
         }
         return new ItemStack(fallback, count);

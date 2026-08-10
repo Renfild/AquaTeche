@@ -1,26 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "IWI",
-    "FRF",
-    "ICI"
+    "IFI",
+    "RCR",
+    "SSS"
   ],
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "W": {
-      "item": "minecraft:water_bucket"
-    },
-    "F": {
-      "item": "minecraft:iron_block"
-    },
-    "R": {
-      "item": "starcatcher:starcatcher_rod"
-    },
-    "C": {
-      "item": "minecraft:chest"
-    }
+    "I": { "item": "minecraft:iron_ingot" },
+    "F": { "item": "minecraft:fishing_rod" },
+    "R": { "item": "minecraft:redstone_block" },
+    "C": { "item": "minecraft:chest" },
+    "S": { "item": "minecraft:smooth_stone" }
   },
   "result": {
     "item": "aquatech_ui:auto_fisher"

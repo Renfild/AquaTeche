@@ -17,9 +17,9 @@
   
   <section class="page-hero">
     <div class="container auth-shell">
-      <div class="eyebrow">Аккаунт</div>
-      <h1>Регистрация</h1>
-      <p>Ник 3–16 символов (A–Z, 0–9, _). Пароль от 4.</p>
+      <div class="eyebrow" data-site="register_eyebrow">Аккаунт</div>
+      <h1 data-site="register_title">Регистрация</h1>
+      <p data-site="register_lead">Ник 3–16 символов (A–Z, 0–9, _). Пароль от 4.</p>
       <form class="card form" id="register-form" style="margin-top:1.25rem">
         <div class="field"><label>Ник</label><input name="nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" /></div>
         <div class="field"><label>Пароль</label><input name="password" type="password" placeholder="минимум 4 символа" required minlength="4" /></div>
