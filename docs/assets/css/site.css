@@ -52,7 +52,14 @@ button { cursor: pointer; border: 0; background: none; }
 
 :focus-visible {
   outline: none;
-  box-shadow: var(--focus);
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+.tile:focus,
+.card-link:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .skip-link {
@@ -538,7 +545,6 @@ button { cursor: pointer; border: 0; background: none; }
 }
 
 .ip-box:hover {
-  border-color: rgba(126, 233, 242, 0.45);
   background: rgba(4, 28, 42, 0.85);
 }
 
@@ -648,17 +654,11 @@ button { cursor: pointer; border: 0; background: none; }
 
 .tile:hover,
 .card-link:hover {
-  border-color: rgba(45, 212, 224, 0.28);
   transform: translateY(-5px);
-}
-
-.tile:hover {
-  border-bottom-color: rgba(45, 212, 224, 0.45);
 }
 
 .tile:hover .feature-art {
   transform: scale(1.03);
-  border-color: rgba(126, 233, 242, 0.28);
 }
 
 .card h3,
