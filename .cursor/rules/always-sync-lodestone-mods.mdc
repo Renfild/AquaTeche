@@ -1,0 +1,39 @@
+---
+description: Always sync first-party jars to Lodestone when server/pack mods change
+alwaysApply: true
+---
+
+# Always sync Lodestone with launcher mods
+
+The live Mohist host is **Lodestone**, not only `server/` in the repo:
+
+`%USERPROFILE%\.lodestone\instances\AquaTech-*\mods`
+
+Players get jars from the CDN pack (`aquatech_ui`, `casesmod`, …). If Lodestone keeps an older jar, Forge `MATCH_VERSION` kicks them (`server 1.0.0` / `client 1.0.1`).
+
+## When
+
+After any change to first-party jars that both server and client load — especially:
+
+- `aquatech_ui-*.jar`
+- `casesmod-*.jar`
+- `packetfixer-*.jar`
+
+Also after `python tools/publish_client_pack.py` (it already calls the sync helper).
+
+## Required
+
+```powershell
+python tools/sync_lodestone_mods.py
+```
+
+Then **restart Mohist in Lodestone** (do not leave a second Java on `:25565`).
+
+Source of truth: `server/mods/` (same jars the pack ships).
+
+Override path if needed: env `AQUATECH_LODESTONE_MODS` = full path to the instance `mods` folder.
+
+## Do not
+
+- Bump client pack version without updating Lodestone jars of the same mods.
+- Leave both `*-1.0.0.jar` and `*-1.0.1.jar` in the Lodestone mods folder.

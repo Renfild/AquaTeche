@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -212,6 +213,10 @@ def main() -> int:
         shutil.copytree(repo_ftb, dst_ftb)
         print(f"OK overlay ftbquests from repo -> {dst_ftb}")
     write_manifest()
+    try:
+        subprocess.check_call([sys.executable, str(ROOT / "tools" / "sync_lodestone_mods.py")])
+    except Exception as exc:
+        print(f"WARN lodestone sync skipped: {exc}")
     print()
     print(f"=== Pack {PACK_TAG} ===")
     print("1) python tools/upload_pack_release.py")
