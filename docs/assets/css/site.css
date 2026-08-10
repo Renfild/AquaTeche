@@ -50,16 +50,25 @@ a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; border: 0; background: none; }
 
-:focus-visible {
-  outline: none;
+a, button, .tile, .card-link, .news-item, .btn, .ip-box, .tab, .menu-btn {
+  -webkit-tap-highlight-color: transparent;
 }
 
-a:focus:not(:focus-visible),
-button:focus:not(:focus-visible),
+a:focus,
+a:focus-visible,
+a:active,
+button:focus,
+button:focus-visible,
 .tile:focus,
-.card-link:focus {
-  outline: none;
-  box-shadow: none;
+.tile:focus-visible,
+.tile:active,
+.card-link:focus,
+.card-link:focus-visible,
+.card-link:active,
+.news-item:focus,
+.news-item:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .skip-link {
@@ -639,25 +648,37 @@ button:focus:not(:focus-visible),
 .card-link,
 .tile {
   display: block;
-  transition: border-color .18s ease, transform .2s var(--ease), background .18s ease;
+  transition: transform .2s var(--ease), background .18s ease;
 }
 
 .tile {
-  border: 1px solid transparent;
+  border: 0;
   border-bottom: 1px solid var(--line);
   border-radius: 0;
   padding: 0 0 1.25rem;
   background: transparent;
   box-shadow: none;
+  outline: none;
   backdrop-filter: none;
 }
 
 .tile:hover,
-.card-link:hover {
+.tile:focus,
+.tile:focus-visible,
+.tile:active,
+.card-link:hover,
+.card-link:focus,
+.card-link:focus-visible,
+.card-link:active {
   transform: translateY(-5px);
+  border: 0 !important;
+  border-bottom: 1px solid var(--line) !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-.tile:hover .feature-art {
+.tile:hover .feature-art,
+.tile:focus .feature-art {
   transform: scale(1.03);
 }
 
@@ -700,11 +721,11 @@ button:focus:not(:focus-visible),
   border-radius: 14px;
   margin-bottom: 1rem;
   overflow: hidden;
-  border: 1px solid rgba(126, 233, 242, 0.12);
+  border: 0;
   background:
     radial-gradient(circle at 70% 30%, rgba(255,255,255,0.14), transparent 40%),
     linear-gradient(145deg, #0e7490, #115e59 55%, #0f172a);
-  transition: transform 600ms var(--spring-soft), border-color .2s ease;
+  transition: transform 600ms var(--spring-soft);
 }
 
 .feature-art::after {
