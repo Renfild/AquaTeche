@@ -1471,3 +1471,48 @@ button:focus-visible,
   z-index: -1;
 }
 
+/* Kill hover/focus chrome on cards — last so nothing overrides */
+.tile,
+.tile:hover,
+.tile:focus,
+.tile:focus-visible,
+.tile:active,
+.card-link,
+.card-link:hover,
+.card-link:focus,
+.card-link:focus-visible,
+.card-link:active,
+.news-item,
+.news-item:hover,
+.news-item:focus,
+.news-item:focus-visible {
+  outline: 0 !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+.tile:hover,
+.tile:focus,
+.tile:focus-visible,
+.tile:active,
+.card-link:hover,
+.card-link:focus,
+.card-link:focus-visible,
+.card-link:active {
+  transform: none;
+}
+
+.tile:hover .feature-art,
+.tile:focus .feature-art {
+  transform: scale(1.02);
+}
+
+.feature-art.tech::before {
+  box-shadow: none;
+}
+
+
