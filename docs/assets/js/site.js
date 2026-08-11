@@ -1,9 +1,9 @@
 (() => {
   const IP = "katherine-hydro.tun.ply.gg:31279";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.20/AquaTech.exe";
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.31/AquaTech.exe";
   /* portal ui build: nav-cta + online nowrap */
-  const CANONICAL = "https://aquatech.santcrail.workers.dev";
+  const CANONICAL = "https://aquateche.store";
   const STORAGE_USER = "aquatech_user";
   const STORAGE_SOUND = "aquatech_sound";
   const API_BASE = "";
@@ -306,7 +306,12 @@
 
   function isCanonicalHost() {
     const h = location.hostname || "";
-    return h.includes("santcrail.workers.dev") || h.includes("pages.dev");
+    return (
+      h === "aquateche.store" ||
+      h === "www.aquateche.store" ||
+      h.includes("santcrail.workers.dev") ||
+      h.includes("pages.dev")
+    );
   }
 
   async function api(path, opts = {}) {
