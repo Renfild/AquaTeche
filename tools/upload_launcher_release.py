@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.37"
+TAG = "client-2.9.38"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -61,7 +61,7 @@ def main() -> None:
 
     zip_path = REL / "AquaTechLauncher.zip"
     man = {
-        "version": "2.9.37",
+        "version": "2.9.38",
         "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
@@ -72,15 +72,15 @@ def main() -> None:
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## AquaTech Client 2.9.37\n\n"
-        "- Play tab: nick comes from portal login (no duplicate field)\n"
+        "## AquaTech Client 2.9.38\n\n"
+        "- Browser login opens reachable portal (workers.dev until DNS is live)\n"
     )
 
     payload = json.dumps(
         {
             "tag_name": TAG,
             "target_commitish": "main",
-            "name": "AquaTech Client 2.9.37",
+            "name": "AquaTech Client 2.9.38",
             "body": body,
             "draft": True,
             "prerelease": False,

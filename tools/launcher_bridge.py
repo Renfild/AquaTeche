@@ -10,7 +10,7 @@ import urllib.request
 from collections import deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs, urlencode, urlparse
 
 import aquatech_launcher as L
 
@@ -21,11 +21,16 @@ PORTAL_BASES = [
     b.strip().rstrip("/")
     for b in (
         os.environ.get("AQUATECH_PORTAL_BASE", ""),
-        "https://aquateche.store",
+        # workers.dev works while aquateche.store NS is still propagating
         "https://aquatech.santcrail.workers.dev",
+        "https://aquateche.store",
     )
     if b and str(b).strip()
 ]
+
+PORTAL_DEFAULT_BASE = (
+    PORTAL_BASES[0] if PORTAL_BASES else "https://aquatech.santcrail.workers.dev"
+)
 
 
 def _friendly_portal_error(ex: BaseException) -> str:
@@ -58,6 +63,32 @@ def _portal_post(path: str, payload: dict, headers: dict[str, str], timeout: int
     raise last_err or RuntimeError("portal unreachable")
 
 
+def _portal_login_page_url(base: str, port: int = API_PORT) -> str:
+    qs = urlencode({"launcher": "1", "port": str(port)})
+    return f"{base.rstrip('/')}/login.html?{qs}"
+
+
+def _resolve_portal_base(prefer: str | None = None) -> str:
+    order: list[str] = []
+    if prefer:
+        order.append(prefer.rstrip("/"))
+    for base in PORTAL_BASES:
+        if base not in order:
+            order.append(base)
+
+    headers = {"User-Agent": f"Mozilla/5.0 AquaTechLauncherBridge/{L.LAUNCHER_VER}"}
+    for base in order:
+        probe = f"{base}/api/catalog"
+        req = urllib.request.Request(probe, headers=headers, method="GET")
+        try:
+            with urllib.request.urlopen(req, timeout=6) as r:
+                if r.status < 500:
+                    return base
+        except (urllib.error.URLError, OSError, TimeoutError):
+            continue
+    return PORTAL_DEFAULT_BASE
+
+
 class LauncherEngine:
     """Runs Play/Update without Tk; pushes logs to a ring buffer for the web UI."""
 
@@ -76,7 +107,7 @@ class LauncherEngine:
             "update_available": False,
             "checking": True,
         }
-        self._portal_base = PORTAL_BASES[0] if PORTAL_BASES else "https://aquateche.store"
+        self._portal_base = PORTAL_DEFAULT_BASE
         self.start_pack_check()
         self._revalidate_portal_session()
 
@@ -145,11 +176,13 @@ class LauncherEngine:
     def portal_browser_login(self) -> dict:
         import webbrowser
 
-        url = f"{self._portal_base}/login.html?launcher=1&port={API_PORT}"
+        base = _resolve_portal_base(self._portal_base)
+        self._portal_base = base
+        url = _portal_login_page_url(base)
         try:
             webbrowser.open(url)
-            self.log("Открыт вход на сайте — после входа вернись в лаунчер.", "info")
-            return {"ok": True, "url": url}
+            self.log(f"Открыт вход: {base}", "info")
+            return {"ok": True, "url": url, "base": base}
         except Exception as ex:
             return {"ok": False, "message": str(ex)}
 
