@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 import json
+import os
 import threading
 import types
+import urllib.error
 import urllib.request
 from collections import deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -15,10 +17,45 @@ import aquatech_launcher as L
 API_HOST = "127.0.0.1"
 API_PORT = 12450
 
-PORTAL_BASE = "https://aquateche.store"
-PORTAL_LOGIN_URL = f"{PORTAL_BASE}/api/login"
-PORTAL_SESSION_URL = f"{PORTAL_BASE}/api/launcher/session"
-PORTAL_VALIDATE_URL = f"{PORTAL_BASE}/api/launcher/session"
+PORTAL_BASES = [
+    b.strip().rstrip("/")
+    for b in (
+        os.environ.get("AQUATECH_PORTAL_BASE", ""),
+        "https://aquateche.store",
+        "https://aquatech.santcrail.workers.dev",
+    )
+    if b and str(b).strip()
+]
+
+
+def _friendly_portal_error(ex: BaseException) -> str:
+    msg = str(ex)
+    if "getaddrinfo failed" in msg or "11001" in msg or "Name or service not known" in msg:
+        return (
+            "aquateche.store не резолвится (DNS ещё не готов). "
+            "Обнови лаунчер или зайди через «Войти через сайт» на workers.dev."
+        )
+    return msg
+
+
+def _portal_post(path: str, payload: dict, headers: dict[str, str], timeout: int = 12) -> tuple[dict, str]:
+    raw = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    last_err: BaseException | None = None
+    for base in PORTAL_BASES:
+        url = f"{base}{path}"
+        req = urllib.request.Request(url, data=raw, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read().decode("utf-8")), base
+        except urllib.error.HTTPError as ex:
+            try:
+                return json.loads(ex.read().decode("utf-8")), base
+            except Exception:
+                last_err = ex
+        except (urllib.error.URLError, OSError, TimeoutError) as ex:
+            last_err = ex
+            continue
+    raise last_err or RuntimeError("portal unreachable")
 
 
 class LauncherEngine:
@@ -39,6 +76,7 @@ class LauncherEngine:
             "update_available": False,
             "checking": True,
         }
+        self._portal_base = PORTAL_BASES[0] if PORTAL_BASES else "https://aquateche.store"
         self.start_pack_check()
         self._revalidate_portal_session()
 
@@ -85,17 +123,11 @@ class LauncherEngine:
             return {"ok": False, "message": "Нет сессии"}
 
         raw = json.dumps({"session": sid}, ensure_ascii=False).encode("utf-8")
-        req = urllib.request.Request(
-            PORTAL_VALIDATE_URL, data=raw, headers=self._portal_headers(), method="POST"
-        )
         try:
-            with urllib.request.urlopen(req, timeout=10) as r:
-                data = json.loads(r.read().decode("utf-8"))
+            data, base = _portal_post("/api/launcher/session", {"session": sid}, self._portal_headers())
+            self._portal_base = base
         except Exception as ex:
-            try:
-                data = json.loads(ex.read().decode("utf-8"))
-            except Exception:
-                return {"ok": False, "message": str(ex)}
+            return {"ok": False, "message": _friendly_portal_error(ex)}
 
         if not (data or {}).get("ok"):
             return {"ok": False, "message": data.get("error") or "Сессия недействительна"}
@@ -113,7 +145,7 @@ class LauncherEngine:
     def portal_browser_login(self) -> dict:
         import webbrowser
 
-        url = f"{PORTAL_BASE}/login.html?launcher=1&port={API_PORT}"
+        url = f"{self._portal_base}/login.html?launcher=1&port={API_PORT}"
         try:
             webbrowser.open(url)
             self.log("Открыт вход на сайте — после входа вернись в лаунчер.", "info")
@@ -221,18 +253,11 @@ class LauncherEngine:
 
         headers = self._portal_headers()
 
-        raw = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-        req = urllib.request.Request(PORTAL_LOGIN_URL, data=raw, headers=headers, method="POST")
         try:
-            with urllib.request.urlopen(req, timeout=10) as r:
-                data = json.loads(r.read().decode("utf-8"))
+            data, base = _portal_post("/api/login", payload, headers)
+            self._portal_base = base
         except Exception as ex:
-            # Handle HTTPError: body should include { ok:false, error:"..." }
-            try:
-                raw_body = ex.read()
-                data = json.loads(raw_body.decode("utf-8"))
-            except Exception:
-                data = {"ok": False, "error": str(ex)}
+            return {"ok": False, "message": _friendly_portal_error(ex)}
 
         if not (data or {}).get("ok"):
             return {"ok": False, "message": data.get("error") or data.get("message") or "Ошибка входа"}
