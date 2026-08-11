@@ -1,14 +1,17 @@
 package main
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestNeedsUpdate(t *testing.T) {
 	cases := []struct {
-		name     string
-		local    string
-		remote   string
-		exeOK    bool
-		want     bool
+		name   string
+		local  string
+		remote string
+		exeOK  bool
+		want   bool
 	}{
 		{"fresh install", "", "2.9.38", false, true},
 		{"empty local with exe", "", "2.9.38", true, true},
@@ -41,11 +44,22 @@ func TestResolveZipURL(t *testing.T) {
 		t.Fatalf("got %s want %s", got, want)
 	}
 	got = ResolveZipURL("AquaTechLauncher.zip", "")
-	if !stringsHasPrefix(got, "https://github.com/Renfild/AquaTeche/releases/download/client-latest/") {
+	if !strings.HasPrefix(got, "https://github.com/Renfild/AquaTeche/releases/download/client-latest/") {
 		t.Fatalf("unexpected fallback: %s", got)
 	}
 }
 
-func stringsHasPrefix(s, p string) bool {
-	return len(s) >= len(p) && s[:len(p)] == p
+func TestVersionNewer(t *testing.T) {
+	if !versionNewer("2.9.39", "2.9.38") {
+		t.Fatal("expected 2.9.39 > 2.9.38")
+	}
+	if versionNewer("2.9.38", "2.9.39") {
+		t.Fatal("expected 2.9.38 < 2.9.39")
+	}
+	if versionNewer("2.9.38", "2.9.38") {
+		t.Fatal("equal should be false")
+	}
+	if !versionNewer("2.9.10", "2.9.9") {
+		t.Fatal("expected 2.9.10 > 2.9.9")
+	}
 }

@@ -18,10 +18,14 @@ import (
 // small AquaTech.exe → downloads AquaTechLauncher.zip → extracts to %LOCALAPPDATA%\AquaTech\app → runs launcher.
 
 const (
-	// Stable URL in repo/Pages — points at current launcher zip on GitHub Releases.
-	manifestURL = "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json"
-	userAgent   = "AquaTechBootstrap/1.0"
+	userAgent = "AquaTechBootstrap/1.1"
 )
+
+// Prefer jsDelivr — raw.githubusercontent.com often serves a stale main for minutes/hours.
+var manifestURLs = []string{
+	"https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
+	"https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
+}
 
 type manifest struct {
 	Version      string `json:"version"`
@@ -50,7 +54,7 @@ func main() {
 
 	ui.SetStatus("Проверяем обновления…")
 	ui.SetProgress(8)
-	man, err := fetchManifest(manifestURL)
+	man, err := fetchBestManifest(manifestURLs)
 	if err != nil {
 		logf(logFile, "manifest err: %v", err)
 		// Offline warm path: launch existing install if present
@@ -150,6 +154,66 @@ func main() {
 	time.Sleep(100 * time.Millisecond)
 	ui.Close()
 	os.Exit(0)
+}
+
+func versionKey(v string) (int, int, int, bool) {
+	v = strings.TrimSpace(v)
+	parts := strings.Split(v, ".")
+	if len(parts) < 2 {
+		return 0, 0, 0, false
+	}
+	nums := make([]int, 3)
+	for i := 0; i < 3 && i < len(parts); i++ {
+		n := 0
+		for _, ch := range parts[i] {
+			if ch < '0' || ch > '9' {
+				break
+			}
+			n = n*10 + int(ch-'0')
+		}
+		nums[i] = n
+	}
+	return nums[0], nums[1], nums[2], true
+}
+
+func versionNewer(a, b string) bool {
+	a1, a2, a3, aok := versionKey(a)
+	b1, b2, b3, bok := versionKey(b)
+	if !aok {
+		return false
+	}
+	if !bok {
+		return true
+	}
+	if a1 != b1 {
+		return a1 > b1
+	}
+	if a2 != b2 {
+		return a2 > b2
+	}
+	return a3 > b3
+}
+
+func fetchBestManifest(urls []string) (*manifest, error) {
+	var best *manifest
+	var lastErr error
+	for _, url := range urls {
+		man, err := fetchManifest(url)
+		if err != nil {
+			lastErr = err
+			continue
+		}
+		if best == nil || versionNewer(man.Version, best.Version) {
+			best = man
+		}
+	}
+	if best == nil {
+		if lastErr != nil {
+			return nil, lastErr
+		}
+		return nil, fmt.Errorf("не удалось загрузить bootstrap.json")
+	}
+	return best, nil
 }
 
 func localVer(path string) string {

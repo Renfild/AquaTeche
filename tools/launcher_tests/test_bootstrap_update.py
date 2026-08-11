@@ -25,8 +25,8 @@ sys.path.insert(0, str(ROOT / "tools"))
 import aquatech_launcher as L  # noqa: E402
 
 BOOTSTRAP_URLS = [
-    "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
     "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
+    "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
 ]
 FAILED = 0
 
@@ -128,34 +128,38 @@ def test_local_bootstrap_matches_upload_script():
 
 
 def test_live_bootstrap_reachable():
-    print("[3] live bootstrap.json on GitHub raw")
-    last_err = None
-    man = None
-    used = None
+    print("[3] live bootstrap.json (best of mirrors)")
+    local = json.loads((ROOT / "docs" / "bootstrap.json").read_text(encoding="utf-8"))
+    local_ver = (local.get("version") or "").strip()
+
+    mirrors: list[tuple[str, dict]] = []
     for url in BOOTSTRAP_URLS:
         try:
             man = _get_json(url)
-            used = url
-            break
+            mirrors.append((url, man))
+            print(f"   mirror {url.split('/')[2]} -> {man.get('version')}")
         except Exception as ex:
-            last_err = ex
-    if not man:
-        _fail("fetch bootstrap", str(last_err))
+            print(f"   mirror fail {url}: {ex}")
+
+    if not mirrors:
+        _fail("fetch bootstrap from all mirrors")
         return
-    _ok(f"fetched from {used}")
+
+    used, man = max(
+        mirrors, key=lambda x: L.pack_version_key(str(x[1].get("version") or "0"))
+    )
+    _ok(f"best mirror={used.split('/')[2]} version={man.get('version')}")
+
     ver = (man.get("version") or "").strip()
     zip_url = (man.get("launcher_zip") or "").strip()
     if not ver or not zip_url:
         _fail("invalid live manifest", str(man)[:200])
         return
-    _ok(f"live version={ver}")
 
-    local = json.loads((ROOT / "docs" / "bootstrap.json").read_text(encoding="utf-8"))
-    local_ver = (local.get("version") or "").strip()
     if ver != local_ver:
-        _fail("live ≠ local bootstrap", f"live={ver} local={local_ver}")
+        _fail("best live != local bootstrap", f"live={ver} local={local_ver}")
     else:
-        _ok("live matches local docs/bootstrap.json")
+        _ok("best live matches local docs/bootstrap.json")
 
     ok, code = _head_ok(zip_url)
     if not ok:
@@ -163,7 +167,6 @@ def test_live_bootstrap_reachable():
     else:
         _ok(f"release zip reachable ({code})")
 
-    # size field consistency (optional but we publish it)
     expect = int(man.get("launcher_zip_size") or 0)
     if expect > 0:
         req = urllib.request.Request(
@@ -175,7 +178,6 @@ def test_live_bootstrap_reachable():
         )
         with urllib.request.urlopen(req, timeout=60) as r:
             cr = r.headers.get("Content-Range") or ""
-            # Content-Range: bytes 0-0/64304017
             total = None
             if "/" in cr:
                 try:
@@ -183,7 +185,7 @@ def test_live_bootstrap_reachable():
                 except ValueError:
                     total = None
             if total is not None and total != expect:
-                _fail("Content-Range total ≠ launcher_zip_size", f"{total} ≠ {expect}")
+                _fail("Content-Range total != launcher_zip_size", f"{total} != {expect}")
             else:
                 _ok(f"zip size field={expect}" + (f" remote={total}" if total else ""))
             r.read(1)

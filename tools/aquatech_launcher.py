@@ -693,8 +693,9 @@ def check_pack_update_available(cfg: dict | None = None) -> dict:
 
 
 BOOTSTRAP_MANIFEST_URLS = [
-    "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
+    # jsDelivr first — raw.githubusercontent.com often lags behind main
     "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
+    "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
 ]
 
 
@@ -710,7 +711,7 @@ def needs_launcher_update(local: str, remote: str) -> bool:
 
 
 def fetch_bootstrap_manifest(timeout: float = 8.0) -> dict | None:
-    """Fetch docs/bootstrap.json (cache-busted)."""
+    """Fetch docs/bootstrap.json from mirrors; keep the newest version."""
     import time as _time
 
     bust = f"?t={int(_time.time())}"
@@ -718,15 +719,20 @@ def fetch_bootstrap_manifest(timeout: float = 8.0) -> dict | None:
         "User-Agent": f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}",
         "Cache-Control": "no-cache",
     }
+    best: dict | None = None
     for base in BOOTSTRAP_MANIFEST_URLS:
         url = base + bust
         try:
             data = _fetch_json_hard(url, timeout, headers=headers)
-            if isinstance(data, dict) and data.get("version") and data.get("launcher_zip"):
-                return data
+            if not (isinstance(data, dict) and data.get("version") and data.get("launcher_zip")):
+                continue
+            if best is None or pack_version_key(str(data["version"])) > pack_version_key(
+                str(best["version"])
+            ):
+                best = data
         except Exception:
             continue
-    return None
+    return best
 
 
 def check_launcher_update_available() -> dict:
