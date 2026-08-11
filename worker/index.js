@@ -1,6 +1,6 @@
 /**
  * AquaTech Worker: same-origin /api/* + static docs assets.
- * Reachable as https://aquatech.santcrail.workers.dev (pages.dev is blocked in some networks).
+ * Reachable as https://aquateche.store (also workers.dev fallback).
  */
 import { onRequestPost as registerPost } from "../functions/api/register.js";
 import { onRequestPost as loginPost } from "../functions/api/login.js";
@@ -10,6 +10,10 @@ import { onRequestGet as playersGet } from "../functions/api/players.js";
 import { onRequestGet as catalogGet } from "../functions/api/catalog.js";
 import { onRequestGet as serverStatusGet } from "../functions/api/server-status.js";
 import { onRequestPost as launcherEnsureNickPost } from "../functions/api/launcher/ensure-nick.js";
+import {
+  onRequestGet as launcherSessionGet,
+  onRequestPost as launcherSessionPost,
+} from "../functions/api/launcher/session.js";
 import {
   onRequestGet as purchaseGet,
   onRequestPost as purchasePost,
@@ -66,6 +70,10 @@ async function handleApi(request, env) {
   if (path === "/api/site" && method === "GET") return siteGet(ctx(request, env));
   // ensure-nick intentionally returns 410 (open signup footgun)
   if (path === "/api/launcher/ensure-nick" && method === "POST") return launcherEnsureNickPost(ctx(request, env));
+  if (path === "/api/launcher/session") {
+    if (method === "GET") return launcherSessionGet(ctx(request, env));
+    if (method === "POST") return launcherSessionPost(ctx(request, env));
+  }
   if (path === "/api/purchase") {
     if (method === "POST") return purchasePost(ctx(request, env));
     if (method === "GET") return purchaseGet(ctx(request, env));

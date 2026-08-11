@@ -1,7 +1,7 @@
 (() => {
   const IP = "g-pl-3.apexnodes.xyz:21561";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.33/AquaTech.exe";
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.35/AquaTech.exe";
   /* portal ui build: nav-cta + online nowrap */
   const CANONICAL = "https://aquateche.store";
   const STORAGE_USER = "aquatech_user";
@@ -681,6 +681,28 @@
   function initAuth() {
     const login = $("#login-form");
     const reg = $("#register-form");
+    const params = new URLSearchParams(location.search);
+    const launcherPort = params.get("port") || "12450";
+    const fromLauncher = params.get("launcher") === "1";
+
+    async function finishLauncherLogin(userNick) {
+      if (!fromLauncher) return false;
+      try {
+        const data = await api("/api/launcher/session", {
+          headers: { "x-aquatech-launcher": "1" },
+        });
+        if (!data.session) return false;
+        const nick = encodeURIComponent(data.user?.nick || userNick || "");
+        location.href = `http://127.0.0.1:${launcherPort}/api/portal_callback?session=${encodeURIComponent(data.session)}&nick=${nick}`;
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    if (fromLauncher && getUser()) {
+      finishLauncherLogin(getUser().nick);
+    }
 
     login?.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -691,9 +713,17 @@
         const data = await api("/api/login", {
           method: "POST",
           body: JSON.stringify({ nick, password }),
+          headers: fromLauncher ? { "x-aquatech-launcher": "1" } : {},
         });
         setUser(data.user);
         toast("Вход выполнен");
+        if (fromLauncher) {
+          if (data.session) {
+            location.href = `http://127.0.0.1:${launcherPort}/api/portal_callback?session=${encodeURIComponent(data.session)}&nick=${encodeURIComponent(data.user.nick)}`;
+            return;
+          }
+          if (await finishLauncherLogin(data.user.nick)) return;
+        }
         location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
       } catch (err) {
         if (apiAvailable === false || isMirrorHost()) {

@@ -15,6 +15,11 @@ import aquatech_launcher as L
 API_HOST = "127.0.0.1"
 API_PORT = 12450
 
+PORTAL_BASE = "https://aquateche.store"
+PORTAL_LOGIN_URL = f"{PORTAL_BASE}/api/login"
+PORTAL_SESSION_URL = f"{PORTAL_BASE}/api/launcher/session"
+PORTAL_VALIDATE_URL = f"{PORTAL_BASE}/api/launcher/session"
+
 
 class LauncherEngine:
     """Runs Play/Update without Tk; pushes logs to a ring buffer for the web UI."""
@@ -28,6 +33,105 @@ class LauncherEngine:
         self._lock = threading.Lock()
         self._running = False
         self._log_seq = 0
+        self.pack_check = {
+            "local": None,
+            "remote": None,
+            "update_available": False,
+            "checking": True,
+        }
+        self.start_pack_check()
+        self._revalidate_portal_session()
+
+    def _portal_headers(self) -> dict[str, str]:
+        return {
+            "User-Agent": f"Mozilla/5.0 AquaTechLauncherBridge/{L.LAUNCHER_VER}",
+            "Content-Type": "application/json",
+            "x-aquatech-launcher": "1",
+        }
+
+    def _save_portal_session(self, session: str, nick: str | None = None) -> None:
+        self.cfg["portal_session"] = str(session)
+        if nick:
+            self.cfg["username"] = str(nick).strip() or self.cfg.get("username", "")
+        try:
+            L.normalize_server_cfg(L.normalize_game_dir(self.cfg))
+            L.CONFIG_PATH.write_text(json.dumps(self.cfg, indent=2), encoding="utf-8")
+        except Exception:
+            pass
+
+    def _clear_portal_session(self) -> None:
+        self.cfg["portal_session"] = ""
+        try:
+            L.CONFIG_PATH.write_text(json.dumps(self.cfg, indent=2), encoding="utf-8")
+        except Exception:
+            pass
+
+    def _revalidate_portal_session(self) -> None:
+        session = str(self.cfg.get("portal_session") or "").strip()
+        if not session:
+            return
+
+        def work():
+            ok = self.portal_validate_session(session).get("ok")
+            if not ok:
+                self._clear_portal_session()
+                self.log("Сессия портала истекла — войди снова.", "warn")
+
+        threading.Thread(target=work, daemon=True, name="aquatech-portal-revalidate").start()
+
+    def portal_validate_session(self, session: str | None = None) -> dict:
+        sid = str(session or self.cfg.get("portal_session") or "").strip()
+        if not sid:
+            return {"ok": False, "message": "Нет сессии"}
+
+        raw = json.dumps({"session": sid}, ensure_ascii=False).encode("utf-8")
+        req = urllib.request.Request(
+            PORTAL_VALIDATE_URL, data=raw, headers=self._portal_headers(), method="POST"
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=10) as r:
+                data = json.loads(r.read().decode("utf-8"))
+        except Exception as ex:
+            try:
+                data = json.loads(ex.read().decode("utf-8"))
+            except Exception:
+                return {"ok": False, "message": str(ex)}
+
+        if not (data or {}).get("ok"):
+            return {"ok": False, "message": data.get("error") or "Сессия недействительна"}
+
+        nick = (data.get("user") or {}).get("nick")
+        if nick:
+            self.cfg["username"] = nick
+        return {"ok": True, "user": data.get("user"), "session": sid}
+
+    def portal_logout(self) -> dict:
+        self._clear_portal_session()
+        self.log("Выход из аккаунта портала.", "info")
+        return {"ok": True}
+
+    def portal_browser_login(self) -> dict:
+        import webbrowser
+
+        url = f"{PORTAL_BASE}/login.html?launcher=1&port={API_PORT}"
+        try:
+            webbrowser.open(url)
+            self.log("Открыт вход на сайте — после входа вернись в лаунчер.", "info")
+            return {"ok": True, "url": url}
+        except Exception as ex:
+            return {"ok": False, "message": str(ex)}
+
+    def portal_callback(self, session: str, nick: str = "") -> dict:
+        session = str(session or "").strip()
+        if not session:
+            return {"ok": False, "message": "Пустая сессия"}
+        verified = self.portal_validate_session(session)
+        if not verified.get("ok"):
+            return verified
+        user_nick = nick or (verified.get("user") or {}).get("nick") or ""
+        self._save_portal_session(session, user_nick)
+        self.log(f"Вход выполнен: {user_nick or 'игрок'}", "ok")
+        return {"ok": True, "user": verified.get("user"), "session": session}
 
     def _load_cfg(self) -> dict:
         cfg = {
@@ -35,6 +139,10 @@ class LauncherEngine:
             "game_dir": str(L.GAME_DIR),
             "ram_mb": 4096,
             "update_url": L.DEFAULT_UPDATE_URL,
+            "portal_session": "",
+            "auto_connect": True,
+            "server_host": L.SERVER_IP,
+            "server_port": L.SERVER_PORT,
         }
         try:
             if L.CONFIG_PATH.exists():
@@ -47,6 +155,7 @@ class LauncherEngine:
             or "playit" in str(cfg.get("sync_url") or "").lower()
         ):
             cfg.pop("sync_url", None)
+        L.normalize_server_cfg(L.normalize_game_dir(cfg))
         try:
             L.CONFIG_PATH.write_text(json.dumps(cfg, indent=2), encoding="utf-8")
         except Exception:
@@ -59,15 +168,14 @@ class LauncherEngine:
                 self.cfg["username"] = str(patch["username"]).strip()
             if "game_dir" in patch:
                 self.cfg["game_dir"] = str(patch["game_dir"]).strip()
-            if "update_url" in patch:
-                self.cfg["update_url"] = L.normalize_update_url(
-                    str(patch["update_url"]).strip().rstrip("/")
-                )
+            if "auto_connect" in patch:
+                self.cfg["auto_connect"] = bool(patch["auto_connect"])
             if "ram_mb" in patch:
                 try:
                     self.cfg["ram_mb"] = int(patch["ram_mb"])
                 except Exception:
                     pass
+        L.normalize_server_cfg(L.normalize_game_dir(self.cfg))
         try:
             L.CONFIG_PATH.write_text(json.dumps(self.cfg, indent=2), encoding="utf-8")
         except Exception:
@@ -89,6 +197,52 @@ class LauncherEngine:
     def set_progress(self, pct: float):
         self.progress = max(0.0, min(100.0, float(pct)))
 
+    def start_pack_check(self):
+        with self._lock:
+            prev = dict(self.pack_check)
+            self.pack_check = {
+                "local": prev.get("local"),
+                "remote": prev.get("remote"),
+                "update_available": bool(prev.get("update_available")),
+                "checking": True,
+            }
+
+        def work():
+            info = L.check_pack_update_available(self.cfg)
+            with self._lock:
+                self.pack_check = {**info, "checking": False}
+
+        threading.Thread(target=work, daemon=True, name="aquatech-pack-check").start()
+
+    def portal_login(self, nick: str, password: str) -> dict:
+        payload = {"nick": str(nick).strip(), "password": str(password)}
+        if not payload["nick"] or not payload["password"]:
+            return {"ok": False, "message": "Некорректный ввод"}
+
+        headers = self._portal_headers()
+
+        raw = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        req = urllib.request.Request(PORTAL_LOGIN_URL, data=raw, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=10) as r:
+                data = json.loads(r.read().decode("utf-8"))
+        except Exception as ex:
+            # Handle HTTPError: body should include { ok:false, error:"..." }
+            try:
+                raw_body = ex.read()
+                data = json.loads(raw_body.decode("utf-8"))
+            except Exception:
+                data = {"ok": False, "error": str(ex)}
+
+        if not (data or {}).get("ok"):
+            return {"ok": False, "message": data.get("error") or data.get("message") or "Ошибка входа"}
+
+        session = data.get("session") or ""
+        user_nick = (data.get("user") or {}).get("nick") or payload["nick"]
+        self._save_portal_session(session, user_nick)
+
+        return {"ok": True, "user": data.get("user"), "session": session}
+
     def snapshot(self, after_id: int = 0) -> dict:
         with self._lock:
             logs = [e for e in self.logs if e["id"] > after_id]
@@ -99,8 +253,8 @@ class LauncherEngine:
                 "status": self.status_text,
                 "cfg": dict(self.cfg),
                 "running": self._running,
+                "pack": dict(self.pack_check),
                 "logs": logs,
-                "server": f"{L.SERVER_IP}:{L.SERVER_PORT}",
             }
 
     def _make_shim(self):
@@ -139,6 +293,7 @@ class LauncherEngine:
                 if ok:
                     engine.set_progress(100)
                     engine.log("Сборка обновлена. Можно играть.", "ok")
+                    engine.start_pack_check()
 
             def _download_url(self, url: str, dest_path: Path, reporthook=None):
                 L.AquaTechLauncher._download_url(self, url, dest_path, reporthook)
@@ -209,7 +364,8 @@ class LauncherEngine:
                     shim._done_update(False)
                 except Exception:
                     self.state = "error"
-                    self._running = False
+            finally:
+                self._running = False
 
         threading.Thread(target=work, daemon=True, name="aquatech-update").start()
         return True, "ok"
@@ -276,6 +432,30 @@ class ApiHandler(BaseHTTPRequestHandler):
             return self._json(200, ENGINE.snapshot(after))
         if path == "/api/health":
             return self._json(200, {"ok": True, "version": L.LAUNCHER_VER})
+        if path == "/api/portal_callback":
+            qs = parse_qs(parsed.query)
+            session = (qs.get("session") or [""])[0]
+            nick = (qs.get("nick") or [""])[0]
+            res = ENGINE.portal_callback(session, nick)
+            html = (
+                "<!DOCTYPE html><html lang='ru'><head><meta charset='utf-8'>"
+                "<title>AquaTech</title></head><body style='font-family:Segoe UI,sans-serif;"
+                "background:#061018;color:#e6eef4;padding:2rem'>"
+                + (
+                    "<h1>Вход выполнен</h1><p>Можно закрыть вкладку и вернуться в лаунчер.</p>"
+                    if res.get("ok")
+                    else f"<h1>Ошибка</h1><p>{res.get('message') or 'Не удалось войти'}</p>"
+                )
+                + "</body></html>"
+            )
+            raw = html.encode("utf-8")
+            self.send_response(200 if res.get("ok") else 400)
+            self._cors()
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(raw)))
+            self.end_headers()
+            self.wfile.write(raw)
+            return
         self._json(404, {"error": "not found"})
 
     def do_POST(self):
@@ -318,6 +498,19 @@ class ApiHandler(BaseHTTPRequestHandler):
                     ENGINE.save_cfg(body)
                 ok, msg = ENGINE.start_update()
                 return self._json(200 if ok else 400, {"ok": ok, "message": msg})
+            if path == "/api/portal_login":
+                nick = (body or {}).get("nick") if body else None
+                password = (body or {}).get("password") if body else None
+                res = ENGINE.portal_login(nick or "", password or "")
+                return self._json(200 if res.get("ok") else 401, res)
+            if path == "/api/portal_validate":
+                res = ENGINE.portal_validate_session()
+                return self._json(200 if res.get("ok") else 401, res)
+            if path == "/api/portal_logout":
+                return self._json(200, ENGINE.portal_logout())
+            if path == "/api/portal_browser":
+                res = ENGINE.portal_browser_login()
+                return self._json(200 if res.get("ok") else 400, res)
             self._json(404, {"error": "not found"})
         except Exception as ex:
             try:

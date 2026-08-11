@@ -17,21 +17,50 @@
         </div>
       </div>
       <nav class="nav">
+        <button class="nav-btn" data-page="auth" id="nav-auth">Аккаунт</button>
         <button class="nav-btn active" data-page="play">Игра</button>
         <button class="nav-btn" data-page="settings">Настройки</button>
         <button class="nav-btn" data-page="log">Активность</button>
       </nav>
-      <div class="side-foot">
-        <div class="server" id="server">—</div>
+      <div class="side-account hidden" id="side-account">
+        <span class="side-account-label">Аккаунт</span>
+        <span class="side-account-nick" id="account-nick">—</span>
+        <button class="btn-ghost sm side-logout" id="btn-logout" type="button">Выйти</button>
       </div>
     </aside>
 
     <main class="main">
-      <section class="page active" id="page-play">
+      <section class="page active" id="page-auth">
+        <div class="hero">
+          <p class="eyebrow">Аккаунт</p>
+          <h1>Вход</h1>
+          <p class="lede">Тот же аккаунт, что на aquateche.store. Нужен для профиля и квестов.</p>
+
+          <div class="auth-row">
+            <label class="field nick">
+              <span>Ник</span>
+              <input id="auth-nick" maxlength="16" placeholder="Steve" autocomplete="username" />
+            </label>
+            <label class="field nick">
+              <span>Пароль</span>
+              <input id="auth-pass" type="password" placeholder="••••" autocomplete="current-password" />
+            </label>
+            <button class="btn-play" id="btn-auth" type="button">Войти</button>
+            <button class="btn-ghost" id="btn-auth-browser" type="button">Войти через сайт</button>
+            <div class="auth-error" id="auth-error"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-play">
         <div class="hero">
           <p class="eyebrow">Океанский модпак · 1.20.1 Forge</p>
           <h1>AquaTech</h1>
           <p class="lede">Впереди тебя ждут лишь глубины и их неизведанность.</p>
+          <div class="update-banner hidden" id="update-banner">
+            <span id="update-banner-text"></span>
+            <button class="btn-ghost sm" id="btn-update-banner" type="button">Обновить сборку</button>
+          </div>
           <div class="play-row">
             <label class="field nick">
               <span>Ник</span>
@@ -56,19 +85,18 @@
           <span>Папка игры</span>
           <div class="dir-row">
             <input id="game-dir" />
-            <button class="btn-ghost sm" id="btn-browse-dir">Выбрать папку 📁</button>
+            <button class="btn-ghost sm" id="btn-browse-dir" type="button">Выбрать папку</button>
           </div>
         </label>
-        <label class="field">
-          <span>URL обновлений (опционально)</span>
-          <input id="update-url" placeholder="https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack" />
+        <label class="field check">
+          <input id="auto-connect" type="checkbox" />
+          <span>Авто-вход на сервер AquaTech</span>
         </label>
         <label class="field ram">
           <span>RAM (МБ)</span>
           <input id="ram" type="number" min="2048" max="32768" step="512" />
         </label>
         <button class="btn-ghost" id="btn-save">Сохранить</button>
-        <p class="hint">По умолчанию сборка качается с сайта AquaTech (GitHub Releases). Playit — только IP сервера игры.</p>
       </section>
 
       <section class="page" id="page-log">

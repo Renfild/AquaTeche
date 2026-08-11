@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.20"
+TAG = "client-2.9.35"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -61,7 +61,7 @@ def main() -> None:
 
     zip_path = REL / "AquaTechLauncher.zip"
     man = {
-        "version": "2.9.20",
+        "version": "2.9.35",
         "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
@@ -72,17 +72,16 @@ def main() -> None:
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## AquaTech Client 2.9.20\n\n"
-        "- Pack sync: download+verify before purge\n"
-        "- Self-update verifies zip MD5/size; atomic app_old swap\n"
-        "- DPAPI session storage + logout\n"
+        "## AquaTech Client 2.9.35\n\n"
+        "- Account tab always visible; auth screen default on cold start\n"
+        "- Portal login synced with aquateche.store (form + browser)\n"
     )
 
     payload = json.dumps(
         {
             "tag_name": TAG,
             "target_commitish": "main",
-            "name": "AquaTech Client 2.9.20",
+            "name": "AquaTech Client 2.9.35",
             "body": body,
             "draft": True,
             "prerelease": False,
@@ -98,7 +97,7 @@ def main() -> None:
     print("draft", release_id)
 
     for path in FILES:
-        print(f"upload {path.name} ({path.stat().st_size / 1024 / 1024:.2f} MB)…")
+        print(f"upload {path.name} ({path.stat().st_size / 1024 / 1024:.2f} MB)вЂ¦")
         api(
             "POST",
             f"https://uploads.github.com/repos/{REPO}/releases/{release_id}/assets?name={path.name}",

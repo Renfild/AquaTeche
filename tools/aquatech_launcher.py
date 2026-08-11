@@ -5,14 +5,14 @@ AquaTech Launcher
 - Syncs pack from local AquaTech-Client or update URL (sync server) — no CurseForge needed
 """
 
-import os, sys, json, hashlib, subprocess, threading, urllib.request, zipfile, shutil, time, platform, math, random, socket
+import os, sys, json, hashlib, subprocess, threading, urllib.request, zipfile, shutil, time, platform, math, random, socket, re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.11"
+LAUNCHER_VER   = "2.9.35"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -25,8 +25,8 @@ FORGE_LANG_PROVIDERS = (
     "lowcodelanguage",
     "mclanguage",
 )
-SERVER_IP      = "katherine-hydro.tun.ply.gg"
-SERVER_PORT    = "31279"
+SERVER_IP      = "g-pl-3.apexnodes.xyz"
+SERVER_PORT    = "21561"
 # Warm Play: skip slow CDN cascade when enough mods already on disk
 PACK_READY_MIN_JARS = 40
 # Pack CDN for friends — manifest.json mirrors; jars download from GitHub Releases URLs inside it.
@@ -57,6 +57,7 @@ GITHUB_RAW     = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 MANIFEST_URL   = f"{GITHUB_RAW}/manifest.json"
 GITHUB_RELEASE = "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.3"
 PACK_FOLDERS   = ("mods", "config", "kubejs", "resourcepacks")
+PACK_VERSION_FILE = ".aquatech_pack_version"
 # Player-local files kept even if not in pack manifest (LoliLand-style sync)
 SYNC_KEEP_NAMES = {
     "options.txt",
@@ -105,6 +106,23 @@ JAVA_URL       = "https://api.adoptium.net/v3/binary/latest/17/ga/windows/x64/jr
 GAME_DIR       = Path.home() / "AppData" / "Roaming" / "AquaTech"
 JAVA_DIR       = GAME_DIR / "_java17"
 CONFIG_PATH    = Path.home() / ".aquatech_launcher.json"
+
+
+def normalize_game_dir(cfg: dict) -> dict:
+    """Default game folder; user can override in settings."""
+    gd = (cfg.get("game_dir") or "").strip()
+    cfg["game_dir"] = gd if gd else str(GAME_DIR)
+    return cfg
+
+
+def normalize_server_cfg(cfg: dict) -> dict:
+    if not (cfg.get("server_host") or "").strip():
+        cfg["server_host"] = SERVER_IP
+    if not str(cfg.get("server_port") or "").strip():
+        cfg["server_port"] = SERVER_PORT
+    if "auto_connect" not in cfg:
+        cfg["auto_connect"] = True
+    return cfg
 
 # ─── Palette (deep ocean launcher) ────────────────────────────────────────────
 C_BG       = "#061018"
@@ -572,6 +590,108 @@ def resolve_update_base(cfg: dict | None = None, *, allow_local_fallback: bool =
     return ""
 
 
+def pack_version_key(version: str) -> tuple[int, ...]:
+    parts: list[int] = []
+    for piece in re.split(r"[.\-_+]", (version or "").strip()):
+        if not piece:
+            continue
+        digits = "".join(ch for ch in piece if ch.isdigit())
+        if digits:
+            parts.append(int(digits))
+    return tuple(parts) if parts else (0,)
+
+
+def read_local_pack_version(game_dir: Path) -> str | None:
+    path = game_dir / PACK_VERSION_FILE
+    try:
+        if path.is_file():
+            ver = path.read_text("utf-8").strip()
+            return ver or None
+    except OSError:
+        pass
+    return None
+
+
+def write_local_pack_version(game_dir: Path, version: str) -> None:
+    ver = (version or "").strip()
+    if not ver:
+        return
+    try:
+        game_dir.mkdir(parents=True, exist_ok=True)
+        (game_dir / PACK_VERSION_FILE).write_text(ver + "\n", encoding="utf-8")
+    except OSError:
+        pass
+
+
+def fetch_remote_pack_manifest(cfg: dict | None = None, timeout: float = 3.0) -> dict | None:
+    """Light manifest.json fetch for startup version check (no file downloads)."""
+    cfg = cfg or {}
+    bases: list[str] = []
+    base = resolve_update_base(cfg, allow_local_fallback=False)
+    if base:
+        bases.append(base.rstrip("/"))
+    for mirror in PACK_CDN_MIRRORS:
+        b = mirror.rstrip("/")
+        if b not in bases:
+            bases.append(b)
+    headers = {"User-Agent": f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}"}
+    for cand in bases[:5]:
+        url = f"{cand.rstrip('/')}/manifest.json"
+        try:
+            t = 0.8 if _is_loopback_url(cand) else timeout
+            return _fetch_json_hard(url, t, headers=headers)
+        except Exception:
+            continue
+    return None
+
+
+def check_pack_update_available(cfg: dict | None = None) -> dict:
+    cfg = cfg or {}
+    game_dir = Path(cfg.get("game_dir") or GAME_DIR)
+    local = read_local_pack_version(game_dir)
+    remote = None
+    manifest = None
+    try:
+        manifest = fetch_remote_pack_manifest(cfg)
+        if manifest:
+            remote = (manifest.get("version") or "").strip() or None
+    except Exception:
+        pass
+    update_available = False
+    if remote and local:
+        update_available = pack_version_key(remote) > pack_version_key(local)
+    elif remote and not local and not _pack_looks_ready(game_dir):
+        update_available = True
+    elif remote and not local and _pack_looks_ready(game_dir) and manifest:
+        marker = None
+        for item in manifest.get("files") or []:
+            rel = str(item.get("path") or "")
+            if "aquatech_ui" in rel and rel.endswith(".jar"):
+                marker = item
+                break
+        if marker:
+            rel = marker["path"].replace("\\", "/").lstrip("/")
+            path = game_dir / rel.replace("/", os.sep)
+            md5 = (marker.get("md5") or "").lower()
+            expect = int(marker.get("size") or 0)
+            up_to_date = False
+            if path.is_file():
+                if md5 and md5_file(path).lower() == md5:
+                    up_to_date = True
+                elif expect and path.stat().st_size == expect:
+                    up_to_date = True
+            if up_to_date:
+                write_local_pack_version(game_dir, remote)
+                local = remote
+            else:
+                update_available = True
+    return {
+        "local": local,
+        "remote": remote,
+        "update_available": update_available,
+    }
+
+
 def purge_pack_extras(game_dir: Path, wanted_rels: set[str], log=None) -> int:
     """Delete files under PACK_FOLDERS that are not listed in the manifest (LoliLand-style)."""
     removed = 0
@@ -661,6 +781,7 @@ def apply_manifest_sync(
     if not jobs:
         _log(f"✓ Сборка актуальна ({len(files)} файлов)" + (f", удалено {deleted}" if deleted else ""))
         _progress(100)
+        write_local_pack_version(game_dir, manifest.get("version") or "")
         return 0, 0, deleted
 
     _log(f"⚡ Обновляем {len(jobs)}/{len(files)} файлов…")
@@ -726,6 +847,7 @@ def apply_manifest_sync(
     else:
         _log(f"✓ Синхронизация: {updated}/{len(files)}" + (f", удалено {deleted}" if deleted else ""))
     _progress(100)
+    write_local_pack_version(game_dir, manifest.get("version") or "")
     return updated, failed, deleted
 
 
@@ -1589,6 +1711,47 @@ def ensure_assets(game_dir: Path, ver: dict, log=None) -> str:
     return index_id
 
 
+def ensure_servers_dat(game_dir: Path, host: str, port: str | int, name: str = "AquaTech") -> None:
+    """Add/update AquaTech in Minecraft multiplayer list (servers.dat)."""
+    try:
+        import nbtlib
+        from nbtlib.tag import Byte, Compound, List, String
+    except ImportError:
+        return
+
+    target_ip = f"{host.strip()}:{str(port).strip()}"
+    path = game_dir / "servers.dat"
+    entry = Compound({
+        "name": String(name),
+        "ip": String(target_ip),
+        "acceptTextures": Byte(1),
+        "hidden": Byte(0),
+    })
+
+    try:
+        if path.is_file():
+            nbt = nbtlib.load(path, gzipped=True)
+            servers = nbt.get("servers")
+            if servers is not None:
+                for item in servers:
+                    if str(item.get("name", "")) == name or str(item.get("ip", "")) == target_ip:
+                        item["name"] = String(name)
+                        item["ip"] = String(target_ip)
+                        nbt.save(path, gzipped=True)
+                        return
+                servers.append(entry)
+                nbt.save(path, gzipped=True)
+                return
+    except Exception:
+        pass
+
+    try:
+        root = Compound({"servers": List[Compound]([entry])})
+        nbtlib.File(root).save(path, gzipped=True)
+    except Exception:
+        pass
+
+
 def ensure_default_russian_options(game_dir: Path):
     """Force Russian UI + fix silent/wrong OpenAL device in options.txt."""
     options_file = game_dir / "options.txt"
@@ -1604,6 +1767,10 @@ def ensure_default_russian_options(game_dir: Path):
         "soundCategory_player": "1.0",
         "soundCategory_ambient": "1.0",
         "soundCategory_voice": "1.0",
+    }
+    # Force-unbind Oculus/Iris shader toggle from K (conflicts with inventory/hotkeys).
+    force_keys = {
+        "key_iris.keybind.toggleShaders": "key.keyboard.unknown",
     }
     try:
         kv: dict[str, str] = {}
@@ -1631,6 +1798,13 @@ def ensure_default_russian_options(game_dir: Path):
             elif key not in kv:
                 kv[key] = val
                 order.append(key)
+                changed = True
+
+        for key, val in force_keys.items():
+            if kv.get(key) != val:
+                kv[key] = val
+                if key not in order:
+                    order.append(key)
                 changed = True
 
         # Wrong OpenAL output (e.g. microphone) => no game audio until restart
@@ -1834,9 +2008,11 @@ def build_launch_cmd(
         if flag not in game_args:
             game_args.extend([flag, val])
 
-    join_target = (auto_join or "").strip()
-    if not join_target:
+    join_target = ""
+    if auto_join is None:
         join_target = f"{SERVER_IP}:{SERVER_PORT}"
+    elif str(auto_join).strip():
+        join_target = str(auto_join).strip()
     if join_target and "--quickPlayMultiplayer" not in game_args:
         game_args.extend(["--quickPlayMultiplayer", join_target])
         if log:
@@ -1965,6 +2141,28 @@ class AquaTechLauncher(tk.Tk):
         self.after(40, self._anim_banner)
         self.after(40, self._anim_progress)
         self.after(200, self._refresh_server_status)
+        self.after(350, self._start_pack_check)
+
+    def _start_pack_check(self):
+        def work():
+            info = check_pack_update_available(self._cfg)
+            self.after(0, lambda: self._apply_pack_check(info))
+
+        threading.Thread(target=work, daemon=True, name="aquatech-pack-check").start()
+
+    def _apply_pack_check(self, info: dict):
+        remote = info.get("remote")
+        if info.get("update_available") and remote:
+            local = info.get("local") or "?"
+            self._pack_update_label.config(
+                text=f"Доступно обновление сборки {remote} (сейчас {local}) — жми «Обновить»",
+            )
+            self._pack_update_wrap.pack(fill="x", pady=(12, 0), before=self._btn_row)
+            self._btn_upd.set_colors("#2a2218", "#3a3020", "#d4a35c")
+        else:
+            self._pack_update_wrap.pack_forget()
+            if not self._running:
+                self._btn_upd.set_colors(C_CARD, C_FIELD_F, C_TEXT)
 
     def _center_window(self):
         """Center on the primary monitor (custom-launcher UX from typical MC launchers)."""
@@ -2006,24 +2204,22 @@ class AquaTechLauncher(tk.Tk):
         # Drop legacy sync_url pointing at Playit tunnels
         if "sync_url" in cfg and ("tun.ply.gg" in str(cfg.get("sync_url") or "").lower() or "playit" in str(cfg.get("sync_url") or "").lower()):
             cfg.pop("sync_url", None)
-        return cfg
+        return normalize_server_cfg(normalize_game_dir(cfg))
 
     def _save_cfg(self):
         self._cfg["username"] = self._e_nick.get().strip()
-        self._cfg["game_dir"] = self._e_dir.get().strip()
-        self._cfg["update_url"] = normalize_update_url(self._e_update.get().strip().rstrip("/"))
+        if hasattr(self, "_e_dir"):
+            self._cfg["game_dir"] = self._e_dir.get().strip()
+        normalize_game_dir(self._cfg)
+        normalize_server_cfg(self._cfg)
+        if hasattr(self, "_auto_connect"):
+            self._cfg["auto_connect"] = bool(self._auto_connect.get())
         try:
             self._cfg["ram_mb"] = int(self._e_ram.get().replace("MB", "").replace("GB", "000").strip())
         except Exception:
             pass
         try:
             CONFIG_PATH.write_text(json.dumps(self._cfg, indent=2), "utf-8")
-        except Exception:
-            pass
-        # Keep UI field in sync after migration
-        try:
-            self._e_update.delete(0, "end")
-            self._e_update.insert(0, self._cfg.get("update_url", "") or "")
         except Exception:
             pass
 
@@ -2142,11 +2338,6 @@ class AquaTechLauncher(tk.Tk):
         tk.Label(brand, text="Launcher", font=FONT_SUB,
                  fg=C_DIM, bg=C_SIDE, anchor="w").pack(fill="x", pady=(2, 0))
 
-        chip = tk.Frame(side, bg=C_NAV_ACT)
-        chip.pack(fill="x", padx=14, pady=(10, 18))
-        tk.Label(chip, text=f"  {SERVER_IP}", font=FONT_CHIP,
-                 fg=C_ACCENT, bg=C_NAV_ACT, anchor="w", pady=7).pack(fill="x")
-
         nav_wrap = tk.Frame(side, bg=C_SIDE)
         nav_wrap.pack(fill="x", padx=10)
         for key, label in (("play", "Игра"), ("settings", "Настройки"), ("log", "Активность")):
@@ -2241,6 +2432,18 @@ class AquaTechLauncher(tk.Tk):
             height=36, radius=10, font=FONT_CHIP,
         ).pack(side="right")
 
+        self._pack_update_wrap = tk.Frame(body, bg="#2a2218", padx=14, pady=10)
+        self._pack_update_label = tk.Label(
+            self._pack_update_wrap,
+            text="",
+            font=FONT_CHIP,
+            fg="#d4a35c",
+            bg="#2a2218",
+            anchor="w",
+            wraplength=main_w - 120,
+        )
+        self._pack_update_label.pack(side="left", fill="x", expand=True)
+
         # Actions
         btn_row = tk.Frame(body, bg=C_BG)
         btn_row.pack(fill="x", pady=(16, 0))
@@ -2254,6 +2457,7 @@ class AquaTechLauncher(tk.Tk):
             height=56, radius=12, font=FONT_BTN,
         )
         self._btn_upd.pack(side="left", fill="x", expand=True)
+        self._btn_row = btn_row
 
         # Progress
         prog_frame = tk.Frame(body, bg=C_BG)
@@ -2286,7 +2490,7 @@ class AquaTechLauncher(tk.Tk):
 
         tk.Label(wrap, text="Настройки", font=FONT_TITLE, fg=C_TEXT, bg=C_BG, anchor="w").pack(fill="x")
         tk.Label(
-            wrap, text="Папка игры, память и источник обновлений сборки.",
+            wrap, text="Папка игры и объём оперативной памяти.",
             font=FONT_SUB, fg=C_MUTED, bg=C_BG, anchor="w",
         ).pack(fill="x", pady=(4, 22))
 
@@ -2296,7 +2500,6 @@ class AquaTechLauncher(tk.Tk):
         self._e_ram = self._field(card, "Оперативка")
         self._e_ram.insert(0, f"{self._cfg.get('ram_mb', 4096)} MB")
 
-        # Game dir with browse
         dwrap = tk.Frame(card, bg=C_CARD)
         dwrap.pack(fill="x", pady=(0, 14))
         tk.Label(dwrap, text="ПАПКА ИГРЫ", font=FONT_LABEL, fg=C_DIM, bg=C_CARD,
@@ -2322,14 +2525,15 @@ class AquaTechLauncher(tk.Tk):
 
         SoftButton(row, "⋯", browse, primary=False, height=40, width=44).pack(side="left", padx=(8, 0))
 
-        self._e_update = self._field(card, "URL обновлений")
-        self._e_update.insert(0, self._cfg.get("update_url", "") or "")
-
-        tk.Label(
-            wrap,
-            text="Манифест сборки: сайт AquaTech (моды качаются с GitHub Releases).",
-            font=FONT_CHIP, fg=C_DIM, bg=C_BG, anchor="w",
-        ).pack(fill="x", pady=(14, 0))
+        self._auto_connect = tk.BooleanVar(value=bool(self._cfg.get("auto_connect", True)))
+        ac_row = tk.Frame(card, bg=C_CARD)
+        ac_row.pack(fill="x")
+        tk.Checkbutton(
+            ac_row, text="Авто-вход на сервер AquaTech",
+            variable=self._auto_connect, font=FONT_CHIP, fg=C_MUTED, bg=C_CARD,
+            activebackground=C_CARD, activeforeground=C_TEXT, selectcolor=C_FIELD,
+            command=lambda: self._cfg.__setitem__("auto_connect", self._auto_connect.get()),
+        ).pack(anchor="w")
 
     def _build_log(self, parent: tk.Frame):
         wrap = tk.Frame(parent, bg=C_BG)
@@ -2504,6 +2708,7 @@ class AquaTechLauncher(tk.Tk):
         self._set_busy(False)
         if ok:
             self._log_line("Сборка обновлена. Можно играть.", "ok")
+            self._start_pack_check()
         else:
             self._btn_upd.set_colors(C_RED, "#EC8888", "#FFFFFF")
             self._btn_upd.set_text("Ошибка обновления")
@@ -2600,10 +2805,12 @@ class AquaTechLauncher(tk.Tk):
         try:
             host = (self._cfg.get("server_host") or SERVER_IP).strip()
             port = str(self._cfg.get("server_port") or SERVER_PORT).strip()
+            ensure_servers_dat(game_dir, host, port)
+            auto_join = f"{host}:{port}" if self._cfg.get("auto_connect", True) else ""
             cmd = build_launch_cmd(
                 game_dir, username, ram_mb, java,
                 log=lambda m: self._log_line(m, "dim"),
-                auto_join=f"{host}:{port}",
+                auto_join=auto_join,
             )
             proc = spawn_minecraft(cmd, game_dir)
             self._log_line(f"Процесс Minecraft PID {proc.pid} — проверяем…", "dim")
@@ -2641,13 +2848,6 @@ class AquaTechLauncher(tk.Tk):
                             self._log_line(line[:220], "dim")
                     except OSError:
                         pass
-                gdir = str(game_dir).lower().replace("/", "\\")
-                if "aquatech-client" in gdir or "aquatbuild" in gdir or "progect" in gdir:
-                    self._log_line(
-                        "⚠️  Папка игры похожа на сборку клиента. В Настройках поставь: "
-                        f"{GAME_DIR}",
-                        "warn",
-                    )
                 self.after(0, lambda: self._done(False))
                 return
 
