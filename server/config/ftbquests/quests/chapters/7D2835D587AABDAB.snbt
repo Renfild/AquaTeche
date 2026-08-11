@@ -1,0 +1,170 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "7D2835D587AABDAB"
+	group: ""
+	icon: {
+		Count: 1
+		id: "starcatcher:bamboo_rod"
+		tag: {
+			Damage: 0
+		}
+	}
+	id: "7D2835D587AABDAB"
+	images: [
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -3.0d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -2.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -2.0d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -1.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -1.0d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -0.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: 0.0d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -1.5d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -1.5d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/radiation_dust"
+			rotation: 0.0d
+			width: 1.0d
+			x: -1.5d
+			y: 1.0d
+		}
+	]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["Мир под водой. Суши нет. Твой источник ресурсов — удочки и океан."]
+			entity_vis_size: 1.0f
+			id: "1BEDD68EFAD565F6"
+			rewards: [{
+				id: "19225B287FE1EDC4"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "7889C9A4847A6FD4"
+				title: "Вступление"
+				type: "checkmark"
+			}]
+			x: -1.5d
+			y: -0.5d
+		}
+		{
+			description: ["Загляни в Discord сервера — новости, помощь и ивенты."]
+			entity_vis_size: 1.0f
+			id: "17AA45F8E0EFA0DB"
+			rewards: [{
+				id: "02E135B2011FBC0D"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "012A92C26362F303"
+				title: "Дискорд"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: -0.5d
+		}
+		{
+			description: ["SHIFT + удочка = таблица вылова. Умножители x2..x64 дают больше ресурсов."]
+			entity_vis_size: 1.0f
+			id: "4E0C4D44F804F8D7"
+			rewards: [{
+				id: "24F829A182135206"
+				item: "starcatcher:fisherman_hat_white"
+				type: "item"
+			}]
+			tasks: [{
+				id: "477E8FB02F9DE540"
+				title: "Рыбалка"
+				type: "checkmark"
+			}]
+			x: -3.0d
+			y: -0.5d
+		}
+		{
+			description: ["Продавай рыбу NPC за Дублоны. Трать их на кейсы и торговлю."]
+			entity_vis_size: 1.0f
+			id: "74B58CD30A570FBA"
+			rewards: [{
+				command: "/casesmod addbalance @p 100"
+				icon: "industrialupgrade:crafting_elements/crafting_637_element"
+				id: "69762D950B0EA414"
+				type: "command"
+			}]
+			tasks: [{
+				id: "3C848335777E73F3"
+				title: "Экономика"
+				type: "checkmark"
+			}]
+			x: -1.5d
+			y: 1.0d
+		}
+	]
+	title: "Информация"
+}

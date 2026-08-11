@@ -50,6 +50,15 @@ public class FishingLootHandler {
         }
         if (rodStack.isEmpty()) return;
 
+        // Fish-only rods (boner/sky): leave StarCatcher alone — do not touch bait/rate/drops.
+        // AquaTech datapack "fish" (ores previewed as cod) compete in the global SC pool;
+        // strip those fakes so bone/sky keep real starcatcher:* fish.
+        if (FishingRodCompat.isFishOnlyRod(rodStack)) {
+            scrubFakeAquaTechFishDrops(event, serverPlayer.getRandom());
+            RodDurability.wearOne(rodStack, serverPlayer);
+            return;
+        }
+
         // Pin rate before SC shrinks bait; after reel put it back and spend 1 of ~10k uses.
         StarCatcherAttachments.ensureRatePersists(rodStack, false);
         final ItemStack rodRef = rodStack;
@@ -60,11 +69,6 @@ public class FishingLootHandler {
             });
         }
 
-        if (FishingRodCompat.isFishOnlyRod(rodStack)) {
-            // Keep StarCatcher default fish behavior; still spend rod uses.
-            RodDurability.wearOne(rodStack, serverPlayer);
-            return;
-        }
         if (rodType == null) return;
 
         // SC already ran minigame. Clear SC drops (do NOT cancel — cancel leaves ghost bob/cast).
@@ -74,6 +78,68 @@ public class FishingLootHandler {
         if (serverPlayer.getServer() != null) {
             serverPlayer.getServer().execute(() -> StarCatcherAttachments.forceReleaseBobber(serverPlayer));
         }
+    }
+
+    /**
+     * AquaTech boot-fix fish entries live in the global SC pool with catch_info=cod.
+     * Fish-only rods must not keep those; keep real starcatcher fish or roll one.
+     */
+    private static void scrubFakeAquaTechFishDrops(ItemFishedEvent event, RandomSource random) {
+        List<ItemStack> drops = event.getDrops();
+        boolean hadStarCatcherFish = false;
+        for (ItemStack stack : drops) {
+            if (isStarCatcherFishItem(stack)) {
+                hadStarCatcherFish = true;
+                break;
+            }
+        }
+        drops.removeIf(stack -> !isStarCatcherFishItem(stack));
+        if (drops.isEmpty() || !hadStarCatcherFish) {
+            drops.clear();
+            ItemStack fish = randomStarCatcherFish(random);
+            if (!fish.isEmpty()) {
+                drops.add(fish);
+            }
+        }
+    }
+
+    private static boolean isStarCatcherFishItem(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) return false;
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (id == null || !"starcatcher".equals(id.getNamespace())) return false;
+        String path = id.getPath();
+        if (path.endsWith("_rod") || path.contains("bait") || path.contains("bobber")
+                || path.contains("hook") || path.contains("template") || path.contains("hat")) {
+            return false;
+        }
+        return true;
+    }
+
+    private static ItemStack randomStarCatcherFish(RandomSource random) {
+        List<Item> fish = new ArrayList<>();
+        for (Item item : BuiltInRegistries.ITEM) {
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+            if (id == null || !"starcatcher".equals(id.getNamespace())) continue;
+            String path = id.getPath();
+            if (path.endsWith("_rod") || path.contains("bait") || path.contains("bobber")
+                    || path.contains("hook") || path.contains("template") || path.contains("hat")
+                    || path.contains("bucket") || path.contains("crate") || path.contains("trophy")) {
+                continue;
+            }
+            // Prefer edible / fish-looking ids
+            if (path.contains("fish") || path.contains("eel") || path.contains("shrimp")
+                    || path.contains("trout") || path.contains("tuna") || path.contains("ray")
+                    || path.contains("jellyfish") || path.contains("starfish") || path.contains("barb")
+                    || path.contains("anthias") || path.contains("chromis") || path.contains("grenadier")
+                    || path.contains("bream") || path.contains("pearl")) {
+                fish.add(item);
+            }
+        }
+        if (fish.isEmpty()) {
+            Item fallback = BuiltInRegistries.ITEM.get(new ResourceLocation("starcatcher", "blossomfish"));
+            return fallback != Items.AIR ? new ItemStack(fallback) : ItemStack.EMPTY;
+        }
+        return new ItemStack(fish.get(random.nextInt(fish.size())));
     }
 
     public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem rodItem, ItemStack rodStack, float lootScale) {

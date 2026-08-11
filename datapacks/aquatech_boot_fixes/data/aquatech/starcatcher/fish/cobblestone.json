@@ -1,5 +1,5 @@
 {
-  "base_chance": 25,
+  "base_chance": 1,
   "catch_info": {
     "item": "minecraft:cod"
   },
@@ -57,5 +57,5 @@
     "golden_chance": 0.0
   },
   "skips_minigame": false,
-  "weight": 20.0
+  "weight": 0.05
 }

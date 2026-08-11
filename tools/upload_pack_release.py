@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload dist/AquaTech-Client to GitHub Release pack-2.9.24 (draft -> upload -> publish)."""
+"""Upload dist/AquaTech-Client to GitHub Release pack-2.9.25 (draft -> upload -> publish)."""
 from __future__ import annotations
 
 import json
@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "pack-2.9.24"
+TAG = "pack-2.9.25"
 PACK = ROOT / "dist" / "AquaTech-Client"
 MANIFEST = PACK / "manifest.json"
 WORKERS = 4

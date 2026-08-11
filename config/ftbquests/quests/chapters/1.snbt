@@ -1,0 +1,909 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "1"
+	group: ""
+	id: "646C2E76666824F0"
+	images: [
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.0d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.5d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.0d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.5d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.5d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.0d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.5d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.0d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.5d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.5d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.0d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_front-back-left-right"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_front-back-left-right"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_front-back-left-right"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.5d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.5d
+			y: -1.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.0d
+			y: -1.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.5d
+			y: -1.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.0d
+			y: -1.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.5d
+			y: -1.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.0d
+			y: -1.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.5d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.5d
+			y: -1.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 5.0d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.5d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.5d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_top-bottom"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_front-back-left-right"
+			rotation: 0.0d
+			width: 1.0d
+			x: 3.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_front-back-left-right"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "industrialupgrade:block/smeltery_furnace_front-back-left-right"
+			rotation: 0.0d
+			width: 1.0d
+			x: 4.5d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:block/anvil_top"
+			rotation: 0.0d
+			width: 1.0d
+			x: -3.0d
+			y: -0.5d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:block/anvil_top"
+			rotation: 0.0d
+			width: 1.0d
+			x: -3.0d
+			y: 0.0d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:block/anvil_top"
+			rotation: 0.0d
+			width: 1.0d
+			x: -3.0d
+			y: -1.0d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:block/anvil_top"
+			rotation: 90.0d
+			width: 1.0d
+			x: -3.0d
+			y: 0.5d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:block/anvil_top"
+			rotation: 90.0d
+			width: 1.0d
+			x: -3.0d
+			y: -1.5d
+		}
+		{
+			height: 1.0d
+			image: "alexsmobs:item/blobfish_bucket"
+			rotation: 0.0d
+			width: 1.0d
+			x: -0.5d
+			y: 5.5d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:textures/mob_effect/speed.png"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.0d
+			y: 5.0d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:textures/mob_effect/speed.png"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.0d
+			y: 7.0d
+		}
+		{
+			height: 1.5d
+			image: "ae2:block/molecular_assembler_lights"
+			rotation: 0.0d
+			width: 1.5d
+			x: -3.0d
+			y: -6.0d
+		}
+		{
+			height: 1.5d
+			image: "ae2:block/molecular_assembler_lights"
+			rotation: 0.0d
+			width: 1.5d
+			x: -3.0d
+			y: -7.0d
+		}
+		{
+			height: 1.5d
+			image: "ae2:block/molecular_assembler_lights"
+			rotation: 0.0d
+			width: 1.5d
+			x: -3.0d
+			y: -8.0d
+		}
+		{
+			height: 1.5d
+			image: "ae2:block/molecular_assembler_lights"
+			rotation: 0.0d
+			width: 1.5d
+			x: -3.0d
+			y: -5.0d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/apothecary_mossy_side"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.0d
+			y: -5.5d
+		}
+	]
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["Твой первый шаг к развитию"]
+			entity_vis_size: 1.0f
+			id: "00AE2E0A6BA75908"
+			rewards: [{
+				count: 16
+				id: "7C9EEC45934222FB"
+				item: "industrialupgrade:itemingots/titanium_ingot"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5EB2532C7D64D95C"
+				item: "industrialupgrade:block_anvil/block_anvil"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["00AE2E0A6BA75908"]
+			entity_vis_size: 1.0f
+			id: "31967B2A2D4B1308"
+			rewards: [{
+				count: 32
+				id: "743B6848C7F15C6B"
+				item: "industrialupgrade:itemplates/titanium_plate"
+				type: "item"
+			}]
+			tasks: [{
+				count: 6L
+				id: "1863ED0229027E72"
+				item: "industrialupgrade:itemingots/titanium_ingot"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["00AE2E0A6BA75908"]
+			entity_vis_size: 1.0f
+			id: "01E4663B9DBBACA1"
+			rewards: [{
+				count: 32
+				id: "0A730D91F142D9BB"
+				item: "industrialupgrade:itemplates/tin_plate"
+				type: "item"
+			}]
+			tasks: [{
+				count: 6L
+				id: "5F77A9F140479E14"
+				item: { Count: 6, id: "industrialupgrade:itemingots/tin_ingot" }
+				type: "item"
+			}]
+			x: -0.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["00AE2E0A6BA75908"]
+			entity_vis_size: 1.0f
+			id: "6B52AD23F19281F2"
+			rewards: [{
+				count: 32
+				id: "69CD8973D214C598"
+				item: "industrialupgrade:itemplates/copper_plate"
+				type: "item"
+			}]
+			tasks: [{
+				count: 6L
+				id: "297861C4B28A1A9B"
+				item: { Count: 6, id: "minecraft:copper_ingot" }
+				type: "item"
+			}]
+			x: -0.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["07F00A1B71A790F2"]
+			entity_vis_size: 1.0f
+			id: "57A2237E905DBDB5"
+			rewards: [
+				{
+					count: 64
+					id: "7DE37A114D5398B9"
+					item: "minecraft:raw_iron"
+					type: "item"
+				}
+				{
+					count: 64
+					id: "597DCE4C80E5CD62"
+					item: "industrialupgrade:raw_metals/raw_manganese"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 74L
+					id: "43E2052ABD2FDAE7"
+					item: "industrialupgrade:smeltery/smeltery_casing"
+					type: "item"
+				}
+				{
+					id: "0A7336A479399DD8"
+					item: "industrialupgrade:smeltery/smeltery_controller"
+					type: "item"
+				}
+				{
+					count: 3L
+					id: "264D486155197214"
+					item: { Count: 3, id: "industrialupgrade:smeltery/smeltery_furnace" }
+					type: "item"
+				}
+				{
+					id: "507CF29DF5F4734B"
+					item: "industrialupgrade:smeltery/smeltery_casting"
+					type: "item"
+				}
+				{
+					count: 18L
+					id: "7B07BE590AB649D3"
+					item: { Count: 18, id: "industrialupgrade:smeltery/smeltery_tank" }
+					type: "item"
+				}
+				{
+					count: 3L
+					id: "3E2099DE48DE581E"
+					item: { Count: 3, id: "industrialupgrade:smeltery/smeltery_fuel_tank" }
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -0.5d
+		}
+		{
+			description: ["Главный ингредиент в создании плавильни"]
+			entity_vis_size: 1.0f
+			id: "07F00A1B71A790F2"
+			rewards: [
+				{
+					count: 64
+					id: "75EC67E48D8A205A"
+					item: "industrialupgrade:crafting_elements/crafting_773_element"
+					type: "item"
+				}
+				{
+					count: 12
+					id: "3B4FC6BF3B4082C5"
+					item: "minecraft:lava_bucket"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 128L
+				id: "5DC02F39978E7788"
+				item: { Count: 64, id: "industrialupgrade:crafting_elements/crafting_773_element" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["57A2237E905DBDB5"]
+			entity_vis_size: 1.0f
+			id: "6F6AC05D36092CB2"
+			rewards: [{
+				count: 5
+				id: "29D882C990085721"
+				item: "industrialupgrade:itemingots/bronze_ingot"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1C2AAA5D2F7B192E"
+				item: "industrialupgrade:crafting_elements/crafting_496_element"
+				type: "item"
+			}]
+			x: 6.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["57A2237E905DBDB5"]
+			entity_vis_size: 1.0f
+			id: "7F5120EC7AD69F11"
+			rewards: [{
+				count: 5
+				id: "40CEF8B1EF5D3D13"
+				item: "minecraft:iron_block"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0046ADB5EBD36638"
+				item: "industrialupgrade:crafting_elements/crafting_497_element"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6F6AC05D36092CB2"]
+			entity_vis_size: 1.0f
+			id: "7B5B49CC51F78251"
+			rewards: [
+				{
+					count: 3
+					id: "6631BCE98CF4B83A"
+					item: "minecraft:gold_block"
+					type: "item"
+				}
+				{
+					count: 27
+					id: "7DE53675A62CAB71"
+					item: "industrialupgrade:itemingots/silver_ingot"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 12L
+				id: "7B27F9E13942BF2D"
+				item: { Count: 12, id: "industrialupgrade:itemingots/electrum_ingot" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6F6AC05D36092CB2"]
+			entity_vis_size: 1.0f
+			id: "2669969AAE69C9EB"
+			rewards: [
+				{
+					count: 10
+					id: "108F5AFC31F56A8A"
+					item: "minecraft:raw_iron"
+					type: "item"
+				}
+				{
+					count: 10
+					id: "42488D93EC6C901B"
+					item: "industrialupgrade:raw_metals/raw_manganese"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "1CE3C0DFA9A51C68"
+				item: "industrialupgrade:alloyingot/ferromanganese"
+				type: "item"
+			}]
+			x: 9.0d
+			y: -1.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			id: "60AF236CF2611884"
+			rewards: [{
+				count: 12
+				id: "058B531D34CCA596"
+				item: "industrialupgrade:crafting_elements/crafting_290_element"
+				type: "item"
+			}]
+			tasks: [{
+				id: "70961830C21AECA6"
+				item: "industrialupgrade:dryer/dryer"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["60AF236CF2611884"]
+			entity_vis_size: 1.0f
+			id: "7E3FBED40A61205B"
+			rewards: [{
+				count: 32
+				id: "30264AAB825ABAAE"
+				item: "industrialupgrade:crafting_elements/crafting_271_element"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2F13521F3FF916A0"
+				item: "industrialupgrade:block_squeezer/squeezer"
+				type: "item"
+			}]
+			x: 1.0d
+			y: -4.0d
+		}
+		{
+			description: ["Можно использовать для хранения жидкостей"]
+			entity_vis_size: 1.0f
+			id: "072814E53CDE7417"
+			rewards: [{
+				count: 6
+				id: "1DB776EA9F8DF4A4"
+				item: "minecraft:bucket"
+				type: "item"
+			}]
+			tasks: [{
+				id: "54D8B11063BAF7CF"
+				item: "industrialupgrade:barrel/barrel"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["072814E53CDE7417"]
+			entity_vis_size: 1.0f
+			id: "60F1216D90D349FF"
+			rewards: [{
+				count: 64
+				id: "23B9FC6766EF4AF2"
+				item: "industrialupgrade:raw_latex"
+				type: "item"
+			}]
+			tasks: [{
+				id: "06FDDA0D0E0D4859"
+				item: "industrialupgrade:bucket/rawlatex"
+				type: "item"
+			}]
+			x: 0.5d
+			y: -8.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			id: "082AEE6D24AC76E7"
+			rewards: [{
+				count: 32
+				id: "084EF795F8DD1E44"
+				item: "industrialupgrade:itemcell/itemcell"
+				type: "item"
+			}]
+			tasks: [{
+				id: "481A61614A712A31"
+				item: "industrialupgrade:primal_fluid_heater/primal_fluid_heater"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -6.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			id: "738EF8D18C9ACB8B"
+			rewards: [
+				{
+					count: 3
+					id: "2068457499CE1DF5"
+					item: {
+						Count: 1
+						id: "aquatech_ui:rate_x4"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "6E612CE661A01FB5"
+					item: {
+						Count: 1
+						id: "starcatcher:good_old_rod"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "332085FED979368A"
+					item: {
+						Count: 1
+						id: "starcatcher:bamboo_rod"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "7A7B2F337D5223A8"
+				item: "aquatech_ui:auto_fisher"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["738EF8D18C9ACB8B"]
+			entity_vis_size: 1.0f
+			id: "0B3C878E8A026BE0"
+			rewards: [{
+				count: 16
+				id: "0281833C07AD45B8"
+				item: "minecraft:gold_ingot"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1BBB61E4437EC07F"
+				item: "aquatech_ui:speed_upgrade"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["738EF8D18C9ACB8B"]
+			entity_vis_size: 1.0f
+			id: "3D021B232766966A"
+			rewards: [{
+				id: "6FCAE914DFD1CC29"
+				item: "aquatech_ui:speed_x4_upgrade"
+				type: "item"
+			}]
+			tasks: [{
+				consume_items: false
+				id: "59CF997C2C6A458A"
+				item: "aquatech_ui:speed_x4_upgrade"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 7.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			id: "0447DBB400FD44EA"
+			rewards: [{
+				count: 16
+				id: "03E1DEAB1C08F2AC"
+				item: "industrialupgrade:itemplates/iron_plate"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5CC0B0D66C8EC375"
+				item: "industrialupgrade:compressor/compressor"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -7.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			id: "7A5E5638AFF5596D"
+			rewards: [{
+				count: 32
+				id: "26FABA3B5E6B0D0E"
+				item: "industrialupgrade:itemdust/iron_dust"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2F4AEBC610E973AD"
+				item: "industrialupgrade:macerator/macerator"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -8.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			id: "7D5783928E12226A"
+			rewards: [{
+				count: 16
+				id: "70752089A00C4E9C"
+				item: "industrialupgrade:wiring/copper1"
+				type: "item"
+			}]
+			tasks: [{
+				id: "675CD32B0F049F07"
+				item: "industrialupgrade:primal_wire_insulator/primal_wire_insulator"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -6.0d
+		}
+		{
+			entity_vis_size: 1.0f
+			id: "1D931D645B78E360"
+			rewards: [
+				{
+					count: 16
+					id: "5C31F543073CEF6C"
+					item: "industrialupgrade:itemplates/titanium_plate"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "16F2689F8BA190C7"
+					item: "industrialupgrade:alloyplate/ferromanganese"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "23D8FA6D705BB68A"
+				item: "industrialupgrade:basemachine3/rolling_machine"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -5.0d
+		}
+	]
+	title: "Глава 1"
+}

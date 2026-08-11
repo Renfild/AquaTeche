@@ -1,0 +1,110 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "57FF374744F4AC76"
+	group: ""
+	id: "57FF374744F4AC76"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			entity_vis_size: 1.0f
+			id: "5D894131F2E2420F"
+			rewards: [{
+				id: "68DFD7FEEC626D89"
+				item: "avaritia:compressed_chest"
+				type: "item"
+			}]
+			tasks: [{
+				count: 12L
+				id: "796D721FCBDE3BCE"
+				item: { Count: 12, id: "minecraft:chest" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["5D894131F2E2420F"]
+			entity_vis_size: 1.0f
+			id: "3C6CA2FE90915F3B"
+			rewards: [
+				{
+					count: 4
+					id: "1FB2A232949D636F"
+					item: "industrialupgrade:wiring/itemcable7"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "41D5CF28DFCC9D16"
+					item: "industrialupgrade:wiring/itemcable6"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 32L
+				id: "7B91F170F8F0A448"
+				item: "industrialupgrade:wiring/itemcable8"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["3C6CA2FE90915F3B"]
+			entity_vis_size: 1.0f
+			id: "31820C5727A1B1B1"
+			rewards: [
+				{
+					count: 4
+					id: "6D857203B1B078E1"
+					item: "industrialupgrade:wiring/itemcable9"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "4753BA024828A0B3"
+					item: "industrialupgrade:wiring/itemcable10"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 16L
+				id: "5E56FB29FD31D2E0"
+				item: { Count: 16, id: "industrialupgrade:wiring/itemcable11" }
+				type: "item"
+			}]
+			x: 2.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3C6CA2FE90915F3B"]
+			entity_vis_size: 1.0f
+			id: "26B6A76FC6AFB2C0"
+			rewards: [
+				{
+					count: 4
+					id: "39BC302A7A55B2FA"
+					item: "industrialupgrade:wiring/itemcable13"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "0DE09BC1E6217F30"
+					item: "industrialupgrade:wiring/itemcable12"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 16L
+				id: "5BD4B97C74BABCBA"
+				item: "industrialupgrade:wiring/itemcable14"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 0.0d
+		}
+	]
+	title: "Примитивная Автоматизация"
+}
