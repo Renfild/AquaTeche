@@ -35,7 +35,7 @@ python scripts/tasks/deploy_apexnodes_sftp.py
 
 Deploy auto:
 - mirrors repo `kubejs/` + aquatech datapacks into `server/` before upload
-- **full** SFTP: panel backup first (`pre-deploy-TIMESTAMP`; skip with `--skip-backup` / `AQUATECH_SKIP_BACKUP=1`)
+- **full** SFTP: panel backup first (`pre-deploy-TIMESTAMP`; rotates if limit=1; skip with `--skip-backup` / `AQUATECH_SKIP_BACKUP=1`)
 - purges stale remote `aquatech_ui-` / `casesmod-` / `packetfixer-` jars
 - injects MySQL placeholders from `.apex_mysql.json`
 

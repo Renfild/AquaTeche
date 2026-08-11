@@ -431,19 +431,65 @@ def apex_command(cmd: str) -> None:
     print(f"OK console: {cmd}", flush=True)
 
 
+def apex_list_backups() -> list[dict]:
+    listed = apex_json("GET", f"/api/client/servers/{APEX_SERVER_ID}/backups", timeout=30)
+    out: list[dict] = []
+    for item in listed.get("data") or []:
+        a = item.get("attributes") or {}
+        if a:
+            out.append(a)
+    return out
+
+
+def apex_delete_backup(uuid: str) -> None:
+    apex_json(
+        "DELETE",
+        f"/api/client/servers/{APEX_SERVER_ID}/backups/{uuid}",
+        timeout=60,
+    )
+    print(f"OK deleted panel backup uuid={uuid}", flush=True)
+
+
+def apex_rotate_oldest_unlocked_backup() -> bool:
+    """Free a slot on hosts with backup_limit=1. Returns True if something deleted."""
+    rows = apex_list_backups()
+    unlocked = [a for a in rows if a.get("uuid") and not a.get("is_locked")]
+    if not unlocked:
+        print("WARN no unlocked panel backup to rotate", flush=True)
+        return False
+    unlocked.sort(key=lambda a: str(a.get("created_at") or ""))
+    victim = unlocked[0]
+    apex_delete_backup(str(victim["uuid"]))
+    return True
+
+
 def apex_create_backup(
     name: str,
     *,
     wait_sec: int = 180,
     require: bool = False,
 ) -> str | None:
-    """Create panel backup before full overwrite. Returns backup uuid when known."""
-    created = apex_json(
-        "POST",
-        f"/api/client/servers/{APEX_SERVER_ID}/backups",
-        {"name": name, "ignored": ""},
-        timeout=60,
-    )
+    """Create panel backup before full overwrite. Rotates if backup limit hit."""
+    created: dict = {}
+    for attempt in range(2):
+        url = f"{APEX_PANEL}/api/client/servers/{APEX_SERVER_ID}/backups"
+        body = json.dumps({"name": name, "ignored": ""}).encode("utf-8")
+        req = urllib.request.Request(url, data=body, headers=_apex_headers(), method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                raw = resp.read()
+            created = json.loads(raw) if raw else {}
+            break
+        except urllib.error.HTTPError as ex:
+            err = ex.read().decode("utf-8", "replace")
+            if ex.code == 400 and "TooManyBackups" in err and attempt == 0:
+                print("panel backup limit hit — rotating oldest unlocked...", flush=True)
+                if not apex_rotate_oldest_unlocked_backup():
+                    raise SystemExit(f"Apex backup POST HTTP {ex.code}: {err[:500]}") from ex
+                time.sleep(2)
+                continue
+            raise SystemExit(f"Apex backup POST HTTP {ex.code}: {err[:500]}") from ex
+
     attrs = created.get("attributes") or created
     uuid = str(attrs.get("uuid") or "")
     print(f"OK panel backup requested name={name!r} uuid={uuid or '?'}", flush=True)
@@ -452,21 +498,19 @@ def apex_create_backup(
 
     deadline = time.time() + wait_sec
     while time.time() < deadline:
-        listed = apex_json("GET", f"/api/client/servers/{APEX_SERVER_ID}/backups", timeout=30)
-        rows = listed.get("data") or []
-        for item in rows:
-            a = item.get("attributes") or {}
+        for a in apex_list_backups():
             if uuid and a.get("uuid") != uuid:
                 continue
             if not uuid and a.get("name") != name:
                 continue
-            if a.get("is_successful") is True and not a.get("is_locked"):
+            # Panels often report is_successful=false until completed_at is set.
+            if a.get("is_successful") is True:
                 print(
                     f"OK backup ready bytes={a.get('bytes')} uuid={a.get('uuid')}",
                     flush=True,
                 )
                 return str(a.get("uuid") or uuid or "")
-            if a.get("is_successful") is False:
+            if a.get("completed_at") and a.get("is_successful") is False:
                 msg = f"FAIL panel backup failed uuid={a.get('uuid')}"
                 if require:
                     raise SystemExit(msg)
