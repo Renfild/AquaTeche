@@ -23,6 +23,7 @@ Optional env:
   AQUATECH_APEX_API_KEY    Client API key (Account -> API Credentials)
   AQUATECH_SFTP_ONLY       Comma prefixes, e.g. config/ftbquests,config/casesmod
   AQUATECH_SKIP_REPO_SYNC  1 = skip kubejs/datapacks mirror into server/
+  AQUATECH_SKIP_BACKUP     1 = skip panel world backup before full SFTP
 """
 from __future__ import annotations
 
@@ -400,12 +401,85 @@ def _apex_headers() -> dict[str, str]:
     }
 
 
+def apex_json(method: str, path: str, body: dict | None = None, timeout: int = 45) -> dict:
+    url = f"{APEX_PANEL}{path}"
+    data = None if body is None else json.dumps(body).encode("utf-8")
+    req = urllib.request.Request(url, data=data, headers=_apex_headers(), method=method)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            raw = resp.read()
+    except urllib.error.HTTPError as ex:
+        err = ex.read().decode("utf-8", "replace")
+        raise SystemExit(f"Apex {method} {path} HTTP {ex.code}: {err[:500]}") from ex
+    if not raw:
+        return {}
+    return json.loads(raw)
+
+
 def apex_server_state() -> str:
-    url = f"{APEX_PANEL}/api/client/servers/{APEX_SERVER_ID}/resources"
-    req = urllib.request.Request(url, headers=_apex_headers())
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        data = json.loads(resp.read())
+    data = apex_json("GET", f"/api/client/servers/{APEX_SERVER_ID}/resources", timeout=20)
     return str((data.get("attributes") or {}).get("current_state") or "unknown")
+
+
+def apex_command(cmd: str) -> None:
+    apex_json(
+        "POST",
+        f"/api/client/servers/{APEX_SERVER_ID}/command",
+        {"command": cmd},
+        timeout=30,
+    )
+    print(f"OK console: {cmd}", flush=True)
+
+
+def apex_create_backup(
+    name: str,
+    *,
+    wait_sec: int = 180,
+    require: bool = False,
+) -> str | None:
+    """Create panel backup before full overwrite. Returns backup uuid when known."""
+    created = apex_json(
+        "POST",
+        f"/api/client/servers/{APEX_SERVER_ID}/backups",
+        {"name": name, "ignored": ""},
+        timeout=60,
+    )
+    attrs = created.get("attributes") or created
+    uuid = str(attrs.get("uuid") or "")
+    print(f"OK panel backup requested name={name!r} uuid={uuid or '?'}", flush=True)
+    if wait_sec <= 0:
+        return uuid or None
+
+    deadline = time.time() + wait_sec
+    while time.time() < deadline:
+        listed = apex_json("GET", f"/api/client/servers/{APEX_SERVER_ID}/backups", timeout=30)
+        rows = listed.get("data") or []
+        for item in rows:
+            a = item.get("attributes") or {}
+            if uuid and a.get("uuid") != uuid:
+                continue
+            if not uuid and a.get("name") != name:
+                continue
+            if a.get("is_successful") is True and not a.get("is_locked"):
+                print(
+                    f"OK backup ready bytes={a.get('bytes')} uuid={a.get('uuid')}",
+                    flush=True,
+                )
+                return str(a.get("uuid") or uuid or "")
+            if a.get("is_successful") is False:
+                msg = f"FAIL panel backup failed uuid={a.get('uuid')}"
+                if require:
+                    raise SystemExit(msg)
+                print(msg, flush=True)
+                return str(a.get("uuid") or uuid or "")
+        time.sleep(5)
+        print("  waiting for panel backup...", flush=True)
+
+    msg = f"WARN backup not finished in {wait_sec}s — continuing"
+    if require:
+        raise SystemExit(f"FAIL backup not finished in {wait_sec}s")
+    print(msg, flush=True)
+    return uuid or None
 
 
 def apex_power(signal: str) -> None:
@@ -454,6 +528,22 @@ def main() -> int:
     parser.add_argument("--restart-only", action="store_true", help="Skip SFTP, only restart/start panel server")
     parser.add_argument("--no-restart", action="store_true", help="Upload only, do not touch panel power")
     parser.add_argument("--no-wait", action="store_true", help="Send power signal but do not wait for running")
+    parser.add_argument(
+        "--skip-backup",
+        action="store_true",
+        help="Skip panel backup before full SFTP (also AQUATECH_SKIP_BACKUP=1)",
+    )
+    parser.add_argument(
+        "--require-backup",
+        action="store_true",
+        help="Fail deploy if panel backup does not finish in time",
+    )
+    parser.add_argument(
+        "--backup-wait",
+        type=int,
+        default=180,
+        help="Seconds to wait for panel backup (default 180; 0 = fire-and-forget)",
+    )
     args = parser.parse_args()
 
     if args.restart_only:
@@ -463,6 +553,23 @@ def main() -> int:
     if not SERVER.is_dir():
         print(f"missing {SERVER}", file=sys.stderr)
         return 1
+
+    only = _only_prefixes()
+    skip_backup = (
+        args.skip_backup
+        or os.environ.get("AQUATECH_SKIP_BACKUP", "").strip() in ("1", "true", "yes")
+        or bool(only)
+    )
+    if not skip_backup:
+        stamp = time.strftime("%Y%m%d-%H%M%S")
+        print(f"Creating panel backup before full SFTP ({stamp})...", flush=True)
+        apex_create_backup(
+            f"pre-deploy-{stamp}",
+            wait_sec=max(0, args.backup_wait),
+            require=args.require_backup,
+        )
+    elif only:
+        print("SFTP_ONLY set — skip panel backup", flush=True)
 
     stage = stage_tree()
     try:

@@ -35,16 +35,25 @@ python scripts/tasks/deploy_apexnodes_sftp.py
 
 Deploy auto:
 - mirrors repo `kubejs/` + aquatech datapacks into `server/` before upload
+- **full** SFTP: panel backup first (`pre-deploy-TIMESTAMP`; skip with `--skip-backup` / `AQUATECH_SKIP_BACKUP=1`)
 - purges stale remote `aquatech_ui-` / `casesmod-` / `packetfixer-` jars
 - injects MySQL placeholders from `.apex_mysql.json`
 
-Quest/config only (fast):
+Quest/config only (fast — no backup):
   `$env:AQUATECH_SFTP_ONLY = 'config/ftbquests'`
 
-Smoke after deploy:
+Smoke after deploy (panel + jars + FAWE + MariaDB):
 
 ```powershell
 python scripts/tasks/smoke_apex_server.py
+```
+
+Console helpers (WorldGuard `-w`, Chunky spawn pregen):
+
+```powershell
+python scripts/tasks/apex_console_ops.py --wg-flag other-explosion deny --world world
+python scripts/tasks/apex_console_ops.py --chunky-spawn --dry-run
+python scripts/tasks/apex_console_ops.py --chunky-spawn --radius 400
 ```
 
 FAWE Mohist patch (when jar updates):

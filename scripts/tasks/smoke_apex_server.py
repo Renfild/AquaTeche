@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
-"""Smoke-check Apex after deploy: panel state, first-party jars, FAWE config hint.
+"""Smoke-check Apex after deploy: panel state, jars, FAWE, MariaDB.
 
 Usage:
   python scripts/tasks/smoke_apex_server.py
 """
 from __future__ import annotations
 
-import json
-import os
 import sys
 from pathlib import Path
 
@@ -15,6 +13,48 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts" / "tasks"))
 
 import deploy_apexnodes_sftp as deploy  # noqa: E402
+
+
+def check_mysql() -> bool:
+    secrets = deploy.load_mysql_secrets()
+    if not secrets:
+        print("WARN MySQL: no .apex_mysql.json — skip")
+        return True
+    try:
+        import pymysql
+    except ImportError:
+        print("FAIL MySQL: pip install pymysql")
+        return False
+    try:
+        conn = pymysql.connect(
+            host=str(secrets["host"]),
+            port=int(secrets.get("port") or 3306),
+            user=str(secrets["username"]),
+            password=str(secrets["password"]),
+            database=str(secrets["database"]),
+            connect_timeout=15,
+            read_timeout=15,
+            write_timeout=15,
+        )
+    except Exception as ex:  # noqa: BLE001 — smoke must report any driver/host error
+        print(f"FAIL MySQL connect: {ex}")
+        return False
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT 1")
+            cur.fetchone()
+            cur.execute("SHOW TABLES LIKE 'aquatech_meta'")
+            row = cur.fetchone()
+        if not row:
+            print("FAIL MySQL: aquatech_meta missing — run setup_apex_mysql.py")
+            return False
+        print(
+            f"MySQL OK {secrets['username']}@{secrets['host']}:{secrets.get('port', 3306)}"
+            f"/{secrets['database']} (aquatech_meta)"
+        )
+        return True
+    finally:
+        conn.close()
 
 
 def main() -> int:
@@ -27,6 +67,7 @@ def main() -> int:
 
     if not deploy.PASSWORD:
         print("WARN: no SFTP pass — skip jar listing")
+        ok = check_mysql() and ok
         return 0 if ok else 1
 
     t = paramiko.Transport((deploy.HOST, deploy.PORT))
@@ -46,7 +87,6 @@ def main() -> int:
         plugins = s.listdir("plugins")
         fawe = [n for n in plugins if n.startswith("FastAsyncWorldEdit") and n.endswith(".jar")]
         print(f"plugins/FAWE: {fawe}")
-        # peek remote config if present
         try:
             with s.open("plugins/FastAsyncWorldEdit/config.yml", "r") as f:
                 text = f.read().decode("utf-8", "replace")
@@ -64,6 +104,10 @@ def main() -> int:
 
     s.close()
     t.close()
+
+    if not check_mysql():
+        ok = False
+
     print("OK" if ok else "FAIL")
     return 0 if ok else 1
 
