@@ -107,8 +107,16 @@ class LauncherEngine:
             "update_available": False,
             "checking": True,
         }
+        self.launcher_check = {
+            "local": L.LAUNCHER_VER,
+            "remote": None,
+            "update_available": False,
+            "checking": True,
+            "hint": "",
+        }
         self._portal_base = PORTAL_DEFAULT_BASE
         self.start_pack_check()
+        self.start_launcher_check()
         self._revalidate_portal_session()
 
     def _portal_headers(self) -> dict[str, str]:
@@ -279,6 +287,29 @@ class LauncherEngine:
 
         threading.Thread(target=work, daemon=True, name="aquatech-pack-check").start()
 
+    def start_launcher_check(self):
+        with self._lock:
+            self.launcher_check = {
+                "local": L.LAUNCHER_VER,
+                "remote": None,
+                "update_available": False,
+                "checking": True,
+                "hint": "",
+            }
+
+        def work():
+            info = L.check_launcher_update_available()
+            with self._lock:
+                self.launcher_check = {**info, "checking": False}
+            if info.get("update_available"):
+                self.log(
+                    f"Доступен лаунчер {info.get('remote')} (сейчас {info.get('local')}). "
+                    f"{info.get('hint') or ''}",
+                    "warn",
+                )
+
+        threading.Thread(target=work, daemon=True, name="aquatech-launcher-check").start()
+
     def portal_login(self, nick: str, password: str) -> dict:
         payload = {"nick": str(nick).strip(), "password": str(password)}
         if not payload["nick"] or not payload["password"]:
@@ -312,6 +343,7 @@ class LauncherEngine:
                 "cfg": dict(self.cfg),
                 "running": self._running,
                 "pack": dict(self.pack_check),
+                "launcher": dict(self.launcher_check),
                 "logs": logs,
             }
 

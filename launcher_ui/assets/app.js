@@ -93,11 +93,22 @@
 
   function paintPackBanner(pack) {
     const el = $("update-banner");
-    if (!el || !pack) return;
+    if (!el) return;
+    const launcher = window.__launcherUpdate;
+    if (launcher?.update_available && launcher.remote) {
+      el.classList.remove("hidden");
+      $("update-banner-text").textContent =
+        `Доступен лаунчер ${launcher.remote} (сейчас ${launcher.local || "?"}). Закрой и запусти AquaTech.exe`;
+      $("btn-update-banner").textContent = "Как обновить";
+      $("btn-update").classList.remove("highlight");
+      return;
+    }
+    if (!pack) return;
     if (pack.update_available && pack.remote) {
       el.classList.remove("hidden");
       const local = pack.local ? ` (сейчас ${pack.local})` : "";
       $("update-banner-text").textContent = `Доступно обновление сборки ${pack.remote}${local}`;
+      $("btn-update-banner").textContent = "Обновить сборку";
       $("btn-update").classList.add("highlight");
     } else {
       el.classList.add("hidden");
@@ -111,6 +122,7 @@
     if (st.state === "error") document.body.classList.add("state-error");
 
     $("ver").textContent = "v" + (st.version || "?");
+    window.__launcherUpdate = st.launcher || null;
     paintPackBanner(st.pack);
     $("status").textContent = st.status || "Готов";
     const pct = Math.round(st.progress || 0);
@@ -234,7 +246,18 @@
     }
   });
 
-  $("btn-update-banner")?.addEventListener("click", () => $("btn-update").click());
+  $("btn-update-banner")?.addEventListener("click", () => {
+    if (window.__launcherUpdate?.update_available) {
+      alert(
+        "Чтобы обновить лаунчер:\n" +
+          "1. Закрой это окно\n" +
+          "2. Запусти AquaTech.exe (с сайта или из загрузок)\n" +
+          "Он сам скачает новую версию."
+      );
+      return;
+    }
+    $("btn-update").click();
+  });
 
   $("btn-auth")?.addEventListener("click", async () => {
     const nick = $("auth-nick")?.value.trim() || "";

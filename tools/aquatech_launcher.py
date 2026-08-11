@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.38"
+LAUNCHER_VER   = "2.9.39"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -689,6 +689,63 @@ def check_pack_update_available(cfg: dict | None = None) -> dict:
         "local": local,
         "remote": remote,
         "update_available": update_available,
+    }
+
+
+BOOTSTRAP_MANIFEST_URLS = [
+    "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
+    "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
+]
+
+
+def needs_launcher_update(local: str, remote: str) -> bool:
+    """True when remote bootstrap version is newer than the running launcher."""
+    local = (local or "").strip()
+    remote = (remote or "").strip()
+    if not remote:
+        return False
+    if not local:
+        return True
+    return pack_version_key(remote) > pack_version_key(local)
+
+
+def fetch_bootstrap_manifest(timeout: float = 8.0) -> dict | None:
+    """Fetch docs/bootstrap.json (cache-busted)."""
+    import time as _time
+
+    bust = f"?t={int(_time.time())}"
+    headers = {
+        "User-Agent": f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}",
+        "Cache-Control": "no-cache",
+    }
+    for base in BOOTSTRAP_MANIFEST_URLS:
+        url = base + bust
+        try:
+            data = _fetch_json_hard(url, timeout, headers=headers)
+            if isinstance(data, dict) and data.get("version") and data.get("launcher_zip"):
+                return data
+        except Exception:
+            continue
+    return None
+
+
+def check_launcher_update_available() -> dict:
+    """Compare running LAUNCHER_VER to published bootstrap.json."""
+    remote = None
+    zip_url = None
+    try:
+        man = fetch_bootstrap_manifest()
+        if man:
+            remote = str(man.get("version") or "").strip() or None
+            zip_url = str(man.get("launcher_zip") or "").strip() or None
+    except Exception:
+        pass
+    return {
+        "local": LAUNCHER_VER,
+        "remote": remote,
+        "update_available": needs_launcher_update(LAUNCHER_VER, remote or ""),
+        "launcher_zip": zip_url,
+        "hint": "Закрой лаунчер и запусти AquaTech.exe — он подтянет новую версию.",
     }
 
 

@@ -70,18 +70,11 @@ func main() {
 	}
 	logf(logFile, "manifest version=%s zip=%s", man.Version, man.LauncherZip)
 
-	needUpdate := true
-	if b, err := os.ReadFile(verFile); err == nil {
-		if strings.TrimSpace(string(b)) == man.Version {
-			if findLauncher(appDir, man.LauncherExe) != "" {
-				needUpdate = false
-			}
-		}
-	}
+	needUpdate := NeedsUpdate(localVer(verFile), man.Version, findLauncher(appDir, man.LauncherExe) != "")
 
 	if needUpdate {
 		ui.SetStatus(fmt.Sprintf("Скачиваем лаунчер %s…", man.Version))
-		zipURL := resolveURL(man)
+		zipURL := ResolveZipURL(man.LauncherZip, man.ReleaseBase)
 		tmpZip := filepath.Join(root, "AquaTechLauncher.zip.part")
 		finalZip := filepath.Join(root, "AquaTechLauncher.zip")
 		if err := downloadFile(zipURL, tmpZip, func(p float64) {
@@ -159,24 +152,28 @@ func main() {
 	os.Exit(0)
 }
 
-func resolveURL(man *manifest) string {
-	u := strings.TrimSpace(man.LauncherZip)
-	if strings.HasPrefix(u, "http://") || strings.HasPrefix(u, "https://") {
-		return u
+func localVer(path string) string {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return ""
 	}
-	base := strings.TrimRight(strings.TrimSpace(man.ReleaseBase), "/")
-	if base == "" {
-		base = "https://github.com/Renfild/AquaTeche/releases/download/client-latest"
-	}
-	return base + "/" + strings.TrimLeft(u, "/")
+	return strings.TrimSpace(string(b))
 }
 
 func fetchManifest(url string) (*manifest, error) {
-	req, err := http.NewRequest(http.MethodGet, url, nil)
+	// Bust intermediary caches (raw.githubusercontent / CDN) so version bumps apply immediately.
+	bust := url
+	if strings.Contains(url, "?") {
+		bust = url + "&t=" + fmt.Sprintf("%d", time.Now().Unix())
+	} else {
+		bust = url + "?t=" + fmt.Sprintf("%d", time.Now().Unix())
+	}
+	req, err := http.NewRequest(http.MethodGet, bust, nil)
 	if err != nil {
 		return nil, err
 	}
 	req.Header.Set("User-Agent", userAgent)
+	req.Header.Set("Cache-Control", "no-cache")
 	client := &http.Client{Timeout: 30 * time.Second}
 	res, err := client.Do(req)
 	if err != nil {
