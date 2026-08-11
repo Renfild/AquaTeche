@@ -3,6 +3,7 @@
   let afterId = 0;
   let busy = false;
   let authed = false;
+  let cachedCfg = {};
 
   const pages = {
     auth: $("page-auth"),
@@ -24,7 +25,7 @@
 
   function applyCfg(cfg) {
     if (!cfg) return;
-    $("nick").value = cfg.username || "";
+    cachedCfg = { ...cachedCfg, ...cfg };
     if ($("game-dir")) $("game-dir").value = cfg.game_dir || "";
     $("ram").value = cfg.ram_mb || 4096;
     if ($("auto-connect")) $("auto-connect").checked = cfg.auto_connect !== false;
@@ -33,7 +34,6 @@
 
   function cfgPayload() {
     return {
-      username: $("nick").value.trim(),
       game_dir: $("game-dir") ? $("game-dir").value.trim() : "",
       auto_connect: $("auto-connect") ? $("auto-connect").checked : true,
       ram_mb: Number($("ram").value) || 4096,

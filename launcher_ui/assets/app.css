@@ -112,7 +112,9 @@ h1 {
 }
 .update-banner.hidden { display: none; }
 
-.play-row { display: flex; gap: 10px; align-items: end; flex-wrap: wrap; }
+.play-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.play-row .btn-play { flex: 1; min-width: 160px; }
+.play-row .btn-ghost { flex: 1; min-width: 140px; }
 .auth-row { display: flex; gap: 10px; align-items: end; flex-wrap: wrap; }
 .auth-error { color: var(--red); font-size: 13px; margin-top: 10px; min-height: 18px; width: 100%; }
 
