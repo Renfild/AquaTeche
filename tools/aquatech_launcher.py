@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.39"
+LAUNCHER_VER   = "2.9.40"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
