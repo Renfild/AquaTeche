@@ -103,7 +103,7 @@ export const SITE_COPY_DEFAULTS = {
   start_step2_1: "Впиши ник в лаунчере",
   start_step2_2: "Дождись загрузки",
   start_step2_3: "Жми «Играть»",
-  start_step2_4: "IP вручную: katherine-hydro.tun.ply.gg:31279",
+  start_step2_4: "IP вручную: g-pl-3.apexnodes.xyz:21561",
   store_eyebrow: "Магазин",
   store_title: "Привилегии",
   store_lead: "Состав рангов и цены. Купить на сайте пока нельзя.",

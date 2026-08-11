@@ -23,8 +23,8 @@ def build_manifest():
         "version": "1.0.0",
         "mc_version": "1.20.1",
         "forge_version": "47.4.0",
-        "server_ip": "katherine-hydro.tun.ply.gg",
-        "server_port": 25565,
+        "server_ip": "g-pl-3.apexnodes.xyz",
+        "server_port": 21561,
         "files": []
     }
 

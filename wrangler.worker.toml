@@ -7,6 +7,14 @@ compatibility_date = "2026-08-08"
 account_id = "b855fc404ea390174024f1d249cb1964"
 workers_dev = true
 
+[[routes]]
+pattern = "aquateche.store"
+custom_domain = true
+
+[[routes]]
+pattern = "www.aquateche.store"
+custom_domain = true
+
 [assets]
 directory = "./docs"
 binding = "ASSETS"
@@ -17,9 +25,9 @@ html_handling = "auto-trailing-slash"
 PROJECT_NAME = "AquaTech"
 MINECRAFT_VERSION = "1.20.1"
 FORGE_VERSION = "47.4.0"
-SERVER_ADDRESS = "katherine-hydro.tun.ply.gg:31279"
+SERVER_ADDRESS = "g-pl-3.apexnodes.xyz:21561"
 PURCHASES_ENABLED = "false"
-SITE_CANONICAL = "https://aquatech.santcrail.workers.dev"
+SITE_CANONICAL = "https://aquateche.store"
 ADMIN_NICKS = "Renfild"
 
 [[d1_databases]]

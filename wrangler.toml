@@ -9,9 +9,9 @@ compatibility_date = "2026-08-08"
 PROJECT_NAME = "AquaTech"
 MINECRAFT_VERSION = "1.20.1"
 FORGE_VERSION = "47.4.0"
-SERVER_ADDRESS = "katherine-hydro.tun.ply.gg:31279"
+SERVER_ADDRESS = "g-pl-3.apexnodes.xyz:21561"
 PURCHASES_ENABLED = "false"
-SITE_CANONICAL = "https://aquatech.santcrail.workers.dev"
+SITE_CANONICAL = "https://aquateche.store"
 ADMIN_NICKS = "Renfild"
 
 [[d1_databases]]

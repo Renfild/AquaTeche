@@ -57,7 +57,7 @@ PAGES["index.html"] = (
       <button class="ip-box reveal" style="--d:.24s" type="button" data-copy-ip>
         <div>
           <small>IP СЕРВЕРА</small>
-          <strong>katherine-hydro.tun.ply.gg:31279</strong>
+          <strong>g-pl-3.apexnodes.xyz:21561</strong>
         </div>
         <span class="copy">Скопировать</span>
       </button>
@@ -116,7 +116,7 @@ PAGES["index.html"] = (
         <button class="ip-box ip-box-block" type="button" data-copy-ip>
           <div>
             <small>ПОДКЛЮЧЕНИЕ</small>
-            <strong>katherine-hydro.tun.ply.gg:31279</strong>
+            <strong>g-pl-3.apexnodes.xyz:21561</strong>
           </div>
           <span class="copy">Скопировать</span>
         </button>
@@ -156,7 +156,7 @@ PAGES["start.html"] = (
           <li data-site="start_step2_1">Впиши ник в лаунчере</li>
           <li data-site="start_step2_2">Дождись загрузки</li>
           <li data-site="start_step2_3">Жми «Играть»</li>
-          <li data-site="start_step2_4">IP вручную: katherine-hydro.tun.ply.gg:31279</li>
+          <li data-site="start_step2_4">IP вручную: g-pl-3.apexnodes.xyz:21561</li>
         </ul>
         <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
           <a class="btn btn-secondary" href="register.html">Профиль на сайте</a>
