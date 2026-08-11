@@ -1,0 +1,101 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "7AF32E99EB2FECE1"
+	group: ""
+	id: "7AF32E99EB2FECE1"
+	images: [
+		{
+			height: 1.2d
+			image: "ftbquests:block/barrier_open"
+			rotation: 0.0d
+			width: 1.2d
+			x: -1.1d
+			y: 0.0d
+		}
+		{
+			height: 1.2d
+			image: "ftbquests:block/barrier_open"
+			rotation: 0.0d
+			width: 1.2d
+			x: 1.1d
+			y: 0.0d
+		}
+		{
+			height: 1.2d
+			image: "ftbquests:block/barrier_open"
+			rotation: 0.0d
+			width: 1.2d
+			x: 3.3000000000000003d
+			y: 0.0d
+		}
+	]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				" Сервер находиться на стадии бета-тестирования!"
+				" Открыть меню F4 (Обязательно возьми кит-старт)"
+				" Открыть древо навыков K"
+				" Таблицу лута удочек можно посмотреть на сайте!"
+			]
+			entity_vis_size: 1.0f
+			id: "3BEAF85B337C69E3"
+			rewards: [{
+				id: "53500725E8012986"
+				type: "xp"
+				xp: 10
+			}]
+			tasks: [{
+				id: "5B9CCFC4B6D3C1E7"
+				title: "Информация"
+				type: "checkmark"
+			}]
+			x: 1.1d
+			y: 0.0d
+		}
+		{
+			description: ["Забудь про шахты и бесконечный фарм! Отныне твой друг удочки."]
+			entity_vis_size: 1.0f
+			id: "730F6FB346363F45"
+			rewards: [
+				{
+					id: "6BE04FFFB5914C5B"
+					type: "xp"
+					xp: 10
+				}
+				{
+					id: "15A6D56493CC841B"
+					item: "starcatcher:fisherman_hat_white"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "6159F279AA6D1411"
+				title: "Рыбалка"
+				type: "checkmark"
+			}]
+			x: -1.1d
+			y: 0.0d
+		}
+		{
+			description: ["Информация о обновлениях выходит на нашем дискорд сервере!"]
+			entity_vis_size: 1.0f
+			id: "40019B4ABD546BD9"
+			rewards: [{
+				id: "5F352417988C0EC8"
+				type: "xp_levels"
+				xp_levels: 10
+			}]
+			tasks: [{
+				id: "2878D922FBB6C433"
+				title: "Дискорд"
+				type: "checkmark"
+			}]
+			x: 3.3000000000000003d
+			y: 0.0d
+		}
+	]
+	title: "Информация"
+}

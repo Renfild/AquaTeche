@@ -3,227 +3,228 @@
 	default_quest_shape: "rsquare"
 	filename: "06_quantum"
 	group: "0AC7A00000000001"
-	icon: "starcatcher:alpha_rod"
-	id: "AQ060000CH"
-	order_index: 6
+	icon: {
+		Count: 1
+		id: "starcatcher:alpha_rod"
+		tag: {
+			Damage: 0
+		}
+	}
+	id: "38805C5B1B24FF12"
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
-			x: -3.2d
-			y: 0.0d
-			id: "AQ060001Q"
-			title: "Осмиридий"
+			description: ["Сплав эндгейма."]
+			entity_vis_size: 1.0f
 			icon: "industrialupgrade:alloyingot/osmiridium"
-			subtitle: "Сплав эндгейма."
-			description: [
-				"Сплав эндгейма."
-			]
-			shape: "rsquare"
-			size: 1.0d
+			id: "5639E2AE110C2A41"
 			min_width: 260
-			tasks: [{
-				id: "AQ060001T"
-				type: "item"
-				item: "industrialupgrade:alloyingot/osmiridium"
-				count: 1L
-			}]
 			rewards: [
 				{
-					id: "AQ060001R"
-					type: "item"
+					id: "66E6D3BD373C5FB0"
 					item: "industrialupgrade:alloyingot/osmiridium"
-					count: 1
+					type: "item"
 				}
 				{
 					command: "/aquatech grantxp @p 120"
 					elevate_perms: true
-					id: "AQ060001X"
+					id: "2058A4B73928DF98"
 					silent: true
 					type: "command"
 				}
 			]
-		},
-		{
-			x: -1.6d
-			y: 0.0d
-			id: "AQ060002Q"
-			title: "Астероидный адамантий"
-			icon: "industrialupgrade:asteroidore/asteroid_adamantium_ore"
-			subtitle: "Космический улов альфы."
-			description: [
-				"Космический улов альфы."
-			]
 			shape: "rsquare"
 			size: 1.0d
-			min_width: 260
-			dependencies: ["AQ060001Q"]
+			subtitle: "Сплав эндгейма."
 			tasks: [{
-				id: "AQ060002T"
+				id: "40445B26400B0234"
+				item: "industrialupgrade:alloyingot/osmiridium"
 				type: "item"
-				item: "industrialupgrade:asteroidore/asteroid_adamantium_ore"
-				count: 1L
 			}]
+			title: "Осмиридий"
+			x: -3.2d
+			y: 0.0d
+		}
+		{
+			description: ["Космический улов альфы."]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:asteroidore/asteroid_adamantium_ore"
+			id: "77BDA161F22A8DE1"
+			min_width: 260
 			rewards: [
 				{
-					id: "AQ060002R"
-					type: "item"
+					id: "29F5FB50AA051BB9"
 					item: "industrialupgrade:asteroidore/asteroid_adamantium_ore"
-					count: 1
+					type: "item"
 				}
 				{
 					command: "/aquatech grantxp @p 130"
 					elevate_perms: true
-					id: "AQ060002X"
+					id: "5B81585AF7FFEF33"
 					silent: true
 					type: "command"
 				}
 			]
-		},
-		{
-			x: 0.0d
-			y: 0.0d
-			id: "AQ060003Q"
-			title: "Альфа-удочка"
-			icon: "starcatcher:alpha_rod"
-			subtitle: "Финал цепочки StarCatcher."
-			description: [
-				"Финал цепочки StarCatcher."
-			]
 			shape: "rsquare"
 			size: 1.0d
-			min_width: 260
-			dependencies: ["AQ060002Q"]
+			subtitle: "Космический улов альфы."
 			tasks: [{
-				id: "AQ060003T"
+				id: "7A74AF0B43BDE722"
+				item: "industrialupgrade:asteroidore/asteroid_adamantium_ore"
 				type: "item"
-				item: "starcatcher:alpha_rod"
-				count: 1L
 			}]
+			title: "Астероидный адамантий"
+			x: -1.6d
+			y: 0.0d
+		}
+		{
+			description: ["Финал цепочки StarCatcher."]
+			entity_vis_size: 1.0f
+			icon: {
+				Count: 1
+				id: "starcatcher:alpha_rod"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "72627DB1C3D4BDC1"
+			min_width: 260
 			rewards: [
 				{
-					id: "AQ060003R"
+					id: "600A7BE45C1D3B3F"
+					item: {
+						Count: 1
+						id: "starcatcher:alpha_rod"
+						tag: {
+							Damage: 0
+						}
+					}
 					type: "item"
-					item: "starcatcher:alpha_rod"
-					count: 1
 				}
 				{
 					command: "/aquatech grantxp @p 200"
 					elevate_perms: true
-					id: "AQ060003X"
+					id: "621585D2F0DE13F1"
 					silent: true
 					type: "command"
 				}
 			]
-		},
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Финал цепочки StarCatcher."
+			tasks: [{
+				id: "6B911CC2CC79BFCC"
+				item: {
+					Count: 1
+					id: "starcatcher:alpha_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "Альфа-удочка"
+			x: 0.0d
+			y: 0.0d
+		}
 		{
+			description: ["Редчайший улов альфы."]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:baseore/iridium"
+			id: "0BC4AA7EA6C6CBEA"
+			min_width: 260
+			rewards: [
+				{
+					id: "3B944DBCB26154DF"
+					item: "industrialupgrade:baseore/iridium"
+					type: "item"
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "5C42CCE002D20629"
+					silent: true
+					type: "command"
+				}
+			]
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Редчайший улов альфы."
+			tasks: [{
+				id: "481A5F2559866D52"
+				item: "industrialupgrade:baseore/iridium"
+				type: "item"
+			}]
+			title: "Иридий"
 			x: 1.6d
 			y: 0.0d
-			id: "AQ060004Q"
-			title: "Иридий"
-			icon: "industrialupgrade:baseore/iridium"
-			subtitle: "Редчайший улов альфы."
-			description: [
-				"Редчайший улов альфы."
-			]
-			shape: "rsquare"
-			size: 1.0d
+		}
+		{
+			description: ["Пара к иридию."]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:baseore1/osmium"
+			id: "3F2188E7B5A0780E"
 			min_width: 260
-			dependencies: ["AQ060003Q"]
-			tasks: [{
-				id: "AQ060004T"
-				type: "item"
-				item: "industrialupgrade:baseore/iridium"
-				count: 1L
-			}]
 			rewards: [
 				{
-					id: "AQ060004R"
+					id: "2B31C808F26C7462"
+					item: "industrialupgrade:baseore1/osmium"
 					type: "item"
-					item: "industrialupgrade:baseore/iridium"
-					count: 1
 				}
 				{
 					command: "/aquatech grantxp @p 140"
 					elevate_perms: true
-					id: "AQ060004X"
+					id: "76945E1CC7FF4703"
 					silent: true
 					type: "command"
 				}
 			]
-		},
-		{
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Пара к иридию."
+			tasks: [{
+				id: "1718F939B3CAC6FC"
+				item: "industrialupgrade:baseore1/osmium"
+				type: "item"
+			}]
+			title: "Осмий"
 			x: 3.2d
 			y: 0.0d
-			id: "AQ060005Q"
-			title: "Осмий"
-			icon: "industrialupgrade:baseore1/osmium"
-			subtitle: "Пара к иридию."
-			description: [
-				"Пара к иридию."
-			]
-			shape: "rsquare"
-			size: 1.0d
-			min_width: 260
-			dependencies: ["AQ060004Q"]
-			tasks: [{
-				id: "AQ060005T"
-				type: "item"
-				item: "industrialupgrade:baseore1/osmium"
-				count: 1L
-			}]
-			rewards: [
-				{
-					id: "AQ060005R"
-					type: "item"
-					item: "industrialupgrade:baseore1/osmium"
-					count: 1
-				}
-				{
-					command: "/aquatech grantxp @p 140"
-					elevate_perms: true
-					id: "AQ060005X"
-					silent: true
-					type: "command"
-				}
-			]
-		},
+		}
 		{
-			x: -3.2d
-			y: -1.5d
-			id: "AQ060006Q"
-			title: "Звёзды для синтеза"
+			description: ["Запас звёзд под генератор материи."]
+			entity_vis_size: 1.0f
 			icon: "minecraft:nether_star"
-			subtitle: "Запас звёзд под генератор материи."
-			description: [
-				"Запас звёзд под генератор материи."
-			]
-			shape: "hexagon"
-			size: 1.35d
+			id: "1815EBCE79CAB86C"
 			min_width: 260
-			dependencies: ["AQ060005Q"]
-			tasks: [{
-				id: "AQ060006T"
-				type: "item"
-				item: "minecraft:nether_star"
-				count: 1L
-			}]
 			rewards: [
 				{
-					id: "AQ060006R"
-					type: "item"
-					item: "minecraft:nether_star"
 					count: 4
+					id: "66D01D588448AEB6"
+					item: "minecraft:nether_star"
+					type: "item"
 				}
 				{
 					command: "/aquatech grantxp @p 100"
 					elevate_perms: true
-					id: "AQ060006X"
+					id: "5603441D7E26A528"
 					silent: true
 					type: "command"
 				}
 			]
+			shape: "hexagon"
+			size: 1.35d
+			subtitle: "Запас звёзд под генератор материи."
+			tasks: [{
+				id: "6C0D773F3440454D"
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
+			title: "Звёзды для синтеза"
+			x: -3.2d
+			y: -1.5d
 		}
 	]
-	subtitle: "Альфа-удочка, иридий, осмиридий и космос."
 	title: "Акт VI · Квантовый эндгейм"
 }

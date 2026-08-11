@@ -180,10 +180,15 @@ def sync_repo_into_server() -> None:
         shutil.copy2(ui_cfg, dst)
         copied += 1
 
-    # FTB Quests: if repo has chapters, overlay into server
-    quests_src = ROOT / "config" / "ftbquests"
-    if quests_src.is_dir():
-        copied += mirror_tree(quests_src, SERVER / "config" / "ftbquests")
+    # FTB Quests: NEVER auto-overlay. Live Apex / server editor is source of truth.
+    # Opt-in only: AQUATECH_SYNC_QUESTS=1 (still prefer pulling remote first).
+    if os.environ.get("AQUATECH_SYNC_QUESTS", "").strip() in {"1", "true", "yes"}:
+        quests_src = ROOT / "config" / "ftbquests"
+        if quests_src.is_dir():
+            copied += mirror_tree(quests_src, SERVER / "config" / "ftbquests")
+            print("  WARN synced repo config/ftbquests -> server (AQUATECH_SYNC_QUESTS=1)", flush=True)
+    else:
+        print("  skip ftbquests overlay (set AQUATECH_SYNC_QUESTS=1 to force)", flush=True)
 
     print(f"  repo->server sync: {copied} file(s)", flush=True)
 

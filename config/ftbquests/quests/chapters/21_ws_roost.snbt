@@ -1,0 +1,2884 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "21_ws_roost"
+	group: "0AC7A00000000005"
+	icon: "chicken_roost:roost"
+	id: "WS210000CH"
+	order_index: 21
+	quest_links: [ ]
+	quests: [
+		{
+			x: -4.62d
+			y: 0.0d
+			id: "WS210001Q"
+			title: "I·1  Яйцо линии"
+			icon: "minecraft:egg"
+			subtitle: "✦ ГАЙД МОДА · Стартовый материал выводка."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 1/55&r",
+				"",
+				"&bRoost Ultimate&r — &eкуры производят ресурсы&r (руды, слитки), потому что под ногами нет нормальной шахты.",
+				"Сюжетная глава «Курятня» даёт старт; мастерская ведёт по &eтирам корма и эссенций&r.",
+				"",
+				"&6Как играть:&r",
+				"1) Поставь блок &eroost&r, положи курицу/яйцо по правилам мода (JEI).",
+				"2) Корми &echicken_food_tier_X&r — чем выше тир, тем лучше линии.",
+				"3) &ecollector&r забирает дроп, &ebreeder/trainer&r качают стадо.",
+				"4) &eEssence tiers&r — «масло» прогрессии биосинтеза.",
+				"5) Soul/Alpha — поздняя селекция элитных линий.",
+				"",
+				"&7Смотри JEI по roost и chicken_food. Ветка &aопциональна&r.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"",
+				"&a▶ Задача:&r Стартовый материал выводка.",
+				"&7Предмет:&r &fminecraft:egg&r",
+				"",
+				"Яйца — старт выводка. Нужны для первых roost-рецептов.",
+				"Копи запас: без яиц линия не масштабируется.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× minecraft:egg  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 280
+			optional: true
+			tasks: [{
+				id: "WS210001T"
+				type: "item"
+				item: "minecraft:egg"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210001R"
+					type: "item"
+					item: "minecraft:egg"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS210001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 0.0d
+			id: "WS210002Q"
+			title: "I·2  Перо"
+			icon: "minecraft:feather"
+			subtitle: "Побочный продукт фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 2/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Побочный продукт фермы.",
+				"&7Предмет:&r &fminecraft:feather&r",
+				"",
+				"Перья — ранний побочный лут. Пригодятся в крафтах и стрелах.",
+				"Collector начнёт собирать сам.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× minecraft:feather  &8+&r  &b15 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210001Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210002T"
+				type: "item"
+				item: "minecraft:feather"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210002R"
+					type: "item"
+					item: "minecraft:feather"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 15"
+					elevate_perms: true
+					id: "WS210002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 0.0d
+			id: "WS210003Q"
+			title: "I·3  Сырая курица"
+			icon: "minecraft:chicken"
+			subtitle: "Первый результат фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 3/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Первый результат фермы.",
+				"&7Предмет:&r &fminecraft:chicken&r",
+				"",
+				"Сырая курица подтверждает, что ферма жива.",
+				"Дальше важнее roost-блоки, чем мясо.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× minecraft:chicken  &8+&r  &b20 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210002Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210003T"
+				type: "item"
+				item: "minecraft:chicken"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210003R"
+					type: "item"
+					item: "minecraft:chicken"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 20"
+					elevate_perms: true
+					id: "WS210003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 0.0d
+			id: "WS210004Q"
+			title: "I·4  Roost"
+			icon: "chicken_roost:roost"
+			subtitle: "Поставь основной roost-блок."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 4/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Поставь основной roost-блок.",
+				"&7Предмет:&r &fchicken_roost:roost&r",
+				"",
+				"Roost — главный блок. Открой GUI: слоты под курицу/корм зависят от версии.",
+				"Без энергии обычно работает; читай тултип.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:roost  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210003Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210004T"
+				type: "item"
+				item: "chicken_roost:roost"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210004R"
+					type: "item"
+					item: "chicken_roost:roost"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS210004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 0.0d
+			id: "WS210005Q"
+			title: "I·5  Пустой roost"
+			icon: "chicken_roost:roost_empty"
+			subtitle: "Запасной корпус."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 5/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Запасной корпус.",
+				"&7Предмет:&r &fchicken_roost:roost_empty&r",
+				"",
+				"Roost — главный блок. Открой GUI: слоты под курицу/корм зависят от версии.",
+				"Без энергии обычно работает; читай тултип.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:roost_empty  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS210004Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210005T"
+				type: "item"
+				item: "chicken_roost:roost_empty"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210005R"
+					type: "item"
+					item: "chicken_roost:roost_empty"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS210005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 0.0d
+			id: "WS210006Q"
+			title: "I·6  Сборщик"
+			icon: "chicken_roost:collector"
+			subtitle: "Автосбор продуктов кур."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 6/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Автосбор продуктов кур.",
+				"&7Предмет:&r &fchicken_roost:collector&r",
+				"",
+				"Collector забирает продукты с roost автоматически.",
+				"Поставь рядом / по инструкции JEI и выведи в сундук.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:collector  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210005Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210006T"
+				type: "item"
+				item: "chicken_roost:collector"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210006R"
+					type: "item"
+					item: "chicken_roost:collector"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 1.93d
+			id: "WS210007Q"
+			title: "I·7  Кормушка кур"
+			icon: "chicken_roost:feeder"
+			subtitle: "Автокормление выводка."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 7/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Автокормление выводка.",
+				"&7Предмет:&r &fchicken_roost:feeder&r",
+				"",
+				"Автокормушка подкладывает food tiers в roost.",
+				"Заполни бункер кормом нужного тира.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:feeder  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210006Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210007T"
+				type: "item"
+				item: "chicken_roost:feeder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210007R"
+					type: "item"
+					item: "chicken_roost:feeder"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS210007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 1.93d
+			id: "WS210008Q"
+			title: "I·8  Разводчик"
+			icon: "chicken_roost:breeder"
+			subtitle: "Ускорь селекцию линий."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 8/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ускорь селекцию линий.",
+				"&7Предмет:&r &fchicken_roost:breeder&r",
+				"",
+				"Breeder ускоряет размножение линий.",
+				"Нужны две подходящие курицы + корм (JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:breeder  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210007Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210008T"
+				type: "item"
+				item: "chicken_roost:breeder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210008R"
+					type: "item"
+					item: "chicken_roost:breeder"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 1.93d
+			id: "WS210009Q"
+			title: "I·9  Тренер"
+			icon: "chicken_roost:trainer"
+			subtitle: "Прокачай кур под ресурс."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 9/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Прокачай кур под ресурс.",
+				"&7Предмет:&r &fchicken_roost:trainer&r",
+				"",
+				"Trainer качает статы/уровень курицы под ресурс.",
+				"Используй на линии, которую хочешь «зашахтить».",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:trainer  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210008Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210009T"
+				type: "item"
+				item: "chicken_roost:trainer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210009R"
+					type: "item"
+					item: "chicken_roost:trainer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS210009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 1.93d
+			id: "WS210010Q"
+			title: "I·10  Сканер кур"
+			icon: "chicken_roost:chicken_scanner"
+			subtitle: "◆ Вехи · Старт · Читай статы линии."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 10/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Читай статы линии.",
+				"&7Предмет:&r &fchicken_roost:chicken_scanner&r",
+				"",
+				"Сканер показывает данные курицы (тир, черты).",
+				"ПКМ по курице/предмету — смотри тултип.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:chicken_scanner  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210009Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210010T"
+				type: "item"
+				item: "chicken_roost:chicken_scanner"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210010R"
+					type: "item"
+					item: "chicken_roost:chicken_scanner"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 1.93d
+			id: "WS210011Q"
+			title: "I·11  Chicken Stick"
+			icon: "chicken_roost:chicken_stick"
+			subtitle: "Инструмент работы с roost."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 11/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Инструмент работы с roost.",
+				"&7Предмет:&r &fchicken_roost:chicken_stick&r",
+				"",
+				"Инструмент взаимодействия с roost-системой.",
+				"JEI покажет рецепт и все применения.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:chicken_stick  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210010Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210011T"
+				type: "item"
+				item: "chicken_roost:chicken_stick"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210011R"
+					type: "item"
+					item: "chicken_roost:chicken_stick"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS210011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 1.93d
+			id: "WS210012Q"
+			title: "II·12  Корм T1"
+			icon: "chicken_roost:chicken_food_tier_1"
+			subtitle: "◆ Вехи · Основа · Питание первого тира."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 12/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Питание первого тира.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_1&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× chicken_roost:chicken_food_tier_1  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210011Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210012T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_1"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210012R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_1"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS210012X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 3.5d
+			id: "WS210013Q"
+			title: "II·13  Корм T3"
+			icon: "chicken_roost:chicken_food_tier_3"
+			subtitle: "Средний рацион."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 13/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Средний рацион.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_3&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× chicken_roost:chicken_food_tier_3  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210012Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210013T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_3"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210013R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_3"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS210013X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 3.5d
+			id: "WS210014Q"
+			title: "II·14  Корм T5"
+			icon: "chicken_roost:chicken_food_tier_5"
+			subtitle: "Продвинутый рацион."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 14/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Продвинутый рацион.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_5&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× chicken_roost:chicken_food_tier_5  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210013Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210014T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_5"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210014R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_5"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210014X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 3.5d
+			id: "WS210015Q"
+			title: "II·15  Корм T7"
+			icon: "chicken_roost:chicken_food_tier_7"
+			subtitle: "Почти топ."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 15/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Почти топ.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_7&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_food_tier_7  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS210014Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210015T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_7"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210015R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_7"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS210015X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 3.5d
+			id: "WS210016Q"
+			title: "II·16  Корм T9"
+			icon: "chicken_roost:chicken_food_tier_9"
+			subtitle: "Максимальный корм."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 16/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Максимальный корм.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_9&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_food_tier_9  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210015Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210016T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_9"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210016R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_9"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS210016X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 3.5d
+			id: "WS210017Q"
+			title: "II·17  Эссенция T1"
+			icon: "chicken_roost:chicken_essence_tier_1"
+			subtitle: "Биосинтез tier 1."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 17/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез tier 1.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_1&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_essence_tier_1  &8+&r  &b30 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210016Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210017T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_1"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210017R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_1"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 30"
+					elevate_perms: true
+					id: "WS210017X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 3.5d
+			id: "WS210018Q"
+			title: "II·18  Эссенция T3"
+			icon: "chicken_roost:chicken_essence_tier_3"
+			subtitle: "Биосинтез tier 3."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 18/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез tier 3.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_3&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_essence_tier_3  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210017Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210018T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_3"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210018R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_3"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS210018X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 5.43d
+			id: "WS210019Q"
+			title: "II·19  Эссенция T5"
+			icon: "chicken_roost:chicken_essence_tier_5"
+			subtitle: "Биосинтез tier 5."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 19/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез tier 5.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_5&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_essence_tier_5  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210018Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210019T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_5"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210019R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_5"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS210019X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 5.43d
+			id: "WS210020Q"
+			title: "II·20  Эссенция T7"
+			icon: "chicken_roost:chicken_essence_tier_7"
+			subtitle: "◆ Вехи · Основа · Биосинтез tier 7."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 20/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез tier 7.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_7&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× chicken_roost:chicken_essence_tier_7  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210019Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210020T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_7"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210020R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_7"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS210020X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 5.43d
+			id: "WS210021Q"
+			title: "II·21  Эссенция T9"
+			icon: "chicken_roost:chicken_essence_tier_9"
+			subtitle: "Топ эссенция кур."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 21/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ эссенция кур.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_9&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× chicken_roost:chicken_essence_tier_9  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210020Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210021T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_9"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210021R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_9"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS210021X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 5.43d
+			id: "WS210022Q"
+			title: "II·22  Soul Extractor"
+			icon: "chicken_roost:soul_extractor"
+			subtitle: "Духи для soul-линий."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 22/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Духи для soul-линий.",
+				"&7Предмет:&r &fchicken_roost:soul_extractor&r",
+				"",
+				"Soul Extractor / Soul Breeder — поздняя магия линий.",
+				"Нужны души/эссенции высокого тира (JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:soul_extractor  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210021Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210022T"
+				type: "item"
+				item: "chicken_roost:soul_extractor"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210022R"
+					type: "item"
+					item: "chicken_roost:soul_extractor"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS210022X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 5.43d
+			id: "WS210023Q"
+			title: "III·23  Soul Breeder"
+			icon: "chicken_roost:soul_breeder"
+			subtitle: "◆ Вехи · Цех · Продвинутое скрещивание."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 23/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Продвинутое скрещивание.",
+				"&7Предмет:&r &fchicken_roost:soul_breeder&r",
+				"",
+				"Breeder ускоряет размножение линий.",
+				"Нужны две подходящие курицы + корм (JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:soul_breeder  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210022Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210023T"
+				type: "item"
+				item: "chicken_roost:soul_breeder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210023R"
+					type: "item"
+					item: "chicken_roost:soul_breeder"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS210023X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 5.43d
+			id: "WS210024Q"
+			title: "III·24  Alpha Roost"
+			icon: "chicken_roost:alpha_roost_container"
+			subtitle: "Контейнер элитной линии."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 24/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Контейнер элитной линии.",
+				"&7Предмет:&r &fchicken_roost:alpha_roost_container&r",
+				"",
+				"Alpha — контейнер элитной линии.",
+				"Ставь, когда обычный roost уже мал для топ-кур.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:alpha_roost_container  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210023Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210024T"
+				type: "item"
+				item: "chicken_roost:alpha_roost_container"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210024R"
+					type: "item"
+					item: "chicken_roost:alpha_roost_container"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS210024X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 7.0d
+			id: "WS210025Q"
+			title: "III·25  Хранилище кур"
+			icon: "chicken_roost:chickenstorage"
+			subtitle: "Склад выводка."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 25/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Склад выводка.",
+				"&7Предмет:&r &fchicken_roost:chickenstorage&r",
+				"",
+				"Склад кур/яиц линии.",
+				"Свяжи с collector, чтобы не захламлять пол.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:chickenstorage  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS210024Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210025T"
+				type: "item"
+				item: "chicken_roost:chickenstorage"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210025R"
+					type: "item"
+					item: "chicken_roost:chickenstorage"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS210025X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 7.0d
+			id: "WS210026Q"
+			title: "III·26  Железо из кур"
+			icon: "minecraft:iron_ingot"
+			subtitle: "Куры = шахта: железо."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 26/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Куры = шахта: железо.",
+				"&7Предмет:&r &fminecraft:iron_ingot&r",
+				"",
+				"Доказательство биосинтеза: железо с кур.",
+				"Если нет дропа — проверь тир корма и trainer.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 32× minecraft:iron_ingot  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210025Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210026T"
+				type: "item"
+				item: "minecraft:iron_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210026R"
+					type: "item"
+					item: "minecraft:iron_ingot"
+					count: 32
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS210026X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 7.0d
+			id: "WS210027Q"
+			title: "III·27  Золото из кур"
+			icon: "minecraft:gold_ingot"
+			subtitle: "Биосинтез драгметалла."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 27/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез драгметалла.",
+				"&7Предмет:&r &fminecraft:gold_ingot&r",
+				"",
+				"Золотая линия обычно выше по тиру, чем железо.",
+				"Смотри какую курицу даёт gold в JEI/квиках мода.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× minecraft:gold_ingot  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210026Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210027T"
+				type: "item"
+				item: "minecraft:gold_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210027R"
+					type: "item"
+					item: "minecraft:gold_ingot"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS210027X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 7.0d
+			id: "WS210028Q"
+			title: "III·28  Медь из кур"
+			icon: "minecraft:copper_ingot"
+			subtitle: "Проводка атолла."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 28/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Проводка атолла.",
+				"&7Предмет:&r &fminecraft:copper_ingot&r",
+				"",
+				"Медь критична для Create на атолле.",
+				"Держи отдельный roost под медь.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 32× minecraft:copper_ingot  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210027Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210028T"
+				type: "item"
+				item: "minecraft:copper_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210028R"
+					type: "item"
+					item: "minecraft:copper_ingot"
+					count: 32
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210028X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 7.0d
+			id: "WS210029Q"
+			title: "III·29  Редстоун из кур"
+			icon: "minecraft:redstone"
+			subtitle: "Сигналы фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 29/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сигналы фермы.",
+				"&7Предмет:&r &fminecraft:redstone&r",
+				"",
+				"Редстоун с кур кормит автоматику.",
+				"Связка roost → Create/редстоун-схемы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 32× minecraft:redstone  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210028Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210029T"
+				type: "item"
+				item: "minecraft:redstone"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210029R"
+					type: "item"
+					item: "minecraft:redstone"
+					count: 32
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS210029X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 7.0d
+			id: "WS210030Q"
+			title: "III·30  Алмазный выводок"
+			icon: "minecraft:diamond"
+			subtitle: "◆ Вехи · Цех · Капстоун курятны."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 30/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Капстоун курятны.",
+				"&7Предмет:&r &fminecraft:diamond&r",
+				"",
+				"Алмазный выводок — капстоун курятны.",
+				"Обычно нужен топ корм/эссенция и прокачанная линия.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× minecraft:diamond  &8+&r  &b120 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210029Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210030T"
+				type: "item"
+				item: "minecraft:diamond"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210030R"
+					type: "item"
+					item: "minecraft:diamond"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 120"
+					elevate_perms: true
+					id: "WS210030X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 8.93d
+			id: "WS210031Q"
+			title: "III·31  Корм T2"
+			icon: "chicken_roost:chicken_food_tier_2"
+			subtitle: "Второй тир рациона."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 31/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Второй тир рациона.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_2&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× chicken_roost:chicken_food_tier_2  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210030Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210031T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_2"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210031R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_2"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS210031X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 8.93d
+			id: "WS210032Q"
+			title: "III·32  Корм T4"
+			icon: "chicken_roost:chicken_food_tier_4"
+			subtitle: "Средний+ рацион."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 32/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Средний+ рацион.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_4&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× chicken_roost:chicken_food_tier_4  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210031Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210032T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_4"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210032R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_4"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS210032X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 8.93d
+			id: "WS210033Q"
+			title: "III·33  Корм T6"
+			icon: "chicken_roost:chicken_food_tier_6"
+			subtitle: "◆ Вехи · Цех · Высокий рацион."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 33/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Высокий рацион.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_6&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× chicken_roost:chicken_food_tier_6  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210032Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210033T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_6"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210033R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_6"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS210033X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 8.93d
+			id: "WS210034Q"
+			title: "IV·34  Корм T8"
+			icon: "chicken_roost:chicken_food_tier_8"
+			subtitle: "Почти максимум."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 34/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Почти максимум.",
+				"&7Предмет:&r &fchicken_roost:chicken_food_tier_8&r",
+				"",
+				"Корм тира N. Крафт из еды/эссенций предыдущих ступеней.",
+				"Не корми T9 линию кормом T1 — прогресс встанет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_food_tier_8  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210033Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210034T"
+				type: "item"
+				item: "chicken_roost:chicken_food_tier_8"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210034R"
+					type: "item"
+					item: "chicken_roost:chicken_food_tier_8"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS210034X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 8.93d
+			id: "WS210035Q"
+			title: "IV·35  Эссенция T2"
+			icon: "chicken_roost:chicken_essence_tier_2"
+			subtitle: "Биосинтез tier 2."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 35/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез tier 2.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_2&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_essence_tier_2  &8+&r  &b35 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS210034Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210035T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_2"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210035R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_2"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 35"
+					elevate_perms: true
+					id: "WS210035X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 8.93d
+			id: "WS210036Q"
+			title: "IV·36  Эссенция T4"
+			icon: "chicken_roost:chicken_essence_tier_4"
+			subtitle: "Биосинтез tier 4."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 36/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез tier 4.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_4&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_essence_tier_4  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210035Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210036T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_4"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210036R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_4"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210036X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 10.5d
+			id: "WS210037Q"
+			title: "IV·37  Эссенция T6"
+			icon: "chicken_roost:chicken_essence_tier_6"
+			subtitle: "Биосинтез tier 6."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 37/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез tier 6.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_6&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× chicken_roost:chicken_essence_tier_6  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210036Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210037T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_6"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210037R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_6"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS210037X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 10.5d
+			id: "WS210038Q"
+			title: "IV·38  Эссенция T8"
+			icon: "chicken_roost:chicken_essence_tier_8"
+			subtitle: "Биосинтез tier 8."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 38/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биосинтез tier 8.",
+				"&7Предмет:&r &fchicken_roost:chicken_essence_tier_8&r",
+				"",
+				"Эссенция тира — ресурс селекции и крафтов выше.",
+				"Копи эссенции пачками: они — «валюта» курятны.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× chicken_roost:chicken_essence_tier_8  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210037Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210038T"
+				type: "item"
+				item: "chicken_roost:chicken_essence_tier_8"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210038R"
+					type: "item"
+					item: "chicken_roost:chicken_essence_tier_8"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS210038X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 10.5d
+			id: "WS210039Q"
+			title: "IV·39  Угольная курица"
+			icon: "chicken_roost:c_coal"
+			subtitle: "Линия угля."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 39/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия угля.",
+				"&7Предмет:&r &fchicken_roost:c_coal&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_coal  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210038Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210039T"
+				type: "item"
+				item: "chicken_roost:c_coal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210039R"
+					type: "item"
+					item: "chicken_roost:c_coal"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS210039X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 10.5d
+			id: "WS210040Q"
+			title: "IV·40  Железная курица"
+			icon: "chicken_roost:c_iron"
+			subtitle: "◆ Вехи · Мастерство · Линия железа."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 40/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия железа.",
+				"&7Предмет:&r &fchicken_roost:c_iron&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_iron  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210039Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210040T"
+				type: "item"
+				item: "chicken_roost:c_iron"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210040R"
+					type: "item"
+					item: "chicken_roost:c_iron"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS210040X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 10.5d
+			id: "WS210041Q"
+			title: "IV·41  Золотая курица"
+			icon: "chicken_roost:c_gold"
+			subtitle: "Линия золота."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 41/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия золота.",
+				"&7Предмет:&r &fchicken_roost:c_gold&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_gold  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210040Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210041T"
+				type: "item"
+				item: "chicken_roost:c_gold"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210041R"
+					type: "item"
+					item: "chicken_roost:c_gold"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS210041X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 10.5d
+			id: "WS210042Q"
+			title: "IV·42  Медная курица"
+			icon: "chicken_roost:c_copper"
+			subtitle: "Линия меди."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 42/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия меди.",
+				"&7Предмет:&r &fchicken_roost:c_copper&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_copper  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210041Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210042T"
+				type: "item"
+				item: "chicken_roost:c_copper"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210042R"
+					type: "item"
+					item: "chicken_roost:c_copper"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210042X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 12.43d
+			id: "WS210043Q"
+			title: "IV·43  Редстоун-курица"
+			icon: "chicken_roost:c_redstone"
+			subtitle: "Линия редстоуна."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 43/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия редстоуна.",
+				"&7Предмет:&r &fchicken_roost:c_redstone&r",
+				"",
+				"Редстоун с кур кормит автоматику.",
+				"Связка roost → Create/редстоун-схемы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_redstone  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210042Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210043T"
+				type: "item"
+				item: "chicken_roost:c_redstone"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210043R"
+					type: "item"
+					item: "chicken_roost:c_redstone"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS210043X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 12.43d
+			id: "WS210044Q"
+			title: "IV·44  Лазуритовая курица"
+			icon: "chicken_roost:c_lapis"
+			subtitle: "◆ Вехи · Мастерство · Линия лазурита."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 44/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия лазурита.",
+				"&7Предмет:&r &fchicken_roost:c_lapis&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_lapis  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210043Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210044T"
+				type: "item"
+				item: "chicken_roost:c_lapis"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210044R"
+					type: "item"
+					item: "chicken_roost:c_lapis"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS210044X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 12.43d
+			id: "WS210045Q"
+			title: "V·45  Кварцевая курица"
+			icon: "chicken_roost:c_quartz"
+			subtitle: "Линия кварца."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 45/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия кварца.",
+				"&7Предмет:&r &fchicken_roost:c_quartz&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_quartz  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS210044Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210045T"
+				type: "item"
+				item: "chicken_roost:c_quartz"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210045R"
+					type: "item"
+					item: "chicken_roost:c_quartz"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS210045X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 12.43d
+			id: "WS210046Q"
+			title: "V·46  Изумрудная курица"
+			icon: "chicken_roost:c_emerald"
+			subtitle: "Линия изумруда."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 46/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия изумруда.",
+				"&7Предмет:&r &fchicken_roost:c_emerald&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_emerald  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210045Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210046T"
+				type: "item"
+				item: "chicken_roost:c_emerald"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210046R"
+					type: "item"
+					item: "chicken_roost:c_emerald"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS210046X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 12.43d
+			id: "WS210047Q"
+			title: "V·47  Алмазная курица"
+			icon: "chicken_roost:c_diamond"
+			subtitle: "Линия алмаза."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 47/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линия алмаза.",
+				"&7Предмет:&r &fchicken_roost:c_diamond&r",
+				"",
+				"Алмазный выводок — капстоун курятны.",
+				"Обычно нужен топ корм/эссенция и прокачанная линия.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_diamond  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210046Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210047T"
+				type: "item"
+				item: "chicken_roost:c_diamond"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210047R"
+					type: "item"
+					item: "chicken_roost:c_diamond"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS210047X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 12.43d
+			id: "WS210048Q"
+			title: "V·48  Незеритовая курица"
+			icon: "chicken_roost:c_netherite"
+			subtitle: "Топ ваниль-линия."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 48/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ ваниль-линия.",
+				"&7Предмет:&r &fchicken_roost:c_netherite&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_netherite  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210047Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210048T"
+				type: "item"
+				item: "chicken_roost:c_netherite"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210048R"
+					type: "item"
+					item: "chicken_roost:c_netherite"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS210048X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 14.0d
+			id: "WS210049Q"
+			title: "V·49  Осмиевая курица"
+			icon: "chicken_roost:c_osmium"
+			subtitle: "Связка с Mek."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 49/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Связка с Mek.",
+				"&7Предмет:&r &fchicken_roost:c_osmium&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_osmium  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210048Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210049T"
+				type: "item"
+				item: "chicken_roost:c_osmium"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210049R"
+					type: "item"
+					item: "chicken_roost:c_osmium"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS210049X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 14.0d
+			id: "WS210050Q"
+			title: "V·50  Оловянная курица"
+			icon: "chicken_roost:c_tin"
+			subtitle: "◆ Вехи · Финал · Сплавы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 50/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сплавы.",
+				"&7Предмет:&r &fchicken_roost:c_tin&r",
+				"",
+				"Предмет-курица линии ресурса (c_iron, c_gold…).",
+				"Сажай в roost нужного тира корма; JEI покажет дроп.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× chicken_roost:c_tin  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS210049Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210050T"
+				type: "item"
+				item: "chicken_roost:c_tin"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210050R"
+					type: "item"
+					item: "chicken_roost:c_tin"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS210050X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 14.0d
+			id: "WS210051Q"
+			title: "V·51  Уголь с кур"
+			icon: "minecraft:coal"
+			subtitle: "Топливо фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 51/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топливо фермы.",
+				"&7Предмет:&r &fminecraft:coal&r",
+				"",
+				"Шаг Roost Ultimate. Открой предмет в &eJEI&r и посмотри, к какому тиру корма/эссенции он относится.",
+				"Цель ветки — заменить шахту фермой кур. Сюжетный Roost можно пройти раньше; мастерская углубляет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 32× minecraft:coal  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210050Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210051T"
+				type: "item"
+				item: "minecraft:coal"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210051R"
+					type: "item"
+					item: "minecraft:coal"
+					count: 32
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS210051X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 14.0d
+			id: "WS210052Q"
+			title: "V·52  Лазурит с кур"
+			icon: "minecraft:lapis_lazuli"
+			subtitle: "Чары и красители."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 52/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Чары и красители.",
+				"&7Предмет:&r &fminecraft:lapis_lazuli&r",
+				"",
+				"Шаг Roost Ultimate. Открой предмет в &eJEI&r и посмотри, к какому тиру корма/эссенции он относится.",
+				"Цель ветки — заменить шахту фермой кур. Сюжетный Roost можно пройти раньше; мастерская углубляет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× minecraft:lapis_lazuli  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210051Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210052T"
+				type: "item"
+				item: "minecraft:lapis_lazuli"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210052R"
+					type: "item"
+					item: "minecraft:lapis_lazuli"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210052X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 14.0d
+			id: "WS210053Q"
+			title: "V·53  Кварц с кур"
+			icon: "minecraft:quartz"
+			subtitle: "Под AE2/декор."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 53/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Под AE2/декор.",
+				"&7Предмет:&r &fminecraft:quartz&r",
+				"",
+				"Шаг Roost Ultimate. Открой предмет в &eJEI&r и посмотри, к какому тиру корма/эссенции он относится.",
+				"Цель ветки — заменить шахту фермой кур. Сюжетный Roost можно пройти раньше; мастерская углубляет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× minecraft:quartz  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210052Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210053T"
+				type: "item"
+				item: "minecraft:quartz"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210053R"
+					type: "item"
+					item: "minecraft:quartz"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS210053X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 14.0d
+			id: "WS210054Q"
+			title: "V·54  Изумруд с кур"
+			icon: "minecraft:emerald"
+			subtitle: "Торговля атолла."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 54/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Торговля атолла.",
+				"&7Предмет:&r &fminecraft:emerald&r",
+				"",
+				"Шаг Roost Ultimate. Открой предмет в &eJEI&r и посмотри, к какому тиру корма/эссенции он относится.",
+				"Цель ветки — заменить шахту фермой кур. Сюжетный Roost можно пройти раньше; мастерская углубляет.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× minecraft:emerald  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS210053Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210054T"
+				type: "item"
+				item: "minecraft:emerald"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210054R"
+					type: "item"
+					item: "minecraft:emerald"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS210054X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 16.28d
+			id: "WS210055Q"
+			title: "V·55  Незерит-лом с кур"
+			icon: "minecraft:netherite_scrap"
+			subtitle: "★ КАПСТОУН · Путь к слитку."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 55/55&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Путь к слитку.",
+				"&7Предмет:&r &fminecraft:netherite_scrap&r",
+				"",
+				"Лом незерита с кур — путь к слитку без шахты незера.",
+				"Нужна топ-линия и корм высокого тира.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× minecraft:netherite_scrap  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			shape: "gear"
+			size: 1.55d
+			min_width: 280
+			dependencies: ["WS210054Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS210055T"
+				type: "item"
+				item: "minecraft:netherite_scrap"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS210055R"
+					type: "item"
+					item: "minecraft:netherite_scrap"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS210055X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Roost Ultimate: куры вместо шахты. Roost → корм/эссенции тиров → collector/breeder → руды."
+	title: "Мастерская · Курятня"
+}

@@ -1,0 +1,3087 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "rsquare"
+	filename: "29_ws_if"
+	group: "0AC7A00000000005"
+	icon: "industrialforegoing:machine_frame_pity"
+	id: "WS290000CH"
+	order_index: 29
+	quest_links: [ ]
+	quests: [
+		{
+			x: -4.62d
+			y: 0.0d
+			id: "WS290001Q"
+			title: "I·1  Pity Frame"
+			icon: "industrialforegoing:machine_frame_pity"
+			subtitle: "✦ ГАЙД МОДА · Стартовая рама."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 1/59&r",
+				"",
+				"&bIndustrial Foregoing&r строит завод из &eлатекса и пластика&r.",
+				"",
+				"&6Старт:&r Fluid Extractor на бревнах → Latex Processing → &eplastic&r → Machine Frame (pity→…→supreme).",
+				"Потом фермы (&eplant gatherer/sower&r), мобы, &elaser drill&r за ресурсами.",
+				"",
+				"&7Почти все машины хотят пластик + раму + энергию. Смотри тир рамы в рецепте JEI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"",
+				"&a▶ Задача:&r Стартовая рама.",
+				"&7Предмет:&r &findustrialforegoing:machine_frame_pity&r",
+				"",
+				"Рама T1. Крафт простой — старт IF.",
+				"Дальше почти всё требует пластик.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:machine_frame_pity  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "hexagon"
+			size: 1.35d
+			min_width: 280
+			optional: true
+			tasks: [{
+				id: "WS290001T"
+				type: "item"
+				item: "industrialforegoing:machine_frame_pity"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290001R"
+					type: "item"
+					item: "industrialforegoing:machine_frame_pity"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS290001X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 0.0d
+			id: "WS290002Q"
+			title: "I·2  Fluid Extractor"
+			icon: "industrialforegoing:fluid_extractor"
+			subtitle: "Сок/латекс из дерева."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 2/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сок/латекс из дерева.",
+				"&7Предмет:&r &findustrialforegoing:fluid_extractor&r",
+				"",
+				"Качает латекс из брёвен (поставь к бревну).",
+				"Трубы/вёдра к processing unit.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:fluid_extractor  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290001Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290002T"
+				type: "item"
+				item: "industrialforegoing:fluid_extractor"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290002R"
+					type: "item"
+					item: "industrialforegoing:fluid_extractor"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS290002X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 0.0d
+			id: "WS290003Q"
+			title: "I·3  Latex Unit"
+			icon: "industrialforegoing:latex_processing_unit"
+			subtitle: "Переработка латекса."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 3/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Переработка латекса.",
+				"&7Предмет:&r &findustrialforegoing:latex_processing_unit&r",
+				"",
+				"Варит латекс → dry rubber / plastic path.",
+				"Подай энергию и латекс.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:latex_processing_unit  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290002Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290003T"
+				type: "item"
+				item: "industrialforegoing:latex_processing_unit"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290003R"
+					type: "item"
+					item: "industrialforegoing:latex_processing_unit"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS290003X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 0.0d
+			id: "WS290004Q"
+			title: "I·4  Сухая резина"
+			icon: "industrialforegoing:dryrubber"
+			subtitle: "Полуфабрикат."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 4/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Полуфабрикат.",
+				"&7Предмет:&r &findustrialforegoing:dryrubber&r",
+				"",
+				"Сухая резина до пластика.",
+				"Плавка/крафт в plastic (JEI).",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× industrialforegoing:dryrubber  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290003Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290004T"
+				type: "item"
+				item: "industrialforegoing:dryrubber"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290004R"
+					type: "item"
+					item: "industrialforegoing:dryrubber"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS290004X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 0.0d
+			id: "WS290005Q"
+			title: "I·5  Пластик"
+			icon: "industrialforegoing:plastic"
+			subtitle: "Материал IF."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 5/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Материал IF.",
+				"&7Предмет:&r &findustrialforegoing:plastic&r",
+				"",
+				"Главный ресурс IF. Копи сундук.",
+				"Без пластика рамы выше не скрафтить.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× industrialforegoing:plastic  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS290004Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290005T"
+				type: "item"
+				item: "industrialforegoing:plastic"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290005R"
+					type: "item"
+					item: "industrialforegoing:plastic"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS290005X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 0.0d
+			id: "WS290006Q"
+			title: "I·6  Simple Frame"
+			icon: "industrialforegoing:machine_frame_simple"
+			subtitle: "Тир 2."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 6/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тир 2.",
+				"&7Предмет:&r &findustrialforegoing:machine_frame_simple&r",
+				"",
+				"Рама T2.",
+				"Открывает нормальные фермы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:machine_frame_simple  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290005Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290006T"
+				type: "item"
+				item: "industrialforegoing:machine_frame_simple"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290006R"
+					type: "item"
+					item: "industrialforegoing:machine_frame_simple"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290006X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 1.93d
+			id: "WS290007Q"
+			title: "I·7  Plant Gatherer"
+			icon: "industrialforegoing:plant_gatherer"
+			subtitle: "Сбор урожая."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 7/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сбор урожая.",
+				"&7Предмет:&r &findustrialforegoing:plant_gatherer&r",
+				"",
+				"Собирает урожай в зоне.",
+				"Поставь над грядками, дай энергию.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:plant_gatherer  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290006Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290007T"
+				type: "item"
+				item: "industrialforegoing:plant_gatherer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290007R"
+					type: "item"
+					item: "industrialforegoing:plant_gatherer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS290007X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 1.93d
+			id: "WS290008Q"
+			title: "I·8  Plant Sower"
+			icon: "industrialforegoing:plant_sower"
+			subtitle: "Посев."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 8/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Посев.",
+				"&7Предмет:&r &findustrialforegoing:plant_sower&r",
+				"",
+				"Сажает семена из инвентаря.",
+				"Пара с gatherer = автоферма.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:plant_sower  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290007Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290008T"
+				type: "item"
+				item: "industrialforegoing:plant_sower"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290008R"
+					type: "item"
+					item: "industrialforegoing:plant_sower"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS290008X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 1.93d
+			id: "WS290009Q"
+			title: "I·9  Block Breaker"
+			icon: "industrialforegoing:block_breaker"
+			subtitle: "Ломатель блоков."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 9/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ломатель блоков.",
+				"&7Предмет:&r &findustrialforegoing:block_breaker&r",
+				"",
+				"Ломает блок спереди.",
+				"Фермы камня/дерева.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:block_breaker  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290008Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290009T"
+				type: "item"
+				item: "industrialforegoing:block_breaker"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290009R"
+					type: "item"
+					item: "industrialforegoing:block_breaker"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290009X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 1.93d
+			id: "WS290010Q"
+			title: "I·10  Block Placer"
+			icon: "industrialforegoing:block_placer"
+			subtitle: "◆ Вехи · Старт · Укладчик."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 10/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Укладчик.",
+				"&7Предмет:&r &findustrialforegoing:block_placer&r",
+				"",
+				"Ставит блоки из внутреннего слота.",
+				"Мосты, генераторы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:block_placer  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290009Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290010T"
+				type: "item"
+				item: "industrialforegoing:block_placer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290010R"
+					type: "item"
+					item: "industrialforegoing:block_placer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290010X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 1.93d
+			id: "WS290011Q"
+			title: "I·11  Slaughter Factory"
+			icon: "industrialforegoing:mob_slaughter_factory"
+			subtitle: "Переработка мобов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 11/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Переработка мобов.",
+				"&7Предмет:&r &findustrialforegoing:mob_slaughter_factory&r",
+				"",
+				"Перерабатывает мобов в мясо/жидкости.",
+				"Нужна безопасная ферма мобов.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:mob_slaughter_factory  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290010Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290011T"
+				type: "item"
+				item: "industrialforegoing:mob_slaughter_factory"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290011R"
+					type: "item"
+					item: "industrialforegoing:mob_slaughter_factory"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290011X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 1.93d
+			id: "WS290012Q"
+			title: "I·12  Mob Crusher"
+			icon: "industrialforegoing:mob_crusher"
+			subtitle: "Дробление дропа."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап I&r &7Старт&r",
+				"&8Шаг 12/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Дробление дропа.",
+				"&7Предмет:&r &findustrialforegoing:mob_crusher&r",
+				"",
+				"Дробит лут мобов.",
+				"Связка со slaughter.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:mob_crusher  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290011Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290012T"
+				type: "item"
+				item: "industrialforegoing:mob_crusher"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290012R"
+					type: "item"
+					item: "industrialforegoing:mob_crusher"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290012X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 3.5d
+			id: "WS290013Q"
+			title: "II·13  Animal Rancher"
+			icon: "industrialforegoing:animal_rancher"
+			subtitle: "◆ Вехи · Основа · Автодоилка/стрижка."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 13/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Автодоилка/стрижка.",
+				"&7Предмет:&r &findustrialforegoing:animal_rancher&r",
+				"",
+				"Доит/стрижёт животных.",
+				"Огради животных в зоне.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:animal_rancher  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290012Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290013T"
+				type: "item"
+				item: "industrialforegoing:animal_rancher"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290013R"
+					type: "item"
+					item: "industrialforegoing:animal_rancher"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS290013X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 3.5d
+			id: "WS290014Q"
+			title: "II·14  Animal Feeder"
+			icon: "industrialforegoing:animal_feeder"
+			subtitle: "Кормление животных."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 14/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Кормление животных.",
+				"&7Предмет:&r &findustrialforegoing:animal_feeder&r",
+				"",
+				"Кормит животных для размножения.",
+				"Сено/еда в GUI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:animal_feeder  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290013Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290014T"
+				type: "item"
+				item: "industrialforegoing:animal_feeder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290014R"
+					type: "item"
+					item: "industrialforegoing:animal_feeder"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290014X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 3.5d
+			id: "WS290015Q"
+			title: "II·15  Sewer"
+			icon: "industrialforegoing:sewer"
+			subtitle: "Стоки фермы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 15/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Стоки фермы.",
+				"&7Предмет:&r &findustrialforegoing:sewer&r",
+				"",
+				"Собирает «стоки» животных.",
+				"Ведёт в composter.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:sewer  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS290014Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290015T"
+				type: "item"
+				item: "industrialforegoing:sewer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290015R"
+					type: "item"
+					item: "industrialforegoing:sewer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS290015X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 3.5d
+			id: "WS290016Q"
+			title: "II·16  Sewage Composter"
+			icon: "industrialforegoing:sewage_composter"
+			subtitle: "Компост."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 16/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Компост.",
+				"&7Предмет:&r &findustrialforegoing:sewage_composter&r",
+				"",
+				"Компост из стоков.",
+				"Удобрение для ферм.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:sewage_composter  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290015Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290016T"
+				type: "item"
+				item: "industrialforegoing:sewage_composter"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290016R"
+					type: "item"
+					item: "industrialforegoing:sewage_composter"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290016X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 3.5d
+			id: "WS290017Q"
+			title: "II·17  Bioreactor"
+			icon: "industrialforegoing:bioreactor"
+			subtitle: "Биотопливо."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 17/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Биотопливо.",
+				"&7Предмет:&r &findustrialforegoing:bioreactor&r",
+				"",
+				"Биотопливо из органики.",
+				"Топливо для biofuel generator.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:bioreactor  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290016Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290017T"
+				type: "item"
+				item: "industrialforegoing:bioreactor"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290017R"
+					type: "item"
+					item: "industrialforegoing:bioreactor"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS290017X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 3.5d
+			id: "WS290018Q"
+			title: "II·18  Biofuel Gen"
+			icon: "industrialforegoing:biofuel_generator"
+			subtitle: "Генератор."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 18/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Генератор.",
+				"&7Предмет:&r &findustrialforegoing:biofuel_generator&r",
+				"",
+				"Жжёт биотопливо → RF.",
+				"Автономная энергия IF.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:biofuel_generator  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290017Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290018T"
+				type: "item"
+				item: "industrialforegoing:biofuel_generator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290018R"
+					type: "item"
+					item: "industrialforegoing:biofuel_generator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290018X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 5.43d
+			id: "WS290019Q"
+			title: "II·19  Advanced Frame"
+			icon: "industrialforegoing:machine_frame_advanced"
+			subtitle: "Тир 3."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 19/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Тир 3.",
+				"&7Предмет:&r &findustrialforegoing:machine_frame_advanced&r",
+				"",
+				"Рама T3.",
+				"Лазеры и серьёзные машины.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:machine_frame_advanced  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290018Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290019T"
+				type: "item"
+				item: "industrialforegoing:machine_frame_advanced"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290019R"
+					type: "item"
+					item: "industrialforegoing:machine_frame_advanced"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS290019X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 5.43d
+			id: "WS290020Q"
+			title: "II·20  Laser Drill"
+			icon: "industrialforegoing:laser_drill"
+			subtitle: "◆ Вехи · Основа · Ресурсный бур."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 20/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Ресурсный бур.",
+				"&7Предмет:&r &findustrialforegoing:laser_drill&r",
+				"",
+				"Бурит ресурсы энергией + базу.",
+				"Ore Laser Base под ним/схема JEI.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:laser_drill  &8+&r  &b95 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290019Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290020T"
+				type: "item"
+				item: "industrialforegoing:laser_drill"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290020R"
+					type: "item"
+					item: "industrialforegoing:laser_drill"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "WS290020X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 5.43d
+			id: "WS290021Q"
+			title: "II·21  Ore Laser Base"
+			icon: "industrialforegoing:ore_laser_base"
+			subtitle: "База лазера."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 21/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r База лазера.",
+				"&7Предмет:&r &findustrialforegoing:ore_laser_base&r",
+				"",
+				"База для лазерного бура по рудам.",
+				"Смотри биом/глубину в тултипе.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:ore_laser_base  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290020Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290021T"
+				type: "item"
+				item: "industrialforegoing:ore_laser_base"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290021R"
+					type: "item"
+					item: "industrialforegoing:ore_laser_base"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS290021X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 5.43d
+			id: "WS290022Q"
+			title: "II·22  Supreme Frame"
+			icon: "industrialforegoing:machine_frame_supreme"
+			subtitle: "Топ рама."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 22/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ рама.",
+				"&7Предмет:&r &findustrialforegoing:machine_frame_supreme&r",
+				"",
+				"Топ рама IF.",
+				"Эндгейм крафты.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:machine_frame_supreme  &8+&r  &b110 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290021Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290022T"
+				type: "item"
+				item: "industrialforegoing:machine_frame_supreme"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290022R"
+					type: "item"
+					item: "industrialforegoing:machine_frame_supreme"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 110"
+					elevate_perms: true
+					id: "WS290022X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 5.43d
+			id: "WS290023Q"
+			title: "II·23  Stasis Chamber"
+			icon: "industrialforegoing:stasis_chamber"
+			subtitle: "Стазис мобов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 23/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Стазис мобов.",
+				"&7Предмет:&r &findustrialforegoing:stasis_chamber&r",
+				"",
+				"Стазис мобов без урона AI-спама.",
+				"Удобно для дроп-ферм.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:stasis_chamber  &8+&r  &b100 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290022Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290023T"
+				type: "item"
+				item: "industrialforegoing:stasis_chamber"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290023R"
+					type: "item"
+					item: "industrialforegoing:stasis_chamber"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 100"
+					elevate_perms: true
+					id: "WS290023X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 5.43d
+			id: "WS290024Q"
+			title: "II·24  Капстоун IF"
+			icon: "industrialforegoing:infinity_drill"
+			subtitle: "◆ Вехи · Основа · Infinity Drill — финал ветки."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап II&r &7Основа&r",
+				"&8Шаг 24/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Infinity Drill — финал ветки.",
+				"&7Предмет:&r &findustrialforegoing:infinity_drill&r",
+				"",
+				"Капстоун-инструмент IF.",
+				"Крафт дорогой — пластик и supreme-материалы.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 32× industrialforegoing:plastic  &8+&r  &b140 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290023Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290024T"
+				type: "item"
+				item: "industrialforegoing:infinity_drill"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290024R"
+					type: "item"
+					item: "industrialforegoing:plastic"
+					count: 32
+				}
+				{
+					command: "/aquatech grantxp @p 140"
+					elevate_perms: true
+					id: "WS290024X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 7.0d
+			id: "WS290025Q"
+			title: "III·25  Plant Fertilizer"
+			icon: "industrialforegoing:plant_fertilizer"
+			subtitle: "Удобрение грядок IF."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 25/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Удобрение грядок IF.",
+				"&7Предмет:&r &findustrialforegoing:plant_fertilizer&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:plant_fertilizer  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS290024Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290025T"
+				type: "item"
+				item: "industrialforegoing:plant_fertilizer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290025R"
+					type: "item"
+					item: "industrialforegoing:plant_fertilizer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS290025X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 7.0d
+			id: "WS290026Q"
+			title: "III·26  Water Condensator"
+			icon: "industrialforegoing:water_condensator"
+			subtitle: "Вода из воздуха."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 26/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Вода из воздуха.",
+				"&7Предмет:&r &findustrialforegoing:water_condensator&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:water_condensator  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290025Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290026T"
+				type: "item"
+				item: "industrialforegoing:water_condensator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290026R"
+					type: "item"
+					item: "industrialforegoing:water_condensator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS290026X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 7.0d
+			id: "WS290027Q"
+			title: "III·27  Pitiful Generator"
+			icon: "industrialforegoing:pitiful_generator"
+			subtitle: "Слабый генератор."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 27/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Слабый генератор.",
+				"&7Предмет:&r &findustrialforegoing:pitiful_generator&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:pitiful_generator  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290026Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290027T"
+				type: "item"
+				item: "industrialforegoing:pitiful_generator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290027R"
+					type: "item"
+					item: "industrialforegoing:pitiful_generator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS290027X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 7.0d
+			id: "WS290028Q"
+			title: "III·28  Dissolution Chamber"
+			icon: "industrialforegoing:dissolution_chamber"
+			subtitle: "Пластик и растворы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 28/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Пластик и растворы.",
+				"&7Предмет:&r &findustrialforegoing:dissolution_chamber&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:dissolution_chamber  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290027Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290028T"
+				type: "item"
+				item: "industrialforegoing:dissolution_chamber"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290028R"
+					type: "item"
+					item: "industrialforegoing:dissolution_chamber"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290028X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 7.0d
+			id: "WS290029Q"
+			title: "III·29  Ведро латекса"
+			icon: "industrialforegoing:latex_bucket"
+			subtitle: "Жидкий латекс."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 29/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Жидкий латекс.",
+				"&7Предмет:&r &findustrialforegoing:latex_bucket&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× industrialforegoing:latex_bucket  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290028Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290029T"
+				type: "item"
+				item: "industrialforegoing:latex_bucket"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290029R"
+					type: "item"
+					item: "industrialforegoing:latex_bucket"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS290029X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 7.0d
+			id: "WS290030Q"
+			title: "III·30  Pink Slime"
+			icon: "industrialforegoing:pink_slime"
+			subtitle: "◆ Вехи · Цех · Побочный продукт."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 30/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Побочный продукт.",
+				"&7Предмет:&r &findustrialforegoing:pink_slime&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 8× industrialforegoing:pink_slime  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290029Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290030T"
+				type: "item"
+				item: "industrialforegoing:pink_slime"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290030R"
+					type: "item"
+					item: "industrialforegoing:pink_slime"
+					count: 8
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290030X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 8.93d
+			id: "WS290031Q"
+			title: "III·31  Pink Slime Ingot"
+			icon: "industrialforegoing:pink_slime_ingot"
+			subtitle: "Слиток слизи."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 31/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Слиток слизи.",
+				"&7Предмет:&r &findustrialforegoing:pink_slime_ingot&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× industrialforegoing:pink_slime_ingot  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290030Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290031T"
+				type: "item"
+				item: "industrialforegoing:pink_slime_ingot"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290031R"
+					type: "item"
+					item: "industrialforegoing:pink_slime_ingot"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS290031X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 8.93d
+			id: "WS290032Q"
+			title: "III·32  Meat Feeder"
+			icon: "industrialforegoing:meat_feeder"
+			subtitle: "Кормление мясом."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 32/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Кормление мясом.",
+				"&7Предмет:&r &findustrialforegoing:meat_feeder&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:meat_feeder  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290031Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290032T"
+				type: "item"
+				item: "industrialforegoing:meat_feeder"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290032R"
+					type: "item"
+					item: "industrialforegoing:meat_feeder"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290032X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 8.93d
+			id: "WS290033Q"
+			title: "III·33  Mob Duplicator"
+			icon: "industrialforegoing:mob_duplicator"
+			subtitle: "Копия мобов."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 33/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Копия мобов.",
+				"&7Предмет:&r &findustrialforegoing:mob_duplicator&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:mob_duplicator  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290032Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290033T"
+				type: "item"
+				item: "industrialforegoing:mob_duplicator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290033R"
+					type: "item"
+					item: "industrialforegoing:mob_duplicator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS290033X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 8.93d
+			id: "WS290034Q"
+			title: "III·34  Mob Imprisonment"
+			icon: "industrialforegoing:mob_imprisonment_tool"
+			subtitle: "Поймай моба."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 34/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Поймай моба.",
+				"&7Предмет:&r &findustrialforegoing:mob_imprisonment_tool&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:mob_imprisonment_tool  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290033Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290034T"
+				type: "item"
+				item: "industrialforegoing:mob_imprisonment_tool"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290034R"
+					type: "item"
+					item: "industrialforegoing:mob_imprisonment_tool"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS290034X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 8.93d
+			id: "WS290035Q"
+			title: "III·35  Hydroponic Bed"
+			icon: "industrialforegoing:hydroponic_bed"
+			subtitle: "Гидропоника."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап III&r &7Цех&r",
+				"&8Шаг 35/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Гидропоника.",
+				"&7Предмет:&r &findustrialforegoing:hydroponic_bed&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× industrialforegoing:hydroponic_bed  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS290034Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290035T"
+				type: "item"
+				item: "industrialforegoing:hydroponic_bed"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290035R"
+					type: "item"
+					item: "industrialforegoing:hydroponic_bed"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290035X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 8.93d
+			id: "WS290036Q"
+			title: "IV·36  Spores Recreator"
+			icon: "industrialforegoing:spores_recreator"
+			subtitle: "◆ Вехи · Мастерство · Споры/грибы."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 36/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Споры/грибы.",
+				"&7Предмет:&r &findustrialforegoing:spores_recreator&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:spores_recreator  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290035Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290036T"
+				type: "item"
+				item: "industrialforegoing:spores_recreator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290036R"
+					type: "item"
+					item: "industrialforegoing:spores_recreator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS290036X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 10.5d
+			id: "WS290037Q"
+			title: "IV·37  Sludge Refiner"
+			icon: "industrialforegoing:sludge_refiner"
+			subtitle: "Переработка шлама."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 37/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Переработка шлама.",
+				"&7Предмет:&r &findustrialforegoing:sludge_refiner&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:sludge_refiner  &8+&r  &b65 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290036Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290037T"
+				type: "item"
+				item: "industrialforegoing:sludge_refiner"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290037R"
+					type: "item"
+					item: "industrialforegoing:sludge_refiner"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 65"
+					elevate_perms: true
+					id: "WS290037X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 10.5d
+			id: "WS290038Q"
+			title: "IV·38  Fermentation Station"
+			icon: "industrialforegoing:fermentation_station"
+			subtitle: "Брожение."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 38/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Брожение.",
+				"&7Предмет:&r &findustrialforegoing:fermentation_station&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:fermentation_station  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290037Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290038T"
+				type: "item"
+				item: "industrialforegoing:fermentation_station"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290038R"
+					type: "item"
+					item: "industrialforegoing:fermentation_station"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290038X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 10.5d
+			id: "WS290039Q"
+			title: "IV·39  Washing Factory"
+			icon: "industrialforegoing:washing_factory"
+			subtitle: "Промывка."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 39/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Промывка.",
+				"&7Предмет:&r &findustrialforegoing:washing_factory&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:washing_factory  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290038Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290039T"
+				type: "item"
+				item: "industrialforegoing:washing_factory"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290039R"
+					type: "item"
+					item: "industrialforegoing:washing_factory"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290039X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 10.5d
+			id: "WS290040Q"
+			title: "IV·40  Fluid Sieving"
+			icon: "industrialforegoing:fluid_sieving_machine"
+			subtitle: "◆ Вехи · Мастерство · Просев жидкостей."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 40/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Просев жидкостей.",
+				"&7Предмет:&r &findustrialforegoing:fluid_sieving_machine&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:fluid_sieving_machine  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290039Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290040T"
+				type: "item"
+				item: "industrialforegoing:fluid_sieving_machine"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290040R"
+					type: "item"
+					item: "industrialforegoing:fluid_sieving_machine"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS290040X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 10.5d
+			id: "WS290041Q"
+			title: "IV·41  Resourceful Furnace"
+			icon: "industrialforegoing:resourceful_furnace"
+			subtitle: "Печь IF."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 41/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Печь IF.",
+				"&7Предмет:&r &findustrialforegoing:resourceful_furnace&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:resourceful_furnace  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290040Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290041T"
+				type: "item"
+				item: "industrialforegoing:resourceful_furnace"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290041R"
+					type: "item"
+					item: "industrialforegoing:resourceful_furnace"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS290041X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 10.5d
+			id: "WS290042Q"
+			title: "IV·42  Stonework Factory"
+			icon: "industrialforegoing:material_stonework_factory"
+			subtitle: "Камень/булыга."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 42/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Камень/булыга.",
+				"&7Предмет:&r &findustrialforegoing:material_stonework_factory&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:material_stonework_factory  &8+&r  &b75 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290041Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290042T"
+				type: "item"
+				item: "industrialforegoing:material_stonework_factory"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290042R"
+					type: "item"
+					item: "industrialforegoing:material_stonework_factory"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 75"
+					elevate_perms: true
+					id: "WS290042X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 12.43d
+			id: "WS290043Q"
+			title: "IV·43  Fluid Collector"
+			icon: "industrialforegoing:fluid_collector"
+			subtitle: "Сбор жидкостей."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 43/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сбор жидкостей.",
+				"&7Предмет:&r &findustrialforegoing:fluid_collector&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:fluid_collector  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290042Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290043T"
+				type: "item"
+				item: "industrialforegoing:fluid_collector"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290043R"
+					type: "item"
+					item: "industrialforegoing:fluid_collector"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290043X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 12.43d
+			id: "WS290044Q"
+			title: "IV·44  Fluid Placer"
+			icon: "industrialforegoing:fluid_placer"
+			subtitle: "Разлив жидкостей."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 44/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Разлив жидкостей.",
+				"&7Предмет:&r &findustrialforegoing:fluid_placer&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:fluid_placer  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290043Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290044T"
+				type: "item"
+				item: "industrialforegoing:fluid_placer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290044R"
+					type: "item"
+					item: "industrialforegoing:fluid_placer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290044X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 12.43d
+			id: "WS290045Q"
+			title: "IV·45  Dye Mixer"
+			icon: "industrialforegoing:dye_mixer"
+			subtitle: "Смесь красителей."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 45/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Смесь красителей.",
+				"&7Предмет:&r &findustrialforegoing:dye_mixer&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:dye_mixer  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS290044Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290045T"
+				type: "item"
+				item: "industrialforegoing:dye_mixer"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290045R"
+					type: "item"
+					item: "industrialforegoing:dye_mixer"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS290045X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 12.43d
+			id: "WS290046Q"
+			title: "IV·46  Enchantment Factory"
+			icon: "industrialforegoing:enchantment_factory"
+			subtitle: "Фабрика чар."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 46/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Фабрика чар.",
+				"&7Предмет:&r &findustrialforegoing:enchantment_factory&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:enchantment_factory  &8+&r  &b90 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290045Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290046T"
+				type: "item"
+				item: "industrialforegoing:enchantment_factory"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290046R"
+					type: "item"
+					item: "industrialforegoing:enchantment_factory"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 90"
+					elevate_perms: true
+					id: "WS290046X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 12.43d
+			id: "WS290047Q"
+			title: "IV·47  Enchant Applicator"
+			icon: "industrialforegoing:enchantment_applicator"
+			subtitle: "◆ Вехи · Мастерство · Нанесение чар."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап IV&r &7Мастерство&r",
+				"&8Шаг 47/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Нанесение чар.",
+				"&7Предмет:&r &findustrialforegoing:enchantment_applicator&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:enchantment_applicator  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290046Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290047T"
+				type: "item"
+				item: "industrialforegoing:enchantment_applicator"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290047R"
+					type: "item"
+					item: "industrialforegoing:enchantment_applicator"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS290047X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 12.43d
+			id: "WS290048Q"
+			title: "V·48  Enchant Extractor"
+			icon: "industrialforegoing:enchantment_extractor"
+			subtitle: "Съём чар."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 48/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Съём чар.",
+				"&7Предмет:&r &findustrialforegoing:enchantment_extractor&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:enchantment_extractor  &8+&r  &b85 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290047Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290048T"
+				type: "item"
+				item: "industrialforegoing:enchantment_extractor"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290048R"
+					type: "item"
+					item: "industrialforegoing:enchantment_extractor"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 85"
+					elevate_perms: true
+					id: "WS290048X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -4.62d
+			y: 14.0d
+			id: "WS290049Q"
+			title: "V·49  Black Hole Unit"
+			icon: "industrialforegoing:simple_black_hole_unit"
+			subtitle: "Компактный склад."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 49/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Компактный склад.",
+				"&7Предмет:&r &findustrialforegoing:simple_black_hole_unit&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:simple_black_hole_unit  &8+&r  &b80 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290048Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290049T"
+				type: "item"
+				item: "industrialforegoing:simple_black_hole_unit"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290049R"
+					type: "item"
+					item: "industrialforegoing:simple_black_hole_unit"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 80"
+					elevate_perms: true
+					id: "WS290049X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 14.0d
+			id: "WS290050Q"
+			title: "V·50  Black Hole Controller"
+			icon: "industrialforegoing:black_hole_controller"
+			subtitle: "◆ Вехи · Финал · Сеть BH."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 50/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Сеть BH.",
+				"&7Предмет:&r &findustrialforegoing:black_hole_controller&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:black_hole_controller  &8+&r  &b95 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "diamond"
+			size: 1.25d
+			min_width: 280
+			dependencies: ["WS290049Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290050T"
+				type: "item"
+				item: "industrialforegoing:black_hole_controller"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290050R"
+					type: "item"
+					item: "industrialforegoing:black_hole_controller"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 95"
+					elevate_perms: true
+					id: "WS290050X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 14.0d
+			id: "WS290051Q"
+			title: "V·51  Conveyor"
+			icon: "industrialforegoing:conveyor"
+			subtitle: "Конвейер IF."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 51/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Конвейер IF.",
+				"&7Предмет:&r &findustrialforegoing:conveyor&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 16× industrialforegoing:conveyor  &8+&r  &b45 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290050Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290051T"
+				type: "item"
+				item: "industrialforegoing:conveyor"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290051R"
+					type: "item"
+					item: "industrialforegoing:conveyor"
+					count: 16
+				}
+				{
+					command: "/aquatech grantxp @p 45"
+					elevate_perms: true
+					id: "WS290051X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 14.0d
+			id: "WS290052Q"
+			title: "V·52  Range Addon"
+			icon: "industrialforegoing:range_addon_1"
+			subtitle: "Радиус машин."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 52/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Радиус машин.",
+				"&7Предмет:&r &findustrialforegoing:range_addon_1&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:range_addon_1  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290051Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290052T"
+				type: "item"
+				item: "industrialforegoing:range_addon_1"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290052R"
+					type: "item"
+					item: "industrialforegoing:range_addon_1"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS290052X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 14.0d
+			id: "WS290053Q"
+			title: "V·53  Speed Addon"
+			icon: "industrialforegoing:speed_addon_1"
+			subtitle: "Скорость машин."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 53/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Скорость машин.",
+				"&7Предмет:&r &findustrialforegoing:speed_addon_1&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:speed_addon_1  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290052Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290053T"
+				type: "item"
+				item: "industrialforegoing:speed_addon_1"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290053R"
+					type: "item"
+					item: "industrialforegoing:speed_addon_1"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290053X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 14.0d
+			id: "WS290054Q"
+			title: "V·54  Efficiency Addon"
+			icon: "industrialforegoing:efficiency_addon_1"
+			subtitle: "Экономия энергии."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 54/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Экономия энергии.",
+				"&7Предмет:&r &findustrialforegoing:efficiency_addon_1&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:efficiency_addon_1  &8+&r  &b55 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290053Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290054T"
+				type: "item"
+				item: "industrialforegoing:efficiency_addon_1"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290054R"
+					type: "item"
+					item: "industrialforegoing:efficiency_addon_1"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 55"
+					elevate_perms: true
+					id: "WS290054X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 4.62d
+			y: 15.93d
+			id: "WS290055Q"
+			title: "V·55  Processing Addon"
+			icon: "industrialforegoing:processing_addon_1"
+			subtitle: "Больше выхода."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 55/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Больше выхода.",
+				"&7Предмет:&r &findustrialforegoing:processing_addon_1&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:processing_addon_1  &8+&r  &b60 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "circle"
+			size: 1.1d
+			min_width: 280
+			dependencies: ["WS290054Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290055T"
+				type: "item"
+				item: "industrialforegoing:processing_addon_1"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290055R"
+					type: "item"
+					item: "industrialforegoing:processing_addon_1"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 60"
+					elevate_perms: true
+					id: "WS290055X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 2.78d
+			y: 15.93d
+			id: "WS290056Q"
+			title: "V·56  Laser Lens"
+			icon: "industrialforegoing:laser_lens0"
+			subtitle: "Линза лазера."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 56/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Линза лазера.",
+				"&7Предмет:&r &findustrialforegoing:laser_lens0&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 1× industrialforegoing:laser_lens0  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290055Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290056T"
+				type: "item"
+				item: "industrialforegoing:laser_lens0"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290056R"
+					type: "item"
+					item: "industrialforegoing:laser_lens0"
+					count: 1
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290056X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: 0.93d
+			y: 15.93d
+			id: "WS290057Q"
+			title: "V·57  Iron Gear IF"
+			icon: "industrialforegoing:iron_gear"
+			subtitle: "Шестерня."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 57/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Шестерня.",
+				"&7Предмет:&r &findustrialforegoing:iron_gear&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× industrialforegoing:iron_gear  &8+&r  &b40 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290056Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290057T"
+				type: "item"
+				item: "industrialforegoing:iron_gear"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290057R"
+					type: "item"
+					item: "industrialforegoing:iron_gear"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 40"
+					elevate_perms: true
+					id: "WS290057X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -0.93d
+			y: 15.93d
+			id: "WS290058Q"
+			title: "V·58  Gold Gear IF"
+			icon: "industrialforegoing:gold_gear"
+			subtitle: "Шестерня выше."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 58/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Шестерня выше.",
+				"&7Предмет:&r &findustrialforegoing:gold_gear&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 4× industrialforegoing:gold_gear  &8+&r  &b50 Aqua XP&r",
+				"",
+				"&7Мастерские опциональны: сюжетный spine можно продолжать отдельно.&r"
+			]
+			shape: "rsquare"
+			size: 1.0d
+			min_width: 280
+			dependencies: ["WS290057Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290058T"
+				type: "item"
+				item: "industrialforegoing:gold_gear"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290058R"
+					type: "item"
+					item: "industrialforegoing:gold_gear"
+					count: 4
+				}
+				{
+					command: "/aquatech grantxp @p 50"
+					elevate_perms: true
+					id: "WS290058X"
+					silent: true
+					type: "command"
+				}
+			]
+		},
+		{
+			x: -2.78d
+			y: 16.28d
+			id: "WS290059Q"
+			title: "V·59  Diamond Gear IF"
+			icon: "industrialforegoing:diamond_gear"
+			subtitle: "★ КАПСТОУН · Топ шестерня."
+			description: [
+				"&b✦ Мастерская&r  &8·&r  &6Этап V&r &7Финал&r",
+				"&8Шаг 59/59&r",
+				"",
+				"&c⛓ Зависимость:&r сначала закрой &eпредыдущий&r квест по стрелке.",
+				"",
+				"&a▶ Задача:&r Топ шестерня.",
+				"&7Предмет:&r &findustrialforegoing:diamond_gear&r",
+				"",
+				"IF = латекс → пластик → рама → машина. Всегда проверяй тир frame в JEI.",
+				"Нет работы — нет энергии или пустой бак латекса/пластика.",
+				"",
+				"&8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬&r",
+				"&6Награда:&r 2× industrialforegoing:diamond_gear  &8+&r  &b70 Aqua XP&r",
+				"",
+				"&d★ Это финал ветки мастерской. Дальше — сюжет или другая мастерская.&r"
+			]
+			shape: "gear"
+			size: 1.55d
+			min_width: 280
+			dependencies: ["WS290058Q"]
+			dependency_requirement: "all"
+			hide_dependency_lines: false
+			tasks: [{
+				id: "WS290059T"
+				type: "item"
+				item: "industrialforegoing:diamond_gear"
+				count: 1L
+			}]
+			rewards: [
+				{
+					id: "WS290059R"
+					type: "item"
+					item: "industrialforegoing:diamond_gear"
+					count: 2
+				}
+				{
+					command: "/aquatech grantxp @p 70"
+					elevate_perms: true
+					id: "WS290059X"
+					silent: true
+					type: "command"
+				}
+			]
+		}
+	]
+	subtitle: "Industrial Foregoing: латекс→пластик→рамы→фермы/лазер. Pity→Simple→Advanced→Supreme."
+	title: "Мастерская · Industrial Foregoing"
+}
