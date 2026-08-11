@@ -1,7 +1,7 @@
 {
   "base_chance": 20,
   "catch_info": {
-    "item": "minecraft:clay_ball"
+    "item": "minecraft:cod"
   },
   "difficulty": {
     "decay": 0.85,
@@ -32,7 +32,7 @@
       }
     ]
   },
-  "has_guide_entry": true,
+  "has_guide_entry": false,
   "rarity": "common",
   "restrictions": [
     {

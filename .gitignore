@@ -48,6 +48,12 @@ casesmod-fixed-source_*/
 aquatech-ui/
 modlist/
 scripts_crafttweaker_archived/
+scripts/scratch/
+scripts/archive/jars/
+scripts/archive/extracted/
+graphify-out/graph.html
+graphify-out/cache/
+
 
 # Parked jars inside mods/
 mods/_parked_*/
@@ -59,16 +65,18 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
-# Secrets — never commit!
+# Secrets â€” never commit!
 .gh_token
 .cf_token
 .cloudflare_token
 cf_token.txt
 *.token
 secrets.json
+.apex_mysql.json
+.apex_deploy.json
 node_modules/
 
-# Orphan gitlink (no .gitmodules) — breaks Cloudflare Pages submodule update
+# Orphan gitlink (no .gitmodules) ï¿½ breaks Cloudflare Pages submodule update
 tools/Custom-Nameplates/
 
 
@@ -77,5 +85,8 @@ AquaTechLauncher.exe
 
 
 tools/_go/
+tools/_playit/
+tools/_asm/*.jar
+tools/_asm/*.class
 bootstrap/AquaTech.exe
 

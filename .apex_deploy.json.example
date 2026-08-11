@@ -1,0 +1,10 @@
+{
+  "sftp_host": "g-pl-3.apexnodes.xyz",
+  "sftp_port": 2022,
+  "sftp_user": "oxmzg5d0.6fdc6f7b",
+  "sftp_pass": "REPLACE_ME",
+  "server_port": "21561",
+  "apex_panel": "https://panel.apexnodes.xyz",
+  "apex_server_id": "6fdc6f7b",
+  "apex_api_key": "ptlc_REPLACE_ME"
+}
