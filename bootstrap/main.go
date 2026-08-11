@@ -2,6 +2,7 @@ package main
 
 import (
 	"archive/zip"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -21,8 +22,9 @@ const (
 	userAgent = "AquaTechBootstrap/1.1"
 )
 
-// Prefer jsDelivr — raw.githubusercontent.com often serves a stale main for minutes/hours.
+// Prefer API + jsDelivr. raw.githubusercontent.com/.../main often lags tip for a long time.
 var manifestURLs = []string{
+	"https://api.github.com/repos/Renfild/AquaTeche/contents/docs/bootstrap.json?ref=main",
 	"https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
 	"https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
 }
@@ -238,6 +240,9 @@ func fetchManifest(url string) (*manifest, error) {
 	}
 	req.Header.Set("User-Agent", userAgent)
 	req.Header.Set("Cache-Control", "no-cache")
+	if strings.Contains(url, "api.github.com") {
+		req.Header.Set("Accept", "application/vnd.github.raw")
+	}
 	client := &http.Client{Timeout: 30 * time.Second}
 	res, err := client.Do(req)
 	if err != nil {
@@ -247,8 +252,30 @@ func fetchManifest(url string) (*manifest, error) {
 	if res.StatusCode >= 400 {
 		return nil, fmt.Errorf("HTTP %d", res.StatusCode)
 	}
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+	// Contents API without Accept: raw returns JSON envelope with base64 content.
+	if strings.Contains(url, "api.github.com") && len(body) > 0 && body[0] == '{' {
+		var envelope struct {
+			Content  string `json:"content"`
+			Encoding string `json:"encoding"`
+		}
+		if err := json.Unmarshal(body, &envelope); err == nil && envelope.Content != "" {
+			enc := envelope.Encoding
+			if enc == "" || enc == "base64" {
+				cleaned := strings.ReplaceAll(envelope.Content, "\n", "")
+				decoded, err := base64.StdEncoding.DecodeString(cleaned)
+				if err != nil {
+					return nil, err
+				}
+				body = decoded
+			}
+		}
+	}
 	var man manifest
-	if err := json.NewDecoder(res.Body).Decode(&man); err != nil {
+	if err := json.Unmarshal(body, &man); err != nil {
 		return nil, err
 	}
 	if man.Version == "" || man.LauncherZip == "" {

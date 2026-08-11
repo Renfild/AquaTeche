@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.40"
+LAUNCHER_VER   = "2.9.41"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -693,7 +693,8 @@ def check_pack_update_available(cfg: dict | None = None) -> dict:
 
 
 BOOTSTRAP_MANIFEST_URLS = [
-    # jsDelivr first — raw.githubusercontent.com often lags behind main
+    # GitHub Contents API (Accept: raw) — not stuck behind raw CDN cache on main
+    "https://api.github.com/repos/Renfild/AquaTeche/contents/docs/bootstrap.json?ref=main",
     "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
     "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
 ]
@@ -714,14 +715,17 @@ def fetch_bootstrap_manifest(timeout: float = 8.0) -> dict | None:
     """Fetch docs/bootstrap.json from mirrors; keep the newest version."""
     import time as _time
 
-    bust = f"?t={int(_time.time())}"
-    headers = {
-        "User-Agent": f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}",
-        "Cache-Control": "no-cache",
-    }
+    ts = int(_time.time())
     best: dict | None = None
     for base in BOOTSTRAP_MANIFEST_URLS:
-        url = base + bust
+        sep = "&" if "?" in base else "?"
+        url = f"{base}{sep}t={ts}"
+        headers = {
+            "User-Agent": f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}",
+            "Cache-Control": "no-cache",
+        }
+        if "api.github.com" in base:
+            headers["Accept"] = "application/vnd.github.raw"
         try:
             data = _fetch_json_hard(url, timeout, headers=headers)
             if not (isinstance(data, dict) and data.get("version") and data.get("launcher_zip")):

@@ -25,6 +25,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import aquatech_launcher as L  # noqa: E402
 
 BOOTSTRAP_URLS = [
+    "https://api.github.com/repos/Renfild/AquaTeche/contents/docs/bootstrap.json?ref=main",
     "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
     "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
 ]
@@ -42,14 +43,15 @@ def _fail(name: str, detail: str = ""):
 
 
 def _get_json(url: str, timeout: float = 20) -> dict:
-    bust = f"{url}{'&' if '?' in url else '?'}t={int(time.time())}"
-    req = urllib.request.Request(
-        bust,
-        headers={
-            "User-Agent": "AquaTechBootstrapTest/1.0",
-            "Cache-Control": "no-cache",
-        },
-    )
+    sep = "&" if "?" in url else "?"
+    bust = f"{url}{sep}t={int(time.time())}"
+    headers = {
+        "User-Agent": "AquaTechBootstrapTest/1.0",
+        "Cache-Control": "no-cache",
+    }
+    if "api.github.com" in url:
+        headers["Accept"] = "application/vnd.github.raw"
+    req = urllib.request.Request(bust, headers=headers)
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8"))
 
