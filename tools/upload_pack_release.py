@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload dist/AquaTech-Client to GitHub Release pack-2.9.2 (draft → upload → publish)."""
+"""Upload dist/AquaTech-Client to GitHub Release pack-2.9.24 (draft -> upload -> publish)."""
 from __future__ import annotations
 
 import json
@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "pack-2.9.8"
+TAG = "pack-2.9.24"
 PACK = ROOT / "dist" / "AquaTech-Client"
 MANIFEST = PACK / "manifest.json"
 WORKERS = 4
@@ -119,7 +119,7 @@ def main() -> None:
 
     print(f"upload done ok={ok} fail={fail}")
     if fail:
-        print("WARNING: some uploads failed — fix and re-run against a NEW tag")
+        print("WARNING: some uploads failed вЂ” fix and re-run against a NEW tag")
         # still publish so partial is usable? better leave draft
         sys.exit(2)
 

@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.41"
+TAG = "client-2.9.42"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -59,9 +59,10 @@ def main() -> None:
         if not f.is_file():
             sys.exit(f"missing {f}")
 
+    ver = TAG.removeprefix("client-")
     zip_path = REL / "AquaTechLauncher.zip"
     man = {
-        "version": "2.9.41",
+        "version": ver,
         "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
@@ -72,7 +73,7 @@ def main() -> None:
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     body = (
-        "## AquaTech Client 2.9.41\n\n"
+        f"## AquaTech Client {ver}\n\n"
         "- Bootstrap reads bootstrap.json via GitHub API (bypasses stale raw/CDN cache)\n"
     )
 
@@ -80,7 +81,7 @@ def main() -> None:
         {
             "tag_name": TAG,
             "target_commitish": "main",
-            "name": "AquaTech Client 2.9.41",
+            "name": f"AquaTech Client {ver}",
             "body": body,
             "draft": True,
             "prerelease": False,

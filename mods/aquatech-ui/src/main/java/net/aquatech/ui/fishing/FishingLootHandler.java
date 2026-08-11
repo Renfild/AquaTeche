@@ -49,16 +49,31 @@ public class FishingLootHandler {
             rodType = FishingRodCompat.resolveRodType(off);
         }
         if (rodStack.isEmpty()) return;
+
+        // Pin rate before SC shrinks bait; after reel put it back and spend 1 of ~10k uses.
+        StarCatcherAttachments.ensureRatePersists(rodStack, false);
+        final ItemStack rodRef = rodStack;
+        if (serverPlayer.getServer() != null) {
+            serverPlayer.getServer().execute(() -> {
+                StarCatcherAttachments.ensureRatePersists(rodRef, false);
+                StarCatcherAttachments.consumeRateCatch(rodRef);
+            });
+        }
+
         if (FishingRodCompat.isFishOnlyRod(rodStack)) {
-            // Keep StarCatcher default fish behavior for fish-only rods.
+            // Keep StarCatcher default fish behavior; still spend rod uses.
+            RodDurability.wearOne(rodStack, serverPlayer);
             return;
         }
         if (rodType == null) return;
 
-        // Cancel vanilla drops; AquaTech rods now use direct reward flow (no custom mini-game).
-        event.setCanceled(true);
+        // SC already ran minigame. Clear SC drops (do NOT cancel — cancel leaves ghost bob/cast).
         event.getDrops().clear();
         awardCatch(serverPlayer, rodType, rodStack, 1.0f, 70);
+        // SC cleans bob after the event; force another pass next tick if attachment stuck.
+        if (serverPlayer.getServer() != null) {
+            serverPlayer.getServer().execute(() -> StarCatcherAttachments.forceReleaseBobber(serverPlayer));
+        }
     }
 
     public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem rodItem, ItemStack rodStack, float lootScale) {
@@ -82,10 +97,7 @@ public class FishingLootHandler {
 
     public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem.RodType type,
                                   ItemStack rodStack, float lootScale, int quality) {
-        // Consume rod durability on catch
-        if (rodStack != null && !rodStack.isEmpty() && rodStack.isDamageableItem()) {
-            rodStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));
-        }
+        RodDurability.wearOne(rodStack, player);
 
         List<ItemStack> customDrops = generateLoot(type, player.getRandom(), rodStack, player);
         customDrops.removeIf(FishingLootHandler::isForbiddenLoot);
@@ -94,13 +106,6 @@ public class FishingLootHandler {
             for (ItemStack drop : customDrops) {
                 int scaled = Math.max(1, Math.round(drop.getCount() * lootScale));
                 drop.setCount(Math.min(drop.getMaxStackSize(), scaled));
-            }
-        }
-        // Perfect reel: small bonus treasure
-        if (quality >= 90 && player.getRandom().nextFloat() < 0.35f) {
-            ItemStack bonus = rareTreasure(player.getRandom());
-            if (!isForbiddenLoot(bonus)) {
-                customDrops.add(bonus);
             }
         }
 
@@ -337,26 +342,28 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.COAL_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.60f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "bamboo_rod" -> { // Tier 1 starter: clay / dirt / cobble / saplings / hevea
+            case "bamboo_rod" -> { // Tier 1 starter: clay / dirt / cobble / saplings / hevea / bamboo
                 // Always one survival starter drop (raft / early game)
                 float rStart = random.nextFloat();
                 ItemStack guaranteed;
-                if (rStart < 0.18f) {
+                if (rStart < 0.16f) {
                     guaranteed = new ItemStack(Items.COBBLESTONE, 2 + random.nextInt(3));
-                } else if (rStart < 0.34f) {
+                } else if (rStart < 0.30f) {
                     guaranteed = new ItemStack(Items.DIRT, 2 + random.nextInt(3));
-                } else if (rStart < 0.48f) {
+                } else if (rStart < 0.42f) {
                     guaranteed = new ItemStack(Items.CLAY_BALL, 2 + random.nextInt(3));
-                } else if (rStart < 0.58f) {
+                } else if (rStart < 0.54f) {
+                    guaranteed = new ItemStack(Items.BAMBOO, 2 + random.nextInt(3));
+                } else if (rStart < 0.62f) {
                     guaranteed = new ItemStack(Items.OAK_SAPLING, 1 + random.nextInt(2));
-                } else if (rStart < 0.68f) {
+                } else if (rStart < 0.70f) {
                     guaranteed = getModItem("industrialupgrade:sapling/rubber_sapling", Items.OAK_SAPLING, 1);
-                } else if (rStart < 0.78f) {
+                } else if (rStart < 0.80f) {
                     guaranteed = new ItemStack(Items.GRAVEL, 2 + random.nextInt(2));
-                } else if (rStart < 0.88f) {
+                } else if (rStart < 0.90f) {
                     guaranteed = new ItemStack(Items.SAND, 2 + random.nextInt(2));
                 } else {
                     guaranteed = new ItemStack(Items.BIRCH_SAPLING, 1);
@@ -366,6 +373,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.50f, new ItemStack(Items.COBBLESTONE, 1 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.DIRT, 1 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.CLAY_BALL, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.BAMBOO, 1 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.35f, new ItemStack(Items.OAK_SAPLING, 1));
                 maybeAdd(pool, random, 0.25f, new ItemStack(Items.BIRCH_SAPLING, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:sapling/rubber_sapling", Items.OAK_SAPLING, 1));
@@ -375,21 +383,20 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.35f, new ItemStack(Items.SAND, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.COPPER_ORE, 1));
                 maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.22f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1));
                 pickFromPool(list, pool, random, 1, 2);
             }
-            case "good_old_rod" -> { // Tier 3: Good Old Rod (Early LV / Iron & Tin)
+            case "good_old_rod" -> { // Tier 3: Good Old Rod (Early LV / Iron & Tin & Spinel)
                 maybeAdd(pool, random, 0.55f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.50f, new ItemStack(Items.REDSTONE_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.LAPIS_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/yttrium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/thallium", Items.IRON_ORE, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "naturalist_rod" -> { // Tier 4: Naturalist Rod (LV Ores & Spinel)
-                maybeAdd(pool, random, 0.55f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1 + random.nextInt(2)));
+            case "naturalist_rod" -> { // Tier 4: Naturalist Rod (LV Ores & Barium)
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
