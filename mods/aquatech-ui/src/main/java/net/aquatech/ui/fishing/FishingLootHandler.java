@@ -220,6 +220,12 @@ public class FishingLootHandler {
                                                int forceRate) {
         String rodId = FishingRodCompat.getRodId(rodStack);
         List<ItemStack> list = (rodId != null) ? rollStarCatcherRodLoot(rodId, random) : baseLoot(type, random);
+        if (rodId != null) {
+            List<ItemStack> customExtra = CustomFishingLootManager.rollCustomLoot(rodId, random);
+            if (!customExtra.isEmpty()) {
+                list.addAll(customExtra);
+            }
+        }
         int rate = forceRate > 0 ? forceRate : readRateMultiplier(rodStack);
         applyRateMultiplier(list, Math.max(1, rate));
 

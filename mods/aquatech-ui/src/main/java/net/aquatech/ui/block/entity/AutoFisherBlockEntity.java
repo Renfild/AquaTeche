@@ -4,6 +4,8 @@ import net.aquatech.ui.capability.SkillEffects;
 import net.aquatech.ui.fishing.AquaTechFishingRodItem;
 import net.aquatech.ui.fishing.FishingLootHandler;
 import net.aquatech.ui.fishing.FishingRodCompat;
+import net.aquatech.ui.fishing.RodDurability;
+import net.aquatech.ui.fishing.StarCatcherAttachments;
 import net.aquatech.ui.inventory.AutoFisherMenu;
 import net.aquatech.ui.item.UpgradeItem;
 import net.aquatech.ui.registry.ModBlockEntities;
@@ -46,9 +48,10 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
     public static final int MAX_RECEIVE = 1000;
     public static final int ENERGY_PER_TICK = 25;
     public static final int MAX_PROGRESS = 100;
-    /** Rod=0, output 1..4 (2×2), upgrade=5. */
-    public static final int UPGRADE_SLOT = 5;
-    public static final int SLOT_COUNT = 6;
+    /** Rod=0, output 1..6 (3×2), upgrade=7. */
+    public static final int OUTPUT_SLOTS = 6;
+    public static final int UPGRADE_SLOT = 7;
+    public static final int SLOT_COUNT = 8;
 
     private final CustomEnergyStorage energyStorage = new CustomEnergyStorage(CAPACITY, MAX_RECEIVE, 0);
     private final LazyOptional<IEnergyStorage> energyOptional = LazyOptional.of(() -> energyStorage);
@@ -64,14 +67,15 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             if (slot == 0) {
                 return FishingRodCompat.isSupportedRod(stack);
             }
-            if (slot >= 1 && slot <= 4) return true; // output
+            if (slot >= 1 && slot <= OUTPUT_SLOTS) return true;
             if (slot == UPGRADE_SLOT) return stack.getItem() instanceof UpgradeItem;
             return false;
         }
     };
     private final LazyOptional<IItemHandler> itemHandlerOptional = LazyOptional.of(() -> itemHandler);
     private final LazyOptional<IItemHandler> inputOptional = LazyOptional.of(() -> new RangedWrapper(itemHandler, 0, 1));
-    private final LazyOptional<IItemHandler> outputOptional = LazyOptional.of(() -> new OutputOnlyWrapper(itemHandler, 1, 5));
+    private final LazyOptional<IItemHandler> outputOptional = LazyOptional.of(
+            () -> new OutputOnlyWrapper(itemHandler, 1, 1 + OUTPUT_SLOTS));
 
     private int progress = 0;
     private int skillCacheTick = -1;
@@ -173,13 +177,8 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasSpaceInOutput() {
-        for (int i = 1; i < UPGRADE_SLOT; i++) {
-            ItemStack stack = itemHandler.getStackInSlot(i);
-            if (stack.isEmpty() || stack.getCount() < stack.getMaxStackSize()) {
-                return true;
-            }
-        }
-        return false;
+        // Always fish: leftover stacks go to adjacent inventory or drop beside the block.
+        return true;
     }
 
     private void doFishOperation(Level level, ItemStack rodStack, Player nearby) {
@@ -198,54 +197,45 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             insertIntoOutput(drop);
         }
 
-        wearRod(rodStack);
-    }
-
-    /** Vanilla damageable rods + StarCatcher (no maxDamage) pack-side wear. */
-    private void wearRod(ItemStack rodStack) {
-        if (rodStack.isEmpty()) return;
-
-        if (rodStack.isDamageableItem()) {
-            rodStack.setDamageValue(rodStack.getDamageValue() + 1);
-            if (rodStack.getDamageValue() >= rodStack.getMaxDamage()) {
-                itemHandler.setStackInSlot(0, ItemStack.EMPTY);
-            } else {
-                itemHandler.setStackInSlot(0, rodStack);
-            }
-            return;
-        }
-
-        CompoundTag tag = rodStack.getOrCreateTag();
-        int wear = tag.getInt("AquaFisherWear") + 1;
-        int max = packMaxWear(rodStack);
-        if (wear >= max) {
+        StarCatcherAttachments.consumeRateCatch(rodStack);
+        if (!RodDurability.wearOne(rodStack, null) || rodStack.isEmpty()) {
             itemHandler.setStackInSlot(0, ItemStack.EMPTY);
-            return;
+        } else {
+            itemHandler.setStackInSlot(0, rodStack);
         }
-        tag.putInt("AquaFisherWear", wear);
-        // Show a fake durability bar via Damage/DamageMax for clients that read NBT
-        tag.putInt("Damage", wear);
-        tag.putInt("aquatech_ui:af_max", max);
-        itemHandler.setStackInSlot(0, rodStack);
-    }
-
-    private static int packMaxWear(ItemStack rod) {
-        String path = FishingRodCompat.getRodId(rod);
-        if (path == null) return 64;
-        return switch (path) {
-            case "bamboo_rod", "good_old_rod", "humble_rod", "sky_rod", "boner_rod" -> 64;
-            case "naturalist_rod", "starcatcher_rod", "slimed_rod" -> 128;
-            case "iceborn_rod", "obsidian_rod", "sharktooth_rod", "azure_crystal_rod" -> 192;
-            default -> 256;
-        };
     }
 
     private void insertIntoOutput(ItemStack stackToInsert) {
+        if (stackToInsert == null || stackToInsert.isEmpty()) return;
         ItemStack copy = stackToInsert.copy();
-        for (int i = 1; i < UPGRADE_SLOT; i++) {
+        for (int i = 1; i <= OUTPUT_SLOTS; i++) {
             copy = itemHandler.insertItem(i, copy, false);
-            if (copy.isEmpty()) break;
+            if (copy.isEmpty()) return;
         }
+        copy = pushToNeighbors(copy);
+        if (!copy.isEmpty() && level != null && !level.isClientSide) {
+            Containers.dropItemStack(level,
+                    worldPosition.getX() + 0.5,
+                    worldPosition.getY() + 1.0,
+                    worldPosition.getZ() + 0.5,
+                    copy);
+        }
+    }
+
+    private ItemStack pushToNeighbors(ItemStack stack) {
+        if (level == null || stack.isEmpty()) return stack;
+        ItemStack remaining = stack;
+        for (Direction dir : Direction.values()) {
+            BlockEntity be = level.getBlockEntity(worldPosition.relative(dir));
+            if (be == null) continue;
+            IItemHandler handler = be.getCapability(ForgeCapabilities.ITEM_HANDLER, dir.getOpposite()).orElse(null);
+            if (handler == null) continue;
+            for (int slot = 0; slot < handler.getSlots() && !remaining.isEmpty(); slot++) {
+                remaining = handler.insertItem(slot, remaining, false);
+            }
+            if (remaining.isEmpty()) return ItemStack.EMPTY;
+        }
+        return remaining;
     }
 
     public void drops() {

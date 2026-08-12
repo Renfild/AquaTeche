@@ -55,7 +55,10 @@ public class AquaTechUI {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(NetworkHandler::register);
+        event.enqueueWork(() -> {
+            NetworkHandler.register();
+            net.aquatech.ui.fishing.RodDurabilityApplier.apply();
+        });
     }
 
     @SubscribeEvent

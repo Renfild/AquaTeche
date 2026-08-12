@@ -24,6 +24,8 @@ const (
 
 // Prefer API + jsDelivr. raw.githubusercontent.com/.../main often lags tip for a long time.
 var manifestURLs = []string{
+	"https://aquatech.santcrail.workers.dev/bootstrap.json",
+	"https://aquateche.store/bootstrap.json",
 	"https://api.github.com/repos/Renfild/AquaTeche/contents/docs/bootstrap.json?ref=main",
 	"https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
 	"https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",

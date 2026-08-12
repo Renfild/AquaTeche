@@ -2,7 +2,6 @@ package net.aquatech.ui.inventory;
 
 import net.aquatech.ui.block.entity.AutoFisherBlockEntity;
 import net.aquatech.ui.fishing.FishingRodCompat;
-import net.aquatech.ui.item.RateModItem;
 import net.aquatech.ui.item.UpgradeItem;
 import net.aquatech.ui.registry.ModBlocks;
 import net.aquatech.ui.registry.ModMenuTypes;
@@ -20,15 +19,21 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
 /**
- * Slot layout:
- * <pre>
- *   rod      (14, 33)
- *   rate     (14, 55)  — RateModItem
- *   upgrade  (38, 55)  — speed/efficiency/double
- *   out 2×2  (120,24)/(140,24)/(120,44)/(140,44)
- * </pre>
+ * auto_fisher.png wells (outer TL → slot +1,+1):
+ * rod (15,28), upgrade (15,47), out 3×2 from (100,29) pitch 20×17.
+ * Arrow progress outline TL (79,40), BR (93,50).
  */
 public class AutoFisherMenu extends AbstractContainerMenu {
+
+    public static final int OUT_ORIGIN_X = 101;
+    public static final int OUT_ORIGIN_Y = 30;
+    public static final int OUT_CELL_W = 20;
+    public static final int OUT_CELL_H = 17;
+    public static final int OUT_COLS = 3;
+    public static final int OUT_ROWS = 2;
+
+    /** Full width of the atlas arrow fill strip. */
+    public static final int PROGRESS_WIDTH = 22;
 
     public final AutoFisherBlockEntity blockEntity;
     private final ContainerData data;
@@ -44,28 +49,28 @@ public class AutoFisherMenu extends AbstractContainerMenu {
         this.data = data;
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 14, 33) {
+            this.addSlot(new SlotItemHandler(handler, 0, 16, 29) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     return FishingRodCompat.isSupportedRod(stack);
                 }
             });
 
-            int[][] outs = {
-                    {120, 24}, {140, 24},
-                    {120, 44}, {140, 44}
-            };
-            for (int i = 0; i < outs.length; i++) {
-                final int slotIndex = 1 + i;
-                this.addSlot(new SlotItemHandler(handler, slotIndex, outs[i][0], outs[i][1]) {
-                    @Override
-                    public boolean mayPlace(ItemStack stack) {
-                        return false;
-                    }
-                });
+            for (int row = 0; row < OUT_ROWS; row++) {
+                for (int col = 0; col < OUT_COLS; col++) {
+                    int slotIndex = 1 + row * OUT_COLS + col;
+                    int x = OUT_ORIGIN_X + col * OUT_CELL_W;
+                    int y = OUT_ORIGIN_Y + row * OUT_CELL_H;
+                    this.addSlot(new SlotItemHandler(handler, slotIndex, x, y) {
+                        @Override
+                        public boolean mayPlace(ItemStack stack) {
+                            return false;
+                        }
+                    });
+                }
             }
 
-            this.addSlot(new SlotItemHandler(handler, AutoFisherBlockEntity.UPGRADE_SLOT, 38, 55) {
+            this.addSlot(new SlotItemHandler(handler, AutoFisherBlockEntity.UPGRADE_SLOT, 16, 48) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     return stack.getItem() instanceof UpgradeItem;
@@ -85,7 +90,7 @@ public class AutoFisherMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(4);
         int maxProgress = this.data.get(5);
-        return maxProgress != 0 && progress != 0 ? progress * 18 / maxProgress : 0;
+        return maxProgress != 0 && progress != 0 ? progress * PROGRESS_WIDTH / maxProgress : 0;
     }
 
     public int getScaledEnergy() {

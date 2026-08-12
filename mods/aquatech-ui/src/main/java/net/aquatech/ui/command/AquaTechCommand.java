@@ -5,6 +5,10 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.aquatech.ui.capability.AquaSkillCapability;
+import net.aquatech.ui.fishing.AquaTechFishingRodItem;
+import net.aquatech.ui.fishing.CustomFishingLootManager;
+import net.aquatech.ui.fishing.FishingLootHandler;
+import net.aquatech.ui.fishing.FishingRodCompat;
 import net.aquatech.ui.horizon.HorizonRoute;
 import net.aquatech.ui.horizon.StormEvent;
 import net.aquatech.ui.network.NetworkHandler;
@@ -15,13 +19,16 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 
+import java.util.List;
+
 /**
- * /aquatech — quest bridge + Horizon Route player commands.
+ * /aquatech & /rod — quest bridge, Horizon Route & fishing loot editor commands.
  */
 @Mod.EventBusSubscriber(modid = net.aquatech.ui.AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class AquaTechCommand {
@@ -35,7 +42,28 @@ public final class AquaTechCommand {
     }
 
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        var rodNode = Commands.literal("rod")
+                .executes(AquaTechCommand::rodInfo)
+                .then(Commands.literal("info").executes(AquaTechCommand::rodInfo))
+                .then(Commands.literal("add")
+                        .requires(s -> s.hasPermission(2))
+                        .then(Commands.argument("chance", StringArgumentType.word())
+                                .executes(AquaTechCommand::rodAdd)
+                                .then(Commands.argument("min", IntegerArgumentType.integer(1))
+                                        .executes(AquaTechCommand::rodAdd)
+                                        .then(Commands.argument("max", IntegerArgumentType.integer(1))
+                                                .executes(AquaTechCommand::rodAdd)))))
+                .then(Commands.literal("remove")
+                        .requires(s -> s.hasPermission(2))
+                        .executes(AquaTechCommand::rodRemove))
+                .then(Commands.literal("clear")
+                        .requires(s -> s.hasPermission(2))
+                        .executes(AquaTechCommand::rodClear));
+
+        dispatcher.register(rodNode);
+
         dispatcher.register(Commands.literal("aquatech")
+                .then(rodNode)
                 .then(Commands.literal("grantxp")
                         .requires(s -> s.hasPermission(2))
                         .then(Commands.argument("player", EntityArgument.player())
@@ -87,6 +115,156 @@ public final class AquaTechCommand {
         );
     }
 
+    private static int rodInfo(CommandContext<CommandSourceStack> ctx) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) {
+            ctx.getSource().sendFailure(Component.literal("Только для игроков"));
+            return 0;
+        }
+
+        ItemStack main = player.getMainHandItem();
+        ItemStack off = player.getOffhandItem();
+        ItemStack rodStack = ItemStack.EMPTY;
+        if (FishingRodCompat.isSupportedRod(main)) rodStack = main;
+        else if (FishingRodCompat.isSupportedRod(off)) rodStack = off;
+
+        if (rodStack.isEmpty()) {
+            player.displayClientMessage(Component.literal("§c[AquaTech] Возьми удочку в руку, чтобы посмотреть её улов."), false);
+            return 0;
+        }
+
+        String rodId = FishingRodCompat.getRodId(rodStack);
+        String rodName = rodStack.getHoverName().getString();
+        AquaTechFishingRodItem.RodType type = FishingRodCompat.resolveRodType(rodStack);
+
+        player.displayClientMessage(Component.literal("§b=== [AquaTech] Вылов удочки: §e" + rodName + " §8(" + rodId + ") ==="), false);
+        if (type != null) {
+            player.displayClientMessage(Component.literal("§7Тир: §f" + (type.ordinal() + 1) + " §8| §7Множитель: §f×" + FishingLootHandler.readRateMultiplier(rodStack)), false);
+        }
+
+        List<CustomFishingLootManager.CustomLootEntry> customEntries = CustomFishingLootManager.getEntries(rodId);
+        player.displayClientMessage(Component.literal("§e✦ Пользовательские добавления улова (/rod add):"), false);
+        if (customEntries.isEmpty()) {
+            player.displayClientMessage(Component.literal("§8  (нет пользовательских добавлений)"), false);
+        } else {
+            for (CustomFishingLootManager.CustomLootEntry e : customEntries) {
+                int pct = Math.round(e.chance * 100f);
+                String range = (e.min == e.max) ? (e.min + " шт.") : (e.min + "-" + e.max + " шт.");
+                player.displayClientMessage(Component.literal("§a  • " + e.itemId + " §7— §e" + pct + "% §7(" + range + ")"), false);
+            }
+        }
+
+        player.displayClientMessage(Component.literal("§7Команды настройки: §f/rod add <шанс%> [мин] [макс] §7| §f/rod remove §7| §f/rod clear"), false);
+        return 1;
+    }
+
+    private static int rodAdd(CommandContext<CommandSourceStack> ctx) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) {
+            ctx.getSource().sendFailure(Component.literal("Только для игроков"));
+            return 0;
+        }
+
+        ItemStack main = player.getMainHandItem();
+        ItemStack off = player.getOffhandItem();
+        ItemStack rodStack = ItemStack.EMPTY;
+        ItemStack targetStack = ItemStack.EMPTY;
+
+        if (FishingRodCompat.isSupportedRod(main)) {
+            rodStack = main;
+            targetStack = off;
+        } else if (FishingRodCompat.isSupportedRod(off)) {
+            rodStack = off;
+            targetStack = main;
+        }
+
+        if (rodStack.isEmpty()) {
+            player.displayClientMessage(Component.literal("§c[AquaTech] Возьми удочку в одну руку!"), false);
+            return 0;
+        }
+
+        if (targetStack.isEmpty()) {
+            player.displayClientMessage(Component.literal("§c[AquaTech] Возьми предмет/блок для вылова во вторую руку!"), false);
+            player.displayClientMessage(Component.literal("§7Пример: Удочка в левой руке, Алмазный блок в правой руке → §f/rod add 50 1 3"), false);
+            return 0;
+        }
+
+        String rawChance = StringArgumentType.getString(ctx, "chance");
+        float chance = parseChance(rawChance);
+        if (chance <= 0f) {
+            player.displayClientMessage(Component.literal("§cНекорректный шанс: '" + rawChance + "'. Используй например 45 или 45%"), false);
+            return 0;
+        }
+
+        int min = 1;
+        int max = 1;
+        try { min = IntegerArgumentType.getInteger(ctx, "min"); } catch (Exception ignored) {}
+        try { max = IntegerArgumentType.getInteger(ctx, "max"); } catch (Exception ignored) {}
+        if (max < min) max = min;
+
+        String rodId = FishingRodCompat.getRodId(rodStack);
+        boolean ok = CustomFishingLootManager.addCustomLoot(rodId, targetStack, chance, min, max);
+        if (ok) {
+            String itemName = targetStack.getHoverName().getString();
+            int pct = Math.round(chance * 100f);
+            String range = (min == max) ? (min + " шт.") : (min + "-" + max + " шт.");
+            player.displayClientMessage(Component.literal(
+                    "§a✓ [AquaTech] Удочка §e" + rodStack.getHoverName().getString()
+                            + " §aтеперь ловит §f" + itemName + " §7(шанс §e" + pct + "%§7, §f" + range + ")!"), false);
+            return 1;
+        } else {
+            player.displayClientMessage(Component.literal("§cНе удалось добавить предмет в улов."), false);
+            return 0;
+        }
+    }
+
+    private static int rodRemove(CommandContext<CommandSourceStack> ctx) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) return 0;
+        ItemStack main = player.getMainHandItem();
+        ItemStack off = player.getOffhandItem();
+        ItemStack rodStack = FishingRodCompat.isSupportedRod(main) ? main : (FishingRodCompat.isSupportedRod(off) ? off : ItemStack.EMPTY);
+        ItemStack targetStack = FishingRodCompat.isSupportedRod(main) ? off : main;
+
+        if (rodStack.isEmpty() || targetStack.isEmpty()) {
+            player.displayClientMessage(Component.literal("§cВозьми удочку в одну руку, а убираемый предмет — во вторую руку."), false);
+            return 0;
+        }
+
+        String rodId = FishingRodCompat.getRodId(rodStack);
+        boolean removed = CustomFishingLootManager.removeCustomLoot(rodId, targetStack);
+        if (removed) {
+            player.displayClientMessage(Component.literal("§a✓ Предмет " + targetStack.getHoverName().getString() + " удален из улова удочки."), false);
+        } else {
+            player.displayClientMessage(Component.literal("§cПредмет " + targetStack.getHoverName().getString() + " не найден в настройках удочки."), false);
+        }
+        return 1;
+    }
+
+    private static int rodClear(CommandContext<CommandSourceStack> ctx) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) return 0;
+        ItemStack main = player.getMainHandItem();
+        ItemStack off = player.getOffhandItem();
+        ItemStack rodStack = FishingRodCompat.isSupportedRod(main) ? main : (FishingRodCompat.isSupportedRod(off) ? off : ItemStack.EMPTY);
+        if (rodStack.isEmpty()) {
+            player.displayClientMessage(Component.literal("§cВозьми удочку в руку."), false);
+            return 0;
+        }
+        String rodId = FishingRodCompat.getRodId(rodStack);
+        CustomFishingLootManager.clearCustomLoot(rodId);
+        player.displayClientMessage(Component.literal("§a✓ Все пользовательские настройки улова удочки очищены."), false);
+        return 1;
+    }
+
+    private static float parseChance(String raw) {
+        if (raw == null || raw.isBlank()) return 0f;
+        String s = raw.trim().replace("%", "");
+        try {
+            float val = Float.parseFloat(s);
+            if (val > 1.0f) val /= 100.0f;
+            return Math.max(0.001f, Math.min(1.0f, val));
+        } catch (Exception e) {
+            return 0f;
+        }
+    }
+
     private static void sync(ServerPlayer player, AquaSkillCapability cap) {
         NetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new S2CSyncSkillsPacket(cap));
     }
@@ -106,86 +284,6 @@ public final class AquaTechCommand {
                         leveledUp ? "§b+" + amount + " Aqua XP §7(новый уровень!)" : "§b+" + amount + " Aqua XP"), true);
             });
             ctx.getSource().sendSuccess(() -> Component.literal("Выдано " + amount + " Aqua XP → " + target.getGameProfile().getName()), true);
-            return 1;
-        } catch (Exception e) {
-            ctx.getSource().sendFailure(Component.literal("Ошибка: " + e.getMessage()));
-            return 0;
-        }
-    }
-
-    private static int setTier(CommandContext<CommandSourceStack> ctx) {
-        try {
-            ServerPlayer target = EntityArgument.getPlayer(ctx, "player");
-            int tier = IntegerArgumentType.getInteger(ctx, "tier");
-            target.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
-                int old = cap.getHorizonTier();
-                cap.forceHorizonTier(tier);
-                sync(target, cap);
-                applyLuckPerms(target, tier);
-                target.displayClientMessage(Component.literal(
-                        "§bГоризонт: §f" + HorizonRoute.tierName(old) + " §8→ §a" + HorizonRoute.tierName(tier)), false);
-            });
-            ctx.getSource().sendSuccess(() -> Component.literal("Tier " + tier + " → " + target.getGameProfile().getName()), true);
-            return 1;
-        } catch (Exception e) {
-            ctx.getSource().sendFailure(Component.literal("Ошибка: " + e.getMessage()));
-            return 0;
-        }
-    }
-
-    /** Promote if higher; used by FTB command rewards. */
-    public static void promoteTier(ServerPlayer player, int tier) {
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
-            if (cap.setHorizonTier(tier)) {
-                sync(player, cap);
-                applyLuckPerms(player, tier);
-                player.displayClientMessage(Component.literal(
-                        "§6✦ Горизонт " + tier + ": §e" + HorizonRoute.tierName(tier) + "§6!"), false);
-                player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-                        net.minecraft.sounds.SoundEvents.UI_TOAST_CHALLENGE_COMPLETE,
-                        net.minecraft.sounds.SoundSource.PLAYERS, 0.8F, 1.0F);
-            }
-        });
-    }
-
-    /**
-     * Clears sticky fleet ranks then applies the target Horizon group.
-     * H0 → remove fleet groups only (stay on default).
-     */
-    private static void applyLuckPerms(ServerPlayer player, int tier) {
-        MinecraftServer server = player.getServer();
-        if (server == null) return;
-        String name = player.getGameProfile().getName();
-        var src = server.createCommandSourceStack();
-        for (String fleet : HorizonRoute.FLEET_LP_GROUPS) {
-            server.getCommands().performPrefixedCommand(src,
-                    "lp user " + name + " parent remove " + fleet);
-        }
-        String group = HorizonRoute.lpGroup(tier);
-        if ("default".equals(group)) {
-            server.getCommands().performPrefixedCommand(src,
-                    "lp user " + name + " parent switchprimarygroup default");
-            return;
-        }
-        server.getCommands().performPrefixedCommand(src,
-                "lp user " + name + " parent add " + group);
-        server.getCommands().performPrefixedCommand(src,
-                "lp user " + name + " parent switchprimarygroup " + group);
-    }
-
-    private static int promoteUnified(CommandContext<CommandSourceStack> ctx) {
-        try {
-            ServerPlayer target = EntityArgument.getPlayer(ctx, "player");
-            String rawRank = StringArgumentType.getString(ctx, "targetRank");
-            int tier = parseTier(rawRank);
-            if (tier < 0) {
-                ctx.getSource().sendFailure(Component.literal(
-                        "Неизвестный ранг: '" + rawRank + "'. Используй: матрос, шкипер, капитан, адмирал, легенда (или 1-5)"));
-                return 0;
-            }
-            promoteTier(target, tier);
-            ctx.getSource().sendSuccess(() -> Component.literal(
-                    "Promote H" + tier + " (" + HorizonRoute.tierName(tier) + ") → " + target.getGameProfile().getName()), true);
             return 1;
         } catch (Exception e) {
             ctx.getSource().sendFailure(Component.literal("Ошибка: " + e.getMessage()));
@@ -220,10 +318,61 @@ public final class AquaTechCommand {
         }
     }
 
-    /**
-     * Converts a rank name string (in any case, Russian or English) to a tier int (0-5).
-     * Returns -1 if unrecognized.
-     */
+    private static int promoteUnified(CommandContext<CommandSourceStack> ctx) {
+        try {
+            ServerPlayer target = EntityArgument.getPlayer(ctx, "player");
+            String rawRank = StringArgumentType.getString(ctx, "targetRank");
+            int tier = parseTier(rawRank);
+            if (tier < 0) {
+                ctx.getSource().sendFailure(Component.literal(
+                        "Неизвестный ранг: '" + rawRank + "'. Используй: матрос, шкипер, капитан, адмирал, легенда (или 1-5)"));
+                return 0;
+            }
+            promoteTier(target, tier);
+            ctx.getSource().sendSuccess(() -> Component.literal(
+                    "Promote H" + tier + " (" + HorizonRoute.tierName(tier) + ") → " + target.getGameProfile().getName()), true);
+            return 1;
+        } catch (Exception e) {
+            ctx.getSource().sendFailure(Component.literal("Ошибка: " + e.getMessage()));
+            return 0;
+        }
+    }
+
+    public static void promoteTier(ServerPlayer player, int tier) {
+        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+            if (cap.setHorizonTier(tier)) {
+                sync(player, cap);
+                applyLuckPerms(player, tier);
+                player.displayClientMessage(Component.literal(
+                        "§6✦ Горизонт " + tier + ": §e" + HorizonRoute.tierName(tier) + "§6!"), false);
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+                        net.minecraft.sounds.SoundEvents.UI_TOAST_CHALLENGE_COMPLETE,
+                        net.minecraft.sounds.SoundSource.PLAYERS, 0.8F, 1.0F);
+            }
+        });
+    }
+
+    private static void applyLuckPerms(ServerPlayer player, int tier) {
+        MinecraftServer server = player.getServer();
+        if (server == null) return;
+        String name = player.getGameProfile().getName();
+        var src = server.createCommandSourceStack();
+        for (String fleet : HorizonRoute.FLEET_LP_GROUPS) {
+            server.getCommands().performPrefixedCommand(src,
+                    "lp user " + name + " parent remove " + fleet);
+        }
+        String group = HorizonRoute.lpGroup(tier);
+        if ("default".equals(group)) {
+            server.getCommands().performPrefixedCommand(src,
+                    "lp user " + name + " parent switchprimarygroup default");
+            return;
+        }
+        server.getCommands().performPrefixedCommand(src,
+                "lp user " + name + " parent add " + group);
+        server.getCommands().performPrefixedCommand(src,
+                "lp user " + name + " parent switchprimarygroup " + group);
+    }
+
     private static int parseTier(String input) {
         if (input == null || input.isBlank()) return -1;
         String s = input.trim().toLowerCase(java.util.Locale.ROOT);
