@@ -3,10 +3,14 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
+import subprocess
+import sys
 import threading
-import types
+import time
 import urllib.error
 import urllib.request
+import zipfile
 from collections import deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -115,9 +119,18 @@ class LauncherEngine:
             "hint": "",
         }
         self._portal_base = PORTAL_DEFAULT_BASE
+        self._sync_version_txt()
         self.start_pack_check()
         self.start_launcher_check()
         self._revalidate_portal_session()
+
+    def _sync_version_txt(self) -> None:
+        try:
+            root = Path(os.getenv("LOCALAPPDATA", "")) / "AquaTech"
+            if root.is_dir():
+                (root / "version.txt").write_text(f"{L.LAUNCHER_VER}\n", encoding="utf-8")
+        except Exception:
+            pass
 
     def _portal_headers(self) -> dict[str, str]:
         return {
@@ -309,6 +322,102 @@ class LauncherEngine:
                 )
 
         threading.Thread(target=work, daemon=True, name="aquatech-launcher-check").start()
+
+    def start_self_update(self) -> tuple[bool, str]:
+        with self._lock:
+            if self._running:
+                return False, "Уже идет другой процесс."
+            self._running = True
+            self.state = "busy"
+            self.status_text = "Скачивание обновления лаунчера…"
+            self.progress = 5.0
+
+        def work():
+            try:
+                self.log("Проверяем доступность обновления лаунчера…")
+                man = L.fetch_bootstrap_manifest()
+                if not man:
+                    raise RuntimeError("Не удалось получить манифест обновлений")
+
+                remote_ver = str(man.get("version") or "").strip()
+                zip_url = str(man.get("launcher_zip") or "").strip()
+                if not zip_url:
+                    raise RuntimeError("Ссылка на архив лаунчера не найдена")
+
+                self.log(f"Скачиваем лаунчер {remote_ver}…")
+                root = Path(os.getenv("LOCALAPPDATA", "")) / "AquaTech"
+                root.mkdir(parents=True, exist_ok=True)
+                part_zip = root / "AquaTechLauncher.zip.part"
+                final_zip = root / "AquaTechLauncher.zip"
+
+                def on_progress(p: float):
+                    with self._lock:
+                        self.progress = 10.0 + p * 70.0
+                        self.status_text = f"Скачиваем лаунчер… {int(p * 100)}%"
+
+                L._http_download(zip_url, part_zip, progress_cb=on_progress)
+                if final_zip.is_file():
+                    final_zip.unlink(missing_ok=True)
+                part_zip.rename(final_zip)
+
+                self.log("Распаковываем обновление…")
+                with self._lock:
+                    self.progress = 85.0
+                    self.status_text = "Распаковываем обновление…"
+
+                stage = root / "app_new"
+                if stage.exists():
+                    shutil.rmtree(stage, ignore_errors=True)
+
+                with zipfile.ZipFile(final_zip, "r") as z:
+                    z.extractall(stage)
+
+                entries = [p for p in stage.iterdir() if p.is_dir()]
+                if len(entries) == 1:
+                    stage_src = entries[0]
+                else:
+                    stage_src = stage
+
+                (root / "version.txt").write_text(f"{remote_ver}\n", encoding="utf-8")
+
+                with self._lock:
+                    self.progress = 95.0
+                    self.status_text = "Перезапуск лаунчера…"
+                self.log("Обновление готово. Запускаем установщик и перезапуск…")
+
+                ps_script = (
+                    "Start-Sleep -Milliseconds 800\n"
+                    f"$root = '{root.as_posix()}'\n"
+                    "$appDir = Join-Path $root 'app'\n"
+                    f"$stageSrc = '{stage_src.as_posix()}'\n"
+                    "Remove-Item $appDir -Recurse -Force -ErrorAction SilentlyContinue\n"
+                    "Move-Item $stageSrc $appDir -Force -ErrorAction SilentlyContinue\n"
+                    "Remove-Item (Join-Path $root 'app_new') -Recurse -Force -ErrorAction SilentlyContinue\n"
+                    "Remove-Item (Join-Path $root 'AquaTechLauncher.zip') -Force -ErrorAction SilentlyContinue\n"
+                    "$exe = Join-Path $root 'AquaTech.exe'\n"
+                    "if (!(Test-Path $exe)) { $exe = Join-Path $appDir 'AquaTechLauncher.exe' }\n"
+                    "Start-Process $exe\n"
+                )
+
+                script_path = root / "update_and_restart.ps1"
+                script_path.write_text(ps_script, encoding="utf-8")
+
+                cmd = f'powershell -NoProfile -ExecutionPolicy Bypass -File "{script_path.resolve()}"'
+                creationflags = subprocess.CREATE_NEW_PROCESS_GROUP | 0x00000008 if sys.platform == "win32" else 0
+                subprocess.Popen(cmd, shell=True, creationflags=creationflags)
+
+                time.sleep(0.5)
+                os._exit(0)
+
+            except Exception as ex:
+                self.log(f" Ошибка автообновления: {ex}", "err")
+                with self._lock:
+                    self.state = "error"
+                    self.status_text = f"Ошибка автообновления: {ex}"
+                    self._running = False
+
+        threading.Thread(target=work, daemon=True, name="aquatech-self-update").start()
+        return True, "Автообновление запущено…"
 
     def portal_login(self, nick: str, password: str) -> dict:
         payload = {"nick": str(nick).strip(), "password": str(password)}
@@ -587,6 +696,9 @@ class ApiHandler(BaseHTTPRequestHandler):
                 if body:
                     ENGINE.save_cfg(body)
                 ok, msg = ENGINE.start_update()
+                return self._json(200 if ok else 400, {"ok": ok, "message": msg})
+            if path == "/api/self_update":
+                ok, msg = ENGINE.start_self_update()
                 return self._json(200 if ok else 400, {"ok": ok, "message": msg})
             if path == "/api/portal_login":
                 nick = (body or {}).get("nick") if body else None

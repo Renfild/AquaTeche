@@ -98,9 +98,9 @@
     if (launcher?.update_available && launcher.remote) {
       el.classList.remove("hidden");
       $("update-banner-text").textContent =
-        `Доступен лаунчер ${launcher.remote} (сейчас ${launcher.local || "?"}). Закрой и запусти AquaTech.exe`;
-      $("btn-update-banner").textContent = "Как обновить";
-      $("btn-update").classList.remove("highlight");
+        `Доступен лаунчер ${launcher.remote} (сейчас ${launcher.local || "?"}).`;
+      $("btn-update-banner").textContent = "Обновить лаунчер";
+      $("btn-update").classList.add("highlight");
       return;
     }
     if (!pack) return;
@@ -246,14 +246,16 @@
     }
   });
 
-  $("btn-update-banner")?.addEventListener("click", () => {
+  $("btn-update-banner")?.addEventListener("click", async () => {
     if (window.__launcherUpdate?.update_available) {
-      alert(
-        "Чтобы обновить лаунчер:\n" +
-          "1. Закрой это окно\n" +
-          "2. Запусти AquaTech.exe (с сайта или из загрузок)\n" +
-          "Он сам скачает новую версию."
-      );
+      showPage("log");
+      setBusy(true, "Автообновление лаунчера…");
+      const r = await fetch("/api/self_update", { method: "POST" });
+      const j = await r.json();
+      if (!j.ok) {
+        setBusy(false);
+        alert(j.message || "Ошибка автообновления");
+      }
       return;
     }
     $("btn-update").click();

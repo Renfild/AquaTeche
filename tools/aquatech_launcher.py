@@ -12,7 +12,7 @@ from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.41"
+LAUNCHER_VER   = "2.9.43"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -755,7 +755,7 @@ def check_launcher_update_available() -> dict:
         "remote": remote,
         "update_available": needs_launcher_update(LAUNCHER_VER, remote or ""),
         "launcher_zip": zip_url,
-        "hint": "Закрой лаунчер и запусти AquaTech.exe — он подтянет новую версию.",
+        "hint": "Нажми «Обновить лаунчер» для автообновления.",
     }
 
 
@@ -1077,24 +1077,30 @@ def find_forge_json(game_dir: Path):
     return None, None
 
 
-def _http_download(url: str, dest: Path, timeout: int = 90) -> None:
+def _http_download(url: str, dest: Path, timeout: int = 90, progress_cb=None) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
     req = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "Mozilla/5.0 AquaTechLauncher/2.7",
+            "User-Agent": f"Mozilla/5.0 AquaTechLauncher/{LAUNCHER_VER}",
             "Accept": "*/*",
             "Connection": "close",
         },
     )
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp, open(tmp, "wb") as f:
+            total_hdr = resp.headers.get("Content-Length")
+            total_bytes = int(total_hdr) if total_hdr and total_hdr.isdigit() else 0
+            downloaded = 0
             while True:
                 chunk = resp.read(262144)
                 if not chunk:
                     break
                 f.write(chunk)
+                downloaded += len(chunk)
+                if progress_cb and total_bytes > 0:
+                    progress_cb(downloaded / total_bytes)
         tmp.replace(dest)
     except Exception:
         tmp.unlink(missing_ok=True)
