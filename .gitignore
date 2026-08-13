@@ -14,7 +14,7 @@ mods/casesmod/build/
 mods/casesmod/.gradle/
 
 # Runtime / exports
-client/
+/client/
 dist/
 *.zip
 *.rar
@@ -44,8 +44,8 @@ img/
 art_source/
 extracted_elements_png/
 balance-minigame-icons/
-casesmod-fixed-source_*/
-aquatech-ui/
+/casesmod-fixed-source_*/
+/aquatech-ui/
 modlist/
 scripts_crafttweaker_archived/
 scripts/scratch/

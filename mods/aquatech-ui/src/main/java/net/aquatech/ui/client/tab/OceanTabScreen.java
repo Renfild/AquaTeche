@@ -1,6 +1,7 @@
 package net.aquatech.ui.client.tab;
 
 import net.aquatech.ui.client.ClientUiState;
+import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.common.PlayerProfile;
 import net.aquatech.ui.common.ServerStats;
@@ -37,9 +38,9 @@ public class OceanTabScreen extends Screen {
         UiDraw.panel(graphics, panelX, panelY, panelW, panelH, UiDraw.COLOR_PANEL);
 
         String header = "На сервере " + stats.online() + " игроков";
-        graphics.drawCenteredString(this.font, header, this.width / 2, panelY + 12, UiDraw.COLOR_ACCENT);
+        AquaFontRenderer.drawCenteredHeader(graphics, this.font, header, this.width / 2, panelY + 12, UiDraw.COLOR_ACCENT);
         String sub = "в том числе " + stats.staffOnline() + " участника команды";
-        graphics.drawCenteredString(this.font, sub, this.width / 2, panelY + 26, UiDraw.COLOR_MUTED);
+        AquaFontRenderer.drawCentered(graphics, this.font, sub, this.width / 2, panelY + 26, UiDraw.COLOR_MUTED);
 
         int listTop = panelY + 44;
         int listBottom = panelY + panelH - 12;
@@ -78,10 +79,10 @@ public class OceanTabScreen extends Screen {
     private void renderEntry(GuiGraphics graphics, PlayerProfile profile, int x, int y, int width) {
         UiDraw.drawPlayerHead(graphics, profile.uuid(), profile.name(), x, y + 4, 28);
         int textX = x + 34;
-        graphics.drawString(this.font, profile.name(), textX, y + 6, UiDraw.COLOR_TEXT, false);
+        AquaFontRenderer.draw(graphics, this.font, profile.name(), textX, y + 6, UiDraw.COLOR_TEXT);
         UiDraw.badge(graphics, textX, y + 20, profile.rankDisplay(), UiDraw.rankColor(profile.rankId()));
         String ping = profile.ping() + "ms";
-        graphics.drawString(this.font, ping, x + width - this.font.width(ping), y + 8, 0xFF55FF55, false);
+        AquaFontRenderer.draw(graphics, this.font, ping, x + width - AquaFontRenderer.width(this.font, ping), y + 8, 0xFF55FF55);
         if (profile.staff()) {
             graphics.drawString(this.font, "⚑", x + width - 12, y + 22, UiDraw.COLOR_ACCENT, false);
         }

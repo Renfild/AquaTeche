@@ -10,6 +10,7 @@ import { onRequestGet as playersGet } from "../functions/api/players.js";
 import { onRequestGet as catalogGet } from "../functions/api/catalog.js";
 import { onRequestGet as serverStatusGet } from "../functions/api/server-status.js";
 import { onRequestPost as launcherEnsureNickPost } from "../functions/api/launcher/ensure-nick.js";
+import { onRequestPost as launcherVerifyTokenPost } from "../functions/api/launcher/verify-token.js";
 import {
   onRequestGet as launcherSessionGet,
   onRequestPost as launcherSessionPost,
@@ -44,6 +45,7 @@ import {
 } from "../functions/api/admin/news/[id].js";
 import { onRequestGet as newsGet } from "../functions/api/news.js";
 import { onRequestGet as siteGet } from "../functions/api/site.js";
+import { sessionCookie } from "../functions/_lib/auth.js";
 
 function ctx(request, env, params = {}) {
   return { request, env, params };
@@ -70,6 +72,7 @@ async function handleApi(request, env) {
   if (path === "/api/site" && method === "GET") return siteGet(ctx(request, env));
   // ensure-nick intentionally returns 410 (open signup footgun)
   if (path === "/api/launcher/ensure-nick" && method === "POST") return launcherEnsureNickPost(ctx(request, env));
+  if (path === "/api/launcher/verify-token" && method === "POST") return launcherVerifyTokenPost(ctx(request, env));
   if (path === "/api/launcher/session") {
     if (method === "GET") return launcherSessionGet(ctx(request, env));
     if (method === "POST") return launcherSessionPost(ctx(request, env));
@@ -126,6 +129,20 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
       return handleApi(request, env);
+    }
+    if (url.pathname.startsWith("/embed/") && env.ASSETS) {
+      const sid = String(url.searchParams.get("session") || "").trim();
+      if (sid.length >= 8) {
+        url.searchParams.delete("session");
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: url.pathname + url.search,
+            "set-cookie": sessionCookie(sid),
+            "cache-control": "no-store",
+          },
+        });
+      }
     }
     if (env.ASSETS) return env.ASSETS.fetch(request);
     return new Response("AquaTech worker: missing ASSETS binding", { status: 500 });

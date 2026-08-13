@@ -1,6 +1,7 @@
 package net.aquatech.ui.client.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -92,9 +93,9 @@ public final class UiDraw {
 
     public static void badge(GuiGraphics graphics, int x, int y, String text, int color) {
         Font font = Minecraft.getInstance().font;
-        int width = font.width(text) + 10;
+        int width = AquaFontRenderer.width(font, text) + 10;
         graphics.fill(x, y, x + width, y + 12, 0xAA000000 | (color & 0x00FFFFFF));
-        graphics.drawString(font, text, x + 5, y + 2, COLOR_TEXT, false);
+        AquaFontRenderer.draw(graphics, font, text, x + 5, y + 2, COLOR_TEXT);
     }
 
     /**

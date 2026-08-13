@@ -11,16 +11,14 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
-import subprocess
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.25"
-PACK_VERSION = "2.9.24"
+PACK_TAG = "pack-2.9.26"
+PACK_VERSION = "2.9.26"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -29,6 +27,7 @@ SKIP_PATH_PARTS = ("_disabled", "_parked", ".disabled", "/players/", "quest_prog
 # Client-only jars (not on dedicated server) — copy from previous pack or client/ if present
 # ImmediatelyFast 1.2.4 crashes with Oculus 1.7 (IrisCompat ImmediateState) — omit until a compatible build.
 CLIENT_ONLY_PREFIXES = (
+    "mcef",
     "embeddium",
     "oculus",
     "entityculling",
@@ -115,7 +114,11 @@ def sync_mods() -> None:
     # Client-only from previous pack / client/
     extras_roots = [PACK.parent / "AquaTech-Client" / "mods", ROOT / "client" / "mods", ROOT / "mods"]
     # PACK was wiped mods — use client and mods folders
-    for root in (ROOT / "client" / "mods", ROOT / "mods"):
+    for root in (
+        ROOT / "client" / "mods",
+        ROOT / "mods",
+        ROOT / "mods" / "aquatech-ui" / "libs",
+    ):
         if not root.is_dir():
             continue
         for jar in root.glob("*.jar"):
@@ -138,7 +141,7 @@ def sync_mods() -> None:
                 print(f"OK client-only {jar.name}")
 
     # Force first-party from server (after bump script)
-    for name in ("aquatech_ui-1.0.13.jar", "casesmod-1.0.1.jar", "packetfixer-3.3.2-forge-1.20.1.jar"):
+    for name in ("aquatech_ui-1.0.22.jar", "casesmod-1.0.7.jar", "packetfixer-3.3.2-forge-1.20.1.jar"):
         cand = SERVER_MODS / name
         if cand.is_file():
             shutil.copy2(cand, dst / name)
@@ -213,10 +216,6 @@ def main() -> int:
         shutil.copytree(repo_ftb, dst_ftb)
         print(f"OK overlay ftbquests from repo -> {dst_ftb}")
     write_manifest()
-    try:
-        subprocess.check_call([sys.executable, str(ROOT / "tools" / "sync_lodestone_mods.py")])
-    except Exception as exc:
-        print(f"WARN lodestone sync skipped: {exc}")
     print()
     print(f"=== Pack {PACK_TAG} ===")
     print("1) python tools/upload_pack_release.py")

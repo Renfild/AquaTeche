@@ -7,12 +7,18 @@ AquaTech Launcher
 
 import os, sys, json, hashlib, subprocess, threading, urllib.request, zipfile, shutil, time, platform, math, random, socket, re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
+try:
+    import tkinter as tk
+    from tkinter import ttk, messagebox, filedialog
+except ImportError:
+    tk = None
+    ttk = None
+    messagebox = None
+    filedialog = None
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-LAUNCHER_VER   = "2.9.45"
+LAUNCHER_VER   = "2.9.47"
 MC_VER         = "1.20.1"
 FORGE_VER      = "47.4.0"
 MCP_VER        = "20230612.114412"  # forge --fml.mcpVersion / client-*-srg.jar folder
@@ -123,6 +129,84 @@ def normalize_server_cfg(cfg: dict) -> dict:
     if "auto_connect" not in cfg:
         cfg["auto_connect"] = True
     return cfg
+
+
+def detect_optimal_ram_mb() -> int:
+    """Auto-detect system RAM and return recommended allocation in MB (4096-8192 MB range, 50% free RAM)."""
+    try:
+        if os.name == "nt":
+            import ctypes
+            class MEMORYSTATUSEX(ctypes.Structure):
+                _fields_ = [
+                    ("dwLength", ctypes.c_ulong),
+                    ("dwMemoryLoad", ctypes.c_ulong),
+                    ("ullTotalPhys", ctypes.c_ulonglong),
+                    ("ullAvailPhys", ctypes.c_ulonglong),
+                    ("ullTotalPageFile", ctypes.c_ulonglong),
+                    ("ullAvailPageFile", ctypes.c_ulonglong),
+                    ("ullTotalVirtual", ctypes.c_ulonglong),
+                    ("ullAvailVirtual", ctypes.c_ulonglong),
+                    ("sullAvailExtendedVirtual", ctypes.c_ulonglong),
+                ]
+            stat = MEMORYSTATUSEX()
+            stat.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
+            if ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat)):
+                avail_mb = int(stat.ullAvailPhys // (1024 * 1024))
+                return max(4096, min(8192, avail_mb // 2))
+    except Exception:
+        pass
+    return 6144
+
+
+def analyze_crash_logs(game_dir: Path) -> dict:
+    """Parse hs_err_pid*.log, crash-reports/ and minecraft_console.log for actionable Russian diagnostic."""
+    log_dir = game_dir / "logs"
+    crash_dir = game_dir / "crash-reports"
+
+    recent_files = []
+    if log_dir.exists():
+        recent_files.extend(log_dir.glob("hs_err_pid*.log"))
+        recent_files.extend(log_dir.glob("minecraft_console.log"))
+        recent_files.extend(log_dir.glob("latest.log"))
+    if crash_dir.exists():
+        recent_files.extend(crash_dir.glob("crash-*.txt"))
+
+    recent_files.sort(key=lambda p: p.stat().st_mtime if p.exists() else 0, reverse=True)
+    if not recent_files:
+        return {"reason": "Неизвестный вылет", "advice": "Нажмите «Починить сборку» для перепроверки файлов."}
+
+    text = ""
+    for f in recent_files[:3]:
+        try:
+            text += f.read_text(encoding="utf-8", errors="replace") + "\n"
+        except OSError:
+            pass
+
+    if "java.lang.OutOfMemoryError" in text or "There is insufficient memory" in text:
+        return {
+            "reason": "Нехватка оперативной памяти (OutOfMemoryError)",
+            "advice": "Увеличьте выделение RAM (6–8 ГБ) в настройках лаунчера и закройте браузер.",
+        }
+    if "nvoglv64.dll" in text or "ig9icd64.dll" in text or "atig6pxx.dll" in text or "EXCEPTION_ACCESS_VIOLATION" in text:
+        return {
+            "reason": "Сбой видеодрайвера (Access Violation in OpenGL)",
+            "advice": "Обновите драйвер видеокарты (NVIDIA/AMD/Intel) до актуальной версии.",
+        }
+    if "Pixel format not accelerated" in text or "GLFW error 65542" in text:
+        return {
+            "reason": "Ошибка OpenGL (Pixel format not accelerated)",
+            "advice": "Установите официальный видеодрайвер вместо базового драйвера Microsoft.",
+        }
+    if "FMLModLoadingFailedException" in text or "ModLoadingException" in text:
+        return {
+            "reason": "Ошибка загрузки мода (ModLoadingException)",
+            "advice": "Нажмите «Починить сборку» для обновления поврежденных файлов модов.",
+        }
+
+    return {
+        "reason": "Завершение процесса Minecraft",
+        "advice": "Нажмите «Починить сборку» или обратитесь в поддержку.",
+    }
 
 # ─── Palette (deep ocean launcher) ────────────────────────────────────────────
 C_BG       = "#061018"
@@ -464,7 +548,8 @@ def _java_major_version(java_path: str) -> int | None:
             cand = str(Path(exe).with_name("java.exe"))
             if Path(cand).exists():
                 exe = cand
-        r = subprocess.run([exe, "-version"], capture_output=True, timeout=5)
+        flags = 0x08000000 if os.name == "nt" else 0
+        r = subprocess.run([exe, "-version"], capture_output=True, timeout=5, creationflags=flags)
         text = (r.stderr or r.stdout or b"").decode("utf-8", errors="replace")
         # examples: java version "17.0.10"  / openjdk version "1.8.0_402" / "25.0.1"
         import re
@@ -1914,6 +1999,7 @@ def build_launch_cmd(
     log=None,
     *,
     auto_join: str | None = None,
+    session_token: str | None = None,
 ) -> list[str]:
     """Build the full Forge launch command (merged inheritsFrom + natives + assets)."""
     ensure_default_russian_options(game_dir)
@@ -2121,13 +2207,15 @@ def build_launch_cmd(
         java_exec,
         f"-Xmx{ram_mb}M",
         f"-Xms{min(ram_mb, 2048)}M",
+        f"-Daquatech.session_token={session_token or ''}",
+        f"-Daquatech.nick={username}",
         "-XX:+UseG1GC",
         "-XX:+ParallelRefProcEnabled",
-        "-XX:MaxGCPauseMillis=200",
+        "-XX:MaxGCPauseMillis=50",
         "-XX:+UnlockExperimentalVMOptions",
         "-XX:+DisableExplicitGC",
         "-XX:G1NewSizePercent=20",
-        "-XX:G1ReservePercent=20",
+        "-XX:G1ReservePercent=15",
         "-XX:G1HeapRegionSize=32M",
         "-Dlog4j2.formatMsgNoLookups=true",
         "-Djava.net.preferIPv4Stack=true",
@@ -2168,9 +2256,13 @@ def spawn_minecraft(cmd: list[str], game_dir: Path) -> subprocess.Popen:
         pass
 
     flags = 0
+    startupinfo = None
     if os.name == "nt":
         # New process group + no console window for smooth seamless launch
         flags = 0x00000200 | 0x08000000  # CREATE_NEW_PROCESS_GROUP | CREATE_NO_WINDOW
+        startupinfo = subprocess.STARTUPINFO()
+        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        startupinfo.wShowWindow = 0  # SW_HIDE
 
     return subprocess.Popen(
         cmd,
@@ -2179,6 +2271,7 @@ def spawn_minecraft(cmd: list[str], game_dir: Path) -> subprocess.Popen:
         stderr=console,
         stdin=subprocess.DEVNULL,
         creationflags=flags,
+        startupinfo=startupinfo,
         close_fds=False if os.name == "nt" else True,
     )
 
@@ -2884,6 +2977,7 @@ class AquaTechLauncher(tk.Tk):
                 game_dir, username, ram_mb, java,
                 log=lambda m: self._log_line(m, "dim"),
                 auto_join=auto_join,
+                session_token=self._cfg.get("portal_session") or "",
             )
             proc = spawn_minecraft(cmd, game_dir)
             self._log_line(f"Процесс Minecraft PID {proc.pid} — проверяем…", "dim")

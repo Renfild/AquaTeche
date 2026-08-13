@@ -1,6 +1,7 @@
 package net.aquatech.ui.client.hud;
 
 import net.aquatech.ui.client.ClientUiState;
+import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.common.ModClientConfig;
 import net.aquatech.ui.server.PressureBridge;
@@ -61,7 +62,7 @@ public final class OceanHudOverlay {
         graphics.fill(0, 0, w, 1, UiDraw.COLOR_ACCENT);
         graphics.fill(0, 5, 2, 22, UiDraw.COLOR_ACCENT);
 
-        graphics.drawString(mc.font, "ПОГРУЖЕНИЕ", 8, 6, UiDraw.COLOR_ACCENT, false);
+        graphics.drawString(mc.font, AquaFontRenderer.header("Погружение"), 8, 6, UiDraw.COLOR_ACCENT, false);
         graphics.fill(8, 18, w - 8, 19, 0x443A7892);
 
         String depthStr = inWater ? depth + " м" : "поверхность";
@@ -104,27 +105,10 @@ public final class OceanHudOverlay {
             String label, String value, int valueColor
     ) {
         Minecraft mc = Minecraft.getInstance();
-        graphics.drawString(mc.font, label, panelX + 8, y, UiDraw.COLOR_MUTED, false);
-        int maxVal = panelWidth - 16 - mc.font.width(label) - 6;
-        String fitted = truncateToWidth(mc, value, Math.max(20, maxVal));
-        graphics.drawString(mc.font, fitted, panelX + panelWidth - 8 - mc.font.width(fitted), y, valueColor, false);
-    }
-
-    private static String truncateToWidth(Minecraft mc, String text, int maxWidth) {
-        if (mc.font.width(text) <= maxWidth) {
-            return text;
-        }
-        String ellipsis = "..";
-        int limit = maxWidth - mc.font.width(ellipsis);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            sb.append(text.charAt(i));
-            if (mc.font.width(sb.toString()) > limit) {
-                sb.setLength(Math.max(0, sb.length() - 1));
-                return sb + ellipsis;
-            }
-        }
-        return text;
+        AquaFontRenderer.draw(graphics, mc.font, label, panelX + 8, y, UiDraw.COLOR_MUTED);
+        int maxVal = panelWidth - 16 - AquaFontRenderer.width(mc.font, label) - 6;
+        String fitted = AquaFontRenderer.fit(mc.font, value, Math.max(20, maxVal));
+        AquaFontRenderer.draw(graphics, mc.font, fitted, panelX + panelWidth - 8 - AquaFontRenderer.width(mc.font, fitted), y, valueColor);
     }
 
     private static String pressureLabel(int pressure) {

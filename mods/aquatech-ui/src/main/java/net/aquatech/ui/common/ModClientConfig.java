@@ -10,6 +10,7 @@ public class ModClientConfig {
     public static final ForgeConfigSpec.DoubleValue HUD_SCALE;
     public static final ForgeConfigSpec.BooleanValue SHOW_PRESSURE;
     public static final ForgeConfigSpec.BooleanValue HUD_VISIBLE;
+    public static final ForgeConfigSpec.ConfigValue<String> PORTAL_BASE;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -32,6 +33,11 @@ public class ModClientConfig {
         SHOW_PRESSURE = builder
                 .comment("Показывать строку давления воды при погружении")
                 .define("showPressure", true);
+        builder.pop();
+        builder.push("web");
+        PORTAL_BASE = builder
+                .comment("Origin for in-game CEF overlays (donate / cabinet embeds)")
+                .define("portalBase", "https://aquateche.store");
         builder.pop();
         SPEC = builder.build();
     }

@@ -404,8 +404,13 @@ class LauncherEngine:
                 script_path.write_text(ps_script, encoding="utf-8")
 
                 cmd = f'powershell -NoProfile -ExecutionPolicy Bypass -File "{script_path.resolve()}"'
-                creationflags = subprocess.CREATE_NEW_PROCESS_GROUP | 0x00000008 if sys.platform == "win32" else 0
-                subprocess.Popen(cmd, shell=True, creationflags=creationflags)
+                creationflags = (subprocess.CREATE_NEW_PROCESS_GROUP | 0x08000000) if sys.platform == "win32" else 0
+                startupinfo = None
+                if sys.platform == "win32":
+                    startupinfo = subprocess.STARTUPINFO()
+                    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                    startupinfo.wShowWindow = 0
+                subprocess.Popen(cmd, shell=True, creationflags=creationflags, startupinfo=startupinfo)
 
                 time.sleep(0.5)
                 os._exit(0)
@@ -576,15 +581,22 @@ ENGINE = LauncherEngine()
 
 def ui_dir() -> Path:
     candidates = [
+        L._bundle_dir() / "docs",
         L._bundle_dir() / "launcher_ui",
+        L._app_dir() / "docs",
         L._app_dir() / "launcher_ui",
+        Path(__file__).resolve().parent.parent / "docs",
         Path(__file__).resolve().parent.parent / "launcher_ui",
+        Path(__file__).resolve().parent / "docs",
         Path(__file__).resolve().parent / "launcher_ui",
     ]
     for c in candidates:
-        if (c / "index.html").is_file():
-            return c
-    return candidates[-1]
+        try:
+            if (c / "index.html").is_file() or (c / "launcher.html").is_file():
+                return c
+        except Exception:
+            pass
+    return candidates[0]
 
 
 class ApiHandler(BaseHTTPRequestHandler):
@@ -621,15 +633,31 @@ class ApiHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
         if path in ("/", "/index.html"):
+            if (ui_dir() / "launcher.html").is_file():
+                return self._static("launcher.html", "text/html; charset=utf-8")
             return self._static("index.html", "text/html; charset=utf-8")
+        if path in ("/launcher", "/launcher.html"):
+            return self._static("launcher.html", "text/html; charset=utf-8")
         if path.startswith("/assets/"):
-            # Files live under launcher_ui/assets/… (not launcher_ui/<name>)
-            rel = path.lstrip("/")  # assets/app.css
+            rel = path.lstrip("/")
             return self._static(rel, None)
         if path == "/api/status":
             qs = parse_qs(parsed.query)
             after = int((qs.get("after") or ["0"])[0] or 0)
-            return self._json(200, ENGINE.snapshot(after))
+            snap = ENGINE.snapshot(after)
+            # Add dynamic RAM detection recommendation
+            try:
+                snap["ram_rec"] = L.detect_optimal_ram_mb()
+            except Exception:
+                snap["ram_rec"] = 4096
+            return self._json(200, snap)
+        if path == "/api/system":
+            return self._json(200, {
+                "ok": True,
+                "ram_recommended": L.detect_optimal_ram_mb(),
+                "launcher_ver": L.LAUNCHER_VER,
+                "game_dir": str(L.GAME_DIR)
+            })
         if path == "/api/health":
             return self._json(200, {"ok": True, "version": L.LAUNCHER_VER})
         if path == "/api/portal_callback":
@@ -663,13 +691,13 @@ class ApiHandler(BaseHTTPRequestHandler):
         try:
             body = self._read_json()
             if path == "/api/browse_dir":
-                import tkinter as tk
-                from tkinter import filedialog
                 res = {"ok": False, "dir": ""}
                 done = threading.Event()
 
                 def open_dialog():
                     try:
+                        import tkinter as tk
+                        from tkinter import filedialog
                         root = tk.Tk()
                         root.withdraw()
                         root.attributes("-topmost", True)
@@ -679,7 +707,15 @@ class ApiHandler(BaseHTTPRequestHandler):
                             res["ok"] = True
                             res["dir"] = selected
                     except Exception:
-                        pass
+                        if sys.platform == "win32":
+                            try:
+                                ps = 'powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $f = New-Object System.Windows.Forms.FolderBrowserDialog; if ($f.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) { Write-Output $f.SelectedPath }"'
+                                out = subprocess.check_output(ps, shell=True, text=True, creationflags=0x08000000).strip()
+                                if out:
+                                    res["ok"] = True
+                                    res["dir"] = out
+                            except Exception:
+                                pass
                     done.set()
 
                 threading.Thread(target=open_dialog, daemon=True).start()
@@ -775,3 +811,17 @@ def wait_api_ready(port: int = API_PORT, timeout: float = 5.0) -> bool:
         except Exception:
             time.sleep(0.1)
     return False
+
+
+if __name__ == "__main__":
+    try:
+        import aquatech_launcher
+        aquatech_launcher.run_web_ui()
+    except Exception as ex:
+        try:
+            import aquatech_launcher
+            app = aquatech_launcher.AquaTechLauncher()
+            app.mainloop()
+        except Exception:
+            pass
+

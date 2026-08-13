@@ -4,7 +4,7 @@ import net.aquatech.ui.capability.AquaSkillCapability;
 import net.aquatech.ui.capability.SkillDefinitions;
 import net.aquatech.ui.capability.SkillDefinitions.NodeType;
 import net.aquatech.ui.capability.SkillDefinitions.SkillDef;
-import net.aquatech.ui.client.render.MachineGuiFx;
+import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.network.C2SOpenSkillTreePacket;
 import net.aquatech.ui.network.C2SUnlockSkillPacket;
@@ -12,11 +12,9 @@ import net.aquatech.ui.network.NetworkHandler;
 import net.aquatech.ui.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -29,25 +27,26 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Ocean skill tree UI. Zoom scales the whole graph uniformly.
- * Detail panel is fixed on the right — never overlays node icons.
+ * Ocean Skill Tree Screen (K Menu).
+ * Glassmorphic dark oceanic design with glowing constellation nodes,
+ * bioluminescent progress bars, and right-hand detail sidebar.
  */
-public class OceanSkillTreeScreen extends Screen {
+public class OceanSkillTreeScreen extends AquaBlurredScreen {
 
-    private static final int ORIGIN_BG = 0xFF0A1628;
-    private static final int FILL_UNLOCKED = 0xFF0F2A1E;
-    private static final int FILL_AVAILABLE = 0xFF0A2230;
-    private static final int FILL_LOCKED = 0xFF111827;
-    private static final int BORDER_UNLOCKED = 0xFF22C55E;
-    private static final int BORDER_AVAILABLE = 0xFF06B6D4;
-    private static final int BORDER_LOCKED = 0xFF334155;
-    private static final int BORDER_HOVER = 0xFFFBBF24;
+    private static final int BG_DARK = 0xF5060C17;
+    private static final int PANEL_FILL = 0xDD0B1829;
+    private static final int PANEL_BORDER = 0xFF00E5FF;
+    private static final int BORDER_UNLOCKED = 0xFF00E5FF;
+    private static final int BORDER_AVAILABLE = 0xFF10B981;
+    private static final int BORDER_LOCKED = 0xFF1E293B;
+    private static final int BORDER_HOVER = 0xFFF59E0B;
 
-    private static final int HALF_SMALL = 9;
-    private static final int HALF_NOTABLE = 12;
-    private static final int HALF_KEYSTONE = 16;
-    private static final int S = 90;
-    private static final int PANEL_W = 260;
+    private static final int HALF_SMALL = 11;
+    private static final int HALF_NOTABLE = 14;
+    private static final int HALF_KEYSTONE = 18;
+    /** World units between nodes. Positions in getPositionForId are × this. */
+    private static final int TREE_SCALE = 2;
+    private static final int PANEL_W = 240;
 
     public static class SkillNode {
         public final String id, title, description;
@@ -73,21 +72,21 @@ public class OceanSkillTreeScreen extends Screen {
     private final List<SkillNode> nodes = new ArrayList<>();
     private final Map<String, SkillNode> nodeIndex = new HashMap<>();
     private final Map<String, Integer> nodeListIdx = new HashMap<>();
-    private final List<BubbleParticle> bubbles = new ArrayList<>();
+    private final List<StarParticle> stars = new ArrayList<>();
     private final Random random = new Random();
 
     private int[] worldX, worldY, worldHalf;
 
     private double camX, camY;
-    private double zoom = 0.55;
+    private double zoom = 0.72;
     private boolean isDragging;
 
     private Set<String> unlockedSnapshot = Set.of();
     private int skillPointsCache, aquaXpCache, levelCache, minXpCache, maxXpCache;
     private SkillNode hoveredNode;
 
-    private static class BubbleParticle {
-        float x, y, speed, radius;
+    private static class StarParticle {
+        float x, y, speed, size;
         int alpha;
     }
 
@@ -96,443 +95,401 @@ public class OceanSkillTreeScreen extends Screen {
         buildTree();
     }
 
-    // =========================================================================
-    // Layout — coordinates only; titles/effects from SkillDefinitions
-    // =========================================================================
-    @SuppressWarnings("ConstantConditions")
     private void buildTree() {
         nodes.clear();
         nodeIndex.clear();
         nodeListIdx.clear();
 
-        add("origin", 0, 0, Items.HEART_OF_THE_SEA);
-
-        // Hub ring
-        add("inner_angler", 0, -S, Items.FISHING_ROD);
-        add("inner_tech", S, 0, Items.REDSTONE);
-        add("inner_luck", (int) (S * 0.7), (int) (S * 0.7), Items.GOLD_NUGGET);
-        add("inner_diving", -(int) (S * 0.7), (int) (S * 0.7), Items.PRISMARINE_CRYSTALS);
-        add("inner_kelp", -S, 0, Items.KELP);
-
-        // Sector 1 — Angler (North)
-        add("rod_speed_1", 0, -2 * S, Items.STRING);
-        add("bait_sense", 0, -3 * S, Items.WHEAT_SEEDS);
-        add("double_catch", -S, -4 * S, Items.IRON_INGOT);
-        add("rod_speed_2", S, -4 * S, Items.FEATHER);
-        add("triple_hook", 0, -5 * S, Items.DIAMOND);
-        add("flood_rhythm", -S, -6 * S, Items.TROPICAL_FISH);
-        add("five_hook", S, -6 * S, Items.DIAMOND_SWORD);
-        add("casting_mastery", 0, -7 * S, Items.ARROW);
-        add("master_angler", 0, -8 * S, Items.FISHING_ROD);
-
-        // Sector 2 — Tech (East)
-        add("fe_collector", 2 * S, 0, Items.REDSTONE_BLOCK);
-        add("efficiency_1", 3 * S, 0,
-                new ItemStack(ModItems.UPGRADES.get(net.aquatech.ui.item.UpgradeItem.UpgradeType.EFFICIENCY).get()));
-        add("speed_boost_1", 4 * S, -S, new ItemStack(ModItems.AUTO_FISHER_ITEM.get()));
-        add("machine_cooling", 4 * S, S, Items.ICE);
-        add("speed_boost_2", 5 * S, -S, new ItemStack(ModItems.OCEAN_FILTER_ITEM.get()));
-        add("overclock", 5 * S, S, Items.REDSTONE_TORCH);
-        add("zero_waste", 6 * S, 0, Items.SLIME_BALL);
-        add("deep_regen", 7 * S, 0, Items.NETHER_STAR);
-        add("overdrive_machine", 8 * S, 0, Items.BEACON);
-
-        // Sector 3 — Luck (SE diagonal)
-        add("luck_1", 2 * S, 2 * S, Items.GOLD_INGOT);
-        add("lucky_cast", 3 * S, 2 * S, Items.GOLD_NUGGET);
-        add("luck_2", 3 * S, 3 * S, Items.EMERALD);
-        add("treasure_map", 4 * S, 3 * S, Items.MAP);
-        add("chest_finder", 4 * S, 4 * S, Items.ENDER_CHEST);
-        add("gem_miner", 5 * S, 4 * S, Items.DIAMOND_BLOCK);
-        add("abyssal_loot", 5 * S, 5 * S, Items.ECHO_SHARD);
-        add("sunken_relic", 6 * S, 5 * S, Items.TOTEM_OF_UNDYING);
-        add("poseidon_blessing", 7 * S, 6 * S, Items.TRIDENT);
-
-        // Sector 4 — Diving (SW diagonal)
-        add("swim_speed", -2 * S, 2 * S, Items.TURTLE_HELMET);
-        add("lung_expand", -3 * S, 2 * S, Items.PUFFERFISH);
-        add("water_breathing", -3 * S, 3 * S, Items.HEART_OF_THE_SEA);
-        add("current_rider", -4 * S, 3 * S, Items.SOUL_SAND);
-        add("night_vision", -4 * S, 4 * S, new ItemStack(ModItems.SONAR_GOGGLES.get()));
-        add("depth_armor", -5 * S, 4 * S, Items.NETHERITE_CHESTPLATE);
-        add("pressure_resist", -5 * S, 5 * S, Items.SHIELD);
-        add("tide_walker", -6 * S, 5 * S, Items.WATER_BUCKET);
-        add("immortal_diver", -7 * S, 6 * S, Items.TOTEM_OF_UNDYING);
-
-        // Sector 5 — Bio (West)
-        add("kelp_harvest", -2 * S, 0, Items.DRIED_KELP);
-        add("algae_study", -3 * S, -S, Items.OAK_LEAVES);
-        add("bio_fuel", -3 * S, S, Items.DRIED_KELP_BLOCK);
-        add("sea_grass_farm", -4 * S, 0, Items.SEAGRASS);
-        add("sponge_grower", -5 * S, -S, Items.WET_SPONGE);
-        add("living_kelp", -5 * S, S, Items.GRASS_BLOCK);
-        add("sea_garden", -6 * S, 0, Items.COMPOSTER);
-        add("mega_bloom", -7 * S, 0, Items.CHORUS_FLOWER);
-        add("immortal_organism", -8 * S, 0, Items.GOLDEN_APPLE);
-
-        // Cross-sector
-        add("ocean_harmony", 2 * S, -5 * S, Items.PRISMARINE_CRYSTALS);
-        add("tide_sync", 3 * S, -4 * S, Items.CLOCK);
-        add("kelp_cast", -4 * S, -3 * S, Items.KELP);
-        add("deep_resonance", -3 * S, -5 * S, Items.NETHER_STAR);
-
-        for (int i = 0; i < nodes.size(); i++) {
-            SkillNode sn = nodes.get(i);
-            nodeIndex.put(sn.id, sn);
-            nodeListIdx.put(sn.id, i);
+        for (SkillDef def : SkillDefinitions.all()) {
+            ItemStack icon = resolveIcon(def.id(), def.type());
+            int[] pos = getPositionForId(def.id());
+            SkillNode node = new SkillNode(def, pos[0] * TREE_SCALE, pos[1] * TREE_SCALE, icon);
+            nodeIndex.put(def.id(), node);
+            nodeListIdx.put(def.id(), nodes.size());
+            nodes.add(node);
         }
+
+        worldX = new int[nodes.size()];
+        worldY = new int[nodes.size()];
+        worldHalf = new int[nodes.size()];
     }
 
-    private void add(String id, int x, int y, Item item) {
-        add(id, x, y, new ItemStack(item));
+    public void refreshData() {
+        buildTree();
+        updateCapabilitySnapshot();
     }
 
-    private void add(String id, int x, int y, ItemStack stack) {
-        SkillDef def = SkillDefinitions.get(id);
-        if (def == null) {
-            throw new IllegalStateException("Missing SkillDefinitions entry: " + id);
-        }
-        nodes.add(new SkillNode(def, x, y, stack));
+    private ItemStack resolveIcon(String id, NodeType type) {
+        if ("origin".equals(id)) return new ItemStack(ModItems.ABYSSAL_MAGNET.get());
+        if (id.contains("speed")) return new ItemStack(Items.FISHING_ROD);
+        if (id.contains("luck") || id.contains("rare")) return new ItemStack(Items.PRISMARINE_SHARD);
+        if (id.contains("xp") || id.contains("double")) return new ItemStack(Items.EXPERIENCE_BOTTLE);
+        if (id.contains("chest") || id.contains("treasure")) return new ItemStack(Items.CHEST);
+        if (id.contains("magnet")) return new ItemStack(ModItems.ABYSSAL_MAGNET.get());
+        if (id.contains("sonar")) return new ItemStack(ModItems.SONAR_GOGGLES.get());
+        return type == NodeType.KEYSTONE ? new ItemStack(Items.NETHER_STAR) :
+               type == NodeType.NOTABLE ? new ItemStack(Items.HEART_OF_THE_SEA) :
+               new ItemStack(Items.NAUTILUS_SHELL);
     }
+
+    private int[] getPositionForId(String id) {
+        // Pentagon radial layout — 5 sectors at 72° intervals, R=80 per step.
+        // Sector unit vectors (screen: Y down):
+        //   Angler  (90°):  dx=0,     dy=-R        (North)
+        //   Tech    (18°):  dx=+76,   dy=-25        (NE)
+        //   Luck   (-54°):  dx=+47,   dy=+65        (SE)
+        //   Diving(-126°):  dx=-47,   dy=+65        (SW)
+        //   Bio    (162°):  dx=-76,   dy=-25        (NW)
+        return switch (id) {
+            // ── HUB ──────────────────────────────────────────────────────────
+            case "origin"            -> new int[]{0, 0};
+
+            // ── SECTOR 1 — ANGLER (North) ─────────────────────────────────
+            case "inner_angler"      -> new int[]{0,    -80};
+            case "rod_speed_1"       -> new int[]{0,   -160};
+            case "bait_sense"        -> new int[]{0,   -240};
+            case "double_catch"      -> new int[]{0,   -320};
+            case "rod_speed_2"       -> new int[]{0,   -400};
+            case "triple_hook"       -> new int[]{0,   -480};
+            case "flood_rhythm"      -> new int[]{0,   -560};
+            case "five_hook"         -> new int[]{0,   -640};
+            case "casting_mastery"   -> new int[]{0,   -720};
+            case "master_angler"     -> new int[]{0,   -800};
+
+            // ── SECTOR 2 — TECH (NE) ──────────────────────────────────────
+            case "inner_tech"        -> new int[]{ 76,  -25};
+            case "fe_collector"      -> new int[]{152,  -50};
+            case "efficiency_1"      -> new int[]{228,  -75};
+            case "speed_boost_1"     -> new int[]{304, -100};
+            case "machine_cooling"   -> new int[]{380, -125};
+            case "speed_boost_2"     -> new int[]{456, -150};
+            case "overclock"         -> new int[]{532, -175};
+            case "zero_waste"        -> new int[]{608, -200};
+            case "deep_regen"        -> new int[]{684, -225};
+            case "overdrive_machine" -> new int[]{760, -250};
+
+            // ── SECTOR 3 — LUCK (SE) ──────────────────────────────────────
+            case "inner_luck"        -> new int[]{ 47,   65};
+            case "luck_1"            -> new int[]{ 94,  130};
+            case "lucky_cast"        -> new int[]{141,  195};
+            case "luck_2"            -> new int[]{188,  260};
+            case "treasure_map"      -> new int[]{235,  325};
+            case "chest_finder"      -> new int[]{282,  390};
+            case "gem_miner"         -> new int[]{329,  455};
+            case "abyssal_loot"      -> new int[]{376,  520};
+            case "sunken_relic"      -> new int[]{423,  585};
+            case "poseidon_blessing" -> new int[]{470,  650};
+
+            // ── SECTOR 4 — DIVING (SW) ────────────────────────────────────
+            case "inner_diving"      -> new int[]{ -47,   65};
+            case "swim_speed"        -> new int[]{ -94,  130};
+            case "lung_expand"       -> new int[]{-141,  195};
+            case "water_breathing"   -> new int[]{-188,  260};
+            case "current_rider"     -> new int[]{-235,  325};
+            case "night_vision"      -> new int[]{-282,  390};
+            case "depth_armor"       -> new int[]{-329,  455};
+            case "pressure_resist"   -> new int[]{-376,  520};
+            case "tide_walker"       -> new int[]{-423,  585};
+            case "immortal_diver"    -> new int[]{-470,  650};
+
+            // ── SECTOR 5 — BIO (NW) ───────────────────────────────────────
+            case "inner_kelp"        -> new int[]{ -76,  -25};
+            case "kelp_harvest"      -> new int[]{-152,  -50};
+            case "algae_study"       -> new int[]{-228,  -75};
+            case "bio_fuel"          -> new int[]{-304, -100};
+            case "sea_grass_farm"    -> new int[]{-380, -125};
+            case "sponge_grower"     -> new int[]{-456, -150};
+            case "living_kelp"       -> new int[]{-532, -175};
+            case "sea_garden"        -> new int[]{-608, -200};
+            case "mega_bloom"        -> new int[]{-684, -225};
+            case "immortal_organism" -> new int[]{-760, -250};
+
+            // ── CROSS-SECTOR ──────────────────────────────────────────────
+            // ocean_harmony: stems from master_angler (0,-800), offset right
+            case "ocean_harmony"     -> new int[]{ 90,  -800};
+            case "tide_sync"         -> new int[]{170,  -800};
+            // kelp_cast: stems from immortal_organism (-760,-250), extends further NW
+            case "kelp_cast"         -> new int[]{-760, -330};
+            case "deep_resonance"    -> new int[]{-760, -410};
+
+            default -> new int[]{0, 0};
+        };
+    }
+
 
     @Override
     protected void init() {
         super.init();
         NetworkHandler.CHANNEL.sendToServer(new C2SOpenSkillTreePacket());
-        refreshData();
-        bubbles.clear();
-        for (int i = 0; i < 14; i++) {
-            BubbleParticle b = new BubbleParticle();
-            b.x = random.nextFloat() * this.width;
-            b.y = random.nextFloat() * this.height;
-            b.speed = 0.2F + random.nextFloat() * 0.4F;
-            b.radius = 2.0F + random.nextFloat() * 3.5F;
-            b.alpha = 20 + random.nextInt(50);
-            bubbles.add(b);
+
+        stars.clear();
+        for (int i = 0; i < 40; i++) {
+            StarParticle p = new StarParticle();
+            p.x = random.nextFloat() * width;
+            p.y = random.nextFloat() * height;
+            p.speed = 0.15f + random.nextFloat() * 0.35f;
+            p.size = 1.0f + random.nextFloat() * 2.0f;
+            p.alpha = 40 + random.nextInt(180);
+            stars.add(p);
         }
-        rebuildLayout();
     }
 
-    public void refreshData() {
+    private void updateCapabilitySnapshot() {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player != null) {
-            mc.player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(this::cacheFromCapability);
-        }
-    }
-
-    private void cacheFromCapability(AquaSkillCapability cap) {
-        unlockedSnapshot = new HashSet<>(cap.getUnlockedSkills());
-        skillPointsCache = cap.getSkillPoints();
-        aquaXpCache = cap.getAquaXp();
-        levelCache = cap.getLevel();
-        minXpCache = cap.getXpForCurrentLevel();
-        maxXpCache = cap.getXpForNextLevel();
-    }
-
-    private void rebuildLayout() {
-        int count = nodes.size();
-        worldX = new int[count];
-        worldY = new int[count];
-        worldHalf = new int[count];
-        for (int i = 0; i < count; i++) {
-            SkillNode sn = nodes.get(i);
-            worldX[i] = sn.x;
-            worldY[i] = sn.y;
-            worldHalf[i] = switch (sn.type) {
-                case SMALL -> HALF_SMALL;
-                case NOTABLE -> HALF_NOTABLE;
-                case KEYSTONE -> HALF_KEYSTONE;
-            };
-        }
-    }
-
-    private double screenToWorldX(double sx) {
-        return (sx - width / 2.0 - camX) / zoom;
-    }
-
-    private double screenToWorldY(double sy) {
-        return (sy - height / 2.0 - camY) / zoom;
-    }
-
-    private boolean isUnlocked(String id) {
-        return "origin".equals(id) || unlockedSnapshot.contains(id);
-    }
-
-    private boolean canAfford(SkillNode node) {
-        return skillPointsCache >= node.cost;
-    }
-
-    private boolean canUnlock(SkillNode node) {
-        if (isUnlocked(node.id) || node.cost <= 0) return false;
-        if (!canAfford(node)) return false;
-        return node.prerequisite == null || "origin".equals(node.prerequisite) || unlockedSnapshot.contains(node.prerequisite);
-    }
-
-    private SkillNode findNearestHover(double wmx, double wmy) {
-        SkillNode best = null;
-        double bestDist = Double.MAX_VALUE;
-        for (int i = 0; i < nodes.size(); i++) {
-            int half = worldHalf[i];
-            double dx = wmx - worldX[i];
-            double dy = wmy - worldY[i];
-            double dist = dx * dx + dy * dy;
-            if (dist <= (half + 2) * (half + 2.0) && dist < bestDist) {
-                bestDist = dist;
-                best = nodes.get(i);
-            }
-        }
-        return best;
-    }
-
-    // =========================================================================
-    // Render
-    // =========================================================================
-    @Override
-    public void render(GuiGraphics g, int mouseX, int mouseY, float pt) {
-        g.fill(0, 0, width, height, ORIGIN_BG);
-        float t = MachineGuiFx.time(pt);
-        MachineGuiFx.scanShimmer(g, 0, 0, width, t, false);
-
-        for (BubbleParticle b : bubbles) {
-            b.y -= b.speed;
-            if (b.y < -10) {
-                b.y = height + 10;
-                b.x = random.nextFloat() * Math.max(1, width - PANEL_W - 20);
-            }
-            g.fill((int) b.x, (int) b.y, (int) (b.x + b.radius), (int) (b.y + b.radius), (b.alpha << 24) | 0x0284C7);
-        }
-
-        double pivotX = width / 2.0 + camX;
-        double pivotY = height / 2.0 + camY;
-
-        double wmx = screenToWorldX(mouseX);
-        double wmy = screenToWorldY(mouseY);
-        // Ignore hover when cursor is over the detail panel
-        boolean overPanel = mouseX >= width - PANEL_W - 8;
-        hoveredNode = overPanel ? null : findNearestHover(wmx, wmy);
-
-        g.pose().pushPose();
-        g.pose().translate(pivotX, pivotY, 0);
-        g.pose().scale((float) zoom, (float) zoom, 1f);
-
-        for (int i = 0; i < nodes.size(); i++) {
-            SkillNode node = nodes.get(i);
-            if (node.prerequisite == null) continue;
-            Integer pi = nodeListIdx.get(node.prerequisite);
-            if (pi == null) continue;
-            boolean active = isUnlocked(node.id) && isUnlocked(node.prerequisite);
-            UiDraw.drawSkillLink(g, worldX[pi], worldY[pi], worldX[i], worldY[i],
-                    active ? 0xFF22C55E : 0x440284C7);
-        }
-
-        for (int i = 0; i < nodes.size(); i++) {
-            SkillNode node = nodes.get(i);
-            int nx = worldX[i], ny = worldY[i], half = worldHalf[i];
-            boolean unlocked = isUnlocked(node.id);
-            boolean available = canUnlock(node);
-            boolean hover = hoveredNode == node;
-
-            int border = unlocked ? BORDER_UNLOCKED : (available ? BORDER_AVAILABLE : BORDER_LOCKED);
-            int fill = unlocked ? FILL_UNLOCKED : (available ? FILL_AVAILABLE : FILL_LOCKED);
-            if (hover) border = BORDER_HOVER;
-
-            UiDraw.drawSkillNode(g, nx, ny, half, border, fill);
-            if (node.type == NodeType.KEYSTONE) {
-                UiDraw.drawSkillNode(g, nx, ny, half + 3, (border & 0x55FFFFFF), 0);
-            }
-            if (hover) {
-                UiDraw.drawSkillNode(g, nx, ny, half + 5, 0x44FBBF24, 0);
-            }
-
-            float iconScale = 0.85f;
-            g.pose().pushPose();
-            g.pose().translate(nx - 8 * iconScale, ny - 8 * iconScale, 0);
-            g.pose().scale(iconScale, iconScale, 1f);
-            g.renderItem(node.displayItem, 0, 0);
-            g.pose().popPose();
-        }
-
-        g.pose().popPose();
-
-        renderHud(g);
-        renderDetailPanel(g);
-        super.render(g, mouseX, mouseY, pt);
-    }
-
-    private void renderHud(GuiGraphics g) {
-        int cx = width / 2;
-        int maxRight = width - PANEL_W - 16;
-        g.pose().pushPose();
-        g.pose().translate(0, 0, 400);
-
-        // HUD panel background (taller to fit all elements)
-        int barHalf = Math.min(210, maxRight / 2 - 20);
-        g.fill(cx - barHalf, 7, Math.min(cx + barHalf, maxRight), 52, 0xFF07131E);
-        g.fill(cx - barHalf, 7, Math.min(cx + barHalf, maxRight), 8, 0xFF0284C7);
-        g.drawCenteredString(font, "≈ СОЗВЕЗДИЯ ОКЕАНА ≈", cx, 13, UiDraw.COLOR_PRIMARY);
-
-        // Row 2: level label on left, points on right — Y=21 (ABOVE the bar)
-        g.drawString(font, "Ур: " + levelCache, cx - barHalf + 6, 21, UiDraw.COLOR_TEXT);
-        String pointsLabel = "Очки: §a" + skillPointsCache;
-        g.drawString(font, pointsLabel, Math.min(cx + barHalf - font.width(pointsLabel) - 4, maxRight - font.width(pointsLabel) - 6), 21, UiDraw.COLOR_TEXT);
-
-        // Row 3: XP bar — Y=30-37
-        int xpW = Math.min(250, barHalf * 2 - 40);
-        int filled = Math.max(0, Math.min(xpW,
-                (aquaXpCache - minXpCache) * xpW / Math.max(1, maxXpCache - minXpCache)));
-        int barX = cx - xpW / 2;
-        g.fill(barX, 30, barX + xpW, 37, 0xFF1E293B);
-        g.fill(barX, 30, barX + filled, 37, UiDraw.COLOR_ACCENT);
-        // XP value centered in bar
-        String xpText = (aquaXpCache - minXpCache) + "/" + (maxXpCache - minXpCache) + " xp";
-        g.drawCenteredString(font, "§8" + xpText, cx, 31, 0xFF64748B);
-
-        // Row 4: skill count — Y=41
-        int total = nodes.size();
-        int learnedShow = unlockedSnapshot.size() + (unlockedSnapshot.contains("origin") ? 0 : 1);
-        learnedShow = Math.min(total, learnedShow);
-        g.drawString(font, "§8" + learnedShow + "/" + total + " навыков", cx - 36, 41, 0xFF64748B);
-
-        g.pose().popPose();
-    }
-
-    private void renderDetailPanel(GuiGraphics g) {
-        int px = width - PANEL_W - 8;
-        int py = 56;
-        int ph = height - py - 28;
-
-        g.pose().pushPose();
-        g.pose().translate(0, 0, 450);
-
-        g.fill(px, py, px + PANEL_W, py + ph, 0xFF0F172A);
-        UiDraw.border(g, px, py, PANEL_W, ph, 0xFF38BDF8);
-        g.fill(px + 1, py + 1, px + PANEL_W - 1, py + 2, 0xFF0284C7);
-
-        int tx = px + 12;
-        int ty = py + 12;
-
-        if (hoveredNode == null) {
-            g.drawString(font, "§bДетали навыка", tx, ty, UiDraw.COLOR_PRIMARY);
-            g.drawString(font, "§8Наведите курсор на узел", tx, ty + 20, 0xFF94A3B8);
-            g.pose().popPose();
-            return;
-        }
-
-        SkillNode node = hoveredNode;
-        boolean unlocked = isUnlocked(node.id);
-        boolean available = canUnlock(node);
-
-        g.renderItem(node.displayItem, tx, ty);
-        g.drawString(font, node.title, tx + 22, ty + 2, UiDraw.COLOR_PRIMARY);
-
-        SkillDef def = SkillDefinitions.get(node.id);
-        String typeLabel = def != null ? def.typeLabel() : "Базовый";
-        String costStr = node.cost <= 0 ? "бесплатно" : (node.cost + " очк.");
-        g.drawString(font, "§8" + typeLabel + "  ·  §f" + costStr, tx + 22, ty + 14, 0xFF64748B);
-
-        int y = ty + 36;
-        g.drawString(font, "§7Эффект:", tx, y, 0xFF94A3B8);
-        y += 14;
-        List<FormattedCharSequence> lines = font.split(Component.literal(node.description), PANEL_W - 24);
-        for (FormattedCharSequence line : lines) {
-            g.drawString(font, line, tx, y, 0xFFE2E8F0);
-            y += 12;
-        }
-
-        y += 8;
-        if (node.prerequisite != null && !isUnlocked(node.prerequisite)) {
-            SkillNode pre = nodeIndex.get(node.prerequisite);
-            String pn = pre != null ? pre.title : node.prerequisite;
-            List<FormattedCharSequence> req = font.split(Component.literal("§cТребует: " + pn), PANEL_W - 24);
-            for (FormattedCharSequence line : req) {
-                g.drawString(font, line, tx, y, 0xFFEF4444);
-                y += 12;
-            }
-            y += 4;
-        }
-
-        String status;
-        int sc;
-        if (unlocked) {
-            status = "✓ ИЗУЧЕНО";
-            sc = 0xFF22C55E;
-        } else if (available) {
-            status = "[ЛКМ] Изучить за " + node.cost + " очк.";
-            sc = 0xFF06B6D4;
-        } else if (!canAfford(node)) {
-            status = "Нужно " + node.cost + " очк. (есть " + skillPointsCache + ")";
-            sc = 0xFFEF4444;
-        } else {
-            status = "Сначала изучите предыдущий узел";
-            sc = 0xFFEF4444;
-        }
-        g.drawString(font, status, tx, Math.min(y + 4, py + ph - 20), sc);
-
-        g.pose().popPose();
-    }
-
-    // =========================================================================
-    // Input
-    // =========================================================================
-    @Override
-    public boolean mouseClicked(double mx, double my, int btn) {
-        if (btn == 0) {
-            if (mx >= width - PANEL_W - 8) {
-                return true; // absorb clicks on panel
-            }
-            isDragging = true;
-            double wx = screenToWorldX(mx);
-            double wy = screenToWorldY(my);
-            SkillNode hit = findNearestHover(wx, wy);
-            if (hit != null) {
-                Minecraft.getInstance().getSoundManager().play(
-                        net.minecraft.client.resources.sounds.SimpleSoundInstance
-                                .forUI(SoundEvents.UI_BUTTON_CLICK, 1f));
-                NetworkHandler.CHANNEL.sendToServer(new C2SUnlockSkillPacket(hit.id));
-                    return true;
-            }
-        }
-        return super.mouseClicked(mx, my, btn);
+        if (mc.player == null) return;
+        mc.player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+            unlockedSnapshot = new HashSet<>(cap.getUnlockedSkills());
+            unlockedSnapshot.add("origin");
+            skillPointsCache = cap.getSkillPoints();
+            aquaXpCache = cap.getAquaXp();
+            levelCache = cap.getLevel();
+            minXpCache = cap.getXpForCurrentLevel();
+            maxXpCache = cap.getXpForNextLevel();
+        });
     }
 
     @Override
-    public boolean mouseReleased(double mx, double my, int btn) {
-        if (btn == 0) isDragging = false;
-        return super.mouseReleased(mx, my, btn);
-    }
+    public void tick() {
+        super.tick();
+        updateCapabilitySnapshot();
 
-    @Override
-    public boolean mouseDragged(double mx, double my, int btn, double dx, double dy) {
-        if (isDragging) {
-            camX += dx;
-            camY += dy;
-            return true;
+        for (StarParticle p : stars) {
+            p.y -= p.speed;
+            if (p.y < 0) {
+                p.y = height;
+                p.x = random.nextFloat() * width;
+            }
         }
-        return super.mouseDragged(mx, my, btn, dx, dy);
-    }
-
-    @Override
-    public boolean mouseScrolled(double mx, double my, double delta) {
-        double oldZoom = zoom;
-        if (delta > 0) zoom = Math.min(2.0, zoom + 0.1);
-        else zoom = Math.max(0.15, zoom - 0.1);
-
-        double zoomRatio = zoom / oldZoom;
-        double pivotX = width / 2.0 + camX;
-        double pivotY = height / 2.0 + camY;
-        camX += (pivotX - mx) * (1 - zoomRatio);
-        camY += (pivotY - my) * (1 - zoomRatio);
-        return true;
-    }
-
-    @Override
-    public void resize(Minecraft mc, int w, int h) {
-        super.resize(mc, w, h);
-        rebuildLayout();
     }
 
     @Override
     public boolean isPauseScreen() {
         return false;
+    }
+
+    @Override
+    protected void renderScreenContent(GuiGraphics g, int mouseX, int mouseY, float pt) {
+
+        // Render floating stars
+        for (StarParticle p : stars) {
+            int color = (p.alpha << 24) | 0x00E5FF;
+            g.fill((int) p.x, (int) p.y, (int) (p.x + p.size), (int) (p.y + p.size), color);
+        }
+
+        int mainWidth = width - PANEL_W;
+        int centerScreenX = mainWidth / 2;
+        int centerScreenY = height / 2;
+
+        hoveredNode = null;
+        double z = this.zoom;
+
+        // Compute world coordinates
+        for (int i = 0; i < nodes.size(); i++) {
+            SkillNode node = nodes.get(i);
+            int half = (node.type == NodeType.KEYSTONE ? HALF_KEYSTONE :
+                        node.type == NodeType.NOTABLE ? HALF_NOTABLE : HALF_SMALL);
+
+            worldX[i] = (int) Math.round(centerScreenX + (node.x - camX) * z);
+            worldY[i] = (int) Math.round(centerScreenY + (node.y - camY) * z);
+            worldHalf[i] = (int) Math.round(half * z);
+        }
+
+        g.pose().pushPose();
+
+        // Connection lines — only unlocked path + next available. Locked-locked web is what "слипалось".
+        for (SkillNode node : nodes) {
+            if (node.prerequisite == null || !nodeIndex.containsKey(node.prerequisite)) continue;
+            boolean fromUnlocked = unlockedSnapshot.contains(node.prerequisite);
+            boolean toUnlocked = unlockedSnapshot.contains(node.id);
+            if (!fromUnlocked && !toUnlocked) continue;
+
+            int idxFrom = nodeListIdx.get(node.prerequisite);
+            int idxTo = nodeListIdx.get(node.id);
+            int lineColor = (fromUnlocked && toUnlocked) ? 0xAA00E5FF : 0x8810B981;
+            UiDraw.drawLine(g, worldX[idxFrom], worldY[idxFrom], worldX[idxTo], worldY[idxTo], lineColor);
+        }
+
+        // Render nodes
+        for (int i = 0; i < nodes.size(); i++) {
+            SkillNode node = nodes.get(i);
+            int nx = worldX[i];
+            int ny = worldY[i];
+            int half = worldHalf[i];
+
+            boolean isUnlocked = unlockedSnapshot.contains(node.id);
+            boolean isPrereqUnlocked = node.prerequisite == null || unlockedSnapshot.contains(node.prerequisite);
+            boolean isAvailable = !isUnlocked && isPrereqUnlocked;
+
+            boolean hover = (mouseX >= nx - half && mouseX <= nx + half &&
+                             mouseY >= ny - half && mouseY <= ny + half &&
+                             mouseX < mainWidth);
+
+            if (hover) {
+                hoveredNode = node;
+            }
+
+            int border = isUnlocked ? BORDER_UNLOCKED :
+                         isAvailable ? BORDER_AVAILABLE : BORDER_LOCKED;
+            if (hover) border = BORDER_HOVER;
+
+            int fill = isUnlocked ? 0xCC083044 :
+                       isAvailable ? 0xCC064E3B : 0x990F172A;
+
+            UiDraw.drawGlowCircle(g, nx, ny, half + 1, (border & 0x33FFFFFF) | (border & 0x00FFFFFF));
+            UiDraw.drawGlowCircle(g, nx, ny, half, fill);
+            UiDraw.drawGlowCircle(g, nx, ny, Math.max(2, half - 3), (fill & 0x00FFFFFF) | 0x22000000);
+
+            // Item icon
+            float iconScale = (float) (0.75 * z);
+            if (iconScale > 0.3f) {
+                g.pose().pushPose();
+                g.pose().translate(nx - 8 * iconScale, ny - 8 * iconScale, 0);
+                g.pose().scale(iconScale, iconScale, 1f);
+                g.renderItem(node.displayItem, 0, 0);
+                g.pose().popPose();
+            }
+        }
+
+        g.pose().popPose();
+
+        renderHudHeader(g, mainWidth);
+        renderDetailSidebar(g);
+    }
+
+    private void renderHudHeader(GuiGraphics g, int mainWidth) {
+        int w = Math.min(420, mainWidth - 40);
+        int h = 40;
+        int x = (mainWidth - w) / 2;
+        int y = 10;
+
+        drawGlassContainer(g, x, y, w, h, 0xCC0B1829, 0x665CE1FF);
+        AquaFontRenderer.drawCenteredHeader(g, font, "Созвездия океана", x + w / 2, y + 5, 0xFF5CE1FF);
+
+        String lvlText = "Уровень " + levelCache;
+        AquaFontRenderer.draw(g, font, lvlText, x + 16, y + 24, 0xFFFFFFFF);
+
+        int xpBarX = x + 120;
+        int xpBarW = w - 240;
+        int xpBarY = y + 26;
+        int xpBarH = 10;
+
+        int curXp = aquaXpCache - minXpCache;
+        int reqXp = Math.max(1, maxXpCache - minXpCache);
+        float progress = Math.max(0.0f, Math.min(1.0f, (float) curXp / reqXp));
+
+        g.fill(xpBarX, xpBarY, xpBarX + xpBarW, xpBarY + xpBarH, 0xFF0F172A);
+        g.fill(xpBarX, xpBarY, xpBarX + (int) (xpBarW * progress), xpBarY + xpBarH, PANEL_BORDER);
+        UiDraw.border(g, xpBarX, xpBarY, xpBarW, xpBarH, 0xFF1E293B);
+
+        String ptsText = "Очки: " + skillPointsCache;
+        AquaFontRenderer.draw(g, font, ptsText, x + w - AquaFontRenderer.width(font, ptsText) - 16, y + 24, 0xFFFFD700);
+    }
+
+    private void renderDetailSidebar(GuiGraphics g) {
+        int px = width - PANEL_W + 8;
+        int py = 12;
+        int pw = PANEL_W - 16;
+        int ph = height - 24;
+
+        g.fill(px, py, px + pw, py + ph, 0xCC0B1829);
+        UiDraw.border(g, px, py, pw, ph, 0x665CE1FF);
+
+        int tx = px + 16;
+        int ty = py + 16;
+
+        if (hoveredNode == null) {
+            AquaFontRenderer.drawHeader(g, font, "Детали навыка", tx, ty, PANEL_BORDER);
+            AquaFontRenderer.draw(g, font, "Наведите курсор на созвездие", tx, ty + 24, 0xFF94A3B8);
+            return;
+        }
+
+        boolean isUnlocked = unlockedSnapshot.contains(hoveredNode.id);
+        boolean isPrereqUnlocked = hoveredNode.prerequisite == null || unlockedSnapshot.contains(hoveredNode.prerequisite);
+        boolean isAvailable = !isUnlocked && isPrereqUnlocked;
+
+        AquaFontRenderer.drawHeader(g, font, hoveredNode.title, tx, ty, 0xFFFFFFFF);
+        ty += 16;
+
+        String badge = hoveredNode.type == NodeType.KEYSTONE ? "[КЛЮЧЕВОЙ]" :
+                       hoveredNode.type == NodeType.NOTABLE ? "[ВЕЛИКИЙ]" : "[ОБЫЧНЫЙ]";
+        AquaFontRenderer.draw(g, font, badge, tx, ty, PANEL_BORDER);
+        ty += 24;
+
+        List<FormattedCharSequence> lines = font.split(AquaFontRenderer.text(hoveredNode.description), pw - 32);
+        for (FormattedCharSequence line : lines) {
+            g.drawString(font, line, tx, ty, 0xFFCBD5E1, false);
+            ty += 12;
+        }
+
+        ty += 16;
+        // Cost & Status
+        if (isUnlocked) {
+            AquaFontRenderer.draw(g, font, "Навык изучен", tx, ty, 0xFF10B981);
+        } else if (isAvailable) {
+            AquaFontRenderer.draw(g, font, "Стоимость: " + hoveredNode.cost + " очк.", tx, ty, 0xFFFFD700);
+            ty += 20;
+
+            int btnW = pw - 32;
+            int btnH = 26;
+            int btnX = tx;
+            int btnY = ty;
+
+            boolean canAfford = skillPointsCache >= hoveredNode.cost;
+            int btnFill = canAfford ? 0xFF047857 : 0xFF1E293B;
+            int btnBorder = canAfford ? 0xFF10B981 : 0xFF475569;
+
+            g.fill(btnX, btnY, btnX + btnW, btnY + btnH, btnFill);
+            UiDraw.border(g, btnX, btnY, btnW, btnH, btnBorder);
+            AquaFontRenderer.drawCentered(g, font, "Изучить", btnX + btnW / 2, btnY + 8, canAfford ? 0xFFFFFFFF : 0xFF94A3B8);
+        } else {
+            AquaFontRenderer.draw(g, font, "Нужен предыдущий навык", tx, ty, 0xFFEF4444);
+        }
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (button == 0 && hoveredNode != null) {
+            boolean isUnlocked = unlockedSnapshot.contains(hoveredNode.id);
+            boolean isPrereqUnlocked = hoveredNode.prerequisite == null || unlockedSnapshot.contains(hoveredNode.prerequisite);
+            boolean isAvailable = !isUnlocked && isPrereqUnlocked;
+
+            if (isAvailable && skillPointsCache >= hoveredNode.cost) {
+                NetworkHandler.CHANNEL.sendToServer(new C2SUnlockSkillPacket(hoveredNode.id));
+                try {
+                    Minecraft.getInstance().getSoundManager().play(
+                            net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(SoundEvents.PLAYER_LEVELUP, 1.2f, 0.5f)
+                    );
+                } catch (Exception ignored) {}
+                return true;
+            }
+        }
+        if (button == 0 && mouseX < width - PANEL_W) {
+            isDragging = true;
+            return true;
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        if (button == 0) isDragging = false;
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (isDragging) {
+            camX -= dragX / zoom;
+            camY -= dragY / zoom;
+            return true;
+        }
+        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        if (delta > 0) zoom = Math.min(1.4, zoom * 1.12);
+        else if (delta < 0) zoom = Math.max(0.35, zoom / 1.12);
+        return true;
     }
 }

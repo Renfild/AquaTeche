@@ -13,6 +13,8 @@ public class ModConfig {
     public static final ForgeConfigSpec.BooleanValue AUTO_STORM_ENABLED;
     public static final ForgeConfigSpec.ConfigValue<String> STORM_TIMEZONE;
     public static final ForgeConfigSpec.BooleanValue FISHING_MINIGAME;
+    public static final ForgeConfigSpec.BooleanValue REQUIRE_PORTAL_SESSION;
+    public static final ForgeConfigSpec.ConfigValue<String> AUTH_API_BASE;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -70,6 +72,14 @@ public class ModConfig {
         FISHING_MINIGAME = builder
                 .comment("Rhythm Hook mini-game on AquaTech rod catch (false = instant loot)")
                 .define("tideTensionEnabled", true);
+        builder.pop();
+        builder.push("auth");
+        REQUIRE_PORTAL_SESSION = builder
+                .comment("true = join requires a valid aquateche.store session (launcher login). Keep false on local Lodestone.")
+                .define("requirePortalSession", false);
+        AUTH_API_BASE = builder
+                .comment("Portal origin used by Mohist to POST /api/launcher/verify-token")
+                .define("apiBase", "https://aquateche.store");
         builder.pop();
         SPEC = builder.build();
     }

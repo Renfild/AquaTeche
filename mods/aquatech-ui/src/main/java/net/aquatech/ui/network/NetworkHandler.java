@@ -85,6 +85,30 @@ public class NetworkHandler {
                 .decoder(C2SRhythmHookResultPacket::new)
                 .consumerMainThread(C2SRhythmHookResultPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(net.aquatech.ui.network.packet.C2SAuthPacket.class, id())
+                .encoder(net.aquatech.ui.network.packet.C2SAuthPacket::encode)
+                .decoder(net.aquatech.ui.network.packet.C2SAuthPacket::new)
+                .consumerMainThread(net.aquatech.ui.network.packet.C2SAuthPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(net.aquatech.ui.network.packet.C2SOpenContainerPacket.class, id())
+                .encoder(net.aquatech.ui.network.packet.C2SOpenContainerPacket::encode)
+                .decoder(net.aquatech.ui.network.packet.C2SOpenContainerPacket::new)
+                .consumerMainThread(net.aquatech.ui.network.packet.C2SOpenContainerPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(net.aquatech.ui.network.packet.S2CSyncLimitersPacket.class, id())
+                .encoder(net.aquatech.ui.network.packet.S2CSyncLimitersPacket::encode)
+                .decoder(net.aquatech.ui.network.packet.S2CSyncLimitersPacket::new)
+                .consumerMainThread(net.aquatech.ui.network.packet.S2CSyncLimitersPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(net.aquatech.ui.network.packet.S2CSessionSyncPacket.class, id())
+                .encoder(net.aquatech.ui.network.packet.S2CSessionSyncPacket::encode)
+                .decoder(net.aquatech.ui.network.packet.S2CSessionSyncPacket::new)
+                .consumerMainThread(net.aquatech.ui.network.packet.S2CSessionSyncPacket::handle)
+                .add();
     }
 
     public static void markJoined(ServerPlayer player) {

@@ -44,6 +44,12 @@
 * **Этап 1.4: Автоматизация (Авторыболов `AutoFisherBlockEntity.java`).**
   * Создание блочного контекста `AbstractContainerMenu` и `AbstractContainerScreen` для `auto_fisher`.
   * Реализация автоматического цикла ловли с поддержкой карт ускорения и фильтров.
+  * Выход **3×2** (6 слотов); остаток улова → соседний инвентарь → дроп рядом с блоком (без void при ×8+).
+  * GUI: удочка/апгрейд слева, стрелка прогресса по центру, сетка дропа справа (`auto_fisher.png`).
+* **Этап 1.5: Прочность удочек StarCatcher (`RodDurability` + KubeJS).**
+  * `RodDurability.java` / `RodDurabilityApplier.java`: лимиты уловов, износ на ручной ловле и AF, force-`maxDamage` через Unsafe (KubeJS `item.maxDamage =` на raw Item часто no-op).
+  * Клиент: полоска `RodDurabilityBar` (всегда видна) + тултип «Осталось уловов: X / Y».
+  * `kubejs/startup_scripts/40_rod_durability.js`: `item.setMaxDamage(N)` — ранние 128, середина 192, поздние 256, топ 320.
 
 ---
 
@@ -75,6 +81,10 @@
 * **Этап 3.2: Цепочка прогрессивного крафта 12 удочек (`20_aquatech_rod_crafts.js`).**
   * Создание усложненной ступенчатой цепочки рецептов (Tier 1 ➔ Tier 13): `humble_rod` ➔ `bamboo_rod` ➔ `good_old_rod` ➔ `naturalist_rod` ➔ `slimed_rod` ➔ `iceborn_rod` ➔ `starcatcher_rod` ➔ `azure_crystal_rod` ➔ `sharktooth_rod` ➔ `obsidian_rod` ➔ `lush_glowberry_rod` ➔ `magmaforged_rod` ➔ `alpha_rod`.
   * Требование предыдущей удочки в крафте + уникальных материалов эпохи Industrial Upgrade (схемы, сплавы, уран, осмиридий).
+* **Этап 3.2b: Баланс лута T1/T2 + тултипы + фантомы.**
+  * T1 `bamboo_rod`: титан убран; добавлен дроп `minecraft:bamboo`; T2 `humble_rod`: титан **60%**.
+  * `kubejs/client_scripts/add_fishing_resource_tooltips.js` синхронизирован с `rollStarCatcherRodLoot` (earliest tier).
+  * `60_disable_phantoms.js`: `doInsomnia false` + cancel spawn phantom.
 * **Этап 3.3: Кастомные крафты сборки (`30_aquatech_crafting.js`).**
   * Адаптация рецептов контроллеров и накопителей AE2 (`ae2:controller`, `ae2:drive`).
   * Рецепты лодки Кикстартера, апгрейдов скорости, океанических фильтров, драги дна и гидрореактора.
@@ -120,9 +130,10 @@
 * **Этап 6.2: Скрипт деплоя скриптов `deploy_runtime.ps1`.**
   * Синхронизация папок `kubejs/`, модов `rhino`, `recipe_generator` и `blueprint` между всеми инстансами.
 * **Этап 6.3: Клиентский лаунчер + онлайн-обновления пака (актуально).**
-  * Лаунчер: `dist/releases/AquaTechLauncher.exe` (исходник `tools/aquatech_launcher.py`, сейчас **v2.3.0**).
-  * Пак для синка: `dist/AquaTech-Client` (+ копия рядом с exe в `dist/releases/AquaTech-Client`).
-  * Краткая инструкция: `КАК_ОБНОВЛЯТЬ_СБОРКУ.txt` (копия также на Рабочем столе: `AquaTech_КАК_ОБНОВЛЯТЬ_СБОРКУ.txt`).
+  * Bootstrap: `dist/releases/AquaTech.exe` + onedir zip `AquaTechLauncher.zip` (`docs/bootstrap.json`).
+  * Актуальные теги (2026-08-11): pack **2.9.18**, launcher **client-2.9.29**, `aquatech_ui` **1.0.12**.
+  * Lodestone больше не синхронизируем. Живой хост — Apex; клиенты берут банки из CDN-пака.
+  * Пак: `python tools/publish_client_pack.py` → `upload_pack_release.py`; лаунчер: PyInstaller + `upload_launcher_release.py`.
 
 #### 🔄 Как обновлять клиентскую сборку (чеклист)
 
@@ -183,9 +194,229 @@
 | **2026-08-06** | `v1.9.1` | Antigravity AI | Удален отдельный слот умножителей улова в Авто-Рыболове. Авторыболов скейлится только от умножителя в удочке; запрещена укладка RateMod в авторыболов (разрешены только модули). Исправлен баг отрицательной энергии (`-15536 FE`) через 32-битный ContainerData сплит. | `AutoFisherBlockEntity.java`, `AutoFisherMenu.java`, `HydroReactorBlockEntity.java`, `HydroReactorMenu.java`, `OceanFilterBlockEntity.java`, `OceanFilterMenu.java`, `SeabedDredgerBlockEntity.java`, `SeabedDredgerMenu.java` |
 | **2026-08-07** | `v2.0.0` | Antigravity AI | **Глобальное обновление баланса и механизмов:**<br>1. Установлен мод **Extended Crafting** (`ExtendedCrafting-1.20.1-6.0.10.jar`) и библиотека `Cucumber-1.20.1-7.0.16.jar`. В KubeJS настроены верстаки 9×9 Ultimate Table для `rate_x32`, `rate_x64` и Административной Панели.<br>2. Удален гидрореактор (`hydro_reactor`), переименован `ocean_filter` в «Ботанический Экстрактор Цветов» (вылов лепестков и цветов Botania), в `seabed_dredger` добавлен Небесный Камень AE2 (`ae2:sky_stone_block`).<br>3. Добавлен `ae2_press_case.json` за 399 монет с прессами AE2, удален `free_case.json`. В KubeJS добавлены рецепты размножения прессов (Пресс + Блок Железа = 2 Пресса) и их взаимозаменяемости.<br>4. В улов удочек 1 тира (`bamboo_rod`, `humble_rod`, `fishing_rod`) добавлен 100% улов Булыжника и стартовых блоков; в улов 2 тира добавлен Титан (45%).<br>5. Вычищены ошибки KubeJS (удалены ссылки на несуществующие айди `aquatech_ui:*_rod` и `double_hook_upgrade`), удалены старые 3×3 Java-рецепты для рейтов х32/х64 из мода. | `ExtendedCrafting-1.20.1-6.0.10.jar`, `Cucumber-1.20.1-7.0.16.jar`, `30_aquatech_crafting.js`, `FishingLootHandler.java`, `FishingRodCompat.java`, `SeabedDredgerBlockEntity.java`, `OceanFilterBlockEntity.java`, `ae2_press_case.json`, `IMPLEMENTATION_PLAN.md` |
 | **2026-08-07** | `v2.1.0` | Composer | Клиентский лаунчер: локальный пак + MD5-синк, кнопка «Обновить», CDN через `start_sync_server` + Playit :8080, UI v2.3.0. Зафиксирован чеклист обновления сборки в ТЗ-6.3 и `КАК_ОБНОВЛЯТЬ_СБОРКУ.txt`. | `tools/aquatech_launcher.py`, `tools/publish_client_pack.py`, `tools/start_sync_server.py`, `IMPLEMENTATION_PLAN.md`, `КАК_ОБНОВЛЯТЬ_СБОРКУ.txt` |
+| **2026-08-11** | `v2.2.0` | Composer | Прочность удочек StarCatcher: `RodDurability` + износ на улове (в т.ч. fish-only), тултип остатка уловов; KubeJS `40_rod_durability.js`. Рейт-моды: `RateModItem.MAX_CATCHES = 10000` + pin bait. Pack/launcher линейка 2.9.15 / client-2.9.26, `aquatech_ui` 1.0.9. | `RodDurability.java`, `FishingLootHandler.java`, `StarCatcherRodTooltips.java`, `AutoFisherBlockEntity.java`, `RateModItem.java`, `40_rod_durability.js` |
+| **2026-08-11** | `v2.2.1` | Composer | Баланс лута: титан снят с T1 `bamboo_rod`, добавлен дроп бамбука; на T2 `humble_rod` титан 45%→60%. Фантомы: `60_disable_phantoms.js` (уже был, освежён). Docs `FISHING_ROD_LOOT_TABLE.md`. `aquatech_ui` 1.0.10, pack 2.9.16, launcher 2.9.27. | `FishingLootHandler.java`, `add_fishing_resource_tooltips.js`, `60_disable_phantoms.js`, `FISHING_ROD_LOOT_TABLE.md` |
+| **2026-08-11** | `v2.2.2` | Composer | Тултипы ресурсов синхронизированы с `rollStarCatcherRodLoot` (earliest tier). AF: выход 2×2→**3×3**, overflow в соседний IItemHandler / дроп в мир. Прочность ранних удочек 64→128 (середина 192, поздние 256, топ 320). Вырезан мёртвый бонус perfect reel (`quality >= 90`). `aquatech_ui` 1.0.11, pack 2.9.17, launcher 2.9.28. | `add_fishing_resource_tooltips.js`, `AutoFisherBlockEntity.java`, `AutoFisherMenu.java`, `40_rod_durability.js`, `RodDurability.java`, `FishingLootHandler.java`, `FISHING_ROD_LOOT_TABLE.md` |
+| **2026-08-11** | `v2.2.3` | Composer | Фикс отображения прочности: KubeJS `item.maxDamage=` no-op на raw Item → Java `RodDurabilityApplier` (Unsafe force maxDamage) + клиентская полоска `RodDurabilityBar` (видна всегда, не только после урона) + `item.setMaxDamage()` в KubeJS. Тултип: «Осталось уловов: X / Y». `aquatech_ui` **1.0.12**, pack **2.9.18**, launcher **client-2.9.29**. | `RodDurabilityApplier.java`, `RodDurabilityBar.java`, `RodDurability.java`, `AquaTechUI.java`, `StarCatcherRodTooltips.java`, `40_rod_durability.js`, `IMPLEMENTATION_PLAN.md` |
+| **2026-08-11** | `v2.2.4` | Composer | AutoFisher UI под новую текстуру: выход **6** слотов (3×2), слоты удочки/апгрейда, стрелка прогресса вместо старого бара. Overflow в chest/мир сохранён. `aquatech_ui` **1.0.13**, pack **2.9.19**, launcher **client-2.9.30**. | `AutoFisherBlockEntity.java`, `AutoFisherMenu.java`, `AutoFisherScreen.java`, `auto_fisher.png` |
+| **2026-08-10** | `v2.3.0` | Composer | Портал: убраны cyan hover/outline на карточках, hero horizon под IP-блоком. Пак **2.9.5–2.9.8**: ImmediatelyFast убран (Oculus crash), `aquatech_ui` **1.0.3**, FAWE Mohist TypeProperty patch. Крафты `boner_rod` / `sky_rod`, x32/x64 только extreme. Lodestone sync при `publish_client_pack`. Таблица лута удочек на портале (`FISHING_ROD_LOOT_TABLE.md`). | `docs/`, `tools/patches/patch_fawe_mohist.py`, `kubejs/`, `tools/publish_client_pack.py`, `tools/sync_lodestone_mods.py` |
+| **2026-08-11** | `v2.3.1` | Composer | **Рыбалка StarCatcher:** откат Rhythm Hook (нет текстур) → нативный SC minigame. `ItemFishedEvent`: **не cancel** (ghost bobber), `getDrops().clear()` + `awardCatch()` для resource rods, `forceReleaseBobber()` next tick. Datapack `aquatech_boot_fixes` fish: preview `minecraft:cod`, `skips_minigame: false`. `aquatech_ui` **1.0.17**, pack **2.9.24**. | `FishingLootHandler.java`, `StarCatcherAttachments.java`, `datapacks/aquatech_boot_fixes/`, `scripts/tasks/neutralize_aquatech_sc_preview.py` |
+| **2026-08-11** | `v2.3.2` | Composer | **Apex deploy P0–P2:** `scripts/tasks/deploy_apexnodes_sftp.py` (SFTP + panel restart, jar purge, kubejs/datapack mirror, MySQL inject). Секреты `.apex_deploy.json` / `.apex_mysql.json`. FAWE `persistent-brushes: false`, `patch_fawe_mohist.py`. Smoke `smoke_apex_server.py`, backup rotate (limit=1), `apex_console_ops.py` (WG `-w`, Chunky). | `scripts/tasks/*.py`, `scripts/README.md`, `server/plugins/FastAsyncWorldEdit/config.yml` |
+| **2026-08-11** | `v2.3.3` | Composer | **Инцидент FTB Quests:** коммит `ce93050` удалил workshop-главы; deploy затирал live-правки с Apex. Восстановление → финал: **только Lodestone-квесты** (`1.snbt` + 3 главы). Deploy **не** трогает `ftbquests` без `AQUATECH_SYNC_QUESTS=1`. | `config/ftbquests/`, `server/config/ftbquests/`, `deploy_apexnodes_sftp.py` |
+| **2026-08-11** | `v2.3.4` | Composer | **Fish-only rods:** `boner_rod`/`sky_rod` — `scrubFakeAquaTechFishDrops()` (убрать cod из aquatech datapack pool), вес aquatech-fish → 0.05. `aquatech_ui` **1.0.18**, pack **pack-2.9.25**. Лаунчер bootstrap **client-2.9.42**, portal auth fixes. | `FishingLootHandler.java`, `FishingRodCompat.java`, `docs/pack/manifest.json`, `docs/bootstrap.json` |
+| **2026-08-13** | `v2.4.0` | Antigravity AI | **Системный аудит и Роадмап проекта (без визуала):** Проведен комплексный аудит сборки, сайта, лаунчера и инфраструктуры. Сформирована дорожная карта исправления дюпов, сквозной токен-авторизации лаунчер-сервер, доната D1, бэкапов R2 и эндгейм-механик. | `IMPLEMENTATION_PLAN.md`, `docs/TECHNICAL_ROADMAP.md` |
+| **2026-08-13** | `v2.4.1` | Antigravity AI | **Реализация Раздела 1 (Серверная сборка):** 1) Износ удочек `RodDurability` без срезки Unbreaking (1 catch = 1 damage). 2) `StarCatcherEnchantmentHandler` заблокировал Mending/Unbreaking на наковальне и починку от XP. 3) `AutoFisherBlockEntity` с принудительным `setChanged()` при улове. 4) `/deposit` и `/withdraw` в `casesmod` для конвертации монет Lightman's Currency ↔ баланс F4. 5) `70_island_auto_claim.js` для авто-привата WorldGuard. | `RodDurability.java`, `StarCatcherEnchantmentHandler.java`, `AutoFisherBlockEntity.java`, `MenuCommands.java`, `70_island_auto_claim.js` |
+| **2026-08-13** | `v2.4.2` | Antigravity AI | **Реализация Раздела 3 (Лаунчер & Безопасность):** 1) Скрытие окон консолей CMD/PowerShell через `CREATE_NO_WINDOW` (`0x08000000`) и `STARTUPINFO` `SW_HIDE`. 2) Сквозная токен-авторизация `C2SAuthPacket` + `ServerAuthTracker` (авто-кик через 10с без валидного токена). 3) Парсер крашей `analyze_crash_logs()` с диагностикой OOM, OpenGL, GPU драйверов. 4) Динамический RAM Allocator `detect_optimal_ram_mb()` (50% свободного OZU) и G1GC флаги Java 17. | `C2SAuthPacket.java`, `ServerAuthTracker.java`, `ClientAuthHandler.java`, `aquatech_launcher.py`, `launcher_bridge.py` |
+| **2026-08-13** | `v2.5.0` | Antigravity AI | **Реализация Web-Лаунчера по принципу LoliLand (Edge WebView2 + REST API Bridge):** 1) Легковесный нативный контейнер `aquatech_web_launcher.py` (PyWebView, 15 МБ). 2) Океанский веб-интерфейс `docs/launcher.html` + `docs/assets/css/launcher.css` по стандартам `anti-ai-slop-design`. 3) Безрамочное окно (Frameless UI), кнопка «ИГРАТЬ» с прогресс-баром, выбор RAM, индикатор онлайна, краш-диагностика на русском языке. 4) Скрипт сборки `build_web_launcher.py`. | `aquatech_web_launcher.py`, `launcher.html`, `launcher.css`, `launcher_bridge.py`, `build_web_launcher.py` |
+| **2026-08-13** | `v2.5.1` | Composer | LoliLand GUI 1.2–1.3 + auth: TTF `aquatech_ui:main/header`, K/TAB/HUD/AquaButton without hover scale. Mohist `POST /api/launcher/verify-token` when `auth.requirePortalSession=true` (default false for Lodestone). `S2CSessionSyncPacket` now carries balance/rank. `aquatech_ui` **1.0.21**. | `AquaFontRenderer.java`, `OceanSkillTreeScreen.java`, `ServerAuthTracker.java`, `PortalSessionVerifier.java`, `main.json`, `header.json` |
+| **2026-08-13** | `v2.5.2` | Composer | Stage 2 CEF: CinemaMod MCEF 2.1.6 in client pack only. F4 Донат + клик по нику → `AquaWebScreen` embeds `/embed/donate.html` `/embed/cabinet.html`. Worker sets `at_session` from `?session=`. `aquatech_ui` **1.0.22**, `casesmod` **1.0.7**. | `AquaWebBridge.java`, `CefHost.java`, `embed.js`, `worker/index.js`, `MainMenuScreen.java` |
+| **2026-08-13** | `v2.5.3` | Composer | Ship pack **2.9.26** + launcher **client-2.9.47**. Lodestone sync removed from `publish_client_pack`. Session token JVM flag for CEF cabinet. | `publish_client_pack.py`, `aquatech_launcher.py`, `docs/pack/manifest.json` |
 
+---
 
+## 🧭 Handoff для Antigravity — спринт 10–11 августа 2026
 
+> [!IMPORTANT]
+> Этот раздел — **полный контекст за 2 дня** (10–11 авг 2026). Читать перед любой работой с сервером, рыбалкой, квестами или деплоем.
+
+### 1. Текущее состояние (snapshot на 2026-08-11)
+
+| Компонент | Версия / значение |
+|-----------|-------------------|
+| **Живой хост** | ApexNodes `g-pl-3.apexnodes.xyz:21561` (panel id `6fdc6f7b`) |
+| **Репо-сервер** | `server/` — зеркало для SFTP, не единственный runtime |
+| **Lodestone** | `%USERPROFILE%\.lodestone\instances\AquaTech-*\mods` — синк first-party jars |
+| **aquatech_ui** | **1.0.18** (`server/mods/`, Apex, Lodestone) |
+| **casesmod** | 1.0.1 |
+| **packetfixer** | 3.3.2-forge-1.20.1 |
+| **Client pack** | GitHub release **pack-2.9.25** (`docs/pack/manifest.json`) |
+| **Launcher bootstrap** | **client-2.9.42** (`docs/bootstrap.json`) |
+| **FAWE** | patched jar + `persistent-brushes: false` |
+| **MySQL** | Apex MariaDB, плейсхолдеры `__AQUATECH_MYSQL_*__` в plugin configs |
+
+### 2. Рыбалка StarCatcher + aquatech_ui (критично)
+
+#### 2.1 Два типа удочек
+
+| Тип | ID | Поведение |
+|-----|-----|-----------|
+| **Resource rods** | `bamboo_rod` … `alpha_rod` (кроме fish-only) | SC minigame → `ItemFishedEvent` → clear SC drops → `awardCatch()` (IU/AquaTech loot pools) |
+| **Fish-only** | `starcatcher:boner_rod`, `starcatcher:sky_rod` | SC minigame → **нативный** улов StarCatcher, без AquaTech resource pool |
+
+Код: `FishingRodCompat.java` (`FISH_ONLY`), `FishingLootHandler.java`.
+
+#### 2.2 Что ломалось и как чинили
+
+1. **Rhythm Hook UI** — отклонён (magenta missing textures). Оставлен **нативный StarCatcher minigame**.
+2. **Застрявший поплавок** — нельзя `event.setCanceled(true)` на `ItemFishedEvent`. Паттерн: clear drops, не cancel, `StarCatcherAttachments.forceReleaseBobber(player)` на следующем тике.
+3. **Костяная удочка ловила cod/руды** — aquatech datapack `starcatcher/fish/*.json` с `catch_info: cod` попадал в **глобальный** SC pool. Фикс 1.0.18: `scrubFakeAquaTechFishDrops()` для fish-only; вес aquatech-fish снижен до `0.05`.
+
+#### 2.3 Datapack aquatech_boot_fixes
+
+Пути (синкаются в `server/datapacks`, `moonlight-global-datapacks`, `world/datapacks`):
+
+```
+datapacks/aquatech_boot_fixes/data/aquatech/starcatcher/fish/*.json
+```
+
+- `catch_info.item` = `minecraft:cod` — **только preview** в minigame
+- Реальный лут resource rods — из Java `rollStarCatcherRodLoot` / `awardCatch`
+- Скрипт регенерации preview: `scripts/tasks/neutralize_aquatech_sc_preview.py`
+
+Документация лута: `docs/FISHING_ROD_LOOT_TABLE.md`.
+
+### 3. FTB Quests — инцидент и правила
+
+#### 3.1 Что случилось
+
+1. Коммит **`ce93050`** (9 авг) удалил workshop-главы `20_ws_*` … `2F_ws_*`.
+2. Deploy копировал `config/ftbquests` из репо на Apex → **затирал** правки из in-game редактора.
+3. Пользовательские квесты жили в **Lodestone**, не в репо.
+
+#### 3.2 Текущий source of truth (квесты)
+
+**Единственные главы на Apex и в репо (после v2.3.4):**
+
+| Файл | Описание |
+|------|----------|
+| `quests/chapters/1.snbt` | Основная глава пользователя (~18 KB) |
+| `quests/chapters/41C738259E283D28.snbt` | Вспомогательная |
+| `quests/chapters/57FF374744F4AC76.snbt` | Вспомогательная |
+| `quests/chapters/7D2835D587AABDAB.snbt` | Вспомогательная (иконка bamboo_rod) |
+
+Оригинал редактирования:  
+`%USERPROFILE%\.lodestone\instances\AquaTech-18b48d49\config\ftbquests\`
+
+Копии в репо: `config/ftbquests/` и `server/config/ftbquests/`.
+
+#### 3.3 Правила для агента (НЕ НАРУШАТЬ)
+
+- Deploy **по умолчанию НЕ** заливает `ftbquests` (`AQUATECH_SYNC_QUESTS=1` только явно).
+- Перед заменой квестов — **скачать live** с Apex или взять из Lodestone.
+- **Не** восстанавливать workshop `20_ws_*` без запроса владельца.
+- Бэкап перед полным deploy: panel backup (rotate при limit=1).
+
+Загрузка только квестов:
+
+```powershell
+$env:AQUATECH_SFTP_ONLY = 'config/ftbquests'
+$env:AQUATECH_SKIP_BACKUP = '1'
+python scripts/tasks/deploy_apexnodes_sftp.py
+```
+
+После: `ftbquests reload` через panel console или `apex_console_ops.py --cmd "ftbquests reload"`.
+
+### 4. Apex deploy — инфраструктура
+
+#### 4.1 Секреты (gitignored)
+
+| Файл | Содержимое |
+|------|------------|
+| `.apex_deploy.json` | `sftp_pass`, `apex_api_key`, host/user/server_id |
+| `.apex_mysql.json` | MariaDB host, user, password, database |
+
+Пример: `.apex_deploy.json.example`.
+
+#### 4.2 Основные скрипты (`scripts/tasks/`)
+
+| Скрипт | Назначение |
+|--------|------------|
+| `deploy_apexnodes_sftp.py` | SFTP upload `server/` → Apex, panel restart, jar purge, kubejs mirror |
+| `smoke_apex_server.py` | panel running, 1 jar per prefix, FAWE brushes, MySQL ping |
+| `apex_console_ops.py` | WG `region flag -w world …`, Chunky spawn pregen |
+| `bootstrap_p0_local.py` | FAWE patch + promote jar локально |
+| `setup_apex_mysql.py` | provision MariaDB + plugin configs |
+| `neutralize_aquatech_sc_preview.py` | cod preview в aquatech fish json |
+
+Документация: `scripts/README.md`.
+
+#### 4.3 Deploy flow (полный)
+
+```powershell
+# secrets in .apex_deploy.json or env
+python scripts/tasks/deploy_apexnodes_sftp.py          # backup → upload → restart
+python scripts/tasks/smoke_apex_server.py              # verify
+python tools/sync_lodestone_mods.py                  # Lodestone jars
+# restart Mohist in Lodestone UI
+```
+
+Флаги: `--skip-backup`, `--no-restart`, `--restart-only`, `AQUATECH_SFTP_ONLY=...`.
+
+#### 4.4 FAWE × Mohist
+
+- NPE `ItemUtil` / `BukkitImplAdapter` → `persistent-brushes: false` в `server/plugins/FastAsyncWorldEdit/config.yml`
+- Jar patch: `tools/patches/patch_fawe_mohist.py` (IBukkit + TypeProperty)
+- На Apex применено, smoke OK
+
+#### 4.5 P2 ops (применено на Apex)
+
+- WG global explosions deny на `world`
+- Chunky circle r=500 вокруг spawn (одноразово после смены карты)
+- Panel backup rotate при `backup_limit=1`
+
+### 5. Клиент / лаунчер / портал (10–11 авг)
+
+- Портал: `aquateche.store`, Worker deploy, login fixes (fallback host если DNS)
+- Launcher: multi-mirror bootstrap, cache-bust, portal auth UI, auto-update banner
+- Pack pipeline: `python tools/publish_client_pack.py` → `python tools/upload_pack_release.py`
+- После first-party jar: **всегда** `python tools/sync_lodestone_mods.py`
+- Rebuild launcher: см. `.cursor/rules/always-rebuild-launcher.mdc`
+
+### 6. Git-коммиты спринта (для blame)
+
+```
+7e16b6c  Restore Lodestone FTB quests + boner fish fix (1.0.18, pack-2.9.25)
+de382d9  Restore workshop quests + stop deploy overwrite (потом откат workshop)
+a8b693f  Apex backup rotate fix
+70bc316  Apex P2 ops (backup, MySQL smoke, WG/Chunky)
+326b1d9  Apex P0/P1 deploy hardening
+c6e27a0  pack 2.9.24 StarCatcher fishing + bobber cleanup
+… (launcher/portal commits 2a7edd8..b5ac552)
+fa5a612  pack 2.9.8 FAWE + aquatech_ui 1.0.3
+```
+
+### 7. Открытые задачи (P3, не делать без запроса)
+
+- [ ] Scheduled autobackup на Apex (не только pre-deploy)
+- [ ] Richer post-restart smoke (console log peek, plugin load)
+- [ ] Chunky progress monitoring / broken chunk audit
+- [ ] Rebuild launcher bootstrap после каждого pack bump (если не сделано)
+- [ ] Workshop quests `20_ws_*` — **удалены намеренно**, не восстанавливать
+
+### 8. Чеклист верификации для Antigravity
+
+```powershell
+# 1. Smoke Apex
+python scripts/tasks/smoke_apex_server.py
+# ожидание: panel running, aquatech_ui-1.0.18.jar ×1, FAWE brushes false, MySQL OK
+
+# 2. Квесты на Apex — только 4 snbt
+# remote: config/ftbquests/quests/chapters/{1,41C738...,57FF37...,7D2835...}.snbt
+
+# 3. Рыбалка in-game
+# resource rod (humble) → IU loot после minigame
+# boner_rod → starcatcher:* fish, НЕ cod/руды
+
+# 4. Lodestone sync
+python tools/sync_lodestone_mods.py
+# один aquatech_ui-1.0.18.jar в Lodestone mods
+
+# 5. Client pack
+# docs/pack/manifest.json → pack-2.9.25, aquatech_ui-1.0.18.jar
+```
+
+### 9. Карта graphify / exploration
+
+Перед широким поиском по коду:
+
+```powershell
+python -m graphify query "Apex deploy fishing FTB quests"
+python -m graphify explain "FishingLootHandler"
+```
+
+После правок Java/kubejs: `python -m graphify update .`
+
+---
 
 
 

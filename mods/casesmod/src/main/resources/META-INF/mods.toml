@@ -5,7 +5,7 @@ issueTrackerURL="https://example.com"
 
 [[mods]]
 modId="casesmod"
-version="1.0.0"
+version="${file.jarVersion}"
 displayName="Cases, Kits, Warps & Quests"
 authors="You"
 description='''Кастомное меню сервера: кейсы с анимацией, донат-меню, киты, варпы и квесты.

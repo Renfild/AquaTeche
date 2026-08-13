@@ -1,6 +1,7 @@
 package net.aquatech.ui.client.tab;
 
 import net.aquatech.ui.client.ClientUiState;
+import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.common.PlayerProfile;
 import net.aquatech.ui.common.ServerStats;
@@ -53,14 +54,14 @@ public final class OceanTabOverlay {
 
         int contentLeft = panelX + OUTER_PADDING;
         int contentRight = panelX + panelW - OUTER_PADDING;
-        graphics.drawString(font, "AQUATECH", contentLeft, panelY + 11, UiDraw.COLOR_ACCENT, false);
-        graphics.drawString(font, "OCEAN NETWORK", contentLeft, panelY + 24, UiDraw.COLOR_MUTED, false);
+        AquaFontRenderer.drawHeader(graphics, font, "AquaTech", contentLeft, panelY + 11, UiDraw.COLOR_ACCENT);
+        AquaFontRenderer.draw(graphics, font, "Ocean Network", contentLeft, panelY + 24, UiDraw.COLOR_MUTED);
 
         String online = "● " + stats.online() + "/" + Math.max(stats.online(), stats.maxPlayers());
         int onlineColor = stats.online() > 0 ? 0xFF63E6A5 : UiDraw.COLOR_MUTED;
-        graphics.drawString(font, online, contentRight - font.width(online), panelY + 11, onlineColor, false);
+        AquaFontRenderer.draw(graphics, font, online, contentRight - AquaFontRenderer.width(font, online), panelY + 11, onlineColor);
         String staff = stats.staffOnline() + " команда";
-        graphics.drawString(font, staff, contentRight - font.width(staff), panelY + 24, UiDraw.COLOR_MUTED, false);
+        AquaFontRenderer.draw(graphics, font, staff, contentRight - AquaFontRenderer.width(font, staff), panelY + 24, UiDraw.COLOR_MUTED);
         graphics.fill(contentLeft, panelY + HEADER_HEIGHT - 5, contentRight, panelY + HEADER_HEIGHT - 4, 0x443A7892);
 
         int listTop = panelY + HEADER_HEIGHT;
@@ -95,8 +96,8 @@ public final class OceanTabOverlay {
 
         // Footer: only hint, no website link
         String hint = maxScroll > 0 ? "колесо мыши — прокрутка" : "удерживайте TAB";
-        graphics.drawString(font, hint, contentRight - font.width(hint),
-                panelY + panelH - FOOTER_HEIGHT + 3, UiDraw.COLOR_MUTED, false);
+        AquaFontRenderer.draw(graphics, font, hint, contentRight - AquaFontRenderer.width(font, hint),
+                panelY + panelH - FOOTER_HEIGHT + 3, UiDraw.COLOR_MUTED);
     }
 
     public static void scroll(double delta) {
@@ -123,15 +124,15 @@ public final class OceanTabOverlay {
         int right = x + width - 8;
         String ping = Math.max(0, profile.ping()) + "ms";
         int pingColor = pingColor(profile.ping());
-        String name = fit(font, profile.name(), Math.max(24, right - textX - font.width(ping) - 14));
-        graphics.drawString(font, name, textX, y + 8, UiDraw.COLOR_TEXT, false);
+        String name = AquaFontRenderer.fit(font, profile.name(), Math.max(24, right - textX - AquaFontRenderer.width(font, ping) - 14));
+        AquaFontRenderer.draw(graphics, font, name, textX, y + 8, UiDraw.COLOR_TEXT);
 
-        String rank = fit(font, profile.rankDisplay(), Math.max(24, right - textX));
-        graphics.drawString(font, rank, textX, y + 23, rankColor, false);
-        graphics.fill(right - font.width(ping) - 6, y + 10, right - font.width(ping) - 3, y + 13, pingColor);
-        graphics.drawString(font, ping, right - font.width(ping), y + 7, pingColor, false);
+        String rank = AquaFontRenderer.fit(font, profile.rankDisplay(), Math.max(24, right - textX));
+        AquaFontRenderer.draw(graphics, font, rank, textX, y + 23, rankColor);
+        graphics.fill(right - AquaFontRenderer.width(font, ping) - 6, y + 10, right - AquaFontRenderer.width(font, ping) - 3, y + 13, pingColor);
+        AquaFontRenderer.draw(graphics, font, ping, right - AquaFontRenderer.width(font, ping), y + 7, pingColor);
         if (profile.staff()) {
-            graphics.drawString(font, "STAFF", right - font.width("STAFF"), y + 23, UiDraw.COLOR_ACCENT, false);
+            AquaFontRenderer.draw(graphics, font, "STAFF", right - AquaFontRenderer.width(font, "STAFF"), y + 23, UiDraw.COLOR_ACCENT);
         }
     }
 
@@ -148,11 +149,4 @@ public final class OceanTabOverlay {
         return 0xFFFF6B6B;
     }
 
-    private static String fit(net.minecraft.client.gui.Font font, String text, int maxWidth) {
-        if (font.width(text) <= maxWidth) {
-            return text;
-        }
-        String ellipsis = "...";
-        return font.plainSubstrByWidth(text, Math.max(0, maxWidth - font.width(ellipsis))) + ellipsis;
-    }
 }

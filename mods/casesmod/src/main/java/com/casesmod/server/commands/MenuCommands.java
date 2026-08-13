@@ -60,6 +60,15 @@ public class MenuCommands {
                     return 1;
                 }));
 
+        dispatcher.register(Commands.literal("deposit")
+                .executes(ctx -> depositLightmansCoins(ctx.getSource().getPlayerOrException())));
+
+        dispatcher.register(Commands.literal("withdraw")
+                .then(Commands.argument("amount", LongArgumentType.longArg(1))
+                        .executes(ctx -> withdrawLightmansCoins(
+                                ctx.getSource().getPlayerOrException(),
+                                LongArgumentType.getLong(ctx, "amount")))));
+
         dispatcher.register(Commands.literal("sellfish")
                 .requires(src -> src.hasPermission(2))
                 .executes(ctx -> {
@@ -703,9 +712,9 @@ public class MenuCommands {
         }
         CaseItem won = CaseManager.INSTANCE.roll(def, new Random());
         if (won.itemId != null && !won.itemId.isEmpty() && !won.itemId.equals("minecraft:air") && !won.itemId.equals("air")) {
-            Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(won.itemId));
+        Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(won.itemId));
             if (item != null && item != net.minecraft.world.item.Items.AIR) {
-                ItemStack reward = new ItemStack(item, won.count);
+        ItemStack reward = new ItemStack(item, won.count);
                 if (!target.getInventory().add(reward)) target.drop(reward, false);
             }
         }
@@ -777,6 +786,84 @@ public class MenuCommands {
         }
         source.sendSuccess(() -> Component.literal("§aВыдан кит \"" + kit.displayName + "§a\" игроку "
                 + target.getGameProfile().getName()), true);
+        return 1;
+    }
+
+    public static int depositLightmansCoins(ServerPlayer player) {
+        Inventory inv = player.getInventory();
+        long totalDeposited = 0;
+
+        for (int slot = 0; slot < inv.getContainerSize(); slot++) {
+            ItemStack stack = inv.getItem(slot);
+            if (stack.isEmpty()) continue;
+
+            ResourceLocation key = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            if (key == null || !"lightmanscurrency".equals(key.getNamespace())) continue;
+
+            long coinValue = switch (key.getPath()) {
+                case "coin_copper" -> 1L;
+                case "coin_iron" -> 10L;
+                case "coin_gold" -> 100L;
+                case "coin_emerald" -> 1000L;
+                case "coin_diamond" -> 10000L;
+                case "coin_netherite" -> 100000L;
+                default -> 0L;
+            };
+
+            if (coinValue > 0) {
+                int count = stack.getCount();
+                totalDeposited += coinValue * count;
+                inv.setItem(slot, ItemStack.EMPTY);
+            }
+        }
+
+        if (totalDeposited > 0) {
+            CurrencyManager.INSTANCE.add(player.getUUID(), totalDeposited);
+            long newBal = CurrencyManager.INSTANCE.getBalance(player.getUUID());
+            syncBalance(player, newBal);
+            final long finalDeposited = totalDeposited;
+            player.sendSystemMessage(Component.literal("§aДепозит внесен! Пополнено на §f" + finalDeposited + " 🪙 §7(Баланс: " + newBal + ")"));
+        } else {
+            player.sendSystemMessage(Component.literal("§cУ вас в инвентаре нет монет Lightman's Currency!"));
+        }
+        return (int) Math.min(Integer.MAX_VALUE, totalDeposited);
+    }
+
+    public static int withdrawLightmansCoins(ServerPlayer player, long amount) {
+        long currentBal = CurrencyManager.INSTANCE.getBalance(player.getUUID());
+        if (amount <= 0 || currentBal < amount) {
+            player.sendSystemMessage(Component.literal("§cНедостаточно средств на балансе! Доступно: §f" + currentBal + " 🪙"));
+            return 0;
+        }
+
+        CurrencyManager.INSTANCE.add(player.getUUID(), -amount);
+        long newBal = CurrencyManager.INSTANCE.getBalance(player.getUUID());
+        syncBalance(player, newBal);
+
+        long rem = amount;
+        long[] values = {100000L, 10000L, 1000L, 100L, 10L, 1L};
+        String[] paths = {"coin_netherite", "coin_diamond", "coin_emerald", "coin_gold", "coin_iron", "coin_copper"};
+
+        for (int i = 0; i < values.length && rem > 0; i++) {
+            long val = values[i];
+            long count = rem / val;
+            if (count > 0) {
+                rem %= val;
+                Item coinItem = BuiltInRegistries.ITEM.get(new ResourceLocation("lightmanscurrency", paths[i]));
+                if (coinItem != null && coinItem != net.minecraft.world.item.Items.AIR) {
+                    while (count > 0) {
+                        int stackSize = (int) Math.min(64, count);
+                        ItemStack coinStack = new ItemStack(coinItem, stackSize);
+                        if (!player.getInventory().add(coinStack)) {
+                            player.drop(coinStack, false);
+                        }
+                        count -= stackSize;
+                    }
+                }
+            }
+        }
+
+        player.sendSystemMessage(Component.literal("§aВыведено §f" + amount + " 🪙 §aмонетами! §7(Остаток: " + newBal + ")"));
         return 1;
     }
 

@@ -17,6 +17,14 @@ public final class ClientUiState {
     private static boolean tabOpen;
     /** Bumped when skill/horizon data is synced to client (HUD string cache). */
     private static int skillSyncGeneration;
+    /** Session token relayed from server after backend auth validation. */
+    private static String sessionToken = "";
+    private static int sessionBalance;
+    private static String sessionRankId = "player";
+    /** Block limiter counts: blockRegistryId -> placed count */
+    private static final Map<String, Integer> LIMITER_PLACED = new java.util.concurrent.ConcurrentHashMap<>();
+    /** Block limiter maxima: blockRegistryId -> max allowed */
+    private static final Map<String, Integer> LIMITER_MAX = new java.util.concurrent.ConcurrentHashMap<>();
 
     private ClientUiState() {
     }
@@ -66,5 +74,42 @@ public final class ClientUiState {
 
     public static int skillSyncGeneration() {
         return skillSyncGeneration;
+    }
+
+    public static void setSession(String token, int balance, String rankId) {
+        sessionToken = token != null ? token : "";
+        sessionBalance = Math.max(0, balance);
+        sessionRankId = rankId != null && !rankId.isBlank() ? rankId : "player";
+    }
+
+    public static void setSessionToken(String token) {
+        setSession(token, sessionBalance, sessionRankId);
+    }
+
+    public static String sessionToken() {
+        return sessionToken;
+    }
+
+    public static int sessionBalance() {
+        return sessionBalance;
+    }
+
+    public static String sessionRankId() {
+        return sessionRankId;
+    }
+
+    public static void updateLimiters(java.util.Map<String, Integer> placed, java.util.Map<String, Integer> max) {
+        LIMITER_PLACED.clear();
+        LIMITER_PLACED.putAll(placed);
+        LIMITER_MAX.clear();
+        LIMITER_MAX.putAll(max);
+    }
+
+    public static int limiterPlaced(String blockId) {
+        return LIMITER_PLACED.getOrDefault(blockId, 0);
+    }
+
+    public static int limiterMax(String blockId) {
+        return LIMITER_MAX.getOrDefault(blockId, 0);
     }
 }

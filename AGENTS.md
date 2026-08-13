@@ -16,9 +16,8 @@
 
 ### 1. Player-facing changes
 - `python tools/publish_client_pack.py` — when modpack mods, KubeJS scripts, or client configs change.
-- `python tools/sync_lodestone_mods.py` — after editing `aquatech_ui`, `casesmod`, or `packetfixer`.
 - Rebuild launcher (PyInstaller + bootstrap + `upload_launcher_release.py`) — see `always-rebuild-launcher.mdc`.
-- Restart Mohist in Lodestone after syncing JARs.
+- Do **not** copy jars or configs into Lodestone. Live host is Apex.
 
 ### 2. Portal changes (`docs/`, `worker/`, etc.)
 - `python tools/generate_site.py`

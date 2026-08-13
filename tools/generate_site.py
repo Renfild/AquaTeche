@@ -806,6 +806,48 @@ def main() -> None:
     (ROOT / "index.html").write_text((DOCS / "index.html").read_text(encoding="utf-8"), encoding="utf-8")
     print("synced root index.html")
 
+    embed_dir = DOCS / "embed"
+    embed_dir.mkdir(parents=True, exist_ok=True)
+    embeds = {
+        "donate.html": (
+            "donate",
+            "Донат",
+            '<p class="embed-muted">Привилегии. Оплата на сайте пока выключена.</p><div class="embed-grid" id="embed-root"></div>',
+        ),
+        "cabinet.html": (
+            "cabinet",
+            "Кабинет",
+            '<div id="embed-root"></div>',
+        ),
+    }
+    embed_shell = """<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title} · AquaTech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/site.css?v=20260813embed" />
+</head>
+<body class="embed" data-embed="{page}">
+  <div class="embed-bar">
+    <h1>{title}</h1>
+    <button type="button" id="embed-close">Закрыть</button>
+  </div>
+  {body}
+  <script src="../assets/js/embed.js"></script>
+</body>
+</html>
+"""
+    for name, (page, title, body) in embeds.items():
+        (embed_dir / name).write_text(
+            embed_shell.format(page=page, title=title, body=body),
+            encoding="utf-8",
+        )
+        print("wrote embed/" + name)
+
 
 if __name__ == "__main__":
     main()

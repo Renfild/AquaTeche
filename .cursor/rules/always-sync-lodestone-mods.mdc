@@ -1,39 +1,18 @@
 ---
-description: Always sync first-party jars to Lodestone when server/pack mods change
+description: Do not copy jars or configs into Lodestone
 alwaysApply: true
 ---
 
-# Always sync Lodestone with launcher mods
+# Do not deploy to Lodestone
 
-The live Mohist host is **Lodestone**, not only `server/` in the repo:
-
-`%USERPROFILE%\.lodestone\instances\AquaTech-*\mods`
-
-Players get jars from the CDN pack (`aquatech_ui`, `casesmod`, …). If Lodestone keeps an older jar, Forge `MATCH_VERSION` kicks them (`server 1.0.0` / `client 1.0.1`).
-
-## When
-
-After any change to first-party jars that both server and client load — especially:
-
-- `aquatech_ui-*.jar`
-- `casesmod-*.jar`
-- `packetfixer-*.jar`
-
-Also after `python tools/publish_client_pack.py` (it already calls the sync helper).
-
-## Required
-
-```powershell
-python tools/sync_lodestone_mods.py
-```
-
-Then **restart Mohist in Lodestone** (do not leave a second Java on `:25565`).
-
-Source of truth: `server/mods/` (same jars the pack ships).
-
-Override path if needed: env `AQUATECH_LODESTONE_MODS` = full path to the instance `mods` folder.
+Live Minecraft host is Apex (`g-pl-3.apexnodes.xyz:21561`). Players get mods from the CDN pack via the AquaTech launcher.
 
 ## Do not
 
-- Bump client pack version without updating Lodestone jars of the same mods.
-- Leave both `*-1.0.0.jar` and `*-1.0.1.jar` in the Lodestone mods folder.
+- Run `python tools/sync_lodestone_mods.py`
+- Copy `aquatech_ui` / `casesmod` / `packetfixer` / kubejs / config into `%USERPROFILE%\.lodestone\instances\AquaTech-*\`
+- Restart Mohist in Lodestone as part of a release
+
+`publish_client_pack.py` must not call the Lodestone helper.
+
+Optional local testing against a Lodestone instance is manual and out of the release path.

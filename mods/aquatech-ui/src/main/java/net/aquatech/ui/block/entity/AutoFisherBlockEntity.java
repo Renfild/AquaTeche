@@ -203,6 +203,7 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         } else {
             itemHandler.setStackInSlot(0, rodStack);
         }
+        setChanged();
     }
 
     private void insertIntoOutput(ItemStack stackToInsert) {
