@@ -70,6 +70,7 @@ public final class ClientEvents {
             ClientUiState.setTabOpen(false);
             return;
         }
+        net.aquatech.ui.client.cache.ResourceCacheManager.getInstance().prefetchPlayerAvatar(mc.player.getUUID());
 
         if (RhythmHookOverlay.isActive()) {
             ClientUiState.setTabOpen(false);

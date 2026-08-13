@@ -39,10 +39,9 @@ public final class ScreenBlurHandler {
         if (screen == null) {
             return false;
         }
-        if (screen instanceof AquaBlurredScreen) {
-            return true;
-        }
-        String name = screen.getClass().getName();
-        return name.startsWith("com.casesmod.client.gui.");
+        return BlurScreenPolicy.shouldBlur(
+                screen instanceof AquaBlurredScreen,
+                screen.getClass().getName()
+        );
     }
 }

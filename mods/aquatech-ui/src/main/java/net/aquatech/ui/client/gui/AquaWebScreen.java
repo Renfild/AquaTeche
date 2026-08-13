@@ -2,6 +2,7 @@ package net.aquatech.ui.client.gui;
 
 import net.aquatech.ui.client.ClientUiState;
 import net.aquatech.ui.client.gui.widget.AquaButton;
+import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.client.web.AquaWebBridge;
@@ -126,7 +127,7 @@ public class AquaWebScreen extends AquaBlurredScreen {
     @Override
     protected void renderScreenContent(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         layoutFrame();
-        drawGlassContainer(g, frameX, frameY, frameW, frameH, COLOR_GLASS_PANEL, COLOR_CYAN_ACCENT);
+        AquaGlassPanel.draw(g, frameX, frameY, frameW, frameH, COLOR_GLASS_PANEL, COLOR_CYAN_ACCENT, 4, true);
         g.fill(frameX + 1, frameY + 1, frameX + frameW - 1, frameY + 34, 0xFF0D2136);
         UiDraw.border(g, frameX, frameY, frameW, 34, COLOR_BORDER_MUTED);
 

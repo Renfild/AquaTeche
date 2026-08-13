@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "aquatech_ui:rate_x2",
+    "aquatech_ui:rate_x4",
+    "aquatech_ui:rate_x8",
+    "aquatech_ui:rate_x16",
+    "aquatech_ui:rate_x32",
+    "aquatech_ui:rate_x64"
+  ]
+}

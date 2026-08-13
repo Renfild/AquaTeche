@@ -1,0 +1,6 @@
+﻿{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "aquatech_ui:item/rate_x16"
+  }
+}

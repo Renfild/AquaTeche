@@ -1,6 +1,8 @@
 package net.aquatech.ui.client.tab;
 
 import net.aquatech.ui.client.ClientUiState;
+import net.aquatech.ui.client.gui.widget.AquaBadge;
+import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.common.PlayerProfile;
@@ -50,7 +52,7 @@ public final class OceanTabOverlay {
                 + visibleRows * CARD_HEIGHT + Math.max(0, visibleRows - 1) * CARD_GAP;
         int panelX = (screenW - panelW) / 2;
         int panelY = (screenH - panelH) / 2;
-        UiDraw.panel(graphics, panelX, panelY, panelW, panelH, UiDraw.COLOR_PANEL);
+        AquaGlassPanel.draw(graphics, panelX, panelY, panelW, panelH, AquaGlassPanel.FILL, AquaGlassPanel.BORDER, 5, true);
 
         int contentLeft = panelX + OUTER_PADDING;
         int contentRight = panelX + panelW - OUTER_PADDING;
@@ -116,8 +118,7 @@ public final class OceanTabOverlay {
 
     private static void renderEntry(GuiGraphics graphics, net.minecraft.client.gui.Font font, PlayerProfile profile, int x, int y, int width) {
         int rankColor = UiDraw.rankColor(profile.rankId());
-        graphics.fill(x, y, x + width, y + CARD_HEIGHT, UiDraw.COLOR_PANEL_LIGHT);
-        graphics.fill(x, y, x + 2, y + CARD_HEIGHT, rankColor);
+        AquaGlassPanel.drawCard(graphics, x, y, width, CARD_HEIGHT, rankColor);
         UiDraw.drawPlayerHead(graphics, profile.uuid(), profile.name(), x + 8, y + 7, 26);
 
         int textX = x + 42;
@@ -127,13 +128,14 @@ public final class OceanTabOverlay {
         String name = AquaFontRenderer.fit(font, profile.name(), Math.max(24, right - textX - AquaFontRenderer.width(font, ping) - 14));
         AquaFontRenderer.draw(graphics, font, name, textX, y + 8, UiDraw.COLOR_TEXT);
 
-        String rank = AquaFontRenderer.fit(font, profile.rankDisplay(), Math.max(24, right - textX));
-        AquaFontRenderer.draw(graphics, font, rank, textX, y + 23, rankColor);
+        int badgeX = textX;
+        String rank = AquaFontRenderer.fit(font, profile.rankDisplay(), Math.max(24, right - textX - 50));
+        badgeX += AquaBadge.draw(graphics, font, badgeX, y + 22, rank, rankColor) + 4;
+        if (profile.staff()) {
+            AquaBadge.draw(graphics, font, badgeX, y + 22, "STAFF", UiDraw.COLOR_ACCENT);
+        }
         graphics.fill(right - AquaFontRenderer.width(font, ping) - 6, y + 10, right - AquaFontRenderer.width(font, ping) - 3, y + 13, pingColor);
         AquaFontRenderer.draw(graphics, font, ping, right - AquaFontRenderer.width(font, ping), y + 7, pingColor);
-        if (profile.staff()) {
-            AquaFontRenderer.draw(graphics, font, "STAFF", right - AquaFontRenderer.width(font, "STAFF"), y + 23, UiDraw.COLOR_ACCENT);
-        }
     }
 
     private static int pingColor(int ping) {

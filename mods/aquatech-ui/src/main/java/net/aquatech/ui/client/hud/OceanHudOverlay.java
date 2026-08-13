@@ -1,6 +1,8 @@
 package net.aquatech.ui.client.hud;
 
+import net.aquatech.ui.client.cache.ResourceCacheManager;
 import net.aquatech.ui.client.ClientUiState;
+import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.common.ModClientConfig;
@@ -57,10 +59,12 @@ public final class OceanHudOverlay {
         graphics.pose().translate(screenX, screenY, 0);
         graphics.pose().scale(scale, scale, 1f);
 
-        graphics.fill(3, 3, w + 3, h + 3, 0x44000000);
-        graphics.fill(0, 0, w, h, 0xD10B1F2A);
-        graphics.fill(0, 0, w, 1, UiDraw.COLOR_ACCENT);
+        AquaGlassPanel.draw(graphics, 0, 0, w, h, 0xD10B1F2A, UiDraw.COLOR_ACCENT, 3, false);
         graphics.fill(0, 5, 2, 22, UiDraw.COLOR_ACCENT);
+        var cachedAvatar = ResourceCacheManager.getInstance().peek("avatar_" + player.getUUID().toString().replace("-", ""));
+        if (cachedAvatar != null) {
+            graphics.blit(cachedAvatar, w - 18, 4, 12, 12, 0, 0, 64, 64, 64, 64);
+        }
 
         graphics.drawString(mc.font, AquaFontRenderer.header("Погружение"), 8, 6, UiDraw.COLOR_ACCENT, false);
         graphics.fill(8, 18, w - 8, 19, 0x443A7892);

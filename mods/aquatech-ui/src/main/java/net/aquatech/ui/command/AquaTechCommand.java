@@ -112,6 +112,12 @@ public final class AquaTechCommand {
                         .executes(AquaTechCommand::seasonSelf))
                 .then(Commands.literal("horizon")
                         .executes(AquaTechCommand::horizonSelf))
+                .then(Commands.literal("vault")
+                        .executes(ctx -> openContainer(ctx, net.aquatech.ui.network.packet.C2SOpenContainerPacket.ContainerType.STORAGE_VAULT)))
+                .then(Commands.literal("limiters")
+                        .executes(ctx -> openContainer(ctx, net.aquatech.ui.network.packet.C2SOpenContainerPacket.ContainerType.BLOCK_LIMITERS)))
+                .then(Commands.literal("look")
+                        .executes(ctx -> openContainer(ctx, net.aquatech.ui.network.packet.C2SOpenContainerPacket.ContainerType.PERSONALIZATION)))
         );
     }
 
@@ -471,8 +477,18 @@ public final class AquaTechCommand {
             player.displayClientMessage(Component.literal(
                     "§7Открой FTB Quests → «Маршрут Горизонта» для вех."), false);
             player.displayClientMessage(Component.literal(
-                    "§8Команды: /aquatech daily · season · horizon"), false);
+                    "§8Команды: /aquatech daily · season · horizon · vault · limiters · look"), false);
         });
+        return 1;
+    }
+
+    private static int openContainer(CommandContext<CommandSourceStack> ctx,
+                                     net.aquatech.ui.network.packet.C2SOpenContainerPacket.ContainerType type) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) {
+            ctx.getSource().sendFailure(Component.literal("Только для игроков"));
+            return 0;
+        }
+        net.aquatech.ui.server.ContainerOpenService.open(player, type);
         return 1;
     }
 }

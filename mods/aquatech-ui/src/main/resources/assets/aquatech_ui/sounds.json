@@ -1,0 +1,42 @@
+{
+  "minigame.pull_tick": {
+    "sounds": [
+      {
+        "name": "aquatech_ui:minigame/pull_tick",
+        "stream": false
+      }
+    ]
+  },
+  "minigame.safe_chime": {
+    "sounds": [
+      {
+        "name": "aquatech_ui:minigame/safe_chime",
+        "stream": false
+      }
+    ]
+  },
+  "minigame.danger_warn": {
+    "sounds": [
+      {
+        "name": "aquatech_ui:minigame/danger_warn",
+        "stream": false
+      }
+    ]
+  },
+  "minigame.catch_success": {
+    "sounds": [
+      {
+        "name": "aquatech_ui:minigame/catch_success",
+        "stream": false
+      }
+    ]
+  },
+  "minigame.line_snap": {
+    "sounds": [
+      {
+        "name": "aquatech_ui:minigame/line_snap",
+        "stream": false
+      }
+    ]
+  }
+}

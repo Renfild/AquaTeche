@@ -6,6 +6,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+
+import java.util.List;
 
 /**
  * TTF labels via {@code assets/aquatech_ui/font/main.json} and {@code header.json}.
@@ -72,6 +75,23 @@ public final class AquaFontRenderer {
     public static void drawCenteredGlowText(GuiGraphics g, Font font, Component text, int cx, int y, int textColor, int glowColor) {
         int w = font.width(text);
         drawGlowText(g, font, text, cx - w / 2, y, textColor, glowColor);
+    }
+
+    public static int drawWrapped(GuiGraphics g, Font font, String plain, int x, int y, int maxWidth, int color) {
+        List<FormattedCharSequence> lines = font.split(text(plain), Math.max(8, maxWidth));
+        int yy = y;
+        for (FormattedCharSequence line : lines) {
+            g.drawString(font, line, x, yy, color, false);
+            yy += 12;
+        }
+        return yy - y;
+    }
+
+    public static int wrappedHeight(Font font, String plain, int maxWidth) {
+        if (plain == null || plain.isEmpty()) {
+            return 0;
+        }
+        return font.split(text(plain), Math.max(8, maxWidth)).size() * 12;
     }
 
     public static String fit(Font font, String text, int maxWidth) {

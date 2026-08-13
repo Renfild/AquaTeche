@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.26"
-PACK_VERSION = "2.9.26"
+PACK_TAG = "pack-2.9.27"
+PACK_VERSION = "2.9.27"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -141,7 +141,7 @@ def sync_mods() -> None:
                 print(f"OK client-only {jar.name}")
 
     # Force first-party from server (after bump script)
-    for name in ("aquatech_ui-1.0.22.jar", "casesmod-1.0.7.jar", "packetfixer-3.3.2-forge-1.20.1.jar"):
+    for name in ("aquatech_ui-1.0.24.jar", "casesmod-1.0.8.jar", "packetfixer-3.3.2-forge-1.20.1.jar"):
         cand = SERVER_MODS / name
         if cand.is_file():
             shutil.copy2(cand, dst / name)

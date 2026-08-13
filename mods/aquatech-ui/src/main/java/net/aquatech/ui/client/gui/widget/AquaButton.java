@@ -1,7 +1,6 @@
 package net.aquatech.ui.client.gui.widget;
 
 import net.aquatech.ui.client.render.AquaFontRenderer;
-import net.aquatech.ui.client.render.UiDraw;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -54,11 +53,7 @@ public class AquaButton extends AbstractButton {
 
         int fill = hovered ? 0xFF0F2E4A : 0xEE0D2136;
         int border = hovered ? accentColor : 0xFF1E293B;
-        g.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height, fill);
-        UiDraw.border(g, this.getX(), this.getY(), this.width, this.height, border);
-        if (hovered) {
-            g.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + 1, accentColor);
-        }
+        AquaGlassPanel.draw(g, this.getX(), this.getY(), this.width, this.height, fill, border, 3, hovered);
 
         Font font = Minecraft.getInstance().font;
         int cy = this.getY() + this.height / 2;

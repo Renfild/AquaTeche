@@ -42,7 +42,7 @@ public class MainMenuScreen extends Screen {
     @Override
     protected void init() {
         cardW = Mth.clamp((int) (width * 0.32f), CARD_MIN_W, CARD_MAX_W);
-        cardH = Mth.clamp((int) (height * 0.58f), 268, 300);
+        cardH = Mth.clamp((int) (height * 0.62f), 312, 360);
         cardX = (width - cardW) / 2;
         cardY = (height - cardH) / 2;
         stripY = cardY + 68;
@@ -67,7 +67,12 @@ public class MainMenuScreen extends Screen {
         addButton(x1, row3, colW, BTN_H, "Квесты", 225, () -> minecraft.setScreen(new QuestsScreen()));
 
         int row4 = row3 + BTN_H + GAP;
-        addButton(x0, row4, innerW, BTN_H + 2, "Кейсы", 270, () -> minecraft.setScreen(new CasesScreen()));
+        addButton(x0, row4, colW, BTN_H, "Кейсы", 270, () -> minecraft.setScreen(new CasesScreen()));
+        addButton(x1, row4, colW, BTN_H, "Хранилище", 300, AquaContainerOverlay::openVault);
+
+        int row5 = row4 + BTN_H + GAP;
+        addButton(x0, row5, colW, BTN_H, "Лимиты", 330, AquaContainerOverlay::openLimiters);
+        addButton(x1, row5, colW, BTN_H, "Вид", 360, AquaContainerOverlay::openLook);
 
         bubbles.resize(width, height);
     }

@@ -4,6 +4,9 @@ import net.aquatech.ui.capability.AquaSkillCapability;
 import net.aquatech.ui.capability.SkillDefinitions;
 import net.aquatech.ui.capability.SkillDefinitions.NodeType;
 import net.aquatech.ui.capability.SkillDefinitions.SkillDef;
+import net.aquatech.ui.client.gui.widget.AquaBadge;
+import net.aquatech.ui.client.gui.widget.AquaCaseSlot;
+import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.network.C2SOpenSkillTreePacket;
@@ -12,9 +15,9 @@ import net.aquatech.ui.network.NetworkHandler;
 import net.aquatech.ui.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -84,6 +87,8 @@ public class OceanSkillTreeScreen extends AquaBlurredScreen {
     private Set<String> unlockedSnapshot = Set.of();
     private int skillPointsCache, aquaXpCache, levelCache, minXpCache, maxXpCache;
     private SkillNode hoveredNode;
+    private int unlockBtnX, unlockBtnY, unlockBtnW, unlockBtnH;
+    private boolean unlockBtnHit;
 
     private static class StarParticle {
         float x, y, speed, size;
@@ -280,7 +285,9 @@ public class OceanSkillTreeScreen extends AquaBlurredScreen {
         int centerScreenX = mainWidth / 2;
         int centerScreenY = height / 2;
 
-        hoveredNode = null;
+        if (mouseX < mainWidth) {
+            hoveredNode = null;
+        }
         double z = this.zoom;
 
         // Compute world coordinates
@@ -362,7 +369,7 @@ public class OceanSkillTreeScreen extends AquaBlurredScreen {
         int x = (mainWidth - w) / 2;
         int y = 10;
 
-        drawGlassContainer(g, x, y, w, h, 0xCC0B1829, 0x665CE1FF);
+        AquaGlassPanel.draw(g, x, y, w, h, AquaGlassPanel.FILL, AquaGlassPanel.BORDER, 5, false);
         AquaFontRenderer.drawCenteredHeader(g, font, "Созвездия океана", x + w / 2, y + 5, 0xFF5CE1FF);
 
         String lvlText = "Уровень " + levelCache;
@@ -390,9 +397,9 @@ public class OceanSkillTreeScreen extends AquaBlurredScreen {
         int py = 12;
         int pw = PANEL_W - 16;
         int ph = height - 24;
+        unlockBtnHit = false;
 
-        g.fill(px, py, px + pw, py + ph, 0xCC0B1829);
-        UiDraw.border(g, px, py, pw, ph, 0x665CE1FF);
+        AquaGlassPanel.draw(g, px, py, pw, ph, AquaGlassPanel.FILL, AquaGlassPanel.BORDER, 5, false);
 
         int tx = px + 16;
         int ty = py + 16;
@@ -407,61 +414,76 @@ public class OceanSkillTreeScreen extends AquaBlurredScreen {
         boolean isPrereqUnlocked = hoveredNode.prerequisite == null || unlockedSnapshot.contains(hoveredNode.prerequisite);
         boolean isAvailable = !isUnlocked && isPrereqUnlocked;
 
-        AquaFontRenderer.drawHeader(g, font, hoveredNode.title, tx, ty, 0xFFFFFFFF);
-        ty += 16;
+        AquaCaseSlot.Rarity slotRarity = hoveredNode.type == NodeType.KEYSTONE ? AquaCaseSlot.Rarity.LEGENDARY
+                : hoveredNode.type == NodeType.NOTABLE ? AquaCaseSlot.Rarity.RARE
+                : AquaCaseSlot.Rarity.COMMON;
+        AquaCaseSlot.draw(g, font, tx, ty, AquaCaseSlot.DEFAULT_SIZE, slotRarity, hoveredNode.displayItem, isAvailable || isUnlocked);
+        AquaFontRenderer.drawHeader(g, font, hoveredNode.title, tx + AquaCaseSlot.DEFAULT_SIZE + 10, ty + 4, 0xFFFFFFFF);
+        String badge = hoveredNode.type == NodeType.KEYSTONE ? "КЛЮЧЕВОЙ"
+                : hoveredNode.type == NodeType.NOTABLE ? "ВЕЛИКИЙ" : "ОБЫЧНЫЙ";
+        AquaBadge.draw(g, font, tx + AquaCaseSlot.DEFAULT_SIZE + 10, ty + 20, badge, PANEL_BORDER);
+        ty += AquaCaseSlot.DEFAULT_SIZE + 12;
 
-        String badge = hoveredNode.type == NodeType.KEYSTONE ? "[КЛЮЧЕВОЙ]" :
-                       hoveredNode.type == NodeType.NOTABLE ? "[ВЕЛИКИЙ]" : "[ОБЫЧНЫЙ]";
-        AquaFontRenderer.draw(g, font, badge, tx, ty, PANEL_BORDER);
-        ty += 24;
+        ty += AquaFontRenderer.drawWrapped(g, font, hoveredNode.description, tx, ty, pw - 32, 0xFFCBD5E1);
+        ty += 12;
 
-        List<FormattedCharSequence> lines = font.split(AquaFontRenderer.text(hoveredNode.description), pw - 32);
-        for (FormattedCharSequence line : lines) {
-            g.drawString(font, line, tx, ty, 0xFFCBD5E1, false);
-            ty += 12;
-        }
-
-        ty += 16;
-        // Cost & Status
         if (isUnlocked) {
             AquaFontRenderer.draw(g, font, "Навык изучен", tx, ty, 0xFF10B981);
         } else if (isAvailable) {
             AquaFontRenderer.draw(g, font, "Стоимость: " + hoveredNode.cost + " очк.", tx, ty, 0xFFFFD700);
             ty += 20;
-
-            int btnW = pw - 32;
-            int btnH = 26;
-            int btnX = tx;
-            int btnY = ty;
-
+            unlockBtnW = pw - 32;
+            unlockBtnH = 26;
+            unlockBtnX = tx;
+            unlockBtnY = ty;
+            unlockBtnHit = true;
             boolean canAfford = skillPointsCache >= hoveredNode.cost;
             int btnFill = canAfford ? 0xFF047857 : 0xFF1E293B;
             int btnBorder = canAfford ? 0xFF10B981 : 0xFF475569;
-
-            g.fill(btnX, btnY, btnX + btnW, btnY + btnH, btnFill);
-            UiDraw.border(g, btnX, btnY, btnW, btnH, btnBorder);
-            AquaFontRenderer.drawCentered(g, font, "Изучить", btnX + btnW / 2, btnY + 8, canAfford ? 0xFFFFFFFF : 0xFF94A3B8);
+            AquaGlassPanel.draw(g, unlockBtnX, unlockBtnY, unlockBtnW, unlockBtnH, btnFill, btnBorder, 3, canAfford);
+            AquaFontRenderer.drawCentered(g, font, "Изучить", unlockBtnX + unlockBtnW / 2, unlockBtnY + 8,
+                    canAfford ? 0xFFFFFFFF : 0xFF94A3B8);
         } else {
             AquaFontRenderer.draw(g, font, "Нужен предыдущий навык", tx, ty, 0xFFEF4444);
         }
     }
 
+    private boolean canUnlock(SkillNode node) {
+        if (node == null) {
+            return false;
+        }
+        boolean unlocked = unlockedSnapshot.contains(node.id);
+        boolean prereq = node.prerequisite == null || unlockedSnapshot.contains(node.prerequisite);
+        return !unlocked && prereq && skillPointsCache >= node.cost;
+    }
+
+    private void openUnlockDialog(SkillNode node) {
+        String skillId = node.id;
+        Minecraft mc = Minecraft.getInstance();
+        AquaDialogScreen.confirm(
+                mc,
+                this,
+                "Изучить навык",
+                node.title + " стоит " + node.cost + " очк. Списать и открыть узел?",
+                () -> {
+                    NetworkHandler.CHANNEL.sendToServer(new C2SUnlockSkillPacket(skillId));
+                    mc.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.PLAYER_LEVELUP, 1.2f, 0.5f));
+                }
+        );
+    }
+
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == 0 && hoveredNode != null) {
-            boolean isUnlocked = unlockedSnapshot.contains(hoveredNode.id);
-            boolean isPrereqUnlocked = hoveredNode.prerequisite == null || unlockedSnapshot.contains(hoveredNode.prerequisite);
-            boolean isAvailable = !isUnlocked && isPrereqUnlocked;
-
-            if (isAvailable && skillPointsCache >= hoveredNode.cost) {
-                NetworkHandler.CHANNEL.sendToServer(new C2SUnlockSkillPacket(hoveredNode.id));
-                try {
-                    Minecraft.getInstance().getSoundManager().play(
-                            net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(SoundEvents.PLAYER_LEVELUP, 1.2f, 0.5f)
-                    );
-                } catch (Exception ignored) {}
-                return true;
-            }
+        if (button == 0 && unlockBtnHit
+                && mouseX >= unlockBtnX && mouseX < unlockBtnX + unlockBtnW
+                && mouseY >= unlockBtnY && mouseY < unlockBtnY + unlockBtnH
+                && canUnlock(hoveredNode)) {
+            openUnlockDialog(hoveredNode);
+            return true;
+        }
+        if (button == 0 && canUnlock(hoveredNode)) {
+            openUnlockDialog(hoveredNode);
+            return true;
         }
         if (button == 0 && mouseX < width - PANEL_W) {
             isDragging = true;

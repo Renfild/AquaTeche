@@ -1,23 +1,26 @@
 package net.aquatech.ui.client.tab;
 
 import net.aquatech.ui.client.ClientUiState;
+import net.aquatech.ui.client.gui.AquaBlurredScreen;
+import net.aquatech.ui.client.gui.widget.AquaBadge;
+import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.common.PlayerProfile;
 import net.aquatech.ui.common.ServerStats;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class OceanTabScreen extends Screen {
+public class OceanTabScreen extends AquaBlurredScreen {
     private static final int COLUMNS = 3;
     private static final int ROW_HEIGHT = 42;
     private double scroll;
 
     public OceanTabScreen() {
         super(Component.literal("AquaTech Tab"));
+        setEnableAtmosphericParticles(false);
     }
 
     @Override
@@ -26,8 +29,7 @@ public class OceanTabScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(graphics);
+    protected void renderScreenContent(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         ServerStats stats = ClientUiState.stats();
         List<PlayerProfile> profiles = ClientUiState.profiles();
 
@@ -35,7 +37,7 @@ public class OceanTabScreen extends Screen {
         int panelH = Math.min(420, this.height - 60);
         int panelX = (this.width - panelW) / 2;
         int panelY = (this.height - panelH) / 2;
-        UiDraw.panel(graphics, panelX, panelY, panelW, panelH, UiDraw.COLOR_PANEL);
+        AquaGlassPanel.draw(graphics, panelX, panelY, panelW, panelH, AquaGlassPanel.FILL, AquaGlassPanel.BORDER, 5, true);
 
         String header = "На сервере " + stats.online() + " игроков";
         AquaFontRenderer.drawCenteredHeader(graphics, this.font, header, this.width / 2, panelY + 12, UiDraw.COLOR_ACCENT);
@@ -66,26 +68,24 @@ public class OceanTabScreen extends Screen {
 
         if (maxScroll > 0) {
             int barX = panelX + panelW - 10;
-            int barH = listHeight;
             graphics.fill(barX, listTop, barX + 4, listBottom, 0x66000000);
-            int thumbH = Math.max(20, barH * barH / contentHeight);
-            int thumbY = listTop + (int) ((scroll / (double) maxScroll) * (barH - thumbH));
+            int thumbH = Math.max(20, listHeight * listHeight / Math.max(1, contentHeight));
+            int thumbY = listTop + (int) ((scroll / (double) maxScroll) * (listHeight - thumbH));
             graphics.fill(barX, thumbY, barX + 4, thumbY + thumbH, UiDraw.COLOR_ACCENT_DARK);
         }
-
-        super.render(graphics, mouseX, mouseY, partialTick);
     }
 
     private void renderEntry(GuiGraphics graphics, PlayerProfile profile, int x, int y, int width) {
         UiDraw.drawPlayerHead(graphics, profile.uuid(), profile.name(), x, y + 4, 28);
         int textX = x + 34;
         AquaFontRenderer.draw(graphics, this.font, profile.name(), textX, y + 6, UiDraw.COLOR_TEXT);
-        UiDraw.badge(graphics, textX, y + 20, profile.rankDisplay(), UiDraw.rankColor(profile.rankId()));
+        int badgeX = textX;
+        badgeX += AquaBadge.draw(graphics, this.font, badgeX, y + 20, profile.rankDisplay(), UiDraw.rankColor(profile.rankId())) + 4;
+        if (profile.staff()) {
+            AquaBadge.draw(graphics, this.font, badgeX, y + 20, "STAFF", UiDraw.COLOR_ACCENT);
+        }
         String ping = profile.ping() + "ms";
         AquaFontRenderer.draw(graphics, this.font, ping, x + width - AquaFontRenderer.width(this.font, ping), y + 8, 0xFF55FF55);
-        if (profile.staff()) {
-            graphics.drawString(this.font, "⚑", x + width - 12, y + 22, UiDraw.COLOR_ACCENT, false);
-        }
     }
 
     @Override
