@@ -139,12 +139,20 @@ public final class AquaWebIpcDispatcher {
                         try {
                             Class<?> clientClass = Class.forName("dev.ftb.mods.ftbquests.client.FTBQuestsClient");
                             clientClass.getMethod("openQuestGui").invoke(null);
-                        } catch (Throwable t2) {
-                            if (mc.player != null) {
-                                mc.player.connection.sendUnsignedCommand("ftbquests open_book");
-                            }
-                        }
+                        } catch (Throwable ignored) {}
                     }
+                });
+                case "OPEN_VAULT" -> mc.execute(() -> {
+                    mc.setScreen(null);
+                    if (mc.player != null) mc.player.connection.sendUnsignedCommand("aquatech vault");
+                });
+                case "OPEN_LIMITERS" -> mc.execute(() -> {
+                    mc.setScreen(null);
+                    if (mc.player != null) mc.player.connection.sendUnsignedCommand("aquatech limiters");
+                });
+                case "OPEN_LOOK" -> mc.execute(() -> {
+                    mc.setScreen(null);
+                    if (mc.player != null) mc.player.connection.sendUnsignedCommand("aquatech look");
                 });
                 case "BUY_DONATE", "BUY_ITEM" -> mc.execute(() -> {
                     String slug = root.has("slug") ? root.get("slug").getAsString() : payload.has("slug") ? payload.get("slug").getAsString() : "";

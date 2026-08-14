@@ -6,17 +6,30 @@ export function mapProfile(row) {
   } catch {
     badges = [];
   }
+  let learnedSkills = ["origin"];
+  try {
+    if (row.learned_skills_json) {
+      learnedSkills = JSON.parse(row.learned_skills_json);
+    }
+  } catch {
+    learnedSkills = ["origin"];
+  }
   return {
     nick: row.nick,
     bio: row.bio,
     theme: row.theme,
     privilege: row.privilege,
-    coins: row.coins,
-    likes: row.likes,
-    fish: row.fish,
-    playtime: `${row.playtime_hours} ч`,
-    playtime_hours: row.playtime_hours,
-    views: row.views,
+    coins: row.coins ?? 0,
+    likes: row.likes ?? 0,
+    fish: row.fish ?? 0,
+    skill_points: row.skill_points ?? 0,
+    learned_skills: learnedSkills,
+    quests_done: row.quests_done ?? 0,
+    quests_total: row.quests_total || 25,
+    leaderboard_rank: row.leaderboard_rank || 1,
+    playtime: `${row.playtime_hours ?? 0} ч`,
+    playtime_hours: row.playtime_hours ?? 0,
+    views: row.views ?? 0,
     badges,
     updated_at: row.updated_at,
   };
@@ -26,6 +39,7 @@ export async function fetchProfileByNick(db, nick) {
   return db
     .prepare(
       `SELECT u.nick, p.bio, p.theme, p.privilege, p.coins, p.likes, p.fish,
+              p.skill_points, p.learned_skills_json, p.quests_done, p.quests_total, p.leaderboard_rank,
               p.playtime_hours, p.views, p.badges_json, p.updated_at
        FROM users u
        JOIN profiles p ON p.user_id = u.id

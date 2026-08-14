@@ -27,7 +27,7 @@ FILES = {
     "look_screen": UI / "client/gui/PersonalizationScreen.java",
     "client_open": UI / "client/gui/ClientContainerScreens.java",
     "cmd": UI / "command/AquaTechCommand.java",
-    "menu": ROOT / "mods/casesmod/src/main/java/com/casesmod/client/gui/MainMenuScreen.java",
+    "menu": UI / "client/web/AquaWebIpcDispatcher.java",
     "bridge": ROOT / "mods/casesmod/src/main/java/com/casesmod/client/gui/AquaContainerOverlay.java",
 }
 
@@ -113,9 +113,9 @@ def test_wiring() -> None:
         if lit not in cmd:
             fail(f"command missing {lit}")
     menu = read("menu")
-    if "AquaContainerOverlay::openVault" not in menu:
+    if "OPEN_VAULT" not in menu:
         fail("F4 menu missing vault button")
-    if "AquaContainerOverlay::openLimiters" not in menu:
+    if "OPEN_LIMITERS" not in menu:
         fail("F4 menu missing limiters button")
     print("OK F4 + commands wired")
 

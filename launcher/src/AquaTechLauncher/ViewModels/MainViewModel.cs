@@ -37,16 +37,19 @@ public partial class MainViewModel : ViewModelBase
         _ = StartupAsync();
     }
 
-    private void RefreshVersionLabel()
+    private void RefreshVersionLabel(string? overridePackVer = null)
     {
-        var packVer = "2.9.43";
+        var packVer = !string.IsNullOrWhiteSpace(overridePackVer) ? overridePackVer.Trim() : "2.9.49";
         try
         {
-            var pPath = System.IO.Path.Combine(GameDir, ".pack_version");
-            if (System.IO.File.Exists(pPath))
+            if (string.IsNullOrWhiteSpace(overridePackVer))
             {
-                var txt = System.IO.File.ReadAllText(pPath).Trim();
-                if (!string.IsNullOrWhiteSpace(txt)) packVer = txt;
+                var pPath = System.IO.Path.Combine(GameDir, ".pack_version");
+                if (System.IO.File.Exists(pPath))
+                {
+                    var txt = System.IO.File.ReadAllText(pPath).Trim();
+                    if (!string.IsNullOrWhiteSpace(txt)) packVer = txt;
+                }
             }
         }
         catch { }
@@ -224,6 +227,7 @@ public partial class MainViewModel : ViewModelBase
         try
         {
             await Task.Run(() => _orch.PlayAsync(_cfg, UiLog, UiProgress));
+            RefreshVersionLabel();
             PlayButtonText = "В игре";
             ActionsEnabled = true;
             MinimizeMainWindow();
@@ -293,6 +297,20 @@ public partial class MainViewModel : ViewModelBase
     {
         AuthChecking = true;
         NeedsAuth = true;
+
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                var man = await _orch.FetchManifestAsync(_cfg.UpdateUrl);
+                if (man != null && !string.IsNullOrWhiteSpace(man.Version))
+                {
+                    Dispatcher.UIThread.Post(() => RefreshVersionLabel(man.Version));
+                }
+            }
+            catch { }
+        });
+
         try
         {
             if (!string.IsNullOrWhiteSpace(_cfg.PortalSession))

@@ -1911,8 +1911,9 @@ def ensure_servers_dat(game_dir: Path, host: str, port: str | int, name: str = "
         pass
 
 
-def ensure_default_russian_options(game_dir: Path):
+def ensure_default_russian_options(game_dir: Path | str):
     """Force Russian UI + fix silent/wrong OpenAL device in options.txt."""
+    game_dir = Path(game_dir)
     options_file = game_dir / "options.txt"
     defaults = {
         "lang": "ru_ru",
@@ -2003,6 +2004,7 @@ def build_launch_cmd(
     session_token: str | None = None,
 ) -> list[str]:
     """Build the full Forge launch command (merged inheritsFrom + natives + assets)."""
+    game_dir = Path(game_dir)
     ensure_default_russian_options(game_dir)
     ver_json, ver_id = find_forge_json(game_dir)
     if not ver_json:

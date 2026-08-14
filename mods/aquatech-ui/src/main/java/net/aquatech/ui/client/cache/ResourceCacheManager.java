@@ -31,7 +31,8 @@ public final class ResourceCacheManager {
     private static final Set<String> ALLOWED_HOSTS = Set.of(
             "aquateche.store",
             "www.aquateche.store",
-            "crafatar.com"
+            "crafatar.com",
+            "mc-heads.net"
     );
 
     private final HttpClient httpClient;

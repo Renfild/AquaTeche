@@ -7,6 +7,11 @@ public sealed class PlayOrchestrator
     private readonly ManifestSync _sync = new();
     private readonly LaunchCommandBuilder _launch = new();
 
+    public Task<PackManifest> FetchManifestAsync(string updateUrl, Action<string>? log = null, CancellationToken ct = default)
+    {
+        return _sync.FetchManifestAsync(updateUrl, log, ct);
+    }
+
     public async Task PlayAsync(
         LauncherConfig cfg,
         Action<string, string> log,

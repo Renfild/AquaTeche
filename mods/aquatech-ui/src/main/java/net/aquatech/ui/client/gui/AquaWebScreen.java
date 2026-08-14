@@ -1,6 +1,8 @@
 package net.aquatech.ui.client.gui;
 
 import net.aquatech.ui.client.ClientUiState;
+import net.aquatech.ui.client.gui.widget.AquaButton;
+import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.client.web.AquaWebBridge;
@@ -46,6 +48,8 @@ public class AquaWebScreen extends AquaBlurredScreen {
         mc.setScreen(new AquaWebScreen(Component.literal(title), url));
     }
 
+    private AquaButton fallbackCloseBtn;
+
     @Override
     protected void init() {
         super.init();
@@ -53,6 +57,7 @@ public class AquaWebScreen extends AquaBlurredScreen {
         int pw = Math.max(64, (int) (width * scale));
         int ph = Math.max(64, (int) (height * scale));
         this.bridge = AquaWebBridge.getOrCreate(targetUrl, pw, ph);
+        this.fallbackCloseBtn = addRenderableWidget(new AquaButton(width / 2 - 60, height / 2 + 18, 120, 20, Component.literal("Закрыть"), this::onClose));
     }
 
     @Override
@@ -90,9 +95,13 @@ public class AquaWebScreen extends AquaBlurredScreen {
 
     @Override
     protected void renderScreenContent(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        if (fallbackCloseBtn != null) {
+            fallbackCloseBtn.visible = bridge == null || !bridge.isAvailable();
+        }
         if (bridge != null && bridge.isAvailable()) {
             bridge.blit(0, 0, width, height);
         } else {
+            AquaGlassPanel.drawCard(g, width / 2 - 120, height / 2 - 40, 240, 80, UiDraw.COLOR_ACCENT);
             AquaFontRenderer.drawCentered(g, font, "Загрузка интерфейса…", width / 2, height / 2 - 10, UiDraw.COLOR_PRIMARY);
             AquaFontRenderer.drawCentered(g, font, "Пожалуйста, подождите", width / 2, height / 2 + 6, UiDraw.COLOR_MUTED);
         }

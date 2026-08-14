@@ -198,11 +198,11 @@
               <div class="stat-label">Рыбы выловлено</div>
             </div>
             <div class="stat-card">
-              <div class="stat-value">24 <span class="stat-unit">/ 600</span></div>
+              <div class="stat-value">${esc(profile.quests_done ?? 0)} <span class="stat-unit">/ ${esc(profile.quests_total || 25)}</span></div>
               <div class="stat-label">Квестов выполнено</div>
             </div>
             <div class="stat-card">
-              <div class="stat-value">#1</div>
+              <div class="stat-value">#${esc(profile.leaderboard_rank || 1)}</div>
               <div class="stat-label">Рейтинг рыбака</div>
             </div>
           </div>
