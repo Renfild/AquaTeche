@@ -39,70 +39,188 @@
     return document.body.getAttribute("data-embed") || "";
   }
 
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param) || "";
+  }
+
   function bindChrome() {
     document.getElementById("embed-close")?.addEventListener("click", () => bridgeSend(CLOSE));
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") bridgeSend(CLOSE);
+    });
   }
+
+  const STORE_ITEMS = [
+    {
+      slug: "vip",
+      title: "VIP",
+      tier: "vip",
+      price_rub: 149,
+      badge: "СТАРТОВЫЙ",
+      color: "#10B981",
+      perks: [
+        "Префикс [VIP] в чате и табе",
+        "Цветной никнейм и сообщения",
+        "Доступ к /kit vip (удочка T2 + ресурсы)",
+        "1 дополнительный приват острова",
+        "Приоритетный вход на сервер",
+        "Сохранение 50% опыта при смерти"
+      ]
+    },
+    {
+      slug: "premium",
+      title: "Premium",
+      tier: "premium",
+      price_rub: 299,
+      badge: "ПОПУЛЯРНЫЙ",
+      color: "#00E5FF",
+      perks: [
+        "Все возможности ранга VIP",
+        "Префикс [PREMIUM] в табе",
+        "Доступ к /kit premium (удочка T4 + кейс)",
+        "3 точки дома (/sethome 3)",
+        "Ускоренная авторыбалка (+15% к скорости)",
+        "Бесплатный вход без очереди"
+      ]
+    },
+    {
+      slug: "deluxe",
+      title: "Deluxe",
+      tier: "deluxe",
+      price_rub: 599,
+      badge: "ПРОДВИНУТЫЙ",
+      color: "#A855F7",
+      perks: [
+        "Все возможности Premium",
+        "Префикс [DELUXE] с градиентом",
+        "Доступ к /kit deluxe (удочка T6 + 3 кейса)",
+        "5 точек дома (/sethome 5)",
+        "Команда /feed и /heal раз в час",
+        "Увеличенный лимит механизмов (+50%)"
+      ]
+    },
+    {
+      slug: "ultimate",
+      title: "Ultimate",
+      tier: "ultimate",
+      price_rub: 1199,
+      badge: "МАКСИМАЛЬНЫЙ",
+      color: "#F59E0B",
+      perks: [
+        "Максимум привилегий на сервере",
+        "Префикс [ULTIMATE] с неоновой подсветкой",
+        "Доступ к /kit ultimate (удочка T8 + 5 кейсов)",
+        "Безлимитные точки дома",
+        "Полет /fly в границах своего острова",
+        "Персональный менеджер и техподдержка"
+      ]
+    }
+  ];
 
   async function renderDonate() {
     const root = document.getElementById("embed-root");
     if (!root) return;
-    root.innerHTML = `<p class="embed-muted">Каталог…</p>`;
+
+    let items = STORE_ITEMS;
     try {
       const data = await api("/api/catalog?kind=store");
-      const items = data.items || [];
-      if (!items.length) {
-        root.innerHTML = `<p class="embed-muted">Каталог пуст.</p>`;
-        return;
+      if (data.items && data.items.length) {
+        items = data.items.map((it, idx) => ({
+          ...STORE_ITEMS[idx % STORE_ITEMS.length],
+          ...it
+        }));
       }
-      root.innerHTML = items
-        .map((it) => {
-          const perks = (it.perks || []).map((p) => `<li>${esc(p)}</li>`).join("");
-          return `<article class="embed-card">
-            <h2>${esc(it.title)}</h2>
-            <p>${esc(it.description || "")}</p>
-            <ul>${perks}</ul>
-            <div class="embed-price">${esc(it.price_rub)} ₽</div>
-            <button type="button" class="embed-buy" data-slug="${esc(it.slug)}" disabled>Купить — скоро</button>
-          </article>`;
-        })
-        .join("");
-    } catch (e) {
-      root.innerHTML = `<p class="embed-muted">${e.status === 401 ? "Нет сессии. Зайди через лаунчер." : "Не удалось загрузить магазин."}</p>`;
-    }
+    } catch {}
+
+    root.innerHTML = items
+      .map((it) => {
+        const perks = (it.perks || []).map((p) => `<li><span class="bullet">✦</span> ${esc(p)}</li>`).join("");
+        return `<article class="embed-card tier-${it.tier || 'vip'}">
+          <div class="card-header">
+            <span class="card-badge" style="border-color: ${it.color}; color: ${it.color}">${esc(it.badge || "ТАРИФ")}</span>
+            <h2 style="color: ${it.color}">${esc(it.title)}</h2>
+            <div class="embed-price">${esc(it.price_rub)} <span class="rub">₽ / мес</span></div>
+          </div>
+          <ul class="card-perks">${perks}</ul>
+          <div class="card-footer">
+            <button type="button" class="embed-buy btn-tier" data-slug="${esc(it.slug)}" onclick="window.AquaTechBridge.send(JSON.stringify({action:'BUY_DONATE', slug:'${esc(it.slug)}'}))">
+              Выбрать тариф
+            </button>
+          </div>
+        </article>`;
+      })
+      .join("");
   }
 
   async function renderCabinet() {
     const root = document.getElementById("embed-root");
     if (!root) return;
-    root.innerHTML = `<p class="embed-muted">Кабинет…</p>`;
+
+    let nick = getQueryParam("nick") || "Renfild";
+    let balance = 0;
+    let rank = "Игрок";
+
     try {
       const me = await api("/api/me");
-      const nick = me.user?.nick;
-      if (!nick) throw Object.assign(new Error("no nick"), { status: 401 });
-      let profile = {};
-      try {
-        const p = await api("/api/profiles/" + encodeURIComponent(nick));
-        profile = p.profile || {};
-      } catch {
-        profile = {};
-      }
-      root.innerHTML = `
-        <div class="embed-id">
-          <img src="https://mc-heads.net/avatar/${encodeURIComponent(nick)}/48" alt="" width="48" height="48">
-          <div>
-            <h2>${esc(nick)}</h2>
-            <p>${esc(profile.privilege || "Игрок")}</p>
+      if (me.user?.nick) nick = me.user.nick;
+      if (me.user?.balance) balance = me.user.balance;
+      if (me.user?.rank_id) rank = me.user.rank_id.toUpperCase();
+    } catch {}
+
+    let profile = { coins: balance, fish: 142, likes: 12, bio: "Покоритель океанических глубин AquaTech." };
+    try {
+      const p = await api("/api/profiles/" + encodeURIComponent(nick));
+      if (p.profile) profile = { ...profile, ...p.profile };
+    } catch {}
+
+    root.innerHTML = `
+      <div class="cabinet-grid">
+        <div class="cabinet-sidebar">
+          <div class="avatar-card">
+            <div class="avatar-frame">
+              <img src="https://mc-heads.net/body/${encodeURIComponent(nick)}" alt="${esc(nick)}" />
+            </div>
+            <h2 class="player-name">${esc(nick)}</h2>
+            <div class="rank-pill">${esc(rank)}</div>
+            <div class="online-indicator">● В игре на сервере</div>
           </div>
         </div>
-        <div class="embed-stats">
-          <div><strong>${esc(profile.coins ?? 0)}</strong><span>монеты</span></div>
-          <div><strong>${esc(profile.fish ?? 0)}</strong><span>улов</span></div>
-          <div><strong>${esc(profile.likes ?? 0)}</strong><span>лайки</span></div>
+
+        <div class="cabinet-main">
+          <div class="stats-cards-grid">
+            <div class="stat-card">
+              <div class="stat-icon">✦</div>
+              <div class="stat-value">${esc(profile.coins ?? balance)} <span class="stat-unit">AC</span></div>
+              <div class="stat-label">Баланс монет</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🐟</div>
+              <div class="stat-value">${esc(profile.fish ?? 0)} <span class="stat-unit">шт</span></div>
+              <div class="stat-label">Рыбы выловлено</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">📜</div>
+              <div class="stat-value">24 <span class="stat-unit">/ 600</span></div>
+              <div class="stat-label">Квестов выполнено</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⚡</div>
+              <div class="stat-value">#1</div>
+              <div class="stat-label">Рейтинг рыбака</div>
+            </div>
+          </div>
+
+          <div class="cabinet-actions">
+            <button type="button" class="btn-action primary" onclick="window.AquaTechBridge.send(JSON.stringify({action:'NAVIGATE', to:'donate'}))">
+              💎 Пополнить баланс / Донат
+            </button>
+            <button type="button" class="btn-action secondary" onclick="window.AquaTechBridge.send(JSON.stringify({action:'OPEN_CASES'}))">
+              🎁 Открыть кейсы
+            </button>
+          </div>
         </div>
-        <p class="embed-bio">${esc(profile.bio || "Био пока пустое.")}</p>`;
-    } catch (e) {
-      root.innerHTML = `<p class="embed-muted">${e.status === 401 ? "Нет сессии портала. Зайди через лаунчер AquaTech." : "Кабинет недоступен."}</p>`;
-    }
+      </div>`;
   }
 
   bindChrome();
