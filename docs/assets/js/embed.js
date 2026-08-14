@@ -135,7 +135,7 @@
 
     root.innerHTML = items
       .map((it) => {
-        const perks = (it.perks || []).map((p) => `<li><span class="bullet">✦</span> ${esc(p)}</li>`).join("");
+        const perks = (it.perks || []).map((p) => `<li><span class="bullet">></span> ${esc(p)}</li>`).join("");
         return `<article class="embed-card tier-${it.tier || 'vip'}">
           <div class="card-header">
             <span class="card-badge" style="border-color: ${it.color}; color: ${it.color}">${esc(it.badge || "ТАРИФ")}</span>
@@ -183,29 +183,25 @@
             </div>
             <h2 class="player-name">${esc(nick)}</h2>
             <div class="rank-pill">${esc(rank)}</div>
-            <div class="online-indicator">● В игре на сервере</div>
+            <div class="online-indicator">В игре на сервере</div>
           </div>
         </div>
 
         <div class="cabinet-main">
           <div class="stats-cards-grid">
             <div class="stat-card">
-              <div class="stat-icon">✦</div>
-              <div class="stat-value">${esc(profile.coins ?? balance)} <span class="stat-unit">AC</span></div>
+              <div class="stat-value">${esc(profile.coins ?? balance)} <span class="stat-unit">монет</span></div>
               <div class="stat-label">Баланс монет</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon">🐟</div>
               <div class="stat-value">${esc(profile.fish ?? 0)} <span class="stat-unit">шт</span></div>
               <div class="stat-label">Рыбы выловлено</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon">📜</div>
               <div class="stat-value">24 <span class="stat-unit">/ 600</span></div>
               <div class="stat-label">Квестов выполнено</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon">⚡</div>
               <div class="stat-value">#1</div>
               <div class="stat-label">Рейтинг рыбака</div>
             </div>
@@ -213,10 +209,10 @@
 
           <div class="cabinet-actions">
             <button type="button" class="btn-action primary" onclick="window.AquaTechBridge.send(JSON.stringify({action:'NAVIGATE', to:'donate'}))">
-              💎 Пополнить баланс / Донат
+              Пополнить баланс / Донат
             </button>
             <button type="button" class="btn-action secondary" onclick="window.AquaTechBridge.send(JSON.stringify({action:'OPEN_CASES'}))">
-              🎁 Открыть кейсы
+              Открыть кейсы
             </button>
           </div>
         </div>

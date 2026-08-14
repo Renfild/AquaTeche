@@ -5,9 +5,11 @@ import com.casesmod.client.gui.widget.CustomButton;
 import com.casesmod.client.gui.widget.GlassUI;
 import com.casesmod.client.gui.widget.MenuFonts;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * F4 / {@code /menu} — Razor-sharp High-Tech Liquid Glass interface.
@@ -16,17 +18,15 @@ public class MainMenuScreen extends Screen {
 
     private static final int PAD = 14;
     private static final int GAP = 6;
-    private static final int BTN_H = 30;
-    private static final int CARD_W = 320;
-    private static final int CARD_H = 300;
+    private static final int BTN_H = 32;
+    private static final int CARD_W = 300;
+    private static final int CARD_H = 210;
 
     private static final int COLOR_CYAN = 0xFF00E5FF;
     private static final int COLOR_MUTED = 0xFF64748B;
     private static final int COLOR_BORDER = 0xFF1C3A5A;
     private static final int COLOR_BG_CARD = 0xF207111D;
     private static final int COLOR_STRIP_BG = 0xEE0B192A;
-
-    private final long openedAtMs = System.currentTimeMillis();
 
     private int cardX;
     private int cardY;
@@ -48,10 +48,10 @@ public class MainMenuScreen extends Screen {
         cardX = (width - cardW) / 2;
         cardY = (height - cardH) / 2;
 
-        stripY = cardY + 44;
+        stripY = cardY + 42;
         stripX1 = cardX + PAD;
         stripX2 = cardX + cardW - PAD;
-        stripH = 22;
+        stripH = 24;
 
         int innerW = cardW - PAD * 2;
         int colW = (innerW - GAP) / 2;
@@ -59,24 +59,19 @@ public class MainMenuScreen extends Screen {
         int x0 = cardX + PAD;
         int x1 = x0 + colW + GAP;
 
-        addButton(x0, gridTop, colW, BTN_H, "⚔ Киты", 0, () -> minecraft.setScreen(new KitsScreen()));
-        addButton(x1, gridTop, colW, BTN_H, "⚡ Варпы", 30, () -> minecraft.setScreen(new WarpsScreen()));
+        // Row 1
+        addButton(x0, gridTop, colW, BTN_H, "Киты", 0, () -> minecraft.setScreen(new KitsScreen()));
+        addButton(x1, gridTop, colW, BTN_H, "Варпы", 30, () -> minecraft.setScreen(new WarpsScreen()));
 
+        // Row 2
         int row2 = gridTop + BTN_H + GAP;
-        addButton(x0, row2, colW, BTN_H, "⚓ Спавн", 60, this::teleportSpawn);
-        addButton(x1, row2, colW, BTN_H, "🐟 Рынок рыбы", 90, () -> minecraft.setScreen(new FishMarketScreen()));
+        addButton(x0, row2, colW, BTN_H, "Спавн", 60, this::teleportSpawn);
+        addButton(x1, row2, colW, BTN_H, "Донат", 90, () -> WebOverlay.openDonate(minecraft));
 
+        // Row 3
         int row3 = row2 + BTN_H + GAP;
-        addButton(x0, row3, colW, BTN_H, "💎 Донат", 120, () -> WebOverlay.openDonate(minecraft));
-        addButton(x1, row3, colW, BTN_H, "📜 Квесты", 150, () -> minecraft.setScreen(new QuestsScreen()));
-
-        int row4 = row3 + BTN_H + GAP;
-        addButton(x0, row4, colW, BTN_H, "🎁 Кейсы", 180, () -> minecraft.setScreen(new CasesScreen()));
-        addButton(x1, row4, colW, BTN_H, "📦 Хранилище", 210, AquaContainerOverlay::openVault);
-
-        int row5 = row4 + BTN_H + GAP;
-        addButton(x0, row5, colW, BTN_H, "⚙ Лимиты", 240, AquaContainerOverlay::openLimiters);
-        addButton(x1, row5, colW, BTN_H, "👁 Вид", 270, AquaContainerOverlay::openLook);
+        addButton(x0, row3, colW, BTN_H, "Квесты", 120, this::openFtbQuests);
+        addButton(x1, row3, colW, BTN_H, "Кейсы", 150, () -> minecraft.setScreen(new CasesScreen()));
     }
 
     private void addButton(int x, int y, int w, int h, String label, int appearDelay, Runnable action) {
@@ -96,6 +91,13 @@ public class MainMenuScreen extends Screen {
         onClose();
     }
 
+    private void openFtbQuests() {
+        if (minecraft.player != null) {
+            minecraft.player.connection.sendUnsignedCommand("ftbquests open");
+        }
+        onClose();
+    }
+
     @Override
     public void render(GuiGraphics gfx, int mouseX, int mouseY, float partialTicks) {
         // Dark atmosphere wash over blurred world
@@ -107,14 +109,12 @@ public class MainMenuScreen extends Screen {
 
         int cx = cardX + cardW / 2;
 
-        // Header Title with Cyan Glow
-        Component titleComp = MenuFonts.text("⟐ AQUATECH ⟐");
+        // Header Title
+        Component titleComp = MenuFonts.text("AQUATECH");
         int tw = font.width(titleComp);
-        gfx.drawString(font, titleComp, cx - tw / 2 - 1, cardY + 12, (0x33 << 24) | COLOR_CYAN, false);
-        gfx.drawString(font, titleComp, cx - tw / 2 + 1, cardY + 12, (0x33 << 24) | COLOR_CYAN, false);
-        gfx.drawString(font, titleComp, cx - tw / 2, cardY + 12, 0xFFFFFFFF, false);
+        gfx.drawString(font, titleComp, cx - tw / 2, cardY + 12, COLOR_CYAN, false);
 
-        drawCentered(gfx, MenuFonts.text("СИСТЕМНЫЙ ТЕРМИНАЛ · F4"), cx, cardY + 26, COLOR_MUTED);
+        drawCentered(gfx, MenuFonts.text("МЕНЮ СЕРВЕРА · F4"), cx, cardY + 24, COLOR_MUTED);
 
         // Player Profile Strip
         renderProfileStrip(gfx, mouseX, mouseY);
@@ -134,27 +134,36 @@ public class MainMenuScreen extends Screen {
         GlassUI.drawGlassPanel(gfx, stripX1, stripY, stripX2, stripY + stripH, 2, stripBg, stripBorder, hovered);
 
         String name = (minecraft.player != null) ? minecraft.player.getGameProfile().getName() : "Игрок";
-        String initial = name.isEmpty() ? "?" : name.substring(0, 1).toUpperCase();
 
-        // Avatar Chip
+        // Player Head Skin
         int avX = stripX1 + 4;
-        int avY = stripY + 3;
-        gfx.fill(avX, avY, avX + 16, avY + 16, 0xFF142E47);
-        GlassUI.drawRectOutline(gfx, avX, avY, avX + 16, avY + 16, COLOR_CYAN);
-        Component initComp = MenuFonts.text(initial);
-        gfx.drawString(font, initComp, avX + (16 - font.width(initComp)) / 2, avY + 4, 0xFFFFFFFF, false);
+        int avY = stripY + 4;
+        ResourceLocation skin = null;
+        if (minecraft.getConnection() != null && minecraft.player != null) {
+            PlayerInfo info = minecraft.getConnection().getPlayerInfo(minecraft.player.getUUID());
+            if (info != null) {
+                skin = info.getSkinLocation();
+            }
+        }
+        if (skin != null) {
+            PlayerFaceRenderer.draw(gfx, skin, avX, avY, 16);
+            GlassUI.drawRectOutline(gfx, avX - 1, avY - 1, avX + 17, avY + 17, COLOR_CYAN);
+        } else {
+            gfx.fill(avX, avY, avX + 16, avY + 16, 0xFF142E47);
+            GlassUI.drawRectOutline(gfx, avX, avY, avX + 16, avY + 16, COLOR_CYAN);
+        }
 
         // Nickname
-        gfx.drawString(font, MenuFonts.text(name), avX + 22, stripY + 7, 0xFFFFFFFF, false);
+        gfx.drawString(font, MenuFonts.text(name), avX + 22, stripY + 8, 0xFFFFFFFF, false);
 
         // Balance Badge
-        Component balComp = MenuFonts.text("✦ " + ClientBalanceState.balance + " AC");
+        Component balComp = MenuFonts.text(ClientBalanceState.balance + " монет");
         int balW = font.width(balComp);
         int pillX1 = stripX2 - balW - 14;
-        int pillY1 = stripY + 3;
-        gfx.fill(pillX1, pillY1, stripX2 - 4, stripY + stripH - 3, 0xFF0D2235);
-        GlassUI.drawRectOutline(gfx, pillX1, pillY1, stripX2 - 4, stripY + stripH - 3, 0xFF1E3F61);
-        gfx.drawString(font, balComp, pillX1 + 5, stripY + 7, COLOR_CYAN, false);
+        int pillY1 = stripY + 4;
+        gfx.fill(pillX1, pillY1, stripX2 - 4, stripY + stripH - 4, 0xFF0D2235);
+        GlassUI.drawRectOutline(gfx, pillX1, pillY1, stripX2 - 4, stripY + stripH - 4, 0xFF1E3F61);
+        gfx.drawString(font, balComp, pillX1 + 5, stripY + 8, COLOR_CYAN, false);
     }
 
     @Override

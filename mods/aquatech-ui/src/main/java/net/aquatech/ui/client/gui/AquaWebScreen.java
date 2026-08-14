@@ -45,22 +45,24 @@ public class AquaWebScreen extends AquaBlurredScreen {
             base = base.substring(0, base.length() - 1);
         }
         String url = base + "/embed/" + page + ".html";
+        String nick = mc.player != null ? mc.player.getGameProfile().getName() : "Renfild";
+        url += "?nick=" + URLEncoder.encode(nick, StandardCharsets.UTF_8);
         String token = ClientUiState.sessionToken();
         if (token != null && token.length() >= 8 && !token.startsWith("local_")) {
-            url += "?session=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
+            url += "&session=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
         }
         mc.setScreen(new AquaWebScreen(Component.literal(title), url));
     }
 
     private void layoutFrame() {
-        frameW = Math.min(840, width - 40);
-        frameH = Math.min(520, height - 60);
+        frameW = Math.min(960, width - 24);
+        frameH = Math.min(600, height - 32);
         frameX = (width - frameW) / 2;
         frameY = (height - frameH) / 2;
         contentX = frameX + 2;
-        contentY = frameY + 35;
+        contentY = frameY + 32;
         contentW = frameW - 4;
-        contentH = frameH - 37;
+        contentH = frameH - 34;
     }
 
     @Override
@@ -71,13 +73,8 @@ public class AquaWebScreen extends AquaBlurredScreen {
         this.bridge = AquaWebBridge.getOrCreate(targetUrl, (int) (contentW * scale), (int) (contentH * scale));
 
         addRenderableWidget(new AquaButton(
-                frameX + frameW - 170, frameY + 6, 120, 22,
-                Component.literal("В браузере"),
-                this::openExternalBrowser
-        ));
-        addRenderableWidget(new AquaButton(
-                frameX + frameW - 44, frameY + 6, 36, 22,
-                Component.literal("✕"),
+                frameX + frameW - 32, frameY + 5, 24, 22,
+                Component.literal("X"),
                 this::onClose
         ));
     }
@@ -103,14 +100,6 @@ public class AquaWebScreen extends AquaBlurredScreen {
         }
     }
 
-    private void openExternalBrowser() {
-        try {
-            Util.getPlatform().openUri(new URI(targetUrl));
-        } catch (Exception e) {
-            net.aquatech.ui.AquaTechUI.LOGGER.debug("[web] openUri: {}", e.toString());
-        }
-    }
-
     private boolean inContent(double mouseX, double mouseY) {
         return mouseX >= contentX && mouseX < contentX + contentW
                 && mouseY >= contentY && mouseY < contentY + contentH;
@@ -128,12 +117,10 @@ public class AquaWebScreen extends AquaBlurredScreen {
     protected void renderScreenContent(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         layoutFrame();
         AquaGlassPanel.draw(g, frameX, frameY, frameW, frameH, COLOR_GLASS_PANEL, COLOR_CYAN_ACCENT, 4, true);
-        g.fill(frameX + 1, frameY + 1, frameX + frameW - 1, frameY + 34, 0xFF0D2136);
-        UiDraw.border(g, frameX, frameY, frameW, 34, COLOR_BORDER_MUTED);
+        g.fill(frameX + 1, frameY + 1, frameX + frameW - 1, frameY + 31, 0xFF0D2136);
+        UiDraw.border(g, frameX, frameY, frameW, 31, COLOR_BORDER_MUTED);
 
-        g.drawString(font, AquaFontRenderer.withMain(pageTitle), frameX + 14, frameY + 8, COLOR_CYAN_ACCENT, false);
-        String shown = targetUrl.length() > 64 ? targetUrl.substring(0, 61) + "..." : targetUrl;
-        AquaFontRenderer.draw(g, font, shown, frameX + 14, frameY + 20, COLOR_TEXT_MUTED);
+        g.drawString(font, AquaFontRenderer.withMain(pageTitle), frameX + 14, frameY + 11, COLOR_CYAN_ACCENT, false);
 
         if (bridge != null && bridge.isAvailable()) {
             bridge.blit(contentX, contentY, contentW, contentH);

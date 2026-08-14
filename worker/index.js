@@ -132,17 +132,17 @@ export default {
     }
     if (url.pathname.startsWith("/embed/") && env.ASSETS) {
       const sid = String(url.searchParams.get("session") || "").trim();
+      const response = await env.ASSETS.fetch(request);
       if (sid.length >= 8) {
-        url.searchParams.delete("session");
-        return new Response(null, {
-          status: 302,
-          headers: {
-            Location: url.pathname + url.search,
-            "set-cookie": sessionCookie(sid),
-            "cache-control": "no-store",
-          },
+        const newHeaders = new Headers(response.headers);
+        newHeaders.append("set-cookie", sessionCookie(sid));
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: newHeaders,
         });
       }
+      return response;
     }
     if (env.ASSETS) return env.ASSETS.fetch(request);
     return new Response("AquaTech worker: missing ASSETS binding", { status: 500 });

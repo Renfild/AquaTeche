@@ -59,9 +59,14 @@ public final class OceanTabOverlay {
         AquaFontRenderer.drawHeader(graphics, font, "AquaTech", contentLeft, panelY + 11, UiDraw.COLOR_ACCENT);
         AquaFontRenderer.draw(graphics, font, "Ocean Network", contentLeft, panelY + 24, UiDraw.COLOR_MUTED);
 
-        String online = "● " + stats.online() + "/" + Math.max(stats.online(), stats.maxPlayers());
+        String onlineText = stats.online() + "/" + Math.max(stats.online(), stats.maxPlayers());
         int onlineColor = stats.online() > 0 ? 0xFF63E6A5 : UiDraw.COLOR_MUTED;
-        AquaFontRenderer.draw(graphics, font, online, contentRight - AquaFontRenderer.width(font, online), panelY + 11, onlineColor);
+        int onlineW = AquaFontRenderer.width(font, onlineText);
+        int dotX = contentRight - onlineW - 8;
+        int dotY = panelY + 14;
+        graphics.fill(dotX, dotY, dotX + 4, dotY + 4, onlineColor);
+        AquaFontRenderer.draw(graphics, font, onlineText, contentRight - onlineW, panelY + 11, onlineColor);
+
         String staff = stats.staffOnline() + " команда";
         AquaFontRenderer.draw(graphics, font, staff, contentRight - AquaFontRenderer.width(font, staff), panelY + 24, UiDraw.COLOR_MUTED);
         graphics.fill(contentLeft, panelY + HEADER_HEIGHT - 5, contentRight, panelY + HEADER_HEIGHT - 4, 0x443A7892);
@@ -123,13 +128,31 @@ public final class OceanTabOverlay {
 
         int textX = x + 42;
         int right = x + width - 8;
-        String ping = Math.max(0, profile.ping()) + "ms";
-        int pingColor = pingColor(profile.ping());
+
+        int realPing = profile.ping();
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.getConnection() != null) {
+            var playerInfo = mc.getConnection().getPlayerInfo(profile.uuid());
+            if (playerInfo != null) {
+                realPing = playerInfo.getLatency();
+            }
+        }
+        String ping = Math.max(0, realPing) + "ms";
+        int pingColor = pingColor(realPing);
+
         String name = AquaFontRenderer.fit(font, profile.name(), Math.max(24, right - textX - AquaFontRenderer.width(font, ping) - 14));
         AquaFontRenderer.draw(graphics, font, name, textX, y + 8, UiDraw.COLOR_TEXT);
 
         int badgeX = textX;
-        String rank = AquaFontRenderer.fit(font, profile.rankDisplay(), Math.max(24, right - textX - 50));
+        String rankRaw = profile.rankDisplay();
+        if (rankRaw == null || rankRaw.isBlank()) {
+            rankRaw = profile.rankId();
+        }
+        rankRaw = rankRaw.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim();
+        if (rankRaw.isBlank()) {
+            rankRaw = "ИГРОК";
+        }
+        String rank = AquaFontRenderer.fit(font, rankRaw.toUpperCase(), Math.max(24, right - textX - 50));
         badgeX += AquaBadge.draw(graphics, font, badgeX, y + 22, rank, rankColor) + 4;
         if (profile.staff()) {
             AquaBadge.draw(graphics, font, badgeX, y + 22, "STAFF", UiDraw.COLOR_ACCENT);

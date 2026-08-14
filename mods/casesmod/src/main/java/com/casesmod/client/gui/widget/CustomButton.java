@@ -93,12 +93,6 @@ public class CustomButton extends Button {
             int tw = font.width(label);
             int tx = getX() + (width - tw) / 2;
             int ty = getY() + (height - 8) / 2;
-
-            if (hovered) {
-                // Subtle text glow on hover
-                gfx.drawString(font, label, tx - 1, ty, (0x33 << 24) | 0x00E5FF, false);
-                gfx.drawString(font, label, tx + 1, ty, (0x33 << 24) | 0x00E5FF, false);
-            }
             gfx.drawString(font, label, tx, ty, textColorFull, false);
         }
 

@@ -3,6 +3,7 @@ package net.aquatech.ui.client.web;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.aquatech.ui.AquaTechUI;
+import net.aquatech.ui.client.gui.AquaWebScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.sounds.SoundEvents;
@@ -52,6 +53,31 @@ public final class AquaWebIpcDispatcher {
                 case "TELEPORT_SPAWN" -> mc.execute(() -> {
                     if (mc.player != null) {
                         mc.player.connection.sendUnsignedCommand("spawn");
+                    }
+                });
+                case "NAVIGATE" -> mc.execute(() -> {
+                    String to = root.has("to") ? root.get("to").getAsString() : payload.has("to") ? payload.get("to").getAsString() : "";
+                    if ("donate".equalsIgnoreCase(to)) {
+                        AquaWebScreen.openEmbed("Донат", "donate");
+                    } else if ("cabinet".equalsIgnoreCase(to)) {
+                        AquaWebScreen.openEmbed("Кабинет", "cabinet");
+                    }
+                });
+                case "OPEN_CASES" -> mc.execute(() -> {
+                    if (mc.player != null) {
+                        mc.player.connection.sendUnsignedCommand("cases");
+                    }
+                });
+                case "BUY_DONATE", "BUY_ITEM" -> mc.execute(() -> {
+                    String slug = root.has("slug") ? root.get("slug").getAsString() : payload.has("slug") ? payload.get("slug").getAsString() : "";
+                    if (mc.player != null && !slug.isBlank()) {
+                        mc.player.connection.sendUnsignedCommand("donate " + slug);
+                    }
+                });
+                case "EXEC_COMMAND" -> mc.execute(() -> {
+                    String cmd = root.has("cmd") ? root.get("cmd").getAsString() : payload.has("cmd") ? payload.get("cmd").getAsString() : "";
+                    if (mc.player != null && !cmd.isBlank()) {
+                        mc.player.connection.sendUnsignedCommand(cmd.startsWith("/") ? cmd.substring(1) : cmd);
                     }
                 });
                 default -> {
