@@ -57,7 +57,7 @@ public final class OceanTabOverlay {
         int contentLeft = panelX + OUTER_PADDING;
         int contentRight = panelX + panelW - OUTER_PADDING;
         AquaFontRenderer.drawHeader(graphics, font, "AquaTech", contentLeft, panelY + 11, UiDraw.COLOR_ACCENT);
-        AquaFontRenderer.draw(graphics, font, "Ocean Network · Сборка v2.9.43", contentLeft, panelY + 24, UiDraw.COLOR_MUTED);
+        AquaFontRenderer.draw(graphics, font, "Ocean Network · Сборка v2.9.47", contentLeft, panelY + 24, UiDraw.COLOR_MUTED);
 
         String onlineText = stats.online() + "/" + Math.max(stats.online(), stats.maxPlayers());
         int onlineColor = stats.online() > 0 ? 0xFF63E6A5 : UiDraw.COLOR_MUTED;
