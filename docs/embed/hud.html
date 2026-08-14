@@ -24,18 +24,14 @@
       position: relative;
     }
 
-    .player-hud-card {
+    .player-hud-container {
       position: absolute;
       top: 16px;
       right: 16px;
-      width: 240px;
-      background: rgba(8, 20, 32, 0.88);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(0, 229, 255, 0.25);
-      border-radius: 18px;
-      padding: 16px 18px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 229, 255, 0.14);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 250px;
       animation: hudSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -44,24 +40,36 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
+    /* Common Card Style */
+    .hud-card {
+      background: rgba(8, 20, 32, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 255, 0.12);
+    }
+
+    /* Top: Profile Card */
     .hud-player-header {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .hud-avatar-box {
       position: relative;
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       flex-shrink: 0;
     }
 
     .hud-avatar {
       width: 100%;
       height: 100%;
-      border-radius: 10px;
+      border-radius: 8px;
       border: 1.5px solid #00e5ff;
       background: #020617;
       display: block;
@@ -71,12 +79,12 @@
       position: absolute;
       bottom: -2px;
       right: -2px;
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       background: #10b981;
       border-radius: 50%;
       border: 2px solid #081420;
-      box-shadow: 0 0 8px #10b981;
+      box-shadow: 0 0 6px #10b981;
     }
 
     .hud-info {
@@ -86,7 +94,7 @@
     }
 
     .hud-nick {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 800;
       color: #ffffff;
       line-height: 1.2;
@@ -96,7 +104,7 @@
     }
 
     .hud-rank {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       color: #00e5ff;
       letter-spacing: 0.05em;
@@ -106,80 +114,155 @@
     .hud-metrics {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .metric-card {
+    .metric-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: rgba(4, 12, 22, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 9px 12px;
-      transition: border-color 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 7px 10px;
     }
 
-    .metric-card:hover {
-      border-color: rgba(0, 229, 255, 0.3);
-    }
-
-    .metric-title {
+    .metric-label {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 12.5px;
+      gap: 7px;
+      font-size: 12px;
       font-weight: 700;
       color: #cbd5e1;
     }
 
-    .metric-icon-coins {
-      color: #fbbf24;
-      filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
-    }
-
-    .metric-icon-time {
-      color: #38bdf8;
-      filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.5));
-    }
-
-    .metric-num {
+    .metric-value {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 800;
       color: #ffffff;
       letter-spacing: -0.02em;
     }
+
+    /* Bottom: Diving Card */
+    .diving-header {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #00e5ff;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    }
+
+    .diving-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .diving-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .diving-name {
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .diving-val {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .val-accent { color: #00e5ff; }
+    .val-norm { color: #00e5ff; }
+    .val-muted { color: #64748b; }
+
+    .oxygen-bar-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .oxygen-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #00e5ff, #38bdf8);
+      box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
   </style>
 </head>
 <body>
-  <div class="player-hud-card" id="player-hud">
-    <div class="hud-player-header">
-      <div class="hud-avatar-box">
-        <img class="hud-avatar" id="player-avatar" src="https://mc-heads.net/avatar/Renfild" alt="Avatar" />
-        <div class="hud-status-dot"></div>
+  <div class="player-hud-container" id="hud-container">
+    <!-- Player Profile Card -->
+    <div class="hud-card">
+      <div class="hud-player-header">
+        <div class="hud-avatar-box">
+          <img class="hud-avatar" id="player-avatar" src="https://mc-heads.net/avatar/Renfild" alt="Avatar" />
+          <div class="hud-status-dot"></div>
+        </div>
+        <div class="hud-info">
+          <span class="hud-nick" id="hud-nick">Renfild</span>
+          <span class="hud-rank" id="hud-rank">ИГРОК</span>
+        </div>
       </div>
-      <div class="hud-info">
-        <span class="hud-nick" id="hud-nick">Renfild</span>
-        <span class="hud-rank" id="hud-rank">ИГРОК</span>
+
+      <div class="hud-metrics">
+        <div class="metric-row">
+          <div class="metric-label">
+            <span>💰</span>
+            <span>Монеты</span>
+          </div>
+          <span class="metric-value" id="hud-coins">0</span>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-label">
+            <span>⏱</span>
+            <span>В игре</span>
+          </div>
+          <span class="metric-value" id="hud-playtime">0 ч</span>
+        </div>
       </div>
     </div>
 
-    <div class="hud-metrics">
-      <div class="metric-card">
-        <div class="metric-title">
-          <span class="metric-icon-coins">💰</span>
-          <span>Монеты</span>
+    <!-- Diving Card -->
+    <div class="hud-card">
+      <div class="diving-header">Погружение</div>
+
+      <div class="diving-stats">
+        <div class="diving-row">
+          <span class="diving-name">Глубина</span>
+          <span class="diving-val" id="dive-depth">поверхность</span>
         </div>
-        <span class="metric-num" id="hud-coins">0</span>
+
+        <div class="diving-row">
+          <span class="diving-name">Давление</span>
+          <span class="diving-val val-norm" id="dive-pressure">норма</span>
+        </div>
+
+        <div class="diving-row">
+          <span class="diving-name">Защита</span>
+          <span class="diving-val val-muted" id="dive-defense">—</span>
+        </div>
+
+        <div class="diving-row">
+          <span class="diving-name">Кислород</span>
+          <span class="diving-val val-accent" id="dive-oxygen">100%</span>
+        </div>
       </div>
 
-      <div class="metric-card">
-        <div class="metric-title">
-          <span class="metric-icon-time">⏱</span>
-          <span>В игре</span>
-        </div>
-        <span class="metric-num" id="hud-playtime">0 ч</span>
+      <div class="oxygen-bar-track">
+        <div class="oxygen-bar-fill" id="dive-oxygen-bar" style="width: 100%;"></div>
       </div>
     </div>
   </div>
@@ -194,7 +277,7 @@
       document.getElementById('hud-nick').textContent = currentNick;
       document.getElementById('player-avatar').src = `https://mc-heads.net/avatar/${encodeURIComponent(currentNick)}`;
 
-      // Fetch player data directly from database API
+      // Fetch player profile from D1 database API
       fetch(`/api/profiles/${encodeURIComponent(currentNick)}`)
         .then(res => res.json())
         .then(data => {
@@ -210,22 +293,38 @@
         .catch(() => {});
     }
 
+    // Update diving data
+    function setDivingData(depth, pressure, defense, oxygen) {
+      if (depth !== undefined) document.getElementById('dive-depth').textContent = depth;
+      if (pressure !== undefined) document.getElementById('dive-pressure').textContent = pressure;
+      if (defense !== undefined) document.getElementById('dive-defense').textContent = defense;
+      if (oxygen !== undefined) {
+        document.getElementById('dive-oxygen').textContent = oxygen + '%';
+        document.getElementById('dive-oxygen-bar').style.width = Math.max(0, Math.min(100, oxygen)) + '%';
+      }
+    }
+
     // Initial load
     updateHud(currentNick);
 
-    // Auto-refresh every 30 seconds
+    // Auto-refresh profile every 30 seconds
     setInterval(() => updateHud(currentNick), 30000);
 
     // Listen for IPC messages from client mod
     window.addEventListener('message', e => {
       try {
         const msg = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-        if (msg && msg.nick) updateHud(msg.nick);
-        if (msg && msg.coins !== undefined) {
-          document.getElementById('hud-coins').textContent = Number(msg.coins).toLocaleString('ru-RU');
-        }
-        if (msg && msg.playtime !== undefined) {
-          document.getElementById('hud-playtime').textContent = msg.playtime;
+        if (msg) {
+          if (msg.nick) updateHud(msg.nick);
+          if (msg.coins !== undefined) {
+            document.getElementById('hud-coins').textContent = Number(msg.coins).toLocaleString('ru-RU');
+          }
+          if (msg.playtime !== undefined) {
+            document.getElementById('hud-playtime').textContent = msg.playtime;
+          }
+          if (msg.depth !== undefined || msg.oxygen !== undefined) {
+            setDivingData(msg.depth, msg.pressure, msg.defense, msg.oxygen);
+          }
         }
       } catch (err) {}
     });
