@@ -1,34 +1,35 @@
 # Полная таблица лута удочек AquaTech
 
-Источник: `mods/aquatech-ui/.../FishingLootHandler.java` → `rollStarCatcherRodLoot`  
-Дата выгрузки: 2026-08-08
+Источник истины: `mods/aquatech-ui/.../FishingLootHandler.java` → `rollStarCatcherRodLoot`  
+Дата: **2026-08-11** (сверка с кодом)
 
 ## Как работает бросок
 
-1. Ресурсные удочки StarCatcher (и ванильная `minecraft:fishing_rod` = бамбук) **отменяют** ванильный/SC улов и крутят пул ниже.
+1. Ресурсные удочки StarCatcher и ванильная `minecraft:fishing_rod` (= `bamboo_rod`) **отменяют** ванильный/SC дроп и крутят пул ниже.
 2. Каждый предмет в пуле сначала проходит свой **шанс** (`maybeAdd`).
-3. Из успешно прошедших предметов случайно оставляют **1–3 стака** (`pickFromPool`).
+3. Из прошедших случайно оставляют **1–3** стака (`pickFromPool`; у T1 bamboo — **1–2** к гарантированному).
 4. Кол-во в стаке — диапазон в колонке «Кол-во».
-5. Умножители в удочке (×2…×64) умножают количество.
-6. Бонусный «treasure» (навыки / шторм / полная луна / perfect reel) — отдельно, см. конец файла.
-7. **Fish-only** удочки (`sky_rod`, `boner_rod`) — лут StarCatcher (рыба), ресурсный пул AquaTech **не** применяется.
+5. Рейт-мод в удочке (×2…×64) умножает количество.
+6. Бонусный treasure (навык / шторм Horizon / полная луна) — отдельно в конце.
+7. **Fish-only** (`sky_rod`, `boner_rod`) — только рыба StarCatcher, пул AquaTech **не** крутится.
 
 ---
 
 ## T1 — `starcatcher:bamboo_rod` / `minecraft:fishing_rod`
 
-**Всегда 1 гарантированный стартовый дроп** (взаимоисключающие веса):
+**Всегда 1 гарантированный стартовый дроп** (взаимоисключающие сегменты):
 
 | Шанс сегмента | Предмет | Кол-во |
 |---------------|---------|--------|
-| 18% | `minecraft:cobblestone` | 2–4 |
-| 16% | `minecraft:dirt` | 2–4 |
-| 14% | `minecraft:clay_ball` | 2–4 |
-| 10% | `minecraft:oak_sapling` | 1–2 |
-| 10% | `industrialupgrade:sapling/rubber_sapling` | 1 |
+| 16% | `minecraft:cobblestone` | 2–4 |
+| 14% | `minecraft:dirt` | 2–4 |
+| 12% | `minecraft:clay_ball` | 2–4 |
+| 12% | `minecraft:bamboo` | 2–4 |
+| 8% | `minecraft:oak_sapling` | 1–2 |
+| 8% | `industrialupgrade:sapling/rubber_sapling` | 1 |
 | 10% | `minecraft:gravel` | 2–3 |
 | 10% | `minecraft:sand` | 2–3 |
-| 12% | `minecraft:birch_sapling` | 1 |
+| 10% | `minecraft:birch_sapling` | 1 |
 
 **Плюс пул (шанс каждого → потом 1–2 стака):**
 
@@ -37,6 +38,7 @@
 | 50% | `minecraft:cobblestone` | 1–3 |
 | 45% | `minecraft:dirt` | 1–3 |
 | 45% | `minecraft:clay_ball` | 1–3 |
+| 45% | `minecraft:bamboo` | 1–3 |
 | 35% | `minecraft:oak_sapling` | 1 |
 | 25% | `minecraft:birch_sapling` | 1 |
 | 35% | `industrialupgrade:sapling/rubber_sapling` | 1 |
@@ -46,7 +48,6 @@
 | 35% | `minecraft:sand` | 1–2 |
 | 40% | `minecraft:copper_ore` | 1 |
 | 30% | `industrialupgrade:classicore/tin` | 1 |
-| 22% | `industrialupgrade:baseore/titanium` | 1 |
 
 ---
 
@@ -60,9 +61,9 @@
 | 50% | `industrialupgrade:classicore/tin` | 1–2 |
 | 45% | `minecraft:iron_ore` | 1–2 |
 | 40% | `minecraft:coal_ore` | 1–2 |
-| 45% | `industrialupgrade:baseore/titanium` | 1–2 |
+| 60% | `industrialupgrade:baseore/titanium` | 1–2 |
 
-Итог: **1–3** стака из прошедших.
+Итог: **1–3** стака.
 
 ---
 
@@ -72,6 +73,7 @@
 |------|---------|--------|
 | 55% | `minecraft:iron_ore` | 1–2 |
 | 50% | `minecraft:redstone_ore` | 1–2 |
+| 50% | `industrialupgrade:baseore/spinel` | 1–2 |
 | 45% | `minecraft:lapis_ore` | 1–2 |
 | 45% | `industrialupgrade:classicore/tin` | 1–2 |
 | 40% | `industrialupgrade:baseore2/strontium` | 1 |
@@ -86,7 +88,6 @@
 
 | Шанс | Предмет | Кол-во |
 |------|---------|--------|
-| 55% | `industrialupgrade:baseore/spinel` | 1–2 |
 | 50% | `industrialupgrade:baseore2/barium` | 1–2 |
 | 45% | `industrialupgrade:classicore/tin` | 1–2 |
 | 40% | `minecraft:iron_ore` | 1–2 |
@@ -224,8 +225,8 @@
 
 | Удочка | Поведение |
 |--------|-----------|
-| `starcatcher:sky_rod` | Рыба StarCatcher (дефолт мода) |
-| `starcatcher:boner_rod` | Рыба StarCatcher (дефолт мода) |
+| `starcatcher:sky_rod` | Рыба StarCatcher (дефолт мода + мини-игра) |
+| `starcatcher:boner_rod` | Рыба StarCatcher (дефолт мода + мини-игра) |
 
 ---
 
@@ -244,34 +245,25 @@
 | 3% | `minecraft:heart_of_the_sea` | 1 |
 
 Когда может выпасть:
-- perfect reel (quality ≥ 90) — 35%;
 - навык rare loot / шторм Horizon;
 - фаза луны 0 (полная) — 18%.
 
 ---
 
-## Примечание про KubeJS
+## Сводная матрица (удочка → фокус)
 
-`kubejs/server_scripts/40_aquatech_fishing_drops.js` тоже добавляет предметы в `ItemFishedEvent`, но для ресурсных удочек Java (`HIGHEST`) **отменяет** событие и выдаёт лут сам. Актуальная таблица — **эта (Java)**. KubeJS-скрипт устарел относительно пулов T3+.
-
----
-
-## Сводная матрица (предмет → удочки)
-
-| Предмет | Удочки |
-|---------|--------|
-| cobblestone / dirt / clay / sand / gravel / saplings / latex / peat | T1 (+ частично T2) |
-| copper_ore, classicore/tin | T1–T4 |
-| titanium | T1 (редко), T2, T9–T10 |
-| iron / coal / redstone_ore | T2–T3 (+ T4–T6 iron) |
-| strontium / yttrium / thallium | T3 |
-| spinel / barium | T4–T5 |
-| polonium | T5, T13 |
-| aluminium / silver / zinc | T6 |
-| gold / tungsten / chromium / sapphire / topaz | T7–T8 |
-| lapis / amethyst / crystal | T7–T8 |
-| cobalt / manganese / nickel | T9 |
-| diamond / obsidian / stainless_steel | T10 |
-| prismarine / platinum / heart_of_the_sea | T11 |
-| quartz / uranium / netherite_scrap / inconel | T12 |
-| iridium / osmium / osmiridium / adamantium / nether_star | T13 |
+| Тир | Удочка | Фокус |
+|-----|--------|--------|
+| 1 | bamboo / fishing_rod | блоки, саженцы, старт IU |
+| 2 | humble | медь, олово, титан |
+| 3 | good_old | железо, spinel, редстоун, лазурит, Sr/Y/Tl |
+| 4 | naturalist | barium |
+| 5 | slimed | spinel, barium, polonium |
+| 6 | iceborn | Al, Ag, Zn |
+| 7 | starcatcher | золото, W, Cr, сапфир/топаз |
+| 8 | azure_crystal | кристаллы / precious gems |
+| 9 | sharktooth | Ti, Co, Mn, Ni |
+| 10 | obsidian | алмаз, обсидиан, нерж. |
+| 11 | lush_glowberry | призмарин, платина |
+| 12 | magmaforged | кварц, уран, незерит-лом |
+| 13 | alpha | Ir, Os, polonium, nether star |

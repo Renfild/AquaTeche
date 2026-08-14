@@ -48,12 +48,7 @@ public final class ClientEvents {
             if (screen != null) {
                 continue; // не перебиваем чат/инвентарь/другие GUI
             }
-            try {
-                Class<?> webScreen = Class.forName("net.aquatech.ui.client.gui.AquaWebScreen");
-                webScreen.getMethod("openEmbed", String.class, String.class).invoke(null, "Меню", "menu");
-            } catch (Throwable t) {
-                NetworkHandler.CHANNEL.sendToServer(new RequestOpenMenuC2SPacket());
-            }
+            com.casesmod.client.gui.WebOverlay.openMainMenu(mc);
         }
     }
 

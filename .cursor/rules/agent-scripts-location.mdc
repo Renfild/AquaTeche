@@ -1,0 +1,29 @@
+---
+description: Put one-off/agent scripts under scripts/; keep release tools in tools/
+alwaysApply: true
+---
+
+# Agent scripts location
+
+When adding one-off or task scripts (analysis, migration helpers, temporary generators, peeks), put them under:
+
+```
+scripts/tasks/
+```
+
+Use other `scripts/` subfolders when they fit:
+
+- `scripts/scratch/` — temporary dumps (`_tmp_*`), safe to delete
+- `scripts/deploy/` — deploy/setup `.ps1` / `.bat` (root shims may call these)
+- `scripts/archive/` — old demos, extracted assets, parked jars
+
+## Do not
+
+- Drop new helper `.py` / `.ps1` in the repo root
+- Park scratch next to release entrypoints in `tools/` (use `scripts/scratch/`)
+
+## Keep in `tools/`
+
+Release and day-to-day pipeline only, e.g. `publish_client_pack.py`, `sync_lodestone_mods.py`, `upload_launcher_release.py`, `upload_pack_release.py`, `generate_site.py`, `deploy_to_cloudflare.py`, `aquatech_launcher.py`.
+
+Domain helpers live in `tools/{quests,patches,portal,assets,server_setup,launcher_tests}/`. Thin shims may exist at `tools/<name>.py` for CI/old paths.

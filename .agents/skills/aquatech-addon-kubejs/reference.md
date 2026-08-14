@@ -24,7 +24,7 @@ Create is **not** on the lean server. CraftTweaker is parked (`scripts/*.zs.disa
 | Datapacks templates | `server/world_datapack_templates/`, `datapacks/` |
 | Parked jars | `_parked_mods/` |
 | SC patch tools | `tools/patch_starcatcher_*.ps1` |
-| Deploy UI | `deploy_aquatech_ui.ps1` |
+| Deploy UI | `scripts/deploy/deploy_aquatech_ui.ps1` (root shim OK) |
 | Deploy kubejs+runtime | `deploy_runtime.ps1` |
 
 ## Fishing addon map (aquatech_ui)

@@ -103,7 +103,7 @@ When adding a feature:
 1. Prefer **compat adapter** (like `FishingRodCompat`) over forking StarCatcher.
 2. Client-only code → `client/` + `@Mod.EventBusSubscriber(value = Dist.CLIENT)`.
 3. Protocol bumps: increment `NetworkHandler.PROTOCOL_VERSION` when packets change.
-4. Build: `mods/aquatech-ui` → `gradlew build` → `deploy_aquatech_ui.ps1`.
+4. Build: `mods/aquatech-ui` → `gradlew build` → `scripts/deploy/deploy_aquatech_ui.ps1` (or root shim).
 
 ### casesmod — meta / menu
 Package: `com.casesmod.*`

@@ -3,14 +3,14 @@
 # The method to use. h2 or mysql
 # If you select mysql, you will need to configure the settings below
 #  Default: h2
-method: h2
+method: mysql
 
 
 # You only need to touch these settings if you are using mysql
-ip: 127.0.0.1:3306
-username: mc
-password: password
-database: mc
+ip: __AQUATECH_MYSQL_HOST__:__AQUATECH_MYSQL_PORT__
+username: __AQUATECH_MYSQL_USER__
+password: '__AQUATECH_MYSQL_PASSWORD__'
+database: __AQUATECH_MYSQL_DATABASE__
 
 # Currently only used with mysql
 characterEncoding: "utf8"
@@ -24,7 +24,7 @@ table_prefix: ajlb_
 minConnections: 1
 maxConnections: 20
 
-allowPublicKeyRetrieval: false
+allowPublicKeyRetrieval: true
 useSSL: false
 
 # The default (1,800,000ms which is 30 minutes) is fine most of the time,

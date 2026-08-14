@@ -1,4 +1,4 @@
-﻿############################################################
+############################################################
 # +------------------------------------------------------+ #
 # |                       Notes                          | #
 # +------------------------------------------------------+ #
@@ -159,7 +159,7 @@ warn-on-smite: true
 drop-items-if-full: false
 
 # Should Essentials notify players if they have no new mail?
-notify-no-new-mail: true
+notify-no-new-mail: false
 
 # Specifies the cooldown duration, in seconds, between mail notifications for a player.
 # Useful for servers with high mail traffic.
@@ -586,8 +586,8 @@ allow-silent-join-quit: false
 # {ONLINE} - The number of players online.
 # {UNIQUE} - The number of unique players to join the server.
 # {UPTIME} - The amount of time the server has been online.
-custom-join-message: "none"
-custom-quit-message: "none"
+custom-join-message: ""
+custom-quit-message: ""
 
 # You can set a custom join message for players who join with an updated username here.
 # This message will only be used if a player has joined before and has since changed their username.
@@ -735,7 +735,7 @@ allow-selling-named-items: false
 # The delay, in milliseconds, for displaying the MOTD to players on join.
 # This has no effect if the MOTD command or permission is disabled.
 # Set to -1 to disable the join MOTD entirely.
-delay-motd: 0
+delay-motd: -1
 
 # A list of commands that should have their complementary confirm commands enabled by default.
 # This is empty by default. For the latest list of valid commands, refer to the latest source 'config.yml'.
@@ -1306,6 +1306,7 @@ random-spawn-location: "none"
 random-respawn-location: "none"
 
 # Teleport all joining players to their spawnpoint.
+# Off: casesmod SpawnOnJoinHandler scans a safe Y so players are not crushed at 0,100.
 spawn-on-join: false
 # The following value of 'guests' states that all players in the 'guests' group will be teleported to spawn when joining.
 #spawn-on-join: guests

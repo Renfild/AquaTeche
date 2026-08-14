@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaTech Launcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/launcher.css" />
+</head>
+<body>
+
+  <!-- Frameless Header -->
+  <header class="titlebar">
+    <div class="titlebar-brand">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
+      <span>AquaTech Launcher</span>
+    </div>
+    <div class="titlebar-controls">
+      <button class="win-btn" id="btn-minimize" title="Свернуть">─</button>
+      <button class="win-btn close" id="btn-close" title="Закрыть">✕</button>
+    </div>
+  </header>
+
+  <!-- App Body Grid -->
+  <main class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="user-profile-card">
+          <div class="user-avatar" id="user-avatar">P</div>
+          <div class="user-info">
+            <small>Игрок</small>
+            <strong id="user-nick">Renfild</strong>
+          </div>
+        </div>
+
+        <div class="nav-settings">
+          <div class="setting-group">
+            <label class="setting-label">Выделение ОЗУ (RAM)</label>
+            <div class="ram-selector">
+              <button class="ram-chip" data-ram="4096">4 ГБ</button>
+              <button class="ram-chip active" data-ram="6144">6 ГБ</button>
+              <button class="ram-chip" data-ram="8192">8 ГБ</button>
+            </div>
+          </div>
+
+          <div class="setting-group" style="margin-top: 12px;">
+            <label class="setting-label">IP Сервера</label>
+            <div class="server-status-box">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div class="status-dot"></div>
+                <span class="status-text">Онлайн</span>
+              </div>
+              <small style="color:var(--text-sub);">ApexNodes</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="color:var(--text-muted); font-size:11px;">
+        AquaTech v2.9.25 · Forge 1.20.1
+      </div>
+    </aside>
+
+    <!-- Main Content Viewport -->
+    <section class="hero-content">
+      <div class="banner-card">
+        <p class="banner-eyebrow">Океанский SkyBlock 1.20.1</p>
+        <h1 class="banner-title">AquaTech</h1>
+        <p class="banner-desc">Спавн на плоту в бесконечной воде. 12 видов удочек StarCatcher, авторыбалка, эко-монеты Lightman's Currency и эндгейм-механики.</p>
+      </div>
+
+      <div class="play-control-area">
+        <div class="play-btn-wrapper">
+          <button class="play-btn" id="play-btn">
+            <div class="play-progress-fill" id="progress-fill"></div>
+            <div class="play-status-label" id="btn-label">
+              <span>ИГРАТЬ</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="log-console-box" id="log-console">
+          Готов к запуску.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Crash Diagnostic Modal -->
+  <div class="modal-overlay" id="crash-modal">
+    <div class="modal-box">
+      <h3 class="modal-title">⚠️ Сбой при запуске Minecraft</h3>
+      <p class="modal-desc" id="crash-reason">Обнаружена проблема с памятью или видеодрайвером.</p>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="crash-close">Понятно</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://127.0.0.1:12450';
+    let currentRam = 6144;
+    let currentNick = 'Player';
+    let isLaunching = false;
+
+    // Window controls
+    document.getElementById('btn-minimize').onclick = () => {
+      if (window.pywebview && window.pywebview.api) {
+        window.pywebview.api.minimize();
+      }
+    };
+    document.getElementById('btn-close').onclick = () => {
+      if (window.pywebview && window.pywebview.api) {
+        window.pywebview.api.close();
+      } else {
+        window.close();
+      }
+    };
+
+    // RAM selection
+    document.querySelectorAll('.ram-chip').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.ram-chip').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentRam = parseInt(btn.dataset.ram);
+        saveConfig();
+      };
+    });
+
+    async function fetchStatus() {
+      try {
+        const r = await fetch(`${API_BASE}/api/status`);
+        const data = await r.json();
+        
+        if (data.cfg && data.cfg.username) {
+          currentNick = data.cfg.username;
+          document.getElementById('user-nick').innerText = currentNick;
+          document.getElementById('user-avatar').innerText = currentNick[0].toUpperCase();
+        }
+
+        const label = document.getElementById('btn-label');
+        const fill = document.getElementById('progress-fill');
+        const logBox = document.getElementById('log-console');
+
+        if (data.state === 'busy') {
+          isLaunching = true;
+          label.innerHTML = `<span>ЗАГРУЗКА... (${Math.round(data.progress)}%)</span>`;
+          fill.style.width = `${data.progress}%`;
+        } else if (data.state === 'ingame') {
+          isLaunching = false;
+          label.innerHTML = `<span>В ИГРЕ</span>`;
+          fill.style.width = '100%';
+        } else if (data.state === 'error') {
+          isLaunching = false;
+          label.innerHTML = `<span>ОШИБКА</span>`;
+          fill.style.width = '0%';
+        } else {
+          isLaunching = false;
+          label.innerHTML = `<span>ИГРАТЬ</span>`;
+          fill.style.width = '0%';
+        }
+
+        if (data.logs && data.logs.length > 0) {
+          const lastLog = data.logs[data.logs.length - 1];
+          logBox.innerText = lastLog.msg || data.status;
+        }
+      } catch (err) {
+        console.warn('API sync wait...', err);
+      }
+    }
+
+    async function saveConfig() {
+      try {
+        await fetch(`${API_BASE}/api/config`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            username: currentNick,
+            ram_mb: currentRam
+          })
+        });
+      } catch (e) {}
+    }
+
+    document.getElementById('play-btn').onclick = async () => {
+      if (isLaunching) return;
+      isLaunching = true;
+      document.getElementById('btn-label').innerHTML = `<span>ПРОВЕРКА ФАЙЛОВ...</span>`;
+      try {
+        await saveConfig();
+        const r = await fetch(`${API_BASE}/api/play`, {method: 'POST'});
+        const res = await r.json();
+        if (!res.ok) {
+          alert(res.message || 'Ошибка запуска');
+          isLaunching = false;
+        }
+      } catch (e) {
+        alert('Ошибка связи с сервером лаунчера');
+        isLaunching = false;
+      }
+    };
+
+    document.getElementById('crash-close').onclick = () => {
+      document.getElementById('crash-modal').classList.remove('active');
+    };
+
+    setInterval(fetchStatus, 800);
+    fetchStatus();
+  </script>
+</body>
+</html>

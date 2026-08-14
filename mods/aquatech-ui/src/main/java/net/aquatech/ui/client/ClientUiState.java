@@ -80,6 +80,12 @@ public final class ClientUiState {
         sessionToken = token != null ? token : "";
         sessionBalance = Math.max(0, balance);
         sessionRankId = rankId != null && !rankId.isBlank() ? rankId : "player";
+        try {
+            if (balance > 0) {
+                Class<?> cls = Class.forName("com.casesmod.client.ClientBalanceState");
+                cls.getField("balance").setLong(null, balance);
+            }
+        } catch (Throwable ignored) {}
     }
 
     public static void setSessionToken(String token) {
@@ -91,6 +97,13 @@ public final class ClientUiState {
     }
 
     public static int sessionBalance() {
+        try {
+            Class<?> cls = Class.forName("com.casesmod.client.ClientBalanceState");
+            long b = cls.getField("balance").getLong(null);
+            if (b >= 0) {
+                return (int) Math.min(Integer.MAX_VALUE, b);
+            }
+        } catch (Throwable ignored) {}
         return sessionBalance;
     }
 

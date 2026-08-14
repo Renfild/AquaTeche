@@ -12,12 +12,12 @@ Whenever you finish changes that players see on the web portal (anything under `
 1. Regenerate HTML if copy/layout changed: `python tools/generate_site.py`
 2. Commit only portal-related files (ask first if commit policy is unclear; if the user said «заливай» / deploy, commit + push is implied).
 3. Push `main` → GitHub Action **Deploy Worker** (`.github/workflows/deploy-worker.yml`) runs `wrangler deploy -c wrangler.worker.toml`. Requires repo secret `CLOUDFLARE_API_TOKEN` (one-time: `python tools/set_github_cf_secret.py` with a real `.cf_token`).
-4. Smoke-check live host: `https://aquatech.santcrail.workers.dev/`
-   - home loads, header/auth shell works
-   - `/api/catalog` returns 200
-   - login/register pages show player copy (no pages.dev / D1 / workers.dev marketing jargon)
-   - Action already runs `smoke_portal_and_versions.py` with `STRICT_LIVE_DEPLOY=1` after deploy
-5. Prefer workers.dev for player links; `*.pages.dev` may be blocked on some networks.
+4. Smoke-check live host: `https://aquateche.store/`
+ - home loads, header/auth shell works
+ - `/api/catalog` returns 200
+ - login/register pages show player copy (no pages.dev / D1 / workers.dev marketing jargon)
+ - Action already runs `smoke_portal_and_versions.py` with `STRICT_LIVE_DEPLOY=1` after deploy
+5. Prefer `https://aquateche.store` for player links; `*.pages.dev` may be blocked on some networks. Fallback: `https://aquatech.santcrail.workers.dev`.
 
 Local fallback if CI secret is missing: `python tools/deploy_to_cloudflare.py worker`
 

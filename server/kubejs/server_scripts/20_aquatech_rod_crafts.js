@@ -45,7 +45,7 @@ ServerEvents.recipes((event) => {
     event.shaped('starcatcher:good_old_rod', [' P2', ' R1', 'R P'], {
       P: 'industrialupgrade:itemplates/iron_plate',
       1: 'industrialupgrade:itemplates/tin_plate',
-      2: 'industrialupgrade:synthetic_rubber',
+      2: 'industrialupgrade:crafting_elements/crafting_271_element',
       R: 'starcatcher:humble_rod',
     }).id('aquatech:good_old_rod_craft')
 
@@ -53,7 +53,7 @@ ServerEvents.recipes((event) => {
     event.remove({ output: 'starcatcher:naturalist_rod' })
     event.shaped('starcatcher:naturalist_rod', [' C2', ' SR', 'S 1'], {
       C: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic circuit
-      S: 'industrialupgrade:synthetic_rubber',
+      S: 'industrialupgrade:crafting_elements/crafting_271_element',
       1: 'industrialupgrade:baseore/spinel',
       2: 'industrialupgrade:itemplates/bronze_plate',
       R: 'starcatcher:good_old_rod',

@@ -55,7 +55,7 @@ public class WarpsScreen extends Screen {
         applyScroll();
 
         addRenderableWidget(new CustomButton(20, height - 40, 90, 20, Component.literal("← Назад"),
-                0xFF888888, b -> minecraft.setScreen(new MainMenuScreen()), null, 0));
+                0xFF888888, b -> WebOverlay.openMainMenu(minecraft), null, 0));
     }
 
     private void applyScroll() {

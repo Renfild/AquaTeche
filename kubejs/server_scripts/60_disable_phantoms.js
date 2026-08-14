@@ -1,9 +1,10 @@
-// Disable Phantom Spawning completely in AquaTech
-ServerEvents.loaded(event => {
+// AquaTech: no phantoms (insomnia off + cancel spawn). Depends: vanilla.
+ServerEvents.loaded((event) => {
   event.server.runCommandSilent('gamerule doInsomnia false')
+  console.log('[AquaTech] doInsomnia false — phantoms disabled')
 })
 
-EntityEvents.spawned(event => {
+EntityEvents.spawned((event) => {
   if (event.entity.type === 'minecraft:phantom') {
     event.cancel()
   }

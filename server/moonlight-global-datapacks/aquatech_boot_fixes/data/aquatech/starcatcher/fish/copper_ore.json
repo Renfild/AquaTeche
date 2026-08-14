@@ -1,28 +1,38 @@
 {
-  "base_chance": 15,
+  "base_chance": 1,
   "catch_info": {
-    "item": "minecraft:copper_ore"
+    "item": "minecraft:cod"
   },
   "difficulty": {
-    "decay": 0.0,
-    "hp": 30,
-    "missPenalty": 0,
+    "decay": 0.85,
+    "hp": 70,
+    "missPenalty": 8,
     "modifiers": [],
-    "speed": 5,
+    "speed": 9,
     "sweetspots": [
       {
         "color_as_int": 65280,
-        "hitbox_size_in_pixels": 30,
+        "hitbox_size_in_pixels": 16,
         "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 50,
+        "moving_rate": 0.9,
+        "reward": 22,
         "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 16,
+        "is_flip": false,
+        "moving_rate": 0.9,
+        "reward": 22,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       }
     ]
   },
-  "has_guide_entry": true,
+  "has_guide_entry": false,
   "rarity": "common",
   "restrictions": [
     {
@@ -46,6 +56,6 @@
     "deviation_weight_grams": 200.0,
     "golden_chance": 0.0
   },
-  "skips_minigame": true,
-  "weight": 12.0
+  "skips_minigame": false,
+  "weight": 0.05
 }

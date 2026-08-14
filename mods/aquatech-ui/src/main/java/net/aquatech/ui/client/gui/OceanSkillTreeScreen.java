@@ -224,19 +224,7 @@ public class OceanSkillTreeScreen extends AquaBlurredScreen {
 
     @Override
     protected void init() {
-        super.init();
-        NetworkHandler.CHANNEL.sendToServer(new C2SOpenSkillTreePacket());
-
-        stars.clear();
-        for (int i = 0; i < 40; i++) {
-            StarParticle p = new StarParticle();
-            p.x = random.nextFloat() * width;
-            p.y = random.nextFloat() * height;
-            p.speed = 0.15f + random.nextFloat() * 0.35f;
-            p.size = 1.0f + random.nextFloat() * 2.0f;
-            p.alpha = 40 + random.nextInt(180);
-            stars.add(p);
-        }
+        AquaWebScreen.openEmbed("Созвездия Океана", "skills");
     }
 
     private void updateCapabilitySnapshot() {

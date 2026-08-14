@@ -84,6 +84,11 @@ public class AquaWebScreen extends AquaBlurredScreen {
     }
 
     @Override
+    protected void renderAtmosphere(GuiGraphics g) {
+        // Transparent backdrop: game world remains clear behind the centered web modal
+    }
+
+    @Override
     protected void renderScreenContent(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         if (bridge != null && bridge.isAvailable()) {
             bridge.blit(0, 0, width, height);

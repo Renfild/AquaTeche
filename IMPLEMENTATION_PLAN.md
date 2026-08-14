@@ -368,6 +368,7 @@ python tools/sync_lodestone_mods.py                  # Lodestone jars
 ### 6. Git-коммиты спринта (для blame)
 
 ```
+pack-2.9.45  Sync balance with CasesMod, clean rank prefixes, frameless HUD & web modal overlays, forward legacy screens
 7e16b6c  Restore Lodestone FTB quests + boner fish fix (1.0.18, pack-2.9.25)
 de382d9  Restore workshop quests + stop deploy overwrite (потом откат workshop)
 a8b693f  Apex backup rotate fix

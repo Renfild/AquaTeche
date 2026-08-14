@@ -74,8 +74,7 @@ public final class LuckPermsBridge {
 
         // Try direct Bukkit player display name prefix (e.g. "[OWNER] xietoru")
         RankInfo directBukkit = tryBukkitDisplayName(player);
-        if (directBukkit != null && !"default".equals(directBukkit.id())) {
-            directBukkit = withGlyph(directBukkit);
+        if (directBukkit != null && !"default".equals(directBukkit.id()) && !"player".equals(directBukkit.id())) {
             CACHE.put(uuid, new CachedRank(directBukkit, now));
             return directBukkit;
         }
@@ -85,7 +84,7 @@ public final class LuckPermsBridge {
             lp = tryLuckPermsFiles(player);
         }
         RankInfo result;
-        if (lp != null && !"default".equals(lp.id())) {
+        if (lp != null && !"default".equals(lp.id()) && !"player".equals(lp.id())) {
             result = lp;
         } else if (player.hasPermissions(2)) {
             result = fromOpLevel(player);
@@ -99,7 +98,6 @@ public final class LuckPermsBridge {
                 result = fromOpLevel(player);
             }
         }
-        result = withGlyph(result);
         CACHE.put(uuid, new CachedRank(result, now));
         return result;
     }
@@ -124,23 +122,6 @@ public final class LuckPermsBridge {
         } catch (Throwable ignored) {
         }
         return null;
-    }
-
-    private static RankInfo withGlyph(RankInfo info) {
-        if (info == null) return null;
-        String glyph = LuckPermsFiles.glyphForGroup(info.id());
-        if (glyph == null || glyph.isBlank()) return info;
-        String display = info.display();
-        // If display already starts with this glyph, keep; else prefix glyph
-        if (!display.isEmpty() && display.codePointAt(0) == glyph.codePointAt(0)) {
-            return info;
-        }
-        // Strip old text-only prefix leftovers, show glyph (+ keep short text if no glyph-only)
-        String cleaned = stripCodes(display).trim();
-        if (cleaned.equalsIgnoreCase(info.id()) || cleaned.isBlank()) {
-            return new RankInfo(info.id(), glyph + " ", info.weight(), info.staff());
-        }
-        return new RankInfo(info.id(), glyph + " " + cleaned, info.weight(), info.staff());
     }
 
     private static RankInfo tryLuckPermsFiles(ServerPlayer player) {

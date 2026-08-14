@@ -1793,7 +1793,7 @@ button:focus-visible,
 
 body.embed {
   min-height: 100%;
-  background: #061018;
+  background: transparent !important;
   padding: 12px 14px 16px;
 }
 
@@ -2027,7 +2027,7 @@ border: 1px solid rgba(245, 158, 11, 0.3);
    ========================================================================== */
 
 body.embed {
-  background: radial-gradient(circle at 50% 10%, #0d2238 0%, #060d17 100%);
+  background: transparent !important;
   color: #f1f5f9;
   font-family: 'Figtree', system-ui, sans-serif;
   margin: 0;

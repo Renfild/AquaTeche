@@ -14,6 +14,10 @@ permissions:
 - permission: essentials.msg
 - permission: essentials.r
 - permission: ftbquests.open
+# Own raft region: /rg info + particle borders via /rg select
+- permission: worldguard.region.info.own.*
+- permission: worldguard.region.select.own.*
+- permission: worldguard.region.list.own
 parents:
 prefixes:
 - " ":

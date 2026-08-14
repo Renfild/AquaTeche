@@ -1,0 +1,23 @@
+# Heavy / vendored / runtime — keep out of the agent memory graph
+server/
+client/
+dist/
+build/
+.gradle/
+**/node_modules/
+tools/_go/
+tools/_playit/
+tools/forge_runtime/
+tools/Custom-Nameplates/
+tools/lodestone/
+scripts/archive/
+scripts/scratch/
+_disabled_mods_backup/
+_mod_dl_cache/
+_parked_cqa/
+mods/**/build/
+**/*.jar
+**/*.class
+graphify-out/
+.claude/
+.cursor/skills/_src/

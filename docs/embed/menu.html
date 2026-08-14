@@ -15,7 +15,7 @@
       padding: 0;
     }
     body {
-      background: rgba(3, 8, 15, 0.45);
+      background: transparent !important;
       color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
       width: 100vw;
@@ -195,12 +195,12 @@
     </div>
 
     <div class="menu-grid">
-      <button type="button" class="menu-btn" onclick="ipcSend({action:'EXEC_COMMAND', cmd:'kit'})">
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'OPEN_KITS'})">
         <span class="btn-icon">⚔</span>
         <span>Киты</span>
       </button>
 
-      <button type="button" class="menu-btn" onclick="ipcSend({action:'EXEC_COMMAND', cmd:'warp'})">
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'OPEN_WARPS'})">
         <span class="btn-icon">⚡</span>
         <span>Варпы</span>
       </button>

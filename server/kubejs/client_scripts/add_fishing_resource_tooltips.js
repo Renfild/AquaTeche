@@ -1,49 +1,103 @@
-// KubeJS Client Script: Tooltips indicating which fishing rod catches resources.
-
+// AquaTech: resource tooltips = earliest rod that can catch the item (FishingLootHandler).
+// Keep in sync with mods/aquatech-ui/.../FishingLootHandler.java rollStarCatcherRodLoot.
 ItemEvents.tooltip((event) => {
-  // Starter items caught by Bamboo Rod (Бамбуковая удочка T-1)
-  const t1Items = [
+  const addTier = (ids, title, styleFn) => {
+    for (const id of ids) {
+      event.add(id, [
+        styleFn(Text.of('⚓ ' + title)),
+        Text.of('Ловится удочкой AquaTech / StarCatcher').darkGray(),
+      ])
+    }
+  }
+
+  addTier([
     'minecraft:dirt',
-    'minecraft:grass_block',
     'minecraft:cobblestone',
     'minecraft:gravel',
     'minecraft:sand',
     'minecraft:clay_ball',
-    'minecraft:clay',
-    'minecraft:oak_log',
-    'minecraft:oak_wood',
-    'minecraft:oak_planks',
+    'minecraft:bamboo',
     'minecraft:oak_sapling',
     'minecraft:birch_sapling',
-    'minecraft:spruce_sapling',
-    'minecraft:jungle_sapling',
-    'minecraft:acacia_sapling',
-    'minecraft:dark_oak_sapling',
     'industrialupgrade:sapling/rubber_sapling',
     'industrialupgrade:raw_latex',
     'industrialupgrade:blockresource/untreated_peat',
     'minecraft:copper_ore',
-    'industrialupgrade:classicore/tin'
-  ];
+    'industrialupgrade:classicore/tin',
+  ], 'Бамбуковая удочка (Т-1)', (t) => t.aqua())
 
-  t1Items.forEach((id) => {
-    event.add(id, [
-      Text.of('⚓ Вылавливается Бамбуковой удочкой (Т-1)').cyan(),
-      Text.of('💡 Ловится в воде на вашем плоту').darkGray()
-    ]);
-  });
+  addTier([
+    'minecraft:iron_ore',
+    'minecraft:coal_ore',
+    'industrialupgrade:baseore/titanium',
+  ], 'Скромная удочка (Т-2)', (t) => t.gold())
 
-  // Items caught by Humble Rod (Скромная удочка T-2)
-  event.add('industrialupgrade:baseore/titanium', [
-    Text.of('⚓ Вылавливается Скромной удочкой (Т-2)').gold(),
-    Text.of('💡 Скромная удочка крафтится из Бамбуковой').darkGray()
-  ]);
+  addTier([
+    'minecraft:redstone_ore',
+    'minecraft:lapis_ore',
+    'industrialupgrade:baseore/spinel',
+    'industrialupgrade:baseore2/strontium',
+    'industrialupgrade:baseore2/yttrium',
+    'industrialupgrade:baseore2/thallium',
+  ], 'Старая добрая удочка (Т-3)', (t) => t.green())
 
-  event.add('minecraft:iron_ore', [
-    Text.of('⚓ Вылавливается Скромной удочкой (Т-2)').cyan()
-  ]);
+  addTier([
+    'industrialupgrade:baseore2/barium',
+    'industrialupgrade:baseore2/polonium',
+  ], 'Натуралист / слизневая (Т-4+)', (t) => t.green())
 
-  event.add('minecraft:redstone', [
-    Text.of('⚓ Вылавливается Скромной удочкой (Т-2)').cyan()
-  ]);
-});
+  addTier([
+    'industrialupgrade:baseore/aluminium',
+    'industrialupgrade:baseore/silver',
+    'industrialupgrade:baseore/zinc',
+  ], 'Ледяная удочка (Т-6)', (t) => t.aqua())
+
+  addTier([
+    'minecraft:gold_ore',
+    'minecraft:lapis_lazuli',
+    'industrialupgrade:baseore/tungsten',
+    'industrialupgrade:baseore/chromium',
+    'industrialupgrade:preciousgem/sapphire_gem',
+    'industrialupgrade:preciousgem/topaz_gem',
+  ], 'Удочка Ловца Звёзд (Т-7)', (t) => t.lightPurple())
+
+  addTier([
+    'minecraft:amethyst_shard',
+    'industrialupgrade:blockpreciousore/sapphire_ore',
+    'industrialupgrade:mineral/crystal',
+  ], 'Лазуритовая удочка (Т-8)', (t) => t.blue())
+
+  addTier([
+    'industrialupgrade:baseore/cobalt',
+    'industrialupgrade:baseore/manganese',
+    'industrialupgrade:baseore/nickel',
+  ], 'Акулья удочка (Т-9)', (t) => t.red())
+
+  addTier([
+    'minecraft:diamond',
+    'minecraft:obsidian',
+    'industrialupgrade:alloyingot/stainless_steel',
+  ], 'Обсидиановая удочка (Т-10)', (t) => t.gray())
+
+  addTier([
+    'minecraft:prismarine_shard',
+    'minecraft:prismarine_crystals',
+    'industrialupgrade:baseore/platinum',
+    'minecraft:heart_of_the_sea',
+  ], 'Светящаяся удочка (Т-11)', (t) => t.green())
+
+  addTier([
+    'minecraft:quartz',
+    'minecraft:netherite_scrap',
+    'industrialupgrade:crushed/uranium',
+    'industrialupgrade:alloyingot/inconel',
+  ], 'Магмовая удочка (Т-12)', (t) => t.gold())
+
+  addTier([
+    'industrialupgrade:baseore/iridium',
+    'industrialupgrade:baseore1/osmium',
+    'industrialupgrade:alloyingot/osmiridium',
+    'industrialupgrade:asteroidore/asteroid_adamantium_ore',
+    'minecraft:nether_star',
+  ], 'Альфа-удочка (Т-13)', (t) => t.lightPurple())
+})

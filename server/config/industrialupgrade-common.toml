@@ -20,7 +20,7 @@
 
 ["Information Text"]
 	#Informational text when logging the game
-	enable = true
+	enable = false
 
 [pollution]
 	#Air pollution

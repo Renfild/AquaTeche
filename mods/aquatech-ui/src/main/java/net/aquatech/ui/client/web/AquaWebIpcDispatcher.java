@@ -38,7 +38,7 @@ public final class AquaWebIpcDispatcher {
             Minecraft mc = Minecraft.getInstance();
 
             switch (action.toUpperCase()) {
-                case "CLOSE_GUI" -> mc.execute(() -> {
+                case "CLOSE_GUI", "CLOSE" -> mc.execute(() -> {
                     if (mc.screen != null) {
                         mc.setScreen(null);
                     }
@@ -97,7 +97,7 @@ public final class AquaWebIpcDispatcher {
                     } else if ("cabinet".equalsIgnoreCase(to)) {
                         AquaWebScreen.openEmbed("Кабинет", "cabinet");
                     } else if ("skills".equalsIgnoreCase(to)) {
-                        mc.setScreen(new OceanSkillTreeScreen());
+                        AquaWebScreen.openEmbed("Созвездия Океана", "skills");
                     } else if ("cases".equalsIgnoreCase(to)) {
                         try {
                             Class<?> clazz = Class.forName("com.casesmod.client.gui.CasesScreen");

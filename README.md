@@ -1,16 +1,31 @@
 # AquaTech
 
-## Root (runtime + deploy)
-- `server/` — Mohist server
-- `client/`, `dist/` — client pack mirrors
-- `mods/` — jars + `aquatech-ui/` / `casesmod/` sources
-- `config/`, `defaultconfigs/`, `datapacks/`, `kubejs/`, `scripts/`, `resourcepacks/`
-- `deploy_*.ps1`, `setup_horizon_route.ps1`
-- docs: `CHANGELOG.md`, `HORIZON_ROUTE.md`, `PLAYER_ROADMAP.md`, `QUEST_ID_FREEZE.md`
+## Layout
+
+| Path | Role |
+|------|------|
+| `server/` | Mohist host |
+| `mods/` | jars + `aquatech-ui` / `casesmod` sources |
+| `kubejs/`, `config/`, `datapacks/`, `resourcepacks/` | pack content |
+| `docs/`, `worker/`, `functions/` | portal |
+| `tools/` | release pipeline + domain helpers (see below) |
+| `scripts/` | task/agent scripts, deploy ps1, scratch, archive |
+| `bootstrap/`, `launcher_ui/` | client launcher |
 
 ## tools/
-Maintenance scripts (quests, Industrial Upgrade, cases, world setup).
-- Pixel fishing HUD: `mods/aquatech-ui/tools/gen_pixel_balance_ui.py`
-- Cleanup: `tools/cleanup_workspace.ps1`
 
-Keep download caches, parked jars, and scratch art out of the root (see `.gitignore`).
+**Stay at `tools/` root (rules / CI / PyInstaller):**  
+`publish_client_pack.py`, `sync_lodestone_mods.py`, `upload_launcher_release.py`, `upload_pack_release.py`, `generate_site.py`, `deploy_to_cloudflare.py`, `aquatech_launcher.py`, …
+
+**By domain:** `quests/`, `patches/`, `portal/`, `assets/`, `server_setup/`, `launcher_tests/`.  
+Old paths like `python tools/smoke_portal_and_versions.py` still work via shims.
+
+## scripts/
+
+See `scripts/README.md`. New one-off scripts → `scripts/tasks/`.  
+Root `deploy_*.ps1` are shims into `scripts/deploy/`.
+
+## Cleanup
+
+`tools/cleanup_workspace.ps1` — deletes caches/parked trees (not a full reorg).  
+Layout pass: `python scripts/tasks/reorganize_layout.py` (idempotent-ish).

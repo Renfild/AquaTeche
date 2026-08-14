@@ -58,15 +58,15 @@ messages:
 # [!] If you're not using ssl, change sslMode=trust to sslMode=disable [!]
 database:
     # Database backend selection. Valid values: FILE, MYSQL, POSTGRESQL.
-    type: FILE
-    host: localhost
-    port: 3306
-    database: db
-    username: root
-    password: pass
+    type: MYSQL
+    host: __AQUATECH_MYSQL_HOST__
+    port: __AQUATECH_MYSQL_PORT__
+    database: __AQUATECH_MYSQL_DATABASE__
+    username: __AQUATECH_MYSQL_USER__
+    password: __AQUATECH_MYSQL_PASSWORD__
     maxPoolSize: 10
     tablePrefix: sr_
-    connectionOptions: sslMode=trust&serverTimezone=UTC
+    connectionOptions: sslMode=disable&serverTimezone=UTC&allowPublicKeyRetrieval=true
 
 ############
 # Commands #
@@ -288,7 +288,7 @@ login:
     offlineModeWarning:
         # Sends a one-time warning to offline-mode players that some third-party launchers can override SkinsRestorer skins.
         # SkinsRestorer cannot detect the exact launcher. Players can dismiss the warning with /skin notification ignore-cracked-client.
-        enabled: true
+        enabled: false
 api:
     # Here you can fill in your APIKey for lower MineSkin request times.
     # Key can be requested from https://mineskin.org/apikey

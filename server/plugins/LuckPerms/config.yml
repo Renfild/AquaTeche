@@ -1,4 +1,10 @@
 server: global
-storage-method: YAML
+storage-method: MySQL
+data:
+  address: __AQUATECH_MYSQL_HOST__:__AQUATECH_MYSQL_PORT__
+  database: __AQUATECH_MYSQL_DATABASE__
+  username: __AQUATECH_MYSQL_USER__
+  password: '__AQUATECH_MYSQL_PASSWORD__'
+  pool-size: 10
 split-storage:
   enabled: false

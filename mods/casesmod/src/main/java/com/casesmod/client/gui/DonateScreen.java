@@ -55,7 +55,7 @@ public class DonateScreen extends Screen {
         applyScroll();
 
         backBtn = new CustomButton(20, height - 36, 90, 22, Component.literal("← Назад"),
-                0xFF444444, 0xFF666666, b -> minecraft.setScreen(new MainMenuScreen()));
+                0xFF444444, 0xFF666666, b -> WebOverlay.openMainMenu(minecraft));
         addRenderableWidget(backBtn);
     }
 

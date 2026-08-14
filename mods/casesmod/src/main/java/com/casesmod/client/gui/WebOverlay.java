@@ -12,6 +12,22 @@ public final class WebOverlay {
     private WebOverlay() {
     }
 
+    public static void openMainMenu(Minecraft mc) {
+        if (!openEmbed("Меню", "menu")) {
+            if (mc != null) {
+                mc.setScreen(null);
+            }
+        }
+    }
+
+    public static void openSkills(Minecraft mc) {
+        if (!openEmbed("Созвездия Океана", "skills")) {
+            if (mc != null) {
+                mc.setScreen(null);
+            }
+        }
+    }
+
     public static void openDonate(Minecraft mc) {
         if (!openEmbed("Донат", "donate")) {
             openExternal("https://aquateche.store/store.html");
