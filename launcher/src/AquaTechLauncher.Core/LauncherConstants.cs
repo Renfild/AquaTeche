@@ -2,7 +2,7 @@ namespace AquaTechLauncher.Core;
 
 public static class LauncherConstants
 {
-    public const string Version = "2.9.54";
+    public const string Version = "2.9.55";
     public const string McVersion = "1.20.1";
     public const string ForgeVersion = "47.4.0";
     public const string McpVersion = "20230612.114412";
@@ -14,6 +14,7 @@ public static class LauncherConstants
     public const int PackReadyMinJars = 40;
 
     public const string PortalApiBase = "https://aquateche.store";
+    public const string FallbackPortalApiBase = "https://aquatech.santcrail.workers.dev";
     public const string BootstrapManifestUrl =
         "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json";
 

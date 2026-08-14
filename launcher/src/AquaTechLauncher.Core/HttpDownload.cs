@@ -17,13 +17,14 @@ public static class HttpDownload
     };
     private static readonly HttpClient Client = CreateClient();
     private static readonly Uri PortalUri = new(LauncherConstants.PortalApiBase + "/");
+    private static readonly Uri FallbackPortalUri = new(LauncherConstants.FallbackPortalApiBase + "/");
 
     private static HttpClient CreateClient()
     {
         var c = new HttpClient(Handler) { Timeout = TimeSpan.FromMinutes(10) };
-        c.DefaultRequestHeaders.UserAgent.ParseAdd($"Mozilla/5.0 AquaTechLauncher/{LauncherConstants.Version}");
+        c.DefaultRequestHeaders.UserAgent.ParseAdd(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36");
         c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-        c.DefaultRequestHeaders.TryAddWithoutValidation("X-AquaTech-Launcher", "1");
         return c;
     }
 
@@ -32,7 +33,14 @@ public static class HttpDownload
         ClearPortalCookies();
         if (string.IsNullOrWhiteSpace(sessionId))
             return;
-        Cookies.Add(PortalUri, new Cookie("at_session", sessionId.Trim())
+        var s = sessionId.Trim();
+        Cookies.Add(PortalUri, new Cookie("at_session", s)
+        {
+            Path = "/",
+            Secure = true,
+            HttpOnly = true,
+        });
+        Cookies.Add(FallbackPortalUri, new Cookie("at_session", s)
         {
             Path = "/",
             Secure = true,
@@ -44,7 +52,8 @@ public static class HttpDownload
     {
         try
         {
-            return Cookies.GetCookies(PortalUri)["at_session"]?.Value;
+            return Cookies.GetCookies(PortalUri)["at_session"]?.Value
+                ?? Cookies.GetCookies(FallbackPortalUri)["at_session"]?.Value;
         }
         catch
         {
@@ -54,8 +63,8 @@ public static class HttpDownload
 
     private static void ClearPortalCookies()
     {
-        foreach (Cookie c in Cookies.GetCookies(PortalUri))
-            c.Expired = true;
+        foreach (Cookie c in Cookies.GetCookies(PortalUri)) c.Expired = true;
+        foreach (Cookie c in Cookies.GetCookies(FallbackPortalUri)) c.Expired = true;
     }
 
     public static async Task DownloadAsync(string url, string destPath, CancellationToken ct = default)
@@ -104,10 +113,9 @@ public static class HttpDownload
             catch (Exception ex)
             {
                 last = ex;
-                try { if (File.Exists(destPath)) File.Delete(destPath); } catch { /* ignore */ }
             }
         }
-        throw last ?? new IOException($"Download failed: {url}");
+        throw last ?? new Exception($"Failed to download {url}");
     }
 
     public static async Task<string> GetStringAsync(string url, CancellationToken ct = default)
@@ -118,14 +126,15 @@ public static class HttpDownload
         return await resp.Content.ReadAsStringAsync(ct);
     }
 
-    public static async Task<(int Status, string Body)> GetRawAsync(string url, CancellationToken ct = default)
+    public static async Task<(int StatusCode, string Body)> GetRawAsync(string url, CancellationToken ct = default)
     {
         using var req = new HttpRequestMessage(HttpMethod.Get, url);
         using var resp = await Client.SendAsync(req, ct);
-        return ((int)resp.StatusCode, await resp.Content.ReadAsStringAsync(ct));
+        var body = await resp.Content.ReadAsStringAsync(ct);
+        return ((int)resp.StatusCode, body);
     }
 
-    public static async Task<(string Body, string? SessionId)> PostJsonAsync(
+    public static async Task<(string Json, string? CookieSession)> PostJsonAsync(
         string url, string jsonBody, CancellationToken ct = default)
     {
         using var req = new HttpRequestMessage(HttpMethod.Post, url)
