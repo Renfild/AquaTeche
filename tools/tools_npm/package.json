@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@cloudflare/workerd-windows-64": "^1.20260813.1",
+    "wrangler": "^4.122.0"
+  }
+}

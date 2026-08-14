@@ -63,7 +63,7 @@ def main() -> int:
     res = subprocess.run(cmd, cwd=str(ROOT), env=env, shell=True)
     if res.returncode == 0:
         if mode == "worker":
-            print("OK https://aquatech.santcrail.workers.dev")
+            print("OK https://aquateche.store")
         else:
             print("OK https://aquatech-7gs.pages.dev")
     return res.returncode

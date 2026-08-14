@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.42"
-PACK_VERSION = "2.9.42"
+PACK_TAG = "pack-2.9.43"
+PACK_VERSION = "2.9.43"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -140,12 +140,21 @@ def sync_mods() -> None:
                 shutil.copy2(jar, target)
                 print(f"OK client-only {jar.name}")
 
-    # Force first-party from server (after bump script)
-    for name in ("aquatech_ui-1.0.24.jar", "casesmod-1.0.8.jar", "packetfixer-3.3.2-forge-1.20.1.jar"):
-        cand = SERVER_MODS / name
-        if cand.is_file():
-            shutil.copy2(cand, dst / name)
-            print(f"OK force {name}")
+    # Always copy fresh compiled first-party jars from mod projects
+    source_map = {
+        "aquatech_ui-1.0.24.jar": ROOT / "mods" / "aquatech-ui" / "build" / "libs" / "aquatech_ui-1.0.24.jar",
+        "casesmod-1.0.8.jar": ROOT / "mods" / "casesmod" / "build" / "libs" / "casesmod-1.0.8.jar",
+    }
+    for name, src_jar in source_map.items():
+        if src_jar.is_file():
+            shutil.copy2(src_jar, SERVER_MODS / name)
+            shutil.copy2(src_jar, dst / name)
+            print(f"OK fresh compiled {name} from {src_jar}")
+        else:
+            cand = SERVER_MODS / name
+            if cand.is_file():
+                shutil.copy2(cand, dst / name)
+                print(f"OK fallback {name} from {cand}")
 
     # Remove parked leftovers
     for jar in list(dst.rglob("*.jar")):

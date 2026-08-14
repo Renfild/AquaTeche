@@ -55,6 +55,7 @@ def main():
             "maxFps:120",
             "enableVsync:false",
             "guiScale:3",
+            "key_iris.keybind.toggleShaders:key.keyboard.unknown",
         ]) + "\n",
         encoding="utf-8",
     )

@@ -161,7 +161,7 @@ public sealed class ManifestSync
         Exception? last = null;
         foreach (var b in bases)
         {
-            var url = $"{b.TrimEnd('/')}/manifest.json";
+            var url = $"{b.TrimEnd('/')}/manifest.json?_t={DateTimeOffset.UtcNow.ToUnixTimeSeconds()}";
             try
             {
                 log?.Invoke($"Манифест: {url}");

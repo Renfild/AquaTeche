@@ -104,7 +104,7 @@ def test_needs_launcher_update_logic():
 
 
 def test_local_bootstrap_matches_upload_script():
-    print("[2] repo docs/bootstrap.json ↔ upload_launcher_release TAG")
+    print("[2] repo docs/bootstrap.json <-> upload_launcher_release TAG")
     man_path = ROOT / "docs" / "bootstrap.json"
     up_path = ROOT / "tools" / "upload_launcher_release.py"
     if not man_path.is_file():

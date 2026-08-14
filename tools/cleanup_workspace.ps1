@@ -89,36 +89,8 @@ if (Test-Path $mg) {
   }
 }
 
-Write-Host "=== 5) One-shot root scripts (keep deploy + maintenance whitelist) ==="
-$keep = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-@(
-  # deploy / setup
-  "deploy_aquatech_ui.ps1","deploy_casesmod.ps1","deploy_industrial_upgrade.ps1","deploy_runtime.ps1","setup_horizon_route.ps1",
-  "setup_luckperms_config.py","setup_luckperms_groups.py","setup_ocean_world.py","setup_mohist_server.py",
-  "configure_minimal_default_permissions.py","configure_worldguard_explosions.py",
-  "install_dev_overlay_mods.py","install_kubejs.py","export_client_pack.py","prune_mods_whitelist.py",
-  "download_industrial_upgrade.py","update_fawe.py",
-  # quests / content regen
-  "generate_600_ocean_quests.py","generate_workshop_quests.py","workshop_guides.py","workshop_quest_extras.py",
-  "wire_aquatech_quests.py","wire_aquatech_quests_p2.py","inject_aqua_xp_rewards.py","strip_op_quest_rewards.py",
-  "validate_quests.py","check_all_chapters.py","build_ftb_quests.py","gen_iu_guide_ftbquests.py","patch_ftbquests.py",
-  "make_boot_fixes_datapack.py","fix_iu_item_ids.py","patch_skyblockbuilder_exitportal.py",
-  # GUI / assets still useful
-  "gen_machine_guis.py","gen_clean_machine_guis.py",
-  # docs
-  "CHANGELOG.md","HORIZON_ROUTE.md","PLAYER_ROADMAP.md","QUEST_ID_FREEZE.md",".gitignore"
-) | ForEach-Object { [void]$keep.Add($_) }
-
-$deletedScripts = 0
-Get-ChildItem $root -File | Where-Object {
-  $_.Extension -in ".py",".ps1",".txt",".jpg",".jpeg",".png",".gif" -and -not $keep.Contains($_.Name)
-} | ForEach-Object {
-  # never delete jar/json/snbt here
-  Remove-Item -LiteralPath $_.FullName -Force
-  Write-Host "DEL  script $($_.Name)"
-  $script:deletedScripts++
-}
-Write-Host "Deleted $deletedScripts root scripts/misc files"
+Write-Host "=== 5) (skipped) root one-shots now live under scripts/ ==="
+Write-Host "    deploy -> scripts/deploy/  tasks -> scripts/tasks/  scratch -> scripts/scratch/"
 
 Write-Host "=== 6) Nested __pycache__ under tools/mods sources ==="
 Get-ChildItem $root -Recurse -Directory -Filter "__pycache__" -EA SilentlyContinue |
