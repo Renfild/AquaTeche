@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "pack-2.9.38"
+TAG = "pack-2.9.39"
 PACK = ROOT / "dist" / "AquaTech-Client"
 MANIFEST = PACK / "manifest.json"
 WORKERS = 4
