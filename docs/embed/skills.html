@@ -334,7 +334,7 @@
     ];
 
     let learned = new Set(["origin"]);
-    let availablePoints = 5;
+    let availablePoints = 0;
 
     const viewport = document.getElementById("viewport");
     const container = document.getElementById("nodes-box");
@@ -344,6 +344,27 @@
     let panX = 0, panY = 0;
     let isDragging = false;
     let startX, startY;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const nick = urlParams.get('nick') || 'Renfild';
+
+    fetch(`/api/profiles/${encodeURIComponent(nick)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.ok && data.profile) {
+          const p = data.profile;
+          if (p.skill_points !== undefined) {
+            availablePoints = Number(p.skill_points || 0);
+          }
+          if (Array.isArray(p.learned_skills)) {
+            p.learned_skills.forEach(s => learned.add(s));
+          }
+          document.getElementById('points-val').textContent = availablePoints;
+          renderNodes();
+          drawLines();
+        }
+      })
+      .catch(() => {});
 
     function resizeCanvas() {
       canvas.width = viewport.clientWidth;
@@ -381,10 +402,10 @@
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         ctx.lineWidth = isUnlocked ? 3 : 1.5;
-        ctx.strokeStyle = isUnlocked ? "rgba(0, 229, 255, 0.85)" : "rgba(255, 255, 255, 0.12)";
+        ctx.strokeStyle = isUnlocked ? "#00e5ff" : "rgba(35, 53, 73, 0.6)";
         if (isUnlocked) {
           ctx.shadowColor = "#00e5ff";
-          ctx.shadowBlur = 12;
+          ctx.shadowBlur = 8;
         } else {
           ctx.shadowBlur = 0;
         }
@@ -394,45 +415,48 @@
 
     function renderNodes() {
       container.innerHTML = "";
+      document.getElementById("points-val").textContent = availablePoints;
       SKILLS.forEach(skill => {
-        const div = document.createElement("div");
-        div.className = `skill-node node-${skill.type}`;
-        div.style.left = `${skill.x - (skill.type === 'keystone' ? 33 : skill.type === 'notable' ? 25 : 18)}px`;
-        div.style.top = `${skill.y - (skill.type === 'keystone' ? 33 : skill.type === 'notable' ? 25 : 18)}px`;
-        div.innerHTML = `<span>${skill.icon}</span>`;
+        const el = document.createElement("div");
+        el.className = `skill-node node-${skill.type}`;
+        el.style.left = `${skill.x - (skill.type === 'keystone' ? 33 : skill.type === 'notable' ? 25 : 18)}px`;
+        el.style.top = `${skill.y - (skill.type === 'keystone' ? 33 : skill.type === 'notable' ? 25 : 18)}px`;
+        el.innerHTML = `<span>${skill.icon}</span>`;
 
         const isLearned = learned.has(skill.id);
         const canLearn = !isLearned && (!skill.prereq || learned.has(skill.prereq)) && availablePoints >= skill.cost;
 
-        if (isLearned) div.classList.add("node-learned");
-        else if (canLearn) div.classList.add("node-available");
+        if (isLearned) el.classList.add("node-learned");
+        else if (canLearn) el.classList.add("node-available");
 
-        div.addEventListener("mouseenter", () => showTooltip(skill, isLearned, canLearn));
-        div.addEventListener("click", () => learnSkill(skill));
+        el.addEventListener("mouseenter", () => showTooltip(skill, isLearned, canLearn));
+        el.addEventListener("mouseleave", hideTooltip);
+        el.addEventListener("click", () => handleNodeClick(skill));
 
-        container.appendChild(div);
+        container.appendChild(el);
       });
-      document.getElementById("points-val").textContent = availablePoints;
     }
 
+    const tooltip = document.getElementById("tooltip");
     function showTooltip(skill, isLearned, canLearn) {
       document.getElementById("tt-title").textContent = skill.title;
-      document.getElementById("tt-cost").textContent = `${skill.cost} Очк.`;
+      document.getElementById("tt-cost").textContent = `${skill.cost} ${skill.cost === 1 ? 'Очко' : 'Очка'}`;
       document.getElementById("tt-desc").textContent = skill.desc;
       const statusEl = document.getElementById("tt-status");
       if (isLearned) {
         statusEl.textContent = "ИЗУЧЕНО";
         statusEl.style.color = "#00e5ff";
       } else if (canLearn) {
-        statusEl.textContent = "ДОСТУПНО ДЛЯ ИЗУЧЕНИЯ";
+        statusEl.textContent = "ДОСТУПНО ДЛЯ ИЗУЧЕНИЯ (Клик)";
         statusEl.style.color = "#10b981";
       } else {
         statusEl.textContent = "ТРЕБУЕТСЯ ПРЕДЫДУЩИЙ НАВЫК";
         statusEl.style.color = "#ef4444";
       }
+      tooltip.style.opacity = "1";
     }
 
-    function learnSkill(skill) {
+    function handleNodeClick(skill) {
       if (learned.has(skill.id)) return;
       if (skill.prereq && !learned.has(skill.prereq)) return;
       if (availablePoints < skill.cost) return;
@@ -447,7 +471,7 @@
 
     function resetSkills() {
       learned = new Set(["origin"]);
-      availablePoints = 5;
+      availablePoints = 0;
       renderNodes();
       drawLines();
       ipcSend({ action: "RESET_SKILLS" });

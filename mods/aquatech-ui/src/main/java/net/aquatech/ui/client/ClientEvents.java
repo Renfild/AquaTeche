@@ -75,7 +75,8 @@ public final class ClientEvents {
         }
         if (!welcomed && mc.player.tickCount > 20) {
             welcomed = true;
-            mc.player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§b[AquaTech] §fСборка §e§lv2.9.47 §fзагружена. §7(F4 — Меню, K — Навыки)"));
+            ClientUiState.resetSessionTimer();
+            mc.player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§b[AquaTech] §fСборка §e§lv2.9.48 §fзагружена. §7(F4 — Меню, K — Навыки)"));
         }
         net.aquatech.ui.client.cache.ResourceCacheManager.getInstance().prefetchPlayerAvatar(mc.player.getUUID());
 

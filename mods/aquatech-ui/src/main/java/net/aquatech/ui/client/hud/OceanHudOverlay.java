@@ -91,7 +91,7 @@ public final class OceanHudOverlay {
         // Metric Rows
         int bal = ClientUiState.sessionBalance();
         drawMetricRow(graphics, 6, 40, w - 12, 14, "💰 Монеты", String.valueOf(bal), COLOR_WHITE);
-        drawMetricRow(graphics, 6, 55, w - 12, 14, "⏱ В игре", "1 ч", COLOR_WHITE);
+        drawMetricRow(graphics, 6, 55, w - 12, 14, "⏱ В игре", ClientUiState.getPlaytimeFormatted(), COLOR_WHITE);
 
         // ═════════════════════════════════════════════════════════════════════════
         // 2. BOTTOM DIVING CARD (Matching hud.html)

@@ -6,9 +6,10 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ItemStack;
 
 /**
- * High-Tech Liquid Glass card button with crisp 1px borders, smooth lift animation, and glowing hover states.
+ * High-Tech Liquid Glass card button with crisp 1px borders, smooth lift animation, item icons, and glowing hover states.
  */
 public class CustomButton extends Button {
     private static final int APPEAR_DURATION_MS = 220;
@@ -17,27 +18,34 @@ public class CustomButton extends Button {
     private final long createdAt = System.currentTimeMillis();
     private final int appearDelayMs;
     private final String iconType;
+    private final ItemStack iconItem;
     private float hoverAnim = 0f;
     private boolean lastHovered = false;
 
     public CustomButton(int x, int y, int w, int h, Component text, int baseColor, int accentColor, OnPress onPress) {
-        this(x, y, w, h, text, accentColor, onPress, 0, "");
+        this(x, y, w, h, text, accentColor, onPress, 0, "", ItemStack.EMPTY);
     }
 
     public CustomButton(int x, int y, int w, int h, Component text, int accentColor, OnPress onPress, int appearDelayMs) {
-        this(x, y, w, h, text, accentColor, onPress, appearDelayMs, "");
+        this(x, y, w, h, text, accentColor, onPress, appearDelayMs, "", ItemStack.EMPTY);
     }
 
     public CustomButton(int x, int y, int w, int h, Component text, int accentColor, OnPress onPress, int appearDelayMs, String iconType) {
+        this(x, y, w, h, text, accentColor, onPress, appearDelayMs, iconType, ItemStack.EMPTY);
+    }
+
+    public CustomButton(int x, int y, int w, int h, Component text, int accentColor, OnPress onPress,
+                        ItemStack icon, int appearDelayMs) {
+        this(x, y, w, h, text, accentColor, onPress, appearDelayMs, "", icon);
+    }
+
+    public CustomButton(int x, int y, int w, int h, Component text, int accentColor, OnPress onPress,
+                        int appearDelayMs, String iconType, ItemStack iconItem) {
         super(x, y, w, h, text, onPress, DEFAULT_NARRATION);
         this.accentColor = accentColor;
         this.appearDelayMs = appearDelayMs;
         this.iconType = iconType != null ? iconType : "";
-    }
-
-    public CustomButton(int x, int y, int w, int h, Component text, int accentColor, OnPress onPress,
-                        net.minecraft.world.item.ItemStack icon, int appearDelayMs) {
-        this(x, y, w, h, text, accentColor, onPress, appearDelayMs, "");
+        this.iconItem = iconItem != null ? iconItem : ItemStack.EMPTY;
     }
 
     private static float easeOutCubic(float t) {
@@ -84,6 +92,11 @@ public class CustomButton extends Button {
         GlassUI.drawGlassPanel(gfx, getX(), getY(), getX() + width, getY() + height, 2, fill, border,
                 hovered && active && alphaMul > 0.9f);
 
+        boolean hasIcon = iconItem != null && !iconItem.isEmpty();
+        if (hasIcon) {
+            gfx.renderItem(iconItem, getX() + 8, getY() + (height - 16) / 2);
+        }
+
         int textAlpha = (int) (255 * alphaMul);
         int textColorFull = (textAlpha << 24) | (hovered ? 0x00E5FF : (active ? 0xF1F5F9 : 0x64748B));
 
@@ -91,7 +104,7 @@ public class CustomButton extends Button {
         Component label = getMessage();
         if (!label.getString().isEmpty()) {
             int tw = font.width(label);
-            int tx = getX() + (width - tw) / 2;
+            int tx = hasIcon ? (getX() + 30) : (getX() + (width - tw) / 2);
             int ty = getY() + (height - 8) / 2;
             gfx.drawString(font, label, tx, ty, textColorFull, false);
         }

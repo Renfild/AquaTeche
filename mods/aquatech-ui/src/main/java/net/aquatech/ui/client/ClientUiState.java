@@ -125,4 +125,21 @@ public final class ClientUiState {
     public static int limiterMax(String blockId) {
         return LIMITER_MAX.getOrDefault(blockId, 0);
     }
+
+    private static long sessionStartMillis = System.currentTimeMillis();
+
+    public static void resetSessionTimer() {
+        sessionStartMillis = System.currentTimeMillis();
+    }
+
+    public static String getPlaytimeFormatted() {
+        long elapsedSec = Math.max(0, (System.currentTimeMillis() - sessionStartMillis) / 1000L);
+        long hours = elapsedSec / 3600L;
+        long mins = (elapsedSec % 3600L) / 60L;
+        if (hours > 0) {
+            return hours + " ч " + mins + " мин";
+        } else {
+            return Math.max(1, mins) + " мин";
+        }
+    }
 }
