@@ -384,21 +384,29 @@ func unzip(src, dest string) error {
 }
 
 func findLauncher(root, name string) string {
-	if name == "" {
-		name = "AquaTechLauncher.exe"
-	}
-	direct := filepath.Join(root, name)
-	if st, err := os.Stat(direct); err == nil && !st.IsDir() {
-		return direct
+	candidates := []string{name, "AquaTechLauncher.exe", "AquaTech.exe"}
+	for _, cand := range candidates {
+		if cand == "" {
+			continue
+		}
+		direct := filepath.Join(root, cand)
+		if st, err := os.Stat(direct); err == nil && !st.IsDir() {
+			return direct
+		}
 	}
 	var found string
 	_ = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if err != nil || info.IsDir() {
 			return nil
 		}
-		if strings.EqualFold(info.Name(), name) {
+		for _, cand := range candidates {
+			if cand != "" && strings.EqualFold(info.Name(), cand) {
+				found = path
+				return io.EOF
+			}
+		}
+		if strings.HasSuffix(strings.ToLower(info.Name()), ".exe") && found == "" {
 			found = path
-			return io.EOF
 		}
 		return nil
 	})

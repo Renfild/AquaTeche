@@ -1542,7 +1542,7 @@
       "label": "fetchProfileByNick()",
       "file_type": "code",
       "source_file": "functions/_lib/profile.js",
-      "source_location": "L25",
+      "source_location": "L38",
       "_callable": true,
       "_origin": "ast",
       "id": "functions_lib_profile_fetchprofilebynick",
@@ -1554,7 +1554,7 @@
       "label": "bumpViews()",
       "file_type": "code",
       "source_file": "functions/_lib/profile.js",
-      "source_location": "L38",
+      "source_location": "L52",
       "_callable": true,
       "_origin": "ast",
       "id": "functions_lib_profile_bumpviews",
@@ -4122,8 +4122,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_launchcommandbuilder_aquatechlauncher_core_processspawner_spawn",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 23,
+      "community_name": ".BuildAsync",
       "norm_label": ".spawn()"
     },
     {
@@ -4133,8 +4133,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "ireadonlylist",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 23,
+      "community_name": ".BuildAsync",
       "norm_label": "ireadonlylist"
     },
     {
@@ -4144,8 +4144,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "process",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 23,
+      "community_name": ".BuildAsync",
       "norm_label": "process"
     },
     {
@@ -4174,8 +4174,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_launcherconfig_aquatechlauncher_core_launcherconfig",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": "launcherconfig"
     },
     {
@@ -4228,8 +4228,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_launcherconfig_aquatechlauncher_core_launcherconfig_normalizeupdateurl",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": ".normalizeupdateurl()"
     },
     {
@@ -4320,8 +4320,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_launcherselfupdate",
-      "community": 203,
-      "community_name": "AquaTechLauncher.Core",
+      "community": 22,
+      "community_name": ".CheckAndApplyAsync",
       "norm_label": "launcherselfupdate.cs"
     },
     {
@@ -4339,8 +4339,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_launcherselfupdate_aquatechlauncher_core_bootstrapmanifest",
-      "community": 203,
-      "community_name": "AquaTechLauncher.Core",
+      "community": 22,
+      "community_name": ".CheckAndApplyAsync",
       "norm_label": "bootstrapmanifest"
     },
     {
@@ -4797,8 +4797,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_playorchestrator_aquatechlauncher_core_playorchestrator",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": "playorchestrator"
     },
     {
@@ -4815,8 +4815,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_playorchestrator_aquatechlauncher_core_playorchestrator_playasync",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": ".playasync()"
     },
     {
@@ -4826,8 +4826,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_playorchestrator_cs_action",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": "action"
     },
     {
@@ -4837,8 +4837,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_playorchestrator_cs_cancellationtoken",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": "cancellationtoken"
     },
     {
@@ -4848,8 +4848,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_playorchestrator_cs_task",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": "task"
     },
     {
@@ -4866,8 +4866,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_playorchestrator_aquatechlauncher_core_playorchestrator_updateasync",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": ".updateasync()"
     },
     {
@@ -4884,8 +4884,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_playorchestrator_aquatechlauncher_core_playorchestrator_syncpackasync",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": ".syncpackasync()"
     },
     {
@@ -4902,8 +4902,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "launcher_src_aquatechlauncher_core_playorchestrator_aquatechlauncher_core_playorchestrator_dumptail",
-      "community": 40,
-      "community_name": ".PlayAsync",
+      "community": 203,
+      "community_name": "AquaTechLauncher.Core",
       "norm_label": ".dumptail()"
     },
     {
@@ -8261,8 +8261,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_block_entity_oceanfilterblockentity_oceanfilterblockentity_createmenu",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".createmenu()"
     },
     {
@@ -10370,8 +10370,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_common_modclientconfig",
-      "community": 25,
-      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
+      "community": 56,
+      "community_name": "ModClientConfig",
       "norm_label": "modclientconfig.java"
     },
     {
@@ -10383,8 +10383,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_common_modclientconfig_modclientconfig",
-      "community": 25,
-      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
+      "community": 56,
+      "community_name": "ModClientConfig",
       "norm_label": "modclientconfig"
     },
     {
@@ -10394,8 +10394,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_common_modclientconfig_java_intvalue",
-      "community": 25,
-      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
+      "community": 56,
+      "community_name": "ModClientConfig",
       "norm_label": "intvalue"
     },
     {
@@ -10405,8 +10405,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "doublevalue",
-      "community": 25,
-      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
+      "community": 56,
+      "community_name": "ModClientConfig",
       "norm_label": "doublevalue"
     },
     {
@@ -10416,8 +10416,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_common_modclientconfig_java_booleanvalue",
-      "community": 25,
-      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
+      "community": 56,
+      "community_name": "ModClientConfig",
       "norm_label": "booleanvalue"
     },
     {
@@ -10427,8 +10427,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_common_modclientconfig_java_configvalue",
-      "community": 25,
-      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
+      "community": 56,
+      "community_name": "ModClientConfig",
       "norm_label": "configvalue"
     },
     {
@@ -13126,8 +13126,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": "autofishermenu"
     },
     {
@@ -13138,8 +13138,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu_autofishermenu",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": ".autofishermenu()"
     },
     {
@@ -13150,8 +13150,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu_iscrafting",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": ".iscrafting()"
     },
     {
@@ -13162,8 +13162,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu_getscaledprogress",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": ".getscaledprogress()"
     },
     {
@@ -13174,8 +13174,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu_getscaledenergy",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": ".getscaledenergy()"
     },
     {
@@ -13186,8 +13186,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu_getenergy",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": ".getenergy()"
     },
     {
@@ -13198,8 +13198,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu_getmaxenergy",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": ".getmaxenergy()"
     },
     {
@@ -13245,8 +13245,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu_addplayerinventory",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": ".addplayerinventory()"
     },
     {
@@ -13257,8 +13257,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_autofishermenu_autofishermenu_addplayerhotbar",
-      "community": 79,
-      "community_name": "net.minecraft.world.entity.player.Inventory",
+      "community": 40,
+      "community_name": "AutoFisherMenu",
       "norm_label": ".addplayerhotbar()"
     },
     {
@@ -13400,8 +13400,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": "oceanfiltermenu"
     },
     {
@@ -13412,8 +13412,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu_oceanfiltermenu",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".oceanfiltermenu()"
     },
     {
@@ -13424,8 +13424,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu_iscrafting",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".iscrafting()"
     },
     {
@@ -13436,8 +13436,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu_getscaledprogress",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".getscaledprogress()"
     },
     {
@@ -13448,8 +13448,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu_getscaledenergy",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".getscaledenergy()"
     },
     {
@@ -13460,8 +13460,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu_getenergy",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".getenergy()"
     },
     {
@@ -13472,8 +13472,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu_getmaxenergy",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".getmaxenergy()"
     },
     {
@@ -13519,8 +13519,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu_addplayerinventory",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".addplayerinventory()"
     },
     {
@@ -13531,8 +13531,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_inventory_oceanfiltermenu_oceanfiltermenu_addplayerhotbar",
-      "community": 56,
-      "community_name": "OceanFilterMenu",
+      "community": 79,
+      "community_name": "net.minecraft.world.entity.player.Inventory",
       "norm_label": ".addplayerhotbar()"
     },
     {
@@ -16223,8 +16223,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_skyblock_islandguardhandler_islandguardhandler_oncommand",
-      "community": 219,
-      "community_name": "IslandGuardHandler",
+      "community": 25,
+      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
       "norm_label": ".oncommand()"
     },
     {
@@ -17243,8 +17243,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_skyblock_personalraftspawner_java_compoundtag",
-      "community": 222,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community": 221,
+      "community_name": ".save",
       "norm_label": "compoundtag"
     },
     {
@@ -17255,8 +17255,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_skyblock_personalraftspawner_raftregistry_save",
-      "community": 222,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community": 221,
+      "community_name": ".save",
       "norm_label": ".save()"
     },
     {
@@ -17266,8 +17266,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_skyblock_personalraftspawner_java_override",
-      "community": 222,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community": 221,
+      "community_name": ".save",
       "norm_label": "override"
     },
     {
@@ -21025,8 +21025,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_casesmod_src_main_java_com_casesmod_network_packets_opencasec2spacket_opencasec2spacket",
-      "community": 218,
-      "community_name": "OpenCaseC2SPacket",
+      "community": 210,
+      "community_name": "net.minecraft.network.FriendlyByteBuf",
       "norm_label": "opencasec2spacket"
     },
     {
@@ -21037,8 +21037,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_casesmod_src_main_java_com_casesmod_network_packets_opencasec2spacket_opencasec2spacket_opencasec2spacket",
-      "community": 218,
-      "community_name": "OpenCaseC2SPacket",
+      "community": 210,
+      "community_name": "net.minecraft.network.FriendlyByteBuf",
       "norm_label": ".opencasec2spacket()"
     },
     {
@@ -21049,8 +21049,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_casesmod_src_main_java_com_casesmod_network_packets_opencasec2spacket_opencasec2spacket_encode",
-      "community": 218,
-      "community_name": "OpenCaseC2SPacket",
+      "community": 210,
+      "community_name": "net.minecraft.network.FriendlyByteBuf",
       "norm_label": ".encode()"
     },
     {
@@ -21061,8 +21061,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_casesmod_src_main_java_com_casesmod_network_packets_opencasec2spacket_opencasec2spacket_decode",
-      "community": 218,
-      "community_name": "OpenCaseC2SPacket",
+      "community": 210,
+      "community_name": "net.minecraft.network.FriendlyByteBuf",
       "norm_label": ".decode()"
     },
     {
@@ -23201,8 +23201,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_aquatech_launcher_normalize_game_dir",
-      "community": 5,
-      "community_name": "AquaTechLauncher",
+      "community": 194,
+      "community_name": "._load_cfg",
       "norm_label": "normalize_game_dir()"
     },
     {
@@ -23213,8 +23213,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_aquatech_launcher_normalize_server_cfg",
-      "community": 5,
-      "community_name": "AquaTechLauncher",
+      "community": 194,
+      "community_name": "._load_cfg",
       "norm_label": "normalize_server_cfg()"
     },
     {
@@ -23670,8 +23670,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_aquatech_launcher_normalize_update_url",
-      "community": 6,
-      "community_name": "aquatech_launcher.py",
+      "community": 194,
+      "community_name": "._load_cfg",
       "norm_label": "normalize_update_url()"
     },
     {
@@ -24210,8 +24210,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_aquatech_launcher_aquatechlauncher_load_cfg",
-      "community": 5,
-      "community_name": "AquaTechLauncher",
+      "community": 194,
+      "community_name": "._load_cfg",
       "norm_label": "._load_cfg()"
     },
     {
@@ -24222,8 +24222,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_aquatech_launcher_aquatechlauncher_save_cfg",
-      "community": 5,
-      "community_name": "AquaTechLauncher",
+      "community": 194,
+      "community_name": "._load_cfg",
       "norm_label": "._save_cfg()"
     },
     {
@@ -24627,8 +24627,8 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "tools_aquatech_launcher_rationale_119",
-      "community": 5,
-      "community_name": "AquaTechLauncher",
+      "community": 194,
+      "community_name": "._load_cfg",
       "norm_label": "default game folder; user can override in settings."
     },
     {
@@ -24770,8 +24770,8 @@
       "source_location": "L605",
       "_origin": "ast",
       "id": "tools_aquatech_launcher_rationale_605",
-      "community": 6,
-      "community_name": "aquatech_launcher.py",
+      "community": 194,
+      "community_name": "._load_cfg",
       "norm_label": "drop mistaken playit/minecraft host from pack cdn field; keep real http(s) cdns."
     },
     {
@@ -28044,8 +28044,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_patches_patch_fawe_typeproperty",
-      "community": 194,
-      "community_name": "patch_fawe_typeproperty.py",
+      "community": 113,
+      "community_name": "ZipFile",
       "norm_label": "patch_fawe_typeproperty.py"
     },
     {
@@ -28056,8 +28056,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_patches_patch_fawe_typeproperty_patch_class",
-      "community": 194,
-      "community_name": "patch_fawe_typeproperty.py",
+      "community": 113,
+      "community_name": "ZipFile",
       "norm_label": "patch_class()"
     },
     {
@@ -28068,8 +28068,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_patches_patch_fawe_typeproperty_main",
-      "community": 194,
-      "community_name": "patch_fawe_typeproperty.py",
+      "community": 113,
+      "community_name": "ZipFile",
       "norm_label": "main()"
     },
     {
@@ -28079,8 +28079,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_patches_patch_fawe_typeproperty_rationale_1",
-      "community": 194,
-      "community_name": "patch_fawe_typeproperty.py",
+      "community": 113,
+      "community_name": "ZipFile",
       "norm_label": "patch fawe paperweightadapter$1 so unknown block properties (typeproperty etc.)..."
     },
     {
@@ -28090,8 +28090,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "tools_patches_patch_fawe_typeproperty_rationale_19",
-      "community": 194,
-      "community_name": "patch_fawe_typeproperty.py",
+      "community": 113,
+      "community_name": "ZipFile",
       "norm_label": "replace the final 'ifeq <throw>' after blockstateinteger check with goto..."
     },
     {
@@ -28229,8 +28229,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_patches_patch_skyblockbuilder_exitportal",
-      "community": 113,
-      "community_name": "ZipFile",
+      "community": 218,
+      "community_name": "patch_skyblockbuilder_exitportal.py",
       "norm_label": "patch_skyblockbuilder_exitportal.py"
     },
     {
@@ -28241,8 +28241,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_patches_patch_skyblockbuilder_exitportal_patch_jar",
-      "community": 113,
-      "community_name": "ZipFile",
+      "community": 218,
+      "community_name": "patch_skyblockbuilder_exitportal.py",
       "norm_label": "patch_jar()"
     },
     {
@@ -28252,8 +28252,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "tools_patches_patch_skyblockbuilder_exitportal_py_path",
-      "community": 113,
-      "community_name": "ZipFile",
+      "community": 218,
+      "community_name": "patch_skyblockbuilder_exitportal.py",
       "norm_label": "path"
     },
     {
@@ -28264,8 +28264,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "tools_patches_patch_skyblockbuilder_exitportal_main",
-      "community": 113,
-      "community_name": "ZipFile",
+      "community": 218,
+      "community_name": "patch_skyblockbuilder_exitportal.py",
       "norm_label": "main()"
     },
     {
@@ -39709,8 +39709,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "net_minecraftforge_common_forgeconfigspec",
-      "community": 25,
-      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
+      "community": 56,
+      "community_name": "ModClientConfig",
       "norm_label": "net.minecraftforge.common.forgeconfigspec"
     },
     {
@@ -39907,8 +39907,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "net_minecraft_server_level_serverlevel",
-      "community": 222,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community": 25,
+      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
       "norm_label": "net.minecraft.server.level.serverlevel"
     },
     {
@@ -40028,8 +40028,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "net_minecraftforge_event_commandevent",
-      "community": 219,
-      "community_name": "IslandGuardHandler",
+      "community": 25,
+      "community_name": "net.minecraftforge.eventbus.api.SubscribeEvent",
       "norm_label": "net.minecraftforge.event.commandevent"
     },
     {
@@ -45518,7 +45518,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "functions/_lib/profile.js",
-      "source_location": "L38",
+      "source_location": "L52",
       "weight": 1.0,
       "_origin": "ast",
       "source": "functions_lib_profile",
@@ -45529,7 +45529,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "functions/_lib/profile.js",
-      "source_location": "L25",
+      "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
       "source": "functions_lib_profile",
