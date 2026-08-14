@@ -78,6 +78,17 @@ public final class AquaWebIpcDispatcher {
                         mc.player.connection.sendUnsignedCommand("donate " + slug);
                     }
                 });
+                case "LEARN_SKILL" -> mc.execute(() -> {
+                    String skillId = root.has("skillId") ? root.get("skillId").getAsString() : payload.has("skillId") ? payload.get("skillId").getAsString() : "";
+                    if (mc.player != null && !skillId.isBlank()) {
+                        mc.player.connection.sendUnsignedCommand("skills learn " + skillId);
+                    }
+                });
+                case "RESET_SKILLS" -> mc.execute(() -> {
+                    if (mc.player != null) {
+                        mc.player.connection.sendUnsignedCommand("skills reset");
+                    }
+                });
                 case "EXEC_COMMAND" -> mc.execute(() -> {
                     String cmd = root.has("cmd") ? root.get("cmd").getAsString() : payload.has("cmd") ? payload.get("cmd").getAsString() : "";
                     if (mc.player != null && !cmd.isBlank()) {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Древо Навыков · AquaTech</title>
+  <title>Древо Созвездий Океана · AquaTech</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
@@ -15,7 +15,7 @@
       padding: 0;
     }
     body {
-      background: radial-gradient(circle at 50% 30%, #0c2035 0%, #050d18 100%);
+      background: radial-gradient(circle at 50% 40%, #0a1b2d 0%, #030810 100%);
       color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
       width: 100vw;
@@ -25,14 +25,14 @@
       flex-direction: column;
     }
 
-    /* Top Navigation Bar */
     .skills-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px 28px;
-      background: rgba(10, 22, 34, 0.7);
-      backdrop-filter: blur(16px);
+      background: rgba(8, 18, 30, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(0, 229, 255, 0.2);
       z-index: 10;
     }
@@ -47,9 +47,9 @@
       font-size: 20px;
       font-weight: 800;
       color: #00e5ff;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      text-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+      text-shadow: 0 0 16px rgba(0, 229, 255, 0.45);
     }
 
     .points-badge {
@@ -59,7 +59,7 @@
       background: rgba(0, 229, 255, 0.1);
       border: 1px solid #00e5ff;
       border-radius: 100px;
-      padding: 4px 14px;
+      padding: 5px 14px;
       font-size: 13px;
       font-weight: 700;
       color: #00e5ff;
@@ -67,11 +67,11 @@
 
     .header-actions {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
     }
 
-    .btn-skill-action {
+    .btn-action {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #cbd5e1;
@@ -83,19 +83,18 @@
       transition: all 0.2s ease;
     }
 
-    .btn-skill-action:hover {
+    .btn-action:hover {
       background: rgba(0, 229, 255, 0.15);
       border-color: #00e5ff;
       color: #fff;
     }
 
-    .btn-close-tree {
+    .btn-close {
       background: rgba(239, 68, 68, 0.15);
       border: 1px solid #ef4444;
       color: #fff;
     }
 
-    /* Main Interactive Tree Area */
     .skills-viewport {
       flex: 1;
       position: relative;
@@ -131,42 +130,42 @@
       justify-content: center;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      background: #081320;
-      border: 2px solid #334155;
-      color: #94a3b8;
+      background: #081422;
+      border: 2px solid #233549;
+      color: #64748b;
     }
 
     .skill-node:hover {
-      transform: scale(1.18);
+      transform: scale(1.22);
       z-index: 5;
     }
 
     .node-small {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       font-size: 14px;
     }
 
     .node-notable {
-      width: 52px;
-      height: 52px;
+      width: 50px;
+      height: 50px;
       border-width: 3px;
       font-size: 18px;
     }
 
     .node-keystone {
-      width: 68px;
-      height: 68px;
-      border-width: 3px;
+      width: 66px;
+      height: 66px;
+      border-width: 3.5px;
       font-size: 24px;
-      box-shadow: 0 0 24px rgba(0, 229, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
     }
 
     .node-learned {
       border-color: #00e5ff !important;
-      background: #0d2946 !important;
+      background: #0c2b48 !important;
       color: #fff !important;
-      box-shadow: 0 0 16px rgba(0, 229, 255, 0.5) !important;
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.55) !important;
     }
 
     .node-available {
@@ -176,8 +175,8 @@
     }
 
     @keyframes pulseNode {
-      0%, 100% { box-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
-      50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.7); }
+      0%, 100% { box-shadow: 0 0 6px rgba(16, 185, 129, 0.3); }
+      50% { box-shadow: 0 0 18px rgba(16, 185, 129, 0.7); }
     }
 
     /* Tooltip */
@@ -188,13 +187,13 @@
       width: 340px;
       background: rgba(8, 18, 30, 0.94);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(0, 229, 255, 0.3);
       border-radius: 14px;
       padding: 18px 20px;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
       pointer-events: none;
       z-index: 20;
-      transition: opacity 0.2s ease;
     }
 
     .tooltip-header {
@@ -241,9 +240,9 @@
       <div class="points-badge">✦ Очки навыков: <span id="points-val">5</span></div>
     </div>
     <div class="header-actions">
-      <button type="button" class="btn-skill-action" onclick="resetView()">Центрировать</button>
-      <button type="button" class="btn-skill-action" onclick="resetSkills()">Сброс навыков</button>
-      <button type="button" class="btn-skill-action btn-close-tree" onclick="window.AquaTechBridge.send(JSON.stringify({action:'CLOSE_GUI'}))">Закрыть (ESC)</button>
+      <button type="button" class="btn-action" onclick="resetView()">Центрировать</button>
+      <button type="button" class="btn-action" onclick="resetSkills()">Сброс</button>
+      <button type="button" class="btn-action btn-close" onclick="ipcSend({action:'CLOSE_GUI'})">Закрыть (ESC)</button>
     </div>
   </header>
 
@@ -262,37 +261,80 @@
   </aside>
 
   <script>
+    // 55 Skills mapped 1:1 from net.aquatech.ui.capability.SkillDefinitions
     const SKILLS = [
-      { id: "origin", x: 1200, y: 1200, type: "keystone", cost: 0, prereq: null, title: "Исток Океана", desc: "Центральный узел. Открывает созвездия глубин.", icon: "⚓" },
-      
-      // Sector 1: Angler (North)
-      { id: "inner_angler", x: 1200, y: 1060, type: "small", cost: 1, prereq: "origin", title: "Школа Рыболова", desc: "Скорость рыбалки +8%.", icon: "🐟" },
-      { id: "rod_speed_1", x: 1200, y: 940, type: "small", cost: 1, prereq: "inner_angler", title: "Ловкие Руки I", desc: "Скорость заброса +8%.", icon: "⚡" },
-      { id: "bait_sense", x: 1120, y: 840, type: "small", cost: 1, prereq: "rod_speed_1", title: "Чутьё Наживки", desc: "Скорость клева +5%.", icon: "🪱" },
-      { id: "double_catch", x: 1280, y: 840, type: "notable", cost: 2, prereq: "rod_speed_1", title: "Двойной Крючок", desc: "Шанс удвоить улов +15%.", icon: "🎣" },
-      { id: "master_angler", x: 1200, y: 700, type: "keystone", cost: 3, prereq: "double_catch", title: "Владыка Удочки", desc: "Все бонусы рыбалки (скорость и улов) +20%.", icon: "👑" },
+      // HUB
+      { id: "origin", x: 1200, y: 1200, type: "keystone", cost: 0, prereq: null, title: "Исток Океана", desc: "Открывает пять ветвей созвездий. Без бонуса.", icon: "⚓" },
+      { id: "inner_angler", x: 1200, y: 1080, type: "small", cost: 1, prereq: "origin", title: "Школа Рыболова", desc: "Скорость рыбалки +8% (ручная и авто).", icon: "🐟" },
+      { id: "inner_tech", x: 1320, y: 1200, type: "small", cost: 1, prereq: "origin", title: "Морская Схема", desc: "Выработка FE реактора +8%.", icon: "⚙" },
+      { id: "inner_luck", x: 1300, y: 1300, type: "small", cost: 1, prereq: "origin", title: "Удача Морей", desc: "Шанс редкого улова +8%.", icon: "🍀" },
+      { id: "inner_diving", x: 1100, y: 1300, type: "small", cost: 1, prereq: "origin", title: "Глубокий Вдох", desc: "Запас воздуха +2 сек.", icon: "🤿" },
+      { id: "inner_kelp", x: 1080, y: 1200, type: "small", cost: 1, prereq: "origin", title: "Органический Исток", desc: "Дроп водорослей +25%.", icon: "🌿" },
 
-      // Sector 2: Tech (East)
-      { id: "inner_tech", x: 1340, y: 1200, type: "small", cost: 1, prereq: "origin", title: "Морская Схема", desc: "Выработка FE реактора +8%.", icon: "⚙" },
-      { id: "fe_collector", x: 1460, y: 1200, type: "small", cost: 1, prereq: "inner_tech", title: "Магнитная Индукция", desc: "Выработка FE +8%.", icon: "🔋" },
-      { id: "speed_boost_1", x: 1580, y: 1140, type: "notable", cost: 2, prereq: "fe_collector", title: "Турбо-Привод I", desc: "Скорость машин +10%.", icon: "⚡" },
-      { id: "reactor_master", x: 1720, y: 1200, type: "keystone", cost: 3, prereq: "speed_boost_1", title: "Ядро Бездны", desc: "Выработка энергии +25%, эффективность +20%.", icon: "💠" },
+      // SECTOR 1 — ANGLER
+      { id: "rod_speed_1", x: 1200, y: 960, type: "small", cost: 1, prereq: "inner_angler", title: "Ловкие Руки I", desc: "Скорость рыбалки +8%.", icon: "⚡" },
+      { id: "bait_sense", x: 1120, y: 880, type: "small", cost: 1, prereq: "rod_speed_1", title: "Чутьё Наживки", desc: "Скорость рыбалки +5%.", icon: "🪱" },
+      { id: "double_catch", x: 1280, y: 880, type: "notable", cost: 2, prereq: "bait_sense", title: "Двойной Крючок", desc: "Шанс удвоить улов +15%.", icon: "🎣" },
+      { id: "rod_speed_2", x: 1280, y: 780, type: "small", cost: 1, prereq: "double_catch", title: "Ловкие Руки II", desc: "Скорость рыбалки +10%.", icon: "⚡" },
+      { id: "triple_hook", x: 1280, y: 680, type: "notable", cost: 2, prereq: "rod_speed_2", title: "Тройной Заброс", desc: "Шанс удвоить улов +10%.", icon: "🎣" },
+      { id: "flood_rhythm", x: 1200, y: 620, type: "small", cost: 1, prereq: "triple_hook", title: "Прилив Удачи", desc: "Шанс редкого улова +8%.", icon: "🌊" },
+      { id: "five_hook", x: 1120, y: 620, type: "notable", cost: 2, prereq: "flood_rhythm", title: "Пятизубый Охват", desc: "Шанс удвоить улов +10%.", icon: "🔱" },
+      { id: "casting_mastery", x: 1120, y: 520, type: "small", cost: 1, prereq: "five_hook", title: "Мастерство Заброса", desc: "Скорость рыбалки +5%.", icon: "🎯" },
+      { id: "master_angler", x: 1200, y: 440, type: "keystone", cost: 3, prereq: "casting_mastery", title: "Владыка Удочки", desc: "Все бонусы рыбалки (скорость и улов) +20%.", icon: "👑" },
 
-      // Sector 3: Luck (South-East)
-      { id: "inner_luck", x: 1300, y: 1320, type: "small", cost: 1, prereq: "origin", title: "Удача Морей", desc: "Шанс редкого улова +8%.", icon: "🍀" },
-      { id: "rare_find_1", x: 1420, y: 1420, type: "notable", cost: 2, prereq: "inner_luck", title: "Сокровища Глубин", desc: "Шанс найти кейсы и реликвии +15%.", icon: "💎" },
+      // SECTOR 2 — TECH
+      { id: "fe_collector", x: 1440, y: 1200, type: "small", cost: 1, prereq: "inner_tech", title: "Магнитная Индукция", desc: "Выработка FE +8%.", icon: "🔋" },
+      { id: "efficiency_1", x: 1440, y: 1100, type: "small", cost: 1, prereq: "fe_collector", title: "Энерго-Сбережение", desc: "Расход FE машин −8%.", icon: "💡" },
+      { id: "speed_boost_1", x: 1560, y: 1100, type: "notable", cost: 2, prereq: "efficiency_1", title: "Турбо-Привод I", desc: "Скорость машин +10%.", icon: "⚡" },
+      { id: "machine_cooling", x: 1560, y: 1200, type: "small", cost: 1, prereq: "speed_boost_1", title: "Охлаждение Машин", desc: "Расход FE −5%.", icon: "❄" },
+      { id: "speed_boost_2", x: 1680, y: 1200, type: "notable", cost: 2, prereq: "machine_cooling", title: "Турбо-Привод II", desc: "Скорость машин +10%.", icon: "⚡" },
+      { id: "overclock", x: 1680, y: 1100, type: "notable", cost: 2, prereq: "speed_boost_2", title: "Оверклокинг Ядра", desc: "Скорость машин +15%.", icon: "🔥" },
+      { id: "zero_waste", x: 1800, y: 1100, type: "small", cost: 1, prereq: "overclock", title: "Нулевые Потери", desc: "Расход FE −10%.", icon: "🛡" },
+      { id: "deep_regen", x: 1800, y: 1200, type: "small", cost: 1, prereq: "zero_waste", title: "Глубокая Регенерация", desc: "Выработка FE +10%.", icon: "💠" },
+      { id: "overdrive_machine", x: 1920, y: 1200, type: "keystone", cost: 3, prereq: "deep_regen", title: "Гипер-Двигатель", desc: "Скорость машин и выработка FE +20%.", icon: "🚀" },
 
-      // Sector 4: Diving (South-West)
-      { id: "inner_diving", x: 1100, y: 1320, type: "small", cost: 1, prereq: "origin", title: "Глубокий Вдох", desc: "Запас воздуха +20 сек.", icon: "🤿" },
-      { id: "swim_speed_1", x: 980, y: 1420, type: "notable", cost: 2, prereq: "inner_diving", title: "Морская Грация", desc: "Скорость плавания +25%.", icon: "🌊" },
-      { id: "abyssal_diver", x: 860, y: 1540, type: "keystone", cost: 3, prereq: "swim_speed_1", title: "Амфибия Бездны", desc: "Бесконечное дыхание под водой и ночное зрение.", icon: "🔱" },
+      // SECTOR 3 — LUCK
+      { id: "luck_1", x: 1400, y: 1400, type: "small", cost: 1, prereq: "inner_luck", title: "Чутьё Рыбака I", desc: "Шанс редкого улова +8%.", icon: "✨" },
+      { id: "lucky_cast", x: 1400, y: 1500, type: "small", cost: 1, prereq: "luck_1", title: "Счастливый Заброс", desc: "Шанс редкого улова +5%.", icon: "🎯" },
+      { id: "luck_2", x: 1500, y: 1500, type: "notable", cost: 2, prereq: "lucky_cast", title: "Чутьё Рыбака II", desc: "Шанс редкого улова +10%.", icon: "💎" },
+      { id: "treasure_map", x: 1500, y: 1600, type: "small", cost: 1, prereq: "luck_2", title: "Карта Сокровищ", desc: "Шанс редкого улова +5%.", icon: "🗺" },
+      { id: "chest_finder", x: 1600, y: 1600, type: "notable", cost: 2, prereq: "treasure_map", title: "Затерянные Сундуки", desc: "Шанс редкого улова +8%.", icon: "📦" },
+      { id: "gem_miner", x: 1600, y: 1700, type: "notable", cost: 2, prereq: "chest_finder", title: "Самоцветный Улов", desc: "Шанс редкого улова +10%.", icon: "💎" },
+      { id: "abyssal_loot", x: 1700, y: 1700, type: "small", cost: 1, prereq: "gem_miner", title: "Дары Глубин", desc: "Шанс редкого улова +8%.", icon: "🎁" },
+      { id: "sunken_relic", x: 1700, y: 1800, type: "notable", cost: 2, prereq: "abyssal_loot", title: "Реликвия Затонувших", desc: "Шанс редкого улова +10%.", icon: "🏺" },
+      { id: "poseidon_blessing", x: 1820, y: 1820, type: "keystone", cost: 3, prereq: "sunken_relic", title: "Благословение Посейдона", desc: "Шанс редкого улова +20%.", icon: "🔱" },
 
-      // Sector 5: Kelp / Organics (West)
-      { id: "inner_kelp", x: 1060, y: 1200, type: "small", cost: 1, prereq: "origin", title: "Органический Исток", desc: "Дроп водорослей и биомассы +25%.", icon: "🌿" }
+      // SECTOR 4 — DIVING
+      { id: "swim_speed", x: 1000, y: 1400, type: "small", cost: 1, prereq: "inner_diving", title: "Морская Грация", desc: "Скорость плавания +8%.", icon: "🌊" },
+      { id: "lung_expand", x: 1000, y: 1500, type: "small", cost: 1, prereq: "swim_speed", title: "Лёгкие Водолаза", desc: "Запас воздуха +2 сек.", icon: "🫁" },
+      { id: "water_breathing", x: 900, y: 1500, type: "notable", cost: 2, prereq: "lung_expand", title: "Аква-Лёгкие", desc: "Дыхание под водой (эффект Water Breathing).", icon: "🤿" },
+      { id: "current_rider", x: 900, y: 1600, type: "small", cost: 1, prereq: "water_breathing", title: "Ездок на Течении", desc: "Скорость плавания +10%.", icon: "🏄" },
+      { id: "night_vision", x: 800, y: 1600, type: "notable", cost: 2, prereq: "current_rider", title: "Очи Бездны", desc: "Ночное зрение под водой.", icon: "👁" },
+      { id: "depth_armor", x: 800, y: 1700, type: "notable", cost: 2, prereq: "night_vision", title: "Давление Бездны", desc: "Запас глубины +6 м, урон −10%.", icon: "🛡" },
+      { id: "pressure_resist", x: 700, y: 1700, type: "small", cost: 1, prereq: "depth_armor", title: "Стойкость к Давлению", desc: "Запас глубины +6 м, урон −10%.", icon: "🪨" },
+      { id: "tide_walker", x: 700, y: 1800, type: "small", cost: 1, prereq: "pressure_resist", title: "Ходок По Воде", desc: "Скорость плавания +8%.", icon: "👣" },
+      { id: "immortal_diver", x: 580, y: 1820, type: "keystone", cost: 3, prereq: "tide_walker", title: "Неуязвимый Водолаз", desc: "Плавание +15%, дыхание под водой, урон −10%.", icon: "🔱" },
+
+      // SECTOR 5 — BIO
+      { id: "kelp_harvest", x: 960, y: 1200, type: "small", cost: 1, prereq: "inner_kelp", title: "Ламинариевый Сбор", desc: "Дроп водорослей +25%.", icon: "🌾" },
+      { id: "algae_study", x: 960, y: 1100, type: "small", cost: 1, prereq: "kelp_harvest", title: "Изучение Водорослей", desc: "Дроп водорослей +25%.", icon: "🔬" },
+      { id: "bio_fuel", x: 840, y: 1100, type: "notable", cost: 2, prereq: "algae_study", title: "Био-Синтез", desc: "Выработка FE реактора +15%.", icon: "🧪" },
+      { id: "sea_grass_farm", x: 840, y: 1200, type: "small", cost: 1, prereq: "bio_fuel", title: "Морской Луг", desc: "Дроп водорослей +25%.", icon: "🌱" },
+      { id: "sponge_grower", x: 720, y: 1200, type: "notable", cost: 2, prereq: "sea_grass_farm", title: "Губочный Сад", desc: "Дроп водорослей +25%.", icon: "🧽" },
+      { id: "living_kelp", x: 720, y: 1100, type: "notable", cost: 2, prereq: "sponge_grower", title: "Живые Водоросли", desc: "Регенерация I в воде.", icon: "🌿" },
+      { id: "sea_garden", x: 600, y: 1100, type: "small", cost: 1, prereq: "living_kelp", title: "Морской Сад", desc: "Дроп водорослей +25%.", icon: "🌺" },
+      { id: "mega_bloom", x: 600, y: 1200, type: "notable", cost: 2, prereq: "sea_garden", title: "Мега-Цветение", desc: "Дроп водорослей +50%.", icon: "🌸" },
+      { id: "immortal_organism", x: 480, y: 1200, type: "keystone", cost: 3, prereq: "mega_bloom", title: "Океанический Био-Разум", desc: "Регенерация II в воде, дроп водорослей +25%.", icon: "🧬" },
+
+      // CROSS-SECTOR
+      { id: "ocean_harmony", x: 1200, y: 320, type: "notable", cost: 2, prereq: "master_angler", title: "Гармония Океана", desc: "Все процентные бонусы навыков +3%.", icon: "🌌" },
+      { id: "tide_sync", x: 1300, y: 320, type: "small", cost: 1, prereq: "ocean_harmony", title: "Синхрон Прилива", desc: "Шанс редкого улова +5%.", icon: "🌊" },
+      { id: "kelp_cast", x: 360, y: 1200, type: "small", cost: 1, prereq: "immortal_organism", title: "Водорослевый Заброс", desc: "Скорость рыбалки +5%.", icon: "🎣" },
+      { id: "deep_resonance", x: 360, y: 1100, type: "notable", cost: 2, prereq: "kelp_cast", title: "Глубинный Резонанс", desc: "Все процентные бонусы навыков +5%.", icon: "🔮" }
     ];
 
-    let learned = new Set(["origin", "inner_angler"]);
-    let availablePoints = 4;
+    let learned = new Set(["origin"]);
+    let availablePoints = 5;
 
     const viewport = document.getElementById("viewport");
     const container = document.getElementById("nodes-box");
@@ -342,7 +384,7 @@
         ctx.strokeStyle = isUnlocked ? "rgba(0, 229, 255, 0.85)" : "rgba(255, 255, 255, 0.12)";
         if (isUnlocked) {
           ctx.shadowColor = "#00e5ff";
-          ctx.shadowBlur = 10;
+          ctx.shadowBlur = 12;
         } else {
           ctx.shadowBlur = 0;
         }
@@ -355,8 +397,8 @@
       SKILLS.forEach(skill => {
         const div = document.createElement("div");
         div.className = `skill-node node-${skill.type}`;
-        div.style.left = `${skill.x - (skill.type === 'keystone' ? 34 : skill.type === 'notable' ? 26 : 19)}px`;
-        div.style.top = `${skill.y - (skill.type === 'keystone' ? 34 : skill.type === 'notable' ? 26 : 19)}px`;
+        div.style.left = `${skill.x - (skill.type === 'keystone' ? 33 : skill.type === 'notable' ? 25 : 18)}px`;
+        div.style.top = `${skill.y - (skill.type === 'keystone' ? 33 : skill.type === 'notable' ? 25 : 18)}px`;
         div.innerHTML = `<span>${skill.icon}</span>`;
 
         const isLearned = learned.has(skill.id);
@@ -385,7 +427,7 @@
         statusEl.textContent = "ДОСТУПНО ДЛЯ ИЗУЧЕНИЯ";
         statusEl.style.color = "#10b981";
       } else {
-        statusEl.textContent = "ЗАБЛОКИРОВАНО";
+        statusEl.textContent = "ТРЕБУЕТСЯ ПРЕДЫДУЩИЙ НАВЫК";
         statusEl.style.color = "#ef4444";
       }
     }
@@ -400,20 +442,27 @@
       renderNodes();
       drawLines();
 
-      if (window.AquaTechBridge) {
-        window.AquaTechBridge.send(JSON.stringify({ action: "LEARN_SKILL", skillId: skill.id }));
-      }
+      ipcSend({ action: "LEARN_SKILL", skillId: skill.id });
     }
 
     function resetSkills() {
       learned = new Set(["origin"]);
-      availablePoints = 6;
+      availablePoints = 5;
       renderNodes();
       drawLines();
+      ipcSend({ action: "RESET_SKILLS" });
     }
 
     function resetView() {
       initViewport();
+    }
+
+    function ipcSend(payload) {
+      if (window.AquaTechBridge && typeof window.AquaTechBridge.send === 'function') {
+        window.AquaTechBridge.send(JSON.stringify(payload));
+      } else {
+        location.hash = 'aqipc=' + encodeURIComponent(JSON.stringify(payload));
+      }
     }
 
     // Drag / Pan logic
@@ -432,6 +481,10 @@
 
     window.addEventListener("mouseup", () => {
       isDragging = false;
+    });
+
+    window.addEventListener("keydown", e => {
+      if (e.key === "Escape") ipcSend({ action: "CLOSE_GUI" });
     });
 
     initViewport();
