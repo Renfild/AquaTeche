@@ -270,6 +270,11 @@ public final class PersonalRaftSpawner {
         ServerLevel level = player.server.getLevel(ServerLevel.OVERWORLD);
         if (level == null) return;
 
+        // If player has a bed or custom respawn position set, respect it
+        if (player.getRespawnPosition() != null) {
+            return;
+        }
+
         RaftRegistry registry = RaftRegistry.get(level);
         RaftRegistry.Entry entry = registry.getEntry(player.getUUID());
         if (entry != null) {
@@ -337,19 +342,21 @@ public final class PersonalRaftSpawner {
             data.putInt(TAG_Y, existing.y());
             data.putInt(TAG_Z, existing.z());
 
-            BlockPos raftSpawn = new BlockPos(existing.x(), SPAWN_Y, existing.z());
-            player.setRespawnPosition(ServerLevel.OVERWORLD, raftSpawn, 180.0f, true, false);
+            if (player.getRespawnPosition() == null) {
+                BlockPos raftSpawn = new BlockPos(existing.x(), SPAWN_Y, existing.z());
+                player.setRespawnPosition(ServerLevel.OVERWORLD, raftSpawn, 180.0f, true, false);
+            }
             ensureWorldGuardClaim(player, new BlockPos(existing.x(), existing.y(), existing.z()));
-            // Do NOT call autoSetHome on login if raft already exists!
             return;
         }
 
         if (data.getBoolean(TAG_READY)) {
             BlockPos pos = new BlockPos(data.getInt(TAG_X), SPAWN_Y, data.getInt(TAG_Z));
             registry.register(player.getUUID(), pos);
-            player.setRespawnPosition(ServerLevel.OVERWORLD, pos, 180.0f, true, false);
+            if (player.getRespawnPosition() == null) {
+                player.setRespawnPosition(ServerLevel.OVERWORLD, pos, 180.0f, true, false);
+            }
             ensureWorldGuardClaim(player, new BlockPos(data.getInt(TAG_X), data.getInt(TAG_Y), data.getInt(TAG_Z)));
-            // Do NOT call autoSetHome on login if raft already exists!
             return;
         }
 

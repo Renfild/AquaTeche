@@ -531,6 +531,17 @@ def apex_create_backup(
     return uuid or None
 
 
+def apex_send_command(command: str) -> bool:
+    url = f"{APEX_PANEL}/api/client/servers/{APEX_SERVER_ID}/command"
+    body = json.dumps({"command": command}).encode("utf-8")
+    req = urllib.request.Request(url, data=body, headers=_apex_headers(), method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return resp.status in (200, 204)
+    except Exception:
+        return False
+
+
 def apex_power(signal: str) -> None:
     url = f"{APEX_PANEL}/api/client/servers/{APEX_SERVER_ID}/power"
     body = json.dumps({"signal": signal}).encode("utf-8")
@@ -547,6 +558,10 @@ def apex_power(signal: str) -> None:
 def apex_restart_or_start(wait: bool = True, timeout_sec: int = 600) -> None:
     state = apex_server_state()
     print(f"panel state before: {state}", flush=True)
+    if state == "running":
+        print("Flushing world chunks to disk (save-all)...", flush=True)
+        apex_send_command("save-all")
+        time.sleep(3)
     signal = "restart" if state == "running" else "start"
     apex_power(signal)
 
@@ -593,7 +608,16 @@ def main() -> int:
         default=180,
         help="Seconds to wait for panel backup (default 180; 0 = fire-and-forget)",
     )
+    parser.add_argument(
+        "--only",
+        type=str,
+        default="",
+        help="Comma-separated relative paths to deploy, e.g. mods or kubejs,config",
+    )
     args = parser.parse_args()
+
+    if args.only:
+        os.environ["AQUATECH_SFTP_ONLY"] = args.only
 
     if args.restart_only:
         apex_restart_or_start(wait=not args.no_wait)

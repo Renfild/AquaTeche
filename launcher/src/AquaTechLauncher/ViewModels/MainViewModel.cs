@@ -39,7 +39,7 @@ public partial class MainViewModel : ViewModelBase
 
     private void RefreshVersionLabel()
     {
-        var packVer = "2.9.41";
+        var packVer = "2.9.42";
         try
         {
             var pPath = System.IO.Path.Combine(GameDir, ".pack_version");
