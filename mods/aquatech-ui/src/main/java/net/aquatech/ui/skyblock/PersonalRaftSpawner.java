@@ -306,13 +306,11 @@ public final class PersonalRaftSpawner {
             data.putInt(TAG_Z, z);
 
             ensureWorldGuardClaim(player, new BlockPos(x, y, z));
-            player.teleportTo(level, x + 0.5, y + 1.1, z + 0.5, player.getYRot(), player.getXRot());
-            autoSetHome(player);
+            player.teleportTo(level, x + 0.5, SPAWN_Y + 0.1, z + 0.5, player.getYRot(), player.getXRot());
 
             String regionId = raftRegionId(player);
             player.sendSystemMessage(Component.literal(
                     "§a⚓ Плот. §7Приват: §f/rg info " + regionId + " §7· границы: §f/rg select " + regionId));
-            player.sendSystemMessage(Component.literal("§a🏠 Точка /home автоматически установлена!"));
             return 1;
         }
 
@@ -342,7 +340,7 @@ public final class PersonalRaftSpawner {
             BlockPos raftSpawn = new BlockPos(existing.x(), SPAWN_Y, existing.z());
             player.setRespawnPosition(ServerLevel.OVERWORLD, raftSpawn, 180.0f, true, false);
             ensureWorldGuardClaim(player, new BlockPos(existing.x(), existing.y(), existing.z()));
-            autoSetHome(player);
+            // Do NOT call autoSetHome on login if raft already exists!
             return;
         }
 
@@ -351,7 +349,7 @@ public final class PersonalRaftSpawner {
             registry.register(player.getUUID(), pos);
             player.setRespawnPosition(ServerLevel.OVERWORLD, pos, 180.0f, true, false);
             ensureWorldGuardClaim(player, new BlockPos(data.getInt(TAG_X), data.getInt(TAG_Y), data.getInt(TAG_Z)));
-            autoSetHome(player);
+            // Do NOT call autoSetHome on login if raft already exists!
             return;
         }
 
