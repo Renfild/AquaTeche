@@ -2,28 +2,29 @@ namespace AquaTechLauncher.Core;
 
 public static class LauncherConstants
 {
-    public const string Version = "2.9.20";
+    public const string Version = "2.9.53";
     public const string McVersion = "1.20.1";
     public const string ForgeVersion = "47.4.0";
     public const string McpVersion = "20230612.114412";
     public static string ForgeVersionId => $"{McVersion}-forge-{ForgeVersion}";
     public static string ForgeCoord => $"{McVersion}-{ForgeVersion}";
 
-    public const string ServerHost = "katherine-hydro.tun.ply.gg";
-    public const int ServerPort = 31279;
+    public const string ServerHost = "g-pl-3.apexnodes.xyz";
+    public const int ServerPort = 21561;
     public const int PackReadyMinJars = 40;
 
-    public const string PortalApiBase = "https://aquatech.santcrail.workers.dev";
+    public const string PortalApiBase = "https://aquateche.store";
     public const string BootstrapManifestUrl =
         "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json";
 
     public const string DefaultUpdateUrl =
-        "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack";
+        "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack";
 
     public static readonly string[] PackCdnMirrors =
     [
-        DefaultUpdateUrl,
         "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
+        "https://aquateche.store/pack",
+        "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
     ];
 
     public static readonly string[] PackFolders = ["mods", "config", "kubejs", "resourcepacks"];

@@ -1,25 +1,29 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>AquaTechLauncher</AssemblyName>
+    <AssemblyName>AquaTech</AssemblyName>
     <RootNamespace>AquaTechLauncher</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets\aquatech.ico</ApplicationIcon>
-    <PublishSingleFile>false</PublishSingleFile>
+    <AssemblyTitle>AquaTech Launcher</AssemblyTitle>
+    <Description>AquaTech Minecraft 1.20.1 Forge Game Launcher</Description>
+    <Product>AquaTech</Product>
+    <Copyright>Copyright © 2026 AquaTech</Copyright>
+    <AssemblyVersion>2.9.53.0</AssemblyVersion>
+    <FileVersion>2.9.53.0</FileVersion>
+    <Version>2.9.53</Version>
+    <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
   </PropertyGroup>
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\..\tools\forge-runtime-1.20.1-47.4.0.zip" Link="forge-runtime-1.20.1-47.4.0.zip" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
-    <None Include="..\..\..\tools\forge-1.20.1-47.4.0-installer.jar" Link="forge-1.20.1-47.4.0-installer.jar" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

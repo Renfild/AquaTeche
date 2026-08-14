@@ -19,25 +19,26 @@ public partial class MainViewModel : ViewModelBase
     private bool _busy;
     private bool? _tcpOnline;
     private int? _tcpMs;
-    private int? _portalPlayers;
+    private int? _onlinePlayers;
+    private int? _maxPlayers;
 
     public MainViewModel()
     {
-        Username = _cfg.Username;
+        Username = string.IsNullOrWhiteSpace(_cfg.Username) ? "Player" : _cfg.Username;
         LoginNick = _cfg.Username;
         RamText = $"{_cfg.RamMb} MB";
         GameDir = _cfg.GameDir;
         VersionLabel = $"v{LauncherConstants.Version}";
-        McLabel = $"Minecraft {LauncherConstants.McVersion}";
+        McLabel = $"Minecraft {LauncherConstants.McVersion} · Forge {LauncherConstants.ForgeVersion}";
         ServerAddress = $"{LauncherConstants.ServerHost}:{LauncherConstants.ServerPort}";
-        OnlinePlayersText = "Проверяем…";
-        NeedsAuth = true;
-        AuthChecking = true;
+        OnlinePlayersText = "Проверяем сервер…";
+        NeedsAuth = false;
+        AuthChecking = false;
         _ = StartupAsync();
     }
 
     [ObservableProperty] private string _page = "play";
-    [ObservableProperty] private string _username = "";
+    [ObservableProperty] private string _username = "Player";
     [ObservableProperty] private string _ramText = "4096 MB";
     [ObservableProperty] private string _gameDir = "";
     [ObservableProperty] private string _statusText = "Готов к запуску";
@@ -51,13 +52,16 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private string _versionLabel = "";
     [ObservableProperty] private string _mcLabel = "";
     [ObservableProperty] private string _onlinePlayersText = "";
-    [ObservableProperty] private bool _needsAuth = true;
+    [ObservableProperty] private bool _needsAuth;
     [ObservableProperty] private bool _authChecking;
     [ObservableProperty] private bool _showLoginForm;
+    [ObservableProperty] private bool _isLoggedIn;
     [ObservableProperty] private string _loginNick = "";
     [ObservableProperty] private string _loginPassword = "";
     [ObservableProperty] private string _authError = "";
     [ObservableProperty] private bool _authBusy;
+    [ObservableProperty] private string _accountBadge = "Гость";
+    [ObservableProperty] private string _coinsText = "0 💰";
 
     public ObservableCollection<LogLine> LogLines { get; } = [];
 
@@ -73,31 +77,30 @@ public partial class MainViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void ShowPlay()
+    private void ShowPlay() => Page = "play";
+
+    [RelayCommand]
+    private void ShowSettings() => Page = "settings";
+
+    [RelayCommand]
+    private void ShowLog() => Page = "log";
+
+    [RelayCommand]
+    private void SetRam(string mb)
     {
-        if (NeedsAuth) return;
-        Page = "play";
+        if (int.TryParse(mb, out var val))
+        {
+            RamText = $"{val} MB";
+            _cfg.RamMb = val;
+            _cfg.Save();
+        }
     }
 
     [RelayCommand]
-    private void ShowSettings()
-    {
-        if (NeedsAuth) return;
-        Page = "settings";
-    }
-
-    [RelayCommand]
-    private void ShowLog()
-    {
-        if (NeedsAuth) return;
-        Page = "log";
-    }
-
-    [RelayCommand]
-    private void BeginAuth()
+    private void ToggleLoginForm()
     {
         UiSounds.Play(UiSounds.Kind.Auth);
-        ShowLoginForm = true;
+        ShowLoginForm = !ShowLoginForm;
         AuthError = "";
     }
 
@@ -108,7 +111,9 @@ public partial class MainViewModel : ViewModelBase
         _cfg.Save();
         HttpDownload.SetPortalSession(null);
         LoginPassword = "";
-        NeedsAuth = true;
+        IsLoggedIn = false;
+        AccountBadge = "Гость";
+        CoinsText = "0 💰";
         ShowLoginForm = false;
         AuthError = "";
         StatusText = "Вышли из аккаунта";
@@ -133,6 +138,23 @@ public partial class MainViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    private void OpenWebsite()
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = LauncherConstants.PortalApiBase,
+                UseShellExecute = true,
+            });
+        }
+        catch
+        {
+            /* ignore */
+        }
+    }
+
+    [RelayCommand]
     private async Task SubmitLoginAsync()
     {
         if (AuthBusy) return;
@@ -144,7 +166,7 @@ public partial class MainViewModel : ViewModelBase
             var (ok, nick, session, err) = await PortalApi.LoginAsync(LoginNick.Trim(), LoginPassword);
             if (!ok || nick == null || session == null)
             {
-                AuthError = string.IsNullOrWhiteSpace(err) ? "Не удалось войти" : err;
+                AuthError = string.IsNullOrWhiteSpace(err) ? "Неверный логин или пароль" : err;
                 return;
             }
             EnterApp(nick, session);
@@ -158,13 +180,13 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private async Task PlayAsync()
     {
-        if (_busy || NeedsAuth) return;
+        if (_busy) return;
         UiSounds.Play(UiSounds.Kind.Play);
         SaveCfgFromUi();
         if (string.IsNullOrWhiteSpace(_cfg.Username))
         {
-            StatusText = "Нет ника — войди заново";
-            NeedsAuth = true;
+            StatusText = "Введи никнейм перед запуском";
+            Page = "play";
             return;
         }
 
@@ -198,7 +220,7 @@ public partial class MainViewModel : ViewModelBase
             && desktop.MainWindow?.Clipboard is { } clip)
         {
             await clip.SetTextAsync(ip);
-            StatusText = "IP скопирован";
+            StatusText = "IP скопирован в буфер обмена";
         }
     }
 
@@ -227,45 +249,39 @@ public partial class MainViewModel : ViewModelBase
         _cfg.PortalSession = session;
         _cfg.Save();
         HttpDownload.SetPortalSession(session);
-        NeedsAuth = false;
-        AuthChecking = false;
+        IsLoggedIn = true;
+        AccountBadge = "Игрок";
         ShowLoginForm = false;
         AuthError = "";
-        StatusText = "Готов к запуску";
+        StatusText = "Аккаунт подключен";
+        UiLog($"Вход в аккаунт: {nick}", "ok");
     }
 
     private async Task StartupAsync()
     {
-        AuthChecking = true;
-        NeedsAuth = true;
         try
         {
-            var (ok, nick, session, _) = await PortalApi.TryRestoreSessionAsync(_cfg.PortalSession);
-            if (ok && nick != null && session != null)
+            if (!string.IsNullOrWhiteSpace(_cfg.PortalSession))
             {
-                EnterApp(nick, session);
-            }
-            else
-            {
-                _cfg.PortalSession = null;
-                _cfg.Save();
-                HttpDownload.SetPortalSession(null);
-                NeedsAuth = true;
+                var (ok, nick, session, _) = await PortalApi.TryRestoreSessionAsync(_cfg.PortalSession);
+                if (ok && nick != null && session != null)
+                {
+                    EnterApp(nick, session);
+                }
+                else
+                {
+                    _cfg.PortalSession = null;
+                    _cfg.Save();
+                    HttpDownload.SetPortalSession(null);
+                }
             }
         }
         catch
         {
-            NeedsAuth = true;
-        }
-        finally
-        {
-            AuthChecking = false;
+            /* offline fallback */
         }
 
         _ = RefreshPingLoopAsync();
-        _ = RefreshPortalStatsLoopAsync();
-
-        if (NeedsAuth) return;
 
         try
         {
@@ -337,8 +353,8 @@ public partial class MainViewModel : ViewModelBase
         {
             ServerStatus = _tcpMs is null ? "Онлайн" : $"Онлайн · {_tcpMs} мс";
             ServerDot = Brush("#22C55E");
-            OnlinePlayersText = _portalPlayers is > 0
-                ? $"Онлайн · {_portalPlayers}"
+            OnlinePlayersText = _onlinePlayers is not null
+                ? $"Игроков онлайн: {_onlinePlayers} / {(_maxPlayers ?? 100)}"
                 : (_tcpMs is null ? "Сервер онлайн" : $"Онлайн · {_tcpMs} мс");
         }
         else if (_tcpOnline == false)
@@ -361,11 +377,16 @@ public partial class MainViewModel : ViewModelBase
         {
             try
             {
-                var (online, ms) = await ServerPing.PingAsync(_cfg.EffectiveHost, _cfg.EffectivePort);
+                var status = await ServerPing.QueryStatusAsync(_cfg.EffectiveHost, _cfg.EffectivePort);
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
-                    _tcpOnline = online;
-                    _tcpMs = ms;
+                    _tcpOnline = status.Online;
+                    _tcpMs = status.LatencyMs;
+                    if (status.Online)
+                    {
+                        _onlinePlayers = status.OnlinePlayers;
+                        _maxPlayers = status.MaxPlayers;
+                    }
                     ApplyUnifiedStatus();
                 });
             }
@@ -379,30 +400,7 @@ public partial class MainViewModel : ViewModelBase
                 });
             }
 
-            try { await Task.Delay(20000); }
-            catch { break; }
-        }
-    }
-
-    private async Task RefreshPortalStatsLoopAsync()
-    {
-        while (true)
-        {
-            try
-            {
-                var status = await PortalApi.FetchServerStatusAsync();
-                await Dispatcher.UIThread.InvokeAsync(() =>
-                {
-                    _portalPlayers = status is { Online: true } ? status.PlayersOnline : null;
-                    ApplyUnifiedStatus();
-                });
-            }
-            catch
-            {
-                /* keep TCP status */
-            }
-
-            try { await Task.Delay(60000); }
+            try { await Task.Delay(15000); }
             catch { break; }
         }
     }
