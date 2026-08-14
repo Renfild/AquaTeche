@@ -13,6 +13,7 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	"unsafe"
 )
 
 // LoliLand-style bootstrap:
@@ -404,19 +405,35 @@ func findLauncher(root, name string) string {
 	return found
 }
 
+var (
+	shell32          = syscall.NewLazyDLL("shell32.dll")
+	procShellExecute = shell32.NewProc("ShellExecuteW")
+)
+
 func startDetached(exe, dir string) error {
-	cmd := exec.Command(exe)
-	cmd.Dir = dir
-	cmd.SysProcAttr = &syscall.SysProcAttr{
-		CreationFlags: syscall.CREATE_NEW_PROCESS_GROUP | 0x00000008, // DETACHED_PROCESS
-	}
-	cmd.Stdout = nil
-	cmd.Stderr = nil
-	if err := cmd.Start(); err != nil {
+	exePtr, err := syscall.UTF16PtrFromString(exe)
+	if err != nil {
 		return err
 	}
-	if cmd.Process != nil {
-		_ = cmd.Process.Release()
+	dirPtr, err := syscall.UTF16PtrFromString(dir)
+	if err != nil {
+		return err
+	}
+	opPtr, _ := syscall.UTF16PtrFromString("open")
+
+	ret, _, _ := procShellExecute.Call(
+		0,
+		uintptr(unsafe.Pointer(opPtr)),
+		uintptr(unsafe.Pointer(exePtr)),
+		0,
+		uintptr(unsafe.Pointer(dirPtr)),
+		1, // SW_SHOWNORMAL
+	)
+	if ret <= 32 {
+		// Fallback to standard exec.Command if ShellExecute returns error code <= 32
+		cmd := exec.Command(exe)
+		cmd.Dir = dir
+		return cmd.Start()
 	}
 	return nil
 }

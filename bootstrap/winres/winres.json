@@ -1,0 +1,70 @@
+{
+  "RT_GROUP_ICON": {
+    "APP": {
+      "0000": [
+        "icon.png"
+      ]
+    }
+  },
+  "RT_MANIFEST": {
+    "#1": {
+      "0409": {
+        "identity": {
+          "name": "AquaTech.Launcher.Bootstrap",
+          "version": "2.9.50.0"
+        },
+        "description": "AquaTech Minecraft Modpack Launcher",
+        "minimum-os": "win10",
+        "execution-level": "as invoker",
+        "ui-access": false,
+        "auto-elevate": false,
+        "dpi-awareness": "system",
+        "disable-theming": false,
+        "disable-window-filtering": false,
+        "high-resolution-scrolling-aware": true,
+        "ultra-high-resolution-scrolling-aware": true,
+        "long-path-aware": true,
+        "printer-driver-isolation": false,
+        "gdi-scaling": false,
+        "segment-heap": true,
+        "use-common-controls-v6": true
+      }
+    }
+  },
+  "RT_VERSION": {
+    "#1": {
+      "0000": {
+        "fixed": {
+          "file_version": "2.9.50.0",
+          "product_version": "2.9.50.0"
+        },
+        "info": {
+          "0409": {
+            "Comments": "AquaTech Ocean Modpack Official Launcher",
+            "CompanyName": "AquaTech Team",
+            "FileDescription": "AquaTech Launcher",
+            "FileVersion": "2.9.50.0",
+            "InternalName": "AquaTech.exe",
+            "LegalCopyright": "Copyright (C) 2026 AquaTech",
+            "LegalTrademarks": "AquaTech",
+            "OriginalFilename": "AquaTech.exe",
+            "ProductName": "AquaTech Launcher",
+            "ProductVersion": "2.9.50.0"
+          },
+          "0419": {
+            "Comments": "Официальный лаунчер сборки AquaTech",
+            "CompanyName": "AquaTech Team",
+            "FileDescription": "Лаунчер AquaTech",
+            "FileVersion": "2.9.50.0",
+            "InternalName": "AquaTech.exe",
+            "LegalCopyright": "Copyright (C) 2026 AquaTech",
+            "LegalTrademarks": "AquaTech",
+            "OriginalFilename": "AquaTech.exe",
+            "ProductName": "Лаунчер AquaTech",
+            "ProductVersion": "2.9.49.0"
+          }
+        }
+      }
+    }
+  }
+}
