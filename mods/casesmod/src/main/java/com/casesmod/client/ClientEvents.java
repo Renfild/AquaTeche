@@ -45,14 +45,15 @@ public final class ClientEvents {
 
         while (KEY_OPEN_MENU.consumeClick()) {
             Screen screen = mc.screen;
-            if (isCasesMenu(screen)) {
-                mc.setScreen(null);
-                continue;
-            }
             if (screen != null) {
                 continue; // не перебиваем чат/инвентарь/другие GUI
             }
-            NetworkHandler.CHANNEL.sendToServer(new RequestOpenMenuC2SPacket());
+            try {
+                Class<?> webScreen = Class.forName("net.aquatech.ui.client.gui.AquaWebScreen");
+                webScreen.getMethod("openEmbed", String.class, String.class).invoke(null, "Меню", "menu");
+            } catch (Throwable t) {
+                NetworkHandler.CHANNEL.sendToServer(new RequestOpenMenuC2SPacket());
+            }
         }
     }
 

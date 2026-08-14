@@ -207,7 +207,7 @@
         <span>Донат</span>
       </button>
 
-      <button type="button" class="menu-btn" onclick="ipcSend({action:'EXEC_COMMAND', cmd:'ftbquests open'})">
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'OPEN_QUESTS'})">
         <span class="btn-icon">📜</span>
         <span>Квесты</span>
       </button>
@@ -239,6 +239,16 @@
     const nick = urlParams.get('nick') || 'Renfild';
     document.getElementById('player-nick').textContent = nick;
     document.getElementById('head-img').src = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}`;
+
+    fetch(`/api/profiles/${encodeURIComponent(nick)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.ok && data.profile) {
+          const coins = Number(data.profile.coins || 0).toLocaleString('ru-RU');
+          document.getElementById('player-bal').textContent = `${coins} монет`;
+        }
+      })
+      .catch(() => {});
 
     function ipcSend(payload) {
       if (window.AquaTechBridge && typeof window.AquaTechBridge.send === 'function') {

@@ -14,7 +14,12 @@ public class ClientPacketHandler {
 
     public static void openMainMenu(long balance) {
         ClientBalanceState.balance = balance;
-        Minecraft.getInstance().setScreen(new MainMenuScreen());
+        try {
+            Class<?> webScreen = Class.forName("net.aquatech.ui.client.gui.AquaWebScreen");
+            webScreen.getMethod("openEmbed", String.class, String.class).invoke(null, "Меню", "menu");
+        } catch (Throwable t) {
+            Minecraft.getInstance().setScreen(new MainMenuScreen());
+        }
     }
 
     public static void openFishMarket() {

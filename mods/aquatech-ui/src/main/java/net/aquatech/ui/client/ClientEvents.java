@@ -36,11 +36,6 @@ public final class ClientEvents {
 
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAboveAll(
-                "ocean_hud",
-                (gui, graphics, partialTick, screenWidth, screenHeight) ->
-                        net.aquatech.ui.client.hud.OceanHudOverlay.render(graphics, partialTick)
-        );
-        event.registerAboveAll(
                 "ocean_tab",
                 (gui, graphics, partialTick, screenWidth, screenHeight) -> {
                     if (ClientUiState.tabOpen()) {
@@ -77,10 +72,10 @@ public final class ClientEvents {
             return;
         }
 
-        // Handle Keybind 'K' for Skill Tree
+        // Handle Keybind 'K' for Web Skill Tree
         while (KEY_SKILL_TREE.consumeClick()) {
             if (mc.screen == null) {
-                mc.setScreen(new OceanSkillTreeScreen());
+                net.aquatech.ui.client.gui.AquaWebScreen.openEmbed("Созвездия Океана", "skills");
             }
         }
 
