@@ -85,7 +85,7 @@
       <Setter Property="BorderBrush" Value="#222C3D"/>
       <Setter Property="BorderThickness" Value="1"/>
       <Setter Property="CornerRadius" Value="10"/>
-      <Setter Property="Padding" Value="14,10"/>
+      <Setter Property="Padding" Value="16,10"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="FontSize" Value="13"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -118,6 +118,7 @@
       <Setter Property="FontSize" Value="17"/>
       <Setter Property="Height" Value="54"/>
       <Setter Property="Padding" Value="0"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
       <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
@@ -135,6 +136,31 @@
       <Setter Property="RenderTransform" Value="translateY(0px) scale(0.97)"/>
     </Style>
 
+    <Style Selector="Button.auth-action">
+      <Setter Property="Foreground" Value="#0F172A"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="Height" Value="50"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Button.auth-action:pointerover">
+      <Setter Property="RenderTransform" Value="translateY(-2px) scale(1.01)"/>
+    </Style>
+    <Style Selector="Button.auth-action:pressed">
+      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.97)"/>
+    </Style>
+
     <Style Selector="Border.panel">
       <Setter Property="Background" Value="#101520"/>
       <Setter Property="BorderBrush" Value="#1E2738"/>
@@ -144,7 +170,88 @@
   </Window.Styles>
 
   <Panel>
-    <Grid ColumnDefinitions="240,*">
+    <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+    <!-- 1. FULL-SCREEN AUTHENTICATION GATE (Visible when NeedsAuth is TRUE)        -->
+    <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+    <Border Background="#080C14" IsVisible="{Binding NeedsAuth}" ZIndex="100">
+      <Panel>
+        <!-- Background Ambient Ocean Glow -->
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="600" CornerRadius="300" Opacity="0.15">
+          <Border.Background>
+            <RadialGradientBrush>
+              <GradientStop Color="#0284C7" Offset="0"/>
+              <GradientStop Color="Transparent" Offset="1"/>
+            </RadialGradientBrush>
+          </Border.Background>
+        </Border>
+
+        <!-- Centered Login Card -->
+        <Border Classes="panel" Width="460" Padding="36" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#0F1420">
+          <StackPanel Spacing="20">
+            <!-- Header Brand -->
+            <StackPanel Spacing="6" HorizontalAlignment="Center">
+              <Border Background="#0284C7" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Center" Margin="0,0,0,4">
+                <TextBlock Text="🌊" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <TextBlock Text="AQUATECH" FontSize="28" FontWeight="ExtraBold" Foreground="#F8FAFC"
+                         LetterSpacing="2" HorizontalAlignment="Center"/>
+              <TextBlock Text="Minecraft 1.20.1 · Океанский Skyblock" FontSize="12" Foreground="#38BDF8"
+                         HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <Border Height="1" Background="#1E2738" Margin="0,4"/>
+
+            <!-- Form -->
+            <StackPanel Spacing="14">
+              <TextBlock Text="ВХОД В АККАУНТ" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center"/>
+
+              <StackPanel Spacing="6">
+                <TextBlock Text="НИКНЕЙМ" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
+                <TextBox Classes="field" Text="{Binding LoginNick}" Watermark="Твой никнейм на сервере"/>
+              </StackPanel>
+
+              <StackPanel Spacing="6">
+                <TextBlock Text="ПАРОЛЬ" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
+                <TextBox Classes="field" Text="{Binding LoginPassword}" PasswordChar="•" Watermark="Пароль от аккаунта"/>
+              </StackPanel>
+
+              <!-- Error Alert -->
+              <Border Background="#2A1215" BorderBrush="#EF4444" BorderThickness="1" CornerRadius="8" Padding="12,8"
+                      IsVisible="{Binding AuthError, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                <TextBlock Text="{Binding AuthError}" FontSize="12" Foreground="#FCA5A5" TextWrapping="Wrap"
+                           HorizontalAlignment="Center" TextAlignment="Center"/>
+              </Border>
+
+              <!-- Submit Button -->
+              <Button Classes="auth-action" Content="Войти в аккаунт" Command="{Binding SubmitLoginCommand}"
+                      IsEnabled="{Binding !AuthBusy}">
+                <Button.Background>
+                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Color="#00F2FE" Offset="0"/>
+                    <GradientStop Color="#0284C7" Offset="1"/>
+                  </LinearGradientBrush>
+                </Button.Background>
+              </Button>
+
+              <!-- Register Link -->
+              <Button Classes="glass" Content="Создать аккаунт на aquateche.store →" Command="{Binding OpenRegisterCommand}"
+                      HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <!-- Bottom Status -->
+            <StackPanel Spacing="4" HorizontalAlignment="Center" Margin="0,8,0,0">
+              <TextBlock Text="{Binding OnlinePlayersText}" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center"/>
+              <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#475569" HorizontalAlignment="Center"/>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+      </Panel>
+    </Border>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+    <!-- 2. MAIN LAUNCHER INTERFACE (Visible when NeedsAuth is FALSE)                -->
+    <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+    <Grid ColumnDefinitions="240,*" IsVisible="{Binding !NeedsAuth}">
       <!-- Sidebar -->
       <Border Background="#0C1018" BorderBrush="#1A2230" BorderThickness="0,0,1,0">
         <DockPanel>
@@ -168,24 +275,22 @@
             <Button Classes="nav" Content="📋  Журнал" Command="{Binding ShowLogCommand}" Classes.active="{Binding IsLogPage}"/>
           </StackPanel>
 
-          <!-- Bottom Status & Account Card -->
+          <!-- Bottom Profile Card & Logout -->
           <StackPanel DockPanel.Dock="Bottom" Margin="16,16" Spacing="10" VerticalAlignment="Bottom">
-            <Border Classes="panel" Padding="12,10">
-              <StackPanel Spacing="6">
+            <Border Classes="panel" Padding="14,12">
+              <StackPanel Spacing="8">
                 <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="{Binding Username}" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                  <TextBlock Text="{Binding Username}" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
                   <Border Grid.Column="1" Background="#1E293B" CornerRadius="6" Padding="6,2">
                     <TextBlock Text="{Binding AccountBadge}" FontSize="10" FontWeight="SemiBold" Foreground="#38BDF8"/>
                   </Border>
                 </Grid>
-                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding IsLoggedIn}">
+                <Grid ColumnDefinitions="*,Auto">
                   <TextBlock Text="Баланс:" FontSize="11" Foreground="#94A3B8"/>
-                  <TextBlock Grid.Column="1" Text="{Binding CoinsText}" FontSize="11" FontWeight="SemiBold" Foreground="#FBBF24"/>
+                  <TextBlock Grid.Column="1" Text="{Binding CoinsText}" FontSize="11" FontWeight="Bold" Foreground="#FBBF24"/>
                 </Grid>
-                <Button Classes="glass" Content="Войти через сайт" Command="{Binding ToggleLoginFormCommand}"
-                        IsVisible="{Binding !IsLoggedIn}" HorizontalAlignment="Stretch" Padding="8,6" FontSize="11"/>
-                <Button Classes="glass" Content="Выйти" Command="{Binding LogoutCommand}"
-                        IsVisible="{Binding IsLoggedIn}" HorizontalAlignment="Stretch" Padding="8,6" FontSize="11"/>
+                <Button Classes="glass" Content="Выйти из аккаунта" Command="{Binding LogoutCommand}"
+                        HorizontalAlignment="Stretch" Padding="8,6" FontSize="11"/>
               </StackPanel>
             </Border>
 
@@ -216,20 +321,30 @@
                 <TextBlock Text="AQUATECH OCEAN" FontSize="26" FontWeight="ExtraBold" Foreground="#F8FAFC" LetterSpacing="1.5"/>
                 <TextBlock Text="Спавн на плоту · Удочки StarCatcher · 12 кейсов · Индустрия" FontSize="13" Foreground="#93C5FD"/>
               </StackPanel>
-              <Button Grid.Column="1" Classes="glass" Content="Сайт проекта ↗" Command="{Binding OpenWebsiteCommand}" VerticalAlignment="Center"/>
+              <Button Grid.Column="1" Classes="glass" Content="Сайт проекта →" Command="{Binding OpenWebsiteCommand}" VerticalAlignment="Center"/>
             </Grid>
           </Border>
 
           <ScrollViewer>
             <StackPanel Spacing="16">
-              <!-- Nickname input -->
-              <StackPanel Spacing="6">
-                <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="ИГРОВОЙ НИКНЕЙМ" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
-                  <TextBlock Grid.Column="1" Text="введи ник для входа" FontSize="11" Foreground="#64748B"/>
+              <!-- Welcome Profile Chip -->
+              <Border Classes="panel" Padding="18,14">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                  <Border Background="#0284C7" CornerRadius="8" Width="36" Height="36" VerticalAlignment="Center" Margin="0,0,12,0">
+                    <TextBlock Text="👤" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Border>
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                      <TextBlock Text="Игрок:" FontSize="12" Foreground="#94A3B8"/>
+                      <TextBlock Text="{Binding Username}" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                    </StackPanel>
+                    <TextBlock Text="Аккаунт верифицирован и готов к игре" FontSize="11" Foreground="#38BDF8"/>
+                  </StackPanel>
+                  <Border Grid.Column="2" Background="#1E293B" CornerRadius="8" Padding="10,6" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding CoinsText}" FontSize="12" FontWeight="Bold" Foreground="#FBBF24"/>
+                  </Border>
                 </Grid>
-                <TextBox Classes="field" Text="{Binding Username}" Watermark="Например: Renfild"/>
-              </StackPanel>
+              </Border>
 
               <!-- Server Card -->
               <Border Classes="panel" Padding="20,16">
@@ -335,47 +450,5 @@
         </DockPanel>
       </Panel>
     </Grid>
-
-    <!-- Login Modal Dialog -->
-    <Border Background="#CC000000" IsVisible="{Binding ShowLoginForm}" ZIndex="100">
-      <Border Classes="panel" Width="420" Padding="28" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#101520">
-        <StackPanel Spacing="16">
-          <Grid ColumnDefinitions="*,Auto">
-            <TextBlock Text="Вход в аккаунт сайта" FontSize="18" FontWeight="Bold" Foreground="#F8FAFC"/>
-            <Button Grid.Column="1" Classes="glass" Content="✕" Command="{Binding ToggleLoginFormCommand}"
-                    Width="32" Height="32" Padding="0"/>
-          </Grid>
-
-          <TextBlock Text="Войди под своими учетными данными с сайта aquateche.store для синхронизации монет и профиля."
-                     FontSize="12" Foreground="#94A3B8" TextWrapping="Wrap"/>
-
-          <StackPanel Spacing="6">
-            <TextBlock Text="НИКНЕЙМ" FontSize="10" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
-            <TextBox Classes="field" Text="{Binding LoginNick}" Watermark="Игровой ник"/>
-          </StackPanel>
-
-          <StackPanel Spacing="6">
-            <TextBlock Text="ПАРОЛЬ" FontSize="10" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
-            <TextBox Classes="field" Text="{Binding LoginPassword}" PasswordChar="•" Watermark="Пароль от сайта"/>
-          </StackPanel>
-
-          <TextBlock Text="{Binding AuthError}" FontSize="12" Foreground="#EF4444" TextWrapping="Wrap"
-                     MinHeight="16" IsVisible="{Binding AuthError, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-
-          <Button Classes="play" Content="Войти" Command="{Binding SubmitLoginCommand}"
-                  IsEnabled="{Binding !AuthBusy}" Height="46" FontSize="15">
-            <Button.Background>
-              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                <GradientStop Color="#00F2FE" Offset="0"/>
-                <GradientStop Color="#0284C7" Offset="1"/>
-              </LinearGradientBrush>
-            </Button.Background>
-          </Button>
-
-          <Button Classes="glass" Content="Создать аккаунт на сайте" Command="{Binding OpenRegisterCommand}"
-                  HorizontalAlignment="Stretch"/>
-        </StackPanel>
-      </Border>
-    </Border>
   </Panel>
 </Window>

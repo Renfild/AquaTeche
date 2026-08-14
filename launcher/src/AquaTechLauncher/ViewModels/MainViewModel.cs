@@ -24,7 +24,7 @@ public partial class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
-        Username = string.IsNullOrWhiteSpace(_cfg.Username) ? "Player" : _cfg.Username;
+        Username = _cfg.Username;
         LoginNick = _cfg.Username;
         RamText = $"{_cfg.RamMb} MB";
         GameDir = _cfg.GameDir;
@@ -32,13 +32,13 @@ public partial class MainViewModel : ViewModelBase
         McLabel = $"Minecraft {LauncherConstants.McVersion} · Forge {LauncherConstants.ForgeVersion}";
         ServerAddress = $"{LauncherConstants.ServerHost}:{LauncherConstants.ServerPort}";
         OnlinePlayersText = "Проверяем сервер…";
-        NeedsAuth = false;
-        AuthChecking = false;
+        NeedsAuth = true;
+        AuthChecking = true;
         _ = StartupAsync();
     }
 
     [ObservableProperty] private string _page = "play";
-    [ObservableProperty] private string _username = "Player";
+    [ObservableProperty] private string _username = "";
     [ObservableProperty] private string _ramText = "4096 MB";
     [ObservableProperty] private string _gameDir = "";
     [ObservableProperty] private string _statusText = "Готов к запуску";
@@ -52,16 +52,16 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private string _versionLabel = "";
     [ObservableProperty] private string _mcLabel = "";
     [ObservableProperty] private string _onlinePlayersText = "";
-    [ObservableProperty] private bool _needsAuth;
-    [ObservableProperty] private bool _authChecking;
-    [ObservableProperty] private bool _showLoginForm;
+    [ObservableProperty] private bool _needsAuth = true;
+    [ObservableProperty] private bool _authChecking = true;
     [ObservableProperty] private bool _isLoggedIn;
     [ObservableProperty] private string _loginNick = "";
     [ObservableProperty] private string _loginPassword = "";
     [ObservableProperty] private string _authError = "";
     [ObservableProperty] private bool _authBusy;
-    [ObservableProperty] private string _accountBadge = "Гость";
+    [ObservableProperty] private string _accountBadge = "Игрок";
     [ObservableProperty] private string _coinsText = "0 💰";
+    [ObservableProperty] private string _hoursText = "0 ч";
 
     public ObservableCollection<LogLine> LogLines { get; } = [];
 
@@ -77,13 +77,25 @@ public partial class MainViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void ShowPlay() => Page = "play";
+    private void ShowPlay()
+    {
+        if (NeedsAuth) return;
+        Page = "play";
+    }
 
     [RelayCommand]
-    private void ShowSettings() => Page = "settings";
+    private void ShowSettings()
+    {
+        if (NeedsAuth) return;
+        Page = "settings";
+    }
 
     [RelayCommand]
-    private void ShowLog() => Page = "log";
+    private void ShowLog()
+    {
+        if (NeedsAuth) return;
+        Page = "log";
+    }
 
     [RelayCommand]
     private void SetRam(string mb)
@@ -97,14 +109,6 @@ public partial class MainViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void ToggleLoginForm()
-    {
-        UiSounds.Play(UiSounds.Kind.Auth);
-        ShowLoginForm = !ShowLoginForm;
-        AuthError = "";
-    }
-
-    [RelayCommand]
     private void Logout()
     {
         _cfg.PortalSession = null;
@@ -112,12 +116,10 @@ public partial class MainViewModel : ViewModelBase
         HttpDownload.SetPortalSession(null);
         LoginPassword = "";
         IsLoggedIn = false;
-        AccountBadge = "Гость";
-        CoinsText = "0 💰";
-        ShowLoginForm = false;
+        NeedsAuth = true;
         AuthError = "";
         StatusText = "Вышли из аккаунта";
-        UiLog("Сессия сброшена", "warn");
+        UiLog("Сессия завершена", "warn");
     }
 
     [RelayCommand]
@@ -158,18 +160,29 @@ public partial class MainViewModel : ViewModelBase
     private async Task SubmitLoginAsync()
     {
         if (AuthBusy) return;
+        if (string.IsNullOrWhiteSpace(LoginNick))
+        {
+            AuthError = "Введи свой никнейм";
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(LoginPassword))
+        {
+            AuthError = "Введи пароль от аккаунта";
+            return;
+        }
+
         AuthBusy = true;
         AuthError = "";
         UiSounds.Play(UiSounds.Kind.Auth);
         try
         {
-            var (ok, nick, session, err) = await PortalApi.LoginAsync(LoginNick.Trim(), LoginPassword);
-            if (!ok || nick == null || session == null)
+            var (ok, profile, session, err) = await PortalApi.LoginAsync(LoginNick.Trim(), LoginPassword);
+            if (!ok || profile == null || session == null)
             {
                 AuthError = string.IsNullOrWhiteSpace(err) ? "Неверный логин или пароль" : err;
                 return;
             }
-            EnterApp(nick, session);
+            EnterApp(profile, session);
         }
         finally
         {
@@ -180,13 +193,13 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private async Task PlayAsync()
     {
-        if (_busy) return;
+        if (_busy || NeedsAuth) return;
         UiSounds.Play(UiSounds.Kind.Play);
         SaveCfgFromUi();
         if (string.IsNullOrWhiteSpace(_cfg.Username))
         {
-            StatusText = "Введи никнейм перед запуском";
-            Page = "play";
+            StatusText = "Сессия истекла — войди заново";
+            NeedsAuth = true;
             return;
         }
 
@@ -240,48 +253,64 @@ public partial class MainViewModel : ViewModelBase
             GameDir = path;
     }
 
-    private void EnterApp(string nick, string session)
+    private void EnterApp(UserProfile profile, string session)
     {
-        Username = nick;
-        LoginNick = nick;
+        Username = profile.Nick;
+        LoginNick = profile.Nick;
         LoginPassword = "";
-        _cfg.Username = nick;
+        _cfg.Username = profile.Nick;
         _cfg.PortalSession = session;
         _cfg.Save();
         HttpDownload.SetPortalSession(session);
         IsLoggedIn = true;
-        AccountBadge = "Игрок";
-        ShowLoginForm = false;
+        AccountBadge = profile.IsAdmin ? "Админ" : "Игрок";
+        CoinsText = $"{profile.Coins} 💰";
+        HoursText = $"{profile.HoursPlayed} ч";
+        NeedsAuth = false;
+        AuthChecking = false;
         AuthError = "";
-        StatusText = "Аккаунт подключен";
-        UiLog($"Вход в аккаунт: {nick}", "ok");
+        StatusText = "Готов к запуску";
+        UiLog($"Авторизован как {profile.Nick} ({AccountBadge})", "ok");
     }
 
     private async Task StartupAsync()
     {
+        AuthChecking = true;
+        NeedsAuth = true;
         try
         {
             if (!string.IsNullOrWhiteSpace(_cfg.PortalSession))
             {
-                var (ok, nick, session, _) = await PortalApi.TryRestoreSessionAsync(_cfg.PortalSession);
-                if (ok && nick != null && session != null)
+                var (ok, profile, session, _) = await PortalApi.TryRestoreSessionAsync(_cfg.PortalSession);
+                if (ok && profile != null && session != null)
                 {
-                    EnterApp(nick, session);
+                    EnterApp(profile, session);
                 }
                 else
                 {
                     _cfg.PortalSession = null;
                     _cfg.Save();
                     HttpDownload.SetPortalSession(null);
+                    NeedsAuth = true;
                 }
+            }
+            else
+            {
+                NeedsAuth = true;
             }
         }
         catch
         {
-            /* offline fallback */
+            NeedsAuth = true;
+        }
+        finally
+        {
+            AuthChecking = false;
         }
 
         _ = RefreshPingLoopAsync();
+
+        if (NeedsAuth) return;
 
         try
         {

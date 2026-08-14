@@ -9,6 +9,13 @@ public sealed class PortalStats
     public int PlayersMax { get; set; }
 }
 
+public sealed record UserProfile(
+    string Nick,
+    bool IsAdmin,
+    long Coins,
+    long HoursPlayed,
+    long Likes);
+
 public static class PortalApi
 {
     public static async Task<PortalStats?> FetchServerStatusAsync(CancellationToken ct = default)
@@ -31,7 +38,7 @@ public static class PortalApi
         }
     }
 
-    public static async Task<(bool Ok, string? Nick, string? Session, string Error)> TryRestoreSessionAsync(
+    public static async Task<(bool Ok, UserProfile? Profile, string? Session, string Error)> TryRestoreSessionAsync(
         string? sessionId, CancellationToken ct = default)
     {
         if (string.IsNullOrWhiteSpace(sessionId))
@@ -46,13 +53,31 @@ public static class PortalApi
                 return (false, null, null, "expired");
             }
             using var doc = JsonDocument.Parse(body);
-            var nick = doc.RootElement.GetProperty("user").GetProperty("nick").GetString();
+            var root = doc.RootElement;
+            if (!root.TryGetProperty("user", out var userEl))
+            {
+                HttpDownload.SetPortalSession(null);
+                return (false, null, null, "bad user");
+            }
+            var nick = userEl.GetProperty("nick").GetString();
             if (string.IsNullOrWhiteSpace(nick))
             {
                 HttpDownload.SetPortalSession(null);
                 return (false, null, null, "bad me");
             }
-            return (true, nick, sessionId, "");
+            var isAdmin = userEl.TryGetProperty("is_admin", out var ia) && ia.GetBoolean();
+            long coins = 0;
+            long hours = 0;
+            long likes = 0;
+            if (root.TryGetProperty("profile", out var profEl))
+            {
+                if (profEl.TryGetProperty("coins", out var c)) coins = c.GetInt64();
+                if (profEl.TryGetProperty("hours_played", out var h)) hours = h.GetInt64();
+                if (profEl.TryGetProperty("likes", out var l)) likes = l.GetInt64();
+            }
+
+            var profile = new UserProfile(nick, isAdmin, coins, hours, likes);
+            return (true, profile, sessionId, "");
         }
         catch (Exception ex)
         {
@@ -61,7 +86,7 @@ public static class PortalApi
         }
     }
 
-    public static async Task<(bool Ok, string? Nick, string? Session, string Error)> LoginAsync(
+    public static async Task<(bool Ok, UserProfile? Profile, string? Session, string Error)> LoginAsync(
         string nick, string password, CancellationToken ct = default)
     {
         try
@@ -71,7 +96,7 @@ public static class PortalApi
                 $"{LauncherConstants.PortalApiBase}/api/login", payload, ct);
             using var doc = JsonDocument.Parse(json);
             if (!doc.RootElement.TryGetProperty("ok", out var okEl) || !okEl.GetBoolean())
-                return (false, null, null, "login failed");
+                return (false, null, null, "Неверный логин или пароль");
             var userNick = doc.RootElement.GetProperty("user").GetProperty("nick").GetString();
             var session = doc.RootElement.TryGetProperty("session", out var s)
                 ? s.GetString()
@@ -81,9 +106,14 @@ public static class PortalApi
             if (string.IsNullOrWhiteSpace(session))
                 session = HttpDownload.GetPortalSession();
             if (string.IsNullOrWhiteSpace(userNick) || string.IsNullOrWhiteSpace(session))
-                return (false, null, null, "Лаунчер не получил сессию — обнови сайт");
+                return (false, null, null, "Ошибка получения сессии");
             HttpDownload.SetPortalSession(session);
-            return (true, userNick, session, "");
+
+            // Fetch profile info
+            var (_, profile, _, _) = await TryRestoreSessionAsync(session, ct);
+            profile ??= new UserProfile(userNick, false, 0, 0, 0);
+
+            return (true, profile, session, "");
         }
         catch (HttpRequestException ex)
         {
