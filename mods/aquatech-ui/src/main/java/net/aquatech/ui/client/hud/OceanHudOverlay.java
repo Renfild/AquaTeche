@@ -1,18 +1,23 @@
 package net.aquatech.ui.client.hud;
 
-import net.aquatech.ui.client.cache.ResourceCacheManager;
 import net.aquatech.ui.client.ClientUiState;
+import net.aquatech.ui.client.gui.widget.AquaBadge;
 import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.common.ModClientConfig;
+import net.aquatech.ui.common.PlayerProfile;
 import net.aquatech.ui.server.PressureBridge;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.tags.FluidTags;
 
-/** Правый боковой HUD: глубина, давление и кислород — давление считается локально каждый кадр. */
+/**
+ * In-game right-side HUD overlay:
+ * 1) Top Profile card (avatar, nickname, rank, coins, playtime).
+ * 2) Bottom Immersion card (depth, pressure, tolerance, oxygen bar).
+ */
 public final class OceanHudOverlay {
     private OceanHudOverlay() {
     }
@@ -30,17 +35,56 @@ public final class OceanHudOverlay {
             return;
         }
 
-        int w = Math.max(110, ModClientConfig.HUD_WIDTH.get());
+        int w = Math.max(140, ModClientConfig.HUD_WIDTH.get());
         float scale = (float) ModClientConfig.HUD_SCALE.get().doubleValue();
         int marginRight = ModClientConfig.HUD_MARGIN_RIGHT.get();
         int marginTop = ModClientConfig.HUD_MARGIN_TOP.get();
         boolean showPressure = ModClientConfig.SHOW_PRESSURE.get();
-        int h = showPressure ? 84 : 58;
 
         int screenX = graphics.guiWidth() - Math.round(w * scale) - marginRight;
         int screenY = marginTop;
 
-        // Live local calc — не ждём сетевой sync профиля (там давление отставало от урона).
+        PlayerProfile profile = ClientUiState.profile(player.getUUID());
+        String rankId = profile != null ? profile.rankId() : "default";
+        String rankRaw = profile != null ? profile.rankDisplay() : "ИГРОК";
+        if (rankRaw == null || rankRaw.isBlank()) rankRaw = "ИГРОК";
+        rankRaw = rankRaw.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim().toUpperCase();
+        if (rankRaw.isBlank()) rankRaw = "ИГРОК";
+        int rankColor = UiDraw.rankColor(rankId);
+
+        graphics.pose().pushPose();
+        graphics.pose().translate(screenX, screenY, 0);
+        graphics.pose().scale(scale, scale, 1f);
+
+        // ═════════════════════════════════════════════════════════════════════════
+        // 1. TOP PROFILE CARD
+        // ═════════════════════════════════════════════════════════════════════════
+        int profileCardH = 68;
+        AquaGlassPanel.draw(graphics, 0, 0, w, profileCardH, 0xD10B1824, rankColor, 3, false);
+
+        // Avatar
+        UiDraw.drawPlayerHead(graphics, player.getUUID(), player.getGameProfile().getName(), 6, 6, 26);
+        // Online green indicator dot
+        graphics.fill(28, 28, 33, 33, 0xFF10B981);
+
+        // Nickname & Rank
+        String name = AquaFontRenderer.fit(mc.font, player.getGameProfile().getName(), w - 42);
+        AquaFontRenderer.draw(graphics, mc.font, name, 36, 6, 0xFFFFFFFF);
+        AquaBadge.draw(graphics, mc.font, 36, 18, rankRaw, rankColor);
+
+        graphics.fill(6, 36, w - 6, 37, 0x443A7892);
+
+        // Coins & Hours played
+        int bal = ClientUiState.sessionBalance();
+        drawStatRow(graphics, 0, 40, w, "💰 Монеты", String.valueOf(bal), 0xFFFFD166);
+        drawStatRow(graphics, 0, 52, w, "⏱ В игре", "1 ч", UiDraw.COLOR_MUTED);
+
+        // ═════════════════════════════════════════════════════════════════════════
+        // 2. BOTTOM IMMERSION CARD
+        // ═════════════════════════════════════════════════════════════════════════
+        int immersionY = profileCardH + 6;
+        int immersionH = showPressure ? 80 : 56;
+
         PressureBridge.PressureInfo live = PressureBridge.fromPlayer(player);
         boolean inWater = live.inWater()
                 || player.isInWater()
@@ -49,30 +93,21 @@ public final class OceanHudOverlay {
         int pressure = inWater ? live.effective() : 0;
         int tolerance = live.tolerance();
 
-        // Fallback if capability not loaded yet on client
         if (inWater && live.depth() == 0 && depth > 0) {
             pressure = Math.max(0, depth - 10);
             tolerance = 10;
         }
 
-        graphics.pose().pushPose();
-        graphics.pose().translate(screenX, screenY, 0);
-        graphics.pose().scale(scale, scale, 1f);
+        AquaGlassPanel.draw(graphics, 0, immersionY, w, immersionH, 0xD10B1F2A, UiDraw.COLOR_ACCENT, 3, false);
+        graphics.fill(0, immersionY + 5, 2, immersionY + 20, UiDraw.COLOR_ACCENT);
 
-        AquaGlassPanel.draw(graphics, 0, 0, w, h, 0xD10B1F2A, UiDraw.COLOR_ACCENT, 3, false);
-        graphics.fill(0, 5, 2, 22, UiDraw.COLOR_ACCENT);
-        var cachedAvatar = ResourceCacheManager.getInstance().peek("avatar_" + player.getUUID().toString().replace("-", ""));
-        if (cachedAvatar != null) {
-            graphics.blit(cachedAvatar, w - 18, 4, 12, 12, 0, 0, 64, 64, 64, 64);
-        }
-
-        graphics.drawString(mc.font, AquaFontRenderer.header("Погружение"), 8, 6, UiDraw.COLOR_ACCENT, false);
-        graphics.fill(8, 18, w - 8, 19, 0x443A7892);
+        graphics.drawString(mc.font, AquaFontRenderer.header("Погружение"), 8, immersionY + 6, UiDraw.COLOR_ACCENT, false);
+        graphics.fill(8, immersionY + 18, w - 8, immersionY + 19, 0x443A7892);
 
         String depthStr = inWater ? depth + " м" : "поверхность";
-        drawRightValue(graphics, 0, 24, w, "Глубина", depthStr, UiDraw.COLOR_TEXT);
+        drawRightValue(graphics, 0, immersionY + 23, w, "Глубина", depthStr, UiDraw.COLOR_TEXT);
 
-        int y = 35;
+        int curY = immersionY + 34;
         if (showPressure) {
             String pressureValue;
             int color;
@@ -83,25 +118,32 @@ public final class OceanHudOverlay {
                 pressureValue = pressure + " (" + pressureLabel(pressure) + ")";
                 color = pressureColor(pressure);
             }
-            drawRightValue(graphics, 0, y, w, "Давление", pressureValue, color);
-            y += 11;
+            drawRightValue(graphics, 0, curY, w, "Давление", pressureValue, color);
+            curY += 11;
             String reserve = inWater ? ("запас " + tolerance + " м") : "—";
-            drawRightValue(graphics, 0, y, w, "Защита", reserve, UiDraw.COLOR_MUTED);
-            y += 11;
+            drawRightValue(graphics, 0, curY, w, "Защита", reserve, UiDraw.COLOR_MUTED);
+            curY += 11;
         }
 
         int maxAir = Math.max(1, player.getMaxAirSupply());
         int airPercent = Math.max(0, Math.min(100, player.getAirSupply() * 100 / maxAir));
-        drawRightValue(graphics, 0, y, w, "Кислород", airPercent + "%", airColor(airPercent));
+        drawRightValue(graphics, 0, curY, w, "Кислород", airPercent + "%", airColor(airPercent));
 
         int barLeft = 8;
         int barRight = w - 8;
-        int barY = y + 11;
+        int barY = curY + 10;
         graphics.fill(barLeft, barY, barRight, barY + 3, 0x55234350);
         int airRight = barLeft + (barRight - barLeft) * airPercent / 100;
         graphics.fill(barLeft, barY, airRight, barY + 3, airColor(airPercent));
 
         graphics.pose().popPose();
+    }
+
+    private static void drawStatRow(GuiGraphics graphics, int panelX, int y, int panelWidth, String label, String value, int valueColor) {
+        Minecraft mc = Minecraft.getInstance();
+        AquaFontRenderer.draw(graphics, mc.font, label, panelX + 8, y, UiDraw.COLOR_MUTED);
+        String fitted = AquaFontRenderer.fit(mc.font, value, 60);
+        AquaFontRenderer.draw(graphics, mc.font, fitted, panelX + panelWidth - 8 - AquaFontRenderer.width(mc.font, fitted), y, valueColor);
     }
 
     private static void drawRightValue(

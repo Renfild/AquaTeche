@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.client.gui.AquaWebScreen;
+import net.aquatech.ui.client.gui.OceanSkillTreeScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.sounds.SoundEvents;
@@ -19,7 +20,6 @@ public final class AquaWebIpcDispatcher {
 
     /**
      * Processes an incoming raw JSON string sent from the embedded CEF web page.
-     * Example format: {"action": "BUY_ITEM", "payload": {"id": "vip_group", "cost": 150}}
      */
     public static void dispatch(String rawJson) {
         if (rawJson == null || rawJson.isBlank()) return;
@@ -29,7 +29,9 @@ public final class AquaWebIpcDispatcher {
             if (!root.has("action")) return;
 
             String action = root.get("action").getAsString();
-            JsonObject payload = root.has("payload") ? root.getAsJsonObject("payload") : new JsonObject();
+            JsonObject payload = root.has("payload") && root.get("payload").isJsonObject()
+                    ? root.getAsJsonObject("payload")
+                    : new JsonObject();
 
             Minecraft mc = Minecraft.getInstance();
 
@@ -45,12 +47,18 @@ public final class AquaWebIpcDispatcher {
                     );
                 });
                 case "TELEPORT_WARP" -> mc.execute(() -> {
-                    if (mc.player != null && payload.has("warp")) {
-                        String warpName = payload.get("warp").getAsString();
-                        mc.player.connection.sendUnsignedCommand("warp " + warpName);
+                    mc.setScreen(null);
+                    if (mc.player != null) {
+                        String warp = root.has("warp") ? root.get("warp").getAsString() : payload.has("warp") ? payload.get("warp").getAsString() : "";
+                        if (warp.isBlank()) {
+                            mc.player.connection.sendUnsignedCommand("warp");
+                        } else {
+                            mc.player.connection.sendUnsignedCommand("warp " + warp);
+                        }
                     }
                 });
                 case "TELEPORT_SPAWN" -> mc.execute(() -> {
+                    mc.setScreen(null);
                     if (mc.player != null) {
                         mc.player.connection.sendUnsignedCommand("spawn");
                     }
@@ -62,17 +70,19 @@ public final class AquaWebIpcDispatcher {
                     } else if ("cabinet".equalsIgnoreCase(to)) {
                         AquaWebScreen.openEmbed("Кабинет", "cabinet");
                     } else if ("skills".equalsIgnoreCase(to)) {
-                        AquaWebScreen.openEmbed("Навыки", "skills");
+                        mc.setScreen(new OceanSkillTreeScreen());
                     } else if ("menu".equalsIgnoreCase(to)) {
                         AquaWebScreen.openEmbed("Меню", "menu");
                     }
                 });
                 case "OPEN_CASES" -> mc.execute(() -> {
+                    mc.setScreen(null);
                     if (mc.player != null) {
                         mc.player.connection.sendUnsignedCommand("cases");
                     }
                 });
                 case "OPEN_QUESTS" -> mc.execute(() -> {
+                    mc.setScreen(null);
                     try {
                         Class<?> clazz = Class.forName("dev.ftb.mods.ftbquests.client.ClientQuestFile");
                         Object instance = clazz.getField("INSTANCE").get(null);
@@ -106,13 +116,13 @@ public final class AquaWebIpcDispatcher {
                     }
                 });
                 case "EXEC_COMMAND" -> mc.execute(() -> {
+                    mc.setScreen(null);
                     String cmd = root.has("cmd") ? root.get("cmd").getAsString() : payload.has("cmd") ? payload.get("cmd").getAsString() : "";
                     if (mc.player != null && !cmd.isBlank()) {
                         mc.player.connection.sendUnsignedCommand(cmd.startsWith("/") ? cmd.substring(1) : cmd);
                     }
                 });
                 default -> {
-                    // Custom action handler
                 }
             }
         } catch (Exception e) {

@@ -15,7 +15,7 @@
       padding: 0;
     }
     body {
-      background: rgba(3, 8, 15, 0.65);
+      background: rgba(3, 8, 15, 0.45);
       color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
       width: 100vw;
@@ -27,34 +27,34 @@
     }
 
     .menu-modal-card {
-      width: 480px;
-      background: rgba(10, 24, 38, 0.92);
+      width: 500px;
+      background: rgba(10, 24, 38, 0.94);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(0, 229, 255, 0.25);
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 229, 255, 0.15);
-      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 229, 255, 0.2);
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes modalPop {
-      from { opacity: 0; transform: scale(0.92) translateY(10px); }
+      from { opacity: 0; transform: scale(0.94) translateY(12px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .menu-header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .menu-title {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 800;
       color: #00e5ff;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      text-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+      text-shadow: 0 0 16px rgba(0, 229, 255, 0.5);
       margin-bottom: 4px;
     }
 
@@ -71,19 +71,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(5, 14, 24, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 10px 14px;
-      margin-bottom: 20px;
+      background: rgba(5, 14, 24, 0.75);
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 22px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
     .profile-card:hover {
       border-color: #00e5ff;
-      background: rgba(8, 20, 34, 0.9);
-      box-shadow: 0 0 16px rgba(0, 229, 255, 0.2);
+      background: rgba(8, 20, 34, 0.95);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
     }
 
     .profile-left {
@@ -93,50 +93,50 @@
     }
 
     .player-head-img {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       border: 1px solid #00e5ff;
     }
 
     .player-nick {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       color: #fff;
     }
 
     .player-balance {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: #00e5ff;
-      background: rgba(0, 229, 255, 0.1);
-      border: 1px solid rgba(0, 229, 255, 0.3);
-      border-radius: 6px;
-      padding: 4px 10px;
+      background: rgba(0, 229, 255, 0.12);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 8px;
+      padding: 6px 12px;
     }
 
     /* Buttons Grid */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 18px;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
     .menu-btn {
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(8, 19, 31, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 14px 16px;
-      font-size: 14px;
+      gap: 12px;
+      background: rgba(8, 19, 31, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 15px 18px;
+      font-size: 15px;
       font-weight: 700;
       color: #e2e8f0;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .menu-btn:hover {
@@ -144,35 +144,43 @@
       border-color: #00e5ff;
       background: rgba(12, 28, 46, 0.95);
       color: #00e5ff;
-      box-shadow: 0 8px 20px rgba(0, 229, 255, 0.15);
+      box-shadow: 0 8px 20px rgba(0, 229, 255, 0.2);
+    }
+
+    .menu-btn:active {
+      transform: translateY(0px) scale(0.98);
     }
 
     .btn-icon {
-      font-size: 18px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .menu-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 11px;
-      color: #475569;
+      font-size: 12px;
+      color: #64748b;
       padding: 0 4px;
     }
 
     .btn-close {
       background: none;
       border: none;
-      color: #64748b;
+      color: #94a3b8;
       cursor: pointer;
       font-weight: 600;
+      font-size: 12px;
       transition: color 0.2s;
     }
     .btn-close:hover { color: #ef4444; }
   </style>
 </head>
-<body>
-  <div class="menu-modal-card">
+<body onclick="handleBackdropClick(event)">
+  <div class="menu-modal-card" onclick="event.stopPropagation()">
     <div class="menu-header">
       <h2 class="menu-title">AquaTech</h2>
       <div class="menu-subtitle">Системный Терминал · Меню Сервера</div>
@@ -230,7 +238,7 @@
 
     <div class="menu-footer">
       <span>ESC для закрытия</span>
-      <button type="button" class="btn-close" onclick="ipcSend({action:'CLOSE_GUI'})">Закрыть</button>
+      <button type="button" class="btn-close" onclick="ipcSend({action:'CLOSE_GUI'})">Закрыть ✕</button>
     </div>
   </div>
 
@@ -256,6 +264,10 @@
       } else {
         location.hash = 'aqipc=' + encodeURIComponent(JSON.stringify(payload));
       }
+    }
+
+    function handleBackdropClick(e) {
+      ipcSend({ action: 'CLOSE_GUI' });
     }
 
     window.addEventListener('keydown', e => {

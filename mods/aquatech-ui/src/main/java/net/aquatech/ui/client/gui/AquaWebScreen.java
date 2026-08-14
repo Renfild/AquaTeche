@@ -1,36 +1,28 @@
 package net.aquatech.ui.client.gui;
 
 import net.aquatech.ui.client.ClientUiState;
-import net.aquatech.ui.client.gui.widget.AquaButton;
-import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.client.web.AquaWebBridge;
 import net.aquatech.ui.client.web.AquaWebIpcDispatcher;
 import net.aquatech.ui.common.ModClientConfig;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 
-import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Modern borderless embedded Web Screen.
+ * Renders transparent HTML modal UI cleanly over Minecraft with no clunky window chrome.
+ */
 public class AquaWebScreen extends AquaBlurredScreen {
 
     private final String targetUrl;
     private final Component pageTitle;
     private AquaWebBridge bridge;
-    private int frameX;
-    private int frameY;
-    private int frameW;
-    private int frameH;
-    private int contentX;
-    private int contentY;
-    private int contentW;
-    private int contentH;
 
     public AquaWebScreen(Component title, String targetUrl) {
         super(title);
@@ -54,38 +46,21 @@ public class AquaWebScreen extends AquaBlurredScreen {
         mc.setScreen(new AquaWebScreen(Component.literal(title), url));
     }
 
-    private void layoutFrame() {
-        frameW = Math.min(960, width - 24);
-        frameH = Math.min(600, height - 32);
-        frameX = (width - frameW) / 2;
-        frameY = (height - frameH) / 2;
-        contentX = frameX + 2;
-        contentY = frameY + 32;
-        contentW = frameW - 4;
-        contentH = frameH - 34;
-    }
-
     @Override
     protected void init() {
         super.init();
-        layoutFrame();
         double scale = minecraft.getWindow().getGuiScale();
-        this.bridge = AquaWebBridge.getOrCreate(targetUrl, (int) (contentW * scale), (int) (contentH * scale));
-
-        addRenderableWidget(new AquaButton(
-                frameX + frameW - 32, frameY + 5, 24, 22,
-                Component.literal("X"),
-                this::onClose
-        ));
+        int pw = Math.max(64, (int) (width * scale));
+        int ph = Math.max(64, (int) (height * scale));
+        this.bridge = AquaWebBridge.getOrCreate(targetUrl, pw, ph);
     }
 
     @Override
     public void resize(Minecraft minecraft, int width, int height) {
         super.resize(minecraft, width, height);
-        layoutFrame();
         if (bridge != null) {
             double scale = minecraft.getWindow().getGuiScale();
-            bridge.resize((int) (contentW * scale), (int) (contentH * scale));
+            bridge.resize((int) (width * scale), (int) (height * scale));
         }
     }
 
@@ -100,39 +75,27 @@ public class AquaWebScreen extends AquaBlurredScreen {
         }
     }
 
-    private boolean inContent(double mouseX, double mouseY) {
-        return mouseX >= contentX && mouseX < contentX + contentW
-                && mouseY >= contentY && mouseY < contentY + contentH;
-    }
-
     private int cefX(double mouseX) {
-        return (int) ((mouseX - contentX) * minecraft.getWindow().getGuiScale());
+        return (int) (mouseX * minecraft.getWindow().getGuiScale());
     }
 
     private int cefY(double mouseY) {
-        return (int) ((mouseY - contentY) * minecraft.getWindow().getGuiScale());
+        return (int) (mouseY * minecraft.getWindow().getGuiScale());
     }
 
     @Override
     protected void renderScreenContent(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
-        layoutFrame();
-        AquaGlassPanel.draw(g, frameX, frameY, frameW, frameH, COLOR_GLASS_PANEL, COLOR_CYAN_ACCENT, 4, true);
-        g.fill(frameX + 1, frameY + 1, frameX + frameW - 1, frameY + 31, 0xFF0D2136);
-        UiDraw.border(g, frameX, frameY, frameW, 31, COLOR_BORDER_MUTED);
-
-        g.drawString(font, AquaFontRenderer.withMain(pageTitle), frameX + 14, frameY + 11, COLOR_CYAN_ACCENT, false);
-
         if (bridge != null && bridge.isAvailable()) {
-            bridge.blit(contentX, contentY, contentW, contentH);
+            bridge.blit(0, 0, width, height);
         } else {
-            AquaFontRenderer.drawCentered(g, font, "Chromium ещё не готов", frameX + frameW / 2, frameY + frameH / 2 - 10, COLOR_CYAN_ACCENT);
-            AquaFontRenderer.drawCentered(g, font, "Нажми «В браузере» или подожди загрузку MCEF", frameX + frameW / 2, frameY + frameH / 2 + 6, COLOR_TEXT_MUTED);
+            AquaFontRenderer.drawCentered(g, font, "Загрузка интерфейса…", width / 2, height / 2 - 10, UiDraw.COLOR_PRIMARY);
+            AquaFontRenderer.drawCentered(g, font, "Пожалуйста, подождите", width / 2, height / 2 + 6, UiDraw.COLOR_MUTED);
         }
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (bridge != null && bridge.isAvailable() && inContent(mouseX, mouseY)) {
+        if (bridge != null && bridge.isAvailable()) {
             bridge.sendMousePress(cefX(mouseX), cefY(mouseY), button);
             return true;
         }
@@ -141,7 +104,7 @@ public class AquaWebScreen extends AquaBlurredScreen {
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        if (bridge != null && bridge.isAvailable() && inContent(mouseX, mouseY)) {
+        if (bridge != null && bridge.isAvailable()) {
             bridge.sendMouseRelease(cefX(mouseX), cefY(mouseY), button);
             return true;
         }
@@ -150,7 +113,7 @@ public class AquaWebScreen extends AquaBlurredScreen {
 
     @Override
     public void mouseMoved(double mouseX, double mouseY) {
-        if (bridge != null && bridge.isAvailable() && inContent(mouseX, mouseY)) {
+        if (bridge != null && bridge.isAvailable()) {
             bridge.sendMouseMove(cefX(mouseX), cefY(mouseY));
         }
         super.mouseMoved(mouseX, mouseY);
@@ -158,7 +121,7 @@ public class AquaWebScreen extends AquaBlurredScreen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        if (bridge != null && bridge.isAvailable() && inContent(mouseX, mouseY)) {
+        if (bridge != null && bridge.isAvailable()) {
             bridge.sendMouseWheel(cefX(mouseX), cefY(mouseY), delta);
             return true;
         }
@@ -168,7 +131,8 @@ public class AquaWebScreen extends AquaBlurredScreen {
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
-            return super.keyPressed(keyCode, scanCode, modifiers);
+            onClose();
+            return true;
         }
         if (bridge != null && bridge.isAvailable()) {
             bridge.sendKeyPress(keyCode, scanCode, modifiers);

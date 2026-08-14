@@ -364,32 +364,38 @@ public class OceanSkillTreeScreen extends AquaBlurredScreen {
     }
 
     private void renderHudHeader(GuiGraphics g, int mainWidth) {
-        int w = Math.min(420, mainWidth - 40);
-        int h = 40;
+        int w = Math.min(520, mainWidth - 40);
+        int h = 48;
         int x = (mainWidth - w) / 2;
         int y = 10;
 
-        AquaGlassPanel.draw(g, x, y, w, h, AquaGlassPanel.FILL, AquaGlassPanel.BORDER, 5, false);
-        AquaFontRenderer.drawCenteredHeader(g, font, "Созвездия океана", x + w / 2, y + 5, 0xFF5CE1FF);
+        AquaGlassPanel.draw(g, x, y, w, h, AquaGlassPanel.FILL, AquaGlassPanel.BORDER, 6, false);
+        AquaFontRenderer.drawCenteredHeader(g, font, "Созвездия Океана", x + w / 2, y + 6, 0xFF00E5FF);
 
         String lvlText = "Уровень " + levelCache;
-        AquaFontRenderer.draw(g, font, lvlText, x + 16, y + 24, 0xFFFFFFFF);
+        AquaFontRenderer.draw(g, font, lvlText, x + 16, y + 26, 0xFFFFFFFF);
 
-        int xpBarX = x + 120;
-        int xpBarW = w - 240;
+        int xpBarX = x + 105;
+        int xpBarW = w - 230;
         int xpBarY = y + 26;
-        int xpBarH = 10;
+        int xpBarH = 12;
 
-        int curXp = aquaXpCache - minXpCache;
+        int curXp = Math.max(0, aquaXpCache - minXpCache);
         int reqXp = Math.max(1, maxXpCache - minXpCache);
         float progress = Math.max(0.0f, Math.min(1.0f, (float) curXp / reqXp));
 
-        g.fill(xpBarX, xpBarY, xpBarX + xpBarW, xpBarY + xpBarH, 0xFF0F172A);
-        g.fill(xpBarX, xpBarY, xpBarX + (int) (xpBarW * progress), xpBarY + xpBarH, PANEL_BORDER);
+        g.fill(xpBarX, xpBarY, xpBarX + xpBarW, xpBarY + xpBarH, 0xFF0A1320);
+        int fillW = (int) (xpBarW * progress);
+        if (fillW > 0) {
+            g.fill(xpBarX, xpBarY, xpBarX + fillW, xpBarY + xpBarH, 0xFF00E5FF);
+        }
         UiDraw.border(g, xpBarX, xpBarY, xpBarW, xpBarH, 0xFF1E293B);
 
-        String ptsText = "Очки: " + skillPointsCache;
-        AquaFontRenderer.draw(g, font, ptsText, x + w - AquaFontRenderer.width(font, ptsText) - 16, y + 24, 0xFFFFD700);
+        String xpText = curXp + " / " + reqXp + " XP";
+        AquaFontRenderer.drawCentered(g, font, xpText, xpBarX + xpBarW / 2, xpBarY + 2, 0xFFF1F5F9);
+
+        String ptsText = "★ Очки: " + skillPointsCache;
+        AquaFontRenderer.draw(g, font, ptsText, x + w - AquaFontRenderer.width(font, ptsText) - 16, y + 26, 0xFFFFD700);
     }
 
     private void renderDetailSidebar(GuiGraphics g) {

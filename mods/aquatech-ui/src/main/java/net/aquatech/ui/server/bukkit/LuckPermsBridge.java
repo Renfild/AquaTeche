@@ -1,5 +1,6 @@
 package net.aquatech.ui.server.bukkit;
 
+import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.capability.AquaSkillCapability;
 import net.aquatech.ui.common.ModConfig;
 import net.aquatech.ui.common.PlayerProfile;
@@ -25,9 +26,9 @@ public final class LuckPermsBridge {
 
     private static boolean reflectReady;
     private static boolean reflectFailed;
+    private static ClassLoader cachedLpLoader;
     private static Method lpProviderGet;
     private static Method queryNonContextual;
-    private static Method legacySerializerDeserialize;
     private static Method latencyMethod;
     private static Field latencyField;
     private static boolean latencyResolved;
@@ -127,7 +128,7 @@ public final class LuckPermsBridge {
             int weight = weightFor(group);
             boolean staff = weight >= weightFor("mod")
                     || "owner".equals(group) || "admin".equals(group)
-                    || "mod".equals(group) || "developer".equals(group)
+                    || "mod".equals(group) || "developer".equals(group) || "dev".equals(group)
                     || "staff".equals(group) || "helper".equals(group);
             return new RankInfo(group, display, weight, staff);
         } catch (Throwable t) {
@@ -136,7 +137,6 @@ public final class LuckPermsBridge {
     }
 
     private static RankInfo fromHorizon(ServerPlayer player) {
-        // LazyOptional.map() NPE's if the mapper returns null — never return null from map().
         return player.getCapability(AquaSkillCapability.INSTANCE)
                 .filter(cap -> cap.getHorizonTier() > 0)
                 .map(cap -> {
@@ -156,12 +156,29 @@ public final class LuckPermsBridge {
         return new RankInfo("default", "Игрок", weightFor("default"), false);
     }
 
+    private static ClassLoader resolveLpClassLoader() {
+        if (cachedLpLoader != null) return cachedLpLoader;
+        try {
+            Class<?> bukkitClass = Class.forName("org.bukkit.Bukkit");
+            Object pm = bukkitClass.getMethod("getPluginManager").invoke(null);
+            Object plugin = pm.getClass().getMethod("getPlugin", String.class).invoke(pm, "LuckPerms");
+            if (plugin != null) {
+                cachedLpLoader = plugin.getClass().getClassLoader();
+                return cachedLpLoader;
+            }
+        } catch (Throwable ignored) {
+        }
+        cachedLpLoader = LuckPermsBridge.class.getClassLoader();
+        return cachedLpLoader;
+    }
+
     private static RankInfo tryLuckPerms(ServerPlayer player) {
         try {
             if (!ensureReflect()) return null;
             Object api = lpProviderGet.invoke(null);
             if (api == null) return null;
 
+            ClassLoader cl = resolveLpClassLoader();
             Object userManager = api.getClass().getMethod("getUserManager").invoke(api);
             Object user = userManager.getClass().getMethod("getUser", UUID.class)
                     .invoke(userManager, player.getUUID());
@@ -173,7 +190,7 @@ public final class LuckPermsBridge {
 
             String display = primary;
             Object cachedData = user.getClass().getMethod("getCachedData").invoke(user);
-            Class<?> queryClass = Class.forName("net.luckperms.api.query.QueryOptions");
+            Class<?> queryClass = Class.forName("net.luckperms.api.query.QueryOptions", true, cl);
             Object queryOpts = queryNonContextual.invoke(null);
             Object metaData = cachedData.getClass()
                     .getMethod("getMetaData", queryClass)
@@ -207,15 +224,7 @@ public final class LuckPermsBridge {
             if (display.isBlank()) display = pretty(primary);
 
             int weight = weightFor(primary);
-            // Also consider highest weighted inherited group
-            try {
-                @SuppressWarnings("unchecked")
-                java.util.Collection<String> groups = (java.util.Collection<String>)
-                        user.getClass().getMethod("getInheritedGroups", queryOpts.getClass())
-                                .invoke(user, queryOpts);
-                // getInheritedGroups returns Collection<Group> in LP API
-            } catch (Throwable ignored) {
-            }
+            // Also inspect node weights
             try {
                 Object nodes = user.getClass().getMethod("getNodes").invoke(user);
                 if (nodes instanceof Iterable<?> it) {
@@ -226,7 +235,6 @@ public final class LuckPermsBridge {
                             int w = weightFor(g);
                             if (w > weight) {
                                 weight = w;
-                                // Keep primary id for color, but bump weight for sort
                             }
                         }
                     }
@@ -236,11 +244,12 @@ public final class LuckPermsBridge {
 
             boolean staff = weight >= weightFor("mod")
                     || "owner".equals(primary) || "admin".equals(primary)
-                    || "mod".equals(primary) || "developer".equals(primary)
+                    || "mod".equals(primary) || "developer".equals(primary) || "dev".equals(primary)
                     || "moderator".equals(primary);
 
             return new RankInfo(primary, display, weight, staff);
         } catch (Throwable t) {
+            AquaTechUI.LOGGER.debug("LuckPerms resolve error: {}", t.toString());
             return null;
         }
     }
@@ -249,16 +258,11 @@ public final class LuckPermsBridge {
         if (reflectReady) return true;
         if (reflectFailed) return false;
         try {
-            Class<?> provider = Class.forName("net.luckperms.api.LuckPermsProvider");
+            ClassLoader cl = resolveLpClassLoader();
+            Class<?> provider = Class.forName("net.luckperms.api.LuckPermsProvider", true, cl);
             lpProviderGet = provider.getMethod("get");
-            Class<?> query = Class.forName("net.luckperms.api.query.QueryOptions");
+            Class<?> query = Class.forName("net.luckperms.api.query.QueryOptions", true, cl);
             queryNonContextual = query.getMethod("nonContextual");
-            try {
-                Class<?> legacy = Class.forName("net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer");
-                Object serializer = legacy.getMethod("legacySection").invoke(null);
-                legacySerializerDeserialize = serializer.getClass().getMethod("deserialize", String.class);
-            } catch (Throwable ignored) {
-            }
             reflectReady = true;
             return true;
         } catch (Throwable t) {
@@ -288,72 +292,61 @@ public final class LuckPermsBridge {
         return Character.toUpperCase(id.charAt(0)) + id.substring(1);
     }
 
-    private static String stripAdventure(String s) {
-        return preserveGlyphsStripJunk(s);
-    }
-
     private static String stripCodes(String s) {
         return preserveGlyphsStripJunk(s);
     }
 
-    /**
-     * Strip Mojang/legacy color codes and MiniMessage tags, but keep Oraxen PUA glyphs (U+E000–U+F8FF).
-     */
-    private static String preserveGlyphsStripJunk(String s) {
-        if (s == null) return "";
-        StringBuilder keptGlyphs = new StringBuilder();
-        StringBuilder rest = new StringBuilder();
-        s.codePoints().forEach(cp -> {
-            if (cp >= 0xE000 && cp <= 0xF8FF) {
-                keptGlyphs.appendCodePoint(cp);
-            } else {
-                rest.appendCodePoint(cp);
-            }
-        });
-        String text = rest.toString();
-        text = text.replaceAll("(?i)[§&][0-9A-FK-OR]", "");
-        // Remove mini-message / glyph tags but we already extracted PUA chars
-        text = text.replaceAll("<[^>]+>", "");
-        text = text.trim();
-        if (keptGlyphs.length() > 0) {
-            return text.isEmpty() ? keptGlyphs + " " : keptGlyphs + " " + text;
-        }
-        return text;
+    public static String preserveGlyphsStripJunk(String s) {
+        if (s == null || s.isBlank()) return "";
+        // Strip legacy Minecraft formatting (&a, §e, etc.) and tags (<red>, </blue>)
+        String clean = s.replaceAll("[§&][0-9a-fk-orA-FK-OR]", "")
+                        .replaceAll("<[^>]*>", "")
+                        .replace("[", "").replace("]", "")
+                        .trim();
+        return clean.isBlank() ? s.trim() : clean;
     }
 
     private static int readLatency(ServerPlayer player) {
+        if (player == null) return 0;
         try {
-            resolveLatencyAccess(player);
+            ServerGamePacketListenerImpl connection = player.connection;
+            if (connection == null) return 0;
+            if (!latencyResolved) {
+                resolveLatencyAccess(connection.getClass());
+            }
             if (latencyMethod != null) {
-                Object v = latencyMethod.invoke(player.connection);
-                if (v instanceof Integer i) return i;
+                return (int) latencyMethod.invoke(connection);
             }
             if (latencyField != null) {
-                return latencyField.getInt(player.connection);
+                return latencyField.getInt(connection);
             }
         } catch (Throwable ignored) {
         }
         return 0;
     }
 
-    private static void resolveLatencyAccess(ServerPlayer player) {
-        if (latencyResolved) return;
+    private static void resolveLatencyAccess(Class<?> listenerClass) {
         latencyResolved = true;
-        ServerGamePacketListenerImpl conn = player.connection;
-        try {
-            latencyMethod = conn.getClass().getMethod("getLatency");
-            return;
-        } catch (NoSuchMethodException ignored) {
-        }
-        Class<?> c = conn.getClass();
-        while (c != null) {
+        for (String name : new String[]{"latency", "getLatency", "ping", "getPing", "m_9780_"}) {
             try {
-                Field f = c.getDeclaredField("latency");
-                f.setAccessible(true);
-                latencyField = f;
-                return;
-            } catch (NoSuchFieldException e) {
-                c = c.getSuperclass();
+                Method m = listenerClass.getMethod(name);
+                if (m.getReturnType() == int.class) {
+                    m.setAccessible(true);
+                    latencyMethod = m;
+                    return;
+                }
+            } catch (NoSuchMethodException ignored) {
+            }
+        }
+        for (String name : new String[]{"latency", "ping", "f_9780_"}) {
+            try {
+                Field f = listenerClass.getDeclaredField(name);
+                if (f.getType() == int.class) {
+                    f.setAccessible(true);
+                    latencyField = f;
+                    return;
+                }
+            } catch (NoSuchFieldException ignored) {
             }
         }
     }

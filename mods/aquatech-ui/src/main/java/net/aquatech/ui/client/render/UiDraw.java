@@ -131,10 +131,13 @@ public final class UiDraw {
     }
 
     public static int rankColor(String rankId) {
-        return switch (rankId) {
+        if (rankId == null) return 0xFF3B82F6;
+        String id = rankId.toLowerCase(java.util.Locale.ROOT);
+        return switch (id) {
             case "owner" -> 0xFFFBBF24;
             case "admin", "dev", "developer" -> 0xFFEF4444;
             case "mod", "moderator" -> 0xFFF97316;
+            case "ultimate" -> 0xFF00E5FF;
             case "admiral" -> 0xFF8B5CF6;
             case "legend" -> 0xFFE879F9;
             case "captain" -> 0xFF38BDF8;
