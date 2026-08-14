@@ -1,0 +1,120 @@
+/**
+ * AquaTech Design System — Bioluminescent Deep Ocean Liquid Glass
+ * Premium Gaming Portal Tokens (Forge 1.20.1)
+ */
+:root {
+  /* Color Palette — Deep Ocean & Bioluminescence */
+  --color-void: #050B14;
+  --color-void-deep: #03070D;
+  --color-abyss-navy: #07101E;
+  --color-abyss-surface: #0A1628;
+  --color-abyss-surface-2: #0F213A;
+
+  /* Accent & Glow */
+  --color-cyan: #5CE1FF;
+  --color-cyan-glow: rgba(92, 225, 255, 0.4);
+  --color-cyan-light: #A5F3FC;
+  --color-cyan-dim: #0284C7;
+  --color-cyan-muted: rgba(92, 225, 255, 0.15);
+
+  --color-emerald: #10B981;
+  --color-emerald-glow: rgba(16, 185, 129, 0.4);
+  --color-gold: #F59E0B;
+  --color-gold-glow: rgba(245, 158, 11, 0.4);
+  --color-ruby: #F43F5E;
+  --color-purple-abyss: #8B5CF6;
+
+  /* Typography Colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-cyan: #7DD3FC;
+  --text-gold: #FDE047;
+
+  /* Liquid Glass Surfaces */
+  --glass-bg: rgba(10, 22, 40, 0.65);
+  --glass-bg-subtle: rgba(15, 33, 58, 0.45);
+  --glass-bg-hover: rgba(14, 116, 144, 0.25);
+  --glass-bg-active: rgba(14, 116, 144, 0.4);
+
+  --glass-border: rgba(92, 225, 255, 0.2);
+  --glass-border-hover: rgba(92, 225, 255, 0.75);
+  --glass-border-active: #5CE1FF;
+  --glass-highlight: rgba(255, 255, 255, 0.12);
+
+  /* Shadows & Neon Radiance */
+  --shadow-glass: 0 16px 36px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 var(--glass-highlight);
+  --shadow-glass-hover: 0 20px 48px -6px rgba(0, 0, 0, 0.7), 0 0 24px var(--color-cyan-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  --shadow-glow-cyan: 0 0 20px var(--color-cyan-glow);
+  --shadow-glow-emerald: 0 0 16px var(--color-emerald-glow);
+  --shadow-glow-gold: 0 0 18px var(--color-gold-glow);
+
+  /* Typography Families */
+  --font-heading: 'Syne', 'Outfit', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Corner Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Universal Glass Utility Classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  pointer-events: none;
+}
+
+.glass-card-interactive {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glass);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.glass-card-interactive:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glass-hover);
+}
+
+.glow-text-cyan {
+  color: var(--color-cyan);
+  text-shadow: 0 0 12px var(--color-cyan-glow);
+}
+
+.glow-text-gold {
+  color: var(--color-gold);
+  text-shadow: 0 0 12px var(--color-gold-glow);
+}
