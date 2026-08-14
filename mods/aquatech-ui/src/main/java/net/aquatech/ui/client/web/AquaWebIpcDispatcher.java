@@ -61,6 +61,10 @@ public final class AquaWebIpcDispatcher {
                         AquaWebScreen.openEmbed("Донат", "donate");
                     } else if ("cabinet".equalsIgnoreCase(to)) {
                         AquaWebScreen.openEmbed("Кабинет", "cabinet");
+                    } else if ("skills".equalsIgnoreCase(to)) {
+                        AquaWebScreen.openEmbed("Навыки", "skills");
+                    } else if ("menu".equalsIgnoreCase(to)) {
+                        AquaWebScreen.openEmbed("Меню", "menu");
                     }
                 });
                 case "OPEN_CASES" -> mc.execute(() -> {

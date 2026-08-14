@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Древо Навыков · AquaTech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: radial-gradient(circle at 50% 30%, #0c2035 0%, #050d18 100%);
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Bar */
+    .skills-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px;
+      background: rgba(10, 22, 34, 0.7);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+      z-index: 10;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .skills-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #00e5ff;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+    }
+
+    .points-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid #00e5ff;
+      border-radius: 100px;
+      padding: 4px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #00e5ff;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-skill-action {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-skill-action:hover {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: #00e5ff;
+      color: #fff;
+    }
+
+    .btn-close-tree {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      color: #fff;
+    }
+
+    /* Main Interactive Tree Area */
+    .skills-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+    }
+    .skills-viewport:active {
+      cursor: grabbing;
+    }
+
+    #constellation-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .nodes-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2400px;
+      height: 2400px;
+      transform-origin: 0 0;
+    }
+
+    .skill-node {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      background: #081320;
+      border: 2px solid #334155;
+      color: #94a3b8;
+    }
+
+    .skill-node:hover {
+      transform: scale(1.18);
+      z-index: 5;
+    }
+
+    .node-small {
+      width: 38px;
+      height: 38px;
+      font-size: 14px;
+    }
+
+    .node-notable {
+      width: 52px;
+      height: 52px;
+      border-width: 3px;
+      font-size: 18px;
+    }
+
+    .node-keystone {
+      width: 68px;
+      height: 68px;
+      border-width: 3px;
+      font-size: 24px;
+      box-shadow: 0 0 24px rgba(0, 229, 255, 0.3);
+    }
+
+    .node-learned {
+      border-color: #00e5ff !important;
+      background: #0d2946 !important;
+      color: #fff !important;
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.5) !important;
+    }
+
+    .node-available {
+      border-color: #10b981 !important;
+      color: #10b981 !important;
+      animation: pulseNode 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseNode {
+      0%, 100% { box-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.7); }
+    }
+
+    /* Tooltip */
+    .skill-tooltip {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      width: 340px;
+      background: rgba(8, 18, 30, 0.94);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+      z-index: 20;
+      transition: opacity 0.2s ease;
+    }
+
+    .tooltip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .tooltip-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .tooltip-cost {
+      font-size: 12px;
+      font-weight: 700;
+      color: #00e5ff;
+      background: rgba(0, 229, 255, 0.12);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .tooltip-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    .tooltip-status {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <header class="skills-header">
+    <div class="header-left">
+      <h1 class="skills-title">Созвездия Океана</h1>
+      <div class="points-badge">✦ Очки навыков: <span id="points-val">5</span></div>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="btn-skill-action" onclick="resetView()">Центрировать</button>
+      <button type="button" class="btn-skill-action" onclick="resetSkills()">Сброс навыков</button>
+      <button type="button" class="btn-skill-action btn-close-tree" onclick="window.AquaTechBridge.send(JSON.stringify({action:'CLOSE_GUI'}))">Закрыть (ESC)</button>
+    </div>
+  </header>
+
+  <main class="skills-viewport" id="viewport">
+    <canvas id="constellation-canvas"></canvas>
+    <div class="nodes-container" id="nodes-box"></div>
+  </main>
+
+  <aside class="skill-tooltip" id="tooltip">
+    <div class="tooltip-header">
+      <h4 class="tooltip-title" id="tt-title">Исток Океана</h4>
+      <span class="tooltip-cost" id="tt-cost">0 Очков</span>
+    </div>
+    <p class="tooltip-desc" id="tt-desc">Открывает пять ветвей созвездий глубин.</p>
+    <div class="tooltip-status" id="tt-status" style="color:#10b981">ИЗУЧЕНО</div>
+  </aside>
+
+  <script>
+    const SKILLS = [
+      { id: "origin", x: 1200, y: 1200, type: "keystone", cost: 0, prereq: null, title: "Исток Океана", desc: "Центральный узел. Открывает созвездия глубин.", icon: "⚓" },
+      
+      // Sector 1: Angler (North)
+      { id: "inner_angler", x: 1200, y: 1060, type: "small", cost: 1, prereq: "origin", title: "Школа Рыболова", desc: "Скорость рыбалки +8%.", icon: "🐟" },
+      { id: "rod_speed_1", x: 1200, y: 940, type: "small", cost: 1, prereq: "inner_angler", title: "Ловкие Руки I", desc: "Скорость заброса +8%.", icon: "⚡" },
+      { id: "bait_sense", x: 1120, y: 840, type: "small", cost: 1, prereq: "rod_speed_1", title: "Чутьё Наживки", desc: "Скорость клева +5%.", icon: "🪱" },
+      { id: "double_catch", x: 1280, y: 840, type: "notable", cost: 2, prereq: "rod_speed_1", title: "Двойной Крючок", desc: "Шанс удвоить улов +15%.", icon: "🎣" },
+      { id: "master_angler", x: 1200, y: 700, type: "keystone", cost: 3, prereq: "double_catch", title: "Владыка Удочки", desc: "Все бонусы рыбалки (скорость и улов) +20%.", icon: "👑" },
+
+      // Sector 2: Tech (East)
+      { id: "inner_tech", x: 1340, y: 1200, type: "small", cost: 1, prereq: "origin", title: "Морская Схема", desc: "Выработка FE реактора +8%.", icon: "⚙" },
+      { id: "fe_collector", x: 1460, y: 1200, type: "small", cost: 1, prereq: "inner_tech", title: "Магнитная Индукция", desc: "Выработка FE +8%.", icon: "🔋" },
+      { id: "speed_boost_1", x: 1580, y: 1140, type: "notable", cost: 2, prereq: "fe_collector", title: "Турбо-Привод I", desc: "Скорость машин +10%.", icon: "⚡" },
+      { id: "reactor_master", x: 1720, y: 1200, type: "keystone", cost: 3, prereq: "speed_boost_1", title: "Ядро Бездны", desc: "Выработка энергии +25%, эффективность +20%.", icon: "💠" },
+
+      // Sector 3: Luck (South-East)
+      { id: "inner_luck", x: 1300, y: 1320, type: "small", cost: 1, prereq: "origin", title: "Удача Морей", desc: "Шанс редкого улова +8%.", icon: "🍀" },
+      { id: "rare_find_1", x: 1420, y: 1420, type: "notable", cost: 2, prereq: "inner_luck", title: "Сокровища Глубин", desc: "Шанс найти кейсы и реликвии +15%.", icon: "💎" },
+
+      // Sector 4: Diving (South-West)
+      { id: "inner_diving", x: 1100, y: 1320, type: "small", cost: 1, prereq: "origin", title: "Глубокий Вдох", desc: "Запас воздуха +20 сек.", icon: "🤿" },
+      { id: "swim_speed_1", x: 980, y: 1420, type: "notable", cost: 2, prereq: "inner_diving", title: "Морская Грация", desc: "Скорость плавания +25%.", icon: "🌊" },
+      { id: "abyssal_diver", x: 860, y: 1540, type: "keystone", cost: 3, prereq: "swim_speed_1", title: "Амфибия Бездны", desc: "Бесконечное дыхание под водой и ночное зрение.", icon: "🔱" },
+
+      // Sector 5: Kelp / Organics (West)
+      { id: "inner_kelp", x: 1060, y: 1200, type: "small", cost: 1, prereq: "origin", title: "Органический Исток", desc: "Дроп водорослей и биомассы +25%.", icon: "🌿" }
+    ];
+
+    let learned = new Set(["origin", "inner_angler"]);
+    let availablePoints = 4;
+
+    const viewport = document.getElementById("viewport");
+    const container = document.getElementById("nodes-box");
+    const canvas = document.getElementById("constellation-canvas");
+    const ctx = canvas.getContext("2d");
+
+    let panX = 0, panY = 0;
+    let isDragging = false;
+    let startX, startY;
+
+    function resizeCanvas() {
+      canvas.width = viewport.clientWidth;
+      canvas.height = viewport.clientHeight;
+      drawLines();
+    }
+    window.addEventListener("resize", resizeCanvas);
+
+    function initViewport() {
+      panX = viewport.clientWidth / 2 - 1200;
+      panY = viewport.clientHeight / 2 - 1200;
+      updateTransform();
+    }
+
+    function updateTransform() {
+      container.style.transform = `translate(${panX}px, ${panY}px)`;
+      drawLines();
+    }
+
+    function drawLines() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      SKILLS.forEach(node => {
+        if (!node.prereq) return;
+        const parent = SKILLS.find(s => s.id === node.prereq);
+        if (!parent) return;
+
+        const x1 = parent.x + panX;
+        const y1 = parent.y + panY;
+        const x2 = node.x + panX;
+        const y2 = node.y + panY;
+
+        const isUnlocked = learned.has(node.id) && learned.has(parent.id);
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.lineWidth = isUnlocked ? 3 : 1.5;
+        ctx.strokeStyle = isUnlocked ? "rgba(0, 229, 255, 0.85)" : "rgba(255, 255, 255, 0.12)";
+        if (isUnlocked) {
+          ctx.shadowColor = "#00e5ff";
+          ctx.shadowBlur = 10;
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.stroke();
+      });
+    }
+
+    function renderNodes() {
+      container.innerHTML = "";
+      SKILLS.forEach(skill => {
+        const div = document.createElement("div");
+        div.className = `skill-node node-${skill.type}`;
+        div.style.left = `${skill.x - (skill.type === 'keystone' ? 34 : skill.type === 'notable' ? 26 : 19)}px`;
+        div.style.top = `${skill.y - (skill.type === 'keystone' ? 34 : skill.type === 'notable' ? 26 : 19)}px`;
+        div.innerHTML = `<span>${skill.icon}</span>`;
+
+        const isLearned = learned.has(skill.id);
+        const canLearn = !isLearned && (!skill.prereq || learned.has(skill.prereq)) && availablePoints >= skill.cost;
+
+        if (isLearned) div.classList.add("node-learned");
+        else if (canLearn) div.classList.add("node-available");
+
+        div.addEventListener("mouseenter", () => showTooltip(skill, isLearned, canLearn));
+        div.addEventListener("click", () => learnSkill(skill));
+
+        container.appendChild(div);
+      });
+      document.getElementById("points-val").textContent = availablePoints;
+    }
+
+    function showTooltip(skill, isLearned, canLearn) {
+      document.getElementById("tt-title").textContent = skill.title;
+      document.getElementById("tt-cost").textContent = `${skill.cost} Очк.`;
+      document.getElementById("tt-desc").textContent = skill.desc;
+      const statusEl = document.getElementById("tt-status");
+      if (isLearned) {
+        statusEl.textContent = "ИЗУЧЕНО";
+        statusEl.style.color = "#00e5ff";
+      } else if (canLearn) {
+        statusEl.textContent = "ДОСТУПНО ДЛЯ ИЗУЧЕНИЯ";
+        statusEl.style.color = "#10b981";
+      } else {
+        statusEl.textContent = "ЗАБЛОКИРОВАНО";
+        statusEl.style.color = "#ef4444";
+      }
+    }
+
+    function learnSkill(skill) {
+      if (learned.has(skill.id)) return;
+      if (skill.prereq && !learned.has(skill.prereq)) return;
+      if (availablePoints < skill.cost) return;
+
+      availablePoints -= skill.cost;
+      learned.add(skill.id);
+      renderNodes();
+      drawLines();
+
+      if (window.AquaTechBridge) {
+        window.AquaTechBridge.send(JSON.stringify({ action: "LEARN_SKILL", skillId: skill.id }));
+      }
+    }
+
+    function resetSkills() {
+      learned = new Set(["origin"]);
+      availablePoints = 6;
+      renderNodes();
+      drawLines();
+    }
+
+    function resetView() {
+      initViewport();
+    }
+
+    // Drag / Pan logic
+    viewport.addEventListener("mousedown", e => {
+      isDragging = true;
+      startX = e.clientX - panX;
+      startY = e.clientY - panY;
+    });
+
+    window.addEventListener("mousemove", e => {
+      if (!isDragging) return;
+      panX = e.clientX - startX;
+      panY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
+
+    initViewport();
+    resizeCanvas();
+    renderNodes();
+  </script>
+</body>
+</html>

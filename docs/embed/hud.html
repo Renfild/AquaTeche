@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Island HUD · AquaTech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: transparent;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #f1f5f9;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .island-hud-card {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 250px;
+      background: rgba(10, 22, 34, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(0, 229, 255, 0.22);
+      border-radius: 18px;
+      padding: 16px 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 229, 255, 0.12);
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .hud-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .hud-star {
+      color: #fbbf24;
+      font-size: 20px;
+      filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
+    }
+
+    .hud-title-box h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .hud-title-box span {
+      font-size: 11px;
+      font-weight: 600;
+      color: #10b981;
+    }
+
+    .hud-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(4, 13, 22, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 7px 12px;
+    }
+
+    .metric-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #f59e0b;
+    }
+    .metric-row:nth-child(2) .metric-label { color: #38bdf8; }
+    .metric-row:nth-child(3) .metric-label { color: #a3e635; }
+
+    .metric-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .hud-collections-title {
+      font-size: 10px;
+      font-weight: 800;
+      color: #00e5ff;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .collection-item {
+      margin-bottom: 7px;
+    }
+
+    .collection-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 3px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.6s ease;
+    }
+    .bar-cobalt { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .bar-mithril { background: linear-gradient(90deg, #8b5cf6, #c084fc); }
+    .bar-emerald { background: linear-gradient(90deg, #10b981, #34d399); }
+  </style>
+</head>
+<body>
+  <div class="island-hud-card" id="island-hud">
+    <div class="hud-header">
+      <div class="hud-star">✦</div>
+      <div class="hud-title-box">
+        <h3 id="player-island-name">Остров «Renfild»</h3>
+        <span id="player-island-level">Уровень острова 42</span>
+      </div>
+    </div>
+
+    <div class="hud-metrics">
+      <div class="metric-row">
+        <div class="metric-label">💰 Монеты</div>
+        <div class="metric-value" id="hud-coins">2.4M</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-label">💎 Души</div>
+        <div class="metric-value" id="hud-souls">18 402</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-label">⛏ Руда / чанк</div>
+        <div class="metric-value" id="hud-density">12.8</div>
+      </div>
+    </div>
+
+    <div class="hud-collections-title">Коллекции</div>
+    
+    <div class="collection-item">
+      <div class="collection-header">
+        <span>Кобальт</span>
+        <span>72%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill bar-cobalt" style="width: 72%;"></div>
+      </div>
+    </div>
+
+    <div class="collection-item">
+      <div class="collection-header">
+        <span>Мифрил</span>
+        <span>34%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill bar-mithril" style="width: 34%;"></div>
+      </div>
+    </div>
+
+    <div class="collection-item">
+      <div class="collection-header">
+        <span>Изумруд</span>
+        <span>91%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill bar-emerald" style="width: 91%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const nick = urlParams.get('nick') || 'Renfild';
+    document.getElementById('player-island-name').textContent = `Остров «${nick}»`;
+  </script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Меню Сервера · AquaTech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: rgba(3, 8, 15, 0.65);
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .menu-modal-card {
+      width: 480px;
+      background: rgba(10, 24, 38, 0.92);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 229, 255, 0.15);
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.92) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .menu-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .menu-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #00e5ff;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+      margin-bottom: 4px;
+    }
+
+    .menu-subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Profile Strip */
+    .profile-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5, 14, 24, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .profile-card:hover {
+      border-color: #00e5ff;
+      background: rgba(8, 20, 34, 0.9);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.2);
+    }
+
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .player-head-img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid #00e5ff;
+    }
+
+    .player-nick {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .player-balance {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: #00e5ff;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+
+    /* Buttons Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(8, 19, 31, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .menu-btn:hover {
+      transform: translateY(-2px);
+      border-color: #00e5ff;
+      background: rgba(12, 28, 46, 0.95);
+      color: #00e5ff;
+      box-shadow: 0 8px 20px rgba(0, 229, 255, 0.15);
+    }
+
+    .btn-icon {
+      font-size: 18px;
+    }
+
+    .menu-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #475569;
+      padding: 0 4px;
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .btn-close:hover { color: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="menu-modal-card">
+    <div class="menu-header">
+      <h2 class="menu-title">AquaTech</h2>
+      <div class="menu-subtitle">Системный Терминал · Меню Сервера</div>
+    </div>
+
+    <div class="profile-card" onclick="ipcSend({action:'NAVIGATE', to:'cabinet'})">
+      <div class="profile-left">
+        <img class="player-head-img" id="head-img" src="https://mc-heads.net/avatar/Renfild" alt="Avatar" />
+        <span class="player-nick" id="player-nick">Renfild</span>
+      </div>
+      <div class="player-balance" id="player-bal">0 монет</div>
+    </div>
+
+    <div class="menu-grid">
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'EXEC_COMMAND', cmd:'kit'})">
+        <span class="btn-icon">⚔</span>
+        <span>Киты</span>
+      </button>
+
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'EXEC_COMMAND', cmd:'warp'})">
+        <span class="btn-icon">⚡</span>
+        <span>Варпы</span>
+      </button>
+
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'TELEPORT_SPAWN'})">
+        <span class="btn-icon">⚓</span>
+        <span>Спавн</span>
+      </button>
+
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'NAVIGATE', to:'donate'})">
+        <span class="btn-icon">💎</span>
+        <span>Донат</span>
+      </button>
+
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'EXEC_COMMAND', cmd:'ftbquests open'})">
+        <span class="btn-icon">📜</span>
+        <span>Квесты</span>
+      </button>
+
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'NAVIGATE', to:'skills'})">
+        <span class="btn-icon">🌟</span>
+        <span>Навыки</span>
+      </button>
+
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'OPEN_CASES'})">
+        <span class="btn-icon">🎁</span>
+        <span>Кейсы</span>
+      </button>
+
+      <button type="button" class="menu-btn" onclick="ipcSend({action:'NAVIGATE', to:'cabinet'})">
+        <span class="btn-icon">👤</span>
+        <span>Кабинет</span>
+      </button>
+    </div>
+
+    <div class="menu-footer">
+      <span>ESC для закрытия</span>
+      <button type="button" class="btn-close" onclick="ipcSend({action:'CLOSE_GUI'})">Закрыть</button>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const nick = urlParams.get('nick') || 'Renfild';
+    document.getElementById('player-nick').textContent = nick;
+    document.getElementById('head-img').src = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}`;
+
+    function ipcSend(payload) {
+      if (window.AquaTechBridge && typeof window.AquaTechBridge.send === 'function') {
+        window.AquaTechBridge.send(JSON.stringify(payload));
+      } else {
+        location.hash = 'aqipc=' + encodeURIComponent(JSON.stringify(payload));
+      }
+    }
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') ipcSend({ action: 'CLOSE_GUI' });
+    });
+  </script>
+</body>
+</html>
