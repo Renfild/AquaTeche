@@ -55,6 +55,8 @@ public final class ClientEvents {
         );
     }
 
+    private static boolean welcomed = false;
+
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) {
@@ -68,7 +70,12 @@ public final class ClientEvents {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.options == null) {
             ClientUiState.setTabOpen(false);
+            welcomed = false;
             return;
+        }
+        if (!welcomed && mc.player.tickCount > 20) {
+            welcomed = true;
+            mc.player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§b[AquaTech] §fСборка §e§lv2.9.41 §fзагружена. §7(F4 — Меню, K — Навыки)"));
         }
         net.aquatech.ui.client.cache.ResourceCacheManager.getInstance().prefetchPlayerAvatar(mc.player.getUUID());
 

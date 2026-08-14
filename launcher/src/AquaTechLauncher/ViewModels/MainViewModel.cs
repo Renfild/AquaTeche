@@ -28,13 +28,29 @@ public partial class MainViewModel : ViewModelBase
         LoginNick = _cfg.Username;
         RamText = $"{_cfg.RamMb} MB";
         GameDir = _cfg.GameDir;
-        VersionLabel = $"v{LauncherConstants.Version}";
+        RefreshVersionLabel();
         McLabel = $"Minecraft {LauncherConstants.McVersion} · Forge {LauncherConstants.ForgeVersion}";
         ServerAddress = $"{LauncherConstants.ServerHost}:{LauncherConstants.ServerPort}";
         OnlinePlayersText = "Проверяем сервер…";
         NeedsAuth = true;
         AuthChecking = true;
         _ = StartupAsync();
+    }
+
+    private void RefreshVersionLabel()
+    {
+        var packVer = "2.9.41";
+        try
+        {
+            var pPath = System.IO.Path.Combine(GameDir, ".pack_version");
+            if (System.IO.File.Exists(pPath))
+            {
+                var txt = System.IO.File.ReadAllText(pPath).Trim();
+                if (!string.IsNullOrWhiteSpace(txt)) packVer = txt;
+            }
+        }
+        catch { }
+        VersionLabel = $"Лаунчер v{LauncherConstants.Version} · Сборка v{packVer}";
     }
 
     [ObservableProperty] private string _page = "play";

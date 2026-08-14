@@ -68,11 +68,8 @@ public sealed class ManifestSync
 
         var jobs = new List<PackFileEntry>();
         var checkedN = 0;
-        if (verifyHash)
-        {
-            log?.Invoke($"Проверяем хеши ({files.Count} файлов)…");
-            progress?.Invoke(5);
-        }
+        log?.Invoke($"Проверяем целостность ({files.Count} файлов сборки v{manifest.Version})…");
+        progress?.Invoke(5);
 
         foreach (var item in files)
         {
@@ -80,7 +77,7 @@ public sealed class ManifestSync
             var rel = item.Path.Replace('\\', '/').TrimStart('/');
             var local = System.IO.Path.Combine(gameDir, rel.Replace('/', System.IO.Path.DirectorySeparatorChar));
             checkedN++;
-            if (verifyHash && checkedN % 25 == 0)
+            if (checkedN % 25 == 0)
                 progress?.Invoke(5 + 25.0 * checkedN / files.Count);
 
             if (NeedsDownload(local, item, verifyHash))
@@ -90,12 +87,13 @@ public sealed class ManifestSync
         if (jobs.Count == 0)
         {
             var deletedOnly = PurgeExtras(gameDir, wanted, log);
-            log?.Invoke($"Сборка актуальна ({files.Count} файлов)" + (deletedOnly > 0 ? $", удалено {deletedOnly}" : ""));
+            SavePackVersion(gameDir, manifest.Version);
+            log?.Invoke($"Сборка v{manifest.Version} актуальна ({files.Count} файлов)" + (deletedOnly > 0 ? $", удалено {deletedOnly}" : ""));
             progress?.Invoke(100);
             return (0, 0, deletedOnly);
         }
 
-        log?.Invoke($"Обновляем {jobs.Count}/{files.Count} файлов…");
+        log?.Invoke($"Обновляем {jobs.Count}/{files.Count} файлов сборки v{manifest.Version}…");
         progress?.Invoke(35);
 
         var updated = 0;
@@ -127,15 +125,30 @@ public sealed class ManifestSync
 
         var deleted = 0;
         if (failed == 0)
+        {
             deleted = PurgeExtras(gameDir, wanted, log);
+            SavePackVersion(gameDir, manifest.Version);
+        }
         else
             log?.Invoke("Purge пропущен — есть ошибки загрузки");
 
         log?.Invoke(failed > 0
-            ? $"Синхронизация: {updated} ок, {failed} ошибок" + (deleted > 0 ? $", −{deleted}" : "")
-            : $"Синхронизация: {updated}/{files.Count}" + (deleted > 0 ? $", удалено {deleted}" : ""));
+            ? $"Синхронизация v{manifest.Version}: {updated} ок, {failed} ошибок" + (deleted > 0 ? $", −{deleted}" : "")
+            : $"Сборка v{manifest.Version} обновлена: {updated}/{files.Count}" + (deleted > 0 ? $", удалено {deleted}" : ""));
         progress?.Invoke(100);
         return (updated, failed, deleted);
+    }
+
+    private static void SavePackVersion(string gameDir, string? version)
+    {
+        try
+        {
+            if (!string.IsNullOrWhiteSpace(version))
+            {
+                File.WriteAllText(System.IO.Path.Combine(gameDir, ".pack_version"), version.Trim());
+            }
+        }
+        catch { /* ignore */ }
     }
 
     public async Task<PackManifest> FetchManifestAsync(string updateBase, Action<string>? log = null, CancellationToken ct = default)
