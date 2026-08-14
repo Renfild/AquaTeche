@@ -25,8 +25,8 @@ public class NetworkHandler {
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(AquaTechUI.MOD_ID, "main"),
             () -> PROTOCOL_VERSION,
-            PROTOCOL_VERSION::equals,
-            PROTOCOL_VERSION::equals
+            version -> true,
+            version -> true
     );
 
     private static int packetId = 0;

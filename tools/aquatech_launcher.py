@@ -37,8 +37,8 @@ SERVER_PORT    = "21561"
 PACK_READY_MIN_JARS = 40
 # Pack CDN for friends — manifest.json mirrors; jars download from GitHub Releases URLs inside it.
 # (Playit is only the Minecraft server IP, not the modpack CDN.)
-# Prefer jsDelivr/raw: Cloudflare Pages (pages.dev) often hangs SSL from some networks.
-DEFAULT_UPDATE_URL = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
+# Prioritize raw GitHub and custom domain for instant zero-cache manifest updates
+DEFAULT_UPDATE_URL = "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack"
 # If nothing configured — try local sync server (start_sync_server.py default 8765).
 # Avoid 8080 first: NVIDIA Broadcast often binds it and returns bogus 404.
 LOCAL_SYNC_FALLBACKS = (
@@ -49,10 +49,11 @@ LOCAL_SYNC_FALLBACKS = (
     "http://127.0.0.1:8080",
 )
 
-# Manifest / pack mirrors (fast GitHub CDNs only — Pages.dev SSL often hangs on Windows).
+# Manifest / pack mirrors (Fast raw GitHub first, then portal domain, then CDN fallback).
 PACK_CDN_MIRRORS = (
     DEFAULT_UPDATE_URL,
-    "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
+    "https://aquateche.store/pack",
+    "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
 )
 CLIENT_DOWNLOAD_URL = (
     "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.11/AquaTech.exe"

@@ -46,6 +46,12 @@ public class AquaTechUI {
 
         ModLoadingContext.get().registerConfig(Type.COMMON, ModConfig.SPEC);
         ModLoadingContext.get().registerConfig(Type.CLIENT, ModClientConfig.SPEC);
+        ModLoadingContext.get().registerExtensionPoint(net.minecraftforge.fml.IExtensionPoint.DisplayTest.class,
+                () -> new net.minecraftforge.fml.IExtensionPoint.DisplayTest(
+                        () -> net.minecraftforge.fml.IExtensionPoint.DisplayTest.IGNORESERVERONLY,
+                        (remote, isServer) -> true
+                )
+        );
 
         modBus.addListener(this::commonSetup);
         if (FMLEnvironment.dist == Dist.CLIENT) {
