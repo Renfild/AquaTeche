@@ -153,10 +153,7 @@ public final class OceanTabOverlay {
             rankRaw = "ИГРОК";
         }
         String rank = AquaFontRenderer.fit(font, rankRaw.toUpperCase(), Math.max(24, right - textX - 50));
-        badgeX += AquaBadge.draw(graphics, font, badgeX, y + 22, rank, rankColor) + 4;
-        if (profile.staff()) {
-            AquaBadge.draw(graphics, font, badgeX, y + 22, "STAFF", UiDraw.COLOR_ACCENT);
-        }
+        AquaBadge.draw(graphics, font, badgeX, y + 22, rank, rankColor);
         graphics.fill(right - AquaFontRenderer.width(font, ping) - 6, y + 10, right - AquaFontRenderer.width(font, ping) - 3, y + 13, pingColor);
         AquaFontRenderer.draw(graphics, font, ping, right - AquaFontRenderer.width(font, ping), y + 7, pingColor);
     }

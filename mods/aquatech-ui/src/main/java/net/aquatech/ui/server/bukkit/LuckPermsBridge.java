@@ -72,6 +72,14 @@ public final class LuckPermsBridge {
             return cached.info();
         }
 
+        // Try direct Bukkit player display name prefix (e.g. "[OWNER] xietoru")
+        RankInfo directBukkit = tryBukkitDisplayName(player);
+        if (directBukkit != null && !"default".equals(directBukkit.id())) {
+            directBukkit = withGlyph(directBukkit);
+            CACHE.put(uuid, new CachedRank(directBukkit, now));
+            return directBukkit;
+        }
+
         RankInfo lp = tryLuckPerms(player);
         if (lp == null) {
             lp = tryLuckPermsFiles(player);
@@ -79,8 +87,9 @@ public final class LuckPermsBridge {
         RankInfo result;
         if (lp != null && !"default".equals(lp.id())) {
             result = lp;
+        } else if (player.hasPermissions(2)) {
+            result = fromOpLevel(player);
         } else {
-            // Horizon fleet tier as soft fallback when LP says default
             RankInfo horizon = fromHorizon(player);
             if (horizon != null) {
                 result = horizon;
@@ -90,10 +99,31 @@ public final class LuckPermsBridge {
                 result = fromOpLevel(player);
             }
         }
-        // Attach rank glyph from aquatech_rank_glyphs.properties when LP prefix is plain text
         result = withGlyph(result);
         CACHE.put(uuid, new CachedRank(result, now));
         return result;
+    }
+
+    private static RankInfo tryBukkitDisplayName(ServerPlayer player) {
+        try {
+            Class<?> bukkitClass = Class.forName("org.bukkit.Bukkit");
+            Object bPlayer = bukkitClass.getMethod("getPlayer", UUID.class).invoke(null, player.getUUID());
+            if (bPlayer != null) {
+                Object disp = bPlayer.getClass().getMethod("getDisplayName").invoke(bPlayer);
+                if (disp != null) {
+                    String dStr = stripCodes(String.valueOf(disp)).trim();
+                    if (dStr.startsWith("[") && dStr.contains("]")) {
+                        String prefix = dStr.substring(1, dStr.indexOf(']')).trim();
+                        if (!prefix.isBlank() && !prefix.equalsIgnoreCase(player.getGameProfile().getName())) {
+                            String pLow = prefix.toLowerCase(Locale.ROOT);
+                            return new RankInfo(pLow, prefix.toUpperCase(Locale.ROOT), weightFor(pLow), true);
+                        }
+                    }
+                }
+            }
+        } catch (Throwable ignored) {
+        }
+        return null;
     }
 
     private static RankInfo withGlyph(RankInfo info) {

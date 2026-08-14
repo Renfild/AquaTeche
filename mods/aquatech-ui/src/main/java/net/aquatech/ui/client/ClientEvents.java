@@ -36,6 +36,11 @@ public final class ClientEvents {
 
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAboveAll(
+                "ocean_hud",
+                (gui, graphics, partialTick, screenWidth, screenHeight) ->
+                        net.aquatech.ui.client.hud.OceanHudOverlay.render(graphics, partialTick)
+        );
+        event.registerAboveAll(
                 "ocean_tab",
                 (gui, graphics, partialTick, screenWidth, screenHeight) -> {
                     if (ClientUiState.tabOpen()) {
