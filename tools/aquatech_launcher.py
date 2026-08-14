@@ -613,7 +613,7 @@ def normalize_update_url(url: str | None) -> str:
     if SERVER_IP.lower() in low:
         return DEFAULT_UPDATE_URL
     # Pages.dev often stalls SSL — steer saved configs to a working mirror
-    if "pages.dev" in low:
+    if "pages.dev" in low or "jsdelivr" in low:
         return DEFAULT_UPDATE_URL
     if not (low.startswith("http://") or low.startswith("https://")):
         return DEFAULT_UPDATE_URL
