@@ -19,7 +19,7 @@
       width:min(1180px,96vw);height:min(680px,92vh);min-height:540px;display:grid;
       grid-template:58px 1fr 38px / 218px 1fr;overflow:hidden;border:1px solid var(--line);
       border-radius:var(--radius);background:linear-gradient(145deg,var(--panel),rgba(7,12,18,.97));
-      box-shadow:0 26px 90px rgba(0,0,0,.58),0 0 50px color-mix(in srgb,var(--accent) 14%,transparent);
+      box-shadow:none;
       animation:hub-in .38s var(--ease) both
     }
     .reduce-motion *{animation:none!important;transition:none!important}
@@ -48,7 +48,7 @@
     .daily strong{display:block;font-size:12px}
     .daily span{display:block;margin:4px 0 10px;color:var(--muted);font-size:10px;line-height:1.45}
     .content{grid-row:2;overflow:hidden;position:relative;padding:20px 22px}
-    .view{height:100%;overflow:auto;padding-right:5px;animation:view-in .22s var(--ease) both}
+    .view{height:100%;overflow:auto;padding-right:5px}.view.view-enter{animation:view-in .22s var(--ease) both}
     .view::-webkit-scrollbar{width:4px}.view::-webkit-scrollbar-thumb{border-radius:4px;background:rgba(255,255,255,.16)}
     @keyframes view-in{from{opacity:0;transform:translateX(7px)}}
     .view-title{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:15px}
@@ -146,7 +146,7 @@
     profile:["Профиль","⌁"],store:["Магазин","◇"],cases:["Кейсы","⬡"],
     pass:["Пропуск","◈"],tops:["Топы","≋"],settings:["Настройки","⚙"]
   };
-  const state = {payload:null,tab:"profile",modalAction:null,toastTimer:0};
+  const state = {payload:null,tab:"profile",modalAction:null,toastTimer:0,navKey:"",viewKey:""};
   const $ = id => document.getElementById(id);
   const esc = value => String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const compact = value => Intl.NumberFormat("ru-RU",{notation:"compact",maximumFractionDigits:1}).format(Number(value||0));
@@ -168,7 +168,12 @@
       const [label,icon]=tabMeta[t],badge=navBadge(t,s);
       return `<button class="nav-button ${t===state.tab?"active":""}" data-tab="${t}"><span>${icon}</span><span class="nav-label">${label}</span>${badge?`<span class="badge">${badge}</span>`:""}</button>`;
     }).join("");
-    $("nav").querySelectorAll("[data-tab]").forEach(button=>button.onclick=()=>{state.tab=button.dataset.tab;renderNav();renderView()});
+    $("nav").querySelectorAll("[data-tab]").forEach(button=>button.onclick=()=>{
+      state.tab=button.dataset.tab;
+      state.viewKey=viewFingerprint(state.tab,state.payload);
+      renderNav();
+      renderView(true);
+    });
   }
   function title(name,subtitle,aside="") {
     return `<div class="view-title"><div><h1>${name}</h1><p>${subtitle}</p></div>${aside}</div>`;
@@ -190,8 +195,8 @@
         <section class="stats">
           <div class="stat"><small>Монеты</small><b>${compact(w.coins)}</b></div>
           <div class="stat"><small>В игре</small><b>${Math.floor((p.playtimeMinutes||0)/60)} ч</b></div>
-          <div class="stat"><small>Победы</small><b>${p.kills||0}</b></div>
-          <div class="stat"><small>Задания</small><b>${p.quests||0}</b></div>
+          <div class="stat"><small>Пройдено квестов</small><b>${p.quests||0}</b></div>
+          <div class="stat"><small>Смерти</small><b>${p.deaths||0}</b></div>
         </section>
       </div>
       <div class="section-title"><b>Сезон</b><span>${season.premium?"Премиум активен":"Бесплатный путь"}</span></div>
@@ -242,11 +247,28 @@
     document.querySelectorAll(".swatch").forEach(b=>b.onclick=()=>{send({type:"settings",theme:b.dataset.theme});state.payload.appearance.theme=b.dataset.theme;applyAppearance();renderView()});
     const toggle=$("motionToggle");if(toggle)toggle.onclick=()=>{const enabled=!state.payload.appearance.animations;send({type:"settings",animations:enabled});state.payload.appearance.animations=enabled;applyAppearance();renderView()};
   }
-  function renderView() {
+  function renderView(animate) {
     const s=state.payload.snapshot;
     const views={profile:profileView,store:storeView,cases:casesView,pass:passView,tops:topsView,settings:settingsView};
     $("content").innerHTML=(views[state.tab]||profileView)(s);
+    if(animate&&$("content").firstElementChild)$("content").firstElementChild.classList.add("view-enter");
     bindViewActions();
+  }
+  function navFingerprint(payload) {
+    const s=payload.snapshot;
+    return JSON.stringify([payload.enabledTabs,s.profile.friendsOnline,s.season.claimable,s.store,s.cases]);
+  }
+  function viewFingerprint(tab,payload) {
+    const s=payload.snapshot;
+    const viewState={
+      profile:[s.profile,s.wallet,s.season],
+      store:[s.store,s.wallet],
+      cases:s.cases,
+      pass:s.season,
+      tops:s.tops,
+      settings:payload.appearance
+    };
+    return JSON.stringify(viewState[tab]??viewState.profile);
   }
   function applyAppearance() {
     const a=state.payload.appearance||{};
@@ -256,8 +278,11 @@
   }
   function applySnapshot(payload) {
     if(!payload||!payload.snapshot)return;
+    const first=!state.payload;
+    const nextNavKey=navFingerprint(payload);
     state.payload=payload;
     if(payload.initialTab&&tabMeta[payload.initialTab]&&!state.initialized)state.tab=payload.initialTab;
+    const nextViewKey=viewFingerprint(state.tab,payload);
     state.initialized=true;
     const s=payload.snapshot;
     $("serverName").textContent=s.server.name;
@@ -268,7 +293,11 @@
     $("openKey").textContent=payload.openKey||"F4";
     $("dailyText").textContent=s.wallet.dailyAvailable?`Серия: ${s.wallet.dailyStreak} дн. Награда готова.`:`Серия: ${s.wallet.dailyStreak} дн. Возвращайтесь завтра.`;
     $("dailyClaim").disabled=!s.wallet.dailyAvailable;
-    applyAppearance();renderNav();renderView();
+    applyAppearance();
+    if(first||nextNavKey!==state.navKey)renderNav();
+    if(first||nextViewKey!==state.viewKey)renderView(first);
+    state.navKey=nextNavKey;
+    state.viewKey=nextViewKey;
   }
   function confirmAction(title,text,name,argument) {
     state.modalAction={name,argument};$("modalTitle").textContent=title;$("modalText").textContent=text;

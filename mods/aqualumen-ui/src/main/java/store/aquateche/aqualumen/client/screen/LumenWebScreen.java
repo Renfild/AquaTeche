@@ -65,8 +65,11 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
             return;
         }
         String message;
-        while ((message = bridge.pollMessage()) != null) {
+        while (bridge != null && (message = bridge.pollMessage()) != null) {
             dispatch(message);
+        }
+        if (bridge == null) {
+            return;
         }
         if (!pageReady && ++pageWaitTicks >= PAGE_READY_TIMEOUT_TICKS) {
             fallbackToNative("page readiness timeout");

@@ -1,10 +1,14 @@
 package store.aquateche.aqualumen.common.service;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.Scoreboard;
 import store.aquateche.aqualumen.AquaLumenUI;
@@ -16,6 +20,7 @@ import store.aquateche.aqualumen.network.LumenNetwork;
 import store.aquateche.aqualumen.network.LumenPackets;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class HubDataService {
 
     private static final Set<UUID> OPEN_HUBS = ConcurrentHashMap.newKeySet();
+    private static boolean questBridgeWarningLogged;
 
     private HubDataService() {
     }
@@ -93,15 +99,18 @@ public final class HubDataService {
 
         Rank rank = rankFor(level);
         long coins = score(player, LumenConfig.COMMON.coinsObjective.get());
+        if (coins == 0L) {
+            coins = inventoryCoins(player);
+        }
         long gems = score(player, LumenConfig.COMMON.gemsObjective.get());
+        int completedQuests = completedQuests(player);
 
         HubSnapshot.Profile profile = new HubSnapshot.Profile(
                 player.getGameProfile().getName(), rank.name(), rank.color(), level, levelProgress,
-                playtimeMinutes, kills, deaths, /* TODO bridge: quest system */ 0,
+                playtimeMinutes, kills, deaths, completedQuests,
                 Math.max(0, server.getPlayerCount() - 1));
 
-        HubSnapshot.Wallet wallet = new HubSnapshot.Wallet(coins, gems,
-                /* TODO bridge: daily streak storage */ 1, true);
+        HubSnapshot.Wallet wallet = new HubSnapshot.Wallet(coins, gems, 0, false);
 
         int maxTier = LumenConfig.COMMON.seasonMaxTier.get();
         int tier = Math.min(maxTier, level);
@@ -175,6 +184,55 @@ public final class HubDataService {
             return 0L;
         }
         return scoreboard.getOrCreatePlayerScore(player.getScoreboardName(), objective).getScore();
+    }
+
+    private static long inventoryCoins(ServerPlayer player) {
+        long total = 0L;
+        for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
+            ItemStack stack = player.getInventory().getItem(slot);
+            if (stack.isEmpty()) {
+                continue;
+            }
+            ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            if (id != null && "lightmanscurrency".equals(id.getNamespace()) && id.getPath().startsWith("coin_")) {
+                total += stack.getCount();
+            }
+        }
+        return total;
+    }
+
+    private static int completedQuests(ServerPlayer player) {
+        try {
+            Class<?> teamDataType = Class.forName("dev.ftb.mods.ftbquests.quest.TeamData");
+            Object teamData = teamDataType.getMethod("get", Player.class).invoke(null, player);
+            if (teamData == null) {
+                return 0;
+            }
+
+            Class<?> questObjectType = Class.forName("dev.ftb.mods.ftbquests.quest.QuestObject");
+            Class<?> questType = Class.forName("dev.ftb.mods.ftbquests.quest.Quest");
+            Object questFile = Class.forName("dev.ftb.mods.ftbquests.quest.ServerQuestFile")
+                    .getField("INSTANCE").get(null);
+            if (questFile == null) {
+                return 0;
+            }
+
+            Collection<?> objects = (Collection<?>) questFile.getClass().getMethod("getAllObjects").invoke(questFile);
+            var isCompleted = teamDataType.getMethod("isCompleted", questObjectType);
+            int completed = 0;
+            for (Object object : objects) {
+                if (questType.isInstance(object) && Boolean.TRUE.equals(isCompleted.invoke(teamData, object))) {
+                    completed++;
+                }
+            }
+            return completed;
+        } catch (ReflectiveOperationException | LinkageError error) {
+            if (!questBridgeWarningLogged) {
+                questBridgeWarningLogged = true;
+                AquaLumenUI.LOGGER.debug("FTB Quests progress unavailable: {}", error.toString());
+            }
+            return 0;
+        }
     }
 
     private static Rank rankFor(int level) {

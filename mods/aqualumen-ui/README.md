@@ -47,12 +47,12 @@ src/main/java/store/aquateche/aqualumen/
 ```bash
 # Java 17 обязателен
 gradle wrapper --gradle-version 8.1.1   # один раз: обёртки в репозитории нет
-./gradlew build          # → build/libs/aqualumen-forge-1.20.1-0.3.2-alpha.jar
+./gradlew build          # → build/libs/aqualumen-forge-1.20.1-0.3.3-alpha.jar
 ./gradlew runClient      # локальная проверка интерфейса
 python3 tools/gen_item_texture.py   # перегенерировать иконку предмета
 ```
 
-Первая сборка требует интернета (ForgeGradle скачивает MDK и маппинги). Сборка `0.3.2-alpha` проходит через `./gradlew build` (Java 21 toolchain used locally).
+Первая сборка требует интернета (ForgeGradle скачивает MDK и маппинги). Сборка `0.3.3-alpha` проходит через `./gradlew build` (Java 21 toolchain used locally).
 
 ## Команды
 
@@ -68,7 +68,7 @@ python3 tools/gen_item_texture.py   # перегенерировать икон�
 
 ## Точки интеграции
 
-В коде помечены `TODO bridge`: экономика, ежедневные награды, квесты, кейсы, магазин. Без них мод работает на встроенных данных: статистика игрока, scoreboard-валюты, топ по наигранному времени, TPS сервера.
+Профиль читает статистику Minecraft, завершённые FTB Quests и монеты Lightman's Currency. Scoreboard остаётся приоритетным источником валюты. Ежедневные награды, кейсы и магазин ждут серверных интеграций.
 
 ## Лицензия
 
@@ -80,4 +80,4 @@ MIT. Не является официальным продуктом Minecraft �
 - **Gradle 8.1.1.** ForgeGradle 6 не работает на Gradle 8.7 и новее — падает на конфигурации. Если в системе стоит другая версия, обёртка (шаг выше) поставит нужную локально.
 - **Обёртки в репозитории нет.** Файлы `gradlew`, `gradlew.bat` и `gradle/wrapper/` создаются командой `gradle wrapper --gradle-version 8.1.1` — бинарный `gradle-wrapper.jar` в исходники не коммитился.
 - **Интернет на первую сборку.** ForgeGradle скачивает около гигабайта зависимостей и декомпилирует Minecraft: 10–20 минут и заметная нагрузка на диск. Дальше всё берётся из кэша.
-- **Проверка результата.** `build/libs/aqualumen-forge-1.20.1-0.3.2-alpha.jar` — в `mods/` на сервере и в клиентскую сборку. `./gradlew runClient` поднимает клиент с модом без ручной установки.
+- **Проверка результата.** `build/libs/aqualumen-forge-1.20.1-0.3.3-alpha.jar` — в `mods/` на сервере и в клиентскую сборку. `./gradlew runClient` поднимает клиент с модом без ручной установки.

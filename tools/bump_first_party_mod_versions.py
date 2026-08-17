@@ -40,7 +40,7 @@ def main() -> int:
     root = Path(__file__).resolve().parents[1]
     pairs = [
         ("aquatech_ui", "1.0.24", "aquatech_ui-1.0.24.jar"),
-        ("aqualumen", "0.3.2-alpha", "aqualumen-forge-1.20.1-0.3.2-alpha.jar"),
+        ("aqualumen", "0.3.3-alpha", "aqualumen-forge-1.20.1-0.3.3-alpha.jar"),
     ]
     targets = [
         root / "server" / "mods",

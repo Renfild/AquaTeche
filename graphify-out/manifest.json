@@ -35,13 +35,13 @@
     "semantic_hash": ""
   },
   "docs/assets/js/site.js": {
-    "mtime": 1786981708.23189,
-    "ast_hash": "3fbeb93c5cf0ac4a73e7cde2e4c31a61",
+    "mtime": 1786984954.2392642,
+    "ast_hash": "6fa4566bbda2f7c71f9bc5f4ac6ba944",
     "semantic_hash": ""
   },
   "docs/pack/manifest.json": {
-    "mtime": 1786981761.2418985,
-    "ast_hash": "a3deb16274bcdfe3d49aa290d65bc065",
+    "mtime": 1786985075.2293615,
+    "ast_hash": "9ba108490bc375eabbdd942ddc4fdc25",
     "semantic_hash": ""
   },
   "functions/_lib/auth.js": {
@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherConstants.cs": {
-    "mtime": 1786981693.6805806,
-    "ast_hash": "e26138320e93eb8b75881aede24bf62c",
+    "mtime": 1786984938.4129322,
+    "ast_hash": "3f25675defddf7135827d657179e82c0",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherSelfUpdate.cs": {
@@ -340,8 +340,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher/AquaTechLauncher.csproj": {
-    "mtime": 1786981701.5249527,
-    "ast_hash": "bc783e598667755026e31bb1452e37f4",
+    "mtime": 1786984944.8893855,
+    "ast_hash": "c7b93af360405494c5f4763c696d0f47",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher/Program.cs": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "scripts/deploy/deploy_runtime.ps1": {
-    "mtime": 1786981650.4203775,
-    "ast_hash": "249863c8dbc3f1f69c47a2c3e57c34e4",
+    "mtime": 1786984926.285301,
+    "ast_hash": "6dc2ccd7828e2fa73b9ee07c96cc2499",
     "semantic_hash": ""
   },
   "scripts/deploy/setup_horizon_route.ps1": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "tools/bump_first_party_mod_versions.py": {
-    "mtime": 1786981658.7319264,
-    "ast_hash": "fc05f228483b6d173289133db672dc70",
+    "mtime": 1786984911.91833,
+    "ast_hash": "56a2ac063532c6f803a6588594087348",
     "semantic_hash": ""
   },
   "tools/cleanup_workspace.ps1": {
@@ -635,8 +635,8 @@
     "semantic_hash": ""
   },
   "tools/publish_client_pack.py": {
-    "mtime": 1786981637.235004,
-    "ast_hash": "a80429d3f38cd739eb5d974f33a3d94b",
+    "mtime": 1786984893.993001,
+    "ast_hash": "30452a984711da126c0908ddcefce242",
     "semantic_hash": ""
   },
   "tools/quests/build_ftb_quests.py": {
@@ -870,13 +870,13 @@
     "semantic_hash": ""
   },
   "tools/upload_launcher_release.py": {
-    "mtime": 1786981687.0375147,
-    "ast_hash": "ebebde62e853fc6e46d0a9b6e8f02525",
+    "mtime": 1786984932.9980597,
+    "ast_hash": "8905f52c2a44b0dda565be936558c304",
     "semantic_hash": ""
   },
   "tools/upload_pack_release.py": {
-    "mtime": 1786981643.5575273,
-    "ast_hash": "d4be2354e1a65f0cc5ff404296fa3220",
+    "mtime": 1786984902.1353426,
+    "ast_hash": "2efdaacff5793d966252a8cd24e38398",
     "semantic_hash": ""
   },
   "tools/upload_to_github.py": {
@@ -2605,8 +2605,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/AquaLumenUI.java": {
-    "mtime": 1786981620.2819335,
-    "ast_hash": "489830dfaa1b40bf0d29092bf17bb617",
+    "mtime": 1786984855.4592013,
+    "ast_hash": "0a61af9273911a47be1e088bdc5e8486",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/ServerEvents.java": {
@@ -2635,8 +2635,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/HubDataService.java": {
-    "mtime": 1786967329.582807,
-    "ast_hash": "80921a2565ab3b88aa7a7908fc60adb4",
+    "mtime": 1786984462.1212413,
+    "ast_hash": "93b82d7cb1a671df7738b8d09ee24fe8",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/config/LumenConfig.java": {
@@ -2670,18 +2670,18 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/CHANGELOG.md": {
-    "mtime": 1786981667.765189,
-    "ast_hash": "43dcb9c2c903e83741895785e1b58ea1",
+    "mtime": 1786984864.4919837,
+    "ast_hash": "f3360f29f9841e4444288c4417a34691",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/README.md": {
-    "mtime": 1786981674.8335507,
-    "ast_hash": "3a2cf1b7f061932bc8bf056e72f79db4",
+    "mtime": 1786984872.3784342,
+    "ast_hash": "71b641cd5f52e238ac913c6f82a984c6",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/docs/MOHIST_SETUP.md": {
-    "mtime": 1786981681.969244,
-    "ast_hash": "dd2f278235dd875fa2728113d38a2a38",
+    "mtime": 1786984878.8953183,
+    "ast_hash": "bb95b0652669a009e3cd3897ec8daa7f",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/docs/UI_STYLE_GUIDE.md": {
@@ -2725,8 +2725,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/html/hub.html": {
-    "mtime": 1786980518.9452739,
-    "ast_hash": "4ae51a3674dd89ae4927ebc849fb12fa",
+    "mtime": 1786984770.724223,
+    "ast_hash": "5d7291a476a80fd76bf4d0d302143764",
     "semantic_hash": ""
   }
 }
