@@ -216,6 +216,7 @@
 | **2026-08-13** | `v2.5.6` | Composer | Ship pack **2.9.27** + launcher **client-2.9.48**. First-party jars `aquatech_ui-1.0.24` / `casesmod-1.0.8`. | `docs/pack/manifest.json`, `docs/bootstrap.json`, `docs/assets/js/site.js` |
 | **2026-08-17** | `v2.5.7` | Composer | Health pass: Go/C# bootstrap upgrade-only + Worker mirrors; C# is the ship path (`dotnet publish`). casesmod leftovers rewired to AquaLumen hub. Hub store/cases clicks send actions; server answers «пока недоступно». Dead preview/web-launcher/casesmod deploy scripts removed. | `bootstrap/update.go`, `LauncherSelfUpdate.cs`, `AquaWebIpcDispatcher.java`, `HubActionHandler.java`, `HubScreen.java` |
 | **2026-08-17** | `v2.5.8` | Composer | Full ship after health pass: pack **2.9.55** (fresh aquatech_ui 1.0.24 + aqualumen 0.3.0-alpha), launcher **client-2.9.65**. | `docs/pack/manifest.json`, `docs/bootstrap.json`, `docs/assets/js/site.js` |
+| **2026-08-17** | `v2.5.9` | Composer | AquaLumen **0.3.1-alpha** moves F4 hub to bundled MCEF HTML with live snapshot IPC, whitelisted server actions and native fallback. Ship pack **2.9.57**, launcher **client-2.9.66**. | `LumenWebScreen.java`, `LumenWebBridge.java`, `hub.html`, `docs/pack/manifest.json` |
 
 ---
 

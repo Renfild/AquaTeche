@@ -1,11 +1,11 @@
 # Graph Report - AquaTech  (2026-08-17)
 
 ## Corpus Check
-- 556 files · ~246,409 words
+- 556 files · ~246,436 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3037 nodes · 6281 edges · 237 communities (203 shown, 34 thin omitted)
+- 3037 nodes · 6281 edges · 236 communities (204 shown, 32 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 85 edges (avg confidence: 0.79)
 - Token cost: 0 input · 0 output
 
@@ -56,7 +56,7 @@
 - Улучшенная — Улучшенная электрическая эра
 - setup_apex_mysql.py
 - UI Style Guide — AquaLumen UI
-- HorizonEvents
+- net.minecraft.server.level.ServerPlayer
 - toggle_iu_space_dims.py
 - AutoFisherMenu
 - setup_d1.py
@@ -83,7 +83,7 @@
 - patch_chapter
 - Minimalist Minecraft Pixel Art GUI Skill
 - patches/patch_fawe_mohist.py
-- ClientHello
+- ChestFallbackUI.java
 - StarCatcherEnchantmentHandler.java
 - test_stage12_fonts.py
 - launcher_tests/test_bootstrap_update.py
@@ -140,7 +140,6 @@
 - tools/patch_fawe_mohist.py
 - tools/patch_iu_no_free_scanner.py
 - replace_release_bootstrap_exe.py
-- .register
 - CapabilityEvents
 - create_ocean_atom_island.py
 - create_ocean_raft.py
@@ -188,7 +187,7 @@
 - DailyContract
 - test_stage13_widgets.py
 - SkillCategory
-- net.minecraft.server.level.ServerPlayer
+- HubActionHandler
 - test_stage11_blur.py
 - SkillTreeData
 - CustomFishingLootManager
@@ -230,7 +229,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (237 total, 34 thin omitted)
+## Communities (236 total, 32 thin omitted)
 
 ### Community 0 - "index.js"
 Cohesion: 0.08
@@ -317,8 +316,8 @@ Cohesion: 0.20
 Nodes (10): Body, CookieContainer, CookieSession, HttpClient, HttpClientHandler, HttpDownload, CancellationToken, Task (+2 more)
 
 ### Community 21 - "HubDataService.java"
-Cohesion: 0.08
-Nodes (21): AquaLumenUI, ChestFallbackUI, FallbackMenu, Item, ItemStack, Override, Mod.EventBusSubscriber, ServerEvents (+13 more)
+Cohesion: 0.10
+Nodes (12): AquaLumenUI, LumenCommands, Mod.EventBusSubscriber, ServerEvents, LumenConfig, LumenNetwork, LumenPackets, net.minecraft.resources.ResourceLocation (+4 more)
 
 ### Community 22 - "Fact"
 Cohesion: 0.18
@@ -396,9 +395,9 @@ Nodes (15): apex_command(), _apex_headers(), apex_json(), apex_power(), apex_sta
 Cohesion: 0.13
 Nodes (14): 1. Палитры, 2. Сетка и размеры (GUI-пиксели Minecraft), 3.1 Движение, 3.2 Иконки, 3. Состояния, 4. Информационная архитектура, 5. Типографика, 6. Доступность (+6 more)
 
-### Community 41 - "HorizonEvents"
-Cohesion: 0.21
-Nodes (6): HorizonEvents, BreakEvent, Mod.EventBusSubscriber, PlayerLoggedInEvent, PlayerTickEvent, net.minecraftforge.event.entity.player.ItemFishedEvent
+### Community 41 - "net.minecraft.server.level.ServerPlayer"
+Cohesion: 0.13
+Nodes (8): HorizonEvents, BreakEvent, Mod.EventBusSubscriber, PlayerLoggedInEvent, PlayerTickEvent, NetworkHandler, net.minecraft.server.level.ServerPlayer, net.minecraftforge.event.entity.player.ItemFishedEvent
 
 ### Community 42 - "toggle_iu_space_dims.py"
 Cohesion: 0.38
@@ -495,6 +494,10 @@ Nodes (6): 1. Minimalist Tech Design Principles (Auto-Fisher Style), 2. Advanced
 ### Community 68 - "patches/patch_fawe_mohist.py"
 Cohesion: 0.30
 Nodes (12): _asm_classpath(), _ensure_patcher_compiled(), _java_bin(), _javac_bin(), main(), patch_ibukkit(), patch_typeproperty(), Path (+4 more)
+
+### Community 69 - "ChestFallbackUI.java"
+Cohesion: 0.16
+Nodes (10): ChestFallbackUI, FallbackMenu, Item, ItemStack, Override, net.minecraft.world.Container, net.minecraft.world.inventory.ChestMenu, net.minecraft.world.inventory.ClickType (+2 more)
 
 ### Community 70 - "StarCatcherEnchantmentHandler.java"
 Cohesion: 0.33
@@ -796,9 +799,9 @@ Nodes (8): fail(), main(), read(), test_badge_slot(), test_dialog(), test_glass(
 Cohesion: 0.12
 Nodes (16): SkillCategory, AIR, ALL_BONUS, CATCH_MULT, FE_EFFICIENCY, FE_GEN, FISHING_SPEED, KELP_HARVEST (+8 more)
 
-### Community 226 - "net.minecraft.server.level.ServerPlayer"
+### Community 226 - "HubActionHandler"
 Cohesion: 0.14
-Nodes (4): PlayerLoggedOutEvent, HubActionHandler, NetworkHandler, net.minecraft.server.level.ServerPlayer
+Nodes (4): PlayerLoggedOutEvent, HubActionHandler, ClientHello, Context
 
 ### Community 227 - "test_stage11_blur.py"
 Cohesion: 0.58
@@ -847,7 +850,7 @@ Nodes (3): fetchStatus(), initRadar(), setOfflineState()
 ## Knowledge Gaps
 - **706 isolated node(s):** `aquatech/bootstrap`, `version`, `mc_version`, `forge_version`, `server_ip` (+701 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **34 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **32 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_

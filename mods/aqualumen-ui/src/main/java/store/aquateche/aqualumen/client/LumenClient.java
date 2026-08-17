@@ -13,7 +13,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 import store.aquateche.aqualumen.AquaLumenUI;
-import store.aquateche.aqualumen.client.screen.HubScreen;
+import store.aquateche.aqualumen.client.screen.HubScreenFactory;
+import store.aquateche.aqualumen.client.screen.HubSnapshotScreen;
 import store.aquateche.aqualumen.common.data.HubSnapshot;
 import store.aquateche.aqualumen.network.LumenNetwork;
 import store.aquateche.aqualumen.network.LumenPackets;
@@ -35,6 +36,7 @@ public final class LumenClient {
 
     @Nullable
     private static HubSnapshot snapshot;
+    private static long snapshotReceivedAt;
 
     private LumenClient() {
     }
@@ -51,17 +53,29 @@ public final class LumenClient {
     /** Called from the network thread wrapper; already scheduled on the client thread. */
     public static void acceptSync(HubSnapshot incoming, boolean openScreen) {
         snapshot = incoming;
+        snapshotReceivedAt = System.currentTimeMillis();
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.screen instanceof HubScreen hub) {
-            hub.refresh();
+        if (minecraft.screen instanceof HubSnapshotScreen hub) {
+            hub.refresh(incoming);
         } else if (openScreen) {
-            minecraft.setScreen(new HubScreen());
+            minecraft.setScreen(HubScreenFactory.create("profile"));
         }
     }
 
     @Nullable
     public static HubSnapshot snapshot() {
         return snapshot;
+    }
+
+    public static long snapshotReceivedAt() {
+        return snapshotReceivedAt;
+    }
+
+    public static void openScreen(String initialTab) {
+        sendAction("hub.open", "");
+        if (snapshot != null) {
+            Minecraft.getInstance().setScreen(HubScreenFactory.create(initialTab));
+        }
     }
 
     public static void sendAction(String action, String argument) {
@@ -86,10 +100,7 @@ public final class LumenClient {
                 return;
             }
             while (OPEN_HUB.consumeClick()) {
-                sendAction("hub.open", "");
-                if (snapshot != null && !(minecraft.screen instanceof HubScreen)) {
-                    minecraft.setScreen(new HubScreen());
-                }
+                openScreen("profile");
             }
         }
     }

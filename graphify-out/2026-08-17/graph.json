@@ -7090,8 +7090,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_serverevents_serverevents_onregistercommands",
-      "community": 134,
-      "community_name": ".register",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": ".onregistercommands()"
     },
     {
@@ -7103,7 +7103,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_serverevents_serverevents_onloggedout",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": ".onloggedout()"
     },
     {
@@ -7114,7 +7114,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_serverevents_java_playerloggedoutevent",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": "playerloggedoutevent"
     },
     {
@@ -7148,8 +7148,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_serverevents_serverevents_markmodded",
-      "community": 69,
-      "community_name": "ClientHello",
+      "community": 226,
+      "community_name": "HubActionHandler",
       "norm_label": ".markmodded()"
     },
     {
@@ -7160,7 +7160,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_serverevents_serverevents_hasclientmod",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".hasclientmod()"
     },
@@ -7184,8 +7184,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_command_lumencommands_lumencommands",
-      "community": 134,
-      "community_name": ".register",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": "lumencommands"
     },
     {
@@ -7196,8 +7196,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_command_lumencommands_lumencommands_lumencommands",
-      "community": 134,
-      "community_name": ".register",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": ".lumencommands()"
     },
     {
@@ -7208,8 +7208,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_command_lumencommands_lumencommands_register",
-      "community": 134,
-      "community_name": ".register",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": ".register()"
     },
     {
@@ -7220,8 +7220,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_command_lumencommands_lumencommands_open",
-      "community": 134,
-      "community_name": ".register",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": ".open()"
     },
     {
@@ -7231,8 +7231,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "chestfallbackui.java"
     },
     {
@@ -7244,8 +7244,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_chestfallbackui",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "chestfallbackui"
     },
     {
@@ -7256,8 +7256,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_chestfallbackui_chestfallbackui",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": ".chestfallbackui()"
     },
     {
@@ -7268,8 +7268,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_chestfallbackui_open",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": ".open()"
     },
     {
@@ -7280,8 +7280,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_chestfallbackui_build",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": ".build()"
     },
     {
@@ -7291,8 +7291,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "simplecontainer",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "simplecontainer"
     },
     {
@@ -7303,8 +7303,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_chestfallbackui_icon",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": ".icon()"
     },
     {
@@ -7314,8 +7314,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_java_item",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "item"
     },
     {
@@ -7325,8 +7325,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_java_itemstack",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "itemstack"
     },
     {
@@ -7338,8 +7338,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_fallbackmenu",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "fallbackmenu"
     },
     {
@@ -7350,8 +7350,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_fallbackmenu_fallbackmenu",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": ".fallbackmenu()"
     },
     {
@@ -7362,8 +7362,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_fallbackmenu_clicked",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": ".clicked()"
     },
     {
@@ -7373,8 +7373,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_java_override",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "override"
     },
     {
@@ -7385,8 +7385,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_fallbackmenu_quickmovestack",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": ".quickmovestack()"
     },
     {
@@ -7397,8 +7397,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_compat_chestfallbackui_fallbackmenu_stillvalid",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": ".stillvalid()"
     },
     {
@@ -7561,7 +7561,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubactionhandler_hubactionhandler",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": "hubactionhandler"
     },
     {
@@ -7573,7 +7573,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubactionhandler_hubactionhandler_hubactionhandler",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": ".hubactionhandler()"
     },
     {
@@ -7585,7 +7585,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubactionhandler_hubactionhandler_handle",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": ".handle()"
     },
     {
@@ -7597,7 +7597,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubactionhandler_hubactionhandler_forget",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": ".forget()"
     },
     {
@@ -7609,7 +7609,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubactionhandler_hubactionhandler_isoncooldown",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": ".isoncooldown()"
     },
     {
@@ -7621,7 +7621,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubactionhandler_hubactionhandler_unavailable",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": ".unavailable()"
     },
     {
@@ -7668,7 +7668,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubdataservice_hubdataservice_open",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".open()"
     },
@@ -7680,7 +7680,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubdataservice_hubdataservice_push",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".push()"
     },
@@ -7705,7 +7705,7 @@
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubdataservice_hubdataservice_closefor",
       "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community_name": "HubActionHandler",
       "norm_label": ".closefor()"
     },
     {
@@ -7716,8 +7716,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubdataservice_hubdataservice_invalidate",
-      "community": 134,
-      "community_name": ".register",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": ".invalidate()"
     },
     {
@@ -7728,8 +7728,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_common_service_hubdataservice_hubdataservice_status",
-      "community": 134,
-      "community_name": ".register",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": ".status()"
     },
     {
@@ -8038,7 +8038,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_network_lumennetwork_lumennetwork_toplayer",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".toplayer()"
     },
@@ -8099,8 +8099,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_network_lumenpackets_clienthello",
-      "community": 69,
-      "community_name": "ClientHello",
+      "community": 226,
+      "community_name": "HubActionHandler",
       "norm_label": "clienthello"
     },
     {
@@ -8111,8 +8111,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_network_lumenpackets_clienthello_clienthello",
-      "community": 69,
-      "community_name": "ClientHello",
+      "community": 226,
+      "community_name": "HubActionHandler",
       "norm_label": ".clienthello()"
     },
     {
@@ -8123,8 +8123,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_network_lumenpackets_clienthello_encode",
-      "community": 69,
-      "community_name": "ClientHello",
+      "community": 226,
+      "community_name": "HubActionHandler",
       "norm_label": ".encode()"
     },
     {
@@ -8135,8 +8135,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_network_lumenpackets_clienthello_handle",
-      "community": 69,
-      "community_name": "ClientHello",
+      "community": 226,
+      "community_name": "HubActionHandler",
       "norm_label": ".handle()"
     },
     {
@@ -8146,8 +8146,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_network_lumenpackets_java_context",
-      "community": 69,
-      "community_name": "ClientHello",
+      "community": 226,
+      "community_name": "HubActionHandler",
       "norm_label": "context"
     },
     {
@@ -8195,8 +8195,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_network_lumenpackets_hubaction_handle",
-      "community": 69,
-      "community_name": "ClientHello",
+      "community": 226,
+      "community_name": "HubActionHandler",
       "norm_label": ".handle()"
     },
     {
@@ -8244,8 +8244,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aqualumen_ui_src_main_java_store_aquateche_aqualumen_network_lumenpackets_hubsync_handle",
-      "community": 69,
-      "community_name": "ClientHello",
+      "community": 226,
+      "community_name": "HubActionHandler",
       "norm_label": ".handle()"
     },
     {
@@ -8669,8 +8669,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_aquatechui_aquatechui_commonsetup",
-      "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": ".commonsetup()"
     },
     {
@@ -14266,7 +14266,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": "horizonevents"
     },
     {
@@ -14277,7 +14277,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_java_mod_eventbussubscriber",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": "mod.eventbussubscriber"
     },
     {
@@ -14289,7 +14289,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_horizonevents",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".horizonevents()"
     },
     {
@@ -14301,7 +14301,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_daykey",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".daykey()"
     },
     {
@@ -14313,7 +14313,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_sync",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".sync()"
     },
     {
@@ -14325,7 +14325,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_holdingaquarod",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".holdingaquarod()"
     },
     {
@@ -14337,7 +14337,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_countcoppercoins",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".countcoppercoins()"
     },
     {
@@ -14349,7 +14349,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_onlogin",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".onlogin()"
     },
     {
@@ -14360,7 +14360,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_java_playerloggedinevent",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": "playerloggedinevent"
     },
     {
@@ -14372,7 +14372,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_onfish",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".onfish()"
     },
     {
@@ -14384,7 +14384,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_onbreak",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".onbreak()"
     },
     {
@@ -14395,7 +14395,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_java_breakevent",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": "breakevent"
     },
     {
@@ -14407,7 +14407,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_ontick",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".ontick()"
     },
     {
@@ -14418,7 +14418,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_java_playertickevent",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": "playertickevent"
     },
     {
@@ -14430,7 +14430,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_nearworkingmachine",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".nearworkingmachine()"
     },
     {
@@ -14442,7 +14442,7 @@
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_horizon_horizonevents_horizonevents_maybesyncprogress",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".maybesyncprogress()"
     },
     {
@@ -16438,7 +16438,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": "networkhandler"
     },
@@ -16450,7 +16450,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler_id",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".id()"
     },
@@ -16462,8 +16462,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler_register",
-      "community": 226,
-      "community_name": "net.minecraft.server.level.ServerPlayer",
+      "community": 21,
+      "community_name": "HubDataService.java",
       "norm_label": ".register()"
     },
     {
@@ -16474,7 +16474,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler_markjoined",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".markjoined()"
     },
@@ -16486,7 +16486,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler_markleft",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".markleft()"
     },
@@ -16498,7 +16498,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler_sendtoall",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".sendtoall()"
     },
@@ -16510,7 +16510,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler_canreceiveplaypackets",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".canreceiveplaypackets()"
     },
@@ -16522,7 +16522,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler_sendtoplayready",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".sendtoplayready()"
     },
@@ -16534,7 +16534,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "mods_aquatech_ui_src_main_java_net_aquatech_ui_network_networkhandler_networkhandler_sendtoplayerwhenready",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": ".sendtoplayerwhenready()"
     },
@@ -28901,7 +28901,7 @@
       "label": "\ud83e\udded Handoff \u0434\u043b\u044f Antigravity \u2014 \u0441\u043f\u0440\u0438\u043d\u0442 10\u201311 \u0430\u0432\u0433\u0443\u0441\u0442\u0430 2026",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L221",
+      "source_location": "L222",
       "_origin": "ast",
       "id": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
       "community": 12,
@@ -28912,7 +28912,7 @@
       "label": "1. \u0422\u0435\u043a\u0443\u0449\u0435\u0435 \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435 (snapshot \u043d\u0430 2026-08-11)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L226",
+      "source_location": "L227",
       "_origin": "ast",
       "id": "implementation_plan_1_\u0442\u0435\u043a\u0443\u0449\u0435\u0435_\u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435_snapshot_\u043d\u0430_2026_08_11",
       "community": 12,
@@ -28923,7 +28923,7 @@
       "label": "2. \u0420\u044b\u0431\u0430\u043b\u043a\u0430 StarCatcher + aquatech_ui (\u043a\u0440\u0438\u0442\u0438\u0447\u043d\u043e)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L241",
+      "source_location": "L242",
       "_origin": "ast",
       "id": "implementation_plan_2_\u0440\u044b\u0431\u0430\u043b\u043a\u0430_starcatcher_aquatech_ui_\u043a\u0440\u0438\u0442\u0438\u0447\u043d\u043e",
       "community": 12,
@@ -28934,7 +28934,7 @@
       "label": "2.1 \u0414\u0432\u0430 \u0442\u0438\u043f\u0430 \u0443\u0434\u043e\u0447\u0435\u043a",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L243",
+      "source_location": "L244",
       "_origin": "ast",
       "id": "implementation_plan_2_1_\u0434\u0432\u0430_\u0442\u0438\u043f\u0430_\u0443\u0434\u043e\u0447\u0435\u043a",
       "community": 12,
@@ -28945,7 +28945,7 @@
       "label": "2.2 \u0427\u0442\u043e \u043b\u043e\u043c\u0430\u043b\u043e\u0441\u044c \u0438 \u043a\u0430\u043a \u0447\u0438\u043d\u0438\u043b\u0438",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L252",
+      "source_location": "L253",
       "_origin": "ast",
       "id": "implementation_plan_2_2_\u0447\u0442\u043e_\u043b\u043e\u043c\u0430\u043b\u043e\u0441\u044c_\u0438_\u043a\u0430\u043a_\u0447\u0438\u043d\u0438\u043b\u0438",
       "community": 12,
@@ -28956,7 +28956,7 @@
       "label": "2.3 Datapack aquatech_boot_fixes",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L258",
+      "source_location": "L259",
       "_origin": "ast",
       "id": "implementation_plan_2_3_datapack_aquatech_boot_fixes",
       "community": 12,
@@ -28967,7 +28967,7 @@
       "label": "3. FTB Quests \u2014 \u0438\u043d\u0446\u0438\u0434\u0435\u043d\u0442 \u0438 \u043f\u0440\u0430\u0432\u0438\u043b\u0430",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L272",
+      "source_location": "L273",
       "_origin": "ast",
       "id": "implementation_plan_3_ftb_quests_\u0438\u043d\u0446\u0438\u0434\u0435\u043d\u0442_\u0438_\u043f\u0440\u0430\u0432\u0438\u043b\u0430",
       "community": 12,
@@ -28978,7 +28978,7 @@
       "label": "3.1 \u0427\u0442\u043e \u0441\u043b\u0443\u0447\u0438\u043b\u043e\u0441\u044c",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L274",
+      "source_location": "L275",
       "_origin": "ast",
       "id": "implementation_plan_3_1_\u0447\u0442\u043e_\u0441\u043b\u0443\u0447\u0438\u043b\u043e\u0441\u044c",
       "community": 12,
@@ -28989,7 +28989,7 @@
       "label": "3.2 \u0422\u0435\u043a\u0443\u0449\u0438\u0439 source of truth (\u043a\u0432\u0435\u0441\u0442\u044b)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L280",
+      "source_location": "L281",
       "_origin": "ast",
       "id": "implementation_plan_3_2_\u0442\u0435\u043a\u0443\u0449\u0438\u0439_source_of_truth_\u043a\u0432\u0435\u0441\u0442\u044b",
       "community": 12,
@@ -29000,7 +29000,7 @@
       "label": "3.3 \u041f\u0440\u0430\u0432\u0438\u043b\u0430 \u0434\u043b\u044f \u0430\u0433\u0435\u043d\u0442\u0430 (\u041d\u0415 \u041d\u0410\u0420\u0423\u0428\u0410\u0422\u042c)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L296",
+      "source_location": "L297",
       "_origin": "ast",
       "id": "implementation_plan_3_3_\u043f\u0440\u0430\u0432\u0438\u043b\u0430_\u0434\u043b\u044f_\u0430\u0433\u0435\u043d\u0442\u0430_\u043d\u0435_\u043d\u0430\u0440\u0443\u0448\u0430\u0442\u044c",
       "community": 12,
@@ -29011,7 +29011,7 @@
       "label": "4. Apex deploy \u2014 \u0438\u043d\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L313",
+      "source_location": "L314",
       "_origin": "ast",
       "id": "implementation_plan_4_apex_deploy_\u0438\u043d\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430",
       "community": 12,
@@ -29022,7 +29022,7 @@
       "label": "4.1 \u0421\u0435\u043a\u0440\u0435\u0442\u044b (gitignored)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L315",
+      "source_location": "L316",
       "_origin": "ast",
       "id": "implementation_plan_4_1_\u0441\u0435\u043a\u0440\u0435\u0442\u044b_gitignored",
       "community": 12,
@@ -29033,7 +29033,7 @@
       "label": "4.2 \u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u0441\u043a\u0440\u0438\u043f\u0442\u044b (`scripts/tasks/`)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L324",
+      "source_location": "L325",
       "_origin": "ast",
       "id": "implementation_plan_4_2_\u043e\u0441\u043d\u043e\u0432\u043d\u044b\u0435_\u0441\u043a\u0440\u0438\u043f\u0442\u044b_scripts_tasks",
       "community": 12,
@@ -29044,7 +29044,7 @@
       "label": "4.3 Deploy flow (\u043f\u043e\u043b\u043d\u044b\u0439)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L337",
+      "source_location": "L338",
       "_origin": "ast",
       "id": "implementation_plan_4_3_deploy_flow_\u043f\u043e\u043b\u043d\u044b\u0439",
       "community": 12,
@@ -29055,7 +29055,7 @@
       "label": "4.4 FAWE \u00d7 Mohist",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L349",
+      "source_location": "L350",
       "_origin": "ast",
       "id": "implementation_plan_4_4_fawe_mohist",
       "community": 12,
@@ -29066,7 +29066,7 @@
       "label": "4.5 P2 ops (\u043f\u0440\u0438\u043c\u0435\u043d\u0435\u043d\u043e \u043d\u0430 Apex)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L355",
+      "source_location": "L356",
       "_origin": "ast",
       "id": "implementation_plan_4_5_p2_ops_\u043f\u0440\u0438\u043c\u0435\u043d\u0435\u043d\u043e_\u043d\u0430_apex",
       "community": 12,
@@ -29077,7 +29077,7 @@
       "label": "5. \u041a\u043b\u0438\u0435\u043d\u0442 / \u043b\u0430\u0443\u043d\u0447\u0435\u0440 / \u043f\u043e\u0440\u0442\u0430\u043b (10\u201311 \u0430\u0432\u0433)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L361",
+      "source_location": "L362",
       "_origin": "ast",
       "id": "implementation_plan_5_\u043a\u043b\u0438\u0435\u043d\u0442_\u043b\u0430\u0443\u043d\u0447\u0435\u0440_\u043f\u043e\u0440\u0442\u0430\u043b_10_11_\u0430\u0432\u0433",
       "community": 12,
@@ -29088,7 +29088,7 @@
       "label": "6. Git-\u043a\u043e\u043c\u043c\u0438\u0442\u044b \u0441\u043f\u0440\u0438\u043d\u0442\u0430 (\u0434\u043b\u044f blame)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L369",
+      "source_location": "L370",
       "_origin": "ast",
       "id": "implementation_plan_6_git_\u043a\u043e\u043c\u043c\u0438\u0442\u044b_\u0441\u043f\u0440\u0438\u043d\u0442\u0430_\u0434\u043b\u044f_blame",
       "community": 12,
@@ -29099,7 +29099,7 @@
       "label": "7. \u041e\u0442\u043a\u0440\u044b\u0442\u044b\u0435 \u0437\u0430\u0434\u0430\u0447\u0438 (P3, \u043d\u0435 \u0434\u0435\u043b\u0430\u0442\u044c \u0431\u0435\u0437 \u0437\u0430\u043f\u0440\u043e\u0441\u0430)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L383",
+      "source_location": "L384",
       "_origin": "ast",
       "id": "implementation_plan_7_\u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0435_\u0437\u0430\u0434\u0430\u0447\u0438_p3_\u043d\u0435_\u0434\u0435\u043b\u0430\u0442\u044c_\u0431\u0435\u0437_\u0437\u0430\u043f\u0440\u043e\u0441\u0430",
       "community": 12,
@@ -29110,7 +29110,7 @@
       "label": "8. \u0427\u0435\u043a\u043b\u0438\u0441\u0442 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u0434\u043b\u044f Antigravity",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L391",
+      "source_location": "L392",
       "_origin": "ast",
       "id": "implementation_plan_8_\u0447\u0435\u043a\u043b\u0438\u0441\u0442_\u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438_\u0434\u043b\u044f_antigravity",
       "community": 12,
@@ -29121,7 +29121,7 @@
       "label": "9. \u041a\u0430\u0440\u0442\u0430 graphify / exploration",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L413",
+      "source_location": "L414",
       "_origin": "ast",
       "id": "implementation_plan_9_\u043a\u0430\u0440\u0442\u0430_graphify_exploration",
       "community": 12,
@@ -35042,7 +35042,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "net_minecraft_server_level_serverplayer",
-      "community": 226,
+      "community": 41,
       "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": "net.minecraft.server.level.serverplayer"
     },
@@ -35097,8 +35097,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "net_minecraft_world_container",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "net.minecraft.world.container"
     },
     {
@@ -35108,8 +35108,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "net_minecraft_world_simplecontainer",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "net.minecraft.world.simplecontainer"
     },
     {
@@ -35141,8 +35141,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "net_minecraft_world_inventory_chestmenu",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "net.minecraft.world.inventory.chestmenu"
     },
     {
@@ -35152,8 +35152,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "net_minecraft_world_inventory_clicktype",
-      "community": 21,
-      "community_name": "HubDataService.java",
+      "community": 69,
+      "community_name": "ChestFallbackUI.java",
       "norm_label": "net.minecraft.world.inventory.clicktype"
     },
     {
@@ -35813,7 +35813,7 @@
       "_origin": "ast",
       "id": "net_minecraftforge_event_entity_player_itemfishedevent",
       "community": 41,
-      "community_name": "HorizonEvents",
+      "community_name": "net.minecraft.server.level.ServerPlayer",
       "norm_label": "net.minecraftforge.event.entity.player.itemfishedevent"
     },
     {
@@ -103275,7 +103275,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L221",
+      "source_location": "L222",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_master_implementation_plan_aquatech_minecraft_1_20_1_forge_mohist",
@@ -103539,7 +103539,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L226",
+      "source_location": "L227",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103550,7 +103550,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L241",
+      "source_location": "L242",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103561,7 +103561,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L272",
+      "source_location": "L273",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103572,7 +103572,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L313",
+      "source_location": "L314",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103583,7 +103583,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L361",
+      "source_location": "L362",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103594,7 +103594,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L369",
+      "source_location": "L370",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103605,7 +103605,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L383",
+      "source_location": "L384",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103616,7 +103616,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L391",
+      "source_location": "L392",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103627,7 +103627,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L413",
+      "source_location": "L414",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_handoff_\u0434\u043b\u044f_antigravity_\u0441\u043f\u0440\u0438\u043d\u0442_10_11_\u0430\u0432\u0433\u0443\u0441\u0442\u0430_2026",
@@ -103638,7 +103638,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L243",
+      "source_location": "L244",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_2_\u0440\u044b\u0431\u0430\u043b\u043a\u0430_starcatcher_aquatech_ui_\u043a\u0440\u0438\u0442\u0438\u0447\u043d\u043e",
@@ -103649,7 +103649,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L252",
+      "source_location": "L253",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_2_\u0440\u044b\u0431\u0430\u043b\u043a\u0430_starcatcher_aquatech_ui_\u043a\u0440\u0438\u0442\u0438\u0447\u043d\u043e",
@@ -103660,7 +103660,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L258",
+      "source_location": "L259",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_2_\u0440\u044b\u0431\u0430\u043b\u043a\u0430_starcatcher_aquatech_ui_\u043a\u0440\u0438\u0442\u0438\u0447\u043d\u043e",
@@ -103671,7 +103671,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L274",
+      "source_location": "L275",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_3_ftb_quests_\u0438\u043d\u0446\u0438\u0434\u0435\u043d\u0442_\u0438_\u043f\u0440\u0430\u0432\u0438\u043b\u0430",
@@ -103682,7 +103682,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L280",
+      "source_location": "L281",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_3_ftb_quests_\u0438\u043d\u0446\u0438\u0434\u0435\u043d\u0442_\u0438_\u043f\u0440\u0430\u0432\u0438\u043b\u0430",
@@ -103693,7 +103693,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L296",
+      "source_location": "L297",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_3_ftb_quests_\u0438\u043d\u0446\u0438\u0434\u0435\u043d\u0442_\u0438_\u043f\u0440\u0430\u0432\u0438\u043b\u0430",
@@ -103704,7 +103704,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L315",
+      "source_location": "L316",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_4_apex_deploy_\u0438\u043d\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430",
@@ -103715,7 +103715,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L324",
+      "source_location": "L325",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_4_apex_deploy_\u0438\u043d\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430",
@@ -103726,7 +103726,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L337",
+      "source_location": "L338",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_4_apex_deploy_\u0438\u043d\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430",
@@ -103737,7 +103737,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L349",
+      "source_location": "L350",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_4_apex_deploy_\u0438\u043d\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430",
@@ -103748,7 +103748,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN.md",
-      "source_location": "L355",
+      "source_location": "L356",
       "weight": 1.0,
       "_origin": "ast",
       "source": "implementation_plan_4_apex_deploy_\u0438\u043d\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430",

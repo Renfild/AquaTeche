@@ -6,7 +6,6 @@ import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.client.gui.AquaWebScreen;
 import net.aquatech.ui.client.gui.OceanSkillTreeScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.sounds.SoundEvents;
 
@@ -150,9 +149,7 @@ public final class AquaWebIpcDispatcher {
     private static void openAqualumenHub(Minecraft mc) {
         try {
             Class<?> client = Class.forName("store.aquateche.aqualumen.client.LumenClient");
-            client.getMethod("sendAction", String.class, String.class).invoke(null, "hub.open", "");
-            Class<?> screen = Class.forName("store.aquateche.aqualumen.client.screen.HubScreen");
-            mc.setScreen((Screen) screen.getConstructor().newInstance());
+            client.getMethod("openScreen", String.class).invoke(null, "profile");
         } catch (Throwable t) {
             mc.setScreen(null);
             if (mc.player != null) {

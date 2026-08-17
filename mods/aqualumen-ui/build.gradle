@@ -36,10 +36,15 @@ minecraft {
 
 repositories {
     mavenCentral()
+    maven {
+        name = "cinemamod"
+        url = "https://mcef-download.cinemamod.com/repositories/releases"
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly files("../aquatech-ui/libs/mcef-forge-2.1.6-1.20.1.jar")
 }
 
 tasks.named('processResources', ProcessResources).configure {

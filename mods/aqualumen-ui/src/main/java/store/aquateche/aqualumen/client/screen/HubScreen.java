@@ -20,7 +20,7 @@ import java.util.List;
  * The hub screen. Fixed three zone shell: header, sidebar, content.
  * Switching a tab only swaps the content zone, so navigation never moves under the cursor.
  */
-public final class HubScreen extends Screen {
+public final class HubScreen extends Screen implements HubSnapshotScreen {
 
     private static final int SIDEBAR = 104;
     private static final int HEADER = 34;
@@ -90,6 +90,11 @@ public final class HubScreen extends Screen {
                 navButtons.get(i).setBadge(tabs.get(i).badge(snapshot));
             }
         }
+    }
+
+    @Override
+    public void refresh(HubSnapshot snapshot) {
+        refresh();
     }
 
     private void select(HubTabs.Tab value) {

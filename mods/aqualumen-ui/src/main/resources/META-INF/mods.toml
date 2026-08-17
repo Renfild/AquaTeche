@@ -30,3 +30,10 @@ ${mod_description}
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="mcef"
+    mandatory=false
+    versionRange="[2.1,)"
+    ordering="AFTER"
+    side="CLIENT"

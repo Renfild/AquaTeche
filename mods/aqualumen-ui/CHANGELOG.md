@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.1-alpha — MCEF hub
+
+- Hub renders bundled `mod://aqualumen/html/hub.html` through CinemaMod MCEF at framebuffer resolution.
+- Live `HubSnapshot` data replaces prototype values; browser actions pass through a strict Java whitelist to existing server validation.
+- Native `HubScreen` remains fallback when MCEF is missing or Chromium cannot initialize.
+- Responsive layout, GUI-scale input mapping, modal `ESC`, themes and reduced motion work inside the web screen.
+
 ## 0.3.0-alpha — покупка с подтверждением, ревеал кейса, 23 иконки
 
 - Прототип: клик по офферу открывает окно подтверждения 480 px — товар, состав, баланс до и после списания, итог золотом. `Enter` подтверждает, `ESC` отменяет, фон размыт и не принимает клики.
