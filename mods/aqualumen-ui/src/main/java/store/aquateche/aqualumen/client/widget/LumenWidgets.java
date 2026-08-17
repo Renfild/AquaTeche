@@ -1,12 +1,14 @@
 package store.aquateche.aqualumen.client.widget;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import store.aquateche.aqualumen.client.render.Anim;
 import store.aquateche.aqualumen.client.render.Gfx;
+import store.aquateche.aqualumen.client.render.HubFont;
 import store.aquateche.aqualumen.client.render.Icons;
 import store.aquateche.aqualumen.client.theme.LumenTheme;
 
@@ -69,20 +71,20 @@ public final class LumenWidgets {
             }
 
             int textColor = selected ? theme.text() : Gfx.lerpColor(theme.textDim(), theme.text(), animation);
+            Font font = Minecraft.getInstance().font;
             Icons.drawCentered(graphics, icon, getX() + 14 + shift, getY() + getHeight() / 2, 8,
                     Gfx.lerpColor(theme.textDim(), theme.accent(), animation));
-            graphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + 24 + shift,
-                    getY() + (getHeight() - 8) / 2, textColor, false);
+            HubFont.draw(graphics, font, getMessage(), getX() + 24 + shift,
+                    getY() + (getHeight() - 8) / 2, textColor);
 
             if (!badge.isEmpty()) {
                 float beat = Anim.pulse(life * 20.0F, 0.16F);
-                int badgeWidth = Minecraft.getInstance().font.width(badge) + 10;
+                int badgeWidth = HubFont.width(font, badge) + 10;
                 int badgeX = getX() + getWidth() - badgeWidth - 8;
                 int badgeY = getY() + (getHeight() - 14) / 2;
                 Gfx.roundedRect(graphics, badgeX, badgeY, badgeWidth, 14, 7,
                         Gfx.withAlpha(theme.accentAlt(), 0.16F + 0.14F * beat));
-                graphics.drawString(Minecraft.getInstance().font, badge, badgeX + 5, badgeY + 3,
-                        theme.accentAlt(), false);
+                HubFont.draw(graphics, font, badge, badgeX + 5, badgeY + 3, theme.accentAlt());
             }
         }
 
@@ -127,6 +129,7 @@ public final class LumenWidgets {
 
             int radius = getHeight() / 2;
             int y = getY() + Math.round(press);
+            Font font = Minecraft.getInstance().font;
             if (primary) {
                 if (hover > 0.02F) {
                     Gfx.glow(graphics, getX(), y, getWidth(), getHeight(), radius, theme.accent(),
@@ -135,14 +138,14 @@ public final class LumenWidgets {
                 Gfx.gradientRoundedH(graphics, getX(), y, getWidth(), getHeight(), radius,
                         Gfx.lerpColor(theme.accent(), theme.accentAlt(), 0.2F * hover),
                         Gfx.lerpColor(theme.accentAlt(), theme.accent(), 0.2F * hover));
-                graphics.drawCenteredString(Minecraft.getInstance().font, getMessage(),
+                HubFont.centered(graphics, font, getMessage(),
                         getX() + getWidth() / 2, y + (getHeight() - 8) / 2, 0xFF08131A);
             } else {
                 Gfx.roundedRect(graphics, getX(), y, getWidth(), getHeight(), radius,
                         Gfx.withAlpha(theme.raised(), 0.75F + 0.25F * hover));
                 Gfx.outline(graphics, getX(), y, getWidth(), getHeight(), radius,
                         Gfx.lerpColor(theme.border(), Gfx.withAlpha(theme.accent(), 0.5F), hover));
-                graphics.drawCenteredString(Minecraft.getInstance().font, getMessage(),
+                HubFont.centered(graphics, font, getMessage(),
                         getX() + getWidth() / 2, y + (getHeight() - 8) / 2,
                         Gfx.lerpColor(theme.text(), theme.accent(), hover * 0.6F));
             }
@@ -169,7 +172,7 @@ public final class LumenWidgets {
         Gfx.roundedRect(graphics, x, y, width, height, 12, theme.shade(theme.raised(), 0.92F));
         Gfx.outline(graphics, x, y, width, height, 12, theme.border());
         if (caption != null && !caption.isEmpty()) {
-            graphics.drawString(Minecraft.getInstance().font, caption, x + 14, y + 12, theme.textDim(), false);
+            HubFont.draw(graphics, Minecraft.getInstance().font, caption, x + 14, y + 12, theme.textDim());
         }
     }
 
@@ -178,8 +181,9 @@ public final class LumenWidgets {
                                 String value, String label, int accent, Icons.Icon icon) {
         Gfx.roundedRect(graphics, x, y, width, height, 10, theme.shade(theme.surface(), 0.85F));
         Gfx.outline(graphics, x, y, width, height, 10, theme.border());
+        Font font = Minecraft.getInstance().font;
         Icons.drawCentered(graphics, icon, x + width - 13, y + 14, 8, Gfx.withAlpha(accent, 0.7F));
-        graphics.drawString(Minecraft.getInstance().font, value, x + 12, y + 12, accent, false);
-        graphics.drawString(Minecraft.getInstance().font, label, x + 12, y + 26, theme.textDim(), false);
+        HubFont.draw(graphics, font, value, x + 12, y + 12, accent);
+        HubFont.draw(graphics, font, label, x + 12, y + 26, theme.textDim());
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import store.aquateche.aqualumen.client.render.Anim;
 import store.aquateche.aqualumen.client.render.Gfx;
+import store.aquateche.aqualumen.client.render.HubFont;
 import store.aquateche.aqualumen.client.render.Icons;
 import store.aquateche.aqualumen.client.theme.LumenTheme;
 
@@ -83,7 +84,7 @@ public final class HubFx {
             float appear = Anim.easeOutCubic(Math.min(1.0F, toast.age / 0.18F));
             float leave = Anim.clamp01((TOAST_LIFETIME - toast.age) / 0.45F);
             float alpha = Math.min(appear, leave);
-            int width = font.width(toast.message) + 40;
+            int width = HubFont.width(font, toast.message) + 40;
             int x = right - width + Math.round((1.0F - appear) * 14.0F);
 
             Gfx.roundedRect(graphics, x, y, width, TOAST_HEIGHT, 10,
@@ -92,8 +93,8 @@ public final class HubFx {
                     Anim.fade(Gfx.withAlpha(toast.color, 0.55F), alpha));
             Icons.drawCentered(graphics, toast.icon, x + 15, y + TOAST_HEIGHT / 2, 10,
                     Anim.fade(toast.color, alpha));
-            graphics.drawString(font, toast.message, x + 26, y + (TOAST_HEIGHT - 8) / 2,
-                    Anim.fade(theme.text(), alpha), false);
+            HubFont.draw(graphics, font, toast.message, x + 26, y + (TOAST_HEIGHT - 8) / 2,
+                    Anim.fade(theme.text(), alpha));
 
             int lifeWidth = Math.round((width - 20) * Anim.clamp01(1.0F - toast.age / TOAST_LIFETIME));
             graphics.fill(x + 10, y + TOAST_HEIGHT - 3, x + 10 + lifeWidth, y + TOAST_HEIGHT - 2,

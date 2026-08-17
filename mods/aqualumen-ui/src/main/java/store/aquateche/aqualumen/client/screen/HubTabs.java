@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import store.aquateche.aqualumen.client.LumenClient;
 import store.aquateche.aqualumen.client.render.Anim;
 import store.aquateche.aqualumen.client.render.Gfx;
+import store.aquateche.aqualumen.client.render.HubFont;
 import store.aquateche.aqualumen.client.render.Icons;
 import store.aquateche.aqualumen.client.theme.LumenTheme;
 import store.aquateche.aqualumen.client.widget.LumenWidgets;
@@ -82,7 +83,7 @@ public final class HubTabs {
     public static void render(GuiGraphics graphics, Font font, LumenTheme theme, @Nullable HubSnapshot snapshot,
                               Tab tab, int x, int y, int width, int height, int mouseX, int mouseY, float time) {
         if (snapshot == null) {
-            graphics.drawString(font, "\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430...", x + 4, y + 4, theme.textDim(), false);
+            HubFont.draw(graphics, font, "\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430...", x + 4, y + 4, theme.textDim());
             return;
         }
         switch (tab) {
@@ -107,17 +108,17 @@ public final class HubTabs {
         Gfx.ring(graphics, x + 44, y + heroHeight / 2, 26, 5, profile.levelProgress() * reveal,
                 theme.shade(theme.surface(), 0.9F), theme.accent(),
                 Gfx.lerpColor(theme.accentAlt(), theme.accent(), pulse));
-        graphics.drawCenteredString(font, String.valueOf(profile.level()), x + 44, y + heroHeight / 2 - 8, theme.text());
-        graphics.drawCenteredString(font, "LVL", x + 44, y + heroHeight / 2 + 3, theme.textDim());
+        HubFont.centered(graphics, font, String.valueOf(profile.level()), x + 44, y + heroHeight / 2 - 8, theme.text());
+        HubFont.centered(graphics, font, "LVL", x + 44, y + heroHeight / 2 + 3, theme.textDim());
 
-        graphics.drawString(font, profile.name(), x + 82, y + 18, theme.text(), false);
-        graphics.drawString(font, profile.rank(), x + 82, y + 32, 0xFF000000 | profile.rankColor(), false);
+        HubFont.draw(graphics, font, profile.name(), x + 82, y + 18, theme.text());
+        HubFont.draw(graphics, font, profile.rank(), x + 82, y + 32, 0xFF000000 | profile.rankColor());
 
         Gfx.progressBar(graphics, x + 82, y + 48, width - 100, 6, profile.levelProgress() * reveal,
                 theme.shade(theme.surface(), 0.9F), theme.accent(), theme.accentAlt());
-        graphics.drawString(font,
+        HubFont.draw(graphics, font,
                 Math.round(profile.levelProgress() * 100) + "% \u0434\u043e \u0443\u0440\u043e\u0432\u043d\u044f " + (profile.level() + 1),
-                x + 82, y + 58, theme.textDim(), false);
+                x + 82, y + 58, theme.textDim());
 
         int tileWidth = (width - 24) / 4;
         int tileY = y + heroHeight + 10;
@@ -143,17 +144,17 @@ public final class HubTabs {
             LumenWidgets.card(graphics, theme, x, dailyY, width, 34, null);
             Icons.drawCentered(graphics, Icons.Icon.CASE, x + 20, dailyY + 17, 10,
                     snapshot.wallet().dailyAvailable() ? theme.accent() : theme.textDim());
-            graphics.drawString(font,
+            HubFont.draw(graphics, font,
                     "\u0415\u0436\u0435\u0434\u043d\u0435\u0432\u043d\u0430\u044f \u043d\u0430\u0433\u0440\u0430\u0434\u0430 \u2022 \u0441\u0435\u0440\u0438\u044f " + snapshot.wallet().dailyStreak(),
-                    x + 32, dailyY + 13, theme.text(), false);
+                    x + 32, dailyY + 13, theme.text());
             String state = snapshot.wallet().dailyAvailable()
                     ? "\u0413\u043e\u0442\u043e\u0432\u043e"
                     : "\u0417\u0430\u0432\u0442\u0440\u0430";
-            int chipWidth = font.width(state) + 16;
+            int chipWidth = HubFont.width(font, state) + 16;
             Gfx.roundedRect(graphics, x + width - chipWidth - 12, dailyY + 8, chipWidth, 18, 9,
                     Gfx.withAlpha(snapshot.wallet().dailyAvailable() ? theme.accent() : theme.textDim(), 0.18F));
-            graphics.drawString(font, state, x + width - chipWidth - 4, dailyY + 13,
-                    snapshot.wallet().dailyAvailable() ? theme.accent() : theme.textDim(), false);
+            HubFont.draw(graphics, font, state, x + width - chipWidth - 4, dailyY + 13,
+                    snapshot.wallet().dailyAvailable() ? theme.accent() : theme.textDim());
         }
     }
 
@@ -185,8 +186,8 @@ public final class HubTabs {
             boolean gems = String.valueOf(offer.currency()).toLowerCase().contains("gem");
             Icons.badge(graphics, gems ? Icons.Icon.GEM : Icons.Icon.COIN, cardX + 10, cardY + 9, 16,
                     Gfx.withAlpha(theme.accent(), 0.16F), gems ? theme.accentAlt() : theme.accent());
-            graphics.drawString(font, offer.title(), cardX + 30, cardY + 12, theme.text(), false);
-            graphics.drawString(font, offer.subtitle(), cardX + 30, cardY + 24, theme.textDim(), false);
+            HubFont.draw(graphics, font, offer.title(), cardX + 30, cardY + 12, theme.text());
+            HubFont.draw(graphics, font, offer.subtitle(), cardX + 30, cardY + 24, theme.textDim());
 
             String price = offer.owned()
                     ? "\u041a\u0443\u043f\u043b\u0435\u043d\u043e"
@@ -194,20 +195,20 @@ public final class HubTabs {
             int priceColor = offer.owned() ? theme.success() : theme.gold();
             Icons.drawCentered(graphics, offer.owned() ? Icons.Icon.CHECK : Icons.Icon.ARROW,
                     cardX + 16, cardY + 46, 8, priceColor);
-            graphics.drawString(font, price, cardX + 24, cardY + 42, priceColor, false);
+            HubFont.draw(graphics, font, price, cardX + 24, cardY + 42, priceColor);
 
             if (!offer.badge().isEmpty()) {
-                int badgeWidth = font.width(offer.badge()) + 12;
+                int badgeWidth = HubFont.width(font, offer.badge()) + 12;
                 Gfx.roundedRect(graphics, cardX + cardWidth - badgeWidth - 10, cardY + 9, badgeWidth, 15, 7,
                         Gfx.withAlpha(theme.accentAlt(), 0.22F));
-                graphics.drawString(font, offer.badge(), cardX + cardWidth - badgeWidth - 4, cardY + 13,
-                        theme.accentAlt(), false);
+                HubFont.draw(graphics, font, offer.badge(), cardX + cardWidth - badgeWidth - 4, cardY + 13,
+                        theme.accentAlt());
             }
         }
 
-        graphics.drawString(font,
+        HubFont.draw(graphics, font,
                 "\u041f\u043e\u043a\u0430 \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e \u2014 \u044d\u043a\u043e\u043d\u043e\u043c\u0438\u043a\u0430 \u0435\u0449\u0451 \u043d\u0435 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0430",
-                x, y + height - 9, theme.textDim(), false);
+                x, y + height - 9, theme.textDim());
     }
 
     private static void cases(GuiGraphics graphics, Font font, LumenTheme theme, HubSnapshot snapshot,
@@ -226,25 +227,25 @@ public final class HubTabs {
                 default -> theme.accent();
             };
             Icons.badge(graphics, Icons.Icon.CASE, x + 10, rowY + 10, 20, Gfx.withAlpha(accent, 0.22F), accent);
-            graphics.drawString(font, entry.title(), x + 40, rowY + 12, theme.text(), false);
-            graphics.drawString(font, "\u0432 \u043d\u0430\u043b\u0438\u0447\u0438\u0438: " + entry.count(),
-                    x + 40, rowY + 24, theme.textDim(), false);
+            HubFont.draw(graphics, font, entry.title(), x + 40, rowY + 12, theme.text());
+            HubFont.draw(graphics, font, "\u0432 \u043d\u0430\u043b\u0438\u0447\u0438\u0438: " + entry.count(),
+                    x + 40, rowY + 24, theme.textDim());
 
             String action = entry.count() > 0
                     ? "\u041e\u0442\u043a\u0440\u044b\u0442\u044c"
                     : "\u041d\u0435\u0442 \u043a\u043b\u044e\u0447\u0435\u0439";
-            int actionWidth = font.width(action) + 20;
+            int actionWidth = HubFont.width(font, action) + 20;
             if (entry.count() > 0) {
                 Gfx.gradientRoundedH(graphics, x + width - actionWidth - 22, rowY + 11, actionWidth + 12, 18, 9,
                         theme.accent(), theme.accentAlt());
                 Icons.drawCentered(graphics, Icons.Icon.KEY, x + width - actionWidth - 10, rowY + 20, 8, 0xFF08131A);
-                graphics.drawString(font, action, x + width - actionWidth, rowY + 16, 0xFF08131A, false);
+                HubFont.draw(graphics, font, action, x + width - actionWidth, rowY + 16, 0xFF08131A);
             } else {
                 Gfx.roundedRect(graphics, x + width - actionWidth - 22, rowY + 11, actionWidth + 12, 18, 9,
                         theme.shade(theme.surface(), 0.8F));
                 Icons.drawCentered(graphics, Icons.Icon.LOCK, x + width - actionWidth - 10, rowY + 20, 8,
                         theme.textDim());
-                graphics.drawString(font, action, x + width - actionWidth, rowY + 16, theme.textDim(), false);
+                HubFont.draw(graphics, font, action, x + width - actionWidth, rowY + 16, theme.textDim());
             }
             index++;
         }
@@ -255,10 +256,10 @@ public final class HubTabs {
         HubSnapshot.Season season = snapshot.season();
 
         LumenWidgets.card(graphics, theme, x, y, width, 52, null);
-        graphics.drawString(font, season.title(), x + 14, y + 14, theme.text(), false);
-        graphics.drawString(font,
+        HubFont.draw(graphics, font, season.title(), x + 14, y + 14, theme.text());
+        HubFont.draw(graphics, font,
                 "\u0423\u0440\u043e\u0432\u0435\u043d\u044c " + season.tier() + " \u0438\u0437 " + season.maxTier(),
-                x + 14, y + 26, theme.textDim(), false);
+                x + 14, y + 26, theme.textDim());
         Gfx.progressBar(graphics, x + 14, y + 38, width - 28, 6, season.tierProgress() * HubFx.enter(),
                 theme.shade(theme.surface(), 0.9F), theme.accent(), theme.accentAlt());
 
@@ -272,7 +273,7 @@ public final class HubTabs {
             Gfx.roundedRect(graphics, nodeX, trackY, nodeWidth, 34, 10,
                     Gfx.withAlpha(color, unlocked ? 0.20F : 0.10F));
             Gfx.outline(graphics, nodeX, trackY, nodeWidth, 34, 10, theme.border());
-            graphics.drawCenteredString(font, String.valueOf(season.tier() + i + 1),
+            HubFont.centered(graphics, font, String.valueOf(season.tier() + i + 1),
                     nodeX + nodeWidth / 2, trackY + 5, unlocked ? theme.text() : theme.textDim());
             Icons.drawCentered(graphics, unlocked ? Icons.Icon.CHECK : Icons.Icon.LOCK,
                     nodeX + nodeWidth / 2, trackY + 23, 10, color);
@@ -290,10 +291,10 @@ public final class HubTabs {
             Gfx.gradientRoundedH(graphics, x, premiumY, width, 30, 10,
                     Gfx.withAlpha(theme.gold(), 0.16F), Gfx.withAlpha(theme.accentAlt(), 0.16F));
             Gfx.outline(graphics, x, premiumY, width, 30, 10, theme.border());
-            graphics.drawString(font, season.premium()
+            HubFont.draw(graphics, font, season.premium()
                             ? "Premium \u0430\u043a\u0442\u0438\u0432\u0435\u043d"
                             : "Premium \u043f\u0440\u043e\u043f\u0443\u0441\u043a \u2014 \u0431\u043e\u043b\u044c\u0448\u0435 \u043d\u0430\u0433\u0440\u0430\u0434 \u043d\u0430 \u043a\u0430\u0436\u0434\u043e\u043c \u0443\u0440\u043e\u0432\u043d\u0435",
-                    x + 14, premiumY + 11, theme.gold(), false);
+                    x + 14, premiumY + 11, theme.gold());
         }
     }
 
@@ -316,19 +317,19 @@ public final class HubTabs {
                 case 3 -> theme.accent();
                 default -> theme.textDim();
             };
-            graphics.drawString(font, "#" + entry.place(), x + 10, rowY + 6, placeColor, false);
+            HubFont.draw(graphics, font, "#" + entry.place(), x + 10, rowY + 6, placeColor);
             if (entry.place() <= 3) {
                 Icons.drawCentered(graphics, Icons.Icon.STAR, x + 32, rowY + 10, 8, placeColor);
             } else if (entry.self()) {
                 Icons.drawCentered(graphics, Icons.Icon.PLAYER, x + 32, rowY + 10, 8, theme.accent());
             }
-            graphics.drawString(font, entry.player(), x + 42, rowY + 6, theme.text(), false);
-            graphics.drawString(font, entry.value(), x + width - font.width(entry.value()) - 12, rowY + 6,
-                    theme.textDim(), false);
+            HubFont.draw(graphics, font, entry.player(), x + 42, rowY + 6, theme.text());
+            HubFont.draw(graphics, font, entry.value(), x + width - HubFont.width(font, entry.value()) - 12, rowY + 6,
+                    theme.textDim());
             index++;
         }
         if (index == 0) {
-            graphics.drawString(font, "\u041d\u0435\u0442 \u0434\u0430\u043d\u043d\u044b\u0445", x, y, theme.textDim(), false);
+            HubFont.draw(graphics, font, "\u041d\u0435\u0442 \u0434\u0430\u043d\u043d\u044b\u0445", x, y, theme.textDim());
         }
     }
 
@@ -349,13 +350,13 @@ public final class HubTabs {
             }
             Gfx.roundedRect(graphics, x, rowY, width, 22, 8, theme.shade(theme.raised(), 0.7F));
             Icons.drawCentered(graphics, icons[Math.min(i, icons.length - 1)], x + 16, rowY + 11, 8, theme.accent());
-            graphics.drawString(font, rows[i][0], x + 28, rowY + 7, theme.text(), false);
-            graphics.drawString(font, rows[i][1], x + width - font.width(rows[i][1]) - 12, rowY + 7,
-                    theme.accent(), false);
+            HubFont.draw(graphics, font, rows[i][0], x + 28, rowY + 7, theme.text());
+            HubFont.draw(graphics, font, rows[i][1], x + width - HubFont.width(font, rows[i][1]) - 12, rowY + 7,
+                    theme.accent());
         }
-        graphics.drawString(font,
+        HubFont.draw(graphics, font,
                 "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438 \u0445\u0440\u0430\u043d\u044f\u0442\u0441\u044f \u0432 config/aqualumen-client.toml",
-                x, y + height - 9, theme.textDim(), false);
+                x, y + height - 9, theme.textDim());
     }
 
     private static String currency(String currency) {

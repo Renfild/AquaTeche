@@ -22,8 +22,6 @@ public final class Icons {
     private static final int ATLAS_WIDTH = CELL * COLUMNS;
     private static final int ATLAS_HEIGHT = CELL * ROWS;
 
-    private static boolean smoothed;
-
     /** Order defines the atlas cell, so it must match the order used by the generator. */
     public enum Icon {
         PLAYER, BAG, CASE, STAR, CHART, GEAR, COIN,
@@ -43,20 +41,13 @@ public final class Icons {
     private Icons() {
     }
 
-    /**
-     * Bilinear filtering is what keeps a 64 px cell clean when it is drawn at 8-20 px. The texture
-     * manager only knows the atlas after the first bind, so this runs right after the first blit.
-     */
+    /** Bilinear on the 64 px atlas so 8–20 px draws stay antialiased instead of nearest-neighbour blocks. */
     private static void smooth() {
-        if (smoothed) {
-            return;
-        }
         try {
             AbstractTexture texture = Minecraft.getInstance().getTextureManager().getTexture(ATLAS);
             texture.setFilter(true, false);
-            smoothed = true;
         } catch (RuntimeException ignored) {
-            // A missing atlas must never take the screen down; the icon just renders unfiltered.
+            // Missing atlas must not take the screen down; the icon just renders unfiltered.
         }
     }
 
@@ -70,12 +61,12 @@ public final class Icons {
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
+        smooth();
         RenderSystem.setShaderColor(red, green, blue, alpha);
         graphics.blit(ATLAS, x, y, side, side,
                 icon.u(), icon.v(), CELL, CELL, ATLAS_WIDTH, ATLAS_HEIGHT);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.disableBlend();
-        smooth();
     }
 
     public static void drawCentered(GuiGraphics graphics, Icon icon, int centerX, int centerY,

@@ -1,71 +1,72 @@
 package store.aquateche.aqualumen.client.render;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
+import org.joml.Matrix4f;
 
-/** Small drawing kit: rounded panels, gradients, glow, progress bars and rings. No textures needed. */
+/**
+ * Hub drawing kit. Shapes are triangle meshes in the GUI pose, so OpenGL rasterizes them
+ * at framebuffer resolution instead of one {@code fill} per GUI pixel (the staircase in screenshots).
+ */
 public final class Gfx {
 
     private Gfx() {
     }
 
     public static void rect(GuiGraphics graphics, int x, int y, int width, int height, int color) {
-        graphics.fill(x, y, x + width, y + height, color);
+        roundedRect(graphics, x, y, width, height, 0, color);
     }
 
     public static void roundedRect(GuiGraphics graphics, int x, int y, int width, int height, int radius, int color) {
         gradientRounded(graphics, x, y, width, height, radius, color, color);
     }
 
-    /** Vertical gradient with rounded corners, drawn scanline by scanline. */
     public static void gradientRounded(GuiGraphics graphics, int x, int y, int width, int height, int radius,
                                        int topColor, int bottomColor) {
-        int r = Math.max(0, Math.min(radius, Math.min(width, height) / 2));
-        for (int row = 0; row < height; row++) {
-            int inset = cornerInset(row, height, r);
-            float t = height <= 1 ? 0.0F : row / (float) (height - 1);
-            graphics.fill(x + inset, y + row, x + width - inset, y + row + 1, lerpColor(topColor, bottomColor, t));
-        }
+        meshRounded(graphics, x, y, width, height, radius, topColor, bottomColor, true);
     }
 
-    /** Horizontal gradient with rounded corners. */
     public static void gradientRoundedH(GuiGraphics graphics, int x, int y, int width, int height, int radius,
                                         int leftColor, int rightColor) {
-        int r = Math.max(0, Math.min(radius, Math.min(width, height) / 2));
-        for (int row = 0; row < height; row++) {
-            int inset = cornerInset(row, height, r);
-            for (int column = inset; column < width - inset; column++) {
-                float t = width <= 1 ? 0.0F : column / (float) (width - 1);
-                graphics.fill(x + column, y + row, x + column + 1, y + row + 1, lerpColor(leftColor, rightColor, t));
-            }
-        }
+        meshRounded(graphics, x, y, width, height, radius, leftColor, rightColor, false);
     }
 
     public static void outline(GuiGraphics graphics, int x, int y, int width, int height, int radius, int color) {
-        int r = Math.max(0, Math.min(radius, Math.min(width, height) / 2));
-        for (int row = 0; row < height; row++) {
-            int inset = cornerInset(row, height, r);
-            boolean edgeRow = row == 0 || row == height - 1 || row < r || row >= height - r;
-            if (edgeRow) {
-                int previous = cornerInset(Math.max(0, row - 1), height, r);
-                int span = Math.max(1, Math.abs(previous - inset));
-                graphics.fill(x + inset, y + row, x + inset + span, y + row + 1, color);
-                graphics.fill(x + width - inset - span, y + row, x + width - inset, y + row + 1, color);
-                if (row == 0 || row == height - 1) {
-                    graphics.fill(x + inset, y + row, x + width - inset, y + row + 1, color);
-                }
-            } else {
-                graphics.fill(x + inset, y + row, x + inset + 1, y + row + 1, color);
-                graphics.fill(x + width - inset - 1, y + row, x + width - inset, y + row + 1, color);
-            }
+        if (width < 2 || height < 2) {
+            return;
         }
+        graphics.flush();
+        float r = clampRadius(radius, width, height);
+        float stroke = 1.0F;
+        beginColor();
+        BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        buffer.begin(VertexFormat.Mode.TRIANGLE_STRIP, DefaultVertexFormat.POSITION_COLOR);
+        Matrix4f matrix = graphics.pose().last().pose();
+        int segments = arcSegments(r);
+        float[] outer = perimeter(x, y, width, height, r, segments);
+        float innerR = Math.max(0.0F, r - stroke);
+        float[] inner = perimeter(x + stroke, y + stroke, width - stroke * 2.0F, height - stroke * 2.0F,
+                innerR, segments);
+        int points = outer.length / 2;
+        for (int i = 0; i <= points; i++) {
+            int index = i % points;
+            put(buffer, matrix, outer[index * 2], outer[index * 2 + 1], color);
+            put(buffer, matrix, inner[index * 2], inner[index * 2 + 1], color);
+        }
+        Tesselator.getInstance().end();
+        restore();
     }
 
-    /** Soft outer glow used for the active navigation item and primary buttons. */
     public static void glow(GuiGraphics graphics, int x, int y, int width, int height, int radius, int color, int layers) {
         for (int layer = layers; layer >= 1; layer--) {
             float alpha = 0.06F * layer / layers;
-            int tinted = withAlpha(color, alpha);
-            roundedRect(graphics, x - layer, y - layer, width + layer * 2, height + layer * 2, radius + layer, tinted);
+            roundedRect(graphics, x - layer, y - layer, width + layer * 2, height + layer * 2,
+                    radius + layer, withAlpha(color, alpha));
         }
     }
 
@@ -79,23 +80,29 @@ public final class Gfx {
         }
     }
 
-    /** Circular progress ring, used for the level indicator on the profile card. */
     public static void ring(GuiGraphics graphics, int centerX, int centerY, int radius, int thickness,
                             float progress, int trackColor, int fromColor, int toColor) {
+        graphics.flush();
         float clamped = Math.max(0.0F, Math.min(1.0F, progress));
-        int inner = radius - thickness;
-        for (int dy = -radius; dy <= radius; dy++) {
-            for (int dx = -radius; dx <= radius; dx++) {
-                float distance = (float) Math.sqrt(dx * dx + dy * dy);
-                if (distance > radius || distance < inner) {
-                    continue;
-                }
-                double angle = (Math.atan2(dy, dx) + Math.PI / 2.0 + Math.PI * 2.0) % (Math.PI * 2.0);
-                float t = (float) (angle / (Math.PI * 2.0));
-                int color = t <= clamped ? lerpColor(fromColor, toColor, t / Math.max(0.001F, clamped)) : trackColor;
-                graphics.fill(centerX + dx, centerY + dy, centerX + dx + 1, centerY + dy + 1, color);
-            }
+        int segments = Math.max(48, radius * 4);
+        float inner = Math.max(0.0F, radius - thickness);
+        beginColor();
+        BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        buffer.begin(VertexFormat.Mode.TRIANGLE_STRIP, DefaultVertexFormat.POSITION_COLOR);
+        Matrix4f matrix = graphics.pose().last().pose();
+        for (int i = 0; i <= segments; i++) {
+            float t = i / (float) segments;
+            double angle = -Math.PI / 2.0 + t * Math.PI * 2.0;
+            float cos = (float) Math.cos(angle);
+            float sin = (float) Math.sin(angle);
+            int color = t <= clamped
+                    ? lerpColor(fromColor, toColor, clamped <= 0.001F ? 0.0F : t / clamped)
+                    : trackColor;
+            put(buffer, matrix, centerX + cos * radius, centerY + sin * radius, color);
+            put(buffer, matrix, centerX + cos * inner, centerY + sin * inner, color);
         }
+        Tesselator.getInstance().end();
+        restore();
     }
 
     public static int cornerInset(int row, int height, int radius) {
@@ -126,6 +133,91 @@ public final class Gfx {
     public static int withAlpha(int color, float alpha) {
         int a = (int) (Math.max(0.0F, Math.min(1.0F, alpha)) * 255.0F);
         return (a << 24) | (color & 0x00FFFFFF);
+    }
+
+    private static void meshRounded(GuiGraphics graphics, float x, float y, float width, float height, float radius,
+                                    int fromColor, int toColor, boolean vertical) {
+        if (width <= 0 || height <= 0) {
+            return;
+        }
+        graphics.flush();
+        float r = clampRadius(radius, width, height);
+        int segments = arcSegments(r);
+        float[] rim = perimeter(x, y, width, height, r, segments);
+        int points = rim.length / 2;
+        float midX = x + width * 0.5F;
+        float midY = y + height * 0.5F;
+        int centerColor = vertical
+                ? lerpColor(fromColor, toColor, 0.5F)
+                : lerpColor(fromColor, toColor, 0.5F);
+
+        beginColor();
+        BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        buffer.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+        Matrix4f matrix = graphics.pose().last().pose();
+        put(buffer, matrix, midX, midY, centerColor);
+        for (int i = 0; i <= points; i++) {
+            int index = i % points;
+            float px = rim[index * 2];
+            float py = rim[index * 2 + 1];
+            float t = vertical
+                    ? (height <= 1 ? 0.0F : (py - y) / height)
+                    : (width <= 1 ? 0.0F : (px - x) / width);
+            put(buffer, matrix, px, py, lerpColor(fromColor, toColor, t));
+        }
+        Tesselator.getInstance().end();
+        restore();
+    }
+
+    private static float[] perimeter(float x, float y, float width, float height, float radius, int segments) {
+        int steps = Math.max(1, segments);
+        float[] out = new float[4 * steps * 2];
+        int n = 0;
+        n = arc(out, n, x + radius, y + radius, radius, (float) Math.PI, (float) (Math.PI * 1.5), steps);
+        n = arc(out, n, x + width - radius, y + radius, radius, (float) (Math.PI * 1.5), (float) (Math.PI * 2.0), steps);
+        n = arc(out, n, x + width - radius, y + height - radius, radius, 0.0F, (float) (Math.PI * 0.5), steps);
+        arc(out, n, x + radius, y + height - radius, radius, (float) (Math.PI * 0.5), (float) Math.PI, steps);
+        return out;
+    }
+
+    private static int arc(float[] out, int n, float cx, float cy, float radius, float from, float to, int steps) {
+        float rad = Math.max(0.0F, radius);
+        for (int i = 0; i < steps; i++) {
+            float t = steps == 1 ? 0.0F : i / (float) (steps - 1);
+            float angle = from + (to - from) * t;
+            out[n++] = cx + (float) Math.cos(angle) * rad;
+            out[n++] = cy + (float) Math.sin(angle) * rad;
+        }
+        return n;
+    }
+
+    private static int arcSegments(float radius) {
+        if (radius < 1.0F) {
+            return 1;
+        }
+        return Math.max(10, Math.min(36, Math.round(radius * 2.5F)));
+    }
+
+    private static float clampRadius(float radius, float width, float height) {
+        return Math.max(0.0F, Math.min(radius, Math.min(width, height) * 0.5F));
+    }
+
+    private static void put(BufferBuilder buffer, Matrix4f matrix, float x, float y, int color) {
+        buffer.vertex(matrix, x, y, 0.0F)
+                .color((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF, (color >>> 24) & 0xFF)
+                .endVertex();
+    }
+
+    private static void beginColor() {
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.disableCull();
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+    }
+
+    private static void restore() {
+        RenderSystem.enableCull();
     }
 
     private static int lerpChannel(int from, int to, float t) {

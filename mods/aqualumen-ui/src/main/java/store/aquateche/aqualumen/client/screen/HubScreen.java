@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import store.aquateche.aqualumen.client.LumenClient;
 import store.aquateche.aqualumen.client.render.Anim;
 import store.aquateche.aqualumen.client.render.Gfx;
+import store.aquateche.aqualumen.client.render.HubFont;
 import store.aquateche.aqualumen.client.render.Icons;
 import store.aquateche.aqualumen.client.theme.LumenTheme;
 import store.aquateche.aqualumen.client.widget.LumenWidgets;
@@ -143,7 +144,7 @@ public final class HubScreen extends Screen {
 
         Icons.drawCentered(graphics, Icons.Icon.WAVE, left + 15, top + 17, 10,
                 Gfx.lerpColor(theme.accent(), theme.accentAlt(), Anim.pulse(time, 0.02F)));
-        graphics.drawString(this.font, serverName, left + 25, top + 12, theme.text(), false);
+        HubFont.draw(graphics, this.font, serverName, left + 25, top + 12, theme.text());
 
         if (snapshot != null) {
             String online = snapshot.server().online() + "/" + snapshot.server().slots();
@@ -161,7 +162,7 @@ public final class HubScreen extends Screen {
         Gfx.roundedRect(graphics, x, y, width, 17, 8, theme.shade(theme.raised(), 0.9F));
         Gfx.outline(graphics, x, y, width, 17, 8, theme.border());
         Icons.drawCentered(graphics, icon, x + 10, y + 9, 8, accent);
-        graphics.drawString(this.font, text, x + 17, y + 5, accent, false);
+        HubFont.draw(graphics, this.font, text, x + 17, y + 5, accent);
     }
 
     private void renderFooter(GuiGraphics graphics) {
@@ -169,7 +170,7 @@ public final class HubScreen extends Screen {
         graphics.fill(left + 1, y, left + panelWidth - 1, y + 1, theme.border());
         HubSnapshot snapshot = LumenClient.snapshot();
         String build = snapshot == null ? "AquaLumen UI" : "AquaLumen UI " + snapshot.server().build();
-        graphics.drawString(this.font, build, left + 12, y + 9, theme.textDim(), false);
+        HubFont.draw(graphics, this.font, build, left + 12, y + 9, theme.textDim());
     }
 
     private static String compact(long value) {
