@@ -96,10 +96,7 @@ FILES = [
     ROOT / "mods" / "aquatech-ui" / "src" / "main" / "java" / "net" / "aquatech" / "ui" / "fishing" / "FishingLootHandler.java",
 ]
 
-# casesmod + configs recursive
 EXTRA_GLOBS = [
-    "server/config/casesmod/**/*.json",
-    "config/casesmod/**/*.json",
     "config/ftbquests/quests/chapters/2F_ws_industrial_upgrade.snbt",
     "server/config/ftbquests/quests/chapters/2F_ws_industrial_upgrade.snbt",
 ]

@@ -39,7 +39,7 @@ public partial class MainViewModel : ViewModelBase
 
     private void RefreshVersionLabel(string? overridePackVer = null)
     {
-        var packVer = !string.IsNullOrWhiteSpace(overridePackVer) ? overridePackVer.Trim() : "2.9.49";
+        var packVer = !string.IsNullOrWhiteSpace(overridePackVer) ? overridePackVer.Trim() : "2.9.54";
         try
         {
             if (string.IsNullOrWhiteSpace(overridePackVer))
@@ -76,6 +76,7 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private bool _isLoggedIn;
     [ObservableProperty] private string _loginNick = "";
     [ObservableProperty] private string _loginPassword = "";
+    [ObservableProperty] private bool _rememberMe = true;
     [ObservableProperty] private string _authError = "";
     [ObservableProperty] private bool _authBusy;
     [ObservableProperty] private string _accountBadge = "Игрок";
@@ -273,13 +274,77 @@ public partial class MainViewModel : ViewModelBase
             GameDir = path;
     }
 
+    [RelayCommand]
+    private async Task RepairPackAsync()
+    {
+        if (_busy || NeedsAuth) return;
+        UiSounds.Play(UiSounds.Kind.Play);
+        SaveCfgFromUi();
+        SetBusy(true, "Проверка файлов…");
+        Page = "log";
+        try
+        {
+            await Task.Run(() => _orch.UpdateAsync(_cfg, UiLog, UiProgress));
+            RefreshVersionLabel();
+            StatusText = "Сборка проверена и готова к запуску";
+        }
+        catch (Exception ex)
+        {
+            UiLog($"Ошибка проверки файлов: {ex.Message}", "err");
+        }
+        finally
+        {
+            SetBusy(false);
+        }
+    }
+
+    [RelayCommand]
+    private void OpenGameFolder()
+    {
+        try
+        {
+            Directory.CreateDirectory(GameDir);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe",
+                Arguments = $"\"{GameDir}\"",
+                UseShellExecute = true,
+            });
+        }
+        catch (Exception ex)
+        {
+            UiLog($"Не удалось открыть папку: {ex.Message}", "warn");
+        }
+    }
+
+    [RelayCommand]
+    private void OpenLogsFolder()
+    {
+        try
+        {
+            var logsDir = System.IO.Path.Combine(GameDir, "logs");
+            Directory.CreateDirectory(logsDir);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe",
+                Arguments = $"\"{logsDir}\"",
+                UseShellExecute = true,
+            });
+        }
+        catch (Exception ex)
+        {
+            UiLog($"Не удалось открыть папку логов: {ex.Message}", "warn");
+        }
+    }
+
     private void EnterApp(UserProfile profile, string session)
     {
         Username = profile.Nick;
         LoginNick = profile.Nick;
         LoginPassword = "";
         _cfg.Username = profile.Nick;
-        _cfg.PortalSession = session;
+        _cfg.RememberMe = RememberMe;
+        _cfg.PortalSession = RememberMe ? session : null;
         _cfg.Save();
         HttpDownload.SetPortalSession(session);
         IsLoggedIn = true;
@@ -297,6 +362,7 @@ public partial class MainViewModel : ViewModelBase
     {
         AuthChecking = true;
         NeedsAuth = true;
+        RememberMe = _cfg.RememberMe;
 
         _ = Task.Run(async () =>
         {
@@ -313,7 +379,7 @@ public partial class MainViewModel : ViewModelBase
 
         try
         {
-            if (!string.IsNullOrWhiteSpace(_cfg.PortalSession))
+            if (_cfg.RememberMe && !string.IsNullOrWhiteSpace(_cfg.PortalSession))
             {
                 var (ok, profile, session, _) = await PortalApi.TryRestoreSessionAsync(_cfg.PortalSession);
                 if (ok && profile != null && session != null)

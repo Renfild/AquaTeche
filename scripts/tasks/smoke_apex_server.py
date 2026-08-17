@@ -76,7 +76,7 @@ def main() -> int:
     assert s is not None
 
     mods = sorted(n for n in s.listdir("mods") if n.endswith(".jar"))
-    for prefix in ("aquatech_ui-", "casesmod-", "packetfixer-"):
+    for prefix in ("aquatech_ui-", "aqualumen-", "packetfixer-"):
         hits = [n for n in mods if n.startswith(prefix)]
         print(f"mods/{prefix}*: {hits}")
         if len(hits) != 1:

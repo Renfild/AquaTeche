@@ -28,7 +28,6 @@ FILES = {
     "client_open": UI / "client/gui/ClientContainerScreens.java",
     "cmd": UI / "command/AquaTechCommand.java",
     "menu": UI / "client/web/AquaWebIpcDispatcher.java",
-    "bridge": ROOT / "mods/casesmod/src/main/java/com/casesmod/client/gui/AquaContainerOverlay.java",
 }
 
 

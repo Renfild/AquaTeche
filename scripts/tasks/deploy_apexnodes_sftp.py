@@ -21,7 +21,7 @@ Optional env:
   AQUATECH_APEX_PANEL      default https://panel.apexnodes.xyz
   AQUATECH_APEX_SERVER_ID  default 6fdc6f7b
   AQUATECH_APEX_API_KEY    Client API key (Account -> API Credentials)
-  AQUATECH_SFTP_ONLY       Comma prefixes, e.g. config/ftbquests,config/casesmod
+  AQUATECH_SFTP_ONLY       Comma prefixes, e.g. config/ftbquests
   AQUATECH_SKIP_REPO_SYNC  1 = skip kubejs/datapacks mirror into server/
   AQUATECH_SKIP_BACKUP     1 = skip panel world backup before full SFTP
 """
@@ -45,7 +45,7 @@ DEPLOY_SECRETS = ROOT / ".apex_deploy.json"
 # Remote paths (relative to SFTP root) -> filename prefixes that must be unique.
 # After upload, delete remote jars with these prefixes that are not in the local keep-set.
 FIRST_PARTY_PURGE: dict[str, tuple[str, ...]] = {
-    "mods": ("aquatech_ui-", "casesmod-", "packetfixer-"),
+    "mods": ("aquatech_ui-", "aqualumen-", "packetfixer-"),
 }
 
 HOST = "g-pl-3.apexnodes.xyz"

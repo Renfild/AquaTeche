@@ -81,6 +81,14 @@ public class VersionCompareTests
     [InlineData(" 2.9.20 ", "2.9.20", true)]
     public void VersionsEqual(string a, string b, bool expect) =>
         Assert.Equal(expect, LauncherSelfUpdate.VersionsEqual(a, b));
+
+    [Theory]
+    [InlineData("2.9.64", "2.9.59", true)]
+    [InlineData("2.9.59", "2.9.64", false)]
+    [InlineData("2.9.64", "2.9.64", false)]
+    [InlineData("2.9.10", "2.9.9", true)]
+    public void VersionNewer(string candidate, string baseline, bool expect) =>
+        Assert.Equal(expect, LauncherSelfUpdate.VersionNewer(candidate, baseline));
 }
 
 public class ZipVerifyTests

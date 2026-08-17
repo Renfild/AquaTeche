@@ -39,8 +39,8 @@ def bump_jar(src: Path, new_ver: str, dest: Path) -> None:
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     pairs = [
-        (\"aquatech_ui\", \"1.0.3\"),
-        ("casesmod", "1.0.1"),
+        ("aquatech_ui", "1.0.24", "aquatech_ui-1.0.24.jar"),
+        ("aqualumen", "0.3.0-alpha", "aqualumen-forge-1.20.1-0.3.0-alpha.jar"),
     ]
     targets = [
         root / "server" / "mods",
@@ -52,8 +52,7 @@ def main() -> int:
     if app.is_dir():
         targets.append(app)
 
-    for stem, ver in pairs:
-        new_name = f"{stem}-{ver}.jar"
+    for stem, ver, new_name in pairs:
         # find any existing jar for this stem
         src = None
         for t in targets:

@@ -1,6 +1,6 @@
 """Push first-party jars from server/mods into the live Lodestone instance.
 
-Keeps aquatech_ui / casesmod / packetfixer on the running Mohist host
+Keeps aquatech_ui / aqualumen / packetfixer on the running Mohist host
 in sync with what the launcher pack ships (avoids MATCH_VERSION kick).
 
 Usage:
@@ -20,7 +20,7 @@ SERVER_MODS = ROOT / "server" / "mods"
 # Filename prefixes that must match the launcher pack / server/mods
 SYNC_PREFIXES = (
     "aquatech_ui-",
-    "casesmod-",
+    "aqualumen-",
     "packetfixer-",
 )
 

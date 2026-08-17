@@ -1,0 +1,43 @@
+{
+  "item.aqualumen.hub_compass": "Компас проекта",
+  "itemGroup.aqualumen.tab": "AquaLumen UI",
+
+  "gui.aqualumen.hub": "Хаб проекта",
+  "gui.aqualumen.tab.profile": "Профиль",
+  "gui.aqualumen.tab.store": "Магазин",
+  "gui.aqualumen.tab.cases": "Кейсы",
+  "gui.aqualumen.tab.pass": "Пропуск",
+  "gui.aqualumen.tab.tops": "Топы",
+  "gui.aqualumen.tab.settings": "Настройки",
+
+  "gui.aqualumen.label.online": "Онлайн",
+  "gui.aqualumen.label.tps": "TPS",
+  "gui.aqualumen.label.ping": "Пинг",
+  "gui.aqualumen.label.balance": "Баланс",
+  "gui.aqualumen.label.gems": "Кристаллы",
+  "gui.aqualumen.label.playtime": "Наиграно",
+  "gui.aqualumen.label.rank": "Ранг",
+  "gui.aqualumen.label.season": "Сезон",
+  "gui.aqualumen.label.level": "Уровень",
+  "gui.aqualumen.label.progress": "Прогресс",
+  "gui.aqualumen.label.daily": "Ежедневные награды",
+  "gui.aqualumen.label.stats": "Статистика",
+
+  "gui.aqualumen.action.claim": "Забрать",
+  "gui.aqualumen.action.buy": "Купить",
+  "gui.aqualumen.action.open": "Открыть",
+  "gui.aqualumen.action.close": "Закрыть",
+  "gui.aqualumen.action.refresh": "Обновить",
+
+  "gui.aqualumen.theme.aqua": "Aqua Lumen",
+  "gui.aqualumen.theme.violet": "Violet Lumen",
+  "gui.aqualumen.theme.rose": "Midnight Rose",
+
+  "key.categories.aqualumen": "AquaLumen UI",
+  "key.aqualumen.open_hub": "Открыть хаб",
+
+  "msg.aqualumen.fallback": "Установите лаунчер aquaTeche, чтобы увидеть полный интерфейс хаба.",
+  "msg.aqualumen.cooldown": "Слишком часто. Подождите немного.",
+  "msg.aqualumen.unavailable": "Пока недоступно. Экономика хаба ещё не подключена.",
+  "msg.aqualumen.reloaded": "Конфигурация AquaLumen UI перезагружена."
+}

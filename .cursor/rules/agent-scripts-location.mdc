@@ -24,6 +24,6 @@ Use other `scripts/` subfolders when they fit:
 
 ## Keep in `tools/`
 
-Release and day-to-day pipeline only, e.g. `publish_client_pack.py`, `sync_lodestone_mods.py`, `upload_launcher_release.py`, `upload_pack_release.py`, `generate_site.py`, `deploy_to_cloudflare.py`, `aquatech_launcher.py`.
+Release and day-to-day pipeline only, e.g. `publish_client_pack.py`, `sync_lodestone_mods.py`, `upload_launcher_release.py`, `upload_pack_release.py`, `generate_site.py`, `deploy_to_cloudflare.py`, `pack_launcher_zip.py`.
 
 Domain helpers live in `tools/{quests,patches,portal,assets,server_setup,launcher_tests}/`. Thin shims may exist at `tools/<name>.py` for CI/old paths.

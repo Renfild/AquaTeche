@@ -2,7 +2,7 @@ namespace AquaTechLauncher.Core;
 
 public static class LauncherConstants
 {
-    public const string Version = "2.9.59";
+    public const string Version = "2.9.65";
     public const string McVersion = "1.20.1";
     public const string ForgeVersion = "47.4.0";
     public const string McpVersion = "20230612.114412";
@@ -16,15 +16,25 @@ public static class LauncherConstants
     public const string PortalApiBase = "https://aquateche.store";
     public const string FallbackPortalApiBase = "https://aquatech.santcrail.workers.dev";
     public const string BootstrapManifestUrl =
-        "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json";
+        "https://aquatech.santcrail.workers.dev/bootstrap.json";
+
+    public static readonly string[] BootstrapManifestUrls =
+    [
+        "https://aquatech.santcrail.workers.dev/bootstrap.json",
+        "https://aquateche.store/bootstrap.json",
+        "https://api.github.com/repos/Renfild/AquaTeche/contents/docs/bootstrap.json?ref=main",
+        "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
+        "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
+    ];
 
     public const string DefaultUpdateUrl =
-        "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack";
+        "https://aquateche.store/pack";
 
     public static readonly string[] PackCdnMirrors =
     [
-        "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
         "https://aquateche.store/pack",
+        "https://aquatech.santcrail.workers.dev/pack",
+        "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
         "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
     ];
 

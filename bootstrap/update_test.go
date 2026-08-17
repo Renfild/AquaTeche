@@ -21,7 +21,7 @@ func TestNeedsUpdate(t *testing.T) {
 		{"missing exe same ver", "2.9.38", "2.9.38", false, true},
 		{"whitespace", " 2.9.38\n", "2.9.38", true, false},
 		{"empty remote", "2.9.38", "", true, false},
-		{"downgrade still updates", "2.9.40", "2.9.38", true, true},
+		{"downgrade skipped", "2.9.40", "2.9.38", true, false},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {

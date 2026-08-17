@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "docs/assets/js/site.js": {
-    "mtime": 1786706983.6529462,
-    "ast_hash": "04fa69855c2bfdc26d424359b6c10a07",
+    "mtime": 1786735599.6257193,
+    "ast_hash": "40c70b8ca69e54cfa353e430dc7b83af",
     "semantic_hash": ""
   },
   "docs/pack/manifest.json": {
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherConstants.cs": {
-    "mtime": 1786706969.4386895,
-    "ast_hash": "475307a3e3c3a16c42f45bdb006159d6",
+    "mtime": 1786735588.42996,
+    "ast_hash": "ca1601a340b597a9ade4680612781d32",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherSelfUpdate.cs": {
@@ -320,8 +320,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/PlayOrchestrator.cs": {
-    "mtime": 1786282146.6873841,
-    "ast_hash": "1e6ca78284c1d7387af7c9b7ffd3b194",
+    "mtime": 1786735394.985523,
+    "ast_hash": "63bd0949ad25c465c1499e875f542ffb",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/PortalApi.cs": {
@@ -365,8 +365,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher/ViewModels/MainViewModel.cs": {
-    "mtime": 1786707004.810805,
-    "ast_hash": "98d8a38ca70d058e1348ce4e8316e914",
+    "mtime": 1786735416.471065,
+    "ast_hash": "8d213e1200fa7a6d87245e73998c2c7f",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher/ViewModels/ViewModelBase.cs": {
@@ -1140,8 +1140,8 @@
     "semantic_hash": ""
   },
   "tools/upload_launcher_release.py": {
-    "mtime": 1786706979.4702408,
-    "ast_hash": "51e9a6e9df512a54e81bb54c42908756",
+    "mtime": 1786735592.7348852,
+    "ast_hash": "b67bb2b5068b62289c3f938316d2b8eb",
     "semantic_hash": ""
   },
   "tools/upload_pack_release.py": {
@@ -1250,72 +1250,72 @@
     "semantic_hash": ""
   },
   "docs/admin.html": {
-    "mtime": 1786735274.9511185,
+    "mtime": 1786735793.3960662,
     "ast_hash": "1530888f5d51b80c0d5351b2004184c0",
     "semantic_hash": ""
   },
   "docs/cases.html": {
-    "mtime": 1786735274.9476166,
+    "mtime": 1786735793.3930664,
     "ast_hash": "f2349349d8dff2f2fd63749ef552c286",
     "semantic_hash": ""
   },
   "docs/index.html": {
-    "mtime": 1786735274.9466164,
+    "mtime": 1786735793.392067,
     "ast_hash": "6f345622d2674d123c0ae2e8cf497c0b",
     "semantic_hash": ""
   },
   "docs/login.html": {
-    "mtime": 1786735274.9496152,
+    "mtime": 1786735793.3940663,
     "ast_hash": "53df1ab8d00c0978715f412f46c19fe6",
     "semantic_hash": ""
   },
   "docs/news.html": {
-    "mtime": 1786735274.9486156,
+    "mtime": 1786735793.3940663,
     "ast_hash": "73bf31de123bf1691ac2f0d95025a917",
     "semantic_hash": ""
   },
   "docs/players.html": {
-    "mtime": 1786735274.9496152,
+    "mtime": 1786735793.3950665,
     "ast_hash": "fc3dabae0f5796aeba596530da0d2662",
     "semantic_hash": ""
   },
   "docs/profile.html": {
-    "mtime": 1786735274.9496152,
+    "mtime": 1786735793.3940663,
     "ast_hash": "a9da9ae4ba8f39ac56d8a812978c0eba",
     "semantic_hash": ""
   },
   "docs/register.html": {
-    "mtime": 1786735274.9496152,
+    "mtime": 1786735793.3950665,
     "ast_hash": "dcafe4881beefbc1afafd72bf96cbd4a",
     "semantic_hash": ""
   },
   "docs/rods.html": {
-    "mtime": 1786735274.9486156,
+    "mtime": 1786735793.3930664,
     "ast_hash": "ed3d3c89c6a882c24267c67b40b81910",
     "semantic_hash": ""
   },
   "docs/rules.html": {
-    "mtime": 1786735274.9496152,
+    "mtime": 1786735793.3950665,
     "ast_hash": "04be6c5ad11502730fc5852d0e21bdb9",
     "semantic_hash": ""
   },
   "docs/start.html": {
-    "mtime": 1786735274.9476166,
+    "mtime": 1786735793.392067,
     "ast_hash": "99a8853737bc3a96e86c8f6547933450",
     "semantic_hash": ""
   },
   "docs/store.html": {
-    "mtime": 1786735274.9476166,
+    "mtime": 1786735793.3930664,
     "ast_hash": "6c5028e8460ce461fc0a324eb8da17e6",
     "semantic_hash": ""
   },
   "docs/top.html": {
-    "mtime": 1786735274.9486156,
+    "mtime": 1786735793.3940663,
     "ast_hash": "d129ebbacfd585ae89e3bd6e87afbaf6",
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1786735274.9511185,
+    "mtime": 1786735793.3960662,
     "ast_hash": "6f345622d2674d123c0ae2e8cf497c0b",
     "semantic_hash": ""
   },
@@ -1735,12 +1735,12 @@
     "semantic_hash": ""
   },
   "docs/embed/cabinet.html": {
-    "mtime": 1786735274.9517696,
+    "mtime": 1786735793.3970673,
     "ast_hash": "de2784a40d65ef0a53775d3752b58cf1",
     "semantic_hash": ""
   },
   "docs/embed/donate.html": {
-    "mtime": 1786735274.9517696,
+    "mtime": 1786735793.3970673,
     "ast_hash": "469ca3ef1284fdd6f5af4ce0d4175ebe",
     "semantic_hash": ""
   },

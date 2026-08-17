@@ -13,7 +13,6 @@ import (
 	"strings"
 	"syscall"
 	"time"
-	"unsafe"
 )
 
 // LoliLand-style bootstrap:
@@ -116,6 +115,8 @@ func main() {
 		if entries, _ := os.ReadDir(stage); len(entries) == 1 && entries[0].IsDir() {
 			src = filepath.Join(stage, entries[0].Name())
 		}
+		_ = exec.Command("taskkill", "/F", "/IM", "AquaTechLauncher.exe").Run()
+		time.Sleep(100 * time.Millisecond)
 		_ = os.RemoveAll(appDir)
 		if err := os.Rename(src, appDir); err != nil {
 			if err := copyDir(src, appDir); err != nil {
@@ -413,37 +414,13 @@ func findLauncher(root, name string) string {
 	return found
 }
 
-var (
-	shell32          = syscall.NewLazyDLL("shell32.dll")
-	procShellExecute = shell32.NewProc("ShellExecuteW")
-)
-
 func startDetached(exe, dir string) error {
-	exePtr, err := syscall.UTF16PtrFromString(exe)
-	if err != nil {
-		return err
+	cmd := exec.Command(exe)
+	cmd.Dir = dir
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		CreationFlags: 0x00000200, // CREATE_NEW_PROCESS_GROUP
 	}
-	dirPtr, err := syscall.UTF16PtrFromString(dir)
-	if err != nil {
-		return err
-	}
-	opPtr, _ := syscall.UTF16PtrFromString("open")
-
-	ret, _, _ := procShellExecute.Call(
-		0,
-		uintptr(unsafe.Pointer(opPtr)),
-		uintptr(unsafe.Pointer(exePtr)),
-		0,
-		uintptr(unsafe.Pointer(dirPtr)),
-		1, // SW_SHOWNORMAL
-	)
-	if ret <= 32 {
-		// Fallback to standard exec.Command if ShellExecute returns error code <= 32
-		cmd := exec.Command(exe)
-		cmd.Dir = dir
-		return cmd.Start()
-	}
-	return nil
+	return cmd.Start()
 }
 
 func copyFile(src, dst string) error {

@@ -2,7 +2,7 @@
 name: aquatech-addon-kubejs
 description: >-
   Systematizes AquaTech pack addons: choose Forge mod vs KubeJS vs datapack vs
-  jar patch, scaffold KubeJS scripts, extend aquatech_ui/casesmod, deploy
+  jar patch, scaffold KubeJS scripts, extend aquatech_ui/aqualumen, deploy
   safely. Use when creating addons, KubeJS/JS scripts, recipe nerfs, fishing
   compat, cases/kits config, StarCatcher patches, or team modpack content.
 ---
@@ -15,11 +15,11 @@ Use this skill for **any new pack feature** so work lands in the right layer and
 
 | Need | Layer | Where |
 |------|-------|--------|
-| New block/item/GUI/network/capability | **Forge Java mod** | `mods/aquatech-ui` or `mods/casesmod` |
+| New block/item/GUI/network/capability | **Forge Java mod** | `mods/aquatech-ui` or `mods/aqualumen-ui` |
 | Recipes, removes, tags, gated crafts | **KubeJS** | `kubejs/server_scripts/` |
 | Worldgen / biome tags / loot tables | **Datapack** | `datapacks/` or `server/world/datapacks/` |
 | Rework foreign mod assets/data without source | **Jar patch script** | `tools/patch_*.ps1` then redeploy jar |
-| Cases, kits, warps, F4 quests | **casesmod JSON** | `config/casesmod/` (+ server mirror) |
+| Hub (F4), store/cases UI | **aqualumen Java** | `mods/aqualumen-ui/` |
 | Rank/UI text/tips | **Config + lang** | `config/aquatech_ui-*.toml`, `assets/*/lang` |
 
 **Rules**
@@ -38,7 +38,7 @@ Player loop
   StarCatcher rods ──fish──► SC fish
                  └─resource─► aquatech_ui FishingLootHandler (+ rate mods)
   IU machines / AE2 / Botania…  ◄── KubeJS nerfs & crafts
-  casesmod F4 menu / kits / cases ◄── config JSON
+  aqualumen F4 hub / store / cases    ◄── mods/aqualumen-ui
   Horizon / skills / raft / Tab   ◄── aquatech_ui Java
 ```
 
@@ -105,13 +105,12 @@ When adding a feature:
 3. Protocol bumps: increment `NetworkHandler.PROTOCOL_VERSION` when packets change.
 4. Build: `mods/aquatech-ui` → `gradlew build` → `scripts/deploy/deploy_aquatech_ui.ps1` (or root shim).
 
-### casesmod — meta / menu
-Package: `com.casesmod.*`
-Prefer **JSON config** (`config/casesmod/cases|kits|quests|warps`) over code when possible.
-Code only for new packet/UI behavior.
+### aqualumen — hub
+Package: `store.aquateche.aqualumen.*`
+F4 hub lives here. Economy actions (`store.buy`, `case.open`) are server-side; do not restore `casesmod`.
 
 ### New Forge addon mod (rare)
-Only if feature cannot live in aquatech_ui/casesmod/KubeJS.
+Only if feature cannot live in aquatech_ui/aqualumen/KubeJS.
 Reuse MDK patterns from existing mods; register in `mods.toml`; deploy jar to all mod targets used by `deploy_*.ps1`.
 
 ## StarCatcher / third-party jar patches
@@ -127,10 +126,9 @@ After patch: copy jar to `mods/`, `server/mods/`, `client/mods/`, CF instance pa
 | Change | Deploy command / action |
 |--------|-------------------------|
 | aquatech_ui Java | `deploy_aquatech_ui.ps1` |
+| aqualumen Java | Gradle build in `mods/aqualumen-ui`, copy versioned jar |
 | KubeJS | `deploy_runtime.ps1` (or sync `kubejs/` → server+client+CF) |
-| casesmod Java | build jar + copy like aquatech_ui |
-| casesmod JSON | sync `config/casesmod/` → `server/config/casesmod/` |
-| FTB quests | sync `config/ftbquests/` → `server/config/ftbquests/` |
+| FTB quests | sync `config/ftbquests/` → `server/config/ftbquests/` **only** with `AQUATECH_SYNC_QUESTS=1` |
 | Datapacks | `datapacks/` and/or `server/world/datapacks/` |
 
 Restart client+server after jar/protocol changes. KubeJS often needs `/reload` or restart.

@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 KEEP_SUBSTRINGS = [
     # ours
     "aquatech_ui",
-    "casesmod",
+    "aqualumen",
     # AE2
     "appliedenergistics2",
     "guideme",

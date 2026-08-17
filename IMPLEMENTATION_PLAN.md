@@ -133,7 +133,7 @@
   * Bootstrap: `dist/releases/AquaTech.exe` + onedir zip `AquaTechLauncher.zip` (`docs/bootstrap.json`).
   * Актуальные теги (2026-08-11): pack **2.9.18**, launcher **client-2.9.29**, `aquatech_ui` **1.0.12**.
   * Lodestone больше не синхронизируем. Живой хост — Apex; клиенты берут банки из CDN-пака.
-  * Пак: `python tools/publish_client_pack.py` → `upload_pack_release.py`; лаунчер: PyInstaller + `upload_launcher_release.py`.
+  * Пак: `python tools/publish_client_pack.py` → `upload_pack_release.py`; лаунчер: `dotnet publish` + Go bootstrap + `upload_launcher_release.py`.
 
 #### 🔄 Как обновлять клиентскую сборку (чеклист)
 
@@ -214,6 +214,8 @@
 | **2026-08-13** | `v2.5.4` | Composer | Stage 1 native GUI kit: `AquaGlassPanel` / `AquaBadge` / `AquaCaseSlot` / `AquaDialogScreen`. TAB + K-tree + HUD + CEF frames use glass. Skill unlock confirms via dialog. TTF wrap helpers. `aquatech_ui` **1.0.23**. | `AquaGlassPanel.java`, `AquaDialogScreen.java`, `OceanSkillTreeScreen.java`, `OceanTabScreen.java` |
 | **2026-08-13** | `v2.5.5` | Composer | Stage 3 packets/cache: `C2SOpenContainer` opens vault (ender chest), limiter GUI, personalization. Island machine caps + `S2CSyncLimitersPacket`. `ResourceCacheManager` HTTPS allowlist + PNG check, HUD/F4 use it. Protocol **7**. `aquatech_ui` **1.0.24**, `casesmod` **1.0.8**. | `ContainerOpenService.java`, `IslandLimiterTracker.java`, `ResourceCacheManager.java`, `MainMenuScreen.java` |
 | **2026-08-13** | `v2.5.6` | Composer | Ship pack **2.9.27** + launcher **client-2.9.48**. First-party jars `aquatech_ui-1.0.24` / `casesmod-1.0.8`. | `docs/pack/manifest.json`, `docs/bootstrap.json`, `docs/assets/js/site.js` |
+| **2026-08-17** | `v2.5.7` | Composer | Health pass: Go/C# bootstrap upgrade-only + Worker mirrors; C# is the ship path (`dotnet publish`). casesmod leftovers rewired to AquaLumen hub. Hub store/cases clicks send actions; server answers «пока недоступно». Dead preview/web-launcher/casesmod deploy scripts removed. | `bootstrap/update.go`, `LauncherSelfUpdate.cs`, `AquaWebIpcDispatcher.java`, `HubActionHandler.java`, `HubScreen.java` |
+| **2026-08-17** | `v2.5.8` | Composer | Full ship after health pass: pack **2.9.55** (fresh aquatech_ui 1.0.24 + aqualumen 0.3.0-alpha), launcher **client-2.9.65**. | `docs/pack/manifest.json`, `docs/bootstrap.json`, `docs/assets/js/site.js` |
 
 ---
 

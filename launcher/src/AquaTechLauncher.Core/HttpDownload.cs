@@ -121,6 +121,9 @@ public static class HttpDownload
     public static async Task<string> GetStringAsync(string url, CancellationToken ct = default)
     {
         using var req = new HttpRequestMessage(HttpMethod.Get, url);
+        if (url.Contains("api.github.com", StringComparison.OrdinalIgnoreCase))
+            req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github.raw");
+        req.Headers.CacheControl = new CacheControlHeaderValue { NoCache = true };
         using var resp = await Client.SendAsync(req, ct);
         resp.EnsureSuccessStatusCode();
         return await resp.Content.ReadAsStringAsync(ct);

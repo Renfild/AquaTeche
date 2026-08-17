@@ -6,7 +6,7 @@ Do **not** treat `registries.json` as installed-mod truth. Prefer:
 
 - `server/mods/*.jar` (runtime)
 - Root `kubejs/` (script source of truth)
-- `mods/aquatech-ui`, `mods/casesmod` (team Java)
+- `mods/aquatech-ui`, `mods/aqualumen-ui` (team Java)
 
 Create is **not** on the lean server. CraftTweaker is parked (`scripts/*.zs.disabled`).
 
@@ -16,8 +16,7 @@ Create is **not** on the lean server. CraftTweaker is parked (`scripts/*.zs.disa
 |---------|------|
 | KubeJS source | `kubejs/server_scripts/`, `kubejs/startup_scripts/` |
 | aquatech_ui source | `mods/aquatech-ui/` |
-| casesmod source | `mods/casesmod/` |
-| cases JSON | `config/casesmod/` |
+| aqualumen source | `mods/aqualumen-ui/` |
 | aquatech config | `config/aquatech_ui-common.toml` |
 | FTB quests live | `config/ftbquests/quests/` |
 | FTB backup | `config/ftbquests_backup_*/` |
@@ -42,14 +41,9 @@ Create is **not** on the lean server. CraftTweaker is parked (`scripts/*.zs.disa
 Resource rods (exactly 5):
 `naturalist_rod`, `starcatcher_rod`, `obsidian_rod`, `lush_glowberry_rod`, `magmaforged_rod`
 
-## casesmod config shapes
+## Hub economy (AquaLumen)
 
-- `config/casesmod/cases/*.json` — case pools
-- `config/casesmod/kits.json` — kits
-- `config/casesmod/quests.json` — F4 stage quests
-- `config/casesmod/warps.json` — menu warps
-
-Prefer editing JSON; bump Java only for new packets/UI.
+Store/cases/pass live in the AquaLumen hub (`mods/aqualumen-ui`). Actions `store.buy` / `case.open` currently reply «пока недоступно» until a real economy bridge exists. Do not restore `casesmod` JSON.
 
 ## KubeJS event cheat sheet (1.20.1 Forge)
 
@@ -76,5 +70,5 @@ IDs: `'namespace:path'`. NBT items: `Item.of('id', { ... })`.
 | Rate mod | Shift+RMB → insert rate_x8 → haul ~16–32 |
 | Fish-only rod | humble_rod → SC fish, no IU override |
 | KubeJS remove | Creative/TP item uncraftable in JEI |
-| casesmod | `/menu` opens, case opens, kit claim |
+| AquaLumen hub | F4 / `/hub` opens; store/cases say «пока недоступно» |
 | Deploy | Same jar MD5 on server + CF client mods |

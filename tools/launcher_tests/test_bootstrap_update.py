@@ -20,11 +20,36 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "tools"))
 
-import aquatech_launcher as L  # noqa: E402
+
+def pack_version_key(v: str) -> tuple[int, int, int]:
+    parts = (v or "").strip().split(".")
+    nums = [0, 0, 0]
+    for i in range(min(3, len(parts))):
+        n = 0
+        for ch in parts[i]:
+            if ch < "0" or ch > "9":
+                break
+            n = n * 10 + ord(ch) - 48
+        nums[i] = n
+    return nums[0], nums[1], nums[2]
+
+
+def needs_launcher_update(local: str, remote: str) -> bool:
+    remote = (remote or "").strip()
+    if not remote:
+        return False
+    local = (local or "").strip()
+    if not local:
+        return True
+    if local.lower() == remote.lower():
+        return False
+    return pack_version_key(remote) > pack_version_key(local)
+
 
 BOOTSTRAP_URLS = [
+    "https://aquatech.santcrail.workers.dev/bootstrap.json",
+    "https://aquateche.store/bootstrap.json",
     "https://api.github.com/repos/Renfild/AquaTeche/contents/docs/bootstrap.json?ref=main",
     "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/bootstrap.json",
     "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/bootstrap.json",
@@ -96,7 +121,7 @@ def test_needs_launcher_update_logic():
         ("2.9.9", "2.9.10", True),
     ]
     for local, remote, want in cases:
-        got = L.needs_launcher_update(local, remote)
+        got = needs_launcher_update(local, remote)
         if got != want:
             _fail(f"{local!r} -> {remote!r}", f"got {got} want {want}")
         else:
@@ -148,7 +173,7 @@ def test_live_bootstrap_reachable():
         return
 
     used, man = max(
-        mirrors, key=lambda x: L.pack_version_key(str(x[1].get("version") or "0"))
+        mirrors, key=lambda x: pack_version_key(str(x[1].get("version") or "0"))
     )
     _ok(f"best mirror={used.split('/')[2]} version={man.get('version')}")
 
@@ -220,17 +245,18 @@ def test_go_needs_update_via_subprocess():
         _ok((r.stdout or "ok").strip().splitlines()[-1] if r.stdout else "ok")
 
 
-def test_check_launcher_update_available_shape():
-    print("[5] check_launcher_update_available() shape")
-    info = L.check_launcher_update_available()
-    for key in ("local", "remote", "update_available", "hint"):
-        if key not in info:
-            _fail(f"missing key {key}")
-            return
-    if info["local"] != L.LAUNCHER_VER:
-        _fail("local version", f"{info['local']} ≠ {L.LAUNCHER_VER}")
+def test_csharp_version_matches_bootstrap():
+    print("[5] C# LauncherConstants.Version vs docs/bootstrap.json")
+    man = json.loads((ROOT / "docs" / "bootstrap.json").read_text(encoding="utf-8"))
+    cs = (ROOT / "launcher" / "src" / "AquaTechLauncher.Core" / "LauncherConstants.cs").read_text(
+        encoding="utf-8"
+    )
+    local = (man.get("version") or "").strip()
+    marker = f'public const string Version = "{local}";'
+    if marker not in cs:
+        _fail("LauncherConstants.Version", f"expected {marker}")
     else:
-        _ok(f"local={info['local']} remote={info['remote']} update={info['update_available']}")
+        _ok(f"C# Version = {local}")
 
 
 def main() -> int:
@@ -239,7 +265,7 @@ def main() -> int:
     test_local_bootstrap_matches_upload_script()
     test_live_bootstrap_reachable()
     test_go_needs_update_via_subprocess()
-    test_check_launcher_update_available_shape()
+    test_csharp_version_matches_bootstrap()
     print()
     if FAILED:
         print(f"FAILED: {FAILED}")

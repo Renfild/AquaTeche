@@ -5,7 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Rarity-tinted item cell. Colors match casesmod {@code CaseItem.Rarity}.
+ * Rarity-tinted item cell. Colors match AquaLumen case rarity.
  */
 public final class AquaCaseSlot {
 

@@ -5,7 +5,7 @@
 | Path | Role |
 |------|------|
 | `server/` | Mohist host |
-| `mods/` | jars + `aquatech-ui` / `casesmod` sources |
+| `mods/` | jars + `aquatech-ui` / `aqualumen-ui` sources |
 | `kubejs/`, `config/`, `datapacks/`, `resourcepacks/` | pack content |
 | `docs/`, `worker/`, `functions/` | portal |
 | `tools/` | release pipeline + domain helpers (see below) |
@@ -14,8 +14,8 @@
 
 ## tools/
 
-**Stay at `tools/` root (rules / CI / PyInstaller):**  
-`publish_client_pack.py`, `sync_lodestone_mods.py`, `upload_launcher_release.py`, `upload_pack_release.py`, `generate_site.py`, `deploy_to_cloudflare.py`, `aquatech_launcher.py`, …
+**Stay at `tools/` root (release pipeline):**  
+`publish_client_pack.py`, `upload_launcher_release.py`, `upload_pack_release.py`, `generate_site.py`, `deploy_to_cloudflare.py`, `pack_launcher_zip.py`, …
 
 **By domain:** `quests/`, `patches/`, `portal/`, `assets/`, `server_setup/`, `launcher_tests/`.  
 Old paths like `python tools/smoke_portal_and_versions.py` still work via shims.

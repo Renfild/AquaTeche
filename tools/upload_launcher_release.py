@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publish LoliLand-style client: AquaTech.exe + AquaTechLauncher.zip."""
+"""Publish LoliLand-style client: Go AquaTech.exe + C# AquaTechLauncher.zip."""
 from __future__ import annotations
 
 import hashlib
@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.59"
+TAG = "client-2.9.65"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -68,7 +68,7 @@ def main() -> None:
         "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
         "launcher_zip_md5": md5_file(zip_path),
         "launcher_zip_size": zip_path.stat().st_size,
-        "pack_cdn": "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
+        "pack_cdn": "https://aquateche.store/pack",
     }
     DOCS_MANIFEST.write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 

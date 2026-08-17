@@ -37,7 +37,7 @@ Deploy auto:
 - mirrors repo `kubejs/` + aquatech datapacks into `server/` before upload
 - **does not** overwrite `config/ftbquests` unless `AQUATECH_SYNC_QUESTS=1` (live editor is source of truth)
 - **full** SFTP: panel backup first (`pre-deploy-TIMESTAMP`; rotates if limit=1; skip with `--skip-backup` / `AQUATECH_SKIP_BACKUP=1`)
-- purges stale remote `aquatech_ui-` / `casesmod-` / `packetfixer-` jars
+- purges stale remote `aquatech_ui-` / `aqualumen-` / `packetfixer-` jars
 - injects MySQL placeholders from `.apex_mysql.json`
 
 Quest/config only (fast — no backup):

@@ -220,8 +220,12 @@ public sealed class ForgeInstaller
             && File.Exists(extra) && new FileInfo(extra).Length > 100_000)
             return Task.CompletedTask;
 
-        var rtZip = FindBundled("forge-runtime-1.20.1-47.4.0.zip")
-            ?? throw new FileNotFoundException("Нет client-*-srg.jar — переустанови лаунчер (runtime zip).");
+        var rtZip = FindBundled("forge-runtime-1.20.1-47.4.0.zip");
+        if (rtZip == null)
+        {
+            log?.Invoke("Forge runtime zip рядом с лаунчером нет — SRG доберёт официальный установщик");
+            return Task.CompletedTask;
+        }
         log?.Invoke("Достаём Minecraft SRG/extra из Forge runtime…");
         var need = new Dictionary<string, string>
         {

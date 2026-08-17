@@ -97,12 +97,12 @@ def test_policy() -> None:
     def should_blur(aqua: bool, class_name: str | None) -> bool:
         if aqua:
             return True
-        return class_name is not None and class_name.startswith("com.casesmod.client.gui.")
+        return class_name is not None and class_name.startswith("store.aquateche.aqualumen.client.screen.")
 
     cases = [
         (True, "net.aquatech.ui.client.gui.OceanSkillTreeScreen", True),
-        (False, "com.casesmod.client.gui.MainMenuScreen", True),
-        (False, "com.casesmod.client.gui.widget.CustomButton", True),
+        (False, "store.aquateche.aqualumen.client.screen.HubScreen", True),
+        (False, "store.aquateche.aqualumen.client.screen.HubTabs", True),
         (False, "net.minecraft.client.gui.screens.PauseScreen", False),
         (False, None, False),
         (False, "", False),
@@ -111,7 +111,7 @@ def test_policy() -> None:
         got = should_blur(aqua, name)
         if got != expect:
             fail(f"policy {aqua=} {name!r} -> {got}, want {expect}")
-    if 'CASESMOD_GUI_PREFIX = "com.casesmod.client.gui."' not in text:
+    if 'AQUALUMEN_GUI_PREFIX = "store.aquateche.aqualumen.client.screen."' not in text:
         fail("BlurScreenPolicy prefix constant drifted")
     print("OK BlurScreenPolicy")
 

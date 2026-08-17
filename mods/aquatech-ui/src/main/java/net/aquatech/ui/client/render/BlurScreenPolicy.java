@@ -6,7 +6,7 @@ package net.aquatech.ui.client.render;
  */
 public final class BlurScreenPolicy {
 
-    public static final String CASESMOD_GUI_PREFIX = "com.casesmod.client.gui.";
+    public static final String AQUALUMEN_GUI_PREFIX = "store.aquateche.aqualumen.client.screen.";
 
     private BlurScreenPolicy() {
     }
@@ -15,6 +15,6 @@ public final class BlurScreenPolicy {
         if (aquaBlurredScreen) {
             return true;
         }
-        return className != null && className.startsWith(CASESMOD_GUI_PREFIX);
+        return className != null && className.startsWith(AQUALUMEN_GUI_PREFIX);
     }
 }

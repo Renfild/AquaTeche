@@ -215,6 +215,8 @@
                 <TextBox Classes="field" Text="{Binding LoginPassword}" PasswordChar="•" Watermark="Пароль от аккаунта"/>
               </StackPanel>
 
+              <CheckBox IsChecked="{Binding RememberMe}" Content="Запомнить меня" Foreground="#94A3B8" FontSize="13" Margin="0,2,0,2"/>
+
               <!-- Error Alert -->
               <Border Background="#2A1215" BorderBrush="#EF4444" BorderThickness="1" CornerRadius="8" Padding="12,8"
                       IsVisible="{Binding AuthError, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
@@ -363,17 +365,22 @@
                 </StackPanel>
               </Border>
 
-              <!-- Big Play Button -->
-              <Button Classes="play" Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
-                      IsEnabled="{Binding ActionsEnabled}" HorizontalAlignment="Stretch">
-                <Button.Background>
-                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                    <GradientStop Color="#00F2FE" Offset="0"/>
-                    <GradientStop Color="#4FACFE" Offset="0.5"/>
-                    <GradientStop Color="#0284C7" Offset="1"/>
-                  </LinearGradientBrush>
-                </Button.Background>
-              </Button>
+              <!-- Action Buttons Row (Play + Update) -->
+              <Grid ColumnDefinitions="*,12,Auto">
+                <Button Grid.Column="0" Classes="play" Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
+                        IsEnabled="{Binding ActionsEnabled}" HorizontalAlignment="Stretch">
+                  <Button.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                      <GradientStop Color="#00F2FE" Offset="0"/>
+                      <GradientStop Color="#4FACFE" Offset="0.5"/>
+                      <GradientStop Color="#0284C7" Offset="1"/>
+                    </LinearGradientBrush>
+                  </Button.Background>
+                </Button>
+                <Button Grid.Column="2" Classes="glass" Content="🔄 Обновить" Command="{Binding RepairPackCommand}"
+                        IsEnabled="{Binding ActionsEnabled}" Height="54" Padding="18,0" FontSize="15"
+                        ToolTip.Tip="Проверить целостность и скачать обновления сборки"/>
+              </Grid>
 
               <!-- Progress & Status -->
               <StackPanel Spacing="8">
@@ -422,6 +429,22 @@
                     <Button Grid.Column="2" Classes="glass" Content="Обзор 📁" Command="{Binding BrowseGameDirCommand}"
                             Height="44" Padding="14,0" HorizontalContentAlignment="Center"/>
                   </Grid>
+                </StackPanel>
+
+                <Border Height="1" Background="#1E2738" Margin="0,4"/>
+
+                <StackPanel Spacing="10">
+                  <TextBlock Text="ОБСЛУЖИВАНИЕ И ВОССТАНОВЛЕНИЕ" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
+                  <TextBlock Text="Если возникают ошибки подключения или краши модов, нажми кнопку ниже для полной проверки и авто-очистки лишних файлов."
+                             FontSize="11" Foreground="#64748B" TextWrapping="Wrap"/>
+                  <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
+                    <Button Classes="glass" Content="🔄 Проверить и починить сборку" Command="{Binding RepairPackCommand}"
+                            Margin="0,0,10,8" Padding="16,10" Foreground="#38BDF8"/>
+                    <Button Classes="glass" Content="📂 Открыть папку игры" Command="{Binding OpenGameFolderCommand}"
+                            Margin="0,0,10,8" Padding="14,10"/>
+                    <Button Classes="glass" Content="📄 Открыть логи" Command="{Binding OpenLogsFolderCommand}"
+                            Margin="0,0,10,8" Padding="14,10"/>
+                  </WrapPanel>
                 </StackPanel>
               </StackPanel>
             </Border>

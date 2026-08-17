@@ -62,6 +62,7 @@ public sealed class ManifestSync
             return (0, 0, 0);
         }
 
+        PreCleanStaleFirstParty(gameDir, log);
         var wanted = new HashSet<string>(
             files.Select(f => f.Path.Replace('\\', '/').TrimStart('/')),
             StringComparer.OrdinalIgnoreCase);
@@ -105,15 +106,20 @@ public sealed class ManifestSync
             await gate.WaitAsync(ct);
             try
             {
+                var relName = System.IO.Path.GetFileName(item.Path);
                 var ok = await DownloadOneAsync(gameDir, item, ct);
                 Interlocked.Increment(ref done);
                 if (ok) Interlocked.Increment(ref updated);
-                else Interlocked.Increment(ref failed);
+                else
+                {
+                    Interlocked.Increment(ref failed);
+                    log?.Invoke($"Ошибка загрузки: {relName}");
+                }
                 var d = done;
                 if (d == 1 || d % 5 == 0 || d == jobs.Count)
                 {
                     progress?.Invoke(35 + 60.0 * d / jobs.Count);
-                    log?.Invoke($"↓ {d}/{jobs.Count}…");
+                    log?.Invoke($"↓ [{d}/{jobs.Count}] {relName}…");
                 }
             }
             finally
@@ -123,14 +129,12 @@ public sealed class ManifestSync
         });
         await Task.WhenAll(tasks);
 
-        var deleted = 0;
+        // Always purge unwanted files (especially stale mods)
+        var deleted = PurgeExtras(gameDir, wanted, log);
         if (failed == 0)
         {
-            deleted = PurgeExtras(gameDir, wanted, log);
             SavePackVersion(gameDir, manifest.Version);
         }
-        else
-            log?.Invoke("Purge пропущен — есть ошибки загрузки");
 
         log?.Invoke(failed > 0
             ? $"Синхронизация v{manifest.Version}: {updated} ок, {failed} ошибок" + (deleted > 0 ? $", −{deleted}" : "")
@@ -153,10 +157,12 @@ public sealed class ManifestSync
 
     public async Task<PackManifest> FetchManifestAsync(string updateBase, Action<string>? log = null, CancellationToken ct = default)
     {
-        var bases = new List<string> { updateBase.TrimEnd('/') };
+        var bases = new List<string>();
         foreach (var m in LauncherConstants.PackCdnMirrors)
             if (!bases.Contains(m, StringComparer.OrdinalIgnoreCase))
                 bases.Add(m);
+        if (!string.IsNullOrWhiteSpace(updateBase) && !bases.Contains(updateBase.TrimEnd('/'), StringComparer.OrdinalIgnoreCase))
+            bases.Add(updateBase.TrimEnd('/'));
 
         Exception? last = null;
         foreach (var b in bases)
@@ -184,37 +190,80 @@ public sealed class ManifestSync
         var rel = item.Path.Replace('\\', '/').TrimStart('/');
         var local = System.IO.Path.Combine(gameDir, rel.Replace('/', System.IO.Path.DirectorySeparatorChar));
         Directory.CreateDirectory(System.IO.Path.GetDirectoryName(local)!);
-        try
+
+        var urls = new List<string>();
+        if (!string.IsNullOrWhiteSpace(item.Url))
+            urls.Add(item.Url.Trim());
+        foreach (var mirror in LauncherConstants.PackCdnMirrors)
         {
-            var url = (item.Url ?? "").Trim();
-            if (string.IsNullOrEmpty(url))
-                url = $"{LauncherConstants.DefaultUpdateUrl}/{rel}";
-            await HttpDownload.DownloadAsync(url, local, ct);
-            if (!string.IsNullOrEmpty(item.Md5))
+            var mUrl = $"{mirror.TrimEnd('/')}/{rel}";
+            if (!urls.Contains(mUrl, StringComparer.OrdinalIgnoreCase))
+                urls.Add(mUrl);
+        }
+
+        foreach (var url in urls)
+        {
+            try
             {
-                var got = HttpDownload.Md5File(local);
-                if (!got.Equals(item.Md5, StringComparison.OrdinalIgnoreCase))
+                await HttpDownload.DownloadAsync(url, local, ct);
+                if (!string.IsNullOrEmpty(item.Md5))
+                {
+                    var got = HttpDownload.Md5File(local);
+                    if (!got.Equals(item.Md5, StringComparison.OrdinalIgnoreCase))
+                    {
+                        File.Delete(local);
+                        continue;
+                    }
+                }
+                if (item.Size > 0 && new FileInfo(local).Length != item.Size)
                 {
                     File.Delete(local);
-                    return false;
+                    continue;
                 }
+                return true;
             }
-            if (item.Size > 0 && new FileInfo(local).Length != item.Size)
+            catch
             {
-                File.Delete(local);
-                return false;
+                try { if (File.Exists(local)) File.Delete(local); } catch { /* ignore */ }
             }
-            return true;
         }
-        catch
-        {
-            try { if (File.Exists(local)) File.Delete(local); } catch { /* ignore */ }
-            return false;
-        }
+        return false;
     }
 
-    private static int PurgeExtras(string gameDir, HashSet<string> wanted, Action<string>? log)
+    public static void PreCleanStaleFirstParty(string gameDir, Action<string>? log)
     {
+        try
+        {
+            var modsDir = System.IO.Path.Combine(gameDir, "mods");
+            if (Directory.Exists(modsDir))
+            {
+                foreach (var f in Directory.EnumerateFiles(modsDir, "*", SearchOption.TopDirectoryOnly))
+                {
+                    var name = System.IO.Path.GetFileName(f).ToLowerInvariant();
+                    if (name.Contains("casesmod") || name.Contains("_parked") || name.EndsWith(".disabled"))
+                    {
+                        try
+                        {
+                            File.SetAttributes(f, FileAttributes.Normal);
+                            File.Delete(f);
+                            log?.Invoke($"Очищен устаревший мод: {System.IO.Path.GetFileName(f)}");
+                        }
+                        catch { }
+                    }
+                }
+            }
+            var cfgCases = System.IO.Path.Combine(gameDir, "config", "casesmod");
+            if (Directory.Exists(cfgCases))
+            {
+                try { Directory.Delete(cfgCases, true); } catch { }
+            }
+        }
+        catch { /* ignore */ }
+    }
+
+    public static int PurgeExtras(string gameDir, HashSet<string> wanted, Action<string>? log)
+    {
+        PreCleanStaleFirstParty(gameDir, log);
         var deleted = 0;
         foreach (var folder in LauncherConstants.PackFolders)
         {
@@ -226,21 +275,21 @@ public sealed class ManifestSync
                 var name = System.IO.Path.GetFileName(file);
                 if (LauncherConstants.SyncKeepNames.Contains(name)) continue;
                 if (wanted.Contains(rel)) continue;
-                // Path-based parked skip (folder or name)
-                if (rel.Contains("_parked", StringComparison.OrdinalIgnoreCase))
-                {
-                    try { File.Delete(file); deleted++; } catch { /* ignore */ }
-                    continue;
-                }
+                // Parked files or stale mods/configs
                 try
                 {
+                    File.SetAttributes(file, FileAttributes.Normal);
                     File.Delete(file);
                     deleted++;
+                    log?.Invoke($"Удален устаревший файл: {rel}");
                 }
-                catch { /* ignore */ }
+                catch (Exception ex)
+                {
+                    log?.Invoke($"Предупреждение: не удалось удалить {rel} ({ex.Message})");
+                }
             }
         }
-        if (deleted > 0) log?.Invoke($"Удалено лишних файлов: {deleted}");
+        if (deleted > 0) log?.Invoke($"Удалено устаревших файлов: {deleted}");
         return deleted;
     }
 

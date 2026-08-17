@@ -62,10 +62,9 @@ Update Shift tooltip lines in `StarCatcherRodTooltips`. Build + `deploy_aquatech
 4. Recipe under `data/aquatech_ui/recipes/rate_xN.json`
 5. Creative tab already iterates `RATE_MODS`
 
-## 5) New casesmod case (JSON only)
+## 5) Hub store/case (out of scope until economy bridge)
 
-`config/casesmod/cases/my_case.json` — mirror to `server/config/casesmod/cases/`.
-No Java rebuild if schema matches existing cases.
+Do not add `casesmod` JSON. AquaLumen `store.buy` / `case.open` currently answer «пока недоступно». A real economy is a separate spec.
 
 ## 6) StarCatcher texture refresh
 
@@ -80,7 +79,7 @@ No Java rebuild if schema matches existing cases.
 |---------|-------|
 | «убери телепорт IU» | KubeJS `10_*.js` |
 | «новая удочка ловит олово» | Java `FishingRodCompat` + loot |
-| «кейс на медь» | casesmod JSON |
+| «кейс на медь» | AquaLumen (blocked until economy bridge) |
 | «текст в Tab» | aquatech_ui config/lang |
 | «другие текстуры удочек» | jar patch script |
 | «квест на авторыбалку» | FTB snbt (and sync server config) |

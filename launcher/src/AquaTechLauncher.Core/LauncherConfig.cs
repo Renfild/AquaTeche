@@ -20,6 +20,9 @@ public sealed class LauncherConfig
     [JsonPropertyName("portal_session")]
     public string? PortalSession { get; set; }
 
+    [JsonPropertyName("remember_me")]
+    public bool RememberMe { get; set; } = true;
+
     [JsonPropertyName("server_host")]
     public string? ServerHost { get; set; }
 
@@ -59,7 +62,8 @@ public sealed class LauncherConfig
             GameDir = GameDir,
             RamMb = RamMb,
             UpdateUrl = UpdateUrl,
-            PortalSession = SessionStore.Protect(PortalSession),
+            RememberMe = RememberMe,
+            PortalSession = RememberMe ? SessionStore.Protect(PortalSession) : null,
             ServerHost = ServerHost,
             ServerPort = ServerPort,
         };

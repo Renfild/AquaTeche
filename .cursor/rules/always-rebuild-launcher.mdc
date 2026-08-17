@@ -9,35 +9,40 @@ Whenever you finish an AquaTech update that players/clients should get — mods,
 
 ## Architecture
 
-- **`AquaTech.exe`** (~5 MB Go bootstrap) — what the website links to (like LoliLand.exe)
-- **`AquaTechLauncher.zip`** (onedir) — downloaded by bootstrap into `%LOCALAPPDATA%\AquaTech\app`
-- **`docs/bootstrap.json`** — version + zip URL (bootstrap reads from GitHub raw `main`)
+- **`AquaTech.exe`** (Go bootstrap) — what the website links to
+- **`AquaTechLauncher.zip`** — C# Avalonia self-contained `AquaTechLauncher.exe` (win-x64). Bootstrap extracts it to `%LOCALAPPDATA%\AquaTech\app`
+- **`docs/bootstrap.json`** — version + zip URL + MD5/size. Go picks the **newest** mirror (Worker, store, GitHub API, jsDelivr, raw)
+
+Do **not** ship PyInstaller / tkinter (`AquaTechLauncher.spec`, `tools/aquatech_launcher.py`). That path is gone.
 
 ## Required steps
 
 1. Pack content: `python tools/publish_client_pack.py` if needed.
-2. Rebuild onedir payload:
-   ```powershell
-   python -m PyInstaller --noconfirm --clean AquaTechLauncher.spec
-   Remove-Item dist\releases\AquaTechLauncher -Recurse -Force -ErrorAction SilentlyContinue
-   Copy-Item dist\AquaTechLauncher dist\releases\AquaTechLauncher -Recurse -Force
-   python -c "import zipfile,pathlib; s=pathlib.Path('dist/releases/AquaTechLauncher'); d=pathlib.Path('dist/releases/AquaTechLauncher.zip');
-   d.unlink(missing_ok=True); z=zipfile.ZipFile(d,'w',zipfile.ZIP_DEFLATED);
-   [z.write(p,p.relative_to(s).as_posix()) for p in s.rglob('*') if p.is_file()]; z.close()"
-   ```
+2. Publish C# launcher and zip:
+
+```powershell
+dotnet publish launcher/src/AquaTechLauncher/AquaTechLauncher.csproj -c Release -r win-x64 --self-contained true -o dist/AquaTechLauncher
+python tools/pack_launcher_zip.py
+```
+
 3. Rebuild bootstrap (portable Go under `tools/_go` if needed):
-   ```powershell
-   $env:CGO_ENABLED=0
-   & tools\_go\bin\go.exe build -C bootstrap -ldflags="-H windowsgui -s -w" -o dist\releases\AquaTech.exe .
-   ```
-4. Bump version in `tools/upload_launcher_release.py` + `docs/bootstrap.json`, then:
-   ```powershell
-   python tools/upload_launcher_release.py
-   ```
-5. Update site download href to the new `AquaTech.exe` release URL and push `main`.
+
+```powershell
+$env:CGO_ENABLED=0
+& tools\_go\bin\go.exe build -C bootstrap -ldflags="-H windowsgui -s -w" -o dist/releases/AquaTech.exe .
+```
+
+4. Bump `TAG` in `tools/upload_launcher_release.py`, `LauncherConstants.Version`, and csproj `AssemblyVersion` to the same `2.9.x`, then:
+
+```powershell
+python tools/upload_launcher_release.py
+```
+
+5. Confirm `docs/assets/js/site.js` DOWNLOAD href matches `client-<version>/AquaTech.exe` and push `main` so raw/jsDelivr stop serving a stale bootstrap.json.
 
 ## Do not
 
-- Ship only the fat 60MB PyInstaller exe as the website download.
-- Embed `.gh_token` into PyInstaller datas.
-- Point bootstrap at an immutable empty release tag without assets.
+- Ship a fat PyInstaller exe as the website download.
+- Embed `.gh_token` into any launcher payload.
+- Point bootstrap at an empty release tag.
+- Add gitignored `tools/forge-runtime-*.zip` as csproj Content (breaks CI). Fast Forge is optional beside the published exe; missing zip falls back to the official installer.

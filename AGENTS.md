@@ -16,7 +16,7 @@
 
 ### 1. Player-facing changes
 - `python tools/publish_client_pack.py` — when modpack mods, KubeJS scripts, or client configs change.
-- Rebuild launcher (PyInstaller + bootstrap + `upload_launcher_release.py`) — see `always-rebuild-launcher.mdc`.
+- Rebuild launcher (`dotnet publish` + Go bootstrap + `upload_launcher_release.py`) — see `always-rebuild-launcher.mdc`.
 - Do **not** copy jars or configs into Lodestone. Live host is Apex.
 
 ### 2. Portal changes (`docs/`, `worker/`, etc.)

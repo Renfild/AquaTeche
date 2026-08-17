@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 /**
- * Turns {@link OceanBlurEngine} on for AquaTech / casesmod screens.
+ * Turns {@link OceanBlurEngine} on for AquaTech / AquaLumen screens.
  * Blur is processed here (world already in the main target), not via GameRenderer.loadEffect.
  */
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)

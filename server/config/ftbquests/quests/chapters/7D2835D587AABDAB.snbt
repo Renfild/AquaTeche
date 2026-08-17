@@ -152,7 +152,7 @@
 			entity_vis_size: 1.0f
 			id: "74B58CD30A570FBA"
 			rewards: [{
-				command: "/casesmod addbalance @p 100"
+				command: "/tellraw @p {\"text\":\"Награда хаба пока без монет — экономика в работе\",\"color\":\"aqua\"}"
 				icon: "industrialupgrade:crafting_elements/crafting_637_element"
 				id: "69762D950B0EA414"
 				type: "command"

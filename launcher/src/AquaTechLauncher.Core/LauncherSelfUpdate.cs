@@ -37,8 +37,7 @@ public static class LauncherSelfUpdate
         BootstrapManifest? man;
         try
         {
-            var json = await HttpDownload.GetStringAsync(LauncherConstants.BootstrapManifestUrl, ct);
-            man = JsonSerializer.Deserialize<BootstrapManifest>(json);
+            man = await FetchBestManifestAsync(ct);
         }
         catch (Exception ex)
         {
@@ -48,7 +47,7 @@ public static class LauncherSelfUpdate
         if (man == null || string.IsNullOrWhiteSpace(man.Version) || string.IsNullOrWhiteSpace(man.LauncherZip))
             return (false, "Манифест лаунчера пустой");
 
-        if (VersionsEqual(man.Version, LauncherConstants.Version))
+        if (!VersionNewer(man.Version, LauncherConstants.Version))
             return (false, $"Актуально (v{LauncherConstants.Version})");
 
         var root = Path.Combine(
@@ -165,8 +164,69 @@ public static class LauncherSelfUpdate
         return true;
     }
 
+    public static async Task<BootstrapManifest?> FetchBestManifestAsync(CancellationToken ct = default)
+    {
+        BootstrapManifest? best = null;
+        Exception? last = null;
+        var stamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        foreach (var url in LauncherConstants.BootstrapManifestUrls)
+        {
+            try
+            {
+                var bust = url.Contains('?', StringComparison.Ordinal) ? $"{url}&t={stamp}" : $"{url}?t={stamp}";
+                var json = await HttpDownload.GetStringAsync(bust, ct);
+                var man = JsonSerializer.Deserialize<BootstrapManifest>(json);
+                if (man == null || string.IsNullOrWhiteSpace(man.Version))
+                    continue;
+                if (best == null || VersionNewer(man.Version, best.Version))
+                    best = man;
+            }
+            catch (Exception ex)
+            {
+                last = ex;
+            }
+        }
+        if (best == null && last != null)
+            throw last;
+        return best;
+    }
+
     public static bool VersionsEqual(string a, string b) =>
         string.Equals(a.Trim(), b.Trim(), StringComparison.OrdinalIgnoreCase);
+
+    public static bool VersionNewer(string candidate, string baseline)
+    {
+        if (!TryVersionKey(candidate, out var a))
+            return false;
+        if (!TryVersionKey(baseline, out var b))
+            return true;
+        if (a.Major != b.Major) return a.Major > b.Major;
+        if (a.Minor != b.Minor) return a.Minor > b.Minor;
+        return a.Patch > b.Patch;
+    }
+
+    private static bool TryVersionKey(string raw, out (int Major, int Minor, int Patch) key)
+    {
+        key = default;
+        var v = raw.Trim();
+        var parts = v.Split('.');
+        if (parts.Length < 2)
+            return false;
+        var nums = new int[3];
+        for (var i = 0; i < 3 && i < parts.Length; i++)
+        {
+            var n = 0;
+            foreach (var ch in parts[i])
+            {
+                if (ch < '0' || ch > '9')
+                    break;
+                n = n * 10 + (ch - '0');
+            }
+            nums[i] = n;
+        }
+        key = (nums[0], nums[1], nums[2]);
+        return true;
+    }
 
     private static bool PathsEqual(string a, string b)
     {

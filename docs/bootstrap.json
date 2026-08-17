@@ -1,9 +1,9 @@
 {
-  "version": "2.9.59",
-  "launcher_zip": "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.59/AquaTechLauncher.zip",
+  "version": "2.9.65",
+  "launcher_zip": "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.65/AquaTechLauncher.zip",
   "launcher_exe": "AquaTechLauncher.exe",
-  "release_base": "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.59",
-  "launcher_zip_md5": "e19c1e3d448fce545ea98c67e0f06032",
-  "launcher_zip_size": 498361874,
-  "pack_cdn": "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack"
+  "release_base": "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.65",
+  "launcher_zip_md5": "3bf048b37b08b533ac641e9150678d27",
+  "launcher_zip_size": 39536284,
+  "pack_cdn": "https://aquateche.store/pack"
 }

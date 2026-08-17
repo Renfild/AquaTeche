@@ -16,7 +16,10 @@ func NeedsUpdate(localVersion, remoteVersion string, launcherExePresent bool) bo
 	if localVersion == "" {
 		return true
 	}
-	return !strings.EqualFold(localVersion, remoteVersion)
+	if strings.EqualFold(localVersion, remoteVersion) {
+		return false
+	}
+	return versionNewer(remoteVersion, localVersion)
 }
 
 // ResolveZipURL builds the absolute download URL for the launcher zip.

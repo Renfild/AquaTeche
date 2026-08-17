@@ -108,21 +108,15 @@ $probe = Resolve-Jar @(
   "$root\client\mods\ProbeJSLegacy-1.20.1-6.2.0.jar"
 )
 $aquatech = Resolve-Jar @(
-  "$root\server\mods\aquatech_ui-1.0.3.jar",
-  "$root\mods\aquatech-ui\build\libs\aquatech_ui-1.0.3.jar",
-  "$root\mods\aquatech_ui-1.0.3.jar",
-  "$root\mods\aquatech-ui\build\libs\aquatech_ui-1.0.0.jar",
-  "$root\mods\aquatech_ui-1.0.0.jar",
-  "$root\server\mods\aquatech_ui-1.0.0.jar"
+  "$root\server\mods\aquatech_ui-1.0.24.jar",
+  "$root\mods\aquatech-ui\build\libs\aquatech_ui-1.0.24.jar",
+  "$root\mods\aquatech_ui-1.0.24.jar"
 )
 
-$casesmod = Resolve-Jar @(
-  "$root\server\mods\casesmod-1.0.1.jar",
-  "$root\mods\casesmod\build\libs\casesmod-1.0.1.jar",
-  "$root\mods\casesmod-1.0.1.jar",
-  "$root\mods\casesmod\build\libs\casesmod-1.0.0.jar",
-  "$root\mods\casesmod-1.0.0.jar",
-  "$root\server\mods\casesmod-1.0.0.jar"
+$aqualumen = Resolve-Jar @(
+  "$root\server\mods\aqualumen-forge-1.20.1-0.3.0-alpha.jar",
+  "$root\mods\aqualumen-ui\build\libs\aqualumen-forge-1.20.1-0.3.0-alpha.jar",
+  "$root\mods\aqualumen-forge-1.20.1-0.3.0-alpha.jar"
 )
 
 $easynpc = Resolve-Jar @(
@@ -134,7 +128,7 @@ Copy-Mod $kubejs $modTargets "kubejs-*.jar"
 Copy-Mod $rhino $modTargets "rhino-*.jar"
 Copy-Mod $rg $modTargets "recipe_generator*.jar"
 Copy-Mod $blueprint $modTargets "blueprint-*.jar"
-if ($casesmod) { Copy-Mod $casesmod $modTargets "casesmod-*.jar" }
+if ($aqualumen) { Copy-Mod $aqualumen $modTargets "aqualumen-*.jar" }
 if ($easynpc) { Copy-Mod $easynpc $modTargets "easy_npc-*.jar" }
 if ($probe) { Copy-Mod $probe $clientOnlyMods "ProbeJS*.jar" }
 if ($aquatech) {

@@ -19,6 +19,17 @@ jobs:
       - name: Unit tests
         run: dotnet test launcher/src/AquaTechLauncher.Core.Tests/AquaTechLauncher.Core.Tests.csproj -c Release
 
+  bootstrap-go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22.x"
+      - name: Go bootstrap tests
+        working-directory: bootstrap
+        run: go test ./...
+
   portal-http:
     runs-on: ubuntu-latest
     steps:
