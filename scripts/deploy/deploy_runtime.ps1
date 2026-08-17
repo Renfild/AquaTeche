@@ -114,9 +114,9 @@ $aquatech = Resolve-Jar @(
 )
 
 $aqualumen = Resolve-Jar @(
-  "$root\server\mods\aqualumen-forge-1.20.1-0.3.3-alpha.jar",
-  "$root\mods\aqualumen-ui\build\libs\aqualumen-forge-1.20.1-0.3.3-alpha.jar",
-  "$root\mods\aqualumen-forge-1.20.1-0.3.3-alpha.jar"
+  "$root\server\mods\aqualumen-forge-1.20.1-0.3.4-alpha.jar",
+  "$root\mods\aqualumen-ui\build\libs\aqualumen-forge-1.20.1-0.3.4-alpha.jar",
+  "$root\mods\aqualumen-forge-1.20.1-0.3.4-alpha.jar"
 )
 
 $easynpc = Resolve-Jar @(

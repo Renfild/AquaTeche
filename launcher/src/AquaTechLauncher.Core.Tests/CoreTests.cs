@@ -128,3 +128,21 @@ public class ZipVerifyTests
         }
     }
 }
+
+public class AutoJoinArgumentTests
+{
+    [Fact]
+    public void Uses_delayed_mod_property_instead_of_quick_play()
+    {
+        var argument = LaunchCommandBuilder.BuildAutoJoinArgument(" play.aquatech.test:25565 ");
+
+        Assert.Equal("-Daquatech.autoJoin=play.aquatech.test:25565", argument);
+        Assert.DoesNotContain("quickPlay", argument, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void Empty_target_disables_auto_join()
+    {
+        Assert.Null(LaunchCommandBuilder.BuildAutoJoinArgument("  "));
+    }
+}

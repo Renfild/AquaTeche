@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.59"
-PACK_VERSION = "2.9.59"
+PACK_TAG = "pack-2.9.60"
+PACK_VERSION = "2.9.60"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -143,7 +143,7 @@ def sync_mods() -> None:
     # Always copy fresh compiled first-party jars from mod projects
     source_map = {
         "aquatech_ui-1.0.24.jar": ROOT / "mods" / "aquatech-ui" / "build" / "libs" / "aquatech_ui-1.0.24.jar",
-        "aqualumen-forge-1.20.1-0.3.3-alpha.jar": ROOT / "mods" / "aqualumen-ui" / "build" / "libs" / "aqualumen-forge-1.20.1-0.3.3-alpha.jar",
+        "aqualumen-forge-1.20.1-0.3.4-alpha.jar": ROOT / "mods" / "aqualumen-ui" / "build" / "libs" / "aqualumen-forge-1.20.1-0.3.4-alpha.jar",
     }
     for name, src_jar in source_map.items():
         if src_jar.is_file():

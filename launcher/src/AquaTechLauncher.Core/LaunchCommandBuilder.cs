@@ -119,13 +119,6 @@ public sealed class LaunchCommandBuilder
         foreach (var (flag, val) in needed)
             if (!gameArgs.Contains(flag)) { gameArgs.Add(flag); gameArgs.Add(val); }
 
-        if (!string.IsNullOrWhiteSpace(autoJoin) && !gameArgs.Contains("--quickPlayMultiplayer"))
-        {
-            gameArgs.Add("--quickPlayMultiplayer");
-            gameArgs.Add(autoJoin);
-            log?.Invoke($"авто-вход на {autoJoin}");
-        }
-
         if (!Directory.EnumerateFiles(nativesDir, "*.dll").Any())
         {
             log?.Invoke("natives пустые — перекачаем LWJGL…");
@@ -158,10 +151,23 @@ public sealed class LaunchCommandBuilder
             "-Dforge.logging.console.level=info",
             $"-XX:ErrorFile={Path.Combine(gameDir, "logs", "hs_err_pid%p.log")}",
         };
+        var autoJoinArgument = BuildAutoJoinArgument(autoJoin);
+        if (autoJoinArgument != null)
+        {
+            cmd.Add(autoJoinArgument);
+            log?.Invoke($"авто-вход на {autoJoin} после загрузки меню");
+        }
         cmd.AddRange(jvmArgs);
         cmd.Add(mainClass);
         cmd.AddRange(gameArgs);
         return cmd;
+    }
+
+    public static string? BuildAutoJoinArgument(string autoJoin)
+    {
+        return string.IsNullOrWhiteSpace(autoJoin)
+            ? null
+            : $"-Daquatech.autoJoin={autoJoin.Trim()}";
     }
 
     private static JsonObject LoadMergedVersion(string gameDir, string verId)
