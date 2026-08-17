@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 public final class LumenWebBridge {
 
-    public static final String HUB_URL = "mod://aqualumen/html/hub.html";
+    public static final String HUB_URL = "mod://aqualumen/hub.html";
     private static final String IPC_MARKER = "#lumenipc=";
     private static final String BRIDGE_SCRIPT = """
             if (!window.AquaLumenBridge) {

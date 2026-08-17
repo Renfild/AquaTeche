@@ -18,6 +18,7 @@ import java.util.Set;
 
 public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
 
+    private static final int PAGE_READY_TIMEOUT_TICKS = 120;
     private static final Set<String> SERVER_ACTIONS = Set.of(
             "hub.refresh", "daily.claim", "store.buy", "case.open", "pass.claim");
 
@@ -26,6 +27,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
     private HubSnapshot pendingSnapshot;
     private boolean pageReady;
     private boolean modalOpen;
+    private int pageWaitTicks;
 
     public LumenWebScreen() {
         this("profile");
@@ -41,8 +43,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         double scale = minecraft.getWindow().getGuiScale();
         bridge = new LumenWebBridge((int) Math.ceil(width * scale), (int) Math.ceil(height * scale));
         if (!bridge.isAvailable()) {
-            AquaLumenUI.LOGGER.warn("[AquaLumen CEF] unavailable, using native hub");
-            minecraft.setScreen(new HubScreen());
+            fallbackToNative("browser unavailable");
             return;
         }
         pendingSnapshot = LumenClient.snapshot();
@@ -67,7 +68,20 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         while ((message = bridge.pollMessage()) != null) {
             dispatch(message);
         }
+        if (!pageReady && ++pageWaitTicks >= PAGE_READY_TIMEOUT_TICKS) {
+            fallbackToNative("page readiness timeout");
+            return;
+        }
         pushSnapshot();
+    }
+
+    private void fallbackToNative(String reason) {
+        AquaLumenUI.LOGGER.warn("[AquaLumen CEF] {}, using native hub", reason);
+        if (bridge != null) {
+            bridge.close();
+            bridge = null;
+        }
+        minecraft.setScreen(new HubScreen());
     }
 
     @Override

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.2-alpha — исправление загрузки MCEF
+
+- Исправлен `mod://` URL: MCEF больше не добавляет второй сегмент `html` и находит встроенный интерфейс.
+- Если HTML не сообщает о готовности за шесть секунд, открывается нативный hub вместо пустого блюра.
+
 ## 0.3.1-alpha — MCEF hub
 
 - Hub renders bundled `mod://aqualumen/html/hub.html` through CinemaMod MCEF at framebuffer resolution.

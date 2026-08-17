@@ -15,7 +15,7 @@ Mohist — гибрид Forge + Bukkit. Мод ставится в `mods/`, пл
 ## Порядок установки
 
 1. Java 17, Mohist для 1.20.1 (сборка на Forge 47.x).
-2. Положите `aqualumen-forge-1.20.1-0.3.1-alpha.jar` в `mods/`.
+2. Положите `aqualumen-forge-1.20.1-0.3.2-alpha.jar` в `mods/`.
 3. Запустите сервер один раз → появятся `config/aqualumen-common.toml`.
 4. Настройте `serverName`, `title` сезона, валютные objectives, список рангов.
 5. В клиентскую сборку лаунчера добавьте тот же jar.
