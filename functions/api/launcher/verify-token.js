@@ -23,9 +23,10 @@ export async function onRequestPost(context) {
   if (!sid || !nick) return bad("Missing session or nick", 400);
 
   const row = await env.DB.prepare(
-    `SELECT u.nick, u.balance, u.rank_id
+    `SELECT u.nick, coalesce(p.coins, 0) AS balance, coalesce(p.privilege, 'player') AS rank_id
      FROM sessions s
      JOIN users u ON u.id = s.user_id
+     LEFT JOIN profiles p ON p.user_id = u.id
      WHERE s.id = ?
        AND lower(u.nick) = lower(?)
        AND datetime(s.expires_at) > datetime('now')`
@@ -35,5 +36,5 @@ export async function onRequestPost(context) {
 
   if (!row) return bad("Session invalid or expired", 401);
 
-  return json({ ok: true, nick: row.nick, balance: row.balance, rank_id: row.rank_id || "player" });
+  return json({ ok: true, nick: row.nick, balance: Number(row.balance) || 0, rank_id: String(row.rank_id || "player") });
 }

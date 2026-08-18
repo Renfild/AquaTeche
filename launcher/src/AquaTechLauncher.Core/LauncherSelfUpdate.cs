@@ -109,21 +109,43 @@ public static class LauncherSelfUpdate
               timeout /t 1 /nobreak >NUL
               goto wait
             )
-            if exist "{appOld}" rmdir /s /q "{appOld}"
-            if exist "{appDir}" ren "{appDir}" "app_old"
-            mkdir "{appDir}"
-            xcopy /e /y /q "{src}\*" "{appDir}\"
-            if errorlevel 1 (
-              if exist "{appOld}" (
-                rmdir /s /q "{appDir}"
-                ren "{appOld}" "app"
-              )
-              exit /b 1
+            timeout /t 1 /nobreak >NUL
+
+            if exist "{appOld}" rmdir /s /q "{appOld}" 2>NUL
+
+            set RETRY_COUNT=0
+            :try_rename
+            if not exist "{appDir}" goto do_copy
+            ren "{appDir}" "app_old" 2>NUL
+            if not errorlevel 1 goto do_copy
+            set /a RETRY_COUNT+=1
+            if %RETRY_COUNT% geq 6 goto rollback
+            timeout /t 1 /nobreak >NUL
+            goto try_rename
+
+            :do_copy
+            mkdir "{appDir}" 2>NUL
+            set COPY_RETRIES=0
+            :try_copy
+            xcopy /e /y /q "{src}\*" "{appDir}\" >NUL 2>NUL
+            if not errorlevel 1 goto success
+            set /a COPY_RETRIES+=1
+            if %COPY_RETRIES% geq 6 goto rollback
+            timeout /t 1 /nobreak >NUL
+            goto try_copy
+
+            :rollback
+            if exist "{appOld}" (
+              rmdir /s /q "{appDir}" 2>NUL
+              ren "{appOld}" "app" 2>NUL
             )
-            if exist "{appOld}" rmdir /s /q "{appOld}"
-            rmdir /s /q "{stage}"
+            exit /b 1
+
+            :success
+            if exist "{appOld}" rmdir /s /q "{appOld}" 2>NUL
+            rmdir /s /q "{stage}" 2>NUL
             start "" "{Path.Combine(appDir, exeName)}"
-            del "%~f0"
+            del "%~f0" 2>NUL
             """);
 
         log?.Invoke($"Обновление v{man.Version} готово — перезапуск…");
@@ -166,28 +188,31 @@ public static class LauncherSelfUpdate
 
     public static async Task<BootstrapManifest?> FetchBestManifestAsync(CancellationToken ct = default)
     {
-        BootstrapManifest? best = null;
-        Exception? last = null;
         var stamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        foreach (var url in LauncherConstants.BootstrapManifestUrls)
+        var tasks = LauncherConstants.BootstrapManifestUrls.Select(async url =>
         {
             try
             {
                 var bust = url.Contains('?', StringComparison.Ordinal) ? $"{url}&t={stamp}" : $"{url}?t={stamp}";
                 var json = await HttpDownload.GetStringAsync(bust, ct);
                 var man = JsonSerializer.Deserialize<BootstrapManifest>(json);
-                if (man == null || string.IsNullOrWhiteSpace(man.Version))
-                    continue;
-                if (best == null || VersionNewer(man.Version, best.Version))
-                    best = man;
+                return man;
             }
-            catch (Exception ex)
+            catch
             {
-                last = ex;
+                return null;
             }
+        }).ToList();
+
+        var results = await Task.WhenAll(tasks);
+        BootstrapManifest? best = null;
+        foreach (var man in results)
+        {
+            if (man == null || string.IsNullOrWhiteSpace(man.Version))
+                continue;
+            if (best == null || VersionNewer(man.Version, best.Version))
+                best = man;
         }
-        if (best == null && last != null)
-            throw last;
         return best;
     }
 

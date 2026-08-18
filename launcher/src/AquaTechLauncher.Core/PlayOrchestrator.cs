@@ -54,7 +54,8 @@ public sealed class PlayOrchestrator
 
         log("Собираем classpath / natives / assets…", "info");
         var autoJoin = $"{cfg.EffectiveHost}:{cfg.EffectivePort}";
-        var cmd = await _launch.BuildAsync(gameDir, username, cfg.RamMb, java, autoJoin, m => log(m, "dim"), ct);
+        var sessionToken = cfg.PortalSession ?? HttpDownload.GetPortalSession();
+        var cmd = await _launch.BuildAsync(gameDir, username, cfg.RamMb, java, autoJoin, sessionToken, m => log(m, "dim"), ct);
         var proc = ProcessSpawner.Spawn(cmd, gameDir);
         log($"Процесс Minecraft PID {proc.Id} — проверяем…", "dim");
 

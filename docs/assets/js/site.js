@@ -717,6 +717,17 @@
     draw();
   }
 
+  const THEMES = [
+    { id: "ocean", label: "🌊 Океан" },
+    { id: "deep", label: "🌌 Глубина" },
+    { id: "storm", label: "⚡ Шторм" },
+    { id: "abyss", label: "🔮 Бездна" },
+    { id: "magma", label: "🔥 Магма" },
+    { id: "celestial", label: "✨ Небесный" },
+    { id: "cyber", label: "💚 Кибер" },
+    { id: "aurora", label: "🌈 Аврора" },
+  ];
+
   async function initProfile() {
     const root = $("#profile-root");
     if (!root) return;
@@ -740,7 +751,7 @@
     if (!profile) {
       const found = FALLBACK_PLAYERS.find((p) => p.nick.toLowerCase() === nick.toLowerCase());
       if (found) {
-        profile = { ...found, views: 240 };
+        profile = { ...found, views: 240, has_liked: false };
       } else {
         profile = {
           nick: nick,
@@ -751,6 +762,7 @@
           fish: 120,
           coins: 24500,
           views: 85,
+          has_liked: false,
           badges: ["Рыбак", "AquaTech 2026"],
         };
       }
@@ -758,45 +770,140 @@
 
     const mine = user && user.nick.toLowerCase() === profile.nick.toLowerCase();
     const theme = profile.theme || "ocean";
+
+    // Social chips HTML
+    const socials = [];
+    if (profile.social_tg) {
+      const tg = profile.social_tg.replace(/^@/, "");
+      socials.push(`<a class="social-chip" href="https://t.me/${encodeURIComponent(tg)}" target="_blank" rel="noopener">✈️ Telegram: @${tg}</a>`);
+    }
+    if (profile.social_vk) {
+      const vk = profile.social_vk.replace(/^(https?:\/\/)?(vk\.com\/)?/, "");
+      socials.push(`<a class="social-chip" href="https://vk.com/${encodeURIComponent(vk)}" target="_blank" rel="noopener">🌐 VK: ${vk}</a>`);
+    }
+    if (profile.social_discord) {
+      socials.push(`<span class="social-chip">🎮 Discord: ${profile.social_discord}</span>`);
+    }
+
     root.innerHTML = `
       <div class="profile-cover ${theme}">
         <div class="profile-identity">
-          <img class="profile-avatar" src="${skinUrl(profile.nick)}" alt="">
-          <div>
+          <img class="profile-avatar" src="${skinUrl(profile.nick)}" alt="${profile.nick}">
+          <div class="profile-meta">
             <h1>${profile.nick}</h1>
-            <p>${profile.privilege || "Игрок"} · ${profile.bio || ""}</p>
+            <div class="profile-status-line">
+              <span class="tag ${profile.slug === "deluxe" || profile.slug === "ultimate" || profile.privilege === "Создатель" ? "gold" : ""}">${profile.privilege || "Игрок"}</span>
+              ${profile.status_message ? `<span class="profile-status-badge">💬 ${profile.status_message}</span>` : ""}
+            </div>
+            ${profile.fav_rod ? `<div class="fav-rod-badge">🎣 Любимая удочка: <strong>${profile.fav_rod}</strong></div>` : ""}
+            ${socials.length ? `<div class="profile-socials">${socials.join("")}</div>` : ""}
+            <p style="margin-top:0.75rem;color:rgba(255,255,255,0.85);max-width:38rem">${profile.bio || ""}</p>
           </div>
         </div>
+        <div class="profile-actions">
+          <button class="btn-like ${profile.has_liked ? "liked" : ""}" type="button" id="btn-like-profile" ${mine ? 'disabled title="Нельзя ставить лайк своему профилю"' : ""}>
+            <span class="heart">${profile.has_liked ? "❤️" : "🤍"}</span>
+            <span id="like-count">${profile.likes || 0}</span>
+            <span style="font-size:0.82rem;font-weight:600;opacity:0.85">${profile.has_liked ? "Вам нравится" : "Похвалить"}</span>
+          </button>
+        </div>
       </div>
-      <div class="stats-row" style="margin-top:1rem">
-        <div class="stat-card"><strong>${profile.likes || 0}</strong><span>лайки</span></div>
-        <div class="stat-card"><strong>${profile.fish || 0}</strong><span>улов</span></div>
-        <div class="stat-card"><strong>${Number(profile.coins || 0).toLocaleString("ru-RU")}</strong><span>монеты</span></div>
+
+      <div class="stats-row" style="margin-top:1.25rem">
+        <div class="stat-card"><strong>${Number(profile.coins || 0).toLocaleString("ru-RU")} ¤</strong><span>AquaCoins</span></div>
+        <div class="stat-card"><strong>${Number(profile.fish || 0).toLocaleString("ru-RU")}</strong><span>рыбы поймано</span></div>
+        <div class="stat-card"><strong>${profile.playtime || (profile.playtime_hours || 0) + " ч"}</strong><span>в игре</span></div>
         <div class="stat-card"><strong>${profile.views || 0}</strong><span>просмотры</span></div>
       </div>
-      <div class="panel" style="margin-top:1rem">
-        <h3>Бейджи</h3>
+
+      <div class="panel" style="margin-top:1.25rem">
+        <h3>Бейджи и титулы</h3>
         <div class="badge-grid" style="margin-top:.6rem">
           ${(profile.badges || []).map((b) => `<span class="badge">${b}</span>`).join("") || '<span class="muted-line">Пока пусто</span>'}
         </div>
       </div>
+
       ${
         mine
-          ? `<form class="panel form" id="profile-edit" style="margin-top:1rem">
-              <h3>Редактировать</h3>
-              <div class="field"><label>О себе</label><textarea name="bio" rows="3">${profile.bio || ""}</textarea></div>
-              <div class="field"><label>Тема</label>
-                <select name="theme">
-                  ${["ocean", "deep", "storm", "abyss"]
-                    .map((t) => `<option value="${t}" ${t === theme ? "selected" : ""}>${t}</option>`)
-                    .join("")}
-                </select>
+          ? `<form class="panel form" id="profile-edit" style="margin-top:1.25rem">
+              <h3>Кастомизация профиля</h3>
+              <p style="color:var(--muted);font-size:0.88rem;margin-top:0.25rem">Настройте внешний вид своей карточки игрока на сайте.</p>
+              
+              <div class="field" style="margin-top:1rem">
+                <label>Тема оформления профиля</label>
+                <div class="theme-selector-grid">
+                  ${THEMES.map(
+                    (t) => `
+                    <label class="theme-pill">
+                      <input type="radio" name="theme" value="${t.id}" ${t.id === theme ? "checked" : ""}>
+                      <div class="theme-pill-content">${t.label}</div>
+                    </label>`
+                  ).join("")}
+                </div>
               </div>
-              <button class="btn btn-primary" type="submit">Сохранить</button>
+
+              <div class="form-grid-2" style="margin-top:0.5rem">
+                <div class="field">
+                  <label>Статус (до 80 символов)</label>
+                  <input type="text" name="status_message" maxlength="80" placeholder="Например: Ловлю на T10 Магматическую" value="${profile.status_message || ""}">
+                </div>
+                <div class="field">
+                  <label>Любимая удочка</label>
+                  <input type="text" name="fav_rod" maxlength="50" placeholder="Например: Алмазная удочка [T7]" value="${profile.fav_rod || ""}">
+                </div>
+              </div>
+
+              <div class="form-grid-2" style="margin-top:0.5rem">
+                <div class="field">
+                  <label>Telegram</label>
+                  <input type="text" name="social_tg" placeholder="@username" value="${profile.social_tg || ""}">
+                </div>
+                <div class="field">
+                  <label>VK</label>
+                  <input type="text" name="social_vk" placeholder="id или ник" value="${profile.social_vk || ""}">
+                </div>
+              </div>
+
+              <div class="field" style="margin-top:0.5rem">
+                <label>Discord</label>
+                <input type="text" name="social_discord" placeholder="username" value="${profile.social_discord || ""}">
+              </div>
+
+              <div class="field" style="margin-top:0.5rem">
+                <label>О себе (био)</label>
+                <textarea name="bio" rows="3" maxlength="300" placeholder="Расскажите о себе, своих рекордах в рыбалке или острове...">${profile.bio || ""}</textarea>
+              </div>
+
+              <button class="btn btn-primary" type="submit" style="margin-top:0.5rem">💾 Сохранить профиль</button>
             </form>`
           : ""
       }`;
 
+    // Wire Like Button
+    const likeBtn = $("#btn-like-profile");
+    likeBtn?.addEventListener("click", async () => {
+      if (!user) {
+        toast("Войдите в аккаунт, чтобы похвалить игрока");
+        return;
+      }
+      try {
+        const res = await api(`/api/profiles/${encodeURIComponent(profile.nick)}/like`, {
+          method: "POST",
+          body: "{}",
+        });
+        if (res.ok) {
+          likeBtn.classList.toggle("liked", res.liked);
+          likeBtn.querySelector(".heart").textContent = res.liked ? "❤️" : "🤍";
+          $("#like-count").textContent = res.likes;
+          toast(res.liked ? "Вы похвалили игрока!" : "Лайк убран");
+          if (soundOn) playTone("ok");
+        }
+      } catch (err) {
+        toast(err.message || "Не удалось поставить лайк");
+      }
+    });
+
+    // Wire Edit Form
     const form = $("#profile-edit");
     form?.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -804,10 +911,19 @@
       try {
         await api(`/api/profiles/${encodeURIComponent(profile.nick)}`, {
           method: "PATCH",
-          body: JSON.stringify({ bio: fd.get("bio"), theme: fd.get("theme") }),
+          body: JSON.stringify({
+            bio: fd.get("bio"),
+            theme: fd.get("theme"),
+            status_message: fd.get("status_message"),
+            fav_rod: fd.get("fav_rod"),
+            social_tg: fd.get("social_tg"),
+            social_vk: fd.get("social_vk"),
+            social_discord: fd.get("social_discord"),
+          }),
         });
-        toast("Профиль сохранён");
-        location.reload();
+        toast("Профиль успешно обновлён!");
+        if (soundOn) playTone("ok");
+        setTimeout(() => location.reload(), 600);
       } catch (err) {
         toast(err.message || "Не удалось сохранить");
       }

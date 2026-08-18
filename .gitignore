@@ -81,7 +81,7 @@ tools/Custom-Nameplates/
 
 # Too large for Cloudflare Pages (25 MiB limit); host via GitHub Releases
 AquaTechLauncher.exe
-/AquaTech.exe
+AquaTech.exe
 
 # Stray binaries, region files, PyInstaller artifacts
 *.mca

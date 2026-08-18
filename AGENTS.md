@@ -5,6 +5,13 @@
 - **Coding (`anti-ai-slop-coding`)**: Domain-specific symbol names, no restating comments, no YAGNI abstraction layers, smallest diff, proper error handling, match repo style.
 - **Design (`anti-ai-slop-design`)**: Brand and clear hierarchy first. No purple SaaS gradients, no default Inter/Roboto stacks, cards only when necessary, concrete UI copy.
 
+## Engineering & Execution Protocol (Thinking, Research & Quality)
+1. **Deep Thinking & Research First**: Always analyze the root cause, search the codebase and the web for current best practices before answering or modifying code.
+2. **Task Decomposition**: Break down complex requests into concise, logical milestones.
+3. **Questions with Recommendations**: Whenever requirements or design forks are ambiguous, ask clarifying questions providing a prioritized `(Recommended)` option and concrete rationale.
+4. **Mandatory Testing & Verification**: Validate every change through automated builds (`dotnet build`, `go build`, `./gradlew build`) or smoke tests before reporting completion.
+5. **Smallest Clean Diffs**: No speculative abstractions; implement only what is necessary and verified.
+
 ## Caveman & Agent Skills
 - **Caveman mode**: `/caveman` for terse chat compression (`lite|full|ultra`). Code, commits, and PR bodies remain in standard English.
 - **Agent skills**: `graphify`, `grill-me`, `interface-kit`, `junior-to-senior`, `loop-factory`, `deslopify`, `last-20-percent`, `context-canary`, `caveman-*`, `cavecrew`.
@@ -35,6 +42,15 @@
 
 ### 6. Git Commits & Push Policy
 - **Never auto-commit or push**. Commit/push ONLY when explicitly requested by the user (e.g. "пушь", "закоммить", "заливай").
+
+### 7. Repository Hygiene & Artifact Prevention
+- Never keep build artifacts (`dist/`, `build/`), compiled binaries (`AquaTech.exe`, `AquaTechLauncher.exe`), intermediate PyInstaller `.spec` files, stray logs (`*.log`), or world region files (`*.mca`) in the repository root or tracking index.
+- Maintain strict `.gitignore` exclusions for `launcher/src/**/bin/`, `launcher/src/**/obj/`, `_disabled_mods_backup/`, and root `.png` captures.
+
+### 8. Launcher Performance & Networking Standards
+- **Parallel Mirror Fetching**: All multi-mirror/CDN manifest probes in Go bootstrap and C# core MUST run concurrently (`Task.WhenAny` / goroutines) with 10–15s timeouts for metadata, never sequential loops.
+- **Fast Warm Start**: Manifest synchronization MUST skip full MD5 file hashing when local `.pack_version` matches the manifest version (validating file existence and byte length instead).
+- **Single-File Native DLLs**: Keep `IncludeNativeLibrariesForSelfExtract` disabled in `AquaTechLauncher.csproj` so native rendering binaries reside extracted in the distribution zip, eliminating 3–8s self-extract delay on startup.
 
 ## graphify (memory / codebase map)
 Knowledge graph lives in `graphify-out/`.

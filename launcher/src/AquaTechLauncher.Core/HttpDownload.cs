@@ -15,16 +15,18 @@ public static class HttpDownload
         UseCookies = true,
         AutomaticDecompression = DecompressionMethods.All,
     };
-    private static readonly HttpClient Client = CreateClient();
+    private static readonly HttpClient Client = CreateClient(TimeSpan.FromMinutes(10));
+    private static readonly HttpClient MetadataClient = CreateClient(TimeSpan.FromSeconds(15));
     private static readonly Uri PortalUri = new(LauncherConstants.PortalApiBase + "/");
     private static readonly Uri FallbackPortalUri = new(LauncherConstants.FallbackPortalApiBase + "/");
 
-    private static HttpClient CreateClient()
+    private static HttpClient CreateClient(TimeSpan timeout)
     {
-        var c = new HttpClient(Handler) { Timeout = TimeSpan.FromMinutes(10) };
+        var c = new HttpClient(Handler) { Timeout = timeout };
         c.DefaultRequestHeaders.UserAgent.ParseAdd(
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36");
         c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+        c.DefaultRequestHeaders.TryAddWithoutValidation("X-AquaTech-Launcher", "1");
         return c;
     }
 
@@ -124,7 +126,7 @@ public static class HttpDownload
         if (url.Contains("api.github.com", StringComparison.OrdinalIgnoreCase))
             req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github.raw");
         req.Headers.CacheControl = new CacheControlHeaderValue { NoCache = true };
-        using var resp = await Client.SendAsync(req, ct);
+        using var resp = await MetadataClient.SendAsync(req, ct);
         resp.EnsureSuccessStatusCode();
         return await resp.Content.ReadAsStringAsync(ct);
     }
@@ -132,7 +134,7 @@ public static class HttpDownload
     public static async Task<(int StatusCode, string Body)> GetRawAsync(string url, CancellationToken ct = default)
     {
         using var req = new HttpRequestMessage(HttpMethod.Get, url);
-        using var resp = await Client.SendAsync(req, ct);
+        using var resp = await MetadataClient.SendAsync(req, ct);
         var body = await resp.Content.ReadAsStringAsync(ct);
         return ((int)resp.StatusCode, body);
     }
@@ -144,7 +146,7 @@ public static class HttpDownload
         {
             Content = new StringContent(jsonBody, Encoding.UTF8, "application/json"),
         };
-        using var resp = await Client.SendAsync(req, ct);
+        using var resp = await MetadataClient.SendAsync(req, ct);
         var body = await resp.Content.ReadAsStringAsync(ct);
         if (!resp.IsSuccessStatusCode)
             throw new HttpRequestException($"HTTP {(int)resp.StatusCode}: {body}");

@@ -201,16 +201,31 @@ func versionNewer(a, b string) bool {
 }
 
 func fetchBestManifest(urls []string) (*manifest, error) {
+	if len(urls) == 0 {
+		return nil, fmt.Errorf("список URL пуст")
+	}
+	type res struct {
+		man *manifest
+		err error
+	}
+	ch := make(chan res, len(urls))
+	for _, u := range urls {
+		go func(url string) {
+			man, err := fetchManifest(url)
+			ch <- res{man: man, err: err}
+		}(u)
+	}
+
 	var best *manifest
 	var lastErr error
-	for _, url := range urls {
-		man, err := fetchManifest(url)
-		if err != nil {
-			lastErr = err
+	for i := 0; i < len(urls); i++ {
+		r := <-ch
+		if r.err != nil {
+			lastErr = r.err
 			continue
 		}
-		if best == nil || versionNewer(man.Version, best.Version) {
-			best = man
+		if best == nil || versionNewer(r.man.Version, best.Version) {
+			best = r.man
 		}
 	}
 	if best == nil {
@@ -247,7 +262,7 @@ func fetchManifest(url string) (*manifest, error) {
 	if strings.Contains(url, "api.github.com") {
 		req.Header.Set("Accept", "application/vnd.github.raw")
 	}
-	client := &http.Client{Timeout: 30 * time.Second}
+	client := &http.Client{Timeout: 10 * time.Second}
 	res, err := client.Do(req)
 	if err != nil {
 		return nil, err

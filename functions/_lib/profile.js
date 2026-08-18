@@ -16,12 +16,18 @@ export function mapProfile(row) {
   }
   return {
     nick: row.nick,
-    bio: row.bio,
-    theme: row.theme,
-    privilege: row.privilege,
+    bio: row.bio || "Исследователь глубин AquaTech.",
+    theme: row.theme || "ocean",
+    status_message: row.status_message || "",
+    fav_rod: row.fav_rod || "",
+    social_tg: row.social_tg || "",
+    social_vk: row.social_vk || "",
+    social_discord: row.social_discord || "",
+    privilege: row.privilege || "Игрок",
     coins: row.coins ?? 0,
     likes: row.likes ?? 0,
     fish: row.fish ?? 0,
+    has_liked: Boolean(row.has_liked),
     skill_points: row.skill_points ?? 0,
     learned_skills: learnedSkills,
     quests_done: row.quests_done ?? 0,
@@ -35,12 +41,31 @@ export function mapProfile(row) {
   };
 }
 
-export async function fetchProfileByNick(db, nick) {
+export async function fetchProfileByNick(db, nick, currentUserId = null) {
+  if (currentUserId) {
+    return db
+      .prepare(
+        `SELECT u.id AS user_id, u.nick, p.bio, p.theme, p.status_message, p.fav_rod,
+                p.social_tg, p.social_vk, p.social_discord,
+                p.privilege, p.coins, p.likes, p.fish,
+                p.skill_points, p.learned_skills_json, p.quests_done, p.quests_total, p.leaderboard_rank,
+                p.playtime_hours, p.views, p.badges_json, p.updated_at,
+                (SELECT 1 FROM profile_likes WHERE from_user_id = ? AND to_user_id = u.id LIMIT 1) AS has_liked
+         FROM users u
+         JOIN profiles p ON p.user_id = u.id
+         WHERE u.nick = ? COLLATE NOCASE`
+      )
+      .bind(currentUserId, nick)
+      .first();
+  }
   return db
     .prepare(
-      `SELECT u.nick, p.bio, p.theme, p.privilege, p.coins, p.likes, p.fish,
+      `SELECT u.id AS user_id, u.nick, p.bio, p.theme, p.status_message, p.fav_rod,
+              p.social_tg, p.social_vk, p.social_discord,
+              p.privilege, p.coins, p.likes, p.fish,
               p.skill_points, p.learned_skills_json, p.quests_done, p.quests_total, p.leaderboard_rank,
-              p.playtime_hours, p.views, p.badges_json, p.updated_at
+              p.playtime_hours, p.views, p.badges_json, p.updated_at,
+              0 AS has_liked
        FROM users u
        JOIN profiles p ON p.user_id = u.id
        WHERE u.nick = ? COLLATE NOCASE`

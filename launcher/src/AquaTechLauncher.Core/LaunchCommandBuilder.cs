@@ -13,6 +13,7 @@ public sealed class LaunchCommandBuilder
         int ramMb,
         string java,
         string autoJoin,
+        string? sessionToken = null,
         Action<string>? log = null,
         CancellationToken ct = default)
     {
@@ -156,6 +157,11 @@ public sealed class LaunchCommandBuilder
         {
             cmd.Add(autoJoinArgument);
             log?.Invoke($"авто-вход на {autoJoin} после загрузки меню");
+        }
+        if (!string.IsNullOrWhiteSpace(sessionToken))
+        {
+            cmd.Add($"-Daquatech.session_token={sessionToken.Trim()}");
+            log?.Invoke("токен сессии передан в Minecraft");
         }
         cmd.AddRange(jvmArgs);
         cmd.Add(mainClass);

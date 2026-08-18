@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/HttpDownload.cs": {
-    "mtime": 1787000766.502022,
-    "ast_hash": "8a342e6972393fa51d5d7d7860ff9dbf",
+    "mtime": 1787000001.2695885,
+    "ast_hash": "73d2d54ad67bba16bc60f4df161b1c94",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/JavaLocator.cs": {
@@ -290,8 +290,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LaunchCommandBuilder.cs": {
-    "mtime": 1787000741.9754264,
-    "ast_hash": "a309b2904af25d6490c18de03ba504a9",
+    "mtime": 1786994122.0729985,
+    "ast_hash": "9f82bccf5de9ff9d2a89e89ebd5d8a0e",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherConfig.cs": {
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherSelfUpdate.cs": {
-    "mtime": 1787000780.034426,
-    "ast_hash": "38f1ea483c7f947a9c78dff9d39d03e9",
+    "mtime": 1787000016.6644733,
+    "ast_hash": "2c293a94cd7c2523bc5e818ab746e8c2",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/ManifestSync.cs": {
@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/PlayOrchestrator.cs": {
-    "mtime": 1787000744.3683517,
-    "ast_hash": "618e6bd3fb468f302f11e3bcb7a40d4a",
+    "mtime": 1786735394.985523,
+    "ast_hash": "63bd0949ad25c465c1499e875f542ffb",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/PortalApi.cs": {
@@ -1290,8 +1290,8 @@
     "semantic_hash": ""
   },
   "functions/api/launcher/verify-token.js": {
-    "mtime": 1787000761.5036893,
-    "ast_hash": "d2ab966ecd61408fd379a925e7a7b7fc",
+    "mtime": 1786620246.3596559,
+    "ast_hash": "9715aba1b40aa5405ae706b803e9f9c0",
     "semantic_hash": ""
   },
   "graphify-out/memory/query_20260813_130612_are_loliland_ui_stages_1_4_complete_in_aquatech_ui.md": {
@@ -2540,8 +2540,8 @@
     "semantic_hash": ""
   },
   "docs/assets/js/radar.js": {
-    "mtime": 1787000802.0662327,
-    "ast_hash": "b9a0f54e14352713521b0357490288ed",
+    "mtime": 1786658535.1343687,
+    "ast_hash": "44e0bda238d07d858971994331e28b6a",
     "semantic_hash": ""
   },
   "docs/ui_preview.html": {
@@ -2712,11 +2712,6 @@
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/html/hub.html": {
     "mtime": 1786984770.724223,
     "ast_hash": "5d7291a476a80fd76bf4d0d302143764",
-    "semantic_hash": ""
-  },
-  "tools/release_launcher.py": {
-    "mtime": 1787000842.3387034,
-    "ast_hash": "3ff4373e6d67f9864a21263203576431",
     "semantic_hash": ""
   }
 }

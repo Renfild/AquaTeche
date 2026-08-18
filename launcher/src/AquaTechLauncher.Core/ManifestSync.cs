@@ -67,9 +67,17 @@ public sealed class ManifestSync
             files.Select(f => f.Path.Replace('\\', '/').TrimStart('/')),
             StringComparer.OrdinalIgnoreCase);
 
+        var localVer = LoadPackVersion(gameDir);
+        var isWarm = !string.IsNullOrWhiteSpace(localVer)
+                     && !string.IsNullOrWhiteSpace(manifest.Version)
+                     && string.Equals(localVer.Trim(), manifest.Version.Trim(), StringComparison.OrdinalIgnoreCase);
+        var effectiveVerifyHash = verifyHash && !isWarm;
+
         var jobs = new List<PackFileEntry>();
         var checkedN = 0;
-        log?.Invoke($"Проверяем целостность ({files.Count} файлов сборки v{manifest.Version})…");
+        log?.Invoke(isWarm
+            ? $"Быстрая проверка сборки v{manifest.Version} ({files.Count} файлов)…"
+            : $"Проверяем целостность ({files.Count} файлов сборки v{manifest.Version})…");
         progress?.Invoke(5);
 
         foreach (var item in files)
@@ -81,7 +89,7 @@ public sealed class ManifestSync
             if (checkedN % 25 == 0)
                 progress?.Invoke(5 + 25.0 * checkedN / files.Count);
 
-            if (NeedsDownload(local, item, verifyHash))
+            if (NeedsDownload(local, item, effectiveVerifyHash))
                 jobs.Add(item);
         }
 
@@ -143,6 +151,16 @@ public sealed class ManifestSync
         return (updated, failed, deleted);
     }
 
+    public static string? LoadPackVersion(string gameDir)
+    {
+        try
+        {
+            var path = System.IO.Path.Combine(gameDir, ".pack_version");
+            return File.Exists(path) ? File.ReadAllText(path).Trim() : null;
+        }
+        catch { return null; }
+    }
+
     private static void SavePackVersion(string gameDir, string? version)
     {
         try
@@ -164,25 +182,34 @@ public sealed class ManifestSync
         if (!string.IsNullOrWhiteSpace(updateBase) && !bases.Contains(updateBase.TrimEnd('/'), StringComparer.OrdinalIgnoreCase))
             bases.Add(updateBase.TrimEnd('/'));
 
-        Exception? last = null;
-        foreach (var b in bases)
+        var stamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        var fetchTasks = bases.Select(async b =>
         {
-            var url = $"{b.TrimEnd('/')}/manifest.json?_t={DateTimeOffset.UtcNow.ToUnixTimeSeconds()}";
+            var url = $"{b.TrimEnd('/')}/manifest.json?_t={stamp}";
+            var json = await HttpDownload.GetStringAsync(url, ct);
+            var man = JsonSerializer.Deserialize<PackManifest>(json)
+                      ?? throw new InvalidDataException("bad manifest");
+            if (man.Files.Count == 0) throw new InvalidDataException("empty files");
+            return man;
+        }).ToList();
+
+        var exceptions = new List<Exception>();
+        while (fetchTasks.Count > 0)
+        {
+            var finished = await Task.WhenAny(fetchTasks);
+            fetchTasks.Remove(finished);
             try
             {
-                log?.Invoke($"Манифест: {url}");
-                var json = await HttpDownload.GetStringAsync(url, ct);
-                var man = JsonSerializer.Deserialize<PackManifest>(json)
-                          ?? throw new InvalidDataException("bad manifest");
-                if (man.Files.Count == 0) throw new InvalidDataException("empty files");
+                var man = await finished;
                 return man;
             }
             catch (Exception ex)
             {
-                last = ex;
+                exceptions.Add(ex);
             }
         }
-        throw last ?? new IOException("Не удалось скачать манифест");
+
+        throw exceptions.LastOrDefault() ?? new IOException("Не удалось скачать манифест ни с одного зеркала");
     }
 
     private static async Task<bool> DownloadOneAsync(string gameDir, PackFileEntry item, CancellationToken ct)

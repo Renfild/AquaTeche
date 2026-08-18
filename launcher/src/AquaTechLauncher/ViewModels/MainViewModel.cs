@@ -412,30 +412,38 @@ public partial class MainViewModel : ViewModelBase
 
         if (NeedsAuth) return;
 
-        try
+        StatusText = "Готов к запуску";
+        Progress = 0;
+        PctText = "0%";
+
+        _ = Task.Run(async () =>
         {
-            UiLog("Проверяем обновление лаунчера…", "dim");
-            var (updated, msg) = await LauncherSelfUpdate.CheckAndApplyAsync(m => UiLog(m, "info"), UiProgress);
-            if (updated)
+            try
             {
-                UiLog($"Перезапуск на v{msg}…", "ok");
-                Dispatcher.UIThread.Post(() =>
+                var (updated, msg) = await LauncherSelfUpdate.CheckAndApplyAsync(
+                    m => Dispatcher.UIThread.Post(() => UiLog(m, "info")),
+                    p => Dispatcher.UIThread.Post(() => UiProgress(p)));
+
+                if (updated)
                 {
-                    if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-                        desktop.Shutdown();
-                });
-                return;
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        UiLog($"Перезапуск на v{msg}…", "ok");
+                        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                            desktop.Shutdown();
+                    });
+                    return;
+                }
+                if (!string.IsNullOrWhiteSpace(msg))
+                {
+                    Dispatcher.UIThread.Post(() => UiLog(msg, "dim"));
+                }
             }
-            if (!string.IsNullOrWhiteSpace(msg))
-                UiLog(msg, "dim");
-            StatusText = "Готов к запуску";
-            Progress = 0;
-            PctText = "0%";
-        }
-        catch (Exception ex)
-        {
-            UiLog($"Автообновление: {ex.Message}", "warn");
-        }
+            catch (Exception ex)
+            {
+                Dispatcher.UIThread.Post(() => UiLog($"Автообновление: {ex.Message}", "warn"));
+            }
+        });
     }
 
     private void SetBusy(bool busy, string? playText = null)

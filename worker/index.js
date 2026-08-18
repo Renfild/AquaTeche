@@ -23,6 +23,8 @@ import {
   onRequestGet as profileGet,
   onRequestPatch as profilePatch,
 } from "../functions/api/profiles/[nick].js";
+import { onRequestPost as profileLikePost } from "../functions/api/profiles/[nick]/like.js";
+import { onRequestPost as syncPlayerPost } from "../functions/api/sync/player.js";
 import { onRequestGet as adminMeGet } from "../functions/api/admin/me.js";
 import {
   onRequestGet as adminSettingsGet,
@@ -70,6 +72,7 @@ async function handleApi(request, env) {
   if (path === "/api/server-status" && method === "GET") return serverStatusGet(ctx(request, env));
   if (path === "/api/news" && method === "GET") return newsGet(ctx(request, env));
   if (path === "/api/site" && method === "GET") return siteGet(ctx(request, env));
+  if (path === "/api/sync/player" && method === "POST") return syncPlayerPost(ctx(request, env));
   // ensure-nick intentionally returns 410 (open signup footgun)
   if (path === "/api/launcher/ensure-nick" && method === "POST") return launcherEnsureNickPost(ctx(request, env));
   if (path === "/api/launcher/verify-token" && method === "POST") return launcherVerifyTokenPost(ctx(request, env));
@@ -109,6 +112,11 @@ async function handleApi(request, env) {
     const params = { id: adminNews[1] };
     if (method === "PATCH") return adminNewsPatch(ctx(request, env, params));
     if (method === "DELETE") return adminNewsDelete(ctx(request, env, params));
+  }
+
+  const profileLikeMatch = path.match(/^\/api\/profiles\/([^/]+)\/like$/);
+  if (profileLikeMatch && method === "POST") {
+    return profileLikePost(ctx(request, env, { nick: decodeURIComponent(profileLikeMatch[1]) }));
   }
 
   const profileMatch = path.match(/^\/api\/profiles\/([^/]+)$/);
