@@ -824,8 +824,19 @@
 
       <div class="panel" style="margin-top:1.25rem">
         <h3>Бейджи и титулы</h3>
-        <div class="badge-grid" style="margin-top:.6rem">
-          ${(profile.badges || []).map((b) => `<span class="badge">${b}</span>`).join("") || '<span class="muted-line">Пока пусто</span>'}
+        <div class="badge-grid">
+          ${(profile.badges || [])
+            .map((b) => {
+              if (typeof b === "string") {
+                return `<div class="badge-card common"><span class="badge-title">${b}</span></div>`;
+              }
+              const rarity = b.rarity || "common";
+              return `<div class="badge-card ${rarity}">
+                <span class="badge-title">${b.title}</span>
+                ${b.desc ? `<span class="badge-desc">${b.desc}</span>` : ""}
+              </div>`;
+            })
+            .join("") || '<span class="muted-line">Пока пусто</span>'}
         </div>
       </div>
 

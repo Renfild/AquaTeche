@@ -1,11 +1,98 @@
+export function computePlayerBadges(row) {
+  const list = [];
+  let manual = [];
+  try {
+    manual = JSON.parse(row.badges_json || "[]");
+  } catch {
+    manual = [];
+  }
+  for (const b of manual) {
+    if (b && typeof b === "string") {
+      list.push({ title: b, rarity: "special", desc: "Особая награда" });
+    } else if (b && b.title) {
+      list.push({
+        title: b.title,
+        rarity: b.rarity || "special",
+        desc: b.desc || "Особый титул",
+      });
+    }
+  }
+
+  // 1. Fishing tier badges
+  const fish = Number(row.fish || 0);
+  if (fish >= 1000) {
+    list.push({ title: "Легенда океана", rarity: "legendary", desc: "Поймано более 1 000 рыб" });
+  } else if (fish >= 500) {
+    list.push({ title: "Охотник Бездны", rarity: "epic", desc: "Поймано более 500 рыб" });
+  } else if (fish >= 250) {
+    list.push({ title: "Мастер катушки", rarity: "rare", desc: "Поймано более 250 рыб" });
+  } else if (fish >= 100) {
+    list.push({ title: "Опытный удильщик", rarity: "rare", desc: "Поймано более 100 рыб" });
+  } else if (fish >= 25) {
+    list.push({ title: "Рыболов-любитель", rarity: "common", desc: "Поймано более 25 рыб" });
+  } else {
+    list.push({ title: "Новичок глубин", rarity: "common", desc: "Первые шаги в рыбалке" });
+  }
+
+  // 2. Economy badges
+  const coins = Number(row.coins || 0);
+  if (coins >= 500000) {
+    list.push({ title: "Олигарх глубин", rarity: "legendary", desc: "Баланс более 500 000 ¤" });
+  } else if (coins >= 100000) {
+    list.push({ title: "Океанский магнат", rarity: "epic", desc: "Баланс более 100 000 ¤" });
+  } else if (coins >= 50000) {
+    list.push({ title: "Состоятельный", rarity: "rare", desc: "Баланс более 50 000 ¤" });
+  } else if (coins >= 10000) {
+    list.push({ title: "Первый капитал", rarity: "common", desc: "Баланс более 10 000 ¤" });
+  }
+
+  // 3. Playtime badges
+  const hours = Number(row.playtime_hours || 0);
+  if (hours >= 100) {
+    list.push({ title: "Хранитель океана", rarity: "legendary", desc: "Более 100 часов на сервере" });
+  } else if (hours >= 50) {
+    list.push({ title: "Ветеран AquaTech", rarity: "epic", desc: "Более 50 часов на сервере" });
+  } else if (hours >= 20) {
+    list.push({ title: "Бывалый мореплаватель", rarity: "rare", desc: "Более 20 часов на сервере" });
+  } else if (hours >= 5) {
+    list.push({ title: "Житель плота", rarity: "common", desc: "Более 5 часов на сервере" });
+  }
+
+  // 4. Social / Likes badges
+  const likes = Number(row.likes || 0);
+  if (likes >= 50) {
+    list.push({ title: "Звезда сообщества", rarity: "legendary", desc: "Более 50 похвал от игроков" });
+  } else if (likes >= 15) {
+    list.push({ title: "Любимец океана", rarity: "epic", desc: "Более 15 похвал от игроков" });
+  } else if (likes >= 5) {
+    list.push({ title: "Заметный игрок", rarity: "rare", desc: "Более 5 похвал от игроков" });
+  }
+
+  // 5. Privilege / Staff badges
+  const priv = String(row.privilege || "").trim();
+  if (priv && priv !== "Игрок") {
+    const isStaff = ["Создатель", "Owner", "Admin", "Разработчик", "Developer", "Управляющий", "Manager"].includes(priv);
+    list.push({
+      title: priv,
+      rarity: isStaff ? "legendary" : "epic",
+      desc: `Привилегия ${priv}`,
+    });
+  }
+
+  const seen = new Set();
+  const deduped = [];
+  for (const item of list) {
+    if (!seen.has(item.title.toLowerCase())) {
+      seen.add(item.title.toLowerCase());
+      deduped.push(item);
+    }
+  }
+  return deduped;
+}
+
 export function mapProfile(row) {
   if (!row) return null;
-  let badges = [];
-  try {
-    badges = JSON.parse(row.badges_json || "[]");
-  } catch {
-    badges = [];
-  }
+  const badges = computePlayerBadges(row);
   let learnedSkills = ["origin"];
   try {
     if (row.learned_skills_json) {
