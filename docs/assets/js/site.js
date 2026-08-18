@@ -791,25 +791,27 @@
 
     root.innerHTML = `
       <div class="profile-cover ${theme}">
-        <div class="profile-identity">
-          <img class="profile-avatar" src="${skinUrl(profile.nick)}" alt="${profile.nick}">
-          <div class="profile-meta">
-            <h1>${profile.nick}</h1>
-            <div class="profile-status-line">
-              <span class="tag ${profile.slug === "deluxe" || profile.slug === "ultimate" || profile.privilege === "Создатель" ? "gold" : ""}">${profile.privilege || "Игрок"}</span>
-              ${profile.status_message ? `<span class="profile-status-badge">${profile.status_message}</span>` : ""}
+        <div class="profile-header-main">
+          <div class="profile-identity">
+            <img class="profile-avatar" src="${skinUrl(profile.nick)}" alt="${profile.nick}">
+            <div class="profile-meta">
+              <div class="profile-title-row">
+                <h1>${profile.nick}</h1>
+                <span class="tag ${profile.slug === "deluxe" || profile.slug === "ultimate" || profile.privilege === "Создатель" ? "gold" : ""}">${profile.privilege || "Игрок"}</span>
+              </div>
+              ${profile.status_message ? `<div class="profile-status-badge">${profile.status_message}</div>` : ""}
+              ${profile.fav_rod ? `<div class="fav-rod-badge">Любимая удочка: <strong>${profile.fav_rod}</strong></div>` : ""}
+              ${socials.length ? `<div class="profile-socials">${socials.join("")}</div>` : ""}
+              ${profile.bio ? `<p class="profile-bio">${profile.bio}</p>` : ""}
             </div>
-            ${profile.fav_rod ? `<div class="fav-rod-badge">Любимая удочка: <strong>${profile.fav_rod}</strong></div>` : ""}
-            ${socials.length ? `<div class="profile-socials">${socials.join("")}</div>` : ""}
-            <p style="margin-top:0.75rem;color:rgba(255,255,255,0.85);max-width:38rem">${profile.bio || ""}</p>
           </div>
-        </div>
-        <div class="profile-actions">
-          <button class="btn-like ${profile.has_liked ? "liked" : ""}" type="button" id="btn-like-profile" ${mine ? 'disabled title="Нельзя ставить лайк своему профилю"' : ""}>
-            <span class="heart">${heartSvg(profile.has_liked)}</span>
-            <span id="like-count">${profile.likes || 0}</span>
-            <span style="font-size:0.82rem;font-weight:600;opacity:0.85">${profile.has_liked ? "Вам нравится" : "Похвалить"}</span>
-          </button>
+          <div class="profile-actions">
+            <button class="btn-like ${profile.has_liked ? "liked" : ""}" type="button" id="btn-like-profile" ${mine ? 'disabled title="Нельзя ставить лайк своему профилю"' : ""}>
+              <span class="heart">${heartSvg(profile.has_liked)}</span>
+              <span id="like-count">${profile.likes || 0}</span>
+              <span style="font-size:0.82rem;font-weight:600;opacity:0.85">${profile.has_liked ? "Вам нравится" : "Похвалить"}</span>
+            </button>
+          </div>
         </div>
       </div>
 
