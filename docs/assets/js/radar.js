@@ -23,13 +23,28 @@
     const progressEl = document.getElementById("radar-slot-progress");
 
     try {
-      const res = await fetch(`https://api.mcstatus.io/v2/status/java/${SERVER_HOST}:${SERVER_PORT}`);
-      if (!res.ok) throw new Error("Status fetch failed");
-      const data = await res.json();
+      let data = null;
+      try {
+        const res = await fetch(`https://api.mcstatus.io/v2/status/java/${SERVER_HOST}:${SERVER_PORT}`, { cache: "no-store" });
+        if (res.ok) data = await res.json();
+      } catch {
+        /* try worker API fallback */
+      }
 
-      if (data.online) {
-        const online = data.players.online || 0;
-        const max = data.players.max || 100;
+      if (!data || typeof data.online !== "boolean") {
+        const workerRes = await fetch("/api/server-status", { cache: "no-store" });
+        if (workerRes.ok) {
+          const wData = await workerRes.json();
+          data = {
+            online: !!wData.online,
+            players: { online: wData.players_online || 0, max: wData.players_max || 100 }
+          };
+        }
+      }
+
+      if (data && data.online) {
+        const online = data.players?.online || 0;
+        const max = data.players?.max || 100;
         const pct = Math.min(100, Math.round((online / max) * 100));
 
         if (countEl) countEl.innerText = `${online} / ${max}`;
@@ -41,11 +56,7 @@
         setOfflineState();
       }
     } catch (e) {
-      // Fallback display
-      if (countEl) countEl.innerText = "Онлайн";
-      if (pingEl) pingEl.innerText = "22 ms";
-      if (tpsEl) tpsEl.innerText = "20.0 TPS";
-      if (statusDot) statusDot.className = "sonar-dot online";
+      setOfflineState();
     }
   }
 

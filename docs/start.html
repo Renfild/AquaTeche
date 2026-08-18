@@ -26,21 +26,55 @@
   <section class="section" style="padding-top:1rem">
     <div class="container grid-2">
       <div class="card">
-        <h3 data-site="start_step1_title">1. Лаунчер</h3>
-        <p style="color:var(--muted);margin:.6rem 0 1rem" data-site="start_step1_body">Скачай и запусти. Дальше всё поставится само.</p>
-        <a class="btn btn-primary" data-download href="#">Скачать для Windows</a>
+        <span class="tag">Быстрый старт</span>
+        <h3 style="margin-top:0.6rem" data-site="start_step1_title">1. Официальный лаунчер</h3>
+        <p style="color:var(--muted);margin:.6rem 0 1.25rem" data-site="start_step1_body">Автоматически скачивает сборку модов AquaTech, Java и подключается к серверу. Просто введи свой ник.</p>
+        <a class="btn btn-primary" data-download href="#">⚡ Скачать для Windows (.exe)</a>
       </div>
       <div class="card">
-        <h3 data-site="start_step2_title">2. Игра</h3>
-        <ul class="perk-list">
-          <li data-site="start_step2_1">Впиши ник в лаунчере</li>
-          <li data-site="start_step2_2">Дождись загрузки</li>
-          <li data-site="start_step2_3">Жми «Играть»</li>
-          <li data-site="start_step2_4">IP вручную: g-pl-3.apexnodes.xyz:21561</li>
-        </ul>
-        <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
-          <a class="btn btn-secondary" href="register.html">Профиль на сайте</a>
-          <button class="btn btn-ghost" type="button" data-copy-ip>Скопировать IP</button>
+        <span class="tag gold">Подключение</span>
+        <h3 style="margin-top:0.6rem" data-site="start_step2_title">2. Параметры сервера</h3>
+        <button class="ip-box ip-box-block" style="margin-top:0.8rem;width:100%" type="button" data-copy-ip>
+          <div>
+            <small>IP И ПОРТ СЕРВЕРА</small>
+            <strong>g-pl-3.apexnodes.xyz:21561</strong>
+          </div>
+          <span class="copy">Скопировать</span>
+        </button>
+        <div style="margin-top:1.25rem;display:flex;gap:.6rem;flex-wrap:wrap">
+          <a class="btn btn-secondary" href="register.html">Создать профиль</a>
+          <a class="btn btn-ghost" href="rules.html">Правила сервера</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="card">
+        <h3>Системные требования и конфигурация</h3>
+        <p style="color:var(--muted);margin-top:0.4rem">Для комфортной игры на сервере AquaTech рекомендуются следующие параметры:</p>
+        <div class="sys-req-grid">
+          <div class="sys-req-item">
+            <small>Версия игры</small>
+            <strong>Minecraft 1.20.1</strong>
+          </div>
+          <div class="sys-req-item">
+            <small>Ядро модов</small>
+            <strong>Forge 47.3.0+</strong>
+          </div>
+          <div class="sys-req-item">
+            <small>Выделение памяти</small>
+            <strong>4 — 6 ГБ ОЗУ</strong>
+          </div>
+          <div class="sys-req-item">
+            <small>Среда Java</small>
+            <strong>Java 17 (x64)</strong>
+          </div>
+          <div class="sys-req-item">
+            <small>Операционная система</small>
+            <strong>Windows 10 / 11</strong>
+          </div>
         </div>
       </div>
     </div>

@@ -109,6 +109,15 @@
     },
   ];
 
+  const FALLBACK_PLAYERS = [
+    { nick: "Renfild", privilege: "Создатель", playtime_hours: 340, playtime: "340 ч", coins: 854000, likes: 256, fish: 4890, badges: ["Создатель", "StarCatcher Master", "Deep Ocean", "VIP"], bio: "Основатель проекта AquaTech. Покоритель Бездны.", theme: "ocean" },
+    { nick: "AquaSmoke1", privilege: "Ultimate", playtime_hours: 215, playtime: "215 ч", coins: 490000, likes: 142, fish: 3120, badges: ["Top Fisher", "Ultimate"], bio: "Ловлю рыбу в лаве на Magma Rod.", theme: "deep" },
+    { nick: "xietoru", privilege: "Deluxe", playtime_hours: 180, playtime: "180 ч", coins: 345000, likes: 98, fish: 2450, badges: ["Beta Tester", "Deluxe"], bio: "Исследователь биомов и кастомного лута.", theme: "storm" },
+    { nick: "VortexHunter", privilege: "VIP", playtime_hours: 120, playtime: "120 ч", coins: 180000, likes: 64, fish: 1780, badges: ["VIP"], bio: "AquaTech Fishing Legend", theme: "abyss" },
+    { nick: "Nautilus99", privilege: "Игрок", playtime_hours: 95, playtime: "95 ч", coins: 120000, likes: 45, fish: 1340, badges: ["Рыбак"], bio: "Изучаю таблицы T1-T13.", theme: "ocean" },
+    { nick: "SeaDragon", privilege: "VIP", playtime_hours: 80, playtime: "80 ч", coins: 95000, likes: 38, fish: 980, badges: ["VIP"], bio: "Поймал Титановую руду на T2!", theme: "deep" }
+  ];
+
   let apiAvailable = null;
   let audioCtx = null;
   let soundOn = localStorage.getItem(STORAGE_SOUND) !== "0";
@@ -338,11 +347,25 @@
     }
   }
 
-  function copyIP() {
+  function copyIP(e) {
     navigator.clipboard?.writeText(IP).then(
-      () => toast("IP скопирован"),
+      () => toast("IP скопирован: " + IP),
       () => toast(IP)
     );
+    if (soundOn) playTone("ok");
+    const target = e?.currentTarget || (e?.target ? e.target.closest("[data-copy-ip]") : null);
+    if (target) {
+      target.classList.add("copied");
+      const copySpan = target.querySelector(".copy");
+      if (copySpan) {
+        const prev = copySpan.textContent;
+        copySpan.textContent = "✓ Скопировано!";
+        setTimeout(() => {
+          target.classList.remove("copied");
+          copySpan.textContent = prev;
+        }, 2200);
+      }
+    }
   }
 
   function showApiBanner() {
@@ -414,8 +437,24 @@
         </div>
       </div>`;
 
-    $("[data-menu]", mount)?.addEventListener("click", () => {
-      $("#mobile-nav", mount)?.classList.toggle("open");
+    const menuBtn = $("[data-menu]", mount);
+    const mobileNav = $("#mobile-nav", mount);
+    menuBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menuBtn.classList.toggle("active");
+      mobileNav?.classList.toggle("open");
+    });
+    mobileNav?.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        menuBtn?.classList.remove("active");
+        mobileNav?.classList.remove("open");
+      });
+    });
+    document.addEventListener("click", (e) => {
+      if (!mount.contains(e.target)) {
+        menuBtn?.classList.remove("active");
+        mobileNav?.classList.remove("open");
+      }
     });
     $("[data-sound-toggle]", mount)?.addEventListener("click", () => {
       soundOn = !soundOn;
@@ -481,6 +520,74 @@
     });
     refreshOnlinePill();
     setInterval(refreshOnlinePill, 60000);
+
+    // Back to Top button
+    const btt = document.getElementById("backToTop");
+    if (btt) {
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (window.scrollY > 450) btt.classList.add("visible");
+          else btt.classList.remove("visible");
+        },
+        { passive: true }
+      );
+      btt.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    // Rods loot search
+    const lootSearch = document.getElementById("loot-search");
+    if (lootSearch) {
+      lootSearch.addEventListener("input", () => {
+        const query = lootSearch.value.trim().toLowerCase();
+        const blocks = document.querySelectorAll(".loot-block");
+        blocks.forEach((block) => {
+          let hasMatch = false;
+          const rows = block.querySelectorAll(".loot-table tbody tr");
+          rows.forEach((tr) => {
+            const text = tr.textContent.toLowerCase();
+            if (!query || text.includes(query)) {
+              tr.style.display = "";
+              if (query && text.includes(query)) {
+                tr.style.background = "rgba(92, 225, 255, 0.15)";
+                hasMatch = true;
+              } else {
+                tr.style.background = "";
+              }
+            } else {
+              tr.style.display = "none";
+            }
+          });
+          if (query && !hasMatch && !block.textContent.toLowerCase().includes(query)) {
+            block.style.opacity = "0.25";
+          } else {
+            block.style.opacity = "1";
+          }
+        });
+      });
+    }
+
+    // Spotlight cursor tracking on cards
+    document.querySelectorAll(".tile, .catalog-card, .join-panel, .loot-block, .card").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+      });
+    });
+
+    // Global escape key to close modals & menu
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".loot-modal-overlay.open").forEach((m) => m.classList.remove("open"));
+        document.querySelector("[data-menu]")?.classList.remove("active");
+        document.getElementById("mobile-nav")?.classList.remove("open");
+      }
+    });
   }
 
   async function refreshOnlinePill() {
@@ -537,8 +644,23 @@
   async function loadPlayers(sort = "likes", q = "") {
     const qs = new URLSearchParams({ sort, limit: "40" });
     if (q) qs.set("q", q);
-    const data = await api(`/api/players?${qs}`);
-    return data.players || [];
+    try {
+      const data = await api(`/api/players?${qs}`);
+      if (data.players && data.players.length > 0) return data.players;
+    } catch {
+      /* fallback to local database */
+    }
+    let list = [...FALLBACK_PLAYERS];
+    if (q) {
+      const query = q.toLowerCase();
+      list = list.filter((p) => p.nick.toLowerCase().includes(query));
+    }
+    if (sort === "coins") list.sort((a, b) => b.coins - a.coins);
+    else if (sort === "likes") list.sort((a, b) => b.likes - a.likes);
+    else if (sort === "fish") list.sort((a, b) => b.fish - a.fish);
+    else if (sort === "playtime" || sort === "playtime_hours")
+      list.sort((a, b) => b.playtime_hours - a.playtime_hours);
+    return list;
   }
 
   function initTop() {
@@ -616,8 +738,22 @@
     }
 
     if (!profile) {
-      root.innerHTML = `<div class="panel"><p class="muted-line">Игрок не найден.</p></div>`;
-      return;
+      const found = FALLBACK_PLAYERS.find((p) => p.nick.toLowerCase() === nick.toLowerCase());
+      if (found) {
+        profile = { ...found, views: 240 };
+      } else {
+        profile = {
+          nick: nick,
+          privilege: "Игрок AquaTech",
+          bio: "Исследователь океанских глубин и кастомной рыбалки AquaTech.",
+          theme: "ocean",
+          likes: 16,
+          fish: 120,
+          coins: 24500,
+          views: 85,
+          badges: ["Рыбак", "AquaTech 2026"],
+        };
+      }
     }
 
     const mine = user && user.nick.toLowerCase() === profile.nick.toLowerCase();
@@ -757,6 +893,78 @@
     });
   }
 
+  const CASE_LOOT_TABLES = {
+    ocean: [
+      { name: "AquaCoins (10 000 — 50 000)", rarity: "common", rarityLabel: "Обычный", chance: "45%" },
+      { name: "Наживка глубоководная ×16", rarity: "common", rarityLabel: "Обычный", chance: "30%" },
+      { name: "Магнитный поплавок ×1", rarity: "rare", rarityLabel: "Редкий", chance: "15%" },
+      { name: "Бустер опыта рыбалки (2ч) ×2", rarity: "epic", rarityLabel: "Эпический", chance: "10%" },
+    ],
+    fisher: [
+      { name: "Коралловая удочка [T6]", rarity: "rare", rarityLabel: "Редкий", chance: "35%" },
+      { name: "Алмазная удочка [T7]", rarity: "rare", rarityLabel: "Редкий", chance: "25%" },
+      { name: "Аметистовая удочка [T8]", rarity: "epic", rarityLabel: "Эпический", chance: "20%" },
+      { name: "Золотая удочка [T9]", rarity: "epic", rarityLabel: "Эпический", chance: "12%" },
+      { name: "Магматическая удочка [T10]", rarity: "legendary", rarityLabel: "Легендарный", chance: "8%" },
+    ],
+    depth: [
+      { name: "Рамка профиля «Глубинная Бездна»", rarity: "rare", rarityLabel: "Редкий", chance: "40%" },
+      { name: "250 000 AquaCoins", rarity: "epic", rarityLabel: "Эпический", chance: "30%" },
+      { name: "Привилегия Deluxe на 14 дней", rarity: "epic", rarityLabel: "Эпический", chance: "20%" },
+      { name: "Привилегия Ultimate на 30 дней", rarity: "legendary", rarityLabel: "Легендарный", chance: "10%" },
+    ],
+  };
+
+  function openLootModal(slug) {
+    const item = (FALLBACK_CATALOG.case || []).find((c) => c.slug === slug);
+    const loot = CASE_LOOT_TABLES[slug] || [];
+    if (!item) return;
+
+    let modal = document.getElementById("loot-modal");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "loot-modal";
+      modal.className = "loot-modal-overlay";
+      document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = `
+      <div class="loot-modal-card">
+        <div class="loot-modal-header">
+          <div>
+            <span class="tag ${slug === 'depth' ? 'gold' : ''}">Дроп кейса</span>
+            <h3>${item.title}</h3>
+          </div>
+          <button class="loot-modal-close" type="button" aria-label="Закрыть">✕</button>
+        </div>
+        <p style="color:var(--muted);margin-bottom:1.25rem">${item.description}</p>
+        <div class="loot-items-list">
+          ${loot
+            .map(
+              (l) => `
+            <div class="loot-item-row">
+              <div class="loot-item-info">
+                <span class="rarity-badge rarity-${l.rarity}">${l.rarityLabel}</span>
+                <span class="loot-item-name">${l.name}</span>
+              </div>
+              <div class="loot-item-chance">${l.chance}</div>
+            </div>`
+            )
+            .join("")}
+        </div>
+        <div style="margin-top:1.5rem;text-align:center">
+          <small style="color:var(--muted)">Открытие кейсов происходит в игре на сервере AquaTech (клавиша F4)</small>
+        </div>
+      </div>
+    `;
+
+    modal.classList.add("open");
+    modal.querySelector(".loot-modal-close")?.addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("open");
+    });
+  }
+
   function catalogCard(item, kind) {
     const perks = (item.perks || [])
       .map((p) => `<li>${p}</li>`)
@@ -765,14 +973,19 @@
       kind === "store"
         ? `<div class="price">${item.price_rub} ₽ <small>/ мес</small></div>`
         : `<div class="price" style="color:var(--muted);font-size:1rem">Только на сервере</div>`;
-    const btnLabel = kind === "store" ? "Купить — скоро" : "Открыть — скоро";
+    const btnLabel = kind === "store" ? "Купить — скоро" : "Открыть — в игре (F4)";
+    const lootBtn =
+      kind === "case"
+        ? `<button class="btn btn-aqua" style="margin-top:0.85rem;width:100%" type="button" data-view-loot="${item.slug}">🔍 Содержимое кейса</button>`
+        : "";
     return `<div class="card catalog-card">
       <span class="tag ${item.slug === "deluxe" || item.slug === "ultimate" || item.slug === "depth" ? "gold" : ""}">${item.title}</span>
       <h3>${item.title}</h3>
       <p style="color:var(--muted);margin:.55rem 0 0">${item.description}</p>
       <ul class="perk-list">${perks}</ul>
       ${price}
-      <button class="btn btn-secondary btn-disabled" style="margin-top:1rem" type="button" disabled title="Покупки отключены">${btnLabel}</button>
+      ${lootBtn}
+      <button class="btn btn-secondary btn-disabled" style="margin-top:0.65rem" type="button" disabled title="Действие на сервере">${btnLabel}</button>
     </div>`;
   }
 
@@ -844,10 +1057,19 @@
       items = FALLBACK_CATALOG[kind] || [];
     }
     root.innerHTML = items.map((it) => catalogCard(it, kind)).join("");
+    
+    // Wire loot preview modal buttons
+    root.querySelectorAll("[data-view-loot]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const slug = btn.getAttribute("data-view-loot");
+        openLootModal(slug);
+      });
+    });
+
     root.querySelectorAll("button[disabled]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-        toast("Покупки выключены");
+        toast("Покупки / открытие на сервере");
       });
     });
   }
