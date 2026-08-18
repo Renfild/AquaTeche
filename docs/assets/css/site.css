@@ -3192,13 +3192,26 @@ img.pixelated,
 }
 
 .btn-like .heart {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-like .heart-icon {
+  width: 17px;
+  height: 17px;
+  color: #fda4af;
+  transition: all 0.2s ease;
+}
+
+.btn-like:not(.liked) .heart-icon {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .btn-like:active .heart,
 .btn-like.liked .heart {
-  transform: scale(1.35);
+  transform: scale(1.25);
 }
 
 /* Social & Equipment Chips */

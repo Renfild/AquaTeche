@@ -718,15 +718,19 @@
   }
 
   const THEMES = [
-    { id: "ocean", label: "🌊 Океан" },
-    { id: "deep", label: "🌌 Глубина" },
-    { id: "storm", label: "⚡ Шторм" },
-    { id: "abyss", label: "🔮 Бездна" },
-    { id: "magma", label: "🔥 Магма" },
-    { id: "celestial", label: "✨ Небесный" },
-    { id: "cyber", label: "💚 Кибер" },
-    { id: "aurora", label: "🌈 Аврора" },
+    { id: "ocean", label: "Океан" },
+    { id: "deep", label: "Глубина" },
+    { id: "storm", label: "Шторм" },
+    { id: "abyss", label: "Бездна" },
+    { id: "magma", label: "Магма" },
+    { id: "celestial", label: "Небесный" },
+    { id: "cyber", label: "Кибер" },
+    { id: "aurora", label: "Аврора" },
   ];
+
+  function heartSvg(filled) {
+    return `<svg class="heart-icon" width="16" height="16" viewBox="0 0 24 24" fill="${filled ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>`;
+  }
 
   async function initProfile() {
     const root = $("#profile-root");
@@ -775,14 +779,14 @@
     const socials = [];
     if (profile.social_tg) {
       const tg = profile.social_tg.replace(/^@/, "");
-      socials.push(`<a class="social-chip" href="https://t.me/${encodeURIComponent(tg)}" target="_blank" rel="noopener">✈️ Telegram: @${tg}</a>`);
+      socials.push(`<a class="social-chip" href="https://t.me/${encodeURIComponent(tg)}" target="_blank" rel="noopener">Telegram: @${tg}</a>`);
     }
     if (profile.social_vk) {
       const vk = profile.social_vk.replace(/^(https?:\/\/)?(vk\.com\/)?/, "");
-      socials.push(`<a class="social-chip" href="https://vk.com/${encodeURIComponent(vk)}" target="_blank" rel="noopener">🌐 VK: ${vk}</a>`);
+      socials.push(`<a class="social-chip" href="https://vk.com/${encodeURIComponent(vk)}" target="_blank" rel="noopener">VK: ${vk}</a>`);
     }
     if (profile.social_discord) {
-      socials.push(`<span class="social-chip">🎮 Discord: ${profile.social_discord}</span>`);
+      socials.push(`<span class="social-chip">Discord: ${profile.social_discord}</span>`);
     }
 
     root.innerHTML = `
@@ -793,16 +797,16 @@
             <h1>${profile.nick}</h1>
             <div class="profile-status-line">
               <span class="tag ${profile.slug === "deluxe" || profile.slug === "ultimate" || profile.privilege === "Создатель" ? "gold" : ""}">${profile.privilege || "Игрок"}</span>
-              ${profile.status_message ? `<span class="profile-status-badge">💬 ${profile.status_message}</span>` : ""}
+              ${profile.status_message ? `<span class="profile-status-badge">${profile.status_message}</span>` : ""}
             </div>
-            ${profile.fav_rod ? `<div class="fav-rod-badge">🎣 Любимая удочка: <strong>${profile.fav_rod}</strong></div>` : ""}
+            ${profile.fav_rod ? `<div class="fav-rod-badge">Любимая удочка: <strong>${profile.fav_rod}</strong></div>` : ""}
             ${socials.length ? `<div class="profile-socials">${socials.join("")}</div>` : ""}
             <p style="margin-top:0.75rem;color:rgba(255,255,255,0.85);max-width:38rem">${profile.bio || ""}</p>
           </div>
         </div>
         <div class="profile-actions">
           <button class="btn-like ${profile.has_liked ? "liked" : ""}" type="button" id="btn-like-profile" ${mine ? 'disabled title="Нельзя ставить лайк своему профилю"' : ""}>
-            <span class="heart">${profile.has_liked ? "❤️" : "🤍"}</span>
+            <span class="heart">${heartSvg(profile.has_liked)}</span>
             <span id="like-count">${profile.likes || 0}</span>
             <span style="font-size:0.82rem;font-weight:600;opacity:0.85">${profile.has_liked ? "Вам нравится" : "Похвалить"}</span>
           </button>
@@ -874,7 +878,7 @@
                 <textarea name="bio" rows="3" maxlength="300" placeholder="Расскажите о себе, своих рекордах в рыбалке или острове...">${profile.bio || ""}</textarea>
               </div>
 
-              <button class="btn btn-primary" type="submit" style="margin-top:0.5rem">💾 Сохранить профиль</button>
+              <button class="btn btn-primary" type="submit" style="margin-top:0.5rem">Сохранить профиль</button>
             </form>`
           : ""
       }`;
@@ -893,7 +897,7 @@
         });
         if (res.ok) {
           likeBtn.classList.toggle("liked", res.liked);
-          likeBtn.querySelector(".heart").textContent = res.liked ? "❤️" : "🤍";
+          likeBtn.querySelector(".heart").innerHTML = heartSvg(res.liked);
           $("#like-count").textContent = res.likes;
           toast(res.liked ? "Вы похвалили игрока!" : "Лайк убран");
           if (soundOn) playTone("ok");
