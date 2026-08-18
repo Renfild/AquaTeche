@@ -73,3 +73,22 @@ PlayerEvents.loggedOut(event => {
         sendStatsToPortal(pName, coins, fish, hours, "Игрок", 0);
     } catch (e) {}
 });
+
+// Real-time fish caught counter and periodic sync
+ItemEvents.fishCaught(event => {
+    let player = event.player;
+    if (!player) return;
+    
+    let current = player.persistentData.getInt('fishCaught') || player.stats.fishCaught || 0;
+    current++;
+    player.persistentData.putInt('fishCaught', current);
+
+    // Sync to portal every 5 catches
+    if (current % 5 === 0) {
+        let ticks = player.stats.playTime || 0;
+        let hours = Math.floor(ticks / 72000);
+        let coins = player.persistentData.coins || 0;
+        sendStatsToPortal(player.username, coins, current, hours, "Игрок", 0);
+    }
+});
+
