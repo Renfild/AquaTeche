@@ -1,8 +1,27 @@
 // AquaTech: Live sync player stats, coins & playtime between Minecraft server & Web Portal
 const SYNC_URL = "https://aquateche.store/api/sync/player";
-const SYNC_KEY = "aquatech_internal_sync_key_2026";
+
+// Sync key lives in config/aquatech_sync_key.json on the server only (gitignored).
+// java.nio is blocked by the KubeJS sandbox, so we read through the JsonIO binding.
+function loadSyncKey() {
+    try {
+        let raw = JsonIO.read('config/aquatech_sync_key.json');
+        if (!raw) return '';
+        if (raw.get) {
+            let v = raw.get('key');
+            return v ? String(v.getAsString ? v.getAsString() : v).trim() : '';
+        }
+        return raw.key ? String(raw.key).trim() : '';
+    } catch (e) {
+        console.error('[portal-sync] cannot read config/aquatech_sync_key.json: ' + e);
+        return '';
+    }
+}
+const SYNC_KEY = loadSyncKey();
+if (SYNC_KEY) console.info('[portal-sync] sync key loaded');
 
 function sendStatsToPortal(pName, coins, fish, playtimeHours, privilege, questsDone) {
+    if (!SYNC_KEY) return;
     let Thread = Java.type('java.lang.Thread');
     let Runnable = Java.type('java.lang.Runnable');
     let URL = Java.type('java.net.URL');
@@ -74,21 +93,7 @@ PlayerEvents.loggedOut(event => {
     } catch (e) {}
 });
 
-// Real-time fish caught counter and periodic sync
-ItemEvents.fishCaught(event => {
-    let player = event.player;
-    if (!player) return;
-    
-    let current = player.persistentData.getInt('fishCaught') || player.stats.fishCaught || 0;
-    current++;
-    player.persistentData.putInt('fishCaught', current);
-
-    // Sync to portal every 5 catches
-    if (current % 5 === 0) {
-        let ticks = player.stats.playTime || 0;
-        let hours = Math.floor(ticks / 72000);
-        let coins = player.persistentData.coins || 0;
-        sendStatsToPortal(player.username, coins, current, hours, "Игрок", 0);
-    }
-});
+// NOTE: KubeJS 2001.6.5 has no fishing event binding (ItemEvents.fishCaught does
+// not exist). The fish counter stays on vanilla stats / aquatech_ui until a
+// proper hook is added to the mod itself.
 

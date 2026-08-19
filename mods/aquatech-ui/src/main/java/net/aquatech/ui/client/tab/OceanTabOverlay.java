@@ -1,24 +1,33 @@
 package net.aquatech.ui.client.tab;
 
 import net.aquatech.ui.client.ClientUiState;
-import net.aquatech.ui.client.gui.widget.AquaBadge;
-import net.aquatech.ui.client.gui.widget.AquaGlassPanel;
 import net.aquatech.ui.client.render.AquaFontRenderer;
+import net.aquatech.ui.client.render.LumenGfx;
+import net.aquatech.ui.client.render.LumenIcons;
 import net.aquatech.ui.client.render.UiDraw;
+import net.aquatech.ui.client.theme.LumenTheme;
 import net.aquatech.ui.common.PlayerProfile;
 import net.aquatech.ui.common.ServerStats;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.List;
 
+/**
+ * Modern TAB Overlay matching the AquaLumen design system:
+ * 1. Clean dark frosted panel with subtle luminous accent borders.
+ * 2. Header with brand title, live player count pill, and server status.
+ * 3. Responsive player grid with stylized rank pills and ping indicators.
+ * 4. Concise footer with navigation hints.
+ */
 public final class OceanTabOverlay {
     private static final int OUTER_PADDING = 14;
     private static final int HEADER_HEIGHT = 52;
-    private static final int FOOTER_HEIGHT = 20;
+    private static final int FOOTER_HEIGHT = 24;
     private static final int CARD_HEIGHT = 40;
-    private static final int CARD_GAP = 7;
-    private static final int IDEAL_CARD_WIDTH = 218;
+    private static final int CARD_GAP = 6;
+    private static final int IDEAL_CARD_WIDTH = 220;
     private static double scroll;
 
     private OceanTabOverlay() {
@@ -30,13 +39,16 @@ public final class OceanTabOverlay {
             return;
         }
 
+        LumenTheme theme = LumenTheme.get();
+        Font font = mc.font;
+
         int screenW = graphics.guiWidth();
         int screenH = graphics.guiHeight();
         ServerStats stats = ClientUiState.stats();
         List<PlayerProfile> profiles = ClientUiState.profiles();
-        var font = mc.font;
 
-        graphics.fill(0, 0, screenW, screenH, 0x52050D12);
+        // Dark ambient background backdrop
+        graphics.fill(0, 0, screenW, screenH, 0x85070C12);
 
         int columns = calculateColumns(screenW, profiles.size());
         int totalRows = Math.max(1, (profiles.size() + columns - 1) / columns);
@@ -44,33 +56,54 @@ public final class OceanTabOverlay {
                 (screenH - 40 - HEADER_HEIGHT - FOOTER_HEIGHT - OUTER_PADDING * 2) / (CARD_HEIGHT + CARD_GAP));
         int visibleRows = Math.min(totalRows, maxVisibleRows);
 
-        int panelW = Math.min(
-                screenW - 24,
-                OUTER_PADDING * 2 + columns * IDEAL_CARD_WIDTH + (columns - 1) * CARD_GAP
-        );
+        int targetW = columns * IDEAL_CARD_WIDTH + (columns - 1) * CARD_GAP + OUTER_PADDING * 2;
+        int panelW = Math.min(screenW - 24, Math.max(300, targetW));
         int panelH = HEADER_HEIGHT + FOOTER_HEIGHT + OUTER_PADDING * 2
                 + visibleRows * CARD_HEIGHT + Math.max(0, visibleRows - 1) * CARD_GAP;
         int panelX = (screenW - panelW) / 2;
         int panelY = (screenH - panelH) / 2;
-        AquaGlassPanel.draw(graphics, panelX, panelY, panelW, panelH, AquaGlassPanel.FILL, AquaGlassPanel.BORDER, 5, true);
+
+        // Modal Panel Surface & Glass Border
+        int cardBg = theme.panelAlpha(0.94f);
+        LumenGfx.roundedRect(graphics, panelX, panelY, panelW, panelH, 8, cardBg);
+        LumenGfx.outline(graphics, panelX, panelY, panelW, panelH, 8, theme.border());
+        LumenGfx.glow(graphics, panelX, panelY, panelW, panelH, 8, theme.accentAlpha(0.14f), 3);
 
         int contentLeft = panelX + OUTER_PADDING;
         int contentRight = panelX + panelW - OUTER_PADDING;
-        AquaFontRenderer.drawHeader(graphics, font, "AquaTech", contentLeft, panelY + 11, UiDraw.COLOR_ACCENT);
-        AquaFontRenderer.draw(graphics, font, "Ocean Network · Сборка v2.9.49", contentLeft, panelY + 24, UiDraw.COLOR_MUTED);
 
-        String onlineText = stats.online() + "/" + Math.max(stats.online(), stats.maxPlayers());
-        int onlineColor = stats.online() > 0 ? 0xFF63E6A5 : UiDraw.COLOR_MUTED;
+        // ═════════════════════════════════════════════════════════════════════════
+        // HEADER
+        // ═════════════════════════════════════════════════════════════════════════
+        AquaFontRenderer.drawHeader(graphics, font, "AQUATECH", contentLeft, panelY + 11, theme.accent());
+        AquaFontRenderer.draw(graphics, font, "OCEAN NETWORK", contentLeft, panelY + 24, theme.textDim());
+
+        // Online Pill Badge
+        int onlineCount = Math.max(1, stats.online());
+        int maxCount = Math.max(stats.online(), stats.maxPlayers() > 0 ? stats.maxPlayers() : 100);
+        String onlineText = onlineCount + " / " + maxCount + " ОНЛАЙН";
         int onlineW = AquaFontRenderer.width(font, onlineText);
-        int dotX = contentRight - onlineW - 8;
-        int dotY = panelY + 14;
-        graphics.fill(dotX, dotY, dotX + 4, dotY + 4, onlineColor);
-        AquaFontRenderer.draw(graphics, font, onlineText, contentRight - onlineW, panelY + 11, onlineColor);
+        int pillW = onlineW + 16;
+        int pillH = 15;
+        int pillX = contentRight - pillW;
+        int pillY = panelY + 11;
 
-        String staff = stats.staffOnline() + " команда";
-        AquaFontRenderer.draw(graphics, font, staff, contentRight - AquaFontRenderer.width(font, staff), panelY + 24, UiDraw.COLOR_MUTED);
-        graphics.fill(contentLeft, panelY + HEADER_HEIGHT - 5, contentRight, panelY + HEADER_HEIGHT - 4, 0x443A7892);
+        LumenGfx.roundedRect(graphics, pillX, pillY, pillW, pillH, 7, 0x244CD08A);
+        LumenGfx.outline(graphics, pillX, pillY, pillW, pillH, 7, 0x554CD08A);
+        graphics.fill(pillX + 6, pillY + 5, pillX + 10, pillY + 9, theme.success());
+        AquaFontRenderer.draw(graphics, font, onlineText, pillX + 13, pillY + 3, theme.success());
 
+        // Subtitle Info (Staff or Network status)
+        String subInfo = stats.staffOnline() > 0 ? (stats.staffOnline() + " персонал в сети") : "Сервер работает стабильно";
+        AquaFontRenderer.draw(graphics, font, subInfo, contentRight - AquaFontRenderer.width(font, subInfo), panelY + 28, theme.textDim());
+
+        // Header Gradient Divider
+        LumenGfx.gradientRoundedH(graphics, contentLeft, panelY + HEADER_HEIGHT - 6, contentRight - contentLeft, 1, 0,
+                theme.accentAlpha(0.40f), 0x083B9DFF);
+
+        // ═════════════════════════════════════════════════════════════════════════
+        // PLAYER CARDS GRID
+        // ═════════════════════════════════════════════════════════════════════════
         int listTop = panelY + HEADER_HEIGHT;
         int listBottom = panelY + panelH - FOOTER_HEIGHT - OUTER_PADDING;
         int listHeight = listBottom - listTop;
@@ -89,22 +122,39 @@ public final class OceanTabOverlay {
             if (y + CARD_HEIGHT < listTop || y > listBottom) {
                 continue;
             }
-            renderEntry(graphics, font, profile, x, y, colWidth);
+            renderEntry(graphics, font, profile, x, y, colWidth, theme);
         }
         graphics.disableScissor();
 
+        // Scrollbar
         if (maxScroll > 0) {
             int barX = panelX + panelW - 6;
-            graphics.fill(barX, listTop, barX + 2, listBottom, 0x44000000);
+            LumenGfx.roundedRect(graphics, barX, listTop, 3, listHeight, 1.5F, 0x22FFFFFF);
             int thumbH = Math.max(14, listHeight * listHeight / contentHeight);
             int thumbY = listTop + (int) ((scroll / (double) maxScroll) * (listHeight - thumbH));
-            graphics.fill(barX, thumbY, barX + 2, thumbY + thumbH, UiDraw.COLOR_ACCENT);
+            LumenGfx.roundedRect(graphics, barX, thumbY, 3, thumbH, 1.5F, theme.accent());
         }
 
-        // Footer: only hint, no website link
-        String hint = maxScroll > 0 ? "колесо мыши — прокрутка" : "удерживайте TAB";
-        AquaFontRenderer.draw(graphics, font, hint, contentRight - AquaFontRenderer.width(font, hint),
-                panelY + panelH - FOOTER_HEIGHT + 3, UiDraw.COLOR_MUTED);
+        // ═════════════════════════════════════════════════════════════════════════
+        // FOOTER
+        // ═════════════════════════════════════════════════════════════════════════
+        int footerY = panelY + panelH - FOOTER_HEIGHT + 7;
+        String domain = "aquateche.store";
+        int domainW = AquaFontRenderer.width(font, domain);
+        AquaFontRenderer.draw(graphics, font, domain, contentLeft, footerY, theme.textDim());
+
+        String hint = maxScroll > 0 ? "Колесо — прокрутка · F4 — Меню" : "F4 — Меню сервера";
+        int hintW = AquaFontRenderer.width(font, hint);
+
+        if (contentRight - hintW > contentLeft + domainW + 16) {
+            AquaFontRenderer.draw(graphics, font, hint, contentRight - hintW, footerY, theme.textDim());
+        } else {
+            String shortHint = "F4 — Меню";
+            int shortW = AquaFontRenderer.width(font, shortHint);
+            if (contentRight - shortW > contentLeft + domainW + 8) {
+                AquaFontRenderer.draw(graphics, font, shortHint, contentRight - shortW, footerY, theme.textDim());
+            }
+        }
     }
 
     public static void scroll(double delta) {
@@ -121,14 +171,29 @@ public final class OceanTabOverlay {
         return Math.max(1, Math.min(byPlayers, byWidth));
     }
 
-    private static void renderEntry(GuiGraphics graphics, net.minecraft.client.gui.Font font, PlayerProfile profile, int x, int y, int width) {
-        int rankColor = UiDraw.rankColor(profile.rankId());
-        AquaGlassPanel.drawCard(graphics, x, y, width, CARD_HEIGHT, rankColor);
-        UiDraw.drawPlayerHead(graphics, profile.uuid(), profile.name(), x + 8, y + 7, 26);
+    private static void renderEntry(GuiGraphics graphics, Font font, PlayerProfile profile, int x, int y, int width, LumenTheme theme) {
+        int rankColor = LumenTheme.getRankColor(profile.rankId());
 
-        int textX = x + 42;
+        // Card background & rank border
+        LumenGfx.roundedRect(graphics, x, y, width, CARD_HEIGHT, 5, theme.raised() & 0x88FFFFFF);
+        LumenGfx.outline(graphics, x, y, width, CARD_HEIGHT, 5, rankColor & 0x38FFFFFF);
+
+        // Left vertical rank indicator bar
+        LumenGfx.roundedRect(graphics, x, y, 3, CARD_HEIGHT, 1.5F, rankColor);
+
+        // Avatar 26x26
+        int avX = x + 8;
+        int avY = y + 7;
+        int avSize = 26;
+        UiDraw.drawPlayerHead(graphics, profile.uuid(), profile.name(), avX, avY, avSize);
+        LumenGfx.outline(graphics, avX - 1, avY - 1, avSize + 2, avSize + 2, 2, rankColor & 0x55FFFFFF);
+        // Mint online dot
+        graphics.fill(avX + avSize - 3, avY + avSize - 3, avX + avSize + 1, avY + avSize + 1, theme.success());
+
+        int textX = x + 40;
         int right = x + width - 8;
 
+        // Ping calculation
         int realPing = profile.ping();
         Minecraft mc = Minecraft.getInstance();
         if (mc.getConnection() != null) {
@@ -138,37 +203,47 @@ public final class OceanTabOverlay {
             }
         }
         String ping = Math.max(0, realPing) + "ms";
-        int pingColor = pingColor(realPing);
+        int pingCol = pingColor(realPing, theme);
+        int pingW = AquaFontRenderer.width(font, ping);
 
-        String name = AquaFontRenderer.fit(font, profile.name(), Math.max(24, right - textX - AquaFontRenderer.width(font, ping) - 14));
-        AquaFontRenderer.draw(graphics, font, name, textX, y + 8, UiDraw.COLOR_TEXT);
+        // Player Name
+        String name = AquaFontRenderer.fit(font, profile.name(), Math.max(24, right - textX - pingW - 14));
+        AquaFontRenderer.draw(graphics, font, name, textX, y + 7, theme.text());
 
-        int badgeX = textX;
+        // Rank Pill
         String rankRaw = profile.rankDisplay();
         if (rankRaw == null || rankRaw.isBlank()) {
             rankRaw = profile.rankId();
         }
-        rankRaw = rankRaw.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim();
+        rankRaw = rankRaw.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim().toUpperCase();
         if (rankRaw.isBlank()) {
             rankRaw = "ИГРОК";
         }
-        String rank = AquaFontRenderer.fit(font, rankRaw.toUpperCase(), Math.max(24, right - textX - 50));
-        AquaBadge.draw(graphics, font, badgeX, y + 22, rank, rankColor);
-        graphics.fill(right - AquaFontRenderer.width(font, ping) - 6, y + 10, right - AquaFontRenderer.width(font, ping) - 3, y + 13, pingColor);
-        AquaFontRenderer.draw(graphics, font, ping, right - AquaFontRenderer.width(font, ping), y + 7, pingColor);
+        String rank = AquaFontRenderer.fit(font, rankRaw, Math.max(24, right - textX - pingW - 12));
+        int rankBadgeW = AquaFontRenderer.width(font, rank) + 8;
+        int rankBadgeH = 12;
+        int rankBadgeY = y + 21;
+
+        LumenGfx.roundedRect(graphics, textX, rankBadgeY, rankBadgeW, rankBadgeH, 3, rankColor & 0x22FFFFFF);
+        LumenGfx.outline(graphics, textX, rankBadgeY, rankBadgeW, rankBadgeH, 3, rankColor & 0x66FFFFFF);
+        AquaFontRenderer.draw(graphics, font, rank, textX + 4, rankBadgeY + 2, rankColor);
+
+        // Ping text & indicator
+        int pingX = right - pingW;
+        graphics.fill(pingX - 6, y + 10, pingX - 2, y + 14, pingCol);
+        AquaFontRenderer.draw(graphics, font, ping, pingX, y + 8, pingCol);
     }
 
-    private static int pingColor(int ping) {
+    private static int pingColor(int ping, LumenTheme theme) {
         if (ping < 0) {
-            return UiDraw.COLOR_MUTED;
+            return theme.textDim();
         }
         if (ping <= 80) {
-            return 0xFF63E6A5;
+            return theme.success();
         }
         if (ping <= 160) {
-            return 0xFFFFD166;
+            return theme.gold();
         }
-        return 0xFFFF6B6B;
+        return theme.danger();
     }
-
 }

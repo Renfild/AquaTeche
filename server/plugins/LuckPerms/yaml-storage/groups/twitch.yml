@@ -4,5 +4,5 @@ permissions:
 parents:
 - default
 prefixes:
-- " ":
+- '&5&l[TWITCH] &5':
     priority: 34

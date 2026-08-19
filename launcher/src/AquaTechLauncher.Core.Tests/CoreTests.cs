@@ -146,3 +146,28 @@ public class AutoJoinArgumentTests
         Assert.Null(LaunchCommandBuilder.BuildAutoJoinArgument("  "));
     }
 }
+
+public class ServerListHelperTests
+{
+    [Fact]
+    public void Generates_valid_single_server_nbt()
+    {
+        var tempDir = Path.Combine(Path.GetTempPath(), "at_server_test_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tempDir);
+        try
+        {
+            var target = "g-pl-3.apexnodes.xyz:21561";
+            ServerListHelper.EnsureServerEntry(tempDir, target, "AquaTech");
+            var dat = Path.Combine(tempDir, "servers.dat");
+            Assert.True(File.Exists(dat));
+            var bytes = File.ReadAllBytes(dat);
+            Assert.True(bytes.Length > 20);
+            var utf8 = Encoding.UTF8.GetBytes(target);
+            Assert.Contains(utf8[0], bytes);
+        }
+        finally
+        {
+            try { Directory.Delete(tempDir, true); } catch { /* ignore */ }
+        }
+    }
+}

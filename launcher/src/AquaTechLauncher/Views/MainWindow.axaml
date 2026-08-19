@@ -191,7 +191,7 @@
             <!-- Header Brand -->
             <StackPanel Spacing="6" HorizontalAlignment="Center">
               <Border Background="#0284C7" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Center" Margin="0,0,0,4">
-                <TextBlock Text="🌊" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="AQ" FontSize="20" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
               </Border>
               <TextBlock Text="AQUATECH" FontSize="28" FontWeight="ExtraBold" Foreground="#F8FAFC"
                          LetterSpacing="2" HorizontalAlignment="Center"/>
@@ -261,7 +261,7 @@
           <StackPanel DockPanel.Dock="Top" Margin="20,24,20,12" Spacing="4">
             <StackPanel Orientation="Horizontal" Spacing="10">
               <Border Background="#0284C7" CornerRadius="8" Width="32" Height="32">
-                <TextBlock Text="🌊" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="AQ" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
               </Border>
               <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="AQUATECH" FontSize="18" FontWeight="ExtraBold" Foreground="#F8FAFC" LetterSpacing="1"/>
@@ -272,9 +272,9 @@
 
           <!-- Navigation -->
           <StackPanel DockPanel.Dock="Top" Margin="12,12" Spacing="6">
-            <Button Classes="nav" Content="🎮  Игра" Command="{Binding ShowPlayCommand}" Classes.active="{Binding IsPlayPage}"/>
-            <Button Classes="nav" Content="⚙️  Настройки" Command="{Binding ShowSettingsCommand}" Classes.active="{Binding IsSettingsPage}"/>
-            <Button Classes="nav" Content="📋  Журнал" Command="{Binding ShowLogCommand}" Classes.active="{Binding IsLogPage}"/>
+            <Button Classes="nav" Content="Игра" Command="{Binding ShowPlayCommand}" Classes.active="{Binding IsPlayPage}"/>
+            <Button Classes="nav" Content="Настройки" Command="{Binding ShowSettingsCommand}" Classes.active="{Binding IsSettingsPage}"/>
+            <Button Classes="nav" Content="Журнал" Command="{Binding ShowLogCommand}" Classes.active="{Binding IsLogPage}"/>
           </StackPanel>
 
           <!-- Bottom Profile Card & Logout -->
@@ -333,7 +333,7 @@
               <Border Classes="panel" Padding="18,14">
                 <Grid ColumnDefinitions="Auto,*,Auto">
                   <Border Background="#0284C7" CornerRadius="8" Width="36" Height="36" VerticalAlignment="Center" Margin="0,0,12,0">
-                    <TextBlock Text="👤" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="AQ" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                   </Border>
                   <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
                     <StackPanel Orientation="Horizontal" Spacing="8">
@@ -350,19 +350,17 @@
 
               <!-- Server Card -->
               <Border Classes="panel" Padding="20,16">
-                <StackPanel Spacing="12">
-                  <Grid ColumnDefinitions="*,Auto">
+                <Grid ColumnDefinitions="*,Auto">
+                  <StackPanel Spacing="4">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                       <TextBlock Text="●" FontSize="14" Foreground="{Binding ServerDot}" VerticalAlignment="Center"/>
                       <TextBlock Text="Основной сервер AquaTech" FontSize="16" FontWeight="Bold" Foreground="#F8FAFC"/>
                     </StackPanel>
-                    <TextBlock Grid.Column="1" Text="{Binding ServerStatus}" FontSize="12" Foreground="#94A3B8" VerticalAlignment="Center"/>
-                  </Grid>
-                  <Grid ColumnDefinitions="*,Auto">
-                    <TextBlock Text="{Binding ServerAddress}" FontSize="14" FontWeight="SemiBold" Foreground="#38BDF8" VerticalAlignment="Center"/>
-                    <Button Grid.Column="1" Classes="glass" Content="📋 Скопировать IP" Command="{Binding CopyIpCommand}"/>
-                  </Grid>
-                </StackPanel>
+                    <TextBlock Text="{Binding OnlinePlayersText}" FontSize="12" Foreground="#38BDF8"/>
+                  </StackPanel>
+                  <TextBlock Grid.Column="1" Text="{Binding ServerStatus}" FontSize="13" FontWeight="SemiBold"
+                             Foreground="#94A3B8" VerticalAlignment="Center"/>
+                </Grid>
               </Border>
 
               <!-- Action Buttons Row (Play + Update) -->
@@ -377,7 +375,7 @@
                     </LinearGradientBrush>
                   </Button.Background>
                 </Button>
-                <Button Grid.Column="2" Classes="glass" Content="🔄 Обновить" Command="{Binding RepairPackCommand}"
+                <Button Grid.Column="2" Classes="glass" Content="Обновить" Command="{Binding RepairPackCommand}"
                         IsEnabled="{Binding ActionsEnabled}" Height="54" Padding="18,0" FontSize="15"
                         ToolTip.Tip="Проверить целостность и скачать обновления сборки"/>
               </Grid>
@@ -415,7 +413,7 @@
                   <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
                     <Button Classes="ram-pill" Content="4096 MB (4G)" Command="{Binding SetRamCommand}" CommandParameter="4096"/>
                     <Button Classes="ram-pill" Content="6144 MB (6G)" Command="{Binding SetRamCommand}" CommandParameter="6144"/>
-                    <Button Classes="ram-pill" Content="8192 MB (8G) ⭐" Command="{Binding SetRamCommand}" CommandParameter="8192"/>
+                    <Button Classes="ram-pill" Content="8192 MB (8G) Рекомендуется" Command="{Binding SetRamCommand}" CommandParameter="8192"/>
                     <Button Classes="ram-pill" Content="12288 MB (12G)" Command="{Binding SetRamCommand}" CommandParameter="12288"/>
                     <Button Classes="ram-pill" Content="16384 MB (16G)" Command="{Binding SetRamCommand}" CommandParameter="16384"/>
                   </StackPanel>
@@ -426,7 +424,7 @@
                   <TextBlock Text="ДИРЕКТОРИЯ ИГРЫ (.minecraft / AquaTech)" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
                   <Grid ColumnDefinitions="*,10,Auto">
                     <TextBox Classes="field" Text="{Binding GameDir}"/>
-                    <Button Grid.Column="2" Classes="glass" Content="Обзор 📁" Command="{Binding BrowseGameDirCommand}"
+                    <Button Grid.Column="2" Classes="glass" Content="Обзор..." Command="{Binding BrowseGameDirCommand}"
                             Height="44" Padding="14,0" HorizontalContentAlignment="Center"/>
                   </Grid>
                 </StackPanel>
@@ -438,11 +436,11 @@
                   <TextBlock Text="Если возникают ошибки подключения или краши модов, нажми кнопку ниже для полной проверки и авто-очистки лишних файлов."
                              FontSize="11" Foreground="#64748B" TextWrapping="Wrap"/>
                   <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
-                    <Button Classes="glass" Content="🔄 Проверить и починить сборку" Command="{Binding RepairPackCommand}"
+                    <Button Classes="glass" Content="Проверить и починить сборку" Command="{Binding RepairPackCommand}"
                             Margin="0,0,10,8" Padding="16,10" Foreground="#38BDF8"/>
-                    <Button Classes="glass" Content="📂 Открыть папку игры" Command="{Binding OpenGameFolderCommand}"
+                    <Button Classes="glass" Content="Папка игры" Command="{Binding OpenGameFolderCommand}"
                             Margin="0,0,10,8" Padding="14,10"/>
-                    <Button Classes="glass" Content="📄 Открыть логи" Command="{Binding OpenLogsFolderCommand}"
+                    <Button Classes="glass" Content="Логи" Command="{Binding OpenLogsFolderCommand}"
                             Margin="0,0,10,8" Padding="14,10"/>
                   </WrapPanel>
                 </StackPanel>

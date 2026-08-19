@@ -4,5 +4,5 @@ permissions:
 parents:
 - admin
 prefixes:
-- " ":
+- '&c&l[ВЛАДЕЛЕЦ] &c':
     priority: 100

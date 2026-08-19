@@ -193,7 +193,9 @@ public sealed class ManifestSync
             return man;
         }).ToList();
 
+        var received = new List<PackManifest>();
         var exceptions = new List<Exception>();
+
         while (fetchTasks.Count > 0)
         {
             var finished = await Task.WhenAny(fetchTasks);
@@ -201,7 +203,12 @@ public sealed class ManifestSync
             try
             {
                 var man = await finished;
-                return man;
+                received.Add(man);
+                if (received.Count == 1 && fetchTasks.Count > 0)
+                {
+                    // Краткий интервал для получения ответов остальных зеркал
+                    await Task.WhenAny(Task.WhenAll(fetchTasks), Task.Delay(750, ct));
+                }
             }
             catch (Exception ex)
             {
@@ -209,7 +216,26 @@ public sealed class ManifestSync
             }
         }
 
+        if (received.Count > 0)
+        {
+            return received.OrderByDescending(m => ParsePackVersion(m.Version)).First();
+        }
+
         throw exceptions.LastOrDefault() ?? new IOException("Не удалось скачать манифест ни с одного зеркала");
+    }
+
+    private static Version ParsePackVersion(string? ver)
+    {
+        if (string.IsNullOrWhiteSpace(ver)) return new Version(0, 0);
+        var clean = ver.Trim().TrimStart('v', 'V', 'p', 'a', 'c', 'k', '-');
+        if (Version.TryParse(clean, out var v)) return v;
+        var parts = clean.Split('.', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length >= 2 && int.TryParse(parts[0], out var maj) && int.TryParse(parts[1], out var min))
+        {
+            var build = parts.Length >= 3 && int.TryParse(parts[2], out var b) ? b : 0;
+            return new Version(maj, min, build);
+        }
+        return new Version(0, 0);
     }
 
     private static async Task<bool> DownloadOneAsync(string gameDir, PackFileEntry item, CancellationToken ct)

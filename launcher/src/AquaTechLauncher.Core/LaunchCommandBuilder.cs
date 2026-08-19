@@ -18,6 +18,7 @@ public sealed class LaunchCommandBuilder
         CancellationToken ct = default)
     {
         EnsureRussianOptions(gameDir);
+        ServerListHelper.EnsureServerEntry(gameDir, autoJoin, "AquaTech");
         var forge = new ForgeInstaller();
         var verId = forge.FindForgeVersionId(gameDir)
             ?? throw new FileNotFoundException("Forge version JSON not found");
@@ -387,11 +388,21 @@ public sealed class LaunchCommandBuilder
         var index = ver["assetIndex"] as JsonObject;
         var indexId = index?["id"]?.GetValue<string>() ?? "5";
         var indexPath = Path.Combine(assetsDir, "indexes", indexId + ".json");
+        var objectsDir = Path.Combine(assetsDir, "objects");
+        var ready = Path.Combine(assetsDir, "indexes", indexId + ".aquatech_ready");
+
+        if (File.Exists(ready) && Directory.Exists(objectsDir) && Directory.EnumerateFiles(objectsDir, "*", SearchOption.AllDirectories).Any())
+        {
+            log?.Invoke($"assets готовы ({indexId})");
+            return indexId;
+        }
+
         if (!File.Exists(indexPath))
         {
             Directory.CreateDirectory(Path.GetDirectoryName(indexPath)!);
             var urls = new List<string>();
             if (index?["url"]?.GetValue<string>() is { } iu) urls.Add(iu);
+            urls.Add($"https://resources.download.minecraft.net/indexes/{indexId}.json");
             urls.Add($"https://bmclapi2.bangbang93.com/assets/indexes/{indexId}.json");
             foreach (var u in urls)
             {
@@ -411,9 +422,12 @@ public sealed class LaunchCommandBuilder
 
         using var doc = JsonDocument.Parse(await File.ReadAllTextAsync(indexPath, ct));
         var objects = doc.RootElement.GetProperty("objects");
-        var objectsDir = Path.Combine(assetsDir, "objects");
         Directory.CreateDirectory(objectsDir);
-        var ready = Path.Combine(assetsDir, "indexes", indexId + ".aquatech_ready");
+        for (var i = 0; i < 256; i++)
+        {
+            Directory.CreateDirectory(Path.Combine(objectsDir, i.ToString("x2")));
+        }
+
         var missing = new List<(string Hash, string Dest, long Size)>();
         foreach (var prop in objects.EnumerateObject())
         {
@@ -430,24 +444,27 @@ public sealed class LaunchCommandBuilder
             return indexId;
         }
         log?.Invoke($"assets: {missing.Count} файлов…");
-        using var gate = new SemaphoreSlim(64);
+        using var gate = new SemaphoreSlim(96);
         var done = 0;
         await Task.WhenAll(missing.Select(async m =>
         {
             await gate.WaitAsync(ct);
             try
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(m.Dest)!);
                 Exception? last = null;
                 foreach (var mirror in LauncherConstants.AssetMirrors)
                 {
                     try
                     {
-                        await HttpDownload.DownloadAsync($"{mirror}/{m.Hash[..2]}/{m.Hash}", m.Dest, ct);
+                        await HttpDownload.DownloadAssetFastAsync($"{mirror}/{m.Hash[..2]}/{m.Hash}", m.Dest, ct);
                         last = null;
                         break;
                     }
-                    catch (Exception ex) { last = ex; try { File.Delete(m.Dest); } catch { /* ignore */ } }
+                    catch (Exception ex)
+                    {
+                        last = ex;
+                        try { if (File.Exists(m.Dest)) File.Delete(m.Dest); } catch { /* ignore */ }
+                    }
                 }
                 if (last != null) throw last;
             }
@@ -455,7 +472,7 @@ public sealed class LaunchCommandBuilder
             finally
             {
                 var d = Interlocked.Increment(ref done);
-                if (d % 200 == 0) log?.Invoke($"assets {d}/{missing.Count}");
+                if (d % 200 == 0 || d == missing.Count) log?.Invoke($"assets {d}/{missing.Count}");
                 gate.Release();
             }
         }));

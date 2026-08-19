@@ -18,6 +18,9 @@ IBUKKIT = "com/fastasyncworldedit/bukkit/adapter/IBukkitAdapter.class"
 TYPEPROP = (
     "com/sk89q/worldedit/bukkit/adapter/ext/fawe/v1_20_R1/PaperweightAdapter$1.class"
 )
+IMPLFAWE = (
+    "com/sk89q/worldedit/bukkit/adapter/impl/fawe/v1_20_R1/PaperweightFaweAdapter.class"
+)
 
 ASM_DIR = Path(__file__).resolve().parent / "_asm"
 ASM_VER = "9.7.1"
@@ -118,6 +121,68 @@ def patch_typeproperty(data: bytes) -> bytes:
     return bytes(patched)
 
 
+def class_index_of(data: bytes, class_name: str) -> int | None:
+    """Index of the CONSTANT_Class entry whose Utf8 name equals class_name."""
+    if data[:4] != b"\xca\xfe\xba\xbe":
+        return None
+    cp_count = int.from_bytes(data[8:10], "big")
+    tag_size = {3: 5, 4: 5, 7: 3, 8: 3, 9: 5, 10: 5, 11: 5, 12: 5,
+                15: 4, 16: 3, 17: 5, 18: 5, 19: 3, 20: 3}
+    utf8: dict[int, bytes] = {}
+    classes: dict[int, int] = {}
+    i = 10
+    idx = 1
+    while idx < cp_count:
+        tag = data[i]
+        if tag == 1:
+            n = int.from_bytes(data[i + 1 : i + 3], "big")
+            utf8[idx] = data[i + 3 : i + 3 + n]
+            i += 3 + n
+        else:
+            if tag == 7:
+                classes[idx] = int.from_bytes(data[i + 1 : i + 3], "big")
+            i += tag_size[tag]
+            if tag in (5, 6):
+                idx += 1
+        idx += 1
+    for cp_idx, name_idx in classes.items():
+        if utf8.get(name_idx) == class_name.encode():
+            return cp_idx
+    return None
+
+
+def patch_impl_typeproperty(data: bytes) -> bytes:
+    """impl PaperweightFaweAdapter.init: unknown IBlockState impls (Mohist
+    TypeProperty) fall through to IntegerProperty instead of aborting init."""
+    idx = class_index_of(
+        data, "net/minecraft/world/level/block/state/properties/BlockStateInteger"
+    )
+    if idx is None:
+        print("  Impl TypeProperty: BlockStateInteger not in constant pool")
+        return data
+    pat = b"\xc1" + idx.to_bytes(2, "big")
+    patched = bytearray(data)
+    hits = 0
+    i = 0
+    while True:
+        j = patched.find(pat, i)
+        if j < 0:
+            break
+        if j + 6 <= len(patched) and patched[j + 3] == 0x99:
+            window = bytes(patched[j + 3 : j + 3 + 72])
+            if 0xBF in window[6:]:
+                patched[j + 3 : j + 6] = b"\xa7\x00\x03"
+                hits += 1
+                i = j + 6
+                continue
+        i = j + 1
+    if hits == 0:
+        print("  Impl TypeProperty: no ifeq pattern (already patched?)")
+    else:
+        print(f"  Impl TypeProperty: patched {hits} branch(es)")
+    return bytes(patched)
+
+
 def rewrite_jar(jar: Path, replacements: dict[str, bytes]) -> None:
     tmp = jar.with_name(jar.name + ".writing")
     patched = jar.with_name(jar.stem + "-patched" + jar.suffix)
@@ -170,11 +235,15 @@ def main() -> int:
         if IBUKKIT not in names:
             print(f"jar missing {IBUKKIT}")
             return 1
-        replacements: dict[str, bytes] = {
-            IBUKKIT: patch_ibukkit(zin.read(IBUKKIT)),
-        }
+        replacements: dict[str, bytes] = {}
+        try:
+            replacements[IBUKKIT] = patch_ibukkit(zin.read(IBUKKIT))
+        except SystemExit:
+            print("  IBukkit: no throw sites left (already patched), keeping as-is")
         if TYPEPROP in names:
             replacements[TYPEPROP] = patch_typeproperty(zin.read(TYPEPROP))
+        if IMPLFAWE in names:
+            replacements[IMPLFAWE] = patch_impl_typeproperty(zin.read(IMPLFAWE))
 
     rewrite_jar(jar, replacements)
     if jar.is_file():

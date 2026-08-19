@@ -1,0 +1,137 @@
+{
+  "cases": [
+    {
+      "id": "ocean",
+      "title": "Океанский кейс",
+      "rarity": "common",
+      "costCoins": 250,
+      "loot": [
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins",
+          "min": 10000,
+          "max": 50000,
+          "weight": 45
+        },
+        {
+          "type": "item",
+          "item": "aquatech_ui:kelp_bio_pellet",
+          "label": "Биогранулы из водорослей",
+          "min": 16,
+          "max": 16,
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "item": "aquatech_ui:abyssal_magnet",
+          "label": "Магнит бездны",
+          "min": 1,
+          "max": 1,
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "item": "minecraft:experience_bottle",
+          "label": "Бутыльки опыта",
+          "min": 16,
+          "max": 16,
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "id": "fisher",
+      "title": "Рыбацкий кейс",
+      "rarity": "rare",
+      "costCoins": 750,
+      "loot": [
+        {
+          "type": "item",
+          "item": "starcatcher:iceborn_rod",
+          "label": "Ледяная удочка [T6]",
+          "min": 1,
+          "max": 1,
+          "weight": 35
+        },
+        {
+          "type": "item",
+          "item": "starcatcher:starcatcher_rod",
+          "label": "Удочка Ловца Звёзд [T7]",
+          "min": 1,
+          "max": 1,
+          "weight": 25
+        },
+        {
+          "type": "item",
+          "item": "starcatcher:azure_crystal_rod",
+          "label": "Лазурный кристалл [T8]",
+          "min": 1,
+          "max": 1,
+          "weight": 20
+        },
+        {
+          "type": "item",
+          "item": "starcatcher:sharktooth_rod",
+          "label": "Акулий клык [T9]",
+          "min": 1,
+          "max": 1,
+          "weight": 12
+        },
+        {
+          "type": "item",
+          "item": "starcatcher:magmaforged_rod",
+          "label": "Магматическая [T10]",
+          "min": 1,
+          "max": 1,
+          "weight": 8
+        }
+      ]
+    },
+    {
+      "id": "depth",
+      "title": "Кейс Бездны",
+      "rarity": "legendary",
+      "costCoins": 2000,
+      "loot": [
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Рамка профиля «Глубинная Бездна» (гемы ×2)",
+          "min": 2,
+          "max": 2,
+          "weight": 40
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins",
+          "min": 250000,
+          "max": 250000,
+          "weight": 30
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Привилегия Deluxe 14 дней (гемы ×5)",
+          "min": 5,
+          "max": 5,
+          "weight": 20
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Привилегия Ultimate 30 дней (гемы ×10)",
+          "min": 10,
+          "max": 10,
+          "weight": 10
+        }
+      ]
+    }
+  ],
+  "daily": {
+    "baseCoins": 150,
+    "streakBonusCoins": 50,
+    "maxStreak": 7
+  }
+}

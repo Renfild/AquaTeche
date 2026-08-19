@@ -1,8 +1,9 @@
 # Deploy aquatech_ui jar to every mods folder used by this project.
 $ErrorActionPreference = "Stop"
 $root = "C:\Users\xieto\Desktop\AquaTech"
-$jar = Join-Path $root "mods\aquatech-ui\build\libs\aquatech_ui-1.0.0.jar"
-if (-not (Test-Path $jar)) { throw "Missing build jar: $jar - run gradlew build first" }
+$jars = Get-ChildItem (Join-Path $root "mods\aquatech-ui\build\libs") -Filter "aquatech_ui-*.jar" -EA SilentlyContinue
+if (-not $jars) { throw "Missing build jar in mods\aquatech-ui\build\libs - run gradlew build first" }
+$jar = $jars[0].FullName
 
 $targets = @(
   "$root\mods",
@@ -10,6 +11,8 @@ $targets = @(
   "$root\client\mods",
   "$root\server\client\mods",
   "$root\dist\AquaTech-Client\mods",
+  # Launcher GameDir default
+  "$env:APPDATA\AquaTech\mods",
   # CurseForge play instance (--gameDir from launcher log)
   "C:\Users\xieto\curseforge\minecraft\Instances\AquaTech\mods",
   "C:\Users\xieto\curseforge\minecraft\Instances\AquaTech\client\mods"
@@ -24,13 +27,14 @@ if (Test-Path $cfJunk) {
   Write-Host "Parked mods/aquatech-ui source tree -> $park"
 }
 
+$jarName = $jars[0].Name
 $hash = (Get-FileHash $jar -Algorithm MD5).Hash
 foreach ($d in $targets) {
   if (-not (Test-Path $d)) { New-Item -ItemType Directory -Force -Path $d | Out-Null }
   Get-ChildItem $d -Filter "aquatech_ui*.jar" -EA SilentlyContinue | Remove-Item -Force
-  Copy-Item $jar (Join-Path $d "aquatech_ui-1.0.0.jar") -Force
-  $h = (Get-FileHash (Join-Path $d "aquatech_ui-1.0.0.jar") -Algorithm MD5).Hash
+  Copy-Item $jar (Join-Path $d $jarName) -Force
+  $h = (Get-FileHash (Join-Path $d $jarName) -Algorithm MD5).Hash
   if ($h -ne $hash) { throw "Hash mismatch in $d" }
   Write-Host "OK $h  $d"
 }
-Write-Host "Deployed aquatech_ui-1.0.0.jar to $($targets.Count) folders (build MD5 $hash)"
+Write-Host "Deployed $jarName to $($targets.Count) folders (build MD5 $hash)"

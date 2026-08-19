@@ -76,20 +76,13 @@ public final class ClientEvents {
         if (!welcomed && mc.player.tickCount > 20) {
             welcomed = true;
             ClientUiState.resetSessionTimer();
-            mc.player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§b[AquaTech] §fСборка §e§lv2.9.49 §fзагружена. §7(F4 — Меню, K — Навыки)"));
+            mc.player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§b[AquaTech] §fСборка загружена. §7(F4 — Меню сервера)"));
         }
         net.aquatech.ui.client.cache.ResourceCacheManager.getInstance().prefetchPlayerAvatar(mc.player.getUUID());
 
         if (RhythmHookOverlay.isActive()) {
             ClientUiState.setTabOpen(false);
             return;
-        }
-
-        // Handle Keybind 'K' for Web Skill Tree
-        while (KEY_SKILL_TREE.consumeClick()) {
-            if (mc.screen == null) {
-                net.aquatech.ui.client.gui.AquaWebScreen.openEmbed("Созвездия Океана", "skills");
-            }
         }
 
         boolean wasOpen = ClientUiState.tabOpen();

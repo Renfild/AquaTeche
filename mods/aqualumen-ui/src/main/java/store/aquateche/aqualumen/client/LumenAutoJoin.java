@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.multiplayer.ServerList;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
@@ -47,9 +48,32 @@ public final class LumenAutoJoin {
         }
 
         attempted = true;
+        ensureServerInList(minecraft, target);
         AquaLumenUI.LOGGER.info("[AquaLumen] joining {} after client initialization", target);
         ServerData server = new ServerData("AquaTech", target, false);
         ConnectScreen.startConnecting(
                 titleScreen, minecraft, ServerAddress.parseString(target), server, false);
+    }
+
+    private static void ensureServerInList(Minecraft minecraft, String target) {
+        try {
+            ServerList serverList = new ServerList(minecraft);
+            serverList.load();
+            boolean found = false;
+            for (int i = 0; i < serverList.size(); i++) {
+                ServerData s = serverList.get(i);
+                if (s != null && s.ip != null && s.ip.equalsIgnoreCase(target)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                serverList.add(new ServerData("AquaTech", target, false), false);
+                serverList.save();
+                AquaLumenUI.LOGGER.info("[AquaLumen] auto-added AquaTech ({}) to server list", target);
+            }
+        } catch (Exception ex) {
+            AquaLumenUI.LOGGER.warn("[AquaLumen] failed to save server list: {}", ex.getMessage());
+        }
     }
 }

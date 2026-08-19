@@ -9,20 +9,25 @@ namespace AquaTechLauncher.Core;
 public static class HttpDownload
 {
     private static readonly CookieContainer Cookies = new();
-    private static readonly HttpClientHandler Handler = new()
+    private static readonly SocketsHttpHandler SocketsHandler = new()
     {
         CookieContainer = Cookies,
         UseCookies = true,
         AutomaticDecompression = DecompressionMethods.All,
+        MaxConnectionsPerServer = 128,
+        PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+        PooledConnectionIdleTimeout = TimeSpan.FromMinutes(2),
+        EnableMultipleHttp2Connections = true,
     };
     private static readonly HttpClient Client = CreateClient(TimeSpan.FromMinutes(10));
     private static readonly HttpClient MetadataClient = CreateClient(TimeSpan.FromSeconds(15));
+    private static readonly HttpClient AssetClient = CreateClient(TimeSpan.FromSeconds(12));
     private static readonly Uri PortalUri = new(LauncherConstants.PortalApiBase + "/");
     private static readonly Uri FallbackPortalUri = new(LauncherConstants.FallbackPortalApiBase + "/");
 
     private static HttpClient CreateClient(TimeSpan timeout)
     {
-        var c = new HttpClient(Handler) { Timeout = timeout };
+        var c = new HttpClient(SocketsHandler) { Timeout = timeout };
         c.DefaultRequestHeaders.UserAgent.ParseAdd(
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36");
         c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
@@ -90,6 +95,16 @@ public static class HttpDownload
             try { if (File.Exists(tmp)) File.Delete(tmp); } catch { /* ignore cleanup */ }
             throw;
         }
+    }
+
+    public static async Task DownloadAssetFastAsync(string url, string destPath, CancellationToken ct = default)
+    {
+        using var req = new HttpRequestMessage(HttpMethod.Get, url);
+        using var resp = await AssetClient.SendAsync(req, HttpCompletionOption.ResponseHeadersRead, ct);
+        resp.EnsureSuccessStatusCode();
+        await using var src = await resp.Content.ReadAsStreamAsync(ct);
+        await using var dst = new FileStream(destPath, FileMode.Create, FileAccess.Write, FileShare.None, 16384, useAsync: true);
+        await src.CopyToAsync(dst, ct);
     }
 
     public static async Task DownloadMirroredAsync(string url, string destPath, CancellationToken ct = default)

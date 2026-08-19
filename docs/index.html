@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AquaTech · океанский Minecraft 1.20.1</title>
-  <meta name="description" content="Океанский Minecraft: удочки StarCatcher, кейсы, сервер AquaTech." />
+  <meta name="description" content="Океанский Minecraft: удочки AquaTech, кейсы, авторыбалка и индустриальный прогресс." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260810g" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260819i" />
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
-  
+
   <section class="hero">
     <div class="hero-bg" aria-hidden="true">
       <div class="hero-caustic"></div>
@@ -23,52 +23,111 @@
       <div class="hero-spark"></div>
     </div>
     <div class="container hero-inner">
-      <p class="eyebrow reveal" data-site="hero_eyebrow">Minecraft 1.20.1 · океанский skyblock</p>
-      <h1 class="reveal" style="--d:.06s" data-site="hero_title">AquaTech</h1>
-      <p class="hero-lead reveal" style="--d:.12s" data-site="hero_lead">Спавн на плоту. Двенадцать удочек StarCatcher, авторыбалка, кейсы и индустриальные моды. Скачай лаунчер и заходи.</p>
+      <p class="eyebrow reveal">Minecraft 1.20.1 · океанский skyblock</p>
+      <h1 class="reveal" style="--d:.06s"><span class="gradient-aqua">AquaTech</span></h1>
+      <p class="hero-lead reveal" style="--d:.12s">Спавн на плоту посреди бесконечного океана. Удочки AquaTech добывают руды прямо из воды, авторыбалка работает пока вы строите, а кейсы и топы ждут в меню F4.</p>
       <div class="hero-actions reveal" style="--d:.18s">
-        <a class="btn btn-primary" data-download href="#">Скачать лаунчер</a>
+        <a class="btn btn-primary" href="start.html">Скачать лаунчер</a>
         <a class="btn btn-secondary" href="register.html">Регистрация</a>
         <a class="btn btn-ghost" href="store.html">Магазин</a>
       </div>
-      <button class="ip-box reveal" style="--d:.24s" type="button" data-copy-ip>
-        <div>
-          <small>IP СЕРВЕРА</small>
-          <strong>g-pl-3.apexnodes.xyz:21561</strong>
-        </div>
-        <span class="copy">Скопировать</span>
-      </button>
+      <div class="hero-status-pill reveal" style="--d:.24s">
+        <span class="status-indicator-dot" aria-hidden="true"></span>
+        <span>Сервер <span data-online aria-live="polite">…</span> · Ocean Skyblock 1.20.1 · Вход через официальный лаунчер</span>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head text-center reveal" style="margin-bottom:2rem">
         <div>
-          <h2 data-site="features_title">На сервере</h2>
-          <p data-site="features_lead">Один мир-океан. Рыбалка, кейсы, прогрессия.</p>
+          <h2>Особенности сервера</h2>
+          <p>Один бесконечный океан: рыбалка вместо шахт, кейсы и живые топы игроков.</p>
         </div>
-        <a class="btn btn-secondary" href="start.html">Как зайти</a>
       </div>
       <div class="grid-3">
         <a class="tile reveal" href="rods.html" style="--d:.05s">
-          <div class="feature-art rods" aria-hidden="true"></div>
-          <span class="tag" data-site="tile_rods_tag">Удочки</span>
-          <h3 data-site="tile_rods_title">StarCatcher</h3>
-          <p data-site="tile_rods_body">Бамбук в начале, дальше руды и индустриальный лут из пулов AquaTech.</p>
+          <span class="tile-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 3l-9.5 9.5a3 3 0 1 0 4.2 4.2L20 7.5" />
+              <path d="M14 5l5 5" />
+              <path d="M4 21c2.5-1 4-2.5 4-5" />
+              <circle cx="19" cy="14" r="0.6" fill="currentColor" stroke="none" />
+            </svg>
+          </span>
+          <span class="tag">Удочки</span>
+          <h3>Удочки AquaTech</h3>
+          <p>13 тиров добычи: от бамбуковой до альфы. Руды, сплавы и компоненты индустрии вылавливаются прямо из воды.</p>
         </a>
         <a class="tile reveal" href="cases.html" style="--d:.1s">
-          <div class="feature-art cases" aria-hidden="true"></div>
-          <span class="tag gold" data-site="tile_cases_tag">Кейсы</span>
-          <h3 data-site="tile_cases_title">Награды в игре</h3>
-          <p data-site="tile_cases_body">Кейсы крутятся на сервере (F4). На сайте только состав.</p>
+          <span class="tile-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8l9-5 9 5v8l-9 5-9-5V8z" />
+              <path d="M3 8l9 5 9-5" />
+              <path d="M12 13v8" />
+            </svg>
+          </span>
+          <span class="tag gold">Кейсы</span>
+          <h3>Кейсы и лут</h3>
+          <p>Океанские кейсы с ресурсами и редкими наградами. Состав показан на сайте, открытие — в игре через меню F4.</p>
         </a>
         <a class="tile reveal" href="top.html" style="--d:.15s">
-          <div class="feature-art tech" aria-hidden="true"></div>
-          <span class="tag" data-site="tile_top_tag">Игроки</span>
-          <h3 data-site="tile_top_title">Топы</h3>
-          <p data-site="tile_top_body">Рейтинг по лайкам и монетам. Профиль можно оформить после входа.</p>
+          <span class="tile-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20V10" />
+              <path d="M10 20V4" />
+              <path d="M16 20v-7" />
+              <path d="M22 20H2" />
+            </svg>
+          </span>
+          <span class="tag">Игроки</span>
+          <h3>Таблица лидеров</h3>
+          <p>Рейтинг по пойманной рыбе, балансу монет и лайкам профиля с обновлением в реальном времени.</p>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head text-center reveal" style="margin-bottom:2rem">
+        <div>
+          <h2>Как начать играть</h2>
+          <p>От регистрации до собственного плота — три шага.</p>
+        </div>
+      </div>
+      <div class="start-steps-grid">
+        <div class="start-step-card reveal">
+          <div class="step-badge">Шаг 1</div>
+          <div class="start-card-content">
+            <h3>Создайте профиль</h3>
+            <p>Аккаунт AquaTech хранит прогресс, статистику улова, баланс и оформление профиля.</p>
+          </div>
+          <div class="start-card-action">
+            <a class="btn btn-secondary btn-full" href="register.html">Регистрация</a>
+          </div>
+        </div>
+        <div class="start-step-card featured reveal" style="--d:.06s">
+          <div class="step-badge accent">Шаг 2</div>
+          <div class="start-card-content">
+            <h3>Скачайте лаунчер</h3>
+            <p>Клиент сам загрузит Forge, моды, квесты и шейдеры — настраивать ничего не нужно.</p>
+          </div>
+          <div class="start-card-action">
+            <a class="btn btn-primary btn-full" data-download href="start.html">Перейти к скачиванию</a>
+          </div>
+        </div>
+        <div class="start-step-card reveal" style="--d:.12s">
+          <div class="step-badge">Шаг 3</div>
+          <div class="start-card-content">
+            <h3>Окажитесь на плоту</h3>
+            <p>Личный плот в океане, первая удочка и путь к индустриальному эндгейму.</p>
+          </div>
+          <div class="start-card-action">
+            <a class="btn btn-ghost btn-full" href="rods.html">Что можно добыть</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -78,8 +137,8 @@
       <div class="reveal">
         <div class="section-head">
           <div>
-            <h2 data-site="home_news_title">Новости</h2>
-            <p data-site="home_news_lead">Что менялось в лаунчере и на сервере.</p>
+            <h2>Новости</h2>
+            <p>Обновления лаунчера, квестов и сервера.</p>
           </div>
         </div>
         <div class="news-list" id="home-news" data-news-home>
@@ -87,19 +146,12 @@
         </div>
       </div>
       <aside class="join-panel reveal" style="--d:.08s">
-        <span class="tag">Сервер</span>
-        <h3 data-site="join_title">AquaTech Ocean</h3>
-        <p data-site="join_body">Океанский skyblock, плот 4×4. Заходи по IP ниже.</p>
-        <button class="ip-box ip-box-block" type="button" data-copy-ip>
-          <div>
-            <small>ПОДКЛЮЧЕНИЕ</small>
-            <strong>g-pl-3.apexnodes.xyz:21561</strong>
-          </div>
-          <span class="copy">Скопировать</span>
-        </button>
+        <span class="tag">Океанский Skyblock</span>
+        <h3>AquaTech Ocean</h3>
+        <p>Выживание на плоту: удочки AquaTech добывают руды из воды, авторыбалка автоматизирует улов, а промышленная цепочка ведёт к квантовому эндгейму.</p>
         <div class="join-actions">
-          <a class="btn btn-aqua" href="start.html">Начать игру</a>
-          <a class="btn btn-secondary" href="players.html">Игроки</a>
+          <a class="btn btn-aqua" href="start.html">Скачать лаунчер</a>
+          <a class="btn btn-secondary" href="register.html">Создать профиль</a>
         </div>
       </aside>
     </div>

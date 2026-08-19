@@ -2,7 +2,7 @@ namespace AquaTechLauncher.Core;
 
 public static class LauncherConstants
 {
-    public const string Version = "2.9.69";
+    public const string Version = "2.9.75";
     public const string McVersion = "1.20.1";
     public const string ForgeVersion = "47.4.0";
     public const string McpVersion = "20230612.114412";
@@ -54,8 +54,8 @@ public static class LauncherConstants
 
     public static readonly string[] AssetMirrors =
     [
-        "https://bmclapi2.bangbang93.com/assets",
         "https://resources.download.minecraft.net",
+        "https://bmclapi2.bangbang93.com/assets",
     ];
 
     public static string GameDirDefault =>

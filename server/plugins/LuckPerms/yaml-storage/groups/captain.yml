@@ -6,5 +6,5 @@ permissions:
 parents:
 - skipper
 prefixes:
-- " ":
+- '&2&l[КАПИТАН] &2':
     priority: 45

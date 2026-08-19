@@ -7,5 +7,5 @@ permissions:
 parents:
 - default
 prefixes:
-- " ":
+- '&3&l[АДМИРАЛ] &3':
     priority: 45

@@ -4,77 +4,208 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Начать игру · AquaTech</title>
-  <meta name="description" content="Скачай лаунчер AquaTech и зайди на сервер." />
+  <meta name="description" content="Скачайте официальный лаунчер AquaTech для комфортной игры на сервере Ocean Skyblock 1.20.1." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260810g" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260819i" />
 </head>
 <body data-page="start">
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
-  
-  <section class="page-hero">
-    <div class="container">
-      <div class="eyebrow" data-site="start_eyebrow">Старт</div>
-      <h1 data-site="start_title">Как зайти</h1>
-      <p data-site="start_lead">Нужен Windows. Скачай лаунчер, впиши ник и жми «Играть».</p>
-      <div class="banner"></div>
+
+  <section class="page-hero start-hero">
+    <div class="container text-center">
+      <div class="eyebrow">Быстрый старт</div>
+      <h1 class="start-main-title">Как начать играть на <span class="gradient-aqua">AquaTech</span></h1>
+      <p class="start-main-lead">Лаунчер автоматически скачает сборку Minecraft 1.20.1 с модами, настроит Java 17 и выделит память под ваш компьютер.</p>
     </div>
   </section>
-  <section class="section" style="padding-top:1rem">
-    <div class="container grid-2">
-      <div class="card">
-        <span class="tag">Быстрый старт</span>
-        <h3 style="margin-top:0.6rem" data-site="start_step1_title">1. Официальный лаунчер</h3>
-        <p style="color:var(--muted);margin:.6rem 0 1.25rem" data-site="start_step1_body">Автоматически скачивает сборку модов AquaTech, Java и подключается к серверу. Просто введи свой ник.</p>
-        <a class="btn btn-primary" data-download href="#">⚡ Скачать для Windows (.exe)</a>
-      </div>
-      <div class="card">
-        <span class="tag gold">Подключение</span>
-        <h3 style="margin-top:0.6rem" data-site="start_step2_title">2. Параметры сервера</h3>
-        <button class="ip-box ip-box-block" style="margin-top:0.8rem;width:100%" type="button" data-copy-ip>
-          <div>
-            <small>IP И ПОРТ СЕРВЕРА</small>
-            <strong>g-pl-3.apexnodes.xyz:21561</strong>
+
+  <section class="section" style="padding-top:1.5rem">
+    <div class="container">
+      <div class="start-steps-grid">
+
+        <!-- Step 1 -->
+        <div class="start-step-card">
+          <div class="step-badge">Шаг 1</div>
+          <div class="start-card-content">
+            <h3>Зарегистрируйтесь</h3>
+            <p>Создайте игровой профиль для сохранения прогресса, настройки скина, кастомизации оформления и синхронизации статистики.</p>
           </div>
-          <span class="copy">Скопировать</span>
-        </button>
-        <div style="margin-top:1.25rem;display:flex;gap:.6rem;flex-wrap:wrap">
-          <a class="btn btn-secondary" href="register.html">Создать профиль</a>
-          <a class="btn btn-ghost" href="rules.html">Правила сервера</a>
+          <div class="start-card-action">
+            <a class="btn btn-secondary btn-full" href="register.html">Создать аккаунт</a>
+          </div>
         </div>
+
+        <!-- Step 2 -->
+        <div class="start-step-card featured">
+          <div class="step-badge accent">Шаг 2</div>
+          <div class="start-card-content">
+            <h3>Скачайте лаунчер</h3>
+            <p>Официальный клиент сам загрузит Forge 47.4.0, все моды, квесты и шейдеры. Ручная распаковка архивов не требуется.</p>
+          </div>
+          <div class="start-card-action">
+            <a class="btn btn-primary btn-full btn-download-main" data-download href="https://github.com/Renfild/AquaTeche/releases/download/client-2.9.75/AquaTech.exe">
+              <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
+              </svg>
+              <span>Скачать для Windows (.exe)</span>
+            </a>
+            <div class="platform-alt-links">
+              <span>Полный дистрибутив:</span>
+              <a href="https://github.com/Renfild/AquaTeche/releases/download/client-2.9.75/AquaTechLauncher.zip" class="platform-link">AquaTechLauncher.zip</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="start-step-card">
+          <div class="step-badge">Шаг 3</div>
+          <div class="start-card-content">
+            <h3>Запустите и играйте</h3>
+            <p>Откройте лаунчер, авторизуйтесь под своим ником и нажмите «Играть». Вы окажетесь на личном плоту с первой удочкой.</p>
+          </div>
+          <div class="start-card-action">
+            <a class="btn btn-ghost btn-full" href="rules.html">Правила сервера</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- System Requirements Section (LoliLand Style Props List) -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head text-center" style="margin-bottom:2rem">
+        <div>
+          <h2>Системные требования</h2>
+          <p>Параметры вашего компьютера для плавной и стабильной игры на AquaTech Ocean Skyblock.</p>
+        </div>
+      </div>
+
+      <div class="props-comparison-grid">
+        <!-- Min Specs -->
+        <div class="props-card">
+          <div class="props-card-header">
+            <h3>Минимальные требования</h3>
+            <span class="props-badge">Стабильные 60 FPS</span>
+          </div>
+          <div class="props-list">
+            <div class="props-row">
+              <div class="props-label">Операционная система</div>
+              <div class="props-val">Windows 10 / 11 (x64) или macOS / Linux</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Процессор (CPU)</div>
+              <div class="props-val">Intel Core i3-6100 или AMD Ryzen 3 1200</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Оперативная память (RAM)</div>
+              <div class="props-val">4 — 6 GB выделенной памяти (из 8 GB общей)</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Видеокарта (GPU)</div>
+              <div class="props-val">Intel UHD Graphics 630 / GeForce GT 730</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Накопитель</div>
+              <div class="props-val">SSD с 4 GB свободного места</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Java среда</div>
+              <div class="props-val">Java 17 (x64) · Скачивается лаунчером автоматически</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Интернет-соединение</div>
+              <div class="props-val">5 Мбит/с для быстрой подгрузки чанков</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommended Specs -->
+        <div class="props-card recommended">
+          <div class="props-card-header">
+            <h3>Рекомендуемые требования</h3>
+            <span class="props-badge highlight">Максимальные шейдеры 144+ FPS</span>
+          </div>
+          <div class="props-list">
+            <div class="props-row">
+              <div class="props-label">Операционная система</div>
+              <div class="props-val">Windows 10 / 11 (x64)</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Процессор (CPU)</div>
+              <div class="props-val">Intel Core i5-10400 или AMD Ryzen 5 3600</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Оперативная память (RAM)</div>
+              <div class="props-val">8 — 16 GB оперативной памяти</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Видеокарта (GPU)</div>
+              <div class="props-val">NVIDIA GeForce GTX 1050 Ti / GTX 1660 / AMD RX 580</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Накопитель</div>
+              <div class="props-val">Быстрый NVMe / SATA SSD</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Java среда</div>
+              <div class="props-val">Оптимизированная GraalVM / Adoptium Java 17</div>
+            </div>
+            <div class="props-row">
+              <div class="props-label">Интернет-соединение</div>
+              <div class="props-val">15+ Мбит/с с низким пингом</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="props-notice-box">
+        <p>Если параметры вашего компьютера ниже минимальных, лаунчер AquaTech автоматически активирует облегчённый профиль рендеринга (Embeddium + FerriteCore + EntityCulling), обеспечивая плавную работу даже на ноутбуках со встроенной графикой.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Launcher Features Grid -->
   <section class="section" style="padding-top:0">
     <div class="container">
-      <div class="card">
-        <h3>Системные требования и конфигурация</h3>
-        <p style="color:var(--muted);margin-top:0.4rem">Для комфортной игры на сервере AquaTech рекомендуются следующие параметры:</p>
-        <div class="sys-req-grid">
-          <div class="sys-req-item">
-            <small>Версия игры</small>
-            <strong>Minecraft 1.20.1</strong>
+      <div class="section-head text-center" style="margin-bottom:2rem">
+        <div>
+          <h2>Возможности лаунчера</h2>
+          <p>Сборка обновляется сама, моды и конфиги настраивать вручную не нужно.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon-header">
+            <span class="icon-circle" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7v8l10-12h-7l0-8z"/></svg>
+            </span>
           </div>
-          <div class="sys-req-item">
-            <small>Ядро модов</small>
-            <strong>Forge 47.3.0+</strong>
+          <h4>Автообновление</h4>
+          <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">Лаунчер сверяет файлы клиента перед каждым стартом и сразу подтягивает новые квесты, рецепты и скрипты.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon-header">
+            <span class="icon-circle" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-3.5 5-5.5 10-5.5S20 8.5 22 12c-2 3.5-5 5.5-10 5.5S4 15.5 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg>
+            </span>
           </div>
-          <div class="sys-req-item">
-            <small>Выделение памяти</small>
-            <strong>4 — 6 ГБ ОЗУ</strong>
+          <h4>Океанские шейдеры</h4>
+          <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">Встроенные моды Embeddium и Oculus с оптимизированным профилем воды, волн и света без просадок FPS.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon-header">
+            <span class="icon-circle" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+            </span>
           </div>
-          <div class="sys-req-item">
-            <small>Среда Java</small>
-            <strong>Java 17 (x64)</strong>
-          </div>
-          <div class="sys-req-item">
-            <small>Операционная система</small>
-            <strong>Windows 10 / 11</strong>
-          </div>
+          <h4>Синхронизация профиля</h4>
+          <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">Прямая связь с профилем: скины, плащи, статистика улова, баланс и титулы отображаются в игре и на сайте.</p>
         </div>
       </div>
     </div>

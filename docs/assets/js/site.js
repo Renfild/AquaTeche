@@ -1,7 +1,7 @@
 (() => {
   const IP = "g-pl-3.apexnodes.xyz:21561";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.69/AquaTech.exe";
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.75/AquaTech.exe";
   /* portal ui build: nav-cta + online nowrap */
   const CANONICAL = "https://aquateche.store";
   const STORAGE_USER = "aquatech_user";
@@ -93,9 +93,9 @@
 
   const FALLBACK_NEWS = [
     {
-      title: "Лаунчер 2.9.20",
-      body: "Полноэкранный вход, палитра v2, анимации кнопок и мягкие звуки клика.",
-      published_at: "2026-08-08",
+      title: "Лаунчер 2.9.69",
+      body: "Автоматическая загрузка сборки с зеркал, авторизация через портал и самообновление лаунчера.",
+      published_at: "2026-08-17",
     },
     {
       title: "Подключение к серверу",
@@ -103,14 +103,14 @@
       published_at: "2026-08-01",
     },
     {
-      title: "Авторыбалка + StarCatcher",
+      title: "Авторыбалка AquaTech",
       body: "Удочки с кастомным лутом и авторыбалкой на сервере.",
       published_at: "2026-07-15",
     },
   ];
 
   const FALLBACK_PLAYERS = [
-    { nick: "Renfild", privilege: "Создатель", playtime_hours: 340, playtime: "340 ч", coins: 854000, likes: 256, fish: 4890, badges: ["Создатель", "StarCatcher Master", "Deep Ocean", "VIP"], bio: "Основатель проекта AquaTech. Покоритель Бездны.", theme: "ocean" },
+    { nick: "Renfild", privilege: "Создатель", playtime_hours: 340, playtime: "340 ч", coins: 854000, likes: 256, fish: 4890, badges: ["Создатель", "Мастер рыбалки", "Deep Ocean", "VIP"], bio: "Основатель проекта AquaTech. Покоритель Бездны.", theme: "ocean" },
     { nick: "AquaSmoke1", privilege: "Ultimate", playtime_hours: 215, playtime: "215 ч", coins: 490000, likes: 142, fish: 3120, badges: ["Top Fisher", "Ultimate"], bio: "Ловлю рыбу в лаве на Magma Rod.", theme: "deep" },
     { nick: "xietoru", privilege: "Deluxe", playtime_hours: 180, playtime: "180 ч", coins: 345000, likes: 98, fish: 2450, badges: ["Beta Tester", "Deluxe"], bio: "Исследователь биомов и кастомного лута.", theme: "storm" },
     { nick: "VortexHunter", privilege: "VIP", playtime_hours: 120, playtime: "120 ч", coins: 180000, likes: 64, fish: 1780, badges: ["VIP"], bio: "AquaTech Fishing Legend", theme: "abyss" },
@@ -490,7 +490,7 @@
           <div>
             <h4>Игра</h4>
             <a href="start.html">Скачать лаунчер</a>
-            <a href="rods.html">StarCatcher удочки</a>
+            <a href="rods.html">Удочки AquaTech</a>
             <a href="cases.html">Кейсы</a>
             <a href="store.html">Донат</a>
           </div>
@@ -600,7 +600,7 @@
       pills.forEach((el) => {
         el.textContent = online ? `${n} онлайн` : "оффлайн";
       });
-      document.querySelectorAll(".online-pill").forEach((el) => {
+      document.querySelectorAll(".online-pill, .hero-status-pill").forEach((el) => {
         el.classList.toggle("is-offline", !online);
         el.title = online
           ? `Онлайн на сервере: ${n}${data.players_max ? " / " + data.players_max : ""}`
@@ -610,7 +610,7 @@
       pills.forEach((el) => {
         el.textContent = "нет данных";
       });
-      document.querySelectorAll(".online-pill").forEach((el) => {
+      document.querySelectorAll(".online-pill, .hero-status-pill").forEach((el) => {
         el.classList.add("is-offline");
       });
     }
@@ -1029,22 +1029,22 @@
   const CASE_LOOT_TABLES = {
     ocean: [
       { name: "AquaCoins (10 000 — 50 000)", rarity: "common", rarityLabel: "Обычный", chance: "45%" },
-      { name: "Наживка глубоководная ×16", rarity: "common", rarityLabel: "Обычный", chance: "30%" },
-      { name: "Магнитный поплавок ×1", rarity: "rare", rarityLabel: "Редкий", chance: "15%" },
-      { name: "Бустер опыта рыбалки (2ч) ×2", rarity: "epic", rarityLabel: "Эпический", chance: "10%" },
+      { name: "Биогранулы из водорослей ×16", rarity: "common", rarityLabel: "Обычный", chance: "30%" },
+      { name: "Магнит бездны ×1", rarity: "rare", rarityLabel: "Редкий", chance: "15%" },
+      { name: "Бутыльки опыта ×16", rarity: "epic", rarityLabel: "Эпический", chance: "10%" },
     ],
     fisher: [
-      { name: "Коралловая удочка [T6]", rarity: "rare", rarityLabel: "Редкий", chance: "35%" },
-      { name: "Алмазная удочка [T7]", rarity: "rare", rarityLabel: "Редкий", chance: "25%" },
-      { name: "Аметистовая удочка [T8]", rarity: "epic", rarityLabel: "Эпический", chance: "20%" },
-      { name: "Золотая удочка [T9]", rarity: "epic", rarityLabel: "Эпический", chance: "12%" },
-      { name: "Магматическая удочка [T10]", rarity: "legendary", rarityLabel: "Легендарный", chance: "8%" },
+      { name: "Ледяная удочка [T6]", rarity: "rare", rarityLabel: "Редкий", chance: "35%" },
+      { name: "Удочка Ловца Звёзд [T7]", rarity: "rare", rarityLabel: "Редкий", chance: "25%" },
+      { name: "Лазурный кристалл [T8]", rarity: "epic", rarityLabel: "Эпический", chance: "20%" },
+      { name: "Акулий клык [T9]", rarity: "epic", rarityLabel: "Эпический", chance: "12%" },
+      { name: "Магматическая [T10]", rarity: "legendary", rarityLabel: "Легендарный", chance: "8%" },
     ],
     depth: [
-      { name: "Рамка профиля «Глубинная Бездна»", rarity: "rare", rarityLabel: "Редкий", chance: "40%" },
+      { name: "Рамка профиля «Глубинная Бездна» (гемы ×2)", rarity: "rare", rarityLabel: "Редкий", chance: "40%" },
       { name: "250 000 AquaCoins", rarity: "epic", rarityLabel: "Эпический", chance: "30%" },
-      { name: "Привилегия Deluxe на 14 дней", rarity: "epic", rarityLabel: "Эпический", chance: "20%" },
-      { name: "Привилегия Ultimate на 30 дней", rarity: "legendary", rarityLabel: "Легендарный", chance: "10%" },
+      { name: "Привилегия Deluxe 14 дней (гемы ×5)", rarity: "epic", rarityLabel: "Эпический", chance: "20%" },
+      { name: "Привилегия Ultimate 30 дней (гемы ×10)", rarity: "legendary", rarityLabel: "Легендарный", chance: "10%" },
     ],
   };
 
@@ -1165,7 +1165,7 @@
         slug: "fisher",
         title: "Кейс рыбака",
         price_rub: 0,
-        description: "Лут под StarCatcher. Рулетки на сайте нет.",
+        description: "Лут кейсов AquaTech. Рулетки на сайте нет.",
         perks: ["Ресурсы улова", "Буст удочки", "Монеты"],
       },
       {

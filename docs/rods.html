@@ -4,23 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Удочки и лут · AquaTech</title>
-  <meta name="description" content="Шансы дропа ресурсных удочек StarCatcher на AquaTech." />
+  <meta name="description" content="Шансы дропа ресурсных удочек AquaTech: 13 тиров добычи из океана." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260810g" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260819i" />
 </head>
 <body data-page="rods">
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
   
-  <section class="page-hero">
-    <div class="container">
-      <div class="eyebrow" data-site="rods_eyebrow">StarCatcher</div>
-      <h1 data-site="rods_title">Удочки и лут</h1>
-      <p data-site="rods_lead">Ванильный улов выключен. Ресурсные удочки крутят пулы AquaTech; множители ×2…×64 умножают количество.</p>
-      <div class="banner" style="background:radial-gradient(circle at 30% 40%, rgba(245,197,66,.3), transparent 35%), linear-gradient(145deg,#164e63,#0f766e,#083344)"></div>
+  <section class="page-hero start-hero">
+    <div class="container text-center">
+      <div class="eyebrow" data-site="rods_eyebrow">AquaTech</div>
+      <h1 class="start-main-title" data-site="rods_title">Удочки и <span class="gradient-aqua">лут</span></h1>
+      <p class="start-main-lead" data-site="rods_lead">Ванильный улов выключен. Ресурсные удочки крутят пулы AquaTech; множители ×2…×64 умножают количество.</p>
     </div>
   </section>
 
@@ -31,17 +30,8 @@
         <li data-site="rods_rule_1">Каждый предмет в пуле сначала кидает свой шанс.</li>
         <li data-site="rods_rule_2">Из успешно прошедших случайно оставляют 1–3 стака (у T1 доп. пула — 1–2).</li>
         <li data-site="rods_rule_3">Кол-во в стаке — диапазон из таблицы; множитель удочки его умножает.</li>
-        <li data-site="rods_rule_4">Костяная и небесная — только рыба StarCatcher, без ресурсного пула.</li>
+        <li data-site="rods_rule_4">Костяная и небесная ловят только рыбу, без ресурсного пула.</li>
       </ul>
-      <div class="loot-search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="loot-search" placeholder="Поиск предмета или руды в таблицах..." autocomplete="off">
-      </div>
-    </div>
-  </section>
-
-  <div class="loot-sticky-nav">
-    <div class="container">
       <nav class="loot-jump" aria-label="Тиры удочек">
         <a href="#t1">T1</a><a href="#t2">T2</a><a href="#t3">T3</a><a href="#t4">T4</a>
         <a href="#t5">T5</a><a href="#t6">T6</a><a href="#t7">T7</a><a href="#t8">T8</a>
@@ -49,9 +39,7 @@
         <a href="#t13">T13</a><a href="#fish">Рыба</a><a href="#treasure">Treasure</a>
       </nav>
     </div>
-  </div>
-
-  <button id="backToTop" class="back-to-top" title="Наверх" aria-label="Наверх">↑</button>
+  </section>
 
   <section class="section" style="padding-top:0">
     <div class="container loot-stack">
@@ -346,14 +334,14 @@
         <header class="loot-head">
           <div class="rod-tier">Рыба</div>
           <h2>Костяная и небесная</h2>
-          <p>Ресурсный пул AquaTech не крутится — улов как у StarCatcher по умолчанию (рыба).</p>
+          <p>Ресурсный пул AquaTech не крутится — обычный рыбный улов.</p>
         </header>
         <div class="loot-table-wrap">
           <table class="loot-table">
             <thead><tr><th>Удочка</th><th>Поведение</th></tr></thead>
             <tbody>
-              <tr><td>Костяная</td><td>Рыба StarCatcher</td></tr>
-              <tr><td>Небесная</td><td>Рыба StarCatcher</td></tr>
+              <tr><td>Костяная</td><td>Только рыба</td></tr>
+              <tr><td>Небесная</td><td>Только рыба</td></tr>
             </tbody>
           </table>
         </div>

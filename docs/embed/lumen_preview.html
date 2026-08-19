@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaLumen UI Preview · AquaTech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --canvas: #070c12;
+      --surface: #0e151e;
+      --raised: #16202c;
+      --border: rgba(255, 255, 255, 0.15);
+      --border-muted: rgba(255, 255, 255, 0.08);
+      --text: #f2f7fa;
+      --text-dim: #9db2c4;
+      --accent: #2fe0c0;
+      --accent-alt: #3b9dff;
+      --gold: #f5c25b;
+      --success: #4cd08a;
+      --danger: #ff6b6b;
+      --coral: #ff9f43;
+      --purple: #e056fd;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 30%, #0c1824 0%, #070c12 100%);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      gap: 36px;
+      overflow-x: hidden;
+    }
+
+    .title-banner {
+      text-align: center;
+    }
+    .title-banner h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-shadow: 0 0 24px rgba(47, 224, 192, 0.35);
+      margin-bottom: 6px;
+    }
+    .title-banner p {
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+
+    .preview-stage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .preview-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .col-header {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .col-header::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       1. SIDEBAR HUD (Right side in-game overlay)
+       ══════════════════════════════════════════════════════════════ */
+    .hud-box {
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .lumen-card {
+      background: rgba(14, 21, 30, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 16px rgba(47, 224, 192, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .lumen-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(47, 224, 192, 0.4), transparent);
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 28px;
+      height: 28px;
+    }
+    .avatar-img {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      border: 1px solid rgba(47, 224, 192, 0.4);
+      background: #1a2332;
+      image-rendering: pixelated;
+    }
+    .online-dot {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      border: 1px solid #0e151e;
+      box-shadow: 0 0 6px var(--success);
+    }
+
+    .profile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .player-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .rank-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+    .rank-deluxe {
+      background: rgba(47, 224, 192, 0.15);
+      border: 1px solid rgba(47, 224, 192, 0.4);
+      color: var(--accent);
+    }
+    .rank-owner {
+      background: rgba(245, 194, 91, 0.15);
+      border: 1px solid rgba(245, 194, 91, 0.4);
+      color: var(--gold);
+    }
+    .rank-admin {
+      background: rgba(255, 107, 107, 0.15);
+      border: 1px solid rgba(255, 107, 107, 0.4);
+      color: var(--danger);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(47, 224, 192, 0.3), rgba(59, 157, 255, 0.05));
+      margin-bottom: 8px;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(22, 32, 44, 0.6);
+      border: 1px solid var(--border-muted);
+      border-radius: 5px;
+      padding: 4px 8px;
+      margin-bottom: 5px;
+      font-size: 11px;
+    }
+    .metric-row:last-child {
+      margin-bottom: 0;
+    }
+    .metric-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-dim);
+    }
+    .metric-icon {
+      font-size: 11px;
+      color: var(--gold);
+    }
+    .metric-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .metric-value.gold {
+      color: var(--gold);
+    }
+
+    /* Diving Card */
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      color: var(--text-dim);
+    }
+    .stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .stat-val.accent {
+      color: var(--accent);
+    }
+    .stat-val.badge-green {
+      background: rgba(76, 208, 138, 0.15);
+      border: 1px solid rgba(76, 208, 138, 0.4);
+      color: var(--success);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 10px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(22, 32, 44, 0.8);
+      border-radius: 2px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 85%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-alt));
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(47, 224, 192, 0.5);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       2. TAB MENU (Player list overlay)
+       ══════════════════════════════════════════════════════════════ */
+    .tab-modal {
+      width: 640px;
+      background: rgba(14, 21, 30, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 32px rgba(47, 224, 192, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+    .tab-modal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-alt), transparent);
+    }
+
+    .tab-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-shadow: 0 0 12px rgba(47, 224, 192, 0.3);
+    }
+    .brand-sub {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .online-counter-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(76, 208, 138, 0.12);
+      border: 1px solid rgba(76, 208, 138, 0.35);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--success);
+      letter-spacing: 0.04em;
+    }
+    .counter-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    .player-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .player-card {
+      background: rgba(22, 32, 44, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .player-card:hover {
+      border-color: rgba(47, 224, 192, 0.3);
+      transform: translateY(-1px);
+    }
+    .player-card-stripe {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+    }
+
+    .player-info-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tab-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #1a2332;
+      image-rendering: pixelated;
+    }
+    .tab-player-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .tab-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .ping-box {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--success);
+    }
+    .ping-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .tab-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text-dim);
+      padding-top: 4px;
+      border-top: 1px solid var(--border-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="title-banner">
+    <h1>AquaLumen Design Preview</h1>
+    <p>Лаконичный дизайн бокового меню (HUD) и TAB для Minecraft 1.20.1 Forge</p>
+  </div>
+
+  <div class="preview-stage">
+
+    <!-- 1. SIDEBAR HUD OVERLAY -->
+    <div class="preview-col">
+      <div class="col-header">Боковое меню HUD (В игре)</div>
+      <div class="hud-box">
+
+        <!-- Profile Card -->
+        <div class="lumen-card">
+          <div class="profile-top">
+            <div class="avatar-wrap">
+              <img class="avatar-img" src="https://minotar.net/avatar/Renfild/64.png" alt="avatar" />
+              <div class="online-dot"></div>
+            </div>
+            <div class="profile-meta">
+              <div class="player-name">Renfild</div>
+              <div class="rank-pill rank-owner">СОЗДАТЕЛЬ</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="metric-row">
+            <div class="metric-label">
+              <span class="metric-icon">●</span>
+              <span>Баланс</span>
+            </div>
+            <div class="metric-value gold">12 450 AQ</div>
+          </div>
+          <div class="metric-row">
+            <div class="metric-label">
+              <span class="metric-icon" style="color: var(--accent-alt);">●</span>
+              <span>В игре</span>
+            </div>
+            <div class="metric-value">48ч 12м</div>
+          </div>
+        </div>
+
+        <!-- Diving Card -->
+        <div class="lumen-card">
+          <div class="card-header">
+            <span>≋</span>
+            <span>ПОГРУЖЕНИЕ</span>
+          </div>
+          <div class="divider"></div>
+          <div class="stat-line">
+            <span class="stat-label">Глубина</span>
+            <span class="stat-val">124 м</span>
+          </div>
+          <div class="stat-line">
+            <span class="stat-label">Давление</span>
+            <span class="stat-val badge-green">14 bar (норма)</span>
+          </div>
+          <div class="stat-line">
+            <span class="stat-label">Защита</span>
+            <span class="stat-val" style="color: var(--text-dim);">запас 60 м</span>
+          </div>
+          <div class="stat-line" style="margin-top: 6px;">
+            <span class="stat-label">Кислород</span>
+            <span class="stat-val accent">85%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. TAB MENU -->
+    <div class="preview-col">
+      <div class="col-header">Меню игроков TAB (По нажатию TAB)</div>
+      <div class="tab-modal">
+        <div class="tab-header">
+          <div>
+            <div class="brand-title">AQUATECH</div>
+            <div class="brand-sub">OCEAN NETWORK · СБОРКА v2.9.70</div>
+          </div>
+          <div class="online-counter-badge">
+            <div class="counter-dot"></div>
+            <span>4 / 100 ОНЛАЙН</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="player-grid">
+          <!-- Player 1 -->
+          <div class="player-card">
+            <div class="player-card-stripe" style="background: var(--gold);"></div>
+            <div class="player-info-left">
+              <img class="tab-avatar" src="https://minotar.net/avatar/Renfild/64.png" alt="Renfild" />
+              <div class="tab-player-meta">
+                <div class="tab-name">Renfild</div>
+                <div class="rank-pill rank-owner">СОЗДАТЕЛЬ</div>
+              </div>
+            </div>
+            <div class="ping-box">
+              <div class="ping-dot"></div>
+              <span>18ms</span>
+            </div>
+          </div>
+
+          <!-- Player 2 -->
+          <div class="player-card">
+            <div class="player-card-stripe" style="background: var(--danger);"></div>
+            <div class="player-info-left">
+              <img class="tab-avatar" src="https://minotar.net/avatar/AquaDev/64.png" alt="AquaDev" />
+              <div class="tab-player-meta">
+                <div class="tab-name">AquaDev</div>
+                <div class="rank-pill rank-admin">DEV</div>
+              </div>
+            </div>
+            <div class="ping-box">
+              <div class="ping-dot"></div>
+              <span>24ms</span>
+            </div>
+          </div>
+
+          <!-- Player 3 -->
+          <div class="player-card">
+            <div class="player-card-stripe" style="background: var(--accent);"></div>
+            <div class="player-info-left">
+              <img class="tab-avatar" src="https://minotar.net/avatar/OceanExplorer/64.png" alt="OceanExplorer" />
+              <div class="tab-player-meta">
+                <div class="tab-name">OceanExplorer</div>
+                <div class="rank-pill rank-deluxe">DELUXE</div>
+              </div>
+            </div>
+            <div class="ping-box">
+              <div class="ping-dot"></div>
+              <span>32ms</span>
+            </div>
+          </div>
+
+          <!-- Player 4 -->
+          <div class="player-card">
+            <div class="player-card-stripe" style="background: var(--accent-alt);"></div>
+            <div class="player-info-left">
+              <img class="tab-avatar" src="https://minotar.net/avatar/SeaSailor/64.png" alt="SeaSailor" />
+              <div class="tab-player-meta">
+                <div class="tab-name">SeaSailor</div>
+                <div class="rank-pill rank-deluxe" style="background: rgba(59, 157, 255, 0.15); border-color: rgba(59, 157, 255, 0.4); color: var(--accent-alt);">ИГРОК</div>
+              </div>
+            </div>
+            <div class="ping-box">
+              <div class="ping-dot"></div>
+              <span>45ms</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-footer">
+          <span>aquateche.store</span>
+          <span>F4 — Меню · K — Навыки · Удерживайте TAB</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

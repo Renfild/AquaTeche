@@ -45,7 +45,7 @@ def main() -> int:
     env["CLOUDFLARE_API_TOKEN"] = t
     print("[Cloudflare Deploy] Using API Token")
 
-    mode = (sys.argv[1] if len(sys.argv) > 1 else "pages").lower()
+    mode = (sys.argv[1] if len(sys.argv) > 1 else "all").lower()
     wrangler_js = ROOT / "tools" / "tools_npm" / "node_modules" / "wrangler" / "bin" / "wrangler.js"
     if wrangler_js.is_file():
         cmdline = f'node "{wrangler_js}"'
@@ -53,20 +53,20 @@ def main() -> int:
         npx = r"C:\PROGRA~1\nodejs\npx.cmd" if os.name == "nt" else "npx"
         cmdline = f'"{npx}" --yes wrangler@latest'
 
-    if mode == "worker":
-        cmd = f'{cmdline} deploy -c wrangler.worker.toml'
-    else:
-        cmd = f'{cmdline} pages deploy "{DOCS}" --project-name {PROJECT} --commit-dirty=true'
+    commands = []
+    if mode in ("worker", "all"):
+        commands.append((f'{cmdline} deploy -c wrangler.worker.toml', "worker", "https://aquateche.store"))
+    if mode in ("pages", "all"):
+        commands.append((f'{cmdline} pages deploy "{DOCS}" --project-name {PROJECT} --commit-dirty=true', "pages", "https://aquatech-7gs.pages.dev"))
 
-    print("Deploying", mode, "->", PROJECT)
-    print(" ", cmd)
-    res = subprocess.run(cmd, cwd=str(ROOT), env=env, shell=True)
-    if res.returncode == 0:
-        if mode == "worker":
-            print("OK https://aquateche.store")
-        else:
-            print("OK https://aquatech-7gs.pages.dev")
-    return res.returncode
+    for cmd, name, url in commands:
+        print("Deploying", name, "->", PROJECT)
+        print(" ", cmd)
+        res = subprocess.run(cmd, cwd=str(ROOT), env=env, shell=True)
+        if res.returncode != 0:
+            return res.returncode
+        print("OK", url)
+    return 0
 
 
 if __name__ == "__main__":

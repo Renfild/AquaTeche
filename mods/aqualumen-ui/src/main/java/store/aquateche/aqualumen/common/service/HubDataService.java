@@ -110,15 +110,27 @@ public final class HubDataService {
                 playtimeMinutes, kills, deaths, completedQuests,
                 Math.max(0, server.getPlayerCount() - 1));
 
-        HubSnapshot.Wallet wallet = new HubSnapshot.Wallet(coins, gems, 0, false);
+        HubSnapshot.Wallet wallet = new HubSnapshot.Wallet(coins, gems,
+                HubEconomy.dailyStreak(player), HubEconomy.dailyAvailable(player));
 
         int maxTier = LumenConfig.COMMON.seasonMaxTier.get();
         int tier = Math.min(maxTier, level);
         HubSnapshot.Season season = new HubSnapshot.Season(LumenConfig.COMMON.seasonTitle.get(),
                 tier, maxTier, levelProgress, false, /* TODO bridge: claimable rewards */ 0);
 
-        return new HubSnapshot(profile, wallet, season, tops(server, player), defaultStore(), defaultCases(),
+        return new HubSnapshot(profile, wallet, season, tops(server, player), defaultStore(), cases(coins),
                 serverInfo(server));
+    }
+
+    /** Cases from config/aqualumen/cases.json; count shows how many the player can afford. */
+    private static List<HubSnapshot.CaseEntry> cases(long coins) {
+        List<HubSnapshot.CaseEntry> entries = new ArrayList<>();
+        for (CaseConfig.CaseDef def : CaseConfig.get().cases) {
+            int count = def.costCoins > 0 ? (int) Math.min(999L, coins / def.costCoins) : 0;
+            entries.add(new HubSnapshot.CaseEntry(def.id,
+                    def.title + " \u00b7 " + def.costCoins + " \u043c\u043e\u043d\u0435\u0442", count, def.rarity));
+        }
+        return entries;
     }
 
     private static HubSnapshot.ServerInfo serverInfo(MinecraftServer server) {
@@ -167,14 +179,6 @@ public final class HubDataService {
                 new HubSnapshot.Offer("boost.xp", "\u0411\u0443\u0441\u0442 \u043e\u043f\u044b\u0442\u0430 x2", "\u0414\u0435\u0439\u0441\u0442\u0432\u0443\u0435\u0442 2 \u0447\u0430\u0441\u0430", 60, "coins", "", false),
                 new HubSnapshot.Offer("pet.axolotl", "\u041f\u0438\u0442\u043e\u043c\u0435\u0446 \u0410\u043a\u0441\u043e\u043b\u043e\u0442\u043b\u044c", "\u041a\u043e\u0441\u043c\u0435\u0442\u0438\u043a\u0430", 240, "gems", "NEW", false),
                 new HubSnapshot.Offer("home.slot", "+1 \u0442\u043e\u0447\u043a\u0430 \u0434\u043e\u043c\u0430", "\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e", 150, "coins", "", false));
-    }
-
-    /** TODO bridge: replace with the real case inventory. */
-    private static List<HubSnapshot.CaseEntry> defaultCases() {
-        return List.of(
-                new HubSnapshot.CaseEntry("case.common", "\u041e\u0431\u044b\u0447\u043d\u044b\u0439 \u043a\u0435\u0439\u0441", 3, "common"),
-                new HubSnapshot.CaseEntry("case.rare", "\u0420\u0435\u0434\u043a\u0438\u0439 \u043a\u0435\u0439\u0441", 1, "rare"),
-                new HubSnapshot.CaseEntry("case.abyss", "\u0410\u0431\u0438\u0441\u0441\u0430\u043b\u044c\u043d\u044b\u0439 \u043a\u0435\u0439\u0441", 0, "legendary"));
     }
 
     private static long score(ServerPlayer player, String objectiveName) {

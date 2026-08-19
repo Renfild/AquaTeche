@@ -4,5 +4,5 @@ permissions:
 parents:
 - default
 prefixes:
-- " ":
+- '&a&l[СТРОИТЕЛЬ] &a':
     priority: 28

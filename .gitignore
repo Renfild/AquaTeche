@@ -106,3 +106,7 @@ tools/_playit/
 tools/_asm/*.jar
 tools/_asm/*.class
 bootstrap/AquaTech.exe
+
+# Portal sync secret (provision on server only)
+server/config/aquatech_sync_key.json
+server/plugins/*.bak

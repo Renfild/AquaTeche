@@ -12,8 +12,8 @@
     <Description>AquaTech Minecraft 1.20.1 Forge Game Launcher</Description>
     <Product>AquaTech</Product>
     <Copyright>Copyright © 2026 AquaTech</Copyright>
-    <AssemblyVersion>2.9.69.0</AssemblyVersion>
-    <FileVersion>2.9.69.0</FileVersion>
+    <AssemblyVersion>2.9.75.0</AssemblyVersion>
+    <FileVersion>2.9.75.0</FileVersion>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishSingleFile>true</PublishSingleFile>

@@ -205,7 +205,15 @@ def upload_release(version: str, files: list[Path]) -> None:
             data=file_data,
             content_type="application/octet-stream",
         )
-    print(f"[+] Successfully published release {tag} (Draft ID: {release_id})")
+
+    _, published = gh_api(
+        "PATCH",
+        f"https://api.github.com/repos/{REPO}/releases/{release_id}",
+        gh_token,
+        data=json.dumps({"draft": False, "make_latest": "true"}).encode(),
+        content_type="application/json",
+    )
+    print(f"[+] Successfully published release {tag} ({published.get('html_url')})")
 
 
 def main() -> None:

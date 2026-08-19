@@ -308,7 +308,7 @@
   function toast(text) {clearTimeout(state.toastTimer);$("toast").textContent=text;$("toast").classList.add("show");state.toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2200)}
   $("refresh").onclick=()=>{action("hub.refresh");toast("Запрос отправлен")};
   $("close").onclick=()=>action("hub.close");
-  $("dailyClaim").onclick=()=>{action("daily.claim");unavailable()};
+  $("dailyClaim").onclick=()=>action("daily.claim");
   $("modalCancel").onclick=closeModal;
   $("modalLayer").onclick=e=>{if(e.target===$("modalLayer"))closeModal()};
   $("modalConfirm").onclick=()=>{if(state.modalAction){action(state.modalAction.name,state.modalAction.argument);unavailable()}closeModal()};

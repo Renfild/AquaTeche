@@ -1,0 +1,70 @@
+package net.aquatech.ui.client.theme;
+
+/**
+ * Clean, modern color tokens for the AquaLumen design system.
+ */
+public record LumenTheme(
+        int canvas,
+        int surface,
+        int surfaceElevated,
+        int raised,
+        int border,
+        int borderMuted,
+        int text,
+        int textDim,
+        int accent,
+        int accentAlt,
+        int gold,
+        int danger,
+        int success
+) {
+
+    public static final LumenTheme AQUA = new LumenTheme(
+            0xFF070C12, // deep dark navy canvas
+            0xFF0E151E, // card surface
+            0xFF121B27, // elevated surface
+            0xFF16202C, // raised hover / row background
+            0x26FFFFFF, // crisp 15% white glass border
+            0x14FFFFFF, // subtle 8% white separator border
+            0xFFF2F7FA, // pure bright text
+            0xFF9DB2C4, // muted slate text
+            0xFF2FE0C0, // electric turquoise / aqua accent
+            0xFF3B9DFF, // vibrant azure blue
+            0xFFF5C25B, // warm gold
+            0xFFFF6B6B, // danger / high latency coral red
+            0xFF4CD08A  // online mint green
+    );
+
+    private static final LumenTheme INSTANCE = AQUA;
+
+    public static LumenTheme get() {
+        return INSTANCE;
+    }
+
+    public int panelAlpha(float opacity) {
+        int a = (int) (Math.min(1.0F, Math.max(0.0F, opacity)) * 255.0F);
+        return (a << 24) | (surface & 0x00FFFFFF);
+    }
+
+    public int accentAlpha(float opacity) {
+        int a = (int) (Math.min(1.0F, Math.max(0.0F, opacity)) * 255.0F);
+        return (a << 24) | (accent & 0x00FFFFFF);
+    }
+
+    public static int getRankColor(String rankId) {
+        if (rankId == null) return 0xFF3B9DFF;
+        String id = rankId.toLowerCase(java.util.Locale.ROOT).trim();
+        return switch (id) {
+            case "owner", "создатель" -> 0xFFF5C25B; // Gold
+            case "admin", "администратор", "dev", "developer" -> 0xFFFF6B6B; // Coral Red
+            case "mod", "moderator", "модератор" -> 0xFFFF9F43; // Orange
+            case "deluxe", "делюкс" -> 0xFF2FE0C0; // Electric Aqua
+            case "ultimate", "ультимейт" -> 0xFF00E5FF; // Bright Cyan
+            case "legend", "легенда" -> 0xFFE056FD; // Neon Purple
+            case "vip", "вип", "premium", "премиум" -> 0xFFFEEAA7; // Pale Gold / Yellow
+            case "admiral", "адмирал" -> 0xFFA29BFE; // Lavender
+            case "captain", "капитан" -> 0xFF74B9FF; // Sky Blue
+            default -> 0xFF81ECEC; // Default Player Soft Mint
+        };
+    }
+}

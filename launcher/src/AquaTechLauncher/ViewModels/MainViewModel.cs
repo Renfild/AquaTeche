@@ -80,7 +80,7 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private string _authError = "";
     [ObservableProperty] private bool _authBusy;
     [ObservableProperty] private string _accountBadge = "Игрок";
-    [ObservableProperty] private string _coinsText = "0 💰";
+    [ObservableProperty] private string _coinsText = "0 монет";
     [ObservableProperty] private string _hoursText = "0 ч";
 
     public ObservableCollection<LogLine> LogLines { get; } = [];
@@ -349,7 +349,7 @@ public partial class MainViewModel : ViewModelBase
         HttpDownload.SetPortalSession(session);
         IsLoggedIn = true;
         AccountBadge = profile.IsAdmin ? "Админ" : "Игрок";
-        CoinsText = $"{profile.Coins} 💰";
+        CoinsText = $"{profile.Coins} монет";
         HoursText = $"{profile.HoursPlayed} ч";
         NeedsAuth = false;
         AuthChecking = false;
