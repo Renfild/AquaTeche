@@ -5,7 +5,7 @@
 	cave_biome_mean_width = 300.0
 	#Average separation (in blocks) between each Alex's Caves cave biome.
 	#Range: > 50
-	cave_biome_mean_separation = 900
+	cave_biome_mean_separation = 400
 	#How irregularly shaped Alex's Caves cave biomes can generate. 0 = all biomes nearly circular. 1 = biomes completely squiggly in shape.
 	#Range: 0.0 ~ 1.0
 	cave_biome_width_randomness = 0.15
@@ -18,7 +18,7 @@
 [mob-spawning]
 	#Cave Creatures (All dinosaurs, raycats, etc) spawn at this frequency. Their cap is calculated by multiplying this number with the default mob cap for surface animals.
 	#Range: 0.0 ~ 10.0
-	cave_creature_spawn_count_modifier = 1.75
+	cave_creature_spawn_count_modifier = 2.5
 	#The percent chance that drowned have to spawn wearing diving gear in the Abyssal Chasm. 0 = no diving gear wearing drowned will spawn
 	#Range: 0.0 ~ 1.0
 	drowned_diving_gear_spawn_chance = 0.2
