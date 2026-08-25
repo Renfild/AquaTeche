@@ -58,12 +58,12 @@ messages:
 # [!] If you're not using ssl, change sslMode=trust to sslMode=disable [!]
 database:
     # Database backend selection. Valid values: FILE, MYSQL, POSTGRESQL.
-    type: MYSQL
-    host: __AQUATECH_MYSQL_HOST__
+    type: FILE
+    host: localhost
     port: 3306
-    database: __AQUATECH_MYSQL_DATABASE__
-    username: __AQUATECH_MYSQL_USER__
-    password: __AQUATECH_MYSQL_PASSWORD__
+    database: db
+    username: root
+    password: pass
     maxPoolSize: 10
     tablePrefix: sr_
     connectionOptions: sslMode=disable&serverTimezone=UTC&allowPublicKeyRetrieval=true
