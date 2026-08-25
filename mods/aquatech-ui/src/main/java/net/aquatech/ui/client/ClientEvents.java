@@ -31,6 +31,13 @@ public final class ClientEvents {
             "key.categories.aquatech_ui"
     );
 
+    public static final KeyMapping KEY_MARKET = new KeyMapping(
+            "key.aquatech_ui.market",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_F4,
+            "key.categories.aquatech_ui"
+    );
+
     private ClientEvents() {
     }
 
@@ -52,6 +59,11 @@ public final class ClientEvents {
                 "rhythm_hook",
                 (gui, graphics, partialTick, screenWidth, screenHeight) ->
                         net.aquatech.ui.client.hud.RhythmHookOverlay.render(graphics, partialTick)
+        );
+        event.registerAboveAll(
+                "aqua_chat",
+                (gui, graphics, partialTick, screenWidth, screenHeight) ->
+                        net.aquatech.ui.client.chat.AquaChatOverlay.render(graphics, partialTick)
         );
     }
 
@@ -95,6 +107,19 @@ public final class ClientEvents {
         if (wasOpen && !tabHeld) {
             OceanTabOverlay.resetScroll();
         }
+
+        while (KEY_MARKET.consumeClick()) {
+            if (mc.player != null) {
+                try {
+                    Class<?> client = Class.forName("store.aquateche.aqualumen.client.LumenClient");
+                    client.getMethod("openScreen", String.class).invoke(null, "fishing");
+                } catch (Throwable t) {
+                    if (mc.player.connection != null) {
+                        mc.player.connection.sendCommand("shop");
+                    }
+                }
+            }
+        }
     }
 
     // InputEvent.Key is NOT cancelable on Forge 1.20.1 — keys are suppressed in
@@ -136,17 +161,20 @@ public final class ClientEvents {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onOverlayPre(RenderGuiOverlayEvent.Pre event) {
         ResourceLocation id = event.getOverlay().id();
-        if (VanillaGuiOverlay.PLAYER_LIST.type().equals(id)) {
+        if (VanillaGuiOverlay.PLAYER_LIST.id().equals(id)) {
             Minecraft.getInstance().gui.getTabList().setVisible(false);
             event.setCanceled(true);
         }
-        if (VanillaGuiOverlay.SCOREBOARD.type().equals(id)) {
+        if (VanillaGuiOverlay.SCOREBOARD.id().equals(id)) {
+            event.setCanceled(true);
+        }
+        if (VanillaGuiOverlay.CHAT_PANEL.id().equals(id)) {
             event.setCanceled(true);
         }
         // Мини-игра: нижние тексты (имя предмета / record overlay) налезают на UI
         if (RhythmHookOverlay.isActive()
-                && (VanillaGuiOverlay.ITEM_NAME.type().equals(id)
-                || VanillaGuiOverlay.RECORD_OVERLAY.type().equals(id))) {
+                && (VanillaGuiOverlay.ITEM_NAME.id().equals(id)
+                || VanillaGuiOverlay.RECORD_OVERLAY.id().equals(id))) {
             event.setCanceled(true);
         }
     }
@@ -154,6 +182,10 @@ public final class ClientEvents {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onClientChatReceived(net.minecraftforge.client.event.ClientChatReceivedEvent event) {
         if (event.getMessage() == null) return;
+        if (event instanceof net.minecraftforge.client.event.ClientChatReceivedEvent.System sys && sys.isOverlay()) {
+            return; // Don't intercept Action Bar messages
+        }
+
         String text = event.getMessage().getString().toLowerCase();
         if (text.contains("промышленная модернизация")
                 || text.contains("industrial upgrade")
@@ -162,6 +194,33 @@ public final class ClientEvents {
                 || text.contains("руководство industrial")
                 || text.contains("industrialupgrade")) {
             event.setCanceled(true);
+            return;
+        }
+        net.aquatech.ui.client.chat.AquaChatManager.addMessage(event.getMessage());
+        event.setCanceled(true);
+    }
+
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onScreenOpen(net.minecraftforge.client.event.ScreenEvent.Opening event) {
+        if (event.getNewScreen() instanceof net.minecraft.client.gui.screens.ChatScreen vanillaChat
+                && !(event.getNewScreen() instanceof net.aquatech.ui.client.chat.AquaChatScreen)) {
+            String initial = "";
+            try {
+                for (java.lang.reflect.Field f : net.minecraft.client.gui.screens.ChatScreen.class.getDeclaredFields()) {
+                    if (f.getType() == String.class) {
+                        f.setAccessible(true);
+                        Object val = f.get(vanillaChat);
+                        if (val instanceof String s && !s.isEmpty()) {
+                            initial = s;
+                            break;
+                        }
+                    }
+                }
+            } catch (Throwable ignored) {
+            }
+            event.setNewScreen(new net.aquatech.ui.client.chat.AquaChatScreen(initial));
         }
     }
 }
+

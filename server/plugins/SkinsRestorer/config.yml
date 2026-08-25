@@ -60,7 +60,7 @@ database:
     # Database backend selection. Valid values: FILE, MYSQL, POSTGRESQL.
     type: MYSQL
     host: __AQUATECH_MYSQL_HOST__
-    port: __AQUATECH_MYSQL_PORT__
+    port: 3306
     database: __AQUATECH_MYSQL_DATABASE__
     username: __AQUATECH_MYSQL_USER__
     password: __AQUATECH_MYSQL_PASSWORD__

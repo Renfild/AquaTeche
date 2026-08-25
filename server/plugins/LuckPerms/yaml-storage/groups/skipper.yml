@@ -6,4 +6,4 @@ parents:
 - sailor
 prefixes:
 - '&3&l[ШКИПЕР] &3':
-    priority: 40
+    priority: 25

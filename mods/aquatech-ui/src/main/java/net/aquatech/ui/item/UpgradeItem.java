@@ -15,7 +15,8 @@ public class UpgradeItem extends Item {
     public enum UpgradeType {
         SPEED("speed", "Модуль ускорения", "Увеличивает скорость работы механизма"),
         SPEED_X4("speed_x4", "Модуль ускорения ×4", "Максимально ускоряет работу механизма в 4 раза (прогресс +4 за тик)"),
-        EFFICIENCY("efficiency", "Модуль энергоэффективности", "Снижает потребление энергии FE на 50%");
+        EFFICIENCY("efficiency", "Модуль энергоэффективности", "Снижает потребление энергии FE на 50%"),
+        OCEAN_BOUNTY("ocean_bounty", "Модуль океанического изобилия", "Авторыболов вылавливает ценную рыбу StarCatcher всех типов для продажи скупщику рыбы");
 
         private final String id;
         private final String russianName;

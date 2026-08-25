@@ -1,3 +1,38 @@
+export function cleanPrivilege(priv) {
+  if (!priv) return "Игрок";
+  let s = String(priv)
+    .replace(/[\uE000-\uF8FF\uD800-\uDFFF]/g, "")
+    .replace(/§[0-9a-fk-or]/gi, "")
+    .trim();
+  s = s.replace(/^[\[\(<]+/, "").replace(/[\]\)>]+$/, "").trim();
+  const low = s.toLowerCase();
+  if (!s || low === "default" || low === "player" || low === "игрок" || low === "матрос" || low === "пролог") return "Игрок";
+  if (low.includes("owner") || low.includes("создател") || low.includes("владел")) return "Владелец";
+  if (low.includes("admin") || low.includes("админ")) return "Админ";
+  if (low.includes("dev") || low.includes("разраб")) return "Разработчик";
+  if (low.includes("mod") || low.includes("модер")) return "Модератор";
+  if (low.includes("helper") || low.includes("хелпер")) return "Хелпер";
+  if (low.includes("manager") || low.includes("куратор") || low.includes("менеджер")) return "Куратор";
+  if (low.includes("staff") || low.includes("персонал")) return "Персонал";
+  if (low.includes("vipplus") || low.includes("vip+")) return "VIP+";
+  if (low.includes("vip")) return "VIP";
+  if (low.includes("deluxe") || low.includes("делюкс")) return "Deluxe";
+  if (low.includes("ultimate") || low.includes("ультимейт")) return "Ultimate";
+  if (low.includes("legend") || low.includes("легенд")) return "Легенда";
+  if (low.includes("admiral") || low.includes("адмирал")) return "Адмирал";
+  if (low.includes("captain") || low.includes("капитан")) return "Капитан";
+  if (low.includes("skipper") || low.includes("шкипер")) return "Шкипер";
+  if (low.includes("sailor") || low.includes("моряк")) return "Моряк";
+  if (low.includes("streamer") || low.includes("стример") || low.includes("twitch")) return "Стример";
+  if (low.includes("youtuber") || low.includes("ютубер") || low.includes("youtube")) return "YouTuber";
+  if (low.includes("artist") || low.includes("артист")) return "Артист";
+  if (low.includes("builder") || low.includes("билдер") || low.includes("строитель")) return "Билдер";
+  if (low.includes("friend") || low.includes("друг")) return "Друг";
+  if (low.includes("trainee") || low.includes("стажер") || low.includes("стажёр")) return "Стажер";
+  return s;
+}
+
+
 export function computePlayerBadges(row) {
   const list = [];
   let manual = [];
@@ -69,9 +104,9 @@ export function computePlayerBadges(row) {
   }
 
   // 5. Privilege / Staff badges
-  const priv = String(row.privilege || "").trim();
+  const priv = cleanPrivilege(row.privilege);
   if (priv && priv !== "Игрок") {
-    const isStaff = ["Создатель", "Owner", "Admin", "Разработчик", "Developer", "Управляющий", "Manager"].includes(priv);
+    const isStaff = ["Создатель", "Владелец", "Owner", "Админ", "Admin", "Разработчик", "Developer", "Управляющий", "Manager"].includes(priv);
     list.push({
       title: priv,
       rarity: isStaff ? "legendary" : "epic",
@@ -101,6 +136,7 @@ export function mapProfile(row) {
   } catch {
     learnedSkills = ["origin"];
   }
+  const cleanPriv = cleanPrivilege(row.privilege);
   return {
     nick: row.nick,
     bio: row.bio || "Исследователь глубин AquaTech.",
@@ -110,7 +146,7 @@ export function mapProfile(row) {
     social_tg: row.social_tg || "",
     social_vk: row.social_vk || "",
     social_discord: row.social_discord || "",
-    privilege: row.privilege || "Игрок",
+    privilege: cleanPriv,
     coins: row.coins ?? 0,
     likes: row.likes ?? 0,
     fish: row.fish ?? 0,

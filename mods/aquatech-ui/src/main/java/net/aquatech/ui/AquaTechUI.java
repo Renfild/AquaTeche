@@ -39,8 +39,11 @@ public class AquaTechUI {
         ModItems.register(modBus);
         ModBlockEntities.register(modBus);
         ModMenuTypes.register(modBus);
-        ModCreativeTabs.register(modBus);
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            ModCreativeTabs.register(modBus);
+        }
         ModSounds.register(modBus);
+
 
         modBus.addListener(net.aquatech.ui.capability.AquaSkillCapability::register);
 

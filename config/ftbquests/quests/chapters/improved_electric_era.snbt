@@ -1,0 +1,1666 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "improved_electric_era"
+	group: ""
+	icon: "industrialupgrade:basemachine3/pallet_generator"
+	id: "5CB739BB1BDB799A"
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Электрический лазерный полировщик. Точно обрабатывает"
+				"кристаллы и детали, которым нужна чистая поверхность."
+			]
+			id: "2F3318CF641E793D"
+			rewards: [{
+				id: "00848F8EAB0BC20A"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "0361FE368316CB82"
+				item: "industrialupgrade:basemachine3/laser_polisher"
+				type: "item"
+			}]
+			title: "Лазерный полировщик"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2F3318CF641E793D"]
+			description: [
+				"Автоматически работает с грядками и растениями в зоне"
+				"действия. Берёт на себя рутинный уход за посевами."
+			]
+			id: "62DB17D90A3021C8"
+			rewards: [{
+				id: "60D14D0BD066ADF1"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "07783CDD8C256C74"
+				item: "industrialupgrade:moremachine3/farmer"
+				type: "item"
+			}]
+			title: "Автономная ферма"
+			x: 1.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["62DB17D90A3021C8"]
+			description: [
+				"Удобрение для ускорения роста растений. Используется в"
+				"аграрных механиках и автоматических фермах."
+			]
+			id: "0DE9504EB3737C7E"
+			rewards: [{
+				id: "D1F8E2FC1CA430B8"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "C1CE87E49ECB1F5D"
+				item: "industrialupgrade:fertilizer"
+				type: "item"
+			}]
+			title: "Удобрение"
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["0DE9504EB3737C7E"]
+			description: [
+				"Одиночная агроферма для одного участка культуры."
+				"Следит за растением и выполняет операции ухода в своей"
+				"зоне."
+			]
+			id: "AAF0D8A675B13EE8"
+			rewards: [{
+				id: "72C60B083569242E"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "796A3F87FC950879"
+				item: "industrialupgrade:basemachine3/single_multi_crop"
+				type: "item"
+			}]
+			title: "Одиночная агроферма"
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["2F3318CF641E793D"]
+			description: [
+				"Карьер для щёлочноземельных ресурсов. Добывает"
+				"специальные минеральные материалы из подходящих"
+				"залежей."
+			]
+			id: "D3F183ED3D2ABCEE"
+			rewards: [{
+				id: "7E30501C02F444D1"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "CCDF132F8CF9914D"
+				item: "industrialupgrade:basemachine3/alkalineearthquarry"
+				type: "item"
+			}]
+			title: "Щёлочноземельный рудник"
+			x: 1.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["D3F183ED3D2ABCEE"]
+			description: [
+				"Стальная сетка для фильтрации и армирования."
+				"Используется в машинах, где материал нужно просеять или"
+				"усилить."
+			]
+			id: "8FE8B5654AAE3F5A"
+			rewards: [{
+				id: "124ACDAA40D44209"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "5E18ACF5E59165FF"
+				item: "industrialupgrade:steelMesh"
+				type: "item"
+			}]
+			title: "Steelmesh"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["8FE8B5654AAE3F5A"]
+			description: [
+				"Лёгкий металл для аккумуляторов и специальных сплавов."
+				"Особенно полезен в энергетических компонентах."
+			]
+			id: "56246C18C422E34C"
+			rewards: [{
+				id: "75184087C31397F7"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "CCA8410D354A87B3"
+				item: "industrialupgrade:baseore1/lithium"
+				type: "item"
+			}]
+			title: "Литиевая пыль"
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["56246C18C422E34C"]
+			description: [
+				"Перезаряжаемый аккумулятор. Хранит EF в предмете и"
+				"отдаёт её машинам или инструментам, которые"
+				"поддерживают зарядку."
+			]
+			id: "B5DB958756F4FC3E"
+			rewards: [{
+				id: "BB44FA8BCC964C74"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "7711021F63E54AD8"
+				item: "industrialupgrade:reBattery"
+				type: "item"
+			}]
+			title: "Rebattery"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["B5DB958756F4FC3E"]
+			description: [
+				"Планировщик многоблоков. Показывает схему конструкции"
+				"и помогает проверять правильность сборки перед"
+				"запуском."
+			]
+			id: "F2969B60F0B9B13F"
+			rewards: [{
+				id: "978E2CDF096E7668"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "8D4A3B47F6BF5F55"
+				item: "industrialupgrade:tools/multiblock_planner"
+				type: "item"
+			}]
+			title: "Планировщик многоблочных структур"
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["B5DB958756F4FC3E"]
+			description: [
+				"Инструмент разведки нефтяных залежей. Помогает найти и"
+				"проверить месторождения нефти."
+			]
+			id: "7BD2D9ADCEABA098"
+			rewards: [{
+				id: "CACDA28B3758690E"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "AB90216B1B46DDAA"
+				item: "industrialupgrade:oilgetter"
+				type: "item"
+			}]
+			title: "Oilgetter"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7BD2D9ADCEABA098"]
+			description: [
+				"Нефтяная буровая установка. Добывает нефть из"
+				"найденной залежи и передаёт её в жидкостную"
+				"переработку."
+			]
+			id: "C6073EA9E2635052"
+			rewards: [{
+				id: "88A4D6E0F593CFAB"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "82B080AED9702F05"
+				item: "industrialupgrade:oilquarry"
+				type: "item"
+			}]
+			title: "Oilquarry"
+			x: 5.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["7BD2D9ADCEABA098"]
+			description: [
+				"Продвинутый нефтеперерабатывающий завод. Разделяет"
+				"нефть на более полезные топливные и химические фракции."
+			]
+			id: "2A7955582C506033"
+			rewards: [{
+				id: "ABDF1EDF7ED83F81"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "6DA54588054D0800"
+				item: "industrialupgrade:oiladvrefiner"
+				type: "item"
+			}]
+			title: "Oiladvrefiner"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2A7955582C506033"]
+			description: [
+				"Коксовая печь для медленной термической переработки"
+				"топлива и органики. Даёт продукты, нужные металлургии и"
+				"химии."
+			]
+			id: "B174779ED4C9E3B3"
+			rewards: [{
+				id: "9A841EBC08BCF1DE"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "3EA40BF59D12C85C"
+				item: "industrialupgrade:adv_cokeoven/adv_coke_oven_output_fluid"
+				type: "item"
+			}]
+			title: "§eЖидкостный выход улучшенной коксовой печи"
+			x: 7.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["B174779ED4C9E3B3"]
+			description: [
+				"Дозиметр показывает уровень радиации. Нужен для"
+				"проверки опасных зон, радиоактивных предметов и ядерных"
+				"установок."
+			]
+			id: "C49A05881C04019E"
+			rewards: [{
+				id: "7AB779EFF1F849A9"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "B17D5BC81409B46B"
+				item: "industrialupgrade:dosimeter"
+				type: "item"
+			}]
+			title: "Dosimeter"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["C49A05881C04019E"]
+			description: [
+				"Средство защиты от радиационного воздействия. Снижает"
+				"опасность при работе с радиоактивными материалами."
+			]
+			id: "DE9673A9D652CE27"
+			rewards: [{
+				id: "5C7492927A106BB0"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "D3BE1660B4C6381F"
+				item: "industrialupgrade:tools/radioprotector"
+				type: "item"
+			}]
+			title: "Radioprotector"
+			x: 9.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["C49A05881C04019E"]
+			description: [
+				"Защитный костюм для опасной среды. Помогает пережить"
+				"радиацию, загрязнение и химические риски при работе с"
+				"опасными механизмами."
+			]
+			id: "BE0F3CB885527429"
+			rewards: [{
+				id: "EB6344BD16305A2D"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "7B2F97A99DC13FE6"
+				item: "industrialupgrade:armour/hazmat_leggings"
+				type: "item"
+			}]
+			title: "Защитные штаны"
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["BE0F3CB885527429"]
+			description: [
+				"Собирает детали топливных стержней для реакторов."
+				"Работает с оболочками, топливом и компонентами ядерной"
+				"цепочки."
+			]
+			id: "5CDD60C29B5FD0FF"
+			rewards: [{
+				id: "2DA654974156D0EB"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "5D68509232CFFDED"
+				item: "industrialupgrade:basemachine3/reactor_rod_factory"
+				type: "item"
+			}]
+			title: "Производитель реакторных стержней"
+			x: 7.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["5CDD60C29B5FD0FF"]
+			description: [
+				"Урановый топливный стержень для реактора. Выделяет"
+				"тепло и энергию в ядерной установке, постепенно"
+				"вырабатывая ресурс."
+			]
+			id: "A95A3062BBB49E76"
+			rewards: [{
+				id: "CA9B414A02024F72"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "A2BDF2E517FA49ED"
+				item: "industrialupgrade:reactors/uranium_fuel_rod"
+				type: "item"
+			}]
+			title: "Урановый стержень"
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["A95A3062BBB49E76"]
+			description: [
+				"Свинцовый контейнер для радиоактивных предметов."
+				"Изолирует опасный материал и уменьшает риск при"
+				"хранении или переноске."
+			]
+			id: "01C7138572D04138"
+			rewards: [{
+				id: "0031843F3E1DDFEA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "56CA3E91B665445A"
+				item: "industrialupgrade:leadbox"
+				type: "item"
+			}]
+			title: "Leadbox"
+			x: 5.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["A95A3062BBB49E76"]
+			description: [
+				"Топливные гранулы для ядерной цепочки. Используются"
+				"как подготовленная форма радиоактивного материала."
+			]
+			id: "C201F274E8EAEEC4"
+			rewards: [{
+				id: "ACDDDDCB4B893DD8"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "274DD9CE0166BA7C"
+				item: "industrialupgrade:pellets/mendelevium_gem_pellet"
+				type: "item"
+			}]
+			title: "Пеллета менделеева"
+			x: 7.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["C201F274E8EAEEC4"]
+			description: [
+				"Формирует топливные гранулы из подготовленного"
+				"материала. Используется перед сборкой ядерного топлива."
+			]
+			id: "71B4B29D9B722ADD"
+			rewards: [{
+				id: "0DC5F4709F9184D7"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "5EDBB859F2A3AB6C"
+				item: "industrialupgrade:basemachine3/pallet_generator"
+				type: "item"
+			}]
+			title: "Радиоизотопный термоэлектрический генератор"
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["BE0F3CB885527429"]
+			description: [
+				"Кабель или труба для радиационной системы. Передаёт"
+				"соответствующий ресурс между ядерными блоками."
+			]
+			id: "6928EBF0BD4534DF"
+			rewards: [{
+				id: "2BC878AF4058CFF9"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "AF338C38EE89F11A"
+				item: "industrialupgrade:radcable/rad_cable_radcable"
+				type: "item"
+			}]
+			title: "Radcable"
+			x: 9.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["6928EBF0BD4534DF"]
+			description: [
+				"Блок аварийной защиты реактора. Следит за опасными"
+				"состояниями и помогает снизить риск неконтролируемой"
+				"работы."
+			]
+			id: "59E975BC6DA45CDD"
+			rewards: [{
+				id: "80B1A3368DC184F5"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "41D4E53D9F421614"
+				item: "industrialupgrade:basemachine3/reactor_safety_doom"
+				type: "item"
+			}]
+			title: "Защитный купол реактора"
+			x: 10.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["59E975BC6DA45CDD"]
+			description: [
+				"Контроллер реакторной установки. Управляет"
+				"многоблочной схемой охлаждения и рабочими частями"
+				"реактора."
+			]
+			id: "278C67C3AAC40F73"
+			rewards: [{
+				id: "921382B9289EC41A"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "4C0B29C165771431"
+				item: "industrialupgrade:water_reactors/water_controller"
+				type: "item"
+			}]
+			title: "Контроллер жидкостного реактора"
+			x: 11.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["59E975BC6DA45CDD"]
+			description: [
+				"Контроллер реакторной установки. Управляет"
+				"многоблочной схемой охлаждения и рабочими частями"
+				"реактора."
+			]
+			id: "278C67C3AAC40F73"
+			rewards: [{
+				id: "921382B9289EC41A"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "4C0B29C165771431"
+				item: "industrialupgrade:gas_reactor/gas_controller"
+				type: "item"
+			}]
+			title: "Контроллер жидкостного реактора"
+			x: 11.0d
+			y: 1.75d
+		}
+		{
+			dependencies: ["DE9673A9D652CE27"]
+			description: [
+				"Лазурный бриллиантовый раствор используется как"
+				"специальная жидкость для защиты и высокоуровневой"
+				"обработки. В коде он связан с радиозащитными предметами"
+				"и жидкостным адаптером."
+			]
+			id: "23CC2A35A948DB47"
+			rewards: [{
+				id: "F4B0FCF4785DAD7F"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "46DDB2DE825EDE44"
+				item: "industrialupgrade:bucket/azurebrilliant"
+				type: "item"
+			}]
+			title: "Azurebrilliant"
+			x: 10.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["C49A05881C04019E"]
+			description: [
+				"Индустриальное масло — тяжёлая нефтяная фракция."
+				"Получается в нефтепереработке и используется как база"
+				"для моторного масла, топлива и химических смесей."
+			]
+			id: "0692F23EACB160BB"
+			rewards: [{
+				id: "E1349CFE262EC658"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "B5C6F5052A0B7341"
+				item: "industrialupgrade:bucket/industrialoil"
+				type: "item"
+			}]
+			title: "Industrialoil"
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0692F23EACB160BB"]
+			description: [
+				"Моторное масло — смазочная жидкость для машинных"
+				"процессов. Оно участвует в механизмах обработки, снижая"
+				"нагрузку/износ в рецептах, где машина требует"
+				"техническую смазку."
+			]
+			id: "72F2BAA173025C75"
+			rewards: [{
+				id: "7E3C5B6FA4E9595C"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "8E7B102B08AA00DE"
+				item: "industrialupgrade:bucket/motoroil"
+				type: "item"
+			}]
+			title: "Motoroil"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["72F2BAA173025C75"]
+			description: [
+				"Солнечный дистиллятор. Использует солнечное тепло для"
+				"испарения и очистки жидкости без обычного топлива."
+			]
+			id: "2F87B9005A1ABB02"
+			rewards: [{
+				id: "844A6F5A52DCA194"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "8F3D39C28DFEBE3B"
+				item: "industrialupgrade:basemachine3/solardestiller"
+				type: "item"
+			}]
+			title: "Солнечный опреснитель"
+			x: 11.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2F87B9005A1ABB02"]
+			description: [
+				"Адаптер для превращения предмета в жидкостный"
+				"эквивалент или обратно по поддерживаемой схеме."
+				"Используется в материалах с точным объёмом жидкости."
+			]
+			id: "D77435DDFB5C4B0C"
+			rewards: [{
+				id: "5A8A9964B91D8A76"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "F7DC55731841A1B0"
+				item: "industrialupgrade:basemachine3/single_fluid_adapter"
+				type: "item"
+			}]
+			title: "Одиночный жидкостный адаптер"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["D77435DDFB5C4B0C"]
+			description: [
+				"Принимает воду и лаву во внутренние баки, тратит EF и"
+				"создаёт обсидиан в выходной слот. Это генератор блока,"
+				"а не энергетический генератор."
+			]
+			id: "D9257A2C231FDC44"
+			rewards: [{
+				id: "9ECD08ACD6111215"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "66A3B66E038ACDD2"
+				item: "industrialupgrade:basemachine2/gen_obsidian"
+				type: "item"
+			}]
+			title: "Генератор обсидиана"
+			x: 13.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["D9257A2C231FDC44"]
+			description: [
+				"Автоматически ловит рыбу через ванильную таблицу"
+				"рыбалки. Требует воду под машиной, удочку или"
+				"энергетический аналог в слоте и тратит EF за улов."
+			]
+			id: "E3E23D5DDFA3DC7E"
+			rewards: [{
+				id: "F2CCD3C862F1CA25"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "A033586D56C6FE37"
+				item: "industrialupgrade:basemachine2/fisher"
+				type: "item"
+			}]
+			title: "Рыболовная машина"
+			x: 14.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["E3E23D5DDFA3DC7E"]
+			description: [
+				"Создаёт визер-ресурсы в машинном процессе."
+				"Используется для опасных материалов, которые неудобно"
+				"получать вручную."
+			]
+			id: "9E6D26F9A5B17D7A"
+			rewards: [{
+				id: "82A4F588FF0F80AA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "778E4D0A74E508EE"
+				item: "industrialupgrade:basemachine1/gen_wither"
+				type: "item"
+			}]
+			title: "Производитель иссушителей"
+			x: 15.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["D77435DDFB5C4B0C"]
+			description: [
+				"Охлаждающая смесь для реакторов и холодильных"
+				"механизмов. Отводит тепло там, где обычной воды или"
+				"воздуха недостаточно."
+			]
+			id: "ACFEE0EF309C24B7"
+			rewards: [{
+				id: "AC4F020A6836E70A"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1830737E249CBE79"
+				item: "industrialupgrade:cooling_mixture"
+				type: "item"
+			}]
+			title: "Cooling Mixture"
+			x: 13.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["ACFEE0EF309C24B7"]
+			description: [
+				"Строительная пена — жидкий материал для распылителя и"
+				"жидкостных машин. Используется для быстрого"
+				"создания/заполнения строительных блоков и как реагент в"
+				"интеграторах."
+			]
+			id: "3D262962E5AD649F"
+			rewards: [{
+				id: "BAB1B2C678508886"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "0C444D86DD1E0B8F"
+				item: "industrialupgrade:bucket/construction_foam"
+				type: "item"
+			}]
+			title: "Капсула жидкой строительной пены"
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3D262962E5AD649F"]
+			description: [
+				"Распылитель для строительной пены и похожих жидкостей."
+				"Наносит содержимое на блоки в мире."
+			]
+			id: "D2D4B1F6226FB7A4"
+			rewards: [{
+				id: "FA2715CFE33589BA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "C3E2D20729311F54"
+				item: "industrialupgrade:tools/foam_sprayer"
+				type: "item"
+			}]
+			title: "Sprayer"
+			x: 14.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["D2D4B1F6226FB7A4"]
+			description: [
+				"Укреплённый камень для прочных конструкций и защиты."
+				"Выдерживает нагрузки лучше обычного строительного"
+				"блока."
+			]
+			id: "D90A492C932B72C4"
+			rewards: [{
+				id: "DF933E56133F1745"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "B220AD0F66EC869A"
+				item: "industrialupgrade:reinforcedstone"
+				type: "item"
+			}]
+			title: "Reinforcedstone"
+			x: 14.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["D90A492C932B72C4"]
+			description: [
+				"Генерирует жидкую материю из энергии и входных"
+				"ресурсов. Используется в материальной переработке и"
+				"репликации."
+			]
+			id: "F680D0C05735C0F9"
+			rewards: [{
+				id: "6CFB37E60478F503"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "5BE17D0BA925DA75"
+				item: "industrialupgrade:simplemachine/generator_matter"
+				type: "item"
+			}]
+			title: "Генератор жидкой материи"
+			x: 15.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["F680D0C05735C0F9"]
+			description: [
+				"Сканирует предмет и записывает его шаблон. Нужен для"
+				"систем, которые работают с материей и точным"
+				"воспроизведением предметов."
+			]
+			id: "13C48C8BF8457ED2"
+			rewards: [{
+				id: "E89C56409A2019DB"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "7CCBB2706D74168B"
+				item: "industrialupgrade:basemachine3/scanner_iu"
+				type: "item"
+			}]
+			title: "Сканер"
+			x: 16.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["13C48C8BF8457ED2"]
+			description: [
+				"Хранит отсканированные шаблоны предметов. Позволяет"
+				"держать несколько паттернов для последующей репликации."
+			]
+			id: "9446095C5697B292"
+			rewards: [{
+				id: "58503F3DEE939993"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "FBDF021960A67E3B"
+				item: "industrialupgrade:basemachine3/pattern_storage_iu"
+				type: "item"
+			}]
+			title: "Хранилище шаблонов"
+			x: 17.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["9446095C5697B292"]
+			description: [
+				"Воссоздаёт предмет по сохранённому шаблону, расходуя"
+				"материю и энергию. Работает как финальная машина"
+				"репликационной системы."
+			]
+			id: "C58353EB69F0E0F5"
+			rewards: [{
+				id: "0B1339D16B92423C"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1F66DDC6F10AC8D8"
+				item: "industrialupgrade:basemachine3/replicator_iu"
+				type: "item"
+			}]
+			title: "Репликатор"
+			x: 18.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["C58353EB69F0E0F5"]
+			description: [
+				"Собирает материю или материальный ресурс из окружающей"
+				"системы. Используется как источник для машин"
+				"репликации."
+			]
+			id: "FFCCFACF7DEE4F7F"
+			rewards: [{
+				id: "208AC39310C989B6"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "35FBE6E34A843C5E"
+				item: "industrialupgrade:basemachine3/matter_collector"
+				type: "item"
+			}]
+			title: "§dСборщик материи"
+			x: 19.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["C58353EB69F0E0F5"]
+			description: [
+				"Коробка утиля со случайным содержимым. Открывается как"
+				"переработанный материал, полученный из скрапа."
+			]
+			id: "93669CFB998127DB"
+			rewards: [{
+				id: "7D68E349F25F2BF1"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "EFDC6B24D80699B2"
+				item: "industrialupgrade:scrapBox"
+				type: "item"
+			}]
+			title: "Scrapbox"
+			x: 18.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["93669CFB998127DB"]
+			description: [
+				"Автоматически обрабатывает скрап и коробки утиля."
+				"Удобен для массовой переработки отходов."
+			]
+			id: "26F0A0C89BB68DF5"
+			rewards: [{
+				id: "52200E3E9CCDDC6A"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "3635CD580C32049D"
+				item: "industrialupgrade:moremachine3/assamplerscrap"
+				type: "item"
+			}]
+			title: "Сборщик утильсырья"
+			x: 18.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["ACFEE0EF309C24B7"]
+			description: [
+				"Ускоряет работу машины, обычно увеличивая расход"
+				"энергии. Используется в слотах улучшений поддерживаемых"
+				"механизмов."
+			]
+			id: "806E653ED6B60671"
+			rewards: [{
+				id: "80B6908EF50E4976"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "217FB61500E16A91"
+				item: "industrialupgrade:overclockerUpgrade"
+				type: "item"
+			}]
+			title: "Overclockerupgrade"
+			x: 13.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["806E653ED6B60671"]
+			description: [
+				"Повышает допустимый энергетический уровень машины."
+				"Помогает безопасно подключать механизм к более сильной"
+				"сети."
+			]
+			id: "B5175FA8FA58F714"
+			rewards: [{
+				id: "696B81CB37FAEAC3"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "283B434175C129EC"
+				item: "industrialupgrade:transformerUpgrade"
+				type: "item"
+			}]
+			title: "Transformerupgrade"
+			x: 12.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["B5175FA8FA58F714"]
+			description: [
+				"Энергетическое хранилище среднего уровня. Накапливает"
+				"EF и отдаёт её в сеть через настроенные стороны."
+			]
+			id: "59F5CC3C9A10473A"
+			rewards: [{
+				id: "E37DE4444447A855"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "8471812B2FDC1078"
+				item: "industrialupgrade:wiring_storage/mfe_iu"
+				type: "item"
+			}]
+			title: "МФЭ"
+			x: 11.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["59F5CC3C9A10473A"]
+			description: [
+				"Уничтожает поступающую жидкость. Нужен для безопасного"
+				"сброса лишних жидкостей из автоматических линий."
+			]
+			id: "ED042707CA6CCF92"
+			rewards: [{
+				id: "24C9826C4836CA5F"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "F1EFE20BDF6A9AA7"
+				item: "industrialupgrade:basemachine3/fluid_trash"
+				type: "item"
+			}]
+			title: "Мусорный бак для жидкостей"
+			x: 10.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["59F5CC3C9A10473A"]
+			description: [
+				"Поглощает лишнюю энергию. Используется как нагрузка"
+				"или аварийный слив для энергетической сети."
+			]
+			id: "607668745EE40C65"
+			rewards: [{
+				id: "2FE8848F3D46B43D"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "E4ED88D1F8D3977A"
+				item: "industrialupgrade:basemachine3/energy_trash"
+				type: "item"
+			}]
+			title: "Мусорный бак для энергии"
+			x: 12.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["59F5CC3C9A10473A"]
+			description: [
+				"Уничтожает предметы из входа. Полезен для линий, где"
+				"нужно удалять мусор и лишние побочные продукты."
+			]
+			id: "E66CD5E7EB5C48DF"
+			rewards: [{
+				id: "B6023E93C1614DB6"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "74C273B96B9F3E31"
+				item: "industrialupgrade:basemachine3/item_trash"
+				type: "item"
+			}]
+			title: "Мусорный бак для предметов"
+			x: 11.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["59F5CC3C9A10473A"]
+			description: [
+				"Разлагает жидкости или материалы электрическим"
+				"процессом. Используется в химии для получения газов и"
+				"отдельных компонентов."
+			]
+			id: "62C29E832ED5F713"
+			rewards: [{
+				id: "95D19F0ED3A4FB6C"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "EAD93B11A7293EBC"
+				item: "industrialupgrade:basemachine2/electrolyzer_iu"
+				type: "item"
+			}]
+			title: "Электролизёр"
+			x: 10.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["62C29E832ED5F713"]
+			description: [
+				"Работает с зачарованными книгами и опытом. Позволяет"
+				"обрабатывать или получать книги зачарований машинным"
+				"способом."
+			]
+			id: "6F35DF1E3D454B58"
+			rewards: [{
+				id: "834B1BE28F50D890"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "059E3F3C23B19313"
+				item: "industrialupgrade:basemachine3/enchanter_books"
+				type: "item"
+			}]
+			title: "Чаровальная машина"
+			x: 9.0d
+			y: 1.75d
+		}
+		{
+			dependencies: ["62C29E832ED5F713"]
+			description: [
+				"Молекулярный преобразователь. Тратит энергию на"
+				"превращение одного материала в другой по заданным"
+				"рецептам."
+			]
+			id: "5BDD944A91FAED4E"
+			rewards: [{
+				id: "2F5465386BD27804"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "FEC5ADFD6870A7AF"
+				item: "industrialupgrade:molecular/molecular"
+				type: "item"
+			}]
+			title: "Молекулярный преобразователь"
+			x: 9.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["5BDD944A91FAED4E"]
+			description: [
+				"Продвинутая солнечная панель. Производит больше"
+				"энергии от света, чем базовые солнечные элементы."
+			]
+			id: "D9C8E233C8A18253"
+			rewards: [{
+				id: "0BA96B79EF9AA36D"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "F503280A27CCBB0B"
+				item: "industrialupgrade:machines/advanced_solar_paneliu"
+				type: "item"
+			}]
+			title: "§6Улучшенная солнечная панель"
+			x: 7.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["D9C8E233C8A18253"]
+			description: [
+				"Малая солнечная панель. Компактно производит энергию"
+				"от света и подходит для небольших установок."
+			]
+			id: "48AA9F5A6B30A2AE"
+			rewards: [{
+				id: "5547F890450F584B"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "F34F971099EFF0FF"
+				item: "industrialupgrade:basemachine3/minipanel"
+				type: "item"
+			}]
+			title: "Сборщик мини-панели"
+			x: 6.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["D9C8E233C8A18253"]
+			description: [
+				"Контроллер молниеотвода. Управляет установкой, которая"
+				"принимает энергию от ударов молнии."
+			]
+			id: "19FE800A052DE507"
+			rewards: [{
+				id: "86C818E31605A1BA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "93BC149C31396B78"
+				item: "industrialupgrade:lightning_rod/lightning_rod_controller"
+				type: "item"
+			}]
+			title: "Контроллер громоотвода"
+			x: 6.0d
+			y: 3.75d
+		}
+		{
+			dependencies: ["48AA9F5A6B30A2AE"]
+			description: [
+				"Фабрика компонентов материи. Производит части, нужные"
+				"для материальных машин и репликации."
+			]
+			id: "14B621FDEB77FA66"
+			rewards: [{
+				id: "954EA76E25CDB511"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "89A8165D995BBD55"
+				item: "industrialupgrade:basemachine3/matter_factory"
+				type: "item"
+			}]
+			title: "Производитель активной массы"
+			x: 5.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["14B621FDEB77FA66"]
+			description: [
+				"Фабрика аккумуляторов. Собирает энергетические"
+				"элементы и батареи для предметов и машин."
+			]
+			id: "2B388CEFECBC3A38"
+			rewards: [{
+				id: "19E0B3634D932631"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "95EE0174B97BED6E"
+				item: "industrialupgrade:basemachine3/battery_factory"
+				type: "item"
+			}]
+			title: "Завод батареек"
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["2B388CEFECBC3A38"]
+			description: [
+				"Фабрика разъёмов и соединительных частей. Делает"
+				"электрические компоненты для кабелей, батарей и машин."
+			]
+			id: "8704F0E1FAF5D1C9"
+			rewards: [{
+				id: "37EA22CE783AA090"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "CE9803DBF0F58846"
+				item: "industrialupgrade:basemachine3/socket_factory"
+				type: "item"
+			}]
+			title: "Завод розеток"
+			x: 3.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5BDD944A91FAED4E"]
+			description: [
+				"Фотониевый слиток для высокоуровневых энергетических и"
+				"световых технологий. Используется в продвинутых"
+				"корпусах и компонентах."
+			]
+			id: "EA09BF3E21A8E9C3"
+			rewards: [{
+				id: "EC5E2D5D77805D86"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "D8DCAFC3A98A4F91"
+				item: "industrialupgrade:photoniy_ingot"
+				type: "item"
+			}]
+			title: "Photoniy Ingot"
+			x: 8.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["EA09BF3E21A8E9C3"]
+			description: [
+				"Собирает воздух или атмосферные компоненты из"
+				"окружающей среды. Даёт газовое сырьё для химических и"
+				"экологических процессов."
+			]
+			id: "B98ED7182A53C1CD"
+			rewards: [{
+				id: "66F869E4243A6185"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "679669CC1F227191"
+				item: "industrialupgrade:basemachine3/aircollector"
+				type: "item"
+			}]
+			title: "Воздухоразделительная установка"
+			x: 7.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["EA09BF3E21A8E9C3"]
+			description: [
+				"Анализирует загрязнение и состояние почвы. Помогает"
+				"понять, насколько участок заражён или пригоден для"
+				"очистки."
+			]
+			id: "024FA4952B6CEE82"
+			rewards: [{
+				id: "18864E4FD5A1F204"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "B979FF0A2A6005CC"
+				item: "industrialupgrade:basemachine3/soil_analyzer"
+				type: "item"
+			}]
+			title: "Анализатор почвы"
+			x: 9.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["024FA4952B6CEE82"]
+			description: [
+				"Очищает радиационное загрязнение в зоне действия."
+				"Используется для восстановления опасных участков после"
+				"ядерных процессов."
+			]
+			id: "4D43E665F35E9965"
+			rewards: [{
+				id: "550E0FDB0BCA54F9"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "0D490635273BD05E"
+				item: "industrialupgrade:basemachine3/radiation_purifier"
+				type: "item"
+			}]
+			title: "Радиационный очиститель"
+			x: 10.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["B98ED7182A53C1CD"]
+			description: [
+				"Синтезатор создаёт материалы из подготовленных"
+				"компонентов. Работает как машина сложной сборки"
+				"вещества."
+			]
+			id: "3C00517AB66CD7FC"
+			rewards: [{
+				id: "F2085A3709F44994"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "C8ED27BD169B4C94"
+				item: "industrialupgrade:basemachine1/synthesis"
+				type: "item"
+			}]
+			title: "Реактор ядерного синтеза"
+			x: 6.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["B98ED7182A53C1CD"]
+			description: [
+				"Улучшение скорости для некоторых механизмов."
+				"Увеличивает темп работы там, где машина поддерживает"
+				"внутренний уровень ускорения."
+			]
+			id: "CB974F2CE8DF8A68"
+			rewards: [{
+				id: "699C9C7CB54EF2D2"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1946EAB31509662D"
+				item: "industrialupgrade:upgrade_speed_creation"
+				type: "item"
+			}]
+			title: "Upgrade Speed Creation"
+			x: 7.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Сканер загрязнения показывает состояние воздуха, почвы"
+				"и опасных зон. Помогает искать источник загрязнения и"
+				"контролировать очистку."
+			]
+			id: "BA82CD2126DBDE5A"
+			rewards: [{
+				id: "A1B19653409A6109"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1C9B31948B4918A8"
+				item: "industrialupgrade:pollution_scanner"
+				type: "item"
+			}]
+			title: "Pollution Scanner"
+			x: 6.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["EA09BF3E21A8E9C3"]
+			description: [
+				"Контроллер паровой турбины управляет многоблоком,"
+				"который потребляет пар и выдаёт энергию. Проверяет"
+				"структуру, рабочие части и поток пара."
+			]
+			id: "AA646DF0D37E8D87"
+			rewards: [{
+				id: "ED8EE01ABC44AEB4"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "06E732E3746F5A1E"
+				item: "industrialupgrade:steam_turbine/steam_turbine_controller"
+				type: "item"
+			}]
+			title: "Контроллер паровой турбины"
+			x: 8.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Исследовательская линза для космического стола."
+				"Открывает анализ более сложных объектов и материалов."
+			]
+			id: "27DC679A8A001B88"
+			rewards: [{
+				id: "97DB4D34EBA1A0AA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "E94D046EFAD399B2"
+				item: "industrialupgrade:research_lens/lens_1"
+				type: "item"
+			}]
+			title: "§bИсследовательская линза I"
+			x: 5.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["27DC679A8A001B88"]
+			description: [
+				"Космический исследовательский стол работает с линзами"
+				"и образцами небесных тел. Он открывает/обрабатывает"
+				"данные по планетам, спутникам и материалам, а не"
+				"является обычным верстаком."
+			]
+			id: "EB9E69D1A1E78214"
+			rewards: [{
+				id: "FF5D0E2181F7A585"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "3222C788DFC1E831"
+				item: "industrialupgrade:basemachine3/research_table_space"
+				type: "item"
+			}]
+			title: "Стол космических исследований"
+			x: 4.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["EB9E69D1A1E78214"]
+			description: [
+				"Стартовая площадка принимает ракетное топливо и"
+				"энергию, заправляет и заряжает установленную"
+				"космическую технику. Имеет большой топливный бак и"
+				"выходные слоты для результатов/ресурсов, связанных с"
+				"полётом."
+			]
+			id: "C5CD7EE4E933856E"
+			rewards: [{
+				id: "3F6ADC1F907982ED"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "07E229CCFCF44D22"
+				item: "industrialupgrade:basemachine3/rocket_launch_pad"
+				type: "item"
+			}]
+			title: "Ракетная стартовая площадка"
+			x: 3.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["C5CD7EE4E933856E"]
+			description: [
+				"Собирает роверы из корпуса, колёс, модулей и"
+				"электронных частей. Машина формирует готовый предмет"
+				"ровера с параметрами, которые потом используются на"
+				"планетах."
+			]
+			id: "BC00ED6C1D822D69"
+			rewards: [{
+				id: "A7F48C549EEC8A86"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "AAF073645C0BDBD0"
+				item: "industrialupgrade:basemachine3/rover_assembler"
+				type: "item"
+			}]
+			title: "Сборщик марсоходов"
+			x: 2.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["BC00ED6C1D822D69"]
+			description: [
+				"Собирает исследовательские зонды из корпуса,"
+				"электроники и модулей. Зонд нужен для автоматического"
+				"изучения тел и получения данных/ресурсов из космической"
+				"системы."
+			]
+			id: "D5BE26ADF338AF6F"
+			rewards: [{
+				id: "768E2460C7AF66D3"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "6AB4305D502E9634"
+				item: "industrialupgrade:basemachine3/probe_assembler"
+				type: "item"
+			}]
+			title: "Сборщик зондов"
+			x: 1.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["D5BE26ADF338AF6F"]
+			description: [
+				"Собирает спутники из корпуса, электроники и модулей."
+				"Спутник работает как отдельная космическая техника для"
+				"исследований и получения ресурсов с орбиты/тел."
+			]
+			id: "1B71FC3F457177B1"
+			rewards: [{
+				id: "628630B4A9F0CDD9"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "D6506AB9FD0EEF5C"
+				item: "industrialupgrade:basemachine3/satellite_assembler"
+				type: "item"
+			}]
+			title: "Сборщик спутников"
+			x: 0.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["1B71FC3F457177B1"]
+			description: [
+				"Собирает ракету из корпуса, двигателя, баков и"
+				"модулей. Результат хранит параметры ракеты и"
+				"используется стартовой площадкой для подготовки полёта."
+			]
+			id: "FA7C62B7FF800B11"
+			rewards: [{
+				id: "8A5F27D0375F8AD4"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "76DF763F64309B26"
+				item: "industrialupgrade:basemachine3/rocket_assembler"
+				type: "item"
+			}]
+			title: "Сборщик ракет"
+			x: -1.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["BC00ED6C1D822D69"]
+			description: [
+				"Гидразин — базовое ракетное топливо. Принимается"
+				"стартовой площадкой, жидкостным миксером и системой"
+				"уровней топлива для роверов/ракет."
+			]
+			id: "04A2AE060E0D6356"
+			rewards: [{
+				id: "AB1832A67B814ADA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "CF177BCBF8026805"
+				item: "industrialupgrade:bucket/hydrazine"
+				type: "item"
+			}]
+			title: "Hydrazine"
+			x: 1.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["04A2AE060E0D6356"]
+			description: [
+				"Базовый ровер для работы на поверхности планет."
+				"Перевозит модули и выполняет задачи исследования"
+				"местности."
+			]
+			id: "B969D019BBF81B8E"
+			rewards: [{
+				id: "F18B8F5B94889227"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "0710C652F8863FA8"
+				item: "industrialupgrade:basemachine3/purifier_soil"
+				type: "item"
+			}]
+			title: "Очиститель почвы"
+			x: 0.0d
+			y: 4.5d
+		}
+	]
+	title: "3. Улучшенная электрическая эра"
+}

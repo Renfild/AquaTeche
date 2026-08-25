@@ -1,0 +1,33 @@
+
+#AquaLumen UI - server side settings
+[hub]
+	#Master switch for the hub interface.
+	enabled = true
+	#Open a chest-based hub for players without the client mod (vanilla clients on Mohist).
+	chestFallback = true
+	#Minimum delay between two hub actions of one player, in milliseconds.
+	#Range: 0 ~ 10000
+	actionCooldownMs = 350
+	#How often an open hub is refreshed for a player, in ticks.
+	#Range: 5 ~ 600
+	snapshotIntervalTicks = 40
+
+#Season / battle pass
+[season]
+	serverName = "aquaTeche • TechnoAqua"
+	title = "Сезон 1 — Глубина"
+	#Range: 1 ~ 500
+	maxTier = 50
+
+#Economy bridge. Scoreboard objectives are used when no economy plugin is detected.
+[economy]
+	coinsObjective = "coins"
+	gemsObjective = "gems"
+
+#Content
+[content]
+	#Rank ladder as 'name:requiredLevel:hexColor'.
+	ranks = ["Новичок:0:8FA6B8", "Дайвер:10:2FE0C0", "Инженер:25:3B9DFF", "Абисс:40:9B7BFF", "Легенда:60:F5C25B"]
+	#Tabs shown in the sidebar, in order.
+	enabledTabs = ["profile", "store", "cases", "pass", "fishing", "kits", "warps", "tops", "settings"]
+

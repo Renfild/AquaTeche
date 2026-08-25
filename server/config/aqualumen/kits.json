@@ -1,0 +1,136 @@
+{
+  "kits": [
+    {
+      "id": "start",
+      "title": "Старт (Start)",
+      "description": "Бамбуковая удочка, множитель удачи, ящик снастей, 16 дубовых лестниц, 8 батона",
+      "badge": "Готов",
+      "command": "kit start",
+      "cooldownSeconds": 0,
+      "items": [
+        {
+          "item": "starcatcher:bamboo_rod",
+          "count": 1
+        },
+        {
+          "item": "aquatech_ui:rate_x2",
+          "count": 1
+        },
+        {
+          "item": "starcatcher:tackle_box",
+          "count": 1
+        },
+        {
+          "item": "minecraft:ladder",
+          "count": 16
+        },
+        {
+          "item": "minecraft:bread",
+          "count": 8
+        }
+      ],
+      "commands": [
+        "kit start"
+      ]
+    },
+    {
+      "id": "starter",
+      "title": "Выживание (Starter)",
+      "description": "Лодка с сундуком, удочка, хлеб, саженцы, факелы, квестбук",
+      "badge": "24 ч",
+      "command": "kit starter",
+      "cooldownSeconds": 86400,
+      "items": [
+        {
+          "item": "minecraft:oak_chest_boat",
+          "count": 1
+        },
+        {
+          "item": "starcatcher:bamboo_rod",
+          "count": 1
+        },
+        {
+          "item": "minecraft:bread",
+          "count": 12
+        },
+        {
+          "item": "minecraft:oak_sapling",
+          "count": 4
+        },
+        {
+          "item": "minecraft:bone_meal",
+          "count": 8
+        },
+        {
+          "item": "minecraft:torch",
+          "count": 16
+        },
+        {
+          "item": "ftbquests:book",
+          "count": 1
+        }
+      ],
+      "commands": [
+        "kit starter"
+      ]
+    },
+    {
+      "id": "diver",
+      "title": "Дайвер (Diver)",
+      "description": "Аквамариновая щука, шляпа рыбака и припасы",
+      "badge": "24 ч",
+      "command": "kit diver",
+      "cooldownSeconds": 86400,
+      "items": [
+        {
+          "item": "starcatcher:aquamarine_pike",
+          "count": 1
+        },
+        {
+          "item": "starcatcher:fisherman_hat_cyan",
+          "count": 1
+        },
+        {
+          "item": "minecraft:cooked_salmon",
+          "count": 16
+        }
+      ],
+      "commands": [
+        "kit diver"
+      ]
+    },
+    {
+      "id": "vip",
+      "title": "Премиум (VIP)",
+      "description": "Удочка акульего зуба, множитель удачи x4, ящик снастей, монеты и золотые яблоки",
+      "badge": "VIP",
+      "command": "kit vip",
+      "cooldownSeconds": 86400,
+      "items": [
+        {
+          "item": "starcatcher:sharktooth_rod",
+          "count": 1
+        },
+        {
+          "item": "aquatech_ui:rate_x4",
+          "count": 1
+        },
+        {
+          "item": "starcatcher:tackle_box_purple",
+          "count": 1
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "count": 4
+        },
+        {
+          "item": "minecraft:emerald",
+          "count": 32
+        }
+      ],
+      "commands": [
+        "kit vip"
+      ]
+    }
+  ]
+}

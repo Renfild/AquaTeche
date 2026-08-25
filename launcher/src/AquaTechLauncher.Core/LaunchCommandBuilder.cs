@@ -536,6 +536,7 @@ public static class ProcessSpawner
             WorkingDirectory = gameDir,
             UseShellExecute = false,
             CreateNoWindow = true,
+            WindowStyle = ProcessWindowStyle.Hidden,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
         };

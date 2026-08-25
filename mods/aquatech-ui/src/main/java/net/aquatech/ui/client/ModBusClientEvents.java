@@ -14,7 +14,7 @@ public class ModBusClientEvents {
 
     @SubscribeEvent
     public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
-        // KEY_SKILL_TREE disabled for now
+        event.register(ClientEvents.KEY_MARKET);
     }
 
     @SubscribeEvent

@@ -5,5 +5,5 @@ permissions:
 parents:
 - mod
 prefixes:
-- '&4&l[АДМИН] &4':
+- " ":
     priority: 80

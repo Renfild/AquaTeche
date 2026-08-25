@@ -80,11 +80,11 @@ ServerEvents.recipes((event) => {
   event.remove({ output: 'industrialupgrade:rate_x32' })
   event.remove({ output: 'industrialupgrade:rate_x64' })
 
-  // x2–x16: normal 3×3 workbench
+  // x2–x16: normal 3×3 workbench (ingots — IU plates have no recipe in this pack)
   event.shaped('aquatech_ui:rate_x2', ['SCS', 'PMP', 'SCS'], {
     S: 'botania:mana_string',
-    C: 'industrialupgrade:itemplates/copper_plate',
-    P: 'industrialupgrade:itemplates/iron_plate',
+    C: 'minecraft:copper_ingot',
+    P: 'minecraft:iron_ingot',
     M: 'botania:manasteel_ingot',
   }).id('aquatech:rate_x2')
 
@@ -314,5 +314,140 @@ ServerEvents.recipes((event) => {
     }
   }
 
+  // =========================================================================
+  // OCEAN BOUNTY UPGRADE (aquatech_ui:upgrade_ocean_bounty / ocean_bounty_upgrade)
+  // Supports Vanilla 3x3, Avaritia 7x7/9x9, and ExtendedCrafting 7x7/9x9
+  // =========================================================================
+  event.remove({ id: 'aquatech:upgrade_ocean_bounty_7x7' })
+  event.remove({ id: 'aquatech:upgrade_ocean_bounty_avaritia' })
+  event.remove({ id: 'aquatech:upgrade_ocean_bounty_extendedcrafting' })
+  event.remove({ id: 'aquatech:upgrade_ocean_bounty_fallback' })
+  event.remove({ id: 'aquatech:upgrade_ocean_bounty_3x3' })
+  event.remove({ id: 'aquatech:upgrade_ocean_bounty_avaritia_extreme' })
+  event.remove({ id: 'aquatech:upgrade_ocean_bounty_avaritia_sculk' })
+
+  let oceanBountyResult = { item: 'aquatech_ui:upgrade_ocean_bounty', count: 1 }
+
+  // 1. Universal Vanilla 3x3 Crafting Table Recipe (Always available)
+  let cItem = 'minecraft:prismarine_crystals'
+  if (Platform.isLoaded('avaritia') && Item.exists('avaritia:crystal_matrix_ingot')) {
+    cItem = 'avaritia:crystal_matrix_ingot'
+  } else if (Platform.isLoaded('botania') && Item.exists('botania:mana_diamond')) {
+    cItem = 'botania:mana_diamond'
+  }
+
+  let tItem = Platform.isLoaded('botania') && Item.exists('botania:terrasteel_ingot')
+    ? 'botania:terrasteel_ingot'
+    : 'minecraft:heart_of_the_sea'
+
+  let iItem = Platform.isLoaded('industrialupgrade') && Item.exists('industrialupgrade:alloyingot/inconel')
+    ? 'industrialupgrade:alloyingot/inconel'
+    : 'minecraft:nautilus_shell'
+
+  let lItem = Platform.isLoaded('botania') && Item.exists('botania:life_essence')
+    ? 'botania:life_essence'
+    : 'minecraft:nether_star'
+
+  let aItem = Platform.isLoaded('industrialupgrade') && Item.exists('industrialupgrade:alloyingot/osmiridium')
+    ? 'industrialupgrade:alloyingot/osmiridium'
+    : 'minecraft:prismarine_shard'
+
+  let key3x3 = {
+    C: cItem,
+    T: tItem,
+    F: 'aquatech_ui:auto_fisher',
+    I: iItem,
+    L: lItem,
+    A: aItem,
+  }
+  event.shaped('aquatech_ui:upgrade_ocean_bounty', [
+    'CTC',
+    'IFI',
+    'ALA'
+  ], key3x3).id('aquatech:upgrade_ocean_bounty_3x3')
+
+
+  // 2. 7x7 Pattern (Sculk / Elite Table)
+  let pattern7x7 = [
+    ' CTTTC ',
+    'CLSLSLC',
+    'TSIAIST',
+    'TLIFAIT',
+    'TSIAIST',
+    'CLSLSLC',
+    ' CTTTC ',
+  ]
+  let keyFull = {
+    C: { item: 'avaritia:crystal_matrix_ingot' },
+    T: { item: 'botania:terrasteel_ingot' },
+    L: { item: 'botania:life_essence' },
+    S: Platform.isLoaded('extrabotany')
+      ? { item: 'extrabotany:orichalcos_ingot' }
+      : { item: 'industrialupgrade:alloyingot/osmiridium' },
+    I: { item: 'industrialupgrade:alloyingot/inconel' },
+    A: { item: 'industrialupgrade:alloyingot/osmiridium' },
+    F: { item: 'aquatech_ui:auto_fisher' },
+  }
+
+  // 3. 9x9 Pattern (Extreme / Ultimate Table)
+  let pattern9x9 = [
+    '         ',
+    '  CTTTC  ',
+    ' CLSLSLC ',
+    ' TSIAIST ',
+    ' TLIFAIT ',
+    ' TSIAIST ',
+    ' CLSLSLC ',
+    '  CTTTC  ',
+    '         '
+  ]
+
+  if (Platform.isLoaded('avaritia')) {
+    // 9x9 Extreme Crafting Table (Tier 4)
+    event.custom({
+      type: 'avaritia:shaped_table',
+      tier: 4,
+      category: 'misc',
+      pattern: pattern9x9,
+      key: keyFull,
+      result: oceanBountyResult,
+      show_notification: true,
+    }).id('aquatech:upgrade_ocean_bounty_avaritia_extreme')
+
+    // 7x7 Sculk Crafting Table (Tier 3)
+    event.custom({
+      type: 'avaritia:shaped_table',
+      tier: 3,
+      category: 'misc',
+      pattern: pattern7x7,
+      key: keyFull,
+      result: oceanBountyResult,
+      show_notification: true,
+    }).id('aquatech:upgrade_ocean_bounty_avaritia_sculk')
+  }
+
+  if (Platform.isLoaded('extendedcrafting')) {
+    event.custom({
+      type: 'extendedcrafting:shaped_table',
+      tier: 3,
+      pattern: pattern7x7,
+      key: keyFull,
+      result: oceanBountyResult,
+    }).id('aquatech:upgrade_ocean_bounty_ec_7x7')
+
+    event.custom({
+      type: 'extendedcrafting:shaped_table',
+      tier: 4,
+      pattern: pattern9x9,
+      key: keyFull,
+      result: oceanBountyResult,
+    }).id('aquatech:upgrade_ocean_bounty_ec_9x9')
+  }
+
+  // Shapeless alias converters
+  event.shapeless('aquatech_ui:upgrade_ocean_bounty', ['aquatech_ui:ocean_bounty_upgrade']).id('aquatech:ocean_bounty_alias_1')
+  event.shapeless('aquatech_ui:ocean_bounty_upgrade', ['aquatech_ui:upgrade_ocean_bounty']).id('aquatech:ocean_bounty_alias_2')
+
   console.log('[AquaTech] Crafting recipes loaded.')
 })
+

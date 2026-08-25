@@ -1,0 +1,690 @@
+{
+  "fishes": [
+    {
+      "id": "starcatcher:agave_bream",
+      "name": "Агавовый лещ",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:amethystback",
+      "name": "Аметистоспин",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:aquamarine_pike",
+      "name": "Аквамариновая щука",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:aurora",
+      "name": "Аврора",
+      "priceCoins": 100,
+      "rarity": "Легенда",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:azure_crystalback_minnow",
+      "name": "Лазурная кристалоспинная мелочь",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:bigeye_tuna",
+      "name": "Большеглазый тунец",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:black_eel",
+      "name": "Чёрный угорь",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:blossomfish",
+      "name": "Цветочная рыба",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:blue_crystal_fin",
+      "name": "Сине-кристаловый плавник",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:blue_herring",
+      "name": "Голубая сельдь",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:bluegigi",
+      "name": "Синежабрик",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:boreal",
+      "name": "Бореаль",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:bright_amethyst_snapper",
+      "name": "Яркий аметистовый луциан",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:cactifish",
+      "name": "Какторыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:carpenjoe",
+      "name": "Карпенджо",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:cerberay",
+      "name": "Церберай",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:charfish",
+      "name": "Угольная рыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:chorus_crab",
+      "name": "Хорусовый краб",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:cinder_squid",
+      "name": "Угольный кальмар",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:crystalback_boreal",
+      "name": "Кристалоспинный Бореаль",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:crystalback_minnow",
+      "name": "Кристалоспинная мелочь",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:crystalback_sturgeon",
+      "name": "Кристалоспинный осётр",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:crystalback_trout",
+      "name": "Форель с кристальной спиной",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:dark_amethyst_snapper",
+      "name": "Тёмный аметистовый луциан",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:deepjaw_herring",
+      "name": "Глубинночелюстная сельдь",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:deepslatefish",
+      "name": "Глубокосланцевик",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:downfall_bream",
+      "name": "Дождевой лещ",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:dried_seaweed",
+      "name": "Сушёная морская водоросль",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:driftfin",
+      "name": "Плавник-скиталец",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:drifting_bream",
+      "name": "Дрейфующий лещ",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:dripfin",
+      "name": "Капельник",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:dusktail_snapper",
+      "name": "Сумеречный луциан",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:elderscale",
+      "name": "Древнечешуй",
+      "priceCoins": 100,
+      "rarity": "Легенда",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:embergill",
+      "name": "Пеплоплавник",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:fossilized_angelfish",
+      "name": "Окаменевшая скалярия",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:frostgill_chub",
+      "name": "Морозожабрый голавль",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:frostjaw_trout",
+      "name": "Ледяная форель",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:garnet_mackerel",
+      "name": "Гранатовая макрель",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:geode_eel",
+      "name": "Геодовый угорь",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:ghostly_pike",
+      "name": "Призрачная щука",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:glowstone_pufferfish",
+      "name": "Светокаменный иглобрюх",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:glowstone_seeker",
+      "name": "Светокаменный искатель",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:hollowbelly_darter",
+      "name": "Пустобрюхий дартер",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:icetooth_sturgeon",
+      "name": "Ледозубый осётр",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:ironjaw_herring",
+      "name": "Железночелюстная сельдь",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:joel",
+      "name": "Джоэл",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:lava_crab",
+      "name": "Лавовый краб",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:lightning_bass",
+      "name": "Молниевый Окунь",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:lily_snapper",
+      "name": "Лилийный щелкун",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:lush_pike",
+      "name": "Мшистая щука",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:magma_fish",
+      "name": "Магмовая рыба",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:mirage_carp",
+      "name": "Миражный карп",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:missingno",
+      "name": "???",
+      "priceCoins": 100,
+      "rarity": "Легенда",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:mistback_chub",
+      "name": "Туманный голавль",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:molten_deepslate_crab",
+      "name": "Плавневый сланцевый краб",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:molten_shrimp",
+      "name": "Плавневая креветка",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:morganite",
+      "name": "Морганит",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:obidontiee",
+      "name": "Кривоговорка",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:obsidian_crab",
+      "name": "Обсидиановый краб",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:obsidian_eel",
+      "name": "Обсидиановый угорь",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:pale_carp",
+      "name": "Бледный карп",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:pale_pinfish",
+      "name": "Бледнопёрка",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:peakdweller",
+      "name": "Горник",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:petaldrift_carp",
+      "name": "Лепестковый карп",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:pinfish",
+      "name": "Пёрка",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:pink_koi",
+      "name": "Розовый Кои",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:pyrotrout",
+      "name": "Пирокумжа",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:redscaled_tuna",
+      "name": "Красночешуйный тунец",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:rockgill",
+      "name": "Камножабр",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:rose_siamese_fish",
+      "name": "Розовая сиамская рыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:sage_catfish",
+      "name": "Травяной сом",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:sandtail",
+      "name": "Песчанохвостка",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:scalding_pike",
+      "name": "Обжигающая щука",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:scorched_bloodsucker",
+      "name": "Обожжённый кровосос",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:scorchfish",
+      "name": "Жарорыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:sculkfish",
+      "name": "Скалк-рыба",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:sea_bass",
+      "name": "Морской окунь",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:shroomfish",
+      "name": "Грибная рыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:silverfin_pike",
+      "name": "Серебропёрая щука",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:silverveil_perch",
+      "name": "Серебряный окунь",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:sludge_catfish",
+      "name": "Болотный сом",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:sporefish",
+      "name": "Споровая рыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:stonefish",
+      "name": "Каменная рыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:sun_seeking_carp",
+      "name": "Солнцелюбивый карп",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:suneater",
+      "name": "Солнцеед",
+      "priceCoins": 100,
+      "rarity": "Легенда",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:sunny_sturgeon",
+      "name": "Солнечный осётр",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:the_quarrish",
+      "name": "Карриш",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:thunder_bass",
+      "name": "Грозовой Окунь",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:twilight_koi",
+      "name": "Сумеречный Кои",
+      "priceCoins": 35,
+      "rarity": "Эпический",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:unknown_fish",
+      "name": "Неизвестная рыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:vesani",
+      "name": "Весани",
+      "priceCoins": 100,
+      "rarity": "Легенда",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:voidbiter",
+      "name": "Пустотыкус",
+      "priceCoins": 100,
+      "rarity": "Легенда",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:ward",
+      "name": "Вард",
+      "priceCoins": 100,
+      "rarity": "Легенда",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:whiteveil",
+      "name": "Белая вуаль",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:willish",
+      "name": "Уиллишь",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:willow_bream",
+      "name": "Ивовый лещ",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:wintery_pike",
+      "name": "Зимняя Щука",
+      "priceCoins": 20,
+      "rarity": "Редкий",
+      "tag": "starcatcher"
+    },
+    {
+      "id": "starcatcher:yellowstone_fish",
+      "name": "Жёлтокаменная рыба",
+      "priceCoins": 10,
+      "rarity": "Обычный",
+      "tag": "starcatcher"
+    }
+  ]
+}

@@ -111,11 +111,11 @@
 
   const FALLBACK_PLAYERS = [
     { nick: "Renfild", privilege: "Создатель", playtime_hours: 340, playtime: "340 ч", coins: 854000, likes: 256, fish: 4890, badges: ["Создатель", "Мастер рыбалки", "Deep Ocean", "VIP"], bio: "Основатель проекта AquaTech. Покоритель Бездны.", theme: "ocean" },
-    { nick: "AquaSmoke1", privilege: "Ultimate", playtime_hours: 215, playtime: "215 ч", coins: 490000, likes: 142, fish: 3120, badges: ["Top Fisher", "Ultimate"], bio: "Ловлю рыбу в лаве на Magma Rod.", theme: "deep" },
-    { nick: "xietoru", privilege: "Deluxe", playtime_hours: 180, playtime: "180 ч", coins: 345000, likes: 98, fish: 2450, badges: ["Beta Tester", "Deluxe"], bio: "Исследователь биомов и кастомного лута.", theme: "storm" },
-    { nick: "VortexHunter", privilege: "VIP", playtime_hours: 120, playtime: "120 ч", coins: 180000, likes: 64, fish: 1780, badges: ["VIP"], bio: "AquaTech Fishing Legend", theme: "abyss" },
-    { nick: "Nautilus99", privilege: "Игрок", playtime_hours: 95, playtime: "95 ч", coins: 120000, likes: 45, fish: 1340, badges: ["Рыбак"], bio: "Изучаю таблицы T1-T13.", theme: "ocean" },
-    { nick: "SeaDragon", privilege: "VIP", playtime_hours: 80, playtime: "80 ч", coins: 95000, likes: 38, fish: 980, badges: ["VIP"], bio: "Поймал Титановую руду на T2!", theme: "deep" }
+    { nick: "AquaSmoke1", privilege: "Легенда", playtime_hours: 215, playtime: "215 ч", coins: 490000, likes: 142, fish: 3120, badges: ["Top Fisher", "Легенда"], bio: "Ловлю рыбу в лаве на Magma Rod.", theme: "deep" },
+    { nick: "xietoru", privilege: "Адмирал", playtime_hours: 180, playtime: "180 ч", coins: 345000, likes: 98, fish: 2450, badges: ["Beta Tester", "Адмирал"], bio: "Исследователь биомов и кастомного лута.", theme: "storm" },
+    { nick: "VortexHunter", privilege: "Капитан", playtime_hours: 120, playtime: "120 ч", coins: 180000, likes: 64, fish: 1780, badges: ["Капитан"], bio: "AquaTech Fishing Legend", theme: "abyss" },
+    { nick: "Nautilus99", privilege: "Шкипер", playtime_hours: 95, playtime: "95 ч", coins: 120000, likes: 45, fish: 1340, badges: ["Шкипер", "Рыбак"], bio: "Изучаю таблицы T1-T13.", theme: "ocean" },
+    { nick: "SeaDragon", privilege: "Моряк", playtime_hours: 80, playtime: "80 ч", coins: 95000, likes: 38, fish: 980, badges: ["Моряк"], bio: "Поймал Титановую руду на T2!", theme: "deep" }
   ];
 
   let apiAvailable = null;
@@ -616,6 +616,41 @@
     }
   }
 
+  function cleanPrivilege(priv) {
+    if (!priv) return "Игрок";
+    let s = String(priv)
+      .replace(/[\uE000-\uF8FF\uD800-\uDFFF]/g, "")
+      .replace(/§[0-9a-fk-or]/gi, "")
+      .trim();
+    s = s.replace(/^[\[\(<]+/, "").replace(/[\]\)>]+$/, "").trim();
+    const low = s.toLowerCase();
+    if (!s || low === "default" || low === "player" || low === "игрок" || low === "матрос" || low === "пролог") return "Игрок";
+    if (low.includes("owner") || low.includes("создател") || low.includes("владел")) return "Владелец";
+    if (low.includes("admin") || low.includes("админ")) return "Админ";
+    if (low.includes("dev") || low.includes("разраб")) return "Разработчик";
+    if (low.includes("mod") || low.includes("модер")) return "Модератор";
+    if (low.includes("helper") || low.includes("хелпер")) return "Хелпер";
+    if (low.includes("manager") || low.includes("куратор") || low.includes("менеджер")) return "Куратор";
+    if (low.includes("staff") || low.includes("персонал")) return "Персонал";
+    if (low.includes("vipplus") || low.includes("vip+")) return "VIP+";
+    if (low.includes("vip")) return "VIP";
+    if (low.includes("deluxe") || low.includes("делюкс")) return "Deluxe";
+    if (low.includes("ultimate") || low.includes("ультимейт")) return "Ultimate";
+    if (low.includes("legend") || low.includes("легенд")) return "Легенда";
+    if (low.includes("admiral") || low.includes("адмирал")) return "Адмирал";
+    if (low.includes("captain") || low.includes("капитан")) return "Капитан";
+    if (low.includes("skipper") || low.includes("шкипер")) return "Шкипер";
+    if (low.includes("sailor") || low.includes("моряк")) return "Моряк";
+    if (low.includes("streamer") || low.includes("стример") || low.includes("twitch")) return "Стример";
+    if (low.includes("youtuber") || low.includes("ютубер") || low.includes("youtube")) return "YouTuber";
+    if (low.includes("artist") || low.includes("артист")) return "Артист";
+    if (low.includes("builder") || low.includes("билдер") || low.includes("строитель")) return "Билдер";
+    if (low.includes("friend") || low.includes("друг")) return "Друг";
+    if (low.includes("trainee") || low.includes("стажер") || low.includes("стажёр")) return "Стажер";
+    return s;
+  }
+
+
   function playerRows(players, mode) {
     return players
       .map((p, i) => {
@@ -631,10 +666,11 @@
               : mode === "fish"
                 ? `${p.fish || 0} 🐟`
                 : playtime;
+        const priv = cleanPrivilege(p.privilege);
         return `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
             <div class="rank">${i + 1}</div>
             <img src="${skinUrl(p.nick)}" alt="">
-            <div class="meta"><strong>${p.nick}</strong><span>${p.privilege || "Игрок"}</span></div>
+            <div class="meta"><strong>${p.nick}</strong><span>${priv}</span></div>
             <div class="stat">${stat}</div>
           </a>`;
       })
@@ -701,7 +737,7 @@
               (p) => `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
             <div class="rank">·</div>
             <img src="${skinUrl(p.nick)}" alt="">
-            <div class="meta"><strong>${p.nick}</strong><span>${p.privilege || "Игрок"} · ${p.playtime || (p.playtime_hours || 0) + " ч"}</span></div>
+            <div class="meta"><strong>${p.nick}</strong><span>${cleanPrivilege(p.privilege)} · ${p.playtime || (p.playtime_hours || 0) + " ч"}</span></div>
             <div class="stat">${p.likes || 0} ❤</div>
           </a>`
             )
@@ -797,7 +833,7 @@
             <div class="profile-meta">
               <div class="profile-title-row">
                 <h1>${profile.nick}</h1>
-                <span class="tag ${profile.slug === "deluxe" || profile.slug === "ultimate" || profile.privilege === "Создатель" ? "gold" : ""}">${profile.privilege || "Игрок"}</span>
+                <span class="tag ${profile.slug === "deluxe" || profile.slug === "ultimate" || profile.privilege === "Создатель" || profile.privilege === "Владелец" ? "gold" : ""}">${cleanPrivilege(profile.privilege)}</span>
               </div>
               ${profile.status_message ? `<div class="profile-status-badge">${profile.status_message}</div>` : ""}
               ${profile.fav_rod ? `<div class="fav-rod-badge">Любимая удочка: <strong>${profile.fav_rod}</strong></div>` : ""}
@@ -1028,23 +1064,44 @@
 
   const CASE_LOOT_TABLES = {
     ocean: [
-      { name: "AquaCoins (10 000 — 50 000)", rarity: "common", rarityLabel: "Обычный", chance: "45%" },
-      { name: "Биогранулы из водорослей ×16", rarity: "common", rarityLabel: "Обычный", chance: "30%" },
-      { name: "Магнит бездны ×1", rarity: "rare", rarityLabel: "Редкий", chance: "15%" },
-      { name: "Бутыльки опыта ×16", rarity: "epic", rarityLabel: "Эпический", chance: "10%" },
+      { name: "AquaCoins ×60–120", rarity: "common", rarityLabel: "Обычный", chance: "20%" },
+      { name: "Железная руда ×4–8", rarity: "common", rarityLabel: "Обычный", chance: "15%" },
+      { name: "Оловянная руда ×3–6", rarity: "common", rarityLabel: "Обычный", chance: "14%" },
+      { name: "Редстоун ×4–8", rarity: "common", rarityLabel: "Обычный", chance: "12%" },
+      { name: "Медные слитки ×4–8", rarity: "common", rarityLabel: "Обычный", chance: "12%" },
+      { name: "Лазурит ×3–6", rarity: "common", rarityLabel: "Обычный", chance: "10%" },
+      { name: "Слизкие шары ×4–9", rarity: "common", rarityLabel: "Обычный", chance: "9%" },
+      { name: "Нить ×4–8", rarity: "common", rarityLabel: "Обычный", chance: "4%" },
+      { name: "Бутыльки опыта ×4–8", rarity: "rare", rarityLabel: "Редкий", chance: "4%" },
     ],
     fisher: [
-      { name: "Ледяная удочка [T6]", rarity: "rare", rarityLabel: "Редкий", chance: "35%" },
-      { name: "Удочка Ловца Звёзд [T7]", rarity: "rare", rarityLabel: "Редкий", chance: "25%" },
-      { name: "Лазурный кристалл [T8]", rarity: "epic", rarityLabel: "Эпический", chance: "20%" },
-      { name: "Акулий клык [T9]", rarity: "epic", rarityLabel: "Эпический", chance: "12%" },
-      { name: "Магматическая [T10]", rarity: "legendary", rarityLabel: "Легендарный", chance: "8%" },
+      { name: "Серебряная руда ×2–4", rarity: "common", rarityLabel: "Обычный", chance: "15%" },
+      { name: "Железная руда ×6–12", rarity: "common", rarityLabel: "Обычный", chance: "13%" },
+      { name: "Алюминиевая руда ×2–4", rarity: "common", rarityLabel: "Обычный", chance: "13%" },
+      { name: "Сапфир ×1–2", rarity: "rare", rarityLabel: "Редкий", chance: "12%" },
+      { name: "Вольфрам ×1–3", rarity: "rare", rarityLabel: "Редкий", chance: "11%" },
+      { name: "Хром ×1–3", rarity: "rare", rarityLabel: "Редкий", chance: "11%" },
+      { name: "Кобальт ×1–2", rarity: "rare", rarityLabel: "Редкий", chance: "8%" },
+      { name: "Бутыльки опыта ×8–16", rarity: "common", rarityLabel: "Обычный", chance: "6%" },
+      { name: "Ледяная удочка [T6]", rarity: "epic", rarityLabel: "Эпический", chance: "4%" },
+      { name: "Удочка Ловца Звёзд [T7]", rarity: "epic", rarityLabel: "Эпический", chance: "3%" },
+      { name: "Лазурный кристалл [T8]", rarity: "epic", rarityLabel: "Эпический", chance: "2%" },
+      { name: "Акулий клык [T9]", rarity: "legendary", rarityLabel: "Легендарный", chance: "2%" },
     ],
     depth: [
-      { name: "Рамка профиля «Глубинная Бездна» (гемы ×2)", rarity: "rare", rarityLabel: "Редкий", chance: "40%" },
-      { name: "250 000 AquaCoins", rarity: "epic", rarityLabel: "Эпический", chance: "30%" },
-      { name: "Привилегия Deluxe 14 дней (гемы ×5)", rarity: "epic", rarityLabel: "Эпический", chance: "20%" },
-      { name: "Привилегия Ultimate 30 дней (гемы ×10)", rarity: "legendary", rarityLabel: "Легендарный", chance: "10%" },
+      { name: "Платина ×2–4", rarity: "rare", rarityLabel: "Редкий", chance: "13%" },
+      { name: "Алмазы ×2–4", rarity: "rare", rarityLabel: "Редкий", chance: "12%" },
+      { name: "Дроблёный уран ×1–3", rarity: "rare", rarityLabel: "Редкий", chance: "11%" },
+      { name: "Инконель ×1–2", rarity: "rare", rarityLabel: "Редкий", chance: "11%" },
+      { name: "Гемы ×2–3", rarity: "rare", rarityLabel: "Редкий", chance: "9%" },
+      { name: "Сердце моря ×1", rarity: "epic", rarityLabel: "Эпический", chance: "8%" },
+      { name: "Осмиридий ×1–2", rarity: "epic", rarityLabel: "Эпический", chance: "8%" },
+      { name: "Адамантиевая руда ×1–2", rarity: "epic", rarityLabel: "Эпический", chance: "7%" },
+      { name: "Светящаяся ягода [T11]", rarity: "epic", rarityLabel: "Эпический", chance: "6%" },
+      { name: "Обсидиановая [T10]", rarity: "epic", rarityLabel: "Эпический", chance: "5%" },
+      { name: "Магматическая [T12]", rarity: "legendary", rarityLabel: "Легендарный", chance: "4%" },
+      { name: "Альфа [T13]", rarity: "legendary", rarityLabel: "Легендарный", chance: "3%" },
+      { name: "Звезда Незера ×1", rarity: "legendary", rarityLabel: "Легендарный", chance: "3%" },
     ],
   };
 
@@ -1125,32 +1182,46 @@
   const FALLBACK_CATALOG = {
     store: [
       {
+        slug: "sailor",
+        title: "Моряк",
+        price_rub: 99,
+        description: "Стартовая морская привилегия. Префикс [МОРЯК], 2 точки дома (/sethome), доступ к базовым удобствам.",
+        perks: ["Префикс [МОРЯК] в чате", "2 точки дома /sethome", "Цветной ник", "Базовый морской набор"],
+      },
+      {
+        slug: "skipper",
+        title: "Шкипер",
+        price_rub: 249,
+        description: "Продвинутый мореплаватель. Префикс [ШКИПЕР], 3 точки дома, приоритетный вход на сервер.",
+        perks: ["Префикс [ШКИПЕР] в чате", "3 точки дома /sethome", "Приоритетный вход на сервер", "Кит Шкипера в меню F4"],
+      },
+      {
+        slug: "captain",
+        title: "Капитан",
+        price_rub: 499,
+        description: "Командир корабля. Префикс [КАПИТАН], 5 точек дома, режим полёта /fly на приватах.",
+        perks: ["Префикс [КАПИТАН] в чате", "Режим полёта /fly", "5 точек дома /sethome", "Множитель удачи x2", "Кит Капитана"],
+      },
+      {
+        slug: "admiral",
+        title: "Адмирал",
+        price_rub: 899,
+        description: "Верховный главнокомандующий флота. Префикс [АДМИРАЛ], 10 точек дома, /fly, /nick.",
+        perks: ["Префикс [АДМИРАЛ] в чате", "Режим полёта /fly", "Смена ника /nick", "10 точек дома /sethome", "Множитель удачи x4", "Кит Адмирала"],
+      },
+      {
+        slug: "legend",
+        title: "Легенда",
+        price_rub: 1499,
+        description: "Высший статус на сервере AquaTech. Префикс [ЛЕГЕНДА], неограниченные дома, /fly, /hat, /nick.",
+        perks: ["Префикс [ЛЕГЕНДА] в чате", "Режим полёта /fly везде", "Блок на голове /hat", "Смена ника /nick", "15 точек дома /sethome", "Максимальный множитель x8", "Эксклюзивный кейс Легенды"],
+      },
+      {
         slug: "vip",
         title: "VIP",
-        price_rub: 149,
-        description: "Префикс, цветной ник, +1 дом. Купить на сайте пока нельзя.",
-        perks: ["Префикс VIP в чате", "+1 дом /sethome", "Цветной ник", "Приоритет в очереди"],
-      },
-      {
-        slug: "premium",
-        title: "Premium",
-        price_rub: 299,
-        description: "Всё из VIP, кейс в день на сервере, приоритет входа.",
-        perks: ["Всё из VIP", "Кейс в день (в игре)", "Приоритет входа", "Доп. слот варпа"],
-      },
-      {
-        slug: "deluxe",
-        title: "Deluxe",
-        price_rub: 599,
-        description: "Бонус к улову и рамка профиля. Оплата на сайте выключена.",
-        perks: ["Всё из Premium", "Рамка профиля", "Бонус к улову", "Бейдж Deluxe"],
-      },
-      {
-        slug: "ultimate",
-        title: "Ultimate",
-        price_rub: 1199,
-        description: "Максимум привилегий на сервере. Оплата на сайте позже.",
-        perks: ["Всё из Deluxe", "Бейдж Ultimate", "Максимум домов", "Приоритет в поддержке"],
+        price_rub: 199,
+        description: "Классическая VIP-привилегия. Префикс [VIP], /fly, /wb, /ec, косметические эффекты.",
+        perks: ["Префикс [VIP] в чате", "Виртуальный верстак /wb", "Эндер-сундук /ec", "Режим полёта /fly", "Косметика AquaLumen"],
       },
     ],
     case: [
@@ -1158,22 +1229,22 @@
         slug: "ocean",
         title: "Океанский кейс",
         price_rub: 0,
-        description: "Монеты и расходники. Открывается в игре (F4).",
-        perks: ["AquaCoins", "Расходники", "Мелкий буст"],
+        description: "Стартовые материалы прогрессии за 500 внутриигровых монет. Открывается в игре (F4).",
+        perks: ["Железо, олово, медь", "Редстоун и лазурит", "Слизкие шары", "Откат 60–120 монет"],
       },
       {
         slug: "fisher",
         title: "Кейс рыбака",
         price_rub: 0,
-        description: "Лут кейсов AquaTech. Рулетки на сайте нет.",
-        perks: ["Ресурсы улова", "Буст удочки", "Монеты"],
+        description: "Материалы середины прогрессии за 1500 монет и редкие удочки T6–T9.",
+        perks: ["Серебро, алюминий, кобальт", "Сапфир, вольфрам, хром", "Удочка T6 — 4%", "Удочка T9 — 2%"],
       },
       {
         slug: "depth",
-        title: "Глубинный кейс",
+        title: "Кейс Бездны",
         price_rub: 0,
-        description: "Редкая косметика и пробные привилегии. Только сервер.",
-        perks: ["Рамка профиля", "Пробная привилегия", "Крупный запас монет"],
+        description: "Поздние материалы за 5000 монет и топовые удочки T10–T13.",
+        perks: ["Платина, уран, инконель", "Осмиридий и адамантит", "Сердце моря и звезда Незера", "Удочка T13 Альфа — 3%"],
       },
     ],
   };

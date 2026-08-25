@@ -4,5 +4,5 @@ permissions:
 parents:
 - default
 prefixes:
-- '&c&l[YOUTUBE] &c':
+- " ":
     priority: 34

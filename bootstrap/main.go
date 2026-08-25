@@ -433,7 +433,8 @@ func startDetached(exe, dir string) error {
 	cmd := exec.Command(exe)
 	cmd.Dir = dir
 	cmd.SysProcAttr = &syscall.SysProcAttr{
-		CreationFlags: 0x00000200, // CREATE_NEW_PROCESS_GROUP
+		HideWindow:    true,
+		CreationFlags: 0x08000000 | 0x00000200, // CREATE_NO_WINDOW | CREATE_NEW_PROCESS_GROUP
 	}
 	return cmd.Start()
 }

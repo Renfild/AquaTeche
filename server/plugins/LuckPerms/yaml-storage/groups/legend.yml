@@ -8,5 +8,5 @@ permissions:
 parents:
 - default
 prefixes:
-- '&6&l[ЛЕГЕНДА] &6':
+- " ":
     priority: 50

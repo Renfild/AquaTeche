@@ -1,15 +1,14 @@
 import { bad, json, readJson } from "../../_lib/http.js";
-
-const DEFAULT_SYNC_KEY = "aquatech_internal_sync_key_2026";
+import { cleanPrivilege } from "../../_lib/profile.js";
 
 export async function onRequestPost(context) {
   const { request, env } = context;
   if (!env.DB) return bad("База не подключена (D1)", 503);
 
   const serverKey = request.headers.get("X-AquaTech-Server-Key") || "";
-  const expectedKey = env.SERVER_SYNC_KEY || DEFAULT_SYNC_KEY;
+  const expectedKey = env.SERVER_SYNC_KEY || "";
 
-  if (serverKey !== expectedKey) {
+  if (!expectedKey || serverKey !== expectedKey) {
     return bad("Неверный ключ сервера", 403);
   }
 
@@ -20,7 +19,7 @@ export async function onRequestPost(context) {
   const coins = Math.max(0, Math.floor(Number(body.coins || 0)));
   const fish = Math.max(0, Math.floor(Number(body.fish || 0)));
   const playtimeHours = Math.max(0, Math.floor(Number(body.playtime_hours || 0)));
-  const privilege = String(body.privilege || "").slice(0, 32);
+  const privilege = cleanPrivilege(body.privilege);
   const questsDone = Math.max(0, Math.floor(Number(body.quests_done || 0)));
 
   // Check if user exists
@@ -90,5 +89,50 @@ export async function onRequestPost(context) {
     }
   }
 
-  return json({ ok: true, synced: true, nick });
+  const profile = await env.DB.prepare(
+    `SELECT u.nick, p.privilege, p.coins, p.fish, p.playtime_hours, p.quests_done, p.likes
+     FROM users u JOIN profiles p ON p.user_id = u.id
+     WHERE u.nick = ? COLLATE NOCASE`
+  )
+    .bind(nick)
+    .first();
+
+  return json({
+    ok: true,
+    synced: true,
+    nick,
+    coins: profile?.coins ?? coins,
+    fish: profile?.fish ?? fish,
+    playtime_hours: profile?.playtime_hours ?? playtimeHours,
+    privilege: profile?.privilege ?? privilege,
+    quests_done: profile?.quests_done ?? questsDone,
+    likes: profile?.likes ?? 0,
+  });
+}
+
+export async function onRequestGet(context) {
+  const { request, env } = context;
+  if (!env.DB) return bad("База не подключена (D1)", 503);
+
+  const serverKey = request.headers.get("X-AquaTech-Server-Key") || "";
+  const expectedKey = env.SERVER_SYNC_KEY || "";
+
+  if (!expectedKey || serverKey !== expectedKey) {
+    return bad("Неверный ключ сервера", 403);
+  }
+
+  const url = new URL(request.url);
+  const nick = String(url.searchParams.get("nick") || "").trim();
+  if (!nick) return bad("Укажите ник игрока");
+
+  const profile = await env.DB.prepare(
+    `SELECT u.nick, p.privilege, p.coins, p.fish, p.playtime_hours, p.quests_done, p.likes
+     FROM users u JOIN profiles p ON p.user_id = u.id
+     WHERE u.nick = ? COLLATE NOCASE`
+  )
+    .bind(nick)
+    .first();
+
+  if (!profile) return bad("Игрок не найден", 404);
+  return json({ ok: true, profile });
 }

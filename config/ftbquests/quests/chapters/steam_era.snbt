@@ -1,0 +1,838 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "steam_era"
+	group: ""
+	icon: "industrialupgrade:basemachine3/steamboiler"
+	id: "6847E9D8B36F0462"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Паровые механизмы потребляют пар только от паровых"
+				"котлов (обычных и мультиблочных), преобразователей пара"
+				"и торфяного парогенератора. Других источников нет."
+			]
+			id: "6F51B358741C21C5"
+			rewards: [{
+				id: "CADAF26A8A98B1E3"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1BCA4D4F47062D12"
+				item: "industrialupgrade:steam_machine_block"
+				type: "item"
+			}]
+			title: "Steam Machine Block"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6F51B358741C21C5"]
+			description: [
+				"Работает каждые 3 тика, потребляет 2 мб воды и"
+				"производит 2 мб пара."
+			]
+			id: "3D0D2D52D8401DDC"
+			rewards: [{
+				id: "CA93770CC1E09851"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "467F5009B6EFFCB9"
+				item: "industrialupgrade:basemachine3/steamboiler"
+				type: "item"
+			}]
+			title: "Паровой котёл"
+			x: 1.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3D0D2D52D8401DDC"]
+			description: [
+				"Для работы требуется нагрев от лавы под ним."
+				"Используйте кнопки \"+\" и \"-\" для регулировки давления"
+				"от 0 до 4."
+			]
+			id: "ADC16E27B12F00B6"
+			rewards: [{
+				id: "AB333D509E9AADFD"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "621FF0F72A2CBC26"
+				item: "industrialupgrade:basemachine3/steampressureconverter"
+				type: "item"
+			}]
+			title: "Паровой преобразователь давления"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["ADC16E27B12F00B6"]
+			description: [
+				"Кремниевая заготовка для электронной цепочки. После"
+				"точной обработки становится основой для плат и более"
+				"сложных схем."
+			]
+			id: "8543F8BA0F9D6325"
+			rewards: [{
+				id: "A5DD8C11BB39DF00"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "D9ED944B34D13187"
+				item: "industrialupgrade:primal_silicon_crystal_handler/primal_silicon_crystal_handler"
+				type: "item"
+			}]
+			title: "Примитивный выращиватель кристаллов"
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["8543F8BA0F9D6325"]
+			description: [
+				"Полирует кристаллы и точные детали лазером. Нужен там,"
+				"где материалу требуется чистая поверхность без грубой"
+				"механической обработки."
+			]
+			id: "03821A4A4913D63C"
+			rewards: [{
+				id: "DACE6219B2C65FF0"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "8A61D9B6EC17B15D"
+				item: "industrialupgrade:primal_laser_polisher/primal_laser_polisher"
+				type: "item"
+			}]
+			title: "Примитивный лазерный полировщик"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["03821A4A4913D63C"]
+			description: [
+				"Паровая полировальная машина. Использует паровую"
+				"систему для аккуратной обработки кристаллов и деталей"
+				"без электрического питания."
+			]
+			id: "5A16378D2D4DD4A8"
+			rewards: [{
+				id: "118E943C85C50504"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "10F0B718837B9A2B"
+				item: "industrialupgrade:basemachine3/steam_sharpener"
+				type: "item"
+			}]
+			title: "Паровой полировщик"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5A16378D2D4DD4A8"]
+			description: [
+				"Генерирует электричество из пара. Требуется лава под"
+				"механизмом."
+			]
+			id: "ED1B78D54659D7C0"
+			rewards: [{
+				id: "0466B1E0A76DE553"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "E16307A8299E94E1"
+				item: "industrialupgrade:basemachine3/steam_ampere_generator"
+				type: "item"
+			}]
+			title: "Паровой преобразователь тока"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["ED1B78D54659D7C0"]
+			description: [
+				"Для работы требуется электричество и лава под ним."
+				"Жидкости забираются с помощью капсул или жидкостных"
+				"труб."
+			]
+			id: "B83A32511DF22D6A"
+			rewards: [{
+				id: "264694199E9EF146"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "6F4D37C11B59B860"
+				item: "industrialupgrade:basemachine3/steam_electrolyzer"
+				type: "item"
+			}]
+			title: "Паровой электролизёр"
+			x: 7.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["B83A32511DF22D6A"]
+			description: [
+				"Кислород используется как окислитель и реагент в"
+				"химических машинах: электролизёрах, газовом комбайнере,"
+				"жидкостных интеграторах и разделителях. Он участвует в"
+				"получении оксидов, кислот и некоторых продуктов из"
+				"рудных или космических материалов."
+			]
+			id: "6DCB07095E764CFF"
+			rewards: [{
+				id: "1F6B7E98D2D6C0B5"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1AD819256A061E45"
+				item: "industrialupgrade:bucket/oxygen"
+				type: "item"
+			}]
+			title: "Окислитель, которым мы дышим"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6DCB07095E764CFF"]
+			description: [
+				"Проводит реакции с газами внутри рабочей камеры."
+				"Работает с газовыми реагентами и предметами, когда"
+				"обычных жидкостных машин недостаточно."
+			]
+			id: "9123CAD78FAF6660"
+			rewards: [{
+				id: "2B2B7C1CB01F41BF"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "6C63059924957278"
+				item: "industrialupgrade:gas_chamber/primal_gas_chamber"
+				type: "item"
+			}]
+			title: "Газовая камера"
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["9123CAD78FAF6660"]
+			description: [
+				"Триоксид серы получается в газовом комбайнере из"
+				"сернистого оксида и кислорода. Затем он смешивается с"
+				"водой для серной кислоты и используется в серной"
+				"химической цепочке."
+			]
+			id: "874B0E9D0911C856"
+			rewards: [{
+				id: "E9BE2EC418C1BAC3"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "96A95CF3DD8FCB30"
+				item: "industrialupgrade:bucket/sulfurtrioxide"
+				type: "item"
+			}]
+			title: "Sulfurtrioxide"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["874B0E9D0911C856"]
+			description: [
+				"Раствор медного сульфата — жидкий медьсодержащий"
+				"реагент. Используется в жидкостных интеграторах и"
+				"смесителях для обработки меди, плат и химических"
+				"заготовок."
+			]
+			id: "2B8BAE8DE8904886"
+			rewards: [{
+				id: "D843A4DD1DB2B2C0"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "0CF000832CCB7E5B"
+				item: "industrialupgrade:fluidcoppersulfate"
+				type: "item"
+			}]
+			title: "Сульфат меди"
+			x: 11.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2B8BAE8DE8904886"]
+			description: [
+				"Пустая плата для электроники. На неё наносятся дорожки"
+				"и устанавливаются компоненты, прежде чем плата станет"
+				"рабочей схемой."
+			]
+			id: "54F899A90B74194B"
+			rewards: [{
+				id: "8FEB801C61EB35FD"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "4A65DC88D70EE17D"
+				item: "industrialupgrade:circuit_board"
+				type: "item"
+			}]
+			title: "Circuit Board"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["54F899A90B74194B"]
+			description: [
+				"Стол для программирования простых плат. Записывает"
+				"управляющую логику в подготовленную плату и превращает"
+				"её в рабочий электронный компонент."
+			]
+			id: "FC8D57ED7F890E41"
+			rewards: [{
+				id: "F0DA307D38CAFBED"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "4DB4561E58361911"
+				item: "industrialupgrade:primal_programming_table/primal_programming_table"
+				type: "item"
+			}]
+			title: "Примитивный программированный стол"
+			x: 13.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["FC8D57ED7F890E41"]
+			description: [
+				"Плата с записанной логикой управления. Используется в"
+				"механизмах и электронных сборках как готовый"
+				"управляющий элемент."
+			]
+			id: "06E3F57D19E99359"
+			rewards: [{
+				id: "412A3FF8915F3574"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "3BABE87B98A15734"
+				item: "industrialupgrade:programmed_circuit_board"
+				type: "item"
+			}]
+			title: "Programmed Circuit Board"
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["06E3F57D19E99359"]
+			description: [
+				"Паровая машина для обработки тяжёлых руд. Разделяет"
+				"плотное сырьё на полезные части без электрической сети."
+			]
+			id: "7D49F9850EB90C01"
+			rewards: [{
+				id: "5EF3E0EEB9AE5705"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "EE3A5C7E8D61DDD4"
+				item: "industrialupgrade:basemachine3/steam_handler_ore"
+				type: "item"
+			}]
+			title: "Паровой сепаратор"
+			x: 14.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["7D49F9850EB90C01"]
+			description: [
+				"Угольная пыль с примесями. Это промежуточный материал:"
+				"её очищают или смешивают, чтобы получить пригодную"
+				"углеродную смесь."
+			]
+			id: "887D8D8B5B9C094E"
+			rewards: [{
+				id: "FA37EF77EF00F127"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "83048247B091AC5D"
+				item: "industrialupgrade:impurity_coal_dust"
+				type: "item"
+			}]
+			title: "Impurity Coal Dust"
+			x: 12.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["887D8D8B5B9C094E"]
+			description: [
+				"Подготовленная углеродная смесь для металлургии. Даёт"
+				"контролируемый углеродный состав при работе со сталью и"
+				"сплавами."
+			]
+			id: "BD265E2183BCB0B1"
+			rewards: [{
+				id: "1E23773106FBDA6C"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "65668EA85B5AF4E2"
+				item: "industrialupgrade:alloy_coal_dust"
+				type: "item"
+			}]
+			title: "Alloy Coal Dust"
+			x: 11.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["BD265E2183BCB0B1"]
+			description: [
+				"Прочный конструкционный металл для корпусов,"
+				"инструментов и машин. Хорошо подходит для механизмов,"
+				"которым уже недостаточно ранних металлов."
+			]
+			id: "2594E7FEF47BCFDF"
+			rewards: [{
+				id: "CE6899FD826A9F08"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "2E48C2AA0827A037"
+				item: "industrialupgrade:casing/steel"
+				type: "item"
+			}]
+			title: "Стальная оболочка"
+			x: 8.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["2594E7FEF47BCFDF"]
+			description: [
+				"Прочный молот для ручной обработки жёстких материалов."
+				"Служит дольше ранних молотов и лучше подходит для"
+				"стальных заготовок."
+			]
+			id: "7905D85C31A49354"
+			rewards: [{
+				id: "ADBD21D2654E4525"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "AB2FCD6DC28E128A"
+				item: "industrialupgrade:energy/steel_hammer"
+				type: "item"
+			}]
+			title: "Стальной молот"
+			x: 7.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["2594E7FEF47BCFDF"]
+			description: [
+				"Усиленная наковальня для тяжёлой ручной обработки."
+				"Рассчитана на прочные сплавы и операции, где обычная"
+				"наковальня быстро ограничивает производство."
+			]
+			id: "9AA19AA7BC59126D"
+			rewards: [{
+				id: "0BBD36A3AF203127"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "9942C674A21F9849"
+				item: "industrialupgrade:block_strong_anvil/block_strong_anvil"
+				type: "item"
+			}]
+			title: "Укреплённая наковальня"
+			x: 9.62d
+			y: 2.75d
+		}
+		{
+			dependencies: ["9AA19AA7BC59126D"]
+			description: [
+				"Плавит руды и материалы в расплавленные металлы."
+				"Работает с огнеупорной обработкой и выдаёт жидкий"
+				"металл для литейных процессов."
+			]
+			id: "342CD2D31CA72D4E"
+			rewards: [{
+				id: "AAC9333E9E77D843"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "84235FDE13DD74FF"
+				item: "industrialupgrade:refractory_furnace/refractory_furnace"
+				type: "item"
+			}]
+			title: "Тугоплавкая печь"
+			x: 10.62d
+			y: 2.75d
+		}
+		{
+			dependencies: ["342CD2D31CA72D4E"]
+			description: [
+				"Небольшая литейная установка. Принимает расплавленный"
+				"металл и отливает из него базовые твёрдые заготовки."
+			]
+			id: "064B68FB95F784E2"
+			rewards: [{
+				id: "B66BEAEA033C8992"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "33A451B5A42B3B4D"
+				item: "industrialupgrade:mini_smeltery/mini_smeltery"
+				type: "item"
+			}]
+			title: "Мини-плавильня"
+			x: 11.62d
+			y: 2.75d
+		}
+		{
+			dependencies: ["2594E7FEF47BCFDF"]
+			description: [
+				"Механизм пайки для ранней электроники. Соединяет"
+				"платы, контакты и мелкие детали в готовые электронные"
+				"компоненты."
+			]
+			id: "E5CE5E1D628BF9BF"
+			rewards: [{
+				id: "3CFCB1AB79DFC962"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "F87A21392C700B2C"
+				item: "industrialupgrade:primal_soldering_mechanism/primal_soldering_mechanism"
+				type: "item"
+			}]
+			title: "Стол для пайки электроники"
+			x: 7.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["E5CE5E1D628BF9BF"]
+			description: [
+				"Генерирует каждые 2 тика: потребляет 1 мб воды,"
+				"производит 2 мб пара."
+			]
+			id: "72A89907ED8A6FCF"
+			rewards: [{
+				id: "5BD5EB17733D1465"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "5E80E9A4DB0E4E70"
+				item: "industrialupgrade:basemachine3/steam_converter"
+				type: "item"
+			}]
+			title: "Паровой преобразователь пара "
+			x: 7.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["72A89907ED8A6FCF"]
+			description: [
+				"Генерирует каждый тик: потребляет 1 мб воды,"
+				"производит 2 мб пара."
+			]
+			id: "E68DA80B9A33E9DF"
+			rewards: [{
+				id: "813A70FDECF3146E"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "7E8D077DE5DBBE41"
+				item: "industrialupgrade:basemachine3/steam_peat_generator"
+				type: "item"
+			}]
+			title: "Паровой генератор на торфе"
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["72A89907ED8A6FCF"]
+			description: [
+				"Паровой насос для перекачки жидкостей. Двигает воду,"
+				"лаву и другие жидкости без электрического двигателя."
+			]
+			id: "AC2C6A28BF35E36E"
+			rewards: [{
+				id: "ACBCF2A96DABF21E"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "195DF1A0B7FC68E3"
+				item: "industrialupgrade:basemachine3/steam_pump"
+				type: "item"
+			}]
+			title: "Паровая помпа"
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["AC2C6A28BF35E36E"]
+			description: [
+				"Генерирует каждый тик: потребляет 1 мб воды,"
+				"производит 2 мб пара. Для работы требуется нагрев от"
+				"нагревательного механизма."
+			]
+			id: "F45EB848AC92BADA"
+			rewards: [{
+				id: "017F167AAC77DD11"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "9ADC08F42D74FA53"
+				item: "industrialupgrade:steam_boiler/steam_boiler_controller"
+				type: "item"
+			}]
+			title: "Контроллер парового котла"
+			x: 5.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["F45EB848AC92BADA"]
+			description: [
+				"Передаёт пар только со стороны, с которой был"
+				"установлен. С других сторон только отправляет пар."
+			]
+			id: "67AF42D9D6969244"
+			rewards: [{
+				id: "E71EA491322FE562"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "A715850E6CD200A7"
+				item: "industrialupgrade:basemachine3/steam_storage"
+				type: "item"
+			}]
+			title: "Паровое хранилище"
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["67AF42D9D6969244"]
+			description: [
+				"Паровой карьер. Использует пар и буровые трубы,"
+				"добывая блоки из рабочей области по мере продвижения"
+				"вниз."
+			]
+			id: "07D4F7F0E43B32CC"
+			rewards: [{
+				id: "225015CBEBEB53E1"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "B23B21B247DAC01B"
+				item: "industrialupgrade:basemachine3/steam_quarry"
+				type: "item"
+			}]
+			title: "Паровой карьер"
+			x: 3.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["07D4F7F0E43B32CC"]
+			description: [
+				"Улучшенный паровой карьер. Работает по той же схеме с"
+				"трубами и паром, но добывает быстрее и удобнее обычной"
+				"версии."
+			]
+			id: "D0B3922A95FA784A"
+			rewards: [{
+				id: "517A2798E2257155"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "609CEB2F9D971B54"
+				item: "industrialupgrade:basemachine3/adv_steam_quarry"
+				type: "item"
+			}]
+			title: "§eУлучшенный паровой карьер"
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["E5CE5E1D628BF9BF"]
+			description: [
+				"Потребляет электричество."
+			]
+			id: "AEF818D275CBB53D"
+			rewards: [{
+				id: "CFFEAE1C975C8799"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "EF89DAF8EDAF8B7F"
+				item: "industrialupgrade:basemachine3/steam_crystal_charge"
+				type: "item"
+			}]
+			title: "Паровой зарядник кристаллов"
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["AEF818D275CBB53D"]
+			description: [
+				"Преобразует обычный пар в перегретый. Использует пар,"
+				"предназначенный для паровых механизмов."
+			]
+			id: "C30A041963C13F11"
+			rewards: [{
+				id: "8E0273F40B30479C"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "21FCA8FDB483E2FB"
+				item: "industrialupgrade:basemachine3/steam_fluid_heater"
+				type: "item"
+			}]
+			title: "Паровой нагреватель жидкостей"
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["AEF818D275CBB53D"]
+			description: [
+				"Прочный сплав для деталей с высокой нагрузкой."
+				"Выдерживает температуру и износ лучше обычной стали."
+			]
+			id: "49DE0F9516C8E39C"
+			rewards: [{
+				id: "5DE1F5C217A84206"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "AF4CCDC5A6451AA6"
+				item: "industrialupgrade:titanium_steel"
+				type: "item"
+			}]
+			title: "Titanium Steel"
+			x: 5.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["49DE0F9516C8E39C"]
+			description: [
+				"Собирает электронные компоненты из плат, проводников и"
+				"мелких деталей. Удобен для повторяемой сборки схем и"
+				"модулей."
+			]
+			id: "E927B5DA80884374"
+			rewards: [{
+				id: "FA50462397A7F77F"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "0CBD50E51A0A9703"
+				item: "industrialupgrade:electronics_assembler/electronics_assembler"
+				type: "item"
+			}]
+			title: "Стол для сборки электроники"
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["E927B5DA80884374"]
+			description: [
+				"Базовая электронная схема. Содержит простую"
+				"управляющую логику для электрических машин и улучшений."
+			]
+			id: "9D6349C557CCA28A"
+			rewards: [{
+				id: "1AB2F6EE84E53F10"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "C68800402B306894"
+				item: "industrialupgrade:electronic_circuit"
+				type: "item"
+			}]
+			title: "Electronic Circuit"
+			x: 3.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["9D6349C557CCA28A"]
+			description: [
+				"Корпус машины, внутри которого размещаются рабочие"
+				"слоты, энергия и механические части. Используется как"
+				"основа большинства механизмов."
+			]
+			id: "7F6BE6627BFC2CF5"
+			rewards: [{
+				id: "A51464D26C6C4344"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "2750ED3656FC53B2"
+				item: "industrialupgrade:machine_casing"
+				type: "item"
+			}]
+			title: "Machine Casing"
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7F6BE6627BFC2CF5"]
+			description: [
+				"Главный блок доменной печи. Управляет многоблочной"
+				"плавкой материалов, которым нужна высокая температура."
+			]
+			id: "4FE087A7196F1E38"
+			rewards: [{
+				id: "E1D9958C8DC54556"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "61A7028A650BE85E"
+				item: "industrialupgrade:blastfurnace/blast_furnace_main"
+				type: "item"
+			}]
+			title: "Контроллер доменной печи"
+			x: 1.0d
+			y: 2.0d
+		}
+	]
+	title: "1. Паровая эпоха"
+}

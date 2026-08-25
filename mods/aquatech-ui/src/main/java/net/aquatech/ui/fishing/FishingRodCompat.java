@@ -41,18 +41,15 @@ public final class FishingRodCompat {
      */
     @Nullable
     public static AquaTechFishingRodItem.RodType resolveRodType(ItemStack stack) {
-        if (!isResourceRod(stack)) return null;
         String path = rodPath(stack);
-        if (path == null) return null;
+        if (path == null) return AquaTechFishingRodItem.RodType.NOVICE;
 
         return switch (path) {
             case "bamboo_rod", "good_old_rod" ->
                     AquaTechFishingRodItem.RodType.NOVICE; // Tier 1 (bamboo = starter blocks)
             // humble is early ores (maps closer to iron-tier pool in generateLoot fallback)
-            case "humble_rod" ->
+            case "humble_rod", "naturalist_rod", "boner_rod", "sky_rod" ->
                     AquaTechFishingRodItem.RodType.IRON; // Tier 2
-            case "naturalist_rod" ->
-                    AquaTechFishingRodItem.RodType.IRON; // keep naturalist as T2 ores if fallback
             case "starcatcher_rod", "slimed_rod" ->
                     AquaTechFishingRodItem.RodType.GOLD; // Tier 3
             case "iceborn_rod", "obsidian_rod" ->

@@ -24,7 +24,11 @@ import {
   onRequestPatch as profilePatch,
 } from "../functions/api/profiles/[nick].js";
 import { onRequestPost as profileLikePost } from "../functions/api/profiles/[nick]/like.js";
-import { onRequestPost as syncPlayerPost } from "../functions/api/sync/player.js";
+import {
+  onRequestPost as syncPlayerPost,
+  onRequestGet as syncPlayerGet,
+} from "../functions/api/sync/player.js";
+import { onRequestGet as marketGet, onRequestPost as marketPost } from "../functions/api/market.js";
 import { onRequestGet as adminMeGet } from "../functions/api/admin/me.js";
 import {
   onRequestGet as adminSettingsGet,
@@ -72,7 +76,14 @@ async function handleApi(request, env) {
   if (path === "/api/server-status" && method === "GET") return serverStatusGet(ctx(request, env));
   if (path === "/api/news" && method === "GET") return newsGet(ctx(request, env));
   if (path === "/api/site" && method === "GET") return siteGet(ctx(request, env));
-  if (path === "/api/sync/player" && method === "POST") return syncPlayerPost(ctx(request, env));
+  if (path === "/api/sync/player") {
+    if (method === "POST") return syncPlayerPost(ctx(request, env));
+    if (method === "GET") return syncPlayerGet(ctx(request, env));
+  }
+  if (path === "/api/market") {
+    if (method === "GET") return marketGet(ctx(request, env));
+    if (method === "POST") return marketPost(ctx(request, env));
+  }
   // ensure-nick intentionally returns 410 (open signup footgun)
   if (path === "/api/launcher/ensure-nick" && method === "POST") return launcherEnsureNickPost(ctx(request, env));
   if (path === "/api/launcher/verify-token" && method === "POST") return launcherVerifyTokenPost(ctx(request, env));

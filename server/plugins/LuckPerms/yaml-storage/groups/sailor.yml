@@ -6,4 +6,4 @@ parents:
 - default
 prefixes:
 - '&7[МОРЯК] &7':
-    priority: 10
+    priority: 20

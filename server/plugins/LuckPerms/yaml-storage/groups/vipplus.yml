@@ -4,5 +4,5 @@ permissions:
 parents:
 - default
 prefixes:
-- '&3&l[DELUXE] &3':
+- " ":
     priority: 42

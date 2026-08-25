@@ -52,8 +52,19 @@ public final class LuckPermsBridge {
                 uuid, name,
                 rank.id(), rank.display(), rank.weight(),
                 ping, rank.staff(), false,
-                pressure.inWater(), pressure.depth(), pressure.effective()
+                pressure.inWater(), pressure.depth(), pressure.effective(),
+                readCoins(player)
         );
+    }
+
+    private static long readCoins(ServerPlayer player) {
+        try {
+            net.minecraft.world.scores.Objective obj = player.getScoreboard().getObjective("coins");
+            if (obj == null) return 0L;
+            return player.getScoreboard().getOrCreatePlayerScore(player.getScoreboardName(), obj).getScore();
+        } catch (Throwable t) {
+            return 0L;
+        }
     }
 
     public static void invalidatePlayer(UUID uuid) {

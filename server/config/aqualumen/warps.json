@@ -1,0 +1,32 @@
+{
+  "warps": [
+    {
+      "id": "spawn",
+      "title": "Спавн",
+      "description": "Центральный океанический хаб, NPC Рыбак, порталы",
+      "tag": "SPAWN",
+      "command": "spawn"
+    },
+    {
+      "id": "home",
+      "title": "Остров / Плот",
+      "description": "Ваш личный остров 4x4, генераторы и фермы",
+      "tag": "ISLAND",
+      "command": "home"
+    },
+    {
+      "id": "fisher",
+      "title": "Рыбак",
+      "description": "Пирс торговца рыбой и магазин снастей",
+      "tag": "MARKET",
+      "command": "warp fisher"
+    },
+    {
+      "id": "abyss",
+      "title": "Бездна",
+      "description": "Глубоководный портал и добыча руд",
+      "tag": "ABYSS",
+      "command": "warp abyss"
+    }
+  ]
+}

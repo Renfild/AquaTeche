@@ -65,6 +65,7 @@ SKIP_DIRS = {
     "crash-reports",
     "local",
     "client",
+    "world",
 }
 SKIP_DIR_PREFIXES = ("world_backup", "_backup", "_uuid_migrate")
 SKIP_FILES = {"Arclight-1.20.1.jar", "Mohist-1.20.1.jar"}
@@ -105,7 +106,10 @@ def should_skip(rel: Path) -> bool:
             return True
     parts = rel.parts
     if parts and parts[0] in SKIP_DIRS:
-        return True
+        if parts[0] == "world" and os.environ.get("AQUATECH_INCLUDE_WORLD", "").strip() in ("1", "true", "yes"):
+            pass
+        else:
+            return True
     if parts and any(parts[0].startswith(p) for p in SKIP_DIR_PREFIXES):
         return True
     if rel.name in SKIP_FILES:
@@ -113,6 +117,9 @@ def should_skip(rel: Path) -> bool:
     if rel.suffix == ".log":
         return True
     if rel.name.endswith(".bak") or ".pre-" in rel.name:
+        return True
+    # Patch-patcher scratch files must never shadow the patched plugin jar.
+    if rel.name.endswith(".tmp") or rel.name.startswith("_"):
         return True
     return False
 
@@ -592,6 +599,7 @@ def main() -> int:
     parser.add_argument("--restart-only", action="store_true", help="Skip SFTP, only restart/start panel server")
     parser.add_argument("--no-restart", action="store_true", help="Upload only, do not touch panel power")
     parser.add_argument("--no-wait", action="store_true", help="Send power signal but do not wait for running")
+    parser.add_argument("--fast", action="store_true", help="Fast hot-deploy (skip panel backup)")
     parser.add_argument(
         "--skip-backup",
         action="store_true",
@@ -609,6 +617,11 @@ def main() -> int:
         help="Seconds to wait for panel backup (default 180; 0 = fire-and-forget)",
     )
     parser.add_argument(
+        "--include-world",
+        action="store_true",
+        help="Include world/ region files in SFTP upload",
+    )
+    parser.add_argument(
         "--only",
         type=str,
         default="",
@@ -618,6 +631,8 @@ def main() -> int:
 
     if args.only:
         os.environ["AQUATECH_SFTP_ONLY"] = args.only
+    if args.include_world:
+        os.environ["AQUATECH_INCLUDE_WORLD"] = "1"
 
     if args.restart_only:
         apex_restart_or_start(wait=not args.no_wait)
@@ -629,7 +644,8 @@ def main() -> int:
 
     only = _only_prefixes()
     skip_backup = (
-        args.skip_backup
+        args.fast
+        or args.skip_backup
         or os.environ.get("AQUATECH_SKIP_BACKUP", "").strip() in ("1", "true", "yes")
         or bool(only)
     )

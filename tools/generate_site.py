@@ -579,6 +579,7 @@ PAGES["top.html"] = (
       <div class="tabs">
         <button class="tab active" type="button" data-top-tab="playtime">По онлайну</button>
         <button class="tab" type="button" data-top-tab="coins">По монетам</button>
+        <button class="tab" type="button" data-top-tab="fish">По улову</button>
         <button class="tab" type="button" data-top-tab="likes">По лайкам</button>
       </div>
       <div class="top-list" id="top-root"></div>

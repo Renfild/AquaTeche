@@ -21,6 +21,8 @@ public final class HubSnapshotJson {
         root.addProperty("receivedAt", receivedAt);
         root.addProperty("initialTab", initialTab);
         root.addProperty("openKey", "F4");
+        root.addProperty("playerHead", PlayerHeadCapture.dataUrl(
+                snapshot != null && snapshot.profile() != null ? snapshot.profile().name() : ""));
 
         JsonArray tabs = new JsonArray();
         LumenConfig.COMMON.enabledTabs.get().forEach(tab -> tabs.add(String.valueOf(tab)));

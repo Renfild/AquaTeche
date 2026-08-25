@@ -7,6 +7,7 @@ import net.aquatech.ui.fishing.FishingRodCompat;
 import net.aquatech.ui.fishing.RodDurability;
 import net.aquatech.ui.fishing.StarCatcherAttachments;
 import net.aquatech.ui.inventory.AutoFisherMenu;
+import net.aquatech.ui.item.RateModItem;
 import net.aquatech.ui.item.UpgradeItem;
 import net.aquatech.ui.registry.ModBlockEntities;
 import net.aquatech.ui.util.CustomEnergyStorage;
@@ -16,14 +17,18 @@ import net.aquatech.ui.util.OutputOnlyWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -37,7 +42,11 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -68,7 +77,7 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
                 return FishingRodCompat.isSupportedRod(stack);
             }
             if (slot >= 1 && slot <= OUTPUT_SLOTS) return true;
-            if (slot == UPGRADE_SLOT) return stack.getItem() instanceof UpgradeItem;
+            if (slot == UPGRADE_SLOT) return stack.getItem() instanceof UpgradeItem || stack.getItem() instanceof RateModItem;
             return false;
         }
     };
@@ -92,9 +101,33 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         int t = (int) (level.getGameTime() & 0x7FFFFFFF);
         if (skillCacheTick >= 0 && (t - skillCacheTick) < 20) return;
         skillCacheTick = t;
-        cachedNearby = SkillEffects.nearestPlayer(level, pos, 16.0);
-        cachedEnergyFactor = SkillEffects.energyCostFactor(cachedNearby);
-        cachedSpeedMult = SkillEffects.autoFisherSpeed(cachedNearby) * SkillEffects.machineSpeedMultiplier(cachedNearby);
+
+        this.cachedNearby = SkillEffects.nearestPlayer(level, pos, 16.0);
+        if (cachedNearby != null) {
+            this.cachedEnergyFactor = SkillEffects.energyCostFactor(cachedNearby);
+            this.cachedSpeedMult = SkillEffects.machineSpeedMultiplier(cachedNearby);
+        } else {
+            this.cachedEnergyFactor = 1f;
+            this.cachedSpeedMult = 1f;
+        }
+    }
+
+    public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T be) {
+        if (be instanceof AutoFisherBlockEntity entity) {
+            tick(level, pos, state, entity);
+        }
+    }
+
+    public static void clientTick(Level level, BlockPos pos, BlockState state, AutoFisherBlockEntity entity) {
+        if (entity.isWorking()) {
+            if (level.random.nextFloat() < 0.25f) {
+                level.addParticle(ParticleTypes.SPLASH,
+                        pos.getX() + 0.5 + (level.random.nextDouble() - 0.5) * 0.4,
+                        pos.getY() + 0.8,
+                        pos.getZ() + 0.5 + (level.random.nextDouble() - 0.5) * 0.4,
+                        0, 0.1, 0);
+            }
+        }
     }
 
     public AutoFisherBlockEntity(BlockPos pos, BlockState state) {
@@ -171,30 +204,39 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
                 return true;
             }
         }
-        // Also accept if the block itself is waterlogged / submerged above
         var above = level.getFluidState(pos.above());
         return above.getType() == Fluids.WATER || above.getType() == Fluids.FLOWING_WATER;
     }
 
     private boolean hasSpaceInOutput() {
-        // Always fish: leftover stacks go to adjacent inventory or drop beside the block.
         return true;
     }
 
     private void doFishOperation(Level level, ItemStack rodStack, Player nearby) {
-        List<ItemStack> loot;
         AquaTechFishingRodItem.RodType rodType = FishingRodCompat.resolveRodType(rodStack);
-        int rodRate = FishingLootHandler.readRateMultiplier(rodStack);
-        int effectiveRate = Math.max(1, rodRate);
-
-        if (rodType != null) {
-            loot = FishingLootHandler.generateLoot(rodType, level.getRandom(), rodStack, nearby, effectiveRate);
-        } else {
-            loot = List.of(new ItemStack(Items.COD, 1));
+        if (rodType == null) {
+            rodType = AquaTechFishingRodItem.RodType.NOVICE;
         }
+
+        int rodRate = FishingLootHandler.readRateMultiplier(rodStack);
+        ItemStack upgradeStack = itemHandler.getStackInSlot(UPGRADE_SLOT);
+        int upgradeRate = (upgradeStack.getItem() instanceof RateModItem r) ? r.getMultiplier() : 1;
+        int effectiveRate = Math.max(1, Math.max(rodRate, upgradeRate));
+
+        List<ItemStack> loot = FishingLootHandler.generateLoot(rodType, level.getRandom(), rodStack, nearby, effectiveRate);
 
         for (ItemStack drop : loot) {
             insertIntoOutput(drop);
+        }
+
+        if (MachineUpgrades.has(itemHandler, UPGRADE_SLOT, UpgradeItem.UpgradeType.OCEAN_BOUNTY)) {
+            List<ItemStack> bonusFish = generateOceanBountyFish(level.getRandom());
+            for (ItemStack fish : bonusFish) {
+                if (effectiveRate > 1) {
+                    fish.setCount(Math.min(fish.getMaxStackSize(), fish.getCount() * effectiveRate));
+                }
+                insertIntoOutput(fish);
+            }
         }
 
         StarCatcherAttachments.consumeRateCatch(rodStack);
@@ -204,6 +246,45 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
             itemHandler.setStackInSlot(0, rodStack);
         }
         setChanged();
+    }
+
+    private List<ItemStack> generateOceanBountyFish(RandomSource random) {
+        List<ItemStack> fish = new ArrayList<>();
+        int count = 1 + random.nextInt(3); // 1-3 fish per catch
+        for (int i = 0; i < count; i++) {
+            float r = random.nextFloat();
+            if (r < 0.04f) {
+                fish.add(getModItem("starcatcher:elderscale", Items.COD, 1)); // Legendary (100c)
+            } else if (r < 0.12f) {
+                fish.add(getModItem("starcatcher:silverveil_perch", Items.SALMON, 1)); // Epic (50c)
+            } else if (r < 0.22f) {
+                fish.add(getModItem("starcatcher:hollowbelly_darter", Items.TROPICAL_FISH, 1)); // Epic (40c)
+            } else if (r < 0.35f) {
+                fish.add(getModItem("starcatcher:carpenjoe", Items.SALMON, 1)); // Epic (30c)
+            } else if (r < 0.50f) {
+                fish.add(getModItem("starcatcher:silverfin_pike", Items.COD, 1)); // Epic (25c)
+            } else if (r < 0.65f) {
+                fish.add(getModItem("starcatcher:sunny_sturgeon", Items.SALMON, 1)); // Rare (20c)
+            } else if (r < 0.80f) {
+                fish.add(getModItem("starcatcher:rockgill", Items.COD, 1)); // Rare (15c)
+            } else if (r < 0.92f) {
+                fish.add(getModItem("starcatcher:driftfin", Items.COD, 1)); // Common (10c)
+            } else {
+                fish.add(new ItemStack(random.nextBoolean() ? Items.PUFFERFISH : Items.TROPICAL_FISH, 1));
+            }
+        }
+        return fish;
+    }
+
+    private static ItemStack getModItem(String regId, Item fallback, int count) {
+        ResourceLocation rl = ResourceLocation.tryParse(regId);
+        if (rl != null && ForgeRegistries.ITEMS.containsKey(rl)) {
+            Item item = ForgeRegistries.ITEMS.getValue(rl);
+            if (item != null && item != Items.AIR) {
+                return new ItemStack(item, count);
+            }
+        }
+        return new ItemStack(fallback, count);
     }
 
     private void insertIntoOutput(ItemStack stackToInsert) {

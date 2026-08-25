@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "aquatech_ui:upgrade_ocean_bounty"
+    }
+  ],
+  "result": {
+    "item": "aquatech_ui:upgrade_ocean_bounty",
+    "count": 1
+  }
+}

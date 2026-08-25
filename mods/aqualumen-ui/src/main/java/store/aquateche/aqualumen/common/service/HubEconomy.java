@@ -29,46 +29,68 @@ public final class HubEconomy {
     }
 
     public static long coins(ServerPlayer player) {
-        long score = score(player, LumenConfig.COMMON.coinsObjective.get());
-        return score > 0L ? score : inventoryCoins(player);
+        String objective = LumenConfig.COMMON.coinsObjective.get();
+        long score = score(player, objective);
+        if (score > 0L) {
+            return score;
+        }
+        // Legacy wallet (old casesmod balance) — import into the scoreboard once,
+        // so KubeJS portal sync and the hub read the same number.
+        long legacy = player.getPersistentData().contains("coins")
+                ? player.getPersistentData().getLong("coins")
+                : 0L;
+        if (legacy > 0L) {
+            adjustScore(player, objective, (int) legacy);
+            return legacy;
+        }
+        long inv = inventoryCoins(player);
+        return inv > 0L ? inv : 0L;
     }
 
     public static boolean trySpendCoins(ServerPlayer player, long amount) {
-        if (amount <= 0) {
+        if (amount <= 0L) {
             return true;
         }
-        long score = score(player, LumenConfig.COMMON.coinsObjective.get());
-        if (score > 0) {
-            if (score < amount) {
-                return false;
+        String objective = LumenConfig.COMMON.coinsObjective.get();
+        if (coins(player) < amount) {
+            return false;
+        }
+        long remaining = amount;
+        long score = score(player, objective);
+        if (score > 0L) {
+            long fromScore = Math.min(score, remaining);
+            adjustScore(player, objective, -(int) fromScore);
+            remaining -= fromScore;
+        }
+        if (remaining > 0L) {
+            drainInventoryCoins(player, (int) remaining);
+        }
+        if (player.getServer() != null) {
+            try {
+                player.getServer().getCommands().performPrefixedCommand(
+                        player.getServer().createCommandSourceStack(),
+                        "eco take " + player.getGameProfile().getName() + " " + amount
+                );
+            } catch (Throwable ignored) {
             }
-            adjustScore(player, LumenConfig.COMMON.coinsObjective.get(), -(int) amount);
-            return true;
         }
-        if (inventoryCoins(player) >= amount) {
-            drainInventoryCoins(player, (int) amount);
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public static void grantCoins(ServerPlayer player, long amount) {
-        if (amount <= 0) {
-            return;
-        }
-        if (score(player, LumenConfig.COMMON.coinsObjective.get()) > 0) {
-            adjustScore(player, LumenConfig.COMMON.coinsObjective.get(), (int) amount);
-            return;
-        }
-        Item copper = BuiltInRegistries.ITEM.get(new ResourceLocation("lightmanscurrency:coin_copper"));
-        if (copper != null && BuiltInRegistries.ITEM.getKey(copper) != null) {
-            giveItem(player, new ItemStack(copper, (int) Math.min(2304L, amount)));
-            if (amount > 2304L) {
-                adjustScore(player, LumenConfig.COMMON.coinsObjective.get(), (int) (amount - 2304L));
-            }
+        if (amount <= 0L) {
             return;
         }
         adjustScore(player, LumenConfig.COMMON.coinsObjective.get(), (int) amount);
+        if (player.getServer() != null) {
+            try {
+                player.getServer().getCommands().performPrefixedCommand(
+                        player.getServer().createCommandSourceStack(),
+                        "eco give " + player.getGameProfile().getName() + " " + amount
+                );
+            } catch (Throwable ignored) {
+            }
+        }
     }
 
     public static void grantGems(ServerPlayer player, int amount) {

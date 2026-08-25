@@ -1,39 +1,38 @@
 modLoader="javafml"
-loaderVersion="${loader_version_range}"
-license="${mod_license}"
+loaderVersion="[47,)"
+license="MIT"
 issueTrackerURL="https://aquateche.store/support"
 
 # IGNORE_ALL_VERSION keeps vanilla / non-modded clients connectable to a Mohist server
 # that runs AquaLumen UI. Such clients automatically fall back to the chest-based hub.
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="${mod_name}"
+modId="aqualumen"
+version="0.3.16-alpha"
+displayName="AquaLumen UI"
 displayURL="https://aquateche.store"
 logoFile="logo.png"
-authors="${mod_authors}"
+authors="xietorui / aquaTeche.store"
 displayTest="IGNORE_ALL_VERSION"
-description='''
-${mod_description}
-'''
+description='''Luminous-style hub interface (profile, store, cases, battle pass, tops) for Forge 1.20.1 and Mohist servers.'''
 
-[[dependencies.${mod_id}]]
+[[dependencies.aqualumen]]
     modId="forge"
     mandatory=true
-    versionRange="${forge_version_range}"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.aqualumen]]
     modId="minecraft"
     mandatory=true
-    versionRange="${minecraft_version_range}"
+    versionRange="[1.20.1,1.21)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.aqualumen]]
     modId="mcef"
     mandatory=false
     versionRange="[2.1,)"
     ordering="AFTER"
     side="CLIENT"
+

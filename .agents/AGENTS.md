@@ -9,6 +9,14 @@
 
 ---
 
+## Strict Execution Protocol (Research -> Deep Thinking -> Double Check -> Dual Test Verification)
+1. **Deep Research First**: Always inspect actual source files, investigate existing models/APIs, and find all relevant context before planning.
+2. **Thorough Risk Analysis & Thinking**: Analyze side-effects and constraints before drafting any code or response.
+3. **Pre-Action Verification**: Double-check that no unrelated or user-crafted files are modified.
+4. **Mandatory Dual Testing**: Run build/compile tests (`./gradlew build`, `dotnet build`), execute smoke tests, and perform explicit post-run validation of outputs.
+
+---
+
 ## Mod Development Guidelines
 
 ### 1. Registration API & Mod ID

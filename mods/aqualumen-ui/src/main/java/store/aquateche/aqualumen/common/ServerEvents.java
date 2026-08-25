@@ -10,6 +10,7 @@ import store.aquateche.aqualumen.AquaLumenUI;
 import store.aquateche.aqualumen.common.command.LumenCommands;
 import store.aquateche.aqualumen.common.service.HubActionHandler;
 import store.aquateche.aqualumen.common.service.HubDataService;
+import store.aquateche.aqualumen.common.service.HubEconomy;
 import store.aquateche.aqualumen.config.LumenConfig;
 
 import java.util.Set;
@@ -42,17 +43,24 @@ public final class ServerEvents {
         HubDataService.closeFor(id);
     }
 
-    /** Periodic refresh for players with an open hub. */
+    /** Periodic refresh for players with an open hub + portal stat sync. */
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) {
             return;
         }
         int interval = LumenConfig.COMMON.snapshotIntervalTicks.get();
-        if (++tickCounter % interval != 0) {
-            return;
+        if (tickCounter % interval == 0) {
+            HubDataService.refreshOpenHubs(event.getServer());
         }
-        HubDataService.refreshOpenHubs(event.getServer());
+        // Portal sync lives here: the KubeJS sandbox blocks java.lang.Thread, so HTTP must come from the mod.
+        if (tickCounter > 0 && tickCounter % 3000 == 0) {
+            for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
+                HubEconomy.coins(player); // main-thread wallet warm-up (legacy import) before the async read
+                HubDataService.syncPlayerToWebAsync(player);
+            }
+        }
+        tickCounter++;
     }
 
     public static void markModded(ServerPlayer player) {

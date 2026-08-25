@@ -5,5 +5,5 @@ permissions:
 parents:
 - default
 prefixes:
-- '&b&l[DEV] &b':
+- " ":
     priority: 75

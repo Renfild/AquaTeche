@@ -1,0 +1,1312 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "basic_electric_era"
+	group: ""
+	icon: "industrialupgrade:basemachine/generator"
+	id: "C3D924250B4CCA04"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Электродвигатель для механизмов с движущимися узлами."
+				"Превращает электрическую энергию в рабочее механическое"
+				"движение."
+			]
+			id: "88FD1F77E2424BA9"
+			rewards: [{
+				id: "50390AF813158844"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1F1044548937CFB5"
+				item: "industrialupgrade:elemotor"
+				type: "item"
+			}]
+			title: "Elemotor"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["88FD1F77E2424BA9"]
+			description: [
+				"Электрический нагреватель жидкостей. Греет содержимое"
+				"бака и используется в процессах, где важна температура"
+				"самой жидкости."
+			]
+			id: "99DC2ACE3C6E9D2D"
+			rewards: [{
+				id: "0850A0A25A764C3B"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "29714CD8E30CE3F7"
+				item: "industrialupgrade:basemachine3/fluid_heat"
+				type: "item"
+			}]
+			title: "Жидкостный нагреватель"
+			x: 1.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["99DC2ACE3C6E9D2D"]
+			description: [
+				"Сжигает твёрдое топливо и производит EF. Простая"
+				"энергетическая машина для питания ранней электрической"
+				"сети."
+			]
+			id: "73817BDF7488C47A"
+			rewards: [{
+				id: "4CD1BF4A32E90300"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "4F63216FE1385AE6"
+				item: "industrialupgrade:basemachine3/generator_iu"
+				type: "item"
+			}]
+			title: "Генератор"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["73817BDF7488C47A"]
+			description: [
+				"Производит EF из редстоун-материалов. Даёт компактную"
+				"энергию из редстоуна без жидкого топлива."
+			]
+			id: "24000E117A1BC8E7"
+			rewards: [{
+				id: "505C6F71ADD21C52"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "E2775CBE4BD35833"
+				item: "industrialupgrade:basemachine3/redstone_generator"
+				type: "item"
+			}]
+			title: "Редстоуновый генератор"
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["73817BDF7488C47A"]
+			description: [
+				"Производит EF из горячих жидкостей, прежде всего лавы."
+				"Работает как источник энергии для геотермальной линии."
+			]
+			id: "42F4D8BAD85A6D34"
+			rewards: [{
+				id: "72E947AAAAAF456E"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "6885970D75282C9B"
+				item: "industrialupgrade:basemachine3/geogenerator_iu"
+				type: "item"
+			}]
+			title: "Геотермальный генератор"
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["42F4D8BAD85A6D34"]
+			description: [
+				"Твердотельный холодильник создаёт холод из снежков,"
+				"снега, льда, плотного льда и синего льда. Предмет"
+				"расходуется, заполняет буфер холода на заданное время,"
+				"а затем холод отдаётся в систему охлаждения механизмов."
+			]
+			id: "DBC252FB5CEA8804"
+			rewards: [{
+				id: "B08C8887E929327B"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "FAD74B03143F2A5E"
+				item: "industrialupgrade:basemachine3/solid_cooling"
+				type: "item"
+			}]
+			title: "Твердотельный холодильник"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["DBC252FB5CEA8804"]
+			description: [
+				"Базовый набор электрических переработчиков: дробление,"
+				"сжатие, извлечение, плавка, прокатка, резка и"
+				"выдавливание. Это основа автоматической обработки"
+				"ресурсов."
+			]
+			id: "13D3DA173A7E2E9C"
+			rewards: [{
+				id: "C4CCB3CD90DAC23C"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "2BF07E6DE908B3D6"
+				item: "industrialupgrade:simplemachine/macerator_iu"
+				type: "item"
+			}]
+			title: "Дробитель"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["13D3DA173A7E2E9C"]
+			description: [
+				"Микросхема управления генераторами. Используется как"
+				"электронный контроллер для энергетических машин."
+			]
+			id: "750FDD44EB955598"
+			rewards: [{
+				id: "8F3148E66FDD0698"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "F9508CF1D5A0607D"
+				item: "industrialupgrade:basemachine/generator_microchip"
+				type: "item"
+			}]
+			title: "Производитель электросхем"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["750FDD44EB955598"]
+			description: [
+				"Плавит несколько материалов вместе и получает сплавы."
+				"Работает с рецептами, где обычная печь не может смешать"
+				"металлы правильно."
+			]
+			id: "A13EE50BA7A69347"
+			rewards: [{
+				id: "034C0771B7D5FB36"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "24260CCAB725A228"
+				item: "industrialupgrade:basemachine/alloy_smelter"
+				type: "item"
+			}]
+			title: "Завод сплавов"
+			x: 7.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["A13EE50BA7A69347"]
+			description: [
+				"Изготавливает шестерни и зубчатые детали. Такие детали"
+				"нужны машинам, где движение передаётся через"
+				"механические узлы."
+			]
+			id: "72924C850349165D"
+			rewards: [{
+				id: "92467851D58D2DE2"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "0C19F77DAF11DE0E"
+				item: "industrialupgrade:moremachine3/gearing"
+				type: "item"
+			}]
+			title: "Механический штамп"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["72924C850349165D"]
+			description: [
+				"Автоматически собирает электронные детали из плат,"
+				"проводов и компонентов. Ускоряет производство сложной"
+				"электроники."
+			]
+			id: "983AC6DACE8A0631"
+			rewards: [{
+				id: "8842A2A504A97B59"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "9D23E27E53756A71"
+				item: "industrialupgrade:basemachine3/electronic_assembler"
+				type: "item"
+			}]
+			title: "Электрический сборщик электроники"
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["983AC6DACE8A0631"]
+			description: [
+				"Создаёт пластик из подготовленных химических"
+				"компонентов. Работает как химическая машина для"
+				"полимерной цепочки."
+			]
+			id: "C8DEA151D843252C"
+			rewards: [{
+				id: "AB2D6D7F26517CE7"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "517E77B59E996D3E"
+				item: "industrialupgrade:basemachine2/plastic_creator"
+				type: "item"
+			}]
+			title: "Химический завод"
+			x: 9.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["C8DEA151D843252C"]
+			description: [
+				"Формует пластик в пластины. Делает ровные пластиковые"
+				"заготовки для корпусов, изоляции и деталей."
+			]
+			id: "A6691D21115DA4F4"
+			rewards: [{
+				id: "A9A2CACF57F4EB38"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "CC0F503F3B20F13E"
+				item: "industrialupgrade:basemachine2/plastic_plate_creator"
+				type: "item"
+			}]
+			title: "Пластавтомат"
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["A6691D21115DA4F4"]
+			description: [
+				"Сваривает металлические детали в прочные узлы."
+				"Используется там, где обычное соединение деталей"
+				"недостаточно прочное."
+			]
+			id: "61B76B1B868E31AC"
+			rewards: [{
+				id: "2CC2882D81BE06CA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "62F91D9A3C839058"
+				item: "industrialupgrade:basemachine3/welding"
+				type: "item"
+			}]
+			title: "Сварочный аппарат"
+			x: 7.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["61B76B1B868E31AC"]
+			description: [
+				"Промывает измельчённую руду и отделяет полезную часть"
+				"от пустой породы. Улучшает качество сырья перед"
+				"дальнейшей переработкой."
+			]
+			id: "A033AE3E6490258D"
+			rewards: [{
+				id: "B3A7E0D24C6B5BB7"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "CCCB06C6F0C3B93E"
+				item: "industrialupgrade:moremachine3/orewashing"
+				type: "item"
+			}]
+			title: "Рудопромывочный механизм"
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["A033AE3E6490258D"]
+			description: [
+				"Нитратный порошок для химических реакций. Используется"
+				"как твёрдый реагент в азотной химии и обработке"
+				"материалов."
+			]
+			id: "45FE28E0C85DBD89"
+			rewards: [{
+				id: "6168085AAB941038"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "42BD2EEED797232C"
+				item: "industrialupgrade:itemdust/silver_nitrate_dust"
+				type: "item"
+			}]
+			title: "Nitrate Dust"
+			x: 5.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["45FE28E0C85DBD89"]
+			description: [
+				"Разделяет предметы на меньшие части по рецептам."
+				"Подходит для получения долей, пыли и промежуточных"
+				"материалов."
+			]
+			id: "CE8AC3297B006176"
+			rewards: [{
+				id: "A62AF051869E9132"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "86CCCF10478FD93C"
+				item: "industrialupgrade:basemachine3/item_divider"
+				type: "item"
+			}]
+			title: "Разделитель предметов"
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["CE8AC3297B006176"]
+			description: [
+				"Азот — газ для химии и охлаждения. Он участвует в"
+				"азотно-водородной цепочке, азотных оксидах и кислотах,"
+				"принимается жидкостным холодильником как рабочая"
+				"охлаждающая жидкость и используется в"
+				"космических/материальных рецептах."
+			]
+			id: "F6C31C15134FFDD9"
+			rewards: [{
+				id: "63A30E4398240727"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "7EBCE1AB6813AF17"
+				item: "industrialupgrade:bucket/nitrogen"
+				type: "item"
+			}]
+			title: "Nitrogen"
+			x: 3.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["F6C31C15134FFDD9"]
+			description: [
+				"Улучшенная электронная схема с более сложной логикой"
+				"управления. Применяется в машинах, которым уже мало"
+				"базовой платы."
+			]
+			id: "2BC7CD881137838B"
+			rewards: [{
+				id: "212C4AAB6C14C395"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "51D757931B2B9E42"
+				item: "industrialupgrade:advanced_circuit"
+				type: "item"
+			}]
+			title: "Прогресс в сфере электроники"
+			x: 3.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["2BC7CD881137838B"]
+			description: [
+				"Портативный датчик газов и загрязнений. Показывает"
+				"опасную атмосферу и помогает контролировать состояние"
+				"зоны вокруг игрока."
+			]
+			id: "357306B2CC87180A"
+			rewards: [{
+				id: "7F59499489A78551"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "4043AB69A6FF2B75"
+				item: "industrialupgrade:tools/gas_sensor"
+				type: "item"
+			}]
+			title: "Газовый сенсор"
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["357306B2CC87180A"]
+			description: [
+				"Природный газ добывается из газовых залежей и"
+				"используется как топливо и сырьё. Его находят"
+				"датчиками/скважинами, подают в насосы и турбины, а"
+				"затем перерабатывают в энергетических или химических"
+				"машинах."
+			]
+			id: "F8E0F213C9BFA65D"
+			rewards: [{
+				id: "932C7ED53714E601"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "80BCFB9B469A924D"
+				item: "industrialupgrade:veingas/gas"
+				type: "item"
+			}]
+			title: "Капсула природного газа"
+			x: 5.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["F8E0F213C9BFA65D"]
+			description: [
+				"Смешивает три твёрдых компонента в один материал."
+				"Используется для порошков и составов, где важны точные"
+				"пропорции."
+			]
+			id: "1C09993DEE54F858"
+			rewards: [{
+				id: "CFBFFA2ABF59053E"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "E9E8C01629D193A5"
+				item: "industrialupgrade:basemachine3/triple_solid_mixer"
+				type: "item"
+			}]
+			title: "Тройной твердотельный смеситель"
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["1C09993DEE54F858"]
+			description: [
+				"Соединяет газы в новые соединения. Работает как"
+				"газовый реактор для азотной, водородной и другой химии."
+			]
+			id: "28B7C75AE358808E"
+			rewards: [{
+				id: "1943A611265CF151"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "8697147661D281CA"
+				item: "industrialupgrade:basemachine3/gas_combiner"
+				type: "item"
+			}]
+			title: "Газовый смеситель"
+			x: 7.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["28B7C75AE358808E"]
+			description: [
+				"Азотно-водородное соединение получается из азота и"
+				"водорода. Используется как промежуточный газ в"
+				"дальнейших реакциях, включая цепочки азотных соединений"
+				"и космическую переработку."
+			]
+			id: "F27D8C4C6EAB010E"
+			rewards: [{
+				id: "E5C86E7B52120942"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1741CAC9F87E3845"
+				item: "industrialupgrade:bucket/nitrogenhydride"
+				type: "item"
+			}]
+			title: "Nitrogenhydride"
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["F27D8C4C6EAB010E"]
+			description: [
+				"Оксид азота — промежуточный газ азотной химии. Через"
+				"газовый комбайнер окисляется кислородом до диоксида"
+				"азота, после чего линия выходит на азотную кислоту."
+			]
+			id: "1EFB906202F540D6"
+			rewards: [{
+				id: "C1B2A63C9BFACA94"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "EB6B69BB8D33B20E"
+				item: "industrialupgrade:bucket/nitrogenoxy"
+				type: "item"
+			}]
+			title: "Nitrogenoxy"
+			x: 9.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["1EFB906202F540D6"]
+			description: [
+				"Диоксид азота — активный газ для получения азотной"
+				"кислоты. В газовом комбайнере смешивается с водой и"
+				"даёт кислоту для травления, пластика и химической"
+				"переработки."
+			]
+			id: "C296046069988CBA"
+			rewards: [{
+				id: "248B695942525682"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "B022251A9BD7227E"
+				item: "industrialupgrade:bucket/nitrogendioxide"
+				type: "item"
+			}]
+			title: "Nitrogendioxide"
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["C296046069988CBA"]
+			description: [
+				"Азотная кислота — сильный жидкий реагент. Используется"
+				"в газовом комбайнере, жидкостных интеграторах,"
+				"пластиковой цепочке, огнеупорной обработке и"
+				"переработке отдельных космических пород."
+			]
+			id: "38272CF1D763C507"
+			rewards: [{
+				id: "C5F29273A8F592D8"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "20CD80BE48CC8B5B"
+				item: "industrialupgrade:bucket/nitricacid"
+				type: "item"
+			}]
+			title: "Nitricacid"
+			x: 10.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["38272CF1D763C507"]
+			description: [
+				"Вводит жидкость в предмет или материал. Используется"
+				"для пропитки, растворения и химической обработки"
+				"твёрдых заготовок."
+			]
+			id: "5E8AB35F4E8DD999"
+			rewards: [{
+				id: "E407DF9D149A98F4"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "84C56C5523AB97A4"
+				item: "industrialupgrade:basemachine3/fluid_integrator"
+				type: "item"
+			}]
+			title: "Жидкостный интегратор"
+			x: 9.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5E8AB35F4E8DD999"]
+			description: [
+				"Нитрат серебра в твёрдой форме. Служит химическим"
+				"реагентом для специальных обработок и серебросодержащих"
+				"цепочек."
+			]
+			id: "B19A488BA4A08C26"
+			rewards: [{
+				id: "67892232E7E29696"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "6519A83E6FADF72D"
+				item: "industrialupgrade:itemdust/silver_nitrate_dust"
+				type: "item"
+			}]
+			title: "Silver Nitrate Dust"
+			x: 8.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["B19A488BA4A08C26"]
+			description: [
+				"Измельчённая урановая руда. Относится к радиоактивной"
+				"переработке и требует отдельной обработки вместо"
+				"обычной рудной линии."
+			]
+			id: "1C1310227D7615E1"
+			rewards: [{
+				id: "ACA4FDDA7C740A9C"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "38524A0A4670A71D"
+				item: "industrialupgrade:crushed_uranium_ore"
+				type: "item"
+			}]
+			title: "Crushed Uranium Ore"
+			x: 7.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1C1310227D7615E1"]
+			description: [
+				"Обрабатывает радиоактивные руды отдельно от обычных"
+				"машин. Подготавливает урановое сырьё к очистке и"
+				"дальнейшей ядерной переработке."
+			]
+			id: "D1018CF80447C906"
+			rewards: [{
+				id: "948BCDCA09C638E5"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "BE1B9C356B716804"
+				item: "industrialupgrade:basemachine3/radioactive_handler_ore"
+				type: "item"
+			}]
+			title: "Обработчик радиоактивных руд"
+			x: 6.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["D1018CF80447C906"]
+			description: [
+				"Глубоко очищает рудное сырьё после дробления и"
+				"промывки. Убирает лишние примеси и даёт более чистый"
+				"материал."
+			]
+			id: "1BED57C8DBECDE55"
+			rewards: [{
+				id: "0297D2C5B39A0FF4"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "4B6E584F54DD8E7E"
+				item: "industrialupgrade:basemachine3/industrial_ore_purifier"
+				type: "item"
+			}]
+			title: "Промышленный очиститель радиоактивных элементов"
+			x: 5.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1BED57C8DBECDE55"]
+			description: [
+				"Датчик солнечной энергии. Используется солнечными"
+				"установками для контроля света и состояния генерации."
+			]
+			id: "B14D92B593F9CD31"
+			rewards: [{
+				id: "F4D653BCFA81F4C8"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "1813ACED2FBBD8B2"
+				item: "industrialupgrade:se_sensor"
+				type: "item"
+			}]
+			title: "Se Sensor"
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["B14D92B593F9CD31"]
+			description: [
+				"Солнечный генератор, работающий от освещения."
+				"Производит энергию без топлива, пока условия позволяют"
+				"получать солнечный поток."
+			]
+			id: "3B0F2ECE1A75F6F6"
+			rewards: [{
+				id: "1303943A09084D38"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "7388ACCB8253AB4B"
+				item: "industrialupgrade:se_gen/se_gen"
+				type: "item"
+			}]
+			title: "Генератор солнечной энергии"
+			x: 3.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3B0F2ECE1A75F6F6"]
+			description: [
+				"Создаёт суннариевые пластины для солнечных технологий."
+				"Обрабатывает материал в форму, удобную для панелей и"
+				"солнечных элементов."
+			]
+			id: "6105DBB6478C49AC"
+			rewards: [{
+				id: "12044D9C898187B8"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "83998E99F601B58D"
+				item: "industrialupgrade:gen_sunnarium_plate/gen_sunnarium_plate"
+				type: "item"
+			}]
+			title: "Производитель соларитовых пластин"
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["6105DBB6478C49AC"]
+			description: [
+				"Создаёт суннариевые элементы и панели. Работает с"
+				"материалами солнечной энергетики и подготавливает их к"
+				"сборке генераторов."
+			]
+			id: "D22067CB871EBDF4"
+			rewards: [{
+				id: "BE9CF9B236DB693A"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "6C13856764EB668F"
+				item: "industrialupgrade:gen_sunnarium/gen_sunnarium"
+				type: "item"
+			}]
+			title: "Преобразователь соларита"
+			x: 1.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["D22067CB871EBDF4"]
+			description: [
+				"Карбид кальция — твёрдый реагент для получения"
+				"ацетилена. Используется в химической цепочке полимеров."
+			]
+			id: "DD6B862E63F89E24"
+			rewards: [{
+				id: "C0D5434DF0862DA6"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "8864DFE28BBC2F64"
+				item: "industrialupgrade:calcium_carbide"
+				type: "item"
+			}]
+			title: "Calcium Carbide"
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["DD6B862E63F89E24"]
+			description: [
+				"Ацетилен — горючий углеводородный газ. В химических"
+				"машинах соединяется с водородом в этилен, участвует в"
+				"газовой турбине и нужен для органической/пластиковой"
+				"цепочки."
+			]
+			id: "9DD6EBABA0617216"
+			rewards: [{
+				id: "15080630CFF18F4D"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "CDA8C4B4533E0DF9"
+				item: "industrialupgrade:bucket/acetylene"
+				type: "item"
+			}]
+			title: "Acetylene"
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["9DD6EBABA0617216"]
+			description: [
+				"Запускает полимеризацию жидкостей и газов. Превращает"
+				"химическое сырьё в полимерные материалы."
+			]
+			id: "B085471586AE40E2"
+			rewards: [{
+				id: "DA9B79344BE8D0D2"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "3AA698D6B7DB806D"
+				item: "industrialupgrade:basemachine3/polymerizer"
+				type: "item"
+			}]
+			title: "Полимеризатор"
+			x: 1.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["B085471586AE40E2"]
+			description: [
+				"Соединяет твёрдый компонент с жидкостью в одном"
+				"процессе. Нужен для материалов, которые должны связать"
+				"или впитать реагент."
+			]
+			id: "C5C0800BF6B10AE0"
+			rewards: [{
+				id: "D3E3A3D16A33D037"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "55D57A8B69A1E2E2"
+				item: "industrialupgrade:basemachine3/solid_fluid_integrator"
+				type: "item"
+			}]
+			title: "Твердотельно-жидкостный интегратор"
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["C5C0800BF6B10AE0"]
+			description: [
+				"Полиэтилен — жидкий полимерный материал. Используется"
+				"в пластиковой цепочке и полимеризаторе как основа для"
+				"получения пластиковых деталей и изоляционных"
+				"материалов."
+			]
+			id: "A838C8A6F515242A"
+			rewards: [{
+				id: "D12D6C79D706B06F"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "94C94EF8825E0B00"
+				item: "industrialupgrade:bucket/polyeth"
+				type: "item"
+			}]
+			title: "Капсула полиэтилена"
+			x: 3.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["A838C8A6F515242A"]
+			description: [
+				"Разделяет жидкость на несколько компонентов. Полезен"
+				"для смесей, топлива и нефтехимических промежуточных"
+				"продуктов."
+			]
+			id: "C134596A2847102C"
+			rewards: [{
+				id: "4F049B38AEDB9984"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "D493CC6E0F177824"
+				item: "industrialupgrade:basemachine3/fluid_separator"
+				type: "item"
+			}]
+			title: "Разделитель жидкостей"
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["C134596A2847102C"]
+			description: [
+				"Пропан — горючий газ и нефтехимический реагент."
+				"Используется в газовой турбине, газовом комбайнере и"
+				"переработке органических фракций, где нужен лёгкий"
+				"углеводород."
+			]
+			id: "9782B3DD9CC9C20B"
+			rewards: [{
+				id: "04287A22CD2DF1E2"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "B31178DD127F4922"
+				item: "industrialupgrade:bucket/propane"
+				type: "item"
+			}]
+			title: "Propane"
+			x: 5.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["9782B3DD9CC9C20B"]
+			description: [
+				"Бром — химический реагент и газовый ресурс."
+				"Используется в газовых скважинах/датчиках,"
+				"электролизёрах, газовом комбайнере и рецептах с"
+				"космическими породами."
+			]
+			id: "538788328ABBC550"
+			rewards: [{
+				id: "D9CD16982F2C3297"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "B4168763501C4946"
+				item: "industrialupgrade:bucket/bromine"
+				type: "item"
+			}]
+			title: "Капсула брома"
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["538788328ABBC550"]
+			description: [
+				"Пропилен — органический газ для полимерной цепочки."
+				"Используется в полимеризаторе и жидкостных"
+				"интеграторах, когда нужно получить пластики или"
+				"органические промежуточные вещества."
+			]
+			id: "2D6C8C48444CD65F"
+			rewards: [{
+				id: "C3327D1240004A25"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "DB98248CAB6CA493"
+				item: "industrialupgrade:bucket/propylene"
+				type: "item"
+			}]
+			title: "Propylene"
+			x: 7.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["2D6C8C48444CD65F"]
+			description: [
+				"Готовый пластик для изоляции, корпусов и деталей"
+				"машин. Это твёрдая форма полимерного материала."
+			]
+			id: "2E45AB1DF8FBFDF9"
+			rewards: [{
+				id: "DE66CD507EED4128"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "C6188EE95D312A00"
+				item: "industrialupgrade:plast"
+				type: "item"
+			}]
+			title: "Plast"
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["2E45AB1DF8FBFDF9"]
+			description: [
+				"Пластиковая пластина для корпусов, изоляции и сборки"
+				"механизмов. Удобная плоская форма готового пластика."
+			]
+			id: "5175E3A701EA616F"
+			rewards: [{
+				id: "6148D18F1B91475F"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "5097FC75E8D3BD8A"
+				item: "industrialupgrade:plastic_plate"
+				type: "item"
+			}]
+			title: "Пластина из пластика"
+			x: 9.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5175E3A701EA616F"]
+			description: [
+				"Обрабатывает тяжёлые руды и минералы, отделяя полезные"
+				"части от пустой породы. Подходит для сырья, которое"
+				"обычные машины перерабатывают хуже."
+			]
+			id: "3735C4550BB9B8D5"
+			rewards: [{
+				id: "5552FC9A5D9F52EB"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "5F4F480498E8B5FC"
+				item: "industrialupgrade:basemachine1/handler_ho"
+				type: "item"
+			}]
+			title: "Минеральный сепаратор"
+			x: 10.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3735C4550BB9B8D5"]
+			description: [
+				"Перерабатывает нефть и тяжёлые жидкости на полезные"
+				"фракции. Работает как центральная машина топливной и"
+				"нефтехимической линии."
+			]
+			id: "278F088E5D98751E"
+			rewards: [{
+				id: "033DA45C283E6ECE"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "6BA71E79C2C04018"
+				item: "industrialupgrade:refiner/refiner"
+				type: "item"
+			}]
+			title: "Нефтеперерабатывающий завод"
+			x: 11.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["278F088E5D98751E"]
+			description: [
+				"Генератор на дизельном топливе. Производит EF из"
+				"плотного жидкого топлива с нефтяной цепочки."
+			]
+			id: "1C4E0ED47D883109"
+			rewards: [{
+				id: "15D6D937790D6D4F"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "C3009FBC9435E2C8"
+				item: "industrialupgrade:basemachine2/gen_disel"
+				type: "item"
+			}]
+			title: "Дизельный генератор"
+			x: 12.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["278F088E5D98751E"]
+			description: [
+				"Генератор на бензине или лёгком топливе. Использует"
+				"жидкое топливо для стабильной выработки EF."
+			]
+			id: "F281DDBD646F4766"
+			rewards: [{
+				id: "1E275A403D8969A5"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "3B2C1B21281B9C88"
+				item: "industrialupgrade:basemachine2/gen_pet"
+				type: "item"
+			}]
+			title: "Бензиновый генератор"
+			x: 12.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["278F088E5D98751E"]
+			description: [
+				"Создаёт холод для системы охлаждения механизмов,"
+				"расходуя жидкий азот, водород или гелий из бака."
+				"Водород даёт холод быстрее, азот работает медленнее,"
+				"гелий расходуется как самый экономный вариант;"
+				"накопленный холод отдаётся через CoolComponent"
+				"соседним/подключённым машинам."
+			]
+			id: "CAD7D0B48983F146"
+			rewards: [{
+				id: "F893DC2ABA44BD4A"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "ED775DB7CDB056B5"
+				item: "industrialupgrade:basemachine3/fluid_cooling"
+				type: "item"
+			}]
+			title: "Жидкостный холодильник"
+			x: 11.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["CAD7D0B48983F146"]
+			description: [
+				"Ветрогенератор. Производит EF от ветра, поэтому"
+				"зависит от условий установки и не расходует топливо."
+			]
+			id: "8F33E996B5A870FE"
+			rewards: [{
+				id: "735222828A3C95C2"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "CDF3E6E9A9311DE6"
+				item: "industrialupgrade:basemachine3/simple_wind_generator"
+				type: "item"
+			}]
+			title: "Ветрогенератор"
+			x: 12.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["CAD7D0B48983F146"]
+			description: [
+				"Водяной генератор. Получает энергию от воды и подходит"
+				"для постоянной выработки при правильной установке."
+			]
+			id: "067A4697E35A6736"
+			rewards: [{
+				id: "418066CD639B95FA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "E24AD3C95891B750"
+				item: "industrialupgrade:basemachine3/simple_water_generator"
+				type: "item"
+			}]
+			title: "Гидрогенератор"
+			x: 11.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["CAD7D0B48983F146"]
+			description: [
+				"Улучшенная плавильня сплавов. Быстрее и удобнее"
+				"обрабатывает сложные металлические смеси."
+			]
+			id: "5F8C3F6E8340DA0E"
+			rewards: [{
+				id: "D1A8E5532ABEE837"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "0DE09D4039CC9FA4"
+				item: "industrialupgrade:basemachine1/adv_alloy_smelter"
+				type: "item"
+			}]
+			title: "§eУлучшенный завод сплавов"
+			x: 10.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["5F8C3F6E8340DA0E"]
+			description: [
+				"Разделяет смеси вращением. Работает с пылями,"
+				"жидкостями и материалами, которые нужно разложить на"
+				"фракции."
+			]
+			id: "5E905126EB2E29EE"
+			rewards: [{
+				id: "F4B601DEFDFA5578"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "42F3539F90B8D99E"
+				item: "industrialupgrade:moremachine3/centrifuge_iu"
+				type: "item"
+			}]
+			title: "Тепловая центрифуга"
+			x: 9.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["5E905126EB2E29EE"]
+			description: [
+				"Обогащает сырьё, увеличивая полезную долю материала."
+				"Используется перед сложной рудной и радиоактивной"
+				"переработкой."
+			]
+			id: "054BAD57C456097C"
+			rewards: [{
+				id: "4356435530F5A760"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "EA10035A2D39515B"
+				item: "industrialupgrade:basemachine1/enrichment"
+				type: "item"
+			}]
+			title: "Обогатитель"
+			x: 8.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["054BAD57C456097C"]
+			description: [
+				"Перерабатывает ядерные отходы и возвращает часть"
+				"полезных материалов. Помогает уменьшить накопление"
+				"опасного остатка."
+			]
+			id: "2C9BF983451D130D"
+			rewards: [{
+				id: "C6FF3C69B473DABA"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "F48A43D81DDB8C56"
+				item: "industrialupgrade:basemachine3/nuclear_waste_recycler"
+				type: "item"
+			}]
+			title: "Переработчик радиоактивных отходов"
+			x: 7.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["2C9BF983451D130D"]
+			description: [
+				"Опасный остаток ядерной переработки. Требует"
+				"отдельного хранения и специальных машин, а не обычной"
+				"обработки."
+			]
+			id: "799AE4C1FE0064F3"
+			rewards: [{
+				id: "7F6E4E4D2D849F9C"
+				type: "xp"
+				xp: 50
+			}]
+			tasks: [{
+				id: "9F58D616504284B9"
+				item: "industrialupgrade:radioactive_waste"
+				type: "item"
+			}]
+			title: "Radioactive Waste"
+			x: 6.0d
+			y: 6.0d
+		}
+	]
+	title: "2. Базовая электрическая эра"
+}

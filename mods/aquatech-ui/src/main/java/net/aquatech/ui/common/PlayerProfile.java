@@ -16,7 +16,8 @@ public record PlayerProfile(
         boolean afk,
         boolean inWater,
         int waterDepth,
-        int effectivePressure
+        int effectivePressure,
+        long coins
 ) {
     public static PlayerProfile read(FriendlyByteBuf buf) {
         return new PlayerProfile(
@@ -30,7 +31,8 @@ public record PlayerProfile(
                 buf.readBoolean(),
                 buf.readBoolean(),
                 buf.readVarInt(),
-                buf.readVarInt()
+                buf.readVarInt(),
+                buf.readVarLong()
         );
     }
 
@@ -46,5 +48,6 @@ public record PlayerProfile(
         buf.writeBoolean(inWater);
         buf.writeVarInt(waterDepth);
         buf.writeVarInt(effectivePressure);
+        buf.writeVarLong(coins);
     }
 }

@@ -5,11 +5,11 @@
 - **Coding (`anti-ai-slop-coding`)**: Domain-specific symbol names, no restating comments, no YAGNI abstraction layers, smallest diff, proper error handling, match repo style.
 - **Design (`anti-ai-slop-design`)**: Brand and clear hierarchy first. No purple SaaS gradients, no default Inter/Roboto stacks, cards only when necessary, concrete UI copy.
 
-## Engineering & Execution Protocol (Thinking, Research & Quality)
-1. **Deep Thinking & Research First**: Always analyze the root cause, search the codebase and the web for current best practices before answering or modifying code.
-2. **Task Decomposition**: Break down complex requests into concise, logical milestones.
-3. **Questions with Recommendations**: Whenever requirements or design forks are ambiguous, ask clarifying questions providing a prioritized `(Recommended)` option and concrete rationale.
-4. **Mandatory Testing & Verification**: Validate every change through automated builds (`dotnet build`, `go build`, `./gradlew build`) or smoke tests before reporting completion.
+## Engineering & Execution Protocol (Deep Thinking, Research & Double-Check Verification)
+1. **Research & Information Gathering First**: Always inspect actual files, search the codebase, and verify active data structures before formulating any answer or plan.
+2. **Deep Thinking & Risk Analysis**: Thoroughly analyze consequences, check all edge cases and dependencies, and ensure no handcrafted files or user customizations are altered.
+3. **Pre-Execution Double Check**: Explicitly verify the plan and target files against the user's explicit instructions before executing.
+4. **Mandatory Testing & Post-Verification**: Validate every change through automated builds (`dotnet build`, `go build`, `./gradlew build`), run smoke tests, and perform a final double-check verification of outputs before reporting completion.
 5. **Smallest Clean Diffs**: No speculative abstractions; implement only what is necessary and verified.
 
 ## Caveman & Agent Skills
@@ -27,8 +27,7 @@
 - Do **not** copy jars or configs into Lodestone. Live host is Apex.
 
 ### 2. Portal changes (`docs/`, `worker/`, etc.)
-- `python tools/generate_site.py`
-- Deploy to `aquateche.store` + run smoke tests.
+- Deploy to Cloudflare (`python tools/deploy_to_cloudflare.py`) + run smoke tests. (Do NOT run `generate_site.py` which overwrites custom `docs/` HTML).
 
 ### 3. After code edits
 - `python -m graphify update .` — update codebase graph index.

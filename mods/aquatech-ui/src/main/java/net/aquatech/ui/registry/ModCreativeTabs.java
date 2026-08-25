@@ -11,7 +11,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModCreativeTabs {
 
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AquaTechUI.MOD_ID);
+    public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<CreativeModeTab>> TAB_REGISTRY_KEY =
+            net.minecraft.resources.ResourceKey.createRegistryKey(new net.minecraft.resources.ResourceLocation("minecraft", "creative_mode_tab"));
+
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(TAB_REGISTRY_KEY, AquaTechUI.MOD_ID);
+
 
     public static final RegistryObject<CreativeModeTab> AQUATECH_TAB = CREATIVE_MODE_TABS.register("aquatech_tab",
             () -> CreativeModeTab.builder()

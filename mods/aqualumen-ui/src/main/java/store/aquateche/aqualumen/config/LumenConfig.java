@@ -70,7 +70,7 @@ public final class LumenConfig {
                             "\u0410\u0431\u0438\u0441\u0441:40:9B7BFF",
                             "\u041b\u0435\u0433\u0435\u043d\u0434\u0430:60:F5C25B"), o -> o instanceof String);
             enabledTabs = b.comment("Tabs shown in the sidebar, in order.")
-                    .defineList("enabledTabs", List.of("profile", "store", "cases", "pass", "tops", "settings"), o -> o instanceof String);
+                    .defineList("enabledTabs", List.of("profile", "store", "cases", "pass", "fishing", "auction", "kits", "warps", "tops", "settings"), o -> o instanceof String);
             b.pop();
         }
     }

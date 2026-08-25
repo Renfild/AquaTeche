@@ -28,6 +28,9 @@ public class ModItems {
             UPGRADES.put(type, ITEMS.register(type.getId() + "_upgrade",
                     () -> new UpgradeItem(type, new Item.Properties())));
         }
+        // Alias for recipe & quest compatibility
+        ITEMS.register("upgrade_ocean_bounty",
+                () -> new UpgradeItem(UpgradeItem.UpgradeType.OCEAN_BOUNTY, new Item.Properties()));
 
         for (RateModItem.RateTier tier : RateModItem.RateTier.values()) {
             RATE_MODS.put(tier, ITEMS.register(tier.getId(),

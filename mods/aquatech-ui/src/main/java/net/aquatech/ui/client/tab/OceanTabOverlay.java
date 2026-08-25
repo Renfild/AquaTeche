@@ -78,7 +78,7 @@ public final class OceanTabOverlay {
         AquaFontRenderer.drawHeader(graphics, font, "AQUATECH", contentLeft, panelY + 11, theme.accent());
         AquaFontRenderer.draw(graphics, font, "OCEAN NETWORK", contentLeft, panelY + 24, theme.textDim());
 
-        // Online Pill Badge
+        // Header Right Info (Online, TPS, Discord)
         int onlineCount = Math.max(1, stats.online());
         int maxCount = Math.max(stats.online(), stats.maxPlayers() > 0 ? stats.maxPlayers() : 100);
         String onlineText = onlineCount + " / " + maxCount + " ОНЛАЙН";
@@ -86,16 +86,30 @@ public final class OceanTabOverlay {
         int pillW = onlineW + 16;
         int pillH = 15;
         int pillX = contentRight - pillW;
-        int pillY = panelY + 11;
+        int pillY = panelY + 9;
 
+        // Online Pill Badge
         LumenGfx.roundedRect(graphics, pillX, pillY, pillW, pillH, 7, 0x244CD08A);
         LumenGfx.outline(graphics, pillX, pillY, pillW, pillH, 7, 0x554CD08A);
         graphics.fill(pillX + 6, pillY + 5, pillX + 10, pillY + 9, theme.success());
         AquaFontRenderer.draw(graphics, font, onlineText, pillX + 13, pillY + 3, theme.success());
 
-        // Subtitle Info (Staff or Network status)
-        String subInfo = stats.staffOnline() > 0 ? (stats.staffOnline() + " персонал в сети") : "Сервер работает стабильно";
-        AquaFontRenderer.draw(graphics, font, subInfo, contentRight - AquaFontRenderer.width(font, subInfo), panelY + 28, theme.textDim());
+        // TPS Pill Badge
+        float tpsVal = stats.tps() > 0 ? stats.tps() : 20.0F;
+        int tpsColor = tpsVal >= 19.0F ? theme.success() : tpsVal >= 16.0F ? theme.gold() : theme.danger();
+        String tpsText = String.format("%.1f TPS", tpsVal);
+        int tpsW = AquaFontRenderer.width(font, tpsText) + 12;
+        int tpsX = pillX - tpsW - 6;
+        LumenGfx.roundedRect(graphics, tpsX, pillY, tpsW, pillH, 7, tpsColor & 0x24FFFFFF);
+        LumenGfx.outline(graphics, tpsX, pillY, tpsW, pillH, 7, tpsColor & 0x55FFFFFF);
+        AquaFontRenderer.draw(graphics, font, tpsText, tpsX + 6, pillY + 3, tpsColor);
+
+        // Discord Square Badge [DS]
+        int dsW = 20;
+        int dsX = tpsX - dsW - 6;
+        LumenGfx.roundedRect(graphics, dsX, pillY, dsW, pillH, 4, 0xFF5865F2);
+        LumenGfx.outline(graphics, dsX, pillY, dsW, pillH, 4, 0x88FFFFFF);
+        AquaFontRenderer.draw(graphics, font, "DS", dsX + 4, pillY + 3, 0xFFFFFFFF);
 
         // Header Gradient Divider
         LumenGfx.gradientRoundedH(graphics, contentLeft, panelY + HEADER_HEIGHT - 6, contentRight - contentLeft, 1, 0,
@@ -141,9 +155,9 @@ public final class OceanTabOverlay {
         int footerY = panelY + panelH - FOOTER_HEIGHT + 7;
         String domain = "aquateche.store";
         int domainW = AquaFontRenderer.width(font, domain);
-        AquaFontRenderer.draw(graphics, font, domain, contentLeft, footerY, theme.textDim());
+        AquaFontRenderer.draw(graphics, font, domain, contentLeft, footerY, 0xFF8AA4B8);
 
-        String hint = maxScroll > 0 ? "Колесо — прокрутка · F4 — Меню" : "F4 — Меню сервера";
+        String hint = maxScroll > 0 ? "Колесо — прокрутка · F4 — Меню" : "F4 — Меню сервера · TAB — Закрыть";
         int hintW = AquaFontRenderer.width(font, hint);
 
         if (contentRight - hintW > contentLeft + domainW + 16) {
@@ -210,16 +224,16 @@ public final class OceanTabOverlay {
         String name = AquaFontRenderer.fit(font, profile.name(), Math.max(24, right - textX - pingW - 14));
         AquaFontRenderer.draw(graphics, font, name, textX, y + 7, theme.text());
 
-        // Rank Pill
-        String rankRaw = profile.rankDisplay();
-        if (rankRaw == null || rankRaw.isBlank()) {
-            rankRaw = profile.rankId();
+        // Rank Pill (Unified clean display)
+        String rankClean = LumenTheme.getRankTitle(profile.rankId());
+        if (profile.rankDisplay() != null && !profile.rankDisplay().isBlank()) {
+            String custom = profile.rankDisplay().replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim().toUpperCase();
+            if (!custom.isBlank() && !custom.equalsIgnoreCase(profile.rankId())) {
+                rankClean = custom;
+            }
         }
-        rankRaw = rankRaw.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim().toUpperCase();
-        if (rankRaw.isBlank()) {
-            rankRaw = "ИГРОК";
-        }
-        String rank = AquaFontRenderer.fit(font, rankRaw, Math.max(24, right - textX - pingW - 12));
+        String rank = AquaFontRenderer.fit(font, rankClean, Math.max(24, right - textX - pingW - 12));
+
         int rankBadgeW = AquaFontRenderer.width(font, rank) + 8;
         int rankBadgeH = 12;
         int rankBadgeY = y + 21;
@@ -227,6 +241,14 @@ public final class OceanTabOverlay {
         LumenGfx.roundedRect(graphics, textX, rankBadgeY, rankBadgeW, rankBadgeH, 3, rankColor & 0x22FFFFFF);
         LumenGfx.outline(graphics, textX, rankBadgeY, rankBadgeW, rankBadgeH, 3, rankColor & 0x66FFFFFF);
         AquaFontRenderer.draw(graphics, font, rank, textX + 4, rankBadgeY + 2, rankColor);
+
+        // Coin balance (server-synced scoreboard "coins")
+        long coins = profile.coins();
+        if (coins > 0) {
+            String balStr = "¤ " + String.format("%,d", coins);
+            int balX = textX + rankBadgeW + 6;
+            AquaFontRenderer.draw(graphics, font, AquaFontRenderer.fit(font, balStr, Math.max(24, right - balX - 8)), balX, rankBadgeY + 2, theme.gold());
+        }
 
         // Ping text & indicator
         int pingX = right - pingW;

@@ -4,5 +4,5 @@ permissions:
 parents:
 - default
 prefixes:
-- '&d&l[ХУДОЖНИК] &d':
+- " ":
     priority: 32

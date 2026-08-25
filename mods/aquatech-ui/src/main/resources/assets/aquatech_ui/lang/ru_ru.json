@@ -43,6 +43,8 @@
   "item.aquatech_ui.speed_upgrade": "§bМодуль Ускорения",
   "item.aquatech_ui.speed_x4_upgrade": "§dМодуль Ускорения ×4",
   "item.aquatech_ui.efficiency_upgrade": "§gМодуль Энергоэффективности",
+  "item.aquatech_ui.ocean_bounty_upgrade": "§6Модуль Океанического Изобилия",
+  "item.aquatech_ui.upgrade_ocean_bounty": "§6Модуль Океанического Изобилия",
   "item.aquatech_ui.mesh_filter": "Сетчатый Фильтр",
   "item.aquatech_ui.dredger_drill_bit": "Буровое Корончатое Долото",
   "item.aquatech_ui.sonar_goggles": "Океанические Сонар-Очки",

@@ -17,13 +17,13 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.80"
-PACK_VERSION = "2.9.80"
+PACK_TAG = "pack-2.9.240"
+PACK_VERSION = "2.9.240"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
 FOLDERS = ["mods", "config", "kubejs", "resourcepacks"]
-SKIP_PATH_PARTS = ("_disabled", "_parked", ".disabled", "/players/", "quest_progress")
+SKIP_PATH_PARTS = ("_disabled", "_parked", ".disabled", "/players/", "quest_progress", "aquatech_sync_key.json")
 # Client-only jars (not on dedicated server) — copy from previous pack or client/ if present
 # ImmediatelyFast 1.2.4 crashes with Oculus 1.7 (IrisCompat ImmediateState) — omit until a compatible build.
 CLIENT_ONLY_PREFIXES = (
@@ -142,8 +142,8 @@ def sync_mods() -> None:
 
     # Always copy fresh compiled first-party jars from mod projects
     source_map = {
-        "aquatech_ui-1.0.24.jar": ROOT / "mods" / "aquatech-ui" / "build" / "libs" / "aquatech_ui-1.0.24.jar",
-        "aqualumen-forge-1.20.1-0.3.4-alpha.jar": ROOT / "mods" / "aqualumen-ui" / "build" / "libs" / "aqualumen-forge-1.20.1-0.3.4-alpha.jar",
+        "aquatech_ui-1.0.27.jar": ROOT / "mods" / "aquatech-ui" / "build" / "libs" / "aquatech_ui-1.0.27.jar",
+        "aqualumen-forge-1.20.1-0.3.16-alpha.jar": ROOT / "mods" / "aqualumen-ui" / "build" / "libs" / "aqualumen-forge-1.20.1-0.3.16-alpha.jar",
     }
     for name, src_jar in source_map.items():
         if src_jar.is_file():

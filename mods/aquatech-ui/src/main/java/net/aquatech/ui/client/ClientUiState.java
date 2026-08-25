@@ -56,6 +56,16 @@ public final class ClientUiState {
         return PROFILES.get(uuid);
     }
 
+    public static PlayerProfile profileByName(String name) {
+        if (name == null || name.isBlank()) return null;
+        for (PlayerProfile p : PROFILES.values()) {
+            if (name.equalsIgnoreCase(p.name())) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     public static ServerStats stats() {
         return stats;
     }

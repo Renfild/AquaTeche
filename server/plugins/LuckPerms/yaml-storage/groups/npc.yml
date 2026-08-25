@@ -4,5 +4,5 @@ permissions:
 parents:
 - default
 prefixes:
-- '&8[NPC] &8':
+- " ":
     priority: 5

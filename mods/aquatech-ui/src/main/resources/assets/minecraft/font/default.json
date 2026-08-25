@@ -193,10 +193,6 @@
     {
       "type": "reference",
       "id": "minecraft:include/default"
-    },
-    {
-      "type": "reference",
-      "id": "minecraft:include/unifont"
     }
   ]
 }

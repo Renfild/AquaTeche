@@ -44,6 +44,8 @@
   "item.aquatech_ui.speed_upgrade": "§bSpeed Upgrade Module",
   "item.aquatech_ui.speed_x4_upgrade": "§dSpeed Upgrade Module ×4",
   "item.aquatech_ui.efficiency_upgrade": "§gEnergy Efficiency Module",
+  "item.aquatech_ui.ocean_bounty_upgrade": "§6Ocean Bounty Module",
+  "item.aquatech_ui.upgrade_ocean_bounty": "§6Ocean Bounty Module",
   "item.aquatech_ui.mesh_filter": "Mesh Filter",
   "item.aquatech_ui.dredger_drill_bit": "Dredger Drill Bit",
   "item.aquatech_ui.sonar_goggles": "Ocean Sonar Goggles",

@@ -28,6 +28,10 @@ public final class HubTabs {
         STORE("store", Icons.Icon.BAG),
         CASES("cases", Icons.Icon.CASE),
         PASS("pass", Icons.Icon.STAR),
+        FISHING("fishing", Icons.Icon.FISH),
+        AUCTION("auction", Icons.Icon.BAG),
+        KITS("kits", Icons.Icon.SHIELD),
+        WARPS("warps", Icons.Icon.BOLT),
         TOPS("tops", Icons.Icon.CHART),
         SETTINGS("settings", Icons.Icon.GEAR);
 
@@ -91,6 +95,10 @@ public final class HubTabs {
             case STORE -> store(graphics, font, theme, snapshot, x, y, width, height, mouseX, mouseY);
             case CASES -> cases(graphics, font, theme, snapshot, x, y, width, height);
             case PASS -> pass(graphics, font, theme, snapshot, x, y, width, height, time);
+            case FISHING -> fishing(graphics, font, theme, snapshot, x, y, width, height, mouseX, mouseY, time);
+            case AUCTION -> auction(graphics, font, theme, snapshot, x, y, width, height, mouseX, mouseY, time);
+            case KITS -> kits(graphics, font, theme, snapshot, x, y, width, height, mouseX, mouseY);
+            case WARPS -> warps(graphics, font, theme, snapshot, x, y, width, height, mouseX, mouseY);
             case TOPS -> tops(graphics, font, theme, snapshot, x, y, width, height);
             case SETTINGS -> settings(graphics, font, theme, x, y, width, height);
         }
@@ -228,12 +236,12 @@ public final class HubTabs {
             };
             Icons.badge(graphics, Icons.Icon.CASE, x + 10, rowY + 10, 20, Gfx.withAlpha(accent, 0.22F), accent);
             HubFont.draw(graphics, font, entry.title(), x + 40, rowY + 12, theme.text());
-            HubFont.draw(graphics, font, "\u0432 \u043d\u0430\u043b\u0438\u0447\u0438\u0438: " + entry.count(),
+            HubFont.draw(graphics, font, entry.cost() + " монет · доступно: " + entry.count(),
                     x + 40, rowY + 24, theme.textDim());
 
             String action = entry.count() > 0
                     ? "\u041e\u0442\u043a\u0440\u044b\u0442\u044c"
-                    : "\u041d\u0435\u0442 \u043a\u043b\u044e\u0447\u0435\u0439";
+                    : "\u041c\u0430\u043b\u043e \u043c\u043e\u043d\u0435\u0442";
             int actionWidth = HubFont.width(font, action) + 20;
             if (entry.count() > 0) {
                 Gfx.gradientRoundedH(graphics, x + width - actionWidth - 22, rowY + 11, actionWidth + 12, 18, 9,
@@ -296,6 +304,344 @@ public final class HubTabs {
                             : "Premium \u043f\u0440\u043e\u043f\u0443\u0441\u043a \u2014 \u0431\u043e\u043b\u044c\u0448\u0435 \u043d\u0430\u0433\u0440\u0430\u0434 \u043d\u0430 \u043a\u0430\u0436\u0434\u043e\u043c \u0443\u0440\u043e\u0432\u043d\u0435",
                     x + 14, premiumY + 11, theme.gold());
         }
+    }
+
+    private static void fishing(GuiGraphics graphics, Font font, LumenTheme theme, HubSnapshot snapshot,
+                                int x, int y, int width, int height, int mouseX, int mouseY, float time) {
+        int heroHeight = 54;
+        LumenWidgets.card(graphics, theme, x, y, width, heroHeight, null);
+
+        Icons.badge(graphics, Icons.Icon.FISH, x + 10, y + 10, 34, Gfx.withAlpha(theme.accent(), 0.18F), theme.accent());
+        HubFont.draw(graphics, font, "Океаническая Рыбалка и Скупка", x + 50, y + 12, theme.text());
+        HubFont.draw(graphics, font, "🔥 Динамический курс: тренды дня дают +50% и +100% монет!",
+                x + 50, y + 26, theme.gold());
+
+        // "Sell all fish" button in hero header
+        int sellAllW = 126;
+        int sellAllX = x + width - sellAllW - 10;
+        int sellAllY = y + 13;
+        boolean sellAllHov = mouseX >= sellAllX && mouseX <= sellAllX + sellAllW && mouseY >= sellAllY && mouseY <= sellAllY + 28;
+        Gfx.gradientRoundedH(graphics, sellAllX, sellAllY, sellAllW, 28, 8,
+                sellAllHov ? theme.accent() : Gfx.withAlpha(theme.accent(), 0.85F),
+                sellAllHov ? theme.accentAlt() : Gfx.withAlpha(theme.accentAlt(), 0.85F));
+        HubFont.centered(graphics, font, "Продать всю рыбу", sellAllX + sellAllW / 2, sellAllY + 10, 0xFF08131A);
+
+        int startY = y + heroHeight + 8;
+        int columns = 3;
+        int cardWidth = (width - (columns - 1) * 8) / columns;
+        int cardHeight = 44;
+
+        List<HubSnapshot.FishEntry> fishes = snapshot != null && snapshot.fishes() != null ? snapshot.fishes() : List.of();
+        long daySeed = System.currentTimeMillis() / 86400000L;
+        int trend1Idx = fishes.isEmpty() ? -1 : (int) Math.abs((daySeed * 7 + 3) % fishes.size());
+        int trend2Idx = fishes.size() <= 1 ? -1 : (int) Math.abs((daySeed * 13 + 5) % fishes.size());
+        if (trend1Idx == trend2Idx && fishes.size() > 1) trend2Idx = (trend1Idx + 1) % fishes.size();
+
+        for (int i = 0; i < fishes.size(); i++) {
+            int col = i % columns;
+            int row = i / columns;
+            int cx = x + col * (cardWidth + 8);
+            int cy = startY + row * (cardHeight + 6);
+            if (cy + cardHeight > y + height) break;
+
+            HubSnapshot.FishEntry fish = fishes.get(i);
+            boolean isTrend1 = (i == trend1Idx);
+            boolean isTrend2 = (i == trend2Idx);
+            boolean isHot = isTrend1 || isTrend2;
+
+            long finalPrice = fish.priceCoins();
+            if (isTrend1) finalPrice = Math.max(finalPrice + 1, Math.round(finalPrice * 1.5));
+            else if (isTrend2) finalPrice = Math.max(finalPrice + 2, Math.round(finalPrice * 2.0));
+
+            boolean hovered = mouseX >= cx && mouseX <= cx + cardWidth && mouseY >= cy && mouseY <= cy + cardHeight;
+            if (isHot || hovered) {
+                Gfx.glow(graphics, cx, cy, cardWidth, cardHeight, 10, isHot ? theme.gold() : theme.accent(), isHot ? 2 : 1);
+            }
+            LumenWidgets.card(graphics, theme, cx, cy, cardWidth, cardHeight, null);
+
+            int dotColor = isHot ? theme.gold() : switch (fish.rarity()) {
+                case "Легенда" -> theme.gold();
+                case "Эпический" -> theme.accentAlt();
+                case "Редкий" -> 0xFF55FF55;
+                default -> theme.accent();
+            };
+            Icons.badge(graphics, Icons.Icon.FISH, cx + 6, cy + 6, 16, Gfx.withAlpha(dotColor, 0.18F), dotColor);
+            
+            String titleText = fish.name();
+            if (isTrend1) titleText += " §6+50%";
+            else if (isTrend2) titleText += " §e+100%";
+            HubFont.draw(graphics, font, titleText, cx + 26, cy + 8, isHot ? theme.gold() : theme.text());
+            
+            String priceStr = finalPrice + " мон · у вас: " + fish.count();
+            HubFont.draw(graphics, font, priceStr, cx + 26, cy + 24,
+                    fish.count() > 0 ? theme.success() : theme.textDim());
+
+            if (fish.count() > 0) {
+                int btnW = 54;
+                int btnX = cx + cardWidth - btnW - 6;
+                int btnY = cy + 11;
+                boolean bHov = mouseX >= btnX && mouseX <= btnX + btnW && mouseY >= btnY && mouseY <= btnY + 22;
+                Gfx.roundedRect(graphics, btnX, btnY, btnW, 22, 6,
+                        bHov ? theme.accent() : Gfx.withAlpha(theme.accent(), 0.25F));
+                HubFont.centered(graphics, font, "Сдать", btnX + btnW / 2, btnY + 7,
+                        bHov ? 0xFF08131A : theme.accent());
+            }
+        }
+    }
+
+    private static boolean clickFishing(HubSnapshot snapshot, int x, int y, int width, int height, int mouseX, int mouseY) {
+        if (snapshot == null) return false;
+        int heroHeight = 54;
+        int sellAllW = 126;
+        int sellAllX = x + width - sellAllW - 10;
+        int sellAllY = y + 13;
+        if (mouseX >= sellAllX && mouseX <= sellAllX + sellAllW && mouseY >= sellAllY && mouseY <= sellAllY + 28) {
+            LumenClient.sendAction("fish.sell_all", "");
+            HubFx.toast("Вся рыба успешно сдана!", Icons.Icon.FISH, LumenTheme.current().gold());
+            return true;
+        }
+
+        int startY = y + heroHeight + 8;
+        int columns = 3;
+        int cardWidth = (width - (columns - 1) * 8) / columns;
+        int cardHeight = 44;
+        List<HubSnapshot.FishEntry> fishes = snapshot.fishes() != null ? snapshot.fishes() : List.of();
+        for (int i = 0; i < fishes.size(); i++) {
+            int col = i % columns;
+            int row = i / columns;
+            int cx = x + col * (cardWidth + 8);
+            int cy = startY + row * (cardHeight + 6);
+            if (cy + cardHeight > y + height) break;
+
+            HubSnapshot.FishEntry fish = fishes.get(i);
+            if (fish.count() > 0 && mouseX >= cx && mouseX <= cx + cardWidth && mouseY >= cy && mouseY <= cy + cardHeight) {
+                LumenClient.sendAction("fish.sell", fish.id());
+                HubFx.toast("Сдано: " + fish.name(), Icons.Icon.FISH, LumenTheme.current().success());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void auction(GuiGraphics graphics, Font font, LumenTheme theme, HubSnapshot snapshot,
+                                int x, int y, int width, int height, int mouseX, int mouseY, float time) {
+        int heroHeight = 54;
+        LumenWidgets.card(graphics, theme, x, y, width, heroHeight, null);
+
+        Icons.badge(graphics, Icons.Icon.BAG, x + 10, y + 10, 34, Gfx.withAlpha(theme.gold(), 0.18F), theme.gold());
+        HubFont.draw(graphics, font, "Океанический Аукцион и Рынок", x + 50, y + 12, theme.text());
+        HubFont.draw(graphics, font, "Покупайте и продавайте редкие ресурсы и механизмы за монеты", x + 50, y + 26, theme.textDim());
+
+        // "+ Выставить лот" button
+        int createW = 110;
+        int createX = x + width - createW - 10;
+        int createY = y + 13;
+        boolean createHov = mouseX >= createX && mouseX <= createX + createW && mouseY >= createY && mouseY <= createY + 28;
+        Gfx.gradientRoundedH(graphics, createX, createY, createW, 28, 8,
+                createHov ? theme.gold() : Gfx.withAlpha(theme.gold(), 0.85F),
+                createHov ? theme.accentAlt() : Gfx.withAlpha(theme.accentAlt(), 0.85F));
+        HubFont.centered(graphics, font, "+ Продать лот", createX + createW / 2, createY + 10, 0xFF08131A);
+
+        int startY = y + heroHeight + 8;
+        int columns = 2;
+        int cardWidth = (width - (columns - 1) * 8) / columns;
+        int cardHeight = 46;
+
+        // Sample marketplace / auction items
+        String[][] sampleLots = {
+            {"Кристалл глубин (x4)", "120 мон", "Renfild", "Ресурс"},
+            {"Светящийся крючок MK-III", "350 мон", "AquaTech", "Снаряжение"},
+            {"Древнечешуйник (x2)", "480 мон", "FisherCat", "Рыба"},
+            {"Сплав орихалка (x8)", "640 мон", "Engineer", "Материал"},
+            {"Капсула сжатого кислорода", "90 мон", "Diver_1", "Расходник"},
+            {"Солнечный осётр (x5)", "250 мон", "StarFisher", "Рыба"}
+        };
+
+        for (int i = 0; i < sampleLots.length; i++) {
+            int col = i % columns;
+            int row = i / columns;
+            int cx = x + col * (cardWidth + 8);
+            int cy = startY + row * (cardHeight + 6);
+            if (cy + cardHeight > y + height) break;
+
+            String[] lot = sampleLots[i];
+            boolean hovered = mouseX >= cx && mouseX <= cx + cardWidth && mouseY >= cy && mouseY <= cy + cardHeight;
+            if (hovered) {
+                Gfx.glow(graphics, cx, cy, cardWidth, cardHeight, 10, theme.accent(), 1);
+            }
+            LumenWidgets.card(graphics, theme, cx, cy, cardWidth, cardHeight, null);
+
+            Icons.badge(graphics, Icons.Icon.CASE, cx + 6, cy + 8, 16, Gfx.withAlpha(theme.accent(), 0.18F), theme.accent());
+            HubFont.draw(graphics, font, lot[0], cx + 26, cy + 9, theme.text());
+            HubFont.draw(graphics, font, lot[1] + " · Продавец: §b" + lot[2], cx + 26, cy + 25, theme.gold());
+
+            int btnW = 60;
+            int btnX = cx + cardWidth - btnW - 6;
+            int btnY = cy + 12;
+            boolean bHov = mouseX >= btnX && mouseX <= btnX + btnW && mouseY >= btnY && mouseY <= btnY + 22;
+            Gfx.roundedRect(graphics, btnX, btnY, btnW, 22, 6,
+                    bHov ? theme.accent() : Gfx.withAlpha(theme.accent(), 0.25F));
+            HubFont.centered(graphics, font, "Купить", btnX + btnW / 2, btnY + 7,
+                    bHov ? 0xFF08131A : theme.accent());
+        }
+    }
+
+    private static boolean clickAuction(HubSnapshot snapshot, int x, int y, int width, int height, int mouseX, int mouseY) {
+        int heroHeight = 54;
+        int createW = 110;
+        int createX = x + width - createW - 10;
+        int createY = y + 13;
+        if (mouseX >= createX && mouseX <= createX + createW && mouseY >= createY && mouseY <= createY + 28) {
+            HubFx.toast("Для продажи держите предмет в руке: /ah sell <цена>", Icons.Icon.BAG, LumenTheme.current().gold());
+            return true;
+        }
+
+        int startY = y + heroHeight + 8;
+        int columns = 2;
+        int cardWidth = (width - (columns - 1) * 8) / columns;
+        int cardHeight = 46;
+
+        for (int i = 0; i < 6; i++) {
+            int col = i % columns;
+            int row = i / columns;
+            int cx = x + col * (cardWidth + 8);
+            int cy = startY + row * (cardHeight + 6);
+            if (cy + cardHeight > y + height) break;
+
+            int btnW = 60;
+            int btnX = cx + cardWidth - btnW - 6;
+            int btnY = cy + 12;
+            if (mouseX >= btnX && mouseX <= btnX + btnW && mouseY >= btnY && mouseY <= btnY + 22) {
+                LumenClient.sendAction("auction.buy", String.valueOf(i));
+                HubFx.toast("Запрос на покупку лота отправлен!", Icons.Icon.BAG, LumenTheme.current().accent());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void kits(GuiGraphics graphics, Font font, LumenTheme theme, HubSnapshot snapshot,
+                             int x, int y, int width, int height, int mouseX, int mouseY) {
+        int heroHeight = 52;
+        LumenWidgets.card(graphics, theme, x, y, width, heroHeight, null);
+        Icons.badge(graphics, Icons.Icon.SHIELD, x + 10, y + 10, 32, Gfx.withAlpha(theme.accent(), 0.18F), theme.accent());
+        HubFont.draw(graphics, font, "\u041d\u0430\u0431\u043e\u0440\u044b \u0421\u043d\u044f\u0440\u044f\u0436\u0435\u043d\u0438\u044f (Kits)", x + 50, y + 12, theme.text());
+        HubFont.draw(graphics, font, "\u041f\u043e\u043b\u0443\u0447\u0430\u0439\u0442\u0435 \u044d\u043a\u0438\u043f\u0438\u0440\u043e\u0432\u043a\u0443 \u0438 \u0441\u0442\u0430\u0440\u0442\u043e\u0432\u044b\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044b", x + 50, y + 26, theme.textDim());
+
+        int startY = y + heroHeight + 8;
+        int rowHeight = 44;
+        List<HubSnapshot.KitEntry> kits = snapshot != null && snapshot.kits() != null ? snapshot.kits() : List.of();
+        for (int i = 0; i < kits.size(); i++) {
+            int rowY = startY + i * (rowHeight + 6);
+            if (rowY + rowHeight > y + height) break;
+
+            HubSnapshot.KitEntry kit = kits.get(i);
+            boolean hovered = mouseX >= x && mouseX <= x + width && mouseY >= rowY && mouseY <= rowY + rowHeight;
+            if (hovered) {
+                Gfx.glow(graphics, x, rowY, width, rowHeight, 10, theme.accent(), 2);
+            }
+            LumenWidgets.card(graphics, theme, x, rowY, width, rowHeight, null);
+            Icons.badge(graphics, Icons.Icon.CASE, x + 10, rowY + 11, 22, Gfx.withAlpha(theme.accent(), 0.16F), theme.accent());
+            HubFont.draw(graphics, font, kit.title(), x + 38, rowY + 10, theme.text());
+            HubFont.draw(graphics, font, kit.description(), x + 38, rowY + 24, theme.textDim());
+
+            int btnWidth = 72;
+            int btnX = x + width - btnWidth - 12;
+            int btnY = rowY + 11;
+            boolean btnHovered = mouseX >= btnX && mouseX <= btnX + btnWidth && mouseY >= btnY && mouseY <= btnY + 22;
+            Gfx.roundedRect(graphics, btnX, btnY, btnWidth, 22, 8,
+                    btnHovered ? theme.accent() : Gfx.withAlpha(theme.accent(), 0.22F));
+            HubFont.centered(graphics, font, "\u0417\u0430\u0431\u0440\u0430\u0442\u044c", btnX + btnWidth / 2, btnY + 7,
+                    btnHovered ? 0xFF08131A : theme.accent());
+        }
+    }
+
+    private static boolean clickKits(HubSnapshot snapshot, int x, int y, int width, int height, int mouseX, int mouseY) {
+        if (snapshot == null || snapshot.kits() == null) return false;
+        int heroHeight = 52;
+        int startY = y + heroHeight + 8;
+        int rowHeight = 44;
+        List<HubSnapshot.KitEntry> kits = snapshot.kits();
+        for (int i = 0; i < kits.size(); i++) {
+            int rowY = startY + i * (rowHeight + 6);
+            if (rowY + rowHeight > y + height) break;
+            int btnWidth = 72;
+            int btnX = x + width - btnWidth - 12;
+            int btnY = rowY + 11;
+            if (mouseX >= btnX && mouseX <= btnX + btnWidth && mouseY >= btnY && mouseY <= btnY + 22) {
+                LumenClient.sendAction("hub.kit", kits.get(i).id());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void warps(GuiGraphics graphics, Font font, LumenTheme theme, HubSnapshot snapshot,
+                              int x, int y, int width, int height, int mouseX, int mouseY) {
+        int heroHeight = 52;
+        LumenWidgets.card(graphics, theme, x, y, width, heroHeight, null);
+        Icons.badge(graphics, Icons.Icon.BOLT, x + 10, y + 10, 32, Gfx.withAlpha(theme.accentAlt(), 0.18F), theme.accentAlt());
+        HubFont.draw(graphics, font, "\u041d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f \u0438 \u0412\u0430\u0440\u043f\u044b (Warps)", x + 50, y + 12, theme.text());
+        HubFont.draw(graphics, font, "\u0411\u044b\u0441\u0442\u0440\u043e\u0435 \u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u0435 \u043f\u043e \u043a\u043b\u044e\u0447\u0435\u0432\u044b\u043c \u0442\u043e\u0447\u043a\u0430\u043c \u043c\u0438\u0440\u0430", x + 50, y + 26, theme.textDim());
+
+        int startY = y + heroHeight + 8;
+        int columns = 2;
+        int cardWidth = (width - 8) / 2;
+        int cardHeight = 56;
+
+        List<HubSnapshot.WarpEntry> warps = snapshot != null && snapshot.warps() != null ? snapshot.warps() : List.of();
+        for (int i = 0; i < warps.size(); i++) {
+            int col = i % columns;
+            int row = i / columns;
+            int cx = x + col * (cardWidth + 8);
+            int cy = startY + row * (cardHeight + 8);
+            if (cy + cardHeight > y + height) break;
+
+            HubSnapshot.WarpEntry warp = warps.get(i);
+            boolean hovered = mouseX >= cx && mouseX <= cx + cardWidth && mouseY >= cy && mouseY <= cy + cardHeight;
+            if (hovered) {
+                Gfx.glow(graphics, cx, cy, cardWidth, cardHeight, 10, theme.accentAlt(), 2);
+            }
+            LumenWidgets.card(graphics, theme, cx, cy, cardWidth, cardHeight, null);
+            Icons.badge(graphics, Icons.Icon.ARROW, cx + 10, cy + 10, 20,
+                    Gfx.withAlpha(theme.accentAlt(), 0.18F), theme.accentAlt());
+            HubFont.draw(graphics, font, warp.title(), cx + 36, cy + 11, theme.text());
+            HubFont.draw(graphics, font, warp.description(), cx + 36, cy + 25, theme.textDim());
+
+            int btnWidth = 64;
+            int btnX = cx + cardWidth - btnWidth - 10;
+            int btnY = cy + 16;
+            boolean btnHovered = mouseX >= btnX && mouseX <= btnX + btnWidth && mouseY >= btnY && mouseY <= btnY + 22;
+            Gfx.roundedRect(graphics, btnX, btnY, btnWidth, 22, 8,
+                    btnHovered ? theme.accentAlt() : Gfx.withAlpha(theme.accentAlt(), 0.22F));
+            HubFont.centered(graphics, font, "\u0422\u0435\u043b\u0435\u043f\u043e\u0440\u0442", btnX + btnWidth / 2, btnY + 7,
+                    btnHovered ? 0xFF08131A : theme.accentAlt());
+        }
+    }
+
+    private static boolean clickWarps(HubSnapshot snapshot, int x, int y, int width, int height, int mouseX, int mouseY) {
+        if (snapshot == null || snapshot.warps() == null) return false;
+        int heroHeight = 52;
+        int startY = y + heroHeight + 8;
+        int columns = 2;
+        int cardWidth = (width - 8) / 2;
+        int cardHeight = 56;
+        List<HubSnapshot.WarpEntry> warps = snapshot.warps();
+        for (int i = 0; i < warps.size(); i++) {
+            int col = i % columns;
+            int row = i / columns;
+            int cx = x + col * (cardWidth + 8);
+            int cy = startY + row * (cardHeight + 8);
+            if (cy + cardHeight > y + height) break;
+            int btnWidth = 64;
+            int btnX = cx + cardWidth - btnWidth - 10;
+            int btnY = cy + 16;
+            if (mouseX >= btnX && mouseX <= btnX + btnWidth && mouseY >= btnY && mouseY <= btnY + 22) {
+                LumenClient.sendAction("hub.warp", warps.get(i).id());
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void tops(GuiGraphics graphics, Font font, LumenTheme theme, HubSnapshot snapshot,
@@ -378,6 +724,10 @@ public final class HubTabs {
             case STORE -> clickStore(snapshot, x, y, width, height, mouseX, mouseY);
             case CASES -> clickCases(snapshot, x, y, width, height, mouseX, mouseY);
             case PASS -> clickPass(snapshot, x, y, width, height, mouseX, mouseY);
+            case FISHING -> clickFishing(snapshot, x, y, width, height, mouseX, mouseY);
+            case AUCTION -> clickAuction(snapshot, x, y, width, height, mouseX, mouseY);
+            case KITS -> clickKits(snapshot, x, y, width, height, mouseX, mouseY);
+            case WARPS -> clickWarps(snapshot, x, y, width, height, mouseX, mouseY);
             default -> false;
         };
     }

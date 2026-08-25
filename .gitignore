@@ -109,4 +109,8 @@ bootstrap/AquaTech.exe
 
 # Portal sync secret (provision on server only)
 server/config/aquatech_sync_key.json
+config/aquatech_sync_key.json
 server/plugins/*.bak
+mods/aqualumen-ui/build/
+mods/aqualumen-ui/.gradle/
+backups/
