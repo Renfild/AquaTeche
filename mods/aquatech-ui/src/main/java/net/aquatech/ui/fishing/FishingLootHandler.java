@@ -475,6 +475,8 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:classicore/tin", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
+                // Chain fix: slimed_rod recipe needs strontium — drop it here
+                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "slimed_rod" -> { // Tier 5: Slimed Rod (LV Ores & Polonium)
@@ -516,6 +518,8 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:preciousgem/topaz_gem", Items.AMETHYST_SHARD, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:blockpreciousore/sapphire_ore", Items.LAPIS_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:mineral/crystal", Items.AMETHYST_BLOCK, 1));
+                // Chain fix: sharktooth_rod recipe needs titanium — drop it here
+                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/cobalt", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.30f, new ItemStack(Items.DIAMOND, 1));
                 pickFromPool(list, pool, random, 1, 3);
