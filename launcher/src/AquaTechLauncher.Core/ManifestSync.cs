@@ -219,7 +219,10 @@ public sealed class ManifestSync
             return (0, 0, deletedOnly);
         }
 
-        log?.Invoke($"Обновляем {jobs.Count}/{files.Count} файлов сборки v{manifest.Version}…");
+        var downloadBytes = jobs.Sum(j => j.Size > 0 ? j.Size : 0);
+        log?.Invoke(downloadBytes > 0
+            ? $"Обновляем {jobs.Count}/{files.Count} файлов сборки v{manifest.Version} (~{downloadBytes / 1_000_000.0:0.#} МБ)…"
+            : $"Обновляем {jobs.Count}/{files.Count} файлов сборки v{manifest.Version}…");
         progress?.Invoke(35);
 
         var updated = 0;
