@@ -214,15 +214,18 @@ ServerEvents.recipes((event) => {
   }).id('aquatech:abyssal_magnet')
 
   // One auto-fisher craft (also clears jar datapack duplicate)
+  // FIX: was craftable on vanilla table from cheap iron — now requires MV-tier IU parts.
   event.remove({ output: 'aquatech_ui:auto_fisher' })
   event.remove({ id: 'aquatech_ui:auto_fisher' })
   event.remove({ id: 'aquatech:auto_fisher' })
-  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SSS'], {
-    I: 'minecraft:iron_ingot',
-    F: 'minecraft:fishing_rod',
-    R: 'minecraft:redstone_block',
+  event.remove({ id: 'aquatech_ui:auto_fisher_jar' })
+  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SES'], {
+    I: 'industrialupgrade:itemingots/aluminium_ingot',
+    F: 'starcatcher:good_old_rod',
+    R: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic Circuit
     C: 'minecraft:chest',
-    S: 'minecraft:smooth_stone',
+    S: 'industrialupgrade:blockresource/reinforced_stone',
+    E: 'industrialupgrade:crafting_elements/crafting_20_element', // Improved Electric Motor
   }).id('aquatech:auto_fisher')
 
   event.shaped('aquatech_ui:seabed_dredger', ['DBD', 'RCR', 'SSS'], {

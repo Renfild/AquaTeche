@@ -3,60 +3,43 @@
 	default_quest_shape: ""
 	filename: "endgame_aquatech"
 	group: ""
-	id: "5D185FFC6CDC465B908E270C6A4898F1"
+	id: "891345EEFA4A4413835FEB0FD67E06AA"
 	icon: "industrialupgrade:admpanel/admpanel"
 	order_index: 7
 	quest_links: [ ]
-	subtitle: "Чем закончить сборку. Финальные вызовы для тех, кто дошёл до конца."
+	subtitle: "Финал пути. Награды: ME-хранилища, Infinity, фотонная панель и золотой префикс ★ Endgame ★."
 	title: "★ Эндгейм: Финал Пути"
 	quests: [
 		{
 			description: [
-				"Цель сборки: скрафтите Административную Солнечную Панель (Admin Solar Panel)."
-				"Путь: Avaritia Extreme Table (9×9) или ExtendedCrafting."
-				"Ключевые компоненты: Infinity Ingot, Rate x64, Alpha Rod, Photonic Solar Panel."
-				"Она выдаёт столько энергии, что сервер перестаёт её замечать. Это и есть конец пути."
+				"Добудьте Alpha Rod — вершину рыбацкой прогрессии из 13 тиров."
+				"Крафт: Osmiridium Alloy Ingot + Asteroid Adamantium Ore + предыдущая удочка."
 			]
 
-		dependencies: ["5F7D6CBF8E0148FC8975716E0FBA534F","A765D221A6B945F08517C26B382E2608"]
-			id: "2D8C516652D44F33939E1BADC892E682"
+			id: "031AE9F35C0842AFAB46B80ABFF9B669"
 			rewards: [{
-				id: "7293BEE07098419A9ADF6B8997F59A33"
-				item: "avaritia:infinity_ingot"
-				type: "item"
-			},{
-				id: "3236AA2ECB664D7C9F0620BCB773F733"
-				type: "xp"
-				xp: 10000
-			}]
-			tasks: [{
-				id: "DD78FF2D2B534647A25161D364BA3782"
-				item: "industrialupgrade:admpanel/admpanel"
-				type: "item"
-			}]
-			title: "Финал: Бесконечная энергия"
-			x: 0.0d
-			y: 0.0d
-		},
-		{
-			description: [
-				"Добудьте Alpha Rod — вершину рыбацкой прогрессии."
-				"Для крафта нужны Osmiridium Alloy Ingot и Asteroid Adamantium Ore."
-				"Ловит всё, что движется. И то, что не движется — тоже."
-			]
-
-			id: "24C83DC9153B44439C8B1DAC6212DF93"
-			rewards: [{
-				id: "543A1163962D4032AD73D97164E47A59"
+				id: "23DFF6F554EC48C584BE1E424F3BC87E"
 				item: "aquatech_ui:rate_x64"
+				count: 2
 				type: "item"
 			},{
-				id: "2F7560D3F7B840AD9C8F25BE15F7914B"
+				id: "4500D5E52EA34B66929A81BA85E72232"
+				item: "ae2:item_storage_cell_256k"
+				count: 4
+				type: "item"
+			},{
+				id: "A5430B63F6964A84867D26A8BF0933F1"
+				item: "ae2:cell_component_256k"
+				count: 4
+				type: "item"
+			},{
+				id: "999969C0A96D464A9F240B190CF989E8"
 				type: "xp"
-				xp: 5000
+				xp: 8000
 			}]
+			subtitle: ""
 			tasks: [{
-				id: "C11726ECC94A4ECD8296D608F9CB80CD"
+				id: "69288D2F614B4BFFAE111EDE74EB1CE5"
 				item: "starcatcher:alpha_rod"
 				type: "item"
 			}]
@@ -66,30 +49,78 @@
 		},
 		{
 			description: [
-				"Принесите Nether Star, пойманную удочкой в океане."
-				"Да, это возможно. Да, это редкость ~6% на Абиссальной+."
-				"Новолуние, ночь и шторм повышают шанс."
+				"Принесите 5 Nether Star, пойманных удочкой в океане — не добытых на сервере."
+				"Новолуние + ночь + шторм: шанс до ~10% на Абиссальной+."
 			]
 
-			id: "325A29A29D2D4350948C4CB4CADC724B"
+			id: "9CF6D75A5FFE4A90845E52F198ADF492"
 			rewards: [{
-				id: "0909B789F23F48AFA22070238AB8E897"
+				id: "560948F349FE49FB8437369373A4C257"
 				item: "avaritia:crystal_matrix_ingot"
+				count: 8
 				type: "item"
 			},{
-				id: "807EF7FC6C924C9389F647BF954DD0DB"
+				id: "56411E5103D74F749BDF21DD88929227"
+				item: "ae2:fluid_storage_cell_256k"
+				count: 2
+				type: "item"
+			},{
+				id: "5D719E10FC0D4C00912E398E333FAEBC"
 				type: "xp"
-				xp: 3000
+				xp: 8000
 			}]
+			subtitle: ""
 			tasks: [{
-				id: "2F55D108F0EE497086410F6A607D7718"
-				count: 3L
+				id: "8BF30B5E325E49228114C02DB21B329D"
+				count: 5L
 				item: "minecraft:nether_star"
 				type: "item"
 			}]
 			title: "Нейтронная звезда в кармане"
 			x: 2.0d
 			y: 1.0d
+		},
+		{
+			description: [
+				"Чем заканчивается AquaTech."
+				"Соберите Admin Solar Panel: Avaritia Extreme Table (9×9)."
+				"Infinity Ingot + Singularity + Rate x64 + Alpha Rod + Photonic Solar Panel."
+				"После неё энергия перестаёт быть вопросом. Вы прошли сборку."
+			]
+
+		dependencies: ["9767D341EDB343D78AF7FD76270EA6FA","50E57C9459474B63B05971A93331F79F"]
+			id: "ABC9A464ECF145D1BFE52FDD4581AE9B"
+			rewards: [{
+				id: "B006C646B92B4E819A384A4A072129FA"
+				item: "avaritia:infinity_ingot"
+				count: 8
+				type: "item"
+			},{
+				id: "E87E028160EC4F0BB3037A59AF920A2C"
+				item: "industrialupgrade:machines/photonic_solar_panel"
+				type: "item"
+			},{
+				id: "72D3B30DADF04D7EA299D4D1CE6CD448"
+				item: "avaritia:compressed_chest"
+				type: "item"
+			},{
+				id: "0E38DCA0AECF4D09AFDB96B21BA05DA2"
+				command: "@player give @s minecraft:name_tag{display:{Name:'{\"text\":\"★ Endgame ★\",\"color\":\"gold\",\"bold\":true}'}}"
+				type: "command"
+			},{
+				id: "C0EAE1B5690C440DAD08AD825BC7DBFA"
+				type: "xp"
+				xp: 25000
+			}]
+			subtitle: ""
+			tasks: [{
+				id: "AB260F068D52426F97784DE7D8083878"
+				item: "industrialupgrade:admpanel/admpanel"
+				type: "item"
+			}]
+			title: "★ ФИНАЛ: Административная Солнечная Панель"
+			x: 0.0d
+			y: 3.0d
 		}
 	]
 }
