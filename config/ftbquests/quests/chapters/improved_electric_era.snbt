@@ -129,7 +129,7 @@
 			}]
 			tasks: [{
 				id: "5E18ACF5E59165FF"
-				item: "industrialupgrade:steelMesh"
+				item: "industrialupgrade:mesh/steelmesh"
 				type: "item"
 			}]
 			title: "Steelmesh"
@@ -172,7 +172,7 @@
 			}]
 			tasks: [{
 				id: "7711021F63E54AD8"
-				item: "industrialupgrade:reBattery"
+				item: "industrialupgrade:battery/re_battery1"
 				type: "item"
 			}]
 			title: "Rebattery"
@@ -215,7 +215,7 @@
 			}]
 			tasks: [{
 				id: "AB90216B1B46DDAA"
-				item: "industrialupgrade:oilgetter"
+				item: "industrialupgrade:crafting_elements/crafting_251_element"
 				type: "item"
 			}]
 			title: "Oilgetter"
@@ -237,7 +237,7 @@
 			}]
 			tasks: [{
 				id: "82B080AED9702F05"
-				item: "industrialupgrade:oilquarry"
+				item: "industrialupgrade:petrol_quarry/petrol_quarry"
 				type: "item"
 			}]
 			title: "Oilquarry"
@@ -258,7 +258,7 @@
 			}]
 			tasks: [{
 				id: "6DA54588054D0800"
-				item: "industrialupgrade:oiladvrefiner"
+				item: "industrialupgrade:adv_refiner_item"
 				type: "item"
 			}]
 			title: "Oiladvrefiner"
@@ -302,7 +302,7 @@
 			}]
 			tasks: [{
 				id: "B17D5BC81409B46B"
-				item: "industrialupgrade:dosimeter"
+				item: "industrialupgrade:crafting_elements/crafting_40_element"
 				type: "item"
 			}]
 			title: "Dosimeter"
@@ -411,7 +411,7 @@
 			}]
 			tasks: [{
 				id: "56CA3E91B665445A"
-				item: "industrialupgrade:leadbox"
+				item: "industrialupgrade:bags/lead_box"
 				type: "item"
 			}]
 			title: "Leadbox"
@@ -805,7 +805,7 @@
 			}]
 			tasks: [{
 				id: "B220AD0F66EC869A"
-				item: "industrialupgrade:reinforcedstone"
+				item: "industrialupgrade:blockresource/reinforced_stone"
 				type: "item"
 			}]
 			title: "Reinforcedstone"
@@ -935,7 +935,7 @@
 			}]
 			tasks: [{
 				id: "EFDC6B24D80699B2"
-				item: "industrialupgrade:scrapBox"
+				item: "industrialupgrade:doublescrapbox"
 				type: "item"
 			}]
 			title: "Scrapbox"
@@ -978,7 +978,7 @@
 			}]
 			tasks: [{
 				id: "217FB61500E16A91"
-				item: "industrialupgrade:overclockerUpgrade"
+				item: "industrialupgrade:upgrades/overclockerupgrade1"
 				type: "item"
 			}]
 			title: "Overclockerupgrade"
@@ -1000,7 +1000,7 @@
 			}]
 			tasks: [{
 				id: "283B434175C129EC"
-				item: "industrialupgrade:transformerUpgrade"
+				item: "industrialupgrade:upgrades/transformerupgrade1"
 				type: "item"
 			}]
 			title: "Transformerupgrade"
@@ -1430,7 +1430,7 @@
 			}]
 			tasks: [{
 				id: "1C9B31948B4918A8"
-				item: "industrialupgrade:pollution_scanner"
+				item: "industrialupgrade:pollution_device"
 				type: "item"
 			}]
 			title: "Pollution Scanner"

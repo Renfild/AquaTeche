@@ -1,0 +1,95 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "endgame_aquatech"
+	group: ""
+	id: "5D185FFC6CDC465B908E270C6A4898F1"
+	icon: "industrialupgrade:admpanel/admpanel"
+	order_index: 7
+	quest_links: [ ]
+	subtitle: "Чем закончить сборку. Финальные вызовы для тех, кто дошёл до конца."
+	title: "★ Эндгейм: Финал Пути"
+	quests: [
+		{
+			description: [
+				"Цель сборки: скрафтите Административную Солнечную Панель (Admin Solar Panel)."
+				"Путь: Avaritia Extreme Table (9×9) или ExtendedCrafting."
+				"Ключевые компоненты: Infinity Ingot, Rate x64, Alpha Rod, Photonic Solar Panel."
+				"Она выдаёт столько энергии, что сервер перестаёт её замечать. Это и есть конец пути."
+			]
+
+		dependencies: ["5F7D6CBF8E0148FC8975716E0FBA534F","A765D221A6B945F08517C26B382E2608"]
+			id: "2D8C516652D44F33939E1BADC892E682"
+			rewards: [{
+				id: "7293BEE07098419A9ADF6B8997F59A33"
+				item: "avaritia:infinity_ingot"
+				type: "item"
+			},{
+				id: "3236AA2ECB664D7C9F0620BCB773F733"
+				type: "xp"
+				xp: 10000
+			}]
+			tasks: [{
+				id: "DD78FF2D2B534647A25161D364BA3782"
+				item: "industrialupgrade:admpanel/admpanel"
+				type: "item"
+			}]
+			title: "Финал: Бесконечная энергия"
+			x: 0.0d
+			y: 0.0d
+		},
+		{
+			description: [
+				"Добудьте Alpha Rod — вершину рыбацкой прогрессии."
+				"Для крафта нужны Osmiridium Alloy Ingot и Asteroid Adamantium Ore."
+				"Ловит всё, что движется. И то, что не движется — тоже."
+			]
+
+			id: "24C83DC9153B44439C8B1DAC6212DF93"
+			rewards: [{
+				id: "543A1163962D4032AD73D97164E47A59"
+				item: "aquatech_ui:rate_x64"
+				type: "item"
+			},{
+				id: "2F7560D3F7B840AD9C8F25BE15F7914B"
+				type: "xp"
+				xp: 5000
+			}]
+			tasks: [{
+				id: "C11726ECC94A4ECD8296D608F9CB80CD"
+				item: "starcatcher:alpha_rod"
+				type: "item"
+			}]
+			title: "Альфа-рыбак"
+			x: -2.0d
+			y: 1.0d
+		},
+		{
+			description: [
+				"Принесите Nether Star, пойманную удочкой в океане."
+				"Да, это возможно. Да, это редкость ~6% на Абиссальной+."
+				"Новолуние, ночь и шторм повышают шанс."
+			]
+
+			id: "325A29A29D2D4350948C4CB4CADC724B"
+			rewards: [{
+				id: "0909B789F23F48AFA22070238AB8E897"
+				item: "avaritia:crystal_matrix_ingot"
+				type: "item"
+			},{
+				id: "807EF7FC6C924C9389F647BF954DD0DB"
+				type: "xp"
+				xp: 3000
+			}]
+			tasks: [{
+				id: "2F55D108F0EE497086410F6A607D7718"
+				count: 3L
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
+			title: "Нейтронная звезда в кармане"
+			x: 2.0d
+			y: 1.0d
+		}
+	]
+}

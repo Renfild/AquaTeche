@@ -3,7 +3,7 @@
 	default_quest_shape: ""
 	filename: "basic_electric_era"
 	group: ""
-	icon: "industrialupgrade:basemachine/generator"
+	icon: "industrialupgrade:basemachine3/generator_iu"
 	id: "C3D924250B4CCA04"
 	order_index: 3
 	quest_links: [ ]
@@ -22,7 +22,7 @@
 			}]
 			tasks: [{
 				id: "1F1044548937CFB5"
-				item: "industrialupgrade:elemotor"
+				item: "industrialupgrade:crafting_elements/crafting_276_element"
 				type: "item"
 			}]
 			title: "Elemotor"
@@ -418,7 +418,7 @@
 			}]
 			tasks: [{
 				id: "51D757931B2B9E42"
-				item: "industrialupgrade:advanced_circuit"
+				item: "industrialupgrade:crafting_elements/crafting_273_element"
 				type: "item"
 			}]
 			title: "Прогресс в сфере электроники"
@@ -664,7 +664,7 @@
 			}]
 			tasks: [{
 				id: "38524A0A4670A71D"
-				item: "industrialupgrade:crushed_uranium_ore"
+				item: "industrialupgrade:crushed/uranium"
 				type: "item"
 			}]
 			title: "Crushed Uranium Ore"
@@ -729,7 +729,7 @@
 			}]
 			tasks: [{
 				id: "1813ACED2FBBD8B2"
-				item: "industrialupgrade:se_sensor"
+				item: "industrialupgrade:crafting_elements/crafting_79_element"
 				type: "item"
 			}]
 			title: "Se Sensor"
@@ -816,7 +816,7 @@
 			}]
 			tasks: [{
 				id: "8864DFE28BBC2F64"
-				item: "industrialupgrade:calcium_carbide"
+				item: "industrialupgrade:crafting_elements/crafting_482_element"
 				type: "item"
 			}]
 			title: "Calcium Carbide"
@@ -1300,7 +1300,7 @@
 			}]
 			tasks: [{
 				id: "9F58D616504284B9"
-				item: "industrialupgrade:radioactive_waste"
+				item: "industrialupgrade:crafting_elements/crafting_443_element"
 				type: "item"
 			}]
 			title: "Radioactive Waste"
