@@ -32,10 +32,10 @@ var manifestURLs = []string{
 }
 
 type manifest struct {
-	Version      string `json:"version"`
-	LauncherZip  string `json:"launcher_zip"`  // URL or filename on same release
-	LauncherExe  string `json:"launcher_exe"`  // relative path inside extract / app dir
-	ReleaseBase  string `json:"release_base"`  // optional base URL for relative names
+	Version     string `json:"version"`
+	LauncherZip string `json:"launcher_zip"` // URL or filename on same release
+	LauncherExe string `json:"launcher_exe"` // relative path inside extract / app dir
+	ReleaseBase string `json:"release_base"` // optional base URL for relative names
 }
 
 func main() {
@@ -115,7 +115,12 @@ func main() {
 		if entries, _ := os.ReadDir(stage); len(entries) == 1 && entries[0].IsDir() {
 			src = filepath.Join(stage, entries[0].Name())
 		}
-		_ = exec.Command("taskkill", "/F", "/IM", "AquaTechLauncher.exe").Run()
+		kill := exec.Command("taskkill", "/F", "/IM", "AquaTechLauncher.exe")
+		kill.SysProcAttr = &syscall.SysProcAttr{
+			HideWindow:    true,
+			CreationFlags: 0x08000000, // CREATE_NO_WINDOW — no console flash
+		}
+		_ = kill.Run()
 		time.Sleep(100 * time.Millisecond)
 		_ = os.RemoveAll(appDir)
 		if err := os.Rename(src, appDir); err != nil {

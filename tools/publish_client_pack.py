@@ -165,6 +165,76 @@ def sync_mods() -> None:
     print(f"OK mods: {len(list(dst.glob('*.jar')))} jars")
 
 
+def load_prev_manifest() -> dict | None:
+    """Previous manifest: docs/pack/manifest.json (last published) or dist backup."""
+    candidates = [
+        DOCS_PACK / "manifest.json",
+        ROOT / "dist" / "AquaTech-Client" / "manifest.prev.json",
+    ]
+    for prev in candidates:
+        try:
+            if prev.is_file():
+                data = json.loads(prev.read_text(encoding="utf-8-sig"))
+                if data.get("files") and data.get("version") != PACK_VERSION:
+                    return data
+        except Exception as e:
+            print(f"WARN previous manifest unreadable ({prev.name}): {e}")
+    return None
+
+
+def backup_current_manifest() -> None:
+    """Keep a copy of the current manifest before overwriting, for next delta."""
+    src = DOCS_PACK / "manifest.json"
+    try:
+        if src.is_file():
+            data = json.loads(src.read_text(encoding="utf-8-sig"))
+            if data.get("version") and data["version"] != PACK_VERSION:
+                shutil.copy2(src, ROOT / "dist" / "AquaTech-Client" / "manifest.prev.json")
+                print(f"OK backed up manifest v{data['version']} for next delta")
+    except Exception as e:
+        print(f"WARN manifest backup failed: {e}")
+
+
+def write_delta(manifest: dict, prev: dict | None) -> None:
+    """delta.json: what changed vs previous pack. Launcher uses it to skip
+    re-hashing unchanged files and show accurate download size."""
+    prev_map = {f["path"]: f for f in (prev or {}).get("files", [])}
+    new_map = {f["path"]: f for f in manifest["files"]}
+
+    added = sorted(set(new_map) - set(prev_map))
+    removed = sorted(set(prev_map) - set(new_map))
+    changed = sorted(
+        p for p in set(new_map) & set(prev_map)
+        if new_map[p]["md5"] != prev_map[p].get("md5")
+        or new_map[p]["size"] != prev_map[p].get("size")
+    )
+
+    delta = {
+        "from_version": (prev or {}).get("version"),
+        "to_version": manifest["version"],
+        "added": [new_map[p] for p in added],
+        "changed": [new_map[p] for p in changed],
+        "removed": [{"path": p} for p in removed],
+        "stats": {
+            "added": len(added),
+            "changed": len(changed),
+            "removed": len(removed),
+            "unchanged": len(new_map) - len(added) - len(changed),
+            "download_bytes": sum(new_map[p]["size"] for p in added + changed),
+        },
+    }
+    text = json.dumps(delta, indent=2, ensure_ascii=False)
+    for out in (PACK / "delta.json", DOCS_PACK / "delta.json"):
+        out.write_text(text, encoding="utf-8")
+
+    st = delta["stats"]
+    mb = st["download_bytes"] / 1_000_000
+    print(
+        f"OK delta: +{st['added']} ~{st['changed']} -{st['removed']} "
+        f"(unchanged {st['unchanged']}), incremental download ≈{mb:.1f} MB"
+    )
+
+
 def write_manifest() -> Path:
     files = []
     for folder in FOLDERS:
@@ -202,7 +272,10 @@ def write_manifest() -> Path:
         "files": files,
     }
     text = json.dumps(manifest, indent=2, ensure_ascii=False)
+    backup_current_manifest()
     out1 = PACK / "manifest.json"
+    prev = load_prev_manifest()
+    write_delta(json.loads(text), prev)
     out2 = ROOT / "dist" / "launcher" / "manifest.json"
     out2.parent.mkdir(parents=True, exist_ok=True)
     DOCS_PACK.mkdir(parents=True, exist_ok=True)

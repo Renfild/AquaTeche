@@ -12,6 +12,88 @@ public sealed class PackManifest
     public List<PackFileEntry> Files { get; set; } = [];
 }
 
+/// <summary>Cache of computed file hashes so incremental updates skip re-hashing unchanged files.</summary>
+public sealed class PackStateCache
+{
+    private sealed class Entry
+    {
+        [JsonPropertyName("md5")] public string Md5 { get; set; } = "";
+        [JsonPropertyName("size")] public long Size { get; set; }
+        [JsonPropertyName("mtime")] public long MtimeUtcTicks { get; set; }
+    }
+
+    [JsonPropertyName("version")]
+    public string? Version { get; set; }
+
+    [JsonPropertyName("files")]
+    [JsonInclude]
+    private Dictionary<string, Entry> Files { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+
+    private static string PathFor(string gameDir) => System.IO.Path.Combine(gameDir, ".pack_state.json");
+
+    /// <summary>True when at least one hash entry is cached.</summary>
+    [JsonIgnore]
+    public bool HasEntries => Files.Count > 0;
+
+    public static PackStateCache Load(string gameDir)
+    {
+        try
+        {
+            var p = PathFor(gameDir);
+            if (!File.Exists(p)) return new PackStateCache();
+            return JsonSerializer.Deserialize<PackStateCache>(File.ReadAllText(p)) ?? new PackStateCache();
+        }
+        catch { return new PackStateCache(); }
+    }
+
+    public void Save(string gameDir)
+    {
+        try
+        {
+            File.WriteAllText(PathFor(gameDir), JsonSerializer.Serialize(this));
+        }
+        catch { /* ignore */ }
+    }
+
+    /// <summary>
+    /// Returns cached md5 when the local file's size and LastWriteTimeUtc match what we hashed before.
+    /// Returns null when there is no valid cache entry (caller must hash or download).
+    /// </summary>
+    public string? GetValidMd5(string localPath, string relPath)
+    {
+        if (!Files.TryGetValue(NormalizeKey(relPath), out var e) || !File.Exists(localPath)) return null;
+        var fi = new FileInfo(localPath);
+        return fi.Length == e.Size && fi.LastWriteTimeUtc.Ticks == e.MtimeUtcTicks ? e.Md5 : null;
+    }
+
+    /// <summary>Store md5 for a file as currently on disk (captures size+mtime snapshot).</summary>
+    public void Store(string localPath, string relPath, string md5)
+    {
+        try
+        {
+            var fi = new FileInfo(localPath);
+            if (!fi.Exists) return;
+            Files[NormalizeKey(relPath)] = new Entry
+            {
+                Md5 = md5,
+                Size = fi.Length,
+                MtimeUtcTicks = fi.LastWriteTimeUtc.Ticks,
+            };
+        }
+        catch { /* ignore */ }
+    }
+
+    /// <summary>Drop entries for files no longer in the manifest.</summary>
+    public void RetainWanted(IEnumerable<string> wantedRelPaths)
+    {
+        var wanted = new HashSet<string>(wantedRelPaths.Select(NormalizeKey), StringComparer.OrdinalIgnoreCase);
+        foreach (var stale in Files.Keys.Where(k => !wanted.Contains(k)).ToList())
+            Files.Remove(stale);
+    }
+
+    private static string NormalizeKey(string path) => path.Replace('\\', '/').TrimStart('/').ToLowerInvariant();
+}
+
 public sealed class PackFileEntry
 {
     [JsonPropertyName("path")]
@@ -73,6 +155,12 @@ public sealed class ManifestSync
                      && string.Equals(localVer.Trim(), manifest.Version.Trim(), StringComparison.OrdinalIgnoreCase);
         var effectiveVerifyHash = verifyHash && !isWarm;
 
+        // Hash cache: on incremental updates (version changed) reuse previously
+        // computed md5s for files whose size+mtime are untouched — avoids
+        // re-hashing ~250 MB of jars every patch.
+        var cache = PackStateCache.Load(gameDir);
+        cache.Version = manifest.Version;
+
         var jobs = new List<PackFileEntry>();
         var checkedN = 0;
         log?.Invoke(isWarm
@@ -89,8 +177,37 @@ public sealed class ManifestSync
             if (checkedN % 25 == 0)
                 progress?.Invoke(5 + 25.0 * checkedN / files.Count);
 
-            if (NeedsDownload(local, item, effectiveVerifyHash))
+            if (!File.Exists(local))
+            {
                 jobs.Add(item);
+                continue;
+            }
+
+            if (!effectiveVerifyHash)
+            {
+                // Warm start: size check only, refresh cache entry opportunistically.
+                if (item.Size > 0 && new FileInfo(local).Length != item.Size)
+                    jobs.Add(item);
+                continue;
+            }
+
+            // Cached hash valid for this exact file snapshot?
+            var cached = cache.GetValidMd5(local, rel);
+            if (cached == null && item.Md5 != null)
+            {
+                cached = HttpDownload.Md5File(local);
+                cache.Store(local, rel, cached);
+            }
+
+            if (!string.IsNullOrEmpty(item.Md5)
+                && !string.Equals(cached, item.Md5, StringComparison.OrdinalIgnoreCase))
+            {
+                jobs.Add(item);
+            }
+            else if (item.Size > 0 && new FileInfo(local).Length != item.Size)
+            {
+                jobs.Add(item);
+            }
         }
 
         if (jobs.Count == 0)
@@ -139,6 +256,19 @@ public sealed class ManifestSync
 
         // Always purge unwanted files (especially stale mods)
         var deleted = PurgeExtras(gameDir, wanted, log);
+        cache.RetainWanted(wanted);
+
+        // Record freshly downloaded files in the cache so the next incremental
+        // update skips hashing them.
+        foreach (var item in files)
+        {
+            var rel = item.Path.Replace('\\', '/').TrimStart('/');
+            var local = System.IO.Path.Combine(gameDir, rel.Replace('/', System.IO.Path.DirectorySeparatorChar));
+            if (File.Exists(local) && !string.IsNullOrEmpty(item.Md5))
+                cache.Store(local, rel, item.Md5!);
+        }
+        cache.Save(gameDir);
+
         if (failed == 0)
         {
             SavePackVersion(gameDir, manifest.Version);
