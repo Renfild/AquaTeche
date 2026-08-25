@@ -29,7 +29,7 @@ public final class HubTabs {
         CASES("cases", Icons.Icon.CASE),
         PASS("pass", Icons.Icon.STAR),
         FISHING("fishing", Icons.Icon.FISH),
-        AUCTION("auction", Icons.Icon.BAG),
+        AUCTION("auction", Icons.Icon.GAVEL),
         KITS("kits", Icons.Icon.SHIELD),
         WARPS("warps", Icons.Icon.BOLT),
         TOPS("tops", Icons.Icon.CHART),

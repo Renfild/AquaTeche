@@ -27,7 +27,7 @@ public final class Icons {
         PLAYER, BAG, CASE, STAR, CHART, GEAR, COIN,
         GEM, KEY, FISH, WAVE, CLOCK, LOCK, CHECK,
         ARROW, BELL, HEART, BOLT, SHIELD, CLOSE, REFRESH,
-        PANEL, LAYERS;
+        PANEL, LAYERS, GAVEL;
 
         int u() {
             return (ordinal() % COLUMNS) * CELL;

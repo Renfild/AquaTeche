@@ -70,14 +70,12 @@ public final class HubScreen extends Screen implements HubSnapshotScreen {
             y += 25;
         }
 
-        addRenderableWidget(new LumenWidgets.PillButton(
+        final LumenWidgets.PillButton refreshButton = new LumenWidgets.PillButton(
                 left + panelWidth - 152, top + panelHeight - 21, 72, 16,
                 Component.translatable("gui.aqualumen.action.refresh"), false, theme,
-                () -> {
-                    LumenClient.sendAction("hub.refresh", "");
-                    HubFx.toast("\u0414\u0430\u043d\u043d\u044b\u0435 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u044b",
-                            Icons.Icon.REFRESH, theme.accent());
-                }));
+                this::refreshPressed);
+        this.refreshButtonWidget = refreshButton;
+        addRenderableWidget(refreshButton);
         addRenderableWidget(new LumenWidgets.PillButton(
                 left + panelWidth - 74, top + panelHeight - 21, 66, 16,
                 Component.translatable("gui.aqualumen.action.close"), true, theme, this::onClose));
@@ -90,6 +88,14 @@ public final class HubScreen extends Screen implements HubSnapshotScreen {
                 navButtons.get(i).setBadge(tabs.get(i).badge(snapshot));
             }
         }
+    }
+
+    private LumenWidgets.PillButton refreshButtonWidget;
+
+    private void refreshPressed() {
+        if (refreshButtonWidget != null) refreshButtonWidget.showBusy();
+        LumenClient.sendAction("hub.refresh", "");
+        HubFx.toast("\u0414\u0430\u043d\u043d\u044b\u0435 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u044b", Icons.Icon.REFRESH, theme.accent());
     }
 
     @Override

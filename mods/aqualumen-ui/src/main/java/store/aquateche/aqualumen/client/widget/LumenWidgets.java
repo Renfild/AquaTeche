@@ -112,6 +112,13 @@ public final class LumenWidgets {
         private final Runnable onPress;
         private float hover;
         private float press;
+        // Busy state: draws a spinning arc instead of the label while a request runs.
+        private int busyTicks;
+
+        /** Marks the button busy for ~1s so the player sees the action fired. */
+        public void showBusy() {
+            this.busyTicks = 20;
+        }
 
         public PillButton(int x, int y, int width, int height, Component title, boolean primary,
                           LumenTheme theme, Runnable onPress) {
@@ -126,10 +133,27 @@ public final class LumenWidgets {
             float delta = Anim.delta();
             hover = Anim.approach(hover, isHovered() ? 1.0F : 0.0F, 16.0F, delta);
             press = Anim.approach(press, 0.0F, 10.0F, delta);
+            if (busyTicks > 0) busyTicks--;
 
             int radius = getHeight() / 2;
             int y = getY() + Math.round(press);
             Font font = Minecraft.getInstance().font;
+
+            if (busyTicks > 0) {
+                // Busy spinner: rotating arc in accent colour
+                Gfx.roundedRect(graphics, getX(), y, getWidth(), getHeight(), radius,
+                        Gfx.withAlpha(theme.raised(), 0.75F));
+                Gfx.outline(graphics, getX(), y, getWidth(), getHeight(), radius, theme.border());
+                float angle = (System.nanoTime() % 1_000_000_000L) / 1_000_000_000.0F * (float) Math.PI * 2.0F;
+                graphics.pose().pushPose();
+                graphics.pose().translate(getX() + getWidth() / 2.0F, y + getHeight() / 2.0F, 0);
+                graphics.pose().mulPose(com.mojang.math.Axis.YP.rotationDegrees((float) Math.toDegrees(angle)));
+                Gfx.outline(graphics, -5, -5, 10, 10, 5,
+                        Gfx.withAlpha(theme.accent(), 0.9F));
+                graphics.pose().popPose();
+                return;
+            }
+
             if (primary) {
                 if (hover > 0.02F) {
                     Gfx.glow(graphics, getX(), y, getWidth(), getHeight(), radius, theme.accent(),

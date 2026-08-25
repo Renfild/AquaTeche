@@ -1,14 +1,43 @@
 {
-  "from_version": "2.9.243",
-  "to_version": "2.9.244",
-  "added": [],
+  "from_version": "2.9.244",
+  "to_version": "2.9.245",
+  "added": [
+    {
+      "path": "kubejs/server_scripts/95_deep_sea_bounty.js",
+      "md5": "e2f44e138bc08283dd409013c06f6c9c",
+      "size": 4684,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.245/kubejs__server_scripts__95_deep_sea_bounty.js",
+      "asset": "kubejs__server_scripts__95_deep_sea_bounty.js"
+    },
+    {
+      "path": "mods/aqualumen-forge-1.20.1-0.3.17-alpha.jar",
+      "md5": "1544d28c019aabbfe95a334497232c4d",
+      "size": 2363165,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.245/aqualumen-forge-1.20.1-0.3.17-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.17-alpha.jar"
+    },
+    {
+      "path": "mods/aquatech_ui-1.0.29.jar",
+      "md5": "f616af00e53894d6e6516cb02cbb85f5",
+      "size": 2106297,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.245/aquatech_ui-1.0.29.jar",
+      "asset": "aquatech_ui-1.0.29.jar"
+    }
+  ],
   "changed": [],
-  "removed": [],
+  "removed": [
+    {
+      "path": "mods/aqualumen-forge-1.20.1-0.3.16-alpha.jar"
+    },
+    {
+      "path": "mods/aquatech_ui-1.0.28.jar"
+    }
+  ],
   "stats": {
-    "added": 0,
+    "added": 3,
     "changed": 0,
-    "removed": 0,
-    "unchanged": 107,
-    "download_bytes": 0
+    "removed": 2,
+    "unchanged": 105,
+    "download_bytes": 4474146
   }
 }

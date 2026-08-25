@@ -297,7 +297,7 @@ public final class AquaChatScreen extends Screen {
             return true;
         }
 
-        // 4. Quick whisper /msg <Nick> on message click
+        // 4. Quick whisper /msg <Nick> on sender-name click (header row only, not whole card)
         int bottomY = this.height - 48;
         int currentY = bottomY;
         List<AquaChatMessage> messages = AquaChatManager.getFilteredMessages();
@@ -310,7 +310,10 @@ public final class AquaChatScreen extends Screen {
             currentY -= msgH + 3;
             if (currentY < bottomY - 175) break;
 
-            if (mouseX >= 8 && mouseX <= 8 + AquaChatOverlay.CHAT_WIDTH && mouseY >= currentY && mouseY <= currentY + msgH) {
+            // Only the header strip (top 14px of the card) triggers /msg
+            boolean inCard = mouseX >= 8 && mouseX <= 8 + AquaChatOverlay.CHAT_WIDTH;
+            boolean inHeader = mouseY >= currentY && mouseY <= currentY + 14;
+            if (inCard && inHeader) {
                 if (msg.getSenderName() != null && !msg.isSystem()) {
                     this.input.setValue("/msg " + msg.getSenderName() + " ");
                     this.input.setCursorPosition(this.input.getValue().length());

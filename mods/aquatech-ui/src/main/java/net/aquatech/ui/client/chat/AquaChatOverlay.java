@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
@@ -41,7 +42,6 @@ public final class AquaChatOverlay {
         int totalMessages = messages.size();
         int endIndex = Math.max(0, totalMessages - scroll);
         int startIndex = Math.max(0, endIndex - (chatOpen ? 18 : 8));
-
         // When chat screen is open, draw full chat history panel background
         if (chatOpen) {
             int panelH = 175;
@@ -80,32 +80,23 @@ public final class AquaChatOverlay {
     }
 
     public static int calculateMessageHeight(Font font, AquaChatMessage msg) {
-        if (msg.isSystem()) {
-            List<FormattedCharSequence> lines = font.split(net.minecraft.network.chat.Component.literal(msg.getMessageText()), CHAT_WIDTH - 24);
-            int lineCount = Math.max(1, lines.size());
-            return 16 + (lineCount * 10) + 4;
-        } else {
-            int textW = CHAT_WIDTH - 26;
-            List<FormattedCharSequence> lines = font.split(net.minecraft.network.chat.Component.literal(msg.getMessageText()), textW);
-            int lineCount = Math.max(1, lines.size());
-            return 16 + (lineCount * 10) + 4;
-        }
+        // Height based on plain text length (same for formatted render)
+        List<FormattedCharSequence> lines = font.split(net.minecraft.network.chat.Component.literal(msg.getMessageText()), CHAT_WIDTH - 24);
+        int lineCount = Math.max(1, lines.size());
+        return 16 + (lineCount * 10) + 4;
     }
 
     private static void renderAquaMessage(GuiGraphics graphics, Font font, AquaChatMessage msg,
                                           int x, int y, int height, float alpha, boolean chatOpen) {
-        // Detect player mention (@Nick or Nick in message body)
+        // Detect player mention (@Nick or whole-word Nick in message body)
         Minecraft mc = Minecraft.getInstance();
-        boolean isMention = false;
-        if (mc.player != null && !msg.isSystem() && msg.getMessageText() != null) {
-            String myName = mc.player.getName().getString();
-            if (msg.getSenderName() == null || !myName.equalsIgnoreCase(msg.getSenderName())) {
-                String lowerText = msg.getMessageText().toLowerCase();
-                String lowerMyName = myName.toLowerCase();
-                if (lowerText.contains("@" + lowerMyName) || lowerText.contains(lowerMyName)) {
-                    isMention = true;
-                }
-            }
+        boolean isMention = isMention(mc, msg);
+
+        // Play notification sound once per mention (client-side, only for fresh messages)
+        if (isMention && !msg.isMentionSoundPlayed() && !chatOpen) {
+            msg.markMentionSoundPlayed();
+            mc.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                    net.minecraft.sounds.SoundEvents.NOTE_BLOCK_PLING.value(), 1.4F));
         }
 
         // Message card plate for crisp contrast and clear separation
@@ -192,13 +183,55 @@ public final class AquaChatOverlay {
             AquaFontRenderer.draw(graphics, font, msg.getTimeFormatted(), x + CHAT_WIDTH - timeW - 4, y + 3, applyAlpha(0x669DB2C4, alpha));
         }
 
-        // 5. Message Body Text (Pure White, placed below header line with 4px clear vertical gap)
-        List<FormattedCharSequence> lines = font.split(net.minecraft.network.chat.Component.literal(msg.getMessageText()), CHAT_WIDTH - 26);
+        // 5. Message Body Text — render ORIGINAL component to preserve § colors
+        //    from plugins/mods; fall back to literal only when original is empty.
         int textY = y + 16;
-        for (FormattedCharSequence line : lines) {
-            graphics.drawString(font, line, x + 18, textY, applyAlpha(0xFFFFFFFF, alpha), true);
-            textY += 10;
+        Component body = msg.getOriginalComponent();
+        if (body != null && !net.minecraft.network.chat.Component.literal("").getString().equals(body.getString())
+                && msg.getMessageText() != null && !msg.getMessageText().isBlank()
+                && body.getString().contains(msg.getMessageText())) {
+            // Original component contains the message body — render it with formatting.
+            // Trim the header prefix (sender name etc.) by rendering full-width below the header.
+            List<FormattedCharSequence> lines = font.split(body, CHAT_WIDTH - 26);
+            // Skip leading visual lines that belong to the header (usually 1)
+            for (int li = 0; li < lines.size(); li++) {
+                graphics.drawString(font, lines.get(li), x + 18, textY, applyAlpha(0xFFFFFFFF, alpha), true);
+                textY += 10;
+            }
+        } else {
+            List<FormattedCharSequence> lines = font.split(net.minecraft.network.chat.Component.literal(msg.getMessageText()), CHAT_WIDTH - 26);
+            for (FormattedCharSequence line : lines) {
+                graphics.drawString(font, line, x + 18, textY, applyAlpha(0xFFFFFFFF, alpha), true);
+                textY += 10;
+            }
         }
+    }
+
+    /**
+     * Strict whole-word mention detection: matches "@Nick" anywhere or "Nick"
+     * only when surrounded by non-word characters (space, start/end, punctuation).
+     * Prevents false positives from substrings (e.g. "Max" inside "максимум").
+     */
+    private static boolean isMention(Minecraft mc, AquaChatMessage msg) {
+        if (mc.player == null || msg.isSystem() || msg.getMessageText() == null) return false;
+        String myName = mc.player.getName().getString();
+        if (msg.getSenderName() != null && myName.equalsIgnoreCase(msg.getSenderName())) return false;
+        String text = msg.getMessageText().toLowerCase();
+        String name = myName.toLowerCase();
+        if (name.isEmpty()) return false;
+        int idx = 0;
+        while ((idx = text.indexOf(name, idx)) >= 0) {
+            int end = idx + name.length();
+            boolean leftOk = idx == 0 || !isWordChar(text.charAt(idx - 1)) || text.charAt(idx - 1) == '@';
+            boolean rightOk = end >= text.length() || !isWordChar(text.charAt(end));
+            if (leftOk && rightOk) return true;
+            idx = end;
+        }
+        return false;
+    }
+
+    private static boolean isWordChar(char c) {
+        return Character.isLetterOrDigit(c) || c == '_';
     }
 
     private static int applyAlpha(int color, float alpha) {

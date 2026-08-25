@@ -58,6 +58,8 @@ public final class AquaChatMessage {
     private final String timeFormatted;
     private final int creationTick;
     private final boolean isSystem;
+    // Mutable per-instance flag: play mention sound only once
+    private boolean mentionSoundPlayed = false;
 
     public AquaChatMessage(UUID senderUuid, String senderName, String rankId, String rankDisplay,
                            int rankColor, Channel channel, String messageText, Component originalComponent,
@@ -284,6 +286,14 @@ public final class AquaChatMessage {
 
     public String getMessageText() {
         return messageText;
+    }
+
+    public boolean isMentionSoundPlayed() {
+        return mentionSoundPlayed;
+    }
+
+    public void markMentionSoundPlayed() {
+        this.mentionSoundPlayed = true;
     }
 
     public Component getOriginalComponent() {

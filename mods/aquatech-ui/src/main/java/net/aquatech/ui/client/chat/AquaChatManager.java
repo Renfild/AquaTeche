@@ -75,7 +75,9 @@ public final class AquaChatManager {
     }
 
     public static void scroll(int delta) {
-        scrollOffset = Math.max(0, scrollOffset + delta);
+        // Clamp so the view can't scroll above the oldest message
+        int max = Math.max(0, getFilteredMessages().size() - 1);
+        scrollOffset = Math.max(0, Math.min(max, scrollOffset + delta));
     }
 
     public static void resetScroll() {
