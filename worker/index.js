@@ -53,6 +53,7 @@ import {
 import { onRequestGet as newsGet } from "../functions/api/news.js";
 import { onRequestGet as siteGet } from "../functions/api/site.js";
 import { sessionCookie } from "../functions/_lib/auth.js";
+import { withSecurityHeaders } from "../functions/_lib/http.js";
 
 function ctx(request, env, params = {}) {
   return { request, env, params };
@@ -168,23 +169,33 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
-      return handleApi(request, env);
+      return withSecurityHeaders(await handleApi(request, env));
     }
     if (url.pathname.startsWith("/embed/") && env.ASSETS) {
       const sid = String(url.searchParams.get("session") || "").trim();
       const response = await env.ASSETS.fetch(request);
-      if (sid.length >= 8) {
-        const newHeaders = new Headers(response.headers);
-        newHeaders.append("set-cookie", sessionCookie(sid));
-        return new Response(response.body, {
-          status: response.status,
-          statusText: response.statusText,
-          headers: newHeaders,
-        });
+      if (sid.length >= 8 && env.DB) {
+        const row = await env.DB.prepare(
+          `SELECT id FROM sessions WHERE id = ? AND datetime(expires_at) > datetime('now')`
+        )
+          .bind(sid)
+          .first();
+        if (row) {
+          const newHeaders = new Headers(response.headers);
+          newHeaders.append("set-cookie", sessionCookie(sid));
+          newHeaders.set("cache-control", "private, no-store");
+          return withSecurityHeaders(
+            new Response(response.body, {
+              status: response.status,
+              statusText: response.statusText,
+              headers: newHeaders,
+            })
+          );
+        }
       }
-      return response;
+      return withSecurityHeaders(response);
     }
-    if (env.ASSETS) return env.ASSETS.fetch(request);
+    if (env.ASSETS) return withSecurityHeaders(await env.ASSETS.fetch(request));
     return new Response("AquaTech worker: missing ASSETS binding", { status: 500 });
   },
 };

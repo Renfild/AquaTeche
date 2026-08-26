@@ -37,7 +37,42 @@ export async function hashPassword(password, saltB64) {
 
 export async function verifyPassword(password, hash, salt) {
   const again = await hashPassword(password, salt);
-  return again.hash === hash;
+  return timingSafeEqualStr(again.hash, hash);
+}
+
+function timingSafeEqualStr(a, b) {
+  const left = String(a || "");
+  const right = String(b || "");
+  const len = Math.max(left.length, right.length);
+  let diff = left.length ^ right.length;
+  for (let i = 0; i < len; i++) {
+    diff |= (left.charCodeAt(i) || 0) ^ (right.charCodeAt(i) || 0);
+  }
+  return diff === 0;
+}
+
+export function isUnclaimedHash(hash) {
+  const h = String(hash || "");
+  return h === "" || h === "IN_GAME_UNREGISTERED";
+}
+
+const MIN_PASSWORD = 8;
+const MAX_PASSWORD = 128;
+
+/** @returns {string | null} error message */
+export function passwordPolicyError(password, nick) {
+  const p = String(password || "");
+  if (p.length < MIN_PASSWORD) return "Пароль от 8 символов";
+  if (p.length > MAX_PASSWORD) return "Пароль слишком длинный";
+  const n = String(nick || "").trim().toLowerCase();
+  if (n && p.toLowerCase() === n) return "Пароль не должен совпадать с ником";
+  return null;
+}
+
+/** Launcher HttpClient has no Origin; browsers always send one on POST. */
+export function wantsLauncherSession(request) {
+  if (request.headers.get("x-aquatech-launcher") !== "1") return false;
+  return !request.headers.get("origin");
 }
 
 export function newSessionId() {

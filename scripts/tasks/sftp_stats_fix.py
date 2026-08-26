@@ -55,11 +55,15 @@ def main() -> int:
     assert sftp is not None
 
     keep: set[str] = set()
+    upload_prefixes: set[str] = set()
     try:
         for jar in jars:
             remote = f"mods/{jar.name}"
             put_file(sftp, jar, remote)
             keep.add(jar.name)
+            for prefix in PURGE_PREFIXES:
+                if jar.name.startswith(prefix):
+                    upload_prefixes.add(prefix)
 
         secrets = deploy.load_mysql_secrets()
         if secrets:
@@ -85,7 +89,7 @@ def main() -> int:
         for name in names:
             if not name.endswith(".jar"):
                 continue
-            if not any(name.startswith(p) for p in PURGE_PREFIXES):
+            if not any(name.startswith(p) for p in upload_prefixes):
                 continue
             if name in keep:
                 continue

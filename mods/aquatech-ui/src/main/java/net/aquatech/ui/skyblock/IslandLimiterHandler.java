@@ -2,14 +2,12 @@ package net.aquatech.ui.skyblock;
 
 import net.aquatech.ui.AquaTechUI;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,16 +18,19 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class IslandLimiterHandler {
 
+    /** Off until we retune against the actual pack (no Create). */
+    private static final boolean ENABLED = false;
+
     private IslandLimiterHandler() {
     }
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void onPlaceCheck(BlockEvent.EntityPlaceEvent event) {
-        if (event.getLevel().isClientSide()) {
+        if (!ENABLED || event.getLevel().isClientSide()) {
             return;
         }
-        String id = blockId(event.getPlacedBlock().getBlock());
-        if (!IslandLimiterRules.isLimited(id)) {
+        String key = IslandLimiterRules.keyFor(event.getPlacedBlock());
+        if (key == null) {
             return;
         }
         if (!(event.getLevel() instanceof ServerLevel level)) {
@@ -40,25 +41,25 @@ public final class IslandLimiterHandler {
             return;
         }
         IslandLimiterTracker tracker = IslandLimiterTracker.get(level);
-        if (tracker.canPlace(owner, id)) {
+        if (tracker.canPlace(owner, key)) {
             return;
         }
         event.setCanceled(true);
         Entity entity = event.getEntity();
         if (entity instanceof ServerPlayer player) {
             player.displayClientMessage(Component.literal(
-                    "§cЛимит на острове: §f" + IslandLimiterRules.title(id)
-                            + " §c" + tracker.count(owner, id) + "/" + IslandLimiterRules.max(id)), true);
+                    "§cЛимит на острове (/is): §f" + IslandLimiterRules.title(key)
+                            + " §c" + tracker.count(owner, key) + "/" + IslandLimiterRules.max(key)), true);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onPlaceCommit(BlockEvent.EntityPlaceEvent event) {
-        if (event.isCanceled() || event.getLevel().isClientSide()) {
+        if (!ENABLED || event.isCanceled() || event.getLevel().isClientSide()) {
             return;
         }
-        String id = blockId(event.getPlacedBlock().getBlock());
-        if (!IslandLimiterRules.isLimited(id) || !(event.getLevel() instanceof ServerLevel level)) {
+        String key = IslandLimiterRules.keyFor(event.getPlacedBlock());
+        if (key == null || !(event.getLevel() instanceof ServerLevel level)) {
             return;
         }
         UUID owner = ownerAt(level, event.getPos());
@@ -66,18 +67,19 @@ public final class IslandLimiterHandler {
             return;
         }
         IslandLimiterTracker tracker = IslandLimiterTracker.get(level);
-        tracker.increment(owner, id);
+        tracker.increment(owner, key);
         Entity placer = event.getEntity();
         syncWatchers(level, owner, placer instanceof ServerPlayer sp ? sp : null);
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onBreak(BlockEvent.BreakEvent event) {
-        if (event.isCanceled() || event.getLevel().isClientSide()) {
+        if (!ENABLED || event.isCanceled() || event.getLevel().isClientSide()) {
             return;
         }
-        String id = blockId(event.getState().getBlock());
-        if (!IslandLimiterRules.isLimited(id) || !(event.getLevel() instanceof ServerLevel level)) {
+        BlockState state = event.getState();
+        String key = IslandLimiterRules.keyFor(state);
+        if (key == null || !(event.getLevel() instanceof ServerLevel level)) {
             return;
         }
         UUID owner = ownerAt(level, event.getPos());
@@ -85,16 +87,20 @@ public final class IslandLimiterHandler {
             return;
         }
         IslandLimiterTracker tracker = IslandLimiterTracker.get(level);
-        tracker.decrement(owner, id);
+        tracker.decrement(owner, key);
         ServerPlayer breaker = event.getPlayer() instanceof ServerPlayer sp ? sp : null;
         syncWatchers(level, owner, breaker);
     }
 
-    static UUID ownerAt(LevelAccessor level, BlockPos pos) {
+    public static UUID ownerAt(LevelAccessor level, BlockPos pos) {
         if (!(level instanceof ServerLevel serverLevel) || pos == null) {
             return null;
         }
-        return PersonalRaftSpawner.RaftRegistry.get(serverLevel).ownerAt(pos);
+        UUID raft = PersonalRaftSpawner.RaftRegistry.get(serverLevel).ownerAt(pos);
+        if (raft != null) {
+            return raft;
+        }
+        return WorldGuardIslandLookup.ownerAt(serverLevel, pos);
     }
 
     private static void syncWatchers(ServerLevel level, UUID owner, ServerPlayer actor) {
@@ -109,10 +115,5 @@ public final class IslandLimiterHandler {
         if (ownerPlayer != null && (actor == null || !ownerPlayer.getUUID().equals(actor.getUUID()))) {
             tracker.syncTo(ownerPlayer, owner);
         }
-    }
-
-    static String blockId(Block block) {
-        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(block);
-        return loc == null ? "" : loc.toString();
     }
 }

@@ -36,8 +36,7 @@ public final class ContainerOpenService {
 
     private static void openLimiters(ServerPlayer player) {
         if (player.level() instanceof ServerLevel level) {
-            java.util.UUID owner = net.aquatech.ui.skyblock.PersonalRaftSpawner.RaftRegistry.get(level)
-                    .ownerAt(player.blockPosition());
+            java.util.UUID owner = net.aquatech.ui.skyblock.IslandLimiterHandler.ownerAt(level, player.blockPosition());
             IslandLimiterTracker.get(level).syncTo(player, owner != null ? owner : player.getUUID());
         }
         NetworkHandler.sendToPlayerWhenReady(

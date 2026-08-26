@@ -29,7 +29,7 @@
     <div class="container auth-shell">
       <div class="eyebrow" data-site="register_eyebrow">Аккаунт</div>
       <h1 data-site="register_title">Регистрация</h1>
-      <p data-site="register_lead">Ник 3–16 символов (A–Z, 0–9, _). Пароль от 4.</p>
+      <p data-site="register_lead">Ник 3–16 символов (A–Z, 0–9, _). Пароль от 8. Если уже заходил на сервер — тот же ник, задай пароль здесь.</p>
       <form class="card form" id="register-form" style="margin-top:1.25rem">
         <div class="field">
           <label for="register-nick">Ник</label>
@@ -37,7 +37,7 @@
         </div>
         <div class="field">
           <label for="register-password">Пароль</label>
-          <input id="register-password" name="password" type="password" placeholder="минимум 4 символа" required minlength="4" autocomplete="new-password" />
+          <input id="register-password" name="password" type="password" placeholder="минимум 8 символов" required minlength="8" autocomplete="new-password" />
         </div>
         <p class="field-error" data-auth-error role="alert" aria-live="polite"></p>
         <button class="btn btn-primary" type="submit">Создать аккаунт</button>
@@ -48,6 +48,6 @@
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260826s"></script>
+  <script src="assets/js/site.js?v=20260826t"></script>
 </body>
 </html>

@@ -3,14 +3,16 @@ import { bad, json, readJson } from "../../_lib/http.js";
 /**
  * POST /api/launcher/verify-token
  * Called by Mohist server (not the browser) to validate a player's session token.
- * Header: x-aquatech-launcher: 1
+ * Header: X-AquaTech-Server-Key (same secret as /api/sync/player)
  * Body: { "session": "<session_id>", "nick": "<minecraft_nick>" }
  * Returns: { ok: true, nick, balance, rank_id } or 401/403.
  */
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  if (request.headers.get("x-aquatech-launcher") !== "1") {
+  const serverKey = request.headers.get("X-AquaTech-Server-Key") || "";
+  const expectedKey = env.SERVER_SYNC_KEY || "";
+  if (!expectedKey || serverKey !== expectedKey) {
     return bad("Forbidden", 403);
   }
 

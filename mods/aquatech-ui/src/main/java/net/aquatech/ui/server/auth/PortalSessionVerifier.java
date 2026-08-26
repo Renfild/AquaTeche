@@ -5,10 +5,13 @@ import com.google.gson.JsonParser;
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.common.ModConfig;
 
+import java.io.File;
+import java.io.FileReader;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 /** Calls {@code POST /api/launcher/verify-token} on aquateche.store (D1 sessions). */
@@ -41,10 +44,16 @@ public final class PortalSessionVerifier {
         body.addProperty("session", sessionToken);
         body.addProperty("nick", nick);
 
+        String syncKey = readSyncKey();
+        if (syncKey == null || syncKey.isBlank()) {
+            return Result.fail("sync key missing");
+        }
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(base + "/api/launcher/verify-token"))
                 .timeout(Duration.ofSeconds(5))
                 .header("Content-Type", "application/json")
+                .header("X-AquaTech-Server-Key", syncKey)
                 .header("x-aquatech-launcher", "1")
                 .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
@@ -68,6 +77,24 @@ public final class PortalSessionVerifier {
         } catch (Exception e) {
             AquaTechUI.LOGGER.warn("[auth] verify-token failed: {}", e.toString());
             return Result.fail(e.getClass().getSimpleName());
+        }
+    }
+
+    private static String readSyncKey() {
+        File file = new File("config/aquatech_sync_key.json");
+        if (!file.isFile()) {
+            return null;
+        }
+        try (FileReader reader = new FileReader(file, StandardCharsets.UTF_8)) {
+            JsonObject obj = JsonParser.parseReader(reader).getAsJsonObject();
+            if (!obj.has("key")) {
+                return null;
+            }
+            String key = obj.get("key").getAsString();
+            return key == null || key.isBlank() ? null : key;
+        } catch (Exception e) {
+            AquaTechUI.LOGGER.warn("[auth] cannot read aquatech_sync_key.json: {}", e.toString());
+            return null;
         }
     }
 }

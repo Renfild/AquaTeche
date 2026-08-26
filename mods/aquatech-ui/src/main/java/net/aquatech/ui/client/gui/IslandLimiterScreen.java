@@ -35,7 +35,7 @@ public class IslandLimiterScreen extends AquaBlurredScreen {
         int y = (height - panelH) / 2;
         AquaGlassPanel.draw(g, x, y, panelW, panelH, AquaGlassPanel.FILL, AquaGlassPanel.BORDER_HOT, 5, true);
         AquaFontRenderer.drawCenteredHeader(g, font, "Лимиты машин", x + panelW / 2, y + 12, COLOR_CYAN_ACCENT);
-        AquaFontRenderer.drawCentered(g, font, "Считается на вашем плоту", x + panelW / 2, y + 28, COLOR_TEXT_MUTED);
+        AquaFontRenderer.drawCentered(g, font, "Считается на регионе /is", x + panelW / 2, y + 28, COLOR_TEXT_MUTED);
 
         int rowY = y + 48;
         for (Map.Entry<String, Integer> e : caps.entrySet()) {
