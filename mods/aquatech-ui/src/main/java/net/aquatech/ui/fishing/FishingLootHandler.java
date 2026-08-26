@@ -142,6 +142,23 @@ public class FishingLootHandler {
         return new ItemStack(fish.get(random.nextInt(fish.size())));
     }
 
+    public static void bumpCatchStat(ServerPlayer player) {
+        try {
+            var scoreboard = player.getScoreboard();
+            var objective = scoreboard.getObjective("aquatech_fish");
+            if (objective == null) {
+                objective = scoreboard.addObjective(
+                        "aquatech_fish",
+                        net.minecraft.world.scores.criteria.ObjectiveCriteria.DUMMY,
+                        net.minecraft.network.chat.Component.literal("AquaTech fish"),
+                        net.minecraft.world.scores.criteria.ObjectiveCriteria.DUMMY.getDefaultRenderType());
+            }
+            var score = scoreboard.getOrCreatePlayerScore(player.getScoreboardName(), objective);
+            score.setScore(score.getScore() + 1);
+        } catch (Throwable ignored) {
+        }
+    }
+
     public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem rodItem, ItemStack rodStack, float lootScale) {
         awardCatch(player, rodItem.getRodType(), rodStack, lootScale, 70);
     }
@@ -163,6 +180,7 @@ public class FishingLootHandler {
 
     public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem.RodType type,
                                   ItemStack rodStack, float lootScale, int quality) {
+        bumpCatchStat(player);
         RodDurability.wearOne(rodStack, player);
 
         List<ItemStack> customDrops = generateLoot(type, player.getRandom(), rodStack, player);

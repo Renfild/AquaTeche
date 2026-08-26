@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   "bootstrap/main.go": {
-    "mtime": 1787127122.8511093,
-    "ast_hash": "b26ba87db8b7749c08843e6198bf5115",
+    "mtime": 1787645259.891898,
+    "ast_hash": "06ab238c093404a3ba890f69bd2b82bd",
     "semantic_hash": ""
   },
   "bootstrap/ui_windows.go": {
@@ -35,13 +35,13 @@
     "semantic_hash": ""
   },
   "docs/assets/js/site.js": {
-    "mtime": 1787423815.299184,
-    "ast_hash": "458f402dd52145fe35393d913cbbe7a6",
+    "mtime": 1787771045.3148446,
+    "ast_hash": "b33a5d36ba7907148f5af2873a6453f7",
     "semantic_hash": ""
   },
   "docs/pack/manifest.json": {
-    "mtime": 1787591443.9711082,
-    "ast_hash": "e544e69fae46fb9b290cc85f99c02f5a",
+    "mtime": 1787744546.2813196,
+    "ast_hash": "adcdedb875e23d428688b7a26d7eaccd",
     "semantic_hash": ""
   },
   "functions/_lib/auth.js": {
@@ -175,7 +175,7 @@
     "semantic_hash": ""
   },
   "kubejs/client_scripts/add_fishing_resource_tooltips.js": {
-    "mtime": 1787072877.2700806,
+    "mtime": 1787743716.838962,
     "ast_hash": "9e8870715427debdfed16f11d062ed4c",
     "semantic_hash": ""
   },
@@ -205,18 +205,18 @@
     "semantic_hash": ""
   },
   "kubejs/server_scripts/10_aquatech_iu_nerf.js": {
-    "mtime": 1785859871.7009337,
-    "ast_hash": "feb522c3442f3b32b725c4ff389d150f",
+    "mtime": 1787775358.9759977,
+    "ast_hash": "f668d304c1aeaf67eab6c39dc3903336",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/20_aquatech_rod_crafts.js": {
-    "mtime": 1787156860.4758058,
-    "ast_hash": "f9764af5ecd3382f30ad50cab181479b",
+    "mtime": 1787775416.9048636,
+    "ast_hash": "265a983635d14c651bca95cc7b902a81",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/30_aquatech_crafting.js": {
-    "mtime": 1787424038.5923748,
-    "ast_hash": "61b6e739b6d01973f606e53ea00e6a11",
+    "mtime": 1787747434.9323325,
+    "ast_hash": "68133237d4339c17d42924f530c5bd77",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/40_aquatech_diving.js": {
@@ -235,13 +235,13 @@
     "semantic_hash": ""
   },
   "kubejs/server_scripts/60_disable_phantoms.js": {
-    "mtime": 1787072877.2830856,
+    "mtime": 1787743716.852646,
     "ast_hash": "7f5a0100c12a4192b975c27a2d3fd9ca",
     "semantic_hash": ""
   },
   "kubejs/startup_scripts/40_rod_durability.js": {
-    "mtime": 1787072877.279085,
-    "ast_hash": "2624388a6168176f391b1e46d0235c58",
+    "mtime": 1787743716.8495133,
+    "ast_hash": "07a28c1f85b5ecc55e62567f15abcbcb",
     "semantic_hash": ""
   },
   "kubejs/startup_scripts/additions.js": {
@@ -265,7 +265,7 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core.Tests/CoreTests.cs": {
-    "mtime": 1787071418.315218,
+    "mtime": 1787642381.906116,
     "ast_hash": "4e4195b7d505900e9a7f023ae211bd41",
     "semantic_hash": ""
   },
@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherConstants.cs": {
-    "mtime": 1787588949.8225782,
-    "ast_hash": "48cd0cf17a445d9ff9f0e958dbaa34fb",
+    "mtime": 1787754811.2960382,
+    "ast_hash": "9642a39be9e54e5adb0345cfaa955cb1",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherSelfUpdate.cs": {
@@ -310,8 +310,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/ManifestSync.cs": {
-    "mtime": 1787079943.6315112,
-    "ast_hash": "244304e0d8a5f079fe7dc3d0e8fa9a90",
+    "mtime": 1787646259.116852,
+    "ast_hash": "35b57b3c3b110e816aede9a374144e15",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/PlayOrchestrator.cs": {
@@ -340,8 +340,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher/AquaTechLauncher.csproj": {
-    "mtime": 1787588949.8240843,
-    "ast_hash": "15c46fb631dbf3d9593ace01316e81d8",
+    "mtime": 1787754812.3491912,
+    "ast_hash": "0ea07649d7fe670410dbafd4211ce2ad",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher/Program.cs": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher/ViewModels/MainViewModel.cs": {
-    "mtime": 1787071402.6300528,
-    "ast_hash": "2df42cae00f6beda71cecc9073203838",
+    "mtime": 1787753651.0485392,
+    "ast_hash": "a3a29518cb810c65b59e7730a982e48e",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher/ViewModels/ViewModelBase.cs": {
@@ -400,12 +400,12 @@
     "semantic_hash": ""
   },
   "scripts/tasks/reorganize_layout.py": {
-    "mtime": 1787072877.2830856,
+    "mtime": 1787743716.852646,
     "ast_hash": "8dd8b0d36d964b117357c1a2c0d4a749",
     "semantic_hash": ""
   },
   "scripts/tasks/write_tool_shims.py": {
-    "mtime": 1787072877.2780848,
+    "mtime": 1787743716.8495133,
     "ast_hash": "7e4aea8efa6dc15d6b0c139fdec76e6f",
     "semantic_hash": ""
   },
@@ -480,17 +480,17 @@
     "semantic_hash": ""
   },
   "tools/cleanup_workspace.ps1": {
-    "mtime": 1787072877.2830856,
+    "mtime": 1787743716.8536465,
     "ast_hash": "5292c355e923b74901a276b2a49ddec7",
     "semantic_hash": ""
   },
   "tools/deploy_to_cloudflare.py": {
-    "mtime": 1787076954.9903214,
+    "mtime": 1787743716.8404741,
     "ast_hash": "ba713f097139fda8d64d458bdeb6fab1",
     "semantic_hash": ""
   },
   "tools/export_client_pack.py": {
-    "mtime": 1787072877.279085,
+    "mtime": 1787743716.852646,
     "ast_hash": "3fe97094c4fececa73f4f45d9eaf9ddd",
     "semantic_hash": ""
   },
@@ -515,12 +515,12 @@
     "semantic_hash": ""
   },
   "tools/patch_fawe_mohist.py": {
-    "mtime": 1787072877.2770846,
+    "mtime": 1787743716.8495133,
     "ast_hash": "7498b021a083888fada536a768708295",
     "semantic_hash": ""
   },
   "tools/patch_iu_no_free_scanner.py": {
-    "mtime": 1787072877.272081,
+    "mtime": 1787743716.8429904,
     "ast_hash": "a0cdbf8455ddb9bb368b1feaaf1110ce",
     "semantic_hash": ""
   },
@@ -605,22 +605,22 @@
     "semantic_hash": ""
   },
   "tools/portal/setup_d1.py": {
-    "mtime": 1787072877.2700806,
+    "mtime": 1787743716.8394723,
     "ast_hash": "a8c020195c13b4a27ddf39aed3b7c7dc",
     "semantic_hash": ""
   },
   "tools/portal/smoke_portal_and_versions.py": {
-    "mtime": 1787072877.2780848,
+    "mtime": 1787743716.8516352,
     "ast_hash": "e3ac5c836666f7c8b8595e65704be83f",
     "semantic_hash": ""
   },
   "tools/portal/test_portal_login_cookie.py": {
-    "mtime": 1787072877.2830856,
+    "mtime": 1787743716.852646,
     "ast_hash": "7c7235c79aeab7675a7208cb57938f4d",
     "semantic_hash": ""
   },
   "tools/portal/test_portal_login_happy.py": {
-    "mtime": 1787072877.2700806,
+    "mtime": 1787743716.8394723,
     "ast_hash": "87ce706a633c40df3687ac35c4bd7a96",
     "semantic_hash": ""
   },
@@ -630,8 +630,8 @@
     "semantic_hash": ""
   },
   "tools/publish_client_pack.py": {
-    "mtime": 1787591442.8724782,
-    "ast_hash": "b2edf1aa9227debc6d2b877bc4fe8cc1",
+    "mtime": 1787746936.2888553,
+    "ast_hash": "b90ff247bc143d6e6f5e3ea2b0d29056",
     "semantic_hash": ""
   },
   "tools/quests/build_ftb_quests.py": {
@@ -815,7 +815,7 @@
     "semantic_hash": ""
   },
   "tools/server_setup/setup_luckperms_config.py": {
-    "mtime": 1787072877.2830856,
+    "mtime": 1787743716.852646,
     "ast_hash": "796d7ec0de3a392a8ec9f840da98ff5f",
     "semantic_hash": ""
   },
@@ -865,13 +865,13 @@
     "semantic_hash": ""
   },
   "tools/upload_launcher_release.py": {
-    "mtime": 1786994369.3562195,
-    "ast_hash": "2480e5bbc9f3eda13c3ef48283a1b075",
+    "mtime": 1787754813.1950004,
+    "ast_hash": "7c5f8a3c259948cc03a2373124f43ac2",
     "semantic_hash": ""
   },
   "tools/upload_pack_release.py": {
-    "mtime": 1787591442.9104688,
-    "ast_hash": "d4cc24b4093fd2ec656a76f975b16b65",
+    "mtime": 1787746935.4942546,
+    "ast_hash": "02bf472e9108b7225c7b8f6b840b1587",
     "semantic_hash": ""
   },
   "tools/upload_to_github.py": {
@@ -880,8 +880,8 @@
     "semantic_hash": ""
   },
   "worker/index.js": {
-    "mtime": 1787591731.4552722,
-    "ast_hash": "4240c0ae45e68ea5a05f3751a88cef45",
+    "mtime": 1787770129.2355237,
+    "ast_hash": "6a38eb9e55fdb57a61272ef894dbf255",
     "semantic_hash": ""
   },
   ".agents/AGENTS.md": {
@@ -945,8 +945,8 @@
     "semantic_hash": ""
   },
   "IMPLEMENTATION_PLAN.md": {
-    "mtime": 1787157353.2950962,
-    "ast_hash": "ce34e680940ac47b48e4f77dd5f0380e",
+    "mtime": 1787772871.76517,
+    "ast_hash": "f89c3ca37f45314e6540d33be829a815",
     "semantic_hash": ""
   },
   "PLAYER_ROADMAP.md": {
@@ -965,83 +965,78 @@
     "semantic_hash": ""
   },
   "docs/404.html": {
-    "mtime": 1787156977.00874,
-    "ast_hash": "52b43cf846de1c142916532ff73945df",
+    "mtime": 1787751076.4228761,
+    "ast_hash": "9eb7a3d05f54408bd6142f21b8154dff",
     "semantic_hash": ""
   },
   "docs/FISHING_ROD_LOOT_TABLE.md": {
-    "mtime": 1787072877.2830856,
+    "mtime": 1787743716.852646,
     "ast_hash": "96f838a6740c57d59621b06139e08c18",
     "semantic_hash": ""
   },
   "docs/admin.html": {
-    "mtime": 1787156977.0097394,
-    "ast_hash": "85619ccbb24a18a97d5e02bf52fdf789",
+    "mtime": 1787774011.561947,
+    "ast_hash": "f9a36e3d8a4fda3ee309f5374c822c19",
     "semantic_hash": ""
   },
   "docs/cases.html": {
-    "mtime": 1787156977.0112443,
-    "ast_hash": "afab46d38cae0fbd505a3a31936109b5",
+    "mtime": 1787774011.5629501,
+    "ast_hash": "54a288efe99069123e75007a6d6aba81",
     "semantic_hash": ""
   },
   "docs/index.html": {
-    "mtime": 1787156977.0122488,
-    "ast_hash": "701f6f2a772683c79cb9600a65384897",
+    "mtime": 1787774011.5639498,
+    "ast_hash": "0cef4b5f1289133df1eb1013c61cd9bd",
     "semantic_hash": ""
   },
   "docs/login.html": {
-    "mtime": 1787156977.0157583,
-    "ast_hash": "e0e97d7922403ceec88fa3180f7212b1",
+    "mtime": 1787774011.56495,
+    "ast_hash": "c5960fcd99be101341b7b7211211b502",
     "semantic_hash": ""
   },
   "docs/news.html": {
-    "mtime": 1787156977.0167577,
-    "ast_hash": "38e8ee95b99147a9fe1e195a4b7b053c",
+    "mtime": 1787774011.5659497,
+    "ast_hash": "ceff2f0c9ebddc13455324e5889596dd",
     "semantic_hash": ""
   },
   "docs/players.html": {
-    "mtime": 1787156977.0179777,
-    "ast_hash": "c38fa90b92aa14008026b0e5483017e8",
+    "mtime": 1787774011.5659497,
+    "ast_hash": "abb6e3b6c486f26b47f018f8f9ed8d2e",
     "semantic_hash": ""
   },
   "docs/profile.html": {
-    "mtime": 1787156977.0189779,
-    "ast_hash": "f9ae8dfc14359de5733757740bb0a488",
+    "mtime": 1787774011.566949,
+    "ast_hash": "f4162fb57efe2c3db2d17898271de0a9",
     "semantic_hash": ""
   },
   "docs/register.html": {
-    "mtime": 1787156977.0209775,
-    "ast_hash": "44e292424322a274ea6d47148374fe85",
+    "mtime": 1787774011.566949,
+    "ast_hash": "3b85f1479a584e8d811f365407b7ca16",
     "semantic_hash": ""
   },
   "docs/rods.html": {
-    "mtime": 1787156977.0224817,
-    "ast_hash": "5217b2a7819571bbc96ad7aee02cd1e0",
+    "mtime": 1787774011.566949,
+    "ast_hash": "bc5a98b2c3ed72a05beeca12fdebe68d",
     "semantic_hash": ""
   },
   "docs/rules.html": {
-    "mtime": 1787156977.0234873,
-    "ast_hash": "6cb438c48df9f000871d9977e578cf81",
+    "mtime": 1787774011.567949,
+    "ast_hash": "cb5c4291998d72512d02c20fbbb1fadb",
     "semantic_hash": ""
   },
   "docs/start.html": {
-    "mtime": 1787156977.0244908,
-    "ast_hash": "5ad5def76d61ff233bf702e6a3a5ece3",
+    "mtime": 1787775331.1143396,
+    "ast_hash": "7065b4ea4c4defbebd560570881d07e7",
     "semantic_hash": ""
   },
   "docs/store.html": {
-    "mtime": 1787156977.026492,
-    "ast_hash": "5dc7dd0d0a5a763a8a763a936f1afedb",
+    "mtime": 1787774011.567949,
+    "ast_hash": "ccc98a2102e5c6c9b6a4da55f5a10d44",
     "semantic_hash": ""
   },
   "docs/top.html": {
-    "mtime": 1787156977.026492,
-    "ast_hash": "26498429ea0a6d0d7190741acad7babf",
-    "semantic_hash": ""
-  },
-  "index.html": {
-    "mtime": 1787122123.40873,
-    "ast_hash": "6f345622d2674d123c0ae2e8cf497c0b",
+    "mtime": 1787774011.568949,
+    "ast_hash": "f2053b2bbe46548909e157b13f289fe2",
     "semantic_hash": ""
   },
   "kubejs/assets/ftbquests/ftb_quests_theme.txt": {
@@ -1175,17 +1170,17 @@
     "semantic_hash": ""
   },
   "scripts/tasks/check_aquateche_domain.py": {
-    "mtime": 1787072877.2730818,
+    "mtime": 1787743716.841982,
     "ast_hash": "07dbb99f61c25f4979c3534219631170",
     "semantic_hash": ""
   },
   "scripts/tasks/deploy_apexnodes_sftp.py": {
-    "mtime": 1787153861.2895987,
-    "ast_hash": "9954e2a7f697e77b67b2fc1e9acab34f",
+    "mtime": 1787772470.5045362,
+    "ast_hash": "1eac4a70dcec945a8bb21d2766f20583",
     "semantic_hash": ""
   },
   "scripts/tasks/extract_iu_guide_book.py": {
-    "mtime": 1787072877.2830856,
+    "mtime": 1787743716.8546457,
     "ast_hash": "9ef8f786b264aea65982d838a3ab4e2d",
     "semantic_hash": ""
   },
@@ -1230,8 +1225,8 @@
     "semantic_hash": ""
   },
   "scripts/tasks/setup_apex_mysql.py": {
-    "mtime": 1787072877.2830856,
-    "ast_hash": "18da9aaa659a9f79ab16ddc10f8c8ebb",
+    "mtime": 1787772507.8425994,
+    "ast_hash": "e7b36a3e2656185a9c33efb4d37ac88d",
     "semantic_hash": ""
   },
   "scripts/tasks/fix_aquatech_sc_fish_minigame.py": {
@@ -1255,8 +1250,8 @@
     "semantic_hash": ""
   },
   "scripts/tasks/apex_console_ops.py": {
-    "mtime": 1786456817.1564653,
-    "ast_hash": "4459711574130aa225fd6a56c94a134a",
+    "mtime": 1787744349.4864182,
+    "ast_hash": "dfef08cf7fa9d134425da0dc8b357f07",
     "semantic_hash": ""
   },
   "tools/pack_launcher_zip.py": {
@@ -1305,13 +1300,13 @@
     "semantic_hash": ""
   },
   "docs/embed/cabinet.html": {
-    "mtime": 1787122123.40873,
-    "ast_hash": "de2784a40d65ef0a53775d3752b58cf1",
+    "mtime": 1787774011.568949,
+    "ast_hash": "c18aa781407cd2d7c701331158506779",
     "semantic_hash": ""
   },
   "docs/embed/donate.html": {
-    "mtime": 1787122123.40873,
-    "ast_hash": "469ca3ef1284fdd6f5af4ce0d4175ebe",
+    "mtime": 1787774011.5699492,
+    "ast_hash": "dd27337adc31e2dc7fe3b5c6e13b7912",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/build.gradle": {
@@ -1330,7 +1325,7 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/AquaTechUI.java": {
-    "mtime": 1787424571.700112,
+    "mtime": 1787743716.8404741,
     "ast_hash": "f1c1d85cd5ebafc8c2b1bad03e447066",
     "semantic_hash": ""
   },
@@ -1360,8 +1355,8 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/entity/AutoFisherBlockEntity.java": {
-    "mtime": 1787232046.591696,
-    "ast_hash": "710343ad531ed58da163e5d49b2f8cc8",
+    "mtime": 1787772456.9827032,
+    "ast_hash": "a8627e72994ac0c0f07707876ea437c8",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/entity/OceanAltarBlockEntity.java": {
@@ -1435,8 +1430,8 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/common/PlayerProfile.java": {
-    "mtime": 1785859871.7106795,
-    "ast_hash": "169fb52d5628d16189adad271e317dc8",
+    "mtime": 1787600866.4928076,
+    "ast_hash": "730184fae4bdb6609d92a427248d4c08",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/common/ServerStats.java": {
@@ -1465,8 +1460,8 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/FishingLootHandler.java": {
-    "mtime": 1787156791.160392,
-    "ast_hash": "edc8947e94652e9a4fc36ab5eeb1a131",
+    "mtime": 1787772454.8775344,
+    "ast_hash": "2f22418dc3f1705c3842d1f6427ff7d9",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/FishingRodCompat.java": {
@@ -1475,7 +1470,7 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/RateModPersistHandler.java": {
-    "mtime": 1787072877.2830856,
+    "mtime": 1787743716.8536465,
     "ast_hash": "86c3007dcd552419939af9cc2bb9d097",
     "semantic_hash": ""
   },
@@ -1485,12 +1480,12 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/RodDurability.java": {
-    "mtime": 1787072877.272081,
+    "mtime": 1787743716.8404741,
     "ast_hash": "e7c32917e5d085157ecd144bc839b793",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/RodDurabilityApplier.java": {
-    "mtime": 1787072877.2770846,
+    "mtime": 1787743716.8404741,
     "ast_hash": "10c2102129a7cadcf5c9736490b678f4",
     "semantic_hash": ""
   },
@@ -1520,7 +1515,7 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/inventory/AutoFisherMenu.java": {
-    "mtime": 1787072877.2690806,
+    "mtime": 1787743716.838962,
     "ast_hash": "5747332df37a7fa7a0ad3150dae683ef",
     "semantic_hash": ""
   },
@@ -1550,7 +1545,7 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/item/RateModItem.java": {
-    "mtime": 1787072877.2780848,
+    "mtime": 1787743716.8495133,
     "ast_hash": "477a37a58cb2e6fb077948b4ae547765",
     "semantic_hash": ""
   },
@@ -2595,8 +2590,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/ServerEvents.java": {
-    "mtime": 1787161107.0628076,
-    "ast_hash": "8e826b3a9b9d670b1390323c652fe355",
+    "mtime": 1787772202.244726,
+    "ast_hash": "973c1049d7d82571d854d127778c31f9",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/command/LumenCommands.java": {
@@ -2610,8 +2605,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/data/HubSnapshot.java": {
-    "mtime": 1787590951.6725113,
-    "ast_hash": "fd671bf009a17d10053132a98fed6c97",
+    "mtime": 1787602518.4581647,
+    "ast_hash": "b2454dac41388c36e8c53660d1b27822",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/HubActionHandler.java": {
@@ -2620,8 +2615,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/HubDataService.java": {
-    "mtime": 1787591098.11063,
-    "ast_hash": "2c41bfd1b9a9a8cfe5a02422094f14c0",
+    "mtime": 1787772478.7139251,
+    "ast_hash": "1aa6326339790550fd69dbe505dd60df",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/config/LumenConfig.java": {
@@ -2645,8 +2640,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/tools/gen_assets.py": {
-    "mtime": 1786901635.754394,
-    "ast_hash": "c373c33de81e0f7f947f7aa97bc562e2",
+    "mtime": 1787690455.0856347,
+    "ast_hash": "73252b3f2d398746361e74c7ab347e99",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/tools/gen_item_texture.py": {
@@ -2675,28 +2670,28 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/docs/icon_sheet.png": {
-    "mtime": 1786901635.7724292,
-    "ast_hash": "754c29cfbfbf7ab29f5141bc81dbecc8",
+    "mtime": 1787690516.3979907,
+    "ast_hash": "bd0fc859a0e9d436d08b4b1ae21caf0b",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/textures/gui/icons.png": {
-    "mtime": 1786901635.5809524,
-    "ast_hash": "6fe111c860d801f2317278a9ee49e7f3",
+    "mtime": 1787690514.050501,
+    "ast_hash": "98715abdbb0c51af674c82f5ecaaa412",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/textures/item/hub_compass.png": {
-    "mtime": 1786901635.5719366,
-    "ast_hash": "c6e8286389f318f72cb48ac8113f6c9d",
+    "mtime": 1787690515.1356113,
+    "ast_hash": "d8d17b6186b92c63602b24ffc0224f67",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/logo.png": {
-    "mtime": 1786901635.530043,
-    "ast_hash": "69c3b2c09692cddecc1c2cf03e626f05",
+    "mtime": 1787690515.7184327,
+    "ast_hash": "d55256621db5e4d0e3b18dff3a327022",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/tools/icons.svg": {
-    "mtime": 1786901635.757898,
-    "ast_hash": "1f0b556b28bad4dfeca5a9cee3cf71e3",
+    "mtime": 1787690512.6130252,
+    "ast_hash": "1a013ccec7af6eb4d86259059f04bf48",
     "semantic_hash": ""
   },
   "scripts/tasks/compare_mods.py": {
@@ -2710,8 +2705,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/html/hub.html": {
-    "mtime": 1787591316.245215,
-    "ast_hash": "a9d2ca82e88464c9bbb8bc17dbe517ac",
+    "mtime": 1787605055.831944,
+    "ast_hash": "0d09cdd90803d0b7c764a6cdd8c2f0e4",
     "semantic_hash": ""
   },
   "tools/release_launcher.py": {
@@ -2725,8 +2720,8 @@
     "semantic_hash": ""
   },
   "functions/api/sync/player.js": {
-    "mtime": 1787162250.9584143,
-    "ast_hash": "bba7955aa6ba94ab46302ba00248cf06",
+    "mtime": 1787772213.085477,
+    "ast_hash": "6c0bc1b39deb584ef9644fd93f78c89e",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/80_live_portal_sync.js": {
@@ -2750,8 +2745,8 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/HubEconomy.java": {
-    "mtime": 1787150055.599741,
-    "ast_hash": "3756a2228226c3d24e80c7cdb9ba19ee",
+    "mtime": 1787772454.8589528,
+    "ast_hash": "2f54129f8c8e01c7667419be936c2f10",
     "semantic_hash": ""
   },
   "docs/embed/lumen_preview.html": {
@@ -2765,13 +2760,13 @@
     "semantic_hash": ""
   },
   "kubejs/server_scripts/90_fisherman_cat_shop.js": {
-    "mtime": 1787581028.9258747,
-    "ast_hash": "7fd55260ff77494f7c0b656030cdc76e",
+    "mtime": 1787775336.7869582,
+    "ast_hash": "7322c8ee084ae94f56863c092e60c058",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/FishShopConfig.java": {
-    "mtime": 1787156922.6908574,
-    "ast_hash": "7add9d70fcba400a0eb27a9aa31eef52",
+    "mtime": 1787602481.0678904,
+    "ast_hash": "e9300581069662358974e176fe2a146c",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/KitConfig.java": {
@@ -2870,18 +2865,13 @@
     "semantic_hash": ""
   },
   "tools/build_case_icons.py": {
-    "mtime": 1787587327.0606692,
-    "ast_hash": "df8c1a369fe1cbd7e9ccbf1f0dfce914",
+    "mtime": 1787605004.1071517,
+    "ast_hash": "d0ce540ccbedbc44883b6a3d6bfc6f51",
     "semantic_hash": ""
   },
   "tools/extract_all_case_textures.py": {
     "mtime": 1787225926.4608924,
     "ast_hash": "2eddcf1d41d41a7a2c7cf2e82b644f5f",
-    "semantic_hash": ""
-  },
-  "hub_dev.html": {
-    "mtime": 1787224697.8868575,
-    "ast_hash": "40674ee920c3075d382c271735829fa3",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/item/ocean_bounty_upgrade.png": {
@@ -2979,11 +2969,6 @@
     "ast_hash": "bc7550ee1f9a327c1c1e30e7b71c22ad",
     "semantic_hash": ""
   },
-  "case_audit_report.txt": {
-    "mtime": 1787322443.1114461,
-    "ast_hash": "4d09d21416cdfaf86da6908a6d69f6c1",
-    "semantic_hash": ""
-  },
   "config/aqualumen/html/hub.html": {
     "mtime": 1787584729.4699292,
     "ast_hash": "7dbc7bfdd9886009cc9e4eed8755743a",
@@ -2994,11 +2979,6 @@
     "ast_hash": "7dbc7bfdd9886009cc9e4eed8755743a",
     "semantic_hash": ""
   },
-  "iu_registered_items.txt": {
-    "mtime": 1787322428.6253414,
-    "ast_hash": "0acb14c4df15aca6bbee996a0e53a76a",
-    "semantic_hash": ""
-  },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/html/hub.html": {
     "mtime": 1787584729.463424,
     "ast_hash": "7dbc7bfdd9886009cc9e4eed8755743a",
@@ -3007,26 +2987,6 @@
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/hub.html": {
     "mtime": 1787584729.4614248,
     "ast_hash": "7dbc7bfdd9886009cc9e4eed8755743a",
-    "semantic_hash": ""
-  },
-  "scratch_lang.txt": {
-    "mtime": 1787322376.0869203,
-    "ast_hash": "2b81d07413efd40e0209419cab4721d7",
-    "semantic_hash": ""
-  },
-  "test_all_cases_result.txt": {
-    "mtime": 1787322625.8498244,
-    "ast_hash": "d0594158f3d2e2f17dc7835d16864233",
-    "semantic_hash": ""
-  },
-  "test_fishing_loot_result.txt": {
-    "mtime": 1787322534.762814,
-    "ast_hash": "8ecc0d1e723ef3af7802d5ec0c2348b3",
-    "semantic_hash": ""
-  },
-  "test_fishing_loot_result2.txt": {
-    "mtime": 1787322557.9539425,
-    "ast_hash": "42f88ecbc40df23249efe5cb17920a39",
     "semantic_hash": ""
   },
   "tools/analyze_guide_methods.py": {
@@ -3139,96 +3099,6 @@
     "ast_hash": "9c27f97a45797f798d4e6b3a616519f2",
     "semantic_hash": ""
   },
-  "BlockBaseMachine1Entity.txt": {
-    "mtime": 1787578203.93285,
-    "ast_hash": "93e64581ce74e8a45918ae7bcd4f8a73",
-    "semantic_hash": ""
-  },
-  "BlockBaseMachine2Entity.txt": {
-    "mtime": 1787578204.0848167,
-    "ast_hash": "89f6b202380a0cb79171b7a01e0e7a09",
-    "semantic_hash": ""
-  },
-  "BlockBaseMachine3Entity.txt": {
-    "mtime": 1787578203.6437018,
-    "ast_hash": "e64869a4bba76ace46a37e5a57848e36",
-    "semantic_hash": ""
-  },
-  "BlockBaseMachineEntity.txt": {
-    "mtime": 1787578203.790409,
-    "ast_hash": "7581ea98c5861ba6234b046e5878cf8a",
-    "semantic_hash": ""
-  },
-  "DataBlock.txt": {
-    "mtime": 1787578203.4464762,
-    "ast_hash": "d02f49c7a415d1cf960b810fe5e0ec53",
-    "semantic_hash": ""
-  },
-  "DataItem.txt": {
-    "mtime": 1787578203.2930071,
-    "ast_hash": "f9b1cab751d2f6607922486c0186bd4e",
-    "semantic_hash": ""
-  },
-  "IUItem.txt": {
-    "mtime": 1787578203.007768,
-    "ast_hash": "6efb1b18afd59fa3535f329a1187c9e2",
-    "semantic_hash": ""
-  },
-  "ItemStackHelper.txt": {
-    "mtime": 1787578203.1450372,
-    "ast_hash": "a6d266539ca1f3cf63d6a6630ba87a3f",
-    "semantic_hash": ""
-  },
-  "baseElectricTab_dump.txt": {
-    "mtime": 1787578135.9379678,
-    "ast_hash": "56d263ce3ce4c3c5587e90de38f990c7",
-    "semantic_hash": ""
-  },
-  "guide_core_decomp.txt": {
-    "mtime": 1787577962.5762308,
-    "ast_hash": "dc9ad8e6bb02b60fddf25a4905002516",
-    "semantic_hash": ""
-  },
-  "guide_core_verbose.txt": {
-    "mtime": 1787578072.211605,
-    "ast_hash": "79a9e261bf6751d6749fa285b4f45a78",
-    "semantic_hash": ""
-  },
-  "guide_cp_strings.txt": {
-    "mtime": 1787578095.7911413,
-    "ast_hash": "cd95b9c16c79128375da45aa043514ef",
-    "semantic_hash": ""
-  },
-  "guide_quest_decomp.txt": {
-    "mtime": 1787577874.8219752,
-    "ast_hash": "39fc73afa28437cb3a8b434f36506802",
-    "semantic_hash": ""
-  },
-  "improvedElectricTab_dump.txt": {
-    "mtime": 1787578135.9389713,
-    "ast_hash": "d756181a115bffdf0c09ce2cc7ccb926",
-    "semantic_hash": ""
-  },
-  "init_code.txt": {
-    "mtime": 1787578110.535357,
-    "ast_hash": "483fa7485197fbd8ccc18b58d2f0ed3e",
-    "semantic_hash": ""
-  },
-  "iu_all_registry_items.txt": {
-    "mtime": 1787578219.2014072,
-    "ast_hash": "93aef7af30adcc399fc8a2612b636267",
-    "semantic_hash": ""
-  },
-  "quest_blocks_sample.txt": {
-    "mtime": 1787578027.5395103,
-    "ast_hash": "23ccb9b64796c51d0c90dc4d9d1ffd18",
-    "semantic_hash": ""
-  },
-  "steamTab_dump.txt": {
-    "mtime": 1787578135.9379678,
-    "ast_hash": "584441e80c5b5b4f253d9447a139725e",
-    "semantic_hash": ""
-  },
   "tools/audit_server_mods.py": {
     "mtime": 1787580703.2551637,
     "ast_hash": "e6e0519e26f877ec8e4ffee13d0a2426",
@@ -3275,8 +3145,8 @@
     "semantic_hash": ""
   },
   "kubejs/server_scripts/75_ftb_chapter_rewards.js": {
-    "mtime": 1787582423.8149629,
-    "ast_hash": "869056c520df3bea5c485a429f282458",
+    "mtime": 1787775365.0392282,
+    "ast_hash": "7703d5671fba3867f24af45c15e500cf",
     "semantic_hash": ""
   },
   "functions/api/market.js": {
@@ -3285,8 +3155,1263 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/MarketService.java": {
-    "mtime": 1787591098.11063,
-    "ast_hash": "d236e5af369fa41a0f4dee7b7fc336e6",
+    "mtime": 1787594287.1850507,
+    "ast_hash": "0e26620abd789add7640ef5514a97412",
+    "semantic_hash": ""
+  },
+  "kubejs/server_scripts/35_fun_crafts.js": {
+    "mtime": 1787747438.5687227,
+    "ast_hash": "2106483d67fc0984b6ab36418bde3cd0",
+    "semantic_hash": ""
+  },
+  "kubejs/server_scripts/36_balanced_tweaks.js": {
+    "mtime": 1787775364.9009879,
+    "ast_hash": "310b9f6cea03ea8a42ab38d20cc14b81",
+    "semantic_hash": ""
+  },
+  "kubejs/server_scripts/95_deep_sea_bounty.js": {
+    "mtime": 1787678457.9604032,
+    "ast_hash": "e2f44e138bc08283dd409013c06f6c9c",
+    "semantic_hash": ""
+  },
+  "kubejs/server_scripts/96_fish_stocking.js": {
+    "mtime": 1787744316.1775105,
+    "ast_hash": "91e44f9e84523f792699b19b3c9703ab",
+    "semantic_hash": ""
+  },
+  "launcher/src/AquaTechLauncher.Core.Tests/PackStateCacheTests.cs": {
+    "mtime": 1787642661.0751712,
+    "ast_hash": "4f5464d8a23c2aa985417e76d8748bc2",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/OceanEventsService.java": {
+    "mtime": 1787607680.4540637,
+    "ast_hash": "3d06a7cce3b857b4d40d02ca84530426",
+    "semantic_hash": ""
+  },
+  "scripts/tasks/backup_world.py": {
+    "mtime": 1787606633.3783224,
+    "ast_hash": "39bfe09cc4a55060eef69af8a5aebf02",
+    "semantic_hash": ""
+  },
+  "tools/gen_bonus_chapters.py": {
+    "mtime": 1787651035.3362424,
+    "ast_hash": "83a9d651c20ac193e657a7a8171c7e0f",
+    "semantic_hash": ""
+  },
+  "tools/server_setup/restore_multinoise_overworld.py": {
+    "mtime": 1787744367.1363912,
+    "ast_hash": "1059cec25f1d625338cbc58539ffcc04",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0410\u0434\u0430\u043c\u0430\u043d\u0442\u0438\u0435\u0432\u044b\u0439_\u0441\u043b\u0438\u0442\u043e\u043a_(GregTech).png.png": {
+    "mtime": 1787605042.980211,
+    "ast_hash": "535cdf1f43eafd4e64f04d2806120183",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0411\u0440\u043e\u043d\u0437\u043e\u0432\u044b\u0439_\u0441\u043b\u0438\u0442\u043e\u043a_(Thermal_Expansion_3).png.png": {
+    "mtime": 1787605043.471283,
+    "ast_hash": "650575fb85abb463bee430faa3a82ca4",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0418\u0437\u043c\u0435\u043b\u044c\u0447\u0451\u043d\u043d\u0430\u044f_\u043e\u043b\u043e\u0432\u044f\u043d\u043d\u0430\u044f_\u0440\u0443\u0434\u0430_(Thermal_Expansion_1).png.png": {
+    "mtime": 1787601929.6574829,
+    "ast_hash": "db8adeefa66e25c49271f5d398e1823e",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0418\u0437\u043c\u0435\u043b\u044c\u0447\u0451\u043d\u043d\u0430\u044f_\u0441\u0435\u0440\u0435\u0431\u0440\u044f\u043d\u0430\u044f_\u0440\u0443\u0434\u0430_(Thermal_Expansion_1).png.png": {
+    "mtime": 1787605035.5401294,
+    "ast_hash": "0cd6b3cf4c2d15e65a8da211761f43af",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0418\u0437\u043c\u0435\u043b\u044c\u0447\u0451\u043d\u043d\u044b\u0439_\u0443\u0433\u043e\u043b\u044c_(Thermal_Expansion_3).png.png": {
+    "mtime": 1787605050.0484753,
+    "ast_hash": "ce85beca3fcc8dbae5ab1523abad90e8",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u041a\u0432\u0430\u043d\u0442\u043e\u0432\u0430\u044f_\u0437\u0430\u043f\u0443\u0442\u0430\u043d\u043d\u0430\u044f_\u0441\u0438\u043d\u0433\u0443\u043b\u044f\u0440\u043d\u043e\u0441\u0442\u044c_(Applied_Energistics_2).png.png": {
+    "mtime": 1787605010.6147988,
+    "ast_hash": "16437ae6f2176288c83421ce9bd96379",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u041c\u0435\u0434\u043d\u044b\u0439_\u0441\u043b\u0438\u0442\u043e\u043a_(Thermal_Expansion_3).png.png": {
+    "mtime": 1787605050.4904299,
+    "ast_hash": "a55cf479e5eaba087835b1e58071d2e2",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u041d\u0435\u0439\u0442\u0440\u043e\u043d\u043d\u044b\u0439_\u0441\u0430\u043c\u043e\u0440\u043e\u0434\u043e\u043a_(Avaritia).png": {
+    "mtime": 1787601900.060064,
+    "ast_hash": "25f394b8fe8973a6d506064353cb9560",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u041d\u0438\u043a\u0435\u043b\u0435\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(Thermal_Expansion_2).png.png": {
+    "mtime": 1787605034.6721065,
+    "ast_hash": "6ca0ad30cc4679aa449fa0376294b8b4",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u041e\u0431\u0436\u0430\u0440\u0435\u043d\u043d\u0430\u044f_\u043a\u043e\u0436\u0430.png.png": {
+    "mtime": 1787605053.3800673,
+    "ast_hash": "0fae10cde232f49623154cf4f4b5695a",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u041e\u043b\u043e\u0432\u044f\u043d\u043d\u0430\u044f_\u0440\u0443\u0434\u0430_(Industrial_Upgrade).png": {
+    "mtime": 1787605042.4668703,
+    "ast_hash": "6a56edb4e044a0651fa09e4a35146ac2",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u041e\u0441\u043c\u0438\u0440\u0438\u0434\u0438\u0435\u0432\u044b\u0439_\u0441\u043b\u0438\u0442\u043e\u043a_(GregTech).png.png": {
+    "mtime": 1787605033.2075527,
+    "ast_hash": "ef6b769aa88691717759a9067be9c40c",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u041f\u0430\u0440\u043e\u0432\u0430\u044f_\u043c\u0430\u0448\u0438\u043d\u0430_(Traincraft).png.png": {
+    "mtime": 1787605041.4514,
+    "ast_hash": "7c916f8ec7f27179f7ffc7add4fbd05b",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0421\u0432\u0438\u043d\u0446\u043e\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(Industrial_Upgrade).png": {
+    "mtime": 1787605042.2532885,
+    "ast_hash": "117f14ba73ae088e7c289761da9dbd10",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0421\u0432\u0438\u043d\u0446\u043e\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(Thermal_Expansion_2).png.png": {
+    "mtime": 1787601929.1543539,
+    "ast_hash": "45752d558c0e2c286be8c6e439f048fb",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0421\u043b\u0438\u0442\u043e\u043a_\u0431\u0435\u0441\u043a\u043e\u043d\u0435\u0447\u043d\u043e\u0441\u0442\u0438_(Avaritia).png": {
+    "mtime": 1787601899.3958113,
+    "ast_hash": "16bba890b1c06606e62a00edf4ea6a8d",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0421\u0442\u0430\u043b\u044c\u043d\u043e\u0439_\u0441\u043b\u0438\u0442\u043e\u043a_(Traincraft).png.png": {
+    "mtime": 1787605043.936149,
+    "ast_hash": "530c6f0b0f64fe4faca7e4a7ac3332c7",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/Grid_\u0423\u0441\u043a\u043e\u0440\u0438\u0442\u0435\u043b\u044c_\u0434\u0432\u0438\u0433\u0430\u0442\u0435\u043b\u044f_(Gravitation_Suite).png.png": {
+    "mtime": 1787605049.0901628,
+    "ast_hash": "de9a78f7176938b975dc3aa93c245316",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0410\u0434\u0440\u043e\u043d\u043d\u0430\u044f_\u0441\u043e\u043b\u043d\u0435\u0447\u043d\u0430\u044f_\u043f\u0430\u043d\u0435\u043b\u044c_(Industrial_Upgrade).gif.gif": {
+    "mtime": 1787605046.1207025,
+    "ast_hash": "ab6228d70df4c4d3acfa91e5c59b270c",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0410\u043b\u043c\u0430\u0437_JE3_BE3.png.png": {
+    "mtime": 1787605051.0022013,
+    "ast_hash": "736f34a661ee2d1dd740805eafa880fa",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0411\u0430\u0440\u0438\u043e\u043d\u043d\u0430\u044f_\u0441\u043e\u043b\u043d\u0435\u0447\u043d\u0430\u044f_\u043f\u0430\u043d\u0435\u043b\u044c_(Industrial_Upgrade).gif.gif": {
+    "mtime": 1787605044.4123902,
+    "ast_hash": "cf0297dcf29d87f064ed2420b3ee4540",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0411\u0435\u0440\u0438\u043b\u043b\u0438\u0435\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(GregTech).png.png": {
+    "mtime": 1787605036.9292243,
+    "ast_hash": "829d5054c289f658550935b904083f5a",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0412\u0435\u0434\u0440\u043e_\u043b\u0430\u0432\u044b_JE2_BE2.png.png": {
+    "mtime": 1787605052.9662964,
+    "ast_hash": "6d1900fd6875bfa76d7b62adc0147062",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0412\u043e\u043b\u044c\u0444\u0440\u0430\u043c\u043e\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(GregTech).png.png": {
+    "mtime": 1787605036.490254,
+    "ast_hash": "d768b690798025341b96ed24eb8edd73",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0412\u044b\u0447\u0438\u0441\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0439_\u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440_(Applied_Energistics_2).png.png": {
+    "mtime": 1787605005.073724,
+    "ast_hash": "39e5bcffb278fb7c6cb36d2d4bfbca24",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0416\u0435\u043b\u0435\u0437\u043d\u044b\u0439_\u0441\u043b\u0438\u0442\u043e\u043a_JE3_BE2.png.png": {
+    "mtime": 1787605052.421855,
+    "ast_hash": "eb3f9d9deedddbfa21c85bb91209eb4d",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0417\u0432\u0435\u0437\u0434\u0430_\u041d\u0438\u0436\u043d\u0435\u0433\u043e_\u043c\u0438\u0440\u0430.png.png": {
+    "mtime": 1787605053.8259454,
+    "ast_hash": "aaa4dba839307cb3a7c196cd398856cb",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0417\u043e\u043b\u043e\u0442\u043e\u0439_\u0441\u043b\u0438\u0442\u043e\u043a_JE4_BE2.png.png": {
+    "mtime": 1787605051.9672577,
+    "ast_hash": "c45c1e01a88c9f10ebed2dcda78b66c7",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0418\u043d\u0436\u0435\u043d\u0435\u0440\u043d\u044b\u0439_\u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440_(Applied_Energistics_2).png.png": {
+    "mtime": 1787605005.5385997,
+    "ast_hash": "1e5f45a3f57f5cdb6c4285a43fe8d3b6",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0418\u0442\u0442\u0440\u0438\u0435\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(GregTech).png.png": {
+    "mtime": 1787605038.532059,
+    "ast_hash": "5ab95eca2f00abe0fc786bc926823203",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u041a\u043e\u0431\u0430\u043b\u044c\u0442\u043e\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(GregTech).png.png": {
+    "mtime": 1787605034.1700237,
+    "ast_hash": "38d8fb56d88486b9eb425be425d528b6",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u041a\u0440\u0430\u0441\u043d\u0430\u044f_\u043f\u044b\u043b\u044c_JE2_BE2.png.png": {
+    "mtime": 1787605054.7180536,
+    "ast_hash": "60e92dad6360aca9b8fd0e06b60b44ca",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u041b\u043e\u0433\u0438\u0447\u0435\u0441\u043a\u0438\u0439_\u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440_(Applied_Energistics_2).png.png": {
+    "mtime": 1787605008.9847245,
+    "ast_hash": "555b2b4a3e6ac299bcac7b7b56f7659c",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u041d\u0435\u0437\u0435\u0440\u0438\u0442\u043e\u0432\u044b\u0439_\u0441\u043b\u0438\u0442\u043e\u043a.png.png": {
+    "mtime": 1787605054.2561948,
+    "ast_hash": "2cf80f92b35abf41f7038c6010b2e8c0",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u041e\u0433\u043d\u0435\u043d\u043d\u044b\u0439_\u0441\u0442\u0435\u0440\u0436\u0435\u043d\u044c.png.png": {
+    "mtime": 1787605049.5609553,
+    "ast_hash": "80ea5c0df42064121c1d6aa075e39a7c",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u041f\u043b\u0430\u0442\u0438\u043d\u043e\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(GregTech).png.png": {
+    "mtime": 1787605035.1177943,
+    "ast_hash": "4074e9c36d1f4395e479b18574c2dad1",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0421\u043f\u0435\u043a\u0442\u0440\u0430\u043b\u044c\u043d\u0430\u044f_\u0441\u043e\u043b\u043d\u0435\u0447\u043d\u0430\u044f_\u043f\u0430\u043d\u0435\u043b\u044c_(Industrial_Upgrade).gif.gif": {
+    "mtime": 1787605048.2166688,
+    "ast_hash": "971bb6654b0f556a2cb398f0ba1e13c0",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0421\u0442\u0440\u043e\u043d\u0446\u0438\u0435\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(GregTech).png.png": {
+    "mtime": 1787605037.457492,
+    "ast_hash": "c081d6390c3ead9cfdb62eced07ba158",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0422\u0438\u0442\u0430\u043d\u043e\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(GregTech).png.png": {
+    "mtime": 1787605036.0092027,
+    "ast_hash": "01a26c92f2f9b211bbfa59bdcde6326f",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0423\u0440\u0430\u043d-235_(GregTech).png.png": {
+    "mtime": 1787605048.6634183,
+    "ast_hash": "1601ed86271617793ef72470b6470076",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0424\u043e\u0442\u043e\u043d\u043d\u0430\u044f_\u0441\u043e\u043b\u043d\u0435\u0447\u043d\u0430\u044f_\u043f\u0430\u043d\u0435\u043b\u044c_(Industrial_Upgrade).gif.gif": {
+    "mtime": 1787605047.7842133,
+    "ast_hash": "4b8ad3a09f70081c09de8a8083e547df",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u0425\u0440\u043e\u043c\u043e\u0432\u0430\u044f_\u0440\u0443\u0434\u0430_(GregTech).png.png": {
+    "mtime": 1787605033.6893582,
+    "ast_hash": "96f5df3002e66546c07ead6d80aac021",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u042d\u043d\u0435\u0440\u0433\u0435\u0442\u0438\u0447\u0435\u0441\u043a\u0438\u0439_\u043a\u0440\u0438\u0441\u0442\u0430\u043b\u043b_(IndustrialCraft_2).png.png": {
+    "mtime": 1787605038.9994738,
+    "ast_hash": "2def5da51d4e8603d3e13fc29000580e",
+    "semantic_hash": ""
+  },
+  "tools/wiki_cache/\u042f\u0439\u0446\u043e_\u0434\u0440\u0430\u043a\u043e\u043d\u0430_\u043d\u0430_\u043f\u043e\u0441\u0442\u0435\u0440\u0435.jpg.png": {
+    "mtime": 1787605051.4709365,
+    "ast_hash": "b2a433be2556ccd71d9af28912f5e7f3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/app.js": {
+    "mtime": 1787748312.3671079,
+    "ast_hash": "afcd236be9307dfb64e07af39e935ad0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/scripts/crawl_website.py": {
+    "mtime": 1787748312.4930272,
+    "ast_hash": "b67b2156ed5a0f201a7eb57082b49fd4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/scripts/extract_design_tokens.py": {
+    "mtime": 1787748312.495027,
+    "ast_hash": "ab5e21a63d6a4d9122ba6a60bd5bd132",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/scripts/fetch_unsplash_images.py": {
+    "mtime": 1787748312.4970286,
+    "ast_hash": "313b0bb4f856cf7022eeb24965463c77",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/AGENTS.md": {
+    "mtime": 1787748312.2045684,
+    "ast_hash": "466c9fbd2220326815c9139de5d01db7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/README.md": {
+    "mtime": 1787748312.332538,
+    "ast_hash": "c7a4c61c41f8d5d502802d5a22fcb288",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/SKILL.md": {
+    "mtime": 1787748312.2055695,
+    "ast_hash": "edd95582496916920cf9dfb25a96029e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig-lookup.md": {
+    "mtime": 1787748312.2070725,
+    "ast_hash": "ade8477749ef49c5eb82ac8a123176bb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/accessibility.md": {
+    "mtime": 1787748312.2251472,
+    "ast_hash": "52e40da65a63948c32ca8a5c4306fdb1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/app-icons.md": {
+    "mtime": 1787748312.229559,
+    "ast_hash": "7ece8d5e60df129dec558e4e335c4baf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/apple-pay.md": {
+    "mtime": 1787748312.2220976,
+    "ast_hash": "fd107b2b31c00f80efc9f5f065deabdc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/apple-pencil-and-scribble.md": {
+    "mtime": 1787748312.2150836,
+    "ast_hash": "c61dd200bf7d51886e0391367b5ddf3a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/augmented-reality.md": {
+    "mtime": 1787748312.229559,
+    "ast_hash": "fb815abc895b6b484bfeab9ec66592c4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/branding.md": {
+    "mtime": 1787748312.2285557,
+    "ast_hash": "fc98ce29a3d10efff146bfaa14866219",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/charting-data.md": {
+    "mtime": 1787748312.2160838,
+    "ast_hash": "47c4505418e4a88061328022af3dcc53",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/collaboration-and-sharing.md": {
+    "mtime": 1787748312.2160838,
+    "ast_hash": "e79f037044c5d0ef5614f04e7a01a0c1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/color.md": {
+    "mtime": 1787748312.2261472,
+    "ast_hash": "c141f2ba5a66a3ebd073a4902535e41d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/dark-mode.md": {
+    "mtime": 1787748312.229559,
+    "ast_hash": "602d78ad8e5e157ad256f17a2ff2a8cd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/drag-and-drop.md": {
+    "mtime": 1787748312.2170844,
+    "ast_hash": "ad4509d1295fed65eba459f9fc5dcb7f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/entering-data.md": {
+    "mtime": 1787748312.2170844,
+    "ast_hash": "ae502234c9071c118abffa94b234cb2e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/feedback.md": {
+    "mtime": 1787748312.2261472,
+    "ast_hash": "f23ad14af288d967f489ef8ac5a00d57",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/file-management.md": {
+    "mtime": 1787748312.2220976,
+    "ast_hash": "1bd217295d6b77998474a3317471380b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/focus-and-selection.md": {
+    "mtime": 1787748312.229559,
+    "ast_hash": "83319bdc440cc575fb43de622156e826",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/game-controls.md": {
+    "mtime": 1787748312.2310607,
+    "ast_hash": "7610a31f36c075b909ec30c4bfe1583a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/generative-ai.md": {
+    "mtime": 1787748312.218588,
+    "ast_hash": "8cad4b562c42c8e610a756c85a34107a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/gestures.md": {
+    "mtime": 1787748312.218588,
+    "ast_hash": "27b0aad92b9034f86a3ac1ffdd4ef896",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/going-full-screen.md": {
+    "mtime": 1787748312.2261472,
+    "ast_hash": "667eeb135cb5c037d4c42a75523d2ce4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/icons.md": {
+    "mtime": 1787748312.2261472,
+    "ast_hash": "9bcd9bfd1d36d8ca754c21f28e19f2ac",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/images.md": {
+    "mtime": 1787748312.219592,
+    "ast_hash": "e4af03ff38aac5e58fd1058a32e742db",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/in-app-purchase.md": {
+    "mtime": 1787748312.219592,
+    "ast_hash": "8bc158764bffaa7a983886d0762f152a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/inclusion.md": {
+    "mtime": 1787748312.232065,
+    "ast_hash": "e8e816dc35a6b43eed92af7ef8de51ea",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/keyboards.md": {
+    "mtime": 1787748312.227982,
+    "ast_hash": "c2342a2dd95d284ae75c5a5e997688ca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/launching.md": {
+    "mtime": 1787748312.2340674,
+    "ast_hash": "2eb434d2a552691b841244674f377c1e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/layout.md": {
+    "mtime": 1787748312.233068,
+    "ast_hash": "628b270046e34f3ffcd02461c4c942c3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/liquid-glass.md": {
+    "mtime": 1787748312.2231443,
+    "ast_hash": "9b7796ac37a91927b049f7ab939ba737",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/live-viewing-apps.md": {
+    "mtime": 1787748312.2340674,
+    "ast_hash": "407c876235e12ab899a8ec32ae180ac5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/loading.md": {
+    "mtime": 1787748312.2120857,
+    "ast_hash": "092c29cf61afedc55d1ef343659163e4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/machine-learning.md": {
+    "mtime": 1787748312.2231443,
+    "ast_hash": "a7368720e2e4d4da8d755ad9783bed09",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/managing-accounts.md": {
+    "mtime": 1787748312.209577,
+    "ast_hash": "7454ef319b5452d30a49a5f287f849b4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/managing-notifications.md": {
+    "mtime": 1787748312.219592,
+    "ast_hash": "644f182a8400b9abdc2c1fcf6ce02d88",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/maps.md": {
+    "mtime": 1787748312.219592,
+    "ast_hash": "896ff01b66fb579297280a3eddc18080",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/materials.md": {
+    "mtime": 1787748312.2285557,
+    "ast_hash": "0581d6d9eaca0d3ecd15a9a1da7979f1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/modality.md": {
+    "mtime": 1787748312.209577,
+    "ast_hash": "c30acd4d655eef64c711001353eb141a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/motion.md": {
+    "mtime": 1787748312.213092,
+    "ast_hash": "4df67ccd5d800a1b22f5383598bcdbbf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/multitasking.md": {
+    "mtime": 1787748312.2241442,
+    "ast_hash": "232d5f0b76aeeab670ab70208657dea4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/offering-help.md": {
+    "mtime": 1787748312.209577,
+    "ast_hash": "83d3493f495a22f676459d6526d52952",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/onboarding.md": {
+    "mtime": 1787748312.221095,
+    "ast_hash": "1cf42d2df07b447054e085bdfce3b8d7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/playing-audio.md": {
+    "mtime": 1787748312.2241442,
+    "ast_hash": "733cf3c77dfce89b6d100125e5dfccd9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/playing-haptics.md": {
+    "mtime": 1787748312.213092,
+    "ast_hash": "eee031c223f45c733f0c761aba0634ba",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/playing-video.md": {
+    "mtime": 1787748312.2251472,
+    "ast_hash": "7b53751d16806fca7aa99b56d8be8c3f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/pointing-devices.md": {
+    "mtime": 1787748312.232065,
+    "ast_hash": "9ea3cfa15921aa14fe206d37c7b691d9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/printing.md": {
+    "mtime": 1787748312.233068,
+    "ast_hash": "9232b506b091b699d780918e8d7527ce",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/privacy.md": {
+    "mtime": 1787748312.2140844,
+    "ast_hash": "75888b3dc3a7f8a0450c50feea507ef8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/ratings-and-reviews.md": {
+    "mtime": 1787748312.221095,
+    "ast_hash": "844257e461062a7b08a173c1ce70b426",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/right-to-left.md": {
+    "mtime": 1787748312.2150836,
+    "ast_hash": "649a1bab29ecb1ea24678ab45f3eea19",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/searching.md": {
+    "mtime": 1787748312.2070725,
+    "ast_hash": "67512ac62f9e3626a5bca7942860b3ad",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/settings.md": {
+    "mtime": 1787748312.2110806,
+    "ast_hash": "10dc26acdac8856f6afe00d1fe68e4a6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/sf-symbols.md": {
+    "mtime": 1787748312.2110806,
+    "ast_hash": "28adad0d49671c98c7b4b718c4850b7f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/typography.md": {
+    "mtime": 1787748312.2070725,
+    "ast_hash": "bff5d7b30588fef19bfc0906625fb8f6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/undo-and-redo.md": {
+    "mtime": 1787748312.2085745,
+    "ast_hash": "eda081eec3ba800c602fbd39f12fc8f0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/apple-design/references/hig/writing.md": {
+    "mtime": 1787748312.2085745,
+    "ast_hash": "cff7dd92869de9ab5524d08864aa9bd3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/README.md": {
+    "mtime": 1787748312.3621075,
+    "ast_hash": "d21f3aec601867062e4d2fec2c37cddf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/SKILL.md": {
+    "mtime": 1787748312.4386268,
+    "ast_hash": "06a247a5b1853a80409b19d77d5ffef9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/DESIGN.md": {
+    "mtime": 1787748312.364111,
+    "ast_hash": "ed3351ad556bda5ea6d3f37bfe03a9dc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/index.html": {
+    "mtime": 1787748312.3651092,
+    "ast_hash": "ee4ff2e802d7c99ecfc77e38635e6d2f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-md-template.md": {
+    "mtime": 1787748312.4995344,
+    "ast_hash": "3482f0b9e9d0ac5d620d30b3fcb08fca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/INDEX.md": {
+    "mtime": 1787748312.5852242,
+    "ast_hash": "d27c5211a0db064d7acde5afcc100206",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/airbnb.md": {
+    "mtime": 1787748312.5170805,
+    "ast_hash": "5cf2cfae1f8916d4b5a9c462ec478977",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/airtable.md": {
+    "mtime": 1787748312.542515,
+    "ast_hash": "46aa55800a72a08d3f94a9e8be35c64d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/apple.md": {
+    "mtime": 1787748312.567068,
+    "ast_hash": "85ce54d5b29fefe794ec74380f63f67e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/bmw.md": {
+    "mtime": 1787748312.5220904,
+    "ast_hash": "f6637cd834aa9158d251a0b6114d1972",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/cal.md": {
+    "mtime": 1787748312.5339365,
+    "ast_hash": "902e78f37a6506cf17ff0b4c15fbdf36",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/claude.md": {
+    "mtime": 1787748312.5234194,
+    "ast_hash": "1b07a63a8601ac6229458746188795ee",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/clay.md": {
+    "mtime": 1787748312.534937,
+    "ast_hash": "f2b0ef9783b23f74e0c4998a2ccdfe8c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/clickhouse.md": {
+    "mtime": 1787748312.5185828,
+    "ast_hash": "d1d03b71db2f0cd1874b1e158009c8a6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/cohere.md": {
+    "mtime": 1787748312.51308,
+    "ast_hash": "7c79925693c65c2d8322ffdf7637f452",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/coinbase.md": {
+    "mtime": 1787748312.5195856,
+    "ast_hash": "c75ed478a8e25aa974c481799cc5c0b4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/composio.md": {
+    "mtime": 1787748312.5140803,
+    "ast_hash": "c0cb37be277e0bbd047b95150dbdb700",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/cursor.md": {
+    "mtime": 1787748312.5842261,
+    "ast_hash": "0384698b8aa6378e0678aa2bfecf3144",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/elevenlabs.md": {
+    "mtime": 1787748312.5210874,
+    "ast_hash": "f920a5c62d8049ac730e517b7bdf02c0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/expo.md": {
+    "mtime": 1787748312.5254183,
+    "ast_hash": "7121faa098d34dbbe1952d278c769788",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/ferrari.md": {
+    "mtime": 1787748312.5369375,
+    "ast_hash": "c7d5c5a0ec99a0a4a29bd8388432f277",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/figma.md": {
+    "mtime": 1787748312.5359366,
+    "ast_hash": "6b7c7949957dc609d03de15147b92fd1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/framer.md": {
+    "mtime": 1787748312.5110757,
+    "ast_hash": "63531b251cf73ce80ff89153bc819fa4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/hashicorp.md": {
+    "mtime": 1787748312.5785806,
+    "ast_hash": "95d056bf6642e411eac4920c5466d094",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/ibm.md": {
+    "mtime": 1787748312.5897322,
+    "ast_hash": "53b9f5b6d066b2869a390b753261c525",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/intercom.md": {
+    "mtime": 1787748312.5570378,
+    "ast_hash": "6c7144c678530868262a4d244877e735",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/kraken.md": {
+    "mtime": 1787748312.5254183,
+    "ast_hash": "68f2fd5d15ba23159b6642a5c9becd0e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/lamborghini.md": {
+    "mtime": 1787748312.5445194,
+    "ast_hash": "ad902115f778ffbe9954a8a9e5d81cac",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/linear.app.md": {
+    "mtime": 1787748312.5455189,
+    "ast_hash": "c5d9f656d0a2211fb7ea90e78c3437e9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/lovable.md": {
+    "mtime": 1787748312.582092,
+    "ast_hash": "d383df41b770975463298c64e7714cbe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/minimax.md": {
+    "mtime": 1787748312.5384421,
+    "ast_hash": "ed0d251d27522f202c1fa647e0b37481",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/mintlify.md": {
+    "mtime": 1787748312.5872252,
+    "ast_hash": "e2d8b60746aa3582ebcd30e9db5b4f9d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/miro.md": {
+    "mtime": 1787748312.5872252,
+    "ast_hash": "19cd0f63da953fa105e3250c7a212c21",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/mistral.ai.md": {
+    "mtime": 1787748312.5760777,
+    "ast_hash": "dffe4acb05dc190551ca3b98effb8d72",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/mongodb.md": {
+    "mtime": 1787748312.5150788,
+    "ast_hash": "31cb4c8e4755e2cbe7e83e7b4ea496fe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/notion.md": {
+    "mtime": 1787748312.5269208,
+    "ast_hash": "5bf120e15e472e22b77db9bbd2587146",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/nvidia.md": {
+    "mtime": 1787748312.547023,
+    "ast_hash": "261fc81c31b99bcf033e2843ec41bc8b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/ollama.md": {
+    "mtime": 1787748312.5570378,
+    "ast_hash": "119d6fac790be5c20cfc0af69758311c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/opencode.ai.md": {
+    "mtime": 1787748312.5520384,
+    "ast_hash": "b69b641c2cac211025aeddd76c7ad083",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/pinterest.md": {
+    "mtime": 1787748312.5495296,
+    "ast_hash": "63b158fc5e23ebc4fca493e6259dff7f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/posthog.md": {
+    "mtime": 1787748312.5832243,
+    "ast_hash": "d0c218da743c1c1d8a2b86cd0a022f13",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/raycast.md": {
+    "mtime": 1787748312.5510337,
+    "ast_hash": "19abd7988d4cffa85be90d565ce01f0e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/renault.md": {
+    "mtime": 1787748312.5284262,
+    "ast_hash": "f89b8815068b3263dc76b988388c5165",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/replicate.md": {
+    "mtime": 1787748312.5595455,
+    "ast_hash": "e9b71e30a3619350ff1326baba290b83",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/resend.md": {
+    "mtime": 1787748312.5540373,
+    "ast_hash": "f3946edad098c9a43f45347e7c7c3d16",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/revolut.md": {
+    "mtime": 1787748312.5795844,
+    "ast_hash": "b0af09312d16dfde2ea25186eefd1c23",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/runwayml.md": {
+    "mtime": 1787748312.567068,
+    "ast_hash": "eea68259723d32369630d1a0f0424859",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/sanity.md": {
+    "mtime": 1787748312.569573,
+    "ast_hash": "3d9fc314bdb026932036912d154978aa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/sentry.md": {
+    "mtime": 1787748312.5394454,
+    "ast_hash": "e2810893e8179dcc20df0b7cc40d3d15",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/spacex.md": {
+    "mtime": 1787748312.569573,
+    "ast_hash": "31087e074ba9f0f5954b5be7ef4a4545",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/spotify.md": {
+    "mtime": 1787748312.5770783,
+    "ast_hash": "195f3a0cc397b604b9bb00c0e2e62cf7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/stripe.md": {
+    "mtime": 1787748312.571075,
+    "ast_hash": "81cf72e2c3db33acc956bdd12ad18d3e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/supabase.md": {
+    "mtime": 1787748312.5810888,
+    "ast_hash": "ff47a4ea633559af997df901431f13dc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/superhuman.md": {
+    "mtime": 1787748312.5294294,
+    "ast_hash": "5eeec8f2cb0c38aea0b9e8e4b00ef194",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/tesla.md": {
+    "mtime": 1787748312.5635622,
+    "ast_hash": "592539143a51924e2883f6b85f1517de",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/together.ai.md": {
+    "mtime": 1787748312.561049,
+    "ast_hash": "288e3d087d260bdefa0c859edc14eb72",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/uber.md": {
+    "mtime": 1787748312.5730789,
+    "ast_hash": "5e7b5401c597e074d9ab68af5eaf01fa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/vercel.md": {
+    "mtime": 1787748312.5740776,
+    "ast_hash": "1efa3fd00c47f8c7e470f2360ee48d53",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/voltagent.md": {
+    "mtime": 1787748312.5655632,
+    "ast_hash": "97599f8af085b08dedd627e374b5b046",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/warp.md": {
+    "mtime": 1787748312.5550382,
+    "ast_hash": "96c13a03302c7647787d2503a5ef31ac",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/webflow.md": {
+    "mtime": 1787748312.5309334,
+    "ast_hash": "d80d3ae0819fd5e795ba85cbe5001469",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/wise.md": {
+    "mtime": 1787748312.531937,
+    "ast_hash": "68278553e392205787720df0b5802596",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/x.ai.md": {
+    "mtime": 1787748312.5625587,
+    "ast_hash": "3428f1b1e6dc411aa2d17963e73d90d5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/design-systems/zapier.md": {
+    "mtime": 1787748312.540948,
+    "ast_hash": "fcdc9f461ce206cc9876f244170f294e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/icon-library.md": {
+    "mtime": 1787748312.5035546,
+    "ast_hash": "0b489004b824f08c0f01191b8fc076e6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/interaction-patterns.md": {
+    "mtime": 1787748312.5070584,
+    "ast_hash": "b15ea3b9e797e01c97cf133e0a960e6d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/motion-library.md": {
+    "mtime": 1787748312.5070584,
+    "ast_hash": "c89dc3202bd004bd73b5f95e02314455",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/quality-checklist.md": {
+    "mtime": 1787748312.509571,
+    "ast_hash": "161b68456218069aefe26c6045b784d0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/scene-defaults.md": {
+    "mtime": 1787748312.5045538,
+    "ast_hash": "19500832980376c494d3efc85fdd3c01",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/scroll-story-patterns.md": {
+    "mtime": 1787748312.5055532,
+    "ast_hash": "a82e32248d1b4b778a81c453dbfc5505",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/style-seeds.md": {
+    "mtime": 1787748312.4985318,
+    "ast_hash": "2f68638d81370b452a6aa92262f56540",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/references/text-decoration-rules.md": {
+    "mtime": 1787748312.5010371,
+    "ast_hash": "20588c5f58753235e1dc3a01d51320ac",
+    "semantic_hash": ""
+  },
+  ".zcode/plans/plan-sess_5b2b6bb5-fe25-4bb9-b2d5-bf187cfdf39c.md": {
+    "mtime": 1787748266.8526359,
+    "ast_hash": "b41d647efc1072650baff10a1d37fd23",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/01.webp": {
+    "mtime": 1787748312.375244,
+    "ast_hash": "77a6b72237a3f8fe7eee1b268c90a553",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/02.webp": {
+    "mtime": 1787748312.3812592,
+    "ast_hash": "e459d4b82a6ea6c7fe7e1e0e81032d00",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/03.webp": {
+    "mtime": 1787748312.3772445,
+    "ast_hash": "921ce282a1a42d9247cb7ee9af1d17e9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/04.webp": {
+    "mtime": 1787748312.3787484,
+    "ast_hash": "3a50d8a322f4f9b09decdd19f72e7201",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/05.webp": {
+    "mtime": 1787748312.380753,
+    "ast_hash": "73660941337bab0f82e6ecfc45742641",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/06.webp": {
+    "mtime": 1787748312.374244,
+    "ast_hash": "c68cdf531bbe8c4f5e56766b01653dd7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/07.webp": {
+    "mtime": 1787748312.3832593,
+    "ast_hash": "a46d164888c8a9a5636dd6a8dd574e8c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/08.webp": {
+    "mtime": 1787748312.4125566,
+    "ast_hash": "d827a494db51ee742f01895c02e0711a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/09.webp": {
+    "mtime": 1787748312.4230814,
+    "ast_hash": "64be3a6e7c6add30e2e0c99c19c82954",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/10.webp": {
+    "mtime": 1787748312.4145613,
+    "ast_hash": "6b0fd7fbed2cec0a090ad08fdd0a2b40",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/11.webp": {
+    "mtime": 1787748312.3897648,
+    "ast_hash": "38ca3eb0d3f98f6fe157f544a86f9e2e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/12.webp": {
+    "mtime": 1787748312.398839,
+    "ast_hash": "c884630a8682f4f01918008d1638c648",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/13.webp": {
+    "mtime": 1787748312.4361236,
+    "ast_hash": "56310507b1dff22239b65ecd2fc9b457",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/14.webp": {
+    "mtime": 1787748312.4073486,
+    "ast_hash": "430e557eac6870761458b4f57b463627",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/15.webp": {
+    "mtime": 1787748312.3923278,
+    "ast_hash": "05309b5f8239df2938f9c376d0a924c0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/16.webp": {
+    "mtime": 1787748312.4321232,
+    "ast_hash": "46849e996dd9e89c89ea796a4236ed2c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/17.webp": {
+    "mtime": 1787748312.4155614,
+    "ast_hash": "70fd53e51b93888b3d5f68b9b1b8b999",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/18.webp": {
+    "mtime": 1787748312.401347,
+    "ast_hash": "4b398df75868bce7635ec96c7db2796e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/19.webp": {
+    "mtime": 1787748312.4170656,
+    "ast_hash": "e46d001222ea900851da8ad4c32d622e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/20.webp": {
+    "mtime": 1787748312.4185705,
+    "ast_hash": "62f749d095dcc9da98e19fb739debb55",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/21.webp": {
+    "mtime": 1787748312.388762,
+    "ast_hash": "a4c2d156adeef049cea5688b1eb0b4b4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/22.webp": {
+    "mtime": 1787748312.4240823,
+    "ast_hash": "860a7f0ec86a1f4fe0804732e185c099",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/23.webp": {
+    "mtime": 1787748312.419575,
+    "ast_hash": "cca4dba08096481485f5a341e5708515",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/24.webp": {
+    "mtime": 1787748312.4286108,
+    "ast_hash": "073cec2b94d1b48f5b0da42366ae5d3f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/25.webp": {
+    "mtime": 1787748312.429615,
+    "ast_hash": "776dda16862e102e64502a63713b3445",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/26.webp": {
+    "mtime": 1787748312.4270859,
+    "ast_hash": "ce3ca312035914753c3bbb16233a3402",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/27.webp": {
+    "mtime": 1787748312.3842604,
+    "ast_hash": "489a925881df98f1930a48fd5e98ac4c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/28.webp": {
+    "mtime": 1787748312.4083488,
+    "ast_hash": "dcea449f81f24bb1f22cdf71cb8b32c9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/29.webp": {
+    "mtime": 1787748312.4351244,
+    "ast_hash": "e881ca1b568c95188df95259d3e6e71d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/30.webp": {
+    "mtime": 1787748312.4095397,
+    "ast_hash": "42f47d3253d3d77c38bf6b92e73b8c1a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/31.webp": {
+    "mtime": 1787748312.4023488,
+    "ast_hash": "d8986f3c91b4dbee8dcb5aaf4423c77c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/32.webp": {
+    "mtime": 1787748312.4311187,
+    "ast_hash": "8cd7a2fc6ef3e9e8a0ee9b9207faeb47",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/33.webp": {
+    "mtime": 1787748312.3933334,
+    "ast_hash": "ac01a3db91b424c15250d47ca37e1441",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/34.webp": {
+    "mtime": 1787748312.3862603,
+    "ast_hash": "fe15b500698ebf98805cc5f1ed6ab6a6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/35.webp": {
+    "mtime": 1787748312.3943324,
+    "ast_hash": "0cda5623b1ed0c77e627945aa8bfeb6c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/36.webp": {
+    "mtime": 1787748312.3963327,
+    "ast_hash": "650e844381fa889788a3b432be970f0f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/37.webp": {
+    "mtime": 1787748312.4033477,
+    "ast_hash": "6c0c85a0b0ba76914f0ccc95e074c890",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/38.webp": {
+    "mtime": 1787748312.397333,
+    "ast_hash": "a5c47b9a9732548dc7f21bba192eb68e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/39.webp": {
+    "mtime": 1787748312.3872597,
+    "ast_hash": "0a2baa94b68d7af63958228114d41474",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/40.webp": {
+    "mtime": 1787748312.405349,
+    "ast_hash": "512c869ffae319a69ee59f22b2d45ed9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/41.webp": {
+    "mtime": 1787748312.4250815,
+    "ast_hash": "8686055ced0f34cd42cf10b9e2f2db69",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/optimized/42.webp": {
+    "mtime": 1787748312.4210787,
+    "ast_hash": "5378ea7482a117f1dabca0127f6be8ed",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/preview/avatar.webp": {
+    "mtime": 1787748312.372124,
+    "ast_hash": "ee7cf1fdd438ae4e9edda1b42ebb784e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design/docs/images/preview/hero.webp": {
+    "mtime": 1787748312.3696141,
+    "ast_hash": "0db5d0711bd388c14f8a2357b0e96c47",
+    "semantic_hash": ""
+  },
+  "functions/api/trends.js": {
+    "mtime": 1787770284.8621883,
+    "ast_hash": "759c39cf44e664f600ae48422b67a8dc",
+    "semantic_hash": ""
+  },
+  "functions/trends_data.js": {
+    "mtime": 1787751656.710608,
+    "ast_hash": "eaedc7c7372d611b9b58f7b696b02c7a",
+    "semantic_hash": ""
+  },
+  "docs/guide.html": {
+    "mtime": 1787774011.5629501,
+    "ast_hash": "949939ed18841ce01ef9ca95ef30a65d",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260826_125311_launcher_mainwindow_axaml_visual_hig_pass.md": {
+    "mtime": 1787748791.4500413,
+    "ast_hash": "36d85ad3ab933051ee75b64f7d34e6f0",
+    "semantic_hash": ""
+  },
+  "docs/assets/logo.png": {
+    "mtime": 1787750969.8135793,
+    "ast_hash": "001fe194b3a2bd4c947c0c3a2b5a97c6",
+    "semantic_hash": ""
+  },
+  "docs/assets/og-cover.png": {
+    "mtime": 1787750969.8496666,
+    "ast_hash": "845aa7d97fae9be0f64fd8d9ff0ca622",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260826_140348_launcher_hig_remaining__ram_selected__logout_confi.md": {
+    "mtime": 1787753028.9954822,
+    "ast_hash": "4bef4ee56255b9061d927a382fee60b4",
+    "semantic_hash": ""
+  },
+  "launcher/src/AquaTechLauncher/Assets/hero.jpg": {
+    "mtime": 1787753508.8885753,
+    "ast_hash": "8e25163628fbca876e74bca37d34b7a1",
+    "semantic_hash": ""
+  },
+  "scripts/tasks/scan_quest_items.py": {
+    "mtime": 1787761159.1989675,
+    "ast_hash": "0b3f201ab0e518c48b9ff1f82bd9683d",
+    "semantic_hash": ""
+  },
+  "tools/quests/build_mod_tabs.py": {
+    "mtime": 1787769472.8610232,
+    "ast_hash": "a20aff7b29a248a153521cc1cd5603b6",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260826_141737_loliland_style_aquatech_launcher_layout.md": {
+    "mtime": 1787753857.7809305,
+    "ast_hash": "a3fe55504214e95966cdb60f8eb9bbb4",
+    "semantic_hash": ""
+  },
+  "scripts/tasks/check_quest_rewards.py": {
+    "mtime": 1787761199.2748535,
+    "ast_hash": "e0a8fc899ad088ef86f3c2816d9cf213",
+    "semantic_hash": ""
+  },
+  "scripts/tasks/dump_quest_rewards.py": {
+    "mtime": 1787763753.6522844,
+    "ast_hash": "9ad1c7b53091c93034d0a98d649809fe",
+    "semantic_hash": ""
+  },
+  "tools/quests/useful_rewards.py": {
+    "mtime": 1787766184.3766923,
+    "ast_hash": "deb8cbb50b0b2e98172d380d9600204b",
+    "semantic_hash": ""
+  },
+  "docs/market.html": {
+    "mtime": 1787774011.56495,
+    "ast_hash": "98ea84c58dd8ef0acf3e885b161fbbd6",
+    "semantic_hash": ""
+  },
+  "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/MariaStats.java": {
+    "mtime": 1787772453.9503798,
+    "ast_hash": "e8071d3a5b660754cac2bc9c46d115e1",
+    "semantic_hash": ""
+  },
+  "scripts/tasks/setup_apex_daily_reload.py": {
+    "mtime": 1787772703.832878,
+    "ast_hash": "b284aef5a16e1e867604c8cfb4231181",
+    "semantic_hash": ""
+  },
+  "scripts/tasks/sftp_stats_fix.py": {
+    "mtime": 1787772524.0204222,
+    "ast_hash": "b506314141294d51f6c94bb2cf9a179a",
+    "semantic_hash": ""
+  },
+  "scripts/tasks/fix_quest_era_gates.py": {
+    "mtime": 1787775417.060649,
+    "ast_hash": "f3991db2b3a6da94b1a4f62bd57d7cc6",
+    "semantic_hash": ""
+  },
+  "scripts/tasks/wrap_ch1_rewards.py": {
+    "mtime": 1787775516.9229612,
+    "ast_hash": "638da2243525cfb8b7ae0a120c3b531f",
     "semantic_hash": ""
   }
 }

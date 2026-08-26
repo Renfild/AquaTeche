@@ -34,7 +34,7 @@ const CHAPTER_REWARDS = {
         coins: 2500,
         keys: 3,
         keyName: "Ключ от Технологического Кейса",
-        trophyItem: "industrialupgrade:basemachine2/compressor",
+        trophyItem: "industrialupgrade:compressor/compressor",
         trophyName: "§9⚡ Трофей: Энергетический Инженер ⚡",
         desc: "Полностью освоена Базовая Электрическая Эра!"
     },

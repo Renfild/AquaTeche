@@ -45,7 +45,8 @@ DEPLOY_SECRETS = ROOT / ".apex_deploy.json"
 # Remote paths (relative to SFTP root) -> filename prefixes that must be unique.
 # After upload, delete remote jars with these prefixes that are not in the local keep-set.
 FIRST_PARTY_PURGE: dict[str, tuple[str, ...]] = {
-    "mods": ("aquatech_ui-", "aqualumen-", "packetfixer-"),
+    "mods": ("aquatech_ui-", "aqualumen-", "packetfixer-", "Chunky"),
+    "plugins": ("Chunky",),
 }
 
 HOST = "g-pl-3.apexnodes.xyz"
@@ -67,7 +68,7 @@ SKIP_DIRS = {
     "client",
     "world",
 }
-SKIP_DIR_PREFIXES = ("world_backup", "_backup", "_uuid_migrate")
+SKIP_DIR_PREFIXES = ("world_backup", "_backup", "_uuid_migrate", "_disabled")
 SKIP_FILES = {"Arclight-1.20.1.jar", "Mohist-1.20.1.jar"}
 
 
@@ -269,6 +270,19 @@ def inject_mysql_secrets(stage: Path) -> None:
         patched += 1
     if patched:
         print(f"  injected MySQL secrets into {patched} staged config(s)", flush=True)
+    cfg_dir = stage / "config"
+    cfg_dir.mkdir(parents=True, exist_ok=True)
+    mysql_json = {
+        "host": secrets["host"],
+        "port": int(secrets["port"]),
+        "database": secrets["database"],
+        "username": secrets["username"],
+        "password": secrets["password"],
+    }
+    (cfg_dir / "aquatech_mysql.json").write_text(
+        json.dumps(mysql_json, indent=2) + "\n", encoding="utf-8"
+    )
+    print("  staged config/aquatech_mysql.json", flush=True)
 
 
 def stage_tree() -> Path:
@@ -395,7 +409,11 @@ def upload_tree(local_root: Path) -> None:
             print(f"  uploaded {uploaded} (skip {skipped}) last={rel}", flush=True)
 
     print(f"OK SFTP upload: {uploaded} new/changed, {skipped} unchanged", flush=True)
-    purge_stale_first_party(sftp)
+    only = _only_prefixes()
+    if only and not any(p == "mods" or p.startswith("mods/") for p in only):
+        print("skip first-party jar purge (SFTP_ONLY has no mods/)", flush=True)
+    else:
+        purge_stale_first_party(sftp)
     sftp.close()
     transport.close()
 

@@ -21,6 +21,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -223,6 +224,9 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         int upgradeRate = (upgradeStack.getItem() instanceof RateModItem r) ? r.getMultiplier() : 1;
         int effectiveRate = Math.max(1, Math.max(rodRate, upgradeRate));
 
+        if (nearby instanceof ServerPlayer serverPlayer) {
+            FishingLootHandler.bumpCatchStat(serverPlayer);
+        }
         List<ItemStack> loot = FishingLootHandler.generateLoot(rodType, level.getRandom(), rodStack, nearby, effectiveRate);
 
         for (ItemStack drop : loot) {

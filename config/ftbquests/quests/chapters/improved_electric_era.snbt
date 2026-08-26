@@ -2,22 +2,39 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "improved_electric_era"
-	group: ""
+	group: "ERA0000000000001"
 	icon: "industrialupgrade:basemachine3/pallet_generator"
 	id: "5CB739BB1BDB799A"
 	order_index: 4
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["799AE4C1FE0064F3"]
 			description: [
 				"Электрический лазерный полировщик. Точно обрабатывает"
 				"кристаллы и детали, которым нужна чистая поверхность."
 			]
 			id: "2F3318CF641E793D"
 			rewards: [{
-				id: "F95523DDA6229FBB"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "C5E1D291BB04073A"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "727BE79553336325"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
+				type: "item"
+			},{
+				id: "E655F2090246D6A8"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "00848F8EAB0BC20A"
@@ -26,7 +43,10 @@
 			}]
 			tasks: [{
 				id: "0361FE368316CB82"
-				item: "industrialupgrade:basemachine3/laser_polisher"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/laser_polisher"
+				}
 				type: "item"
 			}]
 			title: "Лазерный полировщик"
@@ -41,9 +61,25 @@
 			]
 			id: "62DB17D90A3021C8"
 			rewards: [{
-				id: "972F7D53DFE62856"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "85D187DD09231BAC"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "2778654CB24EBCBC"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
+				type: "item"
+			},{
+				id: "C3FCF6690F7A9B60"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "60D14D0BD066ADF1"
@@ -52,7 +88,10 @@
 			}]
 			tasks: [{
 				id: "07783CDD8C256C74"
-				item: "industrialupgrade:moremachine3/farmer"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:moremachine3/farmer"
+				}
 				type: "item"
 			}]
 			title: "Автономная ферма"
@@ -67,9 +106,25 @@
 			]
 			id: "0DE9504EB3737C7E"
 			rewards: [{
-				id: "F03B0482B35E3041"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "ECB3AD6CD90F773F"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "6377F54F3D86F01E"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
+				type: "item"
+			},{
+				id: "87F6E987D228F173"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "D1F8E2FC1CA430B8"
@@ -78,7 +133,10 @@
 			}]
 			tasks: [{
 				id: "C1CE87E49ECB1F5D"
-				item: "industrialupgrade:fertilizer"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:fertilizer"
+				}
 				type: "item"
 			}]
 			title: "Удобрение"
@@ -94,9 +152,25 @@
 			]
 			id: "AAF0D8A675B13EE8"
 			rewards: [{
-				id: "F5C51C7C904FFB7D"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "F23402C3C545F24E"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "DF2C92489E1E642B"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
+				type: "item"
+			},{
+				id: "ACF51A0CA4929001"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "72C60B083569242E"
@@ -105,7 +179,10 @@
 			}]
 			tasks: [{
 				id: "796A3F87FC950879"
-				item: "industrialupgrade:basemachine3/single_multi_crop"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/single_multi_crop"
+				}
 				type: "item"
 			}]
 			title: "Одиночная агроферма"
@@ -113,6 +190,7 @@
 			y: -1.0d
 		}
 		{
+			optional: true
 			dependencies: ["2F3318CF641E793D"]
 			description: [
 				"Карьер для щёлочноземельных ресурсов. Добывает"
@@ -121,9 +199,25 @@
 			]
 			id: "D3F183ED3D2ABCEE"
 			rewards: [{
-				id: "28B7069DA9FE68B7"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "E3931AB10A20890B"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "797678440846D9E9"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "83C8AEB3B2E2C663"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
 				type: "item"
 			},{
 				id: "7E30501C02F444D1"
@@ -132,7 +226,10 @@
 			}]
 			tasks: [{
 				id: "CCDF132F8CF9914D"
-				item: "industrialupgrade:basemachine3/alkalineearthquarry"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/alkalineearthquarry"
+				}
 				type: "item"
 			}]
 			title: "Щёлочноземельный рудник"
@@ -140,7 +237,8 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["D3F183ED3D2ABCEE"]
+			dependencies: ["2F3318CF641E793D"]
+
 			description: [
 				"Стальная сетка для фильтрации и армирования."
 				"Используется в машинах, где материал нужно просеять или"
@@ -148,9 +246,25 @@
 			]
 			id: "8FE8B5654AAE3F5A"
 			rewards: [{
-				id: "DD37CEA646D5F1DD"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "971009FE596CD585"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "9CD777FF6716141F"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "7560D16967392E42"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
 				type: "item"
 			},{
 				id: "124ACDAA40D44209"
@@ -159,7 +273,10 @@
 			}]
 			tasks: [{
 				id: "5E18ACF5E59165FF"
-				item: "industrialupgrade:mesh/steelmesh"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:mesh/steelmesh"
+				}
 				type: "item"
 			}]
 			title: "Steelmesh"
@@ -174,9 +291,25 @@
 			]
 			id: "56246C18C422E34C"
 			rewards: [{
-				id: "113448D38A514561"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "6BACAE74212F8D13"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "6987BDC80E3B093B"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:battery/re_battery"
+				}
+				type: "item"
+			},{
+				id: "60DCC3692F9885CB"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "75184087C31397F7"
@@ -185,7 +318,10 @@
 			}]
 			tasks: [{
 				id: "CCA8410D354A87B3"
-				item: "industrialupgrade:baseore1/lithium"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:baseore1/lithium"
+				}
 				type: "item"
 			}]
 			title: "Литиевая пыль"
@@ -201,9 +337,25 @@
 			]
 			id: "B5DB958756F4FC3E"
 			rewards: [{
-				id: "22A0A5F0F8DF6D29"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "4EF5776BFF0C3434"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "911879375C0AF015"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:battery/re_battery"
+				}
+				type: "item"
+			},{
+				id: "3C7E90BB461650DD"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "BB44FA8BCC964C74"
@@ -212,7 +364,10 @@
 			}]
 			tasks: [{
 				id: "7711021F63E54AD8"
-				item: "industrialupgrade:battery/re_battery1"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:battery/re_battery1"
+				}
 				type: "item"
 			}]
 			title: "Rebattery"
@@ -228,9 +383,25 @@
 			]
 			id: "F2969B60F0B9B13F"
 			rewards: [{
-				id: "E7EA515EEF69EE71"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "5AEC9F17BFEACB49"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "77ADEE43101A9409"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "A99887EDB9E6ED13"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
 				type: "item"
 			},{
 				id: "978E2CDF096E7668"
@@ -239,7 +410,10 @@
 			}]
 			tasks: [{
 				id: "8D4A3B47F6BF5F55"
-				item: "industrialupgrade:tools/multiblock_planner"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:tools/multiblock_planner"
+				}
 				type: "item"
 			}]
 			title: "Планировщик многоблочных структур"
@@ -254,9 +428,25 @@
 			]
 			id: "7BD2D9ADCEABA098"
 			rewards: [{
-				id: "F71A09FF4D45561E"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "5538FDAF4EEA9D23"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "AAA2AD5974E464E1"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "7DE591A6BED8633F"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "CACDA28B3758690E"
@@ -265,7 +455,10 @@
 			}]
 			tasks: [{
 				id: "AB90216B1B46DDAA"
-				item: "industrialupgrade:crafting_elements/crafting_251_element"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:crafting_elements/crafting_251_element"
+				}
 				type: "item"
 			}]
 			title: "Oilgetter"
@@ -273,6 +466,7 @@
 			y: 0.0d
 		}
 		{
+			optional: true
 			dependencies: ["7BD2D9ADCEABA098"]
 			description: [
 				"Нефтяная буровая установка. Добывает нефть из"
@@ -281,9 +475,25 @@
 			]
 			id: "C6073EA9E2635052"
 			rewards: [{
-				id: "071F0E0C37D69305"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "9E06C62019C12E4E"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "DECFDB603356737F"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "A6B670F8923EF570"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "88A4D6E0F593CFAB"
@@ -292,7 +502,10 @@
 			}]
 			tasks: [{
 				id: "82B080AED9702F05"
-				item: "industrialupgrade:petrol_quarry/petrol_quarry"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:petrol_quarry/petrol_quarry"
+				}
 				type: "item"
 			}]
 			title: "Oilquarry"
@@ -307,9 +520,25 @@
 			]
 			id: "2A7955582C506033"
 			rewards: [{
-				id: "A930BDB35491C2BC"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "A18D2807D61A79CA"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "24A6D7FD8ECA52D6"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "9E15DFFDD2DA2479"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "ABDF1EDF7ED83F81"
@@ -318,7 +547,10 @@
 			}]
 			tasks: [{
 				id: "6DA54588054D0800"
-				item: "industrialupgrade:adv_refiner_item"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_refiner_item"
+				}
 				type: "item"
 			}]
 			title: "Oiladvrefiner"
@@ -334,9 +566,25 @@
 			]
 			id: "B174779ED4C9E3B3"
 			rewards: [{
-				id: "EA1B2028C6D3F48E"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "36E9F3DF4598906F"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "0920A795592ED4CA"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "04A7B7F73EDE0AB0"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "9A841EBC08BCF1DE"
@@ -345,7 +593,10 @@
 			}]
 			tasks: [{
 				id: "3EA40BF59D12C85C"
-				item: "industrialupgrade:adv_cokeoven/adv_coke_oven_output_fluid"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_cokeoven/adv_coke_oven_output_fluid"
+				}
 				type: "item"
 			}]
 			title: "§eЖидкостный выход улучшенной коксовой печи"
@@ -361,9 +612,25 @@
 			]
 			id: "C49A05881C04019E"
 			rewards: [{
-				id: "55E33C2E5341E0B9"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "C7CFB87AB334FFDC"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "11F8D592FA47D7A4"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "CE3B86E431897BFE"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			},{
 				id: "7AB779EFF1F849A9"
@@ -372,7 +639,10 @@
 			}]
 			tasks: [{
 				id: "B17D5BC81409B46B"
-				item: "industrialupgrade:crafting_elements/crafting_40_element"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:crafting_elements/crafting_40_element"
+				}
 				type: "item"
 			}]
 			title: "Dosimeter"
@@ -387,9 +657,25 @@
 			]
 			id: "DE9673A9D652CE27"
 			rewards: [{
-				id: "CB1AB01135CB2F5E"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "277CE8E3D5CB7160"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "4539FE03E330E2E9"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "72F0C8A6C1867C5D"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			},{
 				id: "5C7492927A106BB0"
@@ -398,7 +684,10 @@
 			}]
 			tasks: [{
 				id: "D3BE1660B4C6381F"
-				item: "industrialupgrade:tools/radioprotector"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:tools/radioprotector"
+				}
 				type: "item"
 			}]
 			title: "Radioprotector"
@@ -414,9 +703,25 @@
 			]
 			id: "BE0F3CB885527429"
 			rewards: [{
-				id: "39CE7008F9DCE2B7"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "DF525A711DDA3B52"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "C8B6A0B721B3BF02"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "F73FD630D70D5F20"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			},{
 				id: "EB6344BD16305A2D"
@@ -425,7 +730,10 @@
 			}]
 			tasks: [{
 				id: "7B2F97A99DC13FE6"
-				item: "industrialupgrade:armour/hazmat_leggings"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:armour/hazmat_leggings"
+				}
 				type: "item"
 			}]
 			title: "Защитные штаны"
@@ -441,9 +749,25 @@
 			]
 			id: "5CDD60C29B5FD0FF"
 			rewards: [{
-				id: "0360763D2D700F09"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "F11E6DFDBD9E2530"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "A809AB65A5ECF621"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "90D94D25E0E1FF68"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "2DA654974156D0EB"
@@ -452,7 +776,10 @@
 			}]
 			tasks: [{
 				id: "5D68509232CFFDED"
-				item: "industrialupgrade:basemachine3/reactor_rod_factory"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/reactor_rod_factory"
+				}
 				type: "item"
 			}]
 			title: "Производитель реакторных стержней"
@@ -468,9 +795,25 @@
 			]
 			id: "A95A3062BBB49E76"
 			rewards: [{
-				id: "5F591136C9562C81"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "C9442A6E86FE6F51"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "8D1E627CEDBAB84F"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "0B01FEE5B2A06155"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "CA9B414A02024F72"
@@ -479,7 +822,10 @@
 			}]
 			tasks: [{
 				id: "A2BDF2E517FA49ED"
-				item: "industrialupgrade:reactors/uranium_fuel_rod"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:reactors/uranium_fuel_rod"
+				}
 				type: "item"
 			}]
 			title: "Урановый стержень"
@@ -495,9 +841,25 @@
 			]
 			id: "01C7138572D04138"
 			rewards: [{
-				id: "15EE895552A50BB6"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "4C5C083185359E62"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "58952E3F2D25BC9D"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "B83ABDCA5DF10242"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "0031843F3E1DDFEA"
@@ -506,7 +868,10 @@
 			}]
 			tasks: [{
 				id: "56CA3E91B665445A"
-				item: "industrialupgrade:bags/lead_box"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bags/lead_box"
+				}
 				type: "item"
 			}]
 			title: "Leadbox"
@@ -521,9 +886,25 @@
 			]
 			id: "C201F274E8EAEEC4"
 			rewards: [{
-				id: "E045443373B4F4C3"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "6C0E9F692F2C6D5F"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "162D9BFB7DFF0DDA"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "485070D039FBCADD"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "ACDDDDCB4B893DD8"
@@ -532,7 +913,10 @@
 			}]
 			tasks: [{
 				id: "274DD9CE0166BA7C"
-				item: "industrialupgrade:pellets/mendelevium_gem_pellet"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:pellets/mendelevium_gem_pellet"
+				}
 				type: "item"
 			}]
 			title: "Пеллета менделеева"
@@ -547,9 +931,25 @@
 			]
 			id: "71B4B29D9B722ADD"
 			rewards: [{
-				id: "D595BE7BA049B924"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "AF804B1C4B5D64F1"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "FCD60DEA16F85266"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "AAB71C15335159E2"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "0DC5F4709F9184D7"
@@ -558,7 +958,10 @@
 			}]
 			tasks: [{
 				id: "5EDBB859F2A3AB6C"
-				item: "industrialupgrade:basemachine3/pallet_generator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/pallet_generator"
+				}
 				type: "item"
 			}]
 			title: "Радиоизотопный термоэлектрический генератор"
@@ -573,9 +976,25 @@
 			]
 			id: "6928EBF0BD4534DF"
 			rewards: [{
-				id: "134A76407D43835A"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "32D4175A1A5C1DB2"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "2244B87BCC4AE0CB"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "F1E12C9C0293B153"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "2BC878AF4058CFF9"
@@ -584,7 +1003,10 @@
 			}]
 			tasks: [{
 				id: "AF338C38EE89F11A"
-				item: "industrialupgrade:radcable/rad_cable_radcable"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:radcable/rad_cable_radcable"
+				}
 				type: "item"
 			}]
 			title: "Radcable"
@@ -600,9 +1022,25 @@
 			]
 			id: "59E975BC6DA45CDD"
 			rewards: [{
-				id: "5DD9840F27AB9C9E"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "5517351426309248"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "27D7E40722895CB4"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "72800FE7D5CE54BC"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "80B1A3368DC184F5"
@@ -611,7 +1049,10 @@
 			}]
 			tasks: [{
 				id: "41D4E53D9F421614"
-				item: "industrialupgrade:basemachine3/reactor_safety_doom"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/reactor_safety_doom"
+				}
 				type: "item"
 			}]
 			title: "Защитный купол реактора"
@@ -627,9 +1068,25 @@
 			]
 			id: "278C67C3AAC40F73"
 			rewards: [{
-				id: "31E5F174D835A11A"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "125260BF61F9753F"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "12DD2BC999158F4B"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "9947AD88422AA2AD"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "921382B9289EC41A"
@@ -638,7 +1095,10 @@
 			}]
 			tasks: [{
 				id: "4C0B29C165771431"
-				item: "industrialupgrade:water_reactors/water_controller"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:water_reactors/water_controller"
+				}
 				type: "item"
 			}]
 			title: "Контроллер жидкостного реактора"
@@ -653,9 +1113,25 @@
 			]
 			id: "A1C8E0F4B2D60917"
 			rewards: [{
-				id: "CF2CB9AB60C82B16"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "6991D09E80FA1523"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "44060BF031F3E888"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "9ED2265975793955"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "B3D9F1A5C7E82B04"
@@ -664,7 +1140,10 @@
 			}]
 			tasks: [{
 				id: "C4E0A2B6D8F93C15"
-				item: "industrialupgrade:gas_reactor/gas_controller"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:gas_reactor/gas_controller"
+				}
 				type: "item"
 			}]
 			title: "Контроллер газового реактора"
@@ -681,9 +1160,25 @@
 			]
 			id: "23CC2A35A948DB47"
 			rewards: [{
-				id: "67A536E583F8C827"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "D128C4C7CD7C5C52"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "3612CAE66EFB9BB3"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "CDA3623780B90DDC"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "F4B0FCF4785DAD7F"
@@ -692,7 +1187,10 @@
 			}]
 			tasks: [{
 				id: "46DDB2DE825EDE44"
-				item: "industrialupgrade:bucket/azurebrilliant"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/azurebrilliant"
+				}
 				type: "item"
 			}]
 			title: "Azurebrilliant"
@@ -708,9 +1206,25 @@
 			]
 			id: "0692F23EACB160BB"
 			rewards: [{
-				id: "C94AEE15A4ED196E"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "79F5D1AF130E821D"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "90433AF62F9A2309"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "E3413ED578F3D1FF"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "E1349CFE262EC658"
@@ -719,7 +1233,10 @@
 			}]
 			tasks: [{
 				id: "B5C6F5052A0B7341"
-				item: "industrialupgrade:bucket/industrialoil"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/industrialoil"
+				}
 				type: "item"
 			}]
 			title: "Industrialoil"
@@ -736,9 +1253,25 @@
 			]
 			id: "72F2BAA173025C75"
 			rewards: [{
-				id: "8FE7A710F2A2735C"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "43A70AAF4F36E462"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "90E52DDC387BAB0E"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "632E9F9178763772"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "7E3C5B6FA4E9595C"
@@ -747,7 +1280,10 @@
 			}]
 			tasks: [{
 				id: "8E7B102B08AA00DE"
-				item: "industrialupgrade:bucket/motoroil"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/motoroil"
+				}
 				type: "item"
 			}]
 			title: "Motoroil"
@@ -762,9 +1298,25 @@
 			]
 			id: "2F87B9005A1ABB02"
 			rewards: [{
-				id: "BC14BCB5A5DD6C37"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "503C5D186586A5E3"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "CA9274913F466B6B"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "4833174273B9E3D8"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:solar_energy"
+				}
 				type: "item"
 			},{
 				id: "844A6F5A52DCA194"
@@ -773,7 +1325,10 @@
 			}]
 			tasks: [{
 				id: "8F3D39C28DFEBE3B"
-				item: "industrialupgrade:basemachine3/solardestiller"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/solardestiller"
+				}
 				type: "item"
 			}]
 			title: "Солнечный опреснитель"
@@ -789,9 +1344,25 @@
 			]
 			id: "D77435DDFB5C4B0C"
 			rewards: [{
-				id: "88F0CDA4F24CD08A"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "F9441DC6F933D96D"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "B481B792917E7F9E"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
+				type: "item"
+			},{
+				id: "1C5451998F44C588"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "5A8A9964B91D8A76"
@@ -800,7 +1371,10 @@
 			}]
 			tasks: [{
 				id: "F7DC55731841A1B0"
-				item: "industrialupgrade:basemachine3/single_fluid_adapter"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/single_fluid_adapter"
+				}
 				type: "item"
 			}]
 			title: "Одиночный жидкостный адаптер"
@@ -816,9 +1390,25 @@
 			]
 			id: "D9257A2C231FDC44"
 			rewards: [{
-				id: "9578A2A162FB8C7C"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "B49CFE3ACF537FCC"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "CA4F9807D3988874"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "7816D77FAF82EA2A"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/iron_plate"
+				}
 				type: "item"
 			},{
 				id: "9ECD08ACD6111215"
@@ -827,7 +1417,10 @@
 			}]
 			tasks: [{
 				id: "66A3B66E038ACDD2"
-				item: "industrialupgrade:basemachine2/gen_obsidian"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine2/gen_obsidian"
+				}
 				type: "item"
 			}]
 			title: "Генератор обсидиана"
@@ -843,9 +1436,25 @@
 			]
 			id: "E3E23D5DDFA3DC7E"
 			rewards: [{
-				id: "0B5FA82B8677805A"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "6D5569C8863C8D20"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "DE6539D580F7A8C5"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "7CC08F8B29AB3780"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "F2CCD3C862F1CA25"
@@ -854,7 +1463,10 @@
 			}]
 			tasks: [{
 				id: "A033586D56C6FE37"
-				item: "industrialupgrade:basemachine2/fisher"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine2/fisher"
+				}
 				type: "item"
 			}]
 			title: "Рыболовная машина"
@@ -870,9 +1482,25 @@
 			]
 			id: "9E6D26F9A5B17D7A"
 			rewards: [{
-				id: "FB017288AD0EF956"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "36D8F8FA81AF0FCD"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "D109F6055404C197"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "2F50B883918102BC"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "82A4F588FF0F80AA"
@@ -881,7 +1509,10 @@
 			}]
 			tasks: [{
 				id: "778E4D0A74E508EE"
-				item: "industrialupgrade:basemachine1/gen_wither"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine1/gen_wither"
+				}
 				type: "item"
 			}]
 			title: "Производитель иссушителей"
@@ -897,9 +1528,25 @@
 			]
 			id: "ACFEE0EF309C24B7"
 			rewards: [{
-				id: "96B61B2552D3313D"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "B906E554027CEC55"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "1041DF8F75E54AF0"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "2530C32C1A6EED4D"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "AC4F020A6836E70A"
@@ -908,7 +1555,10 @@
 			}]
 			tasks: [{
 				id: "1830737E249CBE79"
-				item: "industrialupgrade:cooling_mixture"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:cooling_mixture"
+				}
 				type: "item"
 			}]
 			title: "Cooling Mixture"
@@ -925,9 +1575,25 @@
 			]
 			id: "3D262962E5AD649F"
 			rewards: [{
-				id: "1DD8F69564A29564"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "019018BDD69F3DA8"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "E83C3B36CBEA5188"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "9E9494B4246212B6"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/iron_plate"
+				}
 				type: "item"
 			},{
 				id: "BAB1B2C678508886"
@@ -936,7 +1602,10 @@
 			}]
 			tasks: [{
 				id: "0C444D86DD1E0B8F"
-				item: "industrialupgrade:bucket/construction_foam"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/construction_foam"
+				}
 				type: "item"
 			}]
 			title: "Капсула жидкой строительной пены"
@@ -951,9 +1620,25 @@
 			]
 			id: "D2D4B1F6226FB7A4"
 			rewards: [{
-				id: "AB1898015A2BD412"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "4706AC89A2C881ED"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "E909C56D56AE739D"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "2F9C77FABC44326C"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/iron_plate"
+				}
 				type: "item"
 			},{
 				id: "FA2715CFE33589BA"
@@ -962,7 +1647,10 @@
 			}]
 			tasks: [{
 				id: "C3E2D20729311F54"
-				item: "industrialupgrade:tools/foam_sprayer"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:tools/foam_sprayer"
+				}
 				type: "item"
 			}]
 			title: "Sprayer"
@@ -978,9 +1666,25 @@
 			]
 			id: "D90A492C932B72C4"
 			rewards: [{
-				id: "CB55E05A03B92216"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "EC81EBCA41632312"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "E35D748C79B36673"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
+				type: "item"
+			},{
+				id: "494808EBD59FCCFB"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/iron_plate"
+				}
 				type: "item"
 			},{
 				id: "DF933E56133F1745"
@@ -989,7 +1693,10 @@
 			}]
 			tasks: [{
 				id: "B220AD0F66EC869A"
-				item: "industrialupgrade:blockresource/reinforced_stone"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:blockresource/reinforced_stone"
+				}
 				type: "item"
 			}]
 			title: "Reinforcedstone"
@@ -1005,9 +1712,25 @@
 			]
 			id: "F680D0C05735C0F9"
 			rewards: [{
-				id: "526BAEECE6ABC43E"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "1CC2C8A6C9085D94"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "FCE37B87554DBD1B"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "49EAB6F863CD1C63"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "6CFB37E60478F503"
@@ -1016,7 +1739,10 @@
 			}]
 			tasks: [{
 				id: "5BE17D0BA925DA75"
-				item: "industrialupgrade:simplemachine/generator_matter"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:simplemachine/generator_matter"
+				}
 				type: "item"
 			}]
 			title: "Генератор жидкой материи"
@@ -1032,9 +1758,25 @@
 			]
 			id: "13C48C8BF8457ED2"
 			rewards: [{
-				id: "A4DC4106CB955B82"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "0AA434C5246FD379"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "668EA7559E7ABA5C"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "0D5AA74959FA6206"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "E89C56409A2019DB"
@@ -1043,7 +1785,10 @@
 			}]
 			tasks: [{
 				id: "7CCBB2706D74168B"
-				item: "industrialupgrade:basemachine3/scanner_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/scanner_iu"
+				}
 				type: "item"
 			}]
 			title: "Сканер"
@@ -1058,9 +1803,25 @@
 			]
 			id: "9446095C5697B292"
 			rewards: [{
-				id: "CF74F0AD256C4C73"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "8F7F82FB65E761A9"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "756B38FF23E92EBE"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "C7F3EC7537B3D5B4"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "58503F3DEE939993"
@@ -1069,7 +1830,10 @@
 			}]
 			tasks: [{
 				id: "FBDF021960A67E3B"
-				item: "industrialupgrade:basemachine3/pattern_storage_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/pattern_storage_iu"
+				}
 				type: "item"
 			}]
 			title: "Хранилище шаблонов"
@@ -1085,9 +1849,25 @@
 			]
 			id: "C58353EB69F0E0F5"
 			rewards: [{
-				id: "8FE6F1707A9804A8"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "192F948CB279168F"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "6D94D1DBF96C7C8C"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "56FFB1E1AEAC19AB"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "0B1339D16B92423C"
@@ -1096,7 +1876,10 @@
 			}]
 			tasks: [{
 				id: "1F66DDC6F10AC8D8"
-				item: "industrialupgrade:basemachine3/replicator_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/replicator_iu"
+				}
 				type: "item"
 			}]
 			title: "Репликатор"
@@ -1112,9 +1895,25 @@
 			]
 			id: "FFCCFACF7DEE4F7F"
 			rewards: [{
-				id: "AA606C7B4B3322AA"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "2CC5DF47ACE9E041"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "C56C7EF7A1F21208"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "76B2AA081A876A6B"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "208AC39310C989B6"
@@ -1123,7 +1922,10 @@
 			}]
 			tasks: [{
 				id: "35FBE6E34A843C5E"
-				item: "industrialupgrade:basemachine3/matter_collector"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/matter_collector"
+				}
 				type: "item"
 			}]
 			title: "§dСборщик материи"
@@ -1138,9 +1940,25 @@
 			]
 			id: "93669CFB998127DB"
 			rewards: [{
-				id: "BB37E6A4AB1379C5"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "49F967470D85A938"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "D4DC54C6325CD411"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "D0BBA6570349F68A"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "7D68E349F25F2BF1"
@@ -1149,7 +1967,10 @@
 			}]
 			tasks: [{
 				id: "EFDC6B24D80699B2"
-				item: "industrialupgrade:doublescrapbox"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:doublescrapbox"
+				}
 				type: "item"
 			}]
 			title: "Scrapbox"
@@ -1164,9 +1985,25 @@
 			]
 			id: "26F0A0C89BB68DF5"
 			rewards: [{
-				id: "26FC175386DA8F5E"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "98073B851746B476"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "8EF1855BE7EB745E"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "0367D0F1C7729646"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "52200E3E9CCDDC6A"
@@ -1175,7 +2012,10 @@
 			}]
 			tasks: [{
 				id: "3635CD580C32049D"
-				item: "industrialupgrade:moremachine3/assamplerscrap"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:moremachine3/assamplerscrap"
+				}
 				type: "item"
 			}]
 			title: "Сборщик утильсырья"
@@ -1191,9 +2031,25 @@
 			]
 			id: "806E653ED6B60671"
 			rewards: [{
-				id: "C92D87A0D9EF6D8F"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "FE8F6B70CB83DDB2"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "4C7999C22E76D6FC"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "CAD0B86AAAFA3DEB"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "80B6908EF50E4976"
@@ -1202,7 +2058,10 @@
 			}]
 			tasks: [{
 				id: "217FB61500E16A91"
-				item: "industrialupgrade:upgrades/overclockerupgrade1"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:upgrades/overclockerupgrade1"
+				}
 				type: "item"
 			}]
 			title: "Overclockerupgrade"
@@ -1218,9 +2077,25 @@
 			]
 			id: "B5175FA8FA58F714"
 			rewards: [{
-				id: "711D870AFE4BBF61"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "7B1DE5B104DC72F6"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "19955E349E96EAA2"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "78E42F8772E29156"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "696B81CB37FAEAC3"
@@ -1229,7 +2104,10 @@
 			}]
 			tasks: [{
 				id: "283B434175C129EC"
-				item: "industrialupgrade:upgrades/transformerupgrade1"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:upgrades/transformerupgrade1"
+				}
 				type: "item"
 			}]
 			title: "Transformerupgrade"
@@ -1244,9 +2122,25 @@
 			]
 			id: "59F5CC3C9A10473A"
 			rewards: [{
-				id: "A70D77D0C324224C"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "D6ADEACCEAE9095A"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "D5ED1B732F4CE3DC"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "D9A325ABA25D0EAC"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "E37DE4444447A855"
@@ -1255,7 +2149,10 @@
 			}]
 			tasks: [{
 				id: "8471812B2FDC1078"
-				item: "industrialupgrade:wiring_storage/mfe_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:wiring_storage/mfe_iu"
+				}
 				type: "item"
 			}]
 			title: "МФЭ"
@@ -1270,9 +2167,25 @@
 			]
 			id: "ED042707CA6CCF92"
 			rewards: [{
-				id: "B8D0DCD05DA84BA6"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "C54F2D68882B340E"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "D0BB164243E8DD7B"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:blockresource/machine"
+				}
+				type: "item"
+			},{
+				id: "76508BC9D7B3ABDE"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "24C9826C4836CA5F"
@@ -1281,7 +2194,10 @@
 			}]
 			tasks: [{
 				id: "F1EFE20BDF6A9AA7"
-				item: "industrialupgrade:basemachine3/fluid_trash"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/fluid_trash"
+				}
 				type: "item"
 			}]
 			title: "Мусорный бак для жидкостей"
@@ -1296,9 +2212,25 @@
 			]
 			id: "607668745EE40C65"
 			rewards: [{
-				id: "DD3C005C2D28221F"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "7F22D574AA5D0591"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "90E373C667FA948A"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:blockresource/machine"
+				}
+				type: "item"
+			},{
+				id: "31E1C037E1B2CB6F"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "2FE8848F3D46B43D"
@@ -1307,7 +2239,10 @@
 			}]
 			tasks: [{
 				id: "E4ED88D1F8D3977A"
-				item: "industrialupgrade:basemachine3/energy_trash"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/energy_trash"
+				}
 				type: "item"
 			}]
 			title: "Мусорный бак для энергии"
@@ -1322,9 +2257,25 @@
 			]
 			id: "E66CD5E7EB5C48DF"
 			rewards: [{
-				id: "608933DD8BC21B3A"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "2E91D285B644F87C"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "D7859C48120FC9DD"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:blockresource/machine"
+				}
+				type: "item"
+			},{
+				id: "3AE3A24FD53D88BD"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "B6023E93C1614DB6"
@@ -1333,7 +2284,10 @@
 			}]
 			tasks: [{
 				id: "74C273B96B9F3E31"
-				item: "industrialupgrade:basemachine3/item_trash"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/item_trash"
+				}
 				type: "item"
 			}]
 			title: "Мусорный бак для предметов"
@@ -1349,9 +2303,25 @@
 			]
 			id: "62C29E832ED5F713"
 			rewards: [{
-				id: "8003DC3665D4CC14"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "E29DC279E0B2BED2"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "627335EA9DBB1188"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "572508D4BB3257B4"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:cable/copper_cable"
+				}
 				type: "item"
 			},{
 				id: "95D19F0ED3A4FB6C"
@@ -1360,7 +2330,10 @@
 			}]
 			tasks: [{
 				id: "EAD93B11A7293EBC"
-				item: "industrialupgrade:basemachine2/electrolyzer_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine2/electrolyzer_iu"
+				}
 				type: "item"
 			}]
 			title: "Электролизёр"
@@ -1376,9 +2349,25 @@
 			]
 			id: "6F35DF1E3D454B58"
 			rewards: [{
-				id: "12E1F85E55E77BB5"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "5A6C5F2AEB524443"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "315030CB4513BB9E"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "5E71C5F8A0900405"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "834B1BE28F50D890"
@@ -1387,7 +2376,10 @@
 			}]
 			tasks: [{
 				id: "059E3F3C23B19313"
-				item: "industrialupgrade:basemachine3/enchanter_books"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/enchanter_books"
+				}
 				type: "item"
 			}]
 			title: "Чаровальная машина"
@@ -1403,9 +2395,25 @@
 			]
 			id: "5BDD944A91FAED4E"
 			rewards: [{
-				id: "8B31B00CB717313D"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "60D8EFB606B94E7F"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "A4868307915AA2A3"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "E0717CCBD10877CA"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			},{
 				id: "2F5465386BD27804"
@@ -1414,7 +2422,10 @@
 			}]
 			tasks: [{
 				id: "FEC5ADFD6870A7AF"
-				item: "industrialupgrade:molecular/molecular"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:molecular/molecular"
+				}
 				type: "item"
 			}]
 			title: "Молекулярный преобразователь"
@@ -1429,9 +2440,18 @@
 			]
 			id: "D9C8E233C8A18253"
 			rewards: [{
-				id: "3E8B250DE72428A8"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "87FB1968F8CD29D5"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "F12FCCB5FFDE1C8A"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:machines/hybrid_solar_paneliu"
+				}
 				type: "item"
 			},{
 				id: "0BA96B79EF9AA36D"
@@ -1440,7 +2460,10 @@
 			}]
 			tasks: [{
 				id: "F503280A27CCBB0B"
-				item: "industrialupgrade:machines/advanced_solar_paneliu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:machines/advanced_solar_paneliu"
+				}
 				type: "item"
 			}]
 			title: "§6Улучшенная солнечная панель"
@@ -1455,9 +2478,25 @@
 			]
 			id: "48AA9F5A6B30A2AE"
 			rewards: [{
-				id: "67A6BBC4A4064C1D"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "4EF377C9E0EF3316"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "4ED4583C97F7D980"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:machines/advanced_solar_paneliu"
+				}
+				type: "item"
+			},{
+				id: "7B20D0A5A4F88286"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "5547F890450F584B"
@@ -1466,7 +2505,10 @@
 			}]
 			tasks: [{
 				id: "F34F971099EFF0FF"
-				item: "industrialupgrade:basemachine3/minipanel"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/minipanel"
+				}
 				type: "item"
 			}]
 			title: "Сборщик мини-панели"
@@ -1481,9 +2523,25 @@
 			]
 			id: "19FE800A052DE507"
 			rewards: [{
-				id: "719D19FABC57DA9A"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "C793E0C9BC1A9CA0"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "1B07CFB972E2F878"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "F4EE4D974270F51C"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "86C818E31605A1BA"
@@ -1492,7 +2550,10 @@
 			}]
 			tasks: [{
 				id: "93BC149C31396B78"
-				item: "industrialupgrade:lightning_rod/lightning_rod_controller"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:lightning_rod/lightning_rod_controller"
+				}
 				type: "item"
 			}]
 			title: "Контроллер громоотвода"
@@ -1507,9 +2568,25 @@
 			]
 			id: "14B621FDEB77FA66"
 			rewards: [{
-				id: "0DD5746F3EBBA530"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "D34B5B2F49F8294E"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "A3467B094771BFAF"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "E6192A93F21032D3"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/energy_crystal"
+				}
 				type: "item"
 			},{
 				id: "954EA76E25CDB511"
@@ -1518,7 +2595,10 @@
 			}]
 			tasks: [{
 				id: "89A8165D995BBD55"
-				item: "industrialupgrade:basemachine3/matter_factory"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/matter_factory"
+				}
 				type: "item"
 			}]
 			title: "Производитель активной массы"
@@ -1533,9 +2613,25 @@
 			]
 			id: "2B388CEFECBC3A38"
 			rewards: [{
-				id: "BFA90A8566E2D9C8"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "BDB43C567F4F1062"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "4C9CCE87F3894953"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:battery/re_battery"
+				}
+				type: "item"
+			},{
+				id: "0288399EE7293EBB"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "19E0B3634D932631"
@@ -1544,7 +2640,10 @@
 			}]
 			tasks: [{
 				id: "95EE0174B97BED6E"
-				item: "industrialupgrade:basemachine3/battery_factory"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/battery_factory"
+				}
 				type: "item"
 			}]
 			title: "Завод батареек"
@@ -1559,9 +2658,25 @@
 			]
 			id: "8704F0E1FAF5D1C9"
 			rewards: [{
-				id: "FBD234CA9B0DDA16"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "AD4C7764D0B6E8FE"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "F90918C37BE6D348"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:battery/re_battery"
+				}
+				type: "item"
+			},{
+				id: "5EF63BCDD872B571"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "37EA22CE783AA090"
@@ -1570,7 +2685,10 @@
 			}]
 			tasks: [{
 				id: "CE9803DBF0F58846"
-				item: "industrialupgrade:basemachine3/socket_factory"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/socket_factory"
+				}
 				type: "item"
 			}]
 			title: "Завод розеток"
@@ -1586,9 +2704,25 @@
 			]
 			id: "EA09BF3E21A8E9C3"
 			rewards: [{
-				id: "1B525013D0CBE36E"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "055E1E83062A030B"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "A4F902200DBDE361"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:machines/hybrid_solar_paneliu"
+				}
+				type: "item"
+			},{
+				id: "529270EB1BCD20AA"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "EC5E2D5D77805D86"
@@ -1597,7 +2731,10 @@
 			}]
 			tasks: [{
 				id: "D8DCAFC3A98A4F91"
-				item: "industrialupgrade:photoniy_ingot"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:photoniy_ingot"
+				}
 				type: "item"
 			}]
 			title: "Photoniy Ingot"
@@ -1613,9 +2750,25 @@
 			]
 			id: "B98ED7182A53C1CD"
 			rewards: [{
-				id: "7B8F5B494637A731"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "3848A813F6476998"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "18AB2B5A64B61694"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "6A73A69EBAC8EAEB"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "66F869E4243A6185"
@@ -1624,7 +2777,10 @@
 			}]
 			tasks: [{
 				id: "679669CC1F227191"
-				item: "industrialupgrade:basemachine3/aircollector"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/aircollector"
+				}
 				type: "item"
 			}]
 			title: "Воздухоразделительная установка"
@@ -1640,9 +2796,25 @@
 			]
 			id: "024FA4952B6CEE82"
 			rewards: [{
-				id: "E9EA2AE5526EEB00"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "97F18ED6EEDB909E"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "85DAD1402089BA71"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "108C6E1C66834C9C"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "18864E4FD5A1F204"
@@ -1651,7 +2823,10 @@
 			}]
 			tasks: [{
 				id: "B979FF0A2A6005CC"
-				item: "industrialupgrade:basemachine3/soil_analyzer"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/soil_analyzer"
+				}
 				type: "item"
 			}]
 			title: "Анализатор почвы"
@@ -1667,9 +2842,25 @@
 			]
 			id: "4D43E665F35E9965"
 			rewards: [{
-				id: "60573D2018FF265A"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "2CB77E96D2A84216"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "2E95FE54F638ABD1"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "00620A8D7FE48C05"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "550E0FDB0BCA54F9"
@@ -1678,7 +2869,10 @@
 			}]
 			tasks: [{
 				id: "0D490635273BD05E"
-				item: "industrialupgrade:basemachine3/radiation_purifier"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/radiation_purifier"
+				}
 				type: "item"
 			}]
 			title: "Радиационный очиститель"
@@ -1694,9 +2888,25 @@
 			]
 			id: "3C00517AB66CD7FC"
 			rewards: [{
-				id: "358A86CDB8CBAF75"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "81E06D602E97294A"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "92088F0B029A7F73"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "F6A2AEF2B4CA99AA"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "F2085A3709F44994"
@@ -1705,7 +2915,10 @@
 			}]
 			tasks: [{
 				id: "C8ED27BD169B4C94"
-				item: "industrialupgrade:basemachine1/synthesis"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine1/synthesis"
+				}
 				type: "item"
 			}]
 			title: "Реактор ядерного синтеза"
@@ -1721,9 +2934,25 @@
 			]
 			id: "CB974F2CE8DF8A68"
 			rewards: [{
-				id: "05D2761D0EBE5FD0"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "4F6BA5CD1ACAA258"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "6217F58E90A75A25"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "2C88E17B94142E6D"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "699C9C7CB54EF2D2"
@@ -1732,7 +2961,10 @@
 			}]
 			tasks: [{
 				id: "1946EAB31509662D"
-				item: "industrialupgrade:upgrade_speed_creation"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:upgrade_speed_creation"
+				}
 				type: "item"
 			}]
 			title: "Upgrade Speed Creation"
@@ -1748,9 +2980,25 @@
 			]
 			id: "BA82CD2126DBDE5A"
 			rewards: [{
-				id: "322D10FBB5E9F63F"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "96E9993009F1EE58"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "E7B047C0DF5A0D93"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "3C9FC59703539B7F"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "A1B19653409A6109"
@@ -1759,7 +3007,10 @@
 			}]
 			tasks: [{
 				id: "1C9B31948B4918A8"
-				item: "industrialupgrade:pollution_device"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:pollution_device"
+				}
 				type: "item"
 			}]
 			title: "Pollution Scanner"
@@ -1775,9 +3026,25 @@
 			]
 			id: "AA646DF0D37E8D87"
 			rewards: [{
-				id: "1F2982349A4A4160"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "445F10AF192B60DB"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "468DA953C1EB0B54"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "95A30C23239B476C"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			},{
 				id: "ED8EE01ABC44AEB4"
@@ -1786,7 +3053,10 @@
 			}]
 			tasks: [{
 				id: "06E732E3746F5A1E"
-				item: "industrialupgrade:steam_turbine/steam_turbine_controller"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:steam_turbine/steam_turbine_controller"
+				}
 				type: "item"
 			}]
 			title: "Контроллер паровой турбины"
@@ -1794,6 +3064,7 @@
 			y: 5.5d
 		}
 		{
+			optional: true
 			dependencies: ["3C00517AB66CD7FC"]
 			description: [
 				"Исследовательская линза для космического стола."
@@ -1801,9 +3072,25 @@
 			]
 			id: "27DC679A8A001B88"
 			rewards: [{
-				id: "AB234644095332C6"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "106AA164CA384DDE"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "EBAE4A38E363EC09"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "E1659A4C76A2719E"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:imp_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "97DB4D34EBA1A0AA"
@@ -1812,7 +3099,10 @@
 			}]
 			tasks: [{
 				id: "E94D046EFAD399B2"
-				item: "industrialupgrade:research_lens/lens_1"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:research_lens/lens_1"
+				}
 				type: "item"
 			}]
 			title: "§bИсследовательская линза I"
@@ -1820,7 +3110,9 @@
 			y: 4.5d
 		}
 		{
-			dependencies: ["27DC679A8A001B88"]
+			optional: true
+			dependencies: ["3C00517AB66CD7FC"]
+
 			description: [
 				"Космический исследовательский стол работает с линзами"
 				"и образцами небесных тел. Он открывает/обрабатывает"
@@ -1829,9 +3121,25 @@
 			]
 			id: "EB9E69D1A1E78214"
 			rewards: [{
-				id: "AC2716C022C4ACCB"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "0582757DFC9DE11D"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "BF9F2EDABEC2016A"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "51745044D04C7618"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:imp_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "FF5D0E2181F7A585"
@@ -1840,7 +3148,10 @@
 			}]
 			tasks: [{
 				id: "3222C788DFC1E831"
-				item: "industrialupgrade:basemachine3/research_table_space"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/research_table_space"
+				}
 				type: "item"
 			}]
 			title: "Стол космических исследований"
@@ -1848,7 +3159,9 @@
 			y: 4.5d
 		}
 		{
-			dependencies: ["EB9E69D1A1E78214"]
+			optional: true
+			dependencies: ["3C00517AB66CD7FC"]
+
 			description: [
 				"Стартовая площадка принимает ракетное топливо и"
 				"энергию, заправляет и заряжает установленную"
@@ -1858,9 +3171,25 @@
 			]
 			id: "C5CD7EE4E933856E"
 			rewards: [{
-				id: "EBEDE1D957092DAE"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "0D3393E3EA6C0FD3"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "03661FF448CE45AD"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "B8D911ED727D5E15"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:imp_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "3F6ADC1F907982ED"
@@ -1869,7 +3198,10 @@
 			}]
 			tasks: [{
 				id: "07E229CCFCF44D22"
-				item: "industrialupgrade:basemachine3/rocket_launch_pad"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/rocket_launch_pad"
+				}
 				type: "item"
 			}]
 			title: "Ракетная стартовая площадка"
@@ -1877,7 +3209,9 @@
 			y: 4.5d
 		}
 		{
-			dependencies: ["C5CD7EE4E933856E"]
+			optional: true
+			dependencies: ["3C00517AB66CD7FC"]
+
 			description: [
 				"Собирает роверы из корпуса, колёс, модулей и"
 				"электронных частей. Машина формирует готовый предмет"
@@ -1886,9 +3220,25 @@
 			]
 			id: "BC00ED6C1D822D69"
 			rewards: [{
-				id: "05009AB0C2604B93"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "08E9B2622153AD57"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "FE5E11CC742DD6BE"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "700020CD3431E03A"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:imp_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "A7F48C549EEC8A86"
@@ -1897,7 +3247,10 @@
 			}]
 			tasks: [{
 				id: "AAF073645C0BDBD0"
-				item: "industrialupgrade:basemachine3/rover_assembler"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/rover_assembler"
+				}
 				type: "item"
 			}]
 			title: "Сборщик марсоходов"
@@ -1905,7 +3258,9 @@
 			y: 4.5d
 		}
 		{
-			dependencies: ["BC00ED6C1D822D69"]
+			optional: true
+			dependencies: ["3C00517AB66CD7FC"]
+
 			description: [
 				"Собирает исследовательские зонды из корпуса,"
 				"электроники и модулей. Зонд нужен для автоматического"
@@ -1914,9 +3269,25 @@
 			]
 			id: "D5BE26ADF338AF6F"
 			rewards: [{
-				id: "D260D57C6FBB45D5"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "6229D282B405CE73"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "F7FE52070AE9263D"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "2965EE8079C28C28"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:imp_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "768E2460C7AF66D3"
@@ -1925,7 +3296,10 @@
 			}]
 			tasks: [{
 				id: "6AB4305D502E9634"
-				item: "industrialupgrade:basemachine3/probe_assembler"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/probe_assembler"
+				}
 				type: "item"
 			}]
 			title: "Сборщик зондов"
@@ -1933,7 +3307,9 @@
 			y: 3.5d
 		}
 		{
-			dependencies: ["D5BE26ADF338AF6F"]
+			optional: true
+			dependencies: ["3C00517AB66CD7FC"]
+
 			description: [
 				"Собирает спутники из корпуса, электроники и модулей."
 				"Спутник работает как отдельная космическая техника для"
@@ -1941,9 +3317,25 @@
 			]
 			id: "1B71FC3F457177B1"
 			rewards: [{
-				id: "368431A668126483"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "347B2B5A5B2D9271"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "9ADF21829B46C6DD"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "CFAE27E4D068E82D"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:imp_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "628630B4A9F0CDD9"
@@ -1952,7 +3344,10 @@
 			}]
 			tasks: [{
 				id: "D6506AB9FD0EEF5C"
-				item: "industrialupgrade:basemachine3/satellite_assembler"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/satellite_assembler"
+				}
 				type: "item"
 			}]
 			title: "Сборщик спутников"
@@ -1960,7 +3355,9 @@
 			y: 2.5d
 		}
 		{
-			dependencies: ["1B71FC3F457177B1"]
+			optional: true
+			dependencies: ["3C00517AB66CD7FC"]
+
 			description: [
 				"Собирает ракету из корпуса, двигателя, баков и"
 				"модулей. Результат хранит параметры ракеты и"
@@ -1968,9 +3365,25 @@
 			]
 			id: "FA7C62B7FF800B11"
 			rewards: [{
-				id: "A271868EAFD1CD4B"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "AF1055DACEA5A777"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "E5C9C6BCD33FBFBB"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "9A90F945B1B0CAE5"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:imp_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "8A5F27D0375F8AD4"
@@ -1979,7 +3392,10 @@
 			}]
 			tasks: [{
 				id: "76DF763F64309B26"
-				item: "industrialupgrade:basemachine3/rocket_assembler"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/rocket_assembler"
+				}
 				type: "item"
 			}]
 			title: "Сборщик ракет"
@@ -1987,7 +3403,9 @@
 			y: 1.5d
 		}
 		{
-			dependencies: ["BC00ED6C1D822D69"]
+			optional: true
+			dependencies: ["3C00517AB66CD7FC"]
+
 			description: [
 				"Гидразин — базовое ракетное топливо. Принимается"
 				"стартовой площадкой, жидкостным миксером и системой"
@@ -1995,9 +3413,25 @@
 			]
 			id: "04A2AE060E0D6356"
 			rewards: [{
-				id: "E13725A60B25A223"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "E34DCDE67A1F80A8"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "0EFB0807D8FF7378"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "0741B41E7238BBA8"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:imp_solar_energy"
+				}
 				type: "item"
 			},{
 				id: "AB1832A67B814ADA"
@@ -2006,7 +3440,10 @@
 			}]
 			tasks: [{
 				id: "CF177BCBF8026805"
-				item: "industrialupgrade:bucket/hydrazine"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/hydrazine"
+				}
 				type: "item"
 			}]
 			title: "Hydrazine"
@@ -2014,17 +3451,33 @@
 			y: 4.5d
 		}
 		{
-			dependencies: ["04A2AE060E0D6356"]
+			dependencies: ["3C00517AB66CD7FC"]
+
 			description: [
-				"Базовый ровер для работы на поверхности планет."
-				"Перевозит модули и выполняет задачи исследования"
-				"местности."
+				"Очищает загрязнённую почву. Квест открывается после"
+				"реактора ядерного синтеза, без космоса и гидразина."
 			]
 			id: "B969D019BBF81B8E"
 			rewards: [{
-				id: "F5300A9FA19615B8"
-				count: 4
-				item: "industrialupgrade:itemingots/steel_ingot"
+				id: "229E60280F10F1B5"
+				item: {
+					Count: 8b
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			},{
+				id: "8D15EF97598443CA"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:machines/hybrid_solar_paneliu"
+				}
+				type: "item"
+			},{
+				id: "E86F5BCAA3543C5B"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:machines/advanced_solar_paneliu"
+				}
 				type: "item"
 			},{
 				id: "F18B8F5B94889227"
@@ -2033,7 +3486,10 @@
 			}]
 			tasks: [{
 				id: "0710C652F8863FA8"
-				item: "industrialupgrade:basemachine3/purifier_soil"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/purifier_soil"
+				}
 				type: "item"
 			}]
 			title: "Очиститель почвы"

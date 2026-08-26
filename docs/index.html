@@ -8,7 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260819j" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AquaTech" />
+  <meta property="og:title" content="AquaTech · океанский Minecraft 1.20.1" />
+  <meta property="og:description" content="Океанский skyblock: удочки AquaTech добывают руды из воды. Кейсы, аукцион, турниры и меню F4." />
+  <meta property="og:url" content="https://aquateche.store/index.html" />
+  <meta property="og:image" content="https://aquateche.store/assets/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AquaTech · океанский Minecraft 1.20.1" />
+  <meta name="twitter:description" content="Океанский skyblock: удочки AquaTech добывают руды из воды. Кейсы, аукцион, турниры и меню F4." />
+<link rel="stylesheet" href="assets/css/site.css?v=20260826p" />
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">К содержимому</a>
@@ -27,13 +37,26 @@
       <h1 class="reveal" style="--d:.06s"><span class="gradient-aqua">AquaTech</span></h1>
       <p class="hero-lead reveal" style="--d:.12s">Спавн на плоту посреди бесконечного океана. Удочки AquaTech добывают руды прямо из воды, авторыбалка работает пока вы строите, а кейсы и топы ждут в меню F4.</p>
       <div class="hero-actions reveal" style="--d:.18s">
-        <a class="btn btn-primary" href="start.html">Скачать лаунчер</a>
+        <a class="btn btn-primary" data-download href="start.html">Скачать лаунчер</a>
         <a class="btn btn-secondary" href="register.html">Регистрация</a>
-        <a class="btn btn-ghost" href="store.html">Магазин</a>
       </div>
       <div class="hero-status-pill reveal" style="--d:.24s">
         <span class="status-indicator-dot" aria-hidden="true"></span>
         <span>Сервер <span data-online aria-live="polite">…</span> · Ocean Skyblock 1.20.1 · Вход через официальный лаунчер</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal" style="margin-bottom:1rem">
+        <div>
+          <h2>Сегодня в цене</h2>
+          <p>Суточный спрос у Кота и в скупке F4. Множитель действует до полуночи.</p>
+        </div>
+      </div>
+      <div data-trends-home>
+        <p class="muted-line">Загрузка тренда…</p>
       </div>
     </div>
   </section>
@@ -85,6 +108,36 @@
           <h3>Таблица лидеров</h3>
           <p>Рейтинг по пойманной рыбе, балансу монет и лайкам профиля с обновлением в реальном времени.</p>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head reveal" style="margin-bottom:1.25rem">
+        <div>
+          <h2>Аукцион</h2>
+          <p>Живые лоты игроков. Купить можно только в игре через /ah.</p>
+        </div>
+        <a class="btn btn-ghost" href="market.html">Все лоты</a>
+      </div>
+      <div data-market-home>
+        <p class="muted-line">Загрузка лотов…</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head reveal" style="margin-bottom:1rem">
+        <div>
+          <h2>Топ по рыбе</h2>
+          <p>Кто больше поймал. Полный рейтинг — на странице топов.</p>
+        </div>
+        <a class="btn btn-ghost" href="top.html">Весь топ</a>
+      </div>
+      <div class="top-list" data-fish-home>
+        <p class="muted-line">Загрузка топа…</p>
       </div>
     </div>
   </section>
@@ -159,6 +212,6 @@
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js"></script>
+  <script src="assets/js/site.js?v=20260826s"></script>
 </body>
 </html>

@@ -1,22 +1,26 @@
 (() => {
   const IP = "g-pl-3.apexnodes.xyz:21561";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.79/AquaTech.exe";
-  /* portal ui build: nav-cta + online nowrap */
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.80/AquaTech.exe";
+  /* portal ui build: compact header + market lots */
   const CANONICAL = "https://aquateche.store";
   const STORAGE_USER = "aquatech_user";
   const STORAGE_SOUND = "aquatech_sound";
   const API_BASE = "";
 
-  const NAV = [
-    { href: "index.html", label: "Главная", id: "home" },
-    { href: "start.html", label: "Начать игру", id: "start", cta: true },
+  const NAV_PRIMARY = [
     { href: "guide.html", label: "Гайд", id: "guide" },
     { href: "store.html", label: "Магазин", id: "store" },
     { href: "cases.html", label: "Кейсы", id: "cases" },
     { href: "rods.html", label: "Удочки", id: "rods" },
+  ];
+  const NAV_MORE = [
+    { href: "market.html", label: "Аукцион", id: "market" },
     { href: "top.html", label: "Топы", id: "top" },
     { href: "news.html", label: "Новости", id: "news" },
+    { href: "players.html", label: "Игроки", id: "players" },
+    { href: "start.html", label: "Как начать", id: "start" },
+    { href: "rules.html", label: "Правила", id: "rules" },
   ];
 
   const COPY_FIELDS = [
@@ -389,72 +393,92 @@
     });
   }
 
+  function navLink(n, active) {
+    return `<a href="${n.href}" class="${n.id === active ? "active" : ""}">${n.label}</a>`;
+  }
+
+  function soundGlyph(on) {
+    return on
+      ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l5 4V6L7 10H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.3 7a7 7 0 0 1 0 10"/></svg>`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l5 4V6L7 10H4z"/><path d="M16 9l5 6M21 9l-5 6"/></svg>`;
+  }
+
   function renderHeader() {
     const mount = $("#site-header");
     if (!mount) return;
     const user = getUser();
     const active = pageId();
-    const nav = NAV.map((n) => {
-      const classes = [
-        n.id === active ? "active" : "",
-        n.cta ? "nav-cta" : "",
-      ]
-        .filter(Boolean)
-        .join(" ");
-      return `<a href="${n.href}" class="${classes}">${n.label}</a>`;
-    }).join("");
+    const primary = NAV_PRIMARY.map((n) => navLink(n, active)).join("");
+    const moreOpen = NAV_MORE.some((n) => n.id === active);
+    const moreLinks = NAV_MORE.map((n) => navLink(n, active)).join("");
+    const coins =
+      user && user.coins != null
+        ? `<span class="header-coins" title="Монеты">${Number(user.coins).toLocaleString("ru-RU")} ¤</span>`
+        : "";
+    const allMobile = [...NAV_PRIMARY, ...NAV_MORE]
+      .map((n) => navLink(n, active))
+      .join("");
 
     mount.innerHTML = `
-      <div class="site-header">
+      <header class="site-header">
         <div class="container header-inner">
-          <a class="brand" href="index.html"><img src="assets/logo.png" alt="" style="width:26px;height:26px;border-radius:7px;image-rendering:pixelated" /></a>
-          <nav class="nav-desktop">${nav}</nav>
+          <a class="brand" href="index.html"><img src="assets/logo.png" alt="" width="28" height="28" /><span>AquaTech</span></a>
+          <nav class="nav-desktop" aria-label="Основное">
+            ${primary}
+            <details class="nav-more"${moreOpen ? " open" : ""}>
+              <summary>Ещё</summary>
+              <div class="nav-more-panel">${moreLinks}</div>
+            </details>
+          </nav>
           <div class="header-spacer"></div>
           <div class="online-pill" title="Онлайн на сервере"><span class="dot"></span><span data-online aria-live="polite">…</span></div>
-          <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="${soundOn ? "true" : "false"}" title="Звуки интерфейса">${soundOn ? "Звук" : "Без звука"}</button>
+          ${coins}
+          <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="${soundOn ? "true" : "false"}" aria-label="${soundOn ? "Выключить звуки" : "Включить звуки"}" title="Звуки интерфейса">${soundGlyph(soundOn)}</button>
           <div class="header-actions">
             ${
               user
                 ? `${user.is_admin ? '<a class="btn btn-ghost" href="admin.html">Админка</a>' : ""}
-                   <a class="btn btn-secondary" href="profile.html?u=${encodeURIComponent(user.nick)}">${user.nick}</a>
+                   <a class="btn btn-secondary" href="profile.html?u=${encodeURIComponent(user.nick)}">${esc(user.nick)}</a>
                    <button class="btn btn-ghost" type="button" data-logout>Выйти</button>`
-                : `<a class="btn btn-ghost btn-hide-desktop" href="login.html">Войти</a>
-                   <a class="btn btn-secondary" href="login.html">Войти</a>
-                   <a class="btn btn-primary btn-show-mobile" href="start.html">Начать игру</a>`
+                : `<a class="btn btn-secondary" href="login.html">Войти</a>`
             }
-            <button class="menu-btn" type="button" aria-label="Меню" data-menu>
+            <a class="btn btn-primary header-download" data-download href="start.html">Скачать</a>
+            <button class="menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav" data-menu>
               <span></span><span></span><span></span>
             </button>
           </div>
         </div>
-        <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Меню" aria-hidden="true">
           <div class="container">
-            ${nav}
-            <a href="players.html">Поиск игроков</a>
-            <a href="rules.html">Правила</a>
+            <a href="index.html" class="${active === "home" ? "active" : ""}">Главная</a>
+            ${allMobile}
             ${user?.is_admin ? '<a href="admin.html">Админка</a>' : ""}
-            ${user ? "" : '<a href="register.html">Регистрация</a>'}
+            ${
+              user
+                ? `<a href="profile.html?u=${encodeURIComponent(user.nick)}">Профиль</a>
+                   <button type="button" data-logout>Выйти</button>`
+                : '<a href="register.html">Регистрация</a>'
+            }
+            <a class="nav-cta" href="${DOWNLOAD}">Скачать лаунчер</a>
           </div>
         </div>
-      </div>`;
+      </header>`;
 
     const menuBtn = $("[data-menu]", mount);
     const mobileNav = $("#mobile-nav", mount);
     menuBtn?.addEventListener("click", (e) => {
       e.stopPropagation();
-      menuBtn.classList.toggle("active");
-      mobileNav?.classList.toggle("open");
+      setMobileMenu(!mobileNav?.classList.contains("open"));
     });
     mobileNav?.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => {
-        menuBtn?.classList.remove("active");
-        mobileNav?.classList.remove("open");
-      });
+      a.addEventListener("click", () => setMobileMenu(false));
     });
     document.addEventListener("click", (e) => {
       if (!mount.contains(e.target)) {
-        menuBtn?.classList.remove("active");
-        mobileNav?.classList.remove("open");
+        setMobileMenu(false);
+        mount.querySelectorAll("details.nav-more").forEach((d) => {
+          d.removeAttribute("open");
+        });
       }
     });
     $("[data-sound-toggle]", mount)?.addEventListener("click", () => {
@@ -463,19 +487,37 @@
       const btn = $("[data-sound-toggle]", mount);
       if (btn) {
         btn.setAttribute("aria-pressed", soundOn ? "true" : "false");
-        btn.textContent = soundOn ? "Звук" : "Без звука";
+        btn.setAttribute("aria-label", soundOn ? "Выключить звуки" : "Включить звуки");
+        btn.innerHTML = soundGlyph(soundOn);
       }
       if (soundOn) playTone("ok");
     });
-    $("[data-logout]", mount)?.addEventListener("click", async () => {
-      try {
-        await api("/api/logout", { method: "POST", body: "{}" });
-      } catch {
-        /* offline / mirror */
-      }
-      setUser(null);
-      location.href = "index.html";
+    mount.querySelectorAll("[data-logout]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        try {
+          await api("/api/logout", { method: "POST", body: "{}" });
+        } catch {
+          /* offline / mirror */
+        }
+        setUser(null);
+        location.href = "index.html";
+      });
     });
+  }
+
+  function setMobileMenu(open) {
+    const btn = document.querySelector("[data-menu]");
+    const nav = document.getElementById("mobile-nav");
+    if (!btn || !nav) return;
+    btn.classList.toggle("active", open);
+    nav.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    nav.setAttribute("aria-hidden", open ? "false" : "true");
+    if (open) {
+      nav.querySelector("a, button")?.focus();
+    } else if (nav.contains(document.activeElement)) {
+      btn.focus();
+    }
   }
 
   function renderFooter() {
@@ -491,6 +533,7 @@
           <div>
             <h4>Игра</h4>
             <a href="start.html">Скачать лаунчер</a>
+            <a href="market.html">Аукцион</a>
             <a href="rods.html">Удочки AquaTech</a>
             <a href="cases.html">Кейсы</a>
             <a href="store.html">Донат</a>
@@ -581,12 +624,10 @@
       });
     });
 
-    // Global escape key to close modals & menu
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         document.querySelectorAll(".loot-modal-overlay.open").forEach((m) => m.classList.remove("open"));
-        document.querySelector("[data-menu]")?.classList.remove("active");
-        document.getElementById("mobile-nav")?.classList.remove("open");
+        setMobileMenu(false);
       }
     });
   }
@@ -665,7 +706,7 @@
             : mode === "likes"
               ? `${p.likes || 0} ❤`
               : mode === "fish"
-                ? `${p.fish || 0} 🐟`
+                ? `${Number(p.fish || 0).toLocaleString("ru-RU")} рыб`
                 : playtime;
         const priv = cleanPrivilege(p.privilege);
         return `<a class="top-row" href="profile.html?u=${encodeURIComponent(p.nick)}">
@@ -703,7 +744,7 @@
   function initTop() {
     const root = $("#top-root");
     if (!root) return;
-    let mode = "likes";
+    let mode = "fish";
     const render = async () => {
       root.innerHTML = `<p class="muted-line">Загрузка…</p>`;
       try {
@@ -1015,6 +1056,10 @@
       const fd = new FormData(login);
       const nick = String(fd.get("nick") || "").trim();
       const password = String(fd.get("password") || "");
+      const errBox = login.querySelector("[data-auth-error]");
+      const submitBtn = login.querySelector('button[type="submit"]');
+      if (errBox) errBox.textContent = "";
+      if (submitBtn) submitBtn.disabled = true;
       try {
         const data = await api("/api/login", {
           method: "POST",
@@ -1032,11 +1077,14 @@
         }
         location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
       } catch (err) {
+        if (submitBtn) submitBtn.disabled = false;
         if (apiAvailable === false || isMirrorHost()) {
           location.href = `${CANONICAL}/login.html`;
           return;
         }
-        toast(err.message || "Ошибка входа");
+        const msg = err.message || "Ошибка входа";
+        if (errBox) errBox.textContent = msg;
+        toast(msg);
       }
     });
 
@@ -1045,6 +1093,10 @@
       const fd = new FormData(reg);
       const nick = String(fd.get("nick") || "").trim();
       const password = String(fd.get("password") || "");
+      const errBox = reg.querySelector("[data-auth-error]");
+      const submitBtn = reg.querySelector('button[type="submit"]');
+      if (errBox) errBox.textContent = "";
+      if (submitBtn) submitBtn.disabled = true;
       try {
         const data = await api("/api/register", {
           method: "POST",
@@ -1054,11 +1106,14 @@
         toast("Аккаунт создан");
         location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
       } catch (err) {
+        if (submitBtn) submitBtn.disabled = false;
         if (apiAvailable === false || isMirrorHost()) {
           location.href = `${CANONICAL}/register.html`;
           return;
         }
-        toast(err.message || "Ошибка регистрации");
+        const msg = err.message || "Ошибка регистрации";
+        if (errBox) errBox.textContent = msg;
+        toast(msg);
       }
     });
   }
@@ -1167,7 +1222,7 @@
     const btnLabel = kind === "store" ? "Купить — скоро" : "Открыть — в игре (F4)";
     const lootBtn =
       kind === "case"
-        ? `<button class="btn btn-aqua" style="margin-top:0.85rem;width:100%" type="button" data-view-loot="${item.slug}">🔍 Содержимое кейса</button>`
+        ? `<button class="btn btn-aqua" style="margin-top:0.85rem;width:100%" type="button" data-view-loot="${item.slug}">Состав кейса</button>`
         : "";
     return `<div class="card catalog-card">
       <span class="tag ${item.slug === "deluxe" || item.slug === "ultimate" || item.slug === "depth" ? "gold" : ""}">${item.title}</span>
@@ -1279,6 +1334,81 @@
     });
   }
 
+  function renderMarketLots(root, lots, { empty = "Пока нет лотов. Выставь предмет командой /ah sell в игре." } = {}) {
+    if (!root) return;
+    const rows = lots || [];
+    if (!rows.length) {
+      root.innerHTML = `<p class="muted-line">${empty}</p>`;
+      return;
+    }
+    root.innerHTML = `<table class="market-table">
+      <thead><tr><th>Предмет</th><th>Кол-во</th><th>Продавец</th><th>Цена</th></tr></thead>
+      <tbody>
+        ${rows
+          .map(
+            (lot) => `<tr>
+              <td>${esc(lot.label || lot.item_id || "предмет")}</td>
+              <td>${esc(lot.count || 1)}</td>
+              <td>${esc(lot.seller || "—")}</td>
+              <td class="price">${Number(lot.price || 0).toLocaleString("ru-RU")} ¤</td>
+            </tr>`
+          )
+          .join("")}
+      </tbody>
+    </table>`;
+  }
+
+  async function initTrends() {
+    const root = $("[data-trends-home]");
+    if (!root) return;
+    const emptyCopy = "Тренд обновится после полуночи на сервере";
+    try {
+      const data = await api("/api/trends");
+      const rows = Array.isArray(data.trends) ? data.trends : [];
+      if (!rows.length) {
+        root.innerHTML = `<p class="muted-line">${emptyCopy}</p>`;
+        return;
+      }
+      root.innerHTML = `<ul class="trend-list">${rows
+        .map((row) => {
+          const label = esc(row.name || row.id || "рыба");
+          const mult = Number(row.mult) || 1;
+          const shown = Number.isInteger(mult) ? String(mult) : String(mult);
+          return `<li class="trend-row"><span class="trend-name">${label}</span><span class="trend-mult">×${esc(shown)}</span></li>`;
+        })
+        .join("")}</ul>`;
+    } catch {
+      root.innerHTML = `<p class="muted-line">${emptyCopy}</p>`;
+    }
+  }
+
+  async function initHomeFishTop() {
+    const root = $("[data-fish-home]");
+    if (!root) return;
+    try {
+      const players = (await loadPlayers("fish")).slice(0, 3);
+      root.innerHTML = playerRows(players, "fish") || `<p class="muted-line">Пока нет улова в базе.</p>`;
+    } catch {
+      root.innerHTML = `<p class="muted-line">Не удалось загрузить топ.</p>`;
+    }
+  }
+
+  async function initMarket() {
+    const home = $("[data-market-home]");
+    const page = $("[data-market-page]");
+    if (!home && !page) return;
+    const limit = page ? 40 : 6;
+    try {
+      const data = await api(`/api/market/public?limit=${limit}`);
+      const lots = data.lots || [];
+      renderMarketLots(home, lots.slice(0, 6), { empty: "Аукцион пуст. Лоты появляются из игры." });
+      renderMarketLots(page, lots);
+    } catch {
+      renderMarketLots(home, [], { empty: "Аукцион сейчас недоступен." });
+      renderMarketLots(page, [], { empty: "Не удалось загрузить лоты." });
+    }
+  }
+
   function initReveal() {
     const nodes = document.querySelectorAll(".reveal");
     if (!nodes.length) return;
@@ -1304,7 +1434,10 @@
   async function refreshSession() {
     try {
       const data = await api("/api/me");
-      if (data.user) setUser(data.user);
+      if (data.user) {
+        const coins = data.profile && data.profile.coins != null ? data.profile.coins : data.user.coins;
+        setUser({ ...data.user, coins });
+      }
     } catch {
       /* not logged in or no API */
     }
@@ -1640,6 +1773,9 @@
     initAuth();
     initCatalog("store");
     initCatalog("case");
+    await initTrends();
+    await initHomeFishTop();
+    await initMarket();
     await loadSiteContent();
     await initAdmin();
     initReveal();

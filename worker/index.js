@@ -29,6 +29,7 @@ import {
   onRequestGet as syncPlayerGet,
 } from "../functions/api/sync/player.js";
 import { onRequestGet as marketGet, onRequestPost as marketPost } from "../functions/api/market.js";
+import { onRequestGet as trendsGet, onRequestPost as trendsPost } from "../functions/api/trends.js";
 import { onRequestGet as adminMeGet } from "../functions/api/admin/me.js";
 import {
   onRequestGet as adminSettingsGet,
@@ -84,6 +85,11 @@ async function handleApi(request, env) {
     if (method === "GET") return marketGet(ctx(request, env));
     if (method === "POST") return marketPost(ctx(request, env));
   }
+  if (path === "/api/trends") {
+    if (method === "GET") return trendsGet(ctx(request, env));
+    if (method === "POST") return trendsPost(ctx(request, env));
+  }
+  if (path === "/api/market/public" && method === "GET") return marketPublicHandler(ctx(request, env));
   // ensure-nick intentionally returns 410 (open signup footgun)
   if (path === "/api/launcher/ensure-nick" && method === "POST") return launcherEnsureNickPost(ctx(request, env));
   if (path === "/api/launcher/verify-token" && method === "POST") return launcherVerifyTokenPost(ctx(request, env));
@@ -141,6 +147,21 @@ async function handleApi(request, env) {
     status: 404,
     headers: { "content-type": "application/json; charset=utf-8" },
   });
+}
+
+async function marketPublicHandler({ request, env }) {
+  if (!env.DB) return new Response(JSON.stringify({ ok: false, lots: [] }), { status: 503, headers: { "content-type": "application/json" } });
+  const url = new URL(request.url);
+  const limit = Math.min(40, Math.max(1, Number(url.searchParams.get("limit") || 6)));
+  try {
+    const lots = await env.DB
+      .prepare(`SELECT id, seller, label, count, price FROM market_listings WHERE status = 'open' ORDER BY created_at DESC LIMIT ?`)
+      .bind(limit)
+      .all();
+    return new Response(JSON.stringify({ ok: true, lots: lots.results || [] }), { headers: { "content-type": "application/json" } });
+  } catch {
+    return new Response(JSON.stringify({ ok: false, lots: [] }), { headers: { "content-type": "application/json" } });
+  }
 }
 
 export default {

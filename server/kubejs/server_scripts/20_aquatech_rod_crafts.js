@@ -34,7 +34,7 @@ ServerEvents.recipes((event) => {
     // Fish-only: Sky Rod
     event.remove({ output: 'starcatcher:sky_rod' })
     event.shaped('starcatcher:sky_rod', [' PF', ' SG', 'S  '], {
-      P: 'minecraft:phantom_membrane',
+      P: 'minecraft:leather',
       F: 'minecraft:feather',
       G: 'minecraft:gold_ingot',
       S: 'minecraft:string',
@@ -144,7 +144,7 @@ ServerEvents.recipes((event) => {
     event.shaped('starcatcher:alpha_rod', [' N2', ' QR', 'Q 1'], {
       N: 'minecraft:nether_star',
       Q: 'industrialupgrade:alloyingot/osmiridium',
-      1: 'industrialupgrade:asteroidore/asteroid_adamantium_ore',
+      1: 'minecraft:netherite_ingot',
       2: 'minecraft:diamond',
       R: 'starcatcher:magmaforged_rod',
     }).id('aquatech:alpha_rod_craft')

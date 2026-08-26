@@ -1,3 +1,16 @@
 {
-	chapter_groups: [ ]
+	chapter_groups: [
+		{
+			id: "ERA0000000000001"
+			title: "Эпохи"
+		}
+		{
+			id: "MOD0000000000001"
+			title: "Моды"
+		}
+		{
+			id: "END0000000000001"
+			title: "Финал"
+		}
+	]
 }

@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "7D2835D587AABDAB"
-	group: ""
+	group: "ERA0000000000001"
 	icon: {
 		Count: 1
 		id: "starcatcher:bamboo_rod"
@@ -102,8 +102,10 @@
 			id: "1BEDD68EFAD565F6"
 			rewards: [{
 				id: "2BE9EEDD25DEC68B"
-				count: 16
-				item: "minecraft:bread"
+				item: {
+					Count: 16b
+					id: "minecraft:bread"
+				}
 				type: "item"
 			},{
 				id: "19225B287FE1EDC4"
@@ -124,8 +126,10 @@
 			id: "17AA45F8E0EFA0DB"
 			rewards: [{
 				id: "C3957775F7B9DEEF"
-				count: 16
-				item: "minecraft:bread"
+				item: {
+					Count: 16b
+					id: "minecraft:bread"
+				}
 				type: "item"
 			},{
 				id: "02E135B2011FBC0D"
@@ -146,7 +150,10 @@
 			id: "4E0C4D44F804F8D7"
 			rewards: [{
 				id: "24F829A182135206"
-				item: "starcatcher:fisherman_hat_white"
+				item: {
+					Count: 1b
+					id: "starcatcher:fisherman_hat_white"
+				}
 				type: "item"
 			}]
 			tasks: [{
@@ -163,8 +170,10 @@
 			id: "74B58CD30A570FBA"
 			rewards: [{
 				id: "9A1EE964ED896BDE"
-				count: 16
-				item: "minecraft:bread"
+				item: {
+					Count: 16b
+					id: "minecraft:bread"
+				}
 				type: "item"
 			},{
 				command: "/tellraw @p {\"text\":\"Награда хаба пока без монет — экономика в работе\",\"color\":\"aqua\"}"

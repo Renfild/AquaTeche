@@ -73,6 +73,8 @@ cf_token.txt
 *.token
 secrets.json
 .apex_mysql.json
+config/aquatech_mysql.json
+server/config/aquatech_mysql.json
 .apex_deploy.json
 node_modules/
 

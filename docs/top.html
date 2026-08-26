@@ -8,7 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260819j" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AquaTech" />
+  <meta property="og:title" content="Топ игроков · AquaTech" />
+  <meta property="og:description" content="Рейтинг по рыбе, монетам и лайкам в реальном времени." />
+  <meta property="og:url" content="https://aquateche.store/top.html" />
+  <meta property="og:image" content="https://aquateche.store/assets/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Топ игроков · AquaTech" />
+  <meta name="twitter:description" content="Рейтинг по рыбе, монетам и лайкам в реальном времени." />
+<link rel="stylesheet" href="assets/css/site.css?v=20260826p" />
 </head>
 <body data-page="top">
   <a class="skip-link" href="#main">К содержимому</a>
@@ -19,10 +29,11 @@
     <div class="container">
       <div class="eyebrow" data-site="top_eyebrow">Рейтинги</div>
       <h1 data-site="top_title">Топы</h1>
-      <p data-site="top_lead">Кто сколько наиграл, кто накопил монет, кого лайкнули.</p>
+      <p data-site="top_lead">Кто больше поймал рыбы, кто наиграл часов, кто накопил монет.</p>
       <div class="banner"></div>
-      <div class="tabs">
-        <button class="tab active" type="button" data-top-tab="playtime">По онлайну</button>
+      <div class="tabs" role="tablist" aria-label="Сортировка топа">
+        <button class="tab active" type="button" data-top-tab="fish">По рыбе</button>
+        <button class="tab" type="button" data-top-tab="playtime">По онлайну</button>
         <button class="tab" type="button" data-top-tab="coins">По монетам</button>
         <button class="tab" type="button" data-top-tab="likes">По лайкам</button>
       </div>
@@ -32,6 +43,6 @@
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js"></script>
+  <script src="assets/js/site.js?v=20260826s"></script>
 </body>
 </html>

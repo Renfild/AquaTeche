@@ -2,13 +2,14 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "basic_electric_era"
-	group: ""
+	group: "ERA0000000000001"
 	icon: "industrialupgrade:basemachine3/generator_iu"
 	id: "C3D924250B4CCA04"
 	order_index: 3
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["4FE087A7196F1E38"]
 			description: [
 				"Электродвигатель для механизмов с движущимися узлами."
 				"Превращает электрическую энергию в рабочее механическое"
@@ -16,9 +17,25 @@
 			]
 			id: "88FD1F77E2424BA9"
 			rewards: [{
-				id: "96CB68F74DF822F1"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "FBAD6360C1C9E267"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "C7F854F007B88FBF"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "C54BC7261D3C1552"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:cable/copper_cable"
+				}
 				type: "item"
 			},{
 				id: "50390AF813158844"
@@ -27,7 +44,10 @@
 			}]
 			tasks: [{
 				id: "1F1044548937CFB5"
-				item: "industrialupgrade:crafting_elements/crafting_276_element"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:crafting_elements/crafting_276_element"
+				}
 				type: "item"
 			}]
 			title: "Elemotor"
@@ -43,9 +63,25 @@
 			]
 			id: "99DC2ACE3C6E9D2D"
 			rewards: [{
-				id: "4FAF76EC87D93CA1"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "549E56DD2EC409F9"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "52DBA50C9E984C51"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:solar_energy"
+				}
+				type: "item"
+			},{
+				id: "EA9CFEEA5CDCC999"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
 				type: "item"
 			},{
 				id: "0850A0A25A764C3B"
@@ -54,7 +90,10 @@
 			}]
 			tasks: [{
 				id: "29714CD8E30CE3F7"
-				item: "industrialupgrade:basemachine3/fluid_heat"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/fluid_heat"
+				}
 				type: "item"
 			}]
 			title: "Жидкостный нагреватель"
@@ -70,9 +109,25 @@
 			]
 			id: "73817BDF7488C47A"
 			rewards: [{
-				id: "4864BBBBB787AE9C"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "BBAA52D65EAD17B2"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "3ED8086CB66276FC"
+				item: {
+					Count: 12b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
+				type: "item"
+			},{
+				id: "0F0E6BFAC1D24F4C"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "4CD1BF4A32E90300"
@@ -81,7 +136,10 @@
 			}]
 			tasks: [{
 				id: "4F63216FE1385AE6"
-				item: "industrialupgrade:basemachine3/generator_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/generator_iu"
+				}
 				type: "item"
 			}]
 			title: "Генератор"
@@ -96,9 +154,25 @@
 			]
 			id: "24000E117A1BC8E7"
 			rewards: [{
-				id: "96AD3E7365074D20"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "EFEC23479B367D29"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "3C6E84BD1D56F4A4"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:solar_energy"
+				}
+				type: "item"
+			},{
+				id: "EDBA490063DA78EA"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
 				type: "item"
 			},{
 				id: "505C6F71ADD21C52"
@@ -107,7 +181,10 @@
 			}]
 			tasks: [{
 				id: "E2775CBE4BD35833"
-				item: "industrialupgrade:basemachine3/redstone_generator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/redstone_generator"
+				}
 				type: "item"
 			}]
 			title: "Редстоуновый генератор"
@@ -122,9 +199,25 @@
 			]
 			id: "42F4D8BAD85A6D34"
 			rewards: [{
-				id: "60E6D519EDC5D25E"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "3937F3D1F27B62C5"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "8A16862E31833656"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:solar_energy"
+				}
+				type: "item"
+			},{
+				id: "38D95EEA53C36B78"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
 				type: "item"
 			},{
 				id: "72E947AAAAAF456E"
@@ -133,7 +226,10 @@
 			}]
 			tasks: [{
 				id: "6885970D75282C9B"
-				item: "industrialupgrade:basemachine3/geogenerator_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/geogenerator_iu"
+				}
 				type: "item"
 			}]
 			title: "Геотермальный генератор"
@@ -150,9 +246,25 @@
 			]
 			id: "DBC252FB5CEA8804"
 			rewards: [{
-				id: "D6E70DE81487ABF4"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "3237C8AF148D1362"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "F6A71C5546723F3A"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
+				type: "item"
+			},{
+				id: "9C997631CAFC26DD"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
 				type: "item"
 			},{
 				id: "B08C8887E929327B"
@@ -161,7 +273,10 @@
 			}]
 			tasks: [{
 				id: "FAD74B03143F2A5E"
-				item: "industrialupgrade:basemachine3/solid_cooling"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/solid_cooling"
+				}
 				type: "item"
 			}]
 			title: "Твердотельный холодильник"
@@ -178,9 +293,25 @@
 			]
 			id: "13D3DA173A7E2E9C"
 			rewards: [{
-				id: "5F6EEB7DC65D46A5"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "516F36066AB88184"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "1DFBD026876B27D9"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
+				type: "item"
+			},{
+				id: "72FEB246D0ADC4D6"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "C4CCB3CD90DAC23C"
@@ -189,7 +320,10 @@
 			}]
 			tasks: [{
 				id: "2BF07E6DE908B3D6"
-				item: "industrialupgrade:simplemachine/macerator_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:simplemachine/macerator_iu"
+				}
 				type: "item"
 			}]
 			title: "Дробитель"
@@ -204,9 +338,25 @@
 			]
 			id: "750FDD44EB955598"
 			rewards: [{
-				id: "A7D549451DF61DBA"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "FCA3AF373D518B6E"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "4AB87B1011BBD623"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "A887450EC782D8CB"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "8F3148E66FDD0698"
@@ -215,7 +365,10 @@
 			}]
 			tasks: [{
 				id: "F9508CF1D5A0607D"
-				item: "industrialupgrade:basemachine/generator_microchip"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine/generator_microchip"
+				}
 				type: "item"
 			}]
 			title: "Производитель электросхем"
@@ -231,9 +384,25 @@
 			]
 			id: "A13EE50BA7A69347"
 			rewards: [{
-				id: "E9C37BB3D4B77994"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "EC6FCD453A2650A9"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "647BD799356501A8"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/tin_ingot"
+				}
+				type: "item"
+			},{
+				id: "7BEED100D4B56437"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/bronze_ingot"
+				}
 				type: "item"
 			},{
 				id: "034C0771B7D5FB36"
@@ -242,7 +411,10 @@
 			}]
 			tasks: [{
 				id: "24260CCAB725A228"
-				item: "industrialupgrade:basemachine/alloy_smelter"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine/alloy_smelter"
+				}
 				type: "item"
 			}]
 			title: "Завод сплавов"
@@ -258,9 +430,25 @@
 			]
 			id: "72924C850349165D"
 			rewards: [{
-				id: "4C4ED56660464072"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "FFE5C2D139C26F94"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "233FBA722272FBA5"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/tin_ingot"
+				}
+				type: "item"
+			},{
+				id: "9AE766130C6B021C"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/bronze_ingot"
+				}
 				type: "item"
 			},{
 				id: "92467851D58D2DE2"
@@ -269,7 +457,10 @@
 			}]
 			tasks: [{
 				id: "0C19F77DAF11DE0E"
-				item: "industrialupgrade:moremachine3/gearing"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:moremachine3/gearing"
+				}
 				type: "item"
 			}]
 			title: "Механический штамп"
@@ -285,9 +476,25 @@
 			]
 			id: "983AC6DACE8A0631"
 			rewards: [{
-				id: "6DC75C26EB4A7611"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "B55054306B7B0987"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "746B2784FF597193"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "908EBA68E824F26F"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "8842A2A504A97B59"
@@ -296,7 +503,10 @@
 			}]
 			tasks: [{
 				id: "9D23E27E53756A71"
-				item: "industrialupgrade:basemachine3/electronic_assembler"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/electronic_assembler"
+				}
 				type: "item"
 			}]
 			title: "Электрический сборщик электроники"
@@ -312,9 +522,25 @@
 			]
 			id: "C8DEA151D843252C"
 			rewards: [{
-				id: "28CAF8F07EDAA36E"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "7B0F39F0B9351F62"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "E242839D278E7376"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
+				type: "item"
+			},{
+				id: "90D601428D743E59"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "AB2D6D7F26517CE7"
@@ -323,7 +549,10 @@
 			}]
 			tasks: [{
 				id: "517E77B59E996D3E"
-				item: "industrialupgrade:basemachine2/plastic_creator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine2/plastic_creator"
+				}
 				type: "item"
 			}]
 			title: "Химический завод"
@@ -338,9 +567,25 @@
 			]
 			id: "A6691D21115DA4F4"
 			rewards: [{
-				id: "9CAD9514FBCD1B5C"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "46E90D3F917FCD17"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "86EB475B76315DAC"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
+				type: "item"
+			},{
+				id: "9B45C718FB51C8B9"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "A9A2CACF57F4EB38"
@@ -349,7 +594,10 @@
 			}]
 			tasks: [{
 				id: "CC0F503F3B20F13E"
-				item: "industrialupgrade:basemachine2/plastic_plate_creator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine2/plastic_plate_creator"
+				}
 				type: "item"
 			}]
 			title: "Пластавтомат"
@@ -365,9 +613,25 @@
 			]
 			id: "61B76B1B868E31AC"
 			rewards: [{
-				id: "378589D2A4EE4D23"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "9E47193B085029E3"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "A3B483BB3C43522F"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemingots/tin_ingot"
+				}
+				type: "item"
+			},{
+				id: "97BCBFC1BF837840"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/bronze_ingot"
+				}
 				type: "item"
 			},{
 				id: "2CC2882D81BE06CA"
@@ -376,7 +640,10 @@
 			}]
 			tasks: [{
 				id: "62F91D9A3C839058"
-				item: "industrialupgrade:basemachine3/welding"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/welding"
+				}
 				type: "item"
 			}]
 			title: "Сварочный аппарат"
@@ -392,9 +659,25 @@
 			]
 			id: "A033AE3E6490258D"
 			rewards: [{
-				id: "6D5E53A6D12AB219"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "398FF6EE9DCDC385"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "DB088FD9798E5D69"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
+				type: "item"
+			},{
+				id: "A31E3CFE13F0FA30"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "B3A7E0D24C6B5BB7"
@@ -403,7 +686,10 @@
 			}]
 			tasks: [{
 				id: "CCCB06C6F0C3B93E"
-				item: "industrialupgrade:moremachine3/orewashing"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:moremachine3/orewashing"
+				}
 				type: "item"
 			}]
 			title: "Рудопромывочный механизм"
@@ -419,9 +705,25 @@
 			]
 			id: "45FE28E0C85DBD89"
 			rewards: [{
-				id: "E690782130207718"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "08579CD670459C9C"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "0B18991BAFE3A7A6"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "6F2D3F8CE403F1D7"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "6168085AAB941038"
@@ -430,7 +732,10 @@
 			}]
 			tasks: [{
 				id: "42BD2EEED797232C"
-				item: "industrialupgrade:itemdust/silver_nitrate_dust"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:itemdust/silver_nitrate_dust"
+				}
 				type: "item"
 			}]
 			title: "Nitrate Dust"
@@ -446,9 +751,25 @@
 			]
 			id: "CE8AC3297B006176"
 			rewards: [{
-				id: "8615F23244ADACFF"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "00A280B95F3B45D7"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "0F675FC0ADEE28E6"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "6F967A2B53114249"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
 				type: "item"
 			},{
 				id: "A62AF051869E9132"
@@ -457,7 +778,10 @@
 			}]
 			tasks: [{
 				id: "86CCCF10478FD93C"
-				item: "industrialupgrade:basemachine3/item_divider"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/item_divider"
+				}
 				type: "item"
 			}]
 			title: "Разделитель предметов"
@@ -475,9 +799,25 @@
 			]
 			id: "F6C31C15134FFDD9"
 			rewards: [{
-				id: "35E91E391829E634"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "42679F1A9BBC1BD5"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "B12A939DEADBD6DA"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "9AD2F890EB58A564"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "63A30E4398240727"
@@ -486,7 +826,10 @@
 			}]
 			tasks: [{
 				id: "7EBCE1AB6813AF17"
-				item: "industrialupgrade:bucket/nitrogen"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/nitrogen"
+				}
 				type: "item"
 			}]
 			title: "Nitrogen"
@@ -502,9 +845,25 @@
 			]
 			id: "2BC7CD881137838B"
 			rewards: [{
-				id: "58E310FB24A69808"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "6C72A3632EB2615F"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "B1030DA45E5BCD63"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "931E17E8D56C32B6"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "212C4AAB6C14C395"
@@ -513,7 +872,10 @@
 			}]
 			tasks: [{
 				id: "51D757931B2B9E42"
-				item: "industrialupgrade:crafting_elements/crafting_273_element"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			}]
 			title: "Прогресс в сфере электроники"
@@ -529,9 +891,25 @@
 			]
 			id: "357306B2CC87180A"
 			rewards: [{
-				id: "5342D2F42F69D87A"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "CC31DCC26B34135F"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "1B0485E2CC2D8B50"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "00A8A6507E488759"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "7F59499489A78551"
@@ -540,7 +918,10 @@
 			}]
 			tasks: [{
 				id: "4043AB69A6FF2B75"
-				item: "industrialupgrade:tools/gas_sensor"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:tools/gas_sensor"
+				}
 				type: "item"
 			}]
 			title: "Газовый сенсор"
@@ -558,9 +939,25 @@
 			]
 			id: "F8E0F213C9BFA65D"
 			rewards: [{
-				id: "D4EFEE1630EB27D8"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "CED0ABCB0D9B98DF"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "CFC81E6AF7D0BCDB"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "8C75B657E243FF58"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "932C7ED53714E601"
@@ -569,7 +966,10 @@
 			}]
 			tasks: [{
 				id: "80BCFB9B469A924D"
-				item: "industrialupgrade:veingas/gas"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:veingas/gas"
+				}
 				type: "item"
 			}]
 			title: "Капсула природного газа"
@@ -585,9 +985,25 @@
 			]
 			id: "1C09993DEE54F858"
 			rewards: [{
-				id: "AC33995643ADEBC7"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "10F459F261FF5C76"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "73749DA701547A1B"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "14D89D78E392C649"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/tin_ingot"
+				}
 				type: "item"
 			},{
 				id: "CFBFFA2ABF59053E"
@@ -596,7 +1012,10 @@
 			}]
 			tasks: [{
 				id: "E9E8C01629D193A5"
-				item: "industrialupgrade:basemachine3/triple_solid_mixer"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/triple_solid_mixer"
+				}
 				type: "item"
 			}]
 			title: "Тройной твердотельный смеситель"
@@ -611,9 +1030,25 @@
 			]
 			id: "28B7C75AE358808E"
 			rewards: [{
-				id: "A1D82F79DA917D20"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "45CF5F696B1D9567"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "E8A3830D31ACB191"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "78019B726F81B98E"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "1943A611265CF151"
@@ -622,7 +1057,10 @@
 			}]
 			tasks: [{
 				id: "8697147661D281CA"
-				item: "industrialupgrade:basemachine3/gas_combiner"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/gas_combiner"
+				}
 				type: "item"
 			}]
 			title: "Газовый смеситель"
@@ -639,9 +1077,25 @@
 			]
 			id: "F27D8C4C6EAB010E"
 			rewards: [{
-				id: "D9A21D398BFDC48E"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "EA43F632A16EE02A"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "381DA535D5553F71"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "185F3D6593D9C505"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "E5C86E7B52120942"
@@ -650,7 +1104,10 @@
 			}]
 			tasks: [{
 				id: "1741CAC9F87E3845"
-				item: "industrialupgrade:bucket/nitrogenhydride"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/nitrogenhydride"
+				}
 				type: "item"
 			}]
 			title: "Nitrogenhydride"
@@ -666,9 +1123,25 @@
 			]
 			id: "1EFB906202F540D6"
 			rewards: [{
-				id: "474A9A2BABF19DE6"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "6E552E270A3907BC"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "D70505F6864BB080"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "924CBCF9554D6E27"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "C1B2A63C9BFACA94"
@@ -677,7 +1150,10 @@
 			}]
 			tasks: [{
 				id: "EB6B69BB8D33B20E"
-				item: "industrialupgrade:bucket/nitrogenoxy"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/nitrogenoxy"
+				}
 				type: "item"
 			}]
 			title: "Nitrogenoxy"
@@ -694,9 +1170,25 @@
 			]
 			id: "C296046069988CBA"
 			rewards: [{
-				id: "A092CB209D37DE42"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "0DEAB3C49ED28305"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "7B3A736F8FE61E39"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "F14891BA86AEB6CB"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "248B695942525682"
@@ -705,7 +1197,10 @@
 			}]
 			tasks: [{
 				id: "B022251A9BD7227E"
-				item: "industrialupgrade:bucket/nitrogendioxide"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/nitrogendioxide"
+				}
 				type: "item"
 			}]
 			title: "Nitrogendioxide"
@@ -722,9 +1217,25 @@
 			]
 			id: "38272CF1D763C507"
 			rewards: [{
-				id: "F60FC82EE27E1EF3"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "22FFC052D73E9F44"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "0E90E3DD7B5B52FF"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "146BA0DAC5FDC0E6"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "C5F29273A8F592D8"
@@ -733,7 +1244,10 @@
 			}]
 			tasks: [{
 				id: "20CD80BE48CC8B5B"
-				item: "industrialupgrade:bucket/nitricacid"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/nitricacid"
+				}
 				type: "item"
 			}]
 			title: "Nitricacid"
@@ -749,9 +1263,25 @@
 			]
 			id: "5E8AB35F4E8DD999"
 			rewards: [{
-				id: "C146FCD7049ED1F4"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "FB13AFEA8CDE6CF3"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "B51D6CDD7E1FC607"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "CBF7D19CD56A4419"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
 				type: "item"
 			},{
 				id: "E407DF9D149A98F4"
@@ -760,7 +1290,10 @@
 			}]
 			tasks: [{
 				id: "84C56C5523AB97A4"
-				item: "industrialupgrade:basemachine3/fluid_integrator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/fluid_integrator"
+				}
 				type: "item"
 			}]
 			title: "Жидкостный интегратор"
@@ -776,9 +1309,25 @@
 			]
 			id: "B19A488BA4A08C26"
 			rewards: [{
-				id: "075D38B0C1A7BF5B"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "58EDB863F6A336A3"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "C938FFEBD4315996"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "884E83D4F62B5CAB"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "67892232E7E29696"
@@ -787,7 +1336,10 @@
 			}]
 			tasks: [{
 				id: "6519A83E6FADF72D"
-				item: "industrialupgrade:itemdust/silver_nitrate_dust"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:itemdust/silver_nitrate_dust"
+				}
 				type: "item"
 			}]
 			title: "Silver Nitrate Dust"
@@ -803,9 +1355,25 @@
 			]
 			id: "1C1310227D7615E1"
 			rewards: [{
-				id: "FD6EAF5B2A76C3D2"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "5735D89ADCB1BA7B"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "CBFC04B45B722316"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "D300F0242373AB98"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "ACA4FDDA7C740A9C"
@@ -814,7 +1382,10 @@
 			}]
 			tasks: [{
 				id: "38524A0A4670A71D"
-				item: "industrialupgrade:crushed/uranium"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:crushed/uranium"
+				}
 				type: "item"
 			}]
 			title: "Crushed Uranium Ore"
@@ -830,9 +1401,25 @@
 			]
 			id: "D1018CF80447C906"
 			rewards: [{
-				id: "EDA1552BA69B18C3"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "3C4CB3E0F6D0F077"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "DDC95349581C841B"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "46EC3438F06369CF"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "948BCDCA09C638E5"
@@ -841,7 +1428,10 @@
 			}]
 			tasks: [{
 				id: "BE1B9C356B716804"
-				item: "industrialupgrade:basemachine3/radioactive_handler_ore"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/radioactive_handler_ore"
+				}
 				type: "item"
 			}]
 			title: "Обработчик радиоактивных руд"
@@ -857,9 +1447,25 @@
 			]
 			id: "1BED57C8DBECDE55"
 			rewards: [{
-				id: "36203B4022BFF4B6"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "93AF191B322D876F"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "A7CC941A9DDA462C"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "2BF204C5C715351E"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "0297D2C5B39A0FF4"
@@ -868,7 +1474,10 @@
 			}]
 			tasks: [{
 				id: "4B6E584F54DD8E7E"
-				item: "industrialupgrade:basemachine3/industrial_ore_purifier"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/industrial_ore_purifier"
+				}
 				type: "item"
 			}]
 			title: "Промышленный очиститель радиоактивных элементов"
@@ -883,9 +1492,25 @@
 			]
 			id: "B14D92B593F9CD31"
 			rewards: [{
-				id: "8BFBF208846F3DAB"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "2BA7FF65CB1BD1BD"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "08DDD52DDCC5B8E2"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "9AC047545AFB9B88"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "F4D653BCFA81F4C8"
@@ -894,7 +1519,10 @@
 			}]
 			tasks: [{
 				id: "1813ACED2FBBD8B2"
-				item: "industrialupgrade:crafting_elements/crafting_79_element"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:crafting_elements/crafting_79_element"
+				}
 				type: "item"
 			}]
 			title: "Se Sensor"
@@ -910,9 +1538,25 @@
 			]
 			id: "3B0F2ECE1A75F6F6"
 			rewards: [{
-				id: "9AC2ADB129FA54C7"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "E8F1A32600D92287"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "E7B55EA2D4B65AE6"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "ECF0993D010E8B34"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:solar_energy"
+				}
 				type: "item"
 			},{
 				id: "1303943A09084D38"
@@ -921,7 +1565,10 @@
 			}]
 			tasks: [{
 				id: "7388ACCB8253AB4B"
-				item: "industrialupgrade:se_gen/se_gen"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:se_gen/se_gen"
+				}
 				type: "item"
 			}]
 			title: "Генератор солнечной энергии"
@@ -937,9 +1584,25 @@
 			]
 			id: "6105DBB6478C49AC"
 			rewards: [{
-				id: "6DE586938F76E4AC"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "B7C66DE5281CA982"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "35B374154FD772F1"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "CB300D9FA9D78EC7"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:solar_energy"
+				}
 				type: "item"
 			},{
 				id: "12044D9C898187B8"
@@ -948,7 +1611,10 @@
 			}]
 			tasks: [{
 				id: "83998E99F601B58D"
-				item: "industrialupgrade:gen_sunnarium_plate/gen_sunnarium_plate"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:gen_sunnarium_plate/gen_sunnarium_plate"
+				}
 				type: "item"
 			}]
 			title: "Производитель соларитовых пластин"
@@ -964,9 +1630,25 @@
 			]
 			id: "D22067CB871EBDF4"
 			rewards: [{
-				id: "053EAF5DA5D5A9FD"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "1684C52E102B74C8"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "3EF04DD6319772B8"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "C24BF80B55AAA9C1"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:solar_energy"
+				}
 				type: "item"
 			},{
 				id: "BE9CF9B236DB693A"
@@ -975,7 +1657,10 @@
 			}]
 			tasks: [{
 				id: "6C13856764EB668F"
-				item: "industrialupgrade:gen_sunnarium/gen_sunnarium"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:gen_sunnarium/gen_sunnarium"
+				}
 				type: "item"
 			}]
 			title: "Преобразователь соларита"
@@ -990,9 +1675,25 @@
 			]
 			id: "DD6B862E63F89E24"
 			rewards: [{
-				id: "D023FB59CBDF46F9"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "C6083FF313A70DC0"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "24350BB61151ED0F"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
+				type: "item"
+			},{
+				id: "E67F24A44F689C00"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "C0D5434DF0862DA6"
@@ -1001,7 +1702,10 @@
 			}]
 			tasks: [{
 				id: "8864DFE28BBC2F64"
-				item: "industrialupgrade:crafting_elements/crafting_482_element"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:crafting_elements/crafting_482_element"
+				}
 				type: "item"
 			}]
 			title: "Calcium Carbide"
@@ -1018,9 +1722,25 @@
 			]
 			id: "9DD6EBABA0617216"
 			rewards: [{
-				id: "CB2A03D379D83586"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "D22752F164291DF6"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "0E3F12C609D2E7E5"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
+				type: "item"
+			},{
+				id: "73D6AF3040A0C4F7"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "15080630CFF18F4D"
@@ -1029,7 +1749,10 @@
 			}]
 			tasks: [{
 				id: "CDA8C4B4533E0DF9"
-				item: "industrialupgrade:bucket/acetylene"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/acetylene"
+				}
 				type: "item"
 			}]
 			title: "Acetylene"
@@ -1044,9 +1767,25 @@
 			]
 			id: "B085471586AE40E2"
 			rewards: [{
-				id: "525535C4EB389A2C"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "6734C790526A9FDD"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "9B306CC6129A1CBA"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
+				type: "item"
+			},{
+				id: "6C74A8213BD0DC2E"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "DA9B79344BE8D0D2"
@@ -1055,7 +1794,10 @@
 			}]
 			tasks: [{
 				id: "3AA698D6B7DB806D"
-				item: "industrialupgrade:basemachine3/polymerizer"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/polymerizer"
+				}
 				type: "item"
 			}]
 			title: "Полимеризатор"
@@ -1071,9 +1813,25 @@
 			]
 			id: "C5C0800BF6B10AE0"
 			rewards: [{
-				id: "2377D1EB524C719C"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "DA5A1FB4E11E3E8B"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "86C81480AA231A9A"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "B7ABEC1641584A77"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
 				type: "item"
 			},{
 				id: "D3E3A3D16A33D037"
@@ -1082,7 +1840,10 @@
 			}]
 			tasks: [{
 				id: "55D57A8B69A1E2E2"
-				item: "industrialupgrade:basemachine3/solid_fluid_integrator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/solid_fluid_integrator"
+				}
 				type: "item"
 			}]
 			title: "Твердотельно-жидкостный интегратор"
@@ -1099,9 +1860,25 @@
 			]
 			id: "A838C8A6F515242A"
 			rewards: [{
-				id: "C4AFA54056D63938"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "21C349E27D50B067"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "ED45040B6121CFCE"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "7E2887F69004BBAD"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
 				type: "item"
 			},{
 				id: "D12D6C79D706B06F"
@@ -1110,7 +1887,10 @@
 			}]
 			tasks: [{
 				id: "94C94EF8825E0B00"
-				item: "industrialupgrade:bucket/polyeth"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/polyeth"
+				}
 				type: "item"
 			}]
 			title: "Капсула полиэтилена"
@@ -1126,9 +1906,25 @@
 			]
 			id: "C134596A2847102C"
 			rewards: [{
-				id: "B7BB74F569ED3F1F"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "839165158306C758"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "80CF4B18B1E82B9A"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "5FCF7D73CCB06492"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
 				type: "item"
 			},{
 				id: "4F049B38AEDB9984"
@@ -1137,7 +1933,10 @@
 			}]
 			tasks: [{
 				id: "D493CC6E0F177824"
-				item: "industrialupgrade:basemachine3/fluid_separator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/fluid_separator"
+				}
 				type: "item"
 			}]
 			title: "Разделитель жидкостей"
@@ -1154,9 +1953,25 @@
 			]
 			id: "9782B3DD9CC9C20B"
 			rewards: [{
-				id: "148F34EAA2B3A991"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "2D4C59858C696A6C"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "A06BC2018E1BD4A0"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "130F08C0CBCBB081"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
 				type: "item"
 			},{
 				id: "04287A22CD2DF1E2"
@@ -1165,7 +1980,10 @@
 			}]
 			tasks: [{
 				id: "B31178DD127F4922"
-				item: "industrialupgrade:bucket/propane"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/propane"
+				}
 				type: "item"
 			}]
 			title: "Propane"
@@ -1182,9 +2000,25 @@
 			]
 			id: "538788328ABBC550"
 			rewards: [{
-				id: "10459930CFA1D396"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "435F5C61EE7F4832"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "4E95FEFF09B6901C"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "747BDE060A3583FD"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
 				type: "item"
 			},{
 				id: "D9CD16982F2C3297"
@@ -1193,7 +2027,10 @@
 			}]
 			tasks: [{
 				id: "B4168763501C4946"
-				item: "industrialupgrade:bucket/bromine"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/bromine"
+				}
 				type: "item"
 			}]
 			title: "Капсула брома"
@@ -1210,9 +2047,25 @@
 			]
 			id: "2D6C8C48444CD65F"
 			rewards: [{
-				id: "930A78BCD852A593"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "DE72D54AECCD47F6"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "52B4A95052FB3231"
+				item: {
+					Count: 8b
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			},{
+				id: "C67BAC93504F9793"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
 				type: "item"
 			},{
 				id: "C3327D1240004A25"
@@ -1221,7 +2074,10 @@
 			}]
 			tasks: [{
 				id: "DB98248CAB6CA493"
-				item: "industrialupgrade:bucket/propylene"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:bucket/propylene"
+				}
 				type: "item"
 			}]
 			title: "Propylene"
@@ -1236,9 +2092,25 @@
 			]
 			id: "2E45AB1DF8FBFDF9"
 			rewards: [{
-				id: "EDC1266FC21876DF"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "2152985C444376F5"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "E96FC1F3940DF45E"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
+				type: "item"
+			},{
+				id: "BC0298B34C2086D9"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "DE66CD507EED4128"
@@ -1247,7 +2119,10 @@
 			}]
 			tasks: [{
 				id: "C6188EE95D312A00"
-				item: "industrialupgrade:plast"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:plast"
+				}
 				type: "item"
 			}]
 			title: "Plast"
@@ -1262,9 +2137,25 @@
 			]
 			id: "5175E3A701EA616F"
 			rewards: [{
-				id: "EC074C28F06F7EA7"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "A30CEAEC90CC6271"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "DD4A82C97E4D084A"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				}
+				type: "item"
+			},{
+				id: "3060DAF5DD397851"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
 				type: "item"
 			},{
 				id: "6148D18F1B91475F"
@@ -1273,7 +2164,10 @@
 			}]
 			tasks: [{
 				id: "5097FC75E8D3BD8A"
-				item: "industrialupgrade:plastic_plate"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:plastic_plate"
+				}
 				type: "item"
 			}]
 			title: "Пластина из пластика"
@@ -1289,9 +2183,25 @@
 			]
 			id: "3735C4550BB9B8D5"
 			rewards: [{
-				id: "71173D69B23F95AD"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "B2EB663D8676842F"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "6DF502A452293F43"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "2091F38F50F62BA3"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			},{
 				id: "5552FC9A5D9F52EB"
@@ -1300,7 +2210,10 @@
 			}]
 			tasks: [{
 				id: "5F4F480498E8B5FC"
-				item: "industrialupgrade:basemachine1/handler_ho"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine1/handler_ho"
+				}
 				type: "item"
 			}]
 			title: "Минеральный сепаратор"
@@ -1316,9 +2229,25 @@
 			]
 			id: "278F088E5D98751E"
 			rewards: [{
-				id: "C7C16A8E945F2D95"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "99DEDAA9C464CCDB"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "9C09EB9A68E12F09"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				}
+				type: "item"
+			},{
+				id: "D1FA4552244D9D19"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			},{
 				id: "033DA45C283E6ECE"
@@ -1327,7 +2256,10 @@
 			}]
 			tasks: [{
 				id: "6BA71E79C2C04018"
-				item: "industrialupgrade:refiner/refiner"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:refiner/refiner"
+				}
 				type: "item"
 			}]
 			title: "Нефтеперерабатывающий завод"
@@ -1342,9 +2274,25 @@
 			]
 			id: "1C4E0ED47D883109"
 			rewards: [{
-				id: "FB2C4BB751187B8C"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "464480F66DA88FF8"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "35C9231AE4A1982D"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:solar_energy"
+				}
+				type: "item"
+			},{
+				id: "EE1AAD795B0E7BEA"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
 				type: "item"
 			},{
 				id: "15D6D937790D6D4F"
@@ -1353,7 +2301,10 @@
 			}]
 			tasks: [{
 				id: "C3009FBC9435E2C8"
-				item: "industrialupgrade:basemachine2/gen_disel"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine2/gen_disel"
+				}
 				type: "item"
 			}]
 			title: "Дизельный генератор"
@@ -1368,9 +2319,25 @@
 			]
 			id: "F281DDBD646F4766"
 			rewards: [{
-				id: "1B4D197D5685135A"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "8A206D23BD224FB7"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "23D4DD3E3186204E"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:solar_energy"
+				}
+				type: "item"
+			},{
+				id: "09B1F817F71B014A"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
 				type: "item"
 			},{
 				id: "1E275A403D8969A5"
@@ -1379,7 +2346,10 @@
 			}]
 			tasks: [{
 				id: "3B2C1B21281B9C88"
-				item: "industrialupgrade:basemachine2/gen_pet"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine2/gen_pet"
+				}
 				type: "item"
 			}]
 			title: "Бензиновый генератор"
@@ -1398,9 +2368,25 @@
 			]
 			id: "CAD7D0B48983F146"
 			rewards: [{
-				id: "92B3D6E8B1AF7564"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "6200B3365D072E98"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "1221B25A34BBF2FC"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
+				type: "item"
+			},{
+				id: "A4D70E3E8FE69E99"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
 				type: "item"
 			},{
 				id: "F893DC2ABA44BD4A"
@@ -1409,7 +2395,10 @@
 			}]
 			tasks: [{
 				id: "ED775DB7CDB056B5"
-				item: "industrialupgrade:basemachine3/fluid_cooling"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/fluid_cooling"
+				}
 				type: "item"
 			}]
 			title: "Жидкостный холодильник"
@@ -1424,9 +2413,25 @@
 			]
 			id: "8F33E996B5A870FE"
 			rewards: [{
-				id: "43DCF47B3A351E89"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "22E27D05F19A7296"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "6562BF5B7438DCC8"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:solar_energy"
+				}
+				type: "item"
+			},{
+				id: "FF37827137E05BA4"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
 				type: "item"
 			},{
 				id: "735222828A3C95C2"
@@ -1435,7 +2440,10 @@
 			}]
 			tasks: [{
 				id: "CDF3E6E9A9311DE6"
-				item: "industrialupgrade:basemachine3/simple_wind_generator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/simple_wind_generator"
+				}
 				type: "item"
 			}]
 			title: "Ветрогенератор"
@@ -1450,9 +2458,25 @@
 			]
 			id: "067A4697E35A6736"
 			rewards: [{
-				id: "230369D3F7C365B8"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "B6A940F830C3DE07"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "00083CFAECEC768F"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:solar_energy"
+				}
+				type: "item"
+			},{
+				id: "D3283C2A9BC7E9DD"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:battery/re_battery"
+				}
 				type: "item"
 			},{
 				id: "418066CD639B95FA"
@@ -1461,7 +2485,10 @@
 			}]
 			tasks: [{
 				id: "E24AD3C95891B750"
-				item: "industrialupgrade:basemachine3/simple_water_generator"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/simple_water_generator"
+				}
 				type: "item"
 			}]
 			title: "Гидрогенератор"
@@ -1476,9 +2503,25 @@
 			]
 			id: "5F8C3F6E8340DA0E"
 			rewards: [{
-				id: "2B978FE1332337D3"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "6F668EF2550D554C"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "7C9BE949A69E4838"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
+				type: "item"
+			},{
+				id: "022E0085312B83A3"
+				item: {
+					Count: 8b
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			},{
 				id: "D1A8E5532ABEE837"
@@ -1487,7 +2530,10 @@
 			}]
 			tasks: [{
 				id: "0DE09D4039CC9FA4"
-				item: "industrialupgrade:basemachine1/adv_alloy_smelter"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine1/adv_alloy_smelter"
+				}
 				type: "item"
 			}]
 			title: "§eУлучшенный завод сплавов"
@@ -1503,9 +2549,25 @@
 			]
 			id: "5E905126EB2E29EE"
 			rewards: [{
-				id: "0B82BEE2D1A3C9D0"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "7B5C3B0D1DCA1D58"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "EC0C7DBE15E318ED"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
+				type: "item"
+			},{
+				id: "1B5D473252BC67D7"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "F4B601DEFDFA5578"
@@ -1514,7 +2576,10 @@
 			}]
 			tasks: [{
 				id: "42F3539F90B8D99E"
-				item: "industrialupgrade:moremachine3/centrifuge_iu"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:moremachine3/centrifuge_iu"
+				}
 				type: "item"
 			}]
 			title: "Тепловая центрифуга"
@@ -1530,9 +2595,25 @@
 			]
 			id: "054BAD57C456097C"
 			rewards: [{
-				id: "C8710CCAC1F64A81"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "F12E291B586A3C7E"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "1BFF04C5FA8005FD"
+				item: {
+					Count: 16b
+					id: "industrialupgrade:itemplates/tin_plate"
+				}
+				type: "item"
+			},{
+				id: "89910B273018C380"
+				item: {
+					Count: 2b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "4356435530F5A760"
@@ -1541,7 +2622,10 @@
 			}]
 			tasks: [{
 				id: "EA10035A2D39515B"
-				item: "industrialupgrade:basemachine1/enrichment"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine1/enrichment"
+				}
 				type: "item"
 			}]
 			title: "Обогатитель"
@@ -1557,9 +2641,25 @@
 			]
 			id: "2C9BF983451D130D"
 			rewards: [{
-				id: "651358DEEB0909E3"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "D172F6E238766CB7"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "A527B8EA19EEBE12"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "133743155679BF27"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "C6FF3C69B473DABA"
@@ -1568,7 +2668,10 @@
 			}]
 			tasks: [{
 				id: "F48A43D81DDB8C56"
-				item: "industrialupgrade:basemachine3/nuclear_waste_recycler"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:basemachine3/nuclear_waste_recycler"
+				}
 				type: "item"
 			}]
 			title: "Переработчик радиоактивных отходов"
@@ -1584,9 +2687,25 @@
 			]
 			id: "799AE4C1FE0064F3"
 			rewards: [{
-				id: "E783303DF2034E95"
-				count: 8
-				item: "industrialupgrade:itemingots/tin_ingot"
+				id: "AE730E5098676045"
+				item: {
+					Count: 16b
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			},{
+				id: "1E502644FC89086B"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:adv_solar_energy"
+				}
+				type: "item"
+			},{
+				id: "38639996A4803210"
+				item: {
+					Count: 4b
+					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				}
 				type: "item"
 			},{
 				id: "7F6E4E4D2D849F9C"
@@ -1595,7 +2714,10 @@
 			}]
 			tasks: [{
 				id: "9F58D616504284B9"
-				item: "industrialupgrade:crafting_elements/crafting_443_element"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:crafting_elements/crafting_443_element"
+				}
 				type: "item"
 			}]
 			title: "Radioactive Waste"

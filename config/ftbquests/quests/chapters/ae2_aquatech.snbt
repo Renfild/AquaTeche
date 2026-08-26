@@ -1,0 +1,1354 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "ae2_aquatech"
+	group: "MOD0000000000001"
+	icon: "ae2:controller"
+	id: "54AD504A2CDDC762"
+	order_index: 11
+	quest_links: [ ]
+	subtitle: "Кварц, инскрайбер, ME-сеть, ячейки, автокрафт."
+	quests: [
+		{
+			description: [
+				"Книга сети. Держи под рукой, пока собираешь"
+				"инскрайбер и кабели."
+			]
+			id: "99FF5C3D2E38A494"
+			icon: "ae2:guide"
+			rewards: [{
+				id: "797BCFBE2B1EC5F3"
+				item: {
+					Count: 16b
+					id: "ae2:certus_quartz_crystal"
+				}
+				type: "item"
+			},{
+				id: "0F4D9B5EC32A5B83"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "1D311E3DA8FBEC9E"
+				item: {
+					Count: 1b
+					id: "ae2:guide"
+				}
+				type: "item"
+			}]
+			title: "Гайд AE2"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["99FF5C3D2E38A494"]
+			description: [
+				"Метеориты AE2 или рост на бутоне. Без цертуса нет"
+				"флюикса и процессоров."
+			]
+			id: "414D29A38795AFF5"
+			icon: "ae2:certus_quartz_crystal"
+			rewards: [{
+				id: "AFFB44B6B2FDD526"
+				item: {
+					Count: 16b
+					id: "ae2:certus_quartz_crystal"
+				}
+				type: "item"
+			},{
+				id: "60E72F5DA51072BE"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "31B2EC768FC4126B"
+				count: 8L
+				item: "ae2:certus_quartz_crystal"
+				type: "item"
+			}]
+			title: "Кварц Цертус"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["414D29A38795AFF5"]
+			description: [
+				"Зарядка в заряднике. Нужен для флюикса и ускорителя"
+				"роста."
+			]
+			id: "64ECB7B94EC30AD0"
+			icon: "ae2:charged_certus_quartz_crystal"
+			rewards: [{
+				id: "E9A333871E804838"
+				item: {
+					Count: 8b
+					id: "ae2:charged_certus_quartz_crystal"
+				}
+				type: "item"
+			},{
+				id: "F321F6858EA8BAA6"
+				item: {
+					Count: 8b
+					id: "ae2:fluix_crystal"
+				}
+				type: "item"
+			},{
+				id: "BB07F824682016FE"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "5C1F551844EEB964"
+				count: 4L
+				item: "ae2:charged_certus_quartz_crystal"
+				type: "item"
+			}]
+			title: "Заряженный цертус"
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["414D29A38795AFF5"]
+			description: [
+				"Дроп с метеорита. Идёт в сундук, танк и гладкие"
+				"блоки сети."
+			]
+			id: "30CDC0F923B814F8"
+			icon: "ae2:sky_stone_block"
+			rewards: [{
+				id: "E17B69A4DA0ECD8F"
+				item: {
+					Count: 16b
+					id: "ae2:sky_stone_block"
+				}
+				type: "item"
+			},{
+				id: "9DBB9B7E43CCF9B4"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "23F12C930ADCBB0A"
+				count: 8L
+				item: "ae2:sky_stone_block"
+				type: "item"
+			}]
+			title: "Небесный камень"
+			x: 3.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["64ECB7B94EC30AD0", "30CDC0F923B814F8"]
+			description: [
+				"Цертус + редстоун + незер-кварц в мире или росте."
+				"Основа кабелей и ядер."
+			]
+			id: "1D392AB2A35961BB"
+			icon: "ae2:fluix_crystal"
+			rewards: [{
+				id: "E523B103F7D6C634"
+				item: {
+					Count: 16b
+					id: "ae2:fluix_crystal"
+				}
+				type: "item"
+			},{
+				id: "7798311468C88804"
+				item: {
+					Count: 8b
+					id: "ae2:silicon"
+				}
+				type: "item"
+			},{
+				id: "E4F21BC554794372"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "A132AEAD6C68BF70"
+				count: 8L
+				item: "ae2:fluix_crystal"
+				type: "item"
+			}]
+			title: "Кристалл флюикса"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1D392AB2A35961BB"]
+			description: [
+				"Плавь пыль цертуса в печи. Печатный кремний без"
+				"него не сделать."
+			]
+			id: "E79743BC40D2EAF8"
+			icon: "ae2:silicon"
+			rewards: [{
+				id: "E50871FDE7B644FA"
+				item: {
+					Count: 16b
+					id: "ae2:silicon"
+				}
+				type: "item"
+			},{
+				id: "28F3870D3DD9F263"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "06CDB60BFEFF6778"
+				count: 8L
+				item: "ae2:silicon"
+				type: "item"
+			}]
+			title: "Кремний AE2"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["E79743BC40D2EAF8"]
+			description: [
+				"Пресс из метеорита. Без прессов инскрайбер пустой."
+			]
+			id: "0DEDE1315426EFFA"
+			icon: "ae2:silicon_press"
+			rewards: [{
+				id: "6B6131F36EC2ECF0"
+				item: {
+					Count: 1b
+					id: "ae2:logic_processor_press"
+				}
+				type: "item"
+			},{
+				id: "EDB0E31EFA20DCBE"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "0983A7418F17A243"
+				item: {
+					Count: 1b
+					id: "ae2:silicon_press"
+				}
+				type: "item"
+			}]
+			title: "Пресс кремния"
+			x: 6.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["0DEDE1315426EFFA"]
+			description: [
+				"Печатает кремний и три процессора. Ставь рядом с"
+				"зарядником."
+			]
+			id: "204482AF2477D075"
+			icon: "ae2:inscriber"
+			rewards: [{
+				id: "3F1E67B2F00FE618"
+				item: {
+					Count: 8b
+					id: "ae2:printed_silicon"
+				}
+				type: "item"
+			},{
+				id: "284DE750AC9A1B12"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "ED973253D4CF8BCA"
+				item: {
+					Count: 1b
+					id: "ae2:inscriber"
+				}
+				type: "item"
+			}]
+			title: "Инскрайбер"
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["204482AF2477D075"]
+			description: [
+				"Заряжает цертус. Питается от любой FE-сети, не"
+				"только ME."
+			]
+			id: "C59C1372D2C90BFE"
+			icon: "ae2:charger"
+			rewards: [{
+				id: "00E39E1C96AEDB07"
+				item: {
+					Count: 8b
+					id: "ae2:charged_certus_quartz_crystal"
+				}
+				type: "item"
+			},{
+				id: "7263A67863D13FF8"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "00A3DC2EA06AF59C"
+				item: {
+					Count: 1b
+					id: "ae2:charger"
+				}
+				type: "item"
+			}]
+			title: "Зарядник"
+			x: 7.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["204482AF2477D075"]
+			description: [
+				"Заготовка процессора. Дальше логика, расчёт и"
+				"инженерия."
+			]
+			id: "F3494A03934F6C19"
+			icon: "ae2:printed_silicon"
+			rewards: [{
+				id: "9435F6C32D242810"
+				item: {
+					Count: 16b
+					id: "ae2:silicon"
+				}
+				type: "item"
+			},{
+				id: "3CAC1E12E5474567"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "6DE18727B7AAD584"
+				count: 4L
+				item: "ae2:printed_silicon"
+				type: "item"
+			}]
+			title: "Печатный кремний"
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["F3494A03934F6C19"]
+			description: [
+				"Золото + кремний в инскрайбере. Кабели, шины,"
+				"терминал."
+			]
+			id: "A04E4977AB2EEC84"
+			icon: "ae2:logic_processor"
+			rewards: [{
+				id: "96C812FC8CAABA55"
+				item: {
+					Count: 8b
+					id: "ae2:logic_processor"
+				}
+				type: "item"
+			},{
+				id: "641F715497019A50"
+				item: {
+					Count: 8b
+					id: "ae2:fluix_glass_cable"
+				}
+				type: "item"
+			},{
+				id: "9B0CB5F4210A9C19"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "0A7C8DF21EEF0BD7"
+				count: 4L
+				item: "ae2:logic_processor"
+				type: "item"
+			}]
+			title: "Логический процессор"
+			x: 10.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["F3494A03934F6C19"]
+			description: [
+				"Цертус + кремний. Ячейки и компоненты памяти."
+			]
+			id: "2D83DABE968C0AE7"
+			icon: "ae2:calculation_processor"
+			rewards: [{
+				id: "A41A37B5917C64A9"
+				item: {
+					Count: 8b
+					id: "ae2:calculation_processor"
+				}
+				type: "item"
+			},{
+				id: "32927F563BF0A0EB"
+				item: {
+					Count: 2b
+					id: "ae2:cell_component_1k"
+				}
+				type: "item"
+			},{
+				id: "ED5940D813A2D70B"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "997A647493BCF458"
+				count: 4L
+				item: "ae2:calculation_processor"
+				type: "item"
+			}]
+			title: "Расчётный процессор"
+			x: 10.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["F3494A03934F6C19"]
+			description: [
+				"Алмаз + кремний. Контроллер, сборщик, плотные"
+				"кабели."
+			]
+			id: "61F9290569BDC2AF"
+			icon: "ae2:engineering_processor"
+			rewards: [{
+				id: "C71E6094AD3A64E5"
+				item: {
+					Count: 8b
+					id: "ae2:engineering_processor"
+				}
+				type: "item"
+			},{
+				id: "4158A44EDBC8A7CE"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "86FFFD3EC98A2B7C"
+				count: 4L
+				item: "ae2:engineering_processor"
+				type: "item"
+			}]
+			title: "Инженерный процессор"
+			x: 10.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["1D392AB2A35961BB"]
+			description: [
+				"Мост между сетями и канал в стеклянном кабеле."
+			]
+			id: "BE0FF7AD094BEA79"
+			icon: "ae2:quartz_fiber"
+			rewards: [{
+				id: "B52E40B35576071B"
+				item: {
+					Count: 8b
+					id: "ae2:quartz_fiber"
+				}
+				type: "item"
+			},{
+				id: "A398419F0B50105F"
+				item: {
+					Count: 8b
+					id: "ae2:fluix_glass_cable"
+				}
+				type: "item"
+			},{
+				id: "CE10D66A214D7970"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "8351E9582669DAD2"
+				count: 4L
+				item: "ae2:quartz_fiber"
+				type: "item"
+			}]
+			title: "Кварцевое волокно"
+			x: 12.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["A04E4977AB2EEC84", "BE0FF7AD094BEA79"]
+			description: [
+				"Каналы ME. Восемь штук — уже хватает на маленький"
+				"остров."
+			]
+			id: "FB34F6736F34E9A2"
+			icon: "ae2:fluix_glass_cable"
+			rewards: [{
+				id: "E28D012680CFE897"
+				item: {
+					Count: 16b
+					id: "ae2:fluix_glass_cable"
+				}
+				type: "item"
+			},{
+				id: "F196D3CA44D5D534"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "76D706E03D4C5B8C"
+				count: 8L
+				item: "ae2:fluix_glass_cable"
+				type: "item"
+			}]
+			title: "Стеклянный кабель флюикса"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["FB34F6736F34E9A2"]
+			description: [
+				"ПКМ по кабелю: каналы, энергия, привязка. Без него"
+				"сеть слепая."
+			]
+			id: "55302AB72DE2387F"
+			icon: "ae2:network_tool"
+			rewards: [{
+				id: "DEB65AEBB573BFB5"
+				item: {
+					Count: 8b
+					id: "ae2:fluix_glass_cable"
+				}
+				type: "item"
+			},{
+				id: "1B0928B7B82749CF"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "14CDEA70CAAF5C0D"
+				item: {
+					Count: 1b
+					id: "ae2:network_tool"
+				}
+				type: "item"
+			}]
+			title: "Сетевой инструмент"
+			x: 12.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["FB34F6736F34E9A2"]
+			description: [
+				"Вход FE в ME. Первая живая сеть — акцептор + кабель"
+				"+ привод."
+			]
+			id: "1D3D74AA9D7674E1"
+			icon: "ae2:energy_acceptor"
+			rewards: [{
+				id: "949E665807044682"
+				item: {
+					Count: 1b
+					id: "ae2:energy_cell"
+				}
+				type: "item"
+			},{
+				id: "142DA5B205CE23BF"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "EFDC085DF41F493D"
+				item: {
+					Count: 1b
+					id: "ae2:energy_acceptor"
+				}
+				type: "item"
+			}]
+			title: "Приёмник энергии"
+			x: 13.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1D3D74AA9D7674E1"]
+			description: [
+				"Буфер сети. Ставь до контроллера, иначе шины"
+				"моргают."
+			]
+			id: "168781B948D826B3"
+			icon: "ae2:energy_cell"
+			rewards: [{
+				id: "AC5FC53FC732FDCA"
+				item: {
+					Count: 8b
+					id: "ae2:fluix_glass_cable"
+				}
+				type: "item"
+			},{
+				id: "6424965457F0107D"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "007B1CD061E010A1"
+				item: {
+					Count: 1b
+					id: "ae2:energy_cell"
+				}
+				type: "item"
+			}]
+			title: "Энергоячейка"
+			x: 15.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["168781B948D826B3"]
+			description: [
+				"Десять слотов под ячейки. Сердце склада."
+			]
+			id: "0CC307CF58D6ACE1"
+			icon: "ae2:drive"
+			rewards: [{
+				id: "F3D4B6620B69006C"
+				item: {
+					Count: 2b
+					id: "ae2:item_cell_housing"
+				}
+				type: "item"
+			},{
+				id: "AB36FDF37F435679"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "AD3FE81E44240AD2"
+				item: {
+					Count: 1b
+					id: "ae2:drive"
+				}
+				type: "item"
+			}]
+			title: "ME-привод"
+			x: 16.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0CC307CF58D6ACE1"]
+			description: [
+				"Пустой корпус. Компонент 1k + корпус = ячейка."
+			]
+			id: "B9FB70727DBC1435"
+			icon: "ae2:item_cell_housing"
+			rewards: [{
+				id: "B52A23EF631B581F"
+				item: {
+					Count: 2b
+					id: "ae2:cell_component_1k"
+				}
+				type: "item"
+			},{
+				id: "1CC2610ECB413BAE"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "0A6893670D2A2DF9"
+				count: 2L
+				item: "ae2:item_cell_housing"
+				type: "item"
+			}]
+			title: "Корпус ячейки"
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["B9FB70727DBC1435", "2D83DABE968C0AE7"]
+			description: [
+				"Память ячейки. Расчётный процессор и редстоун."
+			]
+			id: "8EA1771051CDB34D"
+			icon: "ae2:cell_component_1k"
+			rewards: [{
+				id: "DDC9071F1E44421B"
+				item: {
+					Count: 2b
+					id: "ae2:item_storage_cell_1k"
+				}
+				type: "item"
+			},{
+				id: "CC944C35E5A3305B"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "C23C338B91558B91"
+				count: 2L
+				item: "ae2:cell_component_1k"
+				type: "item"
+			}]
+			title: "Компонент 1k"
+			x: 19.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["8EA1771051CDB34D"]
+			description: [
+				"Первый склад ME. Форматируется в приводе под типы"
+				"предметов."
+			]
+			id: "0AEAE11EF118C678"
+			icon: "ae2:item_storage_cell_1k"
+			rewards: [{
+				id: "AE8EC366B5830A24"
+				item: {
+					Count: 1b
+					id: "ae2:terminal"
+				}
+				type: "item"
+			},{
+				id: "84654DCC2B131169"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "B001E9CDD8DAE7D3"
+				item: {
+					Count: 1b
+					id: "ae2:item_storage_cell_1k"
+				}
+				type: "item"
+			}]
+			title: "Ячейка 1k"
+			x: 21.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0AEAE11EF118C678"]
+			description: [
+				"Окно склада. Ставь на кабель рядом с приводом."
+			]
+			id: "47BF4E42C8B47068"
+			icon: "ae2:terminal"
+			rewards: [{
+				id: "9CB1905C0F7F07A2"
+				item: {
+					Count: 2b
+					id: "ae2:import_bus"
+				}
+				type: "item"
+			},{
+				id: "A5BA41C5E4CD4DB8"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "16EE3A3BDD92E85B"
+				item: {
+					Count: 1b
+					id: "ae2:terminal"
+				}
+				type: "item"
+			}]
+			title: "Терминал"
+			x: 22.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["47BF4E42C8B47068"]
+			description: [
+				"Засасывает сундук в ME. Фильтры — позже картами."
+			]
+			id: "D759F18FE5EA93F4"
+			icon: "ae2:import_bus"
+			rewards: [{
+				id: "E2AFCCBABDBF15B0"
+				item: {
+					Count: 2b
+					id: "ae2:export_bus"
+				}
+				type: "item"
+			},{
+				id: "AD01EED31214A5DB"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "2F7772257B9ACCCC"
+				item: {
+					Count: 1b
+					id: "ae2:import_bus"
+				}
+				type: "item"
+			}]
+			title: "Шина импорта"
+			x: 22.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["D759F18FE5EA93F4"]
+			description: [
+				"Выплёвывает предметы в сундук или машину IU."
+			]
+			id: "1F61FE35160EB707"
+			icon: "ae2:export_bus"
+			rewards: [{
+				id: "6C43AEB073CEEC00"
+				item: {
+					Count: 2b
+					id: "ae2:storage_bus"
+				}
+				type: "item"
+			},{
+				id: "B8C7929CFDBB3E97"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "963063DC92DF55CA"
+				item: {
+					Count: 1b
+					id: "ae2:export_bus"
+				}
+				type: "item"
+			}]
+			title: "Шина экспорта"
+			x: 24.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1F61FE35160EB707"]
+			description: [
+				"Подключает внешний сундук как часть ME без"
+				"перекладывания в ячейки."
+			]
+			id: "F0B79F0B4331B338"
+			icon: "ae2:storage_bus"
+			rewards: [{
+				id: "72B4A9A344BAFE03"
+				item: {
+					Count: 1b
+					id: "ae2:interface"
+				}
+				type: "item"
+			},{
+				id: "51F64A243208F245"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "4DA33FADD5C81333"
+				item: {
+					Count: 1b
+					id: "ae2:storage_bus"
+				}
+				type: "item"
+			}]
+			title: "Шина хранения"
+			x: 25.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["F0B79F0B4331B338"]
+			description: [
+				"Мост автокрафта и машин. Сюда сажают провайдер"
+				"паттернов."
+			]
+			id: "E0B7ED616EFF4B4D"
+			icon: "ae2:interface"
+			rewards: [{
+				id: "9E2E145F0280F71C"
+				item: {
+					Count: 1b
+					id: "ae2:io_port"
+				}
+				type: "item"
+			},{
+				id: "8F81EDDC33F13438"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "C7F6EE17AEA41CF0"
+				item: {
+					Count: 1b
+					id: "ae2:interface"
+				}
+				type: "item"
+			}]
+			title: "Интерфейс"
+			x: 24.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["E0B7ED616EFF4B4D"]
+			description: [
+				"Копирует ячейку в сеть и обратно. Удобно возить"
+				"островной лут."
+			]
+			id: "C24AA88149034D00"
+			icon: "ae2:io_port"
+			rewards: [{
+				id: "FDE9F6547E176C0B"
+				item: {
+					Count: 1b
+					id: "ae2:item_storage_cell_4k"
+				}
+				type: "item"
+			},{
+				id: "5277C4223810DDD8"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "5C91841E1BFD695B"
+				item: {
+					Count: 1b
+					id: "ae2:io_port"
+				}
+				type: "item"
+			}]
+			title: "IO-порт"
+			x: 25.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["47BF4E42C8B47068", "61F9290569BDC2AF"]
+			description: [
+				"32 канала на грань. Ставь, когда стеклянных кабелей"
+				"уже мало."
+			]
+			id: "C2C7DDA5BE36B794"
+			icon: "ae2:controller"
+			rewards: [{
+				id: "AFE4183DB832D0DA"
+				item: {
+					Count: 8b
+					id: "ae2:fluix_smart_cable"
+				}
+				type: "item"
+			},{
+				id: "154669BD4C673224"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "B9B6CBC6CD0F0ABC"
+				item: {
+					Count: 1b
+					id: "ae2:controller"
+				}
+				type: "item"
+			}]
+			title: "ME-контроллер"
+			x: 24.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["C2C7DDA5BE36B794"]
+			description: [
+				"Показывает каналы цветом. Дальше плотный кабель на"
+				"контроллер."
+			]
+			id: "DDB772C1CFD52335"
+			icon: "ae2:fluix_smart_cable"
+			rewards: [{
+				id: "DAF0D4A6CB4FE83E"
+				item: {
+					Count: 4b
+					id: "ae2:fluix_covered_dense_cable"
+				}
+				type: "item"
+			},{
+				id: "4CBC9C9E7ECE1CC2"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "F4C843C72B0A6BBD"
+				count: 8L
+				item: "ae2:fluix_smart_cable"
+				type: "item"
+			}]
+			title: "Умный кабель"
+			x: 25.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["168781B948D826B3"]
+			description: [
+				"Большой буфер. Нужна, когда автокрафт и шины жрут"
+				"энергию пачками."
+			]
+			id: "5C2C83D9E7FD7C81"
+			icon: "ae2:dense_energy_cell"
+			rewards: [{
+				id: "0B0F6E07C5D2AE80"
+				item: {
+					Count: 2b
+					id: "ae2:energy_cell"
+				}
+				type: "item"
+			},{
+				id: "809403167952412C"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "66135B008861E57F"
+				item: {
+					Count: 1b
+					id: "ae2:dense_energy_cell"
+				}
+				type: "item"
+			}]
+			title: "Плотная энергоячейка"
+			x: 16.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["C59C1372D2C90BFE"]
+			description: [
+				"Растит бутоны цертуса. Свой кварц без беготни по"
+				"метеоритам."
+			]
+			id: "9AF50A66DAB8BC4A"
+			icon: "ae2:growth_accelerator"
+			rewards: [{
+				id: "EA638D72DA52A5DF"
+				item: {
+					Count: 8b
+					id: "ae2:charged_certus_quartz_crystal"
+				}
+				type: "item"
+			},{
+				id: "9112B4EF28E10D30"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "C210D48EE01E0401"
+				item: {
+					Count: 1b
+					id: "ae2:growth_accelerator"
+				}
+				type: "item"
+			}]
+			title: "Ускоритель роста"
+			x: 4.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["0AEAE11EF118C678"]
+			description: [
+				"Следующий тир склада. Крафт из четырёх"
+				"1k-компонентов."
+			]
+			id: "C7FB695CAC906379"
+			icon: "ae2:item_storage_cell_4k"
+			rewards: [{
+				id: "00895FE6824A9557"
+				item: {
+					Count: 1b
+					id: "ae2:cell_component_16k"
+				}
+				type: "item"
+			},{
+				id: "13433FC453569DDA"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "E371C593A5B25D96"
+				item: {
+					Count: 1b
+					id: "ae2:item_storage_cell_4k"
+				}
+				type: "item"
+			}]
+			title: "Ячейка 4k"
+			x: 22.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["C7FB695CAC906379"]
+			description: [
+				"Средний склад. Хватает на остров до 64k."
+			]
+			id: "06889FF756F34E15"
+			icon: "ae2:item_storage_cell_16k"
+			rewards: [{
+				id: "7A8D3ABE494C17A3"
+				item: {
+					Count: 1b
+					id: "ae2:item_storage_cell_16k"
+				}
+				type: "item"
+			},{
+				id: "405B635A84B2E87C"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "62890F21A5EF8507"
+				item: {
+					Count: 1b
+					id: "ae2:item_storage_cell_16k"
+				}
+				type: "item"
+			}]
+			title: "Ячейка 16k"
+			x: 24.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["C2C7DDA5BE36B794"]
+			description: [
+				"Автокрафт: паттерн внутрь, интерфейс к машине."
+			]
+			id: "1AF9BD905A907DC4"
+			icon: "ae2:pattern_provider"
+			rewards: [{
+				id: "7445ED74D28A5414"
+				item: {
+					Count: 8b
+					id: "ae2:blank_pattern"
+				}
+				type: "item"
+			},{
+				id: "3B7B3DA3BDA917EA"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "6522FE31300FA693"
+				item: {
+					Count: 1b
+					id: "ae2:pattern_provider"
+				}
+				type: "item"
+			}]
+			title: "Провайдер паттернов"
+			x: 25.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["1AF9BD905A907DC4"]
+			description: [
+				"Кодируется в терминале крафта. Без стопки автокрафт"
+				"мёртв."
+			]
+			id: "937D28E2A499ADF6"
+			icon: "ae2:blank_pattern"
+			rewards: [{
+				id: "6833B40863973818"
+				item: {
+					Count: 16b
+					id: "ae2:blank_pattern"
+				}
+				type: "item"
+			},{
+				id: "C1CBAB7BB3BFDAA3"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "CD9AF4A90A6BDD95"
+				count: 8L
+				item: "ae2:blank_pattern"
+				type: "item"
+			}]
+			title: "Пустой паттерн"
+			x: 27.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["1AF9BD905A907DC4"]
+			description: [
+				"Крафтит по паттерну. Ставь рядом с провайдером."
+			]
+			id: "62279C9FE5565B30"
+			icon: "ae2:molecular_assembler"
+			rewards: [{
+				id: "934F7E8062F7BBEB"
+				item: {
+					Count: 1b
+					id: "ae2:crafting_terminal"
+				}
+				type: "item"
+			},{
+				id: "91CF4C2B0ADEAA96"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "8A9A621C9D5DED55"
+				item: {
+					Count: 1b
+					id: "ae2:molecular_assembler"
+				}
+				type: "item"
+			}]
+			title: "Молекулярный сборщик"
+			x: 25.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["62279C9FE5565B30"]
+			description: [
+				"Верстак + склад в одном окне. Кодирует паттерны."
+			]
+			id: "84D2E725853B8E65"
+			icon: "ae2:crafting_terminal"
+			rewards: [{
+				id: "B5B8A63FFDE74A53"
+				item: {
+					Count: 2b
+					id: "ae2:crafting_unit"
+				}
+				type: "item"
+			},{
+				id: "9B67F0E209E6C408"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "AB9A059466AA1401"
+				item: {
+					Count: 1b
+					id: "ae2:crafting_terminal"
+				}
+				type: "item"
+			}]
+			title: "Терминал крафта"
+			x: 27.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["84D2E725853B8E65"]
+			description: [
+				"Каркас CPU автокрафта. Дальше вешается хранилище"
+				"1k."
+			]
+			id: "E5779F821F80F70A"
+			icon: "ae2:crafting_unit"
+			rewards: [{
+				id: "8C870C568039D06F"
+				item: {
+					Count: 1b
+					id: "ae2:1k_crafting_storage"
+				}
+				type: "item"
+			},{
+				id: "52F7AC212AB893EF"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "E919BDEC5053A774"
+				count: 4L
+				item: "ae2:crafting_unit"
+				type: "item"
+			}]
+			title: "Блок крафта"
+			x: 28.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["E5779F821F80F70A"]
+			description: [
+				"Память CPU. Без него молекулярный сборщик не берёт"
+				"заказы."
+			]
+			id: "FA3D208579816599"
+			icon: "ae2:1k_crafting_storage"
+			rewards: [{
+				id: "75953637D5158FE0"
+				item: {
+					Count: 1b
+					id: "ae2:crafting_accelerator"
+				}
+				type: "item"
+			},{
+				id: "A2C4A3675AC73FD2"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "E755085BDDFEAF2F"
+				item: {
+					Count: 1b
+					id: "ae2:1k_crafting_storage"
+				}
+				type: "item"
+			}]
+			title: "Хранилище крафта 1k"
+			x: 30.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["0AEAE11EF118C678"]
+			description: [
+				"Склад жидкостей ME. Пар, лава, латекс IU — сюда, не"
+				"в вёдра."
+			]
+			id: "58D60A7C34D104BC"
+			icon: "ae2:fluid_storage_cell_1k"
+			rewards: [{
+				id: "A4B81E1CEAA3597F"
+				item: {
+					Count: 1b
+					id: "ae2:fluid_storage_cell_1k"
+				}
+				type: "item"
+			},{
+				id: "E97E67B61948FC2D"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "60BCFB26B4F35847"
+				item: {
+					Count: 1b
+					id: "ae2:fluid_storage_cell_1k"
+				}
+				type: "item"
+			}]
+			title: "Жидкостная ячейка 1k"
+			x: 21.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["DDB772C1CFD52335", "06889FF756F34E15"]
+			description: [
+				"Финал вкладки. Склад под остров и автокрафт без"
+				"постоянной чистки."
+			]
+			id: "CC820D34FAB4DA41"
+			icon: "ae2:item_storage_cell_64k"
+			rewards: [{
+				id: "459EDC010907937D"
+				item: {
+					Count: 1b
+					id: "ae2:item_storage_cell_64k"
+				}
+				type: "item"
+			},{
+				id: "4D74D363C530A572"
+				item: {
+					Count: 1b
+					id: "ae2:fluid_storage_cell_64k"
+				}
+				type: "item"
+			},{
+				id: "9102A52BA2676E48"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "58ED2FDEE792B83F"
+				item: {
+					Count: 1b
+					id: "ae2:item_storage_cell_64k"
+				}
+				type: "item"
+			}]
+			title: "Ячейка 64k"
+			x: 27.0d
+			y: 0.0d
+		}
+	]
+	title: "Applied Energistics"
+}

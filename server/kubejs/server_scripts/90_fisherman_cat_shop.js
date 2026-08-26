@@ -230,6 +230,6 @@ PlayerEvents.loggedIn(event => {
     if (p.persistentData.catTrendDay == day) return;
     p.persistentData.catTrendDay = day;
     event.server.scheduleInTicks(80, () => {
-        if (p && p.isOnline()) p.tell(trendMessage());
+        try { if (p) p.tell(trendMessage()); } catch (e) {}
     });
 });

@@ -36,6 +36,15 @@ public final class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void onLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+        HubEconomy.coins(player);
+        HubDataService.syncPlayerToWebAsync(player);
+    }
+
+    @SubscribeEvent
     public static void onLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         UUID id = event.getEntity().getUUID();
         MODDED_CLIENTS.remove(id);

@@ -61,11 +61,11 @@ export async function onRequestPost(context) {
       binds.push(coins);
     }
     if (body.fish !== undefined) {
-      updates.push("fish = ?");
+      updates.push("fish = MAX(fish, ?)");
       binds.push(fish);
     }
     if (body.playtime_hours !== undefined) {
-      updates.push("playtime_hours = ?");
+      updates.push("playtime_hours = MAX(playtime_hours, ?)");
       binds.push(playtimeHours);
     }
     if (body.privilege !== undefined && privilege) {

@@ -267,21 +267,24 @@ public final class HubDataService {
         return null; // no key file -> sync disabled; never hardcode the secret here
     }
 
-    /** Asynchronously sync player stats & currency to the Web Portal. */
+    /** Snapshot on the main thread, then persist MariaDB + portal D1. */
     public static void syncPlayerToWebAsync(ServerPlayer player) {
         String syncKey = resolveSyncKey();
-        if (syncKey == null) {
-            AquaLumenUI.LOGGER.debug("Portal sync skipped: config/aquatech_sync_key.json missing");
-            return;
-        }
+        long playtimeHours = player.getStats().getValue(Stats.CUSTOM.get(Stats.PLAY_TIME)) / 72000L;
+        int fish = HubEconomy.fishCaught(player);
+        long coins = HubEconomy.coins(player);
+        Rank rank = resolveRank(player);
+        int quests = completedQuests(player);
+        String nick = player.getGameProfile().getName();
+        UUID uuid = player.getUUID();
+        String privilege = rank.name();
         CompletableFuture.runAsync(() -> {
+            MariaStats.upsert(uuid, nick, coins, fish, playtimeHours, quests, privilege);
+            if (syncKey == null) {
+                AquaLumenUI.LOGGER.debug("Portal sync skipped: config/aquatech_sync_key.json missing");
+                return;
+            }
             try {
-                long playtimeHours = player.getStats().getValue(Stats.CUSTOM.get(Stats.PLAY_TIME)) / 72000L;
-                int fish = player.getStats().getValue(Stats.CUSTOM.get(Stats.FISH_CAUGHT));
-                long coins = HubEconomy.coins(player);
-                Rank rank = resolveRank(player);
-                int quests = completedQuests(player);
-
                 URL url = new URL("https://aquateche.store/api/sync/player");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
@@ -293,11 +296,11 @@ public final class HubDataService {
                 conn.setDoOutput(true);
 
                 JsonObject json = new JsonObject();
-                json.addProperty("nick", player.getGameProfile().getName());
+                json.addProperty("nick", nick);
                 json.addProperty("coins", coins);
                 json.addProperty("fish", fish);
                 json.addProperty("playtime_hours", playtimeHours);
-                json.addProperty("privilege", rank.name());
+                json.addProperty("privilege", privilege);
                 json.addProperty("quests_done", quests);
 
                 try (OutputStream os = conn.getOutputStream()) {
@@ -306,16 +309,7 @@ public final class HubDataService {
                 }
 
                 if (conn.getResponseCode() == 200) {
-                    try (InputStream is = conn.getInputStream();
-                         InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8)) {
-                        JsonObject res = JsonParser.parseReader(isr).getAsJsonObject();
-                        if (res.has("coins")) {
-                            long webCoins = res.get("coins").getAsLong();
-                            if (webCoins > coins) {
-                                HubEconomy.grantCoins(player, webCoins - coins);
-                            }
-                        }
-                    }
+                    conn.getInputStream().close();
                 }
                 conn.disconnect();
             } catch (Throwable ignored) {

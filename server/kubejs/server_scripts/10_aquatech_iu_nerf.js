@@ -32,19 +32,13 @@ ServerEvents.recipes((event) => {
 
   removeId(/ae2:.*spatial.*/)
 
-  // Creative / infinity
+  // Creative only — keep Avaritia Infinity crafts (endgame tab / endgame chapter).
   removeId(/industrialupgrade:creative_.*/)
   removeId(/ae2:creative_.*/)
-  removeId(/avaritia:infinity_.*/)
 
   ;[
     'draconicevolution:creative_capacitor',
     'draconicevolution:creative_op_capacitor',
-    'avaritia_armor:crystal_helmet',
-    'avaritia_armor:crystal_chestplate',
-    'avaritia_armor:crystal_leggings',
-    'avaritia_armor:crystal_boots',
-    'avaritia_armor:crystal_core',
     'botanicalextramachinery:catalyst_mana_infinity',
     'botanicalextramachinery:catalyst_living_rock_infinity',
     'botanicalextramachinery:catalyst_seed_infinity',

@@ -17,13 +17,13 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.245"
-PACK_VERSION = "2.9.245"
+PACK_TAG = "pack-2.9.252"
+PACK_VERSION = "2.9.252"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
 FOLDERS = ["mods", "config", "kubejs", "resourcepacks"]
-SKIP_PATH_PARTS = ("_disabled", "_parked", ".disabled", "/players/", "quest_progress", "aquatech_sync_key.json")
+SKIP_PATH_PARTS = ("_disabled", "_parked", ".disabled", "/players/", "quest_progress", "aquatech_sync_key.json", "chunky")
 # Client-only jars (not on dedicated server) — copy from previous pack or client/ if present
 # ImmediatelyFast 1.2.4 crashes with Oculus 1.7 (IrisCompat ImmediateState) — omit until a compatible build.
 CLIENT_ONLY_PREFIXES = (
@@ -140,21 +140,28 @@ def sync_mods() -> None:
                 shutil.copy2(jar, target)
                 print(f"OK client-only {jar.name}")
 
-    # Always copy fresh compiled first-party jars from mod projects
-    source_map = {
-        "aquatech_ui-1.0.29.jar": ROOT / "mods" / "aquatech-ui" / "build" / "libs" / "aquatech_ui-1.0.29.jar",
-        "aqualumen-forge-1.20.1-0.3.17-alpha.jar": ROOT / "mods" / "aqualumen-ui" / "build" / "libs" / "aqualumen-forge-1.20.1-0.3.17-alpha.jar",
-    }
-    for name, src_jar in source_map.items():
-        if src_jar.is_file():
-            shutil.copy2(src_jar, SERVER_MODS / name)
-            shutil.copy2(src_jar, dst / name)
-            print(f"OK fresh compiled {name} from {src_jar}")
-        else:
-            cand = SERVER_MODS / name
-            if cand.is_file():
-                shutil.copy2(cand, dst / name)
-                print(f"OK fallback {name} from {cand}")
+    # Latest compiled first-party jars from mod projects (drop older copies).
+    first_party = [
+        (ROOT / "mods" / "aquatech-ui" / "build" / "libs", "aquatech_ui-", "aquatech_ui-"),
+        (ROOT / "mods" / "aqualumen-ui" / "build" / "libs", "aqualumen-forge-", "aqualumen-"),
+    ]
+    for lib_dir, glob_prefix, purge_prefix in first_party:
+        jars = sorted(
+            (p for p in lib_dir.glob(f"{glob_prefix}*.jar") if p.is_file()),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
+        if not jars:
+            continue
+        src_jar = jars[0]
+        for folder in (SERVER_MODS, dst):
+            if not folder.is_dir():
+                continue
+            for old in folder.glob(f"{purge_prefix}*.jar"):
+                if old.name != src_jar.name:
+                    old.unlink(missing_ok=True)
+            shutil.copy2(src_jar, folder / src_jar.name)
+        print(f"OK fresh compiled {src_jar.name} from {src_jar}")
 
     # Remove parked leftovers
     for jar in list(dst.rglob("*.jar")):
@@ -231,7 +238,7 @@ def write_delta(manifest: dict, prev: dict | None) -> None:
     mb = st["download_bytes"] / 1_000_000
     print(
         f"OK delta: +{st['added']} ~{st['changed']} -{st['removed']} "
-        f"(unchanged {st['unchanged']}), incremental download ≈{mb:.1f} MB"
+        f"(unchanged {st['unchanged']}), incremental download ~{mb:.1f} MB"
     )
 
 

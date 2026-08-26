@@ -91,20 +91,14 @@ ServerEvents.recipes((event) => {
 
   // 18-23: previous-tier rod + fewer rare mats for early tiers (bamboo..slimed),
   // keeps late tiers as-is. Makes first session less punishing.
-  event.shaped('starcatcher:humble_rod', [' CB', ' SB', 'T  '], {
-    C: 'minecraft:copper_ingot', B: 'minecraft:bamboo', T: 'minecraft:string'
-  }).id('aquatech:humble_rod_cheap')
+
   T()
-  event.shaped('starcatcher:good_old_rod', [' TI', ' SI', 'ST '], {
-    T: 'minecraft:string', I: 'industrialupgrade:itemingots/tin_ingot', S: 'minecraft:stick'
-  }).id('aquatech:good_old_rod_cheap')
+
   T()
 
   // Rod repair kits: 1 stick + 3 string + tier material repairs durability via anvil? 
   // Simpler: cheap duplicate rods so losing one isn't devastating:
-  event.shaped(Item.of('starcatcher:bamboo_rod'), ['  B', ' S ', '/  '], {
-    B: 'minecraft:bamboo', S: 'minecraft:string', '/': 'minecraft:stick'
-  }).id('aquatech:bamboo_rod_easy')
+
   T()
 
   // ============ Food & utility (8) ============
@@ -140,43 +134,29 @@ ServerEvents.recipes((event) => {
   // ============ AquaTech UI items rebalance (10) ============
 
   // Mesh filter cheaper (early automation enabler)
-  event.remove({ id: 'aquatech:mesh_filter' })
-  event.shaped('aquatech_ui:mesh_filter', ['KKK', 'KSK', 'KKK'], { K: 'minecraft:kelp', S: 'minecraft:string' }).id('aquatech:mesh_filter_v2')
+  
   T()
 
   // Sonar goggles main recipe cheaper copper->iron
   // (kept original; alt exists in 35_fun_crafts.js)
 
   // Rate x2 cheaper entry: remove manasteel requirement (botania wall)
-  event.remove({ id: 'aquatech:rate_x2' })
-  event.shaped('aquatech_ui:rate_x2', ['SCS', 'PIP', 'SCS'], {
-    S: 'minecraft:string', C: 'minecraft:copper_ingot', P: 'minecraft:iron_ingot', I: 'minecraft:prismarine_crystals'
-  }).id('aquatech:rate_x2_ocean')
+  
   T()
 
   // Auto fisher: chest optional -> any planks (new players may lack chests)
   // Seabed dredger cheaper drill bits
-  event.remove({ id: 'aquatech:seabed_dredger' })
-  event.shaped('aquatech_ui:seabed_dredger', ['DBD', 'RCR', 'SWS'], {
-    D: 'aquatech_ui:dredger_drill_bit', B: 'minecraft:iron_block',
-    R: 'industrialupgrade:crafting_elements/crafting_272_element',
-    S: 'minecraft:smooth_stone', W: 'minecraft:white_wool'
-  }).id('aquatech:seabed_dredger_v2')
+  
   T()
 
   // Ocean altar slightly cheaper heart requirement handled by heart_alt above.
 
   // Upgrade speed_x4: add alt without starcatcher rod sacrifice (use diamond instead)
-  event.remove({ id: 'aquatech:speed_x4_upgrade' })
-  event.shaped('aquatech_ui:speed_x4_upgrade', ['DSD', 'SUS', 'DSD'], {
-    D: 'minecraft:diamond', S: 'minecraft:spyglass', U: 'aquatech_ui:speed_upgrade'
-  }).id('aquatech:speed_x4_alt')
+  
   T()
 
   // Abyssal magnet third path (kelp-heavy budget option)
-  event.shaped('aquatech_ui:abyssal_magnet', ['KIK', 'IRI', 'KKK'], {
-    K: 'minecraft:dried_kelp_block', I: 'minecraft:iron_ingot', R: 'minecraft:redstone_block'
-  }).id('aquatech:abyssal_magnet_budget')
+
   T()
 
   // Dredger drill bit cheaper
@@ -187,17 +167,14 @@ ServerEvents.recipes((event) => {
   T()
 
   // Kelp bio pellet x8 (was x4)
-  event.remove({ id: 'aquatech:treasure_bait' })
-  event.shaped(Item.of('aquatech_ui:kelp_bio_pellet', 4), ['FGF', 'KDK', 'GGG'], {
-    F: 'minecraft:cod', G: 'minecraft:gold_nugget', K: 'minecraft:dried_kelp_block', D: 'minecraft:kelp'
-  }).id('aquatech:treasure_bait')
+  
   T()
 
   // ============ Storage & deco (8) ============
 
   // Barrel-like: chest + slabs -> double chest standalone (QoL)
-  event.shaped('avaritia:compressed_chest', ['CPC', 'PCP', 'CPC'], {
-    C: 'minecraft:chest', P: 'minecraft:prismarine_bricks'
+  event.shaped('avaritia:compressed_chest', ['CCC', 'CIC', 'CCC'], {
+    C: 'minecraft:chest', I: 'minecraft:iron_block'
   }).id('aquatech:compressed_chest_craftable')
   T()
 
@@ -207,7 +184,7 @@ ServerEvents.recipes((event) => {
   T()
 
   // Boat with chest already exists; add OAK CHEST BOAT cheaper
-  event.shaped('minecraft:oak_chest_boat', ['BIB', 'BBB'], { B: 'minecraft:oak_planks', I: 'minecraft:chest' }).id('aquatech:cboat')
+
   T()
 
   // Lantern cheaper (nuggets instead ingots)

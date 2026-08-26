@@ -1,16 +1,16 @@
-# Graph Report - AquaTech  (2026-08-24)
+# Graph Report - AquaTech  (2026-08-26)
 
 ## Corpus Check
-- 653 files · ~563,860 words
+- 803 files · ~736,592 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3414 nodes · 7129 edges · 278 communities (236 shown, 42 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 91 edges (avg confidence: 0.79)
+- 6526 nodes · 10376 edges · 424 communities (377 shown, 47 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 110 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8906a526`
+- Built from commit: `b8e876ee`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -20,7 +20,7 @@
 - net.minecraft.server.level.ServerPlayer
 - AquaTech Addon + KubeJS System
 - js/site.js
-- IslandGuardHandler
+- OceanEventsService
 - Ponytail
 - .CheckAndApplyAsync
 - main.go
@@ -32,41 +32,41 @@
 - AquaTechLauncher.csproj
 - gen_machine_guis.py
 - Полная таблица лута удочек AquaTech
-- AquaTechLauncher.Core
+- FishShopConfig
 - gen_clean_machine_guis.py
 - SkillCategory
-- ModClientConfig
-- AutoFisherBlockEntity.java
-- Fact
+- PackStateCache
+- SkillTreeData
+- AquaTechLauncher.Core
 - .BuildAsync
 - gen_assets.py
 - AutoFisherBlockEntity
 - Ponytail Help
 - .ApplyAsync
-- ChestFallbackUI.java
-- RateModItem.java
+- net.minecraftforge.eventbus.api.SubscribeEvent
+- SkyblockAutoIsland
 - release_launcher.py
 - HorizonEvents
 - PatchIUNoFreeScanner
 - AquaTechAPIHandler
-- IslandLimiterTracker
-- ContainerType
+- ChestFallbackUI.java
+- .PlayAsync
 - StormEvent
 - gen_sc_fishing_ui.py
 - Улучшенная — Улучшенная электрическая эра
 - setup_apex_mysql.py
 - UI Style Guide — AquaLumen UI
 - generate_iu_ftbquests_full.py
-- .PlayAsync
+- KitConfig
 - AquaTechCommand
 - setup_d1.py
 - AquaTech: Ocean Horizon — Changelog (beta)
 - dependencies
-- org.jetbrains.annotations.Nullable
+- net.minecraft.core.BlockPos
 - MainViewModel
 - Маршрут Горизонта — AquaTech meta-progression
-- SkillTreeData
-- SkillPassiveHandler
+- Q: launcher MainWindow AXAML visual HIG pass
+- net.minecraft.world.level.Level
 - gen_stardew_rhythm_ui.py
 - HubDataService
 - publish_client_pack.py
@@ -74,7 +74,7 @@
 - HttpDownload
 - 🗺️ Полный Роадмап Развития Игрока: AquaTech (Minecraft 1.20.1)
 - Mod Development Guidelines
-- SkillDefinitions
+- IslandLimiterTracker
 - bootstrap_p0_local.py
 - Продвинутая — Продвинутая электрическая эра
 - Электрика — baseElectric
@@ -84,7 +84,7 @@
 - patch_chapter
 - Minimalist Minecraft Pixel Art GUI Skill
 - patches/patch_fawe_mohist.py
-- HubDataService.java
+- SeabedDredgerBlockEntity
 - .EnsureJava17Async
 - test_stage12_fonts.py
 - launcher_tests/test_bootstrap_update.py
@@ -94,10 +94,10 @@
 - reorganize_layout.py
 - sync_lodestone_mods.py
 - AquaTech Release & Development Workflows
-- ModItems.java
+- RhythmHookSession.java
 - RodType
 - Client
-- .PlayAsync
+- SkillDefinitions
 - AquaTech
 - gen_rhythm_textures.py
 - generate_resource_rods.py
@@ -111,13 +111,14 @@
 - Пар — steam
 - make_rate
 - finish_pack_release.py
-- strip_op_quest_rewards.py
+- .LoginAsync
 - install_kubejs.py
 - make_boot_fixes_datapack.py
+- portal/smoke_portal_and_versions.py
 - deploy/deploy_runtime.ps1
 - generate_site.py
 - cf_token_playwright.js
-- net.minecraft.network.FriendlyByteBuf
+- net.minecraft.world.entity.player.Inventory
 - force_deep_ocean_world.py
 - download
 - upload_pack_release.py
@@ -125,23 +126,24 @@
 - Дополнительные тексты guide.* / quarry.guide.*
 - deploy/deploy_industrial_upgrade.ps1
 - scripts/
-- StarCatcherEnchantmentHandler.java
+- IslandGuardHandler
 - deploy_to_cloudflare.py
 - generate_iu_chapters_snbt.py
-- FishingRodCompat
-- fix_iu_item_ids.py
+- AutoFisherBlockEntity.java
+- Data
 - portal/set_github_cf_secret.py
 - Q: How does LoliLand draw smooth vector-like in-game UI?
-- AquaLumenUI.java
+- HubDataService.java
 - compress_quest_image.py
-- net.minecraftforge.eventbus.api.SubscribeEvent
+- 7. Animation & Interaction
 - generate_aquatech_ui_assets.py
 - tools/get_cf_token.py
 - tools/patch_fawe_mohist.py
 - tools/patch_iu_no_free_scanner.py
-- .QueryStatusAsync
+- RaftRegistry
+- OceanPlayerMechanics
 - extract_all_case_textures.py
-- Program
+- trends_data.js
 - create_ocean_atom_island.py
 - create_ocean_raft.py
 - tools/set_github_cf_secret.py
@@ -149,10 +151,10 @@
 - tools/test_portal_login_cookie.py
 - tools/test_portal_login_happy.py
 - ponytail-audit/SKILL.md
-- net.minecraft.world.entity.player.Inventory
-- parse_all_tabs.py
+- CustomEnergyStorage
+- WarpConfig
 - aquatech/bootstrap
-- FishShopConfig
+- ForgeInstaller
 - bump_jar
 - Ponytail Gain
 - build_case_icons.py
@@ -160,7 +162,7 @@
 - Примитив — Примитивная эра
 - Совершенная — perElectric
 - Обзор — Основная информация
-- .LoginAsync
+- Design System Inspiration of Cursor
 - deploy_apexnodes_sftp.py
 - install_aquatech_rank_prefixes.py
 - net.minecraft.world.entity.player.Player
@@ -172,40 +174,42 @@
 - Industrial Upgrade — руководство из мода
 - dependencies
 - repair_server_world.py
-- AquaTechLauncher
+- .QueryStatusAsync
 - toggle_iu_space_dims.py
-- CapabilityEvents
+- Design System Inspiration of OpenCode
 - check_aquateche_domain.py
 - tools/test_bootstrap_update.py
 - embed.js
-- DeepBuildGuard
+- ServerListHelper
 - deploy_first_party.py
 - patches/patch_iu_no_free_scanner.py
-- net.minecraft.core.BlockPos
+- net.minecraft.network.FriendlyByteBuf
 - AquaSkillCapability
 - gen_pixel_balance_ui.py
 - net.minecraft.world.item.ItemStack
-- OceanPlayerMechanics
-- fix_aquatech_sc_fish_minigame.py
+- net.minecraft.server.MinecraftServer
+- NetworkHandler
 - prune_mods_whitelist.py
 - StarCatcherAttachments
-- ServerListHelper
+- setup_apex_daily_reload.py
 - PersonalRaftSpawner
-- AquaSkillCapability.java
+- DailyContract
 - test_stage13_widgets.py
 - patch_fawe_typeproperty.py
 - ponytail-debt/SKILL.md
 - test_stage11_blur.py
-- FishingSpeedHandler.java
-- net.minecraft.world.item.Item
+- Design System Inspiration of Raycast
+- DeepBuildGuard
+- build_mod_tabs.py
 - upload_ftbquests_assets.py
-- portal/smoke_portal_and_versions.py
+- Design System Inspiration of Resend
 - CustomFishingLootManager
 - generate_manifest.py
-- setup_mohist_server.py
-- SeabedDredgerBlockEntity
-- RodDurability
+- FishingRodCompat
+- 96_fish_stocking.js
+- ClientHello
 - gen_item_texture.py
+- setup_mohist_server.py
 - 90_fisherman_cat_shop.js
 - patch_skyblockbuilder_exitportal.py
 - patch_ftbquests.py
@@ -213,8 +217,8 @@
 - aquatech-ui/gradlew
 - Q: What is Stage 1 native GUI kit in aquatech_ui?
 - resolve_tabs.py
-- ForgeInstaller
-- OceanFilterBlockEntity
+- Design System Inspiration of Ferrari
+- FishingSpeedHandler
 - build_all_rank_badges.py
 - Q: What is Stage 3 packets and resource cache in aquatech_ui?
 - replace_release_bootstrap_exe.py
@@ -223,29 +227,171 @@
 - render_minecraft_block
 - export_client_pack.py
 - patch_missing_textures.py
-- portal/test_portal_login_cookie.py
-- 75_ftb_chapter_rewards.js
-- TackleBoxMenu
+- CapabilityEvents
 - RateModPersistHandler
+- 75_ftb_chapter_rewards.js
+- 95_deep_sea_bounty.js
+- ChatBubblePacket
+- restore_multinoise_overworld.py
+- gen_bonus_chapters.py
+- Design System Inspiration of Framer
+- Design System Inspiration of Lamborghini
+- Design System Inspiration of Notion
+- Design System Inspiration of NVIDIA
+- Design System Inspiration of PostHog
+- Design System Inspiration of Renault
+- Design System Inspiration of Stripe
+- Design System Inspiration of Superhuman
+- Design System Inspiration of Tesla
+- Design System Inspiration of Vercel
+- Design System Inspiration of Warp
+- L2: 流畅交互
+- Design System Inspiration of Cal.com
+- Design System Inspiration of Claude (Anthropic)
+- Design System Inspiration of Clay
+- Design System Inspiration of Composio
+- Design System Inspiration of Linear
+- Design System Inspiration of Lovable
+- Design System Inspiration of Mintlify
+- Design System Inspiration of Uber
+- Design System Inspiration of VoltAgent
+- Design System Inspiration of Zapier
+- Design System Inspiration of Apple
+- Design System Inspiration of Expo
+- Design System Inspiration of Mistral AI
+- Design System Inspiration of Sanity
+- Design System Inspiration of Cohere
+- Design System Inspiration of IBM
+- Design System Inspiration of Ollama
+- Design System Inspiration of Replicate
+- Design System Inspiration of Together AI
+- Design System Inspiration of Airbnb
+- Design System Inspiration of ElevenLabs
+- Design System Inspiration of HashiCorp
+- Design System Inspiration of MiniMax
+- Design System Inspiration of MongoDB
+- Design System Inspiration of xAI
+- Design System Inspiration of ClickHouse
+- Design System Inspiration of Runway
+- Design System Inspiration of Sentry
+- Design System Inspiration of Supabase
+- Design System Inspiration of Pinterest
+- Design System Inspiration of SpaceX
+- Design System Inspiration of Spotify
+- Design System Inspiration of BMW
+- Design System Inspiration of Figma
+- Design Review Process
+- Design System Inspiration of Revolut
+- Design System Inspiration of Wise
+- extract_design_tokens.py
+- Web Design
+- Design System Inspiration of Intercom
+- Design System Inspiration of Coinbase
+- Design System Inspiration of Kraken
+- Design System Inspiration of Miro
+- S2CSyncLimitersPacket
+- Liquid Glass
+- Design System Inspiration of Airtable
+- Apple Pay
+- Design System Inspiration of Webflow
+- Scroll-Story Patterns
+- 按风格 × 场景的推荐组合
+- Augmented Reality
+- HubSnapshot
+- Layout
+- Machine Learning
+- app.js
+- neutralize_aquatech_sc_preview.py
+- Apple Design Skill
+- Style Seeds
+- RodDurability
+- Inclusion
+- 按类别索引
+- Apple Pencil And Scribble
+- Color
+- System Icon Set
+- Typography
+- Lucide-React 图标分类速查表
+- crawl_website.py
+- Q: launcher HIG remaining: RAM selected, logout confirm, keyboard, auth checking
+- Generative AI
+- Best practices
+- Accessibility
+- App Icons
+- Quick Topic Mapping
+- Maps
+- Right To Left
+- Settings
+- web-design
+- Scene Defaults
+- Dark Mode
+- File Management
+- Game Controls
+- Gestures
+- Multitasking
+- Pointing Devices
+- 质量检查清单
+- Drag And Drop
+- Launching
+- Live Viewing Apps
+- Managing Notifications
+- Motion
+- Offering Help
+- Undo And Redo
+- Charting Data
+- Focus And Selection
+- Going Full Screen
+- Icons
+- Images
+- Keyboards
+- Managing Accounts
+- Onboarding
+- Printing
+- Privacy
+- Searching
+- Writing
+- 文字装饰判断规则
+- RodDurabilityApplier
+- Design Review Agent
+- Branding
+- Collaboration And Sharing
+- Entering Data
+- Loading
+- Modality
+- Playing Audio
+- Playing Video
+- Ratings And Reviews
+- Feedback
+- Materials
+- Playing Haptics
+- DESIGN.md Template
+- fetch_unsplash_images.py
+- plan-sess_5b2b6bb5-fe25-4bb9-b2d5-bf187cfdf39c.md
+- Q: LoliLand-style AquaTech launcher layout
+- jar_items
+- check_quest_rewards.py
+- dump_quest_rewards.py
+- parse_all_tabs.py
+- portal/test_portal_login_cookie.py
 
 ## God Nodes (most connected - your core abstractions)
 1. `Улучшенная — Улучшенная электрическая эра` - 105 edges
 2. `Продвинутая — Продвинутая электрическая эра` - 94 edges
 3. `Электрика — baseElectric` - 60 edges
-4. `json()` - 56 edges
-5. `bad()` - 55 edges
+4. `json()` - 59 edges
+5. `bad()` - 58 edges
 6. `HubDataService` - 51 edges
-7. `AquaSkillCapability` - 44 edges
-8. `AutoFisherBlockEntity` - 39 edges
-9. `Пар — steam` - 39 edges
-10. `MainViewModel` - 38 edges
+7. `MainViewModel` - 46 edges
+8. `AquaSkillCapability` - 44 edges
+9. `handleApi()` - 41 edges
+10. `AutoFisherBlockEntity` - 39 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `patch()` --indirect_call--> `repl()`  [INFERRED]
+  tools/patches/patch_iu_fishing_hints.py → scripts/tasks/wrap_ch1_rewards.py
 - `buildIslandCommand()` --indirect_call--> `ctx()`  [INFERRED]
   kubejs/server_scripts/70_island_auto_claim.js → worker/index.js
 - `main()` --calls--> `build_leaf_index()`  [INFERRED]
-  scripts/tasks/extract_iu_guide_book.py → tools/quests/gen_iu_guide_ftbquests.py
-- `main()` --calls--> `load_models()`  [INFERRED]
   scripts/tasks/extract_iu_guide_book.py → tools/quests/gen_iu_guide_ftbquests.py
 - `main()` --calls--> `parse_quests()`  [INFERRED]
   scripts/tasks/extract_iu_guide_book.py → tools/quests/gen_iu_guide_ftbquests.py
@@ -255,46 +401,46 @@
 ## Import Cycles
 - None detected.
 
-## Communities (278 total, 42 thin omitted)
+## Communities (424 total, 47 thin omitted)
 
 ### Community 0 - "index.js"
 Cohesion: 0.07
-Nodes (88): onRequestPatch(), mapRow(), onRequestGet(), onRequestPost(), parsePerks(), SHORT, onRequestGet(), onRequestDelete() (+80 more)
+Nodes (91): onRequestPatch(), mapRow(), onRequestGet(), onRequestPost(), parsePerks(), SHORT, onRequestGet(), onRequestDelete() (+83 more)
 
 ### Community 1 - "MarketService"
-Cohesion: 0.27
-Nodes (5): com.google.gson.JsonObject, java.net.HttpURLConnection, MarketEntry, JsonObject, MarketService
+Cohesion: 0.20
+Nodes (4): java.net.HttpURLConnection, MarketEntry, JsonObject, MarketService
 
 ### Community 2 - "net.minecraft.server.level.ServerPlayer"
 Cohesion: 0.13
-Nodes (5): ServerTickEvent, HubActionHandler, ItemStack, HubEconomy, net.minecraft.server.level.ServerPlayer
+Nodes (6): PlayerLoggedInEvent, HubActionHandler, ItemStack, TopEntry, HubEconomy, net.minecraft.server.level.ServerPlayer
 
 ### Community 3 - "AquaTech Addon + KubeJS System"
 Cohesion: 0.04
 Nodes (41): 1) New KubeJS nerf script, 2) New KubeJS craft (gated), 3) Extend fishing resource mapping (Java), 4) New rate tier (Java + data), 5) Hub store/case (out of scope until economy bridge), 6) StarCatcher texture refresh, Examples — AquaTech addons, Feature request → layer (quick) (+33 more)
 
 ### Community 4 - "js/site.js"
-Cohesion: 0.13
-Nodes (34): api(), applySiteCopy(), catalogCard(), cleanPrivilege(), copyIP(), ensureAudio(), esc(), formatNewsDate() (+26 more)
+Cohesion: 0.11
+Nodes (41): api(), applySiteCopy(), catalogCard(), cleanPrivilege(), copyIP(), ensureAudio(), esc(), formatNewsDate() (+33 more)
 
-### Community 5 - "IslandGuardHandler"
-Cohesion: 0.13
-Nodes (9): Detonate, IslandGuardHandler, BlockPos, BreakEvent, EntityPlaceEvent, LivingHurtEvent, Mod.EventBusSubscriber, net.minecraftforge.event.CommandEvent (+1 more)
+### Community 5 - "OceanEventsService"
+Cohesion: 0.18
+Nodes (8): JsonObject, Mod.EventBusSubscriber, PlayerLoggedInEvent, ServerTickEvent, OceanEventsService, Quest, TopEntry, TournamentState
 
 ### Community 6 - "Ponytail"
 Cohesion: 0.22
 Nodes (8): Boundaries, Intensity, Output, Persistence, Ponytail, Rules, The ladder, When NOT to be lazy
 
 ### Community 7 - ".CheckAndApplyAsync"
-Cohesion: 0.14
-Nodes (13): InlineData, BootstrapManifest, LauncherSelfUpdate, Action, CancellationToken, Task, Updated, VersionCompareTests (+5 more)
+Cohesion: 0.12
+Nodes (14): InlineData, BootstrapManifest, LauncherSelfUpdate, Action, CancellationToken, Task, Updated, VersionCompareTests (+6 more)
 
 ### Community 8 - "main.go"
 Cohesion: 0.09
 Nodes (31): copyDir(), copyFile(), downloadFile(), fetchBestManifest(), fetchManifest(), findLauncher(), localVer(), logf() (+23 more)
 
 ### Community 9 - "gen_iu_guide_ftbquests.py"
-Cohesion: 0.26
+Cohesion: 0.25
 Nodes (15): main(), strip_mc(), title_for(), build_leaf_index(), escape_snbt(), load_models(), main(), parse_quests() (+7 more)
 
 ### Community 10 - "🗺️ AquaTech Technical Roadmap & System Audit (Архитектура, Бэкенд, Лаунчер, Инфраструктура)"
@@ -325,9 +471,9 @@ Nodes (20): arrow_fill(), bevel_panel(), draw(), energy_fill_strip(), flame_fill
 Cohesion: 0.11
 Nodes (18): Fish-only (без ресурсного пула AquaTech), T10 — `starcatcher:obsidian_rod`, T11 — `starcatcher:lush_glowberry_rod`, T12 — `starcatcher:magmaforged_rod`, T13 — `starcatcher:alpha_rod`, T1 — `starcatcher:bamboo_rod` / `minecraft:fishing_rod`, T2 — `starcatcher:humble_rod`, T3 — `starcatcher:good_old_rod` (+10 more)
 
-### Community 17 - "AquaTechLauncher.Core"
-Cohesion: 0.13
-Nodes (5): AquaTechLauncher.Core, FileNotFoundException, FileNotFoundError, SessionStore, string
+### Community 17 - "FishShopConfig"
+Cohesion: 0.21
+Nodes (4): ResourceLocation, Data, FishDef, FishShopConfig
 
 ### Community 18 - "gen_clean_machine_guis.py"
 Cohesion: 0.32
@@ -337,17 +483,17 @@ Nodes (19): arrow_well(), divider(), energy_well(), inv_grid(), main(), make_alt
 Cohesion: 0.12
 Nodes (16): SkillCategory, AIR, ALL_BONUS, CATCH_MULT, FE_EFFICIENCY, FE_GEN, FISHING_SPEED, KELP_HARVEST (+8 more)
 
-### Community 20 - "ModClientConfig"
-Cohesion: 0.40
-Nodes (5): BooleanValue, ConfigValue, DoubleValue, IntValue, ModClientConfig
+### Community 20 - "PackStateCache"
+Cohesion: 0.22
+Nodes (7): Dictionary, Entry, IEnumerable, Entry, PackStateCache, PackStateCacheTests, Fact
 
-### Community 21 - "AutoFisherBlockEntity.java"
-Cohesion: 0.11
-Nodes (20): CompoundTag, AquaSkillProvider, Override, InventoryNbt, CompoundTag, MachineUpgrades, Override, OutputOnlyWrapper (+12 more)
+### Community 21 - "SkillTreeData"
+Cohesion: 0.16
+Nodes (3): SkillTreeData, C2SUnlockSkillPacket, Context
 
-### Community 22 - "Fact"
-Cohesion: 0.14
-Nodes (8): AquaTechLauncher.Core.Tests, Fact, HttpResponseMessage, AutoJoinArgumentTests, ManifestNeedsDownloadTests, ServerListHelperTests, SessionCookieParseTests, ZipVerifyTests
+### Community 22 - "AquaTechLauncher.Core"
+Cohesion: 0.09
+Nodes (9): AquaTechLauncher.Core, AquaTechLauncher.Core.Tests, HttpResponseMessage, SessionStore, string, AutoJoinArgumentTests, ManifestNeedsDownloadTests, SessionCookieParseTests (+1 more)
 
 ### Community 23 - ".BuildAsync"
 Cohesion: 0.24
@@ -358,31 +504,31 @@ Cohesion: 0.25
 Nodes (18): browser(), build_atlas(), build_item(), build_logo(), build_sheet(), closed_path(), cog_path(), enum_order() (+10 more)
 
 ### Community 25 - "AutoFisherBlockEntity"
-Cohesion: 0.16
-Nodes (6): ClientboundBlockEntityDataPacket, ClientGamePacketListener, Connection, AutoFisherBlockEntity, Override, Packet
+Cohesion: 0.15
+Nodes (6): ClientboundBlockEntityDataPacket, ClientGamePacketListener, AutoFisherBlockEntity, Connection, Override, Packet
 
 ### Community 26 - "Ponytail Help"
 Cohesion: 0.25
 Nodes (7): Configure Default Mode, Deactivate, Levels, More, Ponytail Help, Skills, Update
 
 ### Community 27 - ".ApplyAsync"
-Cohesion: 0.18
+Cohesion: 0.16
 Nodes (12): Deleted, Failed, ManifestSync, PackFileEntry, PackManifest, Action, CancellationToken, HashSet (+4 more)
 
-### Community 28 - "ChestFallbackUI.java"
-Cohesion: 0.16
-Nodes (10): ChestFallbackUI, FallbackMenu, Item, ItemStack, Override, net.minecraft.world.Container, net.minecraft.world.inventory.ChestMenu, net.minecraft.world.inventory.ClickType (+2 more)
+### Community 28 - "net.minecraftforge.eventbus.api.SubscribeEvent"
+Cohesion: 0.09
+Nodes (21): java.lang.reflect.Field, java.lang.reflect.Method, AquaTechUI, BreakEvent, Mod.EventBusSubscriber, PlayerTickEvent, SkillPassiveHandler, PlayerLoggedOutEvent (+13 more)
 
-### Community 29 - "RateModItem.java"
-Cohesion: 0.10
-Nodes (12): java.lang.reflect.Method, RateModItem, RateTier, X16, X2, X32, X4, X64 (+4 more)
+### Community 29 - "SkyblockAutoIsland"
+Cohesion: 0.33
+Nodes (3): Mod.EventBusSubscriber, PlayerLoggedInEvent, SkyblockAutoIsland
 
 ### Community 30 - "release_launcher.py"
 Cohesion: 0.34
 Nodes (13): build_go_bootstrap(), get_current_version(), gh_api(), main(), md5_file(), pack_launcher_zip(), publish_dotnet_launcher(), Path (+5 more)
 
 ### Community 31 - "HorizonEvents"
-Cohesion: 0.21
+Cohesion: 0.23
 Nodes (5): HorizonEvents, BreakEvent, Mod.EventBusSubscriber, PlayerLoggedInEvent, PlayerTickEvent
 
 ### Community 32 - "PatchIUNoFreeScanner"
@@ -393,17 +539,17 @@ Nodes (5): org.objectweb.asm.tree.AbstractInsnNode, org.objectweb.asm.tree.Field
 Cohesion: 0.21
 Nodes (4): AquaTechAPIHandler, AquaTech Sync & Web Portal Backend API Server. Serves: 1) Client Pack Updates…, Top 5 AquaTech players leaderboard., Fetch live player online count from mcsrvstat API.
 
-### Community 34 - "IslandLimiterTracker"
-Cohesion: 0.12
-Nodes (8): IslandLimiterHandler, BreakEvent, EntityPlaceEvent, Mod.EventBusSubscriber, IslandLimiterRules, IslandLimiterTracker, CompoundTag, Override
+### Community 34 - "ChestFallbackUI.java"
+Cohesion: 0.16
+Nodes (10): ChestFallbackUI, FallbackMenu, Item, ItemStack, Override, net.minecraft.world.Container, net.minecraft.world.inventory.ChestMenu, net.minecraft.world.inventory.ClickType (+2 more)
 
-### Community 35 - "ContainerType"
-Cohesion: 0.14
-Nodes (8): C2SOpenContainerPacket, ContainerType, BLOCK_LIMITERS, PERSONALIZATION, STORAGE_VAULT, Context, Context, S2COpenContainerPacket
+### Community 35 - ".PlayAsync"
+Cohesion: 0.31
+Nodes (7): IReadOnlyList, LauncherConfig, PlayOrchestrator, Action, CancellationToken, Task, Process
 
 ### Community 36 - "StormEvent"
 Cohesion: 0.13
-Nodes (11): Deprecated, Mod.EventBusSubscriber, Override, ServerTickEvent, Mode, AUTO, FORCE_OFF, FORCE_ON (+3 more)
+Nodes (10): Deprecated, Mod.EventBusSubscriber, Override, ServerTickEvent, Mode, AUTO, FORCE_OFF, FORCE_ON (+2 more)
 
 ### Community 37 - "gen_sc_fishing_ui.py"
 Cohesion: 0.42
@@ -425,13 +571,13 @@ Nodes (14): 1. Палитры, 2. Сетка и размеры (GUI-пиксел
 Cohesion: 0.48
 Nodes (6): clean_description(), gen_id(), get_best_registry_item(), get_russian_title(), parse_tab_file(), write_snbt_chapter()
 
-### Community 42 - ".PlayAsync"
-Cohesion: 0.22
-Nodes (4): Kind, Kind, UiSounds, Task
+### Community 42 - "KitConfig"
+Cohesion: 0.13
+Nodes (7): com.mojang.brigadier.builder.LiteralArgumentBuilder, LumenCommands, ServerTickEvent, Data, KitConfig, KitDef, KitItem
 
 ### Community 43 - "AquaTechCommand"
-Cohesion: 0.19
-Nodes (4): com.mojang.brigadier.context.CommandContext, AquaTechCommand, Mod.EventBusSubscriber, net.minecraft.commands.CommandSourceStack
+Cohesion: 0.13
+Nodes (7): com.mojang.brigadier.CommandDispatcher, com.mojang.brigadier.context.CommandContext, AquaTechCommand, Mod.EventBusSubscriber, HorizonRoute, net.minecraft.commands.CommandSourceStack, net.minecraftforge.event.RegisterCommandsEvent
 
 ### Community 44 - "setup_d1.py"
 Cohesion: 0.35
@@ -445,33 +591,37 @@ Nodes (11): 2026-07-28 — AquaTech UI hub expansion, 2026-07-28 — Machine GUI
 Cohesion: 0.17
 Nodes (11): @esbuild/win32-x64, playwright, dependencies, @cloudflare/workerd-windows-64, @esbuild/win32-x64, playwright, wrangler, @cloudflare/workerd-windows-64 (+3 more)
 
-### Community 47 - "org.jetbrains.annotations.Nullable"
-Cohesion: 0.12
-Nodes (23): AbyssalPortalBlock, BlockState, Override, AutoFisherBlock, Builder, Builder, Override, OceanAltarBlock (+15 more)
+### Community 47 - "net.minecraft.core.BlockPos"
+Cohesion: 0.08
+Nodes (36): AbyssalPortalBlock, BlockState, Override, AutoFisherBlock, BlockHitResult, Builder, Override, ContainerData (+28 more)
 
 ### Community 48 - "MainViewModel"
-Cohesion: 0.15
-Nodes (9): bool, double, IBrush, LogLine, MainViewModel, int, string, ObservableCollection (+1 more)
+Cohesion: 0.08
+Nodes (13): bool, double, IBrush, Kind, Kind, UiSounds, LogLine, MainViewModel (+5 more)
 
 ### Community 49 - "Маршрут Горизонта — AquaTech meta-progression"
 Cohesion: 0.18
 Nodes (10): FTB, Варпы, Горизонты → LuckPerms, Команды админа, Команды игрока, Контракты дня, Маршрут Горизонта — AquaTech meta-progression, Сезон (+2 more)
 
-### Community 51 - "SkillPassiveHandler"
-Cohesion: 0.22
-Nodes (5): BreakEvent, Mod.EventBusSubscriber, PlayerTickEvent, SkillPassiveHandler, net.minecraftforge.event.entity.living.LivingHurtEvent
+### Community 50 - "Q: launcher MainWindow AXAML visual HIG pass"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: launcher MainWindow AXAML visual HIG pass, Source Nodes
+
+### Community 51 - "net.minecraft.world.level.Level"
+Cohesion: 0.06
+Nodes (21): ItemStack, WorkingMachineTracker, AbyssalMagnetItem, Mod.EventBusSubscriber, Override, Override, RateModItem, RateTier (+13 more)
 
 ### Community 52 - "gen_stardew_rhythm_ui.py"
 Cohesion: 0.51
 Nodes (10): draw_bar(), draw_bubble_frames(), draw_dial(), draw_gem(), draw_needle(), draw_panel(), main(), px() (+2 more)
 
 ### Community 53 - "HubDataService"
-Cohesion: 0.09
-Nodes (21): CaseEntry, CaseResult, FishEntry, HubSnapshot, KitEntry, LootInfo, Offer, Profile (+13 more)
+Cohesion: 0.11
+Nodes (9): CaseResult, PlayerLoggedOutEvent, CachedRank, HubDataService, ClassLoader, LevelData, Rank, SeasonData (+1 more)
 
 ### Community 54 - "publish_client_pack.py"
-Cohesion: 0.36
-Nodes (10): asset_name(), main(), md5_file(), Path, Build AquaTech client pack + manifest for online CDN (website + GitHub…, Prefer repo roots, fall back to existing pack., should_skip(), sync_config_kube_resources() (+2 more)
+Cohesion: 0.21
+Nodes (16): asset_name(), backup_current_manifest(), load_prev_manifest(), main(), md5_file(), Path, Build AquaTech client pack + manifest for online CDN (website + GitHub…, Previous manifest: docs/pack/manifest.json (last published) or dist backup. (+8 more)
 
 ### Community 55 - "upload_to_github.py"
 Cohesion: 0.20
@@ -489,9 +639,9 @@ Nodes (9): 🌊 АКТ 1. Плот выжившего & Примитивный �
 Cohesion: 0.20
 Nodes (9): 1. Registration API & Mod ID, 2. GUI Architecture (Menu + Screen Separation), 3. Network Synchronization, 4. Models, Visuals & Language Keys, 5. Mohist Compatibility, Mod Development Guidelines, Project Rules & Development Standards: Minecraft 1.20.1 (Forge + Mohist), Strict Execution Protocol (Research -> Deep Thinking -> Double Check -> Dual Test Verification) (+1 more)
 
-### Community 59 - "SkillDefinitions"
-Cohesion: 0.22
-Nodes (6): NodeType, KEYSTONE, NOTABLE, SMALL, SkillDef, SkillDefinitions
+### Community 59 - "IslandLimiterTracker"
+Cohesion: 0.12
+Nodes (8): IslandLimiterHandler, BreakEvent, EntityPlaceEvent, Mod.EventBusSubscriber, IslandLimiterRules, IslandLimiterTracker, CompoundTag, Override
 
 ### Community 60 - "bootstrap_p0_local.py"
 Cohesion: 0.43
@@ -529,13 +679,13 @@ Nodes (6): 1. Minimalist Tech Design Principles (Auto-Fisher Style), 2. Advanced
 Cohesion: 0.22
 Nodes (16): _asm_classpath(), class_index_of(), _ensure_patcher_compiled(), _java_bin(), _javac_bin(), main(), patch_ibukkit(), patch_impl_typeproperty() (+8 more)
 
-### Community 69 - "HubDataService.java"
-Cohesion: 0.10
-Nodes (10): com.google.gson.JsonArray, Mod.EventBusSubscriber, PlayerLoggedOutEvent, ServerEvents, LumenConfig, ClientHello, HubAction, Context (+2 more)
+### Community 69 - "SeabedDredgerBlockEntity"
+Cohesion: 0.11
+Nodes (9): ItemStack, Override, SeabedDredgerBlockEntity, UpgradeType, EFFICIENCY, OCEAN_BOUNTY, SPEED, SPEED_X4 (+1 more)
 
 ### Community 70 - ".EnsureJava17Async"
-Cohesion: 0.17
-Nodes (9): JavaLocator, Action, CancellationToken, string, Task, LauncherConstants, HashSet, int (+1 more)
+Cohesion: 0.13
+Nodes (11): FileNotFoundException, FileNotFoundError, JavaLocator, Action, CancellationToken, string, Task, LauncherConstants (+3 more)
 
 ### Community 71 - "test_stage12_fonts.py"
 Cohesion: 0.57
@@ -569,21 +719,21 @@ Nodes (6): find_lodestone_mods(), jars_for_prefix(), md5_file(), Path, Push firs
 Cohesion: 0.12
 Nodes (15): 1. Player-facing changes, 2. Portal changes (`docs/`, `worker/`, etc.), 3. After code edits, 4. After Apex server deploy, 5. FTB Quests safety, 6. Git Commits & Push Policy, 7. Repository Hygiene & Artifact Prevention, 8. Launcher Performance & Networking Standards (+7 more)
 
-### Community 79 - "ModItems.java"
-Cohesion: 0.15
-Nodes (14): ModRegistries, ModBlocks, ModCreativeTabs, ModItems, ModMenuTypes, ModSounds, net.minecraft.sounds.SoundEvent, net.minecraft.world.inventory.MenuType (+6 more)
+### Community 79 - "RhythmHookSession.java"
+Cohesion: 0.13
+Nodes (12): BooleanValue, ConfigValue, DoubleValue, IntValue, ModClientConfig, BooleanValue, ConfigValue, IntValue (+4 more)
 
 ### Community 80 - "RodType"
 Cohesion: 0.05
-Nodes (25): AquaFishCaughtEvent, AquaTechFishingRodItem, Override, RodType, ABYSSAL, DIAMOND, EMERALD, ENDER (+17 more)
+Nodes (26): AquaFishCaughtEvent, AquaTechFishingRodItem, Override, RodType, ABYSSAL, DIAMOND, EMERALD, ENDER (+18 more)
 
 ### Community 81 - "Client"
 Cohesion: 0.28
 Nodes (7): Client, Common, BooleanValue, Builder, ConfigValue, DoubleValue, IntValue
 
-### Community 82 - ".PlayAsync"
-Cohesion: 0.28
-Nodes (7): IReadOnlyList, LauncherConfig, PlayOrchestrator, Action, CancellationToken, Task, Process
+### Community 82 - "SkillDefinitions"
+Cohesion: 0.22
+Nodes (6): NodeType, KEYSTONE, NOTABLE, SMALL, SkillDef, SkillDefinitions
 
 ### Community 83 - "AquaTech"
 Cohesion: 0.33
@@ -637,9 +787,9 @@ Nodes (4): draw_digit(), main(), make_rate(), Image
 Cohesion: 0.80
 Nodes (4): api(), find_release(), main(), token()
 
-### Community 96 - "strip_op_quest_rewards.py"
-Cohesion: 0.50
-Nodes (3): main(), patch_file(), Path
+### Community 96 - ".LoginAsync"
+Cohesion: 0.27
+Nodes (9): Error, PortalApi, PortalStats, UserProfile, CancellationToken, string, Task, Ok (+1 more)
 
 ### Community 97 - "install_kubejs.py"
 Cohesion: 0.70
@@ -653,9 +803,9 @@ Nodes (4): main(), Path, tag_path(), write_tag()
 Cohesion: 0.50
 Nodes (3): { chromium }, fs, path
 
-### Community 103 - "net.minecraft.network.FriendlyByteBuf"
-Cohesion: 0.04
-Nodes (23): PlayerProfile, ServerStats, C2SOpenSkillTreePacket, Context, C2SRhythmHookResultPacket, Context, C2SUnlockSkillPacket, C2SAuthPacket (+15 more)
+### Community 103 - "net.minecraft.world.entity.player.Inventory"
+Cohesion: 0.07
+Nodes (19): AutoFisherMenu, OceanAltarMenu, OceanFilterMenu, SeabedDredgerMenu, TackleBoxMenu, UpgradeItem, ModBlocks, ModItems (+11 more)
 
 ### Community 105 - "download"
 Cohesion: 0.67
@@ -673,45 +823,57 @@ Nodes (31): `guide.chemicalplant`, `guide.chemicalplant1`, `guide.chemicalplant2
 Cohesion: 0.40
 Nodes (4): ApexNodes deploy, ApexNodes MariaDB, scripts/, Правила для агента
 
-### Community 111 - "StarCatcherEnchantmentHandler.java"
-Cohesion: 0.33
-Nodes (4): Mod.EventBusSubscriber, StarCatcherEnchantmentHandler, net.minecraftforge.event.AnvilUpdateEvent, PickupXp
+### Community 111 - "IslandGuardHandler"
+Cohesion: 0.14
+Nodes (9): IslandGuardHandler, BlockPos, BreakEvent, EntityPlaceEvent, LivingHurtEvent, Mod.EventBusSubscriber, net.minecraft.world.level.LevelAccessor, net.minecraftforge.event.CommandEvent (+1 more)
 
 ### Community 113 - "generate_iu_chapters_snbt.py"
 Cohesion: 0.83
 Nodes (3): clean_description(), format_snbt_chapter(), gen_id()
 
+### Community 114 - "AutoFisherBlockEntity.java"
+Cohesion: 0.09
+Nodes (24): Override, OceanAltarBlockEntity, Override, OceanFilterBlockEntity, AquaSkillProvider, Override, ModBlockEntities, InventoryNbt (+16 more)
+
+### Community 115 - "Data"
+Cohesion: 0.32
+Nodes (7): CaseConfig, CaseDef, Daily, Data, RandomSource, LootDef, PendingCaseReward
+
 ### Community 117 - "Q: How does LoliLand draw smooth vector-like in-game UI?"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How does LoliLand draw smooth vector-like in-game UI?, Source Nodes
 
-### Community 118 - "AquaLumenUI.java"
-Cohesion: 0.18
-Nodes (7): com.google.gson.Gson, AquaLumenUI, LumenNetwork, net.minecraftforge.fml.common.Mod, net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent, net.minecraftforge.network.simple.SimpleChannel, org.slf4j.Logger
+### Community 118 - "HubDataService.java"
+Cohesion: 0.11
+Nodes (14): com.google.gson.Gson, com.google.gson.JsonArray, AquaLumenUI, Mod.EventBusSubscriber, ServerEvents, LumenConfig, LumenNetwork, LumenPackets (+6 more)
 
-### Community 122 - "net.minecraftforge.eventbus.api.SubscribeEvent"
-Cohesion: 0.10
-Nodes (20): AquaTechUI, BooleanValue, ConfigValue, IntValue, ModConfig, NetworkHandler, Context, S2CSyncSkillsPacket (+12 more)
+### Community 122 - "7. Animation & Interaction"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Animation & Interaction, 8. Do's and Don'ts (+32 more)
 
-### Community 131 - ".QueryStatusAsync"
-Cohesion: 0.29
-Nodes (6): ServerPing, ServerStatusResult, Task, Ms, Online, Stream
+### Community 129 - "RaftRegistry"
+Cohesion: 0.21
+Nodes (5): Detonate, Entry, CompoundTag, Override, RaftRegistry
 
-### Community 136 - "Program"
-Cohesion: 0.32
-Nodes (4): AppBuilder, DllImport, Program, STAThread
+### Community 131 - "OceanPlayerMechanics"
+Cohesion: 0.27
+Nodes (3): Mod.EventBusSubscriber, PlayerTickEvent, OceanPlayerMechanics
 
 ### Community 144 - "ponytail-audit/SKILL.md"
 Cohesion: 0.40
 Nodes (4): Boundaries, Hunt, Output, Tags
 
-### Community 163 - "net.minecraft.world.entity.player.Inventory"
-Cohesion: 0.09
-Nodes (10): Override, OceanAltarBlockEntity, AutoFisherMenu, OceanAltarMenu, OceanFilterMenu, SeabedDredgerMenu, net.minecraft.world.entity.player.Inventory, net.minecraft.world.inventory.AbstractContainerMenu (+2 more)
+### Community 163 - "CustomEnergyStorage"
+Cohesion: 0.33
+Nodes (3): CustomEnergyStorage, Override, net.minecraftforge.energy.EnergyStorage
 
-### Community 167 - "FishShopConfig"
-Cohesion: 0.06
-Nodes (22): com.mojang.brigadier.builder.LiteralArgumentBuilder, com.mojang.brigadier.CommandDispatcher, ResourceLocation, LumenCommands, CaseConfig, CaseDef, Daily, Data (+14 more)
+### Community 164 - "WarpConfig"
+Cohesion: 0.28
+Nodes (4): Data, ServerPlayer, WarpConfig, WarpDef
+
+### Community 167 - "ForgeInstaller"
+Cohesion: 0.44
+Nodes (4): ForgeInstaller, Action, CancellationToken, Task
 
 ### Community 172 - "bump_jar"
 Cohesion: 0.83
@@ -722,8 +884,8 @@ Cohesion: 0.40
 Nodes (4): Boundaries, Honesty boundary, Ponytail Gain, Scoreboard
 
 ### Community 182 - "build_case_icons.py"
-Cohesion: 0.24
-Nodes (16): dominant_color(), find_texture(), iso_cube(), iso_gem(), iso_ingot(), iso_nuggets(), main(), open_jar() (+8 more)
+Cohesion: 0.22
+Nodes (12): find_texture(), iso_cube(), main(), open_jar(), Image, ZipFile, User's Downloads first, then ru.minecraft.wiki Grid_<имя>.png (cached)., 2:1 isometric cube: top diamond + left/right sides (verified affine). (+4 more)
 
 ### Community 187 - "Примитив — Примитивная эра"
 Cohesion: 0.08
@@ -737,13 +899,13 @@ Nodes (25): solid matter ← `auto_digger`, xenon ← `proteus_pebble`, Адми
 Cohesion: 0.08
 Nodes (25): Виды энергии, Вулканы, Гевея, Жители, Загрязнение воздуха и почвы, Колонии, Космос, Механический рецептор (+17 more)
 
-### Community 190 - ".LoginAsync"
-Cohesion: 0.27
-Nodes (9): Error, PortalApi, PortalStats, UserProfile, CancellationToken, string, Task, Ok (+1 more)
+### Community 190 - "Design System Inspiration of Cursor"
+Cohesion: 0.05
+Nodes (41): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Interaction & Motion, 8. Responsive Behavior (+33 more)
 
 ### Community 191 - "deploy_apexnodes_sftp.py"
-Cohesion: 0.11
-Nodes (33): main(), wg_flag_cmd(), apex_command(), apex_create_backup(), apex_delete_backup(), _apex_headers(), apex_json(), apex_list_backups() (+25 more)
+Cohesion: 0.09
+Nodes (36): main(), wg_flag_cmd(), apex_command(), apex_create_backup(), apex_delete_backup(), _apex_headers(), apex_json(), apex_list_backups() (+28 more)
 
 ### Community 192 - "install_aquatech_rank_prefixes.py"
 Cohesion: 0.36
@@ -751,7 +913,7 @@ Nodes (11): apply_luckperms(), build_font_json(), glyph_char(), main(), patch_se
 
 ### Community 193 - "net.minecraft.world.entity.player.Player"
 Cohesion: 0.12
-Nodes (7): SkillEffects, Snapshot, Override, Override, Override, Override, net.minecraft.world.entity.player.Player
+Nodes (8): SkillEffects, Snapshot, Override, Override, Override, Override, Override, net.minecraft.world.entity.player.Player
 
 ### Community 194 - "ponytail-review/SKILL.md"
 Cohesion: 0.40
@@ -771,7 +933,7 @@ Nodes (4): Answer, Outcome, Q: Install gstack caveman graphify for AquaTech Curs
 
 ### Community 198 - "Json"
 Cohesion: 0.04
-Nodes (3): Json, Neutralize aquatech SC fish preview (loot still from AquaTech rod pools)., Boost density of vanilla underwater vegetation/decoration features (kelp,…
+Nodes (3): Json, Harden aquatech StarCatcher fish: real minigame difficulty, no skip., Boost density of vanilla underwater vegetation/decoration features (kelp,…
 
 ### Community 199 - "Industrial Upgrade — руководство из мода"
 Cohesion: 0.50
@@ -781,17 +943,17 @@ Nodes (3): Industrial Upgrade — руководство из мода, Вкла
 Cohesion: 0.33
 Nodes (5): dependencies, @cloudflare/workerd-windows-64, wrangler, @cloudflare/workerd-windows-64, wrangler
 
-### Community 202 - "AquaTechLauncher"
-Cohesion: 0.10
-Nodes (12): Application, Control, AquaTechLauncher.Views, AquaTechLauncher, AquaTechLauncher.ViewModels, IDataTemplate, App, ViewLocator (+4 more)
+### Community 202 - ".QueryStatusAsync"
+Cohesion: 0.06
+Nodes (22): AppBuilder, Application, Control, AquaTechLauncher.Views, AquaTechLauncher, AquaTechLauncher.ViewModels, DllImport, IDataTemplate (+14 more)
 
 ### Community 203 - "toggle_iu_space_dims.py"
 Cohesion: 0.38
 Nodes (10): clean_level_dat(), deploy_jar(), disable(), enable(), find_source_jar(), main(), park_world_dims(), Path (+2 more)
 
-### Community 204 - "CapabilityEvents"
-Cohesion: 0.33
-Nodes (4): CapabilityEvents, Clone, Mod.EventBusSubscriber, PlayerLoggedInEvent
+### Community 204 - "Design System Inspiration of OpenCode"
+Cohesion: 0.05
+Nodes (41): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Interaction & Motion, 8. Responsive Behavior (+33 more)
 
 ### Community 205 - "check_aquateche_domain.py"
 Cohesion: 0.60
@@ -801,9 +963,9 @@ Nodes (4): api(), main(), Print Cloudflare NS for aquateche.store and check zone
 Cohesion: 0.36
 Nodes (8): api(), bindChrome(), bridgeSend(), esc(), getQueryParam(), renderCabinet(), renderDonate(), send()
 
-### Community 209 - "DeepBuildGuard"
-Cohesion: 0.32
-Nodes (4): EntityMultiPlaceEvent, DeepBuildGuard, EntityPlaceEvent, Mod.EventBusSubscriber
+### Community 209 - "ServerListHelper"
+Cohesion: 0.35
+Nodes (3): BinaryWriter, ServerListHelper, ServerListHelperTests
 
 ### Community 210 - "deploy_first_party.py"
 Cohesion: 0.44
@@ -813,21 +975,21 @@ Nodes (8): bump_pack_version(), copy_jars_to_targets(), main(), md5_file(), Path
 Cohesion: 0.50
 Nodes (8): _cp(), _ensure_compiled(), _java(), _javac(), main(), patch_jar(), Path, Remove IU free ore-scanner give from IUCore.loginPlayer. Usage: python…
 
-### Community 213 - "net.minecraft.core.BlockPos"
-Cohesion: 0.09
-Nodes (16): BlockHitResult, Override, ContainerData, ContainerData, ContainerData, ContainerData, WorkingMachineTracker, BlockHitResult (+8 more)
+### Community 213 - "net.minecraft.network.FriendlyByteBuf"
+Cohesion: 0.04
+Nodes (26): CompoundTag, PlayerProfile, ServerStats, C2SOpenSkillTreePacket, Context, C2SRhythmHookResultPacket, C2SAuthPacket, Context (+18 more)
 
 ### Community 215 - "gen_pixel_balance_ui.py"
 Cohesion: 0.20
 Nodes (30): draw_fish(), hline(), main(), make_bar(), make_bobber(), make_bubbles(), make_fish_sheet(), make_heart_burst() (+22 more)
 
 ### Community 216 - "net.minecraft.world.item.ItemStack"
-Cohesion: 0.21
+Cohesion: 0.18
 Nodes (6): ItemStack, FishingLootHandler, ItemStack, Mod.EventBusSubscriber, net.minecraft.util.RandomSource, net.minecraft.world.item.ItemStack
 
-### Community 217 - "OceanPlayerMechanics"
-Cohesion: 0.27
-Nodes (3): Mod.EventBusSubscriber, PlayerTickEvent, OceanPlayerMechanics
+### Community 217 - "net.minecraft.server.MinecraftServer"
+Cohesion: 0.22
+Nodes (6): com.google.gson.JsonObject, java.sql.Connection, java.sql.Driver, ClassLoader, MariaStats, net.minecraft.server.MinecraftServer
 
 ### Community 219 - "prune_mods_whitelist.py"
 Cohesion: 0.73
@@ -837,13 +999,17 @@ Nodes (5): is_keep(), main(), mandatory_deps(), park_dir(), Path
 Cohesion: 0.28
 Nodes (3): java.lang.reflect.Constructor, ItemStack, StarCatcherAttachments
 
-### Community 222 - "PersonalRaftSpawner"
-Cohesion: 0.10
-Nodes (12): Entry, BlockPos, ClassLoader, Clone, CompoundTag, Mod.EventBusSubscriber, Override, PlayerLoggedInEvent (+4 more)
+### Community 221 - "setup_apex_daily_reload.py"
+Cohesion: 0.57
+Nodes (7): apex_json(), ensure_schedule(), ensure_tasks(), list_schedules(), load_key(), main(), print_schedules()
 
-### Community 223 - "AquaSkillCapability.java"
-Cohesion: 0.16
-Nodes (8): DailyContract, DEPTH, FISH, KELP, MACHINE, MARKET, HorizonRoute, net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent
+### Community 222 - "PersonalRaftSpawner"
+Cohesion: 0.14
+Nodes (9): BlockPos, ClassLoader, Clone, Mod.EventBusSubscriber, PlayerLoggedInEvent, RegisterCommandsEvent, PersonalRaftSpawner, net.minecraft.server.level.ServerLevel (+1 more)
+
+### Community 223 - "DailyContract"
+Cohesion: 0.33
+Nodes (6): DailyContract, DEPTH, FISH, KELP, MACHINE, MARKET
 
 ### Community 224 - "test_stage13_widgets.py"
 Cohesion: 0.64
@@ -861,29 +1027,45 @@ Nodes (3): Boundaries, Output, Scan
 Cohesion: 0.58
 Nodes (8): fail(), main(), test_blurred_screen_keeps_world(), test_engine_does_not_steal_load_effect(), test_glsl(), test_policy(), test_post_chain(), test_program_json()
 
-### Community 228 - "FishingSpeedHandler.java"
-Cohesion: 0.15
-Nodes (7): java.lang.reflect.Field, RodDurabilityApplier, FishingSpeedHandler, Mod.EventBusSubscriber, PlayerTickEvent, net.minecraft.resources.ResourceLocation, net.minecraft.world.entity.projectile.FishingHook
+### Community 228 - "Design System Inspiration of Raycast"
+Cohesion: 0.05
+Nodes (41): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+33 more)
 
-### Community 229 - "net.minecraft.world.item.Item"
-Cohesion: 0.08
-Nodes (19): AbyssalMagnetItem, Mod.EventBusSubscriber, Override, PlayerLoggedOutEvent, PlayerTickEvent, Override, Override, SonarGogglesItem (+11 more)
+### Community 229 - "DeepBuildGuard"
+Cohesion: 0.32
+Nodes (4): EntityMultiPlaceEvent, DeepBuildGuard, EntityPlaceEvent, Mod.EventBusSubscriber
+
+### Community 230 - "build_mod_tabs.py"
+Cohesion: 0.06
+Nodes (61): Match, add_era_gate(), copy_to_server(), ensure_optional(), index_all(), is_blocked_item(), main(), Path (+53 more)
 
 ### Community 231 - "upload_ftbquests_assets.py"
 Cohesion: 0.83
 Nodes (3): api(), main(), token()
 
+### Community 232 - "Design System Inspiration of Resend"
+Cohesion: 0.05
+Nodes (41): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+33 more)
+
 ### Community 233 - "CustomFishingLootManager"
 Cohesion: 0.33
 Nodes (3): CustomFishingLootManager, CustomLootEntry, ItemStack
 
-### Community 236 - "SeabedDredgerBlockEntity"
-Cohesion: 0.13
-Nodes (6): ItemStack, Override, SeabedDredgerBlockEntity, CustomEnergyStorage, Override, net.minecraftforge.energy.EnergyStorage
+### Community 235 - "FishingRodCompat"
+Cohesion: 0.17
+Nodes (6): Mod.EventBusSubscriber, StarCatcherEnchantmentHandler, FishingRodCompat, net.minecraftforge.event.AnvilUpdateEvent, net.minecraftforge.event.entity.player.ItemFishedEvent, PickupXp
+
+### Community 236 - "96_fish_stocking.js"
+Cohesion: 0.47
+Nodes (5): AC_SCHOOLS, blockId(), findWaterSpot(), isWaterBlock(), VANILLA_SCHOOLS
+
+### Community 237 - "ClientHello"
+Cohesion: 0.18
+Nodes (3): ClientHello, HubAction, Context
 
 ### Community 244 - "90_fisherman_cat_shop.js"
-Cohesion: 0.67
-Nodes (3): FISH_CATALOG, getDailyTrends(), openFishermanShop()
+Cohesion: 0.46
+Nodes (7): computeTrends(), FISH_CATALOG, getDailyTrends(), localDay(), multFor(), openFishermanShop(), trendMessage()
 
 ### Community 245 - "patch_skyblockbuilder_exitportal.py"
 Cohesion: 0.83
@@ -901,13 +1083,13 @@ Nodes (3): gradlew script, die(), warn()
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: What is Stage 1 native GUI kit in aquatech_ui?, Source Nodes
 
-### Community 256 - "ForgeInstaller"
-Cohesion: 0.44
-Nodes (4): ForgeInstaller, Action, CancellationToken, Task
+### Community 256 - "Design System Inspiration of Ferrari"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
 
-### Community 259 - "OceanFilterBlockEntity"
-Cohesion: 0.22
-Nodes (3): ItemStack, Override, OceanFilterBlockEntity
+### Community 259 - "FishingSpeedHandler"
+Cohesion: 0.31
+Nodes (4): FishingSpeedHandler, Mod.EventBusSubscriber, PlayerTickEvent, net.minecraft.world.entity.projectile.FishingHook
 
 ### Community 261 - "build_all_rank_badges.py"
 Cohesion: 0.70
@@ -933,29 +1115,557 @@ Nodes (3): fetchStatus(), initRadar(), setOfflineState()
 Cohesion: 0.50
 Nodes (3): Image, Renders top face and side face into a standard Minecraft inventory isometric…, render_minecraft_block()
 
-### Community 279 - "RateModPersistHandler"
+### Community 269 - "CapabilityEvents"
+Cohesion: 0.33
+Nodes (4): CapabilityEvents, Clone, Mod.EventBusSubscriber, PlayerLoggedInEvent
+
+### Community 273 - "RateModPersistHandler"
 Cohesion: 0.33
 Nodes (3): Mod.EventBusSubscriber, PlayerTickEvent, RateModPersistHandler
 
+### Community 280 - "restore_multinoise_overworld.py"
+Cohesion: 0.50
+Nodes (3): patch_level_dat(), Path, Set overworld biome_source to vanilla multi_noise. Does NOT wipe chunks.
+
+### Community 284 - "Design System Inspiration of Framer"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 285 - "Design System Inspiration of Lamborghini"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 286 - "Design System Inspiration of Notion"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Responsive Behavior, 8. Accessibility & States (+32 more)
+
+### Community 287 - "Design System Inspiration of NVIDIA"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Responsive Behavior, 8. Responsive Behavior (Extended) (+32 more)
+
+### Community 288 - "Design System Inspiration of PostHog"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 289 - "Design System Inspiration of Renault"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 290 - "Design System Inspiration of Stripe"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 291 - "Design System Inspiration of Superhuman"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 292 - "Design System Inspiration of Tesla"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 293 - "Design System Inspiration of Vercel"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 294 - "Design System Inspiration of Warp"
+Cohesion: 0.05
+Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
+
+### Community 295 - "L2: 流畅交互"
+Cohesion: 0.05
+Nodes (40): 3D 透视卡片, Blob 浮动（活泼风格背景）, Focus Ring, Glow Pulse（暗色风格）, GSAP + ScrollTrigger 基础设置, Hover：下划线滑入, Hover：卡片图片缩放, Hover：发光边框（暗色风格） (+32 more)
+
+### Community 296 - "Design System Inspiration of Cal.com"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 297 - "Design System Inspiration of Claude (Anthropic)"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 298 - "Design System Inspiration of Clay"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 299 - "Design System Inspiration of Composio"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 300 - "Design System Inspiration of Linear"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 301 - "Design System Inspiration of Lovable"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 302 - "Design System Inspiration of Mintlify"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Dark Mode, 8. Responsive Behavior (+31 more)
+
+### Community 303 - "Design System Inspiration of Uber"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 304 - "Design System Inspiration of VoltAgent"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 305 - "Design System Inspiration of Zapier"
+Cohesion: 0.05
+Nodes (39): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+31 more)
+
+### Community 306 - "Design System Inspiration of Apple"
+Cohesion: 0.05
+Nodes (38): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+30 more)
+
+### Community 307 - "Design System Inspiration of Expo"
+Cohesion: 0.05
+Nodes (38): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+30 more)
+
+### Community 308 - "Design System Inspiration of Mistral AI"
+Cohesion: 0.05
+Nodes (38): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+30 more)
+
+### Community 309 - "Design System Inspiration of Sanity"
+Cohesion: 0.05
+Nodes (38): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+30 more)
+
+### Community 310 - "Design System Inspiration of Cohere"
+Cohesion: 0.05
+Nodes (37): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+29 more)
+
+### Community 311 - "Design System Inspiration of IBM"
+Cohesion: 0.05
+Nodes (37): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+29 more)
+
+### Community 312 - "Design System Inspiration of Ollama"
+Cohesion: 0.05
+Nodes (37): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+29 more)
+
+### Community 313 - "Design System Inspiration of Replicate"
+Cohesion: 0.05
+Nodes (37): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+29 more)
+
+### Community 314 - "Design System Inspiration of Together AI"
+Cohesion: 0.05
+Nodes (37): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+29 more)
+
+### Community 315 - "Design System Inspiration of Airbnb"
+Cohesion: 0.05
+Nodes (36): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+28 more)
+
+### Community 316 - "Design System Inspiration of ElevenLabs"
+Cohesion: 0.05
+Nodes (36): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+28 more)
+
+### Community 317 - "Design System Inspiration of HashiCorp"
+Cohesion: 0.05
+Nodes (36): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+28 more)
+
+### Community 318 - "Design System Inspiration of MiniMax"
+Cohesion: 0.05
+Nodes (36): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+28 more)
+
+### Community 319 - "Design System Inspiration of MongoDB"
+Cohesion: 0.05
+Nodes (36): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+28 more)
+
+### Community 320 - "Design System Inspiration of xAI"
+Cohesion: 0.05
+Nodes (36): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+28 more)
+
+### Community 321 - "Design System Inspiration of ClickHouse"
+Cohesion: 0.06
+Nodes (35): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+27 more)
+
+### Community 322 - "Design System Inspiration of Runway"
+Cohesion: 0.06
+Nodes (35): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+27 more)
+
+### Community 323 - "Design System Inspiration of Sentry"
+Cohesion: 0.06
+Nodes (35): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+27 more)
+
+### Community 324 - "Design System Inspiration of Supabase"
+Cohesion: 0.06
+Nodes (35): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+27 more)
+
+### Community 325 - "Design System Inspiration of Pinterest"
+Cohesion: 0.06
+Nodes (34): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+26 more)
+
+### Community 326 - "Design System Inspiration of SpaceX"
+Cohesion: 0.06
+Nodes (34): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+26 more)
+
+### Community 327 - "Design System Inspiration of Spotify"
+Cohesion: 0.06
+Nodes (33): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+25 more)
+
+### Community 328 - "Design System Inspiration of BMW"
+Cohesion: 0.06
+Nodes (32): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+24 more)
+
+### Community 329 - "Design System Inspiration of Figma"
+Cohesion: 0.06
+Nodes (31): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+23 more)
+
+### Community 330 - "Design Review Process"
+Cohesion: 0.07
+Nodes (28): 1. Accessibility (Critical), 2. Platform Conventions (High), 3. Visual Design (High), 4. Interaction Design (Medium), 5. Content & Writing (Medium), Accessibility Audit, App Icon Review, Both platforms (+20 more)
+
+### Community 331 - "Design System Inspiration of Revolut"
+Cohesion: 0.07
+Nodes (28): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+20 more)
+
+### Community 332 - "Design System Inspiration of Wise"
+Cohesion: 0.07
+Nodes (27): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+19 more)
+
+### Community 333 - "extract_design_tokens.py"
+Cohesion: 0.17
+Nodes (24): analyze_html(), css_values_to_px(), dedupe(), extract_all_tokens(), extract_animations(), extract_border_radius(), extract_colors(), extract_css_url_refs() (+16 more)
+
+### Community 334 - "Web Design"
+Cohesion: 0.08
+Nodes (25): 100 分质量底线（硬性验收）, A1. URL 分析（有参考 URL 时）, A2. 对话引导（无参考物时）, A3. 交互档位确认（不可跳过）, A4. PRD 驱动（检测到项目级规范文件时）, C1. 确认场景 + 收集内容, C2. 设计框架 + 生成代码, C3. 审计 (+17 more)
+
+### Community 335 - "Design System Inspiration of Intercom"
+Cohesion: 0.08
+Nodes (24): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+16 more)
+
+### Community 336 - "Design System Inspiration of Coinbase"
+Cohesion: 0.08
+Nodes (23): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+15 more)
+
+### Community 337 - "Design System Inspiration of Kraken"
+Cohesion: 0.08
+Nodes (23): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+15 more)
+
+### Community 338 - "Design System Inspiration of Miro"
+Cohesion: 0.08
+Nodes (23): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+15 more)
+
+### Community 340 - "Liquid Glass"
+Cohesion: 0.09
+Nodes (21): Applying Color, Best Practices, Clear, Color on Liquid Glass, Color Rules, Core Concept, Default Behavior, Flutter (+13 more)
+
+### Community 341 - "Design System Inspiration of Airtable"
+Cohesion: 0.09
+Nodes (21): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout, 6. Depth, 7. Do's and Don'ts, 8. Responsive Behavior (+13 more)
+
+### Community 342 - "Apple Pay"
+Cohesion: 0.11
+Nodes (18): Apple Pay, Apple Pay mark, Button size and position, Button styles, Button types, Customizing the payment sheet, Data validation, Displaying a website icon (+10 more)
+
+### Community 343 - "Design System Inspiration of Webflow"
+Cohesion: 0.11
+Nodes (18): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout, 6. Depth: 5-layer cascading shadow system, 7. Do's and Don'ts, 8. Responsive: 479px, 768px, 992px (+10 more)
+
+### Community 344 - "Scroll-Story Patterns"
+Cohesion: 0.11
+Nodes (18): L3 硬性要求（除 6 类基础动效外加码）, Pattern 1 — Card Constellation Hero（卡片星座 Hero）, Pattern 2 — Card Collapse Transition（卡片汇聚过渡）, Pattern 3 — Left Pin / Right Swap Narrative（左 pin / 右 swap 叙事）, Pattern 4 — WebGL 3D Signature Moment（WebGL 3D 签名时刻）, Pattern 5 — Section Title Bloom / Ghost（大标题光晕/幽灵影）, Pattern 6 — Abstract Gradient Art Top（抽象渐变艺术顶）, Scroll-Story Patterns (+10 more)
+
+### Community 345 - "按风格 × 场景的推荐组合"
+Cohesion: 0.12
+Nodes (16): Animations — 元素级（29 个）, Backgrounds — 氛围层（38 个）, Chinese Elegant, Components — 交互构件（30 个）, Dark Editorial（hueapp / Linear 骨架类）, Dark Tech / Cyber（cursor / warp / 赛博）, Minimal Pure / Editorial Light, Motion Library — vue-bits / reactbits (+8 more)
+
+### Community 346 - "Augmented Reality"
+Cohesion: 0.12
+Nodes (15): App usability, Augmented Reality, Best practices, Communicating with people, Designing object interactions, Handling interruptions, Helping people place objects, Icons (+7 more)
+
+### Community 347 - "HubSnapshot"
+Cohesion: 0.18
+Nodes (13): CaseEntry, FishEntry, HubSnapshot, KitEntry, LootInfo, Offer, Profile, Season (+5 more)
+
+### Community 348 - "Layout"
+Cohesion: 0.14
+Nodes (13): Adaptability, Best practices, Desktop, Guides and safe areas, Layout, Mobile, Mobile device screen dimensions, Mobile device size classes (+5 more)
+
+### Community 349 - "Machine Learning"
+Cohesion: 0.14
+Nodes (13): Attribution, Calibration, Confidence, Corrections, Explicit feedback, Implicit feedback, Limitations, Machine Learning (+5 more)
+
+### Community 350 - "app.js"
+Cohesion: 0.16
+Nodes (8): blindsContainer, hexToRGB(), i18n, initGradientBlinds(), nav, perf, prepStops(), progress
+
+### Community 352 - "Apple Design Skill"
+Cohesion: 0.15
+Nodes (12): Apple Design Skill, Claude Code, Codex (OpenAI), Coverage, Cursor, Example Usage, File Structure, License (+4 more)
+
+### Community 353 - "Style Seeds"
+Cohesion: 0.15
+Nodes (12): 10. 玻璃拟态 (Glassmorphism), 1. 奶油编辑 (Cream Editorial), 2. 暗黑科技 (Dark Tech), 3. 极简克制 (Minimal Pure), 4. 温暖商务 (Warm Professional), 5. 活泼创意 (Playful Creative), 6. 中文优雅 (Chinese Elegant), 7. 赛博朋克 (Cyberpunk) (+4 more)
+
+### Community 355 - "Inclusion"
+Cohesion: 0.17
+Nodes (11): Accessibility, Avoiding stereotypes, Being approachable, Gender identity, Inclusion, Inclusive by design, Languages, People and settings (+3 more)
+
+### Community 356 - "按类别索引"
+Cohesion: 0.17
+Nodes (11): AI / ML, Design Systems Index, 企业 / 消费, 使用方式, 基础设施, 开发工具, 按类别索引, 推荐参考（按设计风格） (+3 more)
+
+### Community 357 - "Apple Pencil And Scribble"
+Cohesion: 0.18
+Nodes (10): Apple Pencil And Scribble, Barrel roll, Best practices, Custom drawing, Double tap, Hover, Platform considerations, Related (+2 more)
+
+### Community 358 - "Color"
+Cohesion: 0.18
+Nodes (10): App accent colors, Best practices, Color, Color management, Desktop platforms, Inclusive color, Mobile platforms, Platform considerations (+2 more)
+
+### Community 359 - "System Icon Set"
+Cohesion: 0.18
+Nodes (10): Animations, Custom symbols, Design variants, Gradients, Overview, Platform considerations, Rendering modes, System Icon Set (+2 more)
+
+### Community 360 - "Typography"
+Cohesion: 0.18
+Nodes (10): Conveying hierarchy, Desktop, Ensuring legibility, Mobile, Overview, Platform considerations, Supporting scalable text, Typography (+2 more)
+
+### Community 361 - "Lucide-React 图标分类速查表"
+Cohesion: 0.18
+Nodes (10): Lucide-React 图标分类速查表, 使用示例, 内容/文档, 导航类, 技能/技术, 注意事项, 状态/反馈, 用户/个人 (+2 more)
+
+### Community 362 - "crawl_website.py"
+Cohesion: 0.27
+Nodes (10): crawl(), extract_structure(), extract_stylesheets(), extract_tokens(), Path, Scroll through the page step by step, capturing viewport screenshots., Extract design tokens from the rendered page., Extract page structure: sections, images, CSS links, JS libraries. (+2 more)
+
+### Community 363 - "Q: launcher HIG remaining: RAM selected, logout confirm, keyboard, auth checking"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: launcher HIG remaining: RAM selected, logout confirm, keyboard, auth checking, Source Nodes
+
+### Community 364 - "Generative AI"
+Cohesion: 0.20
+Nodes (9): Best practices, Continuous improvement, Generative AI, Inputs, Models and datasets, Outputs, Privacy, Related (+1 more)
+
+### Community 365 - "Best practices"
+Cohesion: 0.20
+Nodes (9): Auto-renewable subscriptions, Best practices, Helping people manage their subscriptions, In-App Purchase, Making signup effortless, Platform considerations, Providing help with in-app purchases, Supporting Family Sharing (+1 more)
+
+### Community 366 - "Accessibility"
+Cohesion: 0.22
+Nodes (8): Accessibility, Cognitive, Hearing, Mobility, Platform considerations, Related, Speech, Vision
+
+### Community 367 - "App Icons"
+Cohesion: 0.22
+Nodes (8): App Icons, Appearances, Design, Icon shape, Layer design, Platform considerations, Specifications, Visual effects
+
+### Community 368 - "Quick Topic Mapping"
+Cohesion: 0.22
+Nodes (8): Accessibility & Inclusion, Design Guidelines Reference Lookup, Integrations & Technologies, Interaction Design, Media, Quick Topic Mapping, UX Patterns, Visual Design
+
+### Community 369 - "Maps"
+Cohesion: 0.22
+Nodes (8): Adding place cards outside of a map, Best practices, Custom information, Indoor maps, Maps, Place cards, Platform considerations, Related
+
+### Community 370 - "Right To Left"
+Cohesion: 0.22
+Nodes (8): Controls, Images, Interface icons, Numbers and characters, Overview, Platform considerations, Right To Left, Text alignment
+
+### Community 371 - "Settings"
+Cohesion: 0.22
+Nodes (8): Best practices, Desktop, General settings, Overview, Platform considerations, Settings, System settings, Task-specific options
+
+### Community 372 - "web-design"
+Cohesion: 0.22
+Nodes (8): 🙏 Credits, 🧭 How it works, 🚀 Install, 📄 License, 📦 Repository layout, 💻 Run the landing page locally, web-design, ✨ What it does
+
+### Community 373 - "Scene Defaults"
+Cohesion: 0.22
+Nodes (8): App UI / 管理后台, Blog / 内容站, Dashboard / 数据面板, Landing Page / 产品介绍页, Portfolio / 作品集, PPT / 课件 / 知识地图, Scene Defaults, 邮件模板
+
+### Community 374 - "Dark Mode"
+Cohesion: 0.25
+Nodes (7): Best practices, Dark Mode, Dark Mode colors, Desktop, Icons and images, Mobile platforms, Text
+
+### Community 375 - "File Management"
+Cohesion: 0.25
+Nodes (7): Creating and opening files, Desktop, File Management, Mobile platforms, Quick Look previews, Related, Saving work
+
+### Community 376 - "Game Controls"
+Cohesion: 0.25
+Nodes (7): Desktop, Game Controls, Keyboards, Mobile platforms, Physical controllers, Related, Touch controls
+
+### Community 377 - "Gestures"
+Cohesion: 0.25
+Nodes (7): Best practices, Custom gestures, Desktop, Gestures, Mobile platforms, Related, Standard gestures
+
+### Community 378 - "Multitasking"
+Cohesion: 0.25
+Nodes (7): Best practices, Desktop, Mobile, Multitasking, Platform considerations, Related, Tablet
+
+### Community 379 - "Pointing Devices"
+Cohesion: 0.25
+Nodes (7): Best practices, Desktop, Mobile, Platform considerations, Pointer, Pointing Devices, Related
+
+### Community 380 - "质量检查清单"
+Cohesion: 0.25
+Nodes (7): DESIGN.md 合规（必查）, 交互, 参考网站解析（有参考 URL 时）, 响应式, 字体, 视觉系统, 质量检查清单
+
+### Community 381 - "Drag And Drop"
+Cohesion: 0.29
+Nodes (6): Accepting drops, Best practices, Desktop, Drag And Drop, Mobile platforms, Providing feedback
+
+### Community 382 - "Launching"
+Cohesion: 0.29
+Nodes (6): Best practices, Launch screens, Launching, Mobile, Platform considerations, Related
+
+### Community 383 - "Live Viewing Apps"
+Cohesion: 0.29
+Nodes (6): Best practices, Cloud DVR, EPG experience, Live Viewing Apps, Platform considerations, Related
+
+### Community 384 - "Managing Notifications"
+Cohesion: 0.29
+Nodes (6): Best practices, Integrating with focus, Managing Notifications, Platform considerations, Related, Sending marketing notifications
+
+### Community 385 - "Motion"
+Cohesion: 0.29
+Nodes (6): Best practices, Leveraging platform capabilities, Motion, Platform considerations, Providing feedback, Related
+
+### Community 386 - "Offering Help"
+Cohesion: 0.29
+Nodes (6): Best practices, Desktop, Mobile, Offering Help, Platform considerations, Related
+
+### Community 387 - "Undo And Redo"
+Cohesion: 0.29
+Nodes (6): Best practices, Desktop, Mobile, Overview, Platform considerations, Undo And Redo
+
+### Community 388 - "Charting Data"
+Cohesion: 0.33
+Nodes (5): Best practices, Charting Data, Designing effective charts, Platform considerations, Related
+
+### Community 389 - "Focus And Selection"
+Cohesion: 0.33
+Nodes (5): Best practices, Desktop, Focus And Selection, Mobile platforms, Related
+
+### Community 390 - "Going Full Screen"
+Cohesion: 0.33
+Nodes (5): Best practices, Desktop, Going Full Screen, Mobile, Platform considerations
+
+### Community 391 - "Icons"
+Cohesion: 0.33
+Nodes (5): Best practices, Desktop, Icons, Related, Standard icons
+
+### Community 392 - "Images"
+Cohesion: 0.33
+Nodes (5): Best practices, Formats, Images, Platform considerations, Resolution
+
+### Community 393 - "Keyboards"
+Cohesion: 0.33
+Nodes (5): Best practices, Custom keyboard shortcuts, Keyboards, Platform considerations, Standard keyboard shortcuts
+
+### Community 394 - "Managing Accounts"
+Cohesion: 0.33
+Nodes (5): Best practices, Deleting accounts, Managing Accounts, Platform considerations, Related
+
+### Community 395 - "Onboarding"
+Cohesion: 0.33
+Nodes (5): Best practices, Onboarding, Onboarding, Platform considerations, Related
+
+### Community 396 - "Printing"
+Cohesion: 0.33
+Nodes (5): Best practices, Desktop, Platform considerations, Printing, Related
+
+### Community 397 - "Privacy"
+Cohesion: 0.33
+Nodes (5): Best practices, Desktop, Platform considerations, Privacy, Related
+
+### Community 398 - "Searching"
+Cohesion: 0.33
+Nodes (5): Best practices, Overview, Platform considerations, Searching, Systemwide search
+
+### Community 399 - "Writing"
+Cohesion: 0.33
+Nodes (5): Best practices, Getting started, Overview, Platform considerations, Writing
+
+### Community 400 - "文字装饰判断规则"
+Cohesion: 0.33
+Nodes (5): 决策表（快速参考）, 文字投影（text-shadow）, 文字装饰判断规则, 渐变文字（gradient text）, 装饰性下划线 / 高亮
+
+### Community 403 - "Design Review Agent"
+Cohesion: 0.40
+Nodes (4): Design Review Agent, How to Use, Key References, Output Format
+
+### Community 404 - "Branding"
+Cohesion: 0.40
+Nodes (4): Best practices, Branding, Platform considerations, Related
+
+### Community 405 - "Collaboration And Sharing"
+Cohesion: 0.40
+Nodes (4): Best practices, Collaboration And Sharing, Platform considerations, Related
+
+### Community 406 - "Entering Data"
+Cohesion: 0.40
+Nodes (4): Best practices, Desktop, Entering Data, Related
+
+### Community 407 - "Loading"
+Cohesion: 0.40
+Nodes (4): Best practices, Loading, Platform considerations, Related
+
+### Community 408 - "Modality"
+Cohesion: 0.40
+Nodes (4): Best practices, Modality, Platform considerations, Related
+
+### Community 409 - "Playing Audio"
+Cohesion: 0.40
+Nodes (4): Best practices, Desktop, Playing Audio, Related
+
+### Community 410 - "Playing Video"
+Cohesion: 0.40
+Nodes (4): Best practices, Platform considerations, Playing Video, Related
+
+### Community 411 - "Ratings And Reviews"
+Cohesion: 0.40
+Nodes (4): Best practices, Overview, Platform considerations, Ratings And Reviews
+
+### Community 412 - "Feedback"
+Cohesion: 0.50
+Nodes (3): Best practices, Feedback, Related
+
+### Community 413 - "Materials"
+Cohesion: 0.50
+Nodes (3): Best practices, Materials, Platform considerations
+
+### Community 414 - "Playing Haptics"
+Cohesion: 0.50
+Nodes (3): Desktop, Playing Haptics, Related
+
+### Community 415 - "DESIGN.md Template"
+Cohesion: 0.50
+Nodes (3): DESIGN.md Template, 模板, 生成指导
+
+### Community 416 - "fetch_unsplash_images.py"
+Cohesion: 0.83
+Nodes (3): generate_unsplash_url(), get_images_by_category(), main()
+
+### Community 418 - "Q: LoliLand-style AquaTech launcher layout"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: LoliLand-style AquaTech launcher layout, Source Nodes
+
+### Community 420 - "jar_items"
+Cohesion: 0.67
+Nodes (3): jar_items(), main(), Path
+
 ## Knowledge Gaps
-- **749 isolated node(s):** `aquatech/bootstrap`, `version`, `mc_version`, `forge_version`, `server_ip` (+744 more)
+- **2884 isolated node(s):** `perf`, `progress`, `nav`, `blindsContainer`, `i18n` (+2879 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **42 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **47 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `CustomFishingLootManager` connect `CustomFishingLootManager` to `net.minecraft.world.item.ItemStack`, `net.minecraftforge.eventbus.api.SubscribeEvent`, `AquaLumenUI.java`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
-- **Why does `LaunchCommandBuilder` connect `.BuildAsync` to `.PlayAsync`, `Fact`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
-- **Why does `PlayOrchestrator` connect `.PlayAsync` to `ForgeInstaller`, `.EnsureJava17Async`, `MainViewModel`, `AquaTechLauncher.Core`, `.BuildAsync`, `.ApplyAsync`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
-- **What connects `aquatech/bootstrap`, `version`, `mc_version` to the rest of the system?**
-  _749 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `LaunchCommandBuilder` connect `.BuildAsync` to `.PlayAsync`, `AquaTechLauncher.Core`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Why does `FishShopConfig` connect `FishShopConfig` to `Data`, `HubDataService.java`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Why does `CustomFishingLootManager` connect `CustomFishingLootManager` to `net.minecraft.world.item.ItemStack`, `AquaTechCommand`, `HubDataService.java`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **What connects `perf`, `progress`, `nav` to the rest of the system?**
+  _2884 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `index.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.07302533532041729 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07047619047619047 - nodes in this community are weakly interconnected._
 - **Should `net.minecraft.server.level.ServerPlayer` be split into smaller, more focused modules?**
-  _Cohesion score 0.13472706155632985 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1331923890063425 - nodes in this community are weakly interconnected._
 - **Should `AquaTech Addon + KubeJS System` be split into smaller, more focused modules?**
   _Cohesion score 0.044444444444444446 - nodes in this community are weakly interconnected._

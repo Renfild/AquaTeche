@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "endgame_aquatech"
-	group: ""
+	group: "END0000000000001"
 	icon: "industrialupgrade:admpanel/admpanel"
 	id: "891345EEFA4A4413835FEB0FD67E06AA"
 	order_index: 10
@@ -18,14 +18,18 @@
 			id: "031AE9F35C0842AFAB46B80ABFF9B669"
 			icon: "starcatcher:alpha_rod"
 			rewards: [{
-				id: "C82D0497889FBDE9"
-				count: 2
-				item: "aquatech_ui:rate_x64"
+				id: "03C27221D6F87C22"
+				item: {
+					Count: 2b
+					id: "aquatech_ui:rate_x64"
+				}
 				type: "item"
 			},{
-				id: "FB087914C7574E6C"
-				count: 2
-				item: "ae2:item_storage_cell_256k"
+				id: "1E75AC291ADAC9F8"
+				item: {
+					Count: 2b
+					id: "ae2:item_storage_cell_256k"
+				}
 				type: "item"
 			},{
 				id: "6D03EABB14D459C8"
@@ -34,7 +38,10 @@
 			}]
 			tasks: [{
 				id: "FE8A223FEFAE433A"
-				item: "starcatcher:alpha_rod"
+				item: {
+					Count: 1b
+					id: "starcatcher:alpha_rod"
+				}
 				type: "item"
 			}]
 			title: "Альфа-рыбак"
@@ -49,14 +56,18 @@
 			id: "9CF6D75A5FFE4A90845E52F198ADF492"
 			icon: "minecraft:nether_star"
 			rewards: [{
-				id: "39BBD7C96BF64E2B"
-				count: 4
-				item: "avaritia:crystal_matrix_ingot"
+				id: "4B88E37CAEC7AF6D"
+				item: {
+					Count: 4b
+					id: "avaritia:crystal_matrix_ingot"
+				}
 				type: "item"
 			},{
-				id: "07BDFDA4F6385EA0"
-				count: 2
-				item: "ae2:fluid_storage_cell_256k"
+				id: "BAC0BD1447BC69BD"
+				item: {
+					Count: 2b
+					id: "ae2:fluid_storage_cell_256k"
+				}
 				type: "item"
 			},{
 				id: "68AE385EDDDB7EFF"
@@ -82,9 +93,11 @@
 			id: "7373C3C191AA6D36"
 			icon: "avaritia:infinity_ingot"
 			rewards: [{
-				id: "04C05C750194B878"
-				count: 2
-				item: "ae2:cell_component_256k"
+				id: "11FF00FA8FE3A3F4"
+				item: {
+					Count: 2b
+					id: "ae2:cell_component_256k"
+				}
 				type: "item"
 			},{
 				id: "6CA5E8B52CBE8776"
@@ -93,7 +106,10 @@
 			}]
 			tasks: [{
 				id: "BC911A7D47F56FAE"
-				item: "avaritia:infinity_ingot"
+				item: {
+					Count: 1b
+					id: "avaritia:infinity_ingot"
+				}
 				type: "item"
 			}]
 			title: "Infinity на столе"
@@ -110,22 +126,32 @@
 			id: "ABC9A464ECF145D1BFE52FDD4581AE9B"
 			icon: "industrialupgrade:admpanel/admpanel"
 			rewards: [{
-				id: "18A92DBA81B4BD6F"
-				item: "industrialupgrade:machines/photonic_solar_panel"
+				id: "29B4FDEED0C16C27"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:machines/photonic_solar_panel"
+				}
 				type: "item"
 			},{
-				id: "58AAE4518276B246"
-				item: "avaritia:compressed_chest"
+				id: "8EC89B20E183E157"
+				item: {
+					Count: 1b
+					id: "avaritia:compressed_chest"
+				}
 				type: "item"
 			},{
-				id: "9A0AB9B1FD960EED"
-				count: 2
-				item: "ae2:item_storage_cell_256k"
+				id: "FDA20A4D28E28306"
+				item: {
+					Count: 2b
+					id: "ae2:item_storage_cell_256k"
+				}
 				type: "item"
 			},{
-				id: "9704459379781354"
-				count: 2
-				item: "ae2:fluid_storage_cell_256k"
+				id: "301E8399C7306D70"
+				item: {
+					Count: 2b
+					id: "ae2:fluid_storage_cell_256k"
+				}
 				type: "item"
 			},{
 				id: "2FF600D1F6169BCC"
@@ -134,7 +160,10 @@
 			}]
 			tasks: [{
 				id: "B13F08F94F11626E"
-				item: "industrialupgrade:admpanel/admpanel"
+				item: {
+					Count: 1b
+					id: "industrialupgrade:admpanel/admpanel"
+				}
 				type: "item"
 			}]
 			title: "Админ-панель"
