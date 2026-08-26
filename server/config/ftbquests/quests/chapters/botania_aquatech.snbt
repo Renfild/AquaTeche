@@ -1,0 +1,545 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "botania_aquatech"
+	group: ""
+	icon: "botania:lexicon"
+	id: "871A7A7163C2DE08"
+	order_index: 6
+	quest_links: [ ]
+	subtitle: "Цветы, мана, Терра, Альфхейм, Гайя."
+	quests: [
+		{
+			description: [
+				"Открой книгу. Без неё цветы и мана остаются"
+				"загадкой."
+			]
+			id: "0974ED5D3F5A4176"
+			icon: "botania:lexicon"
+			rewards: [{
+				id: "5A6F2B845D03F60C"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "2A63839551BC7468"
+				item: "botania:lexicon"
+				type: "item"
+			}]
+			title: "Лексика Ботании"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0974ED5D3F5A4176"]
+			description: [
+				"Сломай мистический цветок. Лепестки — сырьё почти"
+				"всех ранних крафтов Botania."
+			]
+			id: "BE79F2C32E9C822D"
+			icon: "botania:white_petal"
+			rewards: [{
+				id: "1D4B710A767972B3"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "4F157DB0B0C626EB"
+				count: 4L
+				item: "botania:white_petal"
+				type: "item"
+			}]
+			title: "Белый лепесток"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["BE79F2C32E9C822D"]
+			description: [
+				"Поставь алтарь, налей воду, брось лепестки. Так"
+				"собираются функциональные цветы."
+			]
+			id: "B5A044AA10566FA7"
+			icon: "botania:apothecary_default"
+			rewards: [{
+				id: "B12A2DA229C4EEFD"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "BAF6AB7A07E80E2A"
+				item: "botania:apothecary_default"
+				type: "item"
+			}]
+			title: "Лепестковый алтарь"
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["B5A044AA10566FA7"]
+			description: [
+				"Первый рабочий цветок. Превращает дерево в живую"
+				"древесину, камень — в живой камень."
+			]
+			id: "9E3FED4021CDD1CA"
+			icon: "botania:pure_daisy"
+			rewards: [{
+				id: "5799A1D586E04813"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "3BE6FD51F29A084F"
+				item: "botania:pure_daisy"
+				type: "item"
+			}]
+			title: "Чистоцвет"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["9E3FED4021CDD1CA"]
+			description: [
+				"Поставь дуб рядом с чистоцветом и подожди. Это"
+				"каркас мана-сетей."
+			]
+			id: "AB33A7FD19D145D8"
+			icon: "botania:livingwood"
+			rewards: [{
+				id: "84ED735131C84537"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "E8EF1456A15BC936"
+				count: 8L
+				item: "botania:livingwood"
+				type: "item"
+			}]
+			title: "Живая древесина"
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["9E3FED4021CDD1CA"]
+			description: [
+				"Тот же чистоцвет, но на обычном камне. Из него"
+				"делают бассейн и алтарь рун."
+			]
+			id: "A11367A10A68404C"
+			icon: "botania:livingrock"
+			rewards: [{
+				id: "7B9636289872AA10"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "2BED4FAF3997E80A"
+				count: 8L
+				item: "botania:livingrock"
+				type: "item"
+			}]
+			title: "Живой камень"
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["A11367A10A68404C"]
+			description: [
+				"Склад маны. Без него спредеры и пластина Терры не"
+				"работают."
+			]
+			id: "02405A7DBB0FD77D"
+			icon: "botania:mana_pool"
+			rewards: [{
+				id: "2BBD84397AC331EE"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "F39264C7B3D9FE07"
+				item: "botania:mana_pool"
+				type: "item"
+			}]
+			title: "Бассейн маны"
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["02405A7DBB0FD77D", "AB33A7FD19D145D8"]
+			description: [
+				"Стреляет маной в бассейн. Нацель его на бассейн и"
+				"поставь генерирующий цветок сзади."
+			]
+			id: "78FC05F3404DAB85"
+			icon: "botania:mana_spreader"
+			rewards: [{
+				id: "5F26F879247103E3"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "E869F51F502EE559"
+				item: "botania:mana_spreader"
+				type: "item"
+			}]
+			title: "Распылитель маны"
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["78FC05F3404DAB85"]
+			description: [
+				"Переносной заряд. Нужна, чтобы не бегать к бассейну"
+				"каждый раз."
+			]
+			id: "3649D35D98F02D4E"
+			icon: "botania:mana_tablet"
+			rewards: [{
+				id: "3B6050951D07C996"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "F45673ADF3BBFC6B"
+				item: "botania:mana_tablet"
+				type: "item"
+			}]
+			title: "Таблица маны"
+			x: 10.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["78FC05F3404DAB85"]
+			description: [
+				"Брось железный слиток в полный бассейн. Базовый"
+				"металл Botania."
+			]
+			id: "C0B23B743ABD2D62"
+			icon: "botania:manasteel_ingot"
+			rewards: [{
+				id: "8427DEC7F710990E"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "E7D6170B78E62724"
+				count: 4L
+				item: "botania:manasteel_ingot"
+				type: "item"
+			}]
+			title: "Манасталь"
+			x: 10.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["C0B23B743ABD2D62"]
+			description: [
+				"Связывает спредеры с приёмниками. ПКМ по спредеру,"
+				"затем по бассейну."
+			]
+			id: "9FE31ED86CAC91F6"
+			icon: "botania:twig_wand"
+			rewards: [{
+				id: "14807C63F33F02EB"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "9E1C1957EFDE8408"
+				item: "botania:twig_wand"
+				type: "item"
+			}]
+			title: "Жезл из прута"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["9FE31ED86CAC91F6"]
+			description: [
+				"Крафт рун. Налей ману в алтарь, разложи"
+				"ингредиенты, забери руну жезлом."
+			]
+			id: "0EBFF877A2990851"
+			icon: "botania:runic_altar"
+			rewards: [{
+				id: "5CAD129E1B346397"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "590C2E197CFF5F3B"
+				item: "botania:runic_altar"
+				type: "item"
+			}]
+			title: "Рунический алтарь"
+			x: 13.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0EBFF877A2990851"]
+			description: [
+				"Одна из четырёх стихийных рун. Дальше из них"
+				"собирают сезонные и греховные."
+			]
+			id: "F7E588634E582D62"
+			icon: "botania:rune_water"
+			rewards: [{
+				id: "1CF3CDE22F5BF2A6"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "C95AEDBAE1799E50"
+				item: "botania:rune_water"
+				type: "item"
+			}]
+			title: "Руна воды"
+			x: 15.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["F7E588634E582D62"]
+			description: [
+				"Стихийная руна. Нужна для Терры и части"
+				"функциональных цветов."
+			]
+			id: "04126A598BD11B07"
+			icon: "botania:rune_fire"
+			rewards: [{
+				id: "69D331A4C1945BD7"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "33FFA754B0C05E80"
+				item: "botania:rune_fire"
+				type: "item"
+			}]
+			title: "Руна огня"
+			x: 15.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["04126A598BD11B07"]
+			description: [
+				"Стихийная руна. Часто идёт в крафт землеройных и"
+				"защитных цветов."
+			]
+			id: "07C4E81B07DD69E8"
+			icon: "botania:rune_earth"
+			rewards: [{
+				id: "8C3441130166B0B5"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "BAAC5B3DFDEE37EE"
+				item: "botania:rune_earth"
+				type: "item"
+			}]
+			title: "Руна земли"
+			x: 15.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["07C4E81B07DD69E8"]
+			description: [
+				"Стихийная руна. Закрывает четвёрку стихий для"
+				"пластины Терры."
+			]
+			id: "A759595AFFE4090C"
+			icon: "botania:rune_air"
+			rewards: [{
+				id: "8A5D7AE1766CDB6A"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "27E2BA849EED5BA0"
+				item: "botania:rune_air"
+				type: "item"
+			}]
+			title: "Руна воздуха"
+			x: 15.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["A759595AFFE4090C"]
+			description: [
+				"Усиливает передачу маны и нужен у портала в"
+				"Альфхейм."
+			]
+			id: "5870A1A5472796FA"
+			icon: "botania:mana_pylon"
+			rewards: [{
+				id: "CC2DC39866ECD637"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "5AAD293CD40F729E"
+				item: "botania:mana_pylon"
+				type: "item"
+			}]
+			title: "Мана-пилон"
+			x: 16.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5870A1A5472796FA"]
+			description: [
+				"Ставится на живой камень. Глотает ману, манасталь,"
+				"мана-жемчуг и мана-алмаз."
+			]
+			id: "BC6DE68FDF4B3BB2"
+			icon: "botania:terra_plate"
+			rewards: [{
+				id: "D35CCB0398D3726B"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "221F297424392697"
+				item: "botania:terra_plate"
+				type: "item"
+			}]
+			title: "Пластина Терры"
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["BC6DE68FDF4B3BB2"]
+			description: [
+				"Слиток середины мода. Оружие, броня и ключ к Гайе."
+			]
+			id: "6DEB564BC5BBF7A8"
+			icon: "botania:terrasteel_ingot"
+			rewards: [{
+				id: "F532485BC3AB38EB"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "3360A1E9BF8AB42F"
+				item: "botania:terrasteel_ingot"
+				type: "item"
+			}]
+			title: "Террасталь"
+			x: 19.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6DEB564BC5BBF7A8"]
+			description: [
+				"Кирка заряжается маной. На этом этапе уже копает"
+				"быстрее алмазной."
+			]
+			id: "2086E7412B447985"
+			icon: "botania:terra_pick"
+			rewards: [{
+				id: "BE405EF994E9AE35"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "4A9EA370F05E80CF"
+				item: "botania:terra_pick"
+				type: "item"
+			}]
+			title: "Кирка Терры"
+			x: 21.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["6DEB564BC5BBF7A8"]
+			description: [
+				"Рамка из живой древесины и натура-пилонов."
+				"Открывается зарядом маны."
+			]
+			id: "AD20A69E61438870"
+			icon: "botania:alfheim_portal"
+			rewards: [{
+				id: "210CB41C9E4F202A"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "E56A8B71121C7F59"
+				item: "botania:alfheim_portal"
+				type: "item"
+			}]
+			title: "Портал в Альфхейм"
+			x: 21.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["AD20A69E61438870"]
+			description: [
+				"Металл Альфхейма. Обмен через портал: бросай"
+				"ресурсы в воронку живой древесины."
+			]
+			id: "EC11AA1FDCE63132"
+			icon: "botania:elementium_ingot"
+			rewards: [{
+				id: "743789609E21F2F6"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "CB70C665D1BE6BA5"
+				count: 4L
+				item: "botania:elementium_ingot"
+				type: "item"
+			}]
+			title: "Элементий"
+			x: 22.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["EC11AA1FDCE63132"]
+			description: [
+				"Четыре пилона вокруг маяка. Призыв стража Гайи —"
+				"проверка на готовность."
+			]
+			id: "B718A15DE184ADE3"
+			icon: "botania:gaia_pylon"
+			rewards: [{
+				id: "30E5644D202B71D1"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "8E18DCE8828C239D"
+				item: "botania:gaia_pylon"
+				type: "item"
+			}]
+			title: "Пилон Гайи"
+			x: 24.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["B718A15DE184ADE3"]
+			description: [
+				"Дроп с стража. Финал обычной ветки Botania до"
+				"реликвий."
+			]
+			id: "E46A939F581B78FD"
+			icon: "botania:gaia_ingot"
+			rewards: [{
+				id: "7CC9CA2B63D64618"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "1B1A1C2E6FEFA09B"
+				item: "botania:gaia_ingot"
+				type: "item"
+			}]
+			title: "Слиток Гайи"
+			x: 25.5d
+			y: 0.0d
+		}
+	]
+	title: "Botania"
+}

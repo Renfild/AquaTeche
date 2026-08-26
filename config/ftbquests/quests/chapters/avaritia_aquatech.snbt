@@ -1,0 +1,384 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "avaritia_aquatech"
+	group: ""
+	icon: "avaritia:infinity_ingot"
+	id: "02CBEA1FEA4F4C24"
+	order_index: 8
+	quest_links: [ ]
+	subtitle: "Решётка, нейтроний, стол 9×9, Infinity."
+	quests: [
+		{
+			description: [
+				"Старт Avaritia. Крафтится из алмазов. Идёт в"
+				"кристаллическую матрицу."
+			]
+			id: "036A0FBF836BB6C2"
+			icon: "avaritia:diamond_lattice"
+			rewards: [{
+				id: "0FCF1F49C766613A"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "17F1D62B0FCC3898"
+				count: 4L
+				item: "avaritia:diamond_lattice"
+				type: "item"
+			}]
+			title: "Алмазная решётка"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["036A0FBF836BB6C2"]
+			description: [
+				"Слиток каркаса. Без него не собрать сжатый верстак"
+				"и коллектор нейтрония."
+			]
+			id: "5E5277DFF3957C35"
+			icon: "avaritia:crystal_matrix_ingot"
+			rewards: [{
+				id: "2DB28E044770EB4D"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "10C336976A0D7216"
+				item: "avaritia:crystal_matrix_ingot"
+				type: "item"
+			}]
+			title: "Кристаллическая матрица"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E5277DFF3957C35"]
+			description: [
+				"3×3 верстаков в одном блоке. Промежуточный стол до"
+				"экстремального."
+			]
+			id: "AD88DC243A7D8613"
+			icon: "avaritia:compressed_crafting_table"
+			rewards: [{
+				id: "867BFDD21FC3A965"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "61EBBA37F0385D86"
+				item: "avaritia:compressed_crafting_table"
+				type: "item"
+			}]
+			title: "Сжатый верстак"
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["AD88DC243A7D8613"]
+			description: [
+				"Следующее сжатие. Нужен, чтобы скрафтить стол 9×9."
+			]
+			id: "F872AF132DF3B849"
+			icon: "avaritia:double_compressed_crafting_table"
+			rewards: [{
+				id: "9AF7194E9F0B14C2"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "9CEF8CD6251D4284"
+				item: "avaritia:double_compressed_crafting_table"
+				type: "item"
+			}]
+			title: "Двойной сжатый верстак"
+			x: 4.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["F872AF132DF3B849"]
+			description: [
+				"Сетка 9×9. Здесь собирают нейтроний, сингулярности"
+				"и Infinity."
+			]
+			id: "EA0036087119ED6F"
+			icon: "avaritia:extreme_crafting_table"
+			rewards: [{
+				id: "53CBB1F0D6EF4FED"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "879AB912F5CBED22"
+				item: "avaritia:extreme_crafting_table"
+				type: "item"
+			}]
+			title: "Экстремальный верстак"
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["5E5277DFF3957C35"]
+			description: [
+				"Пассивно сыпет кучи. Чем плотнее коллектор, тем"
+				"быстрее."
+			]
+			id: "CA9F493373838F86"
+			icon: "avaritia:neutron_collector"
+			rewards: [{
+				id: "D408198478839774"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "D1B6470D01959F61"
+				item: "avaritia:neutron_collector"
+				type: "item"
+			}]
+			title: "Коллектор нейтрония"
+			x: 3.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["CA9F493373838F86"]
+			description: [
+				"Пыль из коллектора. Копится долго — поставь"
+				"коллектор и жди."
+			]
+			id: "9B519D806FE127CF"
+			icon: "avaritia:neutron_pile"
+			rewards: [{
+				id: "ED0304F862B7BC43"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "3E996249B32EAF6A"
+				count: 8L
+				item: "avaritia:neutron_pile"
+				type: "item"
+			}]
+			title: "Куча нейтрония"
+			x: 4.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["9B519D806FE127CF"]
+			description: [
+				"Сжатие куч. Девять куч = самородок."
+			]
+			id: "48A80D7C52C8001C"
+			icon: "avaritia:neutron_nugget"
+			rewards: [{
+				id: "A6ADA20712E72005"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "C01D94574DA307DE"
+				count: 9L
+				item: "avaritia:neutron_nugget"
+				type: "item"
+			}]
+			title: "Самородки нейтрония"
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["48A80D7C52C8001C"]
+			description: [
+				"Основной металл конца. Идёт в компрессор и"
+				"катализатор Infinity."
+			]
+			id: "BD92E4F709C9AA97"
+			icon: "avaritia:neutron_ingot"
+			rewards: [{
+				id: "618A1F9DE8A191B4"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "73D96D55137E8A42"
+				item: "avaritia:neutron_ingot"
+				type: "item"
+			}]
+			title: "Слиток нейтрония"
+			x: 7.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["BD92E4F709C9AA97", "EA0036087119ED6F"]
+			description: [
+				"Жмёт стаки предметов в сингулярности. Без него"
+				"катализатор не собрать."
+			]
+			id: "0382C6FA3E6472C7"
+			icon: "avaritia:neutron_compressor"
+			rewards: [{
+				id: "4438CA76A987298F"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "A3B12EDAF6ED1718"
+				item: "avaritia:neutron_compressor"
+				type: "item"
+			}]
+			title: "Компрессор нейтрония"
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0382C6FA3E6472C7"]
+			description: [
+				"Смесь сингулярностей и нейтрония на столе 9×9. Ключ"
+				"к слитку Infinity."
+			]
+			id: "BF1754E385C812C3"
+			icon: "avaritia:infinity_catalyst"
+			rewards: [{
+				id: "E16E27017155258F"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "63464692EB570FBE"
+				item: "avaritia:infinity_catalyst"
+				type: "item"
+			}]
+			title: "Катализатор Infinity"
+			x: 10.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["BF1754E385C812C3"]
+			description: [
+				"Финал крафта. Оружие, броня и админ-панель IU"
+				"требуют именно его."
+			]
+			id: "107471907E8C6673"
+			icon: "avaritia:infinity_ingot"
+			rewards: [{
+				id: "011AE7488C8F04F2"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "4C126E953363CB58"
+				item: "avaritia:infinity_ingot"
+				type: "item"
+			}]
+			title: "Слиток Infinity"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["107471907E8C6673"]
+			description: [
+				"Одно попадание. Не носите на хабе без причины."
+			]
+			id: "5CA453DADD6381E2"
+			icon: "avaritia:infinity_sword"
+			rewards: [{
+				id: "116FF8FBC9DC2D09"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "DA907CE901A0CCCC"
+				item: "avaritia:infinity_sword"
+				type: "item"
+			}]
+			title: "Меч Infinity"
+			x: 13.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["107471907E8C6673"]
+			description: [
+				"Копает целые пласты. Переключается в молот."
+			]
+			id: "ADAF2737974F47D1"
+			icon: "avaritia:infinity_pickaxe"
+			rewards: [{
+				id: "FE38C67CAABD0E55"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "538C2075A60E1A45"
+				item: "avaritia:infinity_pickaxe"
+				type: "item"
+			}]
+			title: "Кирка Infinity"
+			x: 13.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["107471907E8C6673"]
+			description: [
+				"Кусок сета. Собирается на экстремальном столе."
+			]
+			id: "6F77AC48B73566E0"
+			icon: "avaritia:infinity_chestplate"
+			rewards: [{
+				id: "C495EDF345B9F35A"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "DE900B7E331839D4"
+				item: "avaritia:infinity_chestplate"
+				type: "item"
+			}]
+			title: "Нагрудник Infinity"
+			x: 13.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["107471907E8C6673"]
+			description: [
+				"Гравитационная жемчужина. Редкий крафт ветки конца."
+			]
+			id: "7E334FB5EC196866"
+			icon: "avaritia:endest_pearl"
+			rewards: [{
+				id: "1C982E43CA1665D3"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "FD0AA61F38BC1B3E"
+				item: "avaritia:endest_pearl"
+				type: "item"
+			}]
+			title: "Эндест-жемчуг"
+			x: 13.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["107471907E8C6673"]
+			description: [
+				"Хранилище под стаки Infinity-крафта. На этом этапе"
+				"обычных сундуков мало."
+			]
+			id: "F8DE96A9F3CFA040"
+			icon: "avaritia:compressed_chest"
+			rewards: [{
+				id: "3EE83D179F15A1A0"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "7C01CB46B5A89F3F"
+				item: "avaritia:compressed_chest"
+				type: "item"
+			}]
+			title: "Сжатый сундук"
+			x: 15.0d
+			y: 0.0d
+		}
+	]
+	title: "Avaritia"
+}

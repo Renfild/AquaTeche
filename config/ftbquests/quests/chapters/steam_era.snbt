@@ -22,7 +22,7 @@
 			}]
 			tasks: [{
 				id: "1BCA4D4F47062D12"
-				item: "industrialupgrade:steam_machine"
+				item: "industrialupgrade:blockresource/steam_machine"
 				type: "item"
 			}]
 			title: "Steam Machine Block"
@@ -266,7 +266,7 @@
 			}]
 			tasks: [{
 				id: "0CF000832CCB7E5B"
-				item: "industrialupgrade:fluidcoppersulfate"
+				item: "industrialupgrade:bucket/coppersulfate"
 				type: "item"
 			}]
 			title: "Сульфат меди"

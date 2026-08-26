@@ -1,0 +1,477 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "alexscaves_aquatech"
+	group: ""
+	icon: "alexscaves:cave_tablet"
+	id: "98864981F4526BD7"
+	order_index: 7
+	quest_links: [ ]
+	subtitle: "Шесть пещер: магнит, токсин, динозавры, бездна, сладости, тьма."
+	quests: [
+		{
+			description: [
+				"Находка в сундуках и от мобов пещер. Без неё карта"
+				"биома не собирается."
+			]
+			id: "F238208D905F01A6"
+			icon: "alexscaves:cave_tablet"
+			rewards: [{
+				id: "E5335C00812B2255"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "D6B8DA316C4AB4F5"
+				item: "alexscaves:cave_tablet"
+				type: "item"
+			}]
+			title: "Пещерная табличка"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["F238208D905F01A6"]
+			description: [
+				"Расшифрованная табличка. Открывает рецепты и"
+				"описание биома."
+			]
+			id: "98E2FCE6F757110F"
+			icon: "alexscaves:cave_codex"
+			rewards: [{
+				id: "D753DB1ED589DA8B"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "DB9473395F67291F"
+				item: "alexscaves:cave_codex"
+				type: "item"
+			}]
+			title: "Кодекс пещер"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["98E2FCE6F757110F"]
+			description: [
+				"Сводка по всем биомам Alex's Caves. Держи под"
+				"рукой, пока ищешь входы."
+			]
+			id: "C16E47A1B021BF0C"
+			icon: "alexscaves:cave_book"
+			rewards: [{
+				id: "A268D6DE63F0AC34"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "346193A2F3B61BC4"
+				item: "alexscaves:cave_book"
+				type: "item"
+			}]
+			title: "Книга пещер"
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["C16E47A1B021BF0C"]
+			description: [
+				"Магнитные пещеры. Неодим — основа перчаток, рельс и"
+				"Теслы."
+			]
+			id: "4099054A63F0A45C"
+			icon: "alexscaves:scarlet_neodymium_ingot"
+			rewards: [{
+				id: "DBF4F58D8482F477"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "76B350CEB1321213"
+				count: 4L
+				item: "alexscaves:scarlet_neodymium_ingot"
+				type: "item"
+			}]
+			title: "Алый неодим"
+			x: 4.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["4099054A63F0A45C"]
+			description: [
+				"Сердце магнитного биома. Бьёт молнией и кормит"
+				"галена-перчатку."
+			]
+			id: "981B18A029959D4D"
+			icon: "alexscaves:tesla_bulb"
+			rewards: [{
+				id: "66DCA0757BD9AE84"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "02F9EF07FED7C2C6"
+				item: "alexscaves:tesla_bulb"
+				type: "item"
+			}]
+			title: "Лампа Теслы"
+			x: 6.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["981B18A029959D4D"]
+			description: [
+				"Тянет и швыряет металлические блоки. Главный"
+				"инструмент магнитной ветки."
+			]
+			id: "9DB75F200B3ADD1D"
+			icon: "alexscaves:galena_gauntlet"
+			rewards: [{
+				id: "2541E87A0A906B00"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "A1D41F4D2AD70D41"
+				item: "alexscaves:galena_gauntlet"
+				type: "item"
+			}]
+			title: "Галена-перчатка"
+			x: 7.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["C16E47A1B021BF0C"]
+			description: [
+				"Токсичные пещеры. Сера сыпется с наростов на"
+				"потолке."
+			]
+			id: "58DC6BCB0B3638ED"
+			icon: "alexscaves:sulfur_dust"
+			rewards: [{
+				id: "E88E383F0E1BD4A1"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "AA9F3C6E37B43DF7"
+				count: 8L
+				item: "alexscaves:sulfur_dust"
+				type: "item"
+			}]
+			title: "Серный порошок"
+			x: 4.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["58DC6BCB0B3638ED"]
+			description: [
+				"Собери газ в бутылку. Нужен для ламп и части"
+				"токсичных крафтов."
+			]
+			id: "A9B950DBE9491753"
+			icon: "alexscaves:radon_bottle"
+			rewards: [{
+				id: "C6068826EC60D297"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "B914C31FFFB55BF7"
+				item: "alexscaves:radon_bottle"
+				type: "item"
+			}]
+			title: "Бутылка радона"
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["A9B950DBE9491753"]
+			description: [
+				"Без костюма радиация токсичных пещер съедает"
+				"здоровье."
+			]
+			id: "EC847705FAC49FCC"
+			icon: "alexscaves:hazmat_chestplate"
+			rewards: [{
+				id: "7E1E8ED237352E8A"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "B7BDCA3950BC7CAA"
+				item: "alexscaves:hazmat_chestplate"
+				type: "item"
+			}]
+			title: "Химзащита"
+			x: 7.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["C16E47A1B021BF0C"]
+			description: [
+				"Первобытные пещеры. Янтарь и амберсол — свет и"
+				"крафт копья."
+			]
+			id: "67C2F7A18344EA05"
+			icon: "alexscaves:amber"
+			rewards: [{
+				id: "8974E2F4528F3A7B"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "FCF25B62544FAF7A"
+				count: 8L
+				item: "alexscaves:amber"
+				type: "item"
+			}]
+			title: "Янтарь"
+			x: 4.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["67C2F7A18344EA05"]
+			description: [
+				"Метательное оружие биома. Легко крафтится на месте"
+				"из известняка."
+			]
+			id: "315FCBDC2B49DBE8"
+			icon: "alexscaves:limestone_spear"
+			rewards: [{
+				id: "BD0C6C56A7BBC888"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "74738E67AFE7C007"
+				item: "alexscaves:limestone_spear"
+				type: "item"
+			}]
+			title: "Известняковое копьё"
+			x: 6.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["67C2F7A18344EA05"]
+			description: [
+				"Еда биома. Варится из местной живности и растений."
+			]
+			id: "04AD0C140A7E97AA"
+			icon: "alexscaves:primordial_soup"
+			rewards: [{
+				id: "59D021B04D1C2303"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "C5B1F94338E73E69"
+				item: "alexscaves:primordial_soup"
+				type: "item"
+			}]
+			title: "Первобытный суп"
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["C16E47A1B021BF0C"]
+			description: [
+				"Затонувший биом. Жемчуг падает с моллюсков и идёт в"
+				"посох моря."
+			]
+			id: "C00FF1FA172F6E1F"
+			icon: "alexscaves:pearl"
+			rewards: [{
+				id: "0BDAA04796D68D54"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "425859A9BDA1C8D8"
+				count: 4L
+				item: "alexscaves:pearl"
+				type: "item"
+			}]
+			title: "Жемчуг бездны"
+			x: 4.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["C00FF1FA172F6E1F"]
+			description: [
+				"Оружие бездны. Держит дистанцию против стражей"
+				"глубин."
+			]
+			id: "1DF50AA2B384178F"
+			icon: "alexscaves:sea_staff"
+			rewards: [{
+				id: "F9298873EEDB19BB"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "B44EFD43ADCC7D22"
+				item: "alexscaves:sea_staff"
+				type: "item"
+			}]
+			title: "Морской посох"
+			x: 6.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["1DF50AA2B384178F"]
+			description: [
+				"Редкий жемчуг. Нужен для поздних крафтов бездны."
+			]
+			id: "92F86BA48107442F"
+			icon: "alexscaves:gazing_pearl"
+			rewards: [{
+				id: "7EEF9EA686AAEFAC"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "64FDA29DD9CB909D"
+				item: "alexscaves:gazing_pearl"
+				type: "item"
+			}]
+			title: "Созерцающий жемчуг"
+			x: 7.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["C16E47A1B021BF0C"]
+			description: [
+				"Кондитерские пещеры. Карамель — базовый ресурс"
+				"сладкого биома."
+			]
+			id: "C913A770F6631899"
+			icon: "alexscaves:caramel"
+			rewards: [{
+				id: "AD08D9031731E7DB"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "B6263ED42C61EEDA"
+				count: 8L
+				item: "alexscaves:caramel"
+				type: "item"
+			}]
+			title: "Карамель"
+			x: 4.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["C913A770F6631899"]
+			description: [
+				"Оружие и блок биома. Из тростей собирают крюки и"
+				"столбы."
+			]
+			id: "D86F7A34F23CA663"
+			icon: "alexscaves:candy_cane"
+			rewards: [{
+				id: "A2DFD8D9D9B9A24E"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "FFB0254DF7E54CFD"
+				item: "alexscaves:candy_cane"
+				type: "item"
+			}]
+			title: "Карамельная трость"
+			x: 6.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["D86F7A34F23CA663"]
+			description: [
+				"Жидкость биома в бутылке. Из неё делают ракеты и"
+				"ведро соды."
+			]
+			id: "D88079A71985D445"
+			icon: "alexscaves:purple_soda_bottle"
+			rewards: [{
+				id: "2DD90A0B2E32CA57"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "8412AEE66DD9EFE1"
+				item: "alexscaves:purple_soda_bottle"
+				type: "item"
+			}]
+			title: "Фиолетовая сода"
+			x: 7.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["C16E47A1B021BF0C"]
+			description: [
+				"Забытые пещеры. Дроп с босса и редких мобов. Сырьё"
+				"плаща тьмы."
+			]
+			id: "70921F79B84C680E"
+			icon: "alexscaves:pure_darkness"
+			rewards: [{
+				id: "1233DBD2A48CBC5D"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "D87A3B1C820A4C14"
+				item: "alexscaves:pure_darkness"
+				type: "item"
+			}]
+			title: "Чистая тьма"
+			x: 4.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["70921F79B84C680E"]
+			description: [
+				"Шлем ветки тьмы. Вместе с плащом закрывает сет"
+				"тьмы."
+			]
+			id: "0F5D8A34355CF126"
+			icon: "alexscaves:hood_of_darkness"
+			rewards: [{
+				id: "889F88CEC7290586"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "453FAC77C832F597"
+				item: "alexscaves:hood_of_darkness"
+				type: "item"
+			}]
+			title: "Капюшон тьмы"
+			x: 6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["0F5D8A34355CF126"]
+			description: [
+				"Финал пещерной книги. Оружие забытого биома."
+			]
+			id: "4D478CA98C143D5B"
+			icon: "alexscaves:desolate_dagger"
+			rewards: [{
+				id: "99824B13F98AB26E"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "11D5326DD4EFC3FD"
+				item: "alexscaves:desolate_dagger"
+				type: "item"
+			}]
+			title: "Клинок запустения"
+			x: 7.5d
+			y: 6.0d
+		}
+	]
+	title: "Alex's Caves"
+}

@@ -22,7 +22,7 @@
 			}]
 			tasks: [{
 				id: "1BCA4D4F47062D12"
-				item: "industrialupgrade:steam_machine_block"
+				item: "industrialupgrade:blockresource/steam_machine"
 				type: "item"
 			}]
 			title: "Steam Machine Block"
@@ -266,7 +266,7 @@
 			}]
 			tasks: [{
 				id: "0CF000832CCB7E5B"
-				item: "industrialupgrade:fluidcoppersulfate"
+				item: "industrialupgrade:bucket/coppersulfate"
 				type: "item"
 			}]
 			title: "Сульфат меди"
@@ -288,7 +288,7 @@
 			}]
 			tasks: [{
 				id: "4A65DC88D70EE17D"
-				item: "industrialupgrade:circuit_board"
+				item: "industrialupgrade:crafting_elements/crafting_487_element"
 				type: "item"
 			}]
 			title: "Circuit Board"
@@ -332,7 +332,7 @@
 			}]
 			tasks: [{
 				id: "3BABE87B98A15734"
-				item: "industrialupgrade:programmed_circuit_board"
+				item: "industrialupgrade:crafting_elements/crafting_488_element"
 				type: "item"
 			}]
 			title: "Programmed Circuit Board"
@@ -375,7 +375,7 @@
 			}]
 			tasks: [{
 				id: "83048247B091AC5D"
-				item: "industrialupgrade:impurity_coal_dust"
+				item: "industrialupgrade:crafting_elements/crafting_498_element"
 				type: "item"
 			}]
 			title: "Impurity Coal Dust"
@@ -397,7 +397,7 @@
 			}]
 			tasks: [{
 				id: "65668EA85B5AF4E2"
-				item: "industrialupgrade:alloy_coal_dust"
+				item: "industrialupgrade:crafting_elements/crafting_499_element"
 				type: "item"
 			}]
 			title: "Alloy Coal Dust"
@@ -740,7 +740,7 @@
 			}]
 			tasks: [{
 				id: "AF4CCDC5A6451AA6"
-				item: "industrialupgrade:titanium_steel"
+				item: "industrialupgrade:crafting_elements/crafting_503_element"
 				type: "item"
 			}]
 			title: "Titanium Steel"
@@ -783,7 +783,7 @@
 			}]
 			tasks: [{
 				id: "C68800402B306894"
-				item: "industrialupgrade:electronic_circuit"
+				item: "industrialupgrade:crafting_elements/crafting_272_element"
 				type: "item"
 			}]
 			title: "Electronic Circuit"
@@ -805,7 +805,7 @@
 			}]
 			tasks: [{
 				id: "2750ED3656FC53B2"
-				item: "industrialupgrade:machine_casing"
+				item: "industrialupgrade:crafting_elements/crafting_137_element"
 				type: "item"
 			}]
 			title: "Machine Casing"
