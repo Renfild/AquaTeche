@@ -219,6 +219,9 @@
             <Image Source="/Assets/aquatech.ico" Width="26" Height="26" VerticalAlignment="Center"/>
             <TextBlock Text="AquaTech" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
                        FontSize="16" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+            <Border Background="#33F59E0B" CornerRadius="10" Padding="8,3" VerticalAlignment="Center">
+              <TextBlock Text="Бета" FontSize="11" FontWeight="SemiBold" Foreground="#FCD34D"/>
+            </Border>
           </StackPanel>
           <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center"
                       IsVisible="{Binding !NeedsAuth}">
@@ -254,10 +257,10 @@
             <StackPanel Spacing="6">
               <TextBlock FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
                          FontSize="36" FontWeight="Bold" Foreground="#F8FAFC" TextWrapping="Wrap">
-                <Run Text="Океанский "/>
-                <Run Text="skyblock" Foreground="#38BDF8"/>
+                <Run Text="Aqua"/>
+                <Run Text="Tech" Foreground="#38BDF8"/>
               </TextBlock>
-              <TextBlock Text="Плот, StarCatcher, кейсы и индустрия на 1.20.1."
+              <TextBlock Text="Тебе предстоит узнать многое"
                          FontSize="15" Foreground="#D6E2EE" TextWrapping="Wrap" MaxWidth="440"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="8">
@@ -297,8 +300,7 @@
               <TextBlock Text="Сборка" FontSize="12" FontWeight="SemiBold" Foreground="#38BDF8"/>
               <TextBlock Text="{Binding PackVersion}" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
                          FontSize="22" FontWeight="Bold" Foreground="#F8FAFC"/>
-              <TextBlock Text="{Binding McLabel}" FontSize="13" Foreground="#D6E2EE" TextWrapping="Wrap"/>
-              <TextBlock Text="{Binding VersionLabel}" FontSize="12" Foreground="#A8B8CC" TextWrapping="Wrap"/>
+              <TextBlock Text="Проект в бете" FontSize="13" Foreground="#D6E2EE"/>
               <Button Classes="glass" Content="Сайт" Command="{Binding OpenWebsiteCommand}"
                       HorizontalAlignment="Left" Margin="0,6,0,0"
                       AutomationProperties.Name="Сайт проекта"/>
@@ -386,7 +388,7 @@
             <Image Source="/Assets/aquatech.ico" Width="40" Height="40" HorizontalAlignment="Center"/>
             <TextBlock Text="AquaTech" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
                        FontSize="22" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center"/>
-            <TextBlock Text="Minecraft 1.20.1 · Океанский skyblock" FontSize="13" Foreground="#A8B8CC"
+            <TextBlock Text="Проект в бете" FontSize="13" Foreground="#A8B8CC"
                        HorizontalAlignment="Center"/>
           </StackPanel>
           <TextBlock Text="Проверяем сессию…" FontSize="13" Foreground="#A8B8CC" HorizontalAlignment="Center"
