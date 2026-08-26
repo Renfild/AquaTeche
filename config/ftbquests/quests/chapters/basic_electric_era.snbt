@@ -16,6 +16,11 @@
 			]
 			id: "88FD1F77E2424BA9"
 			rewards: [{
+				id: "96CB68F74DF822F1"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "50390AF813158844"
 				type: "xp"
 				xp: 50
@@ -38,6 +43,11 @@
 			]
 			id: "99DC2ACE3C6E9D2D"
 			rewards: [{
+				id: "4FAF76EC87D93CA1"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "0850A0A25A764C3B"
 				type: "xp"
 				xp: 50
@@ -60,6 +70,11 @@
 			]
 			id: "73817BDF7488C47A"
 			rewards: [{
+				id: "4864BBBBB787AE9C"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "4CD1BF4A32E90300"
 				type: "xp"
 				xp: 50
@@ -81,6 +96,11 @@
 			]
 			id: "24000E117A1BC8E7"
 			rewards: [{
+				id: "96AD3E7365074D20"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "505C6F71ADD21C52"
 				type: "xp"
 				xp: 50
@@ -102,6 +122,11 @@
 			]
 			id: "42F4D8BAD85A6D34"
 			rewards: [{
+				id: "60E6D519EDC5D25E"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "72E947AAAAAF456E"
 				type: "xp"
 				xp: 50
@@ -125,6 +150,11 @@
 			]
 			id: "DBC252FB5CEA8804"
 			rewards: [{
+				id: "D6E70DE81487ABF4"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "B08C8887E929327B"
 				type: "xp"
 				xp: 50
@@ -148,6 +178,11 @@
 			]
 			id: "13D3DA173A7E2E9C"
 			rewards: [{
+				id: "5F6EEB7DC65D46A5"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "C4CCB3CD90DAC23C"
 				type: "xp"
 				xp: 50
@@ -169,6 +204,11 @@
 			]
 			id: "750FDD44EB955598"
 			rewards: [{
+				id: "A7D549451DF61DBA"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "8F3148E66FDD0698"
 				type: "xp"
 				xp: 50
@@ -191,6 +231,11 @@
 			]
 			id: "A13EE50BA7A69347"
 			rewards: [{
+				id: "E9C37BB3D4B77994"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "034C0771B7D5FB36"
 				type: "xp"
 				xp: 50
@@ -213,6 +258,11 @@
 			]
 			id: "72924C850349165D"
 			rewards: [{
+				id: "4C4ED56660464072"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "92467851D58D2DE2"
 				type: "xp"
 				xp: 50
@@ -235,6 +285,11 @@
 			]
 			id: "983AC6DACE8A0631"
 			rewards: [{
+				id: "6DC75C26EB4A7611"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "8842A2A504A97B59"
 				type: "xp"
 				xp: 50
@@ -257,6 +312,11 @@
 			]
 			id: "C8DEA151D843252C"
 			rewards: [{
+				id: "28CAF8F07EDAA36E"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "AB2D6D7F26517CE7"
 				type: "xp"
 				xp: 50
@@ -278,6 +338,11 @@
 			]
 			id: "A6691D21115DA4F4"
 			rewards: [{
+				id: "9CAD9514FBCD1B5C"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "A9A2CACF57F4EB38"
 				type: "xp"
 				xp: 50
@@ -300,6 +365,11 @@
 			]
 			id: "61B76B1B868E31AC"
 			rewards: [{
+				id: "378589D2A4EE4D23"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "2CC2882D81BE06CA"
 				type: "xp"
 				xp: 50
@@ -322,6 +392,11 @@
 			]
 			id: "A033AE3E6490258D"
 			rewards: [{
+				id: "6D5E53A6D12AB219"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "B3A7E0D24C6B5BB7"
 				type: "xp"
 				xp: 50
@@ -344,6 +419,11 @@
 			]
 			id: "45FE28E0C85DBD89"
 			rewards: [{
+				id: "E690782130207718"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "6168085AAB941038"
 				type: "xp"
 				xp: 50
@@ -366,6 +446,11 @@
 			]
 			id: "CE8AC3297B006176"
 			rewards: [{
+				id: "8615F23244ADACFF"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "A62AF051869E9132"
 				type: "xp"
 				xp: 50
@@ -390,6 +475,11 @@
 			]
 			id: "F6C31C15134FFDD9"
 			rewards: [{
+				id: "35E91E391829E634"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "63A30E4398240727"
 				type: "xp"
 				xp: 50
@@ -412,6 +502,11 @@
 			]
 			id: "2BC7CD881137838B"
 			rewards: [{
+				id: "58E310FB24A69808"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "212C4AAB6C14C395"
 				type: "xp"
 				xp: 50
@@ -434,6 +529,11 @@
 			]
 			id: "357306B2CC87180A"
 			rewards: [{
+				id: "5342D2F42F69D87A"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "7F59499489A78551"
 				type: "xp"
 				xp: 50
@@ -458,6 +558,11 @@
 			]
 			id: "F8E0F213C9BFA65D"
 			rewards: [{
+				id: "D4EFEE1630EB27D8"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "932C7ED53714E601"
 				type: "xp"
 				xp: 50
@@ -480,6 +585,11 @@
 			]
 			id: "1C09993DEE54F858"
 			rewards: [{
+				id: "AC33995643ADEBC7"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "CFBFFA2ABF59053E"
 				type: "xp"
 				xp: 50
@@ -501,6 +611,11 @@
 			]
 			id: "28B7C75AE358808E"
 			rewards: [{
+				id: "A1D82F79DA917D20"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "1943A611265CF151"
 				type: "xp"
 				xp: 50
@@ -524,6 +639,11 @@
 			]
 			id: "F27D8C4C6EAB010E"
 			rewards: [{
+				id: "D9A21D398BFDC48E"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "E5C86E7B52120942"
 				type: "xp"
 				xp: 50
@@ -546,6 +666,11 @@
 			]
 			id: "1EFB906202F540D6"
 			rewards: [{
+				id: "474A9A2BABF19DE6"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "C1B2A63C9BFACA94"
 				type: "xp"
 				xp: 50
@@ -569,6 +694,11 @@
 			]
 			id: "C296046069988CBA"
 			rewards: [{
+				id: "A092CB209D37DE42"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "248B695942525682"
 				type: "xp"
 				xp: 50
@@ -592,6 +722,11 @@
 			]
 			id: "38272CF1D763C507"
 			rewards: [{
+				id: "F60FC82EE27E1EF3"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "C5F29273A8F592D8"
 				type: "xp"
 				xp: 50
@@ -614,6 +749,11 @@
 			]
 			id: "5E8AB35F4E8DD999"
 			rewards: [{
+				id: "C146FCD7049ED1F4"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "E407DF9D149A98F4"
 				type: "xp"
 				xp: 50
@@ -636,6 +776,11 @@
 			]
 			id: "B19A488BA4A08C26"
 			rewards: [{
+				id: "075D38B0C1A7BF5B"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "67892232E7E29696"
 				type: "xp"
 				xp: 50
@@ -658,6 +803,11 @@
 			]
 			id: "1C1310227D7615E1"
 			rewards: [{
+				id: "FD6EAF5B2A76C3D2"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "ACA4FDDA7C740A9C"
 				type: "xp"
 				xp: 50
@@ -680,6 +830,11 @@
 			]
 			id: "D1018CF80447C906"
 			rewards: [{
+				id: "EDA1552BA69B18C3"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "948BCDCA09C638E5"
 				type: "xp"
 				xp: 50
@@ -702,6 +857,11 @@
 			]
 			id: "1BED57C8DBECDE55"
 			rewards: [{
+				id: "36203B4022BFF4B6"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "0297D2C5B39A0FF4"
 				type: "xp"
 				xp: 50
@@ -723,6 +883,11 @@
 			]
 			id: "B14D92B593F9CD31"
 			rewards: [{
+				id: "8BFBF208846F3DAB"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "F4D653BCFA81F4C8"
 				type: "xp"
 				xp: 50
@@ -745,6 +910,11 @@
 			]
 			id: "3B0F2ECE1A75F6F6"
 			rewards: [{
+				id: "9AC2ADB129FA54C7"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "1303943A09084D38"
 				type: "xp"
 				xp: 50
@@ -767,6 +937,11 @@
 			]
 			id: "6105DBB6478C49AC"
 			rewards: [{
+				id: "6DE586938F76E4AC"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "12044D9C898187B8"
 				type: "xp"
 				xp: 50
@@ -789,6 +964,11 @@
 			]
 			id: "D22067CB871EBDF4"
 			rewards: [{
+				id: "053EAF5DA5D5A9FD"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "BE9CF9B236DB693A"
 				type: "xp"
 				xp: 50
@@ -810,6 +990,11 @@
 			]
 			id: "DD6B862E63F89E24"
 			rewards: [{
+				id: "D023FB59CBDF46F9"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "C0D5434DF0862DA6"
 				type: "xp"
 				xp: 50
@@ -833,6 +1018,11 @@
 			]
 			id: "9DD6EBABA0617216"
 			rewards: [{
+				id: "CB2A03D379D83586"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "15080630CFF18F4D"
 				type: "xp"
 				xp: 50
@@ -854,6 +1044,11 @@
 			]
 			id: "B085471586AE40E2"
 			rewards: [{
+				id: "525535C4EB389A2C"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "DA9B79344BE8D0D2"
 				type: "xp"
 				xp: 50
@@ -876,6 +1071,11 @@
 			]
 			id: "C5C0800BF6B10AE0"
 			rewards: [{
+				id: "2377D1EB524C719C"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "D3E3A3D16A33D037"
 				type: "xp"
 				xp: 50
@@ -899,6 +1099,11 @@
 			]
 			id: "A838C8A6F515242A"
 			rewards: [{
+				id: "C4AFA54056D63938"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "D12D6C79D706B06F"
 				type: "xp"
 				xp: 50
@@ -921,6 +1126,11 @@
 			]
 			id: "C134596A2847102C"
 			rewards: [{
+				id: "B7BB74F569ED3F1F"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "4F049B38AEDB9984"
 				type: "xp"
 				xp: 50
@@ -944,6 +1154,11 @@
 			]
 			id: "9782B3DD9CC9C20B"
 			rewards: [{
+				id: "148F34EAA2B3A991"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "04287A22CD2DF1E2"
 				type: "xp"
 				xp: 50
@@ -967,6 +1182,11 @@
 			]
 			id: "538788328ABBC550"
 			rewards: [{
+				id: "10459930CFA1D396"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "D9CD16982F2C3297"
 				type: "xp"
 				xp: 50
@@ -990,6 +1210,11 @@
 			]
 			id: "2D6C8C48444CD65F"
 			rewards: [{
+				id: "930A78BCD852A593"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "C3327D1240004A25"
 				type: "xp"
 				xp: 50
@@ -1011,6 +1236,11 @@
 			]
 			id: "2E45AB1DF8FBFDF9"
 			rewards: [{
+				id: "EDC1266FC21876DF"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "DE66CD507EED4128"
 				type: "xp"
 				xp: 50
@@ -1032,6 +1262,11 @@
 			]
 			id: "5175E3A701EA616F"
 			rewards: [{
+				id: "EC074C28F06F7EA7"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "6148D18F1B91475F"
 				type: "xp"
 				xp: 50
@@ -1054,6 +1289,11 @@
 			]
 			id: "3735C4550BB9B8D5"
 			rewards: [{
+				id: "71173D69B23F95AD"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "5552FC9A5D9F52EB"
 				type: "xp"
 				xp: 50
@@ -1076,6 +1316,11 @@
 			]
 			id: "278F088E5D98751E"
 			rewards: [{
+				id: "C7C16A8E945F2D95"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "033DA45C283E6ECE"
 				type: "xp"
 				xp: 50
@@ -1097,6 +1342,11 @@
 			]
 			id: "1C4E0ED47D883109"
 			rewards: [{
+				id: "FB2C4BB751187B8C"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "15D6D937790D6D4F"
 				type: "xp"
 				xp: 50
@@ -1118,6 +1368,11 @@
 			]
 			id: "F281DDBD646F4766"
 			rewards: [{
+				id: "1B4D197D5685135A"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "1E275A403D8969A5"
 				type: "xp"
 				xp: 50
@@ -1143,6 +1398,11 @@
 			]
 			id: "CAD7D0B48983F146"
 			rewards: [{
+				id: "92B3D6E8B1AF7564"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "F893DC2ABA44BD4A"
 				type: "xp"
 				xp: 50
@@ -1164,6 +1424,11 @@
 			]
 			id: "8F33E996B5A870FE"
 			rewards: [{
+				id: "43DCF47B3A351E89"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "735222828A3C95C2"
 				type: "xp"
 				xp: 50
@@ -1185,6 +1450,11 @@
 			]
 			id: "067A4697E35A6736"
 			rewards: [{
+				id: "230369D3F7C365B8"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "418066CD639B95FA"
 				type: "xp"
 				xp: 50
@@ -1206,6 +1476,11 @@
 			]
 			id: "5F8C3F6E8340DA0E"
 			rewards: [{
+				id: "2B978FE1332337D3"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "D1A8E5532ABEE837"
 				type: "xp"
 				xp: 50
@@ -1228,6 +1503,11 @@
 			]
 			id: "5E905126EB2E29EE"
 			rewards: [{
+				id: "0B82BEE2D1A3C9D0"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "F4B601DEFDFA5578"
 				type: "xp"
 				xp: 50
@@ -1250,6 +1530,11 @@
 			]
 			id: "054BAD57C456097C"
 			rewards: [{
+				id: "C8710CCAC1F64A81"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "4356435530F5A760"
 				type: "xp"
 				xp: 50
@@ -1272,6 +1557,11 @@
 			]
 			id: "2C9BF983451D130D"
 			rewards: [{
+				id: "651358DEEB0909E3"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "C6FF3C69B473DABA"
 				type: "xp"
 				xp: 50
@@ -1294,6 +1584,11 @@
 			]
 			id: "799AE4C1FE0064F3"
 			rewards: [{
+				id: "E783303DF2034E95"
+				count: 8
+				item: "industrialupgrade:itemingots/tin_ingot"
+				type: "item"
+			},{
 				id: "7F6E4E4D2D849F9C"
 				type: "xp"
 				xp: 50

@@ -101,6 +101,11 @@
 			entity_vis_size: 1.0f
 			id: "1BEDD68EFAD565F6"
 			rewards: [{
+				id: "2BE9EEDD25DEC68B"
+				count: 16
+				item: "minecraft:bread"
+				type: "item"
+			},{
 				id: "19225B287FE1EDC4"
 				type: "xp"
 				xp: 100
@@ -118,6 +123,11 @@
 			entity_vis_size: 1.0f
 			id: "17AA45F8E0EFA0DB"
 			rewards: [{
+				id: "C3957775F7B9DEEF"
+				count: 16
+				item: "minecraft:bread"
+				type: "item"
+			},{
 				id: "02E135B2011FBC0D"
 				type: "xp"
 				xp: 100
@@ -152,6 +162,11 @@
 			entity_vis_size: 1.0f
 			id: "74B58CD30A570FBA"
 			rewards: [{
+				id: "9A1EE964ED896BDE"
+				count: 16
+				item: "minecraft:bread"
+				type: "item"
+			},{
 				command: "/tellraw @p {\"text\":\"Награда хаба пока без монет — экономика в работе\",\"color\":\"aqua\"}"
 				icon: "industrialupgrade:crafting_elements/crafting_637_element"
 				id: "69762D950B0EA414"

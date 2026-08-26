@@ -17,6 +17,11 @@
 			id: "0974ED5D3F5A4176"
 			icon: "botania:lexicon"
 			rewards: [{
+				id: "E03A3461384AEA61"
+				count: 16
+				item: "botania:white_petal"
+				type: "item"
+			},{
 				id: "5A6F2B845D03F60C"
 				type: "xp"
 				xp: 75
@@ -39,6 +44,11 @@
 			id: "BE79F2C32E9C822D"
 			icon: "botania:white_petal"
 			rewards: [{
+				id: "6ECDCA7920766036"
+				count: 16
+				item: "botania:white_petal"
+				type: "item"
+			},{
 				id: "1D4B710A767972B3"
 				type: "xp"
 				xp: 75
@@ -62,6 +72,11 @@
 			id: "B5A044AA10566FA7"
 			icon: "botania:apothecary_default"
 			rewards: [{
+				id: "52CC552DB940242C"
+				count: 16
+				item: "botania:white_petal"
+				type: "item"
+			},{
 				id: "B12A2DA229C4EEFD"
 				type: "xp"
 				xp: 75
@@ -84,6 +99,11 @@
 			id: "9E3FED4021CDD1CA"
 			icon: "botania:pure_daisy"
 			rewards: [{
+				id: "160E387FB5366628"
+				count: 8
+				item: "botania:livingwood"
+				type: "item"
+			},{
 				id: "5799A1D586E04813"
 				type: "xp"
 				xp: 75
@@ -106,6 +126,11 @@
 			id: "AB33A7FD19D145D8"
 			icon: "botania:livingwood"
 			rewards: [{
+				id: "6B5EA9B1FE00A296"
+				count: 16
+				item: "botania:livingwood"
+				type: "item"
+			},{
 				id: "84ED735131C84537"
 				type: "xp"
 				xp: 75
@@ -129,6 +154,11 @@
 			id: "A11367A10A68404C"
 			icon: "botania:livingrock"
 			rewards: [{
+				id: "2F556B5C239CE808"
+				count: 16
+				item: "botania:livingrock"
+				type: "item"
+			},{
 				id: "7B9636289872AA10"
 				type: "xp"
 				xp: 75
@@ -152,6 +182,11 @@
 			id: "02405A7DBB0FD77D"
 			icon: "botania:mana_pool"
 			rewards: [{
+				id: "9453ACBB23F28FE5"
+				count: 4
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
 				id: "2BBD84397AC331EE"
 				type: "xp"
 				xp: 75
@@ -174,6 +209,11 @@
 			id: "78FC05F3404DAB85"
 			icon: "botania:mana_spreader"
 			rewards: [{
+				id: "B4A934E51E51D299"
+				count: 4
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
 				id: "5F26F879247103E3"
 				type: "xp"
 				xp: 75
@@ -196,6 +236,10 @@
 			id: "3649D35D98F02D4E"
 			icon: "botania:mana_tablet"
 			rewards: [{
+				id: "C310834CEB156B89"
+				item: "botania:mana_tablet"
+				type: "item"
+			},{
 				id: "3B6050951D07C996"
 				type: "xp"
 				xp: 75
@@ -218,6 +262,11 @@
 			id: "C0B23B743ABD2D62"
 			icon: "botania:manasteel_ingot"
 			rewards: [{
+				id: "A024D5AAD1F474C4"
+				count: 8
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
 				id: "8427DEC7F710990E"
 				type: "xp"
 				xp: 75
@@ -241,6 +290,11 @@
 			id: "9FE31ED86CAC91F6"
 			icon: "botania:twig_wand"
 			rewards: [{
+				id: "0BD93E9A5DD70258"
+				count: 4
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
 				id: "14807C63F33F02EB"
 				type: "xp"
 				xp: 75
@@ -263,6 +317,11 @@
 			id: "0EBFF877A2990851"
 			icon: "botania:runic_altar"
 			rewards: [{
+				id: "72D67ECD01E74F7D"
+				count: 2
+				item: "botania:rune_mana"
+				type: "item"
+			},{
 				id: "5CAD129E1B346397"
 				type: "xp"
 				xp: 75
@@ -285,6 +344,11 @@
 			id: "F7E588634E582D62"
 			icon: "botania:rune_water"
 			rewards: [{
+				id: "D272AB705C77A6C3"
+				count: 2
+				item: "botania:rune_water"
+				type: "item"
+			},{
 				id: "1CF3CDE22F5BF2A6"
 				type: "xp"
 				xp: 75
@@ -307,6 +371,11 @@
 			id: "04126A598BD11B07"
 			icon: "botania:rune_fire"
 			rewards: [{
+				id: "D48EE23A6A8CEF73"
+				count: 2
+				item: "botania:rune_fire"
+				type: "item"
+			},{
 				id: "69D331A4C1945BD7"
 				type: "xp"
 				xp: 75
@@ -329,6 +398,11 @@
 			id: "07C4E81B07DD69E8"
 			icon: "botania:rune_earth"
 			rewards: [{
+				id: "890EAD88203CE773"
+				count: 2
+				item: "botania:rune_earth"
+				type: "item"
+			},{
 				id: "8C3441130166B0B5"
 				type: "xp"
 				xp: 75
@@ -351,6 +425,11 @@
 			id: "A759595AFFE4090C"
 			icon: "botania:rune_air"
 			rewards: [{
+				id: "DB48A0A6A04A40CC"
+				count: 2
+				item: "botania:rune_air"
+				type: "item"
+			},{
 				id: "8A5D7AE1766CDB6A"
 				type: "xp"
 				xp: 75
@@ -373,6 +452,11 @@
 			id: "5870A1A5472796FA"
 			icon: "botania:mana_pylon"
 			rewards: [{
+				id: "D386A0FE0EB52286"
+				count: 8
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
 				id: "CC2DC39866ECD637"
 				type: "xp"
 				xp: 75
@@ -395,6 +479,11 @@
 			id: "BC6DE68FDF4B3BB2"
 			icon: "botania:terra_plate"
 			rewards: [{
+				id: "46424137CCBF7BD9"
+				count: 4
+				item: "botania:mana_pearl"
+				type: "item"
+			},{
 				id: "D35CCB0398D3726B"
 				type: "xp"
 				xp: 75
@@ -416,6 +505,11 @@
 			id: "6DEB564BC5BBF7A8"
 			icon: "botania:terrasteel_ingot"
 			rewards: [{
+				id: "EF213148862B6CAC"
+				count: 2
+				item: "botania:terrasteel_ingot"
+				type: "item"
+			},{
 				id: "F532485BC3AB38EB"
 				type: "xp"
 				xp: 75
@@ -438,6 +532,11 @@
 			id: "2086E7412B447985"
 			icon: "botania:terra_pick"
 			rewards: [{
+				id: "5573C1A6BF5FC1A3"
+				count: 2
+				item: "botania:mana_diamond"
+				type: "item"
+			},{
 				id: "BE405EF994E9AE35"
 				type: "xp"
 				xp: 75
@@ -460,6 +559,11 @@
 			id: "AD20A69E61438870"
 			icon: "botania:alfheim_portal"
 			rewards: [{
+				id: "EC280C6F89143308"
+				count: 4
+				item: "botania:elementium_ingot"
+				type: "item"
+			},{
 				id: "210CB41C9E4F202A"
 				type: "xp"
 				xp: 75
@@ -482,6 +586,11 @@
 			id: "EC11AA1FDCE63132"
 			icon: "botania:elementium_ingot"
 			rewards: [{
+				id: "C26717FB500A1CAA"
+				count: 8
+				item: "botania:elementium_ingot"
+				type: "item"
+			},{
 				id: "743789609E21F2F6"
 				type: "xp"
 				xp: 75
@@ -505,6 +614,11 @@
 			id: "B718A15DE184ADE3"
 			icon: "botania:gaia_pylon"
 			rewards: [{
+				id: "42220F85FEF0CB96"
+				count: 8
+				item: "botania:pixie_dust"
+				type: "item"
+			},{
 				id: "30E5644D202B71D1"
 				type: "xp"
 				xp: 75
@@ -527,6 +641,10 @@
 			id: "E46A939F581B78FD"
 			icon: "botania:gaia_ingot"
 			rewards: [{
+				id: "2E95024D8F84B873"
+				item: "botania:gaia_ingot"
+				type: "item"
+			},{
 				id: "7CC9CA2B63D64618"
 				type: "xp"
 				xp: 75
@@ -538,6 +656,519 @@
 			}]
 			title: "Слиток Гайи"
 			x: 25.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["AB33A7FD19D145D8"]
+			description: [
+				"Botanical Machinery: чистоцвет без ожидания. Ставь"
+				"после живой древесины, когда надоело стоять у"
+				"цветка."
+			]
+			id: "8D5804952515BD7A"
+			icon: "botanicalmachinery:mechanical_daisy"
+			rewards: [{
+				id: "6BBC68657A14A8FE"
+				count: 16
+				item: "botania:livingwood"
+				type: "item"
+			},{
+				id: "0C0D2796CEE9BAC6"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "11039A28975A2774"
+				item: "botanicalmachinery:mechanical_daisy"
+				type: "item"
+			}]
+			title: "Механический чистоцвет"
+			x: 9.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["8D5804952515BD7A"]
+			description: [
+				"Авто-алтарь. Кидает лепестки сам, если подать воду"
+				"и предметы трубами."
+			]
+			id: "D09FC5A0AE513705"
+			icon: "botanicalmachinery:mechanical_apothecary"
+			rewards: [{
+				id: "0E9E57FCFB586308"
+				count: 32
+				item: "botania:white_petal"
+				type: "item"
+			},{
+				id: "7CB939E065C80553"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "A974461951CE64AF"
+				item: "botanicalmachinery:mechanical_apothecary"
+				type: "item"
+			}]
+			title: "Механический алтарь лепестков"
+			x: 10.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["D09FC5A0AE513705"]
+			description: [
+				"Руны без ручной раскладки. Нужен, когда рунный"
+				"крафт идёт пачками."
+			]
+			id: "4128C6165CB09310"
+			icon: "botanicalmachinery:mechanical_runic_altar"
+			rewards: [{
+				id: "A9E44749988B1D34"
+				count: 4
+				item: "botania:rune_mana"
+				type: "item"
+			},{
+				id: "6C69C7C732A4EB2A"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "4DB7B5357EE346C9"
+				item: "botanicalmachinery:mechanical_runic_altar"
+				type: "item"
+			}]
+			title: "Механический рунический алтарь"
+			x: 12.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["4128C6165CB09310"]
+			description: [
+				"Бассейн с авто-вводом. Связка с инфузером и"
+				"батареей маны."
+			]
+			id: "D79AB96EC766C72B"
+			icon: "botanicalmachinery:mechanical_mana_pool"
+			rewards: [{
+				id: "54235C19F3A661B6"
+				count: 8
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
+				id: "BB9E4A5C8CCAB5B9"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "2E52C96004F42510"
+				item: "botanicalmachinery:mechanical_mana_pool"
+				type: "item"
+			}]
+			title: "Механический бассейн"
+			x: 13.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["D79AB96EC766C72B"]
+			description: [
+				"Льёт ману в предметы конвейером. Замена ручному"
+				"бросанию слитков в бассейн."
+			]
+			id: "DC2CA04AFD055971"
+			icon: "botanicalmachinery:mechanical_mana_infuser"
+			rewards: [{
+				id: "26829F3D2DA63870"
+				count: 8
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
+				id: "0EB752CF8E9F3DB1"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "B829D9678904D8EC"
+				item: "botanicalmachinery:mechanical_mana_infuser"
+				type: "item"
+			}]
+			title: "Механический инфузер"
+			x: 15.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["DC2CA04AFD055971"]
+			description: [
+				"Варит зелья Botania без стояния у котла."
+			]
+			id: "A948F811E93D4AD9"
+			icon: "botanicalmachinery:mechanical_brewery"
+			rewards: [{
+				id: "1727CFB40960CC1A"
+				count: 16
+				item: "minecraft:glass_bottle"
+				type: "item"
+			},{
+				id: "6CFE30810D438A11"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "DB94D5FC73335CA2"
+				item: "botanicalmachinery:mechanical_brewery"
+				type: "item"
+			}]
+			title: "Механическая пивоварня"
+			x: 16.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["A948F811E93D4AD9"]
+			description: [
+				"Террасталь пачками. Жрёт ману — поставь батарею"
+				"рядом."
+			]
+			id: "8882EF56C40284B0"
+			icon: "botanicalmachinery:industrial_agglomeration_factory"
+			rewards: [{
+				id: "B98AA158C2AE4F31"
+				count: 2
+				item: "botania:terrasteel_ingot"
+				type: "item"
+			},{
+				id: "F21F766816FD29BE"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "FD69121621C422C4"
+				item: "botanicalmachinery:industrial_agglomeration_factory"
+				type: "item"
+			}]
+			title: "Фабрика агломерации"
+			x: 18.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["8882EF56C40284B0"]
+			description: [
+				"Авто-обмен портала. Кидай ресурсы, забирай"
+				"элементий без беготни к воронке."
+			]
+			id: "DC277C0E383D72FA"
+			icon: "botanicalmachinery:alfheim_market"
+			rewards: [{
+				id: "8DFB906BFDC8AC53"
+				count: 8
+				item: "botania:elementium_ingot"
+				type: "item"
+			},{
+				id: "7904F753A127A8B8"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "D1BF3E1393829F62"
+				item: "botanicalmachinery:alfheim_market"
+				type: "item"
+			}]
+			title: "Рынок Альфхейма"
+			x: 19.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["DC277C0E383D72FA"]
+			description: [
+				"Буфер маны для механических станков. Без неё"
+				"фабрика агломерации голодает."
+			]
+			id: "E1BD86071225242E"
+			icon: "botanicalmachinery:mana_battery"
+			rewards: [{
+				id: "0934D14D91D55EE9"
+				count: 8
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
+				id: "EB8C955762A378A9"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "25B4753AEF3669A0"
+				item: "botanicalmachinery:mana_battery"
+				type: "item"
+			}]
+			title: "Батарея маны"
+			x: 21.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["8D5804952515BD7A"]
+			description: [
+				"Extra Machinery, тир 1. Быстрее ванильного"
+				"чистоцвета, слабее ultimate."
+			]
+			id: "EAD3EC21DC303FD7"
+			icon: "botanicalextramachinery:base_daisy"
+			rewards: [{
+				id: "88773DB6B9D1E95A"
+				count: 16
+				item: "botania:livingrock"
+				type: "item"
+			},{
+				id: "A6239CEDA88417AD"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "9BF5F50F87FF53E8"
+				item: "botanicalextramachinery:base_daisy"
+				type: "item"
+			}]
+			title: "Базовый механический чистоцвет"
+			x: 10.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["EAD3EC21DC303FD7"]
+			description: [
+				"Второй тир Extra Machinery. Имеет смысл, когда"
+				"живой камень идёт стаками."
+			]
+			id: "CFAFE131603A29F3"
+			icon: "botanicalextramachinery:advanced_daisy"
+			rewards: [{
+				id: "7CB8DF27D9C5367F"
+				count: 32
+				item: "botania:livingrock"
+				type: "item"
+			},{
+				id: "B9118959ADFE2BF3"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "2683B970A491C2F7"
+				item: "botanicalextramachinery:advanced_daisy"
+				type: "item"
+			}]
+			title: "Продвинутый чистоцвет"
+			x: 12.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["D79AB96EC766C72B"]
+			description: [
+				"Тир 1 бассейна Extra Machinery. Ставь до advanced,"
+				"не прыгай сразу в ultimate."
+			]
+			id: "5C61258146B3CA68"
+			icon: "botanicalextramachinery:base_mana_pool"
+			rewards: [{
+				id: "47AC39462B6B5E8B"
+				count: 8
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
+				id: "3123686AE10854CF"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "F570FFBD1D255F1D"
+				item: "botanicalextramachinery:base_mana_pool"
+				type: "item"
+			}]
+			title: "Базовый механический бассейн"
+			x: 13.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5C61258146B3CA68"]
+			description: [
+				"Растит цветы Botania без ручной фермы. Апгрейды"
+				"слотов и тепла ставятся внутрь."
+			]
+			id: "79B854FDB93F6DDC"
+			icon: "botanicalextramachinery:greenhouse"
+			rewards: [{
+				id: "05DFFC06CA8368B8"
+				count: 32
+				item: "botania:white_petal"
+				type: "item"
+			},{
+				id: "24A5D7875DF063BC"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "7FDF27E974B27822"
+				item: "botanicalextramachinery:greenhouse"
+				type: "item"
+			}]
+			title: "Теплица"
+			x: 15.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["AD20A69E61438870"]
+			description: [
+				"MythicBotany: инфузия для альфстали. Открывается"
+				"после портала в Альфхейм."
+			]
+			id: "65AD49156B6D8490"
+			icon: "mythicbotany:mana_infuser"
+			rewards: [{
+				id: "456C0F5FE10BED31"
+				count: 4
+				item: "botania:elementium_ingot"
+				type: "item"
+			},{
+				id: "92CB6316728EEDBE"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "A87062D859598324"
+				item: "mythicbotany:mana_infuser"
+				type: "item"
+			}]
+			title: "Инфузер MythicBotany"
+			x: 22.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["65AD49156B6D8490"]
+			description: [
+				"Собирает ману с цветов на большей площади, чем"
+				"обычный спредер."
+			]
+			id: "844E87F2FA33472F"
+			icon: "mythicbotany:mana_collector"
+			rewards: [{
+				id: "0D11FA296E102928"
+				count: 8
+				item: "botania:manasteel_ingot"
+				type: "item"
+			},{
+				id: "6774CF94D49926CB"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "ED4477069114025B"
+				item: "mythicbotany:mana_collector"
+				type: "item"
+			}]
+			title: "Коллектор маны"
+			x: 24.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["844E87F2FA33472F"]
+			description: [
+				"Пилон MythicBotany. Нужен для крафта альфстали и"
+				"части рун миров."
+			]
+			id: "03C9DD414492A6E7"
+			icon: "mythicbotany:alfsteel_pylon"
+			rewards: [{
+				id: "B5759D5B54A33B58"
+				count: 8
+				item: "mythicbotany:alfsteel_nugget"
+				type: "item"
+			},{
+				id: "6E12558D4404B0EA"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "AEB973E4FC5E5DBB"
+				item: "mythicbotany:alfsteel_pylon"
+				type: "item"
+			}]
+			title: "Пилон альфстали"
+			x: 25.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["03C9DD414492A6E7"]
+			description: [
+				"Металл поверх террастали. Кирка и броня"
+				"MythicBotany собираются из него."
+			]
+			id: "16B8F73ED297BC43"
+			icon: "mythicbotany:alfsteel_ingot"
+			rewards: [{
+				id: "1D1FDECB8CA7AD38"
+				count: 16
+				item: "mythicbotany:alfsteel_nugget"
+				type: "item"
+			},{
+				id: "ECFF93951574B103"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "AF13584862D8C7C7"
+				item: "mythicbotany:alfsteel_ingot"
+				type: "item"
+			}]
+			title: "Альфсталь"
+			x: 27.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["16B8F73ED297BC43"]
+			description: [
+				"Кирка MythicBotany. Заряжается маной, копает"
+				"быстрее террастальной."
+			]
+			id: "1332A6D6872569F1"
+			icon: "mythicbotany:alfsteel_pick"
+			rewards: [{
+				id: "31642B2C8F204FDF"
+				count: 8
+				item: "mythicbotany:alfsteel_nugget"
+				type: "item"
+			},{
+				id: "7AA1EF917993E502"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "DA02005FBFA77C7F"
+				item: "mythicbotany:alfsteel_pick"
+				type: "item"
+			}]
+			title: "Кирка альфстали"
+			x: 28.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["16B8F73ED297BC43"]
+			description: [
+				"Одна из рун девяти миров. Дальше из них собирают"
+				"Мьёльнир и реликвии."
+			]
+			id: "B9ACEF17A481FC70"
+			icon: "mythicbotany:asgard_rune"
+			rewards: [{
+				id: "5F1F14B42C7E0560"
+				count: 4
+				item: "mythicbotany:alfsteel_nugget"
+				type: "item"
+			},{
+				id: "A3AE5833005A6EC6"
+				type: "xp"
+				xp: 75
+			}]
+			tasks: [{
+				id: "E15BD961FF7C8DAE"
+				item: "mythicbotany:asgard_rune"
+				type: "item"
+			}]
+			title: "Руна Асгарда"
+			x: 27.0d
 			y: 0.0d
 		}
 	]
