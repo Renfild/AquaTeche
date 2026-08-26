@@ -1,7 +1,7 @@
 (() => {
   const IP = "g-pl-3.apexnodes.xyz:21561";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.75/AquaTech.exe";
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.78/AquaTech.exe";
   /* portal ui build: nav-cta + online nowrap */
   const CANONICAL = "https://aquateche.store";
   const STORAGE_USER = "aquatech_user";
@@ -11,6 +11,7 @@
   const NAV = [
     { href: "index.html", label: "Главная", id: "home" },
     { href: "start.html", label: "Начать игру", id: "start", cta: true },
+    { href: "guide.html", label: "Гайд", id: "guide" },
     { href: "store.html", label: "Магазин", id: "store" },
     { href: "cases.html", label: "Кейсы", id: "cases" },
     { href: "rods.html", label: "Удочки", id: "rods" },
@@ -406,7 +407,7 @@
     mount.innerHTML = `
       <div class="site-header">
         <div class="container header-inner">
-          <a class="brand" href="index.html"><span class="brand-mark"></span>AquaTech</a>
+          <a class="brand" href="index.html"><img src="assets/logo.png" alt="" style="width:26px;height:26px;border-radius:7px;image-rendering:pixelated" /></a>
           <nav class="nav-desktop">${nav}</nav>
           <div class="header-spacer"></div>
           <div class="online-pill" title="Онлайн на сервере"><span class="dot"></span><span data-online aria-live="polite">…</span></div>

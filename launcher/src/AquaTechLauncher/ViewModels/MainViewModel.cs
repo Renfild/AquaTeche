@@ -27,6 +27,7 @@ public partial class MainViewModel : ViewModelBase
         Username = _cfg.Username;
         LoginNick = _cfg.Username;
         RamText = $"{_cfg.RamMb} MB";
+        SelectedRamMb = _cfg.RamMb;
         GameDir = _cfg.GameDir;
         RefreshVersionLabel();
         McLabel = $"Minecraft {LauncherConstants.McVersion} · Forge {LauncherConstants.ForgeVersion}";
@@ -54,6 +55,7 @@ public partial class MainViewModel : ViewModelBase
         }
         catch { }
         VersionLabel = $"Лаунчер v{LauncherConstants.Version} · Сборка v{packVer}";
+        PackVersion = packVer;
     }
 
     [ObservableProperty] private string _page = "play";
@@ -82,19 +84,54 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private string _accountBadge = "Игрок";
     [ObservableProperty] private string _coinsText = "0 монет";
     [ObservableProperty] private string _hoursText = "0 ч";
+    [ObservableProperty] private int _selectedRamMb;
+    [ObservableProperty] private bool _logoutConfirmVisible;
+    [ObservableProperty] private string _packVersion = "2.9.54";
+    [ObservableProperty] private string _onlineCountLabel = "—";
 
     public ObservableCollection<LogLine> LogLines { get; } = [];
 
     public bool IsPlayPage => Page == "play";
     public bool IsSettingsPage => Page == "settings";
     public bool IsLogPage => Page == "log";
+    public bool IsRam4096 => SelectedRamMb == 4096;
+    public bool IsRam6144 => SelectedRamMb == 6144;
+    public bool IsRam8192 => SelectedRamMb == 8192;
+    public bool IsRam12288 => SelectedRamMb == 12288;
+    public bool IsRam16384 => SelectedRamMb == 16384;
+    public bool CanEditAuth => !AuthChecking && !AuthBusy;
+    public string LoginButtonText => AuthBusy ? "Входим…" : "Войти";
+    public string UsernameInitial =>
+        string.IsNullOrWhiteSpace(Username) ? "?" : char.ToUpperInvariant(Username.Trim()[0]).ToString();
 
     partial void OnPageChanged(string value)
     {
+        LogoutConfirmVisible = false;
         OnPropertyChanged(nameof(IsPlayPage));
         OnPropertyChanged(nameof(IsSettingsPage));
         OnPropertyChanged(nameof(IsLogPage));
     }
+
+    partial void OnRamTextChanged(string value) => ApplySelectedRamFromText(value);
+
+    partial void OnSelectedRamMbChanged(int value)
+    {
+        OnPropertyChanged(nameof(IsRam4096));
+        OnPropertyChanged(nameof(IsRam6144));
+        OnPropertyChanged(nameof(IsRam8192));
+        OnPropertyChanged(nameof(IsRam12288));
+        OnPropertyChanged(nameof(IsRam16384));
+    }
+
+    partial void OnAuthCheckingChanged(bool value) => OnPropertyChanged(nameof(CanEditAuth));
+
+    partial void OnAuthBusyChanged(bool value)
+    {
+        OnPropertyChanged(nameof(CanEditAuth));
+        OnPropertyChanged(nameof(LoginButtonText));
+    }
+
+    partial void OnUsernameChanged(string value) => OnPropertyChanged(nameof(UsernameInitial));
 
     [RelayCommand]
     private void ShowPlay()
@@ -123,14 +160,22 @@ public partial class MainViewModel : ViewModelBase
         if (int.TryParse(mb, out var val))
         {
             RamText = $"{val} MB";
+            SelectedRamMb = val;
             _cfg.RamMb = val;
             _cfg.Save();
         }
     }
 
     [RelayCommand]
-    private void Logout()
+    private void RequestLogout() => LogoutConfirmVisible = true;
+
+    [RelayCommand]
+    private void CancelLogout() => LogoutConfirmVisible = false;
+
+    [RelayCommand]
+    private void ConfirmLogout()
     {
+        LogoutConfirmVisible = false;
         _cfg.PortalSession = null;
         _cfg.Save();
         HttpDownload.SetPortalSession(null);
@@ -179,7 +224,7 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private async Task SubmitLoginAsync()
     {
-        if (AuthBusy) return;
+        if (AuthBusy || AuthChecking) return;
         if (string.IsNullOrWhiteSpace(LoginNick))
         {
             AuthError = "Введи свой никнейм";
@@ -353,6 +398,7 @@ public partial class MainViewModel : ViewModelBase
         HoursText = $"{profile.HoursPlayed} ч";
         NeedsAuth = false;
         AuthChecking = false;
+        LogoutConfirmVisible = false;
         AuthError = "";
         StatusText = "Готов к запуску";
         UiLog($"Авторизован как {profile.Nick} ({AccountBadge})", "ok");
@@ -461,6 +507,7 @@ public partial class MainViewModel : ViewModelBase
         var ramRaw = new string(RamText.Where(char.IsDigit).ToArray());
         _cfg.RamMb = int.TryParse(ramRaw, out var ram) && ram >= 1024 ? ram : 4096;
         RamText = $"{_cfg.RamMb} MB";
+        SelectedRamMb = _cfg.RamMb;
         GameDir = _cfg.GameDir;
         _cfg.Save();
     }
@@ -493,18 +540,21 @@ public partial class MainViewModel : ViewModelBase
             OnlinePlayersText = _onlinePlayers is not null
                 ? $"Игроков онлайн: {_onlinePlayers} / {(_maxPlayers ?? 100)}"
                 : (_tcpMs is null ? "Сервер онлайн" : $"Онлайн · {_tcpMs} мс");
+            OnlineCountLabel = _onlinePlayers is int n ? n.ToString("N0") : "онлайн";
         }
         else if (_tcpOnline == false)
         {
             ServerStatus = "Недоступен";
             ServerDot = Brush("#EF4444");
             OnlinePlayersText = "Сервер оффлайн";
+            OnlineCountLabel = "оффлайн";
         }
         else
         {
             ServerStatus = "Проверяем сервер…";
             ServerDot = Brush("#64748B");
             OnlinePlayersText = "Проверяем…";
+            OnlineCountLabel = "—";
         }
     }
 
@@ -540,6 +590,12 @@ public partial class MainViewModel : ViewModelBase
             try { await Task.Delay(15000); }
             catch { break; }
         }
+    }
+
+    private void ApplySelectedRamFromText(string value)
+    {
+        var digits = new string((value ?? "").Where(char.IsDigit).ToArray());
+        SelectedRamMb = int.TryParse(digits, out var ram) && ram >= 1024 ? ram : 0;
     }
 
     private static void MinimizeMainWindow()

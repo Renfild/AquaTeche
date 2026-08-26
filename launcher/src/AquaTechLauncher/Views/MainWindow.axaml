@@ -5,463 +5,367 @@
         x:DataType="vm:MainViewModel"
         Icon="/Assets/aquatech.ico"
         Title="AquaTech Launcher"
-        Width="1020" Height="660"
-        MinWidth="980" MinHeight="620"
+        Width="1280" Height="760"
+        MinWidth="1100" MinHeight="680"
         WindowStartupLocation="CenterScreen"
-        Background="#0B0E14"
-        FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif">
+        Background="#070B12"
+        UseLayoutRounding="True"
+        FontFamily="Segoe UI Variable Text, Segoe UI, sans-serif"
+        FontSize="13">
+
+  <Window.KeyBindings>
+    <KeyBinding Gesture="Ctrl+OemComma" Command="{Binding ShowSettingsCommand}"/>
+    <KeyBinding Gesture="Escape" Command="{Binding CancelLogoutCommand}"/>
+  </Window.KeyBindings>
 
   <Window.Styles>
     <Style Selector="Button.nav">
       <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="Foreground" Value="#94A3B8"/>
-      <Setter Property="HorizontalAlignment" Value="Stretch"/>
-      <Setter Property="HorizontalContentAlignment" Value="Left"/>
-      <Setter Property="Padding" Value="16,12"/>
-      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="Foreground" Value="#D6E2EE"/>
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="Padding" Value="16,8"/>
+      <Setter Property="MinHeight" Value="36"/>
+      <Setter Property="CornerRadius" Value="18"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
-      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="FontSize" Value="13"/>
       <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
-      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
+      <Setter Property="Cursor" Value="Hand"/>
       <Setter Property="Transitions">
         <Transitions>
-          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
           <BrushTransition Property="Background" Duration="0:0:0.12"/>
           <BrushTransition Property="Foreground" Duration="0:0:0.12"/>
         </Transitions>
       </Setter>
     </Style>
-    <Style Selector="Button.nav:pointerover">
-      <Setter Property="RenderTransform" Value="translateY(-1px) scale(1)"/>
-    </Style>
     <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#151B26"/>
-      <Setter Property="Foreground" Value="#F1F5F9"/>
-    </Style>
-    <Style Selector="Button.nav:pressed">
-      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.97)"/>
+      <Setter Property="Background" Value="#33FFFFFF"/>
+      <Setter Property="Foreground" Value="#F8FAFC"/>
     </Style>
     <Style Selector="Button.nav.active">
-      <Setter Property="Background" Value="#151B26"/>
-      <Setter Property="Foreground" Value="#38BDF8"/>
+      <Setter Property="Background" Value="#66101820"/>
+      <Setter Property="Foreground" Value="#F8FAFC"/>
     </Style>
 
     <Style Selector="TextBox.field">
-      <Setter Property="Background" Value="#121722"/>
+      <Setter Property="Background" Value="#66101820"/>
       <Setter Property="Foreground" Value="#F8FAFC"/>
-      <Setter Property="BorderBrush" Value="#222C3D"/>
+      <Setter Property="BorderBrush" Value="#40FFFFFF"/>
       <Setter Property="BorderThickness" Value="1"/>
       <Setter Property="CornerRadius" Value="10"/>
-      <Setter Property="Padding" Value="14,12"/>
-      <Setter Property="FontSize" Value="14"/>
-      <Setter Property="CaretBrush" Value="#06B6D4"/>
+      <Setter Property="Padding" Value="12,11"/>
+      <Setter Property="MinHeight" Value="40"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="CaretBrush" Value="#38BDF8"/>
+      <Setter Property="SelectionBrush" Value="#0E7490"/>
+    </Style>
+    <Style Selector="TextBox.field:focus">
+      <Setter Property="BorderBrush" Value="#38BDF8"/>
+    </Style>
+    <Style Selector="TextBox.field:pointerover">
+      <Setter Property="BorderBrush" Value="#66FFFFFF"/>
     </Style>
 
     <Style Selector="Button.ram-pill">
-      <Setter Property="Background" Value="#121722"/>
-      <Setter Property="Foreground" Value="#94A3B8"/>
-      <Setter Property="BorderBrush" Value="#222C3D"/>
+      <Setter Property="Background" Value="#66101820"/>
+      <Setter Property="Foreground" Value="#D6E2EE"/>
+      <Setter Property="BorderBrush" Value="#33FFFFFF"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="CornerRadius" Value="16"/>
       <Setter Property="Padding" Value="14,8"/>
+      <Setter Property="MinHeight" Value="32"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="FontSize" Value="12"/>
-      <Setter Property="Transitions">
-        <Transitions>
-          <BrushTransition Property="Background" Duration="0:0:0.12"/>
-          <BrushTransition Property="Foreground" Duration="0:0:0.12"/>
-        </Transitions>
-      </Setter>
+      <Setter Property="Cursor" Value="Hand"/>
     </Style>
     <Style Selector="Button.ram-pill:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#1E293B"/>
-      <Setter Property="Foreground" Value="#38BDF8"/>
+      <Setter Property="Background" Value="#33FFFFFF"/>
+      <Setter Property="Foreground" Value="#F8FAFC"/>
+    </Style>
+    <Style Selector="Button.ram-pill.selected">
+      <Setter Property="Background" Value="#15202C"/>
+      <Setter Property="BorderBrush" Value="#38BDF8"/>
+      <Setter Property="Foreground" Value="#F8FAFC"/>
     </Style>
 
     <Style Selector="Button.glass">
-      <Setter Property="Background" Value="#151B26"/>
-      <Setter Property="Foreground" Value="#E2E8F0"/>
-      <Setter Property="BorderBrush" Value="#222C3D"/>
+      <Setter Property="Background" Value="#66101820"/>
+      <Setter Property="Foreground" Value="#F1F5F9"/>
+      <Setter Property="BorderBrush" Value="#40FFFFFF"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="CornerRadius" Value="10"/>
-      <Setter Property="Padding" Value="16,10"/>
+      <Setter Property="CornerRadius" Value="16"/>
+      <Setter Property="Padding" Value="16,9"/>
+      <Setter Property="MinHeight" Value="36"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="FontSize" Value="13"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
-      <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
-      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
-      <Setter Property="Transitions">
-        <Transitions>
-          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
-          <BrushTransition Property="Background" Duration="0:0:0.12"/>
-        </Transitions>
-      </Setter>
-    </Style>
-    <Style Selector="Button.glass:pointerover">
-      <Setter Property="RenderTransform" Value="translateY(-1px) scale(1)"/>
+      <Setter Property="Cursor" Value="Hand"/>
     </Style>
     <Style Selector="Button.glass:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#1E293B"/>
-      <Setter Property="BorderBrush" Value="#38BDF8"/>
+      <Setter Property="Background" Value="#33FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#66FFFFFF"/>
     </Style>
-    <Style Selector="Button.glass:pressed">
-      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.97)"/>
+    <Style Selector="Button.glass:disabled">
+      <Setter Property="Opacity" Value="0.45"/>
     </Style>
 
     <Style Selector="Button.play">
-      <Setter Property="Foreground" Value="#0F172A"/>
+      <Setter Property="Background" Value="#38BDF8"/>
+      <Setter Property="Foreground" Value="#071018"/>
       <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="CornerRadius" Value="12"/>
-      <Setter Property="FontWeight" Value="Bold"/>
-      <Setter Property="FontSize" Value="17"/>
-      <Setter Property="Height" Value="54"/>
-      <Setter Property="Padding" Value="0"/>
-      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="CornerRadius" Value="18"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="Height" Value="56"/>
+      <Setter Property="MinWidth" Value="280"/>
+      <Setter Property="Padding" Value="28,0"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
-      <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
-      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
-      <Setter Property="Transitions">
-        <Transitions>
-          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
-        </Transitions>
-      </Setter>
+      <Setter Property="Cursor" Value="Hand"/>
     </Style>
-    <Style Selector="Button.play:pointerover">
-      <Setter Property="RenderTransform" Value="translateY(-2px) scale(1.01)"/>
+    <Style Selector="Button.play:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#7DD3FC"/>
     </Style>
-    <Style Selector="Button.play:pressed">
-      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.97)"/>
+    <Style Selector="Button.play:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="#0EA5E9"/>
+    </Style>
+    <Style Selector="Button.play:disabled">
+      <Setter Property="Opacity" Value="0.45"/>
     </Style>
 
     <Style Selector="Button.auth-action">
-      <Setter Property="Foreground" Value="#0F172A"/>
+      <Setter Property="Background" Value="#38BDF8"/>
+      <Setter Property="Foreground" Value="#071018"/>
       <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="CornerRadius" Value="12"/>
-      <Setter Property="FontWeight" Value="Bold"/>
-      <Setter Property="FontSize" Value="16"/>
-      <Setter Property="Height" Value="50"/>
+      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="FontSize" Value="15"/>
+      <Setter Property="Height" Value="44"/>
       <Setter Property="HorizontalAlignment" Value="Stretch"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
-      <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
-      <Setter Property="RenderTransform" Value="translateY(0px) scale(1)"/>
-      <Setter Property="Transitions">
-        <Transitions>
-          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
-        </Transitions>
-      </Setter>
+      <Setter Property="Cursor" Value="Hand"/>
     </Style>
-    <Style Selector="Button.auth-action:pointerover">
-      <Setter Property="RenderTransform" Value="translateY(-2px) scale(1.01)"/>
+    <Style Selector="Button.auth-action:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="#7DD3FC"/>
     </Style>
-    <Style Selector="Button.auth-action:pressed">
-      <Setter Property="RenderTransform" Value="translateY(0px) scale(0.97)"/>
+    <Style Selector="Button.auth-action:disabled">
+      <Setter Property="Opacity" Value="0.45"/>
     </Style>
 
-    <Style Selector="Border.panel">
-      <Setter Property="Background" Value="#101520"/>
-      <Setter Property="BorderBrush" Value="#1E2738"/>
+    <Style Selector="Button.link">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="#7DD3FC"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Padding" Value="8,6"/>
+      <Setter Property="MinHeight" Value="32"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="Button.link:pointerover /template/ ContentPresenter">
+      <Setter Property="Foreground" Value="#BAE6FD"/>
+    </Style>
+
+    <Style Selector="CheckBox">
+      <Setter Property="Foreground" Value="#D6E2EE"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="MinHeight" Value="28"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <Style Selector="Border.glass-bar">
+      <Setter Property="Background" Value="#99101820"/>
+      <Setter Property="BorderBrush" Value="#33FFFFFF"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="CornerRadius" Value="18"/>
+    </Style>
+    <Style Selector="Border.stat">
+      <Setter Property="Background" Value="#99101820"/>
+      <Setter Property="BorderBrush" Value="#33FFFFFF"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="16"/>
+      <Setter Property="Padding" Value="14,8"/>
+    </Style>
+    <Style Selector="Border.sheet">
+      <Setter Property="Background" Value="#E6101820"/>
+      <Setter Property="BorderBrush" Value="#33FFFFFF"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="16"/>
+    </Style>
+    <Style Selector="Button:focus-visible /template/ ContentPresenter">
+      <Setter Property="BorderBrush" Value="#38BDF8"/>
+      <Setter Property="BorderThickness" Value="2"/>
     </Style>
   </Window.Styles>
 
   <Panel>
-    <!-- ═══════════════════════════════════════════════════════════════════════════ -->
-    <!-- 1. FULL-SCREEN AUTHENTICATION GATE (Visible when NeedsAuth is TRUE)        -->
-    <!-- ═══════════════════════════════════════════════════════════════════════════ -->
-    <Border Background="#080C14" IsVisible="{Binding NeedsAuth}" ZIndex="100">
-      <Panel>
-        <!-- Background Ambient Ocean Glow -->
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="600" CornerRadius="300" Opacity="0.15">
-          <Border.Background>
-            <RadialGradientBrush>
-              <GradientStop Color="#0284C7" Offset="0"/>
-              <GradientStop Color="Transparent" Offset="1"/>
-            </RadialGradientBrush>
-          </Border.Background>
-        </Border>
-
-        <!-- Centered Login Card -->
-        <Border Classes="panel" Width="460" Padding="36" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#0F1420">
-          <StackPanel Spacing="20">
-            <!-- Header Brand -->
-            <StackPanel Spacing="6" HorizontalAlignment="Center">
-              <Border Background="#0284C7" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Center" Margin="0,0,0,4">
-                <TextBlock Text="AQ" FontSize="20" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-              </Border>
-              <TextBlock Text="AQUATECH" FontSize="28" FontWeight="ExtraBold" Foreground="#F8FAFC"
-                         LetterSpacing="2" HorizontalAlignment="Center"/>
-              <TextBlock Text="Minecraft 1.20.1 · Океанский Skyblock" FontSize="12" Foreground="#38BDF8"
-                         HorizontalAlignment="Center"/>
-            </StackPanel>
-
-            <Border Height="1" Background="#1E2738" Margin="0,4"/>
-
-            <!-- Form -->
-            <StackPanel Spacing="14">
-              <TextBlock Text="ВХОД В АККАУНТ" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center"/>
-
-              <StackPanel Spacing="6">
-                <TextBlock Text="НИКНЕЙМ" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
-                <TextBox Classes="field" Text="{Binding LoginNick}" Watermark="Твой никнейм на сервере"/>
-              </StackPanel>
-
-              <StackPanel Spacing="6">
-                <TextBlock Text="ПАРОЛЬ" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
-                <TextBox Classes="field" Text="{Binding LoginPassword}" PasswordChar="•" Watermark="Пароль от аккаунта"/>
-              </StackPanel>
-
-              <CheckBox IsChecked="{Binding RememberMe}" Content="Запомнить меня" Foreground="#94A3B8" FontSize="13" Margin="0,2,0,2"/>
-
-              <!-- Error Alert -->
-              <Border Background="#2A1215" BorderBrush="#EF4444" BorderThickness="1" CornerRadius="8" Padding="12,8"
-                      IsVisible="{Binding AuthError, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
-                <TextBlock Text="{Binding AuthError}" FontSize="12" Foreground="#FCA5A5" TextWrapping="Wrap"
-                           HorizontalAlignment="Center" TextAlignment="Center"/>
-              </Border>
-
-              <!-- Submit Button -->
-              <Button Classes="auth-action" Content="Войти в аккаунт" Command="{Binding SubmitLoginCommand}"
-                      IsEnabled="{Binding !AuthBusy}">
-                <Button.Background>
-                  <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                    <GradientStop Color="#00F2FE" Offset="0"/>
-                    <GradientStop Color="#0284C7" Offset="1"/>
-                  </LinearGradientBrush>
-                </Button.Background>
-              </Button>
-
-              <!-- Register Link -->
-              <Button Classes="glass" Content="Создать аккаунт на aquateche.store →" Command="{Binding OpenRegisterCommand}"
-                      HorizontalAlignment="Stretch"/>
-            </StackPanel>
-
-            <!-- Bottom Status -->
-            <StackPanel Spacing="4" HorizontalAlignment="Center" Margin="0,8,0,0">
-              <TextBlock Text="{Binding OnlinePlayersText}" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center"/>
-              <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#475569" HorizontalAlignment="Center"/>
-            </StackPanel>
-          </StackPanel>
-        </Border>
-      </Panel>
+    <Image Source="/Assets/hero.jpg" Stretch="UniformToFill" StretchDirection="Both"/>
+    <Border>
+      <Border.Background>
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Color="#66070B12" Offset="0"/>
+          <GradientStop Color="#99070B12" Offset="0.45"/>
+          <GradientStop Color="#E6070B12" Offset="1"/>
+        </LinearGradientBrush>
+      </Border.Background>
     </Border>
 
-    <!-- ═══════════════════════════════════════════════════════════════════════════ -->
-    <!-- 2. MAIN LAUNCHER INTERFACE (Visible when NeedsAuth is FALSE)                -->
-    <!-- ═══════════════════════════════════════════════════════════════════════════ -->
-    <Grid ColumnDefinitions="240,*" IsVisible="{Binding !NeedsAuth}">
-      <!-- Sidebar -->
-      <Border Background="#0C1018" BorderBrush="#1A2230" BorderThickness="0,0,1,0">
-        <DockPanel>
-          <!-- Brand Header -->
-          <StackPanel DockPanel.Dock="Top" Margin="20,24,20,12" Spacing="4">
-            <StackPanel Orientation="Horizontal" Spacing="10">
-              <Border Background="#0284C7" CornerRadius="8" Width="32" Height="32">
-                <TextBlock Text="AQ" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-              </Border>
-              <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="AQUATECH" FontSize="18" FontWeight="ExtraBold" Foreground="#F8FAFC" LetterSpacing="1"/>
-                <TextBlock Text="Ocean Skyblock" FontSize="11" Foreground="#38BDF8"/>
-              </StackPanel>
-            </StackPanel>
+    <DockPanel>
+      <Border Classes="glass-bar" DockPanel.Dock="Top" Margin="16,12,16,0" Padding="14,8">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+          <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+            <Image Source="/Assets/aquatech.ico" Width="26" Height="26" VerticalAlignment="Center"/>
+            <TextBlock Text="AquaTech" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
+                       FontSize="16" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
           </StackPanel>
-
-          <!-- Navigation -->
-          <StackPanel DockPanel.Dock="Top" Margin="12,12" Spacing="6">
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center"
+                      IsVisible="{Binding !NeedsAuth}">
             <Button Classes="nav" Content="Игра" Command="{Binding ShowPlayCommand}" Classes.active="{Binding IsPlayPage}"/>
             <Button Classes="nav" Content="Настройки" Command="{Binding ShowSettingsCommand}" Classes.active="{Binding IsSettingsPage}"/>
             <Button Classes="nav" Content="Журнал" Command="{Binding ShowLogCommand}" Classes.active="{Binding IsLogPage}"/>
           </StackPanel>
-
-          <!-- Bottom Profile Card & Logout -->
-          <StackPanel DockPanel.Dock="Bottom" Margin="16,16" Spacing="10" VerticalAlignment="Bottom">
-            <Border Classes="panel" Padding="14,12">
-              <StackPanel Spacing="8">
-                <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="{Binding Username}" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
-                  <Border Grid.Column="1" Background="#1E293B" CornerRadius="6" Padding="6,2">
-                    <TextBlock Text="{Binding AccountBadge}" FontSize="10" FontWeight="SemiBold" Foreground="#38BDF8"/>
-                  </Border>
-                </Grid>
-                <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="Баланс:" FontSize="11" Foreground="#94A3B8"/>
-                  <TextBlock Grid.Column="1" Text="{Binding CoinsText}" FontSize="11" FontWeight="Bold" Foreground="#FBBF24"/>
-                </Grid>
-                <Button Classes="glass" Content="Выйти из аккаунта" Command="{Binding LogoutCommand}"
-                        HorizontalAlignment="Stretch" Padding="8,6" FontSize="11"/>
-              </StackPanel>
+          <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center"
+                      IsVisible="{Binding !NeedsAuth}">
+            <Border Width="32" Height="32" CornerRadius="16" Background="#38BDF8">
+              <TextBlock Text="{Binding UsernameInitial}" FontSize="13" FontWeight="Bold" Foreground="#071018"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
-
-            <StackPanel Spacing="2">
-              <TextBlock Text="{Binding OnlinePlayersText}" FontSize="11" Foreground="#38BDF8"/>
-              <TextBlock Text="{Binding VersionLabel}" FontSize="10" Foreground="#64748B"/>
-              <TextBlock Text="{Binding McLabel}" FontSize="10" Foreground="#64748B"/>
+            <StackPanel VerticalAlignment="Center" Margin="0,0,4,0">
+              <TextBlock Text="{Binding Username}" FontSize="13" FontWeight="SemiBold" Foreground="#F8FAFC"
+                         TextTrimming="CharacterEllipsis" MaxWidth="140"/>
+              <TextBlock Text="{Binding CoinsText}" FontSize="11" Foreground="#A8B8CC"/>
+            </StackPanel>
+            <Button Classes="glass" Content="Выйти" Command="{Binding RequestLogoutCommand}"
+                    Padding="12,6" IsVisible="{Binding !LogoutConfirmVisible}"
+                    AutomationProperties.Name="Выйти"/>
+            <StackPanel Orientation="Horizontal" Spacing="6" IsVisible="{Binding LogoutConfirmVisible}" VerticalAlignment="Center">
+              <Button Classes="glass" Content="Отмена" Command="{Binding CancelLogoutCommand}" Padding="12,6" IsCancel="True"/>
+              <Button Classes="glass" Content="Выйти" Command="{Binding ConfirmLogoutCommand}" Padding="12,6" Foreground="#FCA5A5"/>
             </StackPanel>
           </StackPanel>
-        </DockPanel>
+        </Grid>
       </Border>
 
-      <!-- Main Content Area -->
-      <Panel Grid.Column="1" Background="#0B0E14" Margin="24">
-        <!-- 1. Play Page -->
-        <DockPanel IsVisible="{Binding IsPlayPage}">
-          <!-- Hero Banner -->
-          <Border DockPanel.Dock="Top" Classes="panel" Height="130" Margin="0,0,0,16" Padding="28,0">
-            <Border.Background>
-              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                <GradientStop Color="#0F172A" Offset="0"/>
-                <GradientStop Color="#082F49" Offset="0.6"/>
-                <GradientStop Color="#0284C7" Offset="1"/>
-              </LinearGradientBrush>
-            </Border.Background>
-            <Grid ColumnDefinitions="*,Auto">
-              <StackPanel VerticalAlignment="Center" Spacing="4">
-                <TextBlock Text="AQUATECH OCEAN" FontSize="26" FontWeight="ExtraBold" Foreground="#F8FAFC" LetterSpacing="1.5"/>
-                <TextBlock Text="Спавн на плоту · Удочки StarCatcher · 12 кейсов · Индустрия" FontSize="13" Foreground="#93C5FD"/>
-              </StackPanel>
-              <Button Grid.Column="1" Classes="glass" Content="Сайт проекта →" Command="{Binding OpenWebsiteCommand}" VerticalAlignment="Center"/>
-            </Grid>
-          </Border>
-
-          <ScrollViewer>
-            <StackPanel Spacing="16">
-              <!-- Welcome Profile Chip -->
-              <Border Classes="panel" Padding="18,14">
-                <Grid ColumnDefinitions="Auto,*,Auto">
-                  <Border Background="#0284C7" CornerRadius="8" Width="36" Height="36" VerticalAlignment="Center" Margin="0,0,12,0">
-                    <TextBlock Text="AQ" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                  </Border>
-                  <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                      <TextBlock Text="Игрок:" FontSize="12" Foreground="#94A3B8"/>
-                      <TextBlock Text="{Binding Username}" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
-                    </StackPanel>
-                    <TextBlock Text="Аккаунт верифицирован и готов к игре" FontSize="11" Foreground="#38BDF8"/>
-                  </StackPanel>
-                  <Border Grid.Column="2" Background="#1E293B" CornerRadius="8" Padding="10,6" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding CoinsText}" FontSize="12" FontWeight="Bold" Foreground="#FBBF24"/>
-                  </Border>
-                </Grid>
-              </Border>
-
-              <!-- Server Card -->
-              <Border Classes="panel" Padding="20,16">
-                <Grid ColumnDefinitions="*,Auto">
-                  <StackPanel Spacing="4">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                      <TextBlock Text="●" FontSize="14" Foreground="{Binding ServerDot}" VerticalAlignment="Center"/>
-                      <TextBlock Text="Основной сервер AquaTech" FontSize="16" FontWeight="Bold" Foreground="#F8FAFC"/>
-                    </StackPanel>
-                    <TextBlock Text="{Binding OnlinePlayersText}" FontSize="12" Foreground="#38BDF8"/>
-                  </StackPanel>
-                  <TextBlock Grid.Column="1" Text="{Binding ServerStatus}" FontSize="13" FontWeight="SemiBold"
-                             Foreground="#94A3B8" VerticalAlignment="Center"/>
-                </Grid>
-              </Border>
-
-              <!-- Action Buttons Row (Play + Update) -->
-              <Grid ColumnDefinitions="*,12,Auto">
-                <Button Grid.Column="0" Classes="play" Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
-                        IsEnabled="{Binding ActionsEnabled}" HorizontalAlignment="Stretch">
-                  <Button.Background>
-                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                      <GradientStop Color="#00F2FE" Offset="0"/>
-                      <GradientStop Color="#4FACFE" Offset="0.5"/>
-                      <GradientStop Color="#0284C7" Offset="1"/>
-                    </LinearGradientBrush>
-                  </Button.Background>
-                </Button>
-                <Button Grid.Column="2" Classes="glass" Content="Обновить" Command="{Binding RepairPackCommand}"
-                        IsEnabled="{Binding ActionsEnabled}" Height="54" Padding="18,0" FontSize="15"
-                        ToolTip.Tip="Проверить целостность и скачать обновления сборки"/>
-              </Grid>
-
-              <!-- Progress & Status -->
-              <StackPanel Spacing="8">
-                <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="#CBD5E1"/>
-                  <TextBlock Grid.Column="1" Text="{Binding PctText}" FontSize="13" FontWeight="Bold" Foreground="#38BDF8"/>
-                </Grid>
-                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="8"
-                             Foreground="#38BDF8" Background="#151B26" CornerRadius="4"/>
-              </StackPanel>
-
-              <TextBlock Text="При нажатии «Играть» сборка автоматически проверит хеши и скачает обновления."
-                         FontSize="11" Foreground="#64748B" TextWrapping="Wrap"/>
+      <Panel Margin="28,20,28,24">
+        <Grid ColumnDefinitions="*,280,320" IsVisible="{Binding IsPlayPage}">
+          <StackPanel VerticalAlignment="Bottom" Spacing="16" MaxWidth="520" HorizontalAlignment="Left">
+            <StackPanel Spacing="6">
+              <TextBlock FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
+                         FontSize="36" FontWeight="Bold" Foreground="#F8FAFC" TextWrapping="Wrap">
+                <Run Text="Океанский "/>
+                <Run Text="skyblock" Foreground="#38BDF8"/>
+              </TextBlock>
+              <TextBlock Text="Плот, StarCatcher, кейсы и индустрия на 1.20.1."
+                         FontSize="15" Foreground="#D6E2EE" TextWrapping="Wrap" MaxWidth="440"/>
             </StackPanel>
-          </ScrollViewer>
-        </DockPanel>
-
-        <!-- 2. Settings Page -->
-        <ScrollViewer IsVisible="{Binding IsSettingsPage}">
-          <StackPanel Spacing="18" MaxWidth="720" HorizontalAlignment="Left">
-            <StackPanel Spacing="4">
-              <TextBlock Text="Параметры запуска" FontSize="24" FontWeight="Bold" Foreground="#F8FAFC"/>
-              <TextBlock Text="Выделение оперативной памяти и выбор директории сборки." FontSize="13" Foreground="#94A3B8"/>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Border Classes="stat">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <TextBlock Text="●" FontSize="12" Foreground="{Binding ServerDot}" VerticalAlignment="Center"/>
+                  <TextBlock Text="{Binding OnlinePlayersText}" FontSize="13" FontWeight="SemiBold" Foreground="#F8FAFC"/>
+                </StackPanel>
+              </Border>
+              <Border Classes="stat">
+                <TextBlock Text="{Binding ServerStatus}" FontSize="13" FontWeight="SemiBold" Foreground="#F8FAFC"/>
+              </Border>
             </StackPanel>
-
-            <Border Classes="panel" Padding="24,20">
-              <StackPanel Spacing="18">
-                <StackPanel Spacing="8">
-                  <TextBlock Text="ВЫДЕЛЕНИЕ ОПЕРАТИВНОЙ ПАМЯТИ (RAM)" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
-                  <TextBox Classes="field" Text="{Binding RamText}"/>
-                  <!-- Quick RAM Presets -->
-                  <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
-                    <Button Classes="ram-pill" Content="4096 MB (4G)" Command="{Binding SetRamCommand}" CommandParameter="4096"/>
-                    <Button Classes="ram-pill" Content="6144 MB (6G)" Command="{Binding SetRamCommand}" CommandParameter="6144"/>
-                    <Button Classes="ram-pill" Content="8192 MB (8G) Рекомендуется" Command="{Binding SetRamCommand}" CommandParameter="8192"/>
-                    <Button Classes="ram-pill" Content="12288 MB (12G)" Command="{Binding SetRamCommand}" CommandParameter="12288"/>
-                    <Button Classes="ram-pill" Content="16384 MB (16G)" Command="{Binding SetRamCommand}" CommandParameter="16384"/>
-                  </StackPanel>
-                  <TextBlock Text="Рекомендуется от 6144 до 8192 MB для стабильных 60+ FPS с индустриальными модами." FontSize="11" Foreground="#64748B"/>
-                </StackPanel>
-
-                <StackPanel Spacing="8">
-                  <TextBlock Text="ДИРЕКТОРИЯ ИГРЫ (.minecraft / AquaTech)" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
-                  <Grid ColumnDefinitions="*,10,Auto">
-                    <TextBox Classes="field" Text="{Binding GameDir}"/>
-                    <Button Grid.Column="2" Classes="glass" Content="Обзор..." Command="{Binding BrowseGameDirCommand}"
-                            Height="44" Padding="14,0" HorizontalContentAlignment="Center"/>
-                  </Grid>
-                </StackPanel>
-
-                <Border Height="1" Background="#1E2738" Margin="0,4"/>
-
-                <StackPanel Spacing="10">
-                  <TextBlock Text="ОБСЛУЖИВАНИЕ И ВОССТАНОВЛЕНИЕ" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1"/>
-                  <TextBlock Text="Если возникают ошибки подключения или краши модов, нажми кнопку ниже для полной проверки и авто-очистки лишних файлов."
-                             FontSize="11" Foreground="#64748B" TextWrapping="Wrap"/>
-                  <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
-                    <Button Classes="glass" Content="Проверить и починить сборку" Command="{Binding RepairPackCommand}"
-                            Margin="0,0,10,8" Padding="16,10" Foreground="#38BDF8"/>
-                    <Button Classes="glass" Content="Папка игры" Command="{Binding OpenGameFolderCommand}"
-                            Margin="0,0,10,8" Padding="14,10"/>
-                    <Button Classes="glass" Content="Логи" Command="{Binding OpenLogsFolderCommand}"
-                            Margin="0,0,10,8" Padding="14,10"/>
-                  </WrapPanel>
-                </StackPanel>
-              </StackPanel>
-            </Border>
           </StackPanel>
+
+          <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Spacing="10">
+            <Button Classes="glass" Content="Обновить сборку" Command="{Binding RepairPackCommand}"
+                    IsEnabled="{Binding ActionsEnabled}" HorizontalAlignment="Center"
+                    ToolTip.Tip="Проверить целостность и скачать обновления сборки"/>
+            <Button Classes="play" Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
+                    IsEnabled="{Binding ActionsEnabled}" HorizontalAlignment="Center"
+                    ToolTip.Tip="Проверит сборку и запустит клиент"/>
+            <StackPanel Spacing="6" Width="280">
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="#D6E2EE" TextWrapping="Wrap"/>
+                <TextBlock Grid.Column="1" Text="{Binding PctText}" FontSize="12" FontWeight="SemiBold" Foreground="#A8B8CC"/>
+              </Grid>
+              <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="8"
+                           Foreground="#38BDF8" Background="#66101820" CornerRadius="4"
+                           AutomationProperties.Name="Прогресс загрузки"
+                           AutomationProperties.HelpText="{Binding StatusText}"/>
+            </StackPanel>
+          </StackPanel>
+
+          <Border Grid.Column="2" Classes="glass-bar" Padding="20,18" VerticalAlignment="Bottom" Margin="16,0,0,0">
+            <StackPanel Spacing="10">
+              <TextBlock Text="Сборка" FontSize="12" FontWeight="SemiBold" Foreground="#38BDF8"/>
+              <TextBlock Text="{Binding PackVersion}" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
+                         FontSize="22" FontWeight="Bold" Foreground="#F8FAFC"/>
+              <TextBlock Text="{Binding McLabel}" FontSize="13" Foreground="#D6E2EE" TextWrapping="Wrap"/>
+              <TextBlock Text="{Binding VersionLabel}" FontSize="12" Foreground="#A8B8CC" TextWrapping="Wrap"/>
+              <Button Classes="glass" Content="Сайт" Command="{Binding OpenWebsiteCommand}"
+                      HorizontalAlignment="Left" Margin="0,6,0,0"
+                      AutomationProperties.Name="Сайт проекта"/>
+            </StackPanel>
+          </Border>
+        </Grid>
+
+        <ScrollViewer IsVisible="{Binding IsSettingsPage}">
+          <Border Classes="sheet" Padding="28,24" MaxWidth="680" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Spacing="16">
+              <StackPanel Spacing="4">
+                <TextBlock Text="Настройки" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
+                           FontSize="22" FontWeight="Bold" Foreground="#F8FAFC"/>
+                <TextBlock Text="Память и папка сборки." FontSize="13" Foreground="#A8B8CC"/>
+              </StackPanel>
+              <StackPanel Spacing="8">
+                <TextBlock Text="Память" FontSize="13" FontWeight="SemiBold" Foreground="#E2E8F0"/>
+                <TextBox Classes="field" Text="{Binding RamText}"/>
+                <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
+                  <Button Classes="ram-pill" Content="4 ГБ" Command="{Binding SetRamCommand}" CommandParameter="4096"
+                          Classes.selected="{Binding IsRam4096}" Margin="0,0,8,8"/>
+                  <Button Classes="ram-pill" Content="6 ГБ" Command="{Binding SetRamCommand}" CommandParameter="6144"
+                          Classes.selected="{Binding IsRam6144}" Margin="0,0,8,8"/>
+                  <Button Classes="ram-pill" Content="8 ГБ" Command="{Binding SetRamCommand}" CommandParameter="8192"
+                          Classes.selected="{Binding IsRam8192}" Margin="0,0,8,8"
+                          ToolTip.Tip="Рекомендуется для индустриальных модов"/>
+                  <Button Classes="ram-pill" Content="12 ГБ" Command="{Binding SetRamCommand}" CommandParameter="12288"
+                          Classes.selected="{Binding IsRam12288}" Margin="0,0,8,8"/>
+                  <Button Classes="ram-pill" Content="16 ГБ" Command="{Binding SetRamCommand}" CommandParameter="16384"
+                          Classes.selected="{Binding IsRam16384}" Margin="0,0,8,8"/>
+                </WrapPanel>
+                <TextBlock Text="Для стабильных 60+ FPS с индустрией обычно хватает 6–8 ГБ." FontSize="12" Foreground="#A8B8CC"/>
+              </StackPanel>
+              <StackPanel Spacing="8">
+                <TextBlock Text="Папка игры" FontSize="13" FontWeight="SemiBold" Foreground="#E2E8F0"/>
+                <Grid ColumnDefinitions="*,10,Auto">
+                  <TextBox Classes="field" Text="{Binding GameDir}"/>
+                  <Button Grid.Column="2" Classes="glass" Content="Обзор…" Command="{Binding BrowseGameDirCommand}"
+                          Height="40" Padding="14,0" AutomationProperties.Name="Выбрать папку игры"/>
+                </Grid>
+              </StackPanel>
+              <Border Height="1" Background="#33FFFFFF" Margin="0,4"/>
+              <StackPanel Spacing="8">
+                <TextBlock Text="Сборка" FontSize="13" FontWeight="SemiBold" Foreground="#E2E8F0"/>
+                <TextBlock Text="Если клиент падает или не коннектится, проверь файлы и убери лишнее."
+                           FontSize="12" Foreground="#A8B8CC" TextWrapping="Wrap"/>
+                <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
+                  <Button Classes="glass" Content="Починить сборку" Command="{Binding RepairPackCommand}" Margin="0,0,8,8"/>
+                  <Button Classes="glass" Content="Папка игры" Command="{Binding OpenGameFolderCommand}" Margin="0,0,8,8"/>
+                  <Button Classes="glass" Content="Логи" Command="{Binding OpenLogsFolderCommand}" Margin="0,0,8,8"/>
+                </WrapPanel>
+              </StackPanel>
+            </StackPanel>
+          </Border>
         </ScrollViewer>
 
-        <!-- 3. Log Page -->
         <DockPanel IsVisible="{Binding IsLogPage}">
-          <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,12">
-            <TextBlock Text="Журнал активности" FontSize="22" FontWeight="Bold" Foreground="#F8FAFC"/>
-            <TextBlock Grid.Column="1" Text="Лог загрузки и старта игры" FontSize="12" Foreground="#64748B" VerticalAlignment="Bottom"/>
-          </Grid>
-          <Border Classes="panel" Padding="8">
+          <TextBlock DockPanel.Dock="Top" Text="Журнал" Margin="0,0,0,12"
+                     FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
+                     FontSize="22" FontWeight="Bold" Foreground="#F8FAFC"/>
+          <Border Classes="sheet" Padding="8">
             <ListBox ItemsSource="{Binding LogLines}" Background="Transparent" BorderThickness="0">
               <ListBox.ItemTemplate>
                 <DataTemplate x:DataType="vm:LogLine">
-                  <StackPanel Orientation="Horizontal" Spacing="8" Margin="8,2">
-                    <TextBlock Text="{Binding Time}" FontFamily="Consolas, monospace" FontSize="11" Foreground="#64748B"/>
-                    <TextBlock Text="{Binding Text}" FontFamily="Consolas, monospace" FontSize="11"
+                  <StackPanel Orientation="Horizontal" Spacing="8" Margin="8,3">
+                    <TextBlock Text="{Binding Time}" FontFamily="Consolas, Cascadia Mono, monospace" FontSize="12" Foreground="#7B8BA0"/>
+                    <TextBlock Text="{Binding Text}" FontFamily="Consolas, Cascadia Mono, monospace" FontSize="12"
                                Foreground="{Binding Color}" TextWrapping="Wrap"/>
                   </StackPanel>
                 </DataTemplate>
@@ -470,6 +374,52 @@
           </Border>
         </DockPanel>
       </Panel>
-    </Grid>
+    </DockPanel>
+
+    <Border IsVisible="{Binding NeedsAuth}" ZIndex="100">
+      <Border.Background>
+        <SolidColorBrush Color="#99070B12"/>
+      </Border.Background>
+      <Border Classes="sheet" Width="400" Padding="28,24" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Spacing="18">
+          <StackPanel Spacing="8" HorizontalAlignment="Center">
+            <Image Source="/Assets/aquatech.ico" Width="40" Height="40" HorizontalAlignment="Center"/>
+            <TextBlock Text="AquaTech" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
+                       FontSize="22" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Center"/>
+            <TextBlock Text="Minecraft 1.20.1 · Океанский skyblock" FontSize="13" Foreground="#A8B8CC"
+                       HorizontalAlignment="Center"/>
+          </StackPanel>
+          <TextBlock Text="Проверяем сессию…" FontSize="13" Foreground="#A8B8CC" HorizontalAlignment="Center"
+                     IsVisible="{Binding AuthChecking}"/>
+          <StackPanel Spacing="12" IsEnabled="{Binding CanEditAuth}">
+            <StackPanel Spacing="6">
+              <TextBlock Text="Ник" FontSize="13" FontWeight="SemiBold" Foreground="#E2E8F0"/>
+              <TextBox Classes="field" Text="{Binding LoginNick}" Watermark="Ник на сервере" AutomationProperties.Name="Ник">
+                <TextBox.KeyBindings>
+                  <KeyBinding Gesture="Enter" Command="{Binding SubmitLoginCommand}"/>
+                </TextBox.KeyBindings>
+              </TextBox>
+            </StackPanel>
+            <StackPanel Spacing="6">
+              <TextBlock Text="Пароль" FontSize="13" FontWeight="SemiBold" Foreground="#E2E8F0"/>
+              <TextBox Classes="field" Text="{Binding LoginPassword}" PasswordChar="•" Watermark="Пароль" AutomationProperties.Name="Пароль">
+                <TextBox.KeyBindings>
+                  <KeyBinding Gesture="Enter" Command="{Binding SubmitLoginCommand}"/>
+                </TextBox.KeyBindings>
+              </TextBox>
+            </StackPanel>
+            <CheckBox IsChecked="{Binding RememberMe}" Content="Запомнить меня"/>
+            <Border Background="#2A1215" BorderBrush="#EF4444" BorderThickness="1" CornerRadius="8" Padding="12,8"
+                    IsVisible="{Binding AuthError, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+              <TextBlock Text="{Binding AuthError}" FontSize="13" Foreground="#FCA5A5" TextWrapping="Wrap"/>
+            </Border>
+            <Button Classes="auth-action" Content="{Binding LoginButtonText}" Command="{Binding SubmitLoginCommand}"
+                    IsEnabled="{Binding CanEditAuth}" IsDefault="True" AutomationProperties.Name="Войти"/>
+            <Button Classes="link" Content="Создать аккаунт на aquateche.store"
+                    Command="{Binding OpenRegisterCommand}" HorizontalAlignment="Center"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </Border>
   </Panel>
 </Window>
