@@ -222,6 +222,25 @@ public partial class MainViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    private async Task CheckNickAsync()
+    {
+        var nick = LoginNick.Trim();
+        if (nick.Length < 3)
+            return;
+        try
+        {
+            if (await PortalApi.NickIsUnclaimedAsync(nick))
+                AuthError = PortalApi.UnclaimedNickMessage;
+            else if (AuthError == PortalApi.UnclaimedNickMessage)
+                AuthError = "";
+        }
+        catch (Exception)
+        {
+            /* nick probe is optional; login still talks to the API */
+        }
+    }
+
+    [RelayCommand]
     private async Task SubmitLoginAsync()
     {
         if (AuthBusy || AuthChecking) return;
@@ -241,6 +260,12 @@ public partial class MainViewModel : ViewModelBase
         UiSounds.Play(UiSounds.Kind.Auth);
         try
         {
+            if (await PortalApi.NickIsUnclaimedAsync(LoginNick.Trim()))
+            {
+                AuthError = PortalApi.UnclaimedNickMessage;
+                return;
+            }
+
             var (ok, profile, session, err) = await PortalApi.LoginAsync(LoginNick.Trim(), LoginPassword);
             if (!ok || profile == null || session == null)
             {

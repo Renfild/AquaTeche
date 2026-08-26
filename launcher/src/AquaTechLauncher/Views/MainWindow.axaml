@@ -396,7 +396,8 @@
           <StackPanel Spacing="12" IsEnabled="{Binding CanEditAuth}">
             <StackPanel Spacing="6">
               <TextBlock Text="Ник" FontSize="13" FontWeight="SemiBold" Foreground="#E2E8F0"/>
-              <TextBox Classes="field" Text="{Binding LoginNick}" Watermark="Ник на сервере" AutomationProperties.Name="Ник">
+              <TextBox x:Name="LoginNickBox" Classes="field" Text="{Binding LoginNick}" Watermark="Ник на сервере"
+                       AutomationProperties.Name="Ник" LostFocus="LoginNick_LostFocus">
                 <TextBox.KeyBindings>
                   <KeyBinding Gesture="Enter" Command="{Binding SubmitLoginCommand}"/>
                 </TextBox.KeyBindings>

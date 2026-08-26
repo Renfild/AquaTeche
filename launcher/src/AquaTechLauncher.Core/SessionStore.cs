@@ -22,7 +22,7 @@ public static class SessionStore
         }
         catch
         {
-            return plain.Trim();
+            return null;
         }
     }
 

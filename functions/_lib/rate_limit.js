@@ -68,3 +68,11 @@ export async function gateRegister(db, request) {
   const ip = clientIp(request);
   return checkAndBump(db, `reg:${ip}`, REGISTER_MAX, REGISTER_WINDOW_MS);
 }
+
+const NICK_LOOKUP_MAX = 20;
+const NICK_LOOKUP_WINDOW_MS = 15 * 60 * 1000;
+
+export async function gateNickLookup(db, request) {
+  const ip = clientIp(request);
+  return checkAndBump(db, `nick:${ip}`, NICK_LOOKUP_MAX, NICK_LOOKUP_WINDOW_MS);
+}

@@ -157,18 +157,24 @@ public static class HttpDownload
     public static async Task<(string Json, string? CookieSession)> PostJsonAsync(
         string url, string jsonBody, CancellationToken ct = default)
     {
+        var (status, body, cookie) = await PostJsonRawAsync(url, jsonBody, ct);
+        if (status < 200 || status >= 300)
+            throw new HttpRequestException($"HTTP {status}: {body}");
+        return (body, cookie);
+    }
+
+    public static async Task<(int Status, string Body, string? CookieSession)> PostJsonRawAsync(
+        string url, string jsonBody, CancellationToken ct = default)
+    {
         using var req = new HttpRequestMessage(HttpMethod.Post, url)
         {
             Content = new StringContent(jsonBody, Encoding.UTF8, "application/json"),
         };
         using var resp = await MetadataClient.SendAsync(req, ct);
         var body = await resp.Content.ReadAsStringAsync(ct);
-        if (!resp.IsSuccessStatusCode)
-            throw new HttpRequestException($"HTTP {(int)resp.StatusCode}: {body}");
-
         var fromHeader = ExtractSessionFromSetCookie(resp);
         var fromJar = GetPortalSession();
-        return (body, fromHeader ?? fromJar);
+        return ((int)resp.StatusCode, body, fromHeader ?? fromJar);
     }
 
     public static string? ExtractSessionFromSetCookie(HttpResponseMessage resp)

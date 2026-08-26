@@ -37,7 +37,10 @@ export async function onRequestPost(context) {
   if (!user) return bad("Неверный логин или пароль", 401);
 
   if (isUnclaimedHash(user.password_hash)) {
-    return bad("Этот ник уже есть с сервера. Задай пароль на странице регистрации.", 401);
+    await clearLoginFails(env.DB, request, nick);
+    return bad("Этот ник уже есть с сервера. Задай пароль на странице регистрации.", 401, {
+      code: "unclaimed",
+    });
   }
 
   const ok = await verifyPassword(password, user.password_hash, user.password_salt);

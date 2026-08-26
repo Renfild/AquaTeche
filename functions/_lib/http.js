@@ -30,8 +30,8 @@ export function withSecurityHeaders(response) {
   });
 }
 
-export function bad(message, status = 400) {
-  return json({ ok: false, error: message }, status);
+export function bad(message, status = 400, extra = {}) {
+  return json({ ok: false, error: message, ...extra }, status);
 }
 
 export function purchasesDisabled() {

@@ -171,3 +171,22 @@ public class ServerListHelperTests
         }
     }
 }
+
+public class LoginFailureMessageTests
+{
+    [Fact]
+    public void Unclaimed_code_uses_register_copy()
+    {
+        var msg = PortalApi.LoginFailureMessage(
+            """{"ok":false,"error":"x","code":"unclaimed"}""", 401);
+        Assert.Equal(PortalApi.UnclaimedNickMessage, msg);
+    }
+
+    [Fact]
+    public void Generic_401_stays_wrong_password()
+    {
+        var msg = PortalApi.LoginFailureMessage(
+            """{"ok":false,"error":"Неверный логин или пароль"}""", 401);
+        Assert.Equal("Неверный логин или пароль", msg);
+    }
+}
