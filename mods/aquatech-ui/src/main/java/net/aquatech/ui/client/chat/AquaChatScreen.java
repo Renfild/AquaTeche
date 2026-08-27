@@ -1,6 +1,5 @@
 package net.aquatech.ui.client.chat;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.LumenGfx;
 import net.minecraft.client.Minecraft;
@@ -19,6 +18,16 @@ public final class AquaChatScreen extends Screen {
     private static final List<String> INPUT_HISTORY = new ArrayList<>();
     private static int historyIndex = -1;
 
+    /** Paste / cut / clear stay on the left; Market is the only primary jump. Copy is Ctrl+C. */
+    private static final String[] TOOL_ACTIONS = {"Вставить", "Вырезать", "Очистить", "Рынок (F4)"};
+    private static final int MARGIN = 10;
+    private static final int INPUT_H = 20;
+    private static final int INPUT_PAD_L = 14;
+    private static final int INPUT_PAD_R = 74;
+    private static final int INPUT_TEXT_Y = 4;
+    private static final int INPUT_TEXT_H = 12;
+    private static final int TOOL_H = 18;
+
     private EditBox input;
     private CommandSuggestions commandSuggestions;
     private final String initialText;
@@ -33,12 +42,12 @@ public final class AquaChatScreen extends Screen {
         super.init();
         AquaChatManager.setChatScreenOpen(true);
 
-        int inputX = 10;
+        int inputX = MARGIN;
         int inputY = this.height - 25;
         int inputW = AquaChatOverlay.CHAT_WIDTH + 8;
-        int inputH = 20;
 
-        this.input = new EditBox(this.font, inputX + 8, inputY + 6, inputW - 75, 9, Component.literal("Chat Input")) {
+        this.input = new EditBox(this.font, inputX + INPUT_PAD_L, inputY + INPUT_TEXT_Y,
+                inputW - INPUT_PAD_L - INPUT_PAD_R, INPUT_TEXT_H, Component.literal("Chat Input")) {
             @Override
             public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
                 if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) {
@@ -127,6 +136,7 @@ public final class AquaChatScreen extends Screen {
             if (mc.player != null) {
                 if (text.startsWith("/")) {
                     mc.player.connection.sendCommand(text.substring(1));
+                    echoOutgoingCommand(mc, text);
                 } else {
                     AquaChatMessage.Channel channel = AquaChatManager.getActiveChannel();
                     if (channel == AquaChatMessage.Channel.GLOBAL && !text.startsWith("!")) {
@@ -141,11 +151,40 @@ public final class AquaChatScreen extends Screen {
         this.onClose();
     }
 
+    /** Local echo so /hub and other commands show in AquaChat (server never broadcasts them). */
+    private static void echoOutgoingCommand(Minecraft mc, String command) {
+        if (mc.player == null || hidesCommandEcho(command)) {
+            return;
+        }
+        String name = mc.player.getName().getString();
+        AquaChatManager.addMessage(Component.literal("<" + name + "> " + command));
+    }
+
+    private static boolean hidesCommandEcho(String command) {
+        String root = command.startsWith("/") ? command.substring(1) : command;
+        int space = root.indexOf(' ');
+        if (space >= 0) {
+            root = root.substring(0, space);
+        }
+        root = root.toLowerCase();
+        return root.equals("login") || root.equals("l") || root.equals("register")
+                || root.equals("changepassword") || root.equals("password") || root.equals("auth");
+    }
+
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        // Header sits on its own strip so it never collides with toolbar controls.
+        int headerY = this.height - AquaChatOverlay.HEADER_INSET;
+        int brandX = MARGIN;
+        AquaFontRenderer.draw(graphics, this.font, "Aqua", brandX, headerY, 0xFFFFFFFF);
+        int aquaW = AquaFontRenderer.width(this.font, "Aqua");
+        AquaFontRenderer.draw(graphics, this.font, "Tech", brandX + aquaW, headerY, 0xFF2FE0C0);
+        AquaFontRenderer.draw(graphics, this.font, " · чат",
+                brandX + AquaFontRenderer.width(this.font, "AquaTech"), headerY, 0xFF81ECEC);
+
         // 1. Channel Selector Tabs (Elevated above chat box with high readability)
-        int tabX = 10;
-        int tabY = this.height - 250;
+        int tabX = MARGIN;
+        int tabY = this.height - AquaChatOverlay.TAB_INSET;
         AquaChatMessage.Channel[] channels = AquaChatMessage.Channel.values();
 
         for (AquaChatMessage.Channel ch : channels) {
@@ -160,60 +199,51 @@ public final class AquaChatScreen extends Screen {
             };
 
             int w = AquaFontRenderer.width(this.font, label) + 14;
-            int h = 15;
+            int h = 17;
 
             boolean hovered = mouseX >= tabX && mouseX <= tabX + w && mouseY >= tabY && mouseY <= tabY + h;
 
             int chColor = ch.getColor();
-            int bgCol = active ? 0xEE0A1826 : (hovered ? 0xDD152638 : 0xAA0A131D);
-            int textCol = active ? chColor : (hovered ? 0xFFFFFFFF : 0xFF8FA3B5);
-            int borderCol = active ? chColor : (hovered ? 0x88FFFFFF : 0x22FFFFFF);
+            // Active = filled pill in channel color with dark text (shape + fill,
+            // not color alone); inactive = ghost outline.
+            int bgCol = active ? (0xF0000000 | chColor) : (hovered ? 0xDD162638 : 0xAA0A131D);
+            int textCol = active ? 0xFF04121A : (hovered ? 0xFFFFFFFF : 0xFF9FB2C4);
+            int borderCol = active ? (0xCCFFFFFF) : (hovered ? 0x88FFFFFF : 0x22FFFFFF);
 
-            LumenGfx.roundedRect(graphics, tabX, tabY, w, h, 3.5F, bgCol);
-            LumenGfx.outline(graphics, tabX, tabY, w, h, 3.5F, borderCol);
-            AquaFontRenderer.draw(graphics, this.font, label, tabX + 7, tabY + 3, textCol);
-
-            // Active indicator bar
-            if (active) {
-                LumenGfx.roundedRect(graphics, tabX + 4, tabY + h - 2, w - 8, 2, 1, chColor);
-            }
+            LumenGfx.roundedRect(graphics, tabX, tabY, w, h, 4, bgCol);
+            LumenGfx.outline(graphics, tabX, tabY, w, h, 4, borderCol);
+            AquaFontRenderer.draw(graphics, this.font, label, tabX + 7, tabY + (h - 9) / 2, textCol);
 
             tabX += w + 4;
         }
 
-        // 2. Toolbar Action Buttons (Вставить, Копировать, Вырезать, Очистить, Рынок)
+        // 2. Toolbar: edit actions grouped left, Market separated as the jump-out control.
         int toolY = this.height - 43;
-        int btnX = 10;
-        String[] actions = {"Вставить", "Копировать", "Вырезать", "Очистить", "Рынок (F4)"};
-
-        for (String action : actions) {
-            int bw = AquaFontRenderer.width(this.font, action) + 8;
-            int bh = 13;
+        int btnX = MARGIN;
+        for (String action : TOOL_ACTIONS) {
             boolean isMarket = action.contains("Рынок");
-            boolean bhov = mouseX >= btnX && mouseX <= btnX + bw && mouseY >= toolY && mouseY <= toolY + bh;
+            if (isMarket) {
+                btnX += 8;
+            }
+            int bw = toolbarButtonWidth(action);
+            boolean bhov = mouseX >= btnX && mouseX <= btnX + bw && mouseY >= toolY && mouseY <= toolY + TOOL_H;
 
             int bbg = isMarket ? (bhov ? 0xEE2A1E08 : 0xBB1E1608) : (bhov ? 0xEE162638 : 0x990C1622);
-            int btc = isMarket ? (bhov ? 0xFFFDE047 : 0xFFF59E0B) : (bhov ? 0xFFFFFFFF : 0xFF9FB2C2);
+            int btc = isMarket ? (bhov ? 0xFFFDE047 : 0xFFF59E0B) : (bhov ? 0xFFFFFFFF : 0xFF9FB2C4);
             int bbd = isMarket ? (bhov ? 0xFFF59E0B : 0x88F59E0B) : (bhov ? 0x662FE0C0 : 0x22FFFFFF);
 
-            LumenGfx.roundedRect(graphics, btnX, toolY, bw, bh, 3, bbg);
-            LumenGfx.outline(graphics, btnX, toolY, bw, bh, 3, bbd);
-            AquaFontRenderer.draw(graphics, this.font, action, btnX + 4, toolY + 2, btc);
+            LumenGfx.roundedRect(graphics, btnX, toolY, bw, TOOL_H, 4, bbg);
+            LumenGfx.outline(graphics, btnX, toolY, bw, TOOL_H, 4, bbd);
+            AquaFontRenderer.draw(graphics, this.font, action, btnX + 6, toolY + (TOOL_H - 9) / 2, btc);
 
             btnX += bw + 4;
         }
 
-        // Right title: AquaTech OceanChat
-        int logoX = 10 + AquaChatOverlay.CHAT_WIDTH - 85;
-        AquaFontRenderer.draw(graphics, this.font, "Aqua", logoX, toolY + 2, 0xFFFFFFFF);
-        AquaFontRenderer.draw(graphics, this.font, "Tech", logoX + AquaFontRenderer.width(this.font, "Aqua"), toolY + 2, 0xFF2FE0C0);
-        AquaFontRenderer.draw(graphics, this.font, " • Chat", logoX + AquaFontRenderer.width(this.font, "AquaTech"), toolY + 2, 0xFF81ECEC);
-
         // 3. Input Box Bar Background & Active Channel Border (Centered height 20px)
-        int inputX = 10;
+        int inputX = MARGIN;
         int inputY = this.height - 25;
         int inputW = AquaChatOverlay.CHAT_WIDTH + 8;
-        int inputH = 20;
+        int inputH = INPUT_H;
         int activeColor = AquaChatManager.getActiveChannel().getColor();
 
         LumenGfx.roundedRect(graphics, inputX, inputY, inputW, inputH, 5.5F, 0xF5081018);
@@ -225,11 +255,15 @@ public final class AquaChatScreen extends Screen {
         // 5. Character counter (Vertically centered)
         String count = this.input.getValue().length() + " / 256";
         int countW = AquaFontRenderer.width(this.font, count);
-        AquaFontRenderer.draw(graphics, this.font, count, inputX + inputW - countW - 20, inputY + 6, 0xFF657B8C);
+        AquaFontRenderer.draw(graphics, this.font, count, inputX + inputW - countW - 20, inputY + 6, 0xFF8FA3B5);
 
-        // Send arrow button »
-        int sendX = inputX + inputW - 14;
-        AquaFontRenderer.draw(graphics, this.font, "»", sendX, inputY + 5, activeColor);
+        // Send button: filled pill in channel color (clear affordance), glyph centered
+        int sendX = inputX + inputW - 16;
+        boolean sendHov = mouseX >= sendX - 1 && mouseX <= sendX + 13 && mouseY >= inputY + 2 && mouseY <= inputY + 18;
+        LumenGfx.roundedRect(graphics, sendX - 1, inputY + 2, 14, 16, 4,
+                sendHov ? 0xFFF5F7FA : (0xE6000000 | activeColor));
+        LumenGfx.outline(graphics, sendX - 1, inputY + 2, 14, 16, 4, sendHov ? 0xFF2FE0C0 : 0x66FFFFFF);
+        AquaFontRenderer.draw(graphics, this.font, "»", sendX + 3, inputY + 6, sendHov ? 0xFF04121A : 0xFFFFFFFF);
 
         // 6. Command Suggestions render (Elevated above input bar with -24px offset)
         if (this.commandSuggestions != null) {
@@ -249,8 +283,8 @@ public final class AquaChatScreen extends Screen {
         }
 
         // 1. Channel tabs
-        int tabX = 10;
-        int tabY = this.height - 250;
+        int tabX = MARGIN;
+        int tabY = this.height - AquaChatOverlay.TAB_INSET;
         AquaChatMessage.Channel[] channels = AquaChatMessage.Channel.values();
 
         for (AquaChatMessage.Channel ch : channels) {
@@ -263,7 +297,7 @@ public final class AquaChatScreen extends Screen {
                 case SYSTEM -> "Система";
             };
             int w = AquaFontRenderer.width(this.font, label) + 14;
-            int h = 15;
+            int h = 17;
 
             if (mouseX >= tabX && mouseX <= tabX + w && mouseY >= tabY && mouseY <= tabY + h) {
                 AquaChatManager.setActiveChannel(ch);
@@ -274,14 +308,15 @@ public final class AquaChatScreen extends Screen {
 
         // 2. Action buttons
         int toolY = this.height - 43;
-        int btnX = 10;
-        String[] actions = {"Вставить", "Копировать", "Вырезать", "Очистить", "Рынок (F4)"};
+        int btnX = MARGIN;
+        for (String action : TOOL_ACTIONS) {
+            boolean isMarket = action.contains("Рынок");
+            if (isMarket) {
+                btnX += 8;
+            }
+            int bw = toolbarButtonWidth(action);
 
-        for (String action : actions) {
-            int bw = AquaFontRenderer.width(this.font, action) + 8;
-            int bh = 13;
-
-            if (mouseX >= btnX && mouseX <= btnX + bw && mouseY >= toolY && mouseY <= toolY + bh) {
+            if (mouseX >= btnX && mouseX <= btnX + bw && mouseY >= toolY && mouseY <= toolY + TOOL_H) {
                 handleAction(action);
                 return true;
             }
@@ -289,7 +324,7 @@ public final class AquaChatScreen extends Screen {
         }
 
         // 3. Send arrow click
-        int inputX = 10;
+        int inputX = MARGIN;
         int inputY = this.height - 25;
         int inputW = AquaChatOverlay.CHAT_WIDTH + 8;
         if (mouseX >= inputX + inputW - 20 && mouseX <= inputX + inputW && mouseY >= inputY && mouseY <= inputY + 20) {
@@ -298,7 +333,7 @@ public final class AquaChatScreen extends Screen {
         }
 
         // 4. Quick whisper /msg <Nick> on sender-name click (header row only, not whole card)
-        int bottomY = this.height - 48;
+        int bottomY = this.height - AquaChatOverlay.OPEN_BOTTOM_GAP;
         int currentY = bottomY;
         List<AquaChatMessage> messages = AquaChatManager.getFilteredMessages();
         int scroll = AquaChatManager.getScrollOffset();
@@ -333,16 +368,6 @@ public final class AquaChatScreen extends Screen {
             if (clip != null && !clip.isEmpty()) {
                 this.input.insertText(clip);
             }
-        } else if (action.equals("Копировать")) {
-            String val = this.input.getValue();
-            if (!val.isEmpty()) {
-                mc.keyboardHandler.setClipboard(val);
-            } else {
-                List<AquaChatMessage> msgs = AquaChatManager.getMessages();
-                if (!msgs.isEmpty()) {
-                    mc.keyboardHandler.setClipboard(msgs.get(msgs.size() - 1).getMessageText());
-                }
-            }
         } else if (action.equals("Вырезать")) {
             String val = this.input.getValue();
             if (!val.isEmpty()) {
@@ -364,6 +389,10 @@ public final class AquaChatScreen extends Screen {
                 }
             }
         }
+    }
+
+    private int toolbarButtonWidth(String action) {
+        return AquaFontRenderer.width(this.font, action) + 12;
     }
 
     @Override

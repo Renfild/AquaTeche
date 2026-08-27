@@ -76,6 +76,15 @@ public final class ClientEvents {
         }
         ClientUiState.tick();
         ChatBubbleManager.tick();
+        // AquaChat owns chat rendering — keep the vanilla chat panel empty no matter
+        // how messages reach it (covers paths that bypass ClientChatReceivedEvent).
+        try {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.gui != null && mc.gui.getChat() != null) {
+                mc.gui.getChat().clearMessages(true);
+            }
+        } catch (Throwable ignored) {
+        }
         net.aquatech.ui.client.hud.RhythmHookOverlay.tick();
         StarCatcherToastSuppressor.tick();
 

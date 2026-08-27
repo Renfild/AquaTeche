@@ -123,7 +123,7 @@ public final class AquaChatMessage {
             String msg = van.group("msg");
             PlayerProfile profile = resolveProfile(sender);
             UUID uuid = resolveUuid(sender, profile);
-            return fromProfile(profile, uuid, sender, msg, Channel.GLOBAL, component, currentTick);
+            return fromProfile(profile, uuid, sender, stripChatBody(unformatted, sender, null), Channel.GLOBAL, component, currentTick);
         }
 
         // 3. Server Chat Formats (supports [ВЛАДЕЛЕЦ]xietoru: msg, ВЛАДЕЛЕЦxietoru: msg, [G] [ВЛАДЕЛЕЦ] xietoru: msg, etc.)
@@ -171,7 +171,11 @@ public final class AquaChatMessage {
 
                 PlayerProfile profile = resolveProfile(sender);
                 UUID uuid = resolveUuid(sender, profile);
-                AquaChatMessage res = fromProfile(profile, uuid, sender, msg, ch, component, currentTick);
+                String body = stripChatBody(unformatted, sender, customRank);
+                if (body.isBlank()) {
+                    body = msg;
+                }
+                AquaChatMessage res = fromProfile(profile, uuid, sender, body, ch, component, currentTick);
                 if (customRank != null && !customRank.isBlank()) {
                     res = res.withCustomRank(customRank);
                 }
@@ -182,6 +186,35 @@ public final class AquaChatMessage {
         // 4. System / Server announcement
         return new AquaChatMessage(null, null, "system", "СИСТЕМА",
                 0xFF00B0FF, Channel.SYSTEM, clean, component, currentTick, true);
+    }
+
+
+    public static String stripChatBody(String raw, String senderName, String rankDisplay) {
+        String t = raw == null ? "" : raw;
+        t = t.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "");
+        t = t.replaceAll("\u00a7[0-9a-fk-orA-FK-OR]", "").trim();
+        if (senderName != null && !senderName.isBlank()) {
+            String tagged = senderName + ":";
+            int colon = t.lastIndexOf(tagged);
+            if (colon >= 0) {
+                t = t.substring(colon + tagged.length()).trim();
+            } else {
+                String van = "<" + senderName + ">";
+                int v = t.indexOf(van);
+                if (v >= 0) {
+                    t = t.substring(v + van.length()).trim();
+                }
+            }
+        }
+        t = t.replaceAll("^(\\[[^\\]]{1,32}\\]\\s*)+", "").trim();
+        if (rankDisplay != null && !rankDisplay.isBlank()) {
+            t = t.replaceFirst("(?iu)^(" + Pattern.quote(rankDisplay) + "\\s*)+", "").trim();
+        }
+        t = t.replaceFirst("(?iu)^(владелец|админ|игрок|модератор|хелпер|owner|admin)\\s+", "").trim();
+        if (senderName != null && !senderName.isBlank()) {
+            t = t.replaceFirst("(?i)^" + Pattern.quote(senderName) + "\\s*:\\s*", "").trim();
+        }
+        return t;
     }
 
     private static PlayerProfile resolveProfile(String name) {

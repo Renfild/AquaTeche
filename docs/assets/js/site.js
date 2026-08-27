@@ -1,7 +1,7 @@
 (() => {
   const IP = "g-pl-3.apexnodes.xyz:21561";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.81/AquaTech.exe";
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.82/AquaTech.exe";
   /* portal ui build: compact header + market lots */
   const CANONICAL = "https://aquateche.store";
   const STORAGE_USER = "aquatech_user";
@@ -1305,6 +1305,37 @@
     ],
   };
 
+
+  async function initLive() {
+    try {
+      const t = await api("/api/trends");
+      const el = $("#live-trends");
+      if (el && t.trends && t.trends.length) {
+        el.innerHTML = t.trends.map((f) =>
+          `<div style="display:flex;justify-content:space-between;align-items:center;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.07)">
+            <span style="font-size:0.92rem">${f.name}</span>
+            <b style="color:var(--gold);font-size:0.92rem">×${f.mult}</b>
+          </div>`).join("");
+      }
+    } catch {}
+    try {
+      const m = await api("/api/market/public?limit=5");
+      const el = $("#live-market");
+      if (el && m.lots && m.lots.length) {
+        el.innerHTML = m.lots.map((l) =>
+          `<div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.07)">
+            <span style="font-size:0.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.label}${l.count > 1 ? ` ×${l.count}` : ""}</span>
+            <span style="display:flex;align-items:center;gap:0.6rem;flex-shrink:0">
+              <b style="color:var(--gold);font-size:0.92rem">${Number(l.price).toLocaleString("ru-RU")} ¤</b>
+              <small style="color:var(--muted)">${l.seller}</small>
+            </span>
+          </div>`).join("");
+      } else if (el) {
+        el.innerHTML = '<p style="color:var(--muted)">Лотов пока нет — будь первым: /ah sell в игре</p>';
+      }
+    } catch {}
+  }
+
   async function initCatalog(kind) {
     const root = kind === "store" ? $("#store-root") : $("#cases-root");
     if (!root) return;
@@ -1771,6 +1802,7 @@
     initPlayers();
     initProfile();
     initAuth();
+    initLive();
     initCatalog("store");
     initCatalog("case");
     await initTrends();
