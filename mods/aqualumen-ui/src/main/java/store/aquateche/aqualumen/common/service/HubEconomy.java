@@ -120,6 +120,19 @@ public final class HubEconomy {
         }
     }
 
+    public static boolean trySpendGems(ServerPlayer player, long amount) {
+        if (amount <= 0L) {
+            return true;
+        }
+        String objective = LumenConfig.COMMON.gemsObjective.get();
+        long have = score(player, objective);
+        if (have < amount) {
+            return false;
+        }
+        adjustScore(player, objective, -(int) Math.min(amount, Integer.MAX_VALUE));
+        return true;
+    }
+
     public static void giveItem(ServerPlayer player, ItemStack stack) {
         if (!player.getInventory().add(stack.copy())) {
             player.drop(stack.copy(), false);

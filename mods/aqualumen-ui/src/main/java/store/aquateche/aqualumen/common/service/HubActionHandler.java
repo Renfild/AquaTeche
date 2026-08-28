@@ -56,7 +56,7 @@ public final class HubActionHandler {
             case "case.claim" -> claimCaseReward(player, true);
             case "daily.claim" -> claimDaily(player);
             case "pass.claim" -> claimPass(player, argument);
-            case "store.buy" -> unavailable(player);
+            case "store.buy" -> StoreCatalog.buy(player, argument);
             case "hub.kit" -> handleKit(player, argument);
             case "hub.warp" -> handleWarp(player, argument);
             case "auction.cancel" -> {
@@ -125,6 +125,10 @@ public final class HubActionHandler {
         player.sendSystemMessage(Component.literal("Сезонный пропуск: Награда уровня " + tier
                 + " получена (+" + rewardCoins + " монет)").withStyle(ChatFormatting.GREEN));
         HubDataService.push(player);
+    }
+
+    static void openCasePublic(ServerPlayer player, String argument) {
+        openCase(player, argument);
     }
 
     private static void openCase(ServerPlayer player, String argument) {
@@ -282,9 +286,5 @@ public final class HubActionHandler {
         String key = player.getUUID() + ":" + action;
         Long previous = LAST_ACTION.put(key, now);
         return previous != null && now - previous < cooldown;
-    }
-
-    private static void unavailable(ServerPlayer player) {
-        player.sendSystemMessage(Component.translatable("msg.aqualumen.unavailable").withStyle(ChatFormatting.YELLOW));
     }
 }

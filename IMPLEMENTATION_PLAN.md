@@ -225,7 +225,7 @@
 | **2026-08-26** | `v2.8.1` | ZCode | **FTB квесты, вторая волна:** предметные награды на все главы (пар: медь×8, базовая электрика: олово×8, улучшенная: сталь×4; глава 1 уже имела предметы). Botania 43 (Botanical Machinery + Extra Machinery + MythicBotany), Avaritia 32 (размерные столы, extreme anvil/smith, blaze/crystal броня, Infinity как таск без выдачи infinity_*), Alex's Caves 33 (магнит/токсин/дино/бездна/сладости/тьма). Секрет бездны: dense energy cell + 64k вместо `ae2:quantum_link`. Скан jar-моделей: 0 bad, 0 duplicate ids, 0 dangling deps. Деплой Apex `AQUATECH_SYNC_QUESTS=1`. | `tools/quests/build_mod_tabs.py`, `config/ftbquests/`, `server/config/ftbquests/`, `scripts/tasks/scan_quest_items.py` |
 | **2026-08-26** | `v2.8.2` | ZCode | **AE2 вкладка FTB:** глава `ae2_aquatech` (order 11, после эндгейма, иконка controller), 42 квеста от гайда до ячейки 64k. Без wireless/quantum/spatial в наградах. Порядок старых вкладок без сдвига: Avaritia 8, тайны 9, эндгейм 10. | `tools/quests/build_mod_tabs.py`, `tools/quests/useful_rewards.py`, `config/ftbquests/`, `server/config/ftbquests/` |
 | **2026-08-26** | `v2.8.3` | ZCode | **Портал:** шапка компактнее (логотип-дом, «Ещё», CTA «Скачать» справа), focus-visible, аукцион на сайте (`market.html` + `/api/market/public` до 40 лотов), ошибки форм под полями. | `docs/`, `docs/assets/css/site.css`, `docs/assets/js/site.js`, `worker/index.js` |
-| **2026-08-27** | `v2.8.8` | ZCode | **Чат Lumen:** убрана кнопка «Копировать», бренд «AquaTech · чат» на шапке над вкладками, поле ввода с внутренним отступом. `aquatech_ui` **1.0.36**, пак **2.9.261**, лаунчер **client-2.9.82**. | `AquaChatScreen.java`, `AquaChatOverlay.java`, `docs/pack/manifest.json`, `docs/bootstrap.json` |
+| **2026-08-28** | `v2.8.9` | ZCode | Волна бэклога: таблица лута сверка с `rollStarCatcherRodLoot` (rods.html T1 без титана, humble 60% Ti, T4 Sr); дыры IU/FTB задокументированы без правки шансов. Island limiter включён (IU 96 / AE2 48 / Botania 24 / hoppers 64). F4 `store.buy` — ранги LP + kit + кейс ocean. D1 `pending_commands` + `/api/purchase/callback` (HMAC / ЮKassa verify) + poll с Apex. R2 upload из `backup_world.py` если есть `.r2.json`. Smoke: `/api/catalog` + `requirePortalSession`. Lodestone вырезан из handoff. Prestige/босс бездны не стартовали. Покупка привилегий за рубли **не включается**. `aquatech_ui` **1.0.37**, aqualumen **0.3.19-alpha**. | `FISHING_ROD_LOOT_TABLE.md`, `docs/rods.html`, `IslandLimiterHandler.java`, `StoreCatalog.java`, `functions/api/purchase.js`, `scripts/tasks/r2_put.py`, `scripts/tasks/smoke_apex_server.py` |
 | **2026-08-26** | `v2.8.4` | ZCode | **Статы рыбалка/монеты:** синк читает Vault/Essentials, не stale scoreboard; кастомный улов пишет `aquatech_fish`; портал `fish=MAX`; зеркало в Apex MariaDB `aquatech_player_stats`. Рестарт панели каждый день 04:00 MSK (`save-all` → `lp sync` → restart). aqualumen **0.3.18-alpha**, aquatech_ui **1.0.32**. | `HubEconomy.java`, `HubDataService.java`, `MariaStats.java`, `FishingLootHandler.java`, `functions/api/sync/player.js`, `scripts/tasks/setup_apex_daily_reload.py` |
 | **2026-08-25** | `v2.8.0` | ZCode | **Ивенты + экономика + ops:** 1) Lumen Market (D1 market_listings, worker /api/market, MarketService, /ah sell/cancel, вкладка Аукцион с реальными лотами; выручка продавцу на портал-кошелёк). 2) Дневной спрос: 3 трендовые рыбы из ВСЕГО каталога (fish_demand.json, единый алгоритм Java+KubeJS), множитель ×2/×1.75/×1.5 в монетной скупке F4 (бейдж ТРЕНД, зачёркнутая цена) и у Кота (изумруды), оповещения: вход/полночь/старт. 3) OceanEventsService (aquatech_ui 1.0.27): Золотая рыба (20-мин окно каждые ~3ч, 5% шанс, джекпот 500-2500, броадкасты), Задания дня (3 от даты: любая/ночь/дождь, награды 300-1100), Недельный турнир (сб+вс, самая тяжёлая рыба по NBT weight, топ-3 призы 2500/1000/500, персист в aquatech_tournament.json). 4) Tab: баланс монет каждого игрока (PlayerProfile.coins из скорборда, 1.0.26). 5) Скин игрока в хабе (PlayerHeadCapture). 6) MOTD двухстрочный. 7) Ops: Chunky преген r8000 блоков @спавн запущен (~1M чанков, ~11ч, continue-on-restart), автобэкап мира scripts/tasks/backup_world.py (SFTP→backups/, keep 7) по расписанию 04:00. 8) Иконки кейсов: вики-рендеры (ru.wiki Grid + Downloads + file-search GIF), блоки 2.5D из jar-текстур. Паки 2.9.190-2.9.240, лаунчер client-2.9.76. | `functions/api/market.js`, `worker/index.js`, `mods/aqualumen-ui/.../MarketService.java`, `FishShopConfig.java`, `HubSnapshot.java`, `mods/aquatech-ui/.../OceanEventsService.java`, `PlayerProfile.java`, `LuckPermsBridge.java`, `PlayerHeadCapture.java`, `kubejs/server_scripts/90_fisherman_cat_shop.js`, `tools/build_case_icons.py`, `scripts/tasks/backup_world.py` |
 | **2026-08-19** | `v2.6.2` | ZCode | **Coins-sync root fix + FAWE-регресс закрыт навсегда:** 1) Hub↔portal монеты: рут-кейс — legacy-кошелёк `persistentData.coins` (150 у xietoru) был невидим Java-хабу (читал только scoreboard/lightman), sync затирал портал нулями. `HubEconomy.coins()` теперь импортирует legacy в scoreboard; `trySpendCoins` — проверка суммы ДО списания + последовательный спенд scoreboard→инвентарь (был баг отрицательного счёта = бесплатные кейсы); `HubDataService.open()` греет кошелёк на главном потоке. 2) Утёкшие ключи добиты: `HubDataService.resolveSyncKey()` → `return null` + skip-guard (без файла `config/aquatech_sync_key.json` синк выключен), KubeJS-фоллбэки `'aquatech_internal_sync_key_2026'` → `''` (обе копии), `functions/api/sync/player.js` fail-closed (нет `SERVER_SYNC_KEY` → 403 всем); воркер задеплоен, smoke: wrong-key 403, real-key GET отдаёт xietoru coins=150. 3) FAWE TypeProperty регресс-кейс найден: SFTP-деплой заливал из репо непатченный `_fawe_patch_work.jar` + `.tmp` (скрипт пропускал только `.bak`/`.pre-`), Bukkit грузил мусорный jar вместо патченного → конфликт + TypeProperty. Локальный `FastAsyncWorldEdit.jar` перепатчен (impl-ветка), мусор удалён локально и на live, `should_skip` теперь отбрасывает `.tmp` и `_`-префикс. Сервер перезапущен: boot чистый (Done 7.4s, без Ambiguous/TypeProperty). 4) Аудит удочек: T1–T5 крафт-цепь валидна; T6+ закрыты кейсом «Рыбацкий» (iceborn 35%/starcatcher 25%/azure 20%/sharktooth 12%/magmaforged 8%); мёртвые крафты: lush (платина только с него самого), alpha (осмиридий/адамантит только с него + IU-space отключён), slimed (slime_block без источника до T5), непатченные дыры: серебро до T6 (нужно и rate_x4), сапфир/вольфрам/хром до T7, кобальт до T9, алмазы до T10 (только rareTreasure), обсидиан до T10 (crying_obsidian). | `mods/aqualumen-ui/.../HubEconomy.java`, `HubDataService.java`, `kubejs/server_scripts/80_live_portal_sync.js`, `server/kubejs/server_scripts/80_live_portal_sync.js`, `functions/api/sync/player.js`, `scripts/tasks/deploy_apexnodes_sftp.py`, `server/plugins/FastAsyncWorldEdit.jar`, `server/mods/aqualumen-forge-1.20.1-0.3.4-alpha.jar` |
@@ -243,7 +243,7 @@
 |-----------|-------------------|
 | **Живой хост** | ApexNodes `g-pl-3.apexnodes.xyz:21561` (panel id `6fdc6f7b`) |
 | **Репо-сервер** | `server/` — зеркало для SFTP, не единственный runtime |
-| **Lodestone** | `%USERPROFILE%\.lodestone\instances\AquaTech-*\mods` — синк first-party jars |
+| **Lodestone** | не используется (live = Apex) |
 | **aquatech_ui** | **1.0.18** (`server/mods/`, Apex, Lodestone) |
 | **casesmod** | 1.0.1 |
 | **packetfixer** | 3.3.2-forge-1.20.1 |
@@ -354,9 +354,10 @@ python scripts/tasks/deploy_apexnodes_sftp.py
 # secrets in .apex_deploy.json or env
 python scripts/tasks/deploy_apexnodes_sftp.py          # backup → upload → restart
 python scripts/tasks/smoke_apex_server.py              # verify
-python tools/sync_lodestone_mods.py                  # Lodestone jars
-# restart Mohist in Lodestone UI
+# first-party jars only: python scripts/tasks/sftp_stats_fix.py jar1 jar2
 ```
+
+Живой хост — Apex, не Lodestone. Не запускать `tools/sync_lodestone_mods.py`.
 
 Флаги: `--skip-backup`, `--no-restart`, `--restart-only`, `AQUATECH_SFTP_ONLY=...`.
 
@@ -380,7 +381,7 @@ python tools/sync_lodestone_mods.py                  # Lodestone jars
 - Интерфейс лаунчера (18 авг): полная очистка XAML и C# от эмодзи, брендовый бейдж `AQ`, скрытие сырого IP-адреса и кнопки копирования из карточки сервера.
 - Автодобавление сервера (18 авг): автогенерация/обновление `servers.dat` в C# перед запуском + автоматическая регистрация сервера в `net.minecraft.client.multiplayer.ServerList` при старте Minecraft через мод `aqualumen-ui`.
 - Pack pipeline: `python tools/publish_client_pack.py` → `python tools/upload_pack_release.py`
-- После first-party jar: **всегда** `python tools/sync_lodestone_mods.py`
+- First-party jars на Apex: `sftp_stats_fix.py`, не Lodestone
 - Rebuild launcher: см. `.cursor/rules/always-rebuild-launcher.mdc`
 
 ### 6. Git-коммиты спринта (для blame)
@@ -399,11 +400,13 @@ fa5a612  pack 2.9.8 FAWE + aquatech_ui 1.0.3
 
 ### 7. Открытые задачи (P3, не делать без запроса)
 
-- [ ] Scheduled autobackup на Apex (не только pre-deploy)
+- [x] Scheduled autobackup: `backup_world.py` + панель 04:00; офсайт R2 — отдельный шаг
 - [ ] Richer post-restart smoke (console log peek, plugin load)
 - [ ] Chunky progress monitoring / broken chunk audit
-- [ ] Rebuild launcher bootstrap после каждого pack bump (если не сделано)
+- [x] Rebuild launcher bootstrap после каждого pack bump (правило always-rebuild-launcher)
 - [ ] Workshop quests `20_ws_*` — **удалены намеренно**, не восстанавливать
+- [x] Ocean Prestige / босс бездны — не стартовать (волны 0–2 закрыты; это геймдизайн, не багфикс)
+- [x] Покупка привилегий за рубли (ЮKassa / сайт) — **не делать** на текущем этапе; `PURCHASES_ENABLED` остаётся false
 
 ### 8. Чеклист верификации для Antigravity
 
@@ -419,12 +422,8 @@ python scripts/tasks/smoke_apex_server.py
 # resource rod (humble) → IU loot после minigame
 # boner_rod → starcatcher:* fish, НЕ cod/руды
 
-# 4. Lodestone sync
-python tools/sync_lodestone_mods.py
-# один aquatech_ui-1.0.18.jar в Lodestone mods
-
-# 5. Client pack
-# docs/pack/manifest.json → pack-2.9.25, aquatech_ui-1.0.18.jar
+# 4. Client pack / Apex mods (не Lodestone)
+# docs/pack/manifest.json + один aquatech_ui-*.jar на Apex
 ```
 
 ### 9. Карта graphify / exploration

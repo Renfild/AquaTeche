@@ -27,6 +27,8 @@ MINECRAFT_VERSION = "1.20.1"
 FORGE_VERSION = "47.4.0"
 SERVER_ADDRESS = "g-pl-3.apexnodes.xyz:21561"
 PURCHASES_ENABLED = "false"
+# Worker secrets (wrangler secret put): SERVER_SYNC_KEY, PAYMENT_WEBHOOK_SECRET,
+# YOOKASSA_SHOP_ID, YOOKASSA_SECRET — do not put them in this file.
 SITE_CANONICAL = "https://aquateche.store"
 ADMIN_NICKS = "Renfild"
 

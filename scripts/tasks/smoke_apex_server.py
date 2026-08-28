@@ -1,18 +1,64 @@
 #!/usr/bin/env python3
-"""Smoke-check Apex after deploy: panel state, jars, FAWE, MariaDB.
+"""Smoke-check Apex after deploy: panel, jars, FAWE, MariaDB, portal catalog.
 
 Usage:
   python scripts/tasks/smoke_apex_server.py
 """
 from __future__ import annotations
 
+import json
 import sys
+import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts" / "tasks"))
 
 import deploy_apexnodes_sftp as deploy  # noqa: E402
+
+PORTAL = "https://aquateche.store"
+
+
+def check_catalog() -> bool:
+    url = f"{PORTAL}/api/catalog"
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "AquaTechSmoke/1.0 (https://aquateche.store)"},
+        )
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            status = resp.status
+            body = json.loads(resp.read().decode("utf-8", "replace"))
+    except Exception as exc:
+        print(f"FAIL catalog {url}: {exc}")
+        return False
+    if status != 200 or not body.get("ok"):
+        print(f"FAIL catalog HTTP {status} body={str(body)[:180]}")
+        return False
+    items = body.get("items") or []
+    print(f"catalog OK {len(items)} items purchases_enabled={body.get('purchases_enabled')}")
+    return True
+
+
+def check_auth_toml(sftp) -> bool:
+    for remote in (
+        "config/aquatech_ui-common.toml",
+        "server/config/aquatech_ui-common.toml",
+    ):
+        try:
+            with sftp.open(remote, "r") as handle:
+                text = handle.read().decode("utf-8", "replace")
+        except OSError:
+            continue
+        if "requirePortalSession = true" in text or "requirePortalSession=true" in text:
+            print(f"auth requirePortalSession true OK ({remote})")
+            return True
+        if "requirePortalSession" in text:
+            print(f"FAIL {remote} requirePortalSession is not true")
+            return False
+    print("WARN no aquatech_ui-common.toml with requirePortalSession")
+    return True
+
 
 
 def check_mysql() -> bool:
@@ -67,7 +113,7 @@ def main() -> int:
 
     if not deploy.PASSWORD:
         print("WARN: no SFTP pass — skip jar listing")
-        ok = check_mysql() and ok
+        ok = check_mysql() and check_catalog() and ok
         return 0 if ok else 1
 
     t = paramiko.Transport((deploy.HOST, deploy.PORT))
@@ -102,10 +148,15 @@ def main() -> int:
     except OSError as ex:
         print(f"WARN plugins list: {ex}")
 
+    if not check_auth_toml(s):
+        ok = False
+
     s.close()
     t.close()
 
     if not check_mysql():
+        ok = False
+    if not check_catalog():
         ok = False
 
     print("OK" if ok else "FAIL")

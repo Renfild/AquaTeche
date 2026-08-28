@@ -1,16 +1,16 @@
-# Graph Report - AquaTech  (2026-08-27)
+# Graph Report - AquaTech  (2026-08-28)
 
 ## Corpus Check
-- 808 files · ~738,779 words
+- 826 files · ~743,985 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 6566 nodes · 10486 edges · 424 communities (376 shown, 48 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 110 edges (avg confidence: 0.78)
+- 6619 nodes · 10664 edges · 424 communities (378 shown, 46 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 111 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0869a9b5`
+- Built from commit: `5edf8e5b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -37,7 +37,7 @@
 - SkillCategory
 - PackStateCache
 - SkillTreeData
-- Fact
+- AquaTechLauncher.Core
 - .BuildAsync
 - gen_assets.py
 - net.minecraft.core.BlockPos
@@ -49,8 +49,8 @@
 - HorizonEvents
 - PatchIUNoFreeScanner
 - AquaTechAPIHandler
-- net.minecraftforge.registries.RegistryObject
-- AquaTechLauncher.Core
+- net.minecraft.world.item.Item
+- FishingRodCompat
 - StormEvent
 - gen_sc_fishing_ui.py
 - Улучшенная — Улучшенная электрическая эра
@@ -66,7 +66,7 @@
 - MainViewModel
 - Маршрут Горизонта — AquaTech meta-progression
 - Q: launcher MainWindow AXAML visual HIG pass
-- net.minecraft.world.item.Item
+- AquaTechFishingRodItem.java
 - gen_stardew_rhythm_ui.py
 - HubDataService
 - publish_client_pack.py
@@ -94,7 +94,7 @@
 - reorganize_layout.py
 - sync_lodestone_mods.py
 - AquaTech Release & Development Workflows
-- RhythmHookSession.java
+- net.minecraft.world.entity.player.Inventory
 - RodType
 - Client
 - SkillDefinitions
@@ -111,14 +111,14 @@
 - Пар — steam
 - make_rate
 - finish_pack_release.py
-- S2CSyncLimitersPacket
+- OceanFilterBlockEntity
 - install_kubejs.py
 - make_boot_fixes_datapack.py
-- .onLoggedOut
+- RateModPersistHandler
 - deploy/deploy_runtime.ps1
 - generate_site.py
 - cf_token_playwright.js
-- net.minecraft.world.entity.player.Inventory
+- net.minecraft.network.FriendlyByteBuf
 - force_deep_ocean_world.py
 - download
 - upload_pack_release.py
@@ -129,11 +129,11 @@
 - IslandGuardHandler
 - deploy_to_cloudflare.py
 - generate_iu_chapters_snbt.py
-- AutoFisherBlockEntity.java
-- Data
+- План следующего этапа: три захода по приоритету
+- SeabedDredgerBlockEntity
 - portal/set_github_cf_secret.py
 - Q: How does LoliLand draw smooth vector-like in-game UI?
-- HubDataService.java
+- AquaLumenUI.java
 - compress_quest_image.py
 - 7. Animation & Interaction
 - generate_aquatech_ui_assets.py
@@ -143,7 +143,7 @@
 - .QueryStatusAsync
 - OceanPlayerMechanics
 - extract_all_case_textures.py
-- trends_data.js
+- HubSnapshot
 - create_ocean_atom_island.py
 - create_ocean_raft.py
 - tools/set_github_cf_secret.py
@@ -151,10 +151,10 @@
 - tools/test_portal_login_cookie.py
 - tools/test_portal_login_happy.py
 - ponytail-audit/SKILL.md
-- CustomEnergyStorage
-- net.minecraft.nbt.CompoundTag
+- .PlayAsync
+- AutoFisherBlockEntity.java
 - aquatech/bootstrap
-- ForgeInstaller
+- ChestFallbackUI.java
 - bump_jar
 - Ponytail Gain
 - build_case_icons.py
@@ -183,17 +183,17 @@
 - ServerListHelper
 - deploy_first_party.py
 - patches/patch_iu_no_free_scanner.py
-- net.minecraft.network.FriendlyByteBuf
+- RhythmHookSession.java
 - AquaSkillCapability
 - gen_pixel_balance_ui.py
-- FishingLootHandler
-- com.google.gson.JsonObject
-- NetworkHandler
-- prune_mods_whitelist.py
 - net.minecraft.world.item.ItemStack
+- Data
+- net.minecraft.server.MinecraftServer
+- prune_mods_whitelist.py
+- StarCatcherAttachments
 - setup_apex_daily_reload.py
 - PersonalRaftSpawner
-- AquaSkillCapability.java
+- DailyContract
 - test_stage13_widgets.py
 - patch_fawe_typeproperty.py
 - ponytail-debt/SKILL.md
@@ -205,9 +205,9 @@
 - Design System Inspiration of Resend
 - CustomFishingLootManager
 - generate_manifest.py
-- FishingRodCompat
+- NetworkHandler
 - 96_fish_stocking.js
-- WorldGuardIslandLookup
+- SkillPassiveHandler
 - gen_item_texture.py
 - setup_mohist_server.py
 - 90_fisherman_cat_shop.js
@@ -218,7 +218,7 @@
 - Q: What is Stage 1 native GUI kit in aquatech_ui?
 - resolve_tabs.py
 - Design System Inspiration of Ferrari
-- FishingSpeedHandler
+- FishingSpeedHandler.java
 - build_all_rank_badges.py
 - Q: What is Stage 3 packets and resource cache in aquatech_ui?
 - replace_release_bootstrap_exe.py
@@ -227,11 +227,11 @@
 - render_minecraft_block
 - export_client_pack.py
 - patch_missing_textures.py
+- WorldGuardIslandLookup
 - CapabilityEvents
-- SkillPassiveHandler
 - 75_ftb_chapter_rewards.js
 - 95_deep_sea_bounty.js
-- .save
+- r2_put.py
 - restore_multinoise_overworld.py
 - gen_bonus_chapters.py
 - Design System Inspiration of Framer
@@ -289,7 +289,7 @@
 - Design System Inspiration of Coinbase
 - Design System Inspiration of Kraken
 - Design System Inspiration of Miro
-- FishingRodCompat.java
+- StarCatcherEnchantmentHandler.java
 - Liquid Glass
 - Design System Inspiration of Airtable
 - Apple Pay
@@ -297,7 +297,7 @@
 - Scroll-Story Patterns
 - 按风格 × 场景的推荐组合
 - Augmented Reality
-- ClientHello
+- .onLoggedOut
 - Layout
 - Machine Learning
 - app.js
@@ -377,13 +377,13 @@
 ## God Nodes (most connected - your core abstractions)
 1. `Улучшенная — Улучшенная электрическая эра` - 105 edges
 2. `Продвинутая — Продвинутая электрическая эра` - 94 edges
-3. `Электрика — baseElectric` - 60 edges
-4. `json()` - 59 edges
-5. `bad()` - 58 edges
-6. `HubDataService` - 51 edges
+3. `json()` - 68 edges
+4. `bad()` - 66 edges
+5. `Электрика — baseElectric` - 60 edges
+6. `HubDataService` - 50 edges
 7. `MainViewModel` - 47 edges
-8. `AquaSkillCapability` - 44 edges
-9. `handleApi()` - 42 edges
+8. `handleApi()` - 46 edges
+9. `AquaSkillCapability` - 44 edges
 10. `AutoFisherBlockEntity` - 39 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -401,19 +401,19 @@
 ## Import Cycles
 - None detected.
 
-## Communities (424 total, 48 thin omitted)
+## Communities (424 total, 46 thin omitted)
 
 ### Community 0 - "index.js"
 Cohesion: 0.06
-Nodes (105): onRequestPatch(), mapRow(), onRequestGet(), onRequestPost(), parsePerks(), SHORT, onRequestGet(), onRequestDelete() (+97 more)
+Nodes (117): onRequestPatch(), mapRow(), onRequestGet(), onRequestPost(), parsePerks(), SHORT, onRequestGet(), onRequestDelete() (+109 more)
 
 ### Community 1 - "MarketService"
-Cohesion: 0.27
-Nodes (4): java.net.HttpURLConnection, MarketEntry, JsonObject, MarketService
+Cohesion: 0.15
+Nodes (9): com.google.gson.JsonObject, java.net.HttpURLConnection, java.sql.Connection, java.sql.Driver, MarketEntry, ClassLoader, MariaStats, JsonObject (+1 more)
 
 ### Community 2 - "net.minecraft.server.level.ServerPlayer"
-Cohesion: 0.15
-Nodes (5): PlayerLoggedInEvent, HubActionHandler, ItemStack, HubEconomy, net.minecraft.server.level.ServerPlayer
+Cohesion: 0.13
+Nodes (6): HubActionHandler, ItemStack, HubEconomy, Product, StoreCatalog, net.minecraft.server.level.ServerPlayer
 
 ### Community 3 - "AquaTech Addon + KubeJS System"
 Cohesion: 0.04
@@ -421,11 +421,11 @@ Nodes (41): 1) New KubeJS nerf script, 2) New KubeJS craft (gated), 3) Extend fi
 
 ### Community 4 - "js/site.js"
 Cohesion: 0.11
-Nodes (41): api(), applySiteCopy(), catalogCard(), cleanPrivilege(), copyIP(), ensureAudio(), esc(), formatNewsDate() (+33 more)
+Nodes (42): api(), applySiteCopy(), catalogCard(), cleanPrivilege(), copyIP(), ensureAudio(), esc(), formatNewsDate() (+34 more)
 
 ### Community 5 - "OceanEventsService"
-Cohesion: 0.15
-Nodes (9): JsonObject, Mod.EventBusSubscriber, PlayerLoggedInEvent, ServerTickEvent, OceanEventsService, Quest, TopEntry, TournamentState (+1 more)
+Cohesion: 0.18
+Nodes (8): JsonObject, Mod.EventBusSubscriber, PlayerLoggedInEvent, ServerTickEvent, OceanEventsService, Quest, TopEntry, TournamentState
 
 ### Community 6 - "Ponytail"
 Cohesion: 0.22
@@ -468,8 +468,8 @@ Cohesion: 0.37
 Nodes (20): arrow_fill(), bevel_panel(), draw(), energy_fill_strip(), flame_fill(), inv_grid(), main(), make_auto_fisher() (+12 more)
 
 ### Community 16 - "Полная таблица лута удочек AquaTech"
-Cohesion: 0.11
-Nodes (18): Fish-only (без ресурсного пула AquaTech), T10 — `starcatcher:obsidian_rod`, T11 — `starcatcher:lush_glowberry_rod`, T12 — `starcatcher:magmaforged_rod`, T13 — `starcatcher:alpha_rod`, T1 — `starcatcher:bamboo_rod` / `minecraft:fishing_rod`, T2 — `starcatcher:humble_rod`, T3 — `starcatcher:good_old_rod` (+10 more)
+Cohesion: 0.10
+Nodes (19): Fish-only (без ресурсного пула AquaTech), T10 — `starcatcher:obsidian_rod`, T11 — `starcatcher:lush_glowberry_rod`, T12 — `starcatcher:magmaforged_rod`, T13 — `starcatcher:alpha_rod`, T1 — `starcatcher:bamboo_rod` / `minecraft:fishing_rod`, T2 — `starcatcher:humble_rod`, T3 — `starcatcher:good_old_rod` (+11 more)
 
 ### Community 17 - "FishShopConfig"
 Cohesion: 0.22
@@ -491,13 +491,13 @@ Nodes (7): Dictionary, Entry, IEnumerable, Entry, PackStateCache, PackStateCache
 Cohesion: 0.16
 Nodes (3): SkillTreeData, C2SUnlockSkillPacket, Context
 
-### Community 22 - "Fact"
-Cohesion: 0.12
-Nodes (9): AquaTechLauncher.Core.Tests, HttpResponseMessage, AutoJoinArgumentTests, LoginFailureMessageTests, ManifestNeedsDownloadTests, ServerListHelperTests, SessionCookieParseTests, ZipVerifyTests (+1 more)
+### Community 22 - "AquaTechLauncher.Core"
+Cohesion: 0.10
+Nodes (9): AquaTechLauncher.Core, AquaTechLauncher.Core.Tests, HttpResponseMessage, AutoJoinArgumentTests, ManifestNeedsDownloadTests, ServerListHelperTests, SessionCookieParseTests, ZipVerifyTests (+1 more)
 
 ### Community 23 - ".BuildAsync"
-Cohesion: 0.19
-Nodes (11): Func, IReadOnlyList, JsonArray, LaunchCommandBuilder, ProcessSpawner, Action, CancellationToken, JsonObject (+3 more)
+Cohesion: 0.24
+Nodes (9): Func, JsonArray, LaunchCommandBuilder, ProcessSpawner, Action, CancellationToken, JsonObject, List (+1 more)
 
 ### Community 24 - "gen_assets.py"
 Cohesion: 0.25
@@ -505,7 +505,7 @@ Nodes (18): browser(), build_atlas(), build_item(), build_logo(), build_sheet(),
 
 ### Community 25 - "net.minecraft.core.BlockPos"
 Cohesion: 0.08
-Nodes (13): ClientboundBlockEntityDataPacket, ClientGamePacketListener, BlockHitResult, AutoFisherBlockEntity, Connection, ContainerData, Override, ContainerData (+5 more)
+Nodes (16): ClientboundBlockEntityDataPacket, ClientGamePacketListener, BlockState, Override, AutoFisherBlockEntity, Connection, ContainerData, Override (+8 more)
 
 ### Community 26 - "Ponytail Help"
 Cohesion: 0.25
@@ -516,7 +516,7 @@ Cohesion: 0.17
 Nodes (12): Deleted, Failed, ManifestSync, PackFileEntry, PackManifest, Action, CancellationToken, HashSet (+4 more)
 
 ### Community 28 - "net.minecraftforge.eventbus.api.SubscribeEvent"
-Cohesion: 0.14
+Cohesion: 0.13
 Nodes (15): java.lang.reflect.Method, AquaTechUI, PlayerLoggedOutEvent, PlayerTickEvent, net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Entity, net.minecraft.world.level.LevelAccessor, net.minecraft.world.level.saveddata.SavedData (+7 more)
 
 ### Community 29 - "SkyblockAutoIsland"
@@ -528,7 +528,7 @@ Cohesion: 0.34
 Nodes (13): build_go_bootstrap(), get_current_version(), gh_api(), main(), md5_file(), pack_launcher_zip(), publish_dotnet_launcher(), Path (+5 more)
 
 ### Community 31 - "HorizonEvents"
-Cohesion: 0.19
+Cohesion: 0.23
 Nodes (5): HorizonEvents, BreakEvent, Mod.EventBusSubscriber, PlayerLoggedInEvent, PlayerTickEvent
 
 ### Community 32 - "PatchIUNoFreeScanner"
@@ -539,13 +539,9 @@ Nodes (5): org.objectweb.asm.tree.AbstractInsnNode, org.objectweb.asm.tree.Field
 Cohesion: 0.21
 Nodes (4): AquaTechAPIHandler, AquaTech Sync & Web Portal Backend API Server. Serves: 1) Client Pack Updates…, Top 5 AquaTech players leaderboard., Fetch live player online count from mcsrvstat API.
 
-### Community 34 - "net.minecraftforge.registries.RegistryObject"
-Cohesion: 0.16
-Nodes (11): ModRegistries, ModBlocks, ModCreativeTabs, ModSounds, net.minecraft.sounds.SoundEvent, net.minecraft.world.item.CreativeModeTab, net.minecraftforge.eventbus.api.IEventBus, net.minecraftforge.registries.DeferredRegister (+3 more)
-
-### Community 35 - "AquaTechLauncher.Core"
-Cohesion: 0.16
-Nodes (8): AquaTechLauncher.Core, LauncherConfig, PlayOrchestrator, Action, CancellationToken, Task, SessionStore, string
+### Community 34 - "net.minecraft.world.item.Item"
+Cohesion: 0.09
+Nodes (26): ModRegistries, AbyssalPortalBlock, AbyssalMagnetItem, Mod.EventBusSubscriber, UpgradeItem, UpgradeType, EFFICIENCY, OCEAN_BOUNTY (+18 more)
 
 ### Community 36 - "StormEvent"
 Cohesion: 0.13
@@ -572,12 +568,12 @@ Cohesion: 0.48
 Nodes (6): clean_description(), gen_id(), get_best_registry_item(), get_russian_title(), parse_tab_file(), write_snbt_chapter()
 
 ### Community 42 - "KitConfig"
-Cohesion: 0.12
-Nodes (8): com.mojang.brigadier.builder.LiteralArgumentBuilder, com.mojang.brigadier.CommandDispatcher, LumenCommands, ServerTickEvent, Data, KitConfig, KitDef, KitItem
+Cohesion: 0.14
+Nodes (6): com.mojang.brigadier.builder.LiteralArgumentBuilder, LumenCommands, Data, KitConfig, KitDef, KitItem
 
 ### Community 43 - "AquaTechCommand"
-Cohesion: 0.18
-Nodes (4): com.mojang.brigadier.context.CommandContext, AquaTechCommand, Mod.EventBusSubscriber, net.minecraft.commands.CommandSourceStack
+Cohesion: 0.14
+Nodes (7): com.mojang.brigadier.CommandDispatcher, com.mojang.brigadier.context.CommandContext, AquaTechCommand, Mod.EventBusSubscriber, HorizonRoute, net.minecraft.commands.CommandSourceStack, net.minecraftforge.event.RegisterCommandsEvent
 
 ### Community 44 - "setup_d1.py"
 Cohesion: 0.35
@@ -593,7 +589,7 @@ Nodes (11): @esbuild/win32-x64, playwright, dependencies, @cloudflare/workerd-wi
 
 ### Community 47 - "net.minecraft.world.level.block.state.BlockState"
 Cohesion: 0.09
-Nodes (31): AbyssalPortalBlock, BlockState, Override, AutoFisherBlock, Builder, Override, BlockHitResult, Builder (+23 more)
+Nodes (29): AutoFisherBlock, BlockHitResult, Builder, Override, BlockHitResult, Builder, Override, OceanAltarBlock (+21 more)
 
 ### Community 48 - "MainViewModel"
 Cohesion: 0.08
@@ -607,17 +603,17 @@ Nodes (10): FTB, Варпы, Горизонты → LuckPerms, Команды а
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: launcher MainWindow AXAML visual HIG pass, Source Nodes
 
-### Community 51 - "net.minecraft.world.item.Item"
+### Community 51 - "AquaTechFishingRodItem.java"
 Cohesion: 0.07
-Nodes (21): AbyssalMagnetItem, Mod.EventBusSubscriber, Override, Override, RateModItem, RateTier, X16, X2 (+13 more)
+Nodes (14): Override, Override, Override, RateModItem, RateTier, X16, X2, X32 (+6 more)
 
 ### Community 52 - "gen_stardew_rhythm_ui.py"
 Cohesion: 0.51
 Nodes (10): draw_bar(), draw_bubble_frames(), draw_dial(), draw_gem(), draw_needle(), draw_panel(), main(), px() (+2 more)
 
 ### Community 53 - "HubDataService"
-Cohesion: 0.08
-Nodes (22): CaseEntry, CaseResult, FishEntry, HubSnapshot, KitEntry, LootInfo, Offer, Profile (+14 more)
+Cohesion: 0.11
+Nodes (9): PlayerLoggedInEvent, CachedRank, HubDataService, ClassLoader, TopEntry, LevelData, Rank, SeasonData (+1 more)
 
 ### Community 54 - "publish_client_pack.py"
 Cohesion: 0.21
@@ -628,8 +624,8 @@ Cohesion: 0.20
 Nodes (6): collect_files(), md5_file(), Path, AquaTech GitHub Release Uploader Загружает все моды и файлы сборки в GitHub…, Upload all files to GitHub Release, return {rel_path: download_url}, upload_release()
 
 ### Community 56 - "HttpDownload"
-Cohesion: 0.18
-Nodes (12): Body, CookieContainer, CookieSession, HttpClient, HttpDownload, CancellationToken, Task, SocketsHttpHandler (+4 more)
+Cohesion: 0.14
+Nodes (16): Body, CookieContainer, CookieSession, HttpClient, ForgeInstaller, Action, CancellationToken, Task (+8 more)
 
 ### Community 57 - "🗺️ Полный Роадмап Развития Игрока: AquaTech (Minecraft 1.20.1)"
 Cohesion: 0.20
@@ -680,8 +676,8 @@ Cohesion: 0.22
 Nodes (16): _asm_classpath(), class_index_of(), _ensure_patcher_compiled(), _java_bin(), _javac_bin(), main(), patch_ibukkit(), patch_impl_typeproperty() (+8 more)
 
 ### Community 69 - ".LoginAsync"
-Cohesion: 0.18
-Nodes (9): Error, PortalApi, PortalStats, UserProfile, CancellationToken, string, Task, Ok (+1 more)
+Cohesion: 0.16
+Nodes (10): Error, PortalApi, PortalStats, UserProfile, CancellationToken, string, Task, LoginFailureMessageTests (+2 more)
 
 ### Community 70 - ".EnsureJava17Async"
 Cohesion: 0.13
@@ -719,13 +715,13 @@ Nodes (6): find_lodestone_mods(), jars_for_prefix(), md5_file(), Path, Push firs
 Cohesion: 0.12
 Nodes (15): 1. Player-facing changes, 2. Portal changes (`docs/`, `worker/`, etc.), 3. After code edits, 4. After Apex server deploy, 5. FTB Quests safety, 6. Git Commits & Push Policy, 7. Repository Hygiene & Artifact Prevention, 8. Launcher Performance & Networking Standards (+7 more)
 
-### Community 79 - "RhythmHookSession.java"
-Cohesion: 0.19
-Nodes (10): BooleanValue, ConfigValue, DoubleValue, IntValue, ModClientConfig, BooleanValue, ConfigValue, IntValue (+2 more)
+### Community 79 - "net.minecraft.world.entity.player.Inventory"
+Cohesion: 0.07
+Nodes (9): AutoFisherMenu, Override, Override, OceanAltarMenu, Override, OceanFilterMenu, Override, TackleBoxMenu (+1 more)
 
 ### Community 80 - "RodType"
-Cohesion: 0.06
-Nodes (24): AquaFishCaughtEvent, AquaTechFishingRodItem, Override, RodType, ABYSSAL, DIAMOND, EMERALD, ENDER (+16 more)
+Cohesion: 0.05
+Nodes (25): AquaFishCaughtEvent, AquaTechFishingRodItem, RodType, ABYSSAL, DIAMOND, EMERALD, ENDER, GOLD (+17 more)
 
 ### Community 81 - "Client"
 Cohesion: 0.28
@@ -787,6 +783,10 @@ Nodes (4): draw_digit(), main(), make_rate(), Image
 Cohesion: 0.80
 Nodes (4): api(), find_release(), main(), token()
 
+### Community 96 - "OceanFilterBlockEntity"
+Cohesion: 0.13
+Nodes (6): ItemStack, Override, OceanFilterBlockEntity, CustomEnergyStorage, Override, net.minecraftforge.energy.EnergyStorage
+
 ### Community 97 - "install_kubejs.py"
 Cohesion: 0.70
 Nodes (4): download(), install(), main(), Path
@@ -795,13 +795,17 @@ Nodes (4): download(), install(), main(), Path
 Cohesion: 0.60
 Nodes (4): main(), Path, tag_path(), write_tag()
 
+### Community 99 - "RateModPersistHandler"
+Cohesion: 0.33
+Nodes (3): Mod.EventBusSubscriber, PlayerTickEvent, RateModPersistHandler
+
 ### Community 102 - "cf_token_playwright.js"
 Cohesion: 0.50
 Nodes (3): { chromium }, fs, path
 
-### Community 103 - "net.minecraft.world.entity.player.Inventory"
-Cohesion: 0.06
-Nodes (13): AutoFisherMenu, Override, Override, OceanAltarMenu, Override, OceanFilterMenu, Override, SeabedDredgerMenu (+5 more)
+### Community 103 - "net.minecraft.network.FriendlyByteBuf"
+Cohesion: 0.04
+Nodes (29): CompoundTag, PlayerProfile, ServerStats, C2SOpenSkillTreePacket, Context, C2SAuthPacket, Context, C2SOpenContainerPacket (+21 more)
 
 ### Community 105 - "download"
 Cohesion: 0.67
@@ -820,28 +824,28 @@ Cohesion: 0.40
 Nodes (4): ApexNodes deploy, ApexNodes MariaDB, scripts/, Правила для агента
 
 ### Community 111 - "IslandGuardHandler"
-Cohesion: 0.13
+Cohesion: 0.15
 Nodes (8): Detonate, IslandGuardHandler, BlockPos, BreakEvent, EntityPlaceEvent, LivingHurtEvent, Mod.EventBusSubscriber, RightClickBlock
 
 ### Community 113 - "generate_iu_chapters_snbt.py"
 Cohesion: 0.83
 Nodes (3): clean_description(), format_snbt_chapter(), gen_id()
 
-### Community 114 - "AutoFisherBlockEntity.java"
-Cohesion: 0.10
-Nodes (22): Override, OceanFilterBlockEntity, UpgradeItem, UpgradeType, EFFICIENCY, OCEAN_BOUNTY, SPEED, SPEED_X4 (+14 more)
+### Community 114 - "План следующего этапа: три захода по приоритету"
+Cohesion: 0.29
+Nodes (6): Не делаем, План следующего этапа: три захода по приоритету, По завершении каждого шага, Шаг 1. Таблица лидеров на портале (быстрая победа из обещанного), Шаг 2. DiscordSRV (токен уже есть у владельца), Шаг 3. Добить P0: авторизация лаунчер↔сервер по токену
 
-### Community 115 - "Data"
-Cohesion: 0.32
-Nodes (7): CaseConfig, CaseDef, Daily, Data, RandomSource, LootDef, PendingCaseReward
+### Community 115 - "SeabedDredgerBlockEntity"
+Cohesion: 0.12
+Nodes (5): ItemStack, Override, SeabedDredgerBlockEntity, Override, SeabedDredgerMenu
 
 ### Community 117 - "Q: How does LoliLand draw smooth vector-like in-game UI?"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How does LoliLand draw smooth vector-like in-game UI?, Source Nodes
 
-### Community 118 - "HubDataService.java"
-Cohesion: 0.08
-Nodes (22): com.google.gson.Gson, com.google.gson.JsonArray, AquaLumenUI, ChestFallbackUI, FallbackMenu, Item, ItemStack, Override (+14 more)
+### Community 118 - "AquaLumenUI.java"
+Cohesion: 0.09
+Nodes (15): com.google.gson.Gson, com.google.gson.JsonArray, AquaLumenUI, Mod.EventBusSubscriber, ServerEvents, LumenConfig, LumenNetwork, ClientHello (+7 more)
 
 ### Community 122 - "7. Animation & Interaction"
 Cohesion: 0.05
@@ -855,21 +859,25 @@ Nodes (6): ServerPing, ServerStatusResult, Task, Ms, Online, Stream
 Cohesion: 0.27
 Nodes (3): Mod.EventBusSubscriber, PlayerTickEvent, OceanPlayerMechanics
 
+### Community 136 - "HubSnapshot"
+Cohesion: 0.17
+Nodes (14): CaseEntry, CaseResult, FishEntry, HubSnapshot, KitEntry, LootInfo, Offer, Profile (+6 more)
+
 ### Community 144 - "ponytail-audit/SKILL.md"
 Cohesion: 0.40
 Nodes (4): Boundaries, Hunt, Output, Tags
 
-### Community 163 - "CustomEnergyStorage"
-Cohesion: 0.31
-Nodes (3): CustomEnergyStorage, Override, net.minecraftforge.energy.EnergyStorage
+### Community 163 - ".PlayAsync"
+Cohesion: 0.18
+Nodes (9): IReadOnlyList, LauncherConfig, PlayOrchestrator, Action, CancellationToken, Task, SessionStore, string (+1 more)
 
-### Community 164 - "net.minecraft.nbt.CompoundTag"
-Cohesion: 0.08
-Nodes (17): ContainerData, Override, OceanAltarBlockEntity, Override, SeabedDredgerBlockEntity, CompoundTag, AquaSkillProvider, Override (+9 more)
+### Community 164 - "AutoFisherBlockEntity.java"
+Cohesion: 0.10
+Nodes (22): Override, OceanAltarBlockEntity, AquaSkillProvider, Override, InventoryNbt, CompoundTag, MachineUpgrades, Override (+14 more)
 
-### Community 167 - "ForgeInstaller"
-Cohesion: 0.44
-Nodes (4): ForgeInstaller, Action, CancellationToken, Task
+### Community 167 - "ChestFallbackUI.java"
+Cohesion: 0.16
+Nodes (10): ChestFallbackUI, FallbackMenu, Item, ItemStack, Override, net.minecraft.world.Container, net.minecraft.world.inventory.ChestMenu, net.minecraft.world.inventory.ClickType (+2 more)
 
 ### Community 172 - "bump_jar"
 Cohesion: 0.83
@@ -900,16 +908,16 @@ Cohesion: 0.05
 Nodes (41): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Interaction & Motion, 8. Responsive Behavior (+33 more)
 
 ### Community 191 - "deploy_apexnodes_sftp.py"
-Cohesion: 0.10
-Nodes (36): main(), wg_flag_cmd(), apex_command(), apex_create_backup(), apex_delete_backup(), _apex_headers(), apex_json(), apex_list_backups() (+28 more)
+Cohesion: 0.08
+Nodes (45): main(), wg_flag_cmd(), collect_named(), main(), prune(), Path, sftp_listdir(), sftp_walk_files() (+37 more)
 
 ### Community 192 - "install_aquatech_rank_prefixes.py"
 Cohesion: 0.36
 Nodes (11): apply_luckperms(), build_font_json(), glyph_char(), main(), patch_server_properties(), stem_for_group(), sync_textures(), upsert_lp_group() (+3 more)
 
 ### Community 193 - "net.minecraft.world.entity.player.Player"
-Cohesion: 0.23
-Nodes (3): SkillEffects, Snapshot, net.minecraft.world.entity.player.Player
+Cohesion: 0.16
+Nodes (6): SkillEffects, Snapshot, Override, SonarGogglesItem, net.minecraft.world.entity.player.Player, net.minecraft.world.item.ArmorItem
 
 ### Community 194 - "ponytail-review/SKILL.md"
 Cohesion: 0.40
@@ -928,7 +936,7 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Install gstack caveman graphify for AquaTech Cursor, Source Nodes
 
 ### Community 198 - "Json"
-Cohesion: 0.03
+Cohesion: 0.04
 Nodes (4): Json, Harden aquatech StarCatcher fish: real minigame difficulty, no skip., Neutralize aquatech SC fish preview (loot still from AquaTech rod pools)., Boost density of vanilla underwater vegetation/decoration features (kelp,…
 
 ### Community 199 - "Industrial Upgrade — руководство из мода"
@@ -967,41 +975,45 @@ Nodes (8): bump_pack_version(), copy_jars_to_targets(), main(), md5_file(), Path
 Cohesion: 0.50
 Nodes (8): _cp(), _ensure_compiled(), _java(), _javac(), main(), patch_jar(), Path, Remove IU free ore-scanner give from IUCore.loginPlayer. Usage: python…
 
-### Community 213 - "net.minecraft.network.FriendlyByteBuf"
-Cohesion: 0.04
-Nodes (27): PlayerProfile, ServerStats, C2SOpenSkillTreePacket, Context, C2SRhythmHookResultPacket, C2SAuthPacket, Context, C2SOpenContainerPacket (+19 more)
+### Community 213 - "RhythmHookSession.java"
+Cohesion: 0.13
+Nodes (12): BooleanValue, ConfigValue, DoubleValue, IntValue, ModClientConfig, BooleanValue, ConfigValue, IntValue (+4 more)
 
 ### Community 215 - "gen_pixel_balance_ui.py"
 Cohesion: 0.20
 Nodes (30): draw_fish(), hline(), main(), make_bar(), make_bobber(), make_bubbles(), make_fish_sheet(), make_heart_burst() (+22 more)
 
-### Community 216 - "FishingLootHandler"
-Cohesion: 0.23
-Nodes (5): ResourceLocation, FishingLootHandler, ItemStack, Mod.EventBusSubscriber, net.minecraft.util.RandomSource
+### Community 216 - "net.minecraft.world.item.ItemStack"
+Cohesion: 0.18
+Nodes (7): ResourceLocation, ItemStack, FishingLootHandler, ItemStack, Mod.EventBusSubscriber, net.minecraft.util.RandomSource, net.minecraft.world.item.ItemStack
 
-### Community 217 - "com.google.gson.JsonObject"
+### Community 217 - "Data"
 Cohesion: 0.32
-Nodes (5): com.google.gson.JsonObject, java.sql.Connection, java.sql.Driver, ClassLoader, MariaStats
+Nodes (7): CaseConfig, CaseDef, Daily, Data, RandomSource, LootDef, PendingCaseReward
+
+### Community 218 - "net.minecraft.server.MinecraftServer"
+Cohesion: 0.23
+Nodes (3): ServerTickEvent, PendingDeliveryService, net.minecraft.server.MinecraftServer
 
 ### Community 219 - "prune_mods_whitelist.py"
 Cohesion: 0.73
 Nodes (5): is_keep(), main(), mandatory_deps(), park_dir(), Path
 
-### Community 220 - "net.minecraft.world.item.ItemStack"
-Cohesion: 0.11
-Nodes (10): java.lang.reflect.Constructor, ItemStack, ItemStack, ItemStack, Mod.EventBusSubscriber, PlayerTickEvent, RateModPersistHandler, ItemStack (+2 more)
+### Community 220 - "StarCatcherAttachments"
+Cohesion: 0.28
+Nodes (3): java.lang.reflect.Constructor, ItemStack, StarCatcherAttachments
 
 ### Community 221 - "setup_apex_daily_reload.py"
 Cohesion: 0.57
 Nodes (7): apex_json(), ensure_schedule(), ensure_tasks(), list_schedules(), load_key(), main(), print_schedules()
 
 ### Community 222 - "PersonalRaftSpawner"
-Cohesion: 0.12
-Nodes (10): Entry, BlockPos, ClassLoader, Clone, Mod.EventBusSubscriber, PlayerLoggedInEvent, RegisterCommandsEvent, PersonalRaftSpawner (+2 more)
+Cohesion: 0.10
+Nodes (12): Entry, BlockPos, ClassLoader, Clone, CompoundTag, Mod.EventBusSubscriber, Override, PlayerLoggedInEvent (+4 more)
 
-### Community 223 - "AquaSkillCapability.java"
-Cohesion: 0.16
-Nodes (8): DailyContract, DEPTH, FISH, KELP, MACHINE, MARKET, HorizonRoute, net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent
+### Community 223 - "DailyContract"
+Cohesion: 0.33
+Nodes (6): DailyContract, DEPTH, FISH, KELP, MACHINE, MARKET
 
 ### Community 224 - "test_stage13_widgets.py"
 Cohesion: 0.64
@@ -1043,13 +1055,13 @@ Nodes (41): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typograph
 Cohesion: 0.33
 Nodes (3): CustomFishingLootManager, CustomLootEntry, ItemStack
 
-### Community 235 - "FishingRodCompat"
-Cohesion: 0.21
-Nodes (3): FishingRodCompat, ItemStack, Context
-
 ### Community 236 - "96_fish_stocking.js"
 Cohesion: 0.47
 Nodes (5): AC_SCHOOLS, blockId(), findWaterSpot(), isWaterBlock(), VANILLA_SCHOOLS
+
+### Community 237 - "SkillPassiveHandler"
+Cohesion: 0.22
+Nodes (5): BreakEvent, Mod.EventBusSubscriber, PlayerTickEvent, SkillPassiveHandler, net.minecraftforge.event.entity.living.LivingHurtEvent
 
 ### Community 244 - "90_fisherman_cat_shop.js"
 Cohesion: 0.46
@@ -1075,9 +1087,9 @@ Nodes (4): Answer, Outcome, Q: What is Stage 1 native GUI kit in aquatech_ui?, S
 Cohesion: 0.05
 Nodes (40): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+32 more)
 
-### Community 259 - "FishingSpeedHandler"
+### Community 259 - "FishingSpeedHandler.java"
 Cohesion: 0.16
-Nodes (6): java.lang.reflect.Field, RodDurabilityApplier, FishingSpeedHandler, Mod.EventBusSubscriber, PlayerTickEvent, net.minecraft.resources.ResourceLocation
+Nodes (6): java.lang.reflect.Field, RodDurabilityApplier, FishingSpeedHandler, Mod.EventBusSubscriber, PlayerTickEvent, net.minecraft.world.entity.projectile.FishingHook
 
 ### Community 261 - "build_all_rank_badges.py"
 Cohesion: 0.70
@@ -1103,13 +1115,13 @@ Nodes (3): fetchStatus(), initRadar(), setOfflineState()
 Cohesion: 0.50
 Nodes (3): Image, Renders top face and side face into a standard Minecraft inventory isometric…, render_minecraft_block()
 
-### Community 269 - "CapabilityEvents"
+### Community 273 - "CapabilityEvents"
 Cohesion: 0.33
 Nodes (4): CapabilityEvents, Clone, Mod.EventBusSubscriber, PlayerLoggedInEvent
 
-### Community 273 - "SkillPassiveHandler"
-Cohesion: 0.22
-Nodes (5): BreakEvent, Mod.EventBusSubscriber, PlayerTickEvent, SkillPassiveHandler, net.minecraftforge.event.entity.living.LivingHurtEvent
+### Community 279 - "r2_put.py"
+Cohesion: 0.70
+Nodes (4): load_secrets(), main(), put(), Path
 
 ### Community 280 - "restore_multinoise_overworld.py"
 Cohesion: 0.50
@@ -1335,8 +1347,8 @@ Nodes (23): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typograph
 Cohesion: 0.08
 Nodes (23): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+15 more)
 
-### Community 339 - "FishingRodCompat.java"
-Cohesion: 0.29
+### Community 339 - "StarCatcherEnchantmentHandler.java"
+Cohesion: 0.33
 Nodes (4): Mod.EventBusSubscriber, StarCatcherEnchantmentHandler, net.minecraftforge.event.AnvilUpdateEvent, PickupXp
 
 ### Community 340 - "Liquid Glass"
@@ -1366,10 +1378,6 @@ Nodes (16): Animations — 元素级（29 个）, Backgrounds — 氛围层（38
 ### Community 346 - "Augmented Reality"
 Cohesion: 0.12
 Nodes (15): App usability, Augmented Reality, Best practices, Communicating with people, Designing object interactions, Handling interruptions, Helping people place objects, Icons (+7 more)
-
-### Community 347 - "ClientHello"
-Cohesion: 0.18
-Nodes (3): ClientHello, HubAction, Context
 
 ### Community 348 - "Layout"
 Cohesion: 0.14
@@ -1644,24 +1652,24 @@ Cohesion: 0.67
 Nodes (3): jar_items(), main(), Path
 
 ## Knowledge Gaps
-- **2885 isolated node(s):** `perf`, `progress`, `nav`, `blindsContainer`, `i18n` (+2880 more)
+- **2891 isolated node(s):** `perf`, `progress`, `nav`, `blindsContainer`, `i18n` (+2886 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **48 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **46 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `LaunchCommandBuilder` connect `.BuildAsync` to `AquaTechLauncher.Core`, `Fact`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **Why does `HttpDownload` connect `HttpDownload` to `AquaTechLauncher.Core`, `.LoginAsync`, `Fact`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
-- **Why does `CustomFishingLootManager` connect `CustomFishingLootManager` to `net.minecraft.world.item.Item`, `AquaTechCommand`, `HubDataService.java`?**
+- **Why does `LaunchCommandBuilder` connect `.BuildAsync` to `.PlayAsync`, `AquaTechLauncher.Core`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **Why does `HttpDownload` connect `HttpDownload` to `.LoginAsync`, `AquaTechLauncher.Core`?**
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+- **Why does `CustomFishingLootManager` connect `CustomFishingLootManager` to `AquaTechCommand`, `AquaLumenUI.java`?**
   _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **What connects `perf`, `progress`, `nav` to the rest of the system?**
-  _2885 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _2891 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `index.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.06033363300369594 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05607940446650124 - nodes in this community are weakly interconnected._
+- **Should `MarketService` be split into smaller, more focused modules?**
+  _Cohesion score 0.14838709677419354 - nodes in this community are weakly interconnected._
 - **Should `net.minecraft.server.level.ServerPlayer` be split into smaller, more focused modules?**
-  _Cohesion score 0.14634146341463414 - nodes in this community are weakly interconnected._
-- **Should `AquaTech Addon + KubeJS System` be split into smaller, more focused modules?**
-  _Cohesion score 0.044444444444444446 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.13010204081632654 - nodes in this community are weakly interconnected._

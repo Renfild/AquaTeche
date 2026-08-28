@@ -187,7 +187,7 @@ public final class HubDataService {
                 wallet,
                 season,
                 tops(server, player),
-                defaultStore(),
+                StoreCatalog.offers(player),
                 cases(coins),
                 kits(),
                 warps(),
@@ -496,18 +496,6 @@ public final class HubDataService {
             place++;
         }
         return entries;
-    }
-
-    /** Default store items. */
-    private static List<HubSnapshot.Offer> defaultStore() {
-        return List.of(
-                new HubSnapshot.Offer("rank.diver", "\u0420\u0430\u043d\u0433 Diver", "\u0414\u043e\u0441\u0442\u0443\u043f \u043a /home x5", 349, "gems", "-20%", false),
-                new HubSnapshot.Offer("rank.abyss", "\u0420\u0430\u043d\u0433 Abyss", "\u041f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442 \u0432\u0445\u043e\u0434\u0430", 899, "gems", "HIT", false),
-                new HubSnapshot.Offer("kit.starter", "\u041d\u0430\u0431\u043e\u0440 Starter", "\u0421\u0442\u0430\u0440\u0442\u043e\u0432\u043e\u0435 \u0441\u043d\u0430\u0440\u044f\u0436\u0435\u043d\u0438\u0435", 120, "coins", "", true),
-                new HubSnapshot.Offer("boost.xp", "\u0411\u0443\u0441\u0442 \u043e\u043f\u044b\u0442\u0430 x2", "\u0414\u0435\u0439\u0441\u0442\u0432\u0443\u0435\u0442 2 \u0447\u0430\u0441\u0430", 60, "coins", "", false),
-                new HubSnapshot.Offer("pet.axolotl", "\u041f\u0438\u0442\u043e\u043c\u0435\u0446 \u0410\u043a\u0441\u043e\u043b\u043e\u0442\u043b\u044c", "\u041a\u043e\u0441\u043c\u0435\u0442\u0438\u043a\u0430", 240, "gems", "NEW", false),
-                new HubSnapshot.Offer("home.slot", "+1 \u0442\u043e\u0447\u043a\u0430 \u0434\u043e\u043c\u0430", "\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e", 150, "coins", "", false)
-        );
     }
 
     private static long resolveGems(ServerPlayer player) {

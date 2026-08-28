@@ -19,7 +19,12 @@ import {
 import {
   onRequestGet as purchaseGet,
   onRequestPost as purchasePost,
+  onRequestCallback as purchaseCallback,
 } from "../functions/api/purchase.js";
+import {
+  onRequestGet as pendingCommandsGet,
+  onRequestPost as pendingCommandsPost,
+} from "../functions/api/internal/pending-commands.js";
 import {
   onRequestGet as profileGet,
   onRequestPatch as profilePatch,
@@ -103,6 +108,13 @@ async function handleApi(request, env) {
   if (path === "/api/purchase") {
     if (method === "POST") return purchasePost(ctx(request, env));
     if (method === "GET") return purchaseGet(ctx(request, env));
+  }
+  if (path === "/api/purchase/callback" && method === "POST") {
+    return purchaseCallback(ctx(request, env));
+  }
+  if (path === "/api/internal/pending-commands") {
+    if (method === "GET") return pendingCommandsGet(ctx(request, env));
+    if (method === "POST") return pendingCommandsPost(ctx(request, env));
   }
 
   if (path === "/api/admin/me" && method === "GET") return adminMeGet(ctx(request, env));

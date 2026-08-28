@@ -75,8 +75,8 @@ public class ModConfig {
         builder.pop();
         builder.push("auth");
         REQUIRE_PORTAL_SESSION = builder
-                .comment("true = join requires a valid aquateche.store session (launcher login). Keep false on local Lodestone.")
-                .define("requirePortalSession", false);
+                .comment("true = join requires a valid aquateche.store session (launcher login). Apex live should stay true.")
+                .define("requirePortalSession", true);
         AUTH_API_BASE = builder
                 .comment("Portal origin used by Mohist to POST /api/launcher/verify-token")
                 .define("apiBase", "https://aquateche.store");

@@ -58,12 +58,37 @@ public final class LuckPermsBridge {
     }
 
     private static long readCoins(ServerPlayer player) {
+        long vault = vaultBalance(player);
+        if (vault >= 0L) {
+            return vault;
+        }
         try {
             net.minecraft.world.scores.Objective obj = player.getScoreboard().getObjective("coins");
             if (obj == null) return 0L;
             return player.getScoreboard().getOrCreatePlayerScore(player.getScoreboardName(), obj).getScore();
         } catch (Throwable t) {
             return 0L;
+        }
+    }
+
+    private static long vaultBalance(ServerPlayer player) {
+        try {
+            Class<?> bukkit = Class.forName("org.bukkit.Bukkit");
+            Object services = bukkit.getMethod("getServicesManager").invoke(null);
+            Class<?> economyClass = Class.forName("net.milkbowl.vault.economy.Economy");
+            Object registration = services.getClass()
+                    .getMethod("getRegistration", Class.class)
+                    .invoke(services, economyClass);
+            if (registration == null) return -1L;
+            Object economy = registration.getClass().getMethod("getProvider").invoke(registration);
+            if (economy == null) return -1L;
+            Class<?> offlineClass = Class.forName("org.bukkit.OfflinePlayer");
+            Object offline = bukkit.getMethod("getOfflinePlayer", UUID.class).invoke(null, player.getUUID());
+            Object bal = economy.getClass().getMethod("getBalance", offlineClass).invoke(economy, offline);
+            if (!(bal instanceof Number number) || number.doubleValue() < 0.0d) return -1L;
+            return (long) Math.floor(number.doubleValue());
+        } catch (Throwable ignored) {
+            return -1L;
         }
     }
 

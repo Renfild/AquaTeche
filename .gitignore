@@ -76,6 +76,9 @@ secrets.json
 config/aquatech_mysql.json
 server/config/aquatech_mysql.json
 .apex_deploy.json
+.r2.json
+.mimosa/
+.zcode/
 node_modules/
 
 # Orphan gitlink (no .gitmodules) � breaks Cloudflare Pages submodule update

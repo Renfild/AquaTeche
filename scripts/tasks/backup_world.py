@@ -211,6 +211,12 @@ def main() -> int:
     write_zip(sftp, world_zip, progress_pairs, "world")
     prune("world")
     ssh.close()
+
+    import r2_put
+
+    for archive in (quest_zip, world_zip):
+        if archive.is_file():
+            r2_put.put(archive, f"{stamp}/{archive.name}")
     return 0
 
 

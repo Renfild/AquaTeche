@@ -11,6 +11,7 @@ import store.aquateche.aqualumen.common.command.LumenCommands;
 import store.aquateche.aqualumen.common.service.HubActionHandler;
 import store.aquateche.aqualumen.common.service.HubDataService;
 import store.aquateche.aqualumen.common.service.HubEconomy;
+import store.aquateche.aqualumen.common.service.PendingDeliveryService;
 import store.aquateche.aqualumen.config.LumenConfig;
 
 import java.util.Set;
@@ -69,6 +70,7 @@ public final class ServerEvents {
                 HubDataService.syncPlayerToWebAsync(player);
             }
         }
+        PendingDeliveryService.onServerTick(event.getServer());
         tickCounter++;
     }
 

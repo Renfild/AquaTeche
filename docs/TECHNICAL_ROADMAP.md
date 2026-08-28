@@ -1,7 +1,7 @@
 # 🗺️ AquaTech Technical Roadmap & System Audit (Архитектура, Бэкенд, Лаунчер, Инфраструктура)
 
 > [!NOTE]
-> Документ содержит результаты глубокого технического аудита кодовой базы AquaTech (Minecraft 1.20.1 Forge + Mohist, Cloudflare Workers D1, Python Launcher). Исключены вопросы дизайна/визуала.
+> Аудит 13 авг 2026. Live на 28 авг: токен-авторизация, Mending-блок, WG-клейм плота, мост монет, аукцион, синки статов, кейсы F4 — **сделаны**. Не планировать заново. Лаунчер — C# Avalonia + Go bootstrap, не Python.
 
 ---
 
@@ -37,13 +37,11 @@
 ## 2. 🌐 Сайт, Cloudflare Worker, D1 БД и API (Web Portal & Backend)
 
 ### 🔴 Критические проблемы:
-1. **Отсутствие реальной оплаты (Store Payment Gateway)**:
-   - **Суть**: Эндпоинт `/api/purchase` заблокирован заглушкой `purchasesDisabled()`.
-   - **План реализации**: Подключить платежный агрегатор (YooKassa / Lava / Telegram Pay / Cryptomus) через Webhook-эндпоинт `/api/purchase/callback` с валидацией подписи HMAC-SHA256.
+1. **Оплата (Store Payment Gateway)** — код готов, live выключен:
+   - `POST /api/purchase` + `/api/purchase/callback` (HMAC `X-AquaTech-Sign` или GET-verify ЮKassa). `PURCHASES_ENABLED=false` в wrangler, пока нет `YOOKASSA_SHOP_ID` / `YOOKASSA_SECRET`. F4 `store.buy` тратит игровые монеты/гемы без шлюза.
 
-2. **Отсутствие шины доставки покупок в игру (Web-to-Game Delivery)**:
-   - **Суть**: База D1 изолирована от сервера Mohist.
-   - **План реализации**: Создать таблицу D1 `pending_commands` и Worker-эндпоинт `/api/internal/pending-commands`. Добавить модуль в `casesmod` / RCON для регулярного выполнения команд на сервере.
+2. **Шина доставки Web→Mohist** — сделано 2026-08-28:
+   - D1 `pending_commands` (`migrations/0007_pending_commands.sql`), `GET/POST /api/internal/pending-commands`, poll `PendingDeliveryService` на Apex (`SERVER_SYNC_KEY`).
 
 3. **Отсутствие восстановления пароля и поля Email**:
    - **Суть**: В таблице `users` отсутствует `email`. Забытый пароль не подлежит сбросу.
@@ -88,9 +86,8 @@
 ## 4. 🛠️ Инфраструктура, Мониторинг & DevOps
 
 ### 🔴 Критические проблемы:
-1. **Отсутствие внешних бэкапов в Cloudflare R2**:
-   - **Суть**: Бэкапы хранятся локально на Apex Nodes.
-   - **План реализации**: Cron-скрипт отправки зашифрованного архива `world/` в Cloudflare R2 каждые 6 часов.
+1. **Офсайт world zip в Cloudflare R2** — хук готов, секреты опциональны:
+   - `backup_world.py` после локального zip зовёт `scripts/tasks/r2_put.py`. Без gitignored `.r2.json` — WARN skip, слот Apex остаётся.
 
 2. **TPS Watchdog & Очистка выроненного лута**:
    - **Суть**: Переполнение `AutoFisher` приводит к просадкам TPS.
@@ -102,16 +99,12 @@
 
 ---
 
-## 📊 Сводная матрица приоритетов (Action Matrix)
+## Сводная матрица (статус 2026-08-28)
 
-| Приоритет | Компонент | Задача | Техническая реализация |
-|---|---|---|---|
-| 🔥 **P0** | **Лаунчер + Сервер** | Сквозная токен-авторизация (`session_token`) | `C2SAuthPacket` в `aquatech_ui` + D1 проверка |
-| 🔥 **P0** | **Сайт + Сервер** | Онлайн-донат и авто-доставка | `/api/purchase/callback` + D1 `pending_commands` |
-| ⚡ **P1** | **Сборка** | Защита прочности удочек от Починки/Прочности | Перехват `AnvilUpdateEvent` в `aquatech_ui` |
-| ⚡ **P1** | **Сборка** | Защита от дюпов инвентаря на Mohist | `ContainerTransactionEvent` + лимит на `AutoFisher` |
-| ⚡ **P1** | **Инфраструктура**| Авто-бэкапы мира в Cloudflare R2 | Cron-скрипт бэкапа мира в R2 bucket |
-| 🔹 **P2** | **Сборка** | Мост экономик (Lightman's ↔ CasesMod) | `CurrencyBridgeHandler` (обмен монет на дублоны F4) |
-| 🔹 **P2** | **Сайт** | Синхронизация статистики в D1 | Hook `PlayerQuitEvent` -> `/api/internal/sync-stats` |
-| 🔹 **P2** | **Лаунчер** | Парсер крашей и динамический RAM | Анализ `hs_err_pid.log` + JVM G1GC флаги |
-| 💡 **P3** | **Сборка** | Океанический Престиж и Босс Бездны | KubeJS/Java система престижа и босса |
+Done: `C2SAuthPacket` + `PortalSessionVerifier` (`requirePortalSession`); `StarCatcherEnchantmentHandler`; `/deposit` `/withdraw` + `HubEconomy`; `70_island_auto_claim.js` + `PersonalRaftSpawner`; `MariaStats` + `/api/sync/player`; C# RAM/G1GC и crash copy в лаунчере.
+
+Done (2026-08-28): D1 `pending_commands` + `/api/purchase/callback`; `IslandLimiterHandler.ENABLED`; R2 upload из `backup_world.py` при наличии `.r2.json`.
+
+Parked: покупка привилегий за рубли (ЮKassa / `PURCHASES_ENABLED`) — не на этом этапе. F4 `store.buy` за игровые монеты/гемы живой.
+
+Open: email-сброс пароля; Mohist-дюпы только если Spark покажет overflow; Ocean Prestige / босс бездны — не стартовать.

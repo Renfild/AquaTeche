@@ -18,8 +18,8 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class IslandLimiterHandler {
 
-    /** Off until we retune against the actual pack (no Create). */
-    private static final boolean ENABLED = false;
+    /** Caps in IslandLimiterRules: IU/AE2/Botania/DE, no Create. */
+    private static final boolean ENABLED = true;
 
     private IslandLimiterHandler() {
     }
