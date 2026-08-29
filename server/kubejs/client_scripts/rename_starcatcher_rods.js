@@ -12,6 +12,6 @@ ClientEvents.lang('ru_ru', event => {
   event.add('item.starcatcher.obsidian_rod', 'Ресурсная удочка X ур. (Обсидиановая)')
   event.add('item.starcatcher.lush_glowberry_rod', 'Ресурсная удочка XI ур. (Светящаяся ягода)')
   event.add('item.starcatcher.magmaforged_rod', 'Ресурсная удочка XII ур. (Магматическая)')
-  event.add('item.starcatcher.boner_rod', 'Костяная удочка (рыба)')
+  event.add('item.starcatcher.boner_rod', 'Костяная удочка (мобы)')
   event.add('item.starcatcher.sky_rod', 'Небесная удочка (рыба)')
 })

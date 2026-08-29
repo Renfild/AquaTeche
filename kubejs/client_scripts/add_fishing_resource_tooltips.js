@@ -24,6 +24,7 @@ ItemEvents.tooltip((event) => {
     'industrialupgrade:blockresource/untreated_peat',
     'minecraft:copper_ore',
     'industrialupgrade:classicore/tin',
+    'minecraft:string',
   ], 'Бамбуковая удочка (Т-1)', (t) => t.aqua())
 
   addTier([
@@ -49,8 +50,26 @@ ItemEvents.tooltip((event) => {
   addTier([
     'industrialupgrade:baseore/aluminium',
     'industrialupgrade:baseore/silver',
+    'minecraft:obsidian',
+  ], 'Слизневая удочка (Т-5)', (t) => t.aqua())
+
+  addTier([
     'industrialupgrade:baseore/zinc',
-  ], 'Ледяная удочка (Т-6)', (t) => t.aqua())
+  ], 'Ледяная удочка (Т-6)', (t) => t.white())
+
+  addTier([
+    'minecraft:bone',
+    'minecraft:cobweb',
+    'minecraft:snow_block',
+    'minecraft:snowball',
+    'minecraft:rotten_flesh',
+    'minecraft:spider_eye',
+    'minecraft:gunpowder',
+    'minecraft:arrow',
+    'minecraft:ender_pearl',
+    'minecraft:phantom_membrane',
+    'minecraft:totem_of_undying',
+  ], 'Костяная удочка', (t) => t.gold())
 
   addTier([
     'minecraft:gold_ore',
@@ -75,7 +94,6 @@ ItemEvents.tooltip((event) => {
 
   addTier([
     'minecraft:diamond',
-    'minecraft:obsidian',
     'industrialupgrade:alloyingot/stainless_steel',
   ], 'Обсидиановая удочка (Т-10)', (t) => t.gray())
 
@@ -100,4 +118,14 @@ ItemEvents.tooltip((event) => {
     'industrialupgrade:asteroidore/asteroid_adamantium_ore',
     'minecraft:nether_star',
   ], 'Альфа-удочка (Т-13)', (t) => t.lightPurple())
+
+  event.add('starcatcher:boner_rod', [
+    Text.of('⚓ Костяная удочка').gold(),
+    Text.of('Ловит дроп враждебных мобов обычного мира: кости, паутина, снег, гниль, порох, стрелы, жемчуг…').gray(),
+    Text.of('Крафт: 3 алмаза + нить. Незера и Энда в пуле нет.').darkGray(),
+  ])
+  event.add('starcatcher:slimed_rod', [
+    Text.of('⚓ Слизневая (Т-5)').aqua(),
+    Text.of('С этой удочки уже ловится обсидиан — хватит на портал в Ад на плоту.').gray(),
+  ])
 })

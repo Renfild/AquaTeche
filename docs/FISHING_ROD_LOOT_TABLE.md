@@ -11,7 +11,7 @@
 4. Кол-во в стаке — диапазон в колонке «Кол-во».
 5. Рейт-мод в удочке (×2…×64) умножает количество.
 6. Бонусный treasure (навык / шторм Horizon / полная луна) — отдельно в конце.
-7. **Fish-only** (`sky_rod`, `boner_rod`) — только рыба StarCatcher, пул AquaTech **не** крутится.
+7. **Fish-only** (`sky_rod`) — только рыба StarCatcher. **Костяная** (`boner_rod`) крутит пул мобов.
 
 ---
 
@@ -29,7 +29,8 @@
 | 8% | `industrialupgrade:sapling/rubber_sapling` | 1 |
 | 10% | `minecraft:gravel` | 2–3 |
 | 10% | `minecraft:sand` | 2–3 |
-| 10% | `minecraft:birch_sapling` | 1 |
+| 6% | `minecraft:string` | 2–4 |
+| 4% | `minecraft:birch_sapling` | 1 |
 
 **Плюс пул (шанс каждого → потом 1–2 стака):**
 
@@ -39,6 +40,7 @@
 | 45% | `minecraft:dirt` | 1–3 |
 | 45% | `minecraft:clay_ball` | 1–3 |
 | 45% | `minecraft:bamboo` | 1–3 |
+| 50% | `minecraft:string` | 1–3 |
 | 35% | `minecraft:oak_sapling` | 1 |
 | 25% | `minecraft:birch_sapling` | 1 |
 | 35% | `industrialupgrade:sapling/rubber_sapling` | 1 |
@@ -107,8 +109,34 @@
 | 40% | `minecraft:iron_ore` | 1–2 |
 | 45% | `industrialupgrade:baseore/silver` | 1 |
 | 40% | `industrialupgrade:baseore/aluminium` | 1–2 |
+| 40% | `minecraft:obsidian` | 1–2 |
 
-Итог: **1–3** стака.
+Итог: **1–3** стака. Обсидиан здесь — портал в Ад с плота.
+
+---
+
+## Костяная — `starcatcher:boner_rod`
+
+Боковая. Крафт: 3 алмаза + нить. Не в цепи T1–T13.
+
+| Шанс | Предмет | Кол-во |
+|------|---------|--------|
+| 70% | `minecraft:bone` | 2–4 |
+| 55% | `minecraft:rotten_flesh` | 2–4 |
+| 50% | `minecraft:string` | 1–3 |
+| 45% | `minecraft:cobweb` | 1–2 |
+| 45% | `minecraft:snow_block` | 1–2 |
+| 45% | `minecraft:arrow` | 4–8 |
+| 40% | `minecraft:spider_eye` | 1–2 |
+| 40% | `minecraft:gunpowder` | 1–3 |
+| 35% | `minecraft:slime_ball` | 1–3 |
+| 25% | `minecraft:ender_pearl` | 1 |
+| 18% | `minecraft:phantom_membrane` | 1 |
+| 3% | `minecraft:totem_of_undying` | 1 |
+
+Итог: **2–4** стака. Ад/Энд-дроп не крутится.
+
+---
 
 ---
 
@@ -250,7 +278,6 @@
 | Удочка | Поведение |
 |--------|-----------|
 | `starcatcher:sky_rod` | Рыба StarCatcher (дефолт мода + мини-игра) |
-| `starcatcher:boner_rod` | Рыба StarCatcher (дефолт мода + мини-игра) |
 
 ---
 
@@ -282,7 +309,8 @@
 | 2 | humble | медь, олово, титан |
 | 3 | good_old | железо, spinel, редстоун, лазурит, Sr/Y/Tl |
 | 4 | naturalist | barium, strontium (крафт slimed) |
-| 5 | slimed | spinel, barium, polonium, Ag, Al |
+| 5 | slimed | spinel, barium, polonium, Ag, Al, **обсидиан** |
+| — | boner | дроп мобов overworld, паутина, снег |
 | 6 | iceborn | Al, Ag, Zn, W, Cr, золото |
 | 7 | starcatcher | золото, W, Cr, сапфир/топаз, кристалл |
 | 8 | azure_crystal | кристаллы, Ti, Co, алмаз |

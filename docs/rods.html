@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Удочки и дроп · AquaTech" />
   <meta name="twitter:description" content="13 тиров удочек: таблицы добычи от бамбука до квантового эндгейма." />
-<link rel="stylesheet" href="assets/css/site.css?v=20260828a" />
+<link rel="stylesheet" href="assets/css/site.css?v=20260829c" />
 </head>
 <body data-page="rods">
   <a class="skip-link" href="#main">К содержимому</a>
@@ -40,13 +40,13 @@
         <li data-site="rods_rule_1">Каждый предмет в пуле сначала кидает свой шанс.</li>
         <li data-site="rods_rule_2">Из успешно прошедших случайно оставляют 1–3 стака (у T1 доп. пула — 1–2).</li>
         <li data-site="rods_rule_3">Кол-во в стаке — диапазон из таблицы; множитель удочки его умножает.</li>
-        <li data-site="rods_rule_4">Костяная и небесная ловят только рыбу, без ресурсного пула.</li>
+        <li data-site="rods_rule_4">Костяная ловит дроп мобов обычного мира (кости, паутина, снег). Небесная — только рыба. Обсидиан с Т-5.</li>
       </ul>
       <nav class="loot-jump" aria-label="Тиры удочек">
         <a href="#t1">T1</a><a href="#t2">T2</a><a href="#t3">T3</a><a href="#t4">T4</a>
         <a href="#t5">T5</a><a href="#t6">T6</a><a href="#t7">T7</a><a href="#t8">T8</a>
         <a href="#t9">T9</a><a href="#t10">T10</a><a href="#t11">T11</a><a href="#t12">T12</a>
-        <a href="#t13">T13</a><a href="#fish">Рыба</a><a href="#treasure">Treasure</a>
+        <a href="#t13">T13</a><a href="#bone">Костяная</a><a href="#fish">Рыба</a><a href="#treasure">Treasure</a>
       </nav>
     </div>
   </section>
@@ -72,7 +72,8 @@
             <tr><td>8%</td><td>Резиновый саженец</td><td>1</td></tr>
             <tr><td>10%</td><td>Гравий</td><td>2–3</td></tr>
             <tr><td>10%</td><td>Песок</td><td>2–3</td></tr>
-            <tr><td>10%</td><td>Саженец берёзы</td><td>1</td></tr>
+            <tr><td>6%</td><td>Нить</td><td>2–4</td></tr>
+            <tr><td>4%</td><td>Саженец берёзы</td><td>1</td></tr>
             </tbody>
           </table>
         </div>
@@ -85,6 +86,7 @@
             <tr><td>45%</td><td>Земля</td><td>1–3</td></tr>
             <tr><td>45%</td><td>Глина</td><td>1–3</td></tr>
             <tr><td>45%</td><td>Бамбук</td><td>1–3</td></tr>
+            <tr><td>50%</td><td>Нить</td><td>1–3</td></tr>
             <tr><td>35%</td><td>Саженец дуба</td><td>1</td></tr>
             <tr><td>25%</td><td>Саженец берёзы</td><td>1</td></tr>
             <tr><td>35%</td><td>Резиновый саженец</td><td>1</td></tr>
@@ -180,11 +182,7 @@
             <tr><td>45%</td><td>Серебро</td><td>1</td></tr>
             <tr><td>40%</td><td>Железная руда</td><td>1–2</td></tr>
             <tr><td>40%</td><td>Алюминий</td><td>1–2</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </article>
-      <article class="loot-block" id="t6">
+            <tr><td>40%</td><td>Обсидиан</td><td>1–2</td></tr>
         <header class="loot-head">
           <div class="rod-tier">T6</div>
           <h2>Ледяная</h2>
@@ -366,21 +364,43 @@
         </div>
       </article>
 
-      <article class="loot-block" id="fish">
+      <article class="loot-block" id="bone">
         <header class="loot-head">
-          <div class="rod-tier">Рыба</div>
-          <h2>Костяная и небесная</h2>
-          <p>Ресурсный пул AquaTech не крутится — обычный рыбный улов.</p>
+          <div class="rod-tier">Бок</div>
+          <h2>Костяная</h2>
+          <p>Не в цепочке T1–T13. Крафт: 3 алмаза + нить. 2–4 стака из пула. Дроп враждебных мобов обычного мира, без Ада и Энда.</p>
         </header>
         <div class="loot-table-wrap">
           <table class="loot-table">
-            <thead><tr><th>Удочка</th><th>Поведение</th></tr></thead>
+            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>
             <tbody>
-              <tr><td>Костяная</td><td>Только рыба</td></tr>
-              <tr><td>Небесная</td><td>Только рыба</td></tr>
+            <tr><td>70%</td><td>Кость</td><td>2–4</td></tr>
+            <tr><td>55%</td><td>Гнилая плоть</td><td>2–4</td></tr>
+            <tr><td>50%</td><td>Нить</td><td>1–3</td></tr>
+            <tr><td>45%</td><td>Паутина</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Блок снега</td><td>1–2</td></tr>
+            <tr><td>45%</td><td>Стрелы</td><td>4–8</td></tr>
+            <tr><td>40%</td><td>Паучий глаз</td><td>1–2</td></tr>
+            <tr><td>40%</td><td>Порох</td><td>1–3</td></tr>
+            <tr><td>35%</td><td>Слизь</td><td>1–3</td></tr>
+            <tr><td>35%</td><td>Снежок</td><td>4–8</td></tr>
+            <tr><td>25%</td><td>Жемчуг Края</td><td>1</td></tr>
+            <tr><td>25%</td><td>Осколок призмарина</td><td>1–3</td></tr>
+            <tr><td>20%</td><td>Изумруд / железо</td><td>1</td></tr>
+            <tr><td>18%</td><td>Мембрана фантома</td><td>1</td></tr>
+            <tr><td>8%</td><td>Седло</td><td>1</td></tr>
+            <tr><td>3%</td><td>Тотем бессмертия</td><td>1</td></tr>
             </tbody>
           </table>
         </div>
+      </article>
+
+      <article class="loot-block" id="fish">
+        <header class="loot-head">
+          <div class="rod-tier">Рыба</div>
+          <h2>Небесная</h2>
+          <p>Ресурсный пул AquaTech не крутится — обычный рыбный улов StarCatcher.</p>
+        </header>
       </article>
 
       <article class="loot-block" id="treasure">
@@ -409,6 +429,6 @@
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260828a"></script>
+  <script src="assets/js/site.js?v=20260829d"></script>
 </body>
 </html>

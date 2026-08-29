@@ -50,7 +50,7 @@ public class FishingLootHandler {
         }
         if (rodStack.isEmpty()) return;
 
-        // Fish-only rods (boner/sky): leave StarCatcher alone — do not touch bait/rate/drops.
+        // Fish-only rods (sky): leave StarCatcher alone — do not touch bait/rate/drops.
         // AquaTech datapack "fish" (ores previewed as cod) compete in the global SC pool;
         // strip those fakes so bone/sky keep real starcatcher:* fish.
         if (FishingRodCompat.isFishOnlyRod(rodStack)) {
@@ -457,6 +457,8 @@ public class FishingLootHandler {
                     guaranteed = new ItemStack(Items.GRAVEL, 2 + random.nextInt(2));
                 } else if (rStart < 0.90f) {
                     guaranteed = new ItemStack(Items.SAND, 2 + random.nextInt(2));
+                } else if (rStart < 0.96f) {
+                    guaranteed = new ItemStack(Items.STRING, 2 + random.nextInt(3));
                 } else {
                     guaranteed = new ItemStack(Items.BIRCH_SAPLING, 1);
                 }
@@ -466,6 +468,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.DIRT, 1 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.CLAY_BALL, 1 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.BAMBOO, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.50f, new ItemStack(Items.STRING, 1 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.35f, new ItemStack(Items.OAK_SAPLING, 1));
                 maybeAdd(pool, random, 0.25f, new ItemStack(Items.BIRCH_SAPLING, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:sapling/rubber_sapling", Items.OAK_SAPLING, 1));
@@ -497,14 +500,47 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "slimed_rod" -> { // Tier 5: Slimed Rod (LV Ores & Polonium)
+            case "slimed_rod" -> { // Tier 5: Slimed Rod (LV Ores & Polonium + early obsidian)
                 maybeAdd(pool, random, 0.55f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/silver", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/aluminium", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.OBSIDIAN, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
+            }
+            case "boner_rod" -> { // Side rod: overworld hostile drops + cobweb/snow
+                maybeAdd(pool, random, 0.70f, new ItemStack(Items.BONE, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.COBWEB, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.SNOW_BLOCK, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.SNOWBALL, 4 + random.nextInt(5)));
+                maybeAdd(pool, random, 0.55f, new ItemStack(Items.ROTTEN_FLESH, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.50f, new ItemStack(Items.STRING, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.SPIDER_EYE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.GUNPOWDER, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.ARROW, 4 + random.nextInt(5)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.SLIME_BALL, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.25f, new ItemStack(Items.ENDER_PEARL, 1));
+                maybeAdd(pool, random, 0.18f, new ItemStack(Items.PHANTOM_MEMBRANE, 1));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.IRON_INGOT, 1));
+                maybeAdd(pool, random, 0.22f, new ItemStack(Items.CARROT, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.22f, new ItemStack(Items.POTATO, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.20f, new ItemStack(Items.REDSTONE, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.18f, new ItemStack(Items.GLOWSTONE_DUST, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.18f, new ItemStack(Items.SUGAR, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.15f, new ItemStack(Items.GLASS_BOTTLE, 1));
+                maybeAdd(pool, random, 0.15f, new ItemStack(Items.STICK, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.20f, new ItemStack(Items.EMERALD, 1));
+                maybeAdd(pool, random, 0.25f, new ItemStack(Items.PRISMARINE_SHARD, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.18f, new ItemStack(Items.PRISMARINE_CRYSTALS, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.12f, new ItemStack(Items.COPPER_INGOT, 1));
+                maybeAdd(pool, random, 0.08f, new ItemStack(Items.SADDLE, 1));
+                maybeAdd(pool, random, 0.03f, new ItemStack(Items.TOTEM_OF_UNDYING, 1));
+                pickFromPool(list, pool, random, 2, 4);
+                if (list.isEmpty()) {
+                    list.add(new ItemStack(Items.BONE, 2 + random.nextInt(3)));
+                }
             }
             case "iceborn_rod" -> { // Tier 6: Iceborn Rod (MV Silver & Aluminium)
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore/aluminium", Items.IRON_ORE, 1 + random.nextInt(2)));

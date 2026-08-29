@@ -24,10 +24,10 @@ ServerEvents.recipes((event) => {
       S: 'minecraft:string',
     }).id('aquatech:humble_rod_craft')
 
-    // Fish-only: Bone Rod
+    // Bone rod: overworld hostile drops (diamond craft)
     event.remove({ output: 'starcatcher:boner_rod' })
-    event.shaped('starcatcher:boner_rod', [' BB', ' SB', 'S  '], {
-      B: 'minecraft:bone',
+    event.shaped('starcatcher:boner_rod', [' DD', ' SD', 'S  '], {
+      D: 'minecraft:diamond',
       S: 'minecraft:string',
     }).id('aquatech:boner_rod_craft')
 
