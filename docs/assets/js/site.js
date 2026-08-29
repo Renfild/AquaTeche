@@ -4,6 +4,7 @@
     "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.83/AquaTech.exe";
   /* portal ui build: compact header + market lots */
   const CANONICAL = "https://aquateche.store";
+  const DISCORD = "https://discord.gg/3Khzr5z4fQ";
   const STORAGE_USER = "aquatech_user";
   const STORAGE_SOUND = "aquatech_sound";
   const API_BASE = "";
@@ -435,10 +436,11 @@
           ${coins}
           <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="${soundOn ? "true" : "false"}" aria-label="${soundOn ? "Выключить звуки" : "Включить звуки"}" title="Звуки интерфейса">${soundGlyph(soundOn)}</button>
           <div class="header-actions">
+            <a class="btn btn-ghost" href="${DISCORD}" target="_blank" rel="noopener noreferrer">Discord</a>
             ${
               user
                 ? `${user.is_admin ? '<a class="btn btn-ghost" href="admin.html">Админка</a>' : ""}
-                   <a class="btn btn-secondary" href="profile.html?u=${encodeURIComponent(user.nick)}">${esc(user.nick)}</a>
+                   <a class="btn btn-secondary" href="profile.html">${esc(user.nick)}</a>
                    <button class="btn btn-ghost" type="button" data-logout>Выйти</button>`
                 : `<a class="btn btn-secondary" href="login.html">Войти</a>`
             }
@@ -455,11 +457,12 @@
             ${user?.is_admin ? '<a href="admin.html">Админка</a>' : ""}
             ${
               user
-                ? `<a href="profile.html?u=${encodeURIComponent(user.nick)}">Профиль</a>
+                ? `<a href="profile.html">Кабинет</a>
                    <button type="button" data-logout>Выйти</button>`
                 : '<a href="register.html">Регистрация</a>'
             }
             <a class="nav-cta" href="${DOWNLOAD}">Скачать лаунчер</a>
+            <a href="${DISCORD}" target="_blank" rel="noopener noreferrer">Discord</a>
           </div>
         </div>
       </header>`;
@@ -544,6 +547,7 @@
             <a href="players.html">Поиск игроков</a>
             <a href="news.html">Новости</a>
             <a href="profile.html">Профили</a>
+            <a href="${DISCORD}" target="_blank" rel="noopener noreferrer">Discord</a>
           </div>
           <div>
             <h4>Проект</h4>
@@ -810,6 +814,581 @@
     return `<svg class="heart-icon" width="16" height="16" viewBox="0 0 24 24" fill="${filled ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>`;
   }
 
+  const LK_TABS = [
+    { id: "overview", label: "Обзор" },
+    { id: "skin", label: "Скин и плащ" },
+    { id: "theme", label: "Тема профиля" },
+    { id: "about", label: "О себе" },
+  ];
+
+  function avatarSrc(nick) {
+    return `/api/skins/${encodeURIComponent(nick)}/avatar`;
+  }
+
+  async function apiUpload(path, form) {
+    const res = await fetch(`${API_BASE}${path}`, { method: "POST", credentials: "include", body: form });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    return data;
+  }
+
+  function blitSkin(ctx, img, sx, sy, sw, sh, dx, dy, scale) {
+    ctx.drawImage(img, sx, sy, sw, sh, dx * scale, dy * scale, sw * scale, sh * scale);
+  }
+
+  function drawSkinFront(canvas, img) {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const scale = Math.max(4, Math.floor(canvas.width / 16));
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const hd = img.width >= 128 ? img.width / 64 : 1;
+    const s = (sx, sy, sw, sh, dx, dy) => blitSkin(ctx, img, sx * hd, sy * hd, sw * hd, sh * hd, dx, dy, scale);
+    s(8, 8, 8, 8, 4, 0);
+    s(40, 8, 8, 8, 4, 0);
+    s(44, 20, 4, 12, 0, 8);
+    s(20, 20, 8, 12, 4, 8);
+    if (img.height >= 64) s(36, 52, 4, 12, 12, 8);
+    else s(44, 20, 4, 12, 12, 8);
+    s(4, 20, 4, 12, 4, 20);
+    if (img.height >= 64) s(20, 52, 4, 12, 8, 20);
+    else s(4, 20, 4, 12, 8, 20);
+  }
+
+  function paintSkinCanvas(canvas, url) {
+    if (!canvas || !url) return;
+    const img = new Image();
+    img.onload = () => drawSkinFront(canvas, img);
+    img.src = url;
+  }
+
+  function lkTab() {
+    const h = (location.hash || "#overview").replace("#", "");
+    return LK_TABS.some((t) => t.id === h) ? h : "overview";
+  }
+
+  function lookCard(kind, title, hint, editable) {
+    const preview =
+      kind === "cape"
+        ? `<img class="look-cape" alt="" data-look-img="cape">`
+        : kind === "avatar"
+          ? `<img class="look-avatar" alt="" data-look-img="avatar">`
+          : `<canvas class="skin-canvas" width="80" height="160" data-look-canvas="skin" aria-label="Превью скина"></canvas>`;
+    const accept = kind === "avatar" ? "image/png,image/jpeg" : "image/png";
+    const dropAttrs = editable
+      ? `data-look-drop="${kind}" tabindex="0" role="button" aria-label="${title}: выбрать файл"`
+      : "";
+    const actions = editable
+      ? `<div class="look-actions">
+        <button type="button" class="btn btn-primary" data-look-upload="${kind}">Загрузить</button>
+        <button type="button" class="btn btn-ghost" data-look-delete="${kind}">Удалить</button>
+        <input type="file" accept="${accept}" hidden data-look-file="${kind}">
+      </div>
+      <p class="look-status" data-look-status="${kind}" aria-live="polite"></p>`
+      : "";
+    return `<article class="look-card ${kind === "avatar" ? "look-avatar-card" : ""}">
+      <h3>${title}</h3>
+      <div class="look-preview" ${dropAttrs}>
+        ${preview}
+      </div>
+      <p class="look-hint">${hint}</p>
+      ${actions}
+    </article>`;
+  }
+
+  function skinLookCard(title, hint, editable) {
+    const dropAttrs = editable
+      ? `data-look-drop="skin" tabindex="0" role="button" aria-label="${title}: выбрать файл"`
+      : "";
+    const actions = editable
+      ? `<div class="look-actions">
+        <button type="button" class="btn btn-primary" data-look-upload="skin">Загрузить</button>
+        <button type="button" class="btn btn-ghost" data-look-delete="skin">Удалить</button>
+        <input type="file" accept="image/png" hidden data-look-file="skin">
+      </div>
+      <p class="look-status" data-look-status="skin" aria-live="polite"></p>`
+      : "";
+    return `<article class="look-card look-skin-card">
+      <h3>${title}</h3>
+      <div class="look-preview look-preview-3d" data-look-host="skin" ${dropAttrs}>
+        <canvas class="skin-canvas" width="80" height="160" data-look-canvas="skin" aria-label="Превью скина"></canvas>
+      </div>
+      <p class="look-hint">${hint}</p>
+      ${actions}
+    </article>`;
+  }
+
+  const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const LOOK_RULES = {
+    skin: { dims: [[64, 64], [64, 32], [128, 128], [128, 64]], max: 131072 },
+    cape: { dims: [[64, 32], [128, 64]], max: 65536 },
+    avatar: { dims: null, max: 262144 },
+  };
+  let skinview3dPromise = null;
+
+  function loadSkinview3d() {
+    if (window.skinview3d) return Promise.resolve(window.skinview3d);
+    if (!skinview3dPromise) {
+      skinview3dPromise = new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = "/assets/js/vendor/skinview3d.bundle.js";
+        s.onload = () => (window.skinview3d ? resolve(window.skinview3d) : reject(new Error("skinview3d")));
+        s.onerror = () => reject(new Error("skinview3d"));
+        document.head.appendChild(s);
+      }).catch((err) => {
+        skinview3dPromise = null;
+        throw err;
+      });
+    }
+    return skinview3dPromise;
+  }
+
+  function setLookStatus(root, kind, text, tone) {
+    const el = root.querySelector(`[data-look-status="${kind}"]`);
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle("ok", tone === "ok");
+    el.classList.toggle("err", tone === "err");
+  }
+
+  function fileImageSize(file) {
+    return new Promise((resolve) => {
+      if (!file.type || !file.type.startsWith("image/")) return resolve(null);
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const size = { w: img.naturalWidth, h: img.naturalHeight };
+        URL.revokeObjectURL(url);
+        resolve(size);
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        resolve(null);
+      };
+      img.src = url;
+    });
+  }
+
+  async function renderOwnCabinet(root, profile, user, theme, socials, mine) {
+    const tab = lkTab();
+    const nav = LK_TABS.map(
+      (t) =>
+        `<a href="#${t.id}" ${t.id === tab ? 'aria-current="page"' : ""}>${t.label}</a>`
+    ).join("");
+    const badges = (profile.badges || [])
+      .map((b) => {
+        if (typeof b === "string") return `<div class="badge-card common"><span class="badge-title">${esc(b)}</span></div>`;
+        return `<div class="badge-card ${esc(b.rarity || "common")}"><span class="badge-title">${esc(b.title)}</span>${b.desc ? `<span class="badge-desc">${esc(b.desc)}</span>` : ""}</div>`;
+      })
+      .join("") || '<span class="muted-line">Пока пусто</span>';
+
+    root.innerHTML = `
+      <div class="lk-page">
+        <div class="lk-hero profile-cover ${esc(theme)}">
+          <div class="lk-hero-id">
+            <img src="${avatarSrc(profile.nick)}" alt="" width="64" height="64" onerror="this.onerror=null;this.src='${skinUrl(profile.nick)}'">
+            <div>
+              <h1>${esc(profile.nick)}</h1>
+              <span class="tag ${profile.privilege === "Создатель" || profile.privilege === "Владелец" ? "gold" : ""}">${esc(cleanPrivilege(profile.privilege))}</span>
+              ${
+                mine
+                  ? ""
+                  : `<button class="btn-like ${profile.has_liked ? "liked" : ""}" type="button" id="btn-like-profile">
+                      <span class="heart">${heartSvg(profile.has_liked)}</span>
+                      <span id="like-count">${profile.likes || 0}</span>
+                      <span style="font-size:0.82rem;font-weight:600;opacity:0.85">${profile.has_liked ? "Нравится" : "Похвалить"}</span>
+                    </button>`
+              }
+            </div>
+          </div>
+          <div class="lk-balance">
+            <div class="lk-balance-card">
+              <div><span>Монеты</span><strong>${Number(profile.coins || 0).toLocaleString("ru-RU")} ¤</strong></div>
+              ${mine ? `<a class="btn btn-primary" href="store.html">Магазин</a>` : ""}
+            </div>
+            <div class="lk-balance-card">
+              <div><span>Рыба</span><strong>${Number(profile.fish || 0).toLocaleString("ru-RU")}</strong></div>
+              <a class="btn btn-secondary" href="top.html">Топы</a>
+            </div>
+          </div>
+        </div>
+        <div class="lk-shell">
+          <nav class="lk-nav" aria-label="Кабинет">${nav}</nav>
+          <div class="lk-main">
+            <section class="lk-pane" data-lk-pane="overview" ${tab === "overview" ? "" : "hidden"}>
+              <h2>Обзор</h2>
+              <div class="stats-row">
+                <div class="stat-card"><strong>${Number(profile.coins || 0).toLocaleString("ru-RU")} ¤</strong><span>AquaCoins</span></div>
+                <div class="stat-card"><strong>${Number(profile.fish || 0).toLocaleString("ru-RU")}</strong><span>рыбы поймано</span></div>
+                <div class="stat-card"><strong>${esc(profile.playtime || (profile.playtime_hours || 0) + " ч")}</strong><span>в игре</span></div>
+                <div class="stat-card"><strong>${profile.views || 0}</strong><span>просмотры</span></div>
+              </div>
+              <div class="panel" style="margin-top:1.25rem">
+                <h3>Бейджи</h3>
+                <div class="badge-grid">${badges}</div>
+              </div>
+            </section>
+            <section class="lk-pane" data-lk-pane="skin" ${tab === "skin" ? "" : "hidden"}>
+              <h2>Скин и плащ</h2>
+              <div class="look-grid">
+                ${skinLookCard("Скин", mine ? "PNG 64×64, 64×32 или 128×128. Модель крутится мышкой. Загруженный скин появится в игре." : "Скин игрока в игре.", mine)}
+                ${lookCard("avatar", "Аватар", mine ? "Картинка на сайте. Можно перетащить файл в рамку." : "Аватар игрока на сайте.", mine)}
+                ${lookCard("cape", "Плащ", mine ? "PNG 64×32 или 128×64. Появится на сайте и на модели скина." : "Плащ на сайте.", mine)}
+              </div>
+            </section>
+            <section class="lk-pane" data-lk-pane="theme" ${tab === "theme" ? "" : "hidden"}>
+              <h2>Тема профиля</h2>
+              ${
+                mine
+                  ? `<form class="panel form" id="profile-edit-theme">
+                <div class="theme-selector-grid">
+                  ${THEMES.map(
+                    (t) => `<label class="theme-pill"><input type="radio" name="theme" value="${t.id}" ${t.id === theme ? "checked" : ""}><div class="theme-pill-content">${t.label}</div></label>`
+                  ).join("")}
+                </div>
+                <button class="btn btn-primary" type="submit" style="margin-top:1rem">Сохранить тему</button>
+              </form>`
+                  : `<p class="muted-line">Тема: ${esc((THEMES.find((t) => t.id === theme) || {}).label || theme)}</p>`
+              }
+            </section>
+            <section class="lk-pane" data-lk-pane="about" ${tab === "about" ? "" : "hidden"}>
+              <h2>О себе</h2>
+              ${
+                mine
+                  ? `<form class="panel form" id="profile-edit">
+                ${socials.length ? `<div class="profile-socials">${socials.join("")}</div>` : ""}
+                <div class="form-grid-2">
+                  <div class="field"><label for="status_message">Статус</label><input id="status_message" type="text" name="status_message" maxlength="80" value="${esc(profile.status_message || "")}"></div>
+                  <div class="field"><label for="fav_rod">Любимая удочка</label><input id="fav_rod" type="text" name="fav_rod" maxlength="50" value="${esc(profile.fav_rod || "")}"></div>
+                </div>
+                <div class="form-grid-2" style="margin-top:0.5rem">
+                  <div class="field"><label for="social_tg">Telegram</label><input id="social_tg" type="text" name="social_tg" value="${esc(profile.social_tg || "")}"></div>
+                  <div class="field"><label for="social_vk">VK</label><input id="social_vk" type="text" name="social_vk" value="${esc(profile.social_vk || "")}"></div>
+                </div>
+                <div class="field" style="margin-top:0.5rem"><label for="social_discord">Discord</label><input id="social_discord" type="text" name="social_discord" value="${esc(profile.social_discord || "")}"></div>
+                <div class="field" style="margin-top:0.5rem"><label for="bio">Био</label><textarea id="bio" name="bio" rows="3" maxlength="300">${esc(profile.bio || "")}</textarea></div>
+                <input type="hidden" name="theme" value="${esc(theme)}">
+                <button class="btn btn-primary" type="submit" style="margin-top:0.75rem">Сохранить</button>
+              </form>`
+                  : `<div class="panel">
+                ${profile.status_message ? `<p>${esc(profile.status_message)}</p>` : ""}
+                ${profile.fav_rod ? `<p>Любимая удочка: <strong>${esc(profile.fav_rod)}</strong></p>` : ""}
+                ${socials.length ? `<div class="profile-socials">${socials.join("")}</div>` : ""}
+                <p class="profile-bio">${esc(profile.bio || "Пока пусто.")}</p>
+              </div>`
+              }
+            </section>
+          </div>
+        </div>
+      </div>`;
+
+    function showTab(id) {
+      root.querySelectorAll("[data-lk-pane]").forEach((p) => {
+        p.hidden = p.dataset.lkPane !== id;
+      });
+      root.querySelectorAll(".lk-nav a").forEach((a) => {
+        if (a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
+      if (id === "skin") maybeSkinMount();
+      else pauseSkinViewer();
+    }
+
+    root.querySelector(".lk-nav")?.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href^='#']");
+      if (!a) return;
+      const id = a.getAttribute("href").slice(1);
+      if (!LK_TABS.some((t) => t.id === id)) return;
+      e.preventDefault();
+      history.replaceState(null, "", "#" + id);
+      showTab(id);
+    });
+
+    window.addEventListener("hashchange", () => showTab(lkTab()));
+
+    async function saveProfile(form) {
+      const fd = new FormData(form);
+      await api(`/api/profiles/${encodeURIComponent(profile.nick)}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          bio: fd.get("bio") ?? profile.bio,
+          theme: fd.get("theme") ?? theme,
+          status_message: fd.get("status_message") ?? profile.status_message,
+          fav_rod: fd.get("fav_rod") ?? profile.fav_rod,
+          social_tg: fd.get("social_tg") ?? profile.social_tg,
+          social_vk: fd.get("social_vk") ?? profile.social_vk,
+          social_discord: fd.get("social_discord") ?? profile.social_discord,
+        }),
+      });
+      toast("Сохранено");
+      if (soundOn) playTone("ok");
+    }
+
+    $("#profile-edit")?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      try {
+        await saveProfile(e.currentTarget);
+      } catch (err) {
+        toast(err.message || "Не удалось сохранить");
+      }
+    });
+    $("#profile-edit-theme")?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      try {
+        const fd = new FormData(e.currentTarget);
+        await api(`/api/profiles/${encodeURIComponent(profile.nick)}`, {
+          method: "PATCH",
+          body: JSON.stringify({
+            bio: profile.bio,
+            theme: fd.get("theme"),
+            status_message: profile.status_message,
+            fav_rod: profile.fav_rod,
+            social_tg: profile.social_tg,
+            social_vk: profile.social_vk,
+            social_discord: profile.social_discord,
+          }),
+        });
+        toast("Тема сохранена");
+        if (soundOn) playTone("ok");
+        root.querySelector(".lk-hero")?.classList.remove(...THEMES.map((t) => t.id));
+        root.querySelector(".lk-hero")?.classList.add("profile-cover", fd.get("theme"));
+      } catch (err) {
+        toast(err.message || "Не удалось сохранить");
+      }
+    });
+
+    let look = { urls: {} };
+    try {
+      look = await api(`/api/skins/${encodeURIComponent(profile.nick)}`);
+    } catch {
+      look = { urls: {} };
+    }
+    const skinUrlNow = look.urls?.skin;
+    if (skinUrlNow) paintSkinCanvas(root.querySelector("[data-look-canvas='skin']"), skinUrlNow);
+    const capeImg = root.querySelector("[data-look-img='cape']");
+    if (capeImg && look.urls?.cape) capeImg.src = look.urls.cape;
+    const avImg = root.querySelector("[data-look-img='avatar']");
+    if (avImg) {
+      avImg.src = look.urls?.avatar || avatarSrc(profile.nick);
+      avImg.onerror = () => {
+        avImg.onerror = null;
+        avImg.src = skinUrl(profile.nick);
+      };
+    }
+
+    const fallbackSkinUrl = `https://mc-heads.net/skin/${encodeURIComponent(profile.nick)}`;
+    let skinState = null;
+
+    function pauseSkinViewer() {
+      if (skinState) skinState.viewer.renderPaused = true;
+    }
+
+    function maybeSkinMount() {
+      const pane = root.querySelector("[data-lk-pane='skin']");
+      const host = root.querySelector("[data-look-host='skin']");
+      if (!pane || !host) return;
+      if (pane.hidden) {
+        pauseSkinViewer();
+        return;
+      }
+      if (skinState) {
+        skinState.viewer.renderPaused = false;
+        return;
+      }
+      const canvas = document.createElement("canvas");
+      canvas.className = "skin-viewer";
+      canvas.setAttribute("role", "img");
+      canvas.setAttribute("aria-label", "3D-превью скина");
+      loadSkinview3d()
+        .then((sv) => {
+          if (!host.isConnected) return;
+          const viewer = new sv.SkinViewer({
+            canvas,
+            width: Math.max(280, host.clientWidth - 24),
+            height: 400,
+          });
+          viewer.controls.enableZoom = false;
+          viewer.controls.enablePan = false;
+          viewer.zoom = 1.25;
+          if (!REDUCED_MOTION.matches) {
+            viewer.autoRotate = true;
+            viewer.autoRotateSpeed = 1.4;
+            viewer.animation = new sv.WalkingAnimation();
+            viewer.animation.speed = 0.7;
+          }
+          viewer.loadSkin(skinUrlNow || fallbackSkinUrl).catch(() => {});
+          if (look.urls?.cape) viewer.loadCape(look.urls.cape).catch(() => {});
+          host.classList.add("has-3d");
+          host.appendChild(canvas);
+          skinState = { viewer, host };
+          let downX = 0;
+          let downY = 0;
+          let moved = false;
+          host.addEventListener("pointerdown", (e) => {
+            downX = e.clientX;
+            downY = e.clientY;
+            moved = false;
+          });
+          host.addEventListener("pointermove", (e) => {
+            if (e.buttons && (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6)) moved = true;
+          });
+          host.addEventListener("pointerup", () => {
+            host._dragMoved = moved;
+          });
+          // Буфер канваса должен совпадать с отображаемым размером, иначе картинка плывёт.
+          const fit = () => {
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+            if (w > 80 && h > 80) {
+              viewer.width = w;
+              viewer.height = h;
+            }
+          };
+          if (window.ResizeObserver) new ResizeObserver(fit).observe(canvas);
+          fit();
+        })
+        .catch(() => {
+          /* WebGL или скрипт недоступны — остаётся плоское 2D-превью */
+        });
+    }
+    maybeSkinMount();
+
+    async function sendLook(kind, file) {
+      const rule = LOOK_RULES[kind];
+      const uploadBtn = root.querySelector(`[data-look-upload="${kind}"]`);
+      const btnLabel = uploadBtn ? uploadBtn.textContent : null;
+      setLookStatus(root, kind, "Загрузка…");
+      if (uploadBtn) {
+        uploadBtn.disabled = true;
+        uploadBtn.textContent = "Загрузка…";
+      }
+      try {
+        if (file.size > rule.max) throw new Error("Файл слишком большой");
+        if (kind === "avatar" && !/^image\/(png|jpeg)$/.test(file.type)) throw new Error("Нужен PNG или JPEG");
+        if (kind !== "avatar" && file.type !== "image/png") throw new Error("Нужен PNG");
+        if (rule.dims) {
+          const dims = await fileImageSize(file);
+          if (!dims || !rule.dims.some(([w, h]) => w === dims.w && h === dims.h)) {
+            throw new Error(kind === "skin" ? "Скин: PNG 64×64, 64×32 или 128×128" : "Плащ: PNG 64×32 или 128×64");
+          }
+        }
+        const form = new FormData();
+        form.append("kind", kind);
+        form.append("file", file);
+        const res = await apiUpload("/api/skins", form);
+        if (kind === "skin") {
+          paintSkinCanvas(root.querySelector("[data-look-canvas='skin']"), res.url);
+          if (skinState) skinState.viewer.loadSkin(res.url).catch(() => {});
+          setLookStatus(root, kind, "Готово! Если ты на сервере — скин обновится через несколько секунд, иначе при следующем входе.", "ok");
+        } else {
+          setLookStatus(root, kind, "Сохранено", "ok");
+        }
+        if (kind === "cape") {
+          if (capeImg) capeImg.src = res.url;
+          if (skinState) skinState.viewer.loadCape(res.url).catch(() => {});
+        }
+        if (kind === "avatar") {
+          const hero = root.querySelector(".lk-hero-id img");
+          if (hero) hero.src = res.url;
+          if (avImg) avImg.src = res.url;
+        }
+        toast("Загружено");
+        if (soundOn) playTone("ok");
+      } catch (err) {
+        setLookStatus(root, kind, err.message || "Не удалось загрузить", "err");
+        toast(err.message || "Не удалось загрузить");
+      } finally {
+        if (uploadBtn) {
+          uploadBtn.disabled = false;
+          uploadBtn.textContent = btnLabel || "Загрузить";
+        }
+      }
+    }
+
+    function bindKind(kind) {
+      const fileInput = root.querySelector(`[data-look-file="${kind}"]`);
+      const drop = root.querySelector(`[data-look-drop="${kind}"]`);
+      root.querySelector(`[data-look-upload="${kind}"]`)?.addEventListener("click", () => fileInput?.click());
+      drop?.addEventListener("click", () => {
+        if (drop._dragMoved) {
+          drop._dragMoved = false;
+          return;
+        }
+        fileInput?.click();
+      });
+      drop?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          fileInput?.click();
+        }
+      });
+      fileInput?.addEventListener("change", () => {
+        const f = fileInput.files?.[0];
+        if (f) sendLook(kind, f);
+        fileInput.value = "";
+      });
+      ["dragenter", "dragover"].forEach((ev) => {
+        drop?.addEventListener(ev, (e) => {
+          e.preventDefault();
+          drop.classList.add("is-over");
+        });
+      });
+      ["dragleave", "drop"].forEach((ev) => {
+        drop?.addEventListener(ev, (e) => {
+          e.preventDefault();
+          drop.classList.remove("is-over");
+        });
+      });
+      drop?.addEventListener("drop", (e) => {
+        const f = e.dataTransfer?.files?.[0];
+        if (f) sendLook(kind, f);
+      });
+      root.querySelector(`[data-look-delete="${kind}"]`)?.addEventListener("click", async () => {
+        if (!confirm(kind === "skin" ? "Снять скин с сайта и в игре?" : "Удалить файл?")) return;
+        try {
+          await api("/api/skins", { method: "DELETE", body: JSON.stringify({ kind }) });
+          toast("Удалено");
+          if (kind === "skin") {
+            const c = root.querySelector("[data-look-canvas='skin']");
+            c?.getContext("2d")?.clearRect(0, 0, c.width, c.height);
+            if (skinState) skinState.viewer.loadSkin(fallbackSkinUrl).catch(() => {});
+          }
+          if (kind === "cape") {
+            if (capeImg) capeImg.removeAttribute("src");
+            if (skinState) skinState.viewer.loadCape(null).catch(() => {});
+          }
+          if (kind === "avatar" && avImg) avImg.src = skinUrl(profile.nick);
+          setLookStatus(root, kind, kind === "skin" ? "Скин снят. В игре вернётся прежний после входа." : "Удалено", "ok");
+        } catch (err) {
+          toast(err.message || "Не удалось удалить");
+        }
+      });
+    }
+    if (mine) ["avatar", "skin", "cape"].forEach(bindKind);
+
+    const likeBtn = $("#btn-like-profile", root);
+    likeBtn?.addEventListener("click", async () => {
+      if (!user) {
+        toast("Войди, чтобы похвалить");
+        return;
+      }
+      try {
+        const res = await api(`/api/profiles/${encodeURIComponent(profile.nick)}/like`, {
+          method: "POST",
+          body: "{}",
+        });
+        if (res.ok) {
+          likeBtn.classList.toggle("liked", res.liked);
+          likeBtn.querySelector(".heart").innerHTML = heartSvg(res.liked);
+          $("#like-count", root).textContent = res.likes;
+          toast(res.liked ? "Похвалили" : "Лайк убран");
+        }
+      } catch (err) {
+        toast(err.message || "Не удалось поставить лайк");
+      }
+    });
+  }
+
   async function initProfile() {
     const root = $("#profile-root");
     if (!root) return;
@@ -867,162 +1446,7 @@
       socials.push(`<span class="social-chip">Discord: ${profile.social_discord}</span>`);
     }
 
-    root.innerHTML = `
-      <div class="profile-cover ${theme}">
-        <div class="profile-header-main">
-          <div class="profile-identity">
-            <img class="profile-avatar" src="${skinUrl(profile.nick)}" alt="${profile.nick}">
-            <div class="profile-meta">
-              <div class="profile-title-row">
-                <h1>${profile.nick}</h1>
-                <span class="tag ${profile.slug === "deluxe" || profile.slug === "ultimate" || profile.privilege === "Создатель" || profile.privilege === "Владелец" ? "gold" : ""}">${cleanPrivilege(profile.privilege)}</span>
-              </div>
-              ${profile.status_message ? `<div class="profile-status-badge">${profile.status_message}</div>` : ""}
-              ${profile.fav_rod ? `<div class="fav-rod-badge">Любимая удочка: <strong>${profile.fav_rod}</strong></div>` : ""}
-              ${socials.length ? `<div class="profile-socials">${socials.join("")}</div>` : ""}
-              ${profile.bio ? `<p class="profile-bio">${profile.bio}</p>` : ""}
-            </div>
-          </div>
-          <div class="profile-actions">
-            <button class="btn-like ${profile.has_liked ? "liked" : ""}" type="button" id="btn-like-profile" ${mine ? 'disabled title="Нельзя ставить лайк своему профилю"' : ""}>
-              <span class="heart">${heartSvg(profile.has_liked)}</span>
-              <span id="like-count">${profile.likes || 0}</span>
-              <span style="font-size:0.82rem;font-weight:600;opacity:0.85">${profile.has_liked ? "Вам нравится" : "Похвалить"}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="stats-row" style="margin-top:1.25rem">
-        <div class="stat-card"><strong>${Number(profile.coins || 0).toLocaleString("ru-RU")} ¤</strong><span>AquaCoins</span></div>
-        <div class="stat-card"><strong>${Number(profile.fish || 0).toLocaleString("ru-RU")}</strong><span>рыбы поймано</span></div>
-        <div class="stat-card"><strong>${profile.playtime || (profile.playtime_hours || 0) + " ч"}</strong><span>в игре</span></div>
-        <div class="stat-card"><strong>${profile.views || 0}</strong><span>просмотры</span></div>
-      </div>
-
-      <div class="panel" style="margin-top:1.25rem">
-        <h3>Бейджи и титулы</h3>
-        <div class="badge-grid">
-          ${(profile.badges || [])
-            .map((b) => {
-              if (typeof b === "string") {
-                return `<div class="badge-card common"><span class="badge-title">${b}</span></div>`;
-              }
-              const rarity = b.rarity || "common";
-              return `<div class="badge-card ${rarity}">
-                <span class="badge-title">${b.title}</span>
-                ${b.desc ? `<span class="badge-desc">${b.desc}</span>` : ""}
-              </div>`;
-            })
-            .join("") || '<span class="muted-line">Пока пусто</span>'}
-        </div>
-      </div>
-
-      ${
-        mine
-          ? `<form class="panel form" id="profile-edit" style="margin-top:1.25rem">
-              <h3>Кастомизация профиля</h3>
-              <p style="color:var(--muted);font-size:0.88rem;margin-top:0.25rem">Настройте внешний вид своей карточки игрока на сайте.</p>
-              
-              <div class="field" style="margin-top:1rem">
-                <label>Тема оформления профиля</label>
-                <div class="theme-selector-grid">
-                  ${THEMES.map(
-                    (t) => `
-                    <label class="theme-pill">
-                      <input type="radio" name="theme" value="${t.id}" ${t.id === theme ? "checked" : ""}>
-                      <div class="theme-pill-content">${t.label}</div>
-                    </label>`
-                  ).join("")}
-                </div>
-              </div>
-
-              <div class="form-grid-2" style="margin-top:0.5rem">
-                <div class="field">
-                  <label>Статус (до 80 символов)</label>
-                  <input type="text" name="status_message" maxlength="80" placeholder="Например: Ловлю на T10 Магматическую" value="${profile.status_message || ""}">
-                </div>
-                <div class="field">
-                  <label>Любимая удочка</label>
-                  <input type="text" name="fav_rod" maxlength="50" placeholder="Например: Алмазная удочка [T7]" value="${profile.fav_rod || ""}">
-                </div>
-              </div>
-
-              <div class="form-grid-2" style="margin-top:0.5rem">
-                <div class="field">
-                  <label>Telegram</label>
-                  <input type="text" name="social_tg" placeholder="@username" value="${profile.social_tg || ""}">
-                </div>
-                <div class="field">
-                  <label>VK</label>
-                  <input type="text" name="social_vk" placeholder="id или ник" value="${profile.social_vk || ""}">
-                </div>
-              </div>
-
-              <div class="field" style="margin-top:0.5rem">
-                <label>Discord</label>
-                <input type="text" name="social_discord" placeholder="username" value="${profile.social_discord || ""}">
-              </div>
-
-              <div class="field" style="margin-top:0.5rem">
-                <label>О себе (био)</label>
-                <textarea name="bio" rows="3" maxlength="300" placeholder="Расскажите о себе, своих рекордах в рыбалке или острове...">${profile.bio || ""}</textarea>
-              </div>
-
-              <button class="btn btn-primary" type="submit" style="margin-top:0.5rem">Сохранить профиль</button>
-            </form>`
-          : ""
-      }`;
-
-    // Wire Like Button
-    const likeBtn = $("#btn-like-profile");
-    likeBtn?.addEventListener("click", async () => {
-      if (!user) {
-        toast("Войдите в аккаунт, чтобы похвалить игрока");
-        return;
-      }
-      try {
-        const res = await api(`/api/profiles/${encodeURIComponent(profile.nick)}/like`, {
-          method: "POST",
-          body: "{}",
-        });
-        if (res.ok) {
-          likeBtn.classList.toggle("liked", res.liked);
-          likeBtn.querySelector(".heart").innerHTML = heartSvg(res.liked);
-          $("#like-count").textContent = res.likes;
-          toast(res.liked ? "Вы похвалили игрока!" : "Лайк убран");
-          if (soundOn) playTone("ok");
-        }
-      } catch (err) {
-        toast(err.message || "Не удалось поставить лайк");
-      }
-    });
-
-    // Wire Edit Form
-    const form = $("#profile-edit");
-    form?.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      try {
-        await api(`/api/profiles/${encodeURIComponent(profile.nick)}`, {
-          method: "PATCH",
-          body: JSON.stringify({
-            bio: fd.get("bio"),
-            theme: fd.get("theme"),
-            status_message: fd.get("status_message"),
-            fav_rod: fd.get("fav_rod"),
-            social_tg: fd.get("social_tg"),
-            social_vk: fd.get("social_vk"),
-            social_discord: fd.get("social_discord"),
-          }),
-        });
-        toast("Профиль успешно обновлён!");
-        if (soundOn) playTone("ok");
-        setTimeout(() => location.reload(), 600);
-      } catch (err) {
-        toast(err.message || "Не удалось сохранить");
-      }
-    });
+    await renderOwnCabinet(root, profile, user, theme, socials, mine);
   }
 
   function initAuth() {
@@ -1813,5 +2237,5 @@
     initReveal();
   });
 
-  window.AquaTechSite = { IP, DOWNLOAD, CANONICAL, toast, copyIP, api };
+  window.AquaTechSite = { IP, DOWNLOAD, DISCORD, CANONICAL, toast, copyIP, api };
 })();

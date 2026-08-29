@@ -66,6 +66,8 @@ Desktop.ini
 .DS_Store
 
 # Secrets — never commit!
+.dev.vars
+.wrangler/
 .gh_token
 .cf_token
 .cloudflare_token

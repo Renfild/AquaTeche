@@ -31,6 +31,11 @@ import {
 } from "../functions/api/profiles/[nick].js";
 import { onRequestPost as profileLikePost } from "../functions/api/profiles/[nick]/like.js";
 import {
+  onRequestGet as skinsGet,
+  onRequestPost as skinsPost,
+  onRequestDelete as skinsDelete,
+} from "../functions/api/skins.js";
+import {
   onRequestPost as syncPlayerPost,
   onRequestGet as syncPlayerGet,
 } from "../functions/api/sync/player.js";
@@ -144,6 +149,24 @@ async function handleApi(request, env) {
     const params = { id: adminNews[1] };
     if (method === "PATCH") return adminNewsPatch(ctx(request, env, params));
     if (method === "DELETE") return adminNewsDelete(ctx(request, env, params));
+  }
+
+  if (path === "/api/skins") {
+    if (method === "POST") return skinsPost(ctx(request, env));
+    if (method === "DELETE") return skinsDelete(ctx(request, env));
+  }
+  const skinFile = path.match(/^\/api\/skins\/([^/]+)\/(skin|cape|avatar)$/);
+  if (skinFile && method === "GET") {
+    return skinsGet(
+      ctx(request, env, {
+        nick: decodeURIComponent(skinFile[1]),
+        kind: skinFile[2],
+      })
+    );
+  }
+  const skinMeta = path.match(/^\/api\/skins\/([^/]+)$/);
+  if (skinMeta && method === "GET") {
+    return skinsGet(ctx(request, env, { nick: decodeURIComponent(skinMeta[1]) }));
   }
 
   const profileLikeMatch = path.match(/^\/api\/profiles\/([^/]+)\/like$/);

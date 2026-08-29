@@ -76,3 +76,11 @@ export async function gateNickLookup(db, request) {
   const ip = clientIp(request);
   return checkAndBump(db, `nick:${ip}`, NICK_LOOKUP_MAX, NICK_LOOKUP_WINDOW_MS);
 }
+
+const SKIN_MAX = 12;
+const SKIN_WINDOW_MS = 15 * 60 * 1000;
+
+export async function gateSkinUpload(db, request, nick) {
+  const ip = clientIp(request);
+  return checkAndBump(db, `skin:${ip}:${String(nick || "").toLowerCase()}`, SKIN_MAX, SKIN_WINDOW_MS);
+}
