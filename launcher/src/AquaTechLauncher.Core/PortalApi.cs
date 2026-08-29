@@ -16,6 +16,25 @@ public sealed record UserProfile(
     long HoursPlayed,
     long Likes);
 
+public sealed record NewsItem(string Title, string Body, string PublishedAt)
+{
+    /// <summary>Human-readable date ("8 августа 2026") with a raw-value fallback.</summary>
+    public string DateLabel
+    {
+        get
+        {
+            var months = new[]
+            {
+                "января", "февраля", "марта", "апреля", "мая", "июня",
+                "июля", "августа", "сентября", "октября", "ноября", "декабря",
+            };
+            if (DateOnly.TryParse(PublishedAt, out var d))
+                return $"{d.Day} {months[d.Month - 1]} {d.Year}";
+            return PublishedAt;
+        }
+    }
+}
+
 public static class PortalApi
 {
     private static readonly string[] ApiBases =
@@ -98,6 +117,38 @@ public static class PortalApi
 
     public const string UnclaimedNickMessage =
         "Этот ник уже есть с сервера. Задай пароль на странице регистрации.";
+
+    public static async Task<IReadOnlyList<NewsItem>> GetNewsAsync(CancellationToken ct = default)
+    {
+        foreach (var baseUrl in ApiBases)
+        {
+            try
+            {
+                var (status, body) = await HttpDownload.GetRawAsync($"{baseUrl}/api/news", ct);
+                if (status != 200 || string.IsNullOrWhiteSpace(body) || body.StartsWith("<"))
+                    continue;
+                using var doc = JsonDocument.Parse(body);
+                if (!doc.RootElement.TryGetProperty("news", out var arr) || arr.ValueKind != JsonValueKind.Array)
+                    continue;
+                var list = new List<NewsItem>();
+                foreach (var n in arr.EnumerateArray())
+                {
+                    var title = n.TryGetProperty("title", out var t) ? t.GetString() : null;
+                    var text = n.TryGetProperty("body", out var b) ? b.GetString() : null;
+                    var date = n.TryGetProperty("published_at", out var d) ? d.GetString() : null;
+                    if (!string.IsNullOrWhiteSpace(title))
+                        list.Add(new NewsItem(title!, text ?? "", date ?? ""));
+                }
+                if (list.Count > 0)
+                    return list;
+            }
+            catch
+            {
+                /* try next */
+            }
+        }
+        return [];
+    }
 
     public static async Task<bool> NickIsUnclaimedAsync(string nick, CancellationToken ct = default)
     {

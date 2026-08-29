@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace AquaTechLauncher.Core;
 
 public sealed class PlayOrchestrator
@@ -6,6 +8,9 @@ public sealed class PlayOrchestrator
     private readonly ForgeInstaller _forge = new();
     private readonly ManifestSync _sync = new();
     private readonly LaunchCommandBuilder _launch = new();
+
+    /// <summary>Living Minecraft process from the last successful Play, if any.</summary>
+    public Process? CurrentGame { get; private set; }
 
     public Task<PackManifest> FetchManifestAsync(string updateUrl, Action<string>? log = null, CancellationToken ct = default)
     {
@@ -57,6 +62,7 @@ public sealed class PlayOrchestrator
         var sessionToken = cfg.PortalSession ?? HttpDownload.GetPortalSession();
         var cmd = await _launch.BuildAsync(gameDir, username, cfg.RamMb, java, autoJoin, sessionToken, m => log(m, "dim"), ct);
         var proc = ProcessSpawner.Spawn(cmd, gameDir);
+        CurrentGame = proc;
         log($"Процесс Minecraft PID {proc.Id} — проверяем…", "dim");
 
         var polls = warm ? 8 : 16;

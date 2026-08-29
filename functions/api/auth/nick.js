@@ -27,5 +27,6 @@ export async function onRequestGet(context) {
   return json({
     ok: true,
     unclaimed: Boolean(user && isUnclaimedHash(user.password_hash)),
+    exists: Boolean(user),
   });
 }

@@ -178,6 +178,10 @@ ServerEvents.recipes((event) => {
   }
 
   // Keep Re-Avaritia's own Extreme Table recipe (7×7 tier-3) — do not replace with a cheap 3×3.
+  event.remove({ id: 'aquatech_ui:speed_upgrade' })
+  event.remove({ id: 'aquatech_ui:speed_x4_upgrade' })
+  event.remove({ id: 'aquatech_ui:sonar_goggles' })
+  event.remove({ output: 'aquatech_ui:sonar_goggles' })
   event.shaped('aquatech_ui:speed_upgrade', ['IRI', 'GRG', 'RGR'], {
     I: 'minecraft:iron_ingot',
     R: 'minecraft:redstone',
@@ -191,6 +195,7 @@ ServerEvents.recipes((event) => {
     C: 'minecraft:chest',
   }).id('aquatech:speed_x4_upgrade')
 
+  event.remove({ id: 'aquatech_ui:mesh_filter' })
   event.shaped('aquatech_ui:mesh_filter', ['SNS', 'NSN', 'SNS'], {
     S: 'minecraft:string',
     N: 'minecraft:iron_nugget',
@@ -205,24 +210,22 @@ ServerEvents.recipes((event) => {
     R: 'minecraft:redstone_block',
   }).id('aquatech:sonar_goggles')
 
-  event.shaped('aquatech_ui:abyssal_magnet', ['NDN', 'MEM', ' S '], {
-    N: 'minecraft:netherite_ingot',
-    D: 'minecraft:diamond_block',
-    M: 'minecraft:echo_shard',
-    E: 'minecraft:ender_eye',
-    S: 'minecraft:nether_star',
-  }).id('aquatech:abyssal_magnet')
+  // Keep datapack aquatech_ui:abyssal_magnet (iron/redstone/heart). Drop nether-star table craft.
+  event.remove({ id: 'aquatech:abyssal_magnet' })
 
   // One auto-fisher craft (also clears jar datapack duplicate)
+  // FIX: was craftable on vanilla table from cheap iron — now requires MV-tier IU parts.
   event.remove({ output: 'aquatech_ui:auto_fisher' })
   event.remove({ id: 'aquatech_ui:auto_fisher' })
   event.remove({ id: 'aquatech:auto_fisher' })
-  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SSS'], {
-    I: 'minecraft:iron_ingot',
-    F: 'minecraft:fishing_rod',
-    R: 'minecraft:redstone_block',
+  event.remove({ id: 'aquatech_ui:auto_fisher_jar' })
+  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SES'], {
+    I: 'industrialupgrade:itemingots/aluminium_ingot',
+    F: 'starcatcher:good_old_rod',
+    R: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic Circuit
     C: 'minecraft:chest',
-    S: 'minecraft:smooth_stone',
+    S: 'industrialupgrade:blockresource/reinforced_stone',
+    E: 'industrialupgrade:crafting_elements/crafting_20_element', // Improved Electric Motor
   }).id('aquatech:auto_fisher')
 
   event.shaped('aquatech_ui:seabed_dredger', ['DBD', 'RCR', 'SSS'], {
@@ -325,6 +328,10 @@ ServerEvents.recipes((event) => {
   event.remove({ id: 'aquatech:upgrade_ocean_bounty_3x3' })
   event.remove({ id: 'aquatech:upgrade_ocean_bounty_avaritia_extreme' })
   event.remove({ id: 'aquatech:upgrade_ocean_bounty_avaritia_sculk' })
+  event.remove({ id: 'aquatech_ui:upgrade_ocean_bounty' })
+  event.remove({ id: 'aquatech_ui:ocean_bounty_upgrade' })
+  event.remove({ id: 'aquatech:ocean_bounty_alias_1' })
+  event.remove({ id: 'aquatech:ocean_bounty_alias_2' })
 
   let oceanBountyResult = { item: 'aquatech_ui:upgrade_ocean_bounty', count: 1 }
 
@@ -443,10 +450,6 @@ ServerEvents.recipes((event) => {
       result: oceanBountyResult,
     }).id('aquatech:upgrade_ocean_bounty_ec_9x9')
   }
-
-  // Shapeless alias converters
-  event.shapeless('aquatech_ui:upgrade_ocean_bounty', ['aquatech_ui:ocean_bounty_upgrade']).id('aquatech:ocean_bounty_alias_1')
-  event.shapeless('aquatech_ui:ocean_bounty_upgrade', ['aquatech_ui:upgrade_ocean_bounty']).id('aquatech:ocean_bounty_alias_2')
 
   console.log('[AquaTech] Crafting recipes loaded.')
 })

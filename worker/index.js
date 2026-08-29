@@ -6,6 +6,7 @@ import { onRequestPost as registerPost } from "../functions/api/register.js";
 import { onRequestPost as loginPost } from "../functions/api/login.js";
 import { onRequestGet as authNickGet } from "../functions/api/auth/nick.js";
 import { onRequestPost as logoutPost } from "../functions/api/logout.js";
+import { onRequestPost as passwordPost } from "../functions/api/password.js";
 import { onRequestGet as meGet } from "../functions/api/me.js";
 import { onRequestGet as playersGet } from "../functions/api/players.js";
 import { onRequestGet as catalogGet } from "../functions/api/catalog.js";
@@ -84,6 +85,7 @@ async function handleApi(request, env) {
   if (path === "/api/login" && method === "POST") return loginPost(ctx(request, env));
   if (path === "/api/auth/nick" && method === "GET") return authNickGet(ctx(request, env));
   if (path === "/api/logout" && method === "POST") return logoutPost(ctx(request, env));
+  if (path === "/api/password" && method === "POST") return passwordPost(ctx(request, env));
   if (path === "/api/me" && method === "GET") return meGet(ctx(request, env));
   if (path === "/api/players" && method === "GET") return playersGet(ctx(request, env));
   if (path === "/api/catalog" && method === "GET") return catalogGet(ctx(request, env));

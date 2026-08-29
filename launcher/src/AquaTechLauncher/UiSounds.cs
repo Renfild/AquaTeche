@@ -18,7 +18,7 @@ public static class UiSounds
                 Kind.Copy => (880.0, 40),
                 _ => (660.0, 55),
             };
-            var wav = BuildWav(freq, ms, amplitude: 0.18);
+            var wav = BuildWav(freq, ms, amplitude: 0.09);
             using var msStream = new MemoryStream(wav);
             using var player = new SoundPlayer(msStream);
             player.Play();

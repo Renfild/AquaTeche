@@ -22,8 +22,10 @@ ItemEvents.modification((event) => {
   for (const [id, max] of Object.entries(rods)) {
     event.modify(id, (item) => {
       item.setMaxDamage(max)
+      // Rods are unique tools — never stack (64 rods in one slot breaks durability display)
+      item.maxStackSize = 1
     })
   }
 
-  console.log('[AquaTech] Rod durability applied to StarCatcher rods (setMaxDamage)')
+  console.log('[AquaTech] Rod durability applied + maxStackSize=1 (no stacking)')
 })

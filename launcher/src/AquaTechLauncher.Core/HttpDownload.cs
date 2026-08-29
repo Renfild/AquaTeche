@@ -36,8 +36,7 @@ public static class HttpDownload
     }
 
     public static void SetPortalSession(string? sessionId)
-    {
-        ClearPortalCookies();
+    {        ClearPortalCookies();
         if (string.IsNullOrWhiteSpace(sessionId))
             return;
         var s = sessionId.Trim();
@@ -72,6 +71,24 @@ public static class HttpDownload
     {
         foreach (Cookie c in Cookies.GetCookies(PortalUri)) c.Expired = true;
         foreach (Cookie c in Cookies.GetCookies(FallbackPortalUri)) c.Expired = true;
+    }
+
+    /// <summary>Small binary GET (images); null on any failure.</summary>
+    public static async Task<byte[]?> GetBytesAsync(string url, CancellationToken ct = default)
+    {
+        try
+        {
+            using var resp = await AssetClient.GetAsync(url, ct);
+            if (!resp.IsSuccessStatusCode) return null;
+            var media = resp.Content.Headers.ContentType?.MediaType;
+            if (media != null && !media.StartsWith("image/", StringComparison.OrdinalIgnoreCase) && !media.Contains("octet-stream"))
+                return null;
+            return await resp.Content.ReadAsByteArrayAsync(ct);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public static async Task DownloadAsync(string url, string destPath, CancellationToken ct = default)

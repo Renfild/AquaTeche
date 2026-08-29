@@ -9,6 +9,7 @@ import net.aquatech.ui.fishing.AquaTechFishingRodItem;
 import net.aquatech.ui.fishing.CustomFishingLootManager;
 import net.aquatech.ui.fishing.FishingLootHandler;
 import net.aquatech.ui.fishing.FishingRodCompat;
+import net.aquatech.ui.fishing.OceanEventsService;
 import net.aquatech.ui.horizon.HorizonRoute;
 import net.aquatech.ui.horizon.StormEvent;
 import net.aquatech.ui.network.NetworkHandler;
@@ -105,6 +106,12 @@ public final class AquaTechCommand {
                         .then(Commands.literal("off").executes(ctx -> setStorm(ctx, false)))
                         .then(Commands.literal("auto").executes(AquaTechCommand::stormAuto))
                         .then(Commands.literal("status").executes(AquaTechCommand::stormStatus)))
+                .then(Commands.literal("goldstorm")
+                        .requires(s -> s.hasPermission(2))
+                        .executes(ctx -> goldStorm(ctx, 10))
+                        .then(Commands.literal("stop").executes(AquaTechCommand::goldStormStop))
+                        .then(Commands.argument("minutes", IntegerArgumentType.integer(1, 60))
+                                .executes(ctx -> goldStorm(ctx, IntegerArgumentType.getInteger(ctx, "minutes")))))
                 // player-facing
                 .then(Commands.literal("daily")
                         .executes(AquaTechCommand::dailySelf))
@@ -410,6 +417,18 @@ public final class AquaTechCommand {
 
     private static int stormStatus(CommandContext<CommandSourceStack> ctx) {
         ctx.getSource().sendSuccess(() -> Component.literal(StormEvent.statusLine()), false);
+        return 1;
+    }
+
+    private static int goldStorm(CommandContext<CommandSourceStack> ctx, int minutes) {
+        int mins = OceanEventsService.startGoldStorm(ctx.getSource().getServer(), minutes);
+        ctx.getSource().sendSuccess(() -> Component.literal("§6Золотая буря §f" + mins + " мин. §7Останови: /aquatech goldstorm stop"), true);
+        return mins;
+    }
+
+    private static int goldStormStop(CommandContext<CommandSourceStack> ctx) {
+        OceanEventsService.stopGoldStorm(ctx.getSource().getServer());
+        ctx.getSource().sendSuccess(() -> Component.literal("§7Золотая буря выключена."), true);
         return 1;
     }
 

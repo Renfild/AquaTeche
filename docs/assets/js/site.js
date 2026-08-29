@@ -818,6 +818,7 @@
     { id: "overview", label: "Обзор" },
     { id: "skin", label: "Скин и плащ" },
     { id: "theme", label: "Тема профиля" },
+    { id: "password", label: "Пароль" },
     { id: "about", label: "О себе" },
   ];
 
@@ -1051,6 +1052,20 @@
                   : `<p class="muted-line">Тема: ${esc((THEMES.find((t) => t.id === theme) || {}).label || theme)}</p>`
               }
             </section>
+            <section class="lk-pane" data-lk-pane="password" ${tab === "password" ? "" : "hidden"}>
+              <h2>Смена пароля</h2>
+              ${
+                mine
+                  ? `<form class="panel form" id="password-change">
+                <div class="field"><label for="pw-old">Текущий пароль</label><input id="pw-old" name="old" type="password" autocomplete="current-password" required></div>
+                <div class="field"><label for="pw-next">Новый пароль (от 8 символов)</label><input id="pw-next" name="next" type="password" minlength="8" autocomplete="new-password" required></div>
+                <div class="field"><label for="pw-next2">Повтори новый пароль</label><input id="pw-next2" name="next2" type="password" autocomplete="new-password" required></div>
+                <p class="field-error" data-pw-error role="alert" aria-live="polite"></p>
+                <button class="btn btn-primary" type="submit">Сменить пароль</button>
+              </form>`
+                  : `<p class="muted-line">Только для своего профиля.</p>`
+              }
+            </section>
             <section class="lk-pane" data-lk-pane="about" ${tab === "about" ? "" : "hidden"}>
               <h2>О себе</h2>
               ${
@@ -1157,6 +1172,29 @@
       }
     });
 
+    $("#password-change")?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const errEl = root.querySelector("[data-pw-error]");
+      if (errEl) errEl.textContent = "";
+      const fd = new FormData(e.currentTarget);
+      if (fd.get("next") !== fd.get("next2")) {
+        if (errEl) errEl.textContent = "Пароли не совпадают";
+        return;
+      }
+      try {
+        await api("/api/password", {
+          method: "POST",
+          body: JSON.stringify({ old: fd.get("old"), next: fd.get("next") }),
+        });
+        toast("Пароль изменён");
+        if (soundOn) playTone("ok");
+        e.currentTarget.reset();
+      } catch (err) {
+        if (errEl) errEl.textContent = err.message || "Не удалось сменить пароль";
+        toast(err.message || "Не удалось сменить пароль");
+      }
+    });
+
     let look = { urls: {} };
     try {
       look = await api(`/api/skins/${encodeURIComponent(profile.nick)}`);
@@ -1207,7 +1245,7 @@
             width: Math.max(280, host.clientWidth - 24),
             height: 400,
           });
-          viewer.controls.enableZoom = false;
+          viewer.controls.enableZoom = true;
           viewer.controls.enablePan = false;
           viewer.zoom = 1.25;
           if (!REDUCED_MOTION.matches) {
@@ -1221,6 +1259,26 @@
           host.classList.add("has-3d");
           host.appendChild(canvas);
           skinState = { viewer, host };
+          const zoomBox = document.createElement("div");
+          zoomBox.className = "skin-zoom";
+          zoomBox.innerHTML = `
+            <button type="button" class="skin-zoom-btn" data-zoom="in" aria-label="Приблизить">+</button>
+            <button type="button" class="skin-zoom-btn" data-zoom="out" aria-label="Отдалить">−</button>
+            <button type="button" class="skin-zoom-btn" data-zoom="reset" aria-label="Сбросить масштаб">⟲</button>`;
+          zoomBox.querySelectorAll("[data-zoom]").forEach((b) => {
+            b.addEventListener("pointerdown", (e) => e.stopPropagation());
+            b.addEventListener("click", (e) => {
+              e.stopPropagation();
+              const dir = b.getAttribute("data-zoom");
+              if (dir === "reset") {
+                viewer.zoom = 1.25;
+                return;
+              }
+              const z = viewer.zoom * (dir === "in" ? 1.25 : 0.8);
+              viewer.zoom = Math.min(4, Math.max(0.4, z));
+            });
+          });
+          host.appendChild(zoomBox);
           let downX = 0;
           let downY = 0;
           let moved = false;
@@ -1317,6 +1375,7 @@
         fileInput?.click();
       });
       drop?.addEventListener("keydown", (e) => {
+        if (e.target.closest(".skin-zoom")) return;
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           fileInput?.click();
@@ -1447,6 +1506,61 @@
     }
 
     await renderOwnCabinet(root, profile, user, theme, socials, mine);
+  }
+
+  function initReset() {
+    const form = $("#reset-form");
+    if (!form) return;
+    const claimForm = $("#reset-claim-form");
+    const supportBox = $("#reset-step-support");
+    let nick = "";
+
+    function resetError(text) {
+      document.querySelectorAll("[data-reset-error]").forEach((el) => {
+        el.textContent = text || "";
+      });
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      nick = ($("#reset-nick")?.value || "").trim();
+      resetError("");
+      try {
+        const data = await api(`/api/auth/nick?nick=${encodeURIComponent(nick)}`);
+        if (data.unclaimed || data.exists === false) {
+          form.hidden = true;
+          claimForm.hidden = false;
+          $("#reset-claim-title").textContent = `Задай пароль для ${nick}`;
+          $("#reset-password")?.focus();
+        } else {
+          form.hidden = true;
+          supportBox.hidden = false;
+        }
+      } catch (err) {
+        resetError(err.message || "Не удалось проверить ник");
+      }
+    });
+
+    claimForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.currentTarget);
+      if (fd.get("password") !== fd.get("password2")) {
+        resetError("Пароли не совпадают");
+        return;
+      }
+      try {
+        await api("/api/register", {
+          method: "POST",
+          body: JSON.stringify({ nick, password: fd.get("password") }),
+        });
+        toast("Пароль задан! Теперь войди.");
+        setTimeout(() => {
+          location.href = "login.html";
+        }, 600);
+      } catch (err) {
+        resetError(err.message || "Не удалось задать пароль");
+      }
+    });
   }
 
   function initAuth() {
@@ -1585,7 +1699,19 @@
     ],
   };
 
+  const RARITY_LABEL = {
+    common: "Обычный",
+    uncommon: "Необычный",
+    rare: "Редкий",
+    epic: "Эпический",
+    legendary: "Легендарный",
+    mythic: "Мифический",
+    exotic: "Экзотический",
+  };
+
   function openLootModal(slug) {
+    const live = (window.__liveCases || []).find((c) => c.slug === slug);
+    if (live) return openLiveLootModal(live);
     const item = (FALLBACK_CATALOG.case || []).find((c) => c.slug === slug);
     const loot = CASE_LOOT_TABLES[slug] || [];
     if (!item) return;
@@ -1633,6 +1759,93 @@
     modal.addEventListener("click", (e) => {
       if (e.target === modal) modal.classList.remove("open");
     });
+  }
+
+  function openLiveLootModal(c) {
+    let modal = document.getElementById("loot-modal");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "loot-modal";
+      modal.className = "loot-modal-overlay";
+      document.body.appendChild(modal);
+    }
+    const rows = [...c.loot].sort((a, b) => b.weight - a.weight);
+    modal.innerHTML = `
+      <div class="loot-modal-card">
+        <div class="loot-modal-header">
+          <div>
+            <span class="rarity-badge rarity-${esc(c.rarity)}">${RARITY_LABEL[c.rarity] || esc(c.rarity)}</span>
+            <h3>${esc(c.title)}</h3>
+          </div>
+          <button class="loot-modal-close" type="button" aria-label="Закрыть">✕</button>
+        </div>
+        <p style="color:var(--muted);margin-bottom:1.25rem">Стоимость открытия: <b style="color:var(--gold)">${Number(c.cost).toLocaleString("ru-RU")} ¤</b>. Шансы считаются по весам из конфига сервера.</p>
+        <div class="loot-items-list">
+          ${rows
+            .map(
+              (l) => `
+            <div class="loot-item-row">
+              <div class="loot-item-info">
+                <span class="loot-item-name">${esc(l.name)}</span>
+                <span class="loot-item-count">${l.min < l.max ? `${l.min}–${l.max}` : l.min} шт</span>
+              </div>
+              <div class="loot-item-chance">${l.chance}%</div>
+            </div>`
+            )
+            .join("")}
+        </div>
+        <div style="margin-top:1.5rem;text-align:center">
+          <small style="color:var(--muted)">Открывается в игре: меню F4</small>
+        </div>
+      </div>
+    `;
+    modal.classList.add("open");
+    modal.querySelector(".loot-modal-close")?.addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("open");
+    });
+  }
+
+  function caseCard(c) {
+    const top = [...c.loot].sort((a, b) => b.weight - a.weight).slice(0, 3);
+    return `<article class="case-card reveal">
+      <div class="case-card-head">
+        <span class="rarity-badge rarity-${esc(c.rarity)}">${RARITY_LABEL[c.rarity] || esc(c.rarity)}</span>
+        <span class="case-cost">${Number(c.cost).toLocaleString("ru-RU")} ¤</span>
+      </div>
+      <h3>${esc(c.title)}</h3>
+      <ul class="case-top">
+        ${top
+          .map(
+            (l) => `<li><span>${esc(l.name)}</span><b>${l.chance}%</b></li>`
+          )
+          .join("")}
+      </ul>
+      <button class="btn btn-secondary" style="margin-top:auto;width:100%" type="button" data-view-loot="${esc(c.slug)}">Состав и шансы</button>
+    </article>`;
+  }
+
+  async function initCasesLive() {
+    const root = $("#cases-root");
+    if (!root) return;
+    root.innerHTML = `<p class="muted-line">Загрузка кейсов…</p>`;
+    let cases = [];
+    try {
+      const data = await api("/data/cases.json");
+      cases = data.cases || [];
+    } catch {
+      cases = [];
+    }
+    if (!cases.length) {
+      await initCatalog("case");
+      return;
+    }
+    window.__liveCases = cases;
+    root.innerHTML = cases.map(caseCard).join("");
+    root.querySelectorAll("[data-view-loot]").forEach((btn) => {
+      btn.addEventListener("click", () => openLootModal(btn.getAttribute("data-view-loot")));
+    });
+    revealScan(root);
   }
 
   function catalogCard(item, kind) {
@@ -1882,8 +2095,35 @@
       },
       { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
-    nodes.forEach((n) => io.observe(n));
+    nodes.forEach((n) => n.classList.contains("in") || io.observe(n));
     document.querySelectorAll(".hero .reveal").forEach((n) => n.classList.add("in"));
+  }
+
+  /** Re-run reveal for dynamically rendered containers (grids get a small stagger). */
+  function revealScan(scope) {
+    const nodes = (scope || document).querySelectorAll(".reveal:not(.in)");
+    if (!nodes.length) return;
+    if (reduceMotion) {
+      nodes.forEach((n) => n.classList.add("in"));
+      return;
+    }
+    revealScan._io =
+      revealScan._io ||
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              revealScan._io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+    nodes.forEach((n, i) => {
+      if (!n.style.transitionDelay && i < 6) n.style.transitionDelay = `${Math.min(i * 45, 240)}ms`;
+      revealScan._io.observe(n);
+    });
   }
 
   async function refreshSession() {
@@ -2226,9 +2466,10 @@
     initPlayers();
     initProfile();
     initAuth();
+    initReset();
     initLive();
     initCatalog("store");
-    initCatalog("case");
+    initCasesLive();
     await initTrends();
     await initHomeFishTop();
     await initMarket();

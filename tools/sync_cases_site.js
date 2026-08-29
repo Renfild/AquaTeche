@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+/**
+ * Syncs live server case config (server/config/aqualumen/cases.json) into the
+ * static site payload (docs/data/cases.json). The server file is the source of
+ * truth; rerun this after changing cases on the server side:
+ *   node tools/sync_cases_site.js
+ */
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.resolve(__dirname, "..");
+const SRC = path.join(ROOT, "server", "config", "aqualumen", "cases.json");
+const OUT = path.join(ROOT, "docs", "data", "cases.json");
+
+const src = JSON.parse(fs.readFileSync(SRC, "utf8"));
+const cases = (src.cases || []).map((c) => {
+  const total = (c.loot || []).reduce((s, l) => s + (Number(l.weight) || 0), 0);
+  return {
+    slug: c.id,
+    title: c.title,
+    rarity: c.rarity,
+    cost: c.costCoins || 0,
+    loot: (c.loot || []).map((l) => ({
+      name: l.label,
+      type: l.type || "item",
+      min: l.min,
+      max: l.max,
+      weight: l.weight,
+      chance: total ? Math.round(((Number(l.weight) || 0) / total) * 1000) / 10 : 0,
+    })),
+  };
+});
+
+fs.mkdirSync(path.dirname(OUT), { recursive: true });
+fs.writeFileSync(OUT, JSON.stringify({ cases }, null, 2) + "\n");
+console.log(`Wrote ${cases.length} cases -> ${path.relative(ROOT, OUT)}`);

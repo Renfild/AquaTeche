@@ -65,6 +65,13 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
+# Runtime caches & world data — never commit
+server/modernfix/structureCacheV1/
+server/plugins/Chunky/tasks/
+server/easy_npc/backup/
+server/world/data/
+server/world/datapacks/
+
 # Secrets — never commit!
 .dev.vars
 .wrangler/
@@ -81,6 +88,7 @@ server/config/aquatech_mysql.json
 .r2.json
 .mimosa/
 .zcode/
+.agents/
 node_modules/
 
 # Orphan gitlink (no .gitmodules) � breaks Cloudflare Pages submodule update

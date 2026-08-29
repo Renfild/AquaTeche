@@ -2,7 +2,7 @@ namespace AquaTechLauncher.Core;
 
 public static class LauncherConstants
 {
-    public const string Version = "2.9.83";
+    public const string Version = "2.9.89";
     public const string McVersion = "1.20.1";
     public const string ForgeVersion = "47.4.0";
     public const string McpVersion = "20230612.114412";
@@ -15,6 +15,17 @@ public static class LauncherConstants
 
     public const string PortalApiBase = "https://aquateche.store";
     public const string FallbackPortalApiBase = "https://aquatech.santcrail.workers.dev";
+
+    /// <summary>
+    /// Discord application id for Rich Presence. Create an app at
+    /// discord.com/developers/applications, upload the "aquatech" asset, paste the id here
+    /// (or set AQUATECH_DISCORD_CLIENT_ID). Empty = presence disabled.
+    /// </summary>
+    public static string DiscordClientId =>
+        Environment.GetEnvironmentVariable("AQUATECH_DISCORD_CLIENT_ID") ?? "";
+
+    public static string PortalLoginUrl(int callbackPort) =>
+        $"{PortalApiBase}/login?launcher=1&port={callbackPort}";
     public const string BootstrapManifestUrl =
         "https://aquatech.santcrail.workers.dev/bootstrap.json";
 

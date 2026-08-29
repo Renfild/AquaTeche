@@ -87,7 +87,7 @@ func main() {
 		finalZip := filepath.Join(root, "AquaTechLauncher.zip")
 		if err := downloadFile(zipURL, tmpZip, func(p float64) {
 			ui.SetProgress(10 + int(p*70))
-			ui.SetStatus(fmt.Sprintf("Скачиваем лаунчер… %d%%", int(p*100)))
+			ui.SetStatus("Скачиваем лаунчер…")
 		}); err != nil {
 			logf(logFile, "download err: %v", err)
 			msgBox("AquaTech", "Не удалось скачать лаунчер:\n"+err.Error())

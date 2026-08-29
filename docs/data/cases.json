@@ -1,0 +1,1068 @@
+{
+  "cases": [
+    {
+      "slug": "starter",
+      "title": "Кейс I: Первопроходец Океана",
+      "rarity": "common",
+      "cost": 2500,
+      "loot": [
+        {
+          "name": "Алмазы",
+          "type": "item",
+          "min": 3,
+          "max": 6,
+          "weight": 10,
+          "chance": 2
+        },
+        {
+          "name": "Сетчатый фильтр",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 25,
+          "chance": 5
+        },
+        {
+          "name": "Железные слитки",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Медные слитки",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 60,
+          "chance": 12
+        },
+        {
+          "name": "Оловянная руда",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 60,
+          "chance": 12
+        },
+        {
+          "name": "Свинцовая руда",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Плавильная смесь",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Плавильные кирпичи",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Кожа для мехов",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Каменный уголь",
+          "type": "item",
+          "min": 32,
+          "max": 64,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Редстоун",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 30,
+          "chance": 6
+        },
+        {
+          "name": "AquaCoins (Куш)",
+          "type": "coins",
+          "min": 3500,
+          "max": 6000,
+          "weight": 25,
+          "chance": 5
+        }
+      ]
+    },
+    {
+      "slug": "smeltery",
+      "title": "Кейс II: Инженер Плавильни",
+      "rarity": "uncommon",
+      "cost": 10000,
+      "loot": [
+        {
+          "name": "Контроллер плавильни",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 10,
+          "chance": 2
+        },
+        {
+          "name": "Блоки корпуса плавильни",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 30,
+          "chance": 6
+        },
+        {
+          "name": "Титановая руда",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Бериллиевая руда",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Стронциевая руда",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Иттриевая руда",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Таллиевая руда",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Бронзовые слитки",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 60,
+          "chance": 12
+        },
+        {
+          "name": "Стержни Блейза",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Ведро лавы для плавки",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 35,
+          "chance": 7
+        },
+        {
+          "name": "Золотые слитки",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "AquaCoins (Джекпот)",
+          "type": "coins",
+          "min": 15000,
+          "max": 25000,
+          "weight": 35,
+          "chance": 7
+        }
+      ]
+    },
+    {
+      "slug": "steam",
+      "title": "Кейс III: Паровая Энергия",
+      "rarity": "rare",
+      "cost": 45000,
+      "loot": [
+        {
+          "name": "Базовый корпус механизма",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 15,
+          "chance": 3
+        },
+        {
+          "name": "Электронные схемы IU",
+          "type": "item",
+          "min": 6,
+          "max": 12,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Стальные слитки",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 60,
+          "chance": 12
+        },
+        {
+          "name": "Резина IU",
+          "type": "item",
+          "min": 32,
+          "max": 64,
+          "weight": 60,
+          "chance": 12
+        },
+        {
+          "name": "Серебряная руда",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Никелевая руда",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Ускорители (Оверклокеры)",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 35,
+          "chance": 7
+        },
+        {
+          "name": "Аккумуляторы RE-Battery",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Изолированные медные провода",
+          "type": "item",
+          "min": 32,
+          "max": 64,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Модуль ускорения AquaTech",
+          "type": "item",
+          "min": 1,
+          "max": 2,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "AquaCoins (Куш)",
+          "type": "coins",
+          "min": 60000,
+          "max": 100000,
+          "weight": 35,
+          "chance": 7
+        },
+        {
+          "name": "Гемы",
+          "type": "gems",
+          "min": 5,
+          "max": 10,
+          "weight": 25,
+          "chance": 5
+        }
+      ]
+    },
+    {
+      "slug": "flora",
+      "title": "Кейс IV: Ботаническая Флора",
+      "rarity": "epic",
+      "cost": 150000,
+      "loot": [
+        {
+          "name": "Слитки манастали",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 61,
+          "chance": 12.2
+        },
+        {
+          "name": "Жемчуг маны",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 51,
+          "chance": 10.2
+        },
+        {
+          "name": "Алмазы маны",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 51,
+          "chance": 10.2
+        },
+        {
+          "name": "Руны Воды",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "Руны Огня",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "Руны Маны",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "Улучшенный корпус механизма",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 31,
+          "chance": 6.2
+        },
+        {
+          "name": "Улучшенные микросхемы",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "Энергетические кристаллы",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "AquaCoins (Джекпот)",
+          "type": "coins",
+          "min": 200000,
+          "max": 350000,
+          "weight": 51,
+          "chance": 10.2
+        },
+        {
+          "name": "Гемы",
+          "type": "gems",
+          "min": 10,
+          "max": 20,
+          "weight": 51,
+          "chance": 10.2
+        }
+      ]
+    },
+    {
+      "slug": "applied",
+      "title": "Кейс V: Цифровая МЭ-Сеть",
+      "rarity": "epic",
+      "cost": 450000,
+      "loot": [
+        {
+          "name": "Комплект прессов высекателя AE2",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 10,
+          "chance": 2
+        },
+        {
+          "name": "Слитки террастали",
+          "type": "item",
+          "min": 6,
+          "max": 12,
+          "weight": 30,
+          "chance": 6
+        },
+        {
+          "name": "МЭ накопитель AE2",
+          "type": "item",
+          "min": 1,
+          "max": 2,
+          "weight": 25,
+          "chance": 5
+        },
+        {
+          "name": "МЭ ячейка хранения 64k",
+          "type": "item",
+          "min": 1,
+          "max": 2,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "МЭ ячейка хранения 16k",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Инженерные процессоры",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Логические процессоры",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Вычислительные процессоры",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Изменчивые кристаллы",
+          "type": "item",
+          "min": 32,
+          "max": 64,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Слитки элементия",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 45,
+          "chance": 9
+        },
+        {
+          "name": "AquaCoins (Куш)",
+          "type": "coins",
+          "min": 600000,
+          "max": 1000000,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Гемы",
+          "type": "gems",
+          "min": 20,
+          "max": 35,
+          "weight": 50,
+          "chance": 10
+        }
+      ]
+    },
+    {
+      "slug": "abyss",
+      "title": "Кейс VI: Глубины и Радиация",
+      "rarity": "legendary",
+      "cost": 1200000,
+      "loot": [
+        {
+          "name": "Эссенция Гайи",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 20,
+          "chance": 4
+        },
+        {
+          "name": "Обогащённый Уран (AC)",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Вольфрамовая руда IU",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Хромовая руда IU",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Жемчужины Бездны",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Пыль сияющего мотылька",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Ткань тьмы Глубин",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Незеритовые слитки",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Модуль ускорения ×4",
+          "type": "item",
+          "min": 1,
+          "max": 2,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Сплав Инконель 718",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "AquaCoins (Джекпот)",
+          "type": "coins",
+          "min": 1500000,
+          "max": 2500000,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Гемы",
+          "type": "gems",
+          "min": 35,
+          "max": 60,
+          "weight": 30,
+          "chance": 6
+        },
+        {
+          "name": "Дифракционная солнечная панель [Тир 6]",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 1,
+          "chance": 0.2
+        }
+      ]
+    },
+    {
+      "slug": "superconductor",
+      "title": "Кейс VII: Сверхпроводники",
+      "rarity": "legendary",
+      "cost": 2500000,
+      "loot": [
+        {
+          "name": "Лапотронные кристаллы",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 31,
+          "chance": 6.2
+        },
+        {
+          "name": "Сплав Осмиридий",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 51,
+          "chance": 10.1
+        },
+        {
+          "name": "Сплав Адамантий",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 51,
+          "chance": 10.1
+        },
+        {
+          "name": "Платиновая руда",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 51,
+          "chance": 10.1
+        },
+        {
+          "name": "Кобальтовая руда",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 51,
+          "chance": 10.1
+        },
+        {
+          "name": "Ускорители (Оверклокеры)",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 51,
+          "chance": 10.1
+        },
+        {
+          "name": "Продвинутые схемы IU",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 51,
+          "chance": 10.1
+        },
+        {
+          "name": "Множитель улова ×32",
+          "type": "item",
+          "min": 1,
+          "max": 2,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "Изотопы Уран-235",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "AquaCoins (Куш)",
+          "type": "coins",
+          "min": 3500000,
+          "max": 5500000,
+          "weight": 51,
+          "chance": 10.1
+        },
+        {
+          "name": "Гемы",
+          "type": "gems",
+          "min": 50,
+          "max": 80,
+          "weight": 31,
+          "chance": 6.2
+        },
+        {
+          "name": "Фотонная солнечная панель [Тир 7]",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 1,
+          "chance": 0.2
+        },
+        {
+          "name": "Нейтронная солнечная панель [Тир 7]",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 1,
+          "chance": 0.2
+        }
+      ]
+    },
+    {
+      "slug": "singularity",
+      "title": "Кейс VIII: Матрица Сингулярности",
+      "rarity": "mythic",
+      "cost": 4500000,
+      "loot": [
+        {
+          "name": "Кристальные матричные слитки",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 20,
+          "chance": 4
+        },
+        {
+          "name": "Слитки Орихалка ExtraBotany",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Слитки Аэриалита ExtraBotany",
+          "type": "item",
+          "min": 12,
+          "max": 24,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Топливо духов ExtraBotany",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Слитки Альфстали",
+          "type": "item",
+          "min": 6,
+          "max": 12,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Слитки черного железа",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Люминесценция ExtendedCrafting",
+          "type": "item",
+          "min": 32,
+          "max": 64,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Звёзды Незера",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Множитель улова ×64",
+          "type": "item",
+          "min": 1,
+          "max": 2,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Сингулярности AE2",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "AquaCoins (Джекпот)",
+          "type": "coins",
+          "min": 6000000,
+          "max": 10000000,
+          "weight": 40,
+          "chance": 8
+        },
+        {
+          "name": "Гемы",
+          "type": "gems",
+          "min": 75,
+          "max": 120,
+          "weight": 30,
+          "chance": 6
+        },
+        {
+          "name": "Барионная солнечная панель [Тир 8]",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 1,
+          "chance": 0.2
+        }
+      ]
+    },
+    {
+      "slug": "draconic",
+      "title": "Кейс IX: Дракониевое Слияние",
+      "rarity": "mythic",
+      "cost": 6500000,
+      "loot": [
+        {
+          "name": "Пробуждённое дракониевое ядро",
+          "type": "item",
+          "min": 1,
+          "max": 2,
+          "weight": 11,
+          "chance": 2.2
+        },
+        {
+          "name": "Сердца Дракона",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 28,
+          "chance": 5.6
+        },
+        {
+          "name": "Пробуждённый драконий",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 44,
+          "chance": 8.8
+        },
+        {
+          "name": "Дракониевые ядра",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 56,
+          "chance": 11.2
+        },
+        {
+          "name": "Ядра виверны",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 44,
+          "chance": 8.8
+        },
+        {
+          "name": "Слитки дракония",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 67,
+          "chance": 13.4
+        },
+        {
+          "name": "Энергетические ядра виверны",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 44,
+          "chance": 8.8
+        },
+        {
+          "name": "Инжекторы слияния",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 44,
+          "chance": 8.8
+        },
+        {
+          "name": "Нейтрониевые слитки",
+          "type": "item",
+          "min": 8,
+          "max": 16,
+          "weight": 44,
+          "chance": 8.8
+        },
+        {
+          "name": "Яйцо дракона",
+          "type": "item",
+          "min": 1,
+          "max": 2,
+          "weight": 39,
+          "chance": 7.8
+        },
+        {
+          "name": "AquaCoins (Куш)",
+          "type": "coins",
+          "min": 9000000,
+          "max": 14000000,
+          "weight": 44,
+          "chance": 8.8
+        },
+        {
+          "name": "Гемы",
+          "type": "gems",
+          "min": 90,
+          "max": 150,
+          "weight": 33,
+          "chance": 6.6
+        },
+        {
+          "name": "Адронная солнечная панель [Тир 9]",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 1,
+          "chance": 0.2
+        }
+      ]
+    },
+    {
+      "slug": "infinity",
+      "title": "Кейс X: Абсолютная Бесконечность",
+      "rarity": "exotic",
+      "cost": 8000000,
+      "loot": [
+        {
+          "name": "Слиток Бесконечности (ДЖЕКПОТ)",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 4,
+          "chance": 0.8
+        },
+        {
+          "name": "Ultimate Crafting Table (9x9)",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 25,
+          "chance": 5
+        },
+        {
+          "name": "Катализаторы Бесконечности",
+          "type": "item",
+          "min": 2,
+          "max": 4,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "Блоки пробуждённого дракония",
+          "type": "item",
+          "min": 4,
+          "max": 8,
+          "weight": 50,
+          "chance": 10
+        },
+        {
+          "name": "Нейтрониевые слитки Avaritia",
+          "type": "item",
+          "min": 16,
+          "max": 32,
+          "weight": 66,
+          "chance": 13.2
+        },
+        {
+          "name": "Кристальные матричные слитки",
+          "type": "item",
+          "min": 24,
+          "max": 48,
+          "weight": 66,
+          "chance": 13.2
+        },
+        {
+          "name": "Нейтрониевые самородки",
+          "type": "item",
+          "min": 64,
+          "max": 128,
+          "weight": 74,
+          "chance": 14.8
+        },
+        {
+          "name": "Нейтрониевый компрессор",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 33,
+          "chance": 6.6
+        },
+        {
+          "name": "Звёзды Незера",
+          "type": "item",
+          "min": 48,
+          "max": 64,
+          "weight": 66,
+          "chance": 13.2
+        },
+        {
+          "name": "AquaCoins (Супер-Куш)",
+          "type": "coins",
+          "min": 15000000,
+          "max": 25000000,
+          "weight": 41,
+          "chance": 8.2
+        },
+        {
+          "name": "Гемы",
+          "type": "gems",
+          "min": 120,
+          "max": 200,
+          "weight": 33,
+          "chance": 6.6
+        },
+        {
+          "name": "Гравитонная солнечная панель [Тир 10]",
+          "type": "item",
+          "min": 1,
+          "max": 1,
+          "weight": 1,
+          "chance": 0.2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Восстановление пароля · AquaTech</title>
+  <meta name="description" content="Не помнишь пароль? Задай новый для ника с сервера AquaTech." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AquaTech" />
+  <meta property="og:title" content="Восстановление пароля · AquaTech" />
+  <meta property="og:description" content="Не помнишь пароль? Задай новый для ника с сервера AquaTech." />
+  <meta property="og:url" content="https://aquateche.store/reset.html" />
+  <meta property="og:image" content="https://aquateche.store/assets/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Восстановление пароля · AquaTech" />
+  <meta name="twitter:description" content="Не помнишь пароль? Задай новый для ника с сервера AquaTech." />
+<link rel="stylesheet" href="assets/css/site.css?v=20260829f" />
+</head>
+<body data-page="reset">
+  <a class="skip-link" href="#main">К содержимому</a>
+  <div id="site-header"></div>
+  <main id="main">
+
+  <section class="page-hero">
+    <div class="container auth-shell">
+      <div class="eyebrow">Аккаунт</div>
+      <h1>Восстановление пароля</h1>
+      <p>Если ты играл на сервере, но не регистрировался на сайте — просто задай пароль, ник уже твой.</p>
+
+      <form class="card form" id="reset-form" style="margin-top:1.25rem">
+        <div class="field">
+          <label for="reset-nick">Ник</label>
+          <input id="reset-nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" autocapitalize="off" spellcheck="false" />
+        </div>
+        <p class="field-error" data-reset-error role="alert" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Продолжить</button>
+        <a class="btn btn-ghost" href="login.html">Вернуться ко входу</a>
+      </form>
+
+      <form class="card form" id="reset-claim-form" hidden style="margin-top:1.25rem">
+        <h3 id="reset-claim-title" style="margin:0 0 1rem">Задай пароль</h3>
+        <div class="field">
+          <label for="reset-password">Новый пароль (от 8 символов)</label>
+          <input id="reset-password" name="password" type="password" minlength="8" autocomplete="new-password" required />
+        </div>
+        <div class="field">
+          <label for="reset-password2">Повтори пароль</label>
+          <input id="reset-password2" name="password2" type="password" minlength="8" autocomplete="new-password" required />
+        </div>
+        <p class="field-error" data-reset-error role="alert" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Задать пароль</button>
+      </form>
+
+      <div class="card form" id="reset-step-support" hidden style="margin-top:1.25rem">
+        <h3 style="margin:0 0 1rem">Ник уже активирован</h3>
+        <p style="color:var(--muted)">Этот ник зарегистрирован, и сайт не хранит почту — самостоятельный сброс недоступен. Напиши в Discord: назови ник, админ поможет вернуть доступ.</p>
+        <a class="btn btn-primary" href="https://discord.gg/3Khzr5z4fQ" target="_blank" rel="noopener">Написать в Discord</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js?v=20260829f"></script>
+</body>
+</html>

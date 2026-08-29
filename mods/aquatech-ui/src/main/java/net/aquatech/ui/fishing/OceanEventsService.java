@@ -43,6 +43,8 @@ public final class OceanEventsService {
     private static final long GOLDEN_BLOCK = 3L * 3600_000L;   // окно каждые 3 часа
     private static final long GOLDEN_WINDOW = 20L * 60_000L;   // длится 20 минут
     private static final double GOLDEN_CHANCE = 0.05;
+    private static final double STORM_GOLDEN_CHANCE = 0.65;
+    private static long goldStormUntil;
     private static boolean lastGoldenActive = false;
     private static boolean lastTournamentActive = false;
     private static boolean tournamentLoaded;
@@ -78,7 +80,66 @@ public final class OceanEventsService {
     }
 
     private static boolean goldenActive(long now) {
-        return goldenWindowStart(now) >= 0;
+        return now < goldStormUntil || goldenWindowStart(now) >= 0;
+    }
+
+    private static boolean goldStormActive(long now) {
+        return now < goldStormUntil;
+    }
+
+    private static double goldenChance(long now) {
+        return goldStormActive(now) ? STORM_GOLDEN_CHANCE : GOLDEN_CHANCE;
+    }
+
+    public static int startGoldStorm(MinecraftServer server, int minutes) {
+        if (server == null) {
+            return 0;
+        }
+        int mins = Math.max(1, Math.min(60, minutes));
+        goldStormUntil = System.currentTimeMillis() + mins * 60_000L;
+        lastGoldenActive = true;
+        ServerLevel overworld = server.overworld();
+        if (overworld != null) {
+            overworld.setWeatherParameters(0, mins * 1200, true, true);
+        }
+        Component title = Component.literal("§6✦ ЗОЛОТАЯ БУРЯ ✦");
+        Component sub = Component.literal("§eЛови рыбу — джекпот до 2500 монет");
+        for (ServerPlayer p : server.getPlayerList().getPlayers()) {
+            p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket(8, 70, 16));
+            p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket(title));
+            p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket(sub));
+            strikeNear(p, 3);
+        }
+        broadcast(server, "§6[Кот-рыболов] §e§lЗОЛОТАЯ БУРЯ! §r§f" + mins
+                + " мин — почти каждый улов может стать золотым. Молнии бьют в воду!");
+        return mins;
+    }
+
+    public static void stopGoldStorm(MinecraftServer server) {
+        goldStormUntil = 0L;
+        lastGoldenActive = goldenWindowStart(System.currentTimeMillis()) >= 0;
+        if (server != null) {
+            broadcast(server, "§6[Кот-рыболов] §7Золотая буря стихла.");
+        }
+    }
+
+    private static void strikeNear(ServerPlayer player, int count) {
+        if (!(player.level() instanceof ServerLevel level)) {
+            return;
+        }
+        var random = player.getRandom();
+        for (int i = 0; i < count; i++) {
+            double x = player.getX() + (random.nextDouble() - 0.5) * 14.0;
+            double z = player.getZ() + (random.nextDouble() - 0.5) * 14.0;
+            double y = player.getY();
+            var bolt = net.minecraft.world.entity.EntityType.LIGHTNING_BOLT.create(level);
+            if (bolt == null) {
+                continue;
+            }
+            bolt.moveTo(x, y, z);
+            bolt.setVisualOnly(true);
+            level.addFreshEntity(bolt);
+        }
     }
 
     // ─────────────────────────── задания дня ───────────────────────────
@@ -231,7 +292,7 @@ public final class OceanEventsService {
 
         // 1. Золотая рыба
         boolean golden = goldenActive(now);
-        if (golden && player.getRandom().nextDouble() < GOLDEN_CHANCE) {
+        if (golden && player.getRandom().nextDouble() < goldenChance(now)) {
             ItemStack target = null;
             for (ItemStack st : awarded) {
                 if (!st.isEmpty() && st.getItem() != Items.AIR) {
@@ -244,6 +305,12 @@ public final class OceanEventsService {
                 target.setHoverName(Component.literal("§6✨ Золотая рыба ✨"));
                 long jackpot = 500 + player.getRandom().nextInt(2000);
                 addCoins(player, jackpot);
+                strikeNear(player, goldStormActive(now) ? 2 : 1);
+                player.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket(4, 40, 10));
+                player.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket(
+                        Component.literal("§6✨ ЗОЛОТАЯ РЫБА ✨")));
+                player.connection.send(new net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket(
+                        Component.literal("§e+" + jackpot + " монет")));
                 broadcast(server, "§6[Кот-рыболов] §e" + player.getGameProfile().getName()
                         + " поймал §6✨ЗОЛОТУЮ рыбу✨ §eи получил " + jackpot + " монет!");
             }
@@ -348,11 +415,20 @@ public final class OceanEventsService {
         }
         if (tick % 20 != 0) return;
         long now = System.currentTimeMillis();
+        if (goldStormActive(now) && tick % 40 == 0) {
+            var players = server.getPlayerList().getPlayers();
+            if (!players.isEmpty()) {
+                strikeNear(players.get(server.overworld().getRandom().nextInt(players.size())), 1);
+            }
+        }
+        if (goldStormUntil > 0L && now >= goldStormUntil) {
+            stopGoldStorm(server);
+        }
 
         boolean golden = goldenActive(now);
         if (golden != lastGoldenActive) {
             lastGoldenActive = golden;
-            if (golden) {
+            if (golden && !goldStormActive(now)) {
                 broadcast(server, "§6[Кот-рыболов] §e§lЗОЛОТАЯ РЫБА! §r§fСледующие 20 минут каждая пойманная рыба может оказаться золотой §7(шанс 5%, джекпот до 2500 монет)§f!");
             }
         }

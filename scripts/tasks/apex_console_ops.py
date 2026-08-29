@@ -54,7 +54,7 @@ def main() -> int:
     p.add_argument(
         "--chunky-spawn",
         action="store_true",
-        help="Queue Chunky circular pregen around spawn",
+        help="DISABLED: Chunky was removed (Apex CPU peg). Flag kept so old scripts fail closed.",
     )
     p.add_argument("--radius", type=int, default=500, help="Chunky radius blocks (default 500)")
     p.add_argument(
@@ -69,9 +69,8 @@ def main() -> int:
     for flag, value in args.wg_flag:
         cmds.append(wg_flag_cmd(args.world, args.region, flag, value))
     if args.chunky_spawn:
-        cmds.extend(
-            t.format(world=args.world, radius=args.radius) for t in CHUNKY_SPAWN_TEMPLATE
-        )
+        print("Chunky disabled — Forge mod + Paper plugin pegged Apex CPU. Do not start pregen.", file=sys.stderr)
+        return 2
 
     if not cmds:
         p.print_help()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Add Botania / Alex's Caves / Avaritia tabs, rewrite secret + endgame.
+Add Botania / Alex's Caves / AE2 / Avaritia tabs, rewrite secret + endgame.
 Patch broken IU steam item IDs. Every item is checked against jar models.
 """
 from __future__ import annotations
@@ -10,6 +10,8 @@ import re
 import shutil
 import zipfile
 from pathlib import Path
+
+from useful_rewards import apply_all, _format_item
 
 ROOT = Path(r"C:/Users/xieto/Desktop/AquaTech")
 MODS = ROOT / "server" / "mods"
@@ -43,6 +45,10 @@ BANNED_REWARD = (
     "industrialupgrade:teleporter",
     "industrialupgrade:jetpack",
     "industrialupgrade:creative_",
+    "industrialupgrade:upgrades/overclocker",
+    "industrialupgrade:upgrades/transformerupgrade",
+    "aquatech_ui:speed_upgrade",
+    "aquatech_ui:speed_x4",
     "botanicalmachinery:mana_battery_creative",
 )
 
@@ -221,16 +227,8 @@ def write_chapter(
         lines.append(f'			icon: "{q.item}"')
 
         reward_bits = []
-        for it, cnt in q.rewards:
-            rid = hid(f"{qid}_{it}_r")
-            extra = f"\n				count: {cnt}" if cnt > 1 else ""
-            reward_bits.append(
-                "{\n"
-                f'				id: "{rid}"{extra}\n'
-                f'				item: "{it}"\n'
-                '				type: "item"\n'
-                "			}"
-            )
+        for i, (it, cnt) in enumerate(q.rewards):
+            reward_bits.append(_format_item(qid, it, cnt, i))
         rid_xp = hid(f"{qid}_xp")
         reward_bits.append(
             "{\n"
@@ -509,6 +507,139 @@ def alex_quests() -> list[Q]:
     ]
 
 
+def ae2_quests() -> list[Q]:
+    c1 = "ae2:item_storage_cell_1k"
+    fluix = "ae2:fluix_crystal"
+    return [
+        Q("guide", "Гайд AE2", "ae2:guide",
+          "Книга сети. Держи под рукой, пока собираешь инскрайбер и кабели.",
+          0, 0, rewards=[("ae2:certus_quartz_crystal", 16)]),
+        Q("certus", "Кварц Цертус", "ae2:certus_quartz_crystal",
+          "Метеориты AE2 или рост на бутоне. Без цертуса нет флюикса и процессоров.",
+          1.5, 0, "guide", count=8, rewards=[("ae2:certus_quartz_crystal", 16)]),
+        Q("charged", "Заряженный цертус", "ae2:charged_certus_quartz_crystal",
+          "Зарядка в заряднике. Нужен для флюикса и ускорителя роста.",
+          3.0, -1.0, "certus", count=4, rewards=[("ae2:charged_certus_quartz_crystal", 8)]),
+        Q("sky", "Небесный камень", "ae2:sky_stone_block",
+          "Дроп с метеорита. Идёт в сундук, танк и гладкие блоки сети.",
+          3.0, 1.0, "certus", count=8, rewards=[("ae2:sky_stone_block", 16)]),
+        Q("fluix", "Кристалл флюикса", "ae2:fluix_crystal",
+          "Цертус + редстоун + незер-кварц в мире или росте. Основа кабелей и ядер.",
+          4.5, 0, ["charged", "sky"], count=8, rewards=[(fluix, 16)]),
+        Q("silicon", "Кремний AE2", "ae2:silicon",
+          "Плавь пыль цертуса в печи. Печатный кремний без него не сделать.",
+          6.0, 0, "fluix", count=8, rewards=[("ae2:silicon", 16)]),
+        Q("press", "Пресс кремния", "ae2:silicon_press",
+          "Пресс из метеорита. Без прессов инскрайбер пустой.",
+          6.0, -1.5, "silicon", rewards=[("ae2:logic_processor_press", 1)]),
+        Q("inscriber", "Инскрайбер", "ae2:inscriber",
+          "Печатает кремний и три процессора. Ставь рядом с зарядником.",
+          7.5, 0, "press", rewards=[("ae2:printed_silicon", 8)]),
+        Q("charger", "Зарядник", "ae2:charger",
+          "Заряжает цертус. Питается от любой FE-сети, не только ME.",
+          7.5, -1.5, "inscriber", rewards=[("ae2:charged_certus_quartz_crystal", 8)]),
+        Q("printed", "Печатный кремний", "ae2:printed_silicon",
+          "Заготовка процессора. Дальше логика, расчёт и инженерия.",
+          9.0, 0, "inscriber", count=4, rewards=[("ae2:silicon", 16)]),
+        Q("logic", "Логический процессор", "ae2:logic_processor",
+          "Золото + кремний в инскрайбере. Кабели, шины, терминал.",
+          10.5, -1.0, "printed", count=4, rewards=[("ae2:logic_processor", 8)]),
+        Q("calc", "Расчётный процессор", "ae2:calculation_processor",
+          "Цертус + кремний. Ячейки и компоненты памяти.",
+          10.5, 0, "printed", count=4, rewards=[("ae2:calculation_processor", 8)]),
+        Q("eng", "Инженерный процессор", "ae2:engineering_processor",
+          "Алмаз + кремний. Контроллер, сборщик, плотные кабели.",
+          10.5, 1.0, "printed", count=4, rewards=[("ae2:engineering_processor", 8)]),
+        Q("fiber", "Кварцевое волокно", "ae2:quartz_fiber",
+          "Мост между сетями и канал в стеклянном кабеле.",
+          12.0, -1.0, "fluix", count=4, rewards=[("ae2:quartz_fiber", 8)]),
+        Q("cable", "Стеклянный кабель флюикса", "ae2:fluix_glass_cable",
+          "Каналы ME. Восемь штук — уже хватает на маленький остров.",
+          12.0, 0, ["logic", "fiber"], count=8, rewards=[("ae2:fluix_glass_cable", 16)]),
+        Q("ntool", "Сетевой инструмент", "ae2:network_tool",
+          "ПКМ по кабелю: каналы, энергия, привязка. Без него сеть слепая.",
+          12.0, 1.0, "cable", rewards=[("ae2:fluix_glass_cable", 8)]),
+        Q("acceptor", "Приёмник энергии", "ae2:energy_acceptor",
+          "Вход FE в ME. Первая живая сеть — акцептор + кабель + привод.",
+          13.5, 0, "cable", rewards=[("ae2:energy_cell", 1)]),
+        Q("energy", "Энергоячейка", "ae2:energy_cell",
+          "Буфер сети. Ставь до контроллера, иначе шины моргают.",
+          15.0, 0, "acceptor", rewards=[("ae2:fluix_glass_cable", 8)]),
+        Q("drive", "ME-привод", "ae2:drive",
+          "Десять слотов под ячейки. Сердце склада.",
+          16.5, 0, "energy", rewards=[("ae2:item_cell_housing", 2)]),
+        Q("housing", "Корпус ячейки", "ae2:item_cell_housing",
+          "Пустой корпус. Компонент 1k + корпус = ячейка.",
+          18.0, 0, "drive", count=2, rewards=[("ae2:cell_component_1k", 2)]),
+        Q("comp1k", "Компонент 1k", "ae2:cell_component_1k",
+          "Память ячейки. Расчётный процессор и редстоун.",
+          19.5, 0, ["housing", "calc"], count=2, rewards=[(c1, 2)]),
+        Q("cell1k", "Ячейка 1k", "ae2:item_storage_cell_1k",
+          "Первый склад ME. Форматируется в приводе под типы предметов.",
+          21.0, 0, "comp1k", rewards=[("ae2:terminal", 1)]),
+        Q("terminal", "Терминал", "ae2:terminal",
+          "Окно склада. Ставь на кабель рядом с приводом.",
+          22.5, 0, "cell1k", rewards=[("ae2:import_bus", 2)]),
+        Q("ibus", "Шина импорта", "ae2:import_bus",
+          "Засасывает сундук в ME. Фильтры — позже картами.",
+          22.5, 1.5, "terminal", rewards=[("ae2:export_bus", 2)]),
+        Q("ebus", "Шина экспорта", "ae2:export_bus",
+          "Выплёвывает предметы в сундук или машину IU.",
+          24.0, 1.5, "ibus", rewards=[("ae2:storage_bus", 2)]),
+        Q("sbus", "Шина хранения", "ae2:storage_bus",
+          "Подключает внешний сундук как часть ME без перекладывания в ячейки.",
+          25.5, 1.5, "ebus", rewards=[("ae2:interface", 1)]),
+        Q("iface", "Интерфейс", "ae2:interface",
+          "Мост автокрафта и машин. Сюда сажают провайдер паттернов.",
+          24.0, 2.5, "sbus", rewards=[("ae2:io_port", 1)]),
+        Q("ioport", "IO-порт", "ae2:io_port",
+          "Копирует ячейку в сеть и обратно. Удобно возить островной лут.",
+          25.5, 2.5, "iface", rewards=[("ae2:item_storage_cell_4k", 1)]),
+        Q("controller", "ME-контроллер", "ae2:controller",
+          "32 канала на грань. Ставь, когда стеклянных кабелей уже мало.",
+          24.0, 0, ["terminal", "eng"], rewards=[("ae2:fluix_smart_cable", 8)]),
+        Q("smart", "Умный кабель", "ae2:fluix_smart_cable",
+          "Показывает каналы цветом. Дальше плотный кабель на контроллер.",
+          25.5, 0, "controller", count=8, rewards=[("ae2:fluix_covered_dense_cable", 4)]),
+        Q("dense", "Плотная энергоячейка", "ae2:dense_energy_cell",
+          "Большой буфер. Нужна, когда автокрафт и шины жрут энергию пачками.",
+          16.5, 1.5, "energy", rewards=[("ae2:energy_cell", 2)]),
+        Q("growth", "Ускоритель роста", "ae2:growth_accelerator",
+          "Растит бутоны цертуса. Свой кварц без беготни по метеоритам.",
+          4.5, -1.5, "charger", rewards=[("ae2:charged_certus_quartz_crystal", 8)]),
+        Q("cell4k", "Ячейка 4k", "ae2:item_storage_cell_4k",
+          "Следующий тир склада. Крафт из четырёх 1k-компонентов.",
+          22.5, -1.5, "cell1k", rewards=[("ae2:cell_component_16k", 1)]),
+        Q("cell16k", "Ячейка 16k", "ae2:item_storage_cell_16k",
+          "Средний склад. Хватает на остров до 64k.",
+          24.0, -1.5, "cell4k", rewards=[("ae2:item_storage_cell_16k", 1)]),
+        Q("pprov", "Провайдер паттернов", "ae2:pattern_provider",
+          "Автокрафт: паттерн внутрь, интерфейс к машине.",
+          25.5, -1.5, "controller", rewards=[("ae2:blank_pattern", 8)]),
+        Q("pattern", "Пустой паттерн", "ae2:blank_pattern",
+          "Кодируется в терминале крафта. Без стопки автокрафт мёртв.",
+          27.0, -1.5, "pprov", count=8, rewards=[("ae2:blank_pattern", 16)]),
+        Q("assembler", "Молекулярный сборщик", "ae2:molecular_assembler",
+          "Крафтит по паттерну. Ставь рядом с провайдером.",
+          25.5, -2.5, "pprov", rewards=[("ae2:crafting_terminal", 1)]),
+        Q("cterm", "Терминал крафта", "ae2:crafting_terminal",
+          "Верстак + склад в одном окне. Кодирует паттерны.",
+          27.0, -2.5, "assembler", rewards=[("ae2:crafting_unit", 2)]),
+        Q("cunit", "Блок крафта", "ae2:crafting_unit",
+          "Каркас CPU автокрафта. Дальше вешается хранилище 1k.",
+          28.5, -2.5, "cterm", count=4, rewards=[("ae2:1k_crafting_storage", 1)]),
+        Q("cstor", "Хранилище крафта 1k", "ae2:1k_crafting_storage",
+          "Память CPU. Без него молекулярный сборщик не берёт заказы.",
+          30.0, -2.5, "cunit", rewards=[("ae2:crafting_accelerator", 1)]),
+        Q("fluid1k", "Жидкостная ячейка 1k", "ae2:fluid_storage_cell_1k",
+          "Склад жидкостей ME. Пар, лава, латекс IU — сюда, не в вёдра.",
+          21.0, 1.5, "cell1k", rewards=[("ae2:fluid_storage_cell_1k", 1)]),
+        Q("cell64k", "Ячейка 64k", "ae2:item_storage_cell_64k",
+          "Финал вкладки. Склад под остров и автокрафт без постоянной чистки.",
+          27.0, 0, ["smart", "cell16k"], rewards=[("ae2:item_storage_cell_64k", 1), ("ae2:fluid_storage_cell_64k", 1)]),
+    ]
+
+
 def avaritia_quests() -> list[Q]:
     nn = "avaritia:neutron_nugget"
     dia = "minecraft:diamond"
@@ -779,16 +910,8 @@ def write_endgame(ava_infinity_id: str, models: set[str]) -> None:
         lines.append(f'			id: "{qid}"')
         lines.append(f'			icon: "{q.item}"')
         reward_bits = []
-        for it, cnt in q.rewards:
-            rid = hid(f"{qid}_{it}_r")
-            extra = f"\n				count: {cnt}" if cnt > 1 else ""
-            reward_bits.append(
-                "{\n"
-                f'				id: "{rid}"{extra}\n'
-                f'				item: "{it}"\n'
-                '				type: "item"\n'
-                "			}"
-            )
+        for i, (it, cnt) in enumerate(q.rewards):
+            reward_bits.append(_format_item(qid, it, cnt, i))
         rid_xp = hid(f"{qid}_xp")
         reward_bits.append(
             "{\n"
@@ -817,63 +940,10 @@ def write_endgame(ava_infinity_id: str, models: set[str]) -> None:
         (dest / "endgame_aquatech.snbt").write_text(text, encoding="utf-8")
 
 
-def inject_item_rewards(models: set[str]) -> None:
-    """Add a material reward to quests that currently only pay XP."""
-    mapping = {
-        "steam_era.snbt": ("industrialupgrade:itemingots/copper_ingot", 8),
-        "basic_electric_era.snbt": ("industrialupgrade:itemingots/tin_ingot", 8),
-        "improved_electric_era.snbt": ("industrialupgrade:itemingots/steel_ingot", 4),
-        "1.snbt": ("industrialupgrade:itemingots/copper_ingot", 8),
-        "7D2835D587AABDAB.snbt": ("minecraft:bread", 16),
-    }
-    quest_split = re.compile(r"(		\{[\s\S]*?\n		\})")
-    for folder in (CFG, SRV):
-        for name, (item, count) in mapping.items():
-            if item != "minecraft:bread" and item not in models:
-                raise SystemExit(f"filler missing {item}")
-            path = folder / name
-            if not path.is_file():
-                continue
-            text = path.read_text(encoding="utf-8")
-            chunks = []
-            last = 0
-            changed = 0
-            for m in quest_split.finditer(text):
-                chunks.append(text[last:m.start()])
-                block = m.group(1)
-                last = m.end()
-                rm = re.search(r"rewards: \[([\s\S]*?)\]\s*\n\t\t\ttasks:", block)
-                if not rm:
-                    chunks.append(block)
-                    continue
-                body = rm.group(1)
-                if 'type: "item"' in body:
-                    chunks.append(block)
-                    continue
-                qid_m = re.search(r'^\t\t\tid: "([0-9A-Fa-f]+)"', block, re.M)
-                qid = qid_m.group(1) if qid_m else hid(name + str(changed))
-                rid = hid(f"{qid}_{item}_bonus")
-                extra = f"\n				count: {count}" if count > 1 else ""
-                insert = (
-                    "rewards: [{\n"
-                    f'				id: "{rid}"{extra}\n'
-                    f'				item: "{item}"\n'
-                    '				type: "item"\n'
-                    "			},"
-                )
-                block = block.replace("rewards: [", insert, 1)
-                chunks.append(block)
-                changed += 1
-            chunks.append(text[last:])
-            path.write_text("".join(chunks), encoding="utf-8")
-            print(f"  rewards {name}: +{changed}")
-
-
 def main() -> None:
     models = load_models()
     patch_steam()
     fix_primitive_dupes()
-    inject_item_rewards(models)
 
     bq = botania_quests()
     bot_ids = write_chapter(
@@ -907,7 +977,11 @@ def main() -> None:
         subtitle="Решётка, нейтроний, стол 9×9, Infinity.",
     )
 
-    ids = {"botania": bot_ids, "alexscaves": cave_ids, "avaritia": ava_ids}
+    ids = {
+        "botania": bot_ids,
+        "alexscaves": cave_ids,
+        "avaritia": ava_ids,
+    }
 
     # abyss secret uses echo shard as task item
     secrets = secret_quests(ids)
@@ -924,11 +998,25 @@ def main() -> None:
     )
 
     write_endgame(ava_ids["infinity"], models)
+    aq = ae2_quests()
+    ae_ids = write_chapter(
+        "ae2_aquatech",
+        hid("chapter_ae2"),
+        "Applied Energistics",
+        "ae2:controller",
+        11,
+        aq,
+        models,
+        subtitle="Кварц, инскрайбер, ME-сеть, ячейки, автокрафт.",
+    )
+    apply_all(CFG, SRV, models)
     print(
         "botania",
         len(bq),
         "caves",
         len(cave_ids),
+        "ae2",
+        len(ae_ids),
         "avaritia",
         len(ava_ids),
         "secrets",

@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:AquaTechLauncher.ViewModels"
+        xmlns:core="using:AquaTechLauncher.Core"
         x:Class="AquaTechLauncher.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/aquatech.ico"
@@ -24,7 +25,7 @@
       <Setter Property="Foreground" Value="#D6E2EE"/>
       <Setter Property="HorizontalAlignment" Value="Left"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
-      <Setter Property="Padding" Value="16,8"/>
+      <Setter Property="Padding" Value="14,8"/>
       <Setter Property="MinHeight" Value="36"/>
       <Setter Property="CornerRadius" Value="18"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
@@ -35,6 +36,7 @@
         <Transitions>
           <BrushTransition Property="Background" Duration="0:0:0.12"/>
           <BrushTransition Property="Foreground" Duration="0:0:0.12"/>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.09"/>
         </Transitions>
       </Setter>
     </Style>
@@ -42,9 +44,122 @@
       <Setter Property="Background" Value="#33FFFFFF"/>
       <Setter Property="Foreground" Value="#F8FAFC"/>
     </Style>
+    <Style Selector="Button.nav:pressed /template/ ContentPresenter">
+      <Setter Property="Foreground" Value="#7DD3FC"/>
+    </Style>
     <Style Selector="Button.nav.active">
       <Setter Property="Background" Value="#66101820"/>
       <Setter Property="Foreground" Value="#F8FAFC"/>
+    </Style>
+
+    <!-- Material glyphs: Segoe MDL2 Assets ships with Windows 10/11 -->
+    <Style Selector="TextBlock.icon">
+      <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Press feedback (Apple-like subtle scale) -->
+    <Style Selector="Button.glass">
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.09"/>
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Button.glass:pressed">
+      <Setter Property="RenderTransform" Value="scale(0.96)"/>
+    </Style>
+
+    <Style Selector="Border.skeleton">
+      <Setter Property="Height" Value="76"/>
+      <Setter Property="CornerRadius" Value="16"/>
+      <Setter Property="Background" Value="#33FFFFFF"/>
+      <Setter Property="Margin" Value="0,0,0,10"/>
+      <Style.Animations>
+        <Animation Duration="0:0:1.2" IterationCount="INFINITE" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0.25"/>
+          </KeyFrame>
+          <KeyFrame Cue="50%">
+            <Setter Property="Opacity" Value="0.6"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="0.25"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <!-- News cards -->
+    <Style Selector="Border.news-card">
+      <Setter Property="Background" Value="#E6101820"/>
+      <Setter Property="BorderBrush" Value="#33FFFFFF"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="16"/>
+      <Setter Property="Padding" Value="22,18"/>
+      <Setter Property="Margin" Value="0,0,0,12"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15"/>
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.news-card:pointerover">
+      <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+      <Setter Property="BorderBrush" Value="#6638BDF8"/>
+    </Style>
+    <Style Selector="Border.date-chip">
+      <Setter Property="Background" Value="#2438BDF8"/>
+      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="Padding" Value="8,3"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Border.date-chip TextBlock">
+      <Setter Property="FontSize" Value="11.5"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Foreground" Value="#7DD3FC"/>
+    </Style>
+    <!-- Featured (latest) news: aqua accent bar + bigger headline -->
+    <Style Selector="Border.news-card Border.accent">
+      <Setter Property="IsVisible" Value="False"/>
+      <Setter Property="Width" Value="3"/>
+      <Setter Property="CornerRadius" Value="2"/>
+      <Setter Property="Background" Value="#38BDF8"/>
+      <Setter Property="Margin" Value="0,2,14,2"/>
+    </Style>
+    <Style Selector="Border.news-card:nth-child(1) Border.accent">
+      <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    <Style Selector="Border.news-card TextBlock.news-title">
+      <Setter Property="FontFamily" Value="avares://AquaTechLauncher/Assets/Fonts#Syne"/>
+      <Setter Property="FontSize" Value="15"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Foreground" Value="#F8FAFC"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Border.news-card:nth-child(1) TextBlock.news-title">
+      <Setter Property="FontSize" Value="19"/>
+    </Style>
+
+    <!-- Live server dot -->
+    <Style Selector="Ellipse.pulse-dot">
+      <Setter Property="Fill" Value="#22C55E"/>
+      <Style.Animations>
+        <Animation Duration="0:0:1.6" IterationCount="INFINITE">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="1"/>
+          </KeyFrame>
+          <KeyFrame Cue="50%">
+            <Setter Property="Opacity" Value="0.4"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
     </Style>
 
     <Style Selector="TextBox.field">
@@ -111,24 +226,47 @@
     </Style>
 
     <Style Selector="Button.play">
-      <Setter Property="Background" Value="#38BDF8"/>
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Color="#5CE1FF" Offset="0"/>
+          <GradientStop Color="#22C9E8" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
       <Setter Property="Foreground" Value="#071018"/>
       <Setter Property="BorderThickness" Value="0"/>
       <Setter Property="CornerRadius" Value="18"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="FontSize" Value="16"/>
-      <Setter Property="Height" Value="56"/>
+      <Setter Property="Height" Value="58"/>
       <Setter Property="MinWidth" Value="280"/>
       <Setter Property="Padding" Value="28,0"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
       <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
+        </Transitions>
+      </Setter>
     </Style>
     <Style Selector="Button.play:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="#7DD3FC"/>
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Color="#7DEBFF" Offset="0"/>
+          <GradientStop Color="#3DD9F2" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
     </Style>
     <Style Selector="Button.play:pressed /template/ ContentPresenter">
-      <Setter Property="Background" Value="#0EA5E9"/>
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Color="#2DD4E0" Offset="0"/>
+          <GradientStop Color="#0EA5E9" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="Button.play:pressed">
+      <Setter Property="RenderTransform" Value="scale(0.97)"/>
     </Style>
     <Style Selector="Button.play:disabled">
       <Setter Property="Opacity" Value="0.45"/>
@@ -225,16 +363,45 @@
           </StackPanel>
           <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center"
                       IsVisible="{Binding !NeedsAuth}">
-            <Button Classes="nav" Content="Игра" Command="{Binding ShowPlayCommand}" Classes.active="{Binding IsPlayPage}"/>
-            <Button Classes="nav" Content="Настройки" Command="{Binding ShowSettingsCommand}" Classes.active="{Binding IsSettingsPage}"/>
-            <Button Classes="nav" Content="Журнал" Command="{Binding ShowLogCommand}" Classes.active="{Binding IsLogPage}"/>
+            <Button Classes="nav" Command="{Binding ShowPlayCommand}" Classes.active="{Binding IsPlayPage}">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Classes="icon" Text="&#xE7FC;"/>
+                <TextBlock Text="Игра"/>
+              </StackPanel>
+            </Button>
+            <Button Classes="nav" Command="{Binding ShowNewsCommand}" Classes.active="{Binding IsNewsPage}">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Classes="icon" Text="&#xE900;"/>
+                <TextBlock Text="Новости"/>
+              </StackPanel>
+            </Button>
+            <Button Classes="nav" Command="{Binding ShowSettingsCommand}" Classes.active="{Binding IsSettingsPage}">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Classes="icon" Text="&#xE713;"/>
+                <TextBlock Text="Настройки"/>
+              </StackPanel>
+            </Button>
+            <Button Classes="nav" Command="{Binding ShowLogCommand}" Classes.active="{Binding IsLogPage}">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Classes="icon" Text="&#xE756;"/>
+                <TextBlock Text="Журнал"/>
+              </StackPanel>
+            </Button>
           </StackPanel>
           <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center"
                       IsVisible="{Binding !NeedsAuth}">
-            <Border Width="32" Height="32" CornerRadius="16" Background="#38BDF8">
-              <TextBlock Text="{Binding UsernameInitial}" FontSize="13" FontWeight="Bold" Foreground="#071018"
-                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Border>
+            <Panel Width="36" Height="36">
+              <Border Width="36" Height="36" CornerRadius="18" Background="#38BDF8">
+                <TextBlock Text="{Binding UsernameInitial}" FontSize="14" FontWeight="Bold" Foreground="#071018"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <Image Source="{Binding AvatarImage}" Width="36" Height="36" HorizontalAlignment="Left"
+                     ToolTip.Tip="{Binding Username}">
+                <Image.Clip>
+                  <RectangleGeometry Rect="0,0,36,36" RadiusX="18" RadiusY="18"/>
+                </Image.Clip>
+              </Image>
+            </Panel>
             <StackPanel VerticalAlignment="Center" Margin="0,0,4,0">
               <TextBlock Text="{Binding Username}" FontSize="13" FontWeight="SemiBold" Foreground="#F8FAFC"
                          TextTrimming="CharacterEllipsis" MaxWidth="140"/>
@@ -251,35 +418,52 @@
         </Grid>
       </Border>
 
-      <Panel Margin="28,20,28,24">
+      <Panel Margin="28,20,28,24" x:Name="PagesHost">
         <Grid ColumnDefinitions="*,280,320" IsVisible="{Binding IsPlayPage}">
-          <StackPanel VerticalAlignment="Bottom" Spacing="16" MaxWidth="520" HorizontalAlignment="Left">
+          <StackPanel VerticalAlignment="Bottom" Spacing="16" MaxWidth="560" HorizontalAlignment="Left">
             <StackPanel Spacing="6">
-              <TextBlock FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
-                         FontSize="36" FontWeight="Bold" Foreground="#F8FAFC" TextWrapping="Wrap">
+              <TextBlock FontFamily="avares://AquaTechLauncher/Assets/Fonts#Syne"
+                         FontSize="38" FontWeight="Bold" Foreground="#F8FAFC" TextWrapping="Wrap">
                 <Run Text="Aqua"/>
                 <Run Text="Tech" Foreground="#38BDF8"/>
               </TextBlock>
               <TextBlock Text="Тебе предстоит узнать многое"
                          FontSize="15" Foreground="#D6E2EE" TextWrapping="Wrap" MaxWidth="440"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Spacing="8">
-              <Border Classes="stat">
-                <StackPanel Orientation="Horizontal" Spacing="8">
-                  <TextBlock Text="●" FontSize="12" Foreground="{Binding ServerDot}" VerticalAlignment="Center"/>
-                  <TextBlock Text="{Binding OnlinePlayersText}" FontSize="13" FontWeight="SemiBold" Foreground="#F8FAFC"/>
-                </StackPanel>
-              </Border>
-              <Border Classes="stat">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+              <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center"
+                          ToolTip.Tip="{Binding ServerStatus}">
+                <Ellipse Classes="pulse-dot" Width="10" Height="10" Fill="{Binding ServerDot}"/>
+                <TextBlock Text="{Binding OnlineCountLabel}" FontFamily="avares://AquaTechLauncher/Assets/Fonts#Syne"
+                           FontSize="30" FontWeight="Bold" Foreground="#F8FAFC"/>
+                <TextBlock Text="игроков в океане" FontSize="12" Foreground="#A8B8CC"
+                           VerticalAlignment="Bottom" Margin="0,0,0,7"/>
+              </StackPanel>
+              <Border Classes="stat" VerticalAlignment="Center">
                 <TextBlock Text="{Binding ServerStatus}" FontSize="13" FontWeight="SemiBold" Foreground="#F8FAFC"/>
               </Border>
             </StackPanel>
+            <Border Classes="stat" IsVisible="{Binding LatestNewsVisible}" MaxWidth="560" HorizontalAlignment="Left"
+                    ToolTip.Tip="Свежая новость сервера — подробнее во вкладке «Новости»">
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <Border Classes="date-chip" VerticalAlignment="Center">
+                  <TextBlock Text="новое"/>
+                </Border>
+                <TextBlock Text="{Binding LatestNewsTitle}" FontSize="12" Foreground="#D6E2EE"
+                           TextWrapping="Wrap" MaxWidth="440" VerticalAlignment="Center"/>
+              </StackPanel>
+            </Border>
           </StackPanel>
 
           <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Spacing="10">
-            <Button Classes="glass" Content="Обновить сборку" Command="{Binding RepairPackCommand}"
+            <Button Classes="glass" Command="{Binding RepairPackCommand}"
                     IsEnabled="{Binding ActionsEnabled}" HorizontalAlignment="Center"
-                    ToolTip.Tip="Проверить целостность и скачать обновления сборки"/>
+                    ToolTip.Tip="Проверить целостность и скачать обновления сборки">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Classes="icon" Text="&#xE72C;"/>
+                <TextBlock Text="Обновить сборку"/>
+              </StackPanel>
+            </Button>
             <Button Classes="play" Content="{Binding PlayButtonText}" Command="{Binding PlayCommand}"
                     IsEnabled="{Binding ActionsEnabled}" HorizontalAlignment="Center"
                     ToolTip.Tip="Проверит сборку и запустит клиент"/>
@@ -298,12 +482,24 @@
           <Border Grid.Column="2" Classes="glass-bar" Padding="20,18" VerticalAlignment="Bottom" Margin="16,0,0,0">
             <StackPanel Spacing="10">
               <TextBlock Text="Сборка" FontSize="12" FontWeight="SemiBold" Foreground="#38BDF8"/>
-              <TextBlock Text="{Binding PackVersion}" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
-                         FontSize="22" FontWeight="Bold" Foreground="#F8FAFC"/>
+              <TextBlock Text="{Binding PackVersion}" FontFamily="avares://AquaTechLauncher/Assets/Fonts#Syne"
+                         FontSize="24" FontWeight="Bold" Foreground="#F8FAFC"/>
               <TextBlock Text="Проект в бете" FontSize="13" Foreground="#D6E2EE"/>
-              <Button Classes="glass" Content="Сайт" Command="{Binding OpenWebsiteCommand}"
-                      HorizontalAlignment="Left" Margin="0,6,0,0"
-                      AutomationProperties.Name="Сайт проекта"/>
+              <Button Classes="glass" Command="{Binding CopyIpCommand}" HorizontalAlignment="Stretch" Margin="0,6,0,0"
+                      AutomationProperties.Name="Скопировать IP сервера"
+                      ToolTip.Tip="Скопировать IP сервера в буфер обмена">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <TextBlock Classes="icon" Text="&#xE8C8;"/>
+                  <TextBlock Text="Скопировать IP"/>
+                </StackPanel>
+              </Button>
+              <Button Classes="glass" Command="{Binding OpenWebsiteCommand}" HorizontalAlignment="Stretch"
+                      AutomationProperties.Name="Сайт проекта">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <TextBlock Classes="icon" Text="&#xE774;"/>
+                  <TextBlock Text="Сайт"/>
+                </StackPanel>
+              </Button>
             </StackPanel>
           </Border>
         </Grid>
@@ -344,6 +540,12 @@
               </StackPanel>
               <Border Height="1" Background="#33FFFFFF" Margin="0,4"/>
               <StackPanel Spacing="8">
+                <TextBlock Text="Интеграции" FontSize="13" FontWeight="SemiBold" Foreground="#E2E8F0"/>
+                <CheckBox IsChecked="{Binding DiscordRpcEnabled}" Content="Discord Rich Presence"
+                          ToolTip.Tip="Показывает в Discord, что ты играешь на AquaTech"/>
+              </StackPanel>
+              <Border Height="1" Background="#33FFFFFF" Margin="0,4"/>
+              <StackPanel Spacing="8">
                 <TextBlock Text="Сборка" FontSize="13" FontWeight="SemiBold" Foreground="#E2E8F0"/>
                 <TextBlock Text="Если клиент падает или не коннектится, проверь файлы и убери лишнее."
                            FontSize="12" Foreground="#A8B8CC" TextWrapping="Wrap"/>
@@ -356,6 +558,64 @@
             </StackPanel>
           </Border>
         </ScrollViewer>
+
+        <DockPanel IsVisible="{Binding IsNewsPage}">
+          <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,14">
+            <StackPanel Spacing="3">
+              <TextBlock Text="Новости сервера" FontFamily="avares://AquaTechLauncher/Assets/Fonts#Syne"
+                         FontSize="24" FontWeight="Bold" Foreground="#F8FAFC"/>
+              <TextBlock Text="Что происходит в океане" FontSize="12" Foreground="#A8B8CC"/>
+            </StackPanel>
+            <Button Grid.Column="1" Classes="glass" Command="{Binding RefreshNewsCommand}"
+                    IsEnabled="{Binding !NewsLoading}" Padding="14,6" MinHeight="32"
+                    AutomationProperties.Name="Обновить новости">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Classes="icon" Text="&#xE72C;"/>
+                <TextBlock Text="Обновить"/>
+              </StackPanel>
+            </Button>
+          </Grid>
+          <TextBlock DockPanel.Dock="Top" Text="Загружаем…" Foreground="#A8B8CC" Margin="0,0,0,12"
+                     IsVisible="{Binding NewsLoading}"/>
+          <ScrollViewer>
+            <StackPanel>
+              <StackPanel IsVisible="{Binding NewsLoading}">
+                <Border Classes="skeleton"/>
+                <Border Classes="skeleton"/>
+                <Border Classes="skeleton"/>
+                <Border Classes="skeleton"/>
+              </StackPanel>
+              <Border Classes="sheet" Padding="24,20" IsVisible="{Binding NewsEmpty}">
+                <StackPanel HorizontalAlignment="Center" Spacing="6">
+                  <TextBlock Classes="icon" Text="&#xE900;" FontSize="28" Foreground="#7B8BA0" HorizontalAlignment="Center"/>
+                  <TextBlock Text="Пока нет новостей" FontSize="15" FontWeight="SemiBold" Foreground="#F8FAFC" HorizontalAlignment="Center"/>
+                  <TextBlock Text="Объявления сервера появятся здесь" FontSize="12" Foreground="#A8B8CC" HorizontalAlignment="Center"/>
+                </StackPanel>
+              </Border>
+              <ItemsControl ItemsSource="{Binding News}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate x:DataType="core:NewsItem">
+                    <Border Classes="news-card">
+                      <StackPanel Orientation="Horizontal">
+                        <Border Classes="accent"/>
+                        <StackPanel Spacing="7">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Border Classes="date-chip">
+                              <TextBlock Text="{Binding DateLabel}"/>
+                            </Border>
+                            <TextBlock Classes="news-title" Text="{Binding Title}"/>
+                          </StackPanel>
+                          <TextBlock Text="{Binding Body}" FontSize="13" Foreground="#C7D5E0"
+                                     TextWrapping="Wrap" LineHeight="20"/>
+                        </StackPanel>
+                      </StackPanel>
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+          </ScrollViewer>
+        </DockPanel>
 
         <DockPanel IsVisible="{Binding IsLogPage}">
           <TextBlock DockPanel.Dock="Top" Text="Журнал" Margin="0,0,0,12"
@@ -418,6 +678,11 @@
             </Border>
             <Button Classes="auth-action" Content="{Binding LoginButtonText}" Command="{Binding SubmitLoginCommand}"
                     IsEnabled="{Binding CanEditAuth}" IsDefault="True" AutomationProperties.Name="Войти"/>
+            <Button Classes="glass" Content="Войти через браузер" Command="{Binding LoginViaBrowserCommand}"
+                    HorizontalAlignment="Stretch"
+                    ToolTip.Tip="Откроет aquateche.store: войди на сайте, и лаунчер подхватит сессию сам"/>
+            <TextBlock Text="Ждём вход в браузере…" FontSize="12" Foreground="#38BDF8"
+                       HorizontalAlignment="Center" IsVisible="{Binding BrowserLoginWaiting}"/>
             <Button Classes="link" Content="Создать аккаунт на aquateche.store"
                     Command="{Binding OpenRegisterCommand}" HorizontalAlignment="Center"/>
           </StackPanel>

@@ -48,9 +48,21 @@ CREATE TABLE IF NOT EXISTS aquatech_player_link (
   UNIQUE KEY uq_aquatech_player_nick (nick)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS aquatech_player_stats (
+  uuid CHAR(36) NOT NULL PRIMARY KEY,
+  nick VARCHAR(32) NOT NULL,
+  coins BIGINT NOT NULL DEFAULT 0,
+  fish BIGINT NOT NULL DEFAULT 0,
+  playtime_hours BIGINT NOT NULL DEFAULT 0,
+  quests_done INT NOT NULL DEFAULT 0,
+  privilege VARCHAR(64) NOT NULL DEFAULT '',
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_stats_nick (nick)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 INSERT INTO aquatech_meta (k, v) VALUES
   ('pack', 'AquaTech'),
-  ('schema_version', '1')
+  ('schema_version', '2')
 ON DUPLICATE KEY UPDATE v = VALUES(v);
 """
 
@@ -359,7 +371,7 @@ def main() -> int:
     parser.add_argument("--rotate-password", action="store_true")
     parser.add_argument("--no-upload", action="store_true")
     parser.add_argument("--no-restart", action="store_true")
-    parser.add_argument("--skip-migrate", action="store_true", help="Skip LP export/import")
+    parser.add_argument("--schema-only", action="store_true", help="Apply SQL then exit (no SFTP/restart)")
     args = parser.parse_args()
 
     secrets = load_or_create_secrets(rotate=args.rotate_password)
@@ -368,6 +380,9 @@ def main() -> int:
         flush=True,
     )
     apply_schema(secrets)
+    if args.schema_only:
+        print("Schema only; skip plugin rewrite / SFTP / restart", flush=True)
+        return 0
     write_plugin_configs(secrets)
 
     if args.no_upload:

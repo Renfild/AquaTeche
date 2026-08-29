@@ -4,9 +4,9 @@
       "id": "start",
       "title": "Старт (Start)",
       "description": "Бамбуковая удочка, множитель удачи, ящик снастей, 16 дубовых лестниц, 8 батона",
-      "badge": "Готов",
+      "badge": "24 ч",
       "command": "kit start",
-      "cooldownSeconds": 0,
+      "cooldownSeconds": 86400,
       "items": [
         {
           "item": "starcatcher:bamboo_rod",

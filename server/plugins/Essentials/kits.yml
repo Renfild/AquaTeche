@@ -1,6 +1,6 @@
 kits:
   start:
-    delay: 15000
+    delay: 86400
     items:
       - starcatcher:bamboo_rod 1
       - aquatech_ui:rate_x2 1

@@ -29,6 +29,8 @@ public static class ServerPing
         {
             using var cts = new CancellationTokenSource(timeoutMs);
             using var client = new TcpClient();
+            client.ReceiveTimeout = timeoutMs;
+            client.SendTimeout = timeoutMs;
             await client.ConnectAsync(host, port, cts.Token);
             var stream = client.GetStream();
 

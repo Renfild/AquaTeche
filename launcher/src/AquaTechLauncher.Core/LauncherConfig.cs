@@ -29,6 +29,9 @@ public sealed class LauncherConfig
     [JsonPropertyName("server_port")]
     public string? ServerPort { get; set; }
 
+    [JsonPropertyName("discord_rpc")]
+    public bool DiscordRpc { get; set; } = true;
+
     public static LauncherConfig Load()
     {
         var cfg = new LauncherConfig();
@@ -66,6 +69,7 @@ public sealed class LauncherConfig
             PortalSession = RememberMe ? SessionStore.Protect(PortalSession) : null,
             ServerHost = ServerHost,
             ServerPort = ServerPort,
+            DiscordRpc = DiscordRpc,
         };
         var json = JsonSerializer.Serialize(wire, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(LauncherConstants.ConfigPath, json);

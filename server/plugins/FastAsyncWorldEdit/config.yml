@@ -109,7 +109,6 @@ experimental:
   #  - Note: If entities become hidden, increase the server view distance to 3
   dynamic-chunk-rendering: -1
   # Allows brushes to be persistent (default: true)
-  # Mohist: BukkitImplAdapter is often null → ItemUtil NPE spam on hotbar change.
   persistent-brushes: false
   # [SAFE] Keep entities that are positioned in non-air blocks when editing an area (default: true)
   #  - Might cause client-side FPS lag in some situations
