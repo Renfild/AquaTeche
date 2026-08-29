@@ -97,7 +97,6 @@ public final class ClientEvents {
         if (!welcomed && mc.player.tickCount > 20) {
             welcomed = true;
             ClientUiState.resetSessionTimer();
-            mc.player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§b[AquaTech] §fСборка загружена. §7(F4 — Меню сервера)"));
         }
         net.aquatech.ui.client.cache.ResourceCacheManager.getInstance().prefetchPlayerAvatar(mc.player.getUUID());
 

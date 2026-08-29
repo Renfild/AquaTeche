@@ -9,13 +9,12 @@ import java.util.Set;
 
 /**
  * Maps StarCatcher rods to AquaTech loot / AutoFisher.
- * Fish-only: sky_rod, boner_rod. Everything else farms resources.
+ * Fish-only: sky_rod. Bone rod farms overworld hostile drops.
  */
 public final class FishingRodCompat {
     /** Only these rods keep StarCatcher fish catches. */
     private static final Set<String> FISH_ONLY = Set.of(
-            "sky_rod",
-            "boner_rod"
+            "sky_rod"
     );
 
     private FishingRodCompat() {
@@ -48,8 +47,10 @@ public final class FishingRodCompat {
             case "bamboo_rod", "good_old_rod" ->
                     AquaTechFishingRodItem.RodType.NOVICE; // Tier 1 (bamboo = starter blocks)
             // humble is early ores (maps closer to iron-tier pool in generateLoot fallback)
-            case "humble_rod", "naturalist_rod", "boner_rod", "sky_rod" ->
+            case "humble_rod", "naturalist_rod", "sky_rod" ->
                     AquaTechFishingRodItem.RodType.IRON; // Tier 2
+            case "boner_rod" ->
+                    AquaTechFishingRodItem.RodType.DIAMOND;
             case "starcatcher_rod", "slimed_rod" ->
                     AquaTechFishingRodItem.RodType.GOLD; // Tier 3
             case "iceborn_rod", "obsidian_rod" ->
