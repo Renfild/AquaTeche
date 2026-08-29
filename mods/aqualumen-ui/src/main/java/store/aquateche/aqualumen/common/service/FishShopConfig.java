@@ -396,16 +396,16 @@ public final class FishShopConfig {
 
     private static Data defaults() {
         Data d = new Data();
-        d.fishes.add(new FishDef("minecraft:cod", "\u0421\u044b\u0440\u0430\u044f \u0442\u0440\u0435\u0441\u043a\u0430", 5, "\u0411\u0430\u0437\u043e\u0432\u044b\u0439", "minecraft"));
-        d.fishes.add(new FishDef("minecraft:salmon", "\u0421\u044b\u0440\u043e\u0439 \u043b\u043e\u0441\u043e\u0441\u044c", 5, "\u0411\u0430\u0437\u043e\u0432\u044b\u0439", "minecraft"));
-        d.fishes.add(new FishDef("starcatcher:driftfin", "Driftfin (\u0414\u0440\u0438\u0444\u0442\u0444\u0438\u043d)", 10, "\u041e\u0431\u044b\u0447\u043d\u044b\u0439", "starcatcher"));
-        d.fishes.add(new FishDef("starcatcher:rockgill", "Rockgill (\u0420\u043e\u043a\u0433\u0438\u043b\u043b)", 15, "\u0420\u0435\u0434\u043a\u0438\u0439", "starcatcher"));
-        d.fishes.add(new FishDef("starcatcher:sunny_sturgeon", "Sunny Sturgeon (\u041e\u0441\u0451\u0442\u0440)", 20, "\u0420\u0435\u0434\u043a\u0438\u0439", "starcatcher"));
-        d.fishes.add(new FishDef("starcatcher:silverfin_pike", "Silverfin Pike (\u0429\u0443\u043a\u0430)", 25, "\u042d\u043f\u0438\u0447\u0435\u0441\u043a\u0438\u0439", "starcatcher"));
-        d.fishes.add(new FishDef("starcatcher:carpenjoe", "Carpenjoe (\u041a\u0430\u0440\u043f\u0435\u043d\u0434\u0436\u043e)", 30, "\u042d\u043f\u0438\u0447\u0435\u0441\u043a\u0438\u0439", "starcatcher"));
-        d.fishes.add(new FishDef("starcatcher:hollowbelly_darter", "Hollowbelly Darter (\u0422\u0435\u043c\u043d\u043e\u0431\u0440\u044e\u0448\u043a\u0430)", 40, "\u042d\u043f\u0438\u0447\u0435\u0441\u043a\u0438\u0439", "starcatcher"));
-        d.fishes.add(new FishDef("starcatcher:silverveil_perch", "Silverveil Perch (\u041e\u043a\u0443\u043d\u044c)", 50, "\u042d\u043f\u0438\u0447\u0435\u0441\u043a\u0438\u0439", "starcatcher"));
-        d.fishes.add(new FishDef("starcatcher:elderscale", "Elderscale (\u0414\u0440\u0435\u0432\u043d\u044f\u044f \u0440\u044b\u0431\u0430)", 100, "\u041b\u0435\u0433\u0435\u043d\u0434\u0430", "starcatcher"));
+        d.fishes.add(new FishDef("minecraft:cod", "\u0421\u044b\u0440\u0430\u044f \u0442\u0440\u0435\u0441\u043a\u0430", 8, "\u0411\u0430\u0437\u043e\u0432\u044b\u0439", "minecraft"));
+        d.fishes.add(new FishDef("minecraft:salmon", "\u0421\u044b\u0440\u043e\u0439 \u043b\u043e\u0441\u043e\u0441\u044c", 8, "\u0411\u0430\u0437\u043e\u0432\u044b\u0439", "minecraft"));
+        d.fishes.add(new FishDef("starcatcher:driftfin", "Driftfin (\u0414\u0440\u0438\u0444\u0442\u0444\u0438\u043d)", 16, "\u041e\u0431\u044b\u0447\u043d\u044b\u0439", "starcatcher"));
+        d.fishes.add(new FishDef("starcatcher:rockgill", "Rockgill (\u0420\u043e\u043a\u0433\u0438\u043b\u043b)", 24, "\u0420\u0435\u0434\u043a\u0438\u0439", "starcatcher"));
+        d.fishes.add(new FishDef("starcatcher:sunny_sturgeon", "Sunny Sturgeon (\u041e\u0441\u0451\u0442\u0440)", 28, "\u0420\u0435\u0434\u043a\u0438\u0439", "starcatcher"));
+        d.fishes.add(new FishDef("starcatcher:silverfin_pike", "Silverfin Pike (\u0429\u0443\u043a\u0430)", 38, "\u042d\u043f\u0438\u0447\u0435\u0441\u043a\u0438\u0439", "starcatcher"));
+        d.fishes.add(new FishDef("starcatcher:carpenjoe", "Carpenjoe (\u041a\u0430\u0440\u043f\u0435\u043d\u0434\u0436\u043e)", 45, "\u042d\u043f\u0438\u0447\u0435\u0441\u043a\u0438\u0439", "starcatcher"));
+        d.fishes.add(new FishDef("starcatcher:hollowbelly_darter", "Hollowbelly Darter (\u0422\u0435\u043c\u043d\u043e\u0431\u0440\u044e\u0448\u043a\u0430)", 60, "\u042d\u043f\u0438\u0447\u0435\u0441\u043a\u0438\u0439", "starcatcher"));
+        d.fishes.add(new FishDef("starcatcher:silverveil_perch", "Silverveil Perch (\u041e\u043a\u0443\u043d\u044c)", 75, "\u042d\u043f\u0438\u0447\u0435\u0441\u043a\u0438\u0439", "starcatcher"));
+        d.fishes.add(new FishDef("starcatcher:elderscale", "Elderscale (\u0414\u0440\u0435\u0432\u043d\u044f\u044f \u0440\u044b\u0431\u0430)", 140, "\u041b\u0435\u0433\u0435\u043d\u0434\u0430", "starcatcher"));
         return d;
     }
 }

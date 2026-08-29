@@ -97,8 +97,12 @@ public final class PendingDeliveryService {
         boolean ok = StoreCatalog.fulfill(player, kind, payload);
         ack(key, id, ok);
         if (ok) {
-            player.sendSystemMessage(Component.literal("Доставка с сайта: " + kind)
-                    .withStyle(ChatFormatting.GREEN));
+            String msg = switch (kind == null ? "" : kind) {
+                case "skin" -> "Скин с сайта применён";
+                case "skin_clear" -> "Скин с сайта снят";
+                default -> "Доставка с сайта: " + kind;
+            };
+            player.sendSystemMessage(Component.literal(msg).withStyle(ChatFormatting.GREEN));
             HubDataService.push(player);
         }
     }

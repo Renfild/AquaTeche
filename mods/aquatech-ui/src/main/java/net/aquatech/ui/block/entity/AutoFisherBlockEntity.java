@@ -210,7 +210,13 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasSpaceInOutput() {
-        return true;
+        for (int i = 1; i <= OUTPUT_SLOTS; i++) {
+            ItemStack slot = itemHandler.getStackInSlot(i);
+            if (slot.isEmpty() || slot.getCount() < slot.getMaxStackSize()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void doFishOperation(Level level, ItemStack rodStack, Player nearby) {
@@ -229,16 +235,31 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         }
         List<ItemStack> loot = FishingLootHandler.generateLoot(rodType, level.getRandom(), rodStack, nearby, effectiveRate);
 
+        int remainingBudget = 64;
         for (ItemStack drop : loot) {
+            if (remainingBudget <= 0) {
+                break;
+            }
+            if (drop.getCount() > remainingBudget) {
+                drop.setCount(remainingBudget);
+            }
+            remainingBudget -= drop.getCount();
             insertIntoOutput(drop);
         }
 
         if (MachineUpgrades.has(itemHandler, UPGRADE_SLOT, UpgradeItem.UpgradeType.OCEAN_BOUNTY)) {
             List<ItemStack> bonusFish = generateOceanBountyFish(level.getRandom());
             for (ItemStack fish : bonusFish) {
+                if (remainingBudget <= 0) {
+                    break;
+                }
                 if (effectiveRate > 1) {
                     fish.setCount(Math.min(fish.getMaxStackSize(), fish.getCount() * effectiveRate));
                 }
+                if (fish.getCount() > remainingBudget) {
+                    fish.setCount(remainingBudget);
+                }
+                remainingBudget -= fish.getCount();
                 insertIntoOutput(fish);
             }
         }

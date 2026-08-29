@@ -5,8 +5,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.aquatech.ui.AquaTechUI;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.scores.Objective;
@@ -337,7 +341,12 @@ public final class OceanEventsService {
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
         MinecraftServer server = event.getServer();
-        if (server == null || server.getTickCount() % 20 != 0) return;
+        if (server == null) return;
+        int tick = server.getTickCount();
+        if (tick % 200 == 0) {
+            sweepStaleDrops(server);
+        }
+        if (tick % 20 != 0) return;
         long now = System.currentTimeMillis();
 
         boolean golden = goldenActive(now);
@@ -357,6 +366,39 @@ public final class OceanEventsService {
             } else if (tournamentLoaded) {
                 awardTournament(server);
             }
+        }
+    }
+
+    /** Roadmap: drop entities older than 3 minutes when TPS < 13. */
+    private static void sweepStaleDrops(MinecraftServer server) {
+        long[] times = server.tickTimes;
+        if (times == null || times.length == 0) {
+            return;
+        }
+        long total = 0L;
+        for (long t : times) {
+            total += t;
+        }
+        float mspt = (total / (float) times.length) / 1_000_000.0F;
+        float tps = Math.min(20.0F, 1000.0F / Math.max(1.0F, mspt));
+        if (tps >= 13.0F) {
+            return;
+        }
+        int removed = 0;
+        AABB loaded = new AABB(-3.0E7, -64, -3.0E7, 3.0E7, 512, 3.0E7);
+        for (ServerLevel level : server.getAllLevels()) {
+            for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, loaded, e -> e.getAge() > 3600)) {
+                item.discard();
+                if (++removed >= 256) {
+                    break;
+                }
+            }
+            if (removed >= 256) {
+                break;
+            }
+        }
+        if (removed > 0) {
+            AquaTechUI.LOGGER.info("[AquaTech] cleared {} ground drops (TPS {})", removed, String.format("%.1f", tps));
         }
     }
 

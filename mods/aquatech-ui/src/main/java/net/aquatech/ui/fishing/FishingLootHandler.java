@@ -55,6 +55,7 @@ public class FishingLootHandler {
         // strip those fakes so bone/sky keep real starcatcher:* fish.
         if (FishingRodCompat.isFishOnlyRod(rodStack)) {
             scrubFakeAquaTechFishDrops(event, serverPlayer.getRandom());
+            bumpCatchStat(serverPlayer, false);
             RodDurability.wearOne(rodStack, serverPlayer);
             return;
         }
@@ -143,8 +144,20 @@ public class FishingLootHandler {
     }
 
     public static void bumpCatchStat(ServerPlayer player) {
+        bumpCatchStat(player, true);
+    }
+
+    public static void bumpCatchStat(ServerPlayer player, boolean awardVanillaStat) {
         try {
-            var scoreboard = player.getScoreboard();
+            int vanilla = 0;
+            try {
+                vanilla = player.getStats().getValue(
+                        net.minecraft.stats.Stats.CUSTOM.get(net.minecraft.stats.Stats.FISH_CAUGHT));
+            } catch (Throwable ignored) {
+            }
+            var scoreboard = player.getServer() != null
+                    ? player.getServer().getScoreboard()
+                    : player.getScoreboard();
             var objective = scoreboard.getObjective("aquatech_fish");
             if (objective == null) {
                 objective = scoreboard.addObjective(
@@ -154,7 +167,14 @@ public class FishingLootHandler {
                         net.minecraft.world.scores.criteria.ObjectiveCriteria.DUMMY.getDefaultRenderType());
             }
             var score = scoreboard.getOrCreatePlayerScore(player.getScoreboardName(), objective);
-            score.setScore(score.getScore() + 1);
+            int current = score.getScore();
+            if (current <= 0 && vanilla > 0) {
+                current = vanilla;
+            }
+            score.setScore(current + 1);
+            if (awardVanillaStat) {
+                player.awardStat(net.minecraft.stats.Stats.FISH_CAUGHT);
+            }
         } catch (Throwable ignored) {
         }
     }

@@ -14,6 +14,7 @@ import store.aquateche.aqualumen.common.service.HubEconomy;
 import store.aquateche.aqualumen.common.service.PendingDeliveryService;
 import store.aquateche.aqualumen.config.LumenConfig;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,6 +27,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class ServerEvents {
 
     private static final Set<UUID> MODDED_CLIENTS = ConcurrentHashMap.newKeySet();
+    private static final Map<UUID, Integer> LAST_FISH = new ConcurrentHashMap<>();
+    private static final Map<UUID, Long> LAST_COINS = new ConcurrentHashMap<>();
     private static int tickCounter;
 
     private ServerEvents() {
@@ -47,7 +50,13 @@ public final class ServerEvents {
 
     @SubscribeEvent
     public static void onLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            HubEconomy.coins(player);
+            HubDataService.syncPlayerToWebAsync(player);
+        }
         UUID id = event.getEntity().getUUID();
+        LAST_FISH.remove(id);
+        LAST_COINS.remove(id);
         MODDED_CLIENTS.remove(id);
         HubActionHandler.forget(id);
         HubDataService.closeFor(id);
@@ -63,10 +72,22 @@ public final class ServerEvents {
         if (tickCounter % interval == 0) {
             HubDataService.refreshOpenHubs(event.getServer());
         }
-        // Portal sync lives here: the KubeJS sandbox blocks java.lang.Thread, so HTTP must come from the mod.
+        if (tickCounter > 0 && tickCounter % 200 == 0) {
+            for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
+                int fish = HubEconomy.fishCaught(player);
+                long coins = HubEconomy.coins(player);
+                UUID id = player.getUUID();
+                Integer prevFish = LAST_FISH.put(id, fish);
+                Long prevCoins = LAST_COINS.put(id, coins);
+                if (prevFish == null || prevFish != fish || prevCoins == null || prevCoins != coins) {
+                    HubDataService.syncPlayerToWebAsync(player);
+                }
+            }
+        }
+        // Playtime / quests: slower full pass.
         if (tickCounter > 0 && tickCounter % 3000 == 0) {
             for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
-                HubEconomy.coins(player); // main-thread wallet warm-up (legacy import) before the async read
+                HubEconomy.coins(player);
                 HubDataService.syncPlayerToWebAsync(player);
             }
         }

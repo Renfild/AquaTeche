@@ -14,13 +14,11 @@ import java.util.List;
 
 public final class AquaChatOverlay {
 
-    public static final int CHAT_WIDTH = 350;
-    /** Gap from screen bottom to the last message row when the chat screen is open. */
-    public static final int OPEN_BOTTOM_GAP = 52;
-    /** Panel top inset when chat is open (header strip + tabs). */
-    public static final int PANEL_TOP_INSET = 270;
-    public static final int HEADER_INSET = 266;
-    public static final int TAB_INSET = 250;
+    public static final int CHAT_WIDTH = AquaChatLayout.CHAT_WIDTH;
+    public static final int OPEN_BOTTOM_GAP = AquaChatLayout.OPEN_BOTTOM_GAP;
+    public static final int PANEL_TOP_INSET = AquaChatLayout.PANEL_TOP_INSET;
+    public static final int HEADER_INSET = AquaChatLayout.HEADER_INSET;
+    public static final int TAB_INSET = AquaChatLayout.TAB_INSET;
     private static final int FADE_START_TICK = 200; // 10 seconds
     private static final int FADE_DURATION = 50;   // 2.5 seconds
 
@@ -39,8 +37,8 @@ public final class AquaChatOverlay {
         int screenHeight = mc.getWindow().getGuiScaledHeight();
         int currentTick = mc.gui.getGuiTicks();
 
-        int chatX = 8;
-        int bottomY = screenHeight - (chatOpen ? OPEN_BOTTOM_GAP : 38);
+        int chatX = AquaChatLayout.CONTENT_X;
+        int bottomY = screenHeight - (chatOpen ? AquaChatLayout.OPEN_BOTTOM_GAP : AquaChatLayout.CLOSED_BOTTOM_GAP);
 
         Font font = mc.font;
         int scroll = AquaChatManager.getScrollOffset();
@@ -52,12 +50,12 @@ public final class AquaChatOverlay {
         // chat UI (tabs -> history -> toolbar -> input). HIG Materials: a single
         // distinct surface establishes hierarchy and a sense of place.
         if (chatOpen) {
-            int panelX = chatX - 6;
-            int panelTop = screenHeight - PANEL_TOP_INSET;
-            int panelBottom = screenHeight - 8;
-            LumenGfx.gradientRounded(graphics, panelX, panelTop, CHAT_WIDTH + 12, panelBottom - panelTop, 8,
+            int panelTop = AquaChatLayout.panelTop(screenHeight);
+            LumenGfx.gradientRounded(graphics, AquaChatLayout.PANEL_X, panelTop,
+                    AquaChatLayout.PANEL_W, AquaChatLayout.panelH(screenHeight), 10,
                     0xE807111C, 0xF00A1624);
-            LumenGfx.outline(graphics, panelX, panelTop, CHAT_WIDTH + 12, panelBottom - panelTop, 8, 0x402FE0C0);
+            LumenGfx.outline(graphics, AquaChatLayout.PANEL_X, panelTop,
+                    AquaChatLayout.PANEL_W, AquaChatLayout.panelH(screenHeight), 10, 0x332FE0C0);
         }
 
         int currentY = bottomY;

@@ -115,6 +115,8 @@ public final class StoreCatalog {
                 giveItem(player, payload);
                 yield true;
             }
+            case "skin" -> applySkinUrl(player, payload);
+            case "skin_clear" -> clearSkin(player);
             default -> false;
         };
     }
@@ -159,6 +161,39 @@ public final class StoreCatalog {
             item = Items.PRISMARINE_SHARD;
         }
         HubEconomy.giveItem(player, new ItemStack(item, Math.max(1, count)));
+    }
+
+    private static boolean allowedSkinUrl(String url) {
+        if (url == null) {
+            return false;
+        }
+        return url.startsWith("https://aquateche.store/api/skins/")
+                || url.contains(".workers.dev/api/skins/");
+    }
+
+    private static boolean applySkinUrl(ServerPlayer player, String url) {
+        if (!allowedSkinUrl(url)) {
+            return false;
+        }
+        MinecraftServer server = player.getServer();
+        if (server == null) {
+            return false;
+        }
+        String name = player.getGameProfile().getName();
+        CommandSourceStack src = server.createCommandSourceStack().withPermission(4).withSuppressedOutput();
+        server.getCommands().performPrefixedCommand(src, "skin set " + name + " " + url);
+        return true;
+    }
+
+    private static boolean clearSkin(ServerPlayer player) {
+        MinecraftServer server = player.getServer();
+        if (server == null) {
+            return false;
+        }
+        String name = player.getGameProfile().getName();
+        CommandSourceStack src = server.createCommandSourceStack().withPermission(4).withSuppressedOutput();
+        server.getCommands().performPrefixedCommand(src, "skin clear " + name);
+        return true;
     }
 
     private static long parseLong(String raw, long fallback) {

@@ -57,13 +57,15 @@ public final class HubEconomy {
     }
 
     public static int fishCaught(ServerPlayer player) {
-        int vanilla = 0;
-        try {
-            vanilla = player.getStats().getValue(Stats.CUSTOM.get(Stats.FISH_CAUGHT));
-        } catch (Throwable ignored) {
-        }
         int board = (int) Math.min(Integer.MAX_VALUE, score(player, FISH_OBJECTIVE));
-        return Math.max(vanilla, board);
+        if (board > 0) {
+            return board;
+        }
+        try {
+            return player.getStats().getValue(Stats.CUSTOM.get(Stats.FISH_CAUGHT));
+        } catch (Throwable ignored) {
+            return 0;
+        }
     }
 
     public static boolean trySpendCoins(ServerPlayer player, long amount) {
@@ -175,16 +177,21 @@ public final class HubEconomy {
         return player.getPersistentData().getCompound(DAILY_TAG);
     }
 
+    private static Scoreboard board(ServerPlayer player) {
+        return player.getServer() != null ? player.getServer().getScoreboard() : player.getScoreboard();
+    }
+
     private static long score(ServerPlayer player, String objectiveName) {
-        Objective objective = player.getScoreboard().getObjective(objectiveName);
+        Scoreboard scoreboard = board(player);
+        Objective objective = scoreboard.getObjective(objectiveName);
         if (objective == null) {
             return 0L;
         }
-        return player.getScoreboard().getOrCreatePlayerScore(player.getScoreboardName(), objective).getScore();
+        return scoreboard.getOrCreatePlayerScore(player.getScoreboardName(), objective).getScore();
     }
 
     private static void adjustScore(ServerPlayer player, String objectiveName, int delta) {
-        Scoreboard scoreboard = player.getScoreboard();
+        Scoreboard scoreboard = board(player);
         Objective objective = scoreboard.getObjective(objectiveName);
         if (objective == null) {
             objective = scoreboard.addObjective(objectiveName, ObjectiveCriteria.DUMMY,
@@ -195,7 +202,7 @@ public final class HubEconomy {
     }
 
     private static void setScore(ServerPlayer player, String objectiveName, long value) {
-        Scoreboard scoreboard = player.getScoreboard();
+        Scoreboard scoreboard = board(player);
         Objective objective = scoreboard.getObjective(objectiveName);
         if (objective == null) {
             objective = scoreboard.addObjective(objectiveName, ObjectiveCriteria.DUMMY,
