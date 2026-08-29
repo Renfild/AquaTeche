@@ -107,10 +107,28 @@ public final class AquaChatMessage {
         String unformatted = clean.replaceAll("§[0-9a-fk-orA-FK-OR]", "").trim();
 
         // 1. Private message: [sender -> target] msg or [sender -> Я] msg
-        Matcher pm = Pattern.compile("^\\[(?<sender>[A-Za-z0-9_]{2,16})\\s*->\\s*(?<target>[A-Za-z0-9_А-Яа-яЁё]{1,16})\\]\\s*(?<msg>.*)$").matcher(unformatted);
+        Matcher pm = Pattern.compile("^\\[(?<sender>[A-Za-z0-9_]{2,16})\\s*(?:->|→|»|›)\\s*(?<target>[A-Za-z0-9_А-Яа-яЁё]{1,16})\\]\\s*(?<msg>.*)$").matcher(unformatted);
         if (pm.matches()) {
-            String sender = pm.group("sender");
+            String sender = resolveSelfAlias(pm.group("sender"));
             String msg = pm.group("msg");
+            PlayerProfile profile = resolveProfile(sender);
+            UUID uuid = resolveUuid(sender, profile);
+            return fromProfile(profile, uuid, sender, msg, Channel.PRIVATE, component, currentTick);
+        }
+
+        Matcher whisperOut = Pattern.compile("^(?:You whisper to|You tell|Вы шепчете(?: игроку)?)\\s+(?<target>[A-Za-z0-9_]{2,16}):\\s*(?<msg>.*)$").matcher(unformatted);
+        if (whisperOut.matches()) {
+            String sender = localPlayerName();
+            String msg = whisperOut.group("msg");
+            PlayerProfile profile = resolveProfile(sender);
+            UUID uuid = resolveUuid(sender, profile);
+            return fromProfile(profile, uuid, sender, msg, Channel.PRIVATE, component, currentTick);
+        }
+
+        Matcher whisperIn = Pattern.compile("^(?<sender>[A-Za-z0-9_]{2,16})\\s+(?:whispers(?: to you)?|шепчет(?: вам)?):\\s*(?<msg>.*)$").matcher(unformatted);
+        if (whisperIn.matches()) {
+            String sender = whisperIn.group("sender");
+            String msg = whisperIn.group("msg");
             PlayerProfile profile = resolveProfile(sender);
             UUID uuid = resolveUuid(sender, profile);
             return fromProfile(profile, uuid, sender, msg, Channel.PRIVATE, component, currentTick);
@@ -215,6 +233,23 @@ public final class AquaChatMessage {
             t = t.replaceFirst("(?i)^" + Pattern.quote(senderName) + "\\s*:\\s*", "").trim();
         }
         return t;
+    }
+
+    private static String localPlayerName() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player != null) {
+            return mc.player.getName().getString();
+        }
+        return "me";
+    }
+
+    private static String resolveSelfAlias(String sender) {
+        if (sender == null) return localPlayerName();
+        String s = sender.trim();
+        if (s.equalsIgnoreCase("me") || s.equalsIgnoreCase("you") || s.equals("я") || s.equals("Вы") || s.equals("вы")) {
+            return localPlayerName();
+        }
+        return s;
     }
 
     private static PlayerProfile resolveProfile(String name) {

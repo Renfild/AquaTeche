@@ -1,6 +1,5 @@
 package net.aquatech.ui.client.chat;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.LumenGfx;
 import net.aquatech.ui.client.render.UiDraw;
@@ -15,7 +14,6 @@ import java.util.List;
 public final class AquaChatOverlay {
 
     public static final int CHAT_WIDTH = AquaChatLayout.CHAT_WIDTH;
-    public static final int OPEN_BOTTOM_GAP = AquaChatLayout.OPEN_BOTTOM_GAP;
     public static final int PANEL_TOP_INSET = AquaChatLayout.PANEL_TOP_INSET;
     public static final int HEADER_INSET = AquaChatLayout.HEADER_INSET;
     public static final int TAB_INSET = AquaChatLayout.TAB_INSET;
@@ -31,32 +29,47 @@ public final class AquaChatOverlay {
         if (mc.options.hideGui) return;
 
         boolean chatOpen = AquaChatManager.isChatScreenOpen() || mc.screen instanceof AquaChatScreen;
-        List<AquaChatMessage> messages = chatOpen ? AquaChatManager.getFilteredMessages() : AquaChatManager.getMessages();
-        if (messages.isEmpty() && !chatOpen) return;
+        // Open chat is one Screen surface (panel + history + input). HUD overlay
+        // would paint the panel on top of the input and clip the field out of the frame.
+        if (chatOpen) {
+            return;
+        }
+
+        List<AquaChatMessage> messages = AquaChatManager.getMessages();
+        if (messages.isEmpty()) return;
 
         int screenHeight = mc.getWindow().getGuiScaledHeight();
+        renderHistory(graphics, mc.font, messages, screenHeight, false);
+    }
+
+    public static void renderOpenPanel(GuiGraphics graphics, int screenHeight) {
+        int panelTop = AquaChatLayout.panelTop(screenHeight);
+        LumenGfx.gradientRounded(graphics, AquaChatLayout.PANEL_X, panelTop,
+                AquaChatLayout.PANEL_W, AquaChatLayout.panelH(screenHeight), AquaChatLayout.PANEL_RADIUS,
+                0xE807111C, 0xF00A1624);
+        LumenGfx.outline(graphics, AquaChatLayout.PANEL_X, panelTop,
+                AquaChatLayout.PANEL_W, AquaChatLayout.panelH(screenHeight), AquaChatLayout.PANEL_RADIUS, 0x332FE0C0);
+    }
+
+    public static void renderOpenHistory(GuiGraphics graphics, Font font, int screenHeight) {
+        renderHistory(graphics, font, AquaChatManager.getFilteredMessages(), screenHeight, true);
+    }
+
+    private static void renderHistory(GuiGraphics graphics, Font font, List<AquaChatMessage> messages,
+                                      int screenHeight, boolean chatOpen) {
+        if (messages.isEmpty()) return;
+
+        Minecraft mc = Minecraft.getInstance();
         int currentTick = mc.gui.getGuiTicks();
-
         int chatX = AquaChatLayout.CONTENT_X;
-        int bottomY = screenHeight - (chatOpen ? AquaChatLayout.OPEN_BOTTOM_GAP : AquaChatLayout.CLOSED_BOTTOM_GAP);
-
-        Font font = mc.font;
+        int bottomY = chatOpen ? AquaChatLayout.messageBottom(screenHeight)
+                : screenHeight - AquaChatLayout.CLOSED_BOTTOM_GAP;
+        int clipTop = chatOpen ? AquaChatLayout.messageTop(screenHeight) : 0;
         int scroll = AquaChatManager.getScrollOffset();
 
         int totalMessages = messages.size();
         int endIndex = Math.max(0, totalMessages - scroll);
         int startIndex = Math.max(0, endIndex - (chatOpen ? 18 : 8));
-        // When chat screen is open, draw ONE material plane behind the whole
-        // chat UI (tabs -> history -> toolbar -> input). HIG Materials: a single
-        // distinct surface establishes hierarchy and a sense of place.
-        if (chatOpen) {
-            int panelTop = AquaChatLayout.panelTop(screenHeight);
-            LumenGfx.gradientRounded(graphics, AquaChatLayout.PANEL_X, panelTop,
-                    AquaChatLayout.PANEL_W, AquaChatLayout.panelH(screenHeight), 10,
-                    0xE807111C, 0xF00A1624);
-            LumenGfx.outline(graphics, AquaChatLayout.PANEL_X, panelTop,
-                    AquaChatLayout.PANEL_W, AquaChatLayout.panelH(screenHeight), 10, 0x332FE0C0);
-        }
 
         int currentY = bottomY;
 
@@ -78,7 +91,7 @@ public final class AquaChatOverlay {
             int msgH = calculateMessageHeight(font, msg);
             currentY -= msgH + 3;
 
-            if (chatOpen && currentY < bottomY - 175) {
+            if (chatOpen && currentY < clipTop) {
                 break;
             }
 
@@ -88,12 +101,17 @@ public final class AquaChatOverlay {
 
     public static int calculateMessageHeight(Font font, AquaChatMessage msg) {
         String body = visibleBody(msg);
-        int lineCount = Math.max(1, font.split(AquaFontRenderer.text(body), CHAT_WIDTH - 40).size());
+        // Vanilla font: custom TTF has no Cyrillic, so split/width must match draw.
+        int lineCount = Math.max(1, font.split(Component.literal(body), CHAT_WIDTH - 40).size());
         return 16 + (lineCount * 12) + 4;
     }
 
     private static String visibleBody(AquaChatMessage msg) {
-        String src = msg.getMessageText() != null ? msg.getMessageText() : "";
+        String parsed = msg.getMessageText() != null ? msg.getMessageText() : "";
+        if (msg.getChannel() == AquaChatMessage.Channel.PRIVATE && !parsed.isBlank()) {
+            return parsed;
+        }
+        String src = parsed;
         if (msg.getOriginalComponent() != null) {
             String raw = msg.getOriginalComponent().getString();
             if (raw != null && !raw.isBlank()) {
@@ -102,9 +120,9 @@ public final class AquaChatOverlay {
         }
         String body = AquaChatMessage.stripChatBody(src, msg.getSenderName(), msg.getRankDisplay());
         if (body == null || body.isBlank()) {
-            body = msg.getMessageText() != null ? msg.getMessageText() : "";
+            body = parsed;
         }
-        return body;
+        return body != null ? body : "";
     }
 
     private static void renderAquaMessage(GuiGraphics graphics, Font font, AquaChatMessage msg,
@@ -157,7 +175,7 @@ public final class AquaChatOverlay {
             }
 
             // System Message Lines (Pure white)
-            List<FormattedCharSequence> lines = font.split(net.minecraft.network.chat.Component.literal(msg.getMessageText()), CHAT_WIDTH - 24);
+            List<FormattedCharSequence> lines = font.split(Component.literal(msg.getMessageText()), CHAT_WIDTH - 24);
             int textY = y + 16;
             for (FormattedCharSequence line : lines) {
                 graphics.drawString(font, line, x + 6, textY, applyAlpha(0xFFFFFFFF, alpha), true);
@@ -212,7 +230,13 @@ public final class AquaChatOverlay {
         String body = visibleBody(msg);
         int bodyX = headX;
         int maxW = CHAT_WIDTH - (bodyX - x) - 8;
-        AquaFontRenderer.drawWrapped(graphics, font, body, bodyX, y + 16, maxW, applyAlpha(0xFFFFFFFF, alpha));
+        List<FormattedCharSequence> bodyLines = font.split(Component.literal(body), Math.max(8, maxW));
+        int bodyY = y + 16;
+        int bodyColor = applyAlpha(0xFFFFFFFF, alpha);
+        for (FormattedCharSequence line : bodyLines) {
+            graphics.drawString(font, line, bodyX, bodyY, bodyColor, false);
+            bodyY += 12;
+        }
     }
 
     /**

@@ -163,11 +163,17 @@ public final class AquaChatScreen extends Screen {
         }
         root = root.toLowerCase();
         return root.equals("login") || root.equals("l") || root.equals("register")
-                || root.equals("changepassword") || root.equals("password") || root.equals("auth");
+                || root.equals("changepassword") || root.equals("password") || root.equals("auth")
+                || root.equals("msg") || root.equals("tell") || root.equals("w")
+                || root.equals("whisper") || root.equals("r") || root.equals("reply")
+                || root.equals("m");
     }
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        AquaChatOverlay.renderOpenPanel(graphics, this.height);
+        AquaChatOverlay.renderOpenHistory(graphics, this.font, this.height);
+
         // Header sits on its own strip so it never collides with toolbar controls.
         int headerY = this.height - AquaChatLayout.HEADER_INSET;
         int brandX = AquaChatLayout.CONTENT_X;
@@ -194,7 +200,7 @@ public final class AquaChatScreen extends Screen {
             };
 
             int w = AquaFontRenderer.width(this.font, label) + 14;
-            int h = 17;
+            int h = AquaChatLayout.TAB_H;
             if (tabX + w > tabMax) {
                 break;
             }
@@ -296,7 +302,7 @@ public final class AquaChatScreen extends Screen {
                 case SYSTEM -> "Система";
             };
             int w = AquaFontRenderer.width(this.font, label) + 14;
-            int h = 17;
+            int h = AquaChatLayout.TAB_H;
             if (tabX + w > tabMax) {
                 break;
             }
@@ -336,17 +342,18 @@ public final class AquaChatScreen extends Screen {
             return true;
         }
 
-        int bottomY = this.height - AquaChatLayout.OPEN_BOTTOM_GAP;
+        int bottomY = AquaChatLayout.messageBottom(this.height);
         int currentY = bottomY;
         List<AquaChatMessage> messages = AquaChatManager.getFilteredMessages();
         int scroll = AquaChatManager.getScrollOffset();
         int startIdx = Math.max(0, messages.size() - 1 - scroll);
+        int clipTop = AquaChatLayout.messageTop(this.height);
 
         for (int i = startIdx; i >= 0; i--) {
             AquaChatMessage msg = messages.get(i);
             int msgH = AquaChatOverlay.calculateMessageHeight(this.font, msg);
             currentY -= msgH + 3;
-            if (currentY < bottomY - 175) break;
+            if (currentY < clipTop) break;
 
             // Only the header strip (top 14px of the card) triggers /msg
             boolean inCard = mouseX >= AquaChatLayout.CONTENT_X && mouseX <= AquaChatLayout.contentRight();
