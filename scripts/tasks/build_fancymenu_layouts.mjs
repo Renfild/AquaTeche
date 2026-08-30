@@ -273,13 +273,14 @@ ${req(loadId)}
 `;
 }
 
-function movedVanilla({ instance, execId, wid, loadId, x, y, w, h, label, bg, hover }) {
+function movedVanilla({ instance, execId, wid, loadId, x, y, w, h, label, bg, hover, labelShadow = true }) {
   const bgLines = bg
     ? ` backgroundnormal = [source:local]/config/fancymenu/assets/${bg}
  backgroundhovered = [source:local]/config/fancymenu/assets/${hover}
 `
     : "";
   const labelLine = label ? ` label = ${label}\n` : "";
+  const shadowLine = label && !labelShadow ? ` label_shadow = false\n` : "";
   return `vanilla_button {
  button_element_executable_block_identifier = ${execId}
  [executable_block:${execId}][type:generic] = [executables:]
@@ -287,7 +288,7 @@ ${bgLines} restartbackgroundanimations = true
  nine_slice_custom_background = true
  nine_slice_border_x = ${NINE_X}
  nine_slice_border_y = ${NINE_Y}
-${labelLine}${widgetMeta(wid)}
+${labelLine}${shadowLine}${widgetMeta(wid)}
  element_type = vanilla_button
  instance_identifier = ${instance}
 ${metaTail}
@@ -306,7 +307,8 @@ ${req(loadId)}
 `;
 }
 
-function customButton({ id, execId, actionId, action, value, x, y, w, h, label, bg, hover }) {
+function customButton({ id, execId, actionId, action, value, x, y, w, h, label, bg, hover, labelShadow = true }) {
+  const shadowLine = labelShadow ? "" : ` label_shadow = false\n`;
   return `element {
  button_element_executable_block_identifier = ${execId}
  [executable_action_instance:${actionId}][action_type:${action}] = ${value}
@@ -318,7 +320,7 @@ function customButton({ id, execId, actionId, action, value, x, y, w, h, label, 
  nine_slice_border_x = ${NINE_X}
  nine_slice_border_y = ${NINE_Y}
  label = ${label}
-${widgetMeta(wid(id))}
+${shadowLine}${widgetMeta(wid(id))}
  element_type = custom_button
  instance_identifier = ${id}
 ${metaTail}
@@ -510,6 +512,7 @@ const title = [
     label: '{"text":"Играть","color":"#031018","bold":true}',
     bg: "btn_play.png",
     hover: "btn_play_hover.png",
+    labelShadow: false,
   }),
   movedVanilla({
     instance: "mc_titlescreen_options_button",
@@ -633,6 +636,7 @@ const pause = [
     label: '{"text":"Продолжить","color":"#031018","bold":true}',
     bg: "btn_play.png",
     hover: "btn_play_hover.png",
+    labelShadow: false,
   }),
   movedVanilla({
     instance: "pause_options_button",

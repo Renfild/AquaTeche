@@ -213,6 +213,7 @@ vanilla_button {
  nine_slice_border_x = 8
  nine_slice_border_y = 8
  label = {"text":"Продолжить","color":"#031018","bold":true}
+ label_shadow = false
  navigatable = true
  widget_active_state_requirement_container_identifier = w-065
  [loading_requirement_container_meta:w-065] = [groups:][instances:]

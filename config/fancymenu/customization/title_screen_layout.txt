@@ -229,6 +229,7 @@ element {
  nine_slice_border_x = 8
  nine_slice_border_y = 8
  label = {"text":"Играть","color":"#031018","bold":true}
+ label_shadow = false
  navigatable = true
  widget_active_state_requirement_container_identifier = wid-btn-play
  [loading_requirement_container_meta:wid-btn-play] = [groups:][instances:]
