@@ -1,106 +1,65 @@
 {
-  "from_version": "2.9.264",
-  "to_version": "2.9.265",
+  "from_version": "2.9.265",
+  "to_version": "2.9.266",
   "added": [
     {
+      "path": "config/fancymenu/assets/pause_glass.png",
+      "md5": "ef0cd21db8e080953ba993c50f153ea1",
+      "size": 82,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__pause_glass.png",
+      "asset": "config__fancymenu__assets__pause_glass.png"
+    }
+  ],
+  "changed": [
+    {
       "path": "config/fancymenu/assets/btn_ghost_hover.png",
-      "md5": "bd206dcd213dafa7bd9e18c81b844a74",
-      "size": 1076465,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_ghost_hover.png",
+      "md5": "7ae89ca5998b32f2ae85f600340b842d",
+      "size": 82,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__btn_ghost_hover.png",
       "asset": "config__fancymenu__assets__btn_ghost_hover.png"
     },
     {
       "path": "config/fancymenu/assets/btn_ghost.png",
-      "md5": "d75421bd9adb21716ed110fb11b8cfb7",
-      "size": 1047700,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_ghost.png",
+      "md5": "84b0522b2cb2485885e8c8da94f8c345",
+      "size": 82,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__btn_ghost.png",
       "asset": "config__fancymenu__assets__btn_ghost.png"
     },
     {
       "path": "config/fancymenu/assets/btn_play_hover.png",
-      "md5": "e1fa8dadeda5e3e323325182133be19d",
-      "size": 1128923,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_play_hover.png",
+      "md5": "ffaadbd8e70017ff56e96964349f46e5",
+      "size": 83,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__btn_play_hover.png",
       "asset": "config__fancymenu__assets__btn_play_hover.png"
     },
     {
       "path": "config/fancymenu/assets/btn_play.png",
-      "md5": "05cc0ecfec76f7a5311a5ec09bd776be",
-      "size": 1116950,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_play.png",
+      "md5": "f6a79873992c8944bc4d78863597f745",
+      "size": 83,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__btn_play.png",
       "asset": "config__fancymenu__assets__btn_play.png"
     },
     {
-      "path": "config/fancymenu/assets/logo.png",
-      "md5": "001fe194b3a2bd4c947c0c3a2b5a97c6",
-      "size": 170436,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__logo.png",
-      "asset": "config__fancymenu__assets__logo.png"
-    },
-    {
-      "path": "config/fancymenu/assets/menu_background.png",
-      "md5": "d8fe8a82173a7a70e2b9a269019ba51f",
-      "size": 1664429,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__menu_background.png",
-      "asset": "config__fancymenu__assets__menu_background.png"
-    },
-    {
-      "path": "config/fancymenu/customizablemenus.txt",
-      "md5": "e121a291dad48a9f8014486750ed6860",
-      "size": 125,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__customizablemenus.txt",
-      "asset": "config__fancymenu__customizablemenus.txt"
-    },
-    {
       "path": "config/fancymenu/customization/pause_screen_layout.txt",
-      "md5": "12fac8a27173626418eb1235b112a699",
-      "size": 23325,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__customization__pause_screen_layout.txt",
+      "md5": "fcd22544442739d612d19d6eff17f1a4",
+      "size": 32403,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__customization__pause_screen_layout.txt",
       "asset": "config__fancymenu__customization__pause_screen_layout.txt"
     },
     {
       "path": "config/fancymenu/customization/title_screen_layout.txt",
-      "md5": "a25bbfe9552a26bc8c22327a0ed2856d",
-      "size": 42437,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__customization__title_screen_layout.txt",
+      "md5": "f7413a6e95924f262a5c29d69fa9c358",
+      "size": 42365,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__customization__title_screen_layout.txt",
       "asset": "config__fancymenu__customization__title_screen_layout.txt"
-    },
-    {
-      "path": "config/fancymenu/options.txt",
-      "md5": "71f373734790993ea83ba11df45a572b",
-      "size": 1251,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__options.txt",
-      "asset": "config__fancymenu__options.txt"
-    },
-    {
-      "path": "mods/fancymenu_forge_3.9.12_MC_1.20.1.jar",
-      "md5": "1ec53b20259f65cad0b722e69d2f8e0f",
-      "size": 26181250,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/fancymenu_forge_3.9.12_MC_1.20.1.jar",
-      "asset": "fancymenu_forge_3.9.12_MC_1.20.1.jar"
-    },
-    {
-      "path": "mods/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
-      "md5": "d69107c593e361e1b7b96733250bd098",
-      "size": 625185,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
-      "asset": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar"
-    },
-    {
-      "path": "mods/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
-      "md5": "6b528d368f7fcbf737df28f2457cdec6",
-      "size": 37178,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
-      "asset": "melody_forge_1.0.3_MC_1.20.1-1.20.4.jar"
     }
   ],
-  "changed": [],
   "removed": [],
   "stats": {
-    "added": 13,
-    "changed": 0,
+    "added": 1,
+    "changed": 6,
     "removed": 0,
-    "unchanged": 114,
-    "download_bytes": 33115654
+    "unchanged": 121,
+    "download_bytes": 75180
   }
 }

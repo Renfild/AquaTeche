@@ -1,5 +1,5 @@
 /**
- * Delta-publish FancyMenu pack 2.9.265 (Python is broken on this machine).
+ * Delta-publish FancyMenu pack 2.9.266 (Python is broken on this machine).
  * Merges new files into docs/pack/manifest.json, uploads only those assets
  * to a draft GitHub release, then publishes the tag.
  */
@@ -9,26 +9,20 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const TAG = "pack-2.9.265";
-const VERSION = "2.9.265";
+const TAG = "pack-2.9.266";
+const VERSION = "2.9.266";
 const REPO = "Renfild/AquaTeche";
 const DOCS_PACK = path.join(ROOT, "docs/pack");
 const RELEASE = `https://github.com/${REPO}/releases/download/${TAG}`;
 
 const ADD = [
-  ["client/mods/fancymenu_forge_3.9.12_MC_1.20.1.jar", "mods/fancymenu_forge_3.9.12_MC_1.20.1.jar"],
-  ["client/mods/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar", "mods/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar"],
-  ["client/mods/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar", "mods/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar"],
-  ["config/fancymenu/options.txt", "config/fancymenu/options.txt"],
-  ["config/fancymenu/customizablemenus.txt", "config/fancymenu/customizablemenus.txt"],
   ["config/fancymenu/customization/title_screen_layout.txt", "config/fancymenu/customization/title_screen_layout.txt"],
   ["config/fancymenu/customization/pause_screen_layout.txt", "config/fancymenu/customization/pause_screen_layout.txt"],
-  ["config/fancymenu/assets/menu_background.png", "config/fancymenu/assets/menu_background.png"],
   ["config/fancymenu/assets/btn_play.png", "config/fancymenu/assets/btn_play.png"],
   ["config/fancymenu/assets/btn_play_hover.png", "config/fancymenu/assets/btn_play_hover.png"],
   ["config/fancymenu/assets/btn_ghost.png", "config/fancymenu/assets/btn_ghost.png"],
   ["config/fancymenu/assets/btn_ghost_hover.png", "config/fancymenu/assets/btn_ghost_hover.png"],
-  ["config/fancymenu/assets/logo.png", "config/fancymenu/assets/logo.png"],
+  ["config/fancymenu/assets/pause_glass.png", "config/fancymenu/assets/pause_glass.png"],
 ];
 
 function md5File(abs) {

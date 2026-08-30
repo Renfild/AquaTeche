@@ -1,5 +1,5 @@
 {
-  "version": "2.9.265",
+  "version": "2.9.266",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -64,30 +64,30 @@
     },
     {
       "path": "config/fancymenu/assets/btn_ghost_hover.png",
-      "md5": "bd206dcd213dafa7bd9e18c81b844a74",
-      "size": 1076465,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_ghost_hover.png",
+      "md5": "7ae89ca5998b32f2ae85f600340b842d",
+      "size": 82,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__btn_ghost_hover.png",
       "asset": "config__fancymenu__assets__btn_ghost_hover.png"
     },
     {
       "path": "config/fancymenu/assets/btn_ghost.png",
-      "md5": "d75421bd9adb21716ed110fb11b8cfb7",
-      "size": 1047700,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_ghost.png",
+      "md5": "84b0522b2cb2485885e8c8da94f8c345",
+      "size": 82,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__btn_ghost.png",
       "asset": "config__fancymenu__assets__btn_ghost.png"
     },
     {
       "path": "config/fancymenu/assets/btn_play_hover.png",
-      "md5": "e1fa8dadeda5e3e323325182133be19d",
-      "size": 1128923,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_play_hover.png",
+      "md5": "ffaadbd8e70017ff56e96964349f46e5",
+      "size": 83,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__btn_play_hover.png",
       "asset": "config__fancymenu__assets__btn_play_hover.png"
     },
     {
       "path": "config/fancymenu/assets/btn_play.png",
-      "md5": "05cc0ecfec76f7a5311a5ec09bd776be",
-      "size": 1116950,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_play.png",
+      "md5": "f6a79873992c8944bc4d78863597f745",
+      "size": 83,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__btn_play.png",
       "asset": "config__fancymenu__assets__btn_play.png"
     },
     {
@@ -105,6 +105,13 @@
       "asset": "config__fancymenu__assets__menu_background.png"
     },
     {
+      "path": "config/fancymenu/assets/pause_glass.png",
+      "md5": "ef0cd21db8e080953ba993c50f153ea1",
+      "size": 82,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__assets__pause_glass.png",
+      "asset": "config__fancymenu__assets__pause_glass.png"
+    },
+    {
       "path": "config/fancymenu/customizablemenus.txt",
       "md5": "e121a291dad48a9f8014486750ed6860",
       "size": 125,
@@ -113,16 +120,16 @@
     },
     {
       "path": "config/fancymenu/customization/pause_screen_layout.txt",
-      "md5": "12fac8a27173626418eb1235b112a699",
-      "size": 23325,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__customization__pause_screen_layout.txt",
+      "md5": "fcd22544442739d612d19d6eff17f1a4",
+      "size": 32403,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__customization__pause_screen_layout.txt",
       "asset": "config__fancymenu__customization__pause_screen_layout.txt"
     },
     {
       "path": "config/fancymenu/customization/title_screen_layout.txt",
-      "md5": "a25bbfe9552a26bc8c22327a0ed2856d",
-      "size": 42437,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__customization__title_screen_layout.txt",
+      "md5": "f7413a6e95924f262a5c29d69fa9c358",
+      "size": 42365,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.266/config__fancymenu__customization__title_screen_layout.txt",
       "asset": "config__fancymenu__customization__title_screen_layout.txt"
     },
     {

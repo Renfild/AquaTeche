@@ -1,10 +1,68 @@
 /** Emit AquaTech FancyMenu v3 layouts (title + pause). */
 import fs from "node:fs";
 import path from "node:path";
+import zlib from "node:zlib";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const OUT = path.join(ROOT, "config/fancymenu/customization");
+const ASSETS = path.join(ROOT, "config/fancymenu/assets");
+
+function crc32(buf) {
+  let crc = 0xffffffff;
+  for (let i = 0; i < buf.length; i++) {
+    crc ^= buf[i];
+    for (let j = 0; j < 8; j++) crc = (crc >>> 1) ^ (0xedb88320 & -(crc & 1));
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+function pngChunk(type, data) {
+  const t = Buffer.from(type);
+  const len = Buffer.alloc(4);
+  len.writeUInt32BE(data.length);
+  const body = Buffer.concat([t, data]);
+  const c = Buffer.alloc(4);
+  c.writeUInt32BE(crc32(body));
+  return Buffer.concat([len, body, c]);
+}
+
+function writePng(file, w, h, rgba) {
+  const raw = Buffer.alloc((w * 4 + 1) * h);
+  for (let y = 0; y < h; y++) {
+    const row = y * (w * 4 + 1);
+    raw[row] = 0;
+    for (let x = 0; x < w; x++) {
+      const i = row + 1 + x * 4;
+      raw[i] = rgba[0];
+      raw[i + 1] = rgba[1];
+      raw[i + 2] = rgba[2];
+      raw[i + 3] = rgba[3];
+    }
+  }
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(w, 0);
+  ihdr.writeUInt32BE(h, 4);
+  ihdr[8] = 8;
+  ihdr[9] = 6;
+  const sig = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+  fs.writeFileSync(
+    file,
+    Buffer.concat([
+      sig,
+      pngChunk("IHDR", ihdr),
+      pngChunk("IDAT", zlib.deflateSync(raw)),
+      pngChunk("IEND", Buffer.alloc(0)),
+    ]),
+  );
+}
+
+fs.mkdirSync(ASSETS, { recursive: true });
+writePng(path.join(ASSETS, "btn_play.png"), 16, 16, [45, 212, 224, 255]);
+writePng(path.join(ASSETS, "btn_play_hover.png"), 16, 16, [126, 233, 242, 255]);
+writePng(path.join(ASSETS, "btn_ghost.png"), 16, 16, [14, 58, 88, 210]);
+writePng(path.join(ASSETS, "btn_ghost_hover.png"), 16, 16, [20, 80, 110, 230]);
+writePng(path.join(ASSETS, "pause_glass.png"), 16, 16, [8, 22, 34, 214]);
 
 const metaTail = ` appearance_delay = no_delay
  appearance_delay_seconds = 1.0
@@ -88,8 +146,8 @@ function movedVanilla({ instance, execId, wid, loadId, x, y, w, h, label, bg, ho
  [executable_block:${execId}][type:generic] = [executables:]
 ${bgLines} restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 24
- nine_slice_border_y = 24
+ nine_slice_border_x = 4
+ nine_slice_border_y = 4
 ${labelLine}${widgetMeta(wid)}
  element_type = vanilla_button
  instance_identifier = ${instance}
@@ -118,8 +176,8 @@ function customButton({ id, execId, actionId, action, value, x, y, w, h, label, 
  backgroundhovered = [source:local]/config/fancymenu/assets/${hover}
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 24
- nine_slice_border_y = 24
+ nine_slice_border_x = 4
+ nine_slice_border_y = 4
  label = ${label}
 ${widgetMeta(wid(id))}
  element_type = custom_button
@@ -168,16 +226,47 @@ ${req(id + "-load")}
 `;
 }
 
-function imageEl({ id, file, x, y, w, h }) {
+function imageEl({ id, file, x, y, w, h, stretchY = false, nineSlice = false }) {
   return `element {
  source = [source:local]/config/fancymenu/assets/${file}
  repeat_texture = false
- nine_slice_texture = false
- nine_slice_texture_border_x = 5
- nine_slice_texture_border_y = 5
+ nine_slice_texture = ${nineSlice}
+ nine_slice_texture_border_x = 4
+ nine_slice_texture_border_y = 4
  image_tint = #FFFFFF
  restart_animated_on_menu_load = false
  element_type = image
+ instance_identifier = ${id}
+${metaTail}
+ anchor_point = top-left
+ x = ${x}
+ y = ${y}
+ width = ${w}
+ height = ${h}
+ stretch_x = false
+ stretch_y = ${stretchY}
+ stay_on_screen = true
+${req(id + "-load")}
+}
+`;
+}
+
+function playerEl({ id, x, y, w, h }) {
+  return `element {
+ copy_client_player = true
+ playername = {"placeholder":"playername"}
+ auto_skin = true
+ auto_cape = true
+ slim = false
+ scale = 30
+ parrot = false
+ is_baby = false
+ crouching = false
+ showname = false
+ follow_mouse = true
+ head_follows_mouse = true
+ body_follows_mouse = true
+ element_type = fancymenu_customization_player_entity
  instance_identifier = ${id}
 ${metaTail}
  anchor_point = top-left
@@ -193,7 +282,7 @@ ${req(id + "-load")}
 `;
 }
 
-function header(identifier, { image = true, blur = false } = {}) {
+function header(identifier, { image = true, blur = false, behind = false } = {}) {
   const bg = image
     ? `menu_background {
  image_path = [source:local]/config/fancymenu/assets/menu_background.png
@@ -216,7 +305,7 @@ customization {
 
 layout-meta {
  identifier = ${identifier}
- render_custom_elements_behind_vanilla = false
+ render_custom_elements_behind_vanilla = ${behind}
  last_edited_time = 1756531200000
  is_enabled = true
  randommode = false
@@ -260,6 +349,8 @@ const HIDDEN_TITLE = [
   "mc_titlescreen_multiplayer_button",
   "mc_titlescreen_realms_button",
   "mc_titlescreen_language_button",
+  "mc_titlescreen_accessibility_button",
+  "forge_titlescreen_mods_button",
   "minecraft_logo_widget",
   "minecraft_splash_widget",
   "minecraft_branding_widget",
@@ -365,28 +456,6 @@ const title = [
     hover: "btn_ghost_hover.png",
   }),
   movedVanilla({
-    instance: "mc_titlescreen_accessibility_button",
-    execId: uid("ex"),
-    wid: uid("w"),
-    loadId: uid("l"),
-    x: 48,
-    y: 500,
-    w: 24,
-    h: 24,
-    label: "",
-  }),
-  movedVanilla({
-    instance: "forge_titlescreen_mods_button",
-    execId: uid("ex"),
-    wid: uid("w"),
-    loadId: uid("l"),
-    x: 880,
-    y: 500,
-    w: 72,
-    h: 24,
-    label: '{"text":"Моды","color":"#B7C9D4"}',
-  }),
-  movedVanilla({
     instance: "mc_titlescreen_copyright_button",
     execId: uid("ex"),
     wid: uid("w"),
@@ -404,32 +473,57 @@ for (const id of HIDDEN_TITLE) {
 }
 
 const pauseHidden = [
+  "pause_title_widget",
+  "pause_send_feedback_button",
+  "pause_feedback_button",
+  "pause_report_bugs_button",
+  "pause_share_to_lan_button",
+  "pause_server_links_button",
   "mc_pausescreen_feedback_button",
   "mc_pausescreen_report_bugs_button",
   "mc_pausescreen_lan_button",
-  "pause_share_to_lan_button",
-  "pause_feedback_button",
-  "pause_report_bugs_button",
+  "40",
 ];
 
 const pause = [
-  header("pause_screen", { image: false, blur: true }),
+  header("pause_screen", { image: false, blur: true, behind: true }),
+  imageEl({
+    id: "pause-glass",
+    file: "pause_glass.png",
+    x: 0,
+    y: 0,
+    w: 292,
+    h: 540,
+    stretchY: true,
+    nineSlice: true,
+  }),
+  imageEl({ id: "pause-logo", file: "logo.png", x: 48, y: 28, w: 56, h: 56 }),
   textEl({
-    id: "pause-title",
-    source: "Пауза",
+    id: "pause-brand",
+    source: "# AquaTech",
     x: 48,
-    y: 80,
-    w: 280,
-    h: 28,
+    y: 92,
+    w: 220,
+    h: 36,
     color: "#F3FBFF",
   }),
+  textEl({
+    id: "pause-hello",
+    source: '{"placeholder":"playername"}',
+    x: 48,
+    y: 130,
+    w: 220,
+    h: 22,
+    color: "#B7C9D4",
+  }),
+  playerEl({ id: "pause-skin", x: 330, y: 120, w: 90, h: 180 }),
   movedVanilla({
-    instance: "mc_pausescreen_return_to_game_button",
+    instance: "pause_return_to_game_button",
     execId: uid("ex"),
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 130,
+    y: 178,
     w: 220,
     h: 40,
     label: '{"text":"Продолжить","color":"#031018","bold":true}',
@@ -437,12 +531,12 @@ const pause = [
     hover: "btn_play_hover.png",
   }),
   movedVanilla({
-    instance: "mc_pausescreen_options_button",
+    instance: "pause_options_button",
     execId: uid("ex"),
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 180,
+    y: 228,
     w: 220,
     h: 36,
     label: '{"text":"Настройки","color":"#F3FBFF"}',
@@ -450,12 +544,12 @@ const pause = [
     hover: "btn_ghost_hover.png",
   }),
   movedVanilla({
-    instance: "mc_pausescreen_advancements_button",
+    instance: "pause_advancements_button",
     execId: uid("ex"),
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 224,
+    y: 272,
     w: 106,
     h: 36,
     label: '{"text":"Прогресс","color":"#F3FBFF"}',
@@ -463,12 +557,12 @@ const pause = [
     hover: "btn_ghost_hover.png",
   }),
   movedVanilla({
-    instance: "mc_pausescreen_stats_button",
+    instance: "pause_stats_button",
     execId: uid("ex"),
     wid: uid("w"),
     loadId: uid("l"),
     x: 162,
-    y: 224,
+    y: 272,
     w: 106,
     h: 36,
     label: '{"text":"Статистика","color":"#F3FBFF"}',
@@ -476,28 +570,15 @@ const pause = [
     hover: "btn_ghost_hover.png",
   }),
   movedVanilla({
-    instance: "mc_pausescreen_disconnect_button",
+    instance: "pause_disconnect_button",
     execId: uid("ex"),
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 276,
+    y: 316,
     w: 220,
     h: 36,
     label: '{"text":"Отключиться","color":"#F3FBFF"}',
-    bg: "btn_ghost.png",
-    hover: "btn_ghost_hover.png",
-  }),
-  movedVanilla({
-    instance: "mc_pausescreen_return_to_menu_button",
-    execId: uid("ex"),
-    wid: uid("w"),
-    loadId: uid("l"),
-    x: 48,
-    y: 276,
-    w: 220,
-    h: 36,
-    label: '{"text":"В меню","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
   }),
