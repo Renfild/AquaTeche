@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.264"
-PACK_VERSION = "2.9.264"
+PACK_TAG = "pack-2.9.265"
+PACK_VERSION = "2.9.265"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -33,6 +33,9 @@ CLIENT_ONLY_PREFIXES = (
     "entityculling",
     "dynamic-fps",
     "betterquestpopup",
+    "fancymenu",
+    "konkrete",
+    "melody",
 )
 # Never pull these from client/ — server copy wins (and may differ by patch version)
 SERVER_OWNED_PREFIXES = (

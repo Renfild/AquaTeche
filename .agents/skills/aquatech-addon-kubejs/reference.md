@@ -57,6 +57,21 @@ StartupEvents.registry('item', event => { }) // startup_scripts only
 
 IDs: `'namespace:path'`. NBT items: `Item.of('id', { ... })`.
 
+## KubeJS addons (Avaritia / Draconic / …)
+
+Do **not** add `kubejs-avaritia`, `kubejs-draconic-evolution`, or similar helper mods.
+
+Live pack already has Re-Avaritia, Draconic Evolution, Extended Crafting, Botania. Recipes go through vanilla KubeJS `event.custom({ type: 'mod:serializer', ... })` or shaped/shapeless. That is how `rate_x32` / `x64` extreme tables are registered today (`avaritia:shaped_table`, `extendedcrafting:shaped_table`).
+
+| Want | How |
+|------|-----|
+| Extreme / 9×9 table | `event.custom({ type: 'avaritia:shaped_table', tier: 4, ... })` |
+| Extended Crafting table | `event.custom({ type: 'extendedcrafting:shaped_table', ... })` |
+| DE fusion | `event.custom({ type: 'draconicevolution:fusion_crafting', ... })` when you actually need a new fusion — currently we only `event.remove` dislocators |
+| Botania altar / apothecary | `event.custom({ type: 'botania:…' })` — not used; shaped crafts are enough |
+
+Addon jars only save a few helper methods (`event.recipes.avaritia.shapedTable`). Same JSON, extra client+server jar, another crash surface. Skip until a recipe type cannot be expressed as `event.custom`.
+
 ## When to jar-patch vs datapack
 
 - **Datapack**: additive tags/recipes/loot under a namespace you control or `#replace` carefully.

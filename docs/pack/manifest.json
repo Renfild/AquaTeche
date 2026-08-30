@@ -1,11 +1,445 @@
 {
-  "version": "2.9.264",
+  "version": "2.9.265",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
   "server_port": 21561,
   "cdn": "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
   "files": [
+    {
+      "path": "config/aqualumen/cases.json",
+      "md5": "11a7d8be68d64836b40b4dbb01e2e347",
+      "size": 29513,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__cases.json",
+      "asset": "config__aqualumen__cases.json"
+    },
+    {
+      "path": "config/aqualumen/fish_shop.json",
+      "md5": "5664dab662b8c60b39e2ee0ae4390881",
+      "size": 18806,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__fish_shop.json",
+      "asset": "config__aqualumen__fish_shop.json"
+    },
+    {
+      "path": "config/aqualumen/html/hub.html",
+      "md5": "7dbc7bfdd9886009cc9e4eed8755743a",
+      "size": 841871,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__html__hub.html",
+      "asset": "config__aqualumen__html__hub.html"
+    },
+    {
+      "path": "config/aqualumen/hub.html",
+      "md5": "7dbc7bfdd9886009cc9e4eed8755743a",
+      "size": 841871,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__hub.html",
+      "asset": "config__aqualumen__hub.html"
+    },
+    {
+      "path": "config/aqualumen/kits.json",
+      "md5": "d29c09bf90c6ec14332699def94bc77a",
+      "size": 3215,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__kits.json",
+      "asset": "config__aqualumen__kits.json"
+    },
+    {
+      "path": "config/aqualumen/warps.json",
+      "md5": "f34189310b1dff224f1931a1c56b2bbb",
+      "size": 876,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__warps.json",
+      "asset": "config__aqualumen__warps.json"
+    },
+    {
+      "path": "config/aquatech_rank_glyphs.properties",
+      "md5": "49e4b122d9c8b00e42ab990daedac84e",
+      "size": 379,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aquatech_rank_glyphs.properties",
+      "asset": "config__aquatech_rank_glyphs.properties"
+    },
+    {
+      "path": "config/aquatech_ui-common.toml",
+      "md5": "bcb35d4e5e1e7c824bc62f4803a3687c",
+      "size": 834,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aquatech_ui-common.toml",
+      "asset": "config__aquatech_ui-common.toml"
+    },
+    {
+      "path": "config/fancymenu/assets/btn_ghost_hover.png",
+      "md5": "bd206dcd213dafa7bd9e18c81b844a74",
+      "size": 1076465,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_ghost_hover.png",
+      "asset": "config__fancymenu__assets__btn_ghost_hover.png"
+    },
+    {
+      "path": "config/fancymenu/assets/btn_ghost.png",
+      "md5": "d75421bd9adb21716ed110fb11b8cfb7",
+      "size": 1047700,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_ghost.png",
+      "asset": "config__fancymenu__assets__btn_ghost.png"
+    },
+    {
+      "path": "config/fancymenu/assets/btn_play_hover.png",
+      "md5": "e1fa8dadeda5e3e323325182133be19d",
+      "size": 1128923,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_play_hover.png",
+      "asset": "config__fancymenu__assets__btn_play_hover.png"
+    },
+    {
+      "path": "config/fancymenu/assets/btn_play.png",
+      "md5": "05cc0ecfec76f7a5311a5ec09bd776be",
+      "size": 1116950,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__btn_play.png",
+      "asset": "config__fancymenu__assets__btn_play.png"
+    },
+    {
+      "path": "config/fancymenu/assets/logo.png",
+      "md5": "001fe194b3a2bd4c947c0c3a2b5a97c6",
+      "size": 170436,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__logo.png",
+      "asset": "config__fancymenu__assets__logo.png"
+    },
+    {
+      "path": "config/fancymenu/assets/menu_background.png",
+      "md5": "d8fe8a82173a7a70e2b9a269019ba51f",
+      "size": 1664429,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__assets__menu_background.png",
+      "asset": "config__fancymenu__assets__menu_background.png"
+    },
+    {
+      "path": "config/fancymenu/customizablemenus.txt",
+      "md5": "e121a291dad48a9f8014486750ed6860",
+      "size": 125,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__customizablemenus.txt",
+      "asset": "config__fancymenu__customizablemenus.txt"
+    },
+    {
+      "path": "config/fancymenu/customization/pause_screen_layout.txt",
+      "md5": "12fac8a27173626418eb1235b112a699",
+      "size": 23325,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__customization__pause_screen_layout.txt",
+      "asset": "config__fancymenu__customization__pause_screen_layout.txt"
+    },
+    {
+      "path": "config/fancymenu/customization/title_screen_layout.txt",
+      "md5": "a25bbfe9552a26bc8c22327a0ed2856d",
+      "size": 42437,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__customization__title_screen_layout.txt",
+      "asset": "config__fancymenu__customization__title_screen_layout.txt"
+    },
+    {
+      "path": "config/fancymenu/options.txt",
+      "md5": "71f373734790993ea83ba11df45a572b",
+      "size": 1251,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/config__fancymenu__options.txt",
+      "asset": "config__fancymenu__options.txt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapter_groups.snbt",
+      "md5": "e346733b29259ae7c802256e83714e3d",
+      "size": 211,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapter_groups.snbt",
+      "asset": "config__ftbquests__quests__chapter_groups.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/1.snbt",
+      "md5": "03a4988926026cc2c8efd00b8e3b8cbb",
+      "size": 19682,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__1.snbt",
+      "asset": "config__ftbquests__quests__chapters__1.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/57FF374744F4AC76.snbt",
+      "md5": "7de3f9b29e634d09c75041bcd7da5891",
+      "size": 2366,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__57FF374744F4AC76.snbt",
+      "asset": "config__ftbquests__quests__chapters__57FF374744F4AC76.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/7D2835D587AABDAB.snbt",
+      "md5": "5fbf04e79ea443cd4e8f6499d1a0b9f8",
+      "size": 4074,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__7D2835D587AABDAB.snbt",
+      "asset": "config__ftbquests__quests__chapters__7D2835D587AABDAB.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/ae2_aquatech.snbt",
+      "md5": "0952b27576a80939d78e3611faee0327",
+      "size": 28058,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__ae2_aquatech.snbt",
+      "asset": "config__ftbquests__quests__chapters__ae2_aquatech.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/alexscaves_aquatech.snbt",
+      "md5": "a1d9399d54ad92f467d95badf53cd48d",
+      "size": 22241,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__alexscaves_aquatech.snbt",
+      "asset": "config__ftbquests__quests__chapters__alexscaves_aquatech.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/avaritia_aquatech.snbt",
+      "md5": "c256f37c4901a7b22c56f1dba17d0beb",
+      "size": 21861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__avaritia_aquatech.snbt",
+      "asset": "config__ftbquests__quests__chapters__avaritia_aquatech.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/basic_electric_era.snbt",
+      "md5": "3f3800f5bfe375c9a597a6eb84df3555",
+      "size": 64634,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__basic_electric_era.snbt",
+      "asset": "config__ftbquests__quests__chapters__basic_electric_era.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/botania_aquatech.snbt",
+      "md5": "6f144ba300c89d36e04c3ff6fd7e8e2c",
+      "size": 32081,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__botania_aquatech.snbt",
+      "asset": "config__ftbquests__quests__chapters__botania_aquatech.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/endgame_aquatech.snbt",
+      "md5": "a663adabd4007a19504ccf35d01b31e0",
+      "size": 3922,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__endgame_aquatech.snbt",
+      "asset": "config__ftbquests__quests__chapters__endgame_aquatech.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/improved_electric_era.snbt",
+      "md5": "cfc757ca7d43c715c9314813fffeb941",
+      "size": 81828,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__improved_electric_era.snbt",
+      "asset": "config__ftbquests__quests__chapters__improved_electric_era.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/secret_aquatech.snbt",
+      "md5": "30bb2c2df3dfbfaaffc002b009671d2f",
+      "size": 7009,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__secret_aquatech.snbt",
+      "asset": "config__ftbquests__quests__chapters__secret_aquatech.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/steam_era.snbt",
+      "md5": "ef7859b75be87ed200820f4e97e39fd3",
+      "size": 40983,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__steam_era.snbt",
+      "asset": "config__ftbquests__quests__chapters__steam_era.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/data.snbt",
+      "md5": "109f5b23742510b936224d2d327e4973",
+      "size": 633,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__data.snbt",
+      "asset": "config__ftbquests__quests__data.snbt"
+    },
+    {
+      "path": "config/industrialupgrade-common.toml",
+      "md5": "7a6582be6c4cad2961deb3df8c45bafd",
+      "size": 102588,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__industrialupgrade-common.toml",
+      "asset": "config__industrialupgrade-common.toml"
+    },
+    {
+      "path": "config/packetfixer.properties",
+      "md5": "2af31aa45bdf6a41619d2bbe9ca69a0f",
+      "size": 296,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__packetfixer.properties",
+      "asset": "config__packetfixer.properties"
+    },
+    {
+      "path": "kubejs/assets/ftbquests/ftb_quests_theme.txt",
+      "md5": "944969a2273df4ac190de3f307f83f20",
+      "size": 8141,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__assets__ftbquests__ftb_quests_theme.txt",
+      "asset": "kubejs__assets__ftbquests__ftb_quests_theme.txt"
+    },
+    {
+      "path": "kubejs/assets/kubejs/textures/aquatechlogo.png",
+      "md5": "164d3faeb16d044153081ff2d460dbee",
+      "size": 9861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__assets__kubejs__textures__aquatechlogo.png",
+      "asset": "kubejs__assets__kubejs__textures__aquatechlogo.png"
+    },
+    {
+      "path": "kubejs/assets/kubejs/textures/logo/aquatechlogo.png",
+      "md5": "164d3faeb16d044153081ff2d460dbee",
+      "size": 9861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__assets__kubejs__textures__logo__aquatechlogo.png",
+      "asset": "kubejs__assets__kubejs__textures__logo__aquatechlogo.png"
+    },
+    {
+      "path": "kubejs/assets/kubejs/textures/quests/aquatechlogo.png",
+      "md5": "164d3faeb16d044153081ff2d460dbee",
+      "size": 9861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__assets__kubejs__textures__quests__aquatechlogo.png",
+      "asset": "kubejs__assets__kubejs__textures__quests__aquatechlogo.png"
+    },
+    {
+      "path": "kubejs/client_scripts/add_fishing_resource_tooltips.js",
+      "md5": "9e8870715427debdfed16f11d062ed4c",
+      "size": 3451,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__client_scripts__add_fishing_resource_tooltips.js",
+      "asset": "kubejs__client_scripts__add_fishing_resource_tooltips.js"
+    },
+    {
+      "path": "kubejs/client_scripts/remove_fishing_tooltips.js",
+      "md5": "8a32082abe25d339c8321607939ae033",
+      "size": 616,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__client_scripts__remove_fishing_tooltips.js",
+      "asset": "kubejs__client_scripts__remove_fishing_tooltips.js"
+    },
+    {
+      "path": "kubejs/client_scripts/rename_starcatcher_rods.js",
+      "md5": "a05ab5bf183971d4d11ee03d29df99e4",
+      "size": 1669,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__client_scripts__rename_starcatcher_rods.js",
+      "asset": "kubejs__client_scripts__rename_starcatcher_rods.js"
+    },
+    {
+      "path": "kubejs/server_scripts/00_disable_iu_space.js",
+      "md5": "c5326b046bc354e45fac4d5c318376c9",
+      "size": 2570,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__00_disable_iu_space.js",
+      "asset": "kubejs__server_scripts__00_disable_iu_space.js"
+    },
+    {
+      "path": "kubejs/server_scripts/00_disable_quarries.js",
+      "md5": "9bd7ba41d8ccdd232229e671d06bc4aa",
+      "size": 2273,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__00_disable_quarries.js",
+      "asset": "kubejs__server_scripts__00_disable_quarries.js"
+    },
+    {
+      "path": "kubejs/server_scripts/05_strip_iu_ore_scanner.js",
+      "md5": "1a12acc64d019e85ce93f7af44bfd8e5",
+      "size": 1021,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__05_strip_iu_ore_scanner.js",
+      "asset": "kubejs__server_scripts__05_strip_iu_ore_scanner.js"
+    },
+    {
+      "path": "kubejs/server_scripts/10_aquatech_iu_nerf.js",
+      "md5": "f668d304c1aeaf67eab6c39dc3903336",
+      "size": 1797,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__10_aquatech_iu_nerf.js",
+      "asset": "kubejs__server_scripts__10_aquatech_iu_nerf.js"
+    },
+    {
+      "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
+      "md5": "265a983635d14c651bca95cc7b902a81",
+      "size": 6265,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__20_aquatech_rod_crafts.js",
+      "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
+    },
+    {
+      "path": "kubejs/server_scripts/30_aquatech_crafting.js",
+      "md5": "68133237d4339c17d42924f530c5bd77",
+      "size": 16395,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__30_aquatech_crafting.js",
+      "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
+    },
+    {
+      "path": "kubejs/server_scripts/35_fun_crafts.js",
+      "md5": "2106483d67fc0984b6ab36418bde3cd0",
+      "size": 293,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__35_fun_crafts.js",
+      "asset": "kubejs__server_scripts__35_fun_crafts.js"
+    },
+    {
+      "path": "kubejs/server_scripts/36_balanced_tweaks.js",
+      "md5": "310b9f6cea03ea8a42ab38d20cc14b81",
+      "size": 11649,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__36_balanced_tweaks.js",
+      "asset": "kubejs__server_scripts__36_balanced_tweaks.js"
+    },
+    {
+      "path": "kubejs/server_scripts/40_aquatech_diving.js",
+      "md5": "25ce571f899ee987bfecfa64de08ef14",
+      "size": 1137,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__40_aquatech_diving.js",
+      "asset": "kubejs__server_scripts__40_aquatech_diving.js"
+    },
+    {
+      "path": "kubejs/server_scripts/40_aquatech_fishing_drops.js",
+      "md5": "26de030a7c244e84fab04036ba28081e",
+      "size": 414,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__40_aquatech_fishing_drops.js",
+      "asset": "kubejs__server_scripts__40_aquatech_fishing_drops.js"
+    },
+    {
+      "path": "kubejs/server_scripts/50_remove_avaritia_fishing_loot.js",
+      "md5": "f63fd03ba4dd06662b15267dd21d5011",
+      "size": 198,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__50_remove_avaritia_fishing_loot.js",
+      "asset": "kubejs__server_scripts__50_remove_avaritia_fishing_loot.js"
+    },
+    {
+      "path": "kubejs/server_scripts/60_disable_phantoms.js",
+      "md5": "7f5a0100c12a4192b975c27a2d3fd9ca",
+      "size": 350,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__60_disable_phantoms.js",
+      "asset": "kubejs__server_scripts__60_disable_phantoms.js"
+    },
+    {
+      "path": "kubejs/server_scripts/70_island_auto_claim.js",
+      "md5": "6c18277ba142fc3db192462c1833f836",
+      "size": 13656,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__70_island_auto_claim.js",
+      "asset": "kubejs__server_scripts__70_island_auto_claim.js"
+    },
+    {
+      "path": "kubejs/server_scripts/75_ftb_chapter_rewards.js",
+      "md5": "7703d5671fba3867f24af45c15e500cf",
+      "size": 7861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__75_ftb_chapter_rewards.js",
+      "asset": "kubejs__server_scripts__75_ftb_chapter_rewards.js"
+    },
+    {
+      "path": "kubejs/server_scripts/80_live_portal_sync.js",
+      "md5": "83629f038bf5a67be47acc62504ddc2f",
+      "size": 230,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__80_live_portal_sync.js",
+      "asset": "kubejs__server_scripts__80_live_portal_sync.js"
+    },
+    {
+      "path": "kubejs/server_scripts/90_fisherman_cat_shop.js",
+      "md5": "7322c8ee084ae94f56863c092e60c058",
+      "size": 10268,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__90_fisherman_cat_shop.js",
+      "asset": "kubejs__server_scripts__90_fisherman_cat_shop.js"
+    },
+    {
+      "path": "kubejs/server_scripts/95_deep_sea_bounty.js",
+      "md5": "e2f44e138bc08283dd409013c06f6c9c",
+      "size": 4684,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__95_deep_sea_bounty.js",
+      "asset": "kubejs__server_scripts__95_deep_sea_bounty.js"
+    },
+    {
+      "path": "kubejs/server_scripts/96_fish_stocking.js",
+      "md5": "91e44f9e84523f792699b19b3c9703ab",
+      "size": 3024,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__96_fish_stocking.js",
+      "asset": "kubejs__server_scripts__96_fish_stocking.js"
+    },
+    {
+      "path": "kubejs/startup_scripts/40_rod_durability.js",
+      "md5": "07a28c1f85b5ecc55e62567f15abcbcb",
+      "size": 1155,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__startup_scripts__40_rod_durability.js",
+      "asset": "kubejs__startup_scripts__40_rod_durability.js"
+    },
+    {
+      "path": "kubejs/startup_scripts/additions.js",
+      "md5": "e3166114982743e5738f94f545355486",
+      "size": 484,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__startup_scripts__additions.js",
+      "asset": "kubejs__startup_scripts__additions.js"
+    },
+    {
+      "path": "kubejs/startup_scripts/disable_iu_space.js",
+      "md5": "243abbe82b6c5996b450a8cbacfa66bc",
+      "size": 966,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__startup_scripts__disable_iu_space.js",
+      "asset": "kubejs__startup_scripts__disable_iu_space.js"
+    },
     {
       "path": "mods/AI-Improvements-1.20-0.5.2.jar",
       "md5": "9a6776ce2deab597d198e8755daa56ff",
@@ -217,6 +651,13 @@
       "asset": "ExtraQuests-1.7.0-1.20.1-Forge.jar"
     },
     {
+      "path": "mods/fancymenu_forge_3.9.12_MC_1.20.1.jar",
+      "md5": "1ec53b20259f65cad0b722e69d2f8e0f",
+      "size": 26181250,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/fancymenu_forge_3.9.12_MC_1.20.1.jar",
+      "asset": "fancymenu_forge_3.9.12_MC_1.20.1.jar"
+    },
+    {
       "path": "mods/FastSuite-1.20.1-5.1.2.jar",
       "md5": "efca8ff65bbf93e3a0f776998ee181e9",
       "size": 26600,
@@ -322,6 +763,13 @@
       "asset": "jei-1.20.1-forge-15.21.0.144.jar"
     },
     {
+      "path": "mods/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
+      "md5": "d69107c593e361e1b7b96733250bd098",
+      "size": 625185,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
+      "asset": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar"
+    },
+    {
       "path": "mods/kubejs-forge-2001.6.5-build.26.jar",
       "md5": "64ee6615f19fb9b2b11fee8b7385eaaf",
       "size": 1658792,
@@ -341,6 +789,13 @@
       "size": 218417,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/mcef-forge-2.1.6-1.20.1.jar",
       "asset": "mcef-forge-2.1.6-1.20.1.jar"
+    },
+    {
+      "path": "mods/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
+      "md5": "6b528d368f7fcbf737df28f2457cdec6",
+      "size": 37178,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.265/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
+      "asset": "melody_forge_1.0.3_MC_1.20.1-1.20.4.jar"
     },
     {
       "path": "mods/modernfix-forge-5.27.66+mc1.20.1.jar",
@@ -432,370 +887,6 @@
       "size": 6975581,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/starcatcher-2.3.19-FORGE-1.20.1.jar",
       "asset": "starcatcher-2.3.19-FORGE-1.20.1.jar"
-    },
-    {
-      "path": "config/aquatech_rank_glyphs.properties",
-      "md5": "49e4b122d9c8b00e42ab990daedac84e",
-      "size": 379,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aquatech_rank_glyphs.properties",
-      "asset": "config__aquatech_rank_glyphs.properties"
-    },
-    {
-      "path": "config/aquatech_ui-common.toml",
-      "md5": "bcb35d4e5e1e7c824bc62f4803a3687c",
-      "size": 834,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aquatech_ui-common.toml",
-      "asset": "config__aquatech_ui-common.toml"
-    },
-    {
-      "path": "config/industrialupgrade-common.toml",
-      "md5": "7a6582be6c4cad2961deb3df8c45bafd",
-      "size": 102588,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__industrialupgrade-common.toml",
-      "asset": "config__industrialupgrade-common.toml"
-    },
-    {
-      "path": "config/packetfixer.properties",
-      "md5": "2af31aa45bdf6a41619d2bbe9ca69a0f",
-      "size": 296,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__packetfixer.properties",
-      "asset": "config__packetfixer.properties"
-    },
-    {
-      "path": "config/aqualumen/cases.json",
-      "md5": "11a7d8be68d64836b40b4dbb01e2e347",
-      "size": 29513,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__cases.json",
-      "asset": "config__aqualumen__cases.json"
-    },
-    {
-      "path": "config/aqualumen/fish_shop.json",
-      "md5": "5664dab662b8c60b39e2ee0ae4390881",
-      "size": 18806,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__fish_shop.json",
-      "asset": "config__aqualumen__fish_shop.json"
-    },
-    {
-      "path": "config/aqualumen/hub.html",
-      "md5": "7dbc7bfdd9886009cc9e4eed8755743a",
-      "size": 841871,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__hub.html",
-      "asset": "config__aqualumen__hub.html"
-    },
-    {
-      "path": "config/aqualumen/kits.json",
-      "md5": "d29c09bf90c6ec14332699def94bc77a",
-      "size": 3215,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__kits.json",
-      "asset": "config__aqualumen__kits.json"
-    },
-    {
-      "path": "config/aqualumen/warps.json",
-      "md5": "f34189310b1dff224f1931a1c56b2bbb",
-      "size": 876,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__warps.json",
-      "asset": "config__aqualumen__warps.json"
-    },
-    {
-      "path": "config/aqualumen/html/hub.html",
-      "md5": "7dbc7bfdd9886009cc9e4eed8755743a",
-      "size": 841871,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__aqualumen__html__hub.html",
-      "asset": "config__aqualumen__html__hub.html"
-    },
-    {
-      "path": "config/ftbquests/quests/chapter_groups.snbt",
-      "md5": "e346733b29259ae7c802256e83714e3d",
-      "size": 211,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapter_groups.snbt",
-      "asset": "config__ftbquests__quests__chapter_groups.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/data.snbt",
-      "md5": "109f5b23742510b936224d2d327e4973",
-      "size": 633,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__data.snbt",
-      "asset": "config__ftbquests__quests__data.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/1.snbt",
-      "md5": "03a4988926026cc2c8efd00b8e3b8cbb",
-      "size": 19682,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__1.snbt",
-      "asset": "config__ftbquests__quests__chapters__1.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/57FF374744F4AC76.snbt",
-      "md5": "7de3f9b29e634d09c75041bcd7da5891",
-      "size": 2366,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__57FF374744F4AC76.snbt",
-      "asset": "config__ftbquests__quests__chapters__57FF374744F4AC76.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/7D2835D587AABDAB.snbt",
-      "md5": "5fbf04e79ea443cd4e8f6499d1a0b9f8",
-      "size": 4074,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__7D2835D587AABDAB.snbt",
-      "asset": "config__ftbquests__quests__chapters__7D2835D587AABDAB.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/ae2_aquatech.snbt",
-      "md5": "0952b27576a80939d78e3611faee0327",
-      "size": 28058,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__ae2_aquatech.snbt",
-      "asset": "config__ftbquests__quests__chapters__ae2_aquatech.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/alexscaves_aquatech.snbt",
-      "md5": "a1d9399d54ad92f467d95badf53cd48d",
-      "size": 22241,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__alexscaves_aquatech.snbt",
-      "asset": "config__ftbquests__quests__chapters__alexscaves_aquatech.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/avaritia_aquatech.snbt",
-      "md5": "c256f37c4901a7b22c56f1dba17d0beb",
-      "size": 21861,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__avaritia_aquatech.snbt",
-      "asset": "config__ftbquests__quests__chapters__avaritia_aquatech.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/basic_electric_era.snbt",
-      "md5": "3f3800f5bfe375c9a597a6eb84df3555",
-      "size": 64634,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__basic_electric_era.snbt",
-      "asset": "config__ftbquests__quests__chapters__basic_electric_era.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/botania_aquatech.snbt",
-      "md5": "6f144ba300c89d36e04c3ff6fd7e8e2c",
-      "size": 32081,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__botania_aquatech.snbt",
-      "asset": "config__ftbquests__quests__chapters__botania_aquatech.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/endgame_aquatech.snbt",
-      "md5": "a663adabd4007a19504ccf35d01b31e0",
-      "size": 3922,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__endgame_aquatech.snbt",
-      "asset": "config__ftbquests__quests__chapters__endgame_aquatech.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/improved_electric_era.snbt",
-      "md5": "cfc757ca7d43c715c9314813fffeb941",
-      "size": 81828,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__improved_electric_era.snbt",
-      "asset": "config__ftbquests__quests__chapters__improved_electric_era.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/secret_aquatech.snbt",
-      "md5": "30bb2c2df3dfbfaaffc002b009671d2f",
-      "size": 7009,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__secret_aquatech.snbt",
-      "asset": "config__ftbquests__quests__chapters__secret_aquatech.snbt"
-    },
-    {
-      "path": "config/ftbquests/quests/chapters/steam_era.snbt",
-      "md5": "ef7859b75be87ed200820f4e97e39fd3",
-      "size": 40983,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/config__ftbquests__quests__chapters__steam_era.snbt",
-      "asset": "config__ftbquests__quests__chapters__steam_era.snbt"
-    },
-    {
-      "path": "kubejs/assets/ftbquests/ftb_quests_theme.txt",
-      "md5": "944969a2273df4ac190de3f307f83f20",
-      "size": 8141,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__assets__ftbquests__ftb_quests_theme.txt",
-      "asset": "kubejs__assets__ftbquests__ftb_quests_theme.txt"
-    },
-    {
-      "path": "kubejs/assets/kubejs/textures/aquatechlogo.png",
-      "md5": "164d3faeb16d044153081ff2d460dbee",
-      "size": 9861,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__assets__kubejs__textures__aquatechlogo.png",
-      "asset": "kubejs__assets__kubejs__textures__aquatechlogo.png"
-    },
-    {
-      "path": "kubejs/assets/kubejs/textures/logo/aquatechlogo.png",
-      "md5": "164d3faeb16d044153081ff2d460dbee",
-      "size": 9861,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__assets__kubejs__textures__logo__aquatechlogo.png",
-      "asset": "kubejs__assets__kubejs__textures__logo__aquatechlogo.png"
-    },
-    {
-      "path": "kubejs/assets/kubejs/textures/quests/aquatechlogo.png",
-      "md5": "164d3faeb16d044153081ff2d460dbee",
-      "size": 9861,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__assets__kubejs__textures__quests__aquatechlogo.png",
-      "asset": "kubejs__assets__kubejs__textures__quests__aquatechlogo.png"
-    },
-    {
-      "path": "kubejs/client_scripts/add_fishing_resource_tooltips.js",
-      "md5": "9e8870715427debdfed16f11d062ed4c",
-      "size": 3451,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__client_scripts__add_fishing_resource_tooltips.js",
-      "asset": "kubejs__client_scripts__add_fishing_resource_tooltips.js"
-    },
-    {
-      "path": "kubejs/client_scripts/remove_fishing_tooltips.js",
-      "md5": "8a32082abe25d339c8321607939ae033",
-      "size": 616,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__client_scripts__remove_fishing_tooltips.js",
-      "asset": "kubejs__client_scripts__remove_fishing_tooltips.js"
-    },
-    {
-      "path": "kubejs/client_scripts/rename_starcatcher_rods.js",
-      "md5": "a05ab5bf183971d4d11ee03d29df99e4",
-      "size": 1669,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__client_scripts__rename_starcatcher_rods.js",
-      "asset": "kubejs__client_scripts__rename_starcatcher_rods.js"
-    },
-    {
-      "path": "kubejs/server_scripts/00_disable_iu_space.js",
-      "md5": "c5326b046bc354e45fac4d5c318376c9",
-      "size": 2570,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__00_disable_iu_space.js",
-      "asset": "kubejs__server_scripts__00_disable_iu_space.js"
-    },
-    {
-      "path": "kubejs/server_scripts/00_disable_quarries.js",
-      "md5": "9bd7ba41d8ccdd232229e671d06bc4aa",
-      "size": 2273,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__00_disable_quarries.js",
-      "asset": "kubejs__server_scripts__00_disable_quarries.js"
-    },
-    {
-      "path": "kubejs/server_scripts/05_strip_iu_ore_scanner.js",
-      "md5": "1a12acc64d019e85ce93f7af44bfd8e5",
-      "size": 1021,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__05_strip_iu_ore_scanner.js",
-      "asset": "kubejs__server_scripts__05_strip_iu_ore_scanner.js"
-    },
-    {
-      "path": "kubejs/server_scripts/10_aquatech_iu_nerf.js",
-      "md5": "f668d304c1aeaf67eab6c39dc3903336",
-      "size": 1797,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__10_aquatech_iu_nerf.js",
-      "asset": "kubejs__server_scripts__10_aquatech_iu_nerf.js"
-    },
-    {
-      "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
-      "md5": "265a983635d14c651bca95cc7b902a81",
-      "size": 6265,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__20_aquatech_rod_crafts.js",
-      "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
-    },
-    {
-      "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "68133237d4339c17d42924f530c5bd77",
-      "size": 16395,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__30_aquatech_crafting.js",
-      "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
-    },
-    {
-      "path": "kubejs/server_scripts/35_fun_crafts.js",
-      "md5": "2106483d67fc0984b6ab36418bde3cd0",
-      "size": 293,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__35_fun_crafts.js",
-      "asset": "kubejs__server_scripts__35_fun_crafts.js"
-    },
-    {
-      "path": "kubejs/server_scripts/36_balanced_tweaks.js",
-      "md5": "310b9f6cea03ea8a42ab38d20cc14b81",
-      "size": 11649,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__36_balanced_tweaks.js",
-      "asset": "kubejs__server_scripts__36_balanced_tweaks.js"
-    },
-    {
-      "path": "kubejs/server_scripts/40_aquatech_diving.js",
-      "md5": "25ce571f899ee987bfecfa64de08ef14",
-      "size": 1137,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__40_aquatech_diving.js",
-      "asset": "kubejs__server_scripts__40_aquatech_diving.js"
-    },
-    {
-      "path": "kubejs/server_scripts/40_aquatech_fishing_drops.js",
-      "md5": "26de030a7c244e84fab04036ba28081e",
-      "size": 414,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__40_aquatech_fishing_drops.js",
-      "asset": "kubejs__server_scripts__40_aquatech_fishing_drops.js"
-    },
-    {
-      "path": "kubejs/server_scripts/50_remove_avaritia_fishing_loot.js",
-      "md5": "f63fd03ba4dd06662b15267dd21d5011",
-      "size": 198,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__50_remove_avaritia_fishing_loot.js",
-      "asset": "kubejs__server_scripts__50_remove_avaritia_fishing_loot.js"
-    },
-    {
-      "path": "kubejs/server_scripts/60_disable_phantoms.js",
-      "md5": "7f5a0100c12a4192b975c27a2d3fd9ca",
-      "size": 350,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__60_disable_phantoms.js",
-      "asset": "kubejs__server_scripts__60_disable_phantoms.js"
-    },
-    {
-      "path": "kubejs/server_scripts/70_island_auto_claim.js",
-      "md5": "6c18277ba142fc3db192462c1833f836",
-      "size": 13656,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__70_island_auto_claim.js",
-      "asset": "kubejs__server_scripts__70_island_auto_claim.js"
-    },
-    {
-      "path": "kubejs/server_scripts/75_ftb_chapter_rewards.js",
-      "md5": "7703d5671fba3867f24af45c15e500cf",
-      "size": 7861,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__75_ftb_chapter_rewards.js",
-      "asset": "kubejs__server_scripts__75_ftb_chapter_rewards.js"
-    },
-    {
-      "path": "kubejs/server_scripts/80_live_portal_sync.js",
-      "md5": "83629f038bf5a67be47acc62504ddc2f",
-      "size": 230,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__80_live_portal_sync.js",
-      "asset": "kubejs__server_scripts__80_live_portal_sync.js"
-    },
-    {
-      "path": "kubejs/server_scripts/90_fisherman_cat_shop.js",
-      "md5": "7322c8ee084ae94f56863c092e60c058",
-      "size": 10268,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__90_fisherman_cat_shop.js",
-      "asset": "kubejs__server_scripts__90_fisherman_cat_shop.js"
-    },
-    {
-      "path": "kubejs/server_scripts/95_deep_sea_bounty.js",
-      "md5": "e2f44e138bc08283dd409013c06f6c9c",
-      "size": 4684,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__95_deep_sea_bounty.js",
-      "asset": "kubejs__server_scripts__95_deep_sea_bounty.js"
-    },
-    {
-      "path": "kubejs/server_scripts/96_fish_stocking.js",
-      "md5": "91e44f9e84523f792699b19b3c9703ab",
-      "size": 3024,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__server_scripts__96_fish_stocking.js",
-      "asset": "kubejs__server_scripts__96_fish_stocking.js"
-    },
-    {
-      "path": "kubejs/startup_scripts/40_rod_durability.js",
-      "md5": "07a28c1f85b5ecc55e62567f15abcbcb",
-      "size": 1155,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__startup_scripts__40_rod_durability.js",
-      "asset": "kubejs__startup_scripts__40_rod_durability.js"
-    },
-    {
-      "path": "kubejs/startup_scripts/additions.js",
-      "md5": "e3166114982743e5738f94f545355486",
-      "size": 484,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__startup_scripts__additions.js",
-      "asset": "kubejs__startup_scripts__additions.js"
-    },
-    {
-      "path": "kubejs/startup_scripts/disable_iu_space.js",
-      "md5": "243abbe82b6c5996b450a8cbacfa66bc",
-      "size": 966,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.262/kubejs__startup_scripts__disable_iu_space.js",
-      "asset": "kubejs__startup_scripts__disable_iu_space.js"
     },
     {
       "path": "resourcepacks/HavenQuestingTheme-1.20.1-1.0.0.zip",
