@@ -1,7 +1,7 @@
 (() => {
   const IP = "g-pl-3.apexnodes.xyz:21561";
   const DOWNLOAD =
-    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.83/AquaTech.exe";
+    "https://github.com/Renfild/AquaTeche/releases/download/client-2.9.89/AquaTech.exe";
   /* portal ui build: compact header + market lots */
   const CANONICAL = "https://aquateche.store";
   const DISCORD = "https://discord.gg/3Khzr5z4fQ";
