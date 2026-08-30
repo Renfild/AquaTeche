@@ -27,17 +27,18 @@ function pngChunk(type, data) {
   return Buffer.concat([len, body, c]);
 }
 
-function writePng(file, w, h, rgba) {
+function writeRgba(file, w, h, sample) {
   const raw = Buffer.alloc((w * 4 + 1) * h);
   for (let y = 0; y < h; y++) {
     const row = y * (w * 4 + 1);
     raw[row] = 0;
     for (let x = 0; x < w; x++) {
+      const p = sample(x, y);
       const i = row + 1 + x * 4;
-      raw[i] = rgba[0];
-      raw[i + 1] = rgba[1];
-      raw[i + 2] = rgba[2];
-      raw[i + 3] = rgba[3];
+      raw[i] = p[0];
+      raw[i + 1] = p[1];
+      raw[i + 2] = p[2];
+      raw[i + 3] = p[3];
     }
   }
   const ihdr = Buffer.alloc(13);
@@ -51,18 +52,114 @@ function writePng(file, w, h, rgba) {
     Buffer.concat([
       sig,
       pngChunk("IHDR", ihdr),
-      pngChunk("IDAT", zlib.deflateSync(raw)),
+      pngChunk("IDAT", zlib.deflateSync(raw, { level: 9 })),
       pngChunk("IEND", Buffer.alloc(0)),
     ]),
   );
 }
 
+function sdRoundBox(x, y, cx, cy, hw, hh, r) {
+  const dx = Math.abs(x - cx) - (hw - r);
+  const dy = Math.abs(y - cy) - (hh - r);
+  const ox = Math.max(dx, 0);
+  const oy = Math.max(dy, 0);
+  return Math.min(Math.max(dx, dy), 0) + Math.hypot(ox, oy) - r;
+}
+
+function clamp01(t) {
+  return t < 0 ? 0 : t > 1 ? 1 : t;
+}
+
+function srcOver(dr, dg, db, da, sr, sg, sb, sa) {
+  const a = sa + da * (1 - sa);
+  if (a < 0.001) return [0, 0, 0, 0];
+  return [
+    Math.round((sr * sa + dr * da * (1 - sa)) / a),
+    Math.round((sg * sa + dg * da * (1 - sa)) / a),
+    Math.round((sb * sa + db * da * (1 - sa)) / a),
+    Math.round(a * 255),
+  ];
+}
+
+function capsule(w, h, { fill, glow, pad = 10, yShift = 1 }) {
+  const r = (h - pad * 2) * 0.5;
+  const cx = w * 0.5;
+  const cy = h * 0.5 - yShift;
+  const hw = w * 0.5 - pad;
+  const hh = (h - pad * 2) * 0.5;
+  return (x, y) => {
+    const d = sdRoundBox(x, y, cx, cy, hw, hh, r);
+    const dGlow = sdRoundBox(x, y, cx, cy + 5, hw + 3, hh + 5, r + 6);
+    const glowA = Math.exp(-(Math.max(dGlow, 0) ** 2) / 28) * (glow[3] / 255);
+    let p = srcOver(0, 0, 0, 0, glow[0], glow[1], glow[2], glowA);
+    const cover = clamp01(0.65 - d);
+    if (cover > 0) {
+      const spec = clamp01((cy - 4 - y) / (hh * 1.4)) * 0.38;
+      const fr = Math.round(fill[0] + (255 - fill[0]) * spec);
+      const fg = Math.round(fill[1] + (255 - fill[1]) * spec);
+      const fb = Math.round(fill[2] + (255 - fill[2]) * spec);
+      const rim = clamp01(1.2 - Math.abs(d + 0.4) * 1.4) * 0.35;
+      p = srcOver(
+        p[0],
+        p[1],
+        p[2],
+        p[3] / 255,
+        Math.round(fr + (255 - fr) * rim * 0.5),
+        Math.round(fg + (255 - fg) * rim * 0.5),
+        Math.round(fb + (255 - fb) * rim * 0.4),
+        cover * (fill[3] / 255),
+      );
+    }
+    return p;
+  };
+}
+
+function glassPanel(w, h) {
+  return (x, y) => {
+    const edge = x > w - 2 ? 0.55 : x < 1 ? 0.12 : 0;
+    const top = y < 2 ? 0.22 : 0;
+    const g = y / h;
+    const r = Math.round(6 + 8 * (1 - g));
+    const gch = Math.round(16 + 14 * (1 - g));
+    const b = Math.round(28 + 18 * (1 - g));
+    const a = Math.round(132 + 36 * (1 - g));
+    const hi = Math.max(edge, top);
+    return [
+      Math.round(r + (90 - r) * hi + edge * 40),
+      Math.round(gch + (210 - gch) * hi),
+      Math.round(b + (235 - b) * hi),
+      a,
+    ];
+  };
+}
+
 fs.mkdirSync(ASSETS, { recursive: true });
-writePng(path.join(ASSETS, "btn_play.png"), 16, 16, [45, 212, 224, 255]);
-writePng(path.join(ASSETS, "btn_play_hover.png"), 16, 16, [126, 233, 242, 255]);
-writePng(path.join(ASSETS, "btn_ghost.png"), 16, 16, [14, 58, 88, 210]);
-writePng(path.join(ASSETS, "btn_ghost_hover.png"), 16, 16, [20, 80, 110, 230]);
-writePng(path.join(ASSETS, "pause_glass.png"), 16, 16, [8, 22, 34, 214]);
+writeRgba(
+  path.join(ASSETS, "btn_play.png"),
+  128,
+  64,
+  capsule(128, 64, { fill: [45, 212, 224, 255], glow: [34, 211, 238, 150], yShift: 2 }),
+);
+writeRgba(
+  path.join(ASSETS, "btn_play_hover.png"),
+  128,
+  64,
+  capsule(128, 64, { fill: [126, 233, 242, 255], glow: [94, 234, 248, 190], yShift: 2 }),
+);
+writeRgba(
+  path.join(ASSETS, "btn_ghost.png"),
+  128,
+  64,
+  capsule(128, 64, { fill: [10, 28, 44, 168], glow: [80, 200, 220, 40], pad: 8, yShift: 0 }),
+);
+writeRgba(
+  path.join(ASSETS, "btn_ghost_hover.png"),
+  128,
+  64,
+  capsule(128, 64, { fill: [14, 48, 72, 200], glow: [80, 220, 235, 70], pad: 8, yShift: 0 }),
+);
+writeRgba(path.join(ASSETS, "pause_glass.png"), 48, 256, glassPanel(48, 256));
+writeRgba(path.join(ASSETS, "rule.png"), 8, 2, () => [180, 240, 250, 70]);
 
 const metaTail = ` appearance_delay = no_delay
  appearance_delay_seconds = 1.0
@@ -146,8 +243,8 @@ function movedVanilla({ instance, execId, wid, loadId, x, y, w, h, label, bg, ho
  [executable_block:${execId}][type:generic] = [executables:]
 ${bgLines} restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 4
- nine_slice_border_y = 4
+ nine_slice_border_x = 28
+ nine_slice_border_y = 22
 ${labelLine}${widgetMeta(wid)}
  element_type = vanilla_button
  instance_identifier = ${instance}
@@ -176,8 +273,8 @@ function customButton({ id, execId, actionId, action, value, x, y, w, h, label, 
  backgroundhovered = [source:local]/config/fancymenu/assets/${hover}
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 4
- nine_slice_border_y = 4
+ nine_slice_border_x = 28
+ nine_slice_border_y = 22
  label = ${label}
 ${widgetMeta(wid(id))}
  element_type = custom_button
@@ -367,7 +464,17 @@ let n = 0;
 const uid = (p) => `${p}-${String(++n).padStart(3, "0")}`;
 
 const title = [
-  header("title_screen"),
+  header("title_screen", { behind: true }),
+  imageEl({
+    id: "title-glass",
+    file: "pause_glass.png",
+    x: 0,
+    y: 0,
+    w: 300,
+    h: 540,
+    stretchY: true,
+    nineSlice: true,
+  }),
   imageEl({ id: "aqua-logo", file: "logo.png", x: 48, y: 28, w: 56, h: 56 }),
   textEl({
     id: "aqua-title",
@@ -378,14 +485,15 @@ const title = [
     h: 44,
     color: "#F3FBFF",
   }),
+  imageEl({ id: "aqua-rule", file: "rule.png", x: 48, y: 132, w: 220, h: 2 }),
   textEl({
     id: "aqua-sub",
     source: "Океанский сервер",
     x: 48,
-    y: 138,
+    y: 140,
     w: 360,
     h: 22,
-    color: "#B7C9D4",
+    color: "#8FB0C2",
   }),
   customButton({
     id: "btn-play",
@@ -394,9 +502,9 @@ const title = [
     action: "joinserver",
     value: "g-pl-3.apexnodes.xyz:21561",
     x: 48,
-    y: 178,
+    y: 176,
     w: 220,
-    h: 40,
+    h: 48,
     label: '{"text":"Играть","color":"#031018","bold":true}',
     bg: "btn_play.png",
     hover: "btn_play_hover.png",
@@ -407,9 +515,9 @@ const title = [
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 228,
+    y: 232,
     w: 220,
-    h: 36,
+    h: 40,
     label: '{"text":"Настройки","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
@@ -421,9 +529,9 @@ const title = [
     action: "openlink",
     value: "https://aquateche.store",
     x: 48,
-    y: 272,
+    y: 278,
     w: 106,
-    h: 36,
+    h: 40,
     label: '{"text":"Сайт","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
@@ -435,9 +543,9 @@ const title = [
     action: "openlink",
     value: "https://discord.gg/3Khzr5z4fQ",
     x: 162,
-    y: 272,
+    y: 278,
     w: 106,
-    h: 36,
+    h: 40,
     label: '{"text":"Discord","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
@@ -448,9 +556,9 @@ const title = [
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 316,
+    y: 324,
     w: 220,
-    h: 36,
+    h: 40,
     label: '{"text":"Выход","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
@@ -460,7 +568,7 @@ const title = [
     execId: uid("ex"),
     wid: uid("w"),
     loadId: uid("l"),
-    x: 280,
+    x: 320,
     y: 516,
     w: 400,
     h: 16,
@@ -482,7 +590,20 @@ const pauseHidden = [
   "mc_pausescreen_feedback_button",
   "mc_pausescreen_report_bugs_button",
   "mc_pausescreen_lan_button",
+  "forge_titlescreen_mods_button",
+  "fml.menu.mods",
   "40",
+  "376324",
+  "398348",
+  "374300",
+  "604330",
+  "606300",
+  "374276",
+  "606252",
+  "376348",
+  "504348",
+  "580332",
+  "604346",
 ];
 
 const pause = [
@@ -492,7 +613,7 @@ const pause = [
     file: "pause_glass.png",
     x: 0,
     y: 0,
-    w: 292,
+    w: 300,
     h: 540,
     stretchY: true,
     nineSlice: true,
@@ -507,14 +628,15 @@ const pause = [
     h: 36,
     color: "#F3FBFF",
   }),
+  imageEl({ id: "pause-rule", file: "rule.png", x: 48, y: 128, w: 220, h: 2 }),
   textEl({
     id: "pause-hello",
-    source: '{"placeholder":"playername"}',
+    source: "Океанский сервер",
     x: 48,
-    y: 130,
+    y: 136,
     w: 220,
     h: 22,
-    color: "#B7C9D4",
+    color: "#8FB0C2",
   }),
   playerEl({ id: "pause-skin", x: 330, y: 120, w: 90, h: 180 }),
   movedVanilla({
@@ -523,9 +645,9 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 178,
+    y: 176,
     w: 220,
-    h: 40,
+    h: 48,
     label: '{"text":"Продолжить","color":"#031018","bold":true}',
     bg: "btn_play.png",
     hover: "btn_play_hover.png",
@@ -536,9 +658,9 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 228,
+    y: 232,
     w: 220,
-    h: 36,
+    h: 40,
     label: '{"text":"Настройки","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
@@ -549,9 +671,9 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 272,
+    y: 278,
     w: 106,
-    h: 36,
+    h: 40,
     label: '{"text":"Прогресс","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
@@ -562,9 +684,9 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: 162,
-    y: 272,
+    y: 278,
     w: 106,
-    h: 36,
+    h: 40,
     label: '{"text":"Статистика","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
@@ -575,9 +697,9 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: 48,
-    y: 316,
+    y: 324,
     w: 220,
-    h: 36,
+    h: 40,
     label: '{"text":"Отключиться","color":"#F3FBFF"}',
     bg: "btn_ghost.png",
     hover: "btn_ghost_hover.png",
