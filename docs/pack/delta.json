@@ -1,79 +1,65 @@
 {
-  "from_version": "2.9.267",
-  "to_version": "2.9.268",
+  "from_version": "2.9.269",
+  "to_version": "2.9.270",
   "added": [
     {
-      "path": "config/fancymenu/assets/logo_glow.png",
-      "md5": "2bc844a4c88e9489d2b43c893d4f088a",
-      "size": 2655,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__assets__logo_glow.png",
-      "asset": "config__fancymenu__assets__logo_glow.png"
+      "path": "config/fancymenu/assets/brand_wordmark.png",
+      "md5": "a330ccacf6fea379a7bbd9bb10653732",
+      "size": 2742,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.270/config__fancymenu__assets__brand_wordmark.png",
+      "asset": "config__fancymenu__assets__brand_wordmark.png"
     }
   ],
   "changed": [
     {
       "path": "config/fancymenu/assets/btn_ghost_hover.png",
-      "md5": "604427265034b4e4f86d3271782fad62",
-      "size": 3283,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__assets__btn_ghost_hover.png",
+      "md5": "6774aa6412e4cf49f3dc16687c6687cc",
+      "size": 2531,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.270/config__fancymenu__assets__btn_ghost_hover.png",
       "asset": "config__fancymenu__assets__btn_ghost_hover.png"
     },
     {
       "path": "config/fancymenu/assets/btn_ghost.png",
-      "md5": "3d7c155d0e76b5bd38e7f37b67c57c3e",
-      "size": 3081,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__assets__btn_ghost.png",
+      "md5": "cd1bc167068bc1d9cceabffe03217130",
+      "size": 2276,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.270/config__fancymenu__assets__btn_ghost.png",
       "asset": "config__fancymenu__assets__btn_ghost.png"
     },
     {
       "path": "config/fancymenu/assets/btn_play_hover.png",
-      "md5": "0142e420a02c2ee79177db670165ba90",
-      "size": 2895,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__assets__btn_play_hover.png",
+      "md5": "7b7418dcf30f677e7b80285ef8f6b2c0",
+      "size": 2354,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.270/config__fancymenu__assets__btn_play_hover.png",
       "asset": "config__fancymenu__assets__btn_play_hover.png"
     },
     {
       "path": "config/fancymenu/assets/btn_play.png",
-      "md5": "4c667c71cd88899b3ec134f00c74a950",
-      "size": 2800,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__assets__btn_play.png",
+      "md5": "90cf5ab3da5875aa07998b20897f0bb6",
+      "size": 2247,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.270/config__fancymenu__assets__btn_play.png",
       "asset": "config__fancymenu__assets__btn_play.png"
     },
     {
-      "path": "config/fancymenu/assets/pause_glass.png",
-      "md5": "352f2df3fa7b1a1127f5209bc45d8998",
-      "size": 453,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__assets__pause_glass.png",
-      "asset": "config__fancymenu__assets__pause_glass.png"
-    },
-    {
-      "path": "config/fancymenu/assets/rule.png",
-      "md5": "73a9dbdd11ec62940ea4f932bb3e050d",
-      "size": 75,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__assets__rule.png",
-      "asset": "config__fancymenu__assets__rule.png"
-    },
-    {
       "path": "config/fancymenu/customization/pause_screen_layout.txt",
-      "md5": "b0a5147de8d90c3aeb692eb881099988",
-      "size": 57098,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__customization__pause_screen_layout.txt",
+      "md5": "920055c1db33b5e01ef38485a938a134",
+      "size": 69528,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.270/config__fancymenu__customization__pause_screen_layout.txt",
       "asset": "config__fancymenu__customization__pause_screen_layout.txt"
     },
     {
       "path": "config/fancymenu/customization/title_screen_layout.txt",
-      "md5": "3b47cd33584377ec33c9222140e5c639",
-      "size": 46651,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.268/config__fancymenu__customization__title_screen_layout.txt",
+      "md5": "eee8a797bd3d669b70c4e8ab57f9a891",
+      "size": 43632,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.270/config__fancymenu__customization__title_screen_layout.txt",
       "asset": "config__fancymenu__customization__title_screen_layout.txt"
     }
   ],
   "removed": [],
   "stats": {
     "added": 1,
-    "changed": 8,
+    "changed": 6,
     "removed": 0,
-    "unchanged": 121,
-    "download_bytes": 118991
+    "unchanged": 124,
+    "download_bytes": 125310
   }
 }
