@@ -210,8 +210,8 @@ vanilla_button {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_play_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Продолжить","color":"#031018","bold":true}
  navigatable = true
  widget_active_state_requirement_container_identifier = w-065
@@ -270,8 +270,8 @@ vanilla_button {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Настройки","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = w-068
@@ -330,8 +330,8 @@ vanilla_button {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Прогресс","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = w-071
@@ -390,8 +390,8 @@ vanilla_button {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Статистика","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = w-074
@@ -450,8 +450,8 @@ vanilla_button {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Отключиться","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = w-077

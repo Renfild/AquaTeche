@@ -1,5 +1,5 @@
 /**
- * Delta-publish FancyMenu pack 2.9.270 (Python is broken on this machine).
+ * Delta-publish FancyMenu pack 2.9.271 (Python is broken on this machine).
  * Merges new files into docs/pack/manifest.json, uploads only those assets
  * to a draft GitHub release, then publishes the tag.
  */
@@ -9,8 +9,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const TAG = "pack-2.9.270";
-const VERSION = "2.9.270";
+const TAG = "pack-2.9.271";
+const VERSION = "2.9.271";
 const REPO = "Renfild/AquaTeche";
 const DOCS_PACK = path.join(ROOT, "docs/pack");
 const RELEASE = `https://github.com/${REPO}/releases/download/${TAG}`;

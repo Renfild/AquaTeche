@@ -11,14 +11,14 @@ const ASSETS = path.join(ROOT, "config/fancymenu/assets");
 
 /** MetaLabs tokens (metalabs.dev :root + .btn / .card). */
 const ML = {
-  aqua: [102, 255, 255], // --aqua-300 hsl(180,100%,70%)
+  aqua: [128, 239, 255], // generated Apple CTA, not neon #66FFFF
   card: [12, 12, 12], // .card --background-color #0C0C0C
   ink: [3, 16, 24],
   white: [243, 251, 255],
 };
 
-const NINE_X = 20;
-const NINE_Y = 18;
+const NINE_X = 8;
+const NINE_Y = 8;
 
 function crc32(buf) {
   let crc = 0xffffffff;
@@ -93,29 +93,26 @@ function srcOver(dr, dg, db, da, sr, sg, sb, sa) {
   ];
 }
 
-function capsule(w, h, { fill, glow, pad = 14, yShift = 1, rimW = 1.2, rimA = 0.35 }) {
-  const r = (h - pad * 2) * 0.5;
+function glassRect(w, h, { fill, rimA = 0.3, rimW = 1.2, radiusFrac = 0.14, pad = 2 }) {
   const cx = w * 0.5;
-  const cy = h * 0.5 - yShift;
+  const cy = h * 0.5;
   const hw = w * 0.5 - pad;
-  const hh = (h - pad * 2) * 0.5;
+  const hh = h * 0.5 - pad;
+  const r = Math.min(hw, hh, (h - pad * 2) * radiusFrac);
+  const inset = NINE_X;
   return (x, y) => {
     const d = sdRoundBox(x, y, cx, cy, hw, hh, r);
-    const dGlow = sdRoundBox(x, y, cx, cy + 2, hw + 1, hh + 2, r + 2);
-    const glowA = Math.exp(-(Math.max(dGlow, 0) ** 2) / 28) * (glow[3] / 255);
-    let p = srcOver(0, 0, 0, 0, glow[0], glow[1], glow[2], glowA);
-    const cover = clamp01(0.65 - d);
-    if (cover > 0) {
-      const spec = clamp01((cy - 4 - y) / (hh * 1.4)) * 0.38;
-      const fr = Math.round(fill[0] + (255 - fill[0]) * spec);
-      const fg = Math.round(fill[1] + (255 - fill[1]) * spec);
-      const fb = Math.round(fill[2] + (255 - fill[2]) * spec);
-      p = srcOver(p[0], p[1], p[2], p[3] / 255, fr, fg, fb, cover * (fill[3] / 255));
-    }
-    const ring = clamp01(1.05 - Math.abs(d) * (1.1 / rimW));
-    if (ring > 0) {
-      p = srcOver(p[0], p[1], p[2], p[3] / 255, 255, 255, 255, ring * rimA);
-    }
+    const cover = clamp01(0.5 - d);
+    if (cover <= 0) return [0, 0, 0, 0];
+    const flat = x >= inset && x < w - inset && y >= inset && y < h - inset;
+    if (flat) return [fill[0], fill[1], fill[2], fill[3]];
+    const spec = clamp01((cy - pad - 1 - y) / Math.max(hh * 2.2, 1)) * 0.12;
+    const fr = Math.round(fill[0] + (255 - fill[0]) * spec);
+    const fg = Math.round(fill[1] + (255 - fill[1]) * spec);
+    const fb = Math.round(fill[2] + (255 - fill[2]) * spec);
+    let p = srcOver(0, 0, 0, 0, fr, fg, fb, cover * (fill[3] / 255));
+    const ring = clamp01(1 - Math.abs(d) / rimW) * cover;
+    if (ring > 0) p = srcOver(p[0], p[1], p[2], p[3] / 255, 255, 255, 255, ring * rimA);
     return p;
   };
 }
@@ -147,54 +144,46 @@ function logoGlow(w, h) {
 }
 
 fs.mkdirSync(ASSETS, { recursive: true });
+const BW = 256;
+const BH = 48;
 writeRgba(
   path.join(ASSETS, "btn_play.png"),
-  128,
-  64,
-  capsule(128, 64, {
-    fill: [...ML.aqua, 255],
-    glow: [ML.aqua[0], ML.aqua[1], ML.aqua[2], 90],
-    yShift: 2,
-    rimW: 1.4,
-    rimA: 0.22,
+  BW,
+  BH,
+  glassRect(BW, BH, {
+    fill: [128, 239, 255, 255],
+    rimA: 0.32,
+    rimW: 1.1,
   }),
 );
 writeRgba(
   path.join(ASSETS, "btn_play_hover.png"),
-  128,
-  64,
-  capsule(128, 64, {
-    fill: [180, 255, 255, 255],
-    glow: [ML.aqua[0], ML.aqua[1], ML.aqua[2], 120],
-    yShift: 2,
-    rimW: 1.4,
-    rimA: 0.28,
+  BW,
+  BH,
+  glassRect(BW, BH, {
+    fill: [176, 246, 255, 255],
+    rimA: 0.38,
+    rimW: 1.1,
   }),
 );
 writeRgba(
   path.join(ASSETS, "btn_ghost.png"),
-  128,
-  64,
-  capsule(128, 64, {
-    fill: [...ML.card, 90],
-    glow: [255, 255, 255, 16],
-    pad: 14,
-    yShift: 0,
-    rimW: 3,
-    rimA: 0.3,
+  BW,
+  BH,
+  glassRect(BW, BH, {
+    fill: [255, 255, 255, 88],
+    rimA: 0.72,
+    rimW: 1.15,
   }),
 );
 writeRgba(
   path.join(ASSETS, "btn_ghost_hover.png"),
-  128,
-  64,
-  capsule(128, 64, {
-    fill: [...ML.card, 130],
-    glow: [255, 255, 255, 32],
-    pad: 14,
-    yShift: 0,
-    rimW: 3,
-    rimA: 0.5,
+  BW,
+  BH,
+  glassRect(BW, BH, {
+    fill: [255, 255, 255, 128],
+    rimA: 0.82,
+    rimW: 1.15,
   }),
 );
 writeRgba(path.join(ASSETS, "pause_glass.png"), 48, 256, glassPanel(48, 256));
@@ -465,6 +454,17 @@ const INNER = RAIL - PAD * 2;
 const HALF = Math.floor((INNER - 8) / 2);
 const CTA_H = 48;
 const BTN_H = 44;
+const GAP = 8;
+
+function stackY(start, heights) {
+  const ys = [];
+  let y = start;
+  for (const h of heights) {
+    ys.push(y);
+    y += h + GAP;
+  }
+  return ys;
+}
 
 function sidebar(prefix) {
   return [
@@ -491,6 +491,9 @@ function sidebar(prefix) {
   ];
 }
 
+const titleYs = stackY(128, [CTA_H, BTN_H, BTN_H, BTN_H]);
+const pauseYs = stackY(128, [CTA_H, BTN_H, BTN_H, BTN_H, BTN_H]);
+
 const title = [
   header("title_screen", { behind: true }),
   ...sidebar("title"),
@@ -501,7 +504,7 @@ const title = [
     action: "joinserver",
     value: "g-pl-3.apexnodes.xyz:21561",
     x: PAD,
-    y: 128,
+    y: titleYs[0],
     w: INNER,
     h: CTA_H,
     label: '{"text":"Играть","color":"#031018","bold":true}',
@@ -514,7 +517,7 @@ const title = [
     wid: uid("w"),
     loadId: uid("l"),
     x: PAD,
-    y: 184,
+    y: titleYs[1],
     w: INNER,
     h: BTN_H,
     label: '{"text":"Настройки","color":"#F3FBFF"}',
@@ -528,7 +531,7 @@ const title = [
     action: "openlink",
     value: "https://aquateche.store",
     x: PAD,
-    y: 236,
+    y: titleYs[2],
     w: HALF,
     h: BTN_H,
     label: '{"text":"Сайт","color":"#F3FBFF"}',
@@ -542,7 +545,7 @@ const title = [
     action: "openlink",
     value: "https://discord.gg/3Khzr5z4fQ",
     x: PAD + HALF + 8,
-    y: 236,
+    y: titleYs[2],
     w: HALF,
     h: BTN_H,
     label: '{"text":"Discord","color":"#F3FBFF"}',
@@ -555,7 +558,7 @@ const title = [
     wid: uid("w"),
     loadId: uid("l"),
     x: PAD,
-    y: 288,
+    y: titleYs[3],
     w: INNER,
     h: BTN_H,
     label: '{"text":"Выход","color":"#F3FBFF"}',
@@ -624,7 +627,7 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: PAD,
-    y: 128,
+    y: pauseYs[0],
     w: INNER,
     h: CTA_H,
     label: '{"text":"Продолжить","color":"#031018","bold":true}',
@@ -637,7 +640,7 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: PAD,
-    y: 184,
+    y: pauseYs[1],
     w: INNER,
     h: BTN_H,
     label: '{"text":"Настройки","color":"#F3FBFF"}',
@@ -650,7 +653,7 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: PAD,
-    y: 236,
+    y: pauseYs[2],
     w: INNER,
     h: BTN_H,
     label: '{"text":"Прогресс","color":"#F3FBFF"}',
@@ -663,7 +666,7 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: PAD,
-    y: 288,
+    y: pauseYs[3],
     w: INNER,
     h: BTN_H,
     label: '{"text":"Статистика","color":"#F3FBFF"}',
@@ -676,7 +679,7 @@ const pause = [
     wid: uid("w"),
     loadId: uid("l"),
     x: PAD,
-    y: 340,
+    y: pauseYs[4],
     w: INNER,
     h: BTN_H,
     label: '{"text":"Отключиться","color":"#F3FBFF"}',

@@ -226,8 +226,8 @@ element {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_play_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Играть","color":"#031018","bold":true}
  navigatable = true
  widget_active_state_requirement_container_identifier = wid-btn-play
@@ -284,8 +284,8 @@ vanilla_button {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Настройки","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = w-004
@@ -345,8 +345,8 @@ element {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Сайт","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = wid-btn-site
@@ -404,8 +404,8 @@ element {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Discord","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = wid-btn-discord
@@ -462,8 +462,8 @@ vanilla_button {
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  label = {"text":"Выход","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = w-011
@@ -520,8 +520,8 @@ vanilla_button {
  [executable_block:ex-013][type:generic] = [executables:]
  restartbackgroundanimations = true
  nine_slice_custom_background = true
- nine_slice_border_x = 20
- nine_slice_border_y = 18
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
  navigatable = true
  widget_active_state_requirement_container_identifier = w-014
  [loading_requirement_container_meta:w-014] = [groups:][instances:]
