@@ -8,6 +8,14 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
 const OUT = path.join(ROOT, "config/fancymenu/customization");
 const ASSETS = path.join(ROOT, "config/fancymenu/assets");
 
+/** MetaLabs tokens (metalabs.dev :root + .btn / .card). */
+const ML = {
+  aqua: [102, 255, 255], // --aqua-300 hsl(180,100%,70%)
+  card: [12, 12, 12], // .card --background-color #0C0C0C
+  ink: [3, 16, 24],
+  white: [243, 251, 255],
+};
+
 function crc32(buf) {
   let crc = 0xffffffff;
   for (let i = 0; i < buf.length; i++) {
@@ -81,7 +89,7 @@ function srcOver(dr, dg, db, da, sr, sg, sb, sa) {
   ];
 }
 
-function capsule(w, h, { fill, glow, pad = 10, yShift = 1 }) {
+function capsule(w, h, { fill, glow, pad = 10, yShift = 1, rimW = 1.2, rimA = 0.35 }) {
   const r = (h - pad * 2) * 0.5;
   const cx = w * 0.5;
   const cy = h * 0.5 - yShift;
@@ -98,17 +106,11 @@ function capsule(w, h, { fill, glow, pad = 10, yShift = 1 }) {
       const fr = Math.round(fill[0] + (255 - fill[0]) * spec);
       const fg = Math.round(fill[1] + (255 - fill[1]) * spec);
       const fb = Math.round(fill[2] + (255 - fill[2]) * spec);
-      const rim = clamp01(1.2 - Math.abs(d + 0.4) * 1.4) * 0.35;
-      p = srcOver(
-        p[0],
-        p[1],
-        p[2],
-        p[3] / 255,
-        Math.round(fr + (255 - fr) * rim * 0.5),
-        Math.round(fg + (255 - fg) * rim * 0.5),
-        Math.round(fb + (255 - fb) * rim * 0.4),
-        cover * (fill[3] / 255),
-      );
+      p = srcOver(p[0], p[1], p[2], p[3] / 255, fr, fg, fb, cover * (fill[3] / 255));
+    }
+    const ring = clamp01(1.05 - Math.abs(d) * (1.1 / rimW));
+    if (ring > 0) {
+      p = srcOver(p[0], p[1], p[2], p[3] / 255, 255, 255, 255, ring * rimA);
     }
     return p;
   };
@@ -116,20 +118,27 @@ function capsule(w, h, { fill, glow, pad = 10, yShift = 1 }) {
 
 function glassPanel(w, h) {
   return (x, y) => {
-    const edge = x > w - 2 ? 0.55 : x < 1 ? 0.12 : 0;
-    const top = y < 2 ? 0.22 : 0;
+    const edge = x > w - 2 ? 0.7 : x < 1 ? 0.08 : 0;
+    const top = y < 2 ? 0.18 : 0;
     const g = y / h;
-    const r = Math.round(6 + 8 * (1 - g));
-    const gch = Math.round(16 + 14 * (1 - g));
-    const b = Math.round(28 + 18 * (1 - g));
-    const a = Math.round(132 + 36 * (1 - g));
+    const [cr, cg, cb] = ML.card;
+    const a = Math.round(150 + 28 * (1 - g));
     const hi = Math.max(edge, top);
     return [
-      Math.round(r + (90 - r) * hi + edge * 40),
-      Math.round(gch + (210 - gch) * hi),
-      Math.round(b + (235 - b) * hi),
+      Math.round(cr + (255 - cr) * hi * 0.35),
+      Math.round(cg + (255 - cg) * hi * 0.35),
+      Math.round(cb + (255 - cb) * hi * 0.4),
       a,
     ];
+  };
+}
+
+function logoGlow(w, h) {
+  return (x, y) => {
+    const dx = (x - w / 2) / (w * 0.42);
+    const dy = (y - h / 2) / (h * 0.42);
+    const a = Math.exp(-(dx * dx + dy * dy) * 1.8) * 0.45;
+    return srcOver(0, 0, 0, 0, ML.aqua[0], ML.aqua[1], ML.aqua[2], a);
   };
 }
 
@@ -138,28 +147,55 @@ writeRgba(
   path.join(ASSETS, "btn_play.png"),
   128,
   64,
-  capsule(128, 64, { fill: [45, 212, 224, 255], glow: [34, 211, 238, 150], yShift: 2 }),
+  capsule(128, 64, {
+    fill: [...ML.aqua, 255],
+    glow: [ML.aqua[0], ML.aqua[1], ML.aqua[2], 160],
+    yShift: 2,
+    rimW: 1.4,
+    rimA: 0.22,
+  }),
 );
 writeRgba(
   path.join(ASSETS, "btn_play_hover.png"),
   128,
   64,
-  capsule(128, 64, { fill: [126, 233, 242, 255], glow: [94, 234, 248, 190], yShift: 2 }),
+  capsule(128, 64, {
+    fill: [180, 255, 255, 255],
+    glow: [ML.aqua[0], ML.aqua[1], ML.aqua[2], 200],
+    yShift: 2,
+    rimW: 1.4,
+    rimA: 0.28,
+  }),
 );
 writeRgba(
   path.join(ASSETS, "btn_ghost.png"),
   128,
   64,
-  capsule(128, 64, { fill: [10, 28, 44, 168], glow: [80, 200, 220, 40], pad: 8, yShift: 0 }),
+  capsule(128, 64, {
+    fill: [...ML.card, 90],
+    glow: [255, 255, 255, 28],
+    pad: 8,
+    yShift: 0,
+    rimW: 3,
+    rimA: 0.3,
+  }),
 );
 writeRgba(
   path.join(ASSETS, "btn_ghost_hover.png"),
   128,
   64,
-  capsule(128, 64, { fill: [14, 48, 72, 200], glow: [80, 220, 235, 70], pad: 8, yShift: 0 }),
+  capsule(128, 64, {
+    fill: [...ML.card, 130],
+    glow: [255, 255, 255, 50],
+    pad: 8,
+    yShift: 0,
+    rimW: 3,
+    rimA: 0.5,
+  }),
 );
 writeRgba(path.join(ASSETS, "pause_glass.png"), 48, 256, glassPanel(48, 256));
-writeRgba(path.join(ASSETS, "rule.png"), 8, 2, () => [180, 240, 250, 70]);
+writeRgba(path.join(ASSETS, "rule.png"), 8, 2, () => [255, 255, 255, 76]);
+writeRgba(path.join(ASSETS, "logo_glow.png"), 96, 96, logoGlow(96, 96));
 
 const metaTail = ` appearance_delay = no_delay
  appearance_delay_seconds = 1.0
@@ -475,15 +511,25 @@ const title = [
     stretchY: true,
     nineSlice: true,
   }),
+  imageEl({ id: "aqua-glow", file: "logo_glow.png", x: 28, y: 8, w: 96, h: 96 }),
   imageEl({ id: "aqua-logo", file: "logo.png", x: 48, y: 28, w: 56, h: 56 }),
   textEl({
     id: "aqua-title",
-    source: "# AquaTech",
+    source: "# Aqua",
     x: 48,
     y: 92,
-    w: 360,
+    w: 110,
     h: 44,
     color: "#F3FBFF",
+  }),
+  textEl({
+    id: "aqua-title-2",
+    source: "# Tech",
+    x: 148,
+    y: 92,
+    w: 140,
+    h: 44,
+    color: "#66FFFF",
   }),
   imageEl({ id: "aqua-rule", file: "rule.png", x: 48, y: 132, w: 220, h: 2 }),
   textEl({
@@ -618,15 +664,25 @@ const pause = [
     stretchY: true,
     nineSlice: true,
   }),
+  imageEl({ id: "pause-glow", file: "logo_glow.png", x: 28, y: 8, w: 96, h: 96 }),
   imageEl({ id: "pause-logo", file: "logo.png", x: 48, y: 28, w: 56, h: 56 }),
   textEl({
     id: "pause-brand",
-    source: "# AquaTech",
+    source: "# Aqua",
     x: 48,
     y: 92,
-    w: 220,
+    w: 110,
     h: 36,
     color: "#F3FBFF",
+  }),
+  textEl({
+    id: "pause-brand-2",
+    source: "# Tech",
+    x: 148,
+    y: 92,
+    w: 140,
+    h: 36,
+    color: "#66FFFF",
   }),
   imageEl({ id: "pause-rule", file: "rule.png", x: 48, y: 128, w: 220, h: 2 }),
   textEl({

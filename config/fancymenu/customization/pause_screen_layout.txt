@@ -81,6 +81,47 @@ element {
 }
 
 element {
+ source = [source:local]/config/fancymenu/assets/logo_glow.png
+ repeat_texture = false
+ nine_slice_texture = false
+ nine_slice_texture_border_x = 4
+ nine_slice_texture_border_y = 4
+ image_tint = #FFFFFF
+ restart_animated_on_menu_load = false
+ element_type = image
+ instance_identifier = pause-glow
+ appearance_delay = no_delay
+ appearance_delay_seconds = 1.0
+ fade_in_v2 = no_fading
+ fade_in_speed = 1.0
+ fade_out = no_fading
+ fade_out_speed = 1.0
+ base_opacity = 1.0
+ auto_sizing = false
+ auto_sizing_base_screen_width = 1920
+ auto_sizing_base_screen_height = 1080
+ sticky_anchor = false
+ anchor_point = top-left
+ x = 28
+ y = 8
+ width = 96
+ height = 96
+ stretch_x = false
+ stretch_y = false
+ stay_on_screen = true
+ element_loading_requirement_container_identifier = pause-glow-load
+ [loading_requirement_container_meta:pause-glow-load] = [groups:][instances:]
+ enable_parallax = false
+ parallax_intensity_v2 = 0.5
+ invert_parallax = false
+ animated_offset_x = 0
+ animated_offset_y = 0
+ load_once_per_session = false
+ in_editor_color = #FFC800FF
+ layer_hidden_in_editor = false
+}
+
+element {
  source = [source:local]/config/fancymenu/assets/logo.png
  repeat_texture = false
  nine_slice_texture = false
@@ -122,7 +163,7 @@ element {
 }
 
 element {
- source = # AquaTech
+ source = # Aqua
  source_mode = direct
  shadow = false
  scale = 1.0
@@ -146,13 +187,55 @@ element {
  anchor_point = top-left
  x = 48
  y = 92
- width = 220
+ width = 110
  height = 36
  stretch_x = false
  stretch_y = false
  stay_on_screen = true
  element_loading_requirement_container_identifier = pause-brand-load
  [loading_requirement_container_meta:pause-brand-load] = [groups:][instances:]
+ enable_parallax = false
+ parallax_intensity_v2 = 0.5
+ invert_parallax = false
+ animated_offset_x = 0
+ animated_offset_y = 0
+ load_once_per_session = false
+ in_editor_color = #FFC800FF
+ layer_hidden_in_editor = false
+}
+
+element {
+ source = # Tech
+ source_mode = direct
+ shadow = false
+ scale = 1.0
+ base_color = #66FFFF
+ text_border = 0
+ line_spacing = 1
+ enable_scrolling = false
+ element_type = text_v2
+ instance_identifier = pause-brand-2
+ appearance_delay = no_delay
+ appearance_delay_seconds = 1.0
+ fade_in_v2 = no_fading
+ fade_in_speed = 1.0
+ fade_out = no_fading
+ fade_out_speed = 1.0
+ base_opacity = 1.0
+ auto_sizing = false
+ auto_sizing_base_screen_width = 1920
+ auto_sizing_base_screen_height = 1080
+ sticky_anchor = false
+ anchor_point = top-left
+ x = 148
+ y = 92
+ width = 140
+ height = 36
+ stretch_x = false
+ stretch_y = false
+ stay_on_screen = true
+ element_loading_requirement_container_identifier = pause-brand-2-load
+ [loading_requirement_container_meta:pause-brand-2-load] = [groups:][instances:]
  enable_parallax = false
  parallax_intensity_v2 = 0.5
  invert_parallax = false
