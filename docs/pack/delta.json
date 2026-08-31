@@ -1,29 +1,89 @@
 {
-  "from_version": "2.9.271",
-  "to_version": "2.9.272",
-  "added": [],
-  "changed": [
+  "from_version": "2.9.272",
+  "to_version": "2.9.273",
+  "added": [
     {
-      "path": "config/fancymenu/customization/pause_screen_layout.txt",
-      "md5": "329af2a30f528303eb3de374302d6c4d",
-      "size": 69540,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.272/config__fancymenu__customization__pause_screen_layout.txt",
-      "asset": "config__fancymenu__customization__pause_screen_layout.txt"
+      "path": "kubejs/server_scripts/41_first_join_hint.js",
+      "md5": "b6e33296bf52da8df7e3847d1ef7cb03",
+      "size": 366,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/kubejs__server_scripts__41_first_join_hint.js",
+      "asset": "kubejs__server_scripts__41_first_join_hint.js"
     },
     {
-      "path": "config/fancymenu/customization/title_screen_layout.txt",
-      "md5": "da5559d7d834ecc7112982aae196feef",
-      "size": 43642,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.272/config__fancymenu__customization__title_screen_layout.txt",
-      "asset": "config__fancymenu__customization__title_screen_layout.txt"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.22-alpha.jar",
+      "md5": "ed80b063f337dd14f4c61c7cf4eb7a00",
+      "size": 2380964,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/aqualumen-forge-1.20.1-0.3.22-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.22-alpha.jar"
+    },
+    {
+      "path": "mods/aquatech_ui-1.0.45.jar",
+      "md5": "b847e105f83f8c01b6ee086ca4d7e0eb",
+      "size": 2118017,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/aquatech_ui-1.0.45.jar",
+      "asset": "aquatech_ui-1.0.45.jar"
     }
   ],
-  "removed": [],
+  "changed": [
+    {
+      "path": "config/aqualumen/fish_shop.json",
+      "md5": "81bffb20dda1a7c7f299e11a891331ee",
+      "size": 18118,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/config__aqualumen__fish_shop.json",
+      "asset": "config__aqualumen__fish_shop.json"
+    },
+    {
+      "path": "config/aqualumen/kits.json",
+      "md5": "3a434db8ff1b0bf590840a5703b3b637",
+      "size": 3214,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/config__aqualumen__kits.json",
+      "asset": "config__aqualumen__kits.json"
+    },
+    {
+      "path": "kubejs/client_scripts/add_fishing_resource_tooltips.js",
+      "md5": "cfaa3098d61c0b68b0048bb412efe88d",
+      "size": 5811,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/kubejs__client_scripts__add_fishing_resource_tooltips.js",
+      "asset": "kubejs__client_scripts__add_fishing_resource_tooltips.js"
+    },
+    {
+      "path": "kubejs/client_scripts/rename_starcatcher_rods.js",
+      "md5": "ed1429b9bfa89c282349c0e31e516c67",
+      "size": 1770,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/kubejs__client_scripts__rename_starcatcher_rods.js",
+      "asset": "kubejs__client_scripts__rename_starcatcher_rods.js"
+    },
+    {
+      "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
+      "md5": "842ec96412a8b6224b7c2fa51df4f6a3",
+      "size": 6298,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/kubejs__server_scripts__20_aquatech_rod_crafts.js",
+      "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
+    },
+    {
+      "path": "kubejs/server_scripts/70_island_auto_claim.js",
+      "md5": "76732aecb172f5c2e7ebdd7f7f4d1ecc",
+      "size": 12497,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.273/kubejs__server_scripts__70_island_auto_claim.js",
+      "asset": "kubejs__server_scripts__70_island_auto_claim.js"
+    }
+  ],
+  "removed": [
+    {
+      "path": "mods/aqualumen-forge-1.20.1-0.3.19-alpha.jar"
+    },
+    {
+      "path": "mods/aquatech_ui-1.0.43.jar"
+    },
+    {
+      "path": "mods/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar"
+    }
+  ],
   "stats": {
-    "added": 0,
-    "changed": 2,
-    "removed": 0,
-    "unchanged": 129,
-    "download_bytes": 113182
+    "added": 3,
+    "changed": 6,
+    "removed": 3,
+    "unchanged": 122,
+    "download_bytes": 4547055
   }
 }
