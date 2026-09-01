@@ -1,36 +1,37 @@
 {
-  "from_version": "2.9.273",
-  "to_version": "2.9.274",
+  "from_version": "2.9.274",
+  "to_version": "2.9.275",
   "added": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.23-alpha.jar",
-      "md5": "37984ae6fb99fd3ebd13c38928da3226",
-      "size": 2386787,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.274/aqualumen-forge-1.20.1-0.3.23-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.23-alpha.jar"
-    },
-    {
-      "path": "mods/aquatech_ui-1.0.46.jar",
-      "md5": "7898624dd47e7408586904495e94059d",
-      "size": 2124917,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.274/aquatech_ui-1.0.46.jar",
-      "asset": "aquatech_ui-1.0.46.jar"
+      "path": "mods/melody_forge_1.0.3_MC_1.20.1.jar",
+      "md5": "6b528d368f7fcbf737df28f2457cdec6",
+      "size": 37178,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.275/melody_forge_1.0.3_MC_1.20.1.jar",
+      "asset": "melody_forge_1.0.3_MC_1.20.1.jar"
     }
   ],
-  "changed": [],
-  "removed": [
+  "changed": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.22-alpha.jar"
+      "path": "config/fancymenu/options.txt",
+      "md5": "05fcc834476bcc8932b13839d7554cfe",
+      "size": 1341,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.275/config__fancymenu__options.txt",
+      "asset": "config__fancymenu__options.txt"
     },
     {
-      "path": "mods/aquatech_ui-1.0.45.jar"
+      "path": "mods/fancymenu_forge_3.9.12_MC_1.20.1.jar",
+      "md5": "57873abc370530ef40ca0ca2b3715c5a",
+      "size": 26114272,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.275/fancymenu_forge_3.9.12_MC_1.20.1.jar",
+      "asset": "fancymenu_forge_3.9.12_MC_1.20.1.jar"
     }
   ],
+  "removed": [],
   "stats": {
-    "added": 2,
-    "changed": 0,
-    "removed": 2,
+    "added": 1,
+    "changed": 2,
+    "removed": 0,
     "unchanged": 129,
-    "download_bytes": 4511704
+    "download_bytes": 26152791
   }
 }

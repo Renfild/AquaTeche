@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Manrope";
+        src: url("fonts/manrope-cyrillic-800.woff2") format("woff2");
+        font-weight: 800;
+        font-style: normal;
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      @font-face {
+        font-family: "Manrope";
+        src: url("fonts/manrope-latin-800.woff2") format("woff2");
+        font-weight: 800;
+        font-style: normal;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Spectral";
+        src: url("fonts/spectral-cyrillic-400i.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      @font-face {
+        font-family: "Spectral";
+        src: url("fonts/spectral-latin-400i.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("fonts/jetbrains-cyrillic-500.woff2") format("woff2");
+        font-weight: 500;
+        font-style: normal;
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("fonts/jetbrains-latin-500.woff2") format("woff2");
+        font-weight: 500;
+        font-style: normal;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      :root {
+        --ink: #0a0e12;
+        --fg: #f3fbff;
+        --accent: #3df0ff;
+        --kw: #7ee9f2;
+        --stage: #020b12;
+        --line: rgba(243, 251, 255, 0.08);
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #000;
+      }
+      body { font-family: "Manrope", sans-serif; }
+
+      #root {
+        container-type: size;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #000;
+      }
+
+      .clip {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #bobber, #dunk, #face, #loot, #profile, #case {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .cam {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+      }
+
+      .cover video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 42%;
+        display: block;
+        background: var(--stage);
+      }
+      .panel video {
+        background: var(--stage);
+      }
+      #face video { object-position: 50% 48%; }
+
+      .panel {
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .panel .cam {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .panel video {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .inv-stage, .end-stage, .grid-wall {
+        width: 100%;
+        height: 100%;
+        background: var(--ink);
+      }
+      .inv-stage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+      }
+      .inv-stage img {
+        width: 92cqw;
+        height: auto;
+        image-rendering: pixelated;
+      }
+
+      .grid-wall {
+        background:
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px),
+          var(--ink);
+        background-size: 4.5cqw 4.5cqw;
+      }
+      .grid-wall .cell {
+        position: absolute;
+        top: 28cqh;
+        left: 18cqw;
+        width: 4.5cqw;
+        height: 4.5cqw;
+        background: var(--accent);
+        filter: blur(0.15cqw);
+      }
+
+      .headline {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .headline .inner { position: relative; }
+      .headline .sans {
+        font: 800 11cqw/0.9 "Manrope", sans-serif;
+        letter-spacing: -0.4cqw;
+        color: var(--fg);
+      }
+      .headline .serif {
+        font: italic 400 11cqw/0.9 "Spectral", serif;
+        color: var(--fg);
+      }
+      .headline .underline {
+        display: block;
+        width: 52cqw;
+        height: 0.9cqw;
+        margin: 1.8cqw auto 0;
+        background: var(--accent);
+        border-radius: 999px;
+        transform-origin: left center;
+      }
+      .ghost {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font: 800 11cqw/0.9 "Manrope", sans-serif;
+        letter-spacing: -0.4cqw;
+        pointer-events: none;
+      }
+      .ghost-r { color: #ff3b3b; }
+      .ghost-b { color: var(--accent); }
+
+      .flash {
+        position: absolute;
+        inset: 0;
+        background: var(--fg);
+        pointer-events: none;
+      }
+
+      .bar-super {
+        position: absolute;
+        left: 6cqw;
+        right: 6cqw;
+        bottom: 28cqh;
+        text-align: center;
+        z-index: 3;
+      }
+      .bar {
+        display: inline-block;
+        padding: 1.1cqw 3.2cqw;
+        background: var(--fg);
+        color: var(--ink);
+        font: 800 6.2cqw/1.15 "Manrope", sans-serif;
+        letter-spacing: -0.18cqw;
+      }
+      .bar .kw { color: #0a5a62; }
+
+      .ledger {
+        position: absolute;
+        left: 10cqw;
+        right: 10cqw;
+        top: 34cqh;
+        text-align: left;
+      }
+      .ledger .row1 {
+        font: 500 7cqw/1.1 "JetBrains Mono", monospace;
+        color: var(--accent);
+        letter-spacing: -0.15cqw;
+      }
+      .ledger .row2 {
+        font: 800 9cqw/0.95 "Manrope", sans-serif;
+        color: var(--fg);
+        letter-spacing: -0.35cqw;
+        margin-top: 2.2cqh;
+      }
+      .ledger .row3 {
+        font: italic 400 6.4cqw/1.1 "Spectral", serif;
+        color: var(--fg);
+        margin-top: 2.4cqh;
+      }
+
+      .end-stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+      }
+      .end-stage img {
+        width: 28cqw;
+        height: 28cqw;
+        image-rendering: pixelated;
+      }
+      .end-stage .bar-super { position: relative; bottom: auto; margin-top: 4cqh; }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.045;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' seed='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+        z-index: 8;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-5sa2" id="root" data-composition-id="main" data-start="0" data-duration="9.5" data-width="1080" data-height="1920">
+      <div data-hf-id="hf-3nhv" id="bobber" class="cover" data-layout-allow-overflow="">
+        <div data-hf-id="hf-12x1" class="cam">
+          <video data-hf-id="hf-okeq" id="bobber-vid" class="clip" muted playsinline src="assets/src.mp4" data-start="0" data-duration="0.32" data-media-start="6" data-track-index="1"></video>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-mzdn" id="dunk" class="cover" data-layout-allow-overflow="">
+        <div data-hf-id="hf-wcpl" class="cam">
+          <video data-hf-id="hf-exgd" id="dunk-vid" class="clip" muted playsinline src="assets/src.mp4" data-start="5.38" data-duration="1.16" data-media-start="15" data-track-index="1"></video>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-ivlk" id="face" class="cover" data-layout-allow-overflow="">
+        <div data-hf-id="hf-xjmo" class="cam">
+          <video data-hf-id="hf-v7y7" id="face-vid" class="clip" muted playsinline src="assets/src.mp4" data-start="0.6" data-duration="0.26" data-media-start="23.2" data-track-index="1"></video>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-osoq" id="shaht" class="clip" data-start="5.04" data-duration="3.02" data-track-index="3" data-media-start="0">
+        <div data-hf-id="hf-szpk" class="cam grid-wall">
+          <div data-hf-id="hf-xwk6" class="flash"></div>
+          <div data-hf-id="hf-xic8" class="ghost ghost-r">ШАХТ НЕТ.</div>
+          <div data-hf-id="hf-r5qg" class="ghost ghost-b">ШАХТ НЕТ.</div>
+          <div data-hf-id="hf-sodk" class="headline">
+            <div data-hf-id="hf-lm34" class="inner">
+              <span data-hf-id="hf-b5mf" class="sans">ШАХТ </span><span data-hf-id="hf-elba" class="serif">НЕТ.</span>
+              <span data-hf-id="hf-b46r" class="underline"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-e46j" id="inv" class="clip" data-start="1.5" data-duration="1.04" data-track-index="1" data-layout-allow-overflow="">
+        <div data-hf-id="hf-lxah" class="cam inv-stage">
+          <img data-hf-id="hf-8idm" src="assets/inv.png" alt="">
+        </div>
+        <div data-hf-id="hf-kccp" class="bar-super">
+          <div data-hf-id="hf-k3s0" class="bar-inner"><span data-hf-id="hf-o3mu" class="bar">Копать не надо.</span></div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-hwge" id="loot" class="panel" data-layout-allow-overflow="">
+        <div data-hf-id="hf-x5bn" class="cam">
+          <video data-hf-id="hf-ks12" id="loot-vid" class="clip" muted playsinline src="assets/loot.mp4" data-start="2.55" data-duration="1.34" data-media-start="7" data-track-index="1"></video>
+        </div>
+      </div>
+      <div data-hf-id="hf-cvww" id="lovish-bar" class="clip" data-start="2.55" data-duration="1.34" data-track-index="3">
+        <div data-hf-id="hf-94zh" class="bar-super">
+          <div data-hf-id="hf-tq1k" class="bar-inner"><span data-hf-id="hf-l6dz" class="bar">Ловишь.</span></div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-8u4a" id="spec" class="clip" data-start="3.9" data-duration="1.14" data-track-index="1">
+        <div data-hf-id="hf-mzpc" class="cam grid-wall">
+          <div data-hf-id="hf-7184" class="cell"></div>
+          <div data-hf-id="hf-75x7" class="ledger" data-layout-allow-overlap="">
+            <div data-hf-id="hf-ydn1" class="row1">1.20.1</div>
+            <div data-hf-id="hf-ti6q" class="row2">ОКЕАН</div>
+            <div data-hf-id="hf-7ch5" class="row3">свой плот</div>
+          </div>
+          <div data-hf-id="hf-abwk" class="bar-super">
+            <div data-hf-id="hf-sj4h" class="bar-inner"><span data-hf-id="hf-1h9a" class="bar">Океан. 1.20.1. Свой плот.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-uun3" id="profile" class="panel" data-layout-allow-overflow="">
+        <div data-hf-id="hf-v5si" class="cam">
+          <video data-hf-id="hf-xjj5" id="profile-vid" class="clip" muted playsinline src="assets/menu.mp4" data-start="5.05" data-duration="1.39" data-media-start="1" data-track-index="1"></video>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-o8gk" id="case" class="panel" data-layout-allow-overflow="">
+        <div data-hf-id="hf-urhh" class="cam">
+          <video data-hf-id="hf-rtyz" id="case-vid" class="clip" muted playsinline src="assets/menu.mp4" data-start="6.45" data-duration="1.34" data-media-start="8" data-track-index="1"></video>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-drfx" id="end" class="clip" data-start="7.8" data-duration="1.7" data-track-index="1">
+        <div data-hf-id="hf-tjn3" class="cam end-stage">
+          <div data-hf-id="hf-r6ka" class="flash"></div>
+          <div data-hf-id="hf-v3b6" class="logo-inner">
+            <img data-hf-id="hf-4d1q" src="assets/logo.png" alt="">
+          </div>
+          <div data-hf-id="hf-9xlj" class="bar-super">
+            <div data-hf-id="hf-sxfi" class="bar-inner"><span data-hf-id="hf-imws" class="bar">aquateche.store</span></div>
+          </div>
+        </div>
+      </div>
+
+      <audio data-hf-id="hf-y4ac" id="master" class="clip" data-start="0" data-duration="9.5" data-track-index="9" src="assets/master_audio.m4a"></audio>
+
+      <div data-hf-id="hf-h60x" class="grain"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      gsap.set("[data-hf-id=\"hf-imws\"]", { x: -40, y: 0 });
+      const tl = gsap.timeline({ paused: true });
+
+      gsap.set(".cam", { force3D: true });
+      gsap.set("#bobber .cam", { scale: 1.12, transformOrigin: "50% 42%" });
+
+      tl.fromTo(
+        "#dunk .cam",
+        { scale: 1.22, x: -10, y: 8, rotation: -1.4, transformOrigin: "50% 42%" },
+        { scale: 1.22, x: 0, y: 0, rotation: 0, duration: 0.22, ease: "power2.out" },
+        0.33
+      );
+      tl.fromTo(
+        "#face .cam",
+        { scale: 1.45, x: 12, y: -10, rotation: 1.6, transformOrigin: "50% 48%" },
+        { scale: 1.45, x: 0, y: 0, rotation: 0, duration: 0.22, ease: "power2.out" },
+        0.6
+      );
+
+      tl.fromTo("#shaht .flash", { opacity: 0.5 }, { opacity: 0, duration: 0.08, ease: "none" }, 0.87);
+      tl.fromTo("#shaht .ghost-r", { opacity: 0.7, x: -6 }, { opacity: 0, duration: 0.1, ease: "none" }, 0.87);
+      tl.fromTo("#shaht .ghost-b", { opacity: 0.7, x: 6 }, { opacity: 0, duration: 0.1, ease: "none" }, 0.87);
+      tl.fromTo(
+        "#shaht .inner",
+        { scale: 1.22, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.2, ease: "power3.out" },
+        0.87
+      );
+      tl.fromTo("#shaht .underline", { scaleX: 0 }, { scaleX: 1, duration: 0.28, ease: "power3.out" }, 0.98);
+
+      tl.fromTo(
+        "#inv .cam",
+        { scale: 1.22, rotation: -3 },
+        { scale: 1, rotation: 0, duration: 0.28, ease: "power3.out" },
+        1.5
+      );
+      tl.fromTo("#inv .bar-inner", { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: "power3.out" }, 1.58);
+
+      tl.fromTo("#loot .cam", { scale: 2.05 }, { scale: 2.12, duration: 1.34, ease: "power1.inOut" }, 2.55);
+      tl.fromTo("#lovish-bar .bar-inner", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2, ease: "power3.out" }, 2.62);
+
+      tl.fromTo("#spec .row1", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2, ease: "power3.out" }, 3.9);
+      tl.fromTo("#spec .row2", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2, ease: "power3.out" }, 4.02);
+      tl.fromTo("#spec .row3", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2, ease: "power3.out" }, 4.14);
+      tl.fromTo("#spec .bar-inner", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2, ease: "power3.out" }, 4.22);
+      tl.fromTo("#spec .cell", { opacity: 0.25 }, { opacity: 1, duration: 0.45, ease: "power1.inOut" }, 3.9);
+
+      tl.fromTo("#profile .cam", { scale: 2.18 }, { scale: 2.26, duration: 1.39, ease: "power1.inOut" }, 5.05);
+      tl.fromTo("#case .cam", { scale: 2.24 }, { scale: 2.32, duration: 1.34, ease: "power1.inOut" }, 6.45);
+
+      tl.fromTo("#end .flash", { opacity: 0.4 }, { opacity: 0, duration: 0.08, ease: "none" }, 7.8);
+      tl.fromTo(
+        "#end .logo-inner",
+        { scale: 1.16, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.28, ease: "power3.out" },
+        7.86
+      );
+      tl.fromTo("#end .bar-inner", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: "power3.out" }, 8.02);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

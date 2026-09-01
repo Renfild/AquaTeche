@@ -210,8 +210,13 @@ public final class PersonalRaftSpawner {
         registry.entries.removeIf(e -> e.owner().equals(player.getUUID()));
         registry.setDirty();
 
-        // 4. Spawn new raft at fresh coordinates
+        // 4. Spawn new raft at fresh coordinates and move the player onto it
         trySpawnRaft(player);
+
+        RaftRegistry.Entry fresh = registry.getEntry(player.getUUID());
+        if (fresh != null) {
+            player.teleportTo(level, fresh.x() + 0.5, SPAWN_Y + 0.1, fresh.z() + 0.5, 180.0f, 0.0f);
+        }
         player.sendSystemMessage(Component.literal("§a⚓ Твой плот и приват успешно пересозданы на новых координатах!"));
         player.sendSystemMessage(Component.literal("§e⚠️ Лимит пересоздания плота исчерпан (1/1)."));
         return 1;
@@ -371,7 +376,7 @@ public final class PersonalRaftSpawner {
         data.putInt(TAG_Z, center.getZ());
 
         player.setRespawnPosition(ServerLevel.OVERWORLD, center.above(), 180.0f, true, false);
-        autoSetHome(player);
+        autoSetHome(player, center.above());
 
         String regionId = raftRegionId(player);
         player.sendSystemMessage(Component.literal(
@@ -383,19 +388,16 @@ public final class PersonalRaftSpawner {
                 center.getX(), DECK_Y, center.getZ(), player.getGameProfile().getName());
     }
 
-    private static void autoSetHome(ServerPlayer player) {
+    private static void autoSetHome(ServerPlayer player, BlockPos home) {
         try {
+            // Essentials sethome uses the source position — pin it to the raft, not the player.
             player.getServer().getCommands().performPrefixedCommand(
-                    player.createCommandSourceStack().withPermission(4), "sethome home");
+                    player.createCommandSourceStack().withPermission(4)
+                            .withPosition(net.minecraft.world.phys.Vec3.atLowerCornerOf(home)),
+                    "sethome home");
         } catch (Throwable t) {
             AquaTechUI.LOGGER.debug("Auto sethome via command stack failed: {}", t.toString());
         }
-        try {
-            Class<?> bukkitClass = Class.forName("org.bukkit.Bukkit");
-            Method dispatch = bukkitClass.getMethod("dispatchCommand", Class.forName("org.bukkit.command.CommandSender"), String.class);
-            Object console = bukkitClass.getMethod("getConsoleSender").invoke(null);
-            dispatch.invoke(null, console, "sethome " + player.getGameProfile().getName() + " home");
-        } catch (Throwable ignored) {}
     }
 
     public static String raftRegionId(ServerPlayer player) {

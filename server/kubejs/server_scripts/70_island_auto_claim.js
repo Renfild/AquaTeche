@@ -41,35 +41,31 @@ PlayerEvents.loggedIn(event => {
     }
 });
 
-// Fail-safe respawn handling: ensure player respawns on their island
-PlayerEvents.respawned(event => {
-    let player = event.player;
-    let pName = player.username;
-
-    let ix = player.persistentData.islandX;
-    let iy = player.persistentData.islandY;
-    let iz = player.persistentData.islandZ;
-
-    if (ix != null && iy != null && iz != null) {
-        event.server.scheduleInTicks(1, callback => {
-            let px = Math.floor(player.x);
-            let pz = Math.floor(player.z);
-            
-            let distFromSpawn = Math.max(Math.abs(px), Math.abs(pz));
-            let islandDistFromSpawn = Math.max(Math.abs(ix), Math.abs(iz));
-
-            if (distFromSpawn <= 10 && islandDistFromSpawn > 10) {
-                let overworld = event.server.getLevel('minecraft:overworld');
-                if (overworld) {
-                    player.teleportTo(overworld, ix + 0.5, iy, iz + 0.5, player.yaw, player.pitch);
-                    player.tell(Text.aqua('[AquaTech] Вы возродились на своём острове.'));
-                }
-            }
-        });
-    }
-});
-
 // Island & Corporate Commands (/is, /island, /corp, /clan)
+// Coords source of truth = aquatech_ui PersonalRaftSpawner tags (aquatech_ui:raft_*).
+
+// Raft region id, mirrors Java raftRegionId(): lowercase + sanitized + _raft.
+function raftRegion(name) {
+    return (name + '_raft').toLowerCase().replace(/[^a-z0-9_-]/g, '_');
+}
+
+// Raft deck coords from the Java mod tags; +1 to stand on top of the deck.
+function raftCoords(p) {
+    if (p == null) return null;
+    let d = p.persistentData;
+    if (!d.contains('aquatech_ui:raft_ready')) return null;
+    return { x: d.getInt('aquatech_ui:raft_x'), y: d.getInt('aquatech_ui:raft_y') + 1, z: d.getInt('aquatech_ui:raft_z') };
+}
+
+function legacyIslandCoords(p) {
+    if (p == null || p.persistentData.islandX == null) return null;
+    return { x: p.persistentData.islandX, y: p.persistentData.islandY, z: p.persistentData.islandZ };
+}
+
+function islandHomeCoords(player, leader) {
+    return raftCoords(leader) || raftCoords(player) || legacyIslandCoords(player);
+}
+
 ServerEvents.commandRegistry(event => {
     const { commands: Commands, arguments: Arguments } = event;
 
@@ -83,9 +79,9 @@ ServerEvents.commandRegistry(event => {
                         let targetName = Arguments.STRING.getResult(ctx, 'target');
                         let pName = sender.username;
 
-                        ctx.source.server.runCommandSilent(`rg addmember island_${pName} ${targetName} -w world`);
+                        ctx.source.server.runCommandSilent(`rg addmember ${raftRegion(pName)} ${targetName} -w world`);
                         sender.tell(Text.gold(`[Остров] Игрок §a${targetName} §fдобавлен в регион вашего острова!`));
-                        
+
                         let targetPlayer = ctx.source.server.getPlayer(targetName);
                         if (targetPlayer) {
                             targetPlayer.persistentData.corpLeader = pName;
@@ -103,7 +99,7 @@ ServerEvents.commandRegistry(event => {
                         let targetName = Arguments.STRING.getResult(ctx, 'target');
                         let pName = sender.username;
 
-                        ctx.source.server.runCommandSilent(`rg addmember island_${pName} ${targetName} -w world`);
+                        ctx.source.server.runCommandSilent(`rg addmember ${raftRegion(pName)} ${targetName} -w world`);
                         sender.tell(Text.gold(`[Остров] Игрок §a${targetName} §fдобавлен в регион вашего острова!`));
                         
                         let targetPlayer = ctx.source.server.getPlayer(targetName);
@@ -123,9 +119,9 @@ ServerEvents.commandRegistry(event => {
                         let targetName = Arguments.STRING.getResult(ctx, 'target');
                         let pName = sender.username;
 
-                        ctx.source.server.runCommandSilent(`rg removemember island_${pName} ${targetName} -w world`);
+                        ctx.source.server.runCommandSilent(`rg removemember ${raftRegion(pName)} ${targetName} -w world`);
                         sender.tell(Text.gold(`[Остров] Игрок §c${targetName} §fудалён из региона вашего острова.`));
-                        
+
                         let targetPlayer = ctx.source.server.getPlayer(targetName);
                         if (targetPlayer && targetPlayer.persistentData.corpLeader === pName) {
                             delete targetPlayer.persistentData.corpLeader;
@@ -142,7 +138,7 @@ ServerEvents.commandRegistry(event => {
                         let targetName = Arguments.STRING.getResult(ctx, 'target');
                         let pName = sender.username;
 
-                        ctx.source.server.runCommandSilent(`rg removemember island_${pName} ${targetName} -w world`);
+                        ctx.source.server.runCommandSilent(`rg removemember ${raftRegion(pName)} ${targetName} -w world`);
                         sender.tell(Text.gold(`[Остров] Игрок §c${targetName} §fудалён из региона вашего острова.`));
                         
                         let targetPlayer = ctx.source.server.getPlayer(targetName);
@@ -176,23 +172,14 @@ ServerEvents.commandRegistry(event => {
                     let leaderName = player.persistentData.corpLeader || player.username;
                     let leader = ctx.source.server.getPlayer(leaderName);
 
-                    let ix, iy, iz;
-                    if (leader && leader.persistentData.islandX != null) {
-                        ix = leader.persistentData.islandX;
-                        iy = leader.persistentData.islandY;
-                        iz = leader.persistentData.islandZ;
-                    } else if (player.persistentData.islandX != null) {
-                        ix = player.persistentData.islandX;
-                        iy = player.persistentData.islandY;
-                        iz = player.persistentData.islandZ;
-                    }
+                    let pos = islandHomeCoords(player, leader);
 
-                    if (ix != null && iy != null && iz != null) {
+                    if (pos) {
                         let overworld = ctx.source.server.getLevel('minecraft:overworld');
-                        player.teleportTo(overworld, ix + 0.5, iy, iz + 0.5, player.yaw, player.pitch);
+                        player.teleportTo(overworld, pos.x + 0.5, pos.y, pos.z + 0.5, player.yaw, player.pitch);
                         player.tell(Text.gold(`[Остров] Вы телепортированы на остров (${leaderName}).`));
                     } else {
-                        player.tell(Text.red('[Остров] Координаты острова не найдены.'));
+                        player.tell(Text.red('[Остров] Плот не найден. Введите /raft, чтобы создать плот.'));
                     }
                     return 1;
                 })
@@ -206,7 +193,7 @@ ServerEvents.commandRegistry(event => {
 
                     player.tell(Text.gold('=== §bОкеанический Остров §6==='));
                     player.tell(Text.white(`Владелец острова: §a${leader}`));
-                    player.tell(Text.white(`Регион WorldGuard: §eisland_${leader}`));
+                    player.tell(Text.white(`Регион WorldGuard: §e${raftRegion(leader)}`));
                     player.tell(Text.white(`Координаты: §e[${player.persistentData.islandX || '?'}, ${player.persistentData.islandY || '?'}, ${player.persistentData.islandZ || '?'}]`));
                     player.tell(Text.gray('Команды: §e/is trust <Ник>§7, §e/is untrust <Ник>§7, §e/is home§7, §e/is sethome'));
                     player.tell(Text.gray('Для общего прогресса квестов: §e/ftbteams party create <Имя>'));
@@ -219,20 +206,11 @@ ServerEvents.commandRegistry(event => {
                 let leaderName = player.persistentData.corpLeader || player.username;
                 let leader = ctx.source.server.getPlayer(leaderName);
 
-                let ix, iy, iz;
-                if (leader && leader.persistentData.islandX != null) {
-                    ix = leader.persistentData.islandX;
-                    iy = leader.persistentData.islandY;
-                    iz = leader.persistentData.islandZ;
-                } else if (player.persistentData.islandX != null) {
-                    ix = player.persistentData.islandX;
-                    iy = player.persistentData.islandY;
-                    iz = player.persistentData.islandZ;
-                }
+                let pos = islandHomeCoords(player, leader);
 
-                if (ix != null && iy != null && iz != null) {
+                if (pos) {
                     let overworld = ctx.source.server.getLevel('minecraft:overworld');
-                    player.teleportTo(overworld, ix + 0.5, iy, iz + 0.5, player.yaw, player.pitch);
+                    player.teleportTo(overworld, pos.x + 0.5, pos.y, pos.z + 0.5, player.yaw, player.pitch);
                     player.tell(Text.gold(`[Остров] Вы телепортированы на остров (${leaderName}).`));
                 } else {
                     player.tell(Text.gold('§b[AquaTech Остров] §fИспользуйте:'));

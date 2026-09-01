@@ -1,0 +1,10 @@
+node_modules/
+out/
+public/*.mp4
+public/*.mp3
+edit/node_modules/
+edit/out/
+edit/assets/*.mp4
+edit/assets/master_audio.wav
+dist/
+.DS_Store

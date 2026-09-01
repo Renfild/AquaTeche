@@ -452,6 +452,7 @@
         </div>
         <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Меню" aria-hidden="true">
           <div class="container">
+            <div class="mobile-nav-status" title="Онлайн на сервере"><span class="dot"></span><span data-online aria-live="polite">…</span></div>
             <a href="index.html" class="${active === "home" ? "active" : ""}">Главная</a>
             ${allMobile}
             ${user?.is_admin ? '<a href="admin.html">Админка</a>' : ""}
@@ -459,7 +460,8 @@
               user
                 ? `<a href="profile.html">Кабинет</a>
                    <button type="button" data-logout>Выйти</button>`
-                : '<a href="register.html">Регистрация</a>'
+                : `<a href="login.html">Войти</a>
+                   <a href="register.html">Регистрация</a>`
             }
             <a class="nav-cta" href="${DOWNLOAD}">Скачать лаунчер</a>
             <a href="${DISCORD}" target="_blank" rel="noopener noreferrer">Discord</a>
@@ -646,7 +648,7 @@
       pills.forEach((el) => {
         el.textContent = online ? `${n} онлайн` : "оффлайн";
       });
-      document.querySelectorAll(".online-pill, .hero-status-pill").forEach((el) => {
+      document.querySelectorAll(".online-pill, .hero-status-pill, .mobile-nav-status").forEach((el) => {
         el.classList.toggle("is-offline", !online);
         el.title = online
           ? `Онлайн на сервере: ${n}${data.players_max ? " / " + data.players_max : ""}`
@@ -656,7 +658,7 @@
       pills.forEach((el) => {
         el.textContent = "нет данных";
       });
-      document.querySelectorAll(".online-pill, .hero-status-pill").forEach((el) => {
+      document.querySelectorAll(".online-pill, .hero-status-pill, .mobile-nav-status").forEach((el) => {
         el.classList.add("is-offline");
       });
     }
