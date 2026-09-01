@@ -33,6 +33,7 @@ public final class HubTabs {
         KITS("kits", Icons.Icon.SHIELD),
         WARPS("warps", Icons.Icon.BOLT),
         TOPS("tops", Icons.Icon.CHART),
+        EVENTS("events", Icons.Icon.BELL),
         SETTINGS("settings", Icons.Icon.GEAR);
 
         private final String key;
@@ -100,6 +101,7 @@ public final class HubTabs {
             case KITS -> kits(graphics, font, theme, snapshot, x, y, width, height, mouseX, mouseY);
             case WARPS -> warps(graphics, font, theme, snapshot, x, y, width, height, mouseX, mouseY);
             case TOPS -> tops(graphics, font, theme, snapshot, x, y, width, height);
+            case EVENTS -> events(graphics, font, theme, snapshot, x, y, width, height, mouseX, mouseY, time);
             case SETTINGS -> settings(graphics, font, theme, x, y, width, height);
         }
     }
@@ -728,6 +730,7 @@ public final class HubTabs {
             case AUCTION -> clickAuction(snapshot, x, y, width, height, mouseX, mouseY);
             case KITS -> clickKits(snapshot, x, y, width, height, mouseX, mouseY);
             case WARPS -> clickWarps(snapshot, x, y, width, height, mouseX, mouseY);
+            case EVENTS -> clickEvents(snapshot, x, y, width, height, mouseX, mouseY);
             default -> false;
         };
     }
@@ -809,5 +812,105 @@ public final class HubTabs {
 
     public static Component title(Tab tab) {
         return Component.translatable(tab.translationKey());
+    }
+
+    /** Вкладка «События»: баннер активного события + контракты дня из aquatech_ui. */
+    private static void events(net.minecraft.client.gui.GuiGraphics graphics, net.minecraft.client.gui.Font font,
+                               store.aquateche.aqualumen.client.theme.LumenTheme theme,
+                               @Nullable HubSnapshot snapshot,
+                               int x, int y, int width, int height, int mouseX, int mouseY, float time) {
+        int heroHeight = 52;
+        LumenWidgets.card(graphics, theme, x, y, width, heroHeight, null);
+        Icons.badge(graphics, Icons.Icon.BELL, x + 10, y + 10, 32, Gfx.withAlpha(theme.accentAlt(), 0.18F), theme.accentAlt());
+        HubFont.draw(graphics, font, "\u0421\u043e\u0431\u044b\u0442\u0438\u044f \u043e\u043a\u0435\u0430\u043d\u0430", x + 50, y + 12, theme.text());
+        String banner = snapshot != null && snapshot.eventLine() != null && !snapshot.eventLine().isEmpty()
+                ? snapshot.eventLine()
+                : "\u0421\u0435\u0439\u0447\u0430\u0441 \u0442\u0438\u0445\u043e \u2014 \u043b\u043e\u0432\u0438\u0442\u0435 \u0432 \u0441\u0432\u043e\u0451 \u0443\u0434\u043e\u0432\u043e\u043b\u044c\u0441\u0442\u0432\u0438\u0435";
+        HubFont.draw(graphics, font, banner, x + 50, y + 26, theme.textDim());
+
+        java.util.List<HubSnapshot.EventQuest> quests = snapshot != null && snapshot.quests() != null
+                ? snapshot.quests()
+                : java.util.List.of();
+        int cardY = y + heroHeight + 10;
+        int cardHeight = 68;
+        for (HubSnapshot.EventQuest q : quests) {
+            if (cardY + cardHeight > y + height) break;
+
+            boolean ready = !q.claimed() && q.progress() >= q.goal();
+            boolean hoverClaim = ready && mouseX >= x && mouseX <= x + width
+                    && mouseY >= cardY + 36 && mouseY <= cardY + 62;
+            if (hoverClaim) {
+                Gfx.glow(graphics, x, cardY, width, cardHeight, 10, theme.accentAlt(), 2);
+            }
+            LumenWidgets.card(graphics, theme, x, cardY, width, cardHeight, null);
+
+            Icons.badge(graphics, Icons.Icon.FISH, x + 10, cardY + 10, 20,
+                    Gfx.withAlpha(theme.accentAlt(), 0.18F), theme.accentAlt());
+            HubFont.draw(graphics, font, q.desc(), x + 40, cardY + 10, theme.text());
+
+            float frac = q.goal() > 0 ? Math.min(1.0F, q.progress() / (float) q.goal()) : 0.0F;
+            Gfx.progressBar(graphics, x + 40, cardY + 30, width - 190, 6, frac,
+                    theme.shade(theme.surface(), 0.9F), theme.accent(), theme.accentAlt());
+            HubFont.draw(graphics, font, q.progress() + " / " + q.goal(), x + 40, cardY + 42, theme.textDim());
+
+            String reward = "+" + q.reward() + " \u043c\u043e\u043d";
+            HubFont.draw(graphics, font, reward, x + width - HubFont.width(font, reward) - 12, cardY + 10,
+                    theme.accent());
+
+            int btnW = 96;
+            int btnX = x + width - btnW - 12;
+            int btnY = cardY + 30;
+            if (q.claimed()) {
+                Icons.badge(graphics, Icons.Icon.CHECK, btnX + btnW / 2 - 22, btnY + 6, 14,
+                        Gfx.withAlpha(theme.accent(), 0.15F), theme.accent());
+                HubFont.draw(graphics, font,
+                        "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u043e", btnX + btnW / 2 - 2, btnY + 8, theme.textDim());
+            } else if (ready) {
+                Gfx.glow(graphics, btnX, btnY, btnW, 24, 8, theme.accent(), 2);
+                HubFont.centered(graphics, font, "\u0417\u0430\u0431\u0440\u0430\u0442\u044c",
+                        btnX + btnW / 2, btnY + 8, theme.accent());
+            } else {
+                HubFont.centered(graphics, font, "\u21bb 100 \u043c\u043e\u043d",
+                        btnX + btnW / 2, btnY + 8, theme.textDim());
+            }
+
+            cardY += cardHeight + 8;
+        }
+
+        if (quests.isEmpty()) {
+            HubFont.centered(graphics, font,
+                    "\u041a\u043e\u043d\u0442\u0440\u0430\u043a\u0442\u044b \u043f\u043e\u044f\u0432\u044f\u0442\u0441\u044f \u043f\u043e\u0441\u043b\u0435 \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u043a\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0430 \u0441 \u043c\u043e\u0434\u043e\u043c aquatech_ui",
+                    x + width / 2, y + heroHeight + 40, theme.textDim());
+        }
+    }
+
+    public static boolean clickEvents(@Nullable HubSnapshot snapshot, int x, int y, int width, int height,
+                                      int mouseX, int mouseY) {
+        if (snapshot == null || snapshot.quests() == null) {
+            return false;
+        }
+        int heroHeight = 52;
+        int cardY = y + heroHeight + 10;
+        int cardHeight = 68;
+        for (HubSnapshot.EventQuest q : snapshot.quests()) {
+            if (cardY + cardHeight > y + height) break;
+            boolean ready = !q.claimed() && q.progress() >= q.goal();
+            int btnW = 96;
+            int btnX = x + width - btnW - 12;
+            int btnY = cardY + 30;
+            boolean overButton = mouseX >= btnX && mouseX <= btnX + btnW && mouseY >= btnY && mouseY <= btnY + 24;
+            if (overButton) {
+                if (ready) {
+                    store.aquateche.aqualumen.client.LumenClient.sendAction("events.claim", String.valueOf(q.idx()));
+                    return true;
+                }
+                if (!q.claimed()) {
+                    store.aquateche.aqualumen.client.LumenClient.sendAction("events.reroll", String.valueOf(q.idx()));
+                    return true;
+                }
+            }
+            cardY += cardHeight + 8;
+        }
+        return false;
     }
 }

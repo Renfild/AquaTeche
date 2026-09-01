@@ -110,8 +110,41 @@ public final class FishShopConfig {
 
     public static double demandFor(String itemId) {
         ensureDemand();
-        Double v = demandMult.get(itemId);
-        return v == null ? 1.0 : v;
+        ensureEventBoost();
+        double v = demandMult.getOrDefault(itemId, 1.0);
+        if (eventBoostId != null && !eventBoostId.isEmpty() && eventBoostId.equals(itemId)
+                && System.currentTimeMillis() < eventBoostUntil) {
+            v *= eventBoostMult;
+        }
+        return v;
+    }
+
+    /**
+     * Всплеск цены одного вида из события (пишет aquatech_ui в event_boost.json).
+     */
+    private static volatile String eventBoostId = "";
+    private static volatile double eventBoostMult = 1.0;
+    private static volatile long eventBoostUntil = 0L;
+    private static volatile long eventBoostMtime = -1L;
+
+    private static void ensureEventBoost() {
+        try {
+            java.nio.file.Path file = FMLPaths.CONFIGDIR.get().resolve("aqualumen/event_boost.json");
+            if (!java.nio.file.Files.exists(file)) return;
+            long mtime = java.nio.file.Files.getLastModifiedTime(file).toMillis();
+            if (mtime == eventBoostMtime) return;
+            eventBoostMtime = mtime;
+            JsonObject j = JsonParser.parseString(java.nio.file.Files.readString(file)).getAsJsonObject();
+            long until = j.has("until") ? j.get("until").getAsLong() : 0L;
+            if (System.currentTimeMillis() < until && j.has("id") && !j.get("id").getAsString().isEmpty()) {
+                eventBoostId = j.get("id").getAsString();
+                eventBoostMult = j.has("mult") ? j.get("mult").getAsDouble() : 1.0;
+            } else {
+                eventBoostId = "";
+                eventBoostMult = 1.0;
+            }
+        } catch (Exception ignored) {
+        }
     }
 
     private FishShopConfig() {

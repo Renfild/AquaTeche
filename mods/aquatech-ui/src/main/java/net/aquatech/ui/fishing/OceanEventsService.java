@@ -28,6 +28,7 @@ import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Океанские ивенты: Золотая рыба (случайное 20-минутное окно каждые ~3 часа,
@@ -40,6 +41,10 @@ public final class OceanEventsService {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Path TOURNAMENT_FILE = FMLPaths.CONFIGDIR.get().resolve("aquatech_tournament.json");
+    private static final Path FISH_SHOP_FILE = FMLPaths.CONFIGDIR.get().resolve("aqualumen/fish_shop.json");
+    private static final Path BOOST_FILE = FMLPaths.CONFIGDIR.get().resolve("aqualumen/event_boost.json");
+    private static final String WEIGHT_TAG = "aquatech_tournament_weight";
+    private static final int REROLL_COST = 100;
     private static final long GOLDEN_BLOCK = 3L * 3600_000L;   // окно каждые 3 часа
     private static final long GOLDEN_WINDOW = 20L * 60_000L;   // длится 20 минут
     private static final double GOLDEN_CHANCE = 0.05;
@@ -48,6 +53,18 @@ public final class OceanEventsService {
     private static boolean lastGoldenActive = false;
     private static boolean lastTournamentActive = false;
     private static boolean tournamentLoaded;
+
+    // ─────────────────────────── косяки и всплески цен ───────────────────────────
+
+    private record School(String fishId, String fishName, double x, double z, int radius, long until) {
+    }
+
+    private record Boost(String fishId, String fishName, double mult, long until) {
+    }
+
+    private static School school;
+    private static Boost boost;
+    private static long nextEventAt;
 
     // ─────────────────────────── монеты ───────────────────────────
 
@@ -58,6 +75,16 @@ public final class OceanEventsService {
         if (obj == null) return; // экономика ещё не инициализирована
         Score score = sb.getOrCreatePlayerScore(player.getScoreboardName(), obj);
         score.setScore(score.getScore() + (int) amount);
+    }
+
+    private static boolean takeCoins(ServerPlayer player, long amount) {
+        Scoreboard sb = player.getScoreboard();
+        Objective obj = sb.getObjective("coins");
+        if (obj == null) return false;
+        Score score = sb.getOrCreatePlayerScore(player.getScoreboardName(), obj);
+        if (score.getScore() < amount) return false;
+        score.setScore(score.getScore() - (int) amount);
+        return true;
     }
 
     private static void broadcast(MinecraftServer server, String message) {
@@ -148,24 +175,33 @@ public final class OceanEventsService {
     }
     // kind: 0 — любая рыба, 1 — ночью, 2 — в дождь
 
-    private static List<Quest> questsFor(int day) {
-        List<Quest> pool = List.of(
-                new Quest("Поймайте 12 рыб", 12, 300, 0),
-                new Quest("Поймайте 6 рыб ночью", 6, 500, 1),
-                new Quest("Поймайте 5 рыб в дождь", 5, 700, 2),
-                new Quest("Поймайте 30 рыб", 30, 900, 0),
-                new Quest("Поймайте 15 рыб ночью", 15, 1100, 1));
-        List<Quest> out = new ArrayList<>();
-        int n = pool.size();
+    private static final List<Quest> QUEST_POOL = List.of(
+            new Quest("Поймайте 12 рыб", 12, 300, 0),
+            new Quest("Поймайте 6 рыб ночью", 6, 500, 1),
+            new Quest("Поймайте 5 рыб в дождь", 5, 700, 2),
+            new Quest("Поймайте 30 рыб", 30, 900, 0),
+            new Quest("Поймайте 15 рыб ночью", 15, 1100, 1));
+
+    /** Детерминированные индексы пула на день — общие для всех игроков. */
+    private static int[] dailyIndices(int day) {
+        int n = QUEST_POOL.size();
         int i1 = ((day * 7 + 3) % n + n) % n;
         int i2 = ((day * 13 + 5) % n + n) % n;
         if (i2 == i1) i2 = (i2 + 1) % n;
         int i3 = ((day * 29 + 11) % n + n) % n;
         if (i3 == i1 || i3 == i2) i3 = (i3 + 1) % n;
         if (i3 == i1) i3 = (i3 + 1) % n;
-        out.add(pool.get(i1));
-        out.add(pool.get(i2));
-        out.add(pool.get(i3));
+        return new int[]{i1, i2, i3};
+    }
+
+    private static List<Quest> questsFor(ServerPlayer player) {
+        JsonObject st = questTag(player);
+        List<Quest> out = new ArrayList<>();
+        int[] def = dailyIndices(today());
+        for (int i = 0; i < 3; i++) {
+            int idx = st.has("q" + i) ? st.get("q" + i).getAsInt() : def[i];
+            out.add(QUEST_POOL.get(Math.floorMod(idx, QUEST_POOL.size())));
+        }
         return out;
     }
 
@@ -190,24 +226,43 @@ public final class OceanEventsService {
     }
 
     private static void ensureQuestDay(ServerPlayer player) {
-        com.google.gson.JsonObject st = questTag(player);
+        JsonObject st = questTag(player);
         int day = today();
         if (!st.has("day") || st.get("day").getAsInt() != day) {
             JsonObject fresh = new JsonObject();
             fresh.addProperty("day", day);
-            fresh.addProperty("p0", 0);
-            fresh.addProperty("p1", 0);
-            fresh.addProperty("p2", 0);
-            fresh.addProperty("d0", false);
-            fresh.addProperty("d1", false);
-            fresh.addProperty("d2", false);
+            int[] idx = dailyIndices(day);
+            for (int i = 0; i < 3; i++) {
+                fresh.addProperty("q" + i, idx[i]);
+                fresh.addProperty("p" + i, 0);
+                fresh.addProperty("c" + i, false);
+            }
+            fresh.addProperty("rr", 0);
             saveQuestTag(player, fresh);
-            List<Quest> qs = questsFor(day);
+            List<Quest> qs = questsFor(player);
             player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §fЗадания дня: §b" + qs.get(0).desc()
                     + " §7(+" + qs.get(0).reward() + ")§f, §b" + qs.get(1).desc()
                     + " §7(+" + qs.get(1).reward() + ")§f, §b" + qs.get(2).desc()
-                    + " §7(+" + qs.get(2).reward() + " монет)"));
+                    + " §7(+" + qs.get(2).reward() + " монет) §7— прогресс в F4 → События"));
+            return;
         }
+        // миграция старого формата (d0..d2 -> c0..c2)
+        boolean migrated = false;
+        for (int i = 0; i < 3; i++) {
+            if (!st.has("c" + i) && st.has("d" + i)) {
+                st.addProperty("c" + i, st.get("d" + i).getAsBoolean());
+                migrated = true;
+            }
+            if (!st.has("q" + i)) {
+                st.addProperty("q" + i, dailyIndices(day)[i]);
+                migrated = true;
+            }
+        }
+        if (!st.has("rr")) {
+            st.addProperty("rr", 0);
+            migrated = true;
+        }
+        if (migrated) saveQuestTag(player, st);
     }
 
     // ─────────────────────────── турнир ───────────────────────────
@@ -316,14 +371,15 @@ public final class OceanEventsService {
             }
         }
 
-        // 2. Задания дня
+        // 2. Контракты дня
         JsonObject st = questTag(player);
-        List<Quest> qs = questsFor(st.has("day") ? st.get("day").getAsInt() : today());
+        List<Quest> qs = questsFor(player);
         boolean changed = false;
         for (int i = 0; i < 3 && i < qs.size(); i++) {
             Quest q = qs.get(i);
-            String dk = "d" + i, pk = "p" + i;
-            if (st.has(dk) && st.get(dk).getAsBoolean()) continue;
+            String ck = "c" + i, pk = "p" + i;
+            if (st.has(ck) && st.get(ck).getAsBoolean()) continue; // награда уже получена
+            if (st.has(pk) && st.get(pk).getAsInt() >= q.goal()) continue; // готово к получению
             boolean fits = switch (q.kind()) {
                 case 1 -> player.level().isNight();
                 case 2 -> player.level().isRaining();
@@ -334,20 +390,18 @@ public final class OceanEventsService {
             st.addProperty(pk, progress);
             changed = true;
             if (progress >= q.goal()) {
-                st.addProperty(dk, true);
-                addCoins(player, q.reward());
-                player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §aЗадание выполнено: "
-                        + q.desc() + " §6(+" + q.reward() + " монет)"));
+                player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §aКонтракт выполнен: "
+                        + q.desc() + " §7— забери §6+" + q.reward() + " §7в F4 → События"));
                 broadcast(server, "§6[Кот-рыболов] §f" + player.getGameProfile().getName()
-                        + " §aвыполнил задание дня: " + q.desc());
+                        + " §aвыполнил контракт дня: " + q.desc());
             } else if (progress % 5 == 0) {
-                player.sendSystemMessage(Component.literal("§7[Задание] " + q.desc() + " — §e"
+                player.sendSystemMessage(Component.literal("§7[Контракт] " + q.desc() + " — §e"
                         + progress + "/" + q.goal()));
             }
         }
         if (changed) saveQuestTag(player, st);
 
-        // 3. Турнир (вес рыбы в NBT)
+        // 3. Турнир (вес: свой тег; StarCatcher 2.3.19 вес в NBT не пишет — проставляем при выдаче)
         if (tournamentActive()) {
             TournamentState t = tournament();
             if (t.week != weekNumber()) {
@@ -358,10 +412,18 @@ public final class OceanEventsService {
             double best = -1;
             String fishName = "";
             for (ItemStack stack : awarded) {
-                if (stack == null || stack.isEmpty() || !stack.hasTag()) continue;
-                var info = stack.getTag().getCompound("caught_fish_info");
-                if (info == null || !info.contains("weight")) continue;
-                double w = info.getDouble("weight");
+                if (stack == null || stack.isEmpty()) continue;
+                double w;
+                if (stack.hasTag() && stack.getTag().contains(WEIGHT_TAG)) {
+                    w = stack.getTag().getDouble(WEIGHT_TAG);
+                } else if (stack.hasTag() && stack.getTag().contains("caught_fish_info")
+                        && stack.getTag().getCompound("caught_fish_info").contains("weight")) {
+                    w = stack.getTag().getCompound("caught_fish_info").getDouble("weight");
+                } else {
+                    var rnd = player.getRandom();
+                    w = Math.round((0.3 + rnd.nextDouble() * rnd.nextDouble() * 24.0) * 100) / 100.0;
+                    stack.getOrCreateTag().putDouble(WEIGHT_TAG, w);
+                }
                 if (w > best) {
                     best = w;
                     fishName = stack.getHoverName().getString();
@@ -400,9 +462,214 @@ public final class OceanEventsService {
                 }
             }
         }
+
+        // 4. Косяк: бонусная рыба в радиусе события (приват не мешает — заброс удочки не гвардится)
+        if (school != null && now < school.until()) {
+            double dx = player.getX() - school.x();
+            double dz = player.getZ() - school.z();
+            if (dx * dx + dz * dz <= (double) school.radius() * school.radius()) {
+                var item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
+                        new net.minecraft.resources.ResourceLocation(school.fishId()));
+                if (item != Items.AIR) {
+                    int extra = 1 + player.getRandom().nextInt(2);
+                    var bonus = new ItemStack(item, extra);
+                    if (!player.getInventory().add(bonus)) {
+                        player.drop(bonus, false);
+                    }
+                    player.sendSystemMessage(Component.literal("§b[Косяк] §f+" + extra + " "
+                            + school.fishName() + " §7— улов в косяке"));
+                }
+            }
+        }
     }
 
-    // ─────────────────────────── тик и вход ───────────────────────────
+    // ─────────────────── hub-интеграция: доступ для вкладки F4 ───────────────────
+
+    /** Снимок контрактов игрока для вкладки «События» в F4. */
+    public static List<Map<String, Object>> questView(ServerPlayer player) {
+        ensureQuestDay(player);
+        JsonObject st = questTag(player);
+        List<Quest> qs = questsFor(player);
+        List<Map<String, Object>> out = new ArrayList<>();
+        for (int i = 0; i < 3 && i < qs.size(); i++) {
+            Quest q = qs.get(i);
+            Map<String, Object> row = new java.util.HashMap<>();
+            int progress = st.has("p" + i) ? st.get("p" + i).getAsInt() : 0;
+            boolean claimed = st.has("c" + i) && st.get("c" + i).getAsBoolean();
+            row.put("index", i);
+            row.put("desc", q.desc());
+            row.put("goal", q.goal());
+            row.put("progress", Math.min(progress, q.goal()));
+            row.put("reward", q.reward());
+            row.put("claimed", claimed);
+            out.add(row);
+        }
+        return out;
+    }
+
+    /** Выдача награды за выполненный контракт. */
+    public static boolean claimQuest(ServerPlayer player, int index) {
+        if (index < 0 || index > 2) return false;
+        ensureQuestDay(player);
+        JsonObject st = questTag(player);
+        List<Quest> qs = questsFor(player);
+        Quest q = qs.get(index);
+        String ck = "c" + index, pk = "p" + index;
+        boolean claimed = st.has(ck) && st.get(ck).getAsBoolean();
+        int progress = st.has(pk) ? st.get(pk).getAsInt() : 0;
+        if (claimed || progress < q.goal()) return false;
+        addCoins(player, q.reward());
+        st.addProperty(ck, true);
+        saveQuestTag(player, st);
+        player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §aНаграда получена: §6+"
+                + q.reward() + " монет"));
+        return true;
+    }
+
+    /** Реролл контракта за 100 монет — не чаще, чем есть запасных в пуле (2 за день). */
+    public static boolean rerollQuest(ServerPlayer player, int index) {
+        if (index < 0 || index > 2) return false;
+        ensureQuestDay(player);
+        JsonObject st = questTag(player);
+        int rr = st.has("rr") ? st.get("rr").getAsInt() : 0;
+        if (rr >= QUEST_POOL.size() - 3) return false;
+        if (st.has("c" + index) && st.get("c" + index).getAsBoolean()) return false;
+        if (!takeCoins(player, REROLL_COST)) {
+            player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §cНужно " + REROLL_COST + " монет на реролл."));
+            return false;
+        }
+        int[] used = new int[3];
+        for (int i = 0; i < 3; i++) used[i] = st.has("q" + i) ? st.get("q" + i).getAsInt() : -1;
+        int pick = -1;
+        for (int cand = 0; cand < QUEST_POOL.size() && pick < 0; cand++) {
+            boolean taken = false;
+            for (int u : used) if (u == cand) taken = true;
+            if (!taken) pick = cand;
+        }
+        if (pick < 0) return false;
+        st.addProperty("q" + index, pick);
+        st.addProperty("p" + index, 0);
+        st.addProperty("rr", rr + 1);
+        saveQuestTag(player, st);
+        player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §fНовый контракт: §b"
+                + QUEST_POOL.get(pick).desc() + " §7(−" + REROLL_COST + " монет)"));
+        return true;
+    }
+
+    /** Статус активных событий для баннера F4. */
+    public static Map<String, Object> statusView() {
+        long now = System.currentTimeMillis();
+        Map<String, Object> m = new java.util.HashMap<>();
+        m.put("golden", goldenActive(now));
+        m.put("storm", goldStormActive(now));
+        m.put("tournament", tournamentActive());
+        if (school != null && now < school.until()) {
+            m.put("schoolFish", school.fishName());
+            m.put("schoolUntil", school.until);
+        }
+        if (boost != null && now < boost.until()) {
+            m.put("boostFish", boost.fishName());
+            m.put("boostMult", boost.mult);
+            m.put("boostUntil", boost.until);
+        }
+        return m;
+    }
+
+    /** Множитель цены вида для скупщика (тренд-всплеск; тренд считает aqualumen). */
+    public static double boostMultiplier(String fishId) {
+        if (boost != null && System.currentTimeMillis() < boost.until && boost.fishId().equals(fishId)) {
+            return boost.mult;
+        }
+        return 1.0;
+    }
+
+    // ─────────────────── косяки и всплески цен: планировщик ───────────────────
+
+    @SuppressWarnings("unchecked")
+    private static List<java.util.Map<String, Object>> shopFish() {
+        try {
+            JsonObject shop = com.google.gson.JsonParser.parseString(
+                    Files.readString(FISH_SHOP_FILE)).getAsJsonObject();
+            JsonObject fishes = shop.getAsJsonObject("fishes");
+            List<java.util.Map<String, Object>> out = new ArrayList<>();
+            for (var entry : fishes.entrySet()) {
+                JsonObject f = entry.getValue().getAsJsonObject();
+                if (f.has("id") && f.has("name")) {
+                    out.add(java.util.Map.of(
+                            "id", f.get("id").getAsString(),
+                            "name", f.get("name").getAsString(),
+                            "price", f.has("priceCoins") ? f.get("priceCoins").getAsInt() : 20));
+                }
+            }
+            return out;
+        } catch (Exception e) {
+            return List.of();
+        }
+    }
+
+    private static void writeBoostFile() {
+        try {
+            Files.createDirectories(BOOST_FILE.getParent());
+            JsonObject j = new JsonObject();
+            if (boost != null) {
+                j.addProperty("id", boost.fishId());
+                j.addProperty("name", boost.fishName());
+                j.addProperty("mult", boost.mult());
+                j.addProperty("until", boost.until());
+            } else {
+                j.addProperty("id", "");
+                j.addProperty("mult", 1.0);
+                j.addProperty("until", 0);
+            }
+            Files.writeString(BOOST_FILE, GSON.toJson(j));
+        } catch (Exception ignored) {
+        }
+    }
+
+    private static void tickEvents(MinecraftServer server, long now) {
+        if (nextEventAt == 0L) {
+            nextEventAt = now + 15L * 60_000L; // первое событие через 15 минут после старта
+            return;
+        }
+        if (school != null && now >= school.until()) {
+            school = null;
+            broadcast(server, "§b[Косяк] §7Косяк ушёл в глубину.");
+        }
+        if (boost != null && now >= boost.until()) {
+            boost = null;
+            writeBoostFile();
+            broadcast(server, "§6[Рыбак] §7Всплеск цен закончился.");
+        }
+        if (school == null && boost == null && now >= nextEventAt) {
+            var players = server.getPlayerList().getPlayers();
+            if (players.isEmpty()) {
+                nextEventAt = now + 10L * 60_000L;
+                return;
+            }
+            var fish = shopFish();
+            if (fish.isEmpty()) {
+                nextEventAt = now + 30L * 60_000L;
+                return;
+            }
+            var pick = fish.get(server.overworld().getRandom().nextInt(fish.size()));
+            if (server.overworld().getRandom().nextBoolean()) {
+                var anchor = players.get(server.overworld().getRandom().nextInt(players.size()));
+                school = new School(String.valueOf(pick.get("id")), String.valueOf(pick.get("name")),
+                        anchor.getX(), anchor.getZ(), 48, now + 7L * 60_000L);
+                broadcast(server, "§b[Косяк] §eКосяк §f" + pick.get("name")
+                        + " §eклубится рядом с §b" + anchor.getGameProfile().getName()
+                        + "§e! Улов этой рыбы ×3 §7(7 минут) §7— приват не помеха, ловите!");
+            } else {
+                double mult = 2.5 + server.overworld().getRandom().nextDouble() * 0.5;
+                boost = new Boost(String.valueOf(pick.get("id")), String.valueOf(pick.get("name")),
+                        Math.round(mult * 100) / 100.0, now + 10L * 60_000L);
+                writeBoostFile();
+                broadcast(server, "§6[Рыбак] §eАжиотаж! §fЦены на §b" + pick.get("name")
+                        + " §eвыросли до ×" + boost.mult() + " §7(10 минут) — успей продать!");
+            }
+            nextEventAt = now + (40 + server.overworld().getRandom().nextInt(31)) * 60_000L; // следующее через 40–70 мин
+        }
+    }
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
@@ -415,6 +682,7 @@ public final class OceanEventsService {
         }
         if (tick % 20 != 0) return;
         long now = System.currentTimeMillis();
+        tickEvents(server, now);
         if (goldStormActive(now) && tick % 40 == 0) {
             var players = server.getPlayerList().getPlayers();
             if (!players.isEmpty()) {

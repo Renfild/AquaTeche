@@ -9,7 +9,7 @@ import store.aquateche.aqualumen.AquaLumenUI;
 
 public final class LumenNetwork {
 
-    private static final String PROTOCOL = "1";
+    private static final String PROTOCOL = "2";
 
     /**
      * Accepting absent and vanilla versions is what keeps a Mohist server joinable for players

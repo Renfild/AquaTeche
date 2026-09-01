@@ -1,7 +1,6 @@
 {
   "item.aqualumen.hub_compass": "Project Compass",
   "itemGroup.aqualumen.tab": "AquaLumen UI",
-
   "gui.aqualumen.hub": "Project Hub",
   "gui.aqualumen.tab.profile": "Profile",
   "gui.aqualumen.tab.store": "Store",
@@ -13,7 +12,6 @@
   "gui.aqualumen.tab.warps": "Warps",
   "gui.aqualumen.tab.tops": "Tops",
   "gui.aqualumen.tab.settings": "Settings",
-
   "gui.aqualumen.label.online": "Online",
   "gui.aqualumen.label.tps": "TPS",
   "gui.aqualumen.label.ping": "Ping",
@@ -26,22 +24,19 @@
   "gui.aqualumen.label.progress": "Progress",
   "gui.aqualumen.label.daily": "Daily rewards",
   "gui.aqualumen.label.stats": "Statistics",
-
   "gui.aqualumen.action.claim": "Claim",
   "gui.aqualumen.action.buy": "Buy",
   "gui.aqualumen.action.open": "Open",
   "gui.aqualumen.action.close": "Close",
   "gui.aqualumen.action.refresh": "Refresh",
-
   "gui.aqualumen.theme.aqua": "Aqua Lumen",
   "gui.aqualumen.theme.violet": "Violet Lumen",
   "gui.aqualumen.theme.rose": "Midnight Rose",
-
   "key.categories.aqualumen": "AquaLumen UI",
   "key.aqualumen.open_hub": "Open hub",
-
   "msg.aqualumen.fallback": "Install the aquaTeche launcher to see the full hub interface.",
   "msg.aqualumen.cooldown": "Too fast. Please wait a moment.",
   "msg.aqualumen.unavailable": "Not available yet. Hub economy is not wired.",
-  "msg.aqualumen.reloaded": "AquaLumen UI configuration reloaded."
+  "msg.aqualumen.reloaded": "AquaLumen UI configuration reloaded.",
+  "gui.aqualumen.tab.events": "Events"
 }

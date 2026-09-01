@@ -19,7 +19,9 @@ public record HubSnapshot(Profile profile,
                           List<FishEntry> fishes,
                           ServerInfo server,
                           CaseResult caseResult,
-                          List<MarketEntry> market) {
+                          List<MarketEntry> market,
+                          List<EventQuest> quests,
+                          String eventLine) {
 
     public record Profile(String name, String rank, int rankColor, int level, float levelProgress,
                           long playtimeMinutes, int kills, int deaths, int quests, int friendsOnline) {
@@ -48,6 +50,10 @@ public record HubSnapshot(Profile profile,
     }
 
     public record MarketEntry(int id, String label, int count, long price, String seller, String itemId, boolean self) {
+    }
+
+    /** Контракт дня: живёт в aquatech_ui (OceanEventsService), сюда приходит только витрина. */
+    public record EventQuest(int idx, String desc, int goal, int progress, long reward, boolean claimed) {
     }
 
     public record KitEntry(String id, String title, String description, String badge, String command) {
@@ -167,6 +173,17 @@ public record HubSnapshot(Profile profile,
             writeSafe(b, m.itemId());
             b.writeBoolean(m.self());
         });
+
+        writeSafe(buf, eventLine == null ? "" : eventLine);
+        buf.writeVarInt(quests == null ? 0 : quests.size());
+        for (EventQuest q : quests == null ? List.<EventQuest>of() : quests) {
+            buf.writeVarInt(q.idx());
+            writeSafe(buf, q.desc());
+            buf.writeVarInt(q.goal());
+            buf.writeVarInt(q.progress());
+            buf.writeVarLong(q.reward());
+            buf.writeBoolean(q.claimed());
+        }
     }
 
     public static HubSnapshot read(FriendlyByteBuf buf) {
@@ -203,6 +220,9 @@ public record HubSnapshot(Profile profile,
                 : null;
         List<MarketEntry> market = buf.readList(b ->
                 new MarketEntry(b.readVarInt(), b.readUtf(), b.readVarInt(), b.readVarLong(), b.readUtf(), b.readUtf(), b.readBoolean()));
-        return new HubSnapshot(profile, wallet, season, tops, store, cases, kits, warps, fishes, server, caseResult, market);
+        String eventLine = buf.readUtf();
+        List<EventQuest> quests = buf.readList(b ->
+                new EventQuest(b.readVarInt(), b.readUtf(), b.readVarInt(), b.readVarInt(), b.readVarLong(), b.readBoolean()));
+        return new HubSnapshot(profile, wallet, season, tops, store, cases, kits, warps, fishes, server, caseResult, market, quests, eventLine);
     }
 }

@@ -194,8 +194,58 @@ public final class HubDataService {
                 fishes(player),
                 serverInfo(server),
                 PENDING_CASE_RESULTS.remove(player.getUUID()),
-                market(player)
+                market(player),
+                eventQuests(player),
+                eventLine()
         );
+    }
+
+    /**
+     * Контракты дня и статус событий живут в aquatech_ui (OceanEventsService).
+     * Compile-зависимости на него нет, поэтому читаем статикой через reflection;
+     * без aquatech_ui вкладка События просто показывает пустое состояние.
+     */
+    private static java.util.List<HubSnapshot.EventQuest> eventQuests(ServerPlayer player) {
+        try {
+            Class<?> svc = Class.forName("net.aquatech.ui.fishing.OceanEventsService");
+            Object view = svc.getMethod("questView", ServerPlayer.class).invoke(null, player);
+            java.util.List<HubSnapshot.EventQuest> out = new java.util.ArrayList<>();
+            if (view instanceof java.util.List<?> list) {
+                int i = 0;
+                for (Object row : list) {
+                    if (!(row instanceof java.util.Map<?, ?> rawMap)) continue;
+                    @SuppressWarnings("unchecked")
+                    java.util.Map<String, Object> m = (java.util.Map<String, Object>) rawMap;
+                    out.add(new HubSnapshot.EventQuest(
+                        i++,
+                        String.valueOf(m.getOrDefault("desc", "")),
+                        ((Number) m.getOrDefault("goal", 0)).intValue(),
+                        ((Number) m.getOrDefault("progress", 0)).intValue(),
+                        ((Number) m.getOrDefault("reward", 0)).longValue(),
+                        Boolean.TRUE.equals(m.get("claimed"))
+                    ));
+                }
+            }
+            return out;
+        } catch (Throwable t) {
+            return java.util.List.of();
+        }
+    }
+
+    private static String eventLine() {
+        try {
+            Class<?> svc = Class.forName("net.aquatech.ui.fishing.OceanEventsService");
+            Object status = svc.getMethod("statusView").invoke(null);
+            if (!(status instanceof java.util.Map<?, ?> m)) return "";
+            if (Boolean.TRUE.equals(m.get("storm"))) return "\u00a76\u2726 Золотая буря идёт — ловите!";
+            if (Boolean.TRUE.equals(m.get("golden"))) return "\u00a76\u2726 Золотая рыба: шанс на каждом улове";
+            if (m.containsKey("schoolFish")) return "\u00a7bКосяк: \u00a7f" + m.get("schoolFish") + " \u00a7e\u00d73 уровень ловли";
+            if (m.containsKey("boostFish")) return "\u00a76Тренд+: \u00a7f" + m.get("boostFish") + " \u00a7e\u00d7" + m.get("boostMult") + " у Скупщика";
+            if (Boolean.TRUE.equals(m.get("tournament"))) return "\u00a76Турнир недели: самая тяжёлая рыба";
+            return "";
+        } catch (Throwable t) {
+            return "";
+        }
     }
 
     private static List<HubSnapshot.KitEntry> kits() {

@@ -55,6 +55,8 @@ public final class HubActionHandler {
             case "case.open" -> openCase(player, argument);
             case "case.claim" -> claimCaseReward(player, true);
             case "daily.claim" -> claimDaily(player);
+            case "events.claim" -> handleEventClaim(player, argument);
+            case "events.reroll" -> handleEventReroll(player, argument);
             case "pass.claim" -> claimPass(player, argument);
             case "store.buy" -> StoreCatalog.buy(player, argument);
             case "hub.kit" -> handleKit(player, argument);
@@ -287,4 +289,43 @@ public final class HubActionHandler {
         Long previous = LAST_ACTION.put(key, now);
         return previous != null && now - previous < cooldown;
     }
-}
+
+
+    /**
+     * Контракты дня исполняются в aquatech_ui (OceanEventsService);
+     * вызываем reflection'ом, чтобы не тянуть compile-зависимость.
+     */
+    private static boolean eventCall(ServerPlayer player, String method, int index) {
+        try {
+            Class<?> svc = Class.forName("net.aquatech.ui.fishing.OceanEventsService");
+            Object result = svc.getMethod(method, ServerPlayer.class, int.class)
+                    .invoke(null, player, index);
+            return Boolean.TRUE.equals(result);
+        } catch (Throwable t) {
+            return false;
+        }
+    }
+
+    private static void handleEventClaim(ServerPlayer player, String argument) {
+        int index;
+        try {
+            index = Integer.parseInt(argument.trim());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        if (!eventCall(player, "claimQuest", index)) {
+            player.sendSystemMessage(Component.literal("\u00a76[\u041a\u043e\u043d\u0442\u0440\u0430\u043a\u0442] \u00a77\u041a\u043e\u043d\u0442\u0440\u0430\u043a\u0442 \u0435\u0449\u0451 \u043d\u0435 \u0433\u043e\u0442\u043e\u0432 \u0438\u043b\u0438 \u043d\u0430\u0433\u0440\u0430\u0434\u0430 \u0443\u0436\u0435 \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0430."));
+        }
+    }
+
+    private static void handleEventReroll(ServerPlayer player, String argument) {
+        int index;
+        try {
+            index = Integer.parseInt(argument.trim());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        if (!eventCall(player, "rerollQuest", index)) {
+            player.sendSystemMessage(Component.literal("\u00a76[\u041a\u043e\u043d\u0442\u0440\u0430\u043a\u0442] \u00a77\u0420\u0435\u0440\u043e\u043b\u043b \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d (\u043d\u0443\u0436\u043d\u043e 100 \u043c\u043e\u043d\u0435\u0442 \u0438\u043b\u0438 \u0437\u0430\u043f\u0430\u0441 \u043a\u043e\u043d\u0442\u0440\u0430\u043a\u0442\u043e\u0432 \u0438\u0441\u0447\u0435\u0440\u043f\u0430\u043d)."));
+        }
+    }}
