@@ -425,7 +425,10 @@ public final class HubTabs {
         return false;
     }
 
-    private static void auction(GuiGraphics graphics, Font font, LumenTheme theme, HubSnapshot snapshot,
+    private static int auctionPage;
+
+    private static void auction(net.minecraft.client.gui.GuiGraphics graphics, net.minecraft.client.gui.Font font,
+                                store.aquateche.aqualumen.client.theme.LumenTheme theme, @Nullable HubSnapshot snapshot,
                                 int x, int y, int width, int height, int mouseX, int mouseY, float time) {
         int heroHeight = 54;
         LumenWidgets.card(graphics, theme, x, y, width, heroHeight, null);
@@ -434,7 +437,6 @@ public final class HubTabs {
         HubFont.draw(graphics, font, "Океанический Аукцион и Рынок", x + 50, y + 12, theme.text());
         HubFont.draw(graphics, font, "Покупайте и продавайте редкие ресурсы и механизмы за монеты", x + 50, y + 26, theme.textDim());
 
-        // "+ Выставить лот" button
         int createW = 110;
         int createX = x + width - createW - 10;
         int createY = y + 13;
@@ -444,84 +446,128 @@ public final class HubTabs {
                 createHov ? theme.accentAlt() : Gfx.withAlpha(theme.accentAlt(), 0.85F));
         HubFont.centered(graphics, font, "+ Продать лот", createX + createW / 2, createY + 10, 0xFF08131A);
 
+        java.util.List<HubSnapshot.MarketEntry> lots = snapshot != null && snapshot.market() != null
+                ? snapshot.market() : java.util.List.of();
+        int perPage = 6;
+        int pages = Math.max(1, (lots.size() + perPage - 1) / perPage);
+        if (auctionPage >= pages) auctionPage = pages - 1;
+        if (auctionPage < 0) auctionPage = 0;
+        int startIdx = auctionPage * perPage;
+        int usable = height - (pages > 1 ? 20 : 0);
+
         int startY = y + heroHeight + 8;
         int columns = 2;
         int cardWidth = (width - (columns - 1) * 8) / columns;
         int cardHeight = 46;
 
-        // Sample marketplace / auction items
-        String[][] sampleLots = {
-            {"Кристалл глубин (x4)", "120 мон", "Renfild", "Ресурс"},
-            {"Светящийся крючок MK-III", "350 мон", "AquaTech", "Снаряжение"},
-            {"Древнечешуйник (x2)", "480 мон", "FisherCat", "Рыба"},
-            {"Сплав орихалка (x8)", "640 мон", "Engineer", "Материал"},
-            {"Капсула сжатого кислорода", "90 мон", "Diver_1", "Расходник"},
-            {"Солнечный осётр (x5)", "250 мон", "StarFisher", "Рыба"}
-        };
+        if (lots.isEmpty()) {
+            HubFont.centered(graphics, font, "\u041b\u043e\u0442\u043e\u0432 \u043f\u043e\u043a\u0430 \u043d\u0435\u0442 \u2014 \u0434\u0435\u0440\u0436\u0438\u0442\u0435 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0432 \u0440\u0443\u043a\u0435 \u0438 \u0432\u0432\u0435\u0434\u0438\u0442\u0435 /ah sell <\u0446\u0435\u043d\u0430>",
+                    x + width / 2, startY + 24, theme.textDim());
+            return;
+        }
 
-        for (int i = 0; i < sampleLots.length; i++) {
+        for (int i = 0; i < perPage; i++) {
+            int idx = startIdx + i;
+            if (idx >= lots.size()) break;
+            HubSnapshot.MarketEntry lot = lots.get(idx);
             int col = i % columns;
             int row = i / columns;
             int cx = x + col * (cardWidth + 8);
             int cy = startY + row * (cardHeight + 6);
-            if (cy + cardHeight > y + height) break;
+            if (cy + cardHeight > y + usable) break;
 
-            String[] lot = sampleLots[i];
             boolean hovered = mouseX >= cx && mouseX <= cx + cardWidth && mouseY >= cy && mouseY <= cy + cardHeight;
             if (hovered) {
-                Gfx.glow(graphics, cx, cy, cardWidth, cardHeight, 10, theme.accent(), 1);
+                Gfx.glow(graphics, cx, cy, cardWidth, cardHeight, 10, theme.gold(), 2);
             }
             LumenWidgets.card(graphics, theme, cx, cy, cardWidth, cardHeight, null);
+            Icons.badge(graphics, Icons.Icon.BAG, cx + 10, cy + 10, 20,
+                    Gfx.withAlpha(theme.gold(), 0.15F), theme.gold());
+            HubFont.draw(graphics, font, lot.label() + " \u00d7" + lot.count(), cx + 38, cy + 9, theme.text());
+            HubFont.draw(graphics, font, "\u041f\u0440\u043e\u0434\u0430\u0432\u0435\u0446: " + lot.seller(), cx + 38, cy + 23, theme.textDim());
 
-            Icons.badge(graphics, Icons.Icon.CASE, cx + 6, cy + 8, 16, Gfx.withAlpha(theme.accent(), 0.18F), theme.accent());
-            HubFont.draw(graphics, font, lot[0], cx + 26, cy + 9, theme.text());
-            HubFont.draw(graphics, font, lot[1] + " · Продавец: §b" + lot[2], cx + 26, cy + 25, theme.gold());
+            String price = lot.price() + " \u043c\u043e\u043d";
+            HubFont.draw(graphics, font, price, cx + cardWidth - HubFont.width(font, price) - 10, cy + 9, theme.gold());
 
-            int btnW = 60;
-            int btnX = cx + cardWidth - btnW - 6;
-            int btnY = cy + 12;
-            boolean bHov = mouseX >= btnX && mouseX <= btnX + btnW && mouseY >= btnY && mouseY <= btnY + 22;
-            Gfx.roundedRect(graphics, btnX, btnY, btnW, 22, 6,
-                    bHov ? theme.accent() : Gfx.withAlpha(theme.accent(), 0.25F));
-            HubFont.centered(graphics, font, "Купить", btnX + btnW / 2, btnY + 7,
-                    bHov ? 0xFF08131A : theme.accent());
+            int btnW = 64;
+            int btnX = cx + cardWidth - btnW - 10;
+            int btnY = cy + 23;
+            String btnLabel = lot.self() ? "\u041e\u0442\u043c\u0435\u043d\u0438\u0442\u044c" : "\u041a\u0443\u043f\u0438\u0442\u044c";
+            boolean btnHov = mouseX >= btnX && mouseX <= btnX + btnW && mouseY >= btnY && mouseY <= btnY + 18;
+            Gfx.gradientRoundedH(graphics, btnX, btnY, btnW, 18, 6,
+                    btnHov ? (lot.self() ? theme.textDim() : theme.accent())
+                            : Gfx.withAlpha(lot.self() ? theme.textDim() : theme.accent(), 0.8F),
+                    btnHov ? theme.accentAlt() : Gfx.withAlpha(theme.accentAlt(), 0.6F));
+            HubFont.centered(graphics, font, btnLabel, btnX + btnW / 2, btnY + 5, 0xFF08131A);
+        }
+
+        if (pages > 1) {
+            int pagY = y + height - 16;
+            HubFont.centered(graphics, font, "\u2190", x + width / 2 - 60, pagY,
+                    auctionPage > 0 ? theme.text() : theme.textDim());
+            HubFont.centered(graphics, font, "\u0421\u0442\u0440. " + (auctionPage + 1) + " / " + pages + "  \u00b7  \u043b\u043e\u0442\u043e\u0432: " + lots.size(),
+                    x + width / 2, pagY, theme.textDim());
+            HubFont.centered(graphics, font, "\u2192", x + width / 2 + 60, pagY,
+                    auctionPage < pages - 1 ? theme.text() : theme.textDim());
         }
     }
 
-    private static boolean clickAuction(HubSnapshot snapshot, int x, int y, int width, int height, int mouseX, int mouseY) {
+    private static boolean clickAuction(@Nullable HubSnapshot snapshot, int x, int y, int width, int height,
+                                        int mouseX, int mouseY) {
         int heroHeight = 54;
         int createW = 110;
         int createX = x + width - createW - 10;
         int createY = y + 13;
         if (mouseX >= createX && mouseX <= createX + createW && mouseY >= createY && mouseY <= createY + 28) {
-            HubFx.toast("Для продажи держите предмет в руке: /ah sell <цена>", Icons.Icon.BAG, LumenTheme.current().gold());
+            HubFx.toast("\u0414\u043b\u044f \u043f\u0440\u043e\u0434\u0430\u0436\u0438 \u0434\u0435\u0440\u0436\u0438\u0442\u0435 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0432 \u0440\u0443\u043a\u0435: /ah sell <\u0446\u0435\u043d\u0430>", Icons.Icon.BAG, LumenTheme.current().gold());
             return true;
         }
 
+        java.util.List<HubSnapshot.MarketEntry> lots = snapshot != null && snapshot.market() != null
+                ? snapshot.market() : java.util.List.of();
+        int perPage = 6;
+        int pages = Math.max(1, (lots.size() + perPage - 1) / perPage);
         int startY = y + heroHeight + 8;
         int columns = 2;
         int cardWidth = (width - (columns - 1) * 8) / columns;
         int cardHeight = 46;
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < perPage; i++) {
+            int idx = auctionPage * perPage + i;
+            if (idx >= lots.size()) break;
+            HubSnapshot.MarketEntry lot = lots.get(idx);
             int col = i % columns;
             int row = i / columns;
             int cx = x + col * (cardWidth + 8);
             int cy = startY + row * (cardHeight + 6);
             if (cy + cardHeight > y + height) break;
-
-            int btnW = 60;
-            int btnX = cx + cardWidth - btnW - 6;
-            int btnY = cy + 12;
-            if (mouseX >= btnX && mouseX <= btnX + btnW && mouseY >= btnY && mouseY <= btnY + 22) {
-                LumenClient.sendAction("auction.buy", String.valueOf(i));
-                HubFx.toast("Запрос на покупку лота отправлен!", Icons.Icon.BAG, LumenTheme.current().accent());
+            int btnW = 64;
+            int btnX = cx + cardWidth - btnW - 10;
+            int btnY = cy + 23;
+            if (mouseX >= btnX && mouseX <= btnX + btnW && mouseY >= btnY && mouseY <= btnY + 18) {
+                String action = lot.self() ? "auction.cancel" : "auction.buy";
+                LumenClient.sendAction(action, String.valueOf(lot.id()));
+                HubFx.toast(lot.self() ? "\u041b\u043e\u0442 \u043e\u0442\u043c\u0435\u043d\u044f\u0435\u0442\u0441\u044f..." : "\u0417\u0430\u043f\u0440\u043e\u0441 \u043d\u0430 \u043f\u043e\u043a\u0443\u043f\u043a\u0443 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d!",
+                        Icons.Icon.BAG, LumenTheme.current().accent());
                 return true;
+            }
+        }
+
+        if (pages > 1) {
+            int pagY = y + height - 20;
+            if (mouseY >= pagY - 4 && mouseY <= pagY + 12) {
+                if (mouseX >= x + width / 2 - 72 && mouseX <= x + width / 2 - 48 && auctionPage > 0) {
+                    auctionPage--;
+                    return true;
+                }
+                if (mouseX >= x + width / 2 + 48 && mouseX <= x + width / 2 + 72 && auctionPage < pages - 1) {
+                    auctionPage++;
+                    return true;
+                }
             }
         }
         return false;
     }
-
     private static void kits(GuiGraphics graphics, Font font, LumenTheme theme, HubSnapshot snapshot,
                              int x, int y, int width, int height, int mouseX, int mouseY) {
         int heroHeight = 52;

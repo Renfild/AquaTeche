@@ -163,11 +163,12 @@ def main() -> None:
             print(f"\nBuilding {key} in {mod_dir}…")
             run([gradlew, "jar"], cwd=mod_dir)
             libs = mod_dir / "build" / "libs"
-            jars = sorted(libs.glob(cfg["build_glob"]))
+            jars = list(libs.glob(cfg["build_glob"]))
             if not jars:
                 sys.exit(f"No jar found in {libs} matching {cfg['build_glob']}")
-            built_jars.append(jars[-1])
-            print(f"  Built: {jars[-1].name}")
+            jar = max(jars, key=lambda p: p.stat().st_mtime)
+            built_jars.append(jar)
+            print(f"  Built: {jar.name}")
     else:
         print("\n=== Step 1: Skipping build ===")
         for key in mod_keys:
@@ -175,10 +176,11 @@ def main() -> None:
             if not cfg:
                 continue
             libs = cfg["dir"] / "build" / "libs"
-            jars = sorted(libs.glob(cfg["build_glob"]))
+            jars = list(libs.glob(cfg["build_glob"]))
             if jars:
-                built_jars.append(jars[-1])
-                print(f"  Using existing: {jars[-1].name}")
+                jar = max(jars, key=lambda p: p.stat().st_mtime)
+                built_jars.append(jar)
+                print(f"  Using existing: {jar.name}")
 
     # ── Step 2: Copy jars to mods/, server/mods/, client ────────────────────
     if built_jars:
@@ -208,7 +210,7 @@ def main() -> None:
     # Check if there's actually something to commit
     diff = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=str(ROOT))
     if diff.returncode != 0:
-        run(["git", "commit", "-m", f"chore: pack manifest {new_version}"], cwd=ROOT)
+        run(["git", "commit", "-m", f"chore: pack manifest {new_version}", "--", "docs/pack/manifest.json"], cwd=ROOT)
         run(["git", "push", "origin", "main"], cwd=ROOT)
     else:
         print("  manifest.json unchanged, skipping push")

@@ -30,7 +30,7 @@
 - Deploy to Cloudflare (`python tools/deploy_to_cloudflare.py`) + run smoke tests. (Do NOT run `generate_site.py` which overwrites custom `docs/` HTML).
 
 ### 3. After code edits
-- `python -m graphify update .` — update codebase graph index.
+- ~~`python -m graphify update .`~~ — skipped while the graphify CLI is unavailable (see graphify section).
 - Update `IMPLEMENTATION_PLAN.md` revision log (Section 6) if architecture or features changed.
 
 ### 4. After Apex server deploy
@@ -52,7 +52,9 @@
 - **Single-File Native DLLs**: Keep `IncludeNativeLibrariesForSelfExtract` disabled in `AquaTechLauncher.csproj` so native rendering binaries reside extracted in the distribution zip, eliminating 3–8s self-extract delay on startup.
 
 ## graphify (memory / codebase map)
-Knowledge graph lives in `graphify-out/`.
+Knowledge graph lives in `graphify-out/`. The `graphify` CLI is currently NOT installed
+(lost in the Python 3.11.9 reinstall, not on PyPI) — skip the `python -m graphify …`
+steps unless it is back; grep the codebase directly instead.
 
 Before broad exploration:
 ```powershell

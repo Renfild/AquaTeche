@@ -149,6 +149,11 @@ public final class MarketService {
     public static void buy(ServerPlayer player, int id) {
         long balance = HubEconomy.coins(player);
         HubSnapshot.MarketEntry entry = find(cache, id);
+        if (entry == null) {
+            player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§7[Рынок] Лот устарел — список обновлён, попробуйте снова."));
+            refreshAsync();
+            return;
+        }
         if (entry != null) {
             if (entry.seller().equalsIgnoreCase(player.getGameProfile().getName())) {
                 player.sendSystemMessage(Component.literal("§e[Рынок] Это ваш лот — отмените его: /ah cancel " + id));

@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.275"
-PACK_VERSION = "2.9.275"
+PACK_TAG = "pack-2.9.276"
+PACK_VERSION = "2.9.276"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -44,6 +44,16 @@ SERVER_OWNED_PREFIXES = (
     "packetfixer",
     "aqualumen",
 )
+# Client jars dropped by exact filename (NOT by substring: "…1.20.1-1.20.4.jar" range jars are valid).
+# Each entry explains why, so the next person doesn't re-add a broken jar blindly.
+EXCLUDED_CLIENT_JARS = {
+    # "immediatelyfast-1.2.4.jar": "crashes with Oculus 1.7 (IrisCompat ImmediateState)",
+}
+# Mandatory client-side mod libraries. If a provider jar is missing from dist, fail the build
+# instead of shipping a client that crashes on launch (the 2.9.274 melody incident).
+REQUIRED_CLIENT_DEPS = {
+    "fancymenu": ("melody", "konkrete"),
+}
 
 
 def md5_file(p: Path) -> str:
@@ -130,7 +140,8 @@ def sync_mods() -> None:
                 continue
             if any(low.startswith(p) or p in low for p in SERVER_OWNED_PREFIXES):
                 continue
-            if "1.20.4" in low:
+            if low in EXCLUDED_CLIENT_JARS:
+                print(f"SKIP client-only {jar.name}: {EXCLUDED_CLIENT_JARS[low]}")
                 continue
             if not any(low.startswith(p) or p in low for p in CLIENT_ONLY_PREFIXES):
                 continue
@@ -173,6 +184,55 @@ def sync_mods() -> None:
             jar.unlink(missing_ok=True)
 
     print(f"OK mods: {len(list(dst.glob('*.jar')))} jars")
+    validate_client_deps(dst)
+
+
+def _jar_mod_ids(path: Path) -> tuple[set[str], set[str]]:
+    """(provided modIds, mandatory dependency modIds) from META-INF/mods.toml, empty if absent."""
+    import tomllib
+    import zipfile
+
+    try:
+        with zipfile.ZipFile(path) as z:
+            raw = z.read("META-INF/mods.toml")
+    except (KeyError, zipfile.BadZipFile):
+        return set(), set()
+    try:
+        data = tomllib.loads(raw.decode("utf-8"))
+    except Exception as e:
+        print(f"WARN {path.name}: unreadable mods.toml ({e})")
+        return set(), set()
+    provided = {m.get("modId") for m in data.get("mods", []) if m.get("modId")}
+    mandatory = set()
+    for dep in data.get("dependencies", {}).values():
+        if not isinstance(dep, list):
+            continue
+        for d in dep:
+            if d.get("mandatory") and str(d.get("side", "both")).lower() in {"both", "client"}:
+                mandatory.add(d.get("modId"))
+    return provided, mandatory
+
+
+def validate_client_deps(dst: Path) -> None:
+    """Fail the build when a shipped client mod misses a mandatory dependency (2.9.274 melody incident)."""
+    provided: set[str] = set()
+    needs: dict[str, set[str]] = {}
+    for jar in sorted(dst.glob("*.jar")):
+        mods, mandatory = _jar_mod_ids(jar)
+        provided |= mods
+        for dep in mandatory:
+            needs.setdefault(jar.name, set()).update(
+                d for d in [dep] if d not in ("forge", "minecraft", "java", "mixinextras")
+            )
+    problems = []
+    for jar_name, deps in sorted(needs.items()):
+        missing = sorted(d for d in deps if not any(d.lower() in p.lower() or p.lower() in d.lower() for p in provided))
+        if missing:
+            problems.append(f"{jar_name} -> missing {', '.join(missing)}")
+    if problems:
+        for p in problems:
+            print(f"FAIL dependency: {p}")
+        raise SystemExit("client dependency validation failed — do NOT ship this pack")
 
 
 def load_prev_manifest() -> dict | None:

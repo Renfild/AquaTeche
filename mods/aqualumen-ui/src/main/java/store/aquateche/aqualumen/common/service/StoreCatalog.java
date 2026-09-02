@@ -32,9 +32,7 @@ public final class StoreCatalog {
             new Product("rank.admiral", "Адмирал", "/nick, 10 домов", 899, "gems", "lp_group", "admiral"),
             new Product("rank.legend", "Легенда", "Максимум домов и /hat", 1499, "gems", "lp_group", "legend"),
             new Product("rank.vip", "VIP", "/wb /ec /fly", 199, "gems", "lp_group", "vip"),
-            new Product("kit.starter", "Набор Starter", "Стартовый набор F4", 120, "coins", "kit", "starter"),
-            new Product("coins.500", "500 монет", "Обмен кристаллов", 50, "gems", "coins", "500"),
-            new Product("case.ocean", "Океанский кейс", "Открыть за монеты", 0, "coins", "case", "ocean")
+            new Product("gems.5", "5 гемов", "50 000 монет → 5 гемов", 50000, "coins", "gems", "5")
     );
 
     private static final String[] FLEET = {"sailor", "skipper", "captain", "admiral", "legend", "vip"};

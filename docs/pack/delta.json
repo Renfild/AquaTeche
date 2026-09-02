@@ -1,37 +1,41 @@
 {
-  "from_version": "2.9.274",
-  "to_version": "2.9.275",
+  "from_version": "2.9.275",
+  "to_version": "2.9.276",
   "added": [
     {
-      "path": "mods/melody_forge_1.0.3_MC_1.20.1.jar",
-      "md5": "6b528d368f7fcbf737df28f2457cdec6",
-      "size": 37178,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.275/melody_forge_1.0.3_MC_1.20.1.jar",
-      "asset": "melody_forge_1.0.3_MC_1.20.1.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.24-alpha.jar",
+      "md5": "559241d2db8395c8d8954a84a4a651ec",
+      "size": 2174620,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.276/aqualumen-forge-1.20.1-0.3.24-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.24-alpha.jar"
     }
   ],
   "changed": [
     {
-      "path": "config/fancymenu/options.txt",
-      "md5": "05fcc834476bcc8932b13839d7554cfe",
-      "size": 1341,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.275/config__fancymenu__options.txt",
-      "asset": "config__fancymenu__options.txt"
+      "path": "config/aqualumen/html/hub.html",
+      "md5": "7eae79e9a3650f3be6c094c523a9189d",
+      "size": 843847,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.276/config__aqualumen__html__hub.html",
+      "asset": "config__aqualumen__html__hub.html"
     },
     {
-      "path": "mods/fancymenu_forge_3.9.12_MC_1.20.1.jar",
-      "md5": "57873abc370530ef40ca0ca2b3715c5a",
-      "size": 26114272,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.275/fancymenu_forge_3.9.12_MC_1.20.1.jar",
-      "asset": "fancymenu_forge_3.9.12_MC_1.20.1.jar"
+      "path": "config/aqualumen/hub.html",
+      "md5": "7eae79e9a3650f3be6c094c523a9189d",
+      "size": 843847,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.276/config__aqualumen__hub.html",
+      "asset": "config__aqualumen__hub.html"
     }
   ],
-  "removed": [],
+  "removed": [
+    {
+      "path": "mods/aqualumen-forge-1.20.1-0.3.23-alpha.jar"
+    }
+  ],
   "stats": {
     "added": 1,
     "changed": 2,
-    "removed": 0,
+    "removed": 1,
     "unchanged": 129,
-    "download_bytes": 26152791
+    "download_bytes": 3862314
   }
 }

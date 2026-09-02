@@ -1,10 +1,20 @@
 import json
+import sys
 import time
 import urllib.request
 import paramiko
 from pathlib import Path
 
-secrets = json.loads(Path('.apex_deploy.json').read_text(encoding='utf-8'))
+ROOT = Path(__file__).resolve().parent.parent
+LOCAL_MODS = ROOT / "server" / "mods"
+if not any(LOCAL_MODS.glob("aqualumen-forge-*.jar")):
+    LOCAL_MODS = ROOT / "mods"
+
+def newest_jar(pattern: str) -> Path | None:
+    found = list(LOCAL_MODS.glob(pattern))
+    return max(found, key=lambda p: p.stat().st_mtime) if found else None
+
+secrets = json.loads((ROOT / ".apex_deploy.json").read_text(encoding="utf-8"))
 host = secrets['sftp_host']
 port = int(secrets['sftp_port'])
 user = secrets['sftp_user']
@@ -13,29 +23,33 @@ server_id = secrets['apex_server_id']
 api_key = secrets['apex_api_key']
 panel = secrets.get('apex_panel', 'https://panel.apexnodes.xyz').rstrip('/')
 
+aqualumen_jar = newest_jar("aqualumen-forge-*.jar")
+if aqualumen_jar is None:
+    sys.exit(f"no aqualumen-forge-*.jar in {LOCAL_MODS}")
+
 print("1. Connecting SFTP to upload new reobfuscated jars and configs...")
 t = paramiko.Transport((host, port))
 t.connect(username=user, password=password)
 sftp = paramiko.SFTPClient.from_transport(t)
 
-# Remove older jars if present
-for old_jar in ["mods/aqualumen-forge-1.20.1-0.3.6-alpha.jar"]:
-    try:
-        sftp.remove(old_jar)
-        print(f"  Removed {old_jar}")
-    except Exception:
-        pass
+remote_mods = sftp.listdir("mods")
+for name in remote_mods:
+    if name.startswith("aqualumen-forge-") and name.endswith(".jar") and name != aqualumen_jar.name:
+        try:
+            sftp.remove(f"mods/{name}")
+            print(f"  Removed {name}")
+        except Exception as ex:
+            print(f"  skip remove {name}: {ex}")
 
-sftp.put(r"server\mods\aquatech_ui-1.0.24.jar", "mods/aquatech_ui-1.0.24.jar")
-print("  Uploaded aquatech_ui-1.0.24.jar")
-sftp.put(r"server\mods\aqualumen-forge-1.20.1-0.3.7-alpha.jar", "mods/aqualumen-forge-1.20.1-0.3.7-alpha.jar")
-print("  Uploaded aqualumen-forge-1.20.1-0.3.7-alpha.jar")
-sftp.put(r"server\config\aqualumen\cases.json", "config/aqualumen/cases.json")
+sftp.put(str(aqualumen_jar), f"mods/{aqualumen_jar.name}")
+print(f"  Uploaded {aqualumen_jar.name}")
+
+sftp.put(str(ROOT / "server/config/aqualumen/cases.json"), "config/aqualumen/cases.json")
 print("  Uploaded config/aqualumen/cases.json")
-sftp.put(r"server\kubejs\server_scripts\30_aquatech_crafting.js", "kubejs/server_scripts/30_aquatech_crafting.js")
+sftp.put(str(ROOT / "server/kubejs/server_scripts/30_aquatech_crafting.js"), "kubejs/server_scripts/30_aquatech_crafting.js")
 print("  Uploaded kubejs/server_scripts/30_aquatech_crafting.js")
 
-for lp_file in Path("server/plugins/LuckPerms/yaml-storage/groups").glob("*.yml"):
+for lp_file in (ROOT / "server/plugins/LuckPerms/yaml-storage/groups").glob("*.yml"):
     remote_lp = f"plugins/LuckPerms/yaml-storage/groups/{lp_file.name}"
     try:
         sftp.put(str(lp_file), remote_lp)

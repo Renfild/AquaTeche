@@ -82,6 +82,7 @@ public final class HubDataService {
             return;
         }
         HubEconomy.coins(player); // warm the wallet: imports legacy persistentData on the main thread
+        MarketService.refreshAsync(); // свежие лоты на каждый вход в F4
         syncPlayerToWebAsync(player);
         HubSnapshot snapshot = build(player);
 
