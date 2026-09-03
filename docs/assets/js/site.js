@@ -19,6 +19,7 @@
     { href: "market.html", label: "Аукцион", id: "market" },
     { href: "top.html", label: "Топы", id: "top" },
     { href: "news.html", label: "Новости", id: "news" },
+    { href: "events.html", label: "События", id: "events" },
     { href: "players.html", label: "Игроки", id: "players" },
     { href: "start.html", label: "Как начать", id: "start" },
     { href: "rules.html", label: "Правила", id: "rules" },
@@ -194,6 +195,17 @@
       gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
       osc.start(now);
       osc.stop(now + 0.08);
+      return;
+    }
+    if (kind === "tick") {
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(800, now);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.02);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.04, now + 0.003);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
+      osc.start(now);
+      osc.stop(now + 0.03);
       return;
     }
     if (kind === "ok") {
@@ -423,7 +435,7 @@
     mount.innerHTML = `
       <header class="site-header">
         <div class="container header-inner">
-          <a class="brand" href="index.html"><img src="assets/logo.png" alt="" width="28" height="28" /><span>AquaTech</span></a>
+          <a class="brand" href="index.html"><img src="assets/logo.png?v=2" alt="" width="32" height="32" /><span>AquaTech</span></a>
           <nav class="nav-desktop" aria-label="Основное">
             ${primary}
             <details class="nav-more"${moreOpen ? " open" : ""}>
@@ -1513,8 +1525,11 @@
   function initReset() {
     const form = $("#reset-form");
     if (!form) return;
+    const emailField = $("#reset-email-field");
+    const codeForm = $("#reset-code-form");
     const claimForm = $("#reset-claim-form");
     const supportBox = $("#reset-step-support");
+    const backBtn = $("#reset-back-btn");
     let nick = "";
 
     function resetError(text) {
@@ -1526,7 +1541,9 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       nick = ($("#reset-nick")?.value || "").trim();
+      const email = ($("#reset-email")?.value || "").trim();
       resetError("");
+
       try {
         const data = await api(`/api/auth/nick?nick=${encodeURIComponent(nick)}`);
         if (data.unclaimed || data.exists === false) {
@@ -1534,12 +1551,70 @@
           claimForm.hidden = false;
           $("#reset-claim-title").textContent = `Задай пароль для ${nick}`;
           $("#reset-password")?.focus();
-        } else {
-          form.hidden = true;
-          supportBox.hidden = false;
+          return;
         }
+
+        // Account is registered/claimed: trigger forgot-password
+        if (emailField.hidden && !email) {
+          emailField.hidden = false;
+          $("#reset-email")?.focus();
+          toast("Введи Email, привязанный к аккаунту");
+          return;
+        }
+
+        const res = await api("/api/auth/forgot-password", {
+          method: "POST",
+          body: JSON.stringify({ nick, email }),
+        });
+
+        form.hidden = true;
+        codeForm.hidden = false;
+        supportBox.hidden = false;
+        $("#reset-code-title").textContent = `Сброс пароля для ${nick}`;
+        $("#reset-code-subtitle").textContent = res.emailMasked
+          ? `Код отправлен на ${res.emailMasked}`
+          : "Код подтверждения отправлен на почту.";
+        $("#reset-verify-code")?.focus();
       } catch (err) {
-        resetError(err.message || "Не удалось проверить ник");
+        resetError(err.message || "Не удалось отправить запрос на сброс");
+        if (emailField.hidden) emailField.hidden = false;
+      }
+    });
+
+    backBtn?.addEventListener("click", () => {
+      codeForm.hidden = true;
+      supportBox.hidden = true;
+      form.hidden = false;
+      resetError("");
+    });
+
+    codeForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.currentTarget);
+      const code = String(fd.get("code") || "").trim();
+      const p1 = String(fd.get("password") || "");
+      const p2 = String(fd.get("password2") || "");
+
+      if (p1 !== p2) {
+        resetError("Пароли не совпадают");
+        return;
+      }
+
+      resetError("");
+      try {
+        await api("/api/auth/reset-password", {
+          method: "POST",
+          body: JSON.stringify({
+            code,
+            password: p1,
+          }),
+        });
+        toast("Пароль успешно изменён! Теперь войди.");
+        setTimeout(() => {
+          location.href = "login.html";
+        }, 800);
+      } catch (err) {
+        resetError(err.message || "Неверный код подтверждения");
       }
     });
 
@@ -1823,8 +1898,189 @@
           )
           .join("")}
       </ul>
-      <button class="btn btn-secondary" style="margin-top:auto;width:100%" type="button" data-view-loot="${esc(c.slug)}">Состав и шансы</button>
+      <div style="display:flex;gap:0.5rem;margin-top:auto">
+        <button class="btn btn-secondary" style="flex:1" type="button" data-view-loot="${esc(c.slug)}">Состав</button>
+        <button class="btn btn-primary" style="flex:1" type="button" data-open-case="${esc(c.slug)}">Крутить</button>
+      </div>
     </article>`;
+  }
+
+  async function openCaseWeb(slug, btn) {
+    const rawUser = localStorage.getItem("at_user");
+    if (!rawUser) {
+      toast("Войди в аккаунт, чтобы открывать кейсы за монеты");
+      setTimeout(() => (location.href = "login.html"), 700);
+      return;
+    }
+    const origText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Крутим…";
+
+    const c = (window.__liveCases || []).find((x) => x.slug === slug);
+    if (!c) {
+      toast("Кейс не найден");
+      btn.disabled = false;
+      btn.textContent = origText;
+      return;
+    }
+
+    let modal = document.getElementById("roulette-modal");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "roulette-modal";
+      modal.className = "roulette-modal-overlay";
+      document.body.appendChild(modal);
+    }
+
+    const RARITY_COLORS = {
+      common: "#94a3b8",
+      uncommon: "#4ade80",
+      rare: "#38bdf8",
+      epic: "#c084fc",
+      legendary: "#facc15",
+      mythic: "#f43f5e",
+      exotic: "#2fe0c0",
+    };
+
+    // Pre-populate 48 random tape tiles from the loot pool
+    const lootPool = c.loot || [];
+    const targetIdx = 34;
+    const tiles = [];
+    for (let i = 0; i < 46; i++) {
+      const pick = lootPool[Math.floor(Math.random() * lootPool.length)] || {
+        name: "Предмет",
+        rarity: "common",
+        min: 1,
+      };
+      tiles.push(pick);
+    }
+
+    modal.innerHTML = `
+      <div class="roulette-box">
+        <h3 style="margin:0 0 0.35rem;font-size:1.35rem;color:#F8FAFC">${esc(c.title)}</h3>
+        <p style="color:var(--muted);font-size:0.9rem;margin:0" id="roulette-status">Крутим барабан…</p>
+        <div class="roulette-reel" id="roulette-reel">
+          <div class="roulette-marker"></div>
+          <div class="roulette-strip" id="roulette-strip">
+            ${tiles
+              .map(
+                (l) => `
+              <div class="roulette-tile" style="border-color:${RARITY_COLORS[l.rarity || 'common']}33">
+                <span class="rarity-badge rarity-${esc(l.rarity || 'common')}" style="transform:scale(0.85)">${RARITY_LABEL[l.rarity] || 'Лут'}</span>
+                <span class="roulette-tile-name">${esc(l.name)}</span>
+                <span class="roulette-tile-count">${l.min || 1} шт.</span>
+              </div>`
+              )
+              .join("")}
+          </div>
+        </div>
+        <div id="roulette-result-box" style="display:none;margin-top:1.2rem">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.1rem;margin-bottom:1.2rem">
+            <span class="rarity-badge" id="roulette-win-rarity"></span>
+            <div id="roulette-win-name" style="font-size:1.7rem;font-weight:bold;color:var(--gold);margin-top:0.4rem"></div>
+            <div id="roulette-win-amount" style="font-size:1.05rem;color:#E2E8F0;font-weight:600"></div>
+          </div>
+          <p style="color:#4ade80;font-weight:500;font-size:0.92rem;margin-bottom:1.2rem">
+            ✓ Предмет автоматически отправлен в твой инвентарь на сервере!
+          </p>
+          <div style="display:flex;gap:0.75rem;justify-content:center">
+            <button class="btn btn-primary" type="button" id="roulette-close-btn" style="min-width:140px">Забрать</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    modal.classList.add("open");
+
+    const stripEl = modal.querySelector("#roulette-strip");
+    const reelEl = modal.querySelector("#roulette-reel");
+
+    try {
+      const res = await api("/api/cases/open", {
+        method: "POST",
+        body: JSON.stringify({ slug }),
+      });
+
+      if (!res.ok || !res.loot) {
+        throw new Error(res.error || "Ошибка открытия");
+      }
+
+      // Embed winning tile into index 34
+      tiles[targetIdx] = {
+        name: res.loot.name,
+        rarity: res.loot.rarity || c.rarity,
+        min: res.loot.amount,
+      };
+
+      stripEl.innerHTML = tiles
+        .map(
+          (l, i) => `
+        <div class="roulette-tile" id="tile-${i}" style="border-bottom-color:${RARITY_COLORS[l.rarity || 'common']}">
+          <span class="rarity-badge rarity-${esc(l.rarity || 'common')}" style="transform:scale(0.85)">${RARITY_LABEL[l.rarity] || 'Лут'}</span>
+          <span class="roulette-tile-name">${esc(l.name)}</span>
+          <span class="roulette-tile-count">×${l.min || 1}</span>
+        </div>`
+        )
+        .join("");
+
+      // Calculate translation distance
+      const tileWidth = 130;
+      const markerX = reelEl.clientWidth / 2;
+      const jitter = (Math.random() * 0.3 - 0.15) * tileWidth;
+      const landDist = targetIdx * tileWidth + tileWidth / 2 - markerX + jitter;
+      const landT0 = performance.now();
+      const landDur = 3900;
+      let lastTileIdx = -1;
+
+      const loop = (now) => {
+        const elapsed = now - landT0;
+        const u = Math.min(1.0, elapsed / landDur);
+        // Quintic smooth ease-out (authentic 60fps decelerating reel)
+        const eased = 1.0 - Math.pow(1.0 - u, 5);
+        const pos = landDist * eased;
+        stripEl.style.transform = `translate3d(${-pos.toFixed(2)}px, 0, 0)`;
+
+        const currentTileIdx = Math.floor((pos + markerX) / tileWidth);
+        if (currentTileIdx !== lastTileIdx) {
+          lastTileIdx = currentTileIdx;
+          playTone("tick");
+        }
+
+        if (u < 1.0) {
+          requestAnimationFrame(loop);
+        } else {
+          // Finished spin
+          playTone("ok");
+          const winTile = document.getElementById(`tile-${targetIdx}`);
+          const winCol = RARITY_COLORS[res.loot.rarity || 'common'] || "#2fe0c0";
+          if (winTile) {
+            winTile.classList.add("win");
+            winTile.style.borderColor = winCol;
+            winTile.style.boxShadow = `0 0 35px ${winCol}aa, inset 0 0 20px ${winCol}33`;
+          }
+
+          modal.querySelector("#roulette-status").textContent = "Выигрыш получен!";
+          modal.querySelector("#roulette-win-rarity").className = `rarity-badge rarity-${esc(res.loot.rarity || 'common')}`;
+          modal.querySelector("#roulette-win-rarity").textContent = RARITY_LABEL[res.loot.rarity] || 'Выигрыш';
+          modal.querySelector("#roulette-win-name").textContent = res.loot.name;
+          modal.querySelector("#roulette-win-amount").textContent = `×${res.loot.amount} шт.`;
+          modal.querySelector("#roulette-result-box").style.display = "block";
+          toast(`Выигрыш: ${res.loot.name} ×${res.loot.amount}`);
+
+          modal.querySelector("#roulette-close-btn").onclick = () => {
+            modal.classList.remove("open");
+          };
+        }
+      };
+
+      requestAnimationFrame(loop);
+    } catch (err) {
+      modal.classList.remove("open");
+      toast(err.message || "Ошибка открытия кейса");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = origText;
+    }
   }
 
   async function initCasesLive() {
@@ -1846,6 +2102,11 @@
     root.innerHTML = cases.map(caseCard).join("");
     root.querySelectorAll("[data-view-loot]").forEach((btn) => {
       btn.addEventListener("click", () => openLootModal(btn.getAttribute("data-view-loot")));
+    });
+    root.querySelectorAll("[data-open-case]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        openCaseWeb(btn.getAttribute("data-open-case"), btn);
+      });
     });
     revealScan(root);
   }
@@ -1952,7 +2213,7 @@
       if (el && t.trends && t.trends.length) {
         el.innerHTML = t.trends.map((f) =>
           `<div style="display:flex;justify-content:space-between;align-items:center;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.07)">
-            <span style="font-size:0.92rem">${f.name}</span>
+            <span style="font-size:0.92rem">${esc(f.name)}</span>
             <b style="color:var(--gold);font-size:0.92rem">×${f.mult}</b>
           </div>`).join("");
       }
@@ -1963,10 +2224,10 @@
       if (el && m.lots && m.lots.length) {
         el.innerHTML = m.lots.map((l) =>
           `<div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.07)">
-            <span style="font-size:0.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.label}${l.count > 1 ? ` ×${l.count}` : ""}</span>
+            <span style="font-size:0.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(l.label)}${l.count > 1 ? ` ×${l.count}` : ""}</span>
             <span style="display:flex;align-items:center;gap:0.6rem;flex-shrink:0">
               <b style="color:var(--gold);font-size:0.92rem">${Number(l.price).toLocaleString("ru-RU")} ¤</b>
-              <small style="color:var(--muted)">${l.seller}</small>
+              <small style="color:var(--muted)">${esc(l.seller)}</small>
             </span>
           </div>`).join("");
       } else if (el) {
@@ -2478,6 +2739,9 @@
     await loadSiteContent();
     await initAdmin();
     initReveal();
+    if ("serviceWorker" in navigator && location.protocol === "https:") {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    }
   });
 
   window.AquaTechSite = { IP, DOWNLOAD, DISCORD, CANONICAL, toast, copyIP, api };

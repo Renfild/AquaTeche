@@ -84,3 +84,21 @@ export async function gateSkinUpload(db, request, nick) {
   const ip = clientIp(request);
   return checkAndBump(db, `skin:${ip}:${String(nick || "").toLowerCase()}`, SKIN_MAX, SKIN_WINDOW_MS);
 }
+
+const PWRESET_MAX = 3;
+const PWRESET_WINDOW_MS = 15 * 60 * 1000;
+
+/** Лимит запросов сброса пароля: на IP, без привязки к нику (анти-энумерация). */
+export async function gatePasswordReset(db, request) {
+  const ip = clientIp(request);
+  return checkAndBump(db, `pwreset:${ip}`, PWRESET_MAX, PWRESET_WINDOW_MS);
+}
+
+const PWCODE_MAX = 5;
+const PWCODE_WINDOW_MS = 15 * 60 * 1000;
+
+/** Анти-брутфорс 6-значного кода: на IP + префикс запроса. */
+export async function gateResetCode(db, request, tokenOrCode) {
+  const ip = clientIp(request);
+  return checkAndBump(db, `pwcode:${ip}:${String(tokenOrCode || "").slice(0, 8)}`, PWCODE_MAX, PWCODE_WINDOW_MS);
+}

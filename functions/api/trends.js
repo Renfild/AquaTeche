@@ -11,7 +11,7 @@ export async function onRequestGet(context) {
   try {
     return await trendsGet(context);
   } catch (e) {
-    return new Response(JSON.stringify({ ok: false, error: String(e && e.stack || e).slice(0, 300) }), {
+    return new Response(JSON.stringify({ ok: false, error: "временная ошибка, попробуй позже" }), {
       status: 500,
       headers: { "content-type": "application/json" },
     });

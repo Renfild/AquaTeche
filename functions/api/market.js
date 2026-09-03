@@ -71,30 +71,31 @@ export async function onRequestPost(context) {
     const buyer = String(body.buyer || "").trim();
     if (!id || !buyer) return bad("Некорректная покупка");
 
-    const sold = await env.DB.prepare(
-      `UPDATE market_listings
-       SET status = 'sold', buyer = ?, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now')
-       WHERE id = ? AND status = 'open'`
-    )
-      .bind(buyer, id)
-      .run();
-    if (!sold.meta.changes) return bad("Лот уже продан или отменён", 409);
+    // Атомарно одной транзакцией: помечаем лот проданным и кредитуем продавца,
+    // иначе сбой между запросами оставляет продавца без монет.
+    const results = await env.DB.batch([
+      env.DB.prepare(
+        `UPDATE market_listings
+         SET status = 'sold', buyer = ?, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now')
+         WHERE id = ? AND status = 'open' AND seller != ? COLLATE NOCASE`
+      ).bind(buyer, id, buyer),
+      env.DB.prepare(
+        `UPDATE profiles
+         SET coins = coins + (SELECT price FROM market_listings WHERE id = ?),
+             updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now')
+         WHERE user_id = (SELECT id FROM users WHERE nick = (SELECT seller FROM market_listings WHERE id = ?) COLLATE NOCASE)`
+      ).bind(id, id),
+    ]);
+
+    if (!results[0].meta.changes) {
+      return bad("Лот уже продан, отменён или это ваш собственный лот", 409);
+    }
 
     const lot = await env.DB.prepare(
       "SELECT seller, item_id, label, nbt, count, price FROM market_listings WHERE id = ?"
     )
       .bind(id)
       .first();
-    if (lot) {
-      // Credit the seller's portal wallet; coin sync delivers it in-game.
-      await env.DB.prepare(
-        `UPDATE profiles SET coins = coins + ?,
-           updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now')
-         WHERE user_id = (SELECT id FROM users WHERE nick = ? COLLATE NOCASE)`
-      )
-        .bind(lot.price, lot.seller)
-        .run();
-    }
     return json({ ok: true, lot });
   }
 
