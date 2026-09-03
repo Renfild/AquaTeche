@@ -13,9 +13,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "pack-2.9.277"
 PACK = ROOT / "dist" / "AquaTech-Client"
 MANIFEST = PACK / "manifest.json"
+TAG = f"pack-{json.loads(MANIFEST.read_text(encoding='utf-8')).get('version', '2.9.284')}" if MANIFEST.is_file() else "pack-2.9.285"
 WORKERS = 4
 
 

@@ -68,19 +68,45 @@ public final class OceanEventsService {
 
     // ─────────────────────────── монеты ───────────────────────────
 
+    private static void pushHubUpdate(ServerPlayer player) {
+        if (player == null) return;
+        try {
+            Class<?> hds = Class.forName("store.aquateche.aqualumen.common.service.HubDataService");
+            hds.getMethod("push", ServerPlayer.class).invoke(null, player);
+        } catch (Throwable ignored) {
+        }
+    }
+
     private static void addCoins(ServerPlayer player, long amount) {
-        if (amount <= 0) return;
+        if (amount <= 0 || player == null) return;
+        try {
+            Class<?> eco = Class.forName("store.aquateche.aqualumen.common.service.HubEconomy");
+            eco.getMethod("grantCoins", ServerPlayer.class, long.class).invoke(null, player, amount);
+            return;
+        } catch (Throwable ignored) {
+        }
         Scoreboard sb = player.getScoreboard();
         Objective obj = sb.getObjective("coins");
-        if (obj == null) return; // экономика ещё не инициализирована
+        if (obj == null) obj = sb.getObjective("aquacoins");
+        if (obj == null) return;
         Score score = sb.getOrCreatePlayerScore(player.getScoreboardName(), obj);
         score.setScore(score.getScore() + (int) amount);
     }
 
     private static boolean takeCoins(ServerPlayer player, long amount) {
+        if (amount <= 0 || player == null) return true;
+        try {
+            Class<?> eco = Class.forName("store.aquateche.aqualumen.common.service.HubEconomy");
+            Object res = eco.getMethod("trySpendCoins", ServerPlayer.class, long.class).invoke(null, player, amount);
+            if (res instanceof Boolean b) {
+                return b;
+            }
+        } catch (Throwable ignored) {
+        }
         Scoreboard sb = player.getScoreboard();
         Objective obj = sb.getObjective("coins");
-        if (obj == null) return false;
+        if (obj == null) obj = sb.getObjective("aquacoins");
+        if (obj == null) return true;
         Score score = sb.getOrCreatePlayerScore(player.getScoreboardName(), obj);
         if (score.getScore() < amount) return false;
         score.setScore(score.getScore() - (int) amount);
@@ -181,7 +207,6 @@ public final class OceanEventsService {
             new Quest("Поймайте 5 рыб в дождь", 5, 700, 2),
             new Quest("Поймайте 30 рыб", 30, 900, 0),
             new Quest("Поймайте 15 рыб ночью", 15, 1100, 1));
-
     /** Детерминированные индексы пула на день — общие для всех игроков. */
     private static int[] dailyIndices(int day) {
         int n = QUEST_POOL.size();
@@ -521,36 +546,50 @@ public final class OceanEventsService {
         addCoins(player, q.reward());
         st.addProperty(ck, true);
         saveQuestTag(player, st);
+        pushHubUpdate(player);
         player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §aНаграда получена: §6+"
                 + q.reward() + " монет"));
         return true;
     }
 
-    /** Реролл контракта за 100 монет — не чаще, чем есть запасных в пуле (2 за день). */
+    /** Реролл контракта за 100 монет. */
     public static boolean rerollQuest(ServerPlayer player, int index) {
         if (index < 0 || index > 2) return false;
         ensureQuestDay(player);
         JsonObject st = questTag(player);
         int rr = st.has("rr") ? st.get("rr").getAsInt() : 0;
-        if (rr >= QUEST_POOL.size() - 3) return false;
-        if (st.has("c" + index) && st.get("c" + index).getAsBoolean()) return false;
+        if (rr >= 25) {
+            player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §cЛимит замен на сегодня исчерпан."));
+            return false;
+        }
+        if (st.has("c" + index) && st.get("c" + index).getAsBoolean()) {
+            player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §cНельзя заменить уже выполненное задание."));
+            return false;
+        }
         if (!takeCoins(player, REROLL_COST)) {
             player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §cНужно " + REROLL_COST + " монет на реролл."));
             return false;
         }
         int[] used = new int[3];
         for (int i = 0; i < 3; i++) used[i] = st.has("q" + i) ? st.get("q" + i).getAsInt() : -1;
-        int pick = -1;
-        for (int cand = 0; cand < QUEST_POOL.size() && pick < 0; cand++) {
-            boolean taken = false;
-            for (int u : used) if (u == cand) taken = true;
-            if (!taken) pick = cand;
+        int currentQ = st.has("q" + index) ? st.get("q" + index).getAsInt() : -1;
+        List<Integer> candidates = new ArrayList<>();
+        for (int i = 0; i < QUEST_POOL.size(); i++) {
+            if (i != currentQ && i != used[0] && i != used[1] && i != used[2]) {
+                candidates.add(i);
+            }
         }
-        if (pick < 0) return false;
+        if (candidates.isEmpty()) {
+            for (int i = 0; i < QUEST_POOL.size(); i++) {
+                if (i != currentQ) candidates.add(i);
+            }
+        }
+        int pick = candidates.isEmpty() ? (currentQ + 1) % QUEST_POOL.size() : candidates.get(player.getRandom().nextInt(candidates.size()));
         st.addProperty("q" + index, pick);
         st.addProperty("p" + index, 0);
         st.addProperty("rr", rr + 1);
         saveQuestTag(player, st);
+        pushHubUpdate(player);
         player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §fНовый контракт: §b"
                 + QUEST_POOL.get(pick).desc() + " §7(−" + REROLL_COST + " монет)"));
         return true;

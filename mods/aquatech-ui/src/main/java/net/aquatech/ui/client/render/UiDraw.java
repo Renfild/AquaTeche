@@ -117,7 +117,7 @@ public final class UiDraw {
     public static void drawPlayerHead(GuiGraphics graphics, UUID uuid, String name, int x, int y, int size) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        ResourceLocation skin = DefaultPlayerSkin.getDefaultSkin(uuid);
+        ResourceLocation skin = DefaultPlayerSkin.getDefaultSkin(uuid != null ? uuid : java.util.UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(java.nio.charset.StandardCharsets.UTF_8)));
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.getConnection() != null) {
             var playerInfo = minecraft.getConnection().getPlayerInfo(uuid);

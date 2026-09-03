@@ -118,8 +118,23 @@ public final class HubActionHandler {
         }
 
         // Grant real coin and item rewards for pass level
-        long rewardCoins = 100L + (long) tier * 35L;
+        long rewardCoins = 100L + (long) tier * 50L;
         HubEconomy.grantCoins(player, rewardCoins);
+
+        // Grant milestone bonuses (cases and crystals)
+        switch (tier) {
+            case 5 -> openCase(player, "starter");
+            case 10 -> openCase(player, "abyss");
+            case 15 -> openCase(player, "metallurgy");
+            case 20 -> openCase(player, "superconductor");
+            case 25 -> openCase(player, "steam");
+            case 30 -> openCase(player, "flora");
+            case 35 -> openCase(player, "applied");
+            case 40 -> openCase(player, "smeltery");
+            case 45 -> openCase(player, "draconic");
+            case 48 -> openCase(player, "singularity");
+            case 50 -> openCase(player, "infinity");
+        }
 
         claimedTag.putBoolean(key, true);
         player.getPersistentData().put("aqualumen_pass_claimed", claimedTag);
