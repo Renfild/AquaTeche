@@ -206,7 +206,12 @@ public final class HubActionHandler {
                     }
                 }
             }
-            player.sendSystemMessage(Component.literal(summary.toString().trim()));
+            // Построчно: единый многострочный компонент на Mohist даёт пустые строки в чате
+            for (String line : summary.toString().trim().split("\n")) {
+                if (!line.isBlank()) {
+                    player.sendSystemMessage(Component.literal(line));
+                }
+            }
             if (firstLoot != null) {
                 String firstLabel = firstLoot.label == null || firstLoot.label.isBlank() ? firstLoot.item : firstLoot.label;
                 String firstType = firstLoot.type == null ? "item" : firstLoot.type;
