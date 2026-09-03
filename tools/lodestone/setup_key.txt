@@ -1,3 +1,0 @@
-Setup Key: Gt7tUtzrKkFqeVlS
-Core Name: xietoru's Lodestone Core
-Panel Port: 16662 (localhost:16662)

@@ -129,3 +129,13 @@ server/plugins/*.bak
 mods/aqualumen-ui/build/
 mods/aqualumen-ui/.gradle/
 backups/
+
+# server bulk: world lives in panel backups, JDKs/Mohist are downloadable
+server/world/
+server/java17/
+server/java21/
+server/mods/disabled/
+server/plugins/disabled/
+server/_uuid_migrate_backup_*/
+tools/lodestone/
+*.jar.bak

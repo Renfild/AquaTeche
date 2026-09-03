@@ -1,8 +1,0 @@
-{
-    "pack": {
-        "pack_format": 15,
-        "supported_formats": [15, 41],
-        "comment": "Versions compatible: 1.20 - 1.20.6",
-        "description": ["by ", {"text":"RoarkCats","color":"#bb66bb"}]
-    }
-}
