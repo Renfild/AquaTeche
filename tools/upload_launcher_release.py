@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "Renfild/AquaTeche"
-TAG = "client-2.9.89"
+TAG = "client-2.9.91"
 REL = ROOT / "dist" / "releases"
 DOCS_MANIFEST = ROOT / "docs" / "bootstrap.json"
 
@@ -63,9 +63,9 @@ def main() -> None:
     zip_path = REL / "AquaTechLauncher.zip"
     man = {
         "version": ver,
-        "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
+        "launcher_zip": "https://aquateche.store/dl/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
-        "release_base": f"https://github.com/{REPO}/releases/download/{TAG}",
+        "release_base": "https://aquateche.store/dl",
         "launcher_zip_md5": md5_file(zip_path),
         "launcher_zip_size": zip_path.stat().st_size,
         "pack_cdn": "https://aquateche.store/pack",

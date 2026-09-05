@@ -74,7 +74,10 @@ def main() -> None:
         content_type="application/json",
     )
     release_id = rel["id"]
-    print(f"draft release id={release_id} tag={TAG} files={len(files)}")
+    files_to_upload = [f for f in files if TAG in (f.get("url") or "")]
+    if not files_to_upload:
+        files_to_upload = files
+    print(f"draft release id={release_id} tag={TAG} uploading {len(files_to_upload)}/{len(files)} files")
 
     upload_url = f"https://uploads.github.com/repos/{REPO}/releases/{release_id}/assets"
 
@@ -104,7 +107,7 @@ def main() -> None:
 
     ok = fail = 0
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        futs = [pool.submit(upload_one, item) for item in files]
+        futs = [pool.submit(upload_one, item) for item in files_to_upload]
         done = 0
         for fut in as_completed(futs):
             name, success, msg = fut.result()
@@ -114,8 +117,8 @@ def main() -> None:
             else:
                 fail += 1
                 print(f"FAIL {name}: {msg}")
-            if done % 25 == 0 or done == len(files):
-                print(f"  progress {done}/{len(files)} ok={ok} fail={fail}")
+            if done % 25 == 0 or done == len(files_to_upload):
+                print(f"  progress {done}/{len(files_to_upload)} ok={ok} fail={fail}")
 
     print(f"upload done ok={ok} fail={fail}")
     if fail:

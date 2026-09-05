@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.285"
-PACK_VERSION = "2.9.285"
+PACK_TAG = "pack-2.9.294"
+PACK_VERSION = "2.9.294"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -306,6 +306,9 @@ def write_delta(manifest: dict, prev: dict | None) -> None:
 
 
 def write_manifest() -> Path:
+    prev = load_prev_manifest()
+    prev_map = {f["path"]: f for f in (prev or {}).get("files", [])}
+
     files = []
     for folder in FOLDERS:
         root = PACK / folder
@@ -322,12 +325,19 @@ def write_manifest() -> Path:
             if should_skip(rel):
                 continue
             aname = asset_name(rel)
+            f_md5 = md5_file(path)
+            f_size = path.stat().st_size
+            prev_f = prev_map.get(rel)
+            if not aname.startswith("aquatech_ui") and prev_f and prev_f.get("md5") == f_md5 and prev_f.get("size") == f_size and prev_f.get("url"):
+                f_url = prev_f["url"]
+            else:
+                f_url = f"{GITHUB_RELEASE}/{aname}"
             files.append(
                 {
                     "path": rel,
-                    "md5": md5_file(path),
-                    "size": path.stat().st_size,
-                    "url": f"{GITHUB_RELEASE}/{aname}",
+                    "md5": f_md5,
+                    "size": f_size,
+                    "url": f_url,
                     "asset": aname,
                 }
             )
@@ -344,7 +354,6 @@ def write_manifest() -> Path:
     text = json.dumps(manifest, indent=2, ensure_ascii=False)
     backup_current_manifest()
     out1 = PACK / "manifest.json"
-    prev = load_prev_manifest()
     write_delta(json.loads(text), prev)
     out2 = ROOT / "dist" / "launcher" / "manifest.json"
     out2.parent.mkdir(parents=True, exist_ok=True)

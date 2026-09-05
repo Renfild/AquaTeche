@@ -2,12 +2,11 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "endgame_aquatech"
-	group: "END0000000000001"
+	group: "2AC058F49B3BBFEF"
 	icon: "industrialupgrade:admpanel/admpanel"
-	id: "891345EEFA4A4413835FEB0FD67E06AA"
-	order_index: 10
+	id: "026F5449CA77B851"
+	order_index: 2
 	quest_links: [ ]
-	subtitle: "Финал. Alpha Rod, Infinity и Admin Solar Panel."
 	quests: [
 		{
 			description: [
@@ -15,32 +14,48 @@
 				"StarCatcher. Без неё финальная панель IU не"
 				"собирается."
 			]
-			id: "031AE9F35C0842AFAB46B80ABFF9B669"
-			icon: "starcatcher:alpha_rod"
-			rewards: [{
-				id: "03C27221D6F87C22"
-				item: {
-					Count: 2b
-					id: "aquatech_ui:rate_x64"
+			entity_vis_size: 1.0f
+			icon: {
+				Count: 1
+				id: "starcatcher:alpha_rod"
+				tag: {
+					Damage: 0
 				}
-				type: "item"
-			},{
-				id: "1E75AC291ADAC9F8"
-				item: {
-					Count: 2b
-					id: "ae2:item_storage_cell_256k"
+			}
+			id: "5A201EA9CECBC459"
+			rewards: [
+				{
+					count: 2
+					id: "03C27221D6F87C22"
+					item: {
+						Count: 1
+						id: "aquatech_ui:rate_x64"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6D03EABB14D459C8"
-				type: "xp"
-				xp: 800
-			}]
+				{
+					count: 2
+					id: "1E75AC291ADAC9F8"
+					item: "ae2:item_storage_cell_256k"
+					type: "item"
+				}
+				{
+					id: "6D03EABB14D459C8"
+					type: "xp"
+					xp: 800
+				}
+			]
 			tasks: [{
-				id: "FE8A223FEFAE433A"
+				id: "03E66506129B2167"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "starcatcher:alpha_rod"
+					tag: {
+						Damage: 0
+					}
 				}
 				type: "item"
 			}]
@@ -53,30 +68,31 @@
 				"Пять звёзд Нижнего мира. На AquaTech их ловят"
 				"удочкой, а не фармят с визер-фермы."
 			]
-			id: "9CF6D75A5FFE4A90845E52F198ADF492"
+			entity_vis_size: 1.0f
 			icon: "minecraft:nether_star"
-			rewards: [{
-				id: "4B88E37CAEC7AF6D"
-				item: {
-					Count: 4b
-					id: "avaritia:crystal_matrix_ingot"
+			id: "0D837E6848797C49"
+			rewards: [
+				{
+					count: 4
+					id: "4B88E37CAEC7AF6D"
+					item: "avaritia:crystal_matrix_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "BAC0BD1447BC69BD"
-				item: {
-					Count: 2b
-					id: "ae2:fluid_storage_cell_256k"
+				{
+					count: 2
+					id: "035EA7C2E3BBADF8"
+					item: "ae2:fluid_storage_cell_256k"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "68AE385EDDDB7EFF"
-				type: "xp"
-				xp: 800
-			}]
+				{
+					id: "68AE385EDDDB7EFF"
+					type: "xp"
+					xp: 800
+				}
+			]
 			tasks: [{
-				id: "819E888C4BC26909"
 				count: 5L
+				id: "56D17B203BA4F3AC"
 				item: "minecraft:nether_star"
 				type: "item"
 			}]
@@ -90,26 +106,25 @@
 				"Слиток Infinity с экстремального стола. Этот квест"
 				"закрывается вместе с вкладкой Avaritia."
 			]
-			id: "7373C3C191AA6D36"
+			entity_vis_size: 1.0f
 			icon: "avaritia:infinity_ingot"
-			rewards: [{
-				id: "11FF00FA8FE3A3F4"
-				item: {
-					Count: 2b
-					id: "ae2:cell_component_256k"
+			id: "7373C3C191AA6D36"
+			rewards: [
+				{
+					count: 2
+					id: "11FF00FA8FE3A3F4"
+					item: "ae2:cell_component_256k"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6CA5E8B52CBE8776"
-				type: "xp"
-				xp: 1000
-			}]
+				{
+					id: "6CA5E8B52CBE8776"
+					type: "xp"
+					xp: 1000
+				}
+			]
 			tasks: [{
-				id: "BC911A7D47F56FAE"
-				item: {
-					Count: 1b
-					id: "avaritia:infinity_ingot"
-				}
+				id: "0248D899E052E0CD"
+				item: "avaritia:infinity_ingot"
 				type: "item"
 			}]
 			title: "Infinity на столе"
@@ -117,53 +132,47 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["031AE9F35C0842AFAB46B80ABFF9B669", "9CF6D75A5FFE4A90845E52F198ADF492", "7373C3C191AA6D36"]
+			dependencies: ["7373C3C191AA6D36"]
 			description: [
 				"Финал AquaTech. Admin Solar Panel на столе 9×9:"
 				"Infinity, сингулярность, Rate x64, Alpha Rod и"
 				"фотонная панель."
 			]
-			id: "ABC9A464ECF145D1BFE52FDD4581AE9B"
+			entity_vis_size: 1.0f
 			icon: "industrialupgrade:admpanel/admpanel"
-			rewards: [{
-				id: "29B4FDEED0C16C27"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:machines/photonic_solar_panel"
+			id: "548404476B858A80"
+			rewards: [
+				{
+					id: "29B4FDEED0C16C27"
+					item: "industrialupgrade:machines/photonic_solar_panel"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8EC89B20E183E157"
-				item: {
-					Count: 1b
-					id: "avaritia:compressed_chest"
+				{
+					id: "00B88E2DC2951E8F"
+					item: "avaritia:compressed_chest"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "FDA20A4D28E28306"
-				item: {
-					Count: 2b
-					id: "ae2:item_storage_cell_256k"
+				{
+					count: 2
+					id: "40710112D6DFC46D"
+					item: "ae2:item_storage_cell_256k"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "301E8399C7306D70"
-				item: {
-					Count: 2b
-					id: "ae2:fluid_storage_cell_256k"
+				{
+					count: 2
+					id: "301E8399C7306D70"
+					item: "ae2:fluid_storage_cell_256k"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "2FF600D1F6169BCC"
-				type: "xp"
-				xp: 2500
-			}]
+				{
+					id: "2FF600D1F6169BCC"
+					type: "xp"
+					xp: 2500
+				}
+			]
 			tasks: [{
-				id: "B13F08F94F11626E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:admpanel/admpanel"
-				}
+				id: "501E3C2DB4B1AFFA"
+				item: "industrialupgrade:admpanel/admpanel"
 				type: "item"
 			}]
 			title: "Админ-панель"

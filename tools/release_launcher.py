@@ -133,9 +133,9 @@ def update_manifest(version: str, zip_path: Path) -> dict:
     tag = f"client-{version}"
     manifest = {
         "version": version,
-        "launcher_zip": f"https://github.com/{REPO}/releases/download/{tag}/AquaTechLauncher.zip",
+        "launcher_zip": "https://aquateche.store/dl/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
-        "release_base": f"https://github.com/{REPO}/releases/download/{tag}",
+        "release_base": "https://aquateche.store/dl",
         "launcher_zip_md5": md5_file(zip_path),
         "launcher_zip_size": zip_path.stat().st_size,
         "pack_cdn": "https://aquateche.store/pack",

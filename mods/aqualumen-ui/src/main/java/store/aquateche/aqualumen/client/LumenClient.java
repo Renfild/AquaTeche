@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,11 +44,21 @@ public final class LumenClient {
 
     public static void bootstrap() {
         MinecraftForge.EVENT_BUS.register(GameEvents.class);
+        MinecraftForge.EVENT_BUS.register(store.aquateche.aqualumen.client.chat.ChatWebOverlay.class);
     }
 
     @SubscribeEvent
     public static void onRegisterKeys(RegisterKeyMappingsEvent event) {
         event.register(OPEN_HUB);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterOverlays(RegisterGuiOverlaysEvent event) {
+        event.registerAbove(
+                net.minecraftforge.client.gui.overlay.VanillaGuiOverlay.CHAT_PANEL.id(),
+                "web_chat",
+                (gui, graphics, partialTick, width, height) ->
+                        store.aquateche.aqualumen.client.chat.ChatWebOverlay.render(graphics, width, height, partialTick));
     }
 
     /** Called from the network thread wrapper; already scheduled on the client thread. */

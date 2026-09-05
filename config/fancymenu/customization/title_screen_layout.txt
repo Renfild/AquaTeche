@@ -228,7 +228,7 @@ element {
  nine_slice_custom_background = true
  nine_slice_border_x = 8
  nine_slice_border_y = 8
- label = {"text":"Играть","color":"#031018","bold":true}
+ label = {"text":"Сервер AquaTech","color":"#031018","bold":true}
  label_shadow = false
  navigatable = true
  widget_active_state_requirement_container_identifier = wid-btn-play
@@ -260,9 +260,9 @@ element {
  sticky_anchor = false
  anchor_point = top-left
  x = 24
- y = 128
+ y = 120
  width = 232
- height = 48
+ height = 42
  stretch_x = false
  stretch_y = false
  stay_on_screen = true
@@ -318,9 +318,9 @@ vanilla_button {
  sticky_anchor = false
  anchor_point = top-left
  x = 24
- y = 184
+ y = 216
  width = 232
- height = 44
+ height = 42
  stretch_x = false
  stretch_y = false
  stay_on_screen = true
@@ -379,9 +379,9 @@ element {
  sticky_anchor = false
  anchor_point = top-left
  x = 24
- y = 236
+ y = 264
  width = 112
- height = 44
+ height = 40
  stretch_x = false
  stretch_y = false
  stay_on_screen = true
@@ -438,9 +438,9 @@ element {
  sticky_anchor = false
  anchor_point = top-left
  x = 144
- y = 236
+ y = 264
  width = 112
- height = 44
+ height = 40
  stretch_x = false
  stretch_y = false
  stay_on_screen = true
@@ -496,9 +496,9 @@ vanilla_button {
  sticky_anchor = false
  anchor_point = top-left
  x = 24
- y = 288
+ y = 310
  width = 232
- height = 44
+ height = 40
  stretch_x = false
  stretch_y = false
  stay_on_screen = true
@@ -576,10 +576,13 @@ vanilla_button {
 vanilla_button {
  button_element_executable_block_identifier = ex-016
  [executable_block:ex-016][type:generic] = [executables:]
+ backgroundnormal = [source:local]/config/fancymenu/assets/btn_ghost.png
+ backgroundhovered = [source:local]/config/fancymenu/assets/btn_ghost_hover.png
  restartbackgroundanimations = true
- nine_slice_custom_background = false
- nine_slice_border_x = 5
- nine_slice_border_y = 5
+ nine_slice_custom_background = true
+ nine_slice_border_x = 8
+ nine_slice_border_y = 8
+ label = {"text":"Одиночная игра","color":"#F3FBFF"}
  navigatable = true
  widget_active_state_requirement_container_identifier = w-017
  [loading_requirement_container_meta:w-017] = [groups:][instances:]
@@ -608,11 +611,11 @@ vanilla_button {
  auto_sizing_base_screen_width = 1920
  auto_sizing_base_screen_height = 1080
  sticky_anchor = false
- anchor_point = vanilla
- x = 0
- y = 0
- width = 20
- height = 20
+ anchor_point = top-left
+ x = 24
+ y = 168
+ width = 232
+ height = 42
  stretch_x = false
  stretch_y = false
  stay_on_screen = true
@@ -626,7 +629,7 @@ vanilla_button {
  load_once_per_session = false
  in_editor_color = #FFC800FF
  layer_hidden_in_editor = false
- is_hidden = true
+ is_hidden = false
  automated_button_clicks = 0
 }
 

@@ -1,51 +1,22 @@
 {
-  "from_version": "2.9.284",
-  "to_version": "2.9.285",
-  "added": [
-    {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.26-alpha.jar",
-      "md5": "3165135e9593acdd04d5efbcbe53f5ed",
-      "size": 2210931,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.285/aqualumen-forge-1.20.1-0.3.26-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.26-alpha.jar"
-    },
-    {
-      "path": "mods/aquatech_ui-1.0.47.jar",
-      "md5": "52164127f7fe7f92b7ebbc5b81481dc5",
-      "size": 2442889,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.285/aquatech_ui-1.0.47.jar",
-      "asset": "aquatech_ui-1.0.47.jar"
-    }
-  ],
+  "from_version": "2.9.293",
+  "to_version": "2.9.294",
+  "added": [],
   "changed": [
     {
-      "path": "config/aqualumen/html/hub.html",
-      "md5": "00322a38ac9e5272b799141a3bfb4c87",
-      "size": 833658,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.285/config__aqualumen__html__hub.html",
-      "asset": "config__aqualumen__html__hub.html"
-    },
-    {
-      "path": "config/aqualumen/hub.html",
-      "md5": "00322a38ac9e5272b799141a3bfb4c87",
-      "size": 833658,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.285/config__aqualumen__hub.html",
-      "asset": "config__aqualumen__hub.html"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.27-alpha.jar",
+      "md5": "9bc73fb2e2f8958ca04c467b7cff1273",
+      "size": 2501706,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.294/aqualumen-forge-1.20.1-0.3.27-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.27-alpha.jar"
     }
   ],
-  "removed": [
-    {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.25-alpha.jar"
-    },
-    {
-      "path": "mods/aquatech_ui-1.0.46.jar"
-    }
-  ],
+  "removed": [],
   "stats": {
-    "added": 2,
-    "changed": 2,
-    "removed": 2,
-    "unchanged": 128,
-    "download_bytes": 6321136
+    "added": 0,
+    "changed": 1,
+    "removed": 0,
+    "unchanged": 131,
+    "download_bytes": 2501706
   }
 }

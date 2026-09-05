@@ -359,11 +359,13 @@ public final class HubDataService {
                     os.flush();
                 }
 
-                if (conn.getResponseCode() == 200) {
-                    conn.getInputStream().close();
-                }
+                int code = conn.getResponseCode();
                 conn.disconnect();
-            } catch (Throwable ignored) {
+                if (code != 200) {
+                    AquaLumenUI.LOGGER.warn("Portal sync failed: HTTP {} for {}", code, nick);
+                }
+            } catch (Throwable t) {
+                AquaLumenUI.LOGGER.warn("Portal sync error for {}: {}", nick, t.toString());
             }
         });
     }
@@ -673,7 +675,8 @@ public final class HubDataService {
         }
 
         float progress = (seasonXp % 100) / 100.0F;
-        boolean premium = player.hasPermissions(2) || isVipOrStaff(player);
+        boolean premium = player.getPersistentData().getBoolean("aqualumen_pass_premium")
+                || player.hasPermissions(2) || isVipOrStaff(player);
 
         // Check claimed tiers in player persistent NBT
         CompoundTag claimedTag = player.getPersistentData().getCompound("aqualumen_pass_claimed");

@@ -32,7 +32,8 @@ public final class StoreCatalog {
             new Product("rank.admiral", "Адмирал", "/nick, 10 домов", 899, "gems", "lp_group", "admiral"),
             new Product("rank.legend", "Легенда", "Максимум домов и /hat", 1499, "gems", "lp_group", "legend"),
             new Product("rank.vip", "VIP", "/wb /ec /fly", 199, "gems", "lp_group", "vip"),
-            new Product("gems.5", "5 гемов", "50 000 монет → 5 гемов", 50000, "coins", "gems", "5")
+            new Product("gems.5", "5 гемов", "50 000 монет → 5 гемов", 50000, "coins", "gems", "5"),
+            new Product("pass.premium", "Боевой Пропуск", "Премиум-награды сезона (50 уровней)", 5, "gems", "pass_premium", "")
     );
 
     private static final String[] FLEET = {"sailor", "skipper", "captain", "admiral", "legend", "vip"};
@@ -44,6 +45,9 @@ public final class StoreCatalog {
         String rank = HubDataService.resolveRank(player).name().toLowerCase(Locale.ROOT);
         return PRODUCTS.stream().map(p -> {
             boolean owned = "lp_group".equals(p.kind) && rank.contains(p.payload);
+            if ("pass_premium".equals(p.kind)) {
+                owned = player.getPersistentData().getBoolean("aqualumen_pass_premium");
+            }
             long price = p.price;
             if ("case".equals(p.kind)) {
                 CaseConfig.CaseDef def = CaseConfig.find(p.payload);
@@ -68,6 +72,12 @@ public final class StoreCatalog {
         if ("case".equals(product.kind)) {
             HubActionHandler.openCasePublic(player, product.payload);
             return;
+        }
+        if ("pass_premium".equals(product.kind)) {
+            if (player.getPersistentData().getBoolean("aqualumen_pass_premium")) {
+                player.sendSystemMessage(Component.literal("Боевой Пропуск уже активен").withStyle(ChatFormatting.YELLOW));
+                return;
+            }
         }
         long price = product.price;
         boolean paid = "gems".equals(product.currency)
@@ -111,6 +121,10 @@ public final class StoreCatalog {
             }
             case "item" -> {
                 giveItem(player, payload);
+                yield true;
+            }
+            case "pass_premium" -> {
+                player.getPersistentData().putBoolean("aqualumen_pass_premium", true);
                 yield true;
             }
             case "skin" -> applySkinUrl(player, payload);
@@ -162,11 +176,14 @@ public final class StoreCatalog {
     }
 
     private static boolean allowedSkinUrl(String url) {
-        if (url == null) {
+        if (url == null || url.isBlank()) {
             return false;
         }
-        return url.startsWith("https://aquateche.store/api/skins/")
-                || url.contains(".workers.dev/api/skins/");
+        String clean = url.trim();
+        if (clean.startsWith("http://") || clean.startsWith("https://")) {
+            return true;
+        }
+        return clean.matches("^[a-zA-Z0-9_]{2,20}$");
     }
 
     private static boolean applySkinUrl(ServerPlayer player, String url) {
@@ -177,9 +194,23 @@ public final class StoreCatalog {
         if (server == null) {
             return false;
         }
+        String clean = url.trim();
         String name = player.getGameProfile().getName();
-        CommandSourceStack src = server.createCommandSourceStack().withPermission(4).withSuppressedOutput();
-        server.getCommands().performPrefixedCommand(src, "skin set " + name + " " + url);
+        CommandSourceStack consoleSrc = server.createCommandSourceStack().withPermission(4).withSuppressedOutput();
+        CommandSourceStack playerSrc = player.createCommandSourceStack().withSuppressedOutput();
+
+        if (clean.startsWith("http://") || clean.startsWith("https://")) {
+            // Player-context SkinsRestorer URL change
+            server.getCommands().performPrefixedCommand(playerSrc, "skin url " + clean);
+            // Console-context SkinsRestorer fallback
+            String customName = "at_" + name.toLowerCase(Locale.ROOT);
+            server.getCommands().performPrefixedCommand(consoleSrc, "sr createcustom " + customName + " " + clean);
+            server.getCommands().performPrefixedCommand(consoleSrc, "skin set " + customName + " " + name);
+        } else {
+            // Mojang nickname or custom skin name
+            server.getCommands().performPrefixedCommand(playerSrc, "skin " + clean);
+            server.getCommands().performPrefixedCommand(consoleSrc, "skin set " + clean + " " + name);
+        }
         return true;
     }
 
@@ -189,8 +220,10 @@ public final class StoreCatalog {
             return false;
         }
         String name = player.getGameProfile().getName();
-        CommandSourceStack src = server.createCommandSourceStack().withPermission(4).withSuppressedOutput();
-        server.getCommands().performPrefixedCommand(src, "skin clear " + name);
+        CommandSourceStack consoleSrc = server.createCommandSourceStack().withPermission(4).withSuppressedOutput();
+        CommandSourceStack playerSrc = player.createCommandSourceStack().withSuppressedOutput();
+        server.getCommands().performPrefixedCommand(playerSrc, "skin clear");
+        server.getCommands().performPrefixedCommand(consoleSrc, "skin clear " + name);
         return true;
     }
 

@@ -18,10 +18,10 @@ import java.util.Set;
 
 public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
 
-    private static final int PAGE_READY_TIMEOUT_TICKS = 120;
+    private static final int PAGE_READY_TIMEOUT_TICKS = 300;
     private static final Set<String> SERVER_ACTIONS = Set.of(
             "hub.refresh", "daily.claim", "store.buy", "case.open", "case.claim", "pass.claim",
-            "hub.kit", "hub.warp", "fish.sell", "fish.sell_all");
+            "hub.kit", "hub.warp", "fish.sell", "fish.sell_all", "events.claim", "events.reroll");
 
     private final String initialTab;
     private LumenWebBridge bridge;
@@ -95,12 +95,20 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
     }
 
     private void pushSnapshot() {
-        if (!pageReady || pendingSnapshot == null || bridge == null) {
+        if (bridge == null) {
+            return;
+        }
+        if (pendingSnapshot == null) {
+            pendingSnapshot = LumenClient.snapshot();
+        }
+        if (pendingSnapshot == null) {
             return;
         }
         String json = HubSnapshotJson.encode(pendingSnapshot, LumenClient.snapshotReceivedAt(), initialTab);
-        bridge.execute("window.AquaLumen&&window.AquaLumen.applySnapshot(" + json + ");");
-        pendingSnapshot = null;
+        bridge.execute("if(window.AquaLumen&&window.AquaLumen.applySnapshot){window.AquaLumen.applySnapshot(" + json + ");}");
+        if (pageReady) {
+            pendingSnapshot = null;
+        }
     }
 
     private void dispatch(String message) {

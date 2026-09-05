@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>AquaTech Chat</title>
+<style>
+  @font-face { font-family: "Ubuntu"; src: url("ubuntu.ttf"); }
+  @font-face { font-family: "Ubuntu"; font-weight: 700; src: url("ubuntu-bold.ttf"); }
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: transparent; }
+  body { font: 13.5px/1.4 "Ubuntu", "Segoe UI", sans-serif; }
+
+  /* корневая сцена: компакт = лента слева-снизу, open = панель */
+  #scene { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 10px 8px 8px; }
+  body.open #scene { justify-content: flex-end; padding: 10px 12px 12px; }
+
+  .panel { width: 100%; max-width: 560px; margin-left: 0; display: none; flex-direction: column;
+    background: rgba(6,8,12,.90); border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
+    box-shadow: 0 0 24px rgba(78,249,255,.08), 0 18px 50px rgba(0,0,0,.5); overflow: hidden; }
+  body.open .panel { display: flex; height: 100%; max-width: none; }
+
+  /* лента (компакт) */
+  #feed { display: flex; flex-direction: column; gap: 5px; }
+  body.open #feed { flex: 1; overflow-y: auto; padding: 4px 6px 6px; gap: 7px; }
+  #feed::-webkit-scrollbar { width: 6px; }
+  #feed::-webkit-scrollbar-thumb { background: rgba(78,249,255,.25); border-radius: 3px; }
+
+  .line { position: relative; display: flex; gap: 9px; align-items: center;
+    background: rgba(10,15,22,.62); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;
+    padding: 5px 10px 5px 8px; animation: slidein .18s ease-out; }
+  body.open .line { border-radius: 12px; padding: 7px 12px 7px 10px; }
+  .line::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 2px; background: var(--c, #4ef9ff); }
+  .line.own { background: rgba(68,225,170,.10); border-color: rgba(68,225,170,.22); }
+  .line.sysline { justify-content: center; background: rgba(78,249,255,.07); border-color: rgba(78,249,255,.25); }
+  .tx.sys { color: #ffd08a; }
+  @keyframes slidein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .ava { width: 22px; height: 22px; border-radius: 6px; flex: none; image-rendering: pixelated;
+    border: 1px solid color-mix(in srgb, var(--c, #4ef9ff) 55%, transparent); }
+  body.open .ava { width: 28px; height: 28px; border-radius: 8px; }
+  .ava.letter { display: grid; place-items: center; font-weight: 700; font-size: 11px; color: #04121c;
+    background: var(--c, #4ef9ff); }
+
+  .who { font-weight: 700; color: #fff; }
+  .tx { color: #e8f1f8; }
+  .tx .c0 { color: #000; } .tx .c1 { color: #0000aa; } .tx .c2 { color: #00aa00; } .tx .c3 { color: #00aaaa; }
+  .tx .c4 { color: #aa0000; } .tx .c5 { color: #aa00aa; } .tx .c6 { color: #ffaa00; } .tx .c7 { color: #aaaaaa; }
+  .tx .c8 { color: #555555; } .tx .c9 { color: #5555ff; } .tx .ca { color: #55ff55; } .tx .cb { color: #55ffff; }
+  .tx .cc { color: #ff5555; } .tx .cd { color: #ff55ff; } .tx .ce { color: #ffff55; } .tx .cf { color: #ffffff; }
+  .tx .l { font-weight: 700; } .tx .o { font-style: italic; } .tx .n { text-decoration: underline; }
+  .tx .sys { color: #ffd08a; }
+
+  /* каналы (open) */
+  #tabs { display: none; gap: 8px; padding: 12px 8px 8px; }
+  body.open #tabs { display: flex; }
+  .tab { flex: 1; text-align: center; font-weight: 700; font-size: 13px; padding: 7px 0; border-radius: 10px;
+    color: #8fa2b8; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); cursor: pointer; }
+  .tab.on { color: #4ef9ff; border-color: #4ef9ff; box-shadow: 0 0 12px rgba(78,249,255,.22); }
+  .tab.soon { opacity: .45; }
+
+  /* инпут (open) */
+  #bar { display: none; gap: 8px; padding: 10px 8px 10px; }
+  body.open #bar { display: flex; }
+  #input { flex: 1; height: 38px; border-radius: 10px; border: 1px solid rgba(78,249,255,.35); outline: none;
+    background: rgba(255,255,255,.04); color: #eef4fa; font: 13.5px "Ubuntu", sans-serif; padding: 0 12px; }
+  #input:focus { box-shadow: 0 0 14px rgba(78,249,255,.18); }
+  #send { width: 40px; border-radius: 10px; border: none; cursor: pointer; color: #04121c; font-size: 15px; font-weight: 700;
+    background: linear-gradient(135deg, #4ef9ff, #44e1aa); box-shadow: 0 4px 16px rgba(78,249,255,.3); }
+  #hint { display: none; padding: 0 10px 8px; color: #56687d; font-size: 11px; text-align: center; }
+  body.open #hint { display: block; }
+</style>
+</head>
+<body>
+<div id="scene">
+  <div id="tabs">
+    <span class="tab on" data-ch="all">Все</span>
+    <span class="tab soon" data-ch="global">Глобал — скоро</span>
+    <span class="tab soon" data-ch="trade">Торговля — скоро</span>
+    <span class="tab soon" data-ch="pm">ЛС — скоро</span>
+  </div>
+  <div id="feed"></div>
+  <div id="bar"><input id="input" maxlength="256" placeholder="Сообщение…"><button id="send">➤</button></div>
+  <div id="hint">Enter — отправить · Esc — свернуть</div>
+</div>
+<script>
+window.AquaLumenBridge = {
+  send: function (message) {
+    var encoded = typeof message === 'string' ? message : JSON.stringify(message);
+    location.hash = 'lumenipc=' + encodeURIComponent(encoded);
+  }
+};
+
+var feed = document.getElementById('feed');
+var input = document.getElementById('input');
+var MAX_LINES = 60;
+
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function colorize(s) {
+  return esc(s).replace(/\u00a7([0-9a-fk-or])/g, function (_, code) {
+    if ('0123456789abcdef'.includes(code)) return '</span><span class="c' + code + '">';
+    if (code === 'l') return '<span class="l">';
+    if (code === 'o') return '<span class="o">';
+    if (code === 'n') return '<span class="n">';
+    return '';
+  });
+}
+
+window.Chat = {
+  push: function (m) {
+    var div = document.createElement('div');
+    if (m.sys) {
+      div.className = 'line sysline';
+      div.innerHTML = '<div class="tx sys">' + colorize(m.text) + '</div>';
+      feed.appendChild(div);
+      while (feed.children.length > MAX_LINES) feed.removeChild(feed.firstChild);
+      feed.scrollTop = feed.scrollHeight;
+      return;
+    }
+    div.className = 'line' + (m.own ? ' own' : '');
+    div.style.setProperty('--c', m.color || '#4ef9ff');
+    var ava = m.head
+      ? '<img class="ava" src="' + m.head + '">'
+      : '<div class="ava letter">' + (m.nick ? m.nick[0] : '?') + '</div>';
+    div.innerHTML = ava + '<div>' + (m.nick ? '<span class="who">' + esc(m.nick) + '</span> ' : '')
+      + '<span class="tx">' + colorize(m.text) + '</span></div>';
+    feed.appendChild(div);
+    while (feed.children.length > MAX_LINES) feed.removeChild(feed.firstChild);
+    feed.scrollTop = feed.scrollHeight;
+  },
+  setSelf: function (head, nick) {
+    window._selfHead = head; window._selfNick = nick;
+  },
+  clear: function () { feed.innerHTML = ''; }
+};
+
+function send() {
+  var v = input.value.trim();
+  if (!v) return;
+  input.value = '';
+  AquaLumenBridge.send({ type: 'chat.send', text: v });
+}
+document.getElementById('send').addEventListener('click', send);
+input.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') { e.preventDefault(); send(); }
+});
+document.getElementById('tabs').addEventListener('click', function (e) {
+  var t = e.target.closest('.tab');
+  if (!t || t.classList.contains('soon')) return;
+  document.querySelectorAll('.tab').forEach(function (x) { x.classList.remove('on'); });
+  t.classList.add('on');
+  AquaLumenBridge.send({ type: 'chat.channel', channel: t.dataset.ch });
+});
+</script>
+</body>
+</html>

@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 public final class LumenWebBridge {
 
     public static final String HUB_URL = "mod://aqualumen/hub.html";
+    public static final String CHAT_URL = "mod://aqualumen/chat.html";
     private static final String IPC_MARKER = "#lumenipc=";
     private static final String BRIDGE_SCRIPT = """
             if (!window.AquaLumenBridge) {
@@ -25,7 +26,7 @@ public final class LumenWebBridge {
                 }
               };
             }
-            if (window.AquaLumen) {
+            if (window.AquaLumenBridge) {
               window.AquaLumenBridge.send({type:'ready'});
             }
             """;
@@ -36,7 +37,11 @@ public final class LumenWebBridge {
     private boolean bridgeInjected;
 
     public LumenWebBridge(int pixelWidth, int pixelHeight) {
-        this.url = HUB_URL;
+        this(HUB_URL, pixelWidth, pixelHeight);
+    }
+
+    public LumenWebBridge(String url, int pixelWidth, int pixelHeight) {
+        this.url = url;
         this.browser = LumenCefHost.create(url, pixelWidth, pixelHeight);
     }
 

@@ -66,6 +66,7 @@ public final class PendingDeliveryService {
             ).openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("X-AquaTech-Server-Key", key);
+            conn.setRequestProperty("User-Agent", "AquaTech-LumenUI/2.9.75");
             conn.setConnectTimeout(3000);
             conn.setReadTimeout(4000);
             if (conn.getResponseCode() != 200) {
@@ -115,6 +116,7 @@ public final class PendingDeliveryService {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
             conn.setRequestProperty("X-AquaTech-Server-Key", key);
+            conn.setRequestProperty("User-Agent", "AquaTech-LumenUI/2.9.75");
             conn.setConnectTimeout(3000);
             conn.setReadTimeout(3000);
             conn.setDoOutput(true);
