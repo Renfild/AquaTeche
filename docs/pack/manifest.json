@@ -1,5 +1,5 @@
 {
-  "version": "2.9.297",
+  "version": "2.9.298",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -35,11 +35,11 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.31-alpha.jar",
-      "md5": "8d145823ba27ea19ed3ecd8b367fe563",
-      "size": 2647764,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.31-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.31-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.32-alpha.jar",
+      "md5": "4e3f677ada8f6f68498ea7fdab31755e",
+      "size": 2648403,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.32-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.32-alpha.jar"
     },
     {
       "path": "mods/aquatech_ui-1.0.56.jar",
@@ -512,8 +512,8 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "d4c903879350144290ced25a814cdb75",
-      "size": 936541,
+      "md5": "ebff6a0d030b7b39d3757d43ce06705e",
+      "size": 936933,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -533,8 +533,8 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "d4c903879350144290ced25a814cdb75",
-      "size": 936541,
+      "md5": "ebff6a0d030b7b39d3757d43ce06705e",
+      "size": 936933,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
