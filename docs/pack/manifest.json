@@ -1,5 +1,5 @@
 {
-  "version": "2.9.295",
+  "version": "2.9.297",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -35,18 +35,18 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.28-alpha.jar",
-      "md5": "e0b51d1d96701ecc615aed5c44850890",
-      "size": 2501707,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.295/aqualumen-forge-1.20.1-0.3.28-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.28-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.31-alpha.jar",
+      "md5": "8d145823ba27ea19ed3ecd8b367fe563",
+      "size": 2647764,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.31-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.31-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.53.jar",
-      "md5": "dc5a941e7acd2f1cfaec6f8bb660961f",
-      "size": 2666798,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.295/aquatech_ui-1.0.53.jar",
-      "asset": "aquatech_ui-1.0.53.jar"
+      "path": "mods/aquatech_ui-1.0.56.jar",
+      "md5": "d71c29dad93503ae8b0e797c98d20e3f",
+      "size": 2766534,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.56.jar",
+      "asset": "aquatech_ui-1.0.56.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -505,23 +505,23 @@
     },
     {
       "path": "config/aqualumen/fish_shop.json",
-      "md5": "e8bb8616b8e6c2e7cec4b9a6eb616562",
-      "size": 18134,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__aqualumen__fish_shop.json",
+      "md5": "f514b006db190734ac227a37cce75be0",
+      "size": 18874,
+      "url": "https://aquateche.store/pack/config/aqualumen/fish_shop.json",
       "asset": "config__aqualumen__fish_shop.json"
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "61adbd2a5be00817770bcd5826bc9816",
-      "size": 833902,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__aqualumen__hub.html",
+      "md5": "d4c903879350144290ced25a814cdb75",
+      "size": 936541,
+      "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
       "path": "config/aqualumen/kits.json",
-      "md5": "3a434db8ff1b0bf590840a5703b3b637",
-      "size": 3214,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__aqualumen__kits.json",
+      "md5": "a6d026b8a13cddd2c85bb0f12d10ebad",
+      "size": 3106,
+      "url": "https://aquateche.store/pack/config/aqualumen/kits.json",
       "asset": "config__aqualumen__kits.json"
     },
     {
@@ -533,9 +533,9 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "61adbd2a5be00817770bcd5826bc9816",
-      "size": 833902,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__aqualumen__html__hub.html",
+      "md5": "d4c903879350144290ced25a814cdb75",
+      "size": 936541,
+      "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
     {
@@ -764,9 +764,9 @@
     },
     {
       "path": "kubejs/client_scripts/add_fishing_resource_tooltips.js",
-      "md5": "cfaa3098d61c0b68b0048bb412efe88d",
-      "size": 5811,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/kubejs__client_scripts__add_fishing_resource_tooltips.js",
+      "md5": "d2ecc0e4de9e28420d88722234561578",
+      "size": 5961,
+      "url": "https://aquateche.store/pack/kubejs/client_scripts/add_fishing_resource_tooltips.js",
       "asset": "kubejs__client_scripts__add_fishing_resource_tooltips.js"
     },
     {
@@ -820,9 +820,9 @@
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "68133237d4339c17d42924f530c5bd77",
-      "size": 16395,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/kubejs__server_scripts__30_aquatech_crafting.js",
+      "md5": "0ef441d9a81352498b1bd454bf820005",
+      "size": 16358,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
     {
