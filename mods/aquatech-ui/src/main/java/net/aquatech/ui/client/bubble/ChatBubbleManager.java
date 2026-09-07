@@ -10,6 +10,9 @@ public final class ChatBubbleManager {
     private ChatBubbleManager() {
     }
 
+    public record BubbleView(String message, int ageTicks, int totalTicks) {
+    }
+
     public static void addBubble(UUID sender, String message, int durationTicks) {
         String safeMessage = message == null ? "" : message.strip();
         if (safeMessage.isEmpty()) {
@@ -24,19 +27,21 @@ public final class ChatBubbleManager {
     public static void tick() {
         for (Map.Entry<UUID, Bubble> entry : BUBBLES.entrySet()) {
             Bubble bubble = entry.getValue();
+            bubble.ageTicks++;
             if (--bubble.ticksRemaining <= 0) {
                 BUBBLES.remove(entry.getKey(), bubble);
             }
         }
     }
 
-    public static String messageFor(UUID playerId) {
+    public static BubbleView viewFor(UUID playerId) {
         Bubble bubble = BUBBLES.get(playerId);
-        return bubble == null ? null : bubble.message;
+        return bubble == null ? null : new BubbleView(bubble.message, bubble.ageTicks, bubble.ageTicks + bubble.ticksRemaining);
     }
 
     private static final class Bubble {
         private final String message;
+        private int ageTicks;
         private int ticksRemaining;
 
         private Bubble(String message, int ticksRemaining) {

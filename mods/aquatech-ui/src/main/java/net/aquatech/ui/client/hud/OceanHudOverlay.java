@@ -19,9 +19,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 
 /**
- * Modern In-Game HUD / Sidebar Overlay designed to 100% match AquaLumen aesthetic:
- * 1. Profile & Status Card: Avatar, Nickname, Rank Pill, Balance with brand logo, Playtime with vector icon.
- * 2. Ocean & Diving Card: Status, Depth, Pressure, Protection & smooth Gradient Oxygen Bar.
+ * HUD "data first": one flat panel per context, hero numbers instead of
+ * label:value tables.
+ * 1. Profile panel — avatar + name + rank pill, balance hero, playtime.
+ * 2. Dive panel — collapsed to a slim "на поверхности" line on the surface,
+ *    expands underwater: depth hero, pressure status pill, oxygen bar.
  */
 public final class OceanHudOverlay {
 
@@ -47,7 +49,7 @@ public final class OceanHudOverlay {
         LumenTheme theme = LumenTheme.get();
         Font font = mc.font;
 
-        int w = Math.max(148, ModClientConfig.HUD_WIDTH.get());
+        int w = Math.max(160, ModClientConfig.HUD_WIDTH.get());
         float scale = (float) ModClientConfig.HUD_SCALE.get().doubleValue();
         int marginRight = ModClientConfig.HUD_MARGIN_RIGHT.get();
         int marginTop = ModClientConfig.HUD_MARGIN_TOP.get();
@@ -57,65 +59,10 @@ public final class OceanHudOverlay {
         int screenY = marginTop;
 
         PlayerProfile profile = ClientUiState.profile(player.getUUID());
-        String rankRaw = profile != null ? profile.rankDisplay() : "";
-        rankRaw = rankRaw == null ? "" : rankRaw.replaceAll("[\uE000-\uF8FF\uD800-\uDFFF]", "").trim();
-        if (rankRaw.isBlank()) rankRaw = LumenTheme.getRankTitle(profile != null ? profile.rankId() : "player");
-        rankRaw = rankRaw.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim().toUpperCase();
-        if (rankRaw.isBlank()) rankRaw = "ИГРОК";
-
+        String rankTitle = profile != null ? profile.rankDisplay() : "";
+        rankTitle = rankTitle == null ? "" : rankTitle.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim();
+        if (rankTitle.isBlank()) rankTitle = LumenTheme.getRankTitle(profile != null ? profile.rankId() : "player");
         int rankColor = LumenTheme.getRankColor(profile != null ? profile.rankId() : "player");
-
-        graphics.pose().pushPose();
-        graphics.pose().translate(screenX, screenY, 0);
-        graphics.pose().scale(scale, scale, 1f);
-
-        // ═════════════════════════════════════════════════════════════════════════
-        // 1. TOP PROFILE & STATS CARD
-        // ═════════════════════════════════════════════════════════════════════════
-        int profileCardH = 76;
-        int cardBg = theme.panelAlpha(0.90f);
-
-        // Background & crisp border
-        LumenGfx.roundedRect(graphics, 0, 0, w, profileCardH, 6, cardBg);
-        LumenGfx.outline(graphics, 0, 0, w, profileCardH, 6, theme.border());
-        LumenGfx.glow(graphics, 0, 0, w, 2, 6, theme.accentAlpha(0.12f), 2);
-
-        // Avatar 24x24
-        int avX = 8;
-        int avY = 8;
-        int avSize = 24;
-        UiDraw.drawPlayerHead(graphics, player.getUUID(), player.getGameProfile().getName(), avX, avY, avSize);
-        // Soft outline around avatar
-        LumenGfx.outline(graphics, avX - 1, avY - 1, avSize + 2, avSize + 2, 2, theme.accentAlpha(0.4f));
-        // Online status mint dot
-        graphics.fill(avX + avSize - 3, avY + avSize - 3, avX + avSize + 1, avY + avSize + 1, theme.success());
-
-        // Nickname
-        int textLeft = avX + avSize + 8;
-        String name = AquaFontRenderer.fit(font, player.getGameProfile().getName(), w - textLeft - 8);
-        AquaFontRenderer.draw(graphics, font, name, textLeft, avY + 1, theme.text());
-
-        // Rank Pill Badge
-        int rankBadgeW = AquaFontRenderer.width(font, rankRaw) + 8;
-        int rankBadgeH = 11;
-        int rankBadgeY = avY + 12;
-        LumenGfx.roundedRect(graphics, textLeft, rankBadgeY, rankBadgeW, rankBadgeH, 3, rankColor & 0x22FFFFFF);
-        LumenGfx.outline(graphics, textLeft, rankBadgeY, rankBadgeW, rankBadgeH, 3, rankColor & 0x66FFFFFF);
-        AquaFontRenderer.draw(graphics, font, rankRaw, textLeft + 4, rankBadgeY + 2, rankColor);
-
-        // Gradient Divider
-        LumenGfx.gradientRoundedH(graphics, 8, 36, w - 16, 1, 0, theme.accentAlpha(0.35f), 0x053B9DFF);
-
-        // Metric Rows
-        int bal = ClientUiState.sessionBalance();
-        drawBalanceRow(graphics, font, 6, 40, w - 12, 15, "Баланс", String.valueOf(bal), theme.gold(), theme);
-        drawLumenMetricRow(graphics, font, 6, 57, w - 12, 15, LumenIcons.Icon.CLOCK, "В игре", ClientUiState.getPlaytimeFormatted(), theme.text(), theme);
-
-        // ═════════════════════════════════════════════════════════════════════════
-        // 2. BOTTOM DIVING & OCEAN CARD
-        // ═════════════════════════════════════════════════════════════════════════
-        int immersionY = profileCardH + 6;
-        int immersionH = showPressure ? 82 : 60;
 
         PressureBridge.PressureInfo live = PressureBridge.fromPlayer(player);
         boolean inWater = live.inWater()
@@ -124,90 +71,104 @@ public final class OceanHudOverlay {
         int depth = inWater ? Math.max(0, PressureBridge.SEA_LEVEL_Y - player.blockPosition().getY()) : 0;
         int pressure = inWater ? live.effective() : 0;
         int tolerance = live.tolerance();
-
         if (inWater && live.depth() == 0 && depth > 0) {
             pressure = Math.max(0, depth - 10);
             tolerance = 10;
         }
-
-        LumenGfx.roundedRect(graphics, 0, immersionY, w, immersionH, 6, cardBg);
-        LumenGfx.outline(graphics, 0, immersionY, w, immersionH, 6, theme.border());
-
-        // Header with Wave vector icon
-        LumenIcons.draw(graphics, LumenIcons.Icon.WAVE, 8, immersionY + 6, 10, theme.accent());
-        AquaFontRenderer.draw(graphics, font, "ПОГРУЖЕНИЕ", 22, immersionY + 7, theme.accent());
-        LumenGfx.gradientRoundedH(graphics, 8, immersionY + 18, w - 16, 1, 0, theme.accentAlpha(0.35f), 0x053B9DFF);
-
-        String depthStr = inWater ? depth + " м" : "поверхность";
-        drawStatRow(graphics, font, 8, immersionY + 23, w - 16, "Глубина", depthStr, theme.text(), theme);
-
-        int curY = immersionY + 34;
-        if (showPressure) {
-            String pressureValue;
-            int color;
-            if (!inWater) {
-                pressureValue = "норма";
-                color = theme.accent();
-            } else {
-                pressureValue = pressure + " (" + pressureLabel(pressure) + ")";
-                color = pressureColor(pressure, theme);
-            }
-            drawStatRow(graphics, font, 8, curY, w - 16, "Давление", pressureValue, color, theme);
-            curY += 11;
-            String reserve = inWater ? (tolerance + " м") : "—";
-            drawStatRow(graphics, font, 8, curY, w - 16, "Защита", reserve, theme.textDim(), theme);
-            curY += 11;
-        }
-
         int maxAir = Math.max(1, player.getMaxAirSupply());
         int airPercent = Math.max(0, Math.min(100, player.getAirSupply() * 100 / maxAir));
-        drawStatRow(graphics, font, 8, curY, w - 16, "Кислород", airPercent + "%", theme.accent(), theme);
 
-        // Smooth Rounded Gradient Oxygen Bar
-        int barLeft = 8;
-        int barWidth = w - 16;
-        int barY = curY + 10;
-        LumenGfx.progressBar(graphics, barLeft, barY, barWidth, 3, airPercent / 100.0F,
-                0x3316202C, theme.accent(), theme.accentAlt());
+        graphics.pose().pushPose();
+        graphics.pose().translate(screenX, screenY, 0);
+        graphics.pose().scale(scale, scale, 1f);
 
-        graphics.pose().popPose();
-    }
+        int pad = 8;
+        int cardBg = theme.panelAlpha(0.88f);
 
-    private static void drawBalanceRow(GuiGraphics graphics, Font font, int x, int y, int rowW, int rowH,
-                                       String label, String value, int valColor, LumenTheme theme) {
-        LumenGfx.roundedRect(graphics, x, y, rowW, rowH, 4, theme.raised() & 0x77FFFFFF);
-        LumenGfx.outline(graphics, x, y, rowW, rowH, 4, theme.borderMuted());
+        // ── Profile panel: identity row + balance hero ─────────────────────────
+        int headerH = 58;
+        LumenGfx.roundedRect(graphics, 0, 0, w, headerH, 8, cardBg);
+        LumenGfx.outline(graphics, 0, 0, w, headerH, 8, theme.border());
+        // rank hairline on the top edge — card identity
+        LumenGfx.gradientRoundedH(graphics, 9, 1, w - 18, 1, 0, rankColor & 0x66FFFFFF, 0x00000000);
+
+        UiDraw.drawPlayerHead(graphics, player.getUUID(), player.getGameProfile().getName(), pad, 7, 20);
+        String name = AquaFontRenderer.fit(font, player.getGameProfile().getName(), w - pad - 20 - 8);
+        AquaFontRenderer.draw(graphics, font, name, pad + 26, 9, theme.text());
+
+        int pillW = AquaFontRenderer.width(font, rankTitle) + 8;
+        int pillX = w - pad - pillW;
+        LumenGfx.roundedRect(graphics, pillX, 8, pillW, 12, 3, rankColor & 0x22FFFFFF);
+        LumenGfx.outline(graphics, pillX, 8, pillW, 12, 3, rankColor & 0x55FFFFFF);
+        AquaFontRenderer.draw(graphics, font, rankTitle, pillX + 4, 10, rankColor);
+
+        LumenGfx.gradientRoundedH(graphics, pad, 32, w - pad * 2, 1, 0, theme.accentAlpha(0.22f), 0x00000000);
+
+        // Balance hero: coin + big gold number + dim caption
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        graphics.blit(COIN_TEXTURE, x + 4, y + 2, 11, 11, 0, 0, 32, 32, 32, 32);
-        AquaFontRenderer.draw(graphics, font, label, x + 19, y + 3, theme.textDim());
-        String fitted = AquaFontRenderer.fit(font, value, 60);
-        int vW = AquaFontRenderer.width(font, fitted);
-        AquaFontRenderer.draw(graphics, font, fitted, x + rowW - vW - 5, y + 3, valColor);
-    }
+        graphics.blit(COIN_TEXTURE, pad, 41, 12, 12, 0, 0, 32, 32, 32, 32);
+        int bal = ClientUiState.sessionBalance();
+        String balStr = AquaFontRenderer.fit(font, String.valueOf(bal), 74);
+        graphics.pose().pushPose();
+        graphics.pose().scale(1.18F, 1.18F, 1F);
+        AquaFontRenderer.draw(graphics, font, balStr, Math.round((pad + 16) / 1.18F), Math.round(40 / 1.18F), theme.gold());
+        graphics.pose().popPose();
+        int balW = AquaFontRenderer.width(font, balStr);
+        AquaFontRenderer.draw(graphics, font, "монет", pad + 16 + Math.round(balW * 1.18F) + 5, 47, theme.textDim());
 
-    private static void drawLumenMetricRow(GuiGraphics graphics, Font font, int x, int y, int rowW, int rowH,
-                                           LumenIcons.Icon icon, String label, String value, int valColor, LumenTheme theme) {
-        LumenGfx.roundedRect(graphics, x, y, rowW, rowH, 4, theme.raised() & 0x77FFFFFF);
-        LumenGfx.outline(graphics, x, y, rowW, rowH, 4, theme.borderMuted());
+        // Playtime at the right edge
+        String playtime = ClientUiState.getPlaytimeFormatted();
+        LumenIcons.draw(graphics, LumenIcons.Icon.CLOCK, w - pad - AquaFontRenderer.width(font, playtime) - 13, 45, 9, theme.textDim());
+        AquaFontRenderer.draw(graphics, font, playtime, w - pad - AquaFontRenderer.width(font, playtime), 45, theme.textDim());
 
-        LumenIcons.draw(graphics, icon, x + 5, y + 2.5F, 10, valColor);
+        // ── Dive panel: collapsed on the surface, expands underwater ───────────
+        int diveY = headerH + 5;
+        if (!inWater) {
+            int diveH = 24;
+            LumenGfx.roundedRect(graphics, 0, diveY, w, diveH, 8, cardBg);
+            LumenGfx.outline(graphics, 0, diveY, w, diveH, 8, theme.border());
+            LumenIcons.draw(graphics, LumenIcons.Icon.WAVE, pad, diveY + 7, 10, theme.textDim());
+            AquaFontRenderer.draw(graphics, font, "на поверхности", pad + 15, diveY + 8, theme.textDim());
+            graphics.pose().popPose();
+            return;
+        }
 
-        AquaFontRenderer.draw(graphics, font, label, x + 19, y + 3, theme.textDim());
+        int diveH = 78;
+        LumenGfx.roundedRect(graphics, 0, diveY, w, diveH, 8, cardBg);
+        LumenGfx.outline(graphics, 0, diveY, w, diveH, 8, theme.border());
+        LumenIcons.draw(graphics, LumenIcons.Icon.WAVE, pad, diveY + 7, 10, theme.accent());
+        AquaFontRenderer.draw(graphics, font, "ПОГРУЖЕНИЕ", pad + 15, diveY + 8, theme.accent());
+        LumenGfx.gradientRoundedH(graphics, pad, diveY + 20, w - pad * 2, 1, 0, theme.accentAlpha(0.22f), 0x00000000);
 
-        String fitted = AquaFontRenderer.fit(font, value, 60);
-        int vW = AquaFontRenderer.width(font, fitted);
-        AquaFontRenderer.draw(graphics, font, fitted, x + rowW - vW - 5, y + 3, valColor);
-    }
+        // Depth hero
+        graphics.pose().pushPose();
+        graphics.pose().scale(1.3F, 1.3F, 1F);
+        AquaFontRenderer.draw(graphics, font, depth + " м", Math.round(pad / 1.3F), Math.round((diveY + 27) / 1.3F), theme.text());
+        graphics.pose().popPose();
 
-    private static void drawStatRow(GuiGraphics graphics, Font font, int x, int y, int rowW, String label, String value, int valColor, LumenTheme theme) {
-        AquaFontRenderer.draw(graphics, font, label, x, y, theme.textDim());
-        int maxVal = rowW - AquaFontRenderer.width(font, label) - 6;
-        String fitted = AquaFontRenderer.fit(font, value, Math.max(20, maxVal));
-        int vW = AquaFontRenderer.width(font, fitted);
-        AquaFontRenderer.draw(graphics, font, fitted, x + rowW - vW, y, valColor);
+        // Pressure status pill (right)
+        String pressureValue = pressure <= 0 ? "норма" : pressureLabel(pressure);
+        int pColor = pressureColor(pressure, theme);
+        int pw = AquaFontRenderer.width(font, pressureValue) + 10;
+        LumenGfx.roundedRect(graphics, w - pad - pw, diveY + 30, pw, 13, 3, pColor & 0x22FFFFFF);
+        LumenGfx.outline(graphics, w - pad - pw, diveY + 30, pw, 13, 3, pColor & 0x55FFFFFF);
+        AquaFontRenderer.draw(graphics, font, pressureValue, w - pad - pw + 5, diveY + 32, pColor);
+
+        if (showPressure) {
+            AquaFontRenderer.draw(graphics, font, "запас защиты: " + tolerance + " м", pad, diveY + 50, theme.textDim());
+        }
+
+        // Oxygen bar with inline percent
+        AquaFontRenderer.draw(graphics, font, "O₂", pad, diveY + 62, theme.textDim());
+        String airText = airPercent + "%";
+        AquaFontRenderer.draw(graphics, font, airText, w - pad - AquaFontRenderer.width(font, airText), diveY + 62, theme.accent());
+        LumenGfx.progressBar(graphics, pad, diveY + 73, w - pad * 2, 3, airPercent / 100.0F,
+                0x3316202C, theme.accent(), theme.accentAlt());
+
+        graphics.pose().popPose();
     }
 
     private static String pressureLabel(int pressure) {
