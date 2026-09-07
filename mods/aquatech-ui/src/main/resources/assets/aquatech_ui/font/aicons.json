@@ -1,0 +1,283 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/anchor.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/bomb.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/candy.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/chest.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/clover.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/cog.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/compass.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/crystals.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/dialogue.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/earth.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/emerald.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/exclamation.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/fire.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/fish.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/fish_grey.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/flag.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/flag_white.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/helmet.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/leaf.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/lightbulb.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/lock.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/magnet.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/medal_bronze.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/medal_gold.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/medal_silver.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/money.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/no.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/palmtree.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/seashell.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/starfish.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "aquatech_ui:icons_pack/yes.png",
+      "ascent": 10,
+      "height": 12,
+      "chars": [
+        ""
+      ]
+    }
+  ]
+}

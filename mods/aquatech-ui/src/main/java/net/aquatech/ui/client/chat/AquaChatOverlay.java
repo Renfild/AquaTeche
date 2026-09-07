@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 import java.util.Locale;
+import net.aquatech.ui.client.theme.LumenTheme;
 
 public final class AquaChatOverlay {
 
@@ -296,8 +297,15 @@ public final class AquaChatOverlay {
             AquaFontRenderer.drawNick(graphics, font, sender, curX, nameY, applyAlpha(0xFFF8FAFC, alpha));
             curX += AquaFontRenderer.nickWidth(font, sender) + 5;
 
-            // Nanobanano Frosted Glass Rank Badge Pill
+            // Nanobanano Frosted Glass Rank Badge Pill (+ wordmark glyph)
+            String rankGlyph = LumenTheme.getRankGlyph(msg.getRankId());
             String rank = formatRankBadge(msg.getRankDisplay(), msg.getRankColor());
+            if (!rankGlyph.isEmpty()) {
+                Component g = Component.literal(rankGlyph).withStyle(net.minecraft.network.chat.Style.EMPTY
+                        .withFont(new net.minecraft.resources.ResourceLocation("aquatech_ui", "ranks")));
+                AquaFontRenderer.draw(graphics, font, g.getString(), curX, nameY + 1, applyAlpha(0xFFFFFFFF, alpha));
+                curX += 11;
+            }
             if (!rank.isEmpty()) {
                 int rCol = getNanobananoRankColor(rank, msg.getRankColor());
                 int rw = AquaFontRenderer.width(font, rank) + 8;

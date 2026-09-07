@@ -51,7 +51,11 @@ public final class NameplateHandler {
 
         Font font = minecraft.font;
         Component nameComp = AquaFontRenderer.text(baseName);
-        Component rankComp = AquaFontRenderer.text(" " + rankText + " ");
+        String glyph = LumenTheme.getRankGlyph(rankId);
+        Component rankComp = glyph.isEmpty()
+                ? AquaFontRenderer.text(" " + rankText + " ")
+                : Component.literal(glyph).withStyle(net.minecraft.network.chat.Style.EMPTY
+                        .withFont(new net.minecraft.resources.ResourceLocation("aquatech_ui", "ranks")));
         var view = ChatBubbleManager.viewFor(player.getUUID());
 
         var pose = event.getPoseStack();
@@ -70,7 +74,7 @@ public final class NameplateHandler {
 
             // Rank pill above the name: tinted translucent bar + rank-colored text
             float pillW = font.width(rankComp);
-            font.drawInBatch(rankComp, -font.width(rankComp) / 2F, -16, rankColor, false,
+            font.drawInBatch(rankComp, -font.width(rankComp) / 2F, -16, glyph.isEmpty() ? rankColor : 0xFFFFFFFF, false,
                     pose.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, light);
 
             // Chat bubble above the pill: fade-in/out + slide-up

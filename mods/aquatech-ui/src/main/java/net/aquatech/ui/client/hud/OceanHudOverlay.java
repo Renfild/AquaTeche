@@ -17,6 +17,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.network.chat.Component;
 
 /**
  * HUD "data first": one flat panel per context, hero numbers instead of
@@ -63,6 +64,7 @@ public final class OceanHudOverlay {
         rankTitle = rankTitle == null ? "" : rankTitle.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim();
         if (rankTitle.isBlank()) rankTitle = LumenTheme.getRankTitle(profile != null ? profile.rankId() : "player");
         int rankColor = LumenTheme.getRankColor(profile != null ? profile.rankId() : "player");
+        String rankGlyph = LumenTheme.getRankGlyph(profile != null ? profile.rankId() : "player");
 
         PressureBridge.PressureInfo live = PressureBridge.fromPlayer(player);
         boolean inWater = live.inWater()
@@ -96,11 +98,18 @@ public final class OceanHudOverlay {
         String name = AquaFontRenderer.fit(font, player.getGameProfile().getName(), w - pad - 20 - 8);
         AquaFontRenderer.draw(graphics, font, name, pad + 26, 9, theme.text());
 
-        int pillW = AquaFontRenderer.width(font, rankTitle) + 8;
+        boolean hasGlyph = !rankGlyph.isEmpty();
+        int pillW = hasGlyph ? 20 : AquaFontRenderer.width(font, rankTitle) + 8;
         int pillX = w - pad - pillW;
         LumenGfx.roundedRect(graphics, pillX, 8, pillW, 12, 3, rankColor & 0x22FFFFFF);
         LumenGfx.outline(graphics, pillX, 8, pillW, 12, 3, rankColor & 0x55FFFFFF);
-        AquaFontRenderer.draw(graphics, font, rankTitle, pillX + 4, 10, rankColor);
+        if (hasGlyph) {
+            Component g = Component.literal(rankGlyph).withStyle(net.minecraft.network.chat.Style.EMPTY
+                    .withFont(new net.minecraft.resources.ResourceLocation("aquatech_ui", "ranks")));
+            graphics.drawString(font, g, pillX + 4, 9, 0xFFFFFFFF, false);
+        } else {
+            AquaFontRenderer.draw(graphics, font, rankTitle, pillX + 4, 10, rankColor);
+        }
 
         LumenGfx.gradientRoundedH(graphics, pad, 32, w - pad * 2, 1, 0, theme.accentAlpha(0.22f), 0x00000000);
 

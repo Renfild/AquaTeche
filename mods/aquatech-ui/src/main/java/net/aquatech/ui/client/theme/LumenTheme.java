@@ -51,6 +51,35 @@ public record LumenTheme(
         return (a << 24) | (accent & 0x00FFFFFF);
     }
 
+    /** PUA char whose ranks-font glyph is this rank's wordmark art. */
+    public static String getRankGlyph(String rankId) {
+        if (rankId == null) return "";
+        String id = rankId.toLowerCase(java.util.Locale.ROOT).trim();
+        return switch (id) {
+            case "owner", "создатель", "владелец" -> "";
+            case "admin", "администратор" -> "";
+            case "dev", "developer", "разработчик" -> "";
+            case "mod", "moderator", "модератор" -> "";
+            case "staff", "персонал" -> "";
+            case "helper", "хелпер" -> "";
+            case "manager", "менеджер", "куратор" -> "";
+            case "magnate", "магнат" -> "";
+            case "mvp" -> "";
+            case "vipplus", "vip+" -> "";
+            case "vip", "вип" -> "";
+            case "streamer", "стример" -> "";
+            case "twitch" -> "";
+            case "youtuber", "youtube", "ютубер" -> "";
+            case "artist", "артист" -> "";
+            case "builder", "билдер", "строитель" -> "";
+            case "friend", "друг" -> "";
+            case "trainee", "стажер", "стажёр" -> "";
+            case "player", "игрок" -> "";
+            case "npc", "нпс" -> "";
+            default -> "";
+        };
+    }
+
     public static int getRankColor(String rankId) {
         if (rankId == null) return 0xFF81ECEC;
         String id = rankId.toLowerCase(java.util.Locale.ROOT).trim();

@@ -15,6 +15,7 @@ import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
+import net.minecraft.network.chat.Component;
 
 /**
  * Modern Apple Bento Minimal TAB Overlay:
@@ -276,11 +277,18 @@ public final class OceanTabOverlay {
                 rankClean = custom;
             }
         }
+        String rankGlyph = LumenTheme.getRankGlyph(profile.rankId());
         String rank = AquaFontRenderer.fit(font, rankClean, maxNameW);
         int pillW = AquaFontRenderer.width(font, rank) + 8;
+        if (!rankGlyph.isEmpty()) pillW += 12;
         LumenGfx.roundedRect(graphics, textX, y + 15, pillW, 12, 3, rankColor & 0x22FFFFFF);
         LumenGfx.outline(graphics, textX, y + 15, pillW, 12, 3, rankColor & 0x55FFFFFF);
         AquaFontRenderer.draw(graphics, font, rank, textX + 4, y + 17, rankColor);
+        if (!rankGlyph.isEmpty()) {
+            Component g = Component.literal(rankGlyph).withStyle(net.minecraft.network.chat.Style.EMPTY
+                    .withFont(new net.minecraft.resources.ResourceLocation("aquatech_ui", "ranks")));
+            graphics.drawString(font, g, textX + pillW - font.width(g) - 3, y + 16, 0xFFFFFFFF, false);
+        }
 
         // Latency text
         AquaFontRenderer.draw(graphics, font, pingStr, right - pingW, y + 12, pingCol);

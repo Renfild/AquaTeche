@@ -160,6 +160,20 @@ hub_html_raw = r'''<!doctype html>
     .brand-mark{background:linear-gradient(135deg,var(--prank,var(--accent)),var(--accent2))}
     .topbar{border-bottom-color:var(--prank-soft,var(--line))}
     .owned-check{color:var(--success);display:inline-grid;place-items:center;vertical-align:-2px;margin-left:6px}
+    .offer.lot-card{flex-direction:row;align-items:center;text-align:left;gap:12px;padding:11px 14px;min-height:0;border-radius:14px}
+    .offer.lot-card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:rgba(255,255,255,.028);transform:none}
+    .lot-icon{width:40px;height:40px;flex:0 0 auto;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.05)}
+    .lot-icon img,.lot-icon .lot-fb svg{width:26px;height:26px;object-fit:contain}
+    .lot-icon .lot-fb{width:100%;height:100%}
+    .lot-body{min-width:0;flex:1;display:grid;gap:3px}
+    .lot-title{font-size:12.5px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .lot-count{color:var(--muted);font-weight:600;font-size:11px}
+    .lot-seller{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .lot-side{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex:0 0 auto}
+    .lot-price{font-size:12.5px;font-weight:750;color:var(--gold);display:flex;align-items:center;gap:4px;font-variant-numeric:tabular-nums}
+    .lot-price img{width:13px;height:13px;image-rendering:pixelated}
+    .lot-actions{display:flex;gap:6px}
+    .lot-card .button{font-size:10.5px;padding:0 12px;min-height:28px}
     .owned-check svg{width:13px;height:13px}
     
     /* Case Opening Modal & Roulette */
@@ -404,6 +418,23 @@ try {
     $("modalConfirm").onclick=()=>{$("modalLayer").classList.remove("open");send({type:"modal",open:false});action(act,arg)};
     $("modalCancel").onclick=()=>{$("modalLayer").classList.remove("open");send({type:"modal",open:false})};
     $("modalLayer").classList.add("open");send({type:"modal",open:true});
+  }
+
+  function bagIcon(cls) {
+    return `<svg viewBox="0 0 24 24" class="${cls}" fill="none" stroke="var(--muted)" stroke-width="1.5"><path d="M4 8.5 6 5h12l2 3.5v3H4Z"/><path d="M4 11.5V20h16v-8.5"/></svg>`;
+  }
+
+  function lotIconHtml(lot, cls) {
+    const tex = resolveItemIcon(lot.label || "", lot.itemId || "");
+    if (tex) return `<img src="${tex}" class="${cls}" alt="">`;
+    if (lot.itemId) {
+      const file = String(lot.itemId).replace(/^[^:]+:/, "").replace(/[^a-z0-9_]/g, "_") + ".png";
+      const url = "https://aquateche.store/assets/images/items/" + file;
+      const fb = bagIcon(cls).replace(/"/g, "&quot;");
+      return `<img src="${url}" class="${cls}" alt="" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='grid'">` +
+             `<span class="${cls} lot-fb" style="display:none;place-items:center">${bagIcon(cls)}</span>`;
+    }
+    return bagIcon(cls);
   }
 
   function resolveItemIcon(label, itemId) {
@@ -1220,43 +1251,34 @@ try {
   function auctionView(s) {
     const lots = s.market || [];
     const activeCount = lots.length;
-    let cards = "";
 
-    if (lots.length === 0) {
-      cards = `<div class="empty-card" style="grid-column:1/-1;text-align:center;padding:36px 20px;background:rgba(255,255,255,.02);border:1px dashed var(--line);border-radius:16px;">
+    const cards = lots.map((lot, i) => {
+      const isSelf = Boolean(lot.self);
+      const btn = isSelf
+        ? `<button class="button cancel-auction" data-id="${lot.id}" style="background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.35);color:var(--danger);">Снять</button>`
+        : `<button class="button primary buy-auction" data-id="${lot.id}">Купить</button>`;
+      const seller = esc(lot.seller || 'Игрок') + (isSelf ? ' · вы' : '');
+      return `<article class="card offer lot-card" style="--i:${i}">
+        <div class="lot-icon">${lotIconHtml(lot, "mc-icon")}</div>
+        <div class="lot-body">
+          <div class="lot-title" title="${esc(lot.label || lot.itemId || '')}">${esc(lot.label || lot.itemId || 'Предмет')}${(lot.count || 1) > 1 ? ` <span class="lot-count">×${num(lot.count)}</span>` : ""}</div>
+          <div class="lot-seller">${seller}</div>
+        </div>
+        <div class="lot-side">
+          <span class="lot-price">${num(lot.price)}${coinIco()}</span>
+          ${btn}
+        </div>
+      </article>`;
+    }).join("");
+
+    const emptyCard = lots.length === 0 ? `<div class="empty-card" style="grid-column:1/-1;text-align:center;padding:36px 20px;background:rgba(255,255,255,.02);border:1px dashed var(--line);border-radius:16px;">
         <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--muted)" stroke-width="1.5" style="margin-bottom:8px;"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>
         <h3 style="font-size:15px;margin:0 0 6px;color:var(--text);">На бирже пока нет активных лотов</h3>
         <p style="font-size:11.5px;color:var(--muted);margin:0 0 14px;line-height:1.4;">Выставите первый предмет на продажу другим игрокам прямо сейчас!</p>
         <div style="font-size:11px;color:var(--accent);background:rgba(47,224,192,.08);padding:6px 14px;border-radius:8px;display:inline-block;border:1px solid rgba(47,224,192,.2);">
           Возьмите предмет в руку и напишите в чат: <b style="color:var(--gold);">/ah sell &lt;цена&gt;</b>
         </div>
-      </div>`;
-    } else {
-      cards = lots.map(lot => {
-        const icon = getItemIconHtml(lot.label, lot.itemId, "mc-icon");
-        const isSelf = Boolean(lot.self);
-        const actionBtn = isSelf
-          ? `<button class="button cancel-auction" data-id="${lot.id}" style="background:rgba(255,107,107,.15);border-color:rgba(255,107,107,.4);color:var(--danger);font-weight:700;">Снять</button>`
-          : `<button class="button primary buy-auction" data-id="${lot.id}">Купить</button>`;
-
-        return `<article class="card offer" style="min-height:130px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;">
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-              <span class="offer-badge" style="position:static;">x${num(lot.count || 1)}</span>
-              <span style="font-size:10px;color:var(--muted);">Продавец: <b style="color:${isSelf ? 'var(--gold)' : 'var(--accent)'};">${esc(lot.seller || 'Игрок')}${isSelf ? ' (Вы)' : ''}</b></span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
-              ${icon}
-              <h3 style="font-size:13.5px;margin:0;font-weight:700;line-height:1.2;">${esc(lot.label || lot.itemId || 'Предмет')}</h3>
-            </div>
-          </div>
-          <div class="offer-foot" style="margin-top:10px;">
-            <span class="price" style="color:var(--gold);font-weight:800;">${coins(lot.price)}</span>
-            ${actionBtn}
-          </div>
-        </article>`;
-      }).join("");
-    }
+      </div>` : "";
 
     return `<div class="view">${title("Аукцион и Рынок", "Покупайте и продавайте предметы между игроками")}
       <div class="grid two" style="margin-bottom:12px;">
@@ -1272,7 +1294,7 @@ try {
         </section>
       </div>
       <div class="section-title"><b>Свежие предложения</b><span>Обновляется в реальном времени</span></div>
-      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));">${cards}</div>
+      <div class="stagger" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:8px;">${emptyCard}${cards}</div>
     </div>`;
   }
 
