@@ -206,13 +206,15 @@
       filter:drop-shadow(0 6px 14px rgba(0,0,0,.8));
     }
 
-    .case-reveal{min-height:108px;display:grid;place-items:center;align-content:center;gap:7px}
-    .case-reveal .win-title{font-size:10px;letter-spacing:.3em;color:var(--muted);font-weight:700}
+    .case-reveal{min-height:108px;display:grid;place-items:center;align-content:center;gap:7px;animation:reveal-in .32s ease-out}
+    .case-reveal .win-title{font-size:11px;letter-spacing:.08em;color:var(--muted);font-weight:700}
     .case-reveal .win-item{font-size:22px;font-weight:800}
     .case-reveal .win-rarity{padding:3px 12px;border:1px solid;border-radius:999px;font-size:10px;letter-spacing:.14em;font-weight:700}
     .case-reveal .win-amount{color:var(--gold);font-size:13px;font-weight:700}
-    .case-wait{min-height:108px;display:grid;place-items:center;color:var(--muted);font-size:12px}
-    .case-actions{display:flex;justify-content:center;gap:10px;margin-top:6px;min-height:32px}
+    .case-wait{min-height:108px;display:grid;place-items:center;color:var(--muted);font-size:12px;text-align:center;padding:0 16px}
+    .case-actions{display:flex;justify-content:center;gap:10px;margin-top:6px;min-height:36px}
+    .case-actions .button{min-width:132px}
+    @keyframes reveal-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
     .confetti{position:fixed;left:50%;top:42%;z-index:30;width:8px;height:14px;border-radius:2px;pointer-events:none;animation:confetti-fly 1.35s ease-out forwards}
     @keyframes confetti-fly{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--cx),var(--cy)) rotate(var(--cr))}}
     @media(max-width:900px){.stage{padding:10px}.hub{width:98vw;height:96vh;grid-template-columns:166px 1fr}.brand{min-width:156px}.chips .chip:nth-child(2){display:none}.content{padding:15px}.grid.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(4,1fr)}.store-grid,.case-grid{grid-template-columns:repeat(2,1fr)}}
@@ -463,22 +465,24 @@ try {
       } catch (e) {}
     },
     win(big) {
+      this.ensure();
       if (!this.ctx || !this.master) return;
       try {
         const t = this.ctx.currentTime;
-        const notes = big ? [523.25, 659.25, 783.99, 1046.50, 1318.51] : [523.25, 659.25, 783.99, 1046.50];
+        const notes = big ? [523.25, 659.25, 783.99, 1046.50] : [392.00, 523.25, 659.25, 783.99];
         notes.forEach((f, i) => {
+          const start = t + i * 0.11;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
-          osc.type = "sine";
-          osc.frequency.setValueAtTime(f, t + i * 0.09);
-          gain.gain.setValueAtTime(0, t + i * 0.09);
-          gain.gain.linearRampToValueAtTime(big ? 0.06 : 0.045, t + i * 0.09 + 0.025);
-          gain.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.09 + (big ? 0.55 : 0.38));
+          osc.type = i % 2 ? "triangle" : "sine";
+          osc.frequency.setValueAtTime(f, start);
+          gain.gain.setValueAtTime(0.0001, start);
+          gain.gain.linearRampToValueAtTime(big ? 0.08 : 0.06, start + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.42);
           osc.connect(gain);
           gain.connect(this.master);
-          osc.start(t + i * 0.09);
-          osc.stop(t + i * 0.09 + 0.6);
+          osc.start(start);
+          osc.stop(start + 0.45);
         });
       } catch (e) {}
     }
@@ -492,6 +496,7 @@ try {
     def: null,
     raf: 0,
     timeout: 0,
+    pending: null,
     W: 116,
     pos: 0,
     tiles: [],
@@ -552,7 +557,7 @@ try {
       $("caseSub").innerHTML = 'Стоимость: ' + coins(def.cost) + ' · ' + this.label(def.rarity);
       $("caseReveal").className = "case-wait";
       $("caseReveal").innerHTML = "<span>Крутим рулетку…</span>";
-      $("caseActions").innerHTML = "";
+      this.bindActions("spin");
       $("caseLayer").classList.add("open");
       send({ type: "modal", open: true });
 
@@ -582,20 +587,58 @@ try {
       $("caseStrip").innerHTML = this.tiles.map(l => this.tileHtml(l)).join("");
       $("caseStrip").style.transform = "translate3d(0, 0, 0)";
 
-      this.timeout = setTimeout(() => this.fail(), 7000);
+      this.timeout = setTimeout(() => this.fail(), 12000);
+      if (this.pending && (!this.pending.caseId || this.pending.caseId === this.def.id)) {
+        const queued = this.pending;
+        this.pending = null;
+        requestAnimationFrame(() => this.deliver(queued));
+      }
+    },
+
+    bindActions(mode) {
+      const closeBtn = '<button class="button" id="caseDone">Закрыть</button>';
+      if (mode !== "done") {
+        $("caseActions").innerHTML = closeBtn;
+        $("caseDone").onclick = () => this.close();
+        return;
+      }
+      const snap = (state.payload && state.payload.snapshot) || {};
+      const next = ((snap.cases || []).find(c => c.id === this.def.id)) || this.def;
+      const canAgain = caseBudget(next).can(1);
+      const again = canAgain
+        ? '<button class="button primary" id="caseAgain">Открыть ещё</button>'
+        : '<button class="button primary" id="caseAgain" disabled>Открыть ещё</button>';
+      $("caseActions").innerHTML = again + closeBtn;
+      $("caseAgain").onclick = () => {
+        const snapNow = (state.payload && state.payload.snapshot) || {};
+        const c = (snapNow.cases || []).find(x => x.id === this.def.id) || this.def;
+        if (!c || !caseBudget(c).can(1)) return;
+        this.open(c);
+        action("case.open", c.id);
+      };
+      $("caseDone").onclick = () => this.close();
     },
 
     deliver(result) {
-      if (!this.active) {
-        const amt = (result.amount > 1) ? (' x' + result.amount) : '';
-        toast('Кейс: ' + this.clean(result.label) + amt);
+      if (!result) return;
+      const mine = this.def && (!result.caseId || result.caseId === this.def.id);
+      if (!this.active || !mine) {
+        this.pending = result;
+        return;
+      }
+      if (this.revealed) {
+        if ($("caseReveal").classList.contains("case-reveal")) return;
+        this.revealed = false;
+        this.delivered = true;
+        clearTimeout(this.timeout);
+        this.reveal(result);
         return;
       }
       if (this.delivered) return;
       this.delivered = true;
       clearTimeout(this.timeout);
 
-      const animations = state.payload.appearance ? state.payload.appearance.animations : true;
+      const animations = !(state.payload && state.payload.appearance && state.payload.appearance.animations === false);
       if (!animations) {
         this.reveal(result);
         return;
@@ -657,47 +700,42 @@ try {
       if (!result) { this.fail(); return; }
 
       action("case.claim", "");
-
       const col = this.color(result.rarity);
-      const strip = $("caseStrip");
-      if (this.resultIndex >= 0 && strip.children[this.resultIndex]) {
-        const winTile = strip.children[this.resultIndex];
-        winTile.classList.add("win");
-        winTile.style.borderColor = col;
-        winTile.style.boxShadow = `0 0 35px ${col}88, inset 0 0 20px ${col}33`;
+      try {
+        const strip = $("caseStrip");
+        if (this.resultIndex >= 0 && strip.children[this.resultIndex]) {
+          const winTile = strip.children[this.resultIndex];
+          winTile.classList.add("win");
+          winTile.style.borderColor = col;
+          winTile.style.boxShadow = `0 0 35px ${col}88, inset 0 0 20px ${col}33`;
+        }
+
+        const iconHtml = getItemIconHtml(result.label, result.item, "mc-icon-lg", result.type);
+        const amountHtml = result.amount > 1
+          ? ('<span class="win-amount">× ' + (result.type === "coins" ? coins(result.amount) : (result.type === "gems" ? (num(result.amount) + ' гемов') : (num(result.amount) + ' шт.'))) + '</span>')
+          : '';
+        const winLabel = esc(this.clean(result.label));
+        const rarLabel = this.label(result.rarity);
+
+        $("caseReveal").className = "case-reveal";
+        $("caseReveal").innerHTML = '<span class="win-title">Вам выпало</span>'
+          + '<span style="display:flex;align-items:center;gap:12px">'
+          + iconHtml
+          + '<span class="win-item" style="color:' + col + '">' + winLabel + '</span>'
+          + '</span>'
+          + amountHtml
+          + '<span class="win-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '18">' + rarLabel + '</span>';
+        $("caseSub").textContent = "Награда уже в инвентаре";
+      } catch (e) {
+        $("caseReveal").className = "case-reveal";
+        $("caseReveal").innerHTML = '<span class="win-title">Вам выпало</span><span class="win-item">' + esc(this.clean((result && result.label) || "предмет")) + '</span>';
       }
 
-      const amountHtml = result.amount > 1
-        ? ('<span class="win-amount">× ' + (result.type === "coins" ? coins(result.amount) : (result.type === "gems" ? (num(result.amount) + ' гемов') : (num(result.amount) + ' шт.'))) + '</span>')
-        : '';
-      const winLabel = esc(this.clean(result.label));
-      const rarLabel = this.label(result.rarity);
+      try {
+        Sfx.win(result.rarity === "epic" || result.rarity === "legendary" || result.rarity === "mythic" || result.rarity === "exotic");
+      } catch (e) {}
 
-      $("caseReveal").className = "case-reveal";
-      $("caseReveal").innerHTML = '<span class="win-title">ВЫИГРЫШ</span>'
-        + '<span style="display:flex;align-items:center;gap:12px">'
-        + iconHtml
-        + '<span class="win-item" style="color:' + col + '">' + winLabel + '</span>'
-        + '</span>'
-        + amountHtml
-        + '<span class="win-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '18">' + rarLabel + '</span>';
-
-      Sfx.win(result.rarity === "epic" || result.rarity === "legendary" || result.rarity === "mythic" || result.rarity === "exotic");
-
-      const next = (state.payload.snapshot.cases || []).find(c => c.id === this.def.id);
-      const canAgain = next && next.count > 0;
-      const againBtnText = canAgain ? ('Открыть ещё · ' + coins(next.cost)) : 'Не хватает монет';
-      const disabledAttr = canAgain ? '' : 'disabled';
-
-      $("caseActions").innerHTML = '<button class="button primary" id="caseAgain" ' + disabledAttr + '>' + againBtnText + '</button><button class="button" id="caseDone">Забрать</button>';
-      $("caseAgain").onclick = () => {
-        const c = (state.payload.snapshot.cases || []).find(x => x.id === this.def.id);
-        if (c && c.count > 0) {
-          this.open(c);
-          action("case.open", c.id);
-        }
-      };
-      $("caseDone").onclick = () => this.close();
+      this.bindActions("done");
 
       if (result.rarity === "epic" || result.rarity === "legendary" || result.rarity === "mythic" || result.rarity === "exotic") {
         this.confetti(col);
@@ -720,8 +758,17 @@ try {
     },
 
     fail() {
-      if (this.active) toast("Кейс не открылся — попробуйте ещё раз");
-      this.close();
+      if (this.revealed) return;
+      this.revealed = true;
+      if (this.raf) {
+        cancelAnimationFrame(this.raf);
+        this.raf = 0;
+      }
+      clearTimeout(this.timeout);
+      $("caseReveal").className = "case-wait";
+      $("caseReveal").innerHTML = "<span>Не удалось открыть. Можно закрыть и попробовать ещё раз.</span>";
+      this.bindActions("done");
+      toast("Кейс не открылся — попробуйте ещё раз");
     },
 
     close(keepLayer) {
