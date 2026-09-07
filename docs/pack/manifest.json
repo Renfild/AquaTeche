@@ -1,5 +1,5 @@
 {
-  "version": "2.9.306",
+  "version": "2.9.307",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -35,18 +35,18 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.38-alpha.jar",
-      "md5": "f00bfcf5563e2e813c8bac5a16ca1075",
-      "size": 2707870,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.38-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.38-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.39-alpha.jar",
+      "md5": "b3cf10152d77688fed827e688ab02c32",
+      "size": 2673526,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.39-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.39-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.59.jar",
-      "md5": "34fe4f89cfb00cd901fdf8b1b33f68a9",
-      "size": 2804622,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.59.jar",
-      "asset": "aquatech_ui-1.0.59.jar"
+      "path": "mods/aquatech_ui-1.0.60.jar",
+      "md5": "fe0e2cb4180b1789d6282ced665f0a5d",
+      "size": 2783040,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.60.jar",
+      "asset": "aquatech_ui-1.0.60.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -505,8 +505,8 @@
     },
     {
       "path": "config/aqualumen/coin.png",
-      "md5": "7ce652bd1e3bbf537b5d8954f90e0300",
-      "size": 4610,
+      "md5": "9aed2e9b3bd26028cccaf44767025982",
+      "size": 465,
       "url": "https://aquateche.store/pack/config/aqualumen/coin.png",
       "asset": "config__aqualumen__coin.png"
     },
@@ -519,8 +519,8 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "8b4b539aad0ed3f5ee838f447a0f2b33",
-      "size": 960860,
+      "md5": "e13cc713282146a3a33cbb259b1a1d68",
+      "size": 951100,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -540,15 +540,15 @@
     },
     {
       "path": "config/aqualumen/html/coin.png",
-      "md5": "7ce652bd1e3bbf537b5d8954f90e0300",
-      "size": 4610,
+      "md5": "9aed2e9b3bd26028cccaf44767025982",
+      "size": 465,
       "url": "https://aquateche.store/pack/config/aqualumen/html/coin.png",
       "asset": "config__aqualumen__html__coin.png"
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "8b4b539aad0ed3f5ee838f447a0f2b33",
-      "size": 960860,
+      "md5": "e13cc713282146a3a33cbb259b1a1d68",
+      "size": 951100,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
