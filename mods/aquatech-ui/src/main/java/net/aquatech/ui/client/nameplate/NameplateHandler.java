@@ -70,8 +70,8 @@ public final class NameplateHandler {
 
             // Rank pill above the name: tinted translucent bar + rank-colored text
             float pillW = font.width(rankComp);
-            font.drawInBatch(rankComp, -pillW / 2F, -16, rankColor, false,
-                    pose.last().pose(), buffer, Font.DisplayMode.NORMAL, BG_DARK, light);
+            font.drawInBatch(rankComp, -font.width(rankComp) / 2F, -16, rankColor, false,
+                    pose.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, light);
 
             // Chat bubble above the pill: fade-in/out + slide-up
             if (view != null) {
@@ -90,7 +90,7 @@ public final class NameplateHandler {
                 for (int i = 0; i < lineCount; i++) {
                     StringBuilder sb = new StringBuilder();
                     rawLines.get(i).accept((part, style, ch) -> {
-                        sb.append(ch);
+                        sb.appendCodePoint(ch);
                         return true;
                     });
                     padded[i] = sb.toString();
@@ -102,7 +102,7 @@ public final class NameplateHandler {
                     padded[i] = padded[i] + " ".repeat(extra);
                 }
 
-                int bubbleBg = applyFade(BG_DARK, fade);
+                int bubbleBg = applyFade(0x4F09111C, fade);
                 int bubbleText = applyFade(TEXT_MAIN, fade);
                 float bubbleH = lineCount * lineH + 8;
                 float bubbleY = -16 - 6 - bubbleH + slide;
