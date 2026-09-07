@@ -101,7 +101,10 @@ hub_html_raw = r'''<!doctype html>
     .button:hover{background:rgba(255,255,255,.1);transform:none}
     .button:disabled{opacity:.4;cursor:default;transform:none}
     .button.primary{border:0;background:var(--accent);color:#06211c;font-weight:650}
-    .rank-card{text-align:left}
+    .rank-card{text-align:left;--rc:var(--line)}
+    .rank-card:hover{border-color:var(--rc)}
+    .rank-card .rank-glyph{width:46px;height:46px;border-radius:13px}
+    .rank-card .rank-glyph svg{width:24px;height:24px}
     
     /* Premium Case Cards */
     .case{min-height:245px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:16px 14px;position:relative;transition:transform .22s var(--ease), border-color .22s}
@@ -1009,14 +1012,14 @@ try {
         </article>`;
       }
       const c = meta.color;
-      return `<article class="card offer rank-card${o.owned ? " is-owned" : ""}">
+      return `<article class="card offer rank-card${o.owned ? " is-owned" : ""}" style="--rc:${c}">
         ${o.owned ? `<span class="offer-badge">Активна</span>` : ""}
-        <div class="rank-glyph" style="color:${c}">${rankGlyph(o.id, c)}</div>
+        <div class="rank-glyph" style="color:${c};background:${c}14">${rankGlyph(o.id, c)}</div>
         <h3>${esc(o.title)}</h3>
         <p>${esc(o.subtitle)}</p>
         <div class="offer-foot">
           <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}</span>
-          <button class="button ${o.owned ? "" : "primary"} rank-more" data-id="${esc(o.id)}" ${o.owned ? "disabled" : ""}>${o.owned ? "Активна" : "Подробнее"}</button>
+          ${o.owned ? "" : `<button class="button primary rank-more" data-id="${esc(o.id)}">Подробнее</button>`}
         </div>
       </article>`;
     }).join("");
