@@ -105,6 +105,18 @@
     .modal-layer{position:fixed;inset:0;z-index:15;display:none;place-items:center;background:rgba(2,5,9,.72);backdrop-filter:blur(8px)}.modal-layer.open{display:grid}
     .modal{width:min(390px,88vw);padding:20px;border:1px solid var(--line);border-radius:17px;background:#101820;box-shadow:0 25px 80px rgba(0,0,0,.6)}.modal h2{margin:0 0 7px;font-size:17px}.modal p{margin:0 0 18px;color:var(--muted);font-size:11px;line-height:1.55}.modal-actions{display:flex;justify-content:flex-end;gap:8px}
     .empty{height:100%;display:grid;place-items:center;color:var(--muted);font-size:12px}
+    .rank-pill{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:8px;font-size:11px;font-weight:760;letter-spacing:.05em}
+    .rank-card{text-align:center}
+    .rank-crest{width:72px;height:72px;display:grid;place-items:center;margin:4px auto;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+    .rank-crest svg{width:44px;height:44px}
+    .rank-modal{width:min(470px,92vw);position:relative}
+    .rank-modal h2{margin:0;font-size:19px}
+    .rank-modal .rank-modal-close{position:absolute;top:12px;right:12px}
+    .rank-modal-head{display:flex;align-items:center;gap:14px;margin-bottom:10px;text-align:left}
+    .rank-modal-sub{margin:0 0 12px;color:var(--muted);font-size:11px}
+    .rank-perks{max-height:250px;overflow:auto;display:grid;gap:6px;margin-bottom:16px}
+    .rank-perk{display:flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025);font-size:11.5px;text-align:left}
+    .rank-perk svg{width:14px;height:14px;flex:0 0 auto}
     
     /* Case Opening Modal & Roulette */
     .case-layer{position:fixed;inset:0;z-index:25;display:none;place-items:center;background:rgba(2,5,9,.88);backdrop-filter:blur(12px)}
@@ -230,6 +242,24 @@
     <div class="modal-actions">
       <button class="button" id="modalCancel">Отмена</button>
       <button class="button primary" id="modalConfirm">Продолжить</button>
+    </div>
+  </section>
+</div>
+<div class="modal-layer" id="rankModalLayer">
+  <section class="modal rank-modal" role="dialog" aria-modal="true">
+    <button class="icon-button rank-modal-close" id="rankModalClose" aria-label="Закрыть"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    <div class="rank-modal-head">
+      <div class="rank-crest" id="rankCrest"></div>
+      <div>
+        <h2 id="rankModalTitle">Привилегия</h2>
+        <span class="rank-pill" id="rankPill"></span>
+      </div>
+    </div>
+    <p class="rank-modal-sub" id="rankModalSub"></p>
+    <div class="rank-perks" id="rankPerks"></div>
+    <div class="modal-actions">
+      <button class="button" id="rankModalCancel">Закрыть</button>
+      <button class="button primary" id="rankModalBuy">Купить</button>
     </div>
   </section>
 </div>
@@ -805,17 +835,78 @@ try {
     </div>`;
   }
 
+  const RANK_META = {
+    "rank.sailor":  { prefix: "МОРЯК",   color: "#2fe0c0", perks: ["Префикс [МОРЯК] в чате", "2 точки дома /sethome", "Цветной ник в чате и Tab", "Базовый морской набор в F4"] },
+    "rank.skipper": { prefix: "ШКИПЕР",  color: "#3b9dff", perks: ["Префикс [ШКИПЕР] в чате", "3 точки дома /sethome", "Приоритетный вход на сервер", "Кит Шкипера в F4"] },
+    "rank.captain": { prefix: "КАПИТАН", color: "#f5c25b", perks: ["Префикс [КАПИТАН] в чате", "5 точек дома /sethome", "Полёт /fly на приватах", "Множитель удачи ×2", "Кит Капитана в F4"] },
+    "rank.admiral": { prefix: "АДМИРАЛ", color: "#ff8c42", perks: ["Префикс [АДМИРАЛ] в чате", "10 точек дома /sethome", "Полёт /fly и смена ника /nick", "Множитель удачи ×4", "Кит Адмирала в F4"] },
+    "rank.legend":  { prefix: "ЛЕГЕНДА", color: "#c264ff", perks: ["Префикс [ЛЕГЕНДА] в чате", "15 точек дома /sethome", "/fly, /hat и /nick", "Множитель удачи ×8", "Эксклюзивный кейс Легенды", "Максимальный кит сезона"] },
+    "rank.vip":     { prefix: "VIP",     color: "#ff6b6b", perks: ["Префикс [VIP] в чате", "Виртуальный верстак /wb", "Эндер-сундук /ec", "Полёт /fly", "Косметика AquaLumen"] },
+  };
+
+  function rankCrest(color) {
+    return `<svg viewBox="0 0 64 64" fill="none" stroke="${color}" stroke-width="2.6" stroke-linecap="round">
+      <circle cx="32" cy="32" r="26" stroke-opacity=".3"/>
+      <circle cx="32" cy="16" r="4"/>
+      <path d="M32 20v25M23 27h18M23 27c-4 4-6 9-6 13M41 27c4 4 6 9 6 13M17 40c-2-2-4-4-4-7M47 40c2-2 4-4 4-7"/>
+    </svg>`;
+  }
+
+  let rankModalOffer = null;
+  function openRankModal(o) {
+    rankModalOffer = o;
+    const meta = RANK_META[o.id] || { prefix: o.title.toUpperCase(), color: "#2fe0c0", perks: [] };
+    $("rankCrest").innerHTML = rankCrest(meta.color);
+    $("rankModalTitle").textContent = o.title;
+    const pill = $("rankPill");
+    pill.textContent = "[" + meta.prefix + "]";
+    pill.style.color = meta.color;
+    pill.style.background = meta.color + "14";
+    pill.style.border = "1px solid " + meta.color + "55";
+    $("rankModalSub").textContent = o.subtitle || "";
+    $("rankPerks").innerHTML = meta.perks.map(p =>
+      `<div class="rank-perk"><svg viewBox="0 0 24 24" fill="none" stroke="${meta.color}" stroke-width="2.4"><path d="M4 12.5l5 5L20 6.5"/></svg>${esc(p)}</div>`
+    ).join("");
+    const buy = $("rankModalBuy");
+    buy.style.display = o.owned ? "none" : "";
+    $("rankModalLayer").classList.add("open");
+    send({ type: "modal", open: true });
+  }
+
+  function closeRankModal() {
+    $("rankModalLayer").classList.remove("open");
+    rankModalOffer = null;
+    send({ type: "modal", open: false });
+  }
+
   function storeView(s) {
-    const cards = (s.store || []).map(o => `<article class="card offer">
-      ${o.badge ? `<span class="offer-badge">${esc(o.badge)}</span>` : ""}
-      <div class="offer-art">${getItemIconHtml(o.title, o.id, "mc-icon")}</div>
-      <h3>${esc(o.title)}</h3>
-      <p>${esc(o.subtitle)}</p>
-      <div class="offer-foot">
-        <span class="price">${num(o.price)} ${o.currency === "gems" ? "крист." : "монет"}</span>
-        <button class="button ${o.owned ? "" : "primary"} buy" data-id="${esc(o.id)}" data-title="${esc(o.title)}" ${o.owned ? "disabled" : ""}>${o.owned ? "Куплено" : "Купить"}</button>
-      </div>
-    </article>`).join("");
+    const cards = (s.store || []).map(o => {
+      const meta = RANK_META[o.id];
+      if (!meta) {
+        return `<article class="card offer">
+          ${o.badge ? `<span class="offer-badge">${esc(o.badge)}</span>` : ""}
+          <div class="offer-art">${getItemIconHtml(o.title, o.id, "mc-icon")}</div>
+          <h3>${esc(o.title)}</h3>
+          <p>${esc(o.subtitle)}</p>
+          <div class="offer-foot">
+            <span class="price">${num(o.price)} ${o.currency === "gems" ? "крист." : "монет"}</span>
+            <button class="button ${o.owned ? "" : "primary"} buy" data-id="${esc(o.id)}" data-title="${esc(o.title)}" ${o.owned ? "disabled" : ""}>${o.owned ? "Куплено" : "Купить"}</button>
+          </div>
+        </article>`;
+      }
+      const c = meta.color;
+      return `<article class="card offer rank-card" style="border-color:${c}44">
+        <span class="offer-badge" style="color:${c};border-color:${c}55;background:${c}14;">${o.owned ? "АКТИВНА" : "ПРИВИЛЕГИЯ"}</span>
+        <div class="rank-crest">${rankCrest(c)}</div>
+        <span class="rank-pill" style="color:${c};background:${c}14;border:1px solid ${c}55;">[${meta.prefix}]</span>
+        <h3 style="margin:8px 0 2px;">${esc(o.title)}</h3>
+        <p>${esc(o.subtitle)}</p>
+        <div class="offer-foot">
+          <span class="price">${num(o.price)} ${o.currency === "gems" ? "крист." : "монет"}</span>
+          <button class="button ${o.owned ? "" : "primary"} rank-more" data-id="${esc(o.id)}" ${o.owned ? "disabled style=\"opacity:.45;cursor:default\"" : ""}>${o.owned ? "Активна" : "Подробнее"}</button>
+        </div>
+      </article>`;
+    }).join("");
     return `<div class="view">${title("Магазин Улучшений", "Привилегии, префиксы и обмен")}
       <div class="store-grid">${cards || '<div class="empty">Товаров нет</div>'}</div>
     </div>`;
@@ -1121,6 +1212,10 @@ try {
 
   function bindViewActions() {
     document.querySelectorAll(".buy").forEach(b => b.onclick = () => confirmAction("Покупка", `Купить «${b.dataset.title}»?`, "store.buy", b.dataset.id));
+    document.querySelectorAll(".rank-more").forEach(b => b.onclick = () => {
+      const offer = (state.payload.snapshot.store || []).find(x => x.id === b.dataset.id);
+      if (offer && !offer.owned) openRankModal(offer);
+    });
     document.querySelectorAll(".event-claim").forEach(b => b.onclick = () => action("events.claim", b.dataset.idx));
     document.querySelectorAll(".event-reroll").forEach(b => b.onclick = () => confirmAction("Сменить контракт", "100 монет", "events.reroll", b.dataset.idx));
     
@@ -1313,6 +1408,16 @@ try {
   $("refresh").onclick = () => { action("hub.refresh"); toast("Обновление…"); };
   $("close").onclick = () => send({ type: "action", action: "hub.close" });
 
+  $("rankModalClose").onclick = closeRankModal;
+  $("rankModalCancel").onclick = closeRankModal;
+  $("rankModalBuy").onclick = () => {
+    if (!rankModalOffer) return;
+    const id = rankModalOffer.id, title = rankModalOffer.title;
+    closeRankModal();
+    action("store.buy", id);
+    toast(`Покупка «${title}»…`);
+  };
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       if ($("casePreviewLayer").classList.contains("open")) {
@@ -1321,6 +1426,10 @@ try {
       }
       if ($("caseLayer").classList.contains("open")) {
         CaseSpin.close();
+        return;
+      }
+      if ($("rankModalLayer").classList.contains("open")) {
+        closeRankModal();
         return;
       }
       if ($("modalLayer").classList.contains("open")) {
