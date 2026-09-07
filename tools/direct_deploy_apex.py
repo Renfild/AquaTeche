@@ -27,22 +27,29 @@ aqualumen_jar = newest_jar("aqualumen-forge-*.jar")
 if aqualumen_jar is None:
     sys.exit(f"no aqualumen-forge-*.jar in {LOCAL_MODS}")
 
+aquatech_ui_jar = newest_jar("aquatech_ui-*.jar")
+if aquatech_ui_jar is None:
+    sys.exit(f"no aquatech_ui-*.jar in {LOCAL_MODS}")
+
 print("1. Connecting SFTP to upload new reobfuscated jars and configs...")
 t = paramiko.Transport((host, port))
 t.connect(username=user, password=password)
 sftp = paramiko.SFTPClient.from_transport(t)
 
 remote_mods = sftp.listdir("mods")
-for name in remote_mods:
-    if name.startswith("aqualumen-forge-") and name.endswith(".jar") and name != aqualumen_jar.name:
-        try:
-            sftp.remove(f"mods/{name}")
-            print(f"  Removed {name}")
-        except Exception as ex:
-            print(f"  skip remove {name}: {ex}")
+for prefix, built in (("aqualumen-forge-", aqualumen_jar), ("aquatech_ui-", aquatech_ui_jar)):
+    for name in remote_mods:
+        if name.startswith(prefix) and name.endswith(".jar") and name != built.name:
+            try:
+                sftp.remove(f"mods/{name}")
+                print(f"  Removed {name}")
+            except Exception as ex:
+                print(f"  skip remove {name}: {ex}")
 
 sftp.put(str(aqualumen_jar), f"mods/{aqualumen_jar.name}")
 print(f"  Uploaded {aqualumen_jar.name}")
+sftp.put(str(aquatech_ui_jar), f"mods/{aquatech_ui_jar.name}")
+print(f"  Uploaded {aquatech_ui_jar.name}")
 
 sftp.put(str(ROOT / "server/config/aqualumen/cases.json"), "config/aqualumen/cases.json")
 print("  Uploaded config/aqualumen/cases.json")

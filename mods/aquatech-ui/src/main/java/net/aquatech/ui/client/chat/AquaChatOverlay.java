@@ -1,17 +1,25 @@
 package net.aquatech.ui.client.chat;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.LumenGfx;
 import net.aquatech.ui.client.render.UiDraw;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
+import java.util.Locale;
 
 public final class AquaChatOverlay {
+
+    private static final ResourceLocation LOGO_TEXTURE = new ResourceLocation("aquatech_ui", "textures/gui/logo.png");
+    public static ItemStack hoveredItem = ItemStack.EMPTY;
 
     public static final int CHAT_WIDTH = AquaChatLayout.CHAT_WIDTH;
     public static final int PANEL_TOP_INSET = AquaChatLayout.PANEL_TOP_INSET;
@@ -44,19 +52,43 @@ public final class AquaChatOverlay {
 
     public static void renderOpenPanel(GuiGraphics graphics, int screenHeight) {
         int panelTop = AquaChatLayout.panelTop(screenHeight);
+        int panelW = AquaChatLayout.PANEL_W;
+        int panelH = AquaChatLayout.panelH(screenHeight);
+
+        // Cyber-MMO Tactical Glass Panel
         LumenGfx.gradientRounded(graphics, AquaChatLayout.PANEL_X, panelTop,
-                AquaChatLayout.PANEL_W, AquaChatLayout.panelH(screenHeight), AquaChatLayout.PANEL_RADIUS,
-                0xE807111C, 0xF00A1624);
+                panelW, panelH, AquaChatLayout.PANEL_RADIUS,
+                0xD808101A, 0xEB040810);
+        // Outer soft cyan halo
+        LumenGfx.outline(graphics, AquaChatLayout.PANEL_X - 1, panelTop - 1,
+                panelW + 2, panelH + 2, AquaChatLayout.PANEL_RADIUS + 1, 0x1A00F0FF);
+        // Crisp high-tech border
         LumenGfx.outline(graphics, AquaChatLayout.PANEL_X, panelTop,
-                AquaChatLayout.PANEL_W, AquaChatLayout.panelH(screenHeight), AquaChatLayout.PANEL_RADIUS, 0x332FE0C0);
+                panelW, panelH, AquaChatLayout.PANEL_RADIUS, 0x3338BDF8);
+        // Top edge light highlight
+        LumenGfx.roundedRect(graphics, AquaChatLayout.PANEL_X + 12, panelTop + 1,
+                panelW - 24, 1, 0, 0x2EFFFFFF);
     }
 
     public static void renderOpenHistory(GuiGraphics graphics, Font font, int screenHeight) {
-        renderHistory(graphics, font, AquaChatManager.getFilteredMessages(), screenHeight, true);
+        renderOpenHistory(graphics, font, screenHeight, -1, -1);
+    }
+
+    public static void renderOpenHistory(GuiGraphics graphics, Font font, int screenHeight, int mouseX, int mouseY) {
+        hoveredItem = ItemStack.EMPTY;
+        renderHistory(graphics, font, AquaChatManager.getFilteredMessages(), screenHeight, true, mouseX, mouseY);
     }
 
     private static void renderHistory(GuiGraphics graphics, Font font, List<AquaChatMessage> messages,
                                       int screenHeight, boolean chatOpen) {
+        renderHistory(graphics, font, messages, screenHeight, chatOpen, -1, -1);
+    }
+
+    private static void renderHistory(GuiGraphics graphics, Font font, List<AquaChatMessage> messages,
+                                      int screenHeight, boolean chatOpen, int mouseX, int mouseY) {
+        if (chatOpen) {
+            hoveredItem = ItemStack.EMPTY;
+        }
         if (messages.isEmpty()) return;
 
         Minecraft mc = Minecraft.getInstance();
@@ -69,7 +101,7 @@ public final class AquaChatOverlay {
 
         int totalMessages = messages.size();
         int endIndex = Math.max(0, totalMessages - scroll);
-        int startIndex = Math.max(0, endIndex - (chatOpen ? 18 : 8));
+        int startIndex = Math.max(0, endIndex - (chatOpen ? 20 : 8));
 
         int currentY = bottomY;
 
@@ -88,155 +120,248 @@ public final class AquaChatOverlay {
 
             if (alpha <= 0.02F) continue;
 
-            int msgH = calculateMessageHeight(font, msg);
-            currentY -= msgH + 3;
+            // Group consecutive system lines under the same header
+            boolean isGrouped = isMessageGrouped(messages, i);
+
+            int msgH = calculateMessageHeight(font, msg, isGrouped);
+            currentY -= msgH + AquaChatLayout.ROW_GAP;
 
             if (chatOpen && currentY < clipTop) {
                 break;
             }
 
-            renderAquaMessage(graphics, font, msg, chatX, currentY, msgH, alpha, chatOpen);
+            // Smooth Slide-In Animation for fresh messages (200ms ease-out)
+            long ageMs = System.currentTimeMillis() - msg.getCreationTimestamp();
+            int animY = currentY;
+            float animAlpha = alpha;
+            if (ageMs < 200) {
+                float p = ageMs / 200.0F;
+                float ease = p * (2.0F - p);
+                animY += (int) (6.0F * (1.0F - ease));
+                animAlpha *= Math.max(0.15F, ease);
+            }
+
+            renderAquaMessage(graphics, font, msg, chatX, animY, msgH, animAlpha, chatOpen, isGrouped, mouseX, mouseY);
         }
+    }
+
+    public static boolean isMessageGrouped(List<AquaChatMessage> messages, int index) {
+        return false;
+    }
+
+    public static int calculateMessageHeight(Font font, AquaChatMessage msg, boolean isGrouped) {
+        if (msg == null) return 0;
+        Component formatted = msg.getFormattedComponent();
+        if (formatted == null || formatted.getString().isBlank()) return 0;
+        int wrapW = wrapWidth();
+        int lines = Math.max(1, font.split(formatted, wrapW).size());
+        int padY = 4;
+        int contentH = 12 + lines * AquaChatLayout.LINE;
+        return padY * 2 + Math.max(AquaChatLayout.HEAD_SIZE, contentH);
+    }
+
+    public static int wrapWidth() {
+        int padX = 8;
+        int indent = padX + AquaChatLayout.HEAD_SIZE + AquaChatLayout.HEAD_GAP;
+        return Math.max(16, CHAT_WIDTH - indent - padX);
     }
 
     public static int calculateMessageHeight(Font font, AquaChatMessage msg) {
-        String body = visibleBody(msg);
-        // Vanilla font: custom TTF has no Cyrillic, so split/width must match draw.
-        int lineCount = Math.max(1, font.split(Component.literal(body), CHAT_WIDTH - 40).size());
-        return 16 + (lineCount * 12) + 4;
+        return calculateMessageHeight(font, msg, false);
     }
 
-    private static String visibleBody(AquaChatMessage msg) {
-        String parsed = msg.getMessageText() != null ? msg.getMessageText() : "";
-        if (msg.getChannel() == AquaChatMessage.Channel.PRIVATE && !parsed.isBlank()) {
-            return parsed;
-        }
-        String src = parsed;
-        if (msg.getOriginalComponent() != null) {
-            String raw = msg.getOriginalComponent().getString();
-            if (raw != null && !raw.isBlank()) {
-                src = raw;
-            }
-        }
-        String body = AquaChatMessage.stripChatBody(src, msg.getSenderName(), msg.getRankDisplay());
-        if (body == null || body.isBlank()) {
-            body = parsed;
-        }
-        return body != null ? body : "";
+    public static String lineToString(FormattedCharSequence seq) {
+        if (seq == null) return "";
+        StringBuilder sb = new StringBuilder();
+        seq.accept((index, style, cp) -> {
+            sb.appendCodePoint(cp);
+            return true;
+        });
+        return sb.toString();
     }
 
     private static void renderAquaMessage(GuiGraphics graphics, Font font, AquaChatMessage msg,
-                                          int x, int y, int height, float alpha, boolean chatOpen) {
-        // Detect player mention (@Nick or whole-word Nick in message body)
-        Minecraft mc = Minecraft.getInstance();
-        boolean isMention = isMention(mc, msg);
+                                          int x, int y, int height, float alpha, boolean chatOpen,
+                                          boolean isGrouped, int mouseX, int mouseY) {
+        if (msg == null) return;
+        Component formatted = msg.getFormattedComponent();
+        if (formatted == null || formatted.getString().isBlank()) return;
 
-        // Play notification sound once per mention (client-side, only for fresh messages)
-        if (isMention && !msg.isMentionSoundPlayed() && !chatOpen) {
+        Minecraft mc = Minecraft.getInstance();
+        boolean isMentioned = isMention(mc, msg);
+
+        if (isMentioned && !msg.isMentionSoundPlayed() && !chatOpen) {
             msg.markMentionSoundPlayed();
             mc.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
                     net.minecraft.sounds.SoundEvents.NOTE_BLOCK_PLING.value(), 1.4F));
         }
 
-        // Message card plate for crisp contrast and clear separation
-        if (isMention) {
-            // Golden glow mention highlight
-            LumenGfx.gradientRounded(graphics, x - 2, y - 1, CHAT_WIDTH + 4, height + 2, 4,
-                    applyAlpha(0x4AF59E0B, alpha), applyAlpha(0x22F59E0B, alpha));
-            LumenGfx.outline(graphics, x - 2, y - 1, CHAT_WIDTH + 4, height + 2, 4, applyAlpha(0xDDF59E0B, alpha));
-        } else if (!chatOpen) {
-            // Plate fades slower than text so contrast never drops below readable
-            int plateAlpha = Math.max(150, (int) (alpha * 190.0F));
-            int bgCol = (Math.min(190, plateAlpha) << 24) | 0x060D17;
-            LumenGfx.roundedRect(graphics, x - 2, y - 1, CHAT_WIDTH + 4, height + 2, 4, bgCol);
+        int cardW = CHAT_WIDTH;
+        int cardH = height;
+        boolean isHovered = chatOpen && mouseX >= x && mouseX <= x + cardW && mouseY >= y && mouseY <= y + cardH;
+
+        // Minimalist nanobanano aesthetic: calm, clean, uncluttered
+        if (chatOpen) {
+            if (isMentioned) {
+                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x28F59E0B, alpha));
+                LumenGfx.roundedRect(graphics, x + 1, y + 2, 3, cardH - 4, 1.5F, applyAlpha(0xFFF59E0B, alpha));
+            } else if (msg.isSystem()) {
+                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x20061622, alpha));
+                LumenGfx.roundedRect(graphics, x + 1, y + 2, 3, cardH - 4, 1.5F, applyAlpha(0xFF38BDF8, alpha));
+            } else if (isHovered) {
+                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x1F38BDF8, alpha));
+                LumenGfx.outline(graphics, x, y, cardW, cardH, 5, applyAlpha(0x3538BDF8, alpha));
+            } else {
+                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x1408101A, alpha));
+            }
         } else {
-            // Subtle card separator in chat screen
-            LumenGfx.roundedRect(graphics, x - 2, y - 1, CHAT_WIDTH + 4, height + 2, 4, applyAlpha(0x220E1C2B, alpha));
+            // Closed HUD during gameplay: soft transparent pill that does not obscure gameplay
+            int hudBg = isMentioned ? 0x902A1A06 : (msg.isSystem() ? 0x80061420 : 0x75050B12);
+            LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(hudBg, alpha));
+            if (isMentioned) {
+                LumenGfx.roundedRect(graphics, x + 1, y + 2, 2, cardH - 4, 1.0F, applyAlpha(0xFFF59E0B, alpha));
+            } else if (msg.isSystem()) {
+                LumenGfx.roundedRect(graphics, x + 1, y + 2, 2, cardH - 4, 1.0F, applyAlpha(0xFF38BDF8, alpha));
+            }
         }
 
-        int curX = x + 3;
+        int padX = 8;
+        int padY = 4;
+        int headX = x + padX;
+        int headY = y + padY;
+        int headSize = AquaChatLayout.HEAD_SIZE;
+        int textX = headX + headSize + AquaChatLayout.HEAD_GAP;
+        int wrapW = wrapWidth();
+        int nameY = headY + 1;
 
+        // 1. Avatar & Author Header
         if (msg.isSystem()) {
-            // System Announcement Header
-            int badgeW = AquaFontRenderer.width(font, "SERVER") + 6;
-            LumenGfx.roundedRect(graphics, curX, y + 1, badgeW, 10, 2.5F, applyAlpha(0xFF2FE0C0, 0.9F * alpha));
-            AquaFontRenderer.draw(graphics, font, "SERVER", curX + 3, y + 2, applyAlpha(0xFF04121A, alpha));
-            curX += badgeW + 3;
+            // Minimalist nanobanano accent: vertical glowing indicator, no broken glyph box
+            LumenGfx.roundedRect(graphics, headX + 4, headY + 2, 3, headSize - 4, 1.5F, applyAlpha(0xFF38BDF8, alpha));
+            LumenGfx.roundedRect(graphics, headX + 3, headY + (headSize - 6) / 2.0F, 5, 5, 2.5F, applyAlpha(0xFF00F0FF, alpha));
 
-            int nameW = AquaFontRenderer.width(font, "AQUATECH") + 6;
-            LumenGfx.roundedRect(graphics, curX, y + 1, nameW, 10, 2.5F, applyAlpha(0xFFF59E0B, 0.25F * alpha));
-            LumenGfx.outline(graphics, curX, y + 1, nameW, 10, 2.5F, applyAlpha(0xFFF59E0B, 0.8F * alpha));
-            AquaFontRenderer.draw(graphics, font, "AQUATECH", curX + 3, y + 2, applyAlpha(0xFFFBBF24, alpha));
-
-            // Timestamp on right
+            int curX = textX;
             if (msg.getTimeFormatted() != null) {
-                int timeW = AquaFontRenderer.width(font, msg.getTimeFormatted());
-                AquaFontRenderer.draw(graphics, font, msg.getTimeFormatted(), x + CHAT_WIDTH - timeW - 4, y + 2, applyAlpha(0x9E9DB2C4, alpha));
+                AquaFontRenderer.draw(graphics, font, msg.getTimeFormatted(), curX, nameY, applyAlpha(0xFF64748B, alpha));
+                curX += AquaFontRenderer.width(font, msg.getTimeFormatted()) + 5;
             }
 
-            // System Message Lines (Pure white)
-            List<FormattedCharSequence> lines = font.split(Component.literal(msg.getMessageText()), CHAT_WIDTH - 24);
-            int textY = y + 16;
-            for (FormattedCharSequence line : lines) {
-                graphics.drawString(font, line, x + 6, textY, applyAlpha(0xFFFFFFFF, alpha), true);
-                textY += 10;
+            String srvBadge = "СЕРВЕР";
+            int srvW = AquaFontRenderer.width(font, srvBadge) + 8;
+            LumenGfx.roundedRect(graphics, curX, nameY - 1, srvW, 11, 3, applyAlpha(0x2800F0FF, alpha));
+            LumenGfx.outline(graphics, curX, nameY - 1, srvW, 11, 3, applyAlpha(0x5500F0FF, alpha));
+            AquaFontRenderer.draw(graphics, font, srvBadge, curX + 4, nameY, applyAlpha(0xFF38BDF8, alpha));
+            curX += srvW + 5;
+        } else {
+            UiDraw.drawPlayerHead(graphics, msg.getSenderUuid(), msg.getSenderName(), headX, headY, headSize, false);
+
+            int curX = textX;
+            if (msg.getTimeFormatted() != null) {
+                AquaFontRenderer.draw(graphics, font, msg.getTimeFormatted(), curX, nameY, applyAlpha(0xFF64748B, alpha));
+                curX += AquaFontRenderer.width(font, msg.getTimeFormatted()) + 5;
             }
-            return;
+
+            String sender = msg.getSenderName() != null ? msg.getSenderName() : "Игрок";
+            AquaFontRenderer.drawNick(graphics, font, sender, curX, nameY, applyAlpha(0xFFF8FAFC, alpha));
+            curX += AquaFontRenderer.nickWidth(font, sender) + 5;
+
+            // Nanobanano Frosted Glass Rank Badge Pill
+            String rank = formatRankBadge(msg.getRankDisplay(), msg.getRankColor());
+            if (!rank.isEmpty()) {
+                int rCol = getNanobananoRankColor(rank, msg.getRankColor());
+                int rw = AquaFontRenderer.width(font, rank) + 8;
+                int pillBg = (rCol & 0x00FFFFFF) | 0x22000000;
+                int pillBorder = (rCol & 0x00FFFFFF) | 0x55000000;
+                LumenGfx.roundedRect(graphics, curX, nameY - 1, rw, 11, 3, applyAlpha(pillBg, alpha));
+                LumenGfx.outline(graphics, curX, nameY - 1, rw, 11, 3, applyAlpha(pillBorder, alpha));
+                AquaFontRenderer.draw(graphics, font, rank, curX + 4, nameY, applyAlpha(rCol, alpha));
+                curX += rw + 5;
+            }
+
+            // Channel tag (only in ALL tab to indicate source channel)
+            if (AquaChatManager.getActiveChannel() == AquaChatMessage.Channel.ALL
+                    && msg.getChannel() != AquaChatMessage.Channel.GLOBAL
+                    && msg.getChannel() != AquaChatMessage.Channel.ALL) {
+                String chTag = msg.getChannel().getTag();
+                int cw = AquaFontRenderer.width(font, chTag) + 6;
+                int chCol = msg.getChannel().getColor();
+                int chBg = (chCol & 0x00FFFFFF) | 0x22000000;
+                LumenGfx.roundedRect(graphics, curX, nameY, cw, 10, 3, applyAlpha(chBg, alpha));
+                AquaFontRenderer.draw(graphics, font, chTag, curX + 3, nameY + 1, applyAlpha(chCol, alpha));
+            }
         }
 
-        // 1. Channel Badge (Pill with vibrant channel color)
-        String chTag = msg.getChannel().getTag();
-        int chCol = msg.getChannel().getColor();
-        int chW = Math.max(12, AquaFontRenderer.width(font, chTag) + 6);
-        int chH = 11;
-        LumenGfx.roundedRect(graphics, curX, y + 1, chW, chH, 2.5F, applyAlpha(chCol, alpha));
-        int tagX = curX + (chW - AquaFontRenderer.width(font, chTag)) / 2;
-        AquaFontRenderer.draw(graphics, font, chTag, tagX, y + 2, applyAlpha(0xFFFFFFFF, alpha));
-        curX += chW + 4;
+        // 2. Message Body Lines
+        int lineY = nameY + 12;
+        List<FormattedCharSequence> lines = font.split(formatted, wrapW);
+        for (FormattedCharSequence line : lines) {
+            String lineStr = lineToString(line);
+            graphics.drawString(font, line, textX, lineY, applyAlpha(0xFFE2E8F0, alpha), false);
 
-        // 2. Player Avatar
-        int headSize = 12;
-        int headX = curX;
-        UiDraw.drawPlayerHead(graphics, msg.getSenderUuid(), msg.getSenderName(), headX, y + 1, headSize);
-        curX += headSize + 5;
+            if (chatOpen) {
+                for (AquaChatMessage.ItemTagRef tag : msg.getItemTags()) {
+                    String chipLabel = "[✦ " + tag.getDisplayName() + "]";
+                    int chipIdx = lineStr.indexOf(chipLabel);
+                    if (chipIdx >= 0) {
+                        String before = lineStr.substring(0, chipIdx);
+                        int startX = textX + font.width(AquaFontRenderer.text(before));
+                        int chipW = font.width(AquaFontRenderer.text(chipLabel));
+                        int itemCol = tag.getRarityColor() != 0 ? tag.getRarityColor() : 0xFF38BDF8;
+                        boolean tagHovered = mouseX >= startX - 2 && mouseX <= startX + chipW + 2
+                                && mouseY >= lineY - 1 && mouseY <= lineY + 11;
+                        if (tagHovered) {
+                            hoveredItem = tag.getStack();
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x44000000 | (itemCol & 0x00FFFFFF));
+                            LumenGfx.outline(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, itemCol);
+                        } else {
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x1A000000 | (itemCol & 0x00FFFFFF));
+                            LumenGfx.outline(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x44000000 | (itemCol & 0x00FFFFFF));
+                        }
+                    }
+                }
+                if (!msg.getSharedItem().isEmpty()) {
+                    String handLabel = "[✦ " + msg.getSharedItem().getHoverName().getString() + "]";
+                    int chipIdx = lineStr.indexOf(handLabel);
+                    if (chipIdx >= 0) {
+                        String before = lineStr.substring(0, chipIdx);
+                        int startX = textX + font.width(AquaFontRenderer.text(before));
+                        int chipW = font.width(AquaFontRenderer.text(handLabel));
+                        int itemCol = 0xFF38BDF8;
+                        boolean handHovered = mouseX >= startX - 2 && mouseX <= startX + chipW + 2
+                                && mouseY >= lineY - 1 && mouseY <= lineY + 11;
+                        if (handHovered) {
+                            hoveredItem = msg.getSharedItem();
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x44000000 | (itemCol & 0x00FFFFFF));
+                            LumenGfx.outline(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, itemCol);
+                        } else {
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x1A000000 | (itemCol & 0x00FFFFFF));
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x44000000 | (itemCol & 0x00FFFFFF));
+                        }
+                    }
+                }
+            }
 
-        // 3. Role / Rank Badge (Lumen capsule with individual rank color)
-        if (msg.getRankDisplay() != null && !msg.getRankDisplay().isBlank()) {
-            String rank = msg.getRankDisplay().toUpperCase();
-            int rankColor = msg.getRankColor();
-            int rankW = AquaFontRenderer.width(font, rank) + 6;
-            int rankH = 10;
-            int rankY = y + 2;
-
-            LumenGfx.roundedRect(graphics, curX, rankY, rankW, rankH, 2.5F, applyAlpha(0xCC111924, alpha));
-            LumenGfx.outline(graphics, curX, rankY, rankW, rankH, 2.5F, applyAlpha(rankColor, 0.85F * alpha));
-            AquaFontRenderer.draw(graphics, font, rank, curX + 3, rankY + 1, applyAlpha(rankColor, alpha));
-            curX += rankW + 4;
+            lineY += AquaChatLayout.LINE;
         }
+    }
 
-        // 4. Sender Name (truncated before the timestamp — no collisions)
-        if (msg.getSenderName() != null) {
-            int nameMax = x + CHAT_WIDTH - timeSafeW(font, msg) - 8 - curX;
-            String name = AquaFontRenderer.fit(font, msg.getSenderName(), Math.max(24, nameMax));
-            AquaFontRenderer.draw(graphics, font, name, curX, y + 3, applyAlpha(0xFFFFFFFF, alpha));
+    private static String fitHeader(Font font, String s, int maxW) {
+        if (s == null) {
+            return "";
         }
-
-        // Timestamp on right
-        if (msg.getTimeFormatted() != null) {
-            int timeW = AquaFontRenderer.width(font, msg.getTimeFormatted());
-            AquaFontRenderer.draw(graphics, font, msg.getTimeFormatted(), x + CHAT_WIDTH - timeW - 4, y + 3, applyAlpha(0x9E9DB2C4, alpha));
+        if (AquaFontRenderer.headerWidth(font, s) <= maxW) {
+            return s;
         }
-
-        String body = visibleBody(msg);
-        int bodyX = headX;
-        int maxW = CHAT_WIDTH - (bodyX - x) - 8;
-        List<FormattedCharSequence> bodyLines = font.split(Component.literal(body), Math.max(8, maxW));
-        int bodyY = y + 16;
-        int bodyColor = applyAlpha(0xFFFFFFFF, alpha);
-        for (FormattedCharSequence line : bodyLines) {
-            graphics.drawString(font, line, bodyX, bodyY, bodyColor, false);
-            bodyY += 12;
+        String ell = "...";
+        int ew = AquaFontRenderer.headerWidth(font, ell);
+        if (maxW <= ew) {
+            return ell;
         }
+        int n = s.length();
+        while (n > 0 && AquaFontRenderer.headerWidth(font, s.substring(0, n)) + ew > maxW) {
+            n--;
+        }
+        return n <= 0 ? ell : s.substring(0, n) + ell;
     }
 
     /**
@@ -266,8 +391,50 @@ public final class AquaChatOverlay {
         return Character.isLetterOrDigit(c) || c == '_';
     }
 
-    private static int timeSafeW(Font font, AquaChatMessage msg) {
-        return msg.getTimeFormatted() != null ? AquaFontRenderer.width(font, msg.getTimeFormatted()) : 0;
+    private static String formatRankBadge(String rankDisplay, int rankColor) {
+        if (rankDisplay == null || rankDisplay.isBlank()) {
+            return "";
+        }
+        String clean = rankDisplay.trim();
+        String upper = clean.toUpperCase(Locale.ROOT);
+        if (upper.contains("ВЛАДЕЛЕЦ") || upper.contains("OWNER")) {
+            return "ВЛАДЕЛЕЦ";
+        } else if (upper.contains("АДМИН") || upper.contains("ADMIN") || upper.contains("DEV")) {
+            return "АДМИН";
+        } else if (upper.contains("МОДЕР") || upper.contains("MOD") || upper.contains("ХЕЛПЕР")) {
+            return "МОДЕРАТОР";
+        } else if (upper.contains("ЛЕГЕНДА") || upper.contains("LEGEND")) {
+            return "ЛЕГЕНДА";
+        } else if (upper.contains("VIP") || upper.contains("ПРЕМИУМ")) {
+            return "VIP";
+        }
+        return upper;
+    }
+
+    public static int getNanobananoRankColor(String rank, int fallbackColor) {
+        if (rank == null || rank.isBlank()) return fallbackColor != 0 ? fallbackColor : 0xFF94A3B8;
+        String u = rank.toUpperCase(Locale.ROOT);
+        if (u.contains("ВЛАДЕЛЕЦ") || u.contains("OWNER")) return 0xFFFF3B30; // Neon Coral Red
+        if (u.contains("АДМИН") || u.contains("ADMIN") || u.contains("DEV")) return 0xFFFF9500; // Warm Amber
+        if (u.contains("МОДЕР") || u.contains("MOD") || u.contains("ХЕЛПЕР")) return 0xFF10B981; // Emerald Mint
+        if (u.contains("VIP") || u.contains("ВИП")) return 0xFF00F0FF; // Cyber Cyan
+        if (u.contains("ПРЕМИУМ") || u.contains("PREMIUM")) return 0xFFA855F7; // Royal Amethyst
+        if (u.contains("ЛЕГЕНДА") || u.contains("LEGEND")) return 0xFFF59E0B; // Imperial Gold
+        if (u.contains("ИГРОК") || u.contains("PLAYER")) return 0xFF94A3B8; // Refined Slate Glass
+        return fallbackColor != 0 ? fallbackColor : 0xFF38BDF8;
+    }
+
+    private static String sentenceLabel(String raw) {
+        if (raw == null || raw.isBlank()) {
+            return "";
+        }
+        String t = raw.trim();
+        Locale ru = Locale.forLanguageTag("ru");
+        if (!t.equals(t.toUpperCase(ru))) {
+            return t;
+        }
+        String lower = t.toLowerCase(ru);
+        return Character.toUpperCase(lower.charAt(0)) + lower.substring(1);
     }
 
     private static int applyAlpha(int color, float alpha) {

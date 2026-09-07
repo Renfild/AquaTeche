@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 
@@ -18,20 +19,52 @@ public final class AquaFontRenderer {
 
     public static final ResourceLocation FONT_MAIN = new ResourceLocation("aquatech_ui", "main");
     public static final ResourceLocation FONT_HEADER = new ResourceLocation("aquatech_ui", "header");
+    public static final ResourceLocation FONT_NICK = new ResourceLocation("aquatech_ui", "nick");
 
     private AquaFontRenderer() {
     }
 
     public static MutableComponent text(String plainText) {
-        return Component.literal(plainText == null ? "" : plainText).withStyle(Style.EMPTY.withFont(FONT_MAIN));
+        String clean = plainText == null ? "" : plainText.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]\\s*", "");
+        return Component.literal(clean).withStyle(Style.EMPTY.withFont(FONT_MAIN));
     }
 
     public static MutableComponent header(String plainText) {
-        return Component.literal(plainText == null ? "" : plainText).withStyle(Style.EMPTY.withFont(FONT_HEADER));
+        String clean = plainText == null ? "" : plainText.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]\\s*", "");
+        return Component.literal(clean).withStyle(Style.EMPTY.withFont(FONT_HEADER));
+    }
+
+    /** Regular-weight nick font: slightly larger than body, no bold. */
+    public static MutableComponent nick(String plainText) {
+        String clean = plainText == null ? "" : plainText.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]\\s*", "");
+        return Component.literal(clean).withStyle(Style.EMPTY.withFont(FONT_NICK));
     }
 
     public static Component withMain(Component src) {
-        return src.copy().withStyle(style -> style.withFont(FONT_MAIN));
+        if (src == null) return Component.empty();
+        return applyFontAndStripPua(src, FONT_MAIN);
+    }
+
+    public static MutableComponent applyFontAndStripPua(Component src, ResourceLocation font) {
+        if (src == null) {
+            return Component.empty();
+        }
+        MutableComponent out;
+        if (src.getContents() instanceof LiteralContents literal) {
+            String text = literal.text().replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]\\s*", "");
+            while (text.contains("  ")) {
+                text = text.replace("  ", " ");
+            }
+            out = Component.literal(text);
+        } else {
+            out = MutableComponent.create(src.getContents());
+        }
+        Style current = src.getStyle();
+        out.setStyle(current != null ? current.withFont(font) : Style.EMPTY.withFont(font));
+        for (Component sib : src.getSiblings()) {
+            out.append(applyFontAndStripPua(sib, font));
+        }
+        return out;
     }
 
     public static int width(Font font, String plain) {
@@ -42,12 +75,20 @@ public final class AquaFontRenderer {
         return font.width(header(plain));
     }
 
+    public static int nickWidth(Font font, String plain) {
+        return font.width(nick(plain));
+    }
+
     public static void draw(GuiGraphics g, Font font, String plain, int x, int y, int color) {
         g.drawString(font, text(plain), x, y, color, false);
     }
 
     public static void drawHeader(GuiGraphics g, Font font, String plain, int x, int y, int color) {
         g.drawString(font, header(plain), x, y, color, false);
+    }
+
+    public static void drawNick(GuiGraphics g, Font font, String plain, int x, int y, int color) {
+        g.drawString(font, nick(plain), x, y, color, false);
     }
 
     public static void drawCentered(GuiGraphics g, Font font, String plain, int cx, int y, int color) {
