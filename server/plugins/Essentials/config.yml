@@ -464,7 +464,7 @@ debug: false
 # For example, to set the language to English, set locale to 'en'. It will then use the file 'messages_en.properties'.
 # Don't forget to remove the # in front of the line.
 # For more information, visit https://essentialsx.net/wiki/Locale.html
-#locale: en
+locale: ru
 
 # Should Essentials use the player's language instead of the server's when sending messages?
 # This is useful if you want to use a different language for your server than for your players.
@@ -1257,7 +1257,7 @@ newbies:
   # {DISPLAYNAME} will be replaced with the player name.
   # Set to '' to disable.
   #announce-format: ''
-  announce-format: '&dWelcome {DISPLAYNAME}&d to the server!'
+  announce-format: '&dWelcome &f{USERNAME}&d to the server!'
 
   # When players spawn for the first time, which spawnpoint should be used?
   # Set to 'none' to use the spawnpoint of the world.

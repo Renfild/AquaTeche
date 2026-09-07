@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Меню Сервера · AquaTech</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
-  <style>
+
+
+<style>
     * {
       box-sizing: border-box;
       user-select: none;
@@ -114,6 +113,14 @@
       border: 1px solid rgba(0, 229, 255, 0.35);
       border-radius: 8px;
       padding: 6px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .player-balance img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
     }
 
     /* Buttons Grid */
@@ -188,10 +195,10 @@
 
     <div class="profile-card" onclick="ipcSend({action:'NAVIGATE', to:'cabinet'})">
       <div class="profile-left">
-        <img class="player-head-img" id="head-img" src="https://mc-heads.net/avatar/Renfild" alt="Avatar" />
+        <img class="player-head-img" id="head-img" src="/assets/images/avatar_default.png" alt="Avatar" />
         <span class="player-nick" id="player-nick">Renfild</span>
       </div>
-      <div class="player-balance" id="player-bal">0 монет</div>
+      <div class="player-balance" id="player-bal">0 <img src="/assets/logo.png" alt=""></div>
     </div>
 
     <div class="menu-grid">
@@ -246,14 +253,14 @@
     const urlParams = new URLSearchParams(window.location.search);
     const nick = urlParams.get('nick') || 'Renfild';
     document.getElementById('player-nick').textContent = nick;
-    document.getElementById('head-img').src = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}`;
+    document.getElementById('head-img').src = `/api/skins/${encodeURIComponent(nick)}/avatar?v=look2`;
 
     fetch(`/api/profiles/${encodeURIComponent(nick)}`)
       .then(res => res.json())
       .then(data => {
         if (data && data.ok && data.profile) {
           const coins = Number(data.profile.coins || 0).toLocaleString('ru-RU');
-          document.getElementById('player-bal').textContent = `${coins} монет`;
+          document.getElementById('player-bal').innerHTML = `${coins} <img src="/assets/logo.png" alt="" width="14" height="14" style="vertical-align:-2px">`;
         }
       })
       .catch(() => {});

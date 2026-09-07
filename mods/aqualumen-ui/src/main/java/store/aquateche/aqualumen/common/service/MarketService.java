@@ -26,14 +26,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Lumen Market — player-to-player item trading for server coins.
  * Listings live in the portal database (aquateche.store/api/market); the server
- * mediates every request with the sync key. Seller proceeds land on the portal
- * wallet at buy time and flow back in-game through the regular coin sync.
+ * mediates every request with the sync key. Buyer is charged and seller is
+ * credited in-game via {@link HubEconomy} — portal D1 is not the live wallet
+ * (player sync overwrites {@code profiles.coins} from the game).
  */
 public final class MarketService {
 
     private static final AtomicBoolean FETCHING = new AtomicBoolean();
     private static volatile List<HubSnapshot.MarketEntry> cache = List.of();
     private static volatile long cacheAt;
+
+    private static final String PRIMARY_URL = "https://aquateche.store/api/market";
+    private static final String FALLBACK_URL = "https://aquatech.santcrail.workers.dev/api/market";
+    private static final String USER_AGENT = "AquaTech-LumenUI/2.9.75";
 
     private MarketService() {
     }
@@ -64,12 +69,10 @@ public final class MarketService {
             if (key == null) {
                 return;
             }
-            HttpURLConnection conn = get("https://aquateche.store/api/market?limit=40");
-            conn.setRequestProperty("X-AquaTech-Server-Key", key);
-            if (conn.getResponseCode() != 200) {
+            JsonObject res = executeGet("?limit=40", key);
+            if (res == null || !res.has("lots")) {
                 return;
             }
-            JsonObject res = parse(conn);
             JsonArray lots = res.getAsJsonArray("lots");
             List<HubSnapshot.MarketEntry> list = new ArrayList<>();
             for (int i = 0; i < lots.size() && i < 40; i++) {
@@ -120,7 +123,7 @@ public final class MarketService {
                 body.addProperty("nbt", nbt);
                 body.addProperty("count", count);
                 body.addProperty("price", price);
-                JsonObject res = post("https://aquateche.store/api/market", body, key);
+                JsonObject res = executePost(body, key);
                 if (res.has("ok") && res.get("ok").getAsBoolean()) {
                     int id = res.get("id").getAsInt();
                     player.getServer().execute(() -> {
@@ -129,7 +132,7 @@ public final class MarketService {
                             player.getMainHandItem().setCount(0);
                         }
                         player.sendSystemMessage(Component.literal("§a[Рынок] Лот #" + id + " выставлен: "
-                                + label + " ×" + count + " за " + price + " монет."));
+                                + label + " ×" + count + " за " + HubEconomy.formatCoins(price) + " ¤."));
                         fetchNow();
                         HubDataService.push(player);
                     });
@@ -160,7 +163,7 @@ public final class MarketService {
                 return;
             }
             if (balance < entry.price()) {
-                player.sendSystemMessage(Component.literal("§c[Рынок] Не хватает монет: нужно " + entry.price()));
+                player.sendSystemMessage(Component.literal("§c[Рынок] Не хватает монет: нужно " + HubEconomy.formatCoins(entry.price()) + " ¤"));
                 return;
             }
         }
@@ -174,7 +177,7 @@ public final class MarketService {
                 body.addProperty("op", "buy");
                 body.addProperty("id", id);
                 body.addProperty("buyer", player.getGameProfile().getName());
-                JsonObject res = post("https://aquateche.store/api/market", body, key);
+                JsonObject res = executePost(body, key);
                 boolean ok = res.has("ok") && res.get("ok").getAsBoolean();
                 player.getServer().execute(() -> {
                     if (!ok) {
@@ -190,16 +193,26 @@ public final class MarketService {
                     if (HubEconomy.trySpendCoins(player, price)) {
                         ItemStack stack = restore(lot);
                         HubEconomy.giveItem(player, stack);
-                        player.sendSystemMessage(Component.literal("§a[Рынок] Куплено: " + lot.get("label").getAsString()
-                                + " ×" + lot.get("count").getAsInt() + " за " + price + " монет."));
-                        if (seller.equalsIgnoreCase(player.getGameProfile().getName())) {
-                            player.sendSystemMessage(Component.literal("§7[Рынок] Выкуп собственного лота — монеты вернулись на портал."));
+                        if (!seller.equalsIgnoreCase(player.getGameProfile().getName())) {
+                            HubEconomy.grantCoinsToName(player.getServer(), seller, price);
+                            ServerPlayer sellerPlayer = HubEconomy.findOnline(player.getServer(), seller);
+                            if (sellerPlayer != null) {
+                                sellerPlayer.sendSystemMessage(Component.literal("§a[Рынок] " + player.getGameProfile().getName()
+                                        + " купил «" + lot.get("label").getAsString() + "» ×"
+                                        + lot.get("count").getAsInt() + " за "
+                                        + HubEconomy.formatCoins(price) + " ¤."));
+                                HubDataService.push(sellerPlayer);
+                                HubDataService.syncPlayerToWebAsync(sellerPlayer);
+                            }
                         }
+                        player.sendSystemMessage(Component.literal("§a[Рынок] Куплено: " + lot.get("label").getAsString()
+                                + " ×" + lot.get("count").getAsInt() + " за " + HubEconomy.formatCoins(price) + " ¤."));
                     } else {
                         player.sendSystemMessage(Component.literal("§c[Рынок] Не хватает монет."));
                     }
                     fetchNow();
                     HubDataService.push(player);
+                    HubDataService.syncPlayerToWebAsync(player);
                 });
             } catch (Throwable t) {
                 player.getServer().execute(() -> player.sendSystemMessage(
@@ -220,7 +233,7 @@ public final class MarketService {
                 body.addProperty("op", "cancel");
                 body.addProperty("id", id);
                 body.addProperty("nick", player.getGameProfile().getName());
-                JsonObject res = post("https://aquateche.store/api/market", body, key);
+                JsonObject res = executePost(body, key);
                 boolean ok = res.has("ok") && res.get("ok").getAsBoolean();
                 player.getServer().execute(() -> {
                     if (ok) {
@@ -259,9 +272,48 @@ public final class MarketService {
         }
     }
 
-    private static HttpURLConnection get(String url) throws Exception {
+    private static JsonObject executeGet(String query, String key) {
+        try {
+            HttpURLConnection conn = get(PRIMARY_URL + query, key);
+            if (conn.getResponseCode() == 200) {
+                return parse(conn);
+            }
+        } catch (Throwable ignored) {
+        }
+        try {
+            HttpURLConnection conn = get(FALLBACK_URL + query, key);
+            if (conn.getResponseCode() == 200) {
+                return parse(conn);
+            }
+        } catch (Throwable ignored) {
+        }
+        return null;
+    }
+
+    private static JsonObject executePost(JsonObject body, String key) throws Exception {
+        try {
+            JsonObject res = post(PRIMARY_URL, body, key);
+            if (res != null && res.has("ok") && res.get("ok").getAsBoolean()) {
+                return res;
+            }
+            if (res != null && res.has("error") && res.has("status")) {
+                int status = res.get("status").getAsInt();
+                if (status != 403 && status != 502 && status != 503) {
+                    return res;
+                }
+            }
+        } catch (Throwable ignored) {
+        }
+        return post(FALLBACK_URL, body, key);
+    }
+
+    private static HttpURLConnection get(String url, String key) throws Exception {
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         conn.setRequestMethod("GET");
+        conn.setRequestProperty("User-Agent", USER_AGENT);
+        if (key != null) {
+            conn.setRequestProperty("X-AquaTech-Server-Key", key);
+        }
         conn.setConnectTimeout(4000);
         conn.setReadTimeout(5000);
         return conn;
@@ -271,22 +323,29 @@ public final class MarketService {
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-        conn.setRequestProperty("X-AquaTech-Server-Key", key);
+        conn.setRequestProperty("User-Agent", USER_AGENT);
+        if (key != null) {
+            conn.setRequestProperty("X-AquaTech-Server-Key", key);
+        }
         conn.setConnectTimeout(4000);
         conn.setReadTimeout(5000);
         conn.setDoOutput(true);
         try (OutputStream os = conn.getOutputStream()) {
             os.write(body.toString().getBytes(StandardCharsets.UTF_8));
         }
-        if (conn.getResponseCode() != 200) {
+        int code = conn.getResponseCode();
+        if (code != 200) {
             InputStream es = conn.getErrorStream();
             String text = es == null ? "" : new String(es.readAllBytes(), StandardCharsets.UTF_8);
             JsonObject res = new JsonObject();
             res.addProperty("ok", false);
+            res.addProperty("status", code);
             String marker = "\"error\":\"";
             int at = text.indexOf(marker);
             if (at >= 0) {
                 res.addProperty("error", text.substring(at + marker.length(), text.indexOf('"', at + marker.length())));
+            } else {
+                res.addProperty("error", "HTTP " + code);
             }
             return res;
         }

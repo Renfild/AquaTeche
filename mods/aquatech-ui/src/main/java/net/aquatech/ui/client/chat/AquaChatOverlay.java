@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public final class AquaChatOverlay {
 
-    private static final ResourceLocation LOGO_TEXTURE = new ResourceLocation("aquatech_ui", "textures/gui/logo.png");
+    private static final ResourceLocation COIN_TEXTURE = new ResourceLocation("aquatech_ui", "textures/gui/coin.png");
     public static ItemStack hoveredItem = ItemStack.EMPTY;
 
     public static final int CHAT_WIDTH = AquaChatLayout.CHAT_WIDTH;
@@ -170,6 +170,37 @@ public final class AquaChatOverlay {
         return calculateMessageHeight(font, msg, false);
     }
 
+    private static void drawBodyLine(GuiGraphics graphics, Font font, FormattedCharSequence line,
+                                     String lineStr, int x, int y, int color, float alpha) {
+        int coin = lineStr.indexOf('\u00A4');
+        if (coin < 0) {
+            graphics.drawString(font, line, x, y, color, false);
+            return;
+        }
+        int cx = x;
+        int from = 0;
+        int size = Math.max(8, font.lineHeight - 2);
+        while (from < lineStr.length()) {
+            int at = lineStr.indexOf('\u00A4', from);
+            if (at < 0) {
+                graphics.drawString(font, lineStr.substring(from), cx, y, color, false);
+                break;
+            }
+            if (at > from) {
+                String chunk = lineStr.substring(from, at);
+                graphics.drawString(font, chunk, cx, y, color, false);
+                cx += font.width(chunk);
+            }
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.enableBlend();
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, Math.max(0.0F, Math.min(1.0F, alpha)));
+            graphics.blit(COIN_TEXTURE, cx, y - 1, size, size, 0, 0, 32, 32, 32, 32);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            cx += size + 1;
+            from = at + 1;
+        }
+    }
+
     public static String lineToString(FormattedCharSequence seq) {
         if (seq == null) return "";
         StringBuilder sb = new StringBuilder();
@@ -296,7 +327,7 @@ public final class AquaChatOverlay {
         List<FormattedCharSequence> lines = font.split(formatted, wrapW);
         for (FormattedCharSequence line : lines) {
             String lineStr = lineToString(line);
-            graphics.drawString(font, line, textX, lineY, applyAlpha(0xFFE2E8F0, alpha), false);
+            drawBodyLine(graphics, font, line, lineStr, textX, lineY, applyAlpha(0xFFE2E8F0, alpha), alpha);
 
             if (chatOpen) {
                 for (AquaChatMessage.ItemTagRef tag : msg.getItemTags()) {
@@ -398,17 +429,19 @@ public final class AquaChatOverlay {
         String clean = rankDisplay.trim();
         String upper = clean.toUpperCase(Locale.ROOT);
         if (upper.contains("ВЛАДЕЛЕЦ") || upper.contains("OWNER")) {
-            return "ВЛАДЕЛЕЦ";
-        } else if (upper.contains("АДМИН") || upper.contains("ADMIN") || upper.contains("DEV")) {
-            return "АДМИН";
+            return "Владелец";
+        } else if (upper.contains("РАЗРАБ") || upper.contains("DEVELOPER") || upper.equals("DEV")) {
+            return "Разраб";
+        } else if (upper.contains("АДМИН") || upper.contains("ADMIN")) {
+            return "Админ";
         } else if (upper.contains("МОДЕР") || upper.contains("MOD") || upper.contains("ХЕЛПЕР")) {
-            return "МОДЕРАТОР";
+            return "Модер";
         } else if (upper.contains("ЛЕГЕНДА") || upper.contains("LEGEND")) {
-            return "ЛЕГЕНДА";
+            return "Легенда";
         } else if (upper.contains("VIP") || upper.contains("ПРЕМИУМ")) {
             return "VIP";
         }
-        return upper;
+        return sentenceLabel(clean);
     }
 
     public static int getNanobananoRankColor(String rank, int fallbackColor) {

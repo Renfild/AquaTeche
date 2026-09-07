@@ -16,6 +16,8 @@ public final class Icons {
 
     private static final ResourceLocation ATLAS =
             new ResourceLocation("aqualumen", "textures/gui/icons.png");
+    private static final ResourceLocation COIN_TEX =
+            new ResourceLocation("aqualumen", "textures/gui/coin.png");
     private static final int CELL = 64;
     private static final int COLUMNS = 7;
     private static final int ROWS = 4;
@@ -61,6 +63,13 @@ public final class Icons {
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
+        if (icon == Icon.COIN) {
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha <= 0.0F ? 1.0F : alpha);
+            graphics.blit(COIN_TEX, x, y, side, side, 0, 0, 32, 32, 32, 32);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.disableBlend();
+            return;
+        }
         smooth();
         RenderSystem.setShaderColor(red, green, blue, alpha);
         graphics.blit(ATLAS, x, y, side, side,

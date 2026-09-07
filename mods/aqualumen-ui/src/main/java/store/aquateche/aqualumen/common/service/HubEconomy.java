@@ -4,6 +4,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.item.ItemStack;
@@ -13,8 +14,10 @@ import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 import store.aquateche.aqualumen.config.LumenConfig;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -114,6 +117,93 @@ public final class HubEconomy {
         }
         adjustScore(player, objective, (int) Math.min(amount, Integer.MAX_VALUE));
         ecoCommand(player, "give", amount);
+    }
+
+    public static ServerPlayer findOnline(MinecraftServer server, String name) {
+        if (server == null || name == null || name.isBlank()) {
+            return null;
+        }
+        ServerPlayer exact = server.getPlayerList().getPlayerByName(name);
+        if (exact != null) {
+            return exact;
+        }
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            if (player.getGameProfile().getName().equalsIgnoreCase(name.trim())) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Credits {@code name} in the same wallet {@link #trySpendCoins} uses.
+     * Online: Vault/scoreboard. Offline: {@code eco give} plus scoreboard by nick.
+     */
+    public static boolean grantCoinsToName(MinecraftServer server, String name, long amount) {
+        if (server == null || name == null || name.isBlank() || amount <= 0L) {
+            return false;
+        }
+        String nick = name.trim();
+        ServerPlayer online = findOnline(server, nick);
+        if (online != null) {
+            grantCoins(online, amount);
+            return true;
+        }
+        ecoCommand(server, nick, "give", amount);
+        adjustScoreByName(server, nick, (int) Math.min(amount, Integer.MAX_VALUE));
+        return true;
+    }
+
+    /**
+     * Player-to-player pay on the hub wallet. Returns false when the sender was not charged.
+     */
+    public static boolean transferCoins(ServerPlayer from, String toName, long amount) {
+        if (from == null || from.getServer() == null) {
+            return false;
+        }
+        if (amount <= 0L) {
+            from.sendSystemMessage(Component.literal("§eСумма должна быть больше нуля."));
+            return false;
+        }
+        String nick = toName == null ? "" : toName.trim();
+        if (nick.isBlank() || nick.length() > 16) {
+            from.sendSystemMessage(Component.literal("§eУкажите ник: /pay <ник> <сумма>"));
+            return false;
+        }
+        if (nick.equalsIgnoreCase(from.getGameProfile().getName())) {
+            from.sendSystemMessage(Component.literal("§eНельзя перевести монеты самому себе."));
+            return false;
+        }
+        if (!playerKnown(from.getServer(), nick)) {
+            from.sendSystemMessage(Component.literal("§cИгрок «" + nick + "» не найден."));
+            return false;
+        }
+        if (!trySpendCoins(from, amount)) {
+            from.sendSystemMessage(Component.literal("§cНе хватает монет: нужно " + formatCoins(amount)
+                    + " ¤, есть " + formatCoins(coins(from)) + " ¤."));
+            return false;
+        }
+        if (!grantCoinsToName(from.getServer(), nick, amount)) {
+            grantCoins(from, amount);
+            from.sendSystemMessage(Component.literal("§cНе удалось отправить монеты. Сумма возвращена."));
+            return false;
+        }
+        String pretty = formatCoins(amount);
+        from.sendSystemMessage(Component.literal("§aОтправлено " + pretty + " ¤ игроку " + nick + "."));
+        ServerPlayer to = findOnline(from.getServer(), nick);
+        if (to != null) {
+            to.sendSystemMessage(Component.literal("§aПолучено " + pretty + " ¤ от "
+                    + from.getGameProfile().getName() + "."));
+            HubDataService.push(to);
+            HubDataService.syncPlayerToWebAsync(to);
+        }
+        HubDataService.push(from);
+        HubDataService.syncPlayerToWebAsync(from);
+        return true;
+    }
+
+    public static String formatCoins(long amount) {
+        return NumberFormat.getIntegerInstance(new Locale("ru", "RU")).format(Math.max(0L, amount));
     }
 
     public static void grantGems(ServerPlayer player, int amount) {
@@ -242,15 +332,63 @@ public final class HubEconomy {
     }
 
     private static void ecoCommand(ServerPlayer player, String op, long amount) {
-        if (player.getServer() == null) {
+        if (player == null || player.getServer() == null) {
+            return;
+        }
+        ecoCommand(player.getServer(), player.getGameProfile().getName(), op, amount);
+    }
+
+    private static void ecoCommand(MinecraftServer server, String name, String op, long amount) {
+        if (server == null || name == null || name.isBlank()) {
             return;
         }
         try {
-            player.getServer().getCommands().performPrefixedCommand(
-                    player.getServer().createCommandSourceStack(),
-                    "eco " + op + " " + player.getGameProfile().getName() + " " + amount
+            server.getCommands().performPrefixedCommand(
+                    server.createCommandSourceStack(),
+                    "eco " + op + " " + name + " " + amount
             );
         } catch (Throwable ignored) {
+        }
+    }
+
+    private static void adjustScoreByName(MinecraftServer server, String name, int delta) {
+        if (server == null || name == null || name.isBlank() || delta == 0) {
+            return;
+        }
+        String objectiveName = LumenConfig.COMMON.coinsObjective.get();
+        Scoreboard scoreboard = server.getScoreboard();
+        Objective objective = scoreboard.getObjective(objectiveName);
+        if (objective == null) {
+            objective = scoreboard.addObjective(objectiveName, ObjectiveCriteria.DUMMY,
+                    Component.literal(objectiveName), ObjectiveCriteria.DUMMY.getDefaultRenderType());
+        }
+        Score score = scoreboard.getOrCreatePlayerScore(name, objective);
+        long next = (long) score.getScore() + delta;
+        int clamped = (int) Math.max(0L, Math.min(next, Integer.MAX_VALUE));
+        score.setScore(clamped);
+    }
+
+    private static boolean playerKnown(MinecraftServer server, String name) {
+        if (findOnline(server, name) != null) {
+            return true;
+        }
+        try {
+            if (server.getProfileCache() != null && server.getProfileCache().get(name).isPresent()) {
+                return true;
+            }
+        } catch (Throwable ignored) {
+        }
+        try {
+            Class<?> bukkit = Class.forName("org.bukkit.Bukkit");
+            Object offline = bukkit.getMethod("getOfflinePlayer", String.class).invoke(null, name);
+            Boolean played = (Boolean) offline.getClass().getMethod("hasPlayedBefore").invoke(offline);
+            if (Boolean.TRUE.equals(played)) {
+                return true;
+            }
+            Boolean onlineFlag = (Boolean) offline.getClass().getMethod("isOnline").invoke(offline);
+            return Boolean.TRUE.equals(onlineFlag);
+        } catch (Throwable ignored) {
+            return false;
         }
     }
 

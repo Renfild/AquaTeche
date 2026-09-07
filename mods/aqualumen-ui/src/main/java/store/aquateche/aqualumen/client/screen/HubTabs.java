@@ -152,19 +152,21 @@ public final class HubTabs {
         int dailyY = tileY + 48;
         if (dailyY + 34 <= y + height) {
             LumenWidgets.card(graphics, theme, x, dailyY, width, 34, null);
+            boolean horizonReady = snapshot.eventLine() != null && snapshot.eventLine().contains("\u0441\u0434\u0430\u0439");
+            boolean canClaim = snapshot.wallet().dailyAvailable() || horizonReady;
             Icons.drawCentered(graphics, Icons.Icon.CASE, x + 20, dailyY + 17, 10,
-                    snapshot.wallet().dailyAvailable() ? theme.accent() : theme.textDim());
+                    canClaim ? theme.accent() : theme.textDim());
             HubFont.draw(graphics, font,
                     "\u0415\u0436\u0435\u0434\u043d\u0435\u0432\u043d\u0430\u044f \u043d\u0430\u0433\u0440\u0430\u0434\u0430 \u2022 \u0441\u0435\u0440\u0438\u044f " + snapshot.wallet().dailyStreak(),
                     x + 32, dailyY + 13, theme.text());
-            String state = snapshot.wallet().dailyAvailable()
-                    ? "\u0413\u043e\u0442\u043e\u0432\u043e"
+            String state = canClaim
+                    ? (horizonReady && !snapshot.wallet().dailyAvailable() ? "\u0421\u0434\u0430\u0442\u044c" : "\u0413\u043e\u0442\u043e\u0432\u043e")
                     : "\u0417\u0430\u0432\u0442\u0440\u0430";
             int chipWidth = HubFont.width(font, state) + 16;
             Gfx.roundedRect(graphics, x + width - chipWidth - 12, dailyY + 8, chipWidth, 18, 9,
-                    Gfx.withAlpha(snapshot.wallet().dailyAvailable() ? theme.accent() : theme.textDim(), 0.18F));
+                    Gfx.withAlpha(canClaim ? theme.accent() : theme.textDim(), 0.18F));
             HubFont.draw(graphics, font, state, x + width - chipWidth - 4, dailyY + 13,
-                    snapshot.wallet().dailyAvailable() ? theme.accent() : theme.textDim());
+                    canClaim ? theme.accent() : theme.textDim());
         }
     }
 
@@ -199,13 +201,16 @@ public final class HubTabs {
             HubFont.draw(graphics, font, offer.title(), cardX + 30, cardY + 12, theme.text());
             HubFont.draw(graphics, font, offer.subtitle(), cardX + 30, cardY + 24, theme.textDim());
 
-            String price = offer.owned()
-                    ? "\u041a\u0443\u043f\u043b\u0435\u043d\u043e"
-                    : offer.price() + " " + currency(offer.currency());
             int priceColor = offer.owned() ? theme.success() : theme.gold();
             Icons.drawCentered(graphics, offer.owned() ? Icons.Icon.CHECK : Icons.Icon.ARROW,
                     cardX + 16, cardY + 46, 8, priceColor);
-            HubFont.draw(graphics, font, price, cardX + 24, cardY + 42, priceColor);
+            if (offer.owned()) {
+                HubFont.draw(graphics, font, "\u041a\u0443\u043f\u043b\u0435\u043d\u043e", cardX + 24, cardY + 42, priceColor);
+            } else if (gems) {
+                HubFont.draw(graphics, font, offer.price() + " \u043a\u0440", cardX + 24, cardY + 42, priceColor);
+            } else {
+                drawCoinAmount(graphics, font, offer.price(), cardX + 24, cardY + 42, priceColor);
+            }
 
             if (!offer.badge().isEmpty()) {
                 int badgeWidth = HubFont.width(font, offer.badge()) + 12;
@@ -237,15 +242,16 @@ public final class HubTabs {
                 default -> theme.accent();
             };
             Icons.badge(graphics, Icons.Icon.CASE, x + 10, rowY + 10, 20, Gfx.withAlpha(accent, 0.22F), accent);
-            HubFont.draw(graphics, font, entry.title(), x + 40, rowY + 12, theme.text());
-            HubFont.draw(graphics, font, entry.cost() + " монет · доступно: " + entry.count(),
-                    x + 40, rowY + 24, theme.textDim());
+            String caseTitle = entry.count() > 0 ? (entry.title() + " \u00d7" + entry.count()) : entry.title();
+            HubFont.draw(graphics, font, caseTitle, x + 40, rowY + 12, theme.text());
+            drawCoinAmount(graphics, font, entry.cost(), x + 40, rowY + 24, theme.textDim());
 
-            String action = entry.count() > 0
+            boolean canOpen = entry.count() > 0 || snapshot.wallet().coins() >= entry.cost();
+            String action = canOpen
                     ? "\u041e\u0442\u043a\u0440\u044b\u0442\u044c"
                     : "\u041c\u0430\u043b\u043e \u043c\u043e\u043d\u0435\u0442";
             int actionWidth = HubFont.width(font, action) + 20;
-            if (entry.count() > 0) {
+            if (canOpen) {
                 Gfx.gradientRoundedH(graphics, x + width - actionWidth - 22, rowY + 11, actionWidth + 12, 18, 9,
                         theme.accent(), theme.accentAlt());
                 Icons.drawCentered(graphics, Icons.Icon.KEY, x + width - actionWidth - 10, rowY + 20, 8, 0xFF08131A);
@@ -753,8 +759,10 @@ public final class HubTabs {
                 x, y + height - 9, theme.textDim());
     }
 
-    private static String currency(String currency) {
-        return "gems".equals(currency) ? "\u043a\u0440" : "\u043c\u043e\u043d";
+    private static void drawCoinAmount(GuiGraphics graphics, Font font, long amount, int x, int y, int color) {
+        String n = Long.toString(amount);
+        HubFont.draw(graphics, font, n, x, y, color);
+        Icons.draw(graphics, Icons.Icon.COIN, x + HubFont.width(font, n) + 2, y - 1, 9, 0xFFFFFFFF);
     }
 
     private static String formatHours(long minutes) {
@@ -826,7 +834,7 @@ public final class HubTabs {
             if (rowY + rowHeight > y + height) {
                 break;
             }
-            if (entry.count() > 0 && mouseX >= x && mouseX <= x + width
+            if ((entry.count() > 0 || snapshot.wallet().coins() >= entry.cost()) && mouseX >= x && mouseX <= x + width
                     && mouseY >= rowY && mouseY <= rowY + rowHeight) {
                 LumenClient.sendAction("case.open", entry.id());
                 return true;

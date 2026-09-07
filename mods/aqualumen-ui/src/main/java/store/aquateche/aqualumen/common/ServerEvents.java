@@ -1,9 +1,11 @@
 package store.aquateche.aqualumen.common;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import store.aquateche.aqualumen.AquaLumenUI;
@@ -11,6 +13,7 @@ import store.aquateche.aqualumen.common.command.LumenCommands;
 import store.aquateche.aqualumen.common.service.HubActionHandler;
 import store.aquateche.aqualumen.common.service.HubDataService;
 import store.aquateche.aqualumen.common.service.HubEconomy;
+import store.aquateche.aqualumen.common.service.PayCommandHook;
 import store.aquateche.aqualumen.common.service.PendingDeliveryService;
 import store.aquateche.aqualumen.config.LumenConfig;
 
@@ -37,6 +40,16 @@ public final class ServerEvents {
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         LumenCommands.register(event.getDispatcher());
+    }
+
+    @SubscribeEvent
+    public static void onServerStarting(ServerStartingEvent event) {
+        PayCommandHook.tryRegisterBukkit();
+    }
+
+    @SubscribeEvent
+    public static void onCommand(CommandEvent event) {
+        PayCommandHook.onForgeCommand(event);
     }
 
     @SubscribeEvent

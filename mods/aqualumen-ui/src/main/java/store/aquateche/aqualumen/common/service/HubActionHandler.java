@@ -2,6 +2,7 @@ package store.aquateche.aqualumen.common.service;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,6 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class HubActionHandler {
 
     private static final Map<String, Long> LAST_ACTION = new ConcurrentHashMap<>();
+    private static final String CASE_KEYS_TAG = "aqualumen_case_keys";
 
     private HubActionHandler() {
     }
@@ -148,24 +150,28 @@ public final class HubActionHandler {
         };
         HubEconomy.grantCoins(player, rewardCoins);
 
-        // Milestone rewards: cases every 5 tiers, two catch multipliers (mirrors
-        // PASS_REWARDS in hub.html) — everything else is the coin payout above
+        String caseExtra = "";
         switch (tier) {
-            case 5 -> openCase(player, "starter");
-            case 10 -> openCase(player, "smeltery");
+            case 5 -> caseExtra = grantPassCase(player, "starter", "Первопроходец");
+            case 10 -> caseExtra = grantPassCase(player, "smeltery", "Инженер");
             case 11 -> HubEconomy.giveItem(player, itemStack("aquatech_ui:rate_x4", 1));
-            case 15 -> openCase(player, "applied");
-            case 20 -> openCase(player, "superconductor");
+            case 15 -> caseExtra = grantPassCase(player, "applied", "Цифровая МЭ");
+            case 20 -> caseExtra = grantPassCase(player, "superconductor", "Проводники");
             case 22 -> HubEconomy.giveItem(player, itemStack("aquatech_ui:rate_x16", 1));
-            case 25 -> openCase(player, "draconic");
+            case 25 -> caseExtra = grantPassCase(player, "draconic", "Драконий");
         }
 
         claimedTag.putBoolean(key, true);
         player.getPersistentData().put("aqualumen_pass_claimed", claimedTag);
 
-        player.sendSystemMessage(Component.literal("Сезонный пропуск: Награда уровня " + tier
-                + " получена (+" + rewardCoins + " монет)").withStyle(ChatFormatting.GREEN));
+        player.sendSystemMessage(Component.literal("Сезонный пропуск: награда уровня " + tier
+                + " получена (+" + HubEconomy.formatCoins(rewardCoins) + " ¤)." + caseExtra).withStyle(ChatFormatting.GREEN));
         HubDataService.push(player);
+    }
+
+    private static String grantPassCase(ServerPlayer player, String caseId, String title) {
+        grantCaseKey(player, caseId, 1);
+        return " Кейс «" + title + "» лежит во вкладке Кейсы — открытие бесплатное.";
     }
 
     static void openCasePublic(ServerPlayer player, String argument) {
@@ -189,11 +195,18 @@ public final class HubActionHandler {
             return;
         }
 
-        long totalCost = (long) def.costCoins * count;
-        if (!HubEconomy.trySpendCoins(player, totalCost)) {
-            player.sendSystemMessage(Component.literal("Недостаточно монет: нужно " + totalCost
-                    + ", есть " + HubEconomy.coins(player)).withStyle(ChatFormatting.RED));
+        int keysHave = caseKeyCount(player, caseId);
+        int fromKeys = Math.min(count, keysHave);
+        int fromCoins = count - fromKeys;
+        long coinCost = (long) def.costCoins * fromCoins;
+        if (fromCoins > 0 && !HubEconomy.trySpendCoins(player, coinCost)) {
+            player.sendSystemMessage(Component.literal("Недостаточно монет: нужно " + HubEconomy.formatCoins(coinCost)
+                    + " ¤, есть " + HubEconomy.formatCoins(HubEconomy.coins(player))
+                    + (keysHave > 0 ? " (бесплатных ключей: " + keysHave + ")" : "")).withStyle(ChatFormatting.RED));
             return;
+        }
+        if (fromKeys > 0) {
+            takeCaseKeys(player, caseId, fromKeys);
         }
 
         RandomSource random = RandomSource.create();
@@ -308,7 +321,7 @@ public final class HubActionHandler {
             return;
         }
         if (reward >= 0L) {
-            player.sendSystemMessage(Component.literal("Ежедневная награда: +" + reward + " монет (серия "
+            player.sendSystemMessage(Component.literal("Ежедневная награда: +" + HubEconomy.formatCoins(reward) + " ¤ (серия "
                     + HubEconomy.dailyStreak(player) + ")").withStyle(ChatFormatting.GREEN));
         }
         HubDataService.push(player);
@@ -331,6 +344,45 @@ public final class HubActionHandler {
             return new ItemStack(Items.PRISMARINE_SHARD, Math.max(1, count));
         }
         return new ItemStack(item, Math.max(1, count));
+    }
+
+
+    static int caseKeyCount(ServerPlayer player, String caseId) {
+        String id = sanitizeCaseId(caseId);
+        if (id.isEmpty() || player == null) return 0;
+        return player.getPersistentData().getCompound(CASE_KEYS_TAG).getInt(id);
+    }
+
+    static void grantCaseKey(ServerPlayer player, String caseId, int amount) {
+        String id = sanitizeCaseId(caseId);
+        if (id.isEmpty() || player == null || amount <= 0) return;
+        CompoundTag tag = player.getPersistentData().getCompound(CASE_KEYS_TAG);
+        tag.putInt(id, Math.max(0, tag.getInt(id) + amount));
+        player.getPersistentData().put(CASE_KEYS_TAG, tag);
+    }
+
+    static boolean takeCaseKeys(ServerPlayer player, String caseId, int amount) {
+        String id = sanitizeCaseId(caseId);
+        if (id.isEmpty() || player == null || amount <= 0) return false;
+        CompoundTag tag = player.getPersistentData().getCompound(CASE_KEYS_TAG);
+        int have = tag.getInt(id);
+        if (have < amount) return false;
+        tag.putInt(id, have - amount);
+        player.getPersistentData().put(CASE_KEYS_TAG, tag);
+        return true;
+    }
+
+    private static String sanitizeCaseId(String caseId) {
+        if (caseId == null) return "";
+        String id = caseId.trim().toLowerCase();
+        if (id.isEmpty() || id.length() > 32) return "";
+        for (int i = 0; i < id.length(); i++) {
+            char c = id.charAt(i);
+            if (!(c >= 'a' && c <= 'z') && !(c >= '0' && c <= '9') && c != '_') {
+                return "";
+            }
+        }
+        return id;
     }
 
     public static void forget(UUID id) {

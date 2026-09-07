@@ -1,5 +1,6 @@
 package net.aquatech.ui.client.hud;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.aquatech.ui.client.ClientUiState;
 import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.aquatech.ui.client.render.LumenGfx;
@@ -13,14 +14,19 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 
 /**
  * Modern In-Game HUD / Sidebar Overlay designed to 100% match AquaLumen aesthetic:
- * 1. Profile & Status Card: Avatar, Nickname, Rank Pill, Balance with vector icon, Playtime with vector icon.
+ * 1. Profile & Status Card: Avatar, Nickname, Rank Pill, Balance with brand logo, Playtime with vector icon.
  * 2. Ocean & Diving Card: Status, Depth, Pressure, Protection & smooth Gradient Oxygen Bar.
  */
 public final class OceanHudOverlay {
+
+    private static final ResourceLocation COIN_TEXTURE =
+            new ResourceLocation("aquatech_ui", "textures/gui/coin.png");
 
     private OceanHudOverlay() {
     }
@@ -101,7 +107,7 @@ public final class OceanHudOverlay {
 
         // Metric Rows
         int bal = ClientUiState.sessionBalance();
-        drawLumenMetricRow(graphics, font, 6, 40, w - 12, 15, LumenIcons.Icon.COIN, "Баланс", bal + " AQ", theme.gold(), theme);
+        drawBalanceRow(graphics, font, 6, 40, w - 12, 15, "Баланс", String.valueOf(bal), theme.gold(), theme);
         drawLumenMetricRow(graphics, font, 6, 57, w - 12, 15, LumenIcons.Icon.CLOCK, "В игре", ClientUiState.getPlaytimeFormatted(), theme.text(), theme);
 
         // ═════════════════════════════════════════════════════════════════════════
@@ -166,18 +172,30 @@ public final class OceanHudOverlay {
         graphics.pose().popPose();
     }
 
+    private static void drawBalanceRow(GuiGraphics graphics, Font font, int x, int y, int rowW, int rowH,
+                                       String label, String value, int valColor, LumenTheme theme) {
+        LumenGfx.roundedRect(graphics, x, y, rowW, rowH, 4, theme.raised() & 0x77FFFFFF);
+        LumenGfx.outline(graphics, x, y, rowW, rowH, 4, theme.borderMuted());
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        graphics.blit(COIN_TEXTURE, x + 4, y + 2, 11, 11, 0, 0, 32, 32, 32, 32);
+        AquaFontRenderer.draw(graphics, font, label, x + 19, y + 3, theme.textDim());
+        String fitted = AquaFontRenderer.fit(font, value, 60);
+        int vW = AquaFontRenderer.width(font, fitted);
+        AquaFontRenderer.draw(graphics, font, fitted, x + rowW - vW - 5, y + 3, valColor);
+    }
+
     private static void drawLumenMetricRow(GuiGraphics graphics, Font font, int x, int y, int rowW, int rowH,
                                            LumenIcons.Icon icon, String label, String value, int valColor, LumenTheme theme) {
         LumenGfx.roundedRect(graphics, x, y, rowW, rowH, 4, theme.raised() & 0x77FFFFFF);
         LumenGfx.outline(graphics, x, y, rowW, rowH, 4, theme.borderMuted());
 
-        // Vector icon
         LumenIcons.draw(graphics, icon, x + 5, y + 2.5F, 10, valColor);
 
-        // Label
         AquaFontRenderer.draw(graphics, font, label, x + 19, y + 3, theme.textDim());
 
-        // Value
         String fitted = AquaFontRenderer.fit(font, value, 60);
         int vW = AquaFontRenderer.width(font, fitted);
         AquaFontRenderer.draw(graphics, font, fitted, x + rowW - vW - 5, y + 3, valColor);

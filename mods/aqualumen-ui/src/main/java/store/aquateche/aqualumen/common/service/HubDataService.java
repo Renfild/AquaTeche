@@ -189,7 +189,7 @@ public final class HubDataService {
                 season,
                 tops(server, player),
                 StoreCatalog.offers(player),
-                cases(coins),
+                cases(player),
                 kits(),
                 warps(),
                 fishes(player),
@@ -197,7 +197,7 @@ public final class HubDataService {
                 PENDING_CASE_RESULTS.remove(player.getUUID()),
                 market(player),
                 eventQuests(player),
-                eventLine()
+                eventLine(player)
         );
     }
 
@@ -233,7 +233,26 @@ public final class HubDataService {
         }
     }
 
-    private static String eventLine() {
+    private static String eventLine(ServerPlayer player) {
+        String step = horizonNextStep(player);
+        String ocean = oceanEventLine();
+        if (!step.isEmpty() && !ocean.isEmpty()) {
+            return step + " · " + ocean;
+        }
+        return !step.isEmpty() ? step : ocean;
+    }
+
+    private static String horizonNextStep(ServerPlayer player) {
+        try {
+            Class<?> ev = Class.forName("net.aquatech.ui.horizon.HorizonEvents");
+            Object line = ev.getMethod("hubNextStep", ServerPlayer.class).invoke(null, player);
+            return line instanceof String s ? s : "";
+        } catch (Throwable t) {
+            return "";
+        }
+    }
+
+    private static String oceanEventLine() {
         try {
             Class<?> svc = Class.forName("net.aquatech.ui.fishing.OceanEventsService");
             Object status = svc.getMethod("statusView").invoke(null);
@@ -413,16 +432,16 @@ public final class HubDataService {
         });
     }
 
-    /** Cases from config/aqualumen/cases.json; count shows how many the player can afford. */
-    private static List<HubSnapshot.CaseEntry> cases(long coins) {
+    /** Cases from config/aqualumen/cases.json. count = owned free keys (battle pass / grants). */
+    private static List<HubSnapshot.CaseEntry> cases(ServerPlayer player) {
         List<HubSnapshot.CaseEntry> entries = new ArrayList<>();
         for (CaseConfig.CaseDef def : CaseConfig.get().cases) {
-            int count = def.costCoins > 0 ? (int) Math.min(999L, coins / def.costCoins) : 0;
+            int keys = HubActionHandler.caseKeyCount(player, def.id);
             entries.add(new HubSnapshot.CaseEntry(
                     def.id,
                     def.title,
                     def.costCoins,
-                    count,
+                    keys,
                     def.rarity,
                     lootPreview(def)
             ));

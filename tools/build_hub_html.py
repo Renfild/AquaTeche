@@ -49,6 +49,9 @@ hub_html_raw = r'''<!doctype html>
     .chips{display:flex;gap:8px}
     .chip{display:flex;align-items:center;gap:7px;height:30px;padding:0 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035);font-size:12px;font-variant-numeric:tabular-nums}
     .chip-dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 10px var(--success)}
+    .aqua-coin-icon{width:14px;height:14px;object-fit:contain;vertical-align:-2px;flex-shrink:0;filter:drop-shadow(0 0 5px rgba(47,224,192,.55))}
+    .chip .aqua-coin-icon{width:16px;height:16px}
+    .coins-amt{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;vertical-align:middle}
     .icon-button{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:transparent;cursor:pointer;transition:.18s var(--ease)}
     .icon-button:hover{background:rgba(255,255,255,.07);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
     .icon-button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
@@ -83,19 +86,31 @@ hub_html_raw = r'''<!doctype html>
     .section-title{display:flex;justify-content:space-between;align-items:center;margin:15px 2px 9px;font-size:12px}.section-title span{color:var(--muted);font-size:10px}
     .season{position:relative}.season-head{display:flex;justify-content:space-between;gap:15px}.season h3{margin:0 0 4px;font-size:14px}.season p{margin:0;color:var(--muted);font-size:10px}.tier{font-size:24px;color:var(--gold)}
     .rows{display:grid}.row{display:flex;align-items:center;gap:11px;min-height:42px;border-bottom:1px solid var(--line);font-size:11px}.row:last-child{border:0}.place{width:24px;color:var(--muted)}.row.self{color:var(--accent)}.row-value{margin-left:auto;color:var(--muted)}
-    .store-grid,.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;padding-bottom:80px}
-    .offer{min-height:172px;display:flex;flex-direction:column;position:relative}.offer-badge{position:absolute;right:11px;top:11px;padding:3px 7px;border-radius:8px;background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold);font-size:9px}
-    .offer-art{height:54px;width:54px;display:grid;place-items:center;margin-bottom:14px;border-radius:16px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 20%,transparent),color-mix(in srgb,var(--accent2) 12%,transparent));color:var(--accent);font-size:22px}
-    .offer h3{margin:0;font-size:13px}.offer p{margin:5px 0 13px;color:var(--muted);font-size:10px;line-height:1.4}.offer-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between}.price{font-size:12px;color:var(--gold)}
-    .button{min-height:30px;padding:0 13px;border:1px solid color-mix(in srgb,var(--accent) 36%,transparent);border-radius:10px;background:color-mix(in srgb,var(--accent) 11%,transparent);color:var(--accent);font-size:10px;cursor:pointer;transition:.18s var(--ease)}
-    .button:hover{background:color-mix(in srgb,var(--accent) 20%,transparent);transform:translateY(-1px)}.button:disabled{opacity:.45;cursor:default;transform:none}
-    .button.primary{border:0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06110f;font-weight:750}
+    .store-grid,.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;padding-bottom:80px}
+    .offer{min-height:176px;display:flex;flex-direction:column;position:relative;padding:18px 16px 16px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.03)}
+    .offer:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.045)}
+    .offer.is-owned{border-color:rgba(76,208,138,.28)}
+    .offer-badge{position:absolute;right:14px;top:14px;padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--muted);font-size:11px;font-weight:600;letter-spacing:0;border:0}
+    .offer-art,.rank-glyph{width:40px;height:40px;display:grid;place-items:center;margin:0 0 14px;border-radius:11px;background:rgba(255,255,255,.06);color:var(--accent)}
+    .offer-art svg,.rank-glyph svg{width:22px;height:22px}
+    .offer h3{margin:0;font-size:17px;font-weight:600;letter-spacing:-.02em}
+    .offer p{margin:6px 0 14px;color:var(--muted);font-size:12px;line-height:1.45}
+    .offer-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .price{font-size:13px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+    .button{min-height:32px;padding:0 14px;border:1px solid rgba(255,255,255,.12);border-radius:980px;background:rgba(255,255,255,.06);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;transition:.18s var(--ease)}
+    .button:hover{background:rgba(255,255,255,.1);transform:none}
+    .button:disabled{opacity:.4;cursor:default;transform:none}
+    .button.primary{border:0;background:var(--accent);color:#06211c;font-weight:650}
+    .rank-card{text-align:left}
     
     /* Premium Case Cards */
     .case{min-height:245px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:16px 14px;position:relative;transition:transform .22s var(--ease), border-color .22s}
     .case:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
     .case-card-img{width:96px;height:96px;object-fit:contain;margin:4px 0 10px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.65));transition:transform .26s var(--ease)}
     .case:hover .case-card-img{transform:scale(1.08) translateY(-2px)}
+    .case-art{position:relative;display:flex;align-items:center;justify-content:center;margin:4px 0 10px}
+    .case-art .case-card-img{margin:0}
+    .case-owned{position:absolute;right:-6px;top:-6px;min-width:28px;height:20px;padding:0 7px;border-radius:999px;background:rgba(52,199,89,.2);border:1px solid rgba(52,199,89,.4);color:#34c759;font-size:11px;font-weight:650;letter-spacing:0;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
     .case h3{margin:0 0 3px;font-size:14px;font-weight:780}
     .case-rarity{display:inline-block;margin:0 0 12px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid}
     .case-actions-row{display:flex;gap:6px;width:100%;margin-top:auto}
@@ -121,18 +136,22 @@ hub_html_raw = r'''<!doctype html>
     .modal-layer{position:fixed;inset:0;z-index:15;display:none;place-items:center;background:rgba(2,5,9,.72);backdrop-filter:blur(8px)}.modal-layer.open{display:grid}
     .modal{width:min(390px,88vw);padding:20px;border:1px solid var(--line);border-radius:17px;background:#101820;box-shadow:0 25px 80px rgba(0,0,0,.6)}.modal h2{margin:0 0 7px;font-size:17px}.modal p{margin:0 0 18px;color:var(--muted);font-size:11px;line-height:1.55}.modal-actions{display:flex;justify-content:flex-end;gap:8px}
     .empty{height:100%;display:grid;place-items:center;color:var(--muted);font-size:12px}
-    .rank-pill{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:8px;font-size:11px;font-weight:760;letter-spacing:.05em}
-    .rank-card{text-align:center}
-    .rank-crest{width:72px;height:72px;display:grid;place-items:center;margin:4px auto;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
-    .rank-crest svg{width:44px;height:44px}
-    .rank-modal{width:min(470px,92vw);position:relative}
+    .rank-modal-head .rank-glyph{width:48px;height:48px;margin:0}
+    .rank-modal-head .rank-glyph svg{width:24px;height:24px}
+    .rank-name{margin:0;font-size:15px;font-weight:750;letter-spacing:.01em}
+    .rank-tag{font-size:10px;font-weight:700;letter-spacing:.16em;margin:4px 0 5px}
+    .rank-sub{margin:0 0 10px;color:var(--muted);font-size:11px}
+    .rank-modal{width:min(440px,92vw);position:relative}
     .rank-modal h2{margin:0;font-size:19px}
     .rank-modal .rank-modal-close{position:absolute;top:12px;right:12px}
-    .rank-modal-head{display:flex;align-items:center;gap:14px;margin-bottom:10px;text-align:left}
-    .rank-modal-sub{margin:0 0 12px;color:var(--muted);font-size:11px}
-    .rank-perks{max-height:250px;overflow:auto;display:grid;gap:6px;margin-bottom:16px}
-    .rank-perk{display:flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025);font-size:11.5px;text-align:left}
-    .rank-perk svg{width:14px;height:14px;flex:0 0 auto}
+    .rank-modal-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;text-align:left}
+    .rank-modal-head .rank-glyph{margin:0;height:auto}
+    .rank-modal-sub{margin:0 0 10px;color:var(--muted);font-size:11px}
+    .rank-modal-tag{font-size:10px;font-weight:700;letter-spacing:.16em;margin-top:4px}
+    .rank-perks{max-height:240px;overflow:auto;margin-bottom:14px}
+    .rank-perk{display:flex;align-items:center;gap:10px;padding:8px 2px;font-size:12px;border-bottom:1px solid rgba(255,255,255,.05)}
+    .rank-perk:last-child{border-bottom:none}
+    .rank-perk svg{width:15px;height:15px;flex:0 0 auto}
     
     /* Case Opening Modal & Roulette */
     .case-layer{position:fixed;inset:0;z-index:25;display:none;place-items:center;background:rgba(2,5,9,.88);backdrop-filter:blur(12px)}
@@ -230,7 +249,7 @@ hub_html_raw = r'''<!doctype html>
       <div class="chips">
         <span class="chip"><i class="chip-dot"></i><b id="online">—/—</b></span>
         <span class="chip"><b id="tps">— TPS</b></span>
-        <span class="chip" style="color:var(--gold);"><b id="coins">0</b>&nbsp;монет</span>
+        <span class="chip" style="color:var(--gold);"><img class="aqua-coin-icon" src="__COIN_SRC__" alt=""><b id="coins">0</b></span>
         <span class="chip" style="color:var(--accent);"><b id="gems">0</b>&nbsp;крист</span>
       </div>
       <button class="icon-button" id="refresh" aria-label="Обновить">
@@ -265,10 +284,10 @@ hub_html_raw = r'''<!doctype html>
   <section class="modal rank-modal" role="dialog" aria-modal="true">
     <button class="icon-button rank-modal-close" id="rankModalClose" aria-label="Закрыть"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     <div class="rank-modal-head">
-      <div class="rank-crest" id="rankCrest"></div>
+      <div class="rank-glyph" id="rankCrest"></div>
       <div>
         <h2 id="rankModalTitle">Привилегия</h2>
-        <span class="rank-pill" id="rankPill"></span>
+        <div class="rank-modal-tag" id="rankModalTag"></div>
       </div>
     </div>
     <p class="rank-modal-sub" id="rankModalSub"></p>
@@ -320,6 +339,9 @@ try {
 
   const ITEM_TEXTURES = __TEXTURES_JSON__;
   const CASE_ICONS = __CASE_ICONS_JSON__;
+  const COIN_SRC = "__COIN_SRC__";
+  function coinIco(){return '<img class="aqua-coin-icon" src="'+COIN_SRC+'" alt="">'}
+  function coins(n){return '<span class="coins-amt">'+num(n)+coinIco()+'</span>'}
 
   const tabMeta = {
     profile:["Профиль",'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.4-3.6 4-5.2 7-5.2s5.6 1.6 7 5.2"/></svg>'],
@@ -367,7 +389,7 @@ try {
 
   function confirmAction(titleText,msgText,act,arg){
     $("modalTitle").textContent=titleText;
-    $("modalText").textContent=msgText;
+    $("modalText").innerHTML=msgText;
     $("modalConfirm").onclick=()=>{$("modalLayer").classList.remove("open");send({type:"modal",open:false});action(act,arg)};
     $("modalCancel").onclick=()=>{$("modalLayer").classList.remove("open");send({type:"modal",open:false})};
     $("modalLayer").classList.add("open");send({type:"modal",open:true});
@@ -392,7 +414,7 @@ try {
 
     /* coins / gems virtual rewards — no item ID */
     if (itype === 'coins' || (!itemId && (low.includes('coin') || low.includes('монет') || low.includes('aquacoin')))) {
-      return `<svg viewBox="0 0 24 24" class="${cls}" style="color:var(--gold);filter:drop-shadow(0 0 8px #f5c25b)"><ellipse cx="12" cy="7" rx="7" ry="3" fill="currentColor"/><path d="M5 7v4c0 1.7 3.1 3 7 3s7-1.3 7-3V7" fill="currentColor" opacity=".8"/><path d="M5 11v4c0 1.7 3.1 3 7 3s7-1.3 7-3v-4" fill="currentColor" opacity=".6"/></svg>`;
+      return `<img src="${COIN_SRC}" class="${cls} aqua-coin-icon" style="width:22px;height:22px" alt="" />`;
     }
     if (itype === 'gems' || (!itemId && (low.includes('гем') || low.includes('крист')))) {
       return `<svg viewBox="0 0 24 24" class="${cls}" style="color:var(--accent);filter:drop-shadow(0 0 10px #2fe0c0)"><path d="M12 2.5 18 8l-6 13L6 8Z" fill="currentColor"/><path d="M6 8h12M12 2.5 9.5 8l2.5 13M12 2.5 14.5 8 12 21" stroke="#000" stroke-width=".8" opacity=".5"/></svg>`;
@@ -543,7 +565,7 @@ try {
       $("caseOrb").style.color = col;
       $("caseOrb").style.boxShadow = `inset 0 0 22px ${col}22, 0 0 26px ${col}1f`;
       $("caseTitle").textContent = def.title;
-      $("caseSub").textContent = `Стоимость: ${num(def.cost)} монет · ${this.label(def.rarity)}`;
+      $("caseSub").innerHTML = 'Стоимость: ' + coins(def.cost) + ' · ' + this.label(def.rarity);
       $("caseReveal").className = "case-wait";
       $("caseReveal").innerHTML = "<span>Крутим рулетку…</span>";
       $("caseActions").innerHTML = "";
@@ -661,10 +683,9 @@ try {
         winTile.style.boxShadow = `0 0 35px ${col}88, inset 0 0 20px ${col}33`;
       }
 
-      const unit = result.type === "coins" ? "монет" : result.type === "gems" ? "гемов" : "шт.";
-      const iconHtml = getItemIconHtml(result.label, result.item, "mc-icon-lg", result.type);
-
-      const amountHtml = result.amount > 1 ? ('<span class="win-amount">x ' + num(result.amount) + ' ' + unit + '</span>') : '';
+      const amountHtml = result.amount > 1
+        ? ('<span class="win-amount">× ' + (result.type === "coins" ? coins(result.amount) : (result.type === "gems" ? (num(result.amount) + ' гемов') : (num(result.amount) + ' шт.'))) + '</span>')
+        : '';
       const winLabel = esc(this.clean(result.label));
       const rarLabel = this.label(result.rarity);
 
@@ -681,7 +702,7 @@ try {
 
       const next = (state.payload.snapshot.cases || []).find(c => c.id === this.def.id);
       const canAgain = next && next.count > 0;
-      const againBtnText = canAgain ? ('Открыть ещё · ' + num(next.cost)) : 'Не хватает монет';
+      const againBtnText = canAgain ? ('Открыть ещё · ' + coins(next.cost)) : 'Не хватает монет';
       const disabledAttr = canAgain ? '' : 'disabled';
 
       $("caseActions").innerHTML = '<button class="button primary" id="caseAgain" ' + disabledAttr + '>' + againBtnText + '</button><button class="button" id="caseDone">Забрать</button>';
@@ -734,13 +755,25 @@ try {
     }
   };
 
+
+  function caseBudget(c) {
+    const keys = Number(c && c.count) || 0;
+    const coins = Number((state.payload && state.payload.snapshot && state.payload.snapshot.wallet || {}).coins) || 0;
+    const cost = Number(c && c.cost) || 0;
+    return {
+      keys, coins, cost,
+      can(n) { return keys >= n || (cost > 0 && coins >= cost * n) || (cost <= 0 && n <= 1); }
+    };
+  }
+
   /* Case Preview Drop Table Overlay */
   const CasePreview = {
     open(c) {
       const col = CaseSpin.color(c.rarity);
       $("previewCaseImg").src = CASE_ICONS[c.id] || "";
       $("previewCaseTitle").textContent = c.title;
-      $("previewCaseSub").innerHTML = '<span class="case-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '14;margin:0 6px 0 0;">' + CaseSpin.label(c.rarity) + '</span> Стоимость: <b style="color:var(--gold);">' + num(c.cost) + '</b> монет';
+      const owned = Number(c.count) || 0;
+      $("previewCaseSub").innerHTML = '<span class="case-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '14;margin:0 6px 0 0;">' + CaseSpin.label(c.rarity) + '</span> Стоимость: <b>' + coins(c.cost) + '</b>' + (owned > 0 ? (' · у вас ×' + owned) : '');
       $("previewLootCount").textContent = ((c.loot || []).length) + " предметов";
 
       let totalWeight = 0;
@@ -760,13 +793,14 @@ try {
 
       $("previewDropGrid").innerHTML = gridHtml;
 
-      const can1 = c.count >= 1;
-      const can5 = c.count >= 5;
-      const can10 = c.count >= 10;
-
-      const btn1Text = can1 ? ('Крутить x1 · ' + num(c.cost) + ' ¤') : ('Нужно ' + num(c.cost) + ' ¤');
-      const btn5Text = can5 ? ('Крутить x5 · ' + num(c.cost * 5) + ' ¤') : ('Нужно ' + num(c.cost * 5) + ' ¤ (x5)');
-      const btn10Text = can10 ? ('Крутить x10 · ' + num(c.cost * 10) + ' ¤') : ('Нужно ' + num(c.cost * 10) + ' ¤ (x10)');
+      const b = caseBudget(c);
+      const can1 = b.can(1);
+      const can5 = b.can(5);
+      const can10 = b.can(10);
+      const labelFor = (n) => b.keys >= n ? ('Открыть ×' + n) : ('Купить ×' + n + ' · ' + coins(b.cost * n));
+      const btn1Text = can1 ? labelFor(1) : ('Нужно ' + coins(b.cost));
+      const btn5Text = can5 ? labelFor(5) : ('Нужно ' + coins(b.cost * 5));
+      const btn10Text = can10 ? labelFor(10) : ('Нужно ' + coins(b.cost * 10));
 
       $("previewActions").innerHTML =
         '<button class="button primary" id="open1Btn" ' + (can1 ? '' : 'disabled') + '>' + btn1Text + '</button>'
@@ -775,21 +809,21 @@ try {
 
       $("open1Btn").onclick = () => {
         this.close();
-        if (c.count >= 1) {
+        if (caseBudget(c).can(1)) {
           CaseSpin.open(c);
           action("case.open", c.id);
         }
       };
       if ($("open5Btn")) $("open5Btn").onclick = () => {
         this.close();
-        if (c.count >= 5) {
+        if (caseBudget(c).can(5)) {
           CaseSpin.open(c);
           action("case.open", c.id + ":5");
         }
       };
       if ($("open10Btn")) $("open10Btn").onclick = () => {
         this.close();
-        if (c.count >= 10) {
+        if (caseBudget(c).can(10)) {
           CaseSpin.open(c);
           action("case.open", c.id + ":10");
         }
@@ -860,30 +894,46 @@ try {
     "rank.vip":     { prefix: "VIP",     color: "#ff6b6b", perks: ["Префикс [VIP] в чате", "Виртуальный верстак /wb", "Эндер-сундук /ec", "Полёт /fly", "Косметика AquaLumen"] },
   };
 
-  function rankCrest(color) {
-    return `<svg viewBox="0 0 64 64" fill="none" stroke="${color}" stroke-width="2.6" stroke-linecap="round">
-      <circle cx="32" cy="32" r="26" stroke-opacity=".3"/>
-      <circle cx="32" cy="16" r="4"/>
-      <path d="M32 20v25M23 27h18M23 27c-4 4-6 9-6 13M41 27c4 4 6 9 6 13M17 40c-2-2-4-4-4-7M47 40c2-2 4-4 4-7"/>
-    </svg>`;
+  function rankGlyph(id, color) {
+    const s = `fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"`;
+    const icons = {
+      "rank.sailor": `<svg viewBox="0 0 24 24" ${s}><path d="M3 15c1.8 3.2 5 5 9 5s7.2-1.8 9-5"/><path d="M12 4v12"/><path d="M8 9h8"/></svg>`,
+      "rank.skipper": `<svg viewBox="0 0 24 24" ${s}><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 1.8"/><circle cx="12" cy="12" r="1.2" fill="${color}" stroke="none"/></svg>`,
+      "rank.captain": `<svg viewBox="0 0 24 24" ${s}><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6.2 6.2l2.1 2.1M15.7 15.7l2.1 2.1M17.8 6.2l-2.1 2.1M8.3 15.7l-2.1 2.1"/></svg>`,
+      "rank.admiral": `<svg viewBox="0 0 24 24" ${s}><path d="m12 4 2.2 6.4H21l-5.4 4 2.1 6.6L12 17.2 6.3 21l2.1-6.6L3 10.4h6.8Z"/></svg>`,
+      "rank.legend": `<svg viewBox="0 0 24 24" ${s}><path d="M12 3.5 13.6 8H18l-3.6 2.8L15.8 16 12 13.4 8.2 16l1.4-5.2L6 8h4.4Z"/><path d="M8 19h8" opacity=".7"/></svg>`,
+      "rank.vip": `<svg viewBox="0 0 24 24" ${s}><path d="M12 3.5 19 9.2 16.4 20H7.6L5 9.2Z"/><path d="M8.2 9.4 12 16.5l3.8-7.1"/></svg>`
+    };
+    return icons[id] || icons["rank.sailor"];
+  }
+
+  function storeGlyph(id) {
+    if (id === "gems.5") {
+      return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 19 10l-7 10.5L5 10Z"/><path d="M5 10h14M12 3.5 9.2 10 12 20.5M12 3.5 14.8 10 12 20.5"/></svg>`;
+    }
+    if (id === "pass.premium") {
+      return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M8 6v12M3 12h5"/></svg>`;
+    }
+    return "";
   }
 
   let rankModalOffer = null;
   function openRankModal(o) {
     rankModalOffer = o;
     const meta = RANK_META[o.id] || { prefix: o.title.toUpperCase(), color: "#2fe0c0", perks: [] };
-    $("rankCrest").innerHTML = rankCrest(meta.color);
+    $("rankCrest").innerHTML = rankGlyph(o.id, meta.color);
     $("rankModalTitle").textContent = o.title;
-    const pill = $("rankPill");
-    pill.textContent = "[" + meta.prefix + "]";
-    pill.style.color = meta.color;
-    pill.style.background = meta.color + "14";
-    pill.style.border = "1px solid " + meta.color + "55";
+    const tag = $("rankModalTag");
+    tag.textContent = "";
+    tag.style.display = "none";
     $("rankModalSub").textContent = o.subtitle || "";
     $("rankPerks").innerHTML = meta.perks.map(p =>
       `<div class="rank-perk"><svg viewBox="0 0 24 24" fill="none" stroke="${meta.color}" stroke-width="2.4"><path d="M4 12.5l5 5L20 6.5"/></svg>${esc(p)}</div>`
     ).join("");
     const buy = $("rankModalBuy");
+    buy.innerHTML = o.currency === "gems"
+      ? (`Купить — ${num(o.price)} крист.`)
+      : (`Купить — ${coins(o.price)}`);
     buy.style.display = o.owned ? "none" : "";
     $("rankModalLayer").classList.add("open");
     send({ type: "modal", open: true });
@@ -899,27 +949,27 @@ try {
     const cards = (s.store || []).map(o => {
       const meta = RANK_META[o.id];
       if (!meta) {
-        return `<article class="card offer">
-          ${o.badge ? `<span class="offer-badge">${esc(o.badge)}</span>` : ""}
-          <div class="offer-art">${getItemIconHtml(o.title, o.id, "mc-icon")}</div>
+        const art = storeGlyph(o.id) || getItemIconHtml(o.title, o.id, "mc-icon");
+        return `<article class="card offer${o.owned ? " is-owned" : ""}">
+          ${o.owned ? `<span class="offer-badge">Куплено</span>` : ""}
+          <div class="offer-art">${art}</div>
           <h3>${esc(o.title)}</h3>
           <p>${esc(o.subtitle)}</p>
           <div class="offer-foot">
-            <span class="price">${num(o.price)} ${o.currency === "gems" ? "крист." : "монет"}</span>
+            <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}</span>
             <button class="button ${o.owned ? "" : "primary"} buy" data-id="${esc(o.id)}" data-title="${esc(o.title)}" ${o.owned ? "disabled" : ""}>${o.owned ? "Куплено" : "Купить"}</button>
           </div>
         </article>`;
       }
       const c = meta.color;
-      return `<article class="card offer rank-card" style="border-color:${c}44">
-        <span class="offer-badge" style="color:${c};border-color:${c}55;background:${c}14;">${o.owned ? "АКТИВНА" : "ПРИВИЛЕГИЯ"}</span>
-        <div class="rank-crest">${rankCrest(c)}</div>
-        <span class="rank-pill" style="color:${c};background:${c}14;border:1px solid ${c}55;">[${meta.prefix}]</span>
-        <h3 style="margin:8px 0 2px;">${esc(o.title)}</h3>
+      return `<article class="card offer rank-card${o.owned ? " is-owned" : ""}">
+        ${o.owned ? `<span class="offer-badge">Активна</span>` : ""}
+        <div class="rank-glyph" style="color:${c}">${rankGlyph(o.id, c)}</div>
+        <h3>${esc(o.title)}</h3>
         <p>${esc(o.subtitle)}</p>
         <div class="offer-foot">
-          <span class="price">${num(o.price)} ${o.currency === "gems" ? "крист." : "монет"}</span>
-          <button class="button ${o.owned ? "" : "primary"} rank-more" data-id="${esc(o.id)}" ${o.owned ? "disabled style=\"opacity:.45;cursor:default\"" : ""}>${o.owned ? "Активна" : "Подробнее"}</button>
+          <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}</span>
+          <button class="button ${o.owned ? "" : "primary"} rank-more" data-id="${esc(o.id)}" ${o.owned ? "disabled" : ""}>${o.owned ? "Активна" : "Подробнее"}</button>
         </div>
       </article>`;
     }).join("");
@@ -936,11 +986,11 @@ try {
       let btn;
       if (q.claimed) btn = `<button class="button" disabled>Получено</button>`;
       else if (ready) btn = `<button class="button primary event-claim" data-idx="${q.idx}">Забрать</button>`;
-      else btn = `<button class="button event-reroll" data-idx="${q.idx}">↻ 100 монет</button>`;
+      else btn = `<button class="button event-reroll" data-idx="${q.idx}">↻ ${coins(100)}</button>`;
       const pct = Number(q.goal) > 0 ? Math.min(100, Math.round(Number(q.progress) / Number(q.goal) * 100)) : 0;
       return `<article class="card offer" style="min-height:auto">
         <h3>${esc(q.desc)}</h3>
-        <p>+${num(q.reward)} монет</p>
+        <p>+${coins(q.reward)}</p>
         <div class="progress-label"><span>${q.progress} / ${q.goal}</span><span>${pct}%</span></div>
         <div class="progress"><i style="width:${pct}%"></i></div>
         <div class="offer-foot" style="margin-top:10px">${btn}</div>
@@ -955,19 +1005,26 @@ try {
     const cards = (s.cases || []).map(c => {
       const col = CaseSpin.color(c.rarity);
       const iconUrl = CASE_ICONS[c.id] || "";
+      const b = caseBudget(c);
+      const openLabel = b.keys > 0 ? "Открыть" : (b.can(1) ? "Купить" : "Мало монет");
+      const stock = coins(c.cost);
+      const ownedBadge = b.keys > 0 ? ('<span class="case-owned">×' + b.keys + '</span>') : "";
       return `<article class="card case" style="border-color:${col}33;cursor:pointer;" data-preview="${esc(c.id)}">
         <span class="case-rarity" style="color:${col};border-color:${col}55;background:${col}14;">${CaseSpin.label(c.rarity)}</span>
-        <img src="${iconUrl}" class="case-card-img" alt="${esc(c.title)}" />
+        <div class="case-art">
+          <img src="${iconUrl}" class="case-card-img" alt="${esc(c.title)}" />
+          ${ownedBadge}
+        </div>
         <h3>${esc(c.title)}</h3>
-        <div style="font-size:12px;color:var(--gold);font-weight:700;margin:4px 0 14px;">${num(c.cost)} монет</div>
+        <div style="font-size:12px;color:var(--text);font-weight:600;margin:4px 0 14px;">${stock}</div>
         <div class="case-actions-row" onclick="event.stopPropagation()">
-          <button class="button preview-case" data-id="${esc(c.id)}">Просмотр</button>
-          <button class="button primary open-case" data-id="${esc(c.id)}" ${c.count > 0 ? "" : "disabled"}>${c.count > 0 ? "Рулетка" : "Мало монет"}</button>
+          <button class="button preview-case" data-id="${esc(c.id)}">Состав</button>
+          <button class="button primary open-case" data-id="${esc(c.id)}" ${b.can(1) ? "" : "disabled"}>${openLabel}</button>
         </div>
       </article>`;
     }).join("");
 
-    return `<div class="view">${title("Кейсы Прогрессии", "10 уникальных кейсов со сбалансированным лутом")}
+    return `<div class="view">${title("Кейсы", "Все кейсы в каталоге. Если кейс выдан — на карточке ×N.")}
       <div class="case-grid">${cards || '<div class="empty">Кейсов нет</div>'}</div>
     </div>`;
   }
@@ -1044,7 +1101,7 @@ try {
           ${iconHtml}
         </div>
         <div style="font-size:11px;font-weight:700;line-height:1.2;margin-bottom:2px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(reward.label)}">${esc(reward.label)}</div>
-        <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;">+${num(reward.coins)} монет</div>
+        <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;">+${coins(reward.coins)}</div>
         <button class="button ${btnClass}" data-level="${t}" ${disabledAttr} style="width:100%;font-size:9.5px;">${btnText}</button>
       </div>`);
     }
@@ -1073,9 +1130,9 @@ try {
         <h3 style="font-size:12.5px;margin:0;font-weight:700;">${esc(f.name)}</h3>
         <span class="offer-badge" style="position:static;">${f.count} шт.</span>
       </div>
-      <p style="font-size:10px;color:var(--muted);margin:0 0 10px;">Цена за шт: <b style="color:var(--gold);">${num(f.priceCoins)}</b> монет</p>
+      <p style="font-size:10px;color:var(--muted);margin:0 0 10px;">Цена за шт: <b style="color:var(--gold);">${coins(f.priceCoins)}</b></p>
       <div class="offer-foot">
-        <span class="price">${num(f.count * f.priceCoins)} монет</span>
+        <span class="price">${coins(f.count * f.priceCoins)}</span>
         <button class="button sell-single-fish" data-fish="${esc(f.id)}" ${f.count > 0 ? "" : "disabled"}>Продать</button>
       </div>
     </article>`).join("");
@@ -1087,16 +1144,16 @@ try {
             <div class="avatar" style="width:64px;height:64px;font-size:24px;">🐟</div>
             <div>
               <h2 style="font-size:18px;margin:0 0 4px;">Скупка Рыбы</h2>
-              <div class="rank">В инвентаре: <b>${totalFish}</b> шт. (${num(totalValue)} монет)</div>
+              <div class="rank">В инвентаре: <b>${totalFish}</b> шт. (${coins(totalValue)})</div>
             </div>
           </div>
           <button class="button primary sell-all-fish" ${totalFish <= 0 ? "disabled" : ""} style="height:36px;padding:0 18px;font-weight:750;margin-left:auto;">
-            ${totalFish > 0 ? `Продать всё (+${num(totalValue)})` : "Инвентарь пуст"}
+            ${totalFish > 0 ? `Продать всё (+${coins(totalValue)})` : "Инвентарь пуст"}
           </button>
         </section>
         <section class="stats">
           <div class="stat"><small>Видов рыбы</small><b>${fishes.length} шт.</b></div>
-          <div class="stat"><small>Баланс</small><b>${compact(s.wallet.coins)}</b></div>
+          <div class="stat"><small>Баланс</small><b>${coins(s.wallet.coins)}</b></div>
         </section>
       </div>
       <div class="section-title"><b>Таблица цен скупки</b><span>Нажмите для продажи партии</span></div>
@@ -1138,7 +1195,7 @@ try {
             </div>
           </div>
           <div class="offer-foot" style="margin-top:10px;">
-            <span class="price" style="color:var(--gold);font-weight:800;">${num(lot.price)} монет</span>
+            <span class="price" style="color:var(--gold);font-weight:800;">${coins(lot.price)}</span>
             ${actionBtn}
           </div>
         </article>`;
@@ -1155,7 +1212,7 @@ try {
         </section>
         <section class="stats">
           <div class="stat"><small>Активных лотов</small><b>${activeCount} шт.</b></div>
-          <div class="stat"><small>Ваш баланс</small><b>${compact(s.wallet ? s.wallet.coins : 0)}</b></div>
+          <div class="stat"><small>Ваш баланс</small><b>${coins(s.wallet ? s.wallet.coins : 0)}</b></div>
         </section>
       </div>
       <div class="section-title"><b>Свежие предложения</b><span>Обновляется в реальном времени</span></div>
@@ -1233,7 +1290,7 @@ try {
       if (offer && !offer.owned) openRankModal(offer);
     });
     document.querySelectorAll(".event-claim").forEach(b => b.onclick = () => action("events.claim", b.dataset.idx));
-    document.querySelectorAll(".event-reroll").forEach(b => b.onclick = () => confirmAction("Сменить контракт", "100 монет", "events.reroll", b.dataset.idx));
+    document.querySelectorAll(".event-reroll").forEach(b => b.onclick = () => confirmAction("Сменить контракт", "Списать " + coins(100) + "?", "events.reroll", b.dataset.idx));
     
     document.querySelectorAll(".preview-case").forEach(b => b.onclick = (e) => {
       e.stopPropagation();
@@ -1250,7 +1307,7 @@ try {
     document.querySelectorAll(".open-case").forEach(b => b.onclick = (e) => {
       e.stopPropagation();
       const def = (state.payload.snapshot.cases || []).find(c => c.id === b.dataset.id);
-      if (!def || def.count <= 0) return;
+      if (!def || !caseBudget(def).can(1)) return;
       CaseSpin.open(def);
       action("case.open", def.id);
     });
@@ -1503,7 +1560,56 @@ try {
 </body>
 </html>'''
 
-hub_html_content = hub_html_raw.replace("__TEXTURES_JSON__", textures_json).replace("__CASE_ICONS_JSON__", case_icons_json)
+def _coin_src():
+    from io import BytesIO
+    import base64
+    from pathlib import Path
+    logo = Path("docs/assets/logo.png")
+    if not logo.is_file():
+        return "coin.png", None
+    try:
+        from PIL import Image
+    except ImportError:
+        return "coin.png", logo.read_bytes()
+    img = Image.open(logo).convert("RGBA")
+    img.thumbnail((48, 48), Image.Resampling.LANCZOS)
+    buf = BytesIO()
+    img.save(buf, format="PNG", optimize=True)
+    raw = buf.getvalue()
+    return "data:image/png;base64," + base64.b64encode(raw).decode("ascii"), raw
+
+
+coin_src, coin_png = _coin_src()
+hub_html_content = (
+    hub_html_raw
+    .replace("__TEXTURES_JSON__", textures_json)
+    .replace("__CASE_ICONS_JSON__", case_icons_json)
+    .replace("__COIN_SRC__", coin_src)
+)
+
+try:
+    from io import BytesIO
+    from pathlib import Path as _P
+    from PIL import Image as _Im
+    _logo = _P("docs/assets/logo.png")
+    if _logo.is_file():
+        _src = _Im.open(_logo).convert("RGBA")
+        _src.thumbnail((32, 32), _Im.Resampling.LANCZOS)
+        _canvas = _Im.new("RGBA", (32, 32), (0, 0, 0, 0))
+        _canvas.paste(_src, ((32 - _src.width) // 2, (32 - _src.height) // 2), _src)
+        _buf = BytesIO()
+        _canvas.save(_buf, format="PNG", optimize=True)
+        _mc = _buf.getvalue()
+        for _mc_path in (
+            "mods/aqualumen-ui/src/main/resources/assets/aqualumen/textures/gui/coin.png",
+            "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/coin.png",
+        ):
+            os.makedirs(os.path.dirname(_mc_path), exist_ok=True)
+            with open(_mc_path, "wb") as _f:
+                _f.write(_mc)
+            print(f"Wrote {len(_mc)} bytes to {_mc_path}")
+except Exception as _coin_err:
+    print("coin.png 32px skipped:", _coin_err)
 
 # Output paths
 dest_paths = [
@@ -1522,4 +1628,7 @@ for p in dest_paths:
     os.makedirs(os.path.dirname(p), exist_ok=True)
     with open(p, 'w', encoding='utf-8') as f:
         f.write(hub_html_content)
+    if coin_png:
+        with open(os.path.join(os.path.dirname(p), 'coin.png'), 'wb') as f:
+            f.write(coin_png)
     print(f'Wrote {len(hub_html_content)} bytes to {p}')
