@@ -54,7 +54,7 @@ public final class HubActionHandler {
             case "hub.close" -> HubDataService.closeFor(player.getUUID());
             case "case.open" -> openCase(player, argument);
             case "case.claim" -> claimCaseReward(player, true);
-            case "daily.claim" -> claimDaily(player);
+            case "daily.claim", "hub.claim_daily" -> claimDaily(player);
             case "events.claim" -> handleEventClaim(player, argument);
             case "events.reroll" -> handleEventReroll(player, argument);
             case "pass.claim" -> claimPass(player, argument);
@@ -117,23 +117,47 @@ public final class HubActionHandler {
             return;
         }
 
-        // Grant real coin and item rewards for pass level
-        long rewardCoins = 100L + (long) tier * 50L;
+        // Lucrative, worthwhile rewards per tier (strictly NO gems)
+        long rewardCoins = switch (tier) {
+            case 1 -> 2500L;
+            case 2 -> 3000L;
+            case 3 -> 3500L;
+            case 4 -> 4000L;
+            case 5 -> 5000L;
+            case 6 -> 6000L;
+            case 7 -> 7000L;
+            case 8 -> 8000L;
+            case 9 -> 9000L;
+            case 10 -> 12000L;
+            case 11 -> 14000L;
+            case 12 -> 16000L;
+            case 13 -> 18000L;
+            case 14 -> 20000L;
+            case 15 -> 25000L;
+            case 16 -> 30000L;
+            case 17 -> 35000L;
+            case 18 -> 40000L;
+            case 19 -> 45000L;
+            case 20 -> 50000L;
+            case 21 -> 55000L;
+            case 22 -> 60000L;
+            case 23 -> 70000L;
+            case 24 -> 80000L;
+            case 25 -> 100000L;
+            default -> 2500L + (long) tier * 1500L;
+        };
         HubEconomy.grantCoins(player, rewardCoins);
 
-        // Grant milestone bonuses (cases and crystals)
+        // Milestone rewards: cases every 5 tiers, two catch multipliers (mirrors
+        // PASS_REWARDS in hub.html) — everything else is the coin payout above
         switch (tier) {
             case 5 -> openCase(player, "starter");
-            case 10 -> openCase(player, "abyss");
-            case 15 -> openCase(player, "metallurgy");
+            case 10 -> openCase(player, "smeltery");
+            case 11 -> HubEconomy.giveItem(player, itemStack("aquatech_ui:rate_x4", 1));
+            case 15 -> openCase(player, "applied");
             case 20 -> openCase(player, "superconductor");
-            case 25 -> openCase(player, "steam");
-            case 30 -> openCase(player, "flora");
-            case 35 -> openCase(player, "applied");
-            case 40 -> openCase(player, "smeltery");
-            case 45 -> openCase(player, "draconic");
-            case 48 -> openCase(player, "singularity");
-            case 50 -> openCase(player, "infinity");
+            case 22 -> HubEconomy.giveItem(player, itemStack("aquatech_ui:rate_x16", 1));
+            case 25 -> openCase(player, "draconic");
         }
 
         claimedTag.putBoolean(key, true);
@@ -276,14 +300,28 @@ public final class HubActionHandler {
 
     private static void claimDaily(ServerPlayer player) {
         long reward = HubEconomy.claimDaily(player);
-        if (reward < 0L) {
+        boolean horizon = tryClaimHorizonDaily(player);
+        if (reward < 0L && !horizon) {
             player.sendSystemMessage(Component.literal("Ежедневная награда уже получена")
                     .withStyle(ChatFormatting.YELLOW));
+            HubDataService.push(player);
             return;
         }
-        player.sendSystemMessage(Component.literal("Ежедневная награда: +" + reward + " монет (серия "
-                + HubEconomy.dailyStreak(player) + ")").withStyle(ChatFormatting.GREEN));
+        if (reward >= 0L) {
+            player.sendSystemMessage(Component.literal("Ежедневная награда: +" + reward + " монет (серия "
+                    + HubEconomy.dailyStreak(player) + ")").withStyle(ChatFormatting.GREEN));
+        }
         HubDataService.push(player);
+    }
+
+    private static boolean tryClaimHorizonDaily(ServerPlayer player) {
+        try {
+            Class<?> ev = Class.forName("net.aquatech.ui.horizon.HorizonEvents");
+            Object ok = ev.getMethod("claimHorizonDaily", ServerPlayer.class).invoke(null, player);
+            return Boolean.TRUE.equals(ok);
+        } catch (Throwable t) {
+            return false;
+        }
     }
 
     private static ItemStack itemStack(String itemId, int count) {

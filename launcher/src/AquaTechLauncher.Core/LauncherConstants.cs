@@ -2,7 +2,7 @@ namespace AquaTechLauncher.Core;
 
 public static class LauncherConstants
 {
-    public const string Version = "2.9.90";
+    public const string Version = "2.9.91";
     public const string McVersion = "1.20.1";
     public const string ForgeVersion = "47.4.0";
     public const string McpVersion = "20230612.114412";
@@ -50,6 +50,9 @@ public static class LauncherConstants
     ];
 
     public static readonly string[] PackFolders = ["mods", "config", "kubejs", "resourcepacks"];
+    // Full-reconcile purge scope. config/ is excluded on purpose: mods keep runtime
+    // state there (JEI lookup history, easy_npc skins), purging wipes player data.
+    public static readonly string[] ReconcileFolders = ["mods", "kubejs", "resourcepacks"];
 
     public static readonly HashSet<string> SyncKeepNames = new(StringComparer.OrdinalIgnoreCase)
     {

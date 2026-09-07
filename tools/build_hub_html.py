@@ -61,11 +61,9 @@ hub_html_raw = r'''<!doctype html>
     .nav-button.active svg{color:var(--accent);filter:drop-shadow(0 0 6px color-mix(in srgb,var(--accent) 45%,transparent))}
     .nav-label{flex:1;font-size:13px}
     .badge{min-width:19px;padding:2px 6px;border-radius:999px;background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent);font-size:10px;text-align:center}
-    .daily{margin-top:auto;padding:13px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.015))}
-    .daily strong{display:block;font-size:12px}
-    .daily span{display:block;margin:4px 0 10px;color:var(--muted);font-size:10px;line-height:1.45}
+    .daily{display:none!important}
     .content{grid-row:2;overflow:hidden;position:relative;padding:20px 22px}
-    .view{height:100%;overflow-y:auto;padding-right:5px}.view.view-enter{animation:view-in .22s var(--ease) both}
+    .view{height:100%;overflow-y:auto;padding-right:5px;padding-bottom:80px;box-sizing:border-box;scroll-behavior:smooth}.view.view-enter{animation:view-in .22s var(--ease) both}
     .view::-webkit-scrollbar{width:4px}.view::-webkit-scrollbar-thumb{border-radius:4px;background:rgba(255,255,255,.16)}
     @keyframes view-in{from{opacity:0;transform:translateX(7px)}to{opacity:1;transform:none}}
     .view-title{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:15px}
@@ -85,7 +83,7 @@ hub_html_raw = r'''<!doctype html>
     .section-title{display:flex;justify-content:space-between;align-items:center;margin:15px 2px 9px;font-size:12px}.section-title span{color:var(--muted);font-size:10px}
     .season{position:relative}.season-head{display:flex;justify-content:space-between;gap:15px}.season h3{margin:0 0 4px;font-size:14px}.season p{margin:0;color:var(--muted);font-size:10px}.tier{font-size:24px;color:var(--gold)}
     .rows{display:grid}.row{display:flex;align-items:center;gap:11px;min-height:42px;border-bottom:1px solid var(--line);font-size:11px}.row:last-child{border:0}.place{width:24px;color:var(--muted)}.row.self{color:var(--accent)}.row-value{margin-left:auto;color:var(--muted)}
-    .store-grid,.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+    .store-grid,.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;padding-bottom:80px}
     .offer{min-height:172px;display:flex;flex-direction:column;position:relative}.offer-badge{position:absolute;right:11px;top:11px;padding:3px 7px;border-radius:8px;background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold);font-size:9px}
     .offer-art{height:54px;width:54px;display:grid;place-items:center;margin-bottom:14px;border-radius:16px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 20%,transparent),color-mix(in srgb,var(--accent2) 12%,transparent));color:var(--accent);font-size:22px}
     .offer h3{margin:0;font-size:13px}.offer p{margin:5px 0 13px;color:var(--muted);font-size:10px;line-height:1.4}.offer-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between}.price{font-size:12px;color:var(--gold)}
@@ -232,11 +230,6 @@ hub_html_raw = r'''<!doctype html>
     </header>
     <aside class="sidebar">
       <nav class="nav" id="nav"></nav>
-      <section class="daily">
-        <strong>Ежедневная награда</strong>
-        <span id="dailyText">Данные загружаются</span>
-        <button class="button primary" id="dailyClaim">Забрать</button>
-      </section>
     </aside>
     <section class="content" id="content"><div class="empty">Получаем профиль с сервера…</div></section>
     <footer class="footer">
@@ -291,6 +284,7 @@ hub_html_raw = r'''<!doctype html>
 </div>
 <div class="toast" id="toast"></div>
 <script>
+try {
 (() => {
   "use strict";
 
@@ -384,53 +378,71 @@ hub_html_raw = r'''<!doctype html>
   }
 
   /* High Performance Audio Synthesizer */
-  /* High Performance Audio Synthesizer */
   const Sfx = {
-    ctx: null, lastTick: 0,
+    ctx: null, master: null, lastTick: 0,
     ensure() {
       try {
-        this.ctx = this.ctx || new (window.AudioContext || window.webkitAudioContext)();
+        if (!this.ctx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) {
+            this.ctx = new AC();
+            // Dynamics compressor + master limiter to completely eliminate audio clipping / bass boost
+            const comp = this.ctx.createDynamicsCompressor();
+            comp.threshold.setValueAtTime(-14, this.ctx.currentTime);
+            comp.knee.setValueAtTime(30, this.ctx.currentTime);
+            comp.ratio.setValueAtTime(12, this.ctx.currentTime);
+            comp.attack.setValueAtTime(0.003, this.ctx.currentTime);
+            comp.release.setValueAtTime(0.25, this.ctx.currentTime);
+
+            const gain = this.ctx.createGain();
+            gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+
+            comp.connect(gain);
+            gain.connect(this.ctx.destination);
+            this.master = comp;
+          }
+        }
         if (this.ctx && this.ctx.state === "suspended") this.ctx.resume();
-      } catch (e) { this.ctx = null; }
+      } catch (e) { this.ctx = null; this.master = null; }
     },
     tick(speedRatio) {
-      if (!this.ctx) return;
+      if (!this.ctx || !this.master) return;
       const now = performance.now();
-      if (now - this.lastTick < 45) return;
+      if (now - this.lastTick < 50) return;
       this.lastTick = now;
       try {
         const t = this.ctx.currentTime;
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = "sine";
-        const f = 1200 + (speedRatio || 1.0) * 900;
+        const f = 1100 + (speedRatio || 1.0) * 700;
         osc.frequency.setValueAtTime(f, t);
-        osc.frequency.exponentialRampToValueAtTime(280, t + 0.02);
-        gain.gain.setValueAtTime(0.035, t);
+        osc.frequency.exponentialRampToValueAtTime(350, t + 0.02);
+        gain.gain.setValueAtTime(0.03, t);
         gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.02);
         osc.connect(gain);
-        gain.connect(this.ctx.destination);
+        gain.connect(this.master);
         osc.start(t);
         osc.stop(t + 0.022);
       } catch (e) {}
     },
     win(big) {
-      if (!this.ctx) return;
+      if (!this.ctx || !this.master) return;
       try {
         const t = this.ctx.currentTime;
         const notes = big ? [523.25, 659.25, 783.99, 1046.50, 1318.51] : [523.25, 659.25, 783.99, 1046.50];
         notes.forEach((f, i) => {
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
-          osc.type = "triangle";
-          osc.frequency.setValueAtTime(f, t + i * 0.08);
-          gain.gain.setValueAtTime(0, t + i * 0.08);
-          gain.gain.linearRampToValueAtTime(big ? 0.09 : 0.06, t + i * 0.08 + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.08 + (big ? 0.6 : 0.4));
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(f, t + i * 0.09);
+          gain.gain.setValueAtTime(0, t + i * 0.09);
+          gain.gain.linearRampToValueAtTime(big ? 0.06 : 0.045, t + i * 0.09 + 0.025);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.09 + (big ? 0.55 : 0.38));
           osc.connect(gain);
-          gain.connect(this.ctx.destination);
-          osc.start(t + i * 0.08);
-          osc.stop(t + i * 0.08 + 0.65);
+          gain.connect(this.master);
+          osc.start(t + i * 0.09);
+          osc.stop(t + i * 0.09 + 0.6);
         });
       } catch (e) {}
     }
@@ -439,6 +451,8 @@ hub_html_raw = r'''<!doctype html>
   /* Smooth GPU 60 FPS Roulette Spin Engine */
   const CaseSpin = {
     active: false,
+    delivered: false,
+    revealed: false,
     def: null,
     raf: 0,
     timeout: 0,
@@ -486,6 +500,8 @@ hub_html_raw = r'''<!doctype html>
       this.close(true);
       this.def = def;
       this.active = true;
+      this.delivered = false;
+      this.revealed = false;
       this.pos = 0;
       this.tiles = [];
       this.resultIndex = -1;
@@ -519,8 +535,8 @@ hub_html_raw = r'''<!doctype html>
           if (cid !== lastId && cnt < maxPerItem) {
             picked = candidate;
             break;
-}
-}
+          }
+        }
         if (!picked) picked = this.pick(lootPool);
         const pid = picked.item || picked.label;
         counts[pid] = (counts[pid] || 0) + 1;
@@ -539,6 +555,8 @@ hub_html_raw = r'''<!doctype html>
         toast('Кейс: ' + this.clean(result.label) + amt);
         return;
       }
+      if (this.delivered) return;
+      this.delivered = true;
       clearTimeout(this.timeout);
 
       const animations = state.payload.appearance ? state.payload.appearance.animations : true;
@@ -588,10 +606,17 @@ hub_html_raw = r'''<!doctype html>
         this.raf = requestAnimationFrame(loop);
       };
 
+      if (this.raf) cancelAnimationFrame(this.raf);
       this.raf = requestAnimationFrame(loop);
     },
 
     reveal(result) {
+      if (this.revealed) return;
+      this.revealed = true;
+      if (this.raf) {
+        cancelAnimationFrame(this.raf);
+        this.raf = 0;
+      }
       if (!result && this.resultIndex >= 0) result = this.tiles[this.resultIndex];
       if (!result) { this.fail(); return; }
 
@@ -646,7 +671,7 @@ hub_html_raw = r'''<!doctype html>
 
     confetti(col) {
       const palette = [col, "#2fe0c0", "#3b9dff", "#f5c25b", "#ff4f79", "#ffffff"];
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 25; i++) {
         const s = document.createElement("i");
         s.className = "confetti";
         s.style.background = palette[i % palette.length];
@@ -666,9 +691,13 @@ hub_html_raw = r'''<!doctype html>
 
     close(keepLayer) {
       this.active = false;
+      this.delivered = false;
+      this.revealed = false;
       clearTimeout(this.timeout);
-      cancelAnimationFrame(this.raf);
-      this.raf = 0;
+      if (this.raf) {
+        cancelAnimationFrame(this.raf);
+        this.raf = 0;
+      }
       if (keepLayer) return;
       $("caseLayer").classList.remove("open");
       send({ type: "modal", open: false });
@@ -852,16 +881,46 @@ hub_html_raw = r'''<!doctype html>
     </div>`;
   }
 
+  const PASS_REWARDS = [
+    { tier: 1, label: "Монеты", coins: 2500 },
+    { tier: 2, label: "Монеты", coins: 3000 },
+    { tier: 3, label: "Монеты", coins: 3500 },
+    { tier: 4, label: "Монеты", coins: 4000 },
+    { tier: 5, label: "Кейс I: Первопроходец", item: "starter", type: "case", coins: 5000 },
+    { tier: 6, label: "Монеты", coins: 6000 },
+    { tier: 7, label: "Монеты", coins: 7000 },
+    { tier: 8, label: "Монеты", coins: 8000 },
+    { tier: 9, label: "Монеты", coins: 9000 },
+    { tier: 10, label: "Кейс II: Инженер", item: "smeltery", type: "case", coins: 12000 },
+    { tier: 11, label: "Множитель улова ×4", item: "aquatech_ui:rate_x4", coins: 14000 },
+    { tier: 12, label: "Монеты", coins: 16000 },
+    { tier: 13, label: "Монеты", coins: 18000 },
+    { tier: 14, label: "Монеты", coins: 20000 },
+    { tier: 15, label: "Кейс V: Цифровая МЭ", item: "applied", type: "case", coins: 25000 },
+    { tier: 16, label: "Монеты", coins: 30000 },
+    { tier: 17, label: "Монеты", coins: 35000 },
+    { tier: 18, label: "Монеты", coins: 40000 },
+    { tier: 19, label: "Монеты", coins: 45000 },
+    { tier: 20, label: "Кейс VII: Проводники", item: "superconductor", type: "case", coins: 50000 },
+    { tier: 21, label: "Монеты", coins: 55000 },
+    { tier: 22, label: "Множитель улова ×16", item: "aquatech_ui:rate_x16", coins: 60000 },
+    { tier: 23, label: "Монеты", coins: 70000 },
+    { tier: 24, label: "Монеты", coins: 80000 },
+    { tier: 25, label: "Кейс IX: Драконий", item: "draconic", type: "case", coins: 100000 },
+  ];
+
   function passView(s) {
-    const season = s.season || { tier: 1, maxTier: 10 };
-    const maxT = season.maxTier || 10;
+    const season = s.season || { tier: 1, maxTier: 25 };
+    const maxT = 25;
+    const currentTier = Number(season.tier) || 1;
     const claimedList = (season.claimedTiers || []).map(Number);
     const cards = [];
+
     for (let t = 1; t <= maxT; t++) {
-      const unlocked = (season.tier || 1) >= t;
+      const reward = PASS_REWARDS[t - 1] || { tier: t, label: "Награда", coins: 2500 + t * 1000 };
+      const unlocked = currentTier >= t;
       const isClaimed = claimedList.includes(t);
       const isClaimable = unlocked && !isClaimed;
-      const rewardCoins = 100 + t * 35;
 
       let btnText = "Закрыто";
       let btnClass = "";
@@ -869,7 +928,6 @@ hub_html_raw = r'''<!doctype html>
 
       if (isClaimed) {
         btnText = "Забрано";
-        btnClass = "";
         disabledAttr = "disabled style='opacity:0.45;border-color:var(--line);color:var(--muted);cursor:default'";
       } else if (isClaimable) {
         btnText = "Забрать";
@@ -877,27 +935,40 @@ hub_html_raw = r'''<!doctype html>
         disabledAttr = "";
       }
 
-      cards.push(`<div class="reward ${isClaimable ? "claimable" : ""}">
-        <span class="reward-level">Уровень ${t}</span>
-        <div class="reward-icon" style="color:${isClaimable ? "var(--accent)" : isClaimed ? "var(--gold)" : "var(--muted)"}">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="7" rx="7" ry="3"/><path d="M5 7v4c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/><path d="M5 11v4c0 1.7 3.1 3 7 3s7-1.3 7-3v-4"/></svg>
+      let iconHtml;
+      if (reward.type === "case") {
+        const caseIconUrl = CASE_ICONS[reward.item] || "";
+        iconHtml = caseIconUrl
+          ? `<img src="${caseIconUrl}" style="width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5))" />`
+          : `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--gold)" stroke-width="1.6"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 11h18M12 6v5"/></svg>`;
+      } else if (!reward.item) {
+        iconHtml = `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--gold)" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5.2"/><path d="M12 9.4v5.2"/></svg>`;
+      } else {
+        iconHtml = getItemIconHtml(reward.label, reward.item, "mc-icon");
+      }
+
+      cards.push(`<div class="card reward ${isClaimable ? "claimable" : ""}" style="min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px 10px;text-align:center;border-color:${isClaimable ? "var(--accent)" : isClaimed ? "rgba(255,255,255,0.06)" : "var(--line)"};${isClaimed ? "opacity:0.55;" : ""}">
+        <span class="reward-level" style="font-weight:700;letter-spacing:0.04em;color:${unlocked ? "var(--accent)" : "var(--muted)"}">УРОВЕНЬ ${t}</span>
+        <div class="reward-icon" style="height:54px;display:grid;place-items:center;margin:6px 0;">
+          ${iconHtml}
         </div>
-        <div style="font-size:11px;font-weight:700;color:${isClaimed ? "var(--muted)" : "var(--gold)"};margin-bottom:6px;">+${rewardCoins} ¤</div>
+        <div style="font-size:11px;font-weight:700;line-height:1.2;margin-bottom:2px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(reward.label)}">${esc(reward.label)}</div>
+        <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;">+${num(reward.coins)} монет</div>
         <button class="button ${btnClass}" data-level="${t}" ${disabledAttr} style="width:100%;font-size:9.5px;">${btnText}</button>
       </div>`);
     }
 
-    return `<div class="view">${title("Сезонный Пропуск", "Выполняйте квесты и забирайте награды")}
-      <section class="card season">
+    return `<div class="view">${title("Сезонный Пропуск", "Выполняйте задания, ловите рыбу и забирайте ценные награды")}
+      <section class="card season" style="margin-bottom:14px;">
         <div class="season-head">
-          <div><h3>${esc(season.title)}</h3><p>Доступно к получению: <b>${season.claimable}</b> наград</p></div>
-          <b class="tier">T${season.tier}</b>
+          <div><h3 style="font-size:16px;">${esc(season.title || "Сезон I: Покорение Океана")}</h3><p>Доступно к получению: <b style="color:var(--accent);">${season.claimable || 0}</b> наград</p></div>
+          <b class="tier" style="font-size:26px;">T${currentTier}</b>
         </div>
         <div class="progress-label"><span>Прогресс сезона</span><span>${Math.round((season.tierProgress || 0) * 100)}%</span></div>
         <div class="progress"><i style="width:${Math.round((season.tierProgress || 0) * 100)}%"></i></div>
       </section>
-      <div class="section-title"><b>Награды уровней</b><span>Сезон 1</span></div>
-      <div class="card pass-track" style="grid-template-columns:repeat(auto-fit,minmax(96px,1fr));">${cards.join("")}</div>
+      <div class="section-title"><b>Линейка Наград (25 уровней)</b><span style="color:var(--accent);">Без гемов · Окупаемость 100%</span></div>
+      <div class="pass-track" style="grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:10px;padding-bottom:80px;">${cards.join("")}</div>
     </div>`;
   }
 
@@ -943,25 +1014,45 @@ hub_html_raw = r'''<!doctype html>
   }
 
   function auctionView(s) {
-    const sampleLots = [
-      { title: "Кристалл глубин (x4)", price: 120, seller: "Renfild", cat: "Ресурс" },
-      { title: "Светящийся крючок MK-III", price: 350, seller: "AquaTech", cat: "Снаряжение" },
-      { title: "Древнечешуйник (x2)", price: 480, seller: "FisherCat", cat: "Рыба" },
-      { title: "Сплав орихалка (x8)", price: 640, seller: "Engineer", cat: "Материал" },
-      { title: "Капсула сжатого кислорода", price: 90, seller: "Diver_1", cat: "Расходник" },
-      { title: "Солнечный осётр (x5)", price: 250, seller: "StarFisher", cat: "Рыба" }
-    ];
-    const cards = sampleLots.map((lot, idx) => `<article class="card offer" style="min-height:125px;padding:14px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-        <span class="offer-badge" style="position:static;">${esc(lot.cat)}</span>
-        <span style="font-size:10px;color:var(--muted);">Продавец: <b style="color:var(--accent);">${esc(lot.seller)}</b></span>
-      </div>
-      <h3 style="font-size:13.5px;margin:0 0 4px;font-weight:700;">${esc(lot.title)}</h3>
-      <div class="offer-foot">
-        <span class="price">${num(lot.price)} монет</span>
-        <button class="button primary buy-auction" data-idx="${idx}">Купить</button>
-      </div>
-    </article>`).join("");
+    const lots = s.market || [];
+    const activeCount = lots.length;
+    let cards = "";
+
+    if (lots.length === 0) {
+      cards = `<div class="empty-card" style="grid-column:1/-1;text-align:center;padding:36px 20px;background:rgba(255,255,255,.02);border:1px dashed var(--line);border-radius:16px;">
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--muted)" stroke-width="1.5" style="margin-bottom:8px;"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>
+        <h3 style="font-size:15px;margin:0 0 6px;color:var(--text);">На бирже пока нет активных лотов</h3>
+        <p style="font-size:11.5px;color:var(--muted);margin:0 0 14px;line-height:1.4;">Выставите первый предмет на продажу другим игрокам прямо сейчас!</p>
+        <div style="font-size:11px;color:var(--accent);background:rgba(47,224,192,.08);padding:6px 14px;border-radius:8px;display:inline-block;border:1px solid rgba(47,224,192,.2);">
+          Возьмите предмет в руку и напишите в чат: <b style="color:var(--gold);">/ah sell &lt;цена&gt;</b>
+        </div>
+      </div>`;
+    } else {
+      cards = lots.map(lot => {
+        const icon = getItemIconHtml(lot.label, lot.itemId, "mc-icon");
+        const isSelf = Boolean(lot.self);
+        const actionBtn = isSelf
+          ? `<button class="button cancel-auction" data-id="${lot.id}" style="background:rgba(255,107,107,.15);border-color:rgba(255,107,107,.4);color:var(--danger);font-weight:700;">Снять</button>`
+          : `<button class="button primary buy-auction" data-id="${lot.id}">Купить</button>`;
+
+        return `<article class="card offer" style="min-height:130px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span class="offer-badge" style="position:static;">x${num(lot.count || 1)}</span>
+              <span style="font-size:10px;color:var(--muted);">Продавец: <b style="color:${isSelf ? 'var(--gold)' : 'var(--accent)'};">${esc(lot.seller || 'Игрок')}${isSelf ? ' (Вы)' : ''}</b></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+              ${icon}
+              <h3 style="font-size:13.5px;margin:0;font-weight:700;line-height:1.2;">${esc(lot.label || lot.itemId || 'Предмет')}</h3>
+            </div>
+          </div>
+          <div class="offer-foot" style="margin-top:10px;">
+            <span class="price" style="color:var(--gold);font-weight:800;">${num(lot.price)} монет</span>
+            ${actionBtn}
+          </div>
+        </article>`;
+      }).join("");
+    }
 
     return `<div class="view">${title("Аукцион и Рынок", "Покупайте и продавайте предметы между игроками")}
       <div class="grid two" style="margin-bottom:12px;">
@@ -972,12 +1063,12 @@ hub_html_raw = r'''<!doctype html>
           </div>
         </section>
         <section class="stats">
-          <div class="stat"><small>Активных лотов</small><b>${sampleLots.length} шт.</b></div>
-          <div class="stat"><small>Ваш баланс</small><b>${compact(s.wallet.coins)}</b></div>
+          <div class="stat"><small>Активных лотов</small><b>${activeCount} шт.</b></div>
+          <div class="stat"><small>Ваш баланс</small><b>${compact(s.wallet ? s.wallet.coins : 0)}</b></div>
         </section>
       </div>
-      <div class="section-title"><b>Свежие предложения</b><span>Обновляется автоматически</span></div>
-      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards}</div>
+      <div class="section-title"><b>Свежие предложения</b><span>Обновляется в реальном времени</span></div>
+      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));">${cards}</div>
     </div>`;
   }
 
@@ -1118,8 +1209,15 @@ hub_html_raw = r'''<!doctype html>
     });
 
     document.querySelectorAll(".buy-auction").forEach(b => b.onclick = () => {
-      toast("Запрос на покупку лота отправлен!");
-      action("auction.buy", b.dataset.idx);
+      toast("Покупка лота...");
+      action("auction.buy", String(b.dataset.id));
+      setTimeout(() => action("hub.refresh"), 500);
+    });
+
+    document.querySelectorAll(".cancel-auction").forEach(b => b.onclick = () => {
+      toast("Снятие лота...");
+      action("auction.cancel", String(b.dataset.id));
+      setTimeout(() => action("hub.refresh"), 500);
     });
 
     document.querySelectorAll(".swatch").forEach(b => b.onclick = () => {
@@ -1211,10 +1309,6 @@ hub_html_raw = r'''<!doctype html>
     $("build").textContent = s.server.build || "AquaLumen UI";
     $("openKey").textContent = payload.openKey || "F4";
 
-    const d = s.wallet;
-    $("dailyText").textContent = d.dailyAvailable ? `Серия: ${d.dailyStreak} дн.` : "Награда уже забрана";
-    $("dailyClaim").disabled = !d.dailyAvailable;
-
     applyAppearance();
     
     const currentJson = JSON.stringify(s);
@@ -1225,11 +1319,13 @@ hub_html_raw = r'''<!doctype html>
     }
 
     if (s.caseResult) {
-      CaseSpin.deliver(s.caseResult);
+      const res = s.caseResult;
+      delete s.caseResult;
+      if (payload.snapshot) delete payload.snapshot.caseResult;
+      CaseSpin.deliver(res);
     }
   }
 
-  $("dailyClaim").onclick = () => { action("hub.claim_daily"); toast("Запрос награды…"); };
   $("refresh").onclick = () => { action("hub.refresh"); toast("Обновление…"); };
   $("close").onclick = () => send({ type: "action", action: "hub.close" });
 
@@ -1286,6 +1382,14 @@ hub_html_raw = r'''<!doctype html>
     window.AquaLumenBridge.send({ type: "ready" });
   }
 })();
+} catch (pageError) {
+  var hubErrorBox = document.getElementById("content");
+  if (hubErrorBox) {
+    hubErrorBox.innerHTML = '<div class="empty">Ошибка интерфейса: ' +
+      String(pageError && pageError.message ? pageError.message : pageError) + '</div>';
+  }
+  if (window.console && console.error) console.error("[AquaLumen] hub page error:", pageError);
+}
 </script>
 </body>
 </html>'''

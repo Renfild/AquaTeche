@@ -111,6 +111,18 @@ public sealed class PackFileEntry
 
 public sealed class ManifestSync
 {
+    public static string? ResolveSafePath(string gameDir, string? relPath)
+    {
+        if (string.IsNullOrWhiteSpace(relPath)) return null;
+        var rel = relPath.Replace('\\', '/').TrimStart('/');
+        if (rel.Contains("../") || rel.Contains("..\\")) return null;
+        var fullGameDir = System.IO.Path.GetFullPath(gameDir).TrimEnd(System.IO.Path.DirectorySeparatorChar) + System.IO.Path.DirectorySeparatorChar;
+        var fullLocal = System.IO.Path.GetFullPath(System.IO.Path.Combine(gameDir, rel.Replace('/', System.IO.Path.DirectorySeparatorChar)));
+        if (!fullLocal.StartsWith(fullGameDir, StringComparison.OrdinalIgnoreCase))
+            return null;
+        return fullLocal;
+    }
+
     /// <summary>True when local file is missing or does not match size/hash rules.</summary>
     public static bool NeedsDownload(string localPath, PackFileEntry item, bool verifyHash)
     {
@@ -135,7 +147,8 @@ public sealed class ManifestSync
         bool verifyHash,
         Action<string>? log = null,
         Action<double>? progress = null,
-        CancellationToken ct = default)
+        CancellationToken ct = default,
+        bool forceFullCheck = false)
     {
         var files = manifest.Files;
         if (files.Count == 0)
@@ -150,10 +163,11 @@ public sealed class ManifestSync
             StringComparer.OrdinalIgnoreCase);
 
         var localVer = LoadPackVersion(gameDir);
-        var isWarm = !string.IsNullOrWhiteSpace(localVer)
+        var isWarm = !forceFullCheck
+                     && !string.IsNullOrWhiteSpace(localVer)
                      && !string.IsNullOrWhiteSpace(manifest.Version)
                      && string.Equals(localVer.Trim(), manifest.Version.Trim(), StringComparison.OrdinalIgnoreCase);
-        var effectiveVerifyHash = verifyHash && !isWarm;
+        var effectiveVerifyHash = forceFullCheck || (verifyHash && !isWarm);
 
         // Hash cache: on incremental updates (version changed) reuse previously
         // computed md5s for files whose size+mtime are untouched — avoids
@@ -163,16 +177,19 @@ public sealed class ManifestSync
 
         var jobs = new List<PackFileEntry>();
         var checkedN = 0;
-        log?.Invoke(isWarm
-            ? $"Быстрая проверка сборки v{manifest.Version} ({files.Count} файлов)…"
-            : $"Проверяем целостность ({files.Count} файлов сборки v{manifest.Version})…");
+        log?.Invoke(forceFullCheck
+            ? $"Принудительная проверка целостности всех {files.Count} файлов сборки v{manifest.Version}…"
+            : (isWarm
+                ? $"Быстрая проверка сборки v{manifest.Version} ({files.Count} файлов)…"
+                : $"Проверяем целостность ({files.Count} файлов сборки v{manifest.Version})…"));
         progress?.Invoke(5);
 
         foreach (var item in files)
         {
             ct.ThrowIfCancellationRequested();
+            var local = ResolveSafePath(gameDir, item.Path);
+            if (local == null) continue;
             var rel = item.Path.Replace('\\', '/').TrimStart('/');
-            var local = System.IO.Path.Combine(gameDir, rel.Replace('/', System.IO.Path.DirectorySeparatorChar));
             checkedN++;
             if (checkedN % 25 == 0)
                 progress?.Invoke(5 + 25.0 * checkedN / files.Count);
@@ -192,7 +209,7 @@ public sealed class ManifestSync
             }
 
             // Cached hash valid for this exact file snapshot?
-            var cached = cache.GetValidMd5(local, rel);
+            var cached = forceFullCheck ? null : cache.GetValidMd5(local, rel);
             if (cached == null && item.Md5 != null)
             {
                 cached = HttpDownload.Md5File(local);
@@ -374,7 +391,8 @@ public sealed class ManifestSync
     private static async Task<bool> DownloadOneAsync(string gameDir, PackFileEntry item, CancellationToken ct)
     {
         var rel = item.Path.Replace('\\', '/').TrimStart('/');
-        var local = System.IO.Path.Combine(gameDir, rel.Replace('/', System.IO.Path.DirectorySeparatorChar));
+        var local = ResolveSafePath(gameDir, item.Path);
+        if (local == null) return false;
         Directory.CreateDirectory(System.IO.Path.GetDirectoryName(local)!);
 
         var urls = new List<string>();
@@ -451,7 +469,7 @@ public sealed class ManifestSync
     {
         PreCleanStaleFirstParty(gameDir, log);
         var deleted = 0;
-        foreach (var folder in LauncherConstants.PackFolders)
+        foreach (var folder in LauncherConstants.ReconcileFolders)
         {
             var root = System.IO.Path.Combine(gameDir, folder);
             if (!Directory.Exists(root)) continue;

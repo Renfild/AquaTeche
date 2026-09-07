@@ -26,8 +26,19 @@ public final class LumenWebBridge {
                 }
               };
             }
-            if (window.AquaLumenBridge) {
-              window.AquaLumenBridge.send({type:'ready'});
+            if (!window.__aqualumenBridgeBooted) {
+              window.__aqualumenBridgeBooted = true;
+              var tries = 0;
+              var bootTimer = setInterval(function() {
+                tries++;
+                if (window.AquaLumen && window.AquaLumen.applySnapshot) {
+                  clearInterval(bootTimer);
+                  window.AquaLumenBridge.send({type:'ready', page:true});
+                } else if (tries >= 100) {
+                  clearInterval(bootTimer);
+                  window.AquaLumenBridge.send({type:'ready', page:false});
+                }
+              }, 100);
             }
             """;
 
