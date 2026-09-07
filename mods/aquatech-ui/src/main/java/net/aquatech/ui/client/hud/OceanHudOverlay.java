@@ -116,8 +116,8 @@ public final class OceanHudOverlay {
         graphics.pose().scale(1.18F, 1.18F, 1F);
         AquaFontRenderer.draw(graphics, font, balStr, Math.round((pad + 16) / 1.18F), Math.round(40 / 1.18F), theme.gold());
         graphics.pose().popPose();
-        int balW = AquaFontRenderer.width(font, balStr);
-        AquaFontRenderer.draw(graphics, font, "монет", pad + 16 + Math.round(balW * 1.18F) + 5, 47, theme.textDim());
+        String balCap = " монет";
+        AquaFontRenderer.draw(graphics, font, balCap, pad + 16 + 62, 47, theme.textDim());
 
         // Playtime at the right edge
         String playtime = ClientUiState.getPlaytimeFormatted();
