@@ -115,12 +115,14 @@ def verify_store_files(manifest_path: Path) -> int:
     """Count pack CDN files whose live bytes don't match the manifest md5."""
     data = json.loads(manifest_path.read_text(encoding="utf-8"))
     bad = 0
+    ua = "AquaTechPackVerify/1.0 (+https://aquateche.store)"
     for f in data.get("files", []):
         url = f.get("url", "")
         if not url.startswith("https://aquateche.store/pack/"):
             continue
         try:
-            with urllib.request.urlopen(url, timeout=60) as r:
+            req = urllib.request.Request(url, headers={"User-Agent": ua})
+            with urllib.request.urlopen(req, timeout=60) as r:
                 if hashlib.md5(r.read()).hexdigest() != f.get("md5"):
                     bad += 1
                     print(f"  md5 mismatch: {f.get('path')}")

@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.295"
-PACK_VERSION = "2.9.295"
+PACK_TAG = "pack-2.9.303"
+PACK_VERSION = "2.9.303"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -328,10 +328,22 @@ def write_manifest() -> Path:
             f_md5 = md5_file(path)
             f_size = path.stat().st_size
             prev_f = prev_map.get(rel)
-            if not aname.startswith("aquatech_ui") and prev_f and prev_f.get("md5") == f_md5 and prev_f.get("size") == f_size and prev_f.get("url"):
+            is_valid_github = (
+                not aname.startswith("aquatech_ui")
+                and prev_f
+                and prev_f.get("md5") == f_md5
+                and prev_f.get("size") == f_size
+                and prev_f.get("url")
+                and "pack-2.9.295" not in prev_f.get("url", "")
+                and "pack-2.9.296" not in prev_f.get("url", "")
+            )
+            if is_valid_github:
                 f_url = prev_f["url"]
             else:
-                f_url = f"{GITHUB_RELEASE}/{aname}"
+                f_url = f"https://aquateche.store/pack/{rel}"
+                dst_docs = DOCS_PACK / rel
+                dst_docs.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(path, dst_docs)
             files.append(
                 {
                     "path": rel,
@@ -361,6 +373,12 @@ def write_manifest() -> Path:
     out1.write_text(text, encoding="utf-8")
     out2.write_text(text, encoding="utf-8")
     (DOCS_PACK / "manifest.json").write_text(text, encoding="utf-8")
+    active_rel_set = {f["path"] for f in files}
+    for p in list(DOCS_PACK.rglob("*")):
+        if p.is_file() and p.name not in ("manifest.json", "delta.json"):
+            rel_p = p.relative_to(DOCS_PACK).as_posix()
+            if rel_p not in active_rel_set:
+                p.unlink(missing_ok=True)
     print(f"OK manifest: {len(files)} files -> {out1}")
     return out1
 
