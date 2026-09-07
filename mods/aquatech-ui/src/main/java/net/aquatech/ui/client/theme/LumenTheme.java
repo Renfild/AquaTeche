@@ -59,13 +59,17 @@ public record LumenTheme(
             case "admin", "администратор", "dev", "developer", "разработчик", "staff", "персонал" -> 0xFFFF6B6B; // Coral Red
             case "mod", "moderator", "модератор" -> 0xFFFF9F43; // Orange
             case "helper", "хелпер" -> 0xFF4CD08A; // Emerald Green
-            case "manager", "менеджер", "куратор", "legend", "легенда" -> 0xFFE056FD; // Neon Purple
+            case "manager", "менеджер", "куратор" -> 0xFFE056FD; // Neon Purple
+            case "legend", "легенда" -> 0xFFC264FF; // Rank Violet (store palette)
             case "deluxe", "делюкс" -> 0xFF2FE0C0; // Electric Aqua
-            case "ultimate", "ультимейт", "skipper", "шкипер" -> 0xFF00E5FF; // Bright Cyan
+            case "ultimate", "ультимейт" -> 0xFF00E5FF; // Bright Cyan
+            case "skipper", "шкипер" -> 0xFF3B9DFF; // Rank Blue (store palette)
             case "sailor", "моряк" -> 0xFF2FE0C0; // Ocean Teal
-            case "vip", "вип", "vipplus", "vip+", "premium", "премиум" -> 0xFFFEEAA7; // Pale Gold / Yellow
-            case "admiral", "адмирал", "streamer", "стример", "twitch" -> 0xFFA29BFE; // Lavender
-            case "captain", "капитан" -> 0xFF74B9FF; // Sky Blue
+            case "vip", "вип", "vipplus", "vip+" -> 0xFFFF6B6B; // Rank Red (store palette)
+            case "premium", "премиум" -> 0xFFFEEAA7; // Pale Gold / Yellow
+            case "admiral", "адмирал" -> 0xFFFF8C42; // Rank Orange (store palette)
+            case "streamer", "стример", "twitch" -> 0xFFA29BFE; // Lavender
+            case "captain", "капитан" -> 0xFFF5C25B; // Rank Gold (store palette)
             case "youtuber", "ютубер", "youtube" -> 0xFFFF4757; // YouTube Red
             case "aquanaut", "акванавт" -> 0xFF2FE0C0; // Aquanaut Mint
             case "hydrotech", "гидротех" -> 0xFFE07A5F; // Hydrotech Copper
@@ -81,38 +85,38 @@ public record LumenTheme(
     }
 
     public static String getRankTitle(String rankId) {
-        if (rankId == null || rankId.isBlank()) return "ИГРОК";
+        if (rankId == null || rankId.isBlank()) return "Игрок";
         String id = rankId.toLowerCase(java.util.Locale.ROOT).trim();
         return switch (id) {
-            case "owner", "создатель", "владелец" -> "ВЛАДЕЛЕЦ";
-            case "admin", "администратор" -> "АДМИН";
-            case "dev", "developer", "разработчик" -> "DEV";
-            case "mod", "moderator", "модератор" -> "МОДЕР";
-            case "staff", "персонал" -> "ПЕРСОНАЛ";
-            case "helper", "хелпер" -> "ХЕЛПЕР";
-            case "manager", "менеджер", "куратор" -> "КУРАТОР";
-            case "aquanaut", "акванавт" -> "АКВАНАВТ";
-            case "hydrotech", "гидротех" -> "ГИДРОТЕХ";
-            case "engineer", "инженер" -> "ИНЖЕНЕР";
-            case "cyberhydro", "кибер-гидро" -> "КИБЕР-ГИДРО";
-            case "legend", "легенда" -> "ЛЕГЕНДА";
-            case "admiral", "адмирал" -> "АДМИРАЛ";
-            case "captain", "капитан" -> "КАПИТАН";
-            case "skipper", "шкипер" -> "ШКИПЕР";
-            case "sailor", "моряк" -> "МОРЯК";
+            case "owner", "создатель", "владелец" -> "Владелец";
+            case "admin", "администратор" -> "Админ";
+            case "dev", "developer", "разработчик" -> "Разраб";
+            case "mod", "moderator", "модератор" -> "Модер";
+            case "staff", "персонал" -> "Персонал";
+            case "helper", "хелпер" -> "Хелпер";
+            case "manager", "менеджер", "куратор" -> "Куратор";
+            case "aquanaut", "акванавт" -> "Акванавт";
+            case "hydrotech", "гидротех" -> "Гидротех";
+            case "engineer", "инженер" -> "Инженер";
+            case "cyberhydro", "кибер-гидро" -> "Кибер-гидро";
+            case "legend", "легенда" -> "Легенда";
+            case "admiral", "адмирал" -> "Адмирал";
+            case "captain", "капитан" -> "Капитан";
+            case "skipper", "шкипер" -> "Шкипер";
+            case "sailor", "моряк" -> "Моряк";
             case "vipplus", "vip+" -> "VIP+";
             case "vip", "вип", "premium", "премиум" -> "VIP";
-            case "deluxe", "делюкс" -> "DELUXE";
-            case "ultimate", "ультимейт" -> "ULTIMATE";
-            case "streamer", "стример" -> "СТРИМЕР";
-            case "twitch" -> "TWITCH";
-            case "youtuber", "ютубер", "youtube" -> "YOUTUBE";
-            case "artist", "артист" -> "АРТИСТ";
-            case "builder", "билдер", "строитель" -> "БИЛДЕР";
-            case "friend", "друг" -> "ДРУГ";
-            case "trainee", "стажер", "стажёр" -> "СТАЖЕР";
+            case "deluxe", "делюкс" -> "Deluxe";
+            case "ultimate", "ультимейт" -> "Ultimate";
+            case "streamer", "стример" -> "Стример";
+            case "twitch" -> "Twitch";
+            case "youtuber", "ютубер", "youtube" -> "YouTube";
+            case "artist", "артист" -> "Артист";
+            case "builder", "билдер", "строитель" -> "Билдер";
+            case "friend", "друг" -> "Друг";
+            case "trainee", "стажер", "стажёр" -> "Стажёр";
             case "npc" -> "NPC";
-            default -> "ИГРОК";
+            default -> "Игрок";
         };
     }
 }

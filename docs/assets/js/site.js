@@ -2544,6 +2544,7 @@
     store: [
       {
         slug: "sailor",
+        color: "#2fe0c0",
         title: "Моряк",
         price_rub: 99,
         description: "Стартовая морская привилегия. Префикс [МОРЯК], 2 точки дома (/sethome), доступ к базовым удобствам.",
@@ -2551,6 +2552,7 @@
       },
       {
         slug: "skipper",
+        color: "#3b9dff",
         title: "Шкипер",
         price_rub: 249,
         description: "Продвинутый мореплаватель. Префикс [ШКИПЕР], 3 точки дома, приоритетный вход на сервер.",
@@ -2558,6 +2560,7 @@
       },
       {
         slug: "captain",
+        color: "#f5c25b",
         title: "Капитан",
         price_rub: 499,
         description: "Командир корабля. Префикс [КАПИТАН], 5 точек дома, режим полёта /fly на приватах.",
@@ -2565,6 +2568,7 @@
       },
       {
         slug: "admiral",
+        color: "#ff8c42",
         title: "Адмирал",
         price_rub: 899,
         description: "Верховный главнокомандующий флота. Префикс [АДМИРАЛ], 10 точек дома, /fly, /nick.",
@@ -2572,6 +2576,7 @@
       },
       {
         slug: "legend",
+        color: "#c264ff",
         title: "Легенда",
         price_rub: 1499,
         description: "Высший статус на сервере AquaTech. Префикс [ЛЕГЕНДА], неограниченные дома, /fly, /hat, /nick.",
@@ -2579,6 +2584,7 @@
       },
       {
         slug: "vip",
+        color: "#ff6b6b",
         title: "VIP",
         price_rub: 199,
         description: "Классическая VIP-привилегия. Префикс [VIP], /fly, /wb, /ec, косметические эффекты.",
@@ -3538,7 +3544,7 @@
         const price = isForever ? r.foreverPrice : r.monthPrice;
         const unit = isForever ? "навсегда" : "мес";
         return `
-          <div class="store-rank-card ${r.popular ? 'is-popular' : ''} ${r.legend ? 'is-legend' : ''}">
+          <div class="store-rank-card ${r.popular ? 'is-popular' : ''} ${r.legend ? 'is-legend' : ''}" style="--rc:${r.color || '#2fe0c0'}">
             <span class="rank-badge-pill ${r.badge}">${r.badgeLabel}</span>
             <h3 class="store-rank-title">${esc(r.title)}</h3>
             <p class="store-rank-desc">${esc(r.desc)}</p>

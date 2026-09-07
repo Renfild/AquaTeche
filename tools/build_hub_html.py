@@ -155,6 +155,12 @@ hub_html_raw = r'''<!doctype html>
     .rank-perk{display:flex;align-items:center;gap:10px;padding:8px 2px;font-size:12px;border-bottom:1px solid rgba(255,255,255,.05)}
     .rank-perk:last-child{border-bottom:none}
     .rank-perk svg{width:15px;height:15px;flex:0 0 auto}
+    .view-enter .stagger>*{animation:card-in .28s var(--ease) both;animation-delay:calc(var(--i,0)*30ms)}
+    @keyframes card-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .brand-mark{background:linear-gradient(135deg,var(--prank,var(--accent)),var(--accent2))}
+    .topbar{border-bottom-color:var(--prank-soft,var(--line))}
+    .owned-check{color:var(--success);display:inline-grid;place-items:center;vertical-align:-2px;margin-left:6px}
+    .owned-check svg{width:13px;height:13px}
     
     /* Case Opening Modal & Roulette */
     .case-layer{position:fixed;inset:0;z-index:25;display:none;place-items:center;background:rgba(2,5,9,.88);backdrop-filter:blur(12px)}
@@ -996,11 +1002,11 @@ try {
   }
 
   function storeView(s) {
-    const cards = (s.store || []).map(o => {
+    const cards = (s.store || []).map((o, cardIndex) => {
       const meta = RANK_META[o.id];
       if (!meta) {
         const art = storeGlyph(o.id) || getItemIconHtml(o.title, o.id, "mc-icon");
-        return `<article class="card offer${o.owned ? " is-owned" : ""}">
+        return `<article class="card offer${o.owned ? " is-owned" : ""}" style="--i:${cardIndex}">
           ${o.owned ? `<span class="offer-badge">Куплено</span>` : ""}
           <div class="offer-art">${art}</div>
           <h3>${esc(o.title)}</h3>
@@ -1012,19 +1018,19 @@ try {
         </article>`;
       }
       const c = meta.color;
-      return `<article class="card offer rank-card${o.owned ? " is-owned" : ""}" style="--rc:${c}">
+      return `<article class="card offer rank-card${o.owned ? " is-owned" : ""}" style="--rc:${c};--i:${cardIndex}">
         ${o.owned ? `<span class="offer-badge">Активна</span>` : ""}
         <div class="rank-glyph" style="color:${c};background:${c}14">${rankGlyph(o.id, c)}</div>
         <h3>${esc(o.title)}</h3>
         <p>${esc(o.subtitle)}</p>
         <div class="offer-foot">
-          <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}</span>
+          <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}${o.owned ? `<span class="owned-check" title="Активна"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12.5l5 5L20 6.5"/></svg></span>` : ""}</span>
           ${o.owned ? "" : `<button class="button primary rank-more" data-id="${esc(o.id)}">Подробнее</button>`}
         </div>
       </article>`;
     }).join("");
     return `<div class="view">${title("Магазин Улучшений", "Привилегии, префиксы и обмен")}
-      <div class="store-grid">${cards || '<div class="empty">Товаров нет</div>'}</div>
+      <div class="store-grid stagger">${cards || '<div class="empty">Товаров нет</div>'}</div>
     </div>`;
   }
 
@@ -1052,14 +1058,14 @@ try {
   }
 
   function casesView(s) {
-    const cards = (s.cases || []).map(c => {
+    const cards = (s.cases || []).map((c, cardIndex) => {
       const col = CaseSpin.color(c.rarity);
       const iconUrl = CASE_ICONS[c.id] || "";
       const b = caseBudget(c);
       const openLabel = b.keys > 0 ? "Открыть" : (b.can(1) ? "Купить" : "Мало монет");
       const stock = coins(c.cost);
       const ownedBadge = b.keys > 0 ? ('<span class="case-owned">×' + b.keys + '</span>') : "";
-      return `<article class="card case" style="border-color:${col}33;cursor:pointer;" data-preview="${esc(c.id)}">
+      return `<article class="card case" style="--i:${cardIndex};border-color:${col}33;cursor:pointer;" data-preview="${esc(c.id)}">
         <span class="case-rarity" style="color:${col};border-color:${col}55;background:${col}14;">${CaseSpin.label(c.rarity)}</span>
         <div class="case-art">
           <img src="${iconUrl}" class="case-card-img" alt="${esc(c.title)}" />
@@ -1075,7 +1081,7 @@ try {
     }).join("");
 
     return `<div class="view">${title("Кейсы", "Все кейсы в каталоге. Если кейс выдан — на карточке ×N.")}
-      <div class="case-grid">${cards || '<div class="empty">Кейсов нет</div>'}</div>
+      <div class="case-grid stagger">${cards || '<div class="empty">Кейсов нет</div>'}</div>
     </div>`;
   }
 
@@ -1272,7 +1278,9 @@ try {
 
   function kitsView(s) {
     const kits = s.kits || [];
-    const cards = kits.map(k => `<article class="card case" style="display:flex;flex-direction:column;justify-content:space-between;padding:14px;min-height:110px;">
+    const cards = kits.map((k, cardIndex) => {
+      const krc = (RANK_META["rank." + k.id] || {}).color;
+      return `<article class="card case" style="--i:${cardIndex};${krc ? `border-color:${krc}44` : ""};display:flex;flex-direction:column;justify-content:space-between;padding:14px;min-height:110px;">
       <div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
           <h3 style="font-size:13px;margin:0;font-weight:700;">${esc(k.title)}</h3>
@@ -1281,10 +1289,10 @@ try {
         <p style="font-size:11px;color:var(--muted);margin:0 0 10px;line-height:1.4;">${esc(k.description)}</p>
       </div>
       <button class="button primary claim-kit" data-kit="${esc(k.id)}" style="align-self:flex-start;">Забрать набор</button>
-    </article>`).join("");
+    </article>`}).join("");
 
     return `<div class="view">${title("Наборы Снаряжения (Kits)", "Получайте экипировку и стартовые ресурсы")}
-      <div class="case-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards || '<div class="empty">Наборов нет</div>'}</div>
+      <div class="case-grid stagger" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards || '<div class="empty">Наборов нет</div>'}</div>
     </div>`;
   }
 
@@ -1483,6 +1491,10 @@ try {
 
   function applyAppearance() {
     const a = state.payload.appearance || {};
+    const spr = (state.payload.snapshot || {}).profile;
+    const prank = spr && spr.rankColor ? "#" + ((spr.rankColor & 0xffffff).toString(16).padStart(6, "0")) : "";
+    document.documentElement.style.setProperty("--prank", prank);
+    document.documentElement.style.setProperty("--prank-soft", prank ? prank + "30" : "");
     const root = document.documentElement;
     root.classList.toggle("reduce-motion", a.animations === false);
     if (a.theme === "violet_lumen") {
@@ -1618,6 +1630,9 @@ def _coin_src():
     from io import BytesIO
     import base64
     from pathlib import Path
+    coin = Path("docs/assets/images/coin_pixel.png")
+    if coin.is_file():
+        return "data:image/png;base64," + base64.b64encode(coin.read_bytes()).decode("ascii"), coin.read_bytes()
     logo = Path("docs/assets/logo.png")
     if not logo.is_file():
         return "coin.png", None

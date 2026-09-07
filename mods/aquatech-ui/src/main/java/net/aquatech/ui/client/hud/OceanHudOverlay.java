@@ -57,8 +57,9 @@ public final class OceanHudOverlay {
         int screenY = marginTop;
 
         PlayerProfile profile = ClientUiState.profile(player.getUUID());
-        String rankRaw = profile != null ? profile.rankDisplay() : "ИГРОК";
-        if (rankRaw == null || rankRaw.isBlank()) rankRaw = "ИГРОК";
+        String rankRaw = profile != null ? profile.rankDisplay() : "";
+        rankRaw = rankRaw == null ? "" : rankRaw.replaceAll("[\uE000-\uF8FF\uD800-\uDFFF]", "").trim();
+        if (rankRaw.isBlank()) rankRaw = LumenTheme.getRankTitle(profile != null ? profile.rankId() : "player");
         rankRaw = rankRaw.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim().toUpperCase();
         if (rankRaw.isBlank()) rankRaw = "ИГРОК";
 
