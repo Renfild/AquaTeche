@@ -1,16 +1,18 @@
 name: Deploy Portal
 
-# Auto-deploy on push: Cloudflare Pages (aquatech-7gs.pages.dev) + Worker (workers.dev).
-# Secret CLOUDFLARE_API_TOKEN must allow Pages Edit; Workers Scripts Edit for workers.dev.
+# Auto-deploy on push: Cloudflare Pages mirror only (aquatech-7gs.pages.dev).
+# NEVER deploy the worker from CI: git does not contain docs/pack content files
+# (jars, hub.html, kits.json are untracked), so a CI worker deploy replaces the
+# live asset set with the git subset and breaks pack syncs for every player.
+# The worker is deployed from the full local tree by deploy_first_party.py
+# (step 4c) or manually: python tools/deploy_to_cloudflare.py worker
 on:
   push:
     branches: [main]
     paths:
       - "docs/**"
       - "functions/**"
-      - "worker/**"
       - "migrations/**"
-      - "wrangler.worker.toml"
       - "wrangler.toml"
       - ".github/workflows/deploy-worker.yml"
   workflow_dispatch:
@@ -37,14 +39,7 @@ jobs:
           accountId: b855fc404ea390174024f1d249cb1964
           command: pages deploy docs --project-name aquatech --commit-dirty=true
 
-      - name: Deploy Worker
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: b855fc404ea390174024f1d249cb1964
-          command: deploy -c wrangler.worker.toml
-
       - name: Live smoke
         env:
           STRICT_LIVE_DEPLOY: "1"
-        run: python tools/smoke_portal_and_versions.py
+        run: python tools/portal/smoke_portal_and_versions.py

@@ -111,6 +111,25 @@ def copy_jars_to_targets(built: list[Path]) -> None:
             print(f"  Copied {src.name} -> {dst_dir} (md5={md5_file(dst)[:8]}…)")
 
 
+def verify_store_files(manifest_path: Path) -> int:
+    """Count pack CDN files whose live bytes don't match the manifest md5."""
+    data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    bad = 0
+    for f in data.get("files", []):
+        url = f.get("url", "")
+        if not url.startswith("https://aquateche.store/pack/"):
+            continue
+        try:
+            with urllib.request.urlopen(url, timeout=60) as r:
+                if hashlib.md5(r.read()).hexdigest() != f.get("md5"):
+                    bad += 1
+                    print(f"  md5 mismatch: {f.get('path')}")
+        except Exception as e:
+            bad += 1
+            print(f"  download failed: {f.get('path')} ({e})")
+    return bad
+
+
 def wait_for_apex(secrets: dict, timeout_s: int = 120) -> bool:
     panel = secrets.get("apex_panel", "https://panel.apexnodes.xyz").rstrip("/")
     server_id = secrets["apex_server_id"]
@@ -214,6 +233,20 @@ def main() -> None:
         run(["git", "push", "origin", "main"], cwd=ROOT)
     else:
         print("  manifest.json unchanged, skipping push")
+
+    # ── Step 4c: Deploy pack CDN worker (assets mirror the local docs/ tree) ──
+    # The CDN content files are NOT in git, so nothing else may deploy the
+    # worker; without this step the CDN serves the previous publish's set.
+    print("\n=== Step 4c: Deploying pack CDN worker ===")
+    run([sys.executable, "tools/deploy_to_cloudflare.py", "worker"], cwd=ROOT)
+    bad = verify_store_files(ROOT / "docs" / "pack" / "manifest.json")
+    if bad > 0:
+        print(f"  {bad} store files mismatch — retrying worker deploy once…")
+        run([sys.executable, "tools/deploy_to_cloudflare.py", "worker"], cwd=ROOT)
+        bad = verify_store_files(ROOT / "docs" / "pack" / "manifest.json")
+    if bad > 0:
+        sys.exit(f"Pack CDN broken after worker deploy: {bad} store files md5-mismatch")
+    print("  pack CDN verified: every store-URL file md5 matches the manifest")
 
     # ── Step 5: Upload GitHub Release ───────────────────────────────────────
     if not args.skip_github:

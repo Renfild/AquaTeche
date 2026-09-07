@@ -5,6 +5,10 @@
 import { onRequestPost as registerPost } from "../functions/api/register.js";
 import { onRequestPost as loginPost } from "../functions/api/login.js";
 import { onRequestGet as authNickGet } from "../functions/api/auth/nick.js";
+import { onRequestPost as forgotPasswordPost } from "../functions/api/auth/forgot-password.js";
+import { onRequestPost as resetPasswordPost } from "../functions/api/auth/reset-password.js";
+import { onRequestPost as casesOpenPost } from "../functions/api/cases/open.js";
+import { onRequestGet as vaultGet } from "../functions/api/vault/index.js";
 import { onRequestPost as logoutPost } from "../functions/api/logout.js";
 import { onRequestPost as passwordPost } from "../functions/api/password.js";
 import { onRequestGet as meGet } from "../functions/api/me.js";
@@ -22,6 +26,10 @@ import {
   onRequestPost as purchasePost,
   onRequestCallback as purchaseCallback,
 } from "../functions/api/purchase.js";
+import {
+  onRequestGet as lavaGet,
+  onRequestPost as lavaPost,
+} from "../functions/api/donate/lava.js";
 import {
   onRequestGet as pendingCommandsGet,
   onRequestPost as pendingCommandsPost,
@@ -84,6 +92,10 @@ async function handleApi(request, env) {
   if (path === "/api/register" && method === "POST") return registerPost(ctx(request, env));
   if (path === "/api/login" && method === "POST") return loginPost(ctx(request, env));
   if (path === "/api/auth/nick" && method === "GET") return authNickGet(ctx(request, env));
+  if (path === "/api/auth/forgot-password" && method === "POST") return forgotPasswordPost(ctx(request, env));
+  if (path === "/api/auth/reset-password" && method === "POST") return resetPasswordPost(ctx(request, env));
+  if (path === "/api/cases/open" && method === "POST") return casesOpenPost(ctx(request, env));
+  if (path === "/api/vault" && method === "GET") return vaultGet(ctx(request, env));
   if (path === "/api/logout" && method === "POST") return logoutPost(ctx(request, env));
   if (path === "/api/password" && method === "POST") return passwordPost(ctx(request, env));
   if (path === "/api/me" && method === "GET") return meGet(ctx(request, env));
@@ -118,6 +130,10 @@ async function handleApi(request, env) {
   }
   if (path === "/api/purchase/callback" && method === "POST") {
     return purchaseCallback(ctx(request, env));
+  }
+  if (path === "/api/donate/lava") {
+    if (method === "POST") return lavaPost(ctx(request, env));
+    if (method === "GET") return lavaGet(ctx(request, env));
   }
   if (path === "/api/internal/pending-commands") {
     if (method === "GET") return pendingCommandsGet(ctx(request, env));
@@ -157,7 +173,7 @@ async function handleApi(request, env) {
     if (method === "POST") return skinsPost(ctx(request, env));
     if (method === "DELETE") return skinsDelete(ctx(request, env));
   }
-  const skinFile = path.match(/^\/api\/skins\/([^/]+)\/(skin|cape|avatar)$/);
+  const skinFile = path.match(/^\/api\/skins\/([^/]+)\/(skin|cape|avatar)(\.png)?$/);
   if (skinFile && method === "GET") {
     return skinsGet(
       ctx(request, env, {
@@ -204,11 +220,92 @@ async function marketPublicHandler({ request, env }) {
   }
 }
 
+const LAUNCHER_FILES = {
+  "aquatech.exe": "AquaTech.exe",
+  "aquatechlauncher.zip": "AquaTechLauncher.zip",
+};
+
+async function proxyLauncherDownload(request, env, rawFile) {
+  const canonicalFile = LAUNCHER_FILES[String(rawFile || "").toLowerCase()];
+  if (!canonicalFile) {
+    return new Response("Not found", { status: 404 });
+  }
+  let tag = "client-2.9.91";
+  try {
+    const bootRes = env.ASSETS
+      ? await env.ASSETS.fetch(new URL("/bootstrap.json", request.url))
+      : null;
+    if (bootRes && bootRes.ok) {
+      const boot = await bootRes.json();
+      if (boot.version) tag = `client-${String(boot.version).trim()}`;
+    }
+  } catch {
+    /* keep default tag */
+  }
+  const upstream = `https://github.com/Renfild/AquaTeche/releases/download/${tag}/${canonicalFile}`;
+  const isHead = request.method === "HEAD";
+  try {
+    const gh = await fetch(upstream, {
+      method: isHead ? "HEAD" : "GET",
+      redirect: "follow",
+      headers: { "user-agent": "AquaTechPortal/1.0", accept: "*/*" },
+      cf: { cacheTtl: 3600, cacheEverything: true },
+    });
+    if (!gh.ok) {
+      return Response.redirect(upstream, 302);
+    }
+    const headers = new Headers();
+    headers.set("content-type", canonicalFile.endsWith(".zip") ? "application/zip" : "application/octet-stream");
+    headers.set("content-disposition", `attachment; filename="${canonicalFile}"`);
+    const len = gh.headers.get("content-length");
+    if (len) headers.set("content-length", len);
+    headers.set("cache-control", "public, max-age=300");
+    return new Response(isHead ? null : gh.body, { status: gh.status, headers });
+  } catch {
+    return Response.redirect(upstream, 302);
+  }
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
       return withSecurityHeaders(await handleApi(request, env));
+    }
+    const dl = url.pathname.match(/^\/dl\/([^/]+)$/);
+    if (dl && (request.method === "GET" || request.method === "HEAD")) {
+      return withSecurityHeaders(await proxyLauncherDownload(request, env, dl[1]));
+    }
+    if (url.pathname.startsWith("/pack/") && env.ASSETS) {
+      let response = await env.ASSETS.fetch(request);
+      // Assets html_handling 307s "/path/file.html" to "/path/file" — resolve it
+      // server-side so launcher downloads never depend on redirect chasing.
+      if (!response.ok && url.pathname.endsWith(".html")) {
+        response = await env.ASSETS.fetch(new URL(url.pathname.slice(0, -5), request.url).toString());
+      }
+      if (response.ok) {
+        const isManifestJson = url.pathname.endsWith("/manifest.json") || url.pathname.endsWith("/delta.json");
+        const isVersionedJar = url.pathname.endsWith(".jar");
+        const packHeaders = new Headers(response.headers);
+        packHeaders.set("content-type", isManifestJson ? "application/json; charset=utf-8" : "application/octet-stream");
+        // jars are content-addressed by filename; hub.html/kits.json change in place
+        packHeaders.set("cache-control", isManifestJson
+          ? "public, max-age=15, must-revalidate"
+          : (isVersionedJar ? "public, max-age=31536000, immutable" : "public, max-age=60, must-revalidate"));
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: packHeaders,
+        });
+      }
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: new Headers({
+          "cache-control": "no-store",
+          "content-type": response.headers.get("content-type") || "text/plain",
+        }),
+      });
     }
     if (url.pathname.startsWith("/embed/") && env.ASSETS) {
       const sid = String(url.searchParams.get("session") || "").trim();
