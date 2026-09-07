@@ -1586,6 +1586,10 @@ try {
         CaseSpin.close();
         return;
       }
+      if ($("rankModalLayer") && $("rankModalLayer").classList.contains("open")) {
+        closeRankModal();
+        return;
+      }
       if ($("modalLayer") && $("modalLayer").classList.contains("open")) {
         $("modalLayer").classList.remove("open");
         send({ type: "modal", open: false });
