@@ -39,9 +39,23 @@ public final class StarCatcherAttachments {
     }
 
     public static int readRateMultiplier(ItemStack rodStack) {
+        if (rodStack == null || rodStack.isEmpty()) return 1;
         ItemStack rate = findRateStack(rodStack);
         if (rate.getItem() instanceof RateModItem mod) {
             return mod.getMultiplier();
+        }
+        if (rodStack.hasTag()) {
+            CompoundTag tag = rodStack.getTag();
+            if (tag != null && tag.contains(PINNED_RATE)) {
+                String pinned = tag.getString(PINNED_RATE);
+                ResourceLocation id = ResourceLocation.tryParse(pinned);
+                if (id != null) {
+                    Item item = BuiltInRegistries.ITEM.get(id);
+                    if (item instanceof RateModItem mod) {
+                        return mod.getMultiplier();
+                    }
+                }
+            }
         }
         return 1;
     }
@@ -59,6 +73,36 @@ public final class StarCatcherAttachments {
             }
         }
         return ItemStack.EMPTY;
+    }
+
+    public static void unpin(ItemStack rodStack) {
+        if (rodStack == null || rodStack.isEmpty() || !rodStack.hasTag()) return;
+        CompoundTag tag = rodStack.getTag();
+        if (tag != null) {
+            tag.remove(PINNED_RATE);
+            tag.remove(PINNED_DMG);
+        }
+    }
+
+    public static void pin(ItemStack rodStack, ItemStack rateStack) {
+        if (rodStack == null || rodStack.isEmpty() || rateStack == null || rateStack.isEmpty()) return;
+        pin(rodStack.getOrCreateTag(), rateStack);
+    }
+
+    /**
+     * Synchronizes pinned rate NBT with actual live rate mod in attachments.
+     * If live rate mod is present -> updates pin.
+     * If live rate mod is absent -> unpins so removed modifier does not ghost-resurrect.
+     */
+    public static void syncRodPin(ItemStack rodStack) {
+        if (rodStack == null || rodStack.isEmpty()) return;
+        if (!FishingRodCompat.isSupportedRod(rodStack)) return;
+        ItemStack liveRate = findRateStack(rodStack);
+        if (!liveRate.isEmpty()) {
+            pin(rodStack.getOrCreateTag(), liveRate);
+        } else {
+            unpin(rodStack);
+        }
     }
 
     public static void ensureRatePersists(ItemStack rodStack) {

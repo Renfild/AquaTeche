@@ -1,0 +1,39 @@
+ignore-plugins:
+  - PlaceholderAPI
+  - ViaVersion
+  - ProtocolLib
+  - LuckPerms
+  - Mohist
+  - Essentials
+  - FastAsyncWorldEdit
+  - Chunky
+  - SkinsRestorer
+  - Vault
+  - spark
+  - CoreProtect
+  - Multiverse-Core
+  - Citizens
+  - AuthMe
+  - Floodgate
+  - Geyser-Spigot
+
+command-topics:
+  help:
+    description: "Доступные команды сервера AquaTech"
+    permission: ""
+    shortText: "Список команд сервера"
+    fullText: |
+      &b⚡ Доступные команды сервера AquaTech:
+      &e/spawn &7— Телепортация на спавн сервера
+      &e/sethome [имя] &7— Установить точку дома
+      &e/home [имя] &7— Телепортация на точку дома
+      &e/delhome [имя] &7— Удалить точку дома
+      &e/tpa <ник> &7— Отправить запрос телепортации к игроку
+      &e/tpaccept &7/ &e/tpdeny &7— Принять / отклонить телепортацию
+      &e/warp [название] &7— Список варпов / телепортация
+      &e/ah &7— Рынок и аукцион предметов
+      &e/kit &7— Меню доступных наборов предметов
+      &e/money &7— Проверить баланс монет
+      &e/pay <ник> <сумма> &7— Перевести монеты игроку
+      &e/msg <ник> <текст> &7/ &e/r &7— Личные сообщения игрокам
+      &6Клавиша F4 &7— Интерактивное меню сервера (Рынок, Квесты, Магазин)

@@ -522,7 +522,14 @@ public static class ProcessSpawner
     {
         var logDir = Path.Combine(gameDir, "logs");
         Directory.CreateDirectory(logDir);
-        try { File.WriteAllLines(Path.Combine(logDir, "last_launch_cmd.txt"), cmd); }
+        try
+        {
+            var sanitizedCmd = cmd.Select(arg =>
+                arg.StartsWith("-Daquatech.session_token=", StringComparison.OrdinalIgnoreCase)
+                    ? "-Daquatech.session_token=[REDACTED]"
+                    : arg);
+            File.WriteAllLines(Path.Combine(logDir, "last_launch_cmd.txt"), sanitizedCmd);
+        }
         catch { /* ignore */ }
 
         var consolePath = Path.Combine(logDir, "minecraft_console.log");

@@ -3,50 +3,263 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Магазин · AquaTech</title>
-  <meta name="description" content="Морские привилегии Моряк–Легенда на сервере AquaTech. Покупка на сайте пока выключена." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+  <title>Магазин привилегий · AquaTech</title>
+  <meta name="description" content="Морские привилегии от Моряка до Легенды на сервере AquaTech. Эксклюзивные возможности, киты и полет." />
+
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AquaTech" />
-  <meta property="og:title" content="Магазин · AquaTech" />
-  <meta property="og:description" content="Привилегии Моряк–Легенда: состав рангов и цены." />
+  <meta property="og:title" content="Магазин привилегий · AquaTech" />
+  <meta property="og:description" content="Морские ранги и привилегии сервера: состав китов, команды и цены." />
   <meta property="og:url" content="https://aquateche.store/store.html" />
   <meta property="og:image" content="https://aquateche.store/assets/logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Магазин · AquaTech" />
-  <meta name="twitter:description" content="Привилегии Моряк–Легенда: состав рангов и цены." />
-<link rel="stylesheet" href="assets/css/site.css?v=20260903logo" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260905_apple_v2" />
 </head>
 <body data-page="store">
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
-  
-  <section class="page-hero">
-    <div class="container">
-      <div class="eyebrow" data-site="store_eyebrow">Магазин</div>
-      <h1 data-site="store_title">Привилегии</h1>
-      <p data-site="store_lead">Состав рангов и цены. Купить на сайте пока нельзя.</p>
-      <div class="notice-banner inline" data-site="store_notice">Покупки выключены. Оплату подключим позже.</div>
-    </div>
-  </section>
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <div class="card">
-        <h3 style="margin:0 0 0.5rem">💎 Внутриигровой обмен и ранги за монеты</h3>
-        <p style="color:var(--muted);font-size:0.92rem">Часть магазина живёт прямо в игре — <b>F4 → Магазин</b>: там же ранги за монеты и обмен <b>50 000 монет → 5 гемов</b>. Гемы тратятся на косметику и особые позиции, монеты копятся рыбалкой и контрактами (F4 → События).</p>
+
+    <!-- Page Hero with Apple-grade Typography & Segmented Duration Switcher -->
+    <section class="subpage-hero store-hero">
+      <div class="container">
+        <div class="hero-card store-hero-card">
+          <p class="eyebrow"><span class="badge-dot"></span>Магазин привилегий</p>
+          <h1>Привилегии и ранги</h1>
+          <p>Полёт, дома, киты и множители рыбалки. Выдача сразу после оплаты через СБП, карту или баланс.</p>
+          <div class="apple-segment-wrapper">
+            <div class="apple-segment" id="storePeriodToggle" role="tablist" aria-label="Срок действия">
+              <button type="button" class="apple-segment-btn active" data-period="month" role="tab" aria-selected="true">
+                1 месяц
+              </button>
+              <button type="button" class="apple-segment-btn" data-period="forever" role="tab" aria-selected="false">
+                <span>Навсегда</span>
+                <span class="apple-badge-save">Выгодно</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="section" style="padding-top:0">
-    <div class="container catalog-grid" id="store-root"></div>
-  </section>
+    </section>
+
+    <!-- In-Game Notice Callout (Apple HIG Style) -->
+    <section class="section" style="padding-top:0;padding-bottom:1rem">
+      <div class="container">
+        <div class="in-game-notice-card">
+          <div class="notice-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="notice-body">
+            <h3>Покупка внутри игры через клавишу F4</h3>
+            <p>Ты также можешь приобретать ранги и кейсы прямо на сервере за заработанную игровую валюту <b>AquaGems</b> и <b>АкваМонеты</b> без использования сайта.</p>
+          </div>
+          <div class="notice-pill">Меню F4 в игре</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store Ranks Grid -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="store-grid" id="store-root">
+          <p class="muted-line">Загрузка каталога привилегий…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apple HIG Coin Packages Bento Section -->
+    <section class="section" style="padding-top:1rem;padding-bottom:1rem" id="coins-packages">
+      <div class="container">
+        <div class="apple-matrix-card" style="background:linear-gradient(135deg,rgba(16,28,40,0.85) 0%,rgba(10,18,28,0.92) 100%);border:1px solid rgba(245,194,91,0.3);box-shadow:0 12px 36px rgba(0,0,0,0.4),0 0 24px rgba(245,194,91,0.1)">
+          <div class="apple-matrix-header" style="text-align:center;margin-bottom:1.5rem">
+            <div class="eyebrow" style="color:#ffd875;font-weight:700"><span class="badge-dot" style="background:#ffd875;box-shadow:0 0 8px #ffd875"></span>ИГРОВАЯ ВАЛЮТА ДЛЯ F4 И АУКЦИОНА</div>
+            <h2 style="font-size:1.8rem;margin:0.35rem 0 0.5rem">Покупка АкваМонет за Рубли</h2>
+            <p style="color:var(--muted);max-width:620px;margin:0 auto">Приобретай внутриигровые монеты для моментального открытия кейсов в F4, покупки редких снастей на аукционе и торговли между игроками.</p>
+          </div>
+
+          <div class="apple-coin-grid">
+            <div class="apple-coin-card lk-balance-card card-coins" style="padding:1.2rem;text-align:center;display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <span class="apple-badge-save" style="margin-bottom:0.5rem;display:inline-block">Старт</span>
+                <strong class="aqua-coin-badge" style="font-size:1.5rem;color:#ffd875;display:inline-flex;align-items:center;justify-content:center;gap:0.35rem">10 000 <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></strong>
+                <p style="color:var(--muted);font-size:0.85rem;margin:0.4rem 0">На 20 стартовых кейсов</p>
+              </div>
+              <button type="button" class="btn btn-primary" data-buy-coins="coins_10k" data-coins-amount="10000" data-coins-price="99" style="background:linear-gradient(135deg,#ffd875,#f59e0b);color:#091924;font-weight:700;border:none;margin-top:0.75rem;width:100%">
+                Купить за 99 ₽
+              </button>
+            </div>
+
+            <div class="apple-coin-card lk-balance-card card-coins" style="padding:1.2rem;text-align:center;display:flex;flex-direction:column;justify-content:space-between;border-color:rgba(245,194,91,0.6);box-shadow:0 0 20px rgba(245,194,91,0.2)">
+              <div>
+                <span class="apple-badge-save" style="margin-bottom:0.5rem;display:inline-block;background:#ffd875;color:#091924;font-weight:800">Популярно</span>
+                <strong class="aqua-coin-badge" style="font-size:1.5rem;color:#ffd875;display:inline-flex;align-items:center;justify-content:center;gap:0.35rem">30 000 <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></strong>
+                <p style="color:var(--muted);font-size:0.85rem;margin:0.4rem 0">Для редких удочек и F4</p>
+              </div>
+              <button type="button" class="btn btn-primary" data-buy-coins="coins_30k" data-coins-amount="30000" data-coins-price="249" style="background:linear-gradient(135deg,#ffd875,#f59e0b);color:#091924;font-weight:700;border:none;margin-top:0.75rem;width:100%">
+                Купить за 249 ₽
+              </button>
+            </div>
+
+            <div class="apple-coin-card lk-balance-card card-coins" style="padding:1.2rem;text-align:center;display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <span class="apple-badge-save" style="margin-bottom:0.5rem;display:inline-block">Выгодно +15%</span>
+                <strong class="aqua-coin-badge" style="font-size:1.5rem;color:#ffd875;display:inline-flex;align-items:center;justify-content:center;gap:0.35rem">75 000 <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></strong>
+                <p style="color:var(--muted);font-size:0.85rem;margin:0.4rem 0">Кейсы Бездны и аукцион</p>
+              </div>
+              <button type="button" class="btn btn-primary" data-buy-coins="coins_75k" data-coins-amount="75000" data-coins-price="499" style="background:linear-gradient(135deg,#ffd875,#f59e0b);color:#091924;font-weight:700;border:none;margin-top:0.75rem;width:100%">
+                Купить за 499 ₽
+              </button>
+            </div>
+
+            <div class="apple-coin-card lk-balance-card card-coins" style="padding:1.2rem;text-align:center;display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <span class="apple-badge-save" style="margin-bottom:0.5rem;display:inline-block">Максимум</span>
+                <strong class="aqua-coin-badge" style="font-size:1.5rem;color:#ffd875;display:inline-flex;align-items:center;justify-content:center;gap:0.35rem">200 000 <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></strong>
+                <p style="color:var(--muted);font-size:0.85rem;margin:0.4rem 0">Океанский магнат</p>
+              </div>
+              <button type="button" class="btn btn-primary" data-buy-coins="coins_200k" data-coins-amount="200000" data-coins-price="999" style="background:linear-gradient(135deg,#ffd875,#f59e0b);color:#091924;font-weight:700;border:none;margin-top:0.75rem;width:100%">
+                Купить за 999 ₽
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apple Comparison Matrix Table -->
+    <section class="section" style="padding-top:1rem">
+      <div class="container">
+        <div class="apple-matrix-card">
+          <div class="apple-matrix-header">
+            <h2>Сравнение возможностей рангов</h2>
+            <p>Наглядная таблица всех команд, точек домов и бонусов для каждого морского звания</p>
+          </div>
+          <div class="apple-matrix-table-wrap">
+            <table class="apple-matrix-table">
+              <thead>
+                <tr>
+                  <th class="col-feature">Возможность / Привилегия</th>
+                  <th class="col-rank">Моряк</th>
+                  <th class="col-rank">Шкипер</th>
+                  <th class="col-rank highlight-col">Капитан</th>
+                  <th class="col-rank">Адмирал</th>
+                  <th class="col-rank legend-col-th">Легенда</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="legend-col">Префикс в чате и Tab</td>
+                  <td><span class="m-check">✓</span></td>
+                  <td><span class="m-check">✓</span></td>
+                  <td class="highlight-col"><span class="m-check">✓</span></td>
+                  <td><span class="m-check">✓</span></td>
+                  <td><span class="m-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="legend-col">Точки дома (/sethome)</td>
+                  <td><span class="m-val">2 точки</span></td>
+                  <td><span class="m-val">3 точки</span></td>
+                  <td class="highlight-col"><span class="m-val">5 точек</span></td>
+                  <td><span class="m-val">10 точек</span></td>
+                  <td><span class="m-val" style="color:#ffd875">Безлимит</span></td>
+                </tr>
+                <tr>
+                  <td class="legend-col">Режим полёта (/fly)</td>
+                  <td><span class="m-cross">—</span></td>
+                  <td><span class="m-cross">—</span></td>
+                  <td class="highlight-col"><span class="m-val" style="color:#a5b4fc">На привате</span></td>
+                  <td><span class="m-val" style="color:#2fe0c0">Везде</span></td>
+                  <td><span class="m-val" style="color:#ffd875">Везде</span></td>
+                </tr>
+                <tr>
+                  <td class="legend-col">Множитель удачи рыбалки</td>
+                  <td><span class="m-val">x1.0</span></td>
+                  <td><span class="m-val">x1.5</span></td>
+                  <td class="highlight-col"><span class="m-val">x2.0</span></td>
+                  <td><span class="m-val">x4.0</span></td>
+                  <td><span class="m-val" style="color:#ffd875">x8.0 МАКС</span></td>
+                </tr>
+                <tr>
+                  <td class="legend-col">Приоритетный вход при полном сервере</td>
+                  <td><span class="m-cross">—</span></td>
+                  <td><span class="m-check">✓</span></td>
+                  <td class="highlight-col"><span class="m-check">✓</span></td>
+                  <td><span class="m-check">✓</span></td>
+                  <td><span class="m-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="legend-col">Смена ника (/nick)</td>
+                  <td><span class="m-cross">—</span></td>
+                  <td><span class="m-cross">—</span></td>
+                  <td class="highlight-col"><span class="m-cross">—</span></td>
+                  <td><span class="m-check">✓</span></td>
+                  <td><span class="m-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="legend-col">Блок на голову (/hat)</td>
+                  <td><span class="m-cross">—</span></td>
+                  <td><span class="m-cross">—</span></td>
+                  <td class="highlight-col"><span class="m-cross">—</span></td>
+                  <td><span class="m-cross">—</span></td>
+                  <td><span class="m-check" style="color:#ffd875">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="legend-col">Сохранение опыта при гибели</td>
+                  <td><span class="m-val">20%</span></td>
+                  <td><span class="m-val">35%</span></td>
+                  <td class="highlight-col"><span class="m-val">50%</span></td>
+                  <td><span class="m-val">75%</span></td>
+                  <td><span class="m-val" style="color:#ffd875">100%</span></td>
+                </tr>
+                <tr>
+                  <td class="legend-col">Набор ресурсов (Кит в F4)</td>
+                  <td><span class="m-val">Базовый</span></td>
+                  <td><span class="m-val">Шкипер</span></td>
+                  <td class="highlight-col"><span class="m-val">Капитан</span></td>
+                  <td><span class="m-val">Адмирал</span></td>
+                  <td><span class="m-val" style="color:#ffd875">Легендарный</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Bento Grid -->
+    <section class="section" style="padding-top:1.5rem">
+      <div class="container">
+        <div class="apple-trust-grid">
+          <div class="apple-trust-item">
+            <div class="trust-ico">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div>
+              <h4>Моментальная выдача</h4>
+              <p>Статус активируется автоматически на сервере в течение 10 секунд после оплаты.</p>
+            </div>
+          </div>
+          <div class="apple-trust-item">
+            <div class="trust-icon">🛡️</div>
+            <div>
+              <h4>Безопасные платежи</h4>
+              <p>Оплата через СБП по QR-коду без комиссии и защищённый эквайринг банковских карт РФ.</p>
+            </div>
+          </div>
+          <div class="apple-trust-item">
+            <div class="trust-icon">💬</div>
+            <div>
+              <h4>Поддержка 24/7</h4>
+              <p>Команда AquaTech всегда на связи в Discord и в игре для решения любых вопросов.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260903logo"></script>
+  <script src="assets/js/site.js?v=20260905_apple_v2"></script>
 </body>
 </html>

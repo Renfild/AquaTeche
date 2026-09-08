@@ -19,10 +19,10 @@
 
 ## Mod Development Guidelines
 
-### 1. Registration API & Mod ID
-- Mod ID: `aquatech_ui`
+### 1. Registration API & Mod IDs
+- First-party mods: `aqualumen` (`mods/aqualumen-ui`, package `store.aquateche.aqualumen.*`) and `aquatech_ui` (`mods/aquatech-ui`, package `net.aquatech.*`).
 - Use modern Forge `DeferredRegister<T>` and `RegistryObject<T>` for all items, blocks, block entities, menu types, and creative tabs.
-- Always include complete package structure (`net.aquatech.ui...`).
+- Always include complete package structure for the mod you are editing.
 
 ### 2. GUI Architecture (Menu + Screen Separation)
 - **Server Logic (`AbstractContainerMenu`)**: Handles slots, container data sync, and item validation.

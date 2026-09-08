@@ -115,8 +115,8 @@ def compile_and_package(mod_dir, mod_jar_name):
             
     return True
 
-ok1 = compile_and_package("mods/aqualumen-ui", "aqualumen-forge-1.20.1-0.3.6-alpha.jar")
-ok2 = compile_and_package("mods/aquatech-ui", "aquatech_ui-1.0.24.jar")
+ok1 = compile_and_package("mods/aqualumen-ui", "aqualumen-forge-1.20.1-0.3.30-alpha.jar")
+ok2 = compile_and_package("mods/aquatech-ui", "aquatech_ui-1.0.56.jar")
 
 if ok1 and ok2:
     print("\n[SUCCESS] Both mods compiled and packaged successfully!")

@@ -108,11 +108,12 @@ public final class LuckPermsBridge {
             return cached.info();
         }
 
-        // Try direct Bukkit player display name prefix (e.g. "[OWNER] xietoru")
+        // Bukkit displayName often copies the default title as text ("ИГРОК")
+        // while LuckPerms prefix is already the bitmap glyph — skip that duplicate.
         RankInfo directBukkit = tryBukkitDisplayName(player);
-        if (directBukkit != null && !"default".equals(directBukkit.id()) && !"player".equals(directBukkit.id())) {
-            CACHE.put(uuid, new CachedRank(directBukkit, now));
-            return directBukkit;
+        if (directBukkit != null && !isDefaultLikeRank(directBukkit.id())) {
+            CACHE.put(uuid, new CachedRank(preferGlyph(directBukkit), now));
+            return preferGlyph(directBukkit);
         }
 
         RankInfo lp = tryLuckPerms(player);
@@ -134,6 +135,7 @@ public final class LuckPermsBridge {
                 result = fromOpLevel(player);
             }
         }
+        result = preferGlyph(result);
         CACHE.put(uuid, new CachedRank(result, now));
         return result;
     }
@@ -170,7 +172,7 @@ public final class LuckPermsBridge {
             if (display == null || display.isBlank()) {
                 display = LuckPermsFiles.displayFor(player.getUUID(), group);
             }
-            display = preserveGlyphsStripJunk(display);
+            display = preferGlyphDisplay(group, display);
             if (display.isBlank()) display = pretty(group);
             int weight = weightFor(group);
             boolean staff = weight >= weightFor("mod")
@@ -245,9 +247,15 @@ public final class LuckPermsBridge {
 
             Object prefixObj = metaData.getClass().getMethod("getPrefix").invoke(metaData);
             if (prefixObj != null) {
-                String prefix = preserveGlyphsStripJunk(String.valueOf(prefixObj));
-                if (!prefix.isBlank()) {
-                    display = prefix.trim();
+                String prefix = String.valueOf(prefixObj);
+                String glyphs = puaOnly(prefix);
+                if (!glyphs.isEmpty()) {
+                    display = glyphs;
+                } else {
+                    String cleaned = preserveGlyphsStripJunk(prefix);
+                    if (!cleaned.isBlank()) {
+                        display = cleaned;
+                    }
                 }
             }
 
@@ -337,6 +345,40 @@ public final class LuckPermsBridge {
     private static String pretty(String id) {
         if (id == null || id.isBlank()) return "Игрок";
         return Character.toUpperCase(id.charAt(0)) + id.substring(1);
+    }
+
+    private static boolean isDefaultLikeRank(String id) {
+        String s = id == null ? "" : id.toLowerCase(Locale.ROOT).trim();
+        return s.isEmpty() || "default".equals(s) || "player".equals(s) || "игрок".equals(s)
+                || "guest".equals(s) || "гость".equals(s);
+    }
+
+    private static String puaOnly(String s) {
+        if (s == null || s.isEmpty()) return "";
+        StringBuilder out = new StringBuilder();
+        s.codePoints().forEach(cp -> {
+            if (cp >= 0xE000 && cp <= 0xF8FF) {
+                out.appendCodePoint(cp);
+            }
+        });
+        return out.toString().trim();
+    }
+
+    private static RankInfo preferGlyph(RankInfo info) {
+        if (info == null) return null;
+        return new RankInfo(info.id(), preferGlyphDisplay(info.id(), info.display()), info.weight(), info.staff());
+    }
+
+    private static String preferGlyphDisplay(String group, String display) {
+        String glyphs = puaOnly(display);
+        if (!glyphs.isEmpty()) {
+            return glyphs;
+        }
+        String mapped = LuckPermsFiles.glyphForGroup(group);
+        if (mapped != null && !mapped.isBlank()) {
+            return mapped.trim();
+        }
+        return preserveGlyphsStripJunk(display);
     }
 
     private static String stripCodes(String s) {

@@ -217,6 +217,7 @@ def main() -> int:
     for archive in (quest_zip, world_zip):
         if archive.is_file():
             r2_put.put(archive, f"{stamp}/{archive.name}")
+    r2_put.prune_r2()
     return 0
 
 

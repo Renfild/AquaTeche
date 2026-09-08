@@ -1,93 +1,139 @@
 ---
 name: minecraft-gui-pixelart
-description: Pixel-perfect Minecraft machine GUI and icon art in the authentic MetaLabs/HiTech mod style. Use when drawing, designing, or generating mod GUIs (container screens, slots, progress gauges, machine panels), machine/item icons, or iso block renders — and whenever the user mentions GUI-текстуры, слоты, шкалы прогресса, иконки механизмов, пиксель-арт интерфейсов for AquaTech or any Minecraft mod.
+description: Pixel-perfect Minecraft machine GUI and icon art in authentic MetaLabs/HiTech styles (A gray, B dark, C steel LED, D 9-slice kit). Use when drawing or generating mod GUIs, slots, gauges, machine panels, item icons, flipbook block faces, or when the user mentions GUI-текстуры, слоты, шкалы, иконки механизмов, пиксель-арт for AquaTech.
 ---
 
-# Minecraft GUI pixel art (authentic MetaLabs/HiTech style)
+# Minecraft GUI pixel art (MetaLabs / HiTech)
 
-Generate pixel-perfect machine GUI sheets and icons as PNG (Aseprite-compatible) for
-Minecraft 1.20.1 mods. The style is reverse-engineered from real extracted MetaLabs mod
-textures (LoliEnergistics, HiTech-Elements, luminous) — see
-`references/real-mod-references.md`. When style is disputed, sample the original PNGs;
-do not argue from memory.
+Generate pixel-perfect machine GUI sheets and icons as PNG (+ `.aseprite`) for
+Minecraft 1.20.1 Forge. Style is reverse-engineered from real mod textures — when
+disputed, **sample PNGs**, do not argue from memory.
 
-## Two styles (both authentic)
+**First action every run:** open `references/style-picker.md` and lock ONE style
+before drawing. Mixing languages on one sheet fails review.
 
-- **Style A "gray tech"** (HiTech `fisher.png`): whole GUI is the vanilla gray box
-  `#C6C6C6`, vanilla dark slots, ONE segmented vertical gauge on the right (20×64, white
-  border, unlit desaturated fill baked, lit fill sprite blitted from the bottom, 8×8 icon
-  label above), vanilla inventory at (8,84)/(8,142). GUI 176×166.
-- **Style B "dark tech"** (LoliEnergistics): dark navy machine panel `#2E2E40` with 1px
-  cyan circuit frame `#4EF9FF` (corner brackets, mid-edge ticks, 2×2 nodes), baked black
-  title plate with a cyan status square, dark socket slots `#232330`, white dotted
-  transfer arrow, thin bottom progress bar with a lightning label; vanilla gray inventory
-  box attached below (rows at y=112, hotbar y=170). GUI 176×194.
+## Four styles
+
+| ID | Name | Source | Typical size | Use for |
+| :--- | :--- | :--- | :--- | :--- |
+| **A** | gray tech | HiTech `fisher.png` | GUI 176×166 | Existing AquaTech fisher/cache |
+| **B** | dark tech | LoliEnergistics | GUI 176×194 | Dark cyan-circuit commissions |
+| **C** | steel LED | HiTech1211 Nexteam 1.21.1 | 16×16 faces, flipbooks | Blocks, materials, coins |
+| **D** | vanilla 9-slice kit | HiTech1211 `next_content_core` | composed 176×166 | **Default new machine GUIs** |
+
+Details:
+
+- **A** — whole GUI `#C6C6C6`, vanilla dark slots, ONE segmented v-gauge 20×64 (white
+  border, unlit baked, lit fill from bottom), inventory (8,84)/(8,142). See
+  `references/real-mod-references.md`.
+- **B** — panel `#2E2E40` + 1px cyan frame `#4EF9FF`, title plate, socket slots,
+  thin bottom progress; gray inventory attached below. Same ref file.
+- **C** — steel frame + `#0D0D11` screen, LED dots, flipbook strips `16×(16·N)`,
+  master-recolor materials. See `references/hitech1211-style.md`. Never mix C's HD
+  elementa menu language with pixel widgets.
+- **D** — ~20 tiny sprites / ~10 colors: 24×24 raised bg tile, classic slots,
+  12×12 panel buttons (hover = edge swap), 14×42 energy track + inset fill,
+  gray→white progress arrow. Volume from bevels only. See
+  `references/hitech1211-elementa-gui.md`. Ground-truth PNGs:
+  `assets/references_mods/hitech1211_kit/`.
 
 ## Non-negotiable rules
 
-A delivery fails review if any of these break:
+Delivery fails if any break:
 
-1. **Sheet 256×256, GUI at (0,0).** Gauge TRACKS are baked into the background; only
-   gauge FILLS live in sprites — tex(176,0) when ≤80px wide, else the free band below the
-   GUI (tex(24,200)), as documented per variant.
-2. **Slots are empty.** No baked items, ever. Style B slots keep the centered socket glyph.
-3. **Exactly ONE gauge per machine.** Storage GUIs have none. The real fisher.png has
-   three gauges — that is the reference for LOOK, not for count.
-4. **No decorative animation widgets.** The gauge fill is the only animated element, and
-   its sprite repeats the track geometry so it stays inside the track.
-5. **PNG / Aseprite only.** Integer grid, no anti-aliasing, no SVG.
-6. **Palette is fixed** (sampled hex values in the references). Style A accent = the
-   gauge color pair; Style B accent = cyan frame + one gauge color pair.
+1. **Sheet 256×256, GUI at (0,0)** for A/B/D composed sheets. Gauge TRACKS baked;
+   only FILLS are sprites — tex(176,0) if ≤80px wide, else band below GUI
+   (tex(24,200)). Style D may also ship loose kit sprites (bg/slot/button/energy)
+   composed in Forge/code — still empty slots, one energy + optional progress.
+2. **Slots are empty.** No baked items. Style B keeps centered socket glyph.
+3. **Exactly ONE energy/progress fill animation** on the machine panel (storage = none).
+   A progress *arrow* + energy bar together is OK in Style D (two widgets, one fill
+   blit each) — not three decorative gauges. Real `fisher.png` has three gauges;
+   that is LOOK reference, not OUR count.
+4. **No decorative animation widgets** (radar, spinner, circuit blink on the GUI sheet).
+   Block-face LED blink belongs on Style C flipbooks, not the container PNG.
+5. **PNG / Aseprite only.** Integer grid. No SVG. No anti-aliased soft edges on
+   pixel widgets (selective 1px AA on curves for Style C items only — see
+   `pixel-art-fundamentals.md`).
+6. **Palette is fixed** per style (sampled hex in references). Do not invent neon
+   purple SaaS accents.
+7. **Minimalism gate (Style D default):** if removing an ornament does not hurt
+   reading slots/energy/progress — remove it.
 
 ## Workflow
 
-1. Read `references/real-mod-references.md` (styles + palettes) and
-   `references/gui-grid-specs.md` (coordinates). Read `references/loli-mod-anatomy.md`
-   to see how the real mods structure assets/namespaces (widget files, slot silhouettes,
-   9-slice kit) — match that layout when exporting for the mod. Read
-   `references/machine-drawing.md` before drawing new icons; read
-   `references/forge-render.md` before wiring textures into Forge code.
-2. Add or edit a variant in `VARIANTS` inside `scripts/generate_gui.py` (style, layout
-   function, gauge color pair). Follow an existing layout function.
-3. Regenerate and verify (every texture is written TWICE: `*.png` for the game and
-   `*.aseprite` — native Aseprite format you can open and fix directly):
+1. Read `references/style-picker.md` → lock style.
+2. Read `references/pixel-art-fundamentals.md` (light / hue-shift / clusters / selout).
+3. Style refs: `real-mod-references.md` (A/B), `hitech1211-style.md` (C),
+   `hitech1211-elementa-gui.md` (D sprites), `hitech1211-machinescreen.md` (D
+   layout / 15-machine rows). Anatomy: `loli-mod-anatomy.md`. Coordinates:
+   `gui-grid-specs.md`. Icons: `machine-drawing.md`. Forge blit: `forge-render.md`.
+4. Sample originals when unsure:
+   - Skill ships: `assets/references_mods/` + `hitech1211_kit/`
+   - Local full dump (gitignored): `scripts/scratch/hitech1211/extracted/`
+   - Desktop `HiTech1211_разбор`: read `ОТЧЁТ.md` first; `01_ui_gui` sprites;
+     `03_sources/next_hitech/client/screen` for row recipes; `08_практика_стиль`
+     for STUDIES + item redraws (**not** PREVIEW GUI sheet — see style-picker trap)
+5. Implement:
+   - A/B/D sheet → edit `VARIANTS` / layout in `scripts/generate_gui.py`
+   - Refresh kit PNGs if scratch extract updated → `python scripts/sync_hitech1211_kit.py`
+   - C face/item → draw or master-recolor per `hitech1211-style.md` recipes
+6. Regenerate and verify:
 
    ```bash
-   python scripts/generate_gui.py                     # writes assets/gui_*.png + .aseprite + preview.html
-   python -m http.server 8791 --bind 127.0.0.1        # from assets/, then open preview.html
-   python scripts/aseprite_writer.py                  # self-test of the .aseprite writer
+   cd .agents/skills/minecraft-gui-pixelart
+   python scripts/generate_gui.py
+   python scripts/qa_check.py
+   python scripts/aseprite_writer.py   # optional self-test
+   # from assets/: python -m http.server 8791 --bind 127.0.0.1 → preview.html
    ```
 
-4. Check the preview in the browser: fill stays inside the track, slots empty, nothing
-   else moves. If a canvas looks stale, call `draw(0.65)` in the page — the rAF loop can
-   pause in a background tab. Screenshot and look at it — do not trust code alone.
-5. Run `python scripts/qa_check.py` — it must pass (sizes, style body colors, empty
-   slots, sprite zones).
-6. Deliver: PNG paths, style (A/B), gauge kind + coordinates, fill sprite location, and
-   the Forge blit snippet from `references/forge-render.md`.
+7. Look at preview / screenshot at 800% — do not trust code alone.
+8. Deliver: PNG + `.aseprite` paths, style ID, gauge/widget coords, fill sprite
+   location(s), Forge blit snippet from `forge-render.md`.
 
-## Built-in variants
+## Built-in variants (`generate_gui.py`)
 
-| Variant | Style | Gauge | Gauge dest | Fill sprite |
-| :--- | :--- | :--- | :--- | :--- |
-| auto_fisher | A gray | v-gauge 20×64, red | (142,11) | tex(176,0) |
-| star_cache | A gray | none (storage) | — | — |
-| alloy_smelter | B dark | h-bar 130×7, orange | (24,88) | tex(24,200) |
-| abyssal_crusher | B dark | v-bar 12×52, magenta | (86,14) | tex(176,0) |
+| Variant | Style | Gauge / widgets | Fill sprite |
+| :--- | :--- | :--- | :--- |
+| auto_fisher | A | v-gauge 20×64 @ (142,11) | tex(176,0) |
+| star_cache | A | none | — |
+| alloy_smelter | B | h-bar 130×7 @ (24,88) | tex(24,200) |
+| abyssal_crusher | B | v-bar 12×52 @ (86,14) | tex(176,0) |
+| steel_press | D | energy 14×42 + progress arrow | kit fills @ tex(176,0) |
+| fish_oil_press | D | Crucible row: energy · input · arrow · tank | kit fills @ tex(176,0) |
+| kit_d | D | atlas of kit sprites | — |
 
-Gauge color pairs (lit/unlit): red `#B00000/#896767`, green `#00FF00/#678967`,
+Gauge color pairs A/B (lit/unlit): red `#B00000/#896767`, green `#00FF00/#678967`,
 blue `#1082B6/#676789`, orange `#FF9D2E/#897567`, magenta `#F05AD0/#89677C`,
 mint `#44E1AA/#67897D`.
 
-## Icons
+Style D energy (from kit): track `#FFFFFF/#373737/#370005…`, fill `#B51508/#9E0E08/#6A0000`.
 
-32×32 iso cubes in `assets/icons_machines.png` (one lit color per machine, shades
-derived: top ×1.0, wedge ×1.45, right ×0.75, left ×0.5, pattern ×0.35). Spec and
-Aseprite settings in `references/machine-drawing.md`.
+## Icons & faces
+
+- **32×32 iso machines:** `assets/icons_machines.png` — one lit color, shades
+  top×1.0 / wedge×1.45 / right×0.75 / left×0.5 / pattern×0.35 (`machine-drawing.md`).
+- **16×16 materials (Style C):** master silhouette → luminance recolor; outline
+  `#21243D`; 3–4 tones; clusters ≥2 px (`hitech1211-style.md`).
+- **Animated fronts:** vertical strip `16×(16·N)` frames; only FRONT blinks.
+
+## Anti-patterns (seen in failed drafts)
+
+- Mixing Style B cyan circuits onto a Style D 9-slice panel
+- Copying `08_практика_стиль/PREVIEW.png` GUI SHEET as if it were live HiTech GUI
+- Using elementa HD cards for a container inventory screen
+- Baking JEI/EMI preview items into slot cells
+- Copying McSkill `next_*` jars or their pause PNGs into the pack (license ARR —
+  steal *structure*, redraw ocean palette)
+- Three fisher-style gauges “because the reference has them”
+- Unique chrome per machine (15 HiTech machines share one row + one kit)
 
 ## QA checklist
 
-- [ ] `python scripts/generate_gui.py` runs clean; `python scripts/qa_check.py` passes.
-- [ ] Preview screenshots show: empty slots, one centered gauge, fill inside track, no other animation.
-- [ ] Zoom 800% on a crop: 1px outlines, no anti-aliasing, sprites inside documented zones.
-- [ ] Menu slot coordinates in Forge code match `references/gui-grid-specs.md`.
+- [ ] Style locked via `style-picker.md`
+- [ ] `python scripts/generate_gui.py` clean; `python scripts/qa_check.py` passes
+- [ ] Preview: empty slots, fills inside tracks, no extra animation on the sheet
+- [ ] Zoom 800%: 1px outlines, no soft AA on GUI chrome, sprites in documented zones
+- [ ] Menu slot coords in Forge match `gui-grid-specs.md`
+- [ ] If Style D: kit colors only (~10), states via edge/fill swap

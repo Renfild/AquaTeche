@@ -99,14 +99,14 @@ ServerEvents.recipes((event) => {
     E: 'botania:elementium_ingot',
     D: 'botania:pixie_dust',
     R: 'aquatech_ui:rate_x4',
-    C: 'industrialupgrade:crafting_elements/crafting_272_element',
+    C: 'industrialupgrade:preciousgem/sapphire_gem',
   }).id('aquatech:rate_x8')
 
   event.shaped('aquatech_ui:rate_x16', ['TDT', 'RCR', 'TDT'], {
     T: 'botania:terrasteel_ingot',
     D: 'botania:dragonstone',
     R: 'aquatech_ui:rate_x8',
-    C: 'industrialupgrade:crafting_elements/crafting_273_element',
+    C: 'industrialupgrade:mineral/crystal',
   }).id('aquatech:rate_x16')
 
   // x32 / x64 — ONLY Avaritia Extreme Crafting Table (9×9). No vanilla 3×3.

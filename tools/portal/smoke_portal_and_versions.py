@@ -93,6 +93,28 @@ def main() -> int:
             print("FAIL: STRICT_LIVE_DEPLOY set")
             return 1
 
+    # Launcher download with browser navigation header (Sec-Fetch-Mode: navigate)
+    req_dl = urllib.request.Request(
+        f"{BASE}/dl/AquaTech.exe",
+        headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+            "Sec-Fetch-Mode": "navigate",
+        },
+    )
+    with urllib.request.urlopen(req_dl, timeout=30) as r:
+        if r.status != 200:
+            print("FAIL: dl/AquaTech.exe status", r.status)
+            return 1
+        ctype = r.headers.get("Content-Type", "")
+        if "text/html" in ctype:
+            print("FAIL: dl/AquaTech.exe returned html (404 page) instead of binary!")
+            return 1
+        first_bytes = r.read(1024)
+        if len(first_bytes) < 2:
+            print("FAIL: dl/AquaTech.exe empty body")
+            return 1
+    print("OK dl/AquaTech.exe navigation download")
+
     print("OK smoke")
     return 0
 

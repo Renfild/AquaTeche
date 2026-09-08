@@ -1,173 +1,295 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>AquaTech · океанский Minecraft 1.20.1</title>
-  <meta name="description" content="Океанский Minecraft: удочки AquaTech, кейсы, авторыбалка и индустриальный прогресс." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AquaTech — Океанский Skyblock Minecraft 1.20.1</title>
+  <meta name="description" content="Официальный сайт сервера AquaTech 1.20.1. Выживание посреди бесконечного океана: удочки вместо шахт, кейсы, рынок, события и лаунчер." />
+  <link rel="canonical" href="https://aquateche.store/" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="AquaTech" />
-  <meta property="og:title" content="AquaTech · океанский Minecraft 1.20.1" />
+  <meta property="og:title" content="AquaTech — Океанский Skyblock Minecraft 1.20.1" />
   <meta property="og:description" content="Океанский skyblock: удочки AquaTech добывают руды из воды. Кейсы, аукцион, турниры и меню F4." />
-  <meta property="og:url" content="https://aquateche.store/index.html" />
+  <meta property="og:url" content="https://aquateche.store/" />
   <meta property="og:image" content="https://aquateche.store/assets/logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AquaTech · океанский Minecraft 1.20.1" />
   <meta name="twitter:description" content="Океанский skyblock: удочки AquaTech добывают руды из воды. Кейсы, аукцион, турниры и меню F4." />
-<link rel="stylesheet" href="assets/css/site.css?v=20260831n" />
+
+
+<link rel="stylesheet" href="assets/css/site.css?v=20260905_apple_v2" />
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
 
+  <!-- =========================================================================
+       HERO SECTION WITH UNIFIED BRAND HEADER & SERVER SHOWCASE CARD
+       ========================================================================= -->
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <div class="hero-caustic"></div>
-      <div class="hero-horizon"></div>
-      <div class="hero-wave"></div>
-      <div class="hero-spark"></div>
-    </div>
-    <div class="container hero-inner">
-      <p class="eyebrow reveal">Minecraft 1.20.1 · океанский skyblock</p>
-      <h1 class="reveal" style="--d:.06s"><span class="gradient-aqua">AquaTech</span></h1>
-      <p class="hero-lead reveal" style="--d:.12s">Спавн на плоту посреди бесконечного океана. Удочки AquaTech добывают руды прямо из воды, авторыбалка работает пока вы строите, а кейсы и топы ждут в меню F4.</p>
-      <div class="hero-actions reveal" style="--d:.18s">
-        <a class="btn btn-primary" data-download href="start.html">Скачать лаунчер</a>
-        <a class="btn btn-secondary" href="register.html">Регистрация</a>
-      </div>
-      <div class="hero-status-pill reveal" style="--d:.24s">
-        <span class="status-indicator-dot" aria-hidden="true"></span>
-        <span>Сервер <span data-online aria-live="polite">…</span> · Ocean Skyblock 1.20.1 · Вход через официальный лаунчер</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal" style="margin-bottom:1rem">
-        <div>
-          <h2>Сегодня в цене</h2>
-          <p>Суточный спрос у Кота и в скупке F4. Множитель действует до полуночи.</p>
+    <div class="container hero-split">
+      <!-- Left Column: Branding, Pitch & CTAs -->
+      <div class="hero-content">
+        <div class="hero-brand-header">
+          <img class="hero-brand-crest" src="assets/logo.png" alt="AquaTech Crest" width="64" height="64" />
+          <div class="hero-brand-text">
+            <p class="hero-kicker">MINECRAFT 1.20.1 · ОКЕАНСКИЙ SKYBLOCK</p>
+            <h1 class="hero-title">AquaTech</h1>
+          </div>
         </div>
-      </div>
-      <div data-trends-home>
-        <p class="muted-line">Загрузка тренда…</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head text-center reveal" style="margin-bottom:2rem">
-        <div>
-          <h2>Особенности сервера</h2>
-          <p>Один бесконечный океан: рыбалка вместо шахт, кейсы и живые топы игроков.</p>
+        <p class="hero-lead">
+          Спавн на плоту посреди бесконечного океана. Авторыбалка и глубинные буры добывают руды из воды, пока вы строите базу, а кейсы и турниры ждут в меню F4.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" data-download href="start.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Скачать лаунчер</span>
+          </a>
+          <a class="btn btn-secondary" href="register.html">Регистрация</a>
         </div>
-      </div>
-      <div class="grid-3">
-        <a class="tile reveal" href="rods.html" style="--d:.05s">
-          <span class="tile-icon" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 3l-9.5 9.5a3 3 0 1 0 4.2 4.2L20 7.5" />
-              <path d="M14 5l5 5" />
-              <path d="M4 21c2.5-1 4-2.5 4-5" />
-              <circle cx="19" cy="14" r="0.6" fill="currentColor" stroke="none" />
-            </svg>
+        <div class="hero-meta">
+          <span class="live-pill" title="Статус сервера">
+            <span class="live-dot"></span>
+            <strong id="heroOnlineCount" style="color:var(--accent);font-weight:800">Загрузка онлайна…</strong> · Ocean Skyblock 1.20.1 · Вход без ввода IP
           </span>
-          <span class="tag">Удочки</span>
-          <h3>Удочки AquaTech</h3>
-          <p>13 тиров добычи: от бамбуковой до альфы. Руды, сплавы и компоненты индустрии вылавливаются прямо из воды.</p>
-        </a>
-        <a class="tile reveal" href="cases.html" style="--d:.1s">
-          <span class="tile-icon" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8l9-5 9 5v8l-9 5-9-5V8z" />
-              <path d="M3 8l9 5 9-5" />
-              <path d="M12 13v8" />
-            </svg>
+        </div>
+      </div>
+
+      <!-- Right Column: Live Server Showcase Card (Clean, Informative, No GUI) -->
+      <div class="hero-visual-wrap">
+        <div class="hero-showcase-card">
+          <div class="showcase-card-header">
+            <div class="showcase-status-badge">
+              <span class="live-dot"></span>
+              <span id="showcaseStatusText">СЕРВЕР В СЕТИ · FORGE 1.20.1</span>
+            </div>
+            <span class="showcase-ping-chip" id="showcasePingText">24/7 ОНЛАЙН</span>
+          </div>
+
+          <div class="showcase-body">
+            <h3 class="showcase-title">Океан высоких технологий</h3>
+            <p class="showcase-desc">Выживание на плоту с полным циклом автоматизации без копания шахт.</p>
+
+            <div class="showcase-stats-grid">
+              <div class="showcase-stat-item">
+                <span class="stat-num">13</span>
+                <span class="stat-lbl">Тиров удочек</span>
+              </div>
+              <div class="showcase-stat-item">
+                <span class="stat-num">400+</span>
+                <span class="stat-lbl">Квестов FTB</span>
+              </div>
+              <div class="showcase-stat-item">
+                <span class="stat-num">100%</span>
+                <span class="stat-lbl">Автоматизация</span>
+              </div>
+            </div>
+
+            <div class="showcase-features-list">
+              <div class="showcase-feat-row">
+                <span class="feat-dot"></span>
+                <span>Авторыболовы и Буры добывают руды из глубин</span>
+              </div>
+              <div class="showcase-feat-row">
+                <span class="feat-dot"></span>
+                <span>Глубокая цепочка переработки Industrial Upgrade</span>
+              </div>
+              <div class="showcase-feat-row">
+                <span class="feat-dot"></span>
+                <span>Рынок игроков <code>/ah</code> и суточный спрос у Кота</span>
+              </div>
+            </div>
+
+            <div class="showcase-cta-block">
+              <a class="btn btn-primary btn-full" data-download href="start.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Скачать лаунчер</span>
+              </a>
+              <small class="showcase-subnote">Вход в 1 клик · Настройка модов автоматическая</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       BENTO GRID DASHBOARD: «ЖИВОЙ ОКЕАН» (CENTERED TOPS, NO FISH ICONS)
+       ========================================================================= -->
+  <section class="home-section bento-section" id="live-dashboard">
+    <div class="container">
+      <div class="section-head-split">
+        <div>
+          <div class="eyebrow" style="color:var(--accent)">Дашборд сервера</div>
+          <h2>Живой океан</h2>
+          <p>Пульс экономики, активность игроков и события сервера прямо сейчас.</p>
+        </div>
+        <div class="bento-head-badge">
+          <span class="bento-live-badge">
+            <span class="live-dot"></span>
+            LIVE СИНХРОНИЗАЦИЯ
           </span>
-          <span class="tag gold">Кейсы</span>
-          <h3>Кейсы и лут</h3>
-          <p>Океанские кейсы с ресурсами и редкими наградами. Состав показан на сайте, открытие — в игре через меню F4.</p>
-        </a>
-        <a class="tile reveal" href="top.html" style="--d:.15s">
-          <span class="tile-icon" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 20V10" />
-              <path d="M10 20V4" />
-              <path d="M16 20v-7" />
-              <path d="M22 20H2" />
-            </svg>
-          </span>
-          <span class="tag">Игроки</span>
-          <h3>Таблица лидеров</h3>
-          <p>Рейтинг по пойманной рыбе, балансу монет и лайкам профиля с обновлением в реальном времени.</p>
-        </a>
+        </div>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Bento 1: Топ рыболовов сервера (CENTERED LEADERBOARD) -->
+        <div class="bento-card bento-radar reveal" style="--d:.02s">
+          <div class="bento-spotlight"></div>
+          <div class="bento-card-header">
+            <div class="bento-title-group">
+              <div class="bento-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5a1.5 1.5 0 0 1 0-3H8"/><path d="M14 14.66V17c0 .55.45 1 1 1h1.5a1.5 1.5 0 0 0 0-3H16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              </div>
+              <div>
+                <h3>Топ рыболовов сервера</h3>
+                <small>Лидеры по общему количеству выловленных ресурсов</small>
+              </div>
+            </div>
+            <div class="bento-meta-pill" id="bentoOnlinePill">
+              <span class="live-dot"></span>
+              <strong id="bentoOnlineText" style="color:var(--accent);font-weight:800;font-size:0.92rem">0 онлайн</strong>
+            </div>
+          </div>
+
+          <!-- Centered, spacious leaderboard rows -->
+          <div class="bento-tops-centered" id="bentoTopFishList">
+            <p class="muted-line">Загрузка лидеров рыболовства…</p>
+          </div>
+        </div>
+
+        <!-- Bento 2: Суточный спрос у Кота (NO FISH ICONS) -->
+        <div class="bento-card bento-trends reveal" style="--d:.06s">
+          <div class="bento-spotlight"></div>
+          <div class="bento-card-header">
+            <div class="bento-title-group">
+              <div class="bento-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+              <div>
+                <h3>Суточный спрос</h3>
+                <small>Хит дня у Кота-рыболова</small>
+              </div>
+            </div>
+            <span class="tag-timer" id="trendsTimer">ДО 00:00</span>
+          </div>
+          <div class="bento-trends-list" id="bentoTrendsList">
+            <p class="muted-line">Загрузка суточного спроса…</p>
+          </div>
+        </div>
+
+        <!-- Bento 3: Свежие лоты аукциона -->
+        <div class="bento-card bento-market reveal" style="--d:.10s">
+          <div class="bento-spotlight"></div>
+          <div class="bento-card-header">
+            <div class="bento-title-group">
+              <div class="bento-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"/><path d="M2 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h18"/></svg>
+              </div>
+              <div>
+                <h3>Свежие лоты аукциона</h3>
+                <small>Торговля игроков (/ah в игре)</small>
+              </div>
+            </div>
+            <a class="bento-link" href="market.html">Все лоты →</a>
+          </div>
+          <div class="bento-market-body" id="bentoMarketFresh">
+            <p class="muted-line">Загрузка рынка…</p>
+          </div>
+        </div>
+
+        <!-- Bento 4: События глубин (2 колонки) -->
+        <div class="bento-card bento-events reveal" style="--d:.14s">
+          <div class="bento-spotlight"></div>
+          <div class="bento-card-header">
+            <div class="bento-title-group">
+              <div class="bento-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div>
+                <h3>События глубин</h3>
+                <small>Морские бусты и аномалии</small>
+              </div>
+            </div>
+            <a class="bento-link" href="events.html">Все события →</a>
+          </div>
+          <div class="bento-events-body">
+            <div class="event-mini-status">
+              <div class="event-mini-head">
+                <span class="event-dot"></span>
+                <b>Золотая рыба</b>
+                <span class="event-mini-badge">Шанс 5%</span>
+              </div>
+              <p>Окно ловли 20 мин каждые 3 часа с джекпотом до 2500 монет.</p>
+            </div>
+            <div class="event-mini-status">
+              <div class="event-mini-head">
+                <span class="event-dot storm"></span>
+                <b>Золотая буря</b>
+                <span class="event-mini-badge" style="color:#c084fc;background:rgba(176,114,255,0.12)">Буст ×1.6</span>
+              </div>
+              <p>Грозовой фронт над океаном повышает редкий улов на 65%.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section" style="padding-top:0">
+  <!-- =========================================================================
+       SECTION DIVIDER 1
+       ========================================================================= -->
+  <div class="container" aria-hidden="true">
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-core"><span class="divider-diamond"></span></div>
+      <div class="divider-line"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       КАК НАЧАТЬ ИГРАТЬ (АВТОМАТИЧЕСКИЙ ВХОД В 1 КЛИК, БЕЗ IP)
+       ========================================================================= -->
+  <section class="home-section" id="how-to-play">
     <div class="container">
-      <div class="section-head reveal" style="margin-bottom:1.25rem">
+      <div class="section-head-split">
         <div>
-          <h2>Аукцион</h2>
-          <p>Живые лоты игроков. Купить можно только в игре через /ah.</p>
-        </div>
-        <a class="btn btn-ghost" href="market.html">Все лоты</a>
-      </div>
-      <div data-market-home>
-        <p class="muted-line">Загрузка лотов…</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <div class="section-head reveal" style="margin-bottom:1rem">
-        <div>
-          <h2>Топ по рыбе</h2>
-          <p>Кто больше поймал. Полный рейтинг — на странице топов.</p>
-        </div>
-        <a class="btn btn-ghost" href="top.html">Весь топ</a>
-      </div>
-      <div class="top-list" data-fish-home>
-        <p class="muted-line">Загрузка топа…</p>
-      </div>
-    </div>
-  </section>
-
-    <section class="section" aria-label="Живой океан">
-    <div class="container">
-      <div class="eyebrow" style="color:var(--accent)">Живой океан</div>
-      <h2 style="font-family:var(--display)">Прямо сейчас на сервере</h2>
-      <div class="grid-2" style="margin-top:1.25rem">
-        <div class="card">
-          <span class="step-badge accent">Кот-рыболов · хит дня</span>
-          <div id="live-trends"><p style="color:var(--muted)">Загрузка трендов…</p></div>
-        </div>
-        <div class="card">
-          <span class="step-badge">Аукцион · свежие лоты</span>
-          <div id="live-market"><p style="color:var(--muted)">Загрузка лотов…</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<section class="section" style="padding-top:0">
-    <div class="container">
-      <div class="section-head text-center reveal" style="margin-bottom:2rem">
-        <div>
+          <div class="eyebrow" style="color:var(--accent)">Быстрый старт</div>
           <h2>Как начать играть</h2>
-          <p>От регистрации до собственного плота — три шага.</p>
+          <p>От регистрации до собственного плота — три простых шага.</p>
         </div>
       </div>
-      <div class="start-steps-grid">
+
+      <!-- Карточка входа через лаунчер (БЕЗ IP) -->
+      <div class="quick-connect-card reveal" style="--d:.04s">
+        <div class="quick-connect-inner">
+          <div class="qc-system">
+            <div class="qc-system-icon" id="qcOsIcon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/></svg>
+            </div>
+            <div class="qc-system-text">
+              <span class="qc-label">Ваша операционная система</span>
+              <strong id="qcOsName">Windows 10/11 x64</strong>
+              <small style="display:block;color:var(--accent);margin-top:2px">Вход в 1 клик через лаунчер (ввод IP не требуется)</small>
+            </div>
+          </div>
+
+          <div class="qc-address-box">
+            <div class="qc-ping-indicator">
+              <span class="ping-dot" title="Сервер в сети"></span>
+              <span class="ping-ms">Сервер онлайн · 1.20.1</span>
+            </div>
+            <a class="btn btn-primary" data-download href="start.html" style="padding:0.65rem 1.4rem">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Скачать лаунчер</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="start-steps-grid" style="margin-top:1.5rem">
         <div class="start-step-card reveal">
           <div class="step-badge">Шаг 1</div>
           <div class="start-card-content">
@@ -192,43 +314,100 @@
           <div class="step-badge">Шаг 3</div>
           <div class="start-card-content">
             <h3>Окажитесь на плоту</h3>
-            <p>Личный плот в океане, первая удочка и путь к индустриальному эндгейму.</p>
+            <p>Войдите в игру через лаунчер в 1 клик, откройте меню F4 и начните с бамбуковой удочки.</p>
           </div>
           <div class="start-card-action">
-            <a class="btn btn-ghost btn-full" href="rods.html">Что можно добыть</a>
+            <a class="btn btn-secondary btn-full" href="guide.html">Гайд новичка</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section-tight">
-    <div class="container grid-2">
-      <div class="reveal">
-        <div class="section-head">
-          <div>
-            <h2>Новости</h2>
-            <p>Обновления лаунчера, квестов и сервера.</p>
-          </div>
-        </div>
-        <div class="news-list" id="home-news" data-news-home>
-          <p class="muted-line">Загрузка новостей…</p>
+  <!-- =========================================================================
+       SECTION DIVIDER 2
+       ========================================================================= -->
+  <div class="container" aria-hidden="true">
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-core"><span class="divider-diamond"></span></div>
+      <div class="divider-line"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       АРХИТЕКТУРА СБОРКИ (FEATURES) - DISTINCT CONTAINER & NO FISH ICONS
+       ========================================================================= -->
+  <section class="home-section feature-section-boxed" id="features">
+    <div class="container">
+      <div class="section-head-split">
+        <div>
+          <div class="eyebrow" style="color:var(--accent)">Архитектура сборки</div>
+          <h2>Океан высоких технологий</h2>
+          <p>Каждая механика спроектирована под глубокую автоматизацию без традиционных рудников.</p>
         </div>
       </div>
-      <aside class="join-panel reveal" style="--d:.08s">
-        <span class="tag">Океанский Skyblock</span>
-        <h3>AquaTech Ocean</h3>
-        <p>Выживание на плоту: удочки AquaTech добывают руды из воды, авторыбалка автоматизирует улов, а промышленная цепочка ведёт к квантовому эндгейму.</p>
-        <div class="join-actions">
-          <a class="btn btn-aqua" href="start.html">Скачать лаунчер</a>
-          <a class="btn btn-secondary" href="register.html">Создать профиль</a>
+
+      <div class="feature-card-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-head">
+            <span class="tag accent">13 уровней развития</span>
+          </div>
+          <h3>Ресурсная рыбалка</h3>
+          <p>Забудьте о копании шахт. От бамбуковой удочки до квантовой Альфа-удочки: каждый заброс приносит руды, металлы и редкие кристаллы Industrial Upgrade.</p>
         </div>
-      </aside>
+
+        <div class="feature-card reveal" style="--d:.06s">
+          <div class="feature-card-head">
+            <span class="tag">Автоматизация</span>
+          </div>
+          <h3>Авторыболовы и Буры</h3>
+          <p>Стройте промышленные гидростанции: Авторыболовы и Океанические Экскаваторы снабжают заводы ресурсами круглосуточно, даже когда вы не в игре.</p>
+        </div>
+
+        <div class="feature-card reveal" style="--d:.12s">
+          <div class="feature-card-head">
+            <span class="tag">FTB Quests</span>
+          </div>
+          <h3>Ветвистая книга квестов</h3>
+          <p>Сотни структурированных заданий ведут от деревянного крючка до материи, термоядерного синтеза и сингулярностей Applied Energistics 2.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION DIVIDER 3
+       ========================================================================= -->
+  <div class="container" aria-hidden="true">
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-core"><span class="divider-diamond"></span></div>
+      <div class="divider-line"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       НОВОСТИ СЕРВЕРА - DISTINCT CONTAINER
+       ========================================================================= -->
+  <section class="home-section news-section-boxed" id="news">
+    <div class="container">
+      <div class="section-head-split">
+        <div>
+          <div class="eyebrow" style="color:var(--accent)">Хроника обновлений</div>
+          <h2>Новости сервера</h2>
+          <p>Патчи, турнирные анонсы и свежие события из жизни проекта.</p>
+        </div>
+        <a class="bento-link" href="news.html">Все новости →</a>
+      </div>
+      <div class="news-grid-home" data-news-home>
+        <p class="muted-line">Загрузка последних новостей…</p>
+      </div>
     </div>
   </section>
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260831m"></script>
+  <script src="assets/js/site.js?v=20260905_apple_v2"></script>
 </body>
 </html>

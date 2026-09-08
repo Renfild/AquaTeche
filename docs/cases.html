@@ -3,42 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Кейсы · AquaTech</title>
-  <meta name="description" content="Состав кейсов AquaTech. Открывать их нужно в игре." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+  <title>Кейсы и Дроп · AquaTech</title>
+  <meta name="description" content="Витрина всех 10 уровней кейсов сервера AquaTech. Просмотр лута, шансов выпадения и наград прогрессии от Тира I до Тира X." />
+
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AquaTech" />
-  <meta property="og:title" content="Кейсы · AquaTech" />
-  <meta property="og:description" content="Состав кейсов: материалы прогрессии, редкие руды и удочки высоких тиров." />
+  <meta property="og:title" content="Кейсы и Дроп · AquaTech" />
+  <meta property="og:description" content="Содержимое 10 уровней кейсов: материалы прогрессии, редкие руды и удочки высоких тиров." />
   <meta property="og:url" content="https://aquateche.store/cases.html" />
   <meta property="og:image" content="https://aquateche.store/assets/logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Кейсы · AquaTech" />
-  <meta name="twitter:description" content="Состав кейсов: материалы прогрессии, редкие руды и удочки высоких тиров." />
-<link rel="stylesheet" href="assets/css/site.css?v=20260831n" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260906_apple_cases_v4" />
 </head>
 <body data-page="cases">
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
-  
-  <section class="page-hero">
-    <div class="container">
-      <div class="eyebrow" data-site="cases_eyebrow">Кейсы</div>
-      <h1 data-site="cases_title">Что внутри</h1>
-      <p data-site="cases_lead">Сайт только показывает состав. Открывай кейсы в игре (F4).</p>
-      <div class="notice-banner inline" data-site="cases_notice">На сайте кейсы не открываются.</div>
-    </div>
-  </section>
-  <section class="section" style="padding-top:0">
-    <div class="container catalog-grid" id="cases-root"></div>
-  </section>
+
+    <!-- Page Hero with Apple-grade Typography & Segmented Tier Filter -->
+    <section class="subpage-hero">
+      <div class="container">
+        <div class="hero-card apple-hero-card">
+          <div class="eyebrow"><span class="badge-dot"></span>СОКРОВИЩА ОКЕАНА · 10 УРОВНЕЙ ПРОГРЕССИИ</div>
+          <h1>Кейсы и Награды</h1>
+          <p>Исследуй все 10 ступеней прогрессии сервера. Проверяй состав каждого кейса, точные шансы выпадения и диапазоны количества предметов по конфигу сервера.</p>
+          
+          <!-- Apple Segmented Tier Filter -->
+          <div class="apple-segment-wrapper">
+            <div class="apple-segment" id="casesTierFilter" role="tablist" aria-label="Фильтр по тирам прогрессии">
+              <button type="button" class="apple-segment-btn active" data-filter="all" role="tab" aria-selected="true">
+                Все кейсы <span class="apple-badge-count">10</span>
+              </button>
+              <button type="button" class="apple-segment-btn" data-filter="early" role="tab" aria-selected="false">
+                Тир I–III
+              </button>
+              <button type="button" class="apple-segment-btn" data-filter="mid" role="tab" aria-selected="false">
+                Тир IV–VI
+              </button>
+              <button type="button" class="apple-segment-btn" data-filter="late" role="tab" aria-selected="false">
+                <span>Тир VII–X</span>
+                <span class="apple-badge-save">Топ</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-meta-row" style="margin-top:1.5rem">
+            <span class="meta-tag"><span class="live-dot"></span>Честные серверные шансы</span>
+            <span class="meta-tag">10 уровней развития</span>
+            <span class="meta-tag">Открытие за АкваМонеты</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- In-Game Notice Callout (Apple HIG Style) -->
+    <section class="section" style="padding-top:0;padding-bottom:1rem">
+      <div class="container">
+        <div class="in-game-notice-card">
+          <div class="notice-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="notice-body">
+            <h3>Открытие кейсов прямо в игре клавишей F4</h3>
+            <p>Монеты для открытия добываются рыбалкой, участием в турнирах и сдачей квестов. При открытии кейса в игре награды моментально выдаются в твой инвентарь.</p>
+          </div>
+          <div class="notice-pill">Меню F4 в игре</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cases Grid Container -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="cases-apple-grid" id="cases-showcase-root">
+          <p class="muted-line">Загрузка витрины кейсов…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apple Trust & Fair Play Bento Grid -->
+    <section class="section" style="padding-top:1.5rem">
+      <div class="container">
+        <div class="apple-trust-grid">
+          <div class="apple-trust-item">
+            <div class="trust-ico">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4>Математически честный RNG</h4>
+              <p>Вероятность выпадения каждого предмета зафиксирована в конфиге сервера и открыто показана в окне содержимого.</p>
+            </div>
+          </div>
+          <div class="apple-trust-item">
+            <div class="trust-ico">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div>
+              <h4>Моментальная выдача</h4>
+              <p>Никаких очередей и ожидания — предмет падает в инвентарь персонажа сразу в момент клика по кейсу.</p>
+            </div>
+          </div>
+          <div class="apple-trust-item">
+            <div class="trust-ico">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <div>
+              <h4>Без обязательного доната</h4>
+              <p>Все монеты можно получить игровым путем, участвуя в морских экспедициях, вылавливая рыбу и закрывая квесты.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260831m"></script>
+  <script src="assets/js/site.js?v=20260906_apple_cases_v4"></script>
 </body>
 </html>

@@ -458,7 +458,7 @@ public final class AquaTechCommand {
                     "§7" + c.description), false);
             player.displayClientMessage(Component.literal(
                     "§fПрогресс: §a" + cap.getDailyProgress() + "§7/§a" + c.target
-                            + (cap.isDailyComplete() ? " §e— напиши /aquatech daily снова, чтобы сдать" : "")), false);
+                            + (cap.isDailyComplete() ? " §e— сдай в F4 или напиши /aquatech daily снова" : "")), false);
             sync(player, cap);
         });
         return 1;

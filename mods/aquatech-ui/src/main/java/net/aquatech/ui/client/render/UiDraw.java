@@ -1,15 +1,17 @@
 package net.aquatech.ui.client.render;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.aquatech.ui.client.gui.widget.AquaBadge;
-import net.aquatech.ui.client.render.AquaFontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.resources.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public final class UiDraw {
@@ -115,19 +117,124 @@ public final class UiDraw {
     }
 
     public static void drawPlayerHead(GuiGraphics graphics, UUID uuid, String name, int x, int y, int size) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        ResourceLocation skin = DefaultPlayerSkin.getDefaultSkin(uuid != null ? uuid : java.util.UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+        drawPlayerHead(graphics, uuid, name, x, y, size, false);
+    }
+
+    /**
+     * Face+hat from the 8×8 skin UVs, snapped to a multiple of 8 so pixel heads stay crisp.
+     * Chat should pass 24 (3×). Nearest filter; no accent box unless asked.
+     */
+    public static void drawPlayerHead(GuiGraphics graphics, UUID uuid, String name, int x, int y, int size, boolean accentBorder) {
+        String nick = name == null ? "" : name;
+        UUID fallback = uuid != null
+                ? uuid
+                : UUID.nameUUIDFromBytes(("OfflinePlayer:" + nick).getBytes(StandardCharsets.UTF_8));
+        ResourceLocation skin = DefaultPlayerSkin.getDefaultSkin(fallback);
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.getConnection() != null) {
-            var playerInfo = minecraft.getConnection().getPlayerInfo(uuid);
+            var playerInfo = uuid != null ? minecraft.getConnection().getPlayerInfo(uuid) : null;
+            if (playerInfo == null && !nick.isBlank()) {
+                playerInfo = minecraft.getConnection().getPlayerInfo(nick);
+            }
             if (playerInfo != null) {
                 skin = playerInfo.getSkinLocation();
             }
         }
-        graphics.blit(skin, x, y, size, size, 8, 8, 8, 8, 64, 64);
-        graphics.blit(skin, x, y, size, size, 40, 8, 8, 8, 64, 64);
-        UiDraw.border(graphics, x - 1, y - 1, size + 2, size + 2, COLOR_ACCENT);
+        int px = Math.max(8, ((size + 4) / 8) * 8);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        minecraft.getTextureManager().getTexture(skin).bind();
+        GlStateManager._texParameter(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
+        GlStateManager._texParameter(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+        graphics.blit(skin, x, y, px, px, 8, 8, 8, 8, 64, 64);
+        graphics.blit(skin, x, y, px, px, 40, 8, 8, 8, 64, 64);
+        if (accentBorder) {
+            border(graphics, x - 1, y - 1, px + 2, px + 2, COLOR_ACCENT);
+        }
+    }
+
+    /**
+     * Cyber-MMO Tactical Rectangular Avatar with smoothed corners and glowing frame.
+     */
+    public static void drawTacticalAvatar(GuiGraphics graphics, UUID uuid, String name, int x, int y, int size,
+                                         int borderColor, float alpha) {
+        int bgCol = ((int) (alpha * 200.0F) << 24) | 0x080E17;
+        LumenGfx.roundedRect(graphics, x, y, size, size, 5, bgCol);
+
+        // Snap head to internal bounds with 2px padding
+        int headPad = 2;
+        int headSize = size - headPad * 2;
+        int hx = x + headPad;
+        int hy = y + headPad;
+
+        drawPlayerHead(graphics, uuid, name, hx, hy, headSize, false);
+
+        int borderAlpha = (int) (((borderColor >>> 24) & 0xFF) * alpha);
+        if (borderAlpha == 0 && alpha > 0.05F) borderAlpha = (int) (alpha * 255.0F);
+        int finalBorder = (borderAlpha << 24) | (borderColor & 0x00FFFFFF);
+
+        // Soft outer glow + crisp outline
+        LumenGfx.outline(graphics, x, y, size, size, 5, finalBorder);
+        LumenGfx.outline(graphics, x - 1, y - 1, size + 2, size + 2, 6, (borderAlpha / 3 << 24) | (borderColor & 0x00FFFFFF));
+    }
+
+    /**
+     * Procedural glowing tactical crest / shield for system announcements (Concept 2 style).
+     */
+    public static void drawTacticalShield(GuiGraphics graphics, int x, int y, int size, int tintColor, float alpha) {
+        int a8 = (int) (((tintColor >>> 24) & 0xFF) * alpha);
+        if (a8 == 0 && alpha > 0.05F) a8 = (int) (alpha * 255.0F);
+        int col = (a8 << 24) | (tintColor & 0x00FFFFFF);
+        int glowCol = ((a8 / 4) << 24) | (tintColor & 0x00FFFFFF);
+
+        int cx = x + size / 2;
+        int cy = y + size / 2;
+        int r = size / 2 - 2;
+
+        // Outer soft glow backdrop
+        LumenGfx.roundedRect(graphics, x + 1, y + 1, size - 2, size - 2, 6, ((a8 / 6) << 24) | 0x001B2B);
+
+        // Tactical Shield Geometry
+        // Crown peaks
+        graphics.fill(cx - 1, y + 2, cx + 1, y + 5, col);
+        graphics.fill(cx - 5, y + 3, cx - 3, y + 6, col);
+        graphics.fill(cx + 3, y + 3, cx + 5, y + 6, col);
+
+        // Shield border
+        int topY = y + 6;
+        int midY = y + size - 8;
+        int botY = y + size - 3;
+        int w2 = r - 2;
+
+        // Top horizontal bar
+        graphics.fill(cx - w2, topY, cx + w2, topY + 1, col);
+
+        // Left & right verticals
+        graphics.fill(cx - w2, topY, cx - w2 + 1, midY, col);
+        graphics.fill(cx + w2 - 1, topY, cx + w2, midY, col);
+
+        // Bottom chevron taper
+        graphics.fill(cx - w2 + 1, midY, cx - w2 + 3, midY + 2, col);
+        graphics.fill(cx + w2 - 3, midY, cx + w2 - 1, midY + 2, col);
+        graphics.fill(cx - 3, midY + 2, cx - 1, botY - 1, col);
+        graphics.fill(cx + 1, midY + 2, cx + 3, botY - 1, col);
+        graphics.fill(cx - 1, botY - 1, cx + 1, botY, col);
+
+        // Side tech wing brackets
+        int wingL = cx - w2 - 3;
+        int wingR = cx + w2 + 2;
+        graphics.fill(wingL, topY + 2, wingL + 2, topY + 4, col);
+        graphics.fill(wingL - 1, topY + 4, wingL + 1, midY - 2, col);
+        graphics.fill(wingL, midY - 2, wingL + 2, midY, col);
+
+        graphics.fill(wingR, topY + 2, wingR + 2, topY + 4, col);
+        graphics.fill(wingR + 1, topY + 4, wingR + 3, midY - 2, col);
+        graphics.fill(wingR, midY - 2, wingR + 2, midY, col);
+
+        // Core cyan emblem / spark
+        graphics.fill(cx - 2, cy - 2, cx + 2, cy + 2, col);
+        graphics.fill(cx - 1, cy - 4, cx + 1, cy + 4, col);
+        graphics.fill(cx - 4, cy - 1, cx + 4, cy + 1, col);
     }
 
     public static int rankColor(String rankId) {

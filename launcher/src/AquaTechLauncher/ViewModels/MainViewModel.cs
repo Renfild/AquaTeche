@@ -493,13 +493,13 @@ public partial class MainViewModel : ViewModelBase
         if (_busy || NeedsAuth) return;
         UiSounds.Play(UiSounds.Kind.Play);
         SaveCfgFromUi();
-        SetBusy(true, "Проверка файлов…");
+        SetBusy(true, "Восстановление и проверка файлов…");
         Page = "log";
         try
         {
-            await Task.Run(() => _orch.UpdateAsync(_cfg, UiLog, UiProgress));
+            await Task.Run(() => _orch.RepairAsync(_cfg, UiLog, UiProgress));
             RefreshVersionLabel();
-            StatusText = "Сборка проверена и готова к запуску";
+            StatusText = "Сборка восстановлена и готова к запуску";
         }
         catch (Exception ex)
         {

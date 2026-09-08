@@ -48,6 +48,7 @@ ItemEvents.tooltip((event) => {
     'minecraft:copper_ore',
     'industrialupgrade:classicore/tin',
     'minecraft:string',
+    'minecraft:slime_ball',
   ], 'Бамбуковая удочка (Т-1)', (t) => t.aqua())
 
   addTier([
@@ -68,6 +69,7 @@ ItemEvents.tooltip((event) => {
   addTier([
     'industrialupgrade:baseore2/barium',
     'industrialupgrade:baseore2/polonium',
+    'minecraft:slime_block',
   ], 'Натуралист / слизневая (Т-4+)', (t) => t.green())
 
   addTier([
@@ -113,33 +115,36 @@ ItemEvents.tooltip((event) => {
     'industrialupgrade:baseore/cobalt',
     'industrialupgrade:baseore/manganese',
     'industrialupgrade:baseore/nickel',
+    'minecraft:diamond_block',
+    'industrialupgrade:alloyingot/stainless_steel',
   ], 'Акулья удочка (Т-9)', (t) => t.red())
 
   addTier([
     'minecraft:diamond',
-    'industrialupgrade:alloyingot/stainless_steel',
+    'minecraft:sea_lantern',
+    'industrialupgrade:baseore/platinum',
+    'minecraft:heart_of_the_sea',
   ], 'Обсидиановая удочка (Т-10)', (t) => t.gray())
 
   addTier([
     'minecraft:prismarine_shard',
     'minecraft:prismarine_crystals',
-    'industrialupgrade:baseore/platinum',
-    'minecraft:heart_of_the_sea',
+    'industrialupgrade:alloyingot/inconel',
+    'minecraft:netherite_ingot',
+    'minecraft:nether_star',
   ], 'Светящаяся удочка (Т-11)', (t) => t.green())
 
   addTier([
     'minecraft:quartz',
     'minecraft:netherite_scrap',
     'industrialupgrade:crushed/uranium',
-    'industrialupgrade:alloyingot/inconel',
+    'industrialupgrade:alloyingot/osmiridium',
+    'industrialupgrade:asteroidore/asteroid_adamantium_ore',
   ], 'Магмовая удочка (Т-12)', (t) => t.gold())
 
   addTier([
     'industrialupgrade:baseore/iridium',
     'industrialupgrade:baseore1/osmium',
-    'industrialupgrade:alloyingot/osmiridium',
-    'industrialupgrade:asteroidore/asteroid_adamantium_ore',
-    'minecraft:nether_star',
   ], 'Альфа-удочка (Т-13)', (t) => t.lightPurple())
 
   event.add('starcatcher:boner_rod', [

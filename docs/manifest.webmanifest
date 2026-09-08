@@ -1,0 +1,21 @@
+{
+  "name": "AquaTech — Океанический Minecraft",
+  "short_name": "AquaTech",
+  "description": "Высокотехнологичный океанический сервер и сборка Minecraft 1.20.1",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070B12",
+  "theme_color": "#0A121E",
+  "icons": [
+    {
+      "src": "/assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

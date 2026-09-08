@@ -50,6 +50,7 @@ async function trendsGet(context) {
       ];
     }
   }
+  trends = trends.map((t) => (t.name === "???" || t.id === "starcatcher:missingno" ? { ...t, name: "Глитч-рыба" } : t));
   return json({ ok: true, day, trends });
 
   function daysSinceEpoch() {

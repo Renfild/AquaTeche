@@ -52,15 +52,81 @@ function publicOrigin(request) {
 }
 
 function toBytes(value) {
-  if (value instanceof Uint8Array) return value;
-  if (value instanceof ArrayBuffer) return new Uint8Array(value);
-  if (Array.isArray(value)) return new Uint8Array(value);
+  if (!value) return null;
+  if (value instanceof Uint8Array) return value.byteLength ? value : null;
+  if (value instanceof ArrayBuffer) return value.byteLength ? new Uint8Array(value) : null;
+  if (ArrayBuffer.isView(value)) {
+    const view = new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+    return view.byteLength ? view : null;
+  }
+  if (Array.isArray(value)) return value.length ? new Uint8Array(value) : null;
+  if (typeof value === "object" && Array.isArray(value.data)) {
+    return value.data.length ? new Uint8Array(value.data) : null;
+  }
   return null;
+}
+
+function imageHeaders(mime, extra = {}) {
+  return {
+    "content-type": mime || "image/png",
+    "cache-control": "private, no-store, no-cache, must-revalidate",
+    "cdn-cache-control": "no-store",
+    "x-content-type-options": "nosniff",
+    "access-control-allow-origin": "*",
+    ...extra,
+  };
 }
 
 function lookUrl(origin, nick, kind, updated) {
   const q = updated ? `?v=${encodeURIComponent(updated)}` : "";
-  return `${origin}/api/skins/${encodeURIComponent(nick)}/${kind}${q}`;
+  return `${origin}/api/skins/${encodeURIComponent(nick)}/${kind}.png${q}`;
+}
+
+function safeMcNick(nick) {
+  const n = String(nick || "").trim();
+  if (!/^[A-Za-z0-9_]{1,16}$/.test(n)) return null;
+  return n;
+}
+
+async function fetchRemotePng(urls) {
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, {
+        headers: { "user-agent": "AquaTechPortal/1.0", accept: "image/png" },
+        cf: { cacheTtl: 0, cacheEverything: false },
+      });
+      if (!res.ok) continue;
+      const ctype = (res.headers.get("content-type") || "").toLowerCase();
+      if (!ctype.includes("image")) continue;
+      const buf = await res.arrayBuffer();
+      if (buf.byteLength < 80 || buf.byteLength > 262144) continue;
+      const bytes = new Uint8Array(buf);
+      if (bytes[0] !== 0x89 || bytes[1] !== 0x50 || bytes[2] !== 0x4e || bytes[3] !== 0x47) continue;
+      return new Response(buf, { headers: imageHeaders("image/png") });
+    } catch {
+      /* next mirror */
+    }
+  }
+  return null;
+}
+
+async function remoteLook(nick, kind) {
+  const n = safeMcNick(nick);
+  if (!n) return null;
+  const enc = encodeURIComponent(n);
+  if (kind === "avatar") {
+    return fetchRemotePng([
+      `https://mc-heads.net/avatar/${enc}/64`,
+      `https://minotar.net/helm/${enc}/64`,
+    ]);
+  }
+  if (kind === "skin") {
+    return fetchRemotePng([
+      `https://mc-heads.net/skin/${enc}`,
+      `https://minotar.net/skin/${enc}`,
+    ]);
+  }
+  return null;
 }
 
 export async function onRequestGet(context) {
@@ -68,7 +134,8 @@ export async function onRequestGet(context) {
   if (!env.DB) return bad("База не подключена (D1)", 503);
   await ensureTable(env.DB);
   const nick = String(params.nick || "").trim();
-  const kind = String(params.kind || "").trim();
+  let kind = String(params.kind || "").trim();
+  if (kind.endsWith(".png")) kind = kind.replace(/\.png$/, "");
   if (!nick) return bad("Ник не указан");
 
   if (!kind) {
@@ -86,7 +153,7 @@ export async function onRequestGet(context) {
       out[row.kind] = true;
       out.urls[row.kind] = lookUrl(origin, nick, row.kind, row.updated_at);
     }
-    return json(out);
+    return json(out, 200, { "access-control-allow-origin": "*" });
   }
 
   if (!KINDS.has(kind)) return bad("Неизвестный тип", 404);
@@ -98,15 +165,24 @@ export async function onRequestGet(context) {
   )
     .bind(nick, kind)
     .first();
-  if (!row) return new Response("Not found", { status: 404 });
+  if (!row) {
+    const remote = await remoteLook(nick, kind);
+    if (remote) return remote;
+    if ((kind === "avatar" || kind === "skin") && env.ASSETS) {
+      const fallback = kind === "avatar" ? "/assets/images/avatar_default.png" : "/assets/images/steve.png";
+      const res = await env.ASSETS.fetch(new Request(new URL(fallback, request.url)));
+      const headers = new Headers(res.headers);
+      headers.set("access-control-allow-origin", "*");
+      headers.set("cache-control", "private, no-store");
+      headers.set("cdn-cache-control", "no-store");
+      return new Response(res.body, { status: res.status, headers });
+    }
+    return new Response("Not found", { status: 404, headers: { "access-control-allow-origin": "*" } });
+  }
   const body = toBytes(row.bytes);
-  if (!body) return new Response("Not found", { status: 404 });
+  if (!body) return new Response("Not found", { status: 404, headers: { "access-control-allow-origin": "*" } });
   return new Response(body, {
-    headers: {
-      "content-type": row.mime || "image/png",
-      "cache-control": "public, max-age=120",
-      "x-content-type-options": "nosniff",
-    },
+    headers: imageHeaders(row.mime, { etag: `"${row.updated_at || "look"}"` }),
   });
 }
 
@@ -160,8 +236,13 @@ export async function onRequestPost(context) {
     .bind(user.id, kind, buf, meta.mime, meta.w, meta.h)
     .run();
 
+  const saved = await env.DB.prepare(
+    "SELECT updated_at FROM player_look WHERE user_id = ? AND kind = ?"
+  )
+    .bind(user.id, kind)
+    .first();
   const origin = publicOrigin(request);
-  const url = lookUrl(origin, user.nick, kind);
+  const url = lookUrl(origin, user.nick, kind, saved?.updated_at || String(Date.now()));
   if (kind === "skin") {
     await enqueueCommand(env.DB, {
       nick: user.nick,

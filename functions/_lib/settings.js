@@ -39,7 +39,10 @@ export async function setSetting(db, key, value) {
 }
 
 export async function purchasesEnabled(env) {
+  if (env.PURCHASES_ENABLED !== undefined) {
+    return String(env.PURCHASES_ENABLED).toLowerCase() === "true";
+  }
   const fromDb = await getSetting(env.DB, "purchases_enabled", "");
   if (fromDb !== "") return fromDb.toLowerCase() === "true";
-  return String(env.PURCHASES_ENABLED || "false").toLowerCase() === "true";
+  return true;
 }

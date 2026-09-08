@@ -127,6 +127,7 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly files("libs/mcef-forge-2.1.6-1.20.1.jar")
+    compileOnly files("libs/jei-1.20.1-forge-15.21.0.144.jar")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

@@ -49,7 +49,48 @@ public class SeabedDredgerBlockEntity extends BlockEntity implements MenuProvide
     public static final int MAX_PROGRESS = 100;
     public static final int UPGRADE_SLOT = 10;
 
-    private final CustomEnergyStorage energyStorage = new CustomEnergyStorage(CAPACITY, MAX_RECEIVE, 0);
+    public static class DredgerEnergyStorage extends net.minecraftforge.energy.EnergyStorage {
+        private Runnable listener = () -> {};
+
+        public DredgerEnergyStorage(int capacity, int maxReceive, int maxExtract) {
+            super(capacity, maxReceive, maxExtract, 0);
+        }
+
+        public DredgerEnergyStorage withListener(Runnable listener) {
+            this.listener = listener != null ? listener : () -> {};
+            return this;
+        }
+
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            int received = super.receiveEnergy(maxReceive, simulate);
+            if (!simulate && received > 0) listener.run();
+            return received;
+        }
+
+        @Override
+        public int extractEnergy(int maxExtract, boolean simulate) {
+            int extracted = super.extractEnergy(maxExtract, simulate);
+            if (!simulate && extracted > 0) listener.run();
+            return extracted;
+        }
+
+        public void setEnergy(int energy) {
+            this.energy = Math.max(0, Math.min(this.capacity, energy));
+            listener.run();
+        }
+
+        public int consumeEnergy(int amount) {
+            int toConsume = Math.min(this.energy, amount);
+            if (toConsume > 0) {
+                this.energy -= toConsume;
+                listener.run();
+            }
+            return toConsume;
+        }
+    }
+
+    private final DredgerEnergyStorage energyStorage = new DredgerEnergyStorage(CAPACITY, MAX_RECEIVE, 0);
     private final LazyOptional<IEnergyStorage> energyOptional = LazyOptional.of(() -> energyStorage);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(11) {

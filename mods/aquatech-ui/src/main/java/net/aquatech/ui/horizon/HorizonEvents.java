@@ -73,19 +73,7 @@ public final class HorizonEvents {
                     player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
                         cap.ensureDaily(dayKey(player));
                         sync(player, cap);
-                        HorizonRoute.DailyContract c = cap.currentContract();
-                        player.displayClientMessage(Component.literal(
-                                "§b≋ Горизонт " + cap.getHorizonTier() + ": §e" + HorizonRoute.tierName(cap.getHorizonTier())), false);
-                        if (!cap.isDailyClaimed()) {
-                            player.displayClientMessage(Component.literal(
-                                    "§7Контракт дня: §f" + c.title + " §a" + cap.getDailyProgress() + "§7/§a" + c.target
-                                            + " §8(/aquatech daily)"), false);
-                        } else {
-                            player.displayClientMessage(Component.literal(
-                                    "§8Контракт дня сдан. Завтра — новый."), false);
-                        }
-                        player.displayClientMessage(Component.literal(
-                                "§8Варпы: §7/warp pier · market · atoll · harbor"), false);
+                        player.displayClientMessage(Component.literal("§b≋ " + hubNextStep(player)), false);
                         if (StormEvent.isActive()) {
                             player.displayClientMessage(Component.literal("§9⚡ Шторм Горизонта активен — редкий улов ×2"), false);
                         }
@@ -176,8 +164,45 @@ public final class HorizonEvents {
             sync(player, cap);
             if (cap.isDailyComplete()) {
                 player.displayClientMessage(Component.literal(
-                        "§a✓ Контракт готов — §e/aquatech daily §aчтобы сдать"), true);
+                        "§a✓ Контракт готов — сдай в F4 или §e/aquatech daily"), true);
             }
         }
+    }
+
+    /** One line for hub + login. Not a fourth progression — points at Horizon / FTB / K. */
+    public static String hubNextStep(ServerPlayer player) {
+        String[] line = {"Сейчас: открой книгу FTB — завод. K — навыки. F4 — сдать день."};
+        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+            cap.ensureDaily(dayKey(player));
+            String prefix = "Горизонт " + cap.getHorizonTier() + " · ";
+            if (cap.isDailyClaimed()) {
+                line[0] = prefix + "контракт сдан. Дальше: глава FTB или навыки K.";
+                return;
+            }
+            HorizonRoute.DailyContract c = cap.currentContract();
+            if (cap.isDailyComplete()) {
+                line[0] = prefix + "сдай «" + c.title + "» в F4 (или /aquatech daily).";
+                return;
+            }
+            line[0] = prefix + "сейчас: " + c.title + " " + cap.getDailyProgress() + "/" + c.target
+                    + " · FTB = завод · K = навыки.";
+        });
+        return line[0];
+    }
+
+    public static boolean claimHorizonDaily(ServerPlayer player) {
+        boolean[] ok = {false};
+        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+            cap.ensureDaily(dayKey(player));
+            if (!cap.claimDaily()) {
+                return;
+            }
+            sync(player, cap);
+            player.displayClientMessage(Component.literal(
+                    "§a✓ Контракт сдан! §b+" + HorizonRoute.DAILY_AQUA_XP
+                            + " Aqua XP §7и §b+" + HorizonRoute.DAILY_SEASON_XP + " XP сезона"), false);
+            ok[0] = true;
+        });
+        return ok[0];
     }
 }

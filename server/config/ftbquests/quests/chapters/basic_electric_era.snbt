@@ -2,10 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "basic_electric_era"
-	group: "ERA0000000000001"
+	group: "31719A5E7B6EF622"
 	icon: "industrialupgrade:basemachine3/generator_iu"
-	id: "C3D924250B4CCA04"
-	order_index: 3
+	id: "7867768B1BAABFF9"
+	order_index: 2
 	quest_links: [ ]
 	quests: [
 		{
@@ -15,39 +15,38 @@
 				"Превращает электрическую энергию в рабочее механическое"
 				"движение."
 			]
-			id: "88FD1F77E2424BA9"
-			rewards: [{
-				id: "FBAD6360C1C9E267"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "7804F931D37DFC4B"
+			rewards: [
+				{
+					count: 16
+					id: "41629BBE3D0BAC45"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C7F854F007B88FBF"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "3F173C840EDCC2FB"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C54BC7261D3C1552"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:cable/copper_cable"
+				{
+					id: "3E4C15BAE76F44EF"
+					item: {
+						Count: 16b
+						id: "industrialupgrade:cable/copper_cable"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "50390AF813158844"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "50390AF813158844"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "1F1044548937CFB5"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_276_element"
-				}
+				item: "industrialupgrade:crafting_elements/crafting_276_element"
 				type: "item"
 			}]
 			title: "Elemotor"
@@ -55,45 +54,40 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["88FD1F77E2424BA9"]
 			description: [
 				"Электрический нагреватель жидкостей. Греет содержимое"
 				"бака и используется в процессах, где важна температура"
 				"самой жидкости."
 			]
-			id: "99DC2ACE3C6E9D2D"
-			rewards: [{
-				id: "549E56DD2EC409F9"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "5093F627EAB14536"
+			rewards: [
+				{
+					count: 16
+					id: "549E56DD2EC409F9"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "52DBA50C9E984C51"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "52DBA50C9E984C51"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "EA9CFEEA5CDCC999"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "4EE8AEB705079EE0"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0850A0A25A764C3B"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0850A0A25A764C3B"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "29714CD8E30CE3F7"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/fluid_heat"
-				}
+				item: "industrialupgrade:basemachine3/fluid_heat"
 				type: "item"
 			}]
 			title: "Жидкостный нагреватель"
@@ -101,45 +95,41 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["99DC2ACE3C6E9D2D"]
 			description: [
 				"Сжигает твёрдое топливо и производит EF. Простая"
 				"энергетическая машина для питания ранней электрической"
 				"сети."
 			]
+			entity_vis_size: 1.0f
 			id: "73817BDF7488C47A"
-			rewards: [{
-				id: "BBAA52D65EAD17B2"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "6DEECC5D6827B8F6"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "3ED8086CB66276FC"
-				item: {
-					Count: 12b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 12
+					id: "3ED8086CB66276FC"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0F0E6BFAC1D24F4C"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "0F0E6BFAC1D24F4C"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "4CD1BF4A32E90300"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "4CD1BF4A32E90300"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "4F63216FE1385AE6"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/generator_iu"
-				}
+				item: "industrialupgrade:basemachine3/generator_iu"
 				type: "item"
 			}]
 			title: "Генератор"
@@ -152,39 +142,35 @@
 				"Производит EF из редстоун-материалов. Даёт компактную"
 				"энергию из редстоуна без жидкого топлива."
 			]
+			entity_vis_size: 1.0f
 			id: "24000E117A1BC8E7"
-			rewards: [{
-				id: "EFEC23479B367D29"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "4FEC1EA3A2CCD251"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "3C6E84BD1D56F4A4"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "3C6E84BD1D56F4A4"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "EDBA490063DA78EA"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "0FF0D9C1B6C02F9D"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "505C6F71ADD21C52"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "505C6F71ADD21C52"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "E2775CBE4BD35833"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/redstone_generator"
-				}
+				id: "74EFAF5D829BB38F"
+				item: "industrialupgrade:basemachine3/redstone_generator"
 				type: "item"
 			}]
 			title: "Редстоуновый генератор"
@@ -197,39 +183,35 @@
 				"Производит EF из горячих жидкостей, прежде всего лавы."
 				"Работает как источник энергии для геотермальной линии."
 			]
+			entity_vis_size: 1.0f
 			id: "42F4D8BAD85A6D34"
-			rewards: [{
-				id: "3937F3D1F27B62C5"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "3937F3D1F27B62C5"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8A16862E31833656"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "24B3BC7B975ED42E"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "38D95EEA53C36B78"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "38D95EEA53C36B78"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "72E947AAAAAF456E"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "72E947AAAAAF456E"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "6885970D75282C9B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/geogenerator_iu"
-				}
+				item: "industrialupgrade:basemachine3/geogenerator_iu"
 				type: "item"
 			}]
 			title: "Геотермальный генератор"
@@ -244,39 +226,36 @@
 				"расходуется, заполняет буфер холода на заданное время,"
 				"а затем холод отдаётся в систему охлаждения механизмов."
 			]
-			id: "DBC252FB5CEA8804"
-			rewards: [{
-				id: "3237C8AF148D1362"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "40291B71F75D4CE3"
+			rewards: [
+				{
+					count: 16
+					id: "3237C8AF148D1362"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "F6A71C5546723F3A"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "136D8B64E30700E7"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9C997631CAFC26DD"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 8
+					id: "727B1755B15615DC"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B08C8887E929327B"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "3303798AB8FDA7E5"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "FAD74B03143F2A5E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/solid_cooling"
-				}
+				id: "251C5A4953B08061"
+				item: "industrialupgrade:basemachine3/solid_cooling"
 				type: "item"
 			}]
 			title: "Твердотельный холодильник"
@@ -284,46 +263,42 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["DBC252FB5CEA8804"]
 			description: [
 				"Базовый набор электрических переработчиков: дробление,"
 				"сжатие, извлечение, плавка, прокатка, резка и"
 				"выдавливание. Это основа автоматической обработки"
 				"ресурсов."
 			]
+			entity_vis_size: 1.0f
 			id: "13D3DA173A7E2E9C"
-			rewards: [{
-				id: "516F36066AB88184"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "516F36066AB88184"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1DFBD026876B27D9"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 16
+					id: "1DFBD026876B27D9"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "72FEB246D0ADC4D6"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "72FEB246D0ADC4D6"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C4CCB3CD90DAC23C"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "128531C21FD4D897"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "2BF07E6DE908B3D6"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:simplemachine/macerator_iu"
-				}
+				item: "industrialupgrade:simplemachine/macerator_iu"
 				type: "item"
 			}]
 			title: "Дробитель"
@@ -336,39 +311,36 @@
 				"Микросхема управления генераторами. Используется как"
 				"электронный контроллер для энергетических машин."
 			]
+			entity_vis_size: 1.0f
 			id: "750FDD44EB955598"
-			rewards: [{
-				id: "FCA3AF373D518B6E"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "575B06A17DC8AB60"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "4AB87B1011BBD623"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 4
+					id: "4AB87B1011BBD623"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A887450EC782D8CB"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 8
+					id: "520E7344A4F57E2A"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8F3148E66FDD0698"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "05F08CDABE3A3E75"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "F9508CF1D5A0607D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine/generator_microchip"
-				}
+				id: "21AD4CD3475B4BCA"
+				item: "industrialupgrade:basemachine/generator_microchip"
 				type: "item"
 			}]
 			title: "Производитель электросхем"
@@ -382,39 +354,36 @@
 				"Работает с рецептами, где обычная печь не может смешать"
 				"металлы правильно."
 			]
-			id: "A13EE50BA7A69347"
-			rewards: [{
-				id: "EC6FCD453A2650A9"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "29F6304C46B1544D"
+			rewards: [
+				{
+					count: 16
+					id: "79133ADA80097B6B"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "647BD799356501A8"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemingots/tin_ingot"
+				{
+					count: 16
+					id: "647BD799356501A8"
+					item: "industrialupgrade:itemingots/tin_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7BEED100D4B56437"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "7BEED100D4B56437"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "034C0771B7D5FB36"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "034C0771B7D5FB36"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "24260CCAB725A228"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine/alloy_smelter"
-				}
+				item: "industrialupgrade:basemachine/alloy_smelter"
 				type: "item"
 			}]
 			title: "Завод сплавов"
@@ -422,45 +391,41 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["A13EE50BA7A69347"]
 			description: [
 				"Изготавливает шестерни и зубчатые детали. Такие детали"
 				"нужны машинам, где движение передаётся через"
 				"механические узлы."
 			]
+			entity_vis_size: 1.0f
 			id: "72924C850349165D"
-			rewards: [{
-				id: "FFE5C2D139C26F94"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "2074E902FC86E7E7"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "233FBA722272FBA5"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemingots/tin_ingot"
+				{
+					count: 16
+					id: "233FBA722272FBA5"
+					item: "industrialupgrade:itemingots/tin_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9AE766130C6B021C"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "6BF70CF6D9DD99AC"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "92467851D58D2DE2"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "49CFFFB554D27CFB"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "0C19F77DAF11DE0E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:moremachine3/gearing"
-				}
+				item: "industrialupgrade:moremachine3/gearing"
 				type: "item"
 			}]
 			title: "Механический штамп"
@@ -474,39 +439,36 @@
 				"проводов и компонентов. Ускоряет производство сложной"
 				"электроники."
 			]
-			id: "983AC6DACE8A0631"
-			rewards: [{
-				id: "B55054306B7B0987"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "1699ACE2EDB35C11"
+			rewards: [
+				{
+					count: 16
+					id: "46485BDF83121BDF"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "746B2784FF597193"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 4
+					id: "746B2784FF597193"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "908EBA68E824F26F"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 8
+					id: "4F9E486B33400F64"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8842A2A504A97B59"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1546B5E0F280968F"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "9D23E27E53756A71"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/electronic_assembler"
-				}
+				id: "47E24A6B2F8D57B4"
+				item: "industrialupgrade:basemachine3/electronic_assembler"
 				type: "item"
 			}]
 			title: "Электрический сборщик электроники"
@@ -514,45 +476,41 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["983AC6DACE8A0631"]
 			description: [
 				"Создаёт пластик из подготовленных химических"
 				"компонентов. Работает как химическая машина для"
 				"полимерной цепочки."
 			]
-			id: "C8DEA151D843252C"
-			rewards: [{
-				id: "7B0F39F0B9351F62"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "2165D10DABC621ED"
+			rewards: [
+				{
+					count: 16
+					id: "7B0F39F0B9351F62"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E242839D278E7376"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 16
+					id: "633F70660C2AA76A"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "90D601428D743E59"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "3041F2D2C8B55D98"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "AB2D6D7F26517CE7"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "743F07E7440042F7"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "517E77B59E996D3E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine2/plastic_creator"
-				}
+				item: "industrialupgrade:basemachine2/plastic_creator"
 				type: "item"
 			}]
 			title: "Химический завод"
@@ -560,44 +518,40 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["C8DEA151D843252C"]
 			description: [
 				"Формует пластик в пластины. Делает ровные пластиковые"
 				"заготовки для корпусов, изоляции и деталей."
 			]
-			id: "A6691D21115DA4F4"
-			rewards: [{
-				id: "46E90D3F917FCD17"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "0CA2B1837C44B811"
+			rewards: [
+				{
+					count: 16
+					id: "46E90D3F917FCD17"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "86EB475B76315DAC"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 16
+					id: "7FD9AC96254753E1"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9B45C718FB51C8B9"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "7FC51996547CA3EE"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A9A2CACF57F4EB38"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0A3AC85D67C679E9"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "CC0F503F3B20F13E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine2/plastic_plate_creator"
-				}
+				id: "2F5F1797747FAA4C"
+				item: "industrialupgrade:basemachine2/plastic_plate_creator"
 				type: "item"
 			}]
 			title: "Пластавтомат"
@@ -605,45 +559,41 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["A6691D21115DA4F4"]
 			description: [
 				"Сваривает металлические детали в прочные узлы."
 				"Используется там, где обычное соединение деталей"
 				"недостаточно прочное."
 			]
+			entity_vis_size: 1.0f
 			id: "61B76B1B868E31AC"
-			rewards: [{
-				id: "9E47193B085029E3"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "6C8EBED698A2E9AA"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A3B483BB3C43522F"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemingots/tin_ingot"
+				{
+					count: 16
+					id: "75DE7443722E9589"
+					item: "industrialupgrade:itemingots/tin_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "97BCBFC1BF837840"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "44F644303339A3D7"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "2CC2882D81BE06CA"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "2CC2882D81BE06CA"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "62F91D9A3C839058"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/welding"
-				}
+				item: "industrialupgrade:basemachine3/welding"
 				type: "item"
 			}]
 			title: "Сварочный аппарат"
@@ -657,39 +607,36 @@
 				"от пустой породы. Улучшает качество сырья перед"
 				"дальнейшей переработкой."
 			]
-			id: "A033AE3E6490258D"
-			rewards: [{
-				id: "398FF6EE9DCDC385"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "2E9AE2556A124CF6"
+			rewards: [
+				{
+					count: 16
+					id: "398FF6EE9DCDC385"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "DB088FD9798E5D69"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 16
+					id: "2D92E199948C6B1B"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A31E3CFE13F0FA30"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 2
+					id: "0AAC1D1C2ED4ECC8"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B3A7E0D24C6B5BB7"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "6A7EA7895D3137AA"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "CCCB06C6F0C3B93E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:moremachine3/orewashing"
-				}
+				id: "72A75D7D97C9BF56"
+				item: "industrialupgrade:moremachine3/orewashing"
 				type: "item"
 			}]
 			title: "Рудопромывочный механизм"
@@ -697,45 +644,41 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["A033AE3E6490258D"]
 			description: [
 				"Нитратный порошок для химических реакций. Используется"
 				"как твёрдый реагент в азотной химии и обработке"
 				"материалов."
 			]
+			entity_vis_size: 1.0f
 			id: "45FE28E0C85DBD89"
-			rewards: [{
-				id: "08579CD670459C9C"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "08579CD670459C9C"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0B18991BAFE3A7A6"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "0B18991BAFE3A7A6"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6F2D3F8CE403F1D7"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "6F2D3F8CE403F1D7"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6168085AAB941038"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "6168085AAB941038"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "42BD2EEED797232C"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:itemdust/silver_nitrate_dust"
-				}
+				item: "industrialupgrade:itemdust/silver_nitrate_dust"
 				type: "item"
 			}]
 			title: "Nitrate Dust"
@@ -749,39 +692,36 @@
 				"Подходит для получения долей, пыли и промежуточных"
 				"материалов."
 			]
-			id: "CE8AC3297B006176"
-			rewards: [{
-				id: "00A280B95F3B45D7"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "7966D25FC6E7811C"
+			rewards: [
+				{
+					count: 16
+					id: "00A280B95F3B45D7"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0F675FC0ADEE28E6"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "0F675FC0ADEE28E6"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6F967A2B53114249"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 8
+					id: "6F967A2B53114249"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A62AF051869E9132"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "5AAB32A759C4F9EA"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "86CCCF10478FD93C"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/item_divider"
-				}
+				id: "5AEDFA9618AB573D"
+				item: "industrialupgrade:basemachine3/item_divider"
 				type: "item"
 			}]
 			title: "Разделитель предметов"
@@ -789,7 +729,6 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["CE8AC3297B006176"]
 			description: [
 				"Азот — газ для химии и охлаждения. Он участвует в"
 				"азотно-водородной цепочке, азотных оксидах и кислотах,"
@@ -797,39 +736,36 @@
 				"охлаждающая жидкость и используется в"
 				"космических/материальных рецептах."
 			]
-			id: "F6C31C15134FFDD9"
-			rewards: [{
-				id: "42679F1A9BBC1BD5"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "44562248E6E59579"
+			rewards: [
+				{
+					count: 16
+					id: "42679F1A9BBC1BD5"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B12A939DEADBD6DA"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "7F8A81624AD0CB24"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9AD2F890EB58A564"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "0586F022AE5FECCC"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "63A30E4398240727"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "63A30E4398240727"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "7EBCE1AB6813AF17"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/nitrogen"
-				}
+				item: "industrialupgrade:bucket/nitrogen"
 				type: "item"
 			}]
 			title: "Nitrogen"
@@ -837,45 +773,41 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["F6C31C15134FFDD9"]
 			description: [
 				"Улучшенная электронная схема с более сложной логикой"
 				"управления. Применяется в машинах, которым уже мало"
 				"базовой платы."
 			]
+			entity_vis_size: 1.0f
 			id: "2BC7CD881137838B"
-			rewards: [{
-				id: "6C72A3632EB2615F"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "6C72A3632EB2615F"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B1030DA45E5BCD63"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 4
+					id: "1B743B7EACCD5A04"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "931E17E8D56C32B6"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 8
+					id: "2D687AA42648FA6E"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "212C4AAB6C14C395"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "212C4AAB6C14C395"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "51D757931B2B9E42"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
-				}
+				item: "industrialupgrade:crafting_elements/crafting_273_element"
 				type: "item"
 			}]
 			title: "Прогресс в сфере электроники"
@@ -889,39 +821,36 @@
 				"опасную атмосферу и помогает контролировать состояние"
 				"зоны вокруг игрока."
 			]
+			entity_vis_size: 1.0f
 			id: "357306B2CC87180A"
-			rewards: [{
-				id: "CC31DCC26B34135F"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "065839E8B3337C46"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1B0485E2CC2D8B50"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "1B0485E2CC2D8B50"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "00A8A6507E488759"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "00A8A6507E488759"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7F59499489A78551"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "7F59499489A78551"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "4043AB69A6FF2B75"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:tools/gas_sensor"
-				}
+				item: "industrialupgrade:tools/gas_sensor"
 				type: "item"
 			}]
 			title: "Газовый сенсор"
@@ -937,39 +866,36 @@
 				"затем перерабатывают в энергетических или химических"
 				"машинах."
 			]
-			id: "F8E0F213C9BFA65D"
-			rewards: [{
-				id: "CED0ABCB0D9B98DF"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "2A18B970488B4198"
+			rewards: [
+				{
+					count: 16
+					id: "6299FA861EB298F9"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "CFC81E6AF7D0BCDB"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "2D28EB3749E19B28"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8C75B657E243FF58"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "7AF3186EBD44D8E7"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "932C7ED53714E601"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0C8EEA2A41BF5539"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "80BCFB9B469A924D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:veingas/gas"
-				}
+				id: "72D10C3E630609CE"
+				item: "industrialupgrade:veingas/gas"
 				type: "item"
 			}]
 			title: "Капсула природного газа"
@@ -977,45 +903,41 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["F8E0F213C9BFA65D"]
 			description: [
 				"Смешивает три твёрдых компонента в один материал."
 				"Используется для порошков и составов, где важны точные"
 				"пропорции."
 			]
+			entity_vis_size: 1.0f
 			id: "1C09993DEE54F858"
-			rewards: [{
-				id: "10F459F261FF5C76"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "10F459F261FF5C76"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "73749DA701547A1B"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "73749DA701547A1B"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "14D89D78E392C649"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/tin_ingot"
+				{
+					count: 8
+					id: "14D89D78E392C649"
+					item: "industrialupgrade:itemingots/tin_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "CFBFFA2ABF59053E"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "04A4AFE39D7DDC70"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "E9E8C01629D193A5"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/triple_solid_mixer"
-				}
+				id: "4603F816774F3DD4"
+				item: "industrialupgrade:basemachine3/triple_solid_mixer"
 				type: "item"
 			}]
 			title: "Тройной твердотельный смеситель"
@@ -1028,39 +950,36 @@
 				"Соединяет газы в новые соединения. Работает как"
 				"газовый реактор для азотной, водородной и другой химии."
 			]
+			entity_vis_size: 1.0f
 			id: "28B7C75AE358808E"
-			rewards: [{
-				id: "45CF5F696B1D9567"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "45CF5F696B1D9567"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E8A3830D31ACB191"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "44B0D7DB6E0106A0"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "78019B726F81B98E"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "78019B726F81B98E"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1943A611265CF151"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1943A611265CF151"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "8697147661D281CA"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/gas_combiner"
-				}
+				id: "792851A82798A20F"
+				item: "industrialupgrade:basemachine3/gas_combiner"
 				type: "item"
 			}]
 			title: "Газовый смеситель"
@@ -1075,39 +994,36 @@
 				"дальнейших реакциях, включая цепочки азотных соединений"
 				"и космическую переработку."
 			]
-			id: "F27D8C4C6EAB010E"
-			rewards: [{
-				id: "EA43F632A16EE02A"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "2885F947151893E5"
+			rewards: [
+				{
+					count: 16
+					id: "3F57D943E1963764"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "381DA535D5553F71"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "381DA535D5553F71"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "185F3D6593D9C505"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "185F3D6593D9C505"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E5C86E7B52120942"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "7E4ADFDA63F5D19F"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "1741CAC9F87E3845"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/nitrogenhydride"
-				}
+				item: "industrialupgrade:bucket/nitrogenhydride"
 				type: "item"
 			}]
 			title: "Nitrogenhydride"
@@ -1115,45 +1031,41 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["F27D8C4C6EAB010E"]
 			description: [
 				"Оксид азота — промежуточный газ азотной химии. Через"
 				"газовый комбайнер окисляется кислородом до диоксида"
 				"азота, после чего линия выходит на азотную кислоту."
 			]
+			entity_vis_size: 1.0f
 			id: "1EFB906202F540D6"
-			rewards: [{
-				id: "6E552E270A3907BC"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "6E552E270A3907BC"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D70505F6864BB080"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "351C290FBC8E464C"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "924CBCF9554D6E27"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "0958F0D13A8D2FEC"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C1B2A63C9BFACA94"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "26F24B1791B1B4DA"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "EB6B69BB8D33B20E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/nitrogenoxy"
-				}
+				id: "25954293DB44E059"
+				item: "industrialupgrade:bucket/nitrogenoxy"
 				type: "item"
 			}]
 			title: "Nitrogenoxy"
@@ -1168,39 +1080,36 @@
 				"даёт кислоту для травления, пластика и химической"
 				"переработки."
 			]
-			id: "C296046069988CBA"
-			rewards: [{
-				id: "0DEAB3C49ED28305"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "733AF4320954E043"
+			rewards: [
+				{
+					count: 16
+					id: "0DEAB3C49ED28305"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7B3A736F8FE61E39"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "7B3A736F8FE61E39"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "F14891BA86AEB6CB"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "41A01708DAEF2BC4"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "248B695942525682"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "248B695942525682"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "B022251A9BD7227E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/nitrogendioxide"
-				}
+				id: "7CEA06CCA44656A8"
+				item: "industrialupgrade:bucket/nitrogendioxide"
 				type: "item"
 			}]
 			title: "Nitrogendioxide"
@@ -1208,46 +1117,42 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["C296046069988CBA"]
 			description: [
 				"Азотная кислота — сильный жидкий реагент. Используется"
 				"в газовом комбайнере, жидкостных интеграторах,"
 				"пластиковой цепочке, огнеупорной обработке и"
 				"переработке отдельных космических пород."
 			]
+			entity_vis_size: 1.0f
 			id: "38272CF1D763C507"
-			rewards: [{
-				id: "22FFC052D73E9F44"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "22FFC052D73E9F44"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0E90E3DD7B5B52FF"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "0E90E3DD7B5B52FF"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "146BA0DAC5FDC0E6"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "146BA0DAC5FDC0E6"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C5F29273A8F592D8"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "4EC476CE21BF6C90"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "20CD80BE48CC8B5B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/nitricacid"
-				}
+				item: "industrialupgrade:bucket/nitricacid"
 				type: "item"
 			}]
 			title: "Nitricacid"
@@ -1261,39 +1166,36 @@
 				"для пропитки, растворения и химической обработки"
 				"твёрдых заготовок."
 			]
+			entity_vis_size: 1.0f
 			id: "5E8AB35F4E8DD999"
-			rewards: [{
-				id: "FB13AFEA8CDE6CF3"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "14CF3962EC832DB7"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B51D6CDD7E1FC607"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "60B2FD2A7ED71AA6"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "CBF7D19CD56A4419"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 8
+					id: "4FFBFA46BE0C61D5"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E407DF9D149A98F4"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "7DF27AE9EFADD542"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "84C56C5523AB97A4"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/fluid_integrator"
-				}
+				id: "6DC0E22BB4ABBDA8"
+				item: "industrialupgrade:basemachine3/fluid_integrator"
 				type: "item"
 			}]
 			title: "Жидкостный интегратор"
@@ -1307,39 +1209,36 @@
 				"реагентом для специальных обработок и серебросодержащих"
 				"цепочек."
 			]
-			id: "B19A488BA4A08C26"
-			rewards: [{
-				id: "58EDB863F6A336A3"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "499DCCB33942F92D"
+			rewards: [
+				{
+					count: 16
+					id: "58EDB863F6A336A3"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C938FFEBD4315996"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "49C85245878BD974"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "884E83D4F62B5CAB"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "68D2DE44B30D5A78"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "67892232E7E29696"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "67892232E7E29696"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "6519A83E6FADF72D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:itemdust/silver_nitrate_dust"
-				}
+				item: "industrialupgrade:itemdust/silver_nitrate_dust"
 				type: "item"
 			}]
 			title: "Silver Nitrate Dust"
@@ -1347,45 +1246,40 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["B19A488BA4A08C26"]
 			description: [
 				"Измельчённая урановая руда. Относится к радиоактивной"
 				"переработке и требует отдельной обработки вместо"
 				"обычной рудной линии."
 			]
+			entity_vis_size: 1.0f
 			id: "1C1310227D7615E1"
-			rewards: [{
-				id: "5735D89ADCB1BA7B"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "5735D89ADCB1BA7B"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "CBFC04B45B722316"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "2439A0209E92C628"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D300F0242373AB98"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 4
+					id: "0F98F8D8D03D865D"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "ACA4FDDA7C740A9C"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "125C34F448434257"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "38524A0A4670A71D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crushed/uranium"
-				}
+				item: "industrialupgrade:crushed/uranium"
 				type: "item"
 			}]
 			title: "Crushed Uranium Ore"
@@ -1399,39 +1293,35 @@
 				"машин. Подготавливает урановое сырьё к очистке и"
 				"дальнейшей ядерной переработке."
 			]
-			id: "D1018CF80447C906"
-			rewards: [{
-				id: "3C4CB3E0F6D0F077"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "4185E884D84010F7"
+			rewards: [
+				{
+					count: 16
+					id: "3C4CB3E0F6D0F077"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "DDC95349581C841B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "3949521476DAB001"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "46EC3438F06369CF"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 4
+					id: "46EC3438F06369CF"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "948BCDCA09C638E5"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "77EDD50337F5B91D"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "BE1B9C356B716804"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/radioactive_handler_ore"
-				}
+				id: "61438768B555438B"
+				item: "industrialupgrade:basemachine3/radioactive_handler_ore"
 				type: "item"
 			}]
 			title: "Обработчик радиоактивных руд"
@@ -1439,45 +1329,40 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["D1018CF80447C906"]
 			description: [
 				"Глубоко очищает рудное сырьё после дробления и"
 				"промывки. Убирает лишние примеси и даёт более чистый"
 				"материал."
 			]
+			entity_vis_size: 1.0f
 			id: "1BED57C8DBECDE55"
-			rewards: [{
-				id: "93AF191B322D876F"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "4314942A4211495E"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A7CC941A9DDA462C"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "3CE8829EBBA2E663"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "2BF204C5C715351E"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 4
+					id: "2BF204C5C715351E"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0297D2C5B39A0FF4"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0297D2C5B39A0FF4"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "4B6E584F54DD8E7E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/industrial_ore_purifier"
-				}
+				item: "industrialupgrade:basemachine3/industrial_ore_purifier"
 				type: "item"
 			}]
 			title: "Промышленный очиститель радиоактивных элементов"
@@ -1490,39 +1375,35 @@
 				"Датчик солнечной энергии. Используется солнечными"
 				"установками для контроля света и состояния генерации."
 			]
-			id: "B14D92B593F9CD31"
-			rewards: [{
-				id: "2BA7FF65CB1BD1BD"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "0BD677C922D60784"
+			rewards: [
+				{
+					count: 16
+					id: "2BA7FF65CB1BD1BD"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "08DDD52DDCC5B8E2"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "08DDD52DDCC5B8E2"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9AC047545AFB9B88"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "51A7776C6699C01D"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "F4D653BCFA81F4C8"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "2BA3DDFCFC260C6C"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "1813ACED2FBBD8B2"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_79_element"
-				}
+				item: "industrialupgrade:crafting_elements/crafting_79_element"
 				type: "item"
 			}]
 			title: "Se Sensor"
@@ -1530,45 +1411,42 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["B14D92B593F9CD31"]
 			description: [
 				"Солнечный генератор, работающий от освещения."
 				"Производит энергию без топлива, пока условия позволяют"
 				"получать солнечный поток."
 			]
+			entity_vis_size: 1.0f
 			id: "3B0F2ECE1A75F6F6"
-			rewards: [{
-				id: "E8F1A32600D92287"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "027F5E83150ECA89"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E7B55EA2D4B65AE6"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "1768AEC5BAD9D729"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "ECF0993D010E8B34"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "5F24BC9156051043"
+					item: {
+						Count: 2b
+						id: "industrialupgrade:solar_energy"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1303943A09084D38"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1303943A09084D38"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "7388ACCB8253AB4B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:se_gen/se_gen"
-				}
+				item: "industrialupgrade:se_gen/se_gen"
 				type: "item"
 			}]
 			title: "Генератор солнечной энергии"
@@ -1582,39 +1460,37 @@
 				"Обрабатывает материал в форму, удобную для панелей и"
 				"солнечных элементов."
 			]
+			entity_vis_size: 1.0f
 			id: "6105DBB6478C49AC"
-			rewards: [{
-				id: "B7C66DE5281CA982"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "793F6B628B2EB176"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "35B374154FD772F1"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "35B374154FD772F1"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "CB300D9FA9D78EC7"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "4F8AF4C9D644D088"
+					item: {
+						Count: 2b
+						id: "industrialupgrade:solar_energy"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "12044D9C898187B8"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "12044D9C898187B8"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "83998E99F601B58D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:gen_sunnarium_plate/gen_sunnarium_plate"
-				}
+				id: "540FF729F793FAE7"
+				item: "industrialupgrade:gen_sunnarium_plate/gen_sunnarium_plate"
 				type: "item"
 			}]
 			title: "Производитель соларитовых пластин"
@@ -1628,39 +1504,37 @@
 				"материалами солнечной энергетики и подготавливает их к"
 				"сборке генераторов."
 			]
-			id: "D22067CB871EBDF4"
-			rewards: [{
-				id: "1684C52E102B74C8"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "0BA884CFF596D057"
+			rewards: [
+				{
+					count: 16
+					id: "1684C52E102B74C8"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "3EF04DD6319772B8"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "3EF04DD6319772B8"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C24BF80B55AAA9C1"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "27186B02F6F19469"
+					item: {
+						Count: 2b
+						id: "industrialupgrade:solar_energy"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "BE9CF9B236DB693A"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "6D5D58698C8218DF"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "6C13856764EB668F"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:gen_sunnarium/gen_sunnarium"
-				}
+				item: "industrialupgrade:gen_sunnarium/gen_sunnarium"
 				type: "item"
 			}]
 			title: "Преобразователь соларита"
@@ -1668,44 +1542,40 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["D22067CB871EBDF4"]
 			description: [
 				"Карбид кальция — твёрдый реагент для получения"
 				"ацетилена. Используется в химической цепочке полимеров."
 			]
-			id: "DD6B862E63F89E24"
-			rewards: [{
-				id: "C6083FF313A70DC0"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "679028E7EBB2C4C6"
+			rewards: [
+				{
+					count: 16
+					id: "11845DA11F4D1D58"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "24350BB61151ED0F"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "24350BB61151ED0F"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E67F24A44F689C00"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "48A30A4190E4A232"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C0D5434DF0862DA6"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "2EADFAA75307BCB5"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "8864DFE28BBC2F64"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_482_element"
-				}
+				id: "0F5DAFE255976B11"
+				item: "industrialupgrade:crafting_elements/crafting_482_element"
 				type: "item"
 			}]
 			title: "Calcium Carbide"
@@ -1713,46 +1583,42 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["DD6B862E63F89E24"]
 			description: [
 				"Ацетилен — горючий углеводородный газ. В химических"
 				"машинах соединяется с водородом в этилен, участвует в"
 				"газовой турбине и нужен для органической/пластиковой"
 				"цепочки."
 			]
-			id: "9DD6EBABA0617216"
-			rewards: [{
-				id: "D22752F164291DF6"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "2655DC9F523A7F6E"
+			rewards: [
+				{
+					count: 16
+					id: "7BCAF66606A2D5E7"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0E3F12C609D2E7E5"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "0E3F12C609D2E7E5"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "73D6AF3040A0C4F7"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "73D6AF3040A0C4F7"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "15080630CFF18F4D"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "15080630CFF18F4D"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "CDA8C4B4533E0DF9"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/acetylene"
-				}
+				id: "436497833EBCD22C"
+				item: "industrialupgrade:bucket/acetylene"
 				type: "item"
 			}]
 			title: "Acetylene"
@@ -1760,44 +1626,40 @@
 			y: 4.0d
 		}
 		{
-			dependencies: ["9DD6EBABA0617216"]
 			description: [
 				"Запускает полимеризацию жидкостей и газов. Превращает"
 				"химическое сырьё в полимерные материалы."
 			]
-			id: "B085471586AE40E2"
-			rewards: [{
-				id: "6734C790526A9FDD"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "2D80D24729C7F44F"
+			rewards: [
+				{
+					count: 16
+					id: "6734C790526A9FDD"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9B306CC6129A1CBA"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 16
+					id: "1B7027C8E9F40CA6"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6C74A8213BD0DC2E"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "6C74A8213BD0DC2E"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "DA9B79344BE8D0D2"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "57D566BB58724B27"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "3AA698D6B7DB806D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/polymerizer"
-				}
+				item: "industrialupgrade:basemachine3/polymerizer"
 				type: "item"
 			}]
 			title: "Полимеризатор"
@@ -1805,45 +1667,41 @@
 			y: 4.0d
 		}
 		{
-			dependencies: ["B085471586AE40E2"]
 			description: [
 				"Соединяет твёрдый компонент с жидкостью в одном"
 				"процессе. Нужен для материалов, которые должны связать"
 				"или впитать реагент."
 			]
-			id: "C5C0800BF6B10AE0"
-			rewards: [{
-				id: "DA5A1FB4E11E3E8B"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "3C4AFC8003B22897"
+			rewards: [
+				{
+					count: 16
+					id: "7E38829EC740FD8B"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "86C81480AA231A9A"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "5C380DD93CCB209F"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B7ABEC1641584A77"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 8
+					id: "401697C9FB38CE61"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D3E3A3D16A33D037"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "7F5F78DE43059066"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "55D57A8B69A1E2E2"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/solid_fluid_integrator"
-				}
+				item: "industrialupgrade:basemachine3/solid_fluid_integrator"
 				type: "item"
 			}]
 			title: "Твердотельно-жидкостный интегратор"
@@ -1851,46 +1709,42 @@
 			y: 4.0d
 		}
 		{
-			dependencies: ["C5C0800BF6B10AE0"]
 			description: [
 				"Полиэтилен — жидкий полимерный материал. Используется"
 				"в пластиковой цепочке и полимеризаторе как основа для"
 				"получения пластиковых деталей и изоляционных"
 				"материалов."
 			]
-			id: "A838C8A6F515242A"
-			rewards: [{
-				id: "21C349E27D50B067"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "6EDAF65F12100B85"
+			rewards: [
+				{
+					count: 16
+					id: "21C349E27D50B067"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "ED45040B6121CFCE"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "6220CDDE57D8A608"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7E2887F69004BBAD"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "7E2887F69004BBAD"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D12D6C79D706B06F"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "222B8CB999620383"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "94C94EF8825E0B00"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/polyeth"
-				}
+				id: "775B2C8F207BEDB1"
+				item: "industrialupgrade:bucket/polyeth"
 				type: "item"
 			}]
 			title: "Капсула полиэтилена"
@@ -1898,45 +1752,41 @@
 			y: 4.0d
 		}
 		{
-			dependencies: ["A838C8A6F515242A"]
 			description: [
 				"Разделяет жидкость на несколько компонентов. Полезен"
 				"для смесей, топлива и нефтехимических промежуточных"
 				"продуктов."
 			]
-			id: "C134596A2847102C"
-			rewards: [{
-				id: "839165158306C758"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "50CFD5932CE4674C"
+			rewards: [
+				{
+					count: 16
+					id: "393E7D924F7EEF6D"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "80CF4B18B1E82B9A"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "61B547D0C50F7986"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "5FCF7D73CCB06492"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 8
+					id: "5FCF7D73CCB06492"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "4F049B38AEDB9984"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "4F049B38AEDB9984"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "D493CC6E0F177824"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/fluid_separator"
-				}
+				id: "4F1FB942A1CCC8D0"
+				item: "industrialupgrade:basemachine3/fluid_separator"
 				type: "item"
 			}]
 			title: "Разделитель жидкостей"
@@ -1944,46 +1794,42 @@
 			y: 4.0d
 		}
 		{
-			dependencies: ["C134596A2847102C"]
 			description: [
 				"Пропан — горючий газ и нефтехимический реагент."
 				"Используется в газовой турбине, газовом комбайнере и"
 				"переработке органических фракций, где нужен лёгкий"
 				"углеводород."
 			]
-			id: "9782B3DD9CC9C20B"
-			rewards: [{
-				id: "2D4C59858C696A6C"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "334AAC3E208BBF62"
+			rewards: [
+				{
+					count: 16
+					id: "2D4C59858C696A6C"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A06BC2018E1BD4A0"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "4602054A281AD910"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "130F08C0CBCBB081"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "130F08C0CBCBB081"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "04287A22CD2DF1E2"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "04287A22CD2DF1E2"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "B31178DD127F4922"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/propane"
-				}
+				id: "53D761A6A976E969"
+				item: "industrialupgrade:bucket/propane"
 				type: "item"
 			}]
 			title: "Propane"
@@ -1991,46 +1837,42 @@
 			y: 4.0d
 		}
 		{
-			dependencies: ["9782B3DD9CC9C20B"]
 			description: [
 				"Бром — химический реагент и газовый ресурс."
 				"Используется в газовых скважинах/датчиках,"
 				"электролизёрах, газовом комбайнере и рецептах с"
 				"космическими породами."
 			]
+			entity_vis_size: 1.0f
 			id: "538788328ABBC550"
-			rewards: [{
-				id: "435F5C61EE7F4832"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "435F5C61EE7F4832"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "4E95FEFF09B6901C"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "4E95FEFF09B6901C"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "747BDE060A3583FD"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "747BDE060A3583FD"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D9CD16982F2C3297"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "045668909BEA0C2C"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "B4168763501C4946"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/bromine"
-				}
+				id: "20B95042B4A46F67"
+				item: "industrialupgrade:bucket/bromine"
 				type: "item"
 			}]
 			title: "Капсула брома"
@@ -2045,39 +1887,36 @@
 				"интеграторах, когда нужно получить пластики или"
 				"органические промежуточные вещества."
 			]
+			entity_vis_size: 1.0f
 			id: "2D6C8C48444CD65F"
-			rewards: [{
-				id: "DE72D54AECCD47F6"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "08EF7C32C52936FE"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "52B4A95052FB3231"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "52B4A95052FB3231"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C67BAC93504F9793"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "735FEBC8B84DD942"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C3327D1240004A25"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "131DE17786CE0BEB"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "DB98248CAB6CA493"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/propylene"
-				}
+				id: "52C58B171508362C"
+				item: "industrialupgrade:bucket/propylene"
 				type: "item"
 			}]
 			title: "Propylene"
@@ -2090,39 +1929,36 @@
 				"Готовый пластик для изоляции, корпусов и деталей"
 				"машин. Это твёрдая форма полимерного материала."
 			]
+			entity_vis_size: 1.0f
 			id: "2E45AB1DF8FBFDF9"
-			rewards: [{
-				id: "2152985C444376F5"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "2152985C444376F5"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E96FC1F3940DF45E"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 16
+					id: "29BE6ED75ACF11EC"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "BC0298B34C2086D9"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "5204C11A502AC669"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "DE66CD507EED4128"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "393BDE53FDEF8E59"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "C6188EE95D312A00"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:plast"
-				}
+				id: "3E012600C5D50F6B"
+				item: "industrialupgrade:plast"
 				type: "item"
 			}]
 			title: "Plast"
@@ -2135,39 +1971,36 @@
 				"Пластиковая пластина для корпусов, изоляции и сборки"
 				"механизмов. Удобная плоская форма готового пластика."
 			]
+			entity_vis_size: 1.0f
 			id: "5175E3A701EA616F"
-			rewards: [{
-				id: "A30CEAEC90CC6271"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "39152BBD6C08F1FD"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "DD4A82C97E4D084A"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 16
+					id: "2E7BA2DFB967AC87"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "3060DAF5DD397851"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "3060DAF5DD397851"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6148D18F1B91475F"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "6148D18F1B91475F"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "5097FC75E8D3BD8A"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:plastic_plate"
-				}
+				item: "industrialupgrade:plastic_plate"
 				type: "item"
 			}]
 			title: "Пластина из пластика"
@@ -2181,39 +2014,36 @@
 				"части от пустой породы. Подходит для сырья, которое"
 				"обычные машины перерабатывают хуже."
 			]
+			entity_vis_size: 1.0f
 			id: "3735C4550BB9B8D5"
-			rewards: [{
-				id: "B2EB663D8676842F"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "73E3095DB4F62B19"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6DF502A452293F43"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "6DF502A452293F43"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "2091F38F50F62BA3"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 8
+					id: "2091F38F50F62BA3"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "5552FC9A5D9F52EB"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "5552FC9A5D9F52EB"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "5F4F480498E8B5FC"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine1/handler_ho"
-				}
+				item: "industrialupgrade:basemachine1/handler_ho"
 				type: "item"
 			}]
 			title: "Минеральный сепаратор"
@@ -2227,39 +2057,36 @@
 				"фракции. Работает как центральная машина топливной и"
 				"нефтехимической линии."
 			]
+			entity_vis_size: 1.0f
 			id: "278F088E5D98751E"
-			rewards: [{
-				id: "99DEDAA9C464CCDB"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "7888A719A836EBC6"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9C09EB9A68E12F09"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "3EB595D6B3F8B808"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D1FA4552244D9D19"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 8
+					id: "31C501635CE192E9"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "033DA45C283E6ECE"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "033DA45C283E6ECE"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "6BA71E79C2C04018"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:refiner/refiner"
-				}
+				item: "industrialupgrade:refiner/refiner"
 				type: "item"
 			}]
 			title: "Нефтеперерабатывающий завод"
@@ -2272,39 +2099,35 @@
 				"Генератор на дизельном топливе. Производит EF из"
 				"плотного жидкого топлива с нефтяной цепочки."
 			]
+			entity_vis_size: 1.0f
 			id: "1C4E0ED47D883109"
-			rewards: [{
-				id: "464480F66DA88FF8"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "464480F66DA88FF8"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "35C9231AE4A1982D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "35C9231AE4A1982D"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "EE1AAD795B0E7BEA"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "1EC4E1FD2B5CA576"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "15D6D937790D6D4F"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "15D6D937790D6D4F"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "C3009FBC9435E2C8"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine2/gen_disel"
-				}
+				id: "3F565BA2A40555EF"
+				item: "industrialupgrade:basemachine2/gen_disel"
 				type: "item"
 			}]
 			title: "Дизельный генератор"
@@ -2317,39 +2140,35 @@
 				"Генератор на бензине или лёгком топливе. Использует"
 				"жидкое топливо для стабильной выработки EF."
 			]
-			id: "F281DDBD646F4766"
-			rewards: [{
-				id: "8A206D23BD224FB7"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "341694582EAC0BDE"
+			rewards: [
+				{
+					count: 16
+					id: "4FE1EE7FA15E68EA"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "23D4DD3E3186204E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "23D4DD3E3186204E"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "09B1F817F71B014A"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "09B1F817F71B014A"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1E275A403D8969A5"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1E275A403D8969A5"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "3B2C1B21281B9C88"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine2/gen_pet"
-				}
+				item: "industrialupgrade:basemachine2/gen_pet"
 				type: "item"
 			}]
 			title: "Бензиновый генератор"
@@ -2366,39 +2185,36 @@
 				"накопленный холод отдаётся через CoolComponent"
 				"соседним/подключённым машинам."
 			]
-			id: "CAD7D0B48983F146"
-			rewards: [{
-				id: "6200B3365D072E98"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "5DCB2B223BAC9063"
+			rewards: [
+				{
+					count: 16
+					id: "6200B3365D072E98"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1221B25A34BBF2FC"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "1221B25A34BBF2FC"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A4D70E3E8FE69E99"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 8
+					id: "046C232C2173CF54"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "F893DC2ABA44BD4A"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1CCDE8364E4A8BDB"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "ED775DB7CDB056B5"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/fluid_cooling"
-				}
+				id: "400EDA62EC55E5B3"
+				item: "industrialupgrade:basemachine3/fluid_cooling"
 				type: "item"
 			}]
 			title: "Жидкостный холодильник"
@@ -2406,44 +2222,39 @@
 			y: 6.0d
 		}
 		{
-			dependencies: ["CAD7D0B48983F146"]
 			description: [
 				"Ветрогенератор. Производит EF от ветра, поэтому"
 				"зависит от условий установки и не расходует топливо."
 			]
-			id: "8F33E996B5A870FE"
-			rewards: [{
-				id: "22E27D05F19A7296"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			entity_vis_size: 1.0f
+			id: "103C7066CE932969"
+			rewards: [
+				{
+					count: 16
+					id: "22E27D05F19A7296"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6562BF5B7438DCC8"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "6562BF5B7438DCC8"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "FF37827137E05BA4"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "0A32A267BCAE1995"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "735222828A3C95C2"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "735222828A3C95C2"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "CDF3E6E9A9311DE6"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/simple_wind_generator"
-				}
+				id: "3FC3E994364BDC7D"
+				item: "industrialupgrade:basemachine3/simple_wind_generator"
 				type: "item"
 			}]
 			title: "Ветрогенератор"
@@ -2451,44 +2262,39 @@
 			y: 6.0d
 		}
 		{
-			dependencies: ["CAD7D0B48983F146"]
 			description: [
 				"Водяной генератор. Получает энергию от воды и подходит"
 				"для постоянной выработки при правильной установке."
 			]
+			entity_vis_size: 1.0f
 			id: "067A4697E35A6736"
-			rewards: [{
-				id: "B6A940F830C3DE07"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "7C5D0F8494A84455"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "00083CFAECEC768F"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "00083CFAECEC768F"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D3283C2A9BC7E9DD"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:battery/re_battery"
+				{
+					count: 2
+					id: "3871D607776FB0FD"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "418066CD639B95FA"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "418066CD639B95FA"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "E24AD3C95891B750"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/simple_water_generator"
-				}
+				id: "373DD62590355DD3"
+				item: "industrialupgrade:basemachine3/simple_water_generator"
 				type: "item"
 			}]
 			title: "Гидрогенератор"
@@ -2496,44 +2302,40 @@
 			y: 7.0d
 		}
 		{
-			dependencies: ["CAD7D0B48983F146"]
 			description: [
 				"Улучшенная плавильня сплавов. Быстрее и удобнее"
 				"обрабатывает сложные металлические смеси."
 			]
+			entity_vis_size: 1.0f
 			id: "5F8C3F6E8340DA0E"
-			rewards: [{
-				id: "6F668EF2550D554C"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "6F668EF2550D554C"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7C9BE949A69E4838"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 2
+					id: "7C9BE949A69E4838"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "022E0085312B83A3"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 8
+					id: "022E0085312B83A3"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D1A8E5532ABEE837"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "3DA1724178312F32"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "0DE09D4039CC9FA4"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine1/adv_alloy_smelter"
-				}
+				item: "industrialupgrade:basemachine1/adv_alloy_smelter"
 				type: "item"
 			}]
 			title: "§eУлучшенный завод сплавов"
@@ -2547,39 +2349,36 @@
 				"жидкостями и материалами, которые нужно разложить на"
 				"фракции."
 			]
+			entity_vis_size: 1.0f
 			id: "5E905126EB2E29EE"
-			rewards: [{
-				id: "7B5C3B0D1DCA1D58"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "7B5C3B0D1DCA1D58"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "EC0C7DBE15E318ED"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 16
+					id: "012D72F5B33BF844"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1B5D473252BC67D7"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 2
+					id: "1B5D473252BC67D7"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "F4B601DEFDFA5578"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0B8A56B894EF3452"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "42F3539F90B8D99E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:moremachine3/centrifuge_iu"
-				}
+				item: "industrialupgrade:moremachine3/centrifuge_iu"
 				type: "item"
 			}]
 			title: "Тепловая центрифуга"
@@ -2593,39 +2392,36 @@
 				"Используется перед сложной рудной и радиоактивной"
 				"переработкой."
 			]
+			entity_vis_size: 1.0f
 			id: "054BAD57C456097C"
-			rewards: [{
-				id: "F12E291B586A3C7E"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "4C2253E361A70CAA"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1BFF04C5FA8005FD"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/tin_plate"
+				{
+					count: 16
+					id: "1BFF04C5FA8005FD"
+					item: "industrialupgrade:itemplates/tin_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "89910B273018C380"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 2
+					id: "2A0F6AF90FC5D451"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "4356435530F5A760"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "4356435530F5A760"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "EA10035A2D39515B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine1/enrichment"
-				}
+				id: "643F0520F9B38CD7"
+				item: "industrialupgrade:basemachine1/enrichment"
 				type: "item"
 			}]
 			title: "Обогатитель"
@@ -2639,39 +2435,35 @@
 				"полезных материалов. Помогает уменьшить накопление"
 				"опасного остатка."
 			]
+			entity_vis_size: 1.0f
 			id: "2C9BF983451D130D"
-			rewards: [{
-				id: "D172F6E238766CB7"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "6A420BD433FCE605"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A527B8EA19EEBE12"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "616F4F0DABB39187"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "133743155679BF27"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 4
+					id: "133743155679BF27"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C6FF3C69B473DABA"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "4B6396099EF22AE3"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "F48A43D81DDB8C56"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/nuclear_waste_recycler"
-				}
+				id: "6A5BECA5A3C81560"
+				item: "industrialupgrade:basemachine3/nuclear_waste_recycler"
 				type: "item"
 			}]
 			title: "Переработчик радиоактивных отходов"
@@ -2685,39 +2477,35 @@
 				"отдельного хранения и специальных машин, а не обычной"
 				"обработки."
 			]
+			entity_vis_size: 1.0f
 			id: "799AE4C1FE0064F3"
-			rewards: [{
-				id: "AE730E5098676045"
-				item: {
-					Count: 16b
-					id: "minecraft:iron_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "627D1B6485F90DF7"
+					item: "minecraft:iron_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1E502644FC89086B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:adv_solar_energy"
+				{
+					id: "1E502644FC89086B"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "38639996A4803210"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_273_element"
+				{
+					count: 4
+					id: "38639996A4803210"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7F6E4E4D2D849F9C"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "7F6E4E4D2D849F9C"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "9F58D616504284B9"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_443_element"
-				}
+				id: "3BB423D69283BC96"
+				item: "industrialupgrade:crafting_elements/crafting_443_element"
 				type: "item"
 			}]
 			title: "Radioactive Waste"
@@ -2725,5 +2513,5 @@
 			y: 6.0d
 		}
 	]
-	title: "2. Базовая электрическая эра"
+	title: "Базовая электрическая эра"
 }

@@ -1,0 +1,252 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "6D8025A12BB42355"
+	group: ""
+	icon: {
+		Count: 1
+		id: "starcatcher:lush_glowberry_rod"
+		tag: {
+			Damage: 0
+		}
+	}
+	id: "6D8025A12BB42355"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			entity_vis_size: 1.0f
+			id: "705499BB5C746D0A"
+			tasks: [{
+				id: "1E727EA4708E9789"
+				item: {
+					Count: 1
+					id: "starcatcher:bamboo_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -10.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["430404F459D20259"]
+			entity_vis_size: 1.0f
+			id: "0A0E79EA6E6A9F63"
+			tasks: [{
+				id: "6B6FE285CEDCD44A"
+				item: {
+					Count: 1
+					id: "starcatcher:humble_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["705499BB5C746D0A"]
+			entity_vis_size: 1.0f
+			id: "430404F459D20259"
+			tasks: [{
+				id: "3512FFE9FCB18706"
+				item: {
+					Count: 1
+					id: "starcatcher:good_old_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -7.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["0A0E79EA6E6A9F63"]
+			entity_vis_size: 1.0f
+			id: "76EB857F1BA2C987"
+			tasks: [{
+				id: "59D9A27BAB49A2C5"
+				item: {
+					Count: 1
+					id: "starcatcher:naturalist_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -1.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["76EB857F1BA2C987"]
+			entity_vis_size: 1.0f
+			id: "63FC8E6CCFCB0801"
+			tasks: [{
+				id: "651EFAF448F9B0AB"
+				item: {
+					Count: 1
+					id: "starcatcher:slimed_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["63FC8E6CCFCB0801"]
+			entity_vis_size: 1.0f
+			id: "65E6DDE1E3D7FCFA"
+			tasks: [{
+				id: "77FBFDE6F9E03A8D"
+				item: {
+					Count: 1
+					id: "starcatcher:iceborn_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 5.5d
+			y: -8.0d
+		}
+		{
+			dependencies: ["65E6DDE1E3D7FCFA"]
+			entity_vis_size: 1.0f
+			id: "7C114857504A6199"
+			tasks: [{
+				id: "44A02965C614F4E0"
+				item: {
+					Count: 1
+					id: "starcatcher:starcatcher_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 6.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["7C114857504A6199"]
+			entity_vis_size: 1.0f
+			id: "5750855BA53E568B"
+			tasks: [{
+				id: "6DF6DF07E85A6FDE"
+				item: {
+					Count: 1
+					id: "starcatcher:azure_crystal_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 7.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["5750855BA53E568B"]
+			entity_vis_size: 1.0f
+			id: "55C4853727C897A1"
+			tasks: [{
+				id: "6370B597B5F0458F"
+				item: {
+					Count: 1
+					id: "starcatcher:sharktooth_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 6.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["55C4853727C897A1"]
+			entity_vis_size: 1.0f
+			id: "624B8BB138A174A0"
+			tasks: [{
+				id: "44CBF506FD14F86E"
+				item: {
+					Count: 1
+					id: "starcatcher:obsidian_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 2.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["624B8BB138A174A0"]
+			entity_vis_size: 1.0f
+			id: "0787BDF7F12D1359"
+			tasks: [{
+				id: "352DB63C99DAEEE3"
+				item: {
+					Count: 1
+					id: "starcatcher:lush_glowberry_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["0787BDF7F12D1359"]
+			entity_vis_size: 1.0f
+			id: "22152AC648FD3EF7"
+			tasks: [{
+				id: "674F83436CD47408"
+				item: {
+					Count: 1
+					id: "starcatcher:magmaforged_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["22152AC648FD3EF7"]
+			entity_vis_size: 1.0f
+			id: "1AAA4F3E922FA769"
+			tasks: [{
+				id: "7CA8BB08D8E55BBA"
+				item: {
+					Count: 1
+					id: "starcatcher:alpha_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 5.0d
+			y: 0.0d
+		}
+	]
+	title: "Удочки"
+}

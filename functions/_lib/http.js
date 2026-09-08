@@ -2,6 +2,7 @@ const SECURITY_HEADERS = {
   "x-content-type-options": "nosniff",
   "referrer-policy": "strict-origin-when-cross-origin",
   "x-frame-options": "SAMEORIGIN",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
 };
 
 /** @param {unknown} data @param {number} [status] */

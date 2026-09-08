@@ -1,0 +1,29 @@
+# Reverse-proxy for a Russian VPS (Timeweb / Selectel / Beget).
+# Browser talks only to this box. Box fetches the Cloudflare Worker.
+#
+# Second hostname (recommended): ru.aquateche.store A-record to this VPS, keep
+# aquateche.store on the Worker. Same Caddy host, TLS via Let's Encrypt.
+#
+# Cut over apex (only if CF anycast is fully blocked):
+# 1) Add this host as A for aquateche.store
+# 2) Remove Worker custom domain for that hostname
+# 3) Caddy reverse_proxy as below
+
+{
+	servers {
+		protocols h1 h2
+	}
+}
+
+{$RF_SITE_HOST:localhost} {
+	encode gzip zstd
+	reverse_proxy https://aquatech.santcrail.workers.dev {
+		header_up Host aquatech.santcrail.workers.dev
+		header_up X-Forwarded-Host {host}
+		header_up X-Forwarded-Proto {scheme}
+		transport http {
+			tls_server_name aquatech.santcrail.workers.dev
+		}
+	}
+	header Strict-Transport-Security "max-age=31536000; includeSubDomains"
+}

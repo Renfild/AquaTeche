@@ -2,10 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "steam_era"
-	group: "ERA0000000000001"
+	group: "31719A5E7B6EF622"
 	icon: "industrialupgrade:basemachine3/steamboiler"
 	id: "6847E9D8B36F0462"
-	order_index: 2
+	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
@@ -15,44 +15,41 @@
 				"котлов (обычных и мультиблочных), преобразователей пара"
 				"и торфяного парогенератора. Других источников нет."
 			]
+			entity_vis_size: 1.0f
 			id: "6F51B358741C21C5"
-			rewards: [{
-				id: "CEE6A255C1EE31B5"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "65B1BD0A91CA529F"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "38BF926BB9821742"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 16
+					id: "38BF926BB9821742"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "AA498088EAF8CA0D"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "4404E459E09F9FC9"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "CADAF26A8A98B1E3"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0BB9EC11DD888D7A"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "1BCA4D4F47062D12"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:blockresource/steam_machine"
-				}
+				item: "industrialupgrade:blockresource/steam_machine"
 				type: "item"
 			}]
 			title: "Steam Machine Block"
 			x: 0.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["6F51B358741C21C5"]
@@ -60,44 +57,41 @@
 				"Работает каждые 3 тика, потребляет 2 мб воды и"
 				"производит 2 мб пара."
 			]
+			entity_vis_size: 1.0f
 			id: "3D0D2D52D8401DDC"
-			rewards: [{
-				id: "4B1E8B3AF79D2119"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "4B1E8B3AF79D2119"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "67EEFA2AE8357F39"
-				item: {
-					Count: 48b
-					id: "minecraft:coal"
+				{
+					count: 48
+					id: "67EEFA2AE8357F39"
+					item: "minecraft:coal"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "F95147F18F9711B5"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 8
+					id: "3673A4F5DDDFA956"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "CA93770CC1E09851"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "457451B406BCDB89"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "467F5009B6EFFCB9"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steamboiler"
-				}
+				item: "industrialupgrade:basemachine3/steamboiler"
 				type: "item"
 			}]
 			title: "Паровой котёл"
 			x: 1.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["3D0D2D52D8401DDC"]
@@ -106,136 +100,127 @@
 				"Используйте кнопки \"+\" и \"-\" для регулировки давления"
 				"от 0 до 4."
 			]
-			id: "ADC16E27B12F00B6"
-			rewards: [{
-				id: "8570849D74A78969"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "1D0519C9E481505D"
+			rewards: [
+				{
+					count: 16
+					id: "188B5896ED3AAC7F"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7413F3E7FF11CE63"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "7413F3E7FF11CE63"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A01630010DF03C62"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:cable/copper_cable"
+				{
+					id: "23F3BD156826CF43"
+					item: {
+						Count: 8b
+						id: "industrialupgrade:cable/copper_cable"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "AB333D509E9AADFD"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "3BCF1B9C0AE385AD"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "621FF0F72A2CBC26"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steampressureconverter"
-				}
+				item: "industrialupgrade:basemachine3/steampressureconverter"
 				type: "item"
 			}]
 			title: "Паровой преобразователь давления"
 			x: 2.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
-			dependencies: ["ADC16E27B12F00B6"]
 			description: [
 				"Кремниевая заготовка для электронной цепочки. После"
 				"точной обработки становится основой для плат и более"
 				"сложных схем."
 			]
-			id: "8543F8BA0F9D6325"
-			rewards: [{
-				id: "2A1DC3FC17E074DF"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "6CC7B7547E8EC240"
+			rewards: [
+				{
+					count: 16
+					id: "2A1DC3FC17E074DF"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E8E3D53FC3A55076"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 8
+					id: "680DD0BEB0E0B52D"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C4AD1FF62990C556"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "25CA15719C24DE71"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A5DD8C11BB39DF00"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "22F81A18CDF6DE0B"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "D9ED944B34D13187"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:primal_silicon_crystal_handler/primal_silicon_crystal_handler"
-				}
+				id: "38187A2E94BC004F"
+				item: "industrialupgrade:primal_silicon_crystal_handler/primal_silicon_crystal_handler"
 				type: "item"
 			}]
 			title: "Примитивный выращиватель кристаллов"
 			x: 3.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
-			dependencies: ["8543F8BA0F9D6325"]
 			description: [
 				"Полирует кристаллы и точные детали лазером. Нужен там,"
 				"где материалу требуется чистая поверхность без грубой"
 				"механической обработки."
 			]
+			entity_vis_size: 1.0f
 			id: "03821A4A4913D63C"
-			rewards: [{
-				id: "69377C8BE01B8E6D"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "69377C8BE01B8E6D"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "817C920F2E3F1BDA"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/iron_plate"
+				{
+					count: 16
+					id: "27C3C1D4D3D8EF91"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "712D4297E2A41368"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 8
+					id: "712D4297E2A41368"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "DACE6219B2C65FF0"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "00CBAB69C87C5D18"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "8A61D9B6EC17B15D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:primal_laser_polisher/primal_laser_polisher"
-				}
+				id: "2F6373424739F93A"
+				item: "industrialupgrade:primal_laser_polisher/primal_laser_polisher"
 				type: "item"
 			}]
 			title: "Примитивный лазерный полировщик"
 			x: 4.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["03821A4A4913D63C"]
@@ -244,44 +229,41 @@
 				"систему для аккуратной обработки кристаллов и деталей"
 				"без электрического питания."
 			]
+			entity_vis_size: 1.0f
 			id: "5A16378D2D4DD4A8"
-			rewards: [{
-				id: "1D2337EAEC2D03D7"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "1D2337EAEC2D03D7"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0DEED2885750E030"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/iron_plate"
+				{
+					count: 16
+					id: "0DEED2885750E030"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "642810D49FF46B20"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 8
+					id: "642810D49FF46B20"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "118E943C85C50504"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "118E943C85C50504"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "10F0B718837B9A2B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_sharpener"
-				}
+				item: "industrialupgrade:basemachine3/steam_sharpener"
 				type: "item"
 			}]
 			title: "Паровой полировщик"
 			x: 5.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["5A16378D2D4DD4A8"]
@@ -289,93 +271,86 @@
 				"Генерирует электричество из пара. Требуется лава под"
 				"механизмом."
 			]
-			id: "ED1B78D54659D7C0"
-			rewards: [{
-				id: "0E3CA8762497268D"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "2E3A6E68C262B8B2"
+			rewards: [
+				{
+					count: 16
+					id: "0E3CA8762497268D"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9D0D5424E1F1CF64"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "016BC08FE78A8602"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "64FC011C1DFBAC40"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:cable/copper_cable"
+				{
+					id: "64FC011C1DFBAC40"
+					item: {
+						Count: 16b
+						id: "industrialupgrade:cable/copper_cable"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0466B1E0A76DE553"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0466B1E0A76DE553"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "E16307A8299E94E1"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_ampere_generator"
-				}
+				id: "5E0C1325AF1E5E67"
+				item: "industrialupgrade:basemachine3/steam_ampere_generator"
 				type: "item"
 			}]
 			title: "Паровой преобразователь тока"
 			x: 6.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
-			dependencies: ["ED1B78D54659D7C0"]
 			description: [
 				"Для работы требуется электричество и лава под ним."
 				"Жидкости забираются с помощью капсул или жидкостных"
 				"труб."
 			]
-			id: "B83A32511DF22D6A"
-			rewards: [{
-				id: "D13C28E541B6DAC8"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "7F0186836B107C12"
+			rewards: [
+				{
+					count: 16
+					id: "2FDD1C5BF3D53E1E"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0FCDF5B8DB0EDA73"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "0FCDF5B8DB0EDA73"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "4EE38EC3D02CFC28"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 8
+					id: "4EE38EC3D02CFC28"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "264694199E9EF146"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "264694199E9EF146"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "6F4D37C11B59B860"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_electrolyzer"
-				}
+				item: "industrialupgrade:basemachine3/steam_electrolyzer"
 				type: "item"
 			}]
 			title: "Паровой электролизёр"
 			x: 7.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
-			dependencies: ["B83A32511DF22D6A"]
 			description: [
 				"Кислород используется как окислитель и реагент в"
 				"химических машинах: электролизёрах, газовом комбайнере,"
@@ -383,44 +358,41 @@
 				"получении оксидов, кислот и некоторых продуктов из"
 				"рудных или космических материалов."
 			]
+			entity_vis_size: 1.0f
 			id: "6DCB07095E764CFF"
-			rewards: [{
-				id: "0A9125237F25D1A1"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "0A9125237F25D1A1"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "84F741BF2451959F"
-				item: {
-					Count: 8b
-					id: "minecraft:bucket"
+				{
+					count: 8
+					id: "2A185C7FC43F1153"
+					item: "minecraft:bucket"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "2A5F9C8696D62ECE"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 8
+					id: "2A5F9C8696D62ECE"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1F6B7E98D2D6C0B5"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1F6B7E98D2D6C0B5"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "1AD819256A061E45"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/oxygen"
-				}
+				item: "industrialupgrade:bucket/oxygen"
 				type: "item"
 			}]
 			title: "Окислитель, которым мы дышим"
 			x: 8.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["6DCB07095E764CFF"]
@@ -429,138 +401,127 @@
 				"Работает с газовыми реагентами и предметами, когда"
 				"обычных жидкостных машин недостаточно."
 			]
-			id: "9123CAD78FAF6660"
-			rewards: [{
-				id: "887546B8FBEE4C61"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "023EC48B66A6C5F2"
+			rewards: [
+				{
+					count: 16
+					id: "699DA7AEB5B4EFA9"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "ACE2C8FE6658E075"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 16
+					id: "3C93580BE021D424"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B489ECBB37B55AB4"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "05D67499AF780B4D"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "2B2B7C1CB01F41BF"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "2B2B7C1CB01F41BF"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "6C63059924957278"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:gas_chamber/primal_gas_chamber"
-				}
+				item: "industrialupgrade:gas_chamber/primal_gas_chamber"
 				type: "item"
 			}]
 			title: "Газовая камера"
 			x: 9.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
-			dependencies: ["9123CAD78FAF6660"]
 			description: [
 				"Триоксид серы получается в газовом комбайнере из"
 				"сернистого оксида и кислорода. Затем он смешивается с"
 				"водой для серной кислоты и используется в серной"
 				"химической цепочке."
 			]
-			id: "874B0E9D0911C856"
-			rewards: [{
-				id: "199B7EDB0DB6C5B5"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "2F18E68C2AD68DAB"
+			rewards: [
+				{
+					count: 16
+					id: "199B7EDB0DB6C5B5"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E8C86C1595327FAC"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 16
+					id: "0AE48B9A0EF4FF49"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "F53CDE443551AA4A"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "5BE72C1D2E20FC07"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E9BE2EC418C1BAC3"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "44910CE09E21D4CF"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "96A95CF3DD8FCB30"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/sulfurtrioxide"
-				}
+				id: "70B24E34C003C50F"
+				item: "industrialupgrade:bucket/sulfurtrioxide"
 				type: "item"
 			}]
 			title: "Sulfurtrioxide"
 			x: 10.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
-			dependencies: ["874B0E9D0911C856"]
 			description: [
 				"Раствор медного сульфата — жидкий медьсодержащий"
 				"реагент. Используется в жидкостных интеграторах и"
 				"смесителях для обработки меди, плат и химических"
 				"заготовок."
 			]
+			entity_vis_size: 1.0f
 			id: "2B8BAE8DE8904886"
-			rewards: [{
-				id: "B746EF41F4B6FE20"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "3086F50234DBD005"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7520365518B94E24"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 16
+					id: "7520365518B94E24"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6CEF926185CAA7CB"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "6CEF926185CAA7CB"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D843A4DD1DB2B2C0"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "56A4984C16983ED9"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "0CF000832CCB7E5B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:bucket/coppersulfate"
-				}
+				item: "industrialupgrade:bucket/coppersulfate"
 				type: "item"
 			}]
 			title: "Сульфат меди"
 			x: 11.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["2B8BAE8DE8904886"]
@@ -569,44 +530,41 @@
 				"и устанавливаются компоненты, прежде чем плата станет"
 				"рабочей схемой."
 			]
+			entity_vis_size: 1.0f
 			id: "54F899A90B74194B"
-			rewards: [{
-				id: "269E63D6A5945DB7"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "269E63D6A5945DB7"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "19D2C74B8FA70809"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "19D2C74B8FA70809"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0D27526D1D4742BB"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "0D27526D1D4742BB"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8FEB801C61EB35FD"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "6767F993A8AA9832"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "4A65DC88D70EE17D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_487_element"
-				}
+				item: "industrialupgrade:crafting_elements/crafting_487_element"
 				type: "item"
 			}]
 			title: "Circuit Board"
 			x: 12.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["54F899A90B74194B"]
@@ -615,90 +573,83 @@
 				"управляющую логику в подготовленную плату и превращает"
 				"её в рабочий электронный компонент."
 			]
-			id: "FC8D57ED7F890E41"
-			rewards: [{
-				id: "670FFBABC89BD255"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "4BC676222A81C410"
+			rewards: [
+				{
+					count: 16
+					id: "670FFBABC89BD255"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "4113FE717C8AABC5"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "4113FE717C8AABC5"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "73C2688FFB419100"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "73C2688FFB419100"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "F0DA307D38CAFBED"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "7882F868457BC735"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "4DB4561E58361911"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:primal_programming_table/primal_programming_table"
-				}
+				item: "industrialupgrade:primal_programming_table/primal_programming_table"
 				type: "item"
 			}]
 			title: "Примитивный программированный стол"
 			x: 13.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
-			dependencies: ["FC8D57ED7F890E41"]
 			description: [
 				"Плата с записанной логикой управления. Используется в"
 				"механизмах и электронных сборках как готовый"
 				"управляющий элемент."
 			]
+			entity_vis_size: 1.0f
 			id: "06E3F57D19E99359"
-			rewards: [{
-				id: "300DC8D2BCAA47F8"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "300DC8D2BCAA47F8"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "66DC317238A37C50"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "66DC317238A37C50"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "59A146B1040CF5F8"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "59A146B1040CF5F8"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "412A3FF8915F3574"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "412A3FF8915F3574"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "3BABE87B98A15734"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_488_element"
-				}
+				item: "industrialupgrade:crafting_elements/crafting_488_element"
 				type: "item"
 			}]
 			title: "Programmed Circuit Board"
 			x: 14.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["06E3F57D19E99359"]
@@ -706,44 +657,41 @@
 				"Паровая машина для обработки тяжёлых руд. Разделяет"
 				"плотное сырьё на полезные части без электрической сети."
 			]
+			entity_vis_size: 1.0f
 			id: "7D49F9850EB90C01"
-			rewards: [{
-				id: "E1A2C0CCB75EB2F7"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "0D9BFC6AE3F29E99"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7F0AB9881D83A796"
-				item: {
-					Count: 32b
-					id: "minecraft:coal"
+				{
+					count: 32
+					id: "7F0AB9881D83A796"
+					item: "minecraft:coal"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "388113BD3D3CAA39"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/iron_plate"
+				{
+					count: 8
+					id: "388113BD3D3CAA39"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "5EF3E0EEB9AE5705"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "5EF3E0EEB9AE5705"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "EE3A5C7E8D61DDD4"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_handler_ore"
-				}
+				id: "1841515E4B734371"
+				item: "industrialupgrade:basemachine3/steam_handler_ore"
 				type: "item"
 			}]
 			title: "Паровой сепаратор"
 			x: 14.0d
-			y: 1.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["7D49F9850EB90C01"]
@@ -752,131 +700,120 @@
 				"её очищают или смешивают, чтобы получить пригодную"
 				"углеродную смесь."
 			]
-			id: "887D8D8B5B9C094E"
-			rewards: [{
-				id: "46A77CC6106CD5CF"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "63284E3AD63A46AE"
+			rewards: [
+				{
+					count: 16
+					id: "46A77CC6106CD5CF"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "01A59E06F8EE18A4"
-				item: {
-					Count: 32b
-					id: "minecraft:coal"
+				{
+					count: 32
+					id: "01A59E06F8EE18A4"
+					item: "minecraft:coal"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "AF814A3CD432D863"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/iron_plate"
+				{
+					count: 8
+					id: "33D21DDD7F431D27"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "FA37EF77EF00F127"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "7A4EEABBA100A1F8"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "83048247B091AC5D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_498_element"
-				}
+				id: "45A5BA899AB1EA98"
+				item: "industrialupgrade:crafting_elements/crafting_498_element"
 				type: "item"
 			}]
 			title: "Impurity Coal Dust"
 			x: 12.0d
-			y: 1.5d
+			y: 0.5d
 		}
 		{
-			dependencies: ["887D8D8B5B9C094E"]
 			description: [
 				"Подготовленная углеродная смесь для металлургии. Даёт"
 				"контролируемый углеродный состав при работе со сталью и"
 				"сплавами."
 			]
-			id: "BD265E2183BCB0B1"
-			rewards: [{
-				id: "512469A4A3138B9E"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "7EE772EF0F85EA22"
+			rewards: [
+				{
+					count: 16
+					id: "512469A4A3138B9E"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "FA8C5D6097BFE1BA"
-				item: {
-					Count: 32b
-					id: "minecraft:coal"
+				{
+					count: 32
+					id: "63D4D085C0AE0A97"
+					item: "minecraft:coal"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A961164741CAE7C1"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/iron_plate"
+				{
+					count: 8
+					id: "438D05D5BFD83F59"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1E23773106FBDA6C"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1E23773106FBDA6C"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "65668EA85B5AF4E2"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_499_element"
-				}
+				item: "industrialupgrade:crafting_elements/crafting_499_element"
 				type: "item"
 			}]
 			title: "Alloy Coal Dust"
-			x: 11.0d
-			y: 2.0d
+			x: 11.5d
+			y: 1.5d
 		}
 		{
-			dependencies: ["BD265E2183BCB0B1"]
 			description: [
 				"Прочный конструкционный металл для корпусов,"
 				"инструментов и машин. Хорошо подходит для механизмов,"
 				"которым уже недостаточно ранних металлов."
 			]
+			entity_vis_size: 1.0f
 			id: "2594E7FEF47BCFDF"
-			rewards: [{
-				id: "5DDBA9A26E3B1766"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "5DDBA9A26E3B1766"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "023D3141B06E0D67"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 8
+					id: "023D3141B06E0D67"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "3D6BF2534FBB5769"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/steel_plate"
+				{
+					count: 8
+					id: "3D6BF2534FBB5769"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "CE6899FD826A9F08"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "70A444A4F47B1C20"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "2E48C2AA0827A037"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:casing/steel"
-				}
+				item: "industrialupgrade:casing/steel"
 				type: "item"
 			}]
 			title: "Стальная оболочка"
@@ -890,44 +827,47 @@
 				"Служит дольше ранних молотов и лучше подходит для"
 				"стальных заготовок."
 			]
+			entity_vis_size: 1.0f
 			id: "7905D85C31A49354"
-			rewards: [{
-				id: "965070C9ACC2E0B6"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "55AEF15B5F812050"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8F4BB3D18BA3F1D0"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 8
+					id: "2AEA673730A6CA9A"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8E2C2D7746F581A8"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/steel_plate"
+				{
+					count: 8
+					id: "1E45F21494707AE8"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "ADBD21D2654E4525"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "510D5F8793AEFCD6"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "AB2FCD6DC28E128A"
+				id: "677F218CF9139886"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "industrialupgrade:energy/steel_hammer"
+					tag: {
+						Damage: 0
+					}
 				}
 				type: "item"
 			}]
 			title: "Стальной молот"
 			x: 7.5d
-			y: 1.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["2594E7FEF47BCFDF"]
@@ -936,39 +876,36 @@
 				"Рассчитана на прочные сплавы и операции, где обычная"
 				"наковальня быстро ограничивает производство."
 			]
-			id: "9AA19AA7BC59126D"
-			rewards: [{
-				id: "F4E4A30611092D16"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "7AAB1469AB4CE7CC"
+			rewards: [
+				{
+					count: 16
+					id: "35C9C831C8CADBBC"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "C60F722F2B971CB6"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 8
+					id: "6BA7F1B038E40FCA"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D0E89FDD529C8B56"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/steel_plate"
+				{
+					count: 8
+					id: "75A8F8BF23589587"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0BBD36A3AF203127"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0BBD36A3AF203127"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "9942C674A21F9849"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:block_strong_anvil/block_strong_anvil"
-				}
+				id: "28DFC28DE89E808C"
+				item: "industrialupgrade:block_strong_anvil/block_strong_anvil"
 				type: "item"
 			}]
 			title: "Укреплённая наковальня"
@@ -976,50 +913,46 @@
 			y: 2.75d
 		}
 		{
-			dependencies: ["9AA19AA7BC59126D"]
 			description: [
 				"Плавит руды и материалы в расплавленные металлы."
 				"Работает с огнеупорной обработкой и выдаёт жидкий"
 				"металл для литейных процессов."
 			]
+			entity_vis_size: 1.0f
 			id: "342CD2D31CA72D4E"
-			rewards: [{
-				id: "80D86BFE6BC01858"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "50DFC96679FAB646"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7244B6C11B9B524A"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 8
+					id: "7244B6C11B9B524A"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "99F2628CD77766E4"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/steel_plate"
+				{
+					count: 8
+					id: "642AEE4E3C9ED820"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "AAC9333E9E77D843"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "0018394935FA0468"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "84235FDE13DD74FF"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:refractory_furnace/refractory_furnace"
-				}
+				id: "3A8AA046843D78F9"
+				item: "industrialupgrade:refractory_furnace/refractory_furnace"
 				type: "item"
 			}]
 			title: "Тугоплавкая печь"
-			x: 10.62d
-			y: 2.75d
+			x: 11.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["342CD2D31CA72D4E"]
@@ -1027,44 +960,41 @@
 				"Небольшая литейная установка. Принимает расплавленный"
 				"металл и отливает из него базовые твёрдые заготовки."
 			]
+			entity_vis_size: 1.0f
 			id: "064B68FB95F784E2"
-			rewards: [{
-				id: "8C65404EBA333886"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "230A1E630E1A7C4C"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "AF1E69D50CF7809A"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 8
+					id: "6C57434E75509CA8"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B692B41390ADADAE"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/steel_plate"
+				{
+					count: 8
+					id: "04D02219ABF9B914"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B66BEAEA033C8992"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "72795BFC512956E0"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "33A451B5A42B3B4D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:mini_smeltery/mini_smeltery"
-				}
+				item: "industrialupgrade:mini_smeltery/mini_smeltery"
 				type: "item"
 			}]
 			title: "Мини-плавильня"
-			x: 11.62d
-			y: 2.75d
+			x: 13.5d
+			y: 2.5d
 		}
 		{
 			dependencies: ["2594E7FEF47BCFDF"]
@@ -1073,39 +1003,36 @@
 				"платы, контакты и мелкие детали в готовые электронные"
 				"компоненты."
 			]
-			id: "E5CE5E1D628BF9BF"
-			rewards: [{
-				id: "B44143B6727D4124"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "62155555A478AC7F"
+			rewards: [
+				{
+					count: 16
+					id: "458F204A7A2341AA"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "2E2F4642A768883D"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "2E2F4642A768883D"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6E2160035020FA69"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:crafting_elements/crafting_271_element"
+				{
+					count: 8
+					id: "6E2160035020FA69"
+					item: "industrialupgrade:crafting_elements/crafting_271_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "3CFCB1AB79DFC962"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "3CFCB1AB79DFC962"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "F87A21392C700B2C"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:primal_soldering_mechanism/primal_soldering_mechanism"
-				}
+				id: "3D04EA54F9779A54"
+				item: "industrialupgrade:primal_soldering_mechanism/primal_soldering_mechanism"
 				type: "item"
 			}]
 			title: "Стол для пайки электроники"
@@ -1113,49 +1040,46 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["E5CE5E1D628BF9BF"]
 			description: [
 				"Генерирует каждые 2 тика: потребляет 1 мб воды,"
 				"производит 2 мб пара."
 			]
+			entity_vis_size: 1.0f
 			id: "72A89907ED8A6FCF"
-			rewards: [{
-				id: "3C6CA5695ACCD5A1"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "3C6CA5695ACCD5A1"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8ABF95C25D6095F4"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "1D7D087152FC4B2F"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6D2B6845D2B0BB45"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:cable/copper_cable"
+				{
+					id: "6D2B6845D2B0BB45"
+					item: {
+						Count: 16b
+						id: "industrialupgrade:cable/copper_cable"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "5BD5EB17733D1465"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "5BD5EB17733D1465"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "5E80E9A4DB0E4E70"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_converter"
-				}
+				item: "industrialupgrade:basemachine3/steam_converter"
 				type: "item"
 			}]
 			title: "Паровой преобразователь пара "
 			x: 7.0d
-			y: 3.0d
+			y: 5.5d
 		}
 		{
 			dependencies: ["72A89907ED8A6FCF"]
@@ -1163,44 +1087,42 @@
 				"Генерирует каждый тик: потребляет 1 мб воды,"
 				"производит 2 мб пара."
 			]
-			id: "E68DA80B9A33E9DF"
-			rewards: [{
-				id: "14F3B146A09853AA"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "4E0B14D08AFD7E00"
+			rewards: [
+				{
+					count: 16
+					id: "14F3B146A09853AA"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D20E714951F4CD9E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "7D0924DC68F2FD22"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8502D9EC92C81759"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:cable/copper_cable"
+				{
+					id: "389AE61A301B240C"
+					item: {
+						Count: 16b
+						id: "industrialupgrade:cable/copper_cable"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "813A70FDECF3146E"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "31B06566290DFE3E"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "7E8D077DE5DBBE41"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_peat_generator"
-				}
+				item: "industrialupgrade:basemachine3/steam_peat_generator"
 				type: "item"
 			}]
 			title: "Паровой генератор на торфе"
 			x: 8.0d
-			y: 4.0d
+			y: 6.5d
 		}
 		{
 			dependencies: ["72A89907ED8A6FCF"]
@@ -1208,269 +1130,242 @@
 				"Паровой насос для перекачки жидкостей. Двигает воду,"
 				"лаву и другие жидкости без электрического двигателя."
 			]
-			id: "AC2C6A28BF35E36E"
-			rewards: [{
-				id: "59A51CDDCDE53FE1"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "6ED4B26A45EF6E28"
+			rewards: [
+				{
+					count: 16
+					id: "59A51CDDCDE53FE1"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0F5FD6E59F770563"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "0F5FD6E59F770563"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A0092C3594C48CE1"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "6A79A9C0E553A405"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "ACBCF2A96DABF21E"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "4D96BBE3675EFD73"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "195DF1A0B7FC68E3"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_pump"
-				}
+				item: "industrialupgrade:basemachine3/steam_pump"
 				type: "item"
 			}]
 			title: "Паровая помпа"
 			x: 6.0d
-			y: 4.0d
+			y: 6.5d
 		}
 		{
-			dependencies: ["AC2C6A28BF35E36E"]
 			description: [
 				"Генерирует каждый тик: потребляет 1 мб воды,"
 				"производит 2 мб пара. Для работы требуется нагрев от"
 				"нагревательного механизма."
 			]
-			id: "F45EB848AC92BADA"
-			rewards: [{
-				id: "ABFA05FE8DAFE53B"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "0DB8C2990F79B04D"
+			rewards: [
+				{
+					count: 16
+					id: "4455710F1A205F38"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "D98E8D416C64006D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "4E8820599E2BA8A6"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1D6E4EE603F013C6"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "1D6E4EE603F013C6"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "017F167AAC77DD11"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "017F167AAC77DD11"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "9ADC08F42D74FA53"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:steam_boiler/steam_boiler_controller"
-				}
+				id: "684ADCF729FC7BB4"
+				item: "industrialupgrade:steam_boiler/steam_boiler_controller"
 				type: "item"
 			}]
 			title: "Контроллер парового котла"
 			x: 5.0d
-			y: 4.0d
+			y: 6.5d
 		}
 		{
-			dependencies: ["F45EB848AC92BADA"]
 			description: [
 				"Передаёт пар только со стороны, с которой был"
 				"установлен. С других сторон только отправляет пар."
 			]
+			entity_vis_size: 1.0f
 			id: "67AF42D9D6969244"
-			rewards: [{
-				id: "035C982F414F7ADC"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "035C982F414F7ADC"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "BB5E3E829A3B0CF4"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "57DE0CB65D370452"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "AEC9DBD292430478"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:cable/copper_cable"
+				{
+					id: "1032ADB5BDCF8CF2"
+					item: {
+						Count: 16b
+						id: "industrialupgrade:cable/copper_cable"
+					}
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E71EA491322FE562"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1D91924FF9F989E7"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "A715850E6CD200A7"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_storage"
-				}
+				id: "3C77AB937B6FEF63"
+				item: "industrialupgrade:basemachine3/steam_storage"
 				type: "item"
 			}]
 			title: "Паровое хранилище"
 			x: 4.0d
-			y: 4.0d
+			y: 6.5d
 		}
 		{
-			optional: true
 			dependencies: ["67AF42D9D6969244"]
 			description: [
 				"Паровой карьер. Использует пар и буровые трубы,"
 				"добывая блоки из рабочей области по мере продвижения"
 				"вниз."
 			]
+			entity_vis_size: 1.0f
 			id: "07D4F7F0E43B32CC"
-			rewards: [{
-				id: "02BA944122EE6B1D"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			optional: true
+			rewards: [
+				{
+					count: 16
+					id: "02BA944122EE6B1D"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7520F1DB35587340"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "7520F1DB35587340"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B39011088E6FF5D8"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "071987B3BE4F96EC"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "225015CBEBEB53E1"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "225015CBEBEB53E1"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "B23B21B247DAC01B"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_quarry"
-				}
+				id: "1930A4D96C98EEF6"
+				item: "industrialupgrade:basemachine3/steam_quarry"
 				type: "item"
 			}]
 			title: "Паровой карьер"
 			x: 3.0d
-			y: 4.0d
+			y: 6.5d
 		}
 		{
-			optional: true
 			dependencies: ["67AF42D9D6969244"]
-
 			description: [
 				"Улучшенный паровой карьер. Работает по той же схеме с"
 				"трубами и паром, но добывает быстрее и удобнее обычной"
 				"версии."
 			]
-			id: "D0B3922A95FA784A"
-			rewards: [{
-				id: "9A090368F631E41E"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "223F648E3B6F74CA"
+			optional: true
+			rewards: [
+				{
+					count: 16
+					id: "7D96503E766779E6"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "328BC061644E242D"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "328BC061644E242D"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "138054D2DF722438"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemingots/bronze_ingot"
+				{
+					count: 8
+					id: "138054D2DF722438"
+					item: "industrialupgrade:itemingots/bronze_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "517A2798E2257155"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "517A2798E2257155"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "609CEB2F9D971B54"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/adv_steam_quarry"
-				}
+				item: "industrialupgrade:basemachine3/adv_steam_quarry"
 				type: "item"
 			}]
 			title: "§eУлучшенный паровой карьер"
 			x: 2.0d
-			y: 4.0d
+			y: 6.5d
 		}
 		{
-			dependencies: ["E5CE5E1D628BF9BF"]
-			description: [
-				"Потребляет электричество."
+			description: ["Потребляет электричество."]
+			entity_vis_size: 1.0f
+			id: "794D11070E2A822E"
+			rewards: [
+				{
+					count: 16
+					id: "795BC915D60942CF"
+					item: "minecraft:copper_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "101409F2DCB9C7E4"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "4F1B0A25873FFFCE"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
+				}
+				{
+					id: "1603144EFD72F9DF"
+					type: "xp"
+					xp: 50
+				}
 			]
-			id: "AEF818D275CBB53D"
-			rewards: [{
-				id: "795BC915D60942CF"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
-				}
-				type: "item"
-			},{
-				id: "101409F2DCB9C7E4"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
-				}
-				type: "item"
-			},{
-				id: "4F1B0A25873FFFCE"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/copper_plate"
-				}
-				type: "item"
-			},{
-				id: "CFFEAE1C975C8799"
-				type: "xp"
-				xp: 50
-			}]
 			tasks: [{
-				id: "EF89DAF8EDAF8B7F"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_crystal_charge"
-				}
+				id: "6BB72C8219CC8873"
+				item: "industrialupgrade:basemachine3/steam_crystal_charge"
 				type: "item"
 			}]
 			title: "Паровой зарядник кристаллов"
@@ -1478,44 +1373,40 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["AEF818D275CBB53D"]
 			description: [
 				"Преобразует обычный пар в перегретый. Использует пар,"
 				"предназначенный для паровых механизмов."
 			]
-			id: "C30A041963C13F11"
-			rewards: [{
-				id: "8030780B4A319E16"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "48ADCF77B70D29D0"
+			rewards: [
+				{
+					count: 16
+					id: "7C92D8FF960F55D4"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "0347A9B41E2F29EE"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 2
+					id: "0347A9B41E2F29EE"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "49059492C8D7116D"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/copper_plate"
+				{
+					count: 8
+					id: "49059492C8D7116D"
+					item: "industrialupgrade:itemplates/copper_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "8E0273F40B30479C"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "77361A6EE11AA681"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "21FCA8FDB483E2FB"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:basemachine3/steam_fluid_heater"
-				}
+				item: "industrialupgrade:basemachine3/steam_fluid_heater"
 				type: "item"
 			}]
 			title: "Паровой нагреватель жидкостей"
@@ -1523,44 +1414,40 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["AEF818D275CBB53D"]
 			description: [
 				"Прочный сплав для деталей с высокой нагрузкой."
 				"Выдерживает температуру и износ лучше обычной стали."
 			]
+			entity_vis_size: 1.0f
 			id: "49DE0F9516C8E39C"
-			rewards: [{
-				id: "194B0B6A152BB9B6"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "194B0B6A152BB9B6"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "4E5628171FB19334"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 16
+					id: "4E5628171FB19334"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "319E9389AC73B72A"
-				item: {
-					Count: 8b
-					id: "industrialupgrade:itemplates/steel_plate"
+				{
+					count: 8
+					id: "319E9389AC73B72A"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "5DE1F5C217A84206"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "5DE1F5C217A84206"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "AF4CCDC5A6451AA6"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_503_element"
-				}
+				id: "7FE3F2DFBF31F168"
+				item: "industrialupgrade:crafting_elements/crafting_503_element"
 				type: "item"
 			}]
 			title: "Titanium Steel"
@@ -1574,39 +1461,36 @@
 				"мелких деталей. Удобен для повторяемой сборки схем и"
 				"модулей."
 			]
-			id: "E927B5DA80884374"
-			rewards: [{
-				id: "6DAEA861167715FF"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "09DAFF7BBFA132DA"
+			rewards: [
+				{
+					count: 16
+					id: "6DAEA861167715FF"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "9365B8FA689073D1"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/iron_plate"
+				{
+					count: 16
+					id: "01EC5E36CD497E70"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "B0D48C0D671F013C"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "7D26FE4B22E69900"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "FA50462397A7F77F"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "07A90A10DC425253"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "0CBD50E51A0A9703"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:electronics_assembler/electronics_assembler"
-				}
+				item: "industrialupgrade:electronics_assembler/electronics_assembler"
 				type: "item"
 			}]
 			title: "Стол для сборки электроники"
@@ -1614,44 +1498,40 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["E927B5DA80884374"]
 			description: [
 				"Базовая электронная схема. Содержит простую"
 				"управляющую логику для электрических машин и улучшений."
 			]
-			id: "9D6349C557CCA28A"
-			rewards: [{
-				id: "8A62FB245FE0A8C3"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			entity_vis_size: 1.0f
+			id: "49ABB0BE555F0DC7"
+			rewards: [
+				{
+					count: 16
+					id: "3A283DAEC89F11F0"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "38DF5A4572A9CD5B"
-				item: {
-					Count: 2b
-					id: "industrialupgrade:blockresource/machine"
+				{
+					count: 2
+					id: "38DF5A4572A9CD5B"
+					item: "industrialupgrade:blockresource/machine"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "56CBD3DB4E7960D2"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "56CBD3DB4E7960D2"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "1AB2F6EE84E53F10"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1AB2F6EE84E53F10"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
-				id: "C68800402B306894"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
-				}
+				id: "3F27A000F28AD375"
+				item: "industrialupgrade:crafting_elements/crafting_272_element"
 				type: "item"
 			}]
 			title: "Electronic Circuit"
@@ -1659,45 +1539,41 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["9D6349C557CCA28A"]
 			description: [
 				"Корпус машины, внутри которого размещаются рабочие"
 				"слоты, энергия и механические части. Используется как"
 				"основа большинства механизмов."
 			]
+			entity_vis_size: 1.0f
 			id: "7F6BE6627BFC2CF5"
-			rewards: [{
-				id: "DE34409F52B142AD"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "4B482704CA829DA3"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "789F92557358F9FA"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemplates/iron_plate"
+				{
+					count: 16
+					id: "789F92557358F9FA"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "6233EAD22799C726"
-				item: {
-					Count: 4b
-					id: "industrialupgrade:crafting_elements/crafting_272_element"
+				{
+					count: 4
+					id: "6233EAD22799C726"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "A51464D26C6C4344"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "5943690E96AC5364"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "2750ED3656FC53B2"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:crafting_elements/crafting_137_element"
-				}
+				item: "industrialupgrade:crafting_elements/crafting_137_element"
 				type: "item"
 			}]
 			title: "Machine Casing"
@@ -1710,39 +1586,35 @@
 				"Главный блок доменной печи. Управляет многоблочной"
 				"плавкой материалов, которым нужна высокая температура."
 			]
+			entity_vis_size: 1.0f
 			id: "4FE087A7196F1E38"
-			rewards: [{
-				id: "D43DED9C92B681F1"
-				item: {
-					Count: 16b
-					id: "minecraft:copper_ingot"
+			rewards: [
+				{
+					count: 16
+					id: "4327E00F8C7326A2"
+					item: "minecraft:copper_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "7327B2F8378C7635"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:solar_energy"
+				{
+					id: "7327B2F8378C7635"
+					item: "industrialupgrade:solar_energy"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "03624F0F6342B82C"
-				item: {
-					Count: 16b
-					id: "industrialupgrade:itemingots/steel_ingot"
+				{
+					count: 16
+					id: "03624F0F6342B82C"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
 				}
-				type: "item"
-			},{
-				id: "E1D9958C8DC54556"
-				type: "xp"
-				xp: 50
-			}]
+				{
+					id: "1B877EB9AFB25C01"
+					type: "xp"
+					xp: 50
+				}
+			]
 			tasks: [{
 				id: "61A7028A650BE85E"
-				item: {
-					Count: 1b
-					id: "industrialupgrade:blastfurnace/blast_furnace_main"
-				}
+				item: "industrialupgrade:blastfurnace/blast_furnace_main"
 				type: "item"
 			}]
 			title: "Контроллер доменной печи"
@@ -1750,5 +1622,5 @@
 			y: 2.0d
 		}
 	]
-	title: "1. Паровая эпоха"
+	title: "Паровая эпоха"
 }

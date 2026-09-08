@@ -28,6 +28,7 @@ public class SeabedDredgerBlock extends BaseEntityBlock {
 
     public SeabedDredgerBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, net.minecraft.core.Direction.NORTH));
     }
 
     @Override

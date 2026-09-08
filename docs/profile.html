@@ -3,43 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Профиль игрока · AquaTech</title>
-  <meta name="description" content="Профиль игрока AquaTech." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+  <title>Личный кабинет · AquaTech</title>
+  <meta name="description" content="Личный кабинет игрока сервера AquaTech. Управление скином, баланс в рублях, статистика уловов и достижения." />
+
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AquaTech" />
-  <meta property="og:title" content="Профиль · AquaTech" />
-  <meta property="og:description" content="Твой профиль AquaTech." />
+  <meta property="og:title" content="Личный кабинет · AquaTech" />
+  <meta property="og:description" content="Профиль игрока: 3D-скин, статистика уловов и баланс в рублях." />
   <meta property="og:url" content="https://aquateche.store/profile.html" />
   <meta property="og:image" content="https://aquateche.store/assets/logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Профиль · AquaTech" />
-  <meta name="twitter:description" content="Твой профиль AquaTech." />
-<link rel="stylesheet" href="assets/css/site.css?v=20260831n" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260905_apple_v2" />
 </head>
 <body data-page="profile">
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
-  
-  <section class="page-hero">
-    <div class="container">
-      <div class="eyebrow" data-site="profile_eyebrow">Профиль</div>
-      <h1 data-site="profile_title">Игрок</h1>
-      <p data-site="profile_lead">Скин, плащ, тема и статы.</p>
-    </div>
-  </section>
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <div id="profile-root"></div>
-    </div>
-  </section>
+
+    <!-- Page Hero -->
+    <section class="subpage-hero profile-hero">
+      <div class="container">
+        <div class="hero-card profile-hero-card">
+          <h1>Профиль</h1>
+          <p class="muted-line" id="profile-hero-lead">Скин, баланс и статистика.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Root -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div id="profile-root">
+          <p class="muted-line">Загрузка профиля игрока…</p>
+        </div>
+      </div>
+    </section>
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260831m"></script>
+  <script src="assets/js/site.js?v=20260905_apple_v2"></script>
 </body>
 </html>

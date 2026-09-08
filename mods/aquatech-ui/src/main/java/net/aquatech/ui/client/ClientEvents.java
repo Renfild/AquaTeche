@@ -34,7 +34,7 @@ public final class ClientEvents {
     public static final KeyMapping KEY_MARKET = new KeyMapping(
             "key.aquatech_ui.market",
             InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_F4,
+            InputConstants.UNKNOWN.getValue(),
             "key.categories.aquatech_ui"
     );
 
@@ -190,22 +190,40 @@ public final class ClientEvents {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onClientChatReceived(net.minecraftforge.client.event.ClientChatReceivedEvent event) {
         if (event.getMessage() == null) return;
-        if (event instanceof net.minecraftforge.client.event.ClientChatReceivedEvent.System sys && sys.isOverlay()) {
-            return; // Don't intercept Action Bar messages
+        if (event instanceof net.minecraftforge.client.event.ClientChatReceivedEvent.System sys) {
+            if (sys.isOverlay()) {
+                return; // Don't intercept Action Bar messages
+            }
+            String text = event.getMessage().getString().toLowerCase();
+            if (text.contains("нажмите i")
+                    || text.contains("press i to open")
+                    || text.contains("руководство industrial")) {
+                event.setCanceled(true);
+                return;
+            }
+            net.aquatech.ui.client.chat.AquaChatManager.addSystemMessage(event.getMessage());
+            event.setCanceled(true);
+            return;
         }
 
         String text = event.getMessage().getString().toLowerCase();
-        if (text.contains("промышленная модернизация")
-                || text.contains("industrial upgrade")
-                || text.contains("нажмите i")
+        if (text.contains("нажмите i")
                 || text.contains("press i to open")
-                || text.contains("руководство industrial")
-                || text.contains("industrialupgrade")) {
+                || text.contains("руководство industrial")) {
             event.setCanceled(true);
             return;
         }
         net.aquatech.ui.client.chat.AquaChatManager.addMessage(event.getMessage());
         event.setCanceled(true);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onClientChat(net.minecraftforge.client.event.ClientChatEvent event) {
+        String msg = event.getMessage() != null ? event.getMessage().trim() : "";
+        if (net.aquatech.ui.client.chat.AquaChatScreen.isHelpCommand(msg)) {
+            event.setCanceled(true);
+            net.aquatech.ui.client.chat.AquaChatManager.showPlayerHelp();
+        }
     }
 
 

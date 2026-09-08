@@ -158,3 +158,4 @@ Task progress:
 
 - Layer details + path index: [reference.md](reference.md)
 - Copy-paste templates: [examples.md](examples.md)
+- How the reference server (McSkill HiTech1211) builds features/economy, and what to copy: [hitech1211-server-lessons.md](hitech1211-server-lessons.md)

@@ -1,26 +1,51 @@
 {
-  "from_version": "2.9.294",
-  "to_version": "2.9.295",
+  "from_version": "2.9.311",
+  "to_version": "2.9.312",
   "added": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.28-alpha.jar",
-      "md5": "e0b51d1d96701ecc615aed5c44850890",
-      "size": 2501707,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.295/aqualumen-forge-1.20.1-0.3.28-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.28-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.41-alpha.jar",
+      "md5": "3e7f17bb5319c6b5c1bf2794955ee34c",
+      "size": 2673844,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.41-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.41-alpha.jar"
+    },
+    {
+      "path": "mods/aquatech_ui-1.0.64.jar",
+      "md5": "6056354111e5243836ee900826ff6717",
+      "size": 2807067,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.64.jar",
+      "asset": "aquatech_ui-1.0.64.jar"
     }
   ],
-  "changed": [],
+  "changed": [
+    {
+      "path": "config/aqualumen/html/hub.html",
+      "md5": "1e58962121ce57c9d6d8439e019a8337",
+      "size": 952524,
+      "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
+      "asset": "config__aqualumen__html__hub.html"
+    },
+    {
+      "path": "config/aqualumen/hub.html",
+      "md5": "1e58962121ce57c9d6d8439e019a8337",
+      "size": 952524,
+      "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
+      "asset": "config__aqualumen__hub.html"
+    }
+  ],
   "removed": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.27-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.40-alpha.jar"
+    },
+    {
+      "path": "mods/aquatech_ui-1.0.63.jar"
     }
   ],
   "stats": {
-    "added": 1,
-    "changed": 0,
-    "removed": 1,
-    "unchanged": 131,
-    "download_bytes": 2501707
+    "added": 2,
+    "changed": 2,
+    "removed": 2,
+    "unchanged": 130,
+    "download_bytes": 7385959
   }
 }

@@ -29,9 +29,7 @@
           "count": 8
         }
       ],
-      "commands": [
-        "kit start"
-      ]
+      "commands": []
     },
     {
       "id": "starter",
@@ -70,9 +68,7 @@
           "count": 1
         }
       ],
-      "commands": [
-        "kit starter"
-      ]
+      "commands": []
     },
     {
       "id": "diver",
@@ -95,9 +91,7 @@
           "count": 16
         }
       ],
-      "commands": [
-        "kit diver"
-      ]
+      "commands": []
     },
     {
       "id": "vip",
@@ -128,9 +122,7 @@
           "count": 32
         }
       ],
-      "commands": [
-        "kit vip"
-      ]
+      "commands": []
     }
   ]
 }

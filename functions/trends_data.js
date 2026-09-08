@@ -210,7 +210,7 @@ export const FISH_POOL = [
  },
  {
   "id": "starcatcher:missingno",
-  "name": "???"
+  "name": "Глитч-рыба"
  },
  {
   "id": "starcatcher:mistback_chub",

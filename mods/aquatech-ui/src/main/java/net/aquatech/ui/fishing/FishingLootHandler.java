@@ -50,16 +50,6 @@ public class FishingLootHandler {
         }
         if (rodStack.isEmpty()) return;
 
-        // Fish-only rods (sky): leave StarCatcher alone — do not touch bait/rate/drops.
-        // AquaTech datapack "fish" (ores previewed as cod) compete in the global SC pool;
-        // strip those fakes so bone/sky keep real starcatcher:* fish.
-        if (FishingRodCompat.isFishOnlyRod(rodStack)) {
-            scrubFakeAquaTechFishDrops(event, serverPlayer.getRandom());
-            bumpCatchStat(serverPlayer, false);
-            RodDurability.wearOne(rodStack, serverPlayer);
-            return;
-        }
-
         // Pin rate before SC shrinks bait; after reel put it back and spend 1 of ~10k uses.
         StarCatcherAttachments.ensureRatePersists(rodStack, false);
         final ItemStack rodRef = rodStack;
@@ -68,6 +58,20 @@ public class FishingLootHandler {
                 StarCatcherAttachments.ensureRatePersists(rodRef, false);
                 StarCatcherAttachments.consumeRateCatch(rodRef);
             });
+        }
+
+        // Fish-only rods (sky): leave StarCatcher alone — do not touch resource drops.
+        // AquaTech datapack "fish" (ores previewed as cod) compete in the global SC pool;
+        // strip those fakes so bone/sky keep real starcatcher:* fish.
+        if (FishingRodCompat.isFishOnlyRod(rodStack)) {
+            scrubFakeAquaTechFishDrops(event, serverPlayer.getRandom());
+            int fishRate = readRateMultiplier(rodStack);
+            if (fishRate > 1) {
+                applyRateMultiplier(event.getDrops(), fishRate);
+            }
+            bumpCatchStat(serverPlayer, false);
+            RodDurability.wearOne(rodStack, serverPlayer);
+            return;
         }
 
         if (rodType == null) return;
@@ -258,6 +262,12 @@ public class FishingLootHandler {
     public static List<ItemStack> generateLoot(AquaTechFishingRodItem.RodType type, RandomSource random,
                                                ItemStack rodStack, @org.jetbrains.annotations.Nullable Player player,
                                                int forceRate) {
+        return generateLoot(type, random, rodStack, player, forceRate, false);
+    }
+
+    public static List<ItemStack> generateLoot(AquaTechFishingRodItem.RodType type, RandomSource random,
+                                               ItemStack rodStack, @org.jetbrains.annotations.Nullable Player player,
+                                               int forceRate, boolean autoFisher) {
         String rodId = FishingRodCompat.getRodId(rodStack);
         List<ItemStack> list = (rodId != null) ? rollStarCatcherRodLoot(rodId, random) : baseLoot(type, random);
         if (rodId != null) {
@@ -297,7 +307,34 @@ public class FishingLootHandler {
             }
         }
 
+        if (autoFisher) {
+            dampenAutoFisherLateLoot(list, random);
+        }
+
         return list;
+    }
+
+    private static boolean isAutoFisherLate(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) {
+            return false;
+        }
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (id == null) {
+            return false;
+        }
+        String key = id.toString();
+        return "minecraft:nether_star".equals(key)
+                || "minecraft:netherite_ingot".equals(key)
+                || "minecraft:heart_of_the_sea".equals(key)
+                || "industrialupgrade:baseore/platinum".equals(key)
+                || "industrialupgrade:alloyingot/inconel".equals(key)
+                || "industrialupgrade:alloyingot/osmiridium".equals(key)
+                || "industrialupgrade:asteroidore/asteroid_adamantium_ore".equals(key);
+    }
+
+    /** AF keeps early ores; late sink items drop less often than by hand. */
+    private static void dampenAutoFisherLateLoot(List<ItemStack> list, RandomSource random) {
+        list.removeIf(stack -> isAutoFisherLate(stack) && random.nextFloat() < 0.65f);
     }
 
     private static ItemStack rareTreasure(RandomSource random) {
@@ -518,6 +555,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 // Chain fix: slimed_rod recipe needs strontium — drop it here
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.28f, new ItemStack(Items.SLIME_BLOCK, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "slimed_rod" -> { // Tier 5: Slimed Rod (LV Ores & Polonium + early obsidian)
@@ -607,6 +645,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.OBSIDIAN, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.12f, new ItemStack(Items.CRYING_OBSIDIAN, 1));
                 maybeAdd(pool, random, 0.20f, getModItem("industrialupgrade:alloyingot/stainless_steel", Items.IRON_INGOT, 1));
+                maybeAdd(pool, random, 0.10f, new ItemStack(Items.DIAMOND_BLOCK, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "obsidian_rod" -> { // Tier 10: Obsidian Rod (HV Steel & Diamond)
@@ -615,6 +654,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:alloyingot/stainless_steel", Items.IRON_INGOT, 1));
                 maybeAdd(pool, random, 0.15f, new ItemStack(Items.HEART_OF_THE_SEA, 1));
+                maybeAdd(pool, random, 0.22f, new ItemStack(Items.SEA_LANTERN, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/platinum", Items.GOLD_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.PRISMARINE_SHARD, 2 + random.nextInt(3)));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.PRISMARINE_CRYSTALS, 2 + random.nextInt(2)));
@@ -628,6 +668,8 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:crushed/uranium", Items.RAW_GOLD, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:alloyingot/inconel", Items.NETHERITE_SCRAP, 1));
                 maybeAdd(pool, random, 0.15f, new ItemStack(Items.NETHERITE_SCRAP, 1));
+                maybeAdd(pool, random, 0.12f, new ItemStack(Items.NETHERITE_INGOT, 1));
+                maybeAdd(pool, random, 0.08f, new ItemStack(Items.NETHER_STAR, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "magmaforged_rod" -> { // Tier 12: Magmaforged Rod (EV Nuclear & Alloy Ores)
@@ -637,6 +679,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:alloyingot/inconel", Items.NETHERITE_SCRAP, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:alloyingot/osmiridium", Items.NETHERITE_INGOT, 1));
                 maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:asteroidore/asteroid_adamantium_ore", Items.NETHERITE_SCRAP, 1));
+                maybeAdd(pool, random, 0.10f, new ItemStack(Items.NETHER_STAR, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "alpha_rod" -> { // Tier 13: Alpha Rod (Quantum Endgame Ores)

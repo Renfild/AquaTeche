@@ -179,7 +179,7 @@
         <div class="cabinet-sidebar">
           <div class="avatar-card">
             <div class="avatar-frame">
-              <img src="https://mc-heads.net/body/${encodeURIComponent(nick)}" alt="${esc(nick)}" />
+              <img src="/api/skins/${encodeURIComponent(nick)}/avatar?v=look2" alt="${esc(nick)}" onerror="this.onerror=null;this.src='/assets/images/avatar_default.png'" />
             </div>
             <h2 class="player-name">${esc(nick)}</h2>
             <div class="rank-pill">${esc(rank)}</div>

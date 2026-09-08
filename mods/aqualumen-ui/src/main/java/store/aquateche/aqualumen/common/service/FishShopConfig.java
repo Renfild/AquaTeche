@@ -254,13 +254,19 @@ public final class FishShopConfig {
             }
 
             // 2. Weight & Size
-            int weightGrams = 0;
+            double weightKg = 0.0;
             if (fishInfo.contains("weight")) {
-                weightGrams = fishInfo.getInt("weight");
+                weightKg = fishInfo.getDouble("weight");
+            } else if (tag.contains("aquatech_tournament_weight")) {
+                weightKg = tag.getDouble("aquatech_tournament_weight");
             } else if (fishInfo.contains("weightInGrams")) {
-                weightGrams = fishInfo.getInt("weightInGrams");
+                weightKg = fishInfo.getDouble("weightInGrams") / 1000.0;
             } else if (tag.contains("Weight")) {
-                weightGrams = tag.getInt("Weight");
+                weightKg = tag.getDouble("Weight");
+            }
+
+            if (weightKg > 100.0) {
+                weightKg /= 1000.0;
             }
 
             float percentile = 0.0F;
@@ -268,10 +274,11 @@ public final class FishShopConfig {
                 percentile = fishInfo.getFloat("percentile");
             }
 
-            if (weightGrams > 0) {
-                weightMultiplier = 1.0 + Math.min(5.0, ((double) weightGrams / 800.0) * 0.4 + (percentile * 0.6));
+            if (weightKg > 0.0) {
+                weightMultiplier = 1.0 + Math.pow(Math.max(0.0, weightKg), 0.85) * 1.35 + (percentile * 3.0);
+                weightMultiplier = Math.min(30.0, weightMultiplier);
             } else if (percentile > 0.0F) {
-                weightMultiplier = 1.0 + (percentile * 1.5);
+                weightMultiplier = 1.0 + (percentile * 3.5);
             }
 
             // 3. Golden / Trophy

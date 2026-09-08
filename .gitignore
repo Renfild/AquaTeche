@@ -81,6 +81,7 @@ server/world/datapacks/
 cf_token.txt
 *.token
 secrets.json
+secrets.lava.env
 .apex_mysql.json
 config/aquatech_mysql.json
 server/config/aquatech_mysql.json

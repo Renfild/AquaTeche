@@ -53,6 +53,17 @@ public sealed class PlayOrchestrator
         }
         progress(30);
 
+        // Apple HIG Safety & Feedback: Memory pre-flight check
+        var memCheck = SystemDiagnostics.CheckMemory(cfg.RamMb);
+        if (!string.IsNullOrEmpty(memCheck.Warning))
+        {
+            log($"⚠️ Память: {memCheck.Warning}", "warn");
+        }
+        else
+        {
+            log($"Выделено памяти: {cfg.RamMb} МБ (всего в системе: {memCheck.TotalPhysicalMb} МБ)", "dim");
+        }
+
         log("Синхронизируем сборку…", "info");
         await SyncPackAsync(cfg, verifyHash: true, skipIfReady: false, log, p => progress(30 + p * 0.55), ct);
         progress(88);
@@ -71,10 +82,16 @@ public sealed class PlayOrchestrator
             await Task.Delay(500, ct);
             if (proc.HasExited)
             {
-                log($"Minecraft сразу закрылся (код {proc.ExitCode})", "err");
+                log($"Minecraft закрылся с кодом {proc.ExitCode}", "err");
+
+                // Apple HIG Actionable Recovery: Crash auto-diagnostics
+                var diag = SystemDiagnostics.AnalyzeCrash(gameDir, proc.ExitCode);
+                log($"🔍 Диагностика сбоя: {diag.Summary}", "err");
+                log($"💡 Совет по устранению: {diag.Recommendation}", "ok");
+
                 DumpTail(Path.Combine(gameDir, "logs", "minecraft_console.log"), log);
                 DumpTail(Path.Combine(gameDir, "logs", "latest.log"), log);
-                throw new InvalidOperationException($"Minecraft exit {proc.ExitCode}");
+                throw new InvalidOperationException($"Minecraft завершился с ошибкой: {diag.Summary}. {diag.Recommendation}");
             }
         }
 
@@ -96,6 +113,29 @@ public sealed class PlayOrchestrator
         await SyncPackAsync(cfg, verifyHash: true, skipIfReady: false, log, progress, ct);
         progress(100);
         log("Сборка обновлена. Можно играть.", "ok");
+    }
+
+    public async Task RepairAsync(
+        LauncherConfig cfg,
+        Action<string, string> log,
+        Action<double> progress,
+        CancellationToken ct = default)
+    {
+        var gameDir = cfg.GameDir;
+        foreach (var sub in LauncherConstants.PackFolders)
+            Directory.CreateDirectory(Path.Combine(gameDir, sub));
+
+        log("Полная принудительная перепроверка всех файлов сборки…", "info");
+        var man = await _sync.FetchManifestAsync(cfg.UpdateUrl, m => log(m, "info"), ct);
+        var (updated, failed, deleted) = await _sync.ApplyAsync(
+            cfg.GameDir, man, verifyHash: true, m => log(m, "info"), progress, ct, forceFullCheck: true);
+        if (failed > 0)
+            throw new IOException($"Восстановление завершилось с {failed} ошибками. Проверь сеть и нажми ещё раз.");
+        progress(100);
+        if (updated > 0 || deleted > 0)
+            log($"Восстановление завершено: исправлено {updated}, удалено лишних {deleted}.", "ok");
+        else
+            log($"Все файлы сборки проверены и целостны ({man.Files.Count} файлов).", "ok");
     }
 
     private async Task SyncPackAsync(

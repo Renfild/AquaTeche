@@ -1,43 +1,67 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Аукцион · AquaTech</title>
-  <meta name="description" content="Игровой аукцион AquaTech. Лоты выставляются в игре командой /ah sell." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <title>Аукцион игроков · AquaTech</title>
+  <meta name="description" content="Живой аукцион сервера AquaTech. Поиск открытых лотов игроков, удочек, руд и механизмов." />
+
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AquaTech" />
-  <meta property="og:title" content="Аукцион · AquaTech" />
-  <meta property="og:description" content="Открытые лоты игроков. Покупка только в игре." />
+  <meta property="og:title" content="Аукцион игроков · AquaTech" />
+  <meta property="og:description" content="Открытые лоты игроков сервера. Покупка и продажа через /ah." />
   <meta property="og:url" content="https://aquateche.store/market.html" />
   <meta property="og:image" content="https://aquateche.store/assets/logo.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Аукцион · AquaTech" />
-  <meta name="twitter:description" content="Открытые лоты игроков. Покупка только в игре." />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260831n" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260905_apple_v2" />
 </head>
 <body data-page="market">
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
-    <section class="page-hero">
+
+    <!-- Page Hero -->
+    <section class="subpage-hero">
       <div class="container">
-        <div class="eyebrow">Аукцион</div>
-        <h1>Лоты игроков</h1>
-        <p>Сайт показывает открытые лоты. Купить или выставить — в игре: <code>/ah sell</code> и меню F4.</p>
+        <div class="hero-card">
+          <div class="eyebrow"><span class="badge-dot"></span>РЫНОК СЕРВЕРА</div>
+          <h1>Аукцион игроков</h1>
+          <p>Сайт синхронизирован с живым аукционом сервера. Просматривай лоты и цены в реальном времени. Покупка и выставление предметов — в игре через команду <code>/ah</code> или меню F4.</p>
+          <div class="hero-meta-row">
+            <span class="meta-tag"><span class="live-dot"></span>Синхронизация в реальном времени</span>
+            <span class="meta-tag">Команда /ah sell &lt;цена&gt;</span>
+            <span class="meta-tag">Расчет в АкваМонетах</span>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- Market Controls & Lots Grid -->
     <section class="section" style="padding-top:0">
-      <div class="container" data-market-page>
-        <p class="muted-line">Загрузка лотов…</p>
+      <div class="container">
+        <div class="market-controls-bar">
+          <div class="market-search-wrap">
+            <svg class="search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="marketSearchInput" class="market-search-input" placeholder="Поиск по названию предмета или нику продавца…" />
+          </div>
+          <div class="market-filter-pills" id="marketFilterPills">
+            <button class="market-pill-btn active" data-filter="all">Все лоты</button>
+            <button class="market-pill-btn" data-filter="rods">Удочки</button>
+            <button class="market-pill-btn" data-filter="ores">Руды и сплавы</button>
+            <button class="market-pill-btn" data-filter="tech">Механизмы</button>
+          </div>
+          <div class="market-lot-counter" id="marketLotCounter">0 лотов</div>
+        </div>
+
+        <div class="market-lots-grid" id="marketLotsGrid" data-market-page>
+          <p class="muted-line">Синхронизация лотов аукциона…</p>
+        </div>
       </div>
     </section>
+
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260831m"></script>
+  <script src="assets/js/site.js?v=20260905_apple_v2"></script>
 </body>
 </html>

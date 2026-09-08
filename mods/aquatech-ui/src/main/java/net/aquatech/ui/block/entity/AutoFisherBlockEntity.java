@@ -233,7 +233,7 @@ public class AutoFisherBlockEntity extends BlockEntity implements MenuProvider {
         if (nearby instanceof ServerPlayer serverPlayer) {
             FishingLootHandler.bumpCatchStat(serverPlayer);
         }
-        List<ItemStack> loot = FishingLootHandler.generateLoot(rodType, level.getRandom(), rodStack, nearby, effectiveRate);
+        List<ItemStack> loot = FishingLootHandler.generateLoot(rodType, level.getRandom(), rodStack, nearby, effectiveRate, true);
 
         int remainingBudget = 64;
         for (ItemStack drop : loot) {

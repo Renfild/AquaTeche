@@ -32,6 +32,19 @@ public class SeabedDredgerScreen extends AbstractAquaMachineScreen<SeabedDredger
     }
 
     @Override
+    protected void blitEnergy(GuiGraphics g, int x, int y, int scaled, float t) {
+        if (scaled <= 0) return;
+        g.blit(texture, x + energyBarX, y + energyBarY + (energyBarH - scaled),
+                176, energyBarH - scaled, energyBarW, scaled);
+    }
+
+    @Override
+    protected void blitProgressArrow(GuiGraphics g, int x, int y, int slotX, int slotY, int scaled, float t) {
+        if (scaled <= 0) return;
+        g.blit(texture, x + slotX, y + slotY, 176, 52, scaled, 17);
+    }
+
+    @Override
     protected Component energyTooltip() {
         return Component.literal(menu.getEnergy() + " / " + menu.getMaxEnergy() + " FE");
     }
