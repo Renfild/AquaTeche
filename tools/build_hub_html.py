@@ -165,6 +165,7 @@ hub_html_raw = r'''<!doctype html>
     .lot-icon{width:40px;height:40px;flex:0 0 auto;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.05)}
     .lot-icon img,.lot-icon .lot-fb svg{width:26px;height:26px;object-fit:contain}
     .lot-icon .lot-fb{width:100%;height:100%}
+    .atlas-sprite{display:block;width:32px;height:32px;image-rendering:pixelated;background-repeat:no-repeat}
     .lot-body{min-width:0;flex:1;display:grid;gap:3px}
     .lot-title{font-size:12.5px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .lot-count{color:var(--muted);font-weight:600;font-size:11px}
@@ -425,6 +426,8 @@ try {
   }
 
   function lotIconHtml(lot, cls) {
+    const spr = atlasSprite(lot.itemId);
+    if (spr) return spr;
     const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/§./g, "").trim();
     const tex = resolveItemIcon(cleanLabel, lot.itemId || "");
     if (tex) return `<img src="${tex}" class="${cls}" alt="">`;
@@ -436,6 +439,24 @@ try {
              `<span class="${cls} lot-fb" style="display:none;place-items:center">${bagIcon(cls)}</span>`;
     }
     return bagIcon(cls);
+  }
+
+  let ATLAS = null;
+  let atlasTried = false;
+  function ensureAtlas() {
+    if (ATLAS || atlasTried) return Promise.resolve();
+    atlasTried = true;
+    return fetch("https://aquateche.store/assets/images/atlas/manifest.json")
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then(j => { ATLAS = j; if (state.tab === "auction") renderView(false); })
+      .catch(() => { ATLAS = false; });
+  }
+
+  function atlasSprite(itemId) {
+    if (!ATLAS || !itemId) return null;
+    const e = ATLAS[String(itemId).trim()];
+    if (!e) return null;
+    return `<span class="atlas-sprite" style="background-image:url(https://aquateche.store/assets/images/atlas/atlas_${e[0]}.png);background-position:${7 - e[1]}px ${7 - e[2]}px"></span>`;
   }
 
   function resolveItemIcon(label, itemId) {
@@ -1250,6 +1271,7 @@ try {
   }
 
   function auctionView(s) {
+    ensureAtlas();
     const lots = s.market || [];
     const activeCount = lots.length;
 

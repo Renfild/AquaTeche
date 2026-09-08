@@ -1,44 +1,44 @@
 {
-  "from_version": "2.9.311",
-  "to_version": "2.9.312",
+  "from_version": "2.9.313",
+  "to_version": "2.9.314",
   "added": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.41-alpha.jar",
-      "md5": "3e7f17bb5319c6b5c1bf2794955ee34c",
-      "size": 2673844,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.41-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.41-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.42-alpha.jar",
+      "md5": "edb38d91058414e9d7ccda38196a8736",
+      "size": 2674882,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.42-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.42-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.64.jar",
-      "md5": "6056354111e5243836ee900826ff6717",
-      "size": 2807067,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.64.jar",
-      "asset": "aquatech_ui-1.0.64.jar"
+      "path": "mods/aquatech_ui-1.0.66.jar",
+      "md5": "6c79d9e0d12ec778d2ec2d11a0ad4e32",
+      "size": 2807087,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.66.jar",
+      "asset": "aquatech_ui-1.0.66.jar"
     }
   ],
   "changed": [
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "1e58962121ce57c9d6d8439e019a8337",
-      "size": 952524,
+      "md5": "ab25ea20fed492efd1b2533767b1bace",
+      "size": 953514,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "1e58962121ce57c9d6d8439e019a8337",
-      "size": 952524,
+      "md5": "ab25ea20fed492efd1b2533767b1bace",
+      "size": 953514,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     }
   ],
   "removed": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.40-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.41-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.63.jar"
+      "path": "mods/aquatech_ui-1.0.65.jar"
     }
   ],
   "stats": {
@@ -46,6 +46,6 @@
     "changed": 2,
     "removed": 2,
     "unchanged": 130,
-    "download_bytes": 7385959
+    "download_bytes": 7388997
   }
 }
