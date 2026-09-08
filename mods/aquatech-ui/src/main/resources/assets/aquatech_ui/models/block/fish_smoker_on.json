@@ -1,0 +1,6 @@
+{
+  "parent": "aquatech_ui:block/fish_smoker",
+  "textures": {
+    "front": "aquatech_ui:block/fish_smoker_front_on"
+  }
+}

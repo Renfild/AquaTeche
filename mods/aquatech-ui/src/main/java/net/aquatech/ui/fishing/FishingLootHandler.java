@@ -106,9 +106,10 @@ public class FishingLootHandler {
                 drops.add(fish);
             }
         }
+        stampFreshness(drops);
     }
 
-    private static boolean isStarCatcherFishItem(ItemStack stack) {
+    public static boolean isStarCatcherFishItem(ItemStack stack) {
         if (stack == null || stack.isEmpty()) return false;
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
         if (id == null || !"starcatcher".equals(id.getNamespace())) return false;
@@ -311,7 +312,26 @@ public class FishingLootHandler {
             dampenAutoFisherLateLoot(list, random);
         }
 
+        stampFreshness(list);
         return list;
+    }
+
+    /**
+     * Freshness stamp for the fish shop (+20% within 30 min of catch, see FishShopConfig).
+     */
+    public static void stampFreshness(List<ItemStack> drops) {
+        if (drops == null) return;
+        for (ItemStack stack : drops) {
+            stampFreshness(stack);
+        }
+    }
+
+    public static void stampFreshness(ItemStack stack) {
+        if (stack == null || stack.isEmpty() || !isStarCatcherFishItem(stack)) return;
+        CompoundTag tag = stack.getOrCreateTag();
+        if (!tag.contains("AquaCaughtAt")) {
+            tag.putLong("AquaCaughtAt", System.currentTimeMillis());
+        }
     }
 
     private static boolean isAutoFisherLate(ItemStack stack) {

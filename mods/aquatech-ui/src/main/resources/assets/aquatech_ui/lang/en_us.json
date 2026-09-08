@@ -59,5 +59,7 @@
   "gui.aquatech_ui.skill_tree.type.keystone": "Constellation",
   "tooltip.aquatech_ui.auto_fisher.desc": "§7Automatically catches ores and Industrial Upgrade resources from ocean water.",
   "tooltip.aquatech_ui.auto_fisher.status.working": "§a✓ Status: Catching resources...",
-  "tooltip.aquatech_ui.auto_fisher.status.no_energy": "§c✗ Status: Out of energy (Requires 25 FE/t — Unified Energy)"
+  "tooltip.aquatech_ui.auto_fisher.status.no_energy": "§c✗ Status: Out of energy (Requires 25 FE/t — Unified Energy)",
+  "block.aquatech_ui.fish_smoker": "Fish Smoker",
+  "item.aquatech_ui.fish_meal": "Fish Meal"
 }

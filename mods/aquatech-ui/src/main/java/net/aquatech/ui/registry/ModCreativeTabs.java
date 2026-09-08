@@ -37,6 +37,8 @@ public class ModCreativeTabs {
                         output.accept(ModItems.SEABED_DREDGER_ITEM.get());
                         output.accept(ModItems.OCEAN_ALTAR_ITEM.get());
                         output.accept(ModItems.ABYSSAL_PORTAL_ITEM.get());
+                        output.accept(ModItems.FISH_SMOKER_ITEM.get());
+                        output.accept(ModItems.FISH_MEAL.get());
                         output.accept(ModItems.KELP_BIO_PELLET.get());
                     })
                     .build());

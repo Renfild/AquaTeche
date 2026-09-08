@@ -1,6 +1,7 @@
 package net.aquatech.ui.client;
 
 import net.aquatech.ui.client.gui.AutoFisherScreen;
+import net.aquatech.ui.client.gui.FishSmokerScreen;
 import net.aquatech.ui.client.gui.OceanAltarScreen;
 import net.aquatech.ui.client.gui.OceanFilterScreen;
 import net.aquatech.ui.client.gui.SeabedDredgerScreen;
@@ -27,6 +28,7 @@ public final class AquaTechClient {
             MenuScreens.register(ModMenuTypes.SEABED_DREDGER_MENU.get(), SeabedDredgerScreen::new);
             MenuScreens.register(ModMenuTypes.TACKLE_BOX_MENU.get(), TackleBoxScreen::new);
             MenuScreens.register(ModMenuTypes.OCEAN_ALTAR_MENU.get(), OceanAltarScreen::new);
+            MenuScreens.register(ModMenuTypes.FISH_SMOKER_MENU.get(), FishSmokerScreen::new);
         });
     }
 }

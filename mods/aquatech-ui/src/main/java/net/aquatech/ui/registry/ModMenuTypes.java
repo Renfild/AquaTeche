@@ -2,6 +2,7 @@ package net.aquatech.ui.registry;
 
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.inventory.AutoFisherMenu;
+import net.aquatech.ui.inventory.FishSmokerMenu;
 import net.aquatech.ui.inventory.OceanAltarMenu;
 import net.aquatech.ui.inventory.OceanFilterMenu;
 import net.aquatech.ui.inventory.SeabedDredgerMenu;
@@ -31,6 +32,9 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<OceanAltarMenu>> OCEAN_ALTAR_MENU = MENUS.register("ocean_altar_menu",
             () -> IForgeMenuType.create(OceanAltarMenu::new));
+
+    public static final RegistryObject<MenuType<FishSmokerMenu>> FISH_SMOKER_MENU = MENUS.register("fish_smoker_menu",
+            () -> IForgeMenuType.create(FishSmokerMenu::new));
 
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);

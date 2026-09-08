@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "aquatech_ui:block/fish_smoker"
+    },
+    "lit=true": {
+      "model": "aquatech_ui:block/fish_smoker_on"
+    }
+  }
+}

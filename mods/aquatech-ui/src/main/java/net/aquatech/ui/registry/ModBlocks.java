@@ -3,6 +3,7 @@ package net.aquatech.ui.registry;
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.block.AbyssalPortalBlock;
 import net.aquatech.ui.block.AutoFisherBlock;
+import net.aquatech.ui.block.FishSmokerBlock;
 import net.aquatech.ui.block.OceanAltarBlock;
 import net.aquatech.ui.block.OceanFilterBlock;
 import net.aquatech.ui.block.SeabedDredgerBlock;
@@ -32,6 +33,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> ABYSSAL_PORTAL = BLOCKS.register("abyssal_portal",
             () -> new AbyssalPortalBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).noOcclusion().lightLevel(state -> 10)));
+
+    public static final RegistryObject<Block> FISH_SMOKER = BLOCKS.register("fish_smoker",
+            () -> new FishSmokerBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

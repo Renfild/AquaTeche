@@ -2,6 +2,7 @@ package net.aquatech.ui.registry;
 
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.block.entity.AutoFisherBlockEntity;
+import net.aquatech.ui.block.entity.FishSmokerBlockEntity;
 import net.aquatech.ui.block.entity.OceanFilterBlockEntity;
 import net.aquatech.ui.block.entity.SeabedDredgerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,6 +26,9 @@ public class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<net.aquatech.ui.block.entity.OceanAltarBlockEntity>> OCEAN_ALTAR = BLOCK_ENTITIES.register("ocean_altar",
             () -> BlockEntityType.Builder.of(net.aquatech.ui.block.entity.OceanAltarBlockEntity::new, ModBlocks.OCEAN_ALTAR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<FishSmokerBlockEntity>> FISH_SMOKER = BLOCK_ENTITIES.register("fish_smoker",
+            () -> BlockEntityType.Builder.of(FishSmokerBlockEntity::new, ModBlocks.FISH_SMOKER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

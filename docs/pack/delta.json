@@ -1,51 +1,44 @@
 {
-  "from_version": "2.9.313",
-  "to_version": "2.9.314",
+  "from_version": "2.9.317",
+  "to_version": "2.9.318",
   "added": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.42-alpha.jar",
-      "md5": "edb38d91058414e9d7ccda38196a8736",
-      "size": 2674882,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.42-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.42-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.43-alpha.jar",
+      "md5": "dd39a2220e492c434e4f5546e925f71d",
+      "size": 2677314,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.43-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.43-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.66.jar",
-      "md5": "6c79d9e0d12ec778d2ec2d11a0ad4e32",
-      "size": 2807087,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.66.jar",
-      "asset": "aquatech_ui-1.0.66.jar"
+      "path": "mods/aquatech_ui-1.0.69.jar",
+      "md5": "ad45e5b07827d900d7a022a3ab6789c5",
+      "size": 2843251,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.69.jar",
+      "asset": "aquatech_ui-1.0.69.jar"
     }
   ],
   "changed": [
     {
-      "path": "config/aqualumen/html/hub.html",
-      "md5": "ab25ea20fed492efd1b2533767b1bace",
-      "size": 953514,
-      "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
-      "asset": "config__aqualumen__html__hub.html"
-    },
-    {
-      "path": "config/aqualumen/hub.html",
-      "md5": "ab25ea20fed492efd1b2533767b1bace",
-      "size": 953514,
-      "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
-      "asset": "config__aqualumen__hub.html"
+      "path": "kubejs/server_scripts/30_aquatech_crafting.js",
+      "md5": "bccab1b19f882f513987cf9630f9bedf",
+      "size": 16983,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
+      "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     }
   ],
   "removed": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.41-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.42-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.65.jar"
+      "path": "mods/aquatech_ui-1.0.68.jar"
     }
   ],
   "stats": {
     "added": 2,
-    "changed": 2,
+    "changed": 1,
     "removed": 2,
-    "unchanged": 130,
-    "download_bytes": 7388997
+    "unchanged": 131,
+    "download_bytes": 5537548
   }
 }

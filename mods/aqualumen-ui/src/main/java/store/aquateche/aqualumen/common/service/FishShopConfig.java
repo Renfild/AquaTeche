@@ -311,6 +311,22 @@ public final class FishShopConfig {
         if (baseDef != null) {
             unitPrice *= demandFor(baseDef.id);
         }
+
+        // Smoked (fish smoker) & freshness (catch stamp from aquatech-ui) bonuses
+        CompoundTag rootTag = stack.getTag();
+        if (rootTag != null) {
+            if (rootTag.getBoolean("AquaSmoked")) {
+                unitPrice *= 2.0;
+            }
+            long caughtAt = rootTag.getLong("AquaCaughtAt");
+            if (caughtAt > 0L) {
+                long ageMs = System.currentTimeMillis() - caughtAt;
+                if (ageMs >= 0L && ageMs <= 30L * 60L * 1000L) {
+                    unitPrice *= 1.2;
+                }
+            }
+        }
+
         long finalUnitPrice = Math.max(1L, Math.round(unitPrice));
         return finalUnitPrice * stack.getCount();
     }

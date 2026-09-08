@@ -68,6 +68,12 @@ public class ModItems {
     public static final RegistryObject<Item> KELP_BIO_PELLET = ITEMS.register("kelp_bio_pellet",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> FISH_MEAL = ITEMS.register("fish_meal",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> FISH_SMOKER_ITEM = ITEMS.register("fish_smoker",
+            () -> new BlockItem(ModBlocks.FISH_SMOKER.get(), new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

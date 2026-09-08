@@ -244,6 +244,22 @@ ServerEvents.recipes((event) => {
     }).id('aquatech:kelp_bio_pellet')
   }
 
+  // Fish Smoker (Коптильня) — smokes fish (×2 in fish shop), grinds junk fish into fish meal
+  event.shaped('aquatech_ui:fish_smoker', ['III', 'FCF', 'PPP'], {
+    I: 'minecraft:iron_ingot',
+    F: 'minecraft:campfire',
+    C: 'aquatech_ui:kelp_bio_pellet',
+    P: 'minecraft:prismarine_shard',
+  }).id('aquatech:fish_smoker')
+
+  // Fish meal closes the junk-fish loop: meal back into smoker fuel
+  event.shapeless(Item.of('aquatech_ui:kelp_bio_pellet', 3), [
+    'aquatech_ui:fish_meal',
+    'aquatech_ui:fish_meal',
+    'minecraft:dried_kelp',
+    'minecraft:dried_kelp',
+  ]).id('aquatech:fish_meal_pellet')
+
   // hydro_reactor removed from ModBlocks — do not craft dead IDs
   event.remove({ id: 'aquatech:hydro_reactor' })
   event.remove({ id: 'aquatech_ui:hydro_reactor' })

@@ -58,5 +58,7 @@
   "gui.aquatech_ui.skill_tree.type.keystone": "Созвездие",
   "tooltip.aquatech_ui.auto_fisher.desc": "§7Автоматически вылавливает руды и ресурсы Industrial Upgrade из океанской воды.",
   "tooltip.aquatech_ui.auto_fisher.status.working": "§a✓ Статус: Идет вылавливание ресурсов...",
-  "tooltip.aquatech_ui.auto_fisher.status.no_energy": "§c✗ Статус: Нет энергии (Требуется 25 FE/t — Единая Энергия)"
+  "tooltip.aquatech_ui.auto_fisher.status.no_energy": "§c✗ Статус: Нет энергии (Требуется 25 FE/t — Единая Энергия)",
+  "block.aquatech_ui.fish_smoker": "Коптильня",
+  "item.aquatech_ui.fish_meal": "Рыбная мука"
 }
