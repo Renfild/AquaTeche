@@ -297,24 +297,13 @@ public final class AquaChatOverlay {
             AquaFontRenderer.drawNick(graphics, font, sender, curX, nameY, applyAlpha(0xFFF8FAFC, alpha));
             curX += AquaFontRenderer.nickWidth(font, sender) + 5;
 
-            // Nanobanano Frosted Glass Rank Badge Pill (+ wordmark glyph)
+            // Rank: user-drawn wordmark art only
             String rankGlyph = LumenTheme.getRankGlyph(msg.getRankId());
-            String rank = formatRankBadge(msg.getRankDisplay(), msg.getRankColor());
             if (!rankGlyph.isEmpty()) {
                 Component g = Component.literal(rankGlyph).withStyle(net.minecraft.network.chat.Style.EMPTY
                         .withFont(new net.minecraft.resources.ResourceLocation("aquatech_ui", "ranks")));
-                AquaFontRenderer.draw(graphics, font, g.getString(), curX, nameY + 1, applyAlpha(0xFFFFFFFF, alpha));
-                curX += 11;
-            }
-            if (!rank.isEmpty()) {
-                int rCol = getNanobananoRankColor(rank, msg.getRankColor());
-                int rw = AquaFontRenderer.width(font, rank) + 8;
-                int pillBg = (rCol & 0x00FFFFFF) | 0x22000000;
-                int pillBorder = (rCol & 0x00FFFFFF) | 0x55000000;
-                LumenGfx.roundedRect(graphics, curX, nameY - 1, rw, 11, 3, applyAlpha(pillBg, alpha));
-                LumenGfx.outline(graphics, curX, nameY - 1, rw, 11, 3, applyAlpha(pillBorder, alpha));
-                AquaFontRenderer.draw(graphics, font, rank, curX + 4, nameY, applyAlpha(rCol, alpha));
-                curX += rw + 5;
+                graphics.drawString(font, g, curX, nameY, applyAlpha(0xFFFFFFFF, alpha), false);
+                curX += font.width(g) + 6;
             }
 
             // Channel tag (only in ALL tab to indicate source channel)

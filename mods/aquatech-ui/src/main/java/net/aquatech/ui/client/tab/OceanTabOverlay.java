@@ -269,25 +269,12 @@ public final class OceanTabOverlay {
         String name = AquaFontRenderer.fit(font, profile.name(), maxNameW);
         AquaFontRenderer.draw(graphics, font, name, textX, y + 6, 0xFFF1F5F9);
 
-        // Rank Display — unified pill (same style as chat and HUD)
-        String rankClean = LumenTheme.getRankTitle(profile.rankId());
-        if (profile.rankDisplay() != null && !profile.rankDisplay().isBlank()) {
-            String custom = profile.rankDisplay().replaceAll("[\uE000-\uF8FF\uD800-\uDFFF]", "").trim();
-            if (!custom.isBlank() && !custom.equalsIgnoreCase(profile.rankId())) {
-                rankClean = custom;
-            }
-        }
+        // Rank Display — user-drawn wordmark art only
         String rankGlyph = LumenTheme.getRankGlyph(profile.rankId());
-        String rank = AquaFontRenderer.fit(font, rankClean, maxNameW);
-        int pillW = AquaFontRenderer.width(font, rank) + 8;
-        if (!rankGlyph.isEmpty()) pillW += 12;
-        LumenGfx.roundedRect(graphics, textX, y + 15, pillW, 12, 3, rankColor & 0x22FFFFFF);
-        LumenGfx.outline(graphics, textX, y + 15, pillW, 12, 3, rankColor & 0x55FFFFFF);
-        AquaFontRenderer.draw(graphics, font, rank, textX + 4, y + 17, rankColor);
         if (!rankGlyph.isEmpty()) {
             Component g = Component.literal(rankGlyph).withStyle(net.minecraft.network.chat.Style.EMPTY
                     .withFont(new net.minecraft.resources.ResourceLocation("aquatech_ui", "ranks")));
-            graphics.drawString(font, g, textX + pillW - font.width(g) - 3, y + 16, 0xFFFFFFFF, false);
+            graphics.drawString(font, g, textX, y + 15, 0xFFFFFFFF, false);
         }
 
         // Latency text

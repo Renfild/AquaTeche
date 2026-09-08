@@ -98,17 +98,10 @@ public final class OceanHudOverlay {
         String name = AquaFontRenderer.fit(font, player.getGameProfile().getName(), w - pad - 20 - 8);
         AquaFontRenderer.draw(graphics, font, name, pad + 26, 9, theme.text());
 
-        boolean hasGlyph = !rankGlyph.isEmpty();
-        int pillW = hasGlyph ? 20 : AquaFontRenderer.width(font, rankTitle) + 8;
-        int pillX = w - pad - pillW;
-        LumenGfx.roundedRect(graphics, pillX, 8, pillW, 12, 3, rankColor & 0x22FFFFFF);
-        LumenGfx.outline(graphics, pillX, 8, pillW, 12, 3, rankColor & 0x55FFFFFF);
-        if (hasGlyph) {
+        if (!rankGlyph.isEmpty()) {
             Component g = Component.literal(rankGlyph).withStyle(net.minecraft.network.chat.Style.EMPTY
                     .withFont(new net.minecraft.resources.ResourceLocation("aquatech_ui", "ranks")));
-            graphics.drawString(font, g, pillX + 4, 9, 0xFFFFFFFF, false);
-        } else {
-            AquaFontRenderer.draw(graphics, font, rankTitle, pillX + 4, 10, rankColor);
+            graphics.drawString(font, g, pad + 26, 24, 0xFFFFFFFF, false);
         }
 
         LumenGfx.gradientRoundedH(graphics, pad, 32, w - pad * 2, 1, 0, theme.accentAlpha(0.22f), 0x00000000);
