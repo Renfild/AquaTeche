@@ -85,12 +85,11 @@ public final class SoldPlaqueToast {
 
             g.pose().pushPose();
             g.pose().translate(x, y, 0);
-            g.blit(BG, 0, 0, 0, 0, W, H, W, H);
+            g.blit(BG, 0, 0, 0, 0, W, H, 256, 64);
             Font f = Minecraft.getInstance().font;
-            drawA(g, f, "§6§lЛОТ ПРОДАН", 8, 5, 0xFFFFC25B, a);
-            drawA(g, f, "§f" + clip(f, t.item, 100), 8, 13, 0xFFFFFFFF, a);
-            drawA(g, f, "§7купил: §b" + t.buyer, 8, 21, 0xFF9DB2C4, a);
-            drawA(g, f, "§6§l" + t.price + " ¤", W - 8 - f.width(t.price + " ¤"), 21, 0xFFFFC25B, a);
+            drawA(g, f, "§6§l" + clip(f, t.item, 74), 8, 8, 0xFFFFC25B, a);
+            drawA(g, f, "§f" + t.price + " ¤", W - 8 - f.width(t.price + " ¤"), 8, 0xFFFFC25B, a);
+            drawA(g, f, "§7Продано игроку §b" + clip(f, t.buyer, 60), 8, 18, 0xFF9DB2C4, a);
             g.pose().popPose();
             y += H + 4;
         }
