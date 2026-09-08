@@ -3,6 +3,7 @@ package net.aquatech.ui.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.client.bubble.ChatBubbleManager;
+import net.aquatech.ui.client.fishing.RateParticles;
 import net.aquatech.ui.client.gui.OceanSkillTreeScreen;
 import net.aquatech.ui.client.hud.RhythmHookOverlay;
 import net.aquatech.ui.client.tab.OceanTabOverlay;
@@ -76,6 +77,7 @@ public final class ClientEvents {
         }
         ClientUiState.tick();
         ChatBubbleManager.tick();
+        RateParticles.tick(Minecraft.getInstance());
         // AquaChat owns chat rendering — keep the vanilla chat panel empty no matter
         // how messages reach it (covers paths that bypass ClientChatReceivedEvent).
         try {
