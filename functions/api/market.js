@@ -57,13 +57,21 @@ export async function onRequestPost(context) {
       .first();
     if ((open?.n || 0) >= 12) return bad("Слишком много открытых лотов (макс. 12)", 429);
 
+    const stats = await env.DB.prepare(
+      `SELECT COUNT(*) AS c, COALESCE(AVG(price), 0) AS a FROM market_listings
+       WHERE item_id = ? AND status = 'sold'
+         AND created_at > datetime('now', '-30 days')`
+    )
+      .bind(itemId)
+      .first();
+
     const res = await env.DB.prepare(
       `INSERT INTO market_listings (seller, item_id, label, nbt, count, price)
        VALUES (?, ?, ?, ?, ?, ?)`
     )
       .bind(nick, itemId, label, nbt, count, price)
       .run();
-    return json({ ok: true, id: res.meta.last_row_id });
+    return json({ ok: true, id: res.meta.last_row_id, avg30: stats?.a || 0, cnt30: stats?.c || 0 });
   }
 
   if (op === "buy") {
@@ -96,6 +104,23 @@ export async function onRequestPost(context) {
     )
       .bind(id)
       .first();
+
+    // Уведомление продавцу: доставит poller сервера (онлайн) или выдаст при входе
+    if (lot && lot.seller) {
+      const notice = JSON.stringify({
+        label: lot.label,
+        count: lot.count,
+        price: lot.price,
+        buyer
+      });
+      await env.DB.prepare(
+        `INSERT INTO pending_commands (nick, kind, payload)
+         VALUES (?, 'sold_notice', ?)`
+      )
+        .bind(lot.seller, notice)
+        .run();
+    }
+
     return json({ ok: true, lot });
   }
 

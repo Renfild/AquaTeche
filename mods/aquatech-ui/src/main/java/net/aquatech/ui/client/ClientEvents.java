@@ -49,6 +49,11 @@ public final class ClientEvents {
                         net.aquatech.ui.client.hud.OceanHudOverlay.render(graphics, partialTick)
         );
         event.registerAboveAll(
+                "sold_plaque",
+                (gui, graphics, partialTick, screenWidth, screenHeight) ->
+                        net.aquatech.ui.client.toast.SoldPlaqueToast.render(graphics, Minecraft.getInstance().font)
+        );
+        event.registerAboveAll(
                 "ocean_tab",
                 (gui, graphics, partialTick, screenWidth, screenHeight) -> {
                     if (ClientUiState.tabOpen()) {
@@ -78,6 +83,7 @@ public final class ClientEvents {
         ClientUiState.tick();
         ChatBubbleManager.tick();
         RateParticles.tick(Minecraft.getInstance());
+        net.aquatech.ui.client.toast.SoldPlaqueToast.tick();
         // AquaChat owns chat rendering — keep the vanilla chat panel empty no matter
         // how messages reach it (covers paths that bypass ClientChatReceivedEvent).
         try {

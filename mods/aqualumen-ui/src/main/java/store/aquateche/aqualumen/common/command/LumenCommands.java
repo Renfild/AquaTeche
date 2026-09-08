@@ -61,7 +61,14 @@ public final class LumenCommands {
                                     MarketService.sell(ctx.getSource().getPlayerOrException(),
                                             LongArgumentType.getLong(ctx, "price"));
                                     return 1;
-                                })))
+                                })
+                                .then(Commands.literal("all")
+                                        .then(Commands.argument("price_per_item", LongArgumentType.longArg(1))
+                                                .executes(ctx -> {
+                                                    MarketService.sellAll(ctx.getSource().getPlayerOrException(),
+                                                            LongArgumentType.getLong(ctx, "price_per_item"));
+                                                    return 1;
+                                                })))))
                 .then(Commands.literal("cancel")
                         .then(Commands.argument("id", IntegerArgumentType.integer(1))
                                 .executes(ctx -> {

@@ -39,6 +39,7 @@ public final class AquaChatManager {
         // Mohist/Paper deliver player chat as system packets. Parse like player chat
         // so ranks/heads work; parse() still falls through to a system row when needed.
         String plain = component == null ? "" : component.getString();
+        net.aquatech.ui.client.toast.SoldPlaqueToast.pushFromChat(plain);
         if (plain.contains("Unable to open Quest GUI")) {
             // FTB Quests spam: three red error lines on every /quest open without
             // server-side quest data. Show a single dimmed notice instead.

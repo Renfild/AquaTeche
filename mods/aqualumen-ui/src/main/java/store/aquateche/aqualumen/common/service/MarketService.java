@@ -92,7 +92,6 @@ public final class MarketService {
         }
     }
 
-    /** Lists the item held in the main hand for {@code price} coins. */
     public static void sell(ServerPlayer player, long price) {
         ItemStack held = player.getMainHandItem();
         if (held.isEmpty()) {
@@ -103,11 +102,57 @@ public final class MarketService {
             player.sendSystemMessage(Component.literal("§e[Рынок] Цена должна быть больше нуля: /ah sell <цена>"));
             return;
         }
-        CompoundTag tag = held.save(new CompoundTag());
+        doSell(player, held, held.getCount(), price, price, java.util.List.of(),
+                () -> player.getMainHandItem().setCount(0));
+    }
+
+    /** /ah sell all <цена за шт> — выставляет ВСЕ одинаковые предметы из инвентаря одним лотом. */
+    public static void sellAll(ServerPlayer player, long pricePerItem) {
+        ItemStack held = player.getMainHandItem();
+        if (held.isEmpty()) {
+            player.sendSystemMessage(Component.literal("§e[Рынок] Возьмите продаваемый предмет в главную руку."));
+            return;
+        }
+        if (pricePerItem < 1) {
+            player.sendSystemMessage(Component.literal("§e[Рынок] Цена должна быть больше нуля: /ah sell all <цена за шт>"));
+            return;
+        }
+        var inv = player.getInventory();
+        long totalCount = 0;
+        java.util.List<Integer> slots = new java.util.ArrayList<>();
+        for (int i = 0; i < inv.getContainerSize(); i++) {
+            ItemStack s = inv.getItem(i);
+            if (!s.isEmpty() && s.getItem() == held.getItem()
+                    && java.util.Objects.equals(s.getTag(), held.getTag())) {
+                totalCount += s.getCount();
+                slots.add(i);
+            }
+        }
+        if (totalCount < 1) {
+            player.sendSystemMessage(Component.literal("§e[Рынок] Не найдено предметов для продажи."));
+            return;
+        }
+        long total = pricePerItem * totalCount;
+        if (total > 50_000_000L) {
+            player.sendSystemMessage(Component.literal("§c[Рынок] Слишком высокая цена лота: максимум 50 000 000 ¤."));
+            return;
+        }
+        ItemStack ref = held.copy();
+        ref.setCount((int) Math.min(total, 2304));
+        doSell(player, ref, (int) Math.min(total, 2304), total, pricePerItem, slots,
+                () -> {
+                    for (int i : slots) {
+                        inv.setItem(i, ItemStack.EMPTY);
+                    }
+                });
+    }
+
+    private static void doSell(ServerPlayer player, ItemStack stack, int count, long price, long pricePer,
+                               java.util.List<Integer> clearSlots, Runnable clearRun) {
+        CompoundTag tag = stack.save(new CompoundTag());
         String nbt = tag.toString();
-        String label = held.getHoverName().getString();
-        int count = held.getCount();
-        String itemId = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(held.getItem()).toString();
+        String label = stack.getHoverName().getString();
+        String itemId = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
 
         CompletableFuture.runAsync(() -> {
             try {
@@ -127,12 +172,21 @@ public final class MarketService {
                 if (res.has("ok") && res.get("ok").getAsBoolean()) {
                     int id = res.get("id").getAsInt();
                     player.getServer().execute(() -> {
-                        ItemStack main = player.getMainHandItem();
-                        if (!main.isEmpty() && main.getCount() == count) {
-                            player.getMainHandItem().setCount(0);
-                        }
+                        clearRun.run();
                         player.sendSystemMessage(Component.literal("§a[Рынок] Лот #" + id + " выставлен: "
                                 + label + " ×" + count + " за " + HubEconomy.formatCoins(price) + " ¤."));
+                        if (res.has("avg30") && !res.get("avg30").isJsonNull()) {
+                            long avg = (long) res.get("avg30").getAsDouble();
+                            int cnt = res.has("cnt30") ? res.get("cnt30").getAsInt() : 0;
+                            if (avg > 0 && cnt > 0) {
+                                player.sendSystemMessage(Component.literal("§7[Рынок] Средняя цена предмета за 30 дней: ~"
+                                        + HubEconomy.formatCoins(avg) + " ¤ (" + cnt + " продаж)."));
+                            }
+                            if (pricePer > avg * 10 && avg > 0) {
+                                player.sendSystemMessage(Component.literal("§e[Рынок] Внимание: цена за штуку больше средней в "
+                                        + (pricePer / avg) + " раз — лот могут не купить."));
+                            }
+                        }
                         fetchNow();
                         HubDataService.push(player);
                     });

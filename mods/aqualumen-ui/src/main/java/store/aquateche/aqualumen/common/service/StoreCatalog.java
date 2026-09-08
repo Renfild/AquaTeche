@@ -127,6 +127,26 @@ public final class StoreCatalog {
                 player.getPersistentData().putBoolean("aqualumen_pass_premium", true);
                 yield true;
             }
+            case "sold_notice" -> {
+                // Лот продавца куплен: золотая строка + лёгкий дзынь.
+                String payloadSafe = payload == null ? "" : payload;
+                String label = "", buyer = "";
+                long price = 0;
+                try {
+                    var obj = com.google.gson.JsonParser.parseString(payloadSafe).getAsJsonObject();
+                    if (obj.has("label")) label = obj.get("label").getAsString();
+                    if (obj.has("buyer")) buyer = obj.get("buyer").getAsString();
+                    if (obj.has("price")) price = obj.get("price").getAsLong();
+                } catch (Exception ignored) {
+                }
+                player.sendSystemMessage(Component.literal(
+                        "§6[Рынок] §fВаш лот \"" + label + "\" купил §b" + buyer
+                                + " §fза §6§l" + HubEconomy.formatCoins(price) + " §r§6¤"));
+                player.level().playSound(null, player.blockPosition(),
+                        net.minecraft.sounds.SoundEvents.EXPERIENCE_ORB_PICKUP,
+                        net.minecraft.sounds.SoundSource.PLAYERS, 0.6F, 1.4F);
+                yield true;
+            }
             case "skin" -> applySkinUrl(player, payload);
             case "skin_clear" -> clearSkin(player);
             default -> false;
