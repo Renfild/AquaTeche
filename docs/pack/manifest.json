@@ -1,5 +1,5 @@
 {
-  "version": "2.9.333",
+  "version": "2.9.334",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -42,11 +42,11 @@
       "asset": "aqualumen-forge-1.20.1-0.3.44-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.81.jar",
-      "md5": "99be7a0520f8005cf044c5f81f110808",
-      "size": 2881970,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.81.jar",
-      "asset": "aquatech_ui-1.0.81.jar"
+      "path": "mods/aquatech_ui-1.0.82.jar",
+      "md5": "5727a9accc32895e7a7c8c43090d65a7",
+      "size": 2881959,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.82.jar",
+      "asset": "aquatech_ui-1.0.82.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -763,6 +763,13 @@
       "asset": "kubejs__assets__kubejs__textures__aquatechlogo.png"
     },
     {
+      "path": "kubejs/assets/kubejs/textures/item/infernal_pearl.png",
+      "md5": "89fc11a41e123b155ed6a82606d7b7a2",
+      "size": 252,
+      "url": "https://aquateche.store/pack/kubejs/assets/kubejs/textures/item/infernal_pearl.png",
+      "asset": "kubejs__assets__kubejs__textures__item__infernal_pearl.png"
+    },
+    {
       "path": "kubejs/assets/kubejs/textures/logo/aquatechlogo.png",
       "md5": "164d3faeb16d044153081ff2d460dbee",
       "size": 9861,
@@ -827,15 +834,15 @@
     },
     {
       "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
-      "md5": "bbeefa0e7eb9233c4399ce40f882da20",
-      "size": 6115,
+      "md5": "762a1b7687ea3d98d023f59d95574952",
+      "size": 6122,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/20_aquatech_rod_crafts.js",
       "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "62e7fe25b252383b879d1f28ba5cbad7",
-      "size": 17541,
+      "md5": "384bec7c424ca6a02ee0fd05ef58568e",
+      "size": 17999,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
@@ -917,6 +924,13 @@
       "asset": "kubejs__server_scripts__96_fish_stocking.js"
     },
     {
+      "path": "kubejs/server_scripts/zz_infernal_pearl.js",
+      "md5": "4b9a9cc7ed66e54ce0e6101b20f0f7fd",
+      "size": 2332,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/zz_infernal_pearl.js",
+      "asset": "kubejs__server_scripts__zz_infernal_pearl.js"
+    },
+    {
       "path": "kubejs/startup_scripts/40_rod_durability.js",
       "md5": "07a28c1f85b5ecc55e62567f15abcbcb",
       "size": 1155,
@@ -936,6 +950,13 @@
       "size": 966,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/kubejs__startup_scripts__disable_iu_space.js",
       "asset": "kubejs__startup_scripts__disable_iu_space.js"
+    },
+    {
+      "path": "kubejs/startup_scripts/zz_infernal_pearl.js",
+      "md5": "21f9fe29310612da3be66cba21283574",
+      "size": 450,
+      "url": "https://aquateche.store/pack/kubejs/startup_scripts/zz_infernal_pearl.js",
+      "asset": "kubejs__startup_scripts__zz_infernal_pearl.js"
     },
     {
       "path": "resourcepacks/HavenQuestingTheme-1.20.1-1.0.0.zip",
