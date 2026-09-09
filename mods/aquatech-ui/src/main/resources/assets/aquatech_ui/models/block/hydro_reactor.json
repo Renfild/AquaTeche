@@ -1,203 +1,867 @@
 {
-  "parent": "block/block",
-  "textures": {
-    "particle": "aquatech_ui:block/hydro_reactor_side",
-    "bottom": "aquatech_ui:block/hydro_reactor_bottom",
-    "top": "aquatech_ui:block/hydro_reactor_top",
-    "side": "aquatech_ui:block/hydro_reactor_side",
-    "front": "aquatech_ui:block/hydro_reactor_front"
-  },
-  "elements": [
-    {
-      "comment": "Reactor Base Pedestal",
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        16,
-        4,
-        16
-      ],
-      "faces": {
-        "down": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#bottom",
-          "cullface": "down"
-        },
-        "up": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#top"
-        },
-        "north": {
-          "uv": [
-            0,
-            12,
-            16,
-            16
-          ],
-          "texture": "#front"
-        },
-        "south": {
-          "uv": [
-            0,
-            12,
-            16,
-            16
-          ],
-          "texture": "#side"
-        },
-        "west": {
-          "uv": [
-            0,
-            12,
-            16,
-            16
-          ],
-          "texture": "#side"
-        },
-        "east": {
-          "uv": [
-            0,
-            12,
-            16,
-            16
-          ],
-          "texture": "#side"
-        }
-      }
+ "credit": "AquaTech machine models",
+ "textures": {
+  "particle": "aquatech_ui:block/machines/hydro_white",
+  "#hydro_white": "aquatech_ui:block/machines/hydro_white",
+  "#hydro_blue": "aquatech_ui:block/machines/hydro_blue",
+  "#hydro_pipe": "aquatech_ui:block/machines/hydro_pipe",
+  "#hydro_glass": "aquatech_ui:block/machines/hydro_glass",
+  "#hydro_core": "aquatech_ui:block/machines/hydro_core"
+ },
+ "elements": [
+  {
+   "name": "tier1",
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    16,
+    2,
+    16
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
     },
-    {
-      "comment": "Glass Reactor Tube",
-      "from": [
-        3,
-        4,
-        3
-      ],
-      "to": [
-        13,
-        14,
-        13
-      ],
-      "faces": {
-        "up": {
-          "uv": [
-            3,
-            3,
-            13,
-            13
-          ],
-          "texture": "#top"
-        },
-        "north": {
-          "uv": [
-            3,
-            2,
-            13,
-            12
-          ],
-          "texture": "#front"
-        },
-        "south": {
-          "uv": [
-            3,
-            2,
-            13,
-            12
-          ],
-          "texture": "#side"
-        },
-        "west": {
-          "uv": [
-            3,
-            2,
-            13,
-            12
-          ],
-          "texture": "#side"
-        },
-        "east": {
-          "uv": [
-            3,
-            2,
-            13,
-            12
-          ],
-          "texture": "#side"
-        }
-      }
+    "up": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
     },
-    {
-      "comment": "Reactor Cap",
-      "from": [
-        1,
-        14,
-        1
-      ],
-      "to": [
-        15,
-        16,
-        15
-      ],
-      "faces": {
-        "up": {
-          "uv": [
-            1,
-            1,
-            15,
-            15
-          ],
-          "texture": "#top",
-          "cullface": "up"
-        },
-        "north": {
-          "uv": [
-            1,
-            0,
-            15,
-            2
-          ],
-          "texture": "#front"
-        },
-        "south": {
-          "uv": [
-            1,
-            0,
-            15,
-            2
-          ],
-          "texture": "#side"
-        },
-        "west": {
-          "uv": [
-            1,
-            0,
-            15,
-            2
-          ],
-          "texture": "#side"
-        },
-        "east": {
-          "uv": [
-            1,
-            0,
-            15,
-            2
-          ],
-          "texture": "#side"
-        }
-      }
+    "north": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
     }
-  ]
+   }
+  },
+  {
+   "name": "tier2",
+   "from": [
+    2,
+    2,
+    2
+   ],
+   "to": [
+    14,
+    4,
+    14
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "tier3",
+   "from": [
+    3,
+    4,
+    3
+   ],
+   "to": [
+    13,
+    6,
+    13
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "pipe_nw",
+   "from": [
+    2,
+    4,
+    2
+   ],
+   "to": [
+    4,
+    13,
+    4
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "pipe_ne",
+   "from": [
+    12,
+    4,
+    2
+   ],
+   "to": [
+    14,
+    13,
+    4
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "pipe_sw",
+   "from": [
+    2,
+    4,
+    12
+   ],
+   "to": [
+    4,
+    13,
+    14
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "pipe_se",
+   "from": [
+    12,
+    4,
+    12
+   ],
+   "to": [
+    14,
+    13,
+    14
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_pipe",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "glass",
+   "from": [
+    4,
+    6,
+    4
+   ],
+   "to": [
+    12,
+    13,
+    12
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_glass",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_glass",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_glass",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_glass",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_glass",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_glass",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "core",
+   "from": [
+    6,
+    6,
+    6
+   ],
+   "to": [
+    10,
+    13,
+    10
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_core",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_core",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_core",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_core",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_core",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_core",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "cap_ring",
+   "from": [
+    4,
+    13,
+    4
+   ],
+   "to": [
+    12,
+    14,
+    12
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "cap_slab",
+   "from": [
+    3,
+    14,
+    3
+   ],
+   "to": [
+    13,
+    15,
+    13
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "cap_top",
+   "from": [
+    2,
+    15,
+    2
+   ],
+   "to": [
+    14,
+    16,
+    14
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_white",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  }
+ ],
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.625,
+    0.625,
+    0.625
+   ]
+  },
+  "ground": {
+   "translation": [
+    0,
+    1,
+    0
+   ]
+  }
+ }
 }

@@ -55,10 +55,11 @@ public class FishSmokerBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            // insertItem() refuses slots where isItemValid is false — output must stay allowed
             if (slot == SLOT_FUEL) {
                 return stack.is(ModItems.KELP_BIO_PELLET.get());
             }
-            return slot != SLOT_OUTPUT;
+            return true;
         }
     };
     private final LazyOptional<IItemHandler> itemHandlerOptional = LazyOptional.of(() -> itemHandler);
@@ -108,7 +109,7 @@ public class FishSmokerBlockEntity extends BlockEntity implements MenuProvider {
         if (level.isClientSide) return;
 
         ItemStack input = entity.itemHandler.getStackInSlot(SLOT_INPUT);
-        boolean canProcess = !input.isEmpty() && entity.hasOutputRoom();
+        boolean canProcess = entity.isSmokableInput(input) && entity.hasOutputRoom();
 
         if (entity.burnLeft <= 0 && canProcess) {
             ItemStack fuel = entity.itemHandler.getStackInSlot(SLOT_FUEL);
@@ -145,6 +146,13 @@ public class FishSmokerBlockEntity extends BlockEntity implements MenuProvider {
             entity.setChanged();
         }
         WorkingMachineTracker.setWorking(level, pos, entity.progress > 0);
+    }
+
+    /** Only sellable starcatcher fish (fresh or already stamped), never smoked twice. */
+    private boolean isSmokableInput(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) return false;
+        if (stack.hasTag() && stack.getTag().getBoolean("AquaSmoked")) return false;
+        return net.aquatech.ui.fishing.FishingLootHandler.isStarCatcherFishItem(stack);
     }
 
     private boolean hasOutputRoom() {

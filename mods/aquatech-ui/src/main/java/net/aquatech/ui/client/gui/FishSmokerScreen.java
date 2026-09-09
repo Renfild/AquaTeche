@@ -1,6 +1,7 @@
 package net.aquatech.ui.client.gui;
 
 import net.aquatech.ui.AquaTechUI;
+import net.aquatech.ui.client.render.UiDraw;
 import net.aquatech.ui.inventory.FishSmokerMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -13,6 +14,7 @@ public class FishSmokerScreen extends AbstractAquaMachineScreen<FishSmokerMenu> 
 
     public FishSmokerScreen(FishSmokerMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title, TEXTURE, false);
+        this.drawAmbientFx = false;
         this.inventoryLabelY = 74;
     }
 
@@ -30,5 +32,11 @@ public class FishSmokerScreen extends AbstractAquaMachineScreen<FishSmokerMenu> 
         if (active) {
             blitProgressArrow(guiGraphics, x, y, 79, 34, menu.getScaledProgress(), t);
         }
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        // Title only — the "Инвентарь" caption collides with the slot grid and is dropped on purpose.
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, UiDraw.COLOR_PRIMARY, false);
     }
 }

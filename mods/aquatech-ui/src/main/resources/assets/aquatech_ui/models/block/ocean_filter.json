@@ -1,86 +1,521 @@
 {
-  "parent": "block/block",
-  "textures": {
-    "particle": "aquatech_ui:block/ocean_filter_side",
-    "bottom": "aquatech_ui:block/ocean_filter_bottom",
-    "top": "aquatech_ui:block/ocean_filter_top",
-    "side": "aquatech_ui:block/ocean_filter_side",
-    "front": "aquatech_ui:block/ocean_filter_front"
-  },
-  "elements": [
-    {
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        16,
-        16,
-        16
-      ],
-      "faces": {
-        "down": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#bottom",
-          "cullface": "down"
-        },
-        "up": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#top",
-          "cullface": "up"
-        },
-        "north": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#front",
-          "cullface": "north"
-        },
-        "south": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#side",
-          "cullface": "south"
-        },
-        "west": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#side",
-          "cullface": "west"
-        },
-        "east": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#side",
-          "cullface": "east"
-        }
-      }
+ "credit": "AquaTech machine models",
+ "textures": {
+  "particle": "aquatech_ui:block/machines/filter_panel",
+  "#filter_panel": "aquatech_ui:block/machines/filter_panel",
+  "#filter_top": "aquatech_ui:block/machines/filter_top",
+  "#filter_grille": "aquatech_ui:block/machines/filter_grille",
+  "#hydro_blue": "aquatech_ui:block/machines/hydro_blue"
+ },
+ "elements": [
+  {
+   "name": "body",
+   "from": [
+    1,
+    0,
+    1
+   ],
+   "to": [
+    15,
+    15,
+    15
+   ],
+   "faces": {
+    "down": {
+     "texture": "#filter_panel",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#filter_panel",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#filter_panel",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#filter_panel",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#filter_panel",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#filter_panel",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
     }
-  ]
+   }
+  },
+  {
+   "name": "top_plate",
+   "from": [
+    0,
+    15,
+    0
+   ],
+   "to": [
+    16,
+    16,
+    16
+   ],
+   "faces": {
+    "down": {
+     "texture": "#filter_top",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#filter_top",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#filter_top",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#filter_top",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#filter_top",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#filter_top",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "grille_n",
+   "from": [
+    3,
+    3,
+    0
+   ],
+   "to": [
+    13,
+    13,
+    1
+   ],
+   "faces": {
+    "down": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "grille_s",
+   "from": [
+    3,
+    3,
+    15
+   ],
+   "to": [
+    13,
+    13,
+    16
+   ],
+   "faces": {
+    "down": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "grille_e",
+   "from": [
+    15,
+    3,
+    3
+   ],
+   "to": [
+    16,
+    13,
+    13
+   ],
+   "faces": {
+    "down": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "grille_w",
+   "from": [
+    0,
+    3,
+    3
+   ],
+   "to": [
+    1,
+    13,
+    13
+   ],
+   "faces": {
+    "down": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#filter_grille",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  },
+  {
+   "name": "led",
+   "from": [
+    6,
+    16,
+    6
+   ],
+   "to": [
+    10,
+    17,
+    10
+   ],
+   "faces": {
+    "down": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "up": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "north": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "south": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "west": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    },
+    "east": {
+     "texture": "#hydro_blue",
+     "uv": [
+      0,
+      0,
+      64,
+      64
+     ]
+    }
+   }
+  }
+ ],
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.625,
+    0.625,
+    0.625
+   ]
+  },
+  "ground": {
+   "translation": [
+    0,
+    1,
+    0
+   ]
+  }
+ }
 }
