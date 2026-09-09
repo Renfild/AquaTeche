@@ -607,15 +607,22 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.28f, new ItemStack(Items.SLIME_BLOCK, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
-            case "slimed_rod" -> { // Tier 5: Slimed Rod (LV Ores & Polonium + early obsidian)
-                maybeAdd(pool, random, 0.55f, getModItem("industrialupgrade:baseore/spinel", Items.IRON_ORE, 1 + random.nextInt(2)));
+            case "slimed_rod" -> { // Tier 5: Slimed Rod — выживальные ресурсы + компонент T6-крафта
+                maybeAdd(pool, random, 0.55f, new ItemStack(Items.WHITE_WOOL, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, new ItemStack(Items.LEATHER, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.55f, new ItemStack(Items.SUGAR_CANE, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.45f, new ItemStack(Items.WHEAT_SEEDS, 2 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.PUMPKIN_SEEDS, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.35f, new ItemStack(Items.MELON_SEEDS, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.BEETROOT_SEEDS, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.CARROT, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.POTATO, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.20f, new ItemStack(Items.LEAD, 1));
                 maybeAdd(pool, random, 0.50f, getModItem("industrialupgrade:baseore2/barium", Items.IRON_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
-                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/silver", Items.IRON_ORE, 1));
-                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/aluminium", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.OBSIDIAN, 1 + random.nextInt(2)));
-                pickFromPool(list, pool, random, 1, 3);
+                pickFromPool(list, pool, random, 2, 4);
             }
             case "boner_rod" -> { // Side rod: overworld hostile drops + cobweb/snow
                 maybeAdd(pool, random, 0.70f, new ItemStack(Items.BONE, 2 + random.nextInt(3)));

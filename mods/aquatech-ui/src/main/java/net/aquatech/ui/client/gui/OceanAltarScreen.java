@@ -25,7 +25,7 @@ public class OceanAltarScreen extends AbstractAquaMachineScreen<OceanAltarMenu> 
     protected void renderMachineOverlays(GuiGraphics guiGraphics, int x, int y, float t, boolean active) {
         MachineGuiFx.altarPulse(guiGraphics, x + 80, y + 35, t, active);
         if (active) {
-            blitProgressArrow(guiGraphics, x, y, 62, 35, menu.getScaledProgress(), t);
+            blitProgressArrow(guiGraphics, x, y, 54, 37, menu.getScaledProgress(), t);
         }
     }
 }

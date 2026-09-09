@@ -48,7 +48,10 @@ public final class AquaChatOverlay {
         if (messages.isEmpty()) return;
 
         int screenHeight = mc.getWindow().getGuiScaledHeight();
-        renderHistory(graphics, mc.font, messages, screenHeight, false);
+        double mxs = mc.mouseHandler.xpos();
+        double mys = mc.mouseHandler.ypos();
+        double gsc = Math.max(1.0, mc.getWindow().getGuiScale());
+        renderHistory(graphics, mc.font, messages, screenHeight, false, (int) (mxs / gsc), (int) (mys / gsc));
     }
 
     public static void renderOpenPanel(GuiGraphics graphics, int screenHeight) {
@@ -85,11 +88,23 @@ public final class AquaChatOverlay {
         renderHistory(graphics, font, messages, screenHeight, chatOpen, -1, -1);
     }
 
+    public static final java.util.List<Object[]> CHIP_RECTS = new java.util.ArrayList<>();
+
+    public static ItemStack chipHit(double x, double y) {
+        for (Object[] r : CHIP_RECTS) {
+            if (x >= (Double) r[0] && x <= (Double) r[2] && y >= (Double) r[1] && y <= (Double) r[3]) {
+                return (ItemStack) r[4];
+            }
+        }
+        return null;
+    }
+
     private static void renderHistory(GuiGraphics graphics, Font font, List<AquaChatMessage> messages,
                                       int screenHeight, boolean chatOpen, int mouseX, int mouseY) {
         if (chatOpen) {
             hoveredItem = ItemStack.EMPTY;
         }
+        CHIP_RECTS.clear();
         if (messages.isEmpty()) return;
 
         Minecraft mc = Minecraft.getInstance();
@@ -335,15 +350,17 @@ public final class AquaChatOverlay {
                         int startX = textX + font.width(AquaFontRenderer.text(before));
                         int chipW = font.width(AquaFontRenderer.text(chipLabel));
                         int itemCol = tag.getRarityColor() != 0 ? tag.getRarityColor() : 0xFF38BDF8;
+                        CHIP_RECTS.add(new Object[]{(double) startX - 2, (double) lineY - 1,
+                                (double) startX + chipW + 2, (double) lineY + 10, tag.getStack()});
                         boolean tagHovered = mouseX >= startX - 2 && mouseX <= startX + chipW + 2
                                 && mouseY >= lineY - 1 && mouseY <= lineY + 11;
                         if (tagHovered) {
                             hoveredItem = tag.getStack();
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x44000000 | (itemCol & 0x00FFFFFF));
-                            LumenGfx.outline(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, itemCol);
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x33000000 | (itemCol & 0x00FFFFFF));
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, 2, 11, 0, itemCol);
                         } else {
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x1A000000 | (itemCol & 0x00FFFFFF));
-                            LumenGfx.outline(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x44000000 | (itemCol & 0x00FFFFFF));
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x30000000);
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, 2, 11, 0, 0x90FFFFFF & (itemCol | 0x00FFFFFF));
                         }
                     }
                 }
@@ -355,15 +372,17 @@ public final class AquaChatOverlay {
                         int startX = textX + font.width(AquaFontRenderer.text(before));
                         int chipW = font.width(AquaFontRenderer.text(handLabel));
                         int itemCol = 0xFF38BDF8;
+                        CHIP_RECTS.add(new Object[]{(double) startX - 2, (double) lineY - 1,
+                                (double) startX + chipW + 2, (double) lineY + 10, msg.getSharedItem()});
                         boolean handHovered = mouseX >= startX - 2 && mouseX <= startX + chipW + 2
                                 && mouseY >= lineY - 1 && mouseY <= lineY + 11;
                         if (handHovered) {
                             hoveredItem = msg.getSharedItem();
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x44000000 | (itemCol & 0x00FFFFFF));
-                            LumenGfx.outline(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, itemCol);
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x33000000 | (itemCol & 0x00FFFFFF));
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, 2, 11, 0, itemCol);
                         } else {
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x1A000000 | (itemCol & 0x00FFFFFF));
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x44000000 | (itemCol & 0x00FFFFFF));
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x30000000);
+                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, 2, 11, 0, 0x90FFFFFF & (itemCol | 0x00FFFFFF));
                         }
                     }
                 }
