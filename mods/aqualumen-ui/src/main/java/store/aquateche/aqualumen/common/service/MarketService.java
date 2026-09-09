@@ -79,7 +79,7 @@ public final class MarketService {
                 JsonObject lot = lots.get(i).getAsJsonObject();
                 list.add(new HubSnapshot.MarketEntry(
                         lot.get("id").getAsInt(),
-                        lot.has("label") ? lot.get("label").getAsString() : lot.get("item_id").getAsString(),
+                        lot.has("label") ? stripAngleTags(lot.get("label").getAsString()) : lot.get("item_id").getAsString(),
                         lot.get("count").getAsInt(),
                         lot.get("price").getAsLong(),
                         lot.get("seller").getAsString(),
@@ -151,7 +151,7 @@ public final class MarketService {
                                java.util.List<Integer> clearSlots, Runnable clearRun) {
         CompoundTag tag = stack.save(new CompoundTag());
         String nbt = tag.toString();
-        String label = stack.getHoverName().getString();
+        String label = stripAngleTags(stack.getHoverName().getString());
         String itemId = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
 
         CompletableFuture.runAsync(() -> {
@@ -252,14 +252,14 @@ public final class MarketService {
                             ServerPlayer sellerPlayer = HubEconomy.findOnline(player.getServer(), seller);
                             if (sellerPlayer != null) {
                                 sellerPlayer.sendSystemMessage(Component.literal("§a[Рынок] " + player.getGameProfile().getName()
-                                        + " купил «" + lot.get("label").getAsString() + "» ×"
+                                        + " купил «" + stripAngleTags(lot.get("label").getAsString()) + "» ×"
                                         + lot.get("count").getAsInt() + " за "
                                         + HubEconomy.formatCoins(price) + " ¤."));
                                 HubDataService.push(sellerPlayer);
                                 HubDataService.syncPlayerToWebAsync(sellerPlayer);
                             }
                         }
-                        player.sendSystemMessage(Component.literal("§a[Рынок] Куплено: " + lot.get("label").getAsString()
+                        player.sendSystemMessage(Component.literal("§a[Рынок] Куплено: " + stripAngleTags(lot.get("label").getAsString())
                                 + " ×" + lot.get("count").getAsInt() + " за " + HubEconomy.formatCoins(price) + " ¤."));
                     } else {
                         player.sendSystemMessage(Component.literal("§c[Рынок] Не хватает монет."));
@@ -411,5 +411,10 @@ public final class MarketService {
              InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
             return JsonParser.parseReader(reader).getAsJsonObject();
         }
+    }
+
+    /** StarCatcher помечает улов как <nick>Name</nick> — теги в ярлыках лотов не нужны. */
+    private static String stripAngleTags(String s) {
+        return s == null ? "" : s.replaceAll("</?[a-zA-Zа-яА-Я0-9_]+>", "");
     }
 }

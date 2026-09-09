@@ -134,13 +134,13 @@ public final class StoreCatalog {
                 long price = 0;
                 try {
                     var obj = com.google.gson.JsonParser.parseString(payloadSafe).getAsJsonObject();
-                    if (obj.has("label")) label = obj.get("label").getAsString();
+                    if (obj.has("label")) label = obj.get("label").getAsString().replaceAll("</?[a-zA-Z0-9_а-яА-Я]+>", "");
                     if (obj.has("buyer")) buyer = obj.get("buyer").getAsString();
                     if (obj.has("price")) price = obj.get("price").getAsLong();
                 } catch (Exception ignored) {
                 }
                 player.sendSystemMessage(Component.literal(
-                        "§6[Рынок] §fВаш лот \"" + label + "\" купил §b" + buyer
+                        "§6[Рынок] §fВаш лот \"" + label + "\" продан. Купил: §b" + buyer
                                 + " §fза §6§l" + HubEconomy.formatCoins(price) + " §r§6¤"));
                 player.level().playSound(null, player.blockPosition(),
                         net.minecraft.sounds.SoundEvents.EXPERIENCE_ORB_PICKUP,

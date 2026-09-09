@@ -101,9 +101,12 @@ public final class PendingDeliveryService {
             String msg = switch (kind == null ? "" : kind) {
                 case "skin" -> "Скин с сайта применён";
                 case "skin_clear" -> "Скин с сайта снят";
+                case "sold_notice" -> ""; // плашка «Лот продан» уже уведомляет
                 default -> "Доставка с сайта: " + kind;
             };
-            player.sendSystemMessage(Component.literal(msg).withStyle(ChatFormatting.GREEN));
+            if (!msg.isEmpty()) {
+                player.sendSystemMessage(Component.literal(msg).withStyle(ChatFormatting.GREEN));
+            }
             HubDataService.push(player);
         }
     }
