@@ -1,5 +1,5 @@
 {
-  "version": "2.9.320",
+  "version": "2.9.321",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -42,11 +42,11 @@
       "asset": "aqualumen-forge-1.20.1-0.3.43-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.71.jar",
-      "md5": "63f54ee7a255ac067e33495405beaeb0",
-      "size": 3586563,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.71.jar",
-      "asset": "aquatech_ui-1.0.71.jar"
+      "path": "mods/aquatech_ui-1.0.72.jar",
+      "md5": "584e1bf7a724ec98d3a0331b9abc0e0d",
+      "size": 2863990,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.72.jar",
+      "asset": "aquatech_ui-1.0.72.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
