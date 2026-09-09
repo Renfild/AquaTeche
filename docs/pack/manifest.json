@@ -1,5 +1,5 @@
 {
-  "version": "2.9.325",
+  "version": "2.9.326",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -35,18 +35,18 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.43-alpha.jar",
-      "md5": "dd39a2220e492c434e4f5546e925f71d",
-      "size": 2677314,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.43-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.43-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.44-alpha.jar",
+      "md5": "41887e552b452f585ebf14b955657d11",
+      "size": 2677518,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.44-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.44-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.76.jar",
-      "md5": "4b05337176b1bd31011dbd27f9f23bb3",
+      "path": "mods/aquatech_ui-1.0.77.jar",
+      "md5": "c442a4784313c3e5ceca305e4a49fe49",
       "size": 2871975,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.76.jar",
-      "asset": "aquatech_ui-1.0.76.jar"
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.77.jar",
+      "asset": "aquatech_ui-1.0.77.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
