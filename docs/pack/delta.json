@@ -1,41 +1,22 @@
 {
-  "from_version": "2.9.332",
-  "to_version": "2.9.333",
-  "added": [
-    {
-      "path": "mods/aquatech_ui-1.0.81.jar",
-      "md5": "99be7a0520f8005cf044c5f81f110808",
-      "size": 2881970,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.81.jar",
-      "asset": "aquatech_ui-1.0.81.jar"
-    }
-  ],
+  "from_version": "2.9.333",
+  "to_version": "2.9.334",
+  "added": [],
   "changed": [
     {
-      "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
-      "md5": "bbeefa0e7eb9233c4399ce40f882da20",
-      "size": 6115,
-      "url": "https://aquateche.store/pack/kubejs/server_scripts/20_aquatech_rod_crafts.js",
-      "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
-    },
-    {
-      "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "62e7fe25b252383b879d1f28ba5cbad7",
-      "size": 17541,
-      "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
-      "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
+      "path": "mods/aquatech_ui-1.0.82.jar",
+      "md5": "5727a9accc32895e7a7c8c43090d65a7",
+      "size": 2881959,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.82.jar",
+      "asset": "aquatech_ui-1.0.82.jar"
     }
   ],
-  "removed": [
-    {
-      "path": "mods/aquatech_ui-1.0.79.jar"
-    }
-  ],
+  "removed": [],
   "stats": {
-    "added": 1,
-    "changed": 2,
-    "removed": 1,
-    "unchanged": 131,
-    "download_bytes": 2905626
+    "added": 0,
+    "changed": 1,
+    "removed": 0,
+    "unchanged": 136,
+    "download_bytes": 2881959
   }
 }

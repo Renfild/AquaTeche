@@ -12,7 +12,7 @@ public class AutoFisherScreen extends AbstractAquaMachineScreen<AutoFisherMenu> 
     private static final ResourceLocation TEXTURE = new ResourceLocation(AquaTechUI.MOD_ID, "textures/gui/auto_fisher.png");
 
     /** Arrow outline on GUI; filled strip in atlas at (180,61). */
-    private static final int PROG_GUI_X = 79;
+    private static final int PROG_GUI_X = 70;
     private static final int PROG_GUI_Y = 40;
     private static final int PROG_U = 180;
     private static final int PROG_V = 61;

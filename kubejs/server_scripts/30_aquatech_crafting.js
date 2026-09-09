@@ -244,6 +244,18 @@ ServerEvents.recipes((event) => {
     }).id('aquatech:kelp_bio_pellet')
   }
 
+  // Устаревшие машины выведены из крафта (будут заменены новыми: рыболов, экскаватор, экстрактор)
+  const DEAD_MACHINES = [
+    'aquatech_ui:auto_fisher',
+    'aquatech_ui:ocean_altar',
+    'aquatech_ui:abyssal_portal',
+    'industrialupgrade:basemachine3/bio_extractor',
+  ]
+  for (const m of DEAD_MACHINES) {
+    event.remove({ output: m })
+    event.remove({ input: m })
+  }
+
   // Разгрузчик сумок (Celestial/Item Manipulator) убран из крафта
   event.remove({ output: 'industrialupgrade:basemachine3/itemmanipulator' })
 

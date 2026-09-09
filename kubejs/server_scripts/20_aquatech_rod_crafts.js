@@ -84,7 +84,7 @@ ServerEvents.recipes((event) => {
     event.shaped(Item.of('starcatcher:starcatcher_rod'), ['GSG', 'NRN', 'DGD'], {
       S: 'industrialupgrade:preciousgem/sapphire_gem',
       G: 'industrialupgrade:baseore/tungsten',
-      N: 'alexscaves:azure_neodymium_ingot',
+      N: 'industrialupgrade:preciousgem/topaz_gem',
       D: 'minecraft:diamond_block',
       R: 'starcatcher:iceborn_rod',
     }).id('aquatech:starcatcher_rod_craft')
