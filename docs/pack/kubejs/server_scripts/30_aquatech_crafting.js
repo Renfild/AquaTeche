@@ -252,6 +252,14 @@ ServerEvents.recipes((event) => {
     P: 'minecraft:prismarine_shard',
   }).id('aquatech:fish_smoker')
 
+  // Жемчужина Разлома — телепорт в Энд и обратно (кулдаун 10 мин)
+  event.shaped('aquatech_ui:abyssal_pearl', ['PDP', 'OHO', 'PDP'], {
+    P: 'minecraft:ender_pearl',
+    D: 'minecraft:diamond',
+    O: 'minecraft:obsidian',
+    H: 'minecraft:heart_of_the_sea',
+  }).id('aquatech:abyssal_pearl')
+
   // Fish meal closes the junk-fish loop: meal back into smoker fuel
   event.shapeless(Item.of('aquatech_ui:kelp_bio_pellet', 3), [
     'aquatech_ui:fish_meal',

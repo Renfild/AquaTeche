@@ -312,8 +312,37 @@ public class FishingLootHandler {
             dampenAutoFisherLateLoot(list, random);
         }
 
+        if (rodId != null) {
+            int tier = FishRosterService.tierOf(rodId);
+            ItemStack fish = FishRosterService.roll(tier, random);
+            if (fish != null) {
+                list.add(0, fish);
+            }
+            if (tier >= 5 && random.nextFloat() < 0.35f) {
+                ItemStack extra = FishRosterService.roll(tier, random);
+                if (extra != null) {
+                    list.add(extra);
+                }
+            }
+            // Жемчужина Разлома: трофей глубины с топовых удочек
+            if (tier >= 10 && random.nextFloat() < 0.02f) {
+                list.add(new ItemStack(ModItems.ABYSSAL_PEARL.get()));
+            }
+            list.removeIf(FishingLootHandler::isAbsurdTechDrop);
+        }
+
         stampFreshness(list);
         return list;
+    }
+
+    /** Машины/техника из лута удочки — бред, режем на месте (солнечные панели и пр.). */
+    private static boolean isAbsurdTechDrop(ItemStack stack) {
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (id == null) return false;
+        String p = id.getPath();
+        return "industrialupgrade".equals(id.getNamespace())
+                && (p.startsWith("machines/") || p.contains("solar") || p.contains("turbine")
+                    || p.contains("reactor") || p.contains("generator"));
     }
 
     /**
