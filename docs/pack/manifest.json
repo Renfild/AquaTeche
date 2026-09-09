@@ -1,5 +1,5 @@
 {
-  "version": "2.9.332",
+  "version": "2.9.333",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -42,11 +42,11 @@
       "asset": "aqualumen-forge-1.20.1-0.3.44-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.79.jar",
-      "md5": "af1adb6d0b06789cbbdd883b7a415280",
-      "size": 2881651,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.79.jar",
-      "asset": "aquatech_ui-1.0.79.jar"
+      "path": "mods/aquatech_ui-1.0.81.jar",
+      "md5": "99be7a0520f8005cf044c5f81f110808",
+      "size": 2881970,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.81.jar",
+      "asset": "aquatech_ui-1.0.81.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -827,15 +827,15 @@
     },
     {
       "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
-      "md5": "842ec96412a8b6224b7c2fa51df4f6a3",
-      "size": 6298,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/kubejs__server_scripts__20_aquatech_rod_crafts.js",
+      "md5": "bbeefa0e7eb9233c4399ce40f882da20",
+      "size": 6115,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/20_aquatech_rod_crafts.js",
       "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "19692f3537ff591782051d10f65ac033",
-      "size": 17328,
+      "md5": "62e7fe25b252383b879d1f28ba5cbad7",
+      "size": 17541,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
