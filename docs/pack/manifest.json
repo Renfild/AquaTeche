@@ -1,5 +1,5 @@
 {
-  "version": "2.9.330",
+  "version": "2.9.331",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -43,8 +43,8 @@
     },
     {
       "path": "mods/aquatech_ui-1.0.78.jar",
-      "md5": "2548a4d8125db6c11b08e5790718449a",
-      "size": 2881234,
+      "md5": "962dee1e799c31cbb538cfeddeef33ca",
+      "size": 2881650,
       "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.78.jar",
       "asset": "aquatech_ui-1.0.78.jar"
     },
