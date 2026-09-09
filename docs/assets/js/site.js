@@ -2930,16 +2930,21 @@
   function renderMarketLots(root, lots, { empty = "Пока нет лотов. Выставь предмет командой /ah sell в игре." } = {}) {
     if (!root) return;
     const rows = lots || [];
-    if (!rows.length) {
-      root.innerHTML = `<p class="muted-line">${empty}</p>`;
-      return;
-    }
-    root.innerHTML = `<table class="market-table">
-      <thead><tr><th>Предмет</th><th>Кол-во</th><th>Продавец</th><th>Цена</th></tr></thead>
+    const iconFor = (lot) => {
+      if (!ATLAS || !lot.item_id) return "";
+      const e = ATLAS[String(lot.item_id).trim()];
+      if (!e) return "";
+      const sheet = e[0];
+      return `<span class="atlas-sprite" style="width:24px;height:24px;background-image:url(https://aquateche.store/assets/images/atlas/atlas_${sheet}.png);background-position:${-8 - e[1]}px ${-8 - e[2]}px"></span>`;
+    };
+    const draw = () => {
+      root.innerHTML = `<table class="market-table">
+      <thead><tr><th></th><th>Предмет</th><th>Кол-во</th><th>Продавец</th><th>Цена</th></tr></thead>
       <tbody>
         ${rows
           .map(
             (lot) => `<tr>
+              <td class="lot-icon-cell">${iconFor(lot)}</td>
               <td>${esc(lot.label || lot.item_id || "предмет")}</td>
               <td>${esc(lot.count || 1)}</td>
               <td>${esc(lot.seller || "—")}</td>
@@ -2949,6 +2954,18 @@
           .join("")}
       </tbody>
     </table>`;
+    };
+    if (!ATLAS) { ensureAtlas().then(draw); return; }
+    draw();
+  }
+
+  async function ensureAtlasAsync() {
+    if (ATLAS || atlasTried === "done") return;
+    atlasTried = "try";
+    try {
+      ATLAS = await (await fetch("https://aquateche.store/assets/images/atlas/manifest.json")).json();
+      atlasTried = "done";
+    } catch { atlasTried = "fail"; }
   }
 
   async function initTrends() {
@@ -2992,6 +3009,7 @@
     if (!home && !page) return;
     const limit = page ? 40 : 6;
     try {
+      await ensureAtlasAsync();
       const data = await api(`/api/market/public?limit=${limit}`);
       const lots = data.lots || [];
       renderMarketLots(home, lots.slice(0, 6), { empty: "Аукцион пуст. Лоты появляются из игры." });

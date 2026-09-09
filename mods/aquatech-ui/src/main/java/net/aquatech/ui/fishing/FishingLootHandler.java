@@ -457,6 +457,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/nickel", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:preciousgem/sapphire_gem", Items.LAPIS_LAZULI, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:preciousgem/topaz_gem", Items.AMETHYST_SHARD, 1));
+                maybeAdd(pool, random, 0.25f, getModItem("industrialupgrade:preciousgem/ruby_gem", Items.REDSTONE, 1));
                 maybeAdd(pool, random, 0.25f, getModItem("industrialupgrade:blockpreciousore/sapphire_ore", Items.LAPIS_ORE, 1));
                 maybeAdd(pool, random, 0.25f, getModItem("industrialupgrade:blockpreciousore/topaz_ore", Items.AMETHYST_BLOCK, 1));
                 pickFromPool(list, pool, random, 1, 3);
@@ -702,6 +703,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.12f, new ItemStack(Items.CRYING_OBSIDIAN, 1));
                 maybeAdd(pool, random, 0.20f, getModItem("industrialupgrade:alloyingot/stainless_steel", Items.IRON_INGOT, 1));
                 maybeAdd(pool, random, 0.10f, new ItemStack(Items.DIAMOND_BLOCK, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:preciousgem/ruby_gem", Items.REDSTONE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "obsidian_rod" -> { // Tier 10: Obsidian Rod (HV Steel & Diamond)

@@ -18,8 +18,8 @@ import java.util.List;
 public final class SoldPlaqueToast {
     private static final ResourceLocation BG =
             new ResourceLocation("aquatech_ui", "textures/gui/plaque_sold.png");
-    private static final int W = 128;
-    private static final int H = 32;
+    private static final int W = 256;
+    private static final int H = 64;
 
     private static final List<SoldPlaqueToast> ACTIVE = new ArrayList<>();
 
@@ -80,6 +80,7 @@ public final class SoldPlaqueToast {
         }
         int mcW = g.guiWidth();
         int y = 6;
+            // (полный размер 256x64)
         for (SoldPlaqueToast t : snapshot) {
             float fadeIn = Math.min(1F, t.age / 6F);
             float fadeOut = Math.min(1F, (170 - t.age) / 12F);
@@ -92,9 +93,10 @@ public final class SoldPlaqueToast {
             g.pose().translate(x, y, 0);
             g.blit(BG, 0, 0, 0, 0, W, H, 256, 64);
             Font f = Minecraft.getInstance().font;
-            drawA(g, f, "§6§l" + clip(f, t.item, 74), 8, 8, 0xFFFFC25B, a);
-            drawA(g, f, "§f" + t.price + " ¤", W - 8 - f.width(t.price + " ¤"), 8, 0xFFFFC25B, a);
-            drawA(g, f, "§7Продано игроку §b" + clip(f, t.buyer, 60), 8, 18, 0xFF9DB2C4, a);
+            drawA(g, f, "§6§l" + clip(f, t.item, 150), 26, 16, 0xFFFFC25B, a);
+            String price = t.price + " ¤";
+            drawA(g, f, "§f" + price, W - 26 - f.width(price), 16, 0xFFFFC25B, a);
+            drawA(g, f, "§7Продано игроку §b" + clip(f, t.buyer, 120), 26, 44, 0xFF9DB2C4, a);
             g.pose().popPose();
             y += H + 4;
         }

@@ -119,6 +119,23 @@ export async function onRequestPost(context) {
       )
         .bind(lot.seller, notice)
         .run();
+
+      // Мост в Telegram: продавцу приходит «у тебя купили»
+      if (env.TG_BOT_TOKEN && env.TG_CHAT_ID) {
+        const tgText =
+          `🪙 AquaTech Аукцион
+` +
+          `«${lot.label}» ×${lot.count} продана за ${lot.price} ¤
+` +
+          `Покупатель: ${buyer}`;
+        context.waitUntil(
+          fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: tgText })
+          }).then((r) => r.json()).catch(() => {})
+        );
+      }
     }
 
     return json({ ok: true, lot });
