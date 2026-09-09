@@ -74,7 +74,7 @@ public record LumenTheme(
             case "builder", "билдер", "строитель" -> "";
             case "friend", "друг" -> "";
             case "trainee", "стажер", "стажёр" -> "";
-            case "player", "игрок" -> "";
+            case "player", "default", "игрок" -> "";
             case "npc", "нпс" -> "";
             default -> "";
         };
@@ -84,6 +84,7 @@ public record LumenTheme(
         if (rankId == null) return 0xFF81ECEC;
         String id = rankId.toLowerCase(java.util.Locale.ROOT).trim();
         return switch (id) {
+            case "default", "player", "игрок" -> 0xFF9AA5B1; // Plain gray
             case "owner", "создатель", "владелец" -> 0xFFF5C25B; // Gold
             case "admin", "администратор", "dev", "developer", "разработчик", "staff", "персонал" -> 0xFFFF6B6B; // Coral Red
             case "mod", "moderator", "модератор" -> 0xFFFF9F43; // Orange

@@ -34,18 +34,23 @@ public final class SoldPlaqueToast {
         this.price = price;
     }
 
-    /** Разбирает строку доставки вида: Ваш лот "X" купил Y за N ¤ */
+    /** Разбирает строку доставки вида: Ваш лот "X" продан. Купил: Y за N ¤ */
     public static void pushFromChat(String stripped) {
-        if (stripped == null || !stripped.contains("Ваш лот") || !stripped.contains("продан")
-                || !stripped.contains("купил")) {
+        if (stripped == null) {
+            return;
+        }
+        String clean = stripped.replaceAll("[§&][0-9a-fk-orA-FK-OR]", "");
+        String low = clean.toLowerCase(java.util.Locale.ROOT);
+        if (!low.contains("ваш лот") || !low.contains("продан") || !low.contains("купил")) {
             return;
         }
         try {
             var m = java.util.regex.Pattern
-                    .compile("Ваш лот \"(.+?)\" купил (.+?) за ([\\d ]+)")
-                    .matcher(stripped);
+                    .compile("Ваш лот \"(.+?)\" продан[.!]\\s*Купил:\\s*(.+?)\\s*за\\s*([\\d\\s]+)",
+                            java.util.regex.Pattern.CASE_INSENSITIVE | java.util.regex.Pattern.UNICODE_CASE)
+                    .matcher(clean);
             if (m.find()) {
-                push(m.group(1), m.group(2), m.group(3).trim());
+                push(m.group(1), m.group(2).trim(), m.group(3).trim());
             }
         } catch (Exception ignored) {
         }

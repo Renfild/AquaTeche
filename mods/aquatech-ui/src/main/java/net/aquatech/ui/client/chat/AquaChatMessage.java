@@ -424,6 +424,10 @@ public final class AquaChatMessage {
             "(?iu)^(?<amt>[\\d\\s.,]+)\\s+has been received from\\s+(?<who>.+?)\\.?\\s*$");
     private static final Pattern PAY_BARE_SENT = Pattern.compile(
             "(?iu)^(?<amt>[\\d\\s.,]+)\\s+has been sent to\\s+(?<who>.+?)\\.?\\s*$");
+    private static final Pattern ACCOUNT_ADDED = Pattern.compile(
+            "(?iu)^(?<amt>[\\d\\s.,]+)\\s*¤?\\s*has been added to your account\\.?\\s*$");
+    private static final Pattern ACCOUNT_TAKEN = Pattern.compile(
+            "(?iu)^(?<amt>[\\d\\s.,]+)\\s*¤?\\s*has been taken from your account\\.?\\s*$");
 
     private static AquaChatMessage tryParseEconomy(String unformatted, int currentTick) {
         if (unformatted == null || unformatted.isBlank()) {
@@ -450,6 +454,18 @@ public final class AquaChatMessage {
             String body = "Отправлено " + amt + " ¤ игроку " + nick + ".";
             return new AquaChatMessage(null, null, "system", "СИСТЕМА",
                     0xFF34C759, Channel.SYSTEM, body, null, currentTick, true);
+        }
+        Matcher added = ACCOUNT_ADDED.matcher(unformatted);
+        if (added.matches()) {
+            String amt = formatPayAmount(added.group("amt"));
+            return new AquaChatMessage(null, null, "system", "СИСТЕМА",
+                    0xFF34C759, Channel.SYSTEM, "Баланс + " + amt + " ¤.", null, currentTick, true);
+        }
+        Matcher taken = ACCOUNT_TAKEN.matcher(unformatted);
+        if (taken.matches()) {
+            String amt = formatPayAmount(taken.group("amt"));
+            return new AquaChatMessage(null, null, "system", "СИСТЕМА",
+                    0xFFFF9F43, Channel.SYSTEM, "Баланс − " + amt + " ¤.", null, currentTick, true);
         }
         return null;
     }
