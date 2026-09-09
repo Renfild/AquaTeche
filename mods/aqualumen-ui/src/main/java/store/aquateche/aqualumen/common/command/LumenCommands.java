@@ -12,6 +12,7 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.Blocks;
 import store.aquateche.aqualumen.common.service.FishShopConfig;
 import store.aquateche.aqualumen.common.service.HubDataService;
 import store.aquateche.aqualumen.common.service.MarketService;
@@ -48,6 +49,7 @@ public final class LumenCommands {
                 .then(Commands.literal("reload")
                         .requires(source -> source.hasPermission(2))
                         .executes(ctx -> reloadAll(ctx.getSource())))
+                .then(buildRtpCommand())
                 .then(buildKitCommands())
                 .then(buildWarpCommands())
                 .then(buildFishCommands());
@@ -286,5 +288,60 @@ public final class LumenCommands {
     private static int open(ServerPlayer player) {
         HubDataService.open(player);
         return 1;
+    }
+
+    private static LiteralArgumentBuilder<CommandSourceStack> buildRtpCommand() {
+        LiteralArgumentBuilder<CommandSourceStack> rtp = Commands.literal("rtp");
+        rtp.executes(ctx -> rtpSafe(ctx.getSource().getPlayerOrException(), false));
+        rtp.then(Commands.literal("nether")
+                .executes(ctx -> rtpSafe(ctx.getSource().getPlayerOrException(), true)));
+        rtp.then(Commands.literal("overworld")
+                .executes(ctx -> rtpSafe(ctx.getSource().getPlayerOrException(), false)));
+        return rtp;
+    }
+
+    /** Случайная безопасная точка: твёрдый пол, 2 блока воздуха, рядом нет лавы. */
+    private static int rtpSafe(ServerPlayer player, boolean nether) {
+        MinecraftServer server = player.getServer();
+        if (server == null) return 0;
+        var target = server.getLevel(nether
+                ? net.minecraft.world.level.Level.NETHER
+                : net.minecraft.world.level.Level.OVERWORLD);
+        if (target == null) return 0;
+        var random = target.getRandom();
+        var pos = player.blockPosition();
+        for (int attempt = 0; attempt < 40; attempt++) {
+            int x = (nether ? 200 : 2000) + random.nextInt(nether ? 400 : 4000) - (nether ? 200 : 2000);
+            int z = random.nextInt(nether ? 400 : 4000) - (nether ? 200 : 2000);
+            int minY = nether ? 32 : 60;
+            int maxY = nether ? 110 : (target.getMinBuildHeight() == -64 ? 200 : 250);
+            int y = random.nextInt(Math.max(1, maxY - minY)) + minY;
+            var cur = new net.minecraft.core.BlockPos(x, y, z);
+            boolean found = false;
+            while (cur.getY() > target.getMinBuildHeight() + 1) {
+                var floor = target.getBlockState(cur);
+                var feet = target.getBlockState(cur.above());
+                var head = target.getBlockState(cur.above(2));
+                if (floor.isSolidRender(target, cur) && feet.isAir() && head.isAir()) {
+                    boolean lavaNear = false;
+                    for (var d : net.minecraft.core.Direction.Plane.HORIZONTAL) {
+                        var around = target.getBlockState(cur.relative(d));
+                        if (around.is(Blocks.LAVA) || around.is(Blocks.FIRE)) { lavaNear = true; break; }
+                    }
+                    if (!lavaNear && !floor.is(Blocks.LAVA)) { found = true; }
+                    break;
+                }
+                cur = cur.below();
+            }
+            if (found) {
+                player.teleportTo(target, cur.getX() + 0.5, cur.getY() + 1.1, cur.getZ() + 0.5,
+                        player.getYRot(), 0.0F);
+                player.sendSystemMessage(Component.literal(
+                        "§a[RTP] §fТелепорт: §e" + cur.getX() + ", " + (cur.getY() + 1) + ", " + cur.getZ()));
+                return 1;
+            }
+        }
+        player.sendSystemMessage(Component.literal("§c[RTP] Не нашёл безопасное место, попробуй ещё раз."));
+        return 0;
     }
 }

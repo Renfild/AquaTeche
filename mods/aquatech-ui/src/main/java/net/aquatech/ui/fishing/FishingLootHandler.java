@@ -234,7 +234,15 @@ public class FishingLootHandler {
         OceanEventsService.onCatch(player, awarded);
 
         int xpAmount = Math.round((30 + type.ordinal() * 30) * (0.85f + quality / 200f));
+        // Сезонный пропуск: XP за каждый улов (редкость => больше сезонного опыта)
+        int seasonGain = 6;
+        for (ItemStack st : awarded) {
+            ResourceLocation rid = BuiltInRegistries.ITEM.getKey(st.getItem());
+            if (rid != null && "starcatcher".equals(rid.getNamespace())) seasonGain += 4;
+        }
+        final int seasonGainF = seasonGain;
         player.getCapability(net.aquatech.ui.capability.AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+            cap.addSeasonXp(seasonGainF);
             boolean levelUp = cap.addXp(xpAmount);
             if (levelUp) {
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(),

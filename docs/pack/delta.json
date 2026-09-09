@@ -1,33 +1,36 @@
 {
-  "from_version": "2.9.334",
-  "to_version": "2.9.335",
-  "added": [
+  "from_version": "2.9.335",
+  "to_version": "2.9.336",
+  "added": [],
+  "changed": [
     {
-      "path": "mods/aquatech_ui-1.0.83.jar",
-      "md5": "de9b26519ae598e143a649fb5db035ca",
-      "size": 2884235,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.83.jar",
-      "asset": "aquatech_ui-1.0.83.jar"
+      "path": "kubejs/server_scripts/36_balanced_tweaks.js",
+      "md5": "38cf7bbbaf9cbde6b7153eafc556ff46",
+      "size": 11483,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/36_balanced_tweaks.js",
+      "asset": "kubejs__server_scripts__36_balanced_tweaks.js"
     },
     {
-      "path": "mods/inventorysorter-1.20.1-23.1.9.jar",
-      "md5": "20ed7cabda94fdf41da01a38e1202dd2",
-      "size": 55856,
-      "url": "https://aquateche.store/pack/mods/inventorysorter-1.20.1-23.1.9.jar",
-      "asset": "inventorysorter-1.20.1-23.1.9.jar"
-    }
-  ],
-  "changed": [],
-  "removed": [
+      "path": "mods/aqualumen-forge-1.20.1-0.3.44-alpha.jar",
+      "md5": "97e037dc819845199cd4ff33381b746f",
+      "size": 2679534,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.44-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.44-alpha.jar"
+    },
     {
-      "path": "mods/aquatech_ui-1.0.82.jar"
+      "path": "mods/aquatech_ui-1.0.83.jar",
+      "md5": "2f645e3b7a4d45ffc0269d7838c72d14",
+      "size": 2884465,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.83.jar",
+      "asset": "aquatech_ui-1.0.83.jar"
     }
   ],
+  "removed": [],
   "stats": {
-    "added": 2,
-    "changed": 0,
-    "removed": 1,
-    "unchanged": 136,
-    "download_bytes": 2940091
+    "added": 0,
+    "changed": 3,
+    "removed": 0,
+    "unchanged": 135,
+    "download_bytes": 5575482
   }
 }

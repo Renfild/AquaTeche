@@ -709,6 +709,12 @@ public final class HubDataService {
             }
         }
 
+        // Анти-откат: уровень никогда не ниже самого высокого ЗАБРАННОГО тира —
+        // забранные награды доказывают, что уровень был достигнут.
+        int claimedMax = 1;
+        for (int t : claimedTiers) claimedMax = Math.max(claimedMax, t);
+        tier = Math.max(tier, claimedMax);
+
         return new SeasonData(title, Math.max(1, Math.min(maxTier, tier)), maxTier, progress, premium, claimable, claimedTiers);
     }
 
