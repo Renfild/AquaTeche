@@ -60,5 +60,6 @@
   "tooltip.aquatech_ui.auto_fisher.status.working": "§a✓ Статус: Идет вылавливание ресурсов...",
   "tooltip.aquatech_ui.auto_fisher.status.no_energy": "§c✗ Статус: Нет энергии (Требуется 25 FE/t — Единая Энергия)",
   "block.aquatech_ui.fish_smoker": "Коптильня",
-  "item.aquatech_ui.fish_meal": "Рыбная мука"
+  "item.aquatech_ui.fish_meal": "Рыбная мука",
+  "item.aquatech_ui.abyssal_pearl": "Жемчужина Разлома"
 }

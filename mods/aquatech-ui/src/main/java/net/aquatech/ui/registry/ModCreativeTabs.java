@@ -39,6 +39,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.ABYSSAL_PORTAL_ITEM.get());
                         output.accept(ModItems.FISH_SMOKER_ITEM.get());
                         output.accept(ModItems.FISH_MEAL.get());
+                        output.accept(ModItems.ABYSSAL_PEARL.get());
                         output.accept(ModItems.KELP_BIO_PELLET.get());
                     })
                     .build());

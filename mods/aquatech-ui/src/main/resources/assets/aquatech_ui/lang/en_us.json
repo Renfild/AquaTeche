@@ -61,5 +61,6 @@
   "tooltip.aquatech_ui.auto_fisher.status.working": "§a✓ Status: Catching resources...",
   "tooltip.aquatech_ui.auto_fisher.status.no_energy": "§c✗ Status: Out of energy (Requires 25 FE/t — Unified Energy)",
   "block.aquatech_ui.fish_smoker": "Fish Smoker",
-  "item.aquatech_ui.fish_meal": "Fish Meal"
+  "item.aquatech_ui.fish_meal": "Fish Meal",
+  "item.aquatech_ui.abyssal_pearl": "Abyssal Pearl of the Rift"
 }
