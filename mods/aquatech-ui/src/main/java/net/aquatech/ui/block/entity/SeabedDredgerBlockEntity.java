@@ -45,8 +45,8 @@ public class SeabedDredgerBlockEntity extends BlockEntity implements MenuProvide
 
     public static final int CAPACITY = 50000;
     public static final int MAX_RECEIVE = 1000;
-    public static final int ENERGY_PER_TICK = 50;
-    public static final int MAX_PROGRESS = 100;
+    public static final int ENERGY_PER_TICK = 35;
+    public static final int MAX_PROGRESS = 60;
     public static final int UPGRADE_SLOT = 10;
 
     public static class DredgerEnergyStorage extends net.minecraftforge.energy.EnergyStorage {
@@ -212,12 +212,16 @@ public class SeabedDredgerBlockEntity extends BlockEntity implements MenuProvide
         List<ItemStack> dredgedLoot = new ArrayList<>();
         float rng = level.getRandom().nextFloat();
 
-        if (rng < 0.65f) dredgedLoot.add(new ItemStack(Items.SAND, 2 + level.getRandom().nextInt(4)));
-        if (rng < 0.50f) dredgedLoot.add(new ItemStack(Items.QUARTZ, 1 + level.getRandom().nextInt(3)));
-        if (rng < 0.40f) dredgedLoot.add(getModItem("ae2:certus_quartz_crystal", Items.QUARTZ, 1 + level.getRandom().nextInt(2)));
-        if (rng < 0.25f) dredgedLoot.add(getModItem("ae2:charged_certus_quartz_crystal", Items.QUARTZ, 1));
-        if (rng < 0.35f) dredgedLoot.add(getModItem("ae2:sky_stone_block", Items.STONE, 1 + level.getRandom().nextInt(2)));
-        if (rng < 0.30f) dredgedLoot.add(getModItem("ae2:sky_dust", Items.SAND, 1 + level.getRandom().nextInt(2)));
+        if (rng < 0.75f) dredgedLoot.add(new ItemStack(Items.SAND, 3 + level.getRandom().nextInt(4)));
+        if (rng < 0.60f) dredgedLoot.add(new ItemStack(Items.QUARTZ, 2 + level.getRandom().nextInt(3)));
+        if (rng < 0.55f) dredgedLoot.add(getModItem("ae2:certus_quartz_crystal", Items.QUARTZ, 2 + level.getRandom().nextInt(2)));
+        if (rng < 0.40f) dredgedLoot.add(getModItem("ae2:charged_certus_quartz_crystal", Items.QUARTZ, 1 + level.getRandom().nextInt(2)));
+        if (rng < 0.45f) dredgedLoot.add(getModItem("ae2:sky_stone_block", Items.STONE, 1 + level.getRandom().nextInt(3)));
+        if (rng < 0.40f) dredgedLoot.add(getModItem("ae2:sky_dust", Items.SAND, 1 + level.getRandom().nextInt(3)));
+        if (rng < 0.45f) dredgedLoot.add(getModItem("ae2:fluix_crystal", Items.QUARTZ, 1 + level.getRandom().nextInt(2)));
+        if (rng < 0.35f) dredgedLoot.add(getModItem("botania:manasteel_ingot", Items.IRON_INGOT, 1 + level.getRandom().nextInt(2)));
+        if (rng < 0.25f) dredgedLoot.add(getModItem("botania:elementium_ingot", Items.IRON_INGOT, 1));
+        if (rng < 0.12f) dredgedLoot.add(getModItem("botania:terrasteel_ingot", Items.IRON_INGOT, 1));
         if (rng < 0.20f) dredgedLoot.add(getModItem("ae2:fluix_crystal", Items.QUARTZ, 1));
         if (dredgedLoot.isEmpty()) dredgedLoot.add(new ItemStack(Items.SAND, 3));
 

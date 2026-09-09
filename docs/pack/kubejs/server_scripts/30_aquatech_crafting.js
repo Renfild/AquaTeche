@@ -244,6 +244,9 @@ ServerEvents.recipes((event) => {
     }).id('aquatech:kelp_bio_pellet')
   }
 
+  // Разгрузчик сумок (Celestial/Item Manipulator) убран из крафта
+  event.remove({ output: 'industrialupgrade:basemachine3/itemmanipulator' })
+
   // Fish Smoker (Коптильня) — smokes fish (×2 in fish shop), grinds junk fish into fish meal
   event.shaped('aquatech_ui:fish_smoker', ['III', 'FCF', 'PPP'], {
     I: 'minecraft:iron_ingot',
@@ -253,11 +256,12 @@ ServerEvents.recipes((event) => {
   }).id('aquatech:fish_smoker')
 
   // Жемчужина Разлома — телепорт в Энд и обратно (кулдаун 10 мин)
-  event.shaped('aquatech_ui:abyssal_pearl', ['PDP', 'OHO', 'PDP'], {
+  event.shaped('aquatech_ui:abyssal_pearl', ['NSN', 'PHP', 'NPO'], {
+    N: 'minecraft:nether_star',
+    S: 'minecraft:netherite_scrap',
     P: 'minecraft:ender_pearl',
-    D: 'minecraft:diamond',
-    O: 'minecraft:obsidian',
     H: 'minecraft:heart_of_the_sea',
+    O: 'minecraft:obsidian',
   }).id('aquatech:abyssal_pearl')
 
   // Fish meal closes the junk-fish loop: meal back into smoker fuel
