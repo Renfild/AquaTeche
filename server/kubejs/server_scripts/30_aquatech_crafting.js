@@ -219,14 +219,6 @@ ServerEvents.recipes((event) => {
   event.remove({ id: 'aquatech_ui:auto_fisher' })
   event.remove({ id: 'aquatech:auto_fisher' })
   event.remove({ id: 'aquatech_ui:auto_fisher_jar' })
-  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SES'], {
-    I: 'industrialupgrade:itemingots/aluminium_ingot',
-    F: 'starcatcher:good_old_rod',
-    R: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic Circuit
-    C: 'minecraft:chest',
-    S: 'industrialupgrade:blockresource/reinforced_stone',
-    E: 'industrialupgrade:crafting_elements/crafting_20_element', // Improved Electric Motor
-  }).id('aquatech:auto_fisher')
 
   event.shaped('aquatech_ui:seabed_dredger', ['DBD', 'RCR', 'SSS'], {
     D: 'aquatech_ui:dredger_drill_bit',
@@ -244,6 +236,21 @@ ServerEvents.recipes((event) => {
     }).id('aquatech:kelp_bio_pellet')
   }
 
+  // Устаревшие машины выведены из крафта (будут заменены новыми: рыболов, экскаватор, экстрактор)
+  const DEAD_MACHINES = [
+    'aquatech_ui:auto_fisher',
+    'aquatech_ui:ocean_altar',
+    'aquatech_ui:abyssal_portal',
+    'industrialupgrade:basemachine3/bio_extractor',
+  ]
+  for (const m of DEAD_MACHINES) {
+    event.remove({ output: m })
+    event.remove({ input: m })
+  }
+
+  // Разгрузчик сумок (Celestial/Item Manipulator) убран из крафта
+  event.remove({ output: 'industrialupgrade:basemachine3/itemmanipulator' })
+
   // Fish Smoker (Коптильня) — smokes fish (×2 in fish shop), grinds junk fish into fish meal
   event.shaped('aquatech_ui:fish_smoker', ['III', 'FCF', 'PPP'], {
     I: 'minecraft:iron_ingot',
@@ -251,6 +258,15 @@ ServerEvents.recipes((event) => {
     C: 'aquatech_ui:kelp_bio_pellet',
     P: 'minecraft:prismarine_shard',
   }).id('aquatech:fish_smoker')
+
+  // Жемчужина Разлома — телепорт в Энд и обратно (кулдаун 10 мин)
+  event.shaped('aquatech_ui:abyssal_pearl', ['NSN', 'PHP', 'NPO'], {
+    N: 'minecraft:nether_star',
+    S: 'minecraft:netherite_scrap',
+    P: 'minecraft:ender_pearl',
+    H: 'minecraft:heart_of_the_sea',
+    O: 'minecraft:obsidian',
+  }).id('aquatech:abyssal_pearl')
 
   // Fish meal closes the junk-fish loop: meal back into smoker fuel
   event.shapeless(Item.of('aquatech_ui:kelp_bio_pellet', 3), [

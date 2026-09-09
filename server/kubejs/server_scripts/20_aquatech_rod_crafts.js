@@ -71,81 +71,75 @@ ServerEvents.recipes((event) => {
 
     // Tier 4: Iceborn Rod (Diamond Tier)
     event.remove({ output: 'starcatcher:iceborn_rod' })
-    event.shaped('starcatcher:iceborn_rod', [' A2', ' IR', 'I 1'], {
-      A: 'industrialupgrade:baseore/silver',
-      I: 'industrialupgrade:baseore/aluminium',
-      1: 'minecraft:lapis_lazuli',
-      2: 'minecraft:iron_ingot',
+    event.shaped('starcatcher:iceborn_rod', ['DAD', 'SDR', 'DAD'], {
+      D: 'minecraft:diamond_block',
+      A: 'industrialupgrade:baseore/aluminium',
+      S: 'industrialupgrade:baseore/silver',
+      D2: 'minecraft:diamond',
       R: 'starcatcher:slimed_rod',
     }).id('aquatech:iceborn_rod_craft')
 
     // Tier 5: StarCatcher Rod
     event.remove({ output: 'starcatcher:starcatcher_rod' })
-    event.shaped('starcatcher:starcatcher_rod', [' S2', ' GR', 'G 1'], {
+    event.shaped(Item.of('starcatcher:starcatcher_rod'), ['GSG', 'NRN', 'DGD'], {
       S: 'industrialupgrade:preciousgem/sapphire_gem',
       G: 'industrialupgrade:baseore/tungsten',
-      1: 'industrialupgrade:baseore/chromium',
-      2: 'minecraft:gold_ingot',
+      N: 'industrialupgrade:preciousgem/topaz_gem',
+      D: 'minecraft:diamond_block',
       R: 'starcatcher:iceborn_rod',
     }).id('aquatech:starcatcher_rod_craft')
 
     // Tier 6: Azure Crystal Rod
     event.remove({ output: 'starcatcher:azure_crystal_rod' })
-    event.shaped('starcatcher:azure_crystal_rod', [' C2', ' AR', 'A 1'], {
-      C: 'industrialupgrade:preciousgem/topaz_gem',
-      A: 'minecraft:gold_ingot',
-      1: 'industrialupgrade:mineral/crystal',
-      2: 'minecraft:lapis_lazuli',
+    event.shaped('starcatcher:azure_crystal_rod', ['TCT', 'ARA', 'TCT'], {
+      T: 'industrialupgrade:preciousgem/topaz_gem',
+      C: 'industrialupgrade:mineral/crystal',
+      A: 'minecraft:gold_block',
       R: 'starcatcher:starcatcher_rod',
     }).id('aquatech:azure_crystal_rod_craft')
 
     // Tier 7: Sharktooth Rod
     event.remove({ output: 'starcatcher:sharktooth_rod' })
-    event.shaped('starcatcher:sharktooth_rod', [' T2', ' CR', 'C 1'], {
+    event.shaped('starcatcher:sharktooth_rod', ['TCT', 'NRN', 'TCT'], {
       T: 'industrialupgrade:baseore/titanium',
       C: 'industrialupgrade:baseore/cobalt',
-      1: 'minecraft:diamond',
-      2: 'minecraft:iron_ingot',
+      N: 'minecraft:netherite_scrap',
       R: 'starcatcher:azure_crystal_rod',
     }).id('aquatech:sharktooth_rod_craft')
 
     // Tier 8: Obsidian Rod
     event.remove({ output: 'starcatcher:obsidian_rod' })
-    event.shaped('starcatcher:obsidian_rod', [' D2', ' SR', 'S 1'], {
+    event.shaped('starcatcher:obsidian_rod', ['DND', 'OSO', 'DND'], {
       D: 'minecraft:diamond_block',
+      N: 'minecraft:netherite_ingot',
+      O: 'minecraft:crying_obsidian',
       S: 'industrialupgrade:alloyingot/stainless_steel',
-      1: 'minecraft:crying_obsidian',
-      2: 'minecraft:gold_ingot',
       R: 'starcatcher:sharktooth_rod',
     }).id('aquatech:obsidian_rod_craft')
 
     // Tier 9: Lush Glowberry Rod
     event.remove({ output: 'starcatcher:lush_glowberry_rod' })
-    event.shaped('starcatcher:lush_glowberry_rod', [' H2', ' PR', 'P 1'], {
+    event.shaped('starcatcher:lush_glowberry_rod', ['HHH', 'PRP', 'PPP'], {
       H: 'minecraft:heart_of_the_sea',
       P: 'industrialupgrade:baseore/platinum',
-      1: 'minecraft:sea_lantern',
-      2: 'minecraft:gold_ingot',
       R: 'starcatcher:obsidian_rod',
     }).id('aquatech:lush_glowberry_rod_craft')
 
     // Tier 10: Magmaforged Rod
     event.remove({ output: 'starcatcher:magmaforged_rod' })
-    event.shaped('starcatcher:magmaforged_rod', [' U2', ' IR', 'I 1'], {
+    event.shaped('starcatcher:magmaforged_rod', ['UIU', 'NRN', 'UIU'], {
       U: 'industrialupgrade:crushed/uranium',
       I: 'industrialupgrade:alloyingot/inconel',
-      1: 'minecraft:netherite_ingot',
-      2: 'minecraft:nether_star',
+      N: 'minecraft:nether_star',
       R: 'starcatcher:lush_glowberry_rod',
     }).id('aquatech:magmaforged_rod_craft')
 
     // Tier 11: Alpha Rod
     event.remove({ output: 'starcatcher:alpha_rod' })
-    event.shaped('starcatcher:alpha_rod', [' N2', ' QR', 'Q 1'], {
+    event.shaped('starcatcher:alpha_rod', ['NQN', 'DRD', 'NQN'], {
       N: 'minecraft:nether_star',
       Q: 'industrialupgrade:alloyingot/osmiridium',
-      1: 'minecraft:netherite_ingot',
-      2: 'minecraft:diamond',
+      D: 'minecraft:dragon_breath',
       R: 'starcatcher:magmaforged_rod',
     }).id('aquatech:alpha_rod_craft')
   }

@@ -219,14 +219,6 @@ ServerEvents.recipes((event) => {
   event.remove({ id: 'aquatech_ui:auto_fisher' })
   event.remove({ id: 'aquatech:auto_fisher' })
   event.remove({ id: 'aquatech_ui:auto_fisher_jar' })
-  event.shaped('aquatech_ui:auto_fisher', ['IFI', 'RCR', 'SES'], {
-    I: 'industrialupgrade:itemingots/aluminium_ingot',
-    F: 'starcatcher:good_old_rod',
-    R: 'industrialupgrade:crafting_elements/crafting_272_element', // Electronic Circuit
-    C: 'minecraft:chest',
-    S: 'industrialupgrade:blockresource/reinforced_stone',
-    E: 'industrialupgrade:crafting_elements/crafting_20_element', // Improved Electric Motor
-  }).id('aquatech:auto_fisher')
 
   event.shaped('aquatech_ui:seabed_dredger', ['DBD', 'RCR', 'SSS'], {
     D: 'aquatech_ui:dredger_drill_bit',
