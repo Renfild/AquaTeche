@@ -1,5 +1,5 @@
 {
-  "version": "2.9.324",
+  "version": "2.9.325",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -42,11 +42,11 @@
       "asset": "aqualumen-forge-1.20.1-0.3.43-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.75.jar",
-      "md5": "c74fc208131ef6b176c6cd95fc58ba00",
-      "size": 2871866,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.75.jar",
-      "asset": "aquatech_ui-1.0.75.jar"
+      "path": "mods/aquatech_ui-1.0.76.jar",
+      "md5": "4b05337176b1bd31011dbd27f9f23bb3",
+      "size": 2871975,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.76.jar",
+      "asset": "aquatech_ui-1.0.76.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -512,8 +512,8 @@
     },
     {
       "path": "config/aqualumen/fish_shop.json",
-      "md5": "f514b006db190734ac227a37cce75be0",
-      "size": 18874,
+      "md5": "b555f0b0a9e4f63cfb07402036f54cdb",
+      "size": 19150,
       "url": "https://aquateche.store/pack/config/aqualumen/fish_shop.json",
       "asset": "config__aqualumen__fish_shop.json"
     },
