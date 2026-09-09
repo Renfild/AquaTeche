@@ -448,6 +448,8 @@ python scripts/tasks/smoke_apex_server.py              # verify
   - Интерактивный демо-режим для гостей без списания монет и реальная боевая прокрутка для авторизованных игроков с подключением к Cloudflare D1 (`/api/cases/open`), транзакционным списанием монет и автоматической очередью выдачи `pending_commands`.
   - Успешный деплой на Cloudflare Worker (`https://aquateche.store`) и Pages (`https://aquatech-7gs.pages.dev`), сквозная верификация через headless-браузер.
 
+| **2026-09-09** | `v2.8.53` | ZCode AI | **Коптильня + свежесть (2.9.318/319) и детальные модели машин (2.9.320).** Коптильня (fish_smoker): рыба starcatcher + биогранула = копчёная ×2 в магазине, мелочь ≤55 монет → рыбная мука; свежесть улова +20% за 30 мин (NBT AquaCaughtAt), тултип с таймером; блок с LIT-текстурой, контракт MACHINE видит. Фиксы: слот выхода коптильни разрешает вставку (Forge insertItemRespecting isItemValid), вход только starcatcher без повторного копчения, крафт мука→гранулы добавлен и в server/kubejs (сервер-авторитетные рецепты). Детальные Blockbench-модели 6 машин (portal/filter/altar/dredger/hydro/smoker) собраны через MCP и установлены в мод как ванильные JSON + 64px текстуры (block/machines/); idle/work анимации — в bbmodel на Desktop. MCP-плагин пропатчен (сессии не протухают, ремап stale id) и переустановлен локально; скилл blockbench-modeling создан. aquatech_ui **1.0.71**, aqualumen **0.3.43-alpha**, пак **2.9.320**. | `block/FishSmokerBlock.java`, `block/entity/FishSmokerBlockEntity.java`, `FishShopConfig.java`, `FishingLootHandler.java`, `kubejs/server_scripts/30_aquatech_crafting.js`, `models/block/*.json`, `textures/block/machines/` |
+
 ### 6. Git-коммиты спринта (для blame)
 
 ```
