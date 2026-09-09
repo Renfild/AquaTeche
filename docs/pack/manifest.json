@@ -1,5 +1,5 @@
 {
-  "version": "2.9.326",
+  "version": "2.9.327",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -42,11 +42,11 @@
       "asset": "aqualumen-forge-1.20.1-0.3.44-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.77.jar",
-      "md5": "c442a4784313c3e5ceca305e4a49fe49",
-      "size": 2871975,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.77.jar",
-      "asset": "aquatech_ui-1.0.77.jar"
+      "path": "mods/aquatech_ui-1.0.78.jar",
+      "md5": "202893ae2bc8268ea04b6f1441a389c1",
+      "size": 2875888,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.78.jar",
+      "asset": "aquatech_ui-1.0.78.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -834,8 +834,8 @@
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "bccab1b19f882f513987cf9630f9bedf",
-      "size": 16983,
+      "md5": "19692f3537ff591782051d10f65ac033",
+      "size": 17328,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
