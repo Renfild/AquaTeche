@@ -71,6 +71,7 @@ import {
   onRequestDelete as adminNewsDelete,
 } from "../functions/api/admin/news/[id].js";
 import { onRequestGet as newsGet } from "../functions/api/news.js";
+import { onRequestPost as tgWebhookPost } from "../functions/api/tg-webhook.js";
 import { onRequestGet as siteGet } from "../functions/api/site.js";
 import { sessionCookie } from "../functions/_lib/auth.js";
 import { withSecurityHeaders } from "../functions/_lib/http.js";
@@ -103,6 +104,7 @@ async function handleApi(request, env) {
   if (path === "/api/catalog" && method === "GET") return catalogGet(ctx(request, env));
   if (path === "/api/server-status" && method === "GET") return serverStatusGet(ctx(request, env));
   if (path === "/api/news" && method === "GET") return newsGet(ctx(request, env));
+  if (path === "/api/tg-webhook" && method === "POST") return tgWebhookPost({ request, env, params: {} });
   if (path === "/api/site" && method === "GET") return siteGet(ctx(request, env));
   if (path === "/api/sync/player") {
     if (method === "POST") return syncPlayerPost(ctx(request, env));
