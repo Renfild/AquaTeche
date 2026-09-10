@@ -268,6 +268,14 @@ ServerEvents.recipes((event) => {
     O: 'minecraft:obsidian',
   }).id('aquatech:abyssal_pearl')
 
+  // Жемчужина Пламени — телепорт в Ад и обратно (кулдаун 10 мин)
+  event.shaped('kubejs:infernal_pearl', ['BNB', 'NPN', 'OBO'], {
+    B: 'minecraft:blaze_powder',
+    N: 'minecraft:nether_brick',
+    P: 'minecraft:ender_pearl',
+    O: 'minecraft:obsidian',
+  }).id('aquatech:infernal_pearl')
+
   // Fish meal closes the junk-fish loop: meal back into smoker fuel
   event.shapeless(Item.of('aquatech_ui:kelp_bio_pellet', 3), [
     'aquatech_ui:fish_meal',
@@ -283,16 +291,8 @@ ServerEvents.recipes((event) => {
   event.remove({ id: 'aquatech_ui:double_hook_upgrade' })
   event.remove({ output: 'aquatech_ui:double_hook_upgrade' })
 
-  if (Item.exists('aquatech_ui:ocean_altar')) {
-    event.shaped('aquatech_ui:ocean_altar', ['EHE', 'PCP', 'ONO'], {
-      E: 'minecraft:echo_shard',
-      H: 'minecraft:heart_of_the_sea',
-      P: 'minecraft:prismarine_shard',
-      C: 'minecraft:crying_obsidian',
-      O: 'minecraft:obsidian',
-      N: 'minecraft:nether_star',
-    }).id('aquatech:ocean_altar')
-  }
+  event.remove({ id: 'aquatech:ocean_altar' })
+  event.remove({ output: 'aquatech_ui:ocean_altar' })
 
   event.remove({ id: 'aquatech:ocean_guide_book' })
   event.remove({ output: 'aquatech_ui:ocean_guide_book' })

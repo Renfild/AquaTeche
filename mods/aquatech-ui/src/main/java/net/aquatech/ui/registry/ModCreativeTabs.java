@@ -3,10 +3,14 @@ package net.aquatech.ui.registry;
 import net.aquatech.ui.AquaTechUI;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModCreativeTabs {
@@ -35,11 +39,13 @@ public class ModCreativeTabs {
                         output.accept(ModItems.AUTO_FISHER_ITEM.get());
                         output.accept(ModItems.OCEAN_FILTER_ITEM.get());
                         output.accept(ModItems.SEABED_DREDGER_ITEM.get());
-                        output.accept(ModItems.OCEAN_ALTAR_ITEM.get());
-                        output.accept(ModItems.ABYSSAL_PORTAL_ITEM.get());
                         output.accept(ModItems.FISH_SMOKER_ITEM.get());
                         output.accept(ModItems.FISH_MEAL.get());
                         output.accept(ModItems.ABYSSAL_PEARL.get());
+                        Item infernal = ForgeRegistries.ITEMS.getValue(new ResourceLocation("kubejs", "infernal_pearl"));
+                        if (infernal != null && infernal != Items.AIR) {
+                            output.accept(infernal);
+                        }
                         output.accept(ModItems.KELP_BIO_PELLET.get());
                     })
                     .build());
