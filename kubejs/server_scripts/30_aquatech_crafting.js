@@ -214,19 +214,16 @@ ServerEvents.recipes((event) => {
   event.remove({ id: 'aquatech:abyssal_magnet' })
 
   // One auto-fisher craft (also clears jar datapack duplicate)
-  // FIX: was craftable on vanilla table from cheap iron — now requires MV-tier IU parts.
   event.remove({ output: 'aquatech_ui:auto_fisher' })
   event.remove({ id: 'aquatech_ui:auto_fisher' })
   event.remove({ id: 'aquatech:auto_fisher' })
   event.remove({ id: 'aquatech_ui:auto_fisher_jar' })
-
-  event.shaped('aquatech_ui:seabed_dredger', ['DBD', 'RCR', 'SSS'], {
-    D: 'aquatech_ui:dredger_drill_bit',
-    B: 'minecraft:iron_block',
-    R: 'industrialupgrade:crafting_elements/crafting_273_element',
-    S: 'minecraft:smooth_stone',
-    C: 'minecraft:chest',
-  }).id('aquatech:seabed_dredger')
+  event.remove({ id: 'aquatech:seabed_dredger' })
+  event.remove({ output: 'aquatech_ui:seabed_dredger' })
+  event.remove({ id: 'aquatech:fish_smoker' })
+  event.remove({ output: 'aquatech_ui:fish_smoker' })
+  event.remove({ id: 'aquatech_ui:ocean_filter' })
+  event.remove({ output: 'aquatech_ui:ocean_filter' })
 
   event.remove({ id: 'aquatech_ui:kelp_bio_pellet' })
   if (Item.exists('aquatech_ui:kelp_bio_pellet')) {
@@ -236,9 +233,12 @@ ServerEvents.recipes((event) => {
     }).id('aquatech:kelp_bio_pellet')
   }
 
-  // Устаревшие машины выведены из крафта (будут заменены новыми: рыболов, экскаватор, экстрактор)
+  // Машины AquaTech выведены: нет крафта, нет GUI
   const DEAD_MACHINES = [
     'aquatech_ui:auto_fisher',
+    'aquatech_ui:ocean_filter',
+    'aquatech_ui:seabed_dredger',
+    'aquatech_ui:fish_smoker',
     'aquatech_ui:ocean_altar',
     'aquatech_ui:abyssal_portal',
     'industrialupgrade:basemachine3/bio_extractor',
@@ -251,14 +251,6 @@ ServerEvents.recipes((event) => {
   // Разгрузчик сумок (Celestial/Item Manipulator) убран из крафта
   event.remove({ output: 'industrialupgrade:basemachine3/itemmanipulator' })
 
-  // Fish Smoker (Коптильня) — smokes fish (×2 in fish shop), grinds junk fish into fish meal
-  event.shaped('aquatech_ui:fish_smoker', ['III', 'FCF', 'PPP'], {
-    I: 'minecraft:iron_ingot',
-    F: 'minecraft:campfire',
-    C: 'aquatech_ui:kelp_bio_pellet',
-    P: 'minecraft:prismarine_shard',
-  }).id('aquatech:fish_smoker')
-
   // Жемчужина Разлома — телепорт в Энд и обратно (кулдаун 10 мин)
   event.shaped('aquatech_ui:abyssal_pearl', ['NSN', 'PHP', 'NPO'], {
     N: 'minecraft:nether_star',
@@ -269,7 +261,7 @@ ServerEvents.recipes((event) => {
   }).id('aquatech:abyssal_pearl')
 
   // Жемчужина Пламени — телепорт в Ад и обратно (кулдаун 10 мин)
-  event.shaped('kubejs:infernal_pearl', ['BNB', 'NPN', 'OBO'], {
+  event.shaped('aquatech_ui:infernal_pearl', ['BNB', 'NPN', 'OBO'], {
     B: 'minecraft:blaze_powder',
     N: 'minecraft:nether_brick',
     P: 'minecraft:ender_pearl',
@@ -394,7 +386,7 @@ ServerEvents.recipes((event) => {
   let key3x3 = {
     C: cItem,
     T: tItem,
-    F: 'aquatech_ui:auto_fisher',
+    F: 'aquatech_ui:abyssal_magnet',
     I: iItem,
     L: lItem,
     A: aItem,
@@ -425,7 +417,7 @@ ServerEvents.recipes((event) => {
       : { item: 'industrialupgrade:alloyingot/osmiridium' },
     I: { item: 'industrialupgrade:alloyingot/inconel' },
     A: { item: 'industrialupgrade:alloyingot/osmiridium' },
-    F: { item: 'aquatech_ui:auto_fisher' },
+    F: { item: 'aquatech_ui:abyssal_magnet' },
   }
 
   // 3. 9x9 Pattern (Extreme / Ultimate Table)

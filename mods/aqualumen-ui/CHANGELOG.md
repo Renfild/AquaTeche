@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.46-alpha — web hub only
+
+- Native Java `HubScreen` / `HubTabs` removed. F4 is MCEF `hub.html` only.
+- If Chromium fails, hub closes. No native fallback.
+
+## 0.3.45-alpha — AquaLumen web hub
+
+- F4 is the MCEF web hub. Native `HubScreen` only if Chromium missing.
+- Header default is AquaLumen, not TechnoAqua. `VERSION` matches `gradle.properties`.
+
 ## 0.3.37-alpha — ревеал кейса: награда, кнопки, звук
 
 - После спина рулетка больше не зависает на «Крутим рулетку…» (`iconHtml` был не определён и ронял `reveal()`).

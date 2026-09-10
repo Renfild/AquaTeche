@@ -53,8 +53,18 @@ print(f"  Uploaded {aquatech_ui_jar.name}")
 
 sftp.put(str(ROOT / "server/config/aqualumen/cases.json"), "config/aqualumen/cases.json")
 print("  Uploaded config/aqualumen/cases.json")
-sftp.put(str(ROOT / "server/kubejs/server_scripts/30_aquatech_crafting.js"), "kubejs/server_scripts/30_aquatech_crafting.js")
-print("  Uploaded kubejs/server_scripts/30_aquatech_crafting.js")
+kubejs_uploads = [
+    (ROOT / "server/kubejs/server_scripts/30_aquatech_crafting.js", "kubejs/server_scripts/30_aquatech_crafting.js"),
+    (ROOT / "server/kubejs/server_scripts/zz_infernal_pearl.js", "kubejs/server_scripts/zz_infernal_pearl.js"),
+    (ROOT / "server/kubejs/startup_scripts/zz_infernal_pearl.js", "kubejs/startup_scripts/zz_infernal_pearl.js"),
+    (ROOT / "server/config/aqualumen-common.toml", "config/aqualumen-common.toml"),
+]
+for local, remote in kubejs_uploads:
+    if not local.is_file():
+        print(f"  skip missing {local}")
+        continue
+    sftp.put(str(local), remote)
+    print(f"  Uploaded {remote}")
 
 for lp_file in (ROOT / "server/plugins/LuckPerms/yaml-storage/groups").glob("*.yml"):
     remote_lp = f"plugins/LuckPerms/yaml-storage/groups/{lp_file.name}"

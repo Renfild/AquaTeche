@@ -13,15 +13,15 @@ public final class HubScreenFactory {
 
     public static Screen create(String initialTab) {
         if (!ModList.get().isLoaded("mcef")) {
-            AquaLumenUI.LOGGER.info("[AquaLumen CEF] MCEF absent, using native hub");
-            return new HubScreen();
+            AquaLumenUI.LOGGER.error("[AquaLumen CEF] MCEF absent, hub unavailable");
+            return null;
         }
         try {
             Class<?> type = Class.forName(WEB_SCREEN);
             return (Screen) type.getConstructor(String.class).newInstance(initialTab);
         } catch (Throwable error) {
-            AquaLumenUI.LOGGER.warn("[AquaLumen CEF] web screen failed, using native hub: {}", error.toString());
-            return new HubScreen();
+            AquaLumenUI.LOGGER.error("[AquaLumen CEF] web hub failed: {}", error.toString());
+            return null;
         }
     }
 }

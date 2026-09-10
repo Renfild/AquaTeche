@@ -45,7 +45,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         double scale = minecraft.getWindow().getGuiScale();
         bridge = new LumenWebBridge((int) Math.ceil(width * scale), (int) Math.ceil(height * scale));
         if (!bridge.isAvailable()) {
-            fallbackToNative("browser unavailable");
+            abort("browser unavailable");
             return;
         }
         pendingSnapshot = LumenClient.snapshot();
@@ -74,19 +74,21 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
             return;
         }
         if (!pageReady && ++pageWaitTicks >= PAGE_READY_TIMEOUT_TICKS) {
-            fallbackToNative("page readiness timeout");
+            abort("page readiness timeout");
             return;
         }
         pushSnapshot();
     }
 
-    private void fallbackToNative(String reason) {
-        AquaLumenUI.LOGGER.warn("[AquaLumen CEF] {}, using native hub", reason);
+    private void abort(String reason) {
+        AquaLumenUI.LOGGER.warn("[AquaLumen CEF] {}", reason);
         if (bridge != null) {
             bridge.close();
             bridge = null;
         }
-        minecraft.setScreen(new HubScreen());
+        if (minecraft != null && minecraft.screen == this) {
+            minecraft.setScreen(null);
+        }
     }
 
     @Override
@@ -119,7 +121,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
             switch (type) {
                 case "ready" -> {
                     if (root.has("page") && !root.get("page").getAsBoolean()) {
-                        fallbackToNative("hub page script failed");
+                        abort("hub page script failed");
                         return;
                     }
                     pageReady = true;

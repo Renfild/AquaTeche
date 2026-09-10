@@ -14,7 +14,7 @@
 
 #Season / battle pass
 [season]
-	serverName = "aquaTeche • TechnoAqua"
+	serverName = "AquaLumen"
 	title = "Сезон 1 — Глубина"
 	#Range: 1 ~ 500
 	maxTier = 50

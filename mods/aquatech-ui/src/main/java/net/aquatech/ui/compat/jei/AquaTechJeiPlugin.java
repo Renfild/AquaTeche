@@ -23,6 +23,18 @@ public class AquaTechJeiPlugin implements IModPlugin {
     @Override
     public void onRuntimeAvailable(IJeiRuntime runtime) {
         jeiRuntime = runtime;
+        try {
+            java.util.List<net.minecraft.world.item.ItemStack> hide = java.util.List.of(
+                    new net.minecraft.world.item.ItemStack(net.aquatech.ui.registry.ModItems.AUTO_FISHER_ITEM.get()),
+                    new net.minecraft.world.item.ItemStack(net.aquatech.ui.registry.ModItems.OCEAN_FILTER_ITEM.get()),
+                    new net.minecraft.world.item.ItemStack(net.aquatech.ui.registry.ModItems.SEABED_DREDGER_ITEM.get()),
+                    new net.minecraft.world.item.ItemStack(net.aquatech.ui.registry.ModItems.FISH_SMOKER_ITEM.get()),
+                    new net.minecraft.world.item.ItemStack(net.aquatech.ui.registry.ModItems.OCEAN_ALTAR_ITEM.get()),
+                    new net.minecraft.world.item.ItemStack(net.aquatech.ui.registry.ModItems.ABYSSAL_PORTAL_ITEM.get())
+            );
+            runtime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, hide);
+        } catch (Throwable ignored) {
+        }
     }
 
     @Override

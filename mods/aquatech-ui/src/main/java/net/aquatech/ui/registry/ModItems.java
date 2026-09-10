@@ -77,6 +77,9 @@ public class ModItems {
     public static final RegistryObject<Item> ABYSSAL_PEARL = ITEMS.register("abyssal_pearl",
             () -> new net.aquatech.ui.item.AbyssalPearlItem(new Item.Properties().stacksTo(1).fireResistant()));
 
+    public static final RegistryObject<Item> INFERNAL_PEARL = ITEMS.register("infernal_pearl",
+            () -> new net.aquatech.ui.item.InfernalPearlItem(new Item.Properties().stacksTo(1).fireResistant()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

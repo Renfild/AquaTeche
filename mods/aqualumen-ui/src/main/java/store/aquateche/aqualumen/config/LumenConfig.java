@@ -51,7 +51,7 @@ public final class LumenConfig {
             b.pop();
 
             b.comment("Season / battle pass").push("season");
-            serverName = b.define("serverName", "aquaTeche \u2022 TechnoAqua");
+            serverName = b.define("serverName", "AquaLumen");
             seasonTitle = b.define("title", "\u0421\u0435\u0437\u043e\u043d 1 \u2014 \u0413\u043b\u0443\u0431\u0438\u043d\u0430");
             seasonMaxTier = b.defineInRange("maxTier", 50, 1, 500);
             b.pop();

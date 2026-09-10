@@ -48,13 +48,7 @@ public class AutoFisherBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, net.minecraft.world.phys.BlockHitResult hit) {
-        if (!level.isClientSide) {
-            BlockEntity entity = level.getBlockEntity(pos);
-            if (entity instanceof AutoFisherBlockEntity autoFisher) {
-                NetworkHooks.openScreen((ServerPlayer) player, autoFisher, pos);
-            }
-        }
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -77,6 +71,6 @@ public class AutoFisherBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntities.AUTO_FISHER.get(), AutoFisherBlockEntity::tick);
+        return null;
     }
 }
