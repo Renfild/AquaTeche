@@ -159,6 +159,7 @@ def sync_mods() -> None:
     first_party = [
         (ROOT / "mods" / "aquatech-ui" / "build" / "libs", "aquatech_ui-", "aquatech_ui-"),
         (ROOT / "mods" / "aqualumen-ui" / "build" / "libs", "aqualumen-forge-", "aqualumen-"),
+        (ROOT / "mods" / "aquatech-machines" / "build" / "libs", "aquatech_machines-", "aquatech_machines-"),
     ]
     for lib_dir, glob_prefix, purge_prefix in first_party:
         jars = sorted(

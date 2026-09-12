@@ -8,6 +8,13 @@
       "size": 1373,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/97_machines_recipes.js",
       "asset": "kubejs__server_scripts__97_machines_recipes.js"
+    },
+    {
+      "path": "mods/aquatech_machines-1.0.1.jar",
+      "md5": "a21b259227eecf798addcd40e90028be",
+      "size": 69068,
+      "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.1.jar",
+      "asset": "aquatech_machines-1.0.1.jar"
     }
   ],
   "changed": [
@@ -21,10 +28,10 @@
   ],
   "removed": [],
   "stats": {
-    "added": 1,
+    "added": 2,
     "changed": 1,
     "removed": 0,
     "unchanged": 138,
-    "download_bytes": 2961819
+    "download_bytes": 3030887
   }
 }
