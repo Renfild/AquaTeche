@@ -1,5 +1,5 @@
 {
-  "version": "2.9.339",
+  "version": "2.9.347",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -35,18 +35,18 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.46-alpha.jar",
-      "md5": "d243384e997c8d9b4378fe9df823a84d",
-      "size": 2629649,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.46-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.46-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
+      "md5": "be78aa636d358800494deb36f72a55d8",
+      "size": 2662296,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.85.jar",
-      "md5": "4f9522af27f97038c7363cb8a9594c25",
-      "size": 2886890,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.85.jar",
-      "asset": "aquatech_ui-1.0.85.jar"
+      "path": "mods/aquatech_ui-1.0.92.jar",
+      "md5": "7508dc9d0485cd313ea5495ed8b2106c",
+      "size": 2960597,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.92.jar",
+      "asset": "aquatech_ui-1.0.92.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -526,8 +526,8 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "ab25ea20fed492efd1b2533767b1bace",
-      "size": 953514,
+      "md5": "ca93fb94d03066d1934d4ea516fb2d05",
+      "size": 992939,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -554,8 +554,8 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "ab25ea20fed492efd1b2533767b1bace",
-      "size": 953514,
+      "md5": "ca93fb94d03066d1934d4ea516fb2d05",
+      "size": 992939,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
@@ -582,30 +582,30 @@
     },
     {
       "path": "config/fancymenu/assets/btn_ghost.png",
-      "md5": "83dfad5eb5c9dcba57da95db161dd173",
-      "size": 360,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__fancymenu__assets__btn_ghost.png",
+      "md5": "0d087d58d3da11c63089f9dd97b01b69",
+      "size": 1584,
+      "url": "https://aquateche.store/pack/config/fancymenu/assets/btn_ghost.png",
       "asset": "config__fancymenu__assets__btn_ghost.png"
     },
     {
       "path": "config/fancymenu/assets/btn_ghost_hover.png",
-      "md5": "1b7bba99d75a593d7df365b19944d9a7",
-      "size": 354,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__fancymenu__assets__btn_ghost_hover.png",
+      "md5": "3ae336ec77235076b2227dbaf71fd708",
+      "size": 2033,
+      "url": "https://aquateche.store/pack/config/fancymenu/assets/btn_ghost_hover.png",
       "asset": "config__fancymenu__assets__btn_ghost_hover.png"
     },
     {
       "path": "config/fancymenu/assets/btn_play.png",
-      "md5": "e25035dfdabe4e7445eb22660cbf23de",
-      "size": 523,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__fancymenu__assets__btn_play.png",
+      "md5": "51955480fb9c42d3bd1ffe0a12c76d0f",
+      "size": 1957,
+      "url": "https://aquateche.store/pack/config/fancymenu/assets/btn_play.png",
       "asset": "config__fancymenu__assets__btn_play.png"
     },
     {
       "path": "config/fancymenu/assets/btn_play_hover.png",
-      "md5": "126f190ffd46584568687399af83ceaa",
-      "size": 483,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__fancymenu__assets__btn_play_hover.png",
+      "md5": "3af4ad7a731e7997d868936b2749f2d8",
+      "size": 2551,
+      "url": "https://aquateche.store/pack/config/fancymenu/assets/btn_play_hover.png",
       "asset": "config__fancymenu__assets__btn_play_hover.png"
     },
     {
@@ -616,6 +616,13 @@
       "asset": "config__fancymenu__assets__logo.png"
     },
     {
+      "path": "config/fancymenu/assets/logo_crystal.png",
+      "md5": "8d4abfe07889effdc1973a8f6a0f433c",
+      "size": 26041,
+      "url": "https://aquateche.store/pack/config/fancymenu/assets/logo_crystal.png",
+      "asset": "config__fancymenu__assets__logo_crystal.png"
+    },
+    {
       "path": "config/fancymenu/assets/logo_glow.png",
       "md5": "5513c9fa1346eea32053e82e75f57857",
       "size": 2666,
@@ -624,16 +631,16 @@
     },
     {
       "path": "config/fancymenu/assets/menu_background.png",
-      "md5": "d8fe8a82173a7a70e2b9a269019ba51f",
-      "size": 1664429,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__fancymenu__assets__menu_background.png",
+      "md5": "1e5ade5b4b1da07e2b4d8df907768dff",
+      "size": 2639653,
+      "url": "https://aquateche.store/pack/config/fancymenu/assets/menu_background.png",
       "asset": "config__fancymenu__assets__menu_background.png"
     },
     {
       "path": "config/fancymenu/assets/pause_glass.png",
-      "md5": "352f2df3fa7b1a1127f5209bc45d8998",
-      "size": 453,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__fancymenu__assets__pause_glass.png",
+      "md5": "196d286c439317619eda601fd30db7dc",
+      "size": 4157,
+      "url": "https://aquateche.store/pack/config/fancymenu/assets/pause_glass.png",
       "asset": "config__fancymenu__assets__pause_glass.png"
     },
     {
@@ -645,16 +652,16 @@
     },
     {
       "path": "config/fancymenu/customization/pause_screen_layout.txt",
-      "md5": "329af2a30f528303eb3de374302d6c4d",
-      "size": 69540,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__fancymenu__customization__pause_screen_layout.txt",
+      "md5": "b49763f04af5b10a99351aa75e5d8f87",
+      "size": 70150,
+      "url": "https://aquateche.store/pack/config/fancymenu/customization/pause_screen_layout.txt",
       "asset": "config__fancymenu__customization__pause_screen_layout.txt"
     },
     {
       "path": "config/fancymenu/customization/title_screen_layout.txt",
-      "md5": "3ac171ce35657676e2a4b159bef4b0e0",
-      "size": 43875,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__fancymenu__customization__title_screen_layout.txt",
+      "md5": "ecc826a1633c7364ec6938fed44b1c2b",
+      "size": 43634,
+      "url": "https://aquateche.store/pack/config/fancymenu/customization/title_screen_layout.txt",
       "asset": "config__fancymenu__customization__title_screen_layout.txt"
     },
     {
@@ -848,8 +855,8 @@
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "d61febfe0784d4560fbe5db8144a1879",
-      "size": 17202,
+      "md5": "b53d0dec7d619970d309fff91c722e05",
+      "size": 13119,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
@@ -960,8 +967,8 @@
     },
     {
       "path": "kubejs/startup_scripts/zz_infernal_pearl.js",
-      "md5": "21f9fe29310612da3be66cba21283574",
-      "size": 450,
+      "md5": "9390416eb3d7f539d7c6722d9ad41123",
+      "size": 431,
       "url": "https://aquateche.store/pack/kubejs/startup_scripts/zz_infernal_pearl.js",
       "asset": "kubejs__startup_scripts__zz_infernal_pearl.js"
     },
