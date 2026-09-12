@@ -1,10 +1,5 @@
 package net.aquatech.ui.client;
 
-import net.aquatech.ui.client.gui.AutoFisherScreen;
-import net.aquatech.ui.client.gui.FishSmokerScreen;
-import net.aquatech.ui.client.gui.OceanAltarScreen;
-import net.aquatech.ui.client.gui.OceanFilterScreen;
-import net.aquatech.ui.client.gui.SeabedDredgerScreen;
 import net.aquatech.ui.client.gui.TackleBoxScreen;
 import net.aquatech.ui.registry.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -22,13 +17,13 @@ public final class AquaTechClient {
 
     private static void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            MinecraftForge.EVENT_BUS.register(net.aquatech.ui.client.nameplate.NameplateHandler.class);
-            MenuScreens.register(ModMenuTypes.AUTO_FISHER_MENU.get(), AutoFisherScreen::new);
-            MenuScreens.register(ModMenuTypes.OCEAN_FILTER_MENU.get(), OceanFilterScreen::new);
-            MenuScreens.register(ModMenuTypes.SEABED_DREDGER_MENU.get(), SeabedDredgerScreen::new);
-            MenuScreens.register(ModMenuTypes.TACKLE_BOX_MENU.get(), TackleBoxScreen::new);
-            MenuScreens.register(ModMenuTypes.OCEAN_ALTAR_MENU.get(), OceanAltarScreen::new);
-            MenuScreens.register(ModMenuTypes.FISH_SMOKER_MENU.get(), FishSmokerScreen::new);
+            try {
+                MinecraftForge.EVENT_BUS.register(net.aquatech.ui.client.nameplate.NameplateHandler.class);
+                            MenuScreens.register(ModMenuTypes.TACKLE_BOX_MENU.get(), TackleBoxScreen::new);
+                        net.aquatech.ui.AquaTechUI.LOGGER.info("[AquaTechClient] All machine MenuScreens registered successfully!");
+            } catch (Throwable t) {
+                net.aquatech.ui.AquaTechUI.LOGGER.error("[AquaTechClient] Error during MenuScreens registration", t);
+            }
         });
     }
 }

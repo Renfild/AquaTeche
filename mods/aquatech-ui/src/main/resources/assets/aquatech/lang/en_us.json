@@ -1,0 +1,10 @@
+{
+  "itemGroup.aquatech.machines": "AquaTech: Machines",
+  "block.aquatech.auto_fisher": "§bAuto-Fisher MK-1",
+  "block.aquatech.fish_smoker": "Fish Smoker",
+  "tooltip.aquatech.auto_fisher.desc": "§7Automatically catches ores and Industrial Upgrade resources from ocean water.",
+  "tooltip.aquatech.auto_fisher.status.working": "§a✓ Status: Catching resources...",
+  "tooltip.aquatech.auto_fisher.status.no_energy": "§c✗ Status: Out of energy (Requires 25 FE/t — Unified Energy)",
+  "container.aquatech.auto_fisher": "Auto-Fisher MK-1",
+  "container.aquatech.fish_smoker": "Fish Smoker"
+}

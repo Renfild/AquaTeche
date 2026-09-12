@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "aquatech_ui:block/auto_fisher_front",
+    "down": "aquatech_ui:block/auto_fisher_bottom",
+    "up": "aquatech_ui:block/auto_fisher_top",
+    "north": "aquatech_ui:block/auto_fisher_front",
+    "south": "aquatech_ui:block/auto_fisher_side",
+    "west": "aquatech_ui:block/auto_fisher_side",
+    "east": "aquatech_ui:block/auto_fisher_side"
+  }
+}

@@ -1,1142 +1,1143 @@
 {
- "credit": "AquaTech machine models",
- "textures": {
-  "particle": "aquatech_ui:block/machines/altar_stone",
-  "#altar_stone": "aquatech_ui:block/machines/altar_stone.png",
-  "#altar_stone_dark": "aquatech_ui:block/machines/altar_stone_dark",
-  "#altar_trim": "aquatech_ui:block/machines/altar_trim",
-  "#altar_water": "aquatech_ui:block/machines/altar_bowl_top.png"
- },
- "elements": [
-  {
-   "name": "tier1",
-   "from": [
-    0,
-    0,
-    0
-   ],
-   "to": [
-    16,
-    3,
-    16
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
+  "credit": "AquaTech machine models",
+  "textures": {
+    "particle": "aquatech_ui:block/machines/altar_stone",
+    "altar_stone": "aquatech_ui:block/machines/altar_stone",
+    "altar_stone_dark": "aquatech_ui:block/machines/altar_stone_dark",
+    "altar_trim": "aquatech_ui:block/machines/altar_trim",
+    "altar_water": "aquatech_ui:block/machines/altar_bowl_top"
   },
-  {
-   "name": "tier2",
-   "from": [
-    2,
-    3,
-    2
-   ],
-   "to": [
-    14,
-    5,
-    14
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+  "elements": [
+    {
+      "name": "tier1",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        3,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "tier2",
+      "from": [
+        2,
+        3,
+        2
+      ],
+      "to": [
+        14,
+        5,
+        14
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "tier3",
+      "from": [
+        3,
+        5,
+        3
+      ],
+      "to": [
+        13,
+        7,
+        13
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "col_nw",
+      "from": [
+        4,
+        7,
+        4
+      ],
+      "to": [
+        6,
+        13,
+        6
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "col_ne",
+      "from": [
+        10,
+        7,
+        4
+      ],
+      "to": [
+        12,
+        13,
+        6
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "col_sw",
+      "from": [
+        4,
+        7,
+        10
+      ],
+      "to": [
+        6,
+        13,
+        12
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "col_se",
+      "from": [
+        10,
+        7,
+        10
+      ],
+      "to": [
+        12,
+        13,
+        12
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "cap_nw",
+      "from": [
+        3,
+        13,
+        3
+      ],
+      "to": [
+        6,
+        14,
+        6
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "cap_ne",
+      "from": [
+        10,
+        13,
+        3
+      ],
+      "to": [
+        13,
+        14,
+        6
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "cap_sw",
+      "from": [
+        3,
+        13,
+        10
+      ],
+      "to": [
+        6,
+        14,
+        13
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "cap_se",
+      "from": [
+        10,
+        13,
+        10
+      ],
+      "to": [
+        13,
+        14,
+        13
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_trim",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "bowl_n",
+      "from": [
+        2,
+        13,
+        2
+      ],
+      "to": [
+        14,
+        16,
+        4
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "bowl_s",
+      "from": [
+        2,
+        13,
+        12
+      ],
+      "to": [
+        14,
+        16,
+        14
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "bowl_w",
+      "from": [
+        2,
+        13,
+        4
+      ],
+      "to": [
+        4,
+        16,
+        12
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "bowl_e",
+      "from": [
+        12,
+        13,
+        4
+      ],
+      "to": [
+        14,
+        16,
+        12
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_stone_dark",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "water",
+      "from": [
+        4,
+        14,
+        4
+      ],
+      "to": [
+        12,
+        15,
+        12
+      ],
+      "faces": {
+        "down": {
+          "texture": "#altar_water",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#altar_water",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#altar_water",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#altar_water",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#altar_water",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#altar_water",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     }
-   }
-  },
-  {
-   "name": "tier3",
-   "from": [
-    3,
-    5,
-    3
-   ],
-   "to": [
-    13,
-    7,
-    13
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
     },
-    "up": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    "ground": {
+      "translation": [
+        0,
+        1,
+        0
+      ]
     }
-   }
   },
-  {
-   "name": "col_nw",
-   "from": [
-    4,
-    7,
-    4
-   ],
-   "to": [
-    6,
-    13,
-    6
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "col_ne",
-   "from": [
-    10,
-    7,
-    4
-   ],
-   "to": [
-    12,
-    13,
-    6
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "col_sw",
-   "from": [
-    4,
-    7,
-    10
-   ],
-   "to": [
-    6,
-    13,
-    12
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "col_se",
-   "from": [
-    10,
-    7,
-    10
-   ],
-   "to": [
-    12,
-    13,
-    12
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "cap_nw",
-   "from": [
-    3,
-    13,
-    3
-   ],
-   "to": [
-    6,
-    14,
-    6
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "cap_ne",
-   "from": [
-    10,
-    13,
-    3
-   ],
-   "to": [
-    13,
-    14,
-    6
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "cap_sw",
-   "from": [
-    3,
-    13,
-    10
-   ],
-   "to": [
-    6,
-    14,
-    13
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "cap_se",
-   "from": [
-    10,
-    13,
-    10
-   ],
-   "to": [
-    13,
-    14,
-    13
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_trim",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "bowl_n",
-   "from": [
-    2,
-    13,
-    2
-   ],
-   "to": [
-    14,
-    16,
-    4
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "bowl_s",
-   "from": [
-    2,
-    13,
-    12
-   ],
-   "to": [
-    14,
-    16,
-    14
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "bowl_w",
-   "from": [
-    2,
-    13,
-    4
-   ],
-   "to": [
-    4,
-    16,
-    12
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "bowl_e",
-   "from": [
-    12,
-    13,
-    4
-   ],
-   "to": [
-    14,
-    16,
-    12
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_stone_dark",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "water",
-   "from": [
-    4,
-    14,
-    4
-   ],
-   "to": [
-    12,
-    15,
-    12
-   ],
-   "faces": {
-    "down": {
-     "texture": "#altar_water",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#altar_water",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#altar_water",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#altar_water",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#altar_water",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#altar_water",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  }
- ],
- "display": {
-  "gui": {
-   "rotation": [
-    30,
-    225,
-    0
-   ],
-   "translation": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    0.625,
-    0.625,
-    0.625
-   ]
-  },
-  "ground": {
-   "translation": [
-    0,
-    1,
-    0
-   ]
-  }
- }
+  "parent": "block/block"
 }

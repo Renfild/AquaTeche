@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "aquatech_ui:block/fish_smoker_front_off",
+    "down": "aquatech_ui:block/fish_smoker_bottom",
+    "up": "aquatech_ui:block/fish_smoker_top",
+    "north": "aquatech_ui:block/fish_smoker_front_off",
+    "south": "aquatech_ui:block/fish_smoker_side",
+    "west": "aquatech_ui:block/fish_smoker_side",
+    "east": "aquatech_ui:block/fish_smoker_side"
+  }
+}

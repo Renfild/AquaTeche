@@ -47,22 +47,18 @@ ServerEvents.recipes((event) => {
   T()
 
   // 7. Dragon breath bottle: glass bottle + chorus fruit + blaze powder
+  // Рубин IU — теперь добываемый: морской рубин из красной пыли и призмарина
+  event.shapeless('industrialupgrade:preciousgem/ruby_gem', [
+    'minecraft:redstone', 'minecraft:redstone',
+    'minecraft:prismarine_crystals', 'minecraft:prismarine_crystals',
+  ]).id('aquatech:ruby_gem_craft')
+
   event.shapeless('minecraft:dragon_breath', ['minecraft:glass_bottle', 'minecraft:chorus_fruit', 'minecraft:blaze_powder']).id('aquatech:dbreath')
   T()
 
   // ============ IU machine cost smoothing (10) ============
 
-  // 8-17: cheaper early IU casings/plates via aquatech intermediates so the
-  // electric era doesn't hard-wall on grinding; each uses prismarine/kelp.
-  const casing = (n, mat, mid) => {
-    event.shaped(`industrialupgrade:crafting_elements/crafting_${n}_element`, ['PMP', 'MPM', 'PMP'], {
-      P: mat, M: mid
-    }).id(`aquatech:iu_casing_${n}`)
-    T()
-  }
-  casing(137, 'minecraft:iron_ingot', 'minecraft:prismarine_crystals')   // Machine Casing
-  casing(138, 'industrialupgrade:itemingots/copper_ingot', 'minecraft:kelp')  // Copper variant if exists
-  casing(20,  'industrialupgrade:itemingots/tin_ingot', 'minecraft:prismarine_shard')  // Improved Electric Motor part
+  // 8-17: дешёвые альт-крафты IU обшивок убраны — корпус мехов идёт по ванильной цепочке IU.
 
   // IU ingots from ore drops caught by rods (smelt-free for rod-caught ores):
   // 9 recipes mapping common rod-caught ores -> 2 ingots via simple blast recipe

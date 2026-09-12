@@ -1,7 +1,6 @@
 package net.aquatech.ui.client.gui;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.client.render.MachineGuiFx;
 import net.aquatech.ui.inventory.TackleBoxMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -20,7 +19,6 @@ public class TackleBoxScreen extends AbstractAquaMachineScreen<TackleBoxMenu> {
     @Override
     protected void renderMachineOverlays(GuiGraphics guiGraphics, int x, int y, float t, boolean active) {
         for (int i = 0; i < SLOT_XS.length; i++) {
-            MachineGuiFx.slotTwinkle(guiGraphics, x + SLOT_XS[i], y + 32, t, i);
         }
     }
 }

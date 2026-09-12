@@ -1,591 +1,592 @@
 {
- "credit": "AquaTech machine models",
- "textures": {
-  "particle": "aquatech_ui:block/machines/portal_base",
-  "#portal_base": "aquatech_ui:block/machines/portal_base.png",
-  "#void_frame": "aquatech_ui:block/machines/void_frame",
-  "#void_swirl": "aquatech_ui:block/machines/void_swirl",
-  "#portal_swirl": "aquatech_ui:block/machines/portal_swirl.png",
-  "#portal_frame": "aquatech_ui:block/machines/portal_frame.png"
- },
- "elements": [
-  {
-   "name": "base",
-   "from": [
-    0,
-    0,
-    0
-   ],
-   "to": [
-    16,
-    2,
-    16
-   ],
-   "faces": {
-    "down": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
+  "credit": "AquaTech machine models",
+  "textures": {
+    "particle": "aquatech_ui:block/machines/portal_base",
+    "portal_base": "aquatech_ui:block/machines/portal_base",
+    "void_frame": "aquatech_ui:block/machines/void_frame",
+    "void_swirl": "aquatech_ui:block/machines/void_swirl",
+    "portal_swirl": "aquatech_ui:block/machines/portal_swirl",
+    "portal_frame": "aquatech_ui:block/machines/portal_frame"
   },
-  {
-   "name": "frame_bottom",
-   "from": [
-    0,
-    2,
-    0
-   ],
-   "to": [
-    16,
-    4,
-    16
-   ],
-   "faces": {
-    "down": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        2,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "up": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "frame_bottom",
+      "from": [
+        0,
+        2,
+        0
+      ],
+      "to": [
+        16,
+        4,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#portal_base",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "north": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "frame_top",
+      "from": [
+        0,
+        14,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "south": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "edge_nw",
+      "from": [
+        0,
+        4,
+        0
+      ],
+      "to": [
+        2,
+        14,
+        2
+      ],
+      "faces": {
+        "down": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "west": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "edge_ne",
+      "from": [
+        14,
+        4,
+        0
+      ],
+      "to": [
+        16,
+        14,
+        2
+      ],
+      "faces": {
+        "down": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     },
-    "east": {
-     "texture": "#portal_base",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    {
+      "name": "edge_sw",
+      "from": [
+        0,
+        4,
+        14
+      ],
+      "to": [
+        2,
+        14,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "edge_se",
+      "from": [
+        14,
+        4,
+        14
+      ],
+      "to": [
+        16,
+        14,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#portal_frame",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "swirl_core",
+      "from": [
+        2,
+        4,
+        2
+      ],
+      "to": [
+        14,
+        14,
+        14
+      ],
+      "faces": {
+        "down": {
+          "texture": "#portal_swirl",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#portal_swirl",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#portal_swirl",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#portal_swirl",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#portal_swirl",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#portal_swirl",
+          "uv": [
+            0,
+            0,
+            16.0,
+            16.0
+          ]
+        }
+      }
     }
-   }
-  },
-  {
-   "name": "frame_top",
-   "from": [
-    0,
-    14,
-    0
-   ],
-   "to": [
-    16,
-    16,
-    16
-   ],
-   "faces": {
-    "down": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
     },
-    "up": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
+    "ground": {
+      "translation": [
+        0,
+        1,
+        0
+      ]
     }
-   }
   },
-  {
-   "name": "edge_nw",
-   "from": [
-    0,
-    4,
-    0
-   ],
-   "to": [
-    2,
-    14,
-    2
-   ],
-   "faces": {
-    "down": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "edge_ne",
-   "from": [
-    14,
-    4,
-    0
-   ],
-   "to": [
-    16,
-    14,
-    2
-   ],
-   "faces": {
-    "down": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "edge_sw",
-   "from": [
-    0,
-    4,
-    14
-   ],
-   "to": [
-    2,
-    14,
-    16
-   ],
-   "faces": {
-    "down": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "edge_se",
-   "from": [
-    14,
-    4,
-    14
-   ],
-   "to": [
-    16,
-    14,
-    16
-   ],
-   "faces": {
-    "down": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#portal_frame",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  },
-  {
-   "name": "swirl_core",
-   "from": [
-    2,
-    4,
-    2
-   ],
-   "to": [
-    14,
-    14,
-    14
-   ],
-   "faces": {
-    "down": {
-     "texture": "#portal_swirl",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "up": {
-     "texture": "#portal_swirl",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "north": {
-     "texture": "#portal_swirl",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "south": {
-     "texture": "#portal_swirl",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "west": {
-     "texture": "#portal_swirl",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    },
-    "east": {
-     "texture": "#portal_swirl",
-     "uv": [
-      0,
-      0,
-      64,
-      64
-     ]
-    }
-   }
-  }
- ],
- "display": {
-  "gui": {
-   "rotation": [
-    30,
-    225,
-    0
-   ],
-   "translation": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    0.625,
-    0.625,
-    0.625
-   ]
-  },
-  "ground": {
-   "translation": [
-    0,
-    1,
-    0
-   ]
-  }
- }
+  "parent": "block/block"
 }

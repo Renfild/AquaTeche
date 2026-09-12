@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import shutil
 from pathlib import Path
 
@@ -17,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.339"
-PACK_VERSION = "2.9.339"
+PACK_TAG = "pack-2.9.349"
+PACK_VERSION = "2.9.349"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -168,7 +169,11 @@ def sync_mods() -> None:
         if not jars:
             continue
         src_jar = jars[0]
-        for folder in (SERVER_MODS, dst):
+        appdata_client = Path(os.environ.get("APPDATA", "")) / "AquaTech" / "mods"
+        folders = [SERVER_MODS, dst]
+        if appdata_client.is_dir():
+            folders.append(appdata_client)
+        for folder in folders:
             if not folder.is_dir():
                 continue
             for old in folder.glob(f"{purge_prefix}*.jar"):

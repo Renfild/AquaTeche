@@ -13,9 +13,7 @@ import java.util.Set;
  */
 public final class FishingRodCompat {
     /** Only these rods keep StarCatcher fish catches. */
-    private static final Set<String> FISH_ONLY = Set.of(
-            "sky_rod"
-    );
+    private static final Set<String> FISH_ONLY = Set.of();
 
     private FishingRodCompat() {
     }

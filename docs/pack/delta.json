@@ -1,51 +1,22 @@
 {
-  "from_version": "2.9.338",
-  "to_version": "2.9.339",
-  "added": [
-    {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.46-alpha.jar",
-      "md5": "d243384e997c8d9b4378fe9df823a84d",
-      "size": 2629649,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.46-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.46-alpha.jar"
-    },
-    {
-      "path": "mods/aquatech_ui-1.0.85.jar",
-      "md5": "4f9522af27f97038c7363cb8a9594c25",
-      "size": 2886890,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.85.jar",
-      "asset": "aquatech_ui-1.0.85.jar"
-    }
-  ],
+  "from_version": "2.9.348",
+  "to_version": "2.9.349",
+  "added": [],
   "changed": [
     {
-      "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "d61febfe0784d4560fbe5db8144a1879",
-      "size": 17202,
-      "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
-      "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
-    },
-    {
-      "path": "kubejs/server_scripts/zz_infernal_pearl.js",
-      "md5": "48331a8bc6d258e33988ed265d8d2a0a",
-      "size": 146,
-      "url": "https://aquateche.store/pack/kubejs/server_scripts/zz_infernal_pearl.js",
-      "asset": "kubejs__server_scripts__zz_infernal_pearl.js"
+      "path": "mods/aquatech_ui-1.0.92.jar",
+      "md5": "1df72180f1e0f7fb4e05e975d73dff94",
+      "size": 2960446,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.92.jar",
+      "asset": "aquatech_ui-1.0.92.jar"
     }
   ],
-  "removed": [
-    {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.44-alpha.jar"
-    },
-    {
-      "path": "mods/aquatech_ui-1.0.84.jar"
-    }
-  ],
+  "removed": [],
   "stats": {
-    "added": 2,
-    "changed": 2,
-    "removed": 2,
-    "unchanged": 134,
-    "download_bytes": 5533887
+    "added": 0,
+    "changed": 1,
+    "removed": 0,
+    "unchanged": 138,
+    "download_bytes": 2960446
   }
 }

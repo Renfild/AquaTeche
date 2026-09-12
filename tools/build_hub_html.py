@@ -130,7 +130,68 @@ hub_html_raw = r'''<!doctype html>
     .drop-item-card b{font-size:10px;font-weight:600;margin-top:2px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .drop-item-chance{font-size:8.5px;padding:2px 6px;border-radius:6px;border:1px solid;font-weight:700;letter-spacing:.05em}
 
-    .pass-track{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}.reward{text-align:center}.reward-level{color:var(--muted);font-size:9px}.reward-icon{height:62px;display:grid;place-items:center;margin:6px 0;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);font-size:22px}.reward.claimable .reward-icon{border-color:color-mix(in srgb,var(--accent) 45%,transparent);box-shadow:0 0 18px color-mix(in srgb,var(--accent) 13%,transparent)}
+    .pass-hero{position:relative;overflow:hidden;border-radius:18px;border:1px solid rgba(47,224,192,.22);background:linear-gradient(135deg,rgba(14,27,39,.95),rgba(7,14,22,.98));padding:18px 22px;margin-bottom:16px;box-shadow:0 10px 35px rgba(0,0,0,.35)}
+    .pass-hero-ambient{position:absolute;top:-40px;right:15%;width:260px;height:180px;background:radial-gradient(ellipse,rgba(47,224,192,.16),transparent 70%);pointer-events:none}
+    .pass-hero-content{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .pass-hero-left{flex:1;min-width:0}
+    .pass-hero-badge-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+    .pass-season-pill{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:rgba(47,224,192,.12);border:1px solid rgba(47,224,192,.3);padding:3px 9px;border-radius:999px}
+    .pass-free-pill{font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--gold);background:rgba(245,194,91,.1);border:1px solid rgba(245,194,91,.25);padding:3px 9px;border-radius:999px}
+    .pass-hero-title{font-size:20px;font-weight:800;margin:0 0 4px;letter-spacing:-.01em;color:#fff}
+    .pass-hero-desc{font-size:11.5px;color:var(--muted);margin:0 0 12px;line-height:1.4}
+    .pass-hero-stats{display:flex;gap:18px}
+    .pass-stat-item small{display:block;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+    .pass-stat-item b{font-size:13px;font-weight:750;color:var(--text)}
+    .pass-stat-item b.highlight-claim{color:var(--accent);text-shadow:0 0 10px rgba(47,224,192,.5)}
+    .pass-hero-right{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px 16px;min-width:240px}
+    .pass-tier-ring{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,rgba(47,224,192,.2),rgba(59,157,255,.2));border:1.5px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(47,224,192,.25);flex-shrink:0}
+    .pass-tier-val{font-size:19px;font-weight:850;line-height:1;color:#fff}
+    .pass-tier-sub{font-size:7.5px;font-weight:800;letter-spacing:.08em;color:var(--accent);margin-top:2px}
+    .pass-tier-progress-box{flex:1;min-width:0}
+    .pass-prog-header{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:5px}
+    .pass-prog-header b{color:var(--accent)}
+    .pass-prog-bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid rgba(255,255,255,.05)}
+    .pass-prog-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#3b9dff);box-shadow:0 0 12px rgba(47,224,192,.6);transition:width .3s ease}
+    .pass-track{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px;margin-top:14px;padding-bottom:90px}
+    .pass-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:205px;padding:12px 10px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(20,30,42,.85) 0%,rgba(10,16,24,.95) 100%);text-align:center;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,border-color .2s ease;overflow:hidden}
+    .pass-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
+    .pass-card-glow{position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .25s ease}
+    .pass-card:hover .pass-card-glow{opacity:1}
+    .pass-card.tier-common{border-color:rgba(255,255,255,.09)}
+    .pass-card.tier-rare{border-color:rgba(47,224,192,.4);background:linear-gradient(180deg,rgba(16,38,48,.9) 0%,rgba(9,20,28,.96) 100%);box-shadow:0 4px 20px rgba(47,224,192,.08)}
+    .pass-card.tier-rare .pass-card-glow{background:radial-gradient(circle at 50% 30%,rgba(47,224,192,.12),transparent 70%)}
+    .pass-card.tier-epic{border-color:rgba(168,85,247,.45);background:linear-gradient(180deg,rgba(34,19,54,.9) 0%,rgba(13,9,24,.96) 100%);box-shadow:0 4px 22px rgba(168,85,247,.12)}
+    .pass-card.tier-epic .pass-card-glow{background:radial-gradient(circle at 50% 30%,rgba(168,85,247,.16),transparent 70%)}
+    .pass-card.tier-legendary{border-color:rgba(245,194,91,.55);background:linear-gradient(180deg,rgba(46,35,14,.9) 0%,rgba(18,14,7,.96) 100%);box-shadow:0 4px 24px rgba(245,194,91,.15)}
+    .pass-card.tier-legendary .pass-card-glow{background:radial-gradient(circle at 50% 30%,rgba(245,194,91,.2),transparent 70%)}
+    .pass-card.tier-mythic{border-color:rgba(239,68,68,.6);background:linear-gradient(180deg,rgba(50,15,25,.92) 0%,rgba(18,6,12,.98) 100%);box-shadow:0 6px 30px rgba(239,68,68,.25),0 0 15px rgba(245,194,91,.2)}
+    .pass-card.tier-mythic .pass-card-glow{background:radial-gradient(circle at 50% 30%,rgba(239,68,68,.25),transparent 70%)}
+    .pass-card.is-claimable{border-color:var(--accent)!important;box-shadow:0 0 24px rgba(47,224,192,.3),inset 0 0 15px rgba(47,224,192,.08)!important;animation:claimable-pulse 2.2s infinite alternate ease-in-out}
+    @keyframes claimable-pulse{0%{box-shadow:0 0 16px rgba(47,224,192,.2),inset 0 0 10px rgba(47,224,192,.04)}100%{box-shadow:0 0 30px rgba(47,224,192,.45),inset 0 0 20px rgba(47,224,192,.12)}}
+    .pass-card.is-claimed{opacity:.52;filter:saturate(.85)}
+    .pass-card.is-claimed:hover{opacity:.78;transform:none}
+    .pass-card-head{display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:6px;font-size:9px}
+    .pass-card-lvl{font-weight:800;letter-spacing:.06em;color:var(--muted)}
+    .pass-card.is-claimable .pass-card-lvl{color:var(--accent)}
+    .pass-card.is-claimed .pass-card-lvl{color:rgba(255,255,255,.4)}
+    .pass-badge-pill{font-size:8px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:6px}
+    .pass-badge-pill.rare{color:var(--accent);background:rgba(47,224,192,.15);border:1px solid rgba(47,224,192,.35)}
+    .pass-badge-pill.epic{color:#c084fc;background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.4)}
+    .pass-badge-pill.legendary{color:var(--gold);background:rgba(245,194,91,.18);border:1px solid rgba(245,194,91,.4)}
+    .pass-badge-pill.mythic{color:#ffedd5;background:linear-gradient(135deg,rgba(239,68,68,.6),rgba(245,194,91,.6));border:1px solid rgba(245,194,91,.7);text-shadow:0 1px 2px rgba(0,0,0,.5)}
+    .pass-card-art{position:relative;height:64px;display:grid;place-items:center;margin:4px 0 8px}
+    .pass-art-pedestal{position:absolute;bottom:2px;width:58px;height:10px;border-radius:50%;background:rgba(0,0,0,.45);filter:blur(4px)}
+    .pass-art-icon{position:relative;z-index:2;display:grid;place-items:center;transition:transform .25s ease}
+    .pass-card:hover .pass-art-icon{transform:translateY(-2px) scale(1.05)}
+    .pass-card-body{width:100%;margin-bottom:8px}
+    .pass-card-title{font-size:11px;font-weight:750;line-height:1.25;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
+    .pass-card-coins{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:750;color:var(--gold);background:rgba(245,194,91,.08);border:1px solid rgba(245,194,91,.2);padding:2px 7px;border-radius:999px}
+    .pass-card-foot{width:100%}
+    .pass-claim-btn{width:100%;height:28px;padding:0;font-size:11px;font-weight:800;letter-spacing:.02em;border-radius:9px;background:linear-gradient(135deg,var(--accent),#3b9dff);color:#061516;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(47,224,192,.4);transition:all .18s ease}
+    .pass-claim-btn:hover{transform:scale(1.02);box-shadow:0 6px 18px rgba(47,224,192,.6);filter:brightness(1.1)}
+    .pass-status-badge{display:flex;align-items:center;justify-content:center;gap:5px;height:28px;border-radius:9px;font-size:10.5px;font-weight:700}
+    .pass-status-badge.claimed{background:rgba(76,208,138,.1);border:1px solid rgba(76,208,138,.25);color:var(--success)}
+    .pass-status-badge.locked{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);color:var(--muted);opacity:.75}
     .settings{max-width:650px}.setting{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}.setting:last-child{border:0}.setting-info{flex:1}.setting-info b{display:block;font-size:12px}.setting-info span{color:var(--muted);font-size:10px}
     .theme-picker{display:flex;gap:7px}.swatch{width:30px;height:30px;border:2px solid transparent;border-radius:10px;cursor:pointer}.swatch.active{border-color:white}.swatch[data-theme=aqua_lumen]{background:linear-gradient(135deg,#2fe0c0,#3b9dff)}.swatch[data-theme=violet_lumen]{background:linear-gradient(135deg,#b072ff,#ff6bc1)}.swatch[data-theme=midnight_rose]{background:linear-gradient(135deg,#ff7a9c,#ffb27a)}
     .toggle{width:42px;height:23px;padding:2px;border:0;border-radius:20px;background:rgba(255,255,255,.13);cursor:pointer}.toggle i{display:block;width:19px;height:19px;border-radius:50%;background:var(--muted);transition:.2s var(--ease)}.toggle.on{background:color-mix(in srgb,var(--accent) 26%,transparent)}.toggle.on i{transform:translateX(19px);background:var(--accent)}
@@ -160,21 +221,148 @@ hub_html_raw = r'''<!doctype html>
     .brand-mark{background:linear-gradient(135deg,var(--prank,var(--accent)),var(--accent2))}
     .topbar{border-bottom-color:var(--prank-soft,var(--line))}
     .owned-check{color:var(--success);display:inline-grid;place-items:center;vertical-align:-2px;margin-left:6px}
-    .offer.lot-card{flex-direction:row;align-items:center;text-align:left;gap:12px;padding:11px 14px;min-height:0;border-radius:14px}
-    .offer.lot-card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:rgba(255,255,255,.028);transform:none}
-    .lot-icon{width:40px;height:40px;flex:0 0 auto;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.05)}
-    .lot-icon img,.lot-icon .lot-fb svg{width:26px;height:26px;object-fit:contain}
-    .lot-icon .lot-fb{width:100%;height:100%}
-    .atlas-sprite{display:block;width:32px;height:32px;image-rendering:pixelated;background-repeat:no-repeat}
-    .lot-body{min-width:0;flex:1;display:grid;gap:3px}
-    .lot-title{font-size:12.5px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .lot-count{color:var(--muted);font-weight:600;font-size:11px}
-    .lot-seller{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .lot-side{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex:0 0 auto}
-    .lot-price{font-size:12.5px;font-weight:750;color:var(--gold);display:flex;align-items:center;gap:4px;font-variant-numeric:tabular-nums}
-    .lot-price img{width:13px;height:13px;image-rendering:pixelated}
-    .lot-actions{display:flex;gap:6px}
-    .lot-card .button{font-size:10.5px;padding:0 12px;min-height:28px}
+    /* Auction & Market Minimalist Bento Styles */
+    .auction-view-wrap { display: flex; flex-direction: column; gap: 14px; }
+    .auction-top-strip {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      padding: 12px 16px; border: 1px solid var(--line); border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+      backdrop-filter: blur(10px);
+    }
+    .auction-stats-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .auction-chip-stat {
+      display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px;
+      border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,0.03);
+      font-size: 12px; font-weight: 600;
+    }
+    .auction-chip-stat small { color: var(--muted); font-size: 11px; font-weight: 500; }
+    .auction-chip-stat b { font-variant-numeric: tabular-nums; }
+    .auction-sell-cmd {
+      display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px;
+      border: 1px solid rgba(47, 224, 192, 0.28); border-radius: 999px;
+      background: rgba(47, 224, 192, 0.08); color: var(--text); font-size: 11.5px;
+      cursor: pointer; transition: all 0.18s var(--ease); user-select: none;
+    }
+    .auction-sell-cmd:hover {
+      background: rgba(47, 224, 192, 0.15); border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .auction-sell-cmd code {
+      color: var(--gold); font-weight: 700; font-family: inherit; font-size: 12px;
+    }
+    .auction-sell-cmd svg {
+      color: var(--accent); opacity: 0.85; flex-shrink: 0;
+    }
+
+    /* Controls Bar: Search & Filter Tabs */
+    .auction-filter-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .auction-search-box {
+      flex: 1; min-width: 220px; max-width: 440px; position: relative; display: flex; align-items: center;
+    }
+    .auction-search-box svg {
+      position: absolute; left: 12px; color: var(--muted); pointer-events: none;
+    }
+    .auction-search-input {
+      width: 100%; height: 36px; padding: 0 34px 0 36px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: rgba(0,0,0,0.22); color: var(--text); font-size: 12px;
+      outline: none; transition: all 0.18s var(--ease);
+    }
+    .auction-search-input:focus {
+      border-color: var(--accent); background: rgba(0,0,0,0.36);
+      box-shadow: 0 0 14px rgba(47, 224, 192, 0.16);
+    }
+    .auction-search-clear {
+      position: absolute; right: 10px; width: 18px; height: 18px;
+      border: none; background: rgba(255,255,255,0.1); border-radius: 50%;
+      color: var(--muted); font-size: 10px; display: none; place-items: center;
+      cursor: pointer; padding: 0;
+    }
+    .auction-search-clear:hover { color: #fff; background: rgba(255,255,255,0.2); }
+    
+    .auction-tab-pills { display: flex; gap: 6px; }
+    .auction-pill {
+      height: 32px; padding: 0 14px; border: 1px solid var(--line); border-radius: 10px;
+      background: rgba(255,255,255,0.03); color: var(--muted); font-size: 11.5px;
+      font-weight: 600; cursor: pointer; transition: all 0.18s var(--ease);
+    }
+    .auction-pill:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+    .auction-pill.active {
+      color: var(--text); border-color: rgba(47, 224, 192, 0.4);
+      background: rgba(47, 224, 192, 0.1);
+    }
+
+    /* Minimalist Lot Card */
+    .auction-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px;
+    }
+    .offer.lot-card {
+      display: flex; flex-direction: row; align-items: center; text-align: left; gap: 12px;
+      padding: 12px 14px; min-height: 74px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.025);
+      position: relative; transition: all 0.2s var(--ease);
+    }
+    .offer.lot-card:hover {
+      border-color: rgba(47, 224, 192, 0.38); background: rgba(255,255,255,0.045);
+      transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+    .offer.lot-card.is-own-lot {
+      border-color: rgba(47, 224, 192, 0.22);
+      background: linear-gradient(135deg, rgba(47, 224, 192, 0.035), rgba(255,255,255,0.02));
+    }
+    .lot-slot-wrap {
+      width: 46px; height: 46px; flex: 0 0 46px; position: relative; display: grid; place-items: center;
+      border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), rgba(0,0,0,0.3));
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+    }
+    .lot-slot-wrap img, .lot-slot-wrap .mc-icon {
+      width: 32px; height: 32px; object-fit: contain; image-rendering: pixelated;
+    }
+    .lot-badge-count {
+      position: absolute; right: -4px; bottom: -4px; padding: 1px 5px;
+      background: #091118; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
+      font-size: 9.5px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums;
+    }
+    .lot-info { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .lot-name {
+      font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.25;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .lot-seller-tag {
+      font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .lot-seller-tag.self { color: var(--accent); font-weight: 600; }
+    .lot-action-col {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex: 0 0 auto;
+    }
+    .lot-cost {
+      font-size: 13px; font-weight: 750; color: var(--gold);
+      display: inline-flex; align-items: center; gap: 4px; font-variant-numeric: tabular-nums;
+    }
+    .lot-card .btn-cancel {
+      font-size: 11px; font-weight: 600; padding: 0 12px; height: 28px;
+      border: 1px solid rgba(255, 107, 107, 0.32); border-radius: 8px;
+      background: rgba(255, 107, 107, 0.08); color: var(--danger);
+      cursor: pointer; transition: all 0.16s var(--ease);
+    }
+    .lot-card .btn-cancel:hover {
+      background: rgba(255, 107, 107, 0.18); border-color: var(--danger);
+      transform: translateY(-1px);
+    }
+    .lot-card .btn-buy {
+      font-size: 11px; font-weight: 700; padding: 0 14px; height: 28px;
+      border: 1px solid rgba(47, 224, 192, 0.35); border-radius: 8px;
+      background: linear-gradient(135deg, rgba(47, 224, 192, 0.2), rgba(59, 157, 255, 0.2));
+      color: #fff; cursor: pointer; transition: all 0.16s var(--ease);
+    }
+    .lot-card .btn-buy:hover {
+      background: linear-gradient(135deg, rgba(47, 224, 192, 0.35), rgba(59, 157, 255, 0.35));
+      border-color: var(--accent); transform: translateY(-1px);
+    }
     .owned-check svg{width:13px;height:13px}
     
     /* Case Opening Modal & Roulette */
@@ -1139,31 +1327,31 @@ try {
   }
 
   const PASS_REWARDS = [
-    { tier: 1, label: "Монеты", coins: 2500 },
-    { tier: 2, label: "Монеты", coins: 3000 },
-    { tier: 3, label: "Монеты", coins: 3500 },
-    { tier: 4, label: "Монеты", coins: 4000 },
-    { tier: 5, label: "Кейс I: Первопроходец", item: "starter", type: "case", coins: 5000 },
-    { tier: 6, label: "Монеты", coins: 6000 },
-    { tier: 7, label: "Монеты", coins: 7000 },
-    { tier: 8, label: "Монеты", coins: 8000 },
-    { tier: 9, label: "Монеты", coins: 9000 },
-    { tier: 10, label: "Кейс II: Инженер", item: "smeltery", type: "case", coins: 12000 },
-    { tier: 11, label: "Множитель улова ×4", item: "aquatech_ui:rate_x4", coins: 14000 },
-    { tier: 12, label: "Монеты", coins: 16000 },
-    { tier: 13, label: "Монеты", coins: 18000 },
-    { tier: 14, label: "Монеты", coins: 20000 },
-    { tier: 15, label: "Кейс V: Цифровая МЭ", item: "applied", type: "case", coins: 25000 },
-    { tier: 16, label: "Монеты", coins: 30000 },
-    { tier: 17, label: "Монеты", coins: 35000 },
-    { tier: 18, label: "Монеты", coins: 40000 },
-    { tier: 19, label: "Монеты", coins: 45000 },
-    { tier: 20, label: "Кейс VII: Проводники", item: "superconductor", type: "case", coins: 50000 },
-    { tier: 21, label: "Монеты", coins: 55000 },
-    { tier: 22, label: "Множитель улова ×16", item: "aquatech_ui:rate_x16", coins: 60000 },
-    { tier: 23, label: "Монеты", coins: 70000 },
-    { tier: 24, label: "Монеты", coins: 80000 },
-    { tier: 25, label: "Кейс IX: Драконий", item: "draconic", type: "case", coins: 100000 },
+    { tier: 1, label: "Монеты", coins: 2500, rarity: "common" },
+    { tier: 2, label: "Монеты", coins: 3000, rarity: "common" },
+    { tier: 3, label: "Монеты", coins: 3500, rarity: "common" },
+    { tier: 4, label: "Монеты", coins: 4000, rarity: "common" },
+    { tier: 5, label: "Кейс I: Первопроходец", item: "starter", type: "case", coins: 5000, rarity: "rare", badge: "Кейс" },
+    { tier: 6, label: "Монеты", coins: 6000, rarity: "common" },
+    { tier: 7, label: "Монеты", coins: 7000, rarity: "common" },
+    { tier: 8, label: "Монеты", coins: 8000, rarity: "common" },
+    { tier: 9, label: "Монеты", coins: 9000, rarity: "common" },
+    { tier: 10, label: "Кейс II: Инженер", item: "smeltery", type: "case", coins: 12000, rarity: "epic", badge: "Эпик" },
+    { tier: 11, label: "Множитель улова ×4", item: "aquatech_ui:rate_x4", coins: 14000, rarity: "rare", badge: "Бафф" },
+    { tier: 12, label: "Монеты", coins: 16000, rarity: "common" },
+    { tier: 13, label: "Монеты", coins: 18000, rarity: "common" },
+    { tier: 14, label: "Монеты", coins: 20000, rarity: "common" },
+    { tier: 15, label: "Кейс V: Цифровая МЭ", item: "applied", type: "case", coins: 25000, rarity: "epic", badge: "Эпик" },
+    { tier: 16, label: "Монеты", coins: 30000, rarity: "common" },
+    { tier: 17, label: "Монеты", coins: 35000, rarity: "common" },
+    { tier: 18, label: "Монеты", coins: 40000, rarity: "common" },
+    { tier: 19, label: "Монеты", coins: 45000, rarity: "common" },
+    { tier: 20, label: "Кейс VII: Проводники", item: "superconductor", type: "case", coins: 50000, rarity: "epic", badge: "Эпик" },
+    { tier: 21, label: "Монеты", coins: 55000, rarity: "common" },
+    { tier: 22, label: "Множитель улова ×16", item: "aquatech_ui:rate_x16", coins: 60000, rarity: "legendary", badge: "Легенда" },
+    { tier: 23, label: "Монеты", coins: 70000, rarity: "rare" },
+    { tier: 24, label: "Монеты", coins: 80000, rarity: "rare" },
+    { tier: 25, label: "Кейс IX: Драконий", item: "draconic", type: "case", coins: 100000, rarity: "mythic", badge: "Финал" },
   ];
 
   function passView(s) {
@@ -1171,61 +1359,109 @@ try {
     const maxT = 25;
     const currentTier = Number(season.tier) || 1;
     const claimedList = (season.claimedTiers || []).map(Number);
+    const claimableCount = Number(season.claimable) || 0;
     const cards = [];
 
     for (let t = 1; t <= maxT; t++) {
-      const reward = PASS_REWARDS[t - 1] || { tier: t, label: "Награда", coins: 2500 + t * 1000 };
+      const reward = PASS_REWARDS[t - 1] || { tier: t, label: "Награда", coins: 2500 + t * 1000, rarity: "common" };
       const unlocked = currentTier >= t;
       const isClaimed = claimedList.includes(t);
       const isClaimable = unlocked && !isClaimed;
+      const rarity = reward.rarity || "common";
 
-      let btnText = "Закрыто";
-      let btnClass = "";
-      let disabledAttr = "disabled";
+      let statusClass = "is-locked";
+      let actionHtml = `<div class="pass-status-badge locked"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Ур. ${t}</div>`;
 
       if (isClaimed) {
-        btnText = "Забрано";
-        disabledAttr = "disabled style='opacity:0.45;border-color:var(--line);color:var(--muted);cursor:default'";
+        statusClass = "is-claimed";
+        actionHtml = `<div class="pass-status-badge claimed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 12 5 5L20 6"/></svg> Забрано</div>`;
       } else if (isClaimable) {
-        btnText = "Забрать";
-        btnClass = "primary claim-pass";
-        disabledAttr = "";
+        statusClass = "is-claimable";
+        actionHtml = `<button class="button primary pass-claim-btn claim-pass" data-level="${t}">Забрать</button>`;
       }
 
       let iconHtml;
       if (reward.type === "case") {
         const caseIconUrl = CASE_ICONS[reward.item] || "";
         iconHtml = caseIconUrl
-          ? `<img src="${caseIconUrl}" style="width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5))" />`
-          : `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--gold)" stroke-width="1.6"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 11h18M12 6v5"/></svg>`;
+          ? `<img src="${caseIconUrl}" class="mc-icon" style="width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.65))" alt="" />`
+          : `<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="var(--gold)" stroke-width="1.6"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 11h18M12 6v5"/></svg>`;
       } else if (!reward.item) {
-        iconHtml = coinIco();
+        iconHtml = `<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:rgba(245,194,91,0.08);border:1px solid rgba(245,194,91,0.2);"><img class="aqua-coin-icon" src="${COIN_SRC}" style="width:28px;height:28px;image-rendering:pixelated;" alt=""></div>`;
       } else {
         iconHtml = getItemIconHtml(reward.label, reward.item, "mc-icon");
       }
 
-      cards.push(`<div class="card reward ${isClaimable ? "claimable" : ""}" style="min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px 10px;text-align:center;border-color:${isClaimable ? "var(--accent)" : isClaimed ? "rgba(255,255,255,0.06)" : "var(--line)"};${isClaimed ? "opacity:0.55;" : ""}">
-        <span class="reward-level" style="font-weight:700;letter-spacing:0.04em;color:${unlocked ? "var(--accent)" : "var(--muted)"}">УРОВЕНЬ ${t}</span>
-        <div class="reward-icon" style="height:54px;display:grid;place-items:center;margin:6px 0;">
-          ${iconHtml}
+      let badgeHtml = "";
+      if (reward.badge) {
+        badgeHtml = `<span class="pass-badge-pill ${rarity}">${esc(reward.badge)}</span>`;
+      }
+
+      cards.push(`<div class="pass-card tier-${rarity} ${statusClass} reward" data-tier="${t}">
+        <div class="pass-card-glow"></div>
+        <div class="pass-card-head">
+          <span class="pass-card-lvl">УРОВЕНЬ ${t}</span>
+          ${badgeHtml}
         </div>
-        <div style="font-size:11px;font-weight:700;line-height:1.2;margin-bottom:2px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(reward.label)}">${esc(reward.label)}</div>
-        <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;">+${coins(reward.coins)}</div>
-        <button class="button ${btnClass}" data-level="${t}" ${disabledAttr} style="width:100%;font-size:9.5px;">${btnText}</button>
+        <div class="pass-card-art">
+          <div class="pass-art-pedestal"></div>
+          <div class="pass-art-icon">${iconHtml}</div>
+        </div>
+        <div class="pass-card-body">
+          <div class="pass-card-title" title="${esc(reward.label)}">${esc(reward.label)}</div>
+          <div class="pass-card-coins">+${coins(reward.coins)}</div>
+        </div>
+        <div class="pass-card-foot">
+          ${actionHtml}
+        </div>
       </div>`);
     }
 
     return `<div class="view">${title("Сезонный Пропуск", "Выполняйте задания, ловите рыбу и забирайте ценные награды")}
-      <section class="card season" style="margin-bottom:14px;">
-        <div class="season-head">
-          <div><h3 style="font-size:16px;">${esc(season.title || "Сезон I: Покорение Океана")}</h3><p>Доступно к получению: <b style="color:var(--accent);">${season.claimable || 0}</b> наград</p></div>
-          <b class="tier" style="font-size:26px;">T${currentTier}</b>
+      <section class="pass-hero">
+        <div class="pass-hero-ambient"></div>
+        <div class="pass-hero-content">
+          <div class="pass-hero-left">
+            <div class="pass-hero-badge-row">
+              <span class="pass-season-pill">СЕЗОН 1</span>
+              <span class="pass-free-pill">100% БЕСПЛАТНО</span>
+            </div>
+            <h2 class="pass-hero-title">${esc(season.title || "Сезон I: Покорение Океана")}</h2>
+            <p class="pass-hero-desc">Ловите редкую рыбу, выполняйте контракты и повышайте уровень боевого пропуска</p>
+            <div class="pass-hero-stats">
+              <div class="pass-stat-item">
+                <small>Доступно к сдаче</small>
+                <b class="${claimableCount > 0 ? "highlight-claim" : ""}">${claimableCount} наград</b>
+              </div>
+              <div class="pass-stat-item">
+                <small>Всего уровней</small>
+                <b>25 рангов</b>
+              </div>
+              <div class="pass-stat-item">
+                <small>Главная награда</small>
+                <b style="color:var(--gold);">Кейс IX: Драконий</b>
+              </div>
+            </div>
+          </div>
+          <div class="pass-hero-right">
+            <div class="pass-tier-ring">
+              <span class="pass-tier-val">T${currentTier}</span>
+              <span class="pass-tier-sub">РАНГ</span>
+            </div>
+            <div class="pass-tier-progress-box">
+              <div class="pass-prog-header">
+                <span>Прогресс сезона</span>
+                <b>${Math.round((season.tierProgress || 0) * 100)}%</b>
+              </div>
+              <div class="pass-prog-bar">
+                <div class="pass-prog-fill" style="width:${Math.round((season.tierProgress || 0) * 100)}%"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="progress-label"><span>Прогресс сезона</span><span>${Math.round((season.tierProgress || 0) * 100)}%</span></div>
-        <div class="progress"><i style="width:${Math.round((season.tierProgress || 0) * 100)}%"></i></div>
       </section>
-      <div class="section-title"><b>Линейка Наград (25 уровней)</b><span style="color:var(--accent);">Без гемов · Окупаемость 100%</span></div>
-      <div class="pass-track" style="grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:10px;padding-bottom:80px;">${cards.join("")}</div>
+      <div class="section-title"><b>Линейка Наград (25 уровней)</b><span style="color:var(--accent);">Без платных гемов · Ценный лут</span></div>
+      <div class="pass-track">${cards.join("")}</div>
     </div>`;
   }
 
@@ -1274,51 +1510,76 @@ try {
     ensureAtlas();
     const lots = s.market || [];
     const activeCount = lots.length;
+    const myLotsCount = lots.filter(l => Boolean(l.self)).length;
 
     const cards = lots.map((lot, i) => {
       const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/§./g, "").trim();
       const isSelf = Boolean(lot.self);
       const btn = isSelf
-        ? `<button class="button cancel-auction" data-id="${lot.id}" style="background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.35);color:var(--danger);">Снять</button>`
-        : `<button class="button primary buy-auction" data-id="${lot.id}">Купить</button>`;
-      const seller = esc(lot.seller || 'Игрок') + (isSelf ? ' · вы' : '');
-      return `<article class="card offer lot-card" style="--i:${i}">
-        <div class="lot-icon">${lotIconHtml(lot, "mc-icon")}</div>
-        <div class="lot-body">
-          <div class="lot-title" title="${esc(cleanLabel || lot.itemId || '')}">${esc(cleanLabel || lot.itemId || 'Предмет')}${(lot.count || 1) > 1 ? ` <span class="lot-count">×${num(lot.count)}</span>` : ""}</div>
-          <div class="lot-seller">${seller}</div>
+        ? `<button class="btn-cancel cancel-auction" data-id="${lot.id}">Снять</button>`
+        : `<button class="btn-buy buy-auction" data-id="${lot.id}">Купить</button>`;
+      const count = Number(lot.count) || 1;
+      const countBadge = count > 1 ? `<span class="lot-badge-count">×${num(count)}</span>` : "";
+      const seller = isSelf
+        ? `<span class="lot-seller-tag self"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Вы')} (Вы)</span>`
+        : `<span class="lot-seller-tag"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Игрок')}</span>`;
+
+      return `<article class="card offer lot-card ${isSelf ? 'is-own-lot' : ''}" data-self="${isSelf ? '1' : '0'}" data-name="${esc((cleanLabel + ' ' + (lot.seller || '') + ' ' + (lot.itemId || '')).toLowerCase())}" style="--i:${i}">
+        <div class="lot-slot-wrap">
+          ${lotIconHtml(lot, "mc-icon")}
+          ${countBadge}
         </div>
-        <div class="lot-side">
-          <span class="lot-price">${num(lot.price)}${coinIco()}</span>
+        <div class="lot-info">
+          <div class="lot-name" title="${esc(cleanLabel || lot.itemId || '')}">${esc(cleanLabel || lot.itemId || 'Предмет')}</div>
+          ${seller}
+        </div>
+        <div class="lot-action-col">
+          <span class="lot-cost">${num(lot.price)}${coinIco()}</span>
           ${btn}
         </div>
       </article>`;
     }).join("");
 
-    const emptyCard = lots.length === 0 ? `<div class="empty-card" style="grid-column:1/-1;text-align:center;padding:36px 20px;background:rgba(255,255,255,.02);border:1px dashed var(--line);border-radius:16px;">
-        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--muted)" stroke-width="1.5" style="margin-bottom:8px;"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>
-        <h3 style="font-size:15px;margin:0 0 6px;color:var(--text);">На бирже пока нет активных лотов</h3>
-        <p style="font-size:11.5px;color:var(--muted);margin:0 0 14px;line-height:1.4;">Выставите первый предмет на продажу другим игрокам прямо сейчас!</p>
-        <div style="font-size:11px;color:var(--accent);background:rgba(47,224,192,.08);padding:6px 14px;border-radius:8px;display:inline-block;border:1px solid rgba(47,224,192,.2);">
-          Возьмите предмет в руку и напишите в чат: <b style="color:var(--gold);">/ah sell &lt;цена&gt;</b>
-        </div>
-      </div>` : "";
+    const emptyHtml = `<div id="auctionEmpty" class="empty-card" style="display:${lots.length === 0 ? 'block' : 'none'};grid-column:1/-1;text-align:center;padding:42px 20px;background:rgba(255,255,255,.02);border:1px dashed var(--line);border-radius:18px;">
+      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="var(--muted)" stroke-width="1.5" style="margin-bottom:10px;opacity:.75"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>
+      <h3 style="font-size:15px;margin:0 0 6px;color:var(--text);font-weight:700;">На бирже пока нет лотов</h3>
+      <p style="font-size:12px;color:var(--muted);margin:0 0 16px;line-height:1.45;">Вы можете первым выставить предмет на продажу другим игрокам прямо сейчас!</p>
+      <div class="auction-sell-cmd" id="copySellCmdEmpty" style="display:inline-flex;">
+        <span style="opacity:.75;">Команда:</span>
+        <code>/ah sell &lt;цена&gt;</code>
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      </div>
+    </div>`;
 
     return `<div class="view">${title("Аукцион и Рынок", "Покупайте и продавайте предметы между игроками")}
-      <div class="grid two" style="margin-bottom:12px;">
-        <section class="card hero" style="min-height:110px;padding:16px;">
-          <div>
-            <h2 style="font-size:18px;margin:0 0 4px;">Торговая Биржа</h2>
-            <p style="font-size:11px;color:var(--muted);margin:0;">Держите предмет в руке и напишите в чат: <b style="color:var(--gold);">/ah sell &lt;цена&gt;</b></p>
+      <div class="auction-view-wrap">
+        <div class="auction-top-strip">
+          <div class="auction-stats-group">
+            <div class="auction-chip-stat"><small>Баланс:</small> <b>${coins(s.wallet ? s.wallet.coins : 0)}</b></div>
+            <div class="auction-chip-stat"><small>Активных лотов:</small> <b>${activeCount} шт.</b></div>
           </div>
-        </section>
-        <section class="stats">
-          <div class="stat"><small>Активных лотов</small><b>${activeCount} шт.</b></div>
-          <div class="stat"><small>Ваш баланс</small><b>${coins(s.wallet ? s.wallet.coins : 0)}</b></div>
-        </section>
+          <div class="auction-sell-cmd" id="copySellCmdBtn" title="Нажмите, чтобы скопировать команду">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            <span>Выставить лот:</span>
+            <code>/ah sell &lt;цена&gt;</code>
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </div>
+        </div>
+
+        <div class="auction-filter-bar">
+          <div class="auction-search-box">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="auctionSearchInput" class="auction-search-input" placeholder="Поиск по названию или продавцу..." autocomplete="off" />
+            <button id="auctionSearchClear" class="auction-search-clear">✕</button>
+          </div>
+          <div class="auction-tab-pills">
+            <button class="auction-pill active" data-filter="all">Все лоты (${activeCount})</button>
+            <button class="auction-pill" data-filter="self">Мои лоты (${myLotsCount})</button>
+          </div>
+        </div>
+
+        <div class="auction-grid stagger" id="auctionCardGrid">${emptyHtml}${cards}</div>
       </div>
-      <div class="section-title"><b>Свежие предложения</b><span>Обновляется в реальном времени</span></div>
-      <div class="stagger" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:8px;">${emptyCard}${cards}</div>
     </div>`;
   }
 
@@ -1425,15 +1686,13 @@ try {
       if (state.payload.snapshot.season.claimable > 0) {
         state.payload.snapshot.season.claimable--;
       }
-      b.textContent = "Забрано";
-      b.disabled = true;
-      b.className = "button";
-      b.style.opacity = "0.45";
-      b.style.borderColor = "var(--line)";
-      b.style.color = "var(--muted)";
-      b.style.cursor = "default";
-      const card = b.closest(".reward");
-      if (card) card.classList.remove("claimable");
+      const card = b.closest(".pass-card") || b.closest(".reward");
+      if (card) {
+        card.classList.remove("is-claimable");
+        card.classList.remove("claimable");
+        card.classList.add("is-claimed");
+      }
+      b.outerHTML = `<div class="pass-status-badge claimed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 12 5 5L20 6"/></svg> Забрано</div>`;
       renderNav();
       action("pass.claim", String(lvl));
       toast("Награда уровня " + lvl + " получена!");
@@ -1475,6 +1734,65 @@ try {
       action("auction.cancel", String(b.dataset.id));
       setTimeout(() => action("hub.refresh"), 500);
     });
+
+    /* Auction Search, Filters & Quick Sell Command Helper */
+    const searchInput = $("auctionSearchInput");
+    const clearBtn = $("auctionSearchClear");
+    const filterPills = document.querySelectorAll(".auction-pill");
+    let activeFilter = "all";
+
+    function filterLots() {
+      const q = (searchInput ? searchInput.value : "").trim().toLowerCase();
+      if (clearBtn) clearBtn.style.display = q ? "grid" : "none";
+      const cards = document.querySelectorAll("#auctionCardGrid .lot-card");
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const matchesQuery = !q || (card.dataset.name || "").includes(q);
+        const isSelf = card.dataset.self === "1";
+        const matchesFilter = activeFilter === "all" || (activeFilter === "self" && isSelf);
+        if (matchesQuery && matchesFilter) {
+          card.style.display = "";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+      const emptyEl = $("auctionEmpty");
+      if (emptyEl) {
+        emptyEl.style.display = visibleCount === 0 ? "block" : "none";
+      }
+    }
+
+    if (searchInput) {
+      searchInput.oninput = filterLots;
+    }
+    if (clearBtn) {
+      clearBtn.onclick = () => {
+        searchInput.value = "";
+        filterLots();
+        searchInput.focus();
+      };
+    }
+    filterPills.forEach(pill => {
+      pill.onclick = () => {
+        filterPills.forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        activeFilter = pill.dataset.filter || "all";
+        filterLots();
+      };
+    });
+
+    const handleCopyCmd = () => {
+      const cmd = "/ah sell ";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cmd).catch(() => {});
+      }
+      toast("Команда скопирована: /ah sell <цена>");
+    };
+    const copyBtn = $("copySellCmdBtn");
+    if (copyBtn) copyBtn.onclick = handleCopyCmd;
+    const copyEmptyBtn = $("copySellCmdEmpty");
+    if (copyEmptyBtn) copyEmptyBtn.onclick = handleCopyCmd;
 
     document.querySelectorAll(".swatch").forEach(b => b.onclick = () => {
       send({ type: "settings", theme: b.dataset.theme });
@@ -1561,21 +1879,96 @@ try {
     state.payload = payload;
     const s = payload.snapshot || {};
 
-    $("serverName").textContent = s.server.name || "AquaTech Network";
-    $("online").textContent = `${s.server.online || 0}/${s.server.slots || 100}`;
-    $("tps").textContent = `${(s.server.tps || 20).toFixed(1)} TPS`;
-    $("coins").textContent = num(s.wallet.coins);
-    $("gems").textContent = num(s.wallet.gems);
-    $("build").textContent = s.server.build || "AquaLumen UI";
-    $("openKey").textContent = payload.openKey || "F4";
+    if ($("serverName")) $("serverName").textContent = (s.server && s.server.name) || "AquaTech Network";
+    if ($("online")) $("online").textContent = `${(s.server && s.server.online) || 0}/${(s.server && s.server.slots) || 100}`;
+    if ($("tps")) $("tps").textContent = `${((s.server && s.server.tps) || 20).toFixed(1)} TPS`;
+    if ($("coins")) $("coins").textContent = num(s.wallet ? s.wallet.coins : 0);
+    if ($("gems")) $("gems").textContent = num(s.wallet ? s.wallet.gems : 0);
+    if ($("build")) $("build").textContent = (s.server && s.server.build) || "AquaLumen UI";
+    if ($("openKey")) $("openKey").textContent = payload.openKey || "F4";
 
     applyAppearance();
     
-    const currentJson = JSON.stringify(s);
-    if (currentJson !== lastSnapshotJson) {
-      lastSnapshotJson = currentJson;
+    function getTabDataKey(tab) {
+      if (!s) return "";
+      switch (tab) {
+        case "auction": return JSON.stringify(s.market || []);
+        case "pass": return JSON.stringify([s.season, s.wallet ? s.wallet.coins : 0]);
+        case "profile": return JSON.stringify([s.player, s.wallet]);
+        case "store": return JSON.stringify([s.shop, s.wallet]);
+        case "fishing": return JSON.stringify([s.fishing, s.wallet]);
+        case "cases": return JSON.stringify([s.cases, s.wallet]);
+        case "tops": return JSON.stringify(s.top || []);
+        case "events": return JSON.stringify(s.events || []);
+        case "kits": return JSON.stringify(s.kits || []);
+        case "warps": return JSON.stringify(s.warps || []);
+        case "settings": return "static";
+        default: return "";
+      }
+    }
+
+    if (!window._lastTabData) window._lastTabData = {};
+    if (!window._lastNavKey) window._lastNavKey = "";
+
+    const currentNavKey = `${s.player ? s.player.rank : ''}|${s.wallet ? s.wallet.coins : 0}|${s.wallet ? s.wallet.gems : 0}|${s.season ? s.season.claimable : 0}`;
+    if (currentNavKey !== window._lastNavKey) {
+      window._lastNavKey = currentNavKey;
       renderNav();
+    }
+
+    const currentTabKey = getTabDataKey(state.tab);
+    if (currentTabKey !== window._lastTabData[state.tab]) {
+      window._lastTabData[state.tab] = currentTabKey;
+      
+      let savedSearch = "";
+      let savedFilter = "all";
+      let searchHadFocus = false;
+      let selStart = 0;
+      let selEnd = 0;
+
+      if (state.tab === "auction") {
+        const inp = $("auctionSearchInput");
+        if (inp) {
+          savedSearch = inp.value;
+          searchHadFocus = (document.activeElement === inp);
+          selStart = inp.selectionStart;
+          selEnd = inp.selectionEnd;
+        }
+        const activePill = document.querySelector(".auction-pill.active");
+        if (activePill && activePill.dataset.filter) {
+          savedFilter = activePill.dataset.filter;
+        }
+      }
+
       renderView(false, true);
+
+      if (state.tab === "auction") {
+        const inp = $("auctionSearchInput");
+        if (inp && savedSearch) {
+          inp.value = savedSearch;
+          if (searchHadFocus) {
+            inp.focus();
+            try { inp.setSelectionRange(selStart, selEnd); } catch (e) {}
+          }
+        }
+        if (savedFilter && savedFilter !== "all") {
+          document.querySelectorAll(".auction-pill").forEach(p => {
+            p.classList.toggle("active", p.dataset.filter === savedFilter);
+          });
+        }
+        if (savedSearch || (savedFilter && savedFilter !== "all")) {
+          const clearBtn = $("auctionSearchClear");
+          if (clearBtn) clearBtn.style.display = savedSearch ? "grid" : "none";
+          const q = savedSearch.toLowerCase();
+          const cards = document.querySelectorAll("#auctionCardGrid .lot-card");
+          cards.forEach(card => {
+            const matchesQuery = !q || (card.dataset.name || "").includes(q);
+            const isSelf = card.dataset.self === "1";
+            const matchesFilter = savedFilter === "all" || (savedFilter === "self" && isSelf);
+            card.style.display = (matchesQuery && matchesFilter) ? "" : "none";
+          });
+        }
+      }
     }
 
     if (s.caseResult) {
@@ -1736,7 +2129,9 @@ dest_paths = [
     'server/config/aqualumen/html/hub.html',
     'server/config/aqualumen/hub.html',
     'config/aqualumen/html/hub.html',
-    'config/aqualumen/hub.html'
+    'config/aqualumen/hub.html',
+    'docs/pack/config/aqualumen/html/hub.html',
+    'docs/pack/config/aqualumen/hub.html'
 ]
 
 for p in dest_paths:

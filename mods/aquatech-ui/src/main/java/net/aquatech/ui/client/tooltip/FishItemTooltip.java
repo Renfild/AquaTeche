@@ -28,7 +28,7 @@ public final class FishItemTooltip {
 
         if (tag.getBoolean("AquaSmoked")) {
             event.getToolTip().add(Component.literal(
-                    "\u00a76Копчёная рыба: \u00a7e×2\u00a76 цены в магазине рыбака"));
+                    "\u00a76Копчёная рыба: \u00a7e×1.5\u00a76 цены в магазине рыбака"));
         }
         long caughtAt = tag.getLong("AquaCaughtAt");
         if (caughtAt > 0L) {

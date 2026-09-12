@@ -112,9 +112,12 @@ public final class HubActionHandler {
             tier = 1;
         }
 
+        java.util.UUID uuid = player.getUUID();
+        MariaStats.PlayerRewards rewards = MariaStats.getRewards(uuid);
         net.minecraft.nbt.CompoundTag claimedTag = player.getPersistentData().getCompound("aqualumen_pass_claimed");
         String key = "t_" + tier;
-        if (claimedTag.getBoolean(key)) {
+
+        if (rewards.isTierClaimed(tier) || claimedTag.getBoolean(key)) {
             player.sendSystemMessage(Component.literal("Награда за уровень " + tier + " уже получена").withStyle(ChatFormatting.YELLOW));
             return;
         }
@@ -161,6 +164,10 @@ public final class HubActionHandler {
             case 25 -> caseExtra = grantPassCase(player, "draconic", "Драконий");
         }
 
+        // Persist to MariaDB + disk cache
+        MariaStats.savePassClaimed(uuid, tier);
+
+        // Keep local persistent NBT in sync
         claimedTag.putBoolean(key, true);
         player.getPersistentData().put("aqualumen_pass_claimed", claimedTag);
 

@@ -1,0 +1,10 @@
+{
+  "itemGroup.aquatech.machines": "AquaTech: Механизмы",
+  "block.aquatech.auto_fisher": "§bАвто-Рыболов MK-1",
+  "block.aquatech.fish_smoker": "Коптильня",
+  "tooltip.aquatech.auto_fisher.desc": "§7Автоматически вылавливает руды и ресурсы Industrial Upgrade из океанской воды.",
+  "tooltip.aquatech.auto_fisher.status.working": "§a✓ Статус: Идет вылавливание ресурсов...",
+  "tooltip.aquatech.auto_fisher.status.no_energy": "§c✗ Статус: Нет энергии (Требуется 25 FE/t — Единая Энергия)",
+  "container.aquatech.auto_fisher": "Авто-Рыболов MK-1",
+  "container.aquatech.fish_smoker": "Коптильня"
+}

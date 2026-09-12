@@ -40,6 +40,7 @@ public final class FishRosterService {
         ROD_TIER.put("slimed_rod", 5);
         ROD_TIER.put("iceborn_rod", 6);
         ROD_TIER.put("starcatcher_rod", 7);
+        ROD_TIER.put("sky_rod", 8);
         ROD_TIER.put("azure_crystal_rod", 8);
         ROD_TIER.put("sharktooth_rod", 9);
         ROD_TIER.put("obsidian_rod", 10);

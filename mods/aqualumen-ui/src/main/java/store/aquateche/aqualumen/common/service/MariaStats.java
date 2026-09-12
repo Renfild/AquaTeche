@@ -10,7 +10,9 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.PreparedStatement;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -79,6 +81,183 @@ public final class MariaStats {
         }
     }
 
+    public record PlayerRewards(long dailyLastDay, int dailyStreak, Set<Integer> passClaimedTiers) {
+        public boolean isTierClaimed(int tier) {
+            return passClaimedTiers != null && passClaimedTiers.contains(tier);
+        }
+    }
+
+    private static final Map<UUID, PlayerRewards> REWARDS_CACHE = new java.util.concurrent.ConcurrentHashMap<>();
+    private static final Path REWARDS_DIR = Path.of("config/aqualumen_rewards");
+
+    public static PlayerRewards getRewards(UUID uuid) {
+        if (uuid == null) return new PlayerRewards(0, 0, java.util.Collections.emptySet());
+        PlayerRewards cached = REWARDS_CACHE.get(uuid);
+        if (cached != null) return cached;
+
+        // Try reading local file cache
+        PlayerRewards fromFile = loadFromFile(uuid);
+        if (fromFile != null) {
+            REWARDS_CACHE.put(uuid, fromFile);
+            return fromFile;
+        }
+
+        PlayerRewards empty = new PlayerRewards(0, 0, new java.util.concurrent.ConcurrentHashMap<Integer, Boolean>().keySet());
+        REWARDS_CACHE.put(uuid, empty);
+        syncRewardsFromDbAsync(uuid);
+        return empty;
+    }
+
+    public static void saveDaily(UUID uuid, long day, int streak) {
+        if (uuid == null) return;
+        PlayerRewards current = getRewards(uuid);
+        Set<Integer> tiers = new java.util.HashSet<>(current.passClaimedTiers());
+        PlayerRewards updated = new PlayerRewards(day, streak, tiers);
+        REWARDS_CACHE.put(uuid, updated);
+        saveToFile(uuid, updated);
+        persistRewardsAsync(uuid, day, streak, tiers);
+    }
+
+    public static void savePassClaimed(UUID uuid, int tier) {
+        if (uuid == null) return;
+        PlayerRewards current = getRewards(uuid);
+        Set<Integer> tiers = new java.util.HashSet<>(current.passClaimedTiers());
+        tiers.add(tier);
+        PlayerRewards updated = new PlayerRewards(current.dailyLastDay(), current.dailyStreak(), tiers);
+        REWARDS_CACHE.put(uuid, updated);
+        saveToFile(uuid, updated);
+        persistRewardsAsync(uuid, current.dailyLastDay(), current.dailyStreak(), tiers);
+    }
+
+    public static void syncRewardsFromDbAsync(UUID uuid) {
+        if (uuid == null) return;
+        java.util.concurrent.CompletableFuture.runAsync(() -> {
+            JsonObject cfg = creds();
+            Driver jdbc = driver();
+            if (cfg == null || jdbc == null) return;
+            String jdbcUrl = "jdbc:mysql://" + cfg.get("host").getAsString() + ":"
+                    + cfg.get("port").getAsInt() + "/" + cfg.get("database").getAsString()
+                    + "?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=utf8";
+            Properties props = new Properties();
+            props.setProperty("user", cfg.get("username").getAsString());
+            props.setProperty("password", cfg.get("password").getAsString());
+            try (Connection conn = jdbc.connect(jdbcUrl, props)) {
+                if (conn == null) return;
+                ensureSchema(conn);
+                try (PreparedStatement ps = conn.prepareStatement(
+                        "SELECT daily_last_day, daily_streak, pass_claimed FROM aquatech_player_rewards WHERE uuid = ?")) {
+                    ps.setString(1, uuid.toString());
+                    try (var rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            long lastDay = rs.getLong("daily_last_day");
+                            int streak = rs.getInt("daily_streak");
+                            String rawTiers = rs.getString("pass_claimed");
+                            Set<Integer> tiers = parseTiers(rawTiers);
+                            PlayerRewards fromDb = new PlayerRewards(lastDay, streak, tiers);
+                            REWARDS_CACHE.put(uuid, fromDb);
+                            saveToFile(uuid, fromDb);
+                        }
+                    }
+                }
+            } catch (Throwable t) {
+                AquaLumenUI.LOGGER.debug("MariaDB rewards sync failed for {}: {}", uuid, t.toString());
+            }
+        });
+    }
+
+    private static void persistRewardsAsync(UUID uuid, long dailyLastDay, int dailyStreak, Set<Integer> tiers) {
+        java.util.concurrent.CompletableFuture.runAsync(() -> {
+            JsonObject cfg = creds();
+            Driver jdbc = driver();
+            if (cfg == null || jdbc == null) return;
+            String jdbcUrl = "jdbc:mysql://" + cfg.get("host").getAsString() + ":"
+                    + cfg.get("port").getAsInt() + "/" + cfg.get("database").getAsString()
+                    + "?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=utf8";
+            Properties props = new Properties();
+            props.setProperty("user", cfg.get("username").getAsString());
+            props.setProperty("password", cfg.get("password").getAsString());
+            try (Connection conn = jdbc.connect(jdbcUrl, props)) {
+                if (conn == null) return;
+                ensureSchema(conn);
+                try (PreparedStatement ps = conn.prepareStatement(
+                        "INSERT INTO aquatech_player_rewards (uuid, daily_last_day, daily_streak, pass_claimed)"
+                                + " VALUES (?,?,?,?)"
+                                + " ON DUPLICATE KEY UPDATE daily_last_day=VALUES(daily_last_day),"
+                                + " daily_streak=VALUES(daily_streak), pass_claimed=VALUES(pass_claimed)")) {
+                    ps.setString(1, uuid.toString());
+                    ps.setLong(2, dailyLastDay);
+                    ps.setInt(3, dailyStreak);
+                    ps.setString(4, formatTiers(tiers));
+                    ps.executeUpdate();
+                }
+            } catch (Throwable t) {
+                AquaLumenUI.LOGGER.debug("MariaDB rewards persist failed for {}: {}", uuid, t.toString());
+            }
+        });
+    }
+
+    private static Set<Integer> parseTiers(String raw) {
+        Set<Integer> set = new java.util.HashSet<>();
+        if (raw == null || raw.isBlank()) return set;
+        for (String part : raw.split(",")) {
+            String trimmed = part.trim();
+            if (!trimmed.isEmpty()) {
+                try {
+                    set.add(Integer.parseInt(trimmed));
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+        return set;
+    }
+
+    private static String formatTiers(Set<Integer> set) {
+        if (set == null || set.isEmpty()) return "";
+        java.util.List<Integer> list = new java.util.ArrayList<>(set);
+        java.util.Collections.sort(list);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            if (i > 0) sb.append(",");
+            sb.append(list.get(i));
+        }
+        return sb.toString();
+    }
+
+    private static PlayerRewards loadFromFile(UUID uuid) {
+        try {
+            Path file = REWARDS_DIR.resolve(uuid + ".json");
+            if (!Files.isRegularFile(file)) return null;
+            String text = Files.readString(file, StandardCharsets.UTF_8);
+            JsonObject obj = JsonParser.parseString(text).getAsJsonObject();
+            long day = obj.has("daily_last_day") ? obj.get("daily_last_day").getAsLong() : 0L;
+            int streak = obj.has("daily_streak") ? obj.get("daily_streak").getAsInt() : 0;
+            Set<Integer> tiers = new java.util.HashSet<>();
+            if (obj.has("pass_claimed") && obj.get("pass_claimed").isJsonArray()) {
+                for (var el : obj.getAsJsonArray("pass_claimed")) {
+                    tiers.add(el.getAsInt());
+                }
+            }
+            return new PlayerRewards(day, streak, tiers);
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    private static void saveToFile(UUID uuid, PlayerRewards rewards) {
+        try {
+            Files.createDirectories(REWARDS_DIR);
+            Path file = REWARDS_DIR.resolve(uuid + ".json");
+            JsonObject obj = new JsonObject();
+            obj.addProperty("daily_last_day", rewards.dailyLastDay());
+            obj.addProperty("daily_streak", rewards.dailyStreak());
+            com.google.gson.JsonArray arr = new com.google.gson.JsonArray();
+            java.util.List<Integer> sorted = new java.util.ArrayList<>(rewards.passClaimedTiers());
+            java.util.Collections.sort(sorted);
+            for (int t : sorted) arr.add(t);
+            obj.add("pass_claimed", arr);
+            Files.writeString(file, obj.toString(), StandardCharsets.UTF_8);
+        } catch (Throwable ignored) {}
+    }
+
     private static void ensureSchema(Connection conn) {
         if (schemaReady) {
             return;
@@ -96,6 +275,16 @@ public final class MariaStats {
                     + " ON UPDATE CURRENT_TIMESTAMP,"
                     + "UNIQUE KEY uq_stats_nick (nick)"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+            st.execute("CREATE TABLE IF NOT EXISTS aquatech_player_rewards ("
+                    + "uuid CHAR(36) NOT NULL PRIMARY KEY,"
+                    + "daily_last_day BIGINT NOT NULL DEFAULT 0,"
+                    + "daily_streak INT NOT NULL DEFAULT 0,"
+                    + "pass_claimed TEXT NOT NULL,"
+                    + "updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"
+                    + " ON UPDATE CURRENT_TIMESTAMP"
+                    + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
             schemaReady = true;
         } catch (Throwable t) {
             AquaLumenUI.LOGGER.debug("MariaDB stats schema failed: {}", t.toString());

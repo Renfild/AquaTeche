@@ -542,6 +542,18 @@ public class FishingLootHandler {
         List<ItemStack> pool = new ArrayList<>();
 
         switch (rodId) {
+            case "sky_rod" -> { // Небесная удочка: Applied Energistics 2 ресурсы
+                maybeAdd(pool, random, 0.65f, getModItem("ae2:certus_quartz_crystal", Items.QUARTZ, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.45f, getModItem("ae2:charged_certus_quartz_crystal", Items.QUARTZ, 1));
+                maybeAdd(pool, random, 0.55f, new ItemStack(Items.QUARTZ, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.50f, getModItem("ae2:sky_stone_block", Items.BLACKSTONE, 1 + random.nextInt(3)));
+                maybeAdd(pool, random, 0.40f, getModItem("ae2:sky_dust", Items.GUNPOWDER, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.25f, getModItem("ae2:fluix_crystal", Items.AMETHYST_SHARD, 1));
+                pickFromPool(list, pool, random, 1, 3);
+                if (list.isEmpty()) {
+                    list.add(getModItem("ae2:certus_quartz_crystal", Items.QUARTZ, 1));
+                }
+            }
             case "humble_rod" -> { // Tier 2: Humble — early ores (+ some starter leftovers)
                 maybeAdd(pool, random, 0.45f, new ItemStack(Items.COBBLESTONE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.35f, new ItemStack(Items.CLAY_BALL, 1 + random.nextInt(2)));

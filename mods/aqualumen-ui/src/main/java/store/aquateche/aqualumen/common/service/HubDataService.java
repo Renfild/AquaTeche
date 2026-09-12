@@ -697,14 +697,24 @@ public final class HubDataService {
         boolean premium = player.getPersistentData().getBoolean("aqualumen_pass_premium")
                 || player.hasPermissions(2) || isVipOrStaff(player);
 
-        // Check claimed tiers in player persistent NBT
+        // Check claimed tiers in MariaStats persistent storage (MySQL + disk cache)
+        MariaStats.PlayerRewards rewards = MariaStats.getRewards(player.getUUID());
+        java.util.Set<Integer> claimedSet = new java.util.HashSet<>(rewards.passClaimedTiers());
+
+        // Also check legacy player persistent NBT
         CompoundTag claimedTag = player.getPersistentData().getCompound("aqualumen_pass_claimed");
-        int claimable = 0;
-        List<Integer> claimedTiers = new ArrayList<>();
-        for (int t = 1; t <= tier; t++) {
+        for (int t = 1; t <= maxTier; t++) {
             if (claimedTag.getBoolean("t_" + t)) {
-                claimedTiers.add(t);
-            } else {
+                claimedSet.add(t);
+            }
+        }
+
+        int claimable = 0;
+        List<Integer> claimedTiers = new ArrayList<>(claimedSet);
+        java.util.Collections.sort(claimedTiers);
+
+        for (int t = 1; t <= tier; t++) {
+            if (!claimedSet.contains(t)) {
                 claimable++;
             }
         }

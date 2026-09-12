@@ -58,6 +58,7 @@ public final class ServerEvents {
             return;
         }
         HubEconomy.coins(player);
+        store.aquateche.aqualumen.common.service.MariaStats.syncRewardsFromDbAsync(player.getUUID());
         HubDataService.syncPlayerToWebAsync(player);
     }
 

@@ -42,15 +42,15 @@
     "semantic_hash": ""
   },
   "docs/assets/js/site.js": {
-    "mtime": 1788778904.0777922,
-    "seen": 1788779004.6609316,
-    "ast_hash": "6ec6aa0b25d868fb8ea4be87f47909e5",
+    "mtime": 1788990490.0334628,
+    "seen": 1789053558.7803614,
+    "ast_hash": "3e9e02cb54bdf156eff29b3b05792280",
     "semantic_hash": ""
   },
   "docs/pack/manifest.json": {
-    "mtime": 1788780872.4741168,
-    "seen": 1788781085.738134,
-    "ast_hash": "9df08f61d1db690a7951a2d4198aa954",
+    "mtime": 1789134557.2725308,
+    "seen": 1789135034.1417186,
+    "ast_hash": "1f0fd811b2ea20f2b9f90edc48b1cdf5",
     "semantic_hash": ""
   },
   "functions/_lib/auth.js": {
@@ -252,15 +252,15 @@
     "semantic_hash": ""
   },
   "kubejs/server_scripts/20_aquatech_rod_crafts.js": {
-    "mtime": 1788017749.0962093,
-    "seen": 1788602273.154601,
-    "ast_hash": "842ec96412a8b6224b7c2fa51df4f6a3",
+    "mtime": 1788985132.448836,
+    "seen": 1789053558.793364,
+    "ast_hash": "762a1b7687ea3d98d023f59d95574952",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/30_aquatech_crafting.js": {
-    "mtime": 1788774635.8745685,
-    "seen": 1788776336.227632,
-    "ast_hash": "0ef441d9a81352498b1bd454bf820005",
+    "mtime": 1789134545.181131,
+    "seen": 1789135034.156185,
+    "ast_hash": "cca46c9f6c15f6f898aa1fb01b0a2709",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/40_aquatech_fishing_drops.js": {
@@ -744,9 +744,9 @@
     "semantic_hash": ""
   },
   "tools/publish_client_pack.py": {
-    "mtime": 1788780871.45225,
-    "seen": 1788781085.8527286,
-    "ast_hash": "3a058c3038d60dd52be601224394ef7b",
+    "mtime": 1789128560.6521273,
+    "seen": 1789130419.5572972,
+    "ast_hash": "d0074c970f1bbfdcf324224d5f99f241",
     "semantic_hash": ""
   },
   "tools/quests/build_ftb_quests.py": {
@@ -1032,8 +1032,8 @@
     "semantic_hash": ""
   },
   "tools/upload_pack_release.py": {
-    "mtime": 1788780871.4527738,
-    "seen": 1788781085.873591,
+    "mtime": 1789067109.1811786,
+    "seen": 1789073403.241749,
     "ast_hash": "e541c410932c7ec6d881948e1f10bc85",
     "semantic_hash": ""
   },
@@ -1044,15 +1044,15 @@
     "semantic_hash": ""
   },
   "worker/index.js": {
-    "mtime": 1788774635.7910006,
-    "seen": 1788776336.2919307,
-    "ast_hash": "2ad7a3d22edef60e09634ca90022d97f",
+    "mtime": 1789029144.8365674,
+    "seen": 1789053558.9116747,
+    "ast_hash": "7032a6ee388ca66badcacaa413bb65ab",
     "semantic_hash": ""
   },
   ".agents/AGENTS.md": {
-    "mtime": 1787126046.702778,
-    "seen": 1788602273.154601,
-    "ast_hash": "45cc263e4193f28c1a8f1f67de4388ef",
+    "mtime": 1788846328.7528467,
+    "seen": 1789053558.9116747,
+    "ast_hash": "06df23e289dd15562d9d32020045ab5e",
     "semantic_hash": ""
   },
   ".agents/skills/aquatech-addon-kubejs/SKILL.md": {
@@ -1104,9 +1104,9 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1788602234.7870245,
-    "seen": 1788602273.154601,
-    "ast_hash": "5f9e7fa3aee9f75e03c0b51cc34a87d8",
+    "mtime": 1788846823.1059096,
+    "seen": 1789053558.915296,
+    "ast_hash": "ba9f917260da773c8a11bf3ead2cafe9",
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
@@ -1122,9 +1122,9 @@
     "semantic_hash": ""
   },
   "IMPLEMENTATION_PLAN.md": {
-    "mtime": 1788780823.7627923,
-    "seen": 1788781085.882192,
-    "ast_hash": "a632e3e5b9098ad2d105548f755d986d",
+    "mtime": 1789066768.1624453,
+    "seen": 1789066826.6678152,
+    "ast_hash": "ad19100aea9d0bcc7f950d9b6938be96",
     "semantic_hash": ""
   },
   "PLAYER_ROADMAP.md": {
@@ -1584,39 +1584,39 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/AbyssalPortalBlock.java": {
-    "mtime": 1785859871.7408183,
-    "seen": 1788602273.154601,
-    "ast_hash": "18f592f8d381b01696bd046bb447b32d",
+    "mtime": 1789065523.045851,
+    "seen": 1789065778.2916582,
+    "ast_hash": "45ed152fe17d2d9c1aaea558225af257",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/AutoFisherBlock.java": {
-    "mtime": 1785241396.7445025,
-    "seen": 1788602273.154601,
-    "ast_hash": "89956f8825cc07a5980ab406f44115bc",
+    "mtime": 1789134377.0085213,
+    "seen": 1789135034.179112,
+    "ast_hash": "d99c4098a66d2f78d31c7c760f270b23",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/OceanAltarBlock.java": {
-    "mtime": 1785307220.40579,
-    "seen": 1788602273.154601,
-    "ast_hash": "86b4d52e74eac68ba1b5f2e58d35c896",
+    "mtime": 1789065505.5616374,
+    "seen": 1789065778.2916582,
+    "ast_hash": "f01c5e452e0630f88b91043fd9a6995b",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/OceanFilterBlock.java": {
-    "mtime": 1785244580.2868195,
-    "seen": 1788602273.154601,
-    "ast_hash": "95f516aebe9365945b947b6d570b2907",
+    "mtime": 1789065520.1497824,
+    "seen": 1789065778.2916582,
+    "ast_hash": "76223077be0476430c8f3dc0933c78ea",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/SeabedDredgerBlock.java": {
-    "mtime": 1788450913.9405363,
-    "seen": 1788602273.154601,
-    "ast_hash": "41068dee18732859467a8e0088db4fd5",
+    "mtime": 1789065497.1248834,
+    "seen": 1789065778.2916582,
+    "ast_hash": "d84c8888ddb2c7596216aa683f87a3cf",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/entity/AutoFisherBlockEntity.java": {
-    "mtime": 1788774635.8745685,
-    "seen": 1788776336.2391493,
-    "ast_hash": "06404d4ff7d5961fd41227527246b176",
+    "mtime": 1789127081.273415,
+    "seen": 1789127505.3016713,
+    "ast_hash": "c42cf620a670397452d83cdce0fdadbe",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/entity/OceanAltarBlockEntity.java": {
@@ -1632,9 +1632,9 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/entity/SeabedDredgerBlockEntity.java": {
-    "mtime": 1788451003.841165,
-    "seen": 1788602273.154601,
-    "ast_hash": "9549cfd1e6a304021b370bec641ee5be",
+    "mtime": 1788983337.59157,
+    "seen": 1789053558.8127093,
+    "ast_hash": "e3c7deb7de6f480517d52ea07446faf5",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/entity/WorkingMachineTracker.java": {
@@ -1740,15 +1740,15 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/FishingLootHandler.java": {
-    "mtime": 1788774635.7910006,
-    "seen": 1788776336.2421525,
-    "ast_hash": "d89bf7ccaba3e6a79e595a597a287326",
+    "mtime": 1789068355.2044306,
+    "seen": 1789073403.2144415,
+    "ast_hash": "d6d4c7cac9109bd2c9254802923f2601",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/FishingRodCompat.java": {
-    "mtime": 1788017748.138501,
-    "seen": 1788602273.154601,
-    "ast_hash": "90020004f4e1235a7145448531450652",
+    "mtime": 1789068327.2971652,
+    "seen": 1789073403.2144415,
+    "ast_hash": "fe8c0937a4dc33af79cdac3441d23741",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/RateModPersistHandler.java": {
@@ -1806,9 +1806,9 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/inventory/AutoFisherMenu.java": {
-    "mtime": 1787918122.6792347,
-    "seen": 1788602273.154601,
-    "ast_hash": "5747332df37a7fa7a0ad3150dae683ef",
+    "mtime": 1789128412.2450826,
+    "seen": 1789130419.5352976,
+    "ast_hash": "238fc1c885a6f2dad0bf44d0b5f59410",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/inventory/OceanAltarMenu.java": {
@@ -1956,33 +1956,33 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/registry/ModBlockEntities.java": {
-    "mtime": 1786089190.2492466,
-    "seen": 1788602273.154601,
-    "ast_hash": "99604fad225089f2bcee0d6356f03bf0",
+    "mtime": 1789134401.670763,
+    "seen": 1789135034.2001119,
+    "ast_hash": "4eefc27572117e45ee47ddde4cb77519",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/registry/ModBlocks.java": {
-    "mtime": 1786089258.914633,
-    "seen": 1788602273.154601,
-    "ast_hash": "8d17a37afd7a7b3dd4925c0e7db50a49",
+    "mtime": 1788888038.4971154,
+    "seen": 1789053558.8275762,
+    "ast_hash": "4dafd7cba8f80c1f2b920fd838bae6bd",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/registry/ModCreativeTabs.java": {
-    "mtime": 1787424567.6203976,
-    "seen": 1788602273.154601,
-    "ast_hash": "b71ccb371c83d23347c0e71dc36ed901",
+    "mtime": 1789070188.035986,
+    "seen": 1789073403.217556,
+    "ast_hash": "0dc730ff733b413c13348c5180f2cb55",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/registry/ModItems.java": {
-    "mtime": 1787225758.3797603,
-    "seen": 1788602273.154601,
-    "ast_hash": "969f482e38d2506977054dea70b54fac",
+    "mtime": 1789065679.8794096,
+    "seen": 1789065778.3089144,
+    "ast_hash": "d5321c320fa126079025ea84fe5f4ac4",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/registry/ModMenuTypes.java": {
-    "mtime": 1786089262.38926,
-    "seen": 1788602273.154601,
-    "ast_hash": "76aec9f1daa1fd08903bf4d0a45af622",
+    "mtime": 1788888038.6543672,
+    "seen": 1789053558.8275762,
+    "ast_hash": "ae9a9b8579a7fc18fd1d61bb289fd5f7",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/registry/ModSounds.java": {
@@ -2112,39 +2112,39 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/auto_fisher_bottom.png": {
-    "mtime": 1785311716.2978342,
-    "seen": 1788602273.1879108,
-    "ast_hash": "09e22213f94038ec81d9f1fd7ed4a05b",
+    "mtime": 1789068610.810987,
+    "seen": 1789073403.2733548,
+    "ast_hash": "05b0263539d735a967747b9f3aa74979",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/auto_fisher_front.png": {
-    "mtime": 1785311716.298834,
-    "seen": 1788602273.1879108,
-    "ast_hash": "0a7a89f65a7d73042ae2d34ec38b7441",
+    "mtime": 1789068610.8079717,
+    "seen": 1789073403.2733548,
+    "ast_hash": "49cbb7b449e9245272ce8bf733e78c5c",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/auto_fisher_front_off.png": {
-    "mtime": 1785311716.2998343,
-    "seen": 1788602273.1879108,
-    "ast_hash": "d245a758f79b293dff134a3ecc3b5320",
+    "mtime": 1789068610.8079717,
+    "seen": 1789073403.2733548,
+    "ast_hash": "49cbb7b449e9245272ce8bf733e78c5c",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/auto_fisher_front_on.png": {
-    "mtime": 1785311716.2998343,
-    "seen": 1788602273.1879108,
-    "ast_hash": "0a7a89f65a7d73042ae2d34ec38b7441",
+    "mtime": 1789068610.803972,
+    "seen": 1789073403.2733548,
+    "ast_hash": "b0e662984f6d1a7aeb40078e36bb9e5b",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/auto_fisher_side.png": {
-    "mtime": 1785311716.3013377,
-    "seen": 1788602273.1879108,
-    "ast_hash": "c4c2aa3d3487788925f0616371c4908c",
+    "mtime": 1789068610.8094754,
+    "seen": 1789073403.2733548,
+    "ast_hash": "16adfd49b14cf8009d33f6ea9619aba6",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/auto_fisher_top.png": {
-    "mtime": 1785311716.3013377,
-    "seen": 1788602273.1879108,
-    "ast_hash": "43ad794bb3e2ede03a2f9d568623cdf7",
+    "mtime": 1789068610.810987,
+    "seen": 1789073403.2733548,
+    "ast_hash": "cdc7381573a3c93d3d4d78b1c0fda52f",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/hydro_reactor_bottom.png": {
@@ -2322,9 +2322,9 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/auto_fisher.png": {
-    "mtime": 1786428889.8307664,
-    "seen": 1788602273.1879108,
-    "ast_hash": "a3a924492b792f8ff5d74541f4cdfc0a",
+    "mtime": 1789068610.8139873,
+    "seen": 1789073403.2778602,
+    "ast_hash": "d1fd9268b6a97cacc72c610525fddae2",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/badge_admin.png": {
@@ -2364,15 +2364,15 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/ocean_altar.png": {
-    "mtime": 1785493039.6424294,
-    "seen": 1788602273.1879108,
-    "ast_hash": "0e021f415268d7c96f4e805f15a793b3",
+    "mtime": 1788993882.1203165,
+    "seen": 1789053559.0078092,
+    "ast_hash": "bf0858f025a1361ae0390dfaf4656c33",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/ocean_filter.png": {
-    "mtime": 1785493039.5253246,
-    "seen": 1788602273.1879108,
-    "ast_hash": "de2bbff950638d46b11866dc3e35d7c3",
+    "mtime": 1788993882.0689878,
+    "seen": 1789053559.0078092,
+    "ast_hash": "6883e491384aa065734bcc370874844d",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/ocean_filter12.png": {
@@ -2394,9 +2394,9 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/seabed_dredger.png": {
-    "mtime": 1788431280.0530658,
-    "seen": 1788602273.1879108,
-    "ast_hash": "3a2dce071ff1ee1ac53b4cefd76136b1",
+    "mtime": 1788993882.0948758,
+    "seen": 1789053559.0088098,
+    "ast_hash": "a547f06f3b136ea0c4ce5b8265c5a603",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/server_menu.png": {
@@ -2814,123 +2814,123 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/admin.png": {
-    "mtime": 1787423277.0759718,
-    "seen": 1788602273.1879108,
-    "ast_hash": "406b69ef902f2013b7149e96c011c6dd",
+    "mtime": 1788813999.8484194,
+    "seen": 1789053559.0288098,
+    "ast_hash": "45ac8dff63a35f3d1b06696e9f504a26",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/artist.png": {
-    "mtime": 1787423277.0884855,
-    "seen": 1788602273.1879108,
+    "mtime": 1788813999.849924,
+    "seen": 1789053559.0288098,
     "ast_hash": "df828f20179f0593114e1468c51b5a7b",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/builder.png": {
-    "mtime": 1787423277.0894883,
-    "seen": 1788602273.1879108,
-    "ast_hash": "a54a42aaed310b4d74c6d645a7bd9002",
+    "mtime": 1788813999.8509288,
+    "seen": 1789053559.0288098,
+    "ast_hash": "fec5552fd265f5a94084388d84c56111",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/dev.png": {
-    "mtime": 1787423277.0769715,
-    "seen": 1788602273.1879108,
-    "ast_hash": "3a3aab50db469b85c86badc9c033d50a",
+    "mtime": 1788813999.8509288,
+    "seen": 1789053559.0288098,
+    "ast_hash": "f0a720b0f90bf6fa6c80e9e40c7775da",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/friend.png": {
-    "mtime": 1787423277.0904891,
-    "seen": 1788602273.1879108,
-    "ast_hash": "0398c2adbd88c14d77bcaa9ee9511598",
+    "mtime": 1788813999.8519285,
+    "seen": 1789053559.0288098,
+    "ast_hash": "e94bb17128fbf3c7a637c992f7b0bafb",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/helper.png": {
-    "mtime": 1787423277.0794747,
-    "seen": 1788602273.1879108,
-    "ast_hash": "ca442fc8d1c164cc65c525b0075973c2",
+    "mtime": 1788813999.8529322,
+    "seen": 1789053559.0288098,
+    "ast_hash": "66073e162b64d5de2fc1fa4f3b054d33",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/magnate.png": {
-    "mtime": 1787423277.0814788,
-    "seen": 1788602273.1879108,
-    "ast_hash": "5ec6076bb05faf2521b88a87d81878bf",
+    "mtime": 1788813999.8529322,
+    "seen": 1789053559.0288098,
+    "ast_hash": "3fa2a35a74808e9ce767fb31b14f5643",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/manager.png": {
-    "mtime": 1787423277.0804791,
-    "seen": 1788602273.1879108,
+    "mtime": 1788813999.8539314,
+    "seen": 1789053559.0288098,
     "ast_hash": "ebaee534ee37ec58664857a39bb5cd84",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/mod.png": {
-    "mtime": 1787423277.0779707,
-    "seen": 1788602273.1879108,
-    "ast_hash": "24cd161efc917ca11d81ce832d1218c4",
+    "mtime": 1788813999.8539314,
+    "seen": 1789053559.0288098,
+    "ast_hash": "db65b332156c806a5c589c09b70cb248",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/mvp.png": {
-    "mtime": 1787423277.0824792,
-    "seen": 1788602273.1879108,
-    "ast_hash": "0ac80f9514a10310aacc282d94cf610c",
+    "mtime": 1788813999.8549314,
+    "seen": 1789053559.0288098,
+    "ast_hash": "ad28e9217ef14a488c2edf24765b499a",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/npc.png": {
-    "mtime": 1787423277.0934885,
-    "seen": 1788602273.1879108,
+    "mtime": 1788813999.8549314,
+    "seen": 1789053559.0288098,
     "ast_hash": "e7429695a5b33e1c9b673f190410f542",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/owner.png": {
-    "mtime": 1787423277.0749705,
-    "seen": 1788602273.1879108,
-    "ast_hash": "4b64a67a40bc6c8d63ba201ee145962d",
+    "mtime": 1788813999.8559313,
+    "seen": 1789053559.0288098,
+    "ast_hash": "aaba7c7f997343e97af92131d2aac4da",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/player.png": {
-    "mtime": 1787423277.0924885,
-    "seen": 1788602273.1879108,
-    "ast_hash": "cbe9c16c0e2deefe1ed321811c830f53",
+    "mtime": 1788813999.8559313,
+    "seen": 1789053559.0288098,
+    "ast_hash": "13b81b60b6d2d30de6f5317276cacd6e",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/staff.png": {
-    "mtime": 1787423277.0789707,
-    "seen": 1788602273.1879108,
+    "mtime": 1788813999.8569317,
+    "seen": 1789053559.0288098,
     "ast_hash": "9334d61b0f200f521688de3f3a2e4d08",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/streamer.png": {
-    "mtime": 1787423277.0854795,
-    "seen": 1788602273.1879108,
+    "mtime": 1788813999.8569317,
+    "seen": 1789053559.0288098,
     "ast_hash": "3501379971aa7c61fd13a074658be8a8",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/trainee.png": {
-    "mtime": 1787423277.0914905,
-    "seen": 1788602273.1879108,
+    "mtime": 1788813999.8579316,
+    "seen": 1789053559.0288098,
     "ast_hash": "0d95cfdd3e91e41e4719d703455e701f",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/twitch.png": {
-    "mtime": 1787423277.0864792,
-    "seen": 1788602273.1879108,
-    "ast_hash": "b4230544f24ee722257bffe2b0f82d99",
+    "mtime": 1788813999.8589334,
+    "seen": 1789053559.0288098,
+    "ast_hash": "9db1626be223fffe88badea5f0629359",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/vip.png": {
-    "mtime": 1787423277.0844793,
-    "seen": 1788602273.1879108,
+    "mtime": 1788813999.8589334,
+    "seen": 1789053559.0288098,
     "ast_hash": "aaf288729696710c4292dccc58eccf65",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/vipplus.png": {
-    "mtime": 1787423277.0834796,
-    "seen": 1788602273.1879108,
+    "mtime": 1788813999.859932,
+    "seen": 1789053559.0288098,
     "ast_hash": "29991e689ba54dd625e0d82b14032aab",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/ranks/youtuber.png": {
-    "mtime": 1787423277.087983,
-    "seen": 1788602273.1879108,
-    "ast_hash": "600993c1f73bccf10a0b914a79b3e236",
+    "mtime": 1788813999.8604357,
+    "seen": 1789053559.0288098,
+    "ast_hash": "4fc2a616263b57ee1fcbc8e0dce471c4",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/sounds/minigame/catch_success.ogg": {
@@ -3090,21 +3090,21 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/AquaLumenUI.java": {
-    "mtime": 1788780257.3115695,
-    "seen": 1788780396.1873717,
-    "ast_hash": "1940048043ec236973d49dce6bf2aab3",
+    "mtime": 1789126963.4705272,
+    "seen": 1789127505.2986708,
+    "ast_hash": "450a3c0157e8a9edbaadd8bc212319b9",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/ServerEvents.java": {
-    "mtime": 1788777343.0307932,
-    "seen": 1788777615.4586012,
-    "ast_hash": "7ead9a7a0238b4fbcc180f507725701d",
+    "mtime": 1789126946.327386,
+    "seen": 1789127505.2986708,
+    "ast_hash": "8012241df6197c2f4276de7db4b4a9ed",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/command/LumenCommands.java": {
-    "mtime": 1787591134.8707788,
-    "seen": 1788602273.154601,
-    "ast_hash": "ad2c9677aa9c570de7a3035c9fd0c05b",
+    "mtime": 1788993832.7755046,
+    "seen": 1789053558.804868,
+    "ast_hash": "25aaa980f29e058abc24d88a1828012d",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/compat/ChestFallbackUI.java": {
@@ -3120,21 +3120,21 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/HubActionHandler.java": {
-    "mtime": 1788778576.5857232,
-    "seen": 1788779004.6950724,
-    "ast_hash": "fa025b1489292ecbaafaa9d979582a08",
+    "mtime": 1789126936.6904323,
+    "seen": 1789127505.299671,
+    "ast_hash": "ead5fa3de79165618ca52c8096f08483",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/HubDataService.java": {
-    "mtime": 1788777344.036824,
-    "seen": 1788777615.4596024,
-    "ast_hash": "86f37a55a480bb1af171c1c95081cc0c",
+    "mtime": 1789126922.9150708,
+    "seen": 1789127505.299671,
+    "ast_hash": "29ac341ad14c9f6caac3f582b81af4e8",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/config/LumenConfig.java": {
-    "mtime": 1788618713.9989736,
-    "seen": 1788621172.768715,
-    "ast_hash": "f6494391b0d8a5aa301dcf9973ae2ff9",
+    "mtime": 1789065432.0870075,
+    "seen": 1789065778.2886589,
+    "ast_hash": "40bced6394359596221049a00e5395ee",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/network/LumenNetwork.java": {
@@ -3168,9 +3168,9 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/CHANGELOG.md": {
-    "mtime": 1788780266.4923267,
-    "seen": 1788780396.330997,
-    "ast_hash": "7982aa537f885f7311ad286b7c14056d",
+    "mtime": 1789066747.0903077,
+    "seen": 1789066826.6841238,
+    "ast_hash": "6a7a427b28610c13971ee393b0d1c8d0",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/README.md": {
@@ -3234,9 +3234,9 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/html/hub.html": {
-    "mtime": 1788780273.9862256,
-    "seen": 1788780396.3336143,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5286365,
+    "seen": 1789127505.3393188,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "tools/release_launcher.py": {
@@ -3276,9 +3276,9 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/HubEconomy.java": {
-    "mtime": 1788778584.937266,
-    "seen": 1788779004.6950724,
-    "ast_hash": "726a083912df1358c96bc02065b43d6b",
+    "mtime": 1789126909.1628225,
+    "seen": 1789127505.299671,
+    "ast_hash": "c18241bac26b28299c03f7850027a8ee",
     "semantic_hash": ""
   },
   "docs/embed/lumen_preview.html": {
@@ -3300,9 +3300,9 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/FishShopConfig.java": {
-    "mtime": 1788719068.421024,
-    "seen": 1788719434.2359746,
-    "ast_hash": "b2d64c9621400ca15f3ebc922a40e042",
+    "mtime": 1789068292.1769638,
+    "seen": 1789073403.2107732,
+    "ast_hash": "d71e64a5159d166f2b49c18f728fa97e",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/KitConfig.java": {
@@ -3318,9 +3318,9 @@
     "semantic_hash": ""
   },
   "tools/build_hub_html.py": {
-    "mtime": 1788780257.0827801,
-    "seen": 1788780396.265269,
-    "ast_hash": "7d3e276ad8ab5d0e7707a1a85561b6ae",
+    "mtime": 1789126849.7329426,
+    "seen": 1789127505.320178,
+    "ast_hash": "0cd4dded02152c4c64c37b3159a5ed9c",
     "semantic_hash": ""
   },
   "tools/compile_mods.py": {
@@ -3390,9 +3390,9 @@
     "semantic_hash": ""
   },
   "tools/direct_deploy_apex.py": {
-    "mtime": 1788771853.2114124,
-    "seen": 1788776336.2708907,
-    "ast_hash": "57ffd3d695c640f5feeaf5d42f44caf8",
+    "mtime": 1789073261.0083578,
+    "seen": 1789073403.2313135,
+    "ast_hash": "7db78fa55132fa75a8932346e024f6bb",
     "semantic_hash": ""
   },
   "tools/fix_mods_toml_in_jars.py": {
@@ -3408,15 +3408,15 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/ui/hub.html": {
-    "mtime": 1788780273.988907,
-    "seen": 1788780396.3336143,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5306356,
+    "seen": 1789127505.3393188,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/hub.html": {
-    "mtime": 1788780273.9836278,
-    "seen": 1788780396.3336143,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5256326,
+    "seen": 1789127505.3393188,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "tools/build_case_icons.py": {
@@ -3546,27 +3546,27 @@
     "semantic_hash": ""
   },
   "config/aqualumen/html/hub.html": {
-    "mtime": 1788780274.00137,
-    "seen": 1788780396.3174174,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5411398,
+    "seen": 1789127505.3353186,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "config/aqualumen/hub.html": {
-    "mtime": 1788780274.0034988,
-    "seen": 1788780396.3174174,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5441396,
+    "seen": 1789127505.3353186,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/html/hub.html": {
-    "mtime": 1788780273.9929101,
-    "seen": 1788780396.335148,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5351415,
+    "seen": 1789127505.3393188,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/hub.html": {
-    "mtime": 1788780273.99091,
-    "seen": 1788780396.335148,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5326352,
+    "seen": 1789127505.3393188,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "tools/analyze_guide_methods.py": {
@@ -3762,15 +3762,15 @@
     "semantic_hash": ""
   },
   "functions/api/market.js": {
-    "mtime": 1788443105.0098412,
-    "seen": 1788602273.154601,
-    "ast_hash": "58571aff21918776bd2cba23da2198f0",
+    "mtime": 1788989986.1313934,
+    "seen": 1789053558.7873635,
+    "ast_hash": "7fad618317bfc4ee28a7d7929bfa9953",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/MarketService.java": {
-    "mtime": 1788778881.9945579,
-    "seen": 1788779004.6960747,
-    "ast_hash": "294cfb25173d0bcdbc481f0eb6ecf0f3",
+    "mtime": 1788962369.869097,
+    "seen": 1789053558.8072395,
+    "ast_hash": "70daa5840b398e04baad14efc195785c",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/35_fun_crafts.js": {
@@ -3780,9 +3780,9 @@
     "semantic_hash": ""
   },
   "kubejs/server_scripts/36_balanced_tweaks.js": {
-    "mtime": 1787775364.9009879,
-    "seen": 1788602273.154601,
-    "ast_hash": "310b9f6cea03ea8a42ab38d20cc14b81",
+    "mtime": 1788989667.2375302,
+    "seen": 1789053558.793364,
+    "ast_hash": "38cf7bbbaf9cbde6b7153eafc556ff46",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/95_deep_sea_bounty.js": {
@@ -4182,9 +4182,9 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/MariaStats.java": {
-    "mtime": 1787772453.9503798,
-    "seen": 1788602273.154601,
-    "ast_hash": "e8071d3a5b660754cac2bc9c46d115e1",
+    "mtime": 1789127014.0202088,
+    "seen": 1789127505.299671,
+    "ast_hash": "671641419bf0d5dcc3586998a54cbd1c",
     "semantic_hash": ""
   },
   "scripts/tasks/setup_apex_daily_reload.py": {
@@ -4242,15 +4242,15 @@
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/PendingDeliveryService.java": {
-    "mtime": 1788526140.356585,
-    "seen": 1788602273.154601,
-    "ast_hash": "42839cc267cf679c608efcf33d076f90",
+    "mtime": 1788962414.2098796,
+    "seen": 1789053558.8072395,
+    "ast_hash": "8ddad5dd930856aece63ca2c7a037859",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/java/store/aquateche/aqualumen/common/service/StoreCatalog.java": {
-    "mtime": 1788526149.8524973,
-    "seen": 1788602273.154601,
-    "ast_hash": "e1b093a25f9b84e8dfd28d7ef084c240",
+    "mtime": 1788962473.4204144,
+    "seen": 1789053558.8072395,
+    "ast_hash": "1e1a1fae37f4384a83b98e658744b438",
     "semantic_hash": ""
   },
   "scripts/tasks/r2_put.py": {
@@ -4392,9 +4392,9 @@
     "semantic_hash": ""
   },
   "config/aqualumen/fish_shop.json": {
-    "mtime": 1788628146.7186759,
-    "seen": 1788695983.6246731,
-    "ast_hash": "f514b006db190734ac227a37cce75be0",
+    "mtime": 1788963678.2566688,
+    "seen": 1789053558.7453616,
+    "ast_hash": "b555f0b0a9e4f63cfb07402036f54cdb",
     "semantic_hash": ""
   },
   "config/aqualumen/kits.json": {
@@ -5250,9 +5250,9 @@
     "semantic_hash": ""
   },
   "docs/pack/delta.json": {
-    "mtime": 1788780872.4726129,
-    "seen": 1788781085.7376144,
-    "ast_hash": "9853edb277960f1c8ef82796f3f5fcf5",
+    "mtime": 1789134557.2715316,
+    "seen": 1789135034.1397183,
+    "ast_hash": "a962b6e10407a56f951d3cedd37f86f5",
     "semantic_hash": ""
   },
   "docs/sw.js": {
@@ -5388,9 +5388,9 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/java/net/aquatech/ui/compat/jei/AquaTechJeiPlugin.java": {
-    "mtime": 1788449815.5559106,
-    "seen": 1788602273.154601,
-    "ast_hash": "4c4fb51ef8bc005ea8eec0680ad9ecf8",
+    "mtime": 1789068653.355804,
+    "seen": 1789073403.2144415,
+    "ast_hash": "5c09edf0757e8a44575650c6723cba51",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/blockstates/abyssal_portal.json": {
@@ -5400,9 +5400,9 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/blockstates/auto_fisher.json": {
-    "mtime": 1785253657.7454376,
-    "seen": 1788602273.154601,
-    "ast_hash": "4dfb01938a31fe1b7777deb6b9968e32",
+    "mtime": 1789071255.656438,
+    "seen": 1789073403.2195554,
+    "ast_hash": "5a4660691c81d4c4fcc4492b8143f1a6",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/blockstates/hydro_reactor.json": {
@@ -5448,51 +5448,51 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/lang/en_us.json": {
-    "mtime": 1788450942.7710843,
-    "seen": 1788602273.154601,
-    "ast_hash": "792770512e4d3e7b84d5c67bdabe655c",
+    "mtime": 1789065684.3580272,
+    "seen": 1789065778.3164234,
+    "ast_hash": "367c303253c953843404c968d3884ff1",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/lang/ru_ru.json": {
-    "mtime": 1788450935.8453557,
-    "seen": 1788602273.154601,
-    "ast_hash": "c3272814da7e677c8a3ae47802b8de24",
+    "mtime": 1789065683.3959906,
+    "seen": 1789065778.3164234,
+    "ast_hash": "79ef079d979c364f55223123025281c8",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/block/abyssal_portal.json": {
-    "mtime": 1785307220.3867898,
-    "seen": 1788602273.154601,
-    "ast_hash": "97e30f94de2f3e5aa34c915ffeadf2ae",
+    "mtime": 1789071247.5589683,
+    "seen": 1789073403.2205555,
+    "ast_hash": "6a335b3de886afd0d47e0dd049bb81b8",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/block/auto_fisher.json": {
-    "mtime": 1785307220.3707917,
-    "seen": 1788602273.154601,
-    "ast_hash": "5b38054dba9f3a472161ff04ebac8dac",
+    "mtime": 1789127040.1854134,
+    "seen": 1789127505.3096735,
+    "ast_hash": "4870be6cbacc016248a56a7562238934",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/block/hydro_reactor.json": {
-    "mtime": 1785307220.3867898,
-    "seen": 1788602273.154601,
-    "ast_hash": "ee7f4bfaa24d7443d5f1a3c5c59459b4",
+    "mtime": 1789071247.562465,
+    "seen": 1789073403.2205555,
+    "ast_hash": "f851fa9f630efe5de3b3573bbb865a20",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/block/ocean_altar.json": {
-    "mtime": 1785307220.39879,
-    "seen": 1788602273.154601,
-    "ast_hash": "5fba540c25f29a66865c412b945ba22b",
+    "mtime": 1789071247.5635018,
+    "seen": 1789073403.2205555,
+    "ast_hash": "fd34fc95b7d9092a788eb8b76e40c0ea",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/block/ocean_filter.json": {
-    "mtime": 1785307220.3637896,
-    "seen": 1788602273.154601,
-    "ast_hash": "df8abb95d1645b592d6ad813ead6124a",
+    "mtime": 1789071247.5646415,
+    "seen": 1789073403.2205555,
+    "ast_hash": "f397c37bb027e896510279ca1ed2f320",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/block/seabed_dredger.json": {
-    "mtime": 1785307220.4037893,
-    "seen": 1788602273.154601,
-    "ast_hash": "2a7d6bf50ab800248eb84761f1694a45",
+    "mtime": 1789071247.5656948,
+    "seen": 1789073403.2205555,
+    "ast_hash": "02d6640d5accee2884f2a4422ca2e729",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/item/abyssal_fishing_rod.json": {
@@ -5784,9 +5784,9 @@
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/minecraft/font/default.json": {
-    "mtime": 1787423277.0944886,
-    "seen": 1788602273.154601,
-    "ast_hash": "92219994db2b7c286f2cc6705c5db6af",
+    "mtime": 1789133123.4573157,
+    "seen": 1789133281.8256824,
+    "ast_hash": "37e2d1999bf2e57fcaa8e9563ce6d4f8",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/minecraft/shaders/program/aquatech_ocean_blur.json": {
@@ -5801,22 +5801,10 @@
     "ast_hash": "f145936aac6427d4996a298cda528464",
     "semantic_hash": ""
   },
-  "mods/aquatech-ui/src/main/resources/data/aquatech_ui/recipes/abyssal_portal.json": {
-    "mtime": 1785307220.4077902,
-    "seen": 1788602273.154601,
-    "ast_hash": "b41eb043ebe7b659660f26d5292469d5",
-    "semantic_hash": ""
-  },
   "mods/aquatech-ui/src/main/resources/data/aquatech_ui/recipes/efficiency_upgrade.json": {
     "mtime": 1785247558.3725433,
     "seen": 1788602273.154601,
     "ast_hash": "4169922e6bfbf9589a07306f3de62ffb",
-    "semantic_hash": ""
-  },
-  "mods/aquatech-ui/src/main/resources/data/aquatech_ui/recipes/ocean_filter.json": {
-    "mtime": 1785247558.3705385,
-    "seen": 1788602273.154601,
-    "ast_hash": "4a5dad238e26739c340844bec3f3ab8c",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/data/starcatcher/tags/items/baits.json": {
@@ -5916,15 +5904,15 @@
     "semantic_hash": ""
   },
   "tools/extracted_case_textures.json": {
-    "mtime": 1788439344.7344859,
-    "seen": 1788602273.154601,
-    "ast_hash": "63229fd0a3e0eac3e4459184d8e21f72",
+    "mtime": 1789075692.4491985,
+    "seen": 1789076044.6015422,
+    "ast_hash": "4de5e743dfb8b685893619524577c9eb",
     "semantic_hash": ""
   },
   "tools/label_texture_map.json": {
-    "mtime": 1788724316.92617,
-    "seen": 1788735091.1061585,
-    "ast_hash": "a2067d8893e9fbaea451447e8a99c634",
+    "mtime": 1789075692.4481997,
+    "seen": 1789076044.603046,
+    "ast_hash": "4abc484ebbd68cb17ca2cb3dee9af107",
     "semantic_hash": ""
   },
   "tools/render_apple_tab_concepts.py": {
@@ -6030,15 +6018,15 @@
     "semantic_hash": ""
   },
   "config/fancymenu/customization/pause_screen_layout.txt": {
-    "mtime": 1788119036.151233,
-    "seen": 1788602273.154601,
-    "ast_hash": "329af2a30f528303eb3de374302d6c4d",
+    "mtime": 1789133096.9491389,
+    "seen": 1789133281.94333,
+    "ast_hash": "b49763f04af5b10a99351aa75e5d8f87",
     "semantic_hash": ""
   },
   "config/fancymenu/customization/title_screen_layout.txt": {
-    "mtime": 1788429274.3648763,
-    "seen": 1788602273.154601,
-    "ast_hash": "3ac171ce35657676e2a4b159bef4b0e0",
+    "mtime": 1789133096.9491389,
+    "seen": 1789133281.94333,
+    "ast_hash": "ecc826a1633c7364ec6938fed44b1c2b",
     "semantic_hash": ""
   },
   "config/fancymenu/options.txt": {
@@ -6198,27 +6186,27 @@
     "semantic_hash": ""
   },
   "config/fancymenu/assets/btn_ghost.png": {
-    "mtime": 1788119035.8282442,
-    "seen": 1788602273.1879108,
-    "ast_hash": "83dfad5eb5c9dcba57da95db161dd173",
+    "mtime": 1789133095.2376585,
+    "seen": 1789133281.9810953,
+    "ast_hash": "0d087d58d3da11c63089f9dd97b01b69",
     "semantic_hash": ""
   },
   "config/fancymenu/assets/btn_ghost_hover.png": {
-    "mtime": 1788119035.8295548,
-    "seen": 1788602273.1879108,
-    "ast_hash": "1b7bba99d75a593d7df365b19944d9a7",
+    "mtime": 1789133095.3044465,
+    "seen": 1789133281.9810953,
+    "ast_hash": "3ae336ec77235076b2227dbaf71fd708",
     "semantic_hash": ""
   },
   "config/fancymenu/assets/btn_play.png": {
-    "mtime": 1788119035.8231509,
-    "seen": 1788602273.1879108,
-    "ast_hash": "e25035dfdabe4e7445eb22660cbf23de",
+    "mtime": 1789133095.1052282,
+    "seen": 1789133281.9810953,
+    "ast_hash": "51955480fb9c42d3bd1ffe0a12c76d0f",
     "semantic_hash": ""
   },
   "config/fancymenu/assets/btn_play_hover.png": {
-    "mtime": 1788119035.8251548,
-    "seen": 1788602273.1879108,
-    "ast_hash": "126f190ffd46584568687399af83ceaa",
+    "mtime": 1789133095.1755335,
+    "seen": 1789133281.9810953,
+    "ast_hash": "3af4ad7a731e7997d868936b2749f2d8",
     "semantic_hash": ""
   },
   "config/fancymenu/assets/logo.png": {
@@ -6234,15 +6222,15 @@
     "semantic_hash": ""
   },
   "config/fancymenu/assets/menu_background.png": {
-    "mtime": 1788109737.2573445,
-    "seen": 1788602273.1879108,
-    "ast_hash": "d8fe8a82173a7a70e2b9a269019ba51f",
+    "mtime": 1789133096.9481387,
+    "seen": 1789133281.982098,
+    "ast_hash": "1e5ade5b4b1da07e2b4d8df907768dff",
     "semantic_hash": ""
   },
   "config/fancymenu/assets/pause_glass.png": {
-    "mtime": 1788119035.8315592,
-    "seen": 1788602273.1879108,
-    "ast_hash": "352f2df3fa7b1a1127f5209bc45d8998",
+    "mtime": 1789133095.6879632,
+    "seen": 1789133281.982098,
+    "ast_hash": "196d286c439317619eda601fd30db7dc",
     "semantic_hash": ""
   },
   "config/fancymenu/assets/rule.png": {
@@ -7386,9 +7374,9 @@
     "semantic_hash": ""
   },
   "docs/pack/config/aqualumen/fish_shop.json": {
-    "mtime": 1788628146.7186759,
-    "seen": 1788721890.2774494,
-    "ast_hash": "f514b006db190734ac227a37cce75be0",
+    "mtime": 1788963678.2566688,
+    "seen": 1789053558.7803614,
+    "ast_hash": "b555f0b0a9e4f63cfb07402036f54cdb",
     "semantic_hash": ""
   },
   "docs/pack/kubejs/client_scripts/add_fishing_resource_tooltips.js": {
@@ -7398,21 +7386,21 @@
     "semantic_hash": ""
   },
   "docs/pack/kubejs/server_scripts/30_aquatech_crafting.js": {
-    "mtime": 1788714436.7922068,
-    "seen": 1788721890.2774494,
-    "ast_hash": "0ef441d9a81352498b1bd454bf820005",
+    "mtime": 1789134545.181131,
+    "seen": 1789135034.1407182,
+    "ast_hash": "cca46c9f6c15f6f898aa1fb01b0a2709",
     "semantic_hash": ""
   },
   "docs/pack/config/aqualumen/html/hub.html": {
-    "mtime": 1788780274.00137,
-    "seen": 1788781085.8912892,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5411398,
+    "seen": 1789127505.3363194,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "docs/pack/config/aqualumen/hub.html": {
-    "mtime": 1788780274.0034988,
-    "seen": 1788781085.8912892,
-    "ast_hash": "916b9390f3551a96c05f83db8c4960d2",
+    "mtime": 1789126975.5441396,
+    "seen": 1789127505.3363194,
+    "ast_hash": "ca93fb94d03066d1934d4ea516fb2d05",
     "semantic_hash": ""
   },
   "docs/pack/config/aqualumen/kits.json": {
@@ -7434,69 +7422,1227 @@
     "semantic_hash": ""
   },
   "config/aqualumen/coin.png": {
-    "mtime": 1788780274.0034988,
-    "seen": 1788780396.3429313,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5441396,
+    "seen": 1789127505.3423204,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
     "semantic_hash": ""
   },
   "config/aqualumen/html/coin.png": {
-    "mtime": 1788780274.001898,
-    "seen": 1788780396.3429313,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5411398,
+    "seen": 1789127505.3423204,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/coin.png": {
-    "mtime": 1788780273.9836278,
-    "seen": 1788780396.4140093,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5266364,
+    "seen": 1789127505.3653188,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/html/coin.png": {
-    "mtime": 1788780273.9867504,
-    "seen": 1788780396.4140093,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5286365,
+    "seen": 1789127505.3653188,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/textures/gui/coin.png": {
-    "mtime": 1788780273.9810708,
-    "seen": 1788780396.4140093,
+    "mtime": 1789126975.5231228,
+    "seen": 1789127505.3653188,
     "ast_hash": "d8789a76a3a62a08c89e41c584640f37",
     "semantic_hash": ""
   },
   "mods/aqualumen-ui/src/main/resources/assets/aqualumen/ui/coin.png": {
-    "mtime": 1788780273.988907,
-    "seen": 1788780396.4171119,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5306356,
+    "seen": 1789127505.3663201,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/coin.png": {
-    "mtime": 1788780273.99091,
-    "seen": 1788780396.4181113,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5326352,
+    "seen": 1789127505.3663201,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/html/coin.png": {
-    "mtime": 1788780273.9944155,
-    "seen": 1788780396.4181113,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5351415,
+    "seen": 1789127505.3663201,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
     "semantic_hash": ""
   },
   "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/coin.png": {
-    "mtime": 1788780273.9810708,
-    "seen": 1788780396.4327893,
+    "mtime": 1789126975.5231228,
+    "seen": 1789127505.3743193,
     "ast_hash": "d8789a76a3a62a08c89e41c584640f37",
     "semantic_hash": ""
   },
   "docs/pack/config/aqualumen/coin.png": {
-    "mtime": 1788778949.249488,
-    "seen": 1788780396.412506,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5481882,
+    "seen": 1789127505.3653188,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
     "semantic_hash": ""
   },
   "docs/pack/config/aqualumen/html/coin.png": {
-    "mtime": 1788778949.2468708,
-    "seen": 1788780396.412506,
-    "ast_hash": "7ce652bd1e3bbf537b5d8954f90e0300",
+    "mtime": 1789126975.5461879,
+    "seen": 1789127505.3653188,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/atlas/manifest.json": {
+    "mtime": 1788865953.2038288,
+    "seen": 1789053558.7793615,
+    "ast_hash": "1e341324c0de68dd7e07db473f4869ed",
+    "semantic_hash": ""
+  },
+  "docs/pack/kubejs/server_scripts/20_aquatech_rod_crafts.js": {
+    "mtime": 1788994333.8696654,
+    "seen": 1789053558.7813637,
+    "ast_hash": "762a1b7687ea3d98d023f59d95574952",
+    "semantic_hash": ""
+  },
+  "docs/pack/kubejs/server_scripts/36_balanced_tweaks.js": {
+    "mtime": 1788989667.2375302,
+    "seen": 1789053558.7813637,
+    "ast_hash": "38cf7bbbaf9cbde6b7153eafc556ff46",
+    "semantic_hash": ""
+  },
+  "docs/pack/kubejs/server_scripts/zz_infernal_pearl.js": {
+    "mtime": 1789065538.87439,
+    "seen": 1789065778.2575488,
+    "ast_hash": "48331a8bc6d258e33988ed265d8d2a0a",
+    "semantic_hash": ""
+  },
+  "docs/pack/kubejs/startup_scripts/zz_infernal_pearl.js": {
+    "mtime": 1788985174.5626738,
+    "seen": 1789053558.7813637,
+    "ast_hash": "21f9fe29310612da3be66cba21283574",
+    "semantic_hash": ""
+  },
+  "functions/api/tg-webhook.js": {
+    "mtime": 1789029599.4313684,
+    "seen": 1789053558.7903633,
+    "ast_hash": "d6fb51ae72216f089d46fef0e4d765ee",
+    "semantic_hash": ""
+  },
+  "kubejs/server_scripts/zz_infernal_pearl.js": {
+    "mtime": 1789065538.87439,
+    "seen": 1789065778.2730541,
+    "ast_hash": "48331a8bc6d258e33988ed265d8d2a0a",
+    "semantic_hash": ""
+  },
+  "kubejs/startup_scripts/zz_infernal_pearl.js": {
+    "mtime": 1788985174.5626738,
+    "seen": 1789053558.7968683,
+    "ast_hash": "21f9fe29310612da3be66cba21283574",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/FishSmokerBlock.java": {
+    "mtime": 1789134382.139882,
+    "seen": 1789135034.179112,
+    "ast_hash": "3d41a9ea04d66d5e85453260fbb5476b",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/block/entity/FishSmokerBlockEntity.java": {
+    "mtime": 1789074272.2266722,
+    "seen": 1789076044.5777974,
+    "ast_hash": "a8efcfad30d85bc30096ae78919f7e97",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/fishing/FishRosterService.java": {
+    "mtime": 1789068388.4142346,
+    "seen": 1789073403.2144415,
+    "ast_hash": "a9878b5ffd88c58fe240cca1a8d2c5fc",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/inventory/FishSmokerMenu.java": {
+    "mtime": 1789128436.1958666,
+    "seen": 1789130419.5352976,
+    "ast_hash": "e06e0da25c07d4b549c82e912ea11897",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/item/AbyssalPearlItem.java": {
+    "mtime": 1788980566.211684,
+    "seen": 1789053558.821574,
+    "ast_hash": "623bc86cd3786922a659f7c793a84cf9",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/util/FishPriceTable.java": {
+    "mtime": 1788887922.066995,
+    "seen": 1789053558.8295763,
+    "ast_hash": "5ebca9d2f3b9f39a0fa4119619ff4736",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/blockstates/fish_smoker.json": {
+    "mtime": 1789072573.1442945,
+    "seen": 1789073403.2195554,
+    "ast_hash": "d1d531841db1db3e0fedac16ed0769bb",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/font/aicons.json": {
+    "mtime": 1788814840.1802092,
+    "seen": 1789053558.831576,
+    "ast_hash": "95759947134e01f49ce1048619ba84a7",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/block/fish_smoker.json": {
+    "mtime": 1789127045.8340437,
+    "seen": 1789127505.3096735,
+    "ast_hash": "31d7a14e6ff0db03af0be058961d715f",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/block/fish_smoker_on.json": {
+    "mtime": 1789127056.9318843,
+    "seen": 1789127505.3096735,
+    "ast_hash": "4794c55c962af9d8cb3b1b061b2c2bba",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/item/abyssal_pearl.json": {
+    "mtime": 1788974892.915069,
+    "seen": 1789053558.8345761,
+    "ast_hash": "19cf8eeef6996753a292eea6c3f92279",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/item/fish_meal.json": {
+    "mtime": 1788888103.9914815,
+    "seen": 1789053558.836576,
+    "ast_hash": "56e2b914c0c675f083d9984856b69de1",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/item/fish_smoker.json": {
+    "mtime": 1788888103.9656465,
+    "seen": 1789053558.836576,
+    "ast_hash": "e92f661b05ca6ef7867e15a333503f28",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/atlas/atlas_0.png": {
+    "mtime": 1788865952.3324428,
+    "seen": 1789053558.9412982,
+    "ast_hash": "1fe1a2e6139e47caeee10fee9f121420",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/atlas/atlas_1.png": {
+    "mtime": 1788865952.535431,
+    "seen": 1789053558.9412982,
+    "ast_hash": "195ec57f236dddb9c242482440f44780",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/atlas/atlas_2.png": {
+    "mtime": 1788865952.726337,
+    "seen": 1789053558.9412982,
+    "ast_hash": "ca0a604dcab6635da0a377e753c93b24",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/atlas/atlas_3.png": {
+    "mtime": 1788865952.9178967,
+    "seen": 1789053558.9412982,
+    "ast_hash": "6046176106433929e28d09b35ce7425e",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/atlas/atlas_4.png": {
+    "mtime": 1788865953.109593,
+    "seen": 1789053558.9412982,
+    "ast_hash": "e0410558d0605fb5ff18dac51733320a",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/atlas/atlas_5.png": {
+    "mtime": 1788865953.2013166,
+    "seen": 1789053558.9412982,
+    "ast_hash": "2afdece0e92b78a8329553df06762c31",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/coin_pixel.png": {
+    "mtime": 1788814000.007568,
+    "seen": 1789053558.9452994,
+    "ast_hash": "d78a43584cc8ab3cc909ca24d227ceb4",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/abyssal_fishing_rod.png": {
+    "mtime": 1788847085.4422367,
+    "seen": 1789053558.9452994,
+    "ast_hash": "5443ba52640b8b0bdfbfa8d8b245df34",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/abyssal_fishing_rod_cast.png": {
+    "mtime": 1788847085.4432368,
+    "seen": 1789053558.9452994,
+    "ast_hash": "49e5d4495cefafade1be37c345a2a938",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/abyssal_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4442368,
+    "seen": 1789053558.9452994,
+    "ast_hash": "7a8761cebf61772c88f8b6bc196a6dae",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/abyssal_lure.png": {
+    "mtime": 1788847085.4442368,
+    "seen": 1789053558.9452994,
+    "ast_hash": "3eae6cc7a90d73222a7b1ca403dab2ac",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/abyssal_magnet.png": {
+    "mtime": 1788847085.4452374,
+    "seen": 1789053558.9452994,
+    "ast_hash": "848350e99a447f0127b00eba8a03c554",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/depth_tackle.png": {
+    "mtime": 1788847085.4452374,
+    "seen": 1789053558.9602995,
+    "ast_hash": "b428d1a95b985f34d19fa4d9a0c0a644",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/diamond_fishing_rod.png": {
+    "mtime": 1788847085.4472368,
+    "seen": 1789053558.9602995,
+    "ast_hash": "e607135848d2c4d63170364569307aaf",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/diamond_fishing_rod_cast.png": {
+    "mtime": 1788847085.4472368,
+    "seen": 1789053558.9602995,
+    "ast_hash": "adf39968e4f7aef8bc12ec03cb0c34f1",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/diamond_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.449376,
+    "seen": 1789053558.9602995,
+    "ast_hash": "55b6a9f415d66b15d9bd453ffde51ad8",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/double_hook_upgrade.png": {
+    "mtime": 1788847085.449376,
+    "seen": 1789053558.9602995,
+    "ast_hash": "79df5551a8242c4bac3c77be6c6b57a7",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/dredger_drill_bit.png": {
+    "mtime": 1788847085.4503765,
+    "seen": 1789053558.9642997,
+    "ast_hash": "aad78a24e9a3300d5012916dabfdc2e6",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/efficiency_upgrade.png": {
+    "mtime": 1788847085.4503765,
+    "seen": 1789053558.9642997,
+    "ast_hash": "9af956a1716c8118a8406c4097f29c38",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/emerald_fishing_rod.png": {
+    "mtime": 1788847085.452381,
+    "seen": 1789053558.9642997,
+    "ast_hash": "fb121d63b8ab6db7ec8654503f6cb7c7",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/emerald_fishing_rod_cast.png": {
+    "mtime": 1788847085.4533806,
+    "seen": 1789053558.9642997,
+    "ast_hash": "2b3420d018ec213a3450c69ab4292b2a",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/emerald_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.45438,
+    "seen": 1789053558.9642997,
+    "ast_hash": "18acb55e49cf7e081f672b621c4a2a2e",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/ender_fishing_rod.png": {
+    "mtime": 1788847085.4553812,
+    "seen": 1789053558.9642997,
+    "ast_hash": "5543a5658c58fb8e8afc74d32a1c676e",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/ender_fishing_rod_cast.png": {
+    "mtime": 1788847085.4563804,
+    "seen": 1789053558.9642997,
+    "ast_hash": "ba87b19b4bca21947f551c582bdd3b89",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/ender_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4573815,
+    "seen": 1789053558.9642997,
+    "ast_hash": "0f1e33ab94c25ec5c8b1748c2f5139be",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/gold_fishing_rod.png": {
+    "mtime": 1788847085.4583802,
+    "seen": 1789053558.9652991,
+    "ast_hash": "bab06b82991dd47a21848cc68796953a",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/gold_fishing_rod_cast.png": {
+    "mtime": 1788847085.4597728,
+    "seen": 1789053558.9652991,
+    "ast_hash": "ba8484c2e271e3bdb1bfbb2a2ccfd660",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/gold_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4607723,
+    "seen": 1789053558.9652991,
+    "ast_hash": "01a27110c301d1468f28c42d90a88798",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/iron_fishing_rod.png": {
+    "mtime": 1788847085.4617717,
+    "seen": 1789053558.983304,
+    "ast_hash": "e67caa60668e7bc1b1976846f621a509",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/iron_fishing_rod_cast.png": {
+    "mtime": 1788847085.463771,
+    "seen": 1789053558.983304,
+    "ast_hash": "db49a06fa97408dcfe524f3b4be25aad",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/iron_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4647717,
+    "seen": 1789053558.983304,
+    "ast_hash": "b876eb099eae285e3c7b8e972c726de4",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/kelp_bio_pellet.png": {
+    "mtime": 1788847085.4647717,
+    "seen": 1789053558.983304,
+    "ast_hash": "17454f497ba78aada6f5af7abee9adfb",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/kinetic_fishing_rod.png": {
+    "mtime": 1788847085.465771,
+    "seen": 1789053558.983304,
+    "ast_hash": "0b72a66949900675aeca9837f1b3a197",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/kinetic_fishing_rod_cast.png": {
+    "mtime": 1788847085.4667711,
+    "seen": 1789053558.983304,
+    "ast_hash": "1c476962551deae5e20840628bbdec67",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/kinetic_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4667711,
+    "seen": 1789053558.983304,
+    "ast_hash": "bff73eabed56eb3f4d46c69341f95286",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/kinetic_lure.png": {
+    "mtime": 1788847085.4682748,
+    "seen": 1789053558.983304,
+    "ast_hash": "499d36bb0eb38d92985d4d516f710337",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/luck_tackle.png": {
+    "mtime": 1788847085.4682748,
+    "seen": 1789053558.983304,
+    "ast_hash": "008197b794a9c066258a4b53c3316549",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/magnetic_lure.png": {
+    "mtime": 1788847085.4692793,
+    "seen": 1789053558.983304,
+    "ast_hash": "31ff7a5c2907e16b54228807638fad64",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/mesh_filter.png": {
+    "mtime": 1788847085.4702833,
+    "seen": 1789053558.983304,
+    "ast_hash": "5c18b7e1b244efbd7fd54cc89cc5a537",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/neptune_trident.png": {
+    "mtime": 1788847085.4712832,
+    "seen": 1789053558.9903026,
+    "ast_hash": "22ac6e5fc21c1c0d3dcca7fb9bb73f81",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/netherite_fishing_rod.png": {
+    "mtime": 1788847085.472283,
+    "seen": 1789053558.9903026,
+    "ast_hash": "7dc2c3f2afc50846e3a8ce9b85b74527",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/netherite_fishing_rod_cast.png": {
+    "mtime": 1788847085.473283,
+    "seen": 1789053558.9903026,
+    "ast_hash": "2ad0bd093988cb3906e3295eaa824cd9",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/netherite_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4742846,
+    "seen": 1789053558.9903026,
+    "ast_hash": "a8ca435e4969d03199fccbac8ce99a8a",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/novice_fishing_rod.png": {
+    "mtime": 1788847085.475283,
+    "seen": 1789053558.9903026,
+    "ast_hash": "872b20f6592b857fb47c6ee191c5f777",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/novice_fishing_rod_cast.png": {
+    "mtime": 1788847085.476283,
+    "seen": 1789053558.9903026,
+    "ast_hash": "f6f39c005b73f8cb450890629e81cb84",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/novice_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4772847,
+    "seen": 1789053558.9903026,
+    "ast_hash": "4d40aa93fc82644fcef4d31f6c7be404",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/ocean_bounty_upgrade.png": {
+    "mtime": 1788847085.4782836,
+    "seen": 1789053558.9903026,
+    "ast_hash": "778b16dfe45d79b21f8aeee62c029095",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/ocean_guide_book.png": {
+    "mtime": 1788847085.47879,
+    "seen": 1789053558.9903026,
+    "ast_hash": "41648563e0d8ed11a1213abe027db39a",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/prismarine_fishing_rod.png": {
+    "mtime": 1788847085.479793,
+    "seen": 1789053558.9903026,
+    "ast_hash": "abc97c3aa08af06cb3d5c716d2b258bf",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/prismarine_fishing_rod_cast.png": {
+    "mtime": 1788847085.4807916,
+    "seen": 1789053558.9903026,
+    "ast_hash": "3f72b4a625be12fff762841d4e8779c5",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/prismarine_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4817924,
+    "seen": 1789053558.9903026,
+    "ast_hash": "c2b791c6937935478078a889bc9dca73",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/quantity_tackle.png": {
+    "mtime": 1788847085.4827914,
+    "seen": 1789053558.9903026,
+    "ast_hash": "49c3c727ef434b54ae54045014e4c7f7",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/rate_x16.png": {
+    "mtime": 1788847085.4827914,
+    "seen": 1789053558.9903026,
+    "ast_hash": "c7677f07ae7ffba8e07dbd204c090cca",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/rate_x2.png": {
+    "mtime": 1788847085.4837909,
+    "seen": 1789053558.9903026,
+    "ast_hash": "190e9b52bef8a1600cb8d2b5d3239a2b",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/rate_x32.png": {
+    "mtime": 1788847085.4847918,
+    "seen": 1789053558.9903026,
+    "ast_hash": "1a0374958627722e03097dbdc258b83f",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/rate_x4.png": {
+    "mtime": 1788847085.4847918,
+    "seen": 1789053558.9903026,
+    "ast_hash": "cb90add2d095bcb6d972b9e805d5b65b",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/rate_x64.png": {
+    "mtime": 1788847085.4857907,
+    "seen": 1789053558.9903026,
+    "ast_hash": "7b9aed64e1ec54b36c0d7631fbaedb09",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/rate_x8.png": {
+    "mtime": 1788847085.4857907,
+    "seen": 1789053558.9903026,
+    "ast_hash": "a44468ec437cfe4359c3e88461a55c20",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/sonar_goggles.png": {
+    "mtime": 1788847085.4867916,
+    "seen": 1789053558.9903026,
+    "ast_hash": "d79db7373dcd38b9dc4961ed9d02304e",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/speed_tackle.png": {
+    "mtime": 1788847085.4867916,
+    "seen": 1789053558.9903026,
+    "ast_hash": "19a27f92ba5fee6f896bcf9912406ad7",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/speed_upgrade.png": {
+    "mtime": 1788847085.4867916,
+    "seen": 1789053558.9903026,
+    "ast_hash": "8267d66f026a2113d86fc0246ed04c10",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/thermal_fishing_rod.png": {
+    "mtime": 1788847085.4882946,
+    "seen": 1789053558.9903026,
+    "ast_hash": "6117ac6f2302c635b1957728c9256ada",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/thermal_fishing_rod_cast.png": {
+    "mtime": 1788847085.4902985,
+    "seen": 1789053558.9903026,
+    "ast_hash": "0cbb78da0f6025d26f30b9bbc4792b53",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/thermal_fishing_rod_cast_bobber.png": {
+    "mtime": 1788847085.4902985,
+    "seen": 1789053558.9903026,
+    "ast_hash": "832d88f2a4bd11d237fb98e2e5d5680b",
+    "semantic_hash": ""
+  },
+  "docs/assets/images/items/thermal_lure.png": {
+    "mtime": 1788847085.4912984,
+    "seen": 1789053558.9903026,
+    "ast_hash": "9862830e1d8fb23b81cc630ff0a33b9b",
+    "semantic_hash": ""
+  },
+  "docs/pack/kubejs/assets/kubejs/textures/item/infernal_pearl.png": {
+    "mtime": 1788985174.7926981,
+    "seen": 1789053558.9913018,
+    "ast_hash": "89fc11a41e123b155ed6a82606d7b7a2",
+    "semantic_hash": ""
+  },
+  "kubejs/assets/kubejs/textures/item/infernal_pearl.png": {
+    "mtime": 1788985174.7926981,
+    "seen": 1789053558.9923036,
+    "ast_hash": "89fc11a41e123b155ed6a82606d7b7a2",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/fish_smoker_bottom.png": {
+    "mtime": 1789068610.7914693,
+    "seen": 1789073403.2733548,
+    "ast_hash": "b2dd5c98cf8b63c9f48869848a2d2129",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/fish_smoker_front.png": {
+    "mtime": 1789068610.7854567,
+    "seen": 1789073403.2733548,
+    "ast_hash": "591933878aec06a99a5b3a5b3ad67102",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/fish_smoker_front_off.png": {
+    "mtime": 1789068610.7844577,
+    "seen": 1789073403.2733548,
+    "ast_hash": "591933878aec06a99a5b3a5b3ad67102",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/fish_smoker_front_on.png": {
+    "mtime": 1789068610.7814584,
+    "seen": 1789073403.2733548,
+    "ast_hash": "8f09d325e07f70ca8a12bb08b7372a1b",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/fish_smoker_side.png": {
+    "mtime": 1789068610.7884583,
+    "seen": 1789073403.2733548,
+    "ast_hash": "7fe5338bd1438a497170423ba8f3bc2c",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/fish_smoker_top.png": {
+    "mtime": 1789068610.7904644,
+    "seen": 1789073403.2733548,
+    "ast_hash": "e833d9ca233bb33895cbd0d6ecb1d7f4",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/af_front.png": {
+    "mtime": 1789068610.806972,
+    "seen": 1789073403.2743552,
+    "ast_hash": "49cbb7b449e9245272ce8bf733e78c5c",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/af_front_on.png": {
+    "mtime": 1789068610.8029718,
+    "seen": 1789073403.2743552,
+    "ast_hash": "b0e662984f6d1a7aeb40078e36bb9e5b",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/af_side.png": {
+    "mtime": 1789068610.8094754,
+    "seen": 1789073403.2743552,
+    "ast_hash": "16adfd49b14cf8009d33f6ea9619aba6",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/af_top.png": {
+    "mtime": 1789068610.8104806,
+    "seen": 1789073403.2743552,
+    "ast_hash": "cdc7381573a3c93d3d4d78b1c0fda52f",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/altar_bowl_top.png": {
+    "mtime": 1788978563.3215213,
+    "seen": 1789053558.9998097,
+    "ast_hash": "e7f1ec5d03ce77412ee7e940b22df28a",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/altar_stone.png": {
+    "mtime": 1788978563.3205214,
+    "seen": 1789053558.9998097,
+    "ast_hash": "4fd375282d77b293552048725434ab46",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/altar_stone_dark.png": {
+    "mtime": 1788907812.625741,
+    "seen": 1789053558.9998097,
+    "ast_hash": "ab840eb05d7ae124f44d895f003f4ed5",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/altar_trim.png": {
+    "mtime": 1788907812.625741,
+    "seen": 1789053558.9998097,
+    "ast_hash": "e58cfccef6b1f850d421a6efa22e8349",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/altar_water.png": {
+    "mtime": 1788978563.3205214,
+    "seen": 1789053558.9998097,
+    "ast_hash": "8060bf54bc6b01533be27e833d1301e2",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/dredge_front.png": {
+    "mtime": 1788978563.3195212,
+    "seen": 1789053558.9998097,
+    "ast_hash": "220c5715d34ff2600ee81aa51e274512",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/dredge_gear.png": {
+    "mtime": 1788907812.6282463,
+    "seen": 1789053558.9998097,
+    "ast_hash": "218c1b597f541d9c8a7fb133f126d979",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/dredge_grille.png": {
+    "mtime": 1788907812.6267412,
+    "seen": 1789053558.9998097,
+    "ast_hash": "7797f2d724a98f1c50e48beb54dd2b9b",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/dredge_hazard.png": {
+    "mtime": 1788907812.6267412,
+    "seen": 1789053558.9998097,
+    "ast_hash": "348463b49bfb335675cae42a38cdeaea",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/dredge_steel.png": {
+    "mtime": 1788978563.3195212,
+    "seen": 1789053558.9998097,
+    "ast_hash": "6fe896752a5058fc3fe22fbcb693e72e",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/dredge_top.png": {
+    "mtime": 1788978563.3205214,
+    "seen": 1789053558.9998097,
+    "ast_hash": "8d75fcd71a83c0f6446de1a922c9fe88",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/filter_grille.png": {
+    "mtime": 1788978563.293687,
+    "seen": 1789053558.9998097,
+    "ast_hash": "a12fdeb290e368f1e3e79a21ed3c9aa8",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/filter_panel.png": {
+    "mtime": 1788978563.3185186,
+    "seen": 1789053558.9998097,
+    "ast_hash": "752b521902fbb2fb0267ca7a9d4822db",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/filter_top.png": {
+    "mtime": 1788978563.3195212,
+    "seen": 1789053558.9998097,
+    "ast_hash": "64f5f0f2ce2f06e972bfd5afba857be8",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/hydro_blue.png": {
+    "mtime": 1788907812.6282463,
+    "seen": 1789053558.9998097,
+    "ast_hash": "a2ad6b7dd33a71c1ea2557a1b3dcd9c5",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/hydro_core.png": {
+    "mtime": 1788907812.6292515,
+    "seen": 1789053558.9998097,
+    "ast_hash": "562fb5ea3f9af6c79a8cae3bfa7390aa",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/hydro_glass.png": {
+    "mtime": 1788907812.6292515,
+    "seen": 1789053558.9998097,
+    "ast_hash": "83367f04ef64d5e03b1f35fe317683f1",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/hydro_pipe.png": {
+    "mtime": 1788907812.6292515,
+    "seen": 1789053558.9998097,
+    "ast_hash": "50971583f51c1c2c209643992a44af9d",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/hydro_white.png": {
+    "mtime": 1788907812.6282463,
+    "seen": 1789053558.9998097,
+    "ast_hash": "a1b9f2f0faf02cfce3dff04abc452c5f",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/portal_base.png": {
+    "mtime": 1788978563.3225226,
+    "seen": 1789053558.9998097,
+    "ast_hash": "cd7e2ff6af51f8a92e6dd2a673b789f9",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/portal_frame.png": {
+    "mtime": 1788978563.3225226,
+    "seen": 1789053558.9998097,
+    "ast_hash": "2c469c5f1c059cfc579e7d8d5fd7a8de",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/portal_swirl.png": {
+    "mtime": 1788980351.643592,
+    "seen": 1789053558.9998097,
+    "ast_hash": "85ec40e382743e244f71ed835b7916a8",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/smoker_bottom.png": {
+    "mtime": 1789068610.7904644,
+    "seen": 1789073403.2758596,
+    "ast_hash": "b2dd5c98cf8b63c9f48869848a2d2129",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/smoker_dark.png": {
+    "mtime": 1789068610.7914693,
+    "seen": 1789073403.2758596,
+    "ast_hash": "9dd32ab78f26d6b01f35fb156488a5d4",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/smoker_front_off.png": {
+    "mtime": 1789068610.7834609,
+    "seen": 1789073403.2758596,
+    "ast_hash": "591933878aec06a99a5b3a5b3ad67102",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/smoker_front_on.png": {
+    "mtime": 1789068610.7804537,
+    "seen": 1789073403.2758596,
+    "ast_hash": "8f09d325e07f70ca8a12bb08b7372a1b",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/smoker_gold.png": {
+    "mtime": 1789068610.7924688,
+    "seen": 1789073403.2758596,
+    "ast_hash": "42b07928f2f5a55f0435a1bf5f712ce2",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/smoker_side.png": {
+    "mtime": 1789068610.787458,
+    "seen": 1789073403.2758596,
+    "ast_hash": "7fe5338bd1438a497170423ba8f3bc2c",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/smoker_top.png": {
+    "mtime": 1789068610.7894604,
+    "seen": 1789073403.2758596,
+    "ast_hash": "e833d9ca233bb33895cbd0d6ecb1d7f4",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/void_frame.png": {
+    "mtime": 1788907812.622742,
+    "seen": 1789053558.9998097,
+    "ast_hash": "76398b33f8230aed50018628c563fa78",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/void_swirl.png": {
+    "mtime": 1788907812.622742,
+    "seen": 1789053558.9998097,
+    "ast_hash": "e4d694099a391f2c607a28eaf0945d20",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/fish_smoker.png": {
+    "mtime": 1789068610.8119874,
+    "seen": 1789073403.2788608,
+    "ast_hash": "a637e510f9225555523ee4114690803b",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/gui/plaque_sold.png": {
+    "mtime": 1788876259.5421977,
+    "seen": 1789053559.0088098,
+    "ast_hash": "9294bb742b0ca0470520441c1a5ba713",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/anchor.png": {
+    "mtime": 1788812211.7784438,
+    "seen": 1789053559.0118093,
+    "ast_hash": "fae36c7d021ba7111a026a786c54ca09",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/bomb.png": {
+    "mtime": 1788812211.7824645,
+    "seen": 1789053559.0118093,
+    "ast_hash": "b8b9d21468ddc9c3e6051a457afe9bc7",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/candy.png": {
+    "mtime": 1788812211.7854645,
+    "seen": 1789053559.0118093,
+    "ast_hash": "3b22d8947ea873a326563dbb56d4187a",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/chest.png": {
+    "mtime": 1788812211.7884655,
+    "seen": 1789053559.0118093,
+    "ast_hash": "faa58d062fc46d9963106554f33a5cac",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/clover.png": {
+    "mtime": 1788812211.791516,
+    "seen": 1789053559.0118093,
+    "ast_hash": "5439a9a9618bd186e0a21d02cb3155e9",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/cog.png": {
+    "mtime": 1788812211.795518,
+    "seen": 1789053559.0118093,
+    "ast_hash": "f5675528c5a2409f296d61047fd8641e",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/compass.png": {
+    "mtime": 1788812211.7985158,
+    "seen": 1789053559.0118093,
+    "ast_hash": "a83509c35fc41e4cd542e8060b8b314f",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/crystals.png": {
+    "mtime": 1788812211.8005154,
+    "seen": 1789053559.0118093,
+    "ast_hash": "202a7045b85746397e429aeab48a2cab",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/dialogue.png": {
+    "mtime": 1788812211.8040142,
+    "seen": 1789053559.0118093,
+    "ast_hash": "2cca0c5f9829fe5f490e55742ee33679",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/earth.png": {
+    "mtime": 1788812211.8074884,
+    "seen": 1789053559.0118093,
+    "ast_hash": "edee963abe8e23f2946cf5cdfce467ee",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/emerald.png": {
+    "mtime": 1788812211.810992,
+    "seen": 1789053559.0118093,
+    "ast_hash": "94dce886952c0a3455e5855226ddfeb3",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/exclamation.png": {
+    "mtime": 1788812211.8139932,
+    "seen": 1789053559.0118093,
+    "ast_hash": "5ebf9bf52536ff4562866075960d9752",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/fire.png": {
+    "mtime": 1788812211.816993,
+    "seen": 1789053559.0118093,
+    "ast_hash": "5a4a0757f0f11c2e8d81b7ee6cd46ab0",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/fish.png": {
+    "mtime": 1788812211.819005,
+    "seen": 1789053559.0118093,
+    "ast_hash": "640ef6db5bc5cae003a6ec22355d109f",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/fish_grey.png": {
+    "mtime": 1788812211.82251,
+    "seen": 1789053559.0118093,
+    "ast_hash": "9e1862644bdb7d15a9e5fc00b9d1aebd",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/flag.png": {
+    "mtime": 1788812211.8255098,
+    "seen": 1789053559.0118093,
+    "ast_hash": "2a92d48a5a5571e6b3e7f263bfeeffbc",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/flag_white.png": {
+    "mtime": 1788812211.828511,
+    "seen": 1789053559.0118093,
+    "ast_hash": "6199cbea82900f45d93b8109b8b8d3bd",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/helmet.png": {
+    "mtime": 1788812211.8310134,
+    "seen": 1789053559.0118093,
+    "ast_hash": "acd1e37cd152e0a655275d1f8a3a2b59",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/leaf.png": {
+    "mtime": 1788812211.8340142,
+    "seen": 1789053559.0118093,
+    "ast_hash": "07ccfb9ae2614f40f27cc4171cd50fdc",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/lightbulb.png": {
+    "mtime": 1788812211.8370142,
+    "seen": 1789053559.0118093,
+    "ast_hash": "c94a269a32983551e879486dcf5f3be4",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/lock.png": {
+    "mtime": 1788812211.839014,
+    "seen": 1789053559.0118093,
+    "ast_hash": "fba07f42e55689a25e36c8716861a2e2",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/magnet.png": {
+    "mtime": 1788812211.8435187,
+    "seen": 1789053559.0118093,
+    "ast_hash": "fc5159ffb9c3d952db583a5b9e83e53c",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/medal_bronze.png": {
+    "mtime": 1788812211.8465192,
+    "seen": 1789053559.0118093,
+    "ast_hash": "751706d06e85f1e04a935ea72ddc7f42",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/medal_gold.png": {
+    "mtime": 1788812211.8495188,
+    "seen": 1789053559.0118093,
+    "ast_hash": "08db31d975ba2004a5d6804469c5ac48",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/medal_silver.png": {
+    "mtime": 1788812211.8516135,
+    "seen": 1789053559.0118093,
+    "ast_hash": "8cbfa4fd44191b284babc926ff587927",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/money.png": {
+    "mtime": 1788812211.854614,
+    "seen": 1789053559.0118093,
+    "ast_hash": "d89a6802344e3085f01f1bb4c2aa6b10",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/no.png": {
+    "mtime": 1788812211.8576138,
+    "seen": 1789053559.0118093,
+    "ast_hash": "7af0ccc07af7d30c79097fa30a282ce8",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/palmtree.png": {
+    "mtime": 1788812211.8606143,
+    "seen": 1789053559.0118093,
+    "ast_hash": "9d27b9f97caa0b5df0e3d87b5193c7a1",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/seashell.png": {
+    "mtime": 1788812211.8636494,
+    "seen": 1789053559.0118093,
+    "ast_hash": "7867259b93e03e0162b00855fc748158",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/starfish.png": {
+    "mtime": 1788812211.8666494,
+    "seen": 1789053559.0118093,
+    "ast_hash": "4017e68cbdbcd48e1afd233470b87223",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/icons_pack/yes.png": {
+    "mtime": 1788812211.8696494,
+    "seen": 1789053559.0118093,
+    "ast_hash": "3968312eaebadfdebf0d1179a47da60c",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/item/abyssal_pearl.png": {
+    "mtime": 1788974892.8694267,
+    "seen": 1789053559.0138097,
+    "ast_hash": "a10a5a492b1077a9d7d6acae7bafd8fa",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/item/fish_meal.png": {
+    "mtime": 1788887720.8673587,
+    "seen": 1789053559.0178099,
+    "ast_hash": "4a3c69dc0f37c59a03987a18945594b5",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/item/InfernalPearlHandler.java": {
+    "mtime": 1789065666.9449122,
+    "seen": 1789065778.3034103,
+    "ast_hash": "7abbf587a55c12440bcc6849203f1a00",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/ui/item/InfernalPearlItem.java": {
+    "mtime": 1789065677.9306939,
+    "seen": 1789065778.3034103,
+    "ast_hash": "db44aa94c3360a129a46c5dcf0b7c0e8",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/models/item/infernal_pearl.json": {
+    "mtime": 1789065686.6300175,
+    "seen": 1789065778.3234231,
+    "ast_hash": "1f6ea95f7d752e4c185f192592910e97",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/item/infernal_pearl.png": {
+    "mtime": 1788985174.7926981,
+    "seen": 1789065778.5130775,
+    "ast_hash": "89fc11a41e123b155ed6a82606d7b7a2",
+    "semantic_hash": ""
+  },
+  "tools/assets/build_nanobanano_machine_assets.py": {
+    "mtime": 1789068599.0278406,
+    "seen": 1789073403.2288058,
+    "ast_hash": "8fc3ff044100f83549876a91f5fda74e",
+    "semantic_hash": ""
+  },
+  "test_all_cases_result.txt": {
+    "mtime": 1789068771.5460696,
+    "seen": 1789073403.2503514,
+    "ast_hash": "7659cee2406dcee1cf771930a341c9e2",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech_ui/textures/block/machines/af_bottom.png": {
+    "mtime": 1789068610.810987,
+    "seen": 1789073403.2743552,
+    "ast_hash": "05b0263539d735a967747b9f3aa74979",
+    "semantic_hash": ""
+  },
+  "tools/assets/build_fancymenu_assets.py": {
+    "mtime": 1789133089.4153,
+    "seen": 1789133281.844021,
+    "ast_hash": "736e57103ed74c03a582e447f603f0dd",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/customization/pause_screen_layout.txt": {
+    "mtime": 1789133096.9491389,
+    "seen": 1789133281.9600444,
+    "ast_hash": "b49763f04af5b10a99351aa75e5d8f87",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/customization/title_screen_layout.txt": {
+    "mtime": 1789133096.9491389,
+    "seen": 1789133281.9600444,
+    "ast_hash": "ecc826a1633c7364ec6938fed44b1c2b",
+    "semantic_hash": ""
+  },
+  "config/fancymenu/assets/logo_crystal.png": {
+    "mtime": 1789133095.6904647,
+    "seen": 1789133281.982098,
+    "ast_hash": "8d4abfe07889effdc1973a8f6a0f433c",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/assets/btn_ghost.png": {
+    "mtime": 1789133095.2376585,
+    "seen": 1789133282.0571556,
+    "ast_hash": "0d087d58d3da11c63089f9dd97b01b69",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/assets/btn_ghost_hover.png": {
+    "mtime": 1789133095.3044465,
+    "seen": 1789133282.0571556,
+    "ast_hash": "3ae336ec77235076b2227dbaf71fd708",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/assets/btn_play.png": {
+    "mtime": 1789133095.1052282,
+    "seen": 1789133282.0571556,
+    "ast_hash": "51955480fb9c42d3bd1ffe0a12c76d0f",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/assets/btn_play_hover.png": {
+    "mtime": 1789133095.1755335,
+    "seen": 1789133282.0571556,
+    "ast_hash": "3af4ad7a731e7997d868936b2749f2d8",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/assets/logo_crystal.png": {
+    "mtime": 1789133095.6904647,
+    "seen": 1789133282.0571556,
+    "ast_hash": "8d4abfe07889effdc1973a8f6a0f433c",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/assets/menu_background.png": {
+    "mtime": 1789133096.9481387,
+    "seen": 1789133282.0571556,
+    "ast_hash": "1e5ade5b4b1da07e2b4d8df907768dff",
+    "semantic_hash": ""
+  },
+  "docs/pack/config/fancymenu/assets/pause_glass.png": {
+    "mtime": 1789133095.6879632,
+    "seen": 1789133282.0571556,
+    "ast_hash": "196d286c439317619eda601fd30db7dc",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/minecraft/font/uniform.json": {
+    "mtime": 1789133131.5588999,
+    "seen": 1789133281.8256824,
+    "ast_hash": "0c71fc2698fc565406dd952efeb3baa3",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/java/net/aquatech/machines/AquaTechMachinesMod.java": {
+    "mtime": 1789134391.7501025,
+    "seen": 1789135034.178112,
+    "ast_hash": "c9a71f8ca5c17ed9ca9268bc9469d04c",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/blockstates/auto_fisher.json": {
+    "mtime": 1789134416.5877273,
+    "seen": 1789135034.2051122,
+    "ast_hash": "56a598bfb576c52eb49329e2b0933c9d",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/blockstates/fish_smoker.json": {
+    "mtime": 1789134422.3571358,
+    "seen": 1789135034.2051122,
+    "ast_hash": "df0dd2b192681ea8bf610293afa2695b",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/lang/en_us.json": {
+    "mtime": 1789134459.459347,
+    "seen": 1789135034.2051122,
+    "ast_hash": "0cd97091a4dd70b9bb5683dbae05cc90",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/lang/ru_ru.json": {
+    "mtime": 1789134453.6724029,
+    "seen": 1789135034.2051122,
+    "ast_hash": "474d0dcdd63fadfd83600f4d51a33d77",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/models/block/auto_fisher.json": {
+    "mtime": 1789134428.475478,
+    "seen": 1789135034.2051122,
+    "ast_hash": "7a9317b7435c3e67c8bdb031373872f5",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/models/block/fish_smoker.json": {
+    "mtime": 1789134433.5132585,
+    "seen": 1789135034.2051122,
+    "ast_hash": "48a84428fdbda3d4cddc3cbaba68d6f8",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/models/block/fish_smoker_on.json": {
+    "mtime": 1789134437.5375803,
+    "seen": 1789135034.2051122,
+    "ast_hash": "d729ec8124f6183fc3ea689a32d013ea",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/models/item/auto_fisher.json": {
+    "mtime": 1789134441.6980178,
+    "seen": 1789135034.2051122,
+    "ast_hash": "dad84b315717898a95a2fc99fce0394d",
+    "semantic_hash": ""
+  },
+  "mods/aquatech-ui/src/main/resources/assets/aquatech/models/item/fish_smoker.json": {
+    "mtime": 1789134448.5432382,
+    "seen": 1789135034.2051122,
+    "ast_hash": "93768005b313d4394bda9e912a26db96",
     "semantic_hash": ""
   }
 }

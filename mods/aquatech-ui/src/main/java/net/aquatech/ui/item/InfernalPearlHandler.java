@@ -1,7 +1,6 @@
 package net.aquatech.ui.item;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -32,7 +31,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class InfernalPearlHandler {
 
-    private static final ResourceLocation PEARL_ID = new ResourceLocation("kubejs", "infernal_pearl");
+    private static final ResourceLocation PEARL_ID = new ResourceLocation("aquatech_ui", "infernal_pearl");
     private static final String RETURN_KEY = "AquaInfernalReturn";
     private static final int COOLDOWN_TICKS = 20 * 60 * 10;
 
@@ -113,12 +112,7 @@ public final class InfernalPearlHandler {
     }
 
     private static boolean isRetiredMachine(Block block) {
-        return block == ModBlocks.AUTO_FISHER.get()
-                || block == ModBlocks.OCEAN_FILTER.get()
-                || block == ModBlocks.SEABED_DREDGER.get()
-                || block == ModBlocks.FISH_SMOKER.get()
-                || block == ModBlocks.OCEAN_ALTAR.get()
-                || block == ModBlocks.ABYSSAL_PORTAL.get();
+        return false; // машины выведены в отдельный мод AquaTech: Механизмы
     }
 
     private static Vec3 netherPlatform(ServerLevel nether) {

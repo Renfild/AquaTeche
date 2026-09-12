@@ -232,29 +232,51 @@ public final class HubEconomy {
     }
 
     public static boolean dailyAvailable(ServerPlayer player) {
+        if (player == null) return false;
+        MariaStats.PlayerRewards rewards = MariaStats.getRewards(player.getUUID());
+        if (rewards.dailyLastDay() > 0) {
+            return rewards.dailyLastDay() != today();
+        }
         return dailyTag(player).getLong("lastDay") != today();
     }
 
     public static int dailyStreak(ServerPlayer player) {
-        return dailyTag(player).getInt("streak");
+        if (player == null) return 1;
+        MariaStats.PlayerRewards rewards = MariaStats.getRewards(player.getUUID());
+        if (rewards.dailyStreak() > 0) {
+            return rewards.dailyStreak();
+        }
+        int tagStreak = dailyTag(player).getInt("streak");
+        return tagStreak > 0 ? tagStreak : 1;
     }
 
     /** @return reward size in coins, or -1 when already claimed today. */
     public static long claimDaily(ServerPlayer player) {
-        CompoundTag tag = dailyTag(player);
+        UUID uuid = player.getUUID();
         long today = today();
-        if (tag.getLong("lastDay") == today) {
+        MariaStats.PlayerRewards rewards = MariaStats.getRewards(uuid);
+        long lastDay = rewards.dailyLastDay() > 0 ? rewards.dailyLastDay() : dailyTag(player).getLong("lastDay");
+
+        if (lastDay == today) {
             return -1L;
         }
-        int streak = tag.getLong("lastDay") == today - 1L
-                ? Math.min(tag.getInt("streak") + 1, CaseConfig.get().daily.maxStreak)
+
+        int prevStreak = rewards.dailyStreak() > 0 ? rewards.dailyStreak() : dailyTag(player).getInt("streak");
+        int streak = (lastDay == today - 1L)
+                ? Math.min(prevStreak + 1, CaseConfig.get().daily.maxStreak)
                 : 1;
         CaseConfig.Daily daily = CaseConfig.get().daily;
         long reward = daily.baseCoins + (long) (streak - 1) * daily.streakBonusCoins;
 
+        // Persist to MariaDB + disk cache
+        MariaStats.saveDaily(uuid, today, streak);
+
+        // Keep local persistent NBT in sync
+        CompoundTag tag = dailyTag(player);
         tag.putLong("lastDay", today);
         tag.putInt("streak", streak);
         player.getPersistentData().put(DAILY_TAG, tag);
+
         grantCoins(player, reward);
         return reward;
     }

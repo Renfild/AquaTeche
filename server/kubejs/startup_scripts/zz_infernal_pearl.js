@@ -1,9 +1,4 @@
-// Жемчужина Пламени: телепорт в Ад и обратно к точке входа (память в persistentData).
-StartupEvents.registry('item', (event) => {
-  event.create('infernal_pearl')
-    .displayName('Жемчужина Пламени')
-    .maxStackSize(1)
-    .fireResistant(true)
-    .texture('kubejs:item/infernal_pearl')
-    .tooltip('§7ПКМ: Ад ↔ точка входа. §8Кулдаун 10 мин')
-})
+// Жемчужина Пламени зарегистрирована в Java (aquatech_ui:infernal_pearl).
+// KubeJS-дубль удалён: у владельца в инвентаре был kubejs:infernal_pearl — он пропадёт,
+// новая выдаётся крафтом или /give aquatech_ui:infernal_pearl.
+console.info('[AquaTech] infernal_pearl is a Java item (aquatech_ui) — kubejs duplicate disabled')

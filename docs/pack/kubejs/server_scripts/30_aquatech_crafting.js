@@ -177,29 +177,15 @@ ServerEvents.recipes((event) => {
     console.log('[AquaTech] avaritia missing — rate_x32/x64 uncraftable')
   }
 
-  // Keep Re-Avaritia's own Extreme Table recipe (7×7 tier-3) — do not replace with a cheap 3×3.
+  // Апгрейды машин и mesh_filter удалены вместе с машинами (новые — в AquaTech: Механизмы).
   event.remove({ id: 'aquatech_ui:speed_upgrade' })
   event.remove({ id: 'aquatech_ui:speed_x4_upgrade' })
+  event.remove({ id: 'aquatech_ui:mesh_filter' })
+  event.remove({ output: 'aquatech_ui:speed_upgrade' })
+  event.remove({ output: 'aquatech_ui:speed_x4_upgrade' })
+  event.remove({ output: 'aquatech_ui:mesh_filter' })
   event.remove({ id: 'aquatech_ui:sonar_goggles' })
   event.remove({ output: 'aquatech_ui:sonar_goggles' })
-  event.shaped('aquatech_ui:speed_upgrade', ['IRI', 'GRG', 'RGR'], {
-    I: 'minecraft:iron_ingot',
-    R: 'minecraft:redstone',
-    G: 'minecraft:gold_ingot',
-  }).id('aquatech:speed_upgrade')
-
-  event.shaped('aquatech_ui:speed_x4_upgrade', ['DRD', 'BCB', 'DBD'], {
-    D: 'minecraft:diamond',
-    R: 'starcatcher:starcatcher_rod',
-    B: 'minecraft:iron_block',
-    C: 'minecraft:chest',
-  }).id('aquatech:speed_x4_upgrade')
-
-  event.remove({ id: 'aquatech_ui:mesh_filter' })
-  event.shaped('aquatech_ui:mesh_filter', ['SNS', 'NSN', 'SNS'], {
-    S: 'minecraft:string',
-    N: 'minecraft:iron_nugget',
-  }).id('aquatech:mesh_filter')
 
   event.shaped('aquatech_ui:sonar_goggles', ['PLP', 'HGH', 'XRX'], {
     P: 'minecraft:prismarine_crystals',
@@ -224,14 +210,6 @@ ServerEvents.recipes((event) => {
   event.remove({ output: 'aquatech_ui:fish_smoker' })
   event.remove({ id: 'aquatech_ui:ocean_filter' })
   event.remove({ output: 'aquatech_ui:ocean_filter' })
-
-  event.remove({ id: 'aquatech_ui:kelp_bio_pellet' })
-  if (Item.exists('aquatech_ui:kelp_bio_pellet')) {
-    event.shaped(Item.of('aquatech_ui:kelp_bio_pellet', 4), ['KKK', 'KRK', 'KKK'], {
-      K: 'minecraft:dried_kelp_block',
-      R: 'minecraft:redstone_block',
-    }).id('aquatech:kelp_bio_pellet')
-  }
 
   // Машины AquaTech выведены: нет крафта, нет GUI
   const DEAD_MACHINES = [
@@ -356,124 +334,6 @@ ServerEvents.recipes((event) => {
   event.remove({ id: 'aquatech_ui:ocean_bounty_upgrade' })
   event.remove({ id: 'aquatech:ocean_bounty_alias_1' })
   event.remove({ id: 'aquatech:ocean_bounty_alias_2' })
-
-  let oceanBountyResult = { item: 'aquatech_ui:upgrade_ocean_bounty', count: 1 }
-
-  // 1. Universal Vanilla 3x3 Crafting Table Recipe (Always available)
-  let cItem = 'minecraft:prismarine_crystals'
-  if (Platform.isLoaded('avaritia') && Item.exists('avaritia:crystal_matrix_ingot')) {
-    cItem = 'avaritia:crystal_matrix_ingot'
-  } else if (Platform.isLoaded('botania') && Item.exists('botania:mana_diamond')) {
-    cItem = 'botania:mana_diamond'
-  }
-
-  let tItem = Platform.isLoaded('botania') && Item.exists('botania:terrasteel_ingot')
-    ? 'botania:terrasteel_ingot'
-    : 'minecraft:heart_of_the_sea'
-
-  let iItem = Platform.isLoaded('industrialupgrade') && Item.exists('industrialupgrade:alloyingot/inconel')
-    ? 'industrialupgrade:alloyingot/inconel'
-    : 'minecraft:nautilus_shell'
-
-  let lItem = Platform.isLoaded('botania') && Item.exists('botania:life_essence')
-    ? 'botania:life_essence'
-    : 'minecraft:nether_star'
-
-  let aItem = Platform.isLoaded('industrialupgrade') && Item.exists('industrialupgrade:alloyingot/osmiridium')
-    ? 'industrialupgrade:alloyingot/osmiridium'
-    : 'minecraft:prismarine_shard'
-
-  let key3x3 = {
-    C: cItem,
-    T: tItem,
-    F: 'aquatech_ui:abyssal_magnet',
-    I: iItem,
-    L: lItem,
-    A: aItem,
-  }
-  event.shaped('aquatech_ui:upgrade_ocean_bounty', [
-    'CTC',
-    'IFI',
-    'ALA'
-  ], key3x3).id('aquatech:upgrade_ocean_bounty_3x3')
-
-
-  // 2. 7x7 Pattern (Sculk / Elite Table)
-  let pattern7x7 = [
-    ' CTTTC ',
-    'CLSLSLC',
-    'TSIAIST',
-    'TLIFAIT',
-    'TSIAIST',
-    'CLSLSLC',
-    ' CTTTC ',
-  ]
-  let keyFull = {
-    C: { item: 'avaritia:crystal_matrix_ingot' },
-    T: { item: 'botania:terrasteel_ingot' },
-    L: { item: 'botania:life_essence' },
-    S: Platform.isLoaded('extrabotany')
-      ? { item: 'extrabotany:orichalcos_ingot' }
-      : { item: 'industrialupgrade:alloyingot/osmiridium' },
-    I: { item: 'industrialupgrade:alloyingot/inconel' },
-    A: { item: 'industrialupgrade:alloyingot/osmiridium' },
-    F: { item: 'aquatech_ui:abyssal_magnet' },
-  }
-
-  // 3. 9x9 Pattern (Extreme / Ultimate Table)
-  let pattern9x9 = [
-    '         ',
-    '  CTTTC  ',
-    ' CLSLSLC ',
-    ' TSIAIST ',
-    ' TLIFAIT ',
-    ' TSIAIST ',
-    ' CLSLSLC ',
-    '  CTTTC  ',
-    '         '
-  ]
-
-  if (Platform.isLoaded('avaritia')) {
-    // 9x9 Extreme Crafting Table (Tier 4)
-    event.custom({
-      type: 'avaritia:shaped_table',
-      tier: 4,
-      category: 'misc',
-      pattern: pattern9x9,
-      key: keyFull,
-      result: oceanBountyResult,
-      show_notification: true,
-    }).id('aquatech:upgrade_ocean_bounty_avaritia_extreme')
-
-    // 7x7 Sculk Crafting Table (Tier 3)
-    event.custom({
-      type: 'avaritia:shaped_table',
-      tier: 3,
-      category: 'misc',
-      pattern: pattern7x7,
-      key: keyFull,
-      result: oceanBountyResult,
-      show_notification: true,
-    }).id('aquatech:upgrade_ocean_bounty_avaritia_sculk')
-  }
-
-  if (Platform.isLoaded('extendedcrafting')) {
-    event.custom({
-      type: 'extendedcrafting:shaped_table',
-      tier: 3,
-      pattern: pattern7x7,
-      key: keyFull,
-      result: oceanBountyResult,
-    }).id('aquatech:upgrade_ocean_bounty_ec_7x7')
-
-    event.custom({
-      type: 'extendedcrafting:shaped_table',
-      tier: 4,
-      pattern: pattern9x9,
-      key: keyFull,
-      result: oceanBountyResult,
-    }).id('aquatech:upgrade_ocean_bounty_ec_9x9')
-  }
 
   console.log('[AquaTech] Crafting recipes loaded.')
 })

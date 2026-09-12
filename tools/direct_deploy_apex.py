@@ -53,6 +53,9 @@ print(f"  Uploaded {aquatech_ui_jar.name}")
 
 sftp.put(str(ROOT / "server/config/aqualumen/cases.json"), "config/aqualumen/cases.json")
 print("  Uploaded config/aqualumen/cases.json")
+if (ROOT / "server/config/aqualumen/hub.html").is_file():
+    sftp.put(str(ROOT / "server/config/aqualumen/hub.html"), "config/aqualumen/hub.html")
+    print("  Uploaded config/aqualumen/hub.html")
 kubejs_uploads = [
     (ROOT / "server/kubejs/server_scripts/30_aquatech_crafting.js", "kubejs/server_scripts/30_aquatech_crafting.js"),
     (ROOT / "server/kubejs/server_scripts/zz_infernal_pearl.js", "kubejs/server_scripts/zz_infernal_pearl.js"),

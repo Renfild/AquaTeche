@@ -1,7 +1,8 @@
 {
   "variants": {
-    "": {
-      "model": "aquatech_ui:block/auto_fisher"
-    }
+    "facing=north": { "model": "aquatech_ui:block/auto_fisher" },
+    "facing=south": { "model": "aquatech_ui:block/auto_fisher", "y": 180 },
+    "facing=west":  { "model": "aquatech_ui:block/auto_fisher", "y": 270 },
+    "facing=east":  { "model": "aquatech_ui:block/auto_fisher", "y": 90 }
   }
 }

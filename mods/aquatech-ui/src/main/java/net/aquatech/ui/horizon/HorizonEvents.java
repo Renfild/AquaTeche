@@ -1,7 +1,6 @@
 package net.aquatech.ui.horizon;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.block.entity.WorkingMachineTracker;
 import net.aquatech.ui.capability.AquaSkillCapability;
 import net.aquatech.ui.fishing.FishingRodCompat;
 import net.aquatech.ui.network.NetworkHandler;
@@ -155,7 +154,7 @@ public final class HorizonEvents {
     }
 
     private static boolean nearWorkingMachine(ServerPlayer player) {
-        return WorkingMachineTracker.hasWorkingNear(player.level(), player.blockPosition(), 6, 3);
+        return false; // машины AquaTech выведены; MACHINE-контракты активируются с новым модом механизмов
     }
 
     private static void maybeSyncProgress(ServerPlayer player, AquaSkillCapability cap) {

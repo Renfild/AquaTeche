@@ -316,7 +316,7 @@ public final class FishShopConfig {
         CompoundTag rootTag = stack.getTag();
         if (rootTag != null) {
             if (rootTag.getBoolean("AquaSmoked")) {
-                unitPrice *= 2.0;
+                unitPrice *= 1.5;
             }
             long caughtAt = rootTag.getLong("AquaCaughtAt");
             if (caughtAt > 0L) {
