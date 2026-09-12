@@ -18,8 +18,8 @@
     },
     {
       "path": "mods/aquatech_machines-1.0.1.jar",
-      "md5": "4587f3d443bcf40d328930ba64de3641",
-      "size": 76561,
+      "md5": "ba29d083c477acf53964f1ae408ac79d",
+      "size": 78688,
       "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.1.jar",
       "asset": "aquatech_machines-1.0.1.jar"
     }
@@ -39,6 +39,6 @@
     "changed": 1,
     "removed": 0,
     "unchanged": 138,
-    "download_bytes": 3039619
+    "download_bytes": 3041746
   }
 }
