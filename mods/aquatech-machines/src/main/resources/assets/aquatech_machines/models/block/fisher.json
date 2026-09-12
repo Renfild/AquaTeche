@@ -1,0 +1,87 @@
+{
+ "parent": "block/block",
+ "textures": {
+  "particle": "aquatech_machines:block/fisher_side",
+  "down": "aquatech_machines:block/fisher_bottom",
+  "up": "aquatech_machines:block/fisher_top",
+  "north": "aquatech_machines:block/fisher_front",
+  "south": "aquatech_machines:block/fisher_side",
+  "west": "aquatech_machines:block/fisher_side",
+  "east": "aquatech_machines:block/fisher_side"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    16,
+    16,
+    16
+   ],
+   "faces": {
+    "down": {
+     "texture": "#down",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "cullface": "down"
+    },
+    "up": {
+     "texture": "#up",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "cullface": "up"
+    },
+    "north": {
+     "texture": "#north",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#south",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "cullface": "south"
+    },
+    "west": {
+     "texture": "#west",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "cullface": "west"
+    },
+    "east": {
+     "texture": "#east",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "cullface": "east"
+    }
+   }
+  }
+ ]
+}

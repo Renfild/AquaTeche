@@ -1,0 +1,7 @@
+{
+ "variants": {
+  "": {
+   "model": "aquatech_machines:block/excavator"
+  }
+ }
+}

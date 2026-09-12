@@ -4,7 +4,7 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="aquatech_ui"
-version="1.0.27"
+version="1.0.92"
 displayName="AquaTech Ocean UI"
 authors="AquaTech"
 description='''Ocean-themed LoliLand-style UI: custom Tab, HUD, nametags and chat bubbles for AquaTech.'''
