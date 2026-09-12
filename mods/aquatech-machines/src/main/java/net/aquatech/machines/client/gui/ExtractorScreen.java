@@ -11,16 +11,6 @@ public class ExtractorScreen extends AbstractMachineScreen<ExtractorMenu> {
             new ResourceLocation("aquatech_machines", "textures/gui/extractor.png");
 
     public ExtractorScreen(ExtractorMenu menu, Inventory inv, Component title) {
-        super(menu, inv, title, TEXTURE);
-    }
-
-    @Override
-    protected int progressU() {
-        return 176;
-    }
-
-    @Override
-    protected int progressV() {
-        return 52;
+        super(menu, inv, title, TEXTURE, 79, 34, 8, 18);
     }
 }

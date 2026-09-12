@@ -1,7 +1,10 @@
 {
  "variants": {
-  "": {
+  "lit=false": {
    "model": "aquatech_machines:block/fisher"
+  },
+  "lit=true": {
+   "model": "aquatech_machines:block/fisher_on"
   }
  }
 }

@@ -11,16 +11,6 @@ public class ExcavatorScreen extends AbstractMachineScreen<ExcavatorMenu> {
             new ResourceLocation("aquatech_machines", "textures/gui/excavator.png");
 
     public ExcavatorScreen(ExcavatorMenu menu, Inventory inv, Component title) {
-        super(menu, inv, title, TEXTURE);
-    }
-
-    @Override
-    protected int progressU() {
-        return 176;
-    }
-
-    @Override
-    protected int progressV() {
-        return 52;
+        super(menu, inv, title, TEXTURE, 52, 35, 8, 18);
     }
 }

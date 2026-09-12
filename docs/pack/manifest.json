@@ -43,8 +43,8 @@
     },
     {
       "path": "mods/aquatech_machines-1.0.1.jar",
-      "md5": "a21b259227eecf798addcd40e90028be",
-      "size": 69068,
+      "md5": "4587f3d443bcf40d328930ba64de3641",
+      "size": 76561,
       "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.1.jar",
       "asset": "aquatech_machines-1.0.1.jar"
     },
@@ -950,6 +950,13 @@
       "size": 1373,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/97_machines_recipes.js",
       "asset": "kubejs__server_scripts__97_machines_recipes.js"
+    },
+    {
+      "path": "kubejs/server_scripts/98_fishing_core_recipe.js",
+      "md5": "0914d4936e4b7db72b87c739af7fdd83",
+      "size": 1239,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/98_fishing_core_recipe.js",
+      "asset": "kubejs__server_scripts__98_fishing_core_recipe.js"
     },
     {
       "path": "kubejs/server_scripts/zz_infernal_pearl.js",

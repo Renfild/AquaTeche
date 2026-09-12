@@ -37,7 +37,8 @@ public class FisherMenu extends BaseMachineMenu {
                         || BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace().equals("starcatcher");
             }
         });
-        addSlot(output(1, 116, 35));
+        addSlot(new SlotItemHandler(blockEntity.getItems(), 1, 44, 53));
+        addSlot(output(2, 116, 35));
     }
 
     public BlockPos getPos() {

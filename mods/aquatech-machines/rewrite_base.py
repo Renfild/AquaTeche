@@ -1,4 +1,6 @@
-package net.aquatech.machines.block.entity;
+# -*- coding: utf-8 -*-
+# Rewrites BaseMachineBlockEntity with energy pull + LIT animation support.
+code = '''package net.aquatech.machines.block.entity;
 
 import net.aquatech.machines.util.MachineEnergyStorage;
 import net.minecraft.core.BlockPos;
@@ -79,35 +81,12 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Menu
         return energy.getEnergy();
     }
 
-    public int getProgressValue() {
-        return progress;
-    }
-
-    public int getMaxProgressValue() {
-        return maxProgress;
-    }
-
     public int getMaxEnergy() {
         return maxEnergy;
     }
 
     public ItemStackHandler getItems() {
         return items;
-    }
-
-    @Override
-    public net.minecraft.network.chat.Component getDisplayName() {
-        return net.minecraft.network.chat.Component.translatable(
-                getBlockState().getBlock().getDescriptionId());
-    }
-
-    protected abstract net.minecraft.world.inventory.AbstractContainerMenu createMenu(int id,
-            net.minecraft.world.entity.player.Inventory inv);
-
-    @Override
-    public net.minecraft.world.inventory.AbstractContainerMenu createMenu(int id,
-            net.minecraft.world.entity.player.Inventory inv, net.minecraft.world.entity.player.Player player) {
-        return createMenu(id, inv);
     }
 
     public static void serverTick(BaseMachineBlockEntity be) {
@@ -244,3 +223,6 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Menu
         progress = tag.getInt("Progress");
     }
 }
+'''
+open("src/main/java/net/aquatech/machines/block/entity/BaseMachineBlockEntity.java", "w", encoding="utf-8", newline="\n").write(code)
+print("base rewritten")

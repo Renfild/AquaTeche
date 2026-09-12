@@ -1,4 +1,7 @@
-package net.aquatech.machines.block.entity;
+# -*- coding: utf-8 -*-
+# Fisher BE v2: слот удочки [0], слот апгрейда [1], выход [2].
+# Базовый режим — ресурсный лут по тиру удочки; с апгрейдом «Ядро Рыболова» — рыба по ростеру.
+code = '''package net.aquatech.machines.block.entity;
 
 import net.aquatech.machines.registry.ModBlockEntities;
 import net.aquatech.machines.registry.ModItems;
@@ -70,3 +73,6 @@ public class FisherBlockEntity extends BaseMachineBlockEntity {
         return new net.aquatech.machines.inventory.FisherMenu(id, inv, this);
     }
 }
+'''
+open("src/main/java/net/aquatech/machines/block/entity/FisherBlockEntity.java", "w", encoding="utf-8", newline="\n").write(code)
+print("fisher v2")

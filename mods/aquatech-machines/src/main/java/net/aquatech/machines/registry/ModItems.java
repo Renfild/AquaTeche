@@ -24,6 +24,9 @@ public class ModItems {
     public static final RegistryObject<Item> EXTRACTOR = ITEMS.register("extractor",
             () -> new BlockItem(ModBlocks.EXTRACTOR.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> FISHING_CORE = ITEMS.register("fishing_core",
+            () -> new Item(new Item.Properties().stacksTo(1).fireResistant()));
+
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
     }

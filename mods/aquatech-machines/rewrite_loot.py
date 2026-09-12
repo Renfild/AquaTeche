@@ -1,6 +1,8 @@
-package net.aquatech.machines.util;
+# -*- coding: utf-8 -*-
+# FisherLoot v2: resource pools by rod tier (base mode) + fish roll proxy (upgraded).
+code = 'package net.aquatech.machines.util;\n\n'
 
-import net.minecraft.resources.ResourceLocation;
+code += '''import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -66,10 +68,6 @@ public final class FisherLoot {
     }
 
     /** Тир удочки StarCatcher по имени предмета (bamboo=1 ... alpha=13). */
-    public static int tierOf(ResourceLocation rodId) {
-        return rodId == null ? 0 : tierOf(rodId.getPath());
-    }
-
     public static int tierOf(String rodPath) {
         if (rodPath == null) return 0;
         return switch (rodPath) {
@@ -126,3 +124,6 @@ public final class FisherLoot {
         return result;
     }
 }
+'''
+open("src/main/java/net/aquatech/machines/util/FisherLoot.java", "w", encoding="utf-8", newline="\n").write(code)
+print("fisherloot v2 written")

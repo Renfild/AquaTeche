@@ -1,7 +1,10 @@
 {
  "variants": {
-  "": {
+  "lit=false": {
    "model": "aquatech_machines:block/extractor"
+  },
+  "lit=true": {
+   "model": "aquatech_machines:block/extractor_on"
   }
  }
 }

@@ -2,5 +2,6 @@
  "itemGroup.aquatech_machines": "AquaTech: Механизмы",
  "block.aquatech_machines.fisher": "Рыболов MK-2",
  "block.aquatech_machines.excavator": "Экскаватор",
- "block.aquatech_machines.extractor": "Экстрактор"
+ "block.aquatech_machines.extractor": "Экстрактор",
+ "item.aquatech_machines.fishing_core": "Ядро Рыболова"
 }

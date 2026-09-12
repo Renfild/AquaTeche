@@ -8,16 +8,26 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 
 /**
- * Общий экран механизма: фон-текстура, стрелка прогресса (24x17 @ 79,34),
- * полоса энергии (12x50 @ 8,18), без надписи «Инвентарь».
+ * Общий экран механизма. Координаты прогресса/энергии задаются наследником
+ * и обязаны совпадать с GUI-текстурой (бокс-в-бокс).
+ * Стрелка-заливка: strip (176,52) 24x17. Энергия: strip (176,0) 12x50, растёт снизу вверх.
  */
 public abstract class AbstractMachineScreen<T extends BaseMachineMenu> extends AbstractContainerScreen<T> {
 
     protected final ResourceLocation texture;
+    protected final int progressX;
+    protected final int progressY;
+    protected final int energyX;
+    protected final int energyY;
 
-    protected AbstractMachineScreen(T menu, Inventory inv, Component title, ResourceLocation texture) {
+    protected AbstractMachineScreen(T menu, Inventory inv, Component title, ResourceLocation texture,
+                                    int progressX, int progressY, int energyX, int energyY) {
         super(menu, inv, title);
         this.texture = texture;
+        this.progressX = progressX;
+        this.progressY = progressY;
+        this.energyX = energyX;
+        this.energyY = energyY;
         this.imageWidth = 176;
         this.imageHeight = 166;
     }
@@ -27,14 +37,6 @@ public abstract class AbstractMachineScreen<T extends BaseMachineMenu> extends A
         super.init();
         titleLabelX = (imageWidth - font.width(title)) / 2;
         titleLabelY = 5;
-    }
-
-    protected abstract int progressU();
-
-    protected abstract int progressV();
-
-    protected ResourceLocation texture() {
-        return texture;
     }
 
     @Override
@@ -47,16 +49,19 @@ public abstract class AbstractMachineScreen<T extends BaseMachineMenu> extends A
     @Override
     protected void renderBg(GuiGraphics g, float partialTick, int mouseX, int mouseY) {
         int x = leftPos, y = topPos;
-        g.blit(texture(), x, y, 0, 0, imageWidth, imageHeight, 256, 256);
+        g.blit(texture, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
 
+        // Прогресс: лево-право по strip (176,52)
         int progress = menu.getScaledProgress(24);
         if (progress > 0) {
-            g.blit(texture(), x + 79, y + 34, 176, 52, progress, 17, 256, 256);
+            g.blit(texture, x + progressX, y + progressY, 176, 52, progress, 17, 256, 256);
         }
 
-        int energy = menu.getMaxEnergy() == 0 ? 0 : menu.getEnergy() * 50 / menu.getMaxEnergy();
+        // Энергия: низ-верх по strip (176,0) 12x50
+        int max = menu.getMaxEnergy();
+        int energy = max == 0 ? 0 : menu.getEnergy() * 50 / max;
         if (energy > 0) {
-            g.blit(texture(), x + 8, y + 18 + (50 - energy), 176, 0, 12, energy, 256, 256);
+            g.blit(texture, x + energyX, y + energyY + (50 - energy), 176, 50 - energy, 12, energy, 256, 256);
         }
     }
 
