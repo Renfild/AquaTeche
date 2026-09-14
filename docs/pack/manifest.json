@@ -1,5 +1,5 @@
 {
-  "version": "2.9.361",
+  "version": "2.9.362",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -540,8 +540,8 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "ca93fb94d03066d1934d4ea516fb2d05",
-      "size": 992939,
+      "md5": "fd35c5eb3fc07426c59bca0494ae15de",
+      "size": 992011,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -869,8 +869,8 @@
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "b53d0dec7d619970d309fff91c722e05",
-      "size": 13119,
+      "md5": "bc5b79816c7575037905ce8b6107d508",
+      "size": 12925,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
@@ -883,8 +883,8 @@
     },
     {
       "path": "kubejs/server_scripts/36_balanced_tweaks.js",
-      "md5": "38cf7bbbaf9cbde6b7153eafc556ff46",
-      "size": 11483,
+      "md5": "92757936ae0684c0b151d15ab8ccc2d8",
+      "size": 11325,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/36_balanced_tweaks.js",
       "asset": "kubejs__server_scripts__36_balanced_tweaks.js"
     },
