@@ -31,6 +31,9 @@ public class ModItems {
     public static final RegistryObject<Item> FLOWER_COLLECTOR = ITEMS.register("flower_collector",
             () -> new BlockItem(ModBlocks.FLOWER_COLLECTOR.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> MANA_FABRICATOR = ITEMS.register("mana_fabricator",
+            () -> new BlockItem(ModBlocks.MANA_FABRICATOR.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> VOLCANIC_CRYSTAL = ITEMS.register("volcanic_crystal",
             () -> new Item(new Item.Properties().fireResistant()));
 

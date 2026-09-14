@@ -13,5 +13,6 @@
   "item.aquatech_machines.speed_upgrade_1": "Улучшение скорости (x1)",
   "item.aquatech_machines.speed_upgrade_4": "Улучшение скорости (x4)",
   "item.aquatech_machines.energy_efficiency": "Улучшение энергоэффективности",
-  "block.aquatech_machines.flower_collector": "Цветолов"
+  "block.aquatech_machines.flower_collector": "Цветолов",
+  "block.aquatech_machines.mana_fabricator": "Мана-Фабрикатор"
 }

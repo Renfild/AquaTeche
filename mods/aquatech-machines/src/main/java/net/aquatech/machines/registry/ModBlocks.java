@@ -34,6 +34,8 @@ public class ModBlocks {
             () -> new net.aquatech.machines.block.CentrifugeBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
     public static final RegistryObject<Block> FLOWER_COLLECTOR = BLOCKS.register("flower_collector",
             () -> new net.aquatech.machines.block.FlowerCollectorBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
+    public static final RegistryObject<Block> MANA_FABRICATOR = BLOCKS.register("mana_fabricator",
+            () -> new net.aquatech.machines.block.ManaFabricatorBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
 
     private static BlockBehaviour.Properties metal() {
         return BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion();

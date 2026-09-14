@@ -1,8 +1,9 @@
 package net.aquatech.machines.compat;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.BlockPos;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,9 +11,8 @@ import java.util.Map;
 
 /**
  * Интеграция с маной Botania (чистая рефлексия, без compile-зависимости — как IU-компат).
- * Машина-цветолов списывает ману из соседних ManaReceiver: мана-пул Botania
- * (ManaPool extends ManaReceiver) принимает отрицательный receiveMana — так пул и «съедается».
- * Искры/генераторы маны можно подключать напрямую к пулу рядом с машиной.
+ * ManaPool extends ManaReceiver: receiveMana(-x) забирает ману из пула (Цветолов),
+ * receiveMana(+x) кладёт ману в пул (Мана-Фабрикатор), isFull() подскажет, есть ли место.
  */
 public final class BotaniaManaBridge {
 
@@ -59,7 +59,7 @@ public final class BotaniaManaBridge {
         if (amount <= 0) return true;
         ensureProbed();
         if (!botaniaAvailable || level == null) return false;
-        for (var side : var_sides()) {
+        for (Direction side : Direction.values()) {
             BlockEntity be = level.getBlockEntity(pos.relative(side));
             if (be == null || !manaReceiverClass.isInstance(be)) continue;
             try {
@@ -75,12 +75,50 @@ public final class BotaniaManaBridge {
         return false;
     }
 
+    /**
+     * Кладёт amount маны в первый соседний ManaReceiver, у которого есть место.
+     * @return true — мана внесена, false — приёмников нет/полны/Botania не установлен.
+     */
+    public static boolean depositToNeighbors(Level level, BlockPos pos, int amount) {
+        if (amount <= 0) return true;
+        ensureProbed();
+        if (!botaniaAvailable || level == null) return false;
+        for (Direction side : Direction.values()) {
+            BlockEntity be = level.getBlockEntity(pos.relative(side));
+            if (be == null || !manaReceiverClass.isInstance(be)) continue;
+            try {
+                boolean full = (Boolean) method(manaReceiverClass, "isFull").invoke(be);
+                if (full) continue;
+                method(manaReceiverClass, "receiveMana", int.class).invoke(be, amount);
+                be.setChanged();
+                return true;
+            } catch (Throwable ignored) {
+            }
+        }
+        return false;
+    }
+
+    /** Есть ли соседний ManaReceiver, готовый принять ману. */
+    public static boolean hasCapacity(Level level, BlockPos pos) {
+        ensureProbed();
+        if (!botaniaAvailable || level == null) return false;
+        for (Direction side : Direction.values()) {
+            BlockEntity be = level.getBlockEntity(pos.relative(side));
+            if (be == null || !manaReceiverClass.isInstance(be)) continue;
+            try {
+                if (!(Boolean) method(manaReceiverClass, "isFull").invoke(be)) return true;
+            } catch (Throwable ignored) {
+            }
+        }
+        return false;
+    }
+
     /** Сколько маны доступно в соседних пулах (для тултипов/тестов). */
     public static int neighborMana(Level level, BlockPos pos) {
         ensureProbed();
         if (!botaniaAvailable || level == null) return 0;
         int total = 0;
-        for (var side : var_sides()) {
+        for (Direction side : Direction.values()) {
             BlockEntity be = level.getBlockEntity(pos.relative(side));
             if (be == null || !manaReceiverClass.isInstance(be)) continue;
             try {
@@ -89,9 +127,5 @@ public final class BotaniaManaBridge {
             }
         }
         return total;
-    }
-
-    private static net.minecraft.core.Direction[] var_sides() {
-        return net.minecraft.core.Direction.values();
     }
 }

@@ -13,5 +13,6 @@
   "item.aquatech_machines.speed_upgrade_1": "Speed Upgrade (x1)",
   "item.aquatech_machines.speed_upgrade_4": "Speed Upgrade (x4)",
   "item.aquatech_machines.energy_efficiency": "Energy Efficiency Upgrade",
-  "block.aquatech_machines.flower_collector": "Flower Collector"
+  "block.aquatech_machines.flower_collector": "Flower Collector",
+  "block.aquatech_machines.mana_fabricator": "Mana Fabricator"
 }

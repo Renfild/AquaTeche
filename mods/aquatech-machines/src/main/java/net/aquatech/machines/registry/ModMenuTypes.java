@@ -32,6 +32,8 @@ public class ModMenuTypes {
             MENUS.register("centrifuge", () -> IForgeMenuType.create(net.aquatech.machines.inventory.CentrifugeMenu::new));
     public static final RegistryObject<MenuType<net.aquatech.machines.inventory.FlowerCollectorMenu>> FLOWER_COLLECTOR =
             MENUS.register("flower_collector", () -> IForgeMenuType.create(net.aquatech.machines.inventory.FlowerCollectorMenu::new));
+    public static final RegistryObject<MenuType<net.aquatech.machines.inventory.ManaFabricatorMenu>> MANA_FABRICATOR =
+            MENUS.register("mana_fabricator", () -> IForgeMenuType.create(net.aquatech.machines.inventory.ManaFabricatorMenu::new));
 
     public static void register(IEventBus bus) {
         MENUS.register(bus);

@@ -1,36 +1,29 @@
 {
-  "from_version": "2.9.368",
-  "to_version": "2.9.369",
+  "from_version": "2.9.369",
+  "to_version": "2.9.370",
   "added": [],
   "changed": [
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "76b4bcffc892c751d98007ab0c21b1a8",
-      "size": 1001329,
+      "md5": "f853ee27d53114fb3d6e60e9fbc351a5",
+      "size": 1002004,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
-      "path": "config/aqualumen/server_shop.json",
-      "md5": "00cd069c791470d0f3dd816ab2f1ed6d",
-      "size": 2925,
-      "url": "https://aquateche.store/pack/config/aqualumen/server_shop.json",
-      "asset": "config__aqualumen__server_shop.json"
-    },
-    {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "763b3ef192bb8c84c1f15d938928e74b",
-      "size": 2680153,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
+      "path": "mods/aquatech_machines-1.0.9.jar",
+      "md5": "18e497094d06dd4e062e75816e4b90c7",
+      "size": 232802,
+      "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.9.jar",
+      "asset": "aquatech_machines-1.0.9.jar"
     }
   ],
   "removed": [],
   "stats": {
     "added": 0,
-    "changed": 3,
+    "changed": 2,
     "removed": 0,
-    "unchanged": 141,
-    "download_bytes": 3684407
+    "unchanged": 142,
+    "download_bytes": 1234806
   }
 }

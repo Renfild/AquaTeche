@@ -36,6 +36,9 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<net.aquatech.machines.block.entity.FlowerCollectorBlockEntity>> FLOWER_COLLECTOR =
             BLOCK_ENTITIES.register("flower_collector",
                     () -> BlockEntityType.Builder.of(net.aquatech.machines.block.entity.FlowerCollectorBlockEntity::new, ModBlocks.FLOWER_COLLECTOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<net.aquatech.machines.block.entity.ManaFabricatorBlockEntity>> MANA_FABRICATOR =
+            BLOCK_ENTITIES.register("mana_fabricator",
+                    () -> BlockEntityType.Builder.of(net.aquatech.machines.block.entity.ManaFabricatorBlockEntity::new, ModBlocks.MANA_FABRICATOR.get()).build(null));
 
     public static void register(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);
