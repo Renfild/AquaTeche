@@ -1,5 +1,5 @@
 {
-  "version": "2.9.370",
+  "version": "2.9.371",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -36,22 +36,22 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "763b3ef192bb8c84c1f15d938928e74b",
-      "size": 2680153,
+      "md5": "fb2a6a9f8481bfbe909ea8019b1f83f5",
+      "size": 2681291,
       "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     },
     {
       "path": "mods/aquatech_machines-1.0.9.jar",
-      "md5": "18e497094d06dd4e062e75816e4b90c7",
-      "size": 232802,
+      "md5": "580de10b0814b51d386151f8cb9b33d8",
+      "size": 234187,
       "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.9.jar",
       "asset": "aquatech_machines-1.0.9.jar"
     },
     {
       "path": "mods/aquatech_ui-1.0.93.jar",
-      "md5": "e3c77ece82dce3e804e471819a8232c7",
-      "size": 2960933,
+      "md5": "b67fd416a9df1786a081c6cc6db073a7",
+      "size": 2972308,
       "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.93.jar",
       "asset": "aquatech_ui-1.0.93.jar"
     },
@@ -554,8 +554,8 @@
     },
     {
       "path": "config/aqualumen/server_shop.json",
-      "md5": "00cd069c791470d0f3dd816ab2f1ed6d",
-      "size": 2925,
+      "md5": "7a34ca2d172471c6636be5dcbf5898cb",
+      "size": 3072,
       "url": "https://aquateche.store/pack/config/aqualumen/server_shop.json",
       "asset": "config__aqualumen__server_shop.json"
     },
@@ -875,6 +875,13 @@
       "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
     },
     {
+      "path": "kubejs/server_scripts/25_hide_guides.js",
+      "md5": "7c026338c2e2c1e76e3deb71474ad4a8",
+      "size": 636,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/25_hide_guides.js",
+      "asset": "kubejs__server_scripts__25_hide_guides.js"
+    },
+    {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
       "md5": "bc5b79816c7575037905ce8b6107d508",
       "size": 12925,
@@ -960,8 +967,8 @@
     },
     {
       "path": "kubejs/server_scripts/97_machines_recipes.js",
-      "md5": "02d560557321ccae67f9cb56e4ef510e",
-      "size": 5658,
+      "md5": "0497583c7424a6e021ac83923523a141",
+      "size": 5858,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/97_machines_recipes.js",
       "asset": "kubejs__server_scripts__97_machines_recipes.js"
     },
