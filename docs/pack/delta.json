@@ -1,44 +1,22 @@
 {
-  "from_version": "2.9.349",
-  "to_version": "2.9.350",
-  "added": [
-    {
-      "path": "kubejs/server_scripts/97_machines_recipes.js",
-      "md5": "c4a73887854fe9ea1fce25979490b561",
-      "size": 1373,
-      "url": "https://aquateche.store/pack/kubejs/server_scripts/97_machines_recipes.js",
-      "asset": "kubejs__server_scripts__97_machines_recipes.js"
-    },
-    {
-      "path": "kubejs/server_scripts/98_fishing_core_recipe.js",
-      "md5": "0914d4936e4b7db72b87c739af7fdd83",
-      "size": 1239,
-      "url": "https://aquateche.store/pack/kubejs/server_scripts/98_fishing_core_recipe.js",
-      "asset": "kubejs__server_scripts__98_fishing_core_recipe.js"
-    },
-    {
-      "path": "mods/aquatech_machines-1.0.1.jar",
-      "md5": "ba29d083c477acf53964f1ae408ac79d",
-      "size": 78688,
-      "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.1.jar",
-      "asset": "aquatech_machines-1.0.1.jar"
-    }
-  ],
+  "from_version": "2.9.365",
+  "to_version": "2.9.366",
+  "added": [],
   "changed": [
     {
-      "path": "mods/aquatech_ui-1.0.92.jar",
-      "md5": "34c415c2cb36cda3b276368ac5fd7023",
-      "size": 2960446,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.92.jar",
-      "asset": "aquatech_ui-1.0.92.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
+      "md5": "ca665ff16c5dd1c8db6169df4ddb0a81",
+      "size": 2669907,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     }
   ],
   "removed": [],
   "stats": {
-    "added": 3,
+    "added": 0,
     "changed": 1,
     "removed": 0,
-    "unchanged": 138,
-    "download_bytes": 3041746
+    "unchanged": 143,
+    "download_bytes": 2669907
   }
 }

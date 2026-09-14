@@ -155,12 +155,8 @@ ServerEvents.recipes((event) => {
 
   T()
 
-  // Dredger drill bit cheaper
-  event.remove({ id: 'aquatech_ui:dredger_drill_bit' })
-  event.shaped('aquatech_ui:dredger_drill_bit', ['DI D'.replace(/ /g,''), 'ISI', '  I'], {
-    D: 'minecraft:diamond', I: 'minecraft:iron_ingot', S: 'minecraft:smooth_stone'
-  }).id('aquatech:drill_bit_v2')
-  T()
+  // dredger_drill_bit removed from the mod (seabed_dredger craft no longer needs drill bits)
+  event.remove({ id: 'aquatech:drill_bit_v2' })
 
   // Kelp bio pellet x8 (was x4)
   
