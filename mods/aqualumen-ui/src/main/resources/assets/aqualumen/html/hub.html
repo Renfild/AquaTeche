@@ -178,7 +178,6 @@
     .pass-status-badge.locked{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);color:var(--muted);opacity:.75}
     .settings{max-width:650px}.setting{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}.setting:last-child{border:0}.setting-info{flex:1}.setting-info b{display:block;font-size:12px}.setting-info span{color:var(--muted);font-size:10px}
     .theme-picker{display:flex;gap:7px}.swatch{width:30px;height:30px;border:2px solid transparent;border-radius:10px;cursor:pointer}.swatch.active{border-color:white}.swatch[data-theme=aqua_lumen]{background:linear-gradient(135deg,#2fe0c0,#3b9dff)}.swatch[data-theme=violet_lumen]{background:linear-gradient(135deg,#b072ff,#ff6bc1)}.swatch[data-theme=midnight_rose]{background:linear-gradient(135deg,#ff7a9c,#ffb27a)}
-    .scale-picker{display:flex;gap:6px}.scale-picker button{min-width:46px;padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.04);color:var(--muted);font-size:10px;font-weight:600;cursor:pointer}.scale-picker button.active{color:#fff;border-color:var(--accent);background:color-mix(in srgb,var(--accent) 20%,transparent)}
     .toggle{width:42px;height:23px;padding:2px;border:0;border-radius:20px;background:rgba(255,255,255,.13);cursor:pointer}.toggle i{display:block;width:19px;height:19px;border-radius:50%;background:var(--muted);transition:.2s var(--ease)}.toggle.on{background:color-mix(in srgb,var(--accent) 26%,transparent)}.toggle.on i{transform:translateX(19px);background:var(--accent)}
     .footer{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:0 15px;border-top:1px solid var(--line);color:var(--muted);font-size:9px}.footer-build{margin-right:auto}.key{padding:2px 6px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.04);color:var(--text)}
     .toast{position:fixed;left:50%;bottom:32px;z-index:20;min-width:230px;padding:11px 14px;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));border-radius:12px;background:#111a23;color:var(--text);font-size:11px;box-shadow:0 15px 45px rgba(0,0,0,.45);transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.22s var(--ease)}.toast.show{transform:translate(-50%,0);opacity:1}
@@ -568,7 +567,7 @@ try {
         caseResult:null
       },
       enabledTabs:["profile","store","cases","pass","fishing","events","auction","kits","warps","tops","settings"],
-      appearance:{theme:"aqua_lumen",animations:true,compact:false,panelOpacity:0.94,scale:1},
+      appearance:{theme:"aqua_lumen",animations:true,compact:false,panelOpacity:0.94},
       openKey:"F4"
     }
   };
@@ -1228,21 +1227,9 @@ try {
   }
 
   function storeView(s) {
-    const cards = (s.store || []).map((o, cardIndex) => {
+    const all = s.store || [];
+    const rankCards = all.filter(o => RANK_META[o.id]).map((o, cardIndex) => {
       const meta = RANK_META[o.id];
-      if (!meta) {
-        const art = storeGlyph(o.id) || getItemIconHtml(o.title, o.id, "mc-icon");
-        return `<article class="card offer${o.owned ? " is-owned" : ""}" style="--i:${cardIndex}">
-          ${o.owned ? `<span class="offer-badge">Куплено</span>` : ""}
-          <div class="offer-art">${art}</div>
-          <h3>${esc(o.title)}</h3>
-          <p>${esc(o.subtitle)}</p>
-          <div class="offer-foot">
-            <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}</span>
-            <button class="button ${o.owned ? "" : "primary"} buy" data-id="${esc(o.id)}" data-title="${esc(o.title)}" ${o.owned ? "disabled" : ""}>${o.owned ? "Куплено" : "Купить"}</button>
-          </div>
-        </article>`;
-      }
       const c = meta.color;
       return `<article class="card offer rank-card${o.owned ? " is-owned" : ""}" style="--rc:${c};--i:${cardIndex}">
         ${o.owned ? `<span class="offer-badge">Активна</span>` : ""}
@@ -1254,9 +1241,23 @@ try {
           ${o.owned ? "" : `<button class="button primary rank-more" data-id="${esc(o.id)}">Подробнее</button>`}
         </div>
       </article>`;
-    }).join("");
-    return `<div class="view">${title("Магазин Улучшений", "Привилегии, префиксы и обмен")}
-      <div class="store-grid stagger">${cards || '<div class="empty">Товаров нет</div>'}</div>
+    });
+    const shopCards = all.filter(o => !RANK_META[o.id]).map((o, cardIndex) => {
+      const art = storeGlyph(o.id) || getItemIconHtml(o.title, o.id, "mc-icon");
+      return `<article class="card offer" style="--i:${cardIndex}">
+        <div class="offer-art">${art}</div>
+        <h3>${esc(o.title)}</h3>
+        <p>${esc(o.subtitle)}</p>
+        <div class="offer-foot">
+          <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}</span>
+          <button class="button primary buy" data-id="${esc(o.id)}" data-title="${esc(o.title)}">Купить</button>
+        </div>
+      </article>`;
+    });
+    return `<div class="view">${title("Магазин", "Привилегии, префиксы и серверные поставки")}
+      <div class="store-grid stagger">${rankCards.join("")}</div>
+      ${shopCards.length ? `<h3 style="margin:6px 0 12px;font-size:15px;color:var(--gold)">Серверные поставки <span style="color:var(--muted);font-size:10px;font-weight:400">— базовые ресурсы с доставкой в инвентарь</span></h3>
+      <div class="store-grid stagger">${shopCards.join("")}</div>` : ""}
     </div>`;
   }
 
@@ -1629,12 +1630,6 @@ try {
           <div class="setting-info"><b>Анимации</b><span>Плавные переходы и рулетка</span></div>
           <button class="toggle ${a.animations ? "on" : ""}" id="motionToggle"><i></i></button>
         </div>
-        <div class="setting">
-          <div class="setting-info"><b>Масштаб меню</b><span>От 100% до 200% — применяется сразу</span></div>
-          <div class="scale-picker">
-            ${[100, 125, 150, 175, 200].map(v => `<button data-scale="${v / 100}" class="${Math.round((a.scale || 1) * 100) === v ? "active" : ""}">${v}%</button>`).join("")}
-          </div>
-        </div>
       </section>
     </div>`;
   }
@@ -1800,14 +1795,6 @@ try {
       applyAppearance();
       renderView(false, true);
     };
-
-    document.querySelectorAll(".scale-picker button").forEach(b => b.onclick = () => {
-      const scale = parseFloat(b.dataset.scale) || 1;
-      send({ type: "settings", scale });
-      state.payload.appearance.scale = scale;
-      renderView(false, true);
-      toast("Масштаб: " + Math.round(scale * 100) + "%");
-    });
   }
 
   function renderView(animate, preserveScroll = true) {

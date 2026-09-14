@@ -82,7 +82,6 @@ public final class LumenConfig {
         public final ForgeConfigSpec.BooleanValue animations;
         public final ForgeConfigSpec.BooleanValue blurBackground;
         public final ForgeConfigSpec.BooleanValue compactMode;
-        public final ForgeConfigSpec.DoubleValue hubScale;
         public final ForgeConfigSpec.BooleanValue sounds;
         public final ForgeConfigSpec.BooleanValue webChat;
 
@@ -94,7 +93,6 @@ public final class LumenConfig {
             blurBackground = b.define("blurBackground", true);
             animations = b.define("animations", true);
             compactMode = b.comment("Denser layout for 1080p windows and low GUI scale.").define("compactMode", false);
-            hubScale = b.comment("Hub menu scale, 1.0 = 100% .. 2.0 = 200%").defineInRange("hubScale", 1.0D, 1.0D, 2.0D);
             sounds = b.define("sounds", true);
             webChat = b.comment("Web-rendered chat overlay (cards, avatars, channels). False = vanilla chat.")
                     .define("webChat", false);

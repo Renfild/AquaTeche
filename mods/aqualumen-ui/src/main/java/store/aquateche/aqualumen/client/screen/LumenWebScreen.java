@@ -43,8 +43,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
     @Override
     protected void init() {
         double scale = minecraft.getWindow().getGuiScale();
-        float s = hubScale();
-        bridge = new LumenWebBridge((int) Math.ceil(width / s * scale), (int) Math.ceil(height / s * scale));
+        bridge = new LumenWebBridge((int) Math.ceil(width * scale), (int) Math.ceil(height * scale));
         if (!bridge.isAvailable()) {
             abort("browser unavailable");
             return;
@@ -52,25 +51,13 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         pendingSnapshot = LumenClient.snapshot();
     }
 
-    /** Hub menu scale: 1.0 = 100% .. 2.0 = 200%. Smaller CEF viewport, blitted 1:1. */
-    private static float hubScale() {
-        float s = LumenConfig.CLIENT.hubScale.get().floatValue();
-        return Math.max(1.0F, Math.min(2.0F, s));
-    }
-
-    private void resizeBridge() {
-        if (bridge == null) {
-            return;
-        }
-        double scale = minecraft.getWindow().getGuiScale();
-        float s = hubScale();
-        bridge.resize((int) Math.ceil(width / s * scale), (int) Math.ceil(height / s * scale));
-    }
-
     @Override
     public void resize(Minecraft minecraft, int width, int height) {
         super.resize(minecraft, width, height);
-        resizeBridge();
+        if (bridge != null) {
+            double scale = minecraft.getWindow().getGuiScale();
+            bridge.resize((int) Math.ceil(width * scale), (int) Math.ceil(height * scale));
+        }
     }
 
     @Override
@@ -172,17 +159,6 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         if (root.has("animations")) {
             LumenConfig.CLIENT.animations.set(root.get("animations").getAsBoolean());
         }
-        boolean scaleChanged = false;
-        if (root.has("scale") && root.get("scale").isJsonPrimitive()) {
-            double requested = Math.max(1.0D, Math.min(2.0D, root.get("scale").getAsDouble()));
-            if (Math.abs(requested - LumenConfig.CLIENT.hubScale.get()) > 0.001D) {
-                LumenConfig.CLIENT.hubScale.set(requested);
-                scaleChanged = true;
-            }
-        }
-        if (scaleChanged) {
-            resizeBridge();
-        }
         pendingSnapshot = LumenClient.snapshot();
         pushSnapshot();
     }
@@ -192,11 +168,11 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
     }
 
     private int cefX(double mouseX) {
-        return (int) Math.round(mouseX / hubScale() * minecraft.getWindow().getGuiScale());
+        return (int) Math.round(mouseX * minecraft.getWindow().getGuiScale());
     }
 
     private int cefY(double mouseY) {
-        return (int) Math.round(mouseY / hubScale() * minecraft.getWindow().getGuiScale());
+        return (int) Math.round(mouseY * minecraft.getWindow().getGuiScale());
     }
 
     @Override
@@ -206,8 +182,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         }
         graphics.fill(0, 0, width, height, 0x9C050B11);
         if (bridge != null && bridge.isAvailable()) {
-            float s = hubScale();
-            bridge.blit(0, 0, Math.round(width / s), Math.round(height / s));
+            bridge.blit(0, 0, width, height);
         }
     }
 
