@@ -48,9 +48,9 @@
     "semantic_hash": ""
   },
   "docs/pack/manifest.json": {
-    "mtime": 1789381225.805122,
-    "seen": 1789381290.8499207,
-    "ast_hash": "d7a0c20735454f6f0534fd3c3815b9ab",
+    "mtime": 1789330272.1163936,
+    "seen": 1789330363.826598,
+    "ast_hash": "a9761e9ee453a2bdac45fdf7958f61e0",
     "semantic_hash": ""
   },
   "functions/_lib/auth.js": {
@@ -348,9 +348,9 @@
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherConstants.cs": {
-    "mtime": 1789378371.761601,
-    "seen": 1789380644.4342947,
-    "ast_hash": "1d414a2ec4e7e90e405a755b47208e3f",
+    "mtime": 1788774635.8061326,
+    "seen": 1788776336.2306378,
+    "ast_hash": "13f08880b98fc2fdda85908c58ebb993",
     "semantic_hash": ""
   },
   "launcher/src/AquaTechLauncher.Core/LauncherSelfUpdate.cs": {
@@ -744,9 +744,9 @@
     "semantic_hash": ""
   },
   "tools/publish_client_pack.py": {
-    "mtime": 1789381219.950786,
-    "seen": 1789381290.8934512,
-    "ast_hash": "9aeef9b8b72477a52ae93156e1d1e812",
+    "mtime": 1789330266.5962353,
+    "seen": 1789330363.871114,
+    "ast_hash": "71528eccd401d7a7f3a375c6a4e1f7e9",
     "semantic_hash": ""
   },
   "tools/quests/build_ftb_quests.py": {
@@ -5154,9 +5154,9 @@
     "semantic_hash": ""
   },
   "docs/pack/delta.json": {
-    "mtime": 1789381225.804608,
-    "seen": 1789381290.8489194,
-    "ast_hash": "1385c784b96f6f1209202c93934cc630",
+    "mtime": 1789330272.1163936,
+    "seen": 1789330363.826598,
+    "ast_hash": "e48d0d4b589186d0eb4605c3783eea9a",
     "semantic_hash": ""
   },
   "docs/sw.js": {
@@ -8526,9 +8526,9 @@
     "semantic_hash": ""
   },
   "docs/pack/kubejs/server_scripts/97_machines_recipes.js": {
-    "mtime": 1789331686.8171315,
-    "seen": 1789332467.6889296,
-    "ast_hash": "4acbf1adc691cfbad9654a7f2b4109d2",
+    "mtime": 1789324584.6893106,
+    "seen": 1789324696.7532623,
+    "ast_hash": "3b76e9d6cdb36a3871526574117da95e",
     "semantic_hash": ""
   },
   "docs/pack/kubejs/server_scripts/98_fishing_core_recipe.js": {
@@ -8538,9 +8538,9 @@
     "semantic_hash": ""
   },
   "kubejs/server_scripts/97_machines_recipes.js": {
-    "mtime": 1789331686.8171315,
-    "seen": 1789332467.6939294,
-    "ast_hash": "4acbf1adc691cfbad9654a7f2b4109d2",
+    "mtime": 1789324584.6893106,
+    "seen": 1789324696.7597673,
+    "ast_hash": "3b76e9d6cdb36a3871526574117da95e",
     "semantic_hash": ""
   },
   "kubejs/server_scripts/98_fishing_core_recipe.js": {
@@ -8610,21 +8610,21 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/ExcavatorBlock.java": {
-    "mtime": 1789381140.814268,
-    "seen": 1789381290.8619187,
-    "ast_hash": "bc475fd964298d5211e953e96d520f01",
+    "mtime": 1789298728.7222826,
+    "seen": 1789299158.0949516,
+    "ast_hash": "f28d3279c1279deb5f4c29b7ef1e2731",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/ExtractorBlock.java": {
-    "mtime": 1789381146.165871,
-    "seen": 1789381290.8619187,
-    "ast_hash": "81a6ea13d38261226bf23ef24833f984",
+    "mtime": 1789298722.9336164,
+    "seen": 1789299158.0949516,
+    "ast_hash": "a1fd1f537e84ba301d57b466dfaa6a19",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/FisherBlock.java": {
-    "mtime": 1789381151.716,
-    "seen": 1789381290.8619187,
-    "ast_hash": "53b07c682a5ad79e24206ae41b799939",
+    "mtime": 1789298734.8273456,
+    "seen": 1789299158.0949516,
+    "ast_hash": "7b449a2140f2ba77022708e6b5425b4f",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/entity/BaseMachineBlockEntity.java": {
@@ -8634,20 +8634,20 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/entity/ExcavatorBlockEntity.java": {
-    "mtime": 1789381170.167755,
-    "seen": 1789381290.8619187,
-    "ast_hash": "4791801fbabca36a70f2890b62f705a8",
+    "mtime": 1789311983.341953,
+    "seen": 1789312741.0620363,
+    "ast_hash": "55345569c48478dbbe22c87b8da6ff01",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/entity/ExtractorBlockEntity.java": {
-    "mtime": 1789381176.2200356,
-    "seen": 1789381290.8619187,
+    "mtime": 1789298802.3647847,
+    "seen": 1789299158.0949516,
     "ast_hash": "ad355b2681027770ecfdba26d6f339a2",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/entity/FisherBlockEntity.java": {
-    "mtime": 1789381182.7912521,
-    "seen": 1789381290.8619187,
+    "mtime": 1789312011.3276505,
+    "seen": 1789312741.0625596,
     "ast_hash": "45d0228b4198306d6e6eb03c767114b4",
     "semantic_hash": ""
   },
@@ -8658,21 +8658,21 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/inventory/ExcavatorMenu.java": {
-    "mtime": 1789332145.749885,
-    "seen": 1789332467.7019506,
-    "ast_hash": "d9101e8dd339b0e8bfedbd9c778335bb",
+    "mtime": 1789311997.2988837,
+    "seen": 1789312741.0625596,
+    "ast_hash": "86310a8a3f09d2d06072091905565e20",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/inventory/ExtractorMenu.java": {
-    "mtime": 1789332152.7717412,
-    "seen": 1789332467.7019506,
-    "ast_hash": "2675dd67c59ce43b0032990a56b0389e",
+    "mtime": 1789298756.922058,
+    "seen": 1789299158.0949516,
+    "ast_hash": "f6aeb480a93a4d76c0c2f68f8e7c2fe4",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/inventory/FisherMenu.java": {
-    "mtime": 1789332159.703894,
-    "seen": 1789332467.7019506,
-    "ast_hash": "b6624ebe9f8fdd2990ae24e3e4a91c7a",
+    "mtime": 1789312025.3520622,
+    "seen": 1789312741.0630846,
+    "ast_hash": "c4af2a9f73d813e6f18aceb2e80c0d35",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/registry/ModBlockEntities.java": {
@@ -8820,111 +8820,111 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/excavator_bottom.png": {
-    "mtime": 1789380428.8806884,
-    "seen": 1789380644.5074637,
-    "ast_hash": "e1f276f32cc6b351602fe4815b1fe90c",
+    "mtime": 1789324473.2251062,
+    "seen": 1789324696.841655,
+    "ast_hash": "81554a6e5e27e52aad1fe96e5be84ba6",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/excavator_front.png": {
-    "mtime": 1789380428.8806884,
-    "seen": 1789380644.5074637,
-    "ast_hash": "5643ed04d039dfcbf700c46dd734cd43",
+    "mtime": 1789324473.224066,
+    "seen": 1789324696.841655,
+    "ast_hash": "6163c5173d65e059fae9cc5c24733765",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/excavator_front_on.png": {
-    "mtime": 1789380428.8806884,
-    "seen": 1789380644.5074637,
-    "ast_hash": "38b15161bdc01129656b34768c236157",
+    "mtime": 1789324473.2245862,
+    "seen": 1789324696.841655,
+    "ast_hash": "5f90092f6257ed2ab79be001eb683ede",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/excavator_side.png": {
-    "mtime": 1789380428.8796892,
-    "seen": 1789380644.5074637,
-    "ast_hash": "df2200fbea2e7496a3c49a5c1ca9dd89",
+    "mtime": 1789324473.223367,
+    "seen": 1789324696.841655,
+    "ast_hash": "43ee839d7e33d69352beba6fa2ef8795",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/excavator_top.png": {
-    "mtime": 1789380428.8796892,
-    "seen": 1789380644.5074637,
-    "ast_hash": "0c582740b4e76a555c5f626cd9c25557",
+    "mtime": 1789324473.223367,
+    "seen": 1789324696.841655,
+    "ast_hash": "43fc4bbcc4dbfbce718f672711f39ac5",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/extractor_bottom.png": {
-    "mtime": 1789380428.8822222,
-    "seen": 1789380644.5074637,
-    "ast_hash": "e1f276f32cc6b351602fe4815b1fe90c",
+    "mtime": 1789324473.2289808,
+    "seen": 1789324696.841655,
+    "ast_hash": "454c314c98910d52806f01b27dd7cfe9",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/extractor_front.png": {
-    "mtime": 1789380428.8822222,
-    "seen": 1789380644.5074637,
-    "ast_hash": "5643ed04d039dfcbf700c46dd734cd43",
+    "mtime": 1789324473.226179,
+    "seen": 1789324696.841655,
+    "ast_hash": "6674f591106ad0a29574d88370028952",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/extractor_front_on.png": {
-    "mtime": 1789380428.8832276,
-    "seen": 1789380644.5074637,
-    "ast_hash": "1c6faffeca50c02844dad747467ff63a",
+    "mtime": 1789324473.2273247,
+    "seen": 1789324696.841655,
+    "ast_hash": "05b5ea92021e5b9ba8b6308e03911cd1",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/extractor_side.png": {
-    "mtime": 1789380428.8816872,
-    "seen": 1789380644.5074637,
-    "ast_hash": "df2200fbea2e7496a3c49a5c1ca9dd89",
+    "mtime": 1789324473.2256284,
+    "seen": 1789324696.841655,
+    "ast_hash": "4a75aede9e3e2954c411f20a742e53f7",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/extractor_top.png": {
-    "mtime": 1789380428.8816872,
-    "seen": 1789380644.5074637,
-    "ast_hash": "0c582740b4e76a555c5f626cd9c25557",
+    "mtime": 1789324473.2251062,
+    "seen": 1789324696.841655,
+    "ast_hash": "d63ad7458bbb5fa3d78891f34e69949e",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/fisher_bottom.png": {
-    "mtime": 1789380428.8786886,
-    "seen": 1789380644.5074637,
-    "ast_hash": "e1f276f32cc6b351602fe4815b1fe90c",
+    "mtime": 1789324473.2228413,
+    "seen": 1789324696.841655,
+    "ast_hash": "bdc98b7208c3a6b0fe29eb029843c412",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/fisher_front.png": {
-    "mtime": 1789380428.8786886,
-    "seen": 1789380644.5074637,
-    "ast_hash": "5643ed04d039dfcbf700c46dd734cd43",
+    "mtime": 1789324473.2217271,
+    "seen": 1789324696.841655,
+    "ast_hash": "c5a372dc47320f8d3cabe47c8ca2934f",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/fisher_front_on.png": {
-    "mtime": 1789380428.8796892,
-    "seen": 1789380644.5074637,
-    "ast_hash": "0b28578036646913b7ae016c221bd09f",
+    "mtime": 1789324473.2222543,
+    "seen": 1789324696.841655,
+    "ast_hash": "92a5a9703a6ff7701e95e21054cea581",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/fisher_side.png": {
-    "mtime": 1789380428.8786886,
-    "seen": 1789380644.5074637,
-    "ast_hash": "df2200fbea2e7496a3c49a5c1ca9dd89",
+    "mtime": 1789324473.2212045,
+    "seen": 1789324696.841655,
+    "ast_hash": "c03d4fc5339dada2714e512ebf0d3d4b",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/fisher_top.png": {
-    "mtime": 1789380428.8776884,
-    "seen": 1789380644.5074637,
-    "ast_hash": "0c582740b4e76a555c5f626cd9c25557",
+    "mtime": 1789324473.2206614,
+    "seen": 1789324696.841655,
+    "ast_hash": "d90d56d59612ec4ac41b6b6ccdc560ed",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/gui/excavator.png": {
-    "mtime": 1789380403.6613774,
-    "seen": 1789380644.5074637,
-    "ast_hash": "72e687d12b70c6d99a327b3015807dda",
+    "mtime": 1789329993.3713844,
+    "seen": 1789330363.9138544,
+    "ast_hash": "28cad3bea44e5f93997a7c3af0ff1532",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/gui/extractor.png": {
-    "mtime": 1789380403.6623764,
-    "seen": 1789380644.5074637,
-    "ast_hash": "6ef47211efff8f95979944ab1aa019b1",
+    "mtime": 1789329993.3723862,
+    "seen": 1789330363.9138544,
+    "ast_hash": "9f17191f591c7727144bfd9da8a78382",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/gui/fisher.png": {
-    "mtime": 1789380403.6593769,
-    "seen": 1789380644.5074637,
-    "ast_hash": "32c0d9a0b34b9f8780f4baab496ce765",
+    "mtime": 1789329993.3703845,
+    "seen": 1789330363.9138544,
+    "ast_hash": "010ce1192b381907e3cfaa9e200f173d",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/item/fishing_core.png": {
@@ -8988,9 +8988,9 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/generate_machine_guis.py": {
-    "mtime": 1789380398.0460784,
-    "seen": 1789380644.4382944,
-    "ast_hash": "b4e0c85d244e38414ed09c363e0bc4bb",
+    "mtime": 1789329988.4667068,
+    "seen": 1789330363.8392634,
+    "ast_hash": "31f7326dc8a8972f24a877320b81a4b8",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/energy/IndustrialUpgradeEnergyCompat.java": {
@@ -9000,27 +9000,27 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/jei/AquaTechMachinesJeiPlugin.java": {
-    "mtime": 1789332206.5286107,
-    "seen": 1789332467.7009497,
-    "ast_hash": "2e8a8c99c1143b7487c6231bd1c37472",
+    "mtime": 1789330099.4359996,
+    "seen": 1789330363.8409731,
+    "ast_hash": "7445a4b4fe0c6ae456d5b5d08541fed3",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/jei/category/ExcavatorRecipeCategory.java": {
-    "mtime": 1789331794.3833997,
-    "seen": 1789332467.7009497,
-    "ast_hash": "5534767376f8c99ce243c9b51a76f29a",
+    "mtime": 1789320874.0366423,
+    "seen": 1789321439.827075,
+    "ast_hash": "df3e87dcd30e5c9a72db3bc04edc7576",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/jei/category/ExtractorRecipeCategory.java": {
-    "mtime": 1789331841.6008866,
-    "seen": 1789332467.7009497,
-    "ast_hash": "70543dee351c803d19944484d2fa8b3a",
+    "mtime": 1789312389.7040758,
+    "seen": 1789312741.0625596,
+    "ast_hash": "9d671b90475808033fbee5e883d1623c",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/jei/category/FisherRecipeCategory.java": {
-    "mtime": 1789331818.776081,
-    "seen": 1789332467.7009497,
-    "ast_hash": "b89f550f4f09e921b804c1b34fbb0cfe",
+    "mtime": 1789320855.637664,
+    "seen": 1789321439.8280761,
+    "ast_hash": "0e3a2099545f2d7715c28f010f6ecf4e",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/jei/recipe/ExcavatorJeiRecipe.java": {
@@ -9048,39 +9048,39 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/CentrifugeBlock.java": {
-    "mtime": 1789381131.1892385,
-    "seen": 1789381290.8619187,
-    "ast_hash": "afdba84af0ff4732c20a5d554f231cb3",
+    "mtime": 1789327187.343391,
+    "seen": 1789327640.3322842,
+    "ast_hash": "e176c77868a2e9bb9e450ee063cd3e1c",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/SynthesizerBlock.java": {
-    "mtime": 1789381135.1471083,
-    "seen": 1789381290.8619187,
-    "ast_hash": "a6a1d887b2e84ed1e77f20b9a7b24941",
+    "mtime": 1789327178.243634,
+    "seen": 1789327640.3322842,
+    "ast_hash": "b27e0c4aa1b20761c839241fe2c64ba9",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/entity/CentrifugeBlockEntity.java": {
-    "mtime": 1789381158.814544,
-    "seen": 1789381290.8619187,
+    "mtime": 1789327168.6865852,
+    "seen": 1789327640.3322842,
     "ast_hash": "d07bc7539c5254c074bf294e9dadf83b",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/block/entity/SynthesizerBlockEntity.java": {
-    "mtime": 1789381163.9504,
-    "seen": 1789381290.8619187,
+    "mtime": 1789327154.8936355,
+    "seen": 1789327640.333786,
     "ast_hash": "325b3cc3abaec7deeec5e976bd963735",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/jei/category/CentrifugeRecipeCategory.java": {
-    "mtime": 1789331778.706128,
-    "seen": 1789332467.7009497,
-    "ast_hash": "8600436d8ca46fa77c703fd9ababbe0b",
+    "mtime": 1789324343.642024,
+    "seen": 1789324696.76698,
+    "ast_hash": "c8b7f32790320e7c0a5a80ea71fcccf5",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/jei/category/SynthesizerRecipeCategory.java": {
-    "mtime": 1789331754.9125555,
-    "seen": 1789332467.7009497,
-    "ast_hash": "74d3abcc8c65a23a9179080ce032b2fe",
+    "mtime": 1789324336.6721847,
+    "seen": 1789324696.767499,
+    "ast_hash": "04779c0d6b23a29fb3303b1c42056ecc",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/compat/jei/recipe/CentrifugeJeiRecipe.java": {
@@ -9096,15 +9096,15 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/inventory/CentrifugeMenu.java": {
-    "mtime": 1789332166.415794,
-    "seen": 1789332467.7019506,
-    "ast_hash": "8ccff6397c9077aaa27181edfcc14f77",
+    "mtime": 1789330044.8714943,
+    "seen": 1789330363.8419757,
+    "ast_hash": "822a715192e622755c535138409dc26c",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/java/net/aquatech/machines/inventory/SynthesizerMenu.java": {
-    "mtime": 1789332172.8533382,
-    "seen": 1789332467.7019506,
-    "ast_hash": "154088a0ad30af91c3e01e798fb7df40",
+    "mtime": 1789330036.4141083,
+    "seen": 1789330363.8419757,
+    "ast_hash": "a585e455cf8c17f87c43c1a089aa7f32",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/blockstates/centrifuge.json": {
@@ -9174,93 +9174,93 @@
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/centrifuge_bottom.png": {
-    "mtime": 1789380428.885226,
-    "seen": 1789380644.5074637,
-    "ast_hash": "e1f276f32cc6b351602fe4815b1fe90c",
+    "mtime": 1789324473.2347944,
+    "seen": 1789324696.841655,
+    "ast_hash": "cbe4492ca6a5dfc1c83ac1d0629f2374",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/centrifuge_front.png": {
-    "mtime": 1789380428.885226,
-    "seen": 1789380644.5074637,
-    "ast_hash": "5643ed04d039dfcbf700c46dd734cd43",
+    "mtime": 1789324473.233793,
+    "seen": 1789324696.841655,
+    "ast_hash": "d9f6e89844b4f3b1f5e806f458aa0b5e",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/centrifuge_front_on.png": {
-    "mtime": 1789380428.885226,
-    "seen": 1789380644.5074637,
-    "ast_hash": "8e9dd4d6e99924b3168cf8d927d8f7ca",
+    "mtime": 1789324473.233793,
+    "seen": 1789324696.841655,
+    "ast_hash": "55ab3dee8dac5c31baca67f29a28f646",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/centrifuge_side.png": {
-    "mtime": 1789380428.885226,
-    "seen": 1789380644.5074637,
-    "ast_hash": "df2200fbea2e7496a3c49a5c1ca9dd89",
+    "mtime": 1789324473.232792,
+    "seen": 1789324696.841655,
+    "ast_hash": "08376728843a0495ad83092ae5525f9f",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/centrifuge_top.png": {
-    "mtime": 1789380428.8842268,
-    "seen": 1789380644.5074637,
-    "ast_hash": "0c582740b4e76a555c5f626cd9c25557",
+    "mtime": 1789324473.232792,
+    "seen": 1789324696.841655,
+    "ast_hash": "2a4d8e1d12a28d27b7171144abd7c4a1",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/synthesizer_bottom.png": {
-    "mtime": 1789380428.8832276,
-    "seen": 1789380644.5074637,
-    "ast_hash": "e1f276f32cc6b351602fe4815b1fe90c",
+    "mtime": 1789324473.231789,
+    "seen": 1789324696.841655,
+    "ast_hash": "ac72c349fc68319c65a6869614faaa10",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/synthesizer_front.png": {
-    "mtime": 1789380428.8842268,
-    "seen": 1789380644.5074637,
-    "ast_hash": "5643ed04d039dfcbf700c46dd734cd43",
+    "mtime": 1789324473.2312248,
+    "seen": 1789324696.841655,
+    "ast_hash": "c967d3c75620165fa2d12ce7b62de1e9",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/synthesizer_front_on.png": {
-    "mtime": 1789380428.8842268,
-    "seen": 1789380644.5074637,
-    "ast_hash": "d282e96123fce0c777b5fb358e390f6d",
+    "mtime": 1789324473.231789,
+    "seen": 1789324696.841655,
+    "ast_hash": "5b12df37dec4aa8055b10e9c56e14d99",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/synthesizer_side.png": {
-    "mtime": 1789380428.8832276,
-    "seen": 1789380644.5074637,
-    "ast_hash": "df2200fbea2e7496a3c49a5c1ca9dd89",
+    "mtime": 1789324473.2306824,
+    "seen": 1789324696.841655,
+    "ast_hash": "632ee0b6ec81ea963c5aaf0c3963d312",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/block/synthesizer_top.png": {
-    "mtime": 1789380428.8832276,
-    "seen": 1789380644.5074637,
-    "ast_hash": "0c582740b4e76a555c5f626cd9c25557",
+    "mtime": 1789324473.2295384,
+    "seen": 1789324696.841655,
+    "ast_hash": "24983ff6ea7d6a5fc834c93ed9751b71",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/gui/centrifuge.png": {
-    "mtime": 1789380403.6643765,
-    "seen": 1789380644.5074637,
-    "ast_hash": "de111a4a709eaab8ab57223aaf863f3d",
+    "mtime": 1789329993.3771858,
+    "seen": 1789330363.9138544,
+    "ast_hash": "29495a5daeed05e9eb526ed2d2dfc688",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/gui/synthesizer.png": {
-    "mtime": 1789380403.6633766,
-    "seen": 1789380644.5074637,
-    "ast_hash": "bba284ef7bb60d726bba578e0c079b89",
+    "mtime": 1789329993.3754096,
+    "seen": 1789330363.9138544,
+    "ast_hash": "c74bb15fe1683c3bdff5a2090a366a62",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/item/abyssal_alloy.png": {
-    "mtime": 1789331629.289245,
-    "seen": 1789332467.7713664,
-    "ast_hash": "bc8feacff780502d69d36af8942f23ca",
+    "mtime": 1789324473.235795,
+    "seen": 1789324696.841655,
+    "ast_hash": "edd011b83ca8ee811f68514392ff8659",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/item/sea_salt.png": {
-    "mtime": 1789331629.2912426,
-    "seen": 1789332467.7723658,
-    "ast_hash": "4b2e3671eaf52e7a473befc40b845997",
+    "mtime": 1789324473.2363012,
+    "seen": 1789324696.841655,
+    "ast_hash": "b2370cc87f546ba393faf6cd16bc64c0",
     "semantic_hash": ""
   },
   "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/item/volcanic_crystal.png": {
-    "mtime": 1789331629.2872427,
-    "seen": 1789332467.7723658,
-    "ast_hash": "fcffe47ae871d6fe928c5462f3c0f507",
+    "mtime": 1789324473.235795,
+    "seen": 1789324696.8426569,
+    "ast_hash": "9db961d30af2eda0d7ed6d38bdd1cd5d",
     "semantic_hash": ""
   }
 }

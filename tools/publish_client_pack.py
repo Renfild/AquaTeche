@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.350"
-PACK_VERSION = "2.9.350"
+PACK_TAG = "pack-2.9.366"
+PACK_VERSION = "2.9.366"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -37,6 +37,7 @@ CLIENT_ONLY_PREFIXES = (
     "fancymenu",
     "konkrete",
     "melody",
+    "mousetweaks",
 )
 # Never pull these from client/ — server copy wins (and may differ by patch version)
 SERVER_OWNED_PREFIXES = (
@@ -44,6 +45,7 @@ SERVER_OWNED_PREFIXES = (
     "aquatech_ui",
     "packetfixer",
     "aqualumen",
+    "aquatech_machines",
 )
 # Client jars dropped by exact filename (NOT by substring: "…1.20.1-1.20.4.jar" range jars are valid).
 # Each entry explains why, so the next person doesn't re-add a broken jar blindly.

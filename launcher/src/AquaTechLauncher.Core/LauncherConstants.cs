@@ -45,6 +45,7 @@ public static class LauncherConstants
     [
         "https://aquateche.store/pack",
         "https://aquatech.santcrail.workers.dev/pack",
+        "https://aquatech-7gs.pages.dev/pack",
         "https://raw.githubusercontent.com/Renfild/AquaTeche/main/docs/pack",
         "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
     ];

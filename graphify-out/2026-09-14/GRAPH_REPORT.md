@@ -1,7 +1,7 @@
 # Graph Report - AquaTech  (2026-09-14)
 
 ## Corpus Check
-- 858 files · ~1,098,127 words
+- 858 files · ~1,098,305 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary

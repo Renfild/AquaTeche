@@ -31,13 +31,19 @@ aquatech_ui_jar = newest_jar("aquatech_ui-*.jar")
 if aquatech_ui_jar is None:
     sys.exit(f"no aquatech_ui-*.jar in {LOCAL_MODS}")
 
+aquatech_machines_jar = newest_jar("aquatech_machines-*.jar")
+
 print("1. Connecting SFTP to upload new reobfuscated jars and configs...")
 t = paramiko.Transport((host, port))
 t.connect(username=user, password=password)
 sftp = paramiko.SFTPClient.from_transport(t)
 
 remote_mods = sftp.listdir("mods")
-for prefix, built in (("aqualumen-forge-", aqualumen_jar), ("aquatech_ui-", aquatech_ui_jar)):
+deploy_jars = [("aqualumen-forge-", aqualumen_jar), ("aquatech_ui-", aquatech_ui_jar)]
+if aquatech_machines_jar:
+    deploy_jars.append(("aquatech_machines-", aquatech_machines_jar))
+
+for prefix, built in deploy_jars:
     for name in remote_mods:
         if name.startswith(prefix) and name.endswith(".jar") and name != built.name:
             try:
@@ -50,9 +56,15 @@ sftp.put(str(aqualumen_jar), f"mods/{aqualumen_jar.name}")
 print(f"  Uploaded {aqualumen_jar.name}")
 sftp.put(str(aquatech_ui_jar), f"mods/{aquatech_ui_jar.name}")
 print(f"  Uploaded {aquatech_ui_jar.name}")
+if aquatech_machines_jar:
+    sftp.put(str(aquatech_machines_jar), f"mods/{aquatech_machines_jar.name}")
+    print(f"  Uploaded {aquatech_machines_jar.name}")
 
 sftp.put(str(ROOT / "server/config/aqualumen/cases.json"), "config/aqualumen/cases.json")
 print("  Uploaded config/aqualumen/cases.json")
+if (ROOT / "server/config/aqualumen/server_shop.json").is_file():
+    sftp.put(str(ROOT / "server/config/aqualumen/server_shop.json"), "config/aqualumen/server_shop.json")
+    print("  Uploaded config/aqualumen/server_shop.json")
 if (ROOT / "server/config/aqualumen/hub.html").is_file():
     sftp.put(str(ROOT / "server/config/aqualumen/hub.html"), "config/aqualumen/hub.html")
     print("  Uploaded config/aqualumen/hub.html")
@@ -60,6 +72,10 @@ kubejs_uploads = [
     (ROOT / "server/kubejs/server_scripts/30_aquatech_crafting.js", "kubejs/server_scripts/30_aquatech_crafting.js"),
     (ROOT / "server/kubejs/server_scripts/zz_infernal_pearl.js", "kubejs/server_scripts/zz_infernal_pearl.js"),
     (ROOT / "server/kubejs/startup_scripts/zz_infernal_pearl.js", "kubejs/startup_scripts/zz_infernal_pearl.js"),
+    (ROOT / "kubejs/server_scripts/90_fisherman_cat_shop.js", "kubejs/server_scripts/90_fisherman_cat_shop.js"),
+    (ROOT / "kubejs/server_scripts/36_balanced_tweaks.js", "kubejs/server_scripts/36_balanced_tweaks.js"),
+    (ROOT / "kubejs/server_scripts/97_machines_recipes.js", "kubejs/server_scripts/97_machines_recipes.js"),
+    (ROOT / "kubejs/server_scripts/98_fishing_core_recipe.js", "kubejs/server_scripts/98_fishing_core_recipe.js"),
     (ROOT / "server/config/aqualumen-common.toml", "config/aqualumen-common.toml"),
 ]
 for local, remote in kubejs_uploads:
