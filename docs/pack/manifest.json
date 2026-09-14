@@ -1,5 +1,5 @@
 {
-  "version": "2.9.368",
+  "version": "2.9.369",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -36,8 +36,8 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "257c116a5acc5a57665246cda7e26451",
-      "size": 2680175,
+      "md5": "763b3ef192bb8c84c1f15d938928e74b",
+      "size": 2680153,
       "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     },
@@ -540,8 +540,8 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "28599bfa32f27293e995a6e7a2d91fd9",
-      "size": 1001341,
+      "md5": "76b4bcffc892c751d98007ab0c21b1a8",
+      "size": 1001329,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -554,8 +554,8 @@
     },
     {
       "path": "config/aqualumen/server_shop.json",
-      "md5": "67c039fdfbc2ffb9e55dd8915d6d0b67",
-      "size": 2935,
+      "md5": "00cd069c791470d0f3dd816ab2f1ed6d",
+      "size": 2925,
       "url": "https://aquateche.store/pack/config/aqualumen/server_shop.json",
       "asset": "config__aqualumen__server_shop.json"
     },
