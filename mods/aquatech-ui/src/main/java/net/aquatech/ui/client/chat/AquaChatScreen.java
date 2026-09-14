@@ -434,6 +434,16 @@ public final class AquaChatScreen extends Screen {
                 || t.startsWith("хелп ") || t.startsWith("commands ");
     }
 
+    private static boolean isStaffSender() {
+        String rank = ClientUiState.sessionRankId();
+        if (rank == null || rank.isBlank()) return false;
+        return switch (rank.toLowerCase(java.util.Locale.ROOT).trim()) {
+            case "owner", "владелец", "admin", "администратор",
+                 "developer", "dev", "разработчик", "mod", "moderator", "модератор" -> true;
+            default -> false;
+        };
+    }
+
     private void sendMessage() {
         String text = this.input.getValue().trim();
         if (!text.isEmpty()) {
@@ -451,17 +461,19 @@ public final class AquaChatScreen extends Screen {
                 }
 
                 // Cooldown Verification for Global, Trade & All Channels (3 seconds)
+                // Staff (owner/admin/developer/mod) are exempt from channel cooldowns
                 AquaChatMessage.Channel channel = AquaChatManager.getActiveChannel();
                 long now = System.currentTimeMillis();
                 boolean isGlobalOrAll = (channel == AquaChatMessage.Channel.GLOBAL || channel == AquaChatMessage.Channel.ALL);
-                if (isGlobalOrAll && now - lastGlobalSendMs < 3000L) {
+                boolean staffSender = isStaffSender();
+                if (!staffSender && isGlobalOrAll && now - lastGlobalSendMs < 3000L) {
                     long remaining = (long) Math.ceil((3000L - (now - lastGlobalSendMs)) / 1000.0);
                     mc.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
                             net.minecraft.sounds.SoundEvents.NOTE_BLOCK_BASS.value(), 0.8F));
                     AquaChatManager.addMessage(Component.literal("§c[Чат] Подождите еще " + remaining + "с перед отправкой!"));
                     return;
                 }
-                if (channel == AquaChatMessage.Channel.TRADE && now - lastTradeSendMs < 10000L) {
+                if (!staffSender && channel == AquaChatMessage.Channel.TRADE && now - lastTradeSendMs < 10000L) {
                     long remaining = (long) Math.ceil((10000L - (now - lastTradeSendMs)) / 1000.0);
                     mc.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
                             net.minecraft.sounds.SoundEvents.NOTE_BLOCK_BASS.value(), 0.8F));

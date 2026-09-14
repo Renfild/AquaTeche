@@ -1,23 +1,25 @@
 package net.aquatech.ui.client.toast;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.aquatech.ui.client.render.AquaFontRenderer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Плашка «Лот продан» — угол сверху-справа, выезжает, висит 6 сек, растворяется.
- * Фон: textures/gui/plaque_sold.png (256x64, рисует юзер). Текст рисуется поверх.
+ * Фон: textures/gui/plaque_sold.png (256x64, рисует юзер). Текст рисуется поверх
+ * шрифтом aquatech_ui:main (ванильный шрифт в паке подменён и ломает кириллицу).
+ * Цена — нашей иконкой монеты textures/gui/coin.png вместо глифа «¤».
  */
 public final class SoldPlaqueToast {
     private static final ResourceLocation BG =
             new ResourceLocation("aquatech_ui", "textures/gui/plaque_sold.png");
+    private static final ResourceLocation COIN =
+            new ResourceLocation("aquatech_ui", "textures/gui/coin.png");
     private static final int W = 256;
     private static final int H = 64;
 
@@ -80,7 +82,6 @@ public final class SoldPlaqueToast {
         }
         int mcW = g.guiWidth();
         int y = 6;
-            // (полный размер 256x64)
         for (SoldPlaqueToast t : snapshot) {
             float fadeIn = Math.min(1F, t.age / 6F);
             float fadeOut = Math.min(1F, (170 - t.age) / 12F);
@@ -92,27 +93,34 @@ public final class SoldPlaqueToast {
             g.pose().pushPose();
             g.pose().translate(x, y, 0);
             g.blit(BG, 0, 0, 0, 0, W, H, 256, 64);
-            Font f = Minecraft.getInstance().font;
-            drawA(g, f, "§6§l" + clip(f, t.item, 150), 26, 16, 0xFFFFC25B, a);
-            String price = t.price + " ¤";
-            drawA(g, f, "§f" + price, W - 26 - f.width(price), 16, 0xFFFFC25B, a);
-            drawA(g, f, "§7Продано игроку §b" + clip(f, t.buyer, 120), 26, 44, 0xFF9DB2C4, a);
+
+            AquaFontRenderer.draw(g, font, clip(font, t.item, 150), 26, 16, fade(0xFFFFC25B, a));
+            // Цена: число + наша иконка монеты (11x11) у правого края
+            String price = t.price == null ? "" : t.price.trim();
+            int priceW = AquaFontRenderer.width(font, price);
+            AquaFontRenderer.draw(g, font, price, W - 26 - priceW - 14, 15, fade(0xFFFFC25B, a));
+            RenderSystem.setShaderColor(1F, 1F, 1F, fade);
+            g.blit(COIN, W - 26 - 11, 14, 11, 11, 0, 0, 32, 32, 32, 32);
+            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+
+            String sold = "Продано игроку ";
+            AquaFontRenderer.draw(g, font, sold, 26, 44, fade(0xFF9DB2C4, a));
+            AquaFontRenderer.draw(g, font, clip(font, t.buyer, 120),
+                    26 + AquaFontRenderer.width(font, sold), 44, fade(0xFF55FFFF, a));
             g.pose().popPose();
             y += H + 4;
         }
     }
 
-    private static void drawA(GuiGraphics g, Font font, String text, int x, int y, int color, int alpha) {
-        var comp = Component.literal(text);
+    private static int fade(int color, int alpha) {
         int base = (color >>> 24) & 0xFF;
-        int c = ((base * alpha / 255) << 24) | (color & 0xFFFFFF);
-        g.drawString(font, comp, x, y, c, false);
+        return ((base * alpha / 255) << 24) | (color & 0xFFFFFF);
     }
 
     private static String clip(Font font, String s, int maxW) {
         String clean = s == null ? "" : s.replaceAll("[\\uE000-\\uF8FF\\uD800-\\uDFFF]", "").trim();
-        if (font.width(clean) <= maxW) return clean;
-        while (!clean.isEmpty() && font.width(clean + "...") > maxW) {
+        if (AquaFontRenderer.width(font, clean) <= maxW) return clean;
+        while (!clean.isEmpty() && AquaFontRenderer.width(font, clean + "...") > maxW) {
             clean = clean.substring(0, clean.length() - 1);
         }
         return clean + "...";

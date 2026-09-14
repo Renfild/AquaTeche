@@ -33,6 +33,8 @@ public class AquaTechUI {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public AquaTechUI() {
+        // Транзиентные UnknownHostException у хостера: не кэшировать негативный DNS 10с.
+        java.security.Security.setProperty("networkaddress.cache.negative.ttl", "3");
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModBlocks.register(modBus);
