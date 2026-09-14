@@ -1,5 +1,5 @@
 {
-  "version": "2.9.360",
+  "version": "2.9.361",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -36,8 +36,8 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "be78aa636d358800494deb36f72a55d8",
-      "size": 2662296,
+      "md5": "0491b2d64657ba4fdd95fcc7ea2f7751",
+      "size": 2663119,
       "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     },
@@ -50,8 +50,8 @@
     },
     {
       "path": "mods/aquatech_ui-1.0.93.jar",
-      "md5": "9a52d6357143a7da39e6f5501ea9cf14",
-      "size": 2960960,
+      "md5": "e3c77ece82dce3e804e471819a8232c7",
+      "size": 2960933,
       "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.93.jar",
       "asset": "aquatech_ui-1.0.93.jar"
     },
@@ -383,6 +383,13 @@
       "size": 1002234,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/modernfix-forge-5.27.66+mc1.20.1.jar",
       "asset": "modernfix-forge-5.27.66+mc1.20.1.jar"
+    },
+    {
+      "path": "mods/MouseTweaks-forge-mc1.20.1-2.25.1.jar",
+      "md5": "ce4b5bbb9ef6a7905c458ab599ef4cb2",
+      "size": 76237,
+      "url": "https://aquateche.store/pack/mods/MouseTweaks-forge-mc1.20.1-2.25.1.jar",
+      "asset": "MouseTweaks-forge-mc1.20.1-2.25.1.jar"
     },
     {
       "path": "mods/MythicBotany-1.20.1-4.0.4.jar",
@@ -925,9 +932,9 @@
     },
     {
       "path": "kubejs/server_scripts/90_fisherman_cat_shop.js",
-      "md5": "7322c8ee084ae94f56863c092e60c058",
-      "size": 10268,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/kubejs__server_scripts__90_fisherman_cat_shop.js",
+      "md5": "b7f6e6fb3b8e868e59c10ee3c506f82b",
+      "size": 10266,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/90_fisherman_cat_shop.js",
       "asset": "kubejs__server_scripts__90_fisherman_cat_shop.js"
     },
     {
