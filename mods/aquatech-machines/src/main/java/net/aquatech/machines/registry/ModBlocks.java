@@ -7,6 +7,7 @@ import net.aquatech.machines.block.FisherBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -18,13 +19,21 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, AquaTechMachinesMod.MOD_ID);
 
     public static final RegistryObject<Block> FISHER = BLOCKS.register("fisher",
-            () -> new FisherBlock(metal().lightLevel(s -> 6)));
+            () -> new FisherBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
 
     public static final RegistryObject<Block> EXCAVATOR = BLOCKS.register("excavator",
-            () -> new ExcavatorBlock(metal().lightLevel(s -> 6)));
+            () -> new ExcavatorBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
 
     public static final RegistryObject<Block> EXTRACTOR = BLOCKS.register("extractor",
-            () -> new ExtractorBlock(metal().lightLevel(s -> 6)));
+            () -> new ExtractorBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
+
+    public static final RegistryObject<Block> SYNTHESIZER = BLOCKS.register("synthesizer",
+            () -> new net.aquatech.machines.block.SynthesizerBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
+
+    public static final RegistryObject<Block> CENTRIFUGE = BLOCKS.register("centrifuge",
+            () -> new net.aquatech.machines.block.CentrifugeBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
+    public static final RegistryObject<Block> FLOWER_COLLECTOR = BLOCKS.register("flower_collector",
+            () -> new net.aquatech.machines.block.FlowerCollectorBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
 
     private static BlockBehaviour.Properties metal() {
         return BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion();

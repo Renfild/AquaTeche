@@ -1,7 +1,17 @@
 {
- "itemGroup.aquatech_machines": "AquaTech: Механизмы",
- "block.aquatech_machines.fisher": "Рыболов MK-2",
- "block.aquatech_machines.excavator": "Экскаватор",
- "block.aquatech_machines.extractor": "Экстрактор",
- "item.aquatech_machines.fishing_core": "Ядро Рыболова"
+  "itemGroup.aquatech_machines": "AquaTech: Механизмы",
+  "block.aquatech_machines.fisher": "Рыболов MK-2",
+  "block.aquatech_machines.excavator": "Экскаватор",
+  "block.aquatech_machines.extractor": "Экстрактор",
+  "block.aquatech_machines.synthesizer": "Гидротермальный Синтезатор",
+  "block.aquatech_machines.centrifuge": "Батиметрическая Центрифуга",
+  "item.aquatech_machines.volcanic_crystal": "Вулканический кристалл",
+  "item.aquatech_machines.abyssal_alloy": "Абиссальный сплав",
+  "item.aquatech_machines.sea_salt": "Морская соль",
+  "item.aquatech_machines.fishing_core": "Ядро Рыболова",
+  "item.aquatech_machines.speed_upgrade": "Улучшение скорости (x1)",
+  "item.aquatech_machines.speed_upgrade_1": "Улучшение скорости (x1)",
+  "item.aquatech_machines.speed_upgrade_4": "Улучшение скорости (x4)",
+  "item.aquatech_machines.energy_efficiency": "Улучшение энергоэффективности",
+  "block.aquatech_machines.flower_collector": "Цветолов"
 }

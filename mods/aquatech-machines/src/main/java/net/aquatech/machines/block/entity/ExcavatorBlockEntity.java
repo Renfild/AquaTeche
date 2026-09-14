@@ -2,44 +2,41 @@ package net.aquatech.machines.block.entity;
 
 import net.aquatech.machines.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/** Экскаватор: добывает грунт/кристаллы/ресурсы МЭ (лут бывшей Драги, усиленный). */
+/** Экскаватор: добывает грунт/кристаллы/ресурсы МЭ (13 видов с шансами). */
 public class ExcavatorBlockEntity extends BaseMachineBlockEntity {
 
     public static final int SLOT_OUTPUT_START = 0;
     public static final int OUTPUT_SLOTS = 9;
+    public static final int SLOT_SPEED = 9;
+    public static final int SLOT_EFF = 10;
+    public static final int SLOT_BATTERY = 11;
 
-    private record Entry(String id, int weight, int min, int max) {}
+    public record Entry(String id, int weight, int min, int max, String label) {}
 
-    private static final List<Entry> POOL = List.of(
-            new Entry("minecraft:sand", 22, 2, 6),
-            new Entry("minecraft:quartz", 16, 1, 4),
-            new Entry("ae2:certus_quartz_crystal", 12, 1, 3),
-            new Entry("ae2:charged_certus_quartz_crystal", 7, 1, 2),
-            new Entry("ae2:sky_stone_block", 10, 1, 3),
-            new Entry("ae2:sky_dust", 9, 1, 3),
-            new Entry("ae2:fluix_crystal", 8, 1, 2),
-            new Entry("botania:manasteel_ingot", 6, 1, 2),
-            new Entry("botania:elementium_ingot", 4, 1, 1),
-            new Entry("botania:terrasteel_ingot", 2, 1, 1),
-            new Entry("industrialupgrade:baseore/spinel", 6, 1, 2),
-            new Entry("industrialupgrade:baseore2/strontium", 6, 1, 2),
-            new Entry("industrialupgrade:baseore2/barium", 5, 1, 2)
+    public static final List<Entry> POOL = List.of(
+            new Entry("ae2:certus_quartz_crystal", 30, 1, 4, "Истинный кварц"),
+            new Entry("ae2:certus_quartz_dust", 20, 1, 4, "Пыль истинного кварца"),
+            new Entry("ae2:sky_stone_block", 25, 2, 6, "Небесный камень"),
+            new Entry("ae2:sky_dust", 15, 1, 4, "Пыль небесного камня"),
+            new Entry("ae2:silicon", 15, 1, 3, "Кремний"),
+            new Entry("ae2:fluix_crystal", 10, 1, 2, "Изменчивый кристалл"),
+            new Entry("ae2:fluix_dust", 10, 1, 3, "Изменчивая пыль")
     );
 
     public ExcavatorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.EXCAVATOR.get(), pos, state, OUTPUT_SLOTS, 100000, 512, 100, 60);
+        super(ModBlockEntities.EXCAVATOR.get(), pos, state, OUTPUT_SLOTS + 3, 200000, 1024, 100, 60, 200000);
+        defineSlots(SLOT_OUTPUT_START, SLOT_OUTPUT_START + OUTPUT_SLOTS - 1, SLOT_SPEED, SLOT_EFF, SLOT_BATTERY);
     }
 
     @Override
@@ -80,7 +77,8 @@ public class ExcavatorBlockEntity extends BaseMachineBlockEntity {
         if (item == null || item == Items.AIR) return;
         ItemStack stack = new ItemStack(item, picked.min() + random.nextInt(picked.max() - picked.min() + 1));
         for (int slot = 0; slot < OUTPUT_SLOTS; slot++) {
-            if (items.insertItem(slot, stack, false).isEmpty()) return;
+            stack = items.insertItem(slot, stack, false);
+            if (stack.isEmpty()) break;
         }
     }
 }

@@ -25,6 +25,14 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<ExtractorMenu>> EXTRACTOR =
             MENUS.register("extractor", () -> IForgeMenuType.create(ExtractorMenu::new));
 
+    public static final RegistryObject<MenuType<net.aquatech.machines.inventory.SynthesizerMenu>> SYNTHESIZER =
+            MENUS.register("synthesizer", () -> IForgeMenuType.create(net.aquatech.machines.inventory.SynthesizerMenu::new));
+
+    public static final RegistryObject<MenuType<net.aquatech.machines.inventory.CentrifugeMenu>> CENTRIFUGE =
+            MENUS.register("centrifuge", () -> IForgeMenuType.create(net.aquatech.machines.inventory.CentrifugeMenu::new));
+    public static final RegistryObject<MenuType<net.aquatech.machines.inventory.FlowerCollectorMenu>> FLOWER_COLLECTOR =
+            MENUS.register("flower_collector", () -> IForgeMenuType.create(net.aquatech.machines.inventory.FlowerCollectorMenu::new));
+
     public static void register(IEventBus bus) {
         MENUS.register(bus);
     }

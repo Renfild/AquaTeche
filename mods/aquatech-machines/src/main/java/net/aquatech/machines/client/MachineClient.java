@@ -19,6 +19,9 @@ public final class MachineClient {
             MenuScreens.register(ModMenuTypes.FISHER.get(), FisherScreen::new);
             MenuScreens.register(ModMenuTypes.EXCAVATOR.get(), ExcavatorScreen::new);
             MenuScreens.register(ModMenuTypes.EXTRACTOR.get(), ExtractorScreen::new);
+            MenuScreens.register(ModMenuTypes.SYNTHESIZER.get(), net.aquatech.machines.client.gui.SynthesizerScreen::new);
+            MenuScreens.register(ModMenuTypes.CENTRIFUGE.get(), net.aquatech.machines.client.gui.CentrifugeScreen::new);
+            MenuScreens.register(ModMenuTypes.FLOWER_COLLECTOR.get(), net.aquatech.machines.client.gui.FlowerCollectorScreen::new);
         });
     }
 }

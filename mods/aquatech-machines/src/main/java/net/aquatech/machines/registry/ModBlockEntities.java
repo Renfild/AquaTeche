@@ -26,6 +26,17 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("extractor",
                     () -> BlockEntityType.Builder.of(ExtractorBlockEntity::new, ModBlocks.EXTRACTOR.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<net.aquatech.machines.block.entity.SynthesizerBlockEntity>> SYNTHESIZER =
+            BLOCK_ENTITIES.register("synthesizer",
+                    () -> BlockEntityType.Builder.of(net.aquatech.machines.block.entity.SynthesizerBlockEntity::new, ModBlocks.SYNTHESIZER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<net.aquatech.machines.block.entity.CentrifugeBlockEntity>> CENTRIFUGE =
+            BLOCK_ENTITIES.register("centrifuge",
+                    () -> BlockEntityType.Builder.of(net.aquatech.machines.block.entity.CentrifugeBlockEntity::new, ModBlocks.CENTRIFUGE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<net.aquatech.machines.block.entity.FlowerCollectorBlockEntity>> FLOWER_COLLECTOR =
+            BLOCK_ENTITIES.register("flower_collector",
+                    () -> BlockEntityType.Builder.of(net.aquatech.machines.block.entity.FlowerCollectorBlockEntity::new, ModBlocks.FLOWER_COLLECTOR.get()).build(null));
+
     public static void register(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);
     }

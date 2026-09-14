@@ -5,12 +5,7 @@ import net.aquatech.machines.registry.ModMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class ExcavatorMenu extends BaseMachineMenu {
 
@@ -25,14 +20,20 @@ public class ExcavatorMenu extends BaseMachineMenu {
         this.pos = be.getBlockPos();
     }
 
-
     @Override
     protected void addMachineSlots(Inventory inv) {
+        // [0..8] Сетка выходов 3x3
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                addSlot(output(row * 3 + col, 79 + col * 18, 17 + row * 18));
+                addSlot(output(row * 3 + col, 81 + col * 18, 18 + row * 18));
             }
         }
+        // [9] Апгрейд скорости (выносное крыло)
+        addSlot(speedUpgradeSlot(ExcavatorBlockEntity.SLOT_SPEED, 185, 19));
+        // [10] Слот батареи / аккумулятора (выносное крыло)
+        addSlot(batterySlot(ExcavatorBlockEntity.SLOT_BATTERY, 185, 41));
+        // [11] Апгрейд энергоэффективности (выносное крыло)
+        addSlot(efficiencyUpgradeSlot(ExcavatorBlockEntity.SLOT_EFF, 185, 63));
     }
 
     public BlockPos getPos() {

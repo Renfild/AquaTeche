@@ -3,27 +3,38 @@ package net.aquatech.machines.block.entity;
 import net.aquatech.machines.registry.ModBlockEntities;
 import net.aquatech.machines.registry.ModItems;
 import net.aquatech.machines.util.FisherLoot;
+import net.aquatech.machines.util.RateMultiplierReader;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 /**
- * Рыболов MK-2: удочка StarCatcher в слоте — машина ловит ресурсный лут тира.
- * С апгрейдом «Ядро Рыболова» (8x8 Avaritia) — ловит рыбу по ростеру тира.
+ * Рыболов MK-2: удочка [0], Ядро Рыболова [1], Скорость [2], Энергоэффективность [3], Выход [4].
+ * Базовый режим — ресурсы по тиру удочки. С ядром — редкая рыба.
+ * Рейт удочки StarCatcher (х2..х64) умножает каждый улов.
  */
 public class FisherBlockEntity extends BaseMachineBlockEntity {
 
     public static final int SLOT_ROD = 0;
-    public static final int SLOT_UPGRADE = 1;
-    public static final int SLOT_OUTPUT = 2;
+    public static final int SLOT_CORE = 1;
+    public static final int SLOT_SPEED = 2;
+    public static final int SLOT_EFF = 3;
+    public static final int SLOT_OUTPUT = 4;
+    public static final int SLOT_BATTERY = 5;
 
     public FisherBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.FISHER.get(), pos, state, 3, 200000, 1024, 100, 40, 200000);
+        super(ModBlockEntities.FISHER.get(), pos, state, 6, 200000, 1024, 100, 40, 200000);
+        defineSlots(SLOT_OUTPUT, SLOT_OUTPUT, SLOT_SPEED, SLOT_EFF, SLOT_BATTERY);
+    }
+
+    @Override
+    protected net.minecraft.world.inventory.AbstractContainerMenu createMenu(int id, Inventory inv) {
+        return new net.aquatech.machines.inventory.FisherMenu(id, inv, this);
     }
 
     @Override
@@ -31,42 +42,73 @@ public class FisherBlockEntity extends BaseMachineBlockEntity {
         return 1;
     }
 
-    private int rodTier() {
+    public int rodTier() {
         ItemStack rod = items.getStackInSlot(SLOT_ROD);
         if (rod.isEmpty()) return 0;
-        ResourceLocation id = BuiltInRegistries.ITEM.getKey(rod.getItem());
-        return FisherLoot.tierOf(id);
+        return FisherLoot.tierOf(rod);
     }
 
-    private boolean hasFishUpgrade() {
-        return !items.getStackInSlot(SLOT_UPGRADE).isEmpty()
-                && items.getStackInSlot(SLOT_UPGRADE).is(ModItems.FISHING_CORE.get());
+    public int activeRate() {
+        ItemStack rod = items.getStackInSlot(SLOT_ROD);
+        if (rod.isEmpty()) return 1;
+        return RateMultiplierReader.read(rod);
+    }
+
+    public boolean hasFishCore() {
+        return !items.getStackInSlot(SLOT_CORE).isEmpty()
+                && items.getStackInSlot(SLOT_CORE).is(ModItems.FISHING_CORE.get());
     }
 
     @Override
     protected boolean hasWork() {
-        return rodTier() > 0;
+        if (rodTier() <= 0) return false;
+        ItemStack out = items.getStackInSlot(SLOT_OUTPUT);
+        return out.isEmpty() || out.getCount() < out.getMaxStackSize();
     }
 
     @Override
     protected void craftOnce() {
         int tier = rodTier();
         if (tier <= 0 || level == null) return;
-        ItemStack loot = hasFishUpgrade()
+        int rate = activeRate();
+        ItemStack loot = hasFishCore()
                 ? FisherLoot.roll(tier, level.getRandom())
                 : FisherLoot.rollResources(tier, level.getRandom());
-        if (loot == null || loot.isEmpty()) return;
-        ItemStack rest = items.insertItem(SLOT_OUTPUT, loot, false);
-        if (!rest.isEmpty()) {
-            net.minecraft.world.entity.item.ItemEntity drop =
-                    new net.minecraft.world.entity.item.ItemEntity(level, worldPosition.getX() + 0.5,
-                            worldPosition.getY() - 0.5, worldPosition.getZ() + 0.5, rest);
-            level.addFreshEntity(drop);
+        if (loot == null || loot.isEmpty()) {
+            loot = FisherLoot.rollResources(tier, level.getRandom());
+            if (loot.isEmpty()) {
+                loot = new ItemStack(net.minecraft.world.item.Items.RAW_IRON, 1);
+            }
         }
-    }
 
-    @Override
-    protected AbstractContainerMenu createMenu(int id, Inventory inv) {
-        return new net.aquatech.machines.inventory.FisherMenu(id, inv, this);
+        int totalCount = Math.max(1, loot.getCount() * rate);
+        while (totalCount > 0) {
+            int toInsert = Math.min(loot.getMaxStackSize(), totalCount);
+            ItemStack chunk = loot.copyWithCount(toInsert);
+            ItemStack rest = items.insertItem(SLOT_OUTPUT, chunk, false);
+            if (!rest.isEmpty()) {
+                // Пытаемся сразу протолкнуть в соседние сундуки
+                for (Direction side : Direction.values()) {
+                    var neighbor = level.getBlockEntity(worldPosition.relative(side));
+                    if (neighbor == null) continue;
+                    var cap = neighbor.getCapability(ForgeCapabilities.ITEM_HANDLER, side.getOpposite()).orElse(null);
+                    if (cap == null) continue;
+                    rest = pushAll(cap, rest);
+                    if (rest.isEmpty()) break;
+                }
+                // Если сундуки полны или отсутствуют — дропаем в мир сверху блока
+                if (!rest.isEmpty()) {
+                    net.minecraft.world.entity.item.ItemEntity drop =
+                            new net.minecraft.world.entity.item.ItemEntity(
+                                    level,
+                                    worldPosition.getX() + 0.5,
+                                    worldPosition.getY() + 1.0,
+                                    worldPosition.getZ() + 0.5,
+                                    rest);
+                    level.addFreshEntity(drop);
+                }
+            }
+            totalCount -= toInsert;
+        }
     }
 }

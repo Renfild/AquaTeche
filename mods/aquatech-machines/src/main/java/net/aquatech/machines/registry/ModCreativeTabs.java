@@ -22,6 +22,16 @@ public class ModCreativeTabs {
                         output.accept(ModItems.FISHER.get());
                         output.accept(ModItems.EXCAVATOR.get());
                         output.accept(ModItems.EXTRACTOR.get());
+                        output.accept(ModItems.SYNTHESIZER.get());
+                        output.accept(ModItems.CENTRIFUGE.get());
+                        output.accept(ModItems.FLOWER_COLLECTOR.get());
+                        output.accept(ModItems.VOLCANIC_CRYSTAL.get());
+                        output.accept(ModItems.ABYSSAL_ALLOY.get());
+                        output.accept(ModItems.SEA_SALT.get());
+                        output.accept(ModItems.FISHING_CORE.get());
+                        output.accept(ModItems.SPEED_UPGRADE_1.get());
+                        output.accept(ModItems.SPEED_UPGRADE_4.get());
+                        output.accept(ModItems.ENERGY_EFFICIENCY.get());
                     })
                     .build());
 
