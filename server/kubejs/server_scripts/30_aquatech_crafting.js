@@ -246,13 +246,7 @@ ServerEvents.recipes((event) => {
     O: 'minecraft:obsidian',
   }).id('aquatech:infernal_pearl')
 
-  // Fish meal closes the junk-fish loop: meal back into smoker fuel
-  event.shapeless(Item.of('aquatech_ui:kelp_bio_pellet', 3), [
-    'aquatech_ui:fish_meal',
-    'aquatech_ui:fish_meal',
-    'minecraft:dried_kelp',
-    'minecraft:dried_kelp',
-  ]).id('aquatech:fish_meal_pellet')
+  // kelp_bio_pellet removed from the mod (junk-fish loop now: fish meal -> smoker fuel)
 
   // hydro_reactor removed from ModBlocks — do not craft dead IDs
   event.remove({ id: 'aquatech:hydro_reactor' })
