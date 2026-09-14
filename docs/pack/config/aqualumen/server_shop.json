@@ -51,19 +51,19 @@
     {
       "id": "iu.circuit1",
       "item": "industrialupgrade:crafting_elements/crafting_272_element:2",
-      "title": "Электронная схема ×2",
-      "price": 6000
+      "title": "Электронная схема ×3",
+      "price": 10000
     },
     {
       "id": "iu.circuit2",
       "item": "industrialupgrade:crafting_elements/crafting_273_element:2",
-      "title": "Продвинутая схема ×2",
-      "price": 7000
+      "title": "Продвинутая схема ×3",
+      "price": 15000
     },
     {
       "id": "iu.circuit3",
       "item": "industrialupgrade:crafting_elements/crafting_274_element:2",
-      "title": "Микропроцессор ×2",
+      "title": "Композит ×2",
       "price": 8000
     },
     {
