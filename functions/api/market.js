@@ -1,4 +1,5 @@
 import { bad, json, readJson } from "../_lib/http.js";
+import { linkedChatId } from "./telegram.js";
 
 /**
  * Lumen Market — player-to-player item market, server-authoritative.
@@ -121,13 +122,25 @@ export async function onRequestPost(context) {
         .run();
 
       // Мост в Telegram: продавцу приходит «у тебя купили»
+      const tgText =
+        `🪙 AquaTech Аукцион\n` +
+        `«${lot.label}» ×${lot.count} продана за ${lot.price} ¤\n` +
+        `Покупатель: ${buyer}`;
+      // Личное уведомление привязанному продавцу
+      if (env.TG_BOT_TOKEN) {
+        const chat = await linkedChatId(env.DB, lot.seller);
+        if (chat) {
+          context.waitUntil(
+            fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ chat_id: chat, text: tgText })
+            }).then((r) => r.json()).catch(() => {})
+          );
+        }
+      }
+      // Плюс общий чат, если настроен
       if (env.TG_BOT_TOKEN && env.TG_CHAT_ID) {
-        const tgText =
-          `🪙 AquaTech Аукцион
-` +
-          `«${lot.label}» ×${lot.count} продана за ${lot.price} ¤
-` +
-          `Покупатель: ${buyer}`;
         context.waitUntil(
           fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
             method: "POST",

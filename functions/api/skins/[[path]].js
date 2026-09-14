@@ -9,3 +9,8 @@ export async function onRequestGet(context) {
     params: { nick: path[0] || "", kind: path[1] || "" },
   });
 }
+
+// Skin fetchers (MineSkin via SkinsRestorer) probe with HEAD; without this they get a 404.
+export async function onRequestHead(context) {
+  return onRequestGet(context);
+}

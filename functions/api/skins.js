@@ -181,8 +181,13 @@ export async function onRequestGet(context) {
   }
   const body = toBytes(row.bytes);
   if (!body) return new Response("Not found", { status: 404, headers: { "access-control-allow-origin": "*" } });
+  // content-length must be explicit: external fetchers (MineSkin via HEAD) size-check it,
+  // and the runtime strips its auto header when the body is dropped for HEAD.
   return new Response(body, {
-    headers: imageHeaders(row.mime, { etag: `"${row.updated_at || "look"}"` }),
+    headers: imageHeaders(row.mime, {
+      etag: `"${row.updated_at || "look"}"`,
+      "content-length": String(body.byteLength),
+    }),
   });
 }
 

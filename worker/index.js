@@ -35,6 +35,11 @@ import {
   onRequestPost as pendingCommandsPost,
 } from "../functions/api/internal/pending-commands.js";
 import {
+  onRequestGet as tgLinkGet,
+  onRequestPost as tgLinkPost,
+  onRequestDelete as tgLinkDelete,
+} from "../functions/api/telegram.js";
+import {
   onRequestGet as profileGet,
   onRequestPatch as profilePatch,
 } from "../functions/api/profiles/[nick].js";
@@ -85,7 +90,12 @@ function normalizePath(pathname) {
   return pathname || "/";
 }
 
-async function handleApi(request, env) {
+async function handleApi(request, env, execCtx) {
+  // Local ctx() shadows the module-level one: every handler gets a working
+  // waitUntil (market buy used to throw 1101 — context.waitUntil was undefined).
+  const waitUntil =
+    execCtx && typeof execCtx.waitUntil === "function" ? execCtx.waitUntil.bind(execCtx) : () => {};
+  const ctx = (request, env, params = {}) => ({ request, env, params, waitUntil });
   const url = new URL(request.url);
   const path = normalizePath(url.pathname);
   const method = request.method.toUpperCase();
@@ -141,6 +151,11 @@ async function handleApi(request, env) {
     if (method === "GET") return pendingCommandsGet(ctx(request, env));
     if (method === "POST") return pendingCommandsPost(ctx(request, env));
   }
+  if (path === "/api/telegram/link") {
+    if (method === "GET") return tgLinkGet(ctx(request, env));
+    if (method === "POST") return tgLinkPost(ctx(request, env));
+    if (method === "DELETE") return tgLinkDelete(ctx(request, env));
+  }
 
   if (path === "/api/admin/me" && method === "GET") return adminMeGet(ctx(request, env));
   if (path === "/api/admin/settings") {
@@ -176,16 +191,27 @@ async function handleApi(request, env) {
     if (method === "DELETE") return skinsDelete(ctx(request, env));
   }
   const skinFile = path.match(/^\/api\/skins\/([^/]+)\/(skin|cape|avatar)(\.png)?$/);
-  if (skinFile && method === "GET") {
-    return skinsGet(
+  // HEAD must answer too: external skin fetchers (SkinsRestorer via MineSkin) probe with HEAD,
+  // a 404 here makes them reject the whole skin URL ("Invalid skin URL or format").
+  if (skinFile && (method === "GET" || method === "HEAD")) {
+    const res = await skinsGet(
       ctx(request, env, {
         nick: decodeURIComponent(skinFile[1]),
         kind: skinFile[2],
       })
     );
+    if (method === "HEAD") {
+      const headers = new Headers(res.headers);
+      if (!headers.has("content-length")) {
+        const buf = await res.arrayBuffer();
+        headers.set("content-length", String(buf.byteLength));
+      }
+      return new Response(null, { status: res.status, headers });
+    }
+    return res;
   }
   const skinMeta = path.match(/^\/api\/skins\/([^/]+)$/);
-  if (skinMeta && method === "GET") {
+  if (skinMeta && (method === "GET" || method === "HEAD")) {
     return skinsGet(ctx(request, env, { nick: decodeURIComponent(skinMeta[1]) }));
   }
 
@@ -269,10 +295,10 @@ async function proxyLauncherDownload(request, env, rawFile) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, execCtx) {
     const url = new URL(request.url);
     if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
-      return withSecurityHeaders(await handleApi(request, env));
+      return withSecurityHeaders(await handleApi(request, env, execCtx));
     }
     const dl = url.pathname.match(/^\/dl\/([^/]+)$/);
     if (dl && (request.method === "GET" || request.method === "HEAD")) {

@@ -1035,6 +1035,7 @@
   const LK_TABS = [
     { id: "overview", label: "Обзор" },
     { id: "skin", label: "Скин и плащ" },
+    { id: "telegram", label: "Telegram" },
     { id: "theme", label: "Тема профиля" },
     { id: "password", label: "Пароль" },
     { id: "about", label: "О себе" },
@@ -1348,9 +1349,15 @@
               </div>`
               }
             </section>
+            <section class="lk-pane" data-lk-pane="telegram" ${tab === "telegram" ? "" : "hidden"}>
+              <h2>Telegram</h2>
+              <div class="panel" id="tg-link-box"><p class="muted-line">Загрузка…</p></div>
+            </section>
           </div>
         </div>
       </div>`;
+
+    if (mine) loadTelegramBox(root);
 
     function showTab(id) {
       root.querySelectorAll("[data-lk-pane]").forEach((p) => {
@@ -1387,6 +1394,50 @@
     });
 
     window.addEventListener("hashchange", () => showTab(lkTab()));
+
+    async function loadTelegramBox(rootEl) {
+      const box = rootEl.querySelector("#tg-link-box");
+      if (!box) return;
+      let st;
+      try {
+        st = await api("/api/telegram/link?_=" + Date.now());
+      } catch {
+        box.innerHTML = '<p class="muted-line">Не удалось загрузить статус привязки.</p>';
+        return;
+      }
+      if (st.linked) {
+        const when = st.linked_at ? new Date(st.linked_at).toLocaleString("ru-RU", { dateStyle: "short", timeStyle: "short" }) : "";
+        box.innerHTML = `
+          <h3 style="margin:0 0 0.35rem">✅ Аккаунт привязан</h3>
+          <p class="muted-line" style="margin:0 0 0.75rem">Telegram: <strong>${esc(st.tg_name || "привязан")}</strong>${when ? ` · с ${esc(when)}` : ""}</p>
+          <p class="muted-line" style="margin:0 0 1rem">Бот пришлёт сообщение, когда купят твой лот на аукционе. Команды: /balance, /trends, /pass.</p>
+          <button class="btn btn-secondary" type="button" id="tg-unlink">Отвязать</button>`;
+        box.querySelector("#tg-unlink").onclick = async () => {
+          await api("/api/telegram/link", { method: "DELETE" });
+          toast("Telegram отвязан");
+          loadTelegramBox(rootEl);
+        };
+        return;
+      }
+      box.innerHTML = `
+        <h3 style="margin:0 0 0.35rem">Привяжи Telegram</h3>
+        <p class="muted-line" style="margin:0 0 0.75rem">Бот @${esc(st.bot)} напишет, когда купят твой лот на аукционе, и покажет баланс и тренды командами /balance, /trends, /pass.</p>
+        <button class="btn btn-primary" type="button" id="tg-code-btn">Получить код</button>
+        <div id="tg-code-out" style="margin-top:1rem"></div>`;
+      box.querySelector("#tg-code-btn").onclick = async () => {
+        const res = await api("/api/telegram/link", { method: "POST" });
+        const out = box.querySelector("#tg-code-out");
+        out.innerHTML = `
+          <p class="muted-line" style="margin:0 0 0.4rem">1. Открой бота <a href="https://t.me/${esc(res.bot)}" target="_blank" rel="noopener" style="color:#2fe0c0;font-weight:600">@${esc(res.bot)}</a></p>
+          <p class="muted-line" style="margin:0 0 0.4rem">2. Отправь ему команду (кликни, чтобы скопировать):</p>
+          <code id="tg-code" title="Нажми, чтобы скопировать" style="display:block;cursor:pointer;user-select:all;font-size:1.35rem;font-weight:700;letter-spacing:0.12em;padding:0.55rem 0.9rem;margin:0.35rem 0 0.5rem;border:1px solid rgba(47,224,192,0.4);border-radius:10px;background:rgba(47,224,192,0.08)">/start ${esc(res.code)}</code>
+          <p class="muted-line" style="margin:0">Код живёт 15 минут. Бот ответит «Готово» — аккаунт привязан.</p>`;
+        out.querySelector("#tg-code").onclick = (e) => {
+          navigator.clipboard?.writeText(e.target.textContent.trim());
+          toast("Скопировано");
+        };
+      };
+    }
 
     async function saveProfile(form) {
       const fd = new FormData(form);
