@@ -25,7 +25,10 @@ public final class ServerShopConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private static final Path FILE = FMLPaths.CONFIGDIR.get().resolve("aqualumen/server_shop.json");
 
-    public record ShopEntry(String id, String item, String title, long price) {
+    public record ShopEntry(String id, String item, String title, long price, String kind, String payload) {
+        public ShopEntry(String id, String item, String title, long price) {
+            this(id, item, title, price, null, null);
+        }
     }
 
     private static volatile List<ShopEntry> cached = List.of();
@@ -119,7 +122,9 @@ public final class ServerShopConfig {
         load();
         return cached.stream()
                 .map(e -> new StoreCatalog.Product(e.id(), e.title(), "Серверная поставка", e.price(),
-                        "coins", "item", e.item()))
+                        "coins",
+                        e.kind() == null || e.kind().isBlank() ? "item" : e.kind(),
+                        e.payload() == null || e.payload().isBlank() ? e.item() : e.payload()))
                 .toList();
     }
 
@@ -129,7 +134,9 @@ public final class ServerShopConfig {
         for (ShopEntry e : cached) {
             if (e.id().toLowerCase(java.util.Locale.ROOT).equals(key)) {
                 return new StoreCatalog.Product(e.id(), e.title(), "Серверная поставка", e.price(),
-                        "coins", "item", e.item());
+                        "coins",
+                        e.kind() == null || e.kind().isBlank() ? "item" : e.kind(),
+                        e.payload() == null || e.payload().isBlank() ? e.item() : e.payload());
             }
         }
         return null;

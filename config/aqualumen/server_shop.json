@@ -104,9 +104,11 @@
     },
     {
       "id": "meta.guidebook",
-      "item": "aquatech_ui:guide:1",
+      "item": "patchouli:guide_book",
       "title": "Гайдбук AquaTech",
-      "price": 500
+      "price": 500,
+      "kind": "patchouli_book",
+      "payload": "aquatech_ui:guide"
     }
   ]
 }

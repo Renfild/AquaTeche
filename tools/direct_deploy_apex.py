@@ -77,6 +77,7 @@ kubejs_uploads = [
     (ROOT / "kubejs/server_scripts/97_machines_recipes.js", "kubejs/server_scripts/97_machines_recipes.js"),
     (ROOT / "kubejs/server_scripts/98_fishing_core_recipe.js", "kubejs/server_scripts/98_fishing_core_recipe.js"),
     (ROOT / "server/config/aqualumen-common.toml", "config/aqualumen-common.toml"),
+    (ROOT / "server/config/industrialupgrade-common.toml", "config/industrialupgrade-common.toml"),
 ]
 for local, remote in kubejs_uploads:
     if not local.is_file():

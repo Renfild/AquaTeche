@@ -85,9 +85,9 @@
 	#Unchecking the tier
 	enableUnchecking = false
 	#Unlimiting the conduction of energy in the cable
-	cableUnlimiting = false
+	cableUnlimiting = true
 	#Enable explosion from mechanisms if transformer mode is on
-	enableExplosion = true
+	enableExplosion = false
 	#Enable lose energy in cables if transformer mode is on
 	enableLosing = true
 

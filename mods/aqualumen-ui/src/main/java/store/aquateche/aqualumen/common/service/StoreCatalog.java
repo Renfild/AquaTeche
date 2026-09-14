@@ -131,6 +131,16 @@ public final class StoreCatalog {
                 giveItem(player, payload);
                 yield true;
             }
+            case "patchouli_book" -> {
+                net.minecraft.world.item.ItemStack book = new net.minecraft.world.item.ItemStack(
+                        BuiltInRegistries.ITEM.get(new net.minecraft.resources.ResourceLocation("patchouli:guide_book")));
+                if (!book.isEmpty()) {
+                    net.minecraft.nbt.CompoundTag tag = book.getOrCreateTag();
+                    tag.putString("patchouli:book", payload);
+                    HubEconomy.giveItem(player, book);
+                }
+                yield true;
+            }
             case "pass_premium" -> {
                 player.getPersistentData().putBoolean("aqualumen_pass_premium", true);
                 yield true;
