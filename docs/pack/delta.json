@@ -1,19 +1,26 @@
 {
-  "from_version": "2.9.366",
-  "to_version": "2.9.367",
+  "from_version": "2.9.367",
+  "to_version": "2.9.368",
   "added": [],
   "changed": [
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "9fb77d8221ee22d7902c30df97d3e7bf",
-      "size": 991105,
+      "md5": "28599bfa32f27293e995a6e7a2d91fd9",
+      "size": 1001341,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
+      "path": "config/aqualumen/server_shop.json",
+      "md5": "67c039fdfbc2ffb9e55dd8915d6d0b67",
+      "size": 2935,
+      "url": "https://aquateche.store/pack/config/aqualumen/server_shop.json",
+      "asset": "config__aqualumen__server_shop.json"
+    },
+    {
       "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "124d4723b90ca7bcc37c5924e3fbecee",
-      "size": 2668847,
+      "md5": "257c116a5acc5a57665246cda7e26451",
+      "size": 2680175,
       "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     }
@@ -21,9 +28,9 @@
   "removed": [],
   "stats": {
     "added": 0,
-    "changed": 2,
+    "changed": 3,
     "removed": 0,
-    "unchanged": 142,
-    "download_bytes": 3659952
+    "unchanged": 141,
+    "download_bytes": 3684451
   }
 }
