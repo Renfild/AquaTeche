@@ -1,5 +1,5 @@
 {
-  "version": "2.9.362",
+  "version": "2.9.363",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -36,15 +36,15 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "0491b2d64657ba4fdd95fcc7ea2f7751",
-      "size": 2663119,
+      "md5": "39563060a3b3ffe324aab0bf3503e99f",
+      "size": 2669670,
       "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     },
     {
       "path": "mods/aquatech_machines-1.0.9.jar",
-      "md5": "faefd594a3e6493e343994fc02385d53",
-      "size": 196532,
+      "md5": "2decfd7da9c89a3da1d1ef164c0e87dd",
+      "size": 217559,
       "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.9.jar",
       "asset": "aquatech_machines-1.0.9.jar"
     },
@@ -553,6 +553,13 @@
       "asset": "config__aqualumen__kits.json"
     },
     {
+      "path": "config/aqualumen/server_shop.json",
+      "md5": "5d069228c97acd4a887e0d775f4873cb",
+      "size": 2819,
+      "url": "https://aquateche.store/pack/config/aqualumen/server_shop.json",
+      "asset": "config__aqualumen__server_shop.json"
+    },
+    {
       "path": "config/aqualumen/warps.json",
       "md5": "f34189310b1dff224f1931a1c56b2bbb",
       "size": 876,
@@ -953,8 +960,8 @@
     },
     {
       "path": "kubejs/server_scripts/97_machines_recipes.js",
-      "md5": "4acbf1adc691cfbad9654a7f2b4109d2",
-      "size": 5122,
+      "md5": "02d560557321ccae67f9cb56e4ef510e",
+      "size": 5658,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/97_machines_recipes.js",
       "asset": "kubejs__server_scripts__97_machines_recipes.js"
     },
