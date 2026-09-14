@@ -1,0 +1,19 @@
+{
+  "name": "Монеты и поставки",
+  "category": "aquatech_ui:economy",
+  "icon": "minecraft:sunflower",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.economy.coins.p1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.economy.coins.p2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.economy.coins.p3"
+    }
+  ]
+}

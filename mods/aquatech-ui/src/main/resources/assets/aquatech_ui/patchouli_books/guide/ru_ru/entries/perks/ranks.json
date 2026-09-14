@@ -1,0 +1,19 @@
+{
+  "name": "Ранги и гемы",
+  "category": "aquatech_ui:perks",
+  "icon": "minecraft:nether_star",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.perks.ranks.p1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.perks.ranks.p2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.perks.ranks.p3"
+    }
+  ]
+}

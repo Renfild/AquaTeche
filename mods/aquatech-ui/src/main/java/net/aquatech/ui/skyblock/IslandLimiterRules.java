@@ -16,27 +16,17 @@ public final class IslandLimiterRules {
 
     private static final Map<String, Integer> MAX = new LinkedHashMap<>();
     private static final Map<String, String> TITLE = new LinkedHashMap<>();
-    private static final Map<String, String> NS_CAT = new LinkedHashMap<>();
 
     static {
-        put("aquatech_ui:auto_fisher", 8, "Авто-рыболов");
-        put("aquatech_ui:ocean_filter", 8, "Ботанический экстрактор");
-        put("aquatech_ui:seabed_dredger", 4, "Дноуглубитель");
-        put("aquatech_ui:ocean_altar", 1, "Алтарь океана");
-        put("aquatech_ui:abyssal_portal", 1, "Бездонный портал");
-        put("minecraft:hopper", 64, "Воронка");
-
-        put("cat:iu", 96, "Industrial Upgrade");
-        put("cat:ae2", 48, "AE2");
-        put("cat:de", 12, "Draconic Evolution");
-        put("cat:botania", 24, "Botania");
-
-        NS_CAT.put("industrialupgrade", "cat:iu");
-        NS_CAT.put("ae2", "cat:ae2");
-        NS_CAT.put("draconicevolution", "cat:de");
-        NS_CAT.put("botania", "cat:botania");
-        NS_CAT.put("mythicbotany", "cat:botania");
-        NS_CAT.put("botanicalmachinery", "cat:botania");
+        // Лимитируются ТОЛЬКО машины AquaTech: Механизмы — по 10 шт каждого на регион.
+        // Остальное (воронки, IU, AE2, Botania, Draconic) не ограничено.
+        put("aquatech_machines:fisher", 10, "Рыбак MK-2");
+        put("aquatech_machines:excavator", 10, "Экскаватор");
+        put("aquatech_machines:extractor", 10, "Экстрактор");
+        put("aquatech_machines:synthesizer", 10, "Синтезатор");
+        put("aquatech_machines:centrifuge", 10, "Центрифуга");
+        put("aquatech_machines:flower_collector", 10, "Цветолов");
+        put("aquatech_machines:mana_fabricator", 10, "Мана-Фабрикатор");
     }
 
     private IslandLimiterRules() {
@@ -63,13 +53,7 @@ public final class IslandLimiterRules {
             return null;
         }
         String id = loc.toString();
-        if (MAX.containsKey(id)) {
-            return id;
-        }
-        if (!hasBlockEntity) {
-            return null;
-        }
-        return NS_CAT.get(loc.getNamespace());
+        return MAX.containsKey(id) ? id : null;
     }
 
     public static boolean isLimited(String key) {

@@ -1826,7 +1826,11 @@ try {
     
     const newView = $("content")?.querySelector(".view");
     if (newView && savedScroll > 0) {
+      // scroll-behavior:smooth на .view превращает восстановление позиции в
+      // «прыжок вверх и плавная прокрутка обратно» — на время рестора выключаем.
+      newView.style.scrollBehavior = "auto";
       newView.scrollTop = savedScroll;
+      newView.style.scrollBehavior = "";
     }
     if (animate) $("content").firstElementChild?.classList.add("view-enter");
     bindViewActions();

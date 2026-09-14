@@ -1,0 +1,19 @@
+{
+  "name": "Первые шаги",
+  "category": "aquatech_ui:start",
+  "icon": "minecraft:compass",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.start.beginning.p1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.start.beginning.p2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.start.beginning.p3"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Обзор механизмов",
+  "category": "aquatech_ui:machines",
+  "icon": "aquatech_machines:fisher",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.machines.overview.p1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.machines.overview.p2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.machines.overview.p3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.machines.overview.p4"
+    }
+  ]
+}

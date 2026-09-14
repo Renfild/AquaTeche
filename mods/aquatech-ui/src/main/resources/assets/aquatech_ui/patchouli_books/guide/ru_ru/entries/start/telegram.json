@@ -1,0 +1,15 @@
+{
+  "name": "Telegram-бот",
+  "category": "aquatech_ui:start",
+  "icon": "minecraft:heart_of_the_sea",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.start.telegram.p1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.start.telegram.p2"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Удочки и тиры",
+  "category": "aquatech_ui:fishing",
+  "icon": "starcatcher:starcatcher_rod",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.fishing.rods.p1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.fishing.rods.p2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.fishing.rods.p3"
+    }
+  ]
+}

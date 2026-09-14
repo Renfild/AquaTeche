@@ -1,0 +1,15 @@
+{
+  "name": "Аукцион",
+  "category": "aquatech_ui:economy",
+  "icon": "minecraft:gold_ingot",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.economy.auction.p1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.economy.auction.p2"
+    }
+  ]
+}

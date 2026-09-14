@@ -33,6 +33,7 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Menu
     private final LazyOptional<IEnergyStorage> energyOptional;
     protected final ItemStackHandler items;
     private final LazyOptional<IItemHandler> itemsOptional;
+    private LazyOptional<IItemHandler> exposedOptional;
 
     protected int progress;
     protected final int maxProgress;
@@ -355,13 +356,36 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Menu
         return rest;
     }
 
+    /**
+     * Наружу (трубы, импорт-экспорт шины, хопперы) машина отдаёт ТОЛЬКО слоты выхода.
+     * Апгрейды, батарея и вход больше не вытаскиваются.
+     */
+    private @NotNull IItemHandler createExposedHandler() {
+        if (firstOutputSlot < 0 || firstOutputSlot > lastOutputSlot
+                || lastOutputSlot >= items.getSlots()) {
+            // Слотов выхода нет (например, Мана-Фабрикатор) — наружу ничего не отдаём.
+            return new IItemHandler() {
+                @Override public int getSlots() { return 0; }
+                @Override public @NotNull ItemStack getStackInSlot(int slot) { return ItemStack.EMPTY; }
+                @Override public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) { return stack; }
+                @Override public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) { return ItemStack.EMPTY; }
+                @Override public int getSlotLimit(int slot) { return 0; }
+                @Override public boolean isItemValid(int slot, @NotNull ItemStack stack) { return false; }
+            };
+        }
+        return new net.minecraftforge.items.wrapper.RangedWrapper(items, firstOutputSlot, lastOutputSlot + 1);
+    }
+
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.ENERGY) {
             return energyOptional.cast();
         }
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return itemsOptional.cast();
+            if (exposedOptional == null) {
+                exposedOptional = LazyOptional.of(this::createExposedHandler);
+            }
+            return exposedOptional.cast();
         }
         return super.getCapability(cap, side);
     }
@@ -371,6 +395,9 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Menu
         super.invalidateCaps();
         energyOptional.invalidate();
         itemsOptional.invalidate();
+        if (exposedOptional != null) {
+            exposedOptional.invalidate();
+        }
     }
 
     public void dropContents() {

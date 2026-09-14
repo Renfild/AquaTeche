@@ -1,0 +1,19 @@
+{
+  "name": "Цветолов",
+  "category": "aquatech_ui:machines",
+  "icon": "aquatech_machines:flower_collector",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.machines.flower.p1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.machines.flower.p2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "aquatech_ui.guide.machines.flower.p3"
+    }
+  ]
+}

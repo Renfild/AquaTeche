@@ -3,7 +3,7 @@
 ServerEvents.recipes((event) => {
   event.shaped('aquatech_machines:fisher', ['IFI', 'RCF', 'ISI'], {
     I: 'industrialupgrade:itemingots/aluminium_ingot',
-    F: 'starcatcher:good_old_rod',
+    F: 'starcatcher:obsidian_rod',
     R: 'industrialupgrade:crafting_elements/crafting_272_element',
     C: 'minecraft:chest',
     S: 'industrialupgrade:blockresource/reinforced_stone',
@@ -27,6 +27,13 @@ ServerEvents.recipes((event) => {
     C: 'industrialupgrade:crafting_elements/crafting_272_element',
     S: 'industrialupgrade:blockresource/reinforced_stone',
   }).id('aquatech_machines:flower_collector')
+
+
+  // Гайдбук сервера
+  event.shaped('aquatech_ui:guide', [' P ', 'PBP', ' P '], {
+    P: 'minecraft:prismarine_shard',
+    B: 'minecraft:book',
+  }).id('aquatech_machines:guide_book')
 
   event.shaped('aquatech_machines:extractor', ['PXP', 'ICI', 'PIP'], {
     P: 'minecraft:prismarine_crystals',

@@ -101,6 +101,12 @@
       "item": "minecraft:obsidian:8",
       "title": "Обсидиан ×8",
       "price": 1200
+    },
+    {
+      "id": "meta.guidebook",
+      "item": "aquatech_ui:guide:1",
+      "title": "Гайдбук AquaTech",
+      "price": 500
     }
   ]
 }
