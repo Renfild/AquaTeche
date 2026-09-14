@@ -1,7 +1,6 @@
 package net.aquatech.ui.client;
 
 import net.aquatech.ui.capability.AquaSkillCapability;
-import net.aquatech.ui.client.gui.OceanSkillTreeScreen;
 import net.aquatech.ui.client.hud.RhythmHookOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -31,9 +30,6 @@ public final class ClientItemActions {
         mc.player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
             cap.deserializeNBT(tag);
             ClientUiState.bumpSkillSyncGeneration();
-            if (mc.screen instanceof OceanSkillTreeScreen screen) {
-                screen.refreshData();
-            }
         });
     }
 }

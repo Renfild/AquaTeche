@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.client.bubble.ChatBubbleManager;
 import net.aquatech.ui.client.fishing.RateParticles;
-import net.aquatech.ui.client.gui.OceanSkillTreeScreen;
 import net.aquatech.ui.client.hud.RhythmHookOverlay;
 import net.aquatech.ui.client.tab.OceanTabOverlay;
 import net.minecraft.client.KeyMapping;
@@ -24,13 +23,6 @@ import org.lwjgl.glfw.GLFW;
 
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class ClientEvents {
-
-    public static final KeyMapping KEY_SKILL_TREE = new KeyMapping(
-            "key.aquatech_ui.skill_tree",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_K,
-            "key.categories.aquatech_ui"
-    );
 
     public static final KeyMapping KEY_MARKET = new KeyMapping(
             "key.aquatech_ui.market",

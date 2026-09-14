@@ -62,18 +62,6 @@ public class NetworkHandler {
                 .consumerMainThread(S2CSyncSkillsPacket::handle)
                 .add();
 
-        CHANNEL.messageBuilder(C2SUnlockSkillPacket.class, id())
-                .encoder(C2SUnlockSkillPacket::toBytes)
-                .decoder(C2SUnlockSkillPacket::new)
-                .consumerMainThread(C2SUnlockSkillPacket::handle)
-                .add();
-
-        CHANNEL.messageBuilder(C2SOpenSkillTreePacket.class, id())
-                .encoder(C2SOpenSkillTreePacket::toBytes)
-                .decoder(C2SOpenSkillTreePacket::new)
-                .consumerMainThread(C2SOpenSkillTreePacket::handle)
-                .add();
-
         CHANNEL.messageBuilder(S2CStartRhythmHookPacket.class, id())
                 .encoder(S2CStartRhythmHookPacket::toBytes)
                 .decoder(S2CStartRhythmHookPacket::new)
