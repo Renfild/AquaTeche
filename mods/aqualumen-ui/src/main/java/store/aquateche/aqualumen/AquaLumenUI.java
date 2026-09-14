@@ -31,6 +31,9 @@ public final class AquaLumenUI {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public AquaLumenUI() {
+        // Apex-контейнер иногда отдаёт транзиентные UnknownHostException —
+        // не держим негативный DNS-кэш 10 секунд, чтобы sync заживал сам за 3с.
+        java.security.Security.setProperty("networkaddress.cache.negative.ttl", "3");
         final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModRegistries.register(modBus);

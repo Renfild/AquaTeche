@@ -43,7 +43,7 @@ public final class StoreCatalog {
 
     public static List<HubSnapshot.Offer> offers(ServerPlayer player) {
         String rank = HubDataService.resolveRank(player).name().toLowerCase(Locale.ROOT);
-        return PRODUCTS.stream().map(p -> {
+        List<HubSnapshot.Offer> base = PRODUCTS.stream().map(p -> {
             boolean owned = "lp_group".equals(p.kind) && rank.contains(p.payload);
             if ("pass_premium".equals(p.kind)) {
                 owned = player.getPersistentData().getBoolean("aqualumen_pass_premium");
@@ -57,6 +57,14 @@ public final class StoreCatalog {
             }
             return new HubSnapshot.Offer(p.id, p.title, p.subtitle, price, p.currency, owned ? "есть" : "", owned);
         }).toList();
+        // Серверный магазин базовых ресурсов — всегда в продаже, без owned.
+        List<HubSnapshot.Offer> shop = ServerShopConfig.products().stream()
+                .map(p -> new HubSnapshot.Offer(p.id(), p.title(), p.subtitle(), p.price(), p.currency(), "", false))
+                .toList();
+        List<HubSnapshot.Offer> all = new java.util.ArrayList<>(base.size() + shop.size());
+        all.addAll(base);
+        all.addAll(shop);
+        return all;
     }
 
     public static void buy(ServerPlayer player, String offerId) {
@@ -104,7 +112,7 @@ public final class StoreCatalog {
                 return p;
             }
         }
-        return null;
+        return ServerShopConfig.find(key);
     }
 
     public static boolean fulfill(ServerPlayer player, String kind, String payload) {

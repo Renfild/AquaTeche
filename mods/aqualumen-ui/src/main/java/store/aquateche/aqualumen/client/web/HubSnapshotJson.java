@@ -36,6 +36,7 @@ public final class HubSnapshotJson {
         appearance.addProperty("animations", LumenConfig.CLIENT.animations.get());
         appearance.addProperty("compact", LumenConfig.CLIENT.compactMode.get());
         appearance.addProperty("panelOpacity", LumenConfig.CLIENT.panelOpacity.get());
+        appearance.addProperty("scale", LumenConfig.CLIENT.hubScale.get());
         root.add("appearance", appearance);
         return GSON.toJson(root);
     }
