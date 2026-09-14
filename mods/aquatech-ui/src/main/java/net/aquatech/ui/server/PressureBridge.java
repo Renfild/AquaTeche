@@ -10,6 +10,10 @@ import net.minecraft.world.item.ItemStack;
 /**
  * Depth / pressure used by HUD and ocean mechanics.
  * Sea level = Y 190. Build floor = 50 m below sea (Y 140).
+ *
+ * Давление зависит от ГЛУБИНЫ под уровнем моря и НЕ зависит от того,
+ * есть ли вокруг вода: песочный колодец или воздушный карман на дне
+ * давят так же, как открытая вода. Обходится только экипировкой/навыками.
  */
 public final class PressureBridge {
     public static final int SEA_LEVEL_Y = 190;
@@ -25,13 +29,10 @@ public final class PressureBridge {
 
     public static PressureInfo fromPlayer(Player player) {
         boolean inWater = player.isEyeInFluid(FluidTags.WATER) || player.isInWater();
-        if (!inWater) {
-            return new PressureInfo(false, 0, 0, 0);
-        }
         int depth = Math.max(0, SEA_LEVEL_Y - player.blockPosition().getY());
         int tolerance = 10 + armorPieceBonus(player) + skillAndGearTolerance(player);
         int effective = Math.max(0, depth - tolerance);
-        return new PressureInfo(true, depth, tolerance, effective);
+        return new PressureInfo(inWater, depth, tolerance, effective);
     }
 
     public static int depthBelowSeaLevel(Entity entity) {

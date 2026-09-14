@@ -70,8 +70,8 @@ public final class OceanHudOverlay {
         boolean inWater = live.inWater()
                 || player.isInWater()
                 || player.isEyeInFluid(FluidTags.WATER);
-        int depth = inWater ? Math.max(0, PressureBridge.SEA_LEVEL_Y - player.blockPosition().getY()) : 0;
-        int pressure = inWater ? live.effective() : 0;
+        int depth = live.depth();
+        int pressure = live.effective();
         int tolerance = live.tolerance();
         if (inWater && live.depth() == 0 && depth > 0) {
             pressure = Math.max(0, depth - 10);

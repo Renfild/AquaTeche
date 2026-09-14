@@ -1,29 +1,22 @@
 {
-  "from_version": "2.9.372",
-  "to_version": "2.9.373",
+  "from_version": "2.9.373",
+  "to_version": "2.9.374",
   "added": [],
   "changed": [
     {
-      "path": "config/aqualumen/server_shop.json",
-      "md5": "44e48972366ffe64c8f7a8ccd920d9bd",
-      "size": 3145,
-      "url": "https://aquateche.store/pack/config/aqualumen/server_shop.json",
-      "asset": "config__aqualumen__server_shop.json"
-    },
-    {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "c6e5ab9c0427e1b4205bef78200333f4",
-      "size": 2682177,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
+      "path": "mods/aquatech_ui-1.0.93.jar",
+      "md5": "801342e5b491d68013bc6b1379eaed74",
+      "size": 2971889,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.93.jar",
+      "asset": "aquatech_ui-1.0.93.jar"
     }
   ],
   "removed": [],
   "stats": {
     "added": 0,
-    "changed": 2,
+    "changed": 1,
     "removed": 0,
-    "unchanged": 143,
-    "download_bytes": 2685322
+    "unchanged": 144,
+    "download_bytes": 2971889
   }
 }

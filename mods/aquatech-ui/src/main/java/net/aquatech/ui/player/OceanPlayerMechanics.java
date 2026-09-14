@@ -54,20 +54,24 @@ public final class OceanPlayerMechanics {
         tickCooldowns(serverPlayer.getUUID());
 
         boolean inWater = serverPlayer.isInWater() || serverPlayer.isEyeInFluid(FluidTags.WATER);
-        if (!inWater) {
-            CRUSH_TICK.remove(serverPlayer.getUUID());
-            CURRENT_TICK.remove(serverPlayer.getUUID());
-            return;
-        }
 
+        // Давление — от глубины, НЕ от воды: песочный колодец / воздушный карман
+        // на дне давят так же, как открытая вода.
         PressureBridge.PressureInfo pressure = PressureBridge.fromPlayer(serverPlayer);
         int effective = pressure.effective();
         int depth = pressure.depth();
 
         applyCrush(serverPlayer, effective);
-        applyUndertow(serverPlayer, effective);
-        serverBiolume(serverPlayer, depth);
-        trySonarPulse(serverPlayer);
+
+        // Водная механика (течение, биолюминесценция, сонар) — только в воде.
+        if (inWater) {
+            applyUndertow(serverPlayer, effective);
+            serverBiolume(serverPlayer, depth);
+            trySonarPulse(serverPlayer);
+        } else {
+            CRUSH_TICK.remove(serverPlayer.getUUID());
+            CURRENT_TICK.remove(serverPlayer.getUUID());
+        }
     }
 
     private static void tickCooldowns(UUID id) {
