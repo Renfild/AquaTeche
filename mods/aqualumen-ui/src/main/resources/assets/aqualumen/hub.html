@@ -178,6 +178,13 @@
     .pass-status-badge.locked{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);color:var(--muted);opacity:.75}
     .settings{max-width:650px}.setting{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}.setting:last-child{border:0}.setting-info{flex:1}.setting-info b{display:block;font-size:12px}.setting-info span{color:var(--muted);font-size:10px}
     .theme-picker{display:flex;gap:7px}.swatch{width:30px;height:30px;border:2px solid transparent;border-radius:10px;cursor:pointer}.swatch.active{border-color:white}.swatch[data-theme=aqua_lumen]{background:linear-gradient(135deg,#2fe0c0,#3b9dff)}.swatch[data-theme=violet_lumen]{background:linear-gradient(135deg,#b072ff,#ff6bc1)}.swatch[data-theme=midnight_rose]{background:linear-gradient(135deg,#ff7a9c,#ffb27a)}
+    .kit-card{transition:transform .22s var(--ease),box-shadow .22s var(--ease),border-color .22s var(--ease);cursor:default}
+    .kit-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.45),0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent)}
+    .kit-card:hover .kit-gift{transform:scale(1.12) rotate(-6deg);box-shadow:0 0 26px color-mix(in srgb,var(--accent) 45%,transparent)}
+    .kit-card:hover .kit-claim{filter:brightness(1.12)}
+    .kit-gift{transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+    .kit-claim{transition:filter .2s var(--ease),transform .15s var(--ease)}
+    .kit-claim:active{transform:scale(.97)}
     .toggle{width:42px;height:23px;padding:2px;border:0;border-radius:20px;background:rgba(255,255,255,.13);cursor:pointer}.toggle i{display:block;width:19px;height:19px;border-radius:50%;background:var(--muted);transition:.2s var(--ease)}.toggle.on{background:color-mix(in srgb,var(--accent) 26%,transparent)}.toggle.on i{transform:translateX(19px);background:var(--accent)}
     .footer{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:0 15px;border-top:1px solid var(--line);color:var(--muted);font-size:9px}.footer-build{margin-right:auto}.key{padding:2px 6px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.04);color:var(--text)}
     .toast{position:fixed;left:50%;bottom:32px;z-index:20;min-width:230px;padding:11px 14px;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));border-radius:12px;background:#111a23;color:var(--text);font-size:11px;box-shadow:0 15px 45px rgba(0,0,0,.45);transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.22s var(--ease)}.toast.show{transform:translate(-50%,0);opacity:1}
@@ -1590,10 +1597,10 @@ try {
     const cards = kits.map((k, cardIndex) => {
       const krc = (RANK_META["rank." + k.id] || {}).color;
       const accent = krc || "var(--accent)";
-      return `<article class="card" style="--i:${cardIndex};position:relative;overflow:hidden;display:flex;flex-direction:column;padding:0;min-height:150px;border-color:${accent}44">
+      return `<article class="card kit-card" style="--i:${cardIndex};position:relative;overflow:hidden;display:flex;flex-direction:column;padding:0;min-height:150px;border-color:${accent}44">
         <div style="height:4px;background:linear-gradient(90deg,${accent},transparent)"></div>
         <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px 8px;flex:1">
-          <div style="width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:12px;font-size:20px;background:color-mix(in srgb,${accent} 16%,transparent);box-shadow:0 0 18px color-mix(in srgb,${accent} 22%,transparent)">🎁</div>
+          <div class="kit-gift" style="width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:12px;font-size:20px;background:color-mix(in srgb,${accent} 16%,transparent)">🎁</div>
           <div style="flex:1;min-width:0">
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
               <h3 style="font-size:13.5px;margin:0;font-weight:750;">${esc(k.title)}</h3>
@@ -1603,13 +1610,13 @@ try {
           </div>
         </div>
         <div style="padding:0 16px 14px">
-          <button class="button primary claim-kit" data-kit="${esc(k.id)}" style="width:100%;background:linear-gradient(90deg,${accent},color-mix(in srgb,${accent} 60%,var(--accent2)));color:#08131a;font-weight:700;">Забрать набор</button>
+          <button class="button primary claim-kit kit-claim" data-kit="${esc(k.id)}" style="width:100%;background:linear-gradient(90deg,${accent},color-mix(in srgb,${accent} 60%,var(--accent2)));color:#08131a;font-weight:700;">Забрать набор</button>
         </div>
       </article>`;
     }).join("");
 
     return `<div class="view">${title("Киты", "Снаряжение и ресурсы — забирай вовремя")}
-      <div class="store-grid" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;padding-bottom:60px;">${cards || '<div class="empty">Наборов нет</div>'}</div>
+      <div class="store-grid stagger" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;padding-bottom:60px;">${cards || '<div class="empty">Наборов нет</div>'}</div>
     </div>`;
   }
 
