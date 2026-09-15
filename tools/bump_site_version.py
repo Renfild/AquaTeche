@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-VERSION = "20260915_tables_mobile_v6"
+VERSION = "20260915_art_v7"
 root = Path("docs")
 count = 0
 for p in root.rglob("*.html"):

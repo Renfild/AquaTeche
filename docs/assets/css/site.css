@@ -10126,7 +10126,7 @@ body[data-page="cases"] .container {
   position: absolute;
   left: 3%;
   right: 3%;
-  top: 14px;
+  top: 16px;
   height: 2px;
   border-radius: 2px;
   background: linear-gradient(90deg, rgba(47, 224, 192, 0.12), rgba(47, 224, 192, 0.45), rgba(47, 224, 192, 0.12));
@@ -10141,8 +10141,8 @@ body[data-page="cases"] .container {
 }
 
 .rod-ladder-track img {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   image-rendering: pixelated;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
   transition: transform 0.18s ease;
@@ -10171,8 +10171,8 @@ body[data-page="cases"] .container {
 }
 
 .feature-card-icon {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   image-rendering: pixelated;
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.55));
 }
