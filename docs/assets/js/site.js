@@ -467,7 +467,7 @@
       user
         ? `<div class="header-balances">
             <a href="profile.html" class="header-rubles" title="Рублёвый баланс: ${Number(user.rub_balance || 0).toLocaleString("ru-RU")} ₽">${Number(user.rub_balance || 0).toLocaleString("ru-RU")} ₽</a>
-            <a href="profile.html#overview" class="header-coins" title="АкваМонеты: ${Number(user.coins || 0).toLocaleString("ru-RU")}"><span class="aqua-coin-badge">${Number(user.coins || 0).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></span></a>
+            <a href="profile.html#overview" class="header-coins" title="АкваМонеты: ${Number(user.coins || 0).toLocaleString("ru-RU")}"><span class="aqua-coin-badge">${Number(user.coins || 0).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon" alt="AquaCoins" /></span></a>
           </div>`
         : "";
     const account = user
@@ -728,14 +728,49 @@
       });
     }
 
-    // Spotlight cursor tracking on cards
+    // Spotlight cursor tracking on cards (rAF-throttled, rect cached per hover)
+    let spotlightScrollTick = 0;
+    window.addEventListener(
+      "scroll",
+      () => {
+        spotlightScrollTick += 1;
+      },
+      { passive: true }
+    );
     document.querySelectorAll(".tile, .catalog-card, .join-panel, .loot-block, .card").forEach((card) => {
-      card.addEventListener("pointermove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty("--mouse-x", `${x}px`);
-        card.style.setProperty("--mouse-y", `${y}px`);
+      let rect = null;
+      let rectTick = -1;
+      let px = 0;
+      let py = 0;
+      let queued = false;
+      const apply = () => {
+        queued = false;
+        card.style.setProperty("--mouse-x", `${px}px`);
+        card.style.setProperty("--mouse-y", `${py}px`);
+      };
+      card.addEventListener("pointerenter", () => {
+        rect = card.getBoundingClientRect();
+        rectTick = spotlightScrollTick;
+      });
+      card.addEventListener(
+        "pointermove",
+        (e) => {
+          if (!rect || rectTick !== spotlightScrollTick) {
+            rect = card.getBoundingClientRect();
+            rectTick = spotlightScrollTick;
+          }
+          px = e.clientX - rect.left;
+          py = e.clientY - rect.top;
+          if (!queued) {
+            queued = true;
+            requestAnimationFrame(apply);
+          }
+        },
+        { passive: true }
+      );
+      card.addEventListener("pointerleave", () => {
+        rect = null;
+        rectTick = -1;
       });
     });
 
@@ -845,7 +880,7 @@
         const playtime = p.playtime || `${hours} ч`;
         const stat =
           mode === "coins"
-            ? `<span class="aqua-coin-badge">${Number(p.coins || 0).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></span>`
+            ? `<span class="aqua-coin-badge">${Number(p.coins || 0).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon" alt="AquaCoins" /></span>`
             : mode === "likes"
               ? `${p.likes || 0} ❤`
               : mode === "fish"
@@ -902,7 +937,7 @@
     const formatStat = (p, tab) => {
       if (tab === "fish") return `${Number(p.fish || 0).toLocaleString("ru-RU")} рыб`;
       if (tab === "playtime") return `${p.playtime_hours || parseInt(p.playtime || "0", 10) || 0} ч`;
-      if (tab === "coins") return `${Number(p.coins || 0).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon" alt="">`;
+      if (tab === "coins") return `${Number(p.coins || 0).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon" alt="">`;
       return `${p.likes || 0} ❤`;
     };
 
@@ -1269,7 +1304,7 @@
             <div class="lk-balance-card card-coins">
               <div class="card-top-row">
                 <span class="currency-label">АкваМонеты</span>
-                <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" />
+                <img src="assets/images/coin.png" class="aqua-coin-icon" alt="AquaCoins" />
               </div>
               <strong class="aqua-coin-badge">${Number(profile.coins || 0).toLocaleString("ru-RU")}</strong>
               ${mine ? `<div class="card-actions"><a class="btn btn-primary" href="cases.html" style="background:linear-gradient(135deg,#ffd875,#f59e0b);color:#091924;border:none;padding:0.35rem 0.75rem;font-size:0.82rem;font-weight:700">Кейсы F4</a><button class="btn btn-secondary" type="button" id="lkBuyCoinsBtn" style="padding:0.35rem 0.75rem;font-size:0.82rem">Купить</button></div>` : `<div class="card-actions"><a class="btn btn-secondary" href="cases.html" style="padding:0.35rem 0.75rem;font-size:0.82rem">Кейсы</a></div>`}
@@ -1291,7 +1326,7 @@
               <h2>Обзор</h2>
               <div class="stats-row">
                 <div class="stat-card"><strong>${rubBalance.toLocaleString("ru-RU")} ₽</strong><span>рублёвый баланс</span></div>
-                <div class="stat-card"><strong class="aqua-coin-badge">${Number(profile.coins || 0).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></strong><span>аква-монет в игре</span></div>
+                <div class="stat-card"><strong class="aqua-coin-badge">${Number(profile.coins || 0).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon" alt="AquaCoins" /></strong><span>аква-монет в игре</span></div>
                 <div class="stat-card"><strong>${Number(profile.fish || 0).toLocaleString("ru-RU")}</strong><span>рыбы поймано</span></div>
                 <div class="stat-card"><strong>${esc(profile.playtime || (profile.playtime_hours || 0) + " ч")}</strong><span>время в игре</span></div>
                 <div class="stat-card"><strong>${profile.views || 0}</strong><span>просмотры</span></div>
@@ -2284,9 +2319,9 @@
       modal.className = "loot-modal-overlay";
       document.body.appendChild(modal);
     }
-    const iconSrc = CASE_ICONS[c.slug] || CASE_ICONS.starter || "assets/logo.png";
+    const iconSrc = CASE_ICONS[c.slug] || CASE_ICONS.starter || "assets/images/cases/starter.png";
     const rows = [...c.loot].sort((a, b) => b.weight - a.weight);
-    const coinSvg = '<img src="assets/logo.png" class="aqua-coin-icon coin-ico" alt="">';
+    const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
     const spinSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 6v6l4 2"/></svg>';
 
     modal.innerHTML = `
@@ -2379,7 +2414,7 @@
     return `<article class="case-card reveal">
       <div class="case-card-head">
         <span class="rarity-badge rarity-${esc(c.rarity)}">${RARITY_LABEL[c.rarity] || esc(c.rarity)}</span>
-        <span class="case-cost">${Number(c.cost).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon coin-ico" alt=""></span>
+        <span class="case-cost">${Number(c.cost).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt=""></span>
       </div>
       <h3>${esc(c.title)}</h3>
       <ul class="case-top">
@@ -2867,7 +2902,7 @@
 
   // ─── BENTO DASHBOARD «ЖИВОЙ ОКЕАН» (NO EMOJIS, CLEAN SVGS) ─────────────────
   async function initBentoDashboard() {
-    const coinSvg = '<img src="assets/logo.png" class="aqua-coin-icon coin-ico" alt="">';
+    const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
     const fishSvg = '<svg class="trend-fish-ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12c3.5-3.5 7.5-3.5 11.5 0-4 3.5-8 3.5-11.5 0z"/><circle cx="14.5" cy="11" r="1" fill="currentColor"/><path d="M18 12l3-2.5v5l-3-2.5z"/></svg>';
 
     // Parallel fetch
@@ -2969,7 +3004,7 @@
           `<div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.07)">
             <span style="font-size:0.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(l.label)}${l.count > 1 ? ` ×${l.count}` : ""}</span>
             <span style="display:flex;align-items:center;gap:0.6rem;flex-shrink:0">
-              <b style="color:var(--gold);font-size:0.92rem">${Number(l.price).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon coin-ico" alt=""></b>
+              <b style="color:var(--gold);font-size:0.92rem">${Number(l.price).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt=""></b>
               <small style="color:var(--muted)">${esc(l.seller)}</small>
             </span>
           </div>`).join("");
@@ -3029,7 +3064,7 @@
               <td>${esc(lot.label || lot.item_id || "предмет")}</td>
               <td>${esc(lot.count || 1)}</td>
               <td>${esc(lot.seller || "—")}</td>
-              <td class="price">${Number(lot.price || 0).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon coin-ico" alt=""></td>
+              <td class="price">${Number(lot.price || 0).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt=""></td>
             </tr>`
           )
           .join("")}
@@ -4045,7 +4080,7 @@
                   <span class="apple-badge-save" style="font-size:0.62rem;padding:0.1rem 0.38rem">${p.badge}</span>
                   <span style="font-size:0.85rem;font-weight:700;color:#f8fafc;white-space:nowrap">${p.price} ₽</span>
                 </div>
-                <strong class="aqua-coin-badge" style="color:#ffd875;font-size:1.05rem;display:inline-flex;align-items:center;gap:0.3rem">${Number(p.coins).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></strong>
+                <strong class="aqua-coin-badge" style="color:#ffd875;font-size:1.05rem;display:inline-flex;align-items:center;gap:0.3rem">${Number(p.coins).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon" alt="AquaCoins" /></strong>
               </div>
             `).join("")}
           </div>
@@ -4153,7 +4188,7 @@
           <div class="apple-modal-total-card">
             <div>
               <div class="apple-modal-total-label">К зачислению:</div>
-              <small class="aqua-coin-badge" style="color:#ffd875;font-weight:700;display:inline-flex;align-items:center;gap:0.25rem">${Number(pack.coins).toLocaleString("ru-RU")} <img src="assets/logo.png" class="aqua-coin-icon" alt="AquaCoins" /></small>
+              <small class="aqua-coin-badge" style="color:#ffd875;font-weight:700;display:inline-flex;align-items:center;gap:0.25rem">${Number(pack.coins).toLocaleString("ru-RU")} <img src="assets/images/coin.png" class="aqua-coin-icon" alt="AquaCoins" /></small>
             </div>
             <div class="apple-modal-total-price">${pack.price} ₽</div>
           </div>
@@ -4615,7 +4650,7 @@
 
     window.__liveCases = casesList;
 
-    const coinSvg = '<img src="assets/logo.png" class="aqua-coin-icon coin-ico" alt="">';
+    const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
 
     let activeFilter = "all";
 
@@ -4631,7 +4666,7 @@
       root.innerHTML = filtered.map((c) => {
         const actualIndex = casesList.findIndex((item) => item.slug === c.slug);
         const tierNum = actualIndex + 1;
-        const iconSrc = CASE_ICONS[c.slug] || CASE_ICONS.starter || "assets/logo.png";
+        const iconSrc = CASE_ICONS[c.slug] || CASE_ICONS.starter || "assets/images/cases/starter.png";
         
         // Extract top 3 loot rewards for preview chips
         const topLoot = c.loot && c.loot.length
@@ -4746,7 +4781,7 @@
     const u = getUser();
     const isAuthed = !!(u && u.nick);
     const userCoins = u && u.coins != null ? Number(u.coins) : 0;
-    const coinSvg = '<img src="assets/logo.png" class="aqua-coin-icon coin-ico" alt="">';
+    const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
     const spinSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 6v6l4 2"/></svg>';
 
     // Build 60 tiles for initial drum display
@@ -5051,7 +5086,7 @@
 
       if (countEl) countEl.textContent = `${filtered.length} лотов`;
 
-      const coinSvg = '<img src="assets/logo.png" class="aqua-coin-icon coin-ico" alt="">';
+      const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
 
       if (!filtered.length) {
         grid.innerHTML = '<p class="muted-line" style="grid-column:1/-1;text-align:center;padding:3rem">По заданным фильтрам лотов не найдено. Выстави свой предмет командой <code>/ah sell</code> в игре!</p>';

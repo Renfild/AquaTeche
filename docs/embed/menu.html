@@ -198,7 +198,7 @@
         <img class="player-head-img" id="head-img" src="/assets/images/avatar_default.png" alt="Avatar" />
         <span class="player-nick" id="player-nick">Renfild</span>
       </div>
-      <div class="player-balance" id="player-bal">0 <img src="/assets/logo.png" alt=""></div>
+      <div class="player-balance" id="player-bal">0 <img src="/assets/images/coin.png" alt=""></div>
     </div>
 
     <div class="menu-grid">
@@ -260,7 +260,7 @@
       .then(data => {
         if (data && data.ok && data.profile) {
           const coins = Number(data.profile.coins || 0).toLocaleString('ru-RU');
-          document.getElementById('player-bal').innerHTML = `${coins} <img src="/assets/logo.png" alt="" width="14" height="14" style="vertical-align:-2px">`;
+          document.getElementById('player-bal').innerHTML = `${coins} <img src="/assets/images/coin.png" alt="" width="14" height="14" style="vertical-align:-2px">`;
         }
       })
       .catch(() => {});

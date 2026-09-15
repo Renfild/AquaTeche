@@ -1,4 +1,4 @@
-const CACHE_NAME = "aquatech-v20260915-copy";
+const CACHE_NAME = "aquatech-v20260915-perf2";
 const PRECACHE_ASSETS = [
   "/",
   "/index.html",
@@ -30,21 +30,44 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+const STALE_WHILE_REVALIDATE =
+  /\.(?:css|js|woff2?|png|jpe?g|webp|svg|ico|gif)$/;
+
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
-  // Skip APIs, downloads, and non-GET requests
+  // Skip APIs, downloads, cross-origin and non-GET requests
   if (
     event.request.method !== "GET" ||
+    url.origin !== self.location.origin ||
     url.pathname.startsWith("/api/") ||
     url.pathname.startsWith("/dl/")
   ) {
     return;
   }
 
+  // Versioned static assets: serve from cache instantly, refresh in background.
+  if (STALE_WHILE_REVALIDATE.test(url.pathname)) {
+    event.respondWith(
+      caches.match(event.request).then((cached) => {
+        const network = fetch(event.request)
+          .then((response) => {
+            if (response && response.status === 200 && response.type === "basic") {
+              const copy = response.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+            }
+            return response;
+          })
+          .catch(() => cached);
+        return cached || network;
+      })
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cached) => {
-      // Network-first for dynamic content, fallback to cache
+      // Network-first for HTML and JSON (site copy, versions, news)
       return fetch(event.request)
         .then((response) => {
           if (response && response.status === 200 && response.type === "basic") {
