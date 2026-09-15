@@ -1,22 +1,44 @@
 {
-  "from_version": "2.9.374",
-  "to_version": "2.9.375",
-  "added": [],
+  "from_version": "2.9.375",
+  "to_version": "2.9.377",
+  "added": [
+    {
+      "path": "mods/cloth-config-11.1.136-forge.jar",
+      "md5": "ca5de5acbcb4a30c010aa6953bd7ef53",
+      "size": 1181413,
+      "url": "https://aquateche.store/pack/mods/cloth-config-11.1.136-forge.jar",
+      "asset": "cloth-config-11.1.136-forge.jar"
+    },
+    {
+      "path": "mods/megacells-forge-2.4.6-1.20.1.jar",
+      "md5": "c2fbcaaa3c810162602ad709ad31a792",
+      "size": 387196,
+      "url": "https://aquateche.store/pack/mods/megacells-forge-2.4.6-1.20.1.jar",
+      "asset": "megacells-forge-2.4.6-1.20.1.jar"
+    }
+  ],
   "changed": [
     {
-      "path": "mods/aquatech_ui-1.0.93.jar",
-      "md5": "c945da9afbc14738021400f811dd4f51",
-      "size": 2944761,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.93.jar",
-      "asset": "aquatech_ui-1.0.93.jar"
+      "path": "config/aqualumen/hub.html",
+      "md5": "46c2d94b2d9fa4a15c03ab0133e50602",
+      "size": 1003663,
+      "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
+      "asset": "config__aqualumen__hub.html"
+    },
+    {
+      "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
+      "md5": "a12a7a11ab369aaeb4e54b4e1b614ddf",
+      "size": 2685187,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     }
   ],
   "removed": [],
   "stats": {
-    "added": 0,
-    "changed": 1,
+    "added": 2,
+    "changed": 2,
     "removed": 0,
-    "unchanged": 144,
-    "download_bytes": 2944761
+    "unchanged": 143,
+    "download_bytes": 5257459
   }
 }

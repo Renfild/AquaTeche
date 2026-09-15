@@ -486,7 +486,7 @@
     mount.innerHTML = `
       <header class="site-header">
         <div class="container header-inner">
-          <a class="brand" href="index.html"><img src="assets/logo.png?v=2" alt="" width="28" height="28" /><span>AquaTech</span></a>
+          <a class="brand" href="index.html"><img src="assets/images/logo_128.png" alt="" width="28" height="28" /><span>AquaTech</span></a>
           <nav class="nav-desktop" aria-label="Основное">
             ${primary}
             <details class="nav-more">
@@ -649,6 +649,36 @@
     updateAuthLinks();
     refreshOnlinePill();
     setInterval(refreshOnlinePill, 30000);
+
+    const versionSlots = document.querySelectorAll("[data-launcher-version]");
+    const packVersionSlots = document.querySelectorAll("[data-pack-version]");
+    const packModSlots = document.querySelectorAll("[data-pack-mods]");
+    if (versionSlots.length) {
+      fetch("/bootstrap.json")
+        .then((r) => r.json())
+        .then((b) => {
+          versionSlots.forEach((el) => {
+            el.textContent = b.version || "";
+          });
+        })
+        .catch(() => {});
+    }
+    if (packVersionSlots.length || packModSlots.length) {
+      fetch("/pack/manifest.json")
+        .then((r) => r.json())
+        .then((m) => {
+          packVersionSlots.forEach((el) => {
+            el.textContent = m.version || "";
+          });
+          if (packModSlots.length && Array.isArray(m.files)) {
+            const jars = m.files.filter((f) => /^mods\/.*\.jar$/i.test(f.path || ""));
+            packModSlots.forEach((el) => {
+              el.textContent = jars.length || "";
+            });
+          }
+        })
+        .catch(() => {});
+    }
 
     // Back to Top button
     const btt = document.getElementById("backToTop");

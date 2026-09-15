@@ -60,6 +60,11 @@ if aquatech_machines_jar:
     sftp.put(str(aquatech_machines_jar), f"mods/{aquatech_machines_jar.name}")
     print(f"  Uploaded {aquatech_machines_jar.name}")
 
+for extra in (ROOT / "mods/megacells-forge-2.4.6-1.20.1.jar", ROOT / "mods/cloth-config-11.1.136-forge.jar"):
+    if extra.is_file():
+        sftp.put(str(extra), f"mods/{extra.name}")
+        print(f"  Uploaded {extra.name}")
+
 sftp.put(str(ROOT / "server/config/aqualumen/cases.json"), "config/aqualumen/cases.json")
 print("  Uploaded config/aqualumen/cases.json")
 if (ROOT / "server/config/aqualumen/server_shop.json").is_file():
