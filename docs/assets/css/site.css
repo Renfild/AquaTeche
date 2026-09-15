@@ -63,6 +63,7 @@
   --fill: rgba(255, 255, 255, 0.06);
   --aqua: #2dd4e0;
   --aqua-2: #7ee9f2;
+  --accent: #2fe0c0;
   --gold: #f0c14a;
   --gold-2: #ffe29a;
   --ok: #34d399;
@@ -1957,11 +1958,6 @@ body.embed .embed-stats span {
   font-size: .75rem;
 }
 
-
-
-border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
 /* 5. Rank Badges Suite */
 .rank-badge {
   display: inline-flex;
@@ -2802,6 +2798,10 @@ img.pixelated,
   gap: 2rem;
 }
 
+.loot-stack > * {
+  min-width: 0;
+}
+
 .loot-block {
   background: rgba(10, 22, 40, 0.7);
   backdrop-filter: blur(16px);
@@ -2873,6 +2873,7 @@ img.pixelated,
   text-transform: uppercase;
   font-size: 0.78rem;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .loot-table td {
@@ -2889,6 +2890,22 @@ img.pixelated,
   font-family: var(--font-mono, monospace);
   font-weight: 700;
   color: #5ce1ff;
+}
+
+@media (max-width: 640px) {
+  .loot-block {
+    padding: 1.15rem;
+    border-radius: 14px;
+  }
+
+  .loot-table {
+    font-size: 0.9rem;
+  }
+
+  .loot-table th,
+  .loot-table td {
+    padding: 0.6rem 0.7rem;
+  }
 }
 
 .loot-rules {
@@ -3696,8 +3713,8 @@ body[data-page="start"] #main {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 3rem;
+  justify-content: center;
+  gap: clamp(2.5rem, 6vh, 4rem);
   padding: clamp(3rem, 8vh, 6.5rem) 0 clamp(2.25rem, 5vh, 4rem);
 }
 
@@ -5206,7 +5223,7 @@ body[data-page="profile"] .page-hero {
   margin-top: 1rem;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1100px) {
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -8472,7 +8489,7 @@ body[data-page="cases"] .container {
 .nav-more-panel {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(8, 16, 24, 0.78);
+  background: rgba(7, 16, 24, 0.96);
   backdrop-filter: blur(24px) saturate(1.4);
   -webkit-backdrop-filter: blur(24px) saturate(1.4);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
@@ -9550,6 +9567,10 @@ body[data-page="cases"] .container {
 
 .hall-segment-wrap {
   display: inline-flex;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
   padding: 4px;
   background: rgba(10, 24, 38, 0.8);
   backdrop-filter: blur(12px);
@@ -9560,7 +9581,12 @@ body[data-page="cases"] .container {
   margin-bottom: 2rem;
 }
 
+.hall-segment-wrap::-webkit-scrollbar {
+  display: none;
+}
+
 .hall-segment-btn {
+  flex: 0 0 auto;
   border: none;
   background: transparent;
   color: #94a3b8;
@@ -9859,3 +9885,204 @@ body[data-page="cases"] .container {
 .store-rank-card{border-top:2px solid var(--rc,rgba(255,255,255,.12))}
 .store-rank-card:hover{border-color:var(--rc,rgba(255,255,255,.25))}
 .store-price-num,.aqua-coin-badge,.balance-num{font-variant-numeric:tabular-nums}
+
+/* ==========================================================================
+   HOME PAGE LAYOUT LAYER
+   Rules for the section/feature/news classes used by index.html only.
+   ========================================================================== */
+
+.bento-section {
+  padding-top: 2rem;
+}
+
+.section-head-split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+}
+
+.section-head-split h2 {
+  margin: 0.35rem 0 0.55rem;
+  font-size: clamp(1.7rem, 2.4vw, 2.05rem);
+}
+
+.section-head-split p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--muted);
+}
+
+.bento-head-badge {
+  display: flex;
+  align-items: center;
+}
+
+.bento-link {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--accent, #2fe0c0);
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.bento-link:hover {
+  color: var(--aqua-2);
+}
+
+.bento-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(47, 224, 192, 0.08);
+  border: 1px solid rgba(47, 224, 192, 0.22);
+}
+
+.tag-timer {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.hero-meta {
+  margin-top: 1.15rem;
+}
+
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(10, 32, 48, 0.6);
+  border: 1px solid rgba(47, 224, 192, 0.22);
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.ping-ms {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.feature-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 900px) {
+  .feature-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: rgba(10, 28, 44, 0.55);
+  border: 1px solid rgba(47, 224, 192, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(47, 224, 192, 0.5), transparent);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(47, 224, 192, 0.4);
+}
+
+.feature-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feature-card h3 {
+  margin: 0;
+  font-size: 1.12rem;
+}
+
+.feature-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.news-grid-home {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 860px) {
+  .news-grid-home {
+    grid-template-columns: 1fr;
+  }
+}
+
+.news-grid-home .news-item {
+  position: relative;
+  padding: 1.25rem 1.35rem;
+  border-radius: 16px;
+  border-bottom-color: transparent;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.news-grid-home .news-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(47, 224, 192, 0.16);
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+
+.news-grid-home .news-item:hover {
+  background: rgba(47, 224, 192, 0.06);
+}
+
+.news-grid-home .news-item:hover::before {
+  border-color: rgba(47, 224, 192, 0.4);
+}
+
+.news-grid-home .news-item p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.start-card-action {
+  margin-top: 1.5rem;
+}

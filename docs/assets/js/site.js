@@ -1828,7 +1828,7 @@
           </div>
           <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.08)">
             <form id="profile-search-form" style="display:flex;gap:0.5rem;max-width:320px;margin:0 auto">
-              <input type="text" id="profile-search-nick" placeholder="Ник игрока..." style="flex:1;padding:0.5rem 0.75rem;border-radius:8px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.15);color:#fff" required>
+              <input type="text" id="profile-search-nick" placeholder="Ник игрока..." style="flex:1;min-width:0;padding:0.5rem 0.75rem;border-radius:8px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.15);color:#fff" required>
               <button class="btn btn-ghost" type="submit">Открыть</button>
             </form>
           </div>

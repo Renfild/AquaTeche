@@ -1,4 +1,4 @@
-const CACHE_NAME = "aquatech-v20260906-dlfix";
+const CACHE_NAME = "aquatech-v20260915-tables-mobile";
 const PRECACHE_ASSETS = [
   "/",
   "/index.html",
