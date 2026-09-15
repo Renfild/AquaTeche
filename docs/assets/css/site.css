@@ -739,9 +739,9 @@ button:focus-visible,
   gap: 0.5rem;
   max-width: 100%;
   color: var(--aqua-2);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 0 0 1rem;
   line-height: 1.35;
@@ -3935,7 +3935,7 @@ body[data-page="start"] #main {
 
 .start-card-content h3 {
   font-family: var(--display);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: #fff;
   margin-bottom: 0.75rem;
@@ -5315,7 +5315,7 @@ body[data-page="profile"] .page-hero {
 }
 
 .bento-title-group h3 {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   margin: 0;
   font-weight: 700;
   color: #f8fafc;
@@ -6292,7 +6292,7 @@ body[data-page="profile"] .page-hero {
 
 .showcase-title {
   margin: 0 0 0.45rem;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #f8fafc;
 }
@@ -6436,51 +6436,6 @@ body[data-page="profile"] .page-hero {
   font-size: 0.95rem;
   color: var(--accent, #2fe0c0);
   white-space: nowrap;
-}
-
-/* ==========================================================================
-   ELEGANT SECTION DIVIDERS (CLEAR SEPARATION OF SECTIONS)
-   ========================================================================== */
-.section-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  margin: 4rem 0 3.5rem;
-  opacity: 0.75;
-}
-
-.divider-line {
-  flex: 1;
-  max-width: 380px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(47, 224, 192, 0.35), transparent);
-}
-
-.divider-core {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.divider-diamond {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  background: var(--accent, #2fe0c0);
-  transform: rotate(45deg);
-  box-shadow: 0 0 10px var(--accent, #2fe0c0);
-}
-
-/* Give features and news generous breathing space */
-.feature-section-boxed {
-  padding: 3.5rem 0;
-  position: relative;
-}
-
-.news-section-boxed {
-  padding: 3.5rem 0;
-  position: relative;
 }
 
 /* ==========================================================================
@@ -9891,8 +9846,8 @@ body[data-page="cases"] .container {
    Rules for the section/feature/news classes used by index.html only.
    ========================================================================== */
 
-.bento-section {
-  padding-top: 2rem;
+.home-section {
+  padding: 3.25rem 0;
 }
 
 .section-head-split {
@@ -9905,7 +9860,11 @@ body[data-page="cases"] .container {
 
 .section-head-split h2 {
   margin: 0.35rem 0 0.55rem;
-  font-size: clamp(1.7rem, 2.4vw, 2.05rem);
+  font-family: var(--display);
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
 .section-head-split p {

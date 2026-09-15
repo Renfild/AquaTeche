@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-VERSION = "20260915_art_v7"
+VERSION = "20260915_copy_v8"
 root = Path("docs")
 count = 0
 for p in root.rglob("*.html"):
