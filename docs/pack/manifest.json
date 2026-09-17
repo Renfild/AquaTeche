@@ -1,5 +1,5 @@
 {
-  "version": "2.9.378",
+  "version": "2.9.379",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-3.apexnodes.xyz",
@@ -36,22 +36,22 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "f9f887152067e690dde8adcd19994080",
-      "size": 2685467,
+      "md5": "1902193468397da808d59ffe4acedb44",
+      "size": 2694884,
       "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
     },
     {
       "path": "mods/aquatech_machines-1.0.9.jar",
-      "md5": "a756df2cbf0dfaad2f8d38258514ada0",
+      "md5": "292933da58cc41907443e91114233ee2",
       "size": 234187,
       "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.9.jar",
       "asset": "aquatech_machines-1.0.9.jar"
     },
     {
       "path": "mods/aquatech_ui-1.0.93.jar",
-      "md5": "c945da9afbc14738021400f811dd4f51",
-      "size": 2944761,
+      "md5": "d176329d1d466c57b54324e5ebce9a03",
+      "size": 2960608,
       "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.93.jar",
       "asset": "aquatech_ui-1.0.93.jar"
     },
@@ -533,9 +533,9 @@
     },
     {
       "path": "config/aqualumen/cases.json",
-      "md5": "11a7d8be68d64836b40b4dbb01e2e347",
-      "size": 29513,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__aqualumen__cases.json",
+      "md5": "053fb9e9fa0ac76a1d5be03f5bb31001",
+      "size": 32230,
+      "url": "https://aquateche.store/pack/config/aqualumen/cases.json",
       "asset": "config__aqualumen__cases.json"
     },
     {
@@ -589,8 +589,8 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "ca93fb94d03066d1934d4ea516fb2d05",
-      "size": 992939,
+      "md5": "fa225fd2e84773e3faada6a527bb5309",
+      "size": 1004308,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
