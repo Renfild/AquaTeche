@@ -1,9 +1,9 @@
 {
-  "version": "2.9.91",
+  "version": "2.9.92",
   "launcher_zip": "https://aquateche.store/dl/AquaTechLauncher.zip",
   "launcher_exe": "AquaTechLauncher.exe",
   "release_base": "https://aquateche.store/dl",
-  "launcher_zip_md5": "40f7052d3a0749a1c869cd13eb755a5e",
-  "launcher_zip_size": 41566329,
+  "launcher_zip_md5": "0757a7544f3eb6b030cbe6aecbe03480",
+  "launcher_zip_size": 41569563,
   "pack_cdn": "https://aquateche.store/pack"
 }

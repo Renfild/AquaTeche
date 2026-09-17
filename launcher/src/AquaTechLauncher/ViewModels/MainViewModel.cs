@@ -64,6 +64,7 @@ public partial class MainViewModel : ViewModelBase
         catch { }
         VersionLabel = $"Лаунчер v{LauncherConstants.Version} · Сборка v{packVer}";
         PackVersion = packVer;
+        OnPropertyChanged(nameof(PackMeta));
     }
 
     [ObservableProperty] private string _page = "play";
@@ -105,11 +106,12 @@ public partial class MainViewModel : ViewModelBase
     public ObservableCollection<LogLine> LogLines { get; } = [];
     public ObservableCollection<NewsItem> News { get; } = [];
 
-    public bool IsPlayPage => Page == "play";
-    public bool IsNewsPage => Page == "news";
+    public bool IsPlayPage => Page == "play";    public bool IsNewsPage => Page == "news";
     public bool IsSettingsPage => Page == "settings";
     public bool IsLogPage => Page == "log";
     public bool LatestNewsVisible => !string.IsNullOrWhiteSpace(LatestNewsTitle);
+    public string PackMeta => $"СБОРКА {PackVersion}";
+    public string RamLabel => SelectedRamMb >= 1024 ? $"{SelectedRamMb / 1024.0:0.#} ГБ" : "—";
     public bool NewsEmpty => !NewsLoading && News.Count == 0;
     public bool IsRam4096 => SelectedRamMb == 4096;
     public bool IsRam6144 => SelectedRamMb == 6144;
@@ -156,6 +158,7 @@ public partial class MainViewModel : ViewModelBase
         OnPropertyChanged(nameof(IsRam8192));
         OnPropertyChanged(nameof(IsRam12288));
         OnPropertyChanged(nameof(IsRam16384));
+        OnPropertyChanged(nameof(RamLabel));
     }
 
     partial void OnAuthCheckingChanged(bool value) => OnPropertyChanged(nameof(CanEditAuth));
@@ -737,7 +740,7 @@ public partial class MainViewModel : ViewModelBase
         if (_tcpOnline == true)
         {
             ServerStatus = _tcpMs is null ? "Онлайн" : $"Онлайн · {_tcpMs} мс";
-            ServerDot = Brush("#22C55E");
+            ServerDot = Brush("#50E8F4");
             OnlinePlayersText = _onlinePlayers is not null
                 ? $"Игроков онлайн: {_onlinePlayers} / {(_maxPlayers ?? 100)}"
                 : (_tcpMs is null ? "Сервер онлайн" : $"Онлайн · {_tcpMs} мс");
@@ -746,14 +749,14 @@ public partial class MainViewModel : ViewModelBase
         else if (_tcpOnline == false)
         {
             ServerStatus = "Недоступен";
-            ServerDot = Brush("#EF4444");
+            ServerDot = Brush("#FF7A90");
             OnlinePlayersText = "Сервер оффлайн";
             OnlineCountLabel = "оффлайн";
         }
         else
         {
             ServerStatus = "Проверяем сервер…";
-            ServerDot = Brush("#64748B");
+            ServerDot = Brush("#61C7F8FE");
             OnlinePlayersText = "Проверяем…";
             OnlineCountLabel = "—";
         }
@@ -819,11 +822,11 @@ public partial class MainViewModel : ViewModelBase
 
     private static IBrush TagBrush(string tag) => tag switch
     {
-        "ok" => Brush("#22C55E"),
-        "err" => Brush("#EF4444"),
-        "warn" => Brush("#F59E0B"),
-        "dim" => Brush("#94A3B8"),
-        _ => Brush("#06B6D4"),
+        "ok" => Brush("#50E8F4"),
+        "err" => Brush("#FF7A90"),
+        "warn" => Brush("#FFE08A"),
+        "dim" => Brush("#61C7F8FE"),
+        _ => Brush("#50E8F4"),
     };
 }
 
