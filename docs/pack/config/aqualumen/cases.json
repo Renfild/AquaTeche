@@ -1,0 +1,1158 @@
+{
+  "cases": [
+    {
+      "id": "starter",
+      "title": "Кейс I: Первопроходец Океана",
+      "rarity": "common",
+      "costCoins": 2500,
+      "pityEvery": 12,
+      "pity": {
+        "type": "item",
+        "item": "minecraft:diamond",
+        "label": "Алмазы",
+        "min": 3,
+        "max": 6,
+        "weight": 10
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "label": "Алмазы",
+          "min": 3,
+          "max": 6,
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "item": "aquatech_ui:mesh_filter",
+          "label": "Сетчатый фильтр",
+          "min": 2,
+          "max": 4,
+          "weight": 25
+        },
+        {
+          "type": "item",
+          "item": "minecraft:iron_ingot",
+          "label": "Железные слитки",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "minecraft:copper_ingot",
+          "label": "Медные слитки",
+          "min": 24,
+          "max": 48,
+          "weight": 60
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:classicore/tin",
+          "label": "Оловянная руда",
+          "min": 16,
+          "max": 32,
+          "weight": 60
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:classicore/lead",
+          "label": "Свинцовая руда",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:crafting_elements/crafting_773_element",
+          "label": "Плавильная смесь",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:crafting_elements/crafting_772_element",
+          "label": "Плавильные кирпичи",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "minecraft:leather",
+          "label": "Кожа для мехов",
+          "min": 8,
+          "max": 16,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "minecraft:coal",
+          "label": "Каменный уголь",
+          "min": 32,
+          "max": 64,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "minecraft:redstone",
+          "label": "Редстоун",
+          "min": 24,
+          "max": 48,
+          "weight": 30
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Куш)",
+          "min": 3500,
+          "max": 6000,
+          "weight": 25
+        }
+      ]
+    },
+    {
+      "id": "smeltery",
+      "title": "Кейс II: Инженер Плавильни",
+      "rarity": "uncommon",
+      "costCoins": 10000,
+      "pityEvery": 12,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:smeltery/smeltery_controller",
+        "label": "Контроллер плавильни",
+        "min": 1,
+        "max": 1,
+        "weight": 10
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "industrialupgrade:smeltery/smeltery_controller",
+          "label": "Контроллер плавильни",
+          "min": 1,
+          "max": 1,
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:smeltery/smeltery_casing",
+          "label": "Блоки корпуса плавильни",
+          "min": 8,
+          "max": 16,
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore/titanium",
+          "label": "Титановая руда",
+          "min": 12,
+          "max": 24,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore1/beryllium",
+          "label": "Бериллиевая руда",
+          "min": 12,
+          "max": 24,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore2/strontium",
+          "label": "Стронциевая руда",
+          "min": 12,
+          "max": 24,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore2/yttrium",
+          "label": "Иттриевая руда",
+          "min": 12,
+          "max": 24,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore2/thallium",
+          "label": "Таллиевая руда",
+          "min": 12,
+          "max": 24,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:itemingots/bronze_ingot",
+          "label": "Бронзовые слитки",
+          "min": 24,
+          "max": 48,
+          "weight": 60
+        },
+        {
+          "type": "item",
+          "item": "minecraft:blaze_rod",
+          "label": "Стержни Блейза",
+          "min": 8,
+          "max": 16,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "minecraft:lava_bucket",
+          "label": "Ведро лавы для плавки",
+          "min": 2,
+          "max": 4,
+          "weight": 35
+        },
+        {
+          "type": "item",
+          "item": "minecraft:gold_ingot",
+          "label": "Золотые слитки",
+          "min": 16,
+          "max": 32,
+          "weight": 40
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Джекпот)",
+          "min": 15000,
+          "max": 25000,
+          "weight": 35
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "title": "Кейс III: Паровая Энергия",
+      "rarity": "rare",
+      "costCoins": 45000,
+      "pityEvery": 12,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:blockresource/machine",
+        "label": "Базовый корпус механизма",
+        "min": 2,
+        "max": 4,
+        "weight": 15
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "industrialupgrade:blockresource/machine",
+          "label": "Базовый корпус механизма",
+          "min": 2,
+          "max": 4,
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:crafting_elements/crafting_273_element",
+          "label": "Электронные схемы IU",
+          "min": 6,
+          "max": 12,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:itemingots/steel_ingot",
+          "label": "Стальные слитки",
+          "min": 24,
+          "max": 48,
+          "weight": 60
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:crafting_elements/crafting_271_element",
+          "label": "Резина IU",
+          "min": 32,
+          "max": 64,
+          "weight": 60
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore/silver",
+          "label": "Серебряная руда",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore/nickel",
+          "label": "Никелевая руда",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:upgrades/overclocker",
+          "label": "Ускорители (Оверклокеры)",
+          "min": 4,
+          "max": 8,
+          "weight": 35
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:battery/re_battery",
+          "label": "Аккумуляторы RE-Battery",
+          "min": 4,
+          "max": 8,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:cable/copper_cable",
+          "label": "Изолированные медные провода",
+          "min": 32,
+          "max": 64,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "aquatech_ui:speed_upgrade",
+          "label": "Модуль ускорения AquaTech",
+          "min": 1,
+          "max": 2,
+          "weight": 40
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Куш)",
+          "min": 60000,
+          "max": 100000,
+          "weight": 35
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Гемы",
+          "min": 5,
+          "max": 10,
+          "weight": 25
+        }
+      ]
+    },
+    {
+      "id": "flora",
+      "title": "Кейс IV: Ботаническая Флора",
+      "rarity": "epic",
+      "costCoins": 150000,
+      "pityEvery": 20,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:blockresource/advanced_machine",
+        "label": "Улучшенный корпус механизма",
+        "min": 2,
+        "max": 4,
+        "weight": 31
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "botania:manasteel_ingot",
+          "label": "Слитки манастали",
+          "min": 24,
+          "max": 48,
+          "weight": 61
+        },
+        {
+          "type": "item",
+          "item": "botania:mana_pearl",
+          "label": "Жемчуг маны",
+          "min": 12,
+          "max": 24,
+          "weight": 51
+        },
+        {
+          "type": "item",
+          "item": "botania:mana_diamond",
+          "label": "Алмазы маны",
+          "min": 8,
+          "max": 16,
+          "weight": 51
+        },
+        {
+          "type": "item",
+          "item": "botania:rune_water",
+          "label": "Руны Воды",
+          "min": 4,
+          "max": 8,
+          "weight": 41
+        },
+        {
+          "type": "item",
+          "item": "botania:rune_fire",
+          "label": "Руны Огня",
+          "min": 4,
+          "max": 8,
+          "weight": 41
+        },
+        {
+          "type": "item",
+          "item": "botania:rune_mana",
+          "label": "Руны Маны",
+          "min": 4,
+          "max": 8,
+          "weight": 41
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:blockresource/advanced_machine",
+          "label": "Улучшенный корпус механизма",
+          "min": 2,
+          "max": 4,
+          "weight": 31
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:crafting_elements/crafting_274_element",
+          "label": "Улучшенные микросхемы",
+          "min": 4,
+          "max": 8,
+          "weight": 41
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:battery/energy_crystal",
+          "label": "Энергетические кристаллы",
+          "min": 2,
+          "max": 4,
+          "weight": 41
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Джекпот)",
+          "min": 200000,
+          "max": 350000,
+          "weight": 51
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Гемы",
+          "min": 10,
+          "max": 20,
+          "weight": 51
+        }
+      ]
+    },
+    {
+      "id": "applied",
+      "title": "Кейс V: Цифровая МЭ-Сеть",
+      "rarity": "epic",
+      "costCoins": 450000,
+      "pityEvery": 20,
+      "pity": {
+        "type": "item",
+        "item": "ae2:logic_processor_press",
+        "label": "Комплект прессов высекателя AE2",
+        "min": 1,
+        "max": 1,
+        "weight": 10
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "ae2:logic_processor_press",
+          "label": "Комплект прессов высекателя AE2",
+          "min": 1,
+          "max": 1,
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "item": "botania:terrasteel_ingot",
+          "label": "Слитки террастали",
+          "min": 6,
+          "max": 12,
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "item": "ae2:drive",
+          "label": "МЭ накопитель AE2",
+          "min": 1,
+          "max": 2,
+          "weight": 25
+        },
+        {
+          "type": "item",
+          "item": "ae2:item_storage_cell_64k",
+          "label": "МЭ ячейка хранения 64k",
+          "min": 1,
+          "max": 2,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "ae2:item_storage_cell_16k",
+          "label": "МЭ ячейка хранения 16k",
+          "min": 2,
+          "max": 4,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "ae2:engineering_processor",
+          "label": "Инженерные процессоры",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "ae2:logic_processor",
+          "label": "Логические процессоры",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "ae2:calculation_processor",
+          "label": "Вычислительные процессоры",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "ae2:fluix_crystal",
+          "label": "Изменчивые кристаллы",
+          "min": 32,
+          "max": 64,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "botania:elementium_ingot",
+          "label": "Слитки элементия",
+          "min": 16,
+          "max": 32,
+          "weight": 45
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Куш)",
+          "min": 600000,
+          "max": 1000000,
+          "weight": 50
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Гемы",
+          "min": 20,
+          "max": 35,
+          "weight": 50
+        }
+      ]
+    },
+    {
+      "id": "abyss",
+      "title": "Кейс VI: Глубины и Радиация",
+      "rarity": "legendary",
+      "costCoins": 1200000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/spectral_solar_panel",
+        "label": "Дифракционная солнечная панель [Тир 6]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "botania:life_essence",
+          "label": "Эссенция Гайи",
+          "min": 8,
+          "max": 16,
+          "weight": 20
+        },
+        {
+          "type": "item",
+          "item": "alexscaves:uranium_rod",
+          "label": "Обогащённый Уран (AC)",
+          "min": 16,
+          "max": 32,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore/tungsten",
+          "label": "Вольфрамовая руда IU",
+          "min": 24,
+          "max": 48,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore/chromium",
+          "label": "Хромовая руда IU",
+          "min": 24,
+          "max": 48,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "alexscaves:pearl",
+          "label": "Жемчужины Бездны",
+          "min": 8,
+          "max": 16,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "alexscaves:moth_dust",
+          "label": "Пыль сияющего мотылька",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "alexscaves:dark_tatters",
+          "label": "Ткань тьмы Глубин",
+          "min": 12,
+          "max": 24,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_ingot",
+          "label": "Незеритовые слитки",
+          "min": 8,
+          "max": 16,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "aquatech_ui:speed_x4_upgrade",
+          "label": "Модуль ускорения ×4",
+          "min": 1,
+          "max": 2,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:alloyingot/inconel",
+          "label": "Сплав Инконель 718",
+          "min": 16,
+          "max": 32,
+          "weight": 40
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Джекпот)",
+          "min": 1500000,
+          "max": 2500000,
+          "weight": 40
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Гемы",
+          "min": 35,
+          "max": 60,
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:machines/spectral_solar_panel",
+          "label": "Дифракционная солнечная панель [Тир 6]",
+          "min": 1,
+          "max": 1,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "superconductor",
+      "title": "Кейс VII: Сверхпроводники",
+      "rarity": "legendary",
+      "costCoins": 2500000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/photonic_solar_panel",
+        "label": "Фотонная солнечная панель [Тир 7]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "industrialupgrade:battery/lapotron_crystal",
+          "label": "Лапотронные кристаллы",
+          "min": 4,
+          "max": 8,
+          "weight": 31
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:alloyingot/osmiridium",
+          "label": "Сплав Осмиридий",
+          "min": 16,
+          "max": 32,
+          "weight": 51
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:itemingots/adamantium",
+          "label": "Сплав Адамантий",
+          "min": 16,
+          "max": 32,
+          "weight": 51
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore/platinum",
+          "label": "Платиновая руда",
+          "min": 24,
+          "max": 48,
+          "weight": 51
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:baseore/cobalt",
+          "label": "Кобальтовая руда",
+          "min": 24,
+          "max": 48,
+          "weight": 51
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:upgrades/overclocker",
+          "label": "Ускорители (Оверклокеры)",
+          "min": 16,
+          "max": 32,
+          "weight": 51
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:crafting_elements/crafting_274_element",
+          "label": "Продвинутые схемы IU",
+          "min": 12,
+          "max": 24,
+          "weight": 51
+        },
+        {
+          "type": "item",
+          "item": "aquatech_ui:rate_x32",
+          "label": "Множитель улова ×32",
+          "min": 1,
+          "max": 2,
+          "weight": 41
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:nuclearresource/uranium_235",
+          "label": "Изотопы Уран-235",
+          "min": 8,
+          "max": 16,
+          "weight": 41
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Куш)",
+          "min": 3500000,
+          "max": 5500000,
+          "weight": 51
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Гемы",
+          "min": 50,
+          "max": 80,
+          "weight": 31
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:machines/photonic_solar_panel",
+          "label": "Фотонная солнечная панель [Тир 7]",
+          "min": 1,
+          "max": 1,
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:machines/neutronium_solar_panel",
+          "label": "Нейтронная солнечная панель [Тир 7]",
+          "min": 1,
+          "max": 1,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "singularity",
+      "title": "Кейс VIII: Матрица Сингулярности",
+      "rarity": "mythic",
+      "costCoins": 4500000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/barion_solar_panel",
+        "label": "Барионная солнечная панель [Тир 8]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "avaritia:crystal_matrix_ingot",
+          "label": "Кристальные матричные слитки",
+          "min": 8,
+          "max": 16,
+          "weight": 20
+        },
+        {
+          "type": "item",
+          "item": "extrabotany:orichalcos_ingot",
+          "label": "Слитки Орихалка ExtraBotany",
+          "min": 8,
+          "max": 16,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "extrabotany:aerialite_ingot",
+          "label": "Слитки Аэриалита ExtraBotany",
+          "min": 12,
+          "max": 24,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "extrabotany:spirit_fuel",
+          "label": "Топливо духов ExtraBotany",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "mythicbotany:alfsteel_ingot",
+          "label": "Слитки Альфстали",
+          "min": 6,
+          "max": 12,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "extendedcrafting:black_iron_ingot",
+          "label": "Слитки черного железа",
+          "min": 24,
+          "max": 48,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "extendedcrafting:luminessence",
+          "label": "Люминесценция ExtendedCrafting",
+          "min": 32,
+          "max": 64,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "minecraft:nether_star",
+          "label": "Звёзды Незера",
+          "min": 16,
+          "max": 32,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "aquatech_ui:rate_x64",
+          "label": "Множитель улова ×64",
+          "min": 1,
+          "max": 2,
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "item": "ae2:singularity",
+          "label": "Сингулярности AE2",
+          "min": 4,
+          "max": 8,
+          "weight": 40
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Джекпот)",
+          "min": 6000000,
+          "max": 10000000,
+          "weight": 40
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Гемы",
+          "min": 75,
+          "max": 120,
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:machines/barion_solar_panel",
+          "label": "Барионная солнечная панель [Тир 8]",
+          "min": 1,
+          "max": 1,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "draconic",
+      "title": "Кейс IX: Дракониевое Слияние",
+      "rarity": "mythic",
+      "costCoins": 6500000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/hadron_solar_panel",
+        "label": "Адронная солнечная панель [Тир 9]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "draconicevolution:awakened_core",
+          "label": "Пробуждённое дракониевое ядро",
+          "min": 1,
+          "max": 2,
+          "weight": 11
+        },
+        {
+          "type": "item",
+          "item": "draconicevolution:dragon_heart",
+          "label": "Сердца Дракона",
+          "min": 2,
+          "max": 4,
+          "weight": 28
+        },
+        {
+          "type": "item",
+          "item": "draconicevolution:awakened_draconium_ingot",
+          "label": "Пробуждённый драконий",
+          "min": 8,
+          "max": 16,
+          "weight": 44
+        },
+        {
+          "type": "item",
+          "item": "draconicevolution:draconium_core",
+          "label": "Дракониевые ядра",
+          "min": 8,
+          "max": 16,
+          "weight": 56
+        },
+        {
+          "type": "item",
+          "item": "draconicevolution:wyvern_core",
+          "label": "Ядра виверны",
+          "min": 4,
+          "max": 8,
+          "weight": 44
+        },
+        {
+          "type": "item",
+          "item": "draconicevolution:draconium_ingot",
+          "label": "Слитки дракония",
+          "min": 24,
+          "max": 48,
+          "weight": 67
+        },
+        {
+          "type": "item",
+          "item": "draconicevolution:wyvern_energy_core",
+          "label": "Энергетические ядра виверны",
+          "min": 2,
+          "max": 4,
+          "weight": 44
+        },
+        {
+          "type": "item",
+          "item": "draconicevolution:basic_crafting_injector",
+          "label": "Инжекторы слияния",
+          "min": 2,
+          "max": 4,
+          "weight": 44
+        },
+        {
+          "type": "item",
+          "item": "avaritia:neutron_ingot",
+          "label": "Нейтрониевые слитки",
+          "min": 8,
+          "max": 16,
+          "weight": 44
+        },
+        {
+          "type": "item",
+          "item": "minecraft:dragon_egg",
+          "label": "Яйцо дракона",
+          "min": 1,
+          "max": 2,
+          "weight": 39
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Куш)",
+          "min": 9000000,
+          "max": 14000000,
+          "weight": 44
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Гемы",
+          "min": 90,
+          "max": 150,
+          "weight": 33
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:machines/hadron_solar_panel",
+          "label": "Адронная солнечная панель [Тир 9]",
+          "min": 1,
+          "max": 1,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "infinity",
+      "title": "Кейс X: Абсолютная Бесконечность",
+      "rarity": "exotic",
+      "costCoins": 8000000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/graviton_solar_panel",
+        "label": "Гравитонная солнечная панель [Тир 10]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
+      "loot": [
+        {
+          "type": "item",
+          "item": "avaritia:infinity_ingot",
+          "label": "Слиток Бесконечности (ДЖЕКПОТ)",
+          "min": 1,
+          "max": 1,
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "item": "avaritia:extreme_crafting_table",
+          "label": "Ultimate Crafting Table (9x9)",
+          "min": 1,
+          "max": 1,
+          "weight": 25
+        },
+        {
+          "type": "item",
+          "item": "avaritia:infinity_catalyst",
+          "label": "Катализаторы Бесконечности",
+          "min": 2,
+          "max": 4,
+          "weight": 41
+        },
+        {
+          "type": "item",
+          "item": "draconicevolution:awakened_draconium_block",
+          "label": "Блоки пробуждённого дракония",
+          "min": 4,
+          "max": 8,
+          "weight": 50
+        },
+        {
+          "type": "item",
+          "item": "avaritia:neutron_ingot",
+          "label": "Нейтрониевые слитки Avaritia",
+          "min": 16,
+          "max": 32,
+          "weight": 66
+        },
+        {
+          "type": "item",
+          "item": "avaritia:crystal_matrix_ingot",
+          "label": "Кристальные матричные слитки",
+          "min": 24,
+          "max": 48,
+          "weight": 66
+        },
+        {
+          "type": "item",
+          "item": "avaritia:neutron_nugget",
+          "label": "Нейтрониевые самородки",
+          "min": 64,
+          "max": 128,
+          "weight": 74
+        },
+        {
+          "type": "item",
+          "item": "avaritia:neutron_compressor",
+          "label": "Нейтрониевый компрессор",
+          "min": 1,
+          "max": 1,
+          "weight": 33
+        },
+        {
+          "type": "item",
+          "item": "minecraft:nether_star",
+          "label": "Звёзды Незера",
+          "min": 48,
+          "max": 64,
+          "weight": 66
+        },
+        {
+          "type": "coins",
+          "item": "",
+          "label": "AquaCoins (Супер-Куш)",
+          "min": 15000000,
+          "max": 25000000,
+          "weight": 41
+        },
+        {
+          "type": "gems",
+          "item": "",
+          "label": "Гемы",
+          "min": 120,
+          "max": 200,
+          "weight": 33
+        },
+        {
+          "type": "item",
+          "item": "industrialupgrade:machines/graviton_solar_panel",
+          "label": "Гравитонная солнечная панель [Тир 10]",
+          "min": 1,
+          "max": 1,
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}
