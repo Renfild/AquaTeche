@@ -112,6 +112,7 @@ public partial class MainViewModel : ViewModelBase
     public bool LatestNewsVisible => !string.IsNullOrWhiteSpace(LatestNewsTitle);
     public string PackMeta => $"СБОРКА {PackVersion}";
     public string RamLabel => SelectedRamMb >= 1024 ? $"{SelectedRamMb / 1024.0:0.#} ГБ" : "—";
+    public string CoinsNumber => CoinsText.Replace(" монет", "").Trim();
     public bool NewsEmpty => !NewsLoading && News.Count == 0;
     public bool IsRam4096 => SelectedRamMb == 4096;
     public bool IsRam6144 => SelectedRamMb == 6144;
@@ -170,6 +171,8 @@ public partial class MainViewModel : ViewModelBase
     }
 
     partial void OnUsernameChanged(string value) => OnPropertyChanged(nameof(UsernameInitial));
+
+    partial void OnCoinsTextChanged(string value) => OnPropertyChanged(nameof(CoinsNumber));
 
     [RelayCommand]
     private void ShowPlay()

@@ -583,7 +583,12 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
               <TextBlock Text="{Binding Username}" FontSize="13" FontWeight="SemiBold" Foreground="#A8DFE9"
                          HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" MaxWidth="160"/>
-              <TextBlock Text="{Binding CoinsText}" FontSize="11" Foreground="#61A8DFE9" HorizontalAlignment="Right"/>
+              <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Border Background="#3350E8F4" CornerRadius="999" Padding="3" VerticalAlignment="Center">
+                  <Image Source="/Assets/coin.png" Width="13" Height="13" Stretch="UniformToFill"/>
+                </Border>
+                <TextBlock Text="{Binding CoinsText}" FontSize="11" Foreground="#8FD9E6" VerticalAlignment="Center"/>
+              </StackPanel>
             </StackPanel>
             <Button Classes="link" Content="Выйти" Command="{Binding RequestLogoutCommand}"
                     IsVisible="{Binding !LogoutConfirmVisible}" AutomationProperties.Name="Выйти"/>
@@ -618,9 +623,14 @@
                   <TextBlock Classes="eyebrow" Text="АККАУНТ"/>
                   <TextBlock Classes="syne" Text="{Binding Username}" FontSize="15" FontWeight="Bold"
                              Foreground="#A8DFE9" TextTrimming="CharacterEllipsis"/>
-                  <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,2,0,0">
+                  <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,3,0,0" HorizontalAlignment="Center">
                     <Border Background="#50E8F4" CornerRadius="999" Padding="7,2">
-                      <TextBlock Text="{Binding CoinsText}" FontSize="10" FontWeight="Bold" Foreground="#001619"/>
+                      <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                        <Image Source="/Assets/coin.png" Width="13" Height="13" Stretch="UniformToFill"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding CoinsNumber}" FontSize="10" FontWeight="Bold" Foreground="#001619"
+                                   VerticalAlignment="Center"/>
+                      </StackPanel>
                     </Border>
                     <TextBlock Text="{Binding AccountBadge}" FontSize="10.5" Foreground="#61A8DFE9"
                                VerticalAlignment="Center"/>
@@ -806,7 +816,7 @@
                   <TextBlock Classes="syne" Text="Быстрый старт" FontSize="15" FontWeight="Bold" Foreground="#A8DFE9"/>
                   <TextBlock TextWrapping="Wrap" FontSize="12.5" LineHeight="19" Foreground="#99A8DFE9"
                              Text="Стартовый набор лежит в меню F4 → Киты: бамбуковая удочка, снасти и лестницы. Там же профиль, магазин, кейсы и топы."/>
-                  <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
+                  <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,4,0,0" HorizontalAlignment="Center">
                     <Button Classes="ghost" Content="Сайт" Command="{Binding OpenWebsiteCommand}" Height="34"
                             AutomationProperties.Name="Сайт проекта"/>
                   </StackPanel>
