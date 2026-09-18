@@ -63,7 +63,7 @@ def main() -> None:
     zip_path = REL / "AquaTechLauncher.zip"
     man = {
         "version": ver,
-        "launcher_zip": "https://aquateche.store/dl/AquaTechLauncher.zip",
+        "launcher_zip": f"https://github.com/{REPO}/releases/download/{TAG}/AquaTechLauncher.zip",
         "launcher_exe": "AquaTechLauncher.exe",
         "release_base": "https://aquateche.store/dl",
         "launcher_zip_md5": md5_file(zip_path),
