@@ -1,9 +1,9 @@
 {
-  "version": "2.9.380",
+  "version": "2.9.383",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
-  "server_ip": "g-pl-3.apexnodes.xyz",
-  "server_port": 21561,
+  "server_ip": "g-pl-2.apexnodes.xyz",
+  "server_port": 21924,
   "cdn": "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack",
   "files": [
     {
@@ -35,11 +35,11 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "md5": "be78aa636d358800494deb36f72a55d8",
-      "size": 2662296,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.48-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.48-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.55-alpha.jar",
+      "md5": "c458531e4fe13e82c9f73ecf5986a772",
+      "size": 2335339,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.55-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.55-alpha.jar"
     },
     {
       "path": "mods/aquatech_machines-1.0.9.jar",
@@ -49,11 +49,11 @@
       "asset": "aquatech_machines-1.0.9.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.93.jar",
-      "md5": "d176329d1d466c57b54324e5ebce9a03",
-      "size": 2960608,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.93.jar",
-      "asset": "aquatech_ui-1.0.93.jar"
+      "path": "mods/aquatech_ui-1.0.99.jar",
+      "md5": "4c969e47a14e6a8a484ef2282d539a64",
+      "size": 2968649,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.99.jar",
+      "asset": "aquatech_ui-1.0.99.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -491,9 +491,9 @@
     },
     {
       "path": "config/aquatech_rank_glyphs.properties",
-      "md5": "49e4b122d9c8b00e42ab990daedac84e",
-      "size": 379,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__aquatech_rank_glyphs.properties",
+      "md5": "240805d756402fa0c6e6549d1fe22b9c",
+      "size": 422,
+      "url": "https://aquateche.store/pack/config/aquatech_rank_glyphs.properties",
       "asset": "config__aquatech_rank_glyphs.properties"
     },
     {
@@ -554,8 +554,8 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "fa225fd2e84773e3faada6a527bb5309",
-      "size": 1004308,
+      "md5": "dfe1f11ab28574804afa40ad04022ce6",
+      "size": 849212,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -589,8 +589,8 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "fa225fd2e84773e3faada6a527bb5309",
-      "size": 1004308,
+      "md5": "dfe1f11ab28574804afa40ad04022ce6",
+      "size": 849212,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
@@ -694,7 +694,7 @@
     },
     {
       "path": "config/fancymenu/customization/title_screen_layout.txt",
-      "md5": "ecc826a1633c7364ec6938fed44b1c2b",
+      "md5": "bc550607b51df7ce4a984efc3de22ef0",
       "size": 43634,
       "url": "https://aquateche.store/pack/config/fancymenu/customization/title_screen_layout.txt",
       "asset": "config__fancymenu__customization__title_screen_layout.txt"
@@ -875,6 +875,13 @@
       "asset": "kubejs__server_scripts__05_strip_iu_ore_scanner.js"
     },
     {
+      "path": "kubejs/server_scripts/06_strip_join_guides.js",
+      "md5": "9cd251fc5697c48fb456f65c7423eab3",
+      "size": 1728,
+      "url": "https://aquateche.store/pack/kubejs/server_scripts/06_strip_join_guides.js",
+      "asset": "kubejs__server_scripts__06_strip_join_guides.js"
+    },
+    {
       "path": "kubejs/server_scripts/10_aquatech_iu_nerf.js",
       "md5": "f668d304c1aeaf67eab6c39dc3903336",
       "size": 1797,
@@ -897,8 +904,8 @@
     },
     {
       "path": "kubejs/server_scripts/30_aquatech_crafting.js",
-      "md5": "bc5b79816c7575037905ce8b6107d508",
-      "size": 12925,
+      "md5": "5c0fdedd37e9d16addf7417ff118ef15",
+      "size": 14129,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
     },
