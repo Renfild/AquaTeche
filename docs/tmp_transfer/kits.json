@@ -1,0 +1,111 @@
+{
+  "kits": [
+    {
+      "id": "start",
+      "title": "Старт (Start)",
+      "description": "Бамбуковая удочка, снасти, 16 лестниц, 8 хлеба и множитель улова ×2",
+      "badge": "24 ч",
+      "command": "kit start",
+      "cooldownSeconds": 86400,
+      "items": [
+        { "item": "starcatcher:bamboo_rod", "count": 1 },
+        { "item": "aquatech_ui:rate_x2", "count": 1 },
+        { "item": "starcatcher:tackle_box", "count": 1 },
+        { "item": "minecraft:ladder", "count": 16 },
+        { "item": "minecraft:bread", "count": 8 }
+      ],
+      "commands": []
+    },
+    {
+      "id": "sailor",
+      "title": "Море (Sailor)",
+      "description": "Удочка Т1, ящик снастей, прикормка на стаю, копчёная рыба и корм для рыбы",
+      "badge": "24 ч",
+      "command": "kit sailor",
+      "cooldownSeconds": 86400,
+      "requiredRanks": ["sailor", "skipper", "captain", "admiral", "legend"],
+      "requiresText": "Море и выше",
+      "items": [
+        { "item": "starcatcher:bamboo_rod", "count": 1 },
+        { "item": "starcatcher:tackle_box", "count": 1 },
+        { "item": "aquatech_ui:bait_shoal", "count": 8 },
+        { "item": "minecraft:cooked_cod", "count": 16 },
+        { "item": "aquatech_ui:fish_meal", "count": 4 }
+      ],
+      "commands": []
+    },
+    {
+      "id": "skipper",
+      "title": "Шкипер (Skipper)",
+      "description": "Удочка Т2, прикормка на руду, сетчатый фильтр и копчёный лосось",
+      "badge": "24 ч",
+      "command": "kit skipper",
+      "cooldownSeconds": 86400,
+      "requiredRanks": ["skipper", "captain", "admiral", "legend"],
+      "requiresText": "Шкипер и выше",
+      "items": [
+        { "item": "starcatcher:humble_rod", "count": 1 },
+        { "item": "aquatech_ui:bait_shoal", "count": 12 },
+        { "item": "aquatech_ui:bait_ore", "count": 8 },
+        { "item": "aquatech_ui:mesh_filter", "count": 1 },
+        { "item": "minecraft:cooked_salmon", "count": 8 }
+      ],
+      "commands": []
+    },
+    {
+      "id": "captain",
+      "title": "Капитан (Captain)",
+      "description": "Удочка Т3, океанический фильтр, двойной крючок и слитки для заводов",
+      "badge": "24 ч",
+      "command": "kit captain",
+      "cooldownSeconds": 86400,
+      "requiredRanks": ["captain", "admiral", "legend"],
+      "requiresText": "Капитан и выше",
+      "items": [
+        { "item": "starcatcher:good_old_rod", "count": 1 },
+        { "item": "aquatech_ui:bait_ore", "count": 16 },
+        { "item": "aquatech_ui:ocean_filter", "count": 1 },
+        { "item": "aquatech_ui:double_hook_upgrade", "count": 1 },
+        { "item": "industrialupgrade:itemingots/aluminium_ingot", "count": 32 }
+      ],
+      "commands": []
+    },
+    {
+      "id": "admiral",
+      "title": "Адмирал (Admiral)",
+      "description": "Удочка Т4, прикормка бездны, морская награда, ускоритель и нержавейка",
+      "badge": "24 ч",
+      "command": "kit admiral",
+      "cooldownSeconds": 86400,
+      "requiredRanks": ["admiral", "legend"],
+      "requiresText": "Адмирал и выше",
+      "items": [
+        { "item": "starcatcher:naturalist_rod", "count": 1 },
+        { "item": "aquatech_ui:bait_abyss", "count": 12 },
+        { "item": "aquatech_ui:ocean_bounty_upgrade", "count": 1 },
+        { "item": "aquatech_ui:efficiency_upgrade", "count": 1 },
+        { "item": "industrialupgrade:alloyingot/stainless_steel", "count": 32 }
+      ],
+      "commands": []
+    },
+    {
+      "id": "legend",
+      "title": "Легенда Океана (Legend)",
+      "description": "Удочка Т5, снасти бездны, множитель улова ×4 и абиссальный магнит",
+      "badge": "24 ч",
+      "command": "kit legend",
+      "cooldownSeconds": 86400,
+      "requiredRanks": ["legend"],
+      "requiresText": "Легенда Океана",
+      "items": [
+        { "item": "starcatcher:slimed_rod", "count": 1 },
+        { "item": "aquatech_ui:bait_abyss", "count": 16 },
+        { "item": "aquatech_ui:rate_x4", "count": 1 },
+        { "item": "aquatech_ui:ocean_bounty_upgrade", "count": 1 },
+        { "item": "aquatech_ui:abyssal_magnet", "count": 1 },
+        { "item": "aquatech_ui:kelp_bio_pellet", "count": 2 }
+      ],
+      "commands": []
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "items": [
+    {
+      "id": "ae.silicon_press",
+      "item": "ae2:silicon_press:1",
+      "title": "Кремниевая печать",
+      "price": 12500
+    },
+    {
+      "id": "ae.logic_press",
+      "item": "ae2:logic_processor_press:1",
+      "title": "Логическая печать",
+      "price": 12500
+    },
+    {
+      "id": "ae.calc_press",
+      "item": "ae2:calculation_processor_press:1",
+      "title": "Вычислительная печать",
+      "price": 12500
+    },
+    {
+      "id": "ae.eng_press",
+      "item": "ae2:engineering_processor_press:1",
+      "title": "Инженерная печать",
+      "price": 12500
+    },
+    {
+      "id": "ae.name_press",
+      "item": "ae2:name_press:1",
+      "title": "Именная печать",
+      "price": 7500
+    },
+    {
+      "id": "ae.certus",
+      "item": "ae2:certus_quartz_crystal:16",
+      "title": "Истинный кварц ×16",
+      "price": 1600
+    },
+    {
+      "id": "ae.charged_certus",
+      "item": "ae2:charged_certus_quartz_crystal:8",
+      "title": "Заряженный истинный кварц ×8",
+      "price": 1300
+    },
+    {
+      "id": "iu.aluminium",
+      "item": "industrialupgrade:itemingots/aluminium_ingot:16",
+      "title": "Алюминий ×16",
+      "price": 2400
+    },
+    {
+      "id": "iu.circuit1",
+      "item": "industrialupgrade:crafting_elements/crafting_272_element:2",
+      "title": "Электронная схема ×3",
+      "price": 10000
+    },
+    {
+      "id": "iu.circuit2",
+      "item": "industrialupgrade:crafting_elements/crafting_273_element:2",
+      "title": "Продвинутая схема ×3",
+      "price": 15000
+    },
+    {
+      "id": "iu.circuit3",
+      "item": "industrialupgrade:crafting_elements/crafting_274_element:2",
+      "title": "Композит ×2",
+      "price": 8000
+    },
+    {
+      "id": "iu.reinforced_stone",
+      "item": "industrialupgrade:blockresource/reinforced_stone:16",
+      "title": "Укреплённый камень ×16",
+      "price": 2000
+    },
+    {
+      "id": "bot.manasteel",
+      "item": "botania:manasteel_ingot:8",
+      "title": "Слиток манастали ×8",
+      "price": 3200
+    },
+    {
+      "id": "bot.mana_pearl",
+      "item": "botania:mana_pearl:4",
+      "title": "Жемчужина маны ×4",
+      "price": 4000
+    },
+    {
+      "id": "bot.mana_diamond",
+      "item": "botania:mana_diamond:4",
+      "title": "Алмаз маны ×4",
+      "price": 4000
+    },
+    {
+      "id": "base.redstone",
+      "item": "minecraft:redstone:32",
+      "title": "Редстоун ×32",
+      "price": 800
+    },
+    {
+      "id": "base.obsidian",
+      "item": "minecraft:obsidian:8",
+      "title": "Обсидиан ×8",
+      "price": 1200
+    },
+    {
+      "id": "meta.guidebook",
+      "item": "patchouli:guide_book",
+      "title": "Гайдбук AquaTech",
+      "price": 500,
+      "kind": "patchouli_book",
+      "payload": "aquatech_ui:ocean_guide_book"
+    }
+  ]
+}
