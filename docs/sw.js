@@ -1,11 +1,18 @@
-const CACHE_NAME = "aquatech-v20260915-perf2";
+const CACHE_NAME = "aquatech-v20260921-cases";
 const PRECACHE_ASSETS = [
   "/",
   "/index.html",
   "/start.html",
   "/rods.html",
   "/cases.html",
+  "/status.html",
   "/market.html",
+  "/guide.html",
+  "/events.html",
+  "/store.html",
+  "/perf.html",
+  "/top.html",
+  "/news.html",
   "/assets/css/site.css",
   "/assets/js/site.js",
   "/assets/logo.png",

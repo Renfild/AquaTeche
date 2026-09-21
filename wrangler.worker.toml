@@ -27,7 +27,7 @@ html_handling = "auto-trailing-slash"
 PROJECT_NAME = "AquaTech"
 MINECRAFT_VERSION = "1.20.1"
 FORGE_VERSION = "47.4.0"
-SERVER_ADDRESS = "g-pl-3.apexnodes.xyz:21561"
+SERVER_ADDRESS = "g-pl-2.apexnodes.xyz:21924"
 PURCHASES_ENABLED = "true"
 LAVA_OFFER_ID = "ffafc44d-c79d-4c07-9f93-116439ae36f9"
 # Worker secrets (wrangler secret put): SERVER_SYNC_KEY, LAVA_API_KEY,

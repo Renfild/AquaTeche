@@ -14,7 +14,7 @@
   <meta property="og:description" content="Открытые лоты игроков сервера. Покупка и продажа через /ah." />
   <meta property="og:url" content="https://aquateche.store/market.html" />
   <meta property="og:image" content="https://aquateche.store/assets/og-cover.png" />
-  <link rel="stylesheet" href="assets/css/site.css?v=20260915_perf_v11" />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260921_topbar" />
 </head>
 <body data-page="market">
   <a class="skip-link" href="#main">К содержимому</a>
@@ -50,18 +50,20 @@
             <button class="market-pill-btn" data-filter="rods">Удочки</button>
             <button class="market-pill-btn" data-filter="ores">Руды и сплавы</button>
             <button class="market-pill-btn" data-filter="tech">Механизмы</button>
+            <button class="market-pill-btn" data-filter="mine">Мои лоты</button>
           </div>
           <div class="market-lot-counter" id="marketLotCounter">0 лотов</div>
         </div>
 
-        <div class="market-lots-grid" id="marketLotsGrid" data-market-page>
+        <div class="market-lots-grid" id="marketLotsGrid">
           <p class="muted-line">Синхронизация лотов аукциона…</p>
         </div>
+        <div class="market-pagination" id="marketPagination" style="display:flex;gap:8px;align-items:center;justify-content:center;margin:1.25rem 0 0"></div>
       </div>
     </section>
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260915_perf_v11"></script>
+  <script src="assets/js/site.js?v=20260921_topbar"></script>
 </body>
 </html>

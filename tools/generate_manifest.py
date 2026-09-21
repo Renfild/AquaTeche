@@ -23,8 +23,8 @@ def build_manifest():
         "version": "1.0.0",
         "mc_version": "1.20.1",
         "forge_version": "47.4.0",
-        "server_ip": "g-pl-3.apexnodes.xyz",
-        "server_port": 21561,
+        "server_ip": "g-pl-2.apexnodes.xyz",
+        "server_port": 21924,
         "files": []
     }
 

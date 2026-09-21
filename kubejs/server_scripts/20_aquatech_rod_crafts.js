@@ -109,11 +109,10 @@ ServerEvents.recipes((event) => {
 
     // Tier 8: Obsidian Rod
     event.remove({ output: 'starcatcher:obsidian_rod' })
-    event.shaped('starcatcher:obsidian_rod', ['DND', 'OSO', 'DND'], {
+    event.shaped('starcatcher:obsidian_rod', ['DND', 'ORO', 'DND'], {
       D: 'minecraft:diamond_block',
       N: 'minecraft:netherite_ingot',
       O: 'minecraft:crying_obsidian',
-      S: 'industrialupgrade:alloyingot/stainless_steel',
       R: 'starcatcher:sharktooth_rod',
     }).id('aquatech:obsidian_rod_craft')
 

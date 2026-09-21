@@ -108,7 +108,7 @@
       "title": "Гайдбук AquaTech",
       "price": 500,
       "kind": "patchouli_book",
-      "payload": "aquatech_ui:guide"
+      "payload": "aquatech_ui:ocean_guide_book"
     }
   ]
 }

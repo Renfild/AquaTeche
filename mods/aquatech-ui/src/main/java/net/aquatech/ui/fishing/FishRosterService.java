@@ -59,6 +59,17 @@ public final class FishRosterService {
         return ROD_TIER.getOrDefault(rodId, 1);
     }
 
+    /** Минимальный тир удочки, с которого ловится вид; 0 — вид не найден. */
+    public static int requiredTierOf(String speciesId) {
+        ensure();
+        for (Entry e : roster) {
+            if (e.id().equals(speciesId)) {
+                return e.requiredTier();
+            }
+        }
+        return 0;
+    }
+
     /** Ролл рыбы под тир удочки; null — ростер пуст (тогда останется базовый лут). */
     public static ItemStack roll(int tier, RandomSource random) {
         ensure();

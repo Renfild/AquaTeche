@@ -70,7 +70,8 @@ public final class FishShopConfig {
                         return;
                     }
                 }
-            } catch (Exception ignored) {
+            } catch (Exception error) {
+                AquaLumenUI.LOGGER.warn("Demand file unreadable, regenerating trends: {}", error.toString());
             }
             List<FishDef> pool = get().fishes;
             int n = pool.size();
@@ -103,7 +104,8 @@ public final class FishShopConfig {
                 root.addProperty("day", today);
                 root.add("trends", trends);
                 Files.writeString(DEMAND_FILE, GSON.toJson(root), StandardCharsets.UTF_8);
-            } catch (Exception ignored) {
+            } catch (Exception error) {
+                AquaLumenUI.LOGGER.warn("Failed to persist daily demand: {}", error.toString());
             }
         }
     }
@@ -126,6 +128,7 @@ public final class FishShopConfig {
     private static volatile double eventBoostMult = 1.0;
     private static volatile long eventBoostUntil = 0L;
     private static volatile long eventBoostMtime = -1L;
+    private static volatile boolean eventBoostWarned = false;
 
     private static void ensureEventBoost() {
         try {
@@ -143,7 +146,11 @@ public final class FishShopConfig {
                 eventBoostId = "";
                 eventBoostMult = 1.0;
             }
-        } catch (Exception ignored) {
+        } catch (Exception error) {
+            if (!eventBoostWarned) {
+                eventBoostWarned = true;
+                AquaLumenUI.LOGGER.warn("event_boost.json unreadable, price boost disabled: {}", error.toString());
+            }
         }
     }
 
@@ -324,6 +331,15 @@ public final class FishShopConfig {
                 if (ageMs >= 0L && ageMs <= 30L * 60L * 1000L) {
                     unitPrice *= 1.2;
                 }
+            }
+            // Грейд с улова (aquatech-ui FishGrade: 1=серебро, 2=золото, 3=радужная)
+            int grade = rootTag.getInt("AquaGrade");
+            if (grade == 1) {
+                unitPrice *= 1.25;
+            } else if (grade == 2) {
+                unitPrice *= 1.6;
+            } else if (grade >= 3) {
+                unitPrice *= 3.0;
             }
         }
 

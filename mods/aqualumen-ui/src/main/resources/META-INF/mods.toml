@@ -7,7 +7,7 @@ issueTrackerURL="https://aquateche.store/support"
 # that runs AquaLumen UI. Such clients automatically fall back to the chest-based hub.
 [[mods]]
 modId="aqualumen"
-version="0.3.16-alpha"
+version="${mod_version}"
 displayName="AquaLumen UI"
 displayURL="https://aquateche.store"
 logoFile="logo.png"

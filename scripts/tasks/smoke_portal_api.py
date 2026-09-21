@@ -19,7 +19,6 @@ PAGES = [
     "bootstrap.json",
     "assets/css/site.css",
     "assets/js/site.js",
-    "assets/js/radar.js",
 ]
 
 print("=== SMOKE TEST: AquaTech Live Web Portal ===\n")

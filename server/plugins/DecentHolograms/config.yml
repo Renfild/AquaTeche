@@ -44,7 +44,7 @@ defaults:
   down-origin: false
 
 # Check for updates on plugin startup? [true/false]
-update-checker: true
+update-checker: false
 
 # Click cooldown in ticks
 click-cooldown: 1

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Против лагов · AquaTech</title>
+  <meta name="description" content="Что мы делаем, чтобы AquaTech не лагал: клиентские моды оптимизации, лимиты на сервере, облегчённые машины, аккуратные бэкапы и быстрый сайт." />
+
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AquaTech" />
+  <meta property="og:title" content="Против лагов · AquaTech" />
+  <meta property="og:description" content="11 модов оптимизации клиента, лимиты на сервере, свои машины вместо тяжёлых аналогов и быстрый портал." />
+  <meta property="og:url" content="https://aquateche.store/perf.html" />
+  <meta property="og:image" content="https://aquateche.store/assets/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Против лагов · AquaTech" />
+  <meta name="twitter:description" content="Что мы делаем, чтобы сервер не лагал." />
+<link rel="stylesheet" href="assets/css/site.css?v=20260921_topbar" />
+</head>
+<body data-page="perf">
+  <a class="skip-link" href="#main">К содержимому</a>
+  <div id="site-header"></div>
+  <main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="eyebrow">Производительность</div>
+      <h1>Против лагов</h1>
+      <p class="muted-line" style="max-width:62ch">
+        Лаги — это не приговор, а набор конкретных решений. Ниже — что именно стоит в сборке, на сервере и на сайте,
+        и зачем это здесь. Без обещаний «60 FPS на калькуляторе»: только то, что реально включено.
+      </p>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <div class="section-head-split">
+        <div>
+          <div class="eyebrow">Клиент</div>
+          <h2>Сборка уже оптимизирована</h2>
+          <p>Из 69 модов сборки 11 — чистая производительность. Они едут вместе с лаунчером, ставить ничего не нужно.</p>
+        </div>
+      </div>
+      <div class="feature-card-grid">
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Кадры и рендер</span></div>
+          <h3>Embeddium и Oculus</h3>
+          <p>Современный рендер вместо ванильного: быстрее рисует чанки и воду, а шейдеры остаются на месте — их можно включить или выключить в один клик.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Память</span></div>
+          <h3>FerriteCore и ModernFix</h3>
+          <p>Срезают расход оперативной памяти на модели и данные — меньше фризов при длинных сессиях и меньше «Java heap space» на 8 ГБ.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Невидимое не рисуем</span></div>
+          <h3>EntityCulling и Dynamic FPS</h3>
+          <p>Сущности за стенами, водой и в других чанках не тратят кадры, а в свёрнутом окне игра снижает нагрузку вместо того, чтобы греться в фоне.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Сеть и логика</span></div>
+          <h3>PacketFixer, Canary, Clumps, FastSuite</h3>
+          <p>Меньше ошибок пакетов и лишней серверной логики, слипание шариков опыта и быстрые рецепты — это то, из-за чего обычно «фризит» при крафте и на фермах.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">ИИ и уборка</span></div>
+          <h3>AI-Improvements</h3>
+          <p>Оптимизация пути мобов: меньше нагрузки от стай, та же сложность боя.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Своё вместо тяжёлого</span></div>
+          <h3>Машины AquaTech</h3>
+          <p>Авторыболов, экскаватор, синтезатор, центрифуга и другие механизмы написаны под наш сервер и живут в одном моде — без слоёв абстракций чужих модов.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <div class="section-head-split">
+        <div>
+          <div class="eyebrow">Сервер</div>
+          <h2>Что настроено на стороне сервера</h2>
+          <p>Лаги чаще приходят не от мобов, а от заводов. Поэтому ограничиваем именно заводы.</p>
+        </div>
+      </div>
+      <ul class="spec-list" style="max-width:46rem">
+        <li class="spec-row"><span class="spec-label">Лимит на машины</span><span class="spec-val">10 машин AquaTech на регион — остальные лимиты (вороны, AE2, Botania) сняты, чтобы не мешать строить</span></li>
+        <li class="spec-row"><span class="spec-label">Чистка рецептов</span><span class="spec-val">мёртвые рецепты и квесты удалены: сервер не считает то, что всё равно нельзя скрафтить</span></li>
+        <li class="spec-row"><span class="spec-label">Бэкапы</span><span class="spec-val">по расписанию ночью, с прогрессом и без остановки мира</span></li>
+        <li class="spec-row"><span class="spec-label">События</span><span class="spec-val">таймеры и бусты считаются одним сервисом, а не скриптами на каждого игрока</span></li>
+        <li class="spec-row"><span class="spec-label">Мониторинг</span><span class="spec-val">после каждого рестарта — смоук-проверка: панель, моды, база, чанки</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <div class="section-head-split">
+        <div>
+          <div class="eyebrow">Сайт и лаунчер</div>
+          <h2>Портал тоже без тормозов</h2>
+          <p>Портал не должен жрать трафик там, где нужна одна цифра.</p>
+        </div>
+      </div>
+      <div class="feature-card-grid">
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Загрузка</span></div>
+          <h3>982 КБ → 574 КБ</h3>
+          <p>Первая загрузка главной стала легче на 42 %: убрали тяжёлый фон с прокруткой, сжали шрифты (353 → 209 КБ) и заменили логотип на 267 КБ игровой иконкой на 2 КБ.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Повторный вход</span></div>
+          <h3>159 КБ вместо 982 КБ</h3>
+          <p>Service worker отдаёт стили, скрипты и картинки из кеша, обновляя их в фоне. Второй и последующие заходы грузятся почти мгновенно.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Отрисовка</span></div>
+          <h3>Меньше стекла — больше кадров</h3>
+          <p>Слоёв размытия стало 8 вместо 12, радиусы уменьшены, лишние GPU-слои убраны. Внешне тот же дизайн, но скролл заметно ровнее.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Лаунчер</span></div>
+          <h3>Параллельные зеркала</h3>
+          <p>Лаунчер одновременно опрашивает зеркала и берёт первое ответившее, а при совпадении версии сборки не пересчитывает хеши файлов — запуск быстрый даже на слабой сети.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <div class="card" style="text-align:center;padding:2rem 1.5rem">
+        <h2 style="margin:0 0 .5rem">Всё это уже в лаунчере</h2>
+        <p class="muted-line" style="margin:0 auto 1.25rem;max-width:52ch">Ставить моды отдельно не нужно: скачал, вошёл, играешь.</p>
+        <a class="btn btn-primary" data-download href="start.html">Скачать лаунчер</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js?v=20260921_topbar"></script>
+</body>
+</html>

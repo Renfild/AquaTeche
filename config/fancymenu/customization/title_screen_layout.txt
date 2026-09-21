@@ -137,7 +137,7 @@ element {
 
 element {
  button_element_executable_block_identifier = ex-001
- [executable_action_instance:act-002][action_type:joinserver] = g-pl-3.apexnodes.xyz:21561
+ [executable_action_instance:act-002][action_type:joinserver] = g-pl-2.apexnodes.xyz:21924
  [executable_block:ex-001][type:generic] = [executables:act-002;]
  backgroundnormal = [source:local]/config/fancymenu/assets/btn_play.png
  backgroundhovered = [source:local]/config/fancymenu/assets/btn_play_hover.png

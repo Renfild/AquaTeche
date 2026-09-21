@@ -62,9 +62,15 @@ public final class OceanEventsService {
     private record Boost(String fishId, String fishName, double mult, long until) {
     }
 
+    /** Активный клёв: вид клюёт активнее, удочки тира не ниже ловят его гарантированным бонусом. */
+    private record Bite(String fishId, String fishName, int tier, long until) {
+    }
+
     private static School school;
     private static Boost boost;
     private static long nextEventAt;
+    private static Bite bite;
+    private static long nextBiteAt;
 
     // ─────────────────────────── монеты ───────────────────────────
 
@@ -144,6 +150,16 @@ public final class OceanEventsService {
         return goldStormActive(now) ? STORM_GOLDEN_CHANCE : GOLDEN_CHANCE;
     }
 
+    /** Открыто ли окно золотой рыбы (включая золотую бурю) — для атласа и подсказок. */
+    public static boolean goldenWindowOpen() {
+        return goldenActive(System.currentTimeMillis());
+    }
+
+    /** Идёт ли золотая буря. */
+    public static boolean goldStormRunning() {
+        return goldStormActive(System.currentTimeMillis());
+    }
+
     public static int startGoldStorm(MinecraftServer server, int minutes) {
         if (server == null) {
             return 0;
@@ -197,19 +213,51 @@ public final class OceanEventsService {
 
     // ─────────────────────────── задания дня ───────────────────────────
 
-    private record Quest(String desc, int goal, long reward, int kind) {
+    private record Quest(String desc, int goal, long reward, int kind, String fishId, int minGrade) {
+        static Quest simple(String desc, int goal, long reward, int kind) {
+            return new Quest(desc, goal, reward, kind, null, 0);
+        }
     }
-    // kind: 0 — любая рыба, 1 — ночью, 2 — в дождь
+    // kind: 0 — любая рыба, 1 — ночью, 2 — в дождь, 3 — конкретный вид, 4 — грейд (minGrade: 1 серебро, 2 золото)
 
-    private static final List<Quest> QUEST_POOL = List.of(
-            new Quest("Поймайте 12 рыб", 12, 300, 0),
-            new Quest("Поймайте 6 рыб ночью", 6, 500, 1),
-            new Quest("Поймайте 5 рыб в дождь", 5, 700, 2),
-            new Quest("Поймайте 30 рыб", 30, 900, 0),
-            new Quest("Поймайте 15 рыб ночью", 15, 1100, 1));
+    private static final List<Quest> STATIC_QUESTS = List.of(
+            Quest.simple("Поймайте 12 рыб", 12, 300, 0),
+            Quest.simple("Поймайте 6 рыб ночью", 6, 500, 1),
+            Quest.simple("Поймайте 5 рыб в дождь", 5, 700, 2),
+            Quest.simple("Поймайте 30 рыб", 30, 900, 0),
+            Quest.simple("Поймайте 15 рыб ночью", 15, 1100, 1));
+
+    /** Соли для трёх видовых контрактов: вид детерминированно меняется раз в день. */
+    private static final int[] SPECIES_SALTS = {3, 11, 29};
+
+    /**
+     * Пул контрактов: статические + 3 видовых (квоты по рыбе из fish_shop.json) + 2 на грейды.
+     * Индексы статических записей не меняются, чтобы сохранённые q0..q2 оставались валидными.
+     */
+    private static List<Quest> questPool() {
+        List<Quest> pool = new ArrayList<>(STATIC_QUESTS);
+        var fish = shopFish();
+        if (fish.isEmpty()) {
+            return pool;
+        }
+        for (int salt : SPECIES_SALTS) {
+            int idx = Math.floorMod(today() * (13 + salt) + salt * 7, fish.size());
+            var f = fish.get(idx);
+            String id = String.valueOf(f.get("id"));
+            String name = String.valueOf(f.get("name"));
+            long price = f.get("price") instanceof Number n ? n.longValue() : 20L;
+            int goal = price >= 500 ? 3 : price >= 120 ? 5 : 8;
+            long reward = Math.max(400, Math.min(1600, 200 + price / 2));
+            pool.add(new Quest("Поймайте " + goal + " шт. «" + name + "»", goal, reward, 3, id, 0));
+        }
+        pool.add(new Quest("Поймайте 2 серебряных рыбы", 2, 800, 4, null, 1));
+        pool.add(new Quest("Поймайте золотую рыбу", 1, 1500, 4, null, 2));
+        return pool;
+    }
+
     /** Детерминированные индексы пула на день — общие для всех игроков. */
     private static int[] dailyIndices(int day) {
-        int n = QUEST_POOL.size();
+        int n = questPool().size();
         int i1 = ((day * 7 + 3) % n + n) % n;
         int i2 = ((day * 13 + 5) % n + n) % n;
         if (i2 == i1) i2 = (i2 + 1) % n;
@@ -221,11 +269,12 @@ public final class OceanEventsService {
 
     private static List<Quest> questsFor(ServerPlayer player) {
         JsonObject st = questTag(player);
+        List<Quest> pool = questPool();
         List<Quest> out = new ArrayList<>();
         int[] def = dailyIndices(today());
         for (int i = 0; i < 3; i++) {
             int idx = st.has("q" + i) ? st.get("q" + i).getAsInt() : def[i];
-            out.add(QUEST_POOL.get(Math.floorMod(idx, QUEST_POOL.size())));
+            out.add(pool.get(Math.floorMod(idx, pool.size())));
         }
         return out;
     }
@@ -408,6 +457,8 @@ public final class OceanEventsService {
             boolean fits = switch (q.kind()) {
                 case 1 -> player.level().isNight();
                 case 2 -> player.level().isRaining();
+                case 3 -> fitsSpecies(awarded, q.fishId());
+                case 4 -> fitsGrade(awarded, q.minGrade());
                 default -> true;
             };
             if (!fits) continue;
@@ -510,6 +561,24 @@ public final class OceanEventsService {
 
     // ─────────────────── hub-интеграция: доступ для вкладки F4 ───────────────────
 
+    private static boolean fitsSpecies(List<ItemStack> awarded, String fishId) {
+        if (fishId == null || fishId.isEmpty()) return false;
+        for (ItemStack stack : awarded) {
+            if (stack == null || stack.isEmpty()) continue;
+            var key = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
+            if (key != null && fishId.equals(key.toString())) return true;
+        }
+        return false;
+    }
+
+    private static boolean fitsGrade(List<ItemStack> awarded, int minGrade) {
+        if (minGrade <= 0) return false;
+        for (ItemStack stack : awarded) {
+            if (FishGrade.of(stack) >= minGrade) return true;
+        }
+        return false;
+    }
+
     /** Снимок контрактов игрока для вкладки «События» в F4. */
     public static List<Map<String, Object>> questView(ServerPlayer player) {
         ensureQuestDay(player);
@@ -573,25 +642,26 @@ public final class OceanEventsService {
         int[] used = new int[3];
         for (int i = 0; i < 3; i++) used[i] = st.has("q" + i) ? st.get("q" + i).getAsInt() : -1;
         int currentQ = st.has("q" + index) ? st.get("q" + index).getAsInt() : -1;
+        List<Quest> pool = questPool();
         List<Integer> candidates = new ArrayList<>();
-        for (int i = 0; i < QUEST_POOL.size(); i++) {
+        for (int i = 0; i < pool.size(); i++) {
             if (i != currentQ && i != used[0] && i != used[1] && i != used[2]) {
                 candidates.add(i);
             }
         }
         if (candidates.isEmpty()) {
-            for (int i = 0; i < QUEST_POOL.size(); i++) {
+            for (int i = 0; i < pool.size(); i++) {
                 if (i != currentQ) candidates.add(i);
             }
         }
-        int pick = candidates.isEmpty() ? (currentQ + 1) % QUEST_POOL.size() : candidates.get(player.getRandom().nextInt(candidates.size()));
+        int pick = candidates.isEmpty() ? (currentQ + 1) % pool.size() : candidates.get(player.getRandom().nextInt(candidates.size()));
         st.addProperty("q" + index, pick);
         st.addProperty("p" + index, 0);
         st.addProperty("rr", rr + 1);
         saveQuestTag(player, st);
         pushHubUpdate(player);
         player.sendSystemMessage(Component.literal("§6[Кот-рыболов] §fНовый контракт: §b"
-                + QUEST_POOL.get(pick).desc() + " §7(−" + REROLL_COST + " монет)"));
+                + pool.get(pick).desc() + " §7(−" + REROLL_COST + " монет)"));
         return true;
     }
 
@@ -602,6 +672,11 @@ public final class OceanEventsService {
         m.put("golden", goldenActive(now));
         m.put("storm", goldStormActive(now));
         m.put("tournament", tournamentActive());
+        if (biteActive()) {
+            m.put("biteFish", bite.fishName());
+            m.put("biteTier", bite.tier());
+            m.put("biteUntil", bite.until());
+        }
         if (school != null && now < school.until()) {
             m.put("schoolFish", school.fishName());
             m.put("schoolUntil", school.until);
@@ -626,24 +701,84 @@ public final class OceanEventsService {
 
     @SuppressWarnings("unchecked")
     private static List<java.util.Map<String, Object>> shopFish() {
+        // fish_shop.json: {"fishes":[...]} — раньше парсился как объект, из-за чего косяки
+        // и всплески цен молча не запускались (пустой список).
         try {
+            long mtime = Files.getLastModifiedTime(FISH_SHOP_FILE).toMillis();
+            if (shopFishCache != null && mtime == shopFishMtime) {
+                return shopFishCache;
+            }
             JsonObject shop = com.google.gson.JsonParser.parseString(
                     Files.readString(FISH_SHOP_FILE)).getAsJsonObject();
-            JsonObject fishes = shop.getAsJsonObject("fishes");
             List<java.util.Map<String, Object>> out = new ArrayList<>();
-            for (var entry : fishes.entrySet()) {
-                JsonObject f = entry.getValue().getAsJsonObject();
-                if (f.has("id") && f.has("name")) {
-                    out.add(java.util.Map.of(
-                            "id", f.get("id").getAsString(),
-                            "name", f.get("name").getAsString(),
-                            "price", f.has("priceCoins") ? f.get("priceCoins").getAsInt() : 20));
+            if (shop.has("fishes") && shop.get("fishes").isJsonArray()) {
+                for (var el : shop.getAsJsonArray("fishes")) {
+                    if (!el.isJsonObject()) continue;
+                    JsonObject f = el.getAsJsonObject();
+                    if (f.has("id") && f.has("name")) {
+                        out.add(java.util.Map.of(
+                                "id", f.get("id").getAsString(),
+                                "name", f.get("name").getAsString(),
+                                "price", f.has("priceCoins") ? f.get("priceCoins").getAsLong() : 20L));
+                    }
                 }
             }
+            shopFishCache = out;
+            shopFishMtime = mtime;
             return out;
         } catch (Exception e) {
-            return List.of();
+            return shopFishCache != null ? shopFishCache : List.of();
         }
+    }
+
+    private static volatile List<java.util.Map<String, Object>> shopFishCache;
+    private static volatile long shopFishMtime = -1L;
+
+    /** Вид для жора: интересный по цене и достижимый средними удочками. */
+    private static java.util.Map<String, Object> pickBiteFish(List<java.util.Map<String, Object>> fish,
+                                                              net.minecraft.util.RandomSource rnd) {
+        List<java.util.Map<String, Object>> pool = new ArrayList<>();
+        for (var f : fish) {
+            long price = f.get("price") instanceof Number n ? n.longValue() : 20L;
+            int tier = FishRosterService.requiredTierOf(String.valueOf(f.get("id")));
+            if (price >= 100L && tier >= 1 && tier <= 11) {
+                pool.add(f);
+            }
+        }
+        List<java.util.Map<String, Object>> from = pool.isEmpty() ? fish : pool;
+        return from.get(rnd.nextInt(from.size()));
+    }
+
+    public static boolean biteActive() {
+        return bite != null && System.currentTimeMillis() < bite.until();
+    }
+
+    public static String biteFishId() {
+        return biteActive() ? bite.fishId() : "";
+    }
+
+    public static String biteFishName() {
+        return biteActive() ? bite.fishName() : "";
+    }
+
+    public static int biteTier() {
+        return biteActive() ? bite.tier() : 0;
+    }
+
+    /** Сколько видов рыбы в конфиге скупщика (для вех атласа). */
+    public static int shopSpeciesCount() {
+        return shopFish().size();
+    }
+
+    /** Начисление монет для сервисов вне этого класса (атлас, вехи). */
+    public static void grantCoins(ServerPlayer player, long amount) {
+        addCoins(player, amount);
+        pushHubUpdate(player);
+    }
+
+    /** Объявление в чат для сервисов вне этого класса (атлас, вехи). */
+    public static void announce(MinecraftServer server, String message) {
+        broadcast(server, message);
     }
 
     private static void writeBoostFile() {
@@ -666,6 +801,29 @@ public final class OceanEventsService {
     }
 
     private static void tickEvents(MinecraftServer server, long now) {
+        // Активный клёв: окно 8 минут раз в 20–35 минут, независимо от косяков и ажиотажа.
+        if (nextBiteAt == 0L) {
+            nextBiteAt = now + 8L * 60_000L;
+        }
+        if (bite != null && now >= bite.until()) {
+            bite = null;
+            broadcast(server, "§d[Кот-рыболов] §7Жор стих.");
+        }
+        if (bite == null && now >= nextBiteAt) {
+            var fish = shopFish();
+            var rnd = server.overworld().getRandom();
+            if (fish.isEmpty()) {
+                nextBiteAt = now + 15L * 60_000L;
+            } else {
+                var pick = pickBiteFish(fish, rnd);
+                int tier = FishRosterService.requiredTierOf(String.valueOf(pick.get("id")));
+                bite = new Bite(String.valueOf(pick.get("id")), String.valueOf(pick.get("name")),
+                        Math.max(1, tier), now + 8L * 60_000L);
+                broadcast(server, "§d[Кот-рыболов] §fЖор: §b" + pick.get("name")
+                        + " §fклюёт 8 минут у снастей §eT" + bite.tier() + "+§f! Ловите, пока стая здесь.");
+                nextBiteAt = now + (20 + rnd.nextInt(16)) * 60_000L;
+            }
+        }
         if (nextEventAt == 0L) {
             nextEventAt = now + 15L * 60_000L; // первое событие через 15 минут после старта
             return;

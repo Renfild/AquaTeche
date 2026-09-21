@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path('.').resolve()
 secrets = json.loads((ROOT / '.apex_deploy.json').read_text(encoding='utf-8'))
 
-host = secrets.get('sftp_host', 'g-pl-3.apexnodes.xyz')
+host = secrets.get('sftp_host', 'g-pl-2.apexnodes.xyz')
 port = int(secrets.get('sftp_port', 2022))
 user = secrets.get('sftp_user')
 password = secrets.get('sftp_pass')

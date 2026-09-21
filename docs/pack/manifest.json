@@ -1,5 +1,5 @@
 {
-  "version": "2.9.383",
+  "version": "2.9.384",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -36,8 +36,8 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.55-alpha.jar",
-      "md5": "c458531e4fe13e82c9f73ecf5986a772",
-      "size": 2335339,
+      "md5": "0ec62faacf2230a05858a067252f1983",
+      "size": 2347375,
       "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.55-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.55-alpha.jar"
     },
@@ -554,22 +554,22 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "dfe1f11ab28574804afa40ad04022ce6",
-      "size": 849212,
+      "md5": "1cbf9625c8ea5617001c893363eaf022",
+      "size": 864161,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
       "path": "config/aqualumen/kits.json",
-      "md5": "a6d026b8a13cddd2c85bb0f12d10ebad",
-      "size": 3106,
+      "md5": "7c684252d928e11c31dd2b1063889e04",
+      "size": 4579,
       "url": "https://aquateche.store/pack/config/aqualumen/kits.json",
       "asset": "config__aqualumen__kits.json"
     },
     {
       "path": "config/aqualumen/server_shop.json",
-      "md5": "44e48972366ffe64c8f7a8ccd920d9bd",
-      "size": 3145,
+      "md5": "3a9687da753f5c67bd05546a0ae54c71",
+      "size": 3156,
       "url": "https://aquateche.store/pack/config/aqualumen/server_shop.json",
       "asset": "config__aqualumen__server_shop.json"
     },
@@ -589,8 +589,8 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "dfe1f11ab28574804afa40ad04022ce6",
-      "size": 849212,
+      "md5": "1cbf9625c8ea5617001c893363eaf022",
+      "size": 864161,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
@@ -890,8 +890,8 @@
     },
     {
       "path": "kubejs/server_scripts/20_aquatech_rod_crafts.js",
-      "md5": "762a1b7687ea3d98d023f59d95574952",
-      "size": 6122,
+      "md5": "7ae3cd2a25839655506011527da4d5ed",
+      "size": 6065,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/20_aquatech_rod_crafts.js",
       "asset": "kubejs__server_scripts__20_aquatech_rod_crafts.js"
     },
@@ -988,8 +988,8 @@
     },
     {
       "path": "kubejs/server_scripts/97_machines_recipes.js",
-      "md5": "0497583c7424a6e021ac83923523a141",
-      "size": 5858,
+      "md5": "9c8015acee200ac94df5bd2ed7fe12da",
+      "size": 5989,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/97_machines_recipes.js",
       "asset": "kubejs__server_scripts__97_machines_recipes.js"
     },

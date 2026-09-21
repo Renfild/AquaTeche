@@ -5,6 +5,14 @@ export const CASES_CATALOG = [
     "title": "Кейс I: Первопроходец Океана",
     "rarity": "common",
     "cost": 2500,
+    "pityEvery": 12,
+    "pity": {
+      "name": "Алмазы",
+      "type": "item",
+      "item": "minecraft:diamond",
+      "min": 3,
+      "max": 6
+    },
     "loot": [
       {
         "name": "Алмазы",
@@ -121,6 +129,14 @@ export const CASES_CATALOG = [
     "title": "Кейс II: Инженер Плавильни",
     "rarity": "uncommon",
     "cost": 10000,
+    "pityEvery": 12,
+    "pity": {
+      "name": "Контроллер плавильни",
+      "type": "item",
+      "item": "industrialupgrade:smeltery/smeltery_controller",
+      "min": 1,
+      "max": 1
+    },
     "loot": [
       {
         "name": "Контроллер плавильни",
@@ -237,6 +253,14 @@ export const CASES_CATALOG = [
     "title": "Кейс III: Паровая Энергия",
     "rarity": "rare",
     "cost": 45000,
+    "pityEvery": 12,
+    "pity": {
+      "name": "Базовый корпус механизма",
+      "type": "item",
+      "item": "industrialupgrade:blockresource/machine",
+      "min": 2,
+      "max": 4
+    },
     "loot": [
       {
         "name": "Базовый корпус механизма",
@@ -353,6 +377,14 @@ export const CASES_CATALOG = [
     "title": "Кейс IV: Ботаническая Флора",
     "rarity": "epic",
     "cost": 150000,
+    "pityEvery": 20,
+    "pity": {
+      "name": "Улучшенный корпус механизма",
+      "type": "item",
+      "item": "industrialupgrade:blockresource/advanced_machine",
+      "min": 2,
+      "max": 4
+    },
     "loot": [
       {
         "name": "Слитки манастали",
@@ -460,6 +492,14 @@ export const CASES_CATALOG = [
     "title": "Кейс V: Цифровая МЭ-Сеть",
     "rarity": "epic",
     "cost": 450000,
+    "pityEvery": 20,
+    "pity": {
+      "name": "Комплект прессов высекателя AE2",
+      "type": "item",
+      "item": "ae2:logic_processor_press",
+      "min": 1,
+      "max": 1
+    },
     "loot": [
       {
         "name": "Комплект прессов высекателя AE2",
@@ -576,6 +616,14 @@ export const CASES_CATALOG = [
     "title": "Кейс VI: Глубины и Радиация",
     "rarity": "legendary",
     "cost": 1200000,
+    "pityEvery": 200,
+    "pity": {
+      "name": "Дифракционная солнечная панель [Тир 6]",
+      "type": "item",
+      "item": "industrialupgrade:machines/spectral_solar_panel",
+      "min": 1,
+      "max": 1
+    },
     "loot": [
       {
         "name": "Эссенция Гайи",
@@ -701,6 +749,14 @@ export const CASES_CATALOG = [
     "title": "Кейс VII: Сверхпроводники",
     "rarity": "legendary",
     "cost": 2500000,
+    "pityEvery": 200,
+    "pity": {
+      "name": "Фотонная солнечная панель [Тир 7]",
+      "type": "item",
+      "item": "industrialupgrade:machines/photonic_solar_panel",
+      "min": 1,
+      "max": 1
+    },
     "loot": [
       {
         "name": "Лапотронные кристаллы",
@@ -826,6 +882,14 @@ export const CASES_CATALOG = [
     "title": "Кейс VIII: Матрица Сингулярности",
     "rarity": "mythic",
     "cost": 4500000,
+    "pityEvery": 200,
+    "pity": {
+      "name": "Барионная солнечная панель [Тир 8]",
+      "type": "item",
+      "item": "industrialupgrade:machines/barion_solar_panel",
+      "min": 1,
+      "max": 1
+    },
     "loot": [
       {
         "name": "Кристальные матричные слитки",
@@ -951,6 +1015,14 @@ export const CASES_CATALOG = [
     "title": "Кейс IX: Дракониевое Слияние",
     "rarity": "mythic",
     "cost": 6500000,
+    "pityEvery": 200,
+    "pity": {
+      "name": "Адронная солнечная панель [Тир 9]",
+      "type": "item",
+      "item": "industrialupgrade:machines/hadron_solar_panel",
+      "min": 1,
+      "max": 1
+    },
     "loot": [
       {
         "name": "Пробуждённое дракониевое ядро",
@@ -1076,6 +1148,14 @@ export const CASES_CATALOG = [
     "title": "Кейс X: Абсолютная Бесконечность",
     "rarity": "exotic",
     "cost": 8000000,
+    "pityEvery": 200,
+    "pity": {
+      "name": "Гравитонная солнечная панель [Тир 10]",
+      "type": "item",
+      "item": "industrialupgrade:machines/graviton_solar_panel",
+      "min": 1,
+      "max": 1
+    },
     "loot": [
       {
         "name": "Слиток Бесконечности (ДЖЕКПОТ)",

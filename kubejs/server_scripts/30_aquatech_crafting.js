@@ -329,6 +329,24 @@ ServerEvents.recipes((event) => {
   event.remove({ id: 'aquatech:ocean_bounty_alias_1' })
   event.remove({ id: 'aquatech:ocean_bounty_alias_2' })
 
+  // =========================================================================
+  // ПРИМАНКИ: рыбное сырьё -> заряды в удочку (FishingBait.java, 16 уловов за предмет)
+  // =========================================================================
+  const CHEAP_FISH = [
+    'starcatcher:aquamarine_pike', 'starcatcher:blossomfish', 'starcatcher:bluegigi',
+    'starcatcher:cactifish', 'starcatcher:crystalback_boreal', 'starcatcher:crystalback_minnow',
+    'minecraft:cod', 'minecraft:salmon'
+  ]
+  event.remove({ output: 'aquatech_ui:bait_shoal' })
+  event.remove({ output: 'aquatech_ui:bait_ore' })
+  event.remove({ output: 'aquatech_ui:bait_abyss' })
+  event.shapeless(Item.of('aquatech_ui:bait_shoal', 2), [CHEAP_FISH, CHEAP_FISH, CHEAP_FISH, 'minecraft:kelp'])
+    .id('aquatech:bait_shoal')
+  event.shapeless(Item.of('aquatech_ui:bait_ore', 2), [CHEAP_FISH, CHEAP_FISH, 'minecraft:gravel', 'industrialupgrade:classicore/tin'])
+    .id('aquatech:bait_ore')
+  event.shapeless(Item.of('aquatech_ui:bait_abyss', 2), ['aquatech_ui:bait_shoal', 'aquatech_ui:bait_shoal', 'minecraft:prismarine_crystals', 'minecraft:ink_sac'])
+    .id('aquatech:bait_abyss')
+
   console.log('[AquaTech] Crafting recipes loaded.')
 })
 

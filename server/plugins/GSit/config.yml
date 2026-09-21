@@ -7,7 +7,7 @@ Lang:
 
 Options:
   # Plugin sends update notifications
-  check-for-update: true
+  check-for-update: false
 
   # Force players to stand up after taking damage
   get-up-damage: false

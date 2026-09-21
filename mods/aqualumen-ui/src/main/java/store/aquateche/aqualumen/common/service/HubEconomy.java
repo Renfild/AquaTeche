@@ -30,12 +30,19 @@ public final class HubEconomy {
     private static final String DAILY_TAG = "aqualumen_daily";
     public static final String FISH_OBJECTIVE = "aquatech_fish";
 
+    /**
+     * Ставится, если Vault-плагин есть, но {@code /eco take} не меняет баланс
+     * (нет команды, чужой провайдер). Тогда кошелёк навсегда уходит на scoreboard,
+     * иначе покупки становятся бесплатными, а баланс замирает.
+     */
+    private static volatile boolean vaultDebitBroken = false;
+
     private HubEconomy() {
     }
 
     public static long coins(ServerPlayer player) {
         String objective = LumenConfig.COMMON.coinsObjective.get();
-        long vault = vaultBalance(player);
+        long vault = vaultDebitBroken ? -1L : vaultBalance(player);
         if (vault >= 0L) {
             if (vault != score(player, objective)) {
                 setScore(player, objective, vault);
@@ -76,15 +83,20 @@ public final class HubEconomy {
             return true;
         }
         String objective = LumenConfig.COMMON.coinsObjective.get();
-        long vault = vaultBalance(player);
+        long vault = vaultDebitBroken ? -1L : vaultBalance(player);
         if (vault >= 0L) {
             if (vault < amount) {
                 return false;
             }
             ecoCommand(player, "take", amount);
             long after = vaultBalance(player);
-            setScore(player, objective, after >= 0L ? after : Math.max(0L, vault - amount));
-            return true;
+            if (after >= 0L && after < vault) {
+                setScore(player, objective, after);
+                return true;
+            }
+            vaultDebitBroken = true;
+            store.aquateche.aqualumen.AquaLumenUI.LOGGER.warn(
+                    "Vault take did not apply (before={}, after={}) — wallet switches to scoreboard", vault, after);
         }
         if (coins(player) < amount) {
             return false;
@@ -103,17 +115,40 @@ public final class HubEconomy {
         return true;
     }
 
+    /**
+     * Принудительное списание для доставки веб-покупок: списывает сколько есть,
+     * возвращает сколько удалось снять. Нужен, чтобы трата на сайте не откатывалась
+     * игровым синком.
+     */
+    public static long webTake(ServerPlayer player, long amount) {
+        if (player == null || amount <= 0L) {
+            return 0L;
+        }
+        long available = coins(player);
+        long take = Math.min(amount, Math.max(0L, available));
+        if (take <= 0L) {
+            return 0L;
+        }
+        boolean ok = trySpendCoins(player, take);
+        return ok ? take : 0L;
+    }
+
     public static void grantCoins(ServerPlayer player, long amount) {
         if (amount <= 0L) {
             return;
         }
         String objective = LumenConfig.COMMON.coinsObjective.get();
-        long vault = vaultBalance(player);
+        long vault = vaultDebitBroken ? -1L : vaultBalance(player);
         if (vault >= 0L) {
             ecoCommand(player, "give", amount);
             long after = vaultBalance(player);
-            setScore(player, objective, after >= 0L ? after : vault + amount);
-            return;
+            if (after >= 0L && after > vault) {
+                setScore(player, objective, after);
+                return;
+            }
+            vaultDebitBroken = true;
+            store.aquateche.aqualumen.AquaLumenUI.LOGGER.warn(
+                    "Vault give did not apply (before={}, after={}) — wallet switches to scoreboard", vault, after);
         }
         adjustScore(player, objective, (int) Math.min(amount, Integer.MAX_VALUE));
         ecoCommand(player, "give", amount);

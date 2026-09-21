@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.378"
-PACK_VERSION = "2.9.378"
+PACK_TAG = "pack-2.9.384"
+PACK_VERSION = "2.9.384"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -366,8 +366,8 @@ def write_manifest() -> Path:
         "version": PACK_VERSION,
         "mc_version": "1.20.1",
         "forge_version": "47.4.0",
-        "server_ip": "g-pl-3.apexnodes.xyz",
-        "server_port": 21561,
+        "server_ip": "g-pl-2.apexnodes.xyz",
+        "server_port": 21924,
         "cdn": SITE_PACK,
         "files": files,
     }

@@ -19,8 +19,29 @@ export async function onRequestGet(context) {
     .bind(user.id)
     .all();
 
+  let stats = { total: 0, rare: 0, lastAt: "" };
+  try {
+    const row = await env.DB
+      .prepare(
+        `SELECT COUNT(*) AS total,
+                SUM(CASE WHEN rarity IN ('rare','epic','legendary','mythic','exotic') THEN 1 ELSE 0 END) AS rare,
+                MAX(created_at) AS last_at
+         FROM player_vault WHERE user_id = ?`
+      )
+      .bind(user.id)
+      .first();
+    stats = {
+      total: Number(row?.total || 0),
+      rare: Number(row?.rare || 0),
+      lastAt: row?.last_at || "",
+    };
+  } catch {
+    // таблицы ещё нет — считаем пустой коллекцией
+  }
+
   return json({
     ok: true,
     vault: results || [],
+    stats,
   });
 }

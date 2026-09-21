@@ -63,5 +63,8 @@
   "block.aquatech_ui.fish_smoker": "Fish Smoker",
   "item.aquatech_ui.fish_meal": "Fish Meal",
   "item.aquatech_ui.abyssal_pearl": "Abyssal Pearl of the Rift",
-  "item.aquatech_ui.infernal_pearl": "Infernal Pearl"
+  "item.aquatech_ui.infernal_pearl": "Infernal Pearl",
+  "item.aquatech_ui.bait_shoal": "Shoal Bait",
+  "item.aquatech_ui.bait_ore": "Ore Bait",
+  "item.aquatech_ui.bait_abyss": "Abyssal Bait"
 }

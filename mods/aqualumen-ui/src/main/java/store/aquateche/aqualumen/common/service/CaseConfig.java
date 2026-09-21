@@ -89,6 +89,10 @@ public final class CaseConfig {
         public String title = "Кейс";
         public String rarity = "common";
         public int costCoins = 0;
+        /** Гарант: каждые N открытий выпадает pity-награда. 0 = выключен. */
+        public int pityEvery = 0;
+        /** Гарантированная награда; null при выключенном гаранте. */
+        public LootDef pity = null;
         public List<LootDef> loot = new ArrayList<>();
     }
 

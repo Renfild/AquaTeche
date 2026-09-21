@@ -147,7 +147,8 @@
       <Setter Property="Foreground" Value="#99A8DFE9"/>
       <Setter Property="HorizontalAlignment" Value="Stretch"/>
       <Setter Property="HorizontalContentAlignment" Value="Center"/>
-      <Setter Property="Padding" Value="12,0"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Padding" Value="0"/>
       <Setter Property="Height" Value="40"/>
       <Setter Property="CornerRadius" Value="11"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
@@ -580,16 +581,6 @@
 
           <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center"
                       IsVisible="{Binding !NeedsAuth}">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-              <TextBlock Text="{Binding Username}" FontSize="13" FontWeight="SemiBold" Foreground="#A8DFE9"
-                         HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" MaxWidth="160"/>
-              <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Border Background="#3350E8F4" CornerRadius="999" Padding="3" VerticalAlignment="Center">
-                  <Image Source="/Assets/coin.png" Width="13" Height="13" Stretch="UniformToFill"/>
-                </Border>
-                <TextBlock Text="{Binding CoinsText}" FontSize="11" Foreground="#8FD9E6" VerticalAlignment="Center"/>
-              </StackPanel>
-            </StackPanel>
             <Button Classes="link" Content="Выйти" Command="{Binding RequestLogoutCommand}"
                     IsVisible="{Binding !LogoutConfirmVisible}" AutomationProperties.Name="Выйти"/>
             <StackPanel Orientation="Horizontal" Spacing="4" IsVisible="{Binding LogoutConfirmVisible}"

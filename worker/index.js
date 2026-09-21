@@ -8,6 +8,8 @@ import { onRequestGet as authNickGet } from "../functions/api/auth/nick.js";
 import { onRequestPost as forgotPasswordPost } from "../functions/api/auth/forgot-password.js";
 import { onRequestPost as resetPasswordPost } from "../functions/api/auth/reset-password.js";
 import { onRequestPost as casesOpenPost } from "../functions/api/cases/open.js";
+import { onRequestGet as casesRecentGet } from "../functions/api/cases/recent.js";
+import { onRequestGet as statusHistoryGet } from "../functions/api/status-history.js";
 import { onRequestGet as vaultGet } from "../functions/api/vault/index.js";
 import { onRequestPost as logoutPost } from "../functions/api/logout.js";
 import { onRequestPost as passwordPost } from "../functions/api/password.js";
@@ -54,6 +56,7 @@ import {
   onRequestGet as syncPlayerGet,
 } from "../functions/api/sync/player.js";
 import { onRequestGet as marketGet, onRequestPost as marketPost } from "../functions/api/market.js";
+import { onRequestGet as marketPublicGet } from "../functions/api/market/public.js";
 import { onRequestGet as trendsGet, onRequestPost as trendsPost } from "../functions/api/trends.js";
 import { onRequestGet as adminMeGet } from "../functions/api/admin/me.js";
 import {
@@ -106,6 +109,7 @@ async function handleApi(request, env, execCtx) {
   if (path === "/api/auth/forgot-password" && method === "POST") return forgotPasswordPost(ctx(request, env));
   if (path === "/api/auth/reset-password" && method === "POST") return resetPasswordPost(ctx(request, env));
   if (path === "/api/cases/open" && method === "POST") return casesOpenPost(ctx(request, env));
+  if (path === "/api/cases/recent" && method === "GET") return casesRecentGet(ctx(request, env));
   if (path === "/api/vault" && method === "GET") return vaultGet(ctx(request, env));
   if (path === "/api/logout" && method === "POST") return logoutPost(ctx(request, env));
   if (path === "/api/password" && method === "POST") return passwordPost(ctx(request, env));
@@ -113,6 +117,7 @@ async function handleApi(request, env, execCtx) {
   if (path === "/api/players" && method === "GET") return playersGet(ctx(request, env));
   if (path === "/api/catalog" && method === "GET") return catalogGet(ctx(request, env));
   if (path === "/api/server-status" && method === "GET") return serverStatusGet(ctx(request, env));
+  if (path === "/api/status-history" && method === "GET") return statusHistoryGet(ctx(request, env));
   if (path === "/api/news" && method === "GET") return newsGet(ctx(request, env));
   if (path === "/api/tg-webhook" && method === "POST") return tgWebhookPost({ request, env, params: {} });
   if (path === "/api/site" && method === "GET") return siteGet(ctx(request, env));
@@ -128,7 +133,7 @@ async function handleApi(request, env, execCtx) {
     if (method === "GET") return trendsGet(ctx(request, env));
     if (method === "POST") return trendsPost(ctx(request, env));
   }
-  if (path === "/api/market/public" && method === "GET") return marketPublicHandler(ctx(request, env));
+    if (path === "/api/market/public" && method === "GET") return marketPublicGet(ctx(request, env));
   // ensure-nick intentionally returns 410 (open signup footgun)
   if (path === "/api/launcher/ensure-nick" && method === "POST") return launcherEnsureNickPost(ctx(request, env));
   if (path === "/api/launcher/verify-token" && method === "POST") return launcherVerifyTokenPost(ctx(request, env));
@@ -231,21 +236,6 @@ async function handleApi(request, env, execCtx) {
     status: 404,
     headers: { "content-type": "application/json; charset=utf-8" },
   });
-}
-
-async function marketPublicHandler({ request, env }) {
-  if (!env.DB) return new Response(JSON.stringify({ ok: false, lots: [] }), { status: 503, headers: { "content-type": "application/json" } });
-  const url = new URL(request.url);
-  const limit = Math.min(40, Math.max(1, Number(url.searchParams.get("limit") || 6)));
-  try {
-    const lots = await env.DB
-      .prepare(`SELECT id, seller, label, count, price FROM market_listings WHERE status = 'open' ORDER BY created_at DESC LIMIT ?`)
-      .bind(limit)
-      .all();
-    return new Response(JSON.stringify({ ok: true, lots: lots.results || [] }), { headers: { "content-type": "application/json" } });
-  } catch {
-    return new Response(JSON.stringify({ ok: false, lots: [] }), { headers: { "content-type": "application/json" } });
-  }
 }
 
 const LAUNCHER_FILES = {

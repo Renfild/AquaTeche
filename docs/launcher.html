@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AquaTech Launcher</title>
 
@@ -31,7 +32,7 @@
         <div class="user-profile-card">
           <div class="user-avatar" id="user-avatar">P</div>
           <div class="user-info">
-            <small>Игрок</small>
+            <small>�грок</small>
             <strong id="user-nick">Renfild</strong>
           </div>
         </div>
@@ -77,7 +78,7 @@
           <button class="play-btn" id="play-btn">
             <div class="play-progress-fill" id="progress-fill"></div>
             <div class="play-status-label" id="btn-label">
-              <span>ИГРАТЬ</span>
+              <span>�ГРАТЬ</span>
             </div>
           </button>
         </div>
@@ -151,15 +152,15 @@
           fill.style.width = `${data.progress}%`;
         } else if (data.state === 'ingame') {
           isLaunching = false;
-          label.innerHTML = `<span>В ИГРЕ</span>`;
+          label.innerHTML = `<span>В �ГРЕ</span>`;
           fill.style.width = '100%';
         } else if (data.state === 'error') {
           isLaunching = false;
-          label.innerHTML = `<span>ОШИБКА</span>`;
+          label.innerHTML = `<span>ОШ�БКА</span>`;
           fill.style.width = '0%';
         } else {
           isLaunching = false;
-          label.innerHTML = `<span>ИГРАТЬ</span>`;
+          label.innerHTML = `<span>�ГРАТЬ</span>`;
           fill.style.width = '0%';
         }
 
@@ -194,11 +195,11 @@
         const r = await fetch(`${API_BASE}/api/play`, {method: 'POST'});
         const res = await r.json();
         if (!res.ok) {
-          alert(res.message || 'Ошибка запуска');
+          alert(res.message || 'Орибка запуска');
           isLaunching = false;
         }
       } catch (e) {
-        alert('Ошибка связи с сервером лаунчера');
+        alert('Орибка связи с сервером лаунчера');
         isLaunching = false;
       }
     };

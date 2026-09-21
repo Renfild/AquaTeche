@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -183,6 +184,7 @@ public final class HubDataService {
         );
 
         // 6. Assemble Full Live Snapshot
+        AtlasView atlasView = atlasView(player);
         return new HubSnapshot(
                 profile,
                 wallet,
@@ -190,15 +192,92 @@ public final class HubDataService {
                 tops(server, player),
                 StoreCatalog.offers(player),
                 cases(player),
-                kits(),
+                kits(player),
                 warps(),
                 fishes(player),
                 serverInfo(server),
                 PENDING_CASE_RESULTS.remove(player.getUUID()),
                 market(player),
                 eventQuests(player),
-                eventLine(player)
+                eventLine(player),
+                atlasView.entries(),
+                atlasView.summary()
         );
+    }
+
+    private record AtlasView(List<HubSnapshot.AtlasEntry> entries, HubSnapshot.AtlasSummary summary) {
+    }
+
+    /**
+     * Рыбный атлас пишет aquatech_ui в persistentData игрока ("aquatech_atlas");
+     * compile-зависимости нет, читаем обычный NBT. Виды и имена — из fish_shop.json.
+     */
+    private static AtlasView atlasView(ServerPlayer player) {
+        CompoundTag atlas = player.getPersistentData().getCompound("aquatech_atlas");
+        CompoundTag species = atlas.getCompound("s");
+        JsonObject records = atlasRecords();
+        List<HubSnapshot.AtlasEntry> list = new ArrayList<>();
+        String recordName = "";
+        float recordWeight = 0f;
+        int found = 0;
+        for (FishShopConfig.FishDef def : FishShopConfig.get().fishes) {
+            if (def.id == null || def.id.isBlank()) continue;
+            boolean has = species.contains(def.id, Tag.TAG_COMPOUND);
+            int count = 0;
+            int grades = 0;
+            int conds = 0;
+            float weight = 0f;
+            if (has) {
+                CompoundTag rec = species.getCompound(def.id);
+                count = rec.getInt("c");
+                grades = rec.getInt("g");
+                conds = rec.getInt("m");
+                weight = (float) rec.getDouble("w");
+                found++;
+                if (weight > recordWeight) {
+                    recordWeight = weight;
+                    recordName = def.name != null && !def.name.isBlank() ? def.name : def.id;
+                }
+            }
+            String holder = "";
+            float serverWeight = 0f;
+            if (records.has(def.id) && records.get(def.id).isJsonObject()) {
+                JsonObject row = records.getAsJsonObject(def.id);
+                holder = row.has("holder") ? row.get("holder").getAsString() : "";
+                serverWeight = row.has("weight") ? row.get("weight").getAsFloat() : 0f;
+            }
+            list.add(new HubSnapshot.AtlasEntry(
+                    def.id,
+                    def.name != null && !def.name.isBlank() ? def.name : def.id,
+                    def.rarity != null ? def.rarity : "",
+                    count, weight, grades, conds, has, holder, serverWeight));
+        }
+        return new AtlasView(list, new HubSnapshot.AtlasSummary(found, list.size(), atlas.getInt("total"),
+                recordName, recordWeight, atlas.getInt("nm"), atlas.getLong("nr")));
+    }
+
+    private static volatile JsonObject atlasRecordsCache;
+    private static volatile long atlasRecordsMtime = -1L;
+
+    /** config/aqualumen/atlas_records.json пишет aquatech_ui (рекорды видов по серверу). */
+    private static JsonObject atlasRecords() {
+        try {
+            java.io.File file = new java.io.File("config/aqualumen/atlas_records.json");
+            if (!file.exists()) {
+                return atlasRecordsCache != null ? atlasRecordsCache : new JsonObject();
+            }
+            long mtime = file.lastModified();
+            if (atlasRecordsCache != null && mtime == atlasRecordsMtime) {
+                return atlasRecordsCache;
+            }
+            try (java.io.FileReader reader = new java.io.FileReader(file, StandardCharsets.UTF_8)) {
+                atlasRecordsCache = JsonParser.parseReader(reader).getAsJsonObject();
+            }
+            atlasRecordsMtime = mtime;
+            return atlasRecordsCache;
+        } catch (Exception e) {
+            return atlasRecordsCache != null ? atlasRecordsCache : new JsonObject();
+        }
     }
 
     /**
@@ -259,6 +338,8 @@ public final class HubDataService {
             if (!(status instanceof java.util.Map<?, ?> m)) return "";
             if (Boolean.TRUE.equals(m.get("storm"))) return "\u00a76\u2726 Золотая буря идёт — ловите!";
             if (Boolean.TRUE.equals(m.get("golden"))) return "\u00a76\u2726 Золотая рыба: шанс на каждом улове";
+            if (m.containsKey("biteFish")) return "\u00a7d\u2726 Жор: \u00a7f" + m.get("biteFish")
+                    + " \u00a77(T" + m.get("biteTier") + "+)";
             if (m.containsKey("schoolFish")) return "\u00a7bКосяк: \u00a7f" + m.get("schoolFish") + " \u00a7e\u00d73 уровень ловли";
             if (m.containsKey("boostFish")) return "\u00a76Тренд+: \u00a7f" + m.get("boostFish") + " \u00a7e\u00d7" + m.get("boostMult") + " у Скупщика";
             if (Boolean.TRUE.equals(m.get("tournament"))) return "\u00a76Турнир недели: самая тяжёлая рыба";
@@ -268,20 +349,52 @@ public final class HubDataService {
         }
     }
 
-    private static List<HubSnapshot.KitEntry> kits() {
+    private static List<HubSnapshot.KitEntry> kits(ServerPlayer player) {
         List<HubSnapshot.KitEntry> list = new ArrayList<>();
+        String rankId = player != null ? resolveRankId(player) : "";
         for (KitConfig.KitDef def : KitConfig.get().kits) {
             String cmd = def.command != null && !def.command.isBlank() ? def.command :
                          (def.commands != null && !def.commands.isEmpty() ? def.commands.get(0) : "kit " + (def.id != null ? def.id : ""));
+            boolean locked = false;
+            if (def.requiredRanks != null && !def.requiredRanks.isEmpty()) {
+                locked = true;
+                for (String required : def.requiredRanks) {
+                    if (required != null && required.equalsIgnoreCase(rankId)) {
+                        locked = false;
+                        break;
+                    }
+                }
+            }
+            String requires = def.requiresText != null && !def.requiresText.isBlank()
+                    ? def.requiresText
+                    : (def.requiredRanks != null ? String.join(", ", def.requiredRanks) : "");
             list.add(new HubSnapshot.KitEntry(
                 def.id != null ? def.id : "",
                 def.title != null ? def.title : "",
                 def.description != null ? def.description : "",
                 def.badge != null ? def.badge : "",
-                cmd
+                cmd,
+                locked,
+                requires
             ));
         }
         return list;
+    }
+
+    /** LuckPerms primary group key (lowercase) so kits can be gated by rank. */
+    public static String resolveRankId(ServerPlayer player) {
+        try {
+            if (!ensureLpReflect()) return "";
+            Object api = lpProviderGet.invoke(null);
+            if (api == null) return "";
+            Object userManager = api.getClass().getMethod("getUserManager").invoke(api);
+            Object user = userManager.getClass().getMethod("getUser", UUID.class).invoke(userManager, player.getUUID());
+            if (user == null) return "";
+            String primary = (String) user.getClass().getMethod("getPrimaryGroup").invoke(user);
+            return primary == null ? "" : primary.toLowerCase(Locale.ROOT);
+        } catch (Throwable t) {
+            return "";
+        }
     }
 
     private static List<HubSnapshot.WarpEntry> warps() {
@@ -443,7 +556,8 @@ public final class HubDataService {
                     def.costCoins,
                     keys,
                     def.rarity,
-                    lootPreview(def)
+                    lootPreview(def),
+                    HubActionHandler.casePityLeft(player, def)
             ));
         }
         return entries;

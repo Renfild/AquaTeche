@@ -16,11 +16,22 @@ const LIB_OUT = path.join(ROOT, "functions", "_lib", "cases_data.js");
 const src = JSON.parse(fs.readFileSync(SRC, "utf8"));
 const cases = (src.cases || []).map((c) => {
   const total = (c.loot || []).reduce((s, l) => s + (Number(l.weight) || 0), 0);
+  const pity = c.pity
+    ? {
+        name: c.pity.label || "Гарантированная награда",
+        type: c.pity.type || "item",
+        item: c.pity.item || "",
+        min: c.pity.min,
+        max: c.pity.max,
+      }
+    : null;
   return {
     slug: c.id,
     title: c.title,
     rarity: c.rarity,
     cost: c.costCoins || 0,
+    pityEvery: Number(c.pityEvery) || 0,
+    pity,
     loot: (c.loot || []).map((l) => ({
       name: l.label,
       type: l.type || "item",

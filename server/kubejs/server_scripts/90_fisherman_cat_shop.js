@@ -127,7 +127,7 @@ function openFishermanShop(player) {
         addTrade('minecraft:emerald', 3, 'minecraft:fishing_rod', 1);
         addTrade('minecraft:emerald', 5, 'starcatcher:fisherman_hat_white', 1);
         addTrade('minecraft:emerald', 8, 'starcatcher:tackle_box', 1);
-        addTrade('minecraft:emerald', 12, 'aquatech_ui:sea_prism_shard', 1);
+        addTrade('minecraft:emerald', 12, 'aquatech_ui:sonar_goggles', 1);
 
         let traderProxy = new JavaAdapter(Merchant, {
             player: serverPlayer,

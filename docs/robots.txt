@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /embed/
+Disallow: /ui_preview.html
+Disallow: /pack/
+Disallow: /dl/
+Disallow: /api/
+
+Sitemap: https://aquateche.store/sitemap.xml

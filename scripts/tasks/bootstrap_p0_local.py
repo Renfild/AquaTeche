@@ -77,11 +77,11 @@ def patch_fawe() -> Path:
 def write_secrets() -> None:
     pwd, key = recover_secrets()
     out = {
-        "sftp_host": "g-pl-3.apexnodes.xyz",
+        "sftp_host": "g-pl-2.apexnodes.xyz",
         "sftp_port": 2022,
         "sftp_user": "oxmzg5d0.6fdc6f7b",
         "sftp_pass": pwd,
-        "server_port": "21561",
+        "server_port": "21924",
         "apex_panel": "https://panel.apexnodes.xyz",
         "apex_server_id": "6fdc6f7b",
         "apex_api_key": key,

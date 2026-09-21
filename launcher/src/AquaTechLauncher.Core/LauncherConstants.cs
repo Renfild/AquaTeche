@@ -2,15 +2,15 @@ namespace AquaTechLauncher.Core;
 
 public static class LauncherConstants
 {
-    public const string Version = "2.9.95";
+    public const string Version = "2.9.97";
     public const string McVersion = "1.20.1";
     public const string ForgeVersion = "47.4.0";
     public const string McpVersion = "20230612.114412";
     public static string ForgeVersionId => $"{McVersion}-forge-{ForgeVersion}";
     public static string ForgeCoord => $"{McVersion}-{ForgeVersion}";
 
-    public const string ServerHost = "g-pl-3.apexnodes.xyz";
-    public const int ServerPort = 21561;
+    public const string ServerHost = "g-pl-2.apexnodes.xyz";
+    public const int ServerPort = 21924;
     public const int PackReadyMinJars = 40;
 
     public const string PortalApiBase = "https://aquateche.store";

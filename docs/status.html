@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Статус сервера · AquaTech</title>
+  <meta name="description" content="Живой статус сервера AquaTech: онлайн, аптайм за 24 часа, 7 и 30 дней, история онлайна по сэмплам каждые пять минут и пик игроков." />
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AquaTech" />
+  <meta property="og:title" content="Статус сервера · AquaTech" />
+  <meta property="og:description" content="Онлайн, аптайм и история онлайна сервера AquaTech без прикрас: видно и падения, и подъёмы." />
+  <meta property="og:url" content="https://aquateche.store/status.html" />
+  <meta property="og:image" content="https://aquateche.store/assets/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Статус сервера · AquaTech" />
+  <meta name="twitter:description" content="Онлайн, аптайм и история онлайна сервера AquaTech." />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260921_topbar" />
+</head>
+<body data-page="status">
+  <a class="skip-link" href="#main">К содержимому</a>
+  <div id="site-header"></div>
+  <main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="eyebrow">Статус сервера</div>
+      <h1>Что происходит с сервером</h1>
+      <p class="muted-line" style="max-width:62ch">
+        Живое состояние океана и история онлайна. Мы не прячем простои: на графике видно и подъёмы, и падения,
+        включая технические работы.
+      </p>
+      <div class="status-live-row">
+        <span class="online-pill" id="statusLivePill">
+          <span class="live-dot"></span>
+          <span id="statusLiveText">Проверяем сервер…</span>
+        </span>
+        <span class="status-addr" id="statusAddress">g-pl-2.apexnodes.xyz:21924</span>
+        <span class="status-checked" id="statusChecked">Последняя проверка: —</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <div class="status-stat-grid">
+        <div class="status-stat">
+          <b id="statusPlayers">—</b>
+          <span>игроков сейчас</span>
+        </div>
+        <div class="status-stat">
+          <b id="statusVersion">—</b>
+          <span>версия сервера</span>
+        </div>
+        <div class="status-stat">
+          <b id="statusUptime">—</b>
+          <span id="statusUptimeLabel">аптайм за 24 часа</span>
+        </div>
+        <div class="status-stat">
+          <b id="statusPeak">—</b>
+          <span>пик онлайна</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <div class="status-chart-card">
+        <div class="status-chart-head">
+          <div>
+            <h2>История онлайна</h2>
+            <p class="muted-line" id="statusChartNote">Сэмплы каждые пять минут. История собирается с момента запуска портала.</p>
+          </div>
+          <div class="apple-segment" id="statusRange" role="tablist" aria-label="Период истории">
+            <button type="button" class="apple-segment-btn active" data-range="24h" role="tab" aria-selected="true">24 часа</button>
+            <button type="button" class="apple-segment-btn" data-range="7d" role="tab" aria-selected="false">7 дней</button>
+            <button type="button" class="apple-segment-btn" data-range="30d" role="tab" aria-selected="false">30 дней</button>
+          </div>
+        </div>
+
+        <div id="statusChart" class="status-chart">
+          <div class="status-chart-empty">Загружаем историю…</div>
+        </div>
+
+        <div id="statusAvailability" class="status-availability" aria-hidden="true"></div>
+
+        <div class="status-chart-legend">
+          <span class="status-legend-item"><i class="status-legend-swatch swatch-online"></i>онлайн</span>
+          <span class="status-legend-item"><i class="status-legend-swatch swatch-players"></i>игроков в игре</span>
+          <span class="status-legend-item"><i class="status-legend-swatch swatch-down"></i>сервер недоступен</span>
+          <span class="status-legend-note" id="statusSamples">—</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <div class="section-head-split">
+        <div>
+          <div class="eyebrow">Как это считается</div>
+          <h2>Честные данные вместо «24/7 онлайн»</h2>
+        </div>
+      </div>
+      <div class="feature-card-grid">
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Источник</span></div>
+          <h3>Публичные query-сервисы</h3>
+          <p>Состояние сервера портал спрашивает у mcstatus.io и mcsrvstat.us — тех же сервисов, что используют мониторинги.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Частота</span></div>
+          <h3>Сэмпл раз в пять минут</h3>
+          <p>Каждый заход на портал обновляет текущее состояние, а в историю попадает не чаще одной точки в пять минут.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-head"><span class="tag">Простои</span></div>
+          <h3>Падения видно</h3>
+          <p>Красные полосы под графиком — это моменты, когда сервер не отвечал. Они остаются в истории, а не исчезают из статистики.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js?v=20260921_topbar"></script>
+</body>
+</html>

@@ -50,6 +50,16 @@ public class ModItems {
     public static final RegistryObject<Item> INFERNAL_PEARL = ITEMS.register("infernal_pearl",
             () -> new net.aquatech.ui.item.InfernalPearlItem(new Item.Properties().stacksTo(1).fireResistant()));
 
+    // Приманки из рыбного сырья (заряжаются в удочку, тратятся на ручной улов)
+    public static final RegistryObject<Item> BAIT_SHOAL = ITEMS.register("bait_shoal",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> BAIT_ORE = ITEMS.register("bait_ore",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> BAIT_ABYSS = ITEMS.register("bait_abyss",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

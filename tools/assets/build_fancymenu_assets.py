@@ -528,7 +528,7 @@ def generate_layouts():
         # Glowing Crystal Emblem
         image_element("title-crystal", "logo_crystal.png", emblem_x, emblem_y, emblem_w, emblem_h, anchor="mid-centered", nine_slice=False),
         # 1. Primary Play Button
-        custom_button("btn-play", uid("ex"), uid("act"), "joinserver", "g-pl-3.apexnodes.xyz:21561",
+        custom_button("btn-play", uid("ex"), uid("act"), "joinserver", "g-pl-2.apexnodes.xyz:21924",
                       btn_x, btn_play_y, btn_w, 42,
                       '{"text":"\\u0421\\u0435\\u0440\\u0432\\u0435\\u0440 AquaTech","color":"#031018","bold":false,"font":"aquatech_ui:header"}',
                       "btn_play.png", "btn_play_hover.png", nine_border=16, anchor="mid-centered"),

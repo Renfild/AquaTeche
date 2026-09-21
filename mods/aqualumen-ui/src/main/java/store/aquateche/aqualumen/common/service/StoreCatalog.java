@@ -123,6 +123,13 @@ public final class StoreCatalog {
                 HubEconomy.grantCoins(player, parseLong(payload, 500));
                 yield true;
             }
+            case "coins_take" -> {
+                long amount = parseLong(payload, 0);
+                long taken = HubEconomy.webTake(player, amount);
+                store.aquateche.aqualumen.AquaLumenUI.LOGGER.info(
+                        "Web wallet debit for {}: {}/{}", player.getGameProfile().getName(), taken, amount);
+                yield true;
+            }
             case "gems" -> {
                 HubEconomy.grantGems(player, (int) parseLong(payload, 10));
                 yield true;

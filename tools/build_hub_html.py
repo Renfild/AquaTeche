@@ -1,4 +1,4 @@
-import json
+﻿import json
 import os
 
 with open('tools/label_texture_map.json', 'r', encoding='utf-8') as f:
@@ -11,6 +11,25 @@ with open('tools/case_icon_map.json', 'r', encoding='utf-8') as f:
     case_icons = json.load(f)
 
 all_textures = {**item_textures, **label_textures}
+
+# РћС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Рµ РїСѓС‚Рё (assets/images/items/*.png) РІРЅСѓС‚СЂРё РёРіСЂС‹ РЅРµ СЂРµР·РѕР»РІСЏС‚СЃСЏ: mod://
+# СЃРјРѕС‚СЂРёС‚ РІ classpath РјРѕРґР°. РРЅР»Р°Р№РЅРёРј РёС… РІ data-URI РёР· docs/assets.
+_ITEMS_DIR = os.path.join('docs', 'assets', 'images', 'items')
+_fixed = 0
+for _key, _src in list(all_textures.items()):
+    if not isinstance(_src, str) or _src.startswith(('data:', 'http')):
+        continue
+    _file = os.path.join(_ITEMS_DIR, os.path.basename(_src))
+    if os.path.isfile(_file):
+        import base64
+        with open(_file, 'rb') as _fh:
+            _b64 = base64.b64encode(_fh.read()).decode('ascii')
+        all_textures[_key] = 'data:image/png;base64,' + _b64
+        _fixed += 1
+    else:
+        print('missing texture file:', _file)
+print('hub textures inlined:', _fixed)
+
 textures_json = json.dumps(all_textures, ensure_ascii=False)
 case_icons_json = json.dumps(case_icons, ensure_ascii=False)
 
@@ -447,6 +466,13 @@ hub_html_raw = r'''<!doctype html>
     @keyframes confetti-fly{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--cx),var(--cy)) rotate(var(--cr))}}
     @media(max-width:900px){.stage{padding:10px}.hub{width:98vw;height:96vh;grid-template-columns:166px 1fr}.brand{min-width:156px}.chips .chip:nth-child(2){display:none}.content{padding:15px}.grid.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(4,1fr)}.store-grid,.case-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-height:610px){.hub{min-height:0;height:96vh}.topbar{height:48px}.hub{grid-template-rows:48px 1fr 32px}.daily{display:none}.content{padding-top:12px;padding-bottom:12px}.hero{min-height:150px}}
+    /* Магазин: строка фильтра */
+    .shop-filter{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+    .hub-input{flex:1 1 220px;min-width:180px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);font:inherit;font-size:12px;outline:none}
+    .hub-input::placeholder{color:var(--muted)}
+    .hub-input:focus{border-color:var(--accent)}
+    .shop-chips{display:flex;flex-wrap:wrap;gap:6px}
+    .atlas-pill.active{background:color-mix(in srgb, var(--accent) 22%, transparent);border-color:var(--accent);color:#eafffb}
   </style>
 </head>
 <body>
@@ -459,56 +485,55 @@ hub_html_raw = r'''<!doctype html>
         </span>
         AquaLumen
       </div>
-      <div class="server-title" id="serverName">AquaTech Network</div>
       <div class="chips">
-        <span class="chip"><i class="chip-dot"></i><b id="online">—/—</b></span>
-        <span class="chip"><b id="tps">— TPS</b></span>
+        <span class="chip"><i class="chip-dot"></i><b id="online">вЂ”/вЂ”</b></span>
+        <span class="chip"><b id="tps">вЂ” TPS</b></span>
         <span class="chip" style="color:var(--gold);"><img class="aqua-coin-icon" src="__COIN_SRC__" alt=""><b id="coins">0</b></span>
-        <span class="chip" style="color:var(--accent);"><b id="gems">0</b>&nbsp;крист</span>
+        <span class="chip" style="color:var(--accent);"><b id="gems">0</b>&nbsp;РєСЂРёСЃС‚</span>
       </div>
-      <button class="icon-button" id="refresh" aria-label="Обновить">
+      <button class="icon-button" id="refresh" aria-label="РћР±РЅРѕРІРёС‚СЊ">
         <svg viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 8A7 7 0 0 1 18 6l2 2M17.9 16A7 7 0 0 1 6 18l-2-2"/></svg>
       </button>
-      <button class="icon-button" id="close" aria-label="Закрыть">
+      <button class="icon-button" id="close" aria-label="Р—Р°РєСЂС‹С‚СЊ">
         <svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
       </button>
     </header>
     <aside class="sidebar">
       <nav class="nav" id="nav"></nav>
     </aside>
-    <section class="content" id="content"><div class="empty">Получаем профиль с сервера…</div></section>
+    <section class="content" id="content"><div class="empty">РџРѕР»СѓС‡Р°РµРј РїСЂРѕС„РёР»СЊ СЃ СЃРµСЂРІРµСЂР°вЂ¦</div></section>
     <footer class="footer">
       <span class="footer-build" id="build">AquaLumen UI</span>
-      <span><span class="key" id="openKey">F4</span> открыть</span>
-      <span><span class="key">ESC</span> закрыть</span>
+      <span><span class="key" id="openKey">F4</span> РѕС‚РєСЂС‹С‚СЊ</span>
+      <span><span class="key">ESC</span> Р·Р°РєСЂС‹С‚СЊ</span>
     </footer>
   </main>
 </div>
 <div class="modal-layer" id="modalLayer">
   <section class="modal" role="dialog" aria-modal="true">
-    <h2 id="modalTitle">Подтверждение</h2>
+    <h2 id="modalTitle">РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ</h2>
     <p id="modalText"></p>
     <div class="modal-actions">
-      <button class="button" id="modalCancel">Отмена</button>
-      <button class="button primary" id="modalConfirm">Продолжить</button>
+      <button class="button" id="modalCancel">РћС‚РјРµРЅР°</button>
+      <button class="button primary" id="modalConfirm">РџСЂРѕРґРѕР»Р¶РёС‚СЊ</button>
     </div>
   </section>
 </div>
 <div class="modal-layer" id="rankModalLayer">
   <section class="modal rank-modal" role="dialog" aria-modal="true">
-    <button class="icon-button rank-modal-close" id="rankModalClose" aria-label="Закрыть"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    <button class="icon-button rank-modal-close" id="rankModalClose" aria-label="Р—Р°РєСЂС‹С‚СЊ"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     <div class="rank-modal-head">
       <div class="rank-glyph" id="rankCrest"></div>
       <div>
-        <h2 id="rankModalTitle">Привилегия</h2>
+        <h2 id="rankModalTitle">РџСЂРёРІРёР»РµРіРёСЏ</h2>
         <div class="rank-modal-tag" id="rankModalTag"></div>
       </div>
     </div>
     <p class="rank-modal-sub" id="rankModalSub"></p>
     <div class="rank-perks" id="rankPerks"></div>
     <div class="modal-actions">
-      <button class="button" id="rankModalCancel">Закрыть</button>
-      <button class="button primary" id="rankModalBuy">Купить</button>
+      <button class="button" id="rankModalCancel">Р—Р°РєСЂС‹С‚СЊ</button>
+      <button class="button primary" id="rankModalBuy">РљСѓРїРёС‚СЊ</button>
     </div>
   </section>
 </div>
@@ -518,14 +543,14 @@ hub_html_raw = r'''<!doctype html>
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;text-align:left;">
       <img id="previewCaseImg" class="case-card-img" style="width:72px;height:72px;margin:0;flex:0 0 auto;" src="" alt="" />
       <div>
-        <h2 id="previewCaseTitle" style="margin:0 0 4px;font-size:20px;">Кейс</h2>
+        <h2 id="previewCaseTitle" style="margin:0 0 4px;font-size:20px;">РљРµР№СЃ</h2>
         <p id="previewCaseSub" style="margin:0;color:var(--muted);font-size:11px;"></p>
       </div>
     </div>
-    <div class="section-title" style="margin:0 0 6px;"><b>Содержимое кейса</b><span id="previewLootCount"></span></div>
+    <div class="section-title" style="margin:0 0 6px;"><b>РЎРѕРґРµСЂР¶РёРјРѕРµ РєРµР№СЃР°</b><span id="previewLootCount"></span></div>
     <div class="case-drop-grid" id="previewDropGrid"></div>
     <div style="margin-top:16px;display:flex;justify-content:flex-end;align-items:center;gap:10px;flex-wrap:wrap;">
-      <button class="button" id="previewCloseBtn">Закрыть</button>
+      <button class="button" id="previewCloseBtn">Р—Р°РєСЂС‹С‚СЊ</button>
       <div id="previewActions" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
     </div>
   </section>
@@ -535,13 +560,13 @@ hub_html_raw = r'''<!doctype html>
     <div class="case-orb" id="caseOrb" style="margin:0 auto;width:54px;height:54px;border-radius:16px;font-size:20px;display:grid;place-items:center;border:1px solid var(--line);background:radial-gradient(circle,color-mix(in srgb,var(--accent) 26%,transparent),transparent 72%)">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h18v4H3zM3 12v8h18v-8M3 8l2-4h6l2 4"/><circle cx="12" cy="16" r="1.4"/></svg>
     </div>
-    <h2 id="caseTitle">Кейс</h2>
+    <h2 id="caseTitle">РљРµР№СЃ</h2>
     <p class="case-sub" id="caseSub"></p>
     <div class="reel" id="caseReel">
       <div class="reel-marker" id="caseMarker"></div>
       <div class="reel-strip" id="caseStrip"></div>
     </div>
-    <div class="case-wait" id="caseReveal"><span>Крутим рулетку…</span></div>
+    <div class="case-wait" id="caseReveal"><span>РљСЂСѓС‚РёРј СЂСѓР»РµС‚РєСѓвЂ¦</span></div>
     <div class="case-actions" id="caseActions"></div>
   </section>
 </div>
@@ -558,26 +583,28 @@ try {
   function coins(n){return '<span class="coins-amt">'+num(n)+coinIco()+'</span>'}
 
   const tabMeta = {
-    profile:["Профиль",'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.4-3.6 4-5.2 7-5.2s5.6 1.6 7 5.2"/></svg>'],
-    store:["Магазин",'<svg viewBox="0 0 24 24"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>'],
-    cases:["Кейсы",'<svg viewBox="0 0 24 24"><path d="M3 8h18v4H3zM3 12v8h18v-8M3 8l2-4h6l2 4"/><circle cx="12" cy="16" r="1.4"/></svg>'],
-    pass:["Пропуск",'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8L12 3Z"/></svg>'],
-    fishing:["Рыбалка",'<svg viewBox="0 0 24 24"><path d="M3 12c3-4 6-4 9 0s6 4 9 0"/><circle cx="18" cy="8" r="1.6"/></svg>'],
-    events:["События",'<svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>'],
-    auction:["Аукцион",'<svg viewBox="0 0 24 24"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>'],
-    kits:["Киты",'<svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="2.5"/><path d="M9 9V6.5A2.5 2.5 0 0 1 11.5 4h1A2.5 2.5 0 0 1 15 6.5V9M4 13.5h16"/></svg>'],
-    warps:["Варпы",'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></svg>'],
-    tops:["Топ",'<svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>'],
-    settings:["Настройки",'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.2a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.2a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3 1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.2a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l.1.1a1.6 1.6 0 0 0-.3 1.8 1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.2a1.6 1.6 0 0 0-1.4 1Z"/></svg>']
+    profile:["РџСЂРѕС„РёР»СЊ",'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.4-3.6 4-5.2 7-5.2s5.6 1.6 7 5.2"/></svg>'],
+    store:["РњР°РіР°Р·РёРЅ",'<svg viewBox="0 0 24 24"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>'],
+    privileges:["РџСЂРёРІРёР»РµРіРёРё",'<svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.1 5.6.7-4.1 3.9 1 5.6L12 15.6 7.1 18.3l1-5.6L4 8.8l5.6-.7L12 3Z"/></svg>'],
+    cases:["РљРµР№СЃС‹",'<svg viewBox="0 0 24 24"><path d="M3 8h18v4H3zM3 12v8h18v-8M3 8l2-4h6l2 4"/><circle cx="12" cy="16" r="1.4"/></svg>'],
+    pass:["РџСЂРѕРїСѓСЃРє",'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8L12 3Z"/></svg>'],
+    fishing:["Р С‹Р±Р°Р»РєР°",'<svg viewBox="0 0 24 24"><path d="M3 12c3-4 6-4 9 0s6 4 9 0"/><circle cx="18" cy="8" r="1.6"/></svg>'],
+    atlas:["РђС‚Р»Р°СЃ",'<svg viewBox="0 0 24 24"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H19v17H7.5A2.5 2.5 0 0 0 5 21.5Z"/><path d="M5 4.5v17"/><path d="M9 6.5h6M9 10h5"/></svg>'],
+    events:["РЎРѕР±С‹С‚РёСЏ",'<svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>'],
+    auction:["РђСѓРєС†РёРѕРЅ",'<svg viewBox="0 0 24 24"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>'],
+    kits:["РљРёС‚С‹",'<svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="2.5"/><path d="M9 9V6.5A2.5 2.5 0 0 1 11.5 4h1A2.5 2.5 0 0 1 15 6.5V9M4 13.5h16"/></svg>'],
+    warps:["Р’Р°СЂРїС‹",'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></svg>'],
+    tops:["РўРѕРї",'<svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>'],
+    settings:["РќР°СЃС‚СЂРѕР№РєРё",'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.2a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.2a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3 1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.2a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l.1.1a1.6 1.6 0 0 0-.3 1.8 1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.2a1.6 1.6 0 0 0-1.4 1Z"/></svg>']
   };
 
   const state = {
     tab:"profile",
     payload:{
       snapshot:{
-        profile:{name:"Player",rank:"Игрок",rankColor:0x8fa6b8,level:1,levelProgress:0,playtimeMinutes:0,kills:0,deaths:0,quests:0,friendsOnline:0},
+        profile:{name:"Player",rank:"РРіСЂРѕРє",rankColor:0x8fa6b8,level:1,levelProgress:0,playtimeMinutes:0,kills:0,deaths:0,quests:0,friendsOnline:0},
         wallet:{coins:0,gems:0,dailyStreak:1,dailyAvailable:false},
-        season:{title:"Сезон 1",tier:1,maxTier:10,tierProgress:0,premium:false,claimable:0,claimedTiers:[]},
+        season:{title:"РЎРµР·РѕРЅ 1",tier:1,maxTier:10,tierProgress:0,premium:false,claimable:0,claimedTiers:[]},
         tops:[],store:[],cases:[],kits:[],warps:[],fishes:[],quests:[],eventLine:"",
         server:{name:"AquaTech Network",online:1,slots:100,tps:20.0,build:"AquaLumen UI"},
         caseResult:null
@@ -592,7 +619,7 @@ try {
   function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
   function compact(n){n=Number(n)||0;if(n>=1e6)return(n/1e6).toFixed(1)+"M";if(n>=1e3)return(n/1e3).toFixed(1)+"k";return String(n)}
   function num(n){return new Intl.NumberFormat("ru-RU").format(Number(n)||0)}
-  function formatHours(m){m=Number(m)||0;const h=Math.floor(m/60),rem=m%60;return h>0?`${h} ч ${rem} м`:`${rem} мин`}
+  function formatHours(m){m=Number(m)||0;const h=Math.floor(m/60),rem=m%60;return h>0?`${h} С‡ ${rem} Рј`:`${rem} РјРёРЅ`}
   function send(msg){if(window.AquaLumenBridge)window.AquaLumenBridge.send(msg)}
   function action(a,arg){send({type:"action",action:a,argument:arg||""})}
 
@@ -616,7 +643,7 @@ try {
   function lotIconHtml(lot, cls) {
     const spr = atlasSprite(lot.itemId);
     if (spr) return spr;
-    const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/§./g, "").trim();
+    const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/В§./g, "").trim();
     const tex = resolveItemIcon(cleanLabel, lot.itemId || "");
     if (tex) return `<img src="${tex}" class="${cls}" alt="">`;
     if (lot.itemId) {
@@ -636,7 +663,7 @@ try {
     atlasTried = true;
     return fetch("https://aquateche.store/assets/images/atlas/manifest.json")
       .then(r => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then(j => { ATLAS = j; if (state.tab === "auction") renderView(false); })
+      .then(j => { ATLAS = j; if (state.tab === "auction" || state.tab === "store" || state.tab === "privileges") renderView(false); })
       .catch(() => { ATLAS = false; });
   }
 
@@ -664,11 +691,11 @@ try {
     const low = String(label || "").toLowerCase();
     const itype = itemType || '';
 
-    /* coins / gems virtual rewards — no item ID */
-    if (itype === 'coins' || (!itemId && (low.includes('coin') || low.includes('монет') || low.includes('aquacoin')))) {
+    /* coins / gems virtual rewards вЂ” no item ID */
+    if (itype === 'coins' || (!itemId && (low.includes('coin') || low.includes('РјРѕРЅРµС‚') || low.includes('aquacoin')))) {
       return `<img src="${COIN_SRC}" class="${cls} aqua-coin-icon" style="width:22px;height:22px" alt="" />`;
     }
-    if (itype === 'gems' || (!itemId && (low.includes('гем') || low.includes('крист')))) {
+    if (itype === 'gems' || (!itemId && (low.includes('РіРµРј') || low.includes('РєСЂРёСЃС‚')))) {
       return `<svg viewBox="0 0 24 24" class="${cls}" style="color:var(--accent);filter:drop-shadow(0 0 10px #2fe0c0)"><path d="M12 2.5 18 8l-6 13L6 8Z" fill="currentColor"/><path d="M6 8h12M12 2.5 9.5 8l2.5 13M12 2.5 14.5 8 12 21" stroke="#000" stroke-width=".8" opacity=".5"/></svg>`;
     }
 
@@ -773,11 +800,11 @@ try {
     landDur: 4100,
     lastIdx: -1,
     colors: { common: "#9db2c4", uncommon: "#4cd08a", rare: "#3b9dff", epic: "#b072ff", legendary: "#f5c25b", mythic: "#ff4f79", exotic: "#ffe066" },
-    ru: { common: "Обычный", uncommon: "Необычный", rare: "Редкий", epic: "Эпический", legendary: "Легендарный", mythic: "Мифический", exotic: "Экзотический" },
+    ru: { common: "РћР±С‹С‡РЅС‹Р№", uncommon: "РќРµРѕР±С‹С‡РЅС‹Р№", rare: "Р РµРґРєРёР№", epic: "Р­РїРёС‡РµСЃРєРёР№", legendary: "Р›РµРіРµРЅРґР°СЂРЅС‹Р№", mythic: "РњРёС„РёС‡РµСЃРєРёР№", exotic: "Р­РєР·РѕС‚РёС‡РµСЃРєРёР№" },
     
     color(r) { return this.colors[r] || this.colors.common; },
     label(r) { return this.ru[r] || r; },
-    clean(l) { return String(l || "").replace(/\\s*[×x]\\s*[\\d\\u2013-]+\\s*$/, ""); },
+    clean(l) { return String(l || "").replace(/\\s*[Г—x]\\s*[\\d\\u2013-]+\\s*$/, ""); },
     
     tileHtml(l) {
       const col = this.color(l.rarity);
@@ -820,14 +847,14 @@ try {
       $("caseOrb").style.color = col;
       $("caseOrb").style.boxShadow = `inset 0 0 22px ${col}22, 0 0 26px ${col}1f`;
       $("caseTitle").textContent = def.title;
-      $("caseSub").innerHTML = 'Стоимость: ' + coins(def.cost) + ' · ' + this.label(def.rarity);
+      $("caseSub").innerHTML = 'РЎС‚РѕРёРјРѕСЃС‚СЊ: ' + coins(def.cost) + ' В· ' + this.label(def.rarity);
       $("caseReveal").className = "case-wait";
-      $("caseReveal").innerHTML = "<span>Крутим рулетку…</span>";
+      $("caseReveal").innerHTML = "<span>РљСЂСѓС‚РёРј СЂСѓР»РµС‚РєСѓвЂ¦</span>";
       this.bindActions("spin");
       $("caseLayer").classList.add("open");
       send({ type: "modal", open: true });
 
-      /* Build reel strip with diversity — no same item twice in a row,
+      /* Build reel strip with diversity вЂ” no same item twice in a row,
          max ~30% slots for any single item so the reel feels varied */
       const lootPool = this.def.loot && this.def.loot.length ? this.def.loot : [{ label: "?", rarity: "common", weight: 1 }];
       const maxPerItem = Math.ceil(55 * 0.28);
@@ -862,7 +889,7 @@ try {
     },
 
     bindActions(mode) {
-      const closeBtn = '<button class="button" id="caseDone">Закрыть</button>';
+      const closeBtn = '<button class="button" id="caseDone">Р—Р°РєСЂС‹С‚СЊ</button>';
       if (mode !== "done") {
         $("caseActions").innerHTML = closeBtn;
         $("caseDone").onclick = () => this.close();
@@ -872,8 +899,8 @@ try {
       const next = ((snap.cases || []).find(c => c.id === this.def.id)) || this.def;
       const canAgain = caseBudget(next).can(1);
       const again = canAgain
-        ? '<button class="button primary" id="caseAgain">Открыть ещё</button>'
-        : '<button class="button primary" id="caseAgain" disabled>Открыть ещё</button>';
+        ? '<button class="button primary" id="caseAgain">РћС‚РєСЂС‹С‚СЊ РµС‰С‘</button>'
+        : '<button class="button primary" id="caseAgain" disabled>РћС‚РєСЂС‹С‚СЊ РµС‰С‘</button>';
       $("caseActions").innerHTML = again + closeBtn;
       $("caseAgain").onclick = () => {
         const snapNow = (state.payload && state.payload.snapshot) || {};
@@ -978,23 +1005,23 @@ try {
 
         const iconHtml = getItemIconHtml(result.label, result.item, "mc-icon-lg", result.type);
         const amountHtml = result.amount > 1
-          ? ('<span class="win-amount">× ' + (result.type === "coins" ? coins(result.amount) : (result.type === "gems" ? (num(result.amount) + ' гемов') : (num(result.amount) + ' шт.'))) + '</span>')
+          ? ('<span class="win-amount">Г— ' + (result.type === "coins" ? coins(result.amount) : (result.type === "gems" ? (num(result.amount) + ' РіРµРјРѕРІ') : (num(result.amount) + ' С€С‚.'))) + '</span>')
           : '';
         const winLabel = esc(this.clean(result.label));
         const rarLabel = this.label(result.rarity);
 
         $("caseReveal").className = "case-reveal";
-        $("caseReveal").innerHTML = '<span class="win-title">Вам выпало</span>'
+        $("caseReveal").innerHTML = '<span class="win-title">Р’Р°Рј РІС‹РїР°Р»Рѕ</span>'
           + '<span style="display:flex;align-items:center;gap:12px">'
           + iconHtml
           + '<span class="win-item" style="color:' + col + '">' + winLabel + '</span>'
           + '</span>'
           + amountHtml
           + '<span class="win-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '18">' + rarLabel + '</span>';
-        $("caseSub").textContent = "Награда уже в инвентаре";
+        $("caseSub").textContent = "РќР°РіСЂР°РґР° СѓР¶Рµ РІ РёРЅРІРµРЅС‚Р°СЂРµ";
       } catch (e) {
         $("caseReveal").className = "case-reveal";
-        $("caseReveal").innerHTML = '<span class="win-title">Вам выпало</span><span class="win-item">' + esc(this.clean((result && result.label) || "предмет")) + '</span>';
+        $("caseReveal").innerHTML = '<span class="win-title">Р’Р°Рј РІС‹РїР°Р»Рѕ</span><span class="win-item">' + esc(this.clean((result && result.label) || "РїСЂРµРґРјРµС‚")) + '</span>';
       }
 
       try {
@@ -1032,9 +1059,9 @@ try {
       }
       clearTimeout(this.timeout);
       $("caseReveal").className = "case-wait";
-      $("caseReveal").innerHTML = "<span>Не удалось открыть. Можно закрыть и попробовать ещё раз.</span>";
+      $("caseReveal").innerHTML = "<span>РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ. РњРѕР¶РЅРѕ Р·Р°РєСЂС‹С‚СЊ Рё РїРѕРїСЂРѕР±РѕРІР°С‚СЊ РµС‰С‘ СЂР°Р·.</span>";
       this.bindActions("done");
-      toast("Кейс не открылся — попробуйте ещё раз");
+      toast("РљРµР№СЃ РЅРµ РѕС‚РєСЂС‹Р»СЃСЏ вЂ” РїРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰С‘ СЂР°Р·");
     },
 
     close(keepLayer) {
@@ -1070,8 +1097,8 @@ try {
       $("previewCaseImg").src = CASE_ICONS[c.id] || "";
       $("previewCaseTitle").textContent = c.title;
       const owned = Number(c.count) || 0;
-      $("previewCaseSub").innerHTML = '<span class="case-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '14;margin:0 6px 0 0;">' + CaseSpin.label(c.rarity) + '</span> Стоимость: <b>' + coins(c.cost) + '</b>' + (owned > 0 ? (' · у вас ×' + owned) : '');
-      $("previewLootCount").textContent = ((c.loot || []).length) + " предметов";
+      $("previewCaseSub").innerHTML = '<span class="case-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '14;margin:0 6px 0 0;">' + CaseSpin.label(c.rarity) + '</span> РЎС‚РѕРёРјРѕСЃС‚СЊ: <b>' + coins(c.cost) + '</b>' + (owned > 0 ? (' В· Сѓ РІР°СЃ Г—' + owned) : '');
+      $("previewLootCount").textContent = ((c.loot || []).length) + " РїСЂРµРґРјРµС‚РѕРІ";
 
       let totalWeight = 0;
       (c.loot || []).forEach(l => totalWeight += Math.max(1, l.weight || 1));
@@ -1084,7 +1111,7 @@ try {
         return '<div class="drop-item-card" style="border-color:' + lcol + '33;box-shadow:inset 0 0 16px ' + lcol + '10;">'
           + icon
           + '<b>' + esc(CaseSpin.clean(l.label)) + '</b>'
-          + '<span class="drop-item-chance" style="color:' + lcol + ';border-color:' + lcol + '44;background:' + lcol + '14;">' + chance + '% · ' + CaseSpin.label(l.rarity) + '</span>'
+          + '<span class="drop-item-chance" style="color:' + lcol + ';border-color:' + lcol + '44;background:' + lcol + '14;">' + chance + '% В· ' + CaseSpin.label(l.rarity) + '</span>'
           + '</div>';
       }).join("");
 
@@ -1094,10 +1121,10 @@ try {
       const can1 = b.can(1);
       const can5 = b.can(5);
       const can10 = b.can(10);
-      const labelFor = (n) => b.keys >= n ? ('Открыть ×' + n) : ('Купить ×' + n + ' · ' + coins(b.cost * n));
-      const btn1Text = can1 ? labelFor(1) : ('Нужно ' + coins(b.cost));
-      const btn5Text = can5 ? labelFor(5) : ('Нужно ' + coins(b.cost * 5));
-      const btn10Text = can10 ? labelFor(10) : ('Нужно ' + coins(b.cost * 10));
+      const labelFor = (n) => b.keys >= n ? ('РћС‚РєСЂС‹С‚СЊ Г—' + n) : ('РљСѓРїРёС‚СЊ Г—' + n + ' В· ' + coins(b.cost * n));
+      const btn1Text = can1 ? labelFor(1) : ('РќСѓР¶РЅРѕ ' + coins(b.cost));
+      const btn5Text = can5 ? labelFor(5) : ('РќСѓР¶РЅРѕ ' + coins(b.cost * 5));
+      const btn10Text = can10 ? labelFor(10) : ('РќСѓР¶РЅРѕ ' + coins(b.cost * 10));
 
       $("previewActions").innerHTML =
         '<button class="button primary" id="open1Btn" ' + (can1 ? '' : 'disabled') + '>' + btn1Text + '</button>'
@@ -1159,36 +1186,36 @@ try {
           <div class="hero-info">
             <h2>${esc(p.name)}</h2>
             <div class="rank" style="color:${rankCol}">${esc(p.rank)}</div>
-            <div class="progress-label"><span>Уровень ${p.level}</span><span>${Math.round(p.levelProgress * 100)}%</span></div>
+            <div class="progress-label"><span>РЈСЂРѕРІРµРЅСЊ ${p.level}</span><span>${Math.round(p.levelProgress * 100)}%</span></div>
             <div class="progress"><i style="width:${Math.round(p.levelProgress * 100)}%"></i></div>
           </div>
         </section>
         <section class="stats">
-          <div class="stat"><small>Время в игре</small><b>${formatHours(p.playtimeMinutes)}</b></div>
-          <div class="stat"><small>Квестов выполнено</small><b>${p.quests}</b></div>
-          <div class="stat"><small>Убийств / Смертей</small><b>${p.kills} / ${p.deaths}</b></div>
-          <div class="stat"><small>Друзей онлайн</small><b>${p.friendsOnline}</b></div>
+          <div class="stat"><small>Р’СЂРµРјСЏ РІ РёРіСЂРµ</small><b>${formatHours(p.playtimeMinutes)}</b></div>
+          <div class="stat"><small>РљРІРµСЃС‚РѕРІ РІС‹РїРѕР»РЅРµРЅРѕ</small><b>${p.quests}</b></div>
+          <div class="stat"><small>РЈР±РёР№СЃС‚РІ / РЎРјРµСЂС‚РµР№</small><b>${p.kills} / ${p.deaths}</b></div>
+          <div class="stat"><small>Р”СЂСѓР·РµР№ РѕРЅР»Р°Р№РЅ</small><b>${p.friendsOnline}</b></div>
         </section>
       </div>
-      <div class="section-title"><b>Сезонный Прогресс</b><span>Уровень ${s.season.tier} / ${s.season.maxTier}</span></div>
+      <div class="section-title"><b>РЎРµР·РѕРЅРЅС‹Р№ РџСЂРѕРіСЂРµСЃСЃ</b><span>РЈСЂРѕРІРµРЅСЊ ${s.season.tier} / ${s.season.maxTier}</span></div>
       <section class="card season">
         <div class="season-head">
-          <div><h3>${esc(s.season.title)}</h3><p>${s.season.premium ? "Премиум пропуск активен" : "Базовый доступ"}</p></div>
+          <div><h3>${esc(s.season.title)}</h3><p>${s.season.premium ? "РџСЂРµРјРёСѓРј РїСЂРѕРїСѓСЃРє Р°РєС‚РёРІРµРЅ" : "Р‘Р°Р·РѕРІС‹Р№ РґРѕСЃС‚СѓРї"}</p></div>
           <b class="tier">T${s.season.tier}</b>
         </div>
-        <div class="progress-label"><span>Прогресс уровня</span><span>${Math.round(s.season.tierProgress * 100)}%</span></div>
+        <div class="progress-label"><span>РџСЂРѕРіСЂРµСЃСЃ СѓСЂРѕРІРЅСЏ</span><span>${Math.round(s.season.tierProgress * 100)}%</span></div>
         <div class="progress"><i style="width:${Math.round(s.season.tierProgress * 100)}%"></i></div>
       </section>
     </div>`;
   }
 
   const RANK_META = {
-    "rank.sailor":  { prefix: "МОРЯК",   color: "#2fe0c0", perks: ["Префикс [МОРЯК] в чате", "2 точки дома /sethome", "Цветной ник в чате и Tab", "Базовый морской набор в F4"] },
-    "rank.skipper": { prefix: "ШКИПЕР",  color: "#3b9dff", perks: ["Префикс [ШКИПЕР] в чате", "3 точки дома /sethome", "Приоритетный вход на сервер", "Кит Шкипера в F4"] },
-    "rank.captain": { prefix: "КАПИТАН", color: "#f5c25b", perks: ["Префикс [КАПИТАН] в чате", "5 точек дома /sethome", "Полёт /fly на приватах", "Множитель удачи ×2", "Кит Капитана в F4"] },
-    "rank.admiral": { prefix: "АДМИРАЛ", color: "#ff8c42", perks: ["Префикс [АДМИРАЛ] в чате", "10 точек дома /sethome", "Полёт /fly и смена ника /nick", "Множитель удачи ×4", "Кит Адмирала в F4"] },
-    "rank.legend":  { prefix: "ЛЕГЕНДА", color: "#c264ff", perks: ["Префикс [ЛЕГЕНДА] в чате", "15 точек дома /sethome", "/fly, /hat и /nick", "Множитель удачи ×8", "Эксклюзивный кейс Легенды", "Максимальный кит сезона"] },
-    "rank.vip":     { prefix: "VIP",     color: "#ff6b6b", perks: ["Префикс [VIP] в чате", "Виртуальный верстак /wb", "Эндер-сундук /ec", "Полёт /fly", "Косметика AquaLumen"] },
+    "rank.sailor":  { prefix: "РњРћР РЇРљ",   color: "#2fe0c0", perks: ["РџСЂРµС„РёРєСЃ [РњРћР РЇРљ] РІ С‡Р°С‚Рµ", "2 С‚РѕС‡РєРё РґРѕРјР° /sethome", "Р¦РІРµС‚РЅРѕР№ РЅРёРє РІ С‡Р°С‚Рµ Рё Tab", "Р‘Р°Р·РѕРІС‹Р№ РјРѕСЂСЃРєРѕР№ РЅР°Р±РѕСЂ РІ F4"] },
+    "rank.skipper": { prefix: "РЁРљРРџР•Р ",  color: "#3b9dff", perks: ["РџСЂРµС„РёРєСЃ [РЁРљРРџР•Р ] РІ С‡Р°С‚Рµ", "3 С‚РѕС‡РєРё РґРѕРјР° /sethome", "РџСЂРёРѕСЂРёС‚РµС‚РЅС‹Р№ РІС…РѕРґ РЅР° СЃРµСЂРІРµСЂ", "РљРёС‚ РЁРєРёРїРµСЂР° РІ F4"] },
+    "rank.captain": { prefix: "РљРђРџРРўРђРќ", color: "#f5c25b", perks: ["РџСЂРµС„РёРєСЃ [РљРђРџРРўРђРќ] РІ С‡Р°С‚Рµ", "5 С‚РѕС‡РµРє РґРѕРјР° /sethome", "РџРѕР»С‘С‚ /fly РЅР° РїСЂРёРІР°С‚Р°С…", "РњРЅРѕР¶РёС‚РµР»СЊ СѓРґР°С‡Рё Г—2", "РљРёС‚ РљР°РїРёС‚Р°РЅР° РІ F4"] },
+    "rank.admiral": { prefix: "РђР”РњРР РђР›", color: "#ff8c42", perks: ["РџСЂРµС„РёРєСЃ [РђР”РњРР РђР›] РІ С‡Р°С‚Рµ", "10 С‚РѕС‡РµРє РґРѕРјР° /sethome", "РџРѕР»С‘С‚ /fly Рё СЃРјРµРЅР° РЅРёРєР° /nick", "РњРЅРѕР¶РёС‚РµР»СЊ СѓРґР°С‡Рё Г—4", "РљРёС‚ РђРґРјРёСЂР°Р»Р° РІ F4"] },
+    "rank.legend":  { prefix: "Р›Р•Р“Р•РќР”Рђ", color: "#c264ff", perks: ["РџСЂРµС„РёРєСЃ [Р›Р•Р“Р•РќР”Рђ] РІ С‡Р°С‚Рµ", "15 С‚РѕС‡РµРє РґРѕРјР° /sethome", "/fly, /hat Рё /nick", "РњРЅРѕР¶РёС‚РµР»СЊ СѓРґР°С‡Рё Г—8", "Р­РєСЃРєР»СЋР·РёРІРЅС‹Р№ РєРµР№СЃ Р›РµРіРµРЅРґС‹", "РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РєРёС‚ СЃРµР·РѕРЅР°"] },
+    "rank.vip":     { prefix: "VIP",     color: "#ff6b6b", perks: ["РџСЂРµС„РёРєСЃ [VIP] РІ С‡Р°С‚Рµ", "Р’РёСЂС‚СѓР°Р»СЊРЅС‹Р№ РІРµСЂСЃС‚Р°Рє /wb", "Р­РЅРґРµСЂ-СЃСѓРЅРґСѓРє /ec", "РџРѕР»С‘С‚ /fly", "РљРѕСЃРјРµС‚РёРєР° AquaLumen"] },
   };
 
   function rankGlyph(id, color) {
@@ -1229,8 +1256,8 @@ try {
     ).join("");
     const buy = $("rankModalBuy");
     buy.innerHTML = o.currency === "gems"
-      ? (`Купить — ${num(o.price)} крист.`)
-      : (`Купить — ${coins(o.price)}`);
+      ? (`РљСѓРїРёС‚СЊ вЂ” ${num(o.price)} РєСЂРёСЃС‚.`)
+      : (`РљСѓРїРёС‚СЊ вЂ” ${coins(o.price)}`);
     buy.style.display = o.owned ? "none" : "";
     $("rankModalLayer").classList.add("open");
     send({ type: "modal", open: true });
@@ -1242,48 +1269,112 @@ try {
     send({ type: "modal", open: false });
   }
 
-  function storeView(s) {
-    const cards = (s.store || []).map((o, cardIndex) => {
+  function storeView(s, ranksOnly) {
+    const RANK_IDS = Object.keys(RANK_META);
+    const offers = (s.store || []).filter((o) => ranksOnly ? RANK_IDS.includes(o.id) : !RANK_IDS.includes(o.id));
+
+    const SHOP_ICONS = {
+      "ae.silicon_press": "ae2:silicon_press",
+      "ae.logic_press": "ae2:logic_processor_press",
+      "ae.calc_press": "ae2:calculation_processor_press",
+      "ae.eng_press": "ae2:engineering_processor_press",
+      "ae.name_press": "ae2:name_press",
+      "ae.certus": "ae2:certus_quartz_crystal",
+      "ae.charged_certus": "ae2:charged_certus_quartz_crystal",
+      "iu.aluminium": "industrialupgrade:itemingots/aluminium_ingot",
+      "iu.circuit1": "industrialupgrade:crafting_elements/crafting_272_element",
+      "iu.circuit2": "industrialupgrade:crafting_elements/crafting_273_element",
+      "iu.circuit3": "industrialupgrade:crafting_elements/crafting_274_element",
+      "iu.reinforced_stone": "industrialupgrade:blockresource/reinforced_stone",
+      "bot.manasteel": "botania:manasteel_ingot",
+      "bot.mana_pearl": "botania:mana_pearl",
+      "bot.mana_diamond": "botania:mana_diamond",
+      "base.redstone": "minecraft:redstone",
+      "base.obsidian": "minecraft:obsidian",
+      "meta.guidebook": "patchouli:guide_book"
+    };
+
+    const offerIcon = (o) => {
+      if (o.id === "gems.5") {
+        return `<img src="${COIN_SRC}" class="mc-icon aqua-coin-icon" style="width:26px;height:26px" alt="" />`;
+      }
+      if (o.id === "pass.premium") {
+        return `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--gold)" stroke-width="1.6"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 11h18M12 6v5"/></svg>`;
+      }
+      const itemId = SHOP_ICONS[o.id];
+      if (itemId) {
+        let sprite = atlasSprite(itemId);
+        if (!sprite && itemId.includes(":")) {
+          const [ns, p] = itemId.split(":");
+          sprite = atlasSprite(ns + ":item_" + p);
+        }
+        if (sprite) return sprite;
+        return getItemIconHtml(o.title, itemId, "mc-icon");
+      }
+      return storeGlyph(o.id) || getItemIconHtml(o.title, o.id, "mc-icon");
+    };
+
+    const cards = offers.map((o, cardIndex) => {
       const meta = RANK_META[o.id];
       if (!meta) {
-        const art = storeGlyph(o.id) || getItemIconHtml(o.title, o.id, "mc-icon");
-        return `<article class="card offer${o.owned ? " is-owned" : ""}" style="--i:${cardIndex}">
-          ${o.owned ? `<span class="offer-badge">Куплено</span>` : ""}
-          <div class="offer-art">${art}</div>
+        const itemId = SHOP_ICONS[o.id] || "";
+        const ns = itemId.includes(":") ? itemId.split(":")[0] : "other";
+        const key = esc((o.title + " " + o.subtitle).toLowerCase());
+        return `<article class="card offer${o.owned ? " is-owned" : ""}" data-shop-name="${key}" data-shop-ns="${esc(ns)}" style="--i:${cardIndex}">
+          ${o.owned ? `<span class="offer-badge">РєСѓРїР»РµРЅРѕ</span>` : ""}
+          <div class="offer-art">${offerIcon(o)}</div>
           <h3>${esc(o.title)}</h3>
           <p>${esc(o.subtitle)}</p>
           <div class="offer-foot">
-            <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}</span>
-            <button class="button ${o.owned ? "" : "primary"} buy" data-id="${esc(o.id)}" data-title="${esc(o.title)}" ${o.owned ? "disabled" : ""}>${o.owned ? "Куплено" : "Купить"}</button>
+            <span class="price">${o.currency === "gems" ? (num(o.price) + " РіРµРј.") : coins(o.price)}</span>
+            <button class="button ${o.owned ? "" : "primary"} buy" data-id="${esc(o.id)}" data-title="${esc(o.title)}" ${o.owned ? "disabled" : ""}>${o.owned ? "РљСѓРїР»РµРЅРѕ" : "РљСѓРїРёС‚СЊ"}</button>
           </div>
         </article>`;
       }
       const c = meta.color;
       return `<article class="card offer rank-card${o.owned ? " is-owned" : ""}" style="--rc:${c};--i:${cardIndex}">
-        ${o.owned ? `<span class="offer-badge">Активна</span>` : ""}
+        ${o.owned ? `<span class="offer-badge">Р°РєС‚РёРІРЅРѕ</span>` : ""}
         <div class="rank-glyph" style="color:${c};background:${c}14">${rankGlyph(o.id, c)}</div>
         <h3>${esc(o.title)}</h3>
         <p>${esc(o.subtitle)}</p>
         <div class="offer-foot">
-          <span class="price">${o.currency === "gems" ? (num(o.price) + " крист.") : coins(o.price)}${o.owned ? `<span class="owned-check" title="Активна"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12.5l5 5L20 6.5"/></svg></span>` : ""}</span>
-          ${o.owned ? "" : `<button class="button primary rank-more" data-id="${esc(o.id)}">Подробнее</button>`}
+          <span class="price">${o.currency === "gems" ? (num(o.price) + " РіРµРј.") : coins(o.price)}</span>
+          ${o.owned ? `<span class="owned-tag">СѓР¶Рµ РµСЃС‚СЊ</span>` : `<button class="button primary rank-more" data-id="${esc(o.id)}">РџРѕРґСЂРѕР±РЅРµРµ</button>`}
         </div>
       </article>`;
     }).join("");
-    return `<div class="view">${title("Магазин Улучшений", "Привилегии, префиксы и обмен")}
-      <div class="store-grid stagger">${cards || '<div class="empty">Товаров нет</div>'}</div>
+
+    const head = ranksOnly
+      ? title("РџСЂРёРІРёР»РµРіРёРё", "Р Р°РЅРіРё LuckPerms: РїСЂРµС„РёРєСЃ, РїСЂРёРѕСЂРёС‚РµС‚ РІС…РѕРґР° Рё РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё")
+      : title("РњР°РіР°Р·РёРЅ", "Р РµСЃСѓСЂСЃС‹ СЃРµСЂРІРµСЂР° Р·Р° РђРєРІР°РњРѕРЅРµС‚С‹ Рё РіРµРјС‹");
+    const empty = ranksOnly ? '<div class="empty">РџСЂРёРІРёР»РµРіРёРё РІСЂРµРјРµРЅРЅРѕ РЅРµРґРѕСЃС‚СѓРїРЅС‹</div>' : '<div class="empty">РўРѕРІР°СЂС‹ СЃРєРѕСЂРѕ РїРѕСЏРІСЏС‚СЃСЏ</div>';
+    const filterBar = ranksOnly
+      ? ""
+      : `<div class="shop-filter">
+          <input id="shopSearch" class="hub-input" type="search" placeholder="РџРѕРёСЃРє РїРѕ РјР°РіР°Р·РёРЅСѓ" autocomplete="off" />
+          <div class="shop-chips" id="shopChips">
+            <button class="atlas-pill active" data-shop="all">Р’СЃРµ</button>
+            <button class="atlas-pill" data-shop="ae2">AE2</button>
+            <button class="atlas-pill" data-shop="industrialupgrade">Industrial Upgrade</button>
+            <button class="atlas-pill" data-shop="botania">Botania</button>
+            <button class="atlas-pill" data-shop="other">РџСЂРѕС‡РµРµ</button>
+          </div>
+        </div>`;
+    return `<div class="view">${head}
+      ${filterBar}
+      <div class="store-grid stagger" id="shopGrid">${cards || empty}</div>
     </div>`;
   }
 
   function eventsView(s) {
-    const banner = s.eventLine || "Сейчас тихо — ловите в своё удовольствие";
+    const banner = s.eventLine || "РЎРµР№С‡Р°СЃ С‚РёС…Рѕ вЂ” Р»РѕРІРёС‚Рµ РІ СЃРІРѕС‘ СѓРґРѕРІРѕР»СЊСЃС‚РІРёРµ";
     const quests = Array.isArray(s.quests) ? s.quests : [];
     const cards = quests.map(q => {
       const ready = !q.claimed && Number(q.progress) >= Number(q.goal);
       let btn;
-      if (q.claimed) btn = `<button class="button" disabled>Получено</button>`;
-      else if (ready) btn = `<button class="button primary event-claim" data-idx="${q.idx}">Забрать</button>`;
-      else btn = `<button class="button event-reroll" data-idx="${q.idx}">↻ ${coins(100)}</button>`;
+      if (q.claimed) btn = `<button class="button" disabled>РџРѕР»СѓС‡РµРЅРѕ</button>`;
+      else if (ready) btn = `<button class="button primary event-claim" data-idx="${q.idx}">Р—Р°Р±СЂР°С‚СЊ</button>`;
+      else btn = `<button class="button event-reroll" data-idx="${q.idx}">в†» ${coins(100)}</button>`;
       const pct = Number(q.goal) > 0 ? Math.min(100, Math.round(Number(q.progress) / Number(q.goal) * 100)) : 0;
       return `<article class="card offer" style="min-height:auto">
         <h3>${esc(q.desc)}</h3>
@@ -1293,8 +1384,8 @@ try {
         <div class="offer-foot" style="margin-top:10px">${btn}</div>
       </article>`;
     }).join("");
-    return `<div class="view">${title("События океана", banner)}
-      <div class="store-grid">${cards || '<div class="empty">Контракты появятся после перезапуска сервера с модом aquatech_ui</div>'}</div>
+    return `<div class="view">${title("РЎРѕР±С‹С‚РёСЏ РѕРєРµР°РЅР°", banner)}
+      <div class="store-grid">${cards || '<div class="empty">РљРѕРЅС‚СЂР°РєС‚С‹ РїРѕСЏРІСЏС‚СЃСЏ РїРѕСЃР»Рµ РїРµСЂРµР·Р°РїСѓСЃРєР° СЃРµСЂРІРµСЂР° СЃ РјРѕРґРѕРј aquatech_ui</div>'}</div>
     </div>`;
   }
 
@@ -1303,9 +1394,9 @@ try {
       const col = CaseSpin.color(c.rarity);
       const iconUrl = CASE_ICONS[c.id] || "";
       const b = caseBudget(c);
-      const openLabel = b.keys > 0 ? "Открыть" : (b.can(1) ? "Купить" : "Мало монет");
+      const openLabel = b.keys > 0 ? "РћС‚РєСЂС‹С‚СЊ" : (b.can(1) ? "РљСѓРїРёС‚СЊ" : "РњР°Р»Рѕ РјРѕРЅРµС‚");
       const stock = coins(c.cost);
-      const ownedBadge = b.keys > 0 ? ('<span class="case-owned">×' + b.keys + '</span>') : "";
+      const ownedBadge = b.keys > 0 ? ('<span class="case-owned">Г—' + b.keys + '</span>') : "";
       return `<article class="card case" style="--i:${cardIndex};border-color:${col}33;cursor:pointer;" data-preview="${esc(c.id)}">
         <span class="case-rarity" style="color:${col};border-color:${col}55;background:${col}14;">${CaseSpin.label(c.rarity)}</span>
         <div class="case-art">
@@ -1315,43 +1406,43 @@ try {
         <h3>${esc(c.title)}</h3>
         <div style="font-size:12px;color:var(--text);font-weight:600;margin:4px 0 14px;">${stock}</div>
         <div class="case-actions-row" onclick="event.stopPropagation()">
-          <button class="button preview-case" data-id="${esc(c.id)}">Состав</button>
+          <button class="button preview-case" data-id="${esc(c.id)}">РЎРѕСЃС‚Р°РІ</button>
           <button class="button primary open-case" data-id="${esc(c.id)}" ${b.can(1) ? "" : "disabled"}>${openLabel}</button>
         </div>
       </article>`;
     }).join("");
 
-    return `<div class="view">${title("Кейсы", "Все кейсы в каталоге. Если кейс выдан — на карточке ×N.")}
-      <div class="case-grid stagger">${cards || '<div class="empty">Кейсов нет</div>'}</div>
+    return `<div class="view">${title("РљРµР№СЃС‹", "Р’СЃРµ РєРµР№СЃС‹ РІ РєР°С‚Р°Р»РѕРіРµ. Р•СЃР»Рё РєРµР№СЃ РІС‹РґР°РЅ вЂ” РЅР° РєР°СЂС‚РѕС‡РєРµ Г—N.")}
+      <div class="case-grid stagger">${cards || '<div class="empty">РљРµР№СЃРѕРІ РЅРµС‚</div>'}</div>
     </div>`;
   }
 
   const PASS_REWARDS = [
-    { tier: 1, label: "Монеты", coins: 2500, rarity: "common" },
-    { tier: 2, label: "Монеты", coins: 3000, rarity: "common" },
-    { tier: 3, label: "Монеты", coins: 3500, rarity: "common" },
-    { tier: 4, label: "Монеты", coins: 4000, rarity: "common" },
-    { tier: 5, label: "Кейс I: Первопроходец", item: "starter", type: "case", coins: 5000, rarity: "rare", badge: "Кейс" },
-    { tier: 6, label: "Монеты", coins: 6000, rarity: "common" },
-    { tier: 7, label: "Монеты", coins: 7000, rarity: "common" },
-    { tier: 8, label: "Монеты", coins: 8000, rarity: "common" },
-    { tier: 9, label: "Монеты", coins: 9000, rarity: "common" },
-    { tier: 10, label: "Кейс II: Инженер", item: "smeltery", type: "case", coins: 12000, rarity: "epic", badge: "Эпик" },
-    { tier: 11, label: "Множитель улова ×4", item: "aquatech_ui:rate_x4", coins: 14000, rarity: "rare", badge: "Бафф" },
-    { tier: 12, label: "Монеты", coins: 16000, rarity: "common" },
-    { tier: 13, label: "Монеты", coins: 18000, rarity: "common" },
-    { tier: 14, label: "Монеты", coins: 20000, rarity: "common" },
-    { tier: 15, label: "Кейс V: Цифровая МЭ", item: "applied", type: "case", coins: 25000, rarity: "epic", badge: "Эпик" },
-    { tier: 16, label: "Монеты", coins: 30000, rarity: "common" },
-    { tier: 17, label: "Монеты", coins: 35000, rarity: "common" },
-    { tier: 18, label: "Монеты", coins: 40000, rarity: "common" },
-    { tier: 19, label: "Монеты", coins: 45000, rarity: "common" },
-    { tier: 20, label: "Кейс VII: Проводники", item: "superconductor", type: "case", coins: 50000, rarity: "epic", badge: "Эпик" },
-    { tier: 21, label: "Монеты", coins: 55000, rarity: "common" },
-    { tier: 22, label: "Множитель улова ×16", item: "aquatech_ui:rate_x16", coins: 60000, rarity: "legendary", badge: "Легенда" },
-    { tier: 23, label: "Монеты", coins: 70000, rarity: "rare" },
-    { tier: 24, label: "Монеты", coins: 80000, rarity: "rare" },
-    { tier: 25, label: "Кейс IX: Драконий", item: "draconic", type: "case", coins: 100000, rarity: "mythic", badge: "Финал" },
+    { tier: 1, label: "РњРѕРЅРµС‚С‹", coins: 2500, rarity: "common" },
+    { tier: 2, label: "РњРѕРЅРµС‚С‹", coins: 3000, rarity: "common" },
+    { tier: 3, label: "РњРѕРЅРµС‚С‹", coins: 3500, rarity: "common" },
+    { tier: 4, label: "РњРѕРЅРµС‚С‹", coins: 4000, rarity: "common" },
+    { tier: 5, label: "РљРµР№СЃ I: РџРµСЂРІРѕРїСЂРѕС…РѕРґРµС†", item: "starter", type: "case", coins: 5000, rarity: "rare", badge: "РљРµР№СЃ" },
+    { tier: 6, label: "РњРѕРЅРµС‚С‹", coins: 6000, rarity: "common" },
+    { tier: 7, label: "РњРѕРЅРµС‚С‹", coins: 7000, rarity: "common" },
+    { tier: 8, label: "РњРѕРЅРµС‚С‹", coins: 8000, rarity: "common" },
+    { tier: 9, label: "РњРѕРЅРµС‚С‹", coins: 9000, rarity: "common" },
+    { tier: 10, label: "РљРµР№СЃ II: РРЅР¶РµРЅРµСЂ", item: "smeltery", type: "case", coins: 12000, rarity: "epic", badge: "Р­РїРёРє" },
+    { tier: 11, label: "РњРЅРѕР¶РёС‚РµР»СЊ СѓР»РѕРІР° Г—4", item: "aquatech_ui:rate_x4", coins: 14000, rarity: "rare", badge: "Р‘Р°С„С„" },
+    { tier: 12, label: "РњРѕРЅРµС‚С‹", coins: 16000, rarity: "common" },
+    { tier: 13, label: "РњРѕРЅРµС‚С‹", coins: 18000, rarity: "common" },
+    { tier: 14, label: "РњРѕРЅРµС‚С‹", coins: 20000, rarity: "common" },
+    { tier: 15, label: "РљРµР№СЃ V: Р¦РёС„СЂРѕРІР°СЏ РњР­", item: "applied", type: "case", coins: 25000, rarity: "epic", badge: "Р­РїРёРє" },
+    { tier: 16, label: "РњРѕРЅРµС‚С‹", coins: 30000, rarity: "common" },
+    { tier: 17, label: "РњРѕРЅРµС‚С‹", coins: 35000, rarity: "common" },
+    { tier: 18, label: "РњРѕРЅРµС‚С‹", coins: 40000, rarity: "common" },
+    { tier: 19, label: "РњРѕРЅРµС‚С‹", coins: 45000, rarity: "common" },
+    { tier: 20, label: "РљРµР№СЃ VII: РџСЂРѕРІРѕРґРЅРёРєРё", item: "superconductor", type: "case", coins: 50000, rarity: "epic", badge: "Р­РїРёРє" },
+    { tier: 21, label: "РњРѕРЅРµС‚С‹", coins: 55000, rarity: "common" },
+    { tier: 22, label: "РњРЅРѕР¶РёС‚РµР»СЊ СѓР»РѕРІР° Г—16", item: "aquatech_ui:rate_x16", coins: 60000, rarity: "legendary", badge: "Р›РµРіРµРЅРґР°" },
+    { tier: 23, label: "РњРѕРЅРµС‚С‹", coins: 70000, rarity: "rare" },
+    { tier: 24, label: "РњРѕРЅРµС‚С‹", coins: 80000, rarity: "rare" },
+    { tier: 25, label: "РљРµР№СЃ IX: Р”СЂР°РєРѕРЅРёР№", item: "draconic", type: "case", coins: 100000, rarity: "mythic", badge: "Р¤РёРЅР°Р»" },
   ];
 
   function passView(s) {
@@ -1363,21 +1454,21 @@ try {
     const cards = [];
 
     for (let t = 1; t <= maxT; t++) {
-      const reward = PASS_REWARDS[t - 1] || { tier: t, label: "Награда", coins: 2500 + t * 1000, rarity: "common" };
+      const reward = PASS_REWARDS[t - 1] || { tier: t, label: "РќР°РіСЂР°РґР°", coins: 2500 + t * 1000, rarity: "common" };
       const unlocked = currentTier >= t;
       const isClaimed = claimedList.includes(t);
       const isClaimable = unlocked && !isClaimed;
       const rarity = reward.rarity || "common";
 
       let statusClass = "is-locked";
-      let actionHtml = `<div class="pass-status-badge locked"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Ур. ${t}</div>`;
+      let actionHtml = `<div class="pass-status-badge locked"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> РЈСЂ. ${t}</div>`;
 
       if (isClaimed) {
         statusClass = "is-claimed";
-        actionHtml = `<div class="pass-status-badge claimed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 12 5 5L20 6"/></svg> Забрано</div>`;
+        actionHtml = `<div class="pass-status-badge claimed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 12 5 5L20 6"/></svg> Р—Р°Р±СЂР°РЅРѕ</div>`;
       } else if (isClaimable) {
         statusClass = "is-claimable";
-        actionHtml = `<button class="button primary pass-claim-btn claim-pass" data-level="${t}">Забрать</button>`;
+        actionHtml = `<button class="button primary pass-claim-btn claim-pass" data-level="${t}">Р—Р°Р±СЂР°С‚СЊ</button>`;
       }
 
       let iconHtml;
@@ -1400,7 +1491,7 @@ try {
       cards.push(`<div class="pass-card tier-${rarity} ${statusClass} reward" data-tier="${t}">
         <div class="pass-card-glow"></div>
         <div class="pass-card-head">
-          <span class="pass-card-lvl">УРОВЕНЬ ${t}</span>
+          <span class="pass-card-lvl">РЈР РћР’Р•РќР¬ ${t}</span>
           ${badgeHtml}
         </div>
         <div class="pass-card-art">
@@ -1417,40 +1508,40 @@ try {
       </div>`);
     }
 
-    return `<div class="view">${title("Сезонный Пропуск", "Выполняйте задания, ловите рыбу и забирайте ценные награды")}
+    return `<div class="view">${title("РЎРµР·РѕРЅРЅС‹Р№ РџСЂРѕРїСѓСЃРє", "Р’С‹РїРѕР»РЅСЏР№С‚Рµ Р·Р°РґР°РЅРёСЏ, Р»РѕРІРёС‚Рµ СЂС‹Р±Сѓ Рё Р·Р°Р±РёСЂР°Р№С‚Рµ С†РµРЅРЅС‹Рµ РЅР°РіСЂР°РґС‹")}
       <section class="pass-hero">
         <div class="pass-hero-ambient"></div>
         <div class="pass-hero-content">
           <div class="pass-hero-left">
             <div class="pass-hero-badge-row">
-              <span class="pass-season-pill">СЕЗОН 1</span>
-              <span class="pass-free-pill">100% БЕСПЛАТНО</span>
+              <span class="pass-season-pill">РЎР•Р—РћРќ 1</span>
+              <span class="pass-free-pill">100% Р‘Р•РЎРџР›РђРўРќРћ</span>
             </div>
-            <h2 class="pass-hero-title">${esc(season.title || "Сезон I: Покорение Океана")}</h2>
-            <p class="pass-hero-desc">Ловите редкую рыбу, выполняйте контракты и повышайте уровень боевого пропуска</p>
+            <h2 class="pass-hero-title">${esc(season.title || "РЎРµР·РѕРЅ I: РџРѕРєРѕСЂРµРЅРёРµ РћРєРµР°РЅР°")}</h2>
+            <p class="pass-hero-desc">Р›РѕРІРёС‚Рµ СЂРµРґРєСѓСЋ СЂС‹Р±Сѓ, РІС‹РїРѕР»РЅСЏР№С‚Рµ РєРѕРЅС‚СЂР°РєС‚С‹ Рё РїРѕРІС‹С€Р°Р№С‚Рµ СѓСЂРѕРІРµРЅСЊ Р±РѕРµРІРѕРіРѕ РїСЂРѕРїСѓСЃРєР°</p>
             <div class="pass-hero-stats">
               <div class="pass-stat-item">
-                <small>Доступно к сдаче</small>
-                <b class="${claimableCount > 0 ? "highlight-claim" : ""}">${claimableCount} наград</b>
+                <small>Р”РѕСЃС‚СѓРїРЅРѕ Рє СЃРґР°С‡Рµ</small>
+                <b class="${claimableCount > 0 ? "highlight-claim" : ""}">${claimableCount} РЅР°РіСЂР°Рґ</b>
               </div>
               <div class="pass-stat-item">
-                <small>Всего уровней</small>
-                <b>25 рангов</b>
+                <small>Р’СЃРµРіРѕ СѓСЂРѕРІРЅРµР№</small>
+                <b>25 СЂР°РЅРіРѕРІ</b>
               </div>
               <div class="pass-stat-item">
-                <small>Главная награда</small>
-                <b style="color:var(--gold);">Кейс IX: Драконий</b>
+                <small>Р“Р»Р°РІРЅР°СЏ РЅР°РіСЂР°РґР°</small>
+                <b style="color:var(--gold);">РљРµР№СЃ IX: Р”СЂР°РєРѕРЅРёР№</b>
               </div>
             </div>
           </div>
           <div class="pass-hero-right">
             <div class="pass-tier-ring">
               <span class="pass-tier-val">T${currentTier}</span>
-              <span class="pass-tier-sub">РАНГ</span>
+              <span class="pass-tier-sub">Р РђРќР“</span>
             </div>
             <div class="pass-tier-progress-box">
               <div class="pass-prog-header">
-                <span>Прогресс сезона</span>
+                <span>РџСЂРѕРіСЂРµСЃСЃ СЃРµР·РѕРЅР°</span>
                 <b>${Math.round((season.tierProgress || 0) * 100)}%</b>
               </div>
               <div class="pass-prog-bar">
@@ -1460,7 +1551,7 @@ try {
           </div>
         </div>
       </section>
-      <div class="section-title"><b>Линейка Наград (25 уровней)</b><span style="color:var(--accent);">Без платных гемов · Ценный лут</span></div>
+      <div class="section-title"><b>Р›РёРЅРµР№РєР° РќР°РіСЂР°Рґ (25 СѓСЂРѕРІРЅРµР№)</b><span style="color:var(--accent);">Р‘РµР· РїР»Р°С‚РЅС‹С… РіРµРјРѕРІ В· Р¦РµРЅРЅС‹Р№ Р»СѓС‚</span></div>
       <div class="pass-track">${cards.join("")}</div>
     </div>`;
   }
@@ -1473,36 +1564,103 @@ try {
     const cards = fishes.map(f => `<article class="card offer" style="min-height:130px;padding:12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <h3 style="font-size:12.5px;margin:0;font-weight:700;">${esc(f.name)}</h3>
-        <span class="offer-badge" style="position:static;">${f.count} шт.</span>
+        <span class="offer-badge" style="position:static;">${f.count} С€С‚.</span>
       </div>
-      <p style="font-size:10px;color:var(--muted);margin:0 0 10px;">Цена за шт: <b style="color:var(--gold);">${coins(f.priceCoins)}</b></p>
+      <p style="font-size:10px;color:var(--muted);margin:0 0 10px;">Р¦РµРЅР° Р·Р° С€С‚: <b style="color:var(--gold);">${coins(f.priceCoins)}</b></p>
       <div class="offer-foot">
         <span class="price">${coins(f.count * f.priceCoins)}</span>
-        <button class="button sell-single-fish" data-fish="${esc(f.id)}" ${f.count > 0 ? "" : "disabled"}>Продать</button>
+        <button class="button sell-single-fish" data-fish="${esc(f.id)}" ${f.count > 0 ? "" : "disabled"}>РџСЂРѕРґР°С‚СЊ</button>
       </div>
     </article>`).join("");
 
-    return `<div class="view">${title("Скупщик Рыбы", "Продавайте улов прямо из инвентаря")}
+    return `<div class="view">${title("РЎРєСѓРїС‰РёРє Р С‹Р±С‹", "РџСЂРѕРґР°РІР°Р№С‚Рµ СѓР»РѕРІ РїСЂСЏРјРѕ РёР· РёРЅРІРµРЅС‚Р°СЂСЏ")}
       <div class="grid two">
         <section class="card hero" style="min-height:140px;padding:16px;">
           <div style="display:flex;gap:14px;align-items:center;">
-            <div class="avatar" style="width:64px;height:64px;font-size:24px;">🐟</div>
+            <div class="avatar" style="width:64px;height:64px;font-size:24px;">рџђџ</div>
             <div>
-              <h2 style="font-size:18px;margin:0 0 4px;">Скупка Рыбы</h2>
-              <div class="rank">В инвентаре: <b>${totalFish}</b> шт. (${coins(totalValue)})</div>
+              <h2 style="font-size:18px;margin:0 0 4px;">РЎРєСѓРїРєР° Р С‹Р±С‹</h2>
+              <div class="rank">Р’ РёРЅРІРµРЅС‚Р°СЂРµ: <b>${totalFish}</b> С€С‚. (${coins(totalValue)})</div>
             </div>
           </div>
           <button class="button primary sell-all-fish" ${totalFish <= 0 ? "disabled" : ""} style="height:36px;padding:0 18px;font-weight:750;margin-left:auto;">
-            ${totalFish > 0 ? `Продать всё (+${coins(totalValue)})` : "Инвентарь пуст"}
+            ${totalFish > 0 ? `РџСЂРѕРґР°С‚СЊ РІСЃС‘ (+${coins(totalValue)})` : "РРЅРІРµРЅС‚Р°СЂСЊ РїСѓСЃС‚"}
           </button>
         </section>
         <section class="stats">
-          <div class="stat"><small>Видов рыбы</small><b>${fishes.length} шт.</b></div>
-          <div class="stat"><small>Баланс</small><b>${coins(s.wallet.coins)}</b></div>
+          <div class="stat"><small>Р’РёРґРѕРІ СЂС‹Р±С‹</small><b>${fishes.length} С€С‚.</b></div>
+          <div class="stat"><small>Р‘Р°Р»Р°РЅСЃ</small><b>${coins(s.wallet.coins)}</b></div>
         </section>
       </div>
-      <div class="section-title"><b>Таблица цен скупки</b><span>Нажмите для продажи партии</span></div>
-      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">${cards || '<div class="empty">У вас нет рыбы в инвентаре</div>'}</div>
+      <div class="section-title"><b>РўР°Р±Р»РёС†Р° С†РµРЅ СЃРєСѓРїРєРё</b><span>РќР°Р¶РјРёС‚Рµ РґР»СЏ РїСЂРѕРґР°Р¶Рё РїР°СЂС‚РёРё</span></div>
+      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">${cards || '<div class="empty">РЈ РІР°СЃ РЅРµС‚ СЂС‹Р±С‹ РІ РёРЅРІРµРЅС‚Р°СЂРµ</div>'}</div>
+    </div>`;
+  }
+
+  function fishAtlasView(s) {
+    const entries = s.atlas || [];
+    entries.sort((a, b) => (b.found - a.found) || ((b.count || 0) - (a.count || 0)) || String(a.name).localeCompare(String(b.name), "ru"));
+    const sum = s.atlasSummary || { found: 0, total: entries.length, catches: 0, recordName: "", recordWeight: 0, nextMilestone: 0, nextReward: 0 };
+    const pct = sum.total > 0 ? Math.round(sum.found * 100 / sum.total) : 0;
+
+    const gradeBadge = (mask, bit, label, color) => {
+      const on = (mask & bit) !== 0;
+      return `<span style="font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:999px;border:1px solid ${on ? color + "66" : "var(--line)"};${on ? `color:${color};background:${color}14;` : "color:var(--muted);opacity:.4;"}">${label}</span>`;
+    };
+    const condBadge = (mask, bit, label) => (mask & bit) !== 0
+      ? `<span style="font-size:9px;padding:2px 6px;border-radius:999px;border:1px solid var(--line);color:var(--muted);">${label}</span>`
+      : "";
+
+    const cards = entries.map(e => {
+      const found = Boolean(e.found);
+      return `<article class="card offer" data-found="${found ? 1 : 0}" style="min-height:128px;padding:12px;${found ? "" : "opacity:.42;filter:saturate(.35);"}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <h3 style="font-size:12.5px;margin:0;font-weight:700;">${found ? esc(e.name) : "???"}</h3>
+          <span class="offer-badge" style="position:static;">${found ? num(e.count) + " РїРѕРёРј." : "вЂ”"}</span>
+        </div>
+        <p style="font-size:10px;color:var(--muted);margin:0 0 6px;">${esc(e.rarity || "")}${found && e.weight > 0 ? ` В· РјРѕР№ СЂРµРєРѕСЂРґ <b style="color:var(--gold);">${Number(e.weight).toFixed(2)} РєРі</b>` : ""}</p>
+        ${found && e.recordHolder ? `<p style="font-size:10px;color:#8fd6ff;margin:0 0 8px;">РЎРµСЂРІРµСЂ: <b>${esc(e.recordHolder)} вЂ” ${Number(e.recordWeight).toFixed(2)} РєРі</b></p>` : ""}
+        <div style="display:flex;gap:4px;flex-wrap:wrap;">
+          ${gradeBadge(e.grades, 1, "РЎ", "#c7d2da")}${gradeBadge(e.grades, 2, "Р—", "#f5c25b")}${gradeBadge(e.grades, 4, "Р ", "#d48cff")}
+          ${condBadge(e.conds, 1, "РґРµРЅСЊ")}${condBadge(e.conds, 2, "РЅРѕС‡СЊ")}${condBadge(e.conds, 4, "РґРѕР¶РґСЊ")}${condBadge(e.conds, 8, "С€С‚РѕСЂРј")}${condBadge(e.conds, 16, "Р·РѕР»РѕС‚Рѕ")}
+        </div>
+      </article>`;
+    }).join("");
+
+    const recordLine = sum.recordName
+      ? `Р РµРєРѕСЂРґ: <b style="color:var(--gold);">${esc(sum.recordName)} вЂ” ${Number(sum.recordWeight).toFixed(2)} РєРі</b>`
+      : "Р РµРєРѕСЂРґРЅС‹Р№ СѓР»РѕРІ РµС‰С‘ РІРїРµСЂРµРґРё";
+    const milestoneLine = Number(sum.nextMilestone) > 0
+      ? `Р”Рѕ РІРµС…Рё: РѕСЃС‚Р°Р»РѕСЃСЊ <b>${Math.max(0, Number(sum.nextMilestone) - Number(sum.found))}</b> РІРёРґРѕРІ В· РЅР°РіСЂР°РґР° <b style="color:var(--gold);">${coins(sum.nextReward)}</b>`
+      : "Р’СЃРµ РІРµС…Рё Р°С‚Р»Р°СЃР° Р·Р°РєСЂС‹С‚С‹";
+
+    return `<div class="view">${title("Р С‹Р±РЅС‹Р№ Р°С‚Р»Р°СЃ", "РљРѕР»Р»РµРєС†РёСЏ РІРёРґРѕРІ, СЂРµРєРѕСЂРґС‹ РІРµСЃР° Рё РіСЂРµР№РґС‹ СѓР»РѕРІР°")}
+      <div class="grid two">
+        <section class="card hero" style="min-height:140px;padding:16px;">
+          <div style="display:flex;gap:14px;align-items:center;">
+            <div class="avatar" style="width:64px;height:64px;">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H19v17H7.5A2.5 2.5 0 0 0 5 21.5Z"/><path d="M5 4.5v17"/><path d="M9 6.5h6M9 10h5"/></svg>
+            </div>
+            <div>
+              <h2 style="font-size:18px;margin:0 0 4px;">РћС‚РєСЂС‹С‚Рѕ РІРёРґРѕРІ: ${num(sum.found)} / ${num(sum.total)}</h2>
+              <div class="rank">РџРѕРёРјРѕРє РІСЃРµРіРѕ: <b>${num(sum.catches)}</b> В· ${recordLine}</div>
+              <div class="rank" style="margin-top:4px;">${milestoneLine}</div>
+              <div class="progress" style="margin-top:10px;max-width:320px;"><i style="width:${pct}%"></i></div>
+            </div>
+          </div>
+        </section>
+        <section class="stats">
+          <div class="stat"><small>РџСЂРѕРіСЂРµСЃСЃ РєРѕР»Р»РµРєС†РёРё</small><b>${pct}%</b></div>
+          <div class="stat"><small>Р“СЂРµР№РґС‹</small><b>РЎ В· Р— В· Р </b></div>
+        </section>
+      </div>
+      <div class="section-title"><b>Р’РёРґС‹ СѓР»РѕРІР°</b><span>РЎ = СЃРµСЂРµР±СЂРѕ В· Р— = Р·РѕР»РѕС‚Рѕ В· Р  = СЂР°РґСѓР¶РЅР°СЏ</span></div>
+      <div style="display:flex;gap:6px;margin:0 2px 10px;">
+        <button class="button atlas-pill active" data-filter="all">Р’СЃРµ</button>
+        <button class="button atlas-pill" data-filter="found">РћС‚РєСЂС‹С‚С‹Рµ</button>
+        <button class="button atlas-pill" data-filter="missing">РќРµРЅР°Р№РґРµРЅРЅС‹Рµ</button>
+      </div>
+      <div class="store-grid" id="atlasGrid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr));">${cards || '<div class="empty">РџРѕР№РјР°Р№С‚Рµ РїРµСЂРІСѓСЋ СЂС‹Р±Сѓ, С‡С‚РѕР±С‹ РѕС‚РєСЂС‹С‚СЊ Р°С‚Р»Р°СЃ</div>'}</div>
     </div>`;
   }
 
@@ -1513,16 +1671,16 @@ try {
     const myLotsCount = lots.filter(l => Boolean(l.self)).length;
 
     const cards = lots.map((lot, i) => {
-      const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/§./g, "").trim();
+      const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/В§./g, "").trim();
       const isSelf = Boolean(lot.self);
       const btn = isSelf
-        ? `<button class="btn-cancel cancel-auction" data-id="${lot.id}">Снять</button>`
-        : `<button class="btn-buy buy-auction" data-id="${lot.id}">Купить</button>`;
+        ? `<button class="btn-cancel cancel-auction" data-id="${lot.id}">РЎРЅСЏС‚СЊ</button>`
+        : `<button class="btn-buy buy-auction" data-id="${lot.id}">РљСѓРїРёС‚СЊ</button>`;
       const count = Number(lot.count) || 1;
-      const countBadge = count > 1 ? `<span class="lot-badge-count">×${num(count)}</span>` : "";
+      const countBadge = count > 1 ? `<span class="lot-badge-count">Г—${num(count)}</span>` : "";
       const seller = isSelf
-        ? `<span class="lot-seller-tag self"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Вы')} (Вы)</span>`
-        : `<span class="lot-seller-tag"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Игрок')}</span>`;
+        ? `<span class="lot-seller-tag self"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Р’С‹')} (Р’С‹)</span>`
+        : `<span class="lot-seller-tag"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'РРіСЂРѕРє')}</span>`;
 
       return `<article class="card offer lot-card ${isSelf ? 'is-own-lot' : ''}" data-self="${isSelf ? '1' : '0'}" data-name="${esc((cleanLabel + ' ' + (lot.seller || '') + ' ' + (lot.itemId || '')).toLowerCase())}" style="--i:${i}">
         <div class="lot-slot-wrap">
@@ -1530,7 +1688,7 @@ try {
           ${countBadge}
         </div>
         <div class="lot-info">
-          <div class="lot-name" title="${esc(cleanLabel || lot.itemId || '')}">${esc(cleanLabel || lot.itemId || 'Предмет')}</div>
+          <div class="lot-name" title="${esc(cleanLabel || lot.itemId || '')}">${esc(cleanLabel || lot.itemId || 'РџСЂРµРґРјРµС‚')}</div>
           ${seller}
         </div>
         <div class="lot-action-col">
@@ -1542,26 +1700,26 @@ try {
 
     const emptyHtml = `<div id="auctionEmpty" class="empty-card" style="display:${lots.length === 0 ? 'block' : 'none'};grid-column:1/-1;text-align:center;padding:42px 20px;background:rgba(255,255,255,.02);border:1px dashed var(--line);border-radius:18px;">
       <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="var(--muted)" stroke-width="1.5" style="margin-bottom:10px;opacity:.75"><path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6.2a3.5 3.5 0 0 1 7 0V8"/></svg>
-      <h3 style="font-size:15px;margin:0 0 6px;color:var(--text);font-weight:700;">На бирже пока нет лотов</h3>
-      <p style="font-size:12px;color:var(--muted);margin:0 0 16px;line-height:1.45;">Вы можете первым выставить предмет на продажу другим игрокам прямо сейчас!</p>
+      <h3 style="font-size:15px;margin:0 0 6px;color:var(--text);font-weight:700;">РќР° Р±РёСЂР¶Рµ РїРѕРєР° РЅРµС‚ Р»РѕС‚РѕРІ</h3>
+      <p style="font-size:12px;color:var(--muted);margin:0 0 16px;line-height:1.45;">Р’С‹ РјРѕР¶РµС‚Рµ РїРµСЂРІС‹Рј РІС‹СЃС‚Р°РІРёС‚СЊ РїСЂРµРґРјРµС‚ РЅР° РїСЂРѕРґР°Р¶Сѓ РґСЂСѓРіРёРј РёРіСЂРѕРєР°Рј РїСЂСЏРјРѕ СЃРµР№С‡Р°СЃ!</p>
       <div class="auction-sell-cmd" id="copySellCmdEmpty" style="display:inline-flex;">
-        <span style="opacity:.75;">Команда:</span>
-        <code>/ah sell &lt;цена&gt;</code>
+        <span style="opacity:.75;">РљРѕРјР°РЅРґР°:</span>
+        <code>/ah sell &lt;С†РµРЅР°&gt;</code>
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       </div>
     </div>`;
 
-    return `<div class="view">${title("Аукцион и Рынок", "Покупайте и продавайте предметы между игроками")}
+    return `<div class="view">${title("РђСѓРєС†РёРѕРЅ Рё Р С‹РЅРѕРє", "РџРѕРєСѓРїР°Р№С‚Рµ Рё РїСЂРѕРґР°РІР°Р№С‚Рµ РїСЂРµРґРјРµС‚С‹ РјРµР¶РґСѓ РёРіСЂРѕРєР°РјРё")}
       <div class="auction-view-wrap">
         <div class="auction-top-strip">
           <div class="auction-stats-group">
-            <div class="auction-chip-stat"><small>Баланс:</small> <b>${coins(s.wallet ? s.wallet.coins : 0)}</b></div>
-            <div class="auction-chip-stat"><small>Активных лотов:</small> <b>${activeCount} шт.</b></div>
+            <div class="auction-chip-stat"><small>Р‘Р°Р»Р°РЅСЃ:</small> <b>${coins(s.wallet ? s.wallet.coins : 0)}</b></div>
+            <div class="auction-chip-stat"><small>РђРєС‚РёРІРЅС‹С… Р»РѕС‚РѕРІ:</small> <b>${activeCount} С€С‚.</b></div>
           </div>
-          <div class="auction-sell-cmd" id="copySellCmdBtn" title="Нажмите, чтобы скопировать команду">
+          <div class="auction-sell-cmd" id="copySellCmdBtn" title="РќР°Р¶РјРёС‚Рµ, С‡С‚РѕР±С‹ СЃРєРѕРїРёСЂРѕРІР°С‚СЊ РєРѕРјР°РЅРґСѓ">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-            <span>Выставить лот:</span>
-            <code>/ah sell &lt;цена&gt;</code>
+            <span>Р’С‹СЃС‚Р°РІРёС‚СЊ Р»РѕС‚:</span>
+            <code>/ah sell &lt;С†РµРЅР°&gt;</code>
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
           </div>
         </div>
@@ -1569,12 +1727,12 @@ try {
         <div class="auction-filter-bar">
           <div class="auction-search-box">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" id="auctionSearchInput" class="auction-search-input" placeholder="Поиск по названию или продавцу..." autocomplete="off" />
-            <button id="auctionSearchClear" class="auction-search-clear">✕</button>
+            <input type="text" id="auctionSearchInput" class="auction-search-input" placeholder="РџРѕРёСЃРє РїРѕ РЅР°Р·РІР°РЅРёСЋ РёР»Рё РїСЂРѕРґР°РІС†Сѓ..." autocomplete="off" />
+            <button id="auctionSearchClear" class="auction-search-clear">вњ•</button>
           </div>
           <div class="auction-tab-pills">
-            <button class="auction-pill active" data-filter="all">Все лоты (${activeCount})</button>
-            <button class="auction-pill" data-filter="self">Мои лоты (${myLotsCount})</button>
+            <button class="auction-pill active" data-filter="all">Р’СЃРµ Р»РѕС‚С‹ (${activeCount})</button>
+            <button class="auction-pill" data-filter="self">РњРѕРё Р»РѕС‚С‹ (${myLotsCount})</button>
           </div>
         </div>
 
@@ -1587,7 +1745,11 @@ try {
     const kits = s.kits || [];
     const cards = kits.map((k, cardIndex) => {
       const krc = (RANK_META["rank." + k.id] || {}).color;
-      return `<article class="card case" style="--i:${cardIndex};${krc ? `border-color:${krc}44` : ""};display:flex;flex-direction:column;justify-content:space-between;padding:14px;min-height:110px;">
+      const locked = !!k.locked;
+      const button = locked
+        ? `<button class="button claim-kit" data-kit="${esc(k.id)}" disabled title="РќСѓР¶РЅР° РїСЂРёРІРёР»РµРіРёСЏ: ${esc(k.requires || "")}">РќСѓР¶РЅР° РїСЂРёРІРёР»РµРіРёСЏ: ${esc(k.requires || "РІС‹С€Рµ СЂР°РЅРіРѕРј")}</button>`
+        : `<button class="button primary claim-kit" data-kit="${esc(k.id)}">Р—Р°Р±СЂР°С‚СЊ РЅР°Р±РѕСЂ</button>`;
+      return `<article class="card case" style="--i:${cardIndex};${krc ? `border-color:${krc}44` : ""};display:flex;flex-direction:column;justify-content:space-between;padding:14px;min-height:110px;${locked ? "opacity:0.72;" : ""}">
       <div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
           <h3 style="font-size:13px;margin:0;font-weight:700;">${esc(k.title)}</h3>
@@ -1595,11 +1757,11 @@ try {
         </div>
         <p style="font-size:11px;color:var(--muted);margin:0 0 10px;line-height:1.4;">${esc(k.description)}</p>
       </div>
-      <button class="button primary claim-kit" data-kit="${esc(k.id)}" style="align-self:flex-start;">Забрать набор</button>
+      ${button}
     </article>`}).join("");
 
-    return `<div class="view">${title("Наборы Снаряжения (Kits)", "Получайте экипировку и стартовые ресурсы")}
-      <div class="case-grid stagger" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards || '<div class="empty">Наборов нет</div>'}</div>
+    return `<div class="view">${title("РќР°Р±РѕСЂС‹ РЎРЅР°СЂСЏР¶РµРЅРёСЏ (Kits)", "РќР°Р±РѕСЂС‹ РїСЂРёРІРёР»РµРіРёР№: СЂР°РЅРі РѕС‚РєСЂС‹РІР°РµС‚ СЃРІРѕР№ РєРёС‚ Рё РІСЃРµ РїСЂРµРґС‹РґСѓС‰РёРµ")}
+      <div class="case-grid stagger" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards || '<div class="empty">РќР°Р±РѕСЂРѕРІ РЅРµС‚</div>'}</div>
     </div>`;
   }
 
@@ -1611,11 +1773,11 @@ try {
         <h3 style="font-size:14px;margin:0 0 4px;font-weight:700;">${esc(w.title)}</h3>
         <p style="font-size:11px;color:var(--muted);margin:0 0 12px;line-height:1.4;">${esc(w.description)}</p>
       </div>
-      <button class="button tp-warp" data-warp="${esc(w.id)}" style="background:linear-gradient(90deg,var(--accent),var(--accent2));color:#08131a;font-weight:700;">Телепортироваться</button>
+      <button class="button tp-warp" data-warp="${esc(w.id)}" style="background:linear-gradient(90deg,var(--accent),var(--accent2));color:#08131a;font-weight:700;">РўРµР»РµРїРѕСЂС‚РёСЂРѕРІР°С‚СЊСЃСЏ</button>
     </article>`).join("");
 
-    return `<div class="view">${title("Навигация и Варпы", "Быстрое перемещение по ключевым точкам мира")}
-      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards || '<div class="empty">Варпов нет</div>'}</div>
+    return `<div class="view">${title("РќР°РІРёРіР°С†РёСЏ Рё Р’Р°СЂРїС‹", "Р‘С‹СЃС‚СЂРѕРµ РїРµСЂРµРјРµС‰РµРЅРёРµ РїРѕ РєР»СЋС‡РµРІС‹Рј С‚РѕС‡РєР°Рј РјРёСЂР°")}
+      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards || '<div class="empty">Р’Р°СЂРїРѕРІ РЅРµС‚</div>'}</div>
     </div>`;
   }
 
@@ -1625,23 +1787,23 @@ try {
       <span>${esc(e.player)}</span>
       <span class="row-value">${esc(e.value)}</span>
     </div>`).join("");
-    return `<div class="view">${title("Топ игроков", "Рейтинг по игровому времени и достижениям")}
-      <section class="card rows">${rows || '<div class="empty">Рейтинг пуст</div>'}</section>
+    return `<div class="view">${title("РўРѕРї РёРіСЂРѕРєРѕРІ", "Р РµР№С‚РёРЅРі РїРѕ РёРіСЂРѕРІРѕРјСѓ РІСЂРµРјРµРЅРё Рё РґРѕСЃС‚РёР¶РµРЅРёСЏРј")}
+      <section class="card rows">${rows || '<div class="empty">Р РµР№С‚РёРЅРі РїСѓСЃС‚</div>'}</section>
     </div>`;
   }
 
   function settingsView() {
     const a = state.payload.appearance;
-    return `<div class="view settings">${title("Настройки", "Применяются только к AquaLumen UI")}
+    return `<div class="view settings">${title("РќР°СЃС‚СЂРѕР№РєРё", "РџСЂРёРјРµРЅСЏСЋС‚СЃСЏ С‚РѕР»СЊРєРѕ Рє AquaLumen UI")}
       <section class="card">
         <div class="setting">
-          <div class="setting-info"><b>Цветовая тема</b><span>Меняет палитру и акцент интерфейса</span></div>
+          <div class="setting-info"><b>Р¦РІРµС‚РѕРІР°СЏ С‚РµРјР°</b><span>РњРµРЅСЏРµС‚ РїР°Р»РёС‚СЂСѓ Рё Р°РєС†РµРЅС‚ РёРЅС‚РµСЂС„РµР№СЃР°</span></div>
           <div class="theme-picker">
             ${["aqua_lumen", "violet_lumen", "midnight_rose"].map(t => `<button aria-label="${t}" class="swatch ${a.theme === t ? "active" : ""}" data-theme="${t}"></button>`).join("")}
           </div>
         </div>
         <div class="setting">
-          <div class="setting-info"><b>Анимации</b><span>Плавные переходы и рулетка</span></div>
+          <div class="setting-info"><b>РђРЅРёРјР°С†РёРё</b><span>РџР»Р°РІРЅС‹Рµ РїРµСЂРµС…РѕРґС‹ Рё СЂСѓР»РµС‚РєР°</span></div>
           <button class="toggle ${a.animations ? "on" : ""}" id="motionToggle"><i></i></button>
         </div>
       </section>
@@ -1649,13 +1811,13 @@ try {
   }
 
   function bindViewActions() {
-    document.querySelectorAll(".buy").forEach(b => b.onclick = () => confirmAction("Покупка", `Купить «${b.dataset.title}»?`, "store.buy", b.dataset.id));
+    document.querySelectorAll(".buy").forEach(b => b.onclick = () => confirmAction("РџРѕРєСѓРїРєР°", `РљСѓРїРёС‚СЊ В«${b.dataset.title}В»?`, "store.buy", b.dataset.id));
     document.querySelectorAll(".rank-more").forEach(b => b.onclick = () => {
       const offer = (state.payload.snapshot.store || []).find(x => x.id === b.dataset.id);
       if (offer && !offer.owned) openRankModal(offer);
     });
     document.querySelectorAll(".event-claim").forEach(b => b.onclick = () => action("events.claim", b.dataset.idx));
-    document.querySelectorAll(".event-reroll").forEach(b => b.onclick = () => confirmAction("Сменить контракт", "Списать " + coins(100) + "?", "events.reroll", b.dataset.idx));
+    document.querySelectorAll(".event-reroll").forEach(b => b.onclick = () => confirmAction("РЎРјРµРЅРёС‚СЊ РєРѕРЅС‚СЂР°РєС‚", "РЎРїРёСЃР°С‚СЊ " + coins(100) + "?", "events.reroll", b.dataset.idx));
     
     document.querySelectorAll(".preview-case").forEach(b => b.onclick = (e) => {
       e.stopPropagation();
@@ -1692,45 +1854,80 @@ try {
         card.classList.remove("claimable");
         card.classList.add("is-claimed");
       }
-      b.outerHTML = `<div class="pass-status-badge claimed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 12 5 5L20 6"/></svg> Забрано</div>`;
+      b.outerHTML = `<div class="pass-status-badge claimed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 12 5 5L20 6"/></svg> Р—Р°Р±СЂР°РЅРѕ</div>`;
       renderNav();
       action("pass.claim", String(lvl));
-      toast("Награда уровня " + lvl + " получена!");
+      toast("РќР°РіСЂР°РґР° СѓСЂРѕРІРЅСЏ " + lvl + " РїРѕР»СѓС‡РµРЅР°!");
       setTimeout(() => action("hub.refresh"), 400);
     });
 
-    document.querySelectorAll(".claim-kit").forEach(b => b.onclick = () => {
-      action("hub.kit", b.dataset.kit);
-      toast("Набор запрошен!");
-      setTimeout(() => action("hub.refresh"), 500);
+    document.querySelectorAll(".claim-kit").forEach(b => {
+      if (b.disabled) return;
+      b.onclick = () => {
+        action("hub.kit", b.dataset.kit);
+        toast("РќР°Р±РѕСЂ Р·Р°РїСЂРѕС€РµРЅ!");
+        setTimeout(() => action("hub.refresh"), 500);
+      };
     });
+
+    // РњР°РіР°Р·РёРЅ: РїРѕРёСЃРє + С„РёР»СЊС‚СЂ РїРѕ РёСЃС‚РѕС‡РЅРёРєСѓ (AE2 / IU / Botania / РїСЂРѕС‡РµРµ)
+    const shopSearch = document.getElementById("shopSearch");
+    const shopChips = document.getElementById("shopChips");
+    const applyShopFilter = () => {
+      const grid = document.getElementById("shopGrid");
+      if (!grid) return;
+      const q = (shopSearch ? shopSearch.value : "").trim().toLowerCase();
+      const active = shopChips ? shopChips.querySelector(".atlas-pill.active") : null;
+      const ns = active ? active.dataset.shop : "all";
+      grid.querySelectorAll("[data-shop-name]").forEach(card => {
+        const matchQ = !q || (card.dataset.shopName || "").includes(q);
+        const matchNs = ns === "all" || card.dataset.shopNs === ns;
+        card.style.display = matchQ && matchNs ? "" : "none";
+      });
+    };
+    if (shopSearch) shopSearch.oninput = applyShopFilter;
+    if (shopChips) {
+      shopChips.querySelectorAll(".atlas-pill").forEach(p => p.onclick = () => {
+        shopChips.querySelectorAll(".atlas-pill").forEach(x => x.classList.toggle("active", x === p));
+        applyShopFilter();
+      });
+    }
 
     document.querySelectorAll(".tp-warp").forEach(b => b.onclick = () => {
       action("hub.warp", b.dataset.warp);
-      toast("Телепортация...");
+      toast("РўРµР»РµРїРѕСЂС‚Р°С†РёСЏ...");
       setTimeout(() => send({ type: "action", action: "hub.close" }), 300);
+    });
+
+    document.querySelectorAll(".atlas-pill").forEach(p => p.onclick = () => {
+      document.querySelectorAll(".atlas-pill").forEach(x => x.classList.toggle("active", x === p));
+      const f = p.dataset.filter;
+      document.querySelectorAll("#atlasGrid [data-found]").forEach(card => {
+        const found = card.dataset.found === "1";
+        card.style.display = (f === "all" || (f === "found" && found) || (f === "missing" && !found)) ? "" : "none";
+      });
     });
 
     document.querySelectorAll(".sell-all-fish").forEach(b => b.onclick = () => {
       action("fish.sell_all");
-      toast("Продажа рыбы...");
+      toast("РџСЂРѕРґР°Р¶Р° СЂС‹Р±С‹...");
       setTimeout(() => action("hub.refresh"), 400);
     });
 
     document.querySelectorAll(".sell-single-fish").forEach(b => b.onclick = () => {
       action("fish.sell", b.dataset.fish);
-      toast("Продажа рыбы...");
+      toast("РџСЂРѕРґР°Р¶Р° СЂС‹Р±С‹...");
       setTimeout(() => action("hub.refresh"), 400);
     });
 
     document.querySelectorAll(".buy-auction").forEach(b => b.onclick = () => {
-      toast("Покупка лота...");
+      toast("РџРѕРєСѓРїРєР° Р»РѕС‚Р°...");
       action("auction.buy", String(b.dataset.id));
       setTimeout(() => action("hub.refresh"), 500);
     });
 
     document.querySelectorAll(".cancel-auction").forEach(b => b.onclick = () => {
-      toast("Снятие лота...");
+      toast("РЎРЅСЏС‚РёРµ Р»РѕС‚Р°...");
       action("auction.cancel", String(b.dataset.id));
       setTimeout(() => action("hub.refresh"), 500);
     });
@@ -1787,7 +1984,7 @@ try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(cmd).catch(() => {});
       }
-      toast("Команда скопирована: /ah sell <цена>");
+      toast("РљРѕРјР°РЅРґР° СЃРєРѕРїРёСЂРѕРІР°РЅР°: /ah sell <С†РµРЅР°>");
     };
     const copyBtn = $("copySellCmdBtn");
     if (copyBtn) copyBtn.onclick = handleCopyCmd;
@@ -1814,8 +2011,9 @@ try {
   function renderView(animate, preserveScroll = true) {
     const s = state.payload.snapshot;
     const views = {
-      profile: profileView, store: storeView, cases: casesView,
-      pass: passView, fishing: fishingView, events: eventsView, auction: auctionView, kits: kitsView,
+      profile: profileView,  cases: casesView,
+      pass: passView, fishing: fishingView, atlas: fishAtlasView, events: eventsView, auction: auctionView, kits: kitsView,
+      privileges: (s) => storeView(s, true), store: (s) => storeView(s, false),
       warps: warpsView, tops: topsView, settings: settingsView
     };
     const currentView = $("content")?.querySelector(".view");
@@ -1879,7 +2077,6 @@ try {
     state.payload = payload;
     const s = payload.snapshot || {};
 
-    if ($("serverName")) $("serverName").textContent = (s.server && s.server.name) || "AquaTech Network";
     if ($("online")) $("online").textContent = `${(s.server && s.server.online) || 0}/${(s.server && s.server.slots) || 100}`;
     if ($("tps")) $("tps").textContent = `${((s.server && s.server.tps) || 20).toFixed(1)} TPS`;
     if ($("coins")) $("coins").textContent = num(s.wallet ? s.wallet.coins : 0);
@@ -1895,8 +2092,10 @@ try {
         case "auction": return JSON.stringify(s.market || []);
         case "pass": return JSON.stringify([s.season, s.wallet ? s.wallet.coins : 0]);
         case "profile": return JSON.stringify([s.player, s.wallet]);
-        case "store": return JSON.stringify([s.shop, s.wallet]);
+        case "store": return JSON.stringify([s.store, s.wallet]);
+        case "privileges": return JSON.stringify([s.store, s.wallet]);
         case "fishing": return JSON.stringify([s.fishing, s.wallet]);
+        case "atlas": return JSON.stringify([s.atlas, s.atlasSummary]);
         case "cases": return JSON.stringify([s.cases, s.wallet]);
         case "tops": return JSON.stringify(s.top || []);
         case "events": return JSON.stringify(s.events || []);
@@ -1979,7 +2178,7 @@ try {
     }
   }
 
-  $("refresh").onclick = () => { action("hub.refresh"); toast("Обновление…"); };
+  $("refresh").onclick = () => { action("hub.refresh"); toast("РћР±РЅРѕРІР»РµРЅРёРµвЂ¦"); };
   $("close").onclick = () => send({ type: "action", action: "hub.close" });
 
   $("rankModalClose").onclick = closeRankModal;
@@ -1989,7 +2188,7 @@ try {
     const id = rankModalOffer.id, title = rankModalOffer.title;
     closeRankModal();
     action("store.buy", id);
-    toast(`Покупка «${title}»…`);
+    toast(`РџРѕРєСѓРїРєР° В«${title}В»вЂ¦`);
   };
 
   document.addEventListener("keydown", (e) => {
@@ -2056,7 +2255,7 @@ try {
 } catch (pageError) {
   var hubErrorBox = document.getElementById("content");
   if (hubErrorBox) {
-    hubErrorBox.innerHTML = '<div class="empty">Ошибка интерфейса: ' +
+    hubErrorBox.innerHTML = '<div class="empty">РћС€РёР±РєР° РёРЅС‚РµСЂС„РµР№СЃР°: ' +
       String(pageError && pageError.message ? pageError.message : pageError) + '</div>';
   }
   if (window.console && console.error) console.error("[AquaLumen] hub page error:", pageError);

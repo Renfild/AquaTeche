@@ -26,6 +26,7 @@ public final class HubActionHandler {
 
     private static final Map<String, Long> LAST_ACTION = new ConcurrentHashMap<>();
     private static final String CASE_KEYS_TAG = "aqualumen_case_keys";
+    private static final String CASE_PITY_TAG = "aqualumen_case_pity";
 
     private HubActionHandler() {
     }
@@ -218,10 +219,18 @@ public final class HubActionHandler {
 
         RandomSource random = RandomSource.create();
         if (count <= 1) {
-            CaseConfig.LootDef loot = CaseConfig.roll(def, random);
+            boolean pityHit = casePityEnabled(def) && casePityCount(player, def.id) + 1 >= def.pityEvery;
+            CaseConfig.LootDef loot = pityHit ? def.pity : CaseConfig.roll(def, random);
             int amount = CaseConfig.rollAmount(loot, random);
             String label = loot.label == null || loot.label.isBlank() ? loot.item : loot.label;
             String type = loot.type == null ? "item" : loot.type;
+            if (casePityEnabled(def)) {
+                setCasePity(player, def.id, pityHit ? 0 : casePityCount(player, def.id) + 1);
+                if (pityHit) {
+                    player.sendSystemMessage(Component.literal("§6[AquaTech] §fСработал гарант: §b" + label)
+                            .withStyle(ChatFormatting.GOLD));
+                }
+            }
 
             // Stage result for client animation
             HubDataService.stageCaseResult(player.getUUID(), new HubSnapshot.CaseResult(
@@ -240,10 +249,18 @@ public final class HubActionHandler {
             summary.append("§6[AquaTech] §fОткрыто §e×").append(count).append(" §fкейсов §b«").append(def.title).append("»:\n");
             CaseConfig.LootDef firstLoot = null;
             int firstAmount = 1;
+            int pityHits = 0;
 
             for (int i = 0; i < count; i++) {
-                CaseConfig.LootDef loot = CaseConfig.roll(def, random);
+                boolean pityHit = casePityEnabled(def) && casePityCount(player, def.id) + 1 >= def.pityEvery;
+                CaseConfig.LootDef loot = pityHit ? def.pity : CaseConfig.roll(def, random);
                 int amount = CaseConfig.rollAmount(loot, random);
+                if (casePityEnabled(def)) {
+                    setCasePity(player, def.id, pityHit ? 0 : casePityCount(player, def.id) + 1);
+                    if (pityHit) {
+                        pityHits++;
+                    }
+                }
                 if (firstLoot == null) {
                     firstLoot = loot;
                     firstAmount = amount;
@@ -252,18 +269,21 @@ public final class HubActionHandler {
                 switch (type) {
                     case "coins" -> {
                         HubEconomy.grantCoins(player, amount);
-                        summary.append("  §7• §e+").append(amount).append(" AquaCoins\n");
+                        summary.append("  §7• §e+").append(amount).append(" AquaCoins").append(pityHit ? " §6(гарант)" : "").append("\n");
                     }
                     case "gems" -> {
                         HubEconomy.grantGems(player, amount);
-                        summary.append("  §7• §d+").append(amount).append(" Гемов\n");
+                        summary.append("  §7• §d+").append(amount).append(" Гемов").append(pityHit ? " §6(гарант)" : "").append("\n");
                     }
                     default -> {
                         ItemStack stack = itemStack(loot.item, amount);
                         HubEconomy.giveItem(player, stack);
-                        summary.append("  §7• §b").append(stack.getHoverName().getString()).append(" §f×").append(amount).append("\n");
+                        summary.append("  §7• §b").append(stack.getHoverName().getString()).append(" §f×").append(amount).append(pityHit ? " §6(гарант)" : "").append("\n");
                     }
                 }
+            }
+            if (pityHits > 0) {
+                summary.append("  §6• Сработал гарант: ").append(pityHits).append(" раз\n");
             }
             // Построчно: единый многострочный компонент на Mohist даёт пустые строки в чате
             for (String line : summary.toString().trim().split("\n")) {
@@ -377,6 +397,31 @@ public final class HubActionHandler {
         tag.putInt(id, have - amount);
         player.getPersistentData().put(CASE_KEYS_TAG, tag);
         return true;
+    }
+
+    /** Сколько открытий игрок сделал с прошлого срабатывания гаранта. */
+    static int casePityCount(ServerPlayer player, String caseId) {
+        String id = sanitizeCaseId(caseId);
+        if (id.isEmpty() || player == null) return 0;
+        return player.getPersistentData().getCompound(CASE_PITY_TAG).getInt(id);
+    }
+
+    private static void setCasePity(ServerPlayer player, String caseId, int value) {
+        String id = sanitizeCaseId(caseId);
+        if (id.isEmpty() || player == null) return;
+        CompoundTag tag = player.getPersistentData().getCompound(CASE_PITY_TAG);
+        tag.putInt(id, Math.max(0, value));
+        player.getPersistentData().put(CASE_PITY_TAG, tag);
+    }
+
+    /** Открытий до гаранта или -1, если у кейса гарант не настроен. */
+    static int casePityLeft(ServerPlayer player, CaseConfig.CaseDef def) {
+        if (def == null || def.pityEvery <= 0 || def.pity == null) return -1;
+        return Math.max(0, def.pityEvery - casePityCount(player, def.id));
+    }
+
+    private static boolean casePityEnabled(CaseConfig.CaseDef def) {
+        return def != null && def.pityEvery > 0 && def.pity != null;
     }
 
     private static String sanitizeCaseId(String caseId) {

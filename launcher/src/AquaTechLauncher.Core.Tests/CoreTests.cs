@@ -156,7 +156,7 @@ public class ServerListHelperTests
         Directory.CreateDirectory(tempDir);
         try
         {
-            var target = "g-pl-3.apexnodes.xyz:21561";
+            var target = "g-pl-2.apexnodes.xyz:21924";
             ServerListHelper.EnsureServerEntry(tempDir, target, "AquaTech");
             var dat = Path.Combine(tempDir, "servers.dat");
             Assert.True(File.Exists(dat));

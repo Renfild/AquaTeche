@@ -6,3 +6,6 @@ server/libraries/net/minecraft/server/1.20.1/server-1.20.1.jar filter=lfs diff=l
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.dll filter=lfs diff=lfs merge=lfs -text
 server/java17/jdk-17.0.10+7/lib/modules filter=lfs diff=lfs merge=lfs -text
+
+docs/pack/config/aqualumen/hub.html -text
+docs/pack/config/aqualumen/html/hub.html -text

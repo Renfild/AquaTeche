@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Океанский skyblock: удочки AquaTech добывают руды из воды. Кейсы, аукцион, турниры и меню F4." />
 
 
-<link rel="stylesheet" href="assets/css/site.css?v=20260915_perf_v11" />
+<link rel="stylesheet" href="assets/css/site.css?v=20260921_topbar" />
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">К содержимому</a>
@@ -32,6 +32,8 @@
        HERO SECTION WITH UNIFIED BRAND HEADER & SERVER SHOWCASE CARD
        ========================================================================= -->
   <section class="hero">
+    <canvas class="hero-canvas" id="ocean-hero" aria-hidden="true"></canvas>
+    <div class="hero-grain" aria-hidden="true"></div>
     <div class="container hero-split">
       <!-- Left Column: Branding, Pitch & CTAs -->
       <div class="hero-content">
@@ -39,18 +41,18 @@
           <img class="hero-brand-crest" src="assets/images/logo_128.png" alt="AquaTech Crest" width="64" height="64" />
           <div class="hero-brand-text">
             <p class="hero-kicker">MINECRAFT 1.20.1 · ОКЕАНСКИЙ SKYBLOCK</p>
-            <h1 class="hero-title">AquaTech</h1>
+            <h1 class="hero-title" data-kinetic="chars">AquaTech</h1>
           </div>
         </div>
-        <p class="hero-lead">
+        <p class="hero-lead" data-kinetic="words">
           Плот посреди океана, ни одной шахты. Бамбуковая удочка вытащит булыжник и медь, Альфа — иридий, осмиридий и звезду Незера. Между ними авторыболов, буры и заводы, которые работают, пока ты спишь.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" data-download href="start.html">
+          <a class="btn btn-primary" data-magnetic="6" data-download href="start.html">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span>Скачать лаунчер</span>
           </a>
-          <a class="btn btn-secondary" href="register.html">Регистрация</a>
+          <a class="btn btn-secondary" data-magnetic="4" href="register.html">Регистрация</a>
         </div>
         <div class="hero-meta">
           <span class="live-pill" title="Статус сервера">
@@ -363,7 +365,7 @@
             <img class="feature-card-icon" src="assets/images/items/industrialupgrade_blockresource_machine.png" alt="" width="32" height="32" loading="lazy" />
             <span class="tag">Автоматизация</span>
           </div>
-          <h3>Авторыболовы и Буры</h3>
+          <h3>Авторыболовы MK-2 и буры</h3>
           <p>Авторыболов ловит сам, океанический экскаватор грызёт дно, синтезатор и центрифуга перерабатывают улов. Гидростанция не останавливается, когда ты выходишь из игры.</p>
         </div>
 
@@ -400,6 +402,11 @@
 
   </main>
   <div id="site-footer"></div>
-  <script src="assets/js/site.js?v=20260915_perf_v11"></script>
+  <script src="assets/js/vendor/lenis.min.js?v=1.3.11" defer></script>
+  <script src="assets/js/vendor/gsap.min.js?v=3.13.0" defer></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js?v=3.13.0" defer></script>
+  <script src="assets/js/site.js?v=20260921_topbar"></script>
+  <script src="assets/js/motion.js?v=1" defer></script>
+  <script src="assets/js/ocean-hero.js?v=1" defer></script>
 </body>
 </html>

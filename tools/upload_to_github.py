@@ -12,7 +12,7 @@ AquaTech GitHub Release Uploader
 import os, sys, json, hashlib, subprocess
 from pathlib import Path
 
-ROOT       = Path(r"C:\Users\xieto\Desktop\AquaTech")
+ROOT       = Path(__file__).resolve().parent.parent
 CLIENT_DIR = ROOT / "dist" / "AquaTech-Client"
 MANIFEST   = CLIENT_DIR / "manifest.json"
 
@@ -42,7 +42,7 @@ def get_token() -> str:
     if t:
         return t
     print("[ERROR] GitHub token not found!")
-    print("  Create file: C:\\Users\\xieto\\Desktop\\AquaTech\\.gh_token")
+    print("  Create file: <repo>\\.gh_token")
     print("  Get token: https://github.com/settings/tokens/new  (scope: repo)")
     sys.exit(1)
 

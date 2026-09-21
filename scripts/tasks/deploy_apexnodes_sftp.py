@@ -14,10 +14,10 @@ Restart panel server without upload:
   python scripts/tasks/deploy_apexnodes_sftp.py --restart-only
 
 Optional env:
-  AQUATECH_SFTP_HOST       default g-pl-3.apexnodes.xyz
+  AQUATECH_SFTP_HOST       default g-pl-2.apexnodes.xyz
   AQUATECH_SFTP_PORT       default 2022
   AQUATECH_SFTP_USER       default oxmzg5d0.6fdc6f7b
-  AQUATECH_SERVER_PORT     default 21561
+  AQUATECH_SERVER_PORT     default 21924
   AQUATECH_APEX_PANEL      default https://panel.apexnodes.xyz
   AQUATECH_APEX_SERVER_ID  default 6fdc6f7b
   AQUATECH_APEX_API_KEY    Client API key (Account -> API Credentials)
@@ -49,14 +49,14 @@ FIRST_PARTY_PURGE: dict[str, tuple[str, ...]] = {
     "plugins": ("Chunky",),
 }
 
-HOST = "g-pl-3.apexnodes.xyz"
+HOST = "g-pl-2.apexnodes.xyz"
 PORT = 2022
-USER = "oxmzg5d0.6fdc6f7b"
+USER = "oxmzg5d0.492a9e1d"
 PASSWORD = ""
-SERVER_PORT = "21561"
+SERVER_PORT = "21924"
 
 APEX_PANEL = "https://panel.apexnodes.xyz"
-APEX_SERVER_ID = "6fdc6f7b"
+APEX_SERVER_ID = "492a9e1d"
 APEX_API_KEY = ""
 
 SKIP_DIRS = {

@@ -46,6 +46,9 @@ public class ModCreativeTabs {
                         output.accept(ModItems.INFERNAL_PEARL.get());
                         output.accept(ModItems.SONAR_GOGGLES.get());
                         output.accept(ModItems.ABYSSAL_MAGNET.get());
+                        output.accept(ModItems.BAIT_SHOAL.get());
+                        output.accept(ModItems.BAIT_ORE.get());
+                        output.accept(ModItems.BAIT_ABYSS.get());
                     })
                     .build());
 

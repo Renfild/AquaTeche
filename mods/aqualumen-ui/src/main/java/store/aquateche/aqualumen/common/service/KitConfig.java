@@ -146,9 +146,28 @@ public final class KitConfig {
             return false;
         }
 
+        if (kit.requiredRanks != null && !kit.requiredRanks.isEmpty()) {
+            String rankId = HubDataService.resolveRankId(player);
+            boolean allowed = false;
+            for (String required : kit.requiredRanks) {
+                if (required != null && required.equalsIgnoreCase(rankId)) {
+                    allowed = true;
+                    break;
+                }
+            }
+            if (!allowed) {
+                String label = kit.requiresText != null && !kit.requiresText.isBlank()
+                        ? kit.requiresText
+                        : String.join(", ", kit.requiredRanks);
+                player.sendSystemMessage(Component.literal(
+                        "\u00a7c[AquaTech] \u00a7f\u041d\u0430\u0431\u043e\u0440 \u00ab" + kit.title
+                                + "\u00bb \u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d \u043f\u0440\u0438\u0432\u0438\u043b\u0435\u0433\u0438\u0438: \u00a7e" + label));
+                return false;
+            }
+        }
+
         loadCooldowns();
-        String cdKey = player.getUUID() + "_" + kit.id.toLowerCase(Locale.ROOT);
-        long now = System.currentTimeMillis();
+        String cdKey = player.getUUID() + "_" + kit.id.toLowerCase(Locale.ROOT);        long now = System.currentTimeMillis();
         long nextAvailable = COOLDOWNS.getOrDefault(cdKey, 0L);
 
         if (now < nextAvailable) {
@@ -206,6 +225,10 @@ public final class KitConfig {
         public long cooldownSeconds;
         public List<KitItem> items = new ArrayList<>();
         public List<String> commands = new ArrayList<>();
+        /** LuckPerms group keys that may claim this kit (higher tiers list themselves plus the ranks above). */
+        public List<String> requiredRanks = new ArrayList<>();
+        /** Human readable requirement shown in the F4 menu when the kit is locked. */
+        public String requiresText;
 
         public KitDef() {
         }

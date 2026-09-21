@@ -1,7 +1,7 @@
 import { json } from "../_lib/http.js";
 
-const DEFAULT_HOST = "g-pl-3.apexnodes.xyz";
-const DEFAULT_PORT = 21561;
+const DEFAULT_HOST = "g-pl-2.apexnodes.xyz";
+const DEFAULT_PORT = 21924;
 const CACHE_TTL_MS = 30_000;
 
 /** @type {{ at: number, payload: object } | null} */
@@ -35,20 +35,76 @@ export async function onRequestGet(context) {
     `https://api.mcsrvstat.us/3/${encodeURIComponent(address)}`,
   ];
 
-  const payload = await Promise.any(
-    mirrors.map((url) => fetchStatus(url, host, port, address))
-  ).catch(() => ({
-    online: false,
-    players_online: 0,
-    players_max: 0,
-    host,
-    port,
-    address,
-    source: "unreachable",
-  }));
+  const answers = await Promise.allSettled(mirrors.map((url) => fetchStatus(url, host, port, address)));
+  const results = answers.filter((a) => a.status === "fulfilled").map((a) => a.value);
+  const payload =
+    results.find((r) => r && r.online) ||
+    results[0] || {
+      online: false,
+      players_online: 0,
+      players_max: 0,
+      host,
+      port,
+      address,
+      source: "unreachable",
+    };
 
   memCache = { at: now, payload };
+  if (context?.env?.DB) {
+    recordSample(context.env.DB, payload, context.waitUntil);
+  }
   return json({ ok: true, ...payload, cached: false });
+}
+
+const SAMPLE_MIN_GAP_MS = 4 * 60_000;
+const SAMPLE_RETENTION_MS = 45 * 24 * 3600_000;
+
+/** Пишем сэмпл в D1 не чаще раза в 4 минуты, чтобы у /api/status-history была история. */
+function recordSample(db, payload, waitUntil) {
+  const write = async () => {
+    try {
+      await db
+        .prepare(
+          `CREATE TABLE IF NOT EXISTS server_status_samples (
+             id INTEGER PRIMARY KEY AUTOINCREMENT,
+             at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+             online INTEGER NOT NULL DEFAULT 0,
+             players INTEGER NOT NULL DEFAULT 0,
+             max_players INTEGER NOT NULL DEFAULT 0,
+             source TEXT
+           )`
+        )
+        .run();
+
+      const last = await db
+        .prepare("SELECT at FROM server_status_samples ORDER BY id DESC LIMIT 1")
+        .first();
+      const lastAt = last?.at ? Date.parse(last.at) : 0;
+      if (Number.isFinite(lastAt) && lastAt > 0 && Date.now() - lastAt < SAMPLE_MIN_GAP_MS) return;
+
+      await db
+        .prepare(
+          "INSERT INTO server_status_samples (online, players, max_players, source) VALUES (?, ?, ?, ?)"
+        )
+        .bind(
+          payload.online ? 1 : 0,
+          Math.max(0, Number(payload.players_online) || 0),
+          Math.max(0, Number(payload.players_max) || 0),
+          String(payload.source || "")
+        )
+        .run();
+
+      await db
+        .prepare("DELETE FROM server_status_samples WHERE at < ?")
+        .bind(new Date(Date.now() - SAMPLE_RETENTION_MS).toISOString())
+        .run();
+    } catch (err) {
+      console.warn("status sample failed:", err);
+    }
+  };
+
+  if (typeof waitUntil === "function") waitUntil(write());
+  else write();
 }
 
 async function fetchStatus(url, host, port, address) {

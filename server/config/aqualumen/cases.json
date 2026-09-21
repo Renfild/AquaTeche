@@ -5,6 +5,15 @@
       "title": "Кейс I: Первопроходец Океана",
       "rarity": "common",
       "costCoins": 2500,
+      "pityEvery": 12,
+      "pity": {
+        "type": "item",
+        "item": "minecraft:diamond",
+        "label": "Алмазы",
+        "min": 3,
+        "max": 6,
+        "weight": 10
+      },
       "loot": [
         {
           "type": "item",
@@ -109,6 +118,15 @@
       "title": "Кейс II: Инженер Плавильни",
       "rarity": "uncommon",
       "costCoins": 10000,
+      "pityEvery": 12,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:smeltery/smeltery_controller",
+        "label": "Контроллер плавильни",
+        "min": 1,
+        "max": 1,
+        "weight": 10
+      },
       "loot": [
         {
           "type": "item",
@@ -213,6 +231,15 @@
       "title": "Кейс III: Паровая Энергия",
       "rarity": "rare",
       "costCoins": 45000,
+      "pityEvery": 12,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:blockresource/machine",
+        "label": "Базовый корпус механизма",
+        "min": 2,
+        "max": 4,
+        "weight": 15
+      },
       "loot": [
         {
           "type": "item",
@@ -317,6 +344,15 @@
       "title": "Кейс IV: Ботаническая Флора",
       "rarity": "epic",
       "costCoins": 150000,
+      "pityEvery": 20,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:blockresource/advanced_machine",
+        "label": "Улучшенный корпус механизма",
+        "min": 2,
+        "max": 4,
+        "weight": 31
+      },
       "loot": [
         {
           "type": "item",
@@ -413,6 +449,15 @@
       "title": "Кейс V: Цифровая МЭ-Сеть",
       "rarity": "epic",
       "costCoins": 450000,
+      "pityEvery": 20,
+      "pity": {
+        "type": "item",
+        "item": "ae2:logic_processor_press",
+        "label": "Комплект прессов высекателя AE2",
+        "min": 1,
+        "max": 1,
+        "weight": 10
+      },
       "loot": [
         {
           "type": "item",
@@ -517,6 +562,15 @@
       "title": "Кейс VI: Глубины и Радиация",
       "rarity": "legendary",
       "costCoins": 1200000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/spectral_solar_panel",
+        "label": "Дифракционная солнечная панель [Тир 6]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
       "loot": [
         {
           "type": "item",
@@ -629,6 +683,15 @@
       "title": "Кейс VII: Сверхпроводники",
       "rarity": "legendary",
       "costCoins": 2500000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/photonic_solar_panel",
+        "label": "Фотонная солнечная панель [Тир 7]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
       "loot": [
         {
           "type": "item",
@@ -741,6 +804,15 @@
       "title": "Кейс VIII: Матрица Сингулярности",
       "rarity": "mythic",
       "costCoins": 4500000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/barion_solar_panel",
+        "label": "Барионная солнечная панель [Тир 8]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
       "loot": [
         {
           "type": "item",
@@ -853,6 +925,15 @@
       "title": "Кейс IX: Дракониевое Слияние",
       "rarity": "mythic",
       "costCoins": 6500000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/hadron_solar_panel",
+        "label": "Адронная солнечная панель [Тир 9]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
       "loot": [
         {
           "type": "item",
@@ -965,6 +1046,15 @@
       "title": "Кейс X: Абсолютная Бесконечность",
       "rarity": "exotic",
       "costCoins": 8000000,
+      "pityEvery": 200,
+      "pity": {
+        "type": "item",
+        "item": "industrialupgrade:machines/graviton_solar_panel",
+        "label": "Гравитонная солнечная панель [Тир 10]",
+        "min": 1,
+        "max": 1,
+        "weight": 1
+      },
       "loot": [
         {
           "type": "item",

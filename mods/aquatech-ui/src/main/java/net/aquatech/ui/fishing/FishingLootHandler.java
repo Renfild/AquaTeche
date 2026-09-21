@@ -69,6 +69,7 @@ public class FishingLootHandler {
             if (fishRate > 1) {
                 applyRateMultiplier(event.getDrops(), fishRate);
             }
+            FishingAtlasService.onManualCatch(serverPlayer, event.getDrops());
             bumpCatchStat(serverPlayer, false);
             RodDurability.wearOne(rodStack, serverPlayer);
             return;
@@ -218,6 +219,10 @@ public class FishingLootHandler {
             }
         }
 
+        // Грейды и атлас: только ручная ловля и до копий, чтобы теги остались на выдаче.
+        FishingAtlasService.onManualCatch(player, customDrops);
+        FishingBait.consume(player, rodStack);
+
         // Copies for event (before inventory mutates stacks)
         List<ItemStack> awarded = new ArrayList<>(customDrops.size());
         for (ItemStack drop : customDrops) {
@@ -339,8 +344,60 @@ public class FishingLootHandler {
             list.removeIf(FishingLootHandler::isAbsurdTechDrop);
         }
 
+        // Приманки — только ручная ловля: Авторыболов их не тратит.
+        if (rodId != null && player != null && !autoFisher) {
+            applyBait(list, rodStack, rodId, random);
+            applyBite(list, rodId, random);
+        }
+
         stampFreshness(list);
         return list;
+    }
+
+    /** Активный клёв: удочка тира не ниже «жора» получает бонусный улов этого вида. */
+    private static void applyBite(List<ItemStack> list, String rodId, RandomSource random) {
+        if (!OceanEventsService.biteActive()) return;
+        if (FishRosterService.tierOf(rodId) < OceanEventsService.biteTier()) return;
+        if (random.nextFloat() >= 0.35f) return;
+        Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(OceanEventsService.biteFishId()));
+        if (item == Items.AIR) return;
+        list.add(new ItemStack(item, random.nextFloat() < 0.12f ? 2 : 1));
+    }
+
+    private static void applyBait(List<ItemStack> list, ItemStack rodStack, String rodId, RandomSource random) {
+        FishingBait.Kind bait = FishingBait.active(rodStack);
+        if (bait == null) return;
+        int tier = FishRosterService.tierOf(rodId);
+        switch (bait) {
+            case ABYSS -> {
+                if (random.nextFloat() < 0.40f) {
+                    ItemStack extra = FishRosterService.roll(Math.min(FishRosterService.MAX_TIER, tier + 1), random);
+                    if (extra != null) {
+                        list.add(extra);
+                    }
+                }
+            }
+            case SHOAL -> {
+                if (random.nextFloat() < 0.30f) {
+                    List<ItemStack> copies = new ArrayList<>();
+                    for (ItemStack stack : list) {
+                        if (isStarCatcherFishItem(stack)) {
+                            copies.add(stack.copy());
+                        }
+                    }
+                    list.addAll(copies);
+                }
+            }
+            case ORE -> {
+                if (random.nextFloat() < 0.35f) {
+                    List<ItemStack> extra = rollStarCatcherRodLoot(rodId, random);
+                    extra.removeIf(FishingLootHandler::isStarCatcherFishItem);
+                    extra.removeIf(FishingLootHandler::isAbsurdTechDrop);
+                    extra.removeIf(FishingLootHandler::isForbiddenLoot);
+                    list.addAll(extra);
+                }
+            }
+        }
     }
 
     /** Машины/техника из лута удочки — бред, режем на месте (солнечные панели и пр.). */

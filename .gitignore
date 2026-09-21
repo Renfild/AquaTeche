@@ -28,6 +28,7 @@ server/crash-reports/
 server/world_backup_*/
 server/_backup_*/
 server/*.log
+server/libraries/
 !server/*.jar
 
 # Python / temp clutter
@@ -51,8 +52,8 @@ scripts_crafttweaker_archived/
 scripts/scratch/
 scripts/archive/jars/
 scripts/archive/extracted/
-graphify-out/graph.html
-graphify-out/cache/
+graphify-out/
+temp_cl/
 
 
 # Parked jars inside mods/
@@ -103,6 +104,12 @@ AquaTech.exe
 *.mca
 *.mca.remote
 *.spec
+
+# Editor / renderer caches
+ads/**/.hyperframes/
+ads/**/.thumbnails/
+ads/**/renders/*.meta.json
+test_all_cases_result.txt
 META-INF/
 _disabled_mods_backup/
 _parked_cqa/

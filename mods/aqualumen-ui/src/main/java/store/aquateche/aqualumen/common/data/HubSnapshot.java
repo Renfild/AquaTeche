@@ -21,7 +21,9 @@ public record HubSnapshot(Profile profile,
                           CaseResult caseResult,
                           List<MarketEntry> market,
                           List<EventQuest> quests,
-                          String eventLine) {
+                          String eventLine,
+                          List<AtlasEntry> atlas,
+                          AtlasSummary atlasSummary) {
 
     public record Profile(String name, String rank, int rankColor, int level, float levelProgress,
                           long playtimeMinutes, int kills, int deaths, int quests, int friendsOnline) {
@@ -39,7 +41,7 @@ public record HubSnapshot(Profile profile,
     public record Offer(String id, String title, String subtitle, long price, String currency, String badge, boolean owned) {
     }
 
-    public record CaseEntry(String id, String title, int cost, int count, String rarity, List<LootInfo> loot) {
+    public record CaseEntry(String id, String title, int cost, int count, String rarity, List<LootInfo> loot, int pityLeft) {
     }
 
     public record LootInfo(String label, String rarity, int weight, String item) {
@@ -52,17 +54,26 @@ public record HubSnapshot(Profile profile,
     public record MarketEntry(int id, String label, int count, long price, String seller, String itemId, boolean self) {
     }
 
-    /** Контракт дня: живёт в aquatech_ui (OceanEventsService), сюда приходит только витрина. */
+    /** РљРѕРЅС‚СЂР°РєС‚ РґРЅСЏ: Р¶РёРІС‘С‚ РІ aquatech_ui (OceanEventsService), СЃСЋРґР° РїСЂРёС…РѕРґРёС‚ С‚РѕР»СЊРєРѕ РІРёС‚СЂРёРЅР°. */
     public record EventQuest(int idx, String desc, int goal, int progress, long reward, boolean claimed) {
     }
 
-    public record KitEntry(String id, String title, String description, String badge, String command) {
+    public record KitEntry(String id, String title, String description, String badge, String command, boolean locked, String requires) {
     }
 
     public record WarpEntry(String id, String title, String description, String tag, String command) {
     }
 
     public record FishEntry(String id, String name, int count, long priceCoins, String rarity, String tag, float demand) {
+    }
+
+    /** Р С‹Р±РЅС‹Р№ Р°С‚Р»Р°СЃ: СЃС‚СЂРѕРєР° РІРёРґР°. found=false вЂ” РІРёРґ РµС‰С‘ РЅРµ РїРѕР№РјР°РЅ (РёРјСЏ РЅРµ СЂР°СЃРєСЂС‹РІР°РµРј). */
+    public record AtlasEntry(String id, String name, String rarity, int count, float weight,
+                             int grades, int conds, boolean found, String recordHolder, float recordWeight) {
+    }
+
+    public record AtlasSummary(int found, int total, int catches, String recordName, float recordWeight,
+                               int nextMilestone, long nextReward) {
     }
 
     public record ServerInfo(String name, int online, int slots, float tps, String build) {
@@ -124,6 +135,7 @@ public record HubSnapshot(Profile profile,
                 b2.writeVarInt(l.weight());
                 writeSafe(b2, l.item());
             });
+            b.writeVarInt(c.pityLeft());
         });
         buf.writeCollection(kits, (b, k) -> {
             writeSafe(b, k.id());
@@ -131,6 +143,8 @@ public record HubSnapshot(Profile profile,
             writeSafe(b, k.description());
             writeSafe(b, k.badge());
             writeSafe(b, k.command());
+            b.writeBoolean(k.locked());
+            writeSafe(b, k.requires());
         });
         buf.writeCollection(warps, (b, w) -> {
             writeSafe(b, w.id());
@@ -184,6 +198,26 @@ public record HubSnapshot(Profile profile,
             buf.writeVarLong(q.reward());
             buf.writeBoolean(q.claimed());
         }
+        buf.writeCollection(atlas == null ? List.of() : atlas, (b, e) -> {
+            writeSafe(b, e.id());
+            writeSafe(b, e.name());
+            writeSafe(b, e.rarity());
+            b.writeVarInt(e.count());
+            b.writeFloat(e.weight());
+            b.writeVarInt(e.grades());
+            b.writeVarInt(e.conds());
+            b.writeBoolean(e.found());
+            writeSafe(b, e.recordHolder());
+            b.writeFloat(e.recordWeight());
+        });
+        AtlasSummary as = atlasSummary != null ? atlasSummary : new AtlasSummary(0, 0, 0, "", 0f, 0, 0L);
+        buf.writeVarInt(as.found());
+        buf.writeVarInt(as.total());
+        buf.writeVarInt(as.catches());
+        writeSafe(buf, as.recordName());
+        buf.writeFloat(as.recordWeight());
+        buf.writeVarInt(as.nextMilestone());
+        buf.writeVarLong(as.nextReward());
     }
 
     public static HubSnapshot read(FriendlyByteBuf buf) {
@@ -205,10 +239,11 @@ public record HubSnapshot(Profile profile,
             String rarity = b.readUtf();
             List<LootInfo> loot = b.readList(b2 ->
                     new LootInfo(b2.readUtf(), b2.readUtf(), b2.readVarInt(), b2.readUtf()));
-            return new CaseEntry(id, title, cost, count, rarity, loot);
+            int pityLeft = b.readVarInt();
+            return new CaseEntry(id, title, cost, count, rarity, loot, pityLeft);
         });
         List<KitEntry> kits = buf.readList(b ->
-                new KitEntry(b.readUtf(), b.readUtf(), b.readUtf(), b.readUtf(), b.readUtf()));
+                new KitEntry(b.readUtf(), b.readUtf(), b.readUtf(), b.readUtf(), b.readUtf(), b.readBoolean(), b.readUtf()));
         List<WarpEntry> warps = buf.readList(b ->
                 new WarpEntry(b.readUtf(), b.readUtf(), b.readUtf(), b.readUtf(), b.readUtf()));
         List<FishEntry> fishes = buf.readList(b ->
@@ -223,6 +258,12 @@ public record HubSnapshot(Profile profile,
         String eventLine = buf.readUtf();
         List<EventQuest> quests = buf.readList(b ->
                 new EventQuest(b.readVarInt(), b.readUtf(), b.readVarInt(), b.readVarInt(), b.readVarLong(), b.readBoolean()));
-        return new HubSnapshot(profile, wallet, season, tops, store, cases, kits, warps, fishes, server, caseResult, market, quests, eventLine);
+        List<AtlasEntry> atlas = buf.readList(b ->
+                new AtlasEntry(b.readUtf(), b.readUtf(), b.readUtf(), b.readVarInt(), b.readFloat(),
+                        b.readVarInt(), b.readVarInt(), b.readBoolean(), b.readUtf(), b.readFloat()));
+        AtlasSummary atlasSummary = new AtlasSummary(buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
+                buf.readUtf(), buf.readFloat(), buf.readVarInt(), buf.readVarLong());
+        return new HubSnapshot(profile, wallet, season, tops, store, cases, kits, warps, fishes, server, caseResult,
+                market, quests, eventLine, atlas, atlasSummary);
     }
 }

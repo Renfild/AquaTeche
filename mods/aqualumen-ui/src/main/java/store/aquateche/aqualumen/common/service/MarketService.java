@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import store.aquateche.aqualumen.AquaLumenUI;
 import store.aquateche.aqualumen.common.data.HubSnapshot;
 
 import java.io.InputStream;
@@ -35,6 +36,7 @@ public final class MarketService {
     private static final AtomicBoolean FETCHING = new AtomicBoolean();
     private static volatile List<HubSnapshot.MarketEntry> cache = List.of();
     private static volatile long cacheAt;
+    private static volatile boolean marketDownWarned = false;
 
     private static final String PRIMARY_URL = "https://aquateche.store/api/market";
     private static final String FALLBACK_URL = "https://aquatech.santcrail.workers.dev/api/market";
@@ -330,6 +332,7 @@ public final class MarketService {
         try {
             HttpURLConnection conn = get(PRIMARY_URL + query, key);
             if (conn.getResponseCode() == 200) {
+                marketDownWarned = false;
                 return parse(conn);
             }
         } catch (Throwable ignored) {
@@ -337,9 +340,14 @@ public final class MarketService {
         try {
             HttpURLConnection conn = get(FALLBACK_URL + query, key);
             if (conn.getResponseCode() == 200) {
+                marketDownWarned = false;
                 return parse(conn);
             }
         } catch (Throwable ignored) {
+        }
+        if (!marketDownWarned) {
+            marketDownWarned = true;
+            AquaLumenUI.LOGGER.warn("Market unreachable on both mirrors, hub lots stay cached: {}", query);
         }
         return null;
     }

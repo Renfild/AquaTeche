@@ -1,8 +1,8 @@
 (() => {
-  const IP = "g-pl-3.apexnodes.xyz:21561";
+  const IP = "g-pl-2.apexnodes.xyz:21924";
   const DOWNLOAD = "/dl/AquaTech.exe";
   const DOWNLOAD_ZIP = "/dl/AquaTechLauncher.zip";
-  const CLIENT_VERSION = "client-2.9.91";
+  const CLIENT_VERSION = "client-2.9.96";
   /* portal ui build: compact header + market lots */
   const CANONICAL = "https://aquateche.store";
   const DISCORD = "https://discord.gg/3Khzr5z4fQ";
@@ -19,12 +19,14 @@
     { href: "rods.html", label: "Удочки", id: "rods" },
   ];
   const NAV_MORE = [
-    { href: "market.html", label: "Аукцион", id: "market" },
+    { href: "market.html", label: "Рынок", id: "market" },
     { href: "top.html", label: "Топы", id: "top" },
     { href: "news.html", label: "Новости", id: "news" },
     { href: "events.html", label: "События", id: "events" },
+    { href: "status.html", label: "Статус", id: "status" },
+    { href: "perf.html", label: "Против лагов", id: "perf" },
     { href: "players.html", label: "Игроки", id: "players" },
-    { href: "start.html", label: "Как начать", id: "start" },
+    { href: "start.html", label: "Первые шаги", id: "start" },
     { href: "rules.html", label: "Правила", id: "rules" },
   ];
 
@@ -649,6 +651,7 @@
     updateAuthLinks();
     refreshOnlinePill();
     setInterval(refreshOnlinePill, 30000);
+    scheduleMotionLayer();
 
     const versionSlots = document.querySelectorAll("[data-launcher-version]");
     const packVersionSlots = document.querySelectorAll("[data-pack-version]");
@@ -783,6 +786,50 @@
     });
   }
 
+  /* Motion layer bootstrap: keeps every page on the same animation language
+     without adding script tags to each HTML file. */
+  const MOTION_VENDOR = [
+    "assets/js/vendor/lenis.min.js?v=1.3.11",
+    "assets/js/vendor/gsap.min.js?v=3.13.0",
+    "assets/js/vendor/ScrollTrigger.min.js?v=3.13.0",
+  ];
+  const MOTION_OWN = ["assets/js/motion.js?v=1", "assets/js/ocean-hero.js?v=1"];
+  const MOTION_SKIP_PAGES = ["admin", "login", "register", "reset"];
+
+  function loadScriptOnce(src) {
+    return new Promise((resolve) => {
+      if (document.querySelector(`script[src="${src}"]`)) {
+        resolve();
+        return;
+      }
+      const el = document.createElement("script");
+      el.src = src;
+      el.defer = true;
+      el.onload = resolve;
+      el.onerror = resolve;
+      document.head.appendChild(el);
+    });
+  }
+
+  async function loadMotionLayer() {
+    if (window.__aquaMotionRequested) return;
+    window.__aquaMotionRequested = true;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (MOTION_SKIP_PAGES.includes(pageId())) return;
+    if (!window.gsap) {
+      for (const src of MOTION_VENDOR) await loadScriptOnce(src);
+    }
+    for (const src of MOTION_OWN) await loadScriptOnce(src);
+  }
+
+  function scheduleMotionLayer() {
+    if (typeof requestIdleCallback === "function") {
+      requestIdleCallback(() => loadMotionLayer(), { timeout: 1800 });
+    } else {
+      setTimeout(loadMotionLayer, 600);
+    }
+  }
+
   async function refreshOnlinePill() {
     const pills = document.querySelectorAll("[data-online]");
     const heroCount = $("#heroOnlineCount");
@@ -800,10 +847,10 @@
       pills.forEach((el) => {
         el.textContent = label;
       });
-      if (heroCount) heroCount.textContent = `${n} онлайн`;
-      if (bentoCount) bentoCount.textContent = `${n} онлайн`;
+      if (heroCount) heroCount.textContent = online ? `${n} онлайн` : "оффлайн";
+      if (bentoCount) bentoCount.textContent = online ? `${n} онлайн` : "оффлайн";
       if (showcaseStatus) {
-        showcaseStatus.textContent = online ? `СЕРВЕР В СЕТИ · ${n}/${max} ИГРОКОВ` : "СЕРВЕР НА ТЕХОБСЛУЖИВАНИИ";
+        showcaseStatus.textContent = online ? `СЕРВЕР В СЕТИ · ${n}/${max} ИГРОКОВ` : "СЕРВЕР НЕ В СЕТИ";
       }
       if (showcasePing) {
         if (online) {
@@ -816,7 +863,7 @@
           showcasePing.style.borderColor = "rgba(239,68,68,0.3)";
         }
       }
-      document.querySelectorAll(".online-pill, .hero-status-pill, .mobile-nav-status, #bentoOnlinePill, .header-live").forEach((el) => {
+      document.querySelectorAll(".online-pill, .live-pill, .hero-status-pill, .mobile-nav-status, #bentoOnlinePill, .header-live, .showcase-status-badge, .bento-live-badge").forEach((el) => {
         el.classList.toggle("is-offline", !online);
         el.title = online
           ? `Онлайн на сервере: ${n}${data.players_max ? " / " + data.players_max : ""} · Пинг: ${latency} ms`
@@ -824,15 +871,22 @@
       });
     } catch {
       pills.forEach((el) => {
-        el.textContent = "0 онлайн";
+        el.textContent = "нет данных";
       });
-      if (heroCount) heroCount.textContent = "0 онлайн";
-      if (bentoCount) bentoCount.textContent = "0 онлайн";
-      if (showcaseStatus) showcaseStatus.textContent = "СЕРВЕР В СЕТИ · FORGE 1.20.1";
+      if (heroCount) heroCount.textContent = "нет данных";
+      if (bentoCount) bentoCount.textContent = "нет данных";
+      if (showcaseStatus) showcaseStatus.textContent = "СТАТУС НЕДОСТУПЕН";
       if (showcasePing) {
-        showcasePing.textContent = "24/7 ОНЛАЙН";
-        showcasePing.style.color = "#22c55e";
+        showcasePing.textContent = "НЕТ ДАННЫХ";
+        showcasePing.style.color = "#94a3b8";
+        showcasePing.style.borderColor = "rgba(148,163,184,0.3)";
       }
+      document
+        .querySelectorAll(".online-pill, .live-pill, .hero-status-pill, .mobile-nav-status, #bentoOnlinePill, .header-live, .showcase-status-badge, .bento-live-badge")
+        .forEach((el) => {
+          el.classList.add("is-offline");
+          el.title = "Не удалось получить статус сервера";
+        });
     }
   }
 
@@ -1349,6 +1403,14 @@
                 <h3>Бейджи</h3>
                 <div class="badge-grid">${badges}</div>
               </div>
+              <div class="panel" style="margin-top:1.25rem" id="lk-achievements">
+                <h3>Достижения</h3>
+                <div class="ach-grid" id="lk-ach-grid"></div>
+                <div id="lk-vault-history" hidden>
+                  <h4 style="margin:1.25rem 0 .5rem;font-size:.95rem">Последние находки</h4>
+                  <ul class="vault-history" id="lk-vault-list"></ul>
+                </div>
+              </div>
             </section>
             <section class="lk-pane" data-lk-pane="skin" ${tab === "skin" ? "" : "hidden"}>
               <h2>Скин и плащ</h2>
@@ -1423,6 +1485,7 @@
       </div>`;
 
     if (mine) loadTelegramBox(root);
+    renderAchievements(root, profile, mine);
 
     function showTab(id) {
       root.querySelectorAll("[data-lk-pane]").forEach((p) => {
@@ -1459,6 +1522,53 @@
     });
 
     window.addEventListener("hashchange", () => showTab(lkTab()));
+
+    async function renderAchievements(rootEl, prof, isMine) {
+      const grid = rootEl.querySelector("#lk-ach-grid");
+      if (!grid) return;
+      const hours = Number(prof.playtime_hours || 0)
+        || Number(String(prof.playtime || "0").replace(/[^\d]/g, ""))
+        || 0;
+      const defs = [
+        { ico: "🎣", title: "Первая рыба", note: "1 улов", ok: Number(prof.fish || 0) >= 1 },
+        { ico: "🐟", title: "Рыбак", note: "500 рыб", ok: Number(prof.fish || 0) >= 500 },
+        { ico: "🏆", title: "Мастер удочки", note: "5 000 рыб", ok: Number(prof.fish || 0) >= 5000 },
+        { ico: "⏳", title: "Часовой океана", note: "100 часов в игре", ok: hours >= 100 },
+        { ico: "💰", title: "Богач", note: "100 000 монет", ok: Number(prof.coins || 0) >= 100000 },
+        { ico: "❤️", title: "Душа компании", note: "50 лайков", ok: Number(prof.likes || 0) >= 50 },
+        { ico: "📜", title: "Квестоман", note: "50 заданий", ok: Number(prof.quests_done || 0) >= 50 },
+      ];
+      const draw = (extra) => {
+        grid.innerHTML = defs.concat(extra || []).map((a) => `
+          <div class="ach-card ${a.ok ? "" : "off"}">
+            <span class="ach-ico" aria-hidden="true">${a.ico}</span>
+            <div><b>${a.title}</b><small>${a.note}</small></div>
+          </div>`).join("");
+      };
+      draw();
+      if (!isMine) return;
+      try {
+        const res = await api("/api/vault");
+        const st = res.stats || { total: 0, rare: 0 };
+        draw([
+          { ico: "🎁", title: "Коллекционер", note: "25 наград из кейсов", ok: Number(st.total || 0) >= 25 },
+          { ico: "✨", title: "Легенда кейсов", note: "10 редких наград", ok: Number(st.rare || 0) >= 10 },
+        ]);
+        const box = rootEl.querySelector("#lk-vault-history");
+        const list = rootEl.querySelector("#lk-vault-list");
+        const items = (res.vault || []).slice(0, 6);
+        if (box && list && items.length) {
+          list.innerHTML = items.map((v) => `
+            <li>
+              <span>${esc(v.item_name || "Награда")} <small style="color:#94a3b8">×${v.amount || 1}</small></span>
+              <span class="vh-rarity">${esc(v.rarity || "common")} · ${new Date(v.created_at).toLocaleDateString("ru-RU")}</span>
+            </li>`).join("");
+          box.hidden = false;
+        }
+      } catch {
+        // история и статистика кейсов не критичны для профиля
+      }
+    }
 
     async function loadTelegramBox(rootEl) {
       const box = rootEl.querySelector("#tg-link-box");
@@ -2230,17 +2340,17 @@
   };
 
   const CASE_ICONS = {
-    starter: "assets/images/cases/starter.png",
-    smeltery: "assets/images/cases/smeltery.png",
-    steam: "assets/images/cases/steam.png",
-    flora: "assets/images/cases/flora.png",
-    applied: "assets/images/cases/applied.png",
-    abyss: "assets/images/cases/abyss.png",
-    superconductor: "assets/images/cases/superconductor.png",
-    singularity: "assets/images/cases/singularity.png",
-    draconic: "assets/images/cases/draconic.png",
-    infinity: "assets/images/cases/infinity.png",
-    metallurgy: "assets/images/cases/metallurgy.png",
+    starter: "assets/images/cases/starter.png?v=20260921",
+    smeltery: "assets/images/cases/smeltery.png?v=20260921",
+    steam: "assets/images/cases/steam.png?v=20260921",
+    flora: "assets/images/cases/flora.png?v=20260921",
+    applied: "assets/images/cases/applied.png?v=20260921",
+    abyss: "assets/images/cases/abyss.png?v=20260921",
+    superconductor: "assets/images/cases/superconductor.png?v=20260921",
+    singularity: "assets/images/cases/singularity.png?v=20260921",
+    draconic: "assets/images/cases/draconic.png?v=20260921",
+    infinity: "assets/images/cases/infinity.png?v=20260921",
+    metallurgy: "assets/images/cases/metallurgy.png?v=20260921",
   };
 
   function getItemIconUrl(itemId) {
@@ -2319,7 +2429,7 @@
       modal.className = "loot-modal-overlay";
       document.body.appendChild(modal);
     }
-    const iconSrc = CASE_ICONS[c.slug] || CASE_ICONS.starter || "assets/images/cases/starter.png";
+    const iconSrc = CASE_ICONS[c.slug] || CASE_ICONS.starter || "assets/images/cases/starter.png?v=20260921";
     const rows = [...c.loot].sort((a, b) => b.weight - a.weight);
     const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
     const spinSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 6v6l4 2"/></svg>';
@@ -2348,6 +2458,18 @@
             <span>${Number(c.cost).toLocaleString("ru-RU")}</span>
           </span>
         </div>
+
+        ${c.pityEvery > 0 && c.pity ? `
+          <div class="case-pity-panel">
+            <div class="case-pity-head">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              <span>Гарант каждые ${c.pityEvery} открытий</span>
+            </div>
+            <div class="case-pity-body">
+              <span>${esc(c.pity.name)}${c.pity.min ? ` · ${c.pity.min}${c.pity.max && c.pity.max !== c.pity.min ? `–${c.pity.max}` : ""} шт` : ""}</span>
+            </div>
+          </div>
+        ` : ""}
 
         <div class="loot-items-list">
           ${(() => {
@@ -3208,6 +3330,910 @@
       .replace(/"/g, "&quot;");
   }
 
+  /* ========================= Admin console ========================= */
+  const ADMIN_SECTIONS = [
+    { id: "overview", label: "Обзор", hint: "Сводка, флаги и быстрые действия" },
+    { id: "news", label: "Новости", hint: "Публикации на главной и в /news" },
+    { id: "users", label: "Игроки", hint: "Поиск, привилегии и статистика" },
+    { id: "catalog", label: "Каталог", hint: "Магазин: ранги, монеты, наборы" },
+    { id: "copy", label: "Тексты сайта", hint: "Строки с data-site по страницам" },
+    { id: "settings", label: "Настройки", hint: "Флаги продаж и источника каталога" },
+  ];
+
+  const admin = {
+    section: "overview",
+    me: null,
+    settings: { purchases_enabled: false, catalog_from_db: false },
+    copy: {},
+    news: [],
+    newsQuery: "",
+    copyQuery: "",
+    users: [],
+    userQuery: "",
+    userLimit: 40,
+    catalog: [],
+    catalogQuery: "",
+    catalogKind: "all",
+    dirty: false,
+  };
+
+  function adminMeta(id) {
+    return ADMIN_SECTIONS.find((s) => s.id === id) || ADMIN_SECTIONS[0];
+  }
+
+  function adminSkeleton(rows) {
+    return `<div class="admin-loading">${Array.from(
+      { length: rows || 3 },
+      () => '<div class="admin-skeleton"></div>'
+    ).join("")}</div>`;
+  }
+
+  function adminEmpty(title, hint) {
+    return `<div class="admin-empty"><strong>${esc(title)}</strong><span>${esc(hint)}</span></div>`;
+  }
+
+  async function adminRequest(path, options) {
+    try {
+      return await api(path, options);
+    } catch (err) {
+      toast(err.message || "Ошибка запроса");
+      throw err;
+    }
+  }
+
+  function adminModal(html) {
+    const wrap = $("#admin-modal");
+    const card = $("#admin-modal-card");
+    if (!wrap || !card) return;
+    card.innerHTML = html;
+    wrap.hidden = false;
+    document.body.style.overflow = "hidden";
+    const first = card.querySelector("input, textarea, select, button");
+    if (first) first.focus();
+  }
+
+  function adminCloseModal() {
+    const wrap = $("#admin-modal");
+    const card = $("#admin-modal-card");
+    if (wrap) wrap.hidden = true;
+    if (card) card.innerHTML = "";
+    document.body.style.overflow = "";
+  }
+
+  function adminConfirm({ title, text, confirmLabel, danger }) {
+    return new Promise((resolve) => {
+      adminModal(`
+        <h3>${esc(title)}</h3>
+        <p>${esc(text)}</p>
+        <div class="admin-modal-foot">
+          <button class="btn btn-ghost" type="button" data-modal-cancel>Отмена</button>
+          <button class="btn ${danger ? "btn-secondary" : "btn-primary"}" type="button" data-modal-ok>${esc(confirmLabel || "Подтвердить")}</button>
+        </div>`);
+      const card = $("#admin-modal-card");
+      card.querySelector("[data-modal-ok]").addEventListener("click", () => {
+        adminCloseModal();
+        resolve(true);
+      });
+      card.querySelector("[data-modal-cancel]").addEventListener("click", () => {
+        adminCloseModal();
+        resolve(false);
+      });
+    });
+  }
+
+  function adminMarkDirty(el, isDirty) {
+    const scope = el.closest("[data-dirty-scope]") || el;
+    scope.classList.toggle("is-dirty", !!isDirty);
+    admin.dirty = !!document.querySelector("#admin-main .is-dirty");
+    adminRefreshToolbar();
+  }
+
+  function adminRefreshToolbar() {
+    const chip = $("#admin-dirty-chip");
+    if (chip) chip.hidden = !admin.dirty;
+    const save = document.querySelector("[data-admin-save]");
+    if (save) {
+      save.disabled = !admin.dirty;
+      save.textContent = admin.dirty ? "Сохранить изменения" : "Всё сохранено";
+    }
+  }
+
+  function adminToolbar(inner) {
+    return `<div class="admin-toolbar">
+      ${inner}
+      <span class="admin-dirty" id="admin-dirty-chip" hidden>есть несохранённые правки</span>
+    </div>`;
+  }
+
+  function adminNavCounts() {
+    return {
+      news: admin.news.length || 0,
+      users: admin.users.length || 0,
+      catalog: admin.catalog.length || 0,
+    };
+  }
+
+  function renderAdminRail() {
+    const nav = $("#admin-nav");
+    const counts = adminNavCounts();
+    if (nav) {
+      nav.innerHTML = ADMIN_SECTIONS.map(
+        (s) => `<button type="button" data-admin-go="${s.id}" class="${s.id === admin.section ? "is-active" : ""}">
+          <span>${esc(s.label)}</span>
+          ${counts[s.id] ? `<span class="admin-nav-count">${counts[s.id]}</span>` : ""}
+        </button>`
+      ).join("");
+      nav.querySelectorAll("[data-admin-go]").forEach((btn) => {
+        btn.addEventListener("click", () => adminGo(btn.getAttribute("data-admin-go")));
+      });
+    }
+    const who = $("#admin-who");
+    if (who) {
+      who.innerHTML = `<strong>${esc(admin.me?.nick || "—")}</strong><small>администратор · сессия активна</small>`;
+    }
+    const flags = $("#admin-flags");
+    if (flags) {
+      flags.innerHTML = `
+        <span class="admin-pill ${admin.settings.purchases_enabled ? "ok" : "bad"}">Продажи ${admin.settings.purchases_enabled ? "включены" : "выключены"}</span>
+        <span class="admin-pill ${admin.settings.catalog_from_db ? "ok" : "warn"}">Каталог: ${admin.settings.catalog_from_db ? "из БД" : "из кода"}</span>`;
+    }
+  }
+
+  function renderAdminOverview() {
+    const published = admin.news.filter((n) => n.published).length;
+    const enabled = admin.catalog.filter((c) => c.enabled).length;
+    const admins = admin.users.filter((u) => u.is_admin).length;
+    const lastNews = admin.news
+      .slice()
+      .sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")))
+      .slice(0, 5);
+    return `
+      <div class="admin-head">
+        <div>
+          <h2>Обзор</h2>
+          <p>Состояние сайта и быстрые переходы. Все данные тянутся из живых API, без кеша.</p>
+        </div>
+        <div class="admin-actions">
+          <button class="btn btn-secondary" type="button" data-admin-refresh>Обновить данные</button>
+        </div>
+      </div>
+      <div class="admin-stats">
+        <div class="admin-stat"><b>${admin.news.length}</b><span>новостей, из них ${published} опубликовано</span></div>
+        <div class="admin-stat"><b>${admin.catalog.length}</b><span>позиций каталога, ${enabled} включено</span></div>
+        <div class="admin-stat"><b>${admin.users.length}</b><span>игроков в выборке, админов ${admins}</span></div>
+        <div class="admin-stat"><b>${Object.keys(admin.copy).length}</b><span>переопределённых текстов сайта</span></div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <div><h3>Быстрые действия</h3><small>частые операции в один клик</small></div>
+        </div>
+        <div class="admin-card-body">
+          <div class="admin-actions">
+            <button class="btn btn-secondary" type="button" data-admin-go="news">Добавить новость</button>
+            <button class="btn btn-secondary" type="button" data-admin-go="users">Найти игрока</button>
+            <button class="btn btn-secondary" type="button" data-admin-go="catalog">Править каталог</button>
+            <button class="btn btn-secondary" type="button" data-admin-go="copy">Тексты сайта</button>
+            <button class="btn btn-ghost" type="button" data-admin-go="settings">Настройки продаж</button>
+          </div>
+        </div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <div><h3>Последние новости</h3><small>свежие публикации по дате</small></div>
+          <button class="btn btn-ghost" type="button" data-admin-go="news">Все новости</button>
+        </div>
+        ${
+          lastNews.length
+            ? `<div class="admin-card-body">${lastNews
+                .map(
+                  (n) => `<div class="admin-row" style="border:1px solid var(--line);border-radius:12px">
+              <div class="admin-meta">
+                <span class="admin-pill ${n.published ? "ok" : "warn"}">${n.published ? "опубликовано" : "черновик"}</span>
+                <span>${esc(String(n.published_at || "").slice(0, 10))}</span>
+              </div>
+              <strong>${esc(n.title)}</strong>
+            </div>`
+                )
+                .join("")}</div>`
+            : adminEmpty("Новостей пока нет", "Первая публикация появится здесь")
+        }
+      </div>`;
+  }
+
+  function renderAdminNews() {
+    const q = admin.newsQuery.trim().toLowerCase();
+    const rows = admin.news.filter(
+      (n) => !q || String(n.title || "").toLowerCase().includes(q) || String(n.body || "").toLowerCase().includes(q)
+    );
+    return `
+      <div class="admin-head">
+        <div>
+          <h2>Новости</h2>
+          <p>Публикуются на главной и в разделе «Новости». Черновики видны только здесь.</p>
+        </div>
+        <div class="admin-actions">
+          <button class="btn btn-primary" type="button" data-admin-news-new>Новая новость</button>
+        </div>
+      </div>
+      ${adminToolbar(`<div class="admin-search field" style="margin:0">
+        <input type="search" id="admin-news-q" placeholder="Поиск по заголовку и тексту…" value="${esc(admin.newsQuery)}" />
+      </div>
+      <button class="btn btn-ghost" type="button" data-admin-news-clear>Сбросить</button>
+      <button class="btn btn-secondary" type="button" data-admin-save disabled>Всё сохранено</button>`)}
+      <div class="admin-card">
+        ${
+          rows.length
+            ? rows
+                .map(
+                  (n) => `<div class="admin-row" data-dirty-scope data-news-id="${n.id}">
+          <div class="admin-meta">
+            <span class="admin-pill ${n.published ? "ok" : "warn"}">${n.published ? "опубликовано" : "черновик"}</span>
+            <span>ID ${n.id}</span>
+          </div>
+          <div class="admin-grid cols-2">
+            <div class="field" style="margin:0"><label>Заголовок</label><input data-f="title" maxlength="160" value="${esc(n.title)}" /></div>
+            <div class="field" style="margin:0"><label>Дата публикации</label><input data-f="published_at" type="date" value="${esc(String(n.published_at || "").slice(0, 10))}" /></div>
+          </div>
+          <div class="field" style="margin:0"><label>Текст</label><textarea data-f="body" rows="3" maxlength="4000">${esc(n.body)}</textarea></div>
+          <div class="admin-actions">
+            <label class="admin-check"><input data-f="published" type="checkbox" ${n.published ? "checked" : ""} /> Опубликовано</label>
+            <button class="btn btn-secondary" type="button" data-admin-news-save>Сохранить</button>
+            <button class="btn btn-ghost" type="button" data-admin-news-delete>Удалить</button>
+          </div>
+        </div>`
+                )
+                .join("")
+            : adminEmpty(q ? "Ничего не нашлось" : "Новостей нет", q ? "Попробуйте другой запрос" : "Нажмите «Новая новость»")
+        }
+      </div>`;
+  }
+
+  function renderAdminUsers() {
+    const rows = admin.users;
+    return `
+      <div class="admin-head">
+        <div>
+          <h2>Игроки</h2>
+          <p>Правка привилегии, монет, лайков, улова и часов. Поля применяются только после «Сохранить».</p>
+        </div>
+      </div>
+      ${adminToolbar(`<div class="admin-search field" style="margin:0">
+        <input type="search" id="admin-user-q" placeholder="Ник или часть ника…" value="${esc(admin.userQuery)}" />
+      </div>
+      <select id="admin-user-limit" style="width:auto;padding:.4rem .5rem;border-radius:8px;border:1px solid var(--line);background:rgba(2,10,18,.55);color:inherit">
+        ${[20, 40, 50].map((n) => `<option value="${n}" ${n === admin.userLimit ? "selected" : ""}>${n} строк</option>`).join("")}
+      </select>
+      <button class="btn btn-ghost" type="button" data-admin-users-reload>Обновить</button>
+      <button class="btn btn-secondary" type="button" data-admin-save disabled>Всё сохранено</button>`)}
+      <div class="admin-card">
+        ${
+          rows.length
+            ? `<div class="admin-table-wrap"><table class="admin-table">
+          <thead><tr>
+            <th>Игрок</th><th>Ранг</th><th>Монеты</th><th>Лайки</th><th>Улов</th><th>Часы</th><th>Био</th><th></th>
+          </tr></thead>
+          <tbody>
+          ${rows
+            .map(
+              (u) => `<tr data-dirty-scope data-nick="${esc(u.nick)}">
+            <td>
+              <strong>${esc(u.nick)}</strong>
+              ${u.is_admin ? '<span class="admin-pill ok" style="margin-left:.35rem">admin</span>' : ""}
+              <div class="admin-meta" style="margin-top:.2rem">с ${esc(String(u.created_at || "").slice(0, 10))}</div>
+            </td>
+            <td><input data-f="privilege" maxlength="40" value="${esc(u.privilege || "")}" /></td>
+            <td><input data-f="coins" type="number" min="0" value="${esc(u.coins ?? 0)}" /></td>
+            <td><input data-f="likes" type="number" min="0" value="${esc(u.likes ?? 0)}" /></td>
+            <td><input data-f="fish" type="number" min="0" value="${esc(u.fish ?? 0)}" /></td>
+            <td><input data-f="playtime_hours" type="number" min="0" value="${esc(u.playtime_hours ?? 0)}" /></td>
+            <td><input data-f="bio" maxlength="280" value="${esc(u.bio || "")}" /></td>
+            <td><div class="admin-row-actions">
+              <button class="btn btn-secondary" type="button" data-admin-user-save>Сохранить</button>
+              <button class="btn btn-ghost" type="button" data-admin-user-admin>${u.is_admin ? "Снять админку" : "Выдать админку"}</button>
+              <a class="btn btn-ghost" href="profile.html?nick=${encodeURIComponent(u.nick)}" target="_blank" rel="noopener">Профиль</a>
+            </div></td>
+          </tr>`
+            )
+            .join("")}
+          </tbody></table></div>`
+            : adminEmpty(
+                admin.userQuery ? "Никого не нашли" : "Список пуст",
+                admin.userQuery ? "Проверьте написание ника" : "Введите ник, чтобы найти игрока"
+              )
+        }
+      </div>`;
+  }
+
+  function renderAdminCatalog() {
+    const q = admin.catalogQuery.trim().toLowerCase();
+    const kinds = [...new Set(admin.catalog.map((c) => c.kind || "other"))].sort();
+    const rows = admin.catalog.filter((c) => {
+      const kindOk = admin.catalogKind === "all" || (c.kind || "other") === admin.catalogKind;
+      const textOk = !q || `${c.slug} ${c.title}`.toLowerCase().includes(q);
+      return kindOk && textOk;
+    });
+    const grouped = rows.reduce((acc, item) => {
+      const kind = item.kind || "other";
+      (acc[kind] = acc[kind] || []).push(item);
+      return acc;
+    }, {});
+    return `
+      <div class="admin-head">
+        <div>
+          <h2>Каталог</h2>
+          <p>Цены, описания и списки преимуществ. Позиции с выключенным флагом не показываются в магазине.</p>
+        </div>
+        <div class="admin-actions">
+          <button class="btn btn-ghost" type="button" data-admin-catalog-short>Короткие тексты</button>
+        </div>
+      </div>
+      ${adminToolbar(`<div class="admin-search field" style="margin:0">
+        <input type="search" id="admin-catalog-q" placeholder="Поиск по slug и названию…" value="${esc(admin.catalogQuery)}" />
+      </div>
+      <select id="admin-catalog-kind" style="width:auto;padding:.4rem .5rem;border-radius:8px;border:1px solid var(--line);background:rgba(2,10,18,.55);color:inherit">
+        <option value="all">Все типы</option>
+        ${kinds.map((k) => `<option value="${esc(k)}" ${k === admin.catalogKind ? "selected" : ""}>${esc(k)}</option>`).join("")}
+      </select>
+      <button class="btn btn-secondary" type="button" data-admin-save disabled>Всё сохранено</button>`)}
+      ${
+        rows.length
+          ? Object.entries(grouped)
+              .map(
+                ([kind, items]) => `<div class="admin-card" style="margin-bottom:1rem">
+          <div class="admin-card-head"><div><h3>${esc(kind)}</h3><small>${items.length} поз.</small></div></div>
+          ${items
+            .map(
+              (it) => `<div class="admin-row" data-dirty-scope data-item-id="${it.id}">
+            <div class="admin-meta">
+              <span class="admin-pill">${esc(it.slug)}</span>
+              <span class="admin-pill ${it.enabled ? "ok" : "bad"}">${it.enabled ? "в магазине" : "скрыт"}</span>
+              <span>ID ${it.id}</span>
+            </div>
+            <div class="admin-grid cols-2">
+              <div class="field" style="margin:0"><label>Название</label><input data-f="title" maxlength="80" value="${esc(it.title)}" /></div>
+              <div class="field" style="margin:0"><label>Цена, ₽</label><input data-f="price_rub" type="number" min="0" value="${esc(it.price_rub ?? 0)}" /></div>
+            </div>
+            <div class="field" style="margin:0"><label>Описание</label><textarea data-f="description" rows="2" maxlength="500">${esc(it.description || "")}</textarea></div>
+            <div class="field" style="margin:0"><label>Преимущества (по строке)</label><textarea data-f="perks" rows="3">${esc((it.perks || []).join("\n"))}</textarea></div>
+            <div class="admin-actions">
+              <label class="admin-check"><input data-f="enabled" type="checkbox" ${it.enabled ? "checked" : ""} /> Показывать в магазине</label>
+              <button class="btn btn-secondary" type="button" data-admin-item-save>Сохранить</button>
+            </div>
+          </div>`
+            )
+            .join("")}
+        </div>`
+              )
+              .join("")
+          : adminEmpty("Ничего не найдено", "Смените фильтр или запрос")
+      }`;
+  }
+
+  function renderAdminCopy() {
+    const q = admin.copyQuery?.trim().toLowerCase() || "";
+    const groups = COPY_FIELDS.reduce((acc, f) => {
+      const hit = !q || `${f.key} ${f.label} ${f.group}`.toLowerCase().includes(q);
+      if (!hit) return acc;
+      (acc[f.group] = acc[f.group] || []).push(f);
+      return acc;
+    }, {});
+    const keys = Object.keys(groups);
+    return `
+      <div class="admin-head">
+        <div>
+          <h2>Тексты сайта</h2>
+          <p>Переопределения строк с атрибутом <code>data-site</code>. Пустое поле — возврат к тексту из кода страницы.</p>
+        </div>
+      </div>
+      ${adminToolbar(`<div class="admin-search field" style="margin:0">
+        <input type="search" id="admin-copy-q" placeholder="Поиск по ключу и подписи…" value="${esc(q)}" />
+      </div>
+      <button class="btn btn-ghost" type="button" data-admin-copy-reset>Сбросить правки</button>
+      <button class="btn btn-secondary" type="button" data-admin-save disabled>Всё сохранено</button>`)}
+      ${
+        keys.length
+          ? keys
+              .map(
+                (group) => `<div class="admin-card" style="margin-bottom:1rem">
+          <div class="admin-card-head"><div><h3>${esc(group)}</h3><small>${groups[group].length} строк</small></div></div>
+          <div class="admin-card-body">
+            ${groups[group]
+              .map(
+                (f) => `<div class="field" data-dirty-scope style="margin:0">
+              <label>${esc(f.label)} <span class="admin-pill" style="margin-left:.3rem">${esc(f.key)}</span></label>
+              ${
+                f.long
+                  ? `<textarea data-copy="${esc(f.key)}" rows="2">${esc(admin.copy[f.key] || "")}</textarea>`
+                  : `<input data-copy="${esc(f.key)}" value="${esc(admin.copy[f.key] || "")}" />`
+              }
+            </div>`
+              )
+              .join("")}
+          </div>
+        </div>`
+              )
+              .join("")
+          : adminEmpty("Ничего не найдено", "Измените поисковый запрос")
+      }`;
+  }
+
+  function renderAdminSettings() {
+    return `
+      <div class="admin-head">
+        <div>
+          <h2>Настройки</h2>
+          <p>Флаги, влияющие на магазин и источник каталога. Применяются сразу после сохранения.</p>
+        </div>
+      </div>
+      <div class="admin-card" data-dirty-scope>
+        <div class="admin-card-head"><div><h3>Магазин</h3><small>продажи и источник данных</small></div></div>
+        <div class="admin-card-body">
+          <label class="admin-check"><input type="checkbox" id="admin-set-purchases" ${admin.settings.purchases_enabled ? "checked" : ""} /> Покупки на сайте включены</label>
+          <label class="admin-check"><input type="checkbox" id="admin-set-catalog" ${admin.settings.catalog_from_db ? "checked" : ""} /> Каталог берётся из базы (иначе — из кода страницы)</label>
+        </div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-card-head"><div><h3>Сессия и доступ</h3><small>кто в системе и куда идут запросы</small></div></div>
+        <div class="admin-card-body">
+          <div class="admin-meta">
+            <span class="admin-pill ok">${esc(admin.me?.nick || "—")}</span>
+            <span>GET /api/admin/me · /settings · /news · /users · /catalog</span>
+          </div>
+          <div class="admin-actions">
+            <button class="btn btn-secondary" type="button" data-admin-go="overview">К обзору</button>
+            <a class="btn btn-ghost" href="index.html">Открыть сайт</a>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function renderAdminSection() {
+    const main = $("#admin-main");
+    if (!main) return;
+    const meta = adminMeta(admin.section);
+    const body =
+      admin.section === "overview"
+        ? renderAdminOverview()
+        : admin.section === "news"
+          ? renderAdminNews()
+          : admin.section === "users"
+            ? renderAdminUsers()
+            : admin.section === "catalog"
+              ? renderAdminCatalog()
+              : admin.section === "copy"
+                ? renderAdminCopy()
+                : renderAdminSettings();
+    main.dataset.section = meta.id;
+    main.innerHTML = body;
+    renderAdminRail();
+    adminRefreshToolbar();
+    wireAdminSection();
+  }
+
+  function adminGo(section) {
+    if (!ADMIN_SECTIONS.some((s) => s.id === section)) section = "overview";
+    if (section === admin.section) return;
+    if (admin.dirty && !confirm("Есть несохранённые правки. Перейти без сохранения?")) return;
+    admin.dirty = false;
+    admin.section = section;
+    if (location.hash.slice(1) !== section) history.replaceState(null, "", `#${section}`);
+    renderAdminSection();
+  }
+
+  async function loadAdminSettings() {
+    const data = await adminRequest("/api/admin/settings");
+    admin.settings = {
+      purchases_enabled: !!data.settings?.purchases_enabled,
+      catalog_from_db: !!data.settings?.catalog_from_db,
+    };
+    admin.copy = data.copy || {};
+    renderAdminRail();
+  }
+
+  async function loadAdminNews() {
+    const data = await adminRequest("/api/admin/news");
+    admin.news = data.news || [];
+  }
+
+  async function loadAdminUsers() {
+    const data = await adminRequest(
+      `/api/admin/users?q=${encodeURIComponent(admin.userQuery)}&limit=${admin.userLimit}`
+    );
+    admin.users = data.users || [];
+  }
+
+  async function loadAdminCatalog() {
+    const data = await adminRequest("/api/admin/catalog");
+    admin.catalog = data.items || [];
+  }
+
+  async function reloadAdmin(section) {
+    const target = section || admin.section;
+    const main = $("#admin-main");
+    if (main) main.innerHTML = adminSkeleton(4);
+    try {
+      if (target === "news") await loadAdminNews();
+      else if (target === "users") await loadAdminUsers();
+      else if (target === "catalog") await loadAdminCatalog();
+      else if (target === "settings" || target === "overview") {
+        await Promise.all([loadAdminSettings(), loadAdminNews(), loadAdminUsers(), loadAdminCatalog()]);
+      }
+      admin.dirty = false;
+      renderAdminSection();
+    } catch {
+      if (main) main.innerHTML = adminEmpty("Не удалось загрузить данные", "Проверьте соединение и попробуйте ещё раз");
+    }
+  }
+
+  async function adminSaveActive() {
+    const main = $("#admin-main");
+    if (!main || !admin.dirty) return;
+    const section = main.dataset.section;
+    try {
+      if (section === "settings") {
+        await adminRequest("/api/admin/settings", {
+          method: "PATCH",
+          body: JSON.stringify({
+            purchases_enabled: !!$("#admin-set-purchases")?.checked,
+            catalog_from_db: !!$("#admin-set-catalog")?.checked,
+          }),
+        });
+        admin.settings.purchases_enabled = !!$("#admin-set-purchases")?.checked;
+        admin.settings.catalog_from_db = !!$("#admin-set-catalog")?.checked;
+      } else if (section === "copy") {
+        const copy = {};
+        main.querySelectorAll("[data-copy]").forEach((el) => {
+          const key = el.getAttribute("data-copy");
+          const saved = admin.copy[key] || "";
+          if (el.value !== saved) copy[key] = el.value;
+        });
+        if (Object.keys(copy).length) {
+          await adminRequest("/api/admin/settings", { method: "PATCH", body: JSON.stringify({ copy }) });
+          Object.assign(admin.copy, copy);
+        }
+      } else if (section === "news") {
+        await adminSaveNewsRows();
+      } else if (section === "users") {
+        await adminSaveUserRows();
+      } else if (section === "catalog") {
+        await adminSaveCatalogRows();
+      }
+      admin.dirty = false;
+      document.querySelectorAll("#admin-main .is-dirty").forEach((el) => el.classList.remove("is-dirty"));
+      toast("Сохранено");
+      if (section === "settings") renderAdminRail();
+    } catch {
+      /* adminRequest already surfaced the error */
+    }
+  }
+
+  function adminRowValues(scope, fields) {
+    const body = {};
+    fields.forEach((key) => {
+      const el = scope.querySelector(`[data-f="${key}"]`);
+      if (!el) return;
+      if (el.type === "checkbox") body[key] = el.checked;
+      else if (el.type === "number") body[key] = Number(el.value);
+      else body[key] = el.value;
+    });
+    return body;
+  }
+
+  async function adminSaveNewsRows() {
+    const scopes = [...document.querySelectorAll("[data-news-id].is-dirty")];
+    for (const scope of scopes) {
+      const id = scope.dataset.newsId;
+      const body = adminRowValues(scope, ["title", "body", "published_at", "published"]);
+      await adminRequest(`/api/admin/news/${id}`, { method: "PATCH", body: JSON.stringify(body) });
+      scope.classList.remove("is-dirty");
+      const item = admin.news.find((n) => String(n.id) === String(id));
+      if (item) Object.assign(item, body);
+    }
+  }
+
+  async function adminSaveUserRows() {
+    const scopes = [...document.querySelectorAll("[data-nick].is-dirty")];
+    for (const scope of scopes) {
+      const nick = scope.dataset.nick;
+      const body = adminRowValues(scope, ["privilege", "coins", "likes", "fish", "playtime_hours", "bio"]);
+      await adminRequest(`/api/admin/users/${encodeURIComponent(nick)}`, {
+        method: "PATCH",
+        body: JSON.stringify(body),
+      });
+      scope.classList.remove("is-dirty");
+      const item = admin.users.find((u) => u.nick === nick);
+      if (item) Object.assign(item, body);
+    }
+  }
+
+  async function adminSaveCatalogRows() {
+    const scopes = [...document.querySelectorAll("[data-item-id].is-dirty")];
+    for (const scope of scopes) {
+      const id = scope.dataset.itemId;
+      const body = adminRowValues(scope, ["title", "price_rub", "description", "enabled"]);
+      const perksEl = scope.querySelector('[data-f="perks"]');
+      if (perksEl) {
+        body.perks = String(perksEl.value)
+          .split(/\r?\n/)
+          .map((s) => s.trim())
+          .filter(Boolean);
+      }
+      await adminRequest(`/api/admin/catalog/${id}`, { method: "PATCH", body: JSON.stringify(body) });
+      scope.classList.remove("is-dirty");
+      const item = admin.catalog.find((c) => String(c.id) === String(id));
+      if (item) Object.assign(item, body);
+    }
+  }
+
+  function wireAdminSection() {
+    const main = $("#admin-main");
+    if (!main) return;
+
+    main.querySelectorAll("[data-admin-go]").forEach((btn) => {
+      btn.addEventListener("click", () => adminGo(btn.getAttribute("data-admin-go")));
+    });
+
+    main.querySelector("[data-admin-refresh]")?.addEventListener("click", () => reloadAdmin());
+
+    // mark dirty on any edit
+    main.addEventListener("input", (e) => {
+      const el = e.target;
+      if (el.matches("[data-f], [data-copy], #admin-set-purchases, #admin-set-catalog")) {
+        adminMarkDirty(el, true);
+      }
+    });
+    main.addEventListener("change", (e) => {
+      const el = e.target;
+      if (el.matches("[data-f], [data-copy], #admin-set-purchases, #admin-set-catalog")) {
+        adminMarkDirty(el, true);
+      }
+    });
+
+    main.querySelector("[data-admin-save]")?.addEventListener("click", adminSaveActive);
+
+    // news
+    const newsQ = $("#admin-news-q");
+    if (newsQ) {
+      newsQ.addEventListener("input", () => {
+        admin.newsQuery = newsQ.value;
+        const pos = newsQ.selectionStart;
+        renderAdminSection();
+        const again = $("#admin-news-q");
+        if (again) {
+          again.focus();
+          again.setSelectionRange(pos, pos);
+        }
+      });
+    }
+    main.querySelector("[data-admin-news-clear]")?.addEventListener("click", () => {
+      admin.newsQuery = "";
+      renderAdminSection();
+    });
+    main.querySelector("[data-admin-news-new]")?.addEventListener("click", () => adminNewsCreateModal());
+
+    main.querySelectorAll("[data-news-id]").forEach((scope) => {
+      scope.querySelector("[data-admin-news-save]")?.addEventListener("click", async () => {
+        const id = scope.dataset.newsId;
+        const body = adminRowValues(scope, ["title", "body", "published_at", "published"]);
+        if (String(body.title || "").trim().length < 2 || String(body.body || "").trim().length < 2) {
+          toast("Заголовок и текст минимум 2 символа");
+          return;
+        }
+        try {
+          await adminRequest(`/api/admin/news/${id}`, { method: "PATCH", body: JSON.stringify(body) });
+          scope.classList.remove("is-dirty");
+          const item = admin.news.find((n) => String(n.id) === String(id));
+          if (item) Object.assign(item, body);
+          admin.dirty = !!document.querySelector("#admin-main .is-dirty");
+          adminRefreshToolbar();
+          toast("Новость сохранена");
+        } catch {
+          /* handled */
+        }
+      });
+      scope.querySelector("[data-admin-news-delete]")?.addEventListener("click", async () => {
+        const id = scope.dataset.newsId;
+        const ok = await adminConfirm({
+          title: "Удалить новость?",
+          text: "Публикация исчезнет с сайта. Действие нельзя отменить.",
+          confirmLabel: "Удалить",
+          danger: true,
+        });
+        if (!ok) return;
+        try {
+          await adminRequest(`/api/admin/news/${id}`, { method: "DELETE" });
+          admin.news = admin.news.filter((n) => String(n.id) !== String(id));
+          renderAdminSection();
+          toast("Удалено");
+        } catch {
+          /* handled */
+        }
+      });
+    });
+
+    // users
+    const userQ = $("#admin-user-q");
+    if (userQ) {
+      let timer;
+      userQ.addEventListener("input", () => {
+        admin.userQuery = userQ.value;
+        clearTimeout(timer);
+        timer = setTimeout(() => reloadAdmin("users"), 320);
+      });
+    }
+    $("#admin-user-limit")?.addEventListener("change", (e) => {
+      admin.userLimit = Number(e.target.value) || 40;
+      reloadAdmin("users");
+    });
+    main.querySelector("[data-admin-users-reload]")?.addEventListener("click", () => reloadAdmin("users"));
+
+    main.querySelectorAll("[data-nick]").forEach((scope) => {
+      scope.querySelector("[data-admin-user-save]")?.addEventListener("click", async () => {
+        const nick = scope.dataset.nick;
+        const body = adminRowValues(scope, ["privilege", "coins", "likes", "fish", "playtime_hours", "bio"]);
+        try {
+          await adminRequest(`/api/admin/users/${encodeURIComponent(nick)}`, {
+            method: "PATCH",
+            body: JSON.stringify(body),
+          });
+          scope.classList.remove("is-dirty");
+          const item = admin.users.find((u) => u.nick === nick);
+          if (item) Object.assign(item, body);
+          admin.dirty = !!document.querySelector("#admin-main .is-dirty");
+          adminRefreshToolbar();
+          toast(`Сохранено: ${nick}`);
+        } catch {
+          /* handled */
+        }
+      });
+      scope.querySelector("[data-admin-user-admin]")?.addEventListener("click", async () => {
+        const nick = scope.dataset.nick;
+        const item = admin.users.find((u) => u.nick === nick);
+        const next = !item?.is_admin;
+        const ok = await adminConfirm({
+          title: next ? `Выдать админку ${nick}?` : `Снять админку с ${nick}?`,
+          text: next
+            ? "Игрок получит доступ к этой панели и служебным API."
+            : "Игрок потеряет доступ к панели. Сессия не сбрасывается, но API перестанут отвечать.",
+          confirmLabel: next ? "Выдать" : "Снять",
+          danger: !next,
+        });
+        if (!ok) return;
+        try {
+          await adminRequest(`/api/admin/users/${encodeURIComponent(nick)}`, {
+            method: "PATCH",
+            body: JSON.stringify({ is_admin: next }),
+          });
+          if (item) item.is_admin = next;
+          renderAdminSection();
+          toast(next ? "Права выданы" : "Права сняты");
+        } catch {
+          /* handled */
+        }
+      });
+    });
+
+    // catalog
+    const catQ = $("#admin-catalog-q");
+    if (catQ) {
+      catQ.addEventListener("input", () => {
+        admin.catalogQuery = catQ.value;
+        const pos = catQ.selectionStart;
+        renderAdminSection();
+        const again = $("#admin-catalog-q");
+        if (again) {
+          again.focus();
+          again.setSelectionRange(pos, pos);
+        }
+      });
+    }
+    $("#admin-catalog-kind")?.addEventListener("change", (e) => {
+      admin.catalogKind = e.target.value;
+      renderAdminSection();
+    });
+    main.querySelector("[data-admin-catalog-short]")?.addEventListener("click", async () => {
+      const ok = await adminConfirm({
+        title: "Записать короткие тексты?",
+        text: "Описания и преимущества всех позиций будут заменены на короткие версии из кода.",
+        confirmLabel: "Записать",
+      });
+      if (!ok) return;
+      try {
+        await adminRequest("/api/admin/catalog", {
+          method: "POST",
+          body: JSON.stringify({ action: "short_copy" }),
+        });
+        await reloadAdmin("catalog");
+        toast("Короткие тексты записаны");
+      } catch {
+        /* handled */
+      }
+    });
+    main.querySelectorAll("[data-item-id]").forEach((scope) => {
+      scope.querySelector("[data-admin-item-save]")?.addEventListener("click", async () => {
+        const id = scope.dataset.itemId;
+        const body = adminRowValues(scope, ["title", "price_rub", "description", "enabled"]);
+        const perksEl = scope.querySelector('[data-f="perks"]');
+        if (perksEl) {
+          body.perks = String(perksEl.value)
+            .split(/\r?\n/)
+            .map((s) => s.trim())
+            .filter(Boolean);
+        }
+        try {
+          await adminRequest(`/api/admin/catalog/${id}`, { method: "PATCH", body: JSON.stringify(body) });
+          scope.classList.remove("is-dirty");
+          const item = admin.catalog.find((c) => String(c.id) === String(id));
+          if (item) Object.assign(item, body);
+          admin.dirty = !!document.querySelector("#admin-main .is-dirty");
+          adminRefreshToolbar();
+          toast("Позиция сохранена");
+        } catch {
+          /* handled */
+        }
+      });
+    });
+
+    // copy
+    const copyQ = $("#admin-copy-q");
+    if (copyQ) {
+      copyQ.addEventListener("input", () => {
+        admin.copyQuery = copyQ.value;
+        const pos = copyQ.selectionStart;
+        renderAdminSection();
+        const again = $("#admin-copy-q");
+        if (again) {
+          again.focus();
+          again.setSelectionRange(pos, pos);
+        }
+      });
+    }
+    main.querySelector("[data-admin-copy-reset]")?.addEventListener("click", () => {
+      admin.dirty = false;
+      renderAdminSection();
+      toast("Правки сброшены");
+    });
+  }
+
+  function adminNewsCreateModal() {
+    const today = new Date().toISOString().slice(0, 10);
+    adminModal(`
+      <h3>Новая новость</h3>
+      <p>Появится на главной и в разделе «Новости», если отмечена публикация.</p>
+      <div class="admin-grid" style="gap:.75rem">
+        <div class="field" style="margin:0"><label>Заголовок</label><input id="admin-news-title" maxlength="160" placeholder="Лаунчер 2.9.381" /></div>
+        <div class="field" style="margin:0"><label>Дата</label><input id="admin-news-date" type="date" value="${today}" /></div>
+        <div class="field" style="margin:0"><label>Текст</label><textarea id="admin-news-body" rows="4" maxlength="4000" placeholder="Что изменилось…"></textarea></div>
+        <label class="admin-check"><input id="admin-news-published" type="checkbox" checked /> Опубликовать сразу</label>
+      </div>
+      <div class="admin-modal-foot">
+        <button class="btn btn-ghost" type="button" data-modal-cancel>Отмена</button>
+        <button class="btn btn-primary" type="button" data-modal-ok>Добавить</button>
+      </div>`);
+    const card = $("#admin-modal-card");
+    card.querySelector("[data-modal-cancel]").addEventListener("click", adminCloseModal);
+    card.querySelector("[data-modal-ok]").addEventListener("click", async () => {
+      const payload = {
+        title: $("#admin-news-title").value.trim(),
+        body: $("#admin-news-body").value.trim(),
+        published_at: $("#admin-news-date").value,
+        published: !!$("#admin-news-published").checked,
+      };
+      if (payload.title.length < 2 || payload.body.length < 2) {
+        toast("Заголовок и текст минимум 2 символа");
+        return;
+      }
+      try {
+        await adminRequest("/api/admin/news", { method: "POST", body: JSON.stringify(payload) });
+        adminCloseModal();
+        await reloadAdmin("news");
+        toast("Новость добавлена");
+      } catch {
+        /* handled */
+      }
+    });
+  }
+
   async function initAdmin() {
     if (pageId() !== "admin") return;
     const gate = $("#admin-gate");
@@ -3215,304 +4241,60 @@
     if (!gate || !root) return;
 
     try {
-      await api("/api/admin/me");
+      const me = await api("/api/admin/me");
+      admin.me = me.user || null;
     } catch (err) {
       gate.innerHTML =
         err.status === 401 || !getUser()
-          ? `Нужен <a href="login.html">вход</a> под админ-ником.`
-          : "Нет доступа к админке.";
+          ? 'Нужен <a href="login.html">вход</a> под админ-ником, чтобы открыть панель.'
+          : "У этого аккаунта нет прав администратора.";
       return;
     }
 
-    gate.textContent = "Доступ есть. Тексты, новости, каталог и игроки ниже.";
+    gate.textContent = "Доступ подтверждён: правки применяются сразу и видны игрокам.";
     root.hidden = false;
 
-    const purchases = $("#admin-purchases");
-    let siteCopy = {};
-    try {
-      const st = await api("/api/admin/settings");
-      if (purchases) purchases.checked = !!st.settings?.purchases_enabled;
-      siteCopy = st.copy || {};
-    } catch {
-      /* settings optional */
-    }
-
-    const copyBox = $("#admin-copy");
-    if (copyBox) {
-      let lastGroup = "";
-      copyBox.innerHTML = COPY_FIELDS.map((f) => {
-        const val = esc(siteCopy[f.key] || "");
-        const field = f.long
-          ? `<div class="field"><label>${esc(f.label)}</label><textarea data-copy="${f.key}" rows="3">${val}</textarea></div>`
-          : `<div class="field"><label>${esc(f.label)}</label><input data-copy="${f.key}" value="${val}" /></div>`;
-        if (f.group && f.group !== lastGroup) {
-          lastGroup = f.group;
-          return `<h4 class="admin-copy-group">${esc(f.group)}</h4>${field}`;
-        }
-        return field;
-      }).join("");
-    }
-
-    $("#admin-save-settings")?.addEventListener("click", async () => {
+    $("#admin-logout")?.addEventListener("click", async () => {
       try {
-        await api("/api/admin/settings", {
-          method: "PATCH",
-          body: JSON.stringify({ purchases_enabled: !!purchases?.checked }),
-        });
-        toast("Настройки сохранены");
-      } catch (err) {
-        toast(err.message || "Не удалось сохранить");
+        await api("/api/logout", { method: "POST", body: "{}" });
+      } catch {
+        /* ignore */
       }
+      location.href = "index.html";
     });
 
-    $("#admin-save-copy")?.addEventListener("click", async () => {
-      const copy = {};
-      document.querySelectorAll("[data-copy]").forEach((el) => {
-        copy[el.getAttribute("data-copy")] = el.value;
-      });
-      try {
-        await api("/api/admin/settings", {
-          method: "PATCH",
-          body: JSON.stringify({ copy }),
-        });
-        toast("Тексты сайта сохранены");
-      } catch (err) {
-        toast(err.message || "Не удалось сохранить тексты");
-      }
+    $("#admin-modal")?.addEventListener("click", (e) => {
+      if (e.target.id === "admin-modal") adminCloseModal();
     });
 
-    async function loadNewsAdmin() {
-      const box = $("#admin-news");
-      if (!box) return;
-      box.innerHTML = `<p class="muted-line">Загрузка…</p>`;
-      try {
-        const data = await api("/api/admin/news");
-        const rows = data.news || [];
-        if (!rows.length) {
-          box.innerHTML = `<p class="muted-line">Новостей нет.</p>`;
-          return;
-        }
-        box.innerHTML = `<table class="admin-table"><thead><tr>
-          <th>Дата</th><th>Заголовок</th><th>Текст</th><th>Вкл</th><th></th>
-        </tr></thead><tbody>
-        ${rows
-          .map(
-            (n) => `<tr data-id="${n.id}">
-          <td><input data-f="published_at" type="date" value="${esc(String(n.published_at || "").slice(0, 10))}" /></td>
-          <td><input data-f="title" value="${esc(n.title)}" /></td>
-          <td><textarea data-f="body" rows="3">${esc(n.body)}</textarea></td>
-          <td><input data-f="published" type="checkbox" ${n.published ? "checked" : ""} /></td>
-          <td style="white-space:nowrap">
-            <button class="btn btn-secondary" type="button" data-save-news>OK</button>
-            <button class="btn btn-ghost" type="button" data-del-news>Удалить</button>
-          </td>
-        </tr>`
-          )
-          .join("")}
-        </tbody></table>`;
-
-        box.querySelectorAll("[data-save-news]").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            const tr = btn.closest("tr");
-            const id = tr?.dataset.id;
-            if (!id) return;
-            const body = {};
-            tr.querySelectorAll("[data-f]").forEach((inp) => {
-              const key = inp.getAttribute("data-f");
-              if (key === "published") body.published = inp.checked;
-              else body[key] = inp.value;
-            });
-            try {
-              await api(`/api/admin/news/${id}`, {
-                method: "PATCH",
-                body: JSON.stringify(body),
-              });
-              toast("Новость сохранена");
-            } catch (err) {
-              toast(err.message || "Ошибка");
-            }
-          });
-        });
-        box.querySelectorAll("[data-del-news]").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            const tr = btn.closest("tr");
-            const id = tr?.dataset.id;
-            if (!id || !confirm("Удалить новость?")) return;
-            try {
-              await api(`/api/admin/news/${id}`, { method: "DELETE" });
-              toast("Удалено");
-              await loadNewsAdmin();
-            } catch (err) {
-              toast(err.message || "Ошибка");
-            }
-          });
-        });
-      } catch (err) {
-        box.innerHTML = `<p class="muted-line">${esc(err.message || "Ошибка загрузки")}</p>`;
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        adminCloseModal();
+        return;
       }
-    }
-
-    const newsForm = $("#admin-news-form");
-    if (newsForm) {
-      const dateInp = newsForm.querySelector('[name="published_at"]');
-      if (dateInp && !dateInp.value) dateInp.value = new Date().toISOString().slice(0, 10);
-      newsForm.addEventListener("submit", async (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
         e.preventDefault();
-        const fd = new FormData(newsForm);
-        try {
-          await api("/api/admin/news", {
-            method: "POST",
-            body: JSON.stringify({
-              title: fd.get("title"),
-              body: fd.get("body"),
-              published_at: fd.get("published_at"),
-              published: !!fd.get("published"),
-            }),
-          });
-          newsForm.reset();
-          if (dateInp) dateInp.value = new Date().toISOString().slice(0, 10);
-          const pub = newsForm.querySelector('[name="published"]');
-          if (pub) pub.checked = true;
-          toast("Новость добавлена");
-          await loadNewsAdmin();
-        } catch (err) {
-          toast(err.message || "Не удалось добавить");
-        }
-      });
-    }
-    async function loadUsers() {
-      const box = $("#admin-users");
-      if (!box) return;
-      const q = ($("#admin-user-q")?.value || "").trim();
-      box.innerHTML = `<p class="muted-line">Загрузка…</p>`;
-      try {
-        const data = await api(`/api/admin/users?q=${encodeURIComponent(q)}`);
-        const rows = data.users || [];
-        if (!rows.length) {
-          box.innerHTML = `<p class="muted-line">Никого не нашли.</p>`;
-          return;
-        }
-        box.innerHTML = `<table class="admin-table"><thead><tr>
-          <th>Ник</th><th>Ранг</th><th>Монеты</th><th>Лайки</th><th>Рыба</th><th>Часы</th><th></th>
-        </tr></thead><tbody>
-        ${rows
-          .map(
-            (u) => `<tr data-nick="${esc(u.nick)}">
-          <td><strong>${esc(u.nick)}</strong>${u.is_admin ? ' <span class="tag">admin</span>' : ""}</td>
-          <td><input data-f="privilege" value="${esc(u.privilege)}" /></td>
-          <td><input data-f="coins" type="number" min="0" value="${esc(u.coins)}" /></td>
-          <td><input data-f="likes" type="number" min="0" value="${esc(u.likes)}" /></td>
-          <td><input data-f="fish" type="number" min="0" value="${esc(u.fish)}" /></td>
-          <td><input data-f="playtime_hours" type="number" min="0" value="${esc(u.playtime_hours)}" /></td>
-          <td><button class="btn btn-secondary" type="button" data-save-user>OK</button></td>
-        </tr>`
-          )
-          .join("")}
-        </tbody></table>`;
-        box.querySelectorAll("[data-save-user]").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            const tr = btn.closest("tr");
-            const nick = tr?.dataset.nick;
-            if (!nick) return;
-            const body = {};
-            tr.querySelectorAll("[data-f]").forEach((inp) => {
-              const key = inp.getAttribute("data-f");
-              body[key] = inp.type === "number" ? Number(inp.value) : inp.value;
-            });
-            try {
-              await api(`/api/admin/users/${encodeURIComponent(nick)}`, {
-                method: "PATCH",
-                body: JSON.stringify(body),
-              });
-              toast(`Сохранено: ${nick}`);
-            } catch (err) {
-              toast(err.message || "Ошибка");
-            }
-          });
-        });
-      } catch (err) {
-        box.innerHTML = `<p class="muted-line">${esc(err.message || "Ошибка загрузки")}</p>`;
-      }
-    }
-
-    async function loadCatalog() {
-      const box = $("#admin-catalog");
-      if (!box) return;
-      box.innerHTML = `<p class="muted-line">Загрузка…</p>`;
-      try {
-        const data = await api("/api/admin/catalog");
-        const rows = data.items || [];
-        box.innerHTML = `<table class="admin-table"><thead><tr>
-          <th>Slug</th><th>Название</th><th>Цена</th><th>Описание</th><th>Perks (\\n)</th><th>Вкл</th><th></th>
-        </tr></thead><tbody>
-        ${rows
-          .map(
-            (it) => `<tr data-id="${it.id}">
-          <td>${esc(it.slug)}<div class="muted-line">${esc(it.kind)}</div></td>
-          <td><input data-f="title" value="${esc(it.title)}" /></td>
-          <td><input data-f="price_rub" type="number" min="0" value="${esc(it.price_rub)}" /></td>
-          <td><textarea data-f="description" rows="3">${esc(it.description)}</textarea></td>
-          <td><textarea data-f="perks" rows="3">${esc((it.perks || []).join("\n"))}</textarea></td>
-          <td><input data-f="enabled" type="checkbox" ${it.enabled ? "checked" : ""} /></td>
-          <td><button class="btn btn-secondary" type="button" data-save-item>OK</button></td>
-        </tr>`
-          )
-          .join("")}
-        </tbody></table>`;
-        box.querySelectorAll("[data-save-item]").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            const tr = btn.closest("tr");
-            const id = tr?.dataset.id;
-            if (!id) return;
-            const body = {};
-            tr.querySelectorAll("[data-f]").forEach((inp) => {
-              const key = inp.getAttribute("data-f");
-              if (key === "enabled") body.enabled = inp.checked;
-              else if (key === "perks")
-                body.perks = String(inp.value)
-                  .split(/\r?\n/)
-                  .map((s) => s.trim())
-                  .filter(Boolean);
-              else if (key === "price_rub") body.price_rub = Number(inp.value);
-              else body[key] = inp.value;
-            });
-            try {
-              await api(`/api/admin/catalog/${id}`, {
-                method: "PATCH",
-                body: JSON.stringify(body),
-              });
-              toast("Каталог сохранён");
-            } catch (err) {
-              toast(err.message || "Ошибка");
-            }
-          });
-        });
-      } catch (err) {
-        box.innerHTML = `<p class="muted-line">${esc(err.message || "Ошибка загрузки")}</p>`;
-      }
-    }
-
-    let userTimer;
-    $("#admin-user-q")?.addEventListener("input", () => {
-      clearTimeout(userTimer);
-      userTimer = setTimeout(loadUsers, 280);
-    });
-    $("#admin-short-copy")?.addEventListener("click", async () => {
-      try {
-        await api("/api/admin/catalog", {
-          method: "POST",
-          body: JSON.stringify({ action: "short_copy" }),
-        });
-        toast("Короткие тексты записаны");
-        await loadCatalog();
-      } catch (err) {
-        toast(err.message || "Ошибка");
+        adminSaveActive();
       }
     });
 
-    await loadNewsAdmin();
-    await loadUsers();
-    await loadCatalog();
+    window.addEventListener("hashchange", () => adminGo(location.hash.slice(1) || "overview"));
+
+    const main = $("#admin-main");
+    if (main) main.innerHTML = adminSkeleton(4);
+
+    try {
+      await Promise.all([loadAdminSettings(), loadAdminNews(), loadAdminUsers(), loadAdminCatalog()]);
+    } catch {
+      main.innerHTML = adminEmpty("Не удалось загрузить данные", "Обновите страницу или проверьте соединение");
+      return;
+    }
+
+    admin.section = ADMIN_SECTIONS.some((s) => s.id === (location.hash.slice(1) || ""))
+      ? location.hash.slice(1)
+      : "overview";
+    renderAdminSection();
+    renderAdminRail();
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -3547,6 +4329,8 @@
       initStorePage();
     } else if (page === "cases") {
       initCasesShowcasePage();
+    } else if (page === "status") {
+      initStatusPage();
     } else if (page === "market") {
       initMarketPage();
     } else if (page === "profile") {
@@ -4649,6 +5433,7 @@
     }
 
     window.__liveCases = casesList;
+    initCaseDrops();
 
     const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
 
@@ -4666,7 +5451,7 @@
       root.innerHTML = filtered.map((c) => {
         const actualIndex = casesList.findIndex((item) => item.slug === c.slug);
         const tierNum = actualIndex + 1;
-        const iconSrc = CASE_ICONS[c.slug] || CASE_ICONS.starter || "assets/images/cases/starter.png";
+        const iconSrc = CASE_ICONS[c.slug] || CASE_ICONS.starter || "assets/images/cases/starter.png?v=20260921";
         
         // Extract top 3 loot rewards for preview chips
         const topLoot = c.loot && c.loot.length
@@ -4690,6 +5475,13 @@
             ${topLoot.length ? `
               <div class="case-loot-chips">
                 ${topLoot.map((item) => `<span class="loot-chip" title="${esc(item.name)}">${esc(item.name)}</span>`).join("")}
+              </div>
+            ` : ""}
+
+            ${c.pityEvery > 0 && c.pity ? `
+              <div class="case-pity-row" title="Гарантированная награда за ${c.pityEvery} открытий">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                <span>Гарант: <b>${esc(c.pity.name)}</b> · каждые ${c.pityEvery}</span>
               </div>
             ` : ""}
 
@@ -4776,7 +5568,7 @@
 
     const actualIdx = (window.__liveCases || []).findIndex((c) => c.slug === slug);
     const tierNum = actualIdx >= 0 ? actualIdx + 1 : 1;
-    const caseIconSrc = CASE_ICONS[slug] || "assets/images/cases/starter.png";
+    const caseIconSrc = CASE_ICONS[slug] || "assets/images/cases/starter.png?v=20260921";
 
     const u = getUser();
     const isAuthed = !!(u && u.nick);
@@ -4797,6 +5589,16 @@
     }
 
     const winIndex = 45;
+
+    const RARITY_HEX = {
+      common: "#94a3b8",
+      uncommon: "#4ade80",
+      rare: "#38bdf8",
+      epic: "#c084fc",
+      legendary: "#facc15",
+      mythic: "#f43f5e",
+      exotic: "#2fe0c0",
+    };
 
     function renderStripTiles(items) {
       return items.map((t, idx) => {
@@ -4871,6 +5673,11 @@
               ? "Предмет моментально выдается в инвентарь на сервере (меню F4) и заносится в хранилище профиля."
               : "Демонстрационный режим. Войдите в аккаунт, чтобы крутить за монеты и получать дроп на сервере."}
           </p>
+          <div class="roulette-pity-line" id="roulettePityLine">
+            ${liveCase && liveCase.pityEvery > 0 && liveCase.pity
+              ? `Гарант: <b>${esc(liveCase.pity.name)}</b> · каждые ${liveCase.pityEvery} открытий`
+              : ""}
+          </div>
         </div>
 
         <div id="rouletteWinContainer"></div>
@@ -4931,7 +5738,17 @@
             item: res.loot.item || "",
             amount: res.loot.amount || 1,
             isReal: true,
+            guaranteed: !!(res.pity && res.pity.guaranteed),
           };
+
+          const pityLine = modal.querySelector("#roulettePityLine");
+          if (pityLine && res.pity) {
+            if (res.pity.guaranteed) {
+              pityLine.innerHTML = `<b class="pity-hit">Гарант сработал</b> · счётчик открытий обнулён`;
+            } else if (Number(res.pity.left) >= 0) {
+              pityLine.innerHTML = `До гаранта: <b>${Number(res.pity.left)}</b> открытий`;
+            }
+          }
         } catch (err) {
           winContainer.innerHTML = `
             <div class="roulette-error-card">
@@ -5004,6 +5821,15 @@
         spinBtn.disabled = false;
         btnTextEl.textContent = "КРУТИТЬ ЕЩЁ РАЗ";
 
+        const stage = modal.querySelector(".roulette-stage");
+        if (stage) {
+          const flash = document.createElement("div");
+          flash.className = "roulette-reveal-flash";
+          flash.style.setProperty("--flash-color", RARITY_HEX[winItem.rarity] || "#2fe0c0");
+          stage.appendChild(flash);
+          setTimeout(() => flash.remove(), 900);
+        }
+
         const winningTile = document.getElementById(`tile-${winIndex}`);
         if (winningTile) winningTile.classList.add("is-winner");
 
@@ -5012,7 +5838,7 @@
 
         if (winItem.isReal) {
           winContainer.innerHTML = `
-            <div class="roulette-win-card">
+            <div class="roulette-win-card ${winItem.guaranteed ? "is-guaranteed" : ""}">
               <div class="roulette-win-ico-box">
                 ${winIconUrl
                   ? `<img class="roulette-win-ico" src="${winIconUrl}" alt="${esc(winItem.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" /><span style="display:none;font-size:1.8rem;color:#2fe0c0">✦</span>`
@@ -5020,12 +5846,20 @@
                 }
               </div>
               <div class="roulette-win-content">
-                <div class="roulette-win-badge badge-real">✓ ${rarityLabel} · Доставлено в игру</div>
+                <div class="roulette-win-badge badge-real">${winItem.guaranteed ? "🛡 Гарант" : "✓"} ${rarityLabel} · Доставлено в игру</div>
                 <div class="roulette-win-name">${esc(winItem.name)} ${winItem.amount > 1 ? `×${winItem.amount}` : ""}</div>
                 <div class="roulette-win-desc">Предмет моментально выдан в твой инвентарь на сервере (меню F4) и зачислен в хранилище профиля.</div>
+                <div class="roulette-win-actions">
+                  <button class="btn btn-primary btn-win-again" type="button" data-spin-again>Открыть ещё раз</button>
+                  <a class="btn btn-secondary btn-win-vault" href="profile.html">Хранилище профиля</a>
+                </div>
               </div>
             </div>
           `;
+          winContainer.querySelector("[data-spin-again]")?.addEventListener("click", () => {
+            winContainer.innerHTML = "";
+            spinBtn.click();
+          });
         } else {
           winContainer.innerHTML = `
             <div class="roulette-win-card">
@@ -5047,82 +5881,333 @@
     };
   }
 
+  // STATUS PAGE: live state + sampled history
+  const STATUS_RANGE_LABEL = { "24h": "24 часа", "7d": "7 дней", "30d": "30 дней" };
+
+  async function initStatusPage() {
+    const liveText = $("#statusLiveText");
+    const livePill = $("#statusLivePill");
+    if (!liveText) return;
+
+    let range = "24h";
+
+    function paintLive(status) {
+      const online = !!status.online;
+      liveText.textContent = online
+        ? `Сервер в сети${status.players_online != null ? ` · ${status.players_online}/${status.players_max}` : ""}`
+        : "Сервер не в сети";
+      if (livePill) {
+        livePill.classList.toggle("is-offline", !online);
+        livePill.classList.toggle("is-online", online);
+      }
+      const playersEl = $("#statusPlayers");
+      if (playersEl) playersEl.textContent = online ? `${Number(status.players_online || 0)}` : "0";
+      const versionEl = $("#statusVersion");
+      if (versionEl) versionEl.textContent = status.version || (online ? "—" : "оффлайн");
+      const addrEl = $("#statusAddress");
+      if (addrEl && status.address) addrEl.textContent = status.address;
+      const checkedEl = $("#statusChecked");
+      if (checkedEl) checkedEl.textContent = `Последняя проверка: ${new Date().toLocaleTimeString("ru-RU")}`;
+    }
+
+    async function loadHistory(nextRange) {
+      range = nextRange || range;
+      const box = $("#statusChart");
+      if (box) box.innerHTML = `<div class="status-chart-empty">Загружаем историю…</div>`;
+      try {
+        const data = await api(`/api/status-history?range=${encodeURIComponent(range)}`);
+        paintHistory(data || {});
+      } catch (err) {
+        if (box) box.innerHTML = `<div class="status-chart-empty">История недоступна</div>`;
+      }
+    }
+
+    function paintHistory(data) {
+      const points = data.points || [];
+      const box = $("#statusChart");
+      const uptimeEl = $("#statusUptime");
+      const uptimeLabel = $("#statusUptimeLabel");
+      const peakEl = $("#statusPeak");
+      const samplesEl = $("#statusSamples");
+      const noteEl = $("#statusChartNote");
+
+      if (uptimeLabel) uptimeLabel.textContent = `аптайм за ${STATUS_RANGE_LABEL[range] || "24 часа"}`;
+      if (uptimeEl) uptimeEl.textContent = data.uptime == null ? "—" : `${data.uptime}%`;
+      if (peakEl) peakEl.textContent = data.peakPlayers ? `${data.peakPlayers}` : "0";
+      if (samplesEl) {
+        samplesEl.textContent = data.samples
+          ? `${data.samples} сэмплов · последний ${new Date(data.lastSampleAt).toLocaleString("ru-RU")}`
+          : "";
+      }
+
+      if (!points.length) {
+        if (box) {
+          box.innerHTML = `<div class="status-chart-empty">
+            История пока пустая: точки начнут появляться каждые пять минут.
+            Загляни позже — здесь будет видно и онлайн, и простои.
+          </div>`;
+        }
+        const avail = $("#statusAvailability");
+        if (avail) avail.innerHTML = "";
+        return;
+      }
+
+      if (noteEl) {
+        noteEl.textContent = `Сэмплы каждые пять минут · ${points.length} точек на графике · окно ${STATUS_RANGE_LABEL[range]}`;
+      }
+
+      const W = 720;
+      const H = 200;
+      const padX = 8;
+      const padTop = 16;
+      const padBottom = 26;
+      const plotH = H - padTop - padBottom;
+      const peak = Math.max(1, data.peakPlayers || 1);
+      const stepX = points.length > 1 ? (W - padX * 2) / (points.length - 1) : 0;
+      const xAt = (i) => padX + i * stepX;
+      const yAt = (players) => padTop + plotH - (Math.max(0, players) / peak) * plotH;
+
+      const onlineRuns = [];
+      points.forEach((p, i) => {
+        if (!p.online) onlineRuns.push(xAt(i));
+      });
+
+      let area = `M ${xAt(0)} ${padTop + plotH}`;
+      points.forEach((p, i) => {
+        area += ` L ${xAt(i).toFixed(1)} ${yAt(p.online ? p.playing : 0).toFixed(1)}`;
+      });
+      area += ` L ${xAt(points.length - 1)} ${padTop + plotH} Z`;
+
+      let line = "";
+      points.forEach((p, i) => {
+        line += `${i === 0 ? "M" : "L"} ${xAt(i).toFixed(1)} ${yAt(p.online ? p.playing : 0).toFixed(1)} `;
+      });
+
+      const gridLines = [0.25, 0.5, 0.75]
+        .map((f) => `<line x1="${padX}" x2="${W - padX}" y1="${(padTop + plotH * f).toFixed(1)}" y2="${(padTop + plotH * f).toFixed(1)}" class="status-grid-line"/>`)
+        .join("");
+
+      const downBars = onlineRuns
+        .map((x) => `<rect x="${(x - stepX / 2).toFixed(1)}" y="${(padTop + plotH - 10).toFixed(1)}" width="${Math.max(2, stepX).toFixed(1)}" height="10" class="status-down-bar"/>`)
+        .join("");
+
+      const peakLine = `<line x1="${padX}" x2="${W - padX}" y1="${padTop}" y2="${padTop}" class="status-grid-line status-grid-peak"/>
+        <text x="${padX + 2}" y="${padTop - 4}" class="status-axis-label">пик ${data.peakPlayers || 0}</text>`;
+
+      if (box) {
+        box.innerHTML = `
+          <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" class="status-chart-svg" role="img" aria-label="История онлайна">
+            ${gridLines}
+            ${downBars}
+            ${peakLine}
+            <path d="${area}" class="status-area"/>
+            <path d="${line}" class="status-line"/>
+          </svg>
+          <div class="status-chart-axis">
+            <span>${new Date(points[0].at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span>
+            <span>${new Date(points[points.length - 1].at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span>
+          </div>
+        `;
+      }
+
+      const avail = $("#statusAvailability");
+      if (avail) {
+        avail.innerHTML = points
+          .map((p) => {
+            const value = p.uptime == null ? (p.online ? 100 : 0) : p.uptime;
+            const level = !p.online ? "down" : value >= 99 ? "full" : "part";
+            const stamp = new Date(p.at).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+            return `<i class="status-avail-bar is-${level}" title="${stamp} · ${p.online ? `${p.playing} игроков` : "недоступен"}"></i>`;
+          })
+          .join("");
+      }
+    }
+
+    document.querySelectorAll("#statusRange .apple-segment-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#statusRange .apple-segment-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        playTone("click");
+        loadHistory(btn.getAttribute("data-range"));
+      });
+    });
+
+    try {
+      const status = await api("/api/server-status");
+      paintLive(status || {});
+    } catch {
+      paintLive({ online: false });
+    }
+    loadHistory("24h");
+  }
+
+  // Лента последних дропов: игра + сайт, из player_vault
+  function dropTimeAgo(iso) {
+    const t = Date.parse(iso);
+    if (!Number.isFinite(t)) return "";
+    const mins = Math.max(0, Math.round((Date.now() - t) / 60000));
+    if (mins < 1) return "только что";
+    if (mins < 60) return `${mins} мин назад`;
+    const hours = Math.round(mins / 60);
+    if (hours < 24) return `${hours} ч назад`;
+    const days = Math.round(hours / 24);
+    return `${days} дн назад`;
+  }
+
+  async function initCaseDrops() {
+    const strip = $("#case-drops-strip");
+    const list = $("#case-drops-list");
+    if (!strip || !list) return;
+    try {
+      const data = await api("/api/cases/recent");
+      const drops = (data && data.drops) || [];
+      if (!drops.length) return;
+      list.innerHTML = drops.slice(0, 10)
+        .map((d) => {
+          const iconUrl = getItemIconUrl(d.item_spec || "");
+          const when = dropTimeAgo(d.created_at);
+          return `<span class="case-drop-chip rarity-${esc(d.rarity || "common")}" title="${esc(d.item_name)} · ${esc(d.nick)}">
+            ${iconUrl ? `<img src="${iconUrl}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
+            <span class="case-drop-name">${esc(d.item_name)}${Number(d.amount) > 1 ? ` ×${d.amount}` : ""}</span>
+            <span class="case-drop-nick">${esc(d.nick)}</span>
+            ${when ? `<span class="case-drop-when">${when}</span>` : ""}
+          </span>`;
+        })
+        .join("");
+      strip.hidden = false;
+    } catch {
+      /* лента дропов не критична для страницы */
+    }
+  }
+
   // 3. MARKET PAGE WITH SEARCH & FILTER
   async function initMarketPage() {
     const grid = $("#marketLotsGrid");
     const countEl = $("#marketLotCounter");
     const searchInput = $("#marketSearchInput");
     const pills = $("#marketFilterPills");
+    const pager = $("#marketPagination");
     if (!grid) return;
 
-    let allLots = [];
-    try {
-      const res = await api("/api/market/public?limit=30");
-      allLots = res && res.items ? res.items : [];
-    } catch {
-      allLots = [];
-    }
-
-    if (!allLots.length) {
-      allLots = [
-        { item_name: "StarCatcher Magma Rod T9", seller_nick: "AquaSmoke1", price: 4500, amount: 1, expires_in: "через 14 ч", category: "rods" },
-        { item_name: "Титановый слиток x64", seller_nick: "Renfild", price: 1200, amount: 64, expires_in: "через 22 ч", category: "ores" },
-        { item_name: "Дноуглубительный бур", seller_nick: "xietoru", price: 8900, amount: 1, expires_in: "через 8 ч", category: "tech" },
-        { item_name: "Кейс Бездны x3", seller_nick: "VortexHunter", price: 14000, amount: 3, expires_in: "через 18 ч", category: "cases" },
-        { item_name: "Авторыболов MK3", seller_nick: "SeaDragon", price: 6500, amount: 1, expires_in: "через 5 ч", category: "tech" },
-        { item_name: "Небесный камень AE2 x128", seller_nick: "Nautilus99", price: 800, amount: 128, expires_in: "через 31 ч", category: "ores" },
-      ];
-    }
-
+    const PER_PAGE = 12;
+    const me = (getUser() || {}).nick || "";
+    let page = 1;
+    let pages = 1;
+    let total = 0;
+    let lots = [];
     let activeFilter = "all";
     let query = "";
 
-    function renderFiltered() {
-      const filtered = allLots.filter((lot) => {
-        const matchesQuery = !query || lot.item_name.toLowerCase().includes(query) || lot.seller_nick.toLowerCase().includes(query);
-        const matchesFilter = activeFilter === "all" || (lot.category && lot.category === activeFilter) || (activeFilter === "rods" && lot.item_name.toLowerCase().includes("rod")) || (activeFilter === "ores" && lot.item_name.toLowerCase().includes("слиток"));
-        return matchesQuery && matchesFilter;
+    const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
+
+    const categoryOf = (lot) => {
+      const label = String(lot.label || "").toLowerCase();
+      const id = String(lot.item_id || "");
+      if (id.endsWith("_rod") || label.includes("удоч")) return "rods";
+      if (id.startsWith("aquatech_machines:") || /машин|бур|экскаватор|синтезатор|центрифуг|механ|fisher|machine/.test(label)) return "tech";
+      if (/слит|руда|руды|ore|ingot|пыль|кристалл|самоцвет|gem|dust/.test(label)) return "ores";
+      return "other";
+    };
+
+    const priceBadge = (lot) => {
+      const avg = Number(lot.avg30 || 0);
+      const sold = Number(lot.sold30 || 0);
+      if (!avg || sold < 3) return "";
+      const diff = Math.round((lot.price - avg) / avg * 100);
+      const title = `Средняя за 30 дней: ${avg.toLocaleString("ru-RU")} (${sold} продаж)`;
+      if (diff <= -10) return `<span class="market-deal good" title="${title}">выгодно ${diff}%</span>`;
+      if (diff >= 15) return `<span class="market-deal bad" title="${title}">дороже рынка +${diff}%</span>`;
+      return "";
+    };
+
+    const iconFor = (lot) => {
+      if (ATLAS && lot.item_id) {
+        const e = ATLAS[String(lot.item_id).trim()];
+        if (e) {
+          const sheet = e[0];
+          return `<span class="atlas-sprite" style="width:26px;height:26px;background-image:url(https://aquateche.store/assets/images/atlas/atlas_${sheet}.png);background-position:${-8 - e[1]}px ${-8 - e[2]}px"></span>`;
+        }
+      }
+      return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>';
+    };
+
+    const render = () => {
+      const filtered = lots.filter((lot) => {
+        const label = String(lot.label || "").toLowerCase();
+        const seller = String(lot.seller || "").toLowerCase();
+        if (query && !label.includes(query) && !seller.includes(query)) return false;
+        if (activeFilter === "mine") return Boolean(me) && seller === me.toLowerCase();
+        return activeFilter === "all" || categoryOf(lot) === activeFilter;
       });
 
-      if (countEl) countEl.textContent = `${filtered.length} лотов`;
-
-      const coinSvg = '<img src="assets/images/coin.png" class="aqua-coin-icon coin-ico" alt="">';
+      if (countEl) {
+        countEl.textContent = activeFilter === "all" && !query
+          ? `${total} лотов`
+          : `Показано ${filtered.length} из ${lots.length}`;
+      }
 
       if (!filtered.length) {
         grid.innerHTML = '<p class="muted-line" style="grid-column:1/-1;text-align:center;padding:3rem">По заданным фильтрам лотов не найдено. Выстави свой предмет командой <code>/ah sell</code> в игре!</p>';
-        return;
-      }
-
-      grid.innerHTML = filtered.map((l) => `
+      } else {
+        grid.innerHTML = filtered.map((lot) => `
         <div class="lot-v2-card">
           <div class="lot-header">
             <div class="lot-seller">
-              <img class="lot-seller-avatar" src="/api/skins/${encodeURIComponent(l.seller_nick)}/avatar?v=look2" alt="${esc(l.seller_nick)}" onerror="this.onerror=null;this.src='/assets/images/avatar_default.png'" />
-              <span class="lot-seller-name">${esc(l.seller_nick)}</span>
+              <img class="lot-seller-avatar" src="/api/skins/${encodeURIComponent(lot.seller)}/avatar?v=look2" alt="${esc(lot.seller)}" onerror="this.onerror=null;this.src='/assets/images/avatar_default.png'" />
+              <span class="lot-seller-name">${esc(lot.seller)}</span>
             </div>
-            <span class="lot-timer">${esc(l.expires_in || "активен")}</span>
+            ${priceBadge(lot) || '<span class="lot-timer">активен</span>'}
           </div>
           <div class="lot-item-info">
-            <div class="lot-item-ico">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-            </div>
+            <div class="lot-item-ico">${iconFor(lot)}</div>
             <div>
-              <div class="lot-item-name">${esc(l.item_name)}</div>
-              <small style="color:#94a3b8">Количество: ×${l.amount || 1}</small>
+              <div class="lot-item-name">${esc(lot.label)}</div>
+              <small style="color:#94a3b8">Количество: ×${lot.count || 1}${lot.avg30 && lot.sold30 >= 3 ? ` · средняя ${Number(lot.avg30).toLocaleString("ru-RU")}` : ""}</small>
             </div>
           </div>
           <div class="lot-footer">
-            <span class="lot-price-tag">${coinSvg}<span>${Number(l.price).toLocaleString("ru-RU")}</span></span>
+            <span class="lot-price-tag">${coinSvg}<span>${Number(lot.price).toLocaleString("ru-RU")}</span></span>
             <span style="font-size:0.8rem;color:#94a3b8">Купить: /ah</span>
           </div>
-        </div>
-      `).join("");
-    }
+        </div>`).join("");
+      }
+
+      if (pager) {
+        if (pages <= 1) {
+          pager.innerHTML = "";
+        } else {
+          pager.innerHTML = `
+            <button class="btn btn-ghost" type="button" id="marketPrev" ${page <= 1 ? "disabled" : ""}>← Назад</button>
+            <span class="muted-line" style="font-size:0.85rem">Страница ${page} из ${pages}</span>
+            <button class="btn btn-ghost" type="button" id="marketNext" ${page >= pages ? "disabled" : ""}>Вперёд →</button>`;
+          const prev = $("#marketPrev");
+          const next = $("#marketNext");
+          if (prev) prev.onclick = () => loadPage(page - 1);
+          if (next) next.onclick = () => loadPage(page + 1);
+        }
+      }
+    };
+
+    const loadPage = async (target) => {
+      page = Math.max(1, target);
+      grid.innerHTML = '<p class="muted-line" style="grid-column:1/-1;text-align:center;padding:3rem">Загрузка лотов…</p>';
+      try {
+        const res = await api(`/api/market/public?page=${page}&limit=${PER_PAGE}`);
+        lots = (res && (res.items || res.lots)) || [];
+        total = Number(res && res.total) || lots.length;
+        pages = Number(res && res.pages) || 1;
+      } catch {
+        lots = [];
+        total = 0;
+        pages = 1;
+      }
+      render();
+    };
 
     if (searchInput) {
       searchInput.addEventListener("input", (e) => {
         query = e.target.value.toLowerCase().trim();
-        renderFiltered();
+        render();
       });
     }
 
@@ -5132,12 +6217,13 @@
           pills.querySelectorAll(".market-pill-btn").forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
           activeFilter = btn.getAttribute("data-filter");
-          renderFiltered();
+          render();
         });
       });
     }
 
-    renderFiltered();
+    await ensureAtlasAsync();
+    await loadPage(1);
   }
 
   // 4. PROFILE PAGE WITH 3D SKIN & BENTO STATS

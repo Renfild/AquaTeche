@@ -39,16 +39,67 @@ export async function onRequestPost(context) {
     return bad("Не удалось списать монеты (недостаточный баланс)", 400);
   }
 
-  // Roll item based on weights
-  const totalWeight = caseDef.loot.reduce((sum, l) => sum + Math.max(1, Number(l.weight) || 1), 0);
-  let pick = Math.floor(Math.random() * totalWeight);
-  let selected = caseDef.loot[caseDef.loot.length - 1];
+  // Списанное на сайте должно уйти и из игрового кошелька: иначе игровой синк
+  // вернёт старый баланс и трата станет бесплатной.
+  if (cost > 0) {
+    try {
+      await env.DB
+        .prepare(
+          `INSERT INTO pending_commands (nick, kind, payload, provider, status)
+           VALUES (?, 'coins_take', ?, 'web_case', 'queued')`
+        )
+        .bind(user.nick, String(cost))
+        .run();
+    } catch (err) {
+      console.warn("Could not queue coins_take:", err);
+    }
+  }
 
-  for (const l of caseDef.loot) {
-    pick -= Math.max(1, Number(l.weight) || 1);
-    if (pick < 0) {
-      selected = l;
-      break;
+  // Roll item based on weights, unless the guarantee fires.
+  const pityEvery = Number(caseDef.pityEvery) || 0;
+  const pityDef = caseDef.pity || null;
+  let pityHit = false;
+  let pityLeft = -1;
+
+  if (pityEvery > 0 && pityDef) {
+    try {
+      await ensurePityTable(env.DB);
+      const row = await env.DB
+        .prepare("SELECT counter FROM case_pity WHERE user_id = ? AND case_slug = ?")
+        .bind(user.id, caseDef.slug)
+        .first();
+      const seen = Number(row?.counter || 0);
+      pityHit = seen + 1 >= pityEvery;
+      const next = pityHit ? 0 : seen + 1;
+      await env.DB
+        .prepare(
+          `INSERT INTO case_pity (user_id, case_slug, counter, updated_at)
+           VALUES (?, ?, ?, strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+           ON CONFLICT(user_id, case_slug)
+           DO UPDATE SET counter = excluded.counter, updated_at = excluded.updated_at`
+        )
+        .bind(user.id, caseDef.slug, next)
+        .run();
+      pityLeft = Math.max(0, pityEvery - next);
+    } catch (err) {
+      console.warn("Pity counter unavailable:", err);
+    }
+  }
+
+  let selected;
+  if (pityHit) {
+    selected = pityDef;
+  } else {
+    const totalWeight = caseDef.loot.reduce((sum, l) => sum + Math.max(1, Number(l.weight) || 1), 0);
+    let pick = Math.floor(Math.random() * totalWeight);
+    selected = caseDef.loot[caseDef.loot.length - 1];
+
+    for (const l of caseDef.loot) {
+      pick -= Math.max(1, Number(l.weight) || 1);
+      if (pick < 0) {
+        selected = l;
+        break;
+      }
     }
   }
 
@@ -68,6 +119,18 @@ export async function onRequestPost(context) {
       finalCoins += amount;
     } catch (err) {
       console.warn("Could not add coins reward to profile:", err);
+    }
+    // Награду монетами тоже доставляем в игру, иначе синк её снесёт.
+    try {
+      await env.DB
+        .prepare(
+          `INSERT INTO pending_commands (nick, kind, payload, provider, status)
+           VALUES (?, 'coins', ?, 'web_case', 'queued')`
+        )
+        .bind(user.nick, String(amount))
+        .run();
+    } catch (err) {
+      console.warn("Could not queue coins reward:", err);
     }
   } else {
     // Deliver in-game item through pending_commands
@@ -174,6 +237,25 @@ export async function onRequestPost(context) {
       type: selected.type || "item",
       rarity: caseDef.rarity,
     },
+    pity: {
+      every: pityEvery,
+      left: pityLeft,
+      guaranteed: pityHit,
+    },
     remainingCoins: finalCoins,
   });
+}
+
+async function ensurePityTable(db) {
+  await db
+    .prepare(
+      `CREATE TABLE IF NOT EXISTS case_pity (
+         user_id INTEGER NOT NULL,
+         case_slug TEXT NOT NULL,
+         counter INTEGER NOT NULL DEFAULT 0,
+         updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+         PRIMARY KEY (user_id, case_slug)
+       )`
+    )
+    .run();
 }
