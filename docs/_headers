@@ -1,4 +1,4 @@
-/assets/*
+﻿/assets/*
   Cache-Control: public, max-age=60, must-revalidate
 
 /api/*
