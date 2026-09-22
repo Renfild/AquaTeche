@@ -224,7 +224,10 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
             if (modalOpen && bridge != null) {
-                bridge.execute("window.AquaLumen&&window.AquaLumen.closeModal();");
+                bridge.execute("window.AquaLumen&&window.AquaLumen.escapeLayer&&window.AquaLumen.escapeLayer();");
+                // один Esc закрывает слой, следующий за ним закрывает сам хаб:
+                // флаг модалок мог залипнуть, поэтому всегда отпускаем его здесь
+                modalOpen = false;
             } else {
                 onClose();
             }

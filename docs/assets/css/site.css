@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
   font-family: Ubuntu;
   font-style: normal;
   font-weight: 300;
@@ -5576,7 +5576,7 @@ body[data-page="profile"] .page-hero {
 }
 
 /* ==========================================================================
-   2. BENTO DASHBOARD В«Р–РР’РћР™ РћРљР•РђРќВ» (APPLE/MACOS STYLE)
+   2. BENTO DASHBOARD В«Р–РВОР™ ОКЕАНВ» (APPLE/MACOS STYLE)
    ========================================================================== */
 .bento-live-badge {
   display: inline-flex;
