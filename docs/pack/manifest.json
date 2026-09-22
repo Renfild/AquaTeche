@@ -1,5 +1,5 @@
 {
-  "version": "2.9.386",
+  "version": "2.9.387",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -36,8 +36,8 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.56-alpha.jar",
-      "md5": "4304d60dc4b0235670e8abfc6d7eb5d8",
-      "size": 2346435,
+      "md5": "0c4722d4cb0b0bc7c43d235feb2effc8",
+      "size": 2345844,
       "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.56-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.56-alpha.jar"
     },
@@ -554,8 +554,8 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "5f67edcb60658fb5312fe17dc68f9701",
-      "size": 858106,
+      "md5": "ab489090b626f1278c8495bf394e1cb8",
+      "size": 857083,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -568,8 +568,8 @@
     },
     {
       "path": "config/aqualumen/server_shop.json",
-      "md5": "3a9687da753f5c67bd05546a0ae54c71",
-      "size": 3156,
+      "md5": "44e48972366ffe64c8f7a8ccd920d9bd",
+      "size": 3145,
       "url": "https://aquateche.store/pack/config/aqualumen/server_shop.json",
       "asset": "config__aqualumen__server_shop.json"
     },
@@ -589,8 +589,8 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "5f67edcb60658fb5312fe17dc68f9701",
-      "size": 858106,
+      "md5": "ab489090b626f1278c8495bf394e1cb8",
+      "size": 857083,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
@@ -981,8 +981,8 @@
     },
     {
       "path": "kubejs/server_scripts/97_machines_recipes.js",
-      "md5": "9c8015acee200ac94df5bd2ed7fe12da",
-      "size": 5989,
+      "md5": "893aa4acc632201addc0bc69bd540cb3",
+      "size": 6030,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/97_machines_recipes.js",
       "asset": "kubejs__server_scripts__97_machines_recipes.js"
     },

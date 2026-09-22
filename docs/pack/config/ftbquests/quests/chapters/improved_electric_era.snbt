@@ -1,0 +1,3091 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "improved_electric_era"
+	group: "31719A5E7B6EF622"
+	icon: "industrialupgrade:basemachine3/pallet_generator"
+	id: "5CB739BB1BDB799A"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["799AE4C1FE0064F3"]
+			description: [
+				"Электрический лазерный полировщик. Точно обрабатывает"
+				"кристаллы и детали, которым нужна чистая поверхность."
+			]
+			entity_vis_size: 1.0f
+			id: "2F3318CF641E793D"
+			rewards: [
+				{
+					count: 8
+					id: "72B5F5BA524488EE"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "727BE79553336325"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "52F35DE3D5209C58"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "00848F8EAB0BC20A"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "0361FE368316CB82"
+				item: "industrialupgrade:basemachine3/laser_polisher"
+				type: "item"
+			}]
+			title: "Лазерный полировщик"
+			x: -1.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["2F3318CF641E793D"]
+			description: [
+				"Автоматически работает с грядками и растениями в зоне"
+				"действия. Берёт на себя рутинный уход за посевами."
+			]
+			entity_vis_size: 1.0f
+			id: "62DB17D90A3021C8"
+			rewards: [
+				{
+					count: 8
+					id: "6487580F07DB4419"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "2778654CB24EBCBC"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "57E05A968ACE782C"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "60D14D0BD066ADF1"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "07783CDD8C256C74"
+				item: "industrialupgrade:moremachine3/farmer"
+				type: "item"
+			}]
+			title: "Автономная ферма"
+			x: -1.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["62DB17D90A3021C8"]
+			description: [
+				"Удобрение для ускорения роста растений. Используется в"
+				"аграрных механиках и автоматических фермах."
+			]
+			entity_vis_size: 1.0f
+			id: "0DE9504EB3737C7E"
+			rewards: [
+				{
+					count: 8
+					id: "12ED73F3381A720F"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "6377F54F3D86F01E"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "2DCF5487D28DCCAB"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "5731C06D239A661F"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "759E3E577C875154"
+				item: "industrialupgrade:fertilizer"
+				type: "item"
+			}]
+			title: "Удобрение"
+			x: 0.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["0DE9504EB3737C7E"]
+			description: [
+				"Одиночная агроферма для одного участка культуры."
+				"Следит за растением и выполняет операции ухода в своей"
+				"зоне."
+			]
+			entity_vis_size: 1.0f
+			id: "4627A7CE8956472D"
+			rewards: [
+				{
+					count: 8
+					id: "2F1C2019D2DA37A9"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "6181CFA8632CA072"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "76EB4D6759F78B15"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "72C60B083569242E"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "796A3F87FC950879"
+				item: "industrialupgrade:basemachine3/single_multi_crop"
+				type: "item"
+			}]
+			title: "Одиночная агроферма"
+			x: 3.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["2F3318CF641E793D"]
+			description: [
+				"Стальная сетка для фильтрации и армирования."
+				"Используется в машинах, где материал нужно просеять или"
+				"усилить."
+			]
+			entity_vis_size: 1.0f
+			id: "1C92BBBD0E10328C"
+			rewards: [
+				{
+					count: 8
+					id: "1F9CB285AEF3D5A2"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "5E3D0EA0A602E449"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "7560D16967392E42"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
+				}
+				{
+					id: "124ACDAA40D44209"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "5E18ACF5E59165FF"
+				item: "industrialupgrade:mesh/steelmesh"
+				type: "item"
+			}]
+			title: "Steelmesh"
+			x: -1.5d
+			y: 0.0d
+		}
+		{
+			description: [
+				"Лёгкий металл для аккумуляторов и специальных сплавов."
+				"Особенно полезен в энергетических компонентах."
+			]
+			entity_vis_size: 1.0f
+			id: "56246C18C422E34C"
+			rewards: [
+				{
+					count: 8
+					id: "6BACAE74212F8D13"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "6987BDC80E3B093B"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "60DCC3692F9885CB"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "75184087C31397F7"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "0F72CCD3C5ACBEE6"
+				item: "industrialupgrade:baseore1/lithium"
+				type: "item"
+			}]
+			title: "Литиевая пыль"
+			x: 3.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["56246C18C422E34C"]
+			description: [
+				"Перезаряжаемый аккумулятор. Хранит EF в предмете и"
+				"отдаёт её машинам или инструментам, которые"
+				"поддерживают зарядку."
+			]
+			entity_vis_size: 1.0f
+			id: "42098767DF38FCCF"
+			rewards: [
+				{
+					count: 8
+					id: "4EF5776BFF0C3434"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "0352AF9A4B91CD75"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "3C7E90BB461650DD"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "76A5936890FFAC1F"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "7711021F63E54AD8"
+				item: {
+					Count: 1
+					id: "industrialupgrade:battery/charging_re_battery"
+					tag: {
+						charge: 40000.0d
+					}
+				}
+				type: "item"
+			}]
+			title: "Rebattery"
+			x: 4.5d
+			y: -2.5d
+		}
+		{
+			description: [
+				"Планировщик многоблоков. Показывает схему конструкции"
+				"и помогает проверять правильность сборки перед"
+				"запуском."
+			]
+			entity_vis_size: 1.0f
+			id: "659AC41F1A9744D1"
+			rewards: [
+				{
+					count: 8
+					id: "5AEC9F17BFEACB49"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "77ADEE43101A9409"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "33610B8EA0C740D0"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
+				}
+				{
+					id: "563C019288150545"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "3864908AFF09C0EF"
+				item: "industrialupgrade:tools/multiblock_planner"
+				type: "item"
+			}]
+			title: "Планировщик многоблочных структур"
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			description: [
+				"Инструмент разведки нефтяных залежей. Помогает найти и"
+				"проверить месторождения нефти."
+			]
+			entity_vis_size: 1.0f
+			id: "7BD2D9ADCEABA098"
+			rewards: [
+				{
+					count: 8
+					id: "5538FDAF4EEA9D23"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "749749323C0BC558"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "7DE591A6BED8633F"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "68C8E17DE9A1C6FB"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "12321D739CF9F6AB"
+				item: "industrialupgrade:crafting_elements/crafting_251_element"
+				type: "item"
+			}]
+			title: "Oilgetter"
+			x: 5.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["7BD2D9ADCEABA098"]
+			description: [
+				"Продвинутый нефтеперерабатывающий завод. Разделяет"
+				"нефть на более полезные топливные и химические фракции."
+			]
+			entity_vis_size: 1.0f
+			id: "2A7955582C506033"
+			rewards: [
+				{
+					count: 8
+					id: "0BBCE979C70F5BFF"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "24A6D7FD8ECA52D6"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "132C80ABE30E1DD8"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "2554E590F9156D24"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "6DA54588054D0800"
+				item: {
+					Count: 1
+					id: "industrialupgrade:basemachine3/imp_refiner"
+					tag: { }
+				}
+				type: "item"
+			}]
+			title: "Oiladvrefiner"
+			x: 7.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["2A7955582C506033"]
+			description: [
+				"Коксовая печь для медленной термической переработки"
+				"топлива и органики. Даёт продукты, нужные металлургии и"
+				"химии."
+			]
+			entity_vis_size: 1.0f
+			id: "273E72712FB0FB32"
+			rewards: [
+				{
+					count: 8
+					id: "36E9F3DF4598906F"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "0920A795592ED4CA"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "04A7B7F73EDE0AB0"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "172C56DD56D563C0"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "3EA40BF59D12C85C"
+				item: "industrialupgrade:adv_cokeoven/adv_coke_oven_output_fluid"
+				type: "item"
+			}]
+			title: "§eЖидкостный выход улучшенной коксовой печи"
+			x: 8.5d
+			y: -1.0d
+		}
+		{
+			description: [
+				"Дозиметр показывает уровень радиации. Нужен для"
+				"проверки опасных зон, радиоактивных предметов и ядерных"
+				"установок."
+			]
+			entity_vis_size: 1.0f
+			id: "44E3CD3BC02FFF63"
+			rewards: [
+				{
+					count: 8
+					id: "56833F7C9D892C9E"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "11F8D592FA47D7A4"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "63D1CC9C6AE98CC7"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					id: "7AB779EFF1F849A9"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "0FF2DD7BEE702224"
+				item: "industrialupgrade:crafting_elements/crafting_40_element"
+				type: "item"
+			}]
+			title: "Dosimeter"
+			x: 10.0d
+			y: -1.0d
+		}
+		{
+			description: [
+				"Средство защиты от радиационного воздействия. Снижает"
+				"опасность при работе с радиоактивными материалами."
+			]
+			entity_vis_size: 1.0f
+			id: "2DC59AB419E24647"
+			rewards: [
+				{
+					count: 8
+					id: "277CE8E3D5CB7160"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "4539FE03E330E2E9"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "72F0C8A6C1867C5D"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					id: "5C7492927A106BB0"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "561FF5796FDE6C84"
+				item: "industrialupgrade:tools/radioprotector"
+				type: "item"
+			}]
+			title: "Radioprotector"
+			x: 9.5d
+			y: -4.5d
+		}
+		{
+			description: [
+				"Защитный костюм для опасной среды. Помогает пережить"
+				"радиацию, загрязнение и химические риски при работе с"
+				"опасными механизмами."
+			]
+			entity_vis_size: 1.0f
+			id: "347C8B9373722927"
+			rewards: [
+				{
+					count: 8
+					id: "3A45DF13DFA4BFAC"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "56AC094DC7B6E7CD"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "31CB16E1D88F4F95"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					id: "37843119A21F15A1"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "7B2F97A99DC13FE6"
+				item: {
+					Count: 1
+					id: "industrialupgrade:armour/hazmat_leggings"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "Защитные штаны"
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			description: [
+				"Собирает детали топливных стержней для реакторов."
+				"Работает с оболочками, топливом и компонентами ядерной"
+				"цепочки."
+			]
+			entity_vis_size: 1.0f
+			id: "5CDD60C29B5FD0FF"
+			rewards: [
+				{
+					count: 8
+					id: "7D3919F3ED847D53"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "62BA270B24D87C9D"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "3F72C2679CB1197C"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "2DA654974156D0EB"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "5D68509232CFFDED"
+				item: "industrialupgrade:basemachine3/reactor_rod_factory"
+				type: "item"
+			}]
+			title: "Производитель реакторных стержней"
+			x: 7.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["5CDD60C29B5FD0FF"]
+			description: [
+				"Урановый топливный стержень для реактора. Выделяет"
+				"тепло и энергию в ядерной установке, постепенно"
+				"вырабатывая ресурс."
+			]
+			entity_vis_size: 1.0f
+			id: "7263655581D9FAFE"
+			rewards: [
+				{
+					count: 8
+					id: "6E524834EF6FB9B9"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "72D3B55DAD462894"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "0B01FEE5B2A06155"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "35B4AB8FC0D37339"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "0BB7AE0D9475F8A2"
+				item: "industrialupgrade:reactors/uranium_fuel_rod"
+				type: "item"
+			}]
+			title: "Урановый стержень"
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			description: [
+				"Свинцовый контейнер для радиоактивных предметов."
+				"Изолирует опасный материал и уменьшает риск при"
+				"хранении или переноске."
+			]
+			entity_vis_size: 1.0f
+			id: "01C7138572D04138"
+			rewards: [
+				{
+					count: 8
+					id: "4C5C083185359E62"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "58952E3F2D25BC9D"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "6C0D86FFE9B56748"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "0031843F3E1DDFEA"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "56CA3E91B665445A"
+				item: "industrialupgrade:bags/lead_box"
+				type: "item"
+			}]
+			title: "Leadbox"
+			x: 5.0d
+			y: 2.0d
+		}
+		{
+			description: [
+				"Топливные гранулы для ядерной цепочки. Используются"
+				"как подготовленная форма радиоактивного материала."
+			]
+			entity_vis_size: 1.0f
+			id: "10A51CD32949BDBA"
+			rewards: [
+				{
+					count: 8
+					id: "6C0E9F692F2C6D5F"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "162D9BFB7DFF0DDA"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "485070D039FBCADD"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "6BFCB25CE92AD79A"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "274DD9CE0166BA7C"
+				item: "industrialupgrade:pellets/mendelevium_gem_pellet"
+				type: "item"
+			}]
+			title: "Пеллета менделеева"
+			x: 7.0d
+			y: 2.0d
+		}
+		{
+			description: [
+				"Формирует топливные гранулы из подготовленного"
+				"материала. Используется перед сборкой ядерного топлива."
+			]
+			entity_vis_size: 1.0f
+			id: "71B4B29D9B722ADD"
+			rewards: [
+				{
+					count: 8
+					id: "4A0308B20F5BF21C"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "0FD5B4929EAE8BD2"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "7D555332BE12F336"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "0DC5F4709F9184D7"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "5EDBB859F2A3AB6C"
+				item: "industrialupgrade:basemachine3/pallet_generator"
+				type: "item"
+			}]
+			title: "Радиоизотопный термоэлектрический генератор"
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			description: [
+				"Блок аварийной защиты реактора. Следит за опасными"
+				"состояниями и помогает снизить риск неконтролируемой"
+				"работы."
+			]
+			entity_vis_size: 1.0f
+			id: "59E975BC6DA45CDD"
+			rewards: [
+				{
+					count: 8
+					id: "5517351426309248"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "27D7E40722895CB4"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "72800FE7D5CE54BC"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "68C26EFE00B334C8"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "41D4E53D9F421614"
+				item: "industrialupgrade:basemachine3/reactor_safety_doom"
+				type: "item"
+			}]
+			title: "Защитный купол реактора"
+			x: 9.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["59E975BC6DA45CDD"]
+			description: [
+				"Контроллер реакторной установки. Управляет"
+				"многоблочной схемой охлаждения и рабочими частями"
+				"реактора."
+			]
+			entity_vis_size: 1.0f
+			id: "278C67C3AAC40F73"
+			rewards: [
+				{
+					count: 8
+					id: "125260BF61F9753F"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "12DD2BC999158F4B"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "2573D63284FAF47C"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "6E1B199910683FC2"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "4C0B29C165771431"
+				item: "industrialupgrade:water_reactors/water_controller"
+				type: "item"
+			}]
+			title: "Контроллер жидкостного реактора"
+			x: 11.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["59E975BC6DA45CDD"]
+			description: [
+				"Газовый контроллер реактора. Отдельная ветка от"
+				"жидкостного: другая схема охлаждения и топливо."
+			]
+			entity_vis_size: 1.0f
+			id: "7394EE386CB22493"
+			rewards: [
+				{
+					count: 8
+					id: "6991D09E80FA1523"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "44060BF031F3E888"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "000DE3C1912A197A"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "0C9D4D65B2D1CC0D"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "639496EED6F7EAE3"
+				item: "industrialupgrade:gas_reactor/gas_controller"
+				type: "item"
+			}]
+			title: "Контроллер газового реактора"
+			x: 11.0d
+			y: 2.5d
+		}
+		{
+			description: [
+				"Лазурный бриллиантовый раствор используется как"
+				"специальная жидкость для защиты и высокоуровневой"
+				"обработки. В коде он связан с радиозащитными предметами"
+				"и жидкостным адаптером."
+			]
+			entity_vis_size: 1.0f
+			id: "23CC2A35A948DB47"
+			rewards: [
+				{
+					count: 8
+					id: "6B05726241C37259"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "3612CAE66EFB9BB3"
+					item: "minecraft:bucket"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "77254EEE9852C216"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "2C6CB29EE55D8450"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "46DDB2DE825EDE44"
+				item: "industrialupgrade:bucket/azurebrilliant"
+				type: "item"
+			}]
+			title: "Azurebrilliant"
+			x: 11.5d
+			y: -4.5d
+		}
+		{
+			description: [
+				"Индустриальное масло — тяжёлая нефтяная фракция."
+				"Получается в нефтепереработке и используется как база"
+				"для моторного масла, топлива и химических смесей."
+			]
+			entity_vis_size: 1.0f
+			id: "0692F23EACB160BB"
+			rewards: [
+				{
+					count: 8
+					id: "79F5D1AF130E821D"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "1C9C6C604A93E514"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "71F30CE536B2F482"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "2510EF610B99E8E1"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "5BF9B0A28FDEE7C7"
+				item: "industrialupgrade:bucket/industrialoil"
+				type: "item"
+			}]
+			title: "Industrialoil"
+			x: 11.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["0692F23EACB160BB"]
+			description: [
+				"Моторное масло — смазочная жидкость для машинных"
+				"процессов. Оно участвует в механизмах обработки, снижая"
+				"нагрузку/износ в рецептах, где машина требует"
+				"техническую смазку."
+			]
+			entity_vis_size: 1.0f
+			id: "72F2BAA173025C75"
+			rewards: [
+				{
+					count: 8
+					id: "43A70AAF4F36E462"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "0EC35A7AFEAD74A8"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "632E9F9178763772"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "7E3C5B6FA4E9595C"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "1D3D4D7D779B8CCD"
+				item: "industrialupgrade:bucket/motoroil"
+				type: "item"
+			}]
+			title: "Motoroil"
+			x: 11.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["72F2BAA173025C75"]
+			description: [
+				"Солнечный дистиллятор. Использует солнечное тепло для"
+				"испарения и очистки жидкости без обычного топлива."
+			]
+			entity_vis_size: 1.0f
+			id: "2F87B9005A1ABB02"
+			rewards: [
+				{
+					count: 8
+					id: "503C5D186586A5E3"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "3B71333814EEFB33"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					id: "4833174273B9E3D8"
+					item: {
+						Count: 2b
+						id: "industrialupgrade:solar_energy"
+					}
+					type: "item"
+				}
+				{
+					id: "7A40AA04967BDC83"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "4DDE2990F956FBF4"
+				item: "industrialupgrade:basemachine3/solardestiller"
+				type: "item"
+			}]
+			title: "Солнечный опреснитель"
+			x: 12.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["2F87B9005A1ABB02"]
+			description: [
+				"Адаптер для превращения предмета в жидкостный"
+				"эквивалент или обратно по поддерживаемой схеме."
+				"Используется в материалах с точным объёмом жидкости."
+			]
+			entity_vis_size: 1.0f
+			id: "3A0B70FFF3100955"
+			rewards: [
+				{
+					count: 8
+					id: "7B1AB4D53C5F43B2"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "6E14E5BA063A7E2A"
+					item: "industrialupgrade:itemplates/steel_plate"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "1C5451998F44C588"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "5A8A9964B91D8A76"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "29E81FEC98E3A49B"
+				item: "industrialupgrade:basemachine3/single_fluid_adapter"
+				type: "item"
+			}]
+			title: "Одиночный жидкостный адаптер"
+			x: 13.5d
+			y: -2.5d
+		}
+		{
+			description: [
+				"Принимает воду и лаву во внутренние баки, тратит EF и"
+				"создаёт обсидиан в выходной слот. Это генератор блока,"
+				"а не энергетический генератор."
+			]
+			entity_vis_size: 1.0f
+			id: "1B182CC17203A0E7"
+			rewards: [
+				{
+					count: 8
+					id: "16DE429D5790E789"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "2A8D3CC47D2F61BD"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "7816D77FAF82EA2A"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
+				}
+				{
+					id: "05BF99FDF86642B6"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "66A3B66E038ACDD2"
+				item: "industrialupgrade:basemachine2/gen_obsidian"
+				type: "item"
+			}]
+			title: "Генератор обсидиана"
+			x: 14.5d
+			y: -4.5d
+		}
+		{
+			description: [
+				"Автоматически ловит рыбу через ванильную таблицу"
+				"рыбалки. Требует воду под машиной, удочку или"
+				"энергетический аналог в слоте и тратит EF за улов."
+			]
+			entity_vis_size: 1.0f
+			id: "1CD43390D8A95BDD"
+			rewards: [
+				{
+					count: 8
+					id: "6D5569C8863C8D20"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "2A912F70F1B88EDB"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "7CC08F8B29AB3780"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "5141D5013B6A3E67"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "3E7B7FD8F31EE4FC"
+				item: "industrialupgrade:basemachine2/fisher"
+				type: "item"
+			}]
+			title: "Рыболовная машина"
+			x: 15.5d
+			y: -5.5d
+		}
+		{
+			description: [
+				"Создаёт визер-ресурсы в машинном процессе."
+				"Используется для опасных материалов, которые неудобно"
+				"получать вручную."
+			]
+			entity_vis_size: 1.0f
+			id: "21219CCC53D2E53D"
+			rewards: [
+				{
+					count: 8
+					id: "36D8F8FA81AF0FCD"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "52A2995BAAE00790"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "2F50B883918102BC"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "4782B1958ADEF053"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "778E4D0A74E508EE"
+				item: "industrialupgrade:basemachine1/gen_wither"
+				type: "item"
+			}]
+			title: "Производитель иссушителей"
+			x: 16.5d
+			y: -4.5d
+		}
+		{
+			description: [
+				"Охлаждающая смесь для реакторов и холодильных"
+				"механизмов. Отводит тепло там, где обычной воды или"
+				"воздуха недостаточно."
+			]
+			entity_vis_size: 1.0f
+			id: "62C901BB66235563"
+			rewards: [
+				{
+					count: 8
+					id: "44B887CBD5ACC270"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "1041DF8F75E54AF0"
+					item: "minecraft:bucket"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "2530C32C1A6EED4D"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "00630EAB72026684"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "1830737E249CBE79"
+				item: "industrialupgrade:cooling_mixture"
+				type: "item"
+			}]
+			title: "Cooling Mixture"
+			x: 14.5d
+			y: -2.5d
+		}
+		{
+			description: [
+				"Строительная пена — жидкий материал для распылителя и"
+				"жидкостных машин. Используется для быстрого"
+				"создания/заполнения строительных блоков и как реагент в"
+				"интеграторах."
+			]
+			entity_vis_size: 1.0f
+			id: "3D262962E5AD649F"
+			rewards: [
+				{
+					count: 8
+					id: "019018BDD69F3DA8"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "76066DB96ABD33DC"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "42E5BCBCCE17AAE0"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
+				}
+				{
+					id: "09DA898ABDFBFCF2"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "0C444D86DD1E0B8F"
+				item: "industrialupgrade:bucket/construction_foam"
+				type: "item"
+			}]
+			title: "Капсула жидкой строительной пены"
+			x: 17.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3D262962E5AD649F"]
+			description: [
+				"Распылитель для строительной пены и похожих жидкостей."
+				"Наносит содержимое на блоки в мире."
+			]
+			entity_vis_size: 1.0f
+			id: "619A0F5399845774"
+			rewards: [
+				{
+					count: 8
+					id: "4706AC89A2C881ED"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "2761F3D466A6E9B4"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "2F9C77FABC44326C"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
+				}
+				{
+					id: "529999A99DB1D368"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "75CAF151C650BBE6"
+				item: "industrialupgrade:tools/foam_sprayer"
+				type: "item"
+			}]
+			title: "Sprayer"
+			x: 17.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["619A0F5399845774"]
+			description: [
+				"Укреплённый камень для прочных конструкций и защиты."
+				"Выдерживает нагрузки лучше обычного строительного"
+				"блока."
+			]
+			entity_vis_size: 1.0f
+			id: "7DD2BF6718E9F3D8"
+			rewards: [
+				{
+					count: 8
+					id: "630236B182076B33"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "0AC82DD4A7F6DEFF"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "494808EBD59FCCFB"
+					item: "industrialupgrade:itemplates/iron_plate"
+					type: "item"
+				}
+				{
+					id: "487B1F2FEA78FBD4"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "0146A574148A405A"
+				item: "industrialupgrade:blockresource/reinforced_stone"
+				type: "item"
+			}]
+			title: "Reinforcedstone"
+			x: 17.5d
+			y: 0.5d
+		}
+		{
+			description: [
+				"Генерирует жидкую материю из энергии и входных"
+				"ресурсов. Используется в материальной переработке и"
+				"репликации."
+			]
+			entity_vis_size: 1.0f
+			id: "4D2928D2BA2AFC74"
+			rewards: [
+				{
+					count: 8
+					id: "1CC2C8A6C9085D94"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "156C7DFFED8D7DF5"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "49EAB6F863CD1C63"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "6CFB37E60478F503"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "5BE17D0BA925DA75"
+				item: "industrialupgrade:simplemachine/generator_matter"
+				type: "item"
+			}]
+			title: "Генератор жидкой материи"
+			x: 14.5d
+			y: 2.0d
+		}
+		{
+			description: [
+				"Сканирует предмет и записывает его шаблон. Нужен для"
+				"систем, которые работают с материей и точным"
+				"воспроизведением предметов."
+			]
+			entity_vis_size: 1.0f
+			id: "13C48C8BF8457ED2"
+			rewards: [
+				{
+					count: 8
+					id: "0AA434C5246FD379"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "668EA7559E7ABA5C"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "0D5AA74959FA6206"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "3E62E7631DF0830A"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "7CCBB2706D74168B"
+				item: "industrialupgrade:basemachine3/scanner_iu"
+				type: "item"
+			}]
+			title: "Сканер"
+			x: 16.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["13C48C8BF8457ED2"]
+			description: [
+				"Хранит отсканированные шаблоны предметов. Позволяет"
+				"держать несколько паттернов для последующей репликации."
+			]
+			entity_vis_size: 1.0f
+			id: "6D37EAACFA8611C2"
+			rewards: [
+				{
+					count: 8
+					id: "439FA3BEE23A1ABD"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "756B38FF23E92EBE"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "3D076F460391D0F5"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "58503F3DEE939993"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "300F814DF8E4FA33"
+				item: "industrialupgrade:basemachine3/pattern_storage_iu"
+				type: "item"
+			}]
+			title: "Хранилище шаблонов"
+			x: 17.5d
+			y: 2.0d
+		}
+		{
+			description: [
+				"Воссоздаёт предмет по сохранённому шаблону, расходуя"
+				"материю и энергию. Работает как финальная машина"
+				"репликационной системы."
+			]
+			entity_vis_size: 1.0f
+			id: "36D96BB8AB34E6A4"
+			rewards: [
+				{
+					count: 8
+					id: "192F948CB279168F"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "6D94D1DBF96C7C8C"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "56FFB1E1AEAC19AB"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "0B1339D16B92423C"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "1F66DDC6F10AC8D8"
+				item: "industrialupgrade:basemachine3/replicator_iu"
+				type: "item"
+			}]
+			title: "Репликатор"
+			x: 19.0d
+			y: 2.0d
+		}
+		{
+			description: [
+				"Собирает материю или материальный ресурс из окружающей"
+				"системы. Используется как источник для машин"
+				"репликации."
+			]
+			entity_vis_size: 1.0f
+			id: "5F7E7C02EB6A0022"
+			rewards: [
+				{
+					count: 8
+					id: "2CC5DF47ACE9E041"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "6DA8A5A66711ABA1"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "76B2AA081A876A6B"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "208AC39310C989B6"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "35FBE6E34A843C5E"
+				item: "industrialupgrade:basemachine3/matter_collector"
+				type: "item"
+			}]
+			title: "§dСборщик материи"
+			x: 20.5d
+			y: 2.0d
+		}
+		{
+			description: [
+				"Коробка утиля со случайным содержимым. Открывается как"
+				"переработанный материал, полученный из скрапа."
+			]
+			entity_vis_size: 1.0f
+			id: "63AFEF7090CA60DC"
+			rewards: [
+				{
+					count: 8
+					id: "49F967470D85A938"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "5145D8C9AFBA16D8"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "07CD82E4C00E40E5"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "7D68E349F25F2BF1"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "594B2677E4AD1C53"
+				item: "industrialupgrade:doublescrapbox"
+				type: "item"
+			}]
+			title: "Scrapbox"
+			x: 17.5d
+			y: 3.5d
+		}
+		{
+			description: [
+				"Автоматически обрабатывает скрап и коробки утиля."
+				"Удобен для массовой переработки отходов."
+			]
+			entity_vis_size: 1.0f
+			id: "26F0A0C89BB68DF5"
+			rewards: [
+				{
+					count: 8
+					id: "5DF8AF5FCCC4F414"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "46FA282C174D83B7"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "0367D0F1C7729646"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "52200E3E9CCDDC6A"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "3635CD580C32049D"
+				item: "industrialupgrade:moremachine3/assamplerscrap"
+				type: "item"
+			}]
+			title: "Сборщик утильсырья"
+			x: 17.5d
+			y: 5.0d
+		}
+		{
+			description: [
+				"Ускоряет работу машины, обычно увеличивая расход"
+				"энергии. Используется в слотах улучшений поддерживаемых"
+				"механизмов."
+			]
+			entity_vis_size: 1.0f
+			id: "55329A469452C186"
+			rewards: [
+				{
+					count: 8
+					id: "65C34B4D0B191552"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "4C7999C22E76D6FC"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "15333F728B98185D"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "112448139A0A5CCD"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "217FB61500E16A91"
+				item: "industrialupgrade:upgrades/overclockerupgrade1"
+				type: "item"
+			}]
+			title: "Overclockerupgrade"
+			x: 13.0d
+			y: 2.5d
+		}
+		{
+			description: [
+				"Повышает допустимый энергетический уровень машины."
+				"Помогает безопасно подключать механизм к более сильной"
+				"сети."
+			]
+			entity_vis_size: 1.0f
+			id: "0865F55FDA11ABCA"
+			rewards: [
+				{
+					count: 8
+					id: "7B1DE5B104DC72F6"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "19955E349E96EAA2"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "78E42F8772E29156"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "696B81CB37FAEAC3"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "283B434175C129EC"
+				item: "industrialupgrade:upgrades/transformerupgrade1"
+				type: "item"
+			}]
+			title: "Transformerupgrade"
+			x: 12.0d
+			y: 2.5d
+		}
+		{
+			description: [
+				"Энергетическое хранилище среднего уровня. Накапливает"
+				"EF и отдаёт её в сеть через настроенные стороны."
+			]
+			entity_vis_size: 1.0f
+			id: "59F5CC3C9A10473A"
+			rewards: [
+				{
+					count: 8
+					id: "1BB445047B7E893D"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "789E2A7589D9265F"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "03E73B72C1A2D838"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "2AC45F1BD4034834"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "4210C3B60DD144EA"
+				item: "industrialupgrade:wiring_storage/mfe_iu"
+				type: "item"
+			}]
+			title: "МФЭ"
+			x: 27.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["59F5CC3C9A10473A"]
+			description: [
+				"Уничтожает поступающую жидкость. Нужен для безопасного"
+				"сброса лишних жидкостей из автоматических линий."
+			]
+			entity_vis_size: 1.0f
+			id: "4D0576505CB6329D"
+			rewards: [
+				{
+					count: 8
+					id: "4D7D9148798DC0F8"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "4EB9693E3BCC05FA"
+					item: "industrialupgrade:blockresource/machine"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "76508BC9D7B3ABDE"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "24C9826C4836CA5F"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "226BC7CCF51A5CEC"
+				item: "industrialupgrade:basemachine3/fluid_trash"
+				type: "item"
+			}]
+			title: "Мусорный бак для жидкостей"
+			x: 25.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["59F5CC3C9A10473A"]
+			description: [
+				"Поглощает лишнюю энергию. Используется как нагрузка"
+				"или аварийный слив для энергетической сети."
+			]
+			entity_vis_size: 1.0f
+			id: "607668745EE40C65"
+			rewards: [
+				{
+					count: 8
+					id: "7F22D574AA5D0591"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "3BBCCD6F3530464D"
+					item: "industrialupgrade:blockresource/machine"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "31E1C037E1B2CB6F"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "2FE8848F3D46B43D"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "7B6EB8CD4FDB155A"
+				item: "industrialupgrade:basemachine3/energy_trash"
+				type: "item"
+			}]
+			title: "Мусорный бак для энергии"
+			x: 28.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["59F5CC3C9A10473A"]
+			description: [
+				"Уничтожает предметы из входа. Полезен для линий, где"
+				"нужно удалять мусор и лишние побочные продукты."
+			]
+			entity_vis_size: 1.0f
+			id: "1CBBB52AEC252AE8"
+			rewards: [
+				{
+					count: 8
+					id: "2E91D285B644F87C"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "4DF2CDE6F355B96E"
+					item: "industrialupgrade:blockresource/machine"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "3AE3A24FD53D88BD"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "6907D5EE0C31AC9F"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "74C273B96B9F3E31"
+				item: "industrialupgrade:basemachine3/item_trash"
+				type: "item"
+			}]
+			title: "Мусорный бак для предметов"
+			x: 27.0d
+			y: 9.5d
+		}
+		{
+			dependencies: ["59F5CC3C9A10473A"]
+			description: [
+				"Разлагает жидкости или материалы электрическим"
+				"процессом. Используется в химии для получения газов и"
+				"отдельных компонентов."
+			]
+			entity_vis_size: 1.0f
+			id: "62C29E832ED5F713"
+			rewards: [
+				{
+					count: 8
+					id: "1AA172F729416C87"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "627335EA9DBB1188"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "572508D4BB3257B4"
+					item: {
+						Count: 16b
+						id: "industrialupgrade:cable/copper_cable"
+					}
+					type: "item"
+				}
+				{
+					id: "735A43AED1085D8E"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "15A2E181D4CF3F35"
+				item: "industrialupgrade:basemachine2/electrolyzer_iu"
+				type: "item"
+			}]
+			title: "Электролизёр"
+			x: 23.5d
+			y: 5.75d
+		}
+		{
+			dependencies: ["62C29E832ED5F713"]
+			description: [
+				"Работает с зачарованными книгами и опытом. Позволяет"
+				"обрабатывать или получать книги зачарований машинным"
+				"способом."
+			]
+			entity_vis_size: 1.0f
+			id: "6F35DF1E3D454B58"
+			rewards: [
+				{
+					count: 8
+					id: "5A6C5F2AEB524443"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "315030CB4513BB9E"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "5E71C5F8A0900405"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "57BA7EA139A76B5F"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "059E3F3C23B19313"
+				item: "industrialupgrade:basemachine3/enchanter_books"
+				type: "item"
+			}]
+			title: "Чаровальная машина"
+			x: 22.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["62C29E832ED5F713"]
+			description: [
+				"Молекулярный преобразователь. Тратит энергию на"
+				"превращение одного материала в другой по заданным"
+				"рецептам."
+			]
+			entity_vis_size: 1.0f
+			id: "5BDD944A91FAED4E"
+			rewards: [
+				{
+					count: 8
+					id: "60D8EFB606B94E7F"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "1FF0EEA8EFFBB832"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "5379D45BFE3F5BE6"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					id: "2F5465386BD27804"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "4A8A2BBFF349F000"
+				item: "industrialupgrade:molecular/molecular"
+				type: "item"
+			}]
+			title: "Молекулярный преобразователь"
+			x: 21.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["5BDD944A91FAED4E"]
+			description: [
+				"Продвинутая солнечная панель. Производит больше"
+				"энергии от света, чем базовые солнечные элементы."
+			]
+			entity_vis_size: 1.0f
+			id: "24CEC12E03AA9623"
+			rewards: [
+				{
+					count: 8
+					id: "1A0F4E5B336EE8F0"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "64CBA9CF8C011023"
+					item: "industrialupgrade:machines/hybrid_solar_paneliu"
+					type: "item"
+				}
+				{
+					id: "0BA96B79EF9AA36D"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "3AF7A160FF814CA4"
+				item: "industrialupgrade:machines/advanced_solar_paneliu"
+				type: "item"
+			}]
+			title: "§6Улучшенная солнечная панель"
+			x: 19.0d
+			y: 7.0d
+		}
+		{
+			description: [
+				"Малая солнечная панель. Компактно производит энергию"
+				"от света и подходит для небольших установок."
+			]
+			entity_vis_size: 1.0f
+			id: "48AA9F5A6B30A2AE"
+			rewards: [
+				{
+					count: 8
+					id: "4EF377C9E0EF3316"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "4ED4583C97F7D980"
+					item: "industrialupgrade:machines/advanced_solar_paneliu"
+					type: "item"
+				}
+				{
+					id: "7B20D0A5A4F88286"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					id: "5547F890450F584B"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "036160E7AD9B4325"
+				item: "industrialupgrade:basemachine3/minipanel"
+				type: "item"
+			}]
+			title: "Сборщик мини-панели"
+			x: 6.0d
+			y: 3.0d
+		}
+		{
+			description: [
+				"Контроллер молниеотвода. Управляет установкой, которая"
+				"принимает энергию от ударов молнии."
+			]
+			entity_vis_size: 1.0f
+			id: "19FE800A052DE507"
+			rewards: [
+				{
+					count: 8
+					id: "41AAA620D92EB45C"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "1B07CFB972E2F878"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "44D06923252F5734"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "21E23EBB1457DD6E"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "4382CB55EA3E735D"
+				item: "industrialupgrade:lightning_rod/lightning_rod_controller"
+				type: "item"
+			}]
+			title: "Контроллер громоотвода"
+			x: 5.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["48AA9F5A6B30A2AE"]
+			description: [
+				"Фабрика компонентов материи. Производит части, нужные"
+				"для материальных машин и репликации."
+			]
+			entity_vis_size: 1.0f
+			id: "14B621FDEB77FA66"
+			rewards: [
+				{
+					count: 8
+					id: "4B06BB091FF0E17E"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "732BA833440D0291"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "6DE091C92D080149"
+					item: "industrialupgrade:battery/energy_crystal"
+					type: "item"
+				}
+				{
+					id: "081C29519E1D955C"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "76D7EAED858FA994"
+				item: "industrialupgrade:basemachine3/matter_factory"
+				type: "item"
+			}]
+			title: "Производитель активной массы"
+			x: 5.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["14B621FDEB77FA66"]
+			description: [
+				"Фабрика аккумуляторов. Собирает энергетические"
+				"элементы и батареи для предметов и машин."
+			]
+			entity_vis_size: 1.0f
+			id: "2B388CEFECBC3A38"
+			rewards: [
+				{
+					count: 8
+					id: "33CAB288805D2507"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "4C9CCE87F3894953"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "0288399EE7293EBB"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "19E0B3634D932631"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "24EDA5F125433D48"
+				item: "industrialupgrade:basemachine3/battery_factory"
+				type: "item"
+			}]
+			title: "Завод батареек"
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["2B388CEFECBC3A38"]
+			description: [
+				"Фабрика разъёмов и соединительных частей. Делает"
+				"электрические компоненты для кабелей, батарей и машин."
+			]
+			entity_vis_size: 1.0f
+			id: "7445F2B21D74EC46"
+			rewards: [
+				{
+					count: 8
+					id: "5A21D899EF9AFD7A"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "55CA8E13A4BC7779"
+					item: "industrialupgrade:battery/re_battery"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "5EF63BCDD872B571"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "37EA22CE783AA090"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "6727C8F702A1D909"
+				item: "industrialupgrade:basemachine3/socket_factory"
+				type: "item"
+			}]
+			title: "Завод розеток"
+			x: 3.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5BDD944A91FAED4E"]
+			description: [
+				"Фотониевый слиток для высокоуровневых энергетических и"
+				"световых технологий. Используется в продвинутых"
+				"корпусах и компонентах."
+			]
+			entity_vis_size: 1.0f
+			id: "45EDE4D6196298DC"
+			rewards: [
+				{
+					count: 8
+					id: "055E1E83062A030B"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "3AFCAF7119314688"
+					item: "industrialupgrade:machines/hybrid_solar_paneliu"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "529270EB1BCD20AA"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "53B37A0FAEED3F19"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "7538A48D6F54CDB0"
+				item: "industrialupgrade:photoniy_ingot"
+				type: "item"
+			}]
+			title: "Photoniy Ingot"
+			x: 21.0d
+			y: 8.5d
+		}
+		{
+			description: [
+				"Собирает воздух или атмосферные компоненты из"
+				"окружающей среды. Даёт газовое сырьё для химических и"
+				"экологических процессов."
+			]
+			entity_vis_size: 1.0f
+			id: "4A551D4E7A1B50F0"
+			rewards: [
+				{
+					count: 8
+					id: "3848A813F6476998"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "18AB2B5A64B61694"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "6A73A69EBAC8EAEB"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					id: "66F869E4243A6185"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "679669CC1F227191"
+				item: "industrialupgrade:basemachine3/aircollector"
+				type: "item"
+			}]
+			title: "Воздухоразделительная установка"
+			x: 7.0d
+			y: 4.5d
+		}
+		{
+			description: [
+				"Анализирует загрязнение и состояние почвы. Помогает"
+				"понять, насколько участок заражён или пригоден для"
+				"очистки."
+			]
+			entity_vis_size: 1.0f
+			id: "024FA4952B6CEE82"
+			rewards: [
+				{
+					count: 8
+					id: "666E6070D3CAA28F"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "6D3959CA65F9E5DB"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "108C6E1C66834C9C"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					id: "18864E4FD5A1F204"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "1C570BAFD3FD4780"
+				item: "industrialupgrade:basemachine3/soil_analyzer"
+				type: "item"
+			}]
+			title: "Анализатор почвы"
+			x: 9.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["024FA4952B6CEE82"]
+			description: [
+				"Очищает радиационное загрязнение в зоне действия."
+				"Используется для восстановления опасных участков после"
+				"ядерных процессов."
+			]
+			entity_vis_size: 1.0f
+			id: "4D43E665F35E9965"
+			rewards: [
+				{
+					count: 8
+					id: "2CB77E96D2A84216"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "2E95FE54F638ABD1"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "00620A8D7FE48C05"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					id: "550E0FDB0BCA54F9"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "0D490635273BD05E"
+				item: "industrialupgrade:basemachine3/radiation_purifier"
+				type: "item"
+			}]
+			title: "Радиационный очиститель"
+			x: 10.0d
+			y: 4.5d
+		}
+		{
+			description: [
+				"Синтезатор создаёт материалы из подготовленных"
+				"компонентов. Работает как машина сложной сборки"
+				"вещества."
+			]
+			entity_vis_size: 1.0f
+			id: "3C00517AB66CD7FC"
+			rewards: [
+				{
+					count: 8
+					id: "490D9AC6CE091EB5"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "0BF55D891F8D1B50"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "335849E06CDE0C46"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					id: "667080FA29D74B0E"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "6DEDB14C2E45BD2D"
+				item: "industrialupgrade:basemachine1/synthesis"
+				type: "item"
+			}]
+			title: "Реактор ядерного синтеза"
+			x: -1.5d
+			y: 8.5d
+		}
+		{
+			description: [
+				"Улучшение скорости для некоторых механизмов."
+				"Увеличивает темп работы там, где машина поддерживает"
+				"внутренний уровень ускорения."
+			]
+			entity_vis_size: 1.0f
+			id: "66FF7722D513A4A3"
+			rewards: [
+				{
+					count: 8
+					id: "4F6BA5CD1ACAA258"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "6217F58E90A75A25"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "2C88E17B94142E6D"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "699C9C7CB54EF2D2"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "1946EAB31509662D"
+				item: "industrialupgrade:upgrade_speed_creation"
+				type: "item"
+			}]
+			title: "Upgrade Speed Creation"
+			x: 7.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Сканер загрязнения показывает состояние воздуха, почвы"
+				"и опасных зон. Помогает искать источник загрязнения и"
+				"контролировать очистку."
+			]
+			entity_vis_size: 1.0f
+			id: "005E9F1FCBBC9B73"
+			rewards: [
+				{
+					count: 8
+					id: "42767B81EDB34014"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "009ECA3400B6E0D0"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "3C9FC59703539B7F"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					id: "651F27E0A9C02422"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "1C9B31948B4918A8"
+				item: "industrialupgrade:pollution_device"
+				type: "item"
+			}]
+			title: "Pollution Scanner"
+			x: 1.5d
+			y: 11.0d
+		}
+		{
+			description: [
+				"Контроллер паровой турбины управляет многоблоком,"
+				"который потребляет пар и выдаёт энергию. Проверяет"
+				"структуру, рабочие части и поток пара."
+			]
+			entity_vis_size: 1.0f
+			id: "0BDA289C9B67C1EB"
+			rewards: [
+				{
+					count: 8
+					id: "445F10AF192B60DB"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "468DA953C1EB0B54"
+					item: "industrialupgrade:adv_solar_energy"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "65C37829D4587891"
+					item: "industrialupgrade:itemingots/steel_ingot"
+					type: "item"
+				}
+				{
+					id: "4DB9E894407C2D10"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "06E732E3746F5A1E"
+				item: "industrialupgrade:steam_turbine/steam_turbine_controller"
+				type: "item"
+			}]
+			title: "Контроллер паровой турбины"
+			x: 8.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Исследовательская линза для космического стола."
+				"Открывает анализ более сложных объектов и материалов."
+			]
+			entity_vis_size: 1.0f
+			id: "27DC679A8A001B88"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "106AA164CA384DDE"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "040166BDE29C6946"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "6A815B05630F32AB"
+					item: "industrialupgrade:imp_solar_energy"
+					type: "item"
+				}
+				{
+					id: "4E4001989B28F3D5"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "659AE9A0DA61B492"
+				item: "industrialupgrade:research_lens/lens_1"
+				type: "item"
+			}]
+			title: "§bИсследовательская линза I"
+			x: -4.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Космический исследовательский стол работает с линзами"
+				"и образцами небесных тел. Он открывает/обрабатывает"
+				"данные по планетам, спутникам и материалам, а не"
+				"является обычным верстаком."
+			]
+			entity_vis_size: 1.0f
+			id: "4296526B82469766"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "0582757DFC9DE11D"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "1E486066A4FDB88C"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "51745044D04C7618"
+					item: "industrialupgrade:imp_solar_energy"
+					type: "item"
+				}
+				{
+					id: "028D44DAECF476BC"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "3222C788DFC1E831"
+				item: "industrialupgrade:basemachine3/research_table_space"
+				type: "item"
+			}]
+			title: "Стол космических исследований"
+			x: -3.0d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Стартовая площадка принимает ракетное топливо и"
+				"энергию, заправляет и заряжает установленную"
+				"космическую технику. Имеет большой топливный бак и"
+				"выходные слоты для результатов/ресурсов, связанных с"
+				"полётом."
+			]
+			entity_vis_size: 1.0f
+			id: "3EBD350F78D876B1"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "0D3393E3EA6C0FD3"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "03661FF448CE45AD"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "06653BA87E9E6440"
+					item: "industrialupgrade:imp_solar_energy"
+					type: "item"
+				}
+				{
+					id: "3F6ADC1F907982ED"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "07E229CCFCF44D22"
+				item: "industrialupgrade:basemachine3/rocket_launch_pad"
+				type: "item"
+			}]
+			title: "Ракетная стартовая площадка"
+			x: -1.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Собирает роверы из корпуса, колёс, модулей и"
+				"электронных частей. Машина формирует готовый предмет"
+				"ровера с параметрами, которые потом используются на"
+				"планетах."
+			]
+			entity_vis_size: 1.0f
+			id: "679B612C885948A1"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "08E9B2622153AD57"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "434A7B03D921D51F"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "700020CD3431E03A"
+					item: "industrialupgrade:imp_solar_energy"
+					type: "item"
+				}
+				{
+					id: "3449AE679879DD94"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "53C7F38F87A65A0C"
+				item: "industrialupgrade:basemachine3/rover_assembler"
+				type: "item"
+			}]
+			title: "Сборщик марсоходов"
+			x: 0.0d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Собирает исследовательские зонды из корпуса,"
+				"электроники и модулей. Зонд нужен для автоматического"
+				"изучения тел и получения данных/ресурсов из космической"
+				"системы."
+			]
+			entity_vis_size: 1.0f
+			id: "3C3D17C09BBD9455"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "6229D282B405CE73"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "2FD6365C0B77CFB5"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "2965EE8079C28C28"
+					item: "industrialupgrade:imp_solar_energy"
+					type: "item"
+				}
+				{
+					id: "768E2460C7AF66D3"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "6AB4305D502E9634"
+				item: "industrialupgrade:basemachine3/probe_assembler"
+				type: "item"
+			}]
+			title: "Сборщик зондов"
+			x: -4.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Собирает спутники из корпуса, электроники и модулей."
+				"Спутник работает как отдельная космическая техника для"
+				"исследований и получения ресурсов с орбиты/тел."
+			]
+			entity_vis_size: 1.0f
+			id: "1B71FC3F457177B1"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "347B2B5A5B2D9271"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "4FB012D85DEE1261"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "0DF32327B51DB051"
+					item: "industrialupgrade:imp_solar_energy"
+					type: "item"
+				}
+				{
+					id: "628630B4A9F0CDD9"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "57EAC7554294A4F5"
+				item: "industrialupgrade:basemachine3/satellite_assembler"
+				type: "item"
+			}]
+			title: "Сборщик спутников"
+			x: -1.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Собирает ракету из корпуса, двигателя, баков и"
+				"модулей. Результат хранит параметры ракеты и"
+				"используется стартовой площадкой для подготовки полёта."
+			]
+			entity_vis_size: 1.0f
+			id: "168045B1B4CB6D1A"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "55B38D4E379A5BD8"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "37DE3FE2EDDF2745"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "3BEA9AD2DFE95FA5"
+					item: "industrialupgrade:imp_solar_energy"
+					type: "item"
+				}
+				{
+					id: "5D92E9F23A233581"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "76DF763F64309B26"
+				item: "industrialupgrade:basemachine3/rocket_assembler"
+				type: "item"
+			}]
+			title: "Сборщик ракет"
+			x: -4.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Гидразин — базовое ракетное топливо. Принимается"
+				"стартовой площадкой, жидкостным миксером и системой"
+				"уровней топлива для роверов/ракет."
+			]
+			entity_vis_size: 1.0f
+			id: "04A2AE060E0D6356"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "2B8DBA906F663068"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "0EFB0807D8FF7378"
+					item: "industrialupgrade:crafting_elements/crafting_273_element"
+					type: "item"
+				}
+				{
+					id: "0741B41E7238BBA8"
+					item: "industrialupgrade:imp_solar_energy"
+					type: "item"
+				}
+				{
+					id: "6365AC39FA58B20F"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "54B13F3B349EB687"
+				item: "industrialupgrade:bucket/hydrazine"
+				type: "item"
+			}]
+			title: "Hydrazine"
+			x: 1.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["3C00517AB66CD7FC"]
+			description: [
+				"Очищает загрязнённую почву. Квест открывается после"
+				"реактора ядерного синтеза, без космоса и гидразина."
+			]
+			entity_vis_size: 1.0f
+			id: "252D93B83CC8A178"
+			rewards: [
+				{
+					count: 8
+					id: "229E60280F10F1B5"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "0553310AC89CBECB"
+					item: "industrialupgrade:machines/hybrid_solar_paneliu"
+					type: "item"
+				}
+				{
+					id: "0A0B2A71ECD54D3B"
+					item: "industrialupgrade:machines/advanced_solar_paneliu"
+					type: "item"
+				}
+				{
+					id: "5CB48FB2ABB3EC0F"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [{
+				id: "0710C652F8863FA8"
+				item: "industrialupgrade:basemachine3/purifier_soil"
+				type: "item"
+			}]
+			title: "Очиститель почвы"
+			x: 1.5d
+			y: 9.0d
+		}
+	]
+	title: "Улучшенная электрическая эра"
+}

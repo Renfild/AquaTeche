@@ -1,48 +1,14 @@
 {
-  "from_version": "2.9.384",
-  "to_version": "2.9.385",
-  "added": [
-    {
-      "path": "kubejs/startup_scripts/25_hide_guides.js",
-      "md5": "7c026338c2e2c1e76e3deb71474ad4a8",
-      "size": 636,
-      "url": "https://aquateche.store/pack/kubejs/startup_scripts/25_hide_guides.js",
-      "asset": "kubejs__startup_scripts__25_hide_guides.js"
-    }
-  ],
-  "changed": [
-    {
-      "path": "config/aqualumen/html/hub.html",
-      "md5": "49ee14cd127ff36d56559d29074fe13e",
-      "size": 857784,
-      "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
-      "asset": "config__aqualumen__html__hub.html"
-    },
-    {
-      "path": "config/aqualumen/hub.html",
-      "md5": "49ee14cd127ff36d56559d29074fe13e",
-      "size": 857784,
-      "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
-      "asset": "config__aqualumen__hub.html"
-    },
-    {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.55-alpha.jar",
-      "md5": "9ea9bcb92a24e950d651a450339a9257",
-      "size": 2346092,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.55-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.55-alpha.jar"
-    }
-  ],
-  "removed": [
-    {
-      "path": "kubejs/server_scripts/25_hide_guides.js"
-    }
-  ],
+  "from_version": "2.9.386",
+  "to_version": "2.9.387",
+  "added": [],
+  "changed": [],
+  "removed": [],
   "stats": {
-    "added": 1,
-    "changed": 3,
-    "removed": 1,
-    "unchanged": 144,
-    "download_bytes": 4062296
+    "added": 0,
+    "changed": 0,
+    "removed": 0,
+    "unchanged": 148,
+    "download_bytes": 0
   }
 }

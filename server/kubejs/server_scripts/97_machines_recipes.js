@@ -30,7 +30,7 @@ ServerEvents.recipes((event) => {
 
 
   // Гайдбук сервера
-  event.shaped('aquatech_ui:ocean_guide_book', [' P ', 'PBP', ' P '], {
+  event.shaped(Item.of('patchouli:guide_book', '{patchouli:book:"aquatech_ui:guide"}'), [' P ', 'PBP', ' P '], {
     P: 'minecraft:prismarine_shard',
     B: 'minecraft:book',
   }).id('aquatech_machines:guide_book')

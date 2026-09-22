@@ -2,7 +2,7 @@
   const IP = "g-pl-2.apexnodes.xyz:21924";
   const DOWNLOAD = "/dl/AquaTech.exe";
   const DOWNLOAD_ZIP = "/dl/AquaTechLauncher.zip";
-  const CLIENT_VERSION = "client-2.9.96";
+  const CLIENT_VERSION = "client-2.9.97";
   /* portal ui build: compact header + market lots */
   const CANONICAL = "https://aquateche.store";
   const DISCORD = "https://discord.gg/3Khzr5z4fQ";

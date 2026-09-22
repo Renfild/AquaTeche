@@ -1236,7 +1236,13 @@ try {
 
   function storeView(s, ranksOnly) {
     const RANK_IDS = Object.keys(RANK_META);
-    const offers = (s.store || []).filter((o) => ranksOnly ? RANK_IDS.includes(o.id) : !RANK_IDS.includes(o.id));
+    // Если вкладка «Привилегии» выключена в enabledTabs — магазин показывает всё (ранги + товары).
+    const hasPrivTab = (state.payload.enabledTabs || []).includes("privileges");
+    const offers = (s.store || []).filter((o) => {
+      const isRank = RANK_IDS.includes(o.id);
+      if (ranksOnly) return isRank;
+      return hasPrivTab ? !isRank : true;
+    });
 
     const SHOP_ICONS = {
       "ae.silicon_press": "ae2:silicon_press",
@@ -1318,13 +1324,6 @@ try {
       ? ""
       : `<div class="shop-filter">
           <input id="shopSearch" class="hub-input" type="search" placeholder="Поиск по магазину" autocomplete="off" />
-          <div class="shop-chips" id="shopChips">
-            <button class="atlas-pill active" data-shop="all">Все</button>
-            <button class="atlas-pill" data-shop="ae2">AE2</button>
-            <button class="atlas-pill" data-shop="industrialupgrade">Industrial Upgrade</button>
-            <button class="atlas-pill" data-shop="botania">Botania</button>
-            <button class="atlas-pill" data-shop="other">Прочее</button>
-          </div>
         </div>`;
     return `<div class="view">${head}
       ${filterBar}
@@ -1836,28 +1835,17 @@ try {
       };
     });
 
-    // Магазин: поиск + фильтр по источнику (AE2 / IU / Botania / прочее)
+    // Магазин: поиск по названию (категории убраны по просьбе владельца)
     const shopSearch = document.getElementById("shopSearch");
-    const shopChips = document.getElementById("shopChips");
     const applyShopFilter = () => {
       const grid = document.getElementById("shopGrid");
       if (!grid) return;
       const q = (shopSearch ? shopSearch.value : "").trim().toLowerCase();
-      const active = shopChips ? shopChips.querySelector(".atlas-pill.active") : null;
-      const ns = active ? active.dataset.shop : "all";
       grid.querySelectorAll("[data-shop-name]").forEach(card => {
-        const matchQ = !q || (card.dataset.shopName || "").includes(q);
-        const matchNs = ns === "all" || card.dataset.shopNs === ns;
-        card.style.display = matchQ && matchNs ? "" : "none";
+        card.style.display = !q || (card.dataset.shopName || "").includes(q) ? "" : "none";
       });
     };
     if (shopSearch) shopSearch.oninput = applyShopFilter;
-    if (shopChips) {
-      shopChips.querySelectorAll(".atlas-pill").forEach(p => p.onclick = () => {
-        shopChips.querySelectorAll(".atlas-pill").forEach(x => x.classList.toggle("active", x === p));
-        applyShopFilter();
-      });
-    }
 
     document.querySelectorAll(".tp-warp").forEach(b => b.onclick = () => {
       action("hub.warp", b.dataset.warp);
