@@ -1,5 +1,5 @@
 {
-  "version": "2.9.385",
+  "version": "2.9.386",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -35,11 +35,11 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.55-alpha.jar",
-      "md5": "9ea9bcb92a24e950d651a450339a9257",
-      "size": 2346092,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.55-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.55-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.56-alpha.jar",
+      "md5": "4304d60dc4b0235670e8abfc6d7eb5d8",
+      "size": 2346435,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.56-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.56-alpha.jar"
     },
     {
       "path": "mods/aquatech_machines-1.0.9.jar",
@@ -554,8 +554,8 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "49ee14cd127ff36d56559d29074fe13e",
-      "size": 857784,
+      "md5": "5f67edcb60658fb5312fe17dc68f9701",
+      "size": 858106,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -589,8 +589,8 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "49ee14cd127ff36d56559d29074fe13e",
-      "size": 857784,
+      "md5": "5f67edcb60658fb5312fe17dc68f9701",
+      "size": 858106,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
@@ -778,9 +778,9 @@
     },
     {
       "path": "config/ftbquests/quests/chapters/improved_electric_era.snbt",
-      "md5": "c28d678e5e584814a30b5ddfe1a1e19a",
-      "size": 74130,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__improved_electric_era.snbt",
+      "md5": "5785c1f7964c615e1db9e5e176a8d07a",
+      "size": 72153,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/improved_electric_era.snbt",
       "asset": "config__ftbquests__quests__chapters__improved_electric_era.snbt"
     },
     {
@@ -792,9 +792,9 @@
     },
     {
       "path": "config/ftbquests/quests/chapters/steam_era.snbt",
-      "md5": "1b11a422d5a683529073515a47b5d018",
-      "size": 37679,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__steam_era.snbt",
+      "md5": "77b39dd21c5d66cc267c44660eb437c2",
+      "size": 35720,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/steam_era.snbt",
       "asset": "config__ftbquests__quests__chapters__steam_era.snbt"
     },
     {
