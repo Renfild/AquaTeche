@@ -573,7 +573,7 @@ public final class AquaChatScreen extends Screen {
                 AquaChatLayout.CHAT_WIDTH, 1, 0, 0x1850E8F4);
 
         // Полоса быстрых команд над строкой ввода: тихие ghost-чипы
-        String[] quickCmds = {"/kit", "/warp", "/ah", "/balance"};
+        String[] quickCmds = {"/menu", "/ah", "/balance"};
         int chipX = AquaChatLayout.CONTENT_X;
         int chipY = AquaChatLayout.chipsY(this.height);
         for (String quick : quickCmds) {
@@ -883,7 +883,7 @@ public final class AquaChatScreen extends Screen {
         }
 
         // Клик по быстрой команде над вводом
-        String[] quickCmds = {"/kit", "/warp", "/ah", "/balance"};
+        String[] quickCmds = {"/menu", "/ah", "/balance"};
         int chipX = AquaChatLayout.CONTENT_X;
         int chipY = AquaChatLayout.chipsY(this.height);
         for (String quick : quickCmds) {
