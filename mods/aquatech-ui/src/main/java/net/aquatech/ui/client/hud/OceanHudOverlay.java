@@ -87,44 +87,47 @@ public final class OceanHudOverlay {
         int pad = 8;
         int cardBg = theme.panelAlpha(0.88f);
 
-        // ── Profile panel: identity row + balance hero ─────────────────────────
-        int headerH = 58;
+        // ── Profile panel: identity row, rank pill, balance / playtime rows ────────
+        int headerH = 68;
         LumenGfx.roundedRect(graphics, 0, 0, w, headerH, 8, cardBg);
         LumenGfx.outline(graphics, 0, 0, w, headerH, 8, theme.border());
-        // rank hairline on the top edge — card identity
         LumenGfx.gradientRoundedH(graphics, 9, 1, w - 18, 1, 0, rankColor & 0x66FFFFFF, 0x00000000);
 
         UiDraw.drawPlayerHead(graphics, player.getUUID(), player.getGameProfile().getName(), pad, 7, 20);
         String name = AquaFontRenderer.fit(font, player.getGameProfile().getName(), w - pad - 20 - 8);
         AquaFontRenderer.draw(graphics, font, name, pad + 26, 9, theme.text());
 
-        if (!rankGlyph.isEmpty()) {
-            Component g = Component.literal(rankGlyph).withStyle(net.minecraft.network.chat.Style.EMPTY
-                    .withFont(new net.minecraft.resources.ResourceLocation("aquatech_ui", "ranks")));
-            graphics.drawString(font, g, pad + 26, 24, 0xFFFFFFFF, false);
+        // Rank pill (preview style) instead of the white wordmark glyph
+        if (!rankTitle.isBlank()) {
+            String pillText = rankTitle.toUpperCase();
+            int pillW = AquaFontRenderer.width(font, pillText) + 10;
+            LumenGfx.roundedRect(graphics, pad + 26, 23, pillW, 12, 3, rankColor & 0x24FFFFFF);
+            LumenGfx.outline(graphics, pad + 26, 23, pillW, 12, 3, rankColor & 0x77FFFFFF);
+            AquaFontRenderer.draw(graphics, font, pillText, pad + 31, 26, rankColor);
         }
 
-        LumenGfx.gradientRoundedH(graphics, pad, 32, w - pad * 2, 1, 0, theme.accentAlpha(0.22f), 0x00000000);
+        LumenGfx.gradientRoundedH(graphics, pad, 39, w - pad * 2, 1, 0, theme.accentAlpha(0.22f), 0x00000000);
 
-        // Balance hero: coin + big gold number + dim caption
+        // Row: Баланс ... coin + amount + AQ
+        int bal = ClientUiState.sessionBalance();
+        String aq = AquaFontRenderer.fit(font, String.valueOf(bal), 70) + " AQ";
+        int aqW = AquaFontRenderer.width(font, aq);
+        AquaFontRenderer.draw(graphics, font, "Баланс", pad, 46, theme.textDim());
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        graphics.blit(COIN_TEXTURE, pad, 41, 12, 12, 0, 0, 32, 32, 32, 32);
-        int bal = ClientUiState.sessionBalance();
-        String balStr = AquaFontRenderer.fit(font, String.valueOf(bal), 74);
-        graphics.pose().pushPose();
-        graphics.pose().scale(1.18F, 1.18F, 1F);
-        AquaFontRenderer.draw(graphics, font, balStr, Math.round((pad + 16) / 1.18F), Math.round(40 / 1.18F), theme.gold());
-        graphics.pose().popPose();
+        graphics.blit(COIN_TEXTURE, w - pad - aqW - 15, 44, 11, 11, 0, 0, 32, 32, 32, 32);
+        AquaFontRenderer.draw(graphics, font, aq, w - pad - aqW, 46, theme.gold());
 
-        // Playtime at the right edge
+        // Row: В игре ... clock + playtime
         String playtime = ClientUiState.getPlaytimeFormatted();
-        LumenIcons.draw(graphics, LumenIcons.Icon.CLOCK, w - pad - AquaFontRenderer.width(font, playtime) - 13, 45, 9, theme.textDim());
-        AquaFontRenderer.draw(graphics, font, playtime, w - pad - AquaFontRenderer.width(font, playtime), 45, theme.textDim());
+        int ptW = AquaFontRenderer.width(font, playtime);
+        AquaFontRenderer.draw(graphics, font, "В игре", pad, 60, theme.textDim());
+        LumenIcons.draw(graphics, LumenIcons.Icon.CLOCK, w - pad - ptW - 13, 60, 9, theme.textDim());
+        AquaFontRenderer.draw(graphics, font, playtime, w - pad - ptW, 60, theme.text());
 
-        // ── Dive panel: collapsed on the surface, expands underwater ───────────
+        // ── Dive panel: collapsed on the surface, expands underwater ────────────
         int diveY = headerH + 5;
         if (!inWater) {
             int diveH = 24;
@@ -136,36 +139,39 @@ public final class OceanHudOverlay {
             return;
         }
 
-        int diveH = 78;
+        int diveH = 94;
         LumenGfx.roundedRect(graphics, 0, diveY, w, diveH, 8, cardBg);
         LumenGfx.outline(graphics, 0, diveY, w, diveH, 8, theme.border());
         LumenIcons.draw(graphics, LumenIcons.Icon.WAVE, pad, diveY + 7, 10, theme.accent());
         AquaFontRenderer.draw(graphics, font, "ПОГРУЖЕНИЕ", pad + 15, diveY + 8, theme.accent());
         LumenGfx.gradientRoundedH(graphics, pad, diveY + 20, w - pad * 2, 1, 0, theme.accentAlpha(0.22f), 0x00000000);
 
-        // Depth hero
-        graphics.pose().pushPose();
-        graphics.pose().scale(1.3F, 1.3F, 1F);
-        AquaFontRenderer.draw(graphics, font, depth + " м", Math.round(pad / 1.3F), Math.round((diveY + 27) / 1.3F), theme.text());
-        graphics.pose().popPose();
+        // Row: Глубина ... value
+        AquaFontRenderer.draw(graphics, font, "Глубина", pad, diveY + 30, theme.textDim());
+        String depthStr = depth + " м";
+        AquaFontRenderer.draw(graphics, font, depthStr, w - pad - AquaFontRenderer.width(font, depthStr), diveY + 30, theme.text());
 
-        // Pressure status pill (right)
+        // Row: Давление ... status pill
+        AquaFontRenderer.draw(graphics, font, "Давление", pad, diveY + 45, theme.textDim());
         String pressureValue = pressure <= 0 ? "норма" : pressureLabel(pressure);
         int pColor = pressureColor(pressure, theme);
         int pw = AquaFontRenderer.width(font, pressureValue) + 10;
-        LumenGfx.roundedRect(graphics, w - pad - pw, diveY + 30, pw, 13, 3, pColor & 0x22FFFFFF);
-        LumenGfx.outline(graphics, w - pad - pw, diveY + 30, pw, 13, 3, pColor & 0x55FFFFFF);
-        AquaFontRenderer.draw(graphics, font, pressureValue, w - pad - pw + 5, diveY + 32, pColor);
+        LumenGfx.roundedRect(graphics, w - pad - pw, diveY + 43, pw, 13, 3, pColor & 0x22FFFFFF);
+        LumenGfx.outline(graphics, w - pad - pw, diveY + 43, pw, 13, 3, pColor & 0x55FFFFFF);
+        AquaFontRenderer.draw(graphics, font, pressureValue, w - pad - pw + 5, diveY + 45, pColor);
 
+        // Row: Защита ... reserve
         if (showPressure) {
-            AquaFontRenderer.draw(graphics, font, "запас защиты: " + tolerance + " м", pad, diveY + 50, theme.textDim());
+            AquaFontRenderer.draw(graphics, font, "Защита", pad, diveY + 60, theme.textDim());
+            String tolStr = "запас " + tolerance + " м";
+            AquaFontRenderer.draw(graphics, font, tolStr, w - pad - AquaFontRenderer.width(font, tolStr), diveY + 60, theme.text());
         }
 
-        // Oxygen bar with inline percent
-        AquaFontRenderer.draw(graphics, font, "O₂", pad, diveY + 62, theme.textDim());
+        // Row: Кислород ... percent + bar
+        AquaFontRenderer.draw(graphics, font, "Кислород", pad, diveY + 75, theme.textDim());
         String airText = airPercent + "%";
-        AquaFontRenderer.draw(graphics, font, airText, w - pad - AquaFontRenderer.width(font, airText), diveY + 62, theme.accent());
-        LumenGfx.progressBar(graphics, pad, diveY + 73, w - pad * 2, 3, airPercent / 100.0F,
+        AquaFontRenderer.draw(graphics, font, airText, w - pad - AquaFontRenderer.width(font, airText), diveY + 75, theme.accent());
+        LumenGfx.progressBar(graphics, pad, diveY + 86, w - pad * 2, 3, airPercent / 100.0F,
                 0x3316202C, theme.accent(), theme.accentAlt());
 
         graphics.pose().popPose();

@@ -22,7 +22,7 @@
 
 
 <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("aquatech_theme")==="dark"?"dark":"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
-<link rel="stylesheet" href="assets/css/site.css?v=20260924_light" />
+<link rel="stylesheet" href="assets/css/site.css?v=20260924_cinema" />
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">К содержимому</a>
@@ -32,87 +32,81 @@
   <!-- =========================================================================
        HERO SECTION WITH UNIFIED BRAND HEADER & SERVER SHOWCASE CARD
        ========================================================================= -->
-  <section class="hero">
-    <canvas class="hero-canvas" id="ocean-hero" aria-hidden="true"></canvas>
-    <div class="hero-grain" aria-hidden="true"></div>
-    <div class="container hero-split">
-      <!-- Left Column: Branding, Pitch & CTAs -->
-      <div class="hero-content">
-        <div class="hero-brand-header">
-          <img class="hero-brand-crest" src="assets/images/logo_128.png" alt="AquaTech Crest" width="64" height="64" />
-          <div class="hero-brand-text">
-            <p class="hero-kicker">MINECRAFT 1.20.1 · ОКЕАНСКИЙ SKYBLOCK</p>
-            <h1 class="hero-title" data-kinetic="chars">AquaTech</h1>
-          </div>
-        </div>
-        <p class="hero-lead" data-kinetic="words">
-          Плот посреди океана, ни одной шахты. Бамбуковая удочка вытащит булыжник и медь, Альфа — иридий, осмиридий и звезду Незера. Между ними авторыболов, буры и заводы, которые работают, пока ты спишь.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" data-magnetic="6" data-download href="start.html">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>Скачать лаунчер</span>
-          </a>
-          <a class="btn btn-secondary" data-magnetic="4" href="register.html">Регистрация</a>
-        </div>
-        <div class="hero-meta">
-          <span class="live-pill" title="Статус сервера">
-            <span class="live-dot"></span>
-            <strong id="heroOnlineCount" style="color:var(--accent);font-weight:800">Загрузка онлайна…</strong> · Ocean Skyblock 1.20.1 · Вход без ввода IP
-          </span>
-        </div>
+  <section class="hero-stage" data-glass-hero>
+    <div class="container hero-stage-inner">
+      <p class="hero-kicker" data-hero-kicker>Океанский Skyblock · Minecraft 1.20.1 · Forge</p>
+      <h1 class="hero-mega" data-hero-mega>Плот посреди <em>бесконечного</em> океана</h1>
+      <p class="hero-stage-lead" data-hero-lead>Ни одной шахты. Удочка вместо кирки, авторыбалы вместо дедлайна, аукцион и квесты, которые ведут за руку. Скачай лаунчер — и выходи на воду.</p>
+      <div class="hero-stage-actions" data-hero-actions>
+        <a class="btn btn-primary" data-magnetic="6" data-download href="start.html">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Скачать лаунчер</span>
+        </a>
+        <a class="btn btn-secondary" data-magnetic="4" href="guide.html">Гайд новичка</a>
       </div>
+      <div class="hero-meta" data-hero-meta>
+        <span class="live-pill" title="Статус сервера">
+          <span class="live-dot"></span>
+          <strong id="heroOnlineCount">Загрузка онлайна…</strong>
+        </span>
+      </div>
+    </div>
+    <span class="scroll-hint" aria-hidden="true">Листай</span>
+  </section>
 
-      <!-- Right Column: Live Server Showcase Card (Clean, Informative, No GUI) -->
-      <div class="hero-visual-wrap">
-        <div class="hero-showcase-card">
-          <div class="showcase-card-header">
-            <div class="showcase-status-badge">
-              <span class="live-dot"></span>
-              <span id="showcaseStatusText">СЕРВЕР В СЕТИ · FORGE 1.20.1</span>
-            </div>
-            <span class="showcase-ping-chip" id="showcasePingText">24/7 ОНЛАЙН</span>
-          </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" data-marquee-track>
+      <span class="marquee-item">13 удочек</span>
+      <span class="marquee-item">426 заданий</span>
+      <span class="marquee-item">авторыбал</span>
+      <span class="marquee-item">аукцион</span>
+      <span class="marquee-item">кейсы</span>
+      <span class="marquee-item">заводы</span>
+    </div>
+  </div>
 
-          <div class="showcase-body">
-            <h3 class="showcase-title">Что тебя ждёт</h3>
-            <p class="showcase-desc">Океан, удочка и завод на плоту. Всё остальное прикрутится само.</p>
+  <section class="home-section story" id="story">
+    <div class="container story-grid">
+      <div class="story-pin">
+        <p class="micro-label story-kicker">Как это устроено</p>
+        <h2 class="story-title" data-float>От пустого плота до <span class="serif-accent">заводов</span>, которые работают без тебя</h2>
+        <p class="story-copy" data-float>Три сцены, которые объясняют весь сервер: как ты попадаешь на плот, как добываешь ресурс и почему дальше за тебя всё делают машины.</p>
+        <p class="story-counter"><b data-story-counter>01</b> / 03</p>
+      </div>
+      <div class="story-stage" data-story-stage data-active="0">
+        <article class="story-panel is-active" data-story-panel>
+          <div class="story-panel-visual"><img src="assets/images/rods/t01-bamboo.png" alt="Бамбуковая удочка" width="190" height="190" loading="lazy" /></div>
+          <h3>Шаг 1. Плот и первая удочка</h3>
+          <p>Вход в один клик через лаунчер, без ввода IP. Открываешь меню F4, берёшь бамбуковую удочку — и первый заброс готов.</p>
+        </article>
+        <article class="story-panel" data-story-panel>
+          <div class="story-panel-visual"><img src="assets/images/rods/t07-starcatcher.png" alt="Удочка Ловец Звёзд" width="190" height="190" loading="lazy" /></div>
+          <h3>Шаг 2. Руда на крючке</h3>
+          <p>Каждая следующая удочка крафтится из предыдущей и её же улова: T1 тянет булыжник, T7 — самоцветы, Альфа — иридий и звезду Незера.</p>
+        </article>
+        <article class="story-panel" data-story-panel>
+          <div class="story-panel-visual"><img src="assets/images/items/industrialupgrade_blockresource_machine.png" alt="Механизм AquaTech" width="190" height="190" loading="lazy" /></div>
+          <h3>Шаг 3. Автоматизация</h3>
+          <p>Авторыболов MK-2 ловит сам, экскаватор грызёт дно, синтезатор и центрифуга перерабатывают улов. Гидростанция не останавливается, когда ты выходишь.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-            <div class="showcase-stats-grid">
-              <div class="showcase-stat-item">
-                <span class="stat-num">13</span>
-                <span class="stat-lbl">Тиров удочек</span>
-              </div>
-              <div class="showcase-stat-item">
-                <span class="stat-num">426</span>
-                <span class="stat-lbl">Заданий FTB</span>
-              </div>
-              <div class="showcase-stat-item">
-                <span class="stat-num">7</span>
-                <span class="stat-lbl">Механизмов</span>
-              </div>
-            </div>
-
-            <div class="showcase-features-list">
-              <div class="showcase-feat-row">
-                <span class="feat-dot"></span>
-                <span>Следующая удочка крафтится из предыдущей и её же улова</span>
-              </div>
-              <div class="showcase-feat-row">
-                <span class="feat-dot"></span>
-                <span>Авторыболов, экскаватор и синтезатор снабжают базу без тебя</span>
-              </div>
-              <div class="showcase-feat-row">
-                <span class="feat-dot"></span>
-                <span>Аукцион <code>/ah</code> и Кот, который каждый день скупает рыбу</span>
-              </div>
-            </div>
-
-            <div class="showcase-cta-block">
-              <a class="btn btn-secondary btn-full" href="guide.html">Как играть: гайд новичка</a>
-              <small class="showcase-subnote">Регистрация → лаунчер → первый плот за 10 минут</small>
-            </div>
-          </div>
+  <section class="home-section" id="numbers">
+    <div class="container">
+      <div class="numbers-band">
+        <div class="number-item">
+          <span class="number-value" data-count="13">13</span>
+          <span class="number-label">тиров удочек — от бамбука до Альфы</span>
+        </div>
+        <div class="number-item">
+          <span class="number-value" data-count="426">426</span>
+          <span class="number-label">заданий FBT Quests с наградами</span>
+        </div>
+        <div class="number-item">
+          <span class="number-value" data-count="7">7</span>
+          <span class="number-label">механизмов, которые работают за тебя</span>
         </div>
       </div>
     </div>
@@ -382,6 +376,33 @@
     </div>
   </section>
 
+  <section class="home-section" id="showcase-frame">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <p class="micro-label">Оформление</p>
+          <h2 data-float>Светлая и тёмная — <span class="serif-accent">на твой вкус</span></h2>
+        </div>
+        <div class="ba-toggle" role="group" aria-label="Тема оформления">
+          <button type="button" data-ba="light" aria-pressed="true">Before</button>
+          <button type="button" data-ba="dark" aria-pressed="false">After</button>
+        </div>
+      </div>
+      <div class="browser-frame" data-float>
+        <div class="browser-bar">
+          <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+          <span class="browser-url">aquateche.store</span>
+        </div>
+        <img src="assets/images/site-mockup.jpg" alt="Главная страница AquaTech" width="1904" height="985" loading="lazy" />
+      </div>
+      <div class="editorial-card" data-float>
+        <p class="micro-label">Introducing</p>
+        <h3>AquaTech 2.9.395 — <span class="serif-accent">тише, быстрее, глубже</span></h3>
+        <p>Новая главная: кинематографичный WebGL-фон, живой дашборд сервера и редакционная вёрстка вместо ленты одинаковых карточек. Переключатель темы остался, но теперь он часть композиции, а не гаджет в шапке.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- =========================================================================
        НОВОСТИ СЕРВЕРА - DISTINCT CONTAINER
        ========================================================================= -->
@@ -408,6 +429,7 @@
   <script src="assets/js/vendor/ScrollTrigger.min.js?v=3.13.0" defer></script>
   <script src="assets/js/site.js?v=20260924_light"></script>
   <script src="assets/js/motion.js?v=1" defer></script>
-  <script src="assets/js/ocean-hero.js?v=1" defer></script>
+  <script src="assets/js/glass-hero.js?v=1" defer></script>
+  <script src="assets/js/home-cinema.js?v=1" defer></script>
 </body>
 </html>

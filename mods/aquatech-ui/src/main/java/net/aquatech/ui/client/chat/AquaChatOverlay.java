@@ -58,20 +58,18 @@ public final class AquaChatOverlay {
         int panelTop = AquaChatLayout.panelTop(screenHeight);
         int panelW = AquaChatLayout.PANEL_W;
         int panelH = AquaChatLayout.panelH(screenHeight);
+        int px = AquaChatLayout.PANEL_X;
+        int pr = AquaChatLayout.PANEL_RADIUS;
 
-        // Cyber-MMO Tactical Glass Panel
-        LumenGfx.gradientRounded(graphics, AquaChatLayout.PANEL_X, panelTop,
-                panelW, panelH, AquaChatLayout.PANEL_RADIUS,
-                0xD808101A, 0xEB040810);
-        // Outer soft cyan halo
-        LumenGfx.outline(graphics, AquaChatLayout.PANEL_X - 1, panelTop - 1,
-                panelW + 2, panelH + 2, AquaChatLayout.PANEL_RADIUS + 1, 0x1A00F0FF);
-        // Crisp high-tech border
-        LumenGfx.outline(graphics, AquaChatLayout.PANEL_X, panelTop,
-                panelW, panelH, AquaChatLayout.PANEL_RADIUS, 0x3338BDF8);
-        // Top edge light highlight
-        LumenGfx.roundedRect(graphics, AquaChatLayout.PANEL_X + 12, panelTop + 1,
-                panelW - 24, 1, 0, 0x2EFFFFFF);
+        // Карточка: тёмный navy-корпус, тонкая световая кромка, мягкое аква-свечение
+        LumenGfx.gradientRounded(graphics, px, panelTop, panelW, panelH, pr, 0xE80D1825, 0xF208111B);
+        LumenGfx.outline(graphics, px - 1, panelTop - 1, panelW + 2, panelH + 2, pr + 1, 0x1450E8F4);
+        LumenGfx.outline(graphics, px, panelTop, panelW, panelH, pr, 0xFF060409);
+        LumenGfx.roundedRect(graphics, px + 1, panelTop + 1, panelW - 2, 1, 0, 0x55C7F8FE);
+        LumenGfx.roundedRect(graphics, px + 1, panelTop + 1, 1, panelH - 2, 0, 0x22C7F8FE);
+        LumenGfx.roundedRect(graphics, px + 2, panelTop + panelH - 2, panelW - 4, 1, 0, 0x22060A0E);
+        // Тонкий шов внутри рамки
+        LumenGfx.roundedRect(graphics, px + 6, panelTop + 6, panelW - 12, 1, 0, 0x1450E8F4);
     }
 
     public static void renderOpenHistory(GuiGraphics graphics, Font font, int screenHeight) {
@@ -328,7 +326,7 @@ public final class AquaChatOverlay {
 
             if (chatOpen) {
                 for (AquaChatMessage.ItemTagRef tag : msg.getItemTags()) {
-                    String chipLabel = "[✦ " + tag.getDisplayName() + "]";
+                    String chipLabel = "[" + tag.getDisplayName() + "]";
                     int chipIdx = lineStr.indexOf(chipLabel);
                     if (chipIdx >= 0) {
                         String before = lineStr.substring(0, chipIdx);
@@ -341,16 +339,14 @@ public final class AquaChatOverlay {
                                 && mouseY >= lineY - 1 && mouseY <= lineY + 11;
                         if (tagHovered) {
                             hoveredItem = tag.getStack();
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x33000000 | (itemCol & 0x00FFFFFF));
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, 2, 11, 0, itemCol);
+                            LumenGfx.roundedRect(graphics, startX - 3, lineY - 1, chipW + 6, 11, 3, 0x2A50E8F4);
                         } else {
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x30000000);
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, 2, 11, 0, 0x90FFFFFF & (itemCol | 0x00FFFFFF));
+                            LumenGfx.roundedRect(graphics, startX - 3, lineY - 1, chipW + 6, 11, 3, 0x18C7F8FE);
                         }
                     }
                 }
                 if (!msg.getSharedItem().isEmpty()) {
-                    String handLabel = "[✦ " + msg.getSharedItem().getHoverName().getString() + "]";
+                    String handLabel = "[" + msg.getSharedItem().getHoverName().getString() + "]";
                     int chipIdx = lineStr.indexOf(handLabel);
                     if (chipIdx >= 0) {
                         String before = lineStr.substring(0, chipIdx);
@@ -363,11 +359,9 @@ public final class AquaChatOverlay {
                                 && mouseY >= lineY - 1 && mouseY <= lineY + 11;
                         if (handHovered) {
                             hoveredItem = msg.getSharedItem();
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x33000000 | (itemCol & 0x00FFFFFF));
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, 2, 11, 0, itemCol);
+                            LumenGfx.roundedRect(graphics, startX - 3, lineY - 1, chipW + 6, 11, 3, 0x2A50E8F4);
                         } else {
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, chipW + 4, 11, 3, 0x30000000);
-                            LumenGfx.roundedRect(graphics, startX - 2, lineY - 1, 2, 11, 0, 0x90FFFFFF & (itemCol | 0x00FFFFFF));
+                            LumenGfx.roundedRect(graphics, startX - 3, lineY - 1, chipW + 6, 11, 3, 0x18C7F8FE);
                         }
                     }
                 }

@@ -20,8 +20,28 @@ public final class AquaChatManager {
     private static boolean chatScreenOpen = false;
 
     private static final Map<AquaChatMessage.Channel, Integer> UNREAD_COUNTS = new java.util.concurrent.ConcurrentHashMap<>();
+    /** Not-yet-echoed local messages: text -> timestamp, so the server echo can be deduped. */
+    private static final Map<String, Long> RECENT_ECHOES = new java.util.concurrent.ConcurrentHashMap<>();
 
     private AquaChatManager() {
+    }
+
+    /** Show the player's own message right away instead of waiting for the server round-trip. */
+    public static synchronized void addLocalEcho(String text) {
+        if (text == null || text.isBlank()) return;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc == null || mc.player == null) return;
+        String nick = mc.player.getName().getString();
+        String rankId = net.aquatech.ui.client.ClientUiState.sessionRankId();
+        if (rankId == null || rankId.isBlank()) rankId = "player";
+        String rankDisplay = net.aquatech.ui.client.theme.LumenTheme.getRankTitle(rankId);
+        int rankColor = net.aquatech.ui.client.theme.LumenTheme.getRankColor(rankId);
+        int tick = mc.gui.getGuiTicks();
+        Component comp = Component.literal(text);
+        AquaChatMessage msg = new AquaChatMessage(mc.player.getUUID(), nick, rankId, rankDisplay, rankColor,
+                AquaChatMessage.Channel.GLOBAL, text, comp, tick, false);
+        RECENT_ECHOES.put(text.trim().toLowerCase(java.util.Locale.ROOT), System.currentTimeMillis());
+        addMessage(msg);
     }
 
     public static synchronized void addMessage(Component component) {
@@ -89,6 +109,20 @@ public final class AquaChatManager {
     public static synchronized void addMessage(AquaChatMessage message) {
         if (message == null) return;
         if (message.getMessageText() == null || message.getMessageText().isBlank()) return;
+        // Dedupe the server echo of a message we already showed locally
+        Minecraft mc = Minecraft.getInstance();
+        if (!message.isSystem() && message.getSenderUuid() != null && mc != null && mc.player != null
+                && message.getSenderUuid().equals(mc.player.getUUID())) {
+            String key = message.getMessageText().trim().toLowerCase(java.util.Locale.ROOT);
+            Long at = RECENT_ECHOES.get(key);
+            if (at != null) {
+                if (System.currentTimeMillis() - at < 6000L) {
+                    RECENT_ECHOES.remove(key);
+                    return;
+                }
+                RECENT_ECHOES.remove(key);
+            }
+        }
         MESSAGES.add(message);
         if (MESSAGES.size() > MAX_HISTORY) {
             MESSAGES.remove(0);
