@@ -39,88 +39,158 @@
   uniform float uTime;
   uniform vec2 uMouse;
   uniform float uTheme;
+  uniform float uScroll;
 
-  float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+  mat2 rot(float a) {
+    float c = cos(a);
+    float s = sin(a);
+    return mat2(c, -s, s, c);
   }
 
-  float noise(vec2 p) {
-    vec2 i = floor(p);
-    vec2 f = fract(p);
-    vec2 u = f * f * (3.0 - 2.0 * f);
-    return mix(
-      mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
-      mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
-      u.y);
+  float smin(float a, float b, float k) {
+    float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
+    return mix(b, a, h) - k * h * (1.0 - h);
   }
 
-  float fbm(vec2 p) {
-    float value = 0.0;
-    float amp = 0.5;
-    for (int i = 0; i < 5; i++) {
-      value += amp * noise(p);
-      p *= 2.04;
-      amp *= 0.5;
+  float sdSphere(vec3 p, float r) {
+    return length(p) - r;
+  }
+
+  float sdBox(vec3 p, vec3 b, float r) {
+    vec3 q = abs(p) - b;
+    return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - r;
+  }
+
+  float scene(vec3 p) {
+    float t = uTime * 0.22;
+
+    vec3 a = p;
+    a.xz *= rot(t * 0.35 + uScroll * 1.2);
+    a.xy *= rot(0.42);
+    float core = sdBox(a, vec3(0.46, 0.32, 0.22), 0.16);
+
+    vec3 b = p - vec3(sin(t * 0.7) * 0.62, cos(t * 0.53) * 0.40, 0.26);
+    b.xz *= rot(-t * 0.5);
+    b.xy *= rot(0.9);
+    float shard = sdBox(b, vec3(0.22, 0.11, 0.09), 0.07);
+
+    vec3 c = p - vec3(cos(t * 0.42) * 0.70, sin(t * 0.61) * 0.32, -0.22);
+    c.xy *= rot(t * 0.33);
+    float bead = sdSphere(c, 0.21 + 0.02 * sin(t * 1.3));
+
+    vec3 d = p - vec3(-0.40, 0.52, 0.46);
+    d.xz *= rot(t * 0.28 + 1.1);
+    float drop = sdSphere(d, 0.16);
+
+    float shape = smin(core, shard, 0.22);
+    shape = smin(shape, bead, 0.18);
+    shape = smin(shape, drop, 0.14);
+    return shape;
+  }
+
+  vec3 normalAt(vec3 p) {
+    vec2 e = vec2(0.0016, 0.0);
+    return normalize(vec3(
+      scene(p + e.xyy) - scene(p - e.xyy),
+      scene(p + e.yxy) - scene(p - e.yxy),
+      scene(p + e.yyx) - scene(p - e.yyx)));
+  }
+
+  float softShadow(vec3 ro, vec3 rd) {
+    float res = 1.0;
+    float t = 0.06;
+    for (int i = 0; i < 18; i++) {
+      float h = scene(ro + rd * t);
+      res = min(res, 9.0 * h / t);
+      t += clamp(h, 0.03, 0.24);
+      if (res < 0.02 || t > 3.2) break;
     }
-    return value;
+    return clamp(res, 0.0, 1.0);
   }
 
   void main() {
-    vec2 uv = gl_FragCoord.xy / uRes.xy;
+    vec2 frag = gl_FragCoord.xy;
+    vec2 uv = frag / uRes.xy;
     float aspect = uRes.x / max(uRes.y, 1.0);
-    vec2 p = vec2(uv.x * aspect, uv.y);
+    vec2 p = vec2((uv.x - 0.5) * aspect, uv.y - 0.5);
 
-    float t = uTime * 0.11;
+    float travel = uScroll * 2.4;
+    float orbit = (uMouse.x - 0.5) * 0.7 + travel * 0.5;
+    float lift = (uMouse.y - 0.5) * 0.4 - uScroll * 0.8;
+    float shift = aspect > 1.35 ? 0.52 : 0.0;
 
-    vec2 mouse = vec2(uMouse.x * aspect, 1.0 - uMouse.y);
-    float pull = smoothstep(0.62, 0.0, distance(p, mouse));
-    p += (mouse - p) * pull * 0.045;
+    vec3 ro = vec3(sin(orbit) * 1.55 - shift, 0.52 + lift, 3.35 + cos(orbit) * 0.85 - travel * 0.35);
+    vec3 target = vec3(-shift, -0.04 + uScroll * 0.55, 0.0);
 
-    vec2 q = vec2(
-      fbm(p * 1.55 + vec2(t * 0.9, -t * 0.6)),
-      fbm(p * 1.55 + vec2(5.2, 1.3) - t * 0.7));
-    vec2 r = vec2(
-      fbm(p * 2.15 + 2.9 * q + vec2(1.7, 9.2) + 0.13 * t),
-      fbm(p * 2.15 + 2.9 * q + vec2(8.3, 2.8) - 0.11 * t));
-    float f = fbm(p * 2.45 + 3.2 * r);
+    vec3 forward = normalize(target - ro);
+    vec3 right = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
+    vec3 up = cross(right, forward);
+    vec3 rd = normalize(forward * 1.9 + right * p.x + up * p.y);
 
-    float depth = smoothstep(0.05, 0.95, uv.y);
+    float hit = 0.0;
+    float depth = 0.0;
+    for (int i = 0; i < 72; i++) {
+      vec3 pos = ro + rd * depth;
+      float d = scene(pos);
+      if (d < 0.0012) { hit = 1.0; break; }
+      depth += d * 0.68;
+      if (depth > 7.0) break;
+    }
 
-    vec3 lightTop = vec3(0.988, 0.980, 0.996);
-    vec3 lightBottom = vec3(0.925, 0.902, 0.969);
-    vec3 lightBase = mix(lightTop, lightBottom, depth);
+    vec3 lightDir = normalize(vec3(-0.55, 0.78, 0.42));
+    vec3 roseDir = normalize(vec3(0.72, 0.18, -0.55));
 
-    vec3 darkTop = vec3(0.043, 0.020, 0.075);
-    vec3 darkBottom = vec3(0.012, 0.063, 0.094);
-    vec3 darkBase = mix(darkTop, darkBottom, depth);
+    vec3 lightTop = vec3(1.0, 0.980, 0.988);
+    vec3 lightBottom = vec3(0.973, 0.925, 0.941);
+    vec3 lightBase = mix(lightTop, lightBottom, smoothstep(-0.2, 0.55, p.y - uScroll * 0.2));
 
-    vec3 base = mix(lightBase, darkBase, uTheme);
+    vec3 darkTop = vec3(0.055, 0.031, 0.086);
+    vec3 darkBottom = vec3(0.012, 0.055, 0.086);
+    vec3 darkBase = mix(darkTop, darkBottom, smoothstep(-0.2, 0.55, p.y));
 
-    float edge = length(vec2(dFdx(f), dFdy(f)));
-    float sheen = smoothstep(0.010, 0.115, edge);
+    vec3 bg = mix(lightBase, darkBase, uTheme);
 
-    float veins = pow(smoothstep(0.62, 0.96, f), 3.0);
+    vec3 glowA = mix(vec3(0.973, 0.741, 0.831), vec3(0.180, 0.831, 0.878), uTheme);
+    vec3 glowB = mix(vec3(0.827, 0.686, 0.965), vec3(0.486, 0.290, 0.902), uTheme);
 
-    vec3 violet = mix(vec3(0.486, 0.227, 0.929), vec3(0.180, 0.831, 0.878), uTheme);
-    vec3 magenta = mix(vec3(0.902, 0.000, 0.494), vec3(0.184, 0.878, 0.784), uTheme);
+    bg += glowA * exp(-4.4 * dot(p - vec2(0.72, 0.20), p - vec2(0.72, 0.20))) * mix(0.34, 0.40, uTheme);
+    bg += glowB * exp(-5.0 * dot(p - vec2(-0.62, -0.24), p - vec2(-0.62, -0.24))) * mix(0.26, 0.32, uTheme);
 
-    vec2 s1c = vec2(0.84, 0.86) + 0.05 * vec2(sin(t * 1.7), cos(t * 1.3));
-    vec2 s2c = vec2(0.14, 0.22) + 0.05 * vec2(cos(t * 1.1), sin(t * 1.5));
-    float s1 = exp(-8.5 * dot(p - s1c, p - s1c));
-    float s2 = exp(-7.0 * dot(p - s2c, p - s2c));
+    vec2 foot = p - vec2(shift * 0.62, -0.46 - uScroll * 0.12);
+    bg *= 1.0 - exp(-7.0 * dot(foot, foot)) * mix(0.16, 0.42, uTheme);
 
-    vec3 col = base;
-    col += sheen * mix(vec3(0.86, 0.84, 1.0), vec3(0.42, 0.72, 0.86), uTheme) * 0.48;
-    col += veins * mix(vec3(0.72, 0.68, 0.98), vec3(0.12, 0.55, 0.72), uTheme) * 0.20;
-    col += violet * s1 * 0.46;
-    col += magenta * s2 * 0.13;
-    col += magenta * pull * 0.04;
+    vec3 col = bg;
 
-    float grain = hash(gl_FragCoord.xy * 0.5 + uTime) - 0.5;
-    col += grain * 0.016;
+    if (hit > 0.5) {
+      vec3 pos = ro + rd * depth;
+      vec3 n = normalAt(pos);
+      float fres = pow(1.0 - clamp(dot(n, -rd), 0.0, 1.0), 2.2);
 
-    float vignette = smoothstep(0.52, 1.18, length((uv - 0.5) * vec2(aspect, 1.0)));
-    col *= 1.0 - vignette * 0.20;
+      float diff = clamp(dot(n, lightDir), 0.0, 1.0);
+      float sh = softShadow(pos + n * 0.02, lightDir);
+      float spec = pow(clamp(dot(reflect(rd, n), lightDir), 0.0, 1.0), 64.0);
+      float spec2 = pow(clamp(dot(reflect(rd, n), roseDir), 0.0, 1.0), 22.0);
+      float rim = pow(clamp(dot(n, roseDir), 0.0, 1.0), 1.8);
+
+      vec3 rose = mix(vec3(0.937, 0.478, 0.671), vec3(0.180, 0.831, 0.878), uTheme);
+      vec3 violet = mix(vec3(0.639, 0.494, 0.918), vec3(0.478, 0.310, 0.886), uTheme);
+      vec3 glassLight = mix(vec3(1.0, 0.988, 0.996), vec3(0.749, 0.937, 1.0), uTheme);
+
+      vec3 body = mix(rose, violet, clamp(0.30 + 0.45 * n.y, 0.0, 1.0));
+      body = mix(body, glassLight, 0.18 + 0.30 * diff);
+
+      col = body * (0.72 + 0.28 * sh);
+      col = mix(col, glassLight, fres * 0.62);
+      col += glassLight * spec * 0.90 * sh;
+      col += violet * spec2 * 0.30;
+      col += rose * rim * 0.22;
+    }
+
+    float grain = fract(sin(dot(frag + uTime, vec2(12.9898, 78.233))) * 43758.5453) - 0.5;
+    col += grain * 0.014;
+
+    float vignette = smoothstep(0.46, 1.16, length(p));
+    col *= 1.0 - vignette * 0.22;
 
     fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
   }`;
@@ -158,6 +228,7 @@
     time: gl.getUniformLocation(program, "uTime"),
     mouse: gl.getUniformLocation(program, "uMouse"),
     theme: gl.getUniformLocation(program, "uTheme"),
+    scroll: gl.getUniformLocation(program, "uScroll"),
   };
 
   const state = {
@@ -167,6 +238,7 @@
     targetX: 0.62,
     targetY: 0.7,
     theme: document.documentElement.getAttribute("data-theme") === "dark" ? 1 : 0,
+    scroll: 0,
     raf: 0,
     width: 0,
     height: 0,
@@ -196,9 +268,12 @@
     state.mouseX += (state.targetX - state.mouseX) * 0.05;
     state.mouseY += (state.targetY - state.mouseY) * 0.05;
     state.theme += ((document.documentElement.getAttribute("data-theme") === "dark" ? 1 : 0) - state.theme) * 0.08;
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    state.scroll += (Math.min(1, Math.max(0, window.scrollY / maxScroll)) - state.scroll) * 0.12;
     gl.uniform1f(uni.time, (now - start) / 1000);
     gl.uniform2f(uni.mouse, state.mouseX, state.mouseY);
     gl.uniform1f(uni.theme, state.theme);
+    gl.uniform1f(uni.scroll, state.scroll);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     canvas.classList.add("is-on");
     if (state.visible && !document.hidden) state.raf = requestAnimationFrame(frame);

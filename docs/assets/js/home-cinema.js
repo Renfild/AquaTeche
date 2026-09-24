@@ -209,11 +209,15 @@
           pinSpacing: true,
           scrub: 0.6,
           onUpdate: (self) => {
-            const next = Math.min(panels.length - 1, Math.floor(self.progress * panels.length));
+            const next = Math.max(0, Math.min(panels.length - 1, Math.round(self.progress * (panels.length - 1))));
             if (next !== current) {
               current = next;
               activate(next);
             }
+          },
+          onLeaveBack: () => {
+            current = 0;
+            activate(0);
           },
         });
       } else {
