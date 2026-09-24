@@ -1,5 +1,5 @@
 {
-  "version": "2.9.394",
+  "version": "2.9.395",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -42,18 +42,18 @@
       "asset": "aqualumen-forge-1.20.1-0.3.57-alpha.jar"
     },
     {
-      "path": "mods/aquatech_machines-1.0.10.jar",
-      "md5": "7bf7caaa5116a542ba10b447e53049f7",
-      "size": 235080,
-      "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.10.jar",
-      "asset": "aquatech_machines-1.0.10.jar"
+      "path": "mods/aquatech_machines-1.0.11.jar",
+      "md5": "8e8c1badd28abdbd47406c61a636adb7",
+      "size": 235210,
+      "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.11.jar",
+      "asset": "aquatech_machines-1.0.11.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.101.jar",
-      "md5": "32117ec556988781c0cd19aaa37e4560",
-      "size": 2831739,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.101.jar",
-      "asset": "aquatech_ui-1.0.101.jar"
+      "path": "mods/aquatech_ui-1.0.102.jar",
+      "md5": "01c2e9f6eb1bb82d2ee330f99418d0a0",
+      "size": 2832390,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.102.jar",
+      "asset": "aquatech_ui-1.0.102.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -981,8 +981,8 @@
     },
     {
       "path": "kubejs/server_scripts/97_machines_recipes.js",
-      "md5": "893aa4acc632201addc0bc69bd540cb3",
-      "size": 6030,
+      "md5": "a69b79299664cc78af465593d5af2e00",
+      "size": 6635,
       "url": "https://aquateche.store/pack/kubejs/server_scripts/97_machines_recipes.js",
       "asset": "kubejs__server_scripts__97_machines_recipes.js"
     },
