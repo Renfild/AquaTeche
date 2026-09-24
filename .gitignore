@@ -147,3 +147,4 @@ server/plugins/disabled/
 server/_uuid_migrate_backup_*/
 tools/lodestone/
 *.jar.bak
+*.lnk
