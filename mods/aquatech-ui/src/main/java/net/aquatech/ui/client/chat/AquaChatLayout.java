@@ -36,10 +36,6 @@ public final class AquaChatLayout {
     public static final int INPUT_PAD_L = 8;
     public static final int INPUT_PAD_R = 56;
 
-    /** Левая колонка каналов (вариант «лента-док»). */
-    public static final int RAIL_W = 112;
-    public static final int RAIL_ROW_H = 22;
-    public static final int RAIL_GAP = 4;
     /** Полоса быстрых команд над строкой ввода. */
     public static final int CHIPS_H = 20;
     public static final int CHIPS_GAP = 6;
@@ -48,35 +44,15 @@ public final class AquaChatLayout {
     }
 
     public static int feedX() {
-        return CONTENT_X + RAIL_W + 8;
-    }
-
-    public static int feedW() {
-        return CHAT_WIDTH - RAIL_W - 8;
-    }
-
-    public static int contentRight() {
-        return feedX() + feedW();
-    }
-
-    public static int railX() {
         return CONTENT_X;
     }
 
-    public static int railW() {
-        return RAIL_W;
+    public static int feedW() {
+        return CHAT_WIDTH;
     }
 
-    public static int railTop(int screenH) {
-        return panelTop(screenH) + 30;
-    }
-
-    public static int railRowY(int screenH, int index) {
-        return railTop(screenH) + index * (RAIL_ROW_H + RAIL_GAP);
-    }
-
-    public static int railCardY(int screenH) {
-        return chipsY(screenH) - 30;
+    public static int contentRight() {
+        return CONTENT_X + CHAT_WIDTH;
     }
 
     public static int chipsY(int screenH) {
@@ -125,6 +101,6 @@ public final class AquaChatLayout {
     }
 
     public static int messageTop(int screenH) {
-        return panelTop(screenH) + 30;
+        return tabY(screenH) + TAB_H + 6;
     }
 }

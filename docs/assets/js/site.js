@@ -8,6 +8,7 @@
   const DISCORD = "https://discord.gg/3Khzr5z4fQ";
   const STORAGE_USER = "aquatech_user";
   const STORAGE_SOUND = "aquatech_sound";
+  const STORAGE_THEME = "aquatech_theme";
   const API_BASE = "";
   const VISA_MIN_RUB = 450;
   let headerOutsideClick = null;
@@ -155,6 +156,27 @@
     if (!user) localStorage.removeItem(STORAGE_USER);
     else localStorage.setItem(STORAGE_USER, JSON.stringify(user));
     try { updateAuthLinks(); } catch {}
+  }
+
+  function currentTheme() {
+    try {
+      return localStorage.getItem(STORAGE_THEME) === "dark" ? "dark" : "light";
+    } catch {
+      return "light";
+    }
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme === "dark" ? "dark" : "light");
+  }
+
+  function setTheme(theme) {
+    const next = theme === "dark" ? "dark" : "light";
+    applyTheme(next);
+    try { localStorage.setItem(STORAGE_THEME, next); } catch {}
+    document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
+      btn.setAttribute("aria-label", next === "dark" ? "Включить светлую тему" : "Включить тёмную тему");
+    });
   }
 
   function skinUrl(nick) {
@@ -500,6 +522,7 @@
             <span class="header-live" title="Онлайн на сервере"><span class="dot"></span><span data-online aria-live="polite">0 онлайн</span></span>
           ${coins}
             ${account}
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Включить тёмную тему" title="Сменить тему"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.2 5.2l1.9 1.9M16.9 16.9l1.9 1.9M18.8 5.2l-1.9 1.9M7.1 16.9l-1.9 1.9" /></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.8A8.6 8.6 0 0 1 9.2 3.5a8.6 8.6 0 1 0 11.3 11.3Z" /></svg></button>
             <a class="header-cta" data-download href="${DOWNLOAD}">Скачать</a>
             <button class="menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav" data-menu>
               <span></span><span></span><span></span>
@@ -566,6 +589,11 @@
           b.textContent = soundOn ? "Звуки: вкл" : "Звуки: выкл";
         });
       if (soundOn) playTone("ok");
+      });
+    });
+    mount.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setTheme(currentTheme() === "dark" ? "light" : "dark");
       });
     });
     mount.querySelectorAll("[data-logout]").forEach((btn) => {
@@ -4298,6 +4326,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    applyTheme(currentTheme());
     reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const page = pageId();
 

@@ -1,12 +1,12 @@
 {
-  "from_version": "2.9.396",
-  "to_version": "2.9.397",
+  "from_version": "2.9.397",
+  "to_version": "2.9.398",
   "added": [],
   "changed": [
     {
       "path": "mods/aquatech_ui-1.0.102.jar",
-      "md5": "dbbecb95cbfe5160912d3dd202cd311d",
-      "size": 2833258,
+      "md5": "bf289664471fc2856ceceb1bcade58b7",
+      "size": 2832965,
       "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.102.jar",
       "asset": "aquatech_ui-1.0.102.jar"
     }
@@ -17,6 +17,6 @@
     "changed": 1,
     "removed": 0,
     "unchanged": 147,
-    "download_bytes": 2833258
+    "download_bytes": 2832965
   }
 }

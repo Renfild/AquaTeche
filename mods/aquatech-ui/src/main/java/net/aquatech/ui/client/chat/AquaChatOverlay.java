@@ -247,29 +247,19 @@ public final class AquaChatOverlay {
         int cardH = height;
         boolean isHovered = chatOpen && mouseX >= x && mouseX <= x + cardW && mouseY >= y && mouseY <= y + cardH;
 
-        // Minimalist nanobanano aesthetic: calm, clean, uncluttered
+        // Аккуратные строки без боковых плашек: подсветка только по событию
         if (chatOpen) {
             if (isMentioned) {
-                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x28F59E0B, alpha));
-                LumenGfx.roundedRect(graphics, x + 1, y + 2, 3, cardH - 4, 1.5F, applyAlpha(0xFFF59E0B, alpha));
+                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x1FF59E0B, alpha));
             } else if (msg.isSystem()) {
-                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x20061622, alpha));
-                LumenGfx.roundedRect(graphics, x + 1, y + 2, 3, cardH - 4, 1.5F, applyAlpha(0xFF38BDF8, alpha));
+                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x14061420, alpha));
             } else if (isHovered) {
-                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x1F38BDF8, alpha));
-                LumenGfx.outline(graphics, x, y, cardW, cardH, 5, applyAlpha(0x3538BDF8, alpha));
-            } else {
-                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x1408101A, alpha));
+                LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(0x1450E8F4, alpha));
             }
         } else {
             // Closed HUD during gameplay: soft transparent pill that does not obscure gameplay
             int hudBg = isMentioned ? 0x902A1A06 : (msg.isSystem() ? 0x80061420 : 0x75050B12);
             LumenGfx.roundedRect(graphics, x, y, cardW, cardH, 5, applyAlpha(hudBg, alpha));
-            if (isMentioned) {
-                LumenGfx.roundedRect(graphics, x + 1, y + 2, 2, cardH - 4, 1.0F, applyAlpha(0xFFF59E0B, alpha));
-            } else if (msg.isSystem()) {
-                LumenGfx.roundedRect(graphics, x + 1, y + 2, 2, cardH - 4, 1.0F, applyAlpha(0xFF38BDF8, alpha));
-            }
         }
 
         int padX = 8;
@@ -280,36 +270,31 @@ public final class AquaChatOverlay {
         int textX = headX + headSize + AquaChatLayout.HEAD_GAP;
         int wrapW = wrapWidth();
         int nameY = headY + 1;
+        String timeText = msg.getTimeFormatted();
+        int timeW = timeText != null ? AquaFontRenderer.width(font, timeText) : 0;
+        int timeX = x + cardW - padX - timeW;
 
         // 1. Avatar & Author Header
         if (msg.isSystem()) {
-            // Minimalist nanobanano accent: vertical glowing indicator, no broken glyph box
-            LumenGfx.roundedRect(graphics, headX + 4, headY + 2, 3, headSize - 4, 1.5F, applyAlpha(0xFF38BDF8, alpha));
-            LumenGfx.roundedRect(graphics, headX + 3, headY + (headSize - 6) / 2.0F, 5, 5, 2.5F, applyAlpha(0xFF00F0FF, alpha));
-
-            int curX = textX;
-            if (msg.getTimeFormatted() != null) {
-                AquaFontRenderer.draw(graphics, font, msg.getTimeFormatted(), curX, nameY, applyAlpha(0xFF64748B, alpha));
-                curX += AquaFontRenderer.width(font, msg.getTimeFormatted()) + 5;
+            if (timeText != null) {
+                AquaFontRenderer.draw(graphics, font, timeText, timeX, nameY, applyAlpha(0x99C7F8FE, alpha));
             }
 
             String srvBadge = "СЕРВЕР";
             int srvW = AquaFontRenderer.width(font, srvBadge) + 8;
-            LumenGfx.roundedRect(graphics, curX, nameY - 1, srvW, 11, 3, applyAlpha(0x2800F0FF, alpha));
-            LumenGfx.outline(graphics, curX, nameY - 1, srvW, 11, 3, applyAlpha(0x5500F0FF, alpha));
-            AquaFontRenderer.draw(graphics, font, srvBadge, curX + 4, nameY, applyAlpha(0xFF38BDF8, alpha));
-            curX += srvW + 5;
+            LumenGfx.roundedRect(graphics, headX, nameY - 1, srvW, 11, 3, applyAlpha(0x1F50E8F4, alpha));
+            LumenGfx.outline(graphics, headX, nameY - 1, srvW, 11, 3, applyAlpha(0x4450E8F4, alpha));
+            AquaFontRenderer.draw(graphics, font, srvBadge, headX + 4, nameY, applyAlpha(0xFF50E8F4, alpha));
         } else {
             UiDraw.drawPlayerHead(graphics, msg.getSenderUuid(), msg.getSenderName(), headX, headY, headSize, false);
 
-            int curX = textX;
-            if (msg.getTimeFormatted() != null) {
-                AquaFontRenderer.draw(graphics, font, msg.getTimeFormatted(), curX, nameY, applyAlpha(0xFF64748B, alpha));
-                curX += AquaFontRenderer.width(font, msg.getTimeFormatted()) + 5;
+            if (timeText != null) {
+                AquaFontRenderer.draw(graphics, font, timeText, timeX, nameY, applyAlpha(0x99C7F8FE, alpha));
             }
 
+            int curX = textX;
             String sender = msg.getSenderName() != null ? msg.getSenderName() : "Игрок";
-            AquaFontRenderer.drawNick(graphics, font, sender, curX, nameY, applyAlpha(0xFFF8FAFC, alpha));
+            AquaFontRenderer.drawNick(graphics, font, sender, curX, nameY, applyAlpha(0xFFC7F8FE, alpha));
             curX += AquaFontRenderer.nickWidth(font, sender) + 5;
 
             // Rank: user-drawn wordmark art only
@@ -328,7 +313,7 @@ public final class AquaChatOverlay {
                 String chTag = msg.getChannel().getTag();
                 int cw = AquaFontRenderer.width(font, chTag) + 6;
                 int chCol = msg.getChannel().getColor();
-                int chBg = (chCol & 0x00FFFFFF) | 0x22000000;
+                int chBg = (chCol & 0x00FFFFFF) | 0x1A000000;
                 LumenGfx.roundedRect(graphics, curX, nameY, cw, 10, 3, applyAlpha(chBg, alpha));
                 AquaFontRenderer.draw(graphics, font, chTag, curX + 3, nameY + 1, applyAlpha(chCol, alpha));
             }

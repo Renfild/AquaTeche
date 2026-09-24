@@ -540,41 +540,39 @@ public final class AquaChatScreen extends Screen {
         AquaChatOverlay.renderOpenPanel(graphics, this.height);
         AquaChatOverlay.renderOpenHistory(graphics, this.font, this.height, mouseX, mouseY);
 
-        // Левая колонка каналов + карточка-подсказка (вариант «лента-док»)
+        // Компактный ряд категорий сверху: активная — аква, остальные тихие
         AquaChatMessage.Channel activeCh = AquaChatManager.getActiveChannel();
         AquaChatMessage.Channel[] channels = AquaChatMessage.Channel.values();
-        int railX = AquaChatLayout.railX();
-        int railW = AquaChatLayout.railW();
-        int railH = AquaChatLayout.RAIL_ROW_H;
-        for (int ci = 0; ci < channels.length; ci++) {
-            AquaChatMessage.Channel ch = channels[ci];
+        int tabY = AquaChatLayout.tabY(this.height);
+        int tabX = AquaChatLayout.CONTENT_X;
+        int tabH = AquaChatLayout.TAB_H;
+        for (AquaChatMessage.Channel ch : channels) {
+            String chLabel = ch.getLabel();
+            int pillW = AquaFontRenderer.width(this.font, chLabel) + 16;
             boolean active = ch == activeCh;
-            int rowY = AquaChatLayout.railRowY(this.height, ci);
-            boolean hovered = mouseX >= railX && mouseX <= railX + railW && mouseY >= rowY && mouseY <= rowY + railH;
+            boolean hovered = mouseX >= tabX && mouseX <= tabX + pillW && mouseY >= tabY && mouseY <= tabY + tabH;
 
             if (active) {
-                LumenGfx.roundedRect(graphics, railX, rowY, railW, railH, 6, 0xFF50E8F4);
+                LumenGfx.roundedRect(graphics, tabX, tabY, pillW, tabH, tabH / 2, 0xFF50E8F4);
             } else if (hovered) {
-                LumenGfx.roundedRect(graphics, railX, rowY, railW, railH, 6, 0x2250E8F4);
+                LumenGfx.roundedRect(graphics, tabX, tabY, pillW, tabH, tabH / 2, 0x2250E8F4);
+                LumenGfx.outline(graphics, tabX, tabY, pillW, tabH, tabH / 2, 0x6650E8F4);
             }
-
-            String chLabel = ch.getLabel();
-            int textCol = active ? 0xFF04141A : (hovered ? 0xFFC7F8FE : 0xFF7E8E9F);
-            AquaFontRenderer.draw(graphics, this.font, chLabel, railX + 9, rowY + (railH - 8) / 2, textCol);
+            AquaFontRenderer.draw(graphics, this.font, chLabel, tabX + 8, tabY + (tabH - 8) / 2,
+                    active ? 0xFF04141A : (hovered ? 0xFFC7F8FE : 0xFF7E8E9F));
 
             int unread = AquaChatManager.getUnreadCount(ch);
             if (unread > 0 && !active) {
-                LumenGfx.roundedRect(graphics, railX + railW - 9, rowY + railH / 2 - 2, 4, 4, 2F, 0xFFEF4444);
+                LumenGfx.roundedRect(graphics, tabX + pillW - 7, tabY + 3, 4, 4, 2F, 0xFF50E8F4);
             }
+            tabX += pillW + 4;
         }
 
-        // Карточка-подсказка внизу рельса
-        int cardY = AquaChatLayout.railCardY(this.height);
-        LumenGfx.roundedRect(graphics, railX, cardY, railW, 26, 6, 0xFFC7F8FE);
-        AquaFontRenderer.draw(graphics, this.font, "F4 — меню", railX + 8, cardY + 5, 0xFF04141A);
-        AquaFontRenderer.draw(graphics, this.font, "киты и кейсы", railX + 8, cardY + 15, 0x99041618);
+        // Тонкий разделитель под категориями
+        LumenGfx.roundedRect(graphics, AquaChatLayout.CONTENT_X, tabY + tabH + 2,
+                AquaChatLayout.CHAT_WIDTH, 1, 0, 0x1850E8F4);
 
-        // Полоса быстрых команд над строкой ввода
+        // Полоса быстрых команд над строкой ввода: тихие ghost-чипы
         String[] quickCmds = {"/kit", "/warp", "/ah", "/balance"};
         int chipX = AquaChatLayout.CONTENT_X;
         int chipY = AquaChatLayout.chipsY(this.height);
@@ -582,9 +580,9 @@ public final class AquaChatScreen extends Screen {
             int cmdW = AquaFontRenderer.width(this.font, quick) + 14;
             boolean chipHov = mouseX >= chipX && mouseX <= chipX + cmdW
                     && mouseY >= chipY && mouseY <= chipY + AquaChatLayout.CHIPS_H;
-            LumenGfx.roundedRect(graphics, chipX, chipY, cmdW, AquaChatLayout.CHIPS_H, 5, chipHov ? 0x3350E8F4 : 0x1A0B131F);
-            LumenGfx.outline(graphics, chipX, chipY, cmdW, AquaChatLayout.CHIPS_H, 5, chipHov ? 0xFF50E8F4 : 0x33384D);
-            AquaFontRenderer.draw(graphics, this.font, quick, chipX + 7, chipY + 6, chipHov ? 0xFFC7F8FE : 0xFF8FA6B8);
+            LumenGfx.roundedRect(graphics, chipX, chipY, cmdW, AquaChatLayout.CHIPS_H, 5, chipHov ? 0x2250E8F4 : 0x0F0B131F);
+            LumenGfx.outline(graphics, chipX, chipY, cmdW, AquaChatLayout.CHIPS_H, 5, chipHov ? 0x8850E8F4 : 0x22283B4D);
+            AquaFontRenderer.draw(graphics, this.font, quick, chipX + 7, chipY + 6, chipHov ? 0xFFC7F8FE : 0xFF7E8E9F);
             chipX += cmdW + 6;
         }
 
@@ -865,20 +863,22 @@ public final class AquaChatScreen extends Screen {
             }
         }
 
-        // Клик по каналу в левом рельсе
-        int railX = AquaChatLayout.railX();
-        int railW = AquaChatLayout.railW();
-        AquaChatMessage.Channel[] channels = AquaChatMessage.Channel.values();
-        for (int ci = 0; ci < channels.length; ci++) {
-            int rowY = AquaChatLayout.railRowY(this.height, ci);
-            if (mouseX >= railX && mouseX <= railX + railW
-                    && mouseY >= rowY && mouseY <= rowY + AquaChatLayout.RAIL_ROW_H) {
-                AquaChatManager.setActiveChannel(channels[ci]);
-                if (this.minecraft != null) {
-                    this.minecraft.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
-                            net.minecraft.sounds.SoundEvents.UI_BUTTON_CLICK, 1.2F));
+        // Клик по категории в верхнем ряду
+        int tabY = AquaChatLayout.tabY(this.height);
+        int tabX = AquaChatLayout.CONTENT_X;
+        int tabH = AquaChatLayout.TAB_H;
+        if (mouseY >= tabY && mouseY <= tabY + tabH) {
+            for (AquaChatMessage.Channel ch : AquaChatMessage.Channel.values()) {
+                int pillW = AquaFontRenderer.width(this.font, ch.getLabel()) + 16;
+                if (mouseX >= tabX && mouseX <= tabX + pillW) {
+                    AquaChatManager.setActiveChannel(ch);
+                    if (this.minecraft != null) {
+                        this.minecraft.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                                net.minecraft.sounds.SoundEvents.UI_BUTTON_CLICK, 1.2F));
+                    }
+                    return true;
                 }
-                return true;
+                tabX += pillW + 4;
             }
         }
 

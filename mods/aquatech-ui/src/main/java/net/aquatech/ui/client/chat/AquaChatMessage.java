@@ -68,12 +68,12 @@ public final class AquaChatMessage {
     }
 
     public enum Channel {
-        ALL("Все", "ALL", 0xFF00F0FF),       // Electric Cyan Neon
-        GLOBAL("Глобал", "G", 0xFF38BDF8),   // Sky Blue
-        LOCAL("Локал", "L", 0xFF10B981),     // Emerald Green
-        TRADE("Рынок", "T", 0xFFF59E0B),     // Amber Gold
-        PRIVATE("ЛС", "PM", 0xFFD946EF),     // Magenta Purple
-        SYSTEM("Инфо", "SYS", 0xFF60A5FA);   // Azure Blue
+        ALL("Все", "ALL", 0xFF50E8F4),
+        GLOBAL("Глобал", "G", 0xFF72D6E8),
+        LOCAL("Локал", "L", 0xFF7FE6B0),
+        TRADE("Рынок", "T", 0xFFFFD875),
+        PRIVATE("ЛС", "PM", 0xFFC7F8FE),
+        SYSTEM("Инфо", "SYS", 0xFF8FD4E0);
 
         private final String label;
         private final String tag;
