@@ -22,7 +22,7 @@ public final class AquaChatOverlay {
     private static final ResourceLocation COIN_TEXTURE = new ResourceLocation("aquatech_ui", "textures/gui/coin.png");
     public static ItemStack hoveredItem = ItemStack.EMPTY;
 
-    public static final int CHAT_WIDTH = AquaChatLayout.CHAT_WIDTH;
+    public static final int CHAT_WIDTH = AquaChatLayout.feedW();
     public static final int PANEL_TOP_INSET = AquaChatLayout.PANEL_TOP_INSET;
     public static final int HEADER_INSET = AquaChatLayout.HEADER_INSET;
     public static final int TAB_INSET = AquaChatLayout.TAB_INSET;
@@ -109,7 +109,7 @@ public final class AquaChatOverlay {
 
         Minecraft mc = Minecraft.getInstance();
         int currentTick = mc.gui.getGuiTicks();
-        int chatX = AquaChatLayout.CONTENT_X;
+        int chatX = AquaChatLayout.feedX();
         int bottomY = chatOpen ? AquaChatLayout.messageBottom(screenHeight)
                 : screenHeight - AquaChatLayout.CLOSED_BOTTOM_GAP;
         int clipTop = chatOpen ? AquaChatLayout.messageTop(screenHeight) : 0;

@@ -435,11 +435,19 @@ public final class AquaChatScreen extends Screen {
     }
 
     private static boolean isStaffSender() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player != null && mc.player.hasPermissions(2)) {
+            return true;
+        }
         String rank = ClientUiState.sessionRankId();
         if (rank == null || rank.isBlank()) return false;
         return switch (rank.toLowerCase(java.util.Locale.ROOT).trim()) {
-            case "owner", "владелец", "admin", "администратор",
-                 "developer", "dev", "разработчик", "mod", "moderator", "модератор" -> true;
+            // staff
+            case "owner", "admin", "developer", "dev", "mod", "moderator", "helper", "manager", "staff" -> true;
+            // платные привилегии: пишут без кулдауна
+            case "vip", "vipplus", "sailor", "skipper", "captain", "admiral", "legend" -> true;
+            // если из сессии придёт русское название группы
+            case "море", "шкипер", "капитан", "адмирал", "легенда", "легенда океана" -> true;
             default -> false;
         };
     }
@@ -532,55 +540,53 @@ public final class AquaChatScreen extends Screen {
         AquaChatOverlay.renderOpenPanel(graphics, this.height);
         AquaChatOverlay.renderOpenHistory(graphics, this.font, this.height, mouseX, mouseY);
 
-        // Segmented Control Channel Tabs (Clean, Spacious Capsule Buttons)
-        int segX = AquaChatLayout.CONTENT_X;
-        int segY = AquaChatLayout.tabY(this.height);
-        int segW = AquaChatLayout.CHAT_WIDTH;
-        int segH = AquaChatLayout.TAB_H;
-
-        // Subtle frosted track
-        LumenGfx.roundedRect(graphics, segX, segY, segW, segH, 5, 0x4408101A);
-        LumenGfx.outline(graphics, segX, segY, segW, segH, 5, 0x22384D);
-
+        // Левая колонка каналов + карточка-подсказка (вариант «лента-док»)
         AquaChatMessage.Channel activeCh = AquaChatManager.getActiveChannel();
         AquaChatMessage.Channel[] channels = AquaChatMessage.Channel.values();
-        int tabGap = 2;
-        int tabPad = 2;
-        int availW = segW - tabPad * 2;
-        int tabW = (availW - (channels.length - 1) * tabGap) / channels.length;
-
+        int railX = AquaChatLayout.railX();
+        int railW = AquaChatLayout.railW();
+        int railH = AquaChatLayout.RAIL_ROW_H;
         for (int ci = 0; ci < channels.length; ci++) {
             AquaChatMessage.Channel ch = channels[ci];
             boolean active = ch == activeCh;
-            int curX = segX + tabPad + ci * (tabW + tabGap);
-            int curW = (ci == channels.length - 1) ? (segX + segW - tabPad - curX) : tabW;
+            int rowY = AquaChatLayout.railRowY(this.height, ci);
+            boolean hovered = mouseX >= railX && mouseX <= railX + railW && mouseY >= rowY && mouseY <= rowY + railH;
 
-            boolean hovered = mouseX >= curX && mouseX <= curX + curW && mouseY >= segY && mouseY <= segY + segH;
-
-            int chCol = ch.getColor();
             if (active) {
-                int activeBg = ((chCol & 0x00FFFFFF) | 0x33000000);
-                LumenGfx.roundedRect(graphics, curX, segY + 1, curW, segH - 2, 4, activeBg);
-                LumenGfx.outline(graphics, curX, segY + 1, curW, segH - 2, 4, chCol);
+                LumenGfx.roundedRect(graphics, railX, rowY, railW, railH, 6, 0xFF50E8F4);
             } else if (hovered) {
-                LumenGfx.roundedRect(graphics, curX, segY + 1, curW, segH - 2, 4, 0x22FFFFFF);
+                LumenGfx.roundedRect(graphics, railX, rowY, railW, railH, 6, 0x2250E8F4);
             }
 
             String chLabel = ch.getLabel();
-            int labelW = AquaFontRenderer.width(this.font, chLabel);
-            int labelX = curX + (curW - labelW) / 2;
-            int labelY = segY + (segH - 8) / 2;
-            int textCol = active ? 0xFFFFFFFF : (hovered ? 0xFFF1F5F9 : 0xFF7E8E9F);
-            AquaFontRenderer.draw(graphics, this.font, chLabel, labelX, labelY, textCol);
+            int textCol = active ? 0xFF04141A : (hovered ? 0xFFC7F8FE : 0xFF7E8E9F);
+            AquaFontRenderer.draw(graphics, this.font, chLabel, railX + 9, rowY + (railH - 8) / 2, textCol);
 
             int unread = AquaChatManager.getUnreadCount(ch);
-            if (unread > 0) {
-                LumenGfx.roundedRect(graphics, curX + curW - 5, segY + 3, 3, 3, 1.5F, 0xFFEF4444);
+            if (unread > 0 && !active) {
+                LumenGfx.roundedRect(graphics, railX + railW - 9, rowY + railH / 2 - 2, 4, 4, 2F, 0xFFEF4444);
             }
         }
 
-        // Clean subtle divider under tabs
-        LumenGfx.roundedRect(graphics, segX + 4, segY + segH + 3, segW - 8, 1, 0, 0x1838BDF8);
+        // Карточка-подсказка внизу рельса
+        int cardY = AquaChatLayout.railCardY(this.height);
+        LumenGfx.roundedRect(graphics, railX, cardY, railW, 26, 6, 0xFFC7F8FE);
+        AquaFontRenderer.draw(graphics, this.font, "F4 — меню", railX + 8, cardY + 5, 0xFF04141A);
+        AquaFontRenderer.draw(graphics, this.font, "киты и кейсы", railX + 8, cardY + 15, 0x99041618);
+
+        // Полоса быстрых команд над строкой ввода
+        String[] quickCmds = {"/kit", "/warp", "/ah", "/balance"};
+        int chipX = AquaChatLayout.CONTENT_X;
+        int chipY = AquaChatLayout.chipsY(this.height);
+        for (String quick : quickCmds) {
+            int cmdW = AquaFontRenderer.width(this.font, quick) + 14;
+            boolean chipHov = mouseX >= chipX && mouseX <= chipX + cmdW
+                    && mouseY >= chipY && mouseY <= chipY + AquaChatLayout.CHIPS_H;
+            LumenGfx.roundedRect(graphics, chipX, chipY, cmdW, AquaChatLayout.CHIPS_H, 5, chipHov ? 0x3350E8F4 : 0x1A0B131F);
+            LumenGfx.outline(graphics, chipX, chipY, cmdW, AquaChatLayout.CHIPS_H, 5, chipHov ? 0xFF50E8F4 : 0x33384D);
+            AquaFontRenderer.draw(graphics, this.font, quick, chipX + 7, chipY + 6, chipHov ? 0xFFC7F8FE : 0xFF8FA6B8);
+            chipX += cmdW + 6;
+        }
 
         // Bottom Dock: [ # ] [ 📋 ] [ Input Capsule with 12/256 & Cooldown ] [ ➤ ]
         int inputY = AquaChatLayout.inputY(this.height);
@@ -859,29 +865,37 @@ public final class AquaChatScreen extends Screen {
             }
         }
 
-        // Segmented Control Channel Tabs Selection
-        int segX = AquaChatLayout.CONTENT_X;
-        int segY = AquaChatLayout.tabY(this.height);
-        int segW = AquaChatLayout.CHAT_WIDTH;
-        int segH = AquaChatLayout.TAB_H;
-        if (mouseY >= segY && mouseY <= segY + segH) {
-            AquaChatMessage.Channel[] channels = AquaChatMessage.Channel.values();
-            int tabGap = 2;
-            int tabPad = 2;
-            int availW = segW - tabPad * 2;
-            int tabW = (availW - (channels.length - 1) * tabGap) / channels.length;
-            for (int ci = 0; ci < channels.length; ci++) {
-                int curX = segX + tabPad + ci * (tabW + tabGap);
-                int curW = (ci == channels.length - 1) ? (segX + segW - tabPad - curX) : tabW;
-                if (mouseX >= curX && mouseX <= curX + curW) {
-                    AquaChatManager.setActiveChannel(channels[ci]);
-                    if (this.minecraft != null) {
-                        this.minecraft.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
-                                net.minecraft.sounds.SoundEvents.UI_BUTTON_CLICK, 1.2F));
-                    }
-                    return true;
+        // Клик по каналу в левом рельсе
+        int railX = AquaChatLayout.railX();
+        int railW = AquaChatLayout.railW();
+        AquaChatMessage.Channel[] channels = AquaChatMessage.Channel.values();
+        for (int ci = 0; ci < channels.length; ci++) {
+            int rowY = AquaChatLayout.railRowY(this.height, ci);
+            if (mouseX >= railX && mouseX <= railX + railW
+                    && mouseY >= rowY && mouseY <= rowY + AquaChatLayout.RAIL_ROW_H) {
+                AquaChatManager.setActiveChannel(channels[ci]);
+                if (this.minecraft != null) {
+                    this.minecraft.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                            net.minecraft.sounds.SoundEvents.UI_BUTTON_CLICK, 1.2F));
                 }
+                return true;
             }
+        }
+
+        // Клик по быстрой команде над вводом
+        String[] quickCmds = {"/kit", "/warp", "/ah", "/balance"};
+        int chipX = AquaChatLayout.CONTENT_X;
+        int chipY = AquaChatLayout.chipsY(this.height);
+        for (String quick : quickCmds) {
+            int cmdW = AquaFontRenderer.width(this.font, quick) + 14;
+            if (mouseX >= chipX && mouseX <= chipX + cmdW
+                    && mouseY >= chipY && mouseY <= chipY + AquaChatLayout.CHIPS_H) {
+                this.input.setValue(quick);
+                this.input.setCursorPosition(quick.length());
+                sendMessage();
+                return true;
+            }
+            chipX += cmdW + 6;
         }
 
         int inputY = AquaChatLayout.inputY(this.height);
