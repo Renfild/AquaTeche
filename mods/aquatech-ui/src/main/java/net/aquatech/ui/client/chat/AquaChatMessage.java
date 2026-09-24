@@ -185,7 +185,7 @@ public final class AquaChatMessage {
 
         String textToParse = rawText;
         if (!this.sharedItem.isEmpty()) {
-            String handTag = "[" + this.sharedItem.getHoverName().getString() + "]";
+            String handTag = "[✦ " + this.sharedItem.getHoverName().getString() + "]";
             textToParse = textToParse.replace("[#]", handTag).replace("[i]", handTag);
         }
 
@@ -216,13 +216,13 @@ public final class AquaChatMessage {
             int idx = 0;
             while ((idx = textToParse.indexOf(tag.getRawTag(), idx)) >= 0) {
                 matches.add(new TagMatch(idx, idx + tag.getRawTag().length(),
-                        "[" + tag.getDisplayName() + "]", tag.getRarityColor()));
+                        "[✦ " + tag.getDisplayName() + "]", tag.getRarityColor()));
                 idx += tag.getRawTag().length();
             }
         }
 
         if (!this.sharedItem.isEmpty()) {
-            String handTag = "[" + this.sharedItem.getHoverName().getString() + "]";
+            String handTag = "[✦ " + this.sharedItem.getHoverName().getString() + "]";
             int idx = 0;
             while ((idx = textToParse.indexOf(handTag, idx)) >= 0) {
                 matches.add(new TagMatch(idx, idx + handTag.length(), handTag,

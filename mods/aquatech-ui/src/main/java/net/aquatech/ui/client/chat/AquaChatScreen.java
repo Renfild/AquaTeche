@@ -39,6 +39,8 @@ public final class AquaChatScreen extends Screen {
     private static final int INPUT_TEXT_Y = 7;
     private static final int INPUT_TEXT_H = 12;
 
+    private static long lastGlobalSendMs = 0;
+    private static long lastTradeSendMs = 0;
 
     private EditBox input;
     private CommandSuggestions commandSuggestions;
@@ -466,8 +468,32 @@ public final class AquaChatScreen extends Screen {
                     return;
                 }
 
+                // Cooldown Verification for Global, Trade & All Channels (3 seconds)
+                // Staff (owner/admin/developer/mod) are exempt from channel cooldowns
                 AquaChatMessage.Channel channel = AquaChatManager.getActiveChannel();
+                long now = System.currentTimeMillis();
                 boolean isGlobalOrAll = (channel == AquaChatMessage.Channel.GLOBAL || channel == AquaChatMessage.Channel.ALL);
+                boolean staffSender = isStaffSender();
+                if (!staffSender && isGlobalOrAll && now - lastGlobalSendMs < 3000L) {
+                    long remaining = (long) Math.ceil((3000L - (now - lastGlobalSendMs)) / 1000.0);
+                    mc.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                            net.minecraft.sounds.SoundEvents.NOTE_BLOCK_BASS.value(), 0.8F));
+                    AquaChatManager.addMessage(Component.literal("§c[Чат] Подождите еще " + remaining + "с перед отправкой!"));
+                    return;
+                }
+                if (!staffSender && channel == AquaChatMessage.Channel.TRADE && now - lastTradeSendMs < 10000L) {
+                    long remaining = (long) Math.ceil((10000L - (now - lastTradeSendMs)) / 1000.0);
+                    mc.getSoundManager().play(net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                            net.minecraft.sounds.SoundEvents.NOTE_BLOCK_BASS.value(), 0.8F));
+                    AquaChatManager.addMessage(Component.literal("§6[Торговля] Подождите еще " + remaining + "с перед отправкой!"));
+                    return;
+                }
+
+                if (isGlobalOrAll) {
+                    lastGlobalSendMs = now;
+                } else if (channel == AquaChatMessage.Channel.TRADE) {
+                    lastTradeSendMs = now;
+                }
 
                 INPUT_HISTORY.remove(text);
                 INPUT_HISTORY.add(text);
@@ -475,16 +501,14 @@ public final class AquaChatScreen extends Screen {
 
                 if (text.startsWith("/")) {
                     mc.player.connection.sendCommand(text.substring(1));
-                    // commands are not echoed as chat speech
+                    // Intentionally do NOT echo outgoing command as a fake player message
                 } else {
-                    String outgoing = text;
                     if (isGlobalOrAll && !text.startsWith("!")) {
-                        outgoing = "!" + text;
+                        text = "!" + text;
                     } else if (channel == AquaChatMessage.Channel.TRADE && !text.startsWith("$") && !text.startsWith("[Trade]")) {
-                        outgoing = "$" + text;
+                        text = "$" + text;
                     }
-                    mc.player.connection.sendChat(outgoing);
-                    AquaChatManager.addLocalEcho(text);
+                    mc.player.connection.sendChat(text);
                 }
             }
         }
@@ -529,12 +553,10 @@ public final class AquaChatScreen extends Screen {
             boolean hovered = mouseX >= tabX && mouseX <= tabX + pillW && mouseY >= tabY && mouseY <= tabY + tabH;
 
             if (active) {
-                LumenGfx.roundedRect(graphics, tabX, tabY, pillW, tabH, 5, 0xFF50E8F4);
-                LumenGfx.roundedRect(graphics, tabX + 1, tabY + 1, pillW - 2, 1, 0, 0x99FFFFFF);
+                LumenGfx.roundedRect(graphics, tabX, tabY, pillW, tabH, tabH / 2, 0xFF50E8F4);
             } else if (hovered) {
-                LumenGfx.roundedRect(graphics, tabX, tabY, pillW, tabH, 5, 0x1F50E8F4);
-                LumenGfx.outline(graphics, tabX, tabY, pillW, tabH, 5, 0x6650E8F4);
-                LumenGfx.roundedRect(graphics, tabX + 1, tabY + 1, pillW - 2, 1, 0, 0x33C7F8FE);
+                LumenGfx.roundedRect(graphics, tabX, tabY, pillW, tabH, tabH / 2, 0x2250E8F4);
+                LumenGfx.outline(graphics, tabX, tabY, pillW, tabH, tabH / 2, 0x6650E8F4);
             }
             AquaFontRenderer.draw(graphics, this.font, chLabel, tabX + 8, tabY + (tabH - 8) / 2,
                     active ? 0xFF04141A : (hovered ? 0xFFC7F8FE : 0xFF7E8E9F));
@@ -551,7 +573,7 @@ public final class AquaChatScreen extends Screen {
                 AquaChatLayout.CHAT_WIDTH, 1, 0, 0x1850E8F4);
 
         // Полоса быстрых команд над строкой ввода: тихие ghost-чипы
-        String[] quickCmds = {"/menu", "F4", "/ah", "/balance"};
+        String[] quickCmds = {"/kit", "/warp", "/ah", "/balance"};
         int chipX = AquaChatLayout.CONTENT_X;
         int chipY = AquaChatLayout.chipsY(this.height);
         for (String quick : quickCmds) {
@@ -560,7 +582,6 @@ public final class AquaChatScreen extends Screen {
                     && mouseY >= chipY && mouseY <= chipY + AquaChatLayout.CHIPS_H;
             LumenGfx.roundedRect(graphics, chipX, chipY, cmdW, AquaChatLayout.CHIPS_H, 5, chipHov ? 0x2250E8F4 : 0x0F0B131F);
             LumenGfx.outline(graphics, chipX, chipY, cmdW, AquaChatLayout.CHIPS_H, 5, chipHov ? 0x8850E8F4 : 0x22283B4D);
-            LumenGfx.roundedRect(graphics, chipX + 1, chipY + 1, cmdW - 2, 1, 0, chipHov ? 0x55C7F8FE : 0x22C7F8FE);
             AquaFontRenderer.draw(graphics, this.font, quick, chipX + 7, chipY + 6, chipHov ? 0xFFC7F8FE : 0xFF7E8E9F);
             chipX += cmdW + 6;
         }
@@ -575,7 +596,6 @@ public final class AquaChatScreen extends Screen {
         boolean hashHov = mouseX >= btnHashX && mouseX <= btnHashX + btnSize && mouseY >= inputY && mouseY <= inputY + inputH;
         LumenGfx.roundedRect(graphics, btnHashX, inputY, btnSize, inputH, 6, hashHov ? 0xDD162232 : 0x880B131F);
         LumenGfx.outline(graphics, btnHashX, inputY, btnSize, inputH, 6, hashHov ? 0xFF00F0FF : 0x3338BDF8);
-        LumenGfx.roundedRect(graphics, btnHashX + 1, inputY + 1, btnSize - 2, 1, 0, 0x55C7F8FE);
         int hashW = AquaFontRenderer.headerWidth(this.font, "#");
         AquaFontRenderer.drawHeader(graphics, this.font, "#", btnHashX + (btnSize - hashW) / 2, inputY + 7,
                 hashHov ? 0xFF00F0FF : 0xFF38BDF8);
@@ -586,7 +606,6 @@ public final class AquaChatScreen extends Screen {
         boolean capFocused = this.input != null && this.input.isFocused();
         LumenGfx.roundedRect(graphics, capX, inputY, capW, inputH, 6, 0xDD070D16);
         LumenGfx.outline(graphics, capX, inputY, capW, inputH, 6, capFocused ? 0x8800F0FF : 0x33384D);
-        LumenGfx.roundedRect(graphics, capX + 1, inputY + 1, capW - 2, 1, 0, capFocused ? 0x9950E8F4 : 0x33C7F8FE);
 
         this.input.render(graphics, mouseX, mouseY, partialTick);
 
@@ -602,17 +621,31 @@ public final class AquaChatScreen extends Screen {
         int countX = capX + capW - countW - 8;
         AquaFontRenderer.draw(graphics, this.font, count, countX, inputY + 8, 0xFF64748B);
 
+        // Cooldown timer & progress bar
+        long now = System.currentTimeMillis();
+        long elapsed = now - (activeCh == AquaChatMessage.Channel.GLOBAL ? lastGlobalSendMs : lastTradeSendMs);
+        long totalCD = activeCh == AquaChatMessage.Channel.GLOBAL ? 5000 : activeCh == AquaChatMessage.Channel.TRADE ? 15000 : 0;
+
+        if (totalCD > 0 && elapsed < totalCD) {
+            float cdPct = (float) (totalCD - elapsed) / totalCD;
+            int barW = (int) ((capW - 12) * cdPct);
+            LumenGfx.roundedRect(graphics, capX + 6, inputY + inputH - 2, barW, 2, 1, 0xFFF59E0B);
+
+            long remSec = (long) Math.ceil((totalCD - elapsed) / 1000.0);
+            String cdStr = remSec + " с";
+            int cdW = AquaFontRenderer.width(this.font, cdStr);
+            AquaFontRenderer.draw(graphics, this.font, cdStr, countX - cdW - 6, inputY + 8, 0xFFF5C25B);
+        }
 
         // 4. Send Button [ ➤ ]
         int sendX = AquaChatLayout.sendX();
         int sendSize = AquaChatLayout.SEND_SIZE;
         boolean sendHov = mouseX >= sendX && mouseX <= sendX + sendSize
                 && mouseY >= inputY && mouseY <= inputY + inputH;
-        LumenGfx.roundedRect(graphics, sendX + 1, inputY + 1, sendSize - 2, 1, 0, 0x88FFFFFF);
-        int sendBg = sendHov ? 0xFF7DF0F8 : 0xCC50E8F4;
+        int sendBg = sendHov ? 0xFF00F0FF : 0x2200F0FF;
         LumenGfx.roundedRect(graphics, sendX, inputY, sendSize, inputH, 6, sendBg);
-        LumenGfx.outline(graphics, sendX, inputY, sendSize, inputH, 6, 0xFF50E8F4);
-        graphics.drawString(this.font, "➤", sendX + 9, inputY + 8, 0xFF04141A, false);
+        LumenGfx.outline(graphics, sendX, inputY, sendSize, inputH, 6, 0xFF00F0FF);
+        graphics.drawString(this.font, "➤", sendX + 9, inputY + 8, sendHov ? 0xFF050E17 : 0xFF00F0FF, false);
 
         // 4b. Floating Pill: Return to bottom / Unread below indicator
         if (AquaChatManager.getScrollOffset() > 0) {
@@ -850,18 +883,16 @@ public final class AquaChatScreen extends Screen {
         }
 
         // Клик по быстрой команде над вводом
-        String[] quickCmds = {"/menu", "F4", "/ah", "/balance"};
+        String[] quickCmds = {"/kit", "/warp", "/ah", "/balance"};
         int chipX = AquaChatLayout.CONTENT_X;
         int chipY = AquaChatLayout.chipsY(this.height);
         for (String quick : quickCmds) {
             int cmdW = AquaFontRenderer.width(this.font, quick) + 14;
             if (mouseX >= chipX && mouseX <= chipX + cmdW
                     && mouseY >= chipY && mouseY <= chipY + AquaChatLayout.CHIPS_H) {
-                if (quick.startsWith("/")) {
-                    this.input.setValue(quick);
-                    this.input.setCursorPosition(quick.length());
-                    sendMessage();
-                }
+                this.input.setValue(quick);
+                this.input.setCursorPosition(quick.length());
+                sendMessage();
                 return true;
             }
             chipX += cmdW + 6;
