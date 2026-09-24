@@ -1,6 +1,5 @@
 {
   "key.categories.aquatech_ui": "AquaTech: Ocean Horizon",
-  "key.aquatech_ui.skill_tree": "Ocean Constellations (Skill Tree)",
   "hud.aquatech_ui.rhythm_hook.title": "Hook!",
   "hud.aquatech_ui.rhythm_hook.title_elite": "Rare Bite!",
   "hud.aquatech_ui.rhythm_hook.hint_hold": "Hold RMB / A / D in green zone",
@@ -52,11 +51,6 @@
   "item.aquatech_ui.abyssal_magnet": "Abyssal Resource Magnet",
   "item.aquatech_ui.kelp_bio_pellet": "Concentrated Bio Pellet",
   "item.aquatech_ui.ocean_guide_book": "Ocean Encyclopedia (Guidebook)",
-  "gui.aquatech_ui.skill_tree.title": "Ocean Constellations",
-  "gui.aquatech_ui.skill_tree.hint": "Hover over constellation node to view description and cost.",
-  "gui.aquatech_ui.skill_tree.type.small": "Basic",
-  "gui.aquatech_ui.skill_tree.type.notable": "Enhanced",
-  "gui.aquatech_ui.skill_tree.type.keystone": "Constellation",
   "tooltip.aquatech_ui.auto_fisher.desc": "§7Automatically catches ores and Industrial Upgrade resources from ocean water.",
   "tooltip.aquatech_ui.auto_fisher.status.working": "§a✓ Status: Catching resources...",
   "tooltip.aquatech_ui.auto_fisher.status.no_energy": "§c✗ Status: Out of energy (Requires 25 FE/t — Unified Energy)",

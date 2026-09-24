@@ -96,7 +96,7 @@ public final class PendingDeliveryService {
             return;
         }
         boolean ok = StoreCatalog.fulfill(player, kind, payload);
-        ack(key, id, ok);
+        ackAsync(key, id, ok);
         if (ok) {
             String msg = switch (kind == null ? "" : kind) {
                 case "skin" -> "Скин с сайта применён";
@@ -109,6 +109,11 @@ public final class PendingDeliveryService {
             }
             HubDataService.push(player);
         }
+    }
+
+    /** Ack is a blocking HTTP call — never run it on the server thread. */
+    private static void ackAsync(String key, int id, boolean ok) {
+        java.util.concurrent.CompletableFuture.runAsync(() -> ack(key, id, ok));
     }
 
     private static void ack(String key, int id, boolean ok) {

@@ -6,82 +6,149 @@
 <style>
   @font-face { font-family: "Ubuntu"; src: url("Ubuntu.ttf"); }
   @font-face { font-family: "Ubuntu"; font-weight: 700; src: url("Ubuntu-Bold.ttf"); }
-  :root { color-scheme: dark; }
+  :root {
+    color-scheme: dark;
+    --ink: #03141a;
+    --ink-2: #06232c;
+    --aqua: #50e8f4;
+    --thin: #c7f8fe;
+    --thin-80: rgba(199, 248, 254, .8);
+    --thin-55: rgba(199, 248, 254, .55);
+    --thin-35: rgba(199, 248, 254, .35);
+    --line: rgba(199, 248, 254, .14);
+    --line-2: rgba(199, 248, 254, .28);
+    --gold: #ffd875;
+    --danger: #ff7a90;
+  }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: 100%; height: 100%; overflow: hidden; background: transparent; }
-  body { font: 13.5px/1.4 "Ubuntu", "Segoe UI", sans-serif; }
+  body { font: 13.5px/1.45 "Ubuntu", "Segoe UI", sans-serif; color: var(--thin); }
 
-  /* корневая сцена: компакт = лента слева-снизу, open = панель */
+  /* сцена: компакт — короткая лента слева-снизу, open — панель с рельсом каналов */
   #scene { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 10px 8px 8px; }
-  body.open #scene { justify-content: flex-end; padding: 10px 12px 12px; }
+  body.open #scene { padding: 12px; }
 
-  .panel { width: 100%; max-width: 560px; margin-left: 0; display: none; flex-direction: column;
-    background: rgba(6,8,12,.90); border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
-    box-shadow: 0 0 24px rgba(78,249,255,.08), 0 18px 50px rgba(0,0,0,.5); overflow: hidden; }
+  .panel {
+    width: 100%; max-width: 620px; display: none; flex-direction: column; min-height: 0;
+    background: linear-gradient(180deg, rgba(6, 35, 44, .94), rgba(3, 20, 26, .92));
+    border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, .55);
+  }
   body.open .panel { display: flex; height: 100%; max-width: none; }
+  body.open .shell { display: grid; grid-template-columns: 214px 1fr; min-height: 0; flex: 1; }
 
-  /* лента (компакт) */
-  #feed { display: flex; flex-direction: column; gap: 5px; }
-  body.open #feed { flex: 1; overflow-y: auto; padding: 4px 6px 6px; gap: 7px; }
-  #feed::-webkit-scrollbar { width: 6px; }
-  #feed::-webkit-scrollbar-thumb { background: rgba(78,249,255,.25); border-radius: 3px; }
+  /* ---------- рельс каналов (только в панели) ---------- */
+  .rail { display: none; }
+  body.open .rail {
+    display: flex; flex-direction: column; gap: 4px; padding: 12px 10px;
+    border-right: 1px solid var(--line); background: rgba(0, 0, 0, .18);
+  }
+  .chan {
+    display: flex; align-items: center; gap: 9px; height: 36px; padding: 0 11px;
+    border-radius: 10px; color: var(--thin-55); font-weight: 700; cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .chan:hover { color: var(--thin-80); border-color: var(--line); }
+  .chan.on { background: var(--aqua); color: var(--ink); border-color: transparent; }
+  .chan.soon { opacity: .4; cursor: default; }
+  .chan small { margin-left: auto; font-size: 10.5px; font-weight: 700; opacity: .75; }
+  .rail-card {
+    margin-top: auto; padding: 11px 12px; border-radius: 12px;
+    background: var(--thin); color: var(--ink);
+  }
+  .rail-card span { display: block; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(0, 22, 25, .6); }
+  .rail-card b { font-size: 13px; }
+  .rail-card small { color: rgba(0, 22, 25, .7); }
 
-  .line { position: relative; display: flex; gap: 9px; align-items: center;
-    background: rgba(10,15,22,.62); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;
-    padding: 5px 10px 5px 8px; animation: slidein .18s ease-out; }
-  body.open .line { border-radius: 12px; padding: 7px 12px 7px 10px; }
-  .line::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 2px; background: var(--c, #4ef9ff); }
-  .line.own { background: rgba(68,225,170,.10); border-color: rgba(68,225,170,.22); }
-  .line.sysline { justify-content: center; background: rgba(78,249,255,.07); border-color: rgba(78,249,255,.25); }
-  .tx.sys { color: #ffd08a; }
+  /* ---------- лента ---------- */
+  .feed { display: flex; flex-direction: column; gap: 5px; overflow: hidden; }
+  body.open .feed { gap: 2px; padding: 10px 12px; overflow-y: auto; }
+  .feed::-webkit-scrollbar { width: 6px; }
+  .feed::-webkit-scrollbar-thumb { background: rgba(80, 232, 244, .3); border-radius: 3px; }
+
+  .line {
+    position: relative; display: flex; gap: 10px; align-items: flex-start;
+    background: rgba(10, 36, 44, .55); border: 1px solid var(--line); border-radius: 10px;
+    padding: 6px 11px 6px 9px; animation: slidein .18s ease-out;
+  }
+  body.open .line { border-radius: 12px; padding: 7px 12px 7px 10px; background: transparent; border-color: transparent; }
+  body.open .line:hover { background: rgba(199, 248, 254, .05); border-color: var(--line); }
+  .line::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 2px; background: var(--c, var(--aqua)); }
+  body.open .line::before { display: none; }
+  .line.own { background: rgba(80, 232, 244, .1); border-color: rgba(80, 232, 244, .28); }
+  .line.sysline::before { background: var(--gold); }
+  .line.sysline { background: rgba(255, 216, 117, .08); border-color: rgba(255, 216, 117, .28); }
+  .line.grouped .ava { visibility: hidden; }
+  .line.grouped { padding-top: 1px; padding-bottom: 1px; }
   @keyframes slidein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-  .ava { width: 22px; height: 22px; border-radius: 6px; flex: none; image-rendering: pixelated;
-    border: 1px solid color-mix(in srgb, var(--c, #4ef9ff) 55%, transparent); }
+  .ava {
+    width: 24px; height: 24px; border-radius: 7px; flex: none; image-rendering: pixelated;
+    border: 1px solid color-mix(in srgb, var(--c, var(--aqua)) 55%, transparent); margin-top: 1px;
+  }
   body.open .ava { width: 28px; height: 28px; border-radius: 8px; }
-  .ava.letter { display: grid; place-items: center; font-weight: 700; font-size: 11px; color: #04121c;
-    background: var(--c, #4ef9ff); }
+  .ava.letter { display: grid; place-items: center; font-weight: 700; font-size: 11px; color: var(--ink); background: var(--c, var(--aqua)); }
 
-  .who { font-weight: 700; color: #fff; }
-  .tx { color: #e8f1f8; }
+  .who { font-weight: 700; color: var(--thin); margin-right: 6px; }
+  .tx { color: var(--thin-80); }
+  .tx.sys { color: var(--gold); }
   .tx .c0 { color: #000; } .tx .c1 { color: #0000aa; } .tx .c2 { color: #00aa00; } .tx .c3 { color: #00aaaa; }
   .tx .c4 { color: #aa0000; } .tx .c5 { color: #aa00aa; } .tx .c6 { color: #ffaa00; } .tx .c7 { color: #aaaaaa; }
   .tx .c8 { color: #555555; } .tx .c9 { color: #5555ff; } .tx .ca { color: #55ff55; } .tx .cb { color: #55ffff; }
   .tx .cc { color: #ff5555; } .tx .cd { color: #ff55ff; } .tx .ce { color: #ffff55; } .tx .cf { color: #ffffff; }
   .tx .l { font-weight: 700; } .tx .o { font-style: italic; } .tx .n { text-decoration: underline; }
-  .tx .sys { color: #ffd08a; }
 
-  /* каналы (open) */
-  #tabs { display: none; gap: 8px; padding: 12px 8px 8px; }
-  body.open #tabs { display: flex; }
-  .tab { flex: 1; text-align: center; font-weight: 700; font-size: 13px; padding: 7px 0; border-radius: 10px;
-    color: #8fa2b8; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); cursor: pointer; }
-  .tab.on { color: #4ef9ff; border-color: #4ef9ff; box-shadow: 0 0 12px rgba(78,249,255,.22); }
-  .tab.soon { opacity: .45; }
+  /* ---------- быстрые команды + ввод ---------- */
+  .chips { display: none; gap: 6px; padding: 0 12px 6px; }
+  body.open .chips { display: flex; flex-wrap: wrap; }
+  .chips span {
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line); color: var(--thin-55);
+  }
+  .chips span:hover { border-color: var(--aqua); color: var(--thin); }
 
-  /* инпут (open) */
-  #bar { display: none; gap: 8px; padding: 10px 8px 10px; }
+  #bar { display: none; gap: 8px; padding: 10px 12px 12px; border-top: 1px solid var(--line); }
   body.open #bar { display: flex; }
-  #input { flex: 1; height: 38px; border-radius: 10px; border: 1px solid rgba(78,249,255,.35); outline: none;
-    background: rgba(255,255,255,.04); color: #eef4fa; font: 13.5px "Ubuntu", sans-serif; padding: 0 12px; }
-  #input:focus { box-shadow: 0 0 14px rgba(78,249,255,.18); }
-  #send { width: 40px; border-radius: 10px; border: none; cursor: pointer; color: #04121c; font-size: 15px; font-weight: 700;
-    background: linear-gradient(135deg, #4ef9ff, #44e1aa); box-shadow: 0 4px 16px rgba(78,249,255,.3); }
-  #hint { display: none; padding: 0 10px 8px; color: #56687d; font-size: 11px; text-align: center; }
+  #input {
+    flex: 1; height: 38px; border-radius: 10px; border: 1px solid var(--line); outline: none;
+    background: rgba(0, 0, 0, .3); color: var(--thin-80); font: 13.5px "Ubuntu", sans-serif; padding: 0 12px;
+  }
+  #input::placeholder { color: var(--thin-35); }
+  #input:focus { border-color: var(--aqua); }
+  #send {
+    width: 42px; border-radius: 10px; border: none; cursor: pointer; color: var(--ink);
+    font-size: 15px; font-weight: 700; background: var(--aqua);
+  }
+  #hint { display: none; padding: 0 12px 10px; color: var(--thin-35); font-size: 11px; text-align: center; }
   body.open #hint { display: block; }
 </style>
 </head>
 <body>
 <div id="scene">
-  <div id="tabs">
-    <span class="tab on" data-ch="all">Все</span>
-    <span class="tab soon" data-ch="global">Глобал вЂ” скоро</span>
-    <span class="tab soon" data-ch="trade">Торговля вЂ” скоро</span>
-    <span class="tab soon" data-ch="pm">ЛС вЂ” скоро</span>
+  <div class="panel">
+    <div class="shell">
+      <aside class="rail">
+        <div class="chan on" data-ch="all">Все</div>
+        <div class="chan soon" data-ch="global">Глобал <small>скоро</small></div>
+        <div class="chan soon" data-ch="trade">Рынок <small>скоро</small></div>
+        <div class="chan soon" data-ch="pm">ЛС <small>скоро</small></div>
+        <div class="rail-card">
+          <span>Подсказка</span>
+          <b>F4 — меню сервера</b>
+          <small>киты, кейсы, магазин и топы там</small>
+        </div>
+      </aside>
+      <div class="feed" id="feed"></div>
+    </div>
+    <div class="chips" id="chips">
+      <span data-cmd="/kit">/kit — набор ранга</span>
+      <span data-cmd="/warp">/warp — точки</span>
+      <span data-cmd="/ah">/ah — аукцион</span>
+      <span data-cmd="/balance">/balance</span>
+    </div>
+    <div id="bar"><input id="input" maxlength="256" placeholder="Сообщение или /команда"><button id="send">&#10148;</button></div>
+    <div id="hint">Enter — отправить · / — команда · Esc — свернуть</div>
   </div>
-  <div id="feed"></div>
-  <div id="bar"><input id="input" maxlength="256" placeholder="СообщениевЂ¦"><button id="send">вћ¤</button></div>
-  <div id="hint">Enter вЂ” отправить В· Esc вЂ” свернуть</div>
 </div>
 <script>
 window.AquaLumenBridge = {
@@ -94,44 +161,50 @@ window.AquaLumenBridge = {
 var feed = document.getElementById('feed');
 var input = document.getElementById('input');
 var MAX_LINES = 60;
+var lastNick = null;
 
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function colorize(s) {
   return esc(s).replace(/\u00a7([0-9a-fk-or])/g, function (_, code) {
-    if ('0123456789abcdef'.includes(code)) return '</span><span class="c' + code + '">';
+    if ('0123456789abcdef'.indexOf(code) >= 0) return '</span><span class="c' + code + '">';
     if (code === 'l') return '<span class="l">';
     if (code === 'o') return '<span class="o">';
     if (code === 'n') return '<span class="n">';
     return '';
   });
 }
+function trim() {
+  while (feed.children.length > MAX_LINES) feed.removeChild(feed.firstChild);
+}
+function toBottom() { feed.scrollTop = feed.scrollHeight; }
 
 window.Chat = {
   push: function (m) {
     var div = document.createElement('div');
     if (m.sys) {
+      lastNick = null;
       div.className = 'line sysline';
       div.innerHTML = '<div class="tx sys">' + colorize(m.text) + '</div>';
       feed.appendChild(div);
-      while (feed.children.length > MAX_LINES) feed.removeChild(feed.firstChild);
-      feed.scrollTop = feed.scrollHeight;
+      trim(); toBottom();
       return;
     }
-    div.className = 'line' + (m.own ? ' own' : '');
-    div.style.setProperty('--c', m.color || '#4ef9ff');
+    var grouped = !m.own && m.nick && m.nick === lastNick;
+    lastNick = m.own ? null : (m.nick || null);
+    div.className = 'line' + (m.own ? ' own' : '') + (grouped ? ' grouped' : '');
+    div.style.setProperty('--c', m.color || '#50e8f4');
     var ava = m.head
       ? '<img class="ava" src="' + m.head + '">'
-      : '<div class="ava letter">' + (m.nick ? m.nick[0] : '?') + '</div>';
-    div.innerHTML = ava + '<div>' + (m.nick ? '<span class="who">' + esc(m.nick) + '</span> ' : '')
+      : '<div class="ava letter">' + (m.nick ? esc(m.nick[0]) : '?') + '</div>';
+    div.innerHTML = ava + '<div>' + (m.nick && !grouped ? '<span class="who">' + esc(m.nick) + '</span> ' : '')
       + '<span class="tx">' + colorize(m.text) + '</span></div>';
     feed.appendChild(div);
-    while (feed.children.length > MAX_LINES) feed.removeChild(feed.firstChild);
-    feed.scrollTop = feed.scrollHeight;
+    trim(); toBottom();
   },
   setSelf: function (head, nick) {
     window._selfHead = head; window._selfNick = nick;
   },
-  clear: function () { feed.innerHTML = ''; }
+  clear: function () { feed.innerHTML = ''; lastNick = null; }
 };
 
 function send() {
@@ -143,13 +216,19 @@ function send() {
 document.getElementById('send').addEventListener('click', send);
 input.addEventListener('keydown', function (e) {
   if (e.key === 'Enter') { e.preventDefault(); send(); }
+  if (e.key === 'Escape') { e.preventDefault(); AquaLumenBridge.send({ type: 'chat.close' }); }
 });
-document.getElementById('tabs').addEventListener('click', function (e) {
-  var t = e.target.closest('.tab');
-  if (!t || t.classList.contains('soon')) return;
-  document.querySelectorAll('.tab').forEach(function (x) { x.classList.remove('on'); });
-  t.classList.add('on');
-  AquaLumenBridge.send({ type: 'chat.channel', channel: t.dataset.ch });
+document.getElementById('chips').addEventListener('click', function (e) {
+  var chip = e.target.closest('[data-cmd]');
+  if (!chip) return;
+  AquaLumenBridge.send({ type: 'chat.send', text: chip.dataset.cmd });
+});
+document.querySelector('.rail').addEventListener('click', function (e) {
+  var tab = e.target.closest('.chan');
+  if (!tab || tab.classList.contains('soon')) return;
+  document.querySelectorAll('.chan').forEach(function (x) { x.classList.remove('on'); });
+  tab.classList.add('on');
+  AquaLumenBridge.send({ type: 'chat.channel', channel: tab.dataset.ch });
 });
 </script>
 </body>

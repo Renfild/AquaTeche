@@ -1,6 +1,6 @@
 package net.aquatech.ui.fishing;
 
-import net.aquatech.ui.capability.SkillEffects;
+import net.aquatech.ui.capability.OceanProgressCapability;
 import net.aquatech.ui.horizon.StormEvent;
 import net.aquatech.ui.item.RateModItem;
 import net.aquatech.ui.registry.ModItems;
@@ -70,6 +70,7 @@ public class FishingLootHandler {
                 applyRateMultiplier(event.getDrops(), fishRate);
             }
             FishingAtlasService.onManualCatch(serverPlayer, event.getDrops());
+            sendCatchFeedback(serverPlayer, rodStack, event.getDrops());
             bumpCatchStat(serverPlayer, false);
             RodDurability.wearOne(rodStack, serverPlayer);
             return;
@@ -116,7 +117,8 @@ public class FishingLootHandler {
         if (id == null || !"starcatcher".equals(id.getNamespace())) return false;
         String path = id.getPath();
         if (path.endsWith("_rod") || path.contains("bait") || path.contains("bobber")
-                || path.contains("hook") || path.contains("template") || path.contains("hat")) {
+                || path.contains("hook") || path.contains("template") || path.contains("hat")
+                || path.contains("unknown_fish")) {
             return false;
         }
         return true;
@@ -195,6 +197,7 @@ public class FishingLootHandler {
         if (id == null) return false;
         String ns = id.getNamespace();
         String path = id.getPath();
+        if ("unknown_fish".equals(path) || path.contains("unknown_fish")) return true;
         if ("avaritia".equals(ns) || "avaritia_armor".equals(ns)) return true;
         if (path.contains("inferno") || path.contains("infernal") || path.contains("crystal_core")
                 || path.contains("crystal_matrix") || path.contains("crystal_pattern") || path.contains("crystal_helmet")
@@ -237,6 +240,7 @@ public class FishingLootHandler {
                 new net.aquatech.ui.event.AquaFishCaughtEvent(player, type, awarded, lootScale, quality));
 
         OceanEventsService.onCatch(player, awarded);
+        sendCatchFeedback(player, rodStack, awarded);
 
         int xpAmount = Math.round((30 + type.ordinal() * 30) * (0.85f + quality / 200f));
         // Сезонный пропуск: XP за каждый улов (редкость => больше сезонного опыта)
@@ -246,18 +250,18 @@ public class FishingLootHandler {
             if (rid != null && "starcatcher".equals(rid.getNamespace())) seasonGain += 4;
         }
         final int seasonGainF = seasonGain;
-        player.getCapability(net.aquatech.ui.capability.AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+        player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             cap.addSeasonXp(seasonGainF);
             boolean levelUp = cap.addXp(xpAmount);
             if (levelUp) {
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                         net.minecraft.sounds.SoundEvents.PLAYER_LEVELUP, net.minecraft.sounds.SoundSource.PLAYERS, 0.8F, 1.0F);
                 player.displayClientMessage(net.minecraft.network.chat.Component.literal(
-                        "§b[AquaTech] §a+1 Очко Навыков Океана! §8[Нажми K для меню]"), true);
+                        "§b[AquaTech] §aУровень Океана: §f" + cap.getLevel()), true);
             }
             net.aquatech.ui.network.NetworkHandler.CHANNEL.send(
                     net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
-                    new net.aquatech.ui.network.S2CSyncSkillsPacket(cap));
+                    new net.aquatech.ui.network.S2CSyncOceanProgressPacket(cap));
         });
     }
 
@@ -294,19 +298,7 @@ public class FishingLootHandler {
         applyRateMultiplier(list, Math.max(1, rate));
 
         if (player != null) {
-            float mult = SkillEffects.catchMultiplier(player);
-            if (mult > 1.0f && random.nextFloat() < (mult - 1.0f)) {
-                List<ItemStack> extra = new ArrayList<>();
-                for (ItemStack s : list) {
-                    ItemStack c = s.copy();
-                    c.setCount(Math.max(1, c.getCount() / 2));
-                    extra.add(c);
-                }
-                list.addAll(extra);
-            }
-
-            float rare = SkillEffects.rareLootBonus(player);
-            if (StormEvent.isActive()) rare = Math.min(0.85f, rare + 0.20f);
+            float rare = StormEvent.isActive() ? 0.20f : 0f;
             if (rare > 0f && random.nextFloat() < rare) {
                 list.add(rareTreasure(random));
             }
@@ -674,6 +666,10 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/yttrium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/thallium", Items.IRON_ORE, 1));
+                // Chain fix: sky_rod needs a feather
+                maybeAdd(pool, random, 0.25f, new ItemStack(Items.FEATHER, 1 + random.nextInt(2)));
+                // Chain fix: boner_rod (Костяная) needs diamonds
+                maybeAdd(pool, random, 0.12f, new ItemStack(Items.DIAMOND, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "naturalist_rod" -> { // Tier 4: Naturalist Rod (LV Ores & Barium)
@@ -682,6 +678,9 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.IRON_ORE, 1 + random.nextInt(2)));
                 // Chain fix: slimed_rod recipe needs strontium — drop it here
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1));
+                // Chain fix: iceborn/starcatcher rods need diamonds — no lower tier drops them
+                maybeAdd(pool, random, 0.28f, new ItemStack(Items.DIAMOND, 1));
+                maybeAdd(pool, random, 0.06f, new ItemStack(Items.DIAMOND_BLOCK, 1));
                 maybeAdd(pool, random, 0.28f, new ItemStack(Items.SLIME_BLOCK, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
@@ -700,6 +699,16 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore2/strontium", Items.IRON_ORE, 1 + random.nextInt(2)));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/polonium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, new ItemStack(Items.OBSIDIAN, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore2/arsenic", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore/chromium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore/nickel", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:crafting_elements/crafting_476_element", Items.QUARTZ, 1));
+                maybeAdd(pool, random, 0.25f, getModItem("industrialupgrade:helium", Items.QUARTZ, 1));
+                // Chain fix: iceborn_rod needs 4 diamonds + aluminium + silver
+                maybeAdd(pool, random, 0.30f, new ItemStack(Items.DIAMOND, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.08f, new ItemStack(Items.DIAMOND_BLOCK, 1));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/aluminium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/silver", Items.IRON_ORE, 1));
                 pickFromPool(list, pool, random, 2, 4);
             }
             case "boner_rod" -> { // Side rod: overworld hostile drops + cobweb/snow
@@ -742,6 +751,11 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:preciousgem/sapphire_gem", Items.LAPIS_LAZULI, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/tungsten", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/chromium", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:baseore2/bismuth", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.22f, getModItem("industrialupgrade:baseore/iridium", Items.DIAMOND, 1));
+                // Chain fix: starcatcher_rod needs topaz + 3 diamond blocks
+                maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:preciousgem/topaz_gem", Items.AMETHYST_SHARD, 1));
+                maybeAdd(pool, random, 0.12f, new ItemStack(Items.DIAMOND_BLOCK, 1));
                 maybeAdd(pool, random, 0.35f, new ItemStack(Items.GOLD_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
@@ -767,6 +781,8 @@ public class FishingLootHandler {
                 // Chain fix: sharktooth_rod recipe needs titanium — drop it here
                 maybeAdd(pool, random, 0.45f, getModItem("industrialupgrade:baseore/titanium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/cobalt", Items.IRON_ORE, 1));
+                // Chain fix: sharktooth_rod needs netherite scrap (3), obsidian_rod needs the ingot
+                maybeAdd(pool, random, 0.20f, new ItemStack(Items.NETHERITE_SCRAP, 1));
                 maybeAdd(pool, random, 0.30f, new ItemStack(Items.DIAMOND, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
@@ -1123,4 +1139,45 @@ public class FishingLootHandler {
         }
         return new ItemStack(fallback, count);
     }
+
+    public static void sendCatchFeedback(ServerPlayer player, ItemStack rodStack, List<ItemStack> awarded) {
+        if (player == null || awarded == null || awarded.isEmpty()) return;
+
+        List<String> fishNames = new ArrayList<>();
+        int speciesCount = 0;
+        for (ItemStack s : awarded) {
+            if (isStarCatcherFishItem(s)) {
+                speciesCount++;
+                fishNames.add((s.getCount() > 1 ? s.getCount() + "× " : "") + s.getHoverName().getString());
+            }
+        }
+
+        if (fishNames.isEmpty()) return;
+
+        StringBuilder sb = new StringBuilder("§b[Улов] §f");
+        sb.append(String.join(", ", fishNames));
+
+        List<String> bonuses = new ArrayList<>();
+        int rate = readRateMultiplier(rodStack);
+        if (rate > 1) {
+            bonuses.add("§6×" + rate + " множитель");
+        }
+        if (speciesCount > 1) {
+            bonuses.add("§eдвойной клёв");
+        }
+        FishingBait.Kind bait = FishingBait.active(rodStack);
+        if (bait == FishingBait.Kind.SHOAL) {
+            bonuses.add("§3бонус стаи");
+        }
+        if (OceanEventsService.biteActive()) {
+            bonuses.add("§dактивный жор");
+        }
+
+        if (!bonuses.isEmpty()) {
+            sb.append(" §8| ").append(String.join(" ", bonuses));
+        }
+
+        player.displayClientMessage(net.minecraft.network.chat.Component.literal(sb.toString()), true);
+    }
 }
+

@@ -407,6 +407,9 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Menu
             drops.add(items.getStackInSlot(i));
         }
         Containers.dropContents(level, worldPosition, drops);
+        for (int i = 0; i < items.getSlots(); i++) {
+            items.setStackInSlot(i, ItemStack.EMPTY);
+        }
     }
 
     @Override

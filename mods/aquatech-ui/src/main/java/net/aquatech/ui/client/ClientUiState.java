@@ -15,8 +15,6 @@ public final class ClientUiState {
     private static ServerStats stats = new ServerStats(0, 0, 0, 20.0F, "AquaTech Ocean Horizon", "bk.aquatech.net");
     private static int titleFrame;
     private static boolean tabOpen;
-    /** Bumped when skill/horizon data is synced to client (HUD string cache). */
-    private static int skillSyncGeneration;
     /** Session token relayed from server after backend auth validation. */
     private static String sessionToken = "";
     private static int sessionBalance;
@@ -76,14 +74,6 @@ public final class ClientUiState {
 
     public static int titleFrame() {
         return titleFrame;
-    }
-
-    public static void bumpSkillSyncGeneration() {
-        skillSyncGeneration++;
-    }
-
-    public static int skillSyncGeneration() {
-        return skillSyncGeneration;
     }
 
     public static void setSession(String token, int balance, String rankId) {

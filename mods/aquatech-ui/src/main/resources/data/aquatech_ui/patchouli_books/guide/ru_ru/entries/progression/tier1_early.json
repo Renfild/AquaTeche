@@ -1,0 +1,19 @@
+{
+  "name": "Акт 1: Плот и выживание",
+  "category": "aquatech_ui:progression",
+  "icon": "starcatcher:humble_rod",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Акт 1: Старт",
+      "text": "Твой путь на плоту:$(br2)$(li)Забери стартовый набор в меню F4 → Киты.$(br)$(li)Лови бамбуковой удочкой медь и железо.$(br)$(li)Скрафти Скромную удочку.$(br)$(li)Сдавай рыбу скупщику."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:kickstarter_boat",
+      "title": "Лодка с сундуком",
+      "text": "Удобная стартовая лодка для рыбалки и исследования океана."
+    }
+  ]
+}

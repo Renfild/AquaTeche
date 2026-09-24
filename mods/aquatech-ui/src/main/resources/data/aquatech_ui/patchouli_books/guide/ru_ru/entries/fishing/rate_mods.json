@@ -1,0 +1,25 @@
+{
+  "name": "Рейт-апгрейды",
+  "category": "aquatech_ui:fishing",
+  "icon": "aquatech_ui:rate_x4",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Рейт-апгрейды",
+      "text": "Рейт-моды $(bold)rate_mod$() от x2 до x64 вставляются в слот наживки удочки!$(br2)Они умножают весь дроп:$(br)$(li)x2 — двойной улов руды и рыбы$(br)$(li)x4 / x8 — четырёх- и восьмикратный$(br)$(li)x16 / x32 / x64 — горы сырья!"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:rate_x2",
+      "title": "Модуль Rate x2",
+      "text": "Начальный модуль удвоения. Крафтится из манастали, меди и железа."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:rate_x4",
+      "title": "Модуль Rate x4",
+      "text": "Учетверение улова. Требует модуль x2, жемчуг маны, серебро и алмаз маны."
+    }
+  ]
+}

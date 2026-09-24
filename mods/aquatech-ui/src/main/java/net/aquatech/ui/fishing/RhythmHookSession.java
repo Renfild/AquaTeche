@@ -1,6 +1,5 @@
 package net.aquatech.ui.fishing;
 
-import net.aquatech.ui.capability.SkillEffects;
 import net.aquatech.ui.common.ModConfig;
 import net.aquatech.ui.network.NetworkHandler;
 import net.aquatech.ui.network.S2CStartRhythmHookPacket;
@@ -65,15 +64,13 @@ public final class RhythmHookSession {
 
         float rodEase = rodType.ordinal() / (float) Math.max(1,
                 AquaTechFishingRodItem.RodType.values().length - 1);
-        float skill = SkillEffects.fishingSpeedBonus(player);
         float gear = FishingLootHandler.fishingGearEase(player, rodStack);
-        float ease = Mth.clamp(rodEase * 0.55f + skill * 0.70f + gear, 0f, 1.15f);
+        float ease = Mth.clamp(rodEase * 0.55f + gear, 0f, 1.15f);
 
         float baseChance = 0.10f;
         float tierBonus = rodEase * 0.12f;
-        float skillBonus = SkillEffects.rareLootBonus(player) * 0.15f;
         float gearBonus = gear * 0.08f;
-        float eliteChance = Mth.clamp(baseChance + tierBonus + skillBonus + gearBonus, 0.08f, 0.45f);
+        float eliteChance = Mth.clamp(baseChance + tierBonus + gearBonus, 0.08f, 0.45f);
         boolean elite = player.getRandom().nextFloat() < eliteChance;
         boolean treasure = elite && player.getRandom().nextFloat() < 0.65f;
 
@@ -170,7 +167,7 @@ public final class RhythmHookSession {
         player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
                 "hud.aquatech_ui.rhythm_hook.success", quality), true);
 
-        player.getCapability(net.aquatech.ui.capability.AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+        player.getCapability(net.aquatech.ui.capability.OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             long day = player.level().getDayTime() / 24000L;
             cap.ensureDaily(day);
             if (cap.currentContract() == net.aquatech.ui.horizon.HorizonRoute.DailyContract.FISH

@@ -1,7 +1,6 @@
 package net.aquatech.ui.player;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.capability.SkillEffects;
 import net.aquatech.ui.fishing.FishingRodCompat;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -66,7 +65,6 @@ public final class FishingSpeedHandler {
         }
 
         float bonus = 0.12f;
-        bonus += SkillEffects.fishingSpeedBonus(player) * 0.75f;
         BONUS_CACHE.put(id, bonus);
         BONUS_TICK.put(id, tick);
         return bonus;

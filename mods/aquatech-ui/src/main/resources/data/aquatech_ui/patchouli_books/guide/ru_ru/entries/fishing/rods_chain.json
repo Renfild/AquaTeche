@@ -1,0 +1,31 @@
+{
+  "name": "Цепочка удочек",
+  "category": "aquatech_ui:fishing",
+  "icon": "starcatcher:obsidian_rod",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Цепочка удочек",
+      "text": "Каждая новая удочка крафтится из $(bold)предыдущей$() плюс ресурсы, которые эта удочка ловит!$(br2)T1: Бамбуковая$(br)T2: Скромная$(br)T3: Добрая старая$(br)T4: Натуралиста$(br)T5: Слаймовая"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:good_old_rod_craft",
+      "title": "Добрая старая удочка",
+      "text": "Крафтится из Скромной удочки, железа, олова и меди."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:naturalist_rod_craft",
+      "title": "Удочка Натуралиста",
+      "text": "Железный тир. Добывает редстоун, шпинель и ценные минералы."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:obsidian_rod_craft",
+      "title": "Обсидиановая удочка",
+      "text": "Тир 8: незерит и плачущий обсидиан. Необходима для крафта Авто-рыбака!"
+    }
+  ]
+}

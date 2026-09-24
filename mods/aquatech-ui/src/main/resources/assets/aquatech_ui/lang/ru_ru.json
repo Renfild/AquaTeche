@@ -1,6 +1,5 @@
 {
   "key.categories.aquatech_ui": "AquaTech: Горизонт Океана",
-  "key.aquatech_ui.skill_tree": "Созвездия Океана (Древо Навыков)",
   "hud.aquatech_ui.rhythm_hook.title": "Подсечка",
   "hud.aquatech_ui.rhythm_hook.title_elite": "Редкий клёв!",
   "hud.aquatech_ui.rhythm_hook.hint_hold": "Держи ПКМ / A / D в зелёной зоне",
@@ -51,11 +50,6 @@
   "item.aquatech_ui.abyssal_magnet": "Абиссальный Магнит Ресурсов",
   "item.aquatech_ui.kelp_bio_pellet": "Концентрированный Био-Пеллет",
   "item.aquatech_ui.ocean_guide_book": "Энциклопедия Океана (Гайдбук)",
-  "gui.aquatech_ui.skill_tree.title": "Созвездия Океана",
-  "gui.aquatech_ui.skill_tree.hint": "Наведите курсор на узел созвездия. Описание и стоимость появятся здесь.",
-  "gui.aquatech_ui.skill_tree.type.small": "Базовый",
-  "gui.aquatech_ui.skill_tree.type.notable": "Усиленный",
-  "gui.aquatech_ui.skill_tree.type.keystone": "Созвездие",
   "tooltip.aquatech_ui.auto_fisher.desc": "§7Автоматически вылавливает руды и ресурсы Industrial Upgrade из океанской воды.",
   "tooltip.aquatech_ui.auto_fisher.status.working": "§a✓ Статус: Идет вылавливание ресурсов...",
   "tooltip.aquatech_ui.auto_fisher.status.no_energy": "§c✗ Статус: Нет энергии (Требуется 25 FE/t — Единая Энергия)",

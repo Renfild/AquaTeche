@@ -13,7 +13,7 @@ with open('tools/case_icon_map.json', 'r', encoding='utf-8') as f:
 all_textures = {**item_textures, **label_textures}
 
 # Относительные пути (assets/images/items/*.png) внутри игры не резолвятся: mod://
-# смотрит РІ classpath мода. Рнлайним их РІ data-URI из docs/assets.
+# смотрит в classpath мода. Рнлайним их в data-URI из docs/assets.
 _ITEMS_DIR = os.path.join('docs', 'assets', 'images', 'items')
 _fixed = 0
 for _key, _src in list(all_textures.items()):
@@ -486,8 +486,8 @@ hub_html_raw = r'''<!doctype html>
         AquaLumen
       </div>
       <div class="chips">
-        <span class="chip"><i class="chip-dot"></i><b id="online">вЂ”/вЂ”</b></span>
-        <span class="chip"><b id="tps">вЂ” TPS</b></span>
+        <span class="chip"><i class="chip-dot"></i><b id="online">—/—</b></span>
+        <span class="chip"><b id="tps">— TPS</b></span>
         <span class="chip" style="color:var(--gold);"><img class="aqua-coin-icon" src="__COIN_SRC__" alt=""><b id="coins">0</b></span>
         <span class="chip" style="color:var(--accent);"><b id="gems">0</b>&nbsp;крист</span>
       </div>
@@ -501,7 +501,7 @@ hub_html_raw = r'''<!doctype html>
     <aside class="sidebar">
       <nav class="nav" id="nav"></nav>
     </aside>
-    <section class="content" id="content"><div class="empty">Получаем профиль СЃ серверавЂ¦</div></section>
+    <section class="content" id="content"><div class="empty">Получаем профиль с сервера…</div></section>
     <footer class="footer">
       <span class="footer-build" id="build">AquaLumen UI</span>
       <span><span class="key" id="openKey">F4</span> открыть</span>
@@ -566,7 +566,7 @@ hub_html_raw = r'''<!doctype html>
       <div class="reel-marker" id="caseMarker"></div>
       <div class="reel-strip" id="caseStrip"></div>
     </div>
-    <div class="case-wait" id="caseReveal"><span>Крутим рулеткувЂ¦</span></div>
+    <div class="case-wait" id="caseReveal"><span>Крутим рулетку…</span></div>
     <div class="case-actions" id="caseActions"></div>
   </section>
 </div>
@@ -619,7 +619,7 @@ try {
   function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
   function compact(n){n=Number(n)||0;if(n>=1e6)return(n/1e6).toFixed(1)+"M";if(n>=1e3)return(n/1e3).toFixed(1)+"k";return String(n)}
   function num(n){return new Intl.NumberFormat("ru-RU").format(Number(n)||0)}
-  function formatHours(m){m=Number(m)||0;const h=Math.floor(m/60),rem=m%60;return h>0?`${h} С‡ ${rem} Рј`:`${rem} мин`}
+  function formatHours(m){m=Number(m)||0;const h=Math.floor(m/60),rem=m%60;return h>0?`${h} ч ${rem} м`:`${rem} мин`}
   function send(msg){if(window.AquaLumenBridge)window.AquaLumenBridge.send(msg)}
   function action(a,arg){send({type:"action",action:a,argument:arg||""})}
 
@@ -643,7 +643,7 @@ try {
   function lotIconHtml(lot, cls) {
     const spr = atlasSprite(lot.itemId);
     if (spr) return spr;
-    const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/В§./g, "").trim();
+    const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/§./g, "").trim();
     const tex = resolveItemIcon(cleanLabel, lot.itemId || "");
     if (tex) return `<img src="${tex}" class="${cls}" alt="">`;
     if (lot.itemId) {
@@ -691,7 +691,7 @@ try {
     const low = String(label || "").toLowerCase();
     const itype = itemType || '';
 
-    /* coins / gems virtual rewards вЂ” no item ID */
+    /* coins / gems virtual rewards — no item ID */
     if (itype === 'coins' || (!itemId && (low.includes('coin') || low.includes('монет') || low.includes('aquacoin')))) {
       return `<img src="${COIN_SRC}" class="${cls} aqua-coin-icon" style="width:22px;height:22px" alt="" />`;
     }
@@ -804,7 +804,7 @@ try {
     
     color(r) { return this.colors[r] || this.colors.common; },
     label(r) { return this.ru[r] || r; },
-    clean(l) { return String(l || "").replace(/\\s*[Г—x]\\s*[\\d\\u2013-]+\\s*$/, ""); },
+    clean(l) { return String(l || "").replace(/\\s*[×x]\\s*[\\d\\u2013-]+\\s*$/, ""); },
     
     tileHtml(l) {
       const col = this.color(l.rarity);
@@ -847,14 +847,14 @@ try {
       $("caseOrb").style.color = col;
       $("caseOrb").style.boxShadow = `inset 0 0 22px ${col}22, 0 0 26px ${col}1f`;
       $("caseTitle").textContent = def.title;
-      $("caseSub").innerHTML = 'Стоимость: ' + coins(def.cost) + ' В· ' + this.label(def.rarity);
+      $("caseSub").innerHTML = 'Стоимость: ' + coins(def.cost) + ' · ' + this.label(def.rarity);
       $("caseReveal").className = "case-wait";
-      $("caseReveal").innerHTML = "<span>Крутим рулеткувЂ¦</span>";
+      $("caseReveal").innerHTML = "<span>Крутим рулетку…</span>";
       this.bindActions("spin");
       $("caseLayer").classList.add("open");
       send({ type: "modal", open: true });
 
-      /* Build reel strip with diversity вЂ” no same item twice in a row,
+      /* Build reel strip with diversity — no same item twice in a row,
          max ~30% slots for any single item so the reel feels varied */
       const lootPool = this.def.loot && this.def.loot.length ? this.def.loot : [{ label: "?", rarity: "common", weight: 1 }];
       const maxPerItem = Math.ceil(55 * 0.28);
@@ -1005,7 +1005,7 @@ try {
 
         const iconHtml = getItemIconHtml(result.label, result.item, "mc-icon-lg", result.type);
         const amountHtml = result.amount > 1
-          ? ('<span class="win-amount">Г— ' + (result.type === "coins" ? coins(result.amount) : (result.type === "gems" ? (num(result.amount) + ' гемов') : (num(result.amount) + ' С€С‚.'))) + '</span>')
+          ? ('<span class="win-amount">× ' + (result.type === "coins" ? coins(result.amount) : (result.type === "gems" ? (num(result.amount) + ' гемов') : (num(result.amount) + ' шт.'))) + '</span>')
           : '';
         const winLabel = esc(this.clean(result.label));
         const rarLabel = this.label(result.rarity);
@@ -1018,7 +1018,7 @@ try {
           + '</span>'
           + amountHtml
           + '<span class="win-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '18">' + rarLabel + '</span>';
-        $("caseSub").textContent = "Награда уже РІ инвентаре";
+        $("caseSub").textContent = "Награда уже в инвентаре";
       } catch (e) {
         $("caseReveal").className = "case-reveal";
         $("caseReveal").innerHTML = '<span class="win-title">Вам выпало</span><span class="win-item">' + esc(this.clean((result && result.label) || "предмет")) + '</span>';
@@ -1059,9 +1059,9 @@ try {
       }
       clearTimeout(this.timeout);
       $("caseReveal").className = "case-wait";
-      $("caseReveal").innerHTML = "<span>Не удалось открыть. Можно закрыть Рё попробовать ещё раз.</span>";
+      $("caseReveal").innerHTML = "<span>Не удалось открыть. Можно закрыть и попробовать ещё раз.</span>";
       this.bindActions("done");
-      toast("Кейс не открылся вЂ” попробуйте ещё раз");
+      toast("Кейс не открылся — попробуйте ещё раз");
     },
 
     close(keepLayer) {
@@ -1097,7 +1097,7 @@ try {
       $("previewCaseImg").src = CASE_ICONS[c.id] || "";
       $("previewCaseTitle").textContent = c.title;
       const owned = Number(c.count) || 0;
-      $("previewCaseSub").innerHTML = '<span class="case-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '14;margin:0 6px 0 0;">' + CaseSpin.label(c.rarity) + '</span> Стоимость: <b>' + coins(c.cost) + '</b>' + (owned > 0 ? (' В· Сѓ вас Г—' + owned) : '');
+      $("previewCaseSub").innerHTML = '<span class="case-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '14;margin:0 6px 0 0;">' + CaseSpin.label(c.rarity) + '</span> Стоимость: <b>' + coins(c.cost) + '</b>' + (owned > 0 ? (' · Сѓ вас ×' + owned) : '');
       $("previewLootCount").textContent = ((c.loot || []).length) + " предметов";
 
       let totalWeight = 0;
@@ -1111,7 +1111,7 @@ try {
         return '<div class="drop-item-card" style="border-color:' + lcol + '33;box-shadow:inset 0 0 16px ' + lcol + '10;">'
           + icon
           + '<b>' + esc(CaseSpin.clean(l.label)) + '</b>'
-          + '<span class="drop-item-chance" style="color:' + lcol + ';border-color:' + lcol + '44;background:' + lcol + '14;">' + chance + '% В· ' + CaseSpin.label(l.rarity) + '</span>'
+          + '<span class="drop-item-chance" style="color:' + lcol + ';border-color:' + lcol + '44;background:' + lcol + '14;">' + chance + '% · ' + CaseSpin.label(l.rarity) + '</span>'
           + '</div>';
       }).join("");
 
@@ -1121,7 +1121,7 @@ try {
       const can1 = b.can(1);
       const can5 = b.can(5);
       const can10 = b.can(10);
-      const labelFor = (n) => b.keys >= n ? ('Открыть Г—' + n) : ('Купить Г—' + n + ' В· ' + coins(b.cost * n));
+      const labelFor = (n) => b.keys >= n ? ('Открыть ×' + n) : ('Купить ×' + n + ' · ' + coins(b.cost * n));
       const btn1Text = can1 ? labelFor(1) : ('Нужно ' + coins(b.cost));
       const btn5Text = can5 ? labelFor(5) : ('Нужно ' + coins(b.cost * 5));
       const btn10Text = can10 ? labelFor(10) : ('Нужно ' + coins(b.cost * 10));
@@ -1191,7 +1191,7 @@ try {
           </div>
         </section>
         <section class="stats">
-          <div class="stat"><small>Время РІ игре</small><b>${formatHours(p.playtimeMinutes)}</b></div>
+          <div class="stat"><small>Время в игре</small><b>${formatHours(p.playtimeMinutes)}</b></div>
           <div class="stat"><small>Квестов выполнено</small><b>${p.quests}</b></div>
           <div class="stat"><small>Убийств / Смертей</small><b>${p.kills} / ${p.deaths}</b></div>
           <div class="stat"><small>Друзей онлайн</small><b>${p.friendsOnline}</b></div>
@@ -1210,12 +1210,12 @@ try {
   }
 
   const RANK_META = {
-    "rank.sailor":  { prefix: "МОРЯК",   color: "#2fe0c0", perks: ["Префикс [МОРЯК] РІ чате", "2 точки дома /sethome", "Цветной ник РІ чате Рё Tab", "Базовый морской набор РІ F4"] },
-    "rank.skipper": { prefix: "ШКРПЕР",  color: "#3b9dff", perks: ["Префикс [ШКРПЕР] РІ чате", "3 точки дома /sethome", "Приоритетный вход на сервер", "Кит Шкипера РІ F4"] },
-    "rank.captain": { prefix: "КАПРТАН", color: "#f5c25b", perks: ["Префикс [КАПРТАН] РІ чате", "5 точек дома /sethome", "Полёт /fly на приватах", "Множитель удачи Г—2", "Кит Капитана РІ F4"] },
-    "rank.admiral": { prefix: "АДМРРАЛ", color: "#ff8c42", perks: ["Префикс [АДМРРАЛ] РІ чате", "10 точек дома /sethome", "Полёт /fly Рё смена ника /nick", "Множитель удачи Г—4", "Кит Адмирала РІ F4"] },
-    "rank.legend":  { prefix: "ЛЕГЕНДА", color: "#c264ff", perks: ["Префикс [ЛЕГЕНДА] РІ чате", "15 точек дома /sethome", "/fly, /hat Рё /nick", "Множитель удачи Г—8", "Эксклюзивный кейс Легенды", "Максимальный кит сезона"] },
-    "rank.vip":     { prefix: "VIP",     color: "#ff6b6b", perks: ["Префикс [VIP] РІ чате", "Виртуальный верстак /wb", "Эндер-сундук /ec", "Полёт /fly", "Косметика AquaLumen"] },
+    "rank.sailor":  { prefix: "МОРЯК",   color: "#2fe0c0", perks: ["Префикс [МОРЯК] в чате", "2 точки дома /sethome", "Цветной ник в чате и Tab", "Базовый морской набор в F4"] },
+    "rank.skipper": { prefix: "ШКРПЕР",  color: "#3b9dff", perks: ["Префикс [ШКРПЕР] в чате", "3 точки дома /sethome", "Приоритетный вход на сервер", "Кит Шкипера в F4"] },
+    "rank.captain": { prefix: "КАПРТАН", color: "#f5c25b", perks: ["Префикс [КАПРТАН] в чате", "5 точек дома /sethome", "Полёт /fly на приватах", "Множитель удачи ×2", "Кит Капитана в F4"] },
+    "rank.admiral": { prefix: "АДМРРАЛ", color: "#ff8c42", perks: ["Префикс [АДМРРАЛ] в чате", "10 точек дома /sethome", "Полёт /fly и смена ника /nick", "Множитель удачи ×4", "Кит Адмирала в F4"] },
+    "rank.legend":  { prefix: "ЛЕГЕНДА", color: "#c264ff", perks: ["Префикс [ЛЕГЕНДА] в чате", "15 точек дома /sethome", "/fly, /hat и /nick", "Множитель удачи ×8", "Эксклюзивный кейс Легенды", "Максимальный кит сезона"] },
+    "rank.vip":     { prefix: "VIP",     color: "#ff6b6b", perks: ["Префикс [VIP] в чате", "Виртуальный верстак /wb", "Эндер-сундук /ec", "Полёт /fly", "Косметика AquaLumen"] },
   };
 
   function rankGlyph(id, color) {
@@ -1256,8 +1256,8 @@ try {
     ).join("");
     const buy = $("rankModalBuy");
     buy.innerHTML = o.currency === "gems"
-      ? (`Купить вЂ” ${num(o.price)} крист.`)
-      : (`Купить вЂ” ${coins(o.price)}`);
+      ? (`Купить — ${num(o.price)} крист.`)
+      : (`Купить — ${coins(o.price)}`);
     buy.style.display = o.owned ? "none" : "";
     $("rankModalLayer").classList.add("open");
     send({ type: "modal", open: true });
@@ -1352,8 +1352,8 @@ try {
     }).join("");
 
     const head = ranksOnly
-      ? title("Привилегии", "Ранги LuckPerms: префикс, приоритет входа Рё возможности")
-      : title("Магазин", "Ресурсы сервера за АкваМонеты Рё гемы");
+      ? title("Привилегии", "Ранги LuckPerms: префикс, приоритет входа и возможности")
+      : title("Магазин", "Ресурсы сервера за АкваМонеты и гемы");
     const empty = ranksOnly ? '<div class="empty">Привилегии временно недоступны</div>' : '<div class="empty">Товары скоро появятся</div>';
     const filterBar = ranksOnly
       ? ""
@@ -1367,7 +1367,7 @@ try {
   }
 
   function eventsView(s) {
-    const banner = s.eventLine || "Сейчас тихо вЂ” ловите РІ своё удовольствие";
+    const banner = s.eventLine || "Сейчас тихо — ловите в своё удовольствие";
     const quests = Array.isArray(s.quests) ? s.quests : [];
     const cards = quests.map(q => {
       const ready = !q.claimed && Number(q.progress) >= Number(q.goal);
@@ -1396,7 +1396,7 @@ try {
       const b = caseBudget(c);
       const openLabel = b.keys > 0 ? "Открыть" : (b.can(1) ? "Купить" : "Мало монет");
       const stock = coins(c.cost);
-      const ownedBadge = b.keys > 0 ? ('<span class="case-owned">Г—' + b.keys + '</span>') : "";
+      const ownedBadge = b.keys > 0 ? ('<span class="case-owned">×' + b.keys + '</span>') : "";
       return `<article class="card case" style="--i:${cardIndex};border-color:${col}33;cursor:pointer;" data-preview="${esc(c.id)}">
         <span class="case-rarity" style="color:${col};border-color:${col}55;background:${col}14;">${CaseSpin.label(c.rarity)}</span>
         <div class="case-art">
@@ -1412,7 +1412,7 @@ try {
       </article>`;
     }).join("");
 
-    return `<div class="view">${title("Кейсы", "Все кейсы РІ каталоге. Если кейс выдан вЂ” на карточке Г—N.")}
+    return `<div class="view">${title("Кейсы", "Все кейсы в каталоге. Если кейс выдан — на карточке ×N.")}
       <div class="case-grid stagger">${cards || '<div class="empty">Кейсов нет</div>'}</div>
     </div>`;
   }
@@ -1428,7 +1428,7 @@ try {
     { tier: 8, label: "Монеты", coins: 8000, rarity: "common" },
     { tier: 9, label: "Монеты", coins: 9000, rarity: "common" },
     { tier: 10, label: "Кейс II: Рнженер", item: "smeltery", type: "case", coins: 12000, rarity: "epic", badge: "Эпик" },
-    { tier: 11, label: "Множитель улова Г—4", item: "aquatech_ui:rate_x4", coins: 14000, rarity: "rare", badge: "Бафф" },
+    { tier: 11, label: "Множитель улова ×4", item: "aquatech_ui:rate_x4", coins: 14000, rarity: "rare", badge: "Бафф" },
     { tier: 12, label: "Монеты", coins: 16000, rarity: "common" },
     { tier: 13, label: "Монеты", coins: 18000, rarity: "common" },
     { tier: 14, label: "Монеты", coins: 20000, rarity: "common" },
@@ -1439,7 +1439,7 @@ try {
     { tier: 19, label: "Монеты", coins: 45000, rarity: "common" },
     { tier: 20, label: "Кейс VII: Проводники", item: "superconductor", type: "case", coins: 50000, rarity: "epic", badge: "Эпик" },
     { tier: 21, label: "Монеты", coins: 55000, rarity: "common" },
-    { tier: 22, label: "Множитель улова Г—16", item: "aquatech_ui:rate_x16", coins: 60000, rarity: "legendary", badge: "Легенда" },
+    { tier: 22, label: "Множитель улова ×16", item: "aquatech_ui:rate_x16", coins: 60000, rarity: "legendary", badge: "Легенда" },
     { tier: 23, label: "Монеты", coins: 70000, rarity: "rare" },
     { tier: 24, label: "Монеты", coins: 80000, rarity: "rare" },
     { tier: 25, label: "Кейс IX: Драконий", item: "draconic", type: "case", coins: 100000, rarity: "mythic", badge: "Финал" },
@@ -1508,7 +1508,7 @@ try {
       </div>`);
     }
 
-    return `<div class="view">${title("Сезонный Пропуск", "Выполняйте задания, ловите рыбу Рё забирайте ценные награды")}
+    return `<div class="view">${title("Сезонный Пропуск", "Выполняйте задания, ловите рыбу и забирайте ценные награды")}
       <section class="pass-hero">
         <div class="pass-hero-ambient"></div>
         <div class="pass-hero-content">
@@ -1518,7 +1518,7 @@ try {
               <span class="pass-free-pill">100% БЕСПЛАТНО</span>
             </div>
             <h2 class="pass-hero-title">${esc(season.title || "Сезон I: Покорение Океана")}</h2>
-            <p class="pass-hero-desc">Ловите редкую рыбу, выполняйте контракты Рё повыС€айте уровень боевого пропуска</p>
+            <p class="pass-hero-desc">Ловите редкую рыбу, выполняйте контракты и повышайте уровень боевого пропуска</p>
             <div class="pass-hero-stats">
               <div class="pass-stat-item">
                 <small>Доступно Рє сдаче</small>
@@ -1551,7 +1551,7 @@ try {
           </div>
         </div>
       </section>
-      <div class="section-title"><b>Линейка Наград (25 уровней)</b><span style="color:var(--accent);">Без платных гемов В· Ценный лут</span></div>
+      <div class="section-title"><b>Линейка Наград (25 уровней)</b><span style="color:var(--accent);">Без платных гемов · Ценный лут</span></div>
       <div class="pass-track">${cards.join("")}</div>
     </div>`;
   }
@@ -1564,9 +1564,9 @@ try {
     const cards = fishes.map(f => `<article class="card offer" style="min-height:130px;padding:12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <h3 style="font-size:12.5px;margin:0;font-weight:700;">${esc(f.name)}</h3>
-        <span class="offer-badge" style="position:static;">${f.count} С€С‚.</span>
+        <span class="offer-badge" style="position:static;">${f.count} шт.</span>
       </div>
-      <p style="font-size:10px;color:var(--muted);margin:0 0 10px;">Цена за С€С‚: <b style="color:var(--gold);">${coins(f.priceCoins)}</b></p>
+      <p style="font-size:10px;color:var(--muted);margin:0 0 10px;">Цена за шт.: <b style="color:var(--gold);">${coins(f.priceCoins)}</b></p>
       <div class="offer-foot">
         <span class="price">${coins(f.count * f.priceCoins)}</span>
         <button class="button sell-single-fish" data-fish="${esc(f.id)}" ${f.count > 0 ? "" : "disabled"}>Продать</button>
@@ -1575,25 +1575,22 @@ try {
 
     return `<div class="view">${title("Скупщик Рыбы", "Продавайте улов прямо из инвентаря")}
       <div class="grid two">
-        <section class="card hero" style="min-height:140px;padding:16px;">
-          <div style="display:flex;gap:14px;align-items:center;">
-            <div class="avatar" style="width:64px;height:64px;font-size:24px;">рџђџ</div>
-            <div>
-              <h2 style="font-size:18px;margin:0 0 4px;">Скупка Рыбы</h2>
-              <div class="rank">Р’ инвентаре: <b>${totalFish}</b> С€С‚. (${coins(totalValue)})</div>
-            </div>
+        <section class="card hero" style="min-height:140px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+          <div>
+            <h2 style="font-size:20px;margin:0 0 6px;font-weight:800;letter-spacing:-0.2px;">Скупка Рыбы</h2>
+            <div class="rank" style="font-size:13px;color:var(--muted);">В инвентаре: <b style="color:var(--accent);">${totalFish}</b> шт. (${coins(totalValue)})</div>
           </div>
-          <button class="button primary sell-all-fish" ${totalFish <= 0 ? "disabled" : ""} style="height:36px;padding:0 18px;font-weight:750;margin-left:auto;">
-            ${totalFish > 0 ? `Продать всё (+${coins(totalValue)})` : "Рнвентарь пуст"}
+          <button class="button primary sell-all-fish" ${totalFish <= 0 ? "disabled" : ""} style="height:38px;padding:0 20px;font-weight:750;">
+            ${totalFish > 0 ? `Продать всё (+${coins(totalValue)})` : "Инвентарь пуст"}
           </button>
         </section>
         <section class="stats">
-          <div class="stat"><small>Видов рыбы</small><b>${fishes.length} С€С‚.</b></div>
+          <div class="stat"><small>Видов рыбы</small><b>${fishes.length} шт.</b></div>
           <div class="stat"><small>Баланс</small><b>${coins(s.wallet.coins)}</b></div>
         </section>
       </div>
       <div class="section-title"><b>Таблица цен скупки</b><span>Нажмите для продажи партии</span></div>
-      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">${cards || '<div class="empty">РЈ вас нет рыбы РІ инвентаре</div>'}</div>
+      <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">${cards || '<div class="empty">У вас нет рыбы в инвентаре</div>'}</div>
     </div>`;
   }
 
@@ -1616,25 +1613,25 @@ try {
       return `<article class="card offer" data-found="${found ? 1 : 0}" style="min-height:128px;padding:12px;${found ? "" : "opacity:.42;filter:saturate(.35);"}">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
           <h3 style="font-size:12.5px;margin:0;font-weight:700;">${found ? esc(e.name) : "???"}</h3>
-          <span class="offer-badge" style="position:static;">${found ? num(e.count) + " поим." : "вЂ”"}</span>
+          <span class="offer-badge" style="position:static;">${found ? num(e.count) + " поим." : "—"}</span>
         </div>
-        <p style="font-size:10px;color:var(--muted);margin:0 0 6px;">${esc(e.rarity || "")}${found && e.weight > 0 ? ` В· мой рекорд <b style="color:var(--gold);">${Number(e.weight).toFixed(2)} кг</b>` : ""}</p>
-        ${found && e.recordHolder ? `<p style="font-size:10px;color:#8fd6ff;margin:0 0 8px;">Сервер: <b>${esc(e.recordHolder)} вЂ” ${Number(e.recordWeight).toFixed(2)} кг</b></p>` : ""}
+        <p style="font-size:10px;color:var(--muted);margin:0 0 6px;">${esc(e.rarity || "")}${found && e.weight > 0 ? ` · мой рекорд <b style="color:var(--gold);">${Number(e.weight).toFixed(2)} кг</b>` : ""}</p>
+        ${found && e.recordHolder ? `<p style="font-size:10px;color:#8fd6ff;margin:0 0 8px;">Сервер: <b>${esc(e.recordHolder)} — ${Number(e.recordWeight).toFixed(2)} кг</b></p>` : ""}
         <div style="display:flex;gap:4px;flex-wrap:wrap;">
-          ${gradeBadge(e.grades, 1, "РЎ", "#c7d2da")}${gradeBadge(e.grades, 2, "Р—", "#f5c25b")}${gradeBadge(e.grades, 4, "Р ", "#d48cff")}
-          ${condBadge(e.conds, 1, "день")}${condBadge(e.conds, 2, "ночь")}${condBadge(e.conds, 4, "дождь")}${condBadge(e.conds, 8, "С€торм")}${condBadge(e.conds, 16, "золото")}
+          ${gradeBadge(e.grades, 1, "С", "#c7d2da")}${gradeBadge(e.grades, 2, "З", "#f5c25b")}${gradeBadge(e.grades, 4, "Р", "#d48cff")}
+          ${condBadge(e.conds, 1, "день")}${condBadge(e.conds, 2, "ночь")}${condBadge(e.conds, 4, "дождь")}${condBadge(e.conds, 8, "шторм")}${condBadge(e.conds, 16, "золото")}
         </div>
       </article>`;
     }).join("");
 
     const recordLine = sum.recordName
-      ? `Рекорд: <b style="color:var(--gold);">${esc(sum.recordName)} вЂ” ${Number(sum.recordWeight).toFixed(2)} кг</b>`
+      ? `Рекорд: <b style="color:var(--gold);">${esc(sum.recordName)} — ${Number(sum.recordWeight).toFixed(2)} кг</b>`
       : "Рекордный улов ещё впереди";
     const milestoneLine = Number(sum.nextMilestone) > 0
-      ? `До вехи: осталось <b>${Math.max(0, Number(sum.nextMilestone) - Number(sum.found))}</b> видов В· награда <b style="color:var(--gold);">${coins(sum.nextReward)}</b>`
+      ? `До вехи: осталось <b>${Math.max(0, Number(sum.nextMilestone) - Number(sum.found))}</b> видов · награда <b style="color:var(--gold);">${coins(sum.nextReward)}</b>`
       : "Все вехи атласа закрыты";
 
-    return `<div class="view">${title("Рыбный атлас", "Коллекция видов, рекорды веса Рё грейды улова")}
+    return `<div class="view">${title("Рыбный атлас", "Коллекция видов, рекорды веса и грейды улова")}
       <div class="grid two">
         <section class="card hero" style="min-height:140px;padding:16px;">
           <div style="display:flex;gap:14px;align-items:center;">
@@ -1643,7 +1640,7 @@ try {
             </div>
             <div>
               <h2 style="font-size:18px;margin:0 0 4px;">Открыто видов: ${num(sum.found)} / ${num(sum.total)}</h2>
-              <div class="rank">Поимок всего: <b>${num(sum.catches)}</b> В· ${recordLine}</div>
+              <div class="rank">Поимок всего: <b>${num(sum.catches)}</b> · ${recordLine}</div>
               <div class="rank" style="margin-top:4px;">${milestoneLine}</div>
               <div class="progress" style="margin-top:10px;max-width:320px;"><i style="width:${pct}%"></i></div>
             </div>
@@ -1651,10 +1648,10 @@ try {
         </section>
         <section class="stats">
           <div class="stat"><small>Прогресс коллекции</small><b>${pct}%</b></div>
-          <div class="stat"><small>Грейды</small><b>РЎ В· Р— В· Р </b></div>
+          <div class="stat"><small>Грейды</small><b>С · З · Р</b></div>
         </section>
       </div>
-      <div class="section-title"><b>Виды улова</b><span>РЎ = серебро В· Р— = золото В· Р  = радужная</span></div>
+      <div class="section-title"><b>Виды улова</b><span>С = серебро · З = золото · Р = радужная</span></div>
       <div style="display:flex;gap:6px;margin:0 2px 10px;">
         <button class="button atlas-pill active" data-filter="all">Все</button>
         <button class="button atlas-pill" data-filter="found">Открытые</button>
@@ -1671,13 +1668,13 @@ try {
     const myLotsCount = lots.filter(l => Boolean(l.self)).length;
 
     const cards = lots.map((lot, i) => {
-      const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/В§./g, "").trim();
+      const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/§./g, "").trim();
       const isSelf = Boolean(lot.self);
       const btn = isSelf
         ? `<button class="btn-cancel cancel-auction" data-id="${lot.id}">Снять</button>`
         : `<button class="btn-buy buy-auction" data-id="${lot.id}">Купить</button>`;
       const count = Number(lot.count) || 1;
-      const countBadge = count > 1 ? `<span class="lot-badge-count">Г—${num(count)}</span>` : "";
+      const countBadge = count > 1 ? `<span class="lot-badge-count">×${num(count)}</span>` : "";
       const seller = isSelf
         ? `<span class="lot-seller-tag self"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Вы')} (Вы)</span>`
         : `<span class="lot-seller-tag"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Ргрок')}</span>`;
@@ -1709,12 +1706,12 @@ try {
       </div>
     </div>`;
 
-    return `<div class="view">${title("Аукцион Рё Рынок", "Покупайте Рё продавайте предметы между игроками")}
+    return `<div class="view">${title("Аукцион и Рынок", "Покупайте и продавайте предметы между игроками")}
       <div class="auction-view-wrap">
         <div class="auction-top-strip">
           <div class="auction-stats-group">
             <div class="auction-chip-stat"><small>Баланс:</small> <b>${coins(s.wallet ? s.wallet.coins : 0)}</b></div>
-            <div class="auction-chip-stat"><small>Активных лотов:</small> <b>${activeCount} С€С‚.</b></div>
+            <div class="auction-chip-stat"><small>Активных лотов:</small> <b>${activeCount} шт.</b></div>
           </div>
           <div class="auction-sell-cmd" id="copySellCmdBtn" title="Нажмите, чтобы скопировать команду">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
@@ -1747,7 +1744,7 @@ try {
       const krc = (RANK_META["rank." + k.id] || {}).color;
       const locked = !!k.locked;
       const button = locked
-        ? `<button class="button claim-kit" data-kit="${esc(k.id)}" disabled title="Нужна привилегия: ${esc(k.requires || "")}">Нужна привилегия: ${esc(k.requires || "выС€Рµ рангом")}</button>`
+        ? `<button class="button claim-kit" data-kit="${esc(k.id)}" disabled title="Нужна привилегия: ${esc(k.requires || "")}">Нужна привилегия: ${esc(k.requires || "вышРµ рангом")}</button>`
         : `<button class="button primary claim-kit" data-kit="${esc(k.id)}">Забрать набор</button>`;
       return `<article class="card case" style="--i:${cardIndex};${krc ? `border-color:${krc}44` : ""};display:flex;flex-direction:column;justify-content:space-between;padding:14px;min-height:110px;${locked ? "opacity:0.72;" : ""}">
       <div>
@@ -1760,7 +1757,7 @@ try {
       ${button}
     </article>`}).join("");
 
-    return `<div class="view">${title("Наборы Снаряжения (Kits)", "Наборы привилегий: ранг открывает свой кит Рё все предыдущие")}
+    return `<div class="view">${title("Наборы Снаряжения (Kits)", "Наборы привилегий: ранг открывает свой кит и все предыдущие")}
       <div class="case-grid stagger" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards || '<div class="empty">Наборов нет</div>'}</div>
     </div>`;
   }
@@ -1776,7 +1773,7 @@ try {
       <button class="button tp-warp" data-warp="${esc(w.id)}" style="background:linear-gradient(90deg,var(--accent),var(--accent2));color:#08131a;font-weight:700;">Телепортироваться</button>
     </article>`).join("");
 
-    return `<div class="view">${title("Навигация Рё Варпы", "Быстрое перемещение по ключевым точкам мира")}
+    return `<div class="view">${title("Навигация и Варпы", "Быстрое перемещение по ключевым точкам мира")}
       <div class="store-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">${cards || '<div class="empty">Варпов нет</div>'}</div>
     </div>`;
   }
@@ -1787,7 +1784,7 @@ try {
       <span>${esc(e.player)}</span>
       <span class="row-value">${esc(e.value)}</span>
     </div>`).join("");
-    return `<div class="view">${title("Топ игроков", "Рейтинг по игровому времени Рё достижениям")}
+    return `<div class="view">${title("Топ игроков", "Рейтинг по игровому времени и достижениям")}
       <section class="card rows">${rows || '<div class="empty">Рейтинг пуст</div>'}</section>
     </div>`;
   }
@@ -1797,13 +1794,13 @@ try {
     return `<div class="view settings">${title("Настройки", "Применяются только Рє AquaLumen UI")}
       <section class="card">
         <div class="setting">
-          <div class="setting-info"><b>Цветовая тема</b><span>Меняет палитру Рё акцент интерфейса</span></div>
+          <div class="setting-info"><b>Цветовая тема</b><span>Меняет палитру и акцент интерфейса</span></div>
           <div class="theme-picker">
             ${["aqua_lumen", "violet_lumen", "midnight_rose"].map(t => `<button aria-label="${t}" class="swatch ${a.theme === t ? "active" : ""}" data-theme="${t}"></button>`).join("")}
           </div>
         </div>
         <div class="setting">
-          <div class="setting-info"><b>Анимации</b><span>Плавные переходы Рё рулетка</span></div>
+          <div class="setting-info"><b>Анимации</b><span>Плавные переходы и рулетка</span></div>
           <button class="toggle ${a.animations ? "on" : ""}" id="motionToggle"><i></i></button>
         </div>
       </section>
@@ -1811,7 +1808,7 @@ try {
   }
 
   function bindViewActions() {
-    document.querySelectorAll(".buy").forEach(b => b.onclick = () => confirmAction("Покупка", `Купить В«${b.dataset.title}В»?`, "store.buy", b.dataset.id));
+    document.querySelectorAll(".buy").forEach(b => b.onclick = () => confirmAction("Покупка", `Купить «${b.dataset.title}»?`, "store.buy", b.dataset.id));
     document.querySelectorAll(".rank-more").forEach(b => b.onclick = () => {
       const offer = (state.payload.snapshot.store || []).find(x => x.id === b.dataset.id);
       if (offer && !offer.owned) openRankModal(offer);
@@ -1865,7 +1862,7 @@ try {
       if (b.disabled) return;
       b.onclick = () => {
         action("hub.kit", b.dataset.kit);
-        toast("Набор запроС€ен!");
+        toast("Набор запрошен!");
         setTimeout(() => action("hub.refresh"), 500);
       };
     });
@@ -2167,7 +2164,7 @@ try {
     }
   }
 
-  $("refresh").onclick = () => { action("hub.refresh"); toast("ОбновлениевЂ¦"); };
+  $("refresh").onclick = () => { action("hub.refresh"); toast("Обновление…"); };
   $("close").onclick = () => send({ type: "action", action: "hub.close" });
 
   $("rankModalClose").onclick = closeRankModal;
@@ -2177,7 +2174,7 @@ try {
     const id = rankModalOffer.id, title = rankModalOffer.title;
     closeRankModal();
     action("store.buy", id);
-    toast(`Покупка В«${title}В»вЂ¦`);
+    toast(`Покупка «${title}»…`);
   };
 
   document.addEventListener("keydown", (e) => {
@@ -2265,7 +2262,7 @@ try {
 } catch (pageError) {
   var hubErrorBox = document.getElementById("content");
   if (hubErrorBox) {
-    hubErrorBox.innerHTML = '<div class="empty">РћС€ибка интерфейса: ' +
+    hubErrorBox.innerHTML = '<div class="empty">Ошибка интерфейса: ' +
       String(pageError && pageError.message ? pageError.message : pageError) + '</div>';
   }
   if (window.console && console.error) console.error("[AquaLumen] hub page error:", pageError);

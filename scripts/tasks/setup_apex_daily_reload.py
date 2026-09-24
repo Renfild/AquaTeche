@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Create a Pterodactyl schedule: save + lp sync + restart at 04:00 Europe/Moscow.
 
-Panel cron is UTC. 04:00 MSK = 01:00 UTC.
+Cron hour is interpreted in the PANEL timezone, which on this host is +03:00 —
+verified live: next_run_at 04:00+03:00, last_run_at 04:04+03:00. So hour=4 is
+correct here; only if the panel timezone were UTC would it need to be hour=1.
 Secrets: .apex_deploy.json (apex_api_key) or AQUATECH_APEX_API_KEY.
 
 Usage:

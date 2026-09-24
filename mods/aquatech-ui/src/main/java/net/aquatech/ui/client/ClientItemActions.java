@@ -1,6 +1,6 @@
 package net.aquatech.ui.client;
 
-import net.aquatech.ui.capability.AquaSkillCapability;
+import net.aquatech.ui.capability.OceanProgressCapability;
 import net.aquatech.ui.client.hud.RhythmHookOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -22,14 +22,12 @@ public final class ClientItemActions {
         RhythmHookOverlay.start(seed, fishHp, spotSize, yellowPad, pointerSpeed, decay, elite, treasure);
     }
 
-    public static void applySyncedSkills(CompoundTag tag) {
+    public static void applySyncedOceanProgress(CompoundTag tag) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || tag == null) {
             return;
         }
-        mc.player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
-            cap.deserializeNBT(tag);
-            ClientUiState.bumpSkillSyncGeneration();
-        });
+        mc.player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap ->
+                cap.deserializeNBT(tag));
     }
 }

@@ -1,7 +1,7 @@
 package net.aquatech.ui.server.bukkit;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.capability.AquaSkillCapability;
+import net.aquatech.ui.capability.OceanProgressCapability;
 import net.aquatech.ui.common.ModConfig;
 import net.aquatech.ui.common.PlayerProfile;
 import net.aquatech.ui.horizon.HorizonRoute;
@@ -186,7 +186,7 @@ public final class LuckPermsBridge {
     }
 
     private static RankInfo fromHorizon(ServerPlayer player) {
-        return player.getCapability(AquaSkillCapability.INSTANCE)
+        return player.getCapability(OceanProgressCapability.INSTANCE)
                 .filter(cap -> cap.getHorizonTier() > 0)
                 .map(cap -> {
                     int tier = cap.getHorizonTier();

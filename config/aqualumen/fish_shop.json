@@ -713,14 +713,6 @@
    "_sc": "epic"
   },
   {
-   "id": "starcatcher:unknown_fish",
-   "name": "Неизвестная рыба",
-   "priceCoins": 35,
-   "rarity": "Обычный",
-   "tag": "starcatcher",
-   "_sc": "common"
-  },
-  {
    "id": "starcatcher:vesani",
    "name": "Весани",
    "priceCoins": 3100,

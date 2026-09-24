@@ -103,11 +103,30 @@ def check_mysql() -> bool:
         conn.close()
 
 
+def check_game_port(host: str = "g-pl-2.apexnodes.xyz", port: int = 21924) -> bool:
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(5)
+    try:
+        res = s.connect_ex((host, port))
+        s.close()
+        return res == 0
+    except Exception:
+        return False
+
+
 def main() -> int:
     deploy.load_deploy_secrets()
     state = deploy.apex_server_state()
     print(f"panel: {state}")
-    ok = state == "running"
+    if state == "running":
+        ok = True
+    elif state == "unknown":
+        port_ok = check_game_port()
+        print(f"game port 21924: {'open (server running)' if port_ok else 'closed'}")
+        ok = port_ok
+    else:
+        ok = False
 
     import paramiko
 

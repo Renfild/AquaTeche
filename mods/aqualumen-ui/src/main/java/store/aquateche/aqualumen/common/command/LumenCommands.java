@@ -105,18 +105,27 @@ public final class LumenCommands {
             if (dispatcher.getRoot().getChild("kit") == null) {
                 dispatcher.register(Commands.literal("kit")
                         .executes(ctx -> {
-                            KitConfig.grantKit(ctx.getSource().getPlayerOrException(), "start");
+                            open(ctx.getSource().getPlayerOrException());
+                            ctx.getSource().sendSuccess(() -> Component.literal(
+                                    "§b[AquaTech] §eНаборы предметов доступны только через меню: клавиша §6F4 §e→ вкладка §aКиты§e!"), false);
                             return 1;
                         })
-                        .then(Commands.argument("id", StringArgumentType.word())
+                        .then(Commands.argument("id", StringArgumentType.greedyString())
                                 .executes(ctx -> {
-                                    KitConfig.grantKit(ctx.getSource().getPlayerOrException(), StringArgumentType.getString(ctx, "id"));
+                                    open(ctx.getSource().getPlayerOrException());
+                                    ctx.getSource().sendSuccess(() -> Component.literal(
+                                            "§b[AquaTech] §eНаборы предметов доступны только через меню: клавиша §6F4 §e→ вкладка §aКиты§e!"), false);
                                     return 1;
                                 })));
             }
             if (dispatcher.getRoot().getChild("kits") == null) {
                 dispatcher.register(Commands.literal("kits")
-                        .executes(ctx -> open(ctx.getSource().getPlayerOrException())));
+                        .executes(ctx -> {
+                            open(ctx.getSource().getPlayerOrException());
+                            ctx.getSource().sendSuccess(() -> Component.literal(
+                                    "§b[AquaTech] §eНаборы предметов доступны только через меню: клавиша §6F4 §e→ вкладка §aКиты§e!"), false);
+                            return 1;
+                        }));
             }
         }
     }
@@ -124,7 +133,9 @@ public final class LumenCommands {
     private static LiteralArgumentBuilder<CommandSourceStack> buildKitCommands() {
         return Commands.literal("kit")
                 .executes(ctx -> {
-                    KitConfig.grantKit(ctx.getSource().getPlayerOrException(), "start");
+                    open(ctx.getSource().getPlayerOrException());
+                    ctx.getSource().sendSuccess(() -> Component.literal(
+                            "§b[AquaTech] §eНаборы предметов доступны только через меню: клавиша §6F4 §e→ вкладка §aКиты§e!"), false);
                     return 1;
                 })
                 .then(Commands.literal("list")

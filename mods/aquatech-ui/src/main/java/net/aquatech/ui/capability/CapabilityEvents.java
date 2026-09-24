@@ -18,19 +18,19 @@ public class CapabilityEvents {
     @SubscribeEvent
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
-            if (!event.getObject().getCapability(AquaSkillCapability.INSTANCE).isPresent()) {
+            if (!event.getObject().getCapability(OceanProgressCapability.INSTANCE).isPresent()) {
                 event.addCapability(
                         new ResourceLocation(AquaTechUI.MOD_ID, "aqua_skills"),
-                        new AquaSkillProvider());
+                        new OceanProgressProvider());
             }
         }
     }
 
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
-        // Carry skills across respawn/dimension changes so the tree never resets.
-        event.getOriginal().getCapability(AquaSkillCapability.INSTANCE).ifPresent(oldCap ->
-                event.getEntity().getCapability(AquaSkillCapability.INSTANCE).ifPresent(newCap ->
+        // Carry ocean progress across respawn/dimension changes.
+        event.getOriginal().getCapability(OceanProgressCapability.INSTANCE).ifPresent(oldCap ->
+                event.getEntity().getCapability(OceanProgressCapability.INSTANCE).ifPresent(newCap ->
                         newCap.copyFrom(oldCap)));
     }
 
@@ -45,17 +45,17 @@ public class CapabilityEvents {
             if (serverPlayer.hasDisconnected()) return;
             if (!net.aquatech.ui.network.NetworkHandler.canReceivePlayPackets(serverPlayer)) return;
 
-            serverPlayer.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+            serverPlayer.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
                 net.aquatech.ui.network.NetworkHandler.CHANNEL.send(
                         net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> serverPlayer),
-                        new net.aquatech.ui.network.S2CSyncSkillsPacket(cap));
+                        new net.aquatech.ui.network.S2CSyncOceanProgressPacket(cap));
 
                 if (!cap.isStarterKitReceived()) {
                     grantStarterKit(serverPlayer);
                     cap.markStarterKitReceived();
                     net.aquatech.ui.network.NetworkHandler.CHANNEL.send(
                             net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> serverPlayer),
-                            new net.aquatech.ui.network.S2CSyncSkillsPacket(cap));
+                            new net.aquatech.ui.network.S2CSyncOceanProgressPacket(cap));
                 }
             });
         }));

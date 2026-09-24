@@ -443,7 +443,10 @@ def apex_json(method: str, path: str, body: dict | None = None, timeout: int = 4
         raise SystemExit(f"Apex {method} {path} HTTP {ex.code}: {err[:500]}") from ex
     if not raw:
         return {}
-    return json.loads(raw)
+    try:
+        return json.loads(raw)
+    except Exception:
+        return {"raw": raw.decode("utf-8", "replace")}
 
 
 def apex_server_state() -> str:

@@ -1,0 +1,18 @@
+{
+  "name": "Полезные команды",
+  "category": "aquatech_ui:start",
+  "icon": "minecraft:writable_book",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Команды навигации",
+      "text": "$(bold)/spawn$() — возврат на спавн.$(br2)$(bold)/sethome <имя>$() — поставить точку дома.$(br2)$(bold)/home <имя>$() — вернуться домой.$(br2)$(bold)/warp <имя>$() — телепорт на варп."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Торговля и общение",
+      "text": "$(bold)/ah sell <цена>$() — продать предмет на аукционе.$(br2)$(bold)/pay <ник> <сумма>$() — перевод монет.$(br2)$(bold)/msg <ник> <текст>$() — личное сообщение.$(br2)$(italic)Наборы предметов забираются в меню F4 → Киты.$()"
+    }
+  ]
+}

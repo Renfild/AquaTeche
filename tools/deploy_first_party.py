@@ -42,6 +42,11 @@ MOD_CONFIGS = {
         "build_glob": "aqualumen-forge-*.jar",
         "prefix": "aqualumen",
     },
+    "machines": {
+        "dir": ROOT / "mods" / "aquatech-machines",
+        "build_glob": "aquatech_machines-*.jar",
+        "prefix": "aquatech_machines",
+    },
 }
 
 DEPLOY_TARGETS = [ROOT / "mods", ROOT / "server" / "mods"]
@@ -161,8 +166,8 @@ def wait_for_apex(secrets: dict, timeout_s: int = 120) -> bool:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Deploy first-party mods")
-    ap.add_argument("--mods", default="aquatech,aqualumen",
-                    help="Comma-separated mod keys: aquatech,aqualumen")
+    ap.add_argument("--mods", default="aquatech,aqualumen,machines",
+                    help="Comma-separated mod keys: aquatech, aqualumen, machines")
     ap.add_argument("--skip-build", action="store_true", help="Skip gradlew jar")
     ap.add_argument("--skip-github", action="store_true", help="Skip GitHub release upload")
     ap.add_argument("--skip-apex", action="store_true", help="Skip Apex server deploy")

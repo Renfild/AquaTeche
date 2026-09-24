@@ -1,10 +1,10 @@
 package net.aquatech.ui.fishing;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.capability.AquaSkillCapability;
+import net.aquatech.ui.capability.OceanProgressCapability;
 import net.aquatech.ui.horizon.StormEvent;
 import net.aquatech.ui.network.NetworkHandler;
-import net.aquatech.ui.network.S2CSyncSkillsPacket;
+import net.aquatech.ui.network.S2CSyncOceanProgressPacket;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -205,11 +205,11 @@ public final class FishingAtlasService {
 
     /** Первый в жизни вид в атласе: +25 сезонного опыта, чтобы коллекция кормила боевой пропуск. */
     private static void grantFirstCatch(ServerPlayer player, String displayName) {
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+        player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             cap.addSeasonXp(25);
             NetworkHandler.CHANNEL.send(
                     PacketDistributor.PLAYER.with(() -> player),
-                    new S2CSyncSkillsPacket(cap));
+                    new S2CSyncOceanProgressPacket(cap));
         });
         player.sendSystemMessage(net.minecraft.network.chat.Component.literal(
                 "§b[Атлас] §aНовый вид: §f" + displayName + " §7(+25 сезонного опыта)"));

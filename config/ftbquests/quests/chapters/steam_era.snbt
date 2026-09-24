@@ -5,6 +5,80 @@
 	group: "31719A5E7B6EF622"
 	icon: "industrialupgrade:basemachine3/steamboiler"
 	id: "6847E9D8B36F0462"
+	images: [
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: -1.5d
+			y: 7.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: -0.5d
+			y: 7.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: -1.0d
+			y: 7.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: 0.0d
+			y: 7.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: 0.5d
+			y: 7.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: 1.0d
+			y: 7.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: 1.5d
+			y: 7.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: 2.0d
+			y: 7.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/alfheim_portal_activated"
+			rotation: 0.0d
+			width: 1.0d
+			x: -2.0d
+			y: 7.5d
+		}
+	]
 	order_index: 1
 	quest_links: [ ]
 	quests: [
@@ -47,9 +121,9 @@
 				item: "industrialupgrade:blockresource/steam_machine"
 				type: "item"
 			}]
-			title: "Steam Machine Block"
+			title: "Основа Основ"
 			x: 0.0d
-			y: -2.5d
+			y: -5.0d
 		}
 		{
 			dependencies: ["6F51B358741C21C5"]
@@ -90,11 +164,14 @@
 				type: "item"
 			}]
 			title: "Паровой котёл"
-			x: 1.0d
-			y: -2.5d
+			x: 1.5d
+			y: -3.0d
 		}
 		{
-			dependencies: ["3D0D2D52D8401DDC"]
+			dependencies: [
+				"6F51B358741C21C5"
+				"3D0D2D52D8401DDC"
+			]
 			description: [
 				"Для работы требуется нагрев от лавы под ним."
 				"Используйте кнопки \"+\" и \"-\" для регулировки давления"
@@ -135,8 +212,8 @@
 				type: "item"
 			}]
 			title: "Паровой преобразователь давления"
-			x: 2.0d
-			y: -2.5d
+			x: -1.5d
+			y: -3.0d
 		}
 		{
 			description: [
@@ -177,10 +254,11 @@
 				type: "item"
 			}]
 			title: "Примитивный выращиватель кристаллов"
-			x: 3.0d
+			x: 13.5d
 			y: -2.5d
 		}
 		{
+			dependencies: ["0F76A4CF5C3470F3"]
 			description: [
 				"Полирует кристаллы и точные детали лазером. Нужен там,"
 				"где материалу требуется чистая поверхность без грубой"
@@ -191,26 +269,42 @@
 			rewards: [
 				{
 					count: 16
-					id: "69377C8BE01B8E6D"
-					item: "minecraft:copper_ingot"
-					type: "item"
-				}
-				{
-					count: 16
 					id: "27C3C1D4D3D8EF91"
 					item: "industrialupgrade:itemplates/iron_plate"
 					type: "item"
 				}
 				{
-					count: 8
+					count: 4
 					id: "712D4297E2A41368"
-					item: "industrialupgrade:itemplates/copper_plate"
+					item: "industrialupgrade:itemplates/titanium_plate"
 					type: "item"
 				}
 				{
 					id: "00CBAB69C87C5D18"
 					type: "xp"
 					xp: 50
+				}
+				{
+					id: "0CA892BB56CC9CA1"
+					item: {
+						Count: 1
+						id: "industrialupgrade:laser"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "091065F68ECF6142"
+					item: {
+						Count: 1
+						id: "industrialupgrade:battery/advanced_re_battery"
+						tag: {
+							charge: 10000.0d
+						}
+					}
+					type: "item"
 				}
 			]
 			tasks: [{
@@ -219,8 +313,8 @@
 				type: "item"
 			}]
 			title: "Примитивный лазерный полировщик"
-			x: 4.0d
-			y: -2.5d
+			x: 0.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["03821A4A4913D63C"]
@@ -255,6 +349,11 @@
 					type: "xp"
 					xp: 50
 				}
+				{
+					id: "0D633F5C72FADD28"
+					item: "industrialupgrade:blockresource/steam_machine"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "10F0B718837B9A2B"
@@ -262,11 +361,11 @@
 				type: "item"
 			}]
 			title: "Паровой полировщик"
-			x: 5.0d
-			y: -2.5d
+			x: 2.5d
+			y: 3.5d
 		}
 		{
-			dependencies: ["5A16378D2D4DD4A8"]
+			dependencies: ["03821A4A4913D63C"]
 			description: [
 				"Генерирует электричество из пара. Требуется лава под"
 				"механизмом."
@@ -305,10 +404,11 @@
 				type: "item"
 			}]
 			title: "Паровой преобразователь тока"
-			x: 6.0d
-			y: -2.5d
+			x: -2.5d
+			y: 3.5d
 		}
 		{
+			dependencies: ["03821A4A4913D63C"]
 			description: [
 				"Для работы требуется электричество и лава под ним."
 				"Жидкости забираются с помощью капсул или жидкостных"
@@ -330,9 +430,9 @@
 					type: "item"
 				}
 				{
-					count: 8
+					count: 4
 					id: "4EE38EC3D02CFC28"
-					item: "industrialupgrade:itemplates/copper_plate"
+					item: "industrialupgrade:crafting_elements/crafting_32_element"
 					type: "item"
 				}
 				{
@@ -347,10 +447,11 @@
 				type: "item"
 			}]
 			title: "Паровой электролизёр"
-			x: 7.0d
-			y: -2.5d
+			x: 0.0d
+			y: 5.5d
 		}
 		{
+			dependencies: ["7F0186836B107C12"]
 			description: [
 				"Кислород используется как окислитель и реагент в"
 				"химических машинах: электролизёрах, газовом комбайнере,"
@@ -391,11 +492,14 @@
 				type: "item"
 			}]
 			title: "Окислитель, которым мы дышим"
-			x: 8.0d
-			y: -2.5d
+			x: -2.5d
+			y: 7.5d
 		}
 		{
-			dependencies: ["6DCB07095E764CFF"]
+			dependencies: [
+				"6DCB07095E764CFF"
+				"7F0186836B107C12"
+			]
 			description: [
 				"Проводит реакции с газами внутри рабочей камеры."
 				"Работает с газовыми реагентами и предметами, когда"
@@ -413,7 +517,7 @@
 				{
 					count: 16
 					id: "3C93580BE021D424"
-					item: "industrialupgrade:itemplates/copper_plate"
+					item: "industrialupgrade:itemplates/electrum_plate"
 					type: "item"
 				}
 				{
@@ -434,8 +538,8 @@
 				type: "item"
 			}]
 			title: "Газовая камера"
-			x: 9.0d
-			y: -2.5d
+			x: 2.5d
+			y: 7.5d
 		}
 		{
 			description: [
@@ -477,7 +581,7 @@
 				type: "item"
 			}]
 			title: "Sulfurtrioxide"
-			x: 10.0d
+			x: 20.5d
 			y: -2.5d
 		}
 		{
@@ -520,7 +624,7 @@
 				type: "item"
 			}]
 			title: "Сульфат меди"
-			x: 11.0d
+			x: 21.5d
 			y: -2.5d
 		}
 		{
@@ -563,7 +667,7 @@
 				type: "item"
 			}]
 			title: "Circuit Board"
-			x: 12.0d
+			x: 22.5d
 			y: -2.5d
 		}
 		{
@@ -606,7 +710,7 @@
 				type: "item"
 			}]
 			title: "Примитивный программированный стол"
-			x: 13.0d
+			x: 23.5d
 			y: -2.5d
 		}
 		{
@@ -648,7 +752,7 @@
 				type: "item"
 			}]
 			title: "Programmed Circuit Board"
-			x: 14.0d
+			x: 24.5d
 			y: -2.5d
 		}
 		{
@@ -690,7 +794,7 @@
 				type: "item"
 			}]
 			title: "Паровой сепаратор"
-			x: 14.0d
+			x: 24.5d
 			y: -0.5d
 		}
 		{
@@ -733,7 +837,7 @@
 				type: "item"
 			}]
 			title: "Impurity Coal Dust"
-			x: 12.0d
+			x: 22.5d
 			y: 0.5d
 		}
 		{
@@ -775,7 +879,7 @@
 				type: "item"
 			}]
 			title: "Alloy Coal Dust"
-			x: 11.5d
+			x: 22.0d
 			y: 1.5d
 		}
 		{
@@ -817,7 +921,7 @@
 				type: "item"
 			}]
 			title: "Стальная оболочка"
-			x: 8.5d
+			x: 19.0d
 			y: 2.0d
 		}
 		{
@@ -866,7 +970,7 @@
 				type: "item"
 			}]
 			title: "Стальной молот"
-			x: 7.5d
+			x: 18.0d
 			y: 0.5d
 		}
 		{
@@ -909,7 +1013,7 @@
 				type: "item"
 			}]
 			title: "Укреплённая наковальня"
-			x: 9.62d
+			x: 20.119999999999997d
 			y: 2.75d
 		}
 		{
@@ -951,7 +1055,7 @@
 				type: "item"
 			}]
 			title: "Тугоплавкая печь"
-			x: 11.5d
+			x: 22.0d
 			y: 3.0d
 		}
 		{
@@ -993,7 +1097,7 @@
 				type: "item"
 			}]
 			title: "Мини-плавильня"
-			x: 13.5d
+			x: 24.0d
 			y: 2.5d
 		}
 		{
@@ -1036,7 +1140,7 @@
 				type: "item"
 			}]
 			title: "Стол для пайки электроники"
-			x: 7.0d
+			x: 17.5d
 			y: 2.0d
 		}
 		{
@@ -1078,7 +1182,7 @@
 				type: "item"
 			}]
 			title: "Паровой преобразователь пара "
-			x: 7.0d
+			x: 17.5d
 			y: 5.5d
 		}
 		{
@@ -1121,7 +1225,7 @@
 				type: "item"
 			}]
 			title: "Паровой генератор на торфе"
-			x: 8.0d
+			x: 18.5d
 			y: 6.5d
 		}
 		{
@@ -1162,7 +1266,7 @@
 				type: "item"
 			}]
 			title: "Паровая помпа"
-			x: 6.0d
+			x: 16.5d
 			y: 6.5d
 		}
 		{
@@ -1203,7 +1307,7 @@
 				type: "item"
 			}]
 			title: "Контроллер парового котла"
-			x: 5.0d
+			x: 15.5d
 			y: 6.5d
 		}
 		{
@@ -1245,7 +1349,7 @@
 				type: "item"
 			}]
 			title: "Паровое хранилище"
-			x: 4.0d
+			x: 14.5d
 			y: 6.5d
 		}
 		{
@@ -1283,7 +1387,7 @@
 				type: "item"
 			}]
 			title: "Паровой зарядник кристаллов"
-			x: 6.0d
+			x: 16.5d
 			y: 2.0d
 		}
 		{
@@ -1324,7 +1428,7 @@
 				type: "item"
 			}]
 			title: "Паровой нагреватель жидкостей"
-			x: 6.0d
+			x: 16.5d
 			y: 1.0d
 		}
 		{
@@ -1365,7 +1469,7 @@
 				type: "item"
 			}]
 			title: "Titanium Steel"
-			x: 5.0d
+			x: 15.5d
 			y: 2.0d
 		}
 		{
@@ -1408,7 +1512,7 @@
 				type: "item"
 			}]
 			title: "Стол для сборки электроники"
-			x: 4.0d
+			x: 14.5d
 			y: 2.0d
 		}
 		{
@@ -1449,7 +1553,7 @@
 				type: "item"
 			}]
 			title: "Electronic Circuit"
-			x: 3.0d
+			x: 13.5d
 			y: 2.0d
 		}
 		{
@@ -1491,7 +1595,7 @@
 				type: "item"
 			}]
 			title: "Machine Casing"
-			x: 2.0d
+			x: 12.0d
 			y: 2.0d
 		}
 		{
@@ -1532,8 +1636,68 @@
 				type: "item"
 			}]
 			title: "Контроллер доменной печи"
-			x: 1.0d
+			x: 11.0d
 			y: 2.0d
+		}
+		{
+			dependencies: ["4FF72D7784B42AA0"]
+			description: ["Заготовка для дальшейших механизмов"]
+			entity_vis_size: 1.0f
+			id: "0F76A4CF5C3470F3"
+			rewards: [
+				{
+					count: 6
+					id: "50D5EB6124517103"
+					item: "industrialupgrade:crafting_elements/crafting_495_element"
+					type: "item"
+				}
+				{
+					id: "08F92BE9683490CD"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 6
+					id: "45294BDB1740E76B"
+					item: "industrialupgrade:preciousgem/ruby_gem"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 12L
+				id: "677423B0AD053FE7"
+				item: { Count: 12, id: "industrialupgrade:crafting_elements/crafting_493_element" }
+				type: "item"
+			}]
+			title: "Кремний?"
+			x: 0.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["6F51B358741C21C5"]
+			entity_vis_size: 1.0f
+			hide_dependency_lines: true
+			id: "4FF72D7784B42AA0"
+			rewards: [
+				{
+					count: 16
+					id: "34BEED43AD1DCA87"
+					item: "industrialupgrade:itemingots/electrum_ingot"
+					type: "item"
+				}
+				{
+					id: "0DF203183CB67321"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [{
+				id: "7692A4760F35BD16"
+				item: "industrialupgrade:primal_fluid_integrator/primal_fluid_integrator"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -1.0d
 		}
 	]
 	title: "Паровая эпоха"

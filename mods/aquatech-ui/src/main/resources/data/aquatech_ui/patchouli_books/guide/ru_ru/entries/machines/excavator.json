@@ -1,0 +1,20 @@
+{
+  "name": "Экскаватор",
+  "category": "aquatech_ui:machines",
+  "icon": "aquatech_machines:excavator",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_machines:excavator",
+      "title": "Экскаватор",
+      "text": "Глубинная буровая установка. Бурит пласты океанического дна, добывая глину, базальт, гравий и древние породы."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_machines:excavator",
+      "title": "Крафт Экскаватора",
+      "text": "Собирается из алмазных блоков, незеритовых слитков и прочных стальных шестерней."
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 // AquaTech: Механизмы — рецепты (aquatech_machines)
-// Рыболов MK-2: железо + удочка StarCatcher + электронная схема + reinforced stone
+// Рыболов MK-2: алюминий + ОДНА удочка StarCatcher + схема + reinforced stone
+// (F ровно один раз: удочка ещё нужна в слоте машины)
 ServerEvents.recipes((event) => {
-  event.shaped('aquatech_machines:fisher', ['IFI', 'RCF', 'ISI'], {
+  event.shaped('aquatech_machines:fisher', ['IFI', 'RCR', 'ISI'], {
     I: 'industrialupgrade:itemingots/aluminium_ingot',
     F: 'starcatcher:obsidian_rod',
     R: 'industrialupgrade:crafting_elements/crafting_272_element',
@@ -19,14 +20,23 @@ ServerEvents.recipes((event) => {
   }).id('aquatech_machines:excavator')
 
   // Экстрактор: призмарин + электронная схема + chest + iron
-  // Цветолов: призмариновые блочки + мана-сталь + розовые лепестки + схема + укреплённый камень
-  event.shaped('aquatech_machines:flower_collector', ['PLP', 'RCR', 'SSS'], {
+  // Цветолов: призмариновые блочки + мана-сталь + мана-жемчуг + лепесток + схема + укреплённый камень
+  event.shaped('aquatech_machines:flower_collector', ['PLP', 'RCR', 'SBS'], {
     P: 'minecraft:prismarine_shard',
     L: 'botania:manasteel_ingot',
-    R: 'minecraft:flowering_azalea_leaves',
+    R: 'botania:mana_pearl',
     C: 'industrialupgrade:crafting_elements/crafting_272_element',
     S: 'industrialupgrade:blockresource/reinforced_stone',
+    B: 'botania:pink_petal',
   }).id('aquatech_machines:flower_collector')
+
+  // Мана-Фабрикатор: FE → мана. Без него цикл Botania не запускается (ману негде брать).
+  event.shaped('aquatech_machines:mana_fabricator', ['PCP', 'ASA', 'PCP'], {
+    P: 'industrialupgrade:itemingots/aluminium_ingot',
+    C: 'industrialupgrade:crafting_elements/crafting_273_element',
+    A: 'botania:apothecary_default',
+    S: 'industrialupgrade:blockresource/reinforced_stone',
+  }).id('aquatech_machines:mana_fabricator')
 
 
   // Гайдбук сервера

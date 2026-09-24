@@ -1,0 +1,20 @@
+{
+  "name": "Цветолов",
+  "category": "aquatech_ui:botania",
+  "icon": "aquatech_machines:flower_collector",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_machines:flower_collector",
+      "title": "Цветолов",
+      "text": "Материализует 162 вида цветов Botania из эфира! Расходует 250 маны и 9 600 FE за цветок."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_machines:flower_collector",
+      "title": "Крафт Цветолова",
+      "text": "Собирается из мана-жемчуга, лепестков и промышленных микросхем."
+    }
+  ]
+}

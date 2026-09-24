@@ -73,6 +73,9 @@ if (ROOT / "server/config/aqualumen/server_shop.json").is_file():
 if (ROOT / "server/config/aqualumen/hub.html").is_file():
     sftp.put(str(ROOT / "server/config/aqualumen/hub.html"), "config/aqualumen/hub.html")
     print("  Uploaded config/aqualumen/hub.html")
+if (ROOT / "server/config/aqualumen/fish_shop.json").is_file():
+    sftp.put(str(ROOT / "server/config/aqualumen/fish_shop.json"), "config/aqualumen/fish_shop.json")
+    print("  Uploaded config/aqualumen/fish_shop.json")
 kubejs_uploads = [
     (ROOT / "server/kubejs/server_scripts/30_aquatech_crafting.js", "kubejs/server_scripts/30_aquatech_crafting.js"),
     (ROOT / "server/kubejs/server_scripts/zz_infernal_pearl.js", "kubejs/server_scripts/zz_infernal_pearl.js"),
@@ -118,21 +121,26 @@ def apex_api(method, path, data=None):
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         res = resp.read()
-        return json.loads(res.decode('utf-8')) if res else {}
+        if not res or not res.strip():
+            return {}
+        try:
+            return json.loads(res.decode('utf-8'))
+        except Exception:
+            return {"raw": res.decode('utf-8', errors='ignore')}
 
-print("2. Sending kill + start signal to Apex...")
+print("2. Sending save-all flush + graceful restart to Apex...")
 try:
-    apex_api("POST", f"/api/client/servers/{server_id}/power", {"signal": "kill"})
+    apex_api("POST", f"/api/client/servers/{server_id}/command", {"command": "save-all flush"})
 except Exception as e:
-    print(f"Kill error (ignoring): {e}")
+    print(f"save-all error (ignoring): {e}")
 
-time.sleep(3)
+time.sleep(5)
 
 try:
-    apex_api("POST", f"/api/client/servers/{server_id}/power", {"signal": "start"})
-    print("  Start signal sent!")
+    apex_api("POST", f"/api/client/servers/{server_id}/power", {"signal": "restart"})
+    print("  Restart signal sent!")
 except Exception as e:
-    print(f"Start error: {e}")
+    print(f"Restart error: {e}")
 
 print("3. Waiting for server to start up...")
 start_time = time.time()

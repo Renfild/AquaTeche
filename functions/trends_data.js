@@ -357,10 +357,6 @@ export const FISH_POOL = [
   "name": "Сумеречный Кои"
  },
  {
-  "id": "starcatcher:unknown_fish",
-  "name": "Неизвестная рыба"
- },
- {
   "id": "starcatcher:vesani",
   "name": "Весани"
  },

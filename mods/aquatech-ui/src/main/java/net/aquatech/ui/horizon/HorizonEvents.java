@@ -1,10 +1,10 @@
 package net.aquatech.ui.horizon;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.capability.AquaSkillCapability;
+import net.aquatech.ui.capability.OceanProgressCapability;
 import net.aquatech.ui.fishing.FishingRodCompat;
 import net.aquatech.ui.network.NetworkHandler;
-import net.aquatech.ui.network.S2CSyncSkillsPacket;
+import net.aquatech.ui.network.S2CSyncOceanProgressPacket;
 import net.aquatech.ui.server.PressureBridge;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -35,8 +35,8 @@ public final class HorizonEvents {
         return player.level().getDayTime() / 24000L;
     }
 
-    private static void sync(ServerPlayer player, AquaSkillCapability cap) {
-        NetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new S2CSyncSkillsPacket(cap));
+    private static void sync(ServerPlayer player, OceanProgressCapability cap) {
+        NetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new S2CSyncOceanProgressPacket(cap));
     }
 
     private static boolean holdingAquaRod(ServerPlayer player) {
@@ -69,7 +69,7 @@ public final class HorizonEvents {
                 () -> {
                     if (player.hasDisconnected()) return;
                     if (!NetworkHandler.canReceivePlayPackets(player)) return;
-                    player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+                    player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
                         cap.ensureDaily(dayKey(player));
                         sync(player, cap);
                         player.displayClientMessage(Component.literal("§b≋ " + hubNextStep(player)), false);
@@ -85,7 +85,7 @@ public final class HorizonEvents {
         if (event.isCanceled()) return; // Tide Tension awards FISH progress on success
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         if (!holdingAquaRod(player)) return;
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+                player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             cap.ensureDaily(dayKey(player));
             if (cap.currentContract() == HorizonRoute.DailyContract.FISH) {
                 int before = cap.getDailyProgress();
@@ -106,7 +106,7 @@ public final class HorizonEvents {
                 || state.is(Blocks.KELP) || state.is(Blocks.KELP_PLANT)
                 || state.is(Blocks.SEAGRASS) || state.is(Blocks.TALL_SEAGRASS);
         if (!kelp) return;
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+                player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             cap.ensureDaily(dayKey(player));
             if (cap.currentContract() == HorizonRoute.DailyContract.KELP) {
                 int before = cap.getDailyProgress();
@@ -124,7 +124,7 @@ public final class HorizonEvents {
         if (!(event.player instanceof ServerPlayer player)) return;
         if (player.tickCount % 20 != 0) return;
 
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+                player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             cap.ensureDaily(dayKey(player));
             if (cap.isDailyClaimed()) return;
 
@@ -157,7 +157,7 @@ public final class HorizonEvents {
         return false; // машины AquaTech выведены; MACHINE-контракты активируются с новым модом механизмов
     }
 
-    private static void maybeSyncProgress(ServerPlayer player, AquaSkillCapability cap) {
+    private static void maybeSyncProgress(ServerPlayer player, OceanProgressCapability cap) {
         int p = cap.getDailyProgress();
         if (cap.isDailyComplete() || p == 1 || p % 5 == 0) {
             sync(player, cap);
@@ -171,7 +171,7 @@ public final class HorizonEvents {
     /** One line for hub + login. Not a fourth progression — points at Horizon / FTB / K. */
     public static String hubNextStep(ServerPlayer player) {
         String[] line = {"Сейчас: открой книгу FTB — завод. K — навыки. F4 — сдать день."};
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+                player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             cap.ensureDaily(dayKey(player));
             String prefix = "Горизонт " + cap.getHorizonTier() + " · ";
             if (cap.isDailyClaimed()) {
@@ -191,7 +191,7 @@ public final class HorizonEvents {
 
     public static boolean claimHorizonDaily(ServerPlayer player) {
         boolean[] ok = {false};
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+                player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             cap.ensureDaily(dayKey(player));
             if (!cap.claimDaily()) {
                 return;

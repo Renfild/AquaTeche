@@ -1,0 +1,7 @@
+{
+	chapter_groups: [
+		{ id: "31719A5E7B6EF622", title: "Эпохи" }
+		{ id: "4BCD563D0A6CE61C", title: "Моды" }
+		{ id: "2AC058F49B3BBFEF", title: "Финал" }
+	]
+}

@@ -6,7 +6,6 @@ import net.aquatech.machines.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
@@ -24,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Батиметрическая Центрифуга / Десалинатор: опреснение морской воды и фракционное разделение минеральных солей.
  */
-public class CentrifugeBlock extends BaseEntityBlock {
+public class CentrifugeBlock extends MachineBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;

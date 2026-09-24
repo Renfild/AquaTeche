@@ -12,14 +12,16 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.387"
-PACK_VERSION = "2.9.387"
+PACK_TAG = "pack-2.9.396"
+PACK_VERSION = "2.9.396"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -393,6 +395,10 @@ def write_manifest() -> Path:
 
 def main() -> int:
     PACK.mkdir(parents=True, exist_ok=True)
+    # Drop tables on docs/rods.html are generated from FishingLootHandler loot pools.
+    rods_gen = ROOT / "tools" / "build_rods_page.py"
+    if rods_gen.is_file():
+        subprocess.run([sys.executable, str(rods_gen)], cwd=str(ROOT), check=False)
     sync_mods()
     sync_config_kube_resources()
     repo_ftb = ROOT / "config" / "ftbquests"

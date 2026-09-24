@@ -84,10 +84,13 @@ public final class FishingOreTooltips {
         hintIu("baseore2/barium", RodHint.NATURALIST);
         hintIu("baseore2/polonium", RodHint.SLIMED);
 
-        hintIu("baseore/aluminium", RodHint.ICEBORN);
-        hintIu("baseore/silver", RodHint.ICEBORN);
-        hintIu("baseore/zinc", RodHint.ICEBORN);
-        hintIu("itemcoolupgrade/azote", RodHint.ICEBORN);
+hintIu("baseore/aluminium", RodHint.ICEBORN);
+hintIu("baseore/silver", RodHint.ICEBORN);
+hintIu("baseore/zinc", RodHint.ICEBORN);
+hintIu("baseore2/bismuth", RodHint.ICEBORN);
+hintIu("baseore/tungsten", RodHint.ICEBORN);
+hintIu("baseore/iridium", RodHint.ICEBORN);
+hintIu("itemcoolupgrade/azote", RodHint.ICEBORN);
 
         hintIu("baseore/tungsten", RodHint.STARCATCHER);
         hintIu("baseore/chromium", RodHint.STARCATCHER);

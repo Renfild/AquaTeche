@@ -59,6 +59,14 @@ public class FisherBlockEntity extends BaseMachineBlockEntity {
                 && items.getStackInSlot(SLOT_CORE).is(ModItems.FISHING_CORE.get());
     }
 
+    /** Fish mode caps the rate at FISH_RATE_CAP so one cast cannot dump 64 fish into the shop. */
+    public static final int FISH_RATE_CAP = 4;
+
+    private static int effectiveRate(int rate, boolean fishMode) {
+        int r = Math.max(1, rate);
+        return fishMode ? Math.min(r, FISH_RATE_CAP) : r;
+    }
+
     @Override
     protected boolean hasWork() {
         if (rodTier() <= 0) return false;
@@ -71,7 +79,8 @@ public class FisherBlockEntity extends BaseMachineBlockEntity {
         int tier = rodTier();
         if (tier <= 0 || level == null) return;
         int rate = activeRate();
-        ItemStack loot = hasFishCore()
+        boolean fishMode = hasFishCore();
+        ItemStack loot = fishMode
                 ? FisherLoot.roll(tier, level.getRandom())
                 : FisherLoot.rollResources(tier, level.getRandom());
         if (loot == null || loot.isEmpty()) {
@@ -81,7 +90,7 @@ public class FisherBlockEntity extends BaseMachineBlockEntity {
             }
         }
 
-        int totalCount = Math.max(1, loot.getCount() * rate);
+        int totalCount = Math.max(1, loot.getCount() * effectiveRate(rate, fishMode));
         while (totalCount > 0) {
             int toInsert = Math.min(loot.getMaxStackSize(), totalCount);
             ItemStack chunk = loot.copyWithCount(toInsert);

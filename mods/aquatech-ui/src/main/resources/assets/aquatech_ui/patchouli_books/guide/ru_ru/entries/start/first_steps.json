@@ -1,0 +1,25 @@
+{
+  "name": "Первые шаги",
+  "category": "aquatech_ui:start",
+  "icon": "starcatcher:bamboo_rod",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Первые шаги",
+      "text": "С чего начать путь:$(br2)$(bold)1. Меню F4$():$(br)Открой раздел $(bold)Киты$() и забери стартовые предметы.$(br2)$(bold)2. Забрось удочку$():$(br)Поймай первую рыбу, медь, железо и глину."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:bamboo_rod_craft",
+      "title": "Бамбуковая удочка",
+      "text": "Базовая снасть. Позволяет добывать первые самородки меди и железа."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:humble_rod_craft",
+      "title": "Скромная удочка",
+      "text": "Следующий тир: крафтится из меди и бамбуковой удочки. Ловит олово и уголь."
+    }
+  ]
+}

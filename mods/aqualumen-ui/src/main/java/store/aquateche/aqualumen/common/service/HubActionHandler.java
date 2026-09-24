@@ -113,6 +113,18 @@ public final class HubActionHandler {
             tier = 1;
         }
 
+        int seasonTier = resolveSeasonTier(player);
+        if (seasonTier <= 0) {
+            player.sendSystemMessage(Component.literal("Не удалось проверить уровень сезона, награда не выдана.")
+                    .withStyle(ChatFormatting.RED));
+            return;
+        }
+        if (tier < 1 || tier > LumenConfig.COMMON.seasonMaxTier.get() || tier > seasonTier) {
+            player.sendSystemMessage(Component.literal("Уровень " + tier + " пропуска недоступен (сейчас открыт до " + seasonTier + ").")
+                    .withStyle(ChatFormatting.YELLOW));
+            return;
+        }
+
         java.util.UUID uuid = player.getUUID();
         MariaStats.PlayerRewards rewards = MariaStats.getRewards(uuid);
         net.minecraft.nbt.CompoundTag claimedTag = player.getPersistentData().getCompound("aqualumen_pass_claimed");
@@ -175,6 +187,25 @@ public final class HubActionHandler {
         player.sendSystemMessage(Component.literal("Сезонный пропуск: награда уровня " + tier
                 + " получена (+" + HubEconomy.formatCoins(rewardCoins) + " ¤)." + caseExtra).withStyle(ChatFormatting.GREEN));
         HubDataService.push(player);
+    }
+
+    /** Реальный уровень боевого пропуска из capability aquatech_ui; -1 если прогресс недоступен. */
+    private static int resolveSeasonTier(ServerPlayer player) {
+        try {
+            Class<?> capClass = Class.forName("net.aquatech.ui.capability.OceanProgressCapability");
+            Object capToken = capClass.getField("INSTANCE").get(null);
+            java.lang.reflect.Method getCap = player.getClass()
+                    .getMethod("getCapability", net.minecraftforge.common.capabilities.Capability.class);
+            Object lazyOpt = getCap.invoke(player, capToken);
+            if (lazyOpt instanceof net.minecraftforge.common.util.LazyOptional<?> opt && opt.isPresent()) {
+                Object cap = opt.resolve().orElse(null);
+                if (cap != null) {
+                    return (int) cap.getClass().getMethod("getSeasonLevel").invoke(cap);
+                }
+            }
+        } catch (Throwable ignored) {
+        }
+        return -1;
     }
 
     private static String grantPassCase(ServerPlayer player, String caseId, String title) {

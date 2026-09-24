@@ -13,6 +13,13 @@ const VALID_THEMES = [
   "aurora",
 ];
 
+// Telegram / VK / Discord handles: letters, digits, _ . - # and / only.
+function sanitizeHandle(value, maxLen) {
+  return String(value ?? "")
+    .replace(/[^A-Za-z0-9_./#@-]/g, "")
+    .slice(0, maxLen);
+}
+
 export async function onRequestGet(context) {
   const { request, env, params } = context;
   if (!env.DB) return bad("База не подключена (D1)", 503);
@@ -46,9 +53,9 @@ export async function onRequestPatch(context) {
   const theme = VALID_THEMES.includes(body.theme) ? body.theme : "ocean";
   const status_message = String(body.status_message ?? "").slice(0, 80);
   const fav_rod = String(body.fav_rod ?? "").slice(0, 50);
-  const social_tg = String(body.social_tg ?? "").slice(0, 60);
-  const social_vk = String(body.social_vk ?? "").slice(0, 60);
-  const social_discord = String(body.social_discord ?? "").slice(0, 60);
+  const social_tg = sanitizeHandle(body.social_tg, 60);
+  const social_vk = sanitizeHandle(body.social_vk, 60);
+  const social_discord = sanitizeHandle(body.social_discord, 60);
 
   await env.DB.prepare(
     `UPDATE profiles

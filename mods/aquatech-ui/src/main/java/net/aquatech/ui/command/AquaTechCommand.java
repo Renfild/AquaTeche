@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import net.aquatech.ui.capability.AquaSkillCapability;
+import net.aquatech.ui.capability.OceanProgressCapability;
 import net.aquatech.ui.fishing.AquaTechFishingRodItem;
 import net.aquatech.ui.fishing.CustomFishingLootManager;
 import net.aquatech.ui.fishing.FishingLootHandler;
@@ -13,7 +13,7 @@ import net.aquatech.ui.fishing.OceanEventsService;
 import net.aquatech.ui.horizon.HorizonRoute;
 import net.aquatech.ui.horizon.StormEvent;
 import net.aquatech.ui.network.NetworkHandler;
-import net.aquatech.ui.network.S2CSyncSkillsPacket;
+import net.aquatech.ui.network.S2CSyncOceanProgressPacket;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -278,8 +278,8 @@ public final class AquaTechCommand {
         }
     }
 
-    private static void sync(ServerPlayer player, AquaSkillCapability cap) {
-        NetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new S2CSyncSkillsPacket(cap));
+    private static void sync(ServerPlayer player, OceanProgressCapability cap) {
+        NetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new S2CSyncOceanProgressPacket(cap));
     }
 
     private static long dayKey(ServerPlayer player) {
@@ -290,7 +290,7 @@ public final class AquaTechCommand {
         try {
             ServerPlayer target = EntityArgument.getPlayer(ctx, "player");
             int amount = IntegerArgumentType.getInteger(ctx, "amount");
-            target.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+            target.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
                 boolean leveledUp = cap.addXp(amount);
                 sync(target, cap);
                 target.displayClientMessage(Component.literal(
@@ -314,7 +314,7 @@ public final class AquaTechCommand {
                         "Неизвестный ранг: '" + rawRank + "'. Используй: пролог, матрос, шкипер, капитан, адмирал, легенда (или 0-5)"));
                 return 0;
             }
-            target.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+            target.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
                 int old = cap.getHorizonTier();
                 cap.forceHorizonTier(tier);
                 sync(target, cap);
@@ -352,7 +352,7 @@ public final class AquaTechCommand {
     }
 
     public static void promoteTier(ServerPlayer player, int tier) {
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+        player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             if (cap.setHorizonTier(tier)) {
                 sync(player, cap);
                 applyLuckPerms(player, tier);
@@ -437,7 +437,7 @@ public final class AquaTechCommand {
             ctx.getSource().sendFailure(Component.literal("Только для игроков"));
             return 0;
         }
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+        player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             cap.ensureDaily(dayKey(player));
             HorizonRoute.DailyContract c = cap.currentContract();
             if (cap.isDailyClaimed()) {
@@ -469,7 +469,7 @@ public final class AquaTechCommand {
             ctx.getSource().sendFailure(Component.literal("Только для игроков"));
             return 0;
         }
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+        player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             int lvl = cap.getSeasonLevel();
             int into = cap.getSeasonXp() % HorizonRoute.SEASON_XP_PER_LEVEL;
             player.displayClientMessage(Component.literal(
@@ -488,7 +488,7 @@ public final class AquaTechCommand {
             ctx.getSource().sendFailure(Component.literal("Только для игроков"));
             return 0;
         }
-        player.getCapability(AquaSkillCapability.INSTANCE).ifPresent(cap -> {
+        player.getCapability(OceanProgressCapability.INSTANCE).ifPresent(cap -> {
             int t = cap.getHorizonTier();
             player.displayClientMessage(Component.literal(
                     "§bГоризонт §f" + t + "§7/§f" + HorizonRoute.MAX_TIER

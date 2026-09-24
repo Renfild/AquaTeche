@@ -47,7 +47,7 @@ public class AquaTechUI {
         ModSounds.register(modBus);
 
 
-        modBus.addListener(net.aquatech.ui.capability.AquaSkillCapability::register);
+        modBus.addListener(net.aquatech.ui.capability.OceanProgressCapability::register);
 
         ModLoadingContext.get().registerConfig(Type.COMMON, ModConfig.SPEC);
         ModLoadingContext.get().registerConfig(Type.CLIENT, ModClientConfig.SPEC);

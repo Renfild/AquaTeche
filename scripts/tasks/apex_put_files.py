@@ -56,11 +56,21 @@ def api(method: str, path: str, data: bytes | None = None, content_type: str | N
 def upload(remote_dir: str, local_path: Path) -> int:
     directory = "/" + remote_dir.strip("/")
     target = local_path.name
-    status, _ = api("POST", f"/api/client/servers/{SERVER_ID}/files/write?directory={directory}",
-                    data=local_path.read_bytes(), content_type="application/octet-stream")
+    boundary = "----AquaTechPanelUploadBoundary7f3c9a"
+    body = b"".join([
+        f"--{boundary}\r\n".encode(),
+        f'Content-Disposition: form-data; name="file"; filename="{target}"\r\n'.encode(),
+        b"Content-Type: application/octet-stream\r\n\r\n",
+        local_path.read_bytes(),
+        f"\r\n--{boundary}--\r\n".encode(),
+    ])
+    status, resp = api("POST", f"/api/client/servers/{SERVER_ID}/files/write?directory={directory}",
+                      data=body, content_type=f"multipart/form-data; boundary={boundary}")
     if 200 <= status < 300:
         print(f"OK uploaded {target} -> {directory} ({local_path.stat().st_size} bytes)")
         return 0
+    if resp:
+        print(resp[:200].decode("utf-8", "replace"), file=sys.stderr)
     return 1
 
 

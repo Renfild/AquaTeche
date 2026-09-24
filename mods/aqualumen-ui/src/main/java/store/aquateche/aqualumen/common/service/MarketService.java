@@ -64,6 +64,20 @@ public final class MarketService {
         });
     }
 
+    /** Refresh without the 30s cache window; safe to call from the server thread. */
+    private static void refreshForced() {
+        if (!FETCHING.compareAndSet(false, true)) {
+            return;
+        }
+        CompletableFuture.runAsync(() -> {
+            try {
+                fetchNow();
+            } finally {
+                FETCHING.set(false);
+            }
+        });
+    }
+
     /** Blocking fetch — call from an async thread so a push right after sell/buy/cancel shows fresh lots. */
     private static void fetchNow() {
         try {
@@ -189,7 +203,7 @@ public final class MarketService {
                                         + (pricePer / avg) + " раз — лот могут не купить."));
                             }
                         }
-                        fetchNow();
+                        refreshForced();
                         HubDataService.push(player);
                     });
                 } else {
@@ -239,7 +253,7 @@ public final class MarketService {
                     if (!ok) {
                         String error = res.has("error") ? res.get("error").getAsString() : "лот недоступен";
                         player.sendSystemMessage(Component.literal("§c[Рынок] " + error));
-                        fetchNow();
+                        refreshForced();
                         HubDataService.push(player);
                         return;
                     }
@@ -266,7 +280,7 @@ public final class MarketService {
                     } else {
                         player.sendSystemMessage(Component.literal("§c[Рынок] Не хватает монет."));
                     }
-                    fetchNow();
+                    refreshForced();
                     HubDataService.push(player);
                     HubDataService.syncPlayerToWebAsync(player);
                 });
@@ -300,7 +314,7 @@ public final class MarketService {
                         String error = res.has("error") ? res.get("error").getAsString() : "лот не найден";
                         player.sendSystemMessage(Component.literal("§c[Рынок] " + error));
                     }
-                    fetchNow();
+                    refreshForced();
                     HubDataService.push(player);
                 });
             } catch (Throwable t) {

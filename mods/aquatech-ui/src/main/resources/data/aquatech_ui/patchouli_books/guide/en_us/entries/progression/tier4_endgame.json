@@ -1,0 +1,19 @@
+{
+  "name": "Акт 4: Эндгейм",
+  "category": "aquatech_ui:progression",
+  "icon": "aquatech_machines:volcanic_crystal",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_machines:fishing_core",
+      "title": "Рыбное ядро",
+      "text": "Сердце высших технологий. Крафтится на верстаке 8×8 Avaritia из редчайших сокровищ океанических глубин."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Вершина мастерства",
+      "text": "Альфа-удочка T11 с рейт-модом x64, полная автоматизация и доминирование на Аукционе!$(br2)$(italic)Ты стал владыкой океана AquaTech!$()"
+    }
+  ]
+}

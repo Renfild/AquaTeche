@@ -45,7 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Builds the server-authoritative snapshot with 100% real live player data:
  * - LuckPerms / Horizon / OP rank and prefix colors
- * - Real AquaSkill / Vanilla level and XP progress
+ * - Real ocean / Vanilla level and XP progress
  * - Real Vanilla stats (Playtime, Kills, Deaths, Fish caught)
  * - Real FTB Quests completed counter
  * - Real Wallet (coins from scoreboard/Lightman's, AquaCoins gems, daily rewards)
@@ -744,9 +744,9 @@ public final class HubDataService {
     }
 
     private static LevelData resolveLevel(ServerPlayer player, long playtimeMinutes) {
-        // 1. Try AquaSkillCapability via reflection
+        // 1. Try OceanProgressCapability via reflection
         try {
-            Class<?> capClass = Class.forName("net.aquatech.ui.capability.AquaSkillCapability");
+            Class<?> capClass = Class.forName("net.aquatech.ui.capability.OceanProgressCapability");
             Object capToken = capClass.getField("INSTANCE").get(null);
             Method getCap = player.getClass().getMethod("getCapability", net.minecraftforge.common.capabilities.Capability.class);
             Object lazyOpt = getCap.invoke(player, capToken);
@@ -786,9 +786,9 @@ public final class HubDataService {
         int seasonXp = 0;
         int tier = 1;
 
-        // 1. Try AquaSkillCapability for season progress
+        // 1. Try OceanProgressCapability for season progress
         try {
-            Class<?> capClass = Class.forName("net.aquatech.ui.capability.AquaSkillCapability");
+            Class<?> capClass = Class.forName("net.aquatech.ui.capability.OceanProgressCapability");
             Object capToken = capClass.getField("INSTANCE").get(null);
             Method getCap = player.getClass().getMethod("getCapability", net.minecraftforge.common.capabilities.Capability.class);
             Object lazyOpt = getCap.invoke(player, capToken);
@@ -982,7 +982,7 @@ public final class HubDataService {
 
     private static Rank tryHorizonTier(ServerPlayer player) {
         try {
-            Class<?> capClass = Class.forName("net.aquatech.ui.capability.AquaSkillCapability");
+            Class<?> capClass = Class.forName("net.aquatech.ui.capability.OceanProgressCapability");
             Object capToken = capClass.getField("INSTANCE").get(null);
             Method getCap = player.getClass().getMethod("getCapability", net.minecraftforge.common.capabilities.Capability.class);
             Object lazyOpt = getCap.invoke(player, capToken);

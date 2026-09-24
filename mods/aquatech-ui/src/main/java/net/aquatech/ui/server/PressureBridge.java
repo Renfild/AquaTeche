@@ -1,6 +1,5 @@
 package net.aquatech.ui.server;
 
-import net.aquatech.ui.capability.SkillEffects;
 import net.aquatech.ui.item.SonarGogglesItem;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
@@ -13,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
  *
  * Давление зависит от ГЛУБИНЫ под уровнем моря и НЕ зависит от того,
  * есть ли вокруг вода: песочный колодец или воздушный карман на дне
- * давят так же, как открытая вода. Обходится только экипировкой/навыками.
+ * давят так же, как открытая вода. Обходится только экипировкой.
  */
 public final class PressureBridge {
     public static final int SEA_LEVEL_Y = 190;
@@ -30,7 +29,7 @@ public final class PressureBridge {
     public static PressureInfo fromPlayer(Player player) {
         boolean inWater = player.isEyeInFluid(FluidTags.WATER) || player.isInWater();
         int depth = Math.max(0, SEA_LEVEL_Y - player.blockPosition().getY());
-        int tolerance = 10 + armorPieceBonus(player) + skillAndGearTolerance(player);
+        int tolerance = 10 + armorPieceBonus(player) + gearTolerance(player);
         int effective = Math.max(0, depth - tolerance);
         return new PressureInfo(inWater, depth, tolerance, effective);
     }
@@ -57,8 +56,8 @@ public final class PressureBridge {
         return pieces * 2;
     }
 
-    private static int skillAndGearTolerance(Player player) {
-        int t = SkillEffects.pressureDepthTolerance(player);
+    private static int gearTolerance(Player player) {
+        int t = 0;
         ItemStack helmet = player.getInventory().getArmor(3);
         if (helmet.getItem() instanceof SonarGogglesItem) {
             t += 4;

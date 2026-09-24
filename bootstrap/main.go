@@ -2,7 +2,9 @@ package main
 
 import (
 	"archive/zip"
+	"crypto/md5"
 	"encoding/base64"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -32,10 +34,12 @@ var manifestURLs = []string{
 }
 
 type manifest struct {
-	Version     string `json:"version"`
-	LauncherZip string `json:"launcher_zip"` // URL or filename on same release
-	LauncherExe string `json:"launcher_exe"` // relative path inside extract / app dir
-	ReleaseBase string `json:"release_base"` // optional base URL for relative names
+	Version        string `json:"version"`
+	LauncherZip    string `json:"launcher_zip"` // URL or filename on same release
+	LauncherExe    string `json:"launcher_exe"` // relative path inside extract / app dir
+	ReleaseBase    string `json:"release_base"` // optional base URL for relative names
+	LauncherZipMD5 string `json:"launcher_zip_md5"`
+	LauncherZipSize int64 `json:"launcher_zip_size"`
 }
 
 func main() {
@@ -91,6 +95,13 @@ func main() {
 		}); err != nil {
 			logf(logFile, "download err: %v", err)
 			msgBox("AquaTech", "Не удалось скачать лаунчер:\n"+err.Error())
+			ui.Close()
+			return
+		}
+		if err := verifyDownloadedZip(tmpZip, man.LauncherZipSize, man.LauncherZipMD5); err != nil {
+			logf(logFile, "integrity err: %v", err)
+			_ = os.Remove(tmpZip)
+			msgBox("AquaTech", "Файл лаунчера не прошёл проверку целостности.\nВозможно, зеркало повреждено или его подменили.\n\n"+err.Error())
 			ui.Close()
 			return
 		}
@@ -317,7 +328,7 @@ func downloadFile(url, dest string, progress func(float64)) error {
 		return err
 	}
 	req.Header.Set("User-Agent", userAgent)
-	client := &http.Client{Timeout: 0}
+	client := &http.Client{Timeout: 20 * time.Minute}
 	res, err := client.Do(req)
 	if err != nil {
 		return err
@@ -340,6 +351,7 @@ func downloadFile(url, dest string, progress func(float64)) error {
 		n, er := res.Body.Read(buf)
 		if n > 0 {
 			if _, err := f.Write(buf[:n]); err != nil {
+				_ = os.Remove(dest)
 				return err
 			}
 			written += int64(n)
@@ -351,11 +363,42 @@ func downloadFile(url, dest string, progress func(float64)) error {
 			break
 		}
 		if er != nil {
+			_ = os.Remove(dest)
 			return er
 		}
 	}
 	if progress != nil {
 		progress(1)
+	}
+	return nil
+}
+
+// verifyDownloadedZip guards against a tampered or corrupted mirror: the manifest
+// carries the expected size and md5, and a mismatch aborts before anything is run.
+func verifyDownloadedZip(path string, wantSize int64, wantMD5 string) error {
+	info, err := os.Stat(path)
+	if err != nil {
+		return err
+	}
+	if wantSize > 0 && info.Size() != wantSize {
+		return fmt.Errorf("размер %d Б, ожидалось %d Б", info.Size(), wantSize)
+	}
+	want := strings.ToLower(strings.TrimSpace(wantMD5))
+	if want == "" {
+		return nil
+	}
+	f, err := os.Open(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	h := md5.New()
+	if _, err := io.Copy(h, f); err != nil {
+		return err
+	}
+	got := hex.EncodeToString(h.Sum(nil))
+	if got != want {
+		return fmt.Errorf("md5 %s, ожидался %s", got, want)
 	}
 	return nil
 }

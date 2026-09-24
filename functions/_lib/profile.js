@@ -128,14 +128,6 @@ export function computePlayerBadges(row) {
 export function mapProfile(row) {
   if (!row) return null;
   const badges = computePlayerBadges(row);
-  let learnedSkills = ["origin"];
-  try {
-    if (row.learned_skills_json) {
-      learnedSkills = JSON.parse(row.learned_skills_json);
-    }
-  } catch {
-    learnedSkills = ["origin"];
-  }
   const cleanPriv = cleanPrivilege(row.privilege);
   return {
     nick: row.nick,
@@ -151,8 +143,6 @@ export function mapProfile(row) {
     likes: row.likes ?? 0,
     fish: row.fish ?? 0,
     has_liked: Boolean(row.has_liked),
-    skill_points: row.skill_points ?? 0,
-    learned_skills: learnedSkills,
     quests_done: row.quests_done ?? 0,
     quests_total: row.quests_total || 25,
     leaderboard_rank: row.leaderboard_rank || 1,
@@ -171,7 +161,7 @@ export async function fetchProfileByNick(db, nick, currentUserId = null) {
         `SELECT u.id AS user_id, u.nick, p.bio, p.theme, p.status_message, p.fav_rod,
                 p.social_tg, p.social_vk, p.social_discord,
                 p.privilege, p.coins, p.likes, p.fish,
-                p.skill_points, p.learned_skills_json, p.quests_done, p.quests_total, p.leaderboard_rank,
+                p.quests_done, p.quests_total, p.leaderboard_rank,
                 p.playtime_hours, p.views, p.badges_json, p.updated_at,
                 (SELECT 1 FROM profile_likes WHERE from_user_id = ? AND to_user_id = u.id LIMIT 1) AS has_liked
          FROM users u
@@ -186,7 +176,7 @@ export async function fetchProfileByNick(db, nick, currentUserId = null) {
       `SELECT u.id AS user_id, u.nick, p.bio, p.theme, p.status_message, p.fav_rod,
               p.social_tg, p.social_vk, p.social_discord,
               p.privilege, p.coins, p.likes, p.fish,
-              p.skill_points, p.learned_skills_json, p.quests_done, p.quests_total, p.leaderboard_rank,
+              p.quests_done, p.quests_total, p.leaderboard_rank,
               p.playtime_hours, p.views, p.badges_json, p.updated_at,
               0 AS has_liked
        FROM users u

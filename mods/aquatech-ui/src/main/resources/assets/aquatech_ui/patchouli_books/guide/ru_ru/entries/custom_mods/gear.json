@@ -1,0 +1,38 @@
+{
+  "name": "Особое Снаряжение",
+  "category": "aquatech_ui:custom_mods",
+  "icon": "aquatech_ui:sonar_goggles",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_ui:sonar_goggles",
+      "title": "Эхолотные очки",
+      "text": "Особый прибор для исследования глубин: позволяет видеть силуэты рыбы сквозь толщу воды."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:sonar_goggles",
+      "title": "Крафт Эхолота",
+      "text": "Собирается из кожаного шлема, кристалла призмарина, стекла и Сердца моря."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_ui:abyssal_magnet",
+      "title": "Бездненный магнит",
+      "text": "Притягивает выловленный дроп и руду прямо в инвентарь игрока с большой дистанции."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_ui:abyssal_magnet",
+      "title": "Крафт Магнита",
+      "text": "Создается из Сердца моря, слитков железа и редстоуна."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "starcatcher:tackle_box",
+      "title": "Ящик для снастей",
+      "text": "Органайзер для удочек, наживок и рыбы. Продаётся у Кота-рыболова или в F4 → Киты."
+    }
+  ]
+}

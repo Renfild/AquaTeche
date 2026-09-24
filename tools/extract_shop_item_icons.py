@@ -56,8 +56,15 @@ OVERRIDES = {
     "ae2:charged_certus_quartz_crystal": ("appliedenergistics2", "assets/ae2/textures/item/certus_quartz_crystal_charged.png"),
     "industrialupgrade:itemingots/aluminium_ingot": ("IndustrialUpgrade", "assets/industrialupgrade/textures/item/aluminium_ingot.png"),
     "industrialupgrade:crafting_elements/crafting_272_element": ("IndustrialUpgrade", "assets/industrialupgrade/textures/item/circuit.png"),
+    "industrialupgrade:crafting_elements/crafting_273_element": ("IndustrialUpgrade", "assets/industrialupgrade/textures/item/advanced_circuit.png"),
+    "industrialupgrade:crafting_elements/crafting_274_element": ("IndustrialUpgrade", "assets/industrialupgrade/textures/item/alloy.png"),
     "industrialupgrade:blockresource/reinforced_stone": ("IndustrialUpgrade", "assets/industrialupgrade/textures/block/reinforced_stone.png"),
     "patchouli:guide_book": ("Patchouli", "assets/patchouli/textures/item/book_brown.png"),
+}
+FORCE_REEXTRACT = {
+    "ae2:charged_certus_quartz_crystal",
+    "industrialupgrade:crafting_elements/crafting_273_element",
+    "industrialupgrade:crafting_elements/crafting_274_element",
 }
 GENERATED = {"minecraft:obsidian"}
 
@@ -91,7 +98,7 @@ def main() -> None:
     for item_id in SHOP_ITEMS:
         target = ITEMS_DIR / normalized(item_id)
         rel = f"assets/images/items/{normalized(item_id)}"
-        if item_id in mapping and target.is_file():
+        if item_id in mapping and target.is_file() and item_id not in FORCE_REEXTRACT:
             print("skip (already mapped):", item_id)
             continue
         if item_id in GENERATED and not target.is_file():
@@ -124,7 +131,15 @@ def main() -> None:
             missing.append(item_id)
             continue
         jar, entry, data = found
-        target.write_bytes(data)
+        from PIL import Image
+        import io
+        try:
+            im = Image.open(io.BytesIO(data))
+            if im.height > im.width:
+                im = im.crop((0, 0, im.width, im.width))
+            im.save(target)
+        except Exception:
+            target.write_bytes(data)
         mapping[item_id] = rel
         added.append(f"{item_id} <- {jar.name}:{entry}")
         print("extracted", item_id, "<-", jar.name, entry)

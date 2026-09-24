@@ -1,0 +1,20 @@
+{
+  "name": "Синтезатор",
+  "category": "aquatech_ui:machines",
+  "icon": "aquatech_machines:synthesizer",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_machines:synthesizer",
+      "title": "Синтезатор",
+      "text": "Гидротермальный синтезатор. Использует лаву и химические реагенты для создания сплавов и вулканических кристаллов."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_machines:synthesizer",
+      "title": "Крафт Синтезатора",
+      "text": "Требует вёдра лавы, титан и термостойкие пластины."
+    }
+  ]
+}

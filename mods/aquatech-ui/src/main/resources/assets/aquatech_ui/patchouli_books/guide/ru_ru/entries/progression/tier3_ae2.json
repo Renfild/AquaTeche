@@ -1,0 +1,25 @@
+{
+  "name": "Акт 3: Цифровизация (AE2)",
+  "category": "aquatech_ui:progression",
+  "icon": "ae2:controller",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Акт 3: AE2",
+      "text": "В сборке AquaTech $(bold)не нужно искать метеориты$()!$(br2)Все 4 типа прессов для процессоров свободно продаются в F4 → Магазин за АкваМонеты."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:me_controller",
+      "title": "МЭ Контроллер",
+      "text": "Сердце цифровой системы хранения и автокрафта."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech:me_drive",
+      "title": "МЭ Накопитель",
+      "text": "Устанавливай ячейки памяти и подключай терминалы доступа к ресурсам."
+    }
+  ]
+}

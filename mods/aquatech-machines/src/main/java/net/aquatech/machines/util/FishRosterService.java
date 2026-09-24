@@ -101,16 +101,22 @@ public final class FishRosterService {
                         f.has("priceCoins") ? f.get("priceCoins").getAsLong() : 30L,
                         f.has("rarity") ? f.get("rarity").getAsString() : "Обычный"));
             }
-            fishes.sort((a, b) -> Long.compare(a.price, b.price));
+            fishes.sort(java.util.Comparator
+                    .comparingInt((FishDef f) -> bandStartByRarity(f.rarity))
+                    .thenComparingLong(f -> f.price));
             List<Entry> built = new ArrayList<>();
-            int prev = 0;
+            Map<String, Integer> ordinalByRarity = new HashMap<>();
+            Map<String, Integer> totalByRarity = new HashMap<>();
+            for (FishDef f : fishes) {
+                totalByRarity.merge(f.rarity, 1, Integer::sum);
+            }
             for (FishDef f : fishes) {
                 int bandStart = bandStartByRarity(f.rarity);
                 int bandSpan = bandSpanByRarity(f.rarity);
-                int idxInBand = countSame(built, f.rarity);
-                int required = bandStart + (bandSpan == 0 ? 0 : idxInBand * bandSpan / Math.max(1, countInSource(fishes, f.rarity)));
-                required = Math.max(prev, Math.min(MAX_TIER, required));
-                prev = required;
+                int ordinal = ordinalByRarity.merge(f.rarity, 1, Integer::sum) - 1;
+                int total = Math.max(1, totalByRarity.getOrDefault(f.rarity, 1));
+                int required = bandStart + (bandSpan == 0 ? 0 : ordinal * bandSpan / total);
+                required = Math.max(1, Math.min(MAX_TIER, required));
                 built.add(new Entry(f.id, required, weightByRarity(f.rarity)));
             }
             roster = List.copyOf(built);
@@ -119,25 +125,6 @@ public final class FishRosterService {
     }
 
     private record FishDef(String id, long price, String rarity) {}
-
-    private static int countSame(List<Entry> built, String rarity) {
-        int n = 0;
-        for (Entry e : built) if (rarityOf(e.requiredTier()).equals(rarity)) n++;
-        return n;
-    }
-
-    private static int countInSource(List<FishDef> fishes, String rarity) {
-        int n = 0;
-        for (FishDef f : fishes) if (f.rarity.equals(rarity)) n++;
-        return Math.max(1, n);
-    }
-
-    private static String rarityOf(int tier) {
-        if (tier >= 8) return "Легенда";
-        if (tier >= 6) return "Эпический";
-        if (tier >= 3) return "Редкий";
-        return "Обычный";
-    }
 
     private static int bandStartByRarity(String rarity) {
         return switch (rarity.toLowerCase(java.util.Locale.ROOT)) {

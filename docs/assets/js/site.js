@@ -2062,14 +2062,14 @@
     const socials = [];
     if (profile.social_tg) {
       const tg = profile.social_tg.replace(/^@/, "");
-      socials.push(`<a class="social-chip" href="https://t.me/${encodeURIComponent(tg)}" target="_blank" rel="noopener">Telegram: @${tg}</a>`);
+      socials.push(`<a class="social-chip" href="https://t.me/${encodeURIComponent(tg)}" target="_blank" rel="noopener">Telegram: @${esc(tg)}</a>`);
     }
     if (profile.social_vk) {
       const vk = profile.social_vk.replace(/^(https?:\/\/)?(vk\.com\/)?/, "");
-      socials.push(`<a class="social-chip" href="https://vk.com/${encodeURIComponent(vk)}" target="_blank" rel="noopener">VK: ${vk}</a>`);
+      socials.push(`<a class="social-chip" href="https://vk.com/${encodeURIComponent(vk)}" target="_blank" rel="noopener">VK: ${esc(vk)}</a>`);
     }
     if (profile.social_discord) {
-      socials.push(`<span class="social-chip">Discord: ${profile.social_discord}</span>`);
+      socials.push(`<span class="social-chip">Discord: ${esc(profile.social_discord)}</span>`);
     }
 
       await renderOwnCabinet(root, profile, user, theme, socials, mine, rubBalance);

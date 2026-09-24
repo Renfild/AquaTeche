@@ -1,0 +1,20 @@
+{
+  "name": "Центрифуга",
+  "category": "aquatech_ui:machines",
+  "icon": "aquatech_machines:centrifuge",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_machines:centrifuge",
+      "title": "Центрифуга",
+      "text": "Разделяет сложные жидкости и рассолы. Производит морскую соль и минеральные соли для химических цепочек."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_machines:centrifuge",
+      "title": "Крафт Центрифуги",
+      "text": "Собирается из стали, стекла и приводов центробежного вращения."
+    }
+  ]
+}

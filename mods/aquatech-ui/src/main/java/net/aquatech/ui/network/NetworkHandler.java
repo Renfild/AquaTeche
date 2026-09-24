@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NetworkHandler {
 
-    private static final String PROTOCOL_VERSION = "7";
+    private static final String PROTOCOL_VERSION = "8";
     /** Mohist reports isAcceptingMessages=true too early — gate custom S2C by join tick. */
     public static final int LOGIN_READY_DELAY_TICKS = 10;
     private static final Map<UUID, Integer> JOIN_TICK = new ConcurrentHashMap<>();
@@ -55,11 +55,11 @@ public class NetworkHandler {
                 .consumerMainThread(ChatBubblePacket::handle)
                 .add();
 
-        // Skill tree packets
-        CHANNEL.messageBuilder(S2CSyncSkillsPacket.class, id())
-                .encoder(S2CSyncSkillsPacket::toBytes)
-                .decoder(S2CSyncSkillsPacket::new)
-                .consumerMainThread(S2CSyncSkillsPacket::handle)
+        // Ocean progress sync (XP / horizon / season)
+        CHANNEL.messageBuilder(S2CSyncOceanProgressPacket.class, id())
+                .encoder(S2CSyncOceanProgressPacket::toBytes)
+                .decoder(S2CSyncOceanProgressPacket::new)
+                .consumerMainThread(S2CSyncOceanProgressPacket::handle)
                 .add();
 
         CHANNEL.messageBuilder(S2CStartRhythmHookPacket.class, id())

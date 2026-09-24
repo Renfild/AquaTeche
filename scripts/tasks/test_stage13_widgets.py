@@ -24,7 +24,6 @@ FILES = {
     "blur": GUI / "AquaBlurredScreen.java",
     "tab_screen": UI / "tab/OceanTabScreen.java",
     "tab_overlay": UI / "tab/OceanTabOverlay.java",
-    "skill": GUI / "OceanSkillTreeScreen.java",
     "hud": UI / "hud/OceanHudOverlay.java",
     "web": GUI / "AquaWebScreen.java",
 }
@@ -94,14 +93,6 @@ def test_wiring() -> None:
     if "AquaGlassPanel" not in overlay or "AquaBadge" not in overlay:
         fail("OceanTabOverlay missing glass/badge")
 
-    skill = read("skill")
-    if "AquaDialogScreen.confirm" not in skill:
-        fail("skill tree unlock must go through AquaDialogScreen")
-    if "AquaCaseSlot" not in skill or "AquaGlassPanel" not in skill:
-        fail("skill tree missing slot/glass")
-    if "AquaBadge" not in skill:
-        fail("skill tree missing AquaBadge")
-
     hud = read("hud")
     if "AquaGlassPanel" not in hud:
         fail("HUD missing AquaGlassPanel")
@@ -110,7 +101,7 @@ def test_wiring() -> None:
     if "AquaGlassPanel" not in web or "new AquaButton(" not in web:
         fail("AquaWebScreen missing glass/button")
 
-    print("OK widgets wired into TAB / K / HUD / CEF")
+    print("OK widgets wired into TAB / HUD / CEF")
 
 
 def main() -> int:

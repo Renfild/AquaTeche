@@ -1,0 +1,20 @@
+{
+  "name": "Экстрактор",
+  "category": "aquatech_ui:machines",
+  "icon": "aquatech_machines:extractor",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_machines:extractor",
+      "title": "Экстрактор",
+      "text": "Высокоточный сепаратор сырья: удваивает выход металлов из сырых руд, очищает чистый кварц и серу."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_machines:extractor",
+      "title": "Крафт Экстрактора",
+      "text": "Создается из обсидиана, поршней и продвинутых компонентов."
+    }
+  ]
+}

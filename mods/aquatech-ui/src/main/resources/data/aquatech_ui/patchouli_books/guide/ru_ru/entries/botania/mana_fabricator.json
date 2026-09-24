@@ -1,0 +1,19 @@
+{
+  "name": "Мана-Фабрикатор",
+  "category": "aquatech_ui:botania",
+  "icon": "aquatech_machines:mana_fabricator",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_machines:mana_fabricator",
+      "title": "Мана-Фабрикатор",
+      "text": "Преобразует 2 400 FE в 200 маны каждые 2 секунды. Устанавливается вплотную к Бассейну маны (Mana Pool)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Подключение",
+      "text": "Подключи провод FE от генераторов к фабрикатору.$(br2)Он будет бесперебойно наполнять мана-пул без необходимости ручного кормления цветов!"
+    }
+  ]
+}

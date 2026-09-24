@@ -1,0 +1,26 @@
+{
+  "name": "Наживки",
+  "category": "aquatech_ui:fishing",
+  "icon": "aquatech_ui:bait_shoal",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_ui:bait_shoal",
+      "title": "Стайная наживка",
+      "text": "Дает +30% шанс поймать дубликат рыбы за один заброс. Незаменима для заполнения Атласа видов."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_ui:bait_ore",
+      "title": "Рудная наживка",
+      "text": "Дает +35% шанс достать дополнительный кусок редкой руды или драгоценный самородок."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_ui:bait_abyss",
+      "title": "Бездненная наживка",
+      "text": "Редчайшая наживка: дает +40% шанс выловить рыбу или руду из тира ВЫШЕ твоей текущей удочки!"
+    }
+  ]
+}

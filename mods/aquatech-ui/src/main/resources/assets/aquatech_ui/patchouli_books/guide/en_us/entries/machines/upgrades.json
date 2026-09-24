@@ -1,0 +1,32 @@
+{
+  "name": "Улучшения машин",
+  "category": "aquatech_ui:machines",
+  "icon": "aquatech_machines:speed_upgrade_1",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquatech_machines:speed_upgrade_1",
+      "title": "Улучшения машин",
+      "text": "Все механизмы принимают модули скорости и энергоэффективности. Модули надежно защищены от вытягивания трубами."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_machines:speed_upgrade_1",
+      "title": "Скорость x1",
+      "text": "Сокращает время каждого рабочего цикла механизма вдвое."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_machines:speed_upgrade_4",
+      "title": "Скорость x4",
+      "text": "Максимальное 4-кратное ускорение рабочего цикла машины."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "aquatech_machines:energy_efficiency_crystal",
+      "title": "Энергоэффективность",
+      "text": "Снижает потребление энергии FE на каждую операцию механизма."
+    }
+  ]
+}

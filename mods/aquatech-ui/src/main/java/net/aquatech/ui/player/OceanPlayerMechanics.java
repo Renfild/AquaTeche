@@ -1,7 +1,6 @@
 package net.aquatech.ui.player;
 
 import net.aquatech.ui.AquaTechUI;
-import net.aquatech.ui.capability.SkillEffects;
 import net.aquatech.ui.item.SonarGogglesItem;
 import net.aquatech.ui.server.PressureBridge;
 import net.minecraft.core.particles.ParticleTypes;
@@ -110,7 +109,6 @@ public final class OceanPlayerMechanics {
         int interval = effective > 25 ? 40 : 55;
         if (tick % interval == 0) {
             float dmg = effective > 25 ? 2.5f : 1.5f;
-            dmg *= (1.0f - SkillEffects.snapshot(player).waterDamageReduction());
             if (dmg > 0.2f) {
                 player.hurt(player.damageSources().drown(), dmg);
                 if (player.level() instanceof ServerLevel sl) {

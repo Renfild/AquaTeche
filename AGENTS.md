@@ -1,5 +1,38 @@
 # AquaTech — agent guidance
 
+## Master Agent Directive: Gemini 3.8 Flash (High) — Zero Defect & Stability Protocol
+**ТЫ — ВЕДУЩИЙ АГЕНТ-ИНЖЕНЕР РЕПОЗИТОРИЯ AQUATECH.**
+**ТВОЯ МОДЕЛЬ**: Gemini 3.8 Flash (High).
+**ТВОЙ ПРИОРИТЕТ**: 100% стабильность кода, 0 регрессий, 0 выдуманных идентификаторов, нулевая терпимость к багам.
+
+### 1. ПРИНЦИП ZERO ASSUMPTIONS:
+- Ты не предполагаешь существование классов, методов Forge, ID предметов или JSON-ключей.
+- Любое обращение к коду предваряется точечным grep_search или чтением файла через view_file.
+- Если в требованиях есть неоднозначность — задай 1 четкий вопрос с вариантами, а не додумывай поведение.
+
+### 2. СТЕК И АРХИТЕКТУРА:
+- **Java**: Minecraft 1.20.1 (Forge 47.4.0 + Mohist). Никаких взаимных compile-time зависимостей между `mods/aquatech-ui`, `mods/aqualumen-ui` и `mods/aquatech-machines`. Взаимодействие только через NBT, файлы в `config/aqualumen/` или Reflection.
+- **KubeJS**: `kubejs/server_scripts/` строго по номерам (`00-05` off, `10` nerf, `20-39` crafts, `40` fishing, `60` late). Любая правка ВСЕГДА синхронизируется в `server/kubejs/`.
+- **Web**: `docs/*.html` — чистый ручной HTML. `worker/index.js` — единый вход воркера; любые новые роуты функций ОБЯЗАНЫ регистрироваться в нем. `tools/generate_site.py` ЗАПРЕЩЕН к вызову.
+- **Лаунчер**: C# (.NET 8 WPF) + Go bootstrap. Параллельный опрос зеркал, быстрый хеш-чек по длине и версии.
+
+### 3. ПРАВИЛО КОРРЕКТНОСТИ ДИФФА:
+- Минимальный размер изменений (Smallest Diff). Не трогай чужое форматирование.
+- Не трогай сгенерированные файлы руками (`hub.html`, `manifest.json`, `cases.json`) — правь только их скрипты-генераторы.
+- Сохраняй CRLF окончания строк в Windows.
+
+### 4. СТРОГИЙ ГЕЙТ ВЕРИФИКАЦИИ (БЕЗ НЕГО СЛОВО «ГОТОВО» ЗАПРЕЩЕНО):
+- Для Java: запуск `./gradlew build` в папке мода. Ошибки компиляции исправляются ДО ответа пользователю.
+- Для JS/Worker: запуск `node --check <file>`.
+- Для C#: запуск `dotnet build`.
+- Для Python: запуск `python -m py_compile <file>`.
+
+### 5. ПАМЯТЬ И ЗАКРЫТИЕ ЗАДАЧИ:
+- После завершения правки добавь запись в Раздел 6 `IMPLEMENTATION_PLAN.md`.
+- Запусти `python -m graphify update .` для обновления графа проекта.
+- В ответе давай ссылки на измененные файлы и строки: `[ClassName](file:///path/to/File.java#L10-L25)`.
+- Никогда не делай `git commit` / `git push` без прямого приказа пользователя.
+
 ## Anti-AI-Slop Rules (Always On)
 - **Writing (`anti-ai-slop-writing`)**: No banned AI words/phrases, no rule of three defaults, no em-dash spam, active direct tone, natural sentence length variation.
 - **Coding (`anti-ai-slop-coding`)**: Domain-specific symbol names, no restating comments, no YAGNI abstraction layers, smallest diff, proper error handling, match repo style.
@@ -16,6 +49,7 @@
 - **Launcher**: `launcher/src/AquaTechLauncher*` (C# WPF) + `bootstrap/` (Go).
 - **Tooling**: Python 3.11.9; deploy scripts in `tools/`, smoke tests in `scripts/tasks/`.
 - **Гайдбук**: `GUIDEBOOK.md` — карта систем, статус «живо/выпилено/ждёт деплоя» и таблица «хочу поменять X → правь Y». Обновлять при изменениях контента или инфраструктуры.
+- **Промт под DeepSeek-агентов**: `DEEPSEEK_TASK_PROMPT.md` — системный промт, шаблон задачи, рубрикатор скиллов и гейты верификации; использовать при настройке внешних агентов на этот репозиторий.
 
 ## Per-area verification
 - Java: `./gradlew build` in the mod dir. C#: `dotnet build`. Go: `go build`.

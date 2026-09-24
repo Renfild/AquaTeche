@@ -1,0 +1,184 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "endgame_aquatech"
+	group: "2AC058F49B3BBFEF"
+	icon: "industrialupgrade:admpanel/admpanel"
+	id: "026F5449CA77B851"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Добудь Alpha Rod — верх рыбацкой линейки"
+				"StarCatcher. Без неё финальная панель IU не"
+				"собирается."
+			]
+			entity_vis_size: 1.0f
+			icon: {
+				Count: 1
+				id: "starcatcher:alpha_rod"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "5A201EA9CECBC459"
+			rewards: [
+				{
+					count: 2
+					id: "03C27221D6F87C22"
+					item: {
+						Count: 1
+						id: "aquatech_ui:rate_x64"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "1E75AC291ADAC9F8"
+					item: "ae2:item_storage_cell_256k"
+					type: "item"
+				}
+				{
+					id: "6D03EABB14D459C8"
+					type: "xp"
+					xp: 800
+				}
+			]
+			tasks: [{
+				id: "03E66506129B2167"
+				item: {
+					Count: 1
+					id: "starcatcher:alpha_rod"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "Альфа-рыбак"
+			x: -2.0d
+			y: 1.0d
+		}
+		{
+			description: [
+				"Пять звёзд Нижнего мира. На AquaTech их ловят"
+				"удочкой, а не фармят с визер-фермы."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:nether_star"
+			id: "0D837E6848797C49"
+			rewards: [
+				{
+					count: 4
+					id: "4B88E37CAEC7AF6D"
+					item: "avaritia:crystal_matrix_ingot"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "035EA7C2E3BBADF8"
+					item: "ae2:fluid_storage_cell_256k"
+					type: "item"
+				}
+				{
+					id: "68AE385EDDDB7EFF"
+					type: "xp"
+					xp: 800
+				}
+			]
+			tasks: [{
+				count: 5L
+				id: "56D17B203BA4F3AC"
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
+			title: "Звёзды из сети"
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["107471907E8C6673"]
+			description: [
+				"Слиток Infinity с экстремального стола. Этот квест"
+				"закрывается вместе с вкладкой Avaritia."
+			]
+			entity_vis_size: 1.0f
+			icon: "avaritia:infinity_ingot"
+			id: "7373C3C191AA6D36"
+			rewards: [
+				{
+					count: 2
+					id: "11FF00FA8FE3A3F4"
+					item: "ae2:cell_component_256k"
+					type: "item"
+				}
+				{
+					id: "6CA5E8B52CBE8776"
+					type: "xp"
+					xp: 1000
+				}
+			]
+			tasks: [{
+				id: "0248D899E052E0CD"
+				item: "avaritia:infinity_ingot"
+				type: "item"
+			}]
+			title: "Infinity на столе"
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7373C3C191AA6D36"]
+			description: [
+				"Финал AquaTech. Admin Solar Panel на столе 9×9:"
+				"Infinity, сингулярность, Rate x64, Alpha Rod и"
+				"фотонная панель."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:admpanel/admpanel"
+			id: "548404476B858A80"
+			rewards: [
+				{
+					id: "29B4FDEED0C16C27"
+					item: "industrialupgrade:machines/photonic_solar_panel"
+					type: "item"
+				}
+				{
+					id: "00B88E2DC2951E8F"
+					item: "avaritia:compressed_chest"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "40710112D6DFC46D"
+					item: "ae2:item_storage_cell_256k"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "301E8399C7306D70"
+					item: "ae2:fluid_storage_cell_256k"
+					type: "item"
+				}
+				{
+					id: "2FF600D1F6169BCC"
+					type: "xp"
+					xp: 2500
+				}
+			]
+			tasks: [{
+				id: "501E3C2DB4B1AFFA"
+				item: "industrialupgrade:admpanel/admpanel"
+				type: "item"
+			}]
+			title: "Админ-панель"
+			x: 0.0d
+			y: 3.5d
+		}
+	]
+	title: "Эндгейм"
+}
