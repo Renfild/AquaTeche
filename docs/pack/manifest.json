@@ -1,5 +1,5 @@
 {
-  "version": "2.9.387",
+  "version": "2.9.394",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -35,25 +35,25 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.56-alpha.jar",
-      "md5": "0c4722d4cb0b0bc7c43d235feb2effc8",
-      "size": 2345844,
-      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.56-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.56-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.57-alpha.jar",
+      "md5": "2af2fc29ce59b0b13aeb2baf95ef46cd",
+      "size": 2345489,
+      "url": "https://aquateche.store/pack/mods/aqualumen-forge-1.20.1-0.3.57-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.57-alpha.jar"
     },
     {
-      "path": "mods/aquatech_machines-1.0.9.jar",
-      "md5": "292933da58cc41907443e91114233ee2",
-      "size": 234187,
-      "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.9.jar",
-      "asset": "aquatech_machines-1.0.9.jar"
+      "path": "mods/aquatech_machines-1.0.10.jar",
+      "md5": "7bf7caaa5116a542ba10b447e53049f7",
+      "size": 235080,
+      "url": "https://aquateche.store/pack/mods/aquatech_machines-1.0.10.jar",
+      "asset": "aquatech_machines-1.0.10.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.99.jar",
-      "md5": "4c969e47a14e6a8a484ef2282d539a64",
-      "size": 2968649,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.99.jar",
-      "asset": "aquatech_ui-1.0.99.jar"
+      "path": "mods/aquatech_ui-1.0.101.jar",
+      "md5": "32117ec556988781c0cd19aaa37e4560",
+      "size": 2831739,
+      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.101.jar",
+      "asset": "aquatech_ui-1.0.101.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -547,15 +547,15 @@
     },
     {
       "path": "config/aqualumen/fish_shop.json",
-      "md5": "b555f0b0a9e4f63cfb07402036f54cdb",
-      "size": 19150,
+      "md5": "cae05b0fb53fa69efe4bff9254d5fa0d",
+      "size": 18956,
       "url": "https://aquateche.store/pack/config/aqualumen/fish_shop.json",
       "asset": "config__aqualumen__fish_shop.json"
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "ab489090b626f1278c8495bf394e1cb8",
-      "size": 857083,
+      "md5": "32cf7aa4ba15b0a1814e721a47658263",
+      "size": 856019,
       "url": "https://aquateche.store/pack/config/aqualumen/hub.html",
       "asset": "config__aqualumen__hub.html"
     },
@@ -589,8 +589,8 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "ab489090b626f1278c8495bf394e1cb8",
-      "size": 857083,
+      "md5": "32cf7aa4ba15b0a1814e721a47658263",
+      "size": 856019,
       "url": "https://aquateche.store/pack/config/aqualumen/html/hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
@@ -701,99 +701,99 @@
     },
     {
       "path": "config/ftbquests/quests/chapter_groups.snbt",
-      "md5": "a9b777926d532f1c9f7fdd20777b7274",
-      "size": 174,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapter_groups.snbt",
+      "md5": "b48c5aa09cb2d07c2ab4c9ce9776f72f",
+      "size": 181,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapter_groups.snbt",
       "asset": "config__ftbquests__quests__chapter_groups.snbt"
     },
     {
       "path": "config/ftbquests/quests/data.snbt",
-      "md5": "e9e751cda809ea50639e6b63c093a951",
-      "size": 601,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__data.snbt",
+      "md5": "109f5b23742510b936224d2d327e4973",
+      "size": 633,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/data.snbt",
       "asset": "config__ftbquests__quests__data.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/1.snbt",
-      "md5": "658d3153a7fd6da10bb31d97622e8695",
-      "size": 17664,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__1.snbt",
+      "md5": "0178a8297a3ccabacbef7b927b752311",
+      "size": 18604,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/1.snbt",
       "asset": "config__ftbquests__quests__chapters__1.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/6D8025A12BB42355.snbt",
-      "md5": "d4ee11b27b44c228130b5c04914a9ffa",
-      "size": 3981,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__6D8025A12BB42355.snbt",
+      "md5": "4e343f190be838bf50e43ecb89476c86",
+      "size": 4233,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/6D8025A12BB42355.snbt",
       "asset": "config__ftbquests__quests__chapters__6D8025A12BB42355.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/7D2835D587AABDAB.snbt",
-      "md5": "f3fa8046d8a922319febfa68bb9155e1",
-      "size": 2938,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__7D2835D587AABDAB.snbt",
+      "md5": "c0005b10e1557178254a5eac38785c32",
+      "size": 3084,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/7D2835D587AABDAB.snbt",
       "asset": "config__ftbquests__quests__chapters__7D2835D587AABDAB.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/ae2_aquatech.snbt",
-      "md5": "448b508ab9c2ba6de4981801ea0b3dea",
-      "size": 26442,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__ae2_aquatech.snbt",
+      "md5": "e6ed256c00428d7057f4b50f6ae2a7b6",
+      "size": 27762,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/ae2_aquatech.snbt",
       "asset": "config__ftbquests__quests__chapters__ae2_aquatech.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/alexscaves_aquatech.snbt",
-      "md5": "0c1ede922bd1e483c22a5b3cb92bd6a3",
-      "size": 22006,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__alexscaves_aquatech.snbt",
+      "md5": "aa95aefec1d0479f75b029556d0e06e4",
+      "size": 23135,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/alexscaves_aquatech.snbt",
       "asset": "config__ftbquests__quests__chapters__alexscaves_aquatech.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/avaritia_aquatech.snbt",
-      "md5": "0f8878285f1fb8cc98a6d12b6820aec5",
-      "size": 20879,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__avaritia_aquatech.snbt",
+      "md5": "9bc18be7b586955127a62b7712d7e58e",
+      "size": 21890,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/avaritia_aquatech.snbt",
       "asset": "config__ftbquests__quests__chapters__avaritia_aquatech.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/basic_electric_era.snbt",
-      "md5": "967ddf46ee0c38c1f34c6e7635ef9fb2",
-      "size": 59322,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__basic_electric_era.snbt",
+      "md5": "2cb76ba9b14266489319ec4413e25319",
+      "size": 61839,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/basic_electric_era.snbt",
       "asset": "config__ftbquests__quests__chapters__basic_electric_era.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/botania_aquatech.snbt",
-      "md5": "967b1c39e24e3e79a0d09b947aa6b032",
-      "size": 30230,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__botania_aquatech.snbt",
+      "md5": "eaf9562fe4af83da048940505742ddc5",
+      "size": 31709,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/botania_aquatech.snbt",
       "asset": "config__ftbquests__quests__chapters__botania_aquatech.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/endgame_aquatech.snbt",
-      "md5": "427b78ace8f241c6af1eedfb55db5e19",
-      "size": 3679,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__endgame_aquatech.snbt",
+      "md5": "147b3f3f019a7977e2085d2f98f75834",
+      "size": 3863,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/endgame_aquatech.snbt",
       "asset": "config__ftbquests__quests__chapters__endgame_aquatech.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/improved_electric_era.snbt",
-      "md5": "5785c1f7964c615e1db9e5e176a8d07a",
-      "size": 72153,
+      "md5": "ccf9311468cb91eaacc8cf6158644f0d",
+      "size": 75244,
       "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/improved_electric_era.snbt",
       "asset": "config__ftbquests__quests__chapters__improved_electric_era.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/secret_aquatech.snbt",
-      "md5": "7f3936828cb68236d0280459f02b2fc4",
-      "size": 6522,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.291/config__ftbquests__quests__chapters__secret_aquatech.snbt",
+      "md5": "9e477a17ca700bfe5e48e70c64943b96",
+      "size": 6814,
+      "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/secret_aquatech.snbt",
       "asset": "config__ftbquests__quests__chapters__secret_aquatech.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/steam_era.snbt",
-      "md5": "77b39dd21c5d66cc267c44660eb437c2",
-      "size": 35720,
+      "md5": "6b208026ae3c074044d1ca23ff36c6f0",
+      "size": 40475,
       "url": "https://aquateche.store/pack/config/ftbquests/quests/chapters/steam_era.snbt",
       "asset": "config__ftbquests__quests__chapters__steam_era.snbt"
     },
