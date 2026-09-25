@@ -44,6 +44,14 @@ def md5_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def get_current_version() -> str:
     if LAUNCHER_CONSTANTS.is_file():
         content = LAUNCHER_CONSTANTS.read_text(encoding="utf-8")
@@ -129,7 +137,7 @@ def pack_launcher_zip(src_dir: Path, zip_dest: Path) -> None:
     print(f"[+] Created {zip_dest} ({zip_dest.stat().st_size / (1024*1024):.2f} MB)")
 
 
-def update_manifest(version: str, zip_path: Path) -> dict:
+def update_manifest(version: str, zip_path: Path, exe_path: Path) -> dict:
     tag = f"client-{version}"
     manifest = {
         "version": version,
@@ -140,6 +148,8 @@ def update_manifest(version: str, zip_path: Path) -> dict:
         "release_base": "https://aquateche.store/dl",
         "launcher_zip_md5": md5_file(zip_path),
         "launcher_zip_size": zip_path.stat().st_size,
+        "launcher_exe_sha256": sha256_file(exe_path),
+        "launcher_zip_sha256": sha256_file(zip_path),
         "pack_cdn": "https://aquateche.store/pack",
     }
     DOCS_MANIFEST.parent.mkdir(parents=True, exist_ok=True)
@@ -245,7 +255,7 @@ def main() -> None:
 
     # Step 4: Update bootstrap.json
     if not args.dry_run:
-        manifest = update_manifest(version, zip_dest)
+        manifest = update_manifest(version, zip_dest, go_exe)
         print("Updated manifest:", json.dumps(manifest, indent=2))
 
     # Step 5: Upload if requested

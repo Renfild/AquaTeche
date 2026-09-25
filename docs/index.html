@@ -22,9 +22,10 @@
 
 
 <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("aquatech_theme")==="dark"?"dark":"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
-<link rel="stylesheet" href="assets/css/site.css?v=20260924_pink" />
+<link rel="stylesheet" href="assets/css/site.css?v=20260924_pink5" />
 </head>
 <body data-page="home">
+  <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
@@ -38,11 +39,14 @@
       <h1 class="hero-mega" data-hero-mega>Плот посреди <em>бесконечного</em> океана</h1>
       <p class="hero-stage-lead" data-hero-lead>Ни одной шахты. Удочка вместо кирки, авторыбалы вместо дедлайна, аукцион и квесты, которые ведут за руку. Скачай лаунчер — и выходи на воду.</p>
       <div class="hero-stage-actions" data-hero-actions>
-        <a class="btn btn-primary" data-magnetic="6" data-download href="start.html">
+        <a class="btn btn-primary" data-magnetic="6" href="register.html">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="16" y1="11" x2="22" y2="11"/></svg>
+          <span>Зарегистрироваться</span>
+        </a>
+        <a class="btn btn-secondary" data-magnetic="4" data-download href="start.html">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Скачать лаунчер</span>
         </a>
-        <a class="btn btn-secondary" data-magnetic="4" href="guide.html">Гайд новичка</a>
       </div>
       <div class="hero-meta" data-hero-meta>
         <span class="live-pill" title="Статус сервера">
@@ -75,17 +79,17 @@
       </div>
       <div class="story-stage" data-story-stage data-active="0">
         <article class="story-panel is-active" data-story-panel>
-          <div class="story-panel-visual"><img src="assets/images/rods/t01-bamboo.png" alt="Бамбуковая удочка" width="190" height="190" loading="lazy" /></div>
+          <div class="scene-art" style="--art-a:#f6b8cd;--art-b:#c9aef2" aria-hidden="true"><img class="specimen" src="assets/images/rods/t01-bamboo.png" alt="" width="112" height="112" loading="lazy" /><span class="scene-art-index">01</span></div>
           <h3>Шаг 1. Плот и первая удочка</h3>
           <p>Вход в один клик через лаунчер, без ввода IP. Открываешь меню F4, берёшь бамбуковую удочку — и первый заброс готов.</p>
         </article>
         <article class="story-panel" data-story-panel>
-          <div class="story-panel-visual"><img src="assets/images/rods/t07-starcatcher.png" alt="Удочка Ловец Звёзд" width="190" height="190" loading="lazy" /></div>
+          <div class="scene-art" style="--art-a:#f2a8c8;--art-b:#a9c8f5" aria-hidden="true"><img class="specimen" src="assets/images/rods/t07-starcatcher.png" alt="" width="112" height="112" loading="lazy" /><span class="scene-art-index">02</span></div>
           <h3>Шаг 2. Руда на крючке</h3>
           <p>Каждая следующая удочка крафтится из предыдущей и её же улова: T1 тянет булыжник, T7 — самоцветы, Альфа — иридий и звезду Незера.</p>
         </article>
         <article class="story-panel" data-story-panel>
-          <div class="story-panel-visual"><img src="assets/images/items/industrialupgrade_blockresource_machine.png" alt="Механизм AquaTech" width="190" height="190" loading="lazy" /></div>
+          <div class="scene-art" style="--art-a:#e6b6f0;--art-b:#9fe0d2" aria-hidden="true"><img class="specimen" src="assets/images/items/industrialupgrade_blockresource_advanced_machine.png" alt="" width="112" height="112" loading="lazy" /><span class="scene-art-index">03</span></div>
           <h3>Шаг 3. Автоматизация</h3>
           <p>Авторыболов MK-2 ловит сам, экскаватор грызёт дно, синтезатор и центрифуга перерабатывают улов. Гидростанция не останавливается, когда ты выходишь.</p>
         </article>
@@ -258,7 +262,6 @@
             <div class="qc-system-text">
               <span class="qc-label">Ваша операционная система</span>
               <strong id="qcOsName">Windows 10/11 x64</strong>
-              <small style="display:block;color:var(--accent);margin-top:2px">Вход в 1 клик через лаунчер (ввод IP не требуется)</small>
             </div>
           </div>
 
@@ -280,7 +283,6 @@
           <div class="step-badge">Шаг 1</div>
           <div class="start-card-content">
             <h3>Создайте профиль</h3>
-            <p>Ник, скин, статистика улова и баланс. Прогресс не потеряется при переезде на другой компьютер.</p>
           </div>
           <div class="start-card-action">
             <a class="btn btn-secondary btn-full" href="register.html">Регистрация</a>
@@ -290,7 +292,6 @@
           <div class="step-badge accent">Шаг 2</div>
           <div class="start-card-content">
             <h3>Скачайте лаунчер</h3>
-            <p>Forge, моды и квесты приедут сами. Искать сборку по сайтам не придётся.</p>
           </div>
           <div class="start-card-action">
             <a class="btn btn-primary btn-full" data-download href="start.html">Перейти к скачиванию</a>
@@ -300,7 +301,6 @@
           <div class="step-badge">Шаг 3</div>
           <div class="start-card-content">
             <h3>Окажитесь на плоту</h3>
-            <p>Вход в один клик. Открой меню F4, возьми бамбуковую удочку и забрось.</p>
           </div>
           <div class="start-card-action">
             <a class="btn btn-secondary btn-full" href="guide.html">Гайд новичка</a>
@@ -323,10 +323,12 @@
         </div>
       </div>
 
-      <div class="rod-ladder reveal">
+      <div class="rod-ladder reveal" data-rod-gallery>
         <div class="rod-ladder-head">
           <span class="tag accent">13 уровней развития</span>
           <p>Каждая следующая удочка ловит руды предыдущего пула — от бамбука до Альфы.</p>
+          <p class="rod-ladder-caption" data-rod-caption>T1 · Бамбуковая</p>
+          <span class="rod-ladder-count" data-rod-count>01 / 13</span>
         </div>
         <ol class="rod-ladder-track">
           <li title="T1 · Бамбуковая / ванильная"><img src="assets/images/rods/t01-bamboo.png" alt="Бамбуковая удочка" width="32" height="32" loading="lazy" /><span>T1</span></li>
@@ -376,34 +378,6 @@
     </div>
   </section>
 
-  <section class="home-section" id="showcase-frame">
-    <div class="container">
-      <div class="split-head">
-        <div>
-          <p class="micro-label">Оформление</p>
-          <h2 data-float>Светлая и тёмная — <span class="serif-accent">на твой вкус</span></h2>
-        </div>
-        <div class="ba-toggle" role="group" aria-label="Тема оформления">
-          <button type="button" data-ba="light" aria-pressed="true">Before</button>
-          <button type="button" data-ba="dark" aria-pressed="false">After</button>
-        </div>
-      </div>
-      <div class="browser-frame" data-float>
-        <div class="browser-bar">
-          <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
-          <span class="browser-url">aquateche.store</span>
-        </div>
-        <img class="mockup-light" src="assets/images/site-mockup.jpg" alt="Главная страница AquaTech в светлой теме" width="1904" height="985" loading="lazy" />
-        <img class="mockup-dark" src="assets/images/site-mockup-dark.jpg" alt="Главная страница AquaTech в тёмной теме" width="1904" height="985" loading="lazy" />
-      </div>
-      <div class="editorial-card" data-float>
-        <p class="micro-label">Introducing</p>
-        <h3>AquaTech 2.9.395 — <span class="serif-accent">тише, быстрее, глубже</span></h3>
-        <p>Новая главная: кинематографичный WebGL-фон, живой дашборд сервера и редакционная вёрстка вместо ленты одинаковых карточек. Переключатель темы остался, но теперь он часть композиции, а не гаджет в шапке.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- =========================================================================
        НОВОСТИ СЕРВЕРА - DISTINCT CONTAINER
        ========================================================================= -->
@@ -428,9 +402,9 @@
   <script src="assets/js/vendor/lenis.min.js?v=1.3.11" defer></script>
   <script src="assets/js/vendor/gsap.min.js?v=3.13.0" defer></script>
   <script src="assets/js/vendor/ScrollTrigger.min.js?v=3.13.0" defer></script>
-  <script src="assets/js/site.js?v=20260924_light"></script>
+  <script src="assets/js/site.js?v=20260925_dl"></script>
   <script src="assets/js/motion.js?v=1" defer></script>
-  <script src="assets/js/glass-hero.js?v=1" defer></script>
-  <script src="assets/js/home-cinema.js?v=1" defer></script>
+  <script src="assets/js/glass-hero.js?v=2" defer></script>
+  <script src="assets/js/home-cinema.js?v=5" defer></script>
 </body>
 </html>

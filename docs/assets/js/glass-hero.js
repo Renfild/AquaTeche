@@ -40,157 +40,111 @@
   uniform vec2 uMouse;
   uniform float uTheme;
   uniform float uScroll;
+  uniform vec3 uClick;
 
-  mat2 rot(float a) {
-    float c = cos(a);
-    float s = sin(a);
-    return mat2(c, -s, s, c);
+  float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
   }
 
-  float smin(float a, float b, float k) {
-    float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
-    return mix(b, a, h) - k * h * (1.0 - h);
+  float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(
+      mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+      mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+      u.y);
   }
 
-  float sdSphere(vec3 p, float r) {
-    return length(p) - r;
-  }
-
-  float sdBox(vec3 p, vec3 b, float r) {
-    vec3 q = abs(p) - b;
-    return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - r;
-  }
-
-  float scene(vec3 p) {
-    float t = uTime * 0.22;
-
-    vec3 a = p;
-    a.xz *= rot(t * 0.35 + uScroll * 1.2);
-    a.xy *= rot(0.42);
-    float core = sdBox(a, vec3(0.46, 0.32, 0.22), 0.16);
-
-    vec3 b = p - vec3(sin(t * 0.7) * 0.62, cos(t * 0.53) * 0.40, 0.26);
-    b.xz *= rot(-t * 0.5);
-    b.xy *= rot(0.9);
-    float shard = sdBox(b, vec3(0.22, 0.11, 0.09), 0.07);
-
-    vec3 c = p - vec3(cos(t * 0.42) * 0.70, sin(t * 0.61) * 0.32, -0.22);
-    c.xy *= rot(t * 0.33);
-    float bead = sdSphere(c, 0.21 + 0.02 * sin(t * 1.3));
-
-    vec3 d = p - vec3(-0.40, 0.52, 0.46);
-    d.xz *= rot(t * 0.28 + 1.1);
-    float drop = sdSphere(d, 0.16);
-
-    float shape = smin(core, shard, 0.22);
-    shape = smin(shape, bead, 0.18);
-    shape = smin(shape, drop, 0.14);
-    return shape;
-  }
-
-  vec3 normalAt(vec3 p) {
-    vec2 e = vec2(0.0016, 0.0);
-    return normalize(vec3(
-      scene(p + e.xyy) - scene(p - e.xyy),
-      scene(p + e.yxy) - scene(p - e.yxy),
-      scene(p + e.yyx) - scene(p - e.yyx)));
-  }
-
-  float softShadow(vec3 ro, vec3 rd) {
-    float res = 1.0;
-    float t = 0.06;
-    for (int i = 0; i < 18; i++) {
-      float h = scene(ro + rd * t);
-      res = min(res, 9.0 * h / t);
-      t += clamp(h, 0.03, 0.24);
-      if (res < 0.02 || t > 3.2) break;
+  float fbm(vec2 p) {
+    float value = 0.0;
+    float amp = 0.5;
+    for (int i = 0; i < 4; i++) {
+      value += amp * noise(p);
+      p *= 2.07;
+      amp *= 0.5;
     }
-    return clamp(res, 0.0, 1.0);
+    return value;
+  }
+
+  float causticField(vec2 p, float t) {
+    float a = fbm(p * 1.9 + vec2(t * 0.14, -t * 0.10));
+    float b = fbm(p * 2.5 - vec2(t * 0.11, t * 0.15));
+    float c = fbm(p * 4.6 + vec2(-t * 0.20, t * 0.06));
+    float ridges = 1.0 - abs(a - b) * 1.7;
+    ridges = pow(max(ridges, 0.0), 3.2);
+    float fine = pow(max(1.0 - abs(c - b) * 2.2, 0.0), 6.0);
+    return ridges * 0.9 + fine * 0.5;
   }
 
   void main() {
     vec2 frag = gl_FragCoord.xy;
     vec2 uv = frag / uRes.xy;
     float aspect = uRes.x / max(uRes.y, 1.0);
-    vec2 p = vec2((uv.x - 0.5) * aspect, uv.y - 0.5);
+    vec2 p = vec2(uv.x * aspect, uv.y);
+    float t = uTime;
 
-    float travel = uScroll * 2.4;
-    float orbit = (uMouse.x - 0.5) * 0.7 + travel * 0.5;
-    float lift = (uMouse.y - 0.5) * 0.4 - uScroll * 0.8;
-    float shift = aspect > 1.35 ? 0.52 : 0.0;
+    vec2 mouse = vec2(uMouse.x * aspect, 1.0 - uMouse.y);
+    float near = smoothstep(0.75, 0.0, distance(p, mouse));
 
-    vec3 ro = vec3(sin(orbit) * 1.55 - shift, 0.52 + lift, 3.35 + cos(orbit) * 0.85 - travel * 0.35);
-    vec3 target = vec3(-shift, -0.04 + uScroll * 0.55, 0.0);
+    vec2 flow = p;
+    flow += vec2(sin(t * 0.21), cos(t * 0.17)) * 0.05;
+    flow += (mouse - p) * near * 0.10;
+    flow.y += uScroll * 0.85;
+    flow.x += sin(flow.y * 1.6 + t * 0.3) * 0.06;
 
-    vec3 forward = normalize(target - ro);
-    vec3 right = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
-    vec3 up = cross(right, forward);
-    vec3 rd = normalize(forward * 1.9 + right * p.x + up * p.y);
-
-    float hit = 0.0;
-    float depth = 0.0;
-    for (int i = 0; i < 72; i++) {
-      vec3 pos = ro + rd * depth;
-      float d = scene(pos);
-      if (d < 0.0012) { hit = 1.0; break; }
-      depth += d * 0.68;
-      if (depth > 7.0) break;
+    float ripple = 0.0;
+    if (uClick.z < 1.35) {
+      float age = uClick.z;
+      vec2 cp = vec2(uClick.x * aspect, 1.0 - uClick.y);
+      float d = distance(p, cp);
+      float ring = sin(d * 26.0 - age * 9.0) * exp(-d * 3.2) * exp(-age * 2.1);
+      ripple = ring;
+      flow += normalize(p - cp + 0.0001) * ring * 0.05;
     }
 
-    vec3 lightDir = normalize(vec3(-0.55, 0.78, 0.42));
-    vec3 roseDir = normalize(vec3(0.72, 0.18, -0.55));
+    float field = causticField(flow, t);
 
-    vec3 lightTop = vec3(1.0, 0.980, 0.988);
+    vec3 aquaLight = vec3(0.541, 0.867, 0.925);
+    vec3 aquaDark = vec3(0.043, 0.145, 0.208);
+    vec3 aqua = mix(aquaDark, aquaLight, uTheme);
+
+    vec3 roseLight = vec3(0.973, 0.796, 0.871);
+    vec3 roseDark = vec3(0.290, 0.114, 0.216);
+    vec3 rose = mix(roseDark, roseLight, uTheme);
+
+    vec3 lightTop = vec3(1.0, 0.984, 0.990);
     vec3 lightBottom = vec3(0.973, 0.925, 0.941);
-    vec3 lightBase = mix(lightTop, lightBottom, smoothstep(-0.2, 0.55, p.y - uScroll * 0.2));
+    vec3 lightBase = mix(lightTop, lightBottom, smoothstep(-0.1, 0.9, uv.y));
 
-    vec3 darkTop = vec3(0.055, 0.031, 0.086);
-    vec3 darkBottom = vec3(0.012, 0.055, 0.086);
-    vec3 darkBase = mix(darkTop, darkBottom, smoothstep(-0.2, 0.55, p.y));
+    vec3 deepTop = vec3(0.043, 0.075, 0.110);
+    vec3 deepBottom = vec3(0.008, 0.031, 0.051);
+    vec3 deepBase = mix(deepTop, deepBottom, smoothstep(-0.1, 0.9, uv.y));
 
-    vec3 bg = mix(lightBase, darkBase, uTheme);
+    vec3 col = mix(lightBase, deepBase, uTheme);
 
-    vec3 glowA = mix(vec3(0.973, 0.741, 0.831), vec3(0.180, 0.831, 0.878), uTheme);
-    vec3 glowB = mix(vec3(0.827, 0.686, 0.965), vec3(0.486, 0.290, 0.902), uTheme);
+    vec2 g1 = p - vec2(0.72, 0.80);
+    vec2 g2 = p - vec2(0.16, 0.22);
+    col += rose * exp(-3.0 * dot(g1, g1)) * mix(0.34, 0.26, uTheme);
+    col += aqua * exp(-3.4 * dot(g2, g2)) * mix(0.26, 0.34, uTheme);
 
-    bg += glowA * exp(-4.4 * dot(p - vec2(0.72, 0.20), p - vec2(0.72, 0.20))) * mix(0.34, 0.40, uTheme);
-    bg += glowB * exp(-5.0 * dot(p - vec2(-0.62, -0.24), p - vec2(-0.62, -0.24))) * mix(0.26, 0.32, uTheme);
+    float veins = smoothstep(0.02, 0.42, field);
+    col += aqua * veins * mix(0.34, 0.36, uTheme);
+    col += vec3(1.0) * pow(max(field - 0.58, 0.0), 1.7) * mix(0.16, 0.26, uTheme);
+    col += aqua * near * 0.10;
+    col += vec3(1.0, 0.98, 0.99) * ripple * 0.16 * mix(0.6, 1.0, uTheme);
 
-    vec2 foot = p - vec2(shift * 0.62, -0.46 - uScroll * 0.12);
-    bg *= 1.0 - exp(-7.0 * dot(foot, foot)) * mix(0.16, 0.42, uTheme);
+    float bubbles = smoothstep(0.965, 1.0, noise(vec2(p.x * 9.0, p.y * 9.0 - t * 0.35)));
+    col += mix(roseLight, aquaLight, uTheme) * bubbles * 0.12;
 
-    vec3 col = bg;
-
-    if (hit > 0.5) {
-      vec3 pos = ro + rd * depth;
-      vec3 n = normalAt(pos);
-      float fres = pow(1.0 - clamp(dot(n, -rd), 0.0, 1.0), 2.2);
-
-      float diff = clamp(dot(n, lightDir), 0.0, 1.0);
-      float sh = softShadow(pos + n * 0.02, lightDir);
-      float spec = pow(clamp(dot(reflect(rd, n), lightDir), 0.0, 1.0), 64.0);
-      float spec2 = pow(clamp(dot(reflect(rd, n), roseDir), 0.0, 1.0), 22.0);
-      float rim = pow(clamp(dot(n, roseDir), 0.0, 1.0), 1.8);
-
-      vec3 rose = mix(vec3(0.937, 0.478, 0.671), vec3(0.180, 0.831, 0.878), uTheme);
-      vec3 violet = mix(vec3(0.639, 0.494, 0.918), vec3(0.478, 0.310, 0.886), uTheme);
-      vec3 glassLight = mix(vec3(1.0, 0.988, 0.996), vec3(0.749, 0.937, 1.0), uTheme);
-
-      vec3 body = mix(rose, violet, clamp(0.30 + 0.45 * n.y, 0.0, 1.0));
-      body = mix(body, glassLight, 0.18 + 0.30 * diff);
-
-      col = body * (0.72 + 0.28 * sh);
-      col = mix(col, glassLight, fres * 0.62);
-      col += glassLight * spec * 0.90 * sh;
-      col += violet * spec2 * 0.30;
-      col += rose * rim * 0.22;
-    }
+    float depth = smoothstep(0.0, 1.0, uv.y + uScroll * 0.25);
+    col *= mix(1.0, 0.86, depth * (1.0 - uTheme));
 
     float grain = fract(sin(dot(frag + uTime, vec2(12.9898, 78.233))) * 43758.5453) - 0.5;
-    col += grain * 0.014;
+    col += grain * 0.012;
 
-    float vignette = smoothstep(0.46, 1.16, length(p));
-    col *= 1.0 - vignette * 0.22;
+    float vignette = smoothstep(0.44, 1.2, length(p * vec2(0.72, 0.86)));
+    col *= 1.0 - vignette * 0.20;
 
     fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
   }`;
@@ -229,6 +183,7 @@
     mouse: gl.getUniformLocation(program, "uMouse"),
     theme: gl.getUniformLocation(program, "uTheme"),
     scroll: gl.getUniformLocation(program, "uScroll"),
+    click: gl.getUniformLocation(program, "uClick"),
   };
 
   const state = {
@@ -239,6 +194,9 @@
     targetY: 0.7,
     theme: document.documentElement.getAttribute("data-theme") === "dark" ? 1 : 0,
     scroll: 0,
+    clickX: 0.5,
+    clickY: 0.5,
+    clickAt: 0,
     raf: 0,
     width: 0,
     height: 0,
@@ -246,7 +204,7 @@
 
   function resize() {
     const mobile = window.matchMedia("(max-width: 700px)").matches;
-    const scale = (mobile ? 0.4 : 0.55) * Math.min(window.devicePixelRatio || 1, 1.5);
+    const scale = (mobile ? 0.24 : 0.34) * Math.min(window.devicePixelRatio || 1, 1.5);
     const width = canvas.clientWidth || host.clientWidth || window.innerWidth;
     const height = canvas.clientHeight || host.clientHeight || window.innerHeight;
     const w = Math.max(2, Math.round(width * scale));
@@ -274,6 +232,7 @@
     gl.uniform2f(uni.mouse, state.mouseX, state.mouseY);
     gl.uniform1f(uni.theme, state.theme);
     gl.uniform1f(uni.scroll, state.scroll);
+    gl.uniform3f(uni.click, state.clickX, state.clickY, state.clickAt ? (now - state.clickAt) / 1000 : 99);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     canvas.classList.add("is-on");
     if (state.visible && !document.hidden) state.raf = requestAnimationFrame(frame);
@@ -289,6 +248,16 @@
     state.targetX = event.clientX / window.innerWidth;
     state.targetY = event.clientY / window.innerHeight;
   }, { passive: true });
+
+  const ripple = (event) => {
+    const rect = host.getBoundingClientRect();
+    state.clickX = (event.clientX - rect.left) / Math.max(1, rect.width);
+    state.clickY = (event.clientY - rect.top) / Math.max(1, rect.height);
+    state.clickAt = performance.now();
+    kick();
+  };
+
+  host.addEventListener("pointerdown", ripple, { passive: true });
 
   const observer = new IntersectionObserver((entries) => {
     state.visible = entries.some((entry) => entry.isIntersecting);

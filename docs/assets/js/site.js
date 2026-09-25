@@ -3,6 +3,10 @@
   const DOWNLOAD = "/dl/AquaTech.exe";
   const DOWNLOAD_ZIP = "/dl/AquaTechLauncher.zip";
   const CLIENT_VERSION = "client-2.9.97";
+  let launcherVersion = CLIENT_VERSION.replace(/^client-/i, "");
+  function launcherBase() {
+    return `/dl/${launcherVersion}`;
+  }
   /* portal ui build: compact header + market lots */
   const CANONICAL = "https://aquateche.store";
   const DISCORD = "https://discord.gg/3Khzr5z4fQ";
@@ -523,7 +527,7 @@
           ${coins}
             ${account}
             <button class="theme-toggle" type="button" data-theme-toggle aria-label="Включить тёмную тему" title="Сменить тему"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.2 5.2l1.9 1.9M16.9 16.9l1.9 1.9M18.8 5.2l-1.9 1.9M7.1 16.9l-1.9 1.9" /></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.8A8.6 8.6 0 0 1 9.2 3.5a8.6 8.6 0 1 0 11.3 11.3Z" /></svg></button>
-            <a class="header-cta" data-download href="${DOWNLOAD}">Скачать</a>
+            <a class="header-cta" data-download href="${launcherBase()}/AquaTech.exe">Скачать</a>
             <button class="menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav" data-menu>
               <span></span><span></span><span></span>
             </button>
@@ -544,7 +548,7 @@
                 : `<a href="login.html">Войти</a>
                    <a href="register.html">Регистрация</a>`
             }
-            <a class="nav-cta" href="${DOWNLOAD}">Скачать лаунчер</a>
+            <a class="nav-cta" href="${launcherBase()}/AquaTech.exe">Скачать лаунчер</a>
             <a href="${DISCORD}" target="_blank" rel="noopener noreferrer">Discord</a>
           </div>
         </div>
@@ -659,7 +663,7 @@
           <div>
             <h4>Проект</h4>
             <a href="rules.html">Правила</a>
-            <a href="${DOWNLOAD}">Скачать лаунчер</a>
+            <a href="${launcherBase()}/AquaTech.exe">Скачать лаунчер</a>
           </div>
         </div>
         <div class="container footer-copy">© 2026 AquaTech</div>
@@ -671,10 +675,10 @@
       el.addEventListener("click", copyIP);
     });
     document.querySelectorAll("[data-download]").forEach((el) => {
-      el.setAttribute("href", DOWNLOAD);
+      el.setAttribute("href", `${launcherBase()}/AquaTech.exe`);
     });
     document.querySelectorAll("[data-download-zip]").forEach((el) => {
-      el.setAttribute("href", DOWNLOAD_ZIP);
+      el.setAttribute("href", `${launcherBase()}/AquaTechLauncher.zip`);
     });
     updateAuthLinks();
     refreshOnlinePill();
@@ -684,16 +688,31 @@
     const versionSlots = document.querySelectorAll("[data-launcher-version]");
     const packVersionSlots = document.querySelectorAll("[data-pack-version]");
     const packModSlots = document.querySelectorAll("[data-pack-mods]");
-    if (versionSlots.length) {
-      fetch("/bootstrap.json")
-        .then((r) => r.json())
-        .then((b) => {
-          versionSlots.forEach((el) => {
-            el.textContent = b.version || "";
+    fetch("/bootstrap.json")
+      .then((r) => r.json())
+      .then((b) => {
+        versionSlots.forEach((el) => {
+          el.textContent = b.version || "";
+        });
+        const v = String(b.version || "").trim();
+        if (/^[A-Za-z0-9._+-]+$/.test(v)) {
+          launcherVersion = v;
+          document.querySelectorAll("[data-download]").forEach((el) => {
+            el.setAttribute("href", `${launcherBase()}/AquaTech.exe`);
           });
-        })
-        .catch(() => {});
-    }
+          document.querySelectorAll("[data-download-zip]").forEach((el) => {
+            el.setAttribute("href", `${launcherBase()}/AquaTechLauncher.zip`);
+          });
+        }
+        const sha = String(b.launcher_exe_sha256 || "").trim();
+        if (/^[a-f0-9]{64}$/i.test(sha)) {
+          document.querySelectorAll("[data-launcher-sha]").forEach((el) => {
+            el.textContent = sha;
+            el.closest("[data-launcher-sha-wrap]")?.removeAttribute("hidden");
+          });
+        }
+      })
+      .catch(() => {});
     if (packVersionSlots.length || packModSlots.length) {
       fetch("/pack/manifest.json")
         .then((r) => r.json())

@@ -58,6 +58,9 @@ public final class HubDataService {
     private static final Map<UUID, CachedRank> RANK_CACHE = new ConcurrentHashMap<>();
     private static final long RANK_CACHE_MS = 3000L;
 
+    /** Effective pass tier per player; mirrors exactly what the hub UI shows, so claims cannot disagree with it. */
+    private static final Map<UUID, Integer> SEASON_TIER_CACHE = new ConcurrentHashMap<>();
+
     /** Last opened case result per player; consumed by build() on the next snapshot push. */
     private static final Map<UUID, HubSnapshot.CaseResult> PENDING_CASE_RESULTS = new ConcurrentHashMap<>();
 
@@ -123,6 +126,7 @@ public final class HubDataService {
     public static void invalidate() {
         OPEN_HUBS.clear();
         RANK_CACHE.clear();
+        SEASON_TIER_CACHE.clear();
     }
 
     public static String status() {
@@ -838,8 +842,19 @@ public final class HubDataService {
         int claimedMax = 1;
         for (int t : claimedTiers) claimedMax = Math.max(claimedMax, t);
         tier = Math.max(tier, claimedMax);
+        tier = Math.max(1, Math.min(maxTier, tier));
+        SEASON_TIER_CACHE.put(player.getUUID(), tier);
 
-        return new SeasonData(title, Math.max(1, Math.min(maxTier, tier)), maxTier, progress, premium, claimable, claimedTiers);
+        return new SeasonData(title, tier, maxTier, progress, premium, claimable, claimedTiers);
+    }
+
+    /** Effective tier for pass.claim: the same value the hub snapshot shows the player. */
+    public static int effectiveSeasonTier(ServerPlayer player) {
+        Integer cached = SEASON_TIER_CACHE.get(player.getUUID());
+        if (cached != null) {
+            return cached;
+        }
+        return resolveSeason(player, player.experienceLevel, completedQuests(player)).tier();
     }
 
     private static boolean isVipOrStaff(ServerPlayer player) {

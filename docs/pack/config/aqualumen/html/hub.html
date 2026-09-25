@@ -1062,7 +1062,7 @@ try {
       $("previewCaseImg").src = CASE_ICONS[c.id] || "";
       $("previewCaseTitle").textContent = c.title;
       const owned = Number(c.count) || 0;
-      $("previewCaseSub").innerHTML = '<span class="case-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '14;margin:0 6px 0 0;">' + CaseSpin.label(c.rarity) + '</span> Стоимость: <b>' + coins(c.cost) + '</b>' + (owned > 0 ? (' · Сѓ вас ×' + owned) : '');
+      $("previewCaseSub").innerHTML = '<span class="case-rarity" style="color:' + col + ';border-color:' + col + '66;background:' + col + '14;margin:0 6px 0 0;">' + CaseSpin.label(c.rarity) + '</span> Стоимость: <b>' + coins(c.cost) + '</b>' + (owned > 0 ? (' · у вас ×' + owned) : '');
       $("previewLootCount").textContent = ((c.loot || []).length) + " предметов";
 
       let totalWeight = 0;
@@ -1339,7 +1339,7 @@ try {
       let btn;
       if (q.claimed) btn = `<button class="button" disabled>Получено</button>`;
       else if (ready) btn = `<button class="button primary event-claim" data-idx="${q.idx}">Забрать</button>`;
-      else btn = `<button class="button event-reroll" data-idx="${q.idx}">в†» ${coins(100)}</button>`;
+      else btn = `<button class="button event-reroll" data-idx="${q.idx}">↻ ${coins(100)}</button>`;
       const pct = Number(q.goal) > 0 ? Math.min(100, Math.round(Number(q.progress) / Number(q.goal) * 100)) : 0;
       return `<article class="card offer" style="min-height:auto">
         <h3>${esc(q.desc)}</h3>
@@ -1350,7 +1350,7 @@ try {
       </article>`;
     }).join("");
     return `<div class="view">${title("События океана", banner)}
-      <div class="store-grid">${cards || '<div class="empty">Контракты появятся после перезапуска сервера СЃ модом aquatech_ui</div>'}</div>
+      <div class="store-grid">${cards || '<div class="empty">Контракты появятся после перезапуска сервера с модом aquatech_ui</div>'}</div>
     </div>`;
   }
 
@@ -1486,7 +1486,7 @@ try {
             <p class="pass-hero-desc">Ловите редкую рыбу, выполняйте контракты и повышайте уровень боевого пропуска</p>
             <div class="pass-hero-stats">
               <div class="pass-stat-item">
-                <small>Доступно Рє сдаче</small>
+                <small>Доступно к сдаче</small>
                 <b class="${claimableCount > 0 ? "highlight-claim" : ""}">${claimableCount} наград</b>
               </div>
               <div class="pass-stat-item">
@@ -1756,7 +1756,7 @@ try {
 
   function settingsView() {
     const a = state.payload.appearance;
-    return `<div class="view settings">${title("Настройки", "Применяются только Рє AquaLumen UI")}
+    return `<div class="view settings">${title("Настройки", "Применяются только к AquaLumen UI")}
       <section class="card">
         <div class="setting">
           <div class="setting-info"><b>Цветовая тема</b><span>Меняет палитру и акцент интерфейса</span></div>

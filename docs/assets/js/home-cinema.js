@@ -149,11 +149,166 @@
     });
   };
 
+  const splitWords = (el) => {
+    const units = [];
+    Array.from(el.childNodes).forEach((node) => {
+      if (node.nodeType === 3) {
+        const words = node.textContent.split(/\s+/).filter(Boolean);
+        if (!words.length) {
+          node.remove();
+          return;
+        }
+        const frag = document.createDocumentFragment();
+        words.forEach((word) => {
+          const outer = document.createElement("span");
+          outer.className = "head-split";
+          const inner = document.createElement("span");
+          inner.className = "head-split-in";
+          inner.textContent = word;
+          outer.appendChild(inner);
+          frag.appendChild(outer);
+          frag.appendChild(document.createTextNode(" "));
+          units.push(inner);
+        });
+        node.replaceWith(frag);
+      } else if (node.nodeType === 1) {
+        const inner = document.createElement("span");
+        inner.className = "head-split-in";
+        inner.textContent = node.textContent;
+        node.textContent = "";
+        node.appendChild(inner);
+        node.classList.add("head-split");
+        units.push(inner);
+      }
+    });
+    return units;
+  };
+
+  const setupHeadlines = (gsap, ScrollTrigger) => {
+    document.querySelectorAll(".section-head h2, .section-head-split h2, .bento-section h2, .story-title").forEach((el) => {
+      if (el.dataset.split === "1") return;
+      el.dataset.split = "1";
+      const units = splitWords(el);
+      if (!units.length) return;
+      gsap.from(units, {
+        yPercent: 108,
+        duration: 0.9,
+        ease: "expo.out",
+        stagger: 0.045,
+        scrollTrigger: { trigger: el, start: "top 88%", once: true },
+      });
+    });
+  };
+
+  const setupProgress = () => {
+    const bar = document.querySelector("[data-scroll-progress]");
+    if (!bar) return;
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const ratio = Math.min(1, Math.max(0, window.scrollY / max));
+      bar.style.scale = ratio + " 1";
+    };
+    const request = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", request, { passive: true });
+    window.addEventListener("resize", request, { passive: true });
+    update();
+  };
+
+  const setupRodGallery = () => {
+    const gallery = document.querySelector("[data-rod-gallery]");
+    if (!gallery) return;
+    const track = gallery.querySelector(".rod-ladder-track");
+    const items = track ? Array.from(track.children) : [];
+    const caption = document.querySelector("[data-rod-caption]");
+    const counter = document.querySelector("[data-rod-count]");
+    if (!track || !items.length) return;
+
+    let active = -1;
+    const setActive = (index) => {
+      if (index === active || index < 0 || index >= items.length) return;
+      active = index;
+      items.forEach((item, i) => item.classList.toggle("is-active", i === index));
+      if (caption) {
+        const raw = items[index].getAttribute("title") || "";
+        const parts = raw.split("·").map((s) => s.trim()).filter(Boolean);
+        caption.textContent = parts.slice(0, 2).join(" · ");
+      }
+      if (counter) {
+        counter.textContent = String(index + 1).padStart(2, "0") + " / " + String(items.length).padStart(2, "0");
+      }
+    };
+
+    const sync = () => {
+      const box = track.getBoundingClientRect();
+      const center = box.left + box.width / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      items.forEach((item, i) => {
+        const r = item.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - center);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      setActive(best);
+    };
+
+    setActive(0);
+    items.forEach((item, i) => {
+      item.addEventListener("click", () => {
+        item.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        setActive(i);
+      }, { passive: true });
+    });
+
+    let queued = false;
+    track.addEventListener("scroll", () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        sync();
+      });
+    }, { passive: true });
+
+    let drag = null;
+    track.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse") {
+        drag = { x: event.clientX, left: track.scrollLeft, moved: false };
+        track.setPointerCapture(event.pointerId);
+      }
+    });
+    track.addEventListener("pointermove", (event) => {
+      if (!drag) return;
+      const dx = event.clientX - drag.x;
+      if (Math.abs(dx) > 4) drag.moved = true;
+      track.scrollLeft = drag.left - dx;
+    });
+    const endDrag = () => {
+      drag = null;
+    };
+    track.addEventListener("pointerup", endDrag);
+    track.addEventListener("pointercancel", endDrag);
+    track.addEventListener("pointerleave", endDrag);
+
+    sync();
+  };
+
   const setupScroll = (gsap, ScrollTrigger) => {
     gsap.registerPlugin(ScrollTrigger);
 
     setupMarquee();
     setupHero(gsap);
+    setupProgress();
+    setupHeadlines(gsap, ScrollTrigger);
+    setupRodGallery();
 
     document.querySelectorAll("[data-count]").forEach((el) => {
       const target = Number(el.dataset.count) || 0;
@@ -236,6 +391,8 @@
     const ScrollTrigger = window.ScrollTrigger;
     if (!gsap || !ScrollTrigger) {
       setupMarquee();
+      setupProgress();
+      setupRodGallery();
       setupSpotlight();
       setupMagnetic();
       return;

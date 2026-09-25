@@ -122,7 +122,7 @@ def main() -> None:
 
     print(f"upload done ok={ok} fail={fail}")
     if fail:
-        print("WARNING: some uploads failed вЂ” fix and re-run against a NEW tag")
+        print("WARNING: some uploads failed — fix and re-run against a NEW tag")
         # still publish so partial is usable? better leave draft
         sys.exit(2)
 

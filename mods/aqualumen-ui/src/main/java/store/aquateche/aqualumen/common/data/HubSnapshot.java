@@ -54,7 +54,7 @@ public record HubSnapshot(Profile profile,
     public record MarketEntry(int id, String label, int count, long price, String seller, String itemId, boolean self) {
     }
 
-    /** Контракт дня: живёт РІ aquatech_ui (OceanEventsService), сюда приходит только витрина. */
+    /** Контракт дня: живёт в aquatech_ui (OceanEventsService), сюда приходит только витрина. */
     public record EventQuest(int idx, String desc, int goal, int progress, long reward, boolean claimed) {
     }
 
@@ -67,7 +67,7 @@ public record HubSnapshot(Profile profile,
     public record FishEntry(String id, String name, int count, long priceCoins, String rarity, String tag, float demand) {
     }
 
-    /** Рыбный атлас: строка вида. found=false вЂ” вид ещё не пойман (имя не раскрываем). */
+    /** Рыбный атлас: строка вида. found=false — вид ещё не пойман (имя не раскрываем). */
     public record AtlasEntry(String id, String name, String rarity, int count, float weight,
                              int grades, int conds, boolean found, String recordHolder, float recordWeight) {
     }

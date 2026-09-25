@@ -1,22 +1,14 @@
 {
-  "from_version": "2.9.401",
-  "to_version": "2.9.402",
+  "from_version": "2.9.402",
+  "to_version": "2.9.403",
   "added": [],
-  "changed": [
-    {
-      "path": "mods/aquatech_ui-1.0.102.jar",
-      "md5": "896b0d559e0f9b0686686d9c696c7fcf",
-      "size": 2833790,
-      "url": "https://aquateche.store/pack/mods/aquatech_ui-1.0.102.jar",
-      "asset": "aquatech_ui-1.0.102.jar"
-    }
-  ],
+  "changed": [],
   "removed": [],
   "stats": {
     "added": 0,
-    "changed": 1,
+    "changed": 0,
     "removed": 0,
-    "unchanged": 147,
-    "download_bytes": 2833790
+    "unchanged": 148,
+    "download_bytes": 0
   }
 }

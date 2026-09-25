@@ -11,12 +11,18 @@
     <AssemblyTitle>AquaTech Launcher</AssemblyTitle>
     <Description>AquaTech Minecraft 1.20.1 Forge Game Launcher</Description>
     <Product>AquaTech</Product>
+    <Company>AquaTech</Company>
+    <Authors>AquaTech</Authors>
+    <OriginalFilename>AquaTechLauncher.exe</OriginalFilename>
     <Copyright>Copyright © 2026 AquaTech</Copyright>
     <AssemblyVersion>2.9.97.0</AssemblyVersion>
     <FileVersion>2.9.97.0</FileVersion>
+    <InformationalVersion>2.9.97</InformationalVersion>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishSingleFile>true</PublishSingleFile>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>

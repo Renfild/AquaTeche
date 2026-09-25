@@ -243,22 +243,30 @@ const LAUNCHER_FILES = {
   "aquatechlauncher.zip": "AquaTechLauncher.zip",
 };
 
-async function proxyLauncherDownload(request, env, rawFile) {
+async function proxyLauncherDownload(request, env, rawFile, requestedTag) {
   const canonicalFile = LAUNCHER_FILES[String(rawFile || "").toLowerCase()];
   if (!canonicalFile) {
     return new Response("Not found", { status: 404 });
   }
   let tag = "client-2.9.91";
-  try {
-    const bootRes = env.ASSETS
-      ? await env.ASSETS.fetch(new URL("/bootstrap.json", request.url))
-      : null;
-    if (bootRes && bootRes.ok) {
-      const boot = await bootRes.json();
-      if (boot.version) tag = `client-${String(boot.version).trim()}`;
+  if (requestedTag) {
+    const clean = String(requestedTag).trim().replace(/[^A-Za-z0-9._+-]/g, "");
+    if (!clean) {
+      return new Response("Bad request", { status: 400 });
     }
-  } catch {
-    /* keep default tag */
+    tag = /^client-/i.test(clean) ? clean : `client-${clean}`;
+  } else {
+    try {
+      const bootRes = env.ASSETS
+        ? await env.ASSETS.fetch(new URL("/bootstrap.json", request.url))
+        : null;
+      if (bootRes && bootRes.ok) {
+        const boot = await bootRes.json();
+        if (boot.version) tag = `client-${String(boot.version).trim()}`;
+      }
+    } catch {
+      /* keep default tag */
+    }
   }
   const upstream = `https://github.com/Renfild/AquaTeche/releases/download/${tag}/${canonicalFile}`;
   const isHead = request.method === "HEAD";
@@ -270,6 +278,9 @@ async function proxyLauncherDownload(request, env, rawFile) {
       cf: { cacheTtl: 3600, cacheEverything: true },
     });
     if (!gh.ok) {
+      if (requestedTag) {
+        return new Response("Not found", { status: 404 });
+      }
       return Response.redirect(upstream, 302);
     }
     const headers = new Headers();
@@ -290,9 +301,9 @@ export default {
     if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
       return withSecurityHeaders(await handleApi(request, env, execCtx));
     }
-    const dl = url.pathname.match(/^\/dl\/([^/]+)$/);
+    const dl = url.pathname.match(/^\/dl\/(?:([A-Za-z0-9._+-]+)\/)?([^/]+)$/);
     if (dl && (request.method === "GET" || request.method === "HEAD")) {
-      return withSecurityHeaders(await proxyLauncherDownload(request, env, dl[1]));
+      return withSecurityHeaders(await proxyLauncherDownload(request, env, dl[2], dl[1]));
     }
     if (url.pathname.startsWith("/pack/") && env.ASSETS) {
       let response = await env.ASSETS.fetch(request);
