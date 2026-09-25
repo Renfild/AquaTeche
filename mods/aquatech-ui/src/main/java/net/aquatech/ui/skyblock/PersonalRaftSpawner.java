@@ -159,7 +159,7 @@ public final class PersonalRaftSpawner {
             return 0;
         }
 
-        player.sendSystemMessage(Component.literal("§c⚠️ ВНИМАНИЕ: Пересоздание плота полностью УДАЛИТ ваш текущий плот, приват и все постройки и вещи!"));
+        player.sendSystemMessage(Component.literal("§c⚠ ВНИМАНИЕ: Пересоздание плота полностью УДАЛИТ ваш текущий плот, приват и все постройки и вещи!"));
         player.sendSystemMessage(Component.literal("§eУ вас осталось пересозданий: §f1/1§e. Для подтверждения введите: §a/raft reset confirm"));
         return 1;
     }
@@ -218,7 +218,7 @@ public final class PersonalRaftSpawner {
             player.teleportTo(level, fresh.x() + 0.5, SPAWN_Y + 0.1, fresh.z() + 0.5, 180.0f, 0.0f);
         }
         player.sendSystemMessage(Component.literal("§a⚓ Твой плот и приват успешно пересозданы на новых координатах!"));
-        player.sendSystemMessage(Component.literal("§e⚠️ Лимит пересоздания плота исчерпан (1/1)."));
+        player.sendSystemMessage(Component.literal("§e⚠ Лимит пересоздания плота исчерпан (1/1)."));
         return 1;
     }
 

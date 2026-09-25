@@ -171,7 +171,7 @@ public final class OceanEventsService {
         if (overworld != null) {
             overworld.setWeatherParameters(0, mins * 1200, true, true);
         }
-        Component title = Component.literal("§6✦ ЗОЛОТАЯ БУРЯ ✦");
+        Component title = Component.literal("§6★ ЗОЛОТАЯ БУРЯ ★");
         Component sub = Component.literal("§eЛови рыбу — джекпот до 2500 монет");
         for (ServerPlayer p : server.getPlayerList().getPlayers()) {
             p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket(8, 70, 16));
@@ -394,7 +394,7 @@ public final class OceanEventsService {
             return;
         }
         long[] prizes = {2500, 1000, 500};
-        String[] places = {"§6🥇", "§7🥈", "§f🥉"};
+        String[] places = {"§6①", "§7②", "§f③"};
         broadcast(server, "§6[Турнир] §eИтоги недели — самые тяжёлые уловы:");
         for (int i = 0; i < Math.min(3, top.size()); i++) {
             TournamentState.TopEntry e = top.get(i);
@@ -431,17 +431,17 @@ public final class OceanEventsService {
             }
             if (target != null) {
                 target.enchant(net.minecraft.world.item.enchantment.Enchantments.FISHING_SPEED, 1);
-                target.setHoverName(Component.literal("§6✨ Золотая рыба ✨"));
+                target.setHoverName(Component.literal("§6★ Золотая рыба ★"));
                 long jackpot = 500 + player.getRandom().nextInt(2000);
                 addCoins(player, jackpot);
                 strikeNear(player, goldStormActive(now) ? 2 : 1);
                 player.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket(4, 40, 10));
                 player.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket(
-                        Component.literal("§6✨ ЗОЛОТАЯ РЫБА ✨")));
+                        Component.literal("§6★ ЗОЛОТАЯ РЫБА ★")));
                 player.connection.send(new net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket(
                         Component.literal("§e+" + jackpot + " монет")));
                 broadcast(server, "§6[Кот-рыболов] §e" + player.getGameProfile().getName()
-                        + " поймал §6✨ЗОЛОТУЮ рыбу✨ §eи получил " + jackpot + " монет!");
+                        + " поймал §6★ЗОЛОТУЮ рыбу★ §eи получил " + jackpot + " монет!");
             }
         }
 

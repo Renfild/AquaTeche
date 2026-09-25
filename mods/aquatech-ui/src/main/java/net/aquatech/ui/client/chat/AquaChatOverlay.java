@@ -328,7 +328,7 @@ public final class AquaChatOverlay {
 
             if (chatOpen) {
                 for (AquaChatMessage.ItemTagRef tag : msg.getItemTags()) {
-                    String chipLabel = "[✦ " + tag.getDisplayName() + "]";
+                    String chipLabel = "[★ " + tag.getDisplayName() + "]";
                     int chipIdx = lineStr.indexOf(chipLabel);
                     if (chipIdx >= 0) {
                         String before = lineStr.substring(0, chipIdx);
@@ -350,7 +350,7 @@ public final class AquaChatOverlay {
                     }
                 }
                 if (!msg.getSharedItem().isEmpty()) {
-                    String handLabel = "[✦ " + msg.getSharedItem().getHoverName().getString() + "]";
+                    String handLabel = "[★ " + msg.getSharedItem().getHoverName().getString() + "]";
                     int chipIdx = lineStr.indexOf(handLabel);
                     if (chipIdx >= 0) {
                         String before = lineStr.substring(0, chipIdx);

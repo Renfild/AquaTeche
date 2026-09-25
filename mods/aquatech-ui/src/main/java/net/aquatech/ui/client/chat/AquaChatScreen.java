@@ -586,7 +586,7 @@ public final class AquaChatScreen extends Screen {
             chipX += cmdW + 6;
         }
 
-        // Bottom Dock: [ # ] [ 📋 ] [ Input Capsule with 12/256 & Cooldown ] [ ➤ ]
+        // Bottom Dock: [ # ] [ ✎ ] [ Input Capsule with 12/256 & Cooldown ] [ ➤ ]
         int inputY = AquaChatLayout.inputY(this.height);
         int inputH = AquaChatLayout.INPUT_H;
 
@@ -738,7 +738,7 @@ public final class AquaChatScreen extends Screen {
             graphics.drawString(this.font, sName, this.contextMenuX + 8, this.contextMenuY + 6, 0xFFF1F5F9, false);
             LumenGfx.roundedRect(graphics, this.contextMenuX + 6, this.contextMenuY + 18, cmW - 12, 1, 0, 0x1AFFFFFF);
 
-            String[] cActions = {"✉ Написать в ЛС", "📋 Скопировать", "🚀 Телепорт (/tpa)", "🚫 Заблокировать"};
+            String[] cActions = {"✉ Написать в ЛС", "✎ Скопировать", "⚡ Телепорт (/tpa)", "✘ Заблокировать"};
             for (int ci = 0; ci < cActions.length; ci++) {
                 int cItemY = this.contextMenuY + 22 + ci * 16;
                 boolean cItemHov = mouseX >= this.contextMenuX && mouseX <= this.contextMenuX + cmW

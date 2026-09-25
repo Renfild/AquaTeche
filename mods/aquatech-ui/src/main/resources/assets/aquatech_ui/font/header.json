@@ -3,9 +3,16 @@
     {
       "type": "ttf",
       "file": "aquatech_ui:ubuntu_bold.ttf",
-      "shift": [0, 0.75],
+      "shift": [
+        0,
+        0.75
+      ],
       "size": 14.0,
       "oversample": 4.0
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:include/default"
     }
   ]
 }

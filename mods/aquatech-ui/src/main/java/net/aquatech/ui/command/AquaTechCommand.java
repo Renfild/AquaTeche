@@ -155,7 +155,7 @@ public final class AquaTechCommand {
         }
 
         List<CustomFishingLootManager.CustomLootEntry> customEntries = CustomFishingLootManager.getEntries(rodId);
-        player.displayClientMessage(Component.literal("§e✦ Пользовательские добавления улова (/rod add):"), false);
+        player.displayClientMessage(Component.literal("§e★ Пользовательские добавления улова (/rod add):"), false);
         if (customEntries.isEmpty()) {
             player.displayClientMessage(Component.literal("§8  (нет пользовательских добавлений)"), false);
         } else {
@@ -220,7 +220,7 @@ public final class AquaTechCommand {
             int pct = Math.round(chance * 100f);
             String range = (min == max) ? (min + " шт.") : (min + "-" + max + " шт.");
             player.displayClientMessage(Component.literal(
-                    "§a✓ [AquaTech] Удочка §e" + rodStack.getHoverName().getString()
+                    "§a✔ [AquaTech] Удочка §e" + rodStack.getHoverName().getString()
                             + " §aтеперь ловит §f" + itemName + " §7(шанс §e" + pct + "%§7, §f" + range + ")!"), false);
             return 1;
         } else {
@@ -244,7 +244,7 @@ public final class AquaTechCommand {
         String rodId = FishingRodCompat.getRodId(rodStack);
         boolean removed = CustomFishingLootManager.removeCustomLoot(rodId, targetStack);
         if (removed) {
-            player.displayClientMessage(Component.literal("§a✓ Предмет " + targetStack.getHoverName().getString() + " удален из улова удочки."), false);
+            player.displayClientMessage(Component.literal("§a✔ Предмет " + targetStack.getHoverName().getString() + " удален из улова удочки."), false);
         } else {
             player.displayClientMessage(Component.literal("§cПредмет " + targetStack.getHoverName().getString() + " не найден в настройках удочки."), false);
         }
@@ -262,7 +262,7 @@ public final class AquaTechCommand {
         }
         String rodId = FishingRodCompat.getRodId(rodStack);
         CustomFishingLootManager.clearCustomLoot(rodId);
-        player.displayClientMessage(Component.literal("§a✓ Все пользовательские настройки улова удочки очищены."), false);
+        player.displayClientMessage(Component.literal("§a✔ Все пользовательские настройки улова удочки очищены."), false);
         return 1;
     }
 
@@ -357,7 +357,7 @@ public final class AquaTechCommand {
                 sync(player, cap);
                 applyLuckPerms(player, tier);
                 player.displayClientMessage(Component.literal(
-                        "§6✦ Горизонт " + tier + ": §e" + HorizonRoute.tierName(tier) + "§6!"), false);
+                        "§6★ Горизонт " + tier + ": §e" + HorizonRoute.tierName(tier) + "§6!"), false);
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                         net.minecraft.sounds.SoundEvents.UI_TOAST_CHALLENGE_COMPLETE,
                         net.minecraft.sounds.SoundSource.PLAYERS, 0.8F, 1.0F);
@@ -447,7 +447,7 @@ public final class AquaTechCommand {
             }
             if (cap.claimDaily()) {
                 player.displayClientMessage(Component.literal(
-                        "§a✓ Контракт сдан! §b+" + HorizonRoute.DAILY_AQUA_XP
+                        "§a✔ Контракт сдан! §b+" + HorizonRoute.DAILY_AQUA_XP
                                 + " Aqua XP §7и §b+" + HorizonRoute.DAILY_SEASON_XP + " XP сезона"), false);
                 sync(player, cap);
                 return;

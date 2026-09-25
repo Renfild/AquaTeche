@@ -163,7 +163,7 @@ public final class HorizonEvents {
             sync(player, cap);
             if (cap.isDailyComplete()) {
                 player.displayClientMessage(Component.literal(
-                        "§a✓ Контракт готов — сдай в F4 или §e/aquatech daily"), true);
+                        "§a✔ Контракт готов — сдай в F4 или §e/aquatech daily"), true);
             }
         }
     }
@@ -198,7 +198,7 @@ public final class HorizonEvents {
             }
             sync(player, cap);
             player.displayClientMessage(Component.literal(
-                    "§a✓ Контракт сдан! §b+" + HorizonRoute.DAILY_AQUA_XP
+                    "§a✔ Контракт сдан! §b+" + HorizonRoute.DAILY_AQUA_XP
                             + " Aqua XP §7и §b+" + HorizonRoute.DAILY_SEASON_XP + " XP сезона"), false);
             ok[0] = true;
         });

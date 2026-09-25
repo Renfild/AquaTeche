@@ -13,7 +13,7 @@ const CHAPTER_REWARDS = {
         keys: 1,
         keyName: "Ключ от Океанического Кейса",
         trophyItem: "minecraft:heart_of_the_sea",
-        trophyName: "§b✦ Трофей: Покоритель Глубин ✦",
+        trophyName: "§b★ Трофей: Покоритель Глубин ★",
         desc: "Завершено Океаническое Пробуждение!"
     },
     // 2. Паровая эпоха
@@ -24,7 +24,7 @@ const CHAPTER_REWARDS = {
         keys: 2,
         keyName: "Ключ от Инженерного Кейса",
         trophyItem: "industrialupgrade:basemachine3/steamboiler",
-        trophyName: "§6⚙ Трофей: Паровой Мастер ⚙",
+        trophyName: "§6◆ Трофей: Паровой Мастер ◆",
         desc: "Полностью освоена Паровая Эпоха!"
     },
     // 3. Базовая электрическая эра
@@ -46,7 +46,7 @@ const CHAPTER_REWARDS = {
         keys: 5,
         keyName: "Ключ от Квантового Кейса",
         trophyItem: "industrialupgrade:quantum_solar_panel",
-        trophyName: "§d✧ Трофей: Кибернетический Архитектор ✧",
+        trophyName: "§d◆ Трофей: Кибернетический Архитектор ◆",
         desc: "Полностью освоена Улучшенная Электрическая Эра!"
     }
 };
