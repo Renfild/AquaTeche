@@ -8,6 +8,23 @@ ServerEvents.recipes((event) => {
   // 1. STARCATCHER RODS PROGRESSION
   // =========================================================================
   if (Platform.isLoaded('starcatcher')) {
+    // StarCatcher ships a second path for every rod: smithing with
+    // `starcatcher:smithing_rod_skin` = any rod from the `starcatcher:rods` tag
+    // + a skin template + a themed fish. For the tier 9 rod (sharktooth) that
+    // fish is `joel` — a legendary fish only reachable with the tier 13 rod, so
+    // the mod recipe inverts progression. Removed by id: the shaped chain below
+    // is the single intended path (previous rod + that tier's materials).
+    const ROD_SKIN_RECIPES = [
+      'starcatcher:bamboo_rod', 'starcatcher:humble_rod', 'starcatcher:boner_rod',
+      'starcatcher:good_old_rod', 'starcatcher:naturalist_rod', 'starcatcher:slimed_rod',
+      'starcatcher:iceborn_rod', 'starcatcher:azure_rod', 'starcatcher:sharktooth_rod',
+      'starcatcher:obsidian_rod', 'starcatcher:lush_rod', 'starcatcher:magmaforged_rod',
+      'starcatcher:sky_rod', 'starcatcher:alpha_rod',
+    ]
+    for (const id of ROD_SKIN_RECIPES) {
+      event.remove({ id: id })
+    }
+
     // Tier 1: Bamboo Rod (Starter Resource Rod)
     event.remove({ output: 'starcatcher:bamboo_rod' })
     event.shaped('starcatcher:bamboo_rod', [' CB', ' SB', 'S  '], {

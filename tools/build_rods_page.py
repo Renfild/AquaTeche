@@ -112,6 +112,15 @@ OVERRIDES = {
     "industrialupgrade:sapling/rubber_sapling": "Резиновый саженец",
     "industrialupgrade:raw_latex": "Сырой латекс",
     "industrialupgrade:blockresource/untreated_peat": "Блок необработанного торфа",
+    "industrialupgrade:baseore/magnesium": "Магниевая руда",
+    "industrialupgrade:fluorapatite": "Фторапатитовая руда",
+    "industrialupgrade:calcium_phosphate": "Фосфат кальция",
+    "industrialupgrade:classicore/lead": "Свинцовая руда",
+    "industrialupgrade:baseore/sulfur": "Серная руда",
+    "industrialupgrade:baseore/mikhail": "Михайлова руда",
+    "industrialupgrade:baseore/germanium": "Германиевая руда",
+    "industrialupgrade:baseore/zirconium": "Циркониевая руда",
+    "industrialupgrade:baseore/niobium": "Ниобиевая руда",
 }
 
 
