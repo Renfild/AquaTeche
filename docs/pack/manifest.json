@@ -1,5 +1,5 @@
 {
-  "version": "2.9.412",
+  "version": "2.9.413",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -42,11 +42,11 @@
       "asset": "aqualumen-forge-1.20.1-0.3.58-alpha.jar"
     },
     {
-      "path": "mods/aquamirae-forge-1.20.1-7.1.14.jar",
-      "md5": "a0f826bde2da80b4208f9fe5754d7de3",
-      "size": 25920958,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.412/aquamirae-forge-1.20.1-7.1.14.jar",
-      "asset": "aquamirae-forge-1.20.1-7.1.14.jar"
+      "path": "mods/aquamirae-forge-1.20.1-6.4.0.jar",
+      "md5": "d47dd885b52d1d95a1761d976b99ff5e",
+      "size": 19073985,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.413/aquamirae-forge-1.20.1-6.4.0.jar",
+      "asset": "aquamirae-forge-1.20.1-6.4.0.jar"
     },
     {
       "path": "mods/aquamirae_delight-2.2-forge-1.20.1.jar",
@@ -66,7 +66,7 @@
       "path": "mods/aquatech_ui-1.0.103.jar",
       "md5": "e646795241b1a3027ff5d266c39ff746",
       "size": 2861818,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.412/aquatech_ui-1.0.103.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.413/aquatech_ui-1.0.103.jar",
       "asset": "aquatech_ui-1.0.103.jar"
     },
     {
