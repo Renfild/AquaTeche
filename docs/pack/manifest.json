@@ -1,5 +1,5 @@
 {
-  "version": "2.9.409",
+  "version": "2.9.410",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -52,7 +52,7 @@
       "path": "mods/aquatech_ui-1.0.103.jar",
       "md5": "96c03fb58765a45de097211d279751aa",
       "size": 2858705,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.409/aquatech_ui-1.0.103.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.410/aquatech_ui-1.0.103.jar",
       "asset": "aquatech_ui-1.0.103.jar"
     },
     {
@@ -932,9 +932,9 @@
     },
     {
       "path": "kubejs/server_scripts/41_first_join_hint.js",
-      "md5": "b6e33296bf52da8df7e3847d1ef7cb03",
-      "size": 366,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.404/kubejs__server_scripts__41_first_join_hint.js",
+      "md5": "61b88d397f754812fbe2037c3d33f348",
+      "size": 3494,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.410/kubejs__server_scripts__41_first_join_hint.js",
       "asset": "kubejs__server_scripts__41_first_join_hint.js"
     },
     {
