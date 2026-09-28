@@ -43,9 +43,8 @@
 2. **Шина доставки Web→Mohist** — сделано 2026-08-28:
    - D1 `pending_commands` (`migrations/0007_pending_commands.sql`), `GET/POST /api/internal/pending-commands`, poll `PendingDeliveryService` на Apex (`SERVER_SYNC_KEY`).
 
-3. **Отсутствие восстановления пароля и поля Email**:
-   - **Суть**: В таблице `users` отсутствует `email`. Забытый пароль не подлежит сбросу.
-   - **План реализации**: Добавить миграцию D1 `0005_email_reset.sql`, добавить поле `email`, внедрить отправку кодов сброса пароля (Mailgun / Resend API) и эндпоинт `/api/auth/reset-password`.
+3. **Восстановление пароля по email — сделано** (2026-09-28 сверено с репо):
+   - Миграция `migrations/0009_auth_recovery_and_vault.sql`, эндпоинты `functions/api/auth/forgot-password.js` + `reset-password.js`, страница `docs/reset.html`, рейт-лимит (`_lib/rate_limit.js`), fail-closed без `env.RESEND_API_KEY` (без ключа отдаёт 503 с просьбой писать в Discord вместо утечки кода сброса). Проверить, что `RESEND_API_KEY` реально задан в Cloudflare Pages — иначе фича молчит.оля (Mailgun / Resend API) и эндпоинт `/api/auth/reset-password`.
 
 ### 🟡 Расширения портала:
 1. **Онлайн-рулетка кейсов (Web Drop Vault)**:
@@ -105,6 +104,10 @@ Done (2026-08-28): D1 `pending_commands` + `/api/purchase/callback`; `IslandLimi
 
 Parked: покупка привилегий за рубли (ЮKassa / `PURCHASES_ENABLED`) — не на этом этапе. F4 `store.buy` за игровые монеты/гемы живой.
 
-Open: email-сброс пароля; Mohist-дюпы только если Spark покажет overflow; Ocean Prestige — не стартовать. Босс бездны снят (кастомная модель не будет).
+Done (2026-09-28): email-сброс пароля (см. п.3 выше — уже реализовано, не открытая задача).
+
+Open: Mohist-дюпы только если Spark покажет overflow; Ocean Prestige — не стартовать. Босс бездны снят (кастомная модель не будет). Chunky — не открытая задача, снят решением владельца (грузил CPU Apex), см. `scripts/tasks/apex_console_ops.py`.
+
+Найдено 2026-09-28: `wrangler.toml` (Cloudflare Pages) держит `PURCHASES_ENABLED = "false"`, но живой `/api/catalog.js` отдаёт `purchases_enabled=true` — расходится либо с переменной окружения в дашборде Pages, либо с override в D1 `site_settings`. Не разбирался дальше без доступа к дашборду/БД; свериться и привести `wrangler.toml` в соответствие с намерением владельца.
 
 Done (2026-08-29): portal fish/coins sync on logout + dirty score; AutoFisher output-full pause + 64/catch cap; ground loot sweep at TPS < 13.
