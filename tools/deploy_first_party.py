@@ -64,6 +64,21 @@ def run(cmd: list[str], cwd: Path) -> None:
         sys.exit(f"Command failed: {' '.join(cmd)}")
 
 
+def game_client_running() -> bool:
+    """True if a Minecraft client from %APPDATA%\\AquaTech is running.
+
+    Step 2 overwrites the mod jars in that folder; a running game keeps the old jar open and
+    then cannot read mod resources (F4 hub: "Resource aqualumen/hub.html NOT found!").
+    """
+    if os.name != "nt":
+        return False
+    ps = ("Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^javaw?\\.exe$' -and "
+          "$_.CommandLine -like '*AppData*Roaming*AquaTech*' } | Measure-Object | "
+          "Select-Object -ExpandProperty Count")
+    out = subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True)
+    return out.stdout.strip() not in ("", "0")
+
+
 def md5_file(p: Path) -> str:
     h = hashlib.md5()
     with open(p, "rb") as f:
@@ -172,7 +187,13 @@ def main() -> None:
     ap.add_argument("--skip-github", action="store_true", help="Skip GitHub release upload")
     ap.add_argument("--skip-apex", action="store_true", help="Skip Apex server deploy")
     ap.add_argument("--no-bump", action="store_true", help="Don't bump pack version (e.g. config-only deploy)")
+    ap.add_argument("--allow-client-running", action="store_true",
+                    help="Deploy even if the game client is running (F4 hub breaks until the game restarts)")
     args = ap.parse_args()
+
+    if not args.allow_client_running and game_client_running():
+        sys.exit("Minecraft client is running: close the game first (deploy replaces jars it has open "
+                 "and breaks the F4 hub until restart). Use --allow-client-running to override.")
 
     mod_keys = [k.strip() for k in args.mods.split(",")]
     built_jars: list[Path] = []

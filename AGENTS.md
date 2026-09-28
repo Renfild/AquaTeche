@@ -82,6 +82,7 @@
 - `python tools/publish_client_pack.py` — when modpack mods, KubeJS scripts, or client configs change.
 - Rebuild launcher (`dotnet publish` + Go bootstrap + `upload_launcher_release.py`) — see `always-rebuild-launcher.mdc`.
 - Do **not** copy jars or configs into Lodestone. Live host is Apex.
+- **Никогда не деплоить (`deploy_first_party.py`, копирование jar в `%APPDATA%\AquaTech\mods`) при запущенном клиенте Minecraft.** Пайплайн перезаписывает jar в папке клиента, пока игра держит его открытым: ресурсы мода пропадают (`ModScheme: Resource aqualumen/hub.html NOT found!`), F4-меню не грузится до перезапуска игры (инцидент 2026-09-27). Перед деплоем попроси закрыть игру или проверь, что `javaw.exe` не запущен, и после деплоя скажи: «перезапусти игру».
 
 ### 2. Portal changes (`docs/`, `worker/`, etc.)
 - Deploy to Cloudflare (`python tools/deploy_to_cloudflare.py`) + run smoke tests. (Do NOT run `generate_site.py` which overwrites custom `docs/` HTML).
