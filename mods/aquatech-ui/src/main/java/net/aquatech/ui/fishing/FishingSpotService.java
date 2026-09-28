@@ -7,7 +7,9 @@ import net.aquatech.ui.network.packet.S2CSpotPacket;
 import net.aquatech.ui.skyblock.WorldGuardIslandLookup;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,16 +34,16 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Личные точки лова. Рядом с игроком на воде появляется точка, видимая только ему.
- * Рыба, пойманная в радиусе точки, получает NBT-метку {@link #TAG}, а скупщик aqualumen
- * (FishShopConfig) умножает её цену на {@link #PRICE_MULT}.
+ * Личные точки лова. Рядом с игроком на воде появляется точка одного из {@link SpotType},
+ * видимая только ему. Рыба, пойманная в радиусе точки, получает NBT-метку {@link #TAG}
+ * (множитель цены как float), а скупщик aqualumen (FishShopConfig) умножает её цену на него.
  */
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID)
 public final class FishingSpotService {
 
     /** Тот же тег читает aqualumen FishShopConfig: модули связаны только через NBT. */
-    public static final String TAG = "AquaSpot";
-    public static final double PRICE_MULT = 2.0;
+    public static final String TAG = "AquaSpotMult";
+    private static final float ZHILA_GRADE_BOOST_CHANCE = 0.2f;
 
     private static final long FIRST_SPOT_DELAY_MS = 3L * 60_000L;
     private static final long RETRY_DELAY_MS = 2L * 60_000L;
@@ -54,11 +56,13 @@ public final class FishingSpotService {
 
     private static final class Spot {
         final BlockPos pos;
+        final SpotType type;
         final long expiresAt;
         int catchesLeft;
 
-        Spot(BlockPos pos, long expiresAt, int catchesLeft) {
+        Spot(BlockPos pos, SpotType type, long expiresAt, int catchesLeft) {
             this.pos = pos;
+            this.type = type;
             this.expiresAt = expiresAt;
             this.catchesLeft = catchesLeft;
         }
@@ -116,8 +120,8 @@ public final class FishingSpotService {
     private static boolean spawn(ServerPlayer player, long now) {
         BlockPos place = findPlace(player.serverLevel(), player);
         if (place == null) return false;
-        Spot spot = new Spot(place, now + ModConfig.SPOT_LIFETIME_MINUTES.get() * 60_000L,
-                ModConfig.SPOT_MAX_CATCHES.get());
+        SpotType type = SpotType.roll(player.getRandom());
+        Spot spot = new Spot(place, type, now + type.lifetimeMinutes() * 60_000L, type.maxCatches());
         SPOTS.put(player.getUUID(), spot);
         int minMinutes = ModConfig.SPOT_MIN_MINUTES.get();
         int maxMinutes = Math.max(minMinutes, ModConfig.SPOT_MAX_MINUTES.get());
@@ -181,10 +185,12 @@ public final class FishingSpotService {
         double dx = spot.pos.getX() + 0.5 - player.getX();
         double dz = spot.pos.getZ() + 0.5 - player.getZ();
         int distance = (int) Math.round(Math.sqrt(dx * dx + dz * dz));
-        player.sendSystemMessage(Component.literal("§b[Точка лова] §fРядом появилась твоя точка: §e"
+        SpotType type = spot.type;
+        player.sendSystemMessage(Component.literal(type.chatColor() + "[" + type.label() + "] §fРядом появилась точка: §e"
                 + distance + " м §f" + compass(dx, dz) + "§f. Рыба оттуда продаётся §6×"
-                + (int) PRICE_MULT + "§f дороже. §7Живёт " + ModConfig.SPOT_LIFETIME_MINUTES.get() + " мин."));
-        player.playNotifySound(SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0F, 1.3F);
+                + type.multLabel() + "§f дороже. §7Живёт " + type.lifetimeMinutes() + " мин."));
+        player.playNotifySound(SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS,
+                1.0F, type == SpotType.ZHILA ? 1.6F : 1.3F);
     }
 
     /** В Minecraft +X это восток, +Z это юг. */
@@ -199,7 +205,7 @@ public final class FishingSpotService {
     private static void expire(ServerPlayer player, Spot spot) {
         SPOTS.remove(player.getUUID(), spot);
         String reason = spot.catchesLeft <= 0 ? "иссякла" : "погасла";
-        player.sendSystemMessage(Component.literal("§b[Точка лова] §7Твоя точка " + reason
+        player.sendSystemMessage(Component.literal("§b[" + spot.type.label() + "] §7Твоя точка " + reason
                 + ". Следующая появится позже."));
         player.playNotifySound(SoundEvents.FISHING_BOBBER_SPLASH, SoundSource.PLAYERS, 0.8F, 0.7F);
         sendClear(player);
@@ -220,7 +226,9 @@ public final class FishingSpotService {
                     1, 0.0, 0.0, 0.0, 0.0);
         }
         level.sendParticles(player, ParticleTypes.SPLASH, true, cx, surfaceY, cz, 8, 1.0, 0.1, 1.0, 0.1);
-        level.sendParticles(player, ParticleTypes.END_ROD, true, cx, surfaceY + 1.0, cz, 3, 0.2, 1.5, 0.2, 0.01);
+        // Жила искрит гуще — заметно ещё до того, как игрок прочитал тип в чате.
+        int sparkles = spot.type == SpotType.ZHILA ? 6 : 3;
+        level.sendParticles(player, ParticleTypes.END_ROD, true, cx, surfaceY + 1.0, cz, sparkles, 0.2, 1.5, 0.2, 0.01);
     }
 
     /**
@@ -237,18 +245,32 @@ public final class FishingSpotService {
         double dz = az - (spot.pos.getZ() + 0.5);
         double radius = ModConfig.SPOT_RADIUS.get();
         if (dx * dx + dz * dz > radius * radius) return;
+        SpotType type = spot.type;
+        float mult = (float) type.priceMult();
         int stamped = 0;
         for (ItemStack stack : drops) {
-            if (isSpotFish(stack)) {
-                stack.getOrCreateTag().putBoolean(TAG, true);
-                stamped++;
+            if (!isSpotFish(stack)) continue;
+            stack.getOrCreateTag().putFloat(TAG, mult);
+            stamped++;
+            if (type.gradeBoost()) {
+                maybeBoostGrade(player, stack);
             }
         }
         if (stamped == 0) return;
         spot.catchesLeft--;
-        player.displayClientMessage(Component.literal("§b[Точка лова] §fРыба §6×" + (int) PRICE_MULT
+        player.displayClientMessage(Component.literal("§b[" + type.label() + "] §fРыба §6×" + type.multLabel()
                 + "§f к цене §7(осталось уловов: " + Math.max(0, spot.catchesLeft) + ")"), true);
         sendState(player, spot);
+    }
+
+    /** Жила: рыбе без грейда даёт шанс стать серебряной, задним числом (и правит атлас). */
+    private static void maybeBoostGrade(ServerPlayer player, ItemStack stack) {
+        if (FishGrade.of(stack) != FishGrade.NONE) return;
+        if (player.getRandom().nextFloat() >= ZHILA_GRADE_BOOST_CHANCE) return;
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (key == null) return;
+        FishGrade.set(stack, FishGrade.SILVER);
+        FishingAtlasService.bumpSpeciesGrade(player, key.toString(), FishGrade.SILVER);
     }
 
     private static boolean isSpotFish(ItemStack stack) {
@@ -261,11 +283,12 @@ public final class FishingSpotService {
     private static void sendState(ServerPlayer player, Spot spot) {
         send(player, new S2CSpotPacket(true, spot.pos,
                 Math.max(0L, spot.expiresAt - System.currentTimeMillis()),
-                Math.max(0, spot.catchesLeft), ModConfig.SPOT_RADIUS.get()));
+                Math.max(0, spot.catchesLeft), ModConfig.SPOT_RADIUS.get(),
+                spot.type.label(), (float) spot.type.priceMult(), spot.type.colorRgb()));
     }
 
     private static void sendClear(ServerPlayer player) {
-        send(player, new S2CSpotPacket(false, BlockPos.ZERO, 0L, 0, 0));
+        send(player, new S2CSpotPacket(false, BlockPos.ZERO, 0L, 0, 0, "", 0f, 0));
     }
 
     /** Клиент без мода не знает этот канал: не шлём ему пакет. */
@@ -276,6 +299,11 @@ public final class FishingSpotService {
         } catch (RuntimeException error) {
             AquaTechUI.LOGGER.debug("[FishingSpot] packet skipped: {}", error.toString());
         }
+    }
+
+    /** "2" или "3.5" — без лишних нулей после точки. Используется и на клиенте (тултип/HUD). */
+    public static String formatMult(float mult) {
+        return mult == (float) Math.floor(mult) ? String.valueOf((int) mult) : String.valueOf(mult);
     }
 
     // ── админ-команды /aquatech spot ────────────────────────────────────────
@@ -301,7 +329,7 @@ public final class FishingSpotService {
             return "Точки нет. Следующая через ~" + (wait / 60_000L) + " мин.";
         }
         long left = Math.max(0L, spot.expiresAt - System.currentTimeMillis());
-        return "Точка " + spot.pos.getX() + " " + spot.pos.getY() + " " + spot.pos.getZ()
+        return "Точка (" + spot.type.label() + ") " + spot.pos.getX() + " " + spot.pos.getY() + " " + spot.pos.getZ()
                 + ", осталось " + (left / 60_000L) + " мин, уловов " + spot.catchesLeft;
     }
 }

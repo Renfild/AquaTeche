@@ -11,7 +11,6 @@ import net.minecraft.util.Mth;
 public final class SpotArrowHud {
 
     private static final int ARROW_Y = 46;
-    private static final int COLOR_FAR = 0xFF3FD8E8;
     private static final int COLOR_HERE = 0xFF7CFC7C;
 
     private SpotArrowHud() {
@@ -28,6 +27,7 @@ public final class SpotArrowHud {
         double distance = Math.sqrt(dx * dx + dz * dz);
         boolean here = distance <= ClientSpotState.radius();
         int centerX = graphics.guiWidth() / 2;
+        int typeColor = 0xFF000000 | ClientSpotState.color();
 
         if (!here) {
             // yaw Minecraft: 0 = юг (+Z), 90 = запад (-X)
@@ -41,16 +41,17 @@ public final class SpotArrowHud {
             pose.translate(1, 1, 0);
             drawArrow(graphics, 0x99000000);
             pose.popPose();
-            drawArrow(graphics, COLOR_FAR);
+            drawArrow(graphics, typeColor);
             pose.popPose();
         }
 
         long left = Math.max(0L, ClientSpotState.expiresAtMs() - System.currentTimeMillis());
         String time = (left / 60_000L) + ":" + String.format("%02d", (left % 60_000L) / 1000L);
         String label = here ? "Ты на точке" : ((int) Math.round(distance) + " м");
-        graphics.drawCenteredString(mc.font, "§bТочка лова §6×2 §7цена", centerX, ARROW_Y - 26, 0xFFFFFFFF);
+        graphics.drawCenteredString(mc.font, "§7" + ClientSpotState.typeLabel() + " §6×"
+                + ClientSpotState.multLabel() + " §7цена", centerX, ARROW_Y - 26, 0xFFFFFFFF);
         graphics.drawCenteredString(mc.font, label + " §7· " + time, centerX, ARROW_Y + 14,
-                here ? COLOR_HERE : 0xFFFFFFFF);
+                here ? COLOR_HERE : typeColor);
     }
 
     /** Указывает вверх: наконечник из рядов расширяющейся ширины и короткое древко. */

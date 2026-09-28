@@ -112,6 +112,25 @@ public final class FishingAtlasService {
         }
     }
 
+    /** Точка «Жила»: рыбе без грейда задним числом подняли грейд — поправить и запись атласа. */
+    public static void bumpSpeciesGrade(ServerPlayer player, String itemId, int grade) {
+        if (player == null || itemId == null || grade <= FishGrade.NONE) return;
+        try {
+            CompoundTag root = player.getPersistentData();
+            if (!root.contains(KEY, Tag.TAG_COMPOUND)) return;
+            CompoundTag atlas = root.getCompound(KEY);
+            if (!atlas.contains("s", Tag.TAG_COMPOUND)) return;
+            CompoundTag species = atlas.getCompound("s");
+            if (!species.contains(itemId, Tag.TAG_COMPOUND)) return;
+            CompoundTag rec = species.getCompound(itemId);
+            rec.putInt("g", rec.getInt("g") | FishGrade.maskBit(grade));
+            species.put(itemId, rec);
+            atlas.put("s", species);
+            root.put(KEY, atlas);
+        } catch (Throwable ignored) {
+        }
+    }
+
     /** Вехи коллекции: пороги по числу видов, награда монетами, маска в "ms". */
     private static final int[] MILESTONES = {5, 10, 20, 30, 50, 75};
     private static final long[] MILESTONE_REWARDS = {3000, 8000, 20000, 40000, 80000, 150000};

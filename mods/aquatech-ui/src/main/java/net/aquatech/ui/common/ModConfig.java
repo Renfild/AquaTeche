@@ -20,8 +20,6 @@ public class ModConfig {
     public static final ForgeConfigSpec.IntValue SPOT_MAX_MINUTES;
     public static final ForgeConfigSpec.IntValue SPOT_MIN_DISTANCE;
     public static final ForgeConfigSpec.IntValue SPOT_MAX_DISTANCE;
-    public static final ForgeConfigSpec.IntValue SPOT_LIFETIME_MINUTES;
-    public static final ForgeConfigSpec.IntValue SPOT_MAX_CATCHES;
     public static final ForgeConfigSpec.IntValue SPOT_RADIUS;
 
     static {
@@ -83,7 +81,8 @@ public class ModConfig {
         builder.pop();
         builder.push("fishingSpots");
         SPOT_ENABLED = builder
-                .comment("Личные точки лова: рыба с точки продаётся дороже (метка AquaSpot, цену считает aqualumen)")
+                .comment("Личные точки лова: рыба с точки продаётся дороже (метка AquaSpotMult, цену считает aqualumen)."
+                        + " Тип точки (Заводь/Жила), множитель, время жизни и число уловов зашиты в SpotType.")
                 .define("enabled", true);
         SPOT_MIN_MINUTES = builder
                 .comment("Минимальный интервал между точками одного игрока, минуты")
@@ -97,12 +96,6 @@ public class ModConfig {
         SPOT_MAX_DISTANCE = builder
                 .comment("Максимальное расстояние от игрока до новой точки, блоки")
                 .defineInRange("maxDistance", 130, 30, 400);
-        SPOT_LIFETIME_MINUTES = builder
-                .comment("Сколько минут живёт точка")
-                .defineInRange("lifetimeMinutes", 10, 1, 120);
-        SPOT_MAX_CATCHES = builder
-                .comment("Сколько уловов с меткой даёт одна точка")
-                .defineInRange("maxCatches", 40, 1, 1000);
         SPOT_RADIUS = builder
                 .comment("Радиус зоны точки вокруг центра, блоки")
                 .defineInRange("radius", 12, 4, 40);

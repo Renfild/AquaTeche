@@ -17,7 +17,6 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class SpotBeamRenderer {
 
-    private static final float[] BEAM_COLOR = {0.25F, 0.85F, 0.9F};
     private static final int BEAM_HEIGHT = 120;
 
     private SpotBeamRenderer() {
@@ -35,9 +34,11 @@ public final class SpotBeamRenderer {
         PoseStack pose = event.getPoseStack();
         pose.pushPose();
         pose.translate(pos.getX() - camera.x, pos.getY() - camera.y, pos.getZ() - camera.z);
+        int rgb = ClientSpotState.color();
+        float[] beamColor = {((rgb >> 16) & 0xFF) / 255F, ((rgb >> 8) & 0xFF) / 255F, (rgb & 0xFF) / 255F};
         MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();
         BeaconRenderer.renderBeaconBeam(pose, buffers, BeaconRenderer.BEAM_LOCATION, event.getPartialTick(),
-                1.0F, mc.level.getGameTime(), 0, BEAM_HEIGHT, BEAM_COLOR, 0.2F, 0.25F);
+                1.0F, mc.level.getGameTime(), 0, BEAM_HEIGHT, beamColor, 0.2F, 0.25F);
         buffers.endBatch();
         pose.popPose();
     }
