@@ -148,3 +148,6 @@ server/_uuid_migrate_backup_*/
 tools/lodestone/
 *.jar.bak
 *.lnk
+
+# DiscordSRV config contains the bot token
+server/plugins/DiscordSRV/config.yml
