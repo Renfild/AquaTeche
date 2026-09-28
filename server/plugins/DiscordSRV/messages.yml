@@ -390,8 +390,8 @@ UnknownCommandMessage: "&bТакой команды не существует!"
 # DiscordChatChannelServerStartupMessage: сообщение, отправляемое при старте сервера; оставьте пустым, чтобы отключить
 # DiscordChatChannelServerShutdownMessage: сообщение, отправляемое при остановке сервера; оставьте пустым, чтобы отключить
 #
-DiscordChatChannelServerStartupMessage: ":white_check_mark: **Сервер успешно запущен**"
-DiscordChatChannelServerShutdownMessage: ":octagonal_sign: **Сервер остановлен**"
+DiscordChatChannelServerStartupMessage: ""
+DiscordChatChannelServerShutdownMessage: ""
 
 # Сообщения мониторинга (детектор лагов)
 #

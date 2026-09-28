@@ -17,6 +17,7 @@ import { onRequestGet as meGet } from "../functions/api/me.js";
 import { onRequestGet as playersGet } from "../functions/api/players.js";
 import { onRequestGet as catalogGet } from "../functions/api/catalog.js";
 import { onRequestGet as serverStatusGet } from "../functions/api/server-status.js";
+import { runStatusWatchdog } from "./watchdog.js";
 import { onRequestPost as launcherEnsureNickPost } from "../functions/api/launcher/ensure-nick.js";
 import { onRequestPost as launcherVerifyTokenPost } from "../functions/api/launcher/verify-token.js";
 import {
@@ -296,6 +297,9 @@ async function proxyLauncherDownload(request, env, rawFile, requestedTag) {
 }
 
 export default {
+  async scheduled(event, env, execCtx) {
+    execCtx?.waitUntil?.(runStatusWatchdog(env));
+  },
   async fetch(request, env, execCtx) {
     const url = new URL(request.url);
     if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
