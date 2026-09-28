@@ -56,6 +56,10 @@ public final class FishItemTooltip {
                     FishGrade.color(grade) + "Грейд: " + FishGrade.name(grade)
                             + " \u00a77(×" + FishGrade.priceMultiplier(grade) + " цены)"));
         }
+        if (tag.getBoolean(net.aquatech.ui.fishing.FishingSpotService.TAG)) {
+            event.getToolTip().add(Component.literal("\u00a7bТочка лова: \u00a76×"
+                    + (int) net.aquatech.ui.fishing.FishingSpotService.PRICE_MULT + "\u00a7b к цене"));
+        }
         double weight = tag.getDouble("aquatech_tournament_weight");
         if (weight > 0.0) {
             event.getToolTip().add(Component.literal(

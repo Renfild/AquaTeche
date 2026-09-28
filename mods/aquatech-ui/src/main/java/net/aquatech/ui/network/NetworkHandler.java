@@ -98,6 +98,12 @@ public class NetworkHandler {
                 .consumerMainThread(net.aquatech.ui.network.packet.S2COpenContainerPacket::handle)
                 .add();
 
+        CHANNEL.messageBuilder(net.aquatech.ui.network.packet.S2CSpotPacket.class, id())
+                .encoder(net.aquatech.ui.network.packet.S2CSpotPacket::encode)
+                .decoder(net.aquatech.ui.network.packet.S2CSpotPacket::new)
+                .consumerMainThread(net.aquatech.ui.network.packet.S2CSpotPacket::handle)
+                .add();
+
         CHANNEL.messageBuilder(net.aquatech.ui.network.packet.S2CSessionSyncPacket.class, id())
                 .encoder(net.aquatech.ui.network.packet.S2CSessionSyncPacket::encode)
                 .decoder(net.aquatech.ui.network.packet.S2CSessionSyncPacket::new)

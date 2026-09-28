@@ -54,6 +54,11 @@ public final class ClientEvents {
                 }
         );
         event.registerAboveAll(
+                "fishing_spot",
+                (gui, graphics, partialTick, screenWidth, screenHeight) ->
+                        net.aquatech.ui.client.hud.SpotArrowHud.render(graphics, partialTick)
+        );
+        event.registerAboveAll(
                 "rhythm_hook",
                 (gui, graphics, partialTick, screenWidth, screenHeight) ->
                         net.aquatech.ui.client.hud.RhythmHookOverlay.render(graphics, partialTick)

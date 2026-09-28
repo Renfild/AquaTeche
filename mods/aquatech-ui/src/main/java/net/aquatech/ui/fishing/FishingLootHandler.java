@@ -70,6 +70,7 @@ public class FishingLootHandler {
                 applyRateMultiplier(event.getDrops(), fishRate);
             }
             FishingAtlasService.onManualCatch(serverPlayer, event.getDrops());
+            FishingSpotService.stamp(serverPlayer, hook, event.getDrops());
             sendCatchFeedback(serverPlayer, rodStack, event.getDrops());
             bumpCatchStat(serverPlayer, false);
             RodDurability.wearOne(rodStack, serverPlayer);
@@ -224,6 +225,7 @@ public class FishingLootHandler {
 
         // Грейды и атлас: только ручная ловля и до копий, чтобы теги остались на выдаче.
         FishingAtlasService.onManualCatch(player, customDrops);
+        FishingSpotService.stamp(player, player.fishing, customDrops);
         FishingBait.consume(player, rodStack);
 
         // Copies for event (before inventory mutates stacks)
@@ -682,6 +684,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.28f, new ItemStack(Items.DIAMOND, 1));
                 maybeAdd(pool, random, 0.06f, new ItemStack(Items.DIAMOND_BLOCK, 1));
                 maybeAdd(pool, random, 0.28f, new ItemStack(Items.SLIME_BLOCK, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:baseore/magnesium", Items.IRON_ORE, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "slimed_rod" -> { // Tier 5: Slimed Rod — выживальные ресурсы + компонент T6-крафта
@@ -709,6 +712,8 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.08f, new ItemStack(Items.DIAMOND_BLOCK, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/aluminium", Items.IRON_ORE, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:baseore/silver", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:fluorapatite", Items.QUARTZ, 1));
+                maybeAdd(pool, random, 0.28f, getModItem("industrialupgrade:calcium_phosphate", Items.QUARTZ, 1));
                 pickFromPool(list, pool, random, 2, 4);
             }
             case "boner_rod" -> { // Side rod: overworld hostile drops + cobweb/snow
@@ -768,6 +773,7 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:preciousgem/sapphire_gem", Items.LAPIS_LAZULI, 1));
                 maybeAdd(pool, random, 0.40f, getModItem("industrialupgrade:preciousgem/topaz_gem", Items.AMETHYST_SHARD, 1));
                 maybeAdd(pool, random, 0.35f, getModItem("industrialupgrade:mineral/crystal", Items.AMETHYST_SHARD, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:classicore/lead", Items.REDSTONE_ORE, 1 + random.nextInt(2)));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "azure_crystal_rod" -> { // Tier 8: Azure Crystal Rod (MV Crystals)
@@ -784,6 +790,9 @@ public class FishingLootHandler {
                 // Chain fix: sharktooth_rod needs netherite scrap (3), obsidian_rod needs the ingot
                 maybeAdd(pool, random, 0.20f, new ItemStack(Items.NETHERITE_SCRAP, 1));
                 maybeAdd(pool, random, 0.30f, new ItemStack(Items.DIAMOND, 1));
+                maybeAdd(pool, random, 0.32f, getModItem("industrialupgrade:baseore/sulfur", Items.IRON_ORE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:baseore/mikhail", Items.IRON_ORE, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:baseore/germanium", Items.IRON_ORE, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "sharktooth_rod" -> { // Tier 9: Sharktooth Rod (HV Heavy Ores)
@@ -797,6 +806,8 @@ public class FishingLootHandler {
                 maybeAdd(pool, random, 0.20f, getModItem("industrialupgrade:alloyingot/stainless_steel", Items.IRON_INGOT, 1));
                 maybeAdd(pool, random, 0.10f, new ItemStack(Items.DIAMOND_BLOCK, 1));
                 maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:preciousgem/ruby_gem", Items.REDSTONE, 1 + random.nextInt(2)));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:baseore/zirconium", Items.DIAMOND, 1));
+                maybeAdd(pool, random, 0.30f, getModItem("industrialupgrade:baseore/niobium", Items.DIAMOND, 1));
                 pickFromPool(list, pool, random, 1, 3);
             }
             case "obsidian_rod" -> { // Tier 10: Obsidian Rod (HV Steel & Diamond)

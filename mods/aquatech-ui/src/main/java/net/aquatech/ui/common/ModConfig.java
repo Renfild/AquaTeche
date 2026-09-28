@@ -15,6 +15,14 @@ public class ModConfig {
     public static final ForgeConfigSpec.BooleanValue FISHING_MINIGAME;
     public static final ForgeConfigSpec.BooleanValue REQUIRE_PORTAL_SESSION;
     public static final ForgeConfigSpec.ConfigValue<String> AUTH_API_BASE;
+    public static final ForgeConfigSpec.BooleanValue SPOT_ENABLED;
+    public static final ForgeConfigSpec.IntValue SPOT_MIN_MINUTES;
+    public static final ForgeConfigSpec.IntValue SPOT_MAX_MINUTES;
+    public static final ForgeConfigSpec.IntValue SPOT_MIN_DISTANCE;
+    public static final ForgeConfigSpec.IntValue SPOT_MAX_DISTANCE;
+    public static final ForgeConfigSpec.IntValue SPOT_LIFETIME_MINUTES;
+    public static final ForgeConfigSpec.IntValue SPOT_MAX_CATCHES;
+    public static final ForgeConfigSpec.IntValue SPOT_RADIUS;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -72,6 +80,32 @@ public class ModConfig {
         FISHING_MINIGAME = builder
                 .comment("Rhythm Hook mini-game on AquaTech rod catch (false = instant loot)")
                 .define("tideTensionEnabled", true);
+        builder.pop();
+        builder.push("fishingSpots");
+        SPOT_ENABLED = builder
+                .comment("Личные точки лова: рыба с точки продаётся дороже (метка AquaSpot, цену считает aqualumen)")
+                .define("enabled", true);
+        SPOT_MIN_MINUTES = builder
+                .comment("Минимальный интервал между точками одного игрока, минуты")
+                .defineInRange("minIntervalMinutes", 20, 1, 600);
+        SPOT_MAX_MINUTES = builder
+                .comment("Максимальный интервал между точками одного игрока, минуты")
+                .defineInRange("maxIntervalMinutes", 40, 1, 600);
+        SPOT_MIN_DISTANCE = builder
+                .comment("Минимальное расстояние от игрока до новой точки, блоки")
+                .defineInRange("minDistance", 70, 20, 300);
+        SPOT_MAX_DISTANCE = builder
+                .comment("Максимальное расстояние от игрока до новой точки, блоки")
+                .defineInRange("maxDistance", 130, 30, 400);
+        SPOT_LIFETIME_MINUTES = builder
+                .comment("Сколько минут живёт точка")
+                .defineInRange("lifetimeMinutes", 10, 1, 120);
+        SPOT_MAX_CATCHES = builder
+                .comment("Сколько уловов с меткой даёт одна точка")
+                .defineInRange("maxCatches", 40, 1, 1000);
+        SPOT_RADIUS = builder
+                .comment("Радиус зоны точки вокруг центра, блоки")
+                .defineInRange("radius", 12, 4, 40);
         builder.pop();
         builder.push("auth");
         REQUIRE_PORTAL_SESSION = builder

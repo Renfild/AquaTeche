@@ -112,6 +112,11 @@ public final class AquaTechCommand {
                         .then(Commands.literal("stop").executes(AquaTechCommand::goldStormStop))
                         .then(Commands.argument("minutes", IntegerArgumentType.integer(1, 60))
                                 .executes(ctx -> goldStorm(ctx, IntegerArgumentType.getInteger(ctx, "minutes")))))
+                .then(Commands.literal("spot")
+                        .requires(s -> s.hasPermission(2))
+                        .then(Commands.literal("spawn").executes(AquaTechCommand::spotSpawn))
+                        .then(Commands.literal("clear").executes(AquaTechCommand::spotClear))
+                        .then(Commands.literal("info").executes(AquaTechCommand::spotInfo)))
                 // player-facing
                 .then(Commands.literal("daily")
                         .executes(AquaTechCommand::dailySelf))
@@ -401,6 +406,38 @@ public final class AquaTechCommand {
                 yield -1;
             }
         };
+    }
+
+    private static int spotSpawn(CommandContext<CommandSourceStack> ctx) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) {
+            ctx.getSource().sendFailure(Component.literal("Только для игроков"));
+            return 0;
+        }
+        if (!net.aquatech.ui.fishing.FishingSpotService.forceSpawn(player)) {
+            ctx.getSource().sendFailure(Component.literal("Не нашёл подходящую воду рядом. Отплыви от острова и повтори."));
+            return 0;
+        }
+        return 1;
+    }
+
+    private static int spotClear(CommandContext<CommandSourceStack> ctx) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) {
+            ctx.getSource().sendFailure(Component.literal("Только для игроков"));
+            return 0;
+        }
+        boolean cleared = net.aquatech.ui.fishing.FishingSpotService.forceClear(player);
+        ctx.getSource().sendSuccess(() -> Component.literal(cleared ? "Точка убрана" : "Активной точки нет"), false);
+        return 1;
+    }
+
+    private static int spotInfo(CommandContext<CommandSourceStack> ctx) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) {
+            ctx.getSource().sendFailure(Component.literal("Только для игроков"));
+            return 0;
+        }
+        String line = net.aquatech.ui.fishing.FishingSpotService.info(player);
+        ctx.getSource().sendSuccess(() -> Component.literal(line), false);
+        return 1;
     }
 
     private static int setStorm(CommandContext<CommandSourceStack> ctx, boolean on) {

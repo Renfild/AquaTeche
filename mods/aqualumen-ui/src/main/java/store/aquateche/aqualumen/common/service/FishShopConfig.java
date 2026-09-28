@@ -338,6 +338,10 @@ public final class FishShopConfig {
             } else if (grade >= 3) {
                 unitPrice *= 3.0;
             }
+            // Рыба с личной точки лова (метку ставит aquatech-ui FishingSpotService, PRICE_MULT = 2.0)
+            if (rootTag.getBoolean("AquaSpot")) {
+                unitPrice *= 2.0;
+            }
         }
 
         long finalUnitPrice = Math.max(1L, Math.round(unitPrice));
