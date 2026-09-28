@@ -46,6 +46,9 @@ public final class FishingSpotService {
     private static final float ZHILA_GRADE_BOOST_CHANCE = 0.2f;
 
     private static final long FIRST_SPOT_DELAY_MS = 3L * 60_000L;
+    /** Новичку — быстро и гарантированно Заводь, пока фича ещё в новинку. */
+    private static final long FIRST_SPOT_DELAY_NEW_PLAYER_MS = 75L * 1000L;
+    private static final String TAG_SPOT_INTRO_DONE = "aquatech_ui:spot_intro_done";
     private static final long RETRY_DELAY_MS = 2L * 60_000L;
     private static final double MIN_GAP_BETWEEN_SPOTS = 40.0;
     private static final int SEARCH_ATTEMPTS = 12;
@@ -110,17 +113,27 @@ public final class FishingSpotService {
 
     private static void maybeSpawn(ServerPlayer player, long now) {
         if (player.isSpectator() || !player.level().dimension().equals(Level.OVERWORLD)) return;
-        long nextAt = NEXT_AT.computeIfAbsent(player.getUUID(), id -> now + FIRST_SPOT_DELAY_MS);
+        boolean introDone = player.getPersistentData().getBoolean(TAG_SPOT_INTRO_DONE);
+        long firstDelay = introDone ? FIRST_SPOT_DELAY_MS : FIRST_SPOT_DELAY_NEW_PLAYER_MS;
+        long nextAt = NEXT_AT.computeIfAbsent(player.getUUID(), id -> now + firstDelay);
         if (now < nextAt) return;
-        if (!spawn(player, now)) {
+        if (!spawn(player, now, !introDone)) {
             NEXT_AT.put(player.getUUID(), now + RETRY_DELAY_MS);
         }
     }
 
     private static boolean spawn(ServerPlayer player, long now) {
+        return spawn(player, now, false);
+    }
+
+    /** forceZavod — новичку: первая точка всегда Заводь, без сюрприза редкого типа. */
+    private static boolean spawn(ServerPlayer player, long now, boolean forceZavod) {
         BlockPos place = findPlace(player.serverLevel(), player);
         if (place == null) return false;
-        SpotType type = SpotType.roll(player.getRandom());
+        SpotType type = forceZavod ? SpotType.ZAVOD : SpotType.roll(player.getRandom());
+        if (forceZavod) {
+            player.getPersistentData().putBoolean(TAG_SPOT_INTRO_DONE, true);
+        }
         Spot spot = new Spot(place, type, now + type.lifetimeMinutes() * 60_000L, type.maxCatches());
         SPOTS.put(player.getUUID(), spot);
         int minMinutes = ModConfig.SPOT_MIN_MINUTES.get();
@@ -319,6 +332,14 @@ public final class FishingSpotService {
         if (old == null) return false;
         sendClear(player);
         return true;
+    }
+
+    /** Тестовая команда /aquatech debug: возвращает игрока в состояние «новичок» для точек лова. */
+    public static void resetIntro(ServerPlayer player) {
+        player.getPersistentData().remove(TAG_SPOT_INTRO_DONE);
+        NEXT_AT.remove(player.getUUID());
+        Spot old = SPOTS.remove(player.getUUID());
+        if (old != null) sendClear(player);
     }
 
     public static String info(ServerPlayer player) {

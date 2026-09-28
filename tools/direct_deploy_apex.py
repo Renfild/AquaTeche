@@ -85,6 +85,7 @@ kubejs_uploads = [
     (ROOT / "kubejs/server_scripts/36_balanced_tweaks.js", "kubejs/server_scripts/36_balanced_tweaks.js"),
     (ROOT / "kubejs/server_scripts/97_machines_recipes.js", "kubejs/server_scripts/97_machines_recipes.js"),
     (ROOT / "kubejs/server_scripts/98_fishing_core_recipe.js", "kubejs/server_scripts/98_fishing_core_recipe.js"),
+    (ROOT / "kubejs/server_scripts/41_first_join_hint.js", "kubejs/server_scripts/41_first_join_hint.js"),
     (ROOT / "server/config/aqualumen-common.toml", "config/aqualumen-common.toml"),
     (ROOT / "server/config/industrialupgrade-common.toml", "config/industrialupgrade-common.toml"),
 ]

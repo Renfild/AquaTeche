@@ -29,6 +29,10 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = "aquatech_ui")
 public class FishingLootHandler {
 
+    /** Первый улов за игру: гарантированный бонус, не зависит от того, что поймалось. */
+    public static final String TAG_FIRST_CATCH_BONUS = "aquatech_ui:first_catch_bonus_shown";
+    private static final long FIRST_CATCH_COINS = 500L;
+
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onItemFished(ItemFishedEvent event) {
         if (event.getEntity() == null || event.getEntity().level().isClientSide) return;
@@ -208,6 +212,31 @@ public class FishingLootHandler {
         return false;
     }
 
+    /**
+     * Первая поимка за игру всегда ощущается особенной, что бы ни выпало: монеты,
+     * форс-грейд на рыбу (если она есть среди дропов) и отдельный фанфар.
+     */
+    private static void maybeFirstCatchFanfare(ServerPlayer player, List<ItemStack> drops) {
+        CompoundTag data = player.getPersistentData();
+        if (data.getBoolean(TAG_FIRST_CATCH_BONUS)) return;
+        data.putBoolean(TAG_FIRST_CATCH_BONUS, true);
+
+        for (ItemStack stack : drops) {
+            if (isStarCatcherFishItem(stack) && FishGrade.of(stack) == FishGrade.NONE) {
+                FishGrade.set(stack, FishGrade.SILVER);
+            }
+        }
+        OceanEventsService.grantCoins(player, FIRST_CATCH_COINS);
+        player.sendSystemMessage(net.minecraft.network.chat.Component.literal(
+                "§b[AquaTech] §fПервый улов! §6+500 монет §fна удачу — путь начат."));
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+                net.minecraft.sounds.SoundEvents.PLAYER_LEVELUP, net.minecraft.sounds.SoundSource.PLAYERS, 1.0F, 1.4F);
+        if (player.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.TOTEM_OF_UNDYING,
+                    player.getX(), player.getY() + 1.0, player.getZ(), 30, 0.5, 0.5, 0.5, 0.3);
+        }
+    }
+
     public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem.RodType type,
                                   ItemStack rodStack, float lootScale, int quality) {
         bumpCatchStat(player);
@@ -227,6 +256,7 @@ public class FishingLootHandler {
         FishingAtlasService.onManualCatch(player, customDrops);
         FishingSpotService.stamp(player, player.fishing, customDrops);
         FishingBait.consume(player, rodStack);
+        maybeFirstCatchFanfare(player, customDrops);
 
         // Copies for event (before inventory mutates stacks)
         List<ItemStack> awarded = new ArrayList<>(customDrops.size());

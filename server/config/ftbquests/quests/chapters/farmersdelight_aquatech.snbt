@@ -1,0 +1,530 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "farmersdelight_aquatech"
+	group: "4BCD563D0A6CE61C"
+	icon: "farmersdelight:cooking_pot"
+	id: "2A5201A44493F6A4"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Первый инструмент кухни. Ставь на верстак или"
+				"стол, чтобы резать продукты ножом."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:cutting_board"
+			id: "E35A374F3BB2D6C8"
+			rewards: [
+				{
+					id: "346148B6211FC424"
+					item: "farmersdelight:flint_knife"
+					type: "item"
+				}
+				{
+					id: "514A404DDFE9C6F3"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "BE9775A86C1D8AE8"
+				item: "farmersdelight:cutting_board"
+				type: "item"
+			}]
+			title: "Разделочная доска"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["E35A374F3BB2D6C8"]
+			description: [
+				"Без ножа доска бесполезна — им режут овощи, мясо"
+				"и рыбу на готовку."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:flint_knife"
+			id: "5C66E86E9FDE4B12"
+			rewards: [
+				{
+					count: 8
+					id: "7B0E8ECD2E7DE0DD"
+					item: "minecraft:brick"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "A03A62972C8864E7"
+					item: "minecraft:iron_ingot"
+					type: "item"
+				}
+				{
+					id: "E337AE216480272F"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "C0EECC22B66A87BC"
+				item: "farmersdelight:flint_knife"
+				type: "item"
+			}]
+			title: "Нож"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5C66E86E9FDE4B12"]
+			description: [
+				"Основная варочная станция. Ставь на костёр или"
+				"печь — суп сам не сварится."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:cooking_pot"
+			id: "38C00FB917C7AB51"
+			rewards: [
+				{
+					count: 4
+					id: "C3BECD3ED1AD469A"
+					item: "farmersdelight:tomato_seeds"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "C301C361F24155FC"
+					item: "farmersdelight:onion"
+					type: "item"
+				}
+				{
+					id: "AE9A91565E22C280"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "05CE925B2B4EEEFB"
+				item: "farmersdelight:cooking_pot"
+				type: "item"
+			}]
+			title: "Котелок"
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["5C66E86E9FDE4B12"]
+			description: [
+				"Вторая станция готовки, для выпечки и жарки. Тот"
+				"же кирпич и железо, что на котелок."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:stove"
+			id: "99D9B4D1087325DB"
+			rewards: [
+				{
+					count: 4
+					id: "64FF0D4EEC379B04"
+					item: "farmersdelight:rice_panicle"
+					type: "item"
+				}
+				{
+					id: "9567585F4082A89E"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "B3D038CA3331F574"
+				item: "farmersdelight:stove"
+				type: "item"
+			}]
+			title: "Печь"
+			x: 3.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["38C00FB917C7AB51"]
+			description: [
+				"Первое блюдо из твоего же улова. Рыба с удочки"
+				"наконец идёт не только на продажу."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:fish_stew"
+			id: "E58AC835FE329516"
+			rewards: [
+				{
+					count: 4
+					id: "A041EAE57E59E049"
+					item: "farmersdelight:cabbage_seeds"
+					type: "item"
+				}
+				{
+					id: "4860562F451AB133"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "AB6E88BB14673AE5"
+				item: "farmersdelight:fish_stew"
+				type: "item"
+			}]
+			title: "Рыбное рагу"
+			x: 4.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["38C00FB917C7AB51"]
+			description: [
+				"Ещё одно рыбное блюдо котелка — годится и на"
+				"стол, и на обмен."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:salmon_roll"
+			id: "81C56C39CD9F01EB"
+			rewards: [
+				{
+					count: 4
+					id: "EF59E69D777EEEDF"
+					item: "farmersdelight:tomato"
+					type: "item"
+				}
+				{
+					id: "3A0FAC8432193CEF"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "4D015BFDB75ECED4"
+				item: "farmersdelight:salmon_roll"
+				type: "item"
+			}]
+			title: "Ролл с лососем"
+			x: 4.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["38C00FB917C7AB51"]
+			description: [
+				"Простое блюдо на каждый день, когда рыбы под"
+				"рукой нет."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:vegetable_soup"
+			id: "C17E80ACC3CAF878"
+			rewards: [
+				{
+					count: 4
+					id: "C825D50F3CE6894A"
+					item: "farmersdelight:onion"
+					type: "item"
+				}
+				{
+					id: "3E5DE03A58F0A862"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "142966999F0D7BA6"
+				item: "farmersdelight:vegetable_soup"
+				type: "item"
+			}]
+			title: "Овощной суп"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"E58AC835FE329516"
+				"81C56C39CD9F01EB"
+				"C17E80ACC3CAF878"
+				"99D9B4D1087325DB"
+			]
+			description: [
+				"Капстоун разделочной доски: печь и котелок"
+				"вместе дают полноценный стол."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:pumpkin_pie_slice"
+			id: "0F2A90B4CFF69E8B"
+			rewards: [
+				{
+					count: 4
+					id: "454FB0D6DE4382B0"
+					item: "farmersdelight:pie_crust"
+					type: "item"
+				}
+				{
+					id: "8FF018A8CCAF83E3"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "366ABFB5EF30180E"
+				item: "farmersdelight:pumpkin_pie_slice"
+				type: "item"
+			}]
+			title: "Пирог с тыквой"
+			x: 6.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["5C66E86E9FDE4B12"]
+			description: [
+				"Замешивается в котелке из пшеницы и воды. Основа"
+				"для пирогов и выпечки."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:wheat_dough"
+			id: "D10977B356BCEEB9"
+			rewards: [
+				{
+					count: 4
+					id: "A64E05EF95F1A23B"
+					item: "minecraft:wheat"
+					type: "item"
+				}
+				{
+					id: "597EE7CC6A3C0034"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "60829D7A9F5E6177"
+				item: "farmersdelight:wheat_dough"
+				type: "item"
+			}]
+			title: "Тесто"
+			x: 7.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["5C66E86E9FDE4B12"]
+			description: [
+				"Вторая варочная утварь: жарит бекон и яичницу"
+				"быстрее костра."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:skillet"
+			id: "DAD89214DF602FD4"
+			rewards: [
+				{
+					count: 4
+					id: "EF680B8199A75FEB"
+					item: "minecraft:egg"
+					type: "item"
+				}
+				{
+					id: "6066DF27E57FD2D6"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "360C1801B3AFCD62"
+				item: "farmersdelight:skillet"
+				type: "item"
+			}]
+			title: "Сковорода"
+			x: 7.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["E35A374F3BB2D6C8"]
+			description: [
+				"Плетётся из соломы. Идёт на корзины, заборы и"
+				"сеть безопасности."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:rope"
+			id: "3C740379D1E868A4"
+			rewards: [
+				{
+					count: 4
+					id: "DCDCACC28F877F62"
+					item: "farmersdelight:straw"
+					type: "item"
+				}
+				{
+					id: "07658881EBA07411"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "8AB71B893CC0CE35"
+				item: "farmersdelight:rope"
+				type: "item"
+			}]
+			title: "Верёвка"
+			x: 7.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["3C740379D1E868A4"]
+			description: [
+				"Компактное хранение урожая. Быстрее и дешевле"
+				"сундука."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:wooden_basket"
+			id: "00FBAE3AD0E42E56"
+			rewards: [
+				{
+					count: 4
+					id: "1033A551C7FFD95A"
+					item: "minecraft:string"
+					type: "item"
+				}
+				{
+					id: "8FC1D9B391464203"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "9E8E88F872032105"
+				item: "farmersdelight:wooden_basket"
+				type: "item"
+			}]
+			title: "Плетёная корзина"
+			x: 9.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"38C00FB917C7AB51"
+				"99D9B4D1087325DB"
+			]
+			description: [
+				"Сытное мясное блюдо котелка и печи вместе."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:hamburger"
+			id: "CBC34C9435962894"
+			rewards: [
+				{
+					count: 2
+					id: "C2091462D01FFE87"
+					item: "farmersdelight:tomato_sauce"
+					type: "item"
+				}
+				{
+					id: "F450BC2A67FA804B"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "A0550328035EE5F6"
+				item: "farmersdelight:hamburger"
+				type: "item"
+			}]
+			title: "Гамбургер"
+			x: 9.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["38C00FB917C7AB51"]
+			description: [
+				"Второе рыбное блюдо котелка — вариация ролла с"
+				"лососем на другой рыбе."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:cod_roll"
+			id: "F62CB0D6D39F72E5"
+			rewards: [
+				{
+					count: 4
+					id: "43A7D90FA715FD0D"
+					item: "farmersdelight:rice"
+					type: "item"
+				}
+				{
+					id: "4834BC62E7FF850B"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "63263FD2913D9015"
+				item: "farmersdelight:cod_roll"
+				type: "item"
+			}]
+			title: "Ролл с треской"
+			x: 9.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["99D9B4D1087325DB"]
+			description: [
+				"Десерт печи. Мёд можно взять у пчёл, если на"
+				"острове есть улей."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:honey_cookie"
+			id: "1BE42255CDDCE7BD"
+			rewards: [
+				{
+					count: 2
+					id: "A63EF4700C2A8F42"
+					item: "minecraft:honey_bottle"
+					type: "item"
+				}
+				{
+					id: "1B45FB55BF3DCE95"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "641949B89A6CE7CA"
+				item: "farmersdelight:honey_cookie"
+				type: "item"
+			}]
+			title: "Медовое печенье"
+			x: 7.5d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"CBC34C9435962894"
+				"F62CB0D6D39F72E5"
+				"1BE42255CDDCE7BD"
+			]
+			description: [
+				"Второй капстоун: гамбургер, рыбный ролл и"
+				"печенье вместе на одном столе."
+			]
+			entity_vis_size: 1.0f
+			icon: "farmersdelight:shepherds_pie_block"
+			id: "A253F22327F93DD3"
+			rewards: [
+				{
+					count: 4
+					id: "B06C8C6474D9E1C2"
+					item: "farmersdelight:wheat_dough"
+					type: "item"
+				}
+				{
+					id: "DA5FE0DC2B156982"
+					type: "xp"
+					xp: 75
+				}
+			]
+			tasks: [{
+				id: "91DC44459337B090"
+				item: "farmersdelight:shepherds_pie_block"
+				type: "item"
+			}]
+			title: "Пастуший пирог"
+			x: 10.5d
+			y: -1.0d
+		}
+	]
+	title: "Фермерское удовольствие"
+}

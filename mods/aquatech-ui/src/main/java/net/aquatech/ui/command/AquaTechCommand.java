@@ -117,6 +117,9 @@ public final class AquaTechCommand {
                         .then(Commands.literal("spawn").executes(AquaTechCommand::spotSpawn))
                         .then(Commands.literal("clear").executes(AquaTechCommand::spotClear))
                         .then(Commands.literal("info").executes(AquaTechCommand::spotInfo)))
+                .then(Commands.literal("debug")
+                        .requires(s -> s.hasPermission(4))
+                        .then(Commands.literal("reset_welcome").executes(AquaTechCommand::debugResetWelcome)))
                 // player-facing
                 .then(Commands.literal("daily")
                         .executes(AquaTechCommand::dailySelf))
@@ -437,6 +440,23 @@ public final class AquaTechCommand {
         }
         String line = net.aquatech.ui.fishing.FishingSpotService.info(player);
         ctx.getSource().sendSuccess(() -> Component.literal(line), false);
+        return 1;
+    }
+
+    /** Сбрасывает всю первую сессию: F4-подсказка + кинематографичный спавн (kubejs),
+     *  первый улов, ранняя точка лова, стартовый кейс. Для проверки онбординга без реролла аккаунта. */
+    private static int debugResetWelcome(CommandContext<CommandSourceStack> ctx) {
+        if (!(ctx.getSource().getEntity() instanceof ServerPlayer player)) {
+            ctx.getSource().sendFailure(Component.literal("Только для игроков"));
+            return 0;
+        }
+        net.minecraft.nbt.CompoundTag data = player.getPersistentData();
+        data.remove("aquatech_f4_hint");
+        data.remove(net.aquatech.ui.fishing.FishingLootHandler.TAG_FIRST_CATCH_BONUS);
+        net.aquatech.ui.fishing.FishingSpotService.resetIntro(player);
+        net.aquatech.ui.player.WelcomeGift.resetGift(player);
+        ctx.getSource().sendSuccess(() -> Component.literal(
+                "Сброшено: F4-подсказка, кинематографичный спавн, первый улов, ранняя точка лова, стартовый кейс. Перезайди на сервер."), false);
         return 1;
     }
 
