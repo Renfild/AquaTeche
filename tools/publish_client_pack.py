@@ -20,8 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.404"
-PACK_VERSION = "2.9.404"
+PACK_TAG = "pack-2.9.408"
+PACK_VERSION = "2.9.408"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -350,7 +350,11 @@ def write_manifest() -> Path:
             if is_valid_github:
                 f_url = prev_f["url"]
             else:
-                f_url = f"https://aquateche.store/pack/{rel}"
+                # Always point at the immutable GitHub release asset. The site
+                # mirror serves these files to Cloudflare-challenged CLI clients
+                # (403) and git mirrors rewrite CRLF -> LF, which breaks the md5
+                # check. The release keeps the exact bytes we hashed here.
+                f_url = f"{GITHUB_RELEASE}/{aname}"
                 dst_docs = DOCS_PACK / rel
                 dst_docs.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(path, dst_docs)

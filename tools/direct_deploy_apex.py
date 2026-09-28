@@ -77,6 +77,7 @@ if (ROOT / "server/config/aqualumen/fish_shop.json").is_file():
     sftp.put(str(ROOT / "server/config/aqualumen/fish_shop.json"), "config/aqualumen/fish_shop.json")
     print("  Uploaded config/aqualumen/fish_shop.json")
 kubejs_uploads = [
+    (ROOT / "server/kubejs/server_scripts/20_aquatech_rod_crafts.js", "kubejs/server_scripts/20_aquatech_rod_crafts.js"),
     (ROOT / "server/kubejs/server_scripts/30_aquatech_crafting.js", "kubejs/server_scripts/30_aquatech_crafting.js"),
     (ROOT / "server/kubejs/server_scripts/zz_infernal_pearl.js", "kubejs/server_scripts/zz_infernal_pearl.js"),
     (ROOT / "server/kubejs/startup_scripts/zz_infernal_pearl.js", "kubejs/startup_scripts/zz_infernal_pearl.js"),
