@@ -85,15 +85,6 @@ ServerEvents.recipes((event) => {
     V: 'aquatech_machines:volcanic_crystal',
   }).id('aquatech_machines:speed_upgrade_4')
 
-  // Альтернативный высокотехнологичный крафт Синтезатора с Абиссальным Сплавом
-  event.shaped('aquatech_machines:synthesizer', ['ABA', 'XCX', 'SSS'], {
-    A: 'aquatech_machines:abyssal_alloy',
-    B: 'minecraft:blast_furnace',
-    X: 'industrialupgrade:crafting_elements/crafting_274_element',
-    C: 'minecraft:lava_bucket',
-    S: 'industrialupgrade:blockresource/reinforced_stone',
-  }).id('aquatech_machines:synthesizer_alloy')
-
   // Крафты с Морской Солью (sea_salt):
   // 1. Прессованный минеральный кальцит из соли
   event.shaped('minecraft:calcite', ['SS', 'SS'], {
