@@ -196,7 +196,7 @@ DiscordChatChannelListCommandAllPlayersSeparator: ", "
 # %message%:        сообщение о входе в игру (Так, как оно отображается в Minecraft)
 #
 MinecraftPlayerJoinMessage:
-  Enabled: true
+  Enabled: false
   Webhook:
     Enable: false
     AvatarUrl: "%botavatarurl%"
@@ -225,7 +225,7 @@ MinecraftPlayerJoinMessage:
 # %message%:        сообщение о входе в игру (Так, как оно отображается в Minecraft)
 #
 MinecraftPlayerFirstJoinMessage:
-  Enabled: true
+  Enabled: false
   Webhook:
     Enable: false
     AvatarUrl: "%botavatarurl%"
@@ -254,7 +254,7 @@ MinecraftPlayerFirstJoinMessage:
 # %message%:        сообщение о выходе из игры (Так, как оно отображается в Minecraft)
 #
 MinecraftPlayerLeaveMessage:
-  Enabled: true
+  Enabled: false
   Webhook:
     Enable: false
     AvatarUrl: "%botavatarurl%"
@@ -284,7 +284,7 @@ MinecraftPlayerLeaveMessage:
 # %world%:        название мира, в котором умер игрок
 #
 MinecraftPlayerDeathMessage:
-  Enabled: true
+  Enabled: false
   Webhook:
     Enable: false
     AvatarUrl: "%botavatarurl%"
@@ -315,7 +315,7 @@ MinecraftPlayerDeathMessage:
 # Также поддерживаются PlaceholderAPI шаблоны
 #
 MinecraftPlayerAchievementMessage:
-  Enabled: true
+  Enabled: false
   Webhook:
     Enable: false
     AvatarUrl: "%botavatarurl%"
