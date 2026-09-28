@@ -31,7 +31,7 @@ public final class HubActionHandler {
     private HubActionHandler() {
     }
 
-    private record PendingCaseReward(CaseConfig.CaseDef def, CaseConfig.LootDef loot, int amount, String type, long timestamp) {
+    private record PendingCaseReward(CaseConfig.CaseDef def, CaseConfig.LootDef loot, int amount, String type, long timestamp, boolean pity) {
     }
 
     private static final Map<UUID, PendingCaseReward> PENDING_CASE_REWARDS = new ConcurrentHashMap<>();
@@ -251,7 +251,7 @@ public final class HubActionHandler {
                     amount, type));
 
             // Store pending reward so item is granted AFTER animation completes
-            PENDING_CASE_REWARDS.put(player.getUUID(), new PendingCaseReward(def, loot, amount, type, System.currentTimeMillis()));
+            PENDING_CASE_REWARDS.put(player.getUUID(), new PendingCaseReward(def, loot, amount, type, System.currentTimeMillis(), pityHit));
 
             // Schedule fallback delivery after 5.5s in case client doesn't send case.claim
             REWARD_SCHEDULER.schedule(() -> claimCaseReward(player, false), 5500, java.util.concurrent.TimeUnit.MILLISECONDS);
@@ -262,6 +262,9 @@ public final class HubActionHandler {
             CaseConfig.LootDef firstLoot = null;
             int firstAmount = 1;
             int pityHits = 0;
+            CaseConfig.LootDef bestLoot = null;
+            int bestAmount = 1;
+            boolean bestPity = false;
 
             for (int i = 0; i < count; i++) {
                 boolean pityHit = casePityEnabled(def) && casePityCount(player, def.id) + 1 >= def.pityEvery;
@@ -276,6 +279,11 @@ public final class HubActionHandler {
                 if (firstLoot == null) {
                     firstLoot = loot;
                     firstAmount = amount;
+                }
+                if (bestLoot == null || loot.weight > bestLoot.weight) {
+                    bestLoot = loot;
+                    bestAmount = amount;
+                    bestPity = pityHit;
                 }
                 String type = loot.type == null ? "item" : loot.type;
                 switch (type) {
@@ -311,6 +319,13 @@ public final class HubActionHandler {
                         HubDataService.rarityForWeight(firstLoot.weight, HubDataService.totalWeight(def)),
                         firstAmount, firstType));
             }
+            if (bestLoot != null) {
+                String bestLabel = bestLoot.label == null || bestLoot.label.isBlank()
+                        ? itemStack(bestLoot.item, bestAmount).getHoverName().getString() : bestLoot.label;
+                RareDropAnnounce.caseDrop(player.server, player, def.title, bestLabel,
+                        HubDataService.rarityForWeight(bestLoot.weight, HubDataService.totalWeight(def)),
+                        bestAmount, bestPity);
+            }
         }
 
         HubDataService.push(player);
@@ -322,28 +337,34 @@ public final class HubActionHandler {
         if (pending == null) return;
 
         player.server.execute(() -> {
+            String rarity = HubDataService.rarityForWeight(pending.loot().weight, HubDataService.totalWeight(pending.def()));
+            String announceLabel = pending.loot().label == null || pending.loot().label.isBlank()
+                    ? pending.loot().item : pending.loot().label;
             switch (pending.type()) {
                 case "coins" -> {
                     HubEconomy.grantCoins(player, pending.amount());
-                    player.sendSystemMessage(Component.literal("Кейс \u00ab" + pending.def().title + "\u00bb: "
+                    player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: "
                             + (pending.loot().label == null || pending.loot().label.isBlank() ? "AquaCoins" : pending.loot().label)
-                            + " \u00d7" + pending.amount()).withStyle(ChatFormatting.GOLD));
+                            + " ×" + pending.amount()).withStyle(ChatFormatting.GOLD));
                 }
                 case "gems" -> {
                     HubEconomy.grantGems(player, pending.amount());
-                    player.sendSystemMessage(Component.literal("Кейс \u00ab" + pending.def().title + "\u00bb: "
+                    player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: "
                             + (pending.loot().label == null || pending.loot().label.isBlank() ? "Гемы" : pending.loot().label)
-                            + " \u00d7" + pending.amount()).withStyle(ChatFormatting.LIGHT_PURPLE));
+                            + " ×" + pending.amount()).withStyle(ChatFormatting.LIGHT_PURPLE));
                 }
                 default -> {
                     ItemStack stack = itemStack(pending.loot().item, pending.amount());
                     HubEconomy.giveItem(player, stack);
-                    player.sendSystemMessage(Component.literal("Кейс \u00ab" + pending.def().title + "\u00bb: ")
+                    announceLabel = stack.getHoverName().getString();
+                    player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: ")
                             .withStyle(ChatFormatting.AQUA)
                             .append(stack.getHoverName())
-                            .append(Component.literal(" \u00d7" + pending.amount()).withStyle(ChatFormatting.AQUA)));
+                            .append(Component.literal(" ×" + pending.amount()).withStyle(ChatFormatting.AQUA)));
                 }
             }
+            RareDropAnnounce.caseDrop(player.server, player, pending.def().title, announceLabel,
+                    rarity, pending.amount(), pending.pity());
             if (push) {
                 HubDataService.push(player);
             }

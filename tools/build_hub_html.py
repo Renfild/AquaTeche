@@ -139,7 +139,7 @@ hub_html_raw = r'''<!doctype html>
     .case-actions-row .button{flex:1;font-size:9.5px;padding:0 6px}
 
     /* Drop Table Preview Modal */
-    .case-preview-layer{position:fixed;inset:0;z-index:24;display:none;place-items:center;background:rgba(2,5,9,.84);backdrop-filter:blur(10px)}
+    .case-preview-layer{position:fixed;inset:0;z-index:24;display:none;place-items:center;background:rgba(2,5,9,.93)}
     .case-preview-layer.open{display:grid}
     .case-preview-modal{position:relative;width:min(640px,94vw);max-height:86vh;padding:24px;border:1px solid var(--line);border-radius:22px;background:#0d151d;box-shadow:0 30px 90px rgba(0,0,0,.85);display:flex;flex-direction:column;animation:hub-in .25s var(--ease) both}
     .close-preview{position:absolute;right:16px;top:16px;z-index:2}
@@ -216,7 +216,7 @@ hub_html_raw = r'''<!doctype html>
     .toggle{width:42px;height:23px;padding:2px;border:0;border-radius:20px;background:rgba(255,255,255,.13);cursor:pointer}.toggle i{display:block;width:19px;height:19px;border-radius:50%;background:var(--muted);transition:.2s var(--ease)}.toggle.on{background:color-mix(in srgb,var(--accent) 26%,transparent)}.toggle.on i{transform:translateX(19px);background:var(--accent)}
     .footer{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:0 15px;border-top:1px solid var(--line);color:var(--muted);font-size:9px}.footer-build{margin-right:auto}.key{padding:2px 6px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.04);color:var(--text)}
     .toast{position:fixed;left:50%;bottom:32px;z-index:20;min-width:230px;padding:11px 14px;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));border-radius:12px;background:#111a23;color:var(--text);font-size:11px;box-shadow:0 15px 45px rgba(0,0,0,.45);transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.22s var(--ease)}.toast.show{transform:translate(-50%,0);opacity:1}
-    .modal-layer{position:fixed;inset:0;z-index:15;display:none;place-items:center;background:rgba(2,5,9,.72);backdrop-filter:blur(8px)}.modal-layer.open{display:grid}
+    .modal-layer{position:fixed;inset:0;z-index:15;display:none;place-items:center;background:rgba(2,5,9,.90)}.modal-layer.open{display:grid}
     .modal{width:min(390px,88vw);padding:20px;border:1px solid var(--line);border-radius:17px;background:#101820;box-shadow:0 25px 80px rgba(0,0,0,.6)}.modal h2{margin:0 0 7px;font-size:17px}.modal p{margin:0 0 18px;color:var(--muted);font-size:11px;line-height:1.55}.modal-actions{display:flex;justify-content:flex-end;gap:8px}
     .empty{height:100%;display:grid;place-items:center;color:var(--muted);font-size:12px}
     .rank-modal-head .rank-glyph{width:48px;height:48px;margin:0}
@@ -385,7 +385,7 @@ hub_html_raw = r'''<!doctype html>
     .owned-check svg{width:13px;height:13px}
     
     /* Case Opening Modal & Roulette */
-    .case-layer{position:fixed;inset:0;z-index:25;display:none;place-items:center;background:rgba(2,5,9,.88);backdrop-filter:blur(12px)}
+    .case-layer{position:fixed;inset:0;z-index:25;display:none;place-items:center;background:rgba(2,5,9,.95)}
     .case-layer.open{display:grid}
     .case-modal{width:min(660px,94vw);padding:24px 24px 20px;border:1px solid var(--line);border-radius:22px;background:#0d151d;box-shadow:0 30px 100px rgba(0,0,0,.85);text-align:center;animation:hub-in .3s var(--ease) both}
     .case-modal h2{margin:8px 0 3px;font-size:20px;font-weight:780}
@@ -412,7 +412,7 @@ hub_html_raw = r'''<!doctype html>
       border-bottom:10px solid var(--accent);filter:drop-shadow(0 -2px 5px rgba(0,0,0,.8));
     }
 
-    .reel-strip{position:absolute;top:10px;bottom:10px;left:0;display:flex;gap:8px;will-change:transform;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);backface-visibility:hidden;perspective:1000px;contain:layout style paint}
+    .reel-strip{position:absolute;top:10px;bottom:10px;left:0;display:flex;gap:8px;will-change:transform;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);contain:layout style paint}
     .reel-tile{
       flex:0 0 108px;width:108px;display:flex;flex-direction:column;align-items:center;justify-content:center;
       gap:6px;padding:6px 6px;border:1px solid rgba(255,255,255,.1);border-radius:14px;
@@ -424,6 +424,25 @@ hub_html_raw = r'''<!doctype html>
       animation:tile-win .6s cubic-bezier(.17,.89,.32,1.28) both;
       z-index:2;
     }
+    .reel-tile.hot{transform:scale(1.07);transition:transform .12s ease-out,border-color .2s,box-shadow .2s}
+    .case-modal.pulse{animation:modal-pulse 1.1s ease-out both}
+    @keyframes modal-pulse{
+      0%{box-shadow:0 0 0 0 var(--rc),0 30px 100px rgba(0,0,0,.85)}
+      100%{box-shadow:0 0 0 54px transparent,0 30px 100px rgba(0,0,0,.85)}
+    }
+    .case-modal.shake{animation:modal-shake .42s linear both}
+    @keyframes modal-shake{
+      0%,100%{transform:translate(0,0)}
+      15%{transform:translate(-5px,2px)}
+      30%{transform:translate(5px,-3px)}
+      45%{transform:translate(-4px,-2px)}
+      60%{transform:translate(4px,3px)}
+      80%{transform:translate(-2px,1px)}
+    }
+    .case-actions .button[disabled]{opacity:.45;pointer-events:none}
+    .lite .mc-icon,.lite .mc-icon-lg{filter:none}
+    .lite .reel-tile.hot{transform:none}
+    .lite .case-modal.pulse,.lite .case-modal.shake{animation:none}
     @keyframes tile-win{
       0%{transform:scale(1)}
       50%{transform:scale(1.14)}
@@ -799,9 +818,54 @@ try {
     landT0: 0,
     landDur: 4100,
     lastIdx: -1,
+    hotIdx: -1,
+    lite: false,
+    avg: 0,
+    samples: 0,
+    lastFrame: 0,
+    exp: 5,
+    order: ["common", "uncommon", "rare", "epic", "legendary", "mythic", "exotic"],
     colors: { common: "#9db2c4", uncommon: "#4cd08a", rare: "#3b9dff", epic: "#b072ff", legendary: "#f5c25b", mythic: "#ff4f79", exotic: "#ffe066" },
     ru: { common: "Обычный", uncommon: "Необычный", rare: "Редкий", epic: "Эпический", legendary: "Легендарный", mythic: "Мифический", exotic: "Экзотический" },
     
+    rank(r) { const i = this.order.indexOf(r); return i < 0 ? 0 : i; },
+
+    /* Встроенный браузер рисует без GPU-окна: если кадры реально тормозят (<~22 fps), выключаем тени и лишние анимации */
+    watch(now) {
+      if (this.lastFrame) {
+        const dt = now - this.lastFrame;
+        this.avg = this.avg ? this.avg * 0.9 + dt * 0.1 : dt;
+        if (!this.lite && ++this.samples > 30 && this.avg > 45) {
+          this.lite = true;
+          document.documentElement.classList.add("lite");
+        }
+      }
+      this.lastFrame = now;
+    },
+
+    markHot() {
+      const idx = Math.floor((this.pos + $("caseReel").clientWidth / 2) / this.W);
+      if (idx === this.hotIdx) return;
+      const kids = $("caseStrip").children;
+      if (kids[this.hotIdx]) kids[this.hotIdx].classList.remove("hot");
+      if (kids[idx]) kids[idx].classList.add("hot");
+      this.hotIdx = idx;
+    },
+
+    /* Пока сервер не ответил, лента медленно ползёт, а не стоит: разгон начинается с этого движения */
+    startIdle() {
+      const t0 = performance.now();
+      const step = (now) => {
+        if (!this.active || this.delivered || this.revealed) return;
+        this.watch(now);
+        this.pos = Math.min(1500, (now - t0) * 0.12);
+        $("caseStrip").style.transform = `translate3d(${-this.pos.toFixed(2)}px, 0, 0)`;
+        this.markHot();
+        this.raf = requestAnimationFrame(step);
+      };
+      this.raf = requestAnimationFrame(step);
+    },
+
     color(r) { return this.colors[r] || this.colors.common; },
     label(r) { return this.ru[r] || r; },
     clean(l) { return String(l || "").replace(/\\s*[×x]\\s*[\\d\\u2013-]+\\s*$/, ""); },
@@ -809,7 +873,7 @@ try {
     tileHtml(l) {
       const col = this.color(l.rarity);
       const icon = getItemIconHtml(l.label, l.item, "mc-icon", l.type);
-      return `<div class="reel-tile" style="border-color:${col}44;box-shadow:inset 0 0 16px ${col}14">
+      return `<div class="reel-tile" style="border-color:${col}44">
         ${icon}
         <b>${esc(this.clean(l.label))}</b>
       </div>`;
@@ -840,6 +904,10 @@ try {
       this.tiles = [];
       this.resultIndex = -1;
       this.lastIdx = -1;
+      this.hotIdx = -1;
+      this.lastFrame = 0;
+      const modalEl = document.querySelector(".case-modal");
+      if (modalEl) modalEl.classList.remove("pulse", "shake");
       Sfx.ensure();
 
       const col = this.color(def.rarity);
@@ -881,6 +949,7 @@ try {
       $("caseStrip").style.transform = "translate3d(0, 0, 0)";
 
       this.timeout = setTimeout(() => this.fail(), 12000);
+      this.startIdle();
       if (this.pending && (!this.pending.caseId || this.pending.caseId === this.def.id)) {
         const queued = this.pending;
         this.pending = null;
@@ -891,7 +960,8 @@ try {
     bindActions(mode) {
       const closeBtn = '<button class="button" id="caseDone">Закрыть</button>';
       if (mode !== "done") {
-        $("caseActions").innerHTML = closeBtn;
+        $("caseActions").innerHTML = '<button class="button primary" id="caseSkip" disabled>Пропустить</button>' + closeBtn;
+        $("caseSkip").onclick = () => this.skip();
         $("caseDone").onclick = () => this.close();
         return;
       }
@@ -940,24 +1010,37 @@ try {
       const targetIdx = 38;
       this.tiles[targetIdx] = { label: result.label, rarity: result.rarity, weight: 1, item: result.item, type: result.type };
       this.resultIndex = targetIdx;
+
+      /* Почти-выигрыш: рядом с наградой стоит самый редкий предмет кейса, если он круче выпавшего */
+      const pool = (this.def.loot && this.def.loot.length ? this.def.loot : []).filter(l => (l.item || l.label) !== (result.item || result.label));
+      let tease = null;
+      for (const l of pool) if (!tease || this.rank(l.rarity) > this.rank(tease.rarity)) tease = l;
+      if (tease && this.rank(tease.rarity) > this.rank(result.rarity)) this.tiles[targetIdx + 1] = tease;
+
       $("caseStrip").innerHTML = this.tiles.map(l => this.tileHtml(l)).join("");
+      this.hotIdx = -1;
+      const skipBtn = $("caseSkip");
+      if (skipBtn) skipBtn.disabled = false;
 
       const markerX = $("caseReel").clientWidth / 2;
       const jitter = (Math.random() * 0.3 - 0.15) * this.W;
-      this.landFrom = 0;
-      this.landDist = targetIdx * this.W + (this.W / 2) - markerX + jitter;
+      const big = this.rank(result.rarity) >= 3;
+      this.landFrom = this.pos;
+      this.landDist = targetIdx * this.W + (this.W / 2) - markerX + jitter - this.pos;
       this.landT0 = performance.now();
-      this.landDur = 4100;
+      /* Для epic и выше лента дольше «ползёт» в конце: нагнетаем напряжение */
+      this.landDur = big ? 5600 : 4100;
+      this.exp = big ? 6 : 5;
 
       const stripEl = $("caseStrip");
 
       const loop = (now) => {
         if (!this.active) return;
+        this.watch(now);
         const elapsed = now - this.landT0;
         const u = Math.min(1.0, elapsed / this.landDur);
 
-        // Quintic Smooth Ease-Out for 60 FPS
-        const eased = 1.0 - Math.pow(1.0 - u, 5);
+        const eased = 1.0 - Math.pow(1.0 - u, this.exp);
         this.pos = this.landFrom + this.landDist * eased;
 
         stripEl.style.transform = `translate3d(${-this.pos.toFixed(2)}px, 0, 0)`;
@@ -967,6 +1050,7 @@ try {
           this.lastIdx = idx;
           Sfx.tick(1.0 - u);
         }
+        this.markHot();
 
         if (u >= 1.0) {
           cancelAnimationFrame(this.raf);
@@ -982,6 +1066,11 @@ try {
       this.raf = requestAnimationFrame(loop);
     },
 
+    skip() {
+      if (!this.delivered || this.revealed || !this.raf) return;
+      this.landT0 = performance.now() - this.landDur;
+    },
+
     reveal(result) {
       if (this.revealed) return;
       this.revealed = true;
@@ -994,6 +1083,14 @@ try {
 
       action("case.claim", "");
       const col = this.color(result.rarity);
+      const kidsHot = $("caseStrip").children[this.hotIdx];
+      if (kidsHot) kidsHot.classList.remove("hot");
+      const modalNode = document.querySelector(".case-modal");
+      if (modalNode && this.rank(result.rarity) >= 2) {
+        modalNode.style.setProperty("--rc", col + "aa");
+        void modalNode.offsetWidth;
+        modalNode.classList.add(this.rank(result.rarity) >= 4 ? "shake" : "pulse");
+      }
       try {
         const strip = $("caseStrip");
         if (this.resultIndex >= 0 && strip.children[this.resultIndex]) {
@@ -1030,14 +1127,15 @@ try {
 
       this.bindActions("done");
 
-      if (result.rarity === "epic" || result.rarity === "legendary" || result.rarity === "mythic" || result.rarity === "exotic") {
-        this.confetti(col);
+      if (this.rank(result.rarity) >= 3) {
+        this.confetti(col, this.rank(result.rarity) >= 4 ? 60 : 30);
       }
     },
 
-    confetti(col) {
+    confetti(col, count) {
+      if (this.lite) count = Math.ceil(count / 2);
       const palette = [col, "#2fe0c0", "#3b9dff", "#f5c25b", "#ff4f79", "#ffffff"];
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < count; i++) {
         const s = document.createElement("i");
         s.className = "confetti";
         s.style.background = palette[i % palette.length];

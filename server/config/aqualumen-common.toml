@@ -31,3 +31,17 @@
 	#Tabs shown in the sidebar, in order.
 	enabledTabs = ["profile", "store", "cases", "pass", "fishing", "atlas", "events", "auction", "kits", "warps", "tops", "settings"]
 
+#Server-wide announcements for rare drops
+[announce]
+	#Broadcast epic/legendary case drops to the whole server.
+	caseDrops = true
+	#Lowest announced rarity: common | rare | epic | legendary.
+	minRarity = "epic"
+	#Minimum gap between two announcements, seconds.
+	#Range: 0 ~ 600
+	cooldownSeconds = 15
+	#Play a chime to everyone when a drop is announced.
+	sound = true
+	#Discord webhook for rare drops. Empty = disabled.
+	discordWebhookUrl = ""
+

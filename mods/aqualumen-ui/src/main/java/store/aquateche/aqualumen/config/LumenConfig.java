@@ -38,6 +38,11 @@ public final class LumenConfig {
         public final ForgeConfigSpec.ConfigValue<String> gemsObjective;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> ranks;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> enabledTabs;
+        public final ForgeConfigSpec.BooleanValue announceCaseDrops;
+        public final ForgeConfigSpec.ConfigValue<String> announceMinRarity;
+        public final ForgeConfigSpec.IntValue announceCooldownSeconds;
+        public final ForgeConfigSpec.BooleanValue announceSound;
+        public final ForgeConfigSpec.ConfigValue<String> announceDiscordWebhook;
 
         Common(ForgeConfigSpec.Builder b) {
             b.comment("AquaLumen UI - server side settings").push("hub");
@@ -71,6 +76,19 @@ public final class LumenConfig {
                             "\u041b\u0435\u0433\u0435\u043d\u0434\u0430:60:F5C25B"), o -> o instanceof String);
             enabledTabs = b.comment("Tabs shown in the sidebar, in order.")
                     .defineList("enabledTabs", List.of("profile", "store", "cases", "pass", "fishing", "atlas", "events", "auction", "kits", "warps", "tops", "settings"), o -> o instanceof String);
+            b.pop();
+
+            b.comment("Server-wide announcements for rare drops").push("announce");
+            announceCaseDrops = b.comment("Broadcast epic/legendary case drops to the whole server.")
+                    .define("caseDrops", true);
+            announceMinRarity = b.comment("Lowest announced rarity: common | rare | epic | legendary.")
+                    .define("minRarity", "epic");
+            announceCooldownSeconds = b.comment("Minimum gap between two announcements, seconds.")
+                    .defineInRange("cooldownSeconds", 15, 0, 600);
+            announceSound = b.comment("Play a chime to everyone when a drop is announced.")
+                    .define("sound", true);
+            announceDiscordWebhook = b.comment("Discord webhook for rare drops. Empty = disabled.")
+                    .define("discordWebhookUrl", "");
             b.pop();
         }
     }
