@@ -100,6 +100,16 @@ public class SynthesizerBlockEntity extends BaseMachineBlockEntity {
                     "minecraft:iron_ingot", 1,
                     "aquatech_machines:volcanic_crystal", 1,
                     "Железо + Кварц + Лава → 4x Незерский кирпич + Слиток железа (+Кристалл)"
+            ),
+            // Нефть без нефтяных месторождений: соль из Батиметрической Центрифуги
+            // + базальт + лава. Нефть — только бонус Зелёной Зоны (60..85%),
+            // то есть темп добычи игрок контролирует давлением, а не циклом.
+            new SynthRecipe(
+                    "aquatech_machines:sea_salt", "minecraft:basalt",
+                    "minecraft:obsidian", 1,
+                    "minecraft:magma_cream", 1,
+                    "industrialupgrade:bucket/sour_light_oil", 1,
+                    "Морская соль + Базальт + Лава → Обсидиан + Сгусток магмы (+Бонус: Ведро кислой лёгкой нефти)"
             )
     );
 

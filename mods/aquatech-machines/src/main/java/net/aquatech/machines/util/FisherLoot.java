@@ -33,13 +33,16 @@ public final class FisherLoot {
             new Entry("minecraft:lapis_ore", 9, 1, 2),
             new Entry("industrialupgrade:baseore/spinel", 8, 1, 2),
             new Entry("industrialupgrade:baseore2/strontium", 8, 1, 2),
-            new Entry("industrialupgrade:baseore2/barium", 8, 1, 2)
+            new Entry("industrialupgrade:baseore2/barium", 8, 1, 2),
+            new Entry("industrialupgrade:baseore/magnesium", 7, 1, 2)
     );
     private static final List<Entry> T5 = List.of(
             new Entry("industrialupgrade:baseore/silver", 8, 1, 2),
             new Entry("industrialupgrade:baseore/nickel", 8, 1, 2),
             new Entry("industrialupgrade:baseore/aluminium", 8, 1, 2),
-            new Entry("minecraft:obsidian", 7, 1, 2)
+            new Entry("minecraft:obsidian", 7, 1, 2),
+            new Entry("industrialupgrade:fluorapatite", 6, 1, 1),
+            new Entry("industrialupgrade:calcium_phosphate", 6, 1, 1)
     );
     private static final List<Entry> T7 = List.of(
             new Entry("industrialupgrade:baseore/tungsten", 8, 1, 2),
@@ -49,14 +52,22 @@ public final class FisherLoot {
             new Entry("ae2:certus_quartz_crystal", 8, 1, 2),
             new Entry("ae2:sky_stone_block", 7, 1, 2),
             new Entry("ae2:sky_dust", 6, 1, 2),
-            new Entry("ae2:fluix_crystal", 5, 1, 1)
+            new Entry("ae2:fluix_crystal", 5, 1, 1),
+            new Entry("industrialupgrade:classicore/lead", 6, 1, 2)
+    );
+    private static final List<Entry> T8 = List.of(
+            new Entry("industrialupgrade:baseore/sulfur", 7, 1, 2),
+            new Entry("industrialupgrade:baseore/mikhail", 6, 1, 1),
+            new Entry("industrialupgrade:baseore/germanium", 6, 1, 1)
     );
     private static final List<Entry> T9 = List.of(
             new Entry("industrialupgrade:baseore/titanium", 8, 1, 2),
             new Entry("industrialupgrade:baseore/cobalt", 8, 1, 2),
             new Entry("minecraft:diamond_ore", 7, 1, 2),
             new Entry("industrialupgrade:alloyingot/stainless_steel", 6, 1, 1),
-            new Entry("industrialupgrade:preciousgem/ruby_gem", 5, 1, 2)
+            new Entry("industrialupgrade:preciousgem/ruby_gem", 5, 1, 2),
+            new Entry("industrialupgrade:baseore/zirconium", 6, 1, 1),
+            new Entry("industrialupgrade:baseore/niobium", 6, 1, 1)
     );
     private static final List<Entry> T11 = List.of(
             new Entry("industrialupgrade:baseore/platinum", 7, 1, 2),
@@ -143,6 +154,7 @@ public final class FisherLoot {
         if (tier >= 3) pool.addAll(T3);
         if (tier >= 5) pool.addAll(T5);
         if (tier >= 7) pool.addAll(T7);
+        if (tier >= 8) pool.addAll(T8);
         if (tier >= 9) pool.addAll(T9);
         if (tier >= 11) pool.addAll(T11);
         if (tier >= 13) pool.addAll(T13);
