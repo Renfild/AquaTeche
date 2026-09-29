@@ -353,8 +353,26 @@
       };
       activate(0);
 
-      if (window.matchMedia("(min-width: 981px)").matches) {
+      /* A tab switch or theme flip can leave the pinned stage showing a stale
+         paint of another scene; rebuild the active panel from scratch. */
+      const repaint = () => {
+        const index = Number(stage.dataset.active) || 0;
+        panels.forEach((panel) => panel.classList.remove("is-active"));
+        void stage.offsetHeight;
+        activate(index);
+      };
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) repaint();
+      });
+      window.addEventListener("pageshow", repaint);
+      new MutationObserver(repaint).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+      /* Pin and swap scenes only on wide screens. matchMedia re-runs this when
+         the window crosses the breakpoint, so a resize never strands the stage
+         with every panel active. */
+      gsap.matchMedia().add("(min-width: 981px)", () => {
         let current = 0;
+        activate(0);
         ScrollTrigger.create({
           trigger: stage,
           start: "top 22%",
@@ -375,9 +393,7 @@
             activate(0);
           },
         });
-      } else {
-        panels.forEach((panel) => panel.classList.add("is-active"));
-      }
+      });
     }
 
     setupSpotlight();

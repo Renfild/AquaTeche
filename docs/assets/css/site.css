@@ -11502,11 +11502,11 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 }
 
 html:not([data-theme="dark"]) body::before {
-  background-color: #ffffff;
+  background-color: var(--surface);
   background-image:
     radial-gradient(ellipse 70% 45% at 78% 6%, rgba(196, 181, 253, 0.3), transparent 62%),
     radial-gradient(ellipse 60% 40% at 10% 20%, rgba(255, 228, 236, 0.55), transparent 60%),
-    linear-gradient(180deg, #ffffff 0%, #fbfbfd 58%, #f6f6f9 100%);
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 60%, var(--bg-3) 100%);
 }
 
 html:not([data-theme="dark"]) .site-header {
@@ -11527,7 +11527,7 @@ html:not([data-theme="dark"]) .nav-desktop a:hover {
 }
 
 html:not([data-theme="dark"]) .btn-secondary {
-  background: #ffffff;
+  background: var(--surface);
 }
 
 html:not([data-theme="dark"]) .btn-primary {
@@ -11555,14 +11555,14 @@ html:not([data-theme="dark"]) .hero-bg {
     radial-gradient(ellipse 58% 46% at 74% 16%, rgba(196, 181, 253, 0.55), transparent 62%),
     radial-gradient(ellipse 46% 38% at 18% 12%, rgba(244, 194, 224, 0.4), transparent 64%),
     linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(247, 245, 251, 0.86) 100%),
-    linear-gradient(165deg, #fbfaff 0%, #f3f0fa 52%, #ece7f7 100%);
+    linear-gradient(165deg, var(--surface) 0%, var(--surface-2) 52%, var(--bg-2) 100%);
 }
 html:not([data-theme="dark"]) body::before {
   background-color: var(--bg);
   background-image:
     radial-gradient(ellipse 70% 45% at 82% 4%, rgba(196, 181, 253, 0.28), transparent 62%),
     radial-gradient(ellipse 58% 40% at 8% 18%, rgba(251, 207, 232, 0.34), transparent 62%),
-    linear-gradient(180deg, #fbfaff 0%, var(--bg) 55%, var(--bg-2) 100%);
+    linear-gradient(180deg, var(--surface) 0%, var(--bg) 55%, var(--bg-2) 100%);
 }
 html:not([data-theme="dark"]) .site-footer {
   background: var(--bg-2);
@@ -11801,17 +11801,24 @@ html:not([data-theme="dark"]) :is(.tag, .meta-tag, .online-pill) {
   border: 1px solid var(--line);
   border-radius: 26px;
   box-shadow: var(--shadow);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(18px);
-  transition: opacity .16s linear, transform .16s linear, visibility 0s linear .16s;
+  display: none;
+  isolation: isolate;
 }
 
 .story-panel.is-active {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  transition: opacity .45s var(--ease) .14s, transform .45s var(--ease) .14s, visibility 0s;
+  display: grid;
+  animation: story-panel-in .45s var(--ease) both;
+}
+
+@keyframes story-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .story-panel-visual {
@@ -12025,9 +12032,7 @@ html:not([data-theme="dark"]) :is(.tag, .meta-tag, .online-pill) {
 
   .story-panel {
     position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
+    display: grid;
   }
 
   .story-panel + .story-panel {
@@ -12041,11 +12046,22 @@ html:not([data-theme="dark"]) :is(.tag, .meta-tag, .online-pill) {
     animation: none !important;
   }
 
+  .story-stage {
+    min-height: 0;
+  }
+
   .story-panel {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    transition: none;
+    position: static;
+    display: grid;
+    animation: none;
+  }
+
+  .story-panel + .story-panel {
+    margin-top: 1rem;
+  }
+
+  .story-counter {
+    display: none;
   }
 }
 
@@ -12055,7 +12071,7 @@ html:not([data-theme="dark"]) :is(.tag, .meta-tag, .online-pill) {
   background:
     radial-gradient(ellipse 60% 48% at 76% 14%, rgba(196, 181, 253, 0.5), transparent 62%),
     radial-gradient(ellipse 48% 40% at 16% 14%, rgba(244, 194, 224, 0.36), transparent 64%),
-    linear-gradient(168deg, #fbfaff 0%, #f2effa 54%, #eae5f6 100%);
+    linear-gradient(168deg, var(--surface) 0%, var(--surface-2) 54%, var(--bg-2) 100%);
 }
 
 .glass-canvas {
@@ -12359,7 +12375,7 @@ html:not([data-theme="dark"]) .hero-bg {
   background-image:
     radial-gradient(ellipse 65% 50% at 72% 10%, rgba(221, 214, 254, 0.7), transparent 60%),
     linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(247, 247, 250, 0.9) 100%),
-    linear-gradient(165deg, #ffffff 0%, #f8f7fc 55%, #f2f1f8 100%);
+    linear-gradient(165deg, var(--surface) 0%, var(--surface-2) 55%, var(--surface-2) 100%);
 }
 
 html:not([data-theme="dark"]) .hero-caustic,
@@ -12395,13 +12411,13 @@ html:not([data-theme="dark"]) .hero-card::after {
 }
 
 html:not([data-theme="dark"]) .card {
-  background: #ffffff;
+  background: var(--surface);
   box-shadow: 0 18px 44px rgba(11, 11, 13, 0.07);
   backdrop-filter: none;
 }
 
 html:not([data-theme="dark"]) .site-footer {
-  background: #f7f7f9;
+  background: var(--surface-2);
 }
 
 html:not([data-theme="dark"]) .header-account-panel,
@@ -12471,7 +12487,7 @@ html:not([data-theme="dark"]) .rod-ladder,
 html:not([data-theme="dark"]) .feature-card,
 html:not([data-theme="dark"]) .start-step-card,
 html:not([data-theme="dark"]) .news-item {
-  background: #ffffff;
+  background: var(--surface);
   border-color: var(--line);
   color: var(--text);
   box-shadow: 0 18px 44px rgba(11, 11, 13, 0.07);
@@ -12564,7 +12580,7 @@ html:not([data-theme="dark"]) :is(
   .loot-table-wrap,
   .market-pill-btn
 ) {
-  background: #ffffff;
+  background: var(--surface);
   border-color: var(--line);
   color: var(--text);
   box-shadow: none;
@@ -12608,7 +12624,7 @@ html:not([data-theme="dark"]) :is(
 }
 
 html:not([data-theme="dark"]) .market-search-input {
-  background: #ffffff;
+  background: var(--surface);
   border-color: var(--line);
   color: var(--text);
 }
@@ -12633,7 +12649,7 @@ html:not([data-theme="dark"]) .online-pill {
 }
 
 html:not([data-theme="dark"]) .podium-avatar-img {
-  background: #f1f1f5;
+  background: var(--surface-2);
 }
 
 html:not([data-theme="dark"]) :is(.status-chart, .loot-table-wrap, .spec-list) :is(th, td) {
@@ -12641,7 +12657,7 @@ html:not([data-theme="dark"]) :is(.status-chart, .loot-table-wrap, .spec-list) :
 }
 
 html:not([data-theme="dark"]) :is(th.col-feature, th.col-rank) {
-  background: #f7f7f9;
+  background: var(--surface-2);
   color: var(--text);
 }
 
@@ -12667,12 +12683,12 @@ html:not([data-theme="dark"]) .status-down-bar {
 
 html:not([data-theme="dark"]) .status-chart,
 html:not([data-theme="dark"]) .status-chart-legend {
-  background: #ffffff;
+  background: var(--surface);
 }
 
 html:not([data-theme="dark"]) .anchor-nav,
 html:not([data-theme="dark"]) .loot-jump {
-  background: #ffffff;
+  background: var(--surface);
   border-color: var(--line);
   color: var(--text);
 }
@@ -12725,7 +12741,7 @@ html:not([data-theme="dark"]) .start-hero .hero-bg {
   background-image:
     radial-gradient(ellipse 65% 50% at 72% 10%, rgba(221, 214, 254, 0.7), transparent 60%),
     linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(247, 247, 250, 0.9) 100%),
-    linear-gradient(165deg, #ffffff 0%, #f8f7fc 55%, #f2f1f8 100%);
+    linear-gradient(165deg, var(--surface) 0%, var(--surface-2) 55%, var(--surface-2) 100%);
 }
 html:not([data-theme="dark"]) :is(
   .store-rank-card,
@@ -12740,7 +12756,7 @@ html:not([data-theme="dark"]) :is(
   .podium-card,
   .status-chart-card
 ) {
-  background: #ffffff;
+  background: var(--surface);
   background-image: none;
   border-color: var(--line);
   color: var(--text);
@@ -12775,4 +12791,2176 @@ html:not([data-theme="dark"]) :is(
   .status-chart-card
 ) :is(h1, h2, h3, h4, strong, b) {
   color: var(--text);
+}
+
+/* === light-pastel:start (pastel light theme; generated once from the dark-origin rules, edit freely) === */
+html:not([data-theme="dark"]) .online-pill {
+  background: var(--surface-2);
+}
+html:not([data-theme="dark"]) .nav-desktop a:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .nav-desktop a.nav-cta.active {
+  box-shadow: 0 0 0 2px rgba(214, 51, 108, 0.21), 0 10px 26px rgba(240, 193, 74, 0.35);
+}
+html:not([data-theme="dark"]) .btn-secondary {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .btn-aqua {
+  background: linear-gradient(135deg, rgba(212, 45, 115, 1), rgba(171, 24, 85, 1));
+  box-shadow: 0 10px 28px rgba(214, 51, 108, 0.17);
+}
+html:not([data-theme="dark"]) .btn-aqua:hover {
+  box-shadow: 0 14px 34px rgba(214, 51, 108, 0.24);
+}
+html:not([data-theme="dark"]) .mobile-nav {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .mobile-nav a.active,
+html:not([data-theme="dark"]) .mobile-nav a:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .hero-horizon {
+  box-shadow: 0 0 36px 6px rgba(214, 51, 108, 0.06);
+}
+html:not([data-theme="dark"]) .hero-lead {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .ip-box {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .ip-box:hover {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .tag {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .tile-icon {
+  color: var(--aqua);
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .tile:hover .tile-icon,
+html:not([data-theme="dark"]) .tile:focus .tile-icon {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 24px rgba(214, 51, 108, 0.11);
+}
+html:not([data-theme="dark"]) .join-panel {
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+}
+html:not([data-theme="dark"]) .banner {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  box-shadow: 0 0 60px rgba(214, 51, 108, 0.07);
+}
+html:not([data-theme="dark"]) .tab.active {
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .top-row img {
+  background: var(--surface-2);
+}
+html:not([data-theme="dark"]) .badge {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .field input,
+html:not([data-theme="dark"]) .field select,
+html:not([data-theme="dark"]) .field textarea {
+  background: var(--surface-2);
+}
+html:not([data-theme="dark"]) .field input:focus,
+html:not([data-theme="dark"]) .field select:focus,
+html:not([data-theme="dark"]) .field textarea:focus {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.07);
+}
+html:not([data-theme="dark"]) .loot-table th {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .toast {
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .modal-card {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .admin-nav button:hover {
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .admin-nav button.is-active {
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .admin-nav-count {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .admin-nav button.is-active .admin-nav-count {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .admin-toolbar {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .admin-card-head {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .admin-stat {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .admin-table th {
+  background: var(--surface-2);
+}
+html:not([data-theme="dark"]) .admin-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .admin-table input,
+html:not([data-theme="dark"]) .admin-table textarea,
+html:not([data-theme="dark"]) .admin-table select {
+  background: var(--surface-2);
+}
+html:not([data-theme="dark"]) .admin-modal-card {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .sound-toggle {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .sound-toggle[aria-pressed="true"] {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) body.embed .embed-buy {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .rank-member {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .rank-diver {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--aqua);
+  box-shadow: 0 0 10px rgba(214, 51, 108, 0.18);
+}
+html:not([data-theme="dark"]) .rank-poseidon {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) body.embed {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .embed-bar {
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .embed-bar h1 {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .embed-bar button#embed-close {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .embed-bar button#embed-close:hover {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .embed-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .embed-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 16px 40px rgba(214, 51, 108, 0.12);
+}
+html:not([data-theme="dark"]) .embed-price {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .embed-price .rub {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .card-perks li {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .card-perks li .bullet {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .btn-tier {
+  background: linear-gradient(135deg, rgba(223, 32, 112, 1) 0%, rgba(223, 32, 112, 1) 100%);
+}
+html:not([data-theme="dark"]) .btn-tier:hover {
+  box-shadow: 0 0 24px rgba(214, 51, 108, 0.24);
+}
+html:not([data-theme="dark"]) .avatar-card {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .player-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .rank-pill {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .online-indicator {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .stat-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .stat-card:hover {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .stat-icon {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .stat-value {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .stat-unit {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .stat-label {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .btn-action.primary {
+  background: linear-gradient(135deg, rgba(223, 32, 112, 1) 0%, rgba(223, 32, 112, 1) 100%);
+}
+html:not([data-theme="dark"]) .btn-action.primary:hover {
+  box-shadow: 0 0 24px rgba(214, 51, 108, 0.24);
+}
+html:not([data-theme="dark"]) .btn-action.secondary {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .btn-action.secondary:hover {
+  background: var(--surface-hover);
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .menu-btn {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .menu-btn:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .mobile-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 20px 40px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .mobile-nav-status {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .mobile-nav a {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .mobile-nav a.active,
+html:not([data-theme="dark"]) .mobile-nav a:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .mobile-nav button {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .mobile-nav button:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .loot-sticky-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 10px 30px -10px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .loot-jump {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .loot-jump::-webkit-scrollbar-thumb {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .loot-jump a {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .loot-jump a:hover,
+html:not([data-theme="dark"]) .loot-jump a.active {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--text);
+  box-shadow: 0 0 14px rgba(214, 51, 108, 0.21);
+}
+html:not([data-theme="dark"]) .loot-search-box input {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  box-shadow: inset 0 2px 4px rgba(110, 30, 70, 0.14);
+}
+html:not([data-theme="dark"]) .loot-search-box input:focus {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 20px rgba(214, 51, 108, 0.18), inset 0 2px 4px rgba(110, 30, 70, 0.14);
+}
+html:not([data-theme="dark"]) .back-to-top {
+  background: linear-gradient(135deg, rgba(138, 20, 69, 1), rgba(191, 27, 95, 1));
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 8px 24px rgba(110, 30, 70, 0.16), 0 0 16px rgba(214, 51, 108, 0.24);
+}
+html:not([data-theme="dark"]) .back-to-top:hover {
+  box-shadow: 0 12px 30px rgba(110, 30, 70, 0.16), 0 0 24px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .loot-block {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 32px rgba(110, 30, 70, 0.14);
+}
+html:not([data-theme="dark"]) .loot-block:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16), 0 0 20px rgba(214, 51, 108, 0.07);
+}
+html:not([data-theme="dark"]) .rod-tier {
+  border: 1px solid var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .loot-table-wrap {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .loot-table th {
+  background: var(--fill);
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .loot-table td {
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .loot-table tbody tr:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .loot-table td:first-child {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .loot-rules li::before {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .catalog-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 32px rgba(110, 30, 70, 0.14);
+}
+html:not([data-theme="dark"]) .catalog-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 20px 48px rgba(110, 30, 70, 0.16), 0 0 24px rgba(214, 51, 108, 0.15);
+}
+html:not([data-theme="dark"]) .catalog-card h3 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .ip-box.copied {
+  border-color: var(--line-strong) !important;
+  background: var(--accent-soft);
+  box-shadow: 0 0 24px rgba(214, 51, 108, 0.21), inset 0 0 12px rgba(214, 51, 108, 0.09) !important;
+}
+html:not([data-theme="dark"]) .ip-box.copied .copy {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .loot-modal-card {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 24px 60px rgba(110, 30, 70, 0.16), 0 0 30px rgba(214, 51, 108, 0.12);
+}
+html:not([data-theme="dark"]) .loot-modal-header {
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .loot-modal-header h3 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .loot-modal-close {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .loot-modal-close:hover {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .loot-item-row {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .loot-item-row:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .loot-item-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .rarity-common {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .rarity-rare {
+  background: var(--accent-soft);
+  color: var(--aqua);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .rarity-legendary {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .loot-item-chance {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .sys-req-item {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .sys-req-item strong {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .profile-cover {
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .profile-cover.ocean {
+  background: linear-gradient(135deg, #cfe8ff, #e7dcff);
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .profile-cover.deep {
+  background: linear-gradient(135deg, #d3d9ff, #f0d7f5);
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .profile-cover.storm {
+  background: linear-gradient(135deg, #d9dcec, #eadcf0);
+}
+html:not([data-theme="dark"]) .profile-cover.abyss {
+  background: linear-gradient(135deg, #d5d3f7, #f4d5e6);
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16), 0 0 30px rgba(168, 85, 247, 0.15);
+}
+html:not([data-theme="dark"]) .profile-cover.magma {
+  background: linear-gradient(135deg, #ffd9cc, #ffe6bd);
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16), 0 0 35px rgba(249, 115, 22, 0.2);
+}
+html:not([data-theme="dark"]) .profile-cover.celestial {
+  background: linear-gradient(135deg, #e6d6ff, #ffd6ea);
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16), 0 0 35px rgba(234, 179, 8, 0.18);
+}
+html:not([data-theme="dark"]) .profile-cover.cyber {
+  background: linear-gradient(135deg, #c9f0e4, #d3e4ff);
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16), 0 0 35px rgba(214, 51, 108, 0.12);
+}
+html:not([data-theme="dark"]) .profile-cover.aurora {
+  background: linear-gradient(135deg, #cdf2dc, #e2d6ff);
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16), 0 0 35px rgba(214, 51, 108, 0.12);
+}
+html:not([data-theme="dark"]) .profile-avatar {
+  border: 3px solid var(--line);
+  box-shadow: 0 8px 24px rgba(110, 30, 70, 0.14);
+}
+html:not([data-theme="dark"]) .profile-meta h1 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .profile-status-badge {
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .profile-bio {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .btn-like {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .btn-like.liked {
+  color: var(--danger);
+}
+html:not([data-theme="dark"]) .btn-like .heart-icon {
+  color: var(--danger);
+}
+html:not([data-theme="dark"]) .btn-like:not(.liked) .heart-icon {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .social-chip {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .social-chip:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .fav-rod-badge {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .theme-pill-content {
+  border: 1px solid var(--line);
+  background: var(--fill);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .theme-pill input:checked + .theme-pill-content {
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+  color: var(--text);
+  box-shadow: 0 0 16px rgba(214, 51, 108, 0.15);
+}
+html:not([data-theme="dark"]) .badge-card {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .badge-card .badge-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .badge-card.rare {
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+  box-shadow: 0 4px 16px rgba(214, 51, 108, 0.05);
+}
+html:not([data-theme="dark"]) .badge-card.rare .badge-title {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .badge-card.legendary .badge-title {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .badge-card.special .badge-title {
+  color: var(--ok);
+}
+html:not([data-theme="dark"]) .hero-status-pill {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 8px 24px rgba(110, 30, 70, 0.1);
+}
+html:not([data-theme="dark"]) .gradient-aqua {
+  background: linear-gradient(135deg, rgba(229, 75, 139, 1), rgba(212, 45, 115, 1) 60%, rgba(238, 139, 180, 1));
+}
+html:not([data-theme="dark"]) .start-step-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 32px rgba(110, 30, 70, 0.14);
+}
+html:not([data-theme="dark"]) .start-step-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 20px 45px rgba(110, 30, 70, 0.16), 0 0 25px rgba(214, 51, 108, 0.06);
+}
+html:not([data-theme="dark"]) .start-step-card.featured {
+  border-color: var(--line-strong);
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16), 0 0 35px rgba(214, 51, 108, 0.09);
+}
+html:not([data-theme="dark"]) .step-badge {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .step-badge.accent {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .start-card-content h3 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .btn-download-main {
+  background: linear-gradient(135deg, rgba(216, 31, 108, 1), rgba(191, 27, 95, 1) 60%, rgba(176, 25, 88, 1));
+  box-shadow: 0 8px 24px rgba(214, 51, 108, 0.21);
+}
+html:not([data-theme="dark"]) .btn-download-main:hover {
+  box-shadow: 0 12px 30px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .platform-link {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .platform-link:hover {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .props-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .props-card.recommended {
+  border-color: var(--line-strong);
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+}
+html:not([data-theme="dark"]) .props-card-header h3 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .props-badge {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .props-badge.highlight {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .props-row {
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .props-val {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .props-notice-box {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .icon-circle {
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .nav-more[open] > summary,
+html:not([data-theme="dark"]) .nav-more > summary:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .nav-more-panel {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .lk-hero-id img {
+  border: 2px solid var(--line-strong);
+  background: var(--surface-2);
+}
+html:not([data-theme="dark"]) .lk-balance-card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(110, 30, 70, 0.09);
+}
+html:not([data-theme="dark"]) .lk-balance-card:hover {
+  box-shadow: 0 12px 30px rgba(110, 30, 70, 0.12);
+}
+html:not([data-theme="dark"]) .lk-balance-card.card-rubles {
+  border-color: var(--line-strong);
+  background: linear-gradient(160deg, #e2f6ee, #d3efe4);
+}
+html:not([data-theme="dark"]) .lk-balance-card.card-rubles:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 12px 32px rgba(214, 51, 108, 0.15);
+}
+html:not([data-theme="dark"]) .lk-balance-card.card-coins {
+  background: linear-gradient(160deg, #fff1d2, #ffe4b5);
+}
+html:not([data-theme="dark"]) .lk-balance-card.card-fish {
+  border-color: var(--line-strong);
+  background: linear-gradient(160deg, #e3efff, #d5e4fb);
+}
+html:not([data-theme="dark"]) .lk-balance-card.card-fish:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 12px 32px rgba(214, 51, 108, 0.12);
+}
+html:not([data-theme="dark"]) .lk-balance-card.card-rubles strong {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .lk-balance-card.card-coins strong {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .lk-balance-card.card-fish strong {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .lk-nav {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .lk-nav a:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .lk-nav a[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--aqua);
+  box-shadow: inset 0 0 0 1px rgba(214, 51, 108, 0.17);
+}
+html:not([data-theme="dark"]) .look-card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .look-preview {
+  border: 1px dashed var(--line-strong);
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+}
+html:not([data-theme="dark"]) .look-preview.is-over {
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .skin-zoom-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+}
+html:not([data-theme="dark"]) .skin-zoom-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .case-card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .case-card:hover {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .case-top li {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .rarity-uncommon {
+  color: var(--ok);
+}
+html:not([data-theme="dark"]) .rarity-mythic {
+  color: var(--danger);
+}
+html:not([data-theme="dark"]) .roulette-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 25px 60px rgba(110, 30, 70, 0.16), 0 0 50px rgba(214, 51, 108, 0.07);
+}
+html:not([data-theme="dark"]) .roulette-reel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .roulette-marker {
+  background: linear-gradient(to bottom, rgba(224, 47, 121, 1), #f5c25b, rgba(224, 47, 121, 1));
+  box-shadow: 0 0 14px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .roulette-tile {
+  border-right: 1px solid var(--line);
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .roulette-tile.win {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .roulette-tile-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .raft-deck {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 2px solid var(--line-strong);
+  box-shadow: 0 16px 32px rgba(110, 30, 70, 0.16), inset 0 2px 6px rgba(214, 51, 108, 0.18);
+}
+html:not([data-theme="dark"]) .core-crystal {
+  background: linear-gradient(135deg, rgba(224, 47, 121, 1), rgba(230, 84, 145, 1));
+  box-shadow: 0 0 25px rgba(214, 51, 108, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.6);
+}
+html:not([data-theme="dark"]) .core-ring {
+  border: 2px dashed var(--line-strong);
+}
+html:not([data-theme="dark"]) .rig-line {
+  background: linear-gradient(to bottom, rgba(224, 47, 121, 0.9), transparent);
+}
+html:not([data-theme="dark"]) .raft-water-splash {
+  border: 1.5px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .hero-chip {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 10px 25px -4px rgba(110, 30, 70, 0.16), 0 0 16px -2px rgba(214, 51, 108, 0.12);
+}
+html:not([data-theme="dark"]) .hero-chip b {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .chip-pulse {
+  box-shadow: 0 0 10px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .bento-live-badge {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .bento-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 36px -8px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .bento-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 20px 48px -12px rgba(110, 30, 70, 0.16),
+              0 0 28px -4px rgba(214, 51, 108, 0.11);
+}
+html:not([data-theme="dark"]) .bento-icon {
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .bento-title-group h3 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .radar-scope-wrapper {
+  border: 1.5px solid var(--line-strong);
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  box-shadow: inset 0 0 16px rgba(214, 51, 108, 0.15), 0 0 12px rgba(214, 51, 108, 0.09);
+}
+html:not([data-theme="dark"]) .radar-ring {
+  border: 1px dashed var(--line);
+}
+html:not([data-theme="dark"]) .radar-center {
+  box-shadow: 0 0 8px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .radar-lead-item {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .radar-lead-item:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .lead-avatar {
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .lead-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .bento-trend-item {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .trend-fish-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .market-lot-card {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .lot-item-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .event-mini-status {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .event-mini-head b {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .event-dot {
+  box-shadow: 0 0 8px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .event-mini-badge {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .quick-connect-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 40px -10px rgba(110, 30, 70, 0.16), 0 0 20px -2px rgba(214, 51, 108, 0.11);
+}
+html:not([data-theme="dark"]) .qc-system-icon {
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .qc-system-text strong {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .qc-ping-indicator {
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .ping-dot {
+  box-shadow: 0 0 8px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .qc-ip-wrapper {
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .qc-ip-text {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .qc-ver-chip {
+  background: var(--accent-soft);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .btn-copy-ip {
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  box-shadow: 0 4px 14px rgba(214, 51, 108, 0.11);
+}
+html:not([data-theme="dark"]) .btn-copy-ip:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 6px 20px rgba(214, 51, 108, 0.18);
+}
+html:not([data-theme="dark"]) .btn-copy-ip.copied {
+  color: var(--ok);
+}
+html:not([data-theme="dark"]) .holo-terminal-glass {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 20px 50px -10px rgba(110, 30, 70, 0.16),
+              0 0 30px -5px rgba(214, 51, 108, 0.11),
+              inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+html:not([data-theme="dark"]) .holo-term-head {
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .holo-status-dot {
+  box-shadow: 0 0 10px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .holo-nav-tabs {
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .holo-tab:hover {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .holo-tab.active {
+  background: var(--accent-soft);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 2px 8px rgba(214, 51, 108, 0.15);
+}
+html:not([data-theme="dark"]) .holo-emitter-ring {
+  border: 1.5px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .holo-emitter-ring.r2 {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .holo-emitter-ring.r3 {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 16px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .holo-telemetry-badge {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 6px 18px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .holo-badge-val {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .holo-term-footer {
+  border-top: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .btn-sonar-pulse {
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(214, 51, 108, 0.09);
+}
+html:not([data-theme="dark"]) .btn-sonar-pulse:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 6px 18px rgba(214, 51, 108, 0.17);
+}
+html:not([data-theme="dark"]) .sonar-wave-ripple {
+  border: 2px solid var(--line-strong);
+  box-shadow: 0 0 25px rgba(214, 51, 108, 0.25), inset 0 0 15px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .rank-pill {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .rank-pill-2 {
+  background: linear-gradient(135deg, rgba(225, 203, 212, 1), #94a3b8);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 0 8px rgba(214, 51, 108, 0.21);
+}
+html:not([data-theme="dark"]) .hero-brand-text .hero-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .hero-showcase-card {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 20px 50px -10px rgba(110, 30, 70, 0.16),
+              0 0 30px -5px rgba(214, 51, 108, 0.11),
+              inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+html:not([data-theme="dark"]) .hero-showcase-card:hover {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .showcase-card-header {
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .showcase-ping-chip {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .showcase-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .showcase-stat-item {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .showcase-feat-row {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .radar-lead-item {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .radar-lead-item:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .lead-avatar {
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .lead-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .guide-stat {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .anchor-nav {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .anchor-nav a:hover,
+html:not([data-theme="dark"]) .anchor-nav a:focus-visible {
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .step-flow li {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .step-time {
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .loot-chip {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .checklist li {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .machine-card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .machine-card:hover {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .machine-icon {
+  border: 1px solid var(--line);
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .guide-accordion details {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .faq details {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .online-pill {
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface-2);
+  box-shadow: 0 0 12px rgba(214, 51, 108, 0.12);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .online-pill [data-online] {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .header-rubles {
+  border: 1.5px solid var(--line-strong);
+  box-shadow: 0 0 12px rgba(214, 51, 108, 0.12);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .header-rubles:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 16px rgba(214, 51, 108, 0.21);
+}
+html:not([data-theme="dark"]) .header-coins {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .aqua-coin-badge {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .coin-ico {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .subpage-hero .hero-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 16px 40px rgba(110, 30, 70, 0.16), 0 0 32px rgba(214, 51, 108, 0.05);
+}
+html:not([data-theme="dark"]) .subpage-hero .hero-card::before {
+  background: linear-gradient(90deg, transparent, rgba(224, 47, 121, 1), rgba(229, 75, 139, 1), transparent);
+}
+html:not([data-theme="dark"]) .subpage-hero h1 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .subpage-hero p {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .meta-tag {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .glass-notice-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .glass-notice-card .notice-icon {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .glass-notice-card h4 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .glass-notice-card p {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .store-rank-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .store-rank-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 14px 32px rgba(110, 30, 70, 0.14), 0 0 24px rgba(214, 51, 108, 0.09);
+}
+html:not([data-theme="dark"]) .store-rank-card.is-popular {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 28px rgba(214, 51, 108, 0.12);
+}
+html:not([data-theme="dark"]) .badge-sailor {
+  background: var(--accent-soft);
+  color: var(--aqua);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .badge-skipper {
+  background: var(--accent-soft);
+  color: var(--aqua);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .badge-captain {
+  background: var(--accent-soft);
+  color: var(--aqua);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .badge-admiral {
+  color: var(--accent-2);
+}
+html:not([data-theme="dark"]) .badge-legend {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .store-rank-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .store-rank-desc {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .store-price-row {
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .store-price-num {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .store-price-unit {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .perk-item-v2 {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .perk-check-ico {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .store-buy-btn {
+  background: linear-gradient(135deg, rgba(224, 47, 121, 1), rgba(179, 25, 89, 1));
+  box-shadow: 0 0 16px rgba(214, 51, 108, 0.21);
+}
+html:not([data-theme="dark"]) .store-buy-btn:hover {
+  box-shadow: 0 0 24px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .case-v2-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .case-v2-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 16px 36px rgba(110, 30, 70, 0.16), 0 0 28px rgba(214, 51, 108, 0.11);
+}
+html:not([data-theme="dark"]) .case-v2-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .case-v2-desc {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .case-v2-cost {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .btn-case-loot {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .btn-case-loot:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .btn-case-spin {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .market-controls-bar {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .market-search-input {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .market-search-input:focus {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .market-pill-btn {
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .market-pill-btn.active,
+html:not([data-theme="dark"]) .market-pill-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .market-lot-counter {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .lot-v2-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .lot-v2-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 10px 24px rgba(110, 30, 70, 0.12);
+}
+html:not([data-theme="dark"]) .lot-seller-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .lot-timer {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .lot-item-ico {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .lot-item-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .lot-footer {
+  border-top: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .lot-price-tag {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .apple-segment {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.28), 0 8px 24px rgba(110, 30, 70, 0.12);
+}
+html:not([data-theme="dark"]) .apple-segment-btn {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-segment-btn:hover {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-segment-btn.active {
+  background: var(--surface-hover);
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(110, 30, 70, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+html:not([data-theme="dark"]) .apple-badge-save {
+  background: linear-gradient(135deg, rgba(176, 25, 88, 1), rgba(136, 19, 68, 1));
+  box-shadow: 0 0 10px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .in-game-notice-card {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .notice-icon {
+  background: var(--accent-soft);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .notice-body h3 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .notice-body p {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .notice-pill {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .apple-matrix-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 48px rgba(110, 30, 70, 0.12);
+}
+html:not([data-theme="dark"]) .apple-matrix-header h2 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-matrix-header p {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-matrix-table-wrap {
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-matrix-table th,
+html:not([data-theme="dark"]) .apple-matrix-table td {
+  border-bottom: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-matrix-table thead th {
+  background: var(--surface-2);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-matrix-table tbody tr:hover td {
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .apple-matrix-table .col-feature,
+html:not([data-theme="dark"]) .apple-matrix-table .legend-col {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-matrix-table .highlight-col {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .m-check {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .m-val {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-trust-item {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-trust-item:hover {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .trust-ico {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .apple-trust-item h4 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-trust-item p {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-modal-box {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line);
+  box-shadow: 0 32px 64px rgba(110, 30, 70, 0.16), 0 0 48px rgba(214, 51, 108, 0.09);
+}
+html:not([data-theme="dark"]) .apple-modal-header h3 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-modal-subtitle {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-modal-close {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-modal-close:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-modal-field label {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-modal-input {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-modal-input:focus {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.12);
+}
+html:not([data-theme="dark"]) .apple-grabber {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .apple-segmented-pills {
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-pill-btn {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-pill-btn:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .apple-pill-btn.active {
+  background: var(--surface-hover);
+  color: var(--text);
+  box-shadow: 0 2px 10px rgba(110, 30, 70, 0.12);
+}
+html:not([data-theme="dark"]) .apple-amount-card {
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-amount-card:hover {
+  border-color: var(--line);
+}
+html:not([data-theme="dark"]) .apple-amount-card:focus-within {
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.15), 0 8px 24px rgba(110, 30, 70, 0.14);
+}
+html:not([data-theme="dark"]) .apple-amount-label {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-amount-hint {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-currency-symbol {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .apple-amount-number-input {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-amount-badge {
+  background: var(--fill);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-inset-group {
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-inset-row:hover {
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .apple-inset-row.active {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .apple-row-icon {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .apple-row-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-row-sub {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-check-circle {
+  border: 1.5px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-inset-row.active .apple-check-circle {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .apple-line-item {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-line-item.total {
+  color: var(--text);
+  border-top: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-line-item.total span:last-child {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .apple-primary-btn {
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.35);
+}
+html:not([data-theme="dark"]) .apple-notice-text {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-pay-method-card {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-pay-method-card:hover {
+  background: var(--surface-hover);
+  border-color: var(--line);
+}
+html:not([data-theme="dark"]) .apple-pay-method-card.active {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  box-shadow: 0 0 0 1px rgba(214, 51, 108, 0.25), 0 8px 24px -4px rgba(214, 51, 108, 0.13);
+}
+html:not([data-theme="dark"]) .apple-pay-icon-box {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-pay-method-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-pay-badge.badge-green {
+  background: var(--accent-soft);
+  color: var(--ok);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .apple-pay-badge.badge-cyan {
+  background: var(--accent-soft);
+  color: var(--aqua);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .apple-pay-badge.badge-amber {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .apple-pay-badge.badge-muted {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-pay-method-sub {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-pay-method-radio {
+  border: 2px solid var(--line);
+}
+html:not([data-theme="dark"]) .apple-pay-method-card.active .apple-pay-method-radio {
+  border-color: var(--line-strong);
+  box-shadow: 0 0 10px rgba(214, 51, 108, 0.24);
+}
+html:not([data-theme="dark"]) .apple-modal-total-card {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .apple-modal-total-label {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .apple-modal-total-price {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-modal-submit-btn {
+  background: linear-gradient(135deg, rgba(224, 47, 121, 1), rgba(179, 25, 89, 1));
+  box-shadow: 0 4px 20px rgba(214, 51, 108, 0.24);
+}
+html:not([data-theme="dark"]) .apple-modal-submit-btn:hover {
+  box-shadow: 0 6px 28px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .apple-modal-status-msg {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .apple-badge-count {
+  background: var(--fill);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .case-apple-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .case-apple-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 16px 36px rgba(110, 30, 70, 0.16), 0 0 28px rgba(214, 51, 108, 0.09);
+}
+html:not([data-theme="dark"]) .case-tier-pill {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .case-apple-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .case-apple-desc {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .loot-chip {
+  color: var(--muted);
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .case-apple-footer {
+  border-top: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .case-cost-label {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .case-cost-value {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .btn-case-apple-view {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.28);
+}
+html:not([data-theme="dark"]) .btn-case-apple-view:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--aqua);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 4px 16px rgba(214, 51, 108, 0.13);
+}
+html:not([data-theme="dark"]) .site-header .nav-desktop a,
+html:not([data-theme="dark"]) .site-header .nav-more > summary {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .site-header .nav-desktop a:hover,
+html:not([data-theme="dark"]) .site-header .nav-more > summary:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .site-header .nav-desktop a.active,
+html:not([data-theme="dark"]) .site-header .nav-more > summary.is-current {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .header-live {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .header-cash-amt {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .header-cash-plus {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .header-cash-plus:hover,
+html:not([data-theme="dark"]) .header-cash-amt:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .header-signin {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .header-signin:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .header-account > summary {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .header-account > summary:hover,
+html:not([data-theme="dark"]) .header-account[open] > summary {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .header-account-panel,
+html:not([data-theme="dark"]) .nav-more-panel {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 18px 44px rgba(110, 30, 70, 0.15);
+}
+html:not([data-theme="dark"]) .header-account-panel a,
+html:not([data-theme="dark"]) .header-account-panel button {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .header-account-panel a:hover,
+html:not([data-theme="dark"]) .header-account-panel button:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .site-header .menu-btn:hover {
+  background: var(--surface-hover);
+}
+html:not([data-theme="dark"]) .btn-case-apple-spin {
+  background: linear-gradient(135deg, rgba(224, 47, 121, 0.94) 0%, rgba(179, 25, 89, 0.98) 100%);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 4px 14px rgba(214, 51, 108, 0.19);
+}
+html:not([data-theme="dark"]) .btn-case-apple-spin:hover {
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 6px 22px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .btn-case-apple-spin:active {
+  box-shadow: 0 2px 8px rgba(214, 51, 108, 0.15);
+}
+html:not([data-theme="dark"]) .loot-modal-card.apple-modal-box {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line-strong);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.36), 0 32px 80px -16px rgba(110, 30, 70, 0.16), 0 0 45px rgba(214, 51, 108, 0.07);
+}
+html:not([data-theme="dark"]) .loot-modal-card.apple-modal-box::before {
+  background: linear-gradient(90deg, transparent, rgba(224, 47, 121, 0.7), transparent);
+}
+html:not([data-theme="dark"]) .apple-modal-close {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .loot-items-list::-webkit-scrollbar-track {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .loot-items-list::-webkit-scrollbar-thumb {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .loot-item-row-apple {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .loot-item-row-apple:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .loot-item-icon-box {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.28);
+}
+html:not([data-theme="dark"]) .loot-count-pill {
+  color: var(--muted);
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .loot-item-prog-track {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .loot-item-prog-fill {
+  background: linear-gradient(90deg, rgba(224, 47, 121, 1), rgba(229, 75, 139, 1));
+}
+html:not([data-theme="dark"]) .btn-loot-modal-spin {
+  background: linear-gradient(135deg, rgba(224, 47, 121, 0.95) 0%, rgba(179, 25, 89, 0.98) 100%);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 6px 20px rgba(214, 51, 108, 0.21);
+}
+html:not([data-theme="dark"]) .btn-loot-modal-spin:hover {
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 8px 26px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .roulette-modal-box {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--line-strong);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.36), 0 32px 80px -16px rgba(110, 30, 70, 0.16), 0 0 45px rgba(214, 51, 108, 0.08);
+}
+html:not([data-theme="dark"]) .roulette-modal-box::before {
+  background: linear-gradient(90deg, transparent, rgba(224, 47, 121, 0.7), transparent);
+}
+html:not([data-theme="dark"]) .roulette-eyebrow {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .roulette-eyebrow .eyebrow-dot {
+  box-shadow: 0 0 8px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .roulette-header h3 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .roulette-close-btn {
+  background: var(--fill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .roulette-close-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .roulette-info-bar .info-pill {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .roulette-info-bar .pill-label {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .roulette-info-bar .pill-value.gold-text {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .roulette-info-bar .pill-value.cyan-text {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .roulette-info-bar .guest-pill {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .roulette-info-bar .guest-login-link {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .roulette-info-bar .guest-login-link:hover {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .roulette-viewport {
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  box-shadow: inset 0 6px 24px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .roulette-item-tile {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .roulette-item-tile.rarity-rare {
+  border-bottom: 3.5px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .roulette-item-tile.is-winner {
+  border: 2px solid var(--line-strong) !important;
+  box-shadow: 0 0 20px rgba(214, 51, 108, 0.25), inset 0 0 15px rgba(214, 51, 108, 0.18);
+}
+html:not([data-theme="dark"]) .roulette-item-fallback {
+  background: var(--accent-soft);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .roulette-item-count {
+  color: var(--muted);
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .roulette-item-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .btn-spin-now {
+  background: linear-gradient(135deg, rgba(224, 47, 121, 1) 0%, rgba(229, 75, 139, 1) 100%);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px rgba(214, 51, 108, 0.23);
+}
+html:not([data-theme="dark"]) .btn-spin-now:hover:not(:disabled) {
+  box-shadow: 0 14px 36px rgba(214, 51, 108, 0.25);
+}
+html:not([data-theme="dark"]) .roulette-hint {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .roulette-win-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1.5px solid var(--line-strong);
+  box-shadow: 0 14px 40px rgba(110, 30, 70, 0.16), 0 0 30px rgba(214, 51, 108, 0.13);
+}
+html:not([data-theme="dark"]) .roulette-win-ico-box {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .roulette-win-badge.badge-real {
+  background: var(--accent-soft);
+  color: var(--aqua);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .roulette-win-badge.badge-demo {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .roulette-win-name {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .roulette-win-desc {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .roulette-error-card {
+  color: var(--danger);
+}
+html:not([data-theme="dark"]) .hall-hero .eyebrow {
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .hall-hero h1 {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .hall-segment-wrap {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .hall-segment-btn {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .hall-segment-btn:hover {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .hall-segment-btn.active {
+  background: var(--accent-soft);
+  color: var(--aqua);
+  box-shadow: 0 2px 8px rgba(110, 30, 70, 0.14);
+}
+html:not([data-theme="dark"]) .podium-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .podium-card.podium-1 {
+  background: linear-gradient(160deg, #fff3d6, #ffe2b8);
+}
+html:not([data-theme="dark"]) .podium-card.podium-2 {
+  background: linear-gradient(160deg, #f2f0f8, #e3def0);
+  box-shadow: 0 12px 36px -8px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .podium-card.podium-3 {
+  background: linear-gradient(160deg, #ffe9dc, #ffd6c2);
+  box-shadow: 0 12px 36px -8px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .podium-avatar-img {
+  background: var(--surface-2);
+  border: 2px solid var(--line);
+}
+html:not([data-theme="dark"]) .podium-nick {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .podium-stat-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .podium-stat-val {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .podium-1 .podium-stat-val {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .podium-stat-lbl {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .top-bento-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 44px -8px rgba(110, 30, 70, 0.16);
+}
+html:not([data-theme="dark"]) .top-bento-row:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .top-row-avatar {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .top-row-nick {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .top-row-meta {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .top-row-stat {
+  color: var(--aqua);
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .bento-meta-pill {
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .tag-timer {
+  background: var(--fill);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .live-pill {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .feature-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+html:not([data-theme="dark"]) .feature-card:hover {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .news-grid-home .news-item {
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .news-grid-home .news-item::before {
+  border: 1px solid var(--line);
+}
+html:not([data-theme="dark"]) .news-grid-home .news-item:hover {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .news-grid-home .news-item:hover::before {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .rod-ladder {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+html:not([data-theme="dark"]) .market-deal.good {
+  color: var(--ok);
+}
+html:not([data-theme="dark"]) .market-deal.bad {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .ach-card {
+  border: 1px solid var(--line);
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .ach-card small {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .vault-history li {
+  border: 1px solid var(--line);
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .vault-history .vh-rarity {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .case-pity-row {
+  border: 1px solid var(--line);
+  background: var(--accent-soft);
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .case-pity-row b {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .case-pity-panel {
+  border: 1px solid var(--line-strong);
+}
+html:not([data-theme="dark"]) .case-pity-head {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .case-pity-body {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .case-drops-strip {
+  border: 1px solid var(--line);
+  background: var(--fill);
+}
+html:not([data-theme="dark"]) .case-drops-note {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .case-drop-chip {
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .case-drop-chip.rarity-rare {
+  border-color: var(--line-strong);
+}
+html:not([data-theme="dark"]) .case-drop-nick {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .case-drop-when {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .roulette-pity-line {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .roulette-pity-line b {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .roulette-pity-line .pity-hit {
+  color: var(--gold);
+}
+html:not([data-theme="dark"]) .roulette-reveal-flash {
+  background: radial-gradient(circle at 50% 50%, var(--flash-color, rgba(224, 47, 121, 1)) 0%, transparent 62%);
+}
+html:not([data-theme="dark"]) .status-addr {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .status-checked {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .status-live-row .online-pill.is-offline {
+  color: var(--danger);
+}
+html:not([data-theme="dark"]) .status-stat b {
+  color: var(--aqua);
+}
+html:not([data-theme="dark"]) .status-stat span {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .status-chart-card {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+}
+html:not([data-theme="dark"]) .status-chart {
+  background: var(--surface);
+}
+html:not([data-theme="dark"]) .status-chart-empty {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .status-chart-axis {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .status-chart-legend {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .swatch-online {
+  background: var(--accent-soft);
+}
+html:not([data-theme="dark"]) .status-legend-note {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) :is(.market-lot-card, .bento-market-body, .lot-seller-row) :is(strong, b) {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .event-mini-badge {
+  color: #7b3fc0;
+}
+html:not([data-theme="dark"]) [style*="color:#ffd875"]:not(.btn) {
+  color: var(--gold) !important;
+}
+/* inline styles baked into site.js / page markup for the dark theme */
+html:not([data-theme="dark"]) :is([style*="color:#f8fafc"], [style*="color:#F8FAFC"], [style*="color:#f1f5f9"], [style*="color:#E2E8F0"], [style*="color:#ffffff"], [style*="color:#fff;"]):not(.btn):not(.apple-badge-save) {
+  color: var(--text) !important;
+}
+html:not([data-theme="dark"]) [style*="color:#94a3b8"] {
+  color: var(--muted) !important;
+}
+html:not([data-theme="dark"]) :is([style*="color:#2fe0c0"], [style*="color:#a5b4fc"]) {
+  color: var(--aqua) !important;
+}
+html:not([data-theme="dark"]) :is([style*="color:#ffd875"], [style*="color:#f5c25b"]):not(.btn) {
+  color: var(--gold) !important;
+}
+html:not([data-theme="dark"]) [style*="color:#4ade80"] {
+  color: var(--ok) !important;
+}
+html:not([data-theme="dark"]) :is([style*="color:#fca5a5"], [style*="color:#f87171"]) {
+  color: var(--danger) !important;
+}
+html:not([data-theme="dark"]) [style*="color:#c084fc"] {
+  color: #7b3fc0 !important;
+}
+html:not([data-theme="dark"]) :is([style*="rgba(8,28,44"], [style*="rgba(16,28,40"]) {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2)) !important;
+  box-shadow: 0 12px 36px rgba(110, 30, 70, 0.1) !important;
+}
+html:not([data-theme="dark"]) :is([style*="background:rgba(2,10,18"], [style*="background:rgba(0,0,0,0.3)"]) {
+  background: var(--surface-2) !important;
+  color: var(--text) !important;
+}
+html:not([data-theme="dark"]) [style*="background:rgba(255,255,255,0.0"] {
+  background: var(--fill) !important;
+}
+html:not([data-theme="dark"]) [style*="rgba(255,255,255,0.0"], html:not([data-theme="dark"]) [style*="rgba(255,255,255,0.1"] {
+  border-color: var(--line) !important;
+}
+html:not([data-theme="dark"]) [style*="rgba(47,224,192,0.2"], html:not([data-theme="dark"]) [style*="rgba(47,224,192,0.3"], html:not([data-theme="dark"]) [style*="rgba(47,224,192,0.4"] {
+  border-color: var(--line-strong) !important;
+}
+html:not([data-theme="dark"]) [style*="background:rgba(47,224,192,0.1"], html:not([data-theme="dark"]) [style*="background:rgba(47,224,192,0.0"] {
+  background: var(--accent-soft) !important;
+}
+html:not([data-theme="dark"]) [style*="background:rgba(245,194,91,0.1"] {
+  background: rgba(240, 190, 90, 0.16) !important;
+}
+html:not([data-theme="dark"]) [style*="background:rgba(239,68,68,0.12)"] {
+  background: rgba(220, 60, 90, 0.1) !important;
+}
+html:not([data-theme="dark"]) .apple-badge-save:not([style*="background"]) {
+  color: #0d6b4b;
+  background: #d5f2e4;
+  box-shadow: none;
+}
+/* === light-pastel:end === */
+
+/* Cabinet panels, badges and achievements on the pastel light theme.
+   Kept below the generated block on purpose; edit here. */
+html:not([data-theme="dark"]) .panel {
+  padding: clamp(1rem, 2vw, 1.3rem) clamp(1rem, 2.4vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  box-shadow: 0 10px 30px rgba(110, 30, 70, 0.08);
+}
+html:not([data-theme="dark"]) .panel > h3:first-child {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+html:not([data-theme="dark"]) .badge-grid {
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+html:not([data-theme="dark"]) .badge-card {
+  padding: 0.7rem 0.9rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+html:not([data-theme="dark"]) .badge-card:hover {
+  box-shadow: 0 8px 20px rgba(110, 30, 70, 0.1);
+}
+html:not([data-theme="dark"]) .badge-card .badge-title {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .badge-card.special {
+  background: #e6f6ee;
+  border-color: #b9e3cd;
+  box-shadow: none;
+}
+html:not([data-theme="dark"]) .badge-card.special .badge-title {
+  color: #12684a;
+}
+html:not([data-theme="dark"]) .badge-card.rare {
+  background: #fde6ee;
+  border-color: #f2b8cc;
+  box-shadow: none;
+}
+html:not([data-theme="dark"]) .badge-card.rare .badge-title {
+  color: #a3245a;
+}
+html:not([data-theme="dark"]) .badge-card.epic {
+  background: #efe6fb;
+  border-color: #d3bff0;
+  box-shadow: none;
+}
+html:not([data-theme="dark"]) .badge-card.epic .badge-title {
+  color: #6b34b0;
+}
+html:not([data-theme="dark"]) .badge-card.legendary {
+  background: #fff1d4;
+  border-color: #efd08a;
+  box-shadow: none;
+}
+html:not([data-theme="dark"]) .badge-card.legendary .badge-title {
+  color: #9a5d0a;
+}
+html:not([data-theme="dark"]) .ach-grid {
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+html:not([data-theme="dark"]) .ach-card {
+  border-radius: 14px;
+  border: 1px solid #efd08a;
+  background: linear-gradient(135deg, #fff6dc, #ffe9c4);
+}
+html:not([data-theme="dark"]) .ach-card b {
+  color: var(--text);
+}
+html:not([data-theme="dark"]) .ach-card small {
+  color: var(--muted);
+}
+html:not([data-theme="dark"]) .ach-card.off {
+  opacity: 1;
+  filter: none;
+  border: 1px dashed var(--line-strong);
+  background: rgba(255, 255, 255, 0.5);
+}
+html:not([data-theme="dark"]) .ach-card.off .ach-ico {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+html:not([data-theme="dark"]) .ach-card.off b,
+html:not([data-theme="dark"]) .ach-card.off small {
+  color: var(--muted);
 }
