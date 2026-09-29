@@ -367,31 +367,25 @@
       window.addEventListener("pageshow", repaint);
       new MutationObserver(repaint).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
-      /* Pin and swap scenes only on wide screens. matchMedia re-runs this when
-         the window crosses the breakpoint, so a resize never strands the stage
-         with every panel active. */
+      /* The stage sticks through CSS (position: sticky inside a tall grid), so a
+         fast wheel drag or middle-click autoscroll can never strand a fixed clone
+         over the page. ScrollTrigger only reads progress to pick the scene. The
+         media query re-runs this when the window crosses the breakpoint. */
       gsap.matchMedia().add("(min-width: 981px)", () => {
-        let current = 0;
+        const grid = stage.closest(".story-grid");
+        if (!grid) return;
+        const pick = (progress) => {
+          const next = Math.max(0, Math.min(panels.length - 1, Math.round(progress * (panels.length - 1))));
+          if (next !== Number(stage.dataset.active)) activate(next);
+        };
         activate(0);
         ScrollTrigger.create({
-          trigger: stage,
+          trigger: grid,
           start: "top 22%",
-          endTrigger: stage,
-          end: "+=" + Math.round(window.innerHeight * 0.85 * panels.length),
-          pin: true,
-          pinSpacing: true,
-          scrub: 0.6,
-          onUpdate: (self) => {
-            const next = Math.max(0, Math.min(panels.length - 1, Math.round(self.progress * (panels.length - 1))));
-            if (next !== current) {
-              current = next;
-              activate(next);
-            }
-          },
-          onLeaveBack: () => {
-            current = 0;
-            activate(0);
-          },
+          end: () => "+=" + Math.max(1, grid.offsetHeight - stage.offsetHeight),
+          invalidateOnRefresh: true,
+          onUpdate: (self) => pick(self.progress),
+          onRefresh: (self) => pick(self.progress),
         });
       });
     }
