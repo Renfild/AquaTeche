@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Недельный турнир · AquaTech</title>
+  <meta name="description" content="Недельный турнир по улову AquaTech: живая таблица топ-10, призы монетами и ключами кейсов, зал славы прошлых недель." />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AquaTech" />
+  <meta property="og:title" content="Недельный турнир · AquaTech" />
+  <meta property="og:description" content="Самая тяжёлая рыба недели: живой топ-10, призы и зал славы." />
+  <meta property="og:url" content="https://aquateche.store/tournament.html" />
+  <meta property="og:image" content="https://aquateche.store/assets/og-cover.png" />
+  <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("aquatech_theme")==="light"?"light":"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
+<link rel="stylesheet" href="assets/css/site.css?v=20260929_dark" />
+<link rel="stylesheet" href="assets/css/tournament.css?v=20260929" />
+</head>
+<body data-page="tournament">
+  <a class="skip-link" href="#main">К содержимому</a>
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="t-page">
+      <div class="container">
+        <div class="eyebrow"><span>Недельный турнир</span></div>
+        <h1>Самая тяжёлая рыба недели</h1>
+        <p class="muted-line">Турнир идёт по субботам и воскресеньям. Топ-3 забирают монеты и ключи кейсов, таблица обновляется каждые 30 секунд.</p>
+
+        <div class="t-top">
+          <div class="t-hero" id="t-hero" aria-live="polite"><div class="t-hero-empty">Загрузка…</div></div>
+          <div class="t-timer">
+            <span id="t-status-label">Загрузка…</span>
+            <b id="t-countdown">—</b>
+          </div>
+        </div>
+
+        <h2 style="margin-top:2rem">Топ-10 недели</h2>
+        <div class="t-board" id="t-board"><p class="t-empty">Загрузка таблицы…</p></div>
+
+        <h2 style="margin-top:2.5rem">Зал славы</h2>
+        <div class="t-hall" id="t-hall"></div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/site.js?v=20260929_dark"></script>
+  <script src="assets/js/tournament.js?v=20260929"></script>
+</body>
+</html>

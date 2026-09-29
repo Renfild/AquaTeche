@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.aquatech.ui.AquaTechUI;
 import net.minecraft.server.MinecraftServer;
@@ -25,6 +26,7 @@ import net.minecraft.world.scores.Scoreboard;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ public final class OceanEventsService {
     private static final Path FISH_SHOP_FILE = FMLPaths.CONFIGDIR.get().resolve("aqualumen/fish_shop.json");
     private static final Path BOOST_FILE = FMLPaths.CONFIGDIR.get().resolve("aqualumen/event_boost.json");
     private static final String WEIGHT_TAG = "aquatech_tournament_weight";
+    private static final String CASE_KEYS_TAG = "aqualumen_case_keys";
     private static final int REROLL_COST = 100;
     private static final long GOLDEN_BLOCK = 3L * 3600_000L;   // окно каждые 3 часа
     private static final long GOLDEN_WINDOW = 20L * 60_000L;   // длится 20 минут
@@ -51,8 +54,8 @@ public final class OceanEventsService {
     private static final double STORM_GOLDEN_CHANCE = 0.65;
     private static long goldStormUntil;
     private static boolean lastGoldenActive = false;
-    private static boolean lastTournamentActive = false;
-    private static boolean tournamentLoaded;
+    private static boolean startupSynced;
+    private static long lastFinalRetryAt;
 
     // ─────────────────────────── косяки и всплески цен ───────────────────────────
 
@@ -341,18 +344,6 @@ public final class OceanEventsService {
 
     // ─────────────────────────── турнир ───────────────────────────
 
-    private static class TournamentState {
-        int week = -1;
-        List<TopEntry> top = new ArrayList<>();
-
-        static class TopEntry {
-            String name;
-            String uuid;
-            double weight;
-            String fish;
-        }
-    }
-
     private static TournamentState tournament;
 
     private static TournamentState tournament() {
@@ -360,12 +351,15 @@ public final class OceanEventsService {
             tournament = new TournamentState();
             try {
                 if (Files.exists(TOURNAMENT_FILE)) {
-                    tournament = GSON.fromJson(Files.readString(TOURNAMENT_FILE), TournamentState.class);
+                    TournamentState loaded = GSON.fromJson(Files.readString(TOURNAMENT_FILE), TournamentState.class);
+                    if (loaded != null) {
+                        tournament = loaded;
+                    }
                 }
             } catch (Exception ignored) {
             }
-            if (tournament == null) tournament = new TournamentState();
-            tournamentLoaded = true;
+            if (tournament.top == null) tournament.top = new ArrayList<>();
+            if (tournament.pending == null) tournament.pending = new ArrayList<>();
         }
         return tournament;
     }
@@ -377,38 +371,78 @@ public final class OceanEventsService {
         }
     }
 
-    private static int weekNumber() {
-        return ZonedDateTime.now().getYear() * 100 + ZonedDateTime.now().getDayOfYear() / 7;
-    }
-
     private static boolean tournamentActive() {
+        if (Boolean.getBoolean("aquatech.tournament.forceActive")) return true;
         DayOfWeek d = ZonedDateTime.now().getDayOfWeek();
         return d == DayOfWeek.SATURDAY || d == DayOfWeek.SUNDAY;
     }
 
-    private static void awardTournament(MinecraftServer server) {
+    private static void syncTournament(TournamentState t, String status) {
+        ZonedDateTime now = ZonedDateTime.now();
+        String json = TournamentLogic.snapshotJson(t.week, status, t.endsAt, TournamentLogic.nextStartMs(now), t.top);
+        PortalTournamentSync.push(t.week, status, json, PortalTournamentSync.resolveBase());
+    }
+
+    private static void beginTournamentWeek(MinecraftServer server, TournamentState t) {
+        ZonedDateTime now = ZonedDateTime.now();
+        t.week = TournamentLogic.weekId(now.toLocalDate());
+        t.endsAt = TournamentLogic.endOfWeekendMs(now);
+        t.top = new ArrayList<>();
+        t.awarded = false;
+        t.finalSent = true;
+        startupSynced = true;
+        saveTournament();
+        syncTournament(t, "active");
+        broadcast(server, "§6[Турнир] §eНедельный турнир стартовал! §fСамая тяжёлая рыба субботы и воскресенья: "
+                + "призы топ-3 — §62500§f/§71000§f/§8500 монет и ключи кейсов. Топ-10 — на сайте, топ-3 — в Tab!");
+    }
+
+    private static void grantPrize(ServerPlayer player, TournamentLogic.Prize prize) {
+        addCoins(player, prize.coins);
+        CompoundTag data = player.getPersistentData();
+        CompoundTag keys = data.getCompound(CASE_KEYS_TAG);
+        keys.putInt(prize.caseId, keys.getInt(prize.caseId) + 1);
+        data.put(CASE_KEYS_TAG, keys);
+        pushHubUpdate(player);
+        player.sendSystemMessage(Component.literal("§6[Турнир] §aПриз за " + prize.place + " место (неделя " + prize.week
+                + "): §6+" + prize.coins + " монет §aи §bключ Кейса " + TournamentLogic.caseNumeral(prize.caseId) + "§a!"));
+    }
+
+    private static void claimPendingPrizes(ServerPlayer player) {
         TournamentState t = tournament();
-        List<TournamentState.TopEntry> top = t.top;
-        if (top == null || top.isEmpty()) {
-            broadcast(server, "§6[Турнир] §7Турнир недели завершён — никто не поймал рыбу. Призовой фонд сгорел!");
-            return;
+        String uuid = player.getUUID().toString();
+        List<TournamentLogic.Prize> mine = TournamentLogic.claimable(t.pending, uuid);
+        if (mine.isEmpty()) return;
+        TournamentLogic.removeClaimed(t.pending, uuid);
+        saveTournament();
+        for (TournamentLogic.Prize prize : mine) {
+            grantPrize(player, prize);
         }
-        long[] prizes = {2500, 1000, 500};
-        String[] places = {"§6①", "§7②", "§f③"};
-        broadcast(server, "§6[Турнир] §eИтоги недели — самые тяжёлые уловы:");
-        for (int i = 0; i < Math.min(3, top.size()); i++) {
-            TournamentState.TopEntry e = top.get(i);
-            broadcast(server, "  " + places[i] + " §f" + e.name + " — §b" + e.fish
-                    + " §7(" + String.format("%.2f", e.weight) + " кг) §6+" + prizes[i] + " монет");
-            ServerPlayer online = server.getPlayerList().getPlayer(java.util.UUID.fromString(e.uuid));
-            if (online != null) {
-                addCoins(online, prizes[i]);
-                online.sendSystemMessage(Component.literal("§6[Турнир] §aПриз " + prizes[i] + " монет зачислен!"));
+    }
+
+    private static void awardTournament(MinecraftServer server, TournamentState t) {
+        t.awarded = true;
+        List<TournamentLogic.Prize> prizes = TournamentLogic.prizesFor(t.top, t.week);
+        if (prizes.isEmpty()) {
+            broadcast(server, "§6[Турнир] §7Турнир недели завершён — никто не поймал рыбу. Призовой фонд сгорел!");
+        } else {
+            broadcast(server, "§6[Турнир] §eИтоги недели — самые тяжёлые уловы:");
+            for (TournamentLogic.Prize prize : prizes) {
+                TournamentLogic.Entry e = t.top.get(prize.place - 1);
+                broadcast(server, "  §f" + prize.place + ". " + e.name + " — §b" + e.fish
+                        + " §7(" + String.format("%.2f", e.weight) + " кг) §6+" + prize.coins
+                        + " монет §7+ ключ Кейса " + TournamentLogic.caseNumeral(prize.caseId));
+                ServerPlayer online = server.getPlayerList().getPlayer(java.util.UUID.fromString(e.uuid));
+                if (online != null) {
+                    grantPrize(online, prize);
+                } else {
+                    t.pending.add(prize);
+                }
             }
         }
-        t.top = new ArrayList<>();
-        t.week = -1;
+        t.finalSent = false;
         saveTournament();
+        syncTournament(t, "finalized");
     }
 
     // ─────────────────────────── обработка улова ───────────────────────────
@@ -480,10 +514,8 @@ public final class OceanEventsService {
         // 3. Турнир (вес: свой тег; StarCatcher 2.3.19 вес в NBT не пишет — проставляем при выдаче)
         if (tournamentActive()) {
             TournamentState t = tournament();
-            if (t.week != weekNumber()) {
-                t.week = weekNumber();
-                t.top = new ArrayList<>();
-                saveTournament();
+            if (t.week != TournamentLogic.weekId(LocalDate.now())) {
+                beginTournamentWeek(player.getServer(), t);
             }
             double best = -1;
             String fishName = "";
@@ -505,36 +537,14 @@ public final class OceanEventsService {
                     fishName = stack.getHoverName().getString();
                 }
             }
-            if (best > 0) {
-                TournamentState.TopEntry mine = null;
-                for (TournamentState.TopEntry e : t.top) {
-                    if (e.uuid.equals(player.getUUID().toString())) {
-                        mine = e;
-                        break;
-                    }
-                }
-                if (mine == null) {
-                    if (t.top.size() < 3 || best > t.top.get(t.top.size() - 1).weight) {
-                        TournamentState.TopEntry e = new TournamentState.TopEntry();
-                        e.name = player.getGameProfile().getName();
-                        e.uuid = player.getUUID().toString();
-                        e.weight = best;
-                        e.fish = fishName;
-                        t.top.add(e);
-                        t.top.sort((a, b2) -> Double.compare(b2.weight, a.weight));
-                        while (t.top.size() > 3) t.top.remove(t.top.size() - 1);
-                        saveTournament();
-                        int place = t.top.indexOf(e);
-                        if (place >= 0 && place < 3) {
-                            player.sendSystemMessage(Component.literal("§6[Турнир] §aВы на "
-                                    + (place + 1) + " месте недели! §7(" + String.format("%.2f", best) + " кг)"));
-                        }
-                    }
-                } else if (best > mine.weight) {
-                    mine.weight = best;
-                    mine.fish = fishName;
-                    t.top.sort((a, b2) -> Double.compare(b2.weight, a.weight));
-                    saveTournament();
+            String uuid = player.getUUID().toString();
+            if (best > 0 && TournamentLogic.record(t.top, uuid, player.getGameProfile().getName(), best, fishName)) {
+                saveTournament();
+                syncTournament(t, "active");
+                int place = TournamentLogic.placeOf(t.top, uuid);
+                if (place > 0) {
+                    player.sendSystemMessage(Component.literal("§6[Турнир] §aВы на " + place + " месте недели! §7("
+                            + String.format("%.2f", best) + " кг)"));
                 }
             }
         }
@@ -898,14 +908,31 @@ public final class OceanEventsService {
             }
         }
 
-        boolean tourney = tournamentActive();
-        if (tourney != lastTournamentActive) {
-            lastTournamentActive = tourney;
-            if (tourney) {
-                tournament();
-                broadcast(server, "§6[Турнир] §eНедельный турнир стартовал! §fСамая тяжёлая рыба субботы и воскресенья приносит §62500§f/§71000§f/§8500 монет. Топ — в Tab!");
-            } else if (tournamentLoaded) {
-                awardTournament(server);
+        TournamentState t = tournament();
+        ZonedDateTime zdt = ZonedDateTime.now();
+        if (tournamentActive()) {
+            if (t.week != TournamentLogic.weekId(zdt.toLocalDate())) {
+                beginTournamentWeek(server, t);
+            } else {
+                if (t.endsAt == 0L) {
+                    t.endsAt = TournamentLogic.endOfWeekendMs(zdt);
+                    saveTournament();
+                }
+                if (!startupSynced) {
+                    startupSynced = true;
+                    syncTournament(t, "active");
+                }
+            }
+        } else if (t.week != -1 && !t.awarded) {
+            awardTournament(server, t);
+        }
+        if (!t.finalSent && t.week != -1) {
+            if (PortalTournamentSync.lastFinalizedWeek() == t.week) {
+                t.finalSent = true;
+                saveTournament();
+            } else if (now - lastFinalRetryAt > 300_000L) {
+                lastFinalRetryAt = now;
+                syncTournament(t, "finalized");
             }
         }
     }
@@ -947,8 +974,9 @@ public final class OceanEventsService {
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         ensureQuestDay(player);
+        claimPendingPrizes(player);
         if (tournamentActive()) {
-            player.sendSystemMessage(Component.literal("§6[Турнир] §eИдёт недельный турнир! §fЛовите самую тяжёлую рыбу — топ-3 получат призы."));
+            player.sendSystemMessage(Component.literal("§6[Турнир] §eИдёт недельный турнир! §fЛовите самую тяжёлую рыбу — топ-3 получат монеты и ключи кейсов, топ-10 виден на сайте."));
         }
     }
 

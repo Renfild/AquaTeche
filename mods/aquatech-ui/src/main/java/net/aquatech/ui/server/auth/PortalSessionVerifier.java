@@ -80,7 +80,7 @@ public final class PortalSessionVerifier {
         }
     }
 
-    private static String readSyncKey() {
+    public static String readSyncKey() {
         File file = new File("config/aquatech_sync_key.json");
         if (!file.isFile()) {
             return null;

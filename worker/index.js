@@ -56,6 +56,8 @@ import {
   onRequestPost as syncPlayerPost,
   onRequestGet as syncPlayerGet,
 } from "../functions/api/sync/player.js";
+import { onRequestPost as syncTournamentPost } from "../functions/api/sync/tournament.js";
+import { onRequestGet as tournamentGet } from "../functions/api/tournament.js";
 import { onRequestGet as marketGet, onRequestPost as marketPost } from "../functions/api/market.js";
 import { onRequestGet as marketPublicGet } from "../functions/api/market/public.js";
 import { onRequestGet as trendsGet, onRequestPost as trendsPost } from "../functions/api/trends.js";
@@ -126,6 +128,8 @@ async function handleApi(request, env, execCtx) {
     if (method === "POST") return syncPlayerPost(ctx(request, env));
     if (method === "GET") return syncPlayerGet(ctx(request, env));
   }
+  if (path === "/api/sync/tournament" && method === "POST") return syncTournamentPost(ctx(request, env));
+  if (path === "/api/tournament" && method === "GET") return tournamentGet(ctx(request, env));
   if (path === "/api/market") {
     if (method === "GET") return marketGet(ctx(request, env));
     if (method === "POST") return marketPost(ctx(request, env));
