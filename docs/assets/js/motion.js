@@ -30,6 +30,23 @@
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
 
+    /* Tab switch and theme flip leave Lenis' eased target out of step with the
+       native scroll position; snap it back and re-measure the pinned scenes. */
+    let resyncTimer = 0;
+    const resync = () => {
+      window.clearTimeout(resyncTimer);
+      resyncTimer = window.setTimeout(() => {
+        lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+        lenis.resize();
+        ScrollTriggerLib.refresh();
+      }, 120);
+    };
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) resync();
+    });
+    window.addEventListener("pageshow", resync);
+    new MutationObserver(resync).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+
     document.addEventListener("click", (event) => {
       const link = event.target.closest('a[href^="#"]');
       if (!link) return;

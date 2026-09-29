@@ -28,6 +28,7 @@
     { href: "top.html", label: "Топы", id: "top" },
     { href: "news.html", label: "Новости", id: "news" },
     { href: "events.html", label: "События", id: "events" },
+    { href: "tournament.html", label: "Турнир", id: "tournament" },
     { href: "status.html", label: "Статус", id: "status" },
     { href: "perf.html", label: "Против лагов", id: "perf" },
     { href: "players.html", label: "Игроки", id: "players" },
@@ -164,9 +165,9 @@
 
   function currentTheme() {
     try {
-      return localStorage.getItem(STORAGE_THEME) === "dark" ? "dark" : "light";
+      return localStorage.getItem(STORAGE_THEME) === "light" ? "light" : "dark";
     } catch {
-      return "light";
+      return "dark";
     }
   }
 
@@ -840,7 +841,7 @@
     "assets/js/vendor/gsap.min.js?v=3.13.0",
     "assets/js/vendor/ScrollTrigger.min.js?v=3.13.0",
   ];
-  const MOTION_OWN = ["assets/js/motion.js?v=1", "assets/js/ocean-hero.js?v=1"];
+  const MOTION_OWN = ["assets/js/motion.js?v=2", "assets/js/ocean-hero.js?v=1"];
   const MOTION_SKIP_PAGES = ["admin", "login", "register", "reset"];
 
   function loadScriptOnce(src) {

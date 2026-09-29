@@ -11386,20 +11386,20 @@ body[data-page="cases"] .container:not(.header-inner) {
    written with literal dark colors, so the dark theme keeps its original look.
    ========================================================================== */
 :root {
-  --bg: #fdf8f9;
-  --bg-2: #f9eff2;
-  --bg-3: #f4e6ec;
-  --surface: #ffffff;
-  --surface-2: #fffafb;
-  --surface-hover: #fdf1f4;
-  --line: rgba(58, 24, 40, 0.1);
-  --line-strong: rgba(58, 24, 40, 0.16);
+  --bg: #f7e4ec;
+  --bg-2: #f1d8e3;
+  --bg-3: #e9c8d8;
+  --surface: #fff6f9;
+  --surface-2: #fbeaf1;
+  --surface-hover: #f8dce8;
+  --line: rgba(110, 30, 70, 0.2);
+  --line-strong: rgba(110, 30, 70, 0.32);
   --text: #1a0f16;
-  --muted: #6b5a63;
+  --muted: #58424e;
   --label: #1a0f16;
-  --label-secondary: #4a3c44;
-  --separator: rgba(58, 24, 40, 0.12);
-  --fill: rgba(58, 24, 40, 0.045);
+  --label-secondary: #43303a;
+  --separator: rgba(110, 30, 70, 0.2);
+  --fill: rgba(110, 30, 70, 0.08);
   --aqua: #a33b6b;
   --aqua-2: #7d2f57;
   --accent: #d6336c;
@@ -11804,13 +11804,14 @@ html:not([data-theme="dark"]) :is(.tag, .meta-tag, .online-pill) {
   opacity: 0;
   visibility: hidden;
   transform: translateY(18px);
-  transition: opacity .5s var(--ease), transform .5s var(--ease), visibility .5s;
+  transition: opacity .16s linear, transform .16s linear, visibility 0s linear .16s;
 }
 
 .story-panel.is-active {
   opacity: 1;
   visibility: visible;
   transform: none;
+  transition: opacity .45s var(--ease) .14s, transform .45s var(--ease) .14s, visibility 0s;
 }
 
 .story-panel-visual {
