@@ -399,11 +399,7 @@ public final class OceanEventsService {
 
     private static void grantPrize(ServerPlayer player, TournamentLogic.Prize prize) {
         addCoins(player, prize.coins);
-        CompoundTag data = player.getPersistentData();
-        CompoundTag keys = data.getCompound(CASE_KEYS_TAG);
-        keys.putInt(prize.caseId, keys.getInt(prize.caseId) + 1);
-        data.put(CASE_KEYS_TAG, keys);
-        pushHubUpdate(player);
+        grantCaseKey(player, prize.caseId);
         player.sendSystemMessage(Component.literal("§6[Турнир] §aПриз за " + prize.place + " место (неделя " + prize.week
                 + "): §6+" + prize.coins + " монет §aи §bключ Кейса " + TournamentLogic.caseNumeral(prize.caseId) + "§a!"));
     }
@@ -783,6 +779,15 @@ public final class OceanEventsService {
     /** Начисление монет для сервисов вне этого класса (атлас, вехи). */
     public static void grantCoins(ServerPlayer player, long amount) {
         addCoins(player, amount);
+        pushHubUpdate(player);
+    }
+
+    /** Ключ кейса для сервисов вне этого класса (турнир, сокровище глубин): счётчик в NBT игрока. */
+    public static void grantCaseKey(ServerPlayer player, String caseId) {
+        CompoundTag data = player.getPersistentData();
+        CompoundTag keys = data.getCompound(CASE_KEYS_TAG);
+        keys.putInt(caseId, keys.getInt(caseId) + 1);
+        data.put(CASE_KEYS_TAG, keys);
         pushHubUpdate(player);
     }
 

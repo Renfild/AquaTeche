@@ -164,14 +164,14 @@ public final class FishingSpotService {
     }
 
     /** Только уже загруженные чанки: генерация на ходу бьёт по TPS. */
-    private static BlockPos waterSurface(ServerLevel level, int x, int z) {
+    static BlockPos waterSurface(ServerLevel level, int x, int z) {
         if (!level.hasChunkAt(new BlockPos(x, 0, z))) return null;
         int y = level.getHeight(Heightmap.Types.WORLD_SURFACE, x, z) - 1;
         BlockPos pos = new BlockPos(x, y, z);
         return level.getFluidState(pos).is(FluidTags.WATER) ? pos : null;
     }
 
-    private static boolean isOpenWater(ServerLevel level, BlockPos surface) {
+    static boolean isOpenWater(ServerLevel level, BlockPos surface) {
         if (!level.getBlockState(surface.above()).isAir()) return false;
         for (int depth = 1; depth <= WATER_DEPTH; depth++) {
             if (!level.getFluidState(surface.below(depth)).is(FluidTags.WATER)) return false;

@@ -21,6 +21,12 @@ public class ModConfig {
     public static final ForgeConfigSpec.IntValue SPOT_MIN_DISTANCE;
     public static final ForgeConfigSpec.IntValue SPOT_MAX_DISTANCE;
     public static final ForgeConfigSpec.IntValue SPOT_RADIUS;
+    public static final ForgeConfigSpec.BooleanValue DEEP_CHEST_ENABLED;
+    public static final ForgeConfigSpec.IntValue DEEP_CHEST_MIN_MINUTES;
+    public static final ForgeConfigSpec.IntValue DEEP_CHEST_MAX_MINUTES;
+    public static final ForgeConfigSpec.IntValue DEEP_CHEST_DURATION_MINUTES;
+    public static final ForgeConfigSpec.IntValue DEEP_CHEST_MIN_DISTANCE;
+    public static final ForgeConfigSpec.IntValue DEEP_CHEST_MAX_DISTANCE;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -99,6 +105,27 @@ public class ModConfig {
         SPOT_RADIUS = builder
                 .comment("Радиус зоны точки вокруг центра, блоки")
                 .defineInRange("radius", 12, 4, 40);
+        builder.pop();
+        builder.push("deepChest");
+        DEEP_CHEST_ENABLED = builder
+                .comment("Сокровище из глубин: светящийся сундук посреди океана, награду забирает первый добравшийся."
+                        + " Награда (5000-10000 монет и шанс ключа кейса) зашита в DeepChestLogic.")
+                .define("enabled", true);
+        DEEP_CHEST_MIN_MINUTES = builder
+                .comment("Минимальный интервал между сокровищами, минуты")
+                .defineInRange("minIntervalMinutes", 120, 5, 1440);
+        DEEP_CHEST_MAX_MINUTES = builder
+                .comment("Максимальный интервал между сокровищами, минуты")
+                .defineInRange("maxIntervalMinutes", 180, 5, 1440);
+        DEEP_CHEST_DURATION_MINUTES = builder
+                .comment("Сколько минут сундук ждёт игроков")
+                .defineInRange("durationMinutes", 5, 1, 30);
+        DEEP_CHEST_MIN_DISTANCE = builder
+                .comment("Минимальное расстояние от случайного игрока до сундука, блоки")
+                .defineInRange("minDistance", 70, 20, 400);
+        DEEP_CHEST_MAX_DISTANCE = builder
+                .comment("Максимальное расстояние от случайного игрока до сундука, блоки")
+                .defineInRange("maxDistance", 140, 30, 500);
         builder.pop();
         builder.push("auth");
         REQUIRE_PORTAL_SESSION = builder

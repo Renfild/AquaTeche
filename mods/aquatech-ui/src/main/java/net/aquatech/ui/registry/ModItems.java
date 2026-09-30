@@ -50,6 +50,10 @@ public class ModItems {
     public static final RegistryObject<Item> INFERNAL_PEARL = ITEMS.register("infernal_pearl",
             () -> new net.aquatech.ui.item.InfernalPearlItem(new Item.Properties().stacksTo(1).fireResistant()));
 
+    /** Носитель модели пиратского сундука для ItemDisplay события «Сокровище из глубин»; в креатив-вкладке не показывается. */
+    public static final RegistryObject<Item> DEEP_CHEST_MODEL = ITEMS.register("deep_chest_model",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+
     // Приманки из рыбного сырья (заряжаются в удочку, тратятся на ручной улов)
     public static final RegistryObject<Item> BAIT_SHOAL = ITEMS.register("bait_shoal",
             () -> new Item(new Item.Properties().stacksTo(16)));

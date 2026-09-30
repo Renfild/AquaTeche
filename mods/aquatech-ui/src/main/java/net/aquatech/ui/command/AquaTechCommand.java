@@ -9,6 +9,7 @@ import net.aquatech.ui.fishing.AquaTechFishingRodItem;
 import net.aquatech.ui.fishing.CustomFishingLootManager;
 import net.aquatech.ui.fishing.FishingLootHandler;
 import net.aquatech.ui.fishing.FishingRodCompat;
+import net.aquatech.ui.fishing.DeepChestService;
 import net.aquatech.ui.fishing.OceanEventsService;
 import net.aquatech.ui.horizon.HorizonRoute;
 import net.aquatech.ui.horizon.StormEvent;
@@ -112,6 +113,11 @@ public final class AquaTechCommand {
                         .then(Commands.literal("stop").executes(AquaTechCommand::goldStormStop))
                         .then(Commands.argument("minutes", IntegerArgumentType.integer(1, 60))
                                 .executes(ctx -> goldStorm(ctx, IntegerArgumentType.getInteger(ctx, "minutes")))))
+                .then(Commands.literal("deepchest")
+                        .requires(s -> s.hasPermission(2))
+                        .executes(AquaTechCommand::deepChestStart)
+                        .then(Commands.literal("stop").executes(AquaTechCommand::deepChestStop))
+                        .then(Commands.literal("info").executes(AquaTechCommand::deepChestInfo)))
                 .then(Commands.literal("spot")
                         .requires(s -> s.hasPermission(2))
                         .then(Commands.literal("spawn").executes(AquaTechCommand::spotSpawn))
@@ -481,6 +487,25 @@ public final class AquaTechCommand {
         int mins = OceanEventsService.startGoldStorm(ctx.getSource().getServer(), minutes);
         ctx.getSource().sendSuccess(() -> Component.literal("§6Золотая буря §f" + mins + " мин. §7Останови: /aquatech goldstorm stop"), true);
         return mins;
+    }
+
+    private static int deepChestStart(CommandContext<CommandSourceStack> ctx) {
+        boolean started = DeepChestService.startNow(ctx.getSource().getServer());
+        ctx.getSource().sendSuccess(() -> Component.literal(started
+                ? "§6Сокровище из глубин запущено. §7Останови: /aquatech deepchest stop"
+                : "§cНе запустилось: оно уже идёт, нет игроков в Overworld или не нашлось открытой воды."), true);
+        return started ? 1 : 0;
+    }
+
+    private static int deepChestStop(CommandContext<CommandSourceStack> ctx) {
+        boolean stopped = DeepChestService.stopNow(ctx.getSource().getServer());
+        ctx.getSource().sendSuccess(() -> Component.literal(stopped ? "§7Сокровище убрано." : "§7Сейчас сокровища нет."), true);
+        return stopped ? 1 : 0;
+    }
+
+    private static int deepChestInfo(CommandContext<CommandSourceStack> ctx) {
+        ctx.getSource().sendSuccess(() -> Component.literal(DeepChestService.statusLine()), false);
+        return 1;
     }
 
     private static int goldStormStop(CommandContext<CommandSourceStack> ctx) {
