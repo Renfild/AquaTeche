@@ -50,10 +50,9 @@ public final class WorldGuardIslandLookup {
         Class<?> blockVector3 = Class.forName("com.sk89q.worldedit.math.BlockVector3", true, cl);
         Object vec = blockVector3.getMethod("at", int.class, int.class, int.class)
                 .invoke(null, pos.getX(), pos.getY(), pos.getZ());
-        Method getApplicable = findMethod(manager.getClass(), "getApplicableRegions", 1);
-        if (getApplicable == null) {
-            return null;
-        }
+        // У RegionManager есть ещё getApplicableRegions(ProtectedRegion): перегрузку выбираем по типу, не по числу аргументов.
+        Method getApplicable = Class.forName("com.sk89q.worldguard.protection.managers.RegionManager", true, cl)
+                .getMethod("getApplicableRegions", blockVector3);
         Object set = getApplicable.invoke(manager, vec);
         if (!(set instanceof Iterable<?> regions)) {
             return null;

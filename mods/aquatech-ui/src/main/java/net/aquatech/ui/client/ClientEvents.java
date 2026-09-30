@@ -207,7 +207,7 @@ public final class ClientEvents {
                 return;
             }
             net.aquatech.ui.client.chat.AquaChatManager.addSystemMessage(event.getMessage());
-            event.setCanceled(true);
+            event.setCanceled(!net.aquatech.ui.client.chat.WebChatGate.active());
             return;
         }
 
@@ -219,7 +219,7 @@ public final class ClientEvents {
             return;
         }
         net.aquatech.ui.client.chat.AquaChatManager.addMessage(event.getMessage());
-        event.setCanceled(true);
+        event.setCanceled(!net.aquatech.ui.client.chat.WebChatGate.active());
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -235,7 +235,8 @@ public final class ClientEvents {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onScreenOpen(net.minecraftforge.client.event.ScreenEvent.Opening event) {
         if (event.getNewScreen() instanceof net.minecraft.client.gui.screens.ChatScreen vanillaChat
-                && !(event.getNewScreen() instanceof net.aquatech.ui.client.chat.AquaChatScreen)) {
+                && !(event.getNewScreen() instanceof net.aquatech.ui.client.chat.AquaChatScreen)
+                && !net.aquatech.ui.client.chat.WebChatGate.active()) {
             String initial = "";
             try {
                 for (java.lang.reflect.Field f : net.minecraft.client.gui.screens.ChatScreen.class.getDeclaredFields()) {

@@ -95,6 +95,11 @@ public final class AquaChatLayout {
         return sendX() - 6 - inputCapsuleX();
     }
 
+    /** Newest row that is visible for the current scroll; -1 when the tab has no messages. */
+    public static int firstVisibleIndex(int messageCount, int scroll) {
+        return Math.min(messageCount - 1, Math.max(0, messageCount - 1 - scroll));
+    }
+
     /** Bottom of the last history row: above the chips row and the input dock. */
     public static int messageBottom(int screenH) {
         return chipsY(screenH) - 6;

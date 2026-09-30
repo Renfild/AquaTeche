@@ -840,7 +840,7 @@ public final class AquaChatScreen extends Screen {
             int currentY = bottomY;
             List<AquaChatMessage> messages = AquaChatManager.getFilteredMessages();
             int scroll = AquaChatManager.getScrollOffset();
-            int startIdx = Math.max(0, messages.size() - 1 - scroll);
+            int startIdx = AquaChatLayout.firstVisibleIndex(messages.size(), scroll);
             int clipTop = AquaChatLayout.messageTop(this.height);
 
             for (int i = startIdx; i >= 0; i--) {
@@ -975,7 +975,7 @@ public final class AquaChatScreen extends Screen {
             int currentY = bottomY;
             List<AquaChatMessage> messages = AquaChatManager.getFilteredMessages();
             int scroll = AquaChatManager.getScrollOffset();
-            int startIdx = Math.max(0, messages.size() - 1 - scroll);
+            int startIdx = AquaChatLayout.firstVisibleIndex(messages.size(), scroll);
             int clipTop = AquaChatLayout.messageTop(this.height);
 
             for (int i = startIdx; i >= 0; i--) {

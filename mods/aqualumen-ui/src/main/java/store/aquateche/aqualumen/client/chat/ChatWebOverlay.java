@@ -35,6 +35,8 @@ public final class ChatWebOverlay {
 
     private static LumenWebBridge bridge;
     private static boolean inputOpen;
+    /** Browser could not start (no CEF): hand the chat back to the native screen for this session. */
+    private static boolean browserFailed;
     private static int lastPixelWidth;
     private static int lastPixelHeight;
 
@@ -42,7 +44,7 @@ public final class ChatWebOverlay {
     }
 
     public static boolean enabled() {
-        return LumenConfig.CLIENT.webChat.get();
+        return LumenConfig.CLIENT.webChat.get() && !browserFailed;
     }
 
     private static Minecraft mc() {
@@ -72,6 +74,12 @@ public final class ChatWebOverlay {
         int ph = (int) Math.ceil(height * window.getGuiScale());
         if (bridge == null) {
             bridge = new LumenWebBridge(LumenWebBridge.CHAT_URL, pw, ph);
+            if (!bridge.isAvailable()) {
+                AquaLumenUI.LOGGER.warn("[AquaLumen Chat] CEF browser unavailable, falling back to native chat");
+                bridge = null;
+                browserFailed = true;
+                return;
+            }
             lastPixelWidth = pw;
             lastPixelHeight = ph;
             pushSelf();

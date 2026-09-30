@@ -67,7 +67,7 @@ public final class DeepChestService {
     private static final double ALIVE_NEAR = 5.0;
     private static final double ALIVE_FAR = 15.0;
     /** Модель сундука 32 юнита в ширину: масштаб 0.7 даёт ~1.4 блока. */
-    private static final float MODEL_SCALE = 0.7f;
+    private static final float MODEL_SCALE = 1.1f;
     /** Если в игре сундук повёрнут спиной к игроку, поменяй на 180. */
     private static final float MODEL_YAW_OFFSET = 0.0f;
     private static final double WATER_LEVEL_OFFSET = 0.85;
@@ -431,8 +431,8 @@ public final class DeepChestService {
     private static void configureHitbox(Interaction hitbox) {
         CompoundTag tag = new CompoundTag();
         hitbox.saveWithoutId(tag);
-        tag.putFloat("width", 2.0f);
-        tag.putFloat("height", 1.6f);
+        tag.putFloat("width", 2.6f);
+        tag.putFloat("height", 1.8f);
         tag.putBoolean("response", true);
         hitbox.load(tag);
     }
