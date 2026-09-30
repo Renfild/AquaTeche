@@ -170,6 +170,9 @@ public final class ChatWebOverlay {
         ensureBridge(window.getGuiScaledWidth(), window.getGuiScaledHeight());
         String legacy = toLegacy(event.getMessage());
         boolean sys = event.isSystem();
+        boolean privateMessage = event.getMessage().getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents tc
+                && tc.getKey().startsWith("commands.message.display.");
+        String channel = ChatChannel.classify(ChatChannel.stripCodes(legacy), sys, privateMessage);
         String nick = nickOf(legacy);
         String color = colorOf(legacy);
         boolean own = mc().player != null && nick.equalsIgnoreCase(mc().player.getGameProfile().getName());
@@ -187,6 +190,7 @@ public final class ChatWebOverlay {
         json.append(",\"color\":").append(quote(color));
         json.append(",\"own\":").append(own);
         json.append(",\"sys\":").append(sys);
+        json.append(",\"ch\":").append(quote(channel));
         json.append("}");
         if (bridge != null) {
             bridge.execute("window.Chat&&window.Chat.push(" + json + ");");
