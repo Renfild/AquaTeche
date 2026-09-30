@@ -54,6 +54,10 @@ public class ModItems {
     public static final RegistryObject<Item> DEEP_CHEST_MODEL = ITEMS.register("deep_chest_model",
             () -> new Item(new Item.Properties().stacksTo(1)));
 
+    /** Крышка того же сундука: отдельная сущность, чтобы открываться и стучать независимо от корпуса. */
+    public static final RegistryObject<Item> DEEP_CHEST_LID = ITEMS.register("deep_chest_lid",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+
     // Приманки из рыбного сырья (заряжаются в удочку, тратятся на ручной улов)
     public static final RegistryObject<Item> BAIT_SHOAL = ITEMS.register("bait_shoal",
             () -> new Item(new Item.Properties().stacksTo(16)));
