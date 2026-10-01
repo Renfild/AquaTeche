@@ -68,8 +68,8 @@ public final class DeepChestService {
     private static final double ALIVE_FAR = 15.0;
     /** Модель сундука 32 юнита в ширину: масштаб 0.7 даёт ~1.4 блока. */
     private static final float MODEL_SCALE = 1.1f;
-    /** Если в игре сундук повёрнут спиной к игроку, поменяй на 180. */
-    private static final float MODEL_YAW_OFFSET = 0.0f;
+    /** Модель нарисована лицом на +Z, а не на -Z: без 180 сундук спавнится спиной к игроку (проверено в игре). */
+    private static final float MODEL_YAW_OFFSET = 180.0f;
     private static final double WATER_LEVEL_OFFSET = 0.85;
     private static final int IDLE_STEP_TICKS = 5;
     private static final int RATTLE_STEP_TICKS = 2;
@@ -91,7 +91,7 @@ public final class DeepChestService {
         long phaseStart;
         double lidAtPhaseStart;
         int lastRattleWindow = -1;
-        int lastAnimTick = Integer.MIN_VALUE;
+        int lastAnimTick = DeepChestAnimation.NEVER_ANIMATED;
         int fireworksShot;
 
         Chest(ServerLevel level, BlockPos surface, long now, long totalMs, UUID bodyId, UUID lidId, UUID hitboxId,
@@ -226,7 +226,7 @@ public final class DeepChestService {
         double near = chest.phase == Phase.ACTIVE ? nearFactor(chest) : 0.0;
         boolean rattling = chest.phase == Phase.ACTIVE && DeepChestAnimation.rattleDeg(age, near) != 0.0;
         int step = rattling ? RATTLE_STEP_TICKS : IDLE_STEP_TICKS;
-        if (tick - chest.lastAnimTick < step) return;
+        if (!DeepChestAnimation.stepDue(tick, chest.lastAnimTick, step)) return;
         chest.lastAnimTick = tick;
 
         double sink = 0.0;
@@ -495,7 +495,7 @@ public final class DeepChestService {
         if (hitbox != null) hitbox.discard();
         chest.phase = Phase.WON;
         chest.phaseStart = System.currentTimeMillis();
-        chest.lastAnimTick = Integer.MIN_VALUE;
+        chest.lastAnimTick = DeepChestAnimation.NEVER_ANIMATED;
         nextAt = chest.phaseStart + DeepChestAnimation.WON_MS + nextDelay();
         return true;
     }
@@ -510,7 +510,7 @@ public final class DeepChestService {
         if (hitbox != null) hitbox.discard();
         chest.phase = Phase.FIZZLING;
         chest.phaseStart = now;
-        chest.lastAnimTick = Integer.MIN_VALUE;
+        chest.lastAnimTick = DeepChestAnimation.NEVER_ANIMATED;
         nextAt = now + DeepChestAnimation.FIZZLE_MS + nextDelay();
     }
 

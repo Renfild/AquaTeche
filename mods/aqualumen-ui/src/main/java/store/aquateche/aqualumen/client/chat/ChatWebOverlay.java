@@ -35,8 +35,6 @@ public final class ChatWebOverlay {
 
     private static LumenWebBridge bridge;
     private static boolean inputOpen;
-    /** Browser could not start (no CEF): hand the chat back to the native screen for this session. */
-    private static boolean browserFailed;
     private static int lastPixelWidth;
     private static int lastPixelHeight;
 
@@ -44,7 +42,7 @@ public final class ChatWebOverlay {
     }
 
     public static boolean enabled() {
-        return LumenConfig.CLIENT.webChat.get() && !browserFailed;
+        return LumenConfig.CLIENT.webChat.get();
     }
 
     private static Minecraft mc() {
@@ -74,12 +72,6 @@ public final class ChatWebOverlay {
         int ph = (int) Math.ceil(height * window.getGuiScale());
         if (bridge == null) {
             bridge = new LumenWebBridge(LumenWebBridge.CHAT_URL, pw, ph);
-            if (!bridge.isAvailable()) {
-                AquaLumenUI.LOGGER.warn("[AquaLumen Chat] CEF browser unavailable, falling back to native chat");
-                bridge = null;
-                browserFailed = true;
-                return;
-            }
             lastPixelWidth = pw;
             lastPixelHeight = ph;
             pushSelf();
@@ -178,9 +170,6 @@ public final class ChatWebOverlay {
         ensureBridge(window.getGuiScaledWidth(), window.getGuiScaledHeight());
         String legacy = toLegacy(event.getMessage());
         boolean sys = event.isSystem();
-        boolean privateMessage = event.getMessage().getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents tc
-                && tc.getKey().startsWith("commands.message.display.");
-        String channel = ChatChannel.classify(ChatChannel.stripCodes(legacy), sys, privateMessage);
         String nick = nickOf(legacy);
         String color = colorOf(legacy);
         boolean own = mc().player != null && nick.equalsIgnoreCase(mc().player.getGameProfile().getName());
@@ -198,7 +187,6 @@ public final class ChatWebOverlay {
         json.append(",\"color\":").append(quote(color));
         json.append(",\"own\":").append(own);
         json.append(",\"sys\":").append(sys);
-        json.append(",\"ch\":").append(quote(channel));
         json.append("}");
         if (bridge != null) {
             bridge.execute("window.Chat&&window.Chat.push(" + json + ");");

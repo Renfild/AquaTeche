@@ -112,8 +112,8 @@ public final class LumenConfig {
             animations = b.define("animations", true);
             compactMode = b.comment("Denser layout for 1080p windows and low GUI scale.").define("compactMode", false);
             sounds = b.define("sounds", true);
-            webChat = b.comment("Web-rendered chat (channels, cards, mini profile). False = native AquaChat.")
-                    .define("webChatEnabled", true);
+            webChat = b.comment("Web-rendered chat overlay (cards, avatars, channels). False = vanilla chat.")
+                    .define("webChat", false);
             b.pop();
         }
     }

@@ -1,26 +1,22 @@
 {
-  "from_version": "2.9.412",
-  "to_version": "2.9.413",
-  "added": [
+  "from_version": "2.9.421",
+  "to_version": "2.9.422",
+  "added": [],
+  "changed": [
     {
-      "path": "mods/aquamirae-forge-1.20.1-6.4.0.jar",
-      "md5": "d47dd885b52d1d95a1761d976b99ff5e",
-      "size": 19073985,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.413/aquamirae-forge-1.20.1-6.4.0.jar",
-      "asset": "aquamirae-forge-1.20.1-6.4.0.jar"
+      "path": "mods/aquatech_ui-1.0.104.jar",
+      "md5": "b5442407322191cca8f109b75e860021",
+      "size": 3623188,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.422/aquatech_ui-1.0.104.jar",
+      "asset": "aquatech_ui-1.0.104.jar"
     }
   ],
-  "changed": [],
-  "removed": [
-    {
-      "path": "mods/aquamirae-forge-1.20.1-7.1.14.jar"
-    }
-  ],
+  "removed": [],
   "stats": {
-    "added": 1,
-    "changed": 0,
-    "removed": 1,
+    "added": 0,
+    "changed": 1,
+    "removed": 0,
     "unchanged": 153,
-    "download_bytes": 19073985
+    "download_bytes": 3623188
   }
 }

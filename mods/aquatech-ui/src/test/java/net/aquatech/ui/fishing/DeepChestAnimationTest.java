@@ -154,6 +154,21 @@ class DeepChestAnimationTest {
         assertTrue(yOpen > yClosed + 0.3, "closed " + yClosed + " open " + yOpen);
     }
 
+    @Test
+    void firstFrameIsDueAtAnyServerTick() {
+        for (int tick : new int[]{0, 1, 5, 200, 72_000, Integer.MAX_VALUE}) {
+            assertTrue(DeepChestAnimation.stepDue(tick, DeepChestAnimation.NEVER_ANIMATED, 5), "tick " + tick);
+        }
+    }
+
+    @Test
+    void stepIsDueOnlyOnceTheIntervalHasPassed() {
+        assertTrue(!DeepChestAnimation.stepDue(103, 100, 5));
+        assertTrue(!DeepChestAnimation.stepDue(104, 100, 5));
+        assertTrue(DeepChestAnimation.stepDue(105, 100, 5));
+        assertTrue(DeepChestAnimation.stepDue(140, 100, 2));
+    }
+
     /** Where a model-space point (16 units per block) ends up for an ItemDisplay with item_display none. */
     private static double[] worldOf(double[] model, DeepChestAnimation.Pose pose) {
         double[] centred = {model[0] / 16.0 - 0.5, model[1] / 16.0 - 0.5, model[2] / 16.0 - 0.5};

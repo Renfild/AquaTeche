@@ -35,26 +35,34 @@
     box-shadow: 0 22px 60px rgba(0, 0, 0, .55);
   }
   body.open .panel { display: flex; height: 100%; max-width: none; }
-  body.open .shell { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+  body.open .shell { display: grid; grid-template-columns: 214px 1fr; min-height: 0; flex: 1; }
 
-  /* ---------- вкладки каналов (только в панели) ---------- */
-  .tabs { display: none; }
-  body.open .tabs { display: flex; gap: 4px; padding: 10px 12px 0; border-bottom: 1px solid var(--line); }
-  .tab {
-    display: flex; align-items: center; gap: 7px; height: 32px; padding: 0 12px; margin-bottom: -1px;
-    color: var(--thin-55); font-weight: 700; cursor: pointer; border-bottom: 2px solid transparent;
+  /* ---------- рельс каналов (только в панели) ---------- */
+  .rail { display: none; }
+  body.open .rail {
+    display: flex; flex-direction: column; gap: 4px; padding: 12px 10px;
+    border-right: 1px solid var(--line); background: rgba(0, 0, 0, .18);
   }
-  .tab:hover { color: var(--thin-80); }
-  .tab.on { color: var(--aqua); border-bottom-color: var(--aqua); }
-  .bdg {
-    display: none; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; text-align: center;
-    font-size: 11px; line-height: 18px; font-weight: 700; color: #3a2a00; background: var(--gold);
+  .chan {
+    display: flex; align-items: center; gap: 9px; height: 36px; padding: 0 11px;
+    border-radius: 10px; color: var(--thin-55); font-weight: 700; cursor: pointer;
+    border: 1px solid transparent;
   }
-  .bdg.show { display: inline-block; }
+  .chan:hover { color: var(--thin-80); border-color: var(--line); }
+  .chan.on { background: var(--aqua); color: var(--ink); border-color: transparent; }
+  .chan.soon { opacity: .4; cursor: default; }
+  .chan small { margin-left: auto; font-size: 10.5px; font-weight: 700; opacity: .75; }
+  .rail-card {
+    margin-top: auto; padding: 11px 12px; border-radius: 12px;
+    background: var(--thin); color: var(--ink);
+  }
+  .rail-card span { display: block; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(0, 22, 25, .6); }
+  .rail-card b { font-size: 13px; }
+  .rail-card small { color: rgba(0, 22, 25, .7); }
 
   /* ---------- лента ---------- */
   .feed { display: flex; flex-direction: column; gap: 5px; overflow: hidden; }
-  body.open .feed { gap: 2px; padding: 10px 12px; overflow-y: auto; flex: 1; min-height: 0; }
+  body.open .feed { gap: 2px; padding: 10px 12px; overflow-y: auto; }
   .feed::-webkit-scrollbar { width: 6px; }
   .feed::-webkit-scrollbar-thumb { background: rgba(80, 232, 244, .3); border-radius: 3px; }
 
@@ -79,41 +87,6 @@
     border: 1px solid color-mix(in srgb, var(--c, var(--aqua)) 55%, transparent); margin-top: 1px;
   }
   body.open .ava { width: 28px; height: 28px; border-radius: 8px; }
-  body.open .line.hide { display: none; }
-  .ts { display: none; margin-right: 6px; font-size: 11px; color: var(--thin-35); font-weight: 400; }
-  body.open .ts { display: inline; }
-  .who { cursor: default; }
-  body.open .who, body.open .ava { cursor: pointer; }
-
-  /* ---------- карточки событий и торговли ---------- */
-  .line.card { align-items: center; gap: 11px; padding: 8px 12px 8px 12px;
-    background: rgba(255, 216, 117, .09); border-color: rgba(255, 216, 117, .34); }
-  .line.card::before { display: none; }
-  body.open .line.card { border-radius: 12px; background: rgba(255, 216, 117, .09); border-color: rgba(255, 216, 117, .34); padding: 9px 12px; margin: 3px 0; }
-  .line.card.aqua { background: rgba(80, 232, 244, .08); border-color: rgba(80, 232, 244, .3); }
-  .line.card .ico { width: 22px; height: 22px; flex: none; color: var(--gold); }
-  .line.card.aqua .ico { color: var(--aqua); }
-  .line.card .ttl { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 1px; }
-  .line.card.aqua .ttl { color: var(--aqua); }
-  .line.card .tx { color: var(--thin-80); }
-
-  .empty { display: none; padding: 26px 12px; text-align: center; color: var(--thin-35); font-size: 12.5px; }
-  body.open .empty.show { display: block; }
-
-  /* ---------- мини-профиль по клику на ник ---------- */
-  #prof {
-    display: none; position: absolute; z-index: 5; width: 210px; padding: 12px; border-radius: 12px;
-    background: #06232c; border: 1px solid var(--line-2); box-shadow: 0 14px 34px rgba(0, 0, 0, .6);
-  }
-  #prof.show { display: block; }
-  #prof .ph { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  #prof img { width: 36px; height: 36px; border-radius: 9px; image-rendering: pixelated; border: 1px solid var(--line-2); }
-  #prof b { font-size: 14px; color: var(--thin); }
-  #prof .pb { display: flex; gap: 6px; }
-  #prof .pb span { flex: 1; text-align: center; padding: 6px 0; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 12px;
-    border: 1px solid var(--line-2); color: var(--thin-80); }
-  #prof .pb span:hover { border-color: var(--aqua); color: var(--aqua); }
-
   .ava.letter { display: grid; place-items: center; font-weight: 700; font-size: 11px; color: var(--ink); background: var(--c, var(--aqua)); }
 
   .who { font-weight: 700; color: var(--thin); margin-right: 6px; }
@@ -154,14 +127,18 @@
 <div id="scene">
   <div class="panel">
     <div class="shell">
-      <div class="tabs" id="tabs">
-        <div class="tab on" data-ch="all">Общий <span class="bdg" data-b="all"></span></div>
-        <div class="tab" data-ch="trade">Торговля <span class="bdg" data-b="trade"></span></div>
-        <div class="tab" data-ch="events">События <span class="bdg" data-b="events"></span></div>
-        <div class="tab" data-ch="pm">Личные <span class="bdg" data-b="pm"></span></div>
-      </div>
+      <aside class="rail">
+        <div class="chan on" data-ch="all">Все</div>
+        <div class="chan soon" data-ch="global">Глобал <small>скоро</small></div>
+        <div class="chan soon" data-ch="trade">Рынок <small>скоро</small></div>
+        <div class="chan soon" data-ch="pm">ЛС <small>скоро</small></div>
+        <div class="rail-card">
+          <span>Подсказка</span>
+          <b>F4 — меню сервера</b>
+          <small>киты, кейсы, магазин и топы там</small>
+        </div>
+      </aside>
       <div class="feed" id="feed"></div>
-      <div class="empty" id="empty"></div>
     </div>
     <div class="chips" id="chips">
       <span data-cmd="/kit">/kit — набор ранга</span>
@@ -169,7 +146,6 @@
       <span data-cmd="/ah">/ah — аукцион</span>
       <span data-cmd="/balance">/balance</span>
     </div>
-    <div id="prof"><div class="ph"><img id="profImg" alt=""><b id="profNick"></b></div><div class="pb"><span id="profMsg">Написать</span><span id="profPay">Заплатить</span></div></div>
     <div id="bar"><input id="input" maxlength="256" placeholder="Сообщение или /команда"><button id="send">&#10148;</button></div>
     <div id="hint">Enter — отправить · / — команда · Esc — свернуть</div>
   </div>
@@ -184,29 +160,8 @@ window.AquaLumenBridge = {
 
 var feed = document.getElementById('feed');
 var input = document.getElementById('input');
-var MAX_LINES = 80;
+var MAX_LINES = 60;
 var lastNick = null;
-var activeCh = 'all';
-var unread = { all: 0, trade: 0, events: 0, pm: 0 };
-var EMPTY_TEXT = {
-  all: 'Здесь будет общий чат.',
-  trade: 'Сделки аукциона и рынка появятся здесь.',
-  events: 'События океана: турнир, косяки, сокровище из глубин.',
-  pm: 'Личные сообщения. Написать: /msg ник текст.'
-};
-var ICONS = {
-  trophy: 'M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3',
-  gem: 'M6 4h12l4 6-10 11L2 10l4-6zM2 10h20M9 4l3 6 3-6M12 10v11',
-  fish: 'M3 12c3-5 8-6 12-3l4-3v12l-4-3c-4 3-9 2-12-3zM8.5 11.5h.01',
-  coin: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v10M9.5 10a2 2 0 0 1 2-1.5h1a1.8 1.8 0 0 1 0 3.5h-2a1.8 1.8 0 0 0 0 3.5h1.2a2 2 0 0 0 2-1.5',
-  star: 'M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7L12 3z'
-};
-var TAG_ICON = {
-  'Турнир': 'trophy', 'Сокровище глубин': 'gem', 'Золотая рыба': 'star', 'Золотая буря': 'star',
-  'Косяк': 'fish', 'Рыбак': 'fish', 'Кот-рыболов': 'fish', 'Улов': 'fish', 'Приманка': 'fish',
-  'Рынок': 'coin', 'Торговля': 'coin', 'Атлас': 'star', 'Контракт': 'star'
-};
-var AQUA_TAGS = { 'Косяк': 1, 'Рыбак': 1, 'Кот-рыболов': 1, 'Улов': 1, 'Приманка': 1 };
 
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function colorize(s) {
@@ -218,93 +173,38 @@ function colorize(s) {
     return '';
   });
 }
-function plain(s) { return String(s).replace(/\u00a7./g, ''); }
-function hhmm() {
-  var d = new Date();
-  return (d.getHours() < 10 ? '0' : '') + d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
-}
 function trim() {
   while (feed.children.length > MAX_LINES) feed.removeChild(feed.firstChild);
 }
 function toBottom() { feed.scrollTop = feed.scrollHeight; }
 
-function renderBadges() {
-  document.querySelectorAll('.bdg').forEach(function (b) {
-    var n = unread[b.dataset.b] || 0;
-    b.textContent = n > 99 ? '99+' : String(n);
-    b.classList.toggle('show', n > 0);
-  });
-}
-function applyFilter() {
-  var any = false;
-  Array.prototype.forEach.call(feed.children, function (line) {
-    var hide = line.dataset.ch !== activeCh;
-    line.classList.toggle('hide', hide);
-    if (!hide) any = true;
-  });
-  var empty = document.getElementById('empty');
-  empty.textContent = EMPTY_TEXT[activeCh] || '';
-  empty.classList.toggle('show', !any);
-  toBottom();
-}
-function setChannel(ch) {
-  activeCh = ch;
-  unread[ch] = 0;
-  document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('on', t.dataset.ch === ch); });
-  renderBadges();
-  applyFilter();
-}
-function svg(name) {
-  return '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="' + ICONS[name] + '"/></svg>';
-}
-
 window.Chat = {
   push: function (m) {
-    var ch = m.ch || 'all';
     var div = document.createElement('div');
-    div.dataset.ch = ch;
-    var t = '<span class="ts">' + hhmm() + '</span>';
-    var tagMatch = m.sys ? plain(m.text).match(/^\s*\[([^\]]{1,30})\]\s*([\s\S]*)$/) : null;
-    if (m.sys && (ch === 'events' || ch === 'trade') && tagMatch) {
-      lastNick = null;
-      var tag = tagMatch[1];
-      div.className = 'line card' + (AQUA_TAGS[tag] ? ' aqua' : '');
-      var body = m.text.replace(/^\s*(\u00a7.)*\[[^\]]{1,30}\]\s*(\u00a7.)*/, '');
-      div.innerHTML = svg(TAG_ICON[tag] || 'star') + '<div><div class="ttl">' + esc(tag) + ' ' + t + '</div><span class="tx">' + colorize(body) + '</span></div>';
-    } else if (m.sys) {
+    if (m.sys) {
       lastNick = null;
       div.className = 'line sysline';
-      div.innerHTML = '<div class="tx sys">' + t + colorize(m.text) + '</div>';
-    } else {
-      var text = m.text;
-      if (m.nick && ch !== 'pm') {
-        var cut = text.replace(new RegExp('^.*?' + m.nick.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:\\s|§.)*[:>»▸]\\s*(?:§.)*'), '');
-        if (cut) text = cut;
-      }
-      var grouped = !m.own && m.nick && m.nick === lastNick;
-      lastNick = m.own ? null : (m.nick || null);
-      div.className = 'line' + (m.own ? ' own' : '') + (grouped ? ' grouped' : '');
-      div.style.setProperty('--c', m.color || '#50e8f4');
-      var ava = m.head
-        ? '<img class="ava" src="' + m.head + '" data-nick="' + esc(m.nick || '') + '">'
-        : '<div class="ava letter" data-nick="' + esc(m.nick || '') + '">' + (m.nick ? esc(m.nick[0]) : '?') + '</div>';
-      div.innerHTML = ava + '<div>' + (m.nick && !grouped ? '<span class="who" data-nick="' + esc(m.nick) + '">' + esc(m.nick) + '</span>' + t : '')
-        + '<span class="tx">' + colorize(text) + '</span></div>';
+      div.innerHTML = '<div class="tx sys">' + colorize(m.text) + '</div>';
+      feed.appendChild(div);
+      trim(); toBottom();
+      return;
     }
+    var grouped = !m.own && m.nick && m.nick === lastNick;
+    lastNick = m.own ? null : (m.nick || null);
+    div.className = 'line' + (m.own ? ' own' : '') + (grouped ? ' grouped' : '');
+    div.style.setProperty('--c', m.color || '#50e8f4');
+    var ava = m.head
+      ? '<img class="ava" src="' + m.head + '">'
+      : '<div class="ava letter">' + (m.nick ? esc(m.nick[0]) : '?') + '</div>';
+    div.innerHTML = ava + '<div>' + (m.nick && !grouped ? '<span class="who">' + esc(m.nick) + '</span> ' : '')
+      + '<span class="tx">' + colorize(m.text) + '</span></div>';
     feed.appendChild(div);
-    if (ch !== activeCh) {
-      unread[ch] = (unread[ch] || 0) + 1;
-      renderBadges();
-    }
-    div.classList.toggle('hide', ch !== activeCh);
-    trim();
-    if (ch === activeCh) document.getElementById('empty').classList.remove('show');
-    toBottom();
+    trim(); toBottom();
   },
   setSelf: function (head, nick) {
     window._selfHead = head; window._selfNick = nick;
   },
-  clear: function () { feed.innerHTML = ''; lastNick = null; applyFilter(); }
+  clear: function () { feed.innerHTML = ''; lastNick = null; }
 };
 
 function send() {
@@ -323,41 +223,13 @@ document.getElementById('chips').addEventListener('click', function (e) {
   if (!chip) return;
   AquaLumenBridge.send({ type: 'chat.send', text: chip.dataset.cmd });
 });
-document.getElementById('tabs').addEventListener('click', function (e) {
-  var tab = e.target.closest('.tab');
-  if (tab) setChannel(tab.dataset.ch);
+document.querySelector('.rail').addEventListener('click', function (e) {
+  var tab = e.target.closest('.chan');
+  if (!tab || tab.classList.contains('soon')) return;
+  document.querySelectorAll('.chan').forEach(function (x) { x.classList.remove('on'); });
+  tab.classList.add('on');
+  AquaLumenBridge.send({ type: 'chat.channel', channel: tab.dataset.ch });
 });
-
-var prof = document.getElementById('prof');
-var profNick = '';
-function hideProf() { prof.classList.remove('show'); }
-feed.addEventListener('click', function (e) {
-  var src = e.target.closest('[data-nick]');
-  if (!src || !document.body.classList.contains('open')) { hideProf(); return; }
-  var nick = src.dataset.nick;
-  if (!nick || nick === window._selfNick) { hideProf(); return; }
-  var row = src.closest('.line');
-  var img = row && row.querySelector('img.ava');
-  profNick = nick;
-  document.getElementById('profNick').textContent = nick;
-  var pi = document.getElementById('profImg');
-  pi.style.display = img ? 'block' : 'none';
-  if (img) pi.src = img.src;
-  var box = row.getBoundingClientRect();
-  prof.style.left = Math.min(Math.max(8, box.left + 30), window.innerWidth - 226) + 'px';
-  prof.style.top = Math.max(8, Math.min(box.bottom + 4, window.innerHeight - 140)) + 'px';
-  prof.classList.add('show');
-  e.stopPropagation();
-});
-document.addEventListener('click', function (e) { if (!e.target.closest('#prof')) hideProf(); });
-function fillInput(text) {
-  input.value = text;
-  input.focus();
-  hideProf();
-}
-document.getElementById('profMsg').addEventListener('click', function () { fillInput('/msg ' + profNick + ' '); });
-document.getElementById('profPay').addEventListener('click', function () { fillInput('/pay ' + profNick + ' '); });
-applyFilter();
 </script>
 </body>
 </html>

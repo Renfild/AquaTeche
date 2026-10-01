@@ -32,6 +32,14 @@ final class DeepChestAnimation {
     private DeepChestAnimation() {
     }
 
+    /** Метка «кадров ещё не было»: разность тиков с ней переполняла int, и анимация не стартовала. */
+    static final int NEVER_ANIMATED = Integer.MIN_VALUE;
+
+    /** Пора ли слать следующий кадр: первый кадр сразу, дальше не чаще чем раз в {@code step} тиков. */
+    static boolean stepDue(int tick, int lastTick, int step) {
+        return lastTick == NEVER_ANIMATED || tick - lastTick >= step;
+    }
+
     private static double clamp01(double v) {
         return Math.max(0.0, Math.min(1.0, v));
     }
