@@ -54,27 +54,27 @@ window.AQUATECH_UPDATES = {
         {
           "name": "Пиратский сундук",
           "note": "Событие «Сокровище из глубин»",
-          "img": "images/updates/chest-card.webp"
+          "img": "assets/images/updates/chest-icon.webp"
         },
         {
           "name": "Ключ Кейса IV",
           "note": "Ботаническая Флора · 1 место, сундук",
-          "img": "images/cases/flora.png"
+          "img": "assets/images/updates/key-flora.webp"
         },
         {
           "name": "Ключ Кейса III",
           "note": "Паровая Энергия · 2 место, сундук",
-          "img": "images/cases/steam.png"
+          "img": "assets/images/updates/key-steam.webp"
         },
         {
           "name": "Ключ Кейса II",
           "note": "Инженер Плавильни · 3 место, сундук",
-          "img": "images/cases/smeltery.png"
+          "img": "assets/images/updates/key-smeltery.webp"
         },
         {
           "name": "Зал славы",
           "note": "Рекорд и победители прошлых недель",
-          "icon": "trophy"
+          "img": "assets/images/updates/trophy.webp"
         }
       ],
       "economy": {

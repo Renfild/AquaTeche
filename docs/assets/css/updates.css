@@ -117,8 +117,8 @@
   transition: transform .4s var(--ease), border-color .3s;
 }
 .u-item:hover { transform: translateY(-4px); border-color: var(--gold); }
-.u-item img { width: 96px; height: 96px; object-fit: contain; margin-bottom: .4rem; filter: drop-shadow(0 10px 12px rgba(0, 0, 0, .35)); }
-.u-item-icon { width: 96px; height: 96px; display: grid; place-items: center; color: var(--gold); margin-bottom: .4rem; }
+.u-item img { width: 136px; height: 136px; object-fit: contain; margin-bottom: .4rem; filter: drop-shadow(0 10px 12px rgba(0, 0, 0, .35)); }
+.u-item-icon { width: 136px; height: 136px; display: grid; place-items: center; color: var(--gold); margin-bottom: .4rem; }
 .u-item-icon svg { width: 64px; height: 64px; }
 .u-item b { line-height: 1.2; }
 .u-item span { color: var(--muted); font-size: .85rem; line-height: 1.35; }
