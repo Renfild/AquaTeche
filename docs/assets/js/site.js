@@ -26,6 +26,7 @@
   const NAV_MORE = [
     { href: "market.html", label: "Рынок", id: "market" },
     { href: "top.html", label: "Топы", id: "top" },
+    { href: "updates.html", label: "Обновления", id: "updates" },
     { href: "news.html", label: "Новости", id: "news" },
     { href: "events.html", label: "События", id: "events" },
     { href: "tournament.html", label: "Турнир", id: "tournament" },
