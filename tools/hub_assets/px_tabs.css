@@ -38,16 +38,16 @@
 .store-grid,.case-grid{gap:14px}
 .offer{border:8px solid transparent!important;border-image:var(--n-inset) 4 fill/8px stretch!important;background:none!important;min-height:0!important;padding:6px 4px 4px!important}
 .offer:hover{filter:brightness(1.18)}
-.offer.is-owned{border-image-source:var(--n-done)!important}
+.offer.is-owned{border-image-source:var(--n-r-uncommon)!important}
 .offer h3,.case h3{font-size:10px!important;line-height:1.5;font-weight:400;letter-spacing:0;color:#fff;text-shadow:1px 1px 0 #000}
 .offer p{font-size:8px!important;line-height:1.7;color:#b9a8ff!important;margin:6px 0 10px!important}
 .offer-badge{border:6px solid transparent!important;border-image:var(--n-lime) 4 fill/6px stretch!important;background:none!important;color:#0e3a05!important;font-size:8px!important;padding:0 2px!important;right:6px!important;top:6px!important;text-shadow:none}
 .price{font-size:10px!important;color:#ffd23a!important;text-shadow:2px 2px 0 #3a1c00}
 .price .aqua-coin-icon,.offer .aqua-coin-icon{width:14px;height:14px}
-.offer-art,.rank-glyph{border:8px solid transparent!important;border-image:var(--n-chip) 4 fill/8px stretch!important;background:none!important;width:64px!important;height:64px!important;margin:0 0 12px!important}
+.offer-art,.rank-glyph{border:8px solid transparent!important;border-image:var(--n-chip) 4 fill/8px stretch!important;background:none!important;width:80px!important;height:80px!important;margin:0 0 12px!important}
 .pxg{display:block;width:100%;height:100%;background-position:center;background-repeat:no-repeat;background-size:contain;image-rendering:pixelated}
 .pxi{display:inline-block;width:16px;height:16px;flex:0 0 16px;background-position:center;background-repeat:no-repeat;background-size:contain;image-rendering:pixelated;vertical-align:middle}
-.offer-art .mc-icon{width:32px;height:32px}
+.offer-art .mc-icon,.offer-art img{width:64px;height:64px;image-rendering:pixelated}
 .rank-card{position:relative}
 .rank-card:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--rc)}
 .owned-tag{font-size:8px;color:#8dff3a}

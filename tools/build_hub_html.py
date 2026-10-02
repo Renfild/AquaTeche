@@ -1368,12 +1368,10 @@ try {
 
   function storeView(s, ranksOnly) {
     const RANK_IDS = Object.keys(RANK_META);
-    // Если вкладка «Привилегии» выключена в enabledTabs — магазин показывает всё (ранги + товары).
-    const hasPrivTab = (state.payload.enabledTabs || []).includes("privileges");
+    // Привилегии (ранги) в F4 не продаются: фильтруем их из магазина.
     const offers = (s.store || []).filter((o) => {
       const isRank = RANK_IDS.includes(o.id);
-      if (ranksOnly) return isRank;
-      return hasPrivTab ? !isRank : true;
+      return !ranksOnly && !isRank;
     });
 
     const SHOP_ICONS = {
@@ -2004,7 +2002,7 @@ __PASS_VIEW_JS__
   }
 
   function renderNav() {
-    const tabs = state.payload.enabledTabs || [];
+    const tabs = (state.payload.enabledTabs || []).filter(k => k !== "privileges");
     $("nav").innerHTML = tabs.map(k => {
       const meta = tabMeta[k] || [k, '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>'];
       const active = state.tab === k ? "active" : "";
