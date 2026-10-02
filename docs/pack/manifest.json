@@ -1,5 +1,5 @@
 {
-  "version": "2.9.424",
+  "version": "2.9.425",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -35,11 +35,11 @@
       "asset": "appliedenergistics2-forge-15.4.10.jar"
     },
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.62-alpha.jar",
-      "md5": "7e10a9137be298a350eb0d1382adc8c5",
-      "size": 2369178,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.424/aqualumen-forge-1.20.1-0.3.62-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.62-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.63-alpha.jar",
+      "md5": "837639a7cdec2694cdfda8fae7cf15e9",
+      "size": 2506968,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.425/aqualumen-forge-1.20.1-0.3.63-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.63-alpha.jar"
     },
     {
       "path": "mods/aquamirae-forge-1.20.1-6.4.0.jar",
@@ -63,11 +63,11 @@
       "asset": "aquatech_machines-1.0.11.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.106.jar",
-      "md5": "a78499eed56f0df7ccadc6c7507763be",
-      "size": 3623690,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.424/aquatech_ui-1.0.106.jar",
-      "asset": "aquatech_ui-1.0.106.jar"
+      "path": "mods/aquatech_ui-1.0.107.jar",
+      "md5": "ecbcd067dc155b7491680767fe9a8b17",
+      "size": 3718180,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.425/aquatech_ui-1.0.107.jar",
+      "asset": "aquatech_ui-1.0.107.jar"
     },
     {
       "path": "mods/architectury-9.2.14-forge.jar",
@@ -575,9 +575,9 @@
     },
     {
       "path": "config/aqualumen/coin.png",
-      "md5": "d78a43584cc8ab3cc909ca24d227ceb4",
-      "size": 346,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.404/config__aqualumen__coin.png",
+      "md5": "d3a9e43b81c70bde1b5d9856af599ad5",
+      "size": 651,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.425/config__aqualumen__coin.png",
       "asset": "config__aqualumen__coin.png"
     },
     {
@@ -589,9 +589,9 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "e79a0b7b77f313d42caabb51b2424a4d",
-      "size": 860467,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.407/config__aqualumen__hub.html",
+      "md5": "9ef36734fd020f2dca51a58dc6250074",
+      "size": 952923,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.425/config__aqualumen__hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
@@ -617,16 +617,16 @@
     },
     {
       "path": "config/aqualumen/html/coin.png",
-      "md5": "d78a43584cc8ab3cc909ca24d227ceb4",
-      "size": 346,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.404/config__aqualumen__html__coin.png",
+      "md5": "d3a9e43b81c70bde1b5d9856af599ad5",
+      "size": 651,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.425/config__aqualumen__html__coin.png",
       "asset": "config__aqualumen__html__coin.png"
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "e79a0b7b77f313d42caabb51b2424a4d",
-      "size": 860467,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.407/config__aqualumen__html__hub.html",
+      "md5": "9ef36734fd020f2dca51a58dc6250074",
+      "size": 952923,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.425/config__aqualumen__html__hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
     {
