@@ -9,6 +9,7 @@ final class DeepChestLogic {
     static final int MIN_COINS = 5000;
     static final int MAX_COINS = 10000;
     static final double KEY_CHANCE = 0.30;
+    static final double BOOSTER_CHANCE = 0.25;
     static final String[] CASE_KEYS = {"flora", "steam", "smeltery"};
 
     record Reward(int coins, String caseId) {
@@ -22,6 +23,11 @@ final class DeepChestLogic {
         int coins = MIN_COINS + 100 * random.nextInt((MAX_COINS - MIN_COINS) / 100 + 1);
         String caseId = random.nextDouble() < KEY_CHANCE ? CASE_KEYS[random.nextInt(CASE_KEYS.length)] : null;
         return new Reward(coins, caseId);
+    }
+
+    /** Малый бустер скупщика к награде сундука, отдельно от ключа. */
+    static boolean rollBooster(Random random) {
+        return random.nextDouble() < BOOSTER_CHANCE;
     }
 
     static long nextDelayMs(Random random, int minMinutes, int maxMinutes) {

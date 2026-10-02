@@ -401,8 +401,10 @@ public final class FishShopConfig {
             return;
         }
 
-        HubEconomy.grantCoins(player, totalCoins);
-        player.sendSystemMessage(Component.literal("\u00a7a[AquaTech] \u0423\u043b\u043e\u0432 \u043f\u0440\u043e\u0434\u0430\u043d: \u00a7e" + totalFishCount + " \u0448\u0442. \u00a76+" + totalCoins + "\u00a7f!"));
+        long bonus = BoosterService.bonusFor(player, totalCoins);
+        HubEconomy.grantCoins(player, totalCoins + bonus);
+        player.sendSystemMessage(Component.literal("\u00a7a[AquaTech] \u0423\u043b\u043e\u0432 \u043f\u0440\u043e\u0434\u0430\u043d: \u00a7e" + totalFishCount + " \u0448\u0442. \u00a76+" + (totalCoins + bonus) + "\u00a7f!"));
+        BoosterService.announceBonus(player, bonus);
         HubDataService.push(player);
     }
 
@@ -439,9 +441,11 @@ public final class FishShopConfig {
             return;
         }
 
-        HubEconomy.grantCoins(player, totalCoins);
+        long bonus = BoosterService.bonusFor(player, totalCoins);
+        HubEconomy.grantCoins(player, totalCoins + bonus);
         String fishName = def != null ? def.name : item.getDescription().getString();
-        player.sendSystemMessage(Component.literal("\u00a7a[AquaTech] \u041f\u0440\u043e\u0434\u0430\u043d\u043e \u00a7e" + totalCount + " \u0448\u0442. " + fishName + " \u00a76+" + totalCoins + "\u00a7f!"));
+        player.sendSystemMessage(Component.literal("\u00a7a[AquaTech] \u041f\u0440\u043e\u0434\u0430\u043d\u043e \u00a7e" + totalCount + " \u0448\u0442. " + fishName + " \u00a76+" + (totalCoins + bonus) + "\u00a7f!"));
+        BoosterService.announceBonus(player, bonus);
         HubDataService.push(player);
     }
 

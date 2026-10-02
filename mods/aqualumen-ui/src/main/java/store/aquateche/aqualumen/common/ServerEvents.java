@@ -10,6 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import store.aquateche.aqualumen.AquaLumenUI;
 import store.aquateche.aqualumen.common.command.LumenCommands;
+import store.aquateche.aqualumen.common.service.BoosterService;
 import store.aquateche.aqualumen.common.service.HubActionHandler;
 import store.aquateche.aqualumen.common.service.HubDataService;
 import store.aquateche.aqualumen.common.service.HubEconomy;
@@ -106,6 +107,9 @@ public final class ServerEvents {
             }
         }
         PendingDeliveryService.onServerTick(event.getServer());
+        if (tickCounter % 20 == 0) {
+            BoosterService.tickActionBar(event.getServer());
+        }
         tickCounter++;
     }
 

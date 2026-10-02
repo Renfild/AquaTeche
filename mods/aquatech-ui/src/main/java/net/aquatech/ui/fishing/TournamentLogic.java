@@ -103,6 +103,11 @@ public final class TournamentLogic {
         return 0;
     }
 
+    /** Бустер скупщика к призу: 1 место получает большой, 2 и 3 места малый. */
+    public static String boosterFor(int place) {
+        return place == 1 ? "large" : place == 2 || place == 3 ? "small" : null;
+    }
+
     public static List<Prize> prizesFor(List<Entry> top, int week) {
         List<Prize> prizes = new ArrayList<>();
         for (int i = 0; i < Math.min(PRIZE_COINS.length, top.size()); i++) {

@@ -27,6 +27,9 @@
         + '<img class="c1" src="assets/images/cases/flora.png" alt="Кейс IV" loading="lazy" width="256" height="256">'
         + '<span class="medal m1">1</span><span class="medal m2">2</span><span class="medal m3">3</span></div>';
     }
+    if (kind === "booster") {
+      return '<div class="u-art u-art--booster"><img src="assets/images/updates/booster.webp" alt="Бустер скупщика" loading="lazy" decoding="async" width="256" height="256"></div>';
+    }
     return '<div class="u-art u-art--themes" aria-hidden="true">'
       + '<div class="mock mock--dark"><i></i><b></b><u></u><span><em></em><em></em><em></em></span></div>'
       + '<div class="mock mock--light"><i></i><b></b><u></u><span><em></em><em></em><em></em></span></div></div>';

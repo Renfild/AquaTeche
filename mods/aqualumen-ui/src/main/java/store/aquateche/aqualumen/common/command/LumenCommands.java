@@ -13,6 +13,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Blocks;
+import store.aquateche.aqualumen.common.service.BoosterLogic;
+import store.aquateche.aqualumen.common.service.BoosterService;
 import store.aquateche.aqualumen.common.service.FishShopConfig;
 import store.aquateche.aqualumen.common.service.HubDataService;
 import store.aquateche.aqualumen.common.service.MarketService;
@@ -84,6 +86,24 @@ public final class LumenCommands {
                     return 1;
                 });
         dispatcher.register(ah);
+
+        LiteralArgumentBuilder<CommandSourceStack> booster = Commands.literal("booster")
+                .executes(ctx -> BoosterService.status(ctx.getSource().getPlayerOrException()))
+                .then(Commands.literal("use")
+                        .then(Commands.argument("tier", StringArgumentType.greedyString())
+                                .executes(ctx -> BoosterService.use(ctx.getSource().getPlayerOrException(),
+                                        StringArgumentType.getString(ctx, "tier")))))
+                .then(Commands.literal("give")
+                        .requires(source -> source.hasPermission(2))
+                        .then(Commands.argument("target", EntityArgument.player())
+                                .then(Commands.argument("tier", StringArgumentType.word())
+                                        .executes(ctx -> giveBooster(ctx.getSource(), EntityArgument.getPlayer(ctx, "target"),
+                                                StringArgumentType.getString(ctx, "tier"), 1))
+                                        .then(Commands.argument("amount", IntegerArgumentType.integer(1, 20))
+                                                .executes(ctx -> giveBooster(ctx.getSource(), EntityArgument.getPlayer(ctx, "target"),
+                                                        StringArgumentType.getString(ctx, "tier"),
+                                                        IntegerArgumentType.getInteger(ctx, "amount")))))));
+        dispatcher.register(booster);
 
         // Register /hub with the same capabilities
         if (LumenConfig.COMMON.hubEnabled.get()) {
@@ -354,5 +374,16 @@ public final class LumenCommands {
         }
         player.sendSystemMessage(Component.literal("§c[RTP] Не нашёл безопасное место, попробуй ещё раз."));
         return 0;
+    }
+
+    private static int giveBooster(CommandSourceStack source, ServerPlayer target, String tierName, int amount) {
+        BoosterLogic.Tier tier = BoosterLogic.parse(tierName);
+        if (tier == null) {
+            source.sendFailure(Component.literal("§cВид бустера: small или large"));
+            return 0;
+        }
+        BoosterService.grant(target, tier, amount);
+        source.sendSuccess(() -> Component.literal("§a" + target.getGameProfile().getName() + ": +" + amount + " " + tier.id()), true);
+        return amount;
     }
 }

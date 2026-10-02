@@ -103,4 +103,16 @@ class DeepChestLogicTest {
         };
         assertNull(DeepChestLogic.rollReward(random).caseId());
     }
+
+    @Test
+    void smallBoosterDropsAboutAQuarterOfTheTime() {
+        Random random = new Random(5);
+        int hits = 0;
+        int rolls = 10000;
+        for (int i = 0; i < rolls; i++) {
+            if (DeepChestLogic.rollBooster(random)) hits++;
+        }
+        double share = hits / (double) rolls;
+        assertTrue(share > 0.22 && share < 0.28, "share " + share);
+    }
 }

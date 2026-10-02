@@ -472,6 +472,7 @@ public final class DeepChestService {
         DeepChestLogic.Reward reward = DeepChestLogic.rollReward(new Random());
         OceanEventsService.grantCoins(player, reward.coins());
         if (reward.caseId() != null) OceanEventsService.grantCaseKey(player, reward.caseId());
+        if (DeepChestLogic.rollBooster(new Random())) OceanEventsService.grantBooster(player, "small");
         lastWinner = player.getUUID();
 
         ServerLevel level = chest.level;

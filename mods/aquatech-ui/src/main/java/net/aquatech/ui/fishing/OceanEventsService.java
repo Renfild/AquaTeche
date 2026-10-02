@@ -47,6 +47,7 @@ public final class OceanEventsService {
     private static final Path BOOST_FILE = FMLPaths.CONFIGDIR.get().resolve("aqualumen/event_boost.json");
     private static final String WEIGHT_TAG = "aquatech_tournament_weight";
     private static final String CASE_KEYS_TAG = "aqualumen_case_keys";
+    private static final String BOOSTERS_TAG = "aqualumen_boosters";
     private static final int REROLL_COST = 100;
     private static final long GOLDEN_BLOCK = 3L * 3600_000L;   // окно каждые 3 часа
     private static final long GOLDEN_WINDOW = 20L * 60_000L;   // длится 20 минут
@@ -400,6 +401,8 @@ public final class OceanEventsService {
     private static void grantPrize(ServerPlayer player, TournamentLogic.Prize prize) {
         addCoins(player, prize.coins);
         grantCaseKey(player, prize.caseId);
+        String booster = TournamentLogic.boosterFor(prize.place);
+        if (booster != null) grantBooster(player, booster);
         player.sendSystemMessage(Component.literal("§6[Турнир] §aПриз за " + prize.place + " место (неделя " + prize.week
                 + "): §6+" + prize.coins + " монет §aи §bключ Кейса " + TournamentLogic.caseNumeral(prize.caseId) + "§a!"));
     }
@@ -789,6 +792,17 @@ public final class OceanEventsService {
         keys.putInt(caseId, keys.getInt(caseId) + 1);
         data.put(CASE_KEYS_TAG, keys);
         pushHubUpdate(player);
+    }
+
+    /** Бустер скупщика в запас игрока: тот же тег, что читает aqualumen (BoosterService), без compile-зависимости. */
+    public static void grantBooster(ServerPlayer player, String tier) {
+        CompoundTag data = player.getPersistentData();
+        CompoundTag boosters = data.getCompound(BOOSTERS_TAG);
+        boosters.putInt(tier, boosters.getInt(tier) + 1);
+        data.put(BOOSTERS_TAG, boosters);
+        boolean large = "large".equals(tier);
+        player.sendSystemMessage(Component.literal("§e[Бустер скупщика] §a+ " + (large ? "большой ×2 · 15 мин" : "малый ×1.5 · 30 мин")
+                + " §7(/booster)"));
     }
 
     /** Объявление в чат для сервисов вне этого класса (атлас, вехи). */

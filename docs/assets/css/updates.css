@@ -78,6 +78,9 @@
 }
 .u-feature:hover .u-art--chest img { transform: translateY(-6px) rotate(-1.5deg) scale(1.02); }
 
+.u-art--booster img { position: relative; width: min(70%, 280px); height: auto; image-rendering: pixelated; filter: drop-shadow(0 20px 22px rgba(0, 0, 0, .4)); transition: transform .6s var(--ease); }
+.u-feature:hover .u-art--booster img { transform: translateY(-6px) scale(1.04); }
+
 .u-art--cases { min-height: 360px; }
 .u-art--cases img { position: absolute; height: auto; filter: drop-shadow(0 20px 22px rgba(0, 0, 0, .4)); transition: transform .6s var(--ease); }
 .u-art--cases .c1 { width: 54%; left: 23%; top: 8%; z-index: 2; }

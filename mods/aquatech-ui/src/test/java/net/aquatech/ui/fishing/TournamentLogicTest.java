@@ -140,4 +140,13 @@ class TournamentLogicTest {
         assertTrue(state.finalSent, "legacy files must not trigger a bogus finalize retry");
         assertEquals(0L, state.endsAt);
     }
+
+    @Test
+    void firstPlaceGetsALargeBoosterSecondAndThirdASmallOne() {
+        assertEquals("large", TournamentLogic.boosterFor(1));
+        assertEquals("small", TournamentLogic.boosterFor(2));
+        assertEquals("small", TournamentLogic.boosterFor(3));
+        assertNull(TournamentLogic.boosterFor(4));
+        assertNull(TournamentLogic.boosterFor(0));
+    }
 }
