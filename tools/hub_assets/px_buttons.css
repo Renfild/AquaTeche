@@ -1,0 +1,52 @@
+/* ===== volumetric buttons: light top edge, thick darker bottom band (see px_assets.button9) ===== */
+.nav-button,.button,.btn-buy,.btn-cancel,.auction-pill,.icon-button,.np-arr,.np-take{border-style:solid!important;border-color:transparent!important;border-width:6px 6px 10px 6px!important;border-image-slice:3 3 5 3 fill!important;border-image-width:6px 6px 10px 6px!important;border-image-repeat:stretch!important;background:none!important;box-shadow:none!important}
+.nav-button{border-image-source:var(--b-gray)!important;text-shadow:0 2px 0 #20244a!important;padding:0 6px 4px 36px!important}
+.nav-button:hover{filter:brightness(1.12)}
+.nav-button.active{border-image-source:var(--b-blue)!important;text-shadow:0 2px 0 #0e2f8a!important}
+.nav-button:active{border-image-source:var(--bp-gray)!important}
+.button,.auction-pill{border-image-source:var(--b-gray)!important;color:#fff!important;text-shadow:0 2px 0 #20244a!important;padding:0 4px 3px!important}
+.button.primary,.btn-buy{border-image-source:var(--b-green)!important;color:#fff!important;text-shadow:0 2px 0 #0e4a10!important;padding:0 4px 3px!important}
+.btn-cancel{border-image-source:var(--b-red)!important;color:#fff!important;text-shadow:0 2px 0 #5a0a10!important;padding:0 4px 3px!important}
+.atlas-pill.active,.auction-pill.active{border-image-source:var(--b-blue)!important;text-shadow:0 2px 0 #0e2f8a!important}
+.button:hover,.btn-buy:hover,.btn-cancel:hover,.auction-pill:hover{filter:brightness(1.12);transform:none!important}
+.button:active,.auction-pill:active{border-image-source:var(--bp-gray)!important;transform:none!important;padding-top:3px!important;padding-bottom:0!important}
+.button.primary:active,.btn-buy:active{border-image-source:var(--bp-green)!important}
+.btn-cancel:active{border-image-source:var(--bp-red)!important}
+.button:disabled{border-image-source:var(--b-lock)!important;filter:none;opacity:.7;color:#8a88b8!important;text-shadow:none!important}
+.icon-button{border-image-source:var(--b-gray)!important;width:46px!important;height:48px!important}
+.icon-button::after{inset:0 0 4px 0}
+.icon-button:active{border-image-source:var(--bp-gray)!important}
+.np-arr{border-image-source:var(--b-gray)!important;width:32px!important;height:56px!important}
+.np-arr::after{inset:0 0 4px 0}
+.np-arr:active{border-image-source:var(--bp-gray)!important}
+.np-take{border-image-source:var(--b-lime)!important;color:#0e3a05!important;text-shadow:0 1px 0 rgba(255,255,255,.4)!important}
+.np-ribbon{border-style:solid!important;border-color:transparent!important;border-width:6px 6px 10px 6px!important;border-image:var(--b-red) 3 3 5 3 fill/6px 6px 10px 6px stretch!important;text-shadow:0 2px 0 #5a0a10!important;padding:0 2px 2px!important}
+
+/* pass slots behave like buttons too */
+.np-slot{border-width:6px 6px 10px 6px!important;border-image-slice:3 3 5 3 fill!important;border-image-width:6px 6px 10px 6px!important;border-image-source:var(--b-lock)!important}
+.np-slot.done{border-image-source:var(--b-green)!important}
+.np-slot.ready{border-image-source:var(--b-lime)!important}
+.np-slot.next{border-image-source:var(--b-next)!important}
+.np-slot.lock{border-image-source:var(--b-lock)!important}
+.np-slot.ready:active{border-image-source:var(--bp-lime)!important}
+
+/* menu icons: 16x16 colour sprites drawn at 2x */
+.nav-button{min-height:48px!important;padding-left:46px!important;filter:drop-shadow(0 2px 0 rgba(5,3,15,.75))}
+.nav-button::before{left:7px!important;top:50%!important;width:32px!important;height:32px!important;margin-top:-18px!important}
+.nav-button:hover{filter:drop-shadow(0 2px 0 rgba(5,3,15,.75)) brightness(1.12)}
+.nav{gap:3px!important}
+.sidebar,.content{min-height:0!important}
+.sidebar{overflow-y:auto}
+.sidebar::-webkit-scrollbar{width:6px}.sidebar::-webkit-scrollbar-thumb{background:#4a3d9a}
+.button,.auction-pill{filter:drop-shadow(0 2px 0 rgba(5,3,15,.6))}
+.button:hover,.auction-pill:hover{filter:drop-shadow(0 2px 0 rgba(5,3,15,.6)) brightness(1.12)}
+.button:disabled{filter:none}
+
+/* compact menu buttons: thinner bottom band so all 11 fit */
+.nav-button{min-height:44px!important;border-width:6px 6px 8px 6px!important;border-image-slice:3 3 4 3 fill!important;border-image-width:6px 6px 8px 6px!important;border-image-source:var(--bn-gray)!important;padding:0 6px 3px 46px!important}
+.nav-button.active{border-image-source:var(--bn-blue)!important}
+.nav-button:active{border-image-source:var(--bnp-gray)!important}
+.nav-button::before{margin-top:-17px!important}
+.nav{padding:6px 8px!important;gap:3px!important}
+.chip{white-space:nowrap}
+.chip b{max-width:190px;overflow:hidden;text-overflow:ellipsis}

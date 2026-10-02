@@ -13,7 +13,7 @@ with open('tools/case_icon_map.json', 'r', encoding='utf-8') as f:
 all_textures = {**item_textures, **label_textures}
 
 # Относительные пути (assets/images/items/*.png) внутри игры не резолвятся: mod://
-# смотрит в classpath мода. Рнлайним их в data-URI из docs/assets.
+# смотрит в classpath мода. Инлайним их в data-URI из docs/assets.
 _ITEMS_DIR = os.path.join('docs', 'assets', 'images', 'items')
 _fixed = 0
 for _key, _src in list(all_textures.items()):
@@ -492,7 +492,8 @@ hub_html_raw = r'''<!doctype html>
     .hub-input:focus{border-color:var(--accent)}
     .shop-chips{display:flex;flex-wrap:wrap;gap:6px}
     .atlas-pill.active{background:color-mix(in srgb, var(--accent) 22%, transparent);border-color:var(--accent);color:#eafffb}
-  </style>
+  __PX_THEME_CSS__
+</style>
 </head>
 <body>
 <div class="stage">
@@ -599,7 +600,7 @@ try {
   const CASE_ICONS = __CASE_ICONS_JSON__;
   const COIN_SRC = "__COIN_SRC__";
   function coinIco(){return '<img class="aqua-coin-icon" src="'+COIN_SRC+'" alt="">'}
-  function coins(n){return '<span class="coins-amt">'+num(n)+coinIco()+'</span>'}
+  function coins(n){return '<span class="coins-amt">'+shortNum(n, 1e9)+coinIco()+'</span>'}
 
   const tabMeta = {
     profile:["Профиль",'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.4-3.6 4-5.2 7-5.2s5.6 1.6 7 5.2"/></svg>'],
@@ -621,7 +622,7 @@ try {
     tab:"profile",
     payload:{
       snapshot:{
-        profile:{name:"Player",rank:"Ргрок",rankColor:0x8fa6b8,level:1,levelProgress:0,playtimeMinutes:0,kills:0,deaths:0,quests:0,friendsOnline:0},
+        profile:{name:"Player",rank:"Игрок",rankColor:0x8fa6b8,level:1,levelProgress:0,playtimeMinutes:0,kills:0,deaths:0,quests:0,friendsOnline:0},
         wallet:{coins:0,gems:0,dailyStreak:1,dailyAvailable:false},
         season:{title:"Сезон 1",tier:1,maxTier:10,tierProgress:0,premium:false,claimable:0,claimedTiers:[]},
         tops:[],store:[],cases:[],kits:[],warps:[],fishes:[],quests:[],eventLine:"",
@@ -638,6 +639,12 @@ try {
   function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
   function compact(n){n=Number(n)||0;if(n>=1e6)return(n/1e6).toFixed(1)+"M";if(n>=1e3)return(n/1e3).toFixed(1)+"k";return String(n)}
   function num(n){return new Intl.NumberFormat("ru-RU").format(Number(n)||0)}
+  function shortNum(n, from){
+    n = Number(n) || 0;
+    if (n < from) return num(n);
+    const f = (v) => v.toFixed(1).replace(".", ",").replace(",0", "");
+    return n >= 1e12 ? f(n / 1e12) + " трлн" : n >= 1e9 ? f(n / 1e9) + " млрд" : f(n / 1e6) + " млн";
+  }
   function formatHours(m){m=Number(m)||0;const h=Math.floor(m/60),rem=m%60;return h>0?`${h} ч ${rem} м`:`${rem} мин`}
   function send(msg){if(window.AquaLumenBridge)window.AquaLumenBridge.send(msg)}
   function action(a,arg){send({type:"action",action:a,argument:arg||""})}
@@ -1309,24 +1316,16 @@ try {
 
   const RANK_META = {
     "rank.sailor":  { prefix: "МОРЯК",   color: "#2fe0c0", perks: ["Префикс [МОРЯК] в чате", "2 точки дома /sethome", "Цветной ник в чате и Tab", "Базовый морской набор в F4"] },
-    "rank.skipper": { prefix: "ШКРПЕР",  color: "#3b9dff", perks: ["Префикс [ШКРПЕР] в чате", "3 точки дома /sethome", "Приоритетный вход на сервер", "Кит Шкипера в F4"] },
-    "rank.captain": { prefix: "КАПРТАН", color: "#f5c25b", perks: ["Префикс [КАПРТАН] в чате", "5 точек дома /sethome", "Полёт /fly на приватах", "Множитель удачи ×2", "Кит Капитана в F4"] },
-    "rank.admiral": { prefix: "АДМРРАЛ", color: "#ff8c42", perks: ["Префикс [АДМРРАЛ] в чате", "10 точек дома /sethome", "Полёт /fly и смена ника /nick", "Множитель удачи ×4", "Кит Адмирала в F4"] },
+    "rank.skipper": { prefix: "ШКИПЕР",  color: "#3b9dff", perks: ["Префикс [ШКИПЕР] в чате", "3 точки дома /sethome", "Приоритетный вход на сервер", "Кит Шкипера в F4"] },
+    "rank.captain": { prefix: "КАПИТАН", color: "#f5c25b", perks: ["Префикс [КАПИТАН] в чате", "5 точек дома /sethome", "Полёт /fly на приватах", "Множитель удачи ×2", "Кит Капитана в F4"] },
+    "rank.admiral": { prefix: "АДМИРАЛ", color: "#ff8c42", perks: ["Префикс [АДМИРАЛ] в чате", "10 точек дома /sethome", "Полёт /fly и смена ника /nick", "Множитель удачи ×4", "Кит Адмирала в F4"] },
     "rank.legend":  { prefix: "ЛЕГЕНДА", color: "#c264ff", perks: ["Префикс [ЛЕГЕНДА] в чате", "15 точек дома /sethome", "/fly, /hat и /nick", "Множитель удачи ×8", "Эксклюзивный кейс Легенды", "Максимальный кит сезона"] },
     "rank.vip":     { prefix: "VIP",     color: "#ff6b6b", perks: ["Префикс [VIP] в чате", "Виртуальный верстак /wb", "Эндер-сундук /ec", "Полёт /fly", "Косметика AquaLumen"] },
   };
 
-  function rankGlyph(id, color) {
-    const s = `fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"`;
-    const icons = {
-      "rank.sailor": `<svg viewBox="0 0 24 24" ${s}><path d="M3 15c1.8 3.2 5 5 9 5s7.2-1.8 9-5"/><path d="M12 4v12"/><path d="M8 9h8"/></svg>`,
-      "rank.skipper": `<svg viewBox="0 0 24 24" ${s}><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 1.8"/><circle cx="12" cy="12" r="1.2" fill="${color}" stroke="none"/></svg>`,
-      "rank.captain": `<svg viewBox="0 0 24 24" ${s}><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6.2 6.2l2.1 2.1M15.7 15.7l2.1 2.1M17.8 6.2l-2.1 2.1M8.3 15.7l-2.1 2.1"/></svg>`,
-      "rank.admiral": `<svg viewBox="0 0 24 24" ${s}><path d="m12 4 2.2 6.4H21l-5.4 4 2.1 6.6L12 17.2 6.3 21l2.1-6.6L3 10.4h6.8Z"/></svg>`,
-      "rank.legend": `<svg viewBox="0 0 24 24" ${s}><path d="M12 3.5 13.6 8H18l-3.6 2.8L15.8 16 12 13.4 8.2 16l1.4-5.2L6 8h4.4Z"/><path d="M8 19h8" opacity=".7"/></svg>`,
-      "rank.vip": `<svg viewBox="0 0 24 24" ${s}><path d="M12 3.5 19 9.2 16.4 20H7.6L5 9.2Z"/><path d="M8.2 9.4 12 16.5l3.8-7.1"/></svg>`
-    };
-    return icons[id] || icons["rank.sailor"];
+  function rankGlyph(id) {
+    const key = String(id).replace("rank.", "");
+    return `<i class="pxg" style="background-image:var(--g-${["sailor", "skipper", "captain", "admiral", "legend", "vip"].includes(key) ? key : "sailor"})"></i>`;
   }
 
   function storeGlyph(id) {
@@ -1400,10 +1399,10 @@ try {
 
     const offerIcon = (o) => {
       if (o.id === "gems.5") {
-        return `<img src="${COIN_SRC}" class="mc-icon aqua-coin-icon" style="width:26px;height:26px" alt="" />`;
+        return `<i class="pxg" style="background-image:var(--s-gem)"></i>`;
       }
       if (o.id === "pass.premium") {
-        return `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--gold)" stroke-width="1.6"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 11h18M12 6v5"/></svg>`;
+        return `<i class="pxg" style="background-image:var(--s-ticket)"></i>`;
       }
       const itemId = SHOP_ICONS[o.id];
       if (itemId) {
@@ -1495,7 +1494,7 @@ try {
       const openLabel = b.keys > 0 ? "Открыть" : (b.can(1) ? "Купить" : "Мало монет");
       const stock = coins(c.cost);
       const ownedBadge = b.keys > 0 ? ('<span class="case-owned">×' + b.keys + '</span>') : "";
-      return `<article class="card case" style="--i:${cardIndex};border-color:${col}33;cursor:pointer;" data-preview="${esc(c.id)}">
+      return `<article class="card case r-${esc(c.rarity)}" style="--i:${cardIndex};border-color:${col}33;cursor:pointer;" data-preview="${esc(c.id)}">
         <span class="case-rarity" style="color:${col};border-color:${col}55;background:${col}14;">${CaseSpin.label(c.rarity)}</span>
         <div class="case-art">
           <img src="${iconUrl}" class="case-card-img" alt="${esc(c.title)}" />
@@ -1525,7 +1524,7 @@ try {
     { tier: 7, label: "Монеты", coins: 7000, rarity: "common" },
     { tier: 8, label: "Монеты", coins: 8000, rarity: "common" },
     { tier: 9, label: "Монеты", coins: 9000, rarity: "common" },
-    { tier: 10, label: "Кейс II: Рнженер", item: "smeltery", type: "case", coins: 12000, rarity: "epic", badge: "Эпик" },
+    { tier: 10, label: "Кейс II: Инженер", item: "smeltery", type: "case", coins: 12000, rarity: "epic", badge: "Эпик" },
     { tier: 11, label: "Множитель улова ×4", item: "aquatech_ui:rate_x4", coins: 14000, rarity: "rare", badge: "Бафф" },
     { tier: 12, label: "Монеты", coins: 16000, rarity: "common" },
     { tier: 13, label: "Монеты", coins: 18000, rarity: "common" },
@@ -1543,116 +1542,7 @@ try {
     { tier: 25, label: "Кейс IX: Драконий", item: "draconic", type: "case", coins: 100000, rarity: "mythic", badge: "Финал" },
   ];
 
-  function passView(s) {
-    const season = s.season || { tier: 1, maxTier: 25 };
-    const maxT = 25;
-    const currentTier = Number(season.tier) || 1;
-    const claimedList = (season.claimedTiers || []).map(Number);
-    const claimableCount = Number(season.claimable) || 0;
-    const cards = [];
-
-    for (let t = 1; t <= maxT; t++) {
-      const reward = PASS_REWARDS[t - 1] || { tier: t, label: "Награда", coins: 2500 + t * 1000, rarity: "common" };
-      const unlocked = currentTier >= t;
-      const isClaimed = claimedList.includes(t);
-      const isClaimable = unlocked && !isClaimed;
-      const rarity = reward.rarity || "common";
-
-      let statusClass = "is-locked";
-      let actionHtml = `<div class="pass-status-badge locked"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Ур. ${t}</div>`;
-
-      if (isClaimed) {
-        statusClass = "is-claimed";
-        actionHtml = `<div class="pass-status-badge claimed"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m4 12 5 5L20 6"/></svg> Забрано</div>`;
-      } else if (isClaimable) {
-        statusClass = "is-claimable";
-        actionHtml = `<button class="button primary pass-claim-btn claim-pass" data-level="${t}">Забрать</button>`;
-      }
-
-      let iconHtml;
-      if (reward.type === "case") {
-        const caseIconUrl = CASE_ICONS[reward.item] || "";
-        iconHtml = caseIconUrl
-          ? `<img src="${caseIconUrl}" class="mc-icon" style="width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.65))" alt="" />`
-          : `<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="var(--gold)" stroke-width="1.6"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 11h18M12 6v5"/></svg>`;
-      } else if (!reward.item) {
-        iconHtml = `<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:rgba(245,194,91,0.08);border:1px solid rgba(245,194,91,0.2);"><img class="aqua-coin-icon" src="${COIN_SRC}" style="width:28px;height:28px;image-rendering:pixelated;" alt=""></div>`;
-      } else {
-        iconHtml = getItemIconHtml(reward.label, reward.item, "mc-icon");
-      }
-
-      let badgeHtml = "";
-      if (reward.badge) {
-        badgeHtml = `<span class="pass-badge-pill ${rarity}">${esc(reward.badge)}</span>`;
-      }
-
-      cards.push(`<div class="pass-card tier-${rarity} ${statusClass} reward" data-tier="${t}">
-        <div class="pass-card-glow"></div>
-        <div class="pass-card-head">
-          <span class="pass-card-lvl">УРОВЕНЬ ${t}</span>
-          ${badgeHtml}
-        </div>
-        <div class="pass-card-art">
-          <div class="pass-art-pedestal"></div>
-          <div class="pass-art-icon">${iconHtml}</div>
-        </div>
-        <div class="pass-card-body">
-          <div class="pass-card-title" title="${esc(reward.label)}">${esc(reward.label)}</div>
-          <div class="pass-card-coins">+${coins(reward.coins)}</div>
-        </div>
-        <div class="pass-card-foot">
-          ${actionHtml}
-        </div>
-      </div>`);
-    }
-
-    return `<div class="view">${title("Сезонный Пропуск", "Выполняйте задания, ловите рыбу и забирайте ценные награды")}
-      <section class="pass-hero">
-        <div class="pass-hero-ambient"></div>
-        <div class="pass-hero-content">
-          <div class="pass-hero-left">
-            <div class="pass-hero-badge-row">
-              <span class="pass-season-pill">СЕЗОН 1</span>
-              <span class="pass-free-pill">100% БЕСПЛАТНО</span>
-            </div>
-            <h2 class="pass-hero-title">${esc(season.title || "Сезон I: Покорение Океана")}</h2>
-            <p class="pass-hero-desc">Ловите редкую рыбу, выполняйте контракты и повышайте уровень боевого пропуска</p>
-            <div class="pass-hero-stats">
-              <div class="pass-stat-item">
-                <small>Доступно к сдаче</small>
-                <b class="${claimableCount > 0 ? "highlight-claim" : ""}">${claimableCount} наград</b>
-              </div>
-              <div class="pass-stat-item">
-                <small>Всего уровней</small>
-                <b>25 рангов</b>
-              </div>
-              <div class="pass-stat-item">
-                <small>Главная награда</small>
-                <b style="color:var(--gold);">Кейс IX: Драконий</b>
-              </div>
-            </div>
-          </div>
-          <div class="pass-hero-right">
-            <div class="pass-tier-ring">
-              <span class="pass-tier-val">T${currentTier}</span>
-              <span class="pass-tier-sub">РАНГ</span>
-            </div>
-            <div class="pass-tier-progress-box">
-              <div class="pass-prog-header">
-                <span>Прогресс сезона</span>
-                <b>${Math.round((season.tierProgress || 0) * 100)}%</b>
-              </div>
-              <div class="pass-prog-bar">
-                <div class="pass-prog-fill" style="width:${Math.round((season.tierProgress || 0) * 100)}%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="section-title"><b>Линейка Наград (25 уровней)</b><span style="color:var(--accent);">Без платных гемов · Ценный лут</span></div>
-      <div class="pass-track">${cards.join("")}</div>
-    </div>`;
-  }
+__PASS_VIEW_JS__
 
   function fishingView(s) {
     const fishes = s.fishes || [];
@@ -1676,10 +1566,10 @@ try {
         <section class="card hero" style="min-height:140px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
           <div>
             <h2 style="font-size:20px;margin:0 0 6px;font-weight:800;letter-spacing:-0.2px;">Скупка Рыбы</h2>
-            <div class="rank" style="font-size:13px;color:var(--muted);">В инвентаре: <b style="color:var(--accent);">${totalFish}</b> шт. (${coins(totalValue)})</div>
+            <div class="rank fish-sub">В инвентаре: <b>${totalFish}</b> шт.</div><div class="fish-worth">Стоимость: ${coins(totalValue)}</div>
           </div>
           <button class="button primary sell-all-fish" ${totalFish <= 0 ? "disabled" : ""} style="height:38px;padding:0 20px;font-weight:750;">
-            ${totalFish > 0 ? `Продать всё (+${coins(totalValue)})` : "Инвентарь пуст"}
+            ${totalFish > 0 ? `<span>Продать всё</span><em>+${coins(totalValue)}</em>` : "Инвентарь пуст"}
           </button>
         </section>
         <section class="stats">
@@ -1774,8 +1664,8 @@ try {
       const count = Number(lot.count) || 1;
       const countBadge = count > 1 ? `<span class="lot-badge-count">×${num(count)}</span>` : "";
       const seller = isSelf
-        ? `<span class="lot-seller-tag self"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Вы')} (Вы)</span>`
-        : `<span class="lot-seller-tag"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${esc(lot.seller || 'Ргрок')}</span>`;
+        ? `<span class="lot-seller-tag self"><i class="pxi" style="width:12px;height:12px;flex-basis:12px;background-image:var(--i-profile)"></i> ${esc(lot.seller || 'Вы')} (Вы)</span>`
+        : `<span class="lot-seller-tag"><i class="pxi" style="width:12px;height:12px;flex-basis:12px;background-image:var(--i-profile)"></i> ${esc(lot.seller || 'Игрок')}</span>`;
 
       return `<article class="card offer lot-card ${isSelf ? 'is-own-lot' : ''}" data-self="${isSelf ? '1' : '0'}" data-name="${esc((cleanLabel + ' ' + (lot.seller || '') + ' ' + (lot.itemId || '')).toLowerCase())}" style="--i:${i}">
         <div class="lot-slot-wrap">
@@ -1800,7 +1690,7 @@ try {
       <div class="auction-sell-cmd" id="copySellCmdEmpty" style="display:inline-flex;">
         <span style="opacity:.75;">Команда:</span>
         <code>/ah sell &lt;цена&gt;</code>
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <i class="pxi" style="background-image:var(--i-copy)"></i>
       </div>
     </div>`;
 
@@ -1812,18 +1702,18 @@ try {
             <div class="auction-chip-stat"><small>Активных лотов:</small> <b>${activeCount} шт.</b></div>
           </div>
           <div class="auction-sell-cmd" id="copySellCmdBtn" title="Нажмите, чтобы скопировать команду">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            <i class="pxi" style="background-image:var(--i-tick)"></i>
             <span>Выставить лот:</span>
             <code>/ah sell &lt;цена&gt;</code>
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <i class="pxi" style="background-image:var(--i-copy)"></i>
           </div>
         </div>
 
         <div class="auction-filter-bar">
           <div class="auction-search-box">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <i class="pxi" style="background-image:var(--i-search)"></i>
             <input type="text" id="auctionSearchInput" class="auction-search-input" placeholder="Поиск по названию или продавцу..." autocomplete="off" />
-            <button id="auctionSearchClear" class="auction-search-clear">вњ•</button>
+            <button id="auctionSearchClear" class="auction-search-clear">x</button>
           </div>
           <div class="auction-tab-pills">
             <button class="auction-pill active" data-filter="all">Все лоты (${activeCount})</button>
@@ -1842,7 +1732,7 @@ try {
       const krc = (RANK_META["rank." + k.id] || {}).color;
       const locked = !!k.locked;
       const button = locked
-        ? `<button class="button claim-kit" data-kit="${esc(k.id)}" disabled title="Нужна привилегия: ${esc(k.requires || "")}">Нужна привилегия: ${esc(k.requires || "вышРµ рангом")}</button>`
+        ? `<button class="button claim-kit" data-kit="${esc(k.id)}" disabled title="Нужна привилегия: ${esc(k.requires || "")}">Нужна привилегия: ${esc(k.requires || "выше рангом")}</button>`
         : `<button class="button primary claim-kit" data-kit="${esc(k.id)}">Забрать набор</button>`;
       return `<article class="card case" style="--i:${cardIndex};${krc ? `border-color:${krc}44` : ""};display:flex;flex-direction:column;justify-content:space-between;padding:14px;min-height:110px;${locked ? "opacity:0.72;" : ""}">
       <div>
@@ -2163,8 +2053,8 @@ try {
 
     if ($("online")) $("online").textContent = `${(s.server && s.server.online) || 0}/${(s.server && s.server.slots) || 100}`;
     if ($("tps")) $("tps").textContent = `${((s.server && s.server.tps) || 20).toFixed(1)} TPS`;
-    if ($("coins")) $("coins").textContent = num(s.wallet ? s.wallet.coins : 0);
-    if ($("gems")) $("gems").textContent = num(s.wallet ? s.wallet.gems : 0);
+    if ($("coins")) { const cv = s.wallet ? s.wallet.coins : 0; $("coins").textContent = shortNum(cv, 1e7); $("coins").title = num(cv); }
+    if ($("gems")) { const gv = s.wallet ? s.wallet.gems : 0; $("gems").textContent = shortNum(gv, 1e7); $("gems").title = num(gv); }
     if ($("build")) $("build").textContent = (s.server && s.server.build) || "AquaLumen UI";
     if ($("openKey")) $("openKey").textContent = payload.openKey || "F4";
 
@@ -2392,11 +2282,35 @@ def _coin_src():
 
 
 coin_src, coin_png = _coin_src()
+
+def _px_theme_css():
+    """Pixel theme for the F4 hub: Press Start 2P (OFL) inlined as woff2, 9-slice borders and sprites as data URIs."""
+    import base64
+    from pathlib import Path
+    base = Path("tools/hub_assets")
+    faces = []
+    ranges = {
+        "cyrillic": "U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116",
+        "latin": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD",
+    }
+    for name, rng in ranges.items():
+        data = base64.b64encode((base / "fonts" / f"PressStart2P-{name}.woff2").read_bytes()).decode("ascii")
+        faces.append("@font-face{font-family:'Press Start 2P';font-style:normal;font-weight:400;"
+                     "src:url(data:font/woff2;base64," + data + ") format('woff2');unicode-range:" + rng + "}")
+    return "\n".join(faces) + "\n" + (base / "px_vars.css").read_text(encoding="utf-8") + "\n" + (base / "px_theme.css").read_text(encoding="utf-8") + "\n" + (base / "px_tabs.css").read_text(encoding="utf-8") + "\n" + (base / "px_buttons.css").read_text(encoding="utf-8")
+
+
+def _pass_view_js():
+    from pathlib import Path
+    return Path("tools/hub_assets/pass_view.js").read_text(encoding="utf-8")
+
 hub_html_content = (
     hub_html_raw
     .replace("__TEXTURES_JSON__", textures_json)
     .replace("__CASE_ICONS_JSON__", case_icons_json)
     .replace("__COIN_SRC__", coin_src)
+    .replace("__PX_THEME_CSS__", _px_theme_css())
+    .replace("__PASS_VIEW_JS__", _pass_view_js())
 )
 
 try:
