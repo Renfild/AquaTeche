@@ -719,10 +719,10 @@ try {
 
     /* coins / gems virtual rewards — no item ID */
     if (itype === 'coins' || (!itemId && (low.includes('coin') || low.includes('монет') || low.includes('aquacoin')))) {
-      return `<img src="${COIN_SRC}" class="${cls} aqua-coin-icon" style="width:22px;height:22px" alt="" />`;
+      return `<img src="${COIN_SRC}" class="${cls} aqua-coin-icon" style="width:32px;height:32px" alt="" />`;
     }
     if (itype === 'gems' || (!itemId && (low.includes('гем') || low.includes('крист')))) {
-      return `<svg viewBox="0 0 24 24" class="${cls}" style="color:var(--accent);filter:drop-shadow(0 0 10px #2fe0c0)"><path d="M12 2.5 18 8l-6 13L6 8Z" fill="currentColor"/><path d="M6 8h12M12 2.5 9.5 8l2.5 13M12 2.5 14.5 8 12 21" stroke="#000" stroke-width=".8" opacity=".5"/></svg>`;
+      return `<i class="pxg ${cls}" style="background-image:var(--s-gem);display:inline-block;width:32px;height:32px" role="img" aria-label="${esc(label)}"></i>`;
     }
 
     const tex = resolveItemIcon(label, itemId);

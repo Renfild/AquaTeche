@@ -56,7 +56,9 @@ def sprite(rows, pal):
 def icon16(rows, main="e6f3ff", acc="ffd23a"):
     rows = list(rows)
     pad_top = (16 - len(rows)) // 2
-    rows = ["." * 16] * pad_top + [r.ljust(16, ".")[:16] for r in rows]
+    wmax = max(len(r) for r in rows)
+    lpad = "." * ((16 - wmax) // 2)
+    rows = ["." * 16] * pad_top + [(lpad + r).ljust(16, ".")[:16] for r in rows]
     rows += ["." * 16] * (16 - len(rows))
     base = sprite(rows, {"#": main, "+": acc})
     shadow = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
@@ -169,7 +171,7 @@ for name, rows in ICONS.items():
     if name in menu_icons.NAMES:
         continue
     css.append(f"--i-{name}:{uri(icon16(rows))};")
-close_rows = ["#.......#", ".#.....#.", "..#...#..", "...#.#...", "....#....", "...#.#...", "..#...#..", ".#.....#.", "#.......#"]
+close_rows = ["##......##", ".##....##.", "..##..##..", "...####...", "....##....", "....##....", "...####...", "..##..##..", ".##....##.", "##......##"]
 css.append(f"--i-close:{uri(icon16(close_rows))};")
 refresh_rows = ["..######.....", ".#......#....", "#........#...", "#.......###..", "#........#...", ".#......#....", "..######.....", ".............", "....######...", "...#......#..", "..###.......#", "...#.......#.", "....#.....#..", ".....######.."]
 css.append(f"--i-refresh:{uri(menu_icons.icon('refresh'))};")
