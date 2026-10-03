@@ -869,6 +869,18 @@ public final class HubDataService {
                 || player.hasPermissions(2) || isVipOrStaff(player);
     }
 
+    /** Free-track tiers the player has claimed: MariaDB / file cache plus the legacy persistent NBT. */
+    public static java.util.Set<Integer> claimedFreeTiers(ServerPlayer player) {
+        CompoundTag tag = player.getPersistentData().getCompound("aqualumen_pass_claimed");
+        java.util.Set<Integer> out = new java.util.HashSet<>(MariaStats.getRewards(player.getUUID()).passClaimedTiers());
+        for (int t = 1; t <= PremiumPassRewards.MAX_TIER; t++) {
+            if (tag.getBoolean("t_" + t)) {
+                out.add(t);
+            }
+        }
+        return out;
+    }
+
     public static java.util.Set<Integer> claimedPremiumTiers(ServerPlayer player) {
         CompoundTag tag = player.getPersistentData().getCompound(PREMIUM_CLAIMED_TAG);
         java.util.Set<Integer> out = new java.util.HashSet<>(MariaStats.getRewards(player.getUUID()).premiumClaimedTiers());

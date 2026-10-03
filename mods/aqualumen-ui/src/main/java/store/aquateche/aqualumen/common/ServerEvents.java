@@ -103,6 +103,7 @@ public final class ServerEvents {
         if (tickCounter > 0 && tickCounter % 3000 == 0) {
             for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
                 HubEconomy.coins(player);
+                HubActionHandler.grantPassRetro(player);
                 HubDataService.syncPlayerToWebAsync(player);
             }
         }

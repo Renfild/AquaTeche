@@ -182,6 +182,7 @@ public final class HubActionHandler {
             case 22 -> HubEconomy.giveItem(player, itemStack("aquatech_ui:rate_x16", 1));
             case 25 -> caseExtra = grantPassCase(player, "draconic", "Драконий");
         }
+        markPassExtraGiven(player, tier);
 
         // Persist to MariaDB + disk cache
         MariaStats.savePassClaimed(uuid, tier);
@@ -192,6 +193,53 @@ public final class HubActionHandler {
 
         player.sendSystemMessage(Component.literal("Сезонный пропуск: награда уровня " + tier
                 + " получена (+" + HubEconomy.formatCoins(rewardCoins) + " ¤)." + caseExtra).withStyle(ChatFormatting.GREEN));
+        HubDataService.push(player);
+    }
+
+    private static final String PASS_EXTRA_TAG = "aqualumen_pass_extra";
+
+    private static void markPassExtraGiven(ServerPlayer player, int tier) {
+        if (PassRetroGrant.extraFor(tier) == null) {
+            return;
+        }
+        net.minecraft.nbt.CompoundTag extras = player.getPersistentData().getCompound(PASS_EXTRA_TAG);
+        extras.putBoolean("t_" + tier, true);
+        player.getPersistentData().put(PASS_EXTRA_TAG, extras);
+    }
+
+    /** One-time catch-up: free tiers 3, 8 and 13 gained extras after some players had already claimed them. */
+    public static void grantPassRetro(ServerPlayer player) {
+        net.minecraft.nbt.CompoundTag extras = player.getPersistentData().getCompound(PASS_EXTRA_TAG);
+        java.util.Set<Integer> given = new java.util.HashSet<>();
+        for (int tier : PassRetroGrant.TIERS) {
+            if (extras.getBoolean("t_" + tier)) {
+                given.add(tier);
+            }
+        }
+        java.util.List<Integer> due = PassRetroGrant.due(HubDataService.claimedFreeTiers(player), given);
+        if (due.isEmpty()) {
+            return;
+        }
+        // mark first: a failing grant below must not hand the same extra out again
+        for (int tier : due) {
+            extras.putBoolean("t_" + tier, true);
+        }
+        player.getPersistentData().put(PASS_EXTRA_TAG, extras);
+        StringBuilder what = new StringBuilder();
+        for (int tier : due) {
+            PassRetroGrant.Extra extra = PassRetroGrant.extraFor(tier);
+            if (extra.smallBooster()) {
+                BoosterService.grant(player, BoosterLogic.Tier.SMALL, 1);
+                what.append(" Бустер скупщика (уровень ").append(tier).append("): /booster.");
+            }
+            if (extra.caseId() != null) {
+                CaseConfig.CaseDef def = CaseConfig.find(extra.caseId());
+                what.append(grantPassCase(player, extra.caseId(), def != null ? def.title : extra.caseId()))
+                        .append(" (уровень ").append(tier).append(").");
+            }
+        }
+        player.sendSystemMessage(Component.literal("Сезонный пропуск: за уже полученные уровни добавлены новые награды." + what)
+                .withStyle(ChatFormatting.GREEN));
         HubDataService.push(player);
     }
 
