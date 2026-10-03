@@ -2,16 +2,16 @@
   const PASS_PREMIUM_COINS = [2500, 3000, 3500, 4000, 5000, 6000, 7000, 8000, 9000, 12000, 14000, 16000, 18000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 70000, 80000, 100000];
   const PASS_PREMIUM_EXTRA = {
     3: { kind: "booster", id: "small", label: "Бустер" },
-    5: { kind: "case", id: "smeltery" },
+    5: { kind: "case", id: "steam" },
     7: { kind: "booster", id: "small", label: "Бустер" },
-    10: { kind: "case", id: "steam" },
+    10: { kind: "case", id: "flora" },
     13: { kind: "item", id: "aquatech_ui:rate_x8", label: "Множитель ×8" },
     14: { kind: "booster", id: "large", label: "Бустер большой" },
-    15: { kind: "case", id: "flora" },
+    15: { kind: "case", id: "abyss" },
     18: { kind: "booster", id: "large", label: "Бустер большой" },
-    20: { kind: "case", id: "abyss" },
+    20: { kind: "case", id: "singularity" },
     23: { kind: "item", id: "aquatech_ui:rate_x32", label: "Множитель ×32" },
-    25: { kind: "case", id: "singularity" },
+    25: { kind: "case", id: "infinity" },
   };
 
   function passView(s) {
@@ -82,7 +82,7 @@
       ? '<div class="np-emb np-on">ПРЕМИУМ АКТИВЕН</div>'
       : `<button class="np-buy button primary" type="button" data-price="${price}">Премиум · ${price} кр.</button>`;
     const total = hasPrem ? maxT * 2 : maxT;
-    return `<div class="view np">
+    return `<div class="view np" style="--ph:${Math.round(performance.now())}">
       <div class="np-head"><div><h2>Сезонный пропуск</h2><p>${esc(season.title || "Сезон 1")} · ${maxT} уровней</p></div>
         <div class="np-headr">${buy}<div class="np-emb">Получено <b>${claimed.length + claimedP.length}</b> из ${total}</div></div></div>
       <section class="np-board">

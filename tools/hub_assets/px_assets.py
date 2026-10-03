@@ -211,14 +211,9 @@ c3.alpha_composite(coin, (8, 0)); c3.alpha_composite(coin, (0, 12)); c3.alpha_co
 c3 = c3.crop((0, 0, 48, 44)).resize((48, 44))
 css.append(f"--s-coin-1:{uri(c1)};")
 css.append(f"--s-coin-3:{uri(c3)};")
-PAL = {"o": "3a2210", "b": "8a5a2b", "h": "c28a4a", "r": "e8d9a8", "g": "ffd23a", "G": "fff6c0", "d": "a8680c", "y": "ffe066"}
-bag = ["....oo.rr.oo....", ".....oorrroo....", "......orro......", ".....obbbbo.....", "....obhbbbbo....", "...obhbbbbbbo...", "..obhbbooobbbo..", "..obbbogGdobbo..", ".obbbbogGdobbbo.", ".obbbbodddobbbo.", ".obbbbbooobbbbo.", ".obbbbbbbbbbbbo.", "..obbbbbbbbbbo..", "...obbbbbbbbo...", "....oooooooo...."]
-chest = [".....oggggo.....", "...oogGGGGgoo...", "..ogGGyyyyGGgo..", "oooooooooooooooo", "obbbbbbbbbbbbbbo", "obhhhhhhhhhhhhbo", "obbbbbbbbbbbbbbo", "oddddddddddddddo", "obbbbbooobbbbbbo", "obbbbbogdobbbbbo", "obbbbbooobbbbbbo", "obbbbbbbbbbbbbbo", "oooooooooooooooo"]
-for nm, rows in (("bag", bag), ("chest", chest)):
-    rows = [r.ljust(16, ".")[:16] for r in rows]
-    pad = (16 - len(rows)) // 2
-    rows = ["." * 16] * pad + rows + ["." * 16] * (16 - len(rows) - pad)
-    css.append(f"--s-{nm}:{uri(sprite(rows, PAL))};")
+import coin_loot
+for nm in ("bag", "chest"):
+    css.append(f"--s-{nm}:{uri(coin_loot.sprite(nm))};")
 # volumetric buttons: hue-shifted ramp, light top edge, thick darker bottom band (pixel-art shading)
 import colorsys
 

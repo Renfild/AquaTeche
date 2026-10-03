@@ -81,7 +81,7 @@ html,body{background:#0a0718!important}
 .np-xpbox b.pc{color:#ffe27a;font-size:10px}
 .np-bar{position:relative;flex:1;height:28px;background:#0b0820;box-shadow:inset 0 4px 0 #05030f,0 0 0 2px #05030f,0 0 0 4px #4a3d9a,0 4px 0 4px #1b1540;overflow:hidden}
 .np-bar i,.progress>i{display:block;position:relative;height:100%;background:linear-gradient(180deg,#d8ff9a 0 4px,#7be63a 4px 55%,#3f9d22 55% 85%,#2a7014 85%);box-shadow:inset -4px 0 0 rgba(255,255,255,.35)}
-.np-bar i:after,.progress>i:after{content:"";position:absolute;left:0;right:0;top:4px;bottom:6px;background:linear-gradient(115deg,transparent 0 40%,rgba(255,255,255,.22) 40% 70%,transparent 70%);background-size:16px 100%;animation:np-stripe 1.4s linear infinite}
+.np-bar i:after,.progress>i:after{content:"";position:absolute;left:0;right:0;top:4px;bottom:6px;background:linear-gradient(115deg,transparent 0 40%,rgba(255,255,255,.22) 40% 70%,transparent 70%);background-size:16px 100%;animation:np-stripe 1.4s linear infinite;animation-delay:calc(var(--ph,0)*-1ms)}
 .np-bar em{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-size:10px;color:#fff;text-shadow:2px 2px 0 #0e3a05;z-index:2}
 @keyframes np-stripe{to{background-position:16px 0}}
 
@@ -105,10 +105,10 @@ html,body{background:#0a0718!important}
 @keyframes np-now{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
 @keyframes np-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @keyframes np-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.np-slot.ready{animation:np-bob 1.8s ease-in-out infinite}
-.np-dia.now{animation:np-now 2.2s ease-in-out infinite}
-.np-prem{animation:np-glow 2.8s ease-in-out infinite}
-.np-bigic{animation:np-float 3.2s ease-in-out infinite}
+.np-slot.ready{animation:np-bob 1.8s ease-in-out infinite;animation-delay:calc(var(--ph,0)*-1ms)}
+.np-dia.now{animation:np-now 2.2s ease-in-out infinite;animation-delay:calc(var(--ph,0)*-1ms)}
+.np-prem{animation:np-glow 2.8s ease-in-out infinite;animation-delay:calc(var(--ph,0)*-1ms)}
+.np-bigic{animation:np-float 3.2s ease-in-out infinite;animation-delay:calc(var(--ph,0)*-1ms)}
 .view-enter .np-col{animation:np-in .32s both;animation-delay:calc(var(--i,0)*45ms)}
 
 .np-rate{display:block;width:64px;height:64px;background-position:center;background-repeat:no-repeat;background-size:contain;image-rendering:pixelated;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.6))}

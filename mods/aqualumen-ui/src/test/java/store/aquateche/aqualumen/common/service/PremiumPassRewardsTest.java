@@ -34,13 +34,28 @@ class PremiumPassRewardsTest {
         assertEquals(100000L, PremiumPassRewards.forTier(25).coins());
     }
 
+    private static final java.util.List<String> CASE_LADDER = java.util.List.of(
+            "starter", "smeltery", "steam", "flora", "applied", "abyss", "superconductor", "singularity", "draconic", "infinity");
+    private static final java.util.Map<Integer, String> FREE_CASES = java.util.Map.of(
+            5, "starter", 10, "smeltery", 15, "applied", 20, "superconductor", 25, "draconic");
+
     @Test
-    void caseRewardsSitOnTheSameMilestonesAsTheFreeTrackButOneStepUp() {
-        assertEquals("smeltery", PremiumPassRewards.forTier(5).caseId());
-        assertEquals("steam", PremiumPassRewards.forTier(10).caseId());
-        assertEquals("flora", PremiumPassRewards.forTier(15).caseId());
-        assertEquals("abyss", PremiumPassRewards.forTier(20).caseId());
-        assertEquals("singularity", PremiumPassRewards.forTier(25).caseId());
+    void premiumCaseIsAlwaysABetterCaseThanTheFreeOneOnTheSameTier() {
+        for (var e : FREE_CASES.entrySet()) {
+            String premium = PremiumPassRewards.forTier(e.getKey()).caseId();
+            assertNotNull(premium, "tier " + e.getKey());
+            assertTrue(CASE_LADDER.indexOf(premium) > CASE_LADDER.indexOf(e.getValue()),
+                    "tier " + e.getKey() + ": premium " + premium + " must beat free " + e.getValue());
+        }
+    }
+
+    @Test
+    void premiumCasesSitOnTheFreeMilestones() {
+        assertEquals("steam", PremiumPassRewards.forTier(5).caseId());
+        assertEquals("flora", PremiumPassRewards.forTier(10).caseId());
+        assertEquals("abyss", PremiumPassRewards.forTier(15).caseId());
+        assertEquals("singularity", PremiumPassRewards.forTier(20).caseId());
+        assertEquals("infinity", PremiumPassRewards.forTier(25).caseId());
         assertNull(PremiumPassRewards.forTier(4).caseId());
     }
 
@@ -58,7 +73,7 @@ class PremiumPassRewardsTest {
     @Test
     void theFinalTierGivesTheTopCaseAndALargeBooster() {
         Reward last = PremiumPassRewards.forTier(PremiumPassRewards.MAX_TIER);
-        assertEquals("singularity", last.caseId());
+        assertEquals("infinity", last.caseId());
         assertEquals(Tier.LARGE, last.booster());
     }
 

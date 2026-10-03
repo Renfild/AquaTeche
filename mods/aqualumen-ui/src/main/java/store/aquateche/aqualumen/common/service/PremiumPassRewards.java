@@ -8,7 +8,8 @@ import java.util.Set;
 
 /**
  * Premium track of the season pass: pure reward table, no Minecraft types.
- * Coins double the free track; the extras (cases, boosters, pearl multipliers) sit between the free milestones.
+ * Coins double the free track; on every case milestone the premium case is a better case than the free one
+ * (free: starter, smeltery, applied, superconductor, draconic), the rest are boosters and pearl multipliers.
  * The F4 page mirrors this table in tools/hub_assets/pass_view.js (PASS_PREMIUM) - keep both in sync.
  */
 public final class PremiumPassRewards {
@@ -35,14 +36,14 @@ public final class PremiumPassRewards {
         long coins = COINS[tier - 1];
         return switch (tier) {
             case 3, 7 -> new Reward(coins, null, null, Tier.SMALL, 1);
-            case 5 -> new Reward(coins, "smeltery", null, null, 0);
-            case 10 -> new Reward(coins, "steam", null, null, 0);
+            case 5 -> new Reward(coins, "steam", null, null, 0);
+            case 10 -> new Reward(coins, "flora", null, null, 0);
             case 13 -> new Reward(coins, null, "aquatech_ui:rate_x8", null, 0);
             case 14, 18 -> new Reward(coins, null, null, Tier.LARGE, 1);
-            case 15 -> new Reward(coins, "flora", null, null, 0);
-            case 20 -> new Reward(coins, "abyss", null, null, 0);
+            case 15 -> new Reward(coins, "abyss", null, null, 0);
+            case 20 -> new Reward(coins, "singularity", null, null, 0);
             case 23 -> new Reward(coins, null, "aquatech_ui:rate_x32", null, 0);
-            case 25 -> new Reward(coins, "singularity", null, Tier.LARGE, 1);
+            case 25 -> new Reward(coins, "infinity", null, Tier.LARGE, 1);
             default -> new Reward(coins, null, null, null, 0);
         };
     }
