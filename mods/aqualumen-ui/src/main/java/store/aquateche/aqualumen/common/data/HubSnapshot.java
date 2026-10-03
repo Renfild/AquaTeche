@@ -32,7 +32,8 @@ public record HubSnapshot(Profile profile,
     public record Wallet(long coins, long gems, int dailyStreak, boolean dailyAvailable) {
     }
 
-    public record Season(String title, int tier, int maxTier, float tierProgress, boolean premium, int claimable, List<Integer> claimedTiers) {
+    public record Season(String title, int tier, int maxTier, float tierProgress, boolean premium, int claimable, List<Integer> claimedTiers,
+                         List<Integer> claimedPremiumTiers) {
     }
 
     public record TopEntry(int place, String player, String value, boolean self) {
@@ -107,6 +108,7 @@ public record HubSnapshot(Profile profile,
         buf.writeBoolean(season.premium());
         buf.writeVarInt(season.claimable());
         buf.writeCollection(season.claimedTiers() != null ? season.claimedTiers() : List.of(), FriendlyByteBuf::writeVarInt);
+        buf.writeCollection(season.claimedPremiumTiers() != null ? season.claimedPremiumTiers() : List.of(), FriendlyByteBuf::writeVarInt);
 
         buf.writeCollection(tops, (b, e) -> {
             b.writeVarInt(e.place());
@@ -225,7 +227,8 @@ public record HubSnapshot(Profile profile,
                 buf.readVarLong(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt());
         Wallet wallet = new Wallet(buf.readVarLong(), buf.readVarLong(), buf.readVarInt(), buf.readBoolean());
         Season season = new Season(buf.readUtf(), buf.readVarInt(), buf.readVarInt(), buf.readFloat(),
-                buf.readBoolean(), buf.readVarInt(), buf.readList(FriendlyByteBuf::readVarInt));
+                buf.readBoolean(), buf.readVarInt(), buf.readList(FriendlyByteBuf::readVarInt),
+                buf.readList(FriendlyByteBuf::readVarInt));
 
         List<TopEntry> tops = buf.readList(b ->
                 new TopEntry(b.readVarInt(), b.readUtf(), b.readUtf(), b.readBoolean()));

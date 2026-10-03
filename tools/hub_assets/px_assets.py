@@ -3,7 +3,7 @@ Run: python tools/hub_assets/px_assets.py"""
 import base64
 import io
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from pathlib import Path
 OUT = str(Path(__file__).resolve().parent) + "/"
@@ -282,6 +282,22 @@ for _n, _c in BUTTONS.items():
     css.append(f"--b-{_n}:{uri(button9(_c))};")
     css.append(f"--bp-{_n}:{uri(button9(_c, True))};")
 
+# booster sprites: the gold coin with a green (small) or cyan double (large) arrow
+def _arrow(im, col, double=False):
+    d = ImageDraw.Draw(im)
+    out = h("0a2a10")
+    for k in range(2 if double else 1):
+        oy = 15 - k * 6
+        d.polygon([(21, oy), (28, oy + 7), (24, oy + 7), (24, oy + 13), (18, oy + 13), (18, oy + 7), (14, oy + 7)], fill=h(col), outline=out)
+        d.line([(21, oy + 3), (21, oy + 8)], fill=h("ffffff"))
+    return im
+
+
+_coin32 = Image.open(Path(OUT).resolve().parents[1] / "docs/assets/images/coin_pixel.png").convert("RGBA")
+for _name, _col, _dbl in (("booster", "5cff7a", False), ("booster-big", "5ff0ff", True)):
+    _im = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
+    _im.alpha_composite(_coin32, (-3, -2))
+    css.append(f"--s-{_name}:{uri(_arrow(_im, _col, _dbl))};")
 import store_icons
 css.append(f"--s-gem:{uri(store_icons.icon('gems'))};")
 css.append(f"--s-ticket:{uri(store_icons.icon('ticket'))};")

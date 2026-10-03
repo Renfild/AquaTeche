@@ -20,7 +20,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
 
     private static final int PAGE_READY_TIMEOUT_TICKS = 300;
     private static final Set<String> SERVER_ACTIONS = Set.of(
-            "hub.refresh", "daily.claim", "hub.claim_daily", "store.buy", "case.open", "case.claim", "pass.claim",
+            "hub.refresh", "daily.claim", "hub.claim_daily", "store.buy", "case.open", "case.claim", "pass.claim", "pass.claim_premium",
             "hub.kit", "hub.warp", "fish.sell", "fish.sell_all", "events.claim", "events.reroll",
             "auction.buy", "auction.cancel");
 

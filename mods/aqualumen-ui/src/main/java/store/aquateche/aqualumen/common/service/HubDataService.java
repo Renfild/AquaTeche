@@ -184,7 +184,8 @@ public final class HubDataService {
                 seasonData.progress(),
                 seasonData.premium(),
                 seasonData.claimable(),
-                seasonData.claimedTiers()
+                seasonData.claimedTiers(),
+                seasonData.claimedPremiumTiers()
         );
 
         // 6. Assemble Full Live Snapshot
@@ -781,7 +782,8 @@ public final class HubDataService {
 
     // ── Real Season Pass Resolution ─────────────────────────────────────────
 
-    private record SeasonData(String title, int tier, int maxTier, float progress, boolean premium, int claimable, List<Integer> claimedTiers) {
+    private record SeasonData(String title, int tier, int maxTier, float progress, boolean premium, int claimable,
+                              List<Integer> claimedTiers, List<Integer> claimedPremiumTiers) {
     }
 
     private static SeasonData resolveSeason(ServerPlayer player, int playerLevel, int quests) {
@@ -812,8 +814,7 @@ public final class HubDataService {
         }
 
         float progress = (seasonXp % 100) / 100.0F;
-        boolean premium = player.getPersistentData().getBoolean("aqualumen_pass_premium")
-                || player.hasPermissions(2) || isVipOrStaff(player);
+        boolean premium = isPremiumPass(player);
 
         // Check claimed tiers in MariaStats persistent storage (MySQL + disk cache)
         MariaStats.PlayerRewards rewards = MariaStats.getRewards(player.getUUID());
@@ -837,6 +838,13 @@ public final class HubDataService {
             }
         }
 
+        java.util.Set<Integer> premiumSet = claimedPremiumTiers(player);
+        List<Integer> claimedPremium = new ArrayList<>(premiumSet);
+        java.util.Collections.sort(claimedPremium);
+        if (premium) {
+            claimable += PremiumPassRewards.claimable(tier, premiumSet).size();
+        }
+
         // Анти-откат: уровень никогда не ниже самого высокого ЗАБРАННОГО тира —
         // забранные награды доказывают, что уровень был достигнут.
         int claimedMax = 1;
@@ -845,7 +853,27 @@ public final class HubDataService {
         tier = Math.max(1, Math.min(maxTier, tier));
         SEASON_TIER_CACHE.put(player.getUUID(), tier);
 
-        return new SeasonData(title, tier, maxTier, progress, premium, claimable, claimedTiers);
+        return new SeasonData(title, tier, maxTier, progress, premium, claimable, claimedTiers, claimedPremium);
+    }
+
+    public static final String PREMIUM_CLAIMED_TAG = "aqualumen_pass_claimed_premium";
+
+    /** Premium pass: bought flag, operators, or a paid rank (the same rule the hub has always used). */
+    public static boolean isPremiumPass(ServerPlayer player) {
+        return player.getPersistentData().getBoolean("aqualumen_pass_premium")
+                || MariaStats.getRewards(player.getUUID()).premiumOwned()
+                || player.hasPermissions(2) || isVipOrStaff(player);
+    }
+
+    public static java.util.Set<Integer> claimedPremiumTiers(ServerPlayer player) {
+        CompoundTag tag = player.getPersistentData().getCompound(PREMIUM_CLAIMED_TAG);
+        java.util.Set<Integer> out = new java.util.HashSet<>(MariaStats.getRewards(player.getUUID()).premiumClaimedTiers());
+        for (int t = 1; t <= PremiumPassRewards.MAX_TIER; t++) {
+            if (tag.getBoolean("t_" + t)) {
+                out.add(t);
+            }
+        }
+        return out;
     }
 
     /** Effective tier for pass.claim: the same value the hub snapshot shows the player. */

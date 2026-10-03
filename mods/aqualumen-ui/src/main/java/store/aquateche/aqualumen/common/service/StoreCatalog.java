@@ -150,6 +150,7 @@ public final class StoreCatalog {
             }
             case "pass_premium" -> {
                 player.getPersistentData().putBoolean("aqualumen_pass_premium", true);
+                MariaStats.savePremiumOwned(player.getUUID());
                 yield true;
             }
             case "sold_notice" -> {

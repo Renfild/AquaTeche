@@ -61,6 +61,7 @@ public final class HubActionHandler {
             case "events.claim" -> handleEventClaim(player, argument);
             case "events.reroll" -> handleEventReroll(player, argument);
             case "pass.claim" -> claimPass(player, argument);
+            case "pass.claim_premium" -> claimPassPremium(player, argument);
             case "store.buy" -> StoreCatalog.buy(player, argument);
             case "hub.kit" -> handleKit(player, argument);
             case "hub.warp" -> handleWarp(player, argument);
@@ -186,6 +187,56 @@ public final class HubActionHandler {
 
         player.sendSystemMessage(Component.literal("Сезонный пропуск: награда уровня " + tier
                 + " получена (+" + HubEconomy.formatCoins(rewardCoins) + " ¤)." + caseExtra).withStyle(ChatFormatting.GREEN));
+        HubDataService.push(player);
+    }
+
+    private static void claimPassPremium(ServerPlayer player, String argument) {
+        int tier;
+        try {
+            tier = Integer.parseInt(argument.trim());
+        } catch (NumberFormatException e) {
+            tier = 1;
+        }
+        if (!HubDataService.isPremiumPass(player)) {
+            player.sendSystemMessage(Component.literal("Премиум-награды открываются после покупки Боевого Пропуска.")
+                    .withStyle(ChatFormatting.YELLOW));
+            return;
+        }
+        int seasonTier = HubDataService.effectiveSeasonTier(player);
+        PremiumPassRewards.Reward reward = PremiumPassRewards.forTier(tier);
+        if (reward == null || tier > seasonTier) {
+            player.sendSystemMessage(Component.literal("Премиум-награда уровня " + tier + " недоступна (сейчас открыт до " + seasonTier + ").")
+                    .withStyle(ChatFormatting.YELLOW));
+            return;
+        }
+        net.minecraft.nbt.CompoundTag claimed = player.getPersistentData().getCompound(HubDataService.PREMIUM_CLAIMED_TAG);
+        String key = "t_" + tier;
+        if (claimed.getBoolean(key) || MariaStats.getRewards(player.getUUID()).isPremiumTierClaimed(tier)) {
+            player.sendSystemMessage(Component.literal("Премиум-награда уровня " + tier + " уже получена").withStyle(ChatFormatting.YELLOW));
+            return;
+        }
+
+        // mark first: a failing grant below must not allow a second claim
+        claimed.putBoolean(key, true);
+        player.getPersistentData().put(HubDataService.PREMIUM_CLAIMED_TAG, claimed);
+        MariaStats.savePremiumClaimed(player.getUUID(), tier);
+
+        HubEconomy.grantCoins(player, reward.coins());
+        StringBuilder extra = new StringBuilder();
+        if (reward.caseId() != null) {
+            CaseConfig.CaseDef def = CaseConfig.find(reward.caseId());
+            extra.append(grantPassCase(player, reward.caseId(), def != null ? def.title : reward.caseId()));
+        }
+        if (reward.itemId() != null) {
+            HubEconomy.giveItem(player, itemStack(reward.itemId(), 1));
+            extra.append(" Множитель улова лежит в инвентаре.");
+        }
+        if (reward.booster() != null) {
+            BoosterService.grant(player, reward.booster(), reward.boosterCount());
+            extra.append(" Бустер скупщика: /booster.");
+        }
+        player.sendSystemMessage(Component.literal("Премиум-пропуск: награда уровня " + tier
+                + " получена (+" + HubEconomy.formatCoins(reward.coins()) + " ¤)." + extra).withStyle(ChatFormatting.GOLD));
         HubDataService.push(player);
     }
 

@@ -81,7 +81,16 @@ public final class MariaStats {
         }
     }
 
-    public record PlayerRewards(long dailyLastDay, int dailyStreak, Set<Integer> passClaimedTiers) {
+    public record PlayerRewards(long dailyLastDay, int dailyStreak, Set<Integer> passClaimedTiers,
+                                Set<Integer> premiumClaimedTiers, boolean premiumOwned) {
+        public PlayerRewards(long dailyLastDay, int dailyStreak, Set<Integer> passClaimedTiers) {
+            this(dailyLastDay, dailyStreak, passClaimedTiers, java.util.Collections.emptySet(), false);
+        }
+
+        public boolean isPremiumTierClaimed(int tier) {
+            return premiumClaimedTiers != null && premiumClaimedTiers.contains(tier);
+        }
+
         public boolean isTierClaimed(int tier) {
             return passClaimedTiers != null && passClaimedTiers.contains(tier);
         }
@@ -112,10 +121,8 @@ public final class MariaStats {
         if (uuid == null) return;
         PlayerRewards current = getRewards(uuid);
         Set<Integer> tiers = new java.util.HashSet<>(current.passClaimedTiers());
-        PlayerRewards updated = new PlayerRewards(day, streak, tiers);
-        REWARDS_CACHE.put(uuid, updated);
-        saveToFile(uuid, updated);
-        persistRewardsAsync(uuid, day, streak, tiers);
+        PlayerRewards updated = new PlayerRewards(day, streak, tiers, current.premiumClaimedTiers(), current.premiumOwned());
+        store(uuid, updated);
     }
 
     public static void savePassClaimed(UUID uuid, int tier) {
@@ -123,10 +130,32 @@ public final class MariaStats {
         PlayerRewards current = getRewards(uuid);
         Set<Integer> tiers = new java.util.HashSet<>(current.passClaimedTiers());
         tiers.add(tier);
-        PlayerRewards updated = new PlayerRewards(current.dailyLastDay(), current.dailyStreak(), tiers);
-        REWARDS_CACHE.put(uuid, updated);
-        saveToFile(uuid, updated);
-        persistRewardsAsync(uuid, current.dailyLastDay(), current.dailyStreak(), tiers);
+        PlayerRewards updated = new PlayerRewards(current.dailyLastDay(), current.dailyStreak(), tiers,
+                current.premiumClaimedTiers(), current.premiumOwned());
+        store(uuid, updated);
+    }
+
+    public static void savePremiumClaimed(UUID uuid, int tier) {
+        if (uuid == null) return;
+        PlayerRewards current = getRewards(uuid);
+        Set<Integer> tiers = new java.util.HashSet<>(current.premiumClaimedTiers());
+        tiers.add(tier);
+        store(uuid, new PlayerRewards(current.dailyLastDay(), current.dailyStreak(), current.passClaimedTiers(),
+                tiers, current.premiumOwned()));
+    }
+
+    /** Remember the purchased premium pass so it survives a wipe of the player data file. */
+    public static void savePremiumOwned(UUID uuid) {
+        if (uuid == null) return;
+        PlayerRewards current = getRewards(uuid);
+        store(uuid, new PlayerRewards(current.dailyLastDay(), current.dailyStreak(), current.passClaimedTiers(),
+                current.premiumClaimedTiers(), true));
+    }
+
+    private static void store(UUID uuid, PlayerRewards rewards) {
+        REWARDS_CACHE.put(uuid, rewards);
+        saveToFile(uuid, rewards);
+        persistRewardsAsync(uuid, rewards);
     }
 
     public static void syncRewardsFromDbAsync(UUID uuid) {
@@ -145,7 +174,8 @@ public final class MariaStats {
                 if (conn == null) return;
                 ensureSchema(conn);
                 try (PreparedStatement ps = conn.prepareStatement(
-                        "SELECT daily_last_day, daily_streak, pass_claimed FROM aquatech_player_rewards WHERE uuid = ?")) {
+                        "SELECT daily_last_day, daily_streak, pass_claimed, pass_premium_claimed, pass_premium_owned"
+                                + " FROM aquatech_player_rewards WHERE uuid = ?")) {
                     ps.setString(1, uuid.toString());
                     try (var rs = ps.executeQuery()) {
                         if (rs.next()) {
@@ -153,7 +183,8 @@ public final class MariaStats {
                             int streak = rs.getInt("daily_streak");
                             String rawTiers = rs.getString("pass_claimed");
                             Set<Integer> tiers = parseTiers(rawTiers);
-                            PlayerRewards fromDb = new PlayerRewards(lastDay, streak, tiers);
+                            PlayerRewards fromDb = new PlayerRewards(lastDay, streak, tiers,
+                                    parseTiers(rs.getString("pass_premium_claimed")), rs.getInt("pass_premium_owned") != 0);
                             REWARDS_CACHE.put(uuid, fromDb);
                             saveToFile(uuid, fromDb);
                         }
@@ -165,7 +196,7 @@ public final class MariaStats {
         });
     }
 
-    private static void persistRewardsAsync(UUID uuid, long dailyLastDay, int dailyStreak, Set<Integer> tiers) {
+    private static void persistRewardsAsync(UUID uuid, PlayerRewards rewards) {
         java.util.concurrent.CompletableFuture.runAsync(() -> {
             JsonObject cfg = creds();
             Driver jdbc = driver();
@@ -180,14 +211,19 @@ public final class MariaStats {
                 if (conn == null) return;
                 ensureSchema(conn);
                 try (PreparedStatement ps = conn.prepareStatement(
-                        "INSERT INTO aquatech_player_rewards (uuid, daily_last_day, daily_streak, pass_claimed)"
-                                + " VALUES (?,?,?,?)"
+                        "INSERT INTO aquatech_player_rewards (uuid, daily_last_day, daily_streak, pass_claimed,"
+                                + " pass_premium_claimed, pass_premium_owned)"
+                                + " VALUES (?,?,?,?,?,?)"
                                 + " ON DUPLICATE KEY UPDATE daily_last_day=VALUES(daily_last_day),"
-                                + " daily_streak=VALUES(daily_streak), pass_claimed=VALUES(pass_claimed)")) {
+                                + " daily_streak=VALUES(daily_streak), pass_claimed=VALUES(pass_claimed),"
+                                + " pass_premium_claimed=VALUES(pass_premium_claimed),"
+                                + " pass_premium_owned=VALUES(pass_premium_owned)")) {
                     ps.setString(1, uuid.toString());
-                    ps.setLong(2, dailyLastDay);
-                    ps.setInt(3, dailyStreak);
-                    ps.setString(4, formatTiers(tiers));
+                    ps.setLong(2, rewards.dailyLastDay());
+                    ps.setInt(3, rewards.dailyStreak());
+                    ps.setString(4, formatTiers(rewards.passClaimedTiers()));
+                    ps.setString(5, formatTiers(rewards.premiumClaimedTiers()));
+                    ps.setInt(6, rewards.premiumOwned() ? 1 : 0);
                     ps.executeUpdate();
                 }
             } catch (Throwable t) {
@@ -236,7 +272,14 @@ public final class MariaStats {
                     tiers.add(el.getAsInt());
                 }
             }
-            return new PlayerRewards(day, streak, tiers);
+            Set<Integer> premium = new java.util.HashSet<>();
+            if (obj.has("premium_claimed") && obj.get("premium_claimed").isJsonArray()) {
+                for (var el : obj.getAsJsonArray("premium_claimed")) {
+                    premium.add(el.getAsInt());
+                }
+            }
+            boolean owned = obj.has("premium_owned") && obj.get("premium_owned").getAsBoolean();
+            return new PlayerRewards(day, streak, tiers, premium, owned);
         } catch (Throwable t) {
             return null;
         }
@@ -254,6 +297,12 @@ public final class MariaStats {
             java.util.Collections.sort(sorted);
             for (int t : sorted) arr.add(t);
             obj.add("pass_claimed", arr);
+            com.google.gson.JsonArray parr = new com.google.gson.JsonArray();
+            java.util.List<Integer> psorted = new java.util.ArrayList<>(rewards.premiumClaimedTiers());
+            java.util.Collections.sort(psorted);
+            for (int t : psorted) parr.add(t);
+            obj.add("premium_claimed", parr);
+            obj.addProperty("premium_owned", rewards.premiumOwned());
             Files.writeString(file, obj.toString(), StandardCharsets.UTF_8);
         } catch (Throwable ignored) {}
     }
@@ -284,6 +333,16 @@ public final class MariaStats {
                     + "updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"
                     + " ON UPDATE CURRENT_TIMESTAMP"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+            for (String alter : new String[]{
+                    "ALTER TABLE aquatech_player_rewards ADD COLUMN IF NOT EXISTS pass_premium_claimed TEXT NULL",
+                    "ALTER TABLE aquatech_player_rewards ADD COLUMN IF NOT EXISTS pass_premium_owned TINYINT NOT NULL DEFAULT 0"}) {
+                try {
+                    st.execute(alter);
+                } catch (Throwable t) {
+                    AquaLumenUI.LOGGER.debug("MariaDB rewards migration skipped: {}", t.toString());
+                }
+            }
 
             schemaReady = true;
         } catch (Throwable t) {
