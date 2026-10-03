@@ -46,6 +46,12 @@ public final class LumenNetwork {
                 .consumerMainThread(LumenPackets.HubSync::handle)
                 .add();
 
+        CHANNEL.messageBuilder(LumenPackets.OnboardingSync.class, nextId++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(LumenPackets.OnboardingSync::encode)
+                .decoder(LumenPackets.OnboardingSync::new)
+                .consumerMainThread(LumenPackets.OnboardingSync::handle)
+                .add();
+
         AquaLumenUI.LOGGER.debug("[AquaLumen UI] registered {} packets", nextId);
     }
 

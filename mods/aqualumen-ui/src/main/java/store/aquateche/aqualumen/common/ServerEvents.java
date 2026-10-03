@@ -31,6 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class ServerEvents {
 
     private static final Set<UUID> MODDED_CLIENTS = ConcurrentHashMap.newKeySet();
+    private static final java.util.Map<UUID, String> CLIENT_VERSIONS = new ConcurrentHashMap<>();
     private static final Map<UUID, Integer> LAST_FISH = new ConcurrentHashMap<>();
     private static final Map<UUID, Long> LAST_COINS = new ConcurrentHashMap<>();
     private static int tickCounter;
@@ -73,6 +74,7 @@ public final class ServerEvents {
         LAST_FISH.remove(id);
         LAST_COINS.remove(id);
         MODDED_CLIENTS.remove(id);
+        CLIENT_VERSIONS.remove(id);
         HubActionHandler.forget(id);
         HubDataService.closeFor(id);
     }
@@ -116,6 +118,18 @@ public final class ServerEvents {
 
     public static void markModded(ServerPlayer player) {
         MODDED_CLIENTS.add(player.getUUID());
+    }
+
+    public static void markModded(ServerPlayer player, String clientVersion) {
+        MODDED_CLIENTS.add(player.getUUID());
+        if (clientVersion != null) {
+            CLIENT_VERSIONS.put(player.getUUID(), clientVersion);
+        }
+    }
+
+    /** The mod version the client reported in its hello, or an empty string when unknown. */
+    public static String clientVersion(ServerPlayer player) {
+        return CLIENT_VERSIONS.getOrDefault(player.getUUID(), "");
     }
 
     public static boolean hasClientMod(ServerPlayer player) {

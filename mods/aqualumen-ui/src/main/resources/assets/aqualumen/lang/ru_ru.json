@@ -34,6 +34,7 @@
   "gui.aqualumen.theme.rose": "Midnight Rose",
   "key.categories.aqualumen": "AquaLumen UI",
   "key.aqualumen.open_hub": "Открыть хаб",
+  "key.aqualumen.toggle_guide": "Показать или скрыть обучение",
   "msg.aqualumen.fallback": "Установите лаунчер aquaTeche, чтобы увидеть полный интерфейс хаба.",
   "msg.aqualumen.cooldown": "Слишком часто. Подождите немного.",
   "msg.aqualumen.unavailable": "Пока недоступно. Экономика хаба ещё не подключена.",

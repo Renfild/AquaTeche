@@ -34,6 +34,13 @@ public final class LumenClient {
             GLFW.GLFW_KEY_F4,
             "key.categories.aqualumen");
 
+    public static final KeyMapping TOGGLE_GUIDE = new KeyMapping(
+            "key.aqualumen.toggle_guide",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_Y,
+            "key.categories.aqualumen");
+
     @Nullable
     private static HubSnapshot snapshot;
     private static long snapshotReceivedAt;
@@ -49,6 +56,7 @@ public final class LumenClient {
     @SubscribeEvent
     public static void onRegisterKeys(RegisterKeyMappingsEvent event) {
         event.register(OPEN_HUB);
+        event.register(TOGGLE_GUIDE);
     }
 
     @SubscribeEvent
@@ -58,6 +66,8 @@ public final class LumenClient {
                 "web_chat",
                 (gui, graphics, partialTick, width, height) ->
                         store.aquateche.aqualumen.client.chat.ChatWebOverlay.render(graphics, width, height, partialTick));
+        event.registerAboveAll("onboarding_guide",
+                (gui, graphics, partialTick, width, height) -> OnboardingHud.render(graphics, width, height));
     }
 
     /** Called from the network thread wrapper; already scheduled on the client thread. */
@@ -111,6 +121,9 @@ public final class LumenClient {
             }
             while (OPEN_HUB.consumeClick()) {
                 openScreen("profile");
+            }
+            while (TOGGLE_GUIDE.consumeClick()) {
+                OnboardingHud.toggle();
             }
         }
     }

@@ -37,7 +37,7 @@ public final class LumenPackets {
             NetworkEvent.Context ctx = context.get();
             ServerPlayer sender = ctx.getSender();
             if (sender != null) {
-                ServerEvents.markModded(sender);
+                ServerEvents.markModded(sender, clientVersion);
             }
             ctx.setPacketHandled(true);
         }
@@ -69,6 +69,45 @@ public final class LumenPackets {
             if (sender != null) {
                 HubActionHandler.handle(sender, action, argument);
             }
+            ctx.setPacketHandled(true);
+        }
+    }
+
+    /**
+     * State of the new-player guide panel. {@code step} 0 hides it, 1..5 is the current step, 6 means finished;
+     * {@code doneStep} and {@code reward} describe the step that was just completed (for the toast).
+     */
+    public static final class OnboardingSync {
+        private final int step;
+        private final int have;
+        private final int doneStep;
+        private final String reward;
+
+        public OnboardingSync(int step, int have, int doneStep, String reward) {
+            this.step = step;
+            this.have = have;
+            this.doneStep = doneStep;
+            this.reward = reward == null ? "" : reward;
+        }
+
+        public OnboardingSync(FriendlyByteBuf buf) {
+            this.step = buf.readVarInt();
+            this.have = buf.readVarInt();
+            this.doneStep = buf.readVarInt();
+            this.reward = buf.readUtf(120);
+        }
+
+        public void encode(FriendlyByteBuf buf) {
+            buf.writeVarInt(step);
+            buf.writeVarInt(have);
+            buf.writeVarInt(doneStep);
+            buf.writeUtf(reward, 120);
+        }
+
+        public void handle(Supplier<NetworkEvent.Context> context) {
+            NetworkEvent.Context ctx = context.get();
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
+                    store.aquateche.aqualumen.client.OnboardingHud.accept(step, have, doneStep, reward));
             ctx.setPacketHandled(true);
         }
     }

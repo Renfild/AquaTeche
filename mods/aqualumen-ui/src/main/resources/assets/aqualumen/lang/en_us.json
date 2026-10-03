@@ -34,6 +34,7 @@
   "gui.aqualumen.theme.rose": "Midnight Rose",
   "key.categories.aqualumen": "AquaLumen UI",
   "key.aqualumen.open_hub": "Open hub",
+  "key.aqualumen.toggle_guide": "Show / hide the guide",
   "msg.aqualumen.fallback": "Install the aquaTeche launcher to see the full hub interface.",
   "msg.aqualumen.cooldown": "Too fast. Please wait a moment.",
   "msg.aqualumen.unavailable": "Not available yet. Hub economy is not wired.",
