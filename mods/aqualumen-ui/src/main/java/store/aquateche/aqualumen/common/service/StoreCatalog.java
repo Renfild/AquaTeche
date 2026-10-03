@@ -33,7 +33,7 @@ public final class StoreCatalog {
             new Product("rank.legend", "Легенда", "Максимум домов и /hat", 1499, "gems", "lp_group", "legend"),
             new Product("rank.vip", "VIP", "/wb /ec /fly", 199, "gems", "lp_group", "vip"),
             new Product("gems.5", "5 гемов", "50 000 монет → 5 гемов", 50000, "coins", "gems", "5"),
-            new Product("pass.premium", "Боевой Пропуск", "Премиум-награды сезона (50 уровней)", 5, "gems", "pass_premium", "")
+            new Product("pass.premium", "Боевой Пропуск", "Премиум-награды сезона (50 уровней)", 100, "gems", "pass_premium", "")
     );
 
     private static final String[] FLEET = {"sailor", "skipper", "captain", "admiral", "legend", "vip"};

@@ -577,8 +577,8 @@ hub_html_raw = r'''<!doctype html>
 </div>
 <div class="case-layer" id="caseLayer">
   <section class="case-modal" role="dialog" aria-modal="true">
-    <div class="case-orb" id="caseOrb" style="margin:0 auto;width:54px;height:54px;border-radius:16px;font-size:20px;display:grid;place-items:center;border:1px solid var(--line);background:radial-gradient(circle,color-mix(in srgb,var(--accent) 26%,transparent),transparent 72%)">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h18v4H3zM3 12v8h18v-8M3 8l2-4h6l2 4"/><circle cx="12" cy="16" r="1.4"/></svg>
+    <div class="case-orb" id="caseOrb" style="margin:0 auto;width:104px;height:104px;display:grid;place-items:center">
+      <img id="caseOrbImg" class="case-card-img" alt="" style="width:96px;height:96px;margin:0;object-fit:contain" />
     </div>
     <h2 id="caseTitle">Кейс</h2>
     <p class="case-sub" id="caseSub"></p>
@@ -918,9 +918,8 @@ try {
       Sfx.ensure();
 
       const col = this.color(def.rarity);
-      $("caseOrb").style.borderColor = col + "66";
-      $("caseOrb").style.color = col;
-      $("caseOrb").style.boxShadow = `inset 0 0 22px ${col}22, 0 0 26px ${col}1f`;
+      $("caseOrbImg").src = CASE_ICONS[def.id] || "";
+      $("caseOrbImg").style.filter = `drop-shadow(0 0 16px ${col}99) drop-shadow(4px 4px 0 rgba(0,0,0,.55))`;
       $("caseTitle").textContent = def.title;
       $("caseSub").innerHTML = 'Стоимость: ' + coins(def.cost) + ' · ' + this.label(def.rarity);
       $("caseReveal").className = "case-wait";

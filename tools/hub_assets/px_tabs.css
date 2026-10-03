@@ -129,7 +129,7 @@
 .drop-item-card{border:8px solid transparent!important;border-image:var(--n-chip) 4 fill/8px stretch!important;background:none!important;border-radius:0!important;padding:4px!important}
 .drop-item-card b{font-size:8px!important;font-weight:400;line-height:1.5;text-shadow:1px 1px 0 #000}
 .drop-item-chance{border-radius:0!important;border-width:2px!important;font-size:8px!important;letter-spacing:0!important;padding:2px 3px!important}
-.case-orb{border-radius:0!important;border:6px solid #3d2f8c!important}
+.case-orb{border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}
 .case-wait{font-size:8px!important}
 
 /* fishing buyer */
