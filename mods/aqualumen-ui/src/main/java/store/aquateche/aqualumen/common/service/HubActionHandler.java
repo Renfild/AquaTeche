@@ -120,7 +120,7 @@ public final class HubActionHandler {
                     .withStyle(ChatFormatting.RED));
             return;
         }
-        if (tier < 1 || tier > LumenConfig.COMMON.seasonMaxTier.get() || tier > seasonTier) {
+        if (tier < 1 || tier > PremiumPassRewards.passMax(LumenConfig.COMMON.seasonMaxTier.get()) || tier > seasonTier) {
             player.sendSystemMessage(Component.literal("Уровень " + tier + " пропуска недоступен (сейчас открыт до " + seasonTier + ").")
                     .withStyle(ChatFormatting.YELLOW));
             return;
@@ -169,9 +169,14 @@ public final class HubActionHandler {
 
         String caseExtra = "";
         switch (tier) {
+            case 3, 8 -> {
+                BoosterService.grant(player, BoosterLogic.Tier.SMALL, 1);
+                caseExtra = " Бустер скупщика: /booster.";
+            }
             case 5 -> caseExtra = grantPassCase(player, "starter", "Первопроходец");
             case 10 -> caseExtra = grantPassCase(player, "smeltery", "Инженер");
             case 11 -> HubEconomy.giveItem(player, itemStack("aquatech_ui:rate_x4", 1));
+            case 13 -> caseExtra = grantPassCase(player, "starter", "Первопроходец");
             case 15 -> caseExtra = grantPassCase(player, "applied", "Цифровая МЭ");
             case 20 -> caseExtra = grantPassCase(player, "superconductor", "Проводники");
             case 22 -> HubEconomy.giveItem(player, itemStack("aquatech_ui:rate_x16", 1));

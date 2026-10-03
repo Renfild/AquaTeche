@@ -17,7 +17,7 @@
 	serverName = "AquaLumen"
 	title = "Сезон 1 — Глубина"
 	#Range: 1 ~ 500
-	maxTier = 50
+	maxTier = 25
 
 #Economy bridge. Scoreboard objectives are used when no economy plugin is detected.
 [economy]

@@ -1,4 +1,4 @@
-const CACHE_NAME = "aquatech-v20261003-fonts";
+const CACHE_NAME = "aquatech-v20261004-pass";
 const PRECACHE_ASSETS = [
   "/",
   "/index.html",

@@ -26,7 +26,6 @@ import javax.annotation.Nullable;
 @Mod.EventBusSubscriber(modid = AquaLumenUI.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class LumenClient {
 
-    public static final String CLIENT_VERSION = AquaLumenUI.VERSION;
 
     public static final KeyMapping OPEN_HUB = new KeyMapping(
             "key.aqualumen.open_hub",
@@ -101,7 +100,7 @@ public final class LumenClient {
 
         @SubscribeEvent
         public static void onLoggingIn(ClientPlayerNetworkEvent.LoggingIn event) {
-            LumenNetwork.toServer(new LumenPackets.ClientHello(CLIENT_VERSION));
+            LumenNetwork.toServer(new LumenPackets.ClientHello(AquaLumenUI.version()));
         }
 
         @SubscribeEvent

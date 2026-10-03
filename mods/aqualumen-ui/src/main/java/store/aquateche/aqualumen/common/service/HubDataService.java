@@ -618,7 +618,7 @@ public final class HubDataService {
                 server.getPlayerCount(),
                 server.getMaxPlayers(),
                 tps,
-                AquaLumenUI.VERSION
+                AquaLumenUI.version()
         );
     }
 
@@ -788,7 +788,7 @@ public final class HubDataService {
 
     private static SeasonData resolveSeason(ServerPlayer player, int playerLevel, int quests) {
         String title = LumenConfig.COMMON.seasonTitle.get();
-        int maxTier = LumenConfig.COMMON.seasonMaxTier.get();
+        int maxTier = PremiumPassRewards.passMax(LumenConfig.COMMON.seasonMaxTier.get());
         int seasonXp = 0;
         int tier = 1;
 
@@ -813,6 +813,8 @@ public final class HubDataService {
             seasonXp = tier * 100 + (playerLevel % 3) * 33;
         }
 
+        // the pass has maxTier levels: count claimable rewards only for levels the hub can show
+        tier = PremiumPassRewards.effectiveTier(tier, maxTier);
         float progress = (seasonXp % 100) / 100.0F;
         boolean premium = isPremiumPass(player);
 
@@ -850,7 +852,7 @@ public final class HubDataService {
         int claimedMax = 1;
         for (int t : claimedTiers) claimedMax = Math.max(claimedMax, t);
         tier = Math.max(tier, claimedMax);
-        tier = Math.max(1, Math.min(maxTier, tier));
+        tier = PremiumPassRewards.effectiveTier(tier, maxTier);
         SEASON_TIER_CACHE.put(player.getUUID(), tier);
 
         return new SeasonData(title, tier, maxTier, progress, premium, claimable, claimedTiers, claimedPremium);

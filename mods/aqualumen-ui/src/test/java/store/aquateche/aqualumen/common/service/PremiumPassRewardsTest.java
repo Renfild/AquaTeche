@@ -28,10 +28,18 @@ class PremiumPassRewardsTest {
     }
 
     @Test
-    void premiumCoinsMatchTheFreeTrackSoPremiumDoublesTheIncome() {
-        assertEquals(2500L, PremiumPassRewards.forTier(1).coins());
-        assertEquals(12000L, PremiumPassRewards.forTier(10).coins());
-        assertEquals(100000L, PremiumPassRewards.forTier(25).coins());
+    void premiumCoinsAreDoubleTheFreeTrack() {
+        assertEquals(5000L, PremiumPassRewards.forTier(1).coins());
+        assertEquals(24000L, PremiumPassRewards.forTier(10).coins());
+        assertEquals(200000L, PremiumPassRewards.forTier(25).coins());
+    }
+
+    @Test
+    void premiumFillsTheEarlyAndMiddleLevelsWithCases() {
+        assertEquals("smeltery", PremiumPassRewards.forTier(2).caseId());
+        assertEquals("steam", PremiumPassRewards.forTier(7).caseId());
+        assertEquals("applied", PremiumPassRewards.forTier(12).caseId());
+        assertEquals("abyss", PremiumPassRewards.forTier(17).caseId());
     }
 
     private static final java.util.List<String> CASE_LADDER = java.util.List.of(
@@ -62,12 +70,14 @@ class PremiumPassRewardsTest {
     @Test
     void boostersAndPearlMultipliersArePlacedBetweenTheCases() {
         assertEquals(Tier.SMALL, PremiumPassRewards.forTier(3).booster());
+        assertEquals(Tier.SMALL, PremiumPassRewards.forTier(6).booster());
         assertEquals(1, PremiumPassRewards.forTier(3).boosterCount());
         assertEquals(Tier.LARGE, PremiumPassRewards.forTier(14).booster());
         assertEquals("aquatech_ui:rate_x8", PremiumPassRewards.forTier(13).itemId());
         assertEquals("aquatech_ui:rate_x32", PremiumPassRewards.forTier(23).itemId());
         assertNull(PremiumPassRewards.forTier(2).itemId());
         assertNull(PremiumPassRewards.forTier(2).booster());
+        assertNull(PremiumPassRewards.forTier(7).booster());
     }
 
     @Test
@@ -83,5 +93,25 @@ class PremiumPassRewardsTest {
         assertEquals(java.util.List.of(1, 2, 3), PremiumPassRewards.claimable(3, java.util.Set.of()));
         assertEquals(java.util.List.of(2, 4), PremiumPassRewards.claimable(4, java.util.Set.of(1, 3)));
         assertEquals(PremiumPassRewards.MAX_TIER, PremiumPassRewards.claimable(99, java.util.Set.of()).size());
+    }
+
+    @Test
+    void passTierNeverExceedsTheTwentyFiveLevelsTheHubDraws() {
+        assertEquals(25, PremiumPassRewards.effectiveTier(40, 50));
+        assertEquals(25, PremiumPassRewards.effectiveTier(26, 500));
+        assertEquals(12, PremiumPassRewards.effectiveTier(12, 50));
+    }
+
+    @Test
+    void configCanOnlyLowerThePassNotRaiseIt() {
+        assertEquals(10, PremiumPassRewards.effectiveTier(20, 10));
+        assertEquals(25, PremiumPassRewards.passMax(50));
+        assertEquals(1, PremiumPassRewards.passMax(0));
+    }
+
+    @Test
+    void tierIsAtLeastOne() {
+        assertEquals(1, PremiumPassRewards.effectiveTier(0, 25));
+        assertEquals(1, PremiumPassRewards.effectiveTier(-4, 25));
     }
 }

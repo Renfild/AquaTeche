@@ -20,6 +20,7 @@ const SLUG_TO_DELIVERY = {
   coins_30k: { kind: "coins", payload: "30000" },
   coins_75k: { kind: "coins", payload: "75000" },
   coins_200k: { kind: "coins", payload: "200000" },
+  pass_premium: { kind: "pass_premium", payload: "" },
 };
 
 const RANK_PRICES = {
@@ -35,6 +36,11 @@ const RANK_PRICES = {
   legend_forever: { title: "Легенда (Навсегда)", price_rub: 3499 },
   vip: { title: "VIP (1 месяц)", price_rub: 199 },
   vip_forever: { title: "VIP (Навсегда)", price_rub: 499 },
+};
+
+// Premium season pass: sold directly for rubles; in the game the same pass costs 1000 gems (ShopRules.PASS_PREMIUM_GEMS).
+const PASS_PACKS = {
+  pass_premium: { title: "Боевой пропуск (премиум)", price_rub: 299 },
 };
 
 const COIN_PACKS = {
@@ -315,8 +321,9 @@ export async function onRequestPost(context) {
     .first();
   const coinPack = COIN_PACKS[slug];
   const rankPack = RANK_PRICES[slug];
-  const title = rankPack?.title || coinPack?.title || catalog?.title || slug;
-  const priceRub = rankPack ? rankPack.price_rub : (coinPack ? coinPack.price_rub : Math.max(1, Number(catalog?.price_rub || 99)));
+  const passPack = PASS_PACKS[slug];
+  const title = rankPack?.title || passPack?.title || coinPack?.title || catalog?.title || slug;
+  const priceRub = rankPack ? rankPack.price_rub : (passPack ? passPack.price_rub : (coinPack ? coinPack.price_rub : Math.max(1, Number(catalog?.price_rub || 99))));
   const method = String(body?.method || "balance").toLowerCase();
 
   if (method === "balance") {
@@ -353,7 +360,9 @@ export async function onRequestPost(context) {
       coins: prof?.coins ?? 0,
       message: delivery.kind === "coins"
         ? `Куплено: «${title}». Монеты моментально зачислены на ваш баланс!`
-        : `Куплено: «${title}». Привилегия выдастся на сервере в течение минуты!`,
+        : delivery.kind === "pass_premium"
+          ? `Куплено: «${title}». Премиум-дорожка откроется в игре в течение минуты, зайдите на сервер.`
+          : `Куплено: «${title}». Привилегия выдастся на сервере в течение минуты!`,
     });
   }
 

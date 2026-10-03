@@ -58,7 +58,7 @@ public final class LumenConfig {
             b.comment("Season / battle pass").push("season");
             serverName = b.define("serverName", "AquaLumen");
             seasonTitle = b.define("title", "\u0421\u0435\u0437\u043e\u043d 1 \u2014 \u0413\u043b\u0443\u0431\u0438\u043d\u0430");
-            seasonMaxTier = b.defineInRange("maxTier", 50, 1, 500);
+            seasonMaxTier = b.defineInRange("maxTier", 25, 1, 25);
             b.pop();
 
             b.comment("Economy bridge. Scoreboard objectives are used when no economy plugin is detected.").push("economy");

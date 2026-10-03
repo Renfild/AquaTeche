@@ -1,13 +1,17 @@
   /* Premium track: mirror of PremiumPassRewards.java - keep both in sync. */
-  const PASS_PREMIUM_COINS = [2500, 3000, 3500, 4000, 5000, 6000, 7000, 8000, 9000, 12000, 14000, 16000, 18000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 70000, 80000, 100000];
+  const PASS_PREMIUM_COINS = [5000, 6000, 7000, 8000, 10000, 12000, 14000, 16000, 18000, 24000, 28000, 32000, 36000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 140000, 160000, 200000];
   const PASS_PREMIUM_EXTRA = {
+    2: { kind: "case", id: "smeltery" },
     3: { kind: "booster", id: "small", label: "Бустер" },
     5: { kind: "case", id: "steam" },
-    7: { kind: "booster", id: "small", label: "Бустер" },
+    6: { kind: "booster", id: "small", label: "Бустер" },
+    7: { kind: "case", id: "steam" },
     10: { kind: "case", id: "flora" },
+    12: { kind: "case", id: "applied" },
     13: { kind: "item", id: "aquatech_ui:rate_x8", label: "Множитель ×8" },
     14: { kind: "booster", id: "large", label: "Бустер большой" },
     15: { kind: "case", id: "abyss" },
+    17: { kind: "case", id: "abyss" },
     18: { kind: "booster", id: "large", label: "Бустер большой" },
     20: { kind: "case", id: "singularity" },
     23: { kind: "item", id: "aquatech_ui:rate_x32", label: "Множитель ×32" },
@@ -33,6 +37,7 @@
     };
     const coinSprite = (n) => n < 10000 ? "coin-1" : n < 30000 ? "coin-3" : n < 70000 ? "bag" : "chest";
     const iconOf = (r) => {
+      if (r.booster) return `<i class="np-coin booster${r.booster === "large" ? " big" : ""}"></i>`;
       if (r.type === "case" && CASE_ICONS[r.item]) return `<img class="np-ic" src="${CASE_ICONS[r.item]}" alt="">`;
       const mult = /rate_x(\d+)$/.exec(r.item || "");
       if (mult) return [2, 4, 8, 16, 32, 64].includes(Number(mult[1])) ? `<i class="np-rate" style="background-image:var(--s-rate-${mult[1]})"></i>` : `<span class="np-mult m${mult[1]}">×${mult[1]}</span>`;
@@ -55,7 +60,7 @@
       const isClaimed = claimed.includes(t);
       const ready = !isClaimed && cur >= t;
       const st = isClaimed ? "done" : ready ? "ready" : (t === cur + 1 ? "next" : "lock");
-      const name = (r.type === "case" || r.item) ? String(r.label).replace(/^Кейс [IVX]+: ?/, "") : "Монеты";
+      const name = (r.type === "case" || r.item || r.booster) ? String(r.label).replace(/^Кейс [IVX]+: ?/, "") : "Монеты";
       free += `<div class="np-col" style="--i:${t - start}"><div class="np-slot ${st}${ready ? " claim-pass" : ""}" ${ready ? `data-level="${t}"` : ""} title="${esc(r.label)}">
         ${ready ? '<span class="np-take">ЗАБРАТЬ!</span>' : ""}
         ${iconOf(r)}${isClaimed ? '<i class="np-ck"></i>' : ""}

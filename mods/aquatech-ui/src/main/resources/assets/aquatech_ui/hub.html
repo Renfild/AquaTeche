@@ -1915,17 +1915,17 @@ try {
   const PASS_REWARDS = [
     { tier: 1, label: "Монеты", coins: 2500, rarity: "common" },
     { tier: 2, label: "Монеты", coins: 3000, rarity: "common" },
-    { tier: 3, label: "Монеты", coins: 3500, rarity: "common" },
+    { tier: 3, label: "Бустер скупщика", booster: "small", coins: 3500, rarity: "rare", badge: "Бустер" },
     { tier: 4, label: "Монеты", coins: 4000, rarity: "common" },
     { tier: 5, label: "Кейс I: Первопроходец", item: "starter", type: "case", coins: 5000, rarity: "rare", badge: "Кейс" },
     { tier: 6, label: "Монеты", coins: 6000, rarity: "common" },
     { tier: 7, label: "Монеты", coins: 7000, rarity: "common" },
-    { tier: 8, label: "Монеты", coins: 8000, rarity: "common" },
+    { tier: 8, label: "Бустер скупщика", booster: "small", coins: 8000, rarity: "rare", badge: "Бустер" },
     { tier: 9, label: "Монеты", coins: 9000, rarity: "common" },
     { tier: 10, label: "Кейс II: Инженер", item: "smeltery", type: "case", coins: 12000, rarity: "epic", badge: "Эпик" },
     { tier: 11, label: "Множитель улова ×4", item: "aquatech_ui:rate_x4", coins: 14000, rarity: "rare", badge: "Бафф" },
     { tier: 12, label: "Монеты", coins: 16000, rarity: "common" },
-    { tier: 13, label: "Монеты", coins: 18000, rarity: "common" },
+    { tier: 13, label: "Кейс I: Первопроходец", item: "starter", type: "case", coins: 18000, rarity: "rare", badge: "Кейс" },
     { tier: 14, label: "Монеты", coins: 20000, rarity: "common" },
     { tier: 15, label: "Кейс V: Цифровая МЭ", item: "applied", type: "case", coins: 25000, rarity: "epic", badge: "Эпик" },
     { tier: 16, label: "Монеты", coins: 30000, rarity: "common" },
@@ -1941,15 +1941,19 @@ try {
   ];
 
   /* Premium track: mirror of PremiumPassRewards.java - keep both in sync. */
-  const PASS_PREMIUM_COINS = [2500, 3000, 3500, 4000, 5000, 6000, 7000, 8000, 9000, 12000, 14000, 16000, 18000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 70000, 80000, 100000];
+  const PASS_PREMIUM_COINS = [5000, 6000, 7000, 8000, 10000, 12000, 14000, 16000, 18000, 24000, 28000, 32000, 36000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 140000, 160000, 200000];
   const PASS_PREMIUM_EXTRA = {
+    2: { kind: "case", id: "smeltery" },
     3: { kind: "booster", id: "small", label: "Бустер" },
     5: { kind: "case", id: "steam" },
-    7: { kind: "booster", id: "small", label: "Бустер" },
+    6: { kind: "booster", id: "small", label: "Бустер" },
+    7: { kind: "case", id: "steam" },
     10: { kind: "case", id: "flora" },
+    12: { kind: "case", id: "applied" },
     13: { kind: "item", id: "aquatech_ui:rate_x8", label: "Множитель ×8" },
     14: { kind: "booster", id: "large", label: "Бустер большой" },
     15: { kind: "case", id: "abyss" },
+    17: { kind: "case", id: "abyss" },
     18: { kind: "booster", id: "large", label: "Бустер большой" },
     20: { kind: "case", id: "singularity" },
     23: { kind: "item", id: "aquatech_ui:rate_x32", label: "Множитель ×32" },
@@ -1975,6 +1979,7 @@ try {
     };
     const coinSprite = (n) => n < 10000 ? "coin-1" : n < 30000 ? "coin-3" : n < 70000 ? "bag" : "chest";
     const iconOf = (r) => {
+      if (r.booster) return `<i class="np-coin booster${r.booster === "large" ? " big" : ""}"></i>`;
       if (r.type === "case" && CASE_ICONS[r.item]) return `<img class="np-ic" src="${CASE_ICONS[r.item]}" alt="">`;
       const mult = /rate_x(\d+)$/.exec(r.item || "");
       if (mult) return [2, 4, 8, 16, 32, 64].includes(Number(mult[1])) ? `<i class="np-rate" style="background-image:var(--s-rate-${mult[1]})"></i>` : `<span class="np-mult m${mult[1]}">×${mult[1]}</span>`;
@@ -1997,7 +2002,7 @@ try {
       const isClaimed = claimed.includes(t);
       const ready = !isClaimed && cur >= t;
       const st = isClaimed ? "done" : ready ? "ready" : (t === cur + 1 ? "next" : "lock");
-      const name = (r.type === "case" || r.item) ? String(r.label).replace(/^Кейс [IVX]+: ?/, "") : "Монеты";
+      const name = (r.type === "case" || r.item || r.booster) ? String(r.label).replace(/^Кейс [IVX]+: ?/, "") : "Монеты";
       free += `<div class="np-col" style="--i:${t - start}"><div class="np-slot ${st}${ready ? " claim-pass" : ""}" ${ready ? `data-level="${t}"` : ""} title="${esc(r.label)}">
         ${ready ? '<span class="np-take">ЗАБРАТЬ!</span>' : ""}
         ${iconOf(r)}${isClaimed ? '<i class="np-ck"></i>' : ""}

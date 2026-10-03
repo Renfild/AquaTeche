@@ -101,6 +101,7 @@ public final class PendingDeliveryService {
             String msg = switch (kind == null ? "" : kind) {
                 case "skin" -> "Скин с сайта применён";
                 case "skin_clear" -> "Скин с сайта снят";
+                case "pass_premium" -> "Боевой пропуск: премиум-дорожка открыта (вкладка «Пропуск» в F4)";
                 case "sold_notice" -> ""; // плашка «Лот продан» уже уведомляет
                 default -> "Доставка с сайта: " + kind;
             };

@@ -26,14 +26,8 @@ public final class StoreCatalog {
     }
 
     private static final List<Product> PRODUCTS = List.of(
-            new Product("rank.sailor", "Моряк", "Префикс, 2 дома", 99, "gems", "lp_group", "sailor"),
-            new Product("rank.skipper", "Шкипер", "Приоритет входа, кит", 249, "gems", "lp_group", "skipper"),
-            new Product("rank.captain", "Капитан", "/fly на приватах", 499, "gems", "lp_group", "captain"),
-            new Product("rank.admiral", "Адмирал", "/nick, 10 домов", 899, "gems", "lp_group", "admiral"),
-            new Product("rank.legend", "Легенда", "Максимум домов и /hat", 1499, "gems", "lp_group", "legend"),
-            new Product("rank.vip", "VIP", "/wb /ec /fly", 199, "gems", "lp_group", "vip"),
             new Product("gems.5", "5 гемов", "50 000 монет → 5 гемов", 50000, "coins", "gems", "5"),
-            new Product("pass.premium", "Боевой Пропуск", "Премиум-награды сезона (50 уровней)", 100, "gems", "pass_premium", "")
+            new Product("pass.premium", "Боевой Пропуск", "Премиум-награды сезона (25 уровней)", ShopRules.PASS_PREMIUM_GEMS, "gems", "pass_premium", "")
     );
 
     private static final String[] FLEET = {"sailor", "skipper", "captain", "admiral", "legend", "vip"};
@@ -72,6 +66,11 @@ public final class StoreCatalog {
             player.sendSystemMessage(Component.literal("Нет такого товара").withStyle(ChatFormatting.RED));
             return;
         }
+        if (ShopRules.isRankId(offerId)) {
+            player.sendSystemMessage(Component.literal("Ранги продаются только на сайте aquateche.store")
+                    .withStyle(ChatFormatting.YELLOW));
+            return;
+        }
         Product product = find(offerId.trim());
         if (product == null) {
             player.sendSystemMessage(Component.literal("Нет такого товара").withStyle(ChatFormatting.RED));
@@ -107,6 +106,9 @@ public final class StoreCatalog {
 
     public static Product find(String id) {
         String key = id.toLowerCase(Locale.ROOT);
+        if (ShopRules.isRankId(key)) {
+            return null;
+        }
         for (Product p : PRODUCTS) {
             if (p.id.equalsIgnoreCase(key) || p.payload.equalsIgnoreCase(key)) {
                 return p;

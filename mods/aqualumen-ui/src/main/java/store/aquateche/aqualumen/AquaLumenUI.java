@@ -27,8 +27,13 @@ import store.aquateche.aqualumen.registry.ModRegistries;
 public final class AquaLumenUI {
 
     public static final String MODID = "aqualumen";
-    public static final String VERSION = "0.3.48-alpha";
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    /** Version from the mod metadata (mods.toml), so the hub footer always matches the installed jar. */
+    public static String version() {
+        var list = net.minecraftforge.fml.ModList.get();
+        return list == null ? "" : list.getModContainerById(MODID).map(c -> c.getModInfo().getVersion().toString()).orElse("");
+    }
 
     public AquaLumenUI() {
         // Apex-контейнер иногда отдаёт транзиентные UnknownHostException —

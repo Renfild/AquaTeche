@@ -4553,6 +4553,12 @@
       });
     });
 
+    document.querySelectorAll("[data-buy-pass]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        openStoreModal("Боевой пропуск (премиум)", 299, "сезон", btn.getAttribute("data-buy-pass"));
+      });
+    });
+
     document.querySelectorAll("[data-buy-coins]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const slug = btn.getAttribute("data-buy-coins");
@@ -4574,7 +4580,7 @@
 
     const user = getUser();
     const defaultNick = user ? user.nick : "";
-    const periodStr = period === "навсегда" ? "Навсегда" : "1 Месяц";
+    const periodStr = period === "навсегда" ? "Навсегда" : period === "сезон" ? "Сезон" : "1 Месяц";
     const priceRub = Math.max(1, Number(price || 99));
     let userRubles = 0;
 
