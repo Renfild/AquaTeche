@@ -1,0 +1,172 @@
+// AquaTech: обучение первых 10 минут. Строка над хотбаром ведёт новичка по 5 шагам,
+// за шаги 1, 3 и 5 небольшие награды. Включается только на самом первом входе
+// (41_first_join_hint.js ставит aquatech_onboard = 1), старые игроки его не видят.
+// Шаг хранится в persistentData.aquatech_onboard: 1..5 — текущий шаг, 99 — пройдено.
+
+const ONBOARD_KEY = 'aquatech_onboard'
+const ONBOARD_BASE = 'aquatech_onboard_base'
+const ONBOARD_DONE = 99
+const ONBOARD_FISH_GOAL = 3
+const ONBOARD_ORES = ['minecraft:copper_ore', 'industrialupgrade:classicore/tin', 'minecraft:iron_ore', 'minecraft:coal_ore']
+
+let HubEconomy = null
+try {
+  HubEconomy = Java.loadClass('store.aquateche.aqualumen.common.service.HubEconomy')
+} catch (err) {
+  console.warn('[AquaTech] onboarding: HubEconomy not available, coins fall back to /eco: ' + err)
+}
+
+function onboardScore(server, name, objective) {
+  try {
+    const board = server.scoreboard
+    const obj = board.getObjective(objective)
+    if (obj == null || !board.hasPlayerScore(name, obj)) return 0
+    return board.getOrCreatePlayerScore(name, obj).getScore()
+  } catch (err) {
+    return 0
+  }
+}
+
+function onboardCoins(player) {
+  if (HubEconomy != null) {
+    try {
+      return Number(HubEconomy.coins(player))
+    } catch (err) {}
+  }
+  return onboardScore(player.server, player.username, 'coins')
+}
+
+function onboardGiveCoins(player, amount) {
+  if (HubEconomy != null) {
+    try {
+      HubEconomy.grantCoins(player, amount)
+      return
+    } catch (err) {}
+  }
+  player.server.runCommandSilent(`eco give ${player.username} ${amount}`)
+}
+
+function onboardHasAny(player, ids) {
+  for (const id of ids) {
+    try {
+      if (player.inventory.count(id) > 0) return true
+    } catch (err) {}
+  }
+  return false
+}
+
+function onboardStarterKeys(player) {
+  return player.persistentData.getCompound('aqualumen_case_keys').getInt('starter')
+}
+
+function onboardBoosterActive(player) {
+  const tag = player.persistentData.getCompound('aqualumen_boosters')
+  return tag.contains('until') && tag.getLong('until') > Date.now()
+}
+
+// Каждый шаг: подсказка для строки над хотбаром, проверка выполнения, награда.
+const ONBOARD_STEPS = {
+  1: {
+    hint: (player, base) => {
+      const caught = Math.max(0, onboardScore(player.server, player.username, 'aquatech_fish') - base)
+      return `§b1/5 §fЗакинь удочку в воду (ПКМ) и поймай рыбу: §e${Math.min(caught, ONBOARD_FISH_GOAL)}/${ONBOARD_FISH_GOAL}`
+    },
+    base: (player) => onboardScore(player.server, player.username, 'aquatech_fish'),
+    done: (player, base) => onboardScore(player.server, player.username, 'aquatech_fish') - base >= ONBOARD_FISH_GOAL,
+    reward: (player) => {
+      onboardGiveCoins(player, 500)
+      return '§6+500 монет'
+    }
+  },
+  2: {
+    hint: () => '§b2/5 §fНажми §eF4§f → «Кейсы» и открой подарочный кейс',
+    base: () => 0,
+    done: (player) => onboardStarterKeys(player) <= 0,
+    reward: () => ''
+  },
+  3: {
+    hint: () => '§b3/5 §fПродай улов: §eF4§f → «Рыбалка» → «Продать»',
+    base: (player) => onboardCoins(player),
+    done: (player, base) => onboardCoins(player) > base,
+    reward: (player) => {
+      player.server.runCommandSilent(`booster give ${player.username} small 1`)
+      return '§6малый бустер скупщика §7(включить: /booster)'
+    }
+  },
+  4: {
+    hint: () => '§b4/5 §fЗабери стартовый набор: §eF4§f → «Киты» или команда §e/kit start',
+    base: () => 0,
+    done: (player) => onboardHasAny(player, ['starcatcher:bamboo_rod']),
+    reward: () => ''
+  },
+  5: {
+    hint: () => '§b5/5 §fПоймай руду: медь, олово, железо или уголь',
+    base: () => 0,
+    done: (player) => onboardHasAny(player, ONBOARD_ORES),
+    reward: (player) => {
+      onboardGiveCoins(player, 1000)
+      player.give(Item.of('aquatech_ui:rate_x2'))
+      return '§6+1000 монет и множитель улова ×2'
+    }
+  }
+}
+
+function onboardAdvance(player, step) {
+  const data = player.persistentData
+  const reward = ONBOARD_STEPS[step].reward(player)
+  const name = player.username
+  player.server.runCommandSilent(`playsound minecraft:entity.player.levelup master ${name} ${player.x} ${player.y} ${player.z} 0.8 1.3`)
+  if (reward) player.tell(Text.of(`§a✔ Шаг ${step} пройден! §fНаграда: ${reward}`))
+
+  const next = step + 1
+  if (ONBOARD_STEPS[next]) {
+    data.putInt(ONBOARD_KEY, next)
+    data.putLong(ONBOARD_BASE, ONBOARD_STEPS[next].base(player))
+    return
+  }
+  data.putInt(ONBOARD_KEY, ONBOARD_DONE)
+  data.remove(ONBOARD_BASE)
+  player.server.runCommandSilent(`title ${name} times 10 70 20`)
+  player.server.runCommandSilent(`title ${name} subtitle {"text":"Дальше путь в квестах и в меню F4","color":"aqua"}`)
+  player.server.runCommandSilent(`title ${name} title {"text":"Старт пройден!","color":"gold","bold":true}`)
+  player.server.runCommandSilent(`playsound minecraft:ui.toast.challenge_complete master ${name} ${player.x} ${player.y} ${player.z} 1.0 1.0`)
+  player.tell(Text.of('§b[AquaTech] §fТы освоился! Дальше: §eквесты§f (книга в инвентаре) ведут к плавильне, пару и электричеству. ' +
+    'Новые удочки открывают новые руды. Турнир по рыбалке каждые выходные, новости на §eaquateche.store'))
+}
+
+ServerEvents.tick((event) => {
+  const { server } = event
+  if (server.tickCount % 20 !== 0) return
+  server.players.forEach((player) => {
+    const data = player.persistentData
+    const step = data.getInt(ONBOARD_KEY)
+    const def = ONBOARD_STEPS[step]
+    if (!def) return
+    if (!data.contains(ONBOARD_BASE)) data.putLong(ONBOARD_BASE, def.base(player))
+    const base = Number(data.getLong(ONBOARD_BASE))
+    if (def.done(player, base)) {
+      onboardAdvance(player, step)
+      return
+    }
+    // бустер пишет в ту же строку раз в секунду: не перебиваем его
+    if (!onboardBoosterActive(player)) {
+      player.displayClientMessage(Text.of(def.hint(player, base)), true)
+    }
+  })
+})
+
+// /onboarding reset — для теста: начать обучение заново (оператор, на себе).
+ServerEvents.commandRegistry((event) => {
+  const { commands: Commands } = event
+  event.register(Commands.literal('onboarding')
+    .requires((src) => src.hasPermission(2))
+    .then(Commands.literal('reset')
+      .executes((ctx) => {
+        const player = ctx.source.player
+        if (!player) return 0
+        player.persistentData.putInt(ONBOARD_KEY, 1)
+        player.persistentData.remove(ONBOARD_BASE)
+        player.tell(Text.of('§b[AquaTech] §fОбучение начато заново.'))
+        return 1
+      })))
+})
