@@ -1,44 +1,44 @@
 {
-  "from_version": "2.9.428",
-  "to_version": "2.9.429",
+  "from_version": "2.9.429",
+  "to_version": "2.9.430",
   "added": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.67-alpha.jar",
-      "md5": "b874d10e0c091087f87e4ce8c27d8c59",
-      "size": 2527639,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.429/aqualumen-forge-1.20.1-0.3.67-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.67-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.68-alpha.jar",
+      "md5": "1c910cc7c715e474044da42a2de7663c",
+      "size": 2539974,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.430/aqualumen-forge-1.20.1-0.3.68-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.68-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.111.jar",
-      "md5": "e8c49cb5756e4303c54930df014704cc",
-      "size": 3728370,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.429/aquatech_ui-1.0.111.jar",
-      "asset": "aquatech_ui-1.0.111.jar"
+      "path": "mods/aquatech_ui-1.0.112.jar",
+      "md5": "83fb2ca57e6d848bdabd40281cd965e2",
+      "size": 3736591,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.430/aquatech_ui-1.0.112.jar",
+      "asset": "aquatech_ui-1.0.112.jar"
     }
   ],
   "changed": [
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "235fccdfe61764a40990f4c5a02fe399",
-      "size": 959572,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.429/config__aqualumen__html__hub.html",
+      "md5": "f9bf12a258df9b4a68f9516fc7dfd12f",
+      "size": 964889,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.430/config__aqualumen__html__hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "235fccdfe61764a40990f4c5a02fe399",
-      "size": 959572,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.429/config__aqualumen__hub.html",
+      "md5": "f9bf12a258df9b4a68f9516fc7dfd12f",
+      "size": 964889,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.430/config__aqualumen__hub.html",
       "asset": "config__aqualumen__hub.html"
     }
   ],
   "removed": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.66-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.67-alpha.jar"
     },
     {
-      "path": "mods/aquatech_ui-1.0.110.jar"
+      "path": "mods/aquatech_ui-1.0.111.jar"
     }
   ],
   "stats": {
@@ -46,6 +46,6 @@
     "changed": 2,
     "removed": 2,
     "unchanged": 150,
-    "download_bytes": 8175153
+    "download_bytes": 8206343
   }
 }
