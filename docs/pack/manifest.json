@@ -967,10 +967,17 @@
     },
     {
       "path": "kubejs/server_scripts/41_first_join_hint.js",
-      "md5": "61b88d397f754812fbe2037c3d33f348",
-      "size": 3494,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.410/kubejs__server_scripts__41_first_join_hint.js",
+      "md5": "0b11a66874a5b30bca4a84fc718bb0c0",
+      "size": 3676,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.433/kubejs__server_scripts__41_first_join_hint.js",
       "asset": "kubejs__server_scripts__41_first_join_hint.js"
+    },
+    {
+      "path": "kubejs/server_scripts/42_aquatech_onboarding.js",
+      "md5": "4ba1f9f9c8c072f4f08f39605871a558",
+      "size": 7213,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.433/kubejs__server_scripts__42_aquatech_onboarding.js",
+      "asset": "kubejs__server_scripts__42_aquatech_onboarding.js"
     },
     {
       "path": "kubejs/server_scripts/60_disable_phantoms.js",
