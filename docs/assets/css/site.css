@@ -11416,11 +11416,11 @@ body[data-page="cases"] .container:not(.header-inner) {
   --shadow: 0 18px 44px rgba(90, 30, 60, 0.08);
   --shadow-lg: 0 40px 90px rgba(120, 40, 80, 0.16);
   --focus: 0 0 0 3px rgba(214, 51, 108, 0.28);
-  --serif: "Playfair Display", Georgia, "Times New Roman", Times, serif;
-  --type-display: clamp(2.9rem, 7.2vw, 6.4rem);
-  --type-title: clamp(1.9rem, 4vw, 3rem);
-  --font: "Manrope", "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --display: "Manrope", "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --serif: "Unbounded", "Onest", "Ubuntu", system-ui, sans-serif;
+  --type-display: clamp(2.1rem, 5vw, 4.5rem);
+  --type-title: clamp(1.5rem, 3.2vw, 2.4rem);
+  --font: "Onest", "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --display: "Unbounded", "Onest", "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
@@ -11497,8 +11497,9 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
 .serif {
   font-family: var(--serif);
-  font-style: italic;
-  letter-spacing: -0.01em;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.03em;
 }
 
 html:not([data-theme="dark"]) body::before {
@@ -11607,9 +11608,9 @@ html:not([data-theme="dark"]) :is(.tag, .meta-tag, .online-pill) {
 
 .serif-accent {
   font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.03em;
 }
 
 .hero-stage {
@@ -11637,20 +11638,21 @@ html:not([data-theme="dark"]) :is(.tag, .meta-tag, .online-pill) {
 
 .hero-mega {
   margin: 0;
-  max-width: 15ch;
-  font-family: var(--font);
+  max-width: 14ch;
+  font-family: var(--display);
   font-size: var(--type-display);
   font-weight: 500;
-  line-height: .92;
-  letter-spacing: -0.045em;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
   color: var(--text);
 }
 
 .hero-mega em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--display);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--accent);
 }
 
 .hero-stage-lead {
@@ -11893,11 +11895,11 @@ html:not([data-theme="dark"]) :is(.tag, .meta-tag, .online-pill) {
 .editorial-card h3 {
   margin: 0;
   font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.9rem, 3.8vw, 3rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   color: var(--text);
 }
 
@@ -12320,38 +12322,38 @@ html[data-theme="dark"] .scene-art {
 }
 
 @font-face {
-  font-family: "Manrope";
+  font-family: "Onest";
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 100 900;
   font-display: swap;
-  src: url(../fonts/Manrope-400700-normal-0.woff2) format("woff2");
+  src: url(../fonts/Onest-cyrillic.woff2) format("woff2");
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
 @font-face {
-  font-family: "Manrope";
+  font-family: "Onest";
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 100 900;
   font-display: swap;
-  src: url(../fonts/Manrope-400700-normal-1.woff2) format("woff2");
+  src: url(../fonts/Onest-latin.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: "Playfair Display";
-  font-style: italic;
-  font-weight: 500;
+  font-family: "Unbounded";
+  font-style: normal;
+  font-weight: 200 900;
   font-display: swap;
-  src: url(../fonts/PlayfairDisplay-500-italic-2.woff2) format("woff2");
+  src: url(../fonts/Unbounded-cyrillic.woff2) format("woff2");
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
 @font-face {
-  font-family: "Playfair Display";
-  font-style: italic;
-  font-weight: 500;
+  font-family: "Unbounded";
+  font-style: normal;
+  font-weight: 200 900;
   font-display: swap;
-  src: url(../fonts/PlayfairDisplay-500-italic-3.woff2) format("woff2");
+  src: url(../fonts/Unbounded-latin.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
