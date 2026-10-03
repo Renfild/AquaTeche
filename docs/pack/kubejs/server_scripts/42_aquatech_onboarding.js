@@ -1,5 +1,5 @@
-// AquaTech: обучение первых 10 минут. Строка над хотбаром ведёт новичка по 5 шагам,
-// за шаги 1, 3 и 5 небольшие награды. Включается только на самом первом входе
+// AquaTech: обучение первых 10 минут. Панель слева (рисует мод aqualumen, OnboardingHud) ведёт новичка
+// по 5 шагам, за шаги 1, 3 и 5 небольшие награды. У клиентов без свежего мода подсказка идёт в action bar. Включается только на самом первом входе
 // (41_first_join_hint.js ставит aquatech_onboard = 1), старые игроки его не видят.
 // Шаг хранится в persistentData.aquatech_onboard: 1..5 — текущий шаг, 99 — пройдено.
 
@@ -8,6 +8,23 @@ const ONBOARD_BASE = 'aquatech_onboard_base'
 const ONBOARD_DONE = 99
 const ONBOARD_FISH_GOAL = 3
 const ONBOARD_ORES = ['minecraft:copper_ore', 'industrialupgrade:classicore/tin', 'minecraft:iron_ore', 'minecraft:coal_ore']
+
+let OnboardingService = null
+try {
+  OnboardingService = Java.loadClass('store.aquateche.aqualumen.common.service.OnboardingService')
+} catch (err) {
+  console.warn('[AquaTech] onboarding: OnboardingService not available, action bar only: ' + err)
+}
+
+// true — клиент нарисовал панель, false — у игрока старый мод, нужен запасной вариант
+function onboardHud(player, step, have, doneStep, reward) {
+  if (OnboardingService == null) return false
+  try {
+    return !!OnboardingService.send(player, step, have, doneStep, reward || '')
+  } catch (err) {
+    return false
+  }
+}
 
 let HubEconomy = null
 try {
@@ -116,10 +133,14 @@ function onboardAdvance(player, step) {
   const reward = ONBOARD_STEPS[step].reward(player)
   const name = player.username
   player.server.runCommandSilent(`playsound minecraft:entity.player.levelup master ${name} ${player.x} ${player.y} ${player.z} 0.8 1.3`)
-  if (reward) player.tell(Text.of(`§a✔ Шаг ${step} пройден! §fНаграда: ${reward}`))
 
   const next = step + 1
-  if (ONBOARD_STEPS[next]) {
+  const finished = !ONBOARD_STEPS[next]
+  // панель сама покажет плашку «Шаг N пройден» с наградой; в чат пишем только тем, у кого панели нет
+  const shown = onboardHud(player, next, 0, step, reward)
+  if (!shown) player.tell(Text.of(`§a✔ Шаг ${step} пройден!` + (reward ? ` §fНаграда: ${reward}` : '')))
+
+  if (!finished) {
     data.putInt(ONBOARD_KEY, next)
     data.putLong(ONBOARD_BASE, ONBOARD_STEPS[next].base(player))
     return
@@ -148,7 +169,9 @@ ServerEvents.tick((event) => {
       onboardAdvance(player, step)
       return
     }
-    // бустер пишет в ту же строку раз в секунду: не перебиваем его
+    const have = step === 1 ? Math.max(0, onboardScore(player.server, player.username, 'aquatech_fish') - base) : 0
+    if (onboardHud(player, step, Math.min(have, ONBOARD_FISH_GOAL), 0, '')) return
+    // запасной вариант без панели: action bar, бустер пишет в ту же строку — не перебиваем его
     if (!onboardBoosterActive(player)) {
       player.displayClientMessage(Text.of(def.hint(player, base)), true)
     }

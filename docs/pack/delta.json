@@ -1,41 +1,34 @@
 {
-  "from_version": "2.9.432",
-  "to_version": "2.9.433",
+  "from_version": "2.9.433",
+  "to_version": "2.9.434",
   "added": [
     {
-      "path": "kubejs/server_scripts/42_aquatech_onboarding.js",
-      "md5": "4ba1f9f9c8c072f4f08f39605871a558",
-      "size": 7213,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.433/kubejs__server_scripts__42_aquatech_onboarding.js",
-      "asset": "kubejs__server_scripts__42_aquatech_onboarding.js"
-    },
-    {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.71-alpha.jar",
-      "md5": "f462d8b5f5f06e694d1d1b7ef9b1d53f",
-      "size": 2545156,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.433/aqualumen-forge-1.20.1-0.3.71-alpha.jar",
-      "asset": "aqualumen-forge-1.20.1-0.3.71-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.72-alpha.jar",
+      "md5": "4c3afba741ae286cc446cdf7ed6c29fe",
+      "size": 2559534,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.434/aqualumen-forge-1.20.1-0.3.72-alpha.jar",
+      "asset": "aqualumen-forge-1.20.1-0.3.72-alpha.jar"
     }
   ],
   "changed": [
     {
-      "path": "kubejs/server_scripts/41_first_join_hint.js",
-      "md5": "0b11a66874a5b30bca4a84fc718bb0c0",
-      "size": 3676,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.433/kubejs__server_scripts__41_first_join_hint.js",
-      "asset": "kubejs__server_scripts__41_first_join_hint.js"
+      "path": "kubejs/server_scripts/42_aquatech_onboarding.js",
+      "md5": "36e8e194a102430c835393b995da1a1a",
+      "size": 8506,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.434/kubejs__server_scripts__42_aquatech_onboarding.js",
+      "asset": "kubejs__server_scripts__42_aquatech_onboarding.js"
     }
   ],
   "removed": [
     {
-      "path": "mods/aqualumen-forge-1.20.1-0.3.70-alpha.jar"
+      "path": "mods/aqualumen-forge-1.20.1-0.3.71-alpha.jar"
     }
   ],
   "stats": {
-    "added": 2,
+    "added": 1,
     "changed": 1,
     "removed": 1,
-    "unchanged": 152,
-    "download_bytes": 2556045
+    "unchanged": 153,
+    "download_bytes": 2568040
   }
 }
