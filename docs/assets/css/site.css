@@ -9606,8 +9606,10 @@ body[data-page="cases"] .container:not(.header-inner) {
   }
   .apple-coin-card .btn {
     min-height: 38px !important;
-    padding: 0.45rem 0.55rem !important;
-    font-size: 0.8rem !important;
+    padding: 0.45rem 0.4rem !important;
+    font-size: 0.72rem !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
     margin-top: 0.4rem !important;
   }
 }
@@ -14977,4 +14979,12 @@ html:not([data-theme="dark"]) .ach-card.off .ach-ico {
 html:not([data-theme="dark"]) .ach-card.off b,
 html:not([data-theme="dark"]) .ach-card.off small {
   color: var(--muted);
+}
+
+/* Unbounded/Onest run wider than the old fonts: let long button labels wrap on the narrowest phones */
+@media (max-width: 380px) {
+  .btn {
+    white-space: normal;
+    line-height: 1.2;
+  }
 }

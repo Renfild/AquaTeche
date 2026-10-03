@@ -40,7 +40,7 @@ public final class StoreCatalog {
         List<HubSnapshot.Offer> base = PRODUCTS.stream().map(p -> {
             boolean owned = "lp_group".equals(p.kind) && rank.contains(p.payload);
             if ("pass_premium".equals(p.kind)) {
-                owned = player.getPersistentData().getBoolean("aqualumen_pass_premium");
+                owned = HubDataService.isPremiumPass(player);
             }
             long price = p.price;
             if ("case".equals(p.kind)) {
@@ -81,7 +81,7 @@ public final class StoreCatalog {
             return;
         }
         if ("pass_premium".equals(product.kind)) {
-            if (player.getPersistentData().getBoolean("aqualumen_pass_premium")) {
+            if (HubDataService.isPremiumPass(player)) {
                 player.sendSystemMessage(Component.literal("Боевой Пропуск уже активен").withStyle(ChatFormatting.YELLOW));
                 return;
             }
@@ -153,6 +153,7 @@ public final class StoreCatalog {
             case "pass_premium" -> {
                 player.getPersistentData().putBoolean("aqualumen_pass_premium", true);
                 MariaStats.savePremiumOwned(player.getUUID());
+                HubDataService.syncPlayerToWebAsync(player);
                 yield true;
             }
             case "sold_notice" -> {

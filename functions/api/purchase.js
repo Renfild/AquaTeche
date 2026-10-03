@@ -2,6 +2,9 @@ import { bad, json, readJson, purchasesDisabled } from "../_lib/http.js";
 import { requireUser } from "../_lib/auth.js";
 import { purchasesEnabled } from "../_lib/settings.js";
 import { enqueueCommand } from "./internal/pending-commands.js";
+import { enqueuePremiumPass, isPremiumPassOwned } from "../_lib/premium-pass.js";
+
+const PASS_OWNED_MESSAGE = "Премиум-пропуск у вас уже есть, второй раз покупать не нужно.";
 
 const SLUG_TO_DELIVERY = {
   sailor: { kind: "lp_group", payload: "sailor" },
@@ -326,6 +329,10 @@ export async function onRequestPost(context) {
   const priceRub = rankPack ? rankPack.price_rub : (passPack ? passPack.price_rub : (coinPack ? coinPack.price_rub : Math.max(1, Number(catalog?.price_rub || 99))));
   const method = String(body?.method || "balance").toLowerCase();
 
+  if (delivery.kind === "pass_premium" && (await isPremiumPassOwned(ctx.env.DB, nick))) {
+    return bad(PASS_OWNED_MESSAGE, 409);
+  }
+
   if (method === "balance") {
     const paid = await deductRub(ctx.env, nick, priceRub);
     if (!paid) {
@@ -333,13 +340,23 @@ export async function onRequestPost(context) {
       return bad("Недостаточно средств. Нужно " + priceRub + " ₽, на балансе " + rub + " ₽. Пополните баланс.", 400);
     }
     const paymentId = "bal_" + Date.now() + "_" + nick + "_" + slug;
-    await enqueueCommand(ctx.env.DB, {
-      nick,
-      kind: delivery.kind,
-      payload: delivery.payload,
-      provider: "balance",
-      providerPaymentId: paymentId,
-    });
+    if (delivery.kind === "pass_premium") {
+      const queuedPass = await enqueuePremiumPass(ctx.env.DB, { nick, provider: "balance", providerPaymentId: paymentId });
+      if (!queuedPass.ok) {
+        await addRub(ctx.env, nick, priceRub);
+        return queuedPass.reason === "error"
+          ? bad("Не удалось поставить покупку в очередь, деньги возвращены на баланс.", 500)
+          : bad(PASS_OWNED_MESSAGE, 409);
+      }
+    } else {
+      await enqueueCommand(ctx.env.DB, {
+        nick,
+        kind: delivery.kind,
+        payload: delivery.payload,
+        provider: "balance",
+        providerPaymentId: paymentId,
+      });
+    }
     if (delivery.kind === "coins") {
       const addCoins = parseInt(delivery.payload, 10) || 0;
       await ctx.env.DB.prepare(
@@ -447,13 +464,27 @@ export async function onRequestCallback(context) {
     return bad("Сумма вебхука меньше счёта", 400);
   }
 
-  await ctx.env.DB.prepare("UPDATE lava_invoices SET status = 'paid' WHERE id = ? AND status = 'pending'")
+  const claimed = await ctx.env.DB.prepare("UPDATE lava_invoices SET status = 'paid' WHERE id = ? AND status = 'pending'")
     .bind(row.id)
     .run();
+  if (!Number(claimed?.meta?.changes || 0)) {
+    return json({ ok: true, duplicate: true, id: row.id });
+  }
 
   if (kind === "rub_topup") {
     if (amount > 0) await addRub(ctx.env, nick, amount);
     return json({ ok: true, action: "topup", nick, amount });
+  }
+
+  if (kind === "pass_premium") {
+    const pass = await enqueuePremiumPass(ctx.env.DB, { nick, provider: "lava_webhook", providerPaymentId: contractId });
+    if (pass.ok) return json({ ok: true, queued: pass.id });
+    if (pass.reason === "owned" && amount > 0) {
+      // paid for a pass the player already has: return the money to the site balance
+      await addRub(ctx.env, nick, amount);
+      return json({ ok: true, refunded: true, nick, amount });
+    }
+    return bad(pass.error || "enqueue", 500);
   }
 
   const queued = await enqueueCommand(ctx.env.DB, {

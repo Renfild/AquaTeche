@@ -1,5 +1,6 @@
 import { bad, json, readJson } from "../../_lib/http.js";
 import { cleanPrivilege } from "../../_lib/profile.js";
+import { markPremiumPassOwned } from "../../_lib/premium-pass.js";
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -88,6 +89,9 @@ export async function onRequestPost(context) {
         .run();
     }
   }
+
+  // the server reports an in-game premium pass so the site never sells it a second time
+  if (body.pass_premium === true) await markPremiumPassOwned(env.DB, nick, "game");
 
   const profile = await env.DB.prepare(
     `SELECT u.nick, p.privilege, p.coins, p.fish, p.playtime_hours, p.quests_done, p.likes

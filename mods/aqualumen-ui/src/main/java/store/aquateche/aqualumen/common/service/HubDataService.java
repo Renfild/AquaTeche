@@ -466,6 +466,7 @@ public final class HubDataService {
         String nick = player.getGameProfile().getName();
         UUID uuid = player.getUUID();
         String privilege = rank.name();
+        boolean passPremium = isPremiumPass(player);
         CompletableFuture.runAsync(() -> {
             MariaStats.upsert(uuid, nick, coins, fish, playtimeHours, quests, privilege);
             if (syncKey == null) {
@@ -490,6 +491,7 @@ public final class HubDataService {
                 json.addProperty("playtime_hours", playtimeHours);
                 json.addProperty("privilege", privilege);
                 json.addProperty("quests_done", quests);
+                json.addProperty("pass_premium", passPremium);
 
                 try (OutputStream os = conn.getOutputStream()) {
                     os.write(json.toString().getBytes(StandardCharsets.UTF_8));
