@@ -52,4 +52,19 @@ class OnboardingStepsTest {
         assertEquals("малый бустер (включить: /booster)", OnboardingSteps.plain("§6малый бустер §7(включить: /booster)"));
         assertEquals("", OnboardingSteps.plain(null));
     }
+
+    @Test
+    void keyLabelIsTheLatinPhysicalKeyNotTheLayoutLetter() {
+        assertEquals("Y", OnboardingSteps.keyLabel("key.keyboard.y", "Н"));
+        assertEquals("H", OnboardingSteps.keyLabel("key.keyboard.h", "Р"));
+        assertEquals("F6", OnboardingSteps.keyLabel("key.keyboard.f6", "F6"));
+        assertEquals("4", OnboardingSteps.keyLabel("key.mouse.4", "Button 4"));
+    }
+
+    @Test
+    void longKeyNamesFallBackToTheTranslatedName() {
+        assertEquals("Левый Shift", OnboardingSteps.keyLabel("key.keyboard.left.shift", "Левый Shift"));
+        assertEquals("Пробел", OnboardingSteps.keyLabel("key.keyboard.space", "Пробел"));
+        assertEquals("?", OnboardingSteps.keyLabel(null, "?"));
+    }
 }

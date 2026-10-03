@@ -9,7 +9,7 @@ public final class OnboardingSteps {
     }
 
     private static final List<Step> ALL = List.of(
-            new Step(1, "Забери стартовый набор", "F4, вкладка «Киты», или команда /kit start", 1),
+            new Step(1, "Забери стартовый набор", "Нажми F4, вкладка «Киты»", 1),
             new Step(2, "Поймай 3 рыбы", "Возьми удочку в руку и закинь её в воду: правая кнопка мыши", 3),
             new Step(3, "Открой подарочный кейс", "Нажми F4, вкладка «Кейсы»", 1),
             new Step(4, "Продай улов", "F4, вкладка «Рыбалка», кнопка «Продать»", 1),
@@ -34,6 +34,21 @@ public final class OnboardingSteps {
             return 1.0;
         }
         return Math.max(0.0, Math.min(1.0, (double) have / goal));
+    }
+
+    /**
+     * Label for a key binding. The game prints the letter of the player's keyboard layout (the physical Y key shows
+     * as the Cyrillic "Н" on a Russian layout, which looks like a Latin H), so for short names like
+     * "key.keyboard.y" or "key.mouse.4" the Latin name is used; longer names keep the translated text.
+     */
+    public static String keyLabel(String translationKey, String translated) {
+        if (translationKey != null) {
+            String tail = translationKey.substring(translationKey.lastIndexOf('.') + 1);
+            if (!tail.isEmpty() && tail.length() <= 3) {
+                return tail.toUpperCase(java.util.Locale.ROOT);
+            }
+        }
+        return translated;
     }
 
     /** Reward text arrives with legacy colour codes (section sign + char); the panel draws its own colours. */

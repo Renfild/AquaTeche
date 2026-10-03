@@ -94,7 +94,7 @@ function onboardBoosterActive(player) {
 // Каждый шаг: подсказка для запасной строки, проверка выполнения, награда.
 const ONBOARD_STEPS = {
   1: {
-    hint: () => '§b1/5 §fЗабери стартовый набор: §eF4§f → «Киты» или команда §e/kit start',
+    hint: () => '§b1/5 §fЗабери стартовый набор: нажми §eF4§f → вкладка «Киты»',
     base: () => 0,
     done: (player) => onboardHasAny(player, ['starcatcher:bamboo_rod', 'starcatcher:tackle_box']),
     reward: () => ''

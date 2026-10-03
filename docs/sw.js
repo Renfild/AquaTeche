@@ -1,4 +1,4 @@
-const CACHE_NAME = "aquatech-v20261004-btn3";
+const CACHE_NAME = "aquatech-v20261004-land";
 const PRECACHE_ASSETS = [
   "/",
   "/index.html",

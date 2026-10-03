@@ -201,7 +201,8 @@ public final class OnboardingHud {
         int tx = x0 + PAD + 2;
         g.drawString(font, finished ? "Старт пройден!" : "ОБУЧЕНИЕ", tx, y0 + 4, accent, true);
 
-        String key = LumenClient.TOGGLE_GUIDE.getTranslatedKeyMessage().getString();
+        String key = OnboardingSteps.keyLabel(LumenClient.TOGGLE_GUIDE.getKey().getName(),
+                LumenClient.TOGGLE_GUIDE.getTranslatedKeyMessage().getString());
         String right = (finished ? "" : Math.min(step, OnboardingSteps.COUNT) + "/" + OnboardingSteps.COUNT + "  ") + "[" + key + "]";
         g.drawString(font, right, x0 + W - PAD - 8 - font.width(right), y0 + 4, DIM, false);
         g.drawString(font, "<", x0 + W - PAD - 3, y0 + 4, DIM, false);

@@ -14988,3 +14988,200 @@ html:not([data-theme="dark"]) .ach-card.off small {
     line-height: 1.2;
   }
 }
+
+/* START PAGE: landing for the TikTok link (hero, steps, reasons, live line, phone fallback) */
+body[data-page="start"] .start-hero.lp-hero {
+  min-height: 0;
+}
+
+body[data-page="start"] .start-hero-body {
+  padding-bottom: clamp(2rem, 5vh, 3.25rem);
+}
+
+.lp-stage {
+  max-width: 44rem;
+}
+
+.lp-lead {
+  margin: 1.1rem auto 0;
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: clamp(1.02rem, 2.4vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.lp-cta {
+  margin-top: 1.6rem;
+}
+
+.lp-note {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.lp-live {
+  margin: 0.9rem 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.88rem;
+}
+
+.lp-live[hidden],
+.lp-mobile[hidden],
+[data-desktop-only][hidden],
+[data-mobile-only][hidden] {
+  display: none !important;
+}
+
+html.lp-nonwin [data-desktop-only] {
+  display: none !important;
+}
+
+.lp-live::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--ok);
+  animation: lp-pulse 2s ease-out infinite;
+}
+
+@keyframes lp-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  70% { box-shadow: 0 0 0 0.5rem rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-live::before { animation: none; }
+}
+
+.lp-mobile {
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+  max-width: 26rem;
+  padding: 1rem 1.1rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.lp-mobile-title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.lp-mobile .start-download-btn {
+  margin-top: 0.4rem;
+}
+
+.lp-section {
+  padding: clamp(2.25rem, 6vw, 4rem) 0;
+}
+
+.lp-alt {
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+}
+
+.lp-h2 {
+  margin: 0 0 1.4rem;
+  text-align: center;
+  font-family: var(--display);
+  font-size: var(--type-title);
+  letter-spacing: -0.02em;
+}
+
+.lp-steps,
+.lp-cards {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.lp-steps {
+  max-width: 56rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lp-cards {
+  max-width: 56rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 760px) {
+  .lp-steps,
+  .lp-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lp-steps li {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.lp-cards li {
+  padding: 1.25rem 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+.lp-num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--aqua);
+  color: #031018;
+  font-weight: 800;
+}
+
+.lp-steps h3,
+.lp-cards h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+}
+
+.lp-steps p,
+.lp-cards p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.lp-narrow {
+  max-width: 36rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.lp-inside {
+  margin-top: 1.4rem;
+}
+
+.lp-final .start-download {
+  margin-top: 0.5rem;
+}
