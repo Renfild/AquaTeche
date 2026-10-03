@@ -23,8 +23,11 @@ class OnboardingStepsTest {
     }
 
     @Test
-    void firstStepCountsThreeFish() {
-        assertEquals(3, OnboardingSteps.get(1).goal());
+    void theKitComesBeforeFishingAndFishingCountsThreeFish() {
+        assertEquals("Забери стартовый набор", OnboardingSteps.get(1).title());
+        assertEquals(1, OnboardingSteps.get(1).goal());
+        assertEquals("Поймай 3 рыбы", OnboardingSteps.get(2).title());
+        assertEquals(3, OnboardingSteps.get(2).goal());
     }
 
     @Test

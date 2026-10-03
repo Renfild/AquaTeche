@@ -1,5 +1,5 @@
 // AquaTech: обучение первых 10 минут. Панель слева (рисует мод aqualumen, OnboardingHud) ведёт новичка
-// по 5 шагам, за шаги 1, 3 и 5 небольшие награды. У клиентов без свежего мода подсказка идёт в action bar. Включается только на самом первом входе
+// по 5 шагам: набор, 3 рыбы, подарочный кейс, продажа улова, руда. Награды за шаги 2, 4 и 5. У клиентов без свежего мода подсказка идёт в action bar. Включается только на самом первом входе
 // (41_first_join_hint.js ставит aquatech_onboard = 1), старые игроки его не видят.
 // Шаг хранится в persistentData.aquatech_onboard: 1..5 — текущий шаг, 99 — пройдено.
 
@@ -44,6 +44,16 @@ function onboardScore(server, name, objective) {
   }
 }
 
+// Улов считаем тем же числом, что показывает F4: любая удочка StarCatcher (HubEconomy.fishCaught).
+function onboardFish(player) {
+  if (HubEconomy != null) {
+    try {
+      return Number(HubEconomy.fishCaught(player))
+    } catch (err) {}
+  }
+  return onboardScore(player.server, player.username, 'aquatech_fish')
+}
+
 function onboardCoins(player) {
   if (HubEconomy != null) {
     try {
@@ -81,28 +91,34 @@ function onboardBoosterActive(player) {
   return tag.contains('until') && tag.getLong('until') > Date.now()
 }
 
-// Каждый шаг: подсказка для строки над хотбаром, проверка выполнения, награда.
+// Каждый шаг: подсказка для запасной строки, проверка выполнения, награда.
 const ONBOARD_STEPS = {
   1: {
+    hint: () => '§b1/5 §fЗабери стартовый набор: §eF4§f → «Киты» или команда §e/kit start',
+    base: () => 0,
+    done: (player) => onboardHasAny(player, ['starcatcher:bamboo_rod', 'starcatcher:tackle_box']),
+    reward: () => ''
+  },
+  2: {
     hint: (player, base) => {
-      const caught = Math.max(0, onboardScore(player.server, player.username, 'aquatech_fish') - base)
-      return `§b1/5 §fЗакинь удочку в воду (ПКМ) и поймай рыбу: §e${Math.min(caught, ONBOARD_FISH_GOAL)}/${ONBOARD_FISH_GOAL}`
+      const caught = Math.max(0, onboardFish(player) - base)
+      return `§b2/5 §fВозьми удочку и поймай рыбу: §e${Math.min(caught, ONBOARD_FISH_GOAL)}/${ONBOARD_FISH_GOAL}`
     },
-    base: (player) => onboardScore(player.server, player.username, 'aquatech_fish'),
-    done: (player, base) => onboardScore(player.server, player.username, 'aquatech_fish') - base >= ONBOARD_FISH_GOAL,
+    base: (player) => onboardFish(player),
+    done: (player, base) => onboardFish(player) - base >= ONBOARD_FISH_GOAL,
     reward: (player) => {
       onboardGiveCoins(player, 500)
       return '§6+500 монет'
     }
   },
-  2: {
-    hint: () => '§b2/5 §fНажми §eF4§f → «Кейсы» и открой подарочный кейс',
+  3: {
+    hint: () => '§b3/5 §fНажми §eF4§f → «Кейсы» и открой подарочный кейс',
     base: () => 0,
     done: (player) => onboardStarterKeys(player) <= 0,
     reward: () => ''
   },
-  3: {
-    hint: () => '§b3/5 §fПродай улов: §eF4§f → «Рыбалка» → «Продать»',
+  4: {
+    hint: () => '§b4/5 §fПродай улов: §eF4§f → «Рыбалка» → «Продать»',
     base: (player) => onboardCoins(player),
     done: (player, base) => onboardCoins(player) > base,
     reward: (player) => {
@@ -110,20 +126,13 @@ const ONBOARD_STEPS = {
       return '§6малый бустер скупщика §7(включить: /booster)'
     }
   },
-  4: {
-    hint: () => '§b4/5 §fЗабери стартовый набор: §eF4§f → «Киты» или команда §e/kit start',
-    base: () => 0,
-    done: (player) => onboardHasAny(player, ['starcatcher:bamboo_rod']),
-    reward: () => ''
-  },
   5: {
     hint: () => '§b5/5 §fПоймай руду: медь, олово, железо или уголь',
     base: () => 0,
     done: (player) => onboardHasAny(player, ONBOARD_ORES),
     reward: (player) => {
-      onboardGiveCoins(player, 1000)
-      player.give(Item.of('aquatech_ui:rate_x2'))
-      return '§6+1000 монет и множитель улова ×2'
+      onboardGiveCoins(player, 1500)
+      return '§6+1500 монет'
     }
   }
 }
@@ -169,7 +178,15 @@ ServerEvents.tick((event) => {
       onboardAdvance(player, step)
       return
     }
-    const have = step === 1 ? Math.max(0, onboardScore(player.server, player.username, 'aquatech_fish') - base) : 0
+    const have = step === 2 ? Math.max(0, onboardFish(player) - base) : 0
+    if (step === 2) {
+      // диагностика: видно в логе KubeJS, считает ли улов (число должно расти при каждой рыбе)
+      const seen = 'aquatech_onboard_seen'
+      if (data.getInt(seen) !== have) {
+        data.putInt(seen, have)
+        console.log('[AquaTech] onboarding ' + player.username + ': fish ' + onboardFish(player) + ' (base ' + base + ', counted ' + have + ')')
+      }
+    }
     if (onboardHud(player, step, Math.min(have, ONBOARD_FISH_GOAL), 0, '')) return
     // запасной вариант без панели: action bar, бустер пишет в ту же строку — не перебиваем его
     if (!onboardBoosterActive(player)) {
