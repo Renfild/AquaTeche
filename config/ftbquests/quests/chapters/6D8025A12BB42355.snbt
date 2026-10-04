@@ -11,7 +11,7 @@
 		}
 	}
 	id: "6D8025A12BB42355"
-	order_index: 2
+	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
@@ -248,7 +248,10 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["6048C28F7E128CE6" "624B8BB138A174A0"]
+			dependencies: [
+				"6048C28F7E128CE6"
+				"624B8BB138A174A0"
+			]
 			entity_vis_size: 1.0f
 			id: "738EF8D18C9ACB8B"
 			rewards: [

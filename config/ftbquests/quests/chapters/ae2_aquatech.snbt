@@ -39,6 +39,7 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["5F1EC3086A56B66A"]
 			description: [
 				"Метеориты AE2 или рост на бутоне. Без цертуса нет"
 				"флюикса и процессоров."
@@ -235,11 +236,11 @@
 				type: "item"
 			}]
 			title: "Пресс кремния"
-			x: 6.0d
-			y: -1.5d
+			x: 18.0d
+			y: 2.5d
 		}
 		{
-			dependencies: ["0DEDE1315426EFFA"]
+			dependencies: ["777286795D74188A"]
 			description: [
 				"Печатает кремний и три процессора. Ставь рядом с"
 				"зарядником."
@@ -270,7 +271,6 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["204482AF2477D075"]
 			description: [
 				"Заряжает цертус. Питается от любой FE-сети, не"
 				"только ME."
@@ -297,8 +297,8 @@
 				type: "item"
 			}]
 			title: "Зарядник"
-			x: 7.5d
-			y: -1.5d
+			x: 16.5d
+			y: 3.5d
 		}
 		{
 			dependencies: ["204482AF2477D075"]
@@ -438,7 +438,6 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["1D392AB2A35961BB"]
 			description: ["Мост между сетями и канал в стеклянном кабеле."]
 			entity_vis_size: 1.0f
 			icon: "ae2:quartz_fiber"
@@ -469,11 +468,11 @@
 				type: "item"
 			}]
 			title: "Кварцевое волокно"
-			x: 4.5d
-			y: 2.5d
+			x: 15.5d
+			y: 4.5d
 		}
 		{
-			dependencies: ["2D83DABE968C0AE7"]
+			dependencies: ["5430473685A84783"]
 			description: [
 				"Каналы ME. Восемь штук — уже хватает на маленький"
 				"остров."
@@ -501,11 +500,11 @@
 				type: "item"
 			}]
 			title: "Стеклянный кабель флюикса"
-			x: 13.5d
-			y: -1.5d
+			x: 15.5d
+			y: 6.5d
 		}
 		{
-			dependencies: ["61F9290569BDC2AF"]
+			dependencies: ["0F0FADE78D6A54B9"]
 			description: [
 				"ПКМ по кабелю: каналы, энергия, привязка. Без него"
 				"сеть слепая."
@@ -532,8 +531,8 @@
 				type: "item"
 			}]
 			title: "Сетевой инструмент"
-			x: 13.5d
-			y: 2.0d
+			x: 15.5d
+			y: 9.0d
 		}
 		{
 			description: [
@@ -561,8 +560,8 @@
 				type: "item"
 			}]
 			title: "Приёмник энергии"
-			x: 13.5d
-			y: 0.0d
+			x: 17.5d
+			y: 4.5d
 		}
 		{
 			dependencies: ["1D3D74AA9D7674E1"]
@@ -592,11 +591,11 @@
 				type: "item"
 			}]
 			title: "Энергоячейка"
-			x: 15.0d
-			y: 0.0d
+			x: 17.5d
+			y: 6.5d
 		}
 		{
-			dependencies: ["168781B948D826B3"]
+			dependencies: ["1F0A82210C77DF0C"]
 			description: ["Десять слотов под ячейки. Сердце склада."]
 			entity_vis_size: 1.0f
 			icon: "ae2:drive"
@@ -620,7 +619,7 @@
 				type: "item"
 			}]
 			title: "ME-привод"
-			x: 16.5d
+			x: 15.5d
 			y: 0.0d
 		}
 		{
@@ -649,7 +648,7 @@
 				type: "item"
 			}]
 			title: "Корпус ячейки"
-			x: 18.0d
+			x: 18.5d
 			y: 0.0d
 		}
 		{
@@ -678,11 +677,11 @@
 				type: "item"
 			}]
 			title: "Компонент 1k"
-			x: 19.5d
+			x: 13.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["1F0A82210C77DF0C"]
+			dependencies: ["75BA5D5D86D72D23"]
 			description: [
 				"Первый склад ME. Форматируется в приводе под типы"
 				"предметов."
@@ -796,8 +795,8 @@
 				type: "item"
 			}]
 			title: "Шина экспорта"
-			x: 24.0d
-			y: 1.5d
+			x: 22.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["1F61FE35160EB707"]
@@ -827,7 +826,7 @@
 			}]
 			title: "Шина хранения"
 			x: 25.5d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["1F61FE35160EB707"]
@@ -856,8 +855,8 @@
 				type: "item"
 			}]
 			title: "Интерфейс"
-			x: 24.0d
-			y: 2.5d
+			x: 22.5d
+			y: 5.5d
 		}
 		{
 			dependencies: ["4D8F5CAF909F9B03"]
@@ -887,7 +886,7 @@
 			}]
 			title: "IO-порт"
 			x: 25.5d
-			y: 2.5d
+			y: 5.5d
 		}
 		{
 			dependencies: ["47BF4E42C8B47068"]
@@ -980,8 +979,8 @@
 				type: "item"
 			}]
 			title: "Плотная энергоячейка"
-			x: 16.5d
-			y: 1.5d
+			x: 17.5d
+			y: 9.0d
 		}
 		{
 			description: [
@@ -1010,8 +1009,8 @@
 				type: "item"
 			}]
 			title: "Ускоритель роста"
-			x: 4.5d
-			y: -1.5d
+			x: 15.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["0AEAE11EF118C678"]
@@ -1040,7 +1039,7 @@
 				type: "item"
 			}]
 			title: "Ячейка 4k"
-			x: 22.5d
+			x: 21.0d
 			y: -1.5d
 		}
 		{
@@ -1071,8 +1070,8 @@
 				type: "item"
 			}]
 			title: "Ячейка 16k"
-			x: 23.5d
-			y: -2.5d
+			x: 21.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["6390CBEF70CCE5FC"]
@@ -1159,7 +1158,7 @@
 			}]
 			title: "Молекулярный сборщик"
 			x: 25.5d
-			y: -2.5d
+			y: -5.5d
 		}
 		{
 			dependencies: ["62279C9FE5565B30"]
@@ -1187,7 +1186,7 @@
 			}]
 			title: "Терминал крафта"
 			x: 27.0d
-			y: -2.5d
+			y: -5.5d
 		}
 		{
 			dependencies: ["77007FF993E42238"]
@@ -1218,7 +1217,7 @@
 			}]
 			title: "Блок крафта"
 			x: 28.5d
-			y: -2.5d
+			y: -5.5d
 		}
 		{
 			dependencies: ["5DD6FD0856F99E20"]
@@ -1247,8 +1246,8 @@
 				type: "item"
 			}]
 			title: "Хранилище крафта 1k"
-			x: 30.0d
-			y: -2.5d
+			x: 31.0d
+			y: -5.5d
 		}
 		{
 			dependencies: ["0AEAE11EF118C678"]
@@ -1312,8 +1311,8 @@
 				type: "item"
 			}]
 			title: "Ячейка 64k"
-			x: 22.0d
-			y: -2.5d
+			x: 21.0d
+			y: -5.5d
 		}
 	]
 	title: "Applied Energistics"

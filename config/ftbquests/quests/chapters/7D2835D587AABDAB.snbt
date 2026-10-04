@@ -5,7 +5,7 @@
 	group: ""
 	icon: {
 		Count: 1
-		id: "starcatcher:bamboo_rod"
+		id: "starcatcher:alpha_rod"
 		tag: {
 			Damage: 0
 		}
@@ -45,7 +45,7 @@
 			y: 0.5d
 		}
 	]
-	order_index: 1
+	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{

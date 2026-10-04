@@ -524,8 +524,8 @@
 				type: "item"
 			}]
 			title: "Компрессор нейтрония"
-			x: 10.5d
-			y: 4.5d
+			x: 17.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["0382C6FA3E6472C7"]
@@ -555,8 +555,8 @@
 				type: "item"
 			}]
 			title: "Сингулярность"
-			x: 13.0d
-			y: 5.5d
+			x: 20.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["0382C6FA3E6472C7"]
@@ -586,8 +586,8 @@
 				type: "item"
 			}]
 			title: "Катализатор Infinity"
-			x: 13.0d
-			y: 4.5d
+			x: 20.0d
+			y: 0.0d
 		}
 		{
 			description: [
@@ -644,8 +644,8 @@
 				type: "item"
 			}]
 			title: "Абсолютная похлёбка"
-			x: 13.0d
-			y: 3.5d
+			x: 20.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["5E5277DFF3957C35"]
@@ -676,7 +676,7 @@
 				type: "item"
 			}]
 			title: "Куб ифрита"
-			x: 1.5d
+			x: 0.0d
 			y: 4.0d
 		}
 		{
@@ -719,8 +719,8 @@
 				type: "item"
 			}]
 			title: "Шлем ифрита"
-			x: 6.0d
-			y: 4.0d
+			x: 0.0d
+			y: 6.0d
 		}
 		{
 			dependencies: ["49F3F990055FD926"]
@@ -762,8 +762,8 @@
 				type: "item"
 			}]
 			title: "Нагрудник ифрита"
-			x: 4.0d
-			y: 4.0d
+			x: 0.0d
+			y: 7.5d
 		}
 		{
 			dependencies: ["5E5277DFF3957C35"]
@@ -791,7 +791,7 @@
 			}]
 			title: "Кристаллическое ядро"
 			x: 3.0d
-			y: 2.5d
+			y: 4.0d
 		}
 		{
 			dependencies: ["038584C0451AD28D"]
@@ -833,8 +833,8 @@
 				type: "item"
 			}]
 			title: "Кристальный шлем"
-			x: 4.5d
-			y: 2.5d
+			x: 3.0d
+			y: 6.0d
 		}
 		{
 			dependencies: ["107471907E8C6673"]
@@ -1005,6 +1005,96 @@
 			title: "Сжатый сундук"
 			x: 13.5d
 			y: -1.5d
+		}
+		{
+			dependencies: ["0919FC55E586B432"]
+			entity_vis_size: 1.0f
+			id: "7AFD49F087652CE3"
+			tasks: [{
+				id: "0D1E6A781A9639DE"
+				item: {
+					Count: 1
+					id: "avaritia_armor:blaze_leggings"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 0.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["7AFD49F087652CE3"]
+			entity_vis_size: 1.0f
+			id: "6EC1A2CD3149A07B"
+			tasks: [{
+				id: "5F23A3676985CB35"
+				item: {
+					Count: 1
+					id: "avaritia_armor:blaze_boots"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 0.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["266844F3E7D45FDF"]
+			entity_vis_size: 1.0f
+			id: "079BB1C76C5AFB80"
+			tasks: [{
+				id: "158F5F8F3A6D9F72"
+				item: {
+					Count: 1
+					id: "avaritia_armor:crystal_chestplate"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["079BB1C76C5AFB80"]
+			entity_vis_size: 1.0f
+			id: "65322080BEC215CC"
+			tasks: [{
+				id: "395C245CECEFE78F"
+				item: {
+					Count: 1
+					id: "avaritia_armor:crystal_leggings"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["65322080BEC215CC"]
+			entity_vis_size: 1.0f
+			id: "67C628C2EBD124EA"
+			tasks: [{
+				id: "4B2BBD26B716EEFD"
+				item: {
+					Count: 1
+					id: "avaritia_armor:crystal_boots"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: 10.5d
 		}
 	]
 	title: " Avaritia"

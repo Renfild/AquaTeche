@@ -111,7 +111,7 @@
 			y: 7.0d
 		}
 	]
-	order_index: 1
+	order_index: 2
 	quest_links: [ ]
 	quests: [
 		{
@@ -1810,7 +1810,7 @@
 				item: "industrialupgrade:compressor/compressor"
 				type: "item"
 			}]
-			x: -4.0d
+			x: 7.0d
 			y: -3.0d
 		}
 		{
@@ -1836,14 +1836,15 @@
 				item: "industrialupgrade:basemachine3/rolling_machine"
 				type: "item"
 			}]
-			x: -4.0d
-			y: -2.0d
+			x: 4.0d
+			y: -0.5d
 		}
 		{
-			dependencies: ["60AF236CF2611884" "3D0D2D52D8401DDC"]
-			description: [
-				"Возьми в руку сок латекса и нажми ПКМ по машине. Через время в баке появится жидкий латекс."
+			dependencies: [
+				"60AF236CF2611884"
+				"3D0D2D52D8401DDC"
 			]
+			description: ["Возьми в руку сок латекса и нажми ПКМ по машине. Через время в баке появится жидкий латекс."]
 			entity_vis_size: 1.0f
 			id: "7E3FBED40A61205B"
 			rewards: [{
@@ -1857,7 +1858,7 @@
 				item: "industrialupgrade:block_squeezer/squeezer"
 				type: "item"
 			}]
-			x: -4.0d
+			x: 5.5d
 			y: -1.0d
 		}
 		{
@@ -1875,11 +1876,14 @@
 				item: "industrialupgrade:primal_fluid_heater/primal_fluid_heater"
 				type: "item"
 			}]
-			x: -4.0d
-			y: 0.0d
+			x: 5.5d
+			y: -4.5d
 		}
 		{
-			dependencies: ["6F6AC05D36092CB2" "3D0D2D52D8401DDC"]
+			dependencies: [
+				"6F6AC05D36092CB2"
+				"3D0D2D52D8401DDC"
+			]
 			entity_vis_size: 1.0f
 			id: "7B5B49CC51F78251"
 			rewards: [
@@ -1902,8 +1906,8 @@
 				item: { Count: 12, id: "industrialupgrade:itemingots/electrum_ingot" }
 				type: "item"
 			}]
-			x: -4.0d
-			y: 1.0d
+			x: 4.0d
+			y: -5.0d
 		}
 	]
 	title: "Паровая эпоха"

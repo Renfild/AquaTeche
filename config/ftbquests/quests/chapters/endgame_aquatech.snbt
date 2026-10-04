@@ -9,6 +9,7 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["7CA8BB08D8E55BBA"]
 			description: [
 				"Добудь Alpha Rod — верх рыбацкой линейки"
 				"StarCatcher. Без неё финальная панель IU не"

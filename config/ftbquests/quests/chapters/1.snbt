@@ -347,7 +347,7 @@
 			image: "alexsmobs:item/blobfish_bucket"
 			rotation: 0.0d
 			width: 1.0d
-			x: -0.5d
+			x: 1.5d
 			y: 5.5d
 		}
 		{
@@ -355,23 +355,15 @@
 			image: "minecraft:textures/mob_effect/speed.png"
 			rotation: 0.0d
 			width: 1.0d
-			x: 2.0d
-			y: 5.0d
-		}
-		{
-			height: 1.0d
-			image: "minecraft:textures/mob_effect/speed.png"
-			rotation: 0.0d
-			width: 1.0d
-			x: 2.0d
-			y: 7.0d
+			x: -2.5d
+			y: 5.5d
 		}
 		{
 			height: 1.5d
 			image: "ae2:block/molecular_assembler_lights"
 			rotation: 0.0d
 			width: 1.5d
-			x: -3.0d
+			x: -2.0d
 			y: -6.0d
 		}
 		{
@@ -379,24 +371,8 @@
 			image: "ae2:block/molecular_assembler_lights"
 			rotation: 0.0d
 			width: 1.5d
-			x: -3.0d
-			y: -7.0d
-		}
-		{
-			height: 1.5d
-			image: "ae2:block/molecular_assembler_lights"
-			rotation: 0.0d
-			width: 1.5d
-			x: -3.0d
+			x: -2.0d
 			y: -8.0d
-		}
-		{
-			height: 1.5d
-			image: "ae2:block/molecular_assembler_lights"
-			rotation: 0.0d
-			width: 1.5d
-			x: -3.0d
-			y: -5.0d
 		}
 		{
 			height: 1.0d
@@ -407,11 +383,11 @@
 			y: -5.5d
 		}
 	]
-	order_index: 0
+	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["A7C100000000001B"]
+			dependencies: ["7D5783928E12226A"]
 			description: [
 				"Рецепт: 5 слитков титана вокруг обычной наковальни."
 				"Обычная наковальня делается из 3 железных блоков и 4 слитков железа."
@@ -551,7 +527,7 @@
 			y: -0.5d
 		}
 		{
-			dependencies: ["00AE2E0A6BA75908" "A7C1000000000021"]
+			dependencies: ["00AE2E0A6BA75908"]
 			description: [
 				"Главный ингредиент в создании плавильни"
 				"Нужно 128 штук. Из 2 глины, 2 самородков шпинели, 2 самородков иттрия, песка и гравия получается 4 штуки."
@@ -619,7 +595,10 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["6F6AC05D36092CB2"]
+			dependencies: [
+				"6F6AC05D36092CB2"
+				"7A5E5638AFF5596D"
+			]
 			description: [
 				"В плавильне делают сплавы: бронзу, ферромарганец, электрум и другие. Рецепты смотри в JEI."
 				"После этого можно переходить к паровым механизмам."
@@ -649,10 +628,8 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["A7C1000000000017"]
-			description: [
-				"Возьми в руку ячейку с сырым латексом и нажми ПКМ по сушилке. Через пару секунд нажми ещё раз и забери латекс."
-			]
+			dependencies: ["072814E53CDE7417"]
+			description: ["Возьми в руку ячейку с сырым латексом и нажми ПКМ по сушилке. Через пару секунд нажми ещё раз и забери латекс."]
 			entity_vis_size: 1.0f
 			id: "60AF236CF2611884"
 			rewards: [{
@@ -666,11 +643,10 @@
 				item: "industrialupgrade:dryer/dryer"
 				type: "item"
 			}]
-			x: -0.5d
-			y: -5.0d
+			x: 2.0d
+			y: -6.0d
 		}
 		{
-			dependencies: ["A7C1000000000017"]
 			description: ["Можно использовать для хранения жидкостей"]
 			entity_vis_size: 1.0f
 			id: "072814E53CDE7417"
@@ -685,14 +661,12 @@
 				item: "industrialupgrade:barrel/barrel"
 				type: "item"
 			}]
-			x: -0.5d
-			y: -7.0d
+			x: 2.0d
+			y: -8.0d
 		}
 		{
-			dependencies: ["072814E53CDE7417"]
-			description: [
-				"Жидкий латекс собирают латексной пипеткой: ПКМ по жилке на дереве. Хранить его удобно в бочке."
-			]
+			dependencies: ["40D5CFD76CEF6B25"]
+			description: ["Жидкий латекс собирают латексной пипеткой: ПКМ по жилке на дереве. Хранить его удобно в бочке."]
 			entity_vis_size: 1.0f
 			id: "60F1216D90D349FF"
 			rewards: [{
@@ -706,11 +680,13 @@
 				item: "industrialupgrade:bucket/rawlatex"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -8.0d
+			x: 6.5d
+			y: -6.0d
 		}
 		{
 			entity_vis_size: 1.0f
+			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "7A5E5638AFF5596D"
 			rewards: [{
 				count: 32
@@ -723,11 +699,13 @@
 				item: "industrialupgrade:macerator/macerator"
 				type: "item"
 			}]
-			x: -3.0d
+			x: -2.0d
 			y: -8.0d
 		}
 		{
 			entity_vis_size: 1.0f
+			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "7D5783928E12226A"
 			rewards: [{
 				count: 16
@@ -740,11 +718,10 @@
 				item: "industrialupgrade:primal_wire_insulator/primal_wire_insulator"
 				type: "item"
 			}]
-			x: -3.0d
+			x: -2.0d
 			y: -6.0d
 		}
 		{
-			dependencies: ["A7C100000000001F"]
 			entity_vis_size: 1.0f
 			id: "6048C28F7E128CE6"
 			rewards: [{
@@ -759,8 +736,8 @@
 				item: "aquatech_machines:fish_generator"
 				type: "item"
 			}]
-			x: -2.0d
-			y: 6.0d
+			x: 0.5d
+			y: 5.5d
 		}
 		{
 			dependencies: ["6048C28F7E128CE6"]
@@ -783,8 +760,32 @@
 				item: "aquatech_machines:fisher_mk1"
 				type: "item"
 			}]
-			x: -4.0d
-			y: 6.0d
+			x: -1.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["60AF236CF2611884"]
+			entity_vis_size: 1.0f
+			id: "40D5CFD76CEF6B25"
+			tasks: [{
+				id: "0C335EF6C3B33F27"
+				item: "industrialupgrade:block_squeezer/squeezer"
+				type: "item"
+			}]
+			x: 4.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["7F5120EC7AD69F11"]
+			entity_vis_size: 1.0f
+			id: "602C0C90354580EC"
+			tasks: [{
+				id: "4CF98FA3C4EA9236"
+				item: "industrialupgrade:alloygear/ferromanganese"
+				type: "item"
+			}]
+			x: 9.0d
+			y: 0.0d
 		}
 	]
 	title: "Древняя эра"
