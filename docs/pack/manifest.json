@@ -1,5 +1,5 @@
 {
-  "version": "2.9.437",
+  "version": "2.9.438",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -36,9 +36,9 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
-      "md5": "e4988e9f91b4d501f55c3348058c1de6",
-      "size": 2560005,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.437/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
+      "md5": "118a5206889eeac5f27fb000be8d61ff",
+      "size": 2560073,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.438/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.74-alpha.jar"
     },
     {
@@ -64,9 +64,9 @@
     },
     {
       "path": "mods/aquatech_ui-1.0.113.jar",
-      "md5": "1ae367fd210fa567812cf27067fa29b7",
-      "size": 3770519,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.437/aquatech_ui-1.0.113.jar",
+      "md5": "c10fa21c90e1671ff0f296b474482d72",
+      "size": 3771953,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.438/aquatech_ui-1.0.113.jar",
       "asset": "aquatech_ui-1.0.113.jar"
     },
     {
@@ -911,9 +911,9 @@
     },
     {
       "path": "kubejs/server_scripts/06_strip_join_guides.js",
-      "md5": "9cd251fc5697c48fb456f65c7423eab3",
-      "size": 1728,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.404/kubejs__server_scripts__06_strip_join_guides.js",
+      "md5": "f5786a7fb249d07001bffbf7f7b2c374",
+      "size": 2525,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.438/kubejs__server_scripts__06_strip_join_guides.js",
       "asset": "kubejs__server_scripts__06_strip_join_guides.js"
     },
     {
@@ -967,16 +967,16 @@
     },
     {
       "path": "kubejs/server_scripts/41_first_join_hint.js",
-      "md5": "0b11a66874a5b30bca4a84fc718bb0c0",
-      "size": 3676,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.433/kubejs__server_scripts__41_first_join_hint.js",
+      "md5": "b4a9851b33a428d4600818df6e1d75cd",
+      "size": 3861,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.438/kubejs__server_scripts__41_first_join_hint.js",
       "asset": "kubejs__server_scripts__41_first_join_hint.js"
     },
     {
       "path": "kubejs/server_scripts/42_aquatech_onboarding.js",
-      "md5": "e2e2c60053f69ef4664a733d01ef5751",
-      "size": 9132,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.436/kubejs__server_scripts__42_aquatech_onboarding.js",
+      "md5": "b6965c623985a875be175b1009989018",
+      "size": 10314,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.438/kubejs__server_scripts__42_aquatech_onboarding.js",
       "asset": "kubejs__server_scripts__42_aquatech_onboarding.js"
     },
     {
