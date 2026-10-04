@@ -50,6 +50,10 @@ public final class PersonalRaftSpawner {
     private static final int DECK_Y = 190;
     private static final int SPAWN_Y = 191;
     private static final int HUB_CLEAR = 320; // keep spawn hub free
+    /** Пересозданный плот ставится на расстоянии от MIN_SCATTER до SCATTER_RADIUS блоков от старого. */
+    private static final int SCATTER_RADIUS = 500;
+    private static final int MIN_SCATTER = 200;
+    private static final int SCATTER_ATTEMPTS = 40;
 
     private PersonalRaftSpawner() {
     }
@@ -253,7 +257,8 @@ public final class PersonalRaftSpawner {
         registry.setDirty();
 
         // 4. Spawn new raft at fresh coordinates and move the player onto it
-        trySpawnRaft(player);
+        BlockPos scatterFrom = (oldX != 0 || oldZ != 0) ? new BlockPos(oldX, DECK_Y, oldZ) : player.blockPosition();
+        trySpawnRaft(player, scatterFrom);
 
         RaftRegistry.Entry fresh = registry.getEntry(player.getUUID());
         if (fresh == null) {
@@ -371,6 +376,11 @@ public final class PersonalRaftSpawner {
     }
 
     private static void trySpawnRaft(ServerPlayer player) {
+        trySpawnRaft(player, null);
+    }
+
+    /** @param scatterFrom если задан, новый плот ищется в {@link #SCATTER_RADIUS} блоках от этой точки, а не в «своём» слоте */
+    private static void trySpawnRaft(ServerPlayer player, BlockPos scatterFrom) {
         if (!player.isAlive() || player.hasDisconnected()) {
             return;
         }
@@ -407,7 +417,9 @@ public final class PersonalRaftSpawner {
             return;
         }
 
-        BlockPos center = findFreeRaftCenter(level, registry, player);
+        BlockPos center = scatterFrom != null
+                ? findScatteredRaftCenter(level, registry, player, scatterFrom)
+                : findFreeRaftCenter(level, registry, player);
         placeRaft(level, center);
         registry.register(player.getUUID(), center);
         ensureWorldGuardClaim(player, center);
@@ -637,6 +649,28 @@ public final class PersonalRaftSpawner {
             x = RAFT_SPACING;
         }
         return new BlockPos(x, DECK_Y, z);
+    }
+
+    /**
+     * Новое место для пересозданного плота: случайная точка в кольце MIN_SCATTER..SCATTER_RADIUS вокруг старого.
+     * Без этого слот выбирался по UUID и игрок оказывался ровно там же (например, в тех же льдах).
+     */
+    private static BlockPos findScatteredRaftCenter(ServerLevel level, RaftRegistry registry, ServerPlayer player, BlockPos from) {
+        var random = level.getRandom();
+        for (int attempt = 0; attempt < SCATTER_ATTEMPTS; attempt++) {
+            double angle = random.nextDouble() * Math.PI * 2.0;
+            int distance = MIN_SCATTER + random.nextInt(SCATTER_RADIUS - MIN_SCATTER + 1);
+            BlockPos candidate = new BlockPos(
+                    from.getX() + (int) Math.round(Math.cos(angle) * distance),
+                    DECK_Y,
+                    from.getZ() + (int) Math.round(Math.sin(angle) * distance));
+            if (isTooCloseToHub(candidate) || !registry.isFree(candidate, player.getUUID()) || looksOccupied(level, candidate)) {
+                continue;
+            }
+            return candidate;
+        }
+        AquaTechUI.LOGGER.warn("No free scattered raft spot for {}, falling back to the regular slot", player.getGameProfile().getName());
+        return findFreeRaftCenter(level, registry, player);
     }
 
     private static BlockPos slotToPos(int slot) {
