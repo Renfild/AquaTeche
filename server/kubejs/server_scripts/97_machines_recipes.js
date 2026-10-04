@@ -10,6 +10,24 @@ ServerEvents.recipes((event) => {
     S: 'industrialupgrade:blockresource/reinforced_stone',
   }).id('aquatech_machines:fisher')
 
+  // Рыболов MK-1 и Рыбный генератор: доступны с удочкой тира 4 (Натуралиста). Удочка уходит в крафт,
+  // как у MK-2. Железо, медь и редстоун падают с ранних тиров, так что материалов хватает уже на тире 4.
+  event.shaped('aquatech_machines:fisher_mk1', ['ICI', 'RFR', 'IHI'], {
+    I: 'minecraft:iron_ingot',
+    C: 'minecraft:copper_ingot',
+    R: 'minecraft:redstone',
+    F: 'starcatcher:naturalist_rod',
+    H: 'minecraft:hopper',
+  }).id('aquatech_machines:fisher_mk1')
+
+  event.shaped('aquatech_machines:fish_generator', ['ICI', 'RFR', 'IBI'], {
+    I: 'minecraft:iron_ingot',
+    C: 'minecraft:copper_ingot',
+    R: 'minecraft:redstone',
+    F: 'starcatcher:naturalist_rod',
+    B: 'minecraft:furnace',
+  }).id('aquatech_machines:fish_generator')
+
   // Экскаватор: буры + электросхемы + reinforced stone
   event.shaped('aquatech_machines:excavator', ['DBD', 'RCR', 'SSS'], {
     D: 'minecraft:diamond',

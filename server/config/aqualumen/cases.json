@@ -25,8 +25,8 @@
         },
         {
           "type": "item",
-          "item": "aquatech_ui:mesh_filter",
-          "label": "Сетчатый фильтр",
+          "item": "aquatech_machines:sea_salt",
+          "label": "Морская соль",
           "min": 2,
           "max": 4,
           "weight": 25
@@ -315,8 +315,8 @@
         },
         {
           "type": "item",
-          "item": "aquatech_ui:speed_upgrade",
-          "label": "Модуль ускорения AquaTech",
+          "item": "aquatech_machines:speed_upgrade",
+          "label": "Улучшение скорости ×1",
           "min": 1,
           "max": 2,
           "weight": 40
@@ -638,8 +638,8 @@
         },
         {
           "type": "item",
-          "item": "aquatech_ui:speed_x4_upgrade",
-          "label": "Модуль ускорения ×4",
+          "item": "aquatech_machines:speed_upgrade_4",
+          "label": "Улучшение скорости ×4",
           "min": 1,
           "max": 2,
           "weight": 40

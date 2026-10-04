@@ -11,9 +11,22 @@ const ONBOARD_DONE = 99
 const ONBOARD_VERSION_KEY = 'aquatech_onboard_v'
 const ONBOARD_VERSION = 2
 const ONBOARD_IS_USED = 'aquatech_is_used'
-const ONBOARD_FISH_STEP = 3
-const ONBOARD_FISH_GOAL = 3
-const ONBOARD_ORES = ['minecraft:copper_ore', 'industrialupgrade:classicore/tin', 'minecraft:iron_ore', 'minecraft:coal_ore']
+
+// /is ставит игроку метку (тег сущности) и флаг в Forge-данных. Тег виден отсюда напрямую. player.persistentData в
+// KubeJS это отдельный компонент KubeJSPersistentData, Forge-флаг там не виден: тем, кто нажал /is до появления тега,
+// флаг читаем из ForgeData в nbt игрока. После /onboarding reset старый флаг игнорируется, нужен новый /is.
+const ONBOARD_IS_RESET = 'aquatech_is_reset'
+
+function onboardIsUsed(player) {
+  try {
+    if (player.tags.contains(ONBOARD_IS_USED)) return true
+    if (player.persistentData.getBoolean(ONBOARD_IS_RESET)) return false
+    return !!player.nbt.getCompound('ForgeData').getBoolean(ONBOARD_IS_USED)
+  } catch (err) {
+    console.warn('[AquaTech] onboarding: cannot read ' + ONBOARD_IS_USED + ': ' + err)
+    return false
+  }
+}
 
 let OnboardingService = null
 try {
@@ -102,7 +115,7 @@ const ONBOARD_STEPS = {
   1: {
     hint: () => '§b1/6 §fНапиши в чате §e/is§f: появится твой личный остров',
     base: () => 0,
-    done: (player) => player.persistentData.getBoolean(ONBOARD_IS_USED),
+    done: (player) => onboardIsUsed(player),
     reward: () => ''
   },
   2: {
@@ -227,7 +240,8 @@ ServerEvents.commandRegistry((event) => {
         player.persistentData.putInt(ONBOARD_KEY, 1)
         player.persistentData.putInt(ONBOARD_VERSION_KEY, ONBOARD_VERSION)
         player.persistentData.remove(ONBOARD_BASE)
-        player.persistentData.remove(ONBOARD_IS_USED)
+        player.removeTag(ONBOARD_IS_USED)
+        player.persistentData.putBoolean(ONBOARD_IS_RESET, true)
         player.tell(Text.of('§b[AquaTech] §fОбучение начато заново.'))
         return 1
       })))
