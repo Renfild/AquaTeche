@@ -55,6 +55,17 @@ public final class FishRosterService {
     private FishRosterService() {
     }
 
+    /** true для любой рыбы каталога магазина (config/aqualumen/fish_shop.json). */
+    public static boolean isCatalogFish(ResourceLocation id) {
+        if (id == null) return false;
+        ensure();
+        String wanted = id.toString();
+        for (Entry e : roster) {
+            if (e.id().equals(wanted)) return true;
+        }
+        return false;
+    }
+
     public static int tierOf(String rodId) {
         return ROD_TIER.getOrDefault(rodId, 1);
     }

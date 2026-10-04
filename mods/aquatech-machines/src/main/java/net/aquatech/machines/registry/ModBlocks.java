@@ -21,6 +21,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> FISHER = BLOCKS.register("fisher",
             () -> new FisherBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
 
+    public static final RegistryObject<Block> FISHER_MK1 = BLOCKS.register("fisher_mk1",
+            () -> new net.aquatech.machines.block.FisherMk1Block(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 12 : 0)));
+
+    public static final RegistryObject<Block> FISH_GENERATOR = BLOCKS.register("fish_generator",
+            () -> new net.aquatech.machines.block.FishGeneratorBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
+
     public static final RegistryObject<Block> EXCAVATOR = BLOCKS.register("excavator",
             () -> new ExcavatorBlock(metal().lightLevel(s -> s.hasProperty(BlockStateProperties.LIT) && s.getValue(BlockStateProperties.LIT) ? 14 : 0)));
 

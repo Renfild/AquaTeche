@@ -1,5 +1,6 @@
 package net.aquatech.ui.fishing;
 
+import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.item.RateModItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -97,6 +98,10 @@ public final class StarCatcherAttachments {
     public static void syncRodPin(ItemStack rodStack) {
         if (rodStack == null || rodStack.isEmpty()) return;
         if (!FishingRodCompat.isSupportedRod(rodStack)) return;
+        // Не смогли прочитать вложения StarCatcher: пустой ответ означает «не знаю», а не «модуля нет».
+        // Раньше в этом случае пин сбрасывался и модуль улова пропадал с удочки насовсем.
+        ensureProbed();
+        if (getMethod == null || holders == null) return;
         ItemStack liveRate = findRateStack(rodStack);
         if (!liveRate.isEmpty()) {
             pin(rodStack.getOrCreateTag(), liveRate);
@@ -300,6 +305,7 @@ public final class StarCatcherAttachments {
                 emptyContainer = containerCtor.newInstance(ItemStack.EMPTY);
             }
         } catch (Throwable t) {
+            AquaTechUI.LOGGER.warn("StarCatcher rod attachments unavailable, rate pins are not touched: {}", t.toString());
             getMethod = null;
             setMethod = null;
             holders = null;

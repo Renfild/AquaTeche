@@ -26,7 +26,6 @@ public final class StoreCatalog {
     }
 
     private static final List<Product> PRODUCTS = List.of(
-            new Product("gems.5", "5 гемов", "50 000 монет → 5 гемов", 50000, "coins", "gems", "5"),
             new Product("pass.premium", "Боевой Пропуск", "Премиум-награды сезона (25 уровней)", ShopRules.PASS_PREMIUM_GEMS, "gems", "pass_premium", "")
     );
 
@@ -55,7 +54,8 @@ public final class StoreCatalog {
         List<HubSnapshot.Offer> shop = ServerShopConfig.products().stream()
                 .map(p -> new HubSnapshot.Offer(p.id(), p.title(), p.subtitle(), p.price(), p.currency(), "", false))
                 .toList();
-        List<HubSnapshot.Offer> all = new java.util.ArrayList<>(base.size() + shop.size());
+        List<HubSnapshot.Offer> all = new java.util.ArrayList<>(base.size() + shop.size() + 2);
+        all.addAll(GemExchange.offers());
         all.addAll(base);
         all.addAll(shop);
         return all;

@@ -1,6 +1,8 @@
 {
   "itemGroup.aquatech_machines": "AquaTech: Machines",
   "block.aquatech_machines.fisher": "Auto-Fisher MK-2",
+  "block.aquatech_machines.fisher_mk1": "Auto-Fisher MK-1",
+  "block.aquatech_machines.fish_generator": "Fish Generator",
   "block.aquatech_machines.excavator": "Excavator",
   "block.aquatech_machines.extractor": "Extractor",
   "block.aquatech_machines.synthesizer": "Hydrothermal Synthesizer",

@@ -366,6 +366,7 @@ public final class PersonalRaftSpawner {
 
         CompoundTag data = player.getPersistentData();
         data.putBoolean(TAG_IS_USED, true); // шаг обучения «напиши /is» (kubejs 42_aquatech_onboarding.js)
+        player.addTag(TAG_IS_USED); // KubeJS не видит Forge-данные игрока, но видит теги
         RaftRegistry registry = RaftRegistry.get(level);
 
         RaftRegistry.Entry entry = registry.getEntry(player.getUUID());

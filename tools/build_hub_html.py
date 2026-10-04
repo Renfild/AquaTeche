@@ -487,6 +487,12 @@ hub_html_raw = r'''<!doctype html>
     @media(max-height:610px){.hub{min-height:0;height:96vh}.topbar{height:48px}.hub{grid-template-rows:48px 1fr 32px}.daily{display:none}.content{padding-top:12px;padding-bottom:12px}.hero{min-height:150px}}
     /* Магазин: строка фильтра */
     .shop-filter{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+    .exchange{padding:14px 16px;margin:0 0 14px}
+    .exchange h3{margin:0 0 2px;font-size:14px;font-weight:800}
+    .exchange p{margin:0;font-size:10.5px;color:var(--muted)}
+    .exchange-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+    .exchange-row b{flex:1 1 190px;font-size:12px}
+    .exchange-row .button{height:32px;padding:0 12px;font-size:11.5px}
     .hub-input{flex:1 1 220px;min-width:180px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);font:inherit;font-size:12px;outline:none}
     .hub-input::placeholder{color:var(--muted)}
     .hub-input:focus{border-color:var(--accent)}
@@ -1370,8 +1376,20 @@ try {
     // Привилегии (ранги) в F4 не продаются: фильтруем их из магазина.
     const offers = (s.store || []).filter((o) => {
       const isRank = RANK_IDS.includes(o.id);
-      return !ranksOnly && !isRank;
+      return !ranksOnly && !isRank && !String(o.id).startsWith("exchange.");
     });
+    const exBuy = (s.store || []).find((o) => o.id === "exchange.buy");
+    const exSell = (s.store || []).find((o) => o.id === "exchange.sell");
+    const myCoins = Number((s.wallet || {}).coins || 0);
+    const myGems = Number((s.wallet || {}).gems || 0);
+    const buyBtn = (n) => `<button class="button exchange-btn" data-act="exchange.buy_gems" data-n="${n}" ${myCoins < n * exBuy.price ? "disabled" : ""}>+${n} крист. · ${coins(n * exBuy.price)}</button>`;
+    const sellBtn = (n) => `<button class="button exchange-btn" data-act="exchange.sell_gems" data-n="${n}" ${myGems < n ? "disabled" : ""}>−${n} крист. · ${coins(n * exSell.price)}</button>`;
+    const exchange = (!ranksOnly && exBuy && exSell) ? `<section class="card exchange">
+        <h3>Обмен валюты</h3>
+        <p>Курс фиксированный. Кристаллы продаются дешевле, чем покупаются.</p>
+        <div class="exchange-row"><b>Монеты → кристаллы<br><span style="color:var(--muted);font-weight:500;">1 крист. = ${coins(exBuy.price)}</span></b>${[1, 5, 10, 50].map(buyBtn).join("")}</div>
+        <div class="exchange-row"><b>Кристаллы → монеты<br><span style="color:var(--muted);font-weight:500;">1 крист. = ${coins(exSell.price)}</span></b>${[1, 10, 50, 100].map(sellBtn).join("")}</div>
+      </section>` : "";
 
     const SHOP_ICONS = {
       "ae.silicon_press": "ae2:silicon_press",
@@ -1455,6 +1473,7 @@ try {
           <input id="shopSearch" class="hub-input" type="search" placeholder="Поиск по магазину" autocomplete="off" />
         </div>`;
     return `<div class="view">${head}
+      ${exchange}
       ${filterBar}
       <div class="store-grid stagger" id="shopGrid">${cards || empty}</div>
     </div>`;
@@ -1544,16 +1563,17 @@ __PASS_VIEW_JS__
   function fishingView(s) {
     const fishes = s.fishes || [];
     let totalFish = 0, totalValue = 0;
-    fishes.forEach(f => { totalFish += (f.count || 0); totalValue += (f.count || 0) * (f.priceCoins || 0); });
+    fishes.forEach(f => { totalFish += (f.count || 0); totalValue += (f.totalCoins || 0); });
 
     const cards = fishes.map(f => `<article class="card offer" style="min-height:130px;padding:12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
         <h3 style="font-size:12.5px;margin:0;font-weight:700;">${esc(f.name)}</h3>
         <span class="offer-badge" style="position:static;">${f.count} шт.</span>
       </div>
-      <p style="font-size:10px;color:var(--muted);margin:0 0 10px;">Цена за шт.: <b style="color:var(--gold);">${coins(f.priceCoins)}</b></p>
+      <p style="font-size:10px;color:var(--muted);margin:0 0 4px;">${f.count > 0 ? "За шт. (среднее)" : "Цена средней рыбы"}: <b style="color:var(--gold);">${coins(f.priceCoins)}</b>${f.rarity ? ` · ${esc(f.rarity)}` : ""}</p>
+      <p style="font-size:9.5px;color:var(--muted);margin:0 0 10px;min-height:12px;">${f.detail ? esc(f.detail) : "&nbsp;"}</p>
       <div class="offer-foot">
-        <span class="price">${coins(f.count * f.priceCoins)}</span>
+        <span class="price">${coins(f.totalCoins || 0)}</span>
         <button class="button sell-single-fish" data-fish="${esc(f.id)}" ${f.count > 0 ? "" : "disabled"}>Продать</button>
       </div>
     </article>`).join("");
@@ -1877,6 +1897,12 @@ __PASS_VIEW_JS__
         const found = card.dataset.found === "1";
         card.style.display = (f === "all" || (f === "found" && found) || (f === "missing" && !found)) ? "" : "none";
       });
+    });
+
+    document.querySelectorAll(".exchange-btn").forEach(b => b.onclick = () => {
+      action(b.dataset.act, b.dataset.n);
+      toast("Обмен...");
+      setTimeout(() => action("hub.refresh"), 400);
     });
 
     document.querySelectorAll(".sell-all-fish").forEach(b => b.onclick = () => {

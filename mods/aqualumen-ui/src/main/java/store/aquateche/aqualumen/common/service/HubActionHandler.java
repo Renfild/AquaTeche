@@ -14,9 +14,11 @@ import store.aquateche.aqualumen.AquaLumenUI;
 import store.aquateche.aqualumen.common.data.HubSnapshot;
 import store.aquateche.aqualumen.config.LumenConfig;
 
+import java.util.Deque;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * Every button in the hub sends an action id, never a result. The server validates the id,
@@ -34,7 +36,8 @@ public final class HubActionHandler {
     private record PendingCaseReward(CaseConfig.CaseDef def, CaseConfig.LootDef loot, int amount, String type, long timestamp, boolean pity) {
     }
 
-    private static final Map<UUID, PendingCaseReward> PENDING_CASE_REWARDS = new ConcurrentHashMap<>();
+    /** Очередь на игрока: два открытия подряд раньше затирали друг друга, и первая награда терялась вместе с монетами. */
+    private static final Map<UUID, Deque<PendingCaseReward>> PENDING_CASE_REWARDS = new ConcurrentHashMap<>();
     private static final java.util.concurrent.ScheduledExecutorService REWARD_SCHEDULER = java.util.concurrent.Executors.newSingleThreadScheduledExecutor(r -> {
         Thread t = new Thread(r, "AquaLumen-CaseRewardScheduler");
         t.setDaemon(true);
@@ -57,6 +60,8 @@ public final class HubActionHandler {
             case "hub.close" -> HubDataService.closeFor(player.getUUID());
             case "case.open" -> openCase(player, argument);
             case "case.claim" -> claimCaseReward(player, true);
+            case "exchange.buy_gems" -> GemExchange.buyGems(player, argument);
+            case "exchange.sell_gems" -> GemExchange.sellGems(player, argument);
             case "daily.claim", "hub.claim_daily" -> claimDaily(player);
             case "events.claim" -> handleEventClaim(player, argument);
             case "events.reroll" -> handleEventReroll(player, argument);
@@ -355,10 +360,11 @@ public final class HubActionHandler {
                     amount, type));
 
             // Store pending reward so item is granted AFTER animation completes
-            PENDING_CASE_REWARDS.put(player.getUUID(), new PendingCaseReward(def, loot, amount, type, System.currentTimeMillis(), pityHit));
+            PendingCaseReward pending = new PendingCaseReward(def, loot, amount, type, System.currentTimeMillis(), pityHit);
+            PENDING_CASE_REWARDS.computeIfAbsent(player.getUUID(), id -> new ConcurrentLinkedDeque<>()).addLast(pending);
 
             // Schedule fallback delivery after 5.5s in case client doesn't send case.claim
-            REWARD_SCHEDULER.schedule(() -> claimCaseReward(player, false), 5500, java.util.concurrent.TimeUnit.MILLISECONDS);
+            REWARD_SCHEDULER.schedule(() -> deliverIfStillPending(player, pending), 5500, java.util.concurrent.TimeUnit.MILLISECONDS);
         } else {
             // Multi-roll: award all rewards and print clean summary
             StringBuilder summary = new StringBuilder();
@@ -437,42 +443,67 @@ public final class HubActionHandler {
 
     public static void claimCaseReward(ServerPlayer player, boolean push) {
         if (player == null) return;
-        PendingCaseReward pending = PENDING_CASE_REWARDS.remove(player.getUUID());
+        Deque<PendingCaseReward> queue = PENDING_CASE_REWARDS.get(player.getUUID());
+        PendingCaseReward pending = queue == null ? null : queue.pollFirst();
         if (pending == null) return;
+        player.server.execute(() -> grantPendingReward(player, pending, push));
+    }
 
-        player.server.execute(() -> {
-            String rarity = HubDataService.rarityForWeight(pending.loot().weight, HubDataService.totalWeight(pending.def()));
-            String announceLabel = pending.loot().label == null || pending.loot().label.isBlank()
-                    ? pending.loot().item : pending.loot().label;
-            switch (pending.type()) {
-                case "coins" -> {
-                    HubEconomy.grantCoins(player, pending.amount());
-                    player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: "
-                            + (pending.loot().label == null || pending.loot().label.isBlank() ? "AquaCoins" : pending.loot().label)
-                            + " ×" + pending.amount()).withStyle(ChatFormatting.GOLD));
-                }
-                case "gems" -> {
-                    HubEconomy.grantGems(player, pending.amount());
-                    player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: "
-                            + (pending.loot().label == null || pending.loot().label.isBlank() ? "Гемы" : pending.loot().label)
-                            + " ×" + pending.amount()).withStyle(ChatFormatting.LIGHT_PURPLE));
-                }
-                default -> {
-                    ItemStack stack = itemStack(pending.loot().item, pending.amount());
-                    HubEconomy.giveItem(player, stack);
-                    announceLabel = stack.getHoverName().getString();
-                    player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: ")
-                            .withStyle(ChatFormatting.AQUA)
-                            .append(stack.getHoverName())
-                            .append(Component.literal(" ×" + pending.amount()).withStyle(ChatFormatting.AQUA)));
-                }
-            }
-            RareDropAnnounce.caseDrop(player.server, player, pending.def().title, announceLabel,
-                    rarity, pending.amount(), pending.pity());
-            if (push) {
-                HubDataService.push(player);
+    /** Запасная выдача: клиент не прислал case.claim за 5,5 с. Если награду уже выдали, ничего не делает. */
+    private static void deliverIfStillPending(ServerPlayer player, PendingCaseReward pending) {
+        net.minecraft.server.MinecraftServer server = player.server;
+        server.execute(() -> {
+            Deque<PendingCaseReward> queue = PENDING_CASE_REWARDS.get(player.getUUID());
+            if (queue == null || !queue.remove(pending)) return;
+            ServerPlayer current = server.getPlayerList().getPlayer(player.getUUID());
+            if (current != null) {
+                grantPendingReward(current, pending, false);
             }
         });
+    }
+
+    /** Игрок выходит (в том числе по Timed out): все оплаченные, но не выданные награды отдаём сразу. */
+    public static void flushPendingRewards(ServerPlayer player) {
+        Deque<PendingCaseReward> queue = PENDING_CASE_REWARDS.remove(player.getUUID());
+        if (queue == null) return;
+        PendingCaseReward pending;
+        while ((pending = queue.pollFirst()) != null) {
+            grantPendingReward(player, pending, false);
+        }
+    }
+
+    private static void grantPendingReward(ServerPlayer player, PendingCaseReward pending, boolean push) {
+        String rarity = HubDataService.rarityForWeight(pending.loot().weight, HubDataService.totalWeight(pending.def()));
+        String announceLabel = pending.loot().label == null || pending.loot().label.isBlank()
+                ? pending.loot().item : pending.loot().label;
+        switch (pending.type()) {
+            case "coins" -> {
+                HubEconomy.grantCoins(player, pending.amount());
+                player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: "
+                        + (pending.loot().label == null || pending.loot().label.isBlank() ? "AquaCoins" : pending.loot().label)
+                        + " ×" + pending.amount()).withStyle(ChatFormatting.GOLD));
+            }
+            case "gems" -> {
+                HubEconomy.grantGems(player, pending.amount());
+                player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: "
+                        + (pending.loot().label == null || pending.loot().label.isBlank() ? "Гемы" : pending.loot().label)
+                        + " ×" + pending.amount()).withStyle(ChatFormatting.LIGHT_PURPLE));
+            }
+            default -> {
+                ItemStack stack = itemStack(pending.loot().item, pending.amount());
+                HubEconomy.giveItem(player, stack);
+                announceLabel = stack.getHoverName().getString();
+                player.sendSystemMessage(Component.literal("Кейс «" + pending.def().title + "»: ")
+                        .withStyle(ChatFormatting.AQUA)
+                        .append(stack.getHoverName())
+                        .append(Component.literal(" ×" + pending.amount()).withStyle(ChatFormatting.AQUA)));
+            }
+        }
+        RareDropAnnounce.caseDrop(player.server, player, pending.def().title, announceLabel,
+                rarity, pending.amount(), pending.pity());
+        if (push) {
+            HubDataService.push(player);
+        }
     }
 
     private static void claimDaily(ServerPlayer player) {

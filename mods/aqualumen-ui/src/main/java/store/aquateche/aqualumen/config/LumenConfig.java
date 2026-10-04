@@ -36,6 +36,8 @@ public final class LumenConfig {
         public final ForgeConfigSpec.IntValue seasonMaxTier;
         public final ForgeConfigSpec.ConfigValue<String> coinsObjective;
         public final ForgeConfigSpec.ConfigValue<String> gemsObjective;
+        public final ForgeConfigSpec.IntValue gemBuyCoins;
+        public final ForgeConfigSpec.IntValue gemSellCoins;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> ranks;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> enabledTabs;
         public final ForgeConfigSpec.BooleanValue announceCaseDrops;
@@ -64,6 +66,11 @@ public final class LumenConfig {
             b.comment("Economy bridge. Scoreboard objectives are used when no economy plugin is detected.").push("economy");
             coinsObjective = b.define("coinsObjective", "coins");
             gemsObjective = b.define("gemsObjective", "gems");
+            gemBuyCoins = b.comment("Coins the player pays for one gem in the store exchange.")
+                    .defineInRange("gemBuyCoins", 10_000, 1, 100_000_000);
+            gemSellCoins = b.comment("Coins the player gets for one gem in the store exchange. Keep it below gemBuyCoins,"
+                    + " otherwise the exchange can be looped for free coins.")
+                    .defineInRange("gemSellCoins", 5_000, 1, 100_000_000);
             b.pop();
 
             b.comment("Content").push("content");

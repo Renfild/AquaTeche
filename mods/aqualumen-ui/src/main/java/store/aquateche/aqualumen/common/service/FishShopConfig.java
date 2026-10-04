@@ -233,23 +233,84 @@ public final class FishShopConfig {
     }
 
     /**
-     * Calculates the dynamic price of a single fish item stack based on base price, rarity, weight, and golden flag.
+     * Множители цены одной рыбы. Меню показывает те же числа, что использует скупка, поэтому формула живёт
+     * в одном месте: {@link #unitPrice()} = база × редкость × вес × золотая × спрос × свежесть × грейд × точка лова.
      */
-    public static long calculateFishPrice(ItemStack stack, FishDef baseDef) {
-        if (stack == null || stack.isEmpty()) return 0;
+    public record PriceParts(long base, double rarity, double weight, double golden, double demand,
+                             double fresh, double grade, double spot) {
+
+        public double unitPrice() {
+            double unit = base * rarity * weight * golden;
+            unit *= demand;
+            unit *= fresh;
+            unit *= grade;
+            unit *= spot;
+            return unit;
+        }
+
+        public long roundedUnitPrice() {
+            return Math.max(1L, Math.round(unitPrice()));
+        }
+
+        /** Короткое объяснение цены для меню: только то, что отличается от единицы. */
+        public String describe() {
+            StringBuilder out = new StringBuilder();
+            appendPart(out, "редкость", rarity);
+            appendPart(out, "вес", weight);
+            appendPart(out, "золотая", golden);
+            appendPart(out, "спрос", demand);
+            appendPart(out, "свежая", fresh);
+            appendPart(out, "грейд", grade);
+            appendPart(out, "точка", spot);
+            return out.toString();
+        }
+
+        private static void appendPart(StringBuilder out, String label, double value) {
+            if (Math.abs(value - 1.0) < 0.005) return;
+            if (out.length() > 0) out.append(" · ");
+            out.append(label).append(" ×").append(String.format(java.util.Locale.ROOT, "%.2f", value));
+        }
+    }
+
+    /** Множитель редкости по её названию (русскому или английскому). */
+    public static double rarityMultiplier(String rarity) {
+        String r = rarity == null ? "" : rarity.toLowerCase();
+        if (r.contains("mythic") || r.contains("\u043c\u0438\u0444\u0438\u043a") || r.contains("\u043c\u0438\u0444\u0438\u0447\u0435\u0441\u043a")) {
+            return 15.0;
+        } else if (r.contains("legend") || r.contains("\u043b\u0435\u0433\u0435\u043d\u0434")) {
+            return 8.0;
+        } else if (r.contains("epic") || r.contains("\u044d\u043f\u0438\u043a") || r.contains("\u044d\u043f\u0438\u0447\u0435\u0441\u043a")) {
+            return 4.0;
+        } else if (r.contains("rare") || r.contains("\u0440\u0435\u0434\u043a")) {
+            return 2.2;
+        } else if (r.contains("uncommon") || r.contains("\u043d\u0435\u043e\u0431\u044b\u0447\u043d")) {
+            return 1.4;
+        }
+        return 1.0;
+    }
+
+    /** Цена рыбы без учёта конкретного улова (вес, грейд, свежесть): строка каталога для пустой ячейки. */
+    public static PriceParts catalogParts(FishDef def) {
+        long base = def != null ? def.priceCoins : 5L;
+        double demand = def != null ? demandFor(def.id) : 1.0;
+        return new PriceParts(base, rarityMultiplier(def != null ? def.rarity : "\u0411\u0430\u0437\u043e\u0432\u044b\u0439"),
+                1.0, 1.0, demand, 1.0, 1.0, 1.0);
+    }
+
+    /**
+     * Все множители конкретной рыбы из инвентаря (редкость и вес из NBT улова, грейд, свежесть, точка лова).
+     */
+    public static PriceParts priceParts(ItemStack stack, FishDef baseDef) {
         long basePrice = baseDef != null ? baseDef.priceCoins : 5L;
 
-        double rarityMultiplier = 1.0;
         double weightMultiplier = 1.0;
         double goldenMultiplier = 1.0;
-
-        String itemRarity = baseDef != null ? baseDef.rarity : "Базовый";
+        String itemRarity = baseDef != null ? baseDef.rarity : "\u0411\u0430\u0437\u043e\u0432\u044b\u0439";
 
         CompoundTag tag = stack.getTag();
         if (tag != null) {
             CompoundTag fishInfo = tag.contains("caught_fish_info") ? tag.getCompound("caught_fish_info") : tag;
 
-            // 1. Rarity from NBT if present
             String rarityStr = "";
             if (fishInfo.contains("rarity")) {
                 rarityStr = fishInfo.getString("rarity");
@@ -260,7 +321,6 @@ public final class FishShopConfig {
                 itemRarity = rarityStr;
             }
 
-            // 2. Weight & Size
             double weightKg = 0.0;
             if (fishInfo.contains("weight")) {
                 weightKg = fishInfo.getDouble("weight");
@@ -288,7 +348,6 @@ public final class FishShopConfig {
                 weightMultiplier = 1.0 + (percentile * 3.5);
             }
 
-            // 3. Golden / Trophy
             boolean golden = false;
             if (fishInfo.contains("golden")) {
                 golden = fishInfo.getBoolean("golden");
@@ -300,53 +359,76 @@ public final class FishShopConfig {
             }
         }
 
-        // Rarity multiplier mapping
-        String rLower = itemRarity.toLowerCase();
-        if (rLower.contains("mythic") || rLower.contains("\u043c\u0438\u0444\u0438\u043a") || rLower.contains("\u043c\u0438\u0444\u0438\u0447\u0435\u0441\u043a")) {
-            rarityMultiplier = 15.0;
-        } else if (rLower.contains("legend") || rLower.contains("\u043b\u0435\u0433\u0435\u043d\u0434")) {
-            rarityMultiplier = 8.0;
-        } else if (rLower.contains("epic") || rLower.contains("\u044d\u043f\u0438\u043a") || rLower.contains("\u044d\u043f\u0438\u0447\u0435\u0441\u043a")) {
-            rarityMultiplier = 4.0;
-        } else if (rLower.contains("rare") || rLower.contains("\u0440\u0435\u0434\u043a")) {
-            rarityMultiplier = 2.2;
-        } else if (rLower.contains("uncommon") || rLower.contains("\u043d\u0435\u043e\u0431\u044b\u0447\u043d")) {
-            rarityMultiplier = 1.4;
-        }
-
-        double unitPrice = basePrice * rarityMultiplier * weightMultiplier * goldenMultiplier;
-        if (baseDef != null) {
-            unitPrice *= demandFor(baseDef.id);
-        }
-
-        // Freshness (catch stamp from aquatech-ui) & quality grade bonuses
+        double demand = baseDef != null ? demandFor(baseDef.id) : 1.0;
+        double fresh = 1.0;
+        double grade = 1.0;
+        double spot = 1.0;
         CompoundTag rootTag = stack.getTag();
         if (rootTag != null) {
             long caughtAt = rootTag.getLong("AquaCaughtAt");
             if (caughtAt > 0L) {
                 long ageMs = System.currentTimeMillis() - caughtAt;
                 if (ageMs >= 0L && ageMs <= 30L * 60L * 1000L) {
-                    unitPrice *= 1.2;
+                    fresh = 1.2;
                 }
             }
             // Грейд с улова (aquatech-ui FishGrade: 1=серебро, 2=золото, 3=радужная)
-            int grade = rootTag.getInt("AquaGrade");
-            if (grade == 1) {
-                unitPrice *= 1.25;
-            } else if (grade == 2) {
-                unitPrice *= 1.6;
-            } else if (grade >= 3) {
-                unitPrice *= 3.0;
+            int gradeId = rootTag.getInt("AquaGrade");
+            if (gradeId == 1) {
+                grade = 1.25;
+            } else if (gradeId == 2) {
+                grade = 1.6;
+            } else if (gradeId >= 3) {
+                grade = 3.0;
             }
             // Рыба с личной точки лова (метку ставит aquatech-ui FishingSpotService; множитель зависит от типа точки)
             float spotMult = rootTag.getFloat("AquaSpotMult");
             if (spotMult > 1.0f) {
-                unitPrice *= spotMult;
+                spot = spotMult;
             }
         }
+        return new PriceParts(basePrice, rarityMultiplier(itemRarity), weightMultiplier, goldenMultiplier, demand,
+                fresh, grade, spot);
+    }
 
-        long finalUnitPrice = Math.max(1L, Math.round(unitPrice));
-        return finalUnitPrice * stack.getCount();
+    /** Цена стопки рыбы при продаже: множители каждой рыбы × количество. */
+    public static long calculateFishPrice(ItemStack stack, FishDef baseDef) {
+        if (stack == null || stack.isEmpty()) return 0;
+        return priceParts(stack, baseDef).roundedUnitPrice() * stack.getCount();
+    }
+
+    /** Запас рыбы вида в инвентаре игрока, оценённый так же, как её купит скупщик. */
+    public record Stock(int count, long totalCoins, long unitCoins, String detail) {
+    }
+
+    public static Stock stockInInventory(ServerPlayer player, FishDef def) {
+        if (player == null || def == null || def.id == null) return new Stock(0, 0L, 0L, "");
+        Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(def.id));
+        if (item == null || BuiltInRegistries.ITEM.getKey(item) == null) return new Stock(0, 0L, 0L, "");
+        int count = 0;
+        long total = 0L;
+        PriceParts best = null;
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (stack.isEmpty() || !stack.is(item)) continue;
+            PriceParts parts = priceParts(stack, def);
+            count += stack.getCount();
+            total += parts.roundedUnitPrice() * stack.getCount();
+            if (best == null || parts.unitPrice() > best.unitPrice()) {
+                best = parts;
+            }
+        }
+        if (count <= 0) {
+            PriceParts catalog = catalogParts(def);
+            return new Stock(0, 0L, catalog.roundedUnitPrice(), catalog.describe());
+        }
+        long bonus = BoosterService.bonusFor(player, total);
+        String detail = best.describe();
+        if (bonus > 0L) {
+            detail = (detail.isEmpty() ? "" : detail + " \u00b7 ") + "\u0431\u0443\u0441\u0442\u0435\u0440 +" + bonus;
+        }
+        long withBonus = total + bonus;
+        return new Stock(count, withBonus, Math.round(withBonus / (double) count), detail);
     }
 
     public static int countInInventory(ServerPlayer player, String itemId) {

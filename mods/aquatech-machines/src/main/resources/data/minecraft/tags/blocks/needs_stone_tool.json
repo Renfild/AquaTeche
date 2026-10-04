@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "aquatech_machines:fisher_mk1",
+    "aquatech_machines:fish_generator",
+    "aquatech_machines:fisher",
+    "aquatech_machines:excavator",
+    "aquatech_machines:extractor",
+    "aquatech_machines:synthesizer",
+    "aquatech_machines:centrifuge",
+    "aquatech_machines:flower_collector",
+    "aquatech_machines:mana_fabricator"
+  ]
+}

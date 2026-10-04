@@ -32,17 +32,23 @@ public final class HubEconomy {
 
     /**
      * Ставится, если Vault-плагин есть, но {@code /eco take} не меняет баланс
-     * (нет команды, чужой провайдер). Тогда кошелёк навсегда уходит на scoreboard,
-     * иначе покупки становятся бесплатными, а баланс замирает.
+     * (нет команды, чужой провайдер). Тогда кошелёк на время уходит на scoreboard,
+     * иначе покупки становятся бесплатными, а баланс замирает. Через VAULT_RETRY_MS Vault пробуется снова:
+     * один разовый сбой раньше отключал его до перезапуска сервера.
      */
-    private static volatile boolean vaultDebitBroken = false;
+    private static volatile long vaultBrokenUntil = 0L;
+    private static final long VAULT_RETRY_MS = 2L * 60_000L;
+
+    private static boolean vaultDebitBroken() {
+        return System.currentTimeMillis() < vaultBrokenUntil;
+    }
 
     private HubEconomy() {
     }
 
     public static long coins(ServerPlayer player) {
         String objective = LumenConfig.COMMON.coinsObjective.get();
-        long vault = vaultDebitBroken ? -1L : vaultBalance(player);
+        long vault = vaultDebitBroken() ? -1L : vaultBalance(player);
         if (vault >= 0L) {
             if (vault != score(player, objective)) {
                 setScore(player, objective, vault);
@@ -83,7 +89,7 @@ public final class HubEconomy {
             return true;
         }
         String objective = LumenConfig.COMMON.coinsObjective.get();
-        long vault = vaultDebitBroken ? -1L : vaultBalance(player);
+        long vault = vaultDebitBroken() ? -1L : vaultBalance(player);
         if (vault >= 0L) {
             if (vault < amount) {
                 return false;
@@ -94,7 +100,7 @@ public final class HubEconomy {
                 setScore(player, objective, after);
                 return true;
             }
-            vaultDebitBroken = true;
+            vaultBrokenUntil = System.currentTimeMillis() + VAULT_RETRY_MS;
             store.aquateche.aqualumen.AquaLumenUI.LOGGER.warn(
                     "Vault take did not apply (before={}, after={}) — wallet switches to scoreboard", vault, after);
         }
@@ -138,7 +144,7 @@ public final class HubEconomy {
             return;
         }
         String objective = LumenConfig.COMMON.coinsObjective.get();
-        long vault = vaultDebitBroken ? -1L : vaultBalance(player);
+        long vault = vaultDebitBroken() ? -1L : vaultBalance(player);
         if (vault >= 0L) {
             ecoCommand(player, "give", amount);
             long after = vaultBalance(player);
@@ -146,7 +152,7 @@ public final class HubEconomy {
                 setScore(player, objective, after);
                 return;
             }
-            vaultDebitBroken = true;
+            vaultBrokenUntil = System.currentTimeMillis() + VAULT_RETRY_MS;
             store.aquateche.aqualumen.AquaLumenUI.LOGGER.warn(
                     "Vault give did not apply (before={}, after={}) — wallet switches to scoreboard", vault, after);
         }

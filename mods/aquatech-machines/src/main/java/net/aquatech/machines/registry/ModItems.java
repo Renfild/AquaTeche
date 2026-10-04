@@ -15,6 +15,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> FISHER = ITEMS.register("fisher",
             () -> new BlockItem(ModBlocks.FISHER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FISHER_MK1 = ITEMS.register("fisher_mk1",
+            () -> new BlockItem(ModBlocks.FISHER_MK1.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FISH_GENERATOR = ITEMS.register("fish_generator",
+            () -> new BlockItem(ModBlocks.FISH_GENERATOR.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> EXCAVATOR = ITEMS.register("excavator",
             () -> new BlockItem(ModBlocks.EXCAVATOR.get(), new Item.Properties()));

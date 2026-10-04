@@ -19,6 +19,8 @@ public class ModCreativeTabs {
                     .title(Component.translatable("itemGroup.aquatech_machines"))
                     .icon(() -> new ItemStack(ModItems.FISHER.get()))
                     .displayItems((params, output) -> {
+                        output.accept(ModItems.FISHER_MK1.get());
+                        output.accept(ModItems.FISH_GENERATOR.get());
                         output.accept(ModItems.FISHER.get());
                         output.accept(ModItems.EXCAVATOR.get());
                         output.accept(ModItems.EXTRACTOR.get());

@@ -19,6 +19,12 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<FisherMenu>> FISHER =
             MENUS.register("fisher", () -> IForgeMenuType.create(FisherMenu::new));
 
+    public static final RegistryObject<MenuType<net.aquatech.machines.inventory.FisherMk1Menu>> FISHER_MK1 =
+            MENUS.register("fisher_mk1", () -> IForgeMenuType.create(net.aquatech.machines.inventory.FisherMk1Menu::new));
+
+    public static final RegistryObject<MenuType<net.aquatech.machines.inventory.FishGeneratorMenu>> FISH_GENERATOR =
+            MENUS.register("fish_generator", () -> IForgeMenuType.create(net.aquatech.machines.inventory.FishGeneratorMenu::new));
+
     public static final RegistryObject<MenuType<ExcavatorMenu>> EXCAVATOR =
             MENUS.register("excavator", () -> IForgeMenuType.create(ExcavatorMenu::new));
 

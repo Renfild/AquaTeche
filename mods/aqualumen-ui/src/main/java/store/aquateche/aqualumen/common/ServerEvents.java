@@ -67,6 +67,7 @@ public final class ServerEvents {
     @SubscribeEvent
     public static void onLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
+            HubActionHandler.flushPendingRewards(player);
             HubEconomy.coins(player);
             HubDataService.syncPlayerToWebAsync(player);
         }

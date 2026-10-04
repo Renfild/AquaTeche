@@ -5,13 +5,11 @@ import net.aquatech.machines.registry.ModItems;
 import net.aquatech.machines.util.FisherLoot;
 import net.aquatech.machines.util.RateMultiplierReader;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 /**
  * Рыболов MK-2: удочка [0], Ядро Рыболова [1], Скорость [2], Энергоэффективность [3], Выход [4].
@@ -91,33 +89,6 @@ public class FisherBlockEntity extends BaseMachineBlockEntity {
         }
 
         int totalCount = Math.max(1, loot.getCount() * effectiveRate(rate, fishMode));
-        while (totalCount > 0) {
-            int toInsert = Math.min(loot.getMaxStackSize(), totalCount);
-            ItemStack chunk = loot.copyWithCount(toInsert);
-            ItemStack rest = items.insertItem(SLOT_OUTPUT, chunk, false);
-            if (!rest.isEmpty()) {
-                // Пытаемся сразу протолкнуть в соседние сундуки
-                for (Direction side : Direction.values()) {
-                    var neighbor = level.getBlockEntity(worldPosition.relative(side));
-                    if (neighbor == null) continue;
-                    var cap = neighbor.getCapability(ForgeCapabilities.ITEM_HANDLER, side.getOpposite()).orElse(null);
-                    if (cap == null) continue;
-                    rest = pushAll(cap, rest);
-                    if (rest.isEmpty()) break;
-                }
-                // Если сундуки полны или отсутствуют — дропаем в мир сверху блока
-                if (!rest.isEmpty()) {
-                    net.minecraft.world.entity.item.ItemEntity drop =
-                            new net.minecraft.world.entity.item.ItemEntity(
-                                    level,
-                                    worldPosition.getX() + 0.5,
-                                    worldPosition.getY() + 1.0,
-                                    worldPosition.getZ() + 0.5,
-                                    rest);
-                    level.addFreshEntity(drop);
-                }
-            }
-            totalCount -= toInsert;
-        }
+        emitToOutput(SLOT_OUTPUT, loot, totalCount);
     }
 }

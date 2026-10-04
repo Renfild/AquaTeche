@@ -65,7 +65,13 @@ public record HubSnapshot(Profile profile,
     public record WarpEntry(String id, String title, String description, String tag, String command) {
     }
 
-    public record FishEntry(String id, String name, int count, long priceCoins, String rarity, String tag, float demand) {
+    /**
+     * priceCoins: цена за штуку с учётом редкости, веса, грейда, свежести, спроса и бустера (средняя по стопкам
+     * в инвентаре; если рыбы нет, то цена средней рыбы вида). totalCoins: сколько заплатят за всё, что лежит в
+     * инвентаре. detail: из чего сложилась цена.
+     */
+    public record FishEntry(String id, String name, int count, long priceCoins, String rarity, String tag, float demand,
+                            long totalCoins, String detail) {
     }
 
     /** Рыбный атлас: строка вида. found=false — вид ещё не пойман (имя не раскрываем). */
@@ -163,6 +169,8 @@ public record HubSnapshot(Profile profile,
             writeSafe(b, f.rarity());
             writeSafe(b, f.tag());
             b.writeFloat(f.demand());
+            b.writeVarLong(f.totalCoins());
+            writeSafe(b, f.detail());
         });
 
         writeSafe(buf, server.name());
@@ -250,7 +258,8 @@ public record HubSnapshot(Profile profile,
         List<WarpEntry> warps = buf.readList(b ->
                 new WarpEntry(b.readUtf(), b.readUtf(), b.readUtf(), b.readUtf(), b.readUtf()));
         List<FishEntry> fishes = buf.readList(b ->
-                new FishEntry(b.readUtf(), b.readUtf(), b.readVarInt(), b.readVarLong(), b.readUtf(), b.readUtf(), b.readFloat()));
+                new FishEntry(b.readUtf(), b.readUtf(), b.readVarInt(), b.readVarLong(), b.readUtf(), b.readUtf(), b.readFloat(),
+                        b.readVarLong(), b.readUtf()));
 
         ServerInfo server = new ServerInfo(buf.readUtf(), buf.readVarInt(), buf.readVarInt(), buf.readFloat(), buf.readUtf());
         CaseResult caseResult = buf.readBoolean()

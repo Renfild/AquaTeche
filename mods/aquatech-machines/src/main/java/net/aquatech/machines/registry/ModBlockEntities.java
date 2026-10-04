@@ -18,6 +18,14 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("fisher",
                     () -> BlockEntityType.Builder.of(FisherBlockEntity::new, ModBlocks.FISHER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<net.aquatech.machines.block.entity.FisherMk1BlockEntity>> FISHER_MK1 =
+            BLOCK_ENTITIES.register("fisher_mk1",
+                    () -> BlockEntityType.Builder.of(net.aquatech.machines.block.entity.FisherMk1BlockEntity::new, ModBlocks.FISHER_MK1.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<net.aquatech.machines.block.entity.FishGeneratorBlockEntity>> FISH_GENERATOR =
+            BLOCK_ENTITIES.register("fish_generator",
+                    () -> BlockEntityType.Builder.of(net.aquatech.machines.block.entity.FishGeneratorBlockEntity::new, ModBlocks.FISH_GENERATOR.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<ExcavatorBlockEntity>> EXCAVATOR =
             BLOCK_ENTITIES.register("excavator",
                     () -> BlockEntityType.Builder.of(ExcavatorBlockEntity::new, ModBlocks.EXCAVATOR.get()).build(null));

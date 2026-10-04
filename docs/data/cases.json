@@ -24,9 +24,9 @@
           "chance": 2
         },
         {
-          "name": "Сетчатый фильтр",
+          "name": "Морская соль",
           "type": "item",
-          "item": "aquatech_ui:mesh_filter",
+          "item": "aquatech_machines:sea_salt",
           "min": 2,
           "max": 4,
           "weight": 25,
@@ -344,9 +344,9 @@
           "chance": 10
         },
         {
-          "name": "Модуль ускорения AquaTech",
+          "name": "Улучшение скорости ×1",
           "type": "item",
-          "item": "aquatech_ui:speed_upgrade",
+          "item": "aquatech_machines:speed_upgrade",
           "min": 1,
           "max": 2,
           "weight": 40,
@@ -698,9 +698,9 @@
           "chance": 8
         },
         {
-          "name": "Модуль ускорения ×4",
+          "name": "Улучшение скорости ×4",
           "type": "item",
-          "item": "aquatech_ui:speed_x4_upgrade",
+          "item": "aquatech_machines:speed_upgrade_4",
           "min": 1,
           "max": 2,
           "weight": 40,

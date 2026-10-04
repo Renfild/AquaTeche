@@ -348,6 +348,32 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Menu
         return moved;
     }
 
+    /**
+     * Кладёт добычу в выходной слот; что не влезло, уходит в соседние инвентари,
+     * а остаток падает в мир над машиной.
+     */
+    protected void emitToOutput(int outputSlot, ItemStack loot, int totalCount) {
+        while (totalCount > 0) {
+            int toInsert = Math.min(loot.getMaxStackSize(), totalCount);
+            ItemStack rest = items.insertItem(outputSlot, loot.copyWithCount(toInsert), false);
+            if (!rest.isEmpty()) {
+                for (Direction side : Direction.values()) {
+                    var neighbor = level.getBlockEntity(worldPosition.relative(side));
+                    if (neighbor == null) continue;
+                    var cap = neighbor.getCapability(ForgeCapabilities.ITEM_HANDLER, side.getOpposite()).orElse(null);
+                    if (cap == null) continue;
+                    rest = pushAll(cap, rest);
+                    if (rest.isEmpty()) break;
+                }
+                if (!rest.isEmpty()) {
+                    level.addFreshEntity(new net.minecraft.world.entity.item.ItemEntity(level,
+                            worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5, rest));
+                }
+            }
+            totalCount -= toInsert;
+        }
+    }
+
     public static ItemStack pushAll(IItemHandler target, ItemStack stack) {
         ItemStack rest = stack;
         for (int i = 0; i < target.getSlots() && !rest.isEmpty(); i++) {

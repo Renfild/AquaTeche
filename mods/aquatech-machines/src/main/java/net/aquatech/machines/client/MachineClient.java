@@ -17,6 +17,8 @@ public final class MachineClient {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(ModMenuTypes.FISHER.get(), FisherScreen::new);
+            MenuScreens.register(ModMenuTypes.FISHER_MK1.get(), net.aquatech.machines.client.gui.FisherMk1Screen::new);
+            MenuScreens.register(ModMenuTypes.FISH_GENERATOR.get(), net.aquatech.machines.client.gui.FishGeneratorScreen::new);
             MenuScreens.register(ModMenuTypes.EXCAVATOR.get(), ExcavatorScreen::new);
             MenuScreens.register(ModMenuTypes.EXTRACTOR.get(), ExtractorScreen::new);
             MenuScreens.register(ModMenuTypes.SYNTHESIZER.get(), net.aquatech.machines.client.gui.SynthesizerScreen::new);

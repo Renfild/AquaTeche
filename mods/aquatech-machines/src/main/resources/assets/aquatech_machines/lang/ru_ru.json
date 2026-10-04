@@ -1,6 +1,8 @@
 {
   "itemGroup.aquatech_machines": "AquaTech: Механизмы",
   "block.aquatech_machines.fisher": "Рыболов MK-2",
+  "block.aquatech_machines.fisher_mk1": "Рыболов MK-1",
+  "block.aquatech_machines.fish_generator": "Рыбный генератор",
   "block.aquatech_machines.excavator": "Экскаватор",
   "block.aquatech_machines.extractor": "Экстрактор",
   "block.aquatech_machines.synthesizer": "Гидротермальный Синтезатор",

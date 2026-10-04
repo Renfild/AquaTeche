@@ -419,15 +419,17 @@ public final class HubDataService {
     private static List<HubSnapshot.FishEntry> fishes(ServerPlayer player) {
         List<HubSnapshot.FishEntry> list = new ArrayList<>();
         for (FishShopConfig.FishDef def : FishShopConfig.get().fishes) {
-            int count = FishShopConfig.countInInventory(player, def.id);
+            FishShopConfig.Stock stock = FishShopConfig.stockInInventory(player, def);
             list.add(new HubSnapshot.FishEntry(
                 def.id != null ? def.id : "",
                 def.name != null ? def.name : "",
-                count,
-                def.priceCoins,
+                stock.count(),
+                stock.unitCoins(),
                 def.rarity != null ? def.rarity : "",
                 def.tag != null ? def.tag : "",
-                (float) FishShopConfig.demandFor(def.id)
+                (float) FishShopConfig.demandFor(def.id),
+                stock.totalCoins(),
+                stock.detail()
             ));
         }
         return list;

@@ -107,13 +107,13 @@
 
 [Radiation]
 	#Enable damage from radiation chunk
-	radiationDamageEnabled = true
+	radiationDamageEnabled = false
 	#Enable radiation chunks generation
-	radiationChunksEnabled = true
+	radiationChunksEnabled = false
 	#Enable radiation accumulation on the player
-	radiationAccumulationEnabled = true
+	radiationAccumulationEnabled = false
 	#Enable render radiation chunk
-	radiationRenderEnabled = true
+	radiationRenderEnabled = false
 
 [mechanisms_unique]
 	#Improved Combined Pump: operation length (old value 30)
