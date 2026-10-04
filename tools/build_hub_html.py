@@ -506,11 +506,19 @@ hub_html_raw = r'''<!doctype html>
     .shop-chips{display:flex;flex-wrap:wrap;gap:6px}
     .atlas-pill.active{background:color-mix(in srgb, var(--accent) 22%, transparent);border-color:var(--accent);color:#eafffb}
   __PX_THEME_CSS__
+    /* Живой фон меню: канвас под панелями, у панелей вместо глухой заливки полупрозрачная */
+    .hub{position:relative}
+    #bgfx{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+    .hub>*:not(#bgfx){position:relative;z-index:1}
+    .hub .content{background:transparent!important}
+    .hub .sidebar{background:rgba(13,9,32,.74)!important}
+    .hub .topbar{background:rgba(13,9,32,.86)!important}
 </style>
 </head>
 <body>
 <div class="stage">
   <main class="hub" id="hub">
+    <canvas id="bgfx" aria-hidden="true"></canvas>
     <header class="topbar">
       <div class="brand">
         <span class="brand-mark">
@@ -2318,6 +2326,92 @@ __PASS_VIEW_JS__
   }
   if (window.console && console.error) console.error("[AquaLumen] hub page error:", pageError);
 }
+</script>
+<script>
+(function () {
+  var cv = document.getElementById("bgfx");
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext("2d");
+  var SCALE = 3, FRAME_MS = 42;
+  var W = 0, H = 0, t = 0, last = 0, sky = null, ray = null;
+  var bubbles = [], kelp = [];
+  var root = document.documentElement;
+
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function newBubble(anywhere) {
+    return { x: rnd(0, W), y: anywhere ? rnd(0, H) : H + rnd(2, 20), r: Math.random() < 0.22 ? 3 : 1,
+             v: rnd(0.12, 0.38), ph: rnd(0, 6.28), amp: rnd(1, 4) };
+  }
+  function seed() {
+    var i;
+    bubbles = []; for (i = 0; i < 28; i++) bubbles.push(newBubble(true));
+    kelp = []; for (i = 0; i < 9; i++) kelp.push({ x: i < 5 ? rnd(2, W * 0.22) : rnd(W * 0.78, W - 2), h: rnd(14, 30), ph: rnd(0, 6.28) });
+    sky = ctx.createLinearGradient(0, 0, 0, H);
+    sky.addColorStop(0, "#0b0a24"); sky.addColorStop(0.55, "#0a1233"); sky.addColorStop(1, "#08243a");
+    ray = ctx.createLinearGradient(0, 0, 0, H);
+    ray.addColorStop(0, "rgba(130,210,255,.10)"); ray.addColorStop(1, "rgba(130,210,255,0)");
+  }
+  function resize() {
+    var r = cv.getBoundingClientRect();
+    var nw = Math.max(80, Math.round(r.width / SCALE)), nh = Math.max(60, Math.round(r.height / SCALE));
+    if (nw === W && nh === H) return;
+    W = nw; H = nh; cv.width = W; cv.height = H; seed();
+  }
+  function px(x, y, w, h) { ctx.fillRect(Math.round(x), Math.round(y), w, h); }
+
+  function draw() {
+    var i, b, k, seg;
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = ray;
+    for (i = 0; i < 4; i++) {
+      var x0 = W * (0.08 + 0.26 * i) + Math.sin(t * 0.00028 + i * 1.7) * 9;
+      ctx.beginPath();
+      ctx.moveTo(x0, 0); ctx.lineTo(x0 + 16 + i * 4, 0);
+      ctx.lineTo(x0 - 38 + i * 4, H); ctx.lineTo(x0 - 62 + i * 4, H);
+      ctx.closePath(); ctx.fill();
+    }
+    ctx.fillStyle = "rgba(40,170,140,.22)";
+    for (i = 0; i < kelp.length; i++) {
+      k = kelp[i];
+      for (seg = 0; seg < k.h; seg += 2) {
+        px(k.x + Math.sin(t * 0.0013 + k.ph + seg * 0.22) * (1 + seg * 0.07), H - seg - 2, 1, 2);
+      }
+    }
+    ctx.fillStyle = "rgba(20,110,120,.30)";
+    for (i = 0; i < W; i += 1) {
+      var wy = H - 4 + Math.sin(i * 0.12 + t * 0.0011) * 1.4;
+      px(i, wy, 1, H - wy);
+    }
+    for (i = 0; i < bubbles.length; i++) {
+      b = bubbles[i];
+      var al = 0.16 + 0.22 * (1 - b.y / H);
+      ctx.fillStyle = "rgba(170,230,255," + al.toFixed(3) + ")";
+      var bx = b.x + Math.sin(t * 0.0012 + b.ph) * b.amp;
+      if (b.r === 1) px(bx, b.y, 1, 1);
+      else { px(bx + 1, b.y, 1, 1); px(bx, b.y + 1, 1, 1); px(bx + 2, b.y + 1, 1, 1); px(bx + 1, b.y + 2, 1, 1); }
+    }
+  }
+  function step(dt) {
+    var i, b, n = dt / FRAME_MS;
+    for (i = 0; i < bubbles.length; i++) {
+      b = bubbles[i]; b.y -= b.v * n;
+      if (b.y < -4) bubbles[i] = newBubble(false);
+    }
+  }
+  function frame(now) {
+    window.requestAnimationFrame(frame);
+    if (document.hidden) return;
+    var calm = root.classList.contains("reduce-motion");
+    if (now - last < FRAME_MS) return;
+    var dt = Math.min(200, now - last); last = now;
+    resize();
+    if (!calm) { t = now; step(dt); }
+    draw();
+  }
+  resize();
+  window.addEventListener("resize", resize);
+  window.requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>'''
