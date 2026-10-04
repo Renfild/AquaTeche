@@ -1,5 +1,5 @@
 {
-  "version": "2.9.441",
+  "version": "2.9.442",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -36,9 +36,9 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
-      "md5": "20f768bf858aad86518965117e9a0176",
-      "size": 2586395,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
+      "md5": "0b37fe9dad8ce61db86838a3ff639630",
+      "size": 2586941,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.74-alpha.jar"
     },
     {
@@ -57,16 +57,16 @@
     },
     {
       "path": "mods/aquatech_machines-1.0.11.jar",
-      "md5": "9afb8a90298b66637bac97404f369134",
-      "size": 320010,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/aquatech_machines-1.0.11.jar",
+      "md5": "de69985da10444cbb862c301875dc7e6",
+      "size": 320321,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/aquatech_machines-1.0.11.jar",
       "asset": "aquatech_machines-1.0.11.jar"
     },
     {
       "path": "mods/aquatech_ui-1.0.113.jar",
-      "md5": "6da835d411d80eb7f1fab53671e78c7f",
-      "size": 3784270,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/aquatech_ui-1.0.113.jar",
+      "md5": "ddf7d61c585bc709aff37b4fd5ccc0cb",
+      "size": 3785297,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/aquatech_ui-1.0.113.jar",
       "asset": "aquatech_ui-1.0.113.jar"
     },
     {
@@ -350,6 +350,13 @@
       "asset": "IndustrialUpgrade-1.20.1-3.4.0.11.jar"
     },
     {
+      "path": "mods/InventoryProfilesNext-forge-1.20-1.10.20.jar",
+      "md5": "7e883e59d6e544574ef58c52562881a9",
+      "size": 1457354,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/InventoryProfilesNext-forge-1.20-1.10.20.jar",
+      "asset": "InventoryProfilesNext-forge-1.20-1.10.20.jar"
+    },
+    {
       "path": "mods/inventorysorter-1.20.1-23.1.9.jar",
       "md5": "20ed7cabda94fdf41da01a38e1202dd2",
       "size": 55856,
@@ -385,11 +392,25 @@
       "asset": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar"
     },
     {
+      "path": "mods/kotlinforforge-4.12.0-all.jar",
+      "md5": "d6a40dede74edbe646b34a1bafd53b4d",
+      "size": 7442998,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/kotlinforforge-4.12.0-all.jar",
+      "asset": "kotlinforforge-4.12.0-all.jar"
+    },
+    {
       "path": "mods/kubejs-forge-2001.6.5-build.26.jar",
       "md5": "64ee6615f19fb9b2b11fee8b7385eaaf",
       "size": 1658792,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.404/kubejs-forge-2001.6.5-build.26.jar",
       "asset": "kubejs-forge-2001.6.5-build.26.jar"
+    },
+    {
+      "path": "mods/libIPN-forge-1.20-4.0.2.jar",
+      "md5": "ef3a86f4867dba031dd6adef7e45d396",
+      "size": 693301,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/libIPN-forge-1.20-4.0.2.jar",
+      "asset": "libIPN-forge-1.20-4.0.2.jar"
     },
     {
       "path": "mods/LibX-1.20.1-5.0.14.jar",
@@ -589,9 +610,9 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "f044f5bd36ec574c6b29a157b662fc33",
-      "size": 973251,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/config__aqualumen__hub.html",
+      "md5": "28344e9667fd98ecc59b436d8dc23057",
+      "size": 973800,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/config__aqualumen__hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
@@ -624,9 +645,9 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "f044f5bd36ec574c6b29a157b662fc33",
-      "size": 973251,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/config__aqualumen__html__hub.html",
+      "md5": "28344e9667fd98ecc59b436d8dc23057",
+      "size": 973800,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/config__aqualumen__html__hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
     {
@@ -883,9 +904,9 @@
     },
     {
       "path": "kubejs/client_scripts/add_fishing_resource_tooltips.js",
-      "md5": "d2ecc0e4de9e28420d88722234561578",
-      "size": 5961,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.404/kubejs__client_scripts__add_fishing_resource_tooltips.js",
+      "md5": "33d5cb9dbb73838214e3c9ac969d6165",
+      "size": 2074,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/kubejs__client_scripts__add_fishing_resource_tooltips.js",
       "asset": "kubejs__client_scripts__add_fishing_resource_tooltips.js"
     },
     {
@@ -988,9 +1009,9 @@
     },
     {
       "path": "kubejs/server_scripts/42_aquatech_onboarding.js",
-      "md5": "49f96c56c699204f13b83e18308e5484",
-      "size": 11288,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/kubejs__server_scripts__42_aquatech_onboarding.js",
+      "md5": "c205a6450e7d3cf8037739398b9ebc1c",
+      "size": 11344,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.442/kubejs__server_scripts__42_aquatech_onboarding.js",
       "asset": "kubejs__server_scripts__42_aquatech_onboarding.js"
     },
     {
