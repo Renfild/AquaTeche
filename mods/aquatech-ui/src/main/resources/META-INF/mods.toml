@@ -24,6 +24,13 @@ description='''Ocean-themed LoliLand-style UI: custom Tab, HUD, nametags and cha
     side="BOTH"
 
 [[dependencies.aquatech_ui]]
+    modId="geckolib"
+    mandatory=true
+    versionRange="[4.8,5)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.aquatech_ui]]
     modId="luckperms"
     mandatory=false
     versionRange="[5.0,)"

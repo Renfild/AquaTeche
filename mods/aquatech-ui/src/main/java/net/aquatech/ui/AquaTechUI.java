@@ -6,6 +6,7 @@ import net.aquatech.ui.network.NetworkHandler;
 import net.aquatech.ui.registry.ModBlockEntities;
 import net.aquatech.ui.registry.ModBlocks;
 import net.aquatech.ui.registry.ModCreativeTabs;
+import net.aquatech.ui.registry.ModEntities;
 import net.aquatech.ui.registry.ModItems;
 import net.aquatech.ui.registry.ModMenuTypes;
 import net.aquatech.ui.registry.ModSounds;
@@ -40,6 +41,7 @@ public class AquaTechUI {
         ModBlocks.register(modBus);
         ModItems.register(modBus);
         ModBlockEntities.register(modBus);
+        ModEntities.register(modBus);
         ModMenuTypes.register(modBus);
         if (FMLEnvironment.dist == Dist.CLIENT) {
             ModCreativeTabs.register(modBus);

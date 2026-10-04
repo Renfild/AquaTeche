@@ -44,6 +44,9 @@ public final class LumenClient {
     @Nullable
     private static HubSnapshot snapshot;
     private static long snapshotReceivedAt;
+    private static final String DEFAULT_TAB = "profile";
+    /** Вкладка, которую просил открыть последний {@link #openScreen}; нужна, пока снимок хаба ещё не пришёл. */
+    private static String requestedTab = DEFAULT_TAB;
 
     private LumenClient() {
     }
@@ -74,11 +77,13 @@ public final class LumenClient {
     public static void acceptSync(HubSnapshot incoming, boolean openScreen) {
         snapshot = incoming;
         snapshotReceivedAt = System.currentTimeMillis();
+        String tab = requestedTab;
+        requestedTab = DEFAULT_TAB;
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.screen instanceof HubSnapshotScreen hub) {
             hub.refresh(incoming);
         } else if (openScreen) {
-            minecraft.setScreen(HubScreenFactory.create("profile"));
+            minecraft.setScreen(HubScreenFactory.create(tab));
         }
     }
 
@@ -92,6 +97,7 @@ public final class LumenClient {
     }
 
     public static void openScreen(String initialTab) {
+        requestedTab = initialTab;
         sendAction("hub.open", "");
         if (snapshot != null) {
             Minecraft.getInstance().setScreen(HubScreenFactory.create(initialTab));

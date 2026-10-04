@@ -129,6 +129,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly files("libs/mcef-forge-2.1.6-1.20.1.jar")
     compileOnly files("libs/jei-1.20.1-forge-15.21.0.144.jar")
+    compileOnly files("libs/geckolib-forge-1.20.1-4.8.4.jar")
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
 
