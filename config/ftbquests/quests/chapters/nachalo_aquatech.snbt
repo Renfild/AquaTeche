@@ -1,0 +1,1058 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "nachalo_aquatech"
+	group: ""
+	icon: "starcatcher:bamboo_rod"
+	id: "A7C0000000000001"
+	order_index: 0
+	quests: [
+		{
+			description: [
+				"Начни с плота. Бамбуковая удочка ловит землю, булыжник, глину, бамбук и саженцы."
+				"Нужны блок земли и саженец дуба. Лови, пока оба не окажутся в инвентаре."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:dirt"
+			id: "A7C1000000000001"
+			rewards: [
+				{
+					id: "A7C3000000010001"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 8
+					id: "A7C3000000010002"
+					item: "minecraft:bone_meal"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000010001"
+					item: "minecraft:dirt"
+					type: "item"
+				}
+				{
+					id: "A7C2000000010002"
+					item: "minecraft:oak_sapling"
+					type: "item"
+				}
+			]
+			title: "Земля и саженец"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["A7C1000000000001"]
+			description: [
+				"Положи землю на плот и посади саженец. Костная мука ускоряет рост."
+				"Пока дерево растёт, лови рыбу: дальше всё равно понадобятся нитки и руда."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:oak_sapling"
+			id: "A7C1000000000002"
+			rewards: [
+				{
+					id: "A7C3000000020001"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 8
+					id: "A7C3000000020002"
+					item: "minecraft:bone_meal"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000020001"
+					title: "Посадить дуб"
+					type: "checkmark"
+				}
+			]
+			title: "Посади дуб"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["A7C1000000000002"]
+			description: [
+				"Руби выросший дуб и крафти доски. В улове брёвен нет, так что дерево единственный источник дерева."
+				"Восьми досок хватит на верстак и сундук."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:oak_log"
+			id: "A7C1000000000003"
+			rewards: [
+				{
+					id: "A7C3000000030001"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 16
+					id: "A7C3000000030002"
+					item: "minecraft:stick"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "A7C2000000030001"
+					item: "minecraft:oak_planks"
+					type: "item"
+				}
+			]
+			title: "Брёвна и доски"
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["A7C1000000000003"]
+			description: [
+				"Верстак нужен для всех рецептов 3×3. Палки идут в инструменты и краник."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:crafting_table"
+			id: "A7C1000000000004"
+			rewards: [
+				{
+					id: "A7C3000000040001"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 16
+					id: "A7C3000000040002"
+					item: "minecraft:oak_planks"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000040001"
+					item: "minecraft:crafting_table"
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "A7C2000000040002"
+					item: "minecraft:stick"
+					type: "item"
+				}
+			]
+			title: "Палки и верстак"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["A7C1000000000004"]
+			description: [
+				"Улов быстро забивает инвентарь, поэтому поставь сундук для запасов."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:chest"
+			id: "A7C1000000000005"
+			rewards: [
+				{
+					id: "A7C3000000050001"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 6
+					id: "A7C3000000050002"
+					item: "minecraft:bread"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000050001"
+					item: "minecraft:chest"
+					type: "item"
+				}
+			]
+			title: "Сундук"
+			x: 4.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["A7C1000000000005"]
+			description: [
+				"Ставь доски к краю плота. Места должно хватить на сундук, печь и грядку."
+				"Чем больше площадь, тем проще потом ставить машины."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:oak_planks"
+			id: "A7C1000000000006"
+			rewards: [
+				{
+					id: "A7C3000000060001"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 300"
+					icon: "minecraft:gold_nugget"
+					id: "A7C3000000060002"
+					title: "300 монет"
+					type: "command"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000060001"
+					title: "Расширить плот"
+					type: "checkmark"
+				}
+			]
+			title: "Расширь плот"
+			x: 3.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["A7C1000000000006"]
+			description: [
+				"Печь делается из 8 булыжников, а булыжник ловит бамбуковая удочка."
+				"Топливом подойдут доски, брёвна и уголь."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:furnace"
+			id: "A7C1000000000007"
+			rewards: [
+				{
+					id: "A7C3000000070001"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 8
+					id: "A7C3000000070002"
+					item: "minecraft:coal"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000070001"
+					item: "minecraft:furnace"
+					type: "item"
+				}
+			]
+			title: "Сделай печь"
+			x: 1.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["A7C1000000000007"]
+			description: [
+				"Поймай медную руду и расплавь её в печи. Медь идёт на бамбуковую удочку и на скромную."
+				"Нужно три слитка: один на запасную бамбуковую, два на скромную."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:copper_ingot"
+			id: "A7C1000000000008"
+			rewards: [
+				{
+					id: "A7C3000000080001"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 4
+					id: "A7C3000000080002"
+					item: "minecraft:bamboo"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 3L
+					id: "A7C2000000080001"
+					item: "minecraft:copper_ingot"
+					type: "item"
+				}
+			]
+			title: "Переплавь медь"
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["A7C1000000000008"]
+			description: [
+				"Нитки тоже ловит бамбуковая удочка. На бамбуковую удочку нужно 2, на скромную 1."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:string"
+			id: "A7C1000000000009"
+			rewards: [
+				{
+					id: "A7C3000000090001"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 8
+					id: "A7C3000000090002"
+					item: "minecraft:clay_ball"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 6L
+					id: "A7C2000000090001"
+					item: "minecraft:string"
+					type: "item"
+				}
+			]
+			title: "Нитки"
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["A7C1000000000009"]
+			description: [
+				"Любая рыба StarCatcher подходит. Лови, сколько хочется: рыба нужна и в пищу, и на продажу."
+			]
+			entity_vis_size: 1.0f
+			icon: "starcatcher:aquamarine_pike"
+			id: "A7C100000000000A"
+			rewards: [
+				{
+					id: "A7C30000000A0001"
+					type: "xp"
+					xp: 25
+				}
+			]
+			tasks: [
+				{
+					id: "A7C20000000A0001"
+					title: "Поймать рыбу"
+					type: "checkmark"
+				}
+			]
+			title: "Выловить улов"
+			x: 1.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["A7C100000000000A"]
+			description: [
+				"Положи пойманную рыбу в печь и забери жареную. Она сытнее сырой."
+			]
+			entity_vis_size: 1.0f
+			icon: "starcatcher:cooked_starcaught_fish"
+			id: "A7C100000000000B"
+			rewards: [
+				{
+					id: "A7C30000000B0001"
+					type: "xp"
+					xp: 25
+				}
+			]
+			tasks: [
+				{
+					id: "A7C20000000B0001"
+					item: "starcatcher:cooked_starcaught_fish"
+					type: "item"
+				}
+			]
+			title: "Приготовь улов"
+			x: 3.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["A7C100000000000B"]
+			description: [
+				"Сделай вторую бамбуковую удочку: 2 бамбука, 2 нитки и слиток меди."
+				"Скромная удочка забирает бамбуковую при крафте, а для старой доброй понадобятся две скромные. Запасные удочки сэкономят время."
+			]
+			entity_vis_size: 1.0f
+			icon: "starcatcher:bamboo_rod"
+			id: "A7C100000000000C"
+			rewards: [
+				{
+					id: "A7C30000000C0001"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 500"
+					icon: "minecraft:gold_nugget"
+					id: "A7C30000000C0002"
+					title: "500 монет"
+					type: "command"
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "A7C20000000C0001"
+					item: "starcatcher:bamboo_rod"
+					type: "item"
+				}
+			]
+			title: "Запасная удочка"
+			x: 4.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["A7C100000000000C"]
+			description: [
+				"Вернись на спавн к торговцу рыбой и нажми по нему ПКМ. Продать улов можно только ему: вкладка «Рыбалка» в F4 тоже работает, когда торговец рядом."
+				"Монеты тратятся на кейсы и в магазине."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:emerald"
+			id: "A7C100000000000D"
+			rewards: [
+				{
+					id: "A7C30000000D0001"
+					type: "xp"
+					xp: 25
+				}
+			]
+			tasks: [
+				{
+					id: "A7C20000000D0001"
+					title: "Продать рыбу"
+					type: "checkmark"
+				}
+			]
+			title: "Продай рыбу"
+			x: 4.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["A7C100000000000D"]
+			description: [
+				"Открой кейс в меню F4, вкладка «Кейсы». Ключи дают за квесты и события."
+				"В награду за этот квест тебя ждёт ещё один ключ."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:tripwire_hook"
+			id: "A7C100000000000E"
+			rewards: [
+				{
+					id: "A7C30000000E0001"
+					type: "xp"
+					xp: 25
+				}
+				{
+					command: "/quest_reward key {p} starter 1"
+					icon: "minecraft:tripwire_hook"
+					id: "A7C30000000E0002"
+					title: "Ключ кейса"
+					type: "command"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C20000000E0001"
+					title: "Открыть кейс"
+					type: "checkmark"
+				}
+			]
+			title: "Открой кейс"
+			x: 3.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["A7C100000000000E"]
+			description: [
+				"В меню F4, вкладка «События», каждый день три задания. За выполнение платят монетами."
+				"Задание можно заменить на другое за 100 монет."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:clock"
+			id: "A7C100000000000F"
+			rewards: [
+				{
+					id: "A7C30000000F0001"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					id: "A7C20000000F0001"
+					title: "Посмотреть задания дня"
+					type: "checkmark"
+				}
+			]
+			title: "Задания дня"
+			x: 1.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["A7C100000000000F"]
+			description: [
+				"Во вкладке «Пропуск» меню F4 лежат награды по уровням. Бесплатная ветка доступна всем, премиум даёт больше."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:experience_bottle"
+			id: "A7C1000000000010"
+			rewards: [
+				{
+					id: "A7C3000000100001"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 300"
+					icon: "minecraft:gold_nugget"
+					id: "A7C3000000100002"
+					title: "300 монет"
+					type: "command"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000100001"
+					title: "Открыть пропуск"
+					type: "checkmark"
+				}
+			]
+			title: "Пропуск сезона"
+			x: 0.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["A7C1000000000010"]
+			description: [
+				"В субботу и воскресенье идёт недельный турнир: побеждает тот, кто поймал самую тяжёлую рыбу."
+				"Трое лучших получают призы. Следи за вкладкой «События» в F4."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:gold_ingot"
+			id: "A7C1000000000011"
+			rewards: [
+				{
+					id: "A7C3000000110001"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000110001"
+					title: "Узнать про турнир"
+					type: "checkmark"
+				}
+			]
+			title: "Турнир"
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["A7C1000000000011"]
+			description: [
+				"Вкладка «Атлас» в F4 хранит всех пойманных рыб. За вехи атласа выдают монеты."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:book"
+			id: "A7C1000000000012"
+			rewards: [
+				{
+					id: "A7C3000000120001"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000120001"
+					title: "Открыть атлас"
+					type: "checkmark"
+				}
+			]
+			title: "Атлас рыб"
+			x: 1.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["A7C1000000000012"]
+			description: [
+				"Раз в 2-3 часа в открытой воде поднимается светящийся сундук. Над хотбаром видно расстояние и сторону света, а на экране идёт боссбар на 5 минут."
+				"Первый, кто нажмёт по сундуку, забирает 5000-10000 монет и с шансом 30% ключ кейса."
+			]
+			entity_vis_size: 1.0f
+			icon: "aquatech_ui:deep_chest_model"
+			id: "A7C1000000000013"
+			rewards: [
+				{
+					id: "A7C3000000130001"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000130001"
+					title: "Найти сундук глубин"
+					type: "checkmark"
+				}
+			]
+			title: "Сундуки глубин"
+			x: 3.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["A7C1000000000013"]
+			description: [
+				"Иногда на воде появляется косяк: в его круге определённый вид рыбы клюёт активнее. Удочки подходящего тира ловят его с гарантированным бонусом."
+				"Подсказку ищи в баннере F4 на вкладке «События»."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:cod"
+			id: "A7C1000000000014"
+			rewards: [
+				{
+					id: "A7C3000000140001"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 500"
+					icon: "minecraft:gold_nugget"
+					id: "A7C3000000140002"
+					title: "500 монет"
+					type: "command"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000140001"
+					title: "Поймать рыбу в косяке"
+					type: "checkmark"
+				}
+			]
+			title: "Косяки рыб"
+			x: 4.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["A7C1000000000014"]
+			description: [
+				"Каучук нужен для проводов и многих рецептов. Саженец гевеи ловит бамбуковая удочка."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:sapling/rubber_sapling"
+			id: "A7C1000000000015"
+			rewards: [
+				{
+					id: "A7C3000000150001"
+					type: "xp"
+					xp: 25
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000150001"
+					item: "industrialupgrade:sapling/rubber_sapling"
+					type: "item"
+				}
+			]
+			title: "Саженец гевеи"
+			x: 4.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["A7C1000000000015"]
+			description: [
+				"Краник делается из 5 досок. Посади гевею на землю и дождись дерева."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:tools/treetap"
+			id: "A7C1000000000016"
+			rewards: [
+				{
+					id: "A7C3000000160001"
+					type: "xp"
+					xp: 25
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000160001"
+					item: "industrialupgrade:tools/treetap"
+					type: "item"
+				}
+			]
+			title: "Краник"
+			x: 3.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["A7C1000000000016"]
+			description: [
+				"Нажми краником ПКМ по жилке латекса на каучуковом дереве. У обычного дерева жилок мало и они восстанавливаются медленно, у болотных и тропических их больше."
+				"Дальше латекс превращают в каучук: в Древней эре есть бочка и сушилка."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:raw_latex"
+			id: "A7C1000000000017"
+			rewards: [
+				{
+					id: "A7C3000000170001"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 400"
+					icon: "minecraft:gold_nugget"
+					id: "A7C3000000170002"
+					title: "400 монет"
+					type: "command"
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "A7C2000000170001"
+					item: "industrialupgrade:raw_latex"
+					type: "item"
+				}
+			]
+			title: "Добудь латекс"
+			x: 1.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["A7C1000000000017"]
+			description: [
+				"Олово нужно для старой доброй удочки и пластин. Его ловит бамбуковая удочка и все, что выше."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:classicore/tin"
+			id: "A7C1000000000018"
+			rewards: [
+				{
+					id: "A7C3000000180001"
+					type: "xp"
+					xp: 25
+				}
+			]
+			tasks: [
+				{
+					count: 4L
+					id: "A7C2000000180001"
+					item: "industrialupgrade:classicore/tin"
+					type: "item"
+				}
+			]
+			title: "Поймай олово"
+			x: 0.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["A7C1000000000018"]
+			description: [
+				"Рецепт: бамбуковая удочка, 2 слитка меди и нитка."
+				"Скромная ловит железо, уголь и титан. Бамбуковая в рецепте пропадает, поэтому и нужна запасная."
+			]
+			entity_vis_size: 1.0f
+			icon: "starcatcher:humble_rod"
+			id: "A7C1000000000019"
+			rewards: [
+				{
+					id: "A7C3000000190001"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000190001"
+					item: "starcatcher:humble_rod"
+					type: "item"
+				}
+			]
+			title: "Скромная удочка"
+			x: 0.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["A7C1000000000019"]
+			description: [
+				"Скромная удочка ловит титановую и железную руду. Титан пойдёт на наковальню, железо на старую добрую удочку и на обычную наковальню."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:baseore/titanium"
+			id: "A7C100000000001A"
+			rewards: [
+				{
+					id: "A7C30000001A0001"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 5L
+					id: "A7C20000001A0001"
+					item: "industrialupgrade:baseore/titanium"
+					type: "item"
+				}
+				{
+					count: 10L
+					id: "A7C20000001A0002"
+					item: "minecraft:iron_ore"
+					type: "item"
+				}
+			]
+			title: "Титан и железо"
+			x: 1.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["A7C100000000001A"]
+			description: [
+				"Расплавь титановую руду в печи. Пять слитков нужны для наковальни Древней эры."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:itemingots/titanium_ingot"
+			id: "A7C100000000001B"
+			rewards: [
+				{
+					id: "A7C30000001B0001"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 5L
+					id: "A7C20000001B0001"
+					item: "industrialupgrade:itemingots/titanium_ingot"
+					type: "item"
+				}
+			]
+			title: "Переплавь титан"
+			x: 3.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["A7C100000000001B"]
+			description: [
+				"Старая добрая удочка требует 2 скромные удочки, 2 слитка железа, слиток олова и слиток меди. На вторую скромную удочку тоже нужно 2 слитка меди."
+				"Расплавь всё в печи и сделай вторую скромную удочку."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:iron_ingot"
+			id: "A7C100000000001C"
+			rewards: [
+				{
+					id: "A7C30000001C0001"
+					type: "xp"
+					xp: 50
+				}
+			]
+			tasks: [
+				{
+					count: 2L
+					id: "A7C20000001C0001"
+					item: "minecraft:iron_ingot"
+					type: "item"
+				}
+				{
+					id: "A7C20000001C0002"
+					item: "industrialupgrade:itemingots/tin_ingot"
+					type: "item"
+				}
+				{
+					count: 5L
+					id: "A7C20000001C0003"
+					item: "minecraft:copper_ingot"
+					type: "item"
+				}
+			]
+			title: "Слитки для удочки"
+			x: 4.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["A7C100000000001C"]
+			description: [
+				"Рецепт: 2 скромные удочки, 2 слитка железа, слиток олова и слиток меди."
+				"Она ловит шпинель, иттрий, стронций и редстоун."
+			]
+			entity_vis_size: 1.0f
+			icon: "starcatcher:good_old_rod"
+			id: "A7C100000000001D"
+			rewards: [
+				{
+					id: "A7C30000001D0001"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "A7C30000001D0002"
+					title: "1000 монет"
+					type: "command"
+				}
+				{
+					command: "/quest_reward key {p} starter 1"
+					icon: "minecraft:tripwire_hook"
+					id: "A7C30000001D0003"
+					title: "Ключ кейса"
+					type: "command"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C20000001D0001"
+					item: "starcatcher:good_old_rod"
+					type: "item"
+				}
+			]
+			title: "Старая добрая удочка"
+			x: 4.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["A7C100000000001D"]
+			description: [
+				"Старая добрая ловит обе руды. Из них делается плавильная смесь для плавильни, а шпинель нужна ещё и удочке натуралиста."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:baseore2/yttrium"
+			id: "A7C100000000001E"
+			rewards: [
+				{
+					id: "A7C30000001E0001"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "A7C20000001E0001"
+					item: "industrialupgrade:baseore2/yttrium"
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "A7C20000001E0002"
+					item: "industrialupgrade:baseore/spinel"
+					type: "item"
+				}
+			]
+			title: "Иттрий и шпинель"
+			x: 3.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["A7C100000000001E"]
+			description: [
+				"Рецепт: старая добрая удочка, редстоун, 2 слитка железа, шпинель и слиток олова."
+				"С ней открываются рыбный генератор и рыболов MK-1 из Древней эры."
+			]
+			entity_vis_size: 1.0f
+			icon: "starcatcher:naturalist_rod"
+			id: "A7C100000000001F"
+			rewards: [
+				{
+					id: "A7C30000001F0001"
+					type: "xp"
+					xp: 150
+				}
+			]
+			tasks: [
+				{
+					id: "A7C20000001F0001"
+					item: "starcatcher:naturalist_rod"
+					type: "item"
+				}
+			]
+			title: "Удочка натуралиста"
+			x: 1.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["A7C100000000001F"]
+			description: [
+				"Рецепт: удочка натуралиста, блок слизи, 2 барий, стронций и слиток железа."
+				"Слизь и барий падают с удочки натуралиста."
+			]
+			entity_vis_size: 1.0f
+			icon: "starcatcher:slimed_rod"
+			id: "A7C1000000000020"
+			rewards: [
+				{
+					id: "A7C3000000200001"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 1500"
+					icon: "minecraft:gold_nugget"
+					id: "A7C3000000200002"
+					title: "1500 монет"
+					type: "command"
+				}
+				{
+					command: "/quest_reward key {p} starter 1"
+					icon: "minecraft:tripwire_hook"
+					id: "A7C3000000200003"
+					title: "Ключ кейса"
+					type: "command"
+				}
+			]
+			tasks: [
+				{
+					id: "A7C2000000200001"
+					item: "starcatcher:slimed_rod"
+					type: "item"
+				}
+			]
+			title: "Слизневая удочка"
+			x: 0.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["A7C100000000001E"]
+			description: [
+				"Расплавь иттрий и шпинель в слитки и разбери их на самородки. Плавильная смесь делается из 2 глины, 2 самородков шпинели, 2 самородков иттрия, песка и гравия, получается 4 штуки."
+				"Дальше идёт плавильня и все остальное в Древней эре."
+			]
+			entity_vis_size: 1.0f
+			icon: "industrialupgrade:itemingots/yttrium"
+			id: "A7C1000000000021"
+			rewards: [
+				{
+					id: "A7C3000000210001"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [
+				{
+					count: 8L
+					id: "A7C2000000210001"
+					item: "industrialupgrade:itemingots/spinel_ingot"
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "A7C2000000210002"
+					item: "industrialupgrade:itemingots/yttrium"
+					type: "item"
+				}
+			]
+			title: "Переплавь руды"
+			x: 0.0d
+			y: 12.0d
+		}
+	]
+	title: "Начало"
+}

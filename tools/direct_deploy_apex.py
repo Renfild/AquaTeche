@@ -87,6 +87,7 @@ kubejs_uploads = [
     (ROOT / "kubejs/server_scripts/98_fishing_core_recipe.js", "kubejs/server_scripts/98_fishing_core_recipe.js"),
     (ROOT / "kubejs/server_scripts/41_first_join_hint.js", "kubejs/server_scripts/41_first_join_hint.js"),
     (ROOT / "kubejs/server_scripts/42_aquatech_onboarding.js", "kubejs/server_scripts/42_aquatech_onboarding.js"),
+    (ROOT / "kubejs/server_scripts/43_aquatech_quest_rewards.js", "kubejs/server_scripts/43_aquatech_quest_rewards.js"),
     (ROOT / "server/config/aqualumen-common.toml", "config/aqualumen-common.toml"),
     (ROOT / "server/config/industrialupgrade-common.toml", "config/industrialupgrade-common.toml"),
 ]

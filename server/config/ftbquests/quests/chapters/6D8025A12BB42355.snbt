@@ -11,7 +11,7 @@
 		}
 	}
 	id: "6D8025A12BB42355"
-	order_index: 1
+	order_index: 2
 	quest_links: [ ]
 	quests: [
 		{
@@ -246,6 +246,119 @@
 			}]
 			x: 5.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["6048C28F7E128CE6" "624B8BB138A174A0"]
+			entity_vis_size: 1.0f
+			id: "738EF8D18C9ACB8B"
+			rewards: [
+				{
+					count: 3
+					id: "2068457499CE1DF5"
+					item: {
+						Count: 1
+						id: "aquatech_ui:rate_x4"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "6E612CE661A01FB5"
+					item: {
+						Count: 1
+						id: "starcatcher:good_old_rod"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "332085FED979368A"
+					item: {
+						Count: 1
+						id: "starcatcher:bamboo_rod"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			subtitle: "Автоматизация рыбалки"
+			tasks: [{
+				id: "7A7B2F337D5223A8"
+				item: "aquatech_machines:fisher"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["738EF8D18C9ACB8B"]
+			entity_vis_size: 1.0f
+			id: "0B3C878E8A026BE0"
+			rewards: [
+				{
+					id: "11125C0338C80DA2"
+					item: "industrialupgrade:machines/hybrid_solar_paneliu"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "5CC81F6595E817E2"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "127AD6AE58C37087"
+					item: "industrialupgrade:wiring/copper"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "1BBB61E4437EC07F"
+				item: "aquatech_machines:speed_upgrade_1"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["738EF8D18C9ACB8B"]
+			entity_vis_size: 1.0f
+			id: "3D021B232766966A"
+			rewards: [
+				{
+					id: "3E89A75D8D020B89"
+					item: "industrialupgrade:machines/ultimate_solar_paneliu"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "06E90D3351AE807A"
+					item: "industrialupgrade:crafting_elements/crafting_272_element"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "238A3BDE96C75717"
+					item: "industrialupgrade:wiring/copper1"
+					random_bonus: 16
+					type: "item"
+				}
+			]
+			tasks: [{
+				consume_items: false
+				id: "59CF997C2C6A458A"
+				item: "aquatech_machines:speed_upgrade_4"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 6.5d
 		}
 	]
 	title: "Удочки"

@@ -8,75 +8,107 @@
 	images: [
 		{
 			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
+			image: "industrialupgrade:block/gas_reactor/casing/adv_casing_side"
 			rotation: 0.0d
 			width: 1.0d
-			x: -1.5d
+			x: 2.5d
 			y: 7.5d
 		}
 		{
 			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
+			image: "botania:block/apothecary_default_side"
 			rotation: 0.0d
 			width: 1.0d
-			x: -0.5d
-			y: 7.5d
+			x: 2.5d
+			y: 8.0d
 		}
 		{
 			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
-			rotation: 0.0d
-			width: 1.0d
-			x: -1.0d
-			y: 7.5d
-		}
-		{
-			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
+			image: "minecraft:item/light_01"
 			rotation: 0.0d
 			width: 1.0d
 			x: 0.0d
+			y: -6.5d
+		}
+		{
+			height: 1.0d
+			image: "minecraft:item/light_02"
+			rotation: 0.0d
+			width: 1.0d
+			x: 17.5d
+			y: -6.5d
+		}
+		{
+			height: 1.0d
+			image: "botania:block/apothecary_default_side"
+			rotation: 0.0d
+			width: 1.0d
+			x: -2.5d
+			y: 8.0d
+		}
+		{
+			height: 1.0d
+			image: "alexscaves:block/energized_galena_top_neutral"
+			rotation: 0.0d
+			width: 1.0d
+			x: 10.5d
 			y: 7.5d
 		}
 		{
 			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
+			image: "alexscaves:block/energized_galena_top_neutral"
 			rotation: 0.0d
 			width: 1.0d
-			x: 0.5d
+			x: 10.0d
+			y: 7.0d
+		}
+		{
+			height: 1.0d
+			image: "alexscaves:block/energized_galena_top_neutral"
+			rotation: 0.0d
+			width: 1.0d
+			x: 9.5d
 			y: 7.5d
 		}
 		{
 			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
+			image: "alexscaves:block/energized_galena_top_neutral"
 			rotation: 0.0d
 			width: 1.0d
-			x: 1.0d
-			y: 7.5d
+			x: 10.5d
+			y: 8.0d
 		}
 		{
 			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
+			image: "alexscaves:block/energized_galena_top_neutral"
 			rotation: 0.0d
 			width: 1.0d
-			x: 1.5d
-			y: 7.5d
+			x: 9.5d
+			y: 8.0d
 		}
 		{
 			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
+			image: "alexscaves:block/energized_galena_top_neutral"
 			rotation: 0.0d
 			width: 1.0d
-			x: 2.0d
-			y: 7.5d
+			x: 10.0d
+			y: 8.0d
 		}
 		{
 			height: 1.0d
-			image: "botania:block/alfheim_portal_activated"
+			image: "alexscaves:block/energized_galena_top_neutral"
 			rotation: 0.0d
 			width: 1.0d
-			x: -2.0d
-			y: 7.5d
+			x: 9.5d
+			y: 7.0d
+		}
+		{
+			height: 1.0d
+			image: "alexscaves:block/energized_galena_top_neutral"
+			rotation: 0.0d
+			width: 1.0d
+			x: 10.5d
+			y: 7.0d
 		}
 	]
 	order_index: 1
@@ -216,6 +248,7 @@
 			y: -3.0d
 		}
 		{
+			dependencies: ["4FF72D7784B42AA0"]
 			description: [
 				"Кремниевая заготовка для электронной цепочки. После"
 				"точной обработки становится основой для плат и более"
@@ -254,8 +287,8 @@
 				type: "item"
 			}]
 			title: "Примитивный выращиватель кристаллов"
-			x: 13.5d
-			y: -2.5d
+			x: 0.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["0F76A4CF5C3470F3"]
@@ -451,7 +484,7 @@
 			y: 5.5d
 		}
 		{
-			dependencies: ["7F0186836B107C12"]
+			dependencies: ["023EC48B66A6C5F2"]
 			description: [
 				"Кислород используется как окислитель и реагент в"
 				"химических машинах: электролизёрах, газовом комбайнере,"
@@ -492,14 +525,11 @@
 				type: "item"
 			}]
 			title: "Окислитель, которым мы дышим"
-			x: -2.5d
+			x: 5.0d
 			y: 7.5d
 		}
 		{
-			dependencies: [
-				"6DCB07095E764CFF"
-				"7F0186836B107C12"
-			]
+			dependencies: ["7F0186836B107C12"]
 			description: [
 				"Проводит реакции с газами внутри рабочей камеры."
 				"Работает с газовыми реагентами и предметами, когда"
@@ -542,6 +572,7 @@
 			y: 7.5d
 		}
 		{
+			dependencies: ["023EC48B66A6C5F2"]
 			description: [
 				"Триоксид серы получается в газовом комбайнере из"
 				"сернистого оксида и кислорода. Затем он смешивается с"
@@ -581,10 +612,11 @@
 				type: "item"
 			}]
 			title: "Sulfurtrioxide"
-			x: 20.5d
-			y: -2.5d
+			x: 2.5d
+			y: 10.0d
 		}
 		{
+			dependencies: ["023EC48B66A6C5F2"]
 			description: [
 				"Раствор медного сульфата — жидкий медьсодержащий"
 				"реагент. Используется в жидкостных интеграторах и"
@@ -624,11 +656,11 @@
 				type: "item"
 			}]
 			title: "Сульфат меди"
-			x: 21.5d
-			y: -2.5d
+			x: 5.0d
+			y: 9.5d
 		}
 		{
-			dependencies: ["2B8BAE8DE8904886"]
+			dependencies: ["7F0186836B107C12"]
 			description: [
 				"Пустая плата для электроники. На неё наносятся дорожки"
 				"и устанавливаются компоненты, прежде чем плата станет"
@@ -666,9 +698,9 @@
 				item: "industrialupgrade:crafting_elements/crafting_487_element"
 				type: "item"
 			}]
-			title: "Circuit Board"
-			x: 22.5d
-			y: -2.5d
+			title: "Печатная плата"
+			x: -2.5d
+			y: 7.5d
 		}
 		{
 			dependencies: ["54F899A90B74194B"]
@@ -710,10 +742,11 @@
 				type: "item"
 			}]
 			title: "Примитивный программированный стол"
-			x: 23.5d
-			y: -2.5d
+			x: -2.5d
+			y: 10.0d
 		}
 		{
+			dependencies: ["54F899A90B74194B"]
 			description: [
 				"Плата с записанной логикой управления. Используется в"
 				"механизмах и электронных сборках как готовый"
@@ -752,16 +785,17 @@
 				type: "item"
 			}]
 			title: "Programmed Circuit Board"
-			x: 24.5d
-			y: -2.5d
+			x: -5.0d
+			y: 7.5d
 		}
 		{
-			dependencies: ["06E3F57D19E99359"]
+			dependencies: ["6F51B358741C21C5"]
 			description: [
 				"Паровая машина для обработки тяжёлых руд. Разделяет"
 				"плотное сырьё на полезные части без электрической сети."
 			]
 			entity_vis_size: 1.0f
+			hide_dependency_lines: true
 			id: "7D49F9850EB90C01"
 			rewards: [
 				{
@@ -787,6 +821,16 @@
 					type: "xp"
 					xp: 50
 				}
+				{
+					id: "322ADBA65F0B17B4"
+					item: "industrialupgrade:crafting_elements/crafting_51_element"
+					type: "item"
+				}
+				{
+					id: "76C4E41185704810"
+					item: "industrialupgrade:blockresource/steam_machine"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "1841515E4B734371"
@@ -794,8 +838,8 @@
 				type: "item"
 			}]
 			title: "Паровой сепаратор"
-			x: 24.5d
-			y: -0.5d
+			x: 17.5d
+			y: -5.0d
 		}
 		{
 			dependencies: ["7D49F9850EB90C01"]
@@ -836,11 +880,12 @@
 				item: "industrialupgrade:crafting_elements/crafting_498_element"
 				type: "item"
 			}]
-			title: "Impurity Coal Dust"
-			x: 22.5d
-			y: 0.5d
+			title: "Угольная пыль?"
+			x: 17.5d
+			y: -3.5d
 		}
 		{
+			dependencies: ["63284E3AD63A46AE"]
 			description: [
 				"Подготовленная углеродная смесь для металлургии. Даёт"
 				"контролируемый углеродный состав при работе со сталью и"
@@ -878,11 +923,12 @@
 				item: "industrialupgrade:crafting_elements/crafting_499_element"
 				type: "item"
 			}]
-			title: "Alloy Coal Dust"
-			x: 22.0d
-			y: 1.5d
+			title: "Пыль для сплавов"
+			x: 17.5d
+			y: -1.5d
 		}
 		{
+			dependencies: ["1591ED484B93AE1C"]
 			description: [
 				"Прочный конструкционный металл для корпусов,"
 				"инструментов и машин. Хорошо подходит для механизмов,"
@@ -921,11 +967,11 @@
 				type: "item"
 			}]
 			title: "Стальная оболочка"
-			x: 19.0d
+			x: 19.5d
 			y: 2.0d
 		}
 		{
-			dependencies: ["2594E7FEF47BCFDF"]
+			dependencies: ["1591ED484B93AE1C"]
 			description: [
 				"Прочный молот для ручной обработки жёстких материалов."
 				"Служит дольше ранних молотов и лучше подходит для"
@@ -970,11 +1016,11 @@
 				type: "item"
 			}]
 			title: "Стальной молот"
-			x: 18.0d
-			y: 0.5d
+			x: 15.5d
+			y: 2.0d
 		}
 		{
-			dependencies: ["2594E7FEF47BCFDF"]
+			dependencies: ["7905D85C31A49354"]
 			description: [
 				"Усиленная наковальня для тяжёлой ручной обработки."
 				"Рассчитана на прочные сплавы и операции, где обычная"
@@ -1013,10 +1059,11 @@
 				type: "item"
 			}]
 			title: "Укреплённая наковальня"
-			x: 20.119999999999997d
-			y: 2.75d
+			x: 15.5d
+			y: 4.5d
 		}
 		{
+			dependencies: ["7AAB1469AB4CE7CC"]
 			description: [
 				"Плавит руды и материалы в расплавленные металлы."
 				"Работает с огнеупорной обработкой и выдаёт жидкий"
@@ -1048,6 +1095,12 @@
 					type: "xp"
 					xp: 50
 				}
+				{
+					count: 16
+					id: "0D075E73FCF1E758"
+					item: "industrialupgrade:itemplates/iridium_plate"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "3A8AA046843D78F9"
@@ -1055,8 +1108,8 @@
 				type: "item"
 			}]
 			title: "Тугоплавкая печь"
-			x: 22.0d
-			y: 3.0d
+			x: 15.5d
+			y: 7.5d
 		}
 		{
 			dependencies: ["342CD2D31CA72D4E"]
@@ -1097,8 +1150,8 @@
 				type: "item"
 			}]
 			title: "Мини-плавильня"
-			x: 24.0d
-			y: 2.5d
+			x: 17.0d
+			y: 9.0d
 		}
 		{
 			dependencies: ["2594E7FEF47BCFDF"]
@@ -1140,10 +1193,11 @@
 				type: "item"
 			}]
 			title: "Стол для пайки электроники"
-			x: 17.5d
-			y: 2.0d
+			x: 19.5d
+			y: 4.5d
 		}
 		{
+			dependencies: ["48ADCF77B70D29D0"]
 			description: [
 				"Генерирует каждые 2 тика: потребляет 1 мб воды,"
 				"производит 2 мб пара."
@@ -1182,8 +1236,8 @@
 				type: "item"
 			}]
 			title: "Паровой преобразователь пара "
-			x: 17.5d
-			y: 5.5d
+			x: 21.0d
+			y: 9.0d
 		}
 		{
 			dependencies: ["72A89907ED8A6FCF"]
@@ -1225,8 +1279,8 @@
 				type: "item"
 			}]
 			title: "Паровой генератор на торфе"
-			x: 18.5d
-			y: 6.5d
+			x: 22.5d
+			y: 7.5d
 		}
 		{
 			dependencies: ["72A89907ED8A6FCF"]
@@ -1266,10 +1320,11 @@
 				type: "item"
 			}]
 			title: "Паровая помпа"
-			x: 16.5d
-			y: 6.5d
+			x: 22.5d
+			y: 10.0d
 		}
 		{
+			dependencies: ["6ED4B26A45EF6E28"]
 			description: [
 				"Генерирует каждый тик: потребляет 1 мб воды,"
 				"производит 2 мб пара. Для работы требуется нагрев от"
@@ -1307,10 +1362,11 @@
 				type: "item"
 			}]
 			title: "Контроллер парового котла"
-			x: 15.5d
-			y: 6.5d
+			x: 24.5d
+			y: 10.0d
 		}
 		{
+			dependencies: ["4E0B14D08AFD7E00"]
 			description: [
 				"Передаёт пар только со стороны, с которой был"
 				"установлен. С других сторон только отправляет пар."
@@ -1349,10 +1405,11 @@
 				type: "item"
 			}]
 			title: "Паровое хранилище"
-			x: 14.5d
-			y: 6.5d
+			x: 24.5d
+			y: 7.5d
 		}
 		{
+			dependencies: ["62155555A478AC7F"]
 			description: ["Потребляет электричество."]
 			entity_vis_size: 1.0f
 			id: "794D11070E2A822E"
@@ -1387,10 +1444,11 @@
 				type: "item"
 			}]
 			title: "Паровой зарядник кристаллов"
-			x: 16.5d
-			y: 2.0d
+			x: 19.5d
+			y: 7.5d
 		}
 		{
+			dependencies: ["794D11070E2A822E"]
 			description: [
 				"Преобразует обычный пар в перегретый. Использует пар,"
 				"предназначенный для паровых механизмов."
@@ -1428,10 +1486,11 @@
 				type: "item"
 			}]
 			title: "Паровой нагреватель жидкостей"
-			x: 16.5d
-			y: 1.0d
+			x: 18.0d
+			y: 9.0d
 		}
 		{
+			dependencies: ["064B68FB95F784E2"]
 			description: [
 				"Прочный сплав для деталей с высокой нагрузкой."
 				"Выдерживает температуру и износ лучше обычной стали."
@@ -1462,15 +1521,21 @@
 					type: "xp"
 					xp: 50
 				}
+				{
+					count: 6
+					id: "7283442E1884F625"
+					item: "industrialupgrade:itemingots/titanium_ingot"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "7FE3F2DFBF31F168"
 				item: "industrialupgrade:crafting_elements/crafting_503_element"
 				type: "item"
 			}]
-			title: "Titanium Steel"
-			x: 15.5d
-			y: 2.0d
+			title: "Титановый сплав"
+			x: 14.0d
+			y: 9.0d
 		}
 		{
 			dependencies: ["49DE0F9516C8E39C"]
@@ -1512,10 +1577,11 @@
 				type: "item"
 			}]
 			title: "Стол для сборки электроники"
-			x: 14.5d
-			y: 2.0d
+			x: 12.5d
+			y: 10.0d
 		}
 		{
+			dependencies: ["09DAFF7BBFA132DA"]
 			description: [
 				"Базовая электронная схема. Содержит простую"
 				"управляющую логику для электрических машин и улучшений."
@@ -1552,11 +1618,12 @@
 				item: "industrialupgrade:crafting_elements/crafting_272_element"
 				type: "item"
 			}]
-			title: "Electronic Circuit"
-			x: 13.5d
-			y: 2.0d
+			title: "Электросхема"
+			x: 10.0d
+			y: 10.0d
 		}
 		{
+			dependencies: ["49DE0F9516C8E39C"]
 			description: [
 				"Корпус машины, внутри которого размещаются рабочие"
 				"слоты, энергия и механические части. Используется как"
@@ -1594,9 +1661,9 @@
 				item: "industrialupgrade:crafting_elements/crafting_137_element"
 				type: "item"
 			}]
-			title: "Machine Casing"
-			x: 12.0d
-			y: 2.0d
+			title: "Обшивка корпуса"
+			x: 12.5d
+			y: 7.5d
 		}
 		{
 			dependencies: ["7F6BE6627BFC2CF5"]
@@ -1615,7 +1682,7 @@
 				}
 				{
 					id: "7327B2F8378C7635"
-					item: "industrialupgrade:solar_energy"
+					item: "industrialupgrade:machines/ultimate_solar_paneliu"
 					type: "item"
 				}
 				{
@@ -1636,11 +1703,11 @@
 				type: "item"
 			}]
 			title: "Контроллер доменной печи"
-			x: 11.0d
-			y: 2.0d
+			x: 10.0d
+			y: 7.5d
 		}
 		{
-			dependencies: ["4FF72D7784B42AA0"]
+			dependencies: ["6CC7B7547E8EC240"]
 			description: ["Заготовка для дальшейших механизмов"]
 			entity_vis_size: 1.0f
 			id: "0F76A4CF5C3470F3"
@@ -1671,7 +1738,7 @@
 			}]
 			title: "Кремний?"
 			x: 0.0d
-			y: 1.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["6F51B358741C21C5"]
@@ -1698,6 +1765,145 @@
 			}]
 			x: 0.0d
 			y: -1.0d
+		}
+		{
+			dependencies: ["7EE772EF0F85EA22"]
+			entity_vis_size: 1.0f
+			id: "1591ED484B93AE1C"
+			rewards: [
+				{
+					count: 16
+					id: "53F5B536C20A0D9F"
+					item: "industrialupgrade:crafting_elements/crafting_499_element"
+					type: "item"
+				}
+				{
+					count: 6
+					id: "221A62F9A186AB9F"
+					item: "industrialupgrade:itemplates/iridium_plate"
+					type: "item"
+				}
+			]
+			subtitle: "Ваша первая Сталь!"
+			tasks: [{
+				consume_items: true
+				count: 4L
+				id: "4E948042D0E40946"
+				item: "industrialupgrade:itemingots/steel_ingot"
+				type: "item"
+			}]
+			x: 17.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["3D0D2D52D8401DDC"]
+			entity_vis_size: 1.0f
+			id: "0447DBB400FD44EA"
+			rewards: [{
+				count: 16
+				id: "03E1DEAB1C08F2AC"
+				item: "industrialupgrade:itemplates/iron_plate"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5CC0B0D66C8EC375"
+				item: "industrialupgrade:compressor/compressor"
+				type: "item"
+			}]
+			x: -4.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["3D0D2D52D8401DDC"]
+			entity_vis_size: 1.0f
+			id: "1D931D645B78E360"
+			rewards: [
+				{
+					count: 16
+					id: "5C31F543073CEF6C"
+					item: "industrialupgrade:itemplates/titanium_plate"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "16F2689F8BA190C7"
+					item: "industrialupgrade:alloyplate/ferromanganese"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "23D8FA6D705BB68A"
+				item: "industrialupgrade:basemachine3/rolling_machine"
+				type: "item"
+			}]
+			x: -4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["60AF236CF2611884" "3D0D2D52D8401DDC"]
+			description: [
+				"Возьми в руку сок латекса и нажми ПКМ по машине. Через время в баке появится жидкий латекс."
+			]
+			entity_vis_size: 1.0f
+			id: "7E3FBED40A61205B"
+			rewards: [{
+				count: 32
+				id: "30264AAB825ABAAE"
+				item: "industrialupgrade:crafting_elements/crafting_271_element"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2F13521F3FF916A0"
+				item: "industrialupgrade:block_squeezer/squeezer"
+				type: "item"
+			}]
+			x: -4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["3D0D2D52D8401DDC"]
+			entity_vis_size: 1.0f
+			id: "082AEE6D24AC76E7"
+			rewards: [{
+				count: 32
+				id: "084EF795F8DD1E44"
+				item: "industrialupgrade:itemcell/itemcell"
+				type: "item"
+			}]
+			tasks: [{
+				id: "481A61614A712A31"
+				item: "industrialupgrade:primal_fluid_heater/primal_fluid_heater"
+				type: "item"
+			}]
+			x: -4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6F6AC05D36092CB2" "3D0D2D52D8401DDC"]
+			entity_vis_size: 1.0f
+			id: "7B5B49CC51F78251"
+			rewards: [
+				{
+					count: 3
+					id: "6631BCE98CF4B83A"
+					item: "minecraft:gold_block"
+					type: "item"
+				}
+				{
+					count: 27
+					id: "7DE53675A62CAB71"
+					item: "industrialupgrade:itemingots/silver_ingot"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 12L
+				id: "7B27F9E13942BF2D"
+				item: { Count: 12, id: "industrialupgrade:itemingots/electrum_ingot" }
+				type: "item"
+			}]
+			x: -4.0d
+			y: 1.0d
 		}
 	]
 	title: "Паровая эпоха"
