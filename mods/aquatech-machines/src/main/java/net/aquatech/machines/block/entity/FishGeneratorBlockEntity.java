@@ -16,9 +16,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -28,8 +30,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Рыбный генератор: сжигает рыбу и превращает её в FE. Не принимает энергию снаружи, отдаёт её соседям
- * (машины сами её тянут, а соседей-приёмников он ещё и подпитывает).
+ * Рыбный генератор: как печка жжёт уголь, дерево и любое горючее (или рыбу) и превращает горение в FE. Не принимает
+ * энергию снаружи, отдаёт её соседям (машины сами её тянут, а соседей-приёмников он ещё и подпитывает).
  */
 public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -51,14 +53,24 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
     private final LazyOptional<ItemStackHandler> fuelOptional = LazyOptional.of(() -> fuel);
 
     private int burnTime;
+    /** Сколько тиков горит текущая единица топлива: нужно экрану для шкалы, у угля и рыбы оно разное. */
+    private int burnTotal;
 
     public FishGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FISH_GENERATOR.get(), pos, state);
     }
 
     public static boolean isFuel(ItemStack stack) {
-        if (stack.isEmpty()) return false;
-        return stack.is(ItemTags.FISHES) || FishRosterService.isCatalogFish(BuiltInRegistries.ITEM.getKey(stack.getItem()));
+        return burnTicksOf(stack) > 0;
+    }
+
+    /** Сколько тиков горит предмет: рыба фиксированно, остальное как в печке (уголь 1600, доски 300 и так далее). */
+    public static int burnTicksOf(ItemStack stack) {
+        if (stack.isEmpty()) return 0;
+        if (stack.is(ItemTags.FISHES) || FishRosterService.isCatalogFish(BuiltInRegistries.ITEM.getKey(stack.getItem()))) {
+            return FishGeneratorLogic.FISH_BURN_TICKS;
+        }
+        return Math.max(0, ForgeHooks.getBurnTime(stack, RecipeType.SMELTING));
     }
 
     public ItemStackHandler getFuel() {
@@ -67,6 +79,10 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
 
     public int getBurnTime() {
         return burnTime;
+    }
+
+    public int getBurnTotal() {
+        return burnTotal;
     }
 
     public int getEnergy() {
@@ -79,26 +95,38 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
 
     public static void serverTick(FishGeneratorBlockEntity be) {
         boolean changed = false;
-        if (be.burnTime > 0) {
+        boolean roomForTick = FishGeneratorLogic.canBurnThisTick(be.storage.getEnergyStored(), be.storage.getMaxEnergyStored());
+        if (be.burnTime <= 0 && roomForTick) {
+            changed = be.igniteNextFuel();
+        }
+        boolean producing = be.burnTime > 0 && roomForTick;
+        if (producing) {
             be.burnTime--;
-            be.storage.generate(FishGeneratorLogic.generatedThisTick(be.storage.getEnergyStored(), be.storage.getMaxEnergyStored()));
+            be.storage.generate(FishGeneratorLogic.FE_PER_TICK);
             changed = true;
         }
-        if (be.burnTime <= 0 && FishGeneratorLogic.canStartBurn(be.storage.getEnergyStored(), be.storage.getMaxEnergyStored())) {
-            ItemStack inSlot = be.fuel.getStackInSlot(SLOT_FUEL);
-            if (isFuel(inSlot)) {
-                be.fuel.extractItem(SLOT_FUEL, 1, false);
-                be.burnTime = FishGeneratorLogic.BURN_TICKS;
-                changed = true;
-            }
-        }
-        be.updateLit(be.burnTime > 0);
+        be.updateLit(producing);
         if (be.pushEnergyToNeighbors()) {
             changed = true;
         }
         if (changed) {
             be.setChanged();
         }
+    }
+
+    /** Берёт одну единицу топлива из слота. Ведро и подобная тара возвращается в слот. */
+    private boolean igniteNextFuel() {
+        ItemStack inSlot = fuel.getStackInSlot(SLOT_FUEL);
+        int ticks = burnTicksOf(inSlot);
+        if (ticks <= 0) return false;
+        ItemStack leftover = inSlot.getCraftingRemainingItem();
+        fuel.extractItem(SLOT_FUEL, 1, false);
+        if (!leftover.isEmpty() && fuel.getStackInSlot(SLOT_FUEL).isEmpty()) {
+            fuel.setStackInSlot(SLOT_FUEL, leftover);
+        }
+        burnTime = ticks;
+        burnTotal = ticks;
+        return true;
     }
 
     private boolean pushEnergyToNeighbors() {
@@ -153,6 +181,7 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
         tag.put("Fuel", fuel.serializeNBT());
         tag.putInt("Energy", storage.getEnergyStored());
         tag.putInt("BurnTime", burnTime);
+        tag.putInt("BurnTotal", burnTotal);
     }
 
     @Override
@@ -161,6 +190,7 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
         fuel.deserializeNBT(tag.getCompound("Fuel"));
         storage.set(tag.getInt("Energy"));
         burnTime = tag.getInt("BurnTime");
+        burnTotal = tag.contains("BurnTotal") ? tag.getInt("BurnTotal") : Math.max(burnTime, 0);
     }
 
     @Override

@@ -452,7 +452,7 @@ public final class FishShopConfig {
     }
 
     public static void sellAll(ServerPlayer player) {
-        if (player == null) return;
+        if (player == null || !FishMerchantProximity.allowSale(player)) return;
         long totalCoins = 0;
         int totalFishCount = 0;
 
@@ -491,7 +491,7 @@ public final class FishShopConfig {
     }
 
     public static void sellSingle(ServerPlayer player, String fishId) {
-        if (player == null || fishId == null) return;
+        if (player == null || fishId == null || !FishMerchantProximity.allowSale(player)) return;
         FishDef def = find(fishId);
         if (def == null && !isVanillaFish(fishId)) {
             player.sendSystemMessage(Component.literal("\u00a7c[AquaTech] \u042d\u0442\u043e\u0442 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u043d\u0435\u043b\u044c\u0437\u044f \u043f\u0440\u043e\u0434\u0430\u0442\u044c: " + fishId));

@@ -15,8 +15,8 @@ public final class FishMerchantClient {
 
     public static void openFishMenu() {
         try {
-            Method openScreen = Class.forName(LUMEN_CLIENT).getMethod("openScreen", String.class);
-            openScreen.invoke(null, FISH_TAB);
+            Method openStandalone = Class.forName(LUMEN_CLIENT).getMethod("openStandalone", String.class);
+            openStandalone.invoke(null, FISH_TAB);
         } catch (ReflectiveOperationException | LinkageError e) {
             AquaTechUI.LOGGER.warn("Fish merchant: aqualumen hub is unavailable, menu not opened: {}", e.toString());
         }

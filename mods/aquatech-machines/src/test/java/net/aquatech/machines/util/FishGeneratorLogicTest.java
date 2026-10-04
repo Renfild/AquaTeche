@@ -17,19 +17,23 @@ class FishGeneratorLogicTest {
     }
 
     @Test
-    void aFishIsOnlyBurnedWhenItsWholeEnergyFitsTheBuffer() {
-        int cap = FishGeneratorLogic.CAPACITY;
-        assertTrue(FishGeneratorLogic.canStartBurn(0, cap));
-        assertTrue(FishGeneratorLogic.canStartBurn(cap - FishGeneratorLogic.FE_PER_FISH, cap));
-        assertFalse(FishGeneratorLogic.canStartBurn(cap - FishGeneratorLogic.FE_PER_FISH + 1, cap));
+    void oneGeneratorKeepsOneMk1FisherRunning() {
+        assertEquals(net.aquatech.machines.block.entity.FisherMk1BlockEntity.ENERGY_PER_TICK, FishGeneratorLogic.FE_PER_TICK);
     }
 
     @Test
-    void generationNeverOverflowsTheBuffer() {
+    void anItemOfCoalGivesSixtyFourThousandFeAndFitsTheBuffer() {
+        int coalEnergy = 1600 * FishGeneratorLogic.FE_PER_TICK;
+        assertEquals(64000, coalEnergy);
+        assertTrue(coalEnergy <= FishGeneratorLogic.CAPACITY);
+    }
+
+    @Test
+    void burningPausesWhenTheBufferHasNoRoomForAWholeTick() {
         int cap = FishGeneratorLogic.CAPACITY;
-        assertEquals(FishGeneratorLogic.FE_PER_TICK, FishGeneratorLogic.generatedThisTick(0, cap));
-        assertEquals(5, FishGeneratorLogic.generatedThisTick(cap - 5, cap));
-        assertEquals(0, FishGeneratorLogic.generatedThisTick(cap, cap));
-        assertEquals(0, FishGeneratorLogic.generatedThisTick(cap + 10, cap));
+        assertTrue(FishGeneratorLogic.canBurnThisTick(0, cap));
+        assertTrue(FishGeneratorLogic.canBurnThisTick(cap - FishGeneratorLogic.FE_PER_TICK, cap));
+        assertFalse(FishGeneratorLogic.canBurnThisTick(cap - FishGeneratorLogic.FE_PER_TICK + 1, cap));
+        assertFalse(FishGeneratorLogic.canBurnThisTick(cap, cap));
     }
 }

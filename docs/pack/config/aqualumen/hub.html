@@ -39,6 +39,8 @@
     .icon-button{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:transparent;cursor:pointer;transition:.18s var(--ease)}
     .icon-button:hover{background:rgba(255,255,255,.07);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
     .icon-button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
+    body.single-tab .sidebar{display:none}
+    body.single-tab .hub{grid-template-columns:1fr!important}
     .sidebar{grid-row:2;display:flex;flex-direction:column;padding:14px 10px;border-right:1px solid var(--line);background:rgba(0,0,0,.08)}
     .nav{display:grid;gap:5px}
     .nav-button{height:42px;display:flex;align-items:center;gap:11px;padding:0 12px;border:1px solid transparent;border-radius:12px;background:transparent;color:var(--muted);cursor:pointer;text-align:left;transition:.18s var(--ease)}
@@ -2568,6 +2570,7 @@ try {
 
   function renderNav() {
     const tabs = (state.payload.enabledTabs || []).filter(k => k !== "privileges");
+    document.body.classList.toggle("single-tab", tabs.length === 1);
     $("nav").innerHTML = tabs.map(k => {
       const meta = tabMeta[k] || [k, '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>'];
       const active = state.tab === k ? "active" : "";

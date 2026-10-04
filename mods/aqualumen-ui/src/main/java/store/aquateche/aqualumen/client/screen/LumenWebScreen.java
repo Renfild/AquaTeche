@@ -22,9 +22,11 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
     private static final Set<String> SERVER_ACTIONS = Set.of(
             "hub.refresh", "daily.claim", "hub.claim_daily", "store.buy", "case.open", "case.claim", "pass.claim", "pass.claim_premium",
             "hub.kit", "hub.warp", "fish.sell", "fish.sell_all", "events.claim", "events.reroll",
-            "auction.buy", "auction.cancel");
+            "auction.buy", "auction.cancel", "exchange.buy_gems", "exchange.sell_gems");
 
     private final String initialTab;
+    /** Открыт торговцем: страница показывает только одну вкладку, без остального меню. */
+    private final boolean standalone;
     private LumenWebBridge bridge;
     private HubSnapshot pendingSnapshot;
     private boolean pageReady;
@@ -36,8 +38,13 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
     }
 
     public LumenWebScreen(String initialTab) {
+        this(initialTab, false);
+    }
+
+    public LumenWebScreen(String initialTab, boolean standalone) {
         super(Component.translatable("gui.aqualumen.hub"));
         this.initialTab = initialTab == null || initialTab.isBlank() ? "profile" : initialTab;
+        this.standalone = standalone;
     }
 
     @Override
@@ -45,7 +52,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         double scale = minecraft.getWindow().getGuiScale();
         bridge = new LumenWebBridge((int) Math.ceil(width * scale), (int) Math.ceil(height * scale));
         if (!bridge.isAvailable()) {
-            abort("browser unavailable");
+            abort("браузер меню не создан");
             return;
         }
         pendingSnapshot = LumenClient.snapshot();
@@ -74,7 +81,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
             return;
         }
         if (!pageReady && ++pageWaitTicks >= PAGE_READY_TIMEOUT_TICKS) {
-            abort("page readiness timeout");
+            abort("страница меню не загрузилась за 15 секунд");
             return;
         }
         pushSnapshot();
@@ -88,6 +95,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         }
         if (minecraft != null && minecraft.screen == this) {
             minecraft.setScreen(null);
+            LumenClient.reportHubUnavailable(reason);
         }
     }
 
@@ -107,7 +115,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         if (pendingSnapshot == null) {
             return;
         }
-        String json = HubSnapshotJson.encode(pendingSnapshot, LumenClient.snapshotReceivedAt(), initialTab);
+        String json = HubSnapshotJson.encode(pendingSnapshot, LumenClient.snapshotReceivedAt(), initialTab, standalone);
         bridge.execute("if(window.AquaLumen&&window.AquaLumen.applySnapshot){window.AquaLumen.applySnapshot(" + json + ");}");
         if (pageReady) {
             pendingSnapshot = null;
@@ -121,7 +129,7 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
             switch (type) {
                 case "ready" -> {
                     if (root.has("page") && !root.get("page").getAsBoolean()) {
-                        abort("hub page script failed");
+                        abort("скрипт страницы меню упал");
                         return;
                     }
                     pageReady = true;

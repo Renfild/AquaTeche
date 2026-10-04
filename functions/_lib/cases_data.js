@@ -379,19 +379,19 @@ export const CASES_CATALOG = [
     "cost": 150000,
     "pityEvery": 20,
     "pity": {
-      "name": "Улучшенный корпус механизма",
+      "name": "Улучшенные микросхемы",
       "type": "item",
-      "item": "industrialupgrade:blockresource/advanced_machine",
-      "min": 2,
-      "max": 4
+      "item": "industrialupgrade:crafting_elements/crafting_274_element",
+      "min": 40,
+      "max": 44
     },
     "loot": [
       {
         "name": "Слитки манастали",
         "type": "item",
         "item": "botania:manasteel_ingot",
-        "min": 24,
-        "max": 48,
+        "min": 56,
+        "max": 64,
         "weight": 61,
         "chance": 12.2
       },
@@ -399,8 +399,8 @@ export const CASES_CATALOG = [
         "name": "Жемчуг маны",
         "type": "item",
         "item": "botania:mana_pearl",
-        "min": 12,
-        "max": 24,
+        "min": 24,
+        "max": 36,
         "weight": 51,
         "chance": 10.2
       },
@@ -408,8 +408,8 @@ export const CASES_CATALOG = [
         "name": "Алмазы маны",
         "type": "item",
         "item": "botania:mana_diamond",
-        "min": 8,
-        "max": 16,
+        "min": 24,
+        "max": 36,
         "weight": 51,
         "chance": 10.2
       },
@@ -417,8 +417,8 @@ export const CASES_CATALOG = [
         "name": "Руны Воды",
         "type": "item",
         "item": "botania:rune_water",
-        "min": 4,
-        "max": 8,
+        "min": 12,
+        "max": 16,
         "weight": 41,
         "chance": 8.2
       },
@@ -426,8 +426,8 @@ export const CASES_CATALOG = [
         "name": "Руны Огня",
         "type": "item",
         "item": "botania:rune_fire",
-        "min": 4,
-        "max": 8,
+        "min": 12,
+        "max": 16,
         "weight": 41,
         "chance": 8.2
       },
@@ -435,8 +435,8 @@ export const CASES_CATALOG = [
         "name": "Руны Маны",
         "type": "item",
         "item": "botania:rune_mana",
-        "min": 4,
-        "max": 8,
+        "min": 12,
+        "max": 16,
         "weight": 41,
         "chance": 8.2
       },
@@ -494,19 +494,19 @@ export const CASES_CATALOG = [
     "cost": 450000,
     "pityEvery": 20,
     "pity": {
-      "name": "Комплект прессов высекателя AE2",
+      "name": "МЭ ячейка хранения 256k",
       "type": "item",
-      "item": "ae2:logic_processor_press",
-      "min": 1,
-      "max": 1
+      "item": "ae2:item_storage_cell_256k",
+      "min": 2,
+      "max": 2
     },
     "loot": [
       {
-        "name": "Комплект прессов высекателя AE2",
+        "name": "МЭ ячейка хранения 256k",
         "type": "item",
-        "item": "ae2:logic_processor_press",
+        "item": "ae2:item_storage_cell_256k",
         "min": 1,
-        "max": 1,
+        "max": 2,
         "weight": 10,
         "chance": 2
       },
@@ -514,8 +514,8 @@ export const CASES_CATALOG = [
         "name": "Слитки террастали",
         "type": "item",
         "item": "botania:terrasteel_ingot",
-        "min": 6,
-        "max": 12,
+        "min": 24,
+        "max": 32,
         "weight": 30,
         "chance": 6
       },
@@ -523,8 +523,8 @@ export const CASES_CATALOG = [
         "name": "МЭ накопитель AE2",
         "type": "item",
         "item": "ae2:drive",
-        "min": 1,
-        "max": 2,
+        "min": 16,
+        "max": 24,
         "weight": 25,
         "chance": 5
       },
@@ -550,8 +550,8 @@ export const CASES_CATALOG = [
         "name": "Инженерные процессоры",
         "type": "item",
         "item": "ae2:engineering_processor",
-        "min": 16,
-        "max": 32,
+        "min": 28,
+        "max": 40,
         "weight": 50,
         "chance": 10
       },
@@ -559,8 +559,8 @@ export const CASES_CATALOG = [
         "name": "Логические процессоры",
         "type": "item",
         "item": "ae2:logic_processor",
-        "min": 16,
-        "max": 32,
+        "min": 28,
+        "max": 40,
         "weight": 50,
         "chance": 10
       },
@@ -568,17 +568,17 @@ export const CASES_CATALOG = [
         "name": "Вычислительные процессоры",
         "type": "item",
         "item": "ae2:calculation_processor",
-        "min": 16,
-        "max": 32,
+        "min": 28,
+        "max": 40,
         "weight": 50,
         "chance": 10
       },
       {
-        "name": "Изменчивые кристаллы",
+        "name": "МЭ ячейка хранения 4k",
         "type": "item",
-        "item": "ae2:fluix_crystal",
-        "min": 32,
-        "max": 64,
+        "item": "ae2:item_storage_cell_4k",
+        "min": 6,
+        "max": 10,
         "weight": 50,
         "chance": 10
       },
@@ -586,8 +586,8 @@ export const CASES_CATALOG = [
         "name": "Слитки элементия",
         "type": "item",
         "item": "botania:elementium_ingot",
-        "min": 16,
-        "max": 32,
+        "min": 32,
+        "max": 48,
         "weight": 45,
         "chance": 9
       },

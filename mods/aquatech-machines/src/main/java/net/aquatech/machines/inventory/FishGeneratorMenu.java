@@ -3,7 +3,6 @@ package net.aquatech.machines.inventory;
 import net.aquatech.machines.block.entity.FishGeneratorBlockEntity;
 import net.aquatech.machines.registry.ModBlocks;
 import net.aquatech.machines.registry.ModMenuTypes;
-import net.aquatech.machines.util.FishGeneratorLogic;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -58,7 +57,7 @@ public class FishGeneratorMenu extends AbstractContainerMenu {
                 if (be != null && be.getLevel() != null && !be.getLevel().isClientSide) {
                     return switch (index) {
                         case 0 -> be.getBurnTime();
-                        case 1 -> FishGeneratorLogic.BURN_TICKS;
+                        case 1 -> be.getBurnTotal();
                         case 2 -> be.getEnergy() & 0xFFFF;
                         case 3 -> (be.getEnergy() >>> 16) & 0xFFFF;
                         case 4 -> be.getMaxEnergy() & 0xFFFF;

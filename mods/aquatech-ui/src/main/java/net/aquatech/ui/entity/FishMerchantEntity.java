@@ -1,8 +1,7 @@
 package net.aquatech.ui.entity;
 
 import net.aquatech.ui.client.FishMerchantClient;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,7 +21,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /**
- * Скупщик рыбы: стоит на месте, по ПКМ открывает у игрока вкладку «Рыбалка» в F4.
+ * Скупщик рыбы: стоит на месте, по ПКМ открывает у игрока отдельное окно «Рыбалка» (без остального меню F4).
  * Простой idle крутится на клиенте, случайные «подёргивания» и «спасибо» запускает сервер.
  */
 public class FishMerchantEntity extends PathfinderMob implements GeoEntity {
@@ -53,8 +52,14 @@ public class FishMerchantEntity extends PathfinderMob implements GeoEntity {
         setNoAi(true);
         setInvulnerable(true);
         setPersistenceRequired();
-        setCustomName(Component.translatable("entity.aquatech_ui.fish_merchant").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD));
-        setCustomNameVisible(true);
+    }
+
+    /** Уже стоящие на спавне торговцы хранят имя в NBT: при загрузке снимаем подпись и с них. */
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        setCustomName(null);
+        setCustomNameVisible(false);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

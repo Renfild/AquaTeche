@@ -2,7 +2,10 @@ package store.aquateche.aqualumen.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -47,6 +50,7 @@ public final class LumenClient {
     private static final String DEFAULT_TAB = "profile";
     /** Вкладка, которую просил открыть последний {@link #openScreen}; нужна, пока снимок хаба ещё не пришёл. */
     private static String requestedTab = DEFAULT_TAB;
+    private static boolean requestedStandalone;
 
     private LumenClient() {
     }
@@ -78,12 +82,14 @@ public final class LumenClient {
         snapshot = incoming;
         snapshotReceivedAt = System.currentTimeMillis();
         String tab = requestedTab;
+        boolean standalone = requestedStandalone;
         requestedTab = DEFAULT_TAB;
+        requestedStandalone = false;
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.screen instanceof HubSnapshotScreen hub) {
             hub.refresh(incoming);
         } else if (openScreen) {
-            minecraft.setScreen(HubScreenFactory.create(tab));
+            openHub(tab, standalone);
         }
     }
 
@@ -97,11 +103,41 @@ public final class LumenClient {
     }
 
     public static void openScreen(String initialTab) {
-        requestedTab = initialTab;
+        open(initialTab, false);
+    }
+
+    /** Окно с одной вкладкой без остального меню: его открывает торговец рыбой. */
+    public static void openStandalone(String tab) {
+        open(tab, true);
+    }
+
+    private static void open(String tab, boolean standalone) {
+        requestedTab = tab;
+        requestedStandalone = standalone;
         sendAction("hub.open", "");
         if (snapshot != null) {
-            Minecraft.getInstance().setScreen(HubScreenFactory.create(initialTab));
+            openHub(tab, standalone);
         }
+    }
+
+    private static void openHub(String tab, boolean standalone) {
+        Screen screen = HubScreenFactory.create(tab, standalone);
+        if (screen == null) {
+            reportHubUnavailable("браузерный движок (MCEF) не запущен");
+            return;
+        }
+        Minecraft.getInstance().setScreen(screen);
+    }
+
+    /** Меню F4 не открылось: без сообщения игрок видит только, что кнопка ничего не делает. */
+    public static void reportHubUnavailable(String reason) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.player == null) {
+            return;
+        }
+        minecraft.player.sendSystemMessage(Component.literal("[AquaTech] Меню F4 не открылось: " + reason
+                + ". Перезапусти игру и дождись конца загрузки (при первом запуске докачивается Chromium, около 125 МБ)."
+                + " Не помогло: отправь админу файл logs/latest.log.").withStyle(ChatFormatting.RED));
     }
 
     public static void sendAction(String action, String argument) {

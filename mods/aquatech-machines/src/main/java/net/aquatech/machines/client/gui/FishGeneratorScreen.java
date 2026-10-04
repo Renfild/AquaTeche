@@ -72,9 +72,8 @@ public class FishGeneratorScreen extends AbstractContainerScreen<FishGeneratorMe
         } else if (inside(mouseX, mouseY, BURN_X, BURN_Y, 24, 17)) {
             int seconds = (menu.getBurnTime() + 19) / 20;
             g.renderComponentTooltip(font, List.of(
-                    Component.literal(menu.getBurnTime() > 0 ? "§6Горит ещё §f" + seconds + " с" : "§7Нет рыбы в огне"),
-                    Component.literal("§8Одна рыба даёт §e" + FishGeneratorLogic.FE_PER_FISH + " FE §8за "
-                            + FishGeneratorLogic.BURN_TICKS / 20 + " с")
+                    Component.literal(menu.getBurnTime() > 0 ? "§6Горит ещё §f" + seconds + " с" : "§7Нет топлива в огне"),
+                    Component.literal("§8Даёт §e" + FishGeneratorLogic.FE_PER_TICK + " FE/t§8. Топливо: уголь, дерево, любое горючее или рыба")
             ), mouseX, mouseY);
         }
     }

@@ -15,7 +15,10 @@ public final class HubSnapshotJson {
     private HubSnapshotJson() {
     }
 
-    public static String encode(HubSnapshot snapshot, long receivedAt, String initialTab) {
+    /** Вкладка продажи рыбы: открывается только у торговца, из общего меню F4 она убрана. */
+    public static final String MERCHANT_TAB = "fishing";
+
+    public static String encode(HubSnapshot snapshot, long receivedAt, String initialTab, boolean standalone) {
         JsonObject root = new JsonObject();
         root.add("snapshot", GSON.toJsonTree(snapshot));
         root.addProperty("receivedAt", receivedAt);
@@ -25,7 +28,14 @@ public final class HubSnapshotJson {
                 snapshot != null && snapshot.profile() != null ? snapshot.profile().name() : ""));
 
         JsonArray tabs = new JsonArray();
-        LumenConfig.COMMON.enabledTabs.get().forEach(tab -> tabs.add(String.valueOf(tab)));
+        if (standalone) {
+            tabs.add(initialTab);
+        } else {
+            LumenConfig.COMMON.enabledTabs.get().stream()
+                    .map(String::valueOf)
+                    .filter(tab -> !MERCHANT_TAB.equals(tab))
+                    .forEach(tabs::add);
+        }
         root.add("enabledTabs", tabs);
 
         LumenTheme theme = LumenTheme.current();
