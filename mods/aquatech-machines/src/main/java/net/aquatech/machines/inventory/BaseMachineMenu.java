@@ -1,5 +1,6 @@
 package net.aquatech.machines.inventory;
 
+import net.aquatech.machines.util.MachineLayout;
 import net.aquatech.machines.block.entity.BaseMachineBlockEntity;
 import net.aquatech.machines.registry.ModItems;
 import net.minecraft.world.entity.player.Inventory;
@@ -102,11 +103,11 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
     private void addPlayerSlots(Inventory inv) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                addSlot(new Slot(inv, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
+                addSlot(new Slot(inv, col + row * 9 + 9, MachineLayout.PLAYER_X + col * 18, MachineLayout.PLAYER_Y + row * 18));
             }
         }
         for (int col = 0; col < 9; col++) {
-            addSlot(new Slot(inv, col, 8 + col * 18, 142));
+            addSlot(new Slot(inv, col, MachineLayout.PLAYER_X + col * 18, MachineLayout.HOTBAR_Y));
         }
     }
 

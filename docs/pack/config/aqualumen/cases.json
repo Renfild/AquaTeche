@@ -347,59 +347,59 @@
       "pityEvery": 20,
       "pity": {
         "type": "item",
-        "item": "industrialupgrade:blockresource/advanced_machine",
-        "label": "Улучшенный корпус механизма",
-        "min": 2,
-        "max": 4,
-        "weight": 31
+        "item": "industrialupgrade:crafting_elements/crafting_274_element",
+        "label": "Улучшенные микросхемы",
+        "min": 40,
+        "max": 44,
+        "weight": 10
       },
       "loot": [
         {
           "type": "item",
           "item": "botania:manasteel_ingot",
           "label": "Слитки манастали",
-          "min": 24,
-          "max": 48,
+          "min": 56,
+          "max": 64,
           "weight": 61
         },
         {
           "type": "item",
           "item": "botania:mana_pearl",
           "label": "Жемчуг маны",
-          "min": 12,
-          "max": 24,
+          "min": 24,
+          "max": 36,
           "weight": 51
         },
         {
           "type": "item",
           "item": "botania:mana_diamond",
           "label": "Алмазы маны",
-          "min": 8,
-          "max": 16,
+          "min": 24,
+          "max": 36,
           "weight": 51
         },
         {
           "type": "item",
           "item": "botania:rune_water",
           "label": "Руны Воды",
-          "min": 4,
-          "max": 8,
+          "min": 12,
+          "max": 16,
           "weight": 41
         },
         {
           "type": "item",
           "item": "botania:rune_fire",
           "label": "Руны Огня",
-          "min": 4,
-          "max": 8,
+          "min": 12,
+          "max": 16,
           "weight": 41
         },
         {
           "type": "item",
           "item": "botania:rune_mana",
           "label": "Руны Маны",
-          "min": 4,
-          "max": 8,
+          "min": 12,
+          "max": 16,
           "weight": 41
         },
         {
@@ -452,35 +452,35 @@
       "pityEvery": 20,
       "pity": {
         "type": "item",
-        "item": "ae2:logic_processor_press",
-        "label": "Комплект прессов высекателя AE2",
-        "min": 1,
-        "max": 1,
+        "item": "ae2:item_storage_cell_256k",
+        "label": "МЭ ячейка хранения 256k",
+        "min": 2,
+        "max": 2,
         "weight": 10
       },
       "loot": [
         {
           "type": "item",
-          "item": "ae2:logic_processor_press",
-          "label": "Комплект прессов высекателя AE2",
+          "item": "ae2:item_storage_cell_256k",
+          "label": "МЭ ячейка хранения 256k",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "weight": 10
         },
         {
           "type": "item",
           "item": "botania:terrasteel_ingot",
           "label": "Слитки террастали",
-          "min": 6,
-          "max": 12,
+          "min": 24,
+          "max": 32,
           "weight": 30
         },
         {
           "type": "item",
           "item": "ae2:drive",
           "label": "МЭ накопитель AE2",
-          "min": 1,
-          "max": 2,
+          "min": 16,
+          "max": 24,
           "weight": 25
         },
         {
@@ -503,40 +503,40 @@
           "type": "item",
           "item": "ae2:engineering_processor",
           "label": "Инженерные процессоры",
-          "min": 16,
-          "max": 32,
+          "min": 28,
+          "max": 40,
           "weight": 50
         },
         {
           "type": "item",
           "item": "ae2:logic_processor",
           "label": "Логические процессоры",
-          "min": 16,
-          "max": 32,
+          "min": 28,
+          "max": 40,
           "weight": 50
         },
         {
           "type": "item",
           "item": "ae2:calculation_processor",
           "label": "Вычислительные процессоры",
-          "min": 16,
-          "max": 32,
+          "min": 28,
+          "max": 40,
           "weight": 50
         },
         {
           "type": "item",
-          "item": "ae2:fluix_crystal",
-          "label": "Изменчивые кристаллы",
-          "min": 32,
-          "max": 64,
+          "item": "ae2:item_storage_cell_4k",
+          "label": "МЭ ячейка хранения 4k",
+          "min": 6,
+          "max": 10,
           "weight": 50
         },
         {
           "type": "item",
           "item": "botania:elementium_ingot",
           "label": "Слитки элементия",
-          "min": 16,
-          "max": 32,
+          "min": 32,
+          "max": 48,
           "weight": 45
         },
         {

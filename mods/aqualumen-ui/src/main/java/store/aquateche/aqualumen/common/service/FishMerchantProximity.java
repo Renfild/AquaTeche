@@ -32,6 +32,11 @@ public final class FishMerchantProximity {
     }
 
     static boolean isNearMerchant(ServerPlayer player) {
+        return isNear(player);
+    }
+
+    /** Работает и на клиенте: игрок и мир те же, что видит сторона. Без мода торговца ограничения нет. */
+    public static boolean isNear(Entity player) {
         if (!ForgeRegistries.ENTITY_TYPES.containsKey(MERCHANT_ID)) {
             return true;
         }

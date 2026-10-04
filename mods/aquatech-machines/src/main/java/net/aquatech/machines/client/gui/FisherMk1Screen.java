@@ -2,6 +2,8 @@ package net.aquatech.machines.client.gui;
 
 import net.aquatech.machines.block.entity.FisherMk1BlockEntity;
 import net.aquatech.machines.inventory.FisherMk1Menu;
+import net.aquatech.machines.util.MachineLayout;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -9,17 +11,22 @@ import net.minecraft.world.item.ItemStack;
 
 public class FisherMk1Screen extends AbstractMachineScreen<FisherMk1Menu> {
 
-    /** Та же панель, что у MK-2: слоты удочки, батареи и выхода стоят на тех же местах. */
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation("aquatech_machines", "textures/gui/fisher.png");
+            new ResourceLocation("aquatech_machines", "textures/gui/fisher_mk1.png");
 
     public FisherMk1Screen(FisherMk1Menu menu, Inventory inv, Component title) {
-        super(menu, inv, title, TEXTURE, 74, 36, 8, 20);
+        super(menu, inv, title, TEXTURE, MachineLayout.FISHER_MK1_POND_X, MachineLayout.FISHER_MK1_POND_Y, MachineLayout.FISHER_MK1_POND_W, MachineLayout.FISHER_MK1_POND_H);
     }
 
     @Override
     protected boolean hasUpgradeWing() {
         return false;
+    }
+
+    @Override
+    protected void renderMachine(GuiGraphics g, float time) {
+        MachineGuiFx.pond(g, texture, MachineLayout.FISHER_MK1_POND_X, MachineLayout.FISHER_MK1_POND_Y, MachineLayout.FISHER_MK1_POND_W,
+                MachineLayout.FISHER_MK1_POND_H, progressFraction(), isWorking(), time);
     }
 
     @Override
@@ -35,8 +42,8 @@ public class FisherMk1Screen extends AbstractMachineScreen<FisherMk1Menu> {
             printChat(" §c• Вставьте удочку StarCatcher в верхний левый слот.");
             return;
         }
-        printChat(" §eУдочка: §b" + rod.getHoverName().getString() + " §7(пул ресурсов тира §a" + fisher.rodTier()
-                + "§7, максимум для MK-1: §a" + FisherMk1BlockEntity.MAX_TIER + "§7)");
+        printChat(" §eУдочка: §b" + rod.getHoverName().getString() + " §7(тир §a" + fisher.rodTier() + "§7)");
+        printChat(" §7Ресурсы те же, что даёт сама удочка при обычной ловле: по одному стеку из её улова за цикл.");
         printChat(" §7Энергию даёт Рыбный генератор рядом, батарея в нижнем слоте или редстоун.");
     }
 }

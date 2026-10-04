@@ -129,18 +129,6 @@ def build_data(names):
                         encoding="utf-8")
 
 
-def build_generator_gui():
-    gui = Image.open(ASSETS / "textures" / "gui" / "fisher.png").convert("RGBA")
-    panel = gui.getpixel((100, 70))
-    px = gui.load()
-    # слоты «ядро» и «выход» не нужны: закрашиваем рамки панелью. Слот рыбы остаётся на месте слота удочки.
-    for (x0, y0, x1, y1) in ((43, 47, 64, 68), (113, 33, 134, 54)):
-        for y in range(y0, y1):
-            for x in range(x0, x1):
-                px[x, y] = panel
-    gui.save(ASSETS / "textures" / "gui" / "fish_generator.png")
-
-
 def main():
     build_texture_set("fisher_mk1", BRONZE, HOOK, HOOK, on_bars=False)
     build_texture_set("fish_generator", EMBER, FLAME_BARS, FLAME_BARS, on_bars=True)
@@ -149,7 +137,7 @@ def main():
     # лут и теги инструмента нужны всем механизмам: без них блок при разрушении ничего не выпадает
     build_data(["fisher_mk1", "fish_generator", "fisher", "excavator", "extractor", "synthesizer", "centrifuge",
                 "flower_collector", "mana_fabricator"])
-    build_generator_gui()
+    # GUI всех механизмов рисует tools/build_machine_guis.py
     print("assets written")
 
 

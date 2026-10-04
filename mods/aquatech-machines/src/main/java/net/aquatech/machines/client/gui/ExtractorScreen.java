@@ -2,6 +2,8 @@ package net.aquatech.machines.client.gui;
 
 import net.aquatech.machines.block.entity.ExtractorBlockEntity;
 import net.aquatech.machines.inventory.ExtractorMenu;
+import net.aquatech.machines.util.MachineLayout;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,7 +14,12 @@ public class ExtractorScreen extends AbstractMachineScreen<ExtractorMenu> {
             new ResourceLocation("aquatech_machines", "textures/gui/extractor.png");
 
     public ExtractorScreen(ExtractorMenu menu, Inventory inv, Component title) {
-        super(menu, inv, title, TEXTURE, 74, 36, 8, 20);
+        super(menu, inv, title, TEXTURE, MachineLayout.EXTRACTOR_ARROW_X, MachineLayout.EXTRACTOR_ARROW_Y, 24, 17);
+    }
+
+    @Override
+    protected void renderMachine(GuiGraphics g, float time) {
+        MachineGuiFx.arrow(g, texture, MachineLayout.EXTRACTOR_ARROW_X, MachineLayout.EXTRACTOR_ARROW_Y, progressFraction(), time);
     }
 
     @Override

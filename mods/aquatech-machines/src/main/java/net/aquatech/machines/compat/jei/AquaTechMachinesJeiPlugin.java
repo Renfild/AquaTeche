@@ -1,5 +1,6 @@
 package net.aquatech.machines.compat.jei;
 
+import net.aquatech.machines.util.MachineLayout;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
@@ -99,11 +100,11 @@ public class AquaTechMachinesJeiPlugin implements IModPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         // Клик по прогресс-бару (24x17) открывает соответствующую категорию JEI
-        registration.addRecipeClickArea(ExtractorScreen.class, 74, 36, 24, 17, EXTRACTOR_TYPE);
-        registration.addRecipeClickArea(ExcavatorScreen.class, 48, 36, 24, 17, EXCAVATOR_TYPE);
-        registration.addRecipeClickArea(FisherScreen.class, 74, 36, 24, 17, FISHER_TYPE);
-        registration.addRecipeClickArea(net.aquatech.machines.client.gui.SynthesizerScreen.class, 92, 37, 24, 17, SYNTHESIZER_TYPE);
-        registration.addRecipeClickArea(net.aquatech.machines.client.gui.CentrifugeScreen.class, 65, 37, 24, 17, CENTRIFUGE_TYPE);
+        registration.addRecipeClickArea(ExtractorScreen.class, MachineLayout.EXTRACTOR_ARROW_X, MachineLayout.EXTRACTOR_ARROW_Y, 24, 17, EXTRACTOR_TYPE);
+        registration.addRecipeClickArea(ExcavatorScreen.class, MachineLayout.EXCAVATOR_ARROW_X, MachineLayout.EXCAVATOR_ARROW_Y, 24, 17, EXCAVATOR_TYPE);
+        registration.addRecipeClickArea(FisherScreen.class, MachineLayout.FISHER_POND_X, MachineLayout.FISHER_POND_Y, MachineLayout.FISHER_POND_W, MachineLayout.FISHER_POND_H, FISHER_TYPE);
+        registration.addRecipeClickArea(net.aquatech.machines.client.gui.SynthesizerScreen.class, MachineLayout.SYNTHESIZER_ARROW_X, MachineLayout.SYNTHESIZER_ARROW_Y, 24, 17, SYNTHESIZER_TYPE);
+        registration.addRecipeClickArea(net.aquatech.machines.client.gui.CentrifugeScreen.class, MachineLayout.CENTRIFUGE_ARROW_X, MachineLayout.CENTRIFUGE_ARROW_Y, 24, 17, CENTRIFUGE_TYPE);
     }
 
     @Override

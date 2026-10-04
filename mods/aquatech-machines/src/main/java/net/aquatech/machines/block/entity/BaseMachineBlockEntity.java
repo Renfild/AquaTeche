@@ -86,6 +86,37 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Menu
         this.batterySlot = battery;
     }
 
+    /** Берёт ли машина энергию Рыбного генератора: по умолчанию нет, это включают только авторыболовы. */
+    public boolean acceptsFishGeneratorPower() {
+        return false;
+    }
+
+    /** Генератор вливает энергию прямо в буфер. Чужим машинам отказ: ничего не принимается. */
+    public int receiveGeneratorEnergy(int amount) {
+        if (!acceptsFishGeneratorPower() || amount <= 0) return 0;
+        int room = Math.max(0, maxEnergy - energy.getEnergy());
+        int accepted = energy.receiveInternal(Math.min(amount, room));
+        if (accepted > 0) setChanged();
+        return accepted;
+    }
+
+    public int speedSlotIndex() {
+        return speedSlot;
+    }
+
+    public int effSlotIndex() {
+        return effSlot;
+    }
+
+    public int batterySlotIndex() {
+        return batterySlot;
+    }
+
+    /** Расход FE за тик с учётом картриджа энергоэффективности: его показывает тултип шкалы энергии. */
+    public int energyPerTickNow() {
+        return effectiveEnergyPerTick();
+    }
+
     /** Скорость прогресса: х4 со speed_upgrade_4, х2 со speed_upgrade_1 / speed_upgrade, иначе х1. */
     protected int progressPerTick() {
         if (isSlot(ModItems.SPEED_UPGRADE_4.get(), speedSlot)) return 4;

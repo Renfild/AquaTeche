@@ -1,5 +1,6 @@
 package net.aquatech.machines.inventory;
 
+import net.aquatech.machines.util.MachineLayout;
 import net.aquatech.machines.block.entity.FishGeneratorBlockEntity;
 import net.aquatech.machines.registry.ModBlocks;
 import net.aquatech.machines.registry.ModMenuTypes;
@@ -16,9 +17,6 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class FishGeneratorMenu extends AbstractContainerMenu {
 
-    private static final int FUEL_X = 45;
-    private static final int FUEL_Y = 25;
-
     private final FishGeneratorBlockEntity blockEntity;
     private final ContainerData data;
 
@@ -30,7 +28,7 @@ public class FishGeneratorMenu extends AbstractContainerMenu {
         super(ModMenuTypes.FISH_GENERATOR.get(), id);
         this.blockEntity = (FishGeneratorBlockEntity) be;
         this.data = makeData(blockEntity);
-        addSlot(new SlotItemHandler(blockEntity.getFuel(), FishGeneratorBlockEntity.SLOT_FUEL, FUEL_X, FUEL_Y) {
+        addSlot(new SlotItemHandler(blockEntity.getFuel(), FishGeneratorBlockEntity.SLOT_FUEL, MachineLayout.FISH_GENERATOR_FUEL_X, MachineLayout.FISH_GENERATOR_FUEL_Y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return FishGeneratorBlockEntity.isFuel(stack);
@@ -38,11 +36,11 @@ public class FishGeneratorMenu extends AbstractContainerMenu {
         });
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                addSlot(new Slot(inv, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
+                addSlot(new Slot(inv, col + row * 9 + 9, MachineLayout.PLAYER_X + col * 18, MachineLayout.PLAYER_Y + row * 18));
             }
         }
         for (int col = 0; col < 9; col++) {
-            addSlot(new Slot(inv, col, 8 + col * 18, 142));
+            addSlot(new Slot(inv, col, MachineLayout.PLAYER_X + col * 18, MachineLayout.HOTBAR_Y));
         }
         addDataSlots(data);
     }
@@ -50,7 +48,7 @@ public class FishGeneratorMenu extends AbstractContainerMenu {
     /** Сервер читает значения из блока, клиент хранит присланные пакеты в кеше (как в BaseMachineMenu). */
     private static ContainerData makeData(FishGeneratorBlockEntity be) {
         return new ContainerData() {
-            private final int[] cache = new int[6];
+            private final int[] cache = new int[8];
 
             @Override
             public int get(int index) {
@@ -62,6 +60,8 @@ public class FishGeneratorMenu extends AbstractContainerMenu {
                         case 3 -> (be.getEnergy() >>> 16) & 0xFFFF;
                         case 4 -> be.getMaxEnergy() & 0xFFFF;
                         case 5 -> (be.getMaxEnergy() >>> 16) & 0xFFFF;
+                        case 6 -> be.getCurrentRate();
+                        case 7 -> be.getLastTransferred();
                         default -> 0;
                     };
                 }
@@ -84,6 +84,20 @@ public class FishGeneratorMenu extends AbstractContainerMenu {
 
     public int getBurnTime() {
         return data.get(0);
+    }
+
+    public int getBurnTotal() {
+        return data.get(1);
+    }
+
+    /** Выработка прямо сейчас в FE/t: зависит от топлива в огне, без огня ноль. */
+    public int getCurrentRate() {
+        return data.get(6);
+    }
+
+    /** Сколько FE за последний тик ушло авторыболовам рядом. */
+    public int getLastTransferred() {
+        return data.get(7);
     }
 
     public int getScaledBurn(int width) {

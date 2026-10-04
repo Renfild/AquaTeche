@@ -15,6 +15,8 @@ IU_JAR  = ROOT / "server/mods/IndustrialUpgrade-1.20.1-3.4.0.11.jar"
 AC_JAR  = ROOT / "server/mods/alexscaves-2.0.2.jar"
 AT_JAR  = ROOT / "server/mods/aquatech_ui-1.0.24.jar"
 AV_JAR  = ROOT / "server/mods/Re-Avaritia-forge-1.20.1-1.4.1-release.jar"
+AE_JAR  = ROOT / "server/mods/appliedenergistics2-forge-15.4.10.jar"
+MACHINE_ITEMS = ROOT / "mods/aquatech-machines/src/main/resources/assets/aquatech_machines/textures/item"
 
 def b64(z, path):
     return "data:image/png;base64," + base64.b64encode(z.read(path)).decode("ascii")
@@ -59,6 +61,17 @@ MANUAL_MAP = {
         (AV_JAR, "assets/avaritia/textures/block/machine/craft/extreme_top.png"),
     "avaritia:neutronium_compressor":
         (AV_JAR, "assets/avaritia/textures/block/machine/compressor/compressor_top.png"),
+    "ae2:item_storage_cell_4k":
+        (AE_JAR, "assets/ae2/textures/item/item_storage_cell_4k.png"),
+    "ae2:item_storage_cell_256k":
+        (AE_JAR, "assets/ae2/textures/item/item_storage_cell_256k.png"),
+}
+
+# Предметы нашего мода механизмов: берём файл прямо из ресурсов репозитория
+REPO_ITEMS = {
+    "aquatech_machines:sea_salt": MACHINE_ITEMS / "sea_salt.png",
+    "aquatech_machines:speed_upgrade": MACHINE_ITEMS / "speed_upgrade.png",
+    "aquatech_machines:speed_upgrade_4": MACHINE_ITEMS / "speed_upgrade_4.png",
 }
 
 # Side textures for 2.5D CSS isometric blocks — stored with __side suffix
@@ -99,6 +112,13 @@ def main():
                 patched += 1
         except KeyError:
             print(f"  [!] Texture not in jar: {tex_path}")
+
+    for item_id, file_path in REPO_ITEMS.items():
+        if item_id in extracted or not file_path.is_file():
+            continue
+        extracted[item_id] = "data:image/png;base64," + base64.b64encode(file_path.read_bytes()).decode("ascii")
+        print(f"  [+] {item_id} -> {file_path.name}")
+        patched += 1
 
     for item_id, (jar_path, tex_path) in SIDE_TEXTURES.items():
         key = item_id + "__side"

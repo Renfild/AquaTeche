@@ -2,6 +2,8 @@ package net.aquatech.machines.client.gui;
 
 import net.aquatech.machines.block.entity.ExcavatorBlockEntity;
 import net.aquatech.machines.inventory.ExcavatorMenu;
+import net.aquatech.machines.util.MachineLayout;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,7 +16,12 @@ public class ExcavatorScreen extends AbstractMachineScreen<ExcavatorMenu> {
             new ResourceLocation("aquatech_machines", "textures/gui/excavator.png");
 
     public ExcavatorScreen(ExcavatorMenu menu, Inventory inv, Component title) {
-        super(menu, inv, title, TEXTURE, 48, 36, 8, 20);
+        super(menu, inv, title, TEXTURE, MachineLayout.EXCAVATOR_ARROW_X, MachineLayout.EXCAVATOR_ARROW_Y, 24, 17);
+    }
+
+    @Override
+    protected void renderMachine(GuiGraphics g, float time) {
+        MachineGuiFx.arrow(g, texture, MachineLayout.EXCAVATOR_ARROW_X, MachineLayout.EXCAVATOR_ARROW_Y, progressFraction(), time);
     }
 
     @Override

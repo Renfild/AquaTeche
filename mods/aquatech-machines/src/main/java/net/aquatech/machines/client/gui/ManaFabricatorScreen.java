@@ -1,6 +1,8 @@
 package net.aquatech.machines.client.gui;
 
 import net.aquatech.machines.inventory.ManaFabricatorMenu;
+import net.aquatech.machines.util.MachineLayout;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,14 +15,34 @@ public class ManaFabricatorScreen extends AbstractMachineScreen<ManaFabricatorMe
             new ResourceLocation("aquatech_machines", "textures/gui/mana_fabricator.png");
 
     public ManaFabricatorScreen(ManaFabricatorMenu menu, Inventory inv, Component title) {
-        super(menu, inv, title, TEXTURE, 52, 36, 8, 20);
+        super(menu, inv, title, TEXTURE, MachineLayout.MANA_FABRICATOR_ARROW_X, MachineLayout.MANA_FABRICATOR_ARROW_Y, 24, 17);
     }
 
     @Override
-    protected void renderTooltip(net.minecraft.client.gui.GuiGraphics g, int mouseX, int mouseY) {
+    protected void renderMachine(GuiGraphics g, float time) {
+        MachineGuiFx.arrow(g, texture, MachineLayout.MANA_FABRICATOR_ARROW_X, MachineLayout.MANA_FABRICATOR_ARROW_Y, progressFraction(), time);
+        MachineGuiFx.crystal(g, texture, MachineLayout.MANA_FABRICATOR_CRYSTAL_X, MachineLayout.MANA_FABRICATOR_CRYSTAL_Y,
+                MachineLayout.MANA_FABRICATOR_CRYSTAL_W, isWorking(), time);
+    }
+
+    /** Вторая шкала у мана-машин показывает ману в соседнем пуле. */
+    @Override
+    protected void renderSecondBar(GuiGraphics g, float time) {
+        MachineGuiFx.bar(g, MachineLayout.BAR2_X, MachineLayout.BAR2_Y, MachineLayout.BAR2_W, MachineLayout.BAR2_H,
+                Math.min(1f, menu.getNeighborMana() / (float) MANA_POOL_CAPACITY), 0xFFB072FF, 0xFFE0C8FF, 0xFF7A3FD0, time);
+    }
+
+    @Override
+    protected void secondBarTooltip(GuiGraphics g, int mouseX, int mouseY) {
+        g.renderComponentTooltip(font, List.of(
+                Component.literal("§dМана в соседнем пуле: §f" + menu.getNeighborMana() + " §7/ §f" + MANA_POOL_CAPACITY)
+        ), mouseX, mouseY);
+    }
+
+    @Override
+    protected void renderTooltip(GuiGraphics g, int mouseX, int mouseY) {
         super.renderTooltip(g, mouseX, mouseY);
-        int x = leftPos, y = topPos;
-        if (mouseX >= x + 51 && mouseX <= x + 77 && mouseY >= y + 35 && mouseY <= y + 54) {
+        if (inside(mouseX, mouseY, MachineLayout.MANA_FABRICATOR_ARROW_X, MachineLayout.MANA_FABRICATOR_ARROW_Y, 24, 17)) {
             g.renderComponentTooltip(font, List.of(
                     Component.literal("§dМана-Фабрикатор: §7превращает FE в ману Botania"),
                     Component.literal("§8Расход: §e2 400 FE §8→ §d200 маны §8за цикл (2с)"),

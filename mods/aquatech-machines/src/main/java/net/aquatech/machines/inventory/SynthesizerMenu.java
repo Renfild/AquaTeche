@@ -1,5 +1,6 @@
 package net.aquatech.machines.inventory;
 
+import net.aquatech.machines.util.MachineLayout;
 import net.aquatech.machines.block.entity.SynthesizerBlockEntity;
 import net.aquatech.machines.registry.ModMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -28,7 +29,7 @@ public class SynthesizerMenu extends BaseMachineMenu {
     @Override
     protected void addMachineSlots(Inventory inv) {
         // [0] Заливка жидкости (ведро лавы или емкость с лавой)
-        addSlot(new SlotItemHandler(blockEntity.getItems(), SynthesizerBlockEntity.SLOT_FLUID_IN, 44, 25) {
+        addSlot(new SlotItemHandler(blockEntity.getItems(), SynthesizerBlockEntity.SLOT_FLUID_IN, MachineLayout.SYNTHESIZER_FLUID_IN_X, MachineLayout.SYNTHESIZER_FLUID_IN_Y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !stack.isEmpty() && (stack.is(Items.LAVA_BUCKET)
@@ -37,25 +38,25 @@ public class SynthesizerMenu extends BaseMachineMenu {
         });
 
         // [1] Выход пустой тары
-        addSlot(output(SynthesizerBlockEntity.SLOT_FLUID_OUT, 44, 51));
+        addSlot(output(SynthesizerBlockEntity.SLOT_FLUID_OUT, MachineLayout.SYNTHESIZER_FLUID_OUT_X, MachineLayout.SYNTHESIZER_FLUID_OUT_Y));
 
         // [2] Твердый реагент A
-        addSlot(new SlotItemHandler(blockEntity.getItems(), SynthesizerBlockEntity.SLOT_INPUT_A, 69, 25));
+        addSlot(new SlotItemHandler(blockEntity.getItems(), SynthesizerBlockEntity.SLOT_INPUT_A, MachineLayout.SYNTHESIZER_INPUT_A_X, MachineLayout.SYNTHESIZER_INPUT_A_Y));
 
         // [3] Твердая матрица B
-        addSlot(new SlotItemHandler(blockEntity.getItems(), SynthesizerBlockEntity.SLOT_INPUT_B, 69, 51));
+        addSlot(new SlotItemHandler(blockEntity.getItems(), SynthesizerBlockEntity.SLOT_INPUT_B, MachineLayout.SYNTHESIZER_INPUT_B_X, MachineLayout.SYNTHESIZER_INPUT_B_Y));
 
         // [4, 5] Выход продукции
-        addSlot(output(SynthesizerBlockEntity.SLOT_OUTPUT_1, 127, 25));
-        addSlot(output(SynthesizerBlockEntity.SLOT_OUTPUT_2, 127, 51));
+        addSlot(output(SynthesizerBlockEntity.SLOT_OUTPUT_1, MachineLayout.SYNTHESIZER_OUTPUT1_X, MachineLayout.SYNTHESIZER_OUTPUT1_Y));
+        addSlot(output(SynthesizerBlockEntity.SLOT_OUTPUT_2, MachineLayout.SYNTHESIZER_OUTPUT2_X, MachineLayout.SYNTHESIZER_OUTPUT2_Y));
 
         // [6] Критический бонус-выход
-        addSlot(output(SynthesizerBlockEntity.SLOT_OUTPUT_3, 151, 38));
+        addSlot(output(SynthesizerBlockEntity.SLOT_OUTPUT_3, MachineLayout.SYNTHESIZER_OUTPUT3_X, MachineLayout.SYNTHESIZER_OUTPUT3_Y));
 
         // [7] Скорость, [8] Батарея, [9] Энергоэффективность (Выносное крыло апгрейдов)
-        addSlot(speedUpgradeSlot(SynthesizerBlockEntity.SLOT_SPEED, 185, 19));
-        addSlot(batterySlot(SynthesizerBlockEntity.SLOT_BATTERY, 185, 41));
-        addSlot(efficiencyUpgradeSlot(SynthesizerBlockEntity.SLOT_EFF, 185, 63));
+        addSlot(speedUpgradeSlot(SynthesizerBlockEntity.SLOT_SPEED, MachineLayout.UPG_X, MachineLayout.UPG_SPEED_Y));
+        addSlot(batterySlot(SynthesizerBlockEntity.SLOT_BATTERY, MachineLayout.UPG_X, MachineLayout.UPG_BATTERY_Y));
+        addSlot(efficiencyUpgradeSlot(SynthesizerBlockEntity.SLOT_EFF, MachineLayout.UPG_X, MachineLayout.UPG_EFF_Y));
     }
 
     public int getPressure() {

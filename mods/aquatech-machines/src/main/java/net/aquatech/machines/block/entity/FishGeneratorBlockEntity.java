@@ -24,21 +24,20 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Рыбный генератор: как печка жжёт уголь, дерево и любое горючее (или рыбу) и превращает горение в FE. Не принимает
- * энергию снаружи, отдаёт её соседям (машины сами её тянут, а соседей-приёмников он ещё и подпитывает).
+ * Рыбный генератор: как печка жжёт уголь, дерево и любое горючее (или рыбу) и превращает горение в FE. Выработка
+ * зависит от топлива (см. {@link FishGeneratorLogic#rateForBurnTicks}). Энергию получают только авторыболовы
+ * (Авто-Рыболов MK-2 и Рыболов MK-1), стоящие вплотную: наружу генератор энергию не выставляет, поэтому ни трубы, ни
+ * другие машины от него не питаются.
  */
 public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvider {
 
     public static final int SLOT_FUEL = 0;
 
-    private final GeneratorEnergy storage = new GeneratorEnergy();
-    private final LazyOptional<EnergyStorage> energyOptional = LazyOptional.of(() -> storage);
     private final ItemStackHandler fuel = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -52,9 +51,14 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
     };
     private final LazyOptional<ItemStackHandler> fuelOptional = LazyOptional.of(() -> fuel);
 
+    private int energy;
     private int burnTime;
     /** Сколько тиков горит текущая единица топлива: нужно экрану для шкалы, у угля и рыбы оно разное. */
     private int burnTotal;
+    /** Выработка в FE/t у топлива, которое горит сейчас. */
+    private int burnRate;
+    /** Сколько FE за последний тик ушло авторыболовам: экран показывает настоящую отдачу. */
+    private int lastTransferred;
 
     public FishGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FISH_GENERATOR.get(), pos, state);
@@ -67,10 +71,23 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
     /** Сколько тиков горит предмет: рыба фиксированно, остальное как в печке (уголь 1600, доски 300 и так далее). */
     public static int burnTicksOf(ItemStack stack) {
         if (stack.isEmpty()) return 0;
-        if (stack.is(ItemTags.FISHES) || FishRosterService.isCatalogFish(BuiltInRegistries.ITEM.getKey(stack.getItem()))) {
+        if (isFish(stack)) {
             return FishGeneratorLogic.FISH_BURN_TICKS;
         }
         return Math.max(0, ForgeHooks.getBurnTime(stack, RecipeType.SMELTING));
+    }
+
+    /** Выработка предмета в FE/t: рыба считается как уголь, остальное по длительности горения. */
+    public static int rateOf(ItemStack stack) {
+        if (stack.isEmpty()) return 0;
+        if (isFish(stack)) {
+            return FishGeneratorLogic.FISH_RATE;
+        }
+        return FishGeneratorLogic.rateForBurnTicks(burnTicksOf(stack));
+    }
+
+    private static boolean isFish(ItemStack stack) {
+        return stack.is(ItemTags.FISHES) || FishRosterService.isCatalogFish(BuiltInRegistries.ITEM.getKey(stack.getItem()));
     }
 
     public ItemStackHandler getFuel() {
@@ -85,28 +102,45 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
         return burnTotal;
     }
 
+    /** Выработка прямо сейчас: ноль, если ничего не горит. */
+    public int getCurrentRate() {
+        return burnTime > 0 ? burnRate : 0;
+    }
+
+    public int getLastTransferred() {
+        return lastTransferred;
+    }
+
     public int getEnergy() {
-        return storage.getEnergyStored();
+        return energy;
     }
 
     public int getMaxEnergy() {
-        return storage.getMaxEnergyStored();
+        return FishGeneratorLogic.CAPACITY;
     }
 
     public static void serverTick(FishGeneratorBlockEntity be) {
         boolean changed = false;
-        boolean roomForTick = FishGeneratorLogic.canBurnThisTick(be.storage.getEnergyStored(), be.storage.getMaxEnergyStored());
-        if (be.burnTime <= 0 && roomForTick) {
-            changed = be.igniteNextFuel();
+        if (be.burnTime <= 0) {
+            int nextRate = rateOf(be.fuel.getStackInSlot(SLOT_FUEL));
+            if (nextRate > 0 && FishGeneratorLogic.canBurnThisTick(be.energy, FishGeneratorLogic.CAPACITY, nextRate)) {
+                changed = be.igniteNextFuel();
+            }
         }
-        boolean producing = be.burnTime > 0 && roomForTick;
+        boolean producing = be.burnTime > 0
+                && FishGeneratorLogic.canBurnThisTick(be.energy, FishGeneratorLogic.CAPACITY, be.burnRate);
         if (producing) {
             be.burnTime--;
-            be.storage.generate(FishGeneratorLogic.FE_PER_TICK);
+            be.energy = Math.min(FishGeneratorLogic.CAPACITY, be.energy + be.burnRate);
             changed = true;
         }
         be.updateLit(producing);
-        if (be.pushEnergyToNeighbors()) {
+        int moved = be.pushEnergyToFishers();
+        if (moved != be.lastTransferred) {
+            be.lastTransferred = moved;
+            changed = true;
+        }
+        if (moved > 0) {
             changed = true;
         }
         if (changed) {
@@ -119,6 +153,7 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
         ItemStack inSlot = fuel.getStackInSlot(SLOT_FUEL);
         int ticks = burnTicksOf(inSlot);
         if (ticks <= 0) return false;
+        int rate = rateOf(inSlot);
         ItemStack leftover = inSlot.getCraftingRemainingItem();
         fuel.extractItem(SLOT_FUEL, 1, false);
         if (!leftover.isEmpty() && fuel.getStackInSlot(SLOT_FUEL).isEmpty()) {
@@ -126,26 +161,23 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
         }
         burnTime = ticks;
         burnTotal = ticks;
+        burnRate = rate;
         return true;
     }
 
-    private boolean pushEnergyToNeighbors() {
-        if (level == null || storage.getEnergyStored() <= 0) return false;
-        boolean moved = false;
+    /** Отдаёт энергию только авторыболовам вплотную. Возвращает, сколько FE ушло за этот тик. */
+    private int pushEnergyToFishers() {
+        if (level == null || energy <= 0) return 0;
+        int total = 0;
         for (Direction side : Direction.values()) {
-            if (storage.getEnergyStored() <= 0) break;
-            BlockEntity neighbor = level.getBlockEntity(worldPosition.relative(side));
-            if (neighbor == null) continue;
-            var target = neighbor.getCapability(ForgeCapabilities.ENERGY, side.getOpposite()).orElse(null);
-            if (target == null || !target.canReceive()) continue;
-            int offered = storage.extractEnergy(FishGeneratorLogic.MAX_EXTRACT, true);
-            int accepted = target.receiveEnergy(offered, false);
-            if (accepted > 0) {
-                storage.extractEnergy(accepted, false);
-                moved = true;
-            }
+            if (energy <= 0) break;
+            if (!(level.getBlockEntity(worldPosition.relative(side)) instanceof BaseMachineBlockEntity machine)) continue;
+            if (!machine.acceptsFishGeneratorPower()) continue;
+            int accepted = machine.receiveGeneratorEnergy(Math.min(FishGeneratorLogic.MAX_EXTRACT, energy));
+            energy -= accepted;
+            total += accepted;
         }
-        return moved;
+        return total;
     }
 
     private void updateLit(boolean lit) {
@@ -179,25 +211,25 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put("Fuel", fuel.serializeNBT());
-        tag.putInt("Energy", storage.getEnergyStored());
+        tag.putInt("Energy", energy);
         tag.putInt("BurnTime", burnTime);
         tag.putInt("BurnTotal", burnTotal);
+        tag.putInt("BurnRate", burnRate);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         fuel.deserializeNBT(tag.getCompound("Fuel"));
-        storage.set(tag.getInt("Energy"));
+        energy = Math.max(0, Math.min(FishGeneratorLogic.CAPACITY, tag.getInt("Energy")));
         burnTime = tag.getInt("BurnTime");
         burnTotal = tag.contains("BurnTotal") ? tag.getInt("BurnTotal") : Math.max(burnTime, 0);
+        burnRate = tag.contains("BurnRate") ? tag.getInt("BurnRate") : FishGeneratorLogic.RATE_COAL;
     }
 
+    /** Наружу выставлен только слот топлива (воронки): энергетической способности у генератора нет. */
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ENERGY) {
-            return energyOptional.cast();
-        }
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return fuelOptional.cast();
         }
@@ -207,32 +239,6 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
-        energyOptional.invalidate();
         fuelOptional.invalidate();
-    }
-
-    /** Накопитель, который сам копит энергию и отдаёт её наружу, но извне ничего не принимает. */
-    private final class GeneratorEnergy extends EnergyStorage {
-
-        GeneratorEnergy() {
-            super(FishGeneratorLogic.CAPACITY, 0, FishGeneratorLogic.MAX_EXTRACT);
-        }
-
-        void generate(int amount) {
-            energy = Math.min(capacity, energy + Math.max(0, amount));
-        }
-
-        void set(int value) {
-            energy = Math.max(0, Math.min(capacity, value));
-        }
-
-        @Override
-        public int extractEnergy(int maxExtract, boolean simulate) {
-            int extracted = super.extractEnergy(maxExtract, simulate);
-            if (extracted > 0 && !simulate) {
-                setChanged();
-            }
-            return extracted;
-        }
     }
 }

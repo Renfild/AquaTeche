@@ -1,5 +1,6 @@
 package net.aquatech.machines.inventory;
 
+import net.aquatech.machines.util.MachineLayout;
 import net.aquatech.machines.block.entity.ExtractorBlockEntity;
 import net.aquatech.machines.registry.ModMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -24,15 +25,15 @@ public class ExtractorMenu extends BaseMachineMenu {
     @Override
     protected void addMachineSlots(Inventory inv) {
         // [0] Входной слот сырья
-        addSlot(new SlotItemHandler(blockEntity.getItems(), ExtractorBlockEntity.SLOT_INPUT, 45, 37));
+        addSlot(new SlotItemHandler(blockEntity.getItems(), ExtractorBlockEntity.SLOT_INPUT, MachineLayout.EXTRACTOR_INPUT_X, MachineLayout.EXTRACTOR_INPUT_Y));
         // [1] Выход готовой продукции
-        addSlot(output(ExtractorBlockEntity.SLOT_OUTPUT, 115, 35));
+        addSlot(output(ExtractorBlockEntity.SLOT_OUTPUT, MachineLayout.EXTRACTOR_OUTPUT_X, MachineLayout.EXTRACTOR_OUTPUT_Y));
         // [2] Апгрейд скорости (выносное крыло)
-        addSlot(speedUpgradeSlot(ExtractorBlockEntity.SLOT_SPEED, 185, 19));
+        addSlot(speedUpgradeSlot(ExtractorBlockEntity.SLOT_SPEED, MachineLayout.UPG_X, MachineLayout.UPG_SPEED_Y));
         // [3] Слот батареи / FE-накопителя (выносное крыло)
-        addSlot(batterySlot(ExtractorBlockEntity.SLOT_BATTERY, 185, 41));
+        addSlot(batterySlot(ExtractorBlockEntity.SLOT_BATTERY, MachineLayout.UPG_X, MachineLayout.UPG_BATTERY_Y));
         // [4] Апгрейд энергоэффективности (выносное крыло)
-        addSlot(efficiencyUpgradeSlot(ExtractorBlockEntity.SLOT_EFF, 185, 63));
+        addSlot(efficiencyUpgradeSlot(ExtractorBlockEntity.SLOT_EFF, MachineLayout.UPG_X, MachineLayout.UPG_EFF_Y));
     }
 
     public BlockPos getPos() {

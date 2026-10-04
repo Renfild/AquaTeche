@@ -282,6 +282,19 @@ public final class PersonalRaftSpawner {
             return false;
         }
         player.teleportTo(level, fresh.x() + 0.5, SPAWN_Y + 0.1, fresh.z() + 0.5, 180.0f, 0.0f);
+        // Essentials ставит /home в точку, где стоит игрок. При создании плота игрок ещё на старом месте, поэтому
+        // после телепорта на новый плот точку дома нужно переставить, иначе /home и меню F4 ведут на первый плот.
+        autoSetHome(player, new BlockPos(fresh.x(), SPAWN_Y, fresh.z()));
+        return true;
+    }
+
+    /** Телепорт игрока на палубу его текущего плота (меню F4 «Остров»). false, если плота нет. */
+    public static boolean teleportToRaft(ServerPlayer player) {
+        ServerLevel level = player.server.getLevel(ServerLevel.OVERWORLD);
+        if (level == null) return false;
+        BlockPos center = raftCenterOf(level, player.getUUID());
+        if (center == null) return false;
+        player.teleportTo(level, center.getX() + 0.5, SPAWN_Y + 0.1, center.getZ() + 0.5, player.getYRot(), 0.0f);
         return true;
     }
 

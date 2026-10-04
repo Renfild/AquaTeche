@@ -1,5 +1,6 @@
 package net.aquatech.machines.inventory;
 
+import net.aquatech.machines.util.MachineLayout;
 import net.aquatech.machines.block.entity.FisherBlockEntity;
 import net.aquatech.machines.registry.ModItems;
 import net.aquatech.machines.registry.ModMenuTypes;
@@ -28,7 +29,7 @@ public class FisherMenu extends BaseMachineMenu {
     @Override
     protected void addMachineSlots(Inventory inv) {
         // [0] Удочка StarCatcher
-        addSlot(new SlotItemHandler(blockEntity.getItems(), FisherBlockEntity.SLOT_ROD, 45, 25) {
+        addSlot(new SlotItemHandler(blockEntity.getItems(), FisherBlockEntity.SLOT_ROD, MachineLayout.FISHER_ROD_X, MachineLayout.FISHER_ROD_Y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !stack.isEmpty() && (stack.getItem() instanceof FishingRodItem
@@ -41,7 +42,7 @@ public class FisherMenu extends BaseMachineMenu {
             }
         });
         // [1] Ядро Рыболова
-        addSlot(new SlotItemHandler(blockEntity.getItems(), FisherBlockEntity.SLOT_CORE, 45, 49) {
+        addSlot(new SlotItemHandler(blockEntity.getItems(), FisherBlockEntity.SLOT_CORE, MachineLayout.FISHER_CORE_X, MachineLayout.FISHER_CORE_Y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !stack.isEmpty() && stack.is(ModItems.FISHING_CORE.get());
@@ -53,13 +54,13 @@ public class FisherMenu extends BaseMachineMenu {
             }
         });
         // [2] Апгрейд скорости (выносное крыло)
-        addSlot(speedUpgradeSlot(FisherBlockEntity.SLOT_SPEED, 185, 19));
+        addSlot(speedUpgradeSlot(FisherBlockEntity.SLOT_SPEED, MachineLayout.UPG_X, MachineLayout.UPG_SPEED_Y));
         // [3] Слот батареи / аккумулятора (выносное крыло)
-        addSlot(batterySlot(FisherBlockEntity.SLOT_BATTERY, 185, 41));
+        addSlot(batterySlot(FisherBlockEntity.SLOT_BATTERY, MachineLayout.UPG_X, MachineLayout.UPG_BATTERY_Y));
         // [4] Выход улова
-        addSlot(output(FisherBlockEntity.SLOT_OUTPUT, 115, 35));
+        addSlot(output(FisherBlockEntity.SLOT_OUTPUT, MachineLayout.FISHER_OUTPUT_X, MachineLayout.FISHER_OUTPUT_Y));
         // [5] Апгрейд энергоэффективности (выносное крыло)
-        addSlot(efficiencyUpgradeSlot(FisherBlockEntity.SLOT_EFF, 185, 63));
+        addSlot(efficiencyUpgradeSlot(FisherBlockEntity.SLOT_EFF, MachineLayout.UPG_X, MachineLayout.UPG_EFF_Y));
     }
 
     public BlockPos getPos() {

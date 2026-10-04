@@ -116,7 +116,10 @@ public final class WarpConfig {
         }
 
         if (warpId.equalsIgnoreCase("home") || warpId.equalsIgnoreCase("island") || cmd.equalsIgnoreCase("home")) {
-            player.server.getCommands().performPrefixedCommand(player.createCommandSourceStack(), "home");
+            // Сначала на текущий плот игрока: Essentials-/home мог остаться на первом плоте после пересоздания острова.
+            if (!teleportToRaft(player)) {
+                player.server.getCommands().performPrefixedCommand(player.createCommandSourceStack(), "home");
+            }
             player.sendSystemMessage(net.minecraft.network.chat.Component.literal("\u00a7a[AquaTech] \u00a7f\u0422\u0435\u043b\u0435\u043f\u043e\u0440\u0442\u0430\u0446\u0438\u044f \u043d\u0430 \u0442\u043e\u0447\u043a\u0443 \u00a7e\u00ab" + title + "\u00bb\u00a7f..."));
             return true;
         }
@@ -124,6 +127,18 @@ public final class WarpConfig {
         player.server.getCommands().performPrefixedCommand(player.createCommandSourceStack(), cmd);
         player.sendSystemMessage(net.minecraft.network.chat.Component.literal("\u00a7a[AquaTech] \u00a7f\u0422\u0435\u043b\u0435\u043f\u043e\u0440\u0442\u0430\u0446\u0438\u044f \u043d\u0430 \u0442\u043e\u0447\u043a\u0443 \u00a7e\u00ab" + title + "\u00bb\u00a7f..."));
         return true;
+    }
+
+    /** Плот живёт в aquatech_ui: прямой зависимости нет, поэтому вызов через reflection. */
+    private static boolean teleportToRaft(net.minecraft.server.level.ServerPlayer player) {
+        try {
+            Class<?> spawner = Class.forName("net.aquatech.ui.skyblock.PersonalRaftSpawner");
+            Object moved = spawner.getMethod("teleportToRaft", net.minecraft.server.level.ServerPlayer.class).invoke(null, player);
+            return Boolean.TRUE.equals(moved);
+        } catch (ReflectiveOperationException | LinkageError error) {
+            AquaLumenUI.LOGGER.debug("Raft teleport unavailable, falling back to /home: {}", error.toString());
+            return false;
+        }
     }
 
     public static final class Data {

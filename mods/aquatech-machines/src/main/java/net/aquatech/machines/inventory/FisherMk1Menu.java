@@ -1,5 +1,6 @@
 package net.aquatech.machines.inventory;
 
+import net.aquatech.machines.util.MachineLayout;
 import net.aquatech.machines.block.entity.FisherMk1BlockEntity;
 import net.aquatech.machines.registry.ModMenuTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,7 +24,7 @@ public class FisherMk1Menu extends BaseMachineMenu {
     @Override
     protected void addMachineSlots(Inventory inv) {
         // [0] Удочка StarCatcher
-        addSlot(new SlotItemHandler(blockEntity.getItems(), FisherMk1BlockEntity.SLOT_ROD, 45, 25) {
+        addSlot(new SlotItemHandler(blockEntity.getItems(), FisherMk1BlockEntity.SLOT_ROD, MachineLayout.FISHER_MK1_ROD_X, MachineLayout.FISHER_MK1_ROD_Y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !stack.isEmpty() && (stack.getItem() instanceof FishingRodItem
@@ -36,8 +37,8 @@ public class FisherMk1Menu extends BaseMachineMenu {
             }
         });
         // [1] Батарея / редстоун
-        addSlot(batterySlot(FisherMk1BlockEntity.SLOT_BATTERY, 45, 49));
+        addSlot(batterySlot(FisherMk1BlockEntity.SLOT_BATTERY, MachineLayout.FISHER_MK1_BATTERY_X, MachineLayout.FISHER_MK1_BATTERY_Y));
         // [2] Выход улова
-        addSlot(output(FisherMk1BlockEntity.SLOT_OUTPUT, 115, 35));
+        addSlot(output(FisherMk1BlockEntity.SLOT_OUTPUT, MachineLayout.FISHER_MK1_OUTPUT_X, MachineLayout.FISHER_MK1_OUTPUT_Y));
     }
 }

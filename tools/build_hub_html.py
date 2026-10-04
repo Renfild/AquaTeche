@@ -121,6 +121,8 @@ hub_html_raw = r'''<!doctype html>
     .button{min-height:32px;padding:0 14px;border:1px solid rgba(255,255,255,.12);border-radius:980px;background:rgba(255,255,255,.06);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;transition:.18s var(--ease)}
     .button:hover{background:rgba(255,255,255,.1);transform:none}
     .button:disabled{opacity:.4;cursor:default;transform:none}
+    .button.locked{opacity:.4;filter:grayscale(1);cursor:not-allowed;transform:none}
+    .merchant-note{display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:10px 14px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:12px;background:color-mix(in srgb,var(--gold) 10%,transparent);font-size:12px}
     .button.primary{border:0;background:var(--accent);color:#06211c;font-weight:650}
     .rank-card{text-align:left;--rc:var(--line)}
     .rank-card:hover{border-color:var(--rc)}
@@ -350,7 +352,10 @@ hub_html_raw = r'''<!doctype html>
     .lot-info { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 3px; }
     .lot-name {
       font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.25;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere;
+    }
+    .lot-id {
+      font-size: 9.5px; color: var(--muted); opacity: .75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .lot-seller-tag {
       font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px;
@@ -626,6 +631,9 @@ try {
     settings:["Настройки",'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.2a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.2a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3 1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.2a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l.1.1a1.6 1.6 0 0 0-.3 1.8 1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.2a1.6 1.6 0 0 0-1.4 1Z"/></svg>']
   };
 
+  /* Рыбу скупает только торговец на спавне: клиент сообщает, стоит ли он рядом (AquaLumen.setMerchantNear). */
+  let merchantNear = false;
+
   const state = {
     tab:"profile",
     payload:{
@@ -674,7 +682,11 @@ try {
     return `<svg viewBox="0 0 24 24" class="${cls}" fill="none" stroke="var(--muted)" stroke-width="1.5"><path d="M4 8.5 6 5h12l2 3.5v3H4Z"/><path d="M4 11.5V20h16v-8.5"/></svg>`;
   }
 
+  /* Иконки предметов из ресурсов игры (клиент присылает их для лотов аукциона). */
+  const EXTRA_ICONS = {};
+
   function lotIconHtml(lot, cls) {
+    if (lot.itemId && EXTRA_ICONS[lot.itemId]) return `<img src="${EXTRA_ICONS[lot.itemId]}" class="${cls}" alt="">`;
     const spr = atlasSprite(lot.itemId);
     if (spr) return spr;
     const cleanLabel = String(lot.label || "").replace(/<[^>]*>/g, "").replace(/§./g, "").trim();
@@ -1576,18 +1588,21 @@ __PASS_VIEW_JS__
       <p style="font-size:9.5px;color:var(--muted);margin:0 0 10px;min-height:12px;">${f.detail ? esc(f.detail) : "&nbsp;"}</p>
       <div class="offer-foot">
         <span class="price">${coins(f.totalCoins || 0)}</span>
-        <button class="button sell-single-fish" data-fish="${esc(f.id)}" ${f.count > 0 ? "" : "disabled"}>Продать</button>
+        <button class="button sell-single-fish${merchantNear ? "" : " locked"}" data-fish="${esc(f.id)}" ${f.count > 0 ? "" : "disabled"}>Продать</button>
       </div>
     </article>`).join("");
 
+    const merchantNote = merchantNear ? "" : `<div class="merchant-note"><b>Торговца рядом нет.</b> Рыбу можно продать только торговцу рыбой на спавне. Подойдите к нему, и кнопки станут доступны.</div>`;
+
     return `<div class="view">${title("Скупщик Рыбы", "Продавайте улов прямо из инвентаря")}
+      ${merchantNote}
       <div class="grid two">
         <section class="card hero" style="min-height:140px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
           <div>
             <h2 style="font-size:20px;margin:0 0 6px;font-weight:800;letter-spacing:-0.2px;">Скупка Рыбы</h2>
             <div class="rank fish-sub">В инвентаре: <b>${totalFish}</b> шт.</div><div class="fish-worth">Стоимость: ${coins(totalValue)}</div>
           </div>
-          <button class="button primary sell-all-fish" ${totalFish <= 0 ? "disabled" : ""} style="height:38px;padding:0 20px;font-weight:750;">
+          <button class="button primary sell-all-fish${merchantNear ? "" : " locked"}" ${totalFish <= 0 ? "disabled" : ""} style="height:38px;padding:0 20px;font-weight:750;">
             ${totalFish > 0 ? `<span>Продать всё</span><em>+${coins(totalValue)}</em>` : "Инвентарь пуст"}
           </button>
         </section>
@@ -1693,6 +1708,7 @@ __PASS_VIEW_JS__
         </div>
         <div class="lot-info">
           <div class="lot-name" title="${esc(cleanLabel || lot.itemId || '')}">${esc(cleanLabel || lot.itemId || 'Предмет')}</div>
+          <div class="lot-id">${esc(lot.itemId || '')}</div>
           ${seller}
         </div>
         <div class="lot-action-col">
@@ -1909,12 +1925,14 @@ __PASS_VIEW_JS__
 
     document.querySelectorAll(".sell-all-fish").forEach(b => b.onclick = () => {
       action("fish.sell_all");
+      if (!merchantNear) { toast("Рыбу можно продать только торговцу на спавне"); return; }
       toast("Продажа рыбы...");
       setTimeout(() => action("hub.refresh"), 400);
     });
 
     document.querySelectorAll(".sell-single-fish").forEach(b => b.onclick = () => {
       action("fish.sell", b.dataset.fish);
+      if (!merchantNear) { toast("Рыбу можно продать только торговцу на спавне"); return; }
       toast("Продажа рыбы...");
       setTimeout(() => action("hub.refresh"), 400);
     });
@@ -2238,6 +2256,17 @@ __PASS_VIEW_JS__
     },
     applySnapshot(snapshot) {
       applyPayload(snapshot);
+    },
+    setItemIcons(icons) {
+      if (!icons) return;
+      Object.assign(EXTRA_ICONS, icons);
+      if (state.tab === "auction") renderView(false, true);
+    },
+    setMerchantNear(near) {
+      const next = Boolean(near);
+      if (next === merchantNear) return;
+      merchantNear = next;
+      if (state.tab === "fishing") renderView(false, true);
     },
     update(jsonOrObj) {
       try {

@@ -10,8 +10,10 @@ import org.lwjgl.glfw.GLFW;
 import store.aquateche.aqualumen.AquaLumenUI;
 import store.aquateche.aqualumen.client.LumenClient;
 import store.aquateche.aqualumen.client.web.HubSnapshotJson;
+import store.aquateche.aqualumen.client.web.ItemIconResolver;
 import store.aquateche.aqualumen.client.web.LumenWebBridge;
 import store.aquateche.aqualumen.common.data.HubSnapshot;
+import store.aquateche.aqualumen.common.service.FishMerchantProximity;
 import store.aquateche.aqualumen.config.LumenConfig;
 
 import java.util.Set;
@@ -32,6 +34,10 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
     private boolean pageReady;
     private boolean modalOpen;
     private int pageWaitTicks;
+    private int merchantCheckTicks;
+    /** Предметы, чьи иконки уже отправлены странице: аукцион показывает любые предметы, иконки берём из ресурсов игры. */
+    private final java.util.Set<String> iconsSent = new java.util.HashSet<>();
+    private Boolean merchantNearSent;
 
     public LumenWebScreen() {
         this("profile");
@@ -85,6 +91,23 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
             return;
         }
         pushSnapshot();
+        pushMerchantNear();
+    }
+
+    /** Раз в полсекунды говорит странице, стоит ли торговец рядом: от этого зависят кнопки продажи рыбы. */
+    private void pushMerchantNear() {
+        if (!pageReady || bridge == null || minecraft == null || minecraft.player == null) {
+            return;
+        }
+        if (merchantNearSent != null && ++merchantCheckTicks < 10) {
+            return;
+        }
+        merchantCheckTicks = 0;
+        boolean near = FishMerchantProximity.isNear(minecraft.player);
+        if (merchantNearSent == null || merchantNearSent != near) {
+            merchantNearSent = near;
+            bridge.execute("if(window.AquaLumen&&window.AquaLumen.setMerchantNear){window.AquaLumen.setMerchantNear(" + near + ");}");
+        }
     }
 
     private void abort(String reason) {
@@ -118,7 +141,29 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
         String json = HubSnapshotJson.encode(pendingSnapshot, LumenClient.snapshotReceivedAt(), initialTab, standalone);
         bridge.execute("if(window.AquaLumen&&window.AquaLumen.applySnapshot){window.AquaLumen.applySnapshot(" + json + ");}");
         if (pageReady) {
+            pushItemIcons(pendingSnapshot);
             pendingSnapshot = null;
+        }
+    }
+
+    /** Иконки предметов аукциона, которых нет в странице: берутся из моделей предметов, без OpenGL. */
+    private void pushItemIcons(HubSnapshot snapshot) {
+        if (snapshot == null || snapshot.market() == null || bridge == null) {
+            return;
+        }
+        JsonObject icons = new JsonObject();
+        for (HubSnapshot.MarketEntry lot : snapshot.market()) {
+            String id = lot.itemId();
+            if (id == null || id.isBlank() || !iconsSent.add(id)) {
+                continue;
+            }
+            String url = ItemIconResolver.dataUrl(id);
+            if (url != null) {
+                icons.addProperty(id, url);
+            }
+        }
+        if (icons.size() > 0) {
+            bridge.execute("if(window.AquaLumen&&window.AquaLumen.setItemIcons){window.AquaLumen.setItemIcons(" + icons + ");}");
         }
     }
 

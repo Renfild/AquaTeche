@@ -40,6 +40,11 @@ public class FisherBlockEntity extends BaseMachineBlockEntity {
         return 1;
     }
 
+    @Override
+    public boolean acceptsFishGeneratorPower() {
+        return true;
+    }
+
     public int rodTier() {
         ItemStack rod = items.getStackInSlot(SLOT_ROD);
         if (rod.isEmpty()) return 0;

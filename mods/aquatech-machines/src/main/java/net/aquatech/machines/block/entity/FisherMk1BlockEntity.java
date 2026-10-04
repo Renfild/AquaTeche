@@ -2,6 +2,7 @@ package net.aquatech.machines.block.entity;
 
 import net.aquatech.machines.registry.ModBlockEntities;
 import net.aquatech.machines.util.FisherLoot;
+import net.aquatech.machines.util.RodLootBridge;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -10,8 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Рыболов MK-1: удочка [0], батарея [1], выход [2].
- * Раз в 5 секунд (100 тиков по 40 FE) добывает один ресурс по тиру удочки, но не выше тира 4.
- * Без Ядра рыбы, множителя улова и апгрейдов: всё это у MK-2.
+ * Раз в 5 секунд (100 тиков по 40 FE) достаёт один ресурс из улова самой удочки: тот же пул и тот же тир, что при
+ * обычной ловле. Без ядра рыбы, множителя улова и апгрейдов, в этом он проще MK-2. Энергию берёт и от батареи, и от
+ * Рыбного генератора рядом.
  */
 public class FisherMk1BlockEntity extends BaseMachineBlockEntity {
 
@@ -19,8 +21,6 @@ public class FisherMk1BlockEntity extends BaseMachineBlockEntity {
     public static final int SLOT_BATTERY = 1;
     public static final int SLOT_OUTPUT = 2;
 
-    /** Удочки выше четвёртого тира дают MK-1 тот же пул, что и тир 4. */
-    public static final int MAX_TIER = 4;
     public static final int CYCLE_TICKS = 100;
     public static final int ENERGY_PER_TICK = 40;
     public static final int ENERGY_CAPACITY = 20000;
@@ -41,10 +41,15 @@ public class FisherMk1BlockEntity extends BaseMachineBlockEntity {
         return 1;
     }
 
+    @Override
+    public boolean acceptsFishGeneratorPower() {
+        return true;
+    }
+
     public int rodTier() {
         ItemStack rod = items.getStackInSlot(SLOT_ROD);
         if (rod.isEmpty()) return 0;
-        return Math.min(MAX_TIER, FisherLoot.tierOf(rod));
+        return FisherLoot.tierOf(rod);
     }
 
     @Override
@@ -58,7 +63,10 @@ public class FisherMk1BlockEntity extends BaseMachineBlockEntity {
     protected void craftOnce() {
         int tier = rodTier();
         if (tier <= 0 || level == null) return;
-        ItemStack loot = FisherLoot.rollResources(tier, level.getRandom());
+        // Те же ресурсы, что даёт сама удочка: берём один стек из её улова. Запасная таблица нужна, если aquatech_ui нет.
+        java.util.List<ItemStack> rolled = RodLootBridge.rollLikeRod(items.getStackInSlot(SLOT_ROD), level.getRandom());
+        ItemStack loot = rolled.isEmpty() ? FisherLoot.rollResources(tier, level.getRandom())
+                : rolled.get(level.getRandom().nextInt(rolled.size()));
         if (loot == null || loot.isEmpty()) {
             loot = new ItemStack(Items.RAW_IRON, 1);
         }

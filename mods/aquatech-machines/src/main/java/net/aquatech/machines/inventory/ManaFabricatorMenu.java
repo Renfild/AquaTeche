@@ -1,5 +1,6 @@
 package net.aquatech.machines.inventory;
 
+import net.aquatech.machines.util.MachineLayout;
 import net.aquatech.machines.block.entity.ManaFabricatorBlockEntity;
 import net.aquatech.machines.registry.ModMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -24,9 +25,9 @@ public class ManaFabricatorMenu extends BaseMachineMenu {
     @Override
     protected void addMachineSlots(Inventory inv) {
         // [0] Батарея, [1] Скорость, [2] Энергоэффективность (выносное крыло)
-        addSlot(batterySlot(ManaFabricatorBlockEntity.SLOT_BATTERY, 185, 19));
-        addSlot(speedUpgradeSlot(ManaFabricatorBlockEntity.SLOT_SPEED, 185, 41));
-        addSlot(efficiencyUpgradeSlot(ManaFabricatorBlockEntity.SLOT_EFF, 185, 63));
+        addSlot(batterySlot(ManaFabricatorBlockEntity.SLOT_BATTERY, MachineLayout.UPG_X, MachineLayout.UPG_BATTERY_Y));
+        addSlot(speedUpgradeSlot(ManaFabricatorBlockEntity.SLOT_SPEED, MachineLayout.UPG_X, MachineLayout.UPG_SPEED_Y));
+        addSlot(efficiencyUpgradeSlot(ManaFabricatorBlockEntity.SLOT_EFF, MachineLayout.UPG_X, MachineLayout.UPG_EFF_Y));
     }
 
     public int getNeighborMana() {

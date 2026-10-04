@@ -1,5 +1,6 @@
 package net.aquatech.machines.inventory;
 
+import net.aquatech.machines.util.MachineLayout;
 import net.aquatech.machines.block.entity.CentrifugeBlockEntity;
 import net.aquatech.machines.registry.ModMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -28,7 +29,7 @@ public class CentrifugeMenu extends BaseMachineMenu {
     @Override
     protected void addMachineSlots(Inventory inv) {
         // [0] Заливка морской воды (ведро или емкость с водой)
-        addSlot(new SlotItemHandler(blockEntity.getItems(), CentrifugeBlockEntity.SLOT_RAW_WATER_IN, 42, 25) {
+        addSlot(new SlotItemHandler(blockEntity.getItems(), CentrifugeBlockEntity.SLOT_RAW_WATER_IN, MachineLayout.CENTRIFUGE_RAW_IN_X, MachineLayout.CENTRIFUGE_RAW_IN_Y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !stack.isEmpty() && (stack.is(Items.WATER_BUCKET)
@@ -37,10 +38,10 @@ public class CentrifugeMenu extends BaseMachineMenu {
         });
 
         // [1] Выход пустого ведра
-        addSlot(output(CentrifugeBlockEntity.SLOT_RAW_WATER_OUT, 42, 51));
+        addSlot(output(CentrifugeBlockEntity.SLOT_RAW_WATER_OUT, MachineLayout.CENTRIFUGE_RAW_OUT_X, MachineLayout.CENTRIFUGE_RAW_OUT_Y));
 
         // [2] Пустая тара под дистиллят (ведро, колба, емкость)
-        addSlot(new SlotItemHandler(blockEntity.getItems(), CentrifugeBlockEntity.SLOT_DISTILL_EMPTY, 156, 25) {
+        addSlot(new SlotItemHandler(blockEntity.getItems(), CentrifugeBlockEntity.SLOT_DISTILL_EMPTY, MachineLayout.CENTRIFUGE_DISTILL_EMPTY_X, MachineLayout.CENTRIFUGE_DISTILL_EMPTY_Y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !stack.isEmpty() && (stack.is(Items.BUCKET) || stack.is(Items.GLASS_BOTTLE)
@@ -49,18 +50,18 @@ public class CentrifugeMenu extends BaseMachineMenu {
         });
 
         // [3] Наполненный дистиллят
-        addSlot(output(CentrifugeBlockEntity.SLOT_DISTILL_FULL, 156, 51));
+        addSlot(output(CentrifugeBlockEntity.SLOT_DISTILL_FULL, MachineLayout.CENTRIFUGE_DISTILL_FULL_X, MachineLayout.CENTRIFUGE_DISTILL_FULL_Y));
 
         // [4, 5, 6, 7] Сетка 2×2 под минералы и соли
-        addSlot(output(CentrifugeBlockEntity.SLOT_MINERAL_0, 97, 27));
-        addSlot(output(CentrifugeBlockEntity.SLOT_MINERAL_1, 116, 27));
-        addSlot(output(CentrifugeBlockEntity.SLOT_MINERAL_2, 97, 49));
-        addSlot(output(CentrifugeBlockEntity.SLOT_MINERAL_3, 116, 49));
+        addSlot(output(CentrifugeBlockEntity.SLOT_MINERAL_0, MachineLayout.CENTRIFUGE_MINERAL0_X, MachineLayout.CENTRIFUGE_MINERAL0_Y));
+        addSlot(output(CentrifugeBlockEntity.SLOT_MINERAL_1, MachineLayout.CENTRIFUGE_MINERAL1_X, MachineLayout.CENTRIFUGE_MINERAL1_Y));
+        addSlot(output(CentrifugeBlockEntity.SLOT_MINERAL_2, MachineLayout.CENTRIFUGE_MINERAL2_X, MachineLayout.CENTRIFUGE_MINERAL2_Y));
+        addSlot(output(CentrifugeBlockEntity.SLOT_MINERAL_3, MachineLayout.CENTRIFUGE_MINERAL3_X, MachineLayout.CENTRIFUGE_MINERAL3_Y));
 
         // [8] Скорость, [9] Энергоэффективность, [10] Батарея (В правом выносном крыле)
-        addSlot(speedUpgradeSlot(CentrifugeBlockEntity.SLOT_SPEED, 185, 19));
-        addSlot(batterySlot(CentrifugeBlockEntity.SLOT_BATTERY, 185, 41));
-        addSlot(efficiencyUpgradeSlot(CentrifugeBlockEntity.SLOT_EFF, 185, 63));
+        addSlot(speedUpgradeSlot(CentrifugeBlockEntity.SLOT_SPEED, MachineLayout.UPG_X, MachineLayout.UPG_SPEED_Y));
+        addSlot(batterySlot(CentrifugeBlockEntity.SLOT_BATTERY, MachineLayout.UPG_X, MachineLayout.UPG_BATTERY_Y));
+        addSlot(efficiencyUpgradeSlot(CentrifugeBlockEntity.SLOT_EFF, MachineLayout.UPG_X, MachineLayout.UPG_EFF_Y));
     }
 
     public int getRawWaterAmount() {
