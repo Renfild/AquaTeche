@@ -1,6 +1,8 @@
 package net.aquatech.ui.entity;
 
 import net.aquatech.ui.client.FishMerchantClient;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -51,6 +53,8 @@ public class FishMerchantEntity extends PathfinderMob implements GeoEntity {
         setNoAi(true);
         setInvulnerable(true);
         setPersistenceRequired();
+        setCustomName(Component.translatable("entity.aquatech_ui.fish_merchant").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD));
+        setCustomNameVisible(true);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

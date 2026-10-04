@@ -2,18 +2,19 @@ package store.aquateche.aqualumen.common.service;
 
 import java.util.List;
 
-/** The five steps of the new-player guide: what the HUD panel shows for each. Pure data, no Minecraft types. */
+/** The six steps of the new-player guide: what the HUD panel shows for each. Pure data, no Minecraft types. */
 public final class OnboardingSteps {
 
     public record Step(int id, String title, String hint, int goal) {
     }
 
     private static final List<Step> ALL = List.of(
-            new Step(1, "Забери стартовый набор", "Нажми F4, вкладка «Киты»", 1),
-            new Step(2, "Поймай 3 рыбы", "Возьми удочку в руку и закинь её в воду: правая кнопка мыши", 3),
-            new Step(3, "Открой подарочный кейс", "Нажми F4, вкладка «Кейсы»", 1),
-            new Step(4, "Продай улов", "F4, вкладка «Рыбалка», кнопка «Продать»", 1),
-            new Step(5, "Поймай руду", "Медь, олово, железо или уголь выпадают с удочки", 1));
+            new Step(1, "Создай свой остров", "Напиши в чате /is: появится твой личный остров", 1),
+            new Step(2, "Забери стартовый набор", "Нажми F4, вкладка «Киты»", 1),
+            new Step(3, "Поймай 3 рыбы", "Возьми удочку в руку и закинь её в воду: правая кнопка мыши", 3),
+            new Step(4, "Открой подарочный кейс", "Нажми F4, вкладка «Кейсы»", 1),
+            new Step(5, "Продай улов", "F4, вкладка «Рыбалка», кнопка «Продать»", 1),
+            new Step(6, "Поймай руду", "Медь, олово, железо или уголь выпадают с удочки", 1));
 
     public static final int COUNT = ALL.size();
 

@@ -5,6 +5,8 @@ PlayerEvents.loggedIn((event) => {
   player.persistentData.aquatech_f4_hint = 1
   // самый первый вход: включаем обучение первых 10 минут (42_aquatech_onboarding.js)
   player.persistentData.putInt('aquatech_onboard', 1)
+  player.persistentData.putInt('aquatech_onboard_v', 2)
+  player.tell(Text.of('§b[AquaTech] §fНапиши §e/is§f, чтобы создать свой личный остров.'))
   player.tell(Text.of('§b[AquaTech] §fМеню сервера — клавиша §eF4§f. Магазин, кейсы, аукцион.'))
 
   // Плот ставит PersonalRaftSpawner синхронно на этом же логине (server.execute в onLogin),

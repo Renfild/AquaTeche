@@ -19,7 +19,7 @@ import store.aquateche.aqualumen.common.service.OnboardingSteps;
 import java.util.List;
 
 /**
- * New-player guide: a panel on the left that slides in, lists the five steps, shows the current hint with a
+ * New-player guide: a panel on the left that slides in, lists the six steps, shows the current hint with a
  * progress bar and drops a toast with the reward when a step is done. It folds into a small tab (key or click).
  * The server (KubeJS script + OnboardingService) owns the state; this class only draws it.
  */

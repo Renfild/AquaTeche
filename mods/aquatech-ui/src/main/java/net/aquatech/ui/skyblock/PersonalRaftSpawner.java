@@ -34,6 +34,7 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class PersonalRaftSpawner {
     public static final String TAG_READY = AquaTechUI.MOD_ID + ":raft_ready";
+    public static final String TAG_IS_USED = "aquatech_is_used";
     public static final String TAG_X = AquaTechUI.MOD_ID + ":raft_x";
     public static final String TAG_Y = AquaTechUI.MOD_ID + ":raft_y";
     public static final String TAG_Z = AquaTechUI.MOD_ID + ":raft_z";
@@ -302,6 +303,7 @@ public final class PersonalRaftSpawner {
         if (level == null) return 0;
 
         CompoundTag data = player.getPersistentData();
+        data.putBoolean(TAG_IS_USED, true); // шаг обучения «напиши /is» (kubejs 42_aquatech_onboarding.js)
         RaftRegistry registry = RaftRegistry.get(level);
 
         RaftRegistry.Entry entry = registry.getEntry(player.getUUID());

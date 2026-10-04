@@ -74,7 +74,7 @@ public final class LumenPackets {
     }
 
     /**
-     * State of the new-player guide panel. {@code step} 0 hides it, 1..5 is the current step, 6 means finished;
+     * State of the new-player guide panel. {@code step} 0 hides it, 1..6 is the current step, 7 means finished;
      * {@code doneStep} and {@code reward} describe the step that was just completed (for the toast).
      */
     public static final class OnboardingSync {

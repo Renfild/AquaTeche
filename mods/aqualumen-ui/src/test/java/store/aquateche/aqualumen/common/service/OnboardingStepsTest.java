@@ -6,12 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OnboardingStepsTest {
 
     @Test
-    void thereAreFiveStepsNumberedFromOne() {
-        assertEquals(5, OnboardingSteps.COUNT);
+    void thereAreSixStepsNumberedFromOne() {
+        assertEquals(6, OnboardingSteps.COUNT);
         for (int id = 1; id <= OnboardingSteps.COUNT; id++) {
             OnboardingSteps.Step step = OnboardingSteps.get(id);
             assertNotNull(step, "step " + id);
@@ -23,11 +24,12 @@ class OnboardingStepsTest {
     }
 
     @Test
-    void theKitComesBeforeFishingAndFishingCountsThreeFish() {
-        assertEquals("Забери стартовый набор", OnboardingSteps.get(1).title());
-        assertEquals(1, OnboardingSteps.get(1).goal());
-        assertEquals("Поймай 3 рыбы", OnboardingSteps.get(2).title());
-        assertEquals(3, OnboardingSteps.get(2).goal());
+    void theIslandComesFirstThenTheKitThenFishingCountsThreeFish() {
+        assertEquals("Создай свой остров", OnboardingSteps.get(1).title());
+        assertTrue(OnboardingSteps.get(1).hint().contains("/is"));
+        assertEquals("Забери стартовый набор", OnboardingSteps.get(2).title());
+        assertEquals("Поймай 3 рыбы", OnboardingSteps.get(3).title());
+        assertEquals(3, OnboardingSteps.get(3).goal());
     }
 
     @Test

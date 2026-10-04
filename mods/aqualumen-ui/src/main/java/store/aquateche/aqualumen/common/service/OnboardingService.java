@@ -17,7 +17,7 @@ public final class OnboardingService {
     }
 
     /**
-     * @param step     current step 1..5, 6 = finished, 0 = hide
+     * @param step     current step 1..6, 7 = finished, 0 = hide
      * @param have     progress inside the step (fish caught for step 1)
      * @param doneStep step just completed, or 0
      * @param reward   reward text of the completed step, colour codes allowed
