@@ -11,6 +11,9 @@ const ONBOARD_DONE = 99
 const ONBOARD_VERSION_KEY = 'aquatech_onboard_v'
 const ONBOARD_VERSION = 2
 const ONBOARD_IS_USED = 'aquatech_is_used'
+const ONBOARD_FISH_STEP = 3
+const ONBOARD_FISH_GOAL = 3
+const ONBOARD_ORES = ['minecraft:copper_ore', 'industrialupgrade:classicore/tin', 'minecraft:iron_ore', 'minecraft:coal_ore']
 
 // /is ставит игроку метку (тег сущности) и флаг в Forge-данных. Тег виден отсюда напрямую. player.persistentData в
 // KubeJS это отдельный компонент KubeJSPersistentData, Forge-флаг там не виден: тем, кто нажал /is до появления тега,

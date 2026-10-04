@@ -182,7 +182,12 @@ public final class DeepChestService {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (!isEligible(player) || ACTIVE.containsKey(player.getUUID())) continue;
             long next = NEXT_AT.computeIfAbsent(player.getUUID(), id -> now + FIRST_DELAY_MS);
-            if (now >= next) begin(server, player, now);
+            if (now < next) continue;
+            if (PersonalSpotFinder.isNearOwnRaft(player.serverLevel(), player, PersonalSpotFinder.AT_HOME_BLOCKS)) {
+                begin(server, player, now);
+            } else {
+                NEXT_AT.put(player.getUUID(), now + PersonalSpotFinder.AWAY_RETRY_MS);
+            }
         }
     }
 

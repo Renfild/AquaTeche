@@ -116,6 +116,10 @@ public final class FishingSpotService {
         long firstDelay = introDone ? FIRST_SPOT_DELAY_MS : FIRST_SPOT_DELAY_NEW_PLAYER_MS;
         long nextAt = NEXT_AT.computeIfAbsent(player.getUUID(), id -> now + firstDelay);
         if (now < nextAt) return;
+        if (!PersonalSpotFinder.isNearOwnRaft(player.serverLevel(), player, PersonalSpotFinder.AT_HOME_BLOCKS)) {
+            NEXT_AT.put(player.getUUID(), now + PersonalSpotFinder.AWAY_RETRY_MS);
+            return;
+        }
         if (!spawn(player, now, !introDone)) {
             NEXT_AT.put(player.getUUID(), now + RETRY_DELAY_MS);
         }

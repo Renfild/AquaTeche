@@ -21,7 +21,25 @@ final class PersonalSpotFinder {
     /** Попытки с подгрузкой чанков: тяжёлые, поэтому их мало и они идут после дешёвого прохода. */
     private static final int FORCED_ATTEMPTS = 4;
 
+    /** Точка или сундук появляются, только пока игрок не дальше этого от центра своего плота. */
+    static final int AT_HOME_BLOCKS = 200;
+    /** Если игрок ушёл от плота, через сколько снова проверяем. */
+    static final long AWAY_RETRY_MS = 20_000L;
+
     private PersonalSpotFinder() {
+    }
+
+    static boolean withinRange(double dx, double dz, int maxDistance) {
+        return dx * dx + dz * dz <= (double) maxDistance * maxDistance;
+    }
+
+    /**
+     * Игрок рядом со своим плотом (или плота у него нет, тогда ищем от него самого). Без этой проверки гость на
+     * чужом плоту получал точку у своего, в километрах отсюда, и не мог до неё доплыть.
+     */
+    static boolean isNearOwnRaft(ServerLevel level, ServerPlayer owner, int maxDistance) {
+        BlockPos raft = PersonalRaftSpawner.raftCenterOf(level, owner.getUUID());
+        return raft == null || withinRange(owner.getX() - raft.getX(), owner.getZ() - raft.getZ(), maxDistance);
     }
 
     /** Вокруг плота кольцо начинается за его приватом, иначе точка попала бы в собственный регион. */

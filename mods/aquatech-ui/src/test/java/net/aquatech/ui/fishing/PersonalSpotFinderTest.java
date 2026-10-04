@@ -19,6 +19,16 @@ class PersonalSpotFinderTest {
     }
 
     @Test
+    void aPlayerFarFromTheirRaftDoesNotGetASpot() {
+        int home = PersonalSpotFinder.AT_HOME_BLOCKS;
+        assertTrue(PersonalSpotFinder.withinRange(0, 0, home));
+        assertTrue(PersonalSpotFinder.withinRange(home, 0, home));
+        assertTrue(PersonalSpotFinder.withinRange(120, 120, home));
+        assertTrue(!PersonalSpotFinder.withinRange(home, 1, home));
+        assertTrue(!PersonalSpotFinder.withinRange(1255, 6668, home), "friend's raft is 6.7 km from ours");
+    }
+
+    @Test
     void ringIsNeverEmptyEvenWhenTheConfiguredMaximumIsBelowTheMinimum() {
         int min = PersonalSpotFinder.ringMin(true, 70);
         int max = PersonalSpotFinder.ringMax(min, 80);
