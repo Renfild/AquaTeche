@@ -1,79 +1,50 @@
 {
-  "from_version": "2.9.439",
-  "to_version": "2.9.440",
-  "added": [
-    {
-      "path": "kubejs/assets/starcatcher/textures/item/alpha_rod_cast.png",
-      "md5": "7a822255014868531362956e81db00a2",
-      "size": 294,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/kubejs__assets__starcatcher__textures__item__alpha_rod_cast.png",
-      "asset": "kubejs__assets__starcatcher__textures__item__alpha_rod_cast.png"
-    },
-    {
-      "path": "kubejs/assets/starcatcher/textures/item/alpha_rod_uncast.png",
-      "md5": "c06f667879bfdb0cd21c5996695171ba",
-      "size": 327,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/kubejs__assets__starcatcher__textures__item__alpha_rod_uncast.png",
-      "asset": "kubejs__assets__starcatcher__textures__item__alpha_rod_uncast.png"
-    }
-  ],
+  "from_version": "2.9.440",
+  "to_version": "2.9.441",
+  "added": [],
   "changed": [
     {
-      "path": "config/aqualumen/cases.json",
-      "md5": "a41a315037803b384c5a302cf317f088",
-      "size": 32222,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/config__aqualumen__cases.json",
-      "asset": "config__aqualumen__cases.json"
-    },
-    {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "32e5d83d8f838083586a6a4d00f809c3",
-      "size": 967835,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/config__aqualumen__html__hub.html",
+      "md5": "f044f5bd36ec574c6b29a157b662fc33",
+      "size": 973251,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/config__aqualumen__html__hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "32e5d83d8f838083586a6a4d00f809c3",
-      "size": 967835,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/config__aqualumen__hub.html",
+      "md5": "f044f5bd36ec574c6b29a157b662fc33",
+      "size": 973251,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/config__aqualumen__hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
-      "path": "kubejs/server_scripts/42_aquatech_onboarding.js",
-      "md5": "49f96c56c699204f13b83e18308e5484",
-      "size": 11288,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/kubejs__server_scripts__42_aquatech_onboarding.js",
-      "asset": "kubejs__server_scripts__42_aquatech_onboarding.js"
-    },
-    {
       "path": "mods/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
-      "md5": "e6881386e63466da17cc2a71007faf67",
-      "size": 2573219,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
+      "md5": "20f768bf858aad86518965117e9a0176",
+      "size": 2586395,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.74-alpha.jar"
     },
     {
       "path": "mods/aquatech_machines-1.0.11.jar",
-      "md5": "6ae2cdf773eff4bb548c5685e9058b26",
-      "size": 276588,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/aquatech_machines-1.0.11.jar",
+      "md5": "9afb8a90298b66637bac97404f369134",
+      "size": 320010,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/aquatech_machines-1.0.11.jar",
       "asset": "aquatech_machines-1.0.11.jar"
     },
     {
       "path": "mods/aquatech_ui-1.0.113.jar",
-      "md5": "7d807c8eace7d78b4460b21964c6dd9f",
-      "size": 3779229,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/aquatech_ui-1.0.113.jar",
+      "md5": "6da835d411d80eb7f1fab53671e78c7f",
+      "size": 3784270,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.441/aquatech_ui-1.0.113.jar",
       "asset": "aquatech_ui-1.0.113.jar"
     }
   ],
   "removed": [],
   "stats": {
-    "added": 2,
-    "changed": 7,
+    "added": 0,
+    "changed": 5,
     "removed": 0,
-    "unchanged": 148,
-    "download_bytes": 8608837
+    "unchanged": 152,
+    "download_bytes": 8637177
   }
 }

@@ -1,6 +1,7 @@
 package net.aquatech.machines.block.entity;
 
 import net.aquatech.machines.registry.ModBlockEntities;
+import net.aquatech.machines.util.FishRosterService;
 import net.aquatech.machines.util.FisherLoot;
 import net.aquatech.machines.util.RodLootBridge;
 import net.minecraft.core.BlockPos;
@@ -41,6 +42,12 @@ public class FisherMk1BlockEntity extends BaseMachineBlockEntity {
         return 1;
     }
 
+    /** MK-1 добывает только ресурсы: любая рыба из улова отбрасывается. */
+    private static boolean isFish(ItemStack stack) {
+        return stack.is(net.minecraft.tags.ItemTags.FISHES)
+                || FishRosterService.isCatalogFish(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()));
+    }
+
     @Override
     public boolean acceptsFishGeneratorPower() {
         return true;
@@ -64,7 +71,8 @@ public class FisherMk1BlockEntity extends BaseMachineBlockEntity {
         int tier = rodTier();
         if (tier <= 0 || level == null) return;
         // Те же ресурсы, что даёт сама удочка: берём один стек из её улова. Запасная таблица нужна, если aquatech_ui нет.
-        java.util.List<ItemStack> rolled = RodLootBridge.rollLikeRod(items.getStackInSlot(SLOT_ROD), level.getRandom());
+        java.util.List<ItemStack> rolled = new java.util.ArrayList<>(RodLootBridge.rollLikeRod(items.getStackInSlot(SLOT_ROD), level.getRandom()));
+        rolled.removeIf(FisherMk1BlockEntity::isFish);
         ItemStack loot = rolled.isEmpty() ? FisherLoot.rollResources(tier, level.getRandom())
                 : rolled.get(level.getRandom().nextInt(rolled.size()));
         if (loot == null || loot.isEmpty()) {

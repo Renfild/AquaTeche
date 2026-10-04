@@ -20,8 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "dist" / "AquaTech-Client"
 DOCS_PACK = ROOT / "docs" / "pack"
 SERVER_MODS = ROOT / "server" / "mods"
-PACK_TAG = "pack-2.9.440"
-PACK_VERSION = "2.9.440"
+PACK_TAG = "pack-2.9.441"
+PACK_VERSION = "2.9.441"
 GITHUB_RELEASE = f"https://github.com/Renfild/AquaTeche/releases/download/{PACK_TAG}"
 SITE_PACK = "https://cdn.jsdelivr.net/gh/Renfild/AquaTeche@main/docs/pack"
 
@@ -40,6 +40,10 @@ CLIENT_ONLY_PREFIXES = (
     "konkrete",
     "melody",
     "mousetweaks",
+    # Inventory Profiles Next: сортировка и фильтры инвентаря, все три мода только для клиента (side=CLIENT).
+    "inventoryprofilesnext",
+    "libipn",
+    "kotlinforforge",
 )
 # Never pull these from client/ — server copy wins (and may differ by patch version)
 SERVER_OWNED_PREFIXES = (
@@ -58,6 +62,7 @@ EXCLUDED_CLIENT_JARS = {
 # instead of shipping a client that crashes on launch (the 2.9.274 melody incident).
 REQUIRED_CLIENT_DEPS = {
     "fancymenu": ("melody", "konkrete"),
+    "inventoryprofilesnext": ("libipn",),
 }
 
 

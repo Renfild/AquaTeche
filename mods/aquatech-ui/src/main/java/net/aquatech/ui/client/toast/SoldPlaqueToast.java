@@ -22,6 +22,16 @@ public final class SoldPlaqueToast {
             new ResourceLocation("aquatech_ui", "textures/gui/coin.png");
     private static final int W = 256;
     private static final int H = 64;
+    /** В текстуре плашка занимает строки 14..53 и столбцы 10..245, остальное прозрачно. Размещаем по видимой части. */
+    private static final int ART_TOP = 14;
+    private static final int ART_HEIGHT = 40;
+    private static final int ART_LEFT = 10;
+    private static final int ART_RIGHT = 246;
+    /** Внутри рамки текст помещается между строками 24 и 47: две строки по 11 пикселей. */
+    private static final int TEXT_X = 22;
+    private static final int TITLE_Y = 25;
+    private static final int SOLD_Y = 37;
+    private static final int PRICE_RIGHT = 222;
 
     private static final List<SoldPlaqueToast> ACTIVE = new ArrayList<>();
 
@@ -81,34 +91,38 @@ public final class SoldPlaqueToast {
             snapshot = new ArrayList<>(ACTIVE);
         }
         int mcW = g.guiWidth();
-        int y = 6;
+        int y = 6 - ART_TOP;
         for (SoldPlaqueToast t : snapshot) {
             float fadeIn = Math.min(1F, t.age / 6F);
             float fadeOut = Math.min(1F, (170 - t.age) / 12F);
             float fade = Math.max(0F, Math.min(fadeIn, fadeOut));
             float slide = (1F - fadeIn) * (W + 10);
-            float x = mcW - W - 6 + slide;
+            float x = mcW - ART_RIGHT - 6 + slide;
             int a = (int) (fade * 255);
 
             g.pose().pushPose();
             g.pose().translate(x, y, 0);
             g.blit(BG, 0, 0, 0, 0, W, H, 256, 64);
 
-            AquaFontRenderer.draw(g, font, clip(font, t.item, 150), 26, 16, fade(0xFFFFC25B, a));
-            // Цена: число + наша иконка монеты (11x11) у правого края
+            // Цена: число + наша иконка монеты (11x11) у правого края внутри рамки
             String price = t.price == null ? "" : t.price.trim();
             int priceW = AquaFontRenderer.width(font, price);
-            AquaFontRenderer.draw(g, font, price, W - 26 - priceW - 14, 15, fade(0xFFFFC25B, a));
+            int coinX = PRICE_RIGHT - 11;
+            int priceX = coinX - 3 - priceW;
+            int titleMax = priceX - 8 - TEXT_X;
+            AquaFontRenderer.draw(g, font, clip(font, t.item, titleMax), TEXT_X, TITLE_Y, fade(0xFFFFC25B, a));
+            AquaFontRenderer.draw(g, font, price, priceX, TITLE_Y, fade(0xFFFFC25B, a));
             RenderSystem.setShaderColor(1F, 1F, 1F, fade);
-            g.blit(COIN, W - 26 - 11, 14, 11, 11, 0, 0, 32, 32, 32, 32);
+            g.blit(COIN, coinX, TITLE_Y - 1, 11, 11, 0, 0, 32, 32, 32, 32);
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
             String sold = "Продано игроку ";
-            AquaFontRenderer.draw(g, font, sold, 26, 44, fade(0xFF9DB2C4, a));
-            AquaFontRenderer.draw(g, font, clip(font, t.buyer, 120),
-                    26 + AquaFontRenderer.width(font, sold), 44, fade(0xFF55FFFF, a));
+            int soldW = AquaFontRenderer.width(font, sold);
+            AquaFontRenderer.draw(g, font, sold, TEXT_X, SOLD_Y, fade(0xFF9DB2C4, a));
+            AquaFontRenderer.draw(g, font, clip(font, t.buyer, PRICE_RIGHT - TEXT_X - soldW),
+                    TEXT_X + soldW, SOLD_Y, fade(0xFF55FFFF, a));
             g.pose().popPose();
-            y += H + 4;
+            y += ART_HEIGHT + 4;
         }
     }
 

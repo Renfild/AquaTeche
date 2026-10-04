@@ -2095,6 +2095,14 @@ __PASS_VIEW_JS__
     state.payload = payload;
     const s = payload.snapshot || {};
 
+    /* Вкладка при открытии: клиент присылает initialTab (у торговца рыбой это «fishing»), она обязана входить в enabledTabs. */
+    const enabledNow = (payload.enabledTabs || []).filter(k => k !== "privileges");
+    if (!state.tabChosen) {
+      state.tabChosen = true;
+      if (payload.initialTab && enabledNow.includes(payload.initialTab)) state.tab = payload.initialTab;
+    }
+    if (enabledNow.length && !enabledNow.includes(state.tab)) state.tab = enabledNow[0];
+
     if ($("online")) $("online").textContent = `${(s.server && s.server.online) || 0}/${(s.server && s.server.slots) || 100}`;
     if ($("tps")) $("tps").textContent = `${((s.server && s.server.tps) || 20).toFixed(1)} TPS`;
     if ($("coins")) { const cv = s.wallet ? s.wallet.coins : 0; $("coins").textContent = shortNum(cv, 1e7); $("coins").title = num(cv); }
@@ -2112,7 +2120,7 @@ __PASS_VIEW_JS__
         case "profile": return JSON.stringify([s.player, s.wallet]);
         case "store": return JSON.stringify([s.store, s.wallet]);
         case "privileges": return JSON.stringify([s.store, s.wallet]);
-        case "fishing": return JSON.stringify([s.fishing, s.wallet]);
+        case "fishing": return JSON.stringify([s.fishes, s.wallet]);
         case "atlas": return JSON.stringify([s.atlas, s.atlasSummary]);
         case "cases": return JSON.stringify([s.cases, s.wallet]);
         case "tops": return JSON.stringify(s.top || []);

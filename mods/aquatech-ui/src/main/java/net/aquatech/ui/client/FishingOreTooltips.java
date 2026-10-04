@@ -4,151 +4,35 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Adds AquaTech fishing rod requirements to all ores and strips legacy IU vein descriptions.
+ * Подсказка «где ловится» у ресурсов: с какой удочки предмет падает впервые и с каких ещё. Данные берёт из
+ * {@link RodDropTable}, который собирается из настоящих пулов дропа (tools/build_rod_drop_table.py), поэтому тир в
+ * подсказке всегда совпадает с игрой. Заодно вычищает старые описания жил Industrial Upgrade.
  */
 @Mod.EventBusSubscriber(modid = "aquatech_ui", value = Dist.CLIENT)
 public final class FishingOreTooltips {
-    private static final Map<String, RodHint> BY_ID = new HashMap<>();
-    private static final Map<Item, RodHint> BY_VANILLA = new HashMap<>();
 
-    static {
-        // Vanilla Ores & Resources
-        hintVanilla(Items.COPPER_ORE, RodHint.HUMBLE);
-        hintVanilla(Items.DEEPSLATE_COPPER_ORE, RodHint.HUMBLE);
-        hintVanilla(Items.RAW_COPPER, RodHint.HUMBLE);
-        hintVanilla(Items.RAW_COPPER_BLOCK, RodHint.HUMBLE);
-
-        hintVanilla(Items.COAL_ORE, RodHint.BAMBOO);
-        hintVanilla(Items.DEEPSLATE_COAL_ORE, RodHint.BAMBOO);
-        hintVanilla(Items.COAL, RodHint.BAMBOO);
-
-        hintVanilla(Items.IRON_ORE, RodHint.GOOD_OLD);
-        hintVanilla(Items.DEEPSLATE_IRON_ORE, RodHint.GOOD_OLD);
-        hintVanilla(Items.RAW_IRON, RodHint.GOOD_OLD);
-        hintVanilla(Items.RAW_IRON_BLOCK, RodHint.GOOD_OLD);
-        hintVanilla(Items.REDSTONE_ORE, RodHint.GOOD_OLD);
-        hintVanilla(Items.DEEPSLATE_REDSTONE_ORE, RodHint.GOOD_OLD);
-        hintVanilla(Items.REDSTONE, RodHint.GOOD_OLD);
-
-        hintVanilla(Items.GOLD_ORE, RodHint.STARCATCHER);
-        hintVanilla(Items.DEEPSLATE_GOLD_ORE, RodHint.STARCATCHER);
-        hintVanilla(Items.RAW_GOLD, RodHint.STARCATCHER);
-        hintVanilla(Items.RAW_GOLD_BLOCK, RodHint.STARCATCHER);
-        hintVanilla(Items.LAPIS_ORE, RodHint.STARCATCHER);
-        hintVanilla(Items.DEEPSLATE_LAPIS_ORE, RodHint.STARCATCHER);
-        hintVanilla(Items.LAPIS_LAZULI, RodHint.STARCATCHER);
-        hintVanilla(Items.EMERALD_ORE, RodHint.STARCATCHER);
-        hintVanilla(Items.DEEPSLATE_EMERALD_ORE, RodHint.STARCATCHER);
-        hintVanilla(Items.EMERALD, RodHint.STARCATCHER);
-
-        hintVanilla(Items.DIAMOND_ORE, RodHint.OBSIDIAN);
-        hintVanilla(Items.DEEPSLATE_DIAMOND_ORE, RodHint.OBSIDIAN);
-        hintVanilla(Items.DIAMOND, RodHint.OBSIDIAN);
-
-        hintVanilla(Items.PRISMARINE_SHARD, RodHint.LUSH);
-        hintVanilla(Items.PRISMARINE_CRYSTALS, RodHint.LUSH);
-        hintVanilla(Items.HEART_OF_THE_SEA, RodHint.LUSH);
-
-        hintVanilla(Items.NETHER_QUARTZ_ORE, RodHint.MAGMA);
-        hintVanilla(Items.QUARTZ, RodHint.MAGMA);
-        hintVanilla(Items.ANCIENT_DEBRIS, RodHint.MAGMA);
-        hintVanilla(Items.NETHERITE_SCRAP, RodHint.MAGMA);
-
-        // Industrial Upgrade Ores & Resources
-        hintIu("classicore/tin", RodHint.HUMBLE);
-        hintIu("raw_latex", RodHint.HUMBLE);
-
-        hintIu("synthetic_rubber", RodHint.BAMBOO);
-        hintIu("sapling/rubber_sapling", RodHint.NATURALIST);
-        hintIu("blockresource/untreated_peat", RodHint.NATURALIST);
-        hintIu("blockresource/peat", RodHint.NATURALIST);
-
-        hintIu("baseore2/strontium", RodHint.GOOD_OLD);
-        hintIu("baseore2/yttrium", RodHint.GOOD_OLD);
-        hintIu("baseore2/thallium", RodHint.GOOD_OLD);
-
-        hintIu("baseore/spinel", RodHint.NATURALIST);
-        hintIu("baseore2/barium", RodHint.NATURALIST);
-        hintIu("baseore2/polonium", RodHint.SLIMED);
-
-hintIu("baseore/aluminium", RodHint.ICEBORN);
-hintIu("baseore/silver", RodHint.ICEBORN);
-hintIu("baseore/zinc", RodHint.ICEBORN);
-hintIu("baseore2/bismuth", RodHint.ICEBORN);
-hintIu("baseore/tungsten", RodHint.ICEBORN);
-hintIu("baseore/iridium", RodHint.ICEBORN);
-hintIu("itemcoolupgrade/azote", RodHint.ICEBORN);
-
-        hintIu("baseore/tungsten", RodHint.STARCATCHER);
-        hintIu("baseore/chromium", RodHint.STARCATCHER);
-        hintIu("preciousgem/sapphire_gem", RodHint.STARCATCHER);
-        hintIu("preciousgem/topaz_gem", RodHint.STARCATCHER);
-        hintIu("blockpreciousore/sapphire_ore", RodHint.STARCATCHER);
-        hintIu("blockpreciousore/topaz_ore", RodHint.STARCATCHER);
-
-        hintIu("mineral/crystal", RodHint.AZURE);
-
-        hintIu("baseore/titanium", RodHint.SHARKTOOTH);
-        hintIu("baseore/cobalt", RodHint.SHARKTOOTH);
-        hintIu("baseore/manganese", RodHint.SHARKTOOTH);
-        hintIu("baseore/nickel", RodHint.SHARKTOOTH);
-
-        hintIu("alloyingot/stainless_steel", RodHint.OBSIDIAN);
-        hintIu("baseore/platinum", RodHint.LUSH);
-
-        hintIu("crushed/uranium", RodHint.MAGMA);
-        hintIu("bucket/sour_light_oil", RodHint.MAGMA);
-        hintIu("alloyingot/inconel", RodHint.MAGMA);
-
-        hintIu("baseore/iridium", RodHint.ALPHA);
-        hintIu("baseore1/osmium", RodHint.ALPHA);
-        hintIu("alloyingot/osmiridium", RodHint.ALPHA);
-        hintIu("asteroidore/asteroid_adamantium_ore", RodHint.ALPHA);
-    }
+    /** Названия ресурсных удочек по тиру (индекс = тир), как в названиях предметов. */
+    private static final String[] ROD_NAMES = {
+            "",
+            "Бамбуковая удочка", "Скромная удочка", "Старая добрая удочка", "Удочка натуралиста", "Слизневая удочка",
+            "Ледяная удочка", "Удочка Ловца Звёзд", "Лазурная удочка", "Удочка из акульего зуба", "Обсидиановая удочка",
+            "Удочка из светящихся ягод", "Магматическая удочка", "Альфа-удочка"
+    };
+    private static final int MAX_TIER = 13;
+    private static final int LISTED_TIERS = 5;
 
     private FishingOreTooltips() {
-    }
-
-    private static void hintVanilla(Item item, RodHint hint) {
-        BY_VANILLA.put(item, hint);
-    }
-
-    private static void hintIu(String path, RodHint hint) {
-        BY_ID.put("industrialupgrade:" + path, hint);
-    }
-
-    private static boolean isOreItem(ResourceLocation id, Item item) {
-        if (BY_VANILLA.containsKey(item)) return true;
-        if (id == null) return false;
-        String full = id.toString().toLowerCase();
-        String path = id.getPath().toLowerCase();
-
-        if (BY_ID.containsKey(full)) return true;
-
-        // Exclude non-ore categories: tools, armors, buckets, machines, plates, ingots, nuggets, hammers
-        if (path.contains("hammer") || path.contains("sword") || path.contains("pickaxe") || path.contains("axe")
-                || path.contains("shovel") || path.contains("hoe") || path.contains("helmet") || path.contains("chestplate")
-                || path.contains("leggings") || path.contains("boots") || path.contains("armor") || path.contains("bucket")
-                || path.contains("pipe") || path.contains("cable") || path.contains("machine") || path.contains("generator")
-                || path.contains("plate") || path.contains("ingot") || path.contains("nugget")) {
-            return false;
-        }
-
-        // Must be an explicit ore, raw ore, gem, or mineral
-        return path.contains("ore") || path.contains("raw_") || path.contains("gem") || path.contains("crystal") || path.contains("shard");
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -156,7 +40,7 @@ hintIu("itemcoolupgrade/azote", RodHint.ICEBORN);
         ItemStack stack = event.getItemStack();
         if (stack.isEmpty()) return;
 
-        // 1. Remove ALL old IU vein/location descriptions, bracketed ore lists, and Shift prompts
+        // 1. Старые описания жил, списки руд в скобках и подсказки про Shift
         event.getToolTip().removeIf(component -> {
             String text = component.getString().toLowerCase();
             return text.contains("жила") || text.contains("жилах") || text.contains("жиле")
@@ -168,50 +52,61 @@ hintIu("itemcoolupgrade/azote", RodHint.ICEBORN);
                     || (text.startsWith("[") && text.endsWith("]"));
         });
 
-        // 2. Resolve AquaTech fishing rod requirement line ONLY for items with explicit rod hints
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
         if (id == null) return;
+        int[] tiers = RodDropTable.tiersOf(id.toString());
+        if (tiers == null || tiers.length == 0) return;
 
-        RodHint hint = BY_VANILLA.get(stack.getItem());
-        if (hint == null) {
-            hint = BY_ID.get(id.toString());
-        }
-
-        if (hint == null) return;
-
+        List<Component> lines = describe(tiers);
         event.getToolTip().add(Component.empty());
-        event.getToolTip().add(Component.literal("AquaTech  ·  Рыбалка")
-                .withStyle(ChatFormatting.DARK_AQUA, ChatFormatting.BOLD));
-        event.getToolTip().add(Component.literal("Ловится  удочкой:  ")
-                .withStyle(ChatFormatting.AQUA)
-                .append(Component.literal(hint.rodName).withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)));
-        event.getToolTip().add(Component.literal(hint.tierLine)
-                .withStyle(ChatFormatting.GRAY));
+        event.getToolTip().add(Component.literal("AquaTech · Рыбалка").withStyle(ChatFormatting.DARK_AQUA, ChatFormatting.BOLD));
+        event.getToolTip().addAll(lines);
     }
 
-    private enum RodHint {
-        HUMBLE("Удочка  скромности  (Humble Rod)", "С  1-й  ресурсной  удочки  и  выше"),
-        BAMBOO("Бамбуковая  удочка  (Bamboo Rod)", "С  2-й  ресурсной  удочки  и  выше"),
-        GOOD_OLD("Старая  добрая  удочка  (Good Old Rod)", "С  3-й  ресурсной  удочки  (Железо  /  Олово  /  Редстоун)"),
-        NATURALIST("Удочка  натуралиста  (Naturalist Rod)", "С  4-й  ресурсной  удочки  (Шпинель  /  Торф  /  Барий)"),
-        SLIMED("Слизневая  удочка  (Slimed Rod)", "С  5-й  ресурсной  удочки  (Полоний  /  Слизь)"),
-        ICEBORN("Удочка  ледянорожденного  (Iceborn Rod)", "С  6-й  ресурсной  удочки  (Алюминий  /  Серебро  /  Цинк)"),
-        STARCATCHER("Удочка  ловца  звезд  (StarCatcher Rod)", "С  7-й  ресурсной  удочки  (Золото  /  Вольфрам  /  Хром)"),
-        AZURE("Лазурная  удочка  (Azure Crystal Rod)", "С  8-й  ресурсной  удочки  (Топаз  /  Кристаллы)"),
-        SHARKTOOTH("Удочка  из  акульего  зуба  (Sharktooth Rod)", "С  9-й  ресурсной  удочки  (Титан  /  Кобальт  /  Никель)"),
-        OBSIDIAN("Обсидиановая  удочка  (Obsidian Rod)", "С  10-й  ресурсной  удочки  (Алмазы  /  Сталь)"),
-        LUSH("Удочка  из  светящихся  ягод  (Lush Glowberry Rod)", "С  11-й  ресурсной  удочки  (Платина  /  Сердце  моря)"),
-        MAGMA("Магмовая  удочка  (Magmaforged Rod)", "С  12-й  ресурсной  удочки  (Кварц  /  Уран  /  Незерит  /  Нефть)"),
-        ALPHA("Альфа  удочка  (Alpha Rod)", "С  13-й  ресурсной  удочки  (Иридий  /  Осмий  /  Адамантий)");
-
-        final String rodName;
-        final String tierLine;
-
-        RodHint(String rodName, String tierLine) {
-            this.rodName = rodName;
-            this.tierLine = tierLine;
+    /** Строки подсказки: самая ранняя ресурсная удочка и список тиров, с которых предмет падает. */
+    static List<Component> describe(int[] sortedTiers) {
+        List<Integer> resource = new ArrayList<>();
+        boolean bone = false;
+        boolean sky = false;
+        for (int tier : sortedTiers) {
+            if (tier == RodDropTable.BONER) bone = true;
+            else if (tier == RodDropTable.SKY) sky = true;
+            else resource.add(tier);
         }
+        List<Component> out = new ArrayList<>();
+        if (!resource.isEmpty()) {
+            int first = resource.get(0);
+            out.add(Component.literal("Ловится удочкой: ").withStyle(ChatFormatting.AQUA)
+                    .append(Component.literal(ROD_NAMES[first] + " (Т-" + first + ")")
+                            .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)));
+            out.add(Component.literal(tierList(resource)).withStyle(ChatFormatting.GRAY));
+        }
+        if (bone) {
+            out.add(Component.literal(resource.isEmpty() ? "Ловится удочкой: " : "Также: ").withStyle(ChatFormatting.AQUA)
+                    .append(Component.literal("Костяная удочка (мобы)").withStyle(ChatFormatting.YELLOW)));
+        }
+        if (sky) {
+            out.add(Component.literal(resource.isEmpty() && !bone ? "Ловится удочкой: " : "Также: ").withStyle(ChatFormatting.AQUA)
+                    .append(Component.literal("Небесная удочка (рыба)").withStyle(ChatFormatting.YELLOW)));
+        }
+        return out;
+    }
+
+    /** «С Т-2 и выше», если дроп идёт на всех старших тирах, иначе список («Выпадает на Т-2, Т-3, Т-5…»). */
+    static String tierList(List<Integer> tiers) {
+        int first = tiers.get(0);
+        boolean everyHigher = tiers.size() == MAX_TIER - first + 1;
+        if (everyHigher) {
+            return first >= MAX_TIER ? "Только на Т-" + MAX_TIER : "С Т-" + first + " и выше";
+        }
+        StringBuilder text = new StringBuilder("Выпадает на ");
+        int shown = Math.min(LISTED_TIERS, tiers.size());
+        for (int i = 0; i < shown; i++) {
+            text.append(i == 0 ? "" : ", ").append("Т-").append(tiers.get(i));
+        }
+        if (tiers.size() > shown) {
+            text.append(" и ещё ").append(tiers.size() - shown);
+        }
+        return text.toString();
     }
 }
-
-

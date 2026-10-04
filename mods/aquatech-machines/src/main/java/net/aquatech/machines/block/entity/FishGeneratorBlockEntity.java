@@ -134,7 +134,8 @@ public class FishGeneratorBlockEntity extends BlockEntity implements MenuProvide
             be.energy = Math.min(FishGeneratorLogic.CAPACITY, be.energy + be.burnRate);
             changed = true;
         }
-        be.updateLit(producing);
+        // Огонь горит, пока топливо в огне: пауза из-за полного буфера не должна гасить блок каждый тик (моргание).
+        be.updateLit(be.burnTime > 0);
         int moved = be.pushEnergyToFishers();
         if (moved != be.lastTransferred) {
             be.lastTransferred = moved;

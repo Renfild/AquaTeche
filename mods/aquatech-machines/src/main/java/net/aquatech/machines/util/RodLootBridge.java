@@ -1,7 +1,6 @@
 package net.aquatech.machines.util;
 
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,30 +18,23 @@ public final class RodLootBridge {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("aquatech_machines/rod_loot");
     private static final String HANDLER = "net.aquatech.ui.fishing.FishingLootHandler";
-    private static final String ROD_TYPE = "net.aquatech.ui.fishing.AquaTechFishingRodItem$RodType";
 
-    private static Method generate;
-    private static Object fallbackRodType;
+    private static Method rollResources;
     private static boolean unavailable;
 
     private RodLootBridge() {
     }
 
-    /** Все стеки, которые удочка выдала бы за один улов (1–3 штуки), без множителя улова и без сокровищ игрока. */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    /** Ресурсные стеки, которые выдала бы удочка за один улов (1–3 штуки): без рыбы, приманок и множителя улова. */
     public static List<ItemStack> rollLikeRod(ItemStack rod, RandomSource random) {
         if (unavailable || rod == null || rod.isEmpty()) {
             return List.of();
         }
         try {
-            if (generate == null) {
-                Class<?> handler = Class.forName(HANDLER);
-                Class<?> rodType = Class.forName(ROD_TYPE);
-                generate = handler.getMethod("generateLoot", rodType, RandomSource.class, ItemStack.class,
-                        Player.class, int.class, boolean.class);
-                fallbackRodType = Enum.valueOf((Class<Enum>) rodType, "IRON");
+            if (rollResources == null) {
+                rollResources = Class.forName(HANDLER).getMethod("rollResourcesOnly", ItemStack.class, RandomSource.class);
             }
-            Object result = generate.invoke(null, fallbackRodType, random, rod, null, 1, true);
+            Object result = rollResources.invoke(null, rod, random);
             List<ItemStack> out = new ArrayList<>();
             if (result instanceof List<?> list) {
                 for (Object entry : list) {

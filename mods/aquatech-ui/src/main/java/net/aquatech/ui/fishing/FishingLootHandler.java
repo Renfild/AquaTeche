@@ -617,6 +617,21 @@ public class FishingLootHandler {
         return list;
     }
 
+    /**
+     * Только ресурсы удочки (руда, материалы), без рыбы, приманок, сокровищ и множителя улова. Это то, что нужно
+     * Рыболову MK-1: он добывает ресурсы так же, как удочка, но рыбу ловить не должен (для рыбы нужно ядро в MK-2).
+     */
+    public static List<ItemStack> rollResourcesOnly(ItemStack rodStack, RandomSource random) {
+        String rodId = FishingRodCompat.getRodId(rodStack);
+        if (rodId == null) {
+            return new ArrayList<>();
+        }
+        List<ItemStack> list = new ArrayList<>(rollStarCatcherRodLoot(rodId, random));
+        list.removeIf(FishingLootHandler::isForbiddenLoot);
+        list.removeIf(FishingLootHandler::isAbsurdTechDrop);
+        return list;
+    }
+
     private static List<ItemStack> rollStarCatcherRodLoot(String rodId, RandomSource random) {
 
         List<ItemStack> list = new ArrayList<>();
