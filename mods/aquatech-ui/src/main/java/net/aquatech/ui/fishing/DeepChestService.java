@@ -2,7 +2,6 @@ package net.aquatech.ui.fishing;
 
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.common.ModConfig;
-import net.aquatech.ui.skyblock.WorldGuardIslandLookup;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,7 +18,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Display;
@@ -38,14 +36,16 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
 /**
- * «Сокровище из глубин»: раз в пару часов посреди океана всплывает пиратский сундук со столбом света.
- * Кто первым доплывёт и нажмёт по нему, забирает 5000–10000 монет и с шансом ключ кейса.
+ * «Сокровище из глубин»: у каждого игрока раз в пару часов возле его плота всплывает личный пиратский сундук
+ * со столбом света. Полоса, подсказка, столб света и награда принадлежат только владельцу: нажав по сундуку,
+ * он забирает 5000–10000 монет и с шансом ключ кейса. Чужой сундук забрать нельзя.
  * Корпус и крышка это два ItemDisplay: крышка приоткрывается, стучит, при победе распахивается с фейерверком.
  * Состояние живёт только в памяти: перезапуск сервера снимает событие, а оставшиеся в чанках сущности
  * сундука удаляются при загрузке (см. {@link #onEntityJoin}).
@@ -57,10 +57,9 @@ public final class DeepChestService {
     private static final String BODY_ITEM = "aquatech_ui:deep_chest_model";
     private static final String LID_ITEM = "aquatech_ui:deep_chest_lid";
     private static final long FIRST_DELAY_MS = 20L * 60_000L;
-    private static final long RETRY_NO_PLAYERS_MS = 5L * 60_000L;
     private static final long RETRY_NO_PLACE_MS = 2L * 60_000L;
-    private static final int SEARCH_ATTEMPTS = 24;
     private static final int BEAM_HEIGHT = 70;
+    private static final double CHEST_GAP = 60.0;
     private static final double PARTICLE_RANGE = 260.0;
     private static final double NEAR_DISTANCE = 12.0;
     /** Ближе этого расстояния сундук «оживает» на полную; дальше FAR он ведёт себя спокойно. */
@@ -78,6 +77,7 @@ public final class DeepChestService {
     private enum Phase {ACTIVE, WON, FIZZLING}
 
     private static final class Chest {
+        final UUID owner;
         final ServerLevel level;
         final BlockPos surface;
         final long spawnedAt;
@@ -94,8 +94,9 @@ public final class DeepChestService {
         int lastAnimTick = DeepChestAnimation.NEVER_ANIMATED;
         int fireworksShot;
 
-        Chest(ServerLevel level, BlockPos surface, long now, long totalMs, UUID bodyId, UUID lidId, UUID hitboxId,
-              ServerBossEvent bar) {
+        Chest(UUID owner, ServerLevel level, BlockPos surface, long now, long totalMs, UUID bodyId, UUID lidId,
+              UUID hitboxId, ServerBossEvent bar) {
+            this.owner = owner;
             this.level = level;
             this.surface = surface;
             this.spawnedAt = now;
@@ -108,37 +109,55 @@ public final class DeepChestService {
         }
     }
 
-    private static Chest active;
-    private static long nextAt;
-    private static UUID lastWinner;
+    /** Активные сундуки по владельцам. Трогаем только из серверного потока. */
+    private static final Map<UUID, Chest> ACTIVE = new HashMap<>();
+    private static final Map<UUID, Long> NEXT_AT = new HashMap<>();
 
     private DeepChestService() {
     }
 
     // ─────────────────────────── управление ───────────────────────────
 
-    /** Для команды /aquatech deepchest: запускает событие сразу, не дожидаясь расписания. */
-    public static boolean startNow(MinecraftServer server) {
-        return active == null && begin(server, System.currentTimeMillis());
+    /** Для команды /aquatech deepchest: запускает событие сразу. {@code only} null = всем подходящим игрокам. */
+    public static boolean startNow(MinecraftServer server, ServerPlayer only) {
+        long now = System.currentTimeMillis();
+        boolean started = false;
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            if (only != null && !player.getUUID().equals(only.getUUID())) continue;
+            if (!isEligible(player) || ACTIVE.containsKey(player.getUUID())) continue;
+            started |= begin(server, player, now);
+        }
+        return started;
     }
 
     public static boolean stopNow(MinecraftServer server) {
-        if (active == null) return false;
-        cleanup(active);
-        active = null;
-        nextAt = System.currentTimeMillis() + nextDelay();
+        if (ACTIVE.isEmpty()) return false;
+        long now = System.currentTimeMillis();
+        for (Chest chest : ACTIVE.values()) {
+            cleanup(chest);
+            NEXT_AT.put(chest.owner, now + nextDelay());
+        }
+        ACTIVE.clear();
         return true;
     }
 
     public static String statusLine() {
-        if (active != null) {
-            String phase = active.phase == Phase.ACTIVE
-                    ? ", осталось " + DeepChestLogic.timeLeft(active.endsAt - System.currentTimeMillis())
-                    : ", финал анимации";
-            return "§6Сокровище глубин активно: §f" + active.surface.getX() + " " + active.surface.getZ() + "§7" + phase;
+        if (ACTIVE.isEmpty()) {
+            return "§7Личных сокровищ сейчас нет. Новые появятся по расписанию у каждого игрока отдельно.";
         }
-        long left = nextAt - System.currentTimeMillis();
-        return "§7Сокровища сейчас нет. Следующее через ~" + (nextAt == 0L ? "?" : Math.max(0L, left / 60_000L) + " мин");
+        StringBuilder out = new StringBuilder("§6Личных сокровищ активно: §f" + ACTIVE.size());
+        for (Chest chest : ACTIVE.values()) {
+            String phase = chest.phase == Phase.ACTIVE
+                    ? "осталось " + DeepChestLogic.timeLeft(chest.endsAt - System.currentTimeMillis())
+                    : "финал анимации";
+            out.append("\n§7- §f").append(chest.surface.getX()).append(' ').append(chest.surface.getZ())
+                    .append(" §7(").append(phase).append(')');
+        }
+        return out.toString();
+    }
+
+    private static boolean isEligible(ServerPlayer player) {
+        return !player.isSpectator() && player.level().dimension().equals(Level.OVERWORLD);
     }
 
     // ─────────────────────────── тик ───────────────────────────
@@ -150,20 +169,21 @@ public final class DeepChestService {
         if (server == null) return;
         int tick = server.getTickCount();
         long now = System.currentTimeMillis();
-        Chest chest = active;
-        if (chest != null) {
+        for (Iterator<Chest> it = ACTIVE.values().iterator(); it.hasNext(); ) {
+            Chest chest = it.next();
             animate(chest, now, tick);
             if (chest.phase != Phase.ACTIVE) {
-                finishIfDone(chest, now);
-                return;
+                if (finishIfDone(chest, now)) it.remove();
+                continue;
             }
-            if (tick % 10 != 0) return;
-            tickActive(server, chest, now, tick % 20 == 0);
-            return;
+            if (tick % 10 == 0) tickActive(server, chest, now, tick % 20 == 0);
         }
         if (tick % 10 != 0 || !ModConfig.DEEP_CHEST_ENABLED.get()) return;
-        if (nextAt == 0L) nextAt = now + FIRST_DELAY_MS;
-        if (now >= nextAt) begin(server, now);
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            if (!isEligible(player) || ACTIVE.containsKey(player.getUUID())) continue;
+            long next = NEXT_AT.computeIfAbsent(player.getUUID(), id -> now + FIRST_DELAY_MS);
+            if (now >= next) begin(server, player, now);
+        }
     }
 
     private static void tickActive(MinecraftServer server, Chest chest, long now, boolean everySecond) {
@@ -172,53 +192,53 @@ public final class DeepChestService {
             startFizzle(server, chest, now);
             return;
         }
+        ServerPlayer owner = server.getPlayerList().getPlayer(chest.owner);
+        if (owner == null) return;
+        if (!owner.level().dimension().equals(Level.OVERWORLD)) {
+            chest.bar.removePlayer(owner);
+            return;
+        }
         double cx = chest.surface.getX() + 0.5;
         double cz = chest.surface.getZ() + 0.5;
         double baseY = chest.surface.getY() + 1.0;
-        for (ServerPlayer player : chest.level.players()) {
-            if (player.distanceToSqr(cx, baseY, cz) > PARTICLE_RANGE * PARTICLE_RANGE) continue;
+        if (owner.distanceToSqr(cx, baseY, cz) <= PARTICLE_RANGE * PARTICLE_RANGE) {
             for (int dy = 0; dy <= BEAM_HEIGHT; dy += 2) {
-                chest.level.sendParticles(player, ParticleTypes.END_ROD, true, cx, baseY + dy, cz, 1, 0.05, 0.0, 0.05, 0.0);
+                chest.level.sendParticles(owner, ParticleTypes.END_ROD, true, cx, baseY + dy, cz, 1, 0.05, 0.0, 0.05, 0.0);
             }
-            chest.level.sendParticles(player, ParticleTypes.FIREWORK, true, cx, baseY + 0.6, cz, 6, 0.5, 0.3, 0.5, 0.05);
-            chest.level.sendParticles(player, ParticleTypes.SPLASH, true, cx, baseY, cz, 12, 1.2, 0.1, 1.2, 0.1);
+            chest.level.sendParticles(owner, ParticleTypes.FIREWORK, true, cx, baseY + 0.6, cz, 6, 0.5, 0.3, 0.5, 0.05);
+            chest.level.sendParticles(owner, ParticleTypes.SPLASH, true, cx, baseY, cz, 12, 1.2, 0.1, 1.2, 0.1);
         }
         if (!everySecond) return;
         chest.bar.setProgress(DeepChestLogic.progress(left, chest.totalMs));
-        chest.bar.setName(Component.literal("§6Сокровище из глубин §7— осталось §e" + DeepChestLogic.timeLeft(left)));
-        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            if (!player.level().dimension().equals(Level.OVERWORLD)) continue;
-            chest.bar.addPlayer(player);
-            double dx = cx - player.getX();
-            double dz = cz - player.getZ();
-            String text = Math.sqrt(dx * dx + dz * dz) <= NEAR_DISTANCE
-                    ? "§a§lТы у сундука! §fЖми по нему!"
-                    : "§6Сокровище: §e" + DeepChestLogic.distance(dx, dz) + " м §f" + DeepChestLogic.compass(dx, dz);
-            player.displayClientMessage(Component.literal(text), true);
-        }
+        chest.bar.setName(Component.literal("§6Твоё сокровище из глубин §7— осталось §e" + DeepChestLogic.timeLeft(left)));
+        chest.bar.addPlayer(owner);
+        double dx = cx - owner.getX();
+        double dz = cz - owner.getZ();
+        String text = Math.sqrt(dx * dx + dz * dz) <= NEAR_DISTANCE
+                ? "§a§lТы у сундука! §fЖми по нему!"
+                : "§6Сокровище: §e" + DeepChestLogic.distance(dx, dz) + " м §f" + DeepChestLogic.compass(dx, dz);
+        owner.displayClientMessage(Component.literal(text), true);
     }
 
+    /** Ушёл владелец: сундук ждать некому, убираем сразу, следующий придёт по обычному расписанию. */
     @SubscribeEvent
     public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
-        if (active != null && event.getEntity() instanceof ServerPlayer player) {
-            active.bar.removePlayer(player);
-        }
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        Chest chest = ACTIVE.remove(player.getUUID());
+        NEXT_AT.put(player.getUUID(), System.currentTimeMillis() + nextDelay());
+        if (chest != null) cleanup(chest);
     }
 
     // ─────────────────────────── анимация ───────────────────────────
 
-    /** 0 далеко, 1 вплотную: насколько близко к сундуку ближайший игрок. */
+    /** 0 далеко, 1 вплотную: насколько близко к сундуку его владелец. */
     private static double nearFactor(Chest chest) {
-        double cx = chest.surface.getX() + 0.5;
-        double cz = chest.surface.getZ() + 0.5;
-        double best = Double.MAX_VALUE;
-        for (ServerPlayer player : chest.level.players()) {
-            if (player.isSpectator()) continue;
-            double dx = player.getX() - cx;
-            double dz = player.getZ() - cz;
-            best = Math.min(best, Math.sqrt(dx * dx + dz * dz));
-        }
-        return Math.max(0.0, Math.min(1.0, (ALIVE_FAR - best) / (ALIVE_FAR - ALIVE_NEAR)));
+        ServerPlayer owner = chest.level.getServer().getPlayerList().getPlayer(chest.owner);
+        if (owner == null || owner.isSpectator() || owner.level() != chest.level) return 0.0;
+        double dx = owner.getX() - (chest.surface.getX() + 0.5);
+        double dz = owner.getZ() - (chest.surface.getZ() + 0.5);
+        double distance = Math.sqrt(dx * dx + dz * dz);
+        return Math.max(0.0, Math.min(1.0, (ALIVE_FAR - distance) / (ALIVE_FAR - ALIVE_NEAR)));
     }
 
     private static void animate(Chest chest, long now, int tick) {
@@ -329,33 +349,24 @@ public final class DeepChestService {
 
     // ─────────────────────────── старт ───────────────────────────
 
-    private static boolean begin(MinecraftServer server, long now) {
-        List<ServerPlayer> anchors = new ArrayList<>();
-        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            if (!player.isSpectator() && player.level().dimension().equals(Level.OVERWORLD)) anchors.add(player);
-        }
-        if (anchors.isEmpty()) {
-            nextAt = now + RETRY_NO_PLAYERS_MS;
-            return false;
-        }
-        ServerPlayer anchor = anchors.get(anchors.size() == 1 ? 0 : new Random().nextInt(anchors.size()));
-        ServerLevel level = anchor.serverLevel();
-        BlockPos surface = findPlace(level, anchor);
+    private static boolean begin(MinecraftServer server, ServerPlayer owner, long now) {
+        ServerLevel level = owner.serverLevel();
+        BlockPos surface = findPlace(level, owner);
         if (surface == null) {
-            nextAt = now + RETRY_NO_PLACE_MS;
+            NEXT_AT.put(owner.getUUID(), now + RETRY_NO_PLACE_MS);
             return false;
         }
         Display.ItemDisplay body = EntityType.ITEM_DISPLAY.create(level);
         Display.ItemDisplay lid = EntityType.ITEM_DISPLAY.create(level);
         Interaction hitbox = EntityType.INTERACTION.create(level);
         if (body == null || lid == null || hitbox == null) {
-            nextAt = now + RETRY_NO_PLACE_MS;
+            NEXT_AT.put(owner.getUUID(), now + RETRY_NO_PLACE_MS);
             return false;
         }
         double x = surface.getX() + 0.5;
         double y = surface.getY() + WATER_LEVEL_OFFSET;
         double z = surface.getZ() + 0.5;
-        float yaw = (float) Math.toDegrees(Math.atan2(-(anchor.getX() - x), anchor.getZ() - z)) + MODEL_YAW_OFFSET;
+        float yaw = (float) Math.toDegrees(Math.atan2(-(owner.getX() - x), owner.getZ() - z)) + MODEL_YAW_OFFSET;
         DeepChestAnimation.Pose start = DeepChestAnimation.bodyPose(0L, MODEL_SCALE, 0.0);
         configureDisplay(body, BODY_ITEM, start);
         configureDisplay(lid, LID_ITEM, DeepChestAnimation.lidPose(start.translation(), start.rotation(), start.scale(), 0.0));
@@ -368,9 +379,10 @@ public final class DeepChestService {
         hitbox.addTag(ENTITY_TAG);
 
         long totalMs = ModConfig.DEEP_CHEST_DURATION_MINUTES.get() * 60_000L;
-        ServerBossEvent bar = new ServerBossEvent(Component.literal("§6Сокровище из глубин"),
+        ServerBossEvent bar = new ServerBossEvent(Component.literal("§6Твоё сокровище из глубин"),
                 BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.PROGRESS);
-        active = new Chest(level, surface, now, totalMs, body.getUUID(), lid.getUUID(), hitbox.getUUID(), bar);
+        ACTIVE.put(owner.getUUID(), new Chest(owner.getUUID(), level, surface, now, totalMs, body.getUUID(), lid.getUUID(),
+                hitbox.getUUID(), bar));
         level.addFreshEntity(body);
         level.addFreshEntity(lid);
         level.addFreshEntity(hitbox);
@@ -379,34 +391,28 @@ public final class DeepChestService {
         level.playSound(null, x, y, z, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.4F, 0.6F);
         strike(level, x, y, z);
 
-        OceanEventsService.announce(server, "§6§l[Сокровище глубин] §eИз глубин поднялся пиратский сундук! §fКто первым "
-                + "доберётся и нажмёт по нему, заберёт §65 000–10 000 монет §fи с шансом §bключ кейса§f. §7У тебя "
-                + DeepChestLogic.timeLeft(totalMs) + ": следи за полосой вверху и подсказкой над хотбаром.");
-        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            bar.addPlayer(player);
-            player.connection.send(new ClientboundSetTitlesAnimationPacket(10, 70, 20));
-            player.connection.send(new ClientboundSetTitleTextPacket(Component.literal("§6Сокровище из глубин")));
-            player.connection.send(new ClientboundSetSubtitleTextPacket(Component.literal("§eУспей добраться первым!")));
-            player.playNotifySound(SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 1.0F, 1.0F);
-        }
+        owner.sendSystemMessage(Component.literal("§6§l[Сокровище глубин] §eУ твоего плота поднялся личный пиратский сундук! "
+                + "Забрать его можешь только ты: нажми по нему и получи §65 000–10 000 монет §fи с шансом §bключ кейса§f. "
+                + "§7У тебя " + DeepChestLogic.timeLeft(totalMs) + ": следи за полосой вверху и подсказкой над хотбаром."));
+        bar.addPlayer(owner);
+        owner.connection.send(new ClientboundSetTitlesAnimationPacket(10, 70, 20));
+        owner.connection.send(new ClientboundSetTitleTextPacket(Component.literal("§6Сокровище из глубин")));
+        owner.connection.send(new ClientboundSetSubtitleTextPacket(Component.literal("§eТвой личный сундук ждёт!")));
+        owner.playNotifySound(SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 1.0F, 1.0F);
         return true;
     }
 
-    private static BlockPos findPlace(ServerLevel level, ServerPlayer anchor) {
-        int minDistance = ModConfig.DEEP_CHEST_MIN_DISTANCE.get();
-        int maxDistance = Math.max(minDistance + 1, ModConfig.DEEP_CHEST_MAX_DISTANCE.get());
-        RandomSource random = anchor.getRandom();
-        for (int attempt = 0; attempt < SEARCH_ATTEMPTS; attempt++) {
-            double angle = random.nextDouble() * Math.PI * 2.0;
-            int distance = minDistance + random.nextInt(maxDistance - minDistance + 1);
-            int x = anchor.getBlockX() + (int) Math.round(Math.cos(angle) * distance);
-            int z = anchor.getBlockZ() + (int) Math.round(Math.sin(angle) * distance);
-            BlockPos surface = FishingSpotService.waterSurface(level, x, z);
-            if (surface == null || !FishingSpotService.isOpenWater(level, surface)) continue;
-            if (WorldGuardIslandLookup.ownerAt(level, surface) != null) continue;
-            return surface;
+    /** Вокруг плота владельца; сундуки разных игроков держим подальше друг от друга. */
+    private static BlockPos findPlace(ServerLevel level, ServerPlayer owner) {
+        return PersonalSpotFinder.find(level, owner, ModConfig.DEEP_CHEST_MIN_DISTANCE.get(),
+                ModConfig.DEEP_CHEST_MAX_DISTANCE.get(), surface -> !nearOtherChest(surface));
+    }
+
+    private static boolean nearOtherChest(BlockPos candidate) {
+        for (Chest other : ACTIVE.values()) {
+            if (other.surface.distSqr(candidate) < CHEST_GAP * CHEST_GAP) return true;
         }
-        return null;
+        return false;
     }
 
     /** Данные дисплея задаются через NBT: публичного API для item и transformation в 1.20.1 нет. */
@@ -457,23 +463,29 @@ public final class DeepChestService {
         if (tryClaim(event.getTarget(), event.getEntity())) event.setCanceled(true);
     }
 
+    private static Chest byHitbox(UUID hitboxId) {
+        for (Chest chest : ACTIVE.values()) {
+            if (chest.hitboxId.equals(hitboxId)) return chest;
+        }
+        return null;
+    }
+
     /** true, если цель это хитбокс сундука (событие поглощаем, даже когда награду не отдали). */
     private static boolean tryClaim(Entity target, net.minecraft.world.entity.player.Player who) {
-        Chest chest = active;
-        if (chest == null || chest.phase != Phase.ACTIVE || !(target instanceof Interaction)
-                || !target.getUUID().equals(chest.hitboxId)) return false;
+        if (!(target instanceof Interaction)) return false;
+        Chest chest = byHitbox(target.getUUID());
+        if (chest == null || chest.phase != Phase.ACTIVE) return false;
         if (!(who instanceof ServerPlayer player)) return true;
         MinecraftServer server = player.getServer();
         if (server == null) return true;
-        if (!DeepChestLogic.mayClaim(lastWinner, player.getUUID(), server.getPlayerList().getPlayerCount())) {
-            player.displayClientMessage(Component.literal("§cПрошлое сокровище забрал ты. Дай шанс другим!"), true);
+        if (!player.getUUID().equals(chest.owner)) {
+            player.displayClientMessage(Component.literal("§cЭто личное сокровище другого игрока."), true);
             return true;
         }
         DeepChestLogic.Reward reward = DeepChestLogic.rollReward(new Random());
         OceanEventsService.grantCoins(player, reward.coins());
         if (reward.caseId() != null) OceanEventsService.grantCaseKey(player, reward.caseId());
         if (DeepChestLogic.rollBooster(new Random())) OceanEventsService.grantBooster(player, "small");
-        lastWinner = player.getUUID();
 
         ServerLevel level = chest.level;
         double x = chest.surface.getX() + 0.5;
@@ -484,10 +496,6 @@ public final class DeepChestService {
         level.playSound(null, chest.surface, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 1.2F, 0.6F);
         strike(level, x, y, z);
 
-        String keyPart = reward.caseId() == null ? ""
-                : " §7и §bключ Кейса " + TournamentLogic.caseNumeral(reward.caseId());
-        OceanEventsService.announce(server, "§6§l[Сокровище глубин] §e" + player.getGameProfile().getName()
-                + " §fпервым добрался до сундука и забрал §6+" + reward.coins() + " монет" + keyPart + "§f!");
         player.sendSystemMessage(Component.literal("§6[Сокровище глубин] §aТвоя награда: §6+" + reward.coins()
                 + " монет" + (reward.caseId() == null ? "" : " §aи §bключ Кейса " + TournamentLogic.caseNumeral(reward.caseId())) + "§a!"));
 
@@ -497,7 +505,7 @@ public final class DeepChestService {
         chest.phase = Phase.WON;
         chest.phaseStart = System.currentTimeMillis();
         chest.lastAnimTick = DeepChestAnimation.NEVER_ANIMATED;
-        nextAt = chest.phaseStart + DeepChestAnimation.WON_MS + nextDelay();
+        NEXT_AT.put(chest.owner, chest.phaseStart + DeepChestAnimation.WON_MS + nextDelay());
         return true;
     }
 
@@ -505,22 +513,25 @@ public final class DeepChestService {
         chest.level.sendParticles(ParticleTypes.SPLASH, chest.surface.getX() + 0.5, chest.surface.getY() + 1.0,
                 chest.surface.getZ() + 0.5, 80, 1.4, 0.4, 1.4, 0.3);
         chest.level.playSound(null, chest.surface, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 1.3F, 0.7F);
-        OceanEventsService.announce(server, "§6[Сокровище глубин] §7Никто не успел: сундук ушёл на дно. Следующий поднимется позже.");
+        ServerPlayer owner = server.getPlayerList().getPlayer(chest.owner);
+        if (owner != null) {
+            owner.sendSystemMessage(Component.literal("§6[Сокровище глубин] §7Не успел: сундук ушёл на дно. Следующий поднимется позже."));
+        }
         chest.bar.removeAllPlayers();
         Entity hitbox = chest.level.getEntity(chest.hitboxId);
         if (hitbox != null) hitbox.discard();
         chest.phase = Phase.FIZZLING;
         chest.phaseStart = now;
         chest.lastAnimTick = DeepChestAnimation.NEVER_ANIMATED;
-        nextAt = now + DeepChestAnimation.FIZZLE_MS + nextDelay();
+        NEXT_AT.put(chest.owner, now + DeepChestAnimation.FIZZLE_MS + nextDelay());
     }
 
-    /** Финальная анимация досмотрена: убираем сущности и освобождаем слот события. */
-    private static void finishIfDone(Chest chest, long now) {
+    /** Финальная анимация досмотрена: убираем сущности. true = сундук можно выкидывать из списка. */
+    private static boolean finishIfDone(Chest chest, long now) {
         long limit = chest.phase == Phase.WON ? DeepChestAnimation.WON_MS : DeepChestAnimation.FIZZLE_MS;
-        if (now - chest.phaseStart < limit) return;
+        if (now - chest.phaseStart < limit) return false;
         cleanup(chest);
-        active = null;
+        return true;
     }
 
     private static void cleanup(Chest chest) {
@@ -536,9 +547,14 @@ public final class DeepChestService {
     public static void onEntityJoin(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
         if (event.getLevel().isClientSide() || !entity.getTags().contains(ENTITY_TAG)) return;
-        Chest chest = active;
-        boolean known = chest != null && (entity.getUUID().equals(chest.bodyId) || entity.getUUID().equals(chest.lidId)
-                || entity.getUUID().equals(chest.hitboxId));
+        UUID id = entity.getUUID();
+        boolean known = false;
+        for (Chest chest : ACTIVE.values()) {
+            if (id.equals(chest.bodyId) || id.equals(chest.lidId) || id.equals(chest.hitboxId)) {
+                known = true;
+                break;
+            }
+        }
         if (!known) event.setCanceled(true);
     }
 

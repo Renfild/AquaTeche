@@ -1,7 +1,6 @@
 package net.aquatech.ui.fishing;
 
 import java.util.Random;
-import java.util.UUID;
 
 /** Чистая логика события «Сокровище из глубин»: без Minecraft-классов, покрыта JUnit. */
 final class DeepChestLogic {
@@ -56,10 +55,5 @@ final class DeepChestLogic {
     static float progress(long leftMs, long totalMs) {
         if (totalMs <= 0L) return 0.0f;
         return Math.max(0.0f, Math.min(1.0f, leftMs / (float) totalMs));
-    }
-
-    /** Прошлый победитель уступает, пока онлайн есть кто-то ещё. */
-    static boolean mayClaim(UUID lastWinner, UUID player, int playersOnline) {
-        return lastWinner == null || !lastWinner.equals(player) || playersOnline <= 1;
     }
 }

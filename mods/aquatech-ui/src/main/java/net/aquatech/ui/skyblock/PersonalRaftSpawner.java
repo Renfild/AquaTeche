@@ -121,11 +121,7 @@ public final class PersonalRaftSpawner {
                     if (region != null) {
                         Method getMembers = region.getClass().getMethod("getMembers");
                         Object members = getMembers.invoke(region);
-                        try {
-                            members.getClass().getMethod("addPlayer", String.class).invoke(members, friendName);
-                        } catch (Throwable t) {
-                            members.getClass().getMethod("addPlayer", UUID.class).invoke(members, UUID.nameUUIDFromBytes(("OfflinePlayer:" + friendName).getBytes()));
-                        }
+                        changeMember(members, "addPlayer", friendName, friendUuid(player, friendName));
                         saveRegionManager(regionManager);
                         player.sendSystemMessage(Component.literal("§a⚓ Игрок §f" + friendName + " §aдобавлен в приват вашего плота!"));
                         return 1;
@@ -139,6 +135,31 @@ public final class PersonalRaftSpawner {
         return 0;
     }
 
+    /**
+     * Друг записывается и по UUID, и по имени: WorldGuard сверяет игрока с обоими списками, а один из способов
+     * (раньше только имя или только офлайн-UUID) на этом сервере мог не совпасть.
+     */
+    private static void changeMember(Object members, String method, String name, UUID uuid) throws ReflectiveOperationException {
+        members.getClass().getMethod(method, UUID.class).invoke(members, uuid);
+        try {
+            members.getClass().getMethod(method, String.class).invoke(members, name);
+        } catch (NoSuchMethodException ignored) {
+            // в новых WorldGuard имена не поддерживаются, UUID достаточно
+        }
+    }
+
+    /** UUID из кэша профилей сервера (регистр имени не важен), иначе офлайн-UUID по введённому имени. */
+    private static UUID friendUuid(ServerPlayer owner, String name) {
+        var cache = owner.server.getProfileCache();
+        if (cache != null) {
+            var known = cache.get(name);
+            if (known.isPresent()) {
+                return known.get().getId();
+            }
+        }
+        return UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    }
+
     public static int handleRemoveFriend(ServerPlayer player, String friendName) {
         String regionId = raftRegionId(player);
         try {
@@ -150,11 +171,7 @@ public final class PersonalRaftSpawner {
                     if (region != null) {
                         Method getMembers = region.getClass().getMethod("getMembers");
                         Object members = getMembers.invoke(region);
-                        try {
-                            members.getClass().getMethod("removePlayer", String.class).invoke(members, friendName);
-                        } catch (Throwable t) {
-                            members.getClass().getMethod("removePlayer", UUID.class).invoke(members, UUID.nameUUIDFromBytes(("OfflinePlayer:" + friendName).getBytes()));
-                        }
+                        changeMember(members, "removePlayer", friendName, friendUuid(player, friendName));
                         saveRegionManager(regionManager);
                         player.sendSystemMessage(Component.literal("§c⚓ Игрок §f" + friendName + " §cудален из вашего привата!"));
                         return 1;
@@ -704,6 +721,24 @@ public final class PersonalRaftSpawner {
             }
         }
         return solids >= 3;
+    }
+
+    /** Центр плота игрока (на уровне палубы) или null, если плота ещё нет. */
+    public static BlockPos raftCenterOf(ServerLevel level, UUID owner) {
+        RaftRegistry.Entry entry = RaftRegistry.get(level).getEntry(owner);
+        return entry == null ? null : new BlockPos(entry.x(), DECK_Y, entry.z());
+    }
+
+    /** true, если точка ближе чем CLAIM_RADIUS + buffer к центру плота кого-то, кроме self. */
+    public static boolean isNearAnotherRaft(ServerLevel level, BlockPos pos, UUID self, int buffer) {
+        long limit = (long) (CLAIM_RADIUS + buffer);
+        for (RaftRegistry.Entry e : RaftRegistry.get(level).entries) {
+            if (e.owner().equals(self)) continue;
+            long dx = (long) pos.getX() - e.x();
+            long dz = (long) pos.getZ() - e.z();
+            if (dx * dx + dz * dz < limit * limit) return true;
+        }
+        return false;
     }
 
     public static BlockPos raftCenterFromPlayerData(ServerPlayer player) {

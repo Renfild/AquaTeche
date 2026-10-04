@@ -51,9 +51,8 @@ public final class FishingSpotService {
     private static final String TAG_SPOT_INTRO_DONE = "aquatech_ui:spot_intro_done";
     private static final long RETRY_DELAY_MS = 2L * 60_000L;
     private static final double MIN_GAP_BETWEEN_SPOTS = 40.0;
-    private static final int SEARCH_ATTEMPTS = 12;
     private static final int WATER_DEPTH = 5;
-    private static final int OPEN_WATER_RING = 6;
+    static final int OPEN_WATER_RING = 6;
     private static final double PARTICLE_RANGE = 220.0;
     private static final int RING_POINTS = 18;
 
@@ -145,22 +144,10 @@ public final class FishingSpotService {
         return true;
     }
 
+    /** Вокруг плота игрока, а не вокруг того места, где он сейчас стоит: у каждого своя вода. */
     private static BlockPos findPlace(ServerLevel level, ServerPlayer player) {
-        int minDistance = ModConfig.SPOT_MIN_DISTANCE.get();
-        int maxDistance = Math.max(minDistance + 1, ModConfig.SPOT_MAX_DISTANCE.get());
-        RandomSource random = player.getRandom();
-        for (int attempt = 0; attempt < SEARCH_ATTEMPTS; attempt++) {
-            double angle = random.nextDouble() * Math.PI * 2.0;
-            int distance = minDistance + random.nextInt(maxDistance - minDistance + 1);
-            int x = player.getBlockX() + (int) Math.round(Math.cos(angle) * distance);
-            int z = player.getBlockZ() + (int) Math.round(Math.sin(angle) * distance);
-            BlockPos surface = waterSurface(level, x, z);
-            if (surface == null || !isOpenWater(level, surface)) continue;
-            if (WorldGuardIslandLookup.ownerAt(level, surface) != null) continue;
-            if (tooCloseToOtherSpot(surface)) continue;
-            return surface;
-        }
-        return null;
+        return PersonalSpotFinder.find(level, player, ModConfig.SPOT_MIN_DISTANCE.get(),
+                ModConfig.SPOT_MAX_DISTANCE.get(), surface -> !tooCloseToOtherSpot(surface));
     }
 
     /** Только уже загруженные чанки: генерация на ходу бьёт по TPS. */
@@ -199,7 +186,7 @@ public final class FishingSpotService {
         double dz = spot.pos.getZ() + 0.5 - player.getZ();
         int distance = (int) Math.round(Math.sqrt(dx * dx + dz * dz));
         SpotType type = spot.type;
-        player.sendSystemMessage(Component.literal(type.chatColor() + "[" + type.label() + "] §fРядом появилась точка: §e"
+        player.sendSystemMessage(Component.literal(type.chatColor() + "[" + type.label() + "] §fПоявилась точка лова: §e"
                 + distance + " м §f" + compass(dx, dz) + "§f. Рыба оттуда продаётся §6×"
                 + type.multLabel() + "§f дороже. §7Живёт " + type.lifetimeMinutes() + " мин."));
         player.playNotifySound(SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS,

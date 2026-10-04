@@ -3,7 +3,6 @@ package net.aquatech.ui.fishing;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -73,16 +72,6 @@ class DeepChestLogicTest {
         assertEquals("5:00", DeepChestLogic.timeLeft(300_000));
         assertEquals("0:07", DeepChestLogic.timeLeft(6_100));
         assertEquals("0:00", DeepChestLogic.timeLeft(-5));
-    }
-
-    @Test
-    void lastWinnerMayNotClaimAgainWhileOthersAreOnline() {
-        UUID a = UUID.randomUUID();
-        UUID b = UUID.randomUUID();
-        assertFalse(DeepChestLogic.mayClaim(a, a, 2));
-        assertTrue(DeepChestLogic.mayClaim(a, b, 2));
-        assertTrue(DeepChestLogic.mayClaim(a, a, 1), "alone on the server is fine");
-        assertTrue(DeepChestLogic.mayClaim(null, a, 3));
     }
 
     @Test

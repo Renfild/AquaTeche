@@ -490,10 +490,11 @@ public final class AquaTechCommand {
     }
 
     private static int deepChestStart(CommandContext<CommandSourceStack> ctx) {
-        boolean started = DeepChestService.startNow(ctx.getSource().getServer());
+        var self = ctx.getSource().getEntity() instanceof net.minecraft.server.level.ServerPlayer p ? p : null;
+        boolean started = DeepChestService.startNow(ctx.getSource().getServer(), self);
         ctx.getSource().sendSuccess(() -> Component.literal(started
-                ? "§6Сокровище из глубин запущено. §7Останови: /aquatech deepchest stop"
-                : "§cНе запустилось: оно уже идёт, нет игроков в Overworld или не нашлось открытой воды."), true);
+                ? "§6Сокровище из глубин запущено" + (self != null ? " для тебя" : " для всех игроков") + ". §7Останови: /aquatech deepchest stop"
+                : "§cНе запустилось: сундук уже идёт, игрок не в Overworld или не нашлось открытой воды."), true);
         return started ? 1 : 0;
     }
 
