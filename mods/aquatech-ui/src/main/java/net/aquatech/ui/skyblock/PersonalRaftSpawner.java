@@ -2,7 +2,9 @@ package net.aquatech.ui.skyblock;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.aquatech.ui.AquaTechUI;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -71,7 +73,12 @@ public final class PersonalRaftSpawner {
                 .then(Commands.literal("recreate")
                         .executes(ctx -> handleResetRequest(ctx.getSource().getPlayerOrException()))
                         .then(Commands.literal("confirm")
-                                .executes(ctx -> handleResetRaftConfirm(ctx.getSource().getPlayerOrException()))));
+                                .executes(ctx -> handleResetRaftConfirm(ctx.getSource().getPlayerOrException())))
+                        .then(Commands.argument("player", EntityArgument.player())
+                                .requires(src -> src.hasPermission(2))
+                                .executes(ctx -> handleAdminRecreate(ctx.getSource(), EntityArgument.getPlayer(ctx, "player"), false))
+                                .then(Commands.literal("confirm")
+                                        .executes(ctx -> handleAdminRecreate(ctx.getSource(), EntityArgument.getPlayer(ctx, "player"), true)))));
 
         var buildIs = Commands.literal("is")
                 .executes(ctx -> handleRaftCommand(ctx.getSource().getPlayerOrException()))
@@ -88,7 +95,12 @@ public final class PersonalRaftSpawner {
                 .then(Commands.literal("recreate")
                         .executes(ctx -> handleResetRequest(ctx.getSource().getPlayerOrException()))
                         .then(Commands.literal("confirm")
-                                .executes(ctx -> handleResetRaftConfirm(ctx.getSource().getPlayerOrException()))));
+                                .executes(ctx -> handleResetRaftConfirm(ctx.getSource().getPlayerOrException())))
+                        .then(Commands.argument("player", EntityArgument.player())
+                                .requires(src -> src.hasPermission(2))
+                                .executes(ctx -> handleAdminRecreate(ctx.getSource(), EntityArgument.getPlayer(ctx, "player"), false))
+                                .then(Commands.literal("confirm")
+                                        .executes(ctx -> handleAdminRecreate(ctx.getSource(), EntityArgument.getPlayer(ctx, "player"), true)))));
 
         dispatcher.register(buildCmd);
         dispatcher.register(buildIs);
@@ -166,15 +178,44 @@ public final class PersonalRaftSpawner {
     }
 
     public static int handleResetRaftConfirm(ServerPlayer player) {
-        ServerLevel level = player.server.getLevel(ServerLevel.OVERWORLD);
-        if (level == null) return 0;
-
         CompoundTag data = player.getPersistentData();
-        int resetCount = data.getInt(TAG_RESET_COUNT);
-        if (resetCount >= 1) {
+        if (data.getInt(TAG_RESET_COUNT) >= 1) {
             player.sendSystemMessage(Component.literal("§c⚓ Вы уже использовали единственный лимит на пересоздание плота (1/1)!"));
             return 0;
         }
+        if (!recreateRaft(player, 1)) {
+            return 0;
+        }
+        player.sendSystemMessage(Component.literal("§a⚓ Твой плот и приват успешно пересозданы на новых координатах!"));
+        player.sendSystemMessage(Component.literal("§e⚠ Лимит пересоздания плота исчерпан (1/1)."));
+        return 1;
+    }
+
+    /** {@code /is recreate <player>} для операторов: без лимита 1/1 и без траты попытки игрока. */
+    public static int handleAdminRecreate(CommandSourceStack source, ServerPlayer target, boolean confirmed) {
+        String name = target.getGameProfile().getName();
+        if (!confirmed) {
+            source.sendSystemMessage(Component.literal("§c⚠ Плот игрока " + name + ", его приват и постройки на нём будут удалены."));
+            source.sendSystemMessage(Component.literal("§eПодтвердить: §a/is recreate " + name + " confirm"));
+            return 1;
+        }
+        // Игрок должен быть онлайн: плот ставится вокруг его сущности. Счётчик попыток остаётся прежним.
+        if (!recreateRaft(target, target.getPersistentData().getInt(TAG_RESET_COUNT))) {
+            source.sendFailure(Component.literal("Не удалось пересоздать плот игрока " + name));
+            return 0;
+        }
+        target.sendSystemMessage(Component.literal("§a⚓ Администратор пересоздал твой плот и приват на новых координатах."));
+        source.sendSystemMessage(Component.literal("§a⚓ Плот игрока " + name + " пересоздан."));
+        AquaTechUI.LOGGER.info("Raft of {} recreated by {}", name, source.getTextName());
+        return 1;
+    }
+
+    /** Стирает старый плот и приват игрока, ставит новый и переносит игрока на него. */
+    private static boolean recreateRaft(ServerPlayer player, int resetCountAfter) {
+        ServerLevel level = player.server.getLevel(ServerLevel.OVERWORLD);
+        if (level == null) return false;
+
+        CompoundTag data = player.getPersistentData();
 
         // 1. Fetch old raft coordinates to destroy old structures
         RaftRegistry registry = RaftRegistry.get(level);
@@ -201,8 +242,8 @@ public final class PersonalRaftSpawner {
             }
         } catch (Throwable ignored) {}
 
-        // 3. Mark reset count as 1 used
-        data.putInt(TAG_RESET_COUNT, 1);
+        // 3. Forget the old raft
+        data.putInt(TAG_RESET_COUNT, resetCountAfter);
         data.remove(TAG_READY);
         data.remove(TAG_X);
         data.remove(TAG_Y);
@@ -215,12 +256,11 @@ public final class PersonalRaftSpawner {
         trySpawnRaft(player);
 
         RaftRegistry.Entry fresh = registry.getEntry(player.getUUID());
-        if (fresh != null) {
-            player.teleportTo(level, fresh.x() + 0.5, SPAWN_Y + 0.1, fresh.z() + 0.5, 180.0f, 0.0f);
+        if (fresh == null) {
+            return false;
         }
-        player.sendSystemMessage(Component.literal("§a⚓ Твой плот и приват успешно пересозданы на новых координатах!"));
-        player.sendSystemMessage(Component.literal("§e⚠ Лимит пересоздания плота исчерпан (1/1)."));
-        return 1;
+        player.teleportTo(level, fresh.x() + 0.5, SPAWN_Y + 0.1, fresh.z() + 0.5, 180.0f, 0.0f);
+        return true;
     }
 
     private static void clearOldRaftArea(ServerLevel level, int cx, int DECK_Y, int cz) {
@@ -453,6 +493,22 @@ public final class PersonalRaftSpawner {
         Object min = at.invoke(null, minX, minY, minZ);
         Object max = at.invoke(null, maxX, maxY, maxZ);
 
+        // Регион уже стоит: ensure вызывается на каждом входе и /is, а пересоздание стирало бы друзей, флаги и участников.
+        Object existing = null;
+        Method getRegion = findMethod(regionManager.getClass(), "getRegion", 1);
+        if (getRegion != null) {
+            existing = getRegion.invoke(regionManager, regionId);
+        }
+        Object keptMembers = null;
+        if (existing != null) {
+            Object oldMin = existing.getClass().getMethod("getMinimumPoint").invoke(existing);
+            Object oldMax = existing.getClass().getMethod("getMaximumPoint").invoke(existing);
+            if (min.equals(oldMin) && max.equals(oldMax)) {
+                return;
+            }
+            keptMembers = existing.getClass().getMethod("getMembers").invoke(existing);
+        }
+
         Class<?> protectedCuboid = Class.forName("com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion", true, cl);
         Object region = protectedCuboid
                 .getConstructor(String.class, blockVector3, blockVector3)
@@ -466,6 +522,9 @@ public final class PersonalRaftSpawner {
             owners.getClass().getMethod("addPlayer", String.class).invoke(owners, player.getGameProfile().getName());
         }
         region.getClass().getMethod("setOwners", defaultDomain).invoke(region, owners);
+        if (keptMembers != null) {
+            region.getClass().getMethod("setMembers", defaultDomain).invoke(region, keptMembers);
+        }
 
         Class<?> flagsClass = Class.forName("com.sk89q.worldguard.protection.flags.Flags", true, cl);
         Class<?> stateEnum = Class.forName("com.sk89q.worldguard.protection.flags.StateFlag$State", true, cl);

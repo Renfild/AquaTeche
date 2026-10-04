@@ -177,6 +177,7 @@
 | `/aquatech grantxp`, `settier`, `promote` | админ | опыт океана, тир, продвижение пути |
 | `/aquatech rod add\|remove\|clear` | админ | кастомный лут удочки |
 | `/aquatech daily`, `season`, `horizon`, `vault`, `limiters`, `look` | админ | ежедневка, сезон, путь, хранилище, лимитеры, скины |
+| `/is recreate <игрок>` и `confirm` | админ | пересоздать плот онлайн-игрока без лимита 1/1 |
 | `/aqualumen open\|refresh\|status\|reload` | админ | хаб-снапшот и конфиги |
 | `/kit set\|remove`, `/warp set`, `/hub reload` | админ | конфиги наборов, варпов, хаба |
 
