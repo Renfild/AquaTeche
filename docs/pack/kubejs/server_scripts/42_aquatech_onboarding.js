@@ -1,13 +1,32 @@
 // AquaTech: обучение первых 10 минут. Панель слева (рисует мод aqualumen, OnboardingHud) ведёт новичка
-// по 5 шагам: набор, 3 рыбы, подарочный кейс, продажа улова, руда. Награды за шаги 2, 4 и 5. У клиентов без свежего мода подсказка идёт в action bar. Включается только на самом первом входе
+// по 6 шагам: остров (/is), набор, 3 рыбы, подарочный кейс, продажа улова, руда. Награды за шаги 3, 5 и 6. У клиентов без свежего мода подсказка идёт в action bar. Включается только на самом первом входе
 // (41_first_join_hint.js ставит aquatech_onboard = 1), старые игроки его не видят.
-// Шаг хранится в persistentData.aquatech_onboard: 1..5 — текущий шаг, 99 — пройдено.
+// Шаг хранится в persistentData.aquatech_onboard: 1..6 — текущий шаг, 99 — пройдено.
+// Номера шагов сдвинуты на 1 (новый шаг 1 — /is): aquatech_onboard_v = 2 ставится новичку при входе,
+// у тех, кто застрял на старой нумерации (v не стоит), шаг переносится один раз в ServerEvents.tick.
 
 const ONBOARD_KEY = 'aquatech_onboard'
 const ONBOARD_BASE = 'aquatech_onboard_base'
 const ONBOARD_DONE = 99
-const ONBOARD_FISH_GOAL = 3
-const ONBOARD_ORES = ['minecraft:copper_ore', 'industrialupgrade:classicore/tin', 'minecraft:iron_ore', 'minecraft:coal_ore']
+const ONBOARD_VERSION_KEY = 'aquatech_onboard_v'
+const ONBOARD_VERSION = 2
+const ONBOARD_IS_USED = 'aquatech_is_used'
+
+// /is ставит игроку метку (тег сущности) и флаг в Forge-данных. Тег виден отсюда напрямую. player.persistentData в
+// KubeJS это отдельный компонент KubeJSPersistentData, Forge-флаг там не виден: тем, кто нажал /is до появления тега,
+// флаг читаем из ForgeData в nbt игрока. После /onboarding reset старый флаг игнорируется, нужен новый /is.
+const ONBOARD_IS_RESET = 'aquatech_is_reset'
+
+function onboardIsUsed(player) {
+  try {
+    if (player.tags.contains(ONBOARD_IS_USED)) return true
+    if (player.persistentData.getBoolean(ONBOARD_IS_RESET)) return false
+    return !!player.nbt.getCompound('ForgeData').getBoolean(ONBOARD_IS_USED)
+  } catch (err) {
+    console.warn('[AquaTech] onboarding: cannot read ' + ONBOARD_IS_USED + ': ' + err)
+    return false
+  }
+}
 
 let OnboardingService = null
 try {
@@ -94,15 +113,21 @@ function onboardBoosterActive(player) {
 // Каждый шаг: подсказка для запасной строки, проверка выполнения, награда.
 const ONBOARD_STEPS = {
   1: {
-    hint: () => '§b1/5 §fЗабери стартовый набор: нажми §eF4§f → вкладка «Киты»',
+    hint: () => '§b1/6 §fНапиши в чате §e/is§f: появится твой личный остров',
+    base: () => 0,
+    done: (player) => onboardIsUsed(player),
+    reward: () => ''
+  },
+  2: {
+    hint: () => '§b2/6 §fЗабери стартовый набор: нажми §eF4§f → вкладка «Киты»',
     base: () => 0,
     done: (player) => onboardHasAny(player, ['starcatcher:bamboo_rod', 'starcatcher:tackle_box']),
     reward: () => ''
   },
-  2: {
+  3: {
     hint: (player, base) => {
       const caught = Math.max(0, onboardFish(player) - base)
-      return `§b2/5 §fВозьми удочку и поймай рыбу: §e${Math.min(caught, ONBOARD_FISH_GOAL)}/${ONBOARD_FISH_GOAL}`
+      return `§b3/6 §fВозьми удочку и поймай рыбу: §e${Math.min(caught, ONBOARD_FISH_GOAL)}/${ONBOARD_FISH_GOAL}`
     },
     base: (player) => onboardFish(player),
     done: (player, base) => onboardFish(player) - base >= ONBOARD_FISH_GOAL,
@@ -111,14 +136,14 @@ const ONBOARD_STEPS = {
       return '§6+500 монет'
     }
   },
-  3: {
-    hint: () => '§b3/5 §fНажми §eF4§f → «Кейсы» и открой подарочный кейс',
+  4: {
+    hint: () => '§b4/6 §fНажми §eF4§f → «Кейсы» и открой подарочный кейс',
     base: () => 0,
     done: (player) => onboardStarterKeys(player) <= 0,
     reward: () => ''
   },
-  4: {
-    hint: () => '§b4/5 §fПродай улов: §eF4§f → «Рыбалка» → «Продать»',
+  5: {
+    hint: () => '§b5/6 §fПродай улов: §eF4§f → «Рыбалка» → «Продать»',
     base: (player) => onboardCoins(player),
     done: (player, base) => onboardCoins(player) > base,
     reward: (player) => {
@@ -126,8 +151,8 @@ const ONBOARD_STEPS = {
       return '§6малый бустер скупщика §7(включить: /booster)'
     }
   },
-  5: {
-    hint: () => '§b5/5 §fПоймай руду: медь, олово, железо или уголь',
+  6: {
+    hint: () => '§b6/6 §fПоймай руду: медь, олово, железо или уголь',
     base: () => 0,
     done: (player) => onboardHasAny(player, ONBOARD_ORES),
     reward: (player) => {
@@ -169,6 +194,14 @@ ServerEvents.tick((event) => {
   if (server.tickCount % 20 !== 0) return
   server.players.forEach((player) => {
     const data = player.persistentData
+    if (data.getInt(ONBOARD_VERSION_KEY) < ONBOARD_VERSION) {
+      const old = data.getInt(ONBOARD_KEY)
+      if (old >= 1 && old < ONBOARD_DONE) {
+        data.putInt(ONBOARD_KEY, old + 1)
+        data.remove(ONBOARD_BASE)
+      }
+      data.putInt(ONBOARD_VERSION_KEY, ONBOARD_VERSION)
+    }
     const step = data.getInt(ONBOARD_KEY)
     const def = ONBOARD_STEPS[step]
     if (!def) return
@@ -178,8 +211,8 @@ ServerEvents.tick((event) => {
       onboardAdvance(player, step)
       return
     }
-    const have = step === 2 ? Math.max(0, onboardFish(player) - base) : 0
-    if (step === 2) {
+    const have = step === ONBOARD_FISH_STEP ? Math.max(0, onboardFish(player) - base) : 0
+    if (step === ONBOARD_FISH_STEP) {
       // диагностика: видно в логе KubeJS, считает ли улов (число должно расти при каждой рыбе)
       const seen = 'aquatech_onboard_seen'
       if (data.getInt(seen) !== have) {
@@ -205,7 +238,10 @@ ServerEvents.commandRegistry((event) => {
         const player = ctx.source.player
         if (!player) return 0
         player.persistentData.putInt(ONBOARD_KEY, 1)
+        player.persistentData.putInt(ONBOARD_VERSION_KEY, ONBOARD_VERSION)
         player.persistentData.remove(ONBOARD_BASE)
+        player.removeTag(ONBOARD_IS_USED)
+        player.persistentData.putBoolean(ONBOARD_IS_RESET, true)
         player.tell(Text.of('§b[AquaTech] §fОбучение начато заново.'))
         return 1
       })))

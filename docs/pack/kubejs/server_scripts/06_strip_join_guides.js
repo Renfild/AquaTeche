@@ -7,7 +7,12 @@ const JOIN_GUIDES = [
   'industrialupgrade:guide_book',
   'industrialupgrade:guide_tablet',
   'industrialupgrade:book',
+  'industrialupgrade:book_iu',
   'alexsmobs:animal_dictionary'
+]
+const JOIN_GUIDE_MASKS = [
+  /^industrialupgrade:(guide|book)/,
+  /^starcatcher:.*guide/
 ]
 const GUIDES_STRIP_FLAG = 'aquatech_stripped_join_guides'
 
@@ -25,6 +30,18 @@ function stripJoinGuides(player) {
       // предмета нет в реестре — пропускаем
     }
   }
+  // Запасной проход по маске: IU/SC могли выдать книгу под id, которого нет в списке выше.
+  for (const mask of JOIN_GUIDE_MASKS) {
+    try {
+      const cnt = player.inventory.count(mask)
+      if (cnt > 0) {
+        player.inventory.clear(mask)
+        removed += cnt
+      }
+    } catch (e) {
+      // маска не поддержана этой версией KubeJS — остаётся список выше
+    }
+  }
   if (removed > 0) {
     console.log('[AquaTech] Removed join guide books x' + removed + ' from ' + player.username)
   }
@@ -36,11 +53,17 @@ PlayerEvents.loggedIn(function (event) {
   var data = player.persistentData
   if (data.getBoolean(GUIDES_STRIP_FLAG)) return
 
-  // Моды выдают книги на логине, иногда с задержкой: чистим дважды, флаг ставим после второй чистки.
+  // Моды выдают книги на логине, иногда с задержкой: чистим несколько раз, флаг ставим после последней чистки.
   event.server.scheduleInTicks(60, function () {
     stripJoinGuides(player)
   })
   event.server.scheduleInTicks(200, function () {
+    stripJoinGuides(player)
+  })
+  event.server.scheduleInTicks(600, function () {
+    stripJoinGuides(player)
+  })
+  event.server.scheduleInTicks(1200, function () {
     stripJoinGuides(player)
     data.putBoolean(GUIDES_STRIP_FLAG, true)
   })
