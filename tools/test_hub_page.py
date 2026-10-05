@@ -3,7 +3,7 @@
     python tools/test_hub_page.py
 
 Нужен Playwright: pip install playwright && python -m playwright install chromium.
-Проверяет окно торговца рыбой (одна вкладка «Рыбалка», серые кнопки без торговца) и обычное F4 (вкладки «Рыбалка» нет).
+Проверяет окно торговца рыбой (одна вкладка «Рыбалка», серые кнопки без торговца), обычное F4 (вкладки «Рыбалка» нет) и вкладку кейсов (все десять карточек с иконками).
 Скриншоты кладёт в mods/aquatech-machines/art/hub_test_*.png.
 """
 import json
@@ -88,6 +88,23 @@ def main():
         ok &= check("F4: нет вкладки «Рыбалка»", not any("Рыбал" in t for t in labels), str(labels))
         ok &= check("F4: боковая панель видна", page.is_visible(".sidebar"))
         page.screenshot(path=str(SHOTS / "hub_test_f4.png"))
+
+        # --- кейсы из настоящего config/aqualumen/cases.json: все десять карточек с загруженными иконками ----------
+        cases = json.loads((ROOT / "config" / "aqualumen" / "cases.json").read_text(encoding="utf-8"))["cases"]
+        case_payload = payload("cases", tabs)
+        case_payload["snapshot"]["cases"] = [
+            {"id": c["id"], "title": c["title"], "rarity": c["rarity"], "cost": c["costCoins"], "count": 0,
+             "pityEvery": c["pityEvery"], "loot": []} for c in cases]
+        page.goto(HUB.as_uri())
+        page.wait_for_function("typeof (window.AquaLumen && window.AquaLumen.applySnapshot) === 'function'")
+        page.evaluate("p => window.AquaLumen.applySnapshot(p)", case_payload)
+        page.wait_for_selector(".card.case")
+        page.wait_for_function("[...document.querySelectorAll('.card.case .case-card-img')].every(i => i.complete && i.naturalWidth > 0)", timeout=15000)
+        ok &= check("кейсы: показаны все десять", page.locator(".card.case").count() == len(cases) == 10,
+                    str(page.locator(".card.case").count()))
+        broken = page.evaluate("[...document.querySelectorAll('.card.case .case-card-img')].filter(i => !(i.complete && i.naturalWidth > 0)).length")
+        ok &= check("кейсы: иконки у всех карточек", broken == 0, f"без иконки: {broken}")
+        page.screenshot(path=str(SHOTS / "hub_test_cases.png"))
 
         # --- вкладка из initialTab, которой нет в списке, заменяется первой доступной -----------------------------
         page.goto(HUB.as_uri())

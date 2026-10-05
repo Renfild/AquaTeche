@@ -282,11 +282,11 @@ def apply_additions(case):
     if rows:
         percent = sum(e["weight"] for e in case["loot"]) / 100  # вес одного процента: у кейсов сумма весов 500, а не 100
         for entry in case["loot"]:
-            entry["weight"] = round(entry["weight"] * OLD_WEIGHT_SCALE, 2)
+            entry["weight"] = max(1, round(entry["weight"] * OLD_WEIGHT_SCALE))
         position = next(i for i, e in enumerate(case["loot"]) if e["type"] == "coins")
         for offset, (item, label, weight, cap) in enumerate(rows):
             case["loot"].insert(position + offset, {"type": "item", "item": item, "label": label,
-                                                    "min": 1, "max": cap, "weight": round(weight * percent, 2)})
+                                                    "min": 1, "max": cap, "weight": max(1, round(weight * percent))})
     for entry in case["loot"] + ([case["pity"]] if case.get("pity") else []):
         if entry.get("item") in RENAME:
             entry["label"] = RENAME[entry["item"]]
@@ -399,9 +399,21 @@ def rebalance_case(case):
     case["costCoins"] = price
 
 
+def check_schema(cases):
+    """CaseConfig в моде читает weight, min и max как int: дробное число роняет весь файл, и хаб показывает запасные кейсы."""
+    for case in cases:
+        for entry in case["loot"] + ([case["pity"]] if case.get("pity") else []):
+            for field in ("weight", "min", "max"):
+                if field in entry and not isinstance(entry[field], int):
+                    raise ValueError(f"{case['id']} / {entry.get('label')}: {field}={entry[field]!r} не целое")
+        if not isinstance(case["costCoins"], int):
+            raise ValueError(f"{case['id']}: costCoins не целое")
+
+
 def rebalance(cases):
     for case in cases:
         rebalance_case(case)
+    check_schema(cases)
 
 
 def report(cases, before=None):

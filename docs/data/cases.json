@@ -527,7 +527,7 @@
           "item": "botania:manasteel_ingot",
           "min": 32,
           "max": 48,
-          "weight": 48.8,
+          "weight": 49,
           "chance": 8.9
         },
         {
@@ -536,7 +536,7 @@
           "item": "botania:mana_pearl",
           "min": 12,
           "max": 20,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 7.5
         },
         {
@@ -545,7 +545,7 @@
           "item": "botania:mana_diamond",
           "min": 12,
           "max": 20,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 7.5
         },
         {
@@ -554,7 +554,7 @@
           "item": "botania:rune_water",
           "min": 12,
           "max": 20,
-          "weight": 32.8,
+          "weight": 33,
           "chance": 6
         },
         {
@@ -563,7 +563,7 @@
           "item": "botania:rune_fire",
           "min": 12,
           "max": 20,
-          "weight": 32.8,
+          "weight": 33,
           "chance": 6
         },
         {
@@ -572,7 +572,7 @@
           "item": "botania:rune_mana",
           "min": 12,
           "max": 20,
-          "weight": 32.8,
+          "weight": 33,
           "chance": 6
         },
         {
@@ -581,8 +581,8 @@
           "item": "industrialupgrade:blockresource/advanced_machine",
           "min": 2,
           "max": 4,
-          "weight": 24.8,
-          "chance": 4.5
+          "weight": 25,
+          "chance": 4.6
         },
         {
           "name": "Улучшенные микросхемы",
@@ -590,7 +590,7 @@
           "item": "industrialupgrade:crafting_elements/crafting_274_element",
           "min": 6,
           "max": 9,
-          "weight": 32.8,
+          "weight": 33,
           "chance": 6
         },
         {
@@ -599,7 +599,7 @@
           "item": "industrialupgrade:battery/energy_crystal",
           "min": 7,
           "max": 11,
-          "weight": 32.8,
+          "weight": 33,
           "chance": 6
         },
         {
@@ -608,8 +608,8 @@
           "item": "industrialupgrade:simplemachine/compressor_iu",
           "min": 2,
           "max": 2,
-          "weight": 20.04,
-          "chance": 3.7
+          "weight": 20,
+          "chance": 3.6
         },
         {
           "name": "Экстрактор",
@@ -617,8 +617,8 @@
           "item": "industrialupgrade:simplemachine/extractor_iu",
           "min": 2,
           "max": 2,
-          "weight": 20.04,
-          "chance": 3.7
+          "weight": 20,
+          "chance": 3.6
         },
         {
           "name": "Электрический сборщик электроники",
@@ -626,8 +626,8 @@
           "item": "industrialupgrade:basemachine3/electronic_assembler",
           "min": 2,
           "max": 2,
-          "weight": 15.03,
-          "chance": 2.8
+          "weight": 15,
+          "chance": 2.7
         },
         {
           "name": "Рудопромывочный механизм",
@@ -635,8 +635,8 @@
           "item": "industrialupgrade:moremachine3/orewashing",
           "min": 2,
           "max": 2,
-          "weight": 15.03,
-          "chance": 2.8
+          "weight": 15,
+          "chance": 2.7
         },
         {
           "name": "Завод сплавов",
@@ -644,8 +644,8 @@
           "item": "industrialupgrade:basemachine/alloy_smelter",
           "min": 2,
           "max": 2,
-          "weight": 15.03,
-          "chance": 2.8
+          "weight": 15,
+          "chance": 2.7
         },
         {
           "name": "Гибридная солнечная панель",
@@ -653,8 +653,8 @@
           "item": "industrialupgrade:machines/hybrid_solar_paneliu",
           "min": 2,
           "max": 2,
-          "weight": 15.03,
-          "chance": 2.8
+          "weight": 15,
+          "chance": 2.7
         },
         {
           "name": "Распространитель маны",
@@ -662,8 +662,8 @@
           "item": "botania:mana_spreader",
           "min": 3,
           "max": 4,
-          "weight": 20.04,
-          "chance": 3.7
+          "weight": 20,
+          "chance": 3.6
         },
         {
           "name": "Бассейн маны",
@@ -671,8 +671,8 @@
           "item": "botania:mana_pool",
           "min": 2,
           "max": 2,
-          "weight": 15.03,
-          "chance": 2.8
+          "weight": 15,
+          "chance": 2.7
         },
         {
           "name": "Теллурическая агломерационная пластина",
@@ -680,7 +680,7 @@
           "item": "botania:terra_plate",
           "min": 1,
           "max": 1,
-          "weight": 10.02,
+          "weight": 10,
           "chance": 1.8
         },
         {
@@ -689,7 +689,7 @@
           "item": "",
           "min": 74000,
           "max": 140000,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 7.5
         },
         {
@@ -698,7 +698,7 @@
           "item": "",
           "min": 10,
           "max": 20,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 7.5
         }
       ]
@@ -1027,7 +1027,7 @@
           "item": "industrialupgrade:machines/proton_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 15.03,
+          "weight": 15,
           "chance": 3.2
         },
         {
@@ -1036,7 +1036,7 @@
           "item": "industrialupgrade:wiring_storage/ult_mfsu",
           "min": 2,
           "max": 2,
-          "weight": 20.04,
+          "weight": 20,
           "chance": 4.3
         },
         {
@@ -1045,7 +1045,7 @@
           "item": "industrialupgrade:moremachine/quad_furnace",
           "min": 3,
           "max": 4,
-          "weight": 15.03,
+          "weight": 15,
           "chance": 3.2
         },
         {
@@ -1054,7 +1054,7 @@
           "item": "industrialupgrade:basemachine1/enrichment",
           "min": 2,
           "max": 2,
-          "weight": 15.03,
+          "weight": 15,
           "chance": 3.2
         },
         {
@@ -1081,7 +1081,7 @@
           "item": "industrialupgrade:machines/spectral_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 0.8,
+          "weight": 1,
           "chance": 0.2
         }
       ]
@@ -1106,7 +1106,7 @@
           "item": "industrialupgrade:battery/lapotron_crystal",
           "min": 48,
           "max": 64,
-          "weight": 24.8,
+          "weight": 25,
           "chance": 5.2
         },
         {
@@ -1115,7 +1115,7 @@
           "item": "industrialupgrade:alloyingot/osmiridium",
           "min": 52,
           "max": 64,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 8.5
         },
         {
@@ -1124,7 +1124,7 @@
           "item": "industrialupgrade:itemingots/adamantium",
           "min": 52,
           "max": 64,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 8.5
         },
         {
@@ -1133,7 +1133,7 @@
           "item": "industrialupgrade:baseore/platinum",
           "min": 52,
           "max": 64,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 8.5
         },
         {
@@ -1142,7 +1142,7 @@
           "item": "industrialupgrade:baseore/cobalt",
           "min": 52,
           "max": 64,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 8.5
         },
         {
@@ -1151,7 +1151,7 @@
           "item": "industrialupgrade:upgrades/overclocker",
           "min": 52,
           "max": 64,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 8.5
         },
         {
@@ -1160,7 +1160,7 @@
           "item": "industrialupgrade:crafting_elements/crafting_274_element",
           "min": 52,
           "max": 64,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 8.5
         },
         {
@@ -1169,7 +1169,7 @@
           "item": "aquatech_ui:rate_x32",
           "min": 2,
           "max": 2,
-          "weight": 32.8,
+          "weight": 33,
           "chance": 6.9
         },
         {
@@ -1178,7 +1178,7 @@
           "item": "industrialupgrade:nuclearresource/uranium_235",
           "min": 52,
           "max": 64,
-          "weight": 32.8,
+          "weight": 33,
           "chance": 6.9
         },
         {
@@ -1187,7 +1187,7 @@
           "item": "industrialupgrade:machines/singular_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 10.06,
+          "weight": 10,
           "chance": 2.1
         },
         {
@@ -1196,7 +1196,7 @@
           "item": "industrialupgrade:wiring_storage/adv_mfsu",
           "min": 2,
           "max": 2,
-          "weight": 20.12,
+          "weight": 20,
           "chance": 4.2
         },
         {
@@ -1205,8 +1205,8 @@
           "item": "industrialupgrade:basemachine/neutron_generator",
           "min": 2,
           "max": 2,
-          "weight": 15.09,
-          "chance": 3.2
+          "weight": 15,
+          "chance": 3.1
         },
         {
           "name": "Реактор ядерного синтеза",
@@ -1214,8 +1214,8 @@
           "item": "industrialupgrade:basemachine1/synthesis",
           "min": 1,
           "max": 1,
-          "weight": 15.09,
-          "chance": 3.2
+          "weight": 15,
+          "chance": 3.1
         },
         {
           "name": "Совершенное МФСУ",
@@ -1223,8 +1223,8 @@
           "item": "industrialupgrade:wiring_storage/per_mfsu",
           "min": 1,
           "max": 1,
-          "weight": 15.09,
-          "chance": 3.2
+          "weight": 15,
+          "chance": 3.1
         },
         {
           "name": "AquaCoins (Куш)",
@@ -1232,7 +1232,7 @@
           "item": "",
           "min": 2100000,
           "max": 3900000,
-          "weight": 40.8,
+          "weight": 41,
           "chance": 8.5
         },
         {
@@ -1241,7 +1241,7 @@
           "item": "",
           "min": 50,
           "max": 80,
-          "weight": 24.8,
+          "weight": 25,
           "chance": 5.2
         },
         {
@@ -1250,7 +1250,7 @@
           "item": "industrialupgrade:machines/photonic_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 0.8,
+          "weight": 1,
           "chance": 0.2
         },
         {
@@ -1259,7 +1259,7 @@
           "item": "industrialupgrade:machines/neutronium_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 0.8,
+          "weight": 1,
           "chance": 0.2
         }
       ]
@@ -1374,7 +1374,7 @@
           "item": "industrialupgrade:wiring_storage/bar_mfsu",
           "min": 2,
           "max": 2,
-          "weight": 15.03,
+          "weight": 15,
           "chance": 3.2
         },
         {
@@ -1383,7 +1383,7 @@
           "item": "industrialupgrade:sintezator/sintezator",
           "min": 2,
           "max": 2,
-          "weight": 20.04,
+          "weight": 20,
           "chance": 4.3
         },
         {
@@ -1392,7 +1392,7 @@
           "item": "extendedcrafting:ultimate_table",
           "min": 1,
           "max": 1,
-          "weight": 15.03,
+          "weight": 15,
           "chance": 3.2
         },
         {
@@ -1401,7 +1401,7 @@
           "item": "avaritia:neutron_collector",
           "min": 2,
           "max": 2,
-          "weight": 15.03,
+          "weight": 15,
           "chance": 3.2
         },
         {
@@ -1428,7 +1428,7 @@
           "item": "industrialupgrade:machines/barion_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 0.8,
+          "weight": 1,
           "chance": 0.2
         }
       ]
@@ -1453,8 +1453,8 @@
           "item": "draconicevolution:awakened_core",
           "min": 2,
           "max": 2,
-          "weight": 8.8,
-          "chance": 1.9
+          "weight": 9,
+          "chance": 2
         },
         {
           "name": "Сердца Дракона",
@@ -1462,7 +1462,7 @@
           "item": "draconicevolution:dragon_heart",
           "min": 3,
           "max": 4,
-          "weight": 22.4,
+          "weight": 22,
           "chance": 4.9
         },
         {
@@ -1471,8 +1471,8 @@
           "item": "draconicevolution:awakened_draconium_ingot",
           "min": 32,
           "max": 48,
-          "weight": 35.2,
-          "chance": 7.8
+          "weight": 35,
+          "chance": 7.7
         },
         {
           "name": "Дракониевые ядра",
@@ -1480,7 +1480,7 @@
           "item": "draconicevolution:draconium_core",
           "min": 52,
           "max": 64,
-          "weight": 44.8,
+          "weight": 45,
           "chance": 9.9
         },
         {
@@ -1489,8 +1489,8 @@
           "item": "draconicevolution:wyvern_core",
           "min": 52,
           "max": 64,
-          "weight": 35.2,
-          "chance": 7.8
+          "weight": 35,
+          "chance": 7.7
         },
         {
           "name": "Слитки дракония",
@@ -1498,8 +1498,8 @@
           "item": "draconicevolution:draconium_ingot",
           "min": 52,
           "max": 64,
-          "weight": 53.6,
-          "chance": 11.8
+          "weight": 54,
+          "chance": 11.9
         },
         {
           "name": "Энергетические ядра виверны",
@@ -1507,8 +1507,8 @@
           "item": "draconicevolution:wyvern_energy_core",
           "min": 52,
           "max": 64,
-          "weight": 35.2,
-          "chance": 7.8
+          "weight": 35,
+          "chance": 7.7
         },
         {
           "name": "Инжекторы слияния",
@@ -1516,8 +1516,8 @@
           "item": "draconicevolution:basic_crafting_injector",
           "min": 32,
           "max": 48,
-          "weight": 35.2,
-          "chance": 7.8
+          "weight": 35,
+          "chance": 7.7
         },
         {
           "name": "Нейтрониевые слитки",
@@ -1525,8 +1525,8 @@
           "item": "avaritia:neutron_ingot",
           "min": 32,
           "max": 48,
-          "weight": 35.2,
-          "chance": 7.8
+          "weight": 35,
+          "chance": 7.7
         },
         {
           "name": "Яйцо дракона",
@@ -1534,8 +1534,8 @@
           "item": "minecraft:dragon_egg",
           "min": 2,
           "max": 2,
-          "weight": 31.2,
-          "chance": 6.9
+          "weight": 31,
+          "chance": 6.8
         },
         {
           "name": "Адронное МФСУ",
@@ -1543,7 +1543,7 @@
           "item": "industrialupgrade:wiring_storage/had_mfsu",
           "min": 2,
           "max": 2,
-          "weight": 19.96,
+          "weight": 20,
           "chance": 4.4
         },
         {
@@ -1552,7 +1552,7 @@
           "item": "draconicevolution:crafting_core",
           "min": 2,
           "max": 2,
-          "weight": 19.96,
+          "weight": 20,
           "chance": 4.4
         },
         {
@@ -1561,17 +1561,17 @@
           "item": "draconicevolution:energy_core",
           "min": 2,
           "max": 2,
-          "weight": 14.97,
+          "weight": 15,
           "chance": 3.3
         },
         {
           "name": "AquaCoins (Куш)",
           "type": "coins",
           "item": "",
-          "min": 12000000,
+          "min": 13000000,
           "max": 23000000,
-          "weight": 35.2,
-          "chance": 7.8
+          "weight": 35,
+          "chance": 7.7
         },
         {
           "name": "Гемы",
@@ -1579,8 +1579,8 @@
           "item": "",
           "min": 90,
           "max": 150,
-          "weight": 26.4,
-          "chance": 5.8
+          "weight": 26,
+          "chance": 5.7
         },
         {
           "name": "Адронная солнечная панель",
@@ -1588,7 +1588,7 @@
           "item": "industrialupgrade:machines/hadron_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 0.8,
+          "weight": 1,
           "chance": 0.2
         }
       ]
@@ -1613,7 +1613,7 @@
           "item": "avaritia:infinity_ingot",
           "min": 1,
           "max": 1,
-          "weight": 3.2,
+          "weight": 3,
           "chance": 0.7
         },
         {
@@ -1631,8 +1631,8 @@
           "item": "avaritia:infinity_catalyst",
           "min": 6,
           "max": 8,
-          "weight": 32.8,
-          "chance": 7.4
+          "weight": 33,
+          "chance": 7.5
         },
         {
           "name": "Блоки пробуждённого дракония",
@@ -1649,7 +1649,7 @@
           "item": "avaritia:neutron_ingot",
           "min": 32,
           "max": 48,
-          "weight": 52.8,
+          "weight": 53,
           "chance": 12
         },
         {
@@ -1658,7 +1658,7 @@
           "item": "avaritia:crystal_matrix_ingot",
           "min": 52,
           "max": 64,
-          "weight": 52.8,
+          "weight": 53,
           "chance": 12
         },
         {
@@ -1667,7 +1667,7 @@
           "item": "avaritia:neutron_nugget",
           "min": 104,
           "max": 128,
-          "weight": 59.2,
+          "weight": 59,
           "chance": 13.4
         },
         {
@@ -1676,8 +1676,8 @@
           "item": "avaritia:neutron_compressor",
           "min": 1,
           "max": 1,
-          "weight": 26.4,
-          "chance": 6
+          "weight": 26,
+          "chance": 5.9
         },
         {
           "name": "Звёзды Незера",
@@ -1685,7 +1685,7 @@
           "item": "minecraft:nether_star",
           "min": 52,
           "max": 64,
-          "weight": 52.8,
+          "weight": 53,
           "chance": 12
         },
         {
@@ -1719,10 +1719,10 @@
           "name": "AquaCoins (Супер-Куш)",
           "type": "coins",
           "item": "",
-          "min": 35000000,
+          "min": 34000000,
           "max": 64000000,
-          "weight": 32.8,
-          "chance": 7.4
+          "weight": 33,
+          "chance": 7.5
         },
         {
           "name": "Гемы",
@@ -1730,8 +1730,8 @@
           "item": "",
           "min": 120,
           "max": 200,
-          "weight": 26.4,
-          "chance": 6
+          "weight": 26,
+          "chance": 5.9
         },
         {
           "name": "Гравитонная солнечная панель",
@@ -1739,7 +1739,7 @@
           "item": "industrialupgrade:machines/graviton_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 0.8,
+          "weight": 1,
           "chance": 0.2
         }
       ]

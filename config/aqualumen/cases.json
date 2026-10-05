@@ -21,7 +21,7 @@
           "label": "Алмазы",
           "min": 8,
           "max": 12,
-          "weight": 8.0
+          "weight": 8
         },
         {
           "type": "item",
@@ -29,7 +29,7 @@
           "label": "Морская соль",
           "min": 8,
           "max": 12,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -37,7 +37,7 @@
           "label": "Железные слитки",
           "min": 16,
           "max": 24,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -45,7 +45,7 @@
           "label": "Медные слитки",
           "min": 22,
           "max": 36,
-          "weight": 48.0
+          "weight": 48
         },
         {
           "type": "item",
@@ -53,7 +53,7 @@
           "label": "Оловянная руда",
           "min": 14,
           "max": 22,
-          "weight": 48.0
+          "weight": 48
         },
         {
           "type": "item",
@@ -61,7 +61,7 @@
           "label": "Свинцовая руда",
           "min": 22,
           "max": 36,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -69,7 +69,7 @@
           "label": "Плавильная смесь",
           "min": 36,
           "max": 56,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -77,7 +77,7 @@
           "label": "Плавильные кирпичи",
           "min": 36,
           "max": 56,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -85,7 +85,7 @@
           "label": "Кожа для мехов",
           "min": 44,
           "max": 64,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -93,7 +93,7 @@
           "label": "Каменный уголь",
           "min": 36,
           "max": 56,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -101,7 +101,7 @@
           "label": "Редстоун",
           "min": 52,
           "max": 64,
-          "weight": 24.0
+          "weight": 24
         },
         {
           "type": "item",
@@ -109,7 +109,7 @@
           "label": "Паровой котёл",
           "min": 2,
           "max": 2,
-          "weight": 25.0
+          "weight": 25
         },
         {
           "type": "item",
@@ -117,7 +117,7 @@
           "label": "Паровой генератор на торфе",
           "min": 2,
           "max": 2,
-          "weight": 25.0
+          "weight": 25
         },
         {
           "type": "item",
@@ -125,7 +125,7 @@
           "label": "Примитивная сушилка латекса",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -133,7 +133,7 @@
           "label": "Примитивный прокатный механизм",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "coins",
@@ -141,7 +141,7 @@
           "label": "AquaCoins (Куш)",
           "min": 4900,
           "max": 9200,
-          "weight": 20.0
+          "weight": 20
         }
       ]
     },
@@ -166,7 +166,7 @@
           "label": "Контроллер плавильни",
           "min": 1,
           "max": 1,
-          "weight": 8.0
+          "weight": 8
         },
         {
           "type": "item",
@@ -174,7 +174,7 @@
           "label": "Блоки корпуса плавильни",
           "min": 7,
           "max": 11,
-          "weight": 24.0
+          "weight": 24
         },
         {
           "type": "item",
@@ -182,7 +182,7 @@
           "label": "Титановая руда",
           "min": 11,
           "max": 18,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -190,7 +190,7 @@
           "label": "Бериллиевая руда",
           "min": 11,
           "max": 18,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -198,7 +198,7 @@
           "label": "Стронциевая руда",
           "min": 11,
           "max": 18,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -206,7 +206,7 @@
           "label": "Иттриевая руда",
           "min": 11,
           "max": 18,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -214,7 +214,7 @@
           "label": "Таллиевая руда",
           "min": 11,
           "max": 18,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -222,7 +222,7 @@
           "label": "Бронзовые слитки",
           "min": 18,
           "max": 28,
-          "weight": 48.0
+          "weight": 48
         },
         {
           "type": "item",
@@ -230,7 +230,7 @@
           "label": "Стержни Блейза",
           "min": 32,
           "max": 48,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -238,7 +238,7 @@
           "label": "Ведро лавы для плавки",
           "min": 3,
           "max": 4,
-          "weight": 28.0
+          "weight": 28
         },
         {
           "type": "item",
@@ -246,7 +246,7 @@
           "label": "Золотые слитки",
           "min": 32,
           "max": 48,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -254,7 +254,7 @@
           "label": "Паровой преобразователь пара",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -262,7 +262,7 @@
           "label": "Паровое хранилище",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -270,7 +270,7 @@
           "label": "Паровая помпа",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -278,7 +278,7 @@
           "label": "Паровой сепаратор",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -286,7 +286,7 @@
           "label": "Мини-плавильня",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "coins",
@@ -294,7 +294,7 @@
           "label": "AquaCoins (Джекпот)",
           "min": 14000,
           "max": 26000,
-          "weight": 28.0
+          "weight": 28
         }
       ]
     },
@@ -319,7 +319,7 @@
           "label": "Базовый корпус механизма",
           "min": 6,
           "max": 10,
-          "weight": 12.0
+          "weight": 12
         },
         {
           "type": "item",
@@ -327,7 +327,7 @@
           "label": "Электронные схемы IU",
           "min": 1,
           "max": 1,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -335,7 +335,7 @@
           "label": "Стальные слитки",
           "min": 22,
           "max": 36,
-          "weight": 48.0
+          "weight": 48
         },
         {
           "type": "item",
@@ -343,7 +343,7 @@
           "label": "Резина IU",
           "min": 28,
           "max": 44,
-          "weight": 48.0
+          "weight": 48
         },
         {
           "type": "item",
@@ -351,7 +351,7 @@
           "label": "Серебряная руда",
           "min": 40,
           "max": 60,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -359,7 +359,7 @@
           "label": "Никелевая руда",
           "min": 40,
           "max": 60,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -367,7 +367,7 @@
           "label": "Ускорители (Оверклокеры)",
           "min": 10,
           "max": 16,
-          "weight": 28.0
+          "weight": 28
         },
         {
           "type": "item",
@@ -375,7 +375,7 @@
           "label": "Аккумуляторы RE-Battery",
           "min": 16,
           "max": 24,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -383,7 +383,7 @@
           "label": "Изолированные медные провода",
           "min": 44,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -391,7 +391,7 @@
           "label": "Улучшение скорости ×1",
           "min": 3,
           "max": 5,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -399,7 +399,7 @@
           "label": "Паровой преобразователь тока",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -407,7 +407,7 @@
           "label": "Генератор",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -415,7 +415,7 @@
           "label": "Дробитель",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -423,7 +423,7 @@
           "label": "Электрическая печь",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -431,7 +431,7 @@
           "label": "Энергохранилище",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -439,7 +439,7 @@
           "label": "Улучшенная солнечная панель",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "coins",
@@ -447,7 +447,7 @@
           "label": "AquaCoins (Куш)",
           "min": 34000,
           "max": 63000,
-          "weight": 28.0
+          "weight": 28
         },
         {
           "type": "gems",
@@ -455,7 +455,7 @@
           "label": "Гемы",
           "min": 5,
           "max": 10,
-          "weight": 20.0
+          "weight": 20
         }
       ]
     },
@@ -480,7 +480,7 @@
           "label": "Слитки манастали",
           "min": 32,
           "max": 48,
-          "weight": 48.8
+          "weight": 49
         },
         {
           "type": "item",
@@ -488,7 +488,7 @@
           "label": "Жемчуг маны",
           "min": 12,
           "max": 20,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "item",
@@ -496,7 +496,7 @@
           "label": "Алмазы маны",
           "min": 12,
           "max": 20,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "item",
@@ -504,7 +504,7 @@
           "label": "Руны Воды",
           "min": 12,
           "max": 20,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "item",
@@ -512,7 +512,7 @@
           "label": "Руны Огня",
           "min": 12,
           "max": 20,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "item",
@@ -520,7 +520,7 @@
           "label": "Руны Маны",
           "min": 12,
           "max": 20,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "item",
@@ -528,7 +528,7 @@
           "label": "Улучшенный корпус механизма",
           "min": 2,
           "max": 4,
-          "weight": 24.8
+          "weight": 25
         },
         {
           "type": "item",
@@ -536,7 +536,7 @@
           "label": "Улучшенные микросхемы",
           "min": 6,
           "max": 9,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "item",
@@ -544,7 +544,7 @@
           "label": "Энергетические кристаллы",
           "min": 7,
           "max": 11,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "item",
@@ -552,7 +552,7 @@
           "label": "Сжиматель",
           "min": 2,
           "max": 2,
-          "weight": 20.04
+          "weight": 20
         },
         {
           "type": "item",
@@ -560,7 +560,7 @@
           "label": "Экстрактор",
           "min": 2,
           "max": 2,
-          "weight": 20.04
+          "weight": 20
         },
         {
           "type": "item",
@@ -568,7 +568,7 @@
           "label": "Электрический сборщик электроники",
           "min": 2,
           "max": 2,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -576,7 +576,7 @@
           "label": "Рудопромывочный механизм",
           "min": 2,
           "max": 2,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -584,7 +584,7 @@
           "label": "Завод сплавов",
           "min": 2,
           "max": 2,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -592,7 +592,7 @@
           "label": "Гибридная солнечная панель",
           "min": 2,
           "max": 2,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -600,7 +600,7 @@
           "label": "Распространитель маны",
           "min": 3,
           "max": 4,
-          "weight": 20.04
+          "weight": 20
         },
         {
           "type": "item",
@@ -608,7 +608,7 @@
           "label": "Бассейн маны",
           "min": 2,
           "max": 2,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -616,7 +616,7 @@
           "label": "Теллурическая агломерационная пластина",
           "min": 1,
           "max": 1,
-          "weight": 10.02
+          "weight": 10
         },
         {
           "type": "coins",
@@ -624,7 +624,7 @@
           "label": "AquaCoins (Джекпот)",
           "min": 74000,
           "max": 140000,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "gems",
@@ -632,7 +632,7 @@
           "label": "Гемы",
           "min": 10,
           "max": 20,
-          "weight": 40.8
+          "weight": 41
         }
       ]
     },
@@ -657,7 +657,7 @@
           "label": "МЭ ячейка хранения 256k",
           "min": 1,
           "max": 1,
-          "weight": 8.0
+          "weight": 8
         },
         {
           "type": "item",
@@ -665,7 +665,7 @@
           "label": "Слитки террастали",
           "min": 20,
           "max": 32,
-          "weight": 24.0
+          "weight": 24
         },
         {
           "type": "item",
@@ -673,7 +673,7 @@
           "label": "МЭ накопитель AE2",
           "min": 16,
           "max": 24,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -681,7 +681,7 @@
           "label": "МЭ ячейка хранения 64k",
           "min": 1,
           "max": 1,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -689,7 +689,7 @@
           "label": "МЭ ячейка хранения 16k",
           "min": 1,
           "max": 1,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -697,7 +697,7 @@
           "label": "Инженерные процессоры",
           "min": 12,
           "max": 20,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -705,7 +705,7 @@
           "label": "Логические процессоры",
           "min": 12,
           "max": 20,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -713,7 +713,7 @@
           "label": "Вычислительные процессоры",
           "min": 12,
           "max": 20,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -721,7 +721,7 @@
           "label": "МЭ ячейка хранения 4k",
           "min": 3,
           "max": 5,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -729,7 +729,7 @@
           "label": "Слитки элементия",
           "min": 32,
           "max": 48,
-          "weight": 36.0
+          "weight": 36
         },
         {
           "type": "item",
@@ -737,7 +737,7 @@
           "label": "Автономная ферма",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -745,7 +745,7 @@
           "label": "МЭСН",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -753,7 +753,7 @@
           "label": "МФЭ",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -761,7 +761,7 @@
           "label": "Совершенная гибридная солнечная панель",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -769,7 +769,7 @@
           "label": "Квантовая солнечная панель",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -777,7 +777,7 @@
           "label": "МФСУ",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -785,7 +785,7 @@
           "label": "Молекулярный сборщик",
           "min": 5,
           "max": 6,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -793,7 +793,7 @@
           "label": "МЭ-регулятор",
           "min": 2,
           "max": 2,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -801,7 +801,7 @@
           "label": "Вырезатель",
           "min": 3,
           "max": 4,
-          "weight": 15.0
+          "weight": 15
         },
         {
           "type": "item",
@@ -809,7 +809,7 @@
           "label": "Химический завод",
           "min": 1,
           "max": 1,
-          "weight": 10.0
+          "weight": 10
         },
         {
           "type": "coins",
@@ -817,7 +817,7 @@
           "label": "AquaCoins (Куш)",
           "min": 290000,
           "max": 530000,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "gems",
@@ -825,7 +825,7 @@
           "label": "Гемы",
           "min": 20,
           "max": 35,
-          "weight": 40.0
+          "weight": 40
         }
       ]
     },
@@ -850,7 +850,7 @@
           "label": "Эссенция Гайи",
           "min": 52,
           "max": 64,
-          "weight": 16.0
+          "weight": 16
         },
         {
           "type": "item",
@@ -858,7 +858,7 @@
           "label": "Обогащённый Уран (AC)",
           "min": 44,
           "max": 64,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -866,7 +866,7 @@
           "label": "Вольфрамовая руда IU",
           "min": 52,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -874,7 +874,7 @@
           "label": "Хромовая руда IU",
           "min": 52,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -882,7 +882,7 @@
           "label": "Жемчужины Бездны",
           "min": 24,
           "max": 40,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -890,7 +890,7 @@
           "label": "Пыль сияющего мотылька",
           "min": 52,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -898,7 +898,7 @@
           "label": "Ткань тьмы Глубин",
           "min": 44,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -906,7 +906,7 @@
           "label": "Незеритовые слитки",
           "min": 12,
           "max": 20,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -914,7 +914,7 @@
           "label": "Улучшение скорости ×4",
           "min": 11,
           "max": 18,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -922,7 +922,7 @@
           "label": "Сплав Инконель 718",
           "min": 32,
           "max": 48,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -930,7 +930,7 @@
           "label": "Протонная солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -938,7 +938,7 @@
           "label": "Продвинутое МФСУ",
           "min": 2,
           "max": 2,
-          "weight": 20.04
+          "weight": 20
         },
         {
           "type": "item",
@@ -946,7 +946,7 @@
           "label": "Совершенная электрическая печь",
           "min": 3,
           "max": 4,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -954,7 +954,7 @@
           "label": "Обогатитель",
           "min": 2,
           "max": 2,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "coins",
@@ -962,7 +962,7 @@
           "label": "AquaCoins (Джекпот)",
           "min": 830000,
           "max": 1500000,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "gems",
@@ -970,7 +970,7 @@
           "label": "Гемы",
           "min": 35,
           "max": 60,
-          "weight": 24.0
+          "weight": 24
         },
         {
           "type": "item",
@@ -978,7 +978,7 @@
           "label": "Спектральная солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 0.8
+          "weight": 1
         }
       ]
     },
@@ -1003,7 +1003,7 @@
           "label": "Лапотронные кристаллы",
           "min": 48,
           "max": 64,
-          "weight": 24.8
+          "weight": 25
         },
         {
           "type": "item",
@@ -1011,7 +1011,7 @@
           "label": "Сплав Осмиридий",
           "min": 52,
           "max": 64,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "item",
@@ -1019,7 +1019,7 @@
           "label": "Сплав Адамантий",
           "min": 52,
           "max": 64,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "item",
@@ -1027,7 +1027,7 @@
           "label": "Платиновая руда",
           "min": 52,
           "max": 64,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "item",
@@ -1035,7 +1035,7 @@
           "label": "Кобальтовая руда",
           "min": 52,
           "max": 64,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "item",
@@ -1043,7 +1043,7 @@
           "label": "Ускорители (Оверклокеры)",
           "min": 52,
           "max": 64,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "item",
@@ -1051,7 +1051,7 @@
           "label": "Продвинутые схемы IU",
           "min": 52,
           "max": 64,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "item",
@@ -1059,7 +1059,7 @@
           "label": "Множитель улова ×32",
           "min": 2,
           "max": 2,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "item",
@@ -1067,7 +1067,7 @@
           "label": "Изотопы Уран-235",
           "min": 52,
           "max": 64,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "item",
@@ -1075,7 +1075,7 @@
           "label": "Сингулярная солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 10.06
+          "weight": 10
         },
         {
           "type": "item",
@@ -1083,7 +1083,7 @@
           "label": "Улучшенное МФСУ",
           "min": 2,
           "max": 2,
-          "weight": 20.12
+          "weight": 20
         },
         {
           "type": "item",
@@ -1091,7 +1091,7 @@
           "label": "Генератор нейтронных частиц",
           "min": 2,
           "max": 2,
-          "weight": 15.09
+          "weight": 15
         },
         {
           "type": "item",
@@ -1099,7 +1099,7 @@
           "label": "Реактор ядерного синтеза",
           "min": 1,
           "max": 1,
-          "weight": 15.09
+          "weight": 15
         },
         {
           "type": "item",
@@ -1107,7 +1107,7 @@
           "label": "Совершенное МФСУ",
           "min": 1,
           "max": 1,
-          "weight": 15.09
+          "weight": 15
         },
         {
           "type": "coins",
@@ -1115,7 +1115,7 @@
           "label": "AquaCoins (Куш)",
           "min": 2100000,
           "max": 3900000,
-          "weight": 40.8
+          "weight": 41
         },
         {
           "type": "gems",
@@ -1123,7 +1123,7 @@
           "label": "Гемы",
           "min": 50,
           "max": 80,
-          "weight": 24.8
+          "weight": 25
         },
         {
           "type": "item",
@@ -1131,7 +1131,7 @@
           "label": "Фотонная солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 0.8
+          "weight": 1
         },
         {
           "type": "item",
@@ -1139,7 +1139,7 @@
           "label": "Нейтронная солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 0.8
+          "weight": 1
         }
       ]
     },
@@ -1164,7 +1164,7 @@
           "label": "Кристальные матричные слитки",
           "min": 40,
           "max": 64,
-          "weight": 16.0
+          "weight": 16
         },
         {
           "type": "item",
@@ -1172,7 +1172,7 @@
           "label": "Слитки Орихалка ExtraBotany",
           "min": 36,
           "max": 56,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -1180,7 +1180,7 @@
           "label": "Слитки Аэриалита ExtraBotany",
           "min": 52,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -1188,7 +1188,7 @@
           "label": "Топливо духов ExtraBotany",
           "min": 52,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -1196,7 +1196,7 @@
           "label": "Слитки Альфстали",
           "min": 24,
           "max": 40,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -1204,7 +1204,7 @@
           "label": "Слитки черного железа",
           "min": 52,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -1212,7 +1212,7 @@
           "label": "Люминесценция ExtendedCrafting",
           "min": 52,
           "max": 64,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -1220,7 +1220,7 @@
           "label": "Звёзды Незера",
           "min": 36,
           "max": 56,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -1228,7 +1228,7 @@
           "label": "Множитель улова ×64",
           "min": 2,
           "max": 2,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -1236,7 +1236,7 @@
           "label": "Сингулярности AE2",
           "min": 22,
           "max": 36,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "item",
@@ -1244,7 +1244,7 @@
           "label": "Барионное МФСУ",
           "min": 2,
           "max": 2,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -1252,7 +1252,7 @@
           "label": "Объединитель панелей",
           "min": 2,
           "max": 2,
-          "weight": 20.04
+          "weight": 20
         },
         {
           "type": "item",
@@ -1260,7 +1260,7 @@
           "label": "Максимальный верстак",
           "min": 1,
           "max": 1,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "item",
@@ -1268,7 +1268,7 @@
           "label": "Нейтрониевый коллектор",
           "min": 2,
           "max": 2,
-          "weight": 15.03
+          "weight": 15
         },
         {
           "type": "coins",
@@ -1276,7 +1276,7 @@
           "label": "AquaCoins (Джекпот)",
           "min": 5200000,
           "max": 9600000,
-          "weight": 32.0
+          "weight": 32
         },
         {
           "type": "gems",
@@ -1284,7 +1284,7 @@
           "label": "Гемы",
           "min": 75,
           "max": 120,
-          "weight": 24.0
+          "weight": 24
         },
         {
           "type": "item",
@@ -1292,7 +1292,7 @@
           "label": "Барионная солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 0.8
+          "weight": 1
         }
       ]
     },
@@ -1317,7 +1317,7 @@
           "label": "Пробуждённое дракониевое ядро",
           "min": 2,
           "max": 2,
-          "weight": 8.8
+          "weight": 9
         },
         {
           "type": "item",
@@ -1325,7 +1325,7 @@
           "label": "Сердца Дракона",
           "min": 3,
           "max": 4,
-          "weight": 22.4
+          "weight": 22
         },
         {
           "type": "item",
@@ -1333,7 +1333,7 @@
           "label": "Пробуждённый драконий",
           "min": 32,
           "max": 48,
-          "weight": 35.2
+          "weight": 35
         },
         {
           "type": "item",
@@ -1341,7 +1341,7 @@
           "label": "Дракониевые ядра",
           "min": 52,
           "max": 64,
-          "weight": 44.8
+          "weight": 45
         },
         {
           "type": "item",
@@ -1349,7 +1349,7 @@
           "label": "Ядра виверны",
           "min": 52,
           "max": 64,
-          "weight": 35.2
+          "weight": 35
         },
         {
           "type": "item",
@@ -1357,7 +1357,7 @@
           "label": "Слитки дракония",
           "min": 52,
           "max": 64,
-          "weight": 53.6
+          "weight": 54
         },
         {
           "type": "item",
@@ -1365,7 +1365,7 @@
           "label": "Энергетические ядра виверны",
           "min": 52,
           "max": 64,
-          "weight": 35.2
+          "weight": 35
         },
         {
           "type": "item",
@@ -1373,7 +1373,7 @@
           "label": "Инжекторы слияния",
           "min": 32,
           "max": 48,
-          "weight": 35.2
+          "weight": 35
         },
         {
           "type": "item",
@@ -1381,7 +1381,7 @@
           "label": "Нейтрониевые слитки",
           "min": 32,
           "max": 48,
-          "weight": 35.2
+          "weight": 35
         },
         {
           "type": "item",
@@ -1389,7 +1389,7 @@
           "label": "Яйцо дракона",
           "min": 2,
           "max": 2,
-          "weight": 31.2
+          "weight": 31
         },
         {
           "type": "item",
@@ -1397,7 +1397,7 @@
           "label": "Адронное МФСУ",
           "min": 2,
           "max": 2,
-          "weight": 19.96
+          "weight": 20
         },
         {
           "type": "item",
@@ -1405,7 +1405,7 @@
           "label": "Ядро слияния",
           "min": 2,
           "max": 2,
-          "weight": 19.96
+          "weight": 20
         },
         {
           "type": "item",
@@ -1413,15 +1413,15 @@
           "label": "Энергетическое ядро",
           "min": 2,
           "max": 2,
-          "weight": 14.97
+          "weight": 15
         },
         {
           "type": "coins",
           "item": "",
           "label": "AquaCoins (Куш)",
-          "min": 12000000,
+          "min": 13000000,
           "max": 23000000,
-          "weight": 35.2
+          "weight": 35
         },
         {
           "type": "gems",
@@ -1429,7 +1429,7 @@
           "label": "Гемы",
           "min": 90,
           "max": 150,
-          "weight": 26.4
+          "weight": 26
         },
         {
           "type": "item",
@@ -1437,7 +1437,7 @@
           "label": "Адронная солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 0.8
+          "weight": 1
         }
       ]
     },
@@ -1462,7 +1462,7 @@
           "label": "Слиток Бесконечности (ДЖЕКПОТ)",
           "min": 1,
           "max": 1,
-          "weight": 3.2
+          "weight": 3
         },
         {
           "type": "item",
@@ -1470,7 +1470,7 @@
           "label": "Ultimate Crafting Table (9x9)",
           "min": 1,
           "max": 1,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -1478,7 +1478,7 @@
           "label": "Катализаторы Бесконечности",
           "min": 6,
           "max": 8,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "item",
@@ -1486,7 +1486,7 @@
           "label": "Блоки пробуждённого дракония",
           "min": 6,
           "max": 8,
-          "weight": 40.0
+          "weight": 40
         },
         {
           "type": "item",
@@ -1494,7 +1494,7 @@
           "label": "Нейтрониевые слитки Avaritia",
           "min": 32,
           "max": 48,
-          "weight": 52.8
+          "weight": 53
         },
         {
           "type": "item",
@@ -1502,7 +1502,7 @@
           "label": "Кристальные матричные слитки",
           "min": 52,
           "max": 64,
-          "weight": 52.8
+          "weight": 53
         },
         {
           "type": "item",
@@ -1510,7 +1510,7 @@
           "label": "Нейтрониевые самородки",
           "min": 104,
           "max": 128,
-          "weight": 59.2
+          "weight": 59
         },
         {
           "type": "item",
@@ -1518,7 +1518,7 @@
           "label": "Нейтрониевый компрессор",
           "min": 1,
           "max": 1,
-          "weight": 26.4
+          "weight": 26
         },
         {
           "type": "item",
@@ -1526,7 +1526,7 @@
           "label": "Звёзды Незера",
           "min": 52,
           "max": 64,
-          "weight": 52.8
+          "weight": 53
         },
         {
           "type": "item",
@@ -1534,7 +1534,7 @@
           "label": "Гравитонное МФСУ",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -1542,7 +1542,7 @@
           "label": "Кварковое МФСУ",
           "min": 2,
           "max": 2,
-          "weight": 20.0
+          "weight": 20
         },
         {
           "type": "item",
@@ -1550,15 +1550,15 @@
           "label": "Кварковая солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 1.0
+          "weight": 1
         },
         {
           "type": "coins",
           "item": "",
           "label": "AquaCoins (Супер-Куш)",
-          "min": 35000000,
+          "min": 34000000,
           "max": 64000000,
-          "weight": 32.8
+          "weight": 33
         },
         {
           "type": "gems",
@@ -1566,7 +1566,7 @@
           "label": "Гемы",
           "min": 120,
           "max": 200,
-          "weight": 26.4
+          "weight": 26
         },
         {
           "type": "item",
@@ -1574,7 +1574,7 @@
           "label": "Гравитонная солнечная панель",
           "min": 1,
           "max": 1,
-          "weight": 0.8
+          "weight": 1
         }
       ]
     }
