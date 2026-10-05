@@ -1,5 +1,5 @@
 {
-  "version": "2.9.446",
+  "version": "2.9.447",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -66,7 +66,7 @@
       "path": "mods/aquatech_ui-1.0.113.jar",
       "md5": "86ec9fb245457601ee626efe01b67994",
       "size": 3788624,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.446/aquatech_ui-1.0.113.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.447/aquatech_ui-1.0.113.jar",
       "asset": "aquatech_ui-1.0.113.jar"
     },
     {
@@ -589,9 +589,9 @@
     },
     {
       "path": "config/aqualumen/cases.json",
-      "md5": "a41a315037803b384c5a302cf317f088",
-      "size": 32222,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.440/config__aqualumen__cases.json",
+      "md5": "c91afefd793f7dee46de7825d95742df",
+      "size": 45150,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.447/config__aqualumen__cases.json",
       "asset": "config__aqualumen__cases.json"
     },
     {
@@ -610,9 +610,9 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "ee8f31f2c59b1a6cde67b64e582cdf73",
-      "size": 977803,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.445/config__aqualumen__hub.html",
+      "md5": "62fe263c25c4a2824388d7658d9bc6ee",
+      "size": 1145147,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.447/config__aqualumen__hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
@@ -645,9 +645,9 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "ee8f31f2c59b1a6cde67b64e582cdf73",
-      "size": 977803,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.445/config__aqualumen__html__hub.html",
+      "md5": "62fe263c25c4a2824388d7658d9bc6ee",
+      "size": 1145147,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.447/config__aqualumen__html__hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
     {
@@ -859,6 +859,13 @@
       "size": 45440,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.443/config__ftbquests__quests__chapters__steam_era.snbt",
       "asset": "config__ftbquests__quests__chapters__steam_era.snbt"
+    },
+    {
+      "path": "config/mcef/mcef.properties",
+      "md5": "a4e0f9823d8545422b727dd816f7b689",
+      "size": 163,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.447/config__mcef__mcef.properties",
+      "asset": "config__mcef__mcef.properties"
     },
     {
       "path": "kubejs/assets/ftbquests/ftb_quests_theme.txt",
