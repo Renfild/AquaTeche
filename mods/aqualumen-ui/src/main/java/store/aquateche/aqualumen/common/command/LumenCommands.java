@@ -18,6 +18,7 @@ import store.aquateche.aqualumen.common.service.BoosterService;
 import store.aquateche.aqualumen.common.service.FishShopConfig;
 import store.aquateche.aqualumen.common.service.HubDataService;
 import store.aquateche.aqualumen.common.service.MarketService;
+import store.aquateche.aqualumen.common.service.MariaStats;
 import store.aquateche.aqualumen.common.service.KitConfig;
 import store.aquateche.aqualumen.common.service.WarpConfig;
 import store.aquateche.aqualumen.config.LumenConfig;
@@ -51,6 +52,10 @@ public final class LumenCommands {
                 .then(Commands.literal("reload")
                         .requires(source -> source.hasPermission(2))
                         .executes(ctx -> reloadAll(ctx.getSource())))
+                .then(Commands.literal("premium")
+                        .requires(source -> source.hasPermission(2))
+                        .then(Commands.argument("target", EntityArgument.player())
+                                .executes(ctx -> givePremiumPass(ctx.getSource(), EntityArgument.getPlayer(ctx, "target")))))
                 .then(buildRtpCommand())
                 .then(buildKitCommands())
                 .then(buildWarpCommands())
@@ -385,5 +390,15 @@ public final class LumenCommands {
         BoosterService.grant(target, tier, amount);
         source.sendSuccess(() -> Component.literal("§a" + target.getGameProfile().getName() + ": +" + amount + " " + tier.id()), true);
         return amount;
+    }
+
+    /** Выдаёт Боевой Пропуск вручную: тот же флаг, что ставит покупка в магазине (NBT игрока + файл + MariaDB). */
+    private static int givePremiumPass(CommandSourceStack source, ServerPlayer target) {
+        target.getPersistentData().putBoolean("aqualumen_pass_premium", true);
+        MariaStats.savePremiumOwned(target.getUUID());
+        HubDataService.syncPlayerToWebAsync(target);
+        HubDataService.push(target);
+        source.sendSuccess(() -> Component.literal("§aБоевой Пропуск выдан: " + target.getGameProfile().getName()), true);
+        return 1;
     }
 }
