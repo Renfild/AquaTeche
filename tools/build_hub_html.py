@@ -1600,7 +1600,7 @@ __PASS_VIEW_JS__
       </div>
     </article>`).join("");
 
-    const merchantNote = merchantNear ? "" : `<div class="merchant-note"><b>Торговца рядом нет.</b> Рыбу можно продать только торговцу рыбой на спавне. Подойдите к нему, и кнопки станут доступны.</div>`;
+    const merchantNote = merchantNear ? "" : `<div class="merchant-note"><span><b>Торговца рядом нет.</b> Рыбу можно продать только торговцу рыбой на спавне. Подойдите к нему, и кнопки станут доступны.</span></div>`;
 
     return `<div class="view">${title("Скупщик Рыбы", "Продавайте улов прямо из инвентаря")}
       ${merchantNote}
