@@ -1,5 +1,5 @@
 {
-  "version": "2.9.448",
+  "version": "2.9.449",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -66,7 +66,7 @@
       "path": "mods/aquatech_ui-1.0.113.jar",
       "md5": "d960cb250edc4308c566bb17b9952d0a",
       "size": 4041790,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.448/aquatech_ui-1.0.113.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.449/aquatech_ui-1.0.113.jar",
       "asset": "aquatech_ui-1.0.113.jar"
     },
     {
@@ -589,9 +589,9 @@
     },
     {
       "path": "config/aqualumen/cases.json",
-      "md5": "c91afefd793f7dee46de7825d95742df",
-      "size": 45150,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.447/config__aqualumen__cases.json",
+      "md5": "a66673cff79f5c3b9dd1beb75bf96d35",
+      "size": 44773,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.449/config__aqualumen__cases.json",
       "asset": "config__aqualumen__cases.json"
     },
     {
