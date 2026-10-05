@@ -24,7 +24,7 @@ class CaseConfigFileTest {
     @Test
     void shippedCasesParseWithIntegerFields() throws Exception {
         CaseConfig.Data data = parse(REPO_CONFIG);
-        assertEquals(10, data.cases.size());
+        assertEquals(11, data.cases.size());
         for (CaseConfig.CaseDef def : data.cases) {
             assertTrue(def.costCoins > 0, def.id);
             assertFalse(def.loot.isEmpty(), def.id);

@@ -447,6 +447,12 @@ hub_html_raw = r'''<!doctype html>
       80%{transform:translate(-2px,1px)}
     }
     .case-actions .button[disabled]{opacity:.45;pointer-events:none}
+    /* Пока крутится рулетка, хаб под окном скрыт: встроенный браузер рисует программно, и каждый перерисованный
+       пиксель фона стоит кадров ленты. Тени и масштабирование плиток тоже выключены. */
+    .spin #hub{visibility:hidden}
+    .spin .mc-icon,.spin .mc-icon-lg{filter:none}
+    .spin .reel-tile{box-shadow:none;transition:none}
+    .spin .reel-tile.hot{transform:none}
     .lite .mc-icon,.lite .mc-icon-lg{filter:none}
     .lite .reel-tile.hot{transform:none}
     .lite .case-modal.pulse,.lite .case-modal.shake{animation:none}
@@ -931,6 +937,7 @@ try {
 
     open(def) {
       this.close(true);
+      document.documentElement.classList.add("spin");
       this.def = def;
       this.active = true;
       this.delivered = false;
@@ -1019,6 +1026,10 @@ try {
     deliver(result) {
       if (!result) return;
       const mine = this.def && (!result.caseId || result.caseId === this.def.id);
+      if (mine && !result.item) {
+        const hit = (this.def.loot || []).find(l => l.label === result.label);
+        if (hit) { result.item = hit.item; result.type = result.type || hit.type; }
+      }
       if (!this.active || !mine) {
         this.pending = result;
         return;
@@ -1206,6 +1217,7 @@ try {
         this.raf = 0;
       }
       if (keepLayer) return;
+      document.documentElement.classList.remove("spin");
       $("caseLayer").classList.remove("open");
       send({ type: "modal", open: false });
     }
@@ -2402,6 +2414,7 @@ __PASS_VIEW_JS__
     window.requestAnimationFrame(frame);
     if (document.hidden) return;
     var calm = root.classList.contains("reduce-motion");
+    if (root.classList.contains("spin")) return;
     if (now - last < FRAME_MS) return;
     var dt = Math.min(200, now - last); last = now;
     resize();

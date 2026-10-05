@@ -18,19 +18,19 @@ export const CASES_CATALOG = [
         "name": "Алмазы",
         "type": "item",
         "item": "minecraft:diamond",
-        "min": 8,
-        "max": 12,
-        "weight": 8,
-        "chance": 1.6
+        "min": 7,
+        "max": 11,
+        "weight": 5,
+        "chance": 1.2
       },
       {
         "name": "Морская соль",
         "type": "item",
         "item": "aquatech_machines:sea_salt",
-        "min": 8,
-        "max": 12,
-        "weight": 20,
-        "chance": 4.1
+        "min": 20,
+        "max": 32,
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "Железные слитки",
@@ -39,16 +39,16 @@ export const CASES_CATALOG = [
         "min": 16,
         "max": 24,
         "weight": 40,
-        "chance": 8.2
+        "chance": 9.4
       },
       {
         "name": "Медные слитки",
         "type": "item",
         "item": "minecraft:copper_ingot",
-        "min": 22,
-        "max": 36,
+        "min": 20,
+        "max": 32,
         "weight": 48,
-        "chance": 9.8
+        "chance": 11.2
       },
       {
         "name": "Оловянная руда",
@@ -57,7 +57,7 @@ export const CASES_CATALOG = [
         "min": 14,
         "max": 22,
         "weight": 48,
-        "chance": 9.8
+        "chance": 11.2
       },
       {
         "name": "Свинцовая руда",
@@ -66,25 +66,25 @@ export const CASES_CATALOG = [
         "min": 22,
         "max": 36,
         "weight": 40,
-        "chance": 8.2
+        "chance": 9.4
       },
       {
         "name": "Плавильная смесь",
         "type": "item",
         "item": "industrialupgrade:crafting_elements/crafting_773_element",
-        "min": 36,
-        "max": 56,
+        "min": 32,
+        "max": 48,
         "weight": 40,
-        "chance": 8.2
+        "chance": 9.4
       },
       {
         "name": "Плавильные кирпичи",
         "type": "item",
         "item": "industrialupgrade:crafting_elements/crafting_772_element",
-        "min": 36,
-        "max": 56,
+        "min": 32,
+        "max": 48,
         "weight": 40,
-        "chance": 8.2
+        "chance": 9.4
       },
       {
         "name": "Кожа для мехов",
@@ -93,25 +93,25 @@ export const CASES_CATALOG = [
         "min": 44,
         "max": 64,
         "weight": 32,
-        "chance": 6.5
+        "chance": 7.5
       },
       {
         "name": "Каменный уголь",
         "type": "item",
         "item": "minecraft:coal",
-        "min": 36,
-        "max": 56,
+        "min": 32,
+        "max": 48,
         "weight": 40,
-        "chance": 8.2
+        "chance": 9.4
       },
       {
         "name": "Редстоун",
         "type": "item",
         "item": "minecraft:redstone",
-        "min": 52,
+        "min": 48,
         "max": 64,
-        "weight": 24,
-        "chance": 4.9
+        "weight": 13,
+        "chance": 3
       },
       {
         "name": "Паровой котёл",
@@ -119,8 +119,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/steamboiler",
         "min": 2,
         "max": 2,
-        "weight": 25,
-        "chance": 5.1
+        "weight": 14,
+        "chance": 3.3
       },
       {
         "name": "Паровой генератор на торфе",
@@ -128,8 +128,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/steam_peat_generator",
         "min": 2,
         "max": 2,
-        "weight": 25,
-        "chance": 5.1
+        "weight": 14,
+        "chance": 3.3
       },
       {
         "name": "Примитивная сушилка латекса",
@@ -137,8 +137,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:dryer/dryer",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.1
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "Примитивный прокатный механизм",
@@ -146,17 +146,17 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/rolling_machine",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.1
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "AquaCoins (Куш)",
         "type": "coins",
         "item": "",
-        "min": 4900,
-        "max": 9200,
+        "min": 5200,
+        "max": 9700,
         "weight": 20,
-        "chance": 4.1
+        "chance": 4.7
       }
     ]
   },
@@ -180,80 +180,80 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:smeltery/smeltery_controller",
         "min": 1,
         "max": 1,
-        "weight": 8,
-        "chance": 1.6
+        "weight": 5,
+        "chance": 1.3
       },
       {
         "name": "Блоки корпуса плавильни",
         "type": "item",
         "item": "industrialupgrade:smeltery/smeltery_casing",
-        "min": 7,
-        "max": 11,
-        "weight": 24,
-        "chance": 4.8
+        "min": 9,
+        "max": 14,
+        "weight": 13,
+        "chance": 3.3
       },
       {
         "name": "Титановая руда",
         "type": "item",
         "item": "industrialupgrade:baseore/titanium",
-        "min": 11,
-        "max": 18,
+        "min": 9,
+        "max": 14,
         "weight": 40,
-        "chance": 8.1
+        "chance": 10.1
       },
       {
         "name": "Бериллиевая руда",
         "type": "item",
         "item": "industrialupgrade:baseore1/beryllium",
-        "min": 11,
-        "max": 18,
+        "min": 9,
+        "max": 14,
         "weight": 40,
-        "chance": 8.1
+        "chance": 10.1
       },
       {
         "name": "Стронциевая руда",
         "type": "item",
         "item": "industrialupgrade:baseore2/strontium",
-        "min": 11,
-        "max": 18,
+        "min": 9,
+        "max": 14,
         "weight": 40,
-        "chance": 8.1
+        "chance": 10.1
       },
       {
         "name": "Иттриевая руда",
         "type": "item",
         "item": "industrialupgrade:baseore2/yttrium",
-        "min": 11,
-        "max": 18,
+        "min": 9,
+        "max": 14,
         "weight": 40,
-        "chance": 8.1
+        "chance": 10.1
       },
       {
         "name": "Таллиевая руда",
         "type": "item",
         "item": "industrialupgrade:baseore2/thallium",
-        "min": 11,
-        "max": 18,
+        "min": 9,
+        "max": 14,
         "weight": 40,
-        "chance": 8.1
+        "chance": 10.1
       },
       {
         "name": "Бронзовые слитки",
         "type": "item",
         "item": "industrialupgrade:itemingots/bronze_ingot",
-        "min": 18,
-        "max": 28,
+        "min": 20,
+        "max": 32,
         "weight": 48,
-        "chance": 9.7
+        "chance": 12.1
       },
       {
         "name": "Стержни Блейза",
         "type": "item",
         "item": "minecraft:blaze_rod",
-        "min": 32,
-        "max": 48,
-        "weight": 32,
-        "chance": 6.5
+        "min": 36,
+        "max": 56,
+        "weight": 18,
+        "chance": 4.5
       },
       {
         "name": "Ведро лавы для плавки",
@@ -261,17 +261,17 @@ export const CASES_CATALOG = [
         "item": "minecraft:lava_bucket",
         "min": 3,
         "max": 4,
-        "weight": 28,
-        "chance": 5.7
+        "weight": 15,
+        "chance": 3.8
       },
       {
         "name": "Золотые слитки",
         "type": "item",
         "item": "minecraft:gold_ingot",
-        "min": 32,
-        "max": 48,
-        "weight": 32,
-        "chance": 6.5
+        "min": 36,
+        "max": 56,
+        "weight": 18,
+        "chance": 4.5
       },
       {
         "name": "Паровой преобразователь пара",
@@ -279,8 +279,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/steam_converter",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Паровое хранилище",
@@ -288,8 +288,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/steam_storage",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Паровая помпа",
@@ -297,8 +297,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/steam_pump",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3
+        "weight": 8,
+        "chance": 2
       },
       {
         "name": "Паровой сепаратор",
@@ -306,8 +306,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/steam_handler_ore",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Мини-плавильня",
@@ -315,17 +315,17 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:mini_smeltery/mini_smeltery",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "AquaCoins (Джекпот)",
         "type": "coins",
         "item": "",
-        "min": 14000,
-        "max": 26000,
+        "min": 15000,
+        "max": 27000,
         "weight": 28,
-        "chance": 5.7
+        "chance": 7.1
       }
     ]
   },
@@ -349,8 +349,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:blockresource/machine",
         "min": 6,
         "max": 10,
-        "weight": 12,
-        "chance": 2.4
+        "weight": 5,
+        "chance": 1.3
       },
       {
         "name": "Электронные схемы IU",
@@ -358,8 +358,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:crafting_elements/crafting_273_element",
         "min": 1,
         "max": 1,
-        "weight": 32,
-        "chance": 6.3
+        "weight": 18,
+        "chance": 4.6
       },
       {
         "name": "Стальные слитки",
@@ -368,7 +368,7 @@ export const CASES_CATALOG = [
         "min": 22,
         "max": 36,
         "weight": 48,
-        "chance": 9.5
+        "chance": 12.3
       },
       {
         "name": "Резина IU",
@@ -377,25 +377,25 @@ export const CASES_CATALOG = [
         "min": 28,
         "max": 44,
         "weight": 48,
-        "chance": 9.5
+        "chance": 12.3
       },
       {
         "name": "Серебряная руда",
         "type": "item",
         "item": "industrialupgrade:baseore/silver",
-        "min": 40,
-        "max": 60,
+        "min": 22,
+        "max": 36,
         "weight": 40,
-        "chance": 7.9
+        "chance": 10.3
       },
       {
         "name": "Никелевая руда",
         "type": "item",
         "item": "industrialupgrade:baseore/nickel",
-        "min": 40,
-        "max": 60,
+        "min": 22,
+        "max": 36,
         "weight": 40,
-        "chance": 7.9
+        "chance": 10.3
       },
       {
         "name": "Ускорители (Оверклокеры)",
@@ -403,8 +403,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:upgrades/overclocker",
         "min": 10,
         "max": 16,
-        "weight": 28,
-        "chance": 5.5
+        "weight": 15,
+        "chance": 3.9
       },
       {
         "name": "Аккумуляторы RE-Battery",
@@ -412,17 +412,17 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:battery/re_battery",
         "min": 16,
         "max": 24,
-        "weight": 32,
-        "chance": 6.3
+        "weight": 18,
+        "chance": 4.6
       },
       {
         "name": "Изолированные медные провода",
         "type": "item",
         "item": "industrialupgrade:cable/copper_cable",
-        "min": 44,
-        "max": 64,
+        "min": 28,
+        "max": 44,
         "weight": 40,
-        "chance": 7.9
+        "chance": 10.3
       },
       {
         "name": "Улучшение скорости ×1",
@@ -430,8 +430,8 @@ export const CASES_CATALOG = [
         "item": "aquatech_machines:speed_upgrade",
         "min": 3,
         "max": 5,
-        "weight": 32,
-        "chance": 6.3
+        "weight": 18,
+        "chance": 4.6
       },
       {
         "name": "Паровой преобразователь тока",
@@ -439,8 +439,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/steam_ampere_generator",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3
+        "weight": 6,
+        "chance": 1.5
       },
       {
         "name": "Генератор",
@@ -448,8 +448,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/generator_iu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Дробитель",
@@ -457,8 +457,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:simplemachine/macerator_iu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Электрическая печь",
@@ -466,8 +466,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:simplemachine/furnace_iu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Энергохранилище",
@@ -475,8 +475,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/batbox_iu",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3
+        "weight": 6,
+        "chance": 1.5
       },
       {
         "name": "Улучшенная солнечная панель",
@@ -484,17 +484,17 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:machines/advanced_solar_paneliu",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3
+        "weight": 6,
+        "chance": 1.5
       },
       {
         "name": "AquaCoins (Куш)",
         "type": "coins",
         "item": "",
-        "min": 34000,
-        "max": 63000,
+        "min": 40000,
+        "max": 74000,
         "weight": 28,
-        "chance": 5.5
+        "chance": 7.2
       },
       {
         "name": "Гемы",
@@ -503,7 +503,7 @@ export const CASES_CATALOG = [
         "min": 5,
         "max": 10,
         "weight": 20,
-        "chance": 4
+        "chance": 5.1
       }
     ]
   },
@@ -525,28 +525,28 @@ export const CASES_CATALOG = [
         "name": "Слитки манастали",
         "type": "item",
         "item": "botania:manasteel_ingot",
-        "min": 32,
-        "max": 48,
+        "min": 20,
+        "max": 32,
         "weight": 49,
-        "chance": 8.9
+        "chance": 12.7
       },
       {
         "name": "Жемчуг маны",
         "type": "item",
         "item": "botania:mana_pearl",
-        "min": 12,
-        "max": 20,
+        "min": 8,
+        "max": 12,
         "weight": 41,
-        "chance": 7.5
+        "chance": 10.6
       },
       {
         "name": "Алмазы маны",
         "type": "item",
         "item": "botania:mana_diamond",
-        "min": 12,
-        "max": 20,
+        "min": 8,
+        "max": 12,
         "weight": 41,
-        "chance": 7.5
+        "chance": 10.6
       },
       {
         "name": "Руны Воды",
@@ -554,8 +554,8 @@ export const CASES_CATALOG = [
         "item": "botania:rune_water",
         "min": 12,
         "max": 20,
-        "weight": 33,
-        "chance": 6
+        "weight": 18,
+        "chance": 4.7
       },
       {
         "name": "Руны Огня",
@@ -563,8 +563,8 @@ export const CASES_CATALOG = [
         "item": "botania:rune_fire",
         "min": 12,
         "max": 20,
-        "weight": 33,
-        "chance": 6
+        "weight": 18,
+        "chance": 4.7
       },
       {
         "name": "Руны Маны",
@@ -572,8 +572,8 @@ export const CASES_CATALOG = [
         "item": "botania:rune_mana",
         "min": 12,
         "max": 20,
-        "weight": 33,
-        "chance": 6
+        "weight": 18,
+        "chance": 4.7
       },
       {
         "name": "Улучшенный корпус механизма",
@@ -581,8 +581,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:blockresource/advanced_machine",
         "min": 2,
         "max": 4,
-        "weight": 25,
-        "chance": 4.6
+        "weight": 14,
+        "chance": 3.6
       },
       {
         "name": "Улучшенные микросхемы",
@@ -590,8 +590,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:crafting_elements/crafting_274_element",
         "min": 6,
         "max": 9,
-        "weight": 33,
-        "chance": 6
+        "weight": 18,
+        "chance": 4.7
       },
       {
         "name": "Энергетические кристаллы",
@@ -599,8 +599,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:battery/energy_crystal",
         "min": 7,
         "max": 11,
-        "weight": 33,
-        "chance": 6
+        "weight": 18,
+        "chance": 4.7
       },
       {
         "name": "Сжиматель",
@@ -608,8 +608,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:simplemachine/compressor_iu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 3.6
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Экстрактор",
@@ -617,8 +617,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:simplemachine/extractor_iu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 3.6
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Электрический сборщик электроники",
@@ -626,8 +626,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine3/electronic_assembler",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.6
       },
       {
         "name": "Рудопромывочный механизм",
@@ -635,8 +635,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:moremachine3/orewashing",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.6
       },
       {
         "name": "Завод сплавов",
@@ -644,8 +644,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine/alloy_smelter",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.6
       },
       {
         "name": "Гибридная солнечная панель",
@@ -653,8 +653,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:machines/hybrid_solar_paneliu",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.6
       },
       {
         "name": "Распространитель маны",
@@ -662,8 +662,8 @@ export const CASES_CATALOG = [
         "item": "botania:mana_spreader",
         "min": 3,
         "max": 4,
-        "weight": 20,
-        "chance": 3.6
+        "weight": 11,
+        "chance": 2.8
       },
       {
         "name": "Бассейн маны",
@@ -671,8 +671,8 @@ export const CASES_CATALOG = [
         "item": "botania:mana_pool",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.6
       },
       {
         "name": "Теллурическая агломерационная пластина",
@@ -680,17 +680,17 @@ export const CASES_CATALOG = [
         "item": "botania:terra_plate",
         "min": 1,
         "max": 1,
-        "weight": 10,
-        "chance": 1.8
+        "weight": 6,
+        "chance": 1.6
       },
       {
         "name": "AquaCoins (Джекпот)",
         "type": "coins",
         "item": "",
-        "min": 74000,
-        "max": 140000,
+        "min": 66000,
+        "max": 120000,
         "weight": 41,
-        "chance": 7.5
+        "chance": 10.6
       },
       {
         "name": "Гемы",
@@ -699,7 +699,7 @@ export const CASES_CATALOG = [
         "min": 10,
         "max": 20,
         "weight": 41,
-        "chance": 7.5
+        "chance": 10.6
       }
     ]
   },
@@ -723,7 +723,7 @@ export const CASES_CATALOG = [
         "item": "ae2:item_storage_cell_256k",
         "min": 1,
         "max": 1,
-        "weight": 8,
+        "weight": 6,
         "chance": 1.4
       },
       {
@@ -732,17 +732,17 @@ export const CASES_CATALOG = [
         "item": "botania:terrasteel_ingot",
         "min": 20,
         "max": 32,
-        "weight": 24,
-        "chance": 4.3
+        "weight": 13,
+        "chance": 3.1
       },
       {
         "name": "МЭ накопитель AE2",
         "type": "item",
         "item": "ae2:drive",
-        "min": 16,
-        "max": 24,
-        "weight": 20,
-        "chance": 3.6
+        "min": 40,
+        "max": 60,
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "МЭ ячейка хранения 64k",
@@ -750,8 +750,8 @@ export const CASES_CATALOG = [
         "item": "ae2:item_storage_cell_64k",
         "min": 1,
         "max": 1,
-        "weight": 32,
-        "chance": 5.7
+        "weight": 18,
+        "chance": 4.3
       },
       {
         "name": "МЭ ячейка хранения 16k",
@@ -760,7 +760,7 @@ export const CASES_CATALOG = [
         "min": 1,
         "max": 1,
         "weight": 40,
-        "chance": 7.1
+        "chance": 9.5
       },
       {
         "name": "Инженерные процессоры",
@@ -769,7 +769,7 @@ export const CASES_CATALOG = [
         "min": 12,
         "max": 20,
         "weight": 40,
-        "chance": 7.1
+        "chance": 9.5
       },
       {
         "name": "Логические процессоры",
@@ -778,7 +778,7 @@ export const CASES_CATALOG = [
         "min": 12,
         "max": 20,
         "weight": 40,
-        "chance": 7.1
+        "chance": 9.5
       },
       {
         "name": "Вычислительные процессоры",
@@ -787,7 +787,7 @@ export const CASES_CATALOG = [
         "min": 12,
         "max": 20,
         "weight": 40,
-        "chance": 7.1
+        "chance": 9.5
       },
       {
         "name": "МЭ ячейка хранения 4k",
@@ -796,7 +796,7 @@ export const CASES_CATALOG = [
         "min": 3,
         "max": 5,
         "weight": 40,
-        "chance": 7.1
+        "chance": 9.5
       },
       {
         "name": "Слитки элементия",
@@ -804,8 +804,8 @@ export const CASES_CATALOG = [
         "item": "botania:elementium_ingot",
         "min": 32,
         "max": 48,
-        "weight": 36,
-        "chance": 6.4
+        "weight": 20,
+        "chance": 4.7
       },
       {
         "name": "Автономная ферма",
@@ -813,8 +813,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:moremachine3/farmer",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 3.6
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "МЭСН",
@@ -822,8 +822,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/cesu_iu",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.4
       },
       {
         "name": "МФЭ",
@@ -831,8 +831,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/mfe_iu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 3.6
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "Совершенная гибридная солнечная панель",
@@ -840,8 +840,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:machines/ultimate_solar_paneliu",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.4
       },
       {
         "name": "Квантовая солнечная панель",
@@ -849,8 +849,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:machines/quantum_solar_paneliu",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.4
       },
       {
         "name": "МФСУ",
@@ -858,8 +858,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/mfsu_iu",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.4
       },
       {
         "name": "Молекулярный сборщик",
@@ -867,8 +867,8 @@ export const CASES_CATALOG = [
         "item": "ae2:molecular_assembler",
         "min": 5,
         "max": 6,
-        "weight": 20,
-        "chance": 3.6
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "МЭ-регулятор",
@@ -876,8 +876,8 @@ export const CASES_CATALOG = [
         "item": "ae2:controller",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.4
       },
       {
         "name": "Вырезатель",
@@ -885,8 +885,8 @@ export const CASES_CATALOG = [
         "item": "ae2:inscriber",
         "min": 3,
         "max": 4,
-        "weight": 15,
-        "chance": 2.7
+        "weight": 6,
+        "chance": 1.4
       },
       {
         "name": "Химический завод",
@@ -894,17 +894,17 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine2/plastic_creator",
         "min": 1,
         "max": 1,
-        "weight": 10,
-        "chance": 1.8
+        "weight": 6,
+        "chance": 1.4
       },
       {
         "name": "AquaCoins (Куш)",
         "type": "coins",
         "item": "",
-        "min": 290000,
-        "max": 530000,
+        "min": 230000,
+        "max": 420000,
         "weight": 40,
-        "chance": 7.1
+        "chance": 9.5
       },
       {
         "name": "Гемы",
@@ -913,7 +913,7 @@ export const CASES_CATALOG = [
         "min": 20,
         "max": 35,
         "weight": 40,
-        "chance": 7.1
+        "chance": 9.5
       }
     ]
   },
@@ -937,8 +937,8 @@ export const CASES_CATALOG = [
         "item": "botania:life_essence",
         "min": 52,
         "max": 64,
-        "weight": 16,
-        "chance": 3.4
+        "weight": 9,
+        "chance": 2.1
       },
       {
         "name": "Обогащённый Уран (AC)",
@@ -947,7 +947,7 @@ export const CASES_CATALOG = [
         "min": 44,
         "max": 64,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Вольфрамовая руда IU",
@@ -956,7 +956,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Хромовая руда IU",
@@ -965,7 +965,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Жемчужины Бездны",
@@ -974,7 +974,7 @@ export const CASES_CATALOG = [
         "min": 24,
         "max": 40,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Пыль сияющего мотылька",
@@ -983,7 +983,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Ткань тьмы Глубин",
@@ -992,7 +992,7 @@ export const CASES_CATALOG = [
         "min": 44,
         "max": 64,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Незеритовые слитки",
@@ -1001,25 +1001,25 @@ export const CASES_CATALOG = [
         "min": 12,
         "max": 20,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Улучшение скорости ×4",
         "type": "item",
         "item": "aquatech_machines:speed_upgrade_4",
-        "min": 11,
-        "max": 18,
+        "min": 10,
+        "max": 16,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Сплав Инконель 718",
         "type": "item",
         "item": "industrialupgrade:alloyingot/inconel",
-        "min": 32,
-        "max": 48,
+        "min": 28,
+        "max": 44,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Протонная солнечная панель",
@@ -1027,8 +1027,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:machines/proton_solar_panel",
         "min": 1,
         "max": 1,
-        "weight": 15,
-        "chance": 3.2
+        "weight": 8,
+        "chance": 1.9
       },
       {
         "name": "Продвинутое МФСУ",
@@ -1036,8 +1036,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/ult_mfsu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.3
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "Совершенная электрическая печь",
@@ -1045,8 +1045,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:moremachine/quad_furnace",
         "min": 3,
         "max": 4,
-        "weight": 15,
-        "chance": 3.2
+        "weight": 8,
+        "chance": 1.9
       },
       {
         "name": "Обогатитель",
@@ -1054,8 +1054,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine1/enrichment",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3.2
+        "weight": 8,
+        "chance": 1.9
       },
       {
         "name": "AquaCoins (Джекпот)",
@@ -1064,7 +1064,7 @@ export const CASES_CATALOG = [
         "min": 830000,
         "max": 1500000,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Гемы",
@@ -1073,7 +1073,7 @@ export const CASES_CATALOG = [
         "min": 35,
         "max": 60,
         "weight": 24,
-        "chance": 5.2
+        "chance": 5.6
       },
       {
         "name": "Спектральная солнечная панель",
@@ -1104,10 +1104,10 @@ export const CASES_CATALOG = [
         "name": "Лапотронные кристаллы",
         "type": "item",
         "item": "industrialupgrade:battery/lapotron_crystal",
-        "min": 48,
+        "min": 52,
         "max": 64,
-        "weight": 25,
-        "chance": 5.2
+        "weight": 14,
+        "chance": 3.2
       },
       {
         "name": "Сплав Осмиридий",
@@ -1116,7 +1116,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 41,
-        "chance": 8.5
+        "chance": 9.4
       },
       {
         "name": "Сплав Адамантий",
@@ -1125,7 +1125,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 41,
-        "chance": 8.5
+        "chance": 9.4
       },
       {
         "name": "Платиновая руда",
@@ -1134,7 +1134,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 41,
-        "chance": 8.5
+        "chance": 9.4
       },
       {
         "name": "Кобальтовая руда",
@@ -1143,7 +1143,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 41,
-        "chance": 8.5
+        "chance": 9.4
       },
       {
         "name": "Ускорители (Оверклокеры)",
@@ -1152,7 +1152,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 41,
-        "chance": 8.5
+        "chance": 9.4
       },
       {
         "name": "Продвинутые схемы IU",
@@ -1161,7 +1161,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 41,
-        "chance": 8.5
+        "chance": 9.4
       },
       {
         "name": "Множитель улова ×32",
@@ -1170,7 +1170,7 @@ export const CASES_CATALOG = [
         "min": 2,
         "max": 2,
         "weight": 33,
-        "chance": 6.9
+        "chance": 7.6
       },
       {
         "name": "Изотопы Уран-235",
@@ -1179,7 +1179,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 33,
-        "chance": 6.9
+        "chance": 7.6
       },
       {
         "name": "Сингулярная солнечная панель",
@@ -1187,8 +1187,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:machines/singular_solar_panel",
         "min": 1,
         "max": 1,
-        "weight": 10,
-        "chance": 2.1
+        "weight": 5,
+        "chance": 1.2
       },
       {
         "name": "Улучшенное МФСУ",
@@ -1196,8 +1196,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/adv_mfsu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.2
+        "weight": 11,
+        "chance": 2.5
       },
       {
         "name": "Генератор нейтронных частиц",
@@ -1205,8 +1205,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine/neutron_generator",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3.1
+        "weight": 8,
+        "chance": 1.8
       },
       {
         "name": "Реактор ядерного синтеза",
@@ -1214,8 +1214,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:basemachine1/synthesis",
         "min": 1,
         "max": 1,
-        "weight": 15,
-        "chance": 3.1
+        "weight": 8,
+        "chance": 1.8
       },
       {
         "name": "Совершенное МФСУ",
@@ -1223,8 +1223,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/per_mfsu",
         "min": 1,
         "max": 1,
-        "weight": 15,
-        "chance": 3.1
+        "weight": 8,
+        "chance": 1.8
       },
       {
         "name": "AquaCoins (Куш)",
@@ -1233,7 +1233,7 @@ export const CASES_CATALOG = [
         "min": 2100000,
         "max": 3900000,
         "weight": 41,
-        "chance": 8.5
+        "chance": 9.4
       },
       {
         "name": "Гемы",
@@ -1242,7 +1242,7 @@ export const CASES_CATALOG = [
         "min": 50,
         "max": 80,
         "weight": 25,
-        "chance": 5.2
+        "chance": 5.8
       },
       {
         "name": "Фотонная солнечная панель",
@@ -1282,10 +1282,10 @@ export const CASES_CATALOG = [
         "name": "Кристальные матричные слитки",
         "type": "item",
         "item": "avaritia:crystal_matrix_ingot",
-        "min": 40,
+        "min": 52,
         "max": 64,
-        "weight": 16,
-        "chance": 3.4
+        "weight": 9,
+        "chance": 2.1
       },
       {
         "name": "Слитки Орихалка ExtraBotany",
@@ -1294,7 +1294,7 @@ export const CASES_CATALOG = [
         "min": 36,
         "max": 56,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Слитки Аэриалита ExtraBotany",
@@ -1303,7 +1303,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Топливо духов ExtraBotany",
@@ -1312,7 +1312,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Слитки Альфстали",
@@ -1321,7 +1321,7 @@ export const CASES_CATALOG = [
         "min": 24,
         "max": 40,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Слитки черного железа",
@@ -1330,7 +1330,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Люминесценция ExtendedCrafting",
@@ -1339,7 +1339,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Звёзды Незера",
@@ -1348,7 +1348,7 @@ export const CASES_CATALOG = [
         "min": 36,
         "max": 56,
         "weight": 40,
-        "chance": 8.6
+        "chance": 9.3
       },
       {
         "name": "Множитель улова ×64",
@@ -1357,7 +1357,7 @@ export const CASES_CATALOG = [
         "min": 2,
         "max": 2,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Сингулярности AE2",
@@ -1366,7 +1366,7 @@ export const CASES_CATALOG = [
         "min": 22,
         "max": 36,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Барионное МФСУ",
@@ -1374,8 +1374,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/bar_mfsu",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3.2
+        "weight": 8,
+        "chance": 1.9
       },
       {
         "name": "Объединитель панелей",
@@ -1383,8 +1383,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:sintezator/sintezator",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.3
+        "weight": 11,
+        "chance": 2.6
       },
       {
         "name": "Максимальный верстак",
@@ -1392,8 +1392,8 @@ export const CASES_CATALOG = [
         "item": "extendedcrafting:ultimate_table",
         "min": 1,
         "max": 1,
-        "weight": 15,
-        "chance": 3.2
+        "weight": 8,
+        "chance": 1.9
       },
       {
         "name": "Нейтрониевый коллектор",
@@ -1401,17 +1401,17 @@ export const CASES_CATALOG = [
         "item": "avaritia:neutron_collector",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3.2
+        "weight": 8,
+        "chance": 1.9
       },
       {
         "name": "AquaCoins (Джекпот)",
         "type": "coins",
         "item": "",
-        "min": 5200000,
-        "max": 9600000,
+        "min": 5100000,
+        "max": 9500000,
         "weight": 32,
-        "chance": 6.9
+        "chance": 7.5
       },
       {
         "name": "Гемы",
@@ -1420,7 +1420,7 @@ export const CASES_CATALOG = [
         "min": 75,
         "max": 120,
         "weight": 24,
-        "chance": 5.2
+        "chance": 5.6
       },
       {
         "name": "Барионная солнечная панель",
@@ -1453,8 +1453,8 @@ export const CASES_CATALOG = [
         "item": "draconicevolution:awakened_core",
         "min": 2,
         "max": 2,
-        "weight": 9,
-        "chance": 2
+        "weight": 5,
+        "chance": 1.2
       },
       {
         "name": "Сердца Дракона",
@@ -1462,8 +1462,8 @@ export const CASES_CATALOG = [
         "item": "draconicevolution:dragon_heart",
         "min": 3,
         "max": 4,
-        "weight": 22,
-        "chance": 4.9
+        "weight": 12,
+        "chance": 2.9
       },
       {
         "name": "Пробуждённый драконий",
@@ -1472,16 +1472,16 @@ export const CASES_CATALOG = [
         "min": 32,
         "max": 48,
         "weight": 35,
-        "chance": 7.7
+        "chance": 8.5
       },
       {
         "name": "Дракониевые ядра",
         "type": "item",
         "item": "draconicevolution:draconium_core",
-        "min": 52,
+        "min": 48,
         "max": 64,
         "weight": 45,
-        "chance": 9.9
+        "chance": 10.9
       },
       {
         "name": "Ядра виверны",
@@ -1490,7 +1490,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 35,
-        "chance": 7.7
+        "chance": 8.5
       },
       {
         "name": "Слитки дракония",
@@ -1499,7 +1499,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 54,
-        "chance": 11.9
+        "chance": 13
       },
       {
         "name": "Энергетические ядра виверны",
@@ -1508,7 +1508,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 35,
-        "chance": 7.7
+        "chance": 8.5
       },
       {
         "name": "Инжекторы слияния",
@@ -1517,7 +1517,7 @@ export const CASES_CATALOG = [
         "min": 32,
         "max": 48,
         "weight": 35,
-        "chance": 7.7
+        "chance": 8.5
       },
       {
         "name": "Нейтрониевые слитки",
@@ -1526,7 +1526,7 @@ export const CASES_CATALOG = [
         "min": 32,
         "max": 48,
         "weight": 35,
-        "chance": 7.7
+        "chance": 8.5
       },
       {
         "name": "Яйцо дракона",
@@ -1535,7 +1535,7 @@ export const CASES_CATALOG = [
         "min": 2,
         "max": 2,
         "weight": 31,
-        "chance": 6.8
+        "chance": 7.5
       },
       {
         "name": "Адронное МФСУ",
@@ -1543,8 +1543,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/had_mfsu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.4
+        "weight": 11,
+        "chance": 2.7
       },
       {
         "name": "Ядро слияния",
@@ -1552,8 +1552,8 @@ export const CASES_CATALOG = [
         "item": "draconicevolution:crafting_core",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.4
+        "weight": 11,
+        "chance": 2.7
       },
       {
         "name": "Энергетическое ядро",
@@ -1561,17 +1561,17 @@ export const CASES_CATALOG = [
         "item": "draconicevolution:energy_core",
         "min": 2,
         "max": 2,
-        "weight": 15,
-        "chance": 3.3
+        "weight": 8,
+        "chance": 1.9
       },
       {
         "name": "AquaCoins (Куш)",
         "type": "coins",
         "item": "",
-        "min": 13000000,
-        "max": 23000000,
+        "min": 11000000,
+        "max": 21000000,
         "weight": 35,
-        "chance": 7.7
+        "chance": 8.5
       },
       {
         "name": "Гемы",
@@ -1580,7 +1580,7 @@ export const CASES_CATALOG = [
         "min": 90,
         "max": 150,
         "weight": 26,
-        "chance": 5.7
+        "chance": 6.3
       },
       {
         "name": "Адронная солнечная панель",
@@ -1622,8 +1622,8 @@ export const CASES_CATALOG = [
         "item": "avaritia:extreme_crafting_table",
         "min": 1,
         "max": 1,
-        "weight": 20,
-        "chance": 4.5
+        "weight": 11,
+        "chance": 2.7
       },
       {
         "name": "Катализаторы Бесконечности",
@@ -1632,7 +1632,7 @@ export const CASES_CATALOG = [
         "min": 6,
         "max": 8,
         "weight": 33,
-        "chance": 7.5
+        "chance": 8.2
       },
       {
         "name": "Блоки пробуждённого дракония",
@@ -1641,7 +1641,7 @@ export const CASES_CATALOG = [
         "min": 6,
         "max": 8,
         "weight": 40,
-        "chance": 9.1
+        "chance": 10
       },
       {
         "name": "Нейтрониевые слитки Avaritia",
@@ -1650,7 +1650,7 @@ export const CASES_CATALOG = [
         "min": 32,
         "max": 48,
         "weight": 53,
-        "chance": 12
+        "chance": 13.2
       },
       {
         "name": "Кристальные матричные слитки",
@@ -1659,7 +1659,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 53,
-        "chance": 12
+        "chance": 13.2
       },
       {
         "name": "Нейтрониевые самородки",
@@ -1668,7 +1668,7 @@ export const CASES_CATALOG = [
         "min": 104,
         "max": 128,
         "weight": 59,
-        "chance": 13.4
+        "chance": 14.7
       },
       {
         "name": "Нейтрониевый компрессор",
@@ -1676,8 +1676,8 @@ export const CASES_CATALOG = [
         "item": "avaritia:neutron_compressor",
         "min": 1,
         "max": 1,
-        "weight": 26,
-        "chance": 5.9
+        "weight": 14,
+        "chance": 3.5
       },
       {
         "name": "Звёзды Незера",
@@ -1686,7 +1686,7 @@ export const CASES_CATALOG = [
         "min": 52,
         "max": 64,
         "weight": 53,
-        "chance": 12
+        "chance": 13.2
       },
       {
         "name": "Гравитонное МФСУ",
@@ -1694,8 +1694,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/gra_mfsu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.5
+        "weight": 11,
+        "chance": 2.7
       },
       {
         "name": "Кварковое МФСУ",
@@ -1703,8 +1703,8 @@ export const CASES_CATALOG = [
         "item": "industrialupgrade:wiring_storage/qua_mfsu",
         "min": 2,
         "max": 2,
-        "weight": 20,
-        "chance": 4.5
+        "weight": 11,
+        "chance": 2.7
       },
       {
         "name": "Кварковая солнечная панель",
@@ -1719,10 +1719,10 @@ export const CASES_CATALOG = [
         "name": "AquaCoins (Супер-Куш)",
         "type": "coins",
         "item": "",
-        "min": 34000000,
-        "max": 64000000,
+        "min": 32000000,
+        "max": 59000000,
         "weight": 33,
-        "chance": 7.5
+        "chance": 8.2
       },
       {
         "name": "Гемы",
@@ -1731,7 +1731,7 @@ export const CASES_CATALOG = [
         "min": 120,
         "max": 200,
         "weight": 26,
-        "chance": 5.9
+        "chance": 6.5
       },
       {
         "name": "Гравитонная солнечная панель",
@@ -1741,6 +1741,148 @@ export const CASES_CATALOG = [
         "max": 1,
         "weight": 1,
         "chance": 0.2
+      }
+    ]
+  },
+  {
+    "slug": "solar",
+    "title": "Кейс XI: Солнечный Спектр",
+    "rarity": "legendary",
+    "cost": 5000000,
+    "pityEvery": 200,
+    "pity": {
+      "name": "Гравитонная солнечная панель",
+      "type": "item",
+      "item": "industrialupgrade:machines/graviton_solar_panel",
+      "min": 1,
+      "max": 1
+    },
+    "loot": [
+      {
+        "name": "Улучшенная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/advanced_solar_paneliu",
+        "min": 1,
+        "max": 1,
+        "weight": 28010,
+        "chance": 28
+      },
+      {
+        "name": "Гибридная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/hybrid_solar_paneliu",
+        "min": 1,
+        "max": 1,
+        "weight": 22000,
+        "chance": 22
+      },
+      {
+        "name": "Совершенная гибридная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/ultimate_solar_paneliu",
+        "min": 1,
+        "max": 1,
+        "weight": 16000,
+        "chance": 16
+      },
+      {
+        "name": "Квантовая солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/quantum_solar_paneliu",
+        "min": 1,
+        "max": 1,
+        "weight": 11000,
+        "chance": 11
+      },
+      {
+        "name": "Спектральная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/spectral_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 8000,
+        "chance": 8
+      },
+      {
+        "name": "Протонная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/proton_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 6000,
+        "chance": 6
+      },
+      {
+        "name": "Сингулярная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/singular_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 4000,
+        "chance": 4
+      },
+      {
+        "name": "Дифракционная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/admin_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 2400,
+        "chance": 2.4
+      },
+      {
+        "name": "Фотонная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/photonic_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 1400,
+        "chance": 1.4
+      },
+      {
+        "name": "Нейтронная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/neutronium_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 700,
+        "chance": 0.7
+      },
+      {
+        "name": "Барионная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/barion_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 300,
+        "chance": 0.3
+      },
+      {
+        "name": "Адронная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/hadron_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 120,
+        "chance": 0.1
+      },
+      {
+        "name": "Гравитонная солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/graviton_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 50,
+        "chance": 0.1
+      },
+      {
+        "name": "Кварковая солнечная панель",
+        "type": "item",
+        "item": "industrialupgrade:machines/quark_solar_panel",
+        "min": 1,
+        "max": 1,
+        "weight": 20,
+        "chance": 0
       }
     ]
   }

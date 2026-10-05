@@ -3,10 +3,10 @@
 
     python tools/build_new_case_icons.py
 
-Берёт предметы из config/aqualumen/cases.json, у которых ещё нет иконки в tools/extracted_case_textures.json,
-находит текстуры в модели предмета (по цепочке parent) и рисует изометрический блок так же, как
-tools/build_all_case_textures.py. Запускать после build_all_case_textures.py и patch_missing_textures.py,
-потом tools/build_hub_html.py.
+Предметы, добавленные в кейсы (ADDITIONS в rebalance_cases.py), и все предметы без иконки рисуются по настоящей
+модели блока (tools/render_block_icon.py). Если у модели нет elements, берётся куб из текстур модели.
+Множители улова берутся из текстур мода (жемчужины), а не из старых плашек. Запускать после
+build_all_case_textures.py и patch_missing_textures.py, потом tools/build_hub_html.py.
 """
 import importlib.util
 import io
@@ -33,9 +33,21 @@ TOP_KEYS = ("up", "top", "glass", "texture", "all", "outside", "Main", "1", "0")
 SIDE_KEYS = ("north", "front", "south", "side", "west", "east", "all", "outside", "Main", "2", "0", "1")
 RIGHT_KEYS = ("east", "side", "west", "south", "north", "all", "outside", "Main", "2", "0", "1")
 
-_spec = importlib.util.spec_from_file_location("case_textures", ROOT / "tools" / "build_all_case_textures.py")
-case_textures = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(case_textures)
+
+def _load(name, filename):
+    spec = importlib.util.spec_from_file_location(name, ROOT / "tools" / filename)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+case_textures = _load("case_textures", "build_all_case_textures.py")
+render_block_icon = _load("render_block_icon", "render_block_icon.py")
+rebalance_cases = _load("rebalance_cases", "rebalance_cases.py")
+
+UI_ITEMS = ROOT / "mods" / "aquatech-ui" / "src" / "main" / "resources" / "assets" / "aquatech_ui" / "textures" / "item"
+# Всегда берутся из текстур мода: в составе кейсов не должно оставаться старых иконок.
+REPO_FLAT = {f"aquatech_ui:rate_x{n}": UI_ITEMS / f"rate_x{n}.png" for n in (2, 4, 8, 16, 32, 64)}
 
 
 class Jars:
@@ -97,7 +109,11 @@ def pick(jars, textures, keys, exclude=()):
     return None
 
 
-def build_icon(jars, item_id):
+def build_icon(jars, item_id, models=None):
+    if models is not None:
+        rendered = models.render(item_id)
+        if rendered is not None:
+            return rendered
     ns, _, path = item_id.partition(":")
     textures = jars.textures(ns, f"item/{path}")
     if not textures:
@@ -119,20 +135,27 @@ def build_icon(jars, item_id):
 def main():
     cases = json.loads(CASES.read_text(encoding="utf-8"))["cases"]
     wanted = sorted({e["item"] for c in cases for e in c["loot"] + [c["pity"]] if e["type"] == "item"})
+    added_by_script = {row[0] for rows in rebalance_cases.ADDITIONS.values() for row in rows}
     icons = json.loads(OUT_FILE.read_text(encoding="utf-8"))
     jars = Jars()
-    added, failed = [], []
+    models = render_block_icon.ModelIcons(jars)
+    done, failed = [], []
     for item_id in wanted:
-        if item_id in icons:
+        if item_id in REPO_FLAT:
             continue
-        icon = build_icon(jars, item_id)
+        if item_id in icons and item_id not in added_by_script:
+            continue
+        icon = build_icon(jars, item_id, models)
         if icon is None:
             failed.append(item_id)
             continue
         icons[item_id] = case_textures.img_to_b64(icon)
-        added.append(item_id)
+        done.append(item_id)
+    for item_id, path in REPO_FLAT.items():
+        icons[item_id] = case_textures.img_to_b64(Image.open(path).convert("RGBA"))
+        done.append(item_id)
     OUT_FILE.write_text(json.dumps(icons, ensure_ascii=False), encoding="utf-8")
-    print(f"добавлено иконок: {len(added)}")
+    print(f"нарисовано иконок: {len(done)}")
     if failed:
         print("не нашлось текстур:", ", ".join(failed))
 

@@ -25,8 +25,12 @@ ROOT = Path(__file__).resolve().parent.parent
 TARGETS = [ROOT / "config" / "aqualumen" / "cases.json", ROOT / "server" / "config" / "aqualumen" / "cases.json"]
 BASE = ROOT / "tools" / "cases_base.json"  # исходные кейсы без добавок: награды считаются всегда с нуля
 
+IU_PANEL_DIFFRACTION = "industrialupgrade:machines/admin_solar_panel"  # в игре это «Дифракционная солнечная панель»
 MIN_SHARE = 0.15
 PITY_SHARE = 1.1
+# Шансы на редкие предметы урезаны: (верхняя граница доли, множитель веса). Меньше 1% не опускаем: это уже «заглавная» награда.
+RARE_FACTORS = ((0.03, 0.40), (0.065, 0.55))
+RARE_FLOOR = 0.0105
 GEM_COINS = 5000  # курс продажи кристалла (gemSellCoins), консервативно
 MAX_QTY = 64  # один стак
 COIN_AVG = 3.0  # средняя денежная награда в долях цены кейса
@@ -104,6 +108,7 @@ VALUE = {
 }
 
 VALUE.update({
+    IU_PANEL_DIFFRACTION: 1_000_000,
     "industrialupgrade:basemachine3/steamboiler": 700,
     "industrialupgrade:basemachine3/steam_peat_generator": 700,
     "industrialupgrade:dryer/dryer": 600,
@@ -353,8 +358,23 @@ def avg_value(entry, case_id=None):
     return avg * unit_value(case_id, entry["item"])
 
 
+def thin_rare_items(case):
+    """Режет вес предметов с долей меньше 6.5%: чем реже награда, тем сильнее. Монеты, гемы и заглавные (<1%) не трогаем."""
+    total = sum(e["weight"] for e in case["loot"])
+    floor = RARE_FLOOR * total
+    for entry in case["loot"]:
+        share = entry["weight"] / total
+        if entry["type"] != "item" or share < 0.01:
+            continue
+        for limit, factor in RARE_FACTORS:
+            if share < limit:
+                entry["weight"] = max(1, round(max(entry["weight"] * factor, min(entry["weight"], floor))))
+                break
+
+
 def rebalance_case(case):
     apply_additions(case)
+    thin_rare_items(case)
     price = PRICES[case["id"]]
     target = TARGET_EV[case["id"]] * price
     loot = case["loot"]
@@ -399,6 +419,38 @@ def rebalance_case(case):
     case["costCoins"] = price
 
 
+# Кейс XI: все солнечные панели IU. Чем выше выработка (EnumSolarPanels.genday), тем меньше шанс. Вес из 100 000.
+SOLAR_CASE = {
+    "id": "solar", "title": "Кейс XI: Солнечный Спектр", "rarity": "legendary", "costCoins": 5_000_000, "pityEvery": 200,
+}
+# (предмет, название, вес из 100 000, выработка FE/t по EnumSolarPanels)
+SOLAR_PANELS = (
+    ("advanced_solar_paneliu", "Улучшенная солнечная панель", 28010, 5),
+    ("hybrid_solar_paneliu", "Гибридная солнечная панель", 22000, 15),
+    ("ultimate_solar_paneliu", "Совершенная гибридная солнечная панель", 16000, 45),
+    ("quantum_solar_paneliu", "Квантовая солнечная панель", 11000, 135),
+    ("spectral_solar_panel", "Спектральная солнечная панель", 8000, 405),
+    ("proton_solar_panel", "Протонная солнечная панель", 6000, 1215),
+    ("singular_solar_panel", "Сингулярная солнечная панель", 4000, 3645),
+    ("admin_solar_panel", "Дифракционная солнечная панель", 2400, 10935),
+    ("photonic_solar_panel", "Фотонная солнечная панель", 1400, 32805),
+    ("neutronium_solar_panel", "Нейтронная солнечная панель", 700, 131220),
+    ("barion_solar_panel", "Барионная солнечная панель", 300, 524880),
+    ("hadron_solar_panel", "Адронная солнечная панель", 120, 2099520),
+    ("graviton_solar_panel", "Гравитонная солнечная панель", 50, 8398080),
+    ("quark_solar_panel", "Кварковая солнечная панель", 20, 33592320),
+)
+
+
+def solar_case():
+    case = dict(SOLAR_CASE)
+    case["loot"] = [{"type": "item", "item": "industrialupgrade:machines/" + leaf, "label": label, "min": 1, "max": 1, "weight": weight}
+                    for leaf, label, weight, _output in SOLAR_PANELS]
+    case["pity"] = {"type": "item", "item": "industrialupgrade:machines/graviton_solar_panel",
+                    "label": "Гравитонная солнечная панель", "min": 1, "max": 1, "weight": 10}
+    return case
+
+
 def check_schema(cases):
     """CaseConfig в моде читает weight, min и max как int: дробное число роняет весь файл, и хаб показывает запасные кейсы."""
     for case in cases:
@@ -413,6 +465,7 @@ def check_schema(cases):
 def rebalance(cases):
     for case in cases:
         rebalance_case(case)
+    cases.append(solar_case())
     check_schema(cases)
 
 
@@ -430,7 +483,7 @@ def report(cases, before=None):
                 low.append(f"{e['label']} от {e['min']}")
         pity = case.get("pity")
         pity_note = f"{avg_value(pity, case['id']) / price:.0%}" if pity else "-"
-        was = f"{before[case['id']]:,}" if before else ""
+        was = f"{before[case['id']]:,}" if before and case['id'] in before else "новый"
         print(f"{case['id']:15}{price:>12,}{was:>12}{ev:>12,.0f}{ev / price * 100:>4.0f}%  "
               f"гарант {pity_note}; {', '.join(low) or 'слабых нет'}")
 

@@ -3,7 +3,7 @@
     python tools/test_hub_page.py
 
 Нужен Playwright: pip install playwright && python -m playwright install chromium.
-Проверяет окно торговца рыбой (одна вкладка «Рыбалка», серые кнопки без торговца), обычное F4 (вкладки «Рыбалка» нет) и вкладку кейсов (все десять карточек с иконками).
+Проверяет окно торговца рыбой (одна вкладка «Рыбалка», серые кнопки без торговца), обычное F4 (вкладки «Рыбалка» нет) и вкладку кейсов (все одиннадцать карточек с иконками).
 Скриншоты кладёт в mods/aquatech-machines/art/hub_test_*.png.
 """
 import json
@@ -100,11 +100,35 @@ def main():
         page.evaluate("p => window.AquaLumen.applySnapshot(p)", case_payload)
         page.wait_for_selector(".card.case")
         page.wait_for_function("[...document.querySelectorAll('.card.case .case-card-img')].every(i => i.complete && i.naturalWidth > 0)", timeout=15000)
-        ok &= check("кейсы: показаны все десять", page.locator(".card.case").count() == len(cases) == 10,
+        ok &= check("кейсы: показаны все одиннадцать", page.locator(".card.case").count() == len(cases) == 11,
                     str(page.locator(".card.case").count()))
         broken = page.evaluate("[...document.querySelectorAll('.card.case .case-card-img')].filter(i => !(i.complete && i.naturalWidth > 0)).length")
         ok &= check("кейсы: иконки у всех карточек", broken == 0, f"без иконки: {broken}")
         page.screenshot(path=str(SHOTS / "hub_test_cases.png"))
+
+        # --- рулетка: иконка выпавшего предмета берётся по id из состава кейса (сервер присылает только название) ---
+        steam = next(c for c in cases if c["id"] == "steam")
+        speed = next(e for e in steam["loot"] if e["item"] == "aquatech_machines:speed_upgrade")
+        spin_payload = payload("cases", tabs)
+        spin_payload["snapshot"]["wallet"]["coins"] = 99999999
+        spin_payload["snapshot"]["cases"] = [
+            {"id": c["id"], "title": c["title"], "rarity": c["rarity"], "cost": c["costCoins"], "count": 0, "pityEvery": c["pityEvery"],
+             "loot": [{"item": e.get("item", ""), "label": e["label"], "type": e["type"], "weight": e["weight"], "rarity": "epic",
+                       "min": e["min"], "max": e["max"]} for e in c["loot"]]} for c in cases]
+        page.goto(HUB.as_uri())
+        page.wait_for_function("typeof (window.AquaLumen && window.AquaLumen.applySnapshot) === 'function'")
+        page.evaluate("p => window.AquaLumen.applySnapshot(p)", spin_payload)
+        page.wait_for_selector(".open-case")
+        page.locator(".open-case").nth(2).click()
+        page.wait_for_selector("#caseLayer.open")
+        ok &= check("рулетка: хаб под окном скрыт", page.evaluate("getComputedStyle(document.getElementById('hub')).visibility") == "hidden")
+        result_payload = json.loads(json.dumps(spin_payload))
+        result_payload["snapshot"]["caseResult"] = {"caseId": "steam", "label": speed["label"], "rarity": "epic", "amount": 4, "type": "item"}
+        page.evaluate("p => window.AquaLumen.applySnapshot(p)", result_payload)
+        page.wait_for_selector("#caseReveal img.mc-icon-lg", timeout=15000)
+        icon = page.evaluate("document.querySelector('#caseReveal img.mc-icon-lg').src.slice(0, 22)")
+        ok &= check("рулетка: у выпавшего предмета своя иконка, а не сундук", icon == "data:image/png;base64,", icon)
+        page.screenshot(path=str(SHOTS / "hub_test_reveal.png"))
 
         # --- вкладка из initialTab, которой нет в списке, заменяется первой доступной -----------------------------
         page.goto(HUB.as_uri())
