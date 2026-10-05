@@ -156,7 +156,7 @@
 |---|---|
 | Сбалансировать цены/лут рыбы | `config/aqualumen/fish_shop.json` (+ зеркало `server/config/`) |
 | Кейсы, гаранты, цены | `config/aqualumen/cases.json` (+ зеркало) |
-| GUI механизмов (текстуры, слоты, анимации) | `tools/build_machine_guis.py` генерирует PNG и `MachineLayout.java`, динамика в `MachineGuiFx`; вид без игры: `tools/preview_machine_guis.py` |
+| GUI механизмов (текстуры, слоты, анимации) | PNG в `mods/aquatech-machines/.../textures/gui/` доработаны вручную, правь их в редакторе (слоты должны остаться на местах из `MachineLayout.java`); `tools/build_machine_guis.py` пишет `MachineLayout.java` и PNG только с `--overwrite-textures`; динамика в `MachineGuiFx`; вид без игры: `tools/preview_machine_guis.py` |
 | Иконки наград кейсов в меню | `tools/patch_missing_textures.py` (добавить предмет) и `python tools/build_hub_html.py` |
 | Крафты, нерфы, блокировки | `kubejs/server_scripts/NN_*.js` и копия в `server/kubejs/` |
 | Изменить F4-хаб | `tools/build_hub_html.py`, затем `python tools/build_hub_html.py` (11 копий) |

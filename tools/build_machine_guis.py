@@ -1,8 +1,12 @@
 """Рисует GUI всех механизмов AquaTech в стиле «Латунь» (золотая панель, табличка, подвесной инвентарь) и
 генерирует Java-константы раскладки, чтобы меню, экраны и текстуры не расходились.
 
-    python tools/build_machine_guis.py            # текстуры + MachineLayout.java
-    python tools/build_machine_guis.py --preview  # ещё и лист предпросмотра в art/
+    python tools/build_machine_guis.py                      # только MachineLayout.java (PNG не трогает)
+    python tools/build_machine_guis.py --overwrite-textures  # ещё и перерисовывает PNG
+    python tools/build_machine_guis.py --preview             # ещё и лист предпросмотра в art/
+
+С 2026-10-05 текстуры GUI доработаны вручную (декор, стрелка в атласе). Без --overwrite-textures готовые PNG не
+перезаписываются: иначе пропадёт правка художника. Раскладка слотов в PNG должна совпадать с MachineLayout.java.
 
 Координаты слотов это левый верхний угол предмета 16x16 в системе GUI 256x212. Динамика (вода, огонь, шкалы, стрелки)
 рисуется в Java поверх фона, а спрайты для неё лежат в нижней части каждой текстуры (y >= 212).
@@ -655,13 +659,15 @@ def preview(images):
 def main():
     GUI_DIR.mkdir(parents=True, exist_ok=True)
     made = []
+    overwrite = "--overwrite-textures" in sys.argv
     for key, spec in MACHINES.items():
         im = build_machine(key, spec)
-        im.save(GUI_DIR / f"{key}.png")
+        if overwrite or not (GUI_DIR / f"{key}.png").exists():
+            im.save(GUI_DIR / f"{key}.png")
         made.append((key, im))
     with open(LAYOUT_JAVA, "w", encoding="utf-8", newline="") as out:
         out.write(java_layout())
-    print(f"written {len(made)} textures and {LAYOUT_JAVA.name}")
+    print(f"written {LAYOUT_JAVA.name}; textures {'rewritten' if overwrite else 'kept (use --overwrite-textures to redraw)'}")
     if "--preview" in sys.argv:
         preview(made)
 
