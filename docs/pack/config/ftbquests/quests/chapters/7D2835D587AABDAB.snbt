@@ -5,7 +5,7 @@
 	group: ""
 	icon: {
 		Count: 1
-		id: "starcatcher:bamboo_rod"
+		id: "starcatcher:alpha_rod"
 		tag: {
 			Damage: 0
 		}
@@ -116,7 +116,7 @@
 			y: -0.5d
 		}
 		{
-			description: ["Продавай рыбу NPC за Дублоны. Трать их на кейсы и торговлю."]
+			description: ["Продавай рыбу торговцу рыбой на спавне за монеты. Трать их на кейсы и в магазине."]
 			entity_vis_size: 1.0f
 			id: "74B58CD30A570FBA"
 			rewards: [
@@ -127,9 +127,10 @@
 					type: "item"
 				}
 				{
-					command: "/tellraw @p {\"text\":\"Награда хаба пока без монет — экономика в работе\",\"color\":\"aqua\"}"
-					icon: "industrialupgrade:crafting_elements/crafting_637_element"
+					command: "/quest_reward coins {p} 200"
+					icon: "minecraft:gold_nugget"
 					id: "69762D950B0EA414"
+					title: "200 монет"
 					type: "command"
 				}
 			]

@@ -11,7 +11,7 @@ public final class FishGeneratorLogic {
     public static final int RATE_COAL = 40;
     public static final int RATE_DENSE = 60;
     public static final int RATE_BLOCK = 80;
-    /** Рыба горит 200 тиков по 40 FE/t: 8000 FE, ровно два улова MK-1. */
+    /** Рыба горит 200 тиков по 40 FE/t: 8000 FE, это четыре улова MK-1. */
     public static final int FISH_BURN_TICKS = 200;
     public static final int FISH_RATE = RATE_COAL;
     public static final int FE_PER_FISH = FISH_BURN_TICKS * FISH_RATE;

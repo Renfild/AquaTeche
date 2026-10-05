@@ -34,6 +34,12 @@
 					type: "xp"
 					xp: 75
 				}
+				{
+					count: 16
+					id: "7B5EC54FB8B38549"
+					item: "botania:pink_double_flower"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "2A63839551BC7468"
@@ -950,7 +956,6 @@
 			y: 5.0d
 		}
 		{
-			dependencies: ["4128C6165CB09310"]
 			description: [
 				"Бассейн с авто-вводом. Связка с инфузером и"
 				"батареей маны."
@@ -1236,7 +1241,6 @@
 			y: 7.0d
 		}
 		{
-			dependencies: ["5C61258146B3CA68"]
 			description: [
 				"Растит цветы Botania без ручной фермы. Апгрейды"
 				"слотов и тепла ставятся внутрь."

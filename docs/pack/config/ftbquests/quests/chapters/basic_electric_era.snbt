@@ -1,11 +1,12 @@
 {
+	always_invisible: true
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "basic_electric_era"
 	group: "31719A5E7B6EF622"
 	icon: "industrialupgrade:basemachine3/generator_iu"
 	id: "7867768B1BAABFF9"
-	order_index: 2
+	order_index: 3
 	quest_links: [ ]
 	quests: [
 		{
@@ -31,14 +32,6 @@
 					type: "item"
 				}
 				{
-					id: "3E4C15BAE76F44EF"
-					item: {
-						Count: 16b
-						id: "industrialupgrade:cable/copper_cable"
-					}
-					type: "item"
-				}
-				{
 					id: "50390AF813158844"
 					type: "xp"
 					xp: 50
@@ -49,11 +42,12 @@
 				item: "industrialupgrade:crafting_elements/crafting_276_element"
 				type: "item"
 			}]
-			title: "Elemotor"
-			x: 0.0d
-			y: 0.0d
+			title: "Электромотор"
+			x: 3.0d
+			y: 3.0d
 		}
 		{
+			dependencies: ["7804F931D37DFC4B"]
 			description: [
 				"Электрический нагреватель жидкостей. Греет содержимое"
 				"бака и используется в процессах, где важна температура"
@@ -63,14 +57,9 @@
 			id: "5093F627EAB14536"
 			rewards: [
 				{
-					count: 16
+					count: 32
 					id: "549E56DD2EC409F9"
-					item: "minecraft:iron_ingot"
-					type: "item"
-				}
-				{
-					id: "52DBA50C9E984C51"
-					item: "industrialupgrade:solar_energy"
+					item: "industrialupgrade:itemingots/zinc_ingot"
 					type: "item"
 				}
 				{
@@ -84,6 +73,12 @@
 					type: "xp"
 					xp: 50
 				}
+				{
+					count: 32
+					id: "1ED43E3825D11AC8"
+					item: "industrialupgrade:itemingots/magnesium_ingot"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "29714CD8E30CE3F7"
@@ -91,10 +86,11 @@
 				type: "item"
 			}]
 			title: "Жидкостный нагреватель"
-			x: 1.0d
+			x: 6.5d
 			y: 0.0d
 		}
 		{
+			dependencies: ["7804F931D37DFC4B"]
 			description: [
 				"Сжигает твёрдое топливо и производит EF. Простая"
 				"энергетическая машина для питания ранней электрической"
@@ -133,7 +129,7 @@
 				type: "item"
 			}]
 			title: "Генератор"
-			x: 2.0d
+			x: 3.0d
 			y: 0.0d
 		}
 		{
@@ -149,11 +145,6 @@
 					count: 16
 					id: "4FEC1EA3A2CCD251"
 					item: "minecraft:iron_ingot"
-					type: "item"
-				}
-				{
-					id: "3C6E84BD1D56F4A4"
-					item: "industrialupgrade:solar_energy"
 					type: "item"
 				}
 				{
@@ -174,8 +165,8 @@
 				type: "item"
 			}]
 			title: "Редстоуновый генератор"
-			x: 2.0d
-			y: -1.0d
+			x: 4.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["73817BDF7488C47A"]
@@ -194,7 +185,7 @@
 				}
 				{
 					id: "24B3BC7B975ED42E"
-					item: "industrialupgrade:solar_energy"
+					item: "industrialupgrade:machines/advanced_solar_paneliu"
 					type: "item"
 				}
 				{
@@ -215,11 +206,11 @@
 				type: "item"
 			}]
 			title: "Геотермальный генератор"
-			x: 3.0d
-			y: 0.0d
+			x: 2.0d
+			y: -1.5d
 		}
 		{
-			dependencies: ["42F4D8BAD85A6D34"]
+			dependencies: ["283829997D53256F"]
 			description: [
 				"Твердотельный холодильник создаёт холод из снежков,"
 				"снега, льда, плотного льда и синего льда. Предмет"
@@ -259,10 +250,11 @@
 				type: "item"
 			}]
 			title: "Твердотельный холодильник"
-			x: 4.0d
-			y: 0.0d
+			x: 10.0d
+			y: 3.0d
 		}
 		{
+			dependencies: ["7804F931D37DFC4B"]
 			description: [
 				"Базовый набор электрических переработчиков: дробление,"
 				"сжатие, извлечение, плавка, прокатка, резка и"
@@ -302,11 +294,11 @@
 				type: "item"
 			}]
 			title: "Дробитель"
-			x: 5.0d
-			y: 0.0d
+			x: 3.0d
+			y: 6.0d
 		}
 		{
-			dependencies: ["13D3DA173A7E2E9C"]
+			dependencies: ["5093F627EAB14536"]
 			description: [
 				"Микросхема управления генераторами. Используется как"
 				"электронный контроллер для энергетических машин."
@@ -344,11 +336,11 @@
 				type: "item"
 			}]
 			title: "Производитель электросхем"
-			x: 6.0d
+			x: 10.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["750FDD44EB955598"]
+			dependencies: ["7804F931D37DFC4B"]
 			description: [
 				"Плавит несколько материалов вместе и получает сплавы."
 				"Работает с рецептами, где обычная печь не может смешать"
@@ -387,10 +379,11 @@
 				type: "item"
 			}]
 			title: "Завод сплавов"
-			x: 7.0d
-			y: 0.0d
+			x: 0.0d
+			y: 3.0d
 		}
 		{
+			dependencies: ["7804F931D37DFC4B"]
 			description: [
 				"Изготавливает шестерни и зубчатые детали. Такие детали"
 				"нужны машинам, где движение передаётся через"
@@ -429,11 +422,11 @@
 				type: "item"
 			}]
 			title: "Механический штамп"
-			x: 8.0d
+			x: 0.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["72924C850349165D"]
+			dependencies: ["7804F931D37DFC4B"]
 			description: [
 				"Автоматически собирает электронные детали из плат,"
 				"проводов и компонентов. Ускоряет производство сложной"
@@ -472,10 +465,11 @@
 				type: "item"
 			}]
 			title: "Электрический сборщик электроники"
-			x: 9.0d
-			y: 0.0d
+			x: 0.0d
+			y: 6.0d
 		}
 		{
+			dependencies: ["0CA2B1837C44B811"]
 			description: [
 				"Создаёт пластик из подготовленных химических"
 				"компонентов. Работает как химическая машина для"
@@ -514,10 +508,11 @@
 				type: "item"
 			}]
 			title: "Химический завод"
-			x: 9.0d
-			y: 1.0d
+			x: -2.5d
+			y: 7.5d
 		}
 		{
+			dependencies: ["7966D25FC6E7811C"]
 			description: [
 				"Формует пластик в пластины. Делает ровные пластиковые"
 				"заготовки для корпусов, изоляции и деталей."
@@ -555,8 +550,8 @@
 				type: "item"
 			}]
 			title: "Пластавтомат"
-			x: 8.0d
-			y: 1.0d
+			x: -2.5d
+			y: 6.0d
 		}
 		{
 			description: [
@@ -597,11 +592,14 @@
 				type: "item"
 			}]
 			title: "Сварочный аппарат"
-			x: 7.0d
-			y: 1.0d
+			x: 10.0d
+			y: 6.0d
 		}
 		{
-			dependencies: ["61B76B1B868E31AC"]
+			dependencies: [
+				"61B76B1B868E31AC"
+				"7804F931D37DFC4B"
+			]
 			description: [
 				"Промывает измельчённую руду и отделяет полезную часть"
 				"от пустой породы. Улучшает качество сырья перед"
@@ -640,10 +638,11 @@
 				type: "item"
 			}]
 			title: "Рудопромывочный механизм"
-			x: 6.0d
-			y: 1.0d
+			x: 6.5d
+			y: 6.0d
 		}
 		{
+			dependencies: ["44562248E6E59579"]
 			description: [
 				"Нитратный порошок для химических реакций. Используется"
 				"как твёрдый реагент в азотной химии и обработке"
@@ -682,11 +681,11 @@
 				type: "item"
 			}]
 			title: "Nitrate Dust"
-			x: 5.0d
-			y: 1.0d
+			x: -2.5d
+			y: -1.5d
 		}
 		{
-			dependencies: ["45FE28E0C85DBD89"]
+			dependencies: ["29F6304C46B1544D"]
 			description: [
 				"Разделяет предметы на меньшие части по рецептам."
 				"Подходит для получения долей, пыли и промежуточных"
@@ -725,10 +724,11 @@
 				type: "item"
 			}]
 			title: "Разделитель предметов"
-			x: 4.0d
-			y: 1.0d
+			x: -2.5d
+			y: 3.0d
 		}
 		{
+			dependencies: ["7966D25FC6E7811C"]
 			description: [
 				"Азот — газ для химии и охлаждения. Он участвует в"
 				"азотно-водородной цепочке, азотных оксидах и кислотах,"
@@ -769,8 +769,8 @@
 				type: "item"
 			}]
 			title: "Nitrogen"
-			x: 3.0d
-			y: 1.0d
+			x: -2.5d
+			y: 0.0d
 		}
 		{
 			description: [
@@ -811,8 +811,8 @@
 				type: "item"
 			}]
 			title: "Прогресс в сфере электроники"
-			x: 3.0d
-			y: 2.0d
+			x: -17.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["2BC7CD881137838B"]
@@ -854,8 +854,8 @@
 				type: "item"
 			}]
 			title: "Газовый сенсор"
-			x: 4.0d
-			y: 2.0d
+			x: -16.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["357306B2CC87180A"]
@@ -899,8 +899,8 @@
 				type: "item"
 			}]
 			title: "Капсула природного газа"
-			x: 5.0d
-			y: 2.0d
+			x: -15.0d
+			y: -0.5d
 		}
 		{
 			description: [
@@ -941,8 +941,8 @@
 				type: "item"
 			}]
 			title: "Тройной твердотельный смеситель"
-			x: 6.0d
-			y: 2.0d
+			x: -14.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["1C09993DEE54F858"]
@@ -983,8 +983,8 @@
 				type: "item"
 			}]
 			title: "Газовый смеситель"
-			x: 7.0d
-			y: 2.0d
+			x: -13.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["28B7C75AE358808E"]
@@ -1027,8 +1027,8 @@
 				type: "item"
 			}]
 			title: "Nitrogenhydride"
-			x: 8.0d
-			y: 2.0d
+			x: -12.0d
+			y: -0.5d
 		}
 		{
 			description: [
@@ -1069,8 +1069,8 @@
 				type: "item"
 			}]
 			title: "Nitrogenoxy"
-			x: 9.0d
-			y: 2.0d
+			x: -11.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["1EFB906202F540D6"]
@@ -1113,8 +1113,8 @@
 				type: "item"
 			}]
 			title: "Nitrogendioxide"
-			x: 10.0d
-			y: 2.0d
+			x: -10.0d
+			y: -0.5d
 		}
 		{
 			description: [
@@ -1156,8 +1156,8 @@
 				type: "item"
 			}]
 			title: "Nitricacid"
-			x: 10.0d
-			y: 3.0d
+			x: -10.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["38272CF1D763C507"]
@@ -1199,8 +1199,8 @@
 				type: "item"
 			}]
 			title: "Жидкостный интегратор"
-			x: 9.0d
-			y: 3.0d
+			x: -11.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["5E8AB35F4E8DD999"]
@@ -1242,8 +1242,8 @@
 				type: "item"
 			}]
 			title: "Silver Nitrate Dust"
-			x: 8.0d
-			y: 3.0d
+			x: -12.0d
+			y: 0.5d
 		}
 		{
 			description: [
@@ -1283,8 +1283,8 @@
 				type: "item"
 			}]
 			title: "Crushed Uranium Ore"
-			x: 7.0d
-			y: 3.0d
+			x: -13.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["1C1310227D7615E1"]
@@ -1325,8 +1325,8 @@
 				type: "item"
 			}]
 			title: "Обработчик радиоактивных руд"
-			x: 6.0d
-			y: 3.0d
+			x: -14.0d
+			y: 0.5d
 		}
 		{
 			description: [
@@ -1366,8 +1366,8 @@
 				type: "item"
 			}]
 			title: "Промышленный очиститель радиоактивных элементов"
-			x: 5.0d
-			y: 3.0d
+			x: -15.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["1BED57C8DBECDE55"]
@@ -1407,8 +1407,8 @@
 				type: "item"
 			}]
 			title: "Se Sensor"
-			x: 4.0d
-			y: 3.0d
+			x: -16.0d
+			y: 0.5d
 		}
 		{
 			description: [
@@ -1450,8 +1450,8 @@
 				type: "item"
 			}]
 			title: "Генератор солнечной энергии"
-			x: 3.0d
-			y: 3.0d
+			x: -17.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["3B0F2ECE1A75F6F6"]
@@ -1494,8 +1494,8 @@
 				type: "item"
 			}]
 			title: "Производитель соларитовых пластин"
-			x: 2.0d
-			y: 3.0d
+			x: -18.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["6105DBB6478C49AC"]
@@ -1538,8 +1538,8 @@
 				type: "item"
 			}]
 			title: "Преобразователь соларита"
-			x: 1.0d
-			y: 3.0d
+			x: -19.0d
+			y: 0.5d
 		}
 		{
 			description: [
@@ -1579,8 +1579,8 @@
 				type: "item"
 			}]
 			title: "Calcium Carbide"
-			x: 0.0d
-			y: 3.0d
+			x: -20.0d
+			y: 0.5d
 		}
 		{
 			description: [
@@ -1622,8 +1622,8 @@
 				type: "item"
 			}]
 			title: "Acetylene"
-			x: 0.0d
-			y: 4.0d
+			x: -20.0d
+			y: 1.5d
 		}
 		{
 			description: [
@@ -1663,8 +1663,8 @@
 				type: "item"
 			}]
 			title: "Полимеризатор"
-			x: 1.0d
-			y: 4.0d
+			x: -19.0d
+			y: 1.5d
 		}
 		{
 			description: [
@@ -1705,8 +1705,8 @@
 				type: "item"
 			}]
 			title: "Твердотельно-жидкостный интегратор"
-			x: 2.0d
-			y: 4.0d
+			x: -18.0d
+			y: 1.5d
 		}
 		{
 			description: [
@@ -1748,8 +1748,8 @@
 				type: "item"
 			}]
 			title: "Капсула полиэтилена"
-			x: 3.0d
-			y: 4.0d
+			x: -17.0d
+			y: 1.5d
 		}
 		{
 			description: [
@@ -1790,8 +1790,8 @@
 				type: "item"
 			}]
 			title: "Разделитель жидкостей"
-			x: 4.0d
-			y: 4.0d
+			x: -16.0d
+			y: 1.5d
 		}
 		{
 			description: [
@@ -1833,8 +1833,8 @@
 				type: "item"
 			}]
 			title: "Propane"
-			x: 5.0d
-			y: 4.0d
+			x: -15.0d
+			y: 1.5d
 		}
 		{
 			description: [
@@ -1876,8 +1876,8 @@
 				type: "item"
 			}]
 			title: "Капсула брома"
-			x: 6.0d
-			y: 4.0d
+			x: -14.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["538788328ABBC550"]
@@ -1920,8 +1920,8 @@
 				type: "item"
 			}]
 			title: "Propylene"
-			x: 7.0d
-			y: 4.0d
+			x: -13.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["2D6C8C48444CD65F"]
@@ -1962,8 +1962,8 @@
 				type: "item"
 			}]
 			title: "Plast"
-			x: 8.0d
-			y: 4.0d
+			x: -12.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["2E45AB1DF8FBFDF9"]
@@ -2004,8 +2004,8 @@
 				type: "item"
 			}]
 			title: "Пластина из пластика"
-			x: 9.0d
-			y: 4.0d
+			x: -11.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["5175E3A701EA616F"]
@@ -2047,8 +2047,8 @@
 				type: "item"
 			}]
 			title: "Минеральный сепаратор"
-			x: 10.0d
-			y: 4.0d
+			x: -10.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["3735C4550BB9B8D5"]
@@ -2090,8 +2090,8 @@
 				type: "item"
 			}]
 			title: "Нефтеперерабатывающий завод"
-			x: 11.0d
-			y: 4.0d
+			x: -9.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["278F088E5D98751E"]
@@ -2131,8 +2131,8 @@
 				type: "item"
 			}]
 			title: "Дизельный генератор"
-			x: 12.0d
-			y: 4.0d
+			x: -8.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["278F088E5D98751E"]
@@ -2172,8 +2172,8 @@
 				type: "item"
 			}]
 			title: "Бензиновый генератор"
-			x: 12.0d
-			y: 5.0d
+			x: -8.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["278F088E5D98751E"]
@@ -2218,8 +2218,8 @@
 				type: "item"
 			}]
 			title: "Жидкостный холодильник"
-			x: 11.0d
-			y: 6.0d
+			x: -9.0d
+			y: 3.5d
 		}
 		{
 			description: [
@@ -2258,8 +2258,8 @@
 				type: "item"
 			}]
 			title: "Ветрогенератор"
-			x: 12.0d
-			y: 6.0d
+			x: -8.0d
+			y: 3.5d
 		}
 		{
 			description: [
@@ -2298,8 +2298,8 @@
 				type: "item"
 			}]
 			title: "Гидрогенератор"
-			x: 11.0d
-			y: 7.0d
+			x: -9.0d
+			y: 4.5d
 		}
 		{
 			description: [
@@ -2339,8 +2339,8 @@
 				type: "item"
 			}]
 			title: "§eУлучшенный завод сплавов"
-			x: 10.0d
-			y: 6.0d
+			x: -10.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["5F8C3F6E8340DA0E"]
@@ -2382,8 +2382,8 @@
 				type: "item"
 			}]
 			title: "Тепловая центрифуга"
-			x: 9.0d
-			y: 6.0d
+			x: -11.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["5E905126EB2E29EE"]
@@ -2425,8 +2425,8 @@
 				type: "item"
 			}]
 			title: "Обогатитель"
-			x: 8.0d
-			y: 6.0d
+			x: -12.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["054BAD57C456097C"]
@@ -2467,8 +2467,8 @@
 				type: "item"
 			}]
 			title: "Переработчик радиоактивных отходов"
-			x: 7.0d
-			y: 6.0d
+			x: -13.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["2C9BF983451D130D"]
@@ -2509,8 +2509,20 @@
 				type: "item"
 			}]
 			title: "Radioactive Waste"
-			x: 6.0d
-			y: 6.0d
+			x: -14.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["7804F931D37DFC4B"]
+			entity_vis_size: 1.0f
+			id: "283829997D53256F"
+			tasks: [{
+				id: "0522F59696C3B1B6"
+				item: "industrialupgrade:blockresource/advanced_machine"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 3.0d
 		}
 	]
 	title: "Базовая электрическая эра"

@@ -3,6 +3,7 @@
 	default_quest_shape: ""
 	filename: "1"
 	group: "31719A5E7B6EF622"
+	icon: "industrialupgrade:smeltery/smeltery_controller"
 	id: "646C2E76666824F0"
 	images: [
 		{
@@ -346,7 +347,7 @@
 			image: "alexsmobs:item/blobfish_bucket"
 			rotation: 0.0d
 			width: 1.0d
-			x: -0.5d
+			x: 1.5d
 			y: 5.5d
 		}
 		{
@@ -354,23 +355,15 @@
 			image: "minecraft:textures/mob_effect/speed.png"
 			rotation: 0.0d
 			width: 1.0d
-			x: 2.0d
-			y: 5.0d
-		}
-		{
-			height: 1.0d
-			image: "minecraft:textures/mob_effect/speed.png"
-			rotation: 0.0d
-			width: 1.0d
-			x: 2.0d
-			y: 7.0d
+			x: -2.5d
+			y: 5.5d
 		}
 		{
 			height: 1.5d
 			image: "ae2:block/molecular_assembler_lights"
 			rotation: 0.0d
 			width: 1.5d
-			x: -3.0d
+			x: -2.0d
 			y: -6.0d
 		}
 		{
@@ -378,24 +371,8 @@
 			image: "ae2:block/molecular_assembler_lights"
 			rotation: 0.0d
 			width: 1.5d
-			x: -3.0d
-			y: -7.0d
-		}
-		{
-			height: 1.5d
-			image: "ae2:block/molecular_assembler_lights"
-			rotation: 0.0d
-			width: 1.5d
-			x: -3.0d
+			x: -2.0d
 			y: -8.0d
-		}
-		{
-			height: 1.5d
-			image: "ae2:block/molecular_assembler_lights"
-			rotation: 0.0d
-			width: 1.5d
-			x: -3.0d
-			y: -5.0d
 		}
 		{
 			height: 1.0d
@@ -406,11 +383,15 @@
 			y: -5.5d
 		}
 	]
-	order_index: 0
+	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
-			description: ["Твой первый шаг к развитию"]
+			dependencies: ["7D5783928E12226A"]
+			description: [
+				"Рецепт: 5 слитков титана вокруг обычной наковальни."
+				"Обычная наковальня делается из 3 железных блоков и 4 слитков железа."
+			]
 			entity_vis_size: 1.0f
 			id: "00AE2E0A6BA75908"
 			rewards: [{
@@ -486,6 +467,10 @@
 		}
 		{
 			dependencies: ["07F00A1B71A790F2"]
+			description: [
+				"Плавильня собирается из нескольких блоков. Сколько каких блоков нужно, написано в контроллере плавильни."
+				"Сначала поставь корпус, потом добавь контроллер, печи, литейный стол и баки."
+			]
 			entity_vis_size: 1.0f
 			id: "57A2237E905DBDB5"
 			rewards: [
@@ -542,8 +527,13 @@
 			y: -0.5d
 		}
 		{
-			description: ["Главный ингредиент в создании плавильни"]
+			dependencies: ["00AE2E0A6BA75908"]
+			description: [
+				"Главный ингредиент в создании плавильни"
+				"Нужно 128 штук. Из 2 глины, 2 самородков шпинели, 2 самородков иттрия, песка и гравия получается 4 штуки."
+			]
 			entity_vis_size: 1.0f
+			hide_dependency_lines: true
 			id: "07F00A1B71A790F2"
 			rewards: [
 				{
@@ -605,34 +595,14 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["6F6AC05D36092CB2"]
-			entity_vis_size: 1.0f
-			id: "7B5B49CC51F78251"
-			rewards: [
-				{
-					count: 3
-					id: "6631BCE98CF4B83A"
-					item: "minecraft:gold_block"
-					type: "item"
-				}
-				{
-					count: 27
-					id: "7DE53675A62CAB71"
-					item: "industrialupgrade:itemingots/silver_ingot"
-					type: "item"
-				}
+			dependencies: [
+				"6F6AC05D36092CB2"
+				"7A5E5638AFF5596D"
 			]
-			tasks: [{
-				count: 12L
-				id: "7B27F9E13942BF2D"
-				item: { Count: 12, id: "industrialupgrade:itemingots/electrum_ingot" }
-				type: "item"
-			}]
-			x: 8.0d
-			y: -2.0d
-		}
-		{
-			dependencies: ["6F6AC05D36092CB2"]
+			description: [
+				"В плавильне делают сплавы: бронзу, ферромарганец, электрум и другие. Рецепты смотри в JEI."
+				"После этого можно переходить к паровым механизмам."
+			]
 			entity_vis_size: 1.0f
 			id: "2669969AAE69C9EB"
 			rewards: [
@@ -658,6 +628,8 @@
 			y: -1.0d
 		}
 		{
+			dependencies: ["072814E53CDE7417"]
+			description: ["Возьми в руку ячейку с сырым латексом и нажми ПКМ по сушилке. Через пару секунд нажми ещё раз и забери латекс."]
 			entity_vis_size: 1.0f
 			id: "60AF236CF2611884"
 			rewards: [{
@@ -671,26 +643,8 @@
 				item: "industrialupgrade:dryer/dryer"
 				type: "item"
 			}]
-			x: -0.5d
-			y: -5.0d
-		}
-		{
-			dependencies: ["60AF236CF2611884"]
-			entity_vis_size: 1.0f
-			id: "7E3FBED40A61205B"
-			rewards: [{
-				count: 32
-				id: "30264AAB825ABAAE"
-				item: "industrialupgrade:crafting_elements/crafting_271_element"
-				type: "item"
-			}]
-			tasks: [{
-				id: "2F13521F3FF916A0"
-				item: "industrialupgrade:block_squeezer/squeezer"
-				type: "item"
-			}]
-			x: 1.0d
-			y: -4.0d
+			x: 2.0d
+			y: -6.0d
 		}
 		{
 			description: ["Можно использовать для хранения жидкостей"]
@@ -707,11 +661,12 @@
 				item: "industrialupgrade:barrel/barrel"
 				type: "item"
 			}]
-			x: -0.5d
-			y: -7.0d
+			x: 2.0d
+			y: -8.0d
 		}
 		{
-			dependencies: ["072814E53CDE7417"]
+			dependencies: ["40D5CFD76CEF6B25"]
+			description: ["Жидкий латекс собирают латексной пипеткой: ПКМ по жилке на дереве. Хранить его удобно в бочке."]
 			entity_vis_size: 1.0f
 			id: "60F1216D90D349FF"
 			rewards: [{
@@ -725,159 +680,13 @@
 				item: "industrialupgrade:bucket/rawlatex"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -8.0d
-		}
-		{
-			entity_vis_size: 1.0f
-			id: "082AEE6D24AC76E7"
-			rewards: [{
-				count: 32
-				id: "084EF795F8DD1E44"
-				item: "industrialupgrade:itemcell/itemcell"
-				type: "item"
-			}]
-			tasks: [{
-				id: "481A61614A712A31"
-				item: "industrialupgrade:primal_fluid_heater/primal_fluid_heater"
-				type: "item"
-			}]
-			x: 2.0d
+			x: 6.5d
 			y: -6.0d
 		}
 		{
 			entity_vis_size: 1.0f
-			id: "738EF8D18C9ACB8B"
-			rewards: [
-				{
-					count: 3
-					id: "2068457499CE1DF5"
-					item: {
-						Count: 1
-						id: "aquatech_ui:rate_x4"
-						tag: {
-							Damage: 0
-						}
-					}
-					type: "item"
-				}
-				{
-					id: "6E612CE661A01FB5"
-					item: {
-						Count: 1
-						id: "starcatcher:good_old_rod"
-						tag: {
-							Damage: 0
-						}
-					}
-					type: "item"
-				}
-				{
-					id: "332085FED979368A"
-					item: {
-						Count: 1
-						id: "starcatcher:bamboo_rod"
-						tag: {
-							Damage: 0
-						}
-					}
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "7A7B2F337D5223A8"
-				item: "aquatech_ui:auto_fisher"
-				type: "item"
-			}]
-			x: -0.5d
-			y: 6.0d
-		}
-		{
-			dependencies: ["738EF8D18C9ACB8B"]
-			entity_vis_size: 1.0f
-			id: "0B3C878E8A026BE0"
-			rewards: [
-				{
-					id: "11125C0338C80DA2"
-					item: "industrialupgrade:solar_energy"
-					type: "item"
-				}
-				{
-					count: 4
-					id: "5CC81F6595E817E2"
-					item: "industrialupgrade:crafting_elements/crafting_272_element"
-					type: "item"
-				}
-				{
-					id: "127AD6AE58C37087"
-					item: {
-						Count: 16b
-						id: "industrialupgrade:cable/copper_cable"
-					}
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "1BBB61E4437EC07F"
-				item: "aquatech_ui:speed_upgrade"
-				type: "item"
-			}]
-			x: 1.0d
-			y: 5.0d
-		}
-		{
-			dependencies: ["738EF8D18C9ACB8B"]
-			entity_vis_size: 1.0f
-			id: "3D021B232766966A"
-			rewards: [
-				{
-					id: "3E89A75D8D020B89"
-					item: "industrialupgrade:solar_energy"
-					type: "item"
-				}
-				{
-					count: 4
-					id: "06E90D3351AE807A"
-					item: "industrialupgrade:crafting_elements/crafting_272_element"
-					type: "item"
-				}
-				{
-					id: "238A3BDE96C75717"
-					item: {
-						Count: 16b
-						id: "industrialupgrade:cable/copper_cable"
-					}
-					type: "item"
-				}
-			]
-			tasks: [{
-				consume_items: false
-				id: "59CF997C2C6A458A"
-				item: "aquatech_ui:speed_x4_upgrade"
-				type: "item"
-			}]
-			x: 1.0d
-			y: 7.0d
-		}
-		{
-			entity_vis_size: 1.0f
-			id: "0447DBB400FD44EA"
-			rewards: [{
-				count: 16
-				id: "03E1DEAB1C08F2AC"
-				item: "industrialupgrade:itemplates/iron_plate"
-				type: "item"
-			}]
-			tasks: [{
-				id: "5CC0B0D66C8EC375"
-				item: "industrialupgrade:compressor/compressor"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -7.0d
-		}
-		{
-			entity_vis_size: 1.0f
+			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "7A5E5638AFF5596D"
 			rewards: [{
 				count: 32
@@ -890,11 +699,13 @@
 				item: "industrialupgrade:macerator/macerator"
 				type: "item"
 			}]
-			x: -3.0d
+			x: -2.0d
 			y: -8.0d
 		}
 		{
 			entity_vis_size: 1.0f
+			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "7D5783928E12226A"
 			rewards: [{
 				count: 16
@@ -907,33 +718,74 @@
 				item: "industrialupgrade:primal_wire_insulator/primal_wire_insulator"
 				type: "item"
 			}]
-			x: -3.0d
+			x: -2.0d
 			y: -6.0d
 		}
 		{
 			entity_vis_size: 1.0f
-			id: "1D931D645B78E360"
-			rewards: [
-				{
-					count: 16
-					id: "5C31F543073CEF6C"
-					item: "industrialupgrade:itemplates/titanium_plate"
-					type: "item"
-				}
-				{
-					count: 16
-					id: "16F2689F8BA190C7"
-					item: "industrialupgrade:alloyplate/ferromanganese"
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "23D8FA6D705BB68A"
-				item: "industrialupgrade:basemachine3/rolling_machine"
+			id: "6048C28F7E128CE6"
+			rewards: [{
+				count: 12
+				id: "4748232AACE9BFF8"
+				item: "starcatcher:peakdweller"
 				type: "item"
 			}]
-			x: -3.0d
-			y: -5.0d
+			subtitle: "рыба = энергия"
+			tasks: [{
+				id: "6A279BAB2443BAEA"
+				item: "aquatech_machines:fish_generator"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["6048C28F7E128CE6"]
+			entity_vis_size: 1.0f
+			id: "1B8C193A9BDE9847"
+			rewards: [{
+				id: "18B74BCA29C2126D"
+				item: {
+					Count: 1
+					id: "aquatech_ui:rate_x4"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			subtitle: "ваш первый рыболов"
+			tasks: [{
+				id: "0FD79B6807410542"
+				item: "aquatech_machines:fisher_mk1"
+				type: "item"
+			}]
+			x: -1.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["60AF236CF2611884"]
+			entity_vis_size: 1.0f
+			id: "40D5CFD76CEF6B25"
+			tasks: [{
+				id: "0C335EF6C3B33F27"
+				item: "industrialupgrade:block_squeezer/squeezer"
+				type: "item"
+			}]
+			x: 4.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["7F5120EC7AD69F11"]
+			entity_vis_size: 1.0f
+			id: "602C0C90354580EC"
+			tasks: [{
+				id: "4CF98FA3C4EA9236"
+				item: "industrialupgrade:alloygear/ferromanganese"
+				type: "item"
+			}]
+			x: 9.0d
+			y: 0.0d
 		}
 	]
 	title: "Древняя эра"

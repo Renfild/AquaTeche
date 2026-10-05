@@ -9,17 +9,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FishGeneratorLogicTest {
 
     @Test
-    void oneFishPaysForExactlyTwoCatchesOfTheMk1Fisher() {
+    void oneFishPaysForExactlyFourCatchesOfTheMk1Fisher() {
         int energyPerCatch = net.aquatech.machines.block.entity.FisherMk1BlockEntity.ENERGY_PER_TICK
                 * net.aquatech.machines.block.entity.FisherMk1BlockEntity.CYCLE_TICKS;
         assertEquals(8000, FishGeneratorLogic.FE_PER_FISH);
-        assertEquals(2 * energyPerCatch, FishGeneratorLogic.FE_PER_FISH);
+        assertEquals(4 * energyPerCatch, FishGeneratorLogic.FE_PER_FISH);
     }
 
     @Test
-    void coalKeepsOneMk1FisherRunning() {
+    void evenWoodKeepsOneMk1FisherRunning() {
+        // Рыболов не должен голодать от самого слабого топлива: иначе прогресс цикла обнуляется и улова нет.
         assertEquals(net.aquatech.machines.block.entity.FisherMk1BlockEntity.ENERGY_PER_TICK,
-                FishGeneratorLogic.rateForBurnTicks(1600));
+                FishGeneratorLogic.rateForBurnTicks(300));
+        assertTrue(FishGeneratorLogic.rateForBurnTicks(1600)
+                >= net.aquatech.machines.block.entity.FisherMk1BlockEntity.ENERGY_PER_TICK);
     }
 
     @Test

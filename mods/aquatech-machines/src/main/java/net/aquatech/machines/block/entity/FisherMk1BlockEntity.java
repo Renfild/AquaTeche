@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Рыболов MK-1: удочка [0], батарея [1], выход [2].
- * Раз в 5 секунд (100 тиков по 40 FE) достаёт один ресурс из улова самой удочки: тот же пул и тот же тир, что при
+ * Раз в 5 секунд (100 тиков по 20 FE) достаёт один ресурс из улова самой удочки: тот же пул и тот же тир, что при
  * обычной ловле. Без ядра рыбы, множителя улова и апгрейдов, в этом он проще MK-2. Энергию берёт и от батареи, и от
  * Рыбного генератора рядом.
  */
@@ -23,7 +23,8 @@ public class FisherMk1BlockEntity extends BaseMachineBlockEntity {
     public static final int SLOT_OUTPUT = 2;
 
     public static final int CYCLE_TICKS = 100;
-    public static final int ENERGY_PER_TICK = 40;
+    /** 20 FE/t: ровно столько даёт самое слабое топливо (дерево), так что один генератор с досками тянет один MK-1. */
+    public static final int ENERGY_PER_TICK = 20;
     public static final int ENERGY_CAPACITY = 20000;
     public static final int MAX_RECEIVE = 200;
 

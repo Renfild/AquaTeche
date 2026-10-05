@@ -146,7 +146,7 @@ const ONBOARD_STEPS = {
     reward: () => ''
   },
   5: {
-    hint: () => '§b5/6 §fПродай улов: §eF4§f → «Рыбалка» → «Продать»',
+    hint: () => '§b5/6 §fПродай улов: подойди к §eторговцу рыбой§f на спавне и нажми по нему §eПКМ§f',
     base: (player) => onboardCoins(player),
     done: (player, base) => onboardCoins(player) > base,
     reward: (player) => {
