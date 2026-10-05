@@ -300,6 +300,38 @@ async function proxyLauncherDownload(request, env, rawFile, requestedTag) {
   }
 }
 
+// MCEF (Chromium для F4-меню) качает сборку с mcef-download.cinemamod.com, а он недоступен части игроков из РФ.
+// Зеркало: клиент берёт сборку у нас (config/mcef/mcef.properties: download-mirror), а мы отдаём её из релиза GitHub.
+const MCEF_BUILDS = {
+  a78e832f9f13c2c688caea3d04d8b84fcd238d94: { tag: "mcef-a78e832-1", files: ["windows_amd64.tar.gz", "windows_amd64.tar.gz.sha256"] },
+};
+
+async function proxyMcefBuild(request, commit, file) {
+  const build = MCEF_BUILDS[commit];
+  if (!build || !build.files.includes(file)) {
+    return new Response("Not found", { status: 404 });
+  }
+  const upstream = `https://github.com/Renfild/AquaTeche/releases/download/${build.tag}/${file}`;
+  const isHead = request.method === "HEAD";
+  try {
+    const gh = await fetch(upstream, {
+      method: isHead ? "HEAD" : "GET",
+      redirect: "follow",
+      headers: { "user-agent": "AquaTechPortal/1.0", accept: "*/*" },
+      cf: { cacheTtl: 86400, cacheEverything: true },
+    });
+    if (!gh.ok) return Response.redirect(upstream, 302);
+    const headers = new Headers();
+    headers.set("content-type", "application/octet-stream");
+    const len = gh.headers.get("content-length");
+    if (len) headers.set("content-length", len);
+    headers.set("cache-control", "public, max-age=86400, immutable");
+    return new Response(isHead ? null : gh.body, { status: gh.status, headers });
+  } catch {
+    return Response.redirect(upstream, 302);
+  }
+}
+
 export default {
   async scheduled(event, env, execCtx) {
     execCtx?.waitUntil?.(runStatusWatchdog(env));
@@ -308,6 +340,10 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
       return withSecurityHeaders(await handleApi(request, env, execCtx));
+    }
+    const mcef = url.pathname.match(/^\/mcef\/java-cef-builds\/([0-9a-f]{40})\/([A-Za-z0-9_.]+)$/);
+    if (mcef && (request.method === "GET" || request.method === "HEAD")) {
+      return withSecurityHeaders(await proxyMcefBuild(request, mcef[1], mcef[2]));
     }
     const dl = url.pathname.match(/^\/dl\/(?:([A-Za-z0-9._+-]+)\/)?([^/]+)$/);
     if (dl && (request.method === "GET" || request.method === "HEAD")) {
