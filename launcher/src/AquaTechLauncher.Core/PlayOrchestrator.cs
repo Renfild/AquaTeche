@@ -66,6 +66,8 @@ public sealed class PlayOrchestrator
 
         log("Синхронизируем сборку…", "info");
         await SyncPackAsync(cfg, verifyHash: true, skipIfReady: false, log, p => progress(30 + p * 0.55), ct);
+        progress(86);
+        await JcefInstaller.EnsureAsync(gameDir, log, progress, ct);
         progress(88);
 
         log("Собираем classpath / natives / assets…", "info");

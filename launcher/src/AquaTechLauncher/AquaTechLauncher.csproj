@@ -15,8 +15,8 @@
     <Authors>AquaTech</Authors>
     <OriginalFilename>AquaTechLauncher.exe</OriginalFilename>
     <Copyright>Copyright © 2026 AquaTech</Copyright>
-    <AssemblyVersion>2.9.97.0</AssemblyVersion>
-    <FileVersion>2.9.97.0</FileVersion>
+    <AssemblyVersion>2.9.98.0</AssemblyVersion>
+    <FileVersion>2.9.98.0</FileVersion>
     <InformationalVersion>2.9.97</InformationalVersion>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
