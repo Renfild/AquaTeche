@@ -10,117 +10,153 @@
         "name": "Алмазы",
         "type": "item",
         "item": "minecraft:diamond",
-        "min": 3,
-        "max": 6
+        "min": 7,
+        "max": 7
       },
       "loot": [
         {
           "name": "Алмазы",
           "type": "item",
           "item": "minecraft:diamond",
-          "min": 3,
-          "max": 6,
-          "weight": 10,
-          "chance": 2
+          "min": 8,
+          "max": 12,
+          "weight": 8,
+          "chance": 1.6
         },
         {
           "name": "Морская соль",
           "type": "item",
           "item": "aquatech_machines:sea_salt",
-          "min": 2,
-          "max": 4,
-          "weight": 25,
-          "chance": 5
+          "min": 8,
+          "max": 12,
+          "weight": 20,
+          "chance": 4.1
         },
         {
           "name": "Железные слитки",
           "type": "item",
           "item": "minecraft:iron_ingot",
           "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "max": 24,
+          "weight": 40,
+          "chance": 8.2
         },
         {
           "name": "Медные слитки",
           "type": "item",
           "item": "minecraft:copper_ingot",
-          "min": 24,
-          "max": 48,
-          "weight": 60,
-          "chance": 12
+          "min": 22,
+          "max": 36,
+          "weight": 48,
+          "chance": 9.8
         },
         {
           "name": "Оловянная руда",
           "type": "item",
           "item": "industrialupgrade:classicore/tin",
-          "min": 16,
-          "max": 32,
-          "weight": 60,
-          "chance": 12
+          "min": 14,
+          "max": 22,
+          "weight": 48,
+          "chance": 9.8
         },
         {
           "name": "Свинцовая руда",
           "type": "item",
           "item": "industrialupgrade:classicore/lead",
-          "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "min": 22,
+          "max": 36,
+          "weight": 40,
+          "chance": 8.2
         },
         {
           "name": "Плавильная смесь",
           "type": "item",
           "item": "industrialupgrade:crafting_elements/crafting_773_element",
-          "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "min": 36,
+          "max": 56,
+          "weight": 40,
+          "chance": 8.2
         },
         {
           "name": "Плавильные кирпичи",
           "type": "item",
           "item": "industrialupgrade:crafting_elements/crafting_772_element",
-          "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "min": 36,
+          "max": 56,
+          "weight": 40,
+          "chance": 8.2
         },
         {
           "name": "Кожа для мехов",
           "type": "item",
           "item": "minecraft:leather",
-          "min": 8,
-          "max": 16,
-          "weight": 40,
-          "chance": 8
+          "min": 44,
+          "max": 64,
+          "weight": 32,
+          "chance": 6.5
         },
         {
           "name": "Каменный уголь",
           "type": "item",
           "item": "minecraft:coal",
-          "min": 32,
-          "max": 64,
-          "weight": 50,
-          "chance": 10
+          "min": 36,
+          "max": 56,
+          "weight": 40,
+          "chance": 8.2
         },
         {
           "name": "Редстоун",
           "type": "item",
           "item": "minecraft:redstone",
-          "min": 24,
-          "max": 48,
-          "weight": 30,
-          "chance": 6
+          "min": 52,
+          "max": 64,
+          "weight": 24,
+          "chance": 4.9
+        },
+        {
+          "name": "Паровой котёл",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/steamboiler",
+          "min": 2,
+          "max": 2,
+          "weight": 25,
+          "chance": 5.1
+        },
+        {
+          "name": "Паровой генератор на торфе",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/steam_peat_generator",
+          "min": 2,
+          "max": 2,
+          "weight": 25,
+          "chance": 5.1
+        },
+        {
+          "name": "Примитивная сушилка латекса",
+          "type": "item",
+          "item": "industrialupgrade:dryer/dryer",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4.1
+        },
+        {
+          "name": "Примитивный прокатный механизм",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/rolling_machine",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4.1
         },
         {
           "name": "AquaCoins (Куш)",
           "type": "coins",
           "item": "",
-          "min": 3500,
-          "max": 6000,
-          "weight": 25,
-          "chance": 5
+          "min": 4900,
+          "max": 9200,
+          "weight": 20,
+          "chance": 4.1
         }
       ]
     },
@@ -128,7 +164,7 @@
       "slug": "smeltery",
       "title": "Кейс II: Инженер Плавильни",
       "rarity": "uncommon",
-      "cost": 10000,
+      "cost": 7000,
       "pityEvery": 12,
       "pity": {
         "name": "Контроллер плавильни",
@@ -144,107 +180,152 @@
           "item": "industrialupgrade:smeltery/smeltery_controller",
           "min": 1,
           "max": 1,
-          "weight": 10,
-          "chance": 2
+          "weight": 8,
+          "chance": 1.6
         },
         {
           "name": "Блоки корпуса плавильни",
           "type": "item",
           "item": "industrialupgrade:smeltery/smeltery_casing",
-          "min": 8,
-          "max": 16,
-          "weight": 30,
-          "chance": 6
+          "min": 7,
+          "max": 11,
+          "weight": 24,
+          "chance": 4.8
         },
         {
           "name": "Титановая руда",
           "type": "item",
           "item": "industrialupgrade:baseore/titanium",
-          "min": 12,
-          "max": 24,
-          "weight": 50,
-          "chance": 10
+          "min": 11,
+          "max": 18,
+          "weight": 40,
+          "chance": 8.1
         },
         {
           "name": "Бериллиевая руда",
           "type": "item",
           "item": "industrialupgrade:baseore1/beryllium",
-          "min": 12,
-          "max": 24,
-          "weight": 50,
-          "chance": 10
+          "min": 11,
+          "max": 18,
+          "weight": 40,
+          "chance": 8.1
         },
         {
           "name": "Стронциевая руда",
           "type": "item",
           "item": "industrialupgrade:baseore2/strontium",
-          "min": 12,
-          "max": 24,
-          "weight": 50,
-          "chance": 10
+          "min": 11,
+          "max": 18,
+          "weight": 40,
+          "chance": 8.1
         },
         {
           "name": "Иттриевая руда",
           "type": "item",
           "item": "industrialupgrade:baseore2/yttrium",
-          "min": 12,
-          "max": 24,
-          "weight": 50,
-          "chance": 10
+          "min": 11,
+          "max": 18,
+          "weight": 40,
+          "chance": 8.1
         },
         {
           "name": "Таллиевая руда",
           "type": "item",
           "item": "industrialupgrade:baseore2/thallium",
-          "min": 12,
-          "max": 24,
-          "weight": 50,
-          "chance": 10
+          "min": 11,
+          "max": 18,
+          "weight": 40,
+          "chance": 8.1
         },
         {
           "name": "Бронзовые слитки",
           "type": "item",
           "item": "industrialupgrade:itemingots/bronze_ingot",
-          "min": 24,
-          "max": 48,
-          "weight": 60,
-          "chance": 12
+          "min": 18,
+          "max": 28,
+          "weight": 48,
+          "chance": 9.7
         },
         {
           "name": "Стержни Блейза",
           "type": "item",
           "item": "minecraft:blaze_rod",
-          "min": 8,
-          "max": 16,
-          "weight": 40,
-          "chance": 8
+          "min": 32,
+          "max": 48,
+          "weight": 32,
+          "chance": 6.5
         },
         {
           "name": "Ведро лавы для плавки",
           "type": "item",
           "item": "minecraft:lava_bucket",
-          "min": 2,
+          "min": 3,
           "max": 4,
-          "weight": 35,
-          "chance": 7
+          "weight": 28,
+          "chance": 5.7
         },
         {
           "name": "Золотые слитки",
           "type": "item",
           "item": "minecraft:gold_ingot",
-          "min": 16,
-          "max": 32,
-          "weight": 40,
-          "chance": 8
+          "min": 32,
+          "max": 48,
+          "weight": 32,
+          "chance": 6.5
+        },
+        {
+          "name": "Паровой преобразователь пара",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/steam_converter",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4
+        },
+        {
+          "name": "Паровое хранилище",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/steam_storage",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4
+        },
+        {
+          "name": "Паровая помпа",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/steam_pump",
+          "min": 2,
+          "max": 2,
+          "weight": 15,
+          "chance": 3
+        },
+        {
+          "name": "Паровой сепаратор",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/steam_handler_ore",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4
+        },
+        {
+          "name": "Мини-плавильня",
+          "type": "item",
+          "item": "industrialupgrade:mini_smeltery/mini_smeltery",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4
         },
         {
           "name": "AquaCoins (Джекпот)",
           "type": "coins",
           "item": "",
-          "min": 15000,
-          "max": 25000,
-          "weight": 35,
-          "chance": 7
+          "min": 14000,
+          "max": 26000,
+          "weight": 28,
+          "chance": 5.7
         }
       ]
     },
@@ -252,114 +333,168 @@
       "slug": "steam",
       "title": "Кейс III: Паровая Энергия",
       "rarity": "rare",
-      "cost": 45000,
+      "cost": 20000,
       "pityEvery": 12,
       "pity": {
         "name": "Базовый корпус механизма",
         "type": "item",
         "item": "industrialupgrade:blockresource/machine",
-        "min": 2,
-        "max": 4
+        "min": 8,
+        "max": 8
       },
       "loot": [
         {
           "name": "Базовый корпус механизма",
           "type": "item",
           "item": "industrialupgrade:blockresource/machine",
-          "min": 2,
-          "max": 4,
-          "weight": 15,
-          "chance": 3
+          "min": 6,
+          "max": 10,
+          "weight": 12,
+          "chance": 2.4
         },
         {
           "name": "Электронные схемы IU",
           "type": "item",
           "item": "industrialupgrade:crafting_elements/crafting_273_element",
-          "min": 6,
-          "max": 12,
-          "weight": 40,
-          "chance": 8
+          "min": 1,
+          "max": 1,
+          "weight": 32,
+          "chance": 6.3
         },
         {
           "name": "Стальные слитки",
           "type": "item",
           "item": "industrialupgrade:itemingots/steel_ingot",
-          "min": 24,
-          "max": 48,
-          "weight": 60,
-          "chance": 12
+          "min": 22,
+          "max": 36,
+          "weight": 48,
+          "chance": 9.5
         },
         {
           "name": "Резина IU",
           "type": "item",
           "item": "industrialupgrade:crafting_elements/crafting_271_element",
-          "min": 32,
-          "max": 64,
-          "weight": 60,
-          "chance": 12
+          "min": 28,
+          "max": 44,
+          "weight": 48,
+          "chance": 9.5
         },
         {
           "name": "Серебряная руда",
           "type": "item",
           "item": "industrialupgrade:baseore/silver",
-          "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "min": 40,
+          "max": 60,
+          "weight": 40,
+          "chance": 7.9
         },
         {
           "name": "Никелевая руда",
           "type": "item",
           "item": "industrialupgrade:baseore/nickel",
-          "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "min": 40,
+          "max": 60,
+          "weight": 40,
+          "chance": 7.9
         },
         {
           "name": "Ускорители (Оверклокеры)",
           "type": "item",
           "item": "industrialupgrade:upgrades/overclocker",
-          "min": 4,
-          "max": 8,
-          "weight": 35,
-          "chance": 7
+          "min": 10,
+          "max": 16,
+          "weight": 28,
+          "chance": 5.5
         },
         {
           "name": "Аккумуляторы RE-Battery",
           "type": "item",
           "item": "industrialupgrade:battery/re_battery",
-          "min": 4,
-          "max": 8,
-          "weight": 40,
-          "chance": 8
+          "min": 16,
+          "max": 24,
+          "weight": 32,
+          "chance": 6.3
         },
         {
           "name": "Изолированные медные провода",
           "type": "item",
           "item": "industrialupgrade:cable/copper_cable",
-          "min": 32,
+          "min": 44,
           "max": 64,
-          "weight": 50,
-          "chance": 10
+          "weight": 40,
+          "chance": 7.9
         },
         {
           "name": "Улучшение скорости ×1",
           "type": "item",
           "item": "aquatech_machines:speed_upgrade",
-          "min": 1,
+          "min": 3,
+          "max": 5,
+          "weight": 32,
+          "chance": 6.3
+        },
+        {
+          "name": "Паровой преобразователь тока",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/steam_ampere_generator",
+          "min": 2,
           "max": 2,
-          "weight": 40,
-          "chance": 8
+          "weight": 15,
+          "chance": 3
+        },
+        {
+          "name": "Генератор",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/generator_iu",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4
+        },
+        {
+          "name": "Дробитель",
+          "type": "item",
+          "item": "industrialupgrade:simplemachine/macerator_iu",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4
+        },
+        {
+          "name": "Электрическая печь",
+          "type": "item",
+          "item": "industrialupgrade:simplemachine/furnace_iu",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4
+        },
+        {
+          "name": "Энергохранилище",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/batbox_iu",
+          "min": 2,
+          "max": 2,
+          "weight": 15,
+          "chance": 3
+        },
+        {
+          "name": "Улучшенная солнечная панель",
+          "type": "item",
+          "item": "industrialupgrade:machines/advanced_solar_paneliu",
+          "min": 2,
+          "max": 2,
+          "weight": 15,
+          "chance": 3
         },
         {
           "name": "AquaCoins (Куш)",
           "type": "coins",
           "item": "",
-          "min": 60000,
-          "max": 100000,
-          "weight": 35,
-          "chance": 7
+          "min": 34000,
+          "max": 63000,
+          "weight": 28,
+          "chance": 5.5
         },
         {
           "name": "Гемы",
@@ -367,8 +502,8 @@
           "item": "",
           "min": 5,
           "max": 10,
-          "weight": 25,
-          "chance": 5
+          "weight": 20,
+          "chance": 4
         }
       ]
     },
@@ -376,69 +511,69 @@
       "slug": "flora",
       "title": "Кейс IV: Ботаническая Флора",
       "rarity": "epic",
-      "cost": 150000,
+      "cost": 55000,
       "pityEvery": 20,
       "pity": {
         "name": "Улучшенные микросхемы",
         "type": "item",
         "item": "industrialupgrade:crafting_elements/crafting_274_element",
-        "min": 40,
-        "max": 44
+        "min": 16,
+        "max": 16
       },
       "loot": [
         {
           "name": "Слитки манастали",
           "type": "item",
           "item": "botania:manasteel_ingot",
-          "min": 56,
-          "max": 64,
-          "weight": 61,
-          "chance": 12.2
+          "min": 32,
+          "max": 48,
+          "weight": 48.8,
+          "chance": 8.9
         },
         {
           "name": "Жемчуг маны",
           "type": "item",
           "item": "botania:mana_pearl",
-          "min": 24,
-          "max": 36,
-          "weight": 51,
-          "chance": 10.2
+          "min": 12,
+          "max": 20,
+          "weight": 40.8,
+          "chance": 7.5
         },
         {
           "name": "Алмазы маны",
           "type": "item",
           "item": "botania:mana_diamond",
-          "min": 24,
-          "max": 36,
-          "weight": 51,
-          "chance": 10.2
+          "min": 12,
+          "max": 20,
+          "weight": 40.8,
+          "chance": 7.5
         },
         {
           "name": "Руны Воды",
           "type": "item",
           "item": "botania:rune_water",
           "min": 12,
-          "max": 16,
-          "weight": 41,
-          "chance": 8.2
+          "max": 20,
+          "weight": 32.8,
+          "chance": 6
         },
         {
           "name": "Руны Огня",
           "type": "item",
           "item": "botania:rune_fire",
           "min": 12,
-          "max": 16,
-          "weight": 41,
-          "chance": 8.2
+          "max": 20,
+          "weight": 32.8,
+          "chance": 6
         },
         {
           "name": "Руны Маны",
           "type": "item",
           "item": "botania:rune_mana",
           "min": 12,
-          "max": 16,
-          "weight": 41,
-          "chance": 8.2
+          "max": 20,
+          "weight": 32.8,
+          "chance": 6
         },
         {
           "name": "Улучшенный корпус механизма",
@@ -446,35 +581,116 @@
           "item": "industrialupgrade:blockresource/advanced_machine",
           "min": 2,
           "max": 4,
-          "weight": 31,
-          "chance": 6.2
+          "weight": 24.8,
+          "chance": 4.5
         },
         {
           "name": "Улучшенные микросхемы",
           "type": "item",
           "item": "industrialupgrade:crafting_elements/crafting_274_element",
-          "min": 4,
-          "max": 8,
-          "weight": 41,
-          "chance": 8.2
+          "min": 6,
+          "max": 9,
+          "weight": 32.8,
+          "chance": 6
         },
         {
           "name": "Энергетические кристаллы",
           "type": "item",
           "item": "industrialupgrade:battery/energy_crystal",
+          "min": 7,
+          "max": 11,
+          "weight": 32.8,
+          "chance": 6
+        },
+        {
+          "name": "Сжиматель",
+          "type": "item",
+          "item": "industrialupgrade:simplemachine/compressor_iu",
           "min": 2,
+          "max": 2,
+          "weight": 20.04,
+          "chance": 3.7
+        },
+        {
+          "name": "Экстрактор",
+          "type": "item",
+          "item": "industrialupgrade:simplemachine/extractor_iu",
+          "min": 2,
+          "max": 2,
+          "weight": 20.04,
+          "chance": 3.7
+        },
+        {
+          "name": "Электрический сборщик электроники",
+          "type": "item",
+          "item": "industrialupgrade:basemachine3/electronic_assembler",
+          "min": 2,
+          "max": 2,
+          "weight": 15.03,
+          "chance": 2.8
+        },
+        {
+          "name": "Рудопромывочный механизм",
+          "type": "item",
+          "item": "industrialupgrade:moremachine3/orewashing",
+          "min": 2,
+          "max": 2,
+          "weight": 15.03,
+          "chance": 2.8
+        },
+        {
+          "name": "Завод сплавов",
+          "type": "item",
+          "item": "industrialupgrade:basemachine/alloy_smelter",
+          "min": 2,
+          "max": 2,
+          "weight": 15.03,
+          "chance": 2.8
+        },
+        {
+          "name": "Гибридная солнечная панель",
+          "type": "item",
+          "item": "industrialupgrade:machines/hybrid_solar_paneliu",
+          "min": 2,
+          "max": 2,
+          "weight": 15.03,
+          "chance": 2.8
+        },
+        {
+          "name": "Распространитель маны",
+          "type": "item",
+          "item": "botania:mana_spreader",
+          "min": 3,
           "max": 4,
-          "weight": 41,
-          "chance": 8.2
+          "weight": 20.04,
+          "chance": 3.7
+        },
+        {
+          "name": "Бассейн маны",
+          "type": "item",
+          "item": "botania:mana_pool",
+          "min": 2,
+          "max": 2,
+          "weight": 15.03,
+          "chance": 2.8
+        },
+        {
+          "name": "Теллурическая агломерационная пластина",
+          "type": "item",
+          "item": "botania:terra_plate",
+          "min": 1,
+          "max": 1,
+          "weight": 10.02,
+          "chance": 1.8
         },
         {
           "name": "AquaCoins (Джекпот)",
           "type": "coins",
           "item": "",
-          "min": 200000,
-          "max": 350000,
-          "weight": 51,
-          "chance": 10.2
+          "min": 74000,
+          "max": 140000,
+          "weight": 40.8,
+          "chance": 7.5
         },
         {
           "name": "Гемы",
@@ -482,8 +698,8 @@
           "item": "",
           "min": 10,
           "max": 20,
-          "weight": 51,
-          "chance": 10.2
+          "weight": 40.8,
+          "chance": 7.5
         }
       ]
     },
@@ -491,14 +707,14 @@
       "slug": "applied",
       "title": "Кейс V: Цифровая МЭ-Сеть",
       "rarity": "epic",
-      "cost": 450000,
+      "cost": 150000,
       "pityEvery": 20,
       "pity": {
         "name": "МЭ ячейка хранения 256k",
         "type": "item",
         "item": "ae2:item_storage_cell_256k",
-        "min": 2,
-        "max": 2
+        "min": 1,
+        "max": 1
       },
       "loot": [
         {
@@ -506,18 +722,18 @@
           "type": "item",
           "item": "ae2:item_storage_cell_256k",
           "min": 1,
-          "max": 2,
-          "weight": 10,
-          "chance": 2
+          "max": 1,
+          "weight": 8,
+          "chance": 1.4
         },
         {
           "name": "Слитки террастали",
           "type": "item",
           "item": "botania:terrasteel_ingot",
-          "min": 24,
+          "min": 20,
           "max": 32,
-          "weight": 30,
-          "chance": 6
+          "weight": 24,
+          "chance": 4.3
         },
         {
           "name": "МЭ накопитель AE2",
@@ -525,62 +741,62 @@
           "item": "ae2:drive",
           "min": 16,
           "max": 24,
-          "weight": 25,
-          "chance": 5
+          "weight": 20,
+          "chance": 3.6
         },
         {
           "name": "МЭ ячейка хранения 64k",
           "type": "item",
           "item": "ae2:item_storage_cell_64k",
           "min": 1,
-          "max": 2,
-          "weight": 40,
-          "chance": 8
+          "max": 1,
+          "weight": 32,
+          "chance": 5.7
         },
         {
           "name": "МЭ ячейка хранения 16k",
           "type": "item",
           "item": "ae2:item_storage_cell_16k",
-          "min": 2,
-          "max": 4,
-          "weight": 50,
-          "chance": 10
+          "min": 1,
+          "max": 1,
+          "weight": 40,
+          "chance": 7.1
         },
         {
           "name": "Инженерные процессоры",
           "type": "item",
           "item": "ae2:engineering_processor",
-          "min": 28,
-          "max": 40,
-          "weight": 50,
-          "chance": 10
+          "min": 12,
+          "max": 20,
+          "weight": 40,
+          "chance": 7.1
         },
         {
           "name": "Логические процессоры",
           "type": "item",
           "item": "ae2:logic_processor",
-          "min": 28,
-          "max": 40,
-          "weight": 50,
-          "chance": 10
+          "min": 12,
+          "max": 20,
+          "weight": 40,
+          "chance": 7.1
         },
         {
           "name": "Вычислительные процессоры",
           "type": "item",
           "item": "ae2:calculation_processor",
-          "min": 28,
-          "max": 40,
-          "weight": 50,
-          "chance": 10
+          "min": 12,
+          "max": 20,
+          "weight": 40,
+          "chance": 7.1
         },
         {
           "name": "МЭ ячейка хранения 4k",
           "type": "item",
           "item": "ae2:item_storage_cell_4k",
-          "min": 6,
-          "max": 10,
-          "weight": 50,
-          "chance": 10
+          "min": 3,
+          "max": 5,
+          "weight": 40,
+          "chance": 7.1
         },
         {
           "name": "Слитки элементия",
@@ -588,17 +804,107 @@
           "item": "botania:elementium_ingot",
           "min": 32,
           "max": 48,
-          "weight": 45,
-          "chance": 9
+          "weight": 36,
+          "chance": 6.4
+        },
+        {
+          "name": "Автономная ферма",
+          "type": "item",
+          "item": "industrialupgrade:moremachine3/farmer",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 3.6
+        },
+        {
+          "name": "МЭСН",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/cesu_iu",
+          "min": 2,
+          "max": 2,
+          "weight": 15,
+          "chance": 2.7
+        },
+        {
+          "name": "МФЭ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/mfe_iu",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 3.6
+        },
+        {
+          "name": "Совершенная гибридная солнечная панель",
+          "type": "item",
+          "item": "industrialupgrade:machines/ultimate_solar_paneliu",
+          "min": 2,
+          "max": 2,
+          "weight": 15,
+          "chance": 2.7
+        },
+        {
+          "name": "Квантовая солнечная панель",
+          "type": "item",
+          "item": "industrialupgrade:machines/quantum_solar_paneliu",
+          "min": 2,
+          "max": 2,
+          "weight": 15,
+          "chance": 2.7
+        },
+        {
+          "name": "МФСУ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/mfsu_iu",
+          "min": 2,
+          "max": 2,
+          "weight": 15,
+          "chance": 2.7
+        },
+        {
+          "name": "Молекулярный сборщик",
+          "type": "item",
+          "item": "ae2:molecular_assembler",
+          "min": 5,
+          "max": 6,
+          "weight": 20,
+          "chance": 3.6
+        },
+        {
+          "name": "МЭ-регулятор",
+          "type": "item",
+          "item": "ae2:controller",
+          "min": 2,
+          "max": 2,
+          "weight": 15,
+          "chance": 2.7
+        },
+        {
+          "name": "Вырезатель",
+          "type": "item",
+          "item": "ae2:inscriber",
+          "min": 3,
+          "max": 4,
+          "weight": 15,
+          "chance": 2.7
+        },
+        {
+          "name": "Химический завод",
+          "type": "item",
+          "item": "industrialupgrade:basemachine2/plastic_creator",
+          "min": 1,
+          "max": 1,
+          "weight": 10,
+          "chance": 1.8
         },
         {
           "name": "AquaCoins (Куш)",
           "type": "coins",
           "item": "",
-          "min": 600000,
-          "max": 1000000,
-          "weight": 50,
-          "chance": 10
+          "min": 290000,
+          "max": 530000,
+          "weight": 40,
+          "chance": 7.1
         },
         {
           "name": "Гемы",
@@ -606,8 +912,8 @@
           "item": "",
           "min": 20,
           "max": 35,
-          "weight": 50,
-          "chance": 10
+          "weight": 40,
+          "chance": 7.1
         }
       ]
     },
@@ -615,10 +921,10 @@
       "slug": "abyss",
       "title": "Кейс VI: Глубины и Радиация",
       "rarity": "legendary",
-      "cost": 1200000,
+      "cost": 400000,
       "pityEvery": 200,
       "pity": {
-        "name": "Дифракционная солнечная панель [Тир 6]",
+        "name": "Спектральная солнечная панель",
         "type": "item",
         "item": "industrialupgrade:machines/spectral_solar_panel",
         "min": 1,
@@ -629,100 +935,136 @@
           "name": "Эссенция Гайи",
           "type": "item",
           "item": "botania:life_essence",
-          "min": 8,
-          "max": 16,
-          "weight": 20,
-          "chance": 4
+          "min": 52,
+          "max": 64,
+          "weight": 16,
+          "chance": 3.4
         },
         {
           "name": "Обогащённый Уран (AC)",
           "type": "item",
           "item": "alexscaves:uranium_rod",
-          "min": 16,
-          "max": 32,
-          "weight": 40,
-          "chance": 8
+          "min": 44,
+          "max": 64,
+          "weight": 32,
+          "chance": 6.9
         },
         {
           "name": "Вольфрамовая руда IU",
           "type": "item",
           "item": "industrialupgrade:baseore/tungsten",
-          "min": 24,
-          "max": 48,
-          "weight": 50,
-          "chance": 10
+          "min": 52,
+          "max": 64,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Хромовая руда IU",
           "type": "item",
           "item": "industrialupgrade:baseore/chromium",
-          "min": 24,
-          "max": 48,
-          "weight": 50,
-          "chance": 10
+          "min": 52,
+          "max": 64,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Жемчужины Бездны",
           "type": "item",
           "item": "alexscaves:pearl",
-          "min": 8,
-          "max": 16,
-          "weight": 50,
-          "chance": 10
+          "min": 24,
+          "max": 40,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Пыль сияющего мотылька",
           "type": "item",
           "item": "alexscaves:moth_dust",
-          "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "min": 52,
+          "max": 64,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Ткань тьмы Глубин",
           "type": "item",
           "item": "alexscaves:dark_tatters",
-          "min": 12,
-          "max": 24,
-          "weight": 50,
-          "chance": 10
+          "min": 44,
+          "max": 64,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Незеритовые слитки",
           "type": "item",
           "item": "minecraft:netherite_ingot",
-          "min": 8,
-          "max": 16,
-          "weight": 40,
-          "chance": 8
+          "min": 12,
+          "max": 20,
+          "weight": 32,
+          "chance": 6.9
         },
         {
           "name": "Улучшение скорости ×4",
           "type": "item",
           "item": "aquatech_machines:speed_upgrade_4",
-          "min": 1,
-          "max": 2,
-          "weight": 40,
-          "chance": 8
+          "min": 11,
+          "max": 18,
+          "weight": 32,
+          "chance": 6.9
         },
         {
           "name": "Сплав Инконель 718",
           "type": "item",
           "item": "industrialupgrade:alloyingot/inconel",
-          "min": 16,
-          "max": 32,
-          "weight": 40,
-          "chance": 8
+          "min": 32,
+          "max": 48,
+          "weight": 32,
+          "chance": 6.9
+        },
+        {
+          "name": "Протонная солнечная панель",
+          "type": "item",
+          "item": "industrialupgrade:machines/proton_solar_panel",
+          "min": 1,
+          "max": 1,
+          "weight": 15.03,
+          "chance": 3.2
+        },
+        {
+          "name": "Продвинутое МФСУ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/ult_mfsu",
+          "min": 2,
+          "max": 2,
+          "weight": 20.04,
+          "chance": 4.3
+        },
+        {
+          "name": "Совершенная электрическая печь",
+          "type": "item",
+          "item": "industrialupgrade:moremachine/quad_furnace",
+          "min": 3,
+          "max": 4,
+          "weight": 15.03,
+          "chance": 3.2
+        },
+        {
+          "name": "Обогатитель",
+          "type": "item",
+          "item": "industrialupgrade:basemachine1/enrichment",
+          "min": 2,
+          "max": 2,
+          "weight": 15.03,
+          "chance": 3.2
         },
         {
           "name": "AquaCoins (Джекпот)",
           "type": "coins",
           "item": "",
-          "min": 1500000,
-          "max": 2500000,
-          "weight": 40,
-          "chance": 8
+          "min": 830000,
+          "max": 1500000,
+          "weight": 32,
+          "chance": 6.9
         },
         {
           "name": "Гемы",
@@ -730,16 +1072,16 @@
           "item": "",
           "min": 35,
           "max": 60,
-          "weight": 30,
-          "chance": 6
+          "weight": 24,
+          "chance": 5.2
         },
         {
-          "name": "Дифракционная солнечная панель [Тир 6]",
+          "name": "Спектральная солнечная панель",
           "type": "item",
           "item": "industrialupgrade:machines/spectral_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 1,
+          "weight": 0.8,
           "chance": 0.2
         }
       ]
@@ -748,10 +1090,10 @@
       "slug": "superconductor",
       "title": "Кейс VII: Сверхпроводники",
       "rarity": "legendary",
-      "cost": 2500000,
+      "cost": 1000000,
       "pityEvery": 200,
       "pity": {
-        "name": "Фотонная солнечная панель [Тир 7]",
+        "name": "Фотонная солнечная панель",
         "type": "item",
         "item": "industrialupgrade:machines/photonic_solar_panel",
         "min": 1,
@@ -762,91 +1104,136 @@
           "name": "Лапотронные кристаллы",
           "type": "item",
           "item": "industrialupgrade:battery/lapotron_crystal",
-          "min": 4,
-          "max": 8,
-          "weight": 31,
-          "chance": 6.2
+          "min": 48,
+          "max": 64,
+          "weight": 24.8,
+          "chance": 5.2
         },
         {
           "name": "Сплав Осмиридий",
           "type": "item",
           "item": "industrialupgrade:alloyingot/osmiridium",
-          "min": 16,
-          "max": 32,
-          "weight": 51,
-          "chance": 10.1
+          "min": 52,
+          "max": 64,
+          "weight": 40.8,
+          "chance": 8.5
         },
         {
           "name": "Сплав Адамантий",
           "type": "item",
           "item": "industrialupgrade:itemingots/adamantium",
-          "min": 16,
-          "max": 32,
-          "weight": 51,
-          "chance": 10.1
+          "min": 52,
+          "max": 64,
+          "weight": 40.8,
+          "chance": 8.5
         },
         {
           "name": "Платиновая руда",
           "type": "item",
           "item": "industrialupgrade:baseore/platinum",
-          "min": 24,
-          "max": 48,
-          "weight": 51,
-          "chance": 10.1
+          "min": 52,
+          "max": 64,
+          "weight": 40.8,
+          "chance": 8.5
         },
         {
           "name": "Кобальтовая руда",
           "type": "item",
           "item": "industrialupgrade:baseore/cobalt",
-          "min": 24,
-          "max": 48,
-          "weight": 51,
-          "chance": 10.1
+          "min": 52,
+          "max": 64,
+          "weight": 40.8,
+          "chance": 8.5
         },
         {
           "name": "Ускорители (Оверклокеры)",
           "type": "item",
           "item": "industrialupgrade:upgrades/overclocker",
-          "min": 16,
-          "max": 32,
-          "weight": 51,
-          "chance": 10.1
+          "min": 52,
+          "max": 64,
+          "weight": 40.8,
+          "chance": 8.5
         },
         {
           "name": "Продвинутые схемы IU",
           "type": "item",
           "item": "industrialupgrade:crafting_elements/crafting_274_element",
-          "min": 12,
-          "max": 24,
-          "weight": 51,
-          "chance": 10.1
+          "min": 52,
+          "max": 64,
+          "weight": 40.8,
+          "chance": 8.5
         },
         {
           "name": "Множитель улова ×32",
           "type": "item",
           "item": "aquatech_ui:rate_x32",
-          "min": 1,
+          "min": 2,
           "max": 2,
-          "weight": 41,
-          "chance": 8.2
+          "weight": 32.8,
+          "chance": 6.9
         },
         {
           "name": "Изотопы Уран-235",
           "type": "item",
           "item": "industrialupgrade:nuclearresource/uranium_235",
-          "min": 8,
-          "max": 16,
-          "weight": 41,
-          "chance": 8.2
+          "min": 52,
+          "max": 64,
+          "weight": 32.8,
+          "chance": 6.9
+        },
+        {
+          "name": "Сингулярная солнечная панель",
+          "type": "item",
+          "item": "industrialupgrade:machines/singular_solar_panel",
+          "min": 1,
+          "max": 1,
+          "weight": 10.06,
+          "chance": 2.1
+        },
+        {
+          "name": "Улучшенное МФСУ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/adv_mfsu",
+          "min": 2,
+          "max": 2,
+          "weight": 20.12,
+          "chance": 4.2
+        },
+        {
+          "name": "Генератор нейтронных частиц",
+          "type": "item",
+          "item": "industrialupgrade:basemachine/neutron_generator",
+          "min": 2,
+          "max": 2,
+          "weight": 15.09,
+          "chance": 3.2
+        },
+        {
+          "name": "Реактор ядерного синтеза",
+          "type": "item",
+          "item": "industrialupgrade:basemachine1/synthesis",
+          "min": 1,
+          "max": 1,
+          "weight": 15.09,
+          "chance": 3.2
+        },
+        {
+          "name": "Совершенное МФСУ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/per_mfsu",
+          "min": 1,
+          "max": 1,
+          "weight": 15.09,
+          "chance": 3.2
         },
         {
           "name": "AquaCoins (Куш)",
           "type": "coins",
           "item": "",
-          "min": 3500000,
-          "max": 5500000,
-          "weight": 51,
-          "chance": 10.1
+          "min": 2100000,
+          "max": 3900000,
+          "weight": 40.8,
+          "chance": 8.5
         },
         {
           "name": "Гемы",
@@ -854,25 +1241,25 @@
           "item": "",
           "min": 50,
           "max": 80,
-          "weight": 31,
-          "chance": 6.2
+          "weight": 24.8,
+          "chance": 5.2
         },
         {
-          "name": "Фотонная солнечная панель [Тир 7]",
+          "name": "Фотонная солнечная панель",
           "type": "item",
           "item": "industrialupgrade:machines/photonic_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 1,
+          "weight": 0.8,
           "chance": 0.2
         },
         {
-          "name": "Нейтронная солнечная панель [Тир 7]",
+          "name": "Нейтронная солнечная панель",
           "type": "item",
           "item": "industrialupgrade:machines/neutronium_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 1,
+          "weight": 0.8,
           "chance": 0.2
         }
       ]
@@ -881,10 +1268,10 @@
       "slug": "singularity",
       "title": "Кейс VIII: Матрица Сингулярности",
       "rarity": "mythic",
-      "cost": 4500000,
+      "cost": 2500000,
       "pityEvery": 200,
       "pity": {
-        "name": "Барионная солнечная панель [Тир 8]",
+        "name": "Барионная солнечная панель",
         "type": "item",
         "item": "industrialupgrade:machines/barion_solar_panel",
         "min": 1,
@@ -895,100 +1282,136 @@
           "name": "Кристальные матричные слитки",
           "type": "item",
           "item": "avaritia:crystal_matrix_ingot",
-          "min": 8,
-          "max": 16,
-          "weight": 20,
-          "chance": 4
+          "min": 40,
+          "max": 64,
+          "weight": 16,
+          "chance": 3.4
         },
         {
           "name": "Слитки Орихалка ExtraBotany",
           "type": "item",
           "item": "extrabotany:orichalcos_ingot",
-          "min": 8,
-          "max": 16,
-          "weight": 40,
-          "chance": 8
+          "min": 36,
+          "max": 56,
+          "weight": 32,
+          "chance": 6.9
         },
         {
           "name": "Слитки Аэриалита ExtraBotany",
           "type": "item",
           "item": "extrabotany:aerialite_ingot",
-          "min": 12,
-          "max": 24,
-          "weight": 50,
-          "chance": 10
+          "min": 52,
+          "max": 64,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Топливо духов ExtraBotany",
           "type": "item",
           "item": "extrabotany:spirit_fuel",
-          "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "min": 52,
+          "max": 64,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Слитки Альфстали",
           "type": "item",
           "item": "mythicbotany:alfsteel_ingot",
-          "min": 6,
-          "max": 12,
-          "weight": 40,
-          "chance": 8
+          "min": 24,
+          "max": 40,
+          "weight": 32,
+          "chance": 6.9
         },
         {
           "name": "Слитки черного железа",
           "type": "item",
           "item": "extendedcrafting:black_iron_ingot",
-          "min": 24,
-          "max": 48,
-          "weight": 50,
-          "chance": 10
+          "min": 52,
+          "max": 64,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Люминесценция ExtendedCrafting",
           "type": "item",
           "item": "extendedcrafting:luminessence",
-          "min": 32,
+          "min": 52,
           "max": 64,
-          "weight": 50,
-          "chance": 10
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Звёзды Незера",
           "type": "item",
           "item": "minecraft:nether_star",
-          "min": 16,
-          "max": 32,
-          "weight": 50,
-          "chance": 10
+          "min": 36,
+          "max": 56,
+          "weight": 40,
+          "chance": 8.6
         },
         {
           "name": "Множитель улова ×64",
           "type": "item",
           "item": "aquatech_ui:rate_x64",
-          "min": 1,
+          "min": 2,
           "max": 2,
-          "weight": 40,
-          "chance": 8
+          "weight": 32,
+          "chance": 6.9
         },
         {
           "name": "Сингулярности AE2",
           "type": "item",
           "item": "ae2:singularity",
-          "min": 4,
-          "max": 8,
-          "weight": 40,
-          "chance": 8
+          "min": 22,
+          "max": 36,
+          "weight": 32,
+          "chance": 6.9
+        },
+        {
+          "name": "Барионное МФСУ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/bar_mfsu",
+          "min": 2,
+          "max": 2,
+          "weight": 15.03,
+          "chance": 3.2
+        },
+        {
+          "name": "Объединитель панелей",
+          "type": "item",
+          "item": "industrialupgrade:sintezator/sintezator",
+          "min": 2,
+          "max": 2,
+          "weight": 20.04,
+          "chance": 4.3
+        },
+        {
+          "name": "Максимальный верстак",
+          "type": "item",
+          "item": "extendedcrafting:ultimate_table",
+          "min": 1,
+          "max": 1,
+          "weight": 15.03,
+          "chance": 3.2
+        },
+        {
+          "name": "Нейтрониевый коллектор",
+          "type": "item",
+          "item": "avaritia:neutron_collector",
+          "min": 2,
+          "max": 2,
+          "weight": 15.03,
+          "chance": 3.2
         },
         {
           "name": "AquaCoins (Джекпот)",
           "type": "coins",
           "item": "",
-          "min": 6000000,
-          "max": 10000000,
-          "weight": 40,
-          "chance": 8
+          "min": 5200000,
+          "max": 9600000,
+          "weight": 32,
+          "chance": 6.9
         },
         {
           "name": "Гемы",
@@ -996,16 +1419,16 @@
           "item": "",
           "min": 75,
           "max": 120,
-          "weight": 30,
-          "chance": 6
+          "weight": 24,
+          "chance": 5.2
         },
         {
-          "name": "Барионная солнечная панель [Тир 8]",
+          "name": "Барионная солнечная панель",
           "type": "item",
           "item": "industrialupgrade:machines/barion_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 1,
+          "weight": 0.8,
           "chance": 0.2
         }
       ]
@@ -1014,10 +1437,10 @@
       "slug": "draconic",
       "title": "Кейс IX: Дракониевое Слияние",
       "rarity": "mythic",
-      "cost": 6500000,
+      "cost": 5500000,
       "pityEvery": 200,
       "pity": {
-        "name": "Адронная солнечная панель [Тир 9]",
+        "name": "Адронная солнечная панель",
         "type": "item",
         "item": "industrialupgrade:machines/hadron_solar_panel",
         "min": 1,
@@ -1028,100 +1451,127 @@
           "name": "Пробуждённое дракониевое ядро",
           "type": "item",
           "item": "draconicevolution:awakened_core",
-          "min": 1,
+          "min": 2,
           "max": 2,
-          "weight": 11,
-          "chance": 2.2
+          "weight": 8.8,
+          "chance": 1.9
         },
         {
           "name": "Сердца Дракона",
           "type": "item",
           "item": "draconicevolution:dragon_heart",
-          "min": 2,
+          "min": 3,
           "max": 4,
-          "weight": 28,
-          "chance": 5.6
+          "weight": 22.4,
+          "chance": 4.9
         },
         {
           "name": "Пробуждённый драконий",
           "type": "item",
           "item": "draconicevolution:awakened_draconium_ingot",
-          "min": 8,
-          "max": 16,
-          "weight": 44,
-          "chance": 8.8
+          "min": 32,
+          "max": 48,
+          "weight": 35.2,
+          "chance": 7.8
         },
         {
           "name": "Дракониевые ядра",
           "type": "item",
           "item": "draconicevolution:draconium_core",
-          "min": 8,
-          "max": 16,
-          "weight": 56,
-          "chance": 11.2
+          "min": 52,
+          "max": 64,
+          "weight": 44.8,
+          "chance": 9.9
         },
         {
           "name": "Ядра виверны",
           "type": "item",
           "item": "draconicevolution:wyvern_core",
-          "min": 4,
-          "max": 8,
-          "weight": 44,
-          "chance": 8.8
+          "min": 52,
+          "max": 64,
+          "weight": 35.2,
+          "chance": 7.8
         },
         {
           "name": "Слитки дракония",
           "type": "item",
           "item": "draconicevolution:draconium_ingot",
-          "min": 24,
-          "max": 48,
-          "weight": 67,
-          "chance": 13.4
+          "min": 52,
+          "max": 64,
+          "weight": 53.6,
+          "chance": 11.8
         },
         {
           "name": "Энергетические ядра виверны",
           "type": "item",
           "item": "draconicevolution:wyvern_energy_core",
-          "min": 2,
-          "max": 4,
-          "weight": 44,
-          "chance": 8.8
+          "min": 52,
+          "max": 64,
+          "weight": 35.2,
+          "chance": 7.8
         },
         {
           "name": "Инжекторы слияния",
           "type": "item",
           "item": "draconicevolution:basic_crafting_injector",
-          "min": 2,
-          "max": 4,
-          "weight": 44,
-          "chance": 8.8
+          "min": 32,
+          "max": 48,
+          "weight": 35.2,
+          "chance": 7.8
         },
         {
           "name": "Нейтрониевые слитки",
           "type": "item",
           "item": "avaritia:neutron_ingot",
-          "min": 8,
-          "max": 16,
-          "weight": 44,
-          "chance": 8.8
+          "min": 32,
+          "max": 48,
+          "weight": 35.2,
+          "chance": 7.8
         },
         {
           "name": "Яйцо дракона",
           "type": "item",
           "item": "minecraft:dragon_egg",
-          "min": 1,
+          "min": 2,
           "max": 2,
-          "weight": 39,
-          "chance": 7.8
+          "weight": 31.2,
+          "chance": 6.9
+        },
+        {
+          "name": "Адронное МФСУ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/had_mfsu",
+          "min": 2,
+          "max": 2,
+          "weight": 19.96,
+          "chance": 4.4
+        },
+        {
+          "name": "Ядро слияния",
+          "type": "item",
+          "item": "draconicevolution:crafting_core",
+          "min": 2,
+          "max": 2,
+          "weight": 19.96,
+          "chance": 4.4
+        },
+        {
+          "name": "Энергетическое ядро",
+          "type": "item",
+          "item": "draconicevolution:energy_core",
+          "min": 2,
+          "max": 2,
+          "weight": 14.97,
+          "chance": 3.3
         },
         {
           "name": "AquaCoins (Куш)",
           "type": "coins",
           "item": "",
-          "min": 9000000,
-          "max": 14000000,
-          "weight": 44,
-          "chance": 8.8
+          "min": 12000000,
+          "max": 23000000,
+          "weight": 35.2,
+          "chance": 7.8
         },
         {
           "name": "Гемы",
@@ -1129,16 +1579,16 @@
           "item": "",
           "min": 90,
           "max": 150,
-          "weight": 33,
-          "chance": 6.6
+          "weight": 26.4,
+          "chance": 5.8
         },
         {
-          "name": "Адронная солнечная панель [Тир 9]",
+          "name": "Адронная солнечная панель",
           "type": "item",
           "item": "industrialupgrade:machines/hadron_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 1,
+          "weight": 0.8,
           "chance": 0.2
         }
       ]
@@ -1147,10 +1597,10 @@
       "slug": "infinity",
       "title": "Кейс X: Абсолютная Бесконечность",
       "rarity": "exotic",
-      "cost": 8000000,
+      "cost": 12000000,
       "pityEvery": 200,
       "pity": {
-        "name": "Гравитонная солнечная панель [Тир 10]",
+        "name": "Гравитонная солнечная панель",
         "type": "item",
         "item": "industrialupgrade:machines/graviton_solar_panel",
         "min": 1,
@@ -1163,8 +1613,8 @@
           "item": "avaritia:infinity_ingot",
           "min": 1,
           "max": 1,
-          "weight": 4,
-          "chance": 0.8
+          "weight": 3.2,
+          "chance": 0.7
         },
         {
           "name": "Ultimate Crafting Table (9x9)",
@@ -1172,53 +1622,53 @@
           "item": "avaritia:extreme_crafting_table",
           "min": 1,
           "max": 1,
-          "weight": 25,
-          "chance": 5
+          "weight": 20,
+          "chance": 4.5
         },
         {
           "name": "Катализаторы Бесконечности",
           "type": "item",
           "item": "avaritia:infinity_catalyst",
-          "min": 2,
-          "max": 4,
-          "weight": 41,
-          "chance": 8.2
+          "min": 6,
+          "max": 8,
+          "weight": 32.8,
+          "chance": 7.4
         },
         {
           "name": "Блоки пробуждённого дракония",
           "type": "item",
           "item": "draconicevolution:awakened_draconium_block",
-          "min": 4,
+          "min": 6,
           "max": 8,
-          "weight": 50,
-          "chance": 10
+          "weight": 40,
+          "chance": 9.1
         },
         {
           "name": "Нейтрониевые слитки Avaritia",
           "type": "item",
           "item": "avaritia:neutron_ingot",
-          "min": 16,
-          "max": 32,
-          "weight": 66,
-          "chance": 13.2
+          "min": 32,
+          "max": 48,
+          "weight": 52.8,
+          "chance": 12
         },
         {
           "name": "Кристальные матричные слитки",
           "type": "item",
           "item": "avaritia:crystal_matrix_ingot",
-          "min": 24,
-          "max": 48,
-          "weight": 66,
-          "chance": 13.2
+          "min": 52,
+          "max": 64,
+          "weight": 52.8,
+          "chance": 12
         },
         {
           "name": "Нейтрониевые самородки",
           "type": "item",
           "item": "avaritia:neutron_nugget",
-          "min": 64,
+          "min": 104,
           "max": 128,
-          "weight": 74,
-          "chance": 14.8
+          "weight": 59.2,
+          "chance": 13.4
         },
         {
           "name": "Нейтрониевый компрессор",
@@ -1226,26 +1676,53 @@
           "item": "avaritia:neutron_compressor",
           "min": 1,
           "max": 1,
-          "weight": 33,
-          "chance": 6.6
+          "weight": 26.4,
+          "chance": 6
         },
         {
           "name": "Звёзды Незера",
           "type": "item",
           "item": "minecraft:nether_star",
-          "min": 48,
+          "min": 52,
           "max": 64,
-          "weight": 66,
-          "chance": 13.2
+          "weight": 52.8,
+          "chance": 12
+        },
+        {
+          "name": "Гравитонное МФСУ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/gra_mfsu",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4.5
+        },
+        {
+          "name": "Кварковое МФСУ",
+          "type": "item",
+          "item": "industrialupgrade:wiring_storage/qua_mfsu",
+          "min": 2,
+          "max": 2,
+          "weight": 20,
+          "chance": 4.5
+        },
+        {
+          "name": "Кварковая солнечная панель",
+          "type": "item",
+          "item": "industrialupgrade:machines/quark_solar_panel",
+          "min": 1,
+          "max": 1,
+          "weight": 1,
+          "chance": 0.2
         },
         {
           "name": "AquaCoins (Супер-Куш)",
           "type": "coins",
           "item": "",
-          "min": 15000000,
-          "max": 25000000,
-          "weight": 41,
-          "chance": 8.2
+          "min": 35000000,
+          "max": 64000000,
+          "weight": 32.8,
+          "chance": 7.4
         },
         {
           "name": "Гемы",
@@ -1253,16 +1730,16 @@
           "item": "",
           "min": 120,
           "max": 200,
-          "weight": 33,
-          "chance": 6.6
+          "weight": 26.4,
+          "chance": 6
         },
         {
-          "name": "Гравитонная солнечная панель [Тир 10]",
+          "name": "Гравитонная солнечная панель",
           "type": "item",
           "item": "industrialupgrade:machines/graviton_solar_panel",
           "min": 1,
           "max": 1,
-          "weight": 1,
+          "weight": 0.8,
           "chance": 0.2
         }
       ]
