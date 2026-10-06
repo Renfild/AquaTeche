@@ -42,3 +42,7 @@ ADMIN_NICKS = "Renfild"
 binding = "DB"
 database_name = "aquatech"
 database_id = "15b52652-9374-4b2a-9fa9-cf0c5e7e8352"
+
+# Cloudflare Email Service: письма с кодами (привязка почты, сброс пароля). Домен aquateche.store onboard-ится в Email Sending.
+[[send_email]]
+name = "EMAIL"
