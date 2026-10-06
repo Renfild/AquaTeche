@@ -1617,6 +1617,37 @@ button:focus-visible,
   display: none !important;
 }
 
+/* Красная плашка: Telegram не привязан, сброс пароля без него невозможен */
+.tg-warning {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.85rem 1.1rem;
+  margin: 0 0 1rem;
+  border: 1px solid rgba(251, 113, 133, 0.6);
+  border-left: 4px solid var(--danger);
+  border-radius: 12px;
+  background: rgba(251, 113, 133, 0.14);
+  color: #fecdd3;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.tg-warning strong {
+  color: #ffe4e6;
+  flex: 1 1 100%;
+  font-size: 1rem;
+}
+
+.tg-warning span {
+  flex: 1 1 18rem;
+}
+
+.tg-warning .btn {
+  flex: 0 0 auto;
+}
+
 .notice-banner {
   background: rgba(251, 191, 36, 0.12);
   border: 1px solid rgba(251, 191, 36, 0.35);

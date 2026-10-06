@@ -53,6 +53,30 @@ export async function linkedChatId(db, nick) {
   }
 }
 
+/** Личное сообщение игроку от бота. false, если токена нет или Telegram не принял сообщение. */
+export async function sendTelegramMessage(env, chatId, text) {
+  if (!env?.TG_BOT_TOKEN || !chatId) return false;
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/** Привязка Telegram аккаунта: { chat_id, tg_name } или null. */
+export async function telegramLinkOf(db, userId) {
+  try {
+    return (await db.prepare("SELECT chat_id, tg_name FROM tg_links WHERE user_id = ?").bind(userId).first()) || null;
+  } catch {
+    return null;
+  }
+}
+
 function randomCode() {
   const buf = crypto.getRandomValues(new Uint8Array(8));
   let out = "";

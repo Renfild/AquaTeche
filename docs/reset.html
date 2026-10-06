@@ -30,15 +30,12 @@
       <div class="eyebrow">Аккаунт</div>
       <h1>Восстановление пароля</h1>
       <p>Если ты играл на сервере, но не регистрировался на сайте — просто задай пароль, ник уже твой.</p>
+      <p style="color:var(--muted)">Если пароль уже есть, но ты его забыл, код придёт в Telegram-бот <b>@aquatechebot</b>. Это работает, если Telegram был привязан заранее: Профиль → Telegram → «Получить код». Не привязывал — смотри блок «Нужна помощь администратора» ниже.</p>
 
       <form class="card form" id="reset-form" style="margin-top:1.25rem">
         <div class="field">
           <label for="reset-nick">Никнейм</label>
           <input id="reset-nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" autocapitalize="off" spellcheck="false" />
-        </div>
-        <div class="field" id="reset-email-field" hidden>
-          <label for="reset-email">Email для подтверждения</label>
-          <input id="reset-email" type="email" placeholder="example@mail.ru" spellcheck="false" />
         </div>
         <p class="field-error" data-reset-error role="alert" aria-live="polite"></p>
         <button class="btn btn-primary" type="submit" id="reset-submit-btn">Продолжить</button>
@@ -47,7 +44,7 @@
 
       <form class="card form" id="reset-code-form" hidden style="margin-top:1.25rem">
         <h3 id="reset-code-title" style="margin:0 0 0.5rem">Подтверждение сброса</h3>
-        <p id="reset-code-subtitle" style="color:var(--muted);margin-bottom:1rem">Код отправлен на указанную почту.</p>
+        <p id="reset-code-subtitle" style="color:var(--muted);margin-bottom:1rem">Код отправлен в Telegram.</p>
         <div class="field">
           <label for="reset-verify-code">6-значный код подтверждения</label>
           <input id="reset-verify-code" name="code" type="text" maxlength="6" pattern="[0-9]{6}" placeholder="123456" required autocomplete="one-time-code" />
@@ -81,8 +78,9 @@
 
       <div class="card form" id="reset-step-support" hidden style="margin-top:1.25rem">
         <h3 style="margin:0 0 1rem">Нужна помощь администратора?</h3>
-        <p style="color:var(--muted)">Если ты потерял доступ к привязанной почте, напиши в Discord: назови свой никнейм, и администратор восстановит доступ вручную.</p>
+        <p style="color:var(--muted)">Если Telegram не привязан или недоступен, напиши в Discord: назови свой никнейм, и администратор восстановит доступ вручную. Привязать Telegram заранее можно в профиле, тогда в следующий раз сброс пройдёт сам.</p>
         <a class="btn btn-primary" href="https://discord.gg/3Khzr5z4fQ" target="_blank" rel="noopener">Написать в Discord</a>
+        <button class="btn btn-ghost" type="button" id="reset-have-code">У меня есть код от администратора</button>
       </div>
     </div>
   </section>

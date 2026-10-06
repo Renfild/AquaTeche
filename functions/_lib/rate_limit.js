@@ -94,11 +94,26 @@ export async function gatePasswordReset(db, request) {
   return checkAndBump(db, `pwreset:${ip}`, PWRESET_MAX, PWRESET_WINDOW_MS);
 }
 
-const PWCODE_MAX = 5;
+const PWCODE_IP_MAX = 30;
+const PWCODE_TOKEN_MAX = 5;
 const PWCODE_WINDOW_MS = 15 * 60 * 1000;
+const PWNICK_MAX = 3;
 
-/** Анти-брутфорс 6-значного кода: на IP + префикс запроса. */
-export async function gateResetCode(db, request, tokenOrCode) {
+/** Общий щит на IP для попыток ввести код: поверх щита на сам запрос сброса. */
+export async function gateResetCode(db, request) {
   const ip = clientIp(request);
-  return checkAndBump(db, `pwcode:${ip}:${String(tokenOrCode || "").slice(0, 8)}`, PWCODE_MAX, PWCODE_WINDOW_MS);
+  return checkAndBump(db, `pwcode:${ip}`, PWCODE_IP_MAX, PWCODE_WINDOW_MS);
+}
+
+/**
+ * Пять попыток на один запрос сброса. Ключ это токен запроса, а не вводимый код: иначе у каждого
+ * подобранного кода был бы свой счётчик и перебор шести цифр ничего не стоил бы.
+ */
+export async function gateResetToken(db, token) {
+  return checkAndBump(db, `pwtok:${token}`, PWCODE_TOKEN_MAX, PWCODE_WINDOW_MS);
+}
+
+/** Не больше трёх запросов кода на ник за окно: иначе чужой аккаунт можно заспамить сообщениями в Telegram. */
+export async function gateResetNick(db, nick) {
+  return checkAndBump(db, `pwnick:${String(nick || "").toLowerCase()}`, PWNICK_MAX, PWCODE_WINDOW_MS);
 }

@@ -1422,6 +1422,7 @@
             </div>
           </div>
         </div>
+        <div id="tg-warn"></div>
         <div class="lk-shell">
           <nav class="lk-nav" aria-label="Кабинет">${nav}</nav>
           <div class="lk-main">
@@ -1621,6 +1622,7 @@
 
     async function loadTelegramBox(rootEl) {
       const box = rootEl.querySelector("#tg-link-box");
+      const warn = rootEl.querySelector("#tg-warn");
       if (!box) return;
       let st;
       try {
@@ -1629,12 +1631,21 @@
         box.innerHTML = '<p class="muted-line">Не удалось загрузить статус привязки.</p>';
         return;
       }
+      if (warn) {
+        warn.innerHTML = st.linked
+          ? ""
+          : `<div class="tg-warning" role="alert">
+              <strong>Привяжи Telegram, иначе не сможешь сбросить пароль.</strong>
+              <span>Если забудешь пароль, а Telegram не привязан, вернуть доступ сможет только администратор в Discord.</span>
+              <a class="btn btn-primary" href="#telegram">Привязать Telegram</a>
+            </div>`;
+      }
       if (st.linked) {
         const when = st.linked_at ? new Date(st.linked_at).toLocaleString("ru-RU", { dateStyle: "short", timeStyle: "short" }) : "";
         box.innerHTML = `
           <h3 style="margin:0 0 0.35rem">✅ Аккаунт привязан</h3>
           <p class="muted-line" style="margin:0 0 0.75rem">Telegram: <strong>${esc(st.tg_name || "привязан")}</strong>${when ? ` · с ${esc(when)}` : ""}</p>
-          <p class="muted-line" style="margin:0 0 1rem">Бот пришлёт сообщение, когда купят твой лот на аукционе. Команды: /balance, /trends, /pass.</p>
+          <p class="muted-line" style="margin:0 0 1rem">Бот пришлёт сообщение, когда купят твой лот на аукционе. Команды: /balance, /trends, /pass. Если забудешь пароль, код для сброса придёт сюда же.</p>
           <button class="btn btn-secondary" type="button" id="tg-unlink">Отвязать</button>`;
         box.querySelector("#tg-unlink").onclick = async () => {
           await api("/api/telegram/link", { method: "DELETE" });
@@ -1644,8 +1655,12 @@
         return;
       }
       box.innerHTML = `
+        <div class="tg-warning" role="alert" style="margin:0 0 1rem">
+          <strong>Без Telegram сбросить пароль самому нельзя.</strong>
+          <span>Нажми «Получить код», отправь его боту, и сброс пароля заработает.</span>
+        </div>
         <h3 style="margin:0 0 0.35rem">Привяжи Telegram</h3>
-        <p class="muted-line" style="margin:0 0 0.75rem">Бот @${esc(st.bot)} напишет, когда купят твой лот на аукционе, и покажет баланс и тренды командами /balance, /trends, /pass.</p>
+        <p class="muted-line" style="margin:0 0 0.75rem">Бот @${esc(st.bot)} напишет, когда купят твой лот на аукционе, и покажет баланс и тренды командами /balance, /trends, /pass. Ещё через него можно сбросить забытый пароль.</p>
         <button class="btn btn-primary" type="button" id="tg-code-btn">Получить код</button>
         <div id="tg-code-out" style="margin-top:1rem"></div>`;
       box.querySelector("#tg-code-btn").onclick = async () => {
@@ -2137,7 +2152,6 @@
   function initReset() {
     const form = $("#reset-form");
     if (!form) return;
-    const emailField = $("#reset-email-field");
     const codeForm = $("#reset-code-form");
     const claimForm = $("#reset-claim-form");
     const supportBox = $("#reset-step-support");
@@ -2153,7 +2167,6 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       nick = ($("#reset-nick")?.value || "").trim();
-      const email = ($("#reset-email")?.value || "").trim();
       resetError("");
 
       try {
@@ -2166,31 +2179,41 @@
           return;
         }
 
-        // Account is registered/claimed: trigger forgot-password
-        if (emailField.hidden && !email) {
-          emailField.hidden = false;
-          $("#reset-email")?.focus();
-          toast("Введи Email, привязанный к аккаунту");
-          return;
-        }
-
+        // Аккаунт уже с паролем: код уходит в привязанный Telegram
         const res = await api("/api/auth/forgot-password", {
           method: "POST",
-          body: JSON.stringify({ nick, email }),
+          body: JSON.stringify({ nick }),
         });
 
         form.hidden = true;
         codeForm.hidden = false;
         supportBox.hidden = false;
         $("#reset-code-title").textContent = `Сброс пароля для ${nick}`;
-        $("#reset-code-subtitle").textContent = res.emailMasked
-          ? `Код отправлен на ${res.emailMasked}`
-          : "Код подтверждения отправлен на почту.";
+        $("#reset-code-subtitle").textContent =
+          res.channel === "email"
+            ? `Код отправлен на ${res.target}`
+            : `Код отправлен в Telegram${res.target ? ` (${res.target})` : ""}. Он действует 15 минут.`;
         $("#reset-verify-code")?.focus();
       } catch (err) {
         resetError(err.message || "Не удалось отправить запрос на сброс");
-        if (emailField.hidden) emailField.hidden = false;
+        supportBox.hidden = false;
       }
+    });
+
+    // Код от администратора (Telegram не привязан): сразу к вводу кода и нового пароля
+    $("#reset-have-code")?.addEventListener("click", () => {
+      nick = ($("#reset-nick")?.value || "").trim();
+      if (!nick) {
+        resetError("Сначала введи ник");
+        $("#reset-nick")?.focus();
+        return;
+      }
+      resetError("");
+      form.hidden = true;
+      codeForm.hidden = false;
+      $("#reset-code-title").textContent = `Сброс пароля для ${nick}`;
+      $("#reset-code-subtitle").textContent = "Введи код, который дал администратор, и новый пароль. Код действует ограниченное время.";
+      $("#reset-verify-code")?.focus();
     });
 
     backBtn?.addEventListener("click", () => {
@@ -2217,6 +2240,7 @@
         await api("/api/auth/reset-password", {
           method: "POST",
           body: JSON.stringify({
+            nick,
             code,
             password: p1,
           }),
