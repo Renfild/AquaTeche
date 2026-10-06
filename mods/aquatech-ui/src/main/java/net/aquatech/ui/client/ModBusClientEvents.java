@@ -1,6 +1,7 @@
 package net.aquatech.ui.client;
 
 import net.aquatech.ui.AquaTechUI;
+import net.aquatech.ui.client.render.BeeKeeperRenderer;
 import net.aquatech.ui.client.render.FishMerchantRenderer;
 import net.aquatech.ui.registry.ModBlockEntities;
 import net.aquatech.ui.registry.ModEntities;
@@ -21,6 +22,7 @@ public class ModBusClientEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.FISH_MERCHANT.get(), FishMerchantRenderer::new);
+        event.registerEntityRenderer(ModEntities.BEE_KEEPER.get(), BeeKeeperRenderer::new);
     }
 }
 

@@ -1,6 +1,7 @@
 package net.aquatech.ui.registry;
 
 import net.aquatech.ui.AquaTechUI;
+import net.aquatech.ui.entity.BeeKeeperEntity;
 import net.aquatech.ui.entity.FishMerchantEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -22,6 +23,13 @@ public final class ModEntities {
                     .clientTrackingRange(8)
                     .build("fish_merchant"));
 
+    public static final RegistryObject<EntityType<BeeKeeperEntity>> BEE_KEEPER = ENTITY_TYPES.register(
+            "bee_keeper",
+            () -> EntityType.Builder.of(BeeKeeperEntity::new, MobCategory.MISC)
+                    .sized(0.8F, 2.0F)
+                    .clientTrackingRange(8)
+                    .build("bee_keeper"));
+
     private ModEntities() {
     }
 
@@ -32,5 +40,6 @@ public final class ModEntities {
 
     private static void onAttributes(EntityAttributeCreationEvent event) {
         event.put(FISH_MERCHANT.get(), FishMerchantEntity.createAttributes().build());
+        event.put(BEE_KEEPER.get(), BeeKeeperEntity.createAttributes().build());
     }
 }

@@ -13,7 +13,9 @@ import store.aquateche.aqualumen.client.web.HubSnapshotJson;
 import store.aquateche.aqualumen.client.web.ItemIconResolver;
 import store.aquateche.aqualumen.client.web.LumenWebBridge;
 import store.aquateche.aqualumen.common.data.HubSnapshot;
+import store.aquateche.aqualumen.common.service.BeeKeeperProximity;
 import store.aquateche.aqualumen.common.service.FishMerchantProximity;
+import store.aquateche.aqualumen.common.service.ServerShopConfig;
 import store.aquateche.aqualumen.config.LumenConfig;
 
 import java.util.Set;
@@ -103,7 +105,9 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
             return;
         }
         merchantCheckTicks = 0;
-        boolean near = FishMerchantProximity.isNear(minecraft.player);
+        boolean near = BeeKeeperProximity.TAB.equals(initialTab)
+                ? BeeKeeperProximity.isNear(minecraft.player)
+                : FishMerchantProximity.isNear(minecraft.player);
         if (merchantNearSent == null || merchantNearSent != near) {
             merchantNearSent = near;
             bridge.execute("if(window.AquaLumen&&window.AquaLumen.setMerchantNear){window.AquaLumen.setMerchantNear(" + near + ");}");
@@ -148,18 +152,32 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
 
     /** Иконки предметов аукциона, которых нет в странице: берутся из моделей предметов, без OpenGL. */
     private void pushItemIcons(HubSnapshot snapshot) {
-        if (snapshot == null || snapshot.market() == null || bridge == null) {
+        if (snapshot == null || bridge == null) {
             return;
         }
         JsonObject icons = new JsonObject();
-        for (HubSnapshot.MarketEntry lot : snapshot.market()) {
-            String id = lot.itemId();
-            if (id == null || id.isBlank() || !iconsSent.add(id)) {
-                continue;
+        if (snapshot.market() != null) {
+            for (HubSnapshot.MarketEntry lot : snapshot.market()) {
+                String id = lot.itemId();
+                if (id == null || id.isBlank() || !iconsSent.add(id)) {
+                    continue;
+                }
+                String url = ItemIconResolver.dataUrl(id);
+                if (url != null) {
+                    icons.addProperty(id, url);
+                }
             }
-            String url = ItemIconResolver.dataUrl(id);
-            if (url != null) {
-                icons.addProperty(id, url);
+        }
+        if (BeeKeeperProximity.TAB.equals(initialTab) && snapshot.store() != null) {
+            // товары пчеловода показываются по id предложения, у них нет предмета в снимке
+            for (HubSnapshot.Offer offer : snapshot.store()) {
+                if (!BeeKeeperProximity.isBeeOffer(offer.id()) || !iconsSent.add(offer.id())) {
+                    continue;
+                }
+                String url = ItemIconResolver.dataUrl(ServerShopConfig.iconItemId(offer.id()));
+                if (url != null) {
+                    icons.addProperty(offer.id(), url);
+                }
             }
         }
         if (icons.size() > 0) {

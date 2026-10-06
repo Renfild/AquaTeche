@@ -130,6 +130,41 @@ def main():
         ok &= check("рулетка: у выпавшего предмета своя иконка, а не сундук", icon == "data:image/png;base64,", icon)
         page.screenshot(path=str(SHOTS / "hub_test_reveal.png"))
 
+        # --- пчеловод: одна вкладка «Пчеловод» только с товарами bee.*, покупка требует пчеловода рядом -------------
+        pixel = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+        offers = [
+            {"id": "bee.cages", "title": "Клетка для пчёл ×4", "subtitle": "Пасека", "price": 120, "currency": "coins", "badge": "", "owned": False},
+            {"id": "bee.bee_digger", "title": "Пчела-копатель", "subtitle": "Пасека", "price": 450, "currency": "coins", "badge": "", "owned": False},
+            {"id": "base.redstone", "title": "Редстоун ×32", "subtitle": "Серверная поставка", "price": 160, "currency": "coins", "badge": "", "owned": False},
+        ]
+        bee_payload = payload("bees", ["bees"])
+        bee_payload["snapshot"]["store"] = offers
+        page.goto(HUB.as_uri())
+        page.wait_for_function("typeof (window.AquaLumen && window.AquaLumen.applySnapshot) === 'function'")
+        page.evaluate("p => window.AquaLumen.applySnapshot(p)", bee_payload)
+        page.wait_for_selector(".card.offer")
+        ok &= check("пчеловод: заголовок и только его товары", "Пчеловод" in page.inner_text("#content")
+                    and page.locator(".card.offer").count() == 2, str(page.locator(".card.offer").count()))
+        ok &= check("пчеловод: пчеловода рядом нет, плашка видна", page.is_visible(".merchant-note"))
+        page.evaluate("icons => window.AquaLumen.setItemIcons(icons)", {"bee.cages": pixel})
+        ok &= check("пчеловод: иконка товара приходит из клиента", page.locator(".card.offer img.mc-icon[src^='data:image/png']").count() == 1)
+        page.locator(".buy").first.click()
+        ok &= check("пчеловод: без него рядом покупка не открывается", page.locator("#modalLayer.open").count() == 0)
+        page.screenshot(path=str(SHOTS / "hub_test_bees_far.png"))
+        page.evaluate("window.AquaLumen.setMerchantNear(true)")
+        ok &= check("пчеловод рядом: плашки нет", not page.is_visible(".merchant-note"))
+        page.locator(".buy").first.click()
+        ok &= check("пчеловод рядом: покупка открывает подтверждение", page.locator("#modalLayer.open").count() == 1)
+        page.screenshot(path=str(SHOTS / "hub_test_bees_near.png"))
+
+        page.goto(HUB.as_uri())
+        page.wait_for_function("typeof (window.AquaLumen && window.AquaLumen.applySnapshot) === 'function'")
+        store_payload = payload("store", tabs)
+        store_payload["snapshot"]["store"] = offers
+        page.evaluate("p => window.AquaLumen.applySnapshot(p)", store_payload)
+        page.wait_for_selector(".card.offer")
+        ok &= check("F4 магазин: товаров пчеловода нет", page.locator(".card.offer").count() == 1, str(page.locator(".card.offer").count()))
+
         # --- вкладка из initialTab, которой нет в списке, заменяется первой доступной -----------------------------
         page.goto(HUB.as_uri())
         page.wait_for_function("typeof (window.AquaLumen && window.AquaLumen.applySnapshot) === 'function'")

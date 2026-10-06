@@ -37,10 +37,15 @@ public final class FishMerchantProximity {
 
     /** Работает и на клиенте: игрок и мир те же, что видит сторона. Без мода торговца ограничения нет. */
     public static boolean isNear(Entity player) {
-        if (!ForgeRegistries.ENTITY_TYPES.containsKey(MERCHANT_ID)) {
+        return isNear(player, MERCHANT_ID);
+    }
+
+    /** Та же проверка для любого торговца по id типа сущности (пчеловод использует её же). */
+    static boolean isNear(Entity player, ResourceLocation merchantId) {
+        if (!ForgeRegistries.ENTITY_TYPES.containsKey(merchantId)) {
             return true;
         }
-        EntityType<?> merchant = ForgeRegistries.ENTITY_TYPES.getValue(MERCHANT_ID);
+        EntityType<?> merchant = ForgeRegistries.ENTITY_TYPES.getValue(merchantId);
         return !player.level().getEntities((Entity) null, player.getBoundingBox().inflate(RANGE_BLOCKS),
                 entity -> entity.getType() == merchant).isEmpty();
     }

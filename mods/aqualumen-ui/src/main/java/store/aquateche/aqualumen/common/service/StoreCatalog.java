@@ -76,6 +76,9 @@ public final class StoreCatalog {
             player.sendSystemMessage(Component.literal("Нет такого товара").withStyle(ChatFormatting.RED));
             return;
         }
+        if (BeeKeeperProximity.isBeeOffer(product.id) && !BeeKeeperProximity.allowPurchase(player)) {
+            return;
+        }
         if ("case".equals(product.kind)) {
             HubActionHandler.openCasePublic(player, product.payload);
             return;
@@ -140,6 +143,7 @@ public final class StoreCatalog {
                 giveItem(player, payload);
                 yield true;
             }
+            case "item_nbt" -> giveItemNbt(player, payload);
             case "patchouli_book" -> {
                 net.minecraft.world.item.ItemStack book = new net.minecraft.world.item.ItemStack(
                         BuiltInRegistries.ITEM.get(new net.minecraft.resources.ResourceLocation("patchouli:guide_book")));
@@ -222,6 +226,27 @@ public final class StoreCatalog {
             item = Items.PRISMARINE_SHARD;
         }
         HubEconomy.giveItem(player, new ItemStack(item, Math.max(1, count)));
+    }
+
+    /** Спек «modid:item|count|{snbt}»: нужен для клеток с пчёлами, их вид хранится в NBT. */
+    private static boolean giveItemNbt(ServerPlayer player, String spec) {
+        String[] parts = spec.split("\\|", 3);
+        Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(parts[0]));
+        if (item == Items.AIR) {
+            store.aquateche.aqualumen.AquaLumenUI.LOGGER.warn("item_nbt: unknown item in '{}'", spec);
+            return false;
+        }
+        ItemStack stack = new ItemStack(item, parts.length > 1 ? Math.max(1, (int) parseLong(parts[1], 1)) : 1);
+        if (parts.length > 2) {
+            try {
+                stack.setTag(net.minecraft.nbt.TagParser.parseTag(parts[2]));
+            } catch (com.mojang.brigadier.exceptions.CommandSyntaxException e) {
+                store.aquateche.aqualumen.AquaLumenUI.LOGGER.warn("item_nbt: bad NBT in '{}': {}", spec, e.getMessage());
+                return false;
+            }
+        }
+        HubEconomy.giveItem(player, stack);
+        return true;
     }
 
     private static boolean allowedSkinUrl(String url) {

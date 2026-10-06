@@ -121,11 +121,30 @@ public final class ServerShopConfig {
     public static List<StoreCatalog.Product> products() {
         load();
         return cached.stream()
-                .map(e -> new StoreCatalog.Product(e.id(), e.title(), "Серверная поставка", e.price(),
+                .map(e -> new StoreCatalog.Product(e.id(), e.title(), subtitle(e), e.price(),
                         "coins",
                         e.kind() == null || e.kind().isBlank() ? "item" : e.kind(),
                         e.payload() == null || e.payload().isBlank() ? e.item() : e.payload()))
                 .toList();
+    }
+
+    private static String subtitle(ShopEntry e) {
+        return BeeKeeperProximity.isBeeOffer(e.id()) ? "Пасека" : "Серверная поставка";
+    }
+
+    /** Id предмета для иконки товара: без счётчика «:16» и без хвоста «|count|nbt». */
+    public static String iconItemId(String offerId) {
+        StoreCatalog.Product product = find(offerId == null ? "" : offerId);
+        if (product == null) {
+            return null;
+        }
+        String spec = product.payload();
+        int bar = spec.indexOf('|');
+        if (bar >= 0) {
+            return spec.substring(0, bar);
+        }
+        int colon = spec.lastIndexOf(':');
+        return colon > spec.indexOf(':') ? spec.substring(0, colon) : spec;
     }
 
     public static StoreCatalog.Product find(String id) {
@@ -133,7 +152,7 @@ public final class ServerShopConfig {
         String key = id == null ? "" : id.toLowerCase(java.util.Locale.ROOT);
         for (ShopEntry e : cached) {
             if (e.id().toLowerCase(java.util.Locale.ROOT).equals(key)) {
-                return new StoreCatalog.Product(e.id(), e.title(), "Серверная поставка", e.price(),
+                return new StoreCatalog.Product(e.id(), e.title(), subtitle(e), e.price(),
                         "coins",
                         e.kind() == null || e.kind().isBlank() ? "item" : e.kind(),
                         e.payload() == null || e.payload().isBlank() ? e.item() : e.payload());

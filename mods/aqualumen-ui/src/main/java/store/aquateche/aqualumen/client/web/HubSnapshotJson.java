@@ -15,8 +15,8 @@ public final class HubSnapshotJson {
     private HubSnapshotJson() {
     }
 
-    /** Вкладка продажи рыбы: открывается только у торговца, из общего меню F4 она убрана. */
-    public static final String MERCHANT_TAB = "fishing";
+    /** Вкладки торговцев (рыба, пчёлы): открываются только у них, из общего меню F4 они убраны. */
+    public static final java.util.Set<String> MERCHANT_TABS = java.util.Set.of("fishing", "bees");
 
     public static String encode(HubSnapshot snapshot, long receivedAt, String initialTab, boolean standalone) {
         JsonObject root = new JsonObject();
@@ -33,7 +33,7 @@ public final class HubSnapshotJson {
         } else {
             LumenConfig.COMMON.enabledTabs.get().stream()
                     .map(String::valueOf)
-                    .filter(tab -> !MERCHANT_TAB.equals(tab))
+                    .filter(tab -> !MERCHANT_TABS.contains(tab))
                     .forEach(tabs::add);
         }
         root.add("enabledTabs", tabs);
