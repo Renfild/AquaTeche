@@ -39,9 +39,26 @@
           <label for="register-password">Пароль</label>
           <input id="register-password" name="password" type="password" placeholder="минимум 8 символов" required minlength="8" autocomplete="new-password" />
         </div>
+        <div class="field">
+          <label for="register-email">Почта для восстановления пароля</label>
+          <input id="register-email" name="email" type="email" placeholder="you@mail.ru" required maxlength="120" autocomplete="email" />
+          <small class="muted-line">Пришлём код подтверждения. Нужна только чтобы вернуть доступ, если забудешь пароль: без рассылок.</small>
+        </div>
         <p class="field-error" data-auth-error role="alert" aria-live="polite"></p>
         <button class="btn btn-primary" type="submit">Создать аккаунт</button>
         <a class="btn btn-ghost" href="login.html">Уже есть аккаунт? Войти</a>
+      </form>
+
+      <form class="card form" id="register-email-form" hidden style="margin-top:1.25rem" novalidate>
+        <h3 style="margin:0">Подтверди почту</h3>
+        <p class="muted-line" id="register-email-sent" style="margin:0"></p>
+        <div class="field">
+          <label for="register-email-code">Код из письма (6 цифр)</label>
+          <input id="register-email-code" type="text" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" placeholder="000000" autocomplete="one-time-code" />
+        </div>
+        <p class="field-error" id="register-email-error" role="alert" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Подтвердить и продолжить</button>
+        <button class="btn btn-ghost" type="button" id="register-email-skip">Подтвержу позже в профиле</button>
       </form>
     </div>
   </section>

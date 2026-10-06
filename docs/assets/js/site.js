@@ -2525,6 +2525,7 @@
       const fd = new FormData(reg);
       const nick = String(fd.get("nick") || "").trim();
       const password = String(fd.get("password") || "");
+      const email = String(fd.get("email") || "").trim();
       const errBox = reg.querySelector("[data-auth-error]");
       const submitBtn = reg.querySelector('button[type="submit"]');
       if (errBox) errBox.textContent = "";
@@ -2532,11 +2533,42 @@
       try {
         const data = await api("/api/register", {
           method: "POST",
-          body: JSON.stringify({ nick, password }),
+          body: JSON.stringify({ nick, password, email }),
         });
         setUser(data.user);
-        toast("Аккаунт создан");
-        location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
+        const profileUrl = `profile.html?u=${encodeURIComponent(data.user.nick)}${data.email_pending ? "" : "#email"}`;
+        if (data.email_pending) {
+          // Аккаунт уже создан: просим подтвердить почту кодом, чтобы потом можно было сбросить пароль
+          const mailForm = $("#register-email-form");
+          reg.hidden = true;
+          mailForm.hidden = false;
+          $("#register-email-sent").textContent = `Аккаунт создан. Код отправлен на ${data.email_pending}. Проверь и папку «Спам»: код действует 15 минут.`;
+          $("#register-email-code")?.focus();
+          $("#register-email-code")?.addEventListener("input", (ev) => {
+            ev.target.value = ev.target.value.replace(/\D/g, "").slice(0, 6);
+          });
+          $("#register-email-skip")?.addEventListener("click", () => {
+            location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}#email`;
+          });
+          mailForm.addEventListener("submit", async (ev) => {
+            ev.preventDefault();
+            const err2 = $("#register-email-error");
+            err2.textContent = "";
+            try {
+              await api("/api/auth/email", {
+                method: "POST",
+                body: JSON.stringify({ action: "confirm", code: $("#register-email-code").value.trim() }),
+              });
+              toast("Почта подтверждена");
+              location.href = `profile.html?u=${encodeURIComponent(data.user.nick)}`;
+            } catch (error) {
+              err2.textContent = error.message || "Неверный код";
+            }
+          });
+          return;
+        }
+        toast(data.email_error ? "Аккаунт создан. Почту привяжи в профиле: письмо не ушло" : "Аккаунт создан");
+        location.href = profileUrl;
       } catch (err) {
         if (submitBtn) submitBtn.disabled = false;
         if (apiAvailable === false || isMirrorHost()) {

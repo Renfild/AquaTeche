@@ -275,3 +275,65 @@ test("если письмо не ушло и Telegram нет, запрос сг�
     tg.restore();
   }
 });
+
+// ---------- регистрация с почтой ----------
+import { onRequestPost as register } from "../../functions/api/register.js";
+
+const signUp = (env, body, ip = "7.7.7.7") =>
+  register({
+    env,
+    request: new Request("https://aquateche.store/api/register", {
+      method: "POST",
+      headers: { "content-type": "application/json", "cf-connecting-ip": ip },
+      body: JSON.stringify(body),
+    }),
+  });
+
+test("регистрация с почтой шлёт код, а почта в аккаунт попадает только после подтверждения", async () => {
+  const env = await makeEnv({ linked: false });
+  const mail = fakeMail();
+  env.EMAIL = mail;
+  const res = await signUp(env, { nick: "Newbie", password: "long-password-1", email: "New@Example.com" });
+  assert.equal(res.status, 201);
+  const body = await res.json();
+  assert.equal(body.email_pending, "ne***@example.com");
+  assert.equal(mail.sent[0].to, "new@example.com");
+  const user = await env.DB.prepare("SELECT id, email FROM users WHERE nick = 'Newbie'").first();
+  assert.equal(user.email, null);
+
+  const sid = res.headers.get("set-cookie").match(/at_session=([^;]+)/)[1];
+  const confirm = await emailPost({
+    env,
+    request: new Request("https://aquateche.store/api/auth/email", {
+      method: "POST",
+      headers: { "content-type": "application/json", cookie: `at_session=${sid}` },
+      body: JSON.stringify({ action: "confirm", code: mailCode(mail) }),
+    }),
+  });
+  assert.equal(confirm.status, 200);
+  assert.equal((await env.DB.prepare("SELECT email FROM users WHERE nick = 'Newbie'").first()).email, "new@example.com");
+});
+
+test("регистрация без почты (лаунчер) работает как раньше", async () => {
+  const env = await makeEnv({ linked: false });
+  env.EMAIL = fakeMail();
+  const res = await signUp(env, { nick: "Launcher1", password: "long-password-1" });
+  assert.equal(res.status, 201);
+  assert.equal((await res.json()).email_pending, undefined);
+  assert.equal(env.EMAIL.sent?.length ?? 0, 0);
+});
+
+test("кривой адрес почты отклоняет регистрацию, а сбой письма её не отменяет", async () => {
+  const env = await makeEnv({ linked: false });
+  env.EMAIL = fakeMail();
+  const bad = await signUp(env, { nick: "BadMail", password: "long-password-1", email: "not-an-email" }, "8.8.8.1");
+  assert.equal(bad.status, 400);
+  assert.equal(await env.DB.prepare("SELECT id FROM users WHERE nick = 'BadMail'").first(), null);
+
+  env.EMAIL = fakeMail({ fail: true });
+  const ok = await signUp(env, { nick: "MailDown", password: "long-password-1", email: "a@b.co" }, "8.8.8.2");
+  assert.equal(ok.status, 201);
+  const body = await ok.json();
+  assert.equal(body.email_pending, undefined);
+  assert.ok(body.email_error);
+});

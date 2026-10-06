@@ -11,6 +11,14 @@ import {
   wantsLauncherSession,
 } from "../_lib/auth.js";
 import { gateRegister } from "../_lib/rate_limit.js";
+import { normalizeEmail, startEmailVerification } from "../_lib/email_verify.js";
+
+/** Отправляет код на почту сразу после регистрации. Сбой письма регистрацию не отменяет: почту можно привязать в кабинете. */
+async function emailExtras(env, user, email) {
+  if (!email) return {};
+  const res = await startEmailVerification(env, user, email);
+  return res.ok ? { email_pending: res.target } : { email_error: res.error };
+}
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -24,6 +32,10 @@ export async function onRequestPost(context) {
   if (!nickOk(nick)) return bad("Ник: 3–16 символов (латиница, цифры, _)");
   const policy = passwordPolicyError(password, nick);
   if (policy) return bad(policy);
+  // Почта необязательна для сервера (лаунчер регистрирует без неё), но если пришла, она должна быть настоящей
+  const rawEmail = String(body.email || "").trim();
+  const email = rawEmail ? normalizeEmail(rawEmail) : "";
+  if (rawEmail && !email) return bad("Проверь адрес почты");
 
   const gated = await gateRegister(env.DB, request);
   if (!gated.ok) {
@@ -55,6 +67,7 @@ export async function onRequestPost(context) {
         claimed: true,
         user: { nick },
         ...(wantsLauncherSession(request) ? { session: sid } : {}),
+        ...(await emailExtras(env, { id: existing.id, nick }, email)),
       },
       200,
       { "set-cookie": sessionCookie(sid) }
@@ -85,6 +98,7 @@ export async function onRequestPost(context) {
       ok: true,
       user: { nick },
       ...(wantsLauncherSession(request) ? { session: sid } : {}),
+      ...(await emailExtras(env, { id: userId, nick }, email)),
     },
     201,
     { "set-cookie": sessionCookie(sid) }
