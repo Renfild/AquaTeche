@@ -64,5 +64,6 @@
   "item.aquatech_ui.bait_ore": "Ore Bait",
   "item.aquatech_ui.bait_abyss": "Abyssal Bait",
   "entity.aquatech_ui.fish_merchant": "Fish Merchant",
-  "entity.aquatech_ui.bee_keeper": "Beekeeper"
+  "entity.aquatech_ui.bee_keeper": "Beekeeper",
+  "block.aquatech_ui.fish_keepnet": "Fish Keepnet"
 }

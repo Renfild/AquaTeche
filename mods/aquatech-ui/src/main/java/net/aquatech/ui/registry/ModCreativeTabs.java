@@ -49,6 +49,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.BAIT_SHOAL.get());
                         output.accept(ModItems.BAIT_ORE.get());
                         output.accept(ModItems.BAIT_ABYSS.get());
+                        output.accept(ModItems.FISH_KEEPNET.get());
                     })
                     .build());
 

@@ -1,5 +1,6 @@
 package net.aquatech.ui.client;
 
+import net.aquatech.ui.client.gui.KeepnetScreen;
 import net.aquatech.ui.client.gui.TackleBoxScreen;
 import net.aquatech.ui.registry.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -20,6 +21,7 @@ public final class AquaTechClient {
             try {
                 MinecraftForge.EVENT_BUS.register(net.aquatech.ui.client.nameplate.NameplateHandler.class);
                             MenuScreens.register(ModMenuTypes.TACKLE_BOX_MENU.get(), TackleBoxScreen::new);
+                            MenuScreens.register(ModMenuTypes.KEEPNET_MENU.get(), KeepnetScreen::new);
                         net.aquatech.ui.AquaTechUI.LOGGER.info("[AquaTechClient] All machine MenuScreens registered successfully!");
             } catch (Throwable t) {
                 net.aquatech.ui.AquaTechUI.LOGGER.error("[AquaTechClient] Error during MenuScreens registration", t);

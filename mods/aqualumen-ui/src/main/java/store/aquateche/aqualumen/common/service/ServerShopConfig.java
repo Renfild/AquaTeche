@@ -141,7 +141,9 @@ public final class ServerShopConfig {
         String spec = product.payload();
         int bar = spec.indexOf('|');
         if (bar >= 0) {
-            return spec.substring(0, bar);
+            String item = spec.substring(0, bar);
+            // у клетки с пчелой нет отдельного предмета: «filled» есть только как модель, зарегистрирован bee_cage
+            return "productivebees:bee_cage".equals(item) ? item + "_filled" : item;
         }
         int colon = spec.lastIndexOf(':');
         return colon > spec.indexOf(':') ? spec.substring(0, colon) : spec;

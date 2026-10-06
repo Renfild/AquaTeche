@@ -1,6 +1,7 @@
 package net.aquatech.ui.registry;
 
 import net.aquatech.ui.AquaTechUI;
+import net.aquatech.ui.inventory.KeepnetMenu;
 import net.aquatech.ui.inventory.TackleBoxMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -18,6 +19,9 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<TackleBoxMenu>> TACKLE_BOX_MENU = MENUS.register("tackle_box_menu",
             () -> IForgeMenuType.create(TackleBoxMenu::new));
+
+    public static final RegistryObject<MenuType<KeepnetMenu>> KEEPNET_MENU = MENUS.register("keepnet_menu",
+            () -> IForgeMenuType.create(KeepnetMenu::new));
 
 
 

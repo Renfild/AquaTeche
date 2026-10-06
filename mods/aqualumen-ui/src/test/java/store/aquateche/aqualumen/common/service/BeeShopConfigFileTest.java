@@ -49,7 +49,7 @@ class BeeShopConfigFileTest {
             assertTrue(item.get("price").getAsLong() >= 50_000, id + " bee costs less than 50000");
             String[] parts = item.get("payload").getAsString().split("\\|", 3);
             assertEquals(3, parts.length, id);
-            assertEquals("productivebees:bee_cage_filled", parts[0], id);
+            assertEquals("productivebees:bee_cage", parts[0], id);
             CompoundTag tag = TagParser.parseTag(parts[2]);
             String entity = tag.getString("entity");
             assertTrue(entity.matches("productivebees:[a-z_]+"), id + " entity=" + entity);

@@ -68,6 +68,9 @@ public class ModItems {
     public static final RegistryObject<Item> BAIT_ABYSS = ITEMS.register("bait_abyss",
             () -> new Item(new Item.Properties().stacksTo(16)));
 
+    public static final RegistryObject<Item> FISH_KEEPNET = ITEMS.register("fish_keepnet",
+            () -> new BlockItem(ModBlocks.FISH_KEEPNET.get(), new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
