@@ -258,26 +258,50 @@ def esc(text: str) -> str:
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def table(rows: list[tuple[float, str, str]], subtitle: str) -> str:
+def real_chances(probs: list[float], lo: int, hi: int) -> list[float]:
+    """Точный шанс предмета в итоговом улове: бросок шанса, затем keepRandomStacks(lo..hi) режет пул до случайного числа стаков."""
+    out = []
+    for i, p in enumerate(probs):
+        others = probs[:i] + probs[i + 1:]
+        dist = [1.0]  # распределение числа прошедших остальных предметов
+        for q in others:
+            nxt = [0.0] * (len(dist) + 1)
+            for k, v in enumerate(dist):
+                nxt[k] += v * (1 - q)
+                nxt[k + 1] += v * q
+            dist = nxt
+        kept = 0.0
+        for k, v in enumerate(dist):
+            n = k + 1
+            if n <= lo:
+                kept += v
+                continue
+            span = max(1, hi - lo + 1)
+            kept += v * sum(min(n, lo + u) / n for u in range(span)) / span
+        out.append(p * kept)
+    return out
+
+
+def table(rows: list[tuple[float, str, str]], subtitle: str, real: list[float] | None = None) -> str:
     out = [f'        <h3 class="loot-sub">{esc(subtitle)}</h3>',
            '        <div class="loot-table-wrap">',
            '          <table class="loot-table">',
-           '            <thead><tr><th>Шанс</th><th>Предмет</th><th>Кол-во</th></tr></thead>',
+           '            <thead><tr><th>Шанс</th>' + ('<th>Реальный шанс</th>' if real else '') + '<th>Предмет</th><th>Кол-во</th></tr></thead>',
            '            <tbody>']
-    for chance, item_id, count in rows:
-        out.append(f"            <tr><td>{chance * 100:.0f}%</td><td>{esc(mod_name(item_id))}</td><td>{esc(count)}</td></tr>")
+    for idx, (chance, item_id, count) in enumerate(rows):
+        real_cell = f"<td><b>{real[idx] * 100:.0f}%</b></td>" if real else ""
+        out.append(f"            <tr><td>{chance * 100:.0f}%</td>{real_cell}<td>{esc(mod_name(item_id))}</td><td>{esc(count)}</td></tr>")
     out += ['            </tbody>', '          </table>', '        </div>']
     return "\n".join(out)
 
 
 def build_article(article_id: str, rod: str, data: dict, header_html: str) -> str:
     lo, hi = data["stacks"]
-    sub = f"Из прошедших шансов берут {lo}–{hi} стака."
     parts = [f'      <article class="loot-block" id="{article_id}">', header_html.rstrip(), ""]
     if data["guarantee"]:
         parts.append(table(data["guarantee"], "Гарантия (один из)"))
         parts.append("")
-    parts.append(table(data["pool"], "Пул"))
+    parts.append(table(data["pool"], "Пул", real_chances([c for c, _, _ in data["pool"]], lo, hi)))
     parts.append("      </article>")
     return "\n".join(parts)
 
@@ -308,7 +332,7 @@ def render_regions(page: str, rods: dict[str, dict]) -> str:
 
 def sub_line(data: dict) -> str:
     lo, hi = data["stacks"]
-    return f"Из прошедших шансов берут {lo}–{hi} стака."
+    return f"Каждый предмет сначала проходит бросок (колонка «Шанс»), затем из прошедших случайно оставляют {lo}–{hi} стака. «Реальный шанс» — вероятность увидеть предмет в одном улове с учётом этого отбора."
 
 
 def main() -> int:
