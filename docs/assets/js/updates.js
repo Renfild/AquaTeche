@@ -27,6 +27,15 @@
         + '<img class="c1" src="assets/images/cases/flora.png" alt="Кейс IV" loading="lazy" width="256" height="256">'
         + '<span class="medal m1">1</span><span class="medal m2">2</span><span class="medal m3">3</span></div>';
     }
+    if (kind === "keeper") {
+      return '<div class="u-art u-art--keeper"><img src="assets/images/updates/beekeeper-idle.webp" alt="Пчеловод на спавне, анимация ожидания" loading="lazy" decoding="async" width="540" height="502"></div>';
+    }
+    if (kind === "keepnet") {
+      return '<div class="u-art u-art--keepnet"><img src="assets/images/updates/keepnet-turn.webp" alt="Садок для рыбы" loading="lazy" decoding="async" width="460" height="430"></div>';
+    }
+    if (kind === "atlas") {
+      return '<div class="u-art u-art--atlas"><img src="assets/images/updates/atlas-fish.webp" alt="Значки видов рыбы в атласе" loading="lazy" decoding="async" width="450" height="318"></div>';
+    }
     if (kind === "booster") {
       return '<div class="u-art u-art--booster"><img src="assets/images/updates/booster.webp" alt="Бустер скупщика" loading="lazy" decoding="async" width="256" height="256"></div>';
     }
@@ -74,7 +83,7 @@
       + '<div class="container u-hero-inner"><div class="u-kicker">' + esc(u.title) + "</div><h1>" + esc(u.name) + "</h1>"
       + '<span class="u-date">Доступно с ' + dateRu(u.date) + "</span>"
       + '<p class="u-tagline">' + esc(u.tagline) + "</p></div>"
-      + '<img class="u-hero-chest" src="assets/images/updates/chest-hero.webp" alt="" width="1084" height="1006" fetchpriority="high">'
+      + '<img class="u-hero-chest" src="' + esc(u.heroImg || "assets/images/updates/chest-hero.webp") + '" alt="" width="' + (u.heroImg ? 540 : 1084) + '" height="' + (u.heroImg ? 502 : 1006) + '" fetchpriority="high">'
       + '<a class="u-scroll" href="#u-main" aria-label="Листать вниз"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>';
     document.title = u.title + " · AquaTech";
 
