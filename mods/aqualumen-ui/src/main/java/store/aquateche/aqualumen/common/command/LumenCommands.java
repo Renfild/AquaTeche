@@ -17,6 +17,7 @@ import store.aquateche.aqualumen.common.service.BoosterLogic;
 import store.aquateche.aqualumen.common.service.BoosterService;
 import store.aquateche.aqualumen.common.service.FishShopConfig;
 import store.aquateche.aqualumen.common.service.HubDataService;
+import store.aquateche.aqualumen.common.service.HubEconomy;
 import store.aquateche.aqualumen.common.service.MarketService;
 import store.aquateche.aqualumen.common.service.MariaStats;
 import store.aquateche.aqualumen.common.service.KitConfig;
@@ -56,6 +57,8 @@ public final class LumenCommands {
                         .requires(source -> source.hasPermission(2))
                         .then(Commands.argument("target", EntityArgument.player())
                                 .executes(ctx -> givePremiumPass(ctx.getSource(), EntityArgument.getPlayer(ctx, "target")))))
+                .then(buildWalletCommands("coins", false))
+                .then(buildWalletCommands("gems", true))
                 .then(buildRtpCommand())
                 .then(buildKitCommands())
                 .then(buildWarpCommands())
@@ -390,6 +393,72 @@ public final class LumenCommands {
         BoosterService.grant(target, tier, amount);
         source.sendSuccess(() -> Component.literal("§a" + target.getGameProfile().getName() + ": +" + amount + " " + tier.id()), true);
         return amount;
+    }
+
+    /** /aqualumen coins|gems get|give|take|set <игрок> [сумма]: ручная правка баланса, только для операторов. */
+    private static LiteralArgumentBuilder<CommandSourceStack> buildWalletCommands(String literal, boolean gems) {
+        return Commands.literal(literal)
+                .requires(source -> source.hasPermission(2))
+                .then(Commands.literal("get")
+                        .then(Commands.argument("target", EntityArgument.player())
+                                .executes(ctx -> walletGet(ctx.getSource(), EntityArgument.getPlayer(ctx, "target"), gems))))
+                .then(walletChangeNode("give", gems))
+                .then(walletChangeNode("take", gems))
+                .then(walletChangeNode("set", gems));
+    }
+
+    private static LiteralArgumentBuilder<CommandSourceStack> walletChangeNode(String op, boolean gems) {
+        long min = op.equals("set") ? 0L : 1L;
+        return Commands.literal(op)
+                .then(Commands.argument("target", EntityArgument.player())
+                        .then(Commands.argument("amount", LongArgumentType.longArg(min, Integer.MAX_VALUE))
+                                .executes(ctx -> walletChange(ctx.getSource(), EntityArgument.getPlayer(ctx, "target"),
+                                        op, LongArgumentType.getLong(ctx, "amount"), gems))));
+    }
+
+    private static long walletOf(ServerPlayer player, boolean gems) {
+        return gems ? HubEconomy.gems(player) : HubEconomy.coins(player);
+    }
+
+    private static int walletGet(CommandSourceStack source, ServerPlayer target, boolean gems) {
+        long value = walletOf(target, gems);
+        source.sendSuccess(() -> Component.literal("§b" + target.getGameProfile().getName() + ": §f"
+                + HubEconomy.formatCoins(value) + (gems ? " кристаллов" : " монет")), false);
+        return 1;
+    }
+
+    private static int walletChange(CommandSourceStack source, ServerPlayer target, String op, long amount, boolean gems) {
+        long before = walletOf(target, gems);
+        switch (op) {
+            case "give" -> {
+                if (gems) {
+                    HubEconomy.grantGems(target, (int) amount);
+                } else {
+                    HubEconomy.grantCoins(target, amount);
+                }
+            }
+            case "take" -> {
+                if (gems) {
+                    HubEconomy.setGems(target, Math.max(0L, before - amount));
+                } else {
+                    HubEconomy.webTake(target, amount);
+                }
+            }
+            default -> {
+                if (gems) {
+                    HubEconomy.setGems(target, amount);
+                } else {
+                    HubEconomy.setCoins(target, amount);
+                }
+            }
+        }
+        long after = walletOf(target, gems);
+        HubDataService.syncPlayerToWebAsync(target);
+        HubDataService.push(target);
+        source.sendSuccess(() -> Component.literal("§a" + target.getGameProfile().getName() + ": "
+                + HubEconomy.formatCoins(before) + " → " + HubEconomy.formatCoins(after)
+                + (gems ? " кристаллов" : " монет")), true);
+        return 1;
     }
 
     /** Выдаёт Боевой Пропуск вручную: тот же флаг, что ставит покупка в магазине (NBT игрока + файл + MariaDB). */

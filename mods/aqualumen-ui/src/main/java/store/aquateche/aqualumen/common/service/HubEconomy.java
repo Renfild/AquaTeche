@@ -266,6 +266,26 @@ public final class HubEconomy {
         return true;
     }
 
+    public static long gems(ServerPlayer player) {
+        return score(player, LumenConfig.COMMON.gemsObjective.get());
+    }
+
+    /** Админская правка: ставит точное число кристаллов. */
+    public static void setGems(ServerPlayer player, long value) {
+        setScore(player, LumenConfig.COMMON.gemsObjective.get(), value);
+    }
+
+    /** Админская правка: доводит кошелёк до {@code target} через те же give/take, что и покупки. */
+    public static long setCoins(ServerPlayer player, long target) {
+        long current = coins(player);
+        if (target > current) {
+            grantCoins(player, target - current);
+        } else if (target < current) {
+            webTake(player, current - target);
+        }
+        return coins(player);
+    }
+
     public static void giveItem(ServerPlayer player, ItemStack stack) {
         if (!player.getInventory().add(stack.copy())) {
             player.drop(stack.copy(), false);
