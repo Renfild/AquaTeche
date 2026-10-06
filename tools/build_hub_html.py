@@ -511,6 +511,32 @@ hub_html_raw = r'''<!doctype html>
     .hub-input:focus{border-color:var(--accent)}
     .shop-chips{display:flex;flex-wrap:wrap;gap:6px}
     .atlas-pill.active{background:color-mix(in srgb, var(--accent) 22%, transparent);border-color:var(--accent);color:#eafffb}
+    .atlas-rarities{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0 4px}
+    .atlas-rarcell{--rc:#9db2c4;display:grid;gap:5px;padding:9px 11px;border:1px solid color-mix(in srgb,var(--rc) 34%,transparent);border-radius:12px;background:color-mix(in srgb,var(--rc) 8%,transparent);cursor:pointer;text-align:left;transition:border-color .15s,background .15s}
+    .atlas-rarcell:hover,.atlas-rarcell.active{border-color:var(--rc);background:color-mix(in srgb,var(--rc) 18%,transparent)}
+    .atlas-rarcell b{display:block;line-height:1.2;font-size:15px;font-variant-numeric:tabular-nums;color:var(--rc)}
+    .atlas-rarcell b i{font-style:normal;font-size:11px;color:var(--muted);font-weight:600}
+    .atlas-rarcell span{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .atlas-rarcell .progress{height:4px}
+    .atlas-rarcell .progress>i{background:var(--rc);box-shadow:none}
+    .atlas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:10px}
+    .atlas-card{--rc:#9db2c4;position:relative;display:flex;flex-direction:column;gap:9px;padding:12px;border-color:color-mix(in srgb,var(--rc) 38%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--rc) 11%,transparent),rgba(255,255,255,.02))}
+    .atlas-card.missing{opacity:.6}
+    .atlas-icon{flex:0 0 auto;width:62px;height:62px;display:grid;place-items:center;border-radius:12px;border:1px solid color-mix(in srgb,var(--rc) 60%,transparent);background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--rc) 30%,transparent),rgba(0,0,0,.4));box-shadow:inset 0 0 14px rgba(0,0,0,.45),0 0 14px color-mix(in srgb,var(--rc) 22%,transparent);color:var(--muted)}
+    .atlas-icon .mc-icon{width:44px;height:44px}
+    .atlas-hero-icon .mc-icon{width:52px;height:52px}
+    .atlas-card.missing .atlas-icon{box-shadow:inset 0 0 14px rgba(0,0,0,.45)}
+    .atlas-card.missing .atlas-icon .mc-icon{filter:brightness(0) opacity(.72)}
+    .atlas-head{display:flex;gap:11px;align-items:center}
+    .atlas-title{min-width:0;flex:1;display:grid;gap:5px;padding-right:34px}
+    .atlas-notes{display:grid;gap:4px}
+    .atlas-title h3{margin:0;font-size:12px;font-weight:700;line-height:1.25;overflow-wrap:anywhere}
+    .atlas-tag{justify-self:start;padding:1px 8px;border-radius:999px;border:1px solid color-mix(in srgb,var(--rc) 55%,transparent);background:color-mix(in srgb,var(--rc) 14%,transparent);color:var(--rc);font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .atlas-count{position:absolute;top:9px;right:10px;font-size:11px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums}
+    .atlas-note{margin:0;font-size:10px;color:var(--muted)}
+    .atlas-note b{color:var(--gold)}
+    .atlas-note.srv,.atlas-note.srv b{color:#8fd6ff}
+    .atlas-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
   __PX_THEME_CSS__
     /* Живой фон меню: канвас под панелями, у панелей вместо глухой заливки полупрозрачная */
     .hub{position:relative}
@@ -1647,9 +1673,40 @@ __PASS_VIEW_JS__
     </div>`;
   }
 
+  const ATLAS_RARITIES = [
+    { name: "Обычные", color: "#9db2c4", test: /^обыч/i },
+    { name: "Необычные", color: "#4cd08a", test: /^необыч/i },
+    { name: "Редкие", color: "#3b9dff", test: /^редк/i },
+    { name: "Эпические", color: "#d48cff", test: /^эпич/i },
+    { name: "Легенды", color: "#f5c25b", test: /^легенд/i },
+  ];
+  let atlasFilter = { state: "all", rarity: "" };
+
+  function atlasRarity(label) {
+    const i = ATLAS_RARITIES.findIndex(r => r.test.test(String(label || "").trim()));
+    return i < 0 ? 0 : i;
+  }
+
+  const FISH_GLYPH = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12c3-5 8-6 12-4l4-3v14l-4-3c-4 2-9 1-12-4Z"/><circle cx="8.5" cy="11" r=".8" fill="currentColor"/></svg>';
+
+  function fishIconHtml(id) {
+    return EXTRA_ICONS[id] ? `<img src="${EXTRA_ICONS[id]}" class="mc-icon" alt="">` : FISH_GLYPH;
+  }
+
+  function applyAtlasFilter() {
+    document.querySelectorAll("#atlasGrid [data-found]").forEach(card => {
+      const found = card.dataset.found === "1";
+      const f = atlasFilter.state;
+      const stateOk = f === "all" || (f === "found" && found) || (f === "missing" && !found);
+      const rarityOk = !atlasFilter.rarity || card.dataset.rar === atlasFilter.rarity;
+      card.style.display = stateOk && rarityOk ? "" : "none";
+    });
+  }
+
   function fishAtlasView(s) {
     const entries = s.atlas || [];
-    entries.sort((a, b) => (b.found - a.found) || ((b.count || 0) - (a.count || 0)) || String(a.name).localeCompare(String(b.name), "ru"));
+    entries.sort((a, b) => (b.found - a.found) || (atlasRarity(b.rarity) - atlasRarity(a.rarity))
+      || ((b.count || 0) - (a.count || 0)) || String(a.name).localeCompare(String(b.name), "ru"));
     const sum = s.atlasSummary || { found: 0, total: entries.length, catches: 0, recordName: "", recordWeight: 0, nextMilestone: 0, nextReward: 0 };
     const pct = sum.total > 0 ? Math.round(sum.found * 100 / sum.total) : 0;
 
@@ -1661,19 +1718,37 @@ __PASS_VIEW_JS__
       ? `<span style="font-size:9px;padding:2px 6px;border-radius:999px;border:1px solid var(--line);color:var(--muted);">${label}</span>`
       : "";
 
+    const rarities = ATLAS_RARITIES.map(r => ({ ...r, total: 0, found: 0 }));
+    entries.forEach(e => {
+      const r = rarities[atlasRarity(e.rarity)];
+      r.total++;
+      if (e.found) r.found++;
+    });
+    const rarityStrip = rarities.map((r, i) => r.total ? `<button class="atlas-rarcell${atlasFilter.rarity === String(i) ? " active" : ""}" data-rar="${i}" style="--rc:${r.color}">
+        <b>${r.found}<i> / ${r.total}</i></b><span>${r.name}</span>
+        <div class="progress"><i style="width:${Math.round(r.found * 100 / r.total)}%"></i></div>
+      </button>` : "").join("");
+
     const cards = entries.map(e => {
       const found = Boolean(e.found);
-      return `<article class="card offer" data-found="${found ? 1 : 0}" style="min-height:128px;padding:12px;${found ? "" : "opacity:.42;filter:saturate(.35);"}">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-          <h3 style="font-size:12.5px;margin:0;font-weight:700;">${found ? esc(e.name) : "???"}</h3>
-          <span class="offer-badge" style="position:static;">${found ? num(e.count) + " поим." : "—"}</span>
+      const rar = atlasRarity(e.rarity);
+      return `<article class="card atlas-card${found ? "" : " missing"}" data-found="${found ? 1 : 0}" data-rar="${rar}" style="--rc:${ATLAS_RARITIES[rar].color}">
+        <div class="atlas-head">
+          <div class="atlas-icon">${fishIconHtml(e.id)}</div>
+          <div class="atlas-title">
+            <h3>${found ? esc(e.name) : "???"}</h3>
+            <span class="atlas-tag">${esc(e.rarity || ATLAS_RARITIES[rar].name)}</span>
+          </div>
         </div>
-        <p style="font-size:10px;color:var(--muted);margin:0 0 6px;">${esc(e.rarity || "")}${found && e.weight > 0 ? ` · мой рекорд <b style="color:var(--gold);">${Number(e.weight).toFixed(2)} кг</b>` : ""}</p>
-        ${found && e.recordHolder ? `<p style="font-size:10px;color:#8fd6ff;margin:0 0 8px;">Сервер: <b>${esc(e.recordHolder)} — ${Number(e.recordWeight).toFixed(2)} кг</b></p>` : ""}
-        <div style="display:flex;gap:4px;flex-wrap:wrap;">
-          ${gradeBadge(e.grades, 1, "С", "#c7d2da")}${gradeBadge(e.grades, 2, "З", "#f5c25b")}${gradeBadge(e.grades, 4, "Р", "#d48cff")}
-          ${condBadge(e.conds, 1, "день")}${condBadge(e.conds, 2, "ночь")}${condBadge(e.conds, 4, "дождь")}${condBadge(e.conds, 8, "шторм")}${condBadge(e.conds, 16, "золото")}
+        <div class="atlas-notes">
+          ${found ? `<p class="atlas-note">${e.weight > 0 ? `рекорд <b>${Number(e.weight).toFixed(2)} кг</b>` : "вес не записан"}</p>` : `<p class="atlas-note">ещё не поймана</p>`}
+          ${found && e.recordHolder ? `<p class="atlas-note srv">сервер: <b>${esc(e.recordHolder)} · ${Number(e.recordWeight).toFixed(2)} кг</b></p>` : ""}
+          <div class="atlas-badges">
+            ${gradeBadge(e.grades, 1, "С", "#c7d2da")}${gradeBadge(e.grades, 2, "З", "#f5c25b")}${gradeBadge(e.grades, 4, "Р", "#d48cff")}
+            ${condBadge(e.conds, 1, "день")}${condBadge(e.conds, 2, "ночь")}${condBadge(e.conds, 4, "дождь")}${condBadge(e.conds, 8, "шторм")}${condBadge(e.conds, 16, "золото")}
+          </div>
         </div>
+        ${found ? `<span class="atlas-count">×${num(e.count)}</span>` : ""}
       </article>`;
     }).join("");
 
@@ -1683,14 +1758,15 @@ __PASS_VIEW_JS__
     const milestoneLine = Number(sum.nextMilestone) > 0
       ? `До вехи: осталось <b>${Math.max(0, Number(sum.nextMilestone) - Number(sum.found))}</b> видов · награда <b style="color:var(--gold);">${coins(sum.nextReward)}</b>`
       : "Все вехи атласа закрыты";
+    const recordFish = entries.filter(e => e.found && e.weight > 0).sort((a, b) => b.weight - a.weight)[0];
+    const heroIcon = recordFish ? fishIconHtml(recordFish.id) : FISH_GLYPH;
+    const pill = (key, label) => `<button class="button atlas-pill${atlasFilter.state === key ? " active" : ""}" data-filter="${key}">${label}</button>`;
 
     return `<div class="view">${title("Рыбный атлас", "Коллекция видов, рекорды веса и грейды улова")}
       <div class="grid two">
         <section class="card hero" style="min-height:140px;padding:16px;">
           <div style="display:flex;gap:14px;align-items:center;">
-            <div class="avatar" style="width:64px;height:64px;">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H19v17H7.5A2.5 2.5 0 0 0 5 21.5Z"/><path d="M5 4.5v17"/><path d="M9 6.5h6M9 10h5"/></svg>
-            </div>
+            <div class="avatar atlas-hero-icon" style="width:72px;height:72px;">${heroIcon}</div>
             <div>
               <h2 style="font-size:18px;margin:0 0 4px;">Открыто видов: ${num(sum.found)} / ${num(sum.total)}</h2>
               <div class="rank">Поимок всего: <b>${num(sum.catches)}</b> · ${recordLine}</div>
@@ -1704,13 +1780,12 @@ __PASS_VIEW_JS__
           <div class="stat"><small>Грейды</small><b>С · З · Р</b></div>
         </section>
       </div>
+      <div class="atlas-rarities">${rarityStrip}</div>
       <div class="section-title"><b>Виды улова</b><span>С = серебро · З = золото · Р = радужная</span></div>
       <div style="display:flex;gap:6px;margin:0 2px 10px;">
-        <button class="button atlas-pill active" data-filter="all">Все</button>
-        <button class="button atlas-pill" data-filter="found">Открытые</button>
-        <button class="button atlas-pill" data-filter="missing">Ненайденные</button>
+        ${pill("all", "Все")}${pill("found", "Открытые")}${pill("missing", "Ненайденные")}
       </div>
-      <div class="store-grid" id="atlasGrid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr));">${cards || '<div class="empty">Поймайте первую рыбу, чтобы открыть атлас</div>'}</div>
+      <div class="atlas-grid" id="atlasGrid">${cards || '<div class="empty">Поймайте первую рыбу, чтобы открыть атлас</div>'}</div>
     </div>`;
   }
 
@@ -1944,12 +2019,16 @@ __PASS_VIEW_JS__
 
     document.querySelectorAll(".atlas-pill").forEach(p => p.onclick = () => {
       document.querySelectorAll(".atlas-pill").forEach(x => x.classList.toggle("active", x === p));
-      const f = p.dataset.filter;
-      document.querySelectorAll("#atlasGrid [data-found]").forEach(card => {
-        const found = card.dataset.found === "1";
-        card.style.display = (f === "all" || (f === "found" && found) || (f === "missing" && !found)) ? "" : "none";
-      });
+      atlasFilter.state = p.dataset.filter;
+      applyAtlasFilter();
     });
+    document.querySelectorAll(".atlas-rarcell").forEach(c => c.onclick = () => {
+      const turnOn = !c.classList.contains("active");
+      document.querySelectorAll(".atlas-rarcell").forEach(x => x.classList.toggle("active", turnOn && x === c));
+      atlasFilter.rarity = turnOn ? c.dataset.rar : "";
+      applyAtlasFilter();
+    });
+    applyAtlasFilter();
 
     document.querySelectorAll(".exchange-btn").forEach(b => b.onclick = () => {
       action(b.dataset.act, b.dataset.n);
@@ -2303,7 +2382,7 @@ __PASS_VIEW_JS__
     setItemIcons(icons) {
       if (!icons) return;
       Object.assign(EXTRA_ICONS, icons);
-      if (state.tab === "auction" || state.tab === "bees") renderView(false, true);
+      if (state.tab === "auction" || state.tab === "bees" || state.tab === "atlas") renderView(false, true);
     },
     setMerchantNear(near) {
       const next = Boolean(near);

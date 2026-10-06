@@ -6,8 +6,10 @@
 Проверяет окно торговца рыбой (одна вкладка «Рыбалка», серые кнопки без торговца), обычное F4 (вкладки «Рыбалка» нет) и вкладку кейсов (все одиннадцать карточек с иконками).
 Скриншоты кладёт в mods/aquatech-machines/art/hub_test_*.png.
 """
+import base64
 import json
 import sys
+import zipfile
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
@@ -164,6 +166,46 @@ def main():
         page.evaluate("p => window.AquaLumen.applySnapshot(p)", store_payload)
         page.wait_for_selector(".card.offer")
         ok &= check("F4 магазин: товаров пчеловода нет", page.locator(".card.offer").count() == 1, str(page.locator(".card.offer").count()))
+
+        # --- атлас: карточки из настоящего fish_shop.json, значки видов приходят из клиента (здесь из jar Starcatcher) --
+        fishes = json.loads((ROOT / "config" / "aqualumen" / "fish_shop.json").read_text(encoding="utf-8"))["fishes"]
+        atlas_payload = payload("atlas", ["atlas", "profile"])
+        atlas_payload["snapshot"]["atlas"] = [
+            {"id": f["id"], "name": f["name"], "rarity": f["rarity"], "count": 3 if i % 2 == 0 else 0,
+             "weight": 12.5 if i == 0 else (1.5 if i % 2 == 0 else 0), "grades": i % 8, "conds": i % 32,
+             "found": i % 2 == 0, "recordHolder": "Tester" if i % 2 == 0 else "", "recordWeight": 20.0}
+            for i, f in enumerate(fishes)]
+        atlas_payload["snapshot"]["atlasSummary"] = {"found": (len(fishes) + 1) // 2, "total": len(fishes), "catches": 150,
+                                                      "recordName": fishes[0]["name"], "recordWeight": 12.5,
+                                                      "nextMilestone": 60, "nextReward": 150000}
+        jar = zipfile.ZipFile(next((ROOT / "mods").glob("starcatcher-*.jar")))
+        icons = {}
+        for f in fishes:
+            raw = jar.read("assets/starcatcher/textures/item/" + f["id"].split(":")[1] + ".png")
+            icons[f["id"]] = "data:image/png;base64," + base64.b64encode(raw).decode()
+        page.goto(HUB.as_uri())
+        page.wait_for_function("typeof (window.AquaLumen && window.AquaLumen.applySnapshot) === 'function'")
+        page.evaluate("p => window.AquaLumen.applySnapshot(p)", atlas_payload)
+        page.wait_for_selector(".atlas-card")
+        ok &= check("атлас: карточка на каждый вид", page.locator(".atlas-card").count() == len(fishes) == 97,
+                    str(page.locator(".atlas-card").count()))
+        ok &= check("атлас: без значков стоит заглушка-рыбка", page.locator(".atlas-card img.mc-icon").count() == 0)
+        page.evaluate("icons => window.AquaLumen.setItemIcons(icons)", icons)
+        page.wait_for_selector(".atlas-card img.mc-icon")
+        ok &= check("атлас: у каждого вида свой значок", page.locator(".atlas-card img.mc-icon").count() == len(fishes))
+        ok &= check("атлас: ячейки редкостей считают виды",
+                    sum(int(t) for t in page.evaluate("[...document.querySelectorAll('.atlas-rarcell')].map(c => c.dataset.rar && c.querySelector('b').firstChild.textContent)")) == (len(fishes) + 1) // 2)
+        ok &= check("атлас: непойманные скрыты за «???»", page.locator(".atlas-card.missing h3", has_text="???").count() == len(fishes) // 2)
+        page.screenshot(path=str(SHOTS / "hub_test_atlas.png"))
+        page.locator(".atlas-rarcell").last.click()
+        legends = sum(1 for f in fishes if f["rarity"].startswith("Легенд"))
+        visible = page.evaluate("[...document.querySelectorAll('#atlasGrid .atlas-card')].filter(c => c.style.display !== 'none').length")
+        ok &= check("атлас: фильтр по редкости", visible == legends, f"{visible} из {legends}")
+        page.locator(".atlas-pill[data-filter=found]").click()
+        visible = page.evaluate("[...document.querySelectorAll('#atlasGrid .atlas-card')].filter(c => c.style.display !== 'none').length")
+        ok &= check("атлас: редкость и «Открытые» работают вместе",
+                    visible == sum(1 for i, f in enumerate(fishes) if i % 2 == 0 and f["rarity"].startswith("Легенд")), str(visible))
+        page.screenshot(path=str(SHOTS / "hub_test_atlas_filtered.png"))
 
         # --- вкладка из initialTab, которой нет в списке, заменяется первой доступной -----------------------------
         page.goto(HUB.as_uri())

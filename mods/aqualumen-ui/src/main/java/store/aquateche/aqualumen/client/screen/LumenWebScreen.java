@@ -180,6 +180,18 @@ public final class LumenWebScreen extends Screen implements HubSnapshotScreen {
                 }
             }
         }
+        if (!standalone && snapshot.atlas() != null) {
+            // рыбный атлас рисует значки видов по id предмета Starcatcher
+            for (HubSnapshot.AtlasEntry fish : snapshot.atlas()) {
+                if (fish.id() == null || !iconsSent.add(fish.id())) {
+                    continue;
+                }
+                String url = ItemIconResolver.dataUrl(fish.id());
+                if (url != null) {
+                    icons.addProperty(fish.id(), url);
+                }
+            }
+        }
         if (icons.size() > 0) {
             bridge.execute("if(window.AquaLumen&&window.AquaLumen.setItemIcons){window.AquaLumen.setItemIcons(" + icons + ");}");
         }
