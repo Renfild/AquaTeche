@@ -27,9 +27,6 @@
         + '<img class="c1" src="assets/images/cases/flora.png" alt="Кейс IV" loading="lazy" width="256" height="256">'
         + '<span class="medal m1">1</span><span class="medal m2">2</span><span class="medal m3">3</span></div>';
     }
-    if (kind === "keeper") {
-      return '<div class="u-art u-art--keeper"><img src="assets/images/updates/beekeeper-idle.webp" alt="Пчеловод на спавне, анимация ожидания" loading="lazy" decoding="async" width="540" height="502"></div>';
-    }
     if (kind === "keepnet") {
       return '<div class="u-art u-art--keepnet"><img src="assets/images/updates/keepnet-turn.webp" alt="Садок для рыбы" loading="lazy" decoding="async" width="460" height="430"></div>';
     }
@@ -55,11 +52,34 @@
       + art(f.art) + "</article>";
   }
 
+  function bold(text) {
+    return esc(text).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+  }
+
+  function npc(n) {
+    return '<article class="u-npc u-npc--' + esc(n.tone || "sea") + ' reveal">'
+      + "<h3>" + esc(n.name) + "</h3><p>" + bold(n.text) + "</p>"
+      + '<img src="' + esc(n.img) + '" alt="' + esc(n.alt || n.name) + '" loading="lazy" decoding="async" width="' + Number(n.w) + '" height="' + Number(n.h) + '">'
+      + "</article>";
+  }
+
   function item(i) {
     var pic = i.img
       ? '<img src="' + esc(i.img) + '" alt="" loading="lazy" decoding="async" width="96" height="96">'
       : '<span class="u-item-icon">' + TROPHY + "</span>";
     return '<div class="u-item reveal">' + pic + "<b>" + esc(i.name) + "</b><span>" + esc(i.note) + "</span></div>";
+  }
+
+  function recipe(r) {
+    var cells = r.grid.map(function (c) {
+      return '<span class="u-cell" title="' + esc(c.alt) + '"><img src="' + esc(c.img) + '" alt="' + esc(c.alt) + '" width="64" height="64" loading="lazy"></span>';
+    }).join("");
+    var legend = (r.legend || []).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
+    return '<section class="u-section" id="u-recipe"><div class="container"><h2 class="u-h2 reveal">' + esc(r.title) + "</h2>"
+      + '<div class="u-recipe reveal"><div class="u-craft"><div class="u-grid3">' + cells + "</div>"
+      + '<svg class="u-arrow" viewBox="0 0 48 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h40M32 3l11 9-11 9"/></svg>'
+      + '<span class="u-cell u-cell--result" title="' + esc(r.result.alt) + '"><img src="' + esc(r.result.img) + '" alt="' + esc(r.result.alt) + '" width="96" height="96" loading="lazy"></span></div>'
+      + (legend ? '<ul class="u-legend">' + legend + "</ul>" : "") + "</div></div></section>";
   }
 
   function list(title, items) {
@@ -83,11 +103,16 @@
       + '<div class="container u-hero-inner"><div class="u-kicker">' + esc(u.title) + "</div><h1>" + esc(u.name) + "</h1>"
       + '<span class="u-date">Доступно с ' + dateRu(u.date) + "</span>"
       + '<p class="u-tagline">' + esc(u.tagline) + "</p></div>"
-      + '<img class="u-hero-chest" src="' + esc(u.heroImg || "assets/images/updates/chest-hero.webp") + '" alt="" width="' + (u.heroImg ? 540 : 1084) + '" height="' + (u.heroImg ? 502 : 1006) + '" fetchpriority="high">'
+      + '<img class="u-hero-chest" src="' + esc(u.heroImg || "assets/images/updates/chest-hero.webp") + '" alt=""' + (u.heroImg ? "" : ' width="1084" height="1006"') + ' fetchpriority="high">'
       + '<a class="u-scroll" href="#u-main" aria-label="Листать вниз"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>';
     document.title = u.title + " · AquaTech";
 
-    var html = '<section class="u-section" id="u-main"><div class="container"><h2 class="u-h2 reveal">Главные изменения</h2>'
+    var html = "";
+    if (u.npcs && u.npcs.length) {
+      html += '<section class="u-section" id="u-npcs"><div class="container"><h2 class="u-h2 reveal">' + esc(u.npcsTitle || "Жители спавна") + '</h2><div class="u-npcs">'
+        + u.npcs.map(npc).join("") + "</div></div></section>";
+    }
+    html += '<section class="u-section" id="u-main"><div class="container"><h2 class="u-h2 reveal">Главные изменения</h2>'
       + (u.features || []).map(feature).join("") + "</div></section>";
 
     if (u.items && u.items.length) {
@@ -95,10 +120,14 @@
         + u.items.map(item).join("") + "</div></div></section>";
     }
 
+    if (u.recipe) html += recipe(u.recipe);
+
     if (u.economy && u.economy.rows) {
-      html += '<section class="u-section" id="u-economy"><div class="container"><h2 class="u-h2 reveal">' + esc(u.economy.title) + '</h2><div class="u-stats">'
+      html += '<section class="u-section" id="u-economy"><div class="container"><h2 class="u-h2 reveal">' + esc(u.economy.title) + '</h2><div class="u-stats' + (u.economy.dense ? " u-stats--dense" : "") + '">'
         + u.economy.rows.map(function (r) {
-          return '<div class="u-stat reveal"><span>' + esc(r.source) + "</span><b>" + esc(r.big) + "</b><p>" + esc(r.reward) + "</p><small>" + esc(r.rhythm) + "</small></div>";
+          var ic = r.img ? '<img class="u-stat-ic" src="' + esc(r.img) + '" alt="" width="64" height="64" loading="lazy">' : "";
+          return '<div class="u-stat reveal">' + ic + "<span>" + esc(r.source) + "</span><b>" + esc(r.big) + "</b><p>" + esc(r.reward) + "</p>"
+            + (r.rhythm ? "<small>" + esc(r.rhythm) + "</small>" : "") + "</div>";
         }).join("") + "</div></div></section>";
     }
 

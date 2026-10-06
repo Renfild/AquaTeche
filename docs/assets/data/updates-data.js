@@ -7,21 +7,28 @@ window.AQUATECH_UPDATES = {
       "date": "2026-10-07",
       "heroImg": "assets/images/updates/beekeeper-idle.webp",
       "tagline": "На спавне появился пчеловод с лавкой для пасеки, у рыбаков есть садок для улова, а рыбный атлас теперь показывает каждую рыбу.",
-      "features": [
+      "npcsTitle": "Жители спавна",
+      "npcs": [
         {
-          "tag": "Новый житель",
-          "title": "Пчеловод",
-          "titleAccent": "на спавне",
-          "accent": "honey",
-          "art": "keeper",
-          "text": "Бородатый пасечник в соломенной шляпе с сетчатой маской, сотовой рамкой и ульем за спиной. Рядом с ним вьётся пчела, а иногда он поправляет рамку. Нажмите по нему правой кнопкой, и откроется лавка пасеки.",
-          "points": [
-            "12 базовых пород пчёл из Productive Bees для начала разведения, по 50 000 монет за клетку",
-            "Стартовый набор: клетки, ловец пчёл, центрифуга, розлив мёда, улья, медовые лакомства и бутылки мёда",
-            "Купить можно только рядом с ним: издалека кнопки покупки не сработают",
-            "Пчела продаётся в клетке Productive Bees, с нужной породой внутри"
-          ]
+          "name": "Рыболов",
+          "tone": "sea",
+          "text": "Стоит на спавне рядом со своим ящиком с уловом. Нажмите по нему правой кнопкой, и откроется **скупка рыбы**: продайте улов **целиком или по одной рыбе**, цены лежат в таблице. Кнопки продажи работают, только пока вы рядом с ним.",
+          "img": "assets/images/updates/fisher-idle.webp",
+          "alt": "Рыболов на спавне, анимация ожидания",
+          "w": 353,
+          "h": 430
         },
+        {
+          "name": "Пчеловод",
+          "tone": "honey",
+          "text": "Новый житель спавна, возле него кружит пчела. ПКМ открывает **лавку пасеки**: **12 пород пчёл** из Productive Bees по 50 000 монет и стартовый набор: клетки, ловец, центрифуга, розлив мёда и улья. Купить можно только рядом с ним.",
+          "img": "assets/images/updates/beekeeper-idle.webp",
+          "alt": "Пчеловод на спавне, анимация ожидания",
+          "w": 482,
+          "h": 430
+        }
+      ],
+      "features": [
         {
           "tag": "Новый блок",
           "title": "Садок",
@@ -60,28 +67,128 @@ window.AQUATECH_UPDATES = {
           "name": "Садок",
           "note": "27 ячеек · только рыба",
           "img": "assets/images/updates/keepnet-icon.webp"
+        },
+        {
+          "name": "Пчела в клетке",
+          "note": "12 пород Productive Bees · по 50 000",
+          "img": "assets/images/updates/ic-bee-cage.webp"
+        },
+        {
+          "name": "Рыбный атлас",
+          "note": "значок у каждого вида · фильтр по редкости",
+          "img": "assets/images/updates/ic-fish.webp"
         }
       ],
+      "recipe": {
+        "title": "Рецепт садка",
+        "grid": [
+          {
+            "img": "assets/images/updates/ic-planks.webp",
+            "alt": "Любые доски"
+          },
+          {
+            "img": "assets/images/updates/ic-string.webp",
+            "alt": "Нить"
+          },
+          {
+            "img": "assets/images/updates/ic-planks.webp",
+            "alt": "Любые доски"
+          },
+          {
+            "img": "assets/images/updates/ic-string.webp",
+            "alt": "Нить"
+          },
+          {
+            "img": "assets/images/updates/ic-chest.webp",
+            "alt": "Деревянный сундук"
+          },
+          {
+            "img": "assets/images/updates/ic-string.webp",
+            "alt": "Нить"
+          },
+          {
+            "img": "assets/images/updates/ic-planks.webp",
+            "alt": "Любые доски"
+          },
+          {
+            "img": "assets/images/updates/ic-iron-ingot.webp",
+            "alt": "Железный слиток"
+          },
+          {
+            "img": "assets/images/updates/ic-planks.webp",
+            "alt": "Любые доски"
+          }
+        ],
+        "result": {
+          "img": "assets/images/updates/keepnet-icon.webp",
+          "alt": "Садок"
+        },
+        "legend": [
+          "Доски: любые",
+          "Нить",
+          "Сундук: любой деревянный",
+          "Железный слиток"
+        ]
+      },
       "economy": {
         "title": "Цены в лавке пасеки",
+        "dense": true,
         "rows": [
           {
             "source": "Пчела (12 пород)",
             "big": "50 000",
             "reward": "монет за клетку с пчелой",
-            "rhythm": "плотники, шахтёрские, копатель, каменщик, листорез, тростниковая, потная, кочевник, смоляная"
+            "rhythm": "плотники, шахтёрские, копатель, каменщик, листорез, тростниковая, потная, кочевник, смоляная",
+            "img": "assets/images/updates/ic-bee-cage.webp"
           },
           {
             "source": "Ловец пчёл",
             "big": "60 000",
             "reward": "монет",
-            "rhythm": "розлив мёда тоже 60 000, центрифуга 75 000"
+            "rhythm": "",
+            "img": "assets/images/updates/ic-catcher.webp"
+          },
+          {
+            "source": "Розлив мёда",
+            "big": "60 000",
+            "reward": "монет",
+            "rhythm": "",
+            "img": "assets/images/updates/ic-bottler.webp"
+          },
+          {
+            "source": "Центрифуга",
+            "big": "75 000",
+            "reward": "монет",
+            "rhythm": "",
+            "img": "assets/images/updates/ic-centrifuge.webp"
           },
           {
             "source": "Клетки ×4",
             "big": "10 000",
             "reward": "монет за четыре клетки",
-            "rhythm": "улей ×2 стоит 20 000, лакомство ×8 8 000, бутылка мёда ×4 4 000"
+            "rhythm": "",
+            "img": "assets/images/updates/ic-bee-cage-empty.webp"
+          },
+          {
+            "source": "Улей ×2",
+            "big": "20 000",
+            "reward": "монет за два улья",
+            "rhythm": "",
+            "img": "assets/images/updates/ic-beehive.webp"
+          },
+          {
+            "source": "Медовое лакомство ×8",
+            "big": "8 000",
+            "reward": "монет",
+            "rhythm": "",
+            "img": "assets/images/updates/ic-honey-treat.webp"
+          },
+          {
+            "source": "Бутылка мёда ×4",
+            "big": "4 000",
+            "reward": "монет",
+            "rhythm": "",
+            "img": "assets/images/updates/ic-honey-bottle.webp"
           }
         ]
       },
