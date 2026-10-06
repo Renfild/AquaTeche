@@ -7,6 +7,11 @@ import { onRequestPost as loginPost } from "../functions/api/login.js";
 import { onRequestGet as authNickGet } from "../functions/api/auth/nick.js";
 import { onRequestPost as forgotPasswordPost } from "../functions/api/auth/forgot-password.js";
 import { onRequestPost as resetPasswordPost } from "../functions/api/auth/reset-password.js";
+import {
+  onRequestGet as emailBindGet,
+  onRequestPost as emailBindPost,
+  onRequestDelete as emailBindDelete,
+} from "../functions/api/auth/email.js";
 import { onRequestPost as casesOpenPost } from "../functions/api/cases/open.js";
 import { onRequestGet as casesRecentGet } from "../functions/api/cases/recent.js";
 import { onRequestGet as statusHistoryGet } from "../functions/api/status-history.js";
@@ -111,6 +116,11 @@ async function handleApi(request, env, execCtx) {
   if (path === "/api/auth/nick" && method === "GET") return authNickGet(ctx(request, env));
   if (path === "/api/auth/forgot-password" && method === "POST") return forgotPasswordPost(ctx(request, env));
   if (path === "/api/auth/reset-password" && method === "POST") return resetPasswordPost(ctx(request, env));
+  if (path === "/api/auth/email") {
+    if (method === "GET") return emailBindGet(ctx(request, env));
+    if (method === "POST") return emailBindPost(ctx(request, env));
+    if (method === "DELETE") return emailBindDelete(ctx(request, env));
+  }
   if (path === "/api/cases/open" && method === "POST") return casesOpenPost(ctx(request, env));
   if (path === "/api/cases/recent" && method === "GET") return casesRecentGet(ctx(request, env));
   if (path === "/api/vault" && method === "GET") return vaultGet(ctx(request, env));

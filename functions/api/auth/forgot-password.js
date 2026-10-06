@@ -1,16 +1,11 @@
 import { bad, json, readJson } from "../../_lib/http.js";
 import { newSessionId, nickOk, normalizeNick } from "../../_lib/auth.js";
+import { ensureRecoverySchema } from "../../_lib/auth_recovery.js";
+import { codeMail, maskEmail, sendMail } from "../../_lib/mail.js";
 import { gatePasswordReset, gateResetNick } from "../../_lib/rate_limit.js";
 import { sendTelegramMessage, telegramLinkOf } from "../telegram.js";
 
 const CODE_TTL_MS = 15 * 60 * 1000;
-
-function maskEmail(email) {
-  if (!email || !email.includes("@")) return "***";
-  const [user, domain] = email.split("@");
-  const visible = user.length > 2 ? user.slice(0, 2) + "***" : "***";
-  return `${visible}@${domain}`;
-}
 
 function maskTelegram(name) {
   const clean = String(name || "").replace(/^@/, "");
@@ -25,34 +20,16 @@ function newCode() {
   return String(100000 + (buf[0] % 900000));
 }
 
-async function sendByEmail(env, user, email, code) {
-  if (!env.RESEND_API_KEY) return false;
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: "AquaTech <auth@aquateche.store>",
-        to: [email],
-        subject: "Сброс пароля на AquaTech",
-        html: `<p>Привет, <b>${user.nick}</b>!</p><p>Код для подтверждения сброса пароля: <b style="font-size:18px;letter-spacing:2px;">${code}</b></p><p>Код действует 15 минут. Если ты не запрашивал сброс, просто проигнорируй это письмо.</p>`,
-      }),
-    });
-    return res.ok;
-  } catch {
-    return false;
-  }
-}
-
 /**
  * POST /api/auth/forgot-password { nick }
- * Код уходит только в канал, который владелец аккаунта привязал заранее: сначала Telegram (бот @aquatechebot),
- * потом почта. На сервере вход требует сессию сайта, так что присылать код в игру нельзя: забывший пароль
+ * Код уходит во все каналы, которые владелец аккаунта привязал заранее: Telegram (бот @aquatechebot) и подтверждённая
+ * почта. Хватает одного доставленного. На сервере вход требует сессию сайта, так что присылать код в игру нельзя: забывший пароль
  * в игру не попадёт. Сам код в ответ никогда не попадает.
  */
 export async function onRequestPost(context) {
   const { request, env } = context;
   if (!env.DB) return bad("База данных D1 не подключена", 503);
+  await ensureRecoverySchema(env.DB);
 
   const gate = await gatePasswordReset(env.DB, request);
   if (!gate.ok) {
@@ -92,27 +69,22 @@ export async function onRequestPost(context) {
     .bind(token, user.id, code, expiresAt)
     .run();
 
-  let channel = "";
-  let target = "";
+  const channels = [];
   if (link) {
     const text =
       `Сброс пароля AquaTech для ника ${user.nick}.\n` +
       `Код: ${code}\n` +
       `Он действует 15 минут. Если ты ничего не запрашивал, просто проигнорируй это сообщение: пароль не изменится.`;
-    if (await sendTelegramMessage(env, link.chat_id, text)) {
-      channel = "telegram";
-      target = maskTelegram(link.tg_name);
-    }
+    if (await sendTelegramMessage(env, link.chat_id, text)) channels.push({ type: "telegram", target: maskTelegram(link.tg_name) });
   }
-  if (!channel && email && (await sendByEmail(env, user, email, code))) {
-    channel = "email";
-    target = maskEmail(email);
+  if (email && (await sendMail(env, { to: email, ...codeMail({ nick: user.nick, code, purpose: "reset" }) }))) {
+    channels.push({ type: "email", target: maskEmail(email) });
   }
 
-  if (!channel) {
+  if (!channels.length) {
     await env.DB.prepare("UPDATE password_reset_tokens SET used = 1 WHERE token = ?").bind(token).run();
-    return bad("Не удалось отправить код: открой чат с ботом @aquatechebot и напиши ему /start, потом повтори. Не выходит, пиши в Discord", 503);
+    return bad("Не удалось отправить код. Для Telegram открой чат с @aquatechebot и напиши ему /start, для почты проверь папку «Спам» и повтори. Не выходит, пиши в Discord", 503);
   }
 
-  return json({ ok: true, channel, target });
+  return json({ ok: true, channels, channel: channels[0].type, target: channels[0].target });
 }

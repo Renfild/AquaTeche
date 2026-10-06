@@ -117,3 +117,8 @@ export async function gateResetToken(db, token) {
 export async function gateResetNick(db, nick) {
   return checkAndBump(db, `pwnick:${String(nick || "").toLowerCase()}`, PWNICK_MAX, PWCODE_WINDOW_MS);
 }
+
+/** Не больше трёх писем с кодом привязки в час на аккаунт: иначе привязку можно использовать для спама. */
+export async function gateEmailStart(db, userId) {
+  return checkAndBump(db, `emailstart:${userId}`, 3, 60 * 60 * 1000);
+}

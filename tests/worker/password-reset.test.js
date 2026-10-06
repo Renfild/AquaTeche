@@ -161,3 +161,117 @@ test("слабый пароль отклоняется и код остаётс�
     tg.restore();
   }
 });
+
+// ---------- почта ----------
+import { onRequestGet as emailGet, onRequestPost as emailPost, onRequestDelete as emailDelete } from "../../functions/api/auth/email.js";
+
+function fakeMail({ fail = false } = {}) {
+  const sent = [];
+  return { sent, send: async (msg) => { if (fail) throw Object.assign(new Error("boom"), { code: "E_FAIL" }); sent.push(msg); return { messageId: "m" + sent.length }; } };
+}
+
+const cabinet = (fn, env, body, ip = "5.5.5.5") =>
+  fn({
+    env,
+    request: new Request("https://aquateche.store/api/auth/email", {
+      method: body === undefined ? "GET" : "POST",
+      headers: { "content-type": "application/json", cookie: "at_session=s1", "cf-connecting-ip": ip },
+      ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+    }),
+  });
+const mailCode = (mail) => mail.sent.at(-1).text.match(/(\d{6})/)[1];
+const emailOf = async (env) => (await env.DB.prepare("SELECT email FROM users WHERE id = 1").first()).email;
+
+test("почта привязывается только после подтверждения кодом из письма", async () => {
+  const env = await makeEnv({ linked: false });
+  const mail = fakeMail();
+  env.EMAIL = mail;
+  const start = await cabinet(emailPost, env, { action: "start", email: "Steve@Example.com" });
+  assert.equal(start.status, 200);
+  assert.equal((await start.json()).target, "st***@example.com");
+  assert.equal(mail.sent[0].to, "steve@example.com");
+  assert.equal(await emailOf(env), null, "до подтверждения почта в аккаунт не пишется");
+
+  const wrong = await cabinet(emailPost, env, { action: "confirm", code: mailCode(mail) === "000000" ? "000001" : "000000" });
+  assert.equal(wrong.status, 403);
+  assert.equal(await emailOf(env), null);
+
+  const ok = await cabinet(emailPost, env, { action: "confirm", code: mailCode(mail) });
+  assert.equal(ok.status, 200);
+  assert.equal(await emailOf(env), "steve@example.com");
+  const status = await (await cabinet(emailGet, env)).json();
+  assert.equal(status.linked, true);
+  assert.equal(status.email_masked, "st***@example.com");
+
+  const del = await emailDelete({ env, request: new Request("https://aquateche.store/api/auth/email", { method: "DELETE", headers: { cookie: "at_session=s1" } }) });
+  assert.equal(del.status, 200);
+  assert.equal(await emailOf(env), null);
+});
+
+test("без настроенной почты привязка честно отвечает 503", async () => {
+  const env = await makeEnv({ linked: false });
+  const res = await cabinet(emailPost, env, { action: "start", email: "a@b.co" });
+  assert.equal(res.status, 503);
+  assert.equal((await (await cabinet(emailGet, env)).json()).configured, false);
+});
+
+test("после пяти неверных кодов привязки код сгорает", async () => {
+  const env = await makeEnv({ linked: false });
+  const mail = fakeMail();
+  env.EMAIL = mail;
+  await cabinet(emailPost, env, { action: "start", email: "a@b.co" });
+  const real = mailCode(mail);
+  const wrong = real === "000000" ? "000001" : "000000";
+  for (let i = 0; i < 5; i++) assert.equal((await cabinet(emailPost, env, { action: "confirm", code: wrong })).status, 403);
+  assert.equal((await cabinet(emailPost, env, { action: "confirm", code: real })).status, 429);
+  assert.equal(await emailOf(env), null);
+});
+
+test("сброс пароля по почте, когда Telegram не привязан", async () => {
+  const tg = fakeTelegram();
+  try {
+    const env = await makeEnv({ linked: false });
+    const mail = fakeMail();
+    env.EMAIL = mail;
+    await env.DB.prepare("UPDATE users SET email = 'steve@example.com' WHERE id = 1").run();
+    const res = await askCode(env);
+    assert.equal(res.status, 200);
+    const body = await res.json();
+    assert.deepEqual(body.channels, [{ type: "email", target: "st***@example.com" }]);
+    assert.equal(tg.sent.length, 0);
+    const ok = await sendReset(env, { nick: "Steve", code: mailCode(mail), password: "new-password-1" });
+    assert.equal(ok.status, 200);
+    assert.notEqual(await passwordHash(env), "oldhash");
+  } finally {
+    tg.restore();
+  }
+});
+
+test("если привязаны Telegram и почта, код приходит в оба канала и он один", async () => {
+  const tg = fakeTelegram();
+  try {
+    const env = await makeEnv();
+    const mail = fakeMail();
+    env.EMAIL = mail;
+    await env.DB.prepare("UPDATE users SET email = 'steve@example.com' WHERE id = 1").run();
+    const body = await (await askCode(env)).json();
+    assert.deepEqual(body.channels.map((c) => c.type).sort(), ["email", "telegram"]);
+    assert.equal(mailCode(mail), codeFrom(tg));
+  } finally {
+    tg.restore();
+  }
+});
+
+test("если письмо не ушло и Telegram нет, запрос сгорает и отвечает 503", async () => {
+  const tg = fakeTelegram();
+  try {
+    const env = await makeEnv({ linked: false });
+    env.EMAIL = fakeMail({ fail: true });
+    await env.DB.prepare("UPDATE users SET email = 'steve@example.com' WHERE id = 1").run();
+    const res = await askCode(env);
+    assert.equal(res.status, 503);
+    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS n FROM password_reset_tokens WHERE used = 0").first()).n, 0);
+  } finally {
+    tg.restore();
+  }
+});

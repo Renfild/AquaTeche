@@ -24,49 +24,87 @@
   <a class="skip-link" href="#main">К содержимому</a>
   <div id="site-header"></div>
   <main id="main">
+  <section class="rs">
+    <div class="rs-card">
+      <header class="rs-head">
+        <span class="rs-eyebrow">Аккаунт</span>
+        <h1>Восстановление пароля</h1>
+        <ol class="rs-steps" aria-label="Шаги восстановления">
+          <li class="is-active" data-rs-step="1"><b>1</b><span>Ник</span></li>
+          <li data-rs-step="2"><b>2</b><span>Код и пароль</span></li>
+          <li data-rs-step="3"><b>3</b><span>Готово</span></li>
+        </ol>
+      </header>
 
-  <section class="page-hero">
-    <div class="container auth-shell">
-      <div class="eyebrow">Аккаунт</div>
-      <h1>Восстановление пароля</h1>
-      <p>Если ты играл на сервере, но не регистрировался на сайте — просто задай пароль, ник уже твой.</p>
-      <p style="color:var(--muted)">Если пароль уже есть, но ты его забыл, код придёт в Telegram-бот <b>@aquatechebot</b>. Это работает, если Telegram был привязан заранее: Профиль → Telegram → «Получить код». Не привязывал — смотри блок «Нужна помощь администратора» ниже.</p>
-
-      <form class="card form" id="reset-form" style="margin-top:1.25rem">
+      <form class="rs-pane form" id="reset-form" novalidate>
         <div class="field">
-          <label for="reset-nick">Никнейм</label>
-          <input id="reset-nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" autocapitalize="off" spellcheck="false" />
+          <label for="reset-nick">Твой ник на сервере</label>
+          <input id="reset-nick" maxlength="16" placeholder="Steve" required pattern="[A-Za-z0-9_]{3,16}" autocapitalize="off" autocomplete="username" spellcheck="false" />
         </div>
         <p class="field-error" data-reset-error role="alert" aria-live="polite"></p>
-        <button class="btn btn-primary" type="submit" id="reset-submit-btn">Продолжить</button>
-        <a class="btn btn-ghost" href="login.html">Вернуться ко входу</a>
+        <button class="btn btn-primary" type="submit" id="reset-submit-btn">Получить код</button>
+
+        <div class="rs-channels">
+          <p class="rs-channels-title">Куда придёт код</p>
+          <ul>
+            <li>
+              <span class="rs-ico" aria-hidden="true">TG</span>
+              <div><b>Telegram</b><small>бот @aquatechebot, если ты привязал его в профиле</small></div>
+            </li>
+            <li>
+              <span class="rs-ico" aria-hidden="true">@</span>
+              <div><b>Почта</b><small>если ты привязал и подтвердил её в профиле</small></div>
+            </li>
+          </ul>
+          <p class="rs-note">Ничего не привязано? <button type="button" class="rs-link" id="reset-open-help">Помощь администратора</button></p>
+        </div>
       </form>
 
-      <form class="card form" id="reset-code-form" hidden style="margin-top:1.25rem">
-        <h3 id="reset-code-title" style="margin:0 0 0.5rem">Подтверждение сброса</h3>
-        <p id="reset-code-subtitle" style="color:var(--muted);margin-bottom:1rem">Код отправлен в Telegram.</p>
+      <form class="rs-pane form" id="reset-code-form" hidden novalidate>
+        <div class="rs-sent" role="status">
+          <span class="rs-sent-mark" aria-hidden="true">✓</span>
+          <div>
+            <h2 id="reset-code-title">Код отправлен</h2>
+            <p id="reset-code-subtitle">Введи код и придумай новый пароль.</p>
+          </div>
+        </div>
         <div class="field">
-          <label for="reset-verify-code">6-значный код подтверждения</label>
-          <input id="reset-verify-code" name="code" type="text" maxlength="6" pattern="[0-9]{6}" placeholder="123456" required autocomplete="one-time-code" />
+          <label for="reset-verify-code">Код из сообщения (6 цифр)</label>
+          <input id="reset-verify-code" class="rs-code" name="code" type="text" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" placeholder="000000" required autocomplete="one-time-code" />
         </div>
         <div class="field">
           <label for="reset-new-password">Новый пароль (от 8 символов)</label>
-          <input id="reset-new-password" name="password" type="password" minlength="8" autocomplete="new-password" required />
+          <div class="rs-pass">
+            <input id="reset-new-password" name="password" type="password" minlength="8" autocomplete="new-password" required />
+            <button type="button" class="rs-eye" data-rs-eye="reset-new-password" aria-label="Показать пароль">Показать</button>
+          </div>
         </div>
         <div class="field">
-          <label for="reset-new-password2">Повтори новый пароль</label>
+          <label for="reset-new-password2">Повтори пароль</label>
           <input id="reset-new-password2" name="password2" type="password" minlength="8" autocomplete="new-password" required />
         </div>
         <p class="field-error" data-reset-error role="alert" aria-live="polite"></p>
-        <button class="btn btn-primary" type="submit">Сбросить пароль</button>
-        <button class="btn btn-ghost" type="button" id="reset-back-btn">Назад</button>
+        <button class="btn btn-primary" type="submit">Сменить пароль</button>
+        <div class="rs-row">
+          <button class="btn btn-ghost" type="button" id="reset-resend">Выслать код снова</button>
+          <button class="btn btn-ghost" type="button" id="reset-back-btn">Другой ник</button>
+        </div>
       </form>
 
-      <form class="card form" id="reset-claim-form" hidden style="margin-top:1.25rem">
-        <h3 id="reset-claim-title" style="margin:0 0 1rem">Задай пароль</h3>
+      <form class="rs-pane form" id="reset-claim-form" hidden novalidate>
+        <div class="rs-sent" role="status">
+          <span class="rs-sent-mark" aria-hidden="true">!</span>
+          <div>
+            <h2 id="reset-claim-title">Задай пароль</h2>
+            <p>Ник есть на сервере, но пароля у него ещё нет. Придумай его сейчас, ник станет твоим.</p>
+          </div>
+        </div>
         <div class="field">
-          <label for="reset-password">Новый пароль (от 8 символов)</label>
-          <input id="reset-password" name="password" type="password" minlength="8" autocomplete="new-password" required />
+          <label for="reset-password">Пароль (от 8 символов)</label>
+          <div class="rs-pass">
+            <input id="reset-password" name="password" type="password" minlength="8" autocomplete="new-password" required />
+            <button type="button" class="rs-eye" data-rs-eye="reset-password" aria-label="Показать пароль">Показать</button>
+          </div>
         </div>
         <div class="field">
           <label for="reset-password2">Повтори пароль</label>
@@ -74,17 +112,34 @@
         </div>
         <p class="field-error" data-reset-error role="alert" aria-live="polite"></p>
         <button class="btn btn-primary" type="submit">Задать пароль</button>
+        <button class="btn btn-ghost" type="button" data-rs-restart>Другой ник</button>
       </form>
 
-      <div class="card form" id="reset-step-support" hidden style="margin-top:1.25rem">
-        <h3 style="margin:0 0 1rem">Нужна помощь администратора?</h3>
-        <p style="color:var(--muted)">Если Telegram не привязан или недоступен, напиши в Discord: назови свой никнейм, и администратор восстановит доступ вручную. Привязать Telegram заранее можно в профиле, тогда в следующий раз сброс пройдёт сам.</p>
+      <div class="rs-pane rs-done" id="reset-done" hidden role="status">
+        <span class="rs-done-mark" aria-hidden="true">✓</span>
+        <h2>Пароль изменён</h2>
+        <p>Старые сессии закрыты. Войди на сайте и в лаунчере с новым паролем.</p>
+        <a class="btn btn-primary" href="login.html">Войти</a>
+      </div>
+    </div>
+
+    <aside class="rs-help" id="reset-step-support" hidden>
+      <h2>Нужна помощь администратора</h2>
+      <p>Если ни Telegram, ни почта не привязаны, сбросить пароль самому не получится. Это делается так:</p>
+      <ol>
+        <li>Напиши в Discord свой ник на сервере.</li>
+        <li>Администратор проверит, что это ты, и пришлёт одноразовый код.</li>
+        <li>Нажми кнопку ниже, введи код и придумай новый пароль.</li>
+      </ol>
+      <div class="rs-help-actions">
         <a class="btn btn-primary" href="https://discord.gg/3Khzr5z4fQ" target="_blank" rel="noopener">Написать в Discord</a>
         <button class="btn btn-ghost" type="button" id="reset-have-code">У меня есть код от администратора</button>
       </div>
-    </div>
-  </section>
+      <p class="rs-help-tip">Чтобы в следующий раз всё прошло само, привяжи Telegram или почту в профиле.</p>
+    </aside>
 
+    <p class="rs-back"><a href="login.html">← Вернуться ко входу</a></p>
+  </section>
   </main>
   <div id="site-footer"></div>
   <script src="assets/js/site.js?v=20261004_pass"></script>

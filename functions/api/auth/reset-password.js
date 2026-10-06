@@ -1,5 +1,6 @@
 import { bad, json, readJson } from "../../_lib/http.js";
 import { hashPassword, nickOk, normalizeNick, passwordPolicyError } from "../../_lib/auth.js";
+import { ensureRecoverySchema } from "../../_lib/auth_recovery.js";
 import { gateResetCode, gateResetToken } from "../../_lib/rate_limit.js";
 
 /** Сравнение без раннего выхода: время ответа не выдаёт, сколько цифр угадано. */
@@ -19,6 +20,7 @@ function sameCode(a, b) {
 export async function onRequestPost(context) {
   const { request, env } = context;
   if (!env.DB) return bad("База данных D1 не подключена", 503);
+  await ensureRecoverySchema(env.DB);
 
   const body = await readJson(request);
   if (!body) return bad("Некорректный JSON");

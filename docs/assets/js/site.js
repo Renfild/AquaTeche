@@ -1204,6 +1204,7 @@
     { id: "overview", label: "Обзор" },
     { id: "skin", label: "Скин и плащ" },
     { id: "telegram", label: "Telegram" },
+    { id: "email", label: "Почта" },
     { id: "theme", label: "Тема профиля" },
     { id: "password", label: "Пароль" },
     { id: "about", label: "О себе" },
@@ -1530,11 +1531,22 @@
               <h2>Telegram</h2>
               <div class="panel" id="tg-link-box"><p class="muted-line">Загрузка…</p></div>
             </section>
+            <section class="lk-pane" data-lk-pane="email" ${tab === "email" ? "" : "hidden"}>
+              <h2>Почта</h2>
+              <div class="panel" id="email-link-box"><p class="muted-line">Загрузка…</p></div>
+            </section>
           </div>
         </div>
       </div>`;
 
-    if (mine) loadTelegramBox(root);
+    if (mine) {
+      loadTelegramBox(root);
+      loadEmailBox(root);
+      loadRecoveryBanner(root);
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden && root.isConnected) loadRecoveryBanner(root);
+      });
+    }
     renderAchievements(root, profile, mine);
 
     function showTab(id) {
@@ -1622,7 +1634,6 @@
 
     async function loadTelegramBox(rootEl) {
       const box = rootEl.querySelector("#tg-link-box");
-      const warn = rootEl.querySelector("#tg-warn");
       if (!box) return;
       let st;
       try {
@@ -1630,15 +1641,6 @@
       } catch {
         box.innerHTML = '<p class="muted-line">Не удалось загрузить статус привязки.</p>';
         return;
-      }
-      if (warn) {
-        warn.innerHTML = st.linked
-          ? ""
-          : `<div class="tg-warning" role="alert">
-              <strong>Привяжи Telegram, иначе не сможешь сбросить пароль.</strong>
-              <span>Если забудешь пароль, а Telegram не привязан, вернуть доступ сможет только администратор в Discord.</span>
-              <a class="btn btn-primary" href="#telegram">Привязать Telegram</a>
-            </div>`;
       }
       if (st.linked) {
         const when = st.linked_at ? new Date(st.linked_at).toLocaleString("ru-RU", { dateStyle: "short", timeStyle: "short" }) : "";
@@ -1651,14 +1653,11 @@
           await api("/api/telegram/link", { method: "DELETE" });
           toast("Telegram отвязан");
           loadTelegramBox(rootEl);
+          loadRecoveryBanner(rootEl);
         };
         return;
       }
       box.innerHTML = `
-        <div class="tg-warning" role="alert" style="margin:0 0 1rem">
-          <strong>Без Telegram сбросить пароль самому нельзя.</strong>
-          <span>Нажми «Получить код», отправь его боту, и сброс пароля заработает.</span>
-        </div>
         <h3 style="margin:0 0 0.35rem">Привяжи Telegram</h3>
         <p class="muted-line" style="margin:0 0 0.75rem">Бот @${esc(st.bot)} напишет, когда купят твой лот на аукционе, и покажет баланс и тренды командами /balance, /trends, /pass. Ещё через него можно сбросить забытый пароль.</p>
         <button class="btn btn-primary" type="button" id="tg-code-btn">Получить код</button>
@@ -1676,6 +1675,122 @@
           toast("Скопировано");
         };
       };
+    }
+
+    /** Красная плашка: пока не привязан ни Telegram, ни почта, сброс пароля возможен только через администратора. */
+    async function loadRecoveryBanner(rootEl) {
+      const warn = rootEl.querySelector("#tg-warn");
+      if (!warn) return;
+      let tg = null;
+      let mail = null;
+      try {
+        [tg, mail] = await Promise.all([
+          api("/api/telegram/link?_=" + Date.now()).catch(() => null),
+          api("/api/auth/email?_=" + Date.now()).catch(() => null),
+        ]);
+      } catch {
+        return;
+      }
+      if (!tg && !mail) return;
+      const bound = Boolean(tg?.linked) || Boolean(mail?.linked);
+      warn.innerHTML = bound
+        ? ""
+        : `<div class="tg-warning" role="alert">
+            <strong>Привяжи Telegram или почту, иначе не сможешь сбросить пароль.</strong>
+            <span>Если забудешь пароль, а ничего не привязано, вернуть доступ сможет только администратор в Discord.</span>
+            <a class="btn btn-primary" href="#telegram">Привязать Telegram</a>
+            <a class="btn btn-ghost" href="#email">Привязать почту</a>
+          </div>`;
+    }
+
+    async function loadEmailBox(rootEl) {
+      const box = rootEl.querySelector("#email-link-box");
+      if (!box) return;
+      let st;
+      try {
+        st = await api("/api/auth/email?_=" + Date.now());
+      } catch {
+        box.innerHTML = '<p class="muted-line">Не удалось загрузить статус почты.</p>';
+        return;
+      }
+      if (st.linked) {
+        box.innerHTML = `
+          <h3 style="margin:0 0 0.35rem">✅ Почта привязана</h3>
+          <p class="muted-line" style="margin:0 0 0.75rem">Адрес: <strong>${esc(st.email_masked)}</strong></p>
+          <p class="muted-line" style="margin:0 0 1rem">Если забудешь пароль, код для сброса придёт на эту почту.</p>
+          <button class="btn btn-secondary" type="button" id="email-unlink">Отвязать</button>`;
+        box.querySelector("#email-unlink").onclick = async () => {
+          await api("/api/auth/email", { method: "DELETE" });
+          toast("Почта отвязана");
+          loadEmailBox(rootEl);
+          loadRecoveryBanner(rootEl);
+        };
+        return;
+      }
+      if (!st.configured) {
+        box.innerHTML = `
+          <h3 style="margin:0 0 0.35rem">Привязка почты скоро</h3>
+          <p class="muted-line" style="margin:0">Отправка писем на сайте пока не включена. Пока привяжи Telegram: вкладка «Telegram».</p>`;
+        return;
+      }
+      box.innerHTML = `
+        <h3 style="margin:0 0 0.35rem">Привяжи почту</h3>
+        <p class="muted-line" style="margin:0 0 0.9rem">Мы пришлём код на этот адрес. Подтверждённая почта нужна только для сброса пароля, никаких рассылок.</p>
+        <form id="email-start-form" class="form">
+          <div class="field">
+            <label for="email-input">Адрес почты</label>
+            <input id="email-input" type="email" placeholder="you@mail.ru" autocomplete="email" required maxlength="120" />
+          </div>
+          <p class="field-error" id="email-error" role="alert" aria-live="polite"></p>
+          <button class="btn btn-primary" type="submit">Отправить код</button>
+        </form>
+        <form id="email-confirm-form" class="form" hidden>
+          <p class="muted-line" id="email-sent" style="margin:0"></p>
+          <div class="field">
+            <label for="email-code">Код из письма (6 цифр)</label>
+            <input id="email-code" type="text" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" placeholder="000000" autocomplete="one-time-code" required />
+          </div>
+          <p class="field-error" id="email-confirm-error" role="alert" aria-live="polite"></p>
+          <button class="btn btn-primary" type="submit">Подтвердить почту</button>
+        </form>`;
+      const startForm = box.querySelector("#email-start-form");
+      const confirmForm = box.querySelector("#email-confirm-form");
+      startForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const err = box.querySelector("#email-error");
+        err.textContent = "";
+        try {
+          const res = await api("/api/auth/email", {
+            method: "POST",
+            body: JSON.stringify({ action: "start", email: box.querySelector("#email-input").value.trim() }),
+          });
+          startForm.hidden = true;
+          confirmForm.hidden = false;
+          box.querySelector("#email-sent").textContent = `Код отправлен на ${res.target}. Проверь и папку «Спам». Он действует 15 минут.`;
+          box.querySelector("#email-code").focus();
+        } catch (error) {
+          err.textContent = error.message || "Не удалось отправить код";
+        }
+      });
+      box.querySelector("#email-code").addEventListener("input", (e) => {
+        e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6);
+      });
+      confirmForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const err = box.querySelector("#email-confirm-error");
+        err.textContent = "";
+        try {
+          await api("/api/auth/email", {
+            method: "POST",
+            body: JSON.stringify({ action: "confirm", code: box.querySelector("#email-code").value.trim() }),
+          });
+          toast("Почта привязана");
+          loadEmailBox(rootEl);
+          loadRecoveryBanner(rootEl);
+        } catch (error) {
+          err.textContent = error.message || "Неверный код";
+        }
+      });
     }
 
     async function saveProfile(form) {
@@ -2154,9 +2269,13 @@
     if (!form) return;
     const codeForm = $("#reset-code-form");
     const claimForm = $("#reset-claim-form");
+    const doneBox = $("#reset-done");
     const supportBox = $("#reset-step-support");
-    const backBtn = $("#reset-back-btn");
+    const resendBtn = $("#reset-resend");
+    const panes = [form, codeForm, claimForm, doneBox];
     let nick = "";
+    let cooldown = 0;
+    let cooldownTimer = 0;
 
     function resetError(text) {
       document.querySelectorAll("[data-reset-error]").forEach((el) => {
@@ -2164,112 +2283,174 @@
       });
     }
 
+    function showPane(pane, step) {
+      panes.forEach((p) => {
+        p.hidden = p !== pane;
+      });
+      document.querySelectorAll("[data-rs-step]").forEach((li) => {
+        const n = Number(li.dataset.rsStep);
+        li.classList.toggle("is-active", n === step);
+        li.classList.toggle("is-done", n < step);
+      });
+      resetError("");
+    }
+
+    function startCooldown(seconds) {
+      cooldown = seconds;
+      clearInterval(cooldownTimer);
+      const tick = () => {
+        if (!resendBtn) return;
+        resendBtn.disabled = cooldown > 0;
+        resendBtn.textContent = cooldown > 0 ? `Ещё раз (${cooldown} с)` : "Выслать код снова";
+        if (cooldown <= 0) clearInterval(cooldownTimer);
+        cooldown -= 1;
+      };
+      tick();
+      cooldownTimer = setInterval(tick, 1000);
+    }
+
+    /** Просит сервер отправить код и показывает, куда он ушёл. */
+    async function requestCode() {
+      const res = await api("/api/auth/forgot-password", { method: "POST", body: JSON.stringify({ nick }) });
+      const channels = Array.isArray(res.channels) && res.channels.length ? res.channels : [{ type: res.channel, target: res.target }];
+      const where = channels
+        .map((c) => (c.type === "email" ? `на почту ${c.target}` : `в Telegram ${c.target}`))
+        .join(" и ");
+      $("#reset-code-title").textContent = "Код отправлен";
+      $("#reset-code-subtitle").textContent = `Он ушёл ${where}. Действует 15 минут. Введи его и придумай новый пароль для ${nick}.`;
+      showPane(codeForm, 2);
+      if (resendBtn) resendBtn.hidden = false;
+      startCooldown(60);
+      $("#reset-verify-code")?.focus();
+    }
+
+    function openHelp() {
+      supportBox.hidden = false;
+      supportBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function restart() {
+      showPane(form, 1);
+      supportBox.hidden = true;
+      $("#reset-nick")?.focus();
+    }
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       nick = ($("#reset-nick")?.value || "").trim();
       resetError("");
-
+      if (!/^[A-Za-z0-9_]{3,16}$/.test(nick)) {
+        resetError("Ник: 3–16 символов, латиница, цифры и _");
+        return;
+      }
+      const submit = $("#reset-submit-btn");
+      submit.disabled = true;
       try {
         const data = await api(`/api/auth/nick?nick=${encodeURIComponent(nick)}`);
         if (data.unclaimed || data.exists === false) {
-          form.hidden = true;
-          claimForm.hidden = false;
           $("#reset-claim-title").textContent = `Задай пароль для ${nick}`;
+          showPane(claimForm, 2);
           $("#reset-password")?.focus();
           return;
         }
-
-        // Аккаунт уже с паролем: код уходит в привязанный Telegram
-        const res = await api("/api/auth/forgot-password", {
-          method: "POST",
-          body: JSON.stringify({ nick }),
-        });
-
-        form.hidden = true;
-        codeForm.hidden = false;
-        supportBox.hidden = false;
-        $("#reset-code-title").textContent = `Сброс пароля для ${nick}`;
-        $("#reset-code-subtitle").textContent =
-          res.channel === "email"
-            ? `Код отправлен на ${res.target}`
-            : `Код отправлен в Telegram${res.target ? ` (${res.target})` : ""}. Он действует 15 минут.`;
-        $("#reset-verify-code")?.focus();
+        await requestCode();
       } catch (err) {
-        resetError(err.message || "Не удалось отправить запрос на сброс");
-        supportBox.hidden = false;
+        resetError(err.message || "Не удалось отправить код");
+        openHelp();
+      } finally {
+        submit.disabled = false;
       }
     });
 
-    // Код от администратора (Telegram не привязан): сразу к вводу кода и нового пароля
+    resendBtn?.addEventListener("click", async () => {
+      if (cooldown > 0) return;
+      resetError("");
+      resendBtn.disabled = true;
+      try {
+        await requestCode();
+        toast("Код отправлен ещё раз");
+      } catch (err) {
+        resetError(err.message || "Не удалось отправить код");
+        startCooldown(30);
+      }
+    });
+
+    $("#reset-back-btn")?.addEventListener("click", restart);
+    document.querySelectorAll("[data-rs-restart]").forEach((b) => b.addEventListener("click", restart));
+    $("#reset-open-help")?.addEventListener("click", openHelp);
+
+    // Код от администратора (Telegram и почта не привязаны): сразу к вводу кода и нового пароля
     $("#reset-have-code")?.addEventListener("click", () => {
       nick = ($("#reset-nick")?.value || "").trim();
       if (!nick) {
+        showPane(form, 1);
         resetError("Сначала введи ник");
         $("#reset-nick")?.focus();
         return;
       }
-      resetError("");
-      form.hidden = true;
-      codeForm.hidden = false;
-      $("#reset-code-title").textContent = `Сброс пароля для ${nick}`;
-      $("#reset-code-subtitle").textContent = "Введи код, который дал администратор, и новый пароль. Код действует ограниченное время.";
+      $("#reset-code-title").textContent = "Код от администратора";
+      $("#reset-code-subtitle").textContent = `Введи код, который тебе дал администратор, и придумай новый пароль для ${nick}.`;
+      showPane(codeForm, 2);
+      resendBtn.hidden = true;
       $("#reset-verify-code")?.focus();
     });
 
-    backBtn?.addEventListener("click", () => {
-      codeForm.hidden = true;
-      supportBox.hidden = true;
-      form.hidden = false;
-      resetError("");
+    $("#reset-verify-code")?.addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6);
     });
 
-    codeForm?.addEventListener("submit", async (e) => {
+    document.querySelectorAll("[data-rs-eye]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const input = document.getElementById(btn.dataset.rsEye);
+        if (!input) return;
+        const show = input.type === "password";
+        input.type = show ? "text" : "password";
+        btn.textContent = show ? "Скрыть" : "Показать";
+      });
+    });
+
+    codeForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.currentTarget);
+      const fd = new FormData(codeForm);
       const code = String(fd.get("code") || "").trim();
       const p1 = String(fd.get("password") || "");
       const p2 = String(fd.get("password2") || "");
-
+      if (!/^[0-9]{6}$/.test(code)) {
+        resetError("Код состоит из 6 цифр");
+        return;
+      }
+      if (p1.length < 8) {
+        resetError("Пароль от 8 символов");
+        return;
+      }
       if (p1 !== p2) {
         resetError("Пароли не совпадают");
         return;
       }
-
       resetError("");
       try {
-        await api("/api/auth/reset-password", {
-          method: "POST",
-          body: JSON.stringify({
-            nick,
-            code,
-            password: p1,
-          }),
-        });
-        toast("Пароль успешно изменён! Теперь войди.");
-        setTimeout(() => {
-          location.href = "login.html";
-        }, 800);
+        await api("/api/auth/reset-password", { method: "POST", body: JSON.stringify({ nick, code, password: p1 }) });
+        showPane(doneBox, 3);
       } catch (err) {
         resetError(err.message || "Неверный код подтверждения");
       }
     });
 
-    claimForm?.addEventListener("submit", async (e) => {
+    claimForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.currentTarget);
-      if (fd.get("password") !== fd.get("password2")) {
+      const fd = new FormData(claimForm);
+      const p1 = String(fd.get("password") || "");
+      if (p1.length < 8) {
+        resetError("Пароль от 8 символов");
+        return;
+      }
+      if (p1 !== fd.get("password2")) {
         resetError("Пароли не совпадают");
         return;
       }
       try {
-        await api("/api/register", {
-          method: "POST",
-          body: JSON.stringify({ nick, password: fd.get("password") }),
-        });
-        toast("Пароль задан! Теперь войди.");
-        setTimeout(() => {
-          location.href = "login.html";
-        }, 600);
+        await api("/api/register", { method: "POST", body: JSON.stringify({ nick, password: p1 }) });
+        showPane(doneBox, 3);
       } catch (err) {
         resetError(err.message || "Не удалось задать пароль");
       }
