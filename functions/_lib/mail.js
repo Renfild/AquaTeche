@@ -1,6 +1,6 @@
 /**
- * Отправка писем. Основной путь: Cloudflare Email Service (привязка send_email с именем EMAIL, домен onboard-ится
- * командой `wrangler email sending enable aquateche.store`). Запасной путь: Resend по ключу RESEND_API_KEY.
+ * Отправка писем через Resend (секрет RESEND_API_KEY, домен aquateche.store верифицирован).
+ * Привязка send_email с именем EMAIL осталась как запасной путь (в тестах), в боевом конфиге её нет.
  * Без обоих mailConfigured() возвращает false, и сайт честно говорит, что почта пока не включена.
  */
 const FROM = { email: "auth@aquateche.store", name: "AquaTech" };
