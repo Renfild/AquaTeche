@@ -643,7 +643,9 @@ public final class HubActionHandler {
         } catch (NumberFormatException e) {
             return;
         }
-        if (!eventCall(player, "claimQuest", index)) {
+        boolean claimed = eventCall(player, "claimQuest", index);
+        HubDataService.push(player);
+        if (!claimed) {
             player.sendSystemMessage(Component.literal("\u00a76[\u041a\u043e\u043d\u0442\u0440\u0430\u043a\u0442] \u00a77\u041a\u043e\u043d\u0442\u0440\u0430\u043a\u0442 \u0435\u0449\u0451 \u043d\u0435 \u0433\u043e\u0442\u043e\u0432 \u0438\u043b\u0438 \u043d\u0430\u0433\u0440\u0430\u0434\u0430 \u0443\u0436\u0435 \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0430."));
         }
     }
@@ -655,7 +657,9 @@ public final class HubActionHandler {
         } catch (NumberFormatException e) {
             return;
         }
-        if (!eventCall(player, "rerollQuest", index)) {
+        boolean rerolled = eventCall(player, "rerollQuest", index);
+        HubDataService.push(player);
+        if (!rerolled) {
             player.sendSystemMessage(Component.literal("\u00a76[\u041a\u043e\u043d\u0442\u0440\u0430\u043a\u0442] \u00a77\u0420\u0435\u0440\u043e\u043b\u043b \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d (\u043d\u0443\u0436\u043d\u043e 100 \u043c\u043e\u043d\u0435\u0442 \u0438\u043b\u0438 \u0437\u0430\u043f\u0430\u0441 \u043a\u043e\u043d\u0442\u0440\u0430\u043a\u0442\u043e\u0432 \u0438\u0441\u0447\u0435\u0440\u043f\u0430\u043d)."));
         }
     }}

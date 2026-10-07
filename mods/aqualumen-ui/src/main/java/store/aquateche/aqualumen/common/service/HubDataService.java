@@ -373,12 +373,15 @@ public final class HubDataService {
             String requires = def.requiresText != null && !def.requiresText.isBlank()
                     ? def.requiresText
                     : (def.requiredRanks != null ? String.join(", ", def.requiredRanks) : "");
+            // Поле command клиентской веб-панели не используется; несём в нём остаток перезарядки ("cooldown:<сек>"),
+            // чтобы не менять формат пакета у клиентов со старым модом.
+            long left = def.id != null ? KitConfig.remainingSeconds(player, def.id) : 0L;
             list.add(new HubSnapshot.KitEntry(
                 def.id != null ? def.id : "",
                 def.title != null ? def.title : "",
                 def.description != null ? def.description : "",
                 def.badge != null ? def.badge : "",
-                cmd,
+                left > 0L ? "cooldown:" + left : cmd,
                 locked,
                 requires
             ));

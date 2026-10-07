@@ -109,6 +109,144 @@
       "price": 500,
       "kind": "patchouli_book",
       "payload": "aquatech_ui:guide"
+    },
+    {
+      "id": "bee.cages",
+      "item": "productivebees:bee_cage:4",
+      "title": "Клетка для пчёл ×4",
+      "price": 10000
+    },
+    {
+      "id": "bee.catcher",
+      "item": "productivebees:catcher:1",
+      "title": "Ловец пчёл",
+      "price": 60000
+    },
+    {
+      "id": "bee.centrifuge",
+      "item": "productivebees:centrifuge:1",
+      "title": "Центрифуга",
+      "price": 75000
+    },
+    {
+      "id": "bee.bottler",
+      "item": "productivebees:bottler:1",
+      "title": "Розлив мёда",
+      "price": 60000
+    },
+    {
+      "id": "bee.honey_treat",
+      "item": "productivebees:honey_treat:8",
+      "title": "Медовое лакомство ×8",
+      "price": 8000
+    },
+    {
+      "id": "bee.honey_bottle",
+      "item": "minecraft:honey_bottle:4",
+      "title": "Бутылка мёда ×4",
+      "price": 4000
+    },
+    {
+      "id": "bee.beehive",
+      "item": "minecraft:beehive:2",
+      "title": "Улей ×2",
+      "price": 20000
+    },
+    {
+      "id": "bee.bee_yellow_black_carpenter",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:yellow_black_carpenter_bee\",name:\"Yellow Carpenter Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Пчела-плотник жёлтая",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:yellow_black_carpenter_bee\",name:\"Yellow Carpenter Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_green_carpenter",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:green_carpenter_bee\",name:\"Green Carpenter Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Пчела-плотник зелёная",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:green_carpenter_bee\",name:\"Green Carpenter Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_ashy_mining",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:ashy_mining_bee\",name:\"Ashy Mining Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Пепельная шахтёрская пчела",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:ashy_mining_bee\",name:\"Ashy Mining Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_chocolate_mining",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:chocolate_mining_bee\",name:\"Chocolate Mining Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Шоколадная шахтёрская пчела",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:chocolate_mining_bee\",name:\"Chocolate Mining Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_digger",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:digger_bee\",name:\"Digger Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Пчела-копатель",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:digger_bee\",name:\"Digger Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_blue_banded",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:blue_banded_bee\",name:\"Blue Banded Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Пчела в голубую полоску",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:blue_banded_bee\",name:\"Blue Banded Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_mason",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:mason_bee\",name:\"Mason Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Пчела-каменщик",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:mason_bee\",name:\"Mason Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_leafcutter",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:leafcutter_bee\",name:\"Leafcutter Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Пчела-листорез",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:leafcutter_bee\",name:\"Leafcutter Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_reed",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:reed_bee\",name:\"Reed Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Тростниковая пчела",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:reed_bee\",name:\"Reed Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_sweat",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:sweat_bee\",name:\"Sweat Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Потная пчела",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:sweat_bee\",name:\"Sweat Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_nomad",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:nomad_bee\",name:\"Nomad Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Пчела-кочевник",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:nomad_bee\",name:\"Nomad Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
+    },
+    {
+      "id": "bee.bee_resin",
+      "item": "productivebees:bee_cage|1|{entity:\"productivebees:resin_bee\",name:\"Resin Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}",
+      "kind": "item_nbt",
+      "title": "Смоляная пчела",
+      "price": 50000,
+      "payload": "productivebees:bee_cage|1|{entity:\"productivebees:resin_bee\",name:\"Resin Bee\",isProductiveBee:1b,mod:\"productivebees\",modName:\"Productive Bees\"}"
     }
   ]
 }

@@ -138,6 +138,15 @@ public final class KitConfig {
         return null;
     }
 
+    /** Сколько секунд осталось до следующей выдачи набора; 0, если можно забирать. */
+    public static long remainingSeconds(ServerPlayer player, String kitId) {
+        if (player == null || kitId == null) return 0L;
+        loadCooldowns();
+        long next = COOLDOWNS.getOrDefault(player.getUUID() + "_" + kitId.toLowerCase(Locale.ROOT), 0L);
+        long left = next - System.currentTimeMillis();
+        return left > 0L ? (left + 999L) / 1000L : 0L;
+    }
+
     public static boolean grantKit(ServerPlayer player, String kitId) {
         if (player == null || kitId == null) return false;
         KitDef kit = find(kitId);
