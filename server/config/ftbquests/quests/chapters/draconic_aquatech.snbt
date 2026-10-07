@@ -1,0 +1,1198 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "draconic_aquatech"
+	group: "2AC058F49B3BBFEF"
+	icon: "draconicevolution:draconic_chestpiece"
+	id: "C29417745990E7DE"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Draconic Evolution строится на слиянии (Fusion Crafting): в центре стоит ядро слияния, вокруг него инжекторы. В инжекторы кладут ингредиенты, ядру подводят энергию, и через время получается результат."
+				"На AquaTech рецепты мода пересобраны под моды сервера. Вместо алмазов и золота нужны манасталь, террасталь и альфсталь из Botania и Mythic Botany, процессоры AE2 и MEGA, накопители IndustrialUpgrade, а в финале нейтроний и кристаллическая матрица Avaritia."
+				"Тиры идут по порядку: драконит, виверна (Wyvern), дракон (Draconic, пробуждённый), хаос (Chaotic). Инжектор следующего тира собирают на инжекторах предыдущего."
+				"Энергия и время слияния остались как в моде, сложность идёт от материалов. Все рецепты смотри в JEI, а здесь они расписаны по шагам."
+				"Дислокаторы (телепорты) на сервере отключены. Магнит собирается без них."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:draconic_chestpiece"
+			id: "6518BC1F985089B3"
+			rewards: [
+				{
+					id: "40C7D3C552CFED43"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "488EF2B954732AB6"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "E60E93E6C5A9C97A"
+				title: "Прочитать про слияние"
+				type: "checkmark"
+			}]
+			title: "Draconic Evolution"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6518BC1F985089B3"]
+			description: [
+				"В нашем мире нет руды драконита и острова хаоса. Драконит берётся тремя способами."
+				"Первый: дракон Энда. С него падает драконья пыль (по настройке сервера 64 штуки за убийство), а яйцо дракона появляется после каждого убийства. Дракона можно вызвать заново четырьмя кристаллами Энда."
+				"Второй: кейс «Драконий» (F4, вкладка «Кейсы»). В нём слитки, ядра драконита и виверны, детали слияния и сердце дракона."
+				"Третий: пчела драконита из главы Productive Bees. Её соты в центрифуге дают самородки драконита."
+				"Драконья пыль плавится в слиток драконита. Из девяти самородков складывается слиток, из девяти слитков блок."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:draconium_dust"
+			id: "44A964D53AA2F2C2"
+			rewards: [
+				{
+					id: "F7A1F68CD62BFF49"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "83E9CBC320518A04"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "DF4028499B7D477D"
+				item: "draconicevolution:draconium_dust"
+				type: "item"
+			}]
+			title: "Откуда драконит"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["44A964D53AA2F2C2"]
+			description: [
+				"Переплавь драконью пыль в печи. Самородки, слитки и блоки складываются друг в друга и обратно рецептами 3×3 и бесформенными рецептами."
+				"Слиток драконита нужен везде. Он идёт в ядра, инжекторы, инструменты и заготовки машин. Береги его: добыча ограничена драконом, кейсами и пчёлами."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:draconium_ingot"
+			id: "98F2E3EEB867AD24"
+			rewards: [
+				{
+					id: "96745671F62FAACE"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "EA78679582714FEC"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "C0D8E14E30D6D9E3"
+				item: "draconicevolution:draconium_ingot"
+				type: "item"
+			}]
+			title: "Слиток драконита"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"98F2E3EEB867AD24"
+				"2D24321A0DD539D3"
+			]
+			description: [
+				"Базовая деталь всего мода. Рецепт 3×3: 4 слитка драконита по углам, 4 слитка манасталь по сторонам и алмаз маны в центре."
+				"Манасталь и алмаз маны делают в Botania: мана-бассейн, слиток манасталь, алмаз маны. Манасталь можно получать и от пчелы манасталь (глава Productive Bees)."
+				"Ядро драконита идёт в ядро виверны, ядро слияния и почти все инжекторы."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:draconium_core"
+			id: "BD1F8CE58739BE69"
+			rewards: [
+				{
+					id: "91B98683B4779F90"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 1500"
+					icon: "minecraft:gold_nugget"
+					id: "813123B286DD7053"
+					title: "1 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "83E12CC4E6F6A66E"
+				item: "draconicevolution:draconium_core"
+				type: "item"
+			}]
+			title: "Ядро драконита"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"BD1F8CE58739BE69"
+				"61F9290569BDC2AF"
+			]
+			description: [
+				"Ядро слияния (Fusion Crafting Core) стоит в центре. Рецепт 3×3: 4 инженерных процессора AE2 по углам, 4 алмаза маны по сторонам и ядро драконита в центре."
+				"Инженерный процессор печатают на инскрайбере AE2 (см. главу Applied Energistics)."
+				"Правый клик по ядру открывает его окно: там выбирается рецепт и виден заряд."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:crafting_core"
+			id: "5D3C4C5AC197DABA"
+			rewards: [
+				{
+					id: "629F0C6ABD4B5510"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 1500"
+					icon: "minecraft:gold_nugget"
+					id: "094461A7A88472E8"
+					title: "1 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "1180F228BCC3E85D"
+				item: "draconicevolution:crafting_core"
+				type: "item"
+			}]
+			title: "Ядро слияния"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"5D3C4C5AC197DABA"
+				"281BD310F4AE52F5"
+			]
+			description: [
+				"Инжекторы ставят вокруг ядра. В каждый кладут по ингредиенту, а ядро забирает их и собирает результат."
+				"Рецепт базового инжектора: сверху 2 алмаза маны и ядро драконита между ними, в центре блок манасталь, по бокам и снизу 5 живых камней (Livingrock)."
+				"Инжекторы старших тиров делаются слиянием и требуют инжекторов предыдущего тира."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:basic_crafting_injector"
+			id: "EE8DBD94F73EF7D8"
+			rewards: [
+				{
+					id: "C1D70AADB0F811F8"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 1500"
+					icon: "minecraft:gold_nugget"
+					id: "57FF727C918252EC"
+					title: "1 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "96C25FBA317A134A"
+				item: "draconicevolution:basic_crafting_injector"
+				type: "item"
+			}]
+			title: "Инжектор слияния"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["EE8DBD94F73EF7D8"]
+			description: [
+				"Поставь ядро слияния, а инжекторы вокруг него на расстоянии от 2 до 16 блоков (так настроен сервер). Положи катализатор в ядро, а ингредиенты рецепта в инжекторы."
+				"Тир инжекторов должен быть не ниже тира рецепта: у рецепта в JEI указан тир (DRACONIUM, WYVERN, DRACONIC, CHAOTIC) и сколько энергии он требует."
+				"Энергию в ядро приводят кристаллами-реле от энергоядра. Кристаллы связываются кристальным связывателем (Crystal Binder), который собирается так же из драконита, алмаза маны и палки блейза."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:crafting_core"
+			id: "3A9D384863FCE60D"
+			rewards: [
+				{
+					id: "2ED581C41A7BCA36"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 2000"
+					icon: "minecraft:gold_nugget"
+					id: "D9BF98D10A506761"
+					title: "2 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "0DE8B6B8F356728B"
+				title: "Провести первое слияние"
+				type: "checkmark"
+			}]
+			title: "Как проходит слияние"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"BD1F8CE58739BE69"
+				"6DEB564BC5BBF7A8"
+			]
+			description: [
+				"Ядро виверны: 4 слитка террастали по углам, 4 ядра драконита по сторонам и звезда Незера в центре."
+				"Террасталь делают на терра-плите Botania или берут из сот пчелы террастали (глава Productive Bees). Звезду Незера дают Иссушитель и редкий улов удочкой (секретный квест «Звезда в Сети»)."
+				"Это ключевая деталь тира виверны: ядро идёт в инжектор виверны, инструменты, броню и ядро пробуждения."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:wyvern_core"
+			id: "DA226F98D7DC0099"
+			rewards: [
+				{
+					id: "14FA0033E00AFB6F"
+					type: "xp"
+					xp: 250
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "4CE2A650E2172564"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "D6F19B3DD95ACA76"
+				item: "draconicevolution:wyvern_core"
+				type: "item"
+			}]
+			title: "Ядро виверны"
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"DA226F98D7DC0099"
+				"EE8DBD94F73EF7D8"
+			]
+			description: [
+				"Слияние тира DRACONIUM (32 000 энергии). Катализатор: базовый инжектор."
+				"Ингредиенты: ядро виверны, 2 ядра драконита, 4 драконьих камня Botania (Elven Dragonstone) и блок драконита."
+				"Драконьи камни получают у эльфов в Альфхейме (глава Botania)."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:wyvern_crafting_injector"
+			id: "BA0B5EFC1205369B"
+			rewards: [
+				{
+					id: "7EF63EE8FF791774"
+					type: "xp"
+					xp: 250
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "618DB7FE83BF3D5F"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "D16A3A7ECA662F86"
+				item: "draconicevolution:wyvern_crafting_injector"
+				type: "item"
+			}]
+			title: "Инжектор виверны"
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"3A9D384863FCE60D"
+				"1D392AB2A35961BB"
+			]
+			description: [
+				"Кристаллы-реле передают энергию от энергоядра к машинам и ядру слияния. Базовый: 4 кристалла флюкса AE2 вокруг энергоядра виверны. Из одного рецепта выходит 4 кристалла."
+				"Старшие кристаллы: виверна (4 энергоядра виверны по углам, 4 базовых кристалла по сторонам и инженерный процессор AE2 в центре) и дракон (слияние тира DRACONIC на 128 000 энергии: 4 энергоядра виверны, ядро виверны и 4 решётки алмаза Avaritia)."
+				"Из реле делают входные и выходные кристаллы (IO), два одинаковых IO сливаются обратно в реле."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:basic_relay_crystal"
+			id: "58F5CBE551B0D7C8"
+			rewards: [
+				{
+					id: "0CE9BD2ACDE76540"
+					type: "xp"
+					xp: 250
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "567E51E074DCF041"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "4FFA05EE8D7A097E"
+				item: "draconicevolution:basic_relay_crystal"
+				type: "item"
+			}]
+			title: "Кристаллы-реле"
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"58F5CBE551B0D7C8"
+				"DA226F98D7DC0099"
+				"59F5CC3C9A10473A"
+			]
+			description: [
+				"Хранит энергию для инструментов и машин. Рецепт 3×3: 4 слитка драконита по углам, 4 накопителя MFE IndustrialUpgrade по сторонам и ядро драконита в центре."
+				"Одного энергоядра хватает на один инструмент. Для кристаллов-реле и кабелей понадобится несколько штук: строй линию MFE заранее."
+				"Сами MFE описаны в главе улучшенной электрической эры."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:wyvern_energy_core"
+			id: "7F5A2F3858BBF63A"
+			rewards: [
+				{
+					id: "7B16927968CAFAFF"
+					type: "xp"
+					xp: 250
+				}
+				{
+					command: "/quest_reward coins {p} 4000"
+					icon: "minecraft:gold_nugget"
+					id: "957797723671BEE7"
+					title: "4 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "C9CDE407C984A234"
+				item: "draconicevolution:wyvern_energy_core"
+				type: "item"
+			}]
+			title: "Энергоядро виверны"
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7F5A2F3858BBF63A"]
+			description: [
+				"Большое хранилище энергии из блоков. Рецепт ядра: 6 слитков драконита, 2 энергоядра виверны и процессор накопления MEGA в центре."
+				"Вокруг ядра ставят стабилизаторы (4 драконьих камня и генератор частиц), к ним подключаются энергопилоны и кристаллы-реле. Энергопилон: 4 слитка драконита, пыль пикси, 2 заряженных кристалла истинного кварца AE2, ядро драконита и алмаз маны (выходит 2 штуки)."
+				"Ядро строится ступенями: чем выше тир блоков, тем больше ёмкость."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:energy_core"
+			id: "26D32698162379A0"
+			rewards: [
+				{
+					id: "5C4629E66717B67E"
+					type: "xp"
+					xp: 300
+				}
+				{
+					command: "/quest_reward coins {p} 4000"
+					icon: "minecraft:gold_nugget"
+					id: "0721989996417ADD"
+					title: "4 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "BD0178C6BC0A4506"
+				item: "draconicevolution:energy_core"
+				type: "item"
+			}]
+			title: "Энергоядро (мультиблок)"
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"BA0B5EFC1205369B"
+				"7F5A2F3858BBF63A"
+			]
+			description: [
+				"Слияние тира WYVERN (8 000 000 энергии). Катализатор: алмазный инструмент того же вида."
+				"Ингредиенты: ядро драконита, 2 слитка террастали, 2 базовых кристалла-реле и энергоядро виверны. Катализатор: алмазный инструмент того же вида (для лука обычный лук, для нагрудника алмазный нагрудник). Так собираются кирка, топор, лопата, мотыга, меч, лук и нагрудник виверны."
+				"Инструменты работают на энергии: заряжай их в энергоядре или зарядном блоке. Модули (отдельная ветка) дают им новые умения."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:wyvern_pickaxe"
+			id: "634DD9B9AB54644D"
+			rewards: [
+				{
+					id: "49271F3598057921"
+					type: "xp"
+					xp: 400
+				}
+				{
+					command: "/quest_reward coins {p} 5000"
+					icon: "minecraft:gold_nugget"
+					id: "597358A10D909185"
+					title: "5 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "95512CC26FD2C5BB"
+				item: "draconicevolution:wyvern_pickaxe"
+				type: "item"
+			}]
+			title: "Инструменты виверны"
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["634DD9B9AB54644D"]
+			description: [
+				"Слияние тира WYVERN (8 000 000 энергии). Катализатор: ядро виверны. Ингредиенты: 4 энергоядра виверны, 2 слитка террастали и 2 слитка драконита."
+				"Конденсатор (Capacitor) носят с собой, он подзаряжает вещи из инвентаря. Нагрудник виверны собирается слиянием на алмазном нагруднике так же, как инструменты."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:wyvern_capacitor"
+			id: "4904C94B51FEADF7"
+			rewards: [
+				{
+					id: "F869A9ABED9D4EFF"
+					type: "xp"
+					xp: 400
+				}
+				{
+					command: "/quest_reward coins {p} 6000"
+					icon: "minecraft:gold_nugget"
+					id: "4F83F8FE30ED9733"
+					title: "6 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "39466BCA831212AF"
+				item: "draconicevolution:wyvern_capacitor"
+				type: "item"
+			}]
+			title: "Конденсатор виверны"
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["DA226F98D7DC0099"]
+			description: [
+				"Модули ставятся в инструменты и броню через окно модулей. Основа всех модулей: ядро модуля. Рецепт: 4 слитка манасталь по углам, 2 процессора логики AE2, 2 золотых слитка и слиток драконита."
+				"Лестница материалов в модулях: драконит использует манасталь, виверна использует террасталь вместо драконита, дракон использует альфсталь вместо незерита, хаос использует кристаллическую матрицу Avaritia."
+				"Каждый следующий модуль собирается из предыдущего: так, модуль урона виверны требует модуль урона драконита."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:module_core"
+			id: "2528D74BB72C34D6"
+			rewards: [
+				{
+					id: "6A512D23A75DBE71"
+					type: "xp"
+					xp: 300
+				}
+				{
+					command: "/quest_reward coins {p} 4000"
+					icon: "minecraft:gold_nugget"
+					id: "C5573E49D3772879"
+					title: "4 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "0C072621511A4C78"
+				item: "draconicevolution:module_core"
+				type: "item"
+			}]
+			title: "Модули"
+			x: 14.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"DA226F98D7DC0099"
+				"16B8F73ED297BC43"
+			]
+			description: [
+				"Слияние тира WYVERN (50 000 000 энергии). Катализатор: 4 блока драконита. Ингредиенты: 4 ядра драконита, 2 слитка альфсталь и сердце дракона. Получается 4 блока пробуждённого драконита."
+				"Из блока выходит девять слитков, из слитка девять самородков. Альфсталь делают в Mythic Botany или берут у пчелы альфсталь. Сердце дракона даёт дракон Энда и кейс «Драконий»."
+				"Дальше пробуждённый драконит можно добывать у пчелы пробуждения (глава Productive Bees)."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:awakened_draconium_block"
+			id: "4F6496E7FADF4420"
+			rewards: [
+				{
+					id: "8724F318E33AC696"
+					type: "xp"
+					xp: 500
+				}
+				{
+					command: "/quest_reward coins {p} 8000"
+					icon: "minecraft:gold_nugget"
+					id: "B8F0F92A32927B79"
+					title: "8 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "E7AC54CAD4E7DDE5"
+				item: "draconicevolution:awakened_draconium_block"
+				type: "item"
+			}]
+			title: "Пробуждённый драконит"
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"4F6496E7FADF4420"
+				"BA0B5EFC1205369B"
+			]
+			description: [
+				"Слияние тира WYVERN (1 000 000 энергии). Катализатор: звезда Незера. Ингредиенты: 4 ядра виверны, 2 слитка пробуждённого драконита и 2 слитка альфсталь."
+				"Ядро пробуждения нужно для инжектора пробуждения, энергоядра дракона и всех инструментов дракона."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:awakened_core"
+			id: "C7B61210BC9A4312"
+			rewards: [
+				{
+					id: "B73EAAC785841E05"
+					type: "xp"
+					xp: 500
+				}
+				{
+					command: "/quest_reward coins {p} 8000"
+					icon: "minecraft:gold_nugget"
+					id: "B601C865B2ADB0D6"
+					title: "8 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "96BA234BB69EB97F"
+				item: "draconicevolution:awakened_core"
+				type: "item"
+			}]
+			title: "Ядро пробуждения"
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"C7B61210BC9A4312"
+				"036A0FBF836BB6C2"
+			]
+			description: [
+				"Слияние тира WYVERN (256 000 энергии). Катализатор: инжектор виверны. Ингредиенты: 4 решётки алмаза Avaritia, 2 ядра виверны и блок пробуждённого драконита."
+				"Решётка алмаза открывает цепочку Avaritia: следуй главе про Avaritia, пока не получишь решётку."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:awakened_crafting_injector"
+			id: "D87BE5CDD7442F7B"
+			rewards: [
+				{
+					id: "9A6D418AE35FFAD4"
+					type: "xp"
+					xp: 500
+				}
+				{
+					command: "/quest_reward coins {p} 8000"
+					icon: "minecraft:gold_nugget"
+					id: "42274B59766CFA26"
+					title: "8 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "9CD1DC4E3AD8F35F"
+				item: "draconicevolution:awakened_crafting_injector"
+				type: "item"
+			}]
+			title: "Инжектор пробуждения"
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"C7B61210BC9A4312"
+				"7F5A2F3858BBF63A"
+				"5C2C83D9E7FD7C81"
+			]
+			description: [
+				"Рецепт 3×3: 4 слитка пробуждённого драконита по углам, 4 энергоядра виверны по сторонам и энергоячейка MEGA в центре."
+				"Энергоячейка MEGA собирается на основе плотной энергоячейки AE2 (см. главу AE2)."
+				"Нужно для инструментов, брони и конденсатора дракона, а также для энергоядра хаоса."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:draconic_energy_core"
+			id: "F7D228926811DCDA"
+			rewards: [
+				{
+					id: "7779E7951457B33A"
+					type: "xp"
+					xp: 500
+				}
+				{
+					command: "/quest_reward coins {p} 9000"
+					icon: "minecraft:gold_nugget"
+					id: "120B69F731F3B173"
+					title: "9 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "B0D714A464E80B43"
+				item: "draconicevolution:draconic_energy_core"
+				type: "item"
+			}]
+			title: "Энергоядро дракона"
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["26D32698162379A0"]
+			description: [
+				"Передают энергию без кабелей. Рецепт 3×3: 4 жемчужины Края по углам, генератор частиц сверху и снизу, беспроводной приёмник или усилитель AE2 слева и справа и кристалл-реле в центре."
+				"Базовый кристалл использует приёмник AE2, виверна и дракон используют усилитель. Кристалл дракона дополнительно требует пыль пикси вместо жемчужин."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:wyvern_wireless_crystal"
+			id: "90CB4F67A8E9EF70"
+			rewards: [
+				{
+					id: "2D4B5B42C3D526B9"
+					type: "xp"
+					xp: 400
+				}
+				{
+					command: "/quest_reward coins {p} 6000"
+					icon: "minecraft:gold_nugget"
+					id: "FCEBA217DDB9092C"
+					title: "6 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "7613F357182F56BF"
+				item: "draconicevolution:wyvern_wireless_crystal"
+				type: "item"
+			}]
+			title: "Беспроводные кристаллы"
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"D87BE5CDD7442F7B"
+				"F7D228926811DCDA"
+			]
+			description: [
+				"Слияние тира DRACONIC (32 000 000 энергии). Катализатор: инструмент виверны того же вида."
+				"Ингредиенты: ядро виверны, 2 слитка незерита, 2 слитка альфсталь, 2 слитка пробуждённого драконита и энергоядро дракона."
+				"Так собираются кирка, топор, лопата, мотыга, меч, лук и нагрудник дракона. Конденсатор и посох собираются отдельно."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:draconic_pickaxe"
+			id: "0FFBF732393D3070"
+			rewards: [
+				{
+					id: "64D75321EAC0C7AB"
+					type: "xp"
+					xp: 800
+				}
+				{
+					command: "/quest_reward coins {p} 15000"
+					icon: "minecraft:gold_nugget"
+					id: "6CFAE71E00272B3C"
+					title: "15 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "7FC0DECE7FB3C392"
+				item: "draconicevolution:draconic_pickaxe"
+				type: "item"
+			}]
+			title: "Инструменты дракона"
+			x: 10.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"0FFBF732393D3070"
+				"4099054A63F0A45C"
+			]
+			description: [
+				"Реактор вырабатывает много энергии, но способен взорваться. Строй его вдали от базы, держи под рукой аварийное отключение и проверь стабилизацию по компаратору."
+				"Каркас стабилизатора: 6 слитков алого неодима AlexsCaves, ядро виверны и слиток пробуждённого драконита. Входной ротор: 3 слитка пробуждённого драконита, 2 слитка алого неодима и ядро драконита."
+				"Выходной ротор: 3 решётки алмаза Avaritia, 2 слитка лазурного неодима и ядро драконита. Фокусирующее кольцо: 4 слитка элементиума, 3 решётки алмаза и 2 ядра виверны."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:reactor_prt_stab_frame"
+			id: "A0B113E6F32B1D68"
+			rewards: [
+				{
+					id: "1FBE2C698A3754A9"
+					type: "xp"
+					xp: 800
+				}
+				{
+					command: "/quest_reward coins {p} 15000"
+					icon: "minecraft:gold_nugget"
+					id: "C525BE18F066DBC0"
+					title: "15 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "C670F2D029B505F6"
+				item: "draconicevolution:reactor_prt_stab_frame"
+				type: "item"
+			}]
+			title: "Детали реактора"
+			x: 12.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"D87BE5CDD7442F7B"
+				"34797EC98AE1BB6E"
+				"5E5277DFF3957C35"
+			]
+			description: [
+				"Хранителя хаоса и острова хаоса в нашем мире нет, поэтому осколки хаоса получают только от пчелы хаоса (глава Productive Bees)."
+				"Чтобы не получился замкнутый круг, инжектор хаоса и сама пчела хаоса собираются без осколков: на нейтронии и кристаллической матрице Avaritia."
+				"План: инжектор хаоса, затем слияние пчелы хаоса, затем улей с пчёлами хаоса, затем центрифуга. Осколки пойдут потоком, и только после этого открываются ядро хаоса, реактор, оружие и посох."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:chaos_shard"
+			id: "B907B7EF913EAB34"
+			rewards: [
+				{
+					id: "A03FE7F7FF6AA716"
+					type: "xp"
+					xp: 800
+				}
+				{
+					command: "/quest_reward coins {p} 15000"
+					icon: "minecraft:gold_nugget"
+					id: "8D18CA7DCBD5220C"
+					title: "15 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "E3E2201EB34104A3"
+				title: "Составить план по хаосу"
+				type: "checkmark"
+			}]
+			title: "Путь к хаосу"
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["B907B7EF913EAB34"]
+			description: [
+				"Слияние тира DRACONIC (8 000 000 энергии). Катализатор: инжектор пробуждения. Ингредиенты: 4 нейтрониевых слитка, 4 слитка кристаллической матрицы и яйцо дракона."
+				"Осколки хаоса в этом рецепте не нужны, это сознательное отличие от оригинального мода."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:chaotic_crafting_injector"
+			id: "B9E20613B9DCD7EE"
+			rewards: [
+				{
+					id: "A357AAAD6E5AB141"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					command: "/quest_reward coins {p} 20000"
+					icon: "minecraft:gold_nugget"
+					id: "0162B541D50D0121"
+					title: "20 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "22006370D9DC7220"
+				item: "draconicevolution:chaotic_crafting_injector"
+				type: "item"
+			}]
+			title: "Инжектор хаоса"
+			x: 2.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"B9E20613B9DCD7EE"
+				"B40AD64250835DD3"
+			]
+			description: [
+				"Рецепт и подробности смотри в главе Productive Bees, квест «Пчела хаоса». Это слияние тира CHAOTIC (64 000 000 энергии) на яйце пчелы пробуждения."
+				"Яйцо выпускают в улей. Её соты в центрифуге дают малые и средние осколки хаоса."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "BDCCDC27DF4D1EAC"
+			rewards: [
+				{
+					id: "3E3FF4A4EA18A175"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					command: "/quest_reward coins {p} 20000"
+					icon: "minecraft:gold_nugget"
+					id: "406C42A16230AE8A"
+					title: "20 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "91FF5661F4F37938"
+				title: "Получить пчелу хаоса"
+				type: "checkmark"
+			}]
+			title: "Пчела хаоса"
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"BDCCDC27DF4D1EAC"
+				"4E8BB02D9839A6C0"
+			]
+			description: [
+				"Соты пчелы хаоса дают 1–2 малых осколка и с шансом 15% средний. Девять малых складываются в средний, девять средних в большой, девять больших в осколок хаоса."
+				"Для ядра хаоса нужно 4 больших осколка, то есть 324 малых. Строй ферму с продуктивностью, расширителями и электрической центрифугой (рецепт фермы в главе Productive Bees)."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:small_chaos_frag"
+			id: "A38E26779665EE90"
+			rewards: [
+				{
+					id: "30B887FF75C35ED0"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					command: "/quest_reward coins {p} 20000"
+					icon: "minecraft:gold_nugget"
+					id: "4D768C7E6665D3C0"
+					title: "20 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "98B09B9493693014"
+				item: "draconicevolution:small_chaos_frag"
+				type: "item"
+			}]
+			title: "Осколки хаоса"
+			x: 6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"A38E26779665EE90"
+				"C7B61210BC9A4312"
+			]
+			description: [
+				"Слияние тира DRACONIC (100 000 000 энергии). Катализатор: большой осколок хаоса. Ингредиенты: 2 слитка кристаллической матрицы, 2 нейтрониевых слитка, 4 ядра пробуждения и ещё 4 больших осколка."
+				"Всего на ядро уходит 5 больших осколков: 4 в ингредиентах и 1 катализатором, итого около 405 малых."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:chaotic_core"
+			id: "8C9D59C5D8801C4D"
+			rewards: [
+				{
+					id: "993593C1C69DA510"
+					type: "xp"
+					xp: 1500
+				}
+				{
+					command: "/quest_reward coins {p} 30000"
+					icon: "minecraft:gold_nugget"
+					id: "723C92A6BCDDAC1D"
+					title: "30 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "24FE12DF32C94B78"
+				item: "draconicevolution:chaotic_core"
+				type: "item"
+			}]
+			title: "Ядро хаоса"
+			x: 8.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"8C9D59C5D8801C4D"
+				"F7D228926811DCDA"
+			]
+			description: [
+				"Рецепт 3×3: 4 средних осколка хаоса по углам, 4 энергоядра дракона по сторонам и накопитель Quantum MFSU IndustrialUpgrade в центре."
+				"Хранит больше всего энергии и питает инструменты и броню хаоса."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:chaotic_energy_core"
+			id: "CDBAFB57F859F047"
+			rewards: [
+				{
+					id: "9CEE7CC3220B2754"
+					type: "xp"
+					xp: 1500
+				}
+				{
+					command: "/quest_reward coins {p} 30000"
+					icon: "minecraft:gold_nugget"
+					id: "EF99A17FCCB7D6F4"
+					title: "30 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "E75460F375DC7658"
+				item: "draconicevolution:chaotic_energy_core"
+				type: "item"
+			}]
+			title: "Энергоядро хаоса"
+			x: 10.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"CDBAFB57F859F047"
+				"0FFBF732393D3070"
+			]
+			description: [
+				"Слияние тира CHAOTIC (128 000 000 энергии). Катализатор: инструмент дракона того же вида."
+				"Ингредиенты: ядро хаоса, энергоядро хаоса, 3 слитка пробуждённого драконита, 2 слитка кристаллической матрицы и нейтрониевый слиток."
+				"Так собираются кирка, топор, лопата, мотыга, меч, лук, нагрудник и конденсатор хаоса."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:chaotic_pickaxe"
+			id: "B5246E9F0A730348"
+			rewards: [
+				{
+					id: "CFEDFFE2444CFAD4"
+					type: "xp"
+					xp: 2000
+				}
+				{
+					command: "/quest_reward coins {p} 40000"
+					icon: "minecraft:gold_nugget"
+					id: "C67839BDB15BF866"
+					title: "40 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "AE4928EBDA47E702"
+				item: "draconicevolution:chaotic_pickaxe"
+				type: "item"
+			}]
+			title: "Оружие хаоса"
+			x: 12.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["B5246E9F0A730348"]
+			description: [
+				"Универсальный инструмент: слияние тира CHAOTIC на 1 024 000 000 энергии."
+				"Есть два рецепта: из кирки, меча и лопаты хаоса, либо на основе посоха дракона. Оба требуют большого числа осколков хаоса, энергоядро хаоса и ядро хаоса."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:chaotic_staff"
+			id: "1CE2308E531884E0"
+			rewards: [
+				{
+					id: "7FF383FD995A5968"
+					type: "xp"
+					xp: 3000
+				}
+				{
+					command: "/quest_reward coins {p} 60000"
+					icon: "minecraft:gold_nugget"
+					id: "5AA2BE136BC2FAF0"
+					title: "60 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "6083947131401CF4"
+				item: "draconicevolution:chaotic_staff"
+				type: "item"
+			}]
+			title: "Посох хаоса"
+			x: 14.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"8C9D59C5D8801C4D"
+				"2528D74BB72C34D6"
+			]
+			description: [
+				"Модули хаоса собираются из модулей дракона, ядра пробуждения и средних осколков хаоса. Вместо незерита в них идёт кристаллическая матрица Avaritia."
+				"Начни с урона, энергии и скорости: они самые простые. Модуль полёта требует большие осколки хаоса и зелья, модуль бессмертия чарованное золотое яблоко и модуль ёмкости щита."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:item_chaotic_damage"
+			id: "46392E3D1DE86CEF"
+			rewards: [
+				{
+					id: "C370249EF5FC632B"
+					type: "xp"
+					xp: 2000
+				}
+				{
+					command: "/quest_reward coins {p} 40000"
+					icon: "minecraft:gold_nugget"
+					id: "844886C688090329"
+					title: "40 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "8FF792332220D2BE"
+				item: "draconicevolution:item_chaotic_damage"
+				type: "item"
+			}]
+			title: "Модули хаоса"
+			x: 16.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"A0B113E6F32B1D68"
+				"60ADD93185D58FC2"
+				"A38E26779665EE90"
+			]
+			description: [
+				"Слияние тира CHAOTIC (64 000 000 энергии). Катализатор: осколок хаоса. Ингредиенты: 4 слитка пробуждённого драконита, 3 урановых стержня AlexsCaves и 2 больших осколка хаоса."
+				"Реактор жжёт драконит и хаос и даёт очень много энергии. Следи за температурой и насыщением: при перегреве реактор взрывается. Включи полуавтоматическое отключение (SAS), если нужно, чтобы он остановился сам."
+				"Построй реактор вдали от основной базы и от соседей: взрыв разрушает всё вокруг."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:reactor_core"
+			id: "025286674AA3F520"
+			rewards: [
+				{
+					id: "E4336FF747C6663A"
+					type: "xp"
+					xp: 2000
+				}
+				{
+					command: "/quest_reward coins {p} 40000"
+					icon: "minecraft:gold_nugget"
+					id: "6E9E652694A8ECF5"
+					title: "40 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "44E25F1398C9E2D8"
+				item: "draconicevolution:reactor_core"
+				type: "item"
+			}]
+			title: "Реактор"
+			x: 14.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3A9D384863FCE60D"]
+			description: [
+				"Магнит подбирает предметы вокруг игрока. Оригинальный рецепт требовал дислокатор, а дислокаторы на сервере отключены, поэтому магнит собирается без него."
+				"Рецепт: 2 редстоуна сверху по краям, 2 слитка драконита в середине по краям, 2 слитка манасталь снизу по краям и жемчужина флюкса AE2 между ними."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:magnet"
+			id: "149B9201012E3E01"
+			rewards: [
+				{
+					id: "2B40F5CA0930FD16"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "ED840B26C1C83030"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "F21EC6B87F157DD1"
+				item: "draconicevolution:magnet"
+				type: "item"
+			}]
+			title: "Магнит"
+			x: 16.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"1CE2308E531884E0"
+				"46392E3D1DE86CEF"
+				"025286674AA3F520"
+			]
+			description: [
+				"Ты прошёл весь Draconic Evolution: от драконьей пыли до посоха хаоса, реактора и модулей хаоса."
+				"Теперь у тебя самое сильное снаряжение сервера и вся инфраструктура под него."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:chaotic_chestpiece"
+			id: "EA94D0597AF11E16"
+			rewards: [
+				{
+					id: "C715DFEA155236C1"
+					type: "xp"
+					xp: 5000
+				}
+				{
+					command: "/quest_reward coins {p} 100000"
+					icon: "minecraft:gold_nugget"
+					id: "96E482945F1553CA"
+					title: "100 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "E26ABA6DBC428591"
+				title: "Закончить главу Draconic Evolution"
+				type: "checkmark"
+			}]
+			title: "Хозяин дракона"
+			x: 10.0d
+			y: 8.0d
+		}
+	]
+	title: "Draconic Evolution"
+}

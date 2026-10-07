@@ -90,6 +90,12 @@
 					type: "xp"
 					xp: 800
 				}
+				{
+					count: 6
+					id: "5A8A0A8EBA267F61"
+					item: "industrialupgrade:upgrades/overclockerupgrade1"
+					type: "item"
+				}
 			]
 			tasks: [{
 				count: 5L
@@ -102,7 +108,11 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["107471907E8C6673"]
+			dependencies: [
+				"107471907E8C6673"
+				"0D837E6848797C49"
+				"5A201EA9CECBC459"
+			]
 			description: [
 				"Слиток Infinity с экстремального стола. Этот квест"
 				"закрывается вместе с вкладкой Avaritia."

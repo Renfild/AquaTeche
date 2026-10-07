@@ -338,6 +338,12 @@
 					item: "alexsmobs:blobfish_bucket"
 					type: "item"
 				}
+				{
+					count: 4
+					id: "45D51BF813FA9E92"
+					item: "starcatcher:aquarium"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "2BBCFCC441FC9923"
@@ -423,11 +429,18 @@
 			entity_vis_size: 1.0f
 			icon: "minecraft:emerald"
 			id: "497F4F64A27A6D3C"
-			rewards: [{
-				id: "6F7DEEA0949B62F9"
-				type: "xp"
-				xp: 25
-			}]
+			rewards: [
+				{
+					id: "6F7DEEA0949B62F9"
+					type: "xp"
+					xp: 25
+				}
+				{
+					id: "17C7C0582DD24214"
+					item: "minecraft:cherry_chest_boat"
+					type: "item"
+				}
+			]
 			tasks: [{
 				id: "2983ACA0B9B83C52"
 				title: "Продать рыбу"
@@ -444,7 +457,7 @@
 				"В награду за этот квест тебя ждёт ещё один ключ."
 			]
 			entity_vis_size: 1.0f
-			icon: "minecraft:tripwire_hook"
+			icon: "avaritia:infinity_chest"
 			id: "6F0DDE131DBCB049"
 			rewards: [
 				{
@@ -454,7 +467,7 @@
 				}
 				{
 					command: "/quest_reward key {p} starter 1"
-					icon: "minecraft:tripwire_hook"
+					icon: "avaritia:infinity_chest"
 					id: "2E2A6D8422D4C489"
 					title: "Ключ кейса"
 					type: "command"
@@ -609,6 +622,11 @@
 					title: "500 монет"
 					type: "command"
 				}
+				{
+					id: "1580DA551DCB5CDF"
+					item: "aquatech_ui:bait_shoal"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "78532DCE619B3326"
@@ -628,7 +646,7 @@
 			rewards: [{
 				id: "43D0E2CD7460AE4D"
 				type: "xp"
-				xp: 25
+				xp: 50
 			}]
 			tasks: [{
 				id: "02DE4AD09D956E6A"
@@ -710,11 +728,19 @@
 			entity_vis_size: 1.0f
 			icon: "industrialupgrade:classicore/tin"
 			id: "126F04F0385E9797"
-			rewards: [{
-				id: "11111151A439631C"
-				type: "xp"
-				xp: 25
-			}]
+			rewards: [
+				{
+					id: "11111151A439631C"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 16
+					id: "2B2FA5C7DE94CA4C"
+					item: "minecraft:coal"
+					type: "item"
+				}
+			]
 			tasks: [{
 				count: 4L
 				id: "05F1A0B4F2836F0C"
@@ -740,11 +766,18 @@
 				}
 			}
 			id: "49A6082B2166C689"
-			rewards: [{
-				id: "25442096902E66BB"
-				type: "xp"
-				xp: 100
-			}]
+			rewards: [
+				{
+					id: "25442096902E66BB"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "0B33F82066146AE4"
+					item: "aquatech_ui:bait_ore"
+					type: "item"
+				}
+			]
 			tasks: [{
 				id: "42CA6C9FF936D2FC"
 				item: {
@@ -766,11 +799,19 @@
 			entity_vis_size: 1.0f
 			icon: "industrialupgrade:baseore/titanium"
 			id: "6D2F7F422DCF47E4"
-			rewards: [{
-				id: "2A0F835F87DA3C51"
-				type: "xp"
-				xp: 50
-			}]
+			rewards: [
+				{
+					id: "2A0F835F87DA3C51"
+					type: "xp"
+					xp: 50
+				}
+				{
+					count: 16
+					id: "2B592D681854DE2C"
+					item: "minecraft:coal"
+					type: "item"
+				}
+			]
 			tasks: [
 				{
 					count: 5L
@@ -819,11 +860,18 @@
 			entity_vis_size: 1.0f
 			icon: "minecraft:iron_ingot"
 			id: "7EC41AE8B81717CD"
-			rewards: [{
-				id: "4AC6FA66045B69E4"
-				type: "xp"
-				xp: 50
-			}]
+			rewards: [
+				{
+					id: "4AC6FA66045B69E4"
+					type: "xp"
+					xp: 50
+				}
+				{
+					id: "53A41A1D49736E8A"
+					item: "starcatcher:shiny_hook"
+					type: "item"
+				}
+			]
 			tasks: [
 				{
 					count: 2L
@@ -877,7 +925,7 @@
 				}
 				{
 					command: "/quest_reward key {p} starter 1"
-					icon: "minecraft:tripwire_hook"
+					icon: "aquamirae:frozen_chest"
 					id: "0C6A8F66971CC0B5"
 					title: "Ключ кейса"
 					type: "command"
@@ -904,11 +952,18 @@
 			entity_vis_size: 1.0f
 			icon: "industrialupgrade:baseore2/yttrium"
 			id: "4CF555451E1DE2B0"
-			rewards: [{
-				id: "445AB939CD6B8171"
-				type: "xp"
-				xp: 100
-			}]
+			rewards: [
+				{
+					id: "445AB939CD6B8171"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "56F477C847864EFE"
+					item: "minecraft:lava_bucket"
+					type: "item"
+				}
+			]
 			tasks: [
 				{
 					count: 8L
@@ -942,11 +997,18 @@
 				}
 			}
 			id: "62E3541CE07C9CEC"
-			rewards: [{
-				id: "1934FA230713558F"
-				type: "xp"
-				xp: 150
-			}]
+			rewards: [
+				{
+					id: "1934FA230713558F"
+					type: "xp"
+					xp: 150
+				}
+				{
+					id: "4A4E7A126B115574"
+					item: "minecraft:pointed_dripstone"
+					type: "item"
+				}
+			]
 			tasks: [{
 				id: "587F26479EF6838A"
 				item: {
@@ -997,6 +1059,11 @@
 					title: "Ключ кейса"
 					type: "command"
 				}
+				{
+					id: "5ABCBC84024C9A0B"
+					item: "starcatcher:slimey_bobber"
+					type: "item"
+				}
 			]
 			tasks: [{
 				id: "6ACEE6D6CAFCC0EA"
@@ -1022,11 +1089,37 @@
 			entity_vis_size: 1.0f
 			icon: "industrialupgrade:itemingots/yttrium"
 			id: "1740765733EA931B"
-			rewards: [{
-				id: "68A29F3B5655E29B"
-				type: "xp"
-				xp: 100
-			}]
+			rewards: [
+				{
+					id: "68A29F3B5655E29B"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 6
+					id: "54C9DCD355FD50F1"
+					item: "minecraft:blast_furnace"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "3CB417BC26950ECA"
+					item: "industrialupgrade:wiring/itemcable8"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "4F675D6B34A4177D"
+					item: "industrialupgrade:wiring/itemcable7"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "3ECF24DC2264F665"
+					item: "industrialupgrade:wiring/itemcable6"
+					type: "item"
+				}
+			]
 			tasks: [
 				{
 					count: 8L

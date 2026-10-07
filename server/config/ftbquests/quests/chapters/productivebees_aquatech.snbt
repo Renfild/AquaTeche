@@ -1,0 +1,1528 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "productivebees_aquatech"
+	group: "4BCD563D0A6CE61C"
+	icon: "productivebees:bee_cage"
+	id: "746F3E65E8DE8C7D"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"На спавне стоит Пчеловод. Нажми по нему правой кнопкой, и откроется лавка пасеки. Покупать у него можно только рядом с ним: издалека кнопки покупки не работают."
+				"В лавке есть 12 базовых пород пчёл (по 50 000 монет за клетку с пчелой), клетки, ловец пчёл, центрифуга, розлив мёда, улья, медовые лакомства и бутылки мёда."
+				"Эта глава учит всему, что есть в Productive Bees: как ловить и поселять пчёл, как получать из сот металлы, как разводить новые породы, как менять гены и откуда берутся пчёлы Botania, AE2 и Draconic Evolution."
+				"Квесты идут по порядку. В каждом написано, что нужно, как это работает и зачем это нужно дальше."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:bee_cage"
+			id: "948535F91BBED7DD"
+			rewards: [
+				{
+					id: "E99E0CE6D0DF0052"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 500"
+					icon: "minecraft:gold_nugget"
+					id: "A75EBCEF4E97D559"
+					title: "500 монет"
+					type: "command"
+				}
+				{
+					count: 4
+					id: "6ADC3199B3278A89"
+					item: "productivebees:bee_cage"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "C7C38D040E6E2AD6"
+				title: "Поговорить с Пчеловодом"
+				type: "checkmark"
+			}]
+			title: "Пчеловод"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["948535F91BBED7DD"]
+			description: [
+				"Клетка нужна для всего: ловить, носить и выпускать пчёл. Рецепт: доска, бутылка мёда и доска в один ряд, выходит 4 клетки. Бутылку мёда берут из ванильного улья стеклянной бутылкой, либо покупают у Пчеловода."
+				"Правый клик клеткой по пчеле ловит её. Правый клик заполненной клеткой по земле выпускает пчелу обратно."
+				"Выпусти пчелу на подходящий цветок, и она запомнит его как свой цветок. Выпусти её на улей или гнездо, присев (Shift), и она запомнит их как свой дом."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:bee_cage"
+			id: "6D43E2F6217E7A57"
+			rewards: [
+				{
+					id: "0E7A362473E76238"
+					type: "xp"
+					xp: 25
+				}
+				{
+					count: 2
+					id: "F8567389939EA05A"
+					item: "minecraft:honey_bottle"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "9B28A840CF5A2A43"
+				item: "productivebees:bee_cage"
+				type: "item"
+			}]
+			title: "Клетка для пчёл"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6D43E2F6217E7A57"]
+			description: [
+				"Лакомство нужно почти везде. Оно успокаивает разозлённую пчелу, ускоряет рост пчелят, заселяет пустые гнёзда и переносит гены (см. блок про гены)."
+				"Рецепты: сота и бутылка мёда без формы дают 1 лакомство. Блок мёда и 4 соты дают 4 лакомства. Сота и две пыльцы тоже дают 1 лакомство. Пчеловод продаёт готовые лакомства."
+				"Чем больше лакомств пчела съела, тем спокойнее у неё характер."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:honey_treat"
+			id: "D181B14AF39137C6"
+			rewards: [
+				{
+					id: "0567CCD19C31795F"
+					type: "xp"
+					xp: 25
+				}
+				{
+					command: "/quest_reward coins {p} 300"
+					icon: "minecraft:gold_nugget"
+					id: "E5D2FAE3191FA252"
+					title: "300 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "1D6593AB51654BEF"
+				item: "productivebees:honey_treat"
+				type: "item"
+			}]
+			title: "Медовое лакомство"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["D181B14AF39137C6"]
+			description: [
+				"Одиночные пчёлы живут в гнёздах. В нашем мире они не растут сами, поэтому гнёзда делают руками: меч и блок материала без формы. Деревянное гнездо: деревянный меч и бревно. Каменное, земляное, снежное: деревянный или железный меч и нужный блок. Редкие (обсидиан, золотая руда Незера): алмазный меч."
+				"Гнездо, сделанное руками, пустое. Чтобы очистить гнездо от пчелы и яиц, скрафти его одно в сетке крафта."
+				"Гнездо можно сломать вместе с пчелой внутри, Silk Touch не нужен."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:oak_wood_nest"
+			id: "14D3663F2C13D750"
+			rewards: [
+				{
+					id: "B27DA2913FE9AF8D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 300"
+					icon: "minecraft:gold_nugget"
+					id: "5FA21633058935F8"
+					title: "300 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "988AC34191881612"
+				item: "productivebees:oak_wood_nest"
+				type: "item"
+			}]
+			title: "Гнездо"
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["14D3663F2C13D750"]
+			description: [
+				"Правый клик лакомством по пустому гнезду запускает отсчёт. Через время туда вселится одиночная пчела. Какая именно, зависит от типа гнезда, а иногда и от биома, где оно стоит."
+				"Дерево: дуб и берёза дают жёлто-чёрного и зелёного плотника. Тёмный дуб: голубополосую пчелу, зелёного и жёлто-чёрного плотника. Ель: смоляную пчелу и жёлто-чёрного плотника. Джунгли: зелёного плотника. Мангры: обоих плотников. Акация и вишня: голубополосую."
+				"Земля и камень: рыхлая земля даёт пепельную шахтёрскую, шоколадную шахтёрскую пчелу и листореза. Гравий: обеих шахтёрских и копателя (только в пляжных и речных биомах). Песок: обеих шахтёрских (в песчаных биомах). Камень: копателя и каменщика. Тростник: каменщика и тростниковую пчелу. Снег: потную пчелу (в снежных биомах)."
+				"Кочевника в гнёздах нет, он продаётся только у Пчеловода. Остальных 11 базовых пород Пчеловод тоже продаёт, если не хочешь ждать."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:oak_wood_nest"
+			id: "AA43D6F0F52CB67B"
+			rewards: [
+				{
+					id: "9D66EE1E6AAE7D43"
+					type: "xp"
+					xp: 75
+				}
+				{
+					command: "/quest_reward coins {p} 500"
+					icon: "minecraft:gold_nugget"
+					id: "0E5A5CF67D8BDE33"
+					title: "500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "CB611EC33D215A80"
+				title: "Заселить гнездо пчелой"
+				type: "checkmark"
+			}]
+			title: "Заселить гнездо"
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["AA43D6F0F52CB67B"]
+			description: [
+				"Ловец сам ловит пролетающих пчёл в клетки. Рецепт: 7 железных слитков, ком земли и раздатчик. Заряди его пустыми клетками."
+				"Положи сверху цветок или кормушку, и пчёлы будут слетаться. Улучшения для ловца: «БейБи» (ловит только пчелят), фильтр (только выбранные породы), дальность (можно ставить несколько)."
+				"Готовый ловец продаёт Пчеловод."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:catcher"
+			id: "FEEDC491A051D2B0"
+			rewards: [
+				{
+					id: "64952DBA5DE42F3D"
+					type: "xp"
+					xp: 75
+				}
+				{
+					count: 8
+					id: "C4F92EFA6DE9CF1E"
+					item: "productivebees:bee_cage"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "4A1D8F20C153CC6C"
+				item: "productivebees:catcher"
+				type: "item"
+			}]
+			title: "Ловец пчёл"
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["FEEDC491A051D2B0"]
+			description: [
+				"Дикие пчёлы живут в особых гнёздах. Нужны гнездо, особый предмет и нужный биом: гнездо ставишь в этом биоме и кликаешь предметом."
+				"Незер: кристаллическая пчела (гнездо из кварцевой руды Незера, железный меч, предмет: кварц), светящаяся (гнездо из светящегося камня, светящаяся пыль), призрачная (гнездо из песка душ, слеза гаста), магматическая (гнездо из незер-кирпича, железный меч, магмовый крем), золотая (гнездо из золотой руды Незера, алмазный меч, золотой слиток)."
+				"Энд: эндер-пчела (гнездо из эндер-камня, железный меч, жареный хорус), драконья пчела (гнездо из обсидиана, алмазный меч, дыхание дракона; живёт на главном острове Энда)."
+				"Особые биомы: слизистая пчела (гнездо из слизевого блока, болото), шмель (гнездо из блока травы, равнины)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:obsidian_nest"
+			id: "1B53148B861EBFD7"
+			rewards: [
+				{
+					id: "FF87845464576B95"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "DA547E2489278032"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "0E0FEBDF1DEA4577"
+				title: "Заселить дикое гнездо"
+				type: "checkmark"
+			}]
+			title: "Дикие пчёлы"
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["D181B14AF39137C6"]
+			description: [
+				"Улучшенный улей показывает, какие пчёлы внутри, сам хранит соты, не требует костра для сбора и переносится вместе с пчёлами без Silk Touch. Вмещает 3 пчелы."
+				"Рецепт: 4 дубовые доски, 2 соты, ванильный улей, костёр и ножницы. Для других пород дерева есть свои варианты."
+				"Если пчёлы не выходят, ударь улей палкой: они вылетят, но прогресс текущего цикла пропадёт."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:advanced_oak_beehive"
+			id: "BFB34C1DEC2598EF"
+			rewards: [
+				{
+					id: "D3FB1021A7B94B01"
+					type: "xp"
+					xp: 75
+				}
+				{
+					command: "/quest_reward coins {p} 500"
+					icon: "minecraft:gold_nugget"
+					id: "F1EEEC54A8910052"
+					title: "500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "ABE3CBA7924AA7B1"
+				item: "productivebees:advanced_oak_beehive"
+				type: "item"
+			}]
+			title: "Улучшенный улей"
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["BFB34C1DEC2598EF"]
+			description: [
+				"Расширитель присоединяется к улью. Вместимость вырастает с 3 до 5 пчёл, и появляются слоты под улучшения."
+				"Рецепт: 8 дубовых досок вокруг соты."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:expansion_box_oak"
+			id: "281DC2DC05B70C18"
+			rewards: [
+				{
+					id: "5017E0E23C5C6C06"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 300"
+					icon: "minecraft:gold_nugget"
+					id: "BD08C41AD1B17690"
+					title: "300 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "495132C5C77D6A87"
+				item: "productivebees:expansion_box_oak"
+				type: "item"
+			}]
+			title: "Расширитель улья"
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"281DC2DC05B70C18"
+				"AA43D6F0F52CB67B"
+			]
+			description: [
+				"Выпусти пчелу из клетки на улей, присев (Shift): она запомнит его как свой дом. В GUI улья видно, кто сейчас внутри."
+				"Рядом с ульем должен расти цветок, который пчела любит. У одиночных пчёл подходят обычные цветы, у других пород свои предпочтения, смотри их в JEI."
+				"Обычно пчёлы работают днём и прячутся от дождя и грозы. Эти привычки можно изменить генами (блок про гены)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:advanced_oak_beehive"
+			id: "83CDB5C58C41AC94"
+			rewards: [
+				{
+					id: "7C34393515FA8823"
+					type: "xp"
+					xp: 75
+				}
+				{
+					command: "/quest_reward coins {p} 500"
+					icon: "minecraft:gold_nugget"
+					id: "CF2240AFA8E2B54D"
+					title: "500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "D3A05D9A99E5CF65"
+				title: "Поселить пчёл в улей"
+				type: "checkmark"
+			}]
+			title: "Поселить пчёл в улей"
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["281DC2DC05B70C18"]
+			description: [
+				"Основа для всех улучшений: 3 изумруда, 4 деревянные палки, лакомство и алмаз. Улучшения ставятся в расширитель улья, в ловец, центрифугу и другие машины."
+				"БейБи: улей сам разводит пчёл (основа, 4 цветка и 4 блока сот). Время: пчёлы работают быстрее (основа, 4 часов, 4 блока сот). Дальность: больше радиус (основа, 4 железных блока, 4 блока сот)."
+				"Фильтр: ловец берёт только выбранные породы. Блок сот: соты автоматически складываются в блоки. В некоторых машинах улучшения скорости и продуктивности тоже работают."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:upgrade_base"
+			id: "95A4C241B4D6DD3C"
+			rewards: [
+				{
+					id: "5E12C38D8828B354"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "29F1DCF86EAE2E5D"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "BB5ECB57D0A29277"
+				item: "productivebees:upgrade_base"
+				type: "item"
+			}]
+			title: "Улучшения улья"
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"95A4C241B4D6DD3C"
+				"428D4743B5E3F648"
+			]
+			description: [
+				"Улучшение продуктивности даёт больше сот за вылет пчелы. Рецепт: основа, 2 драконьих куска, 4 блока сот и 2 блока мёда."
+				"Драконий кусок делается из 9 драконьей пыли. Пыль даёт сота драконьей пчелы, которая живёт в яйце дракона (блок «Улей в яйце дракона»). Драконьи пчёлы описаны в конце главы, это серьёзная цель."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:upgrade_productivity"
+			id: "271E61907B6C95CB"
+			rewards: [
+				{
+					id: "63BC7A56E98A48B5"
+					type: "xp"
+					xp: 250
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "8BB319FB7F3BD883"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "89102F501552F935"
+				item: "productivebees:upgrade_productivity"
+				type: "item"
+			}]
+			title: "Продуктивность"
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["83CDB5C58C41AC94"]
+			description: [
+				"Пчёлы в улучшенном улье приносят соты ресурсов. У каждой соты есть тип: сота железной пчелы, сота манасталевой пчелы и так далее. Положить соту в печь нельзя, её надо отдать центрифуге."
+				"Соты складываются в блоки сот для хранения и обратно."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:configurable_honeycomb"
+			id: "67572FEED43FF57F"
+			rewards: [
+				{
+					id: "923A43142EF8FC18"
+					type: "xp"
+					xp: 75
+				}
+				{
+					command: "/quest_reward coins {p} 500"
+					icon: "minecraft:gold_nugget"
+					id: "5556C256B6E4E7BE"
+					title: "500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "90758C06120A53DF"
+				item: "productivebees:configurable_honeycomb"
+				type: "item"
+			}]
+			title: "Соты ресурсов"
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["67572FEED43FF57F"]
+			description: [
+				"Центрифуга раскручивает соту и выдаёт материал, воск и каплю жидкого мёда. Рецепт: 7 железных слитков и точило. Базовая центрифуга работает без энергии, но медленно."
+				"Материалы каждой соты смотри в JEI (вкладка «Центрифуга»). У нас это в первую очередь драконит из сот драконита, манасталь, террасталь и альфсталь из сот Botania, кварц и флюкс из сот AE2."
+				"Мёд из центрифуги выходит жидкостью. Ставь рядом бутылочницу или бак."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:centrifuge"
+			id: "0F97E6F3F8290674"
+			rewards: [
+				{
+					id: "8828A8E2942026D5"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "A505BF64FD1EBA9B"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "9BF0E8A2D2DC7798"
+				item: "productivebees:centrifuge"
+				type: "item"
+			}]
+			title: "Центрифуга"
+			x: 2.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["0F97E6F3F8290674"]
+			description: [
+				"Розлив фасует жидкости. Пустая бутылка и 250 мБ мёда дают бутылку мёда. Сота и 250 мБ мёда дают лакомство. Рецепт самой машины: 7 железных слитков, плита гладкого камня и стекло."
+				"Поставь розлив вплотную к центрифуге, и мёд будет наливаться сам."
+				"Для генов розлив нужен вместе с поршнем: им «разливают» пчёл (см. блок генов)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:bottler"
+			id: "F6A8F7AA41F23170"
+			rewards: [
+				{
+					id: "EC6025272A322771"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "8D7FF1BEC0E25774"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "CD5B9146C9BE2C83"
+				item: "productivebees:bottler"
+				type: "item"
+			}]
+			title: "Розлив мёда"
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["0F97E6F3F8290674"]
+			description: [
+				"Электрическая центрифуга работает намного быстрее обычной и ест FE. Рецепт: обычная центрифуга и 2 редстоуна в ряд."
+				"В неё можно ставить улучшения скорости и продуктивности. Ей нужна энергия FE."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:powered_centrifuge"
+			id: "DC0A03D90F5445FD"
+			rewards: [
+				{
+					id: "51970224ABEA32D3"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1500"
+					icon: "minecraft:gold_nugget"
+					id: "198D00059D0F1E77"
+					title: "1 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "AC9561938D702674"
+				item: "productivebees:powered_centrifuge"
+				type: "item"
+			}]
+			title: "Электрическая центрифуга"
+			x: 6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"F6A8F7AA41F23170"
+				"DC0A03D90F5445FD"
+			]
+			description: [
+				"Генератор мёда сжигает жидкий мёд и даёт FE. Рецепт: 7 железных слитков, ведро мёда и печь. В него тоже ставятся улучшения продуктивности и скорости."
+				"Удобно замкнуть цикл: улей даёт соты, центрифуга даёт мёд, генератор даёт энергию для самой центрифуги."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:honey_generator"
+			id: "5FADD8806EBBFE6D"
+			rewards: [
+				{
+					id: "628E132D978D3246"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1500"
+					icon: "minecraft:gold_nugget"
+					id: "95041EFF66C176E0"
+					title: "1 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "A2231C0E0A7EEC16"
+				item: "productivebees:honey_generator"
+				type: "item"
+			}]
+			title: "Мёд в энергию"
+			x: 8.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["83CDB5C58C41AC94"]
+			description: [
+				"Новые породы получаются скрещиванием двух родителей. Рецепт разведения лежит в JEI: найди яйцо или клетку нужной пчелы и посмотри вкладку «Разведение»."
+				"Есть два способа. Камера разведения (следующий квест) делает всё в безопасной машине. Улучшение «БейБи» в улье даёт небольшой шанс на потомка без твоего участия, но только для пчёл, которые вообще размножаются."
+				"Не все породы выводятся. Часть из них только вселяется в гнёзда, часть получается превращением (конвертацией) другой пчелы предметом, как у Botania и AE2."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:bee_cage"
+			id: "E6695B5C1D4D3443"
+			rewards: [
+				{
+					id: "5E2D2CBF089B935D"
+					type: "xp"
+					xp: 50
+				}
+				{
+					command: "/quest_reward coins {p} 500"
+					icon: "minecraft:gold_nugget"
+					id: "F37CFC052EDB1CFB"
+					title: "500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "F7C133934067DCC1"
+				title: "Найти рецепт разведения в JEI"
+				type: "checkmark"
+			}]
+			title: "Как разводить пчёл"
+			x: 0.0d
+			y: 8.0d
+		}
+		{
+			dependencies: [
+				"E6695B5C1D4D3443"
+				"95A4C241B4D6DD3C"
+			]
+			description: [
+				"В камеру кладут двух родителей в клетках, предметы, которые им нравятся (цветы породы), и пустые клетки для потомства. Ей нужно FE. Улучшения скорости ускоряют процесс."
+				"Рецепт: 7 железных слитков, куст роз и улучшение «БейБи»."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:breeding_chamber"
+			id: "9C842A6B31BC5D63"
+			rewards: [
+				{
+					id: "44ECAC16FA5774A4"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 2000"
+					icon: "minecraft:gold_nugget"
+					id: "E6EC7D4E7C757AEE"
+					title: "2 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "7064081D71AA7879"
+				item: "productivebees:breeding_chamber"
+				type: "item"
+			}]
+			title: "Камера разведения"
+			x: 2.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["9C842A6B31BC5D63"]
+			description: [
+				"Инкубатор ускоряет рост пчелят: положи пчелёнка в клетке и лакомства. Рецепт: 7 железных слитков, датчик дневного света и блок сена."
+				"Второе назначение: яйцо плюс ген типа превращается в яйцо этой пчелы. Так делают яйца пчёл для превращений и слияний (блоки Botania и Draconic Evolution)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:incubator"
+			id: "EF4633978BABE49E"
+			rewards: [
+				{
+					id: "6859E3E077A02481"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 2000"
+					icon: "minecraft:gold_nugget"
+					id: "118933D1B4FE3B8D"
+					title: "2 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "D6CD54E58DE0ECB6"
+				item: "productivebees:incubator"
+				type: "item"
+			}]
+			title: "Инкубатор"
+			x: 4.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["9C842A6B31BC5D63"]
+			description: [
+				"Эти пчёлы выполняют работу вместо тебя. Цепочка разведения: шоколадная шахтёрская и копатель дают пчелу-каменолома (колет камень, песок и гравий, собирает каменную крошку). Жёлто-чёрный и зелёный плотник дают лесоруба (грызёт дерево, приносит щепу)."
+				"Лесоруб и потная пчела дают рэнчера (доит коров, овец и лам, стрижёт овец, приносит молочные соты). Лесоруб и рэнчер дают фермера (собирает урожай в радиусе 4 блоков). Фермер и рэнчер дают купидона (подогревает животных)."
+				"Лазурит и скелетная пчела дают пчелу-красильщика (красители по цветку, который она опылила)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:advanced_oak_beehive"
+			id: "0A48DDD1A20790DF"
+			rewards: [
+				{
+					id: "C9A99B163BDB853B"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 2500"
+					icon: "minecraft:gold_nugget"
+					id: "2CE1C23110CC6DD3"
+					title: "2 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "38DF20D07CE97D3A"
+				title: "Вывести пчелу-рабочего"
+				type: "checkmark"
+			}]
+			title: "Рабочие пчёлы"
+			x: 6.0d
+			y: 8.0d
+		}
+		{
+			dependencies: [
+				"0A48DDD1A20790DF"
+				"1B53148B861EBFD7"
+			]
+			description: [
+				"Железная: кристаллическая и пепельная шахтёрская. Золотая: кристаллическая и каменщик. Редстоун: светящаяся и шоколадная шахтёрская. Лазурит: редстоун и голубополосая. Уголь: магматическая и листорез. Обсидиан: магматическая и потная. Огненная: магматическая и кочевник."
+				"Алмазная: эндер-пчела и лазурит. Изумрудная: слизистая и алмазная. Опыт: изумрудная и лазурит."
+				"Призмариновая: её не выводят, её выуживают в океанском биоме. Скелетная и зомби-пчела сами вселяются в улучшенный улей, если оставить его пустым в темноте. Крипер-пчела: накорми ванильную пчелу блоком TNT. Иссушённая: накорми скелетную пчелу розой иссушителя. Древняя (незеритовая): накорми алмазную пчелу блоком незерита."
+				"Остальные породы (металлы, сплавы, самоцветы) смотри в JEI: там видно родителей и условия."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:advanced_oak_beehive"
+			id: "E9CF81799F2E185D"
+			rewards: [
+				{
+					id: "BA6D3A2EE641C422"
+					type: "xp"
+					xp: 250
+				}
+				{
+					command: "/quest_reward coins {p} 5000"
+					icon: "minecraft:gold_nugget"
+					id: "9691FD0DBB8B6B6D"
+					title: "5 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "26BF1CF7024EC1C0"
+				title: "Вывести железную пчелу"
+				type: "checkmark"
+			}]
+			title: "Дерево пчёл: ресурсы"
+			x: 8.0d
+			y: 8.0d
+		}
+		{
+			dependencies: [
+				"F6A8F7AA41F23170"
+				"83CDB5C58C41AC94"
+			]
+			description: [
+				"Гены берут так: поставь розлив, напротив него поршень, а пчелу помести между ними. В розлив положи пустые стеклянные бутылки и включи поршень рычагом. Пчела окажется в бутылке, получится «Раздавленный пчелиный материал»."
+				"Материал бросают в центрифугу. Из него получаются образцы генов и мусор."
+				"Пчёл для этого сначала ловят клеткой и выпускают рядом. Ген типа потом даёт яйцо в инкубаторе (см. ниже)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:gene_bottle"
+			id: "618E3E6038461B74"
+			rewards: [
+				{
+					id: "FC3A42D6BD65C567"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "9921A11E319E7D7F"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "73656A8308EEB984"
+				item: "productivebees:gene_bottle"
+				type: "item"
+			}]
+			title: "Бутылка с пчелой"
+			x: 0.0d
+			y: 10.0d
+		}
+		{
+			dependencies: [
+				"618E3E6038461B74"
+				"0F97E6F3F8290674"
+			]
+			description: [
+				"В центрифуге материал разделяется на образцы генов: тип пчелы и атрибуты (продуктивность, выносливость, нрав, погода, время суток)."
+				"Каждый ген имеет чистоту. Чем она выше, тем больше шанс, что пчела получит признак."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:gene"
+			id: "3D14C9D652BEDDC1"
+			rewards: [
+				{
+					id: "FF999B52E029A613"
+					type: "xp"
+					xp: 100
+				}
+				{
+					command: "/quest_reward coins {p} 1000"
+					icon: "minecraft:gold_nugget"
+					id: "7D6461A61BBDFB78"
+					title: "1 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "435CC2771CD202B5"
+				item: "productivebees:gene"
+				type: "item"
+			}]
+			title: "Образцы генов"
+			x: 2.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["3D14C9D652BEDDC1"]
+			description: [
+				"Два одинаковых гена в сетке крафта сливаются в ген повышенной чистоты. Можно просто положить несколько одинаковых генов на одно лакомство."
+				"Индексатор генов делает это сам: загрузи в него образцы и подай редстоун-сигнал. Рецепт: 7 железных слитков, компаратор и верстак."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:gene_indexer"
+			id: "E80A9FA94F2AD319"
+			rewards: [
+				{
+					id: "4273BCFF443D3ACD"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 1500"
+					icon: "minecraft:gold_nugget"
+					id: "B6C31F268F84B1C0"
+					title: "1 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "4B2C2D7CE3E592D2"
+				item: "productivebees:gene_indexer"
+				type: "item"
+			}]
+			title: "Чистота гена"
+			x: 4.0d
+			y: 10.0d
+		}
+		{
+			dependencies: [
+				"E80A9FA94F2AD319"
+				"D181B14AF39137C6"
+			]
+			description: [
+				"Лакомство и ген дают лакомство с геном. Скорми его пчеле, и с шансом, зависящим от чистоты, она получит новый признак."
+				"Скорми пчеле побольше обычных лакомств: так улучшается нрав."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:honey_treat"
+			id: "521C598C04CAB8E2"
+			rewards: [
+				{
+					id: "FB7C91CB1AD43982"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 1500"
+					icon: "minecraft:gold_nugget"
+					id: "BF0842692847F3B5"
+					title: "1 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "8D9F71E5A1F83D18"
+				title: "Скормить пчеле лакомство с геном"
+				type: "checkmark"
+			}]
+			title: "Ген на лакомстве"
+			x: 6.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["521C598C04CAB8E2"]
+			description: [
+				"Продуктивность: обычная, средняя, высокая, очень высокая. Больше сот за вылет. Выносливость: слабая, обычная, средняя, сильная. Влияет на здоровье, а у сильных пчёл есть шанс не потерять жало."
+				"Нрав: пассивный, обычный, агрессивный, враждебный. Погода: нет (работает только в ясную погоду), дождь, любая. Пчела привыкает к плохой погоде, если оставить её на поводке под дождём, но она может получить урон и умереть, держи лакомства под рукой."
+				"Время суток: дневная работает только днём, ночная только ночью, метатурнальная всегда. Оставь дневную пчелу на поводке ночью, и она с шансом станет ночной. Ночную днём, и она может стать метатурнальной."
+				"Часть пчёл накладывает эффекты на игроков рядом, и положительные, и отрицательные."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:gene"
+			id: "178BB1F4A26EACA0"
+			rewards: [
+				{
+					id: "B52AB3ACFF84983D"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "FDC5A19B245340C6"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "3E63A4AB1F7B2612"
+				title: "Улучшить хотя бы один атрибут пчелы"
+				type: "checkmark"
+			}]
+			title: "Атрибуты"
+			x: 8.0d
+			y: 10.0d
+		}
+		{
+			dependencies: [
+				"3D14C9D652BEDDC1"
+				"EF4633978BABE49E"
+			]
+			description: [
+				"Инкубатор делает из обычного яйца и гена типа яйцо этой породы. Используется только ген типа, остальные гены на лакомстве теряются."
+				"Яйца нужны, чтобы превращать пчёл: Botania и AE2 меняют именно яйца. Яйцо можно размножать, пока у тебя есть пчела: бутылка, центрифуга, ген, инкубатор."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "0A59D0398A4E1F39"
+			rewards: [
+				{
+					id: "39C84DC9A582E8B1"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "495CD7617B08F732"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "83C80702F8E5B20B"
+				item: "productivebees:spawn_egg_configurable_bee"
+				type: "item"
+			}]
+			title: "Яйцо пчелы"
+			x: 10.0d
+			y: 10.0d
+		}
+		{
+			dependencies: [
+				"0A59D0398A4E1F39"
+				"64B2F6394B6B0D07"
+			]
+			description: [
+				"Первый шаг пчёл Botania. Лепестковый аптекарь: 3 белых лепестка, лакомство и ванильное яйцо пчелы, брошенное в воду. Получится яйцо чистой пчелы."
+				"Ванильное яйцо пчелы получают в инкубаторе: поймай обычную пчелу, сделай ген и яйцо."
+				"Чистая пчела превращает блоки возле себя: камень в живую породу, брёвна в живое дерево, лёд в плотный лёд, воду в снежный блок и другое."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "1C54B915EEDD6DF8"
+			rewards: [
+				{
+					id: "691A003356F32DE2"
+					type: "xp"
+					xp: 150
+				}
+				{
+					command: "/quest_reward coins {p} 2000"
+					icon: "minecraft:gold_nugget"
+					id: "3230965373ADEDA7"
+					title: "2 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "128D97B2C3413A96"
+				title: "Получить яйцо чистой пчелы"
+				type: "checkmark"
+			}]
+			title: "Чистая пчела"
+			x: 0.0d
+			y: 12.0d
+		}
+		{
+			dependencies: [
+				"1C54B915EEDD6DF8"
+				"0EBFF877A2990851"
+			]
+			description: [
+				"Руническая сборка: яйцо чистой пчелы, 4 руны маны и руна жадности, 100 000 маны. Получится яйцо пчелы маны."
+				"Улей с такой пчелой даёт чёрные лотосы (шанс 50%) и редкие чёрнее чёрных лотосы (шанс 5%)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "F57B17D22C670254"
+			rewards: [
+				{
+					id: "55A4E11EE4100E24"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 2500"
+					icon: "minecraft:gold_nugget"
+					id: "02228A7EA23D1743"
+					title: "2 500 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "C58062E3303DC59F"
+				title: "Получить яйцо пчелы маны"
+				type: "checkmark"
+			}]
+			title: "Пчела маны"
+			x: 2.0d
+			y: 12.0d
+		}
+		{
+			dependencies: [
+				"0A59D0398A4E1F39"
+				"E9CF81799F2E185D"
+				"02405A7DBB0FD77D"
+				"2D24321A0DD539D3"
+			]
+			description: [
+				"Бассейн маны: яйцо железной пчелы плюс 10 000 маны даёт яйцо пчелы манасталь."
+				"Соты манасталь в центрифуге дают 1–2 самородка манасталь (шанс 60%). Самородки сплавляются в слитки для рецептов Draconic Evolution: ядро драконита, модули драконита и узлы машин."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "906323D2E2BDA724"
+			rewards: [
+				{
+					id: "7E0D8C4DFDA9D636"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "92604EDCE9BDA59A"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "F88117EC9B382B93"
+				title: "Получить яйцо пчелы манасталь"
+				type: "checkmark"
+			}]
+			title: "Пчела манасталь"
+			x: 4.0d
+			y: 12.0d
+		}
+		{
+			dependencies: [
+				"906323D2E2BDA724"
+				"1BFF3A4AD70743E7"
+				"6DEB564BC5BBF7A8"
+			]
+			description: [
+				"Терра-плита: яйцо пчелы манасталь, алмаз маны и жемчуг маны, 500 000 маны. Получится яйцо пчелы террастали. Тот же рецепт есть и в инфузере Mythic Botany."
+				"Соты террастали в центрифуге дают 1–2 самородка террастали (шанс 30%). Террасталь теперь нужна для ядра виверны, модулей виверны и инструментов виверны в Draconic Evolution."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "CF1C6AA051B88284"
+			rewards: [
+				{
+					id: "6B16772965BCD695"
+					type: "xp"
+					xp: 300
+				}
+				{
+					command: "/quest_reward coins {p} 4000"
+					icon: "minecraft:gold_nugget"
+					id: "733A61697B5D17FA"
+					title: "4 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "ED983F5032725F15"
+				title: "Получить яйцо пчелы террастали"
+				type: "checkmark"
+			}]
+			title: "Пчела террастали"
+			x: 6.0d
+			y: 12.0d
+		}
+		{
+			dependencies: [
+				"906323D2E2BDA724"
+				"7ED5D7922E0667E4"
+				"10F5A3D26D2D9082"
+			]
+			description: [
+				"Торговля с эльфами через портал в Альфхейм: яйцо пчелы манасталь превращается в яйцо пчелы элементиума."
+				"Соты в центрифуге дают 1–2 самородка элементиума (шанс 20%)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "1FFD82CEB279EDFC"
+			rewards: [
+				{
+					id: "B01BB90CFD276F30"
+					type: "xp"
+					xp: 300
+				}
+				{
+					command: "/quest_reward coins {p} 4000"
+					icon: "minecraft:gold_nugget"
+					id: "29F45B343346F966"
+					title: "4 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "F0BC4EB4ED2703AE"
+				title: "Получить яйцо пчелы элементиума"
+				type: "checkmark"
+			}]
+			title: "Пчела элементиума"
+			x: 8.0d
+			y: 12.0d
+		}
+		{
+			dependencies: [
+				"1FFD82CEB279EDFC"
+				"65AD49156B6D8490"
+				"16B8F73ED297BC43"
+			]
+			description: [
+				"Инфузер Mythic Botany: яйцо пчелы элементиума, самоцвет драконита (Elven dragonstone), пыль пикси и 4 000 000 маны. Получится яйцо пчелы альфсталь."
+				"Соты альфсталь дают 2–3 самородка альфсталь без шанса, то есть каждая сота. Альфсталь нужна для пробуждённого тира Draconic Evolution: ядро пробуждения, инструменты и модули."
+				"Улей этой пчелы заметно упрощает постройку драконьих машин."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "14CFAA636CBE119B"
+			rewards: [
+				{
+					id: "020DCDF4CAB1CCA5"
+					type: "xp"
+					xp: 500
+				}
+				{
+					command: "/quest_reward coins {p} 8000"
+					icon: "minecraft:gold_nugget"
+					id: "49A0B98CE8FB7ECF"
+					title: "8 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "6BCDE727CCA13ED0"
+				title: "Получить яйцо пчелы альфсталь"
+				type: "checkmark"
+			}]
+			title: "Пчела альфсталь"
+			x: 10.0d
+			y: 12.0d
+		}
+		{
+			dependencies: [
+				"E9CF81799F2E185D"
+				"414D29A38795AFF5"
+			]
+			description: [
+				"Разведение: кристаллическая пчела (Незер) и эндер-пчела (Энд) дают пространственную пчелу."
+				"Соты в центрифуге дают 1–2 кристалла истинного кварца и пыль кварца (шанс 50%)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "D54B30271C3F6969"
+			rewards: [
+				{
+					id: "F87B99E3AE6F16D8"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "DE2C988734CD0AD2"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "CFB04ED469C1F63E"
+				title: "Вывести пространственную пчелу"
+				type: "checkmark"
+			}]
+			title: "Пространственная пчела"
+			x: 0.0d
+			y: 14.0d
+		}
+		{
+			dependencies: [
+				"D54B30271C3F6969"
+				"1D392AB2A35961BB"
+			]
+			description: [
+				"Превращение: пространственная пчела и флюксовая жемчужина дают пчелу флюкса."
+				"Соты в центрифуге дают кристалл флюкса (шанс 20%)."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "250AE35067DC6BFF"
+			rewards: [
+				{
+					id: "E174BFA461630E22"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 3000"
+					icon: "minecraft:gold_nugget"
+					id: "30AF3B5A0744AB41"
+					title: "3 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "75917CC5FBA02981"
+				title: "Вывести пчелу флюкса"
+				type: "checkmark"
+			}]
+			title: "Пчела флюкса"
+			x: 2.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["250AE35067DC6BFF"]
+			description: [
+				"Превращение AE2: брось яйцо пространственной пчелы и блок небесной стали в лаву (MEGA Cells). Получится яйцо пчелы небесной стали."
+				"Соты в центрифуге дают слиток небесной стали (шанс 25%). Он нужен для MEGA Cells."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "50B1E0DF32A47330"
+			rewards: [
+				{
+					id: "0B339F8652426997"
+					type: "xp"
+					xp: 300
+				}
+				{
+					command: "/quest_reward coins {p} 4000"
+					icon: "minecraft:gold_nugget"
+					id: "9887C928ED33C6CF"
+					title: "4 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "D1DFAFD227EF6CAF"
+				title: "Получить пчелу небесной стали"
+				type: "checkmark"
+			}]
+			title: "Пчела небесной стали"
+			x: 4.0d
+			y: 14.0d
+		}
+		{
+			dependencies: [
+				"0A48DDD1A20790DF"
+				"414D29A38795AFF5"
+			]
+			description: [
+				"Разведение: кочевник и тростниковая пчела дают пчелу кремния. Кремний нужен для печатей и процессоров AE2."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "194954D124F14EE1"
+			rewards: [
+				{
+					id: "29342BB524DA78FA"
+					type: "xp"
+					xp: 200
+				}
+				{
+					command: "/quest_reward coins {p} 2000"
+					icon: "minecraft:gold_nugget"
+					id: "46046636DE733BB8"
+					title: "2 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "23D0C2C313276EA6"
+				title: "Вывести пчелу кремния"
+				type: "checkmark"
+			}]
+			title: "Пчела кремния"
+			x: 6.0d
+			y: 14.0d
+		}
+		{
+			dependencies: [
+				"1B53148B861EBFD7"
+				"0F97E6F3F8290674"
+			]
+			description: [
+				"Драконья пчела живёт на главном острове Энда. Сделай гнездо из обсидиана (алмазный меч), поставь в Энде и кликни дыханием дракона. Пчела любит яйцо дракона и вылетает в Энде без цветов."
+				"Улей в яйце дракона: яйцо дракона и обычный улей без формы. В Энде он работает без цветов. Из сот драконьей пчелы центрифуга достаёт драконью пыль (шанс 30%), девять пылинок складываются в драконий кусок."
+				"Из драконьей пчелы получаются все остальные драконьи пчёлы. Яйцо этой пчелы будет катализатором для пчелы драконита."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:dragon_egg_hive"
+			id: "428D4743B5E3F648"
+			rewards: [
+				{
+					id: "25C2DE62FBDF3DEA"
+					type: "xp"
+					xp: 300
+				}
+				{
+					command: "/quest_reward coins {p} 5000"
+					icon: "minecraft:gold_nugget"
+					id: "D2E8231D0D50AD7B"
+					title: "5 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "58A50F0B01864A2C"
+				item: "productivebees:dragon_egg_hive"
+				type: "item"
+			}]
+			title: "Драконья пчела"
+			x: 0.0d
+			y: 16.0d
+		}
+		{
+			dependencies: [
+				"428D4743B5E3F648"
+				"0A59D0398A4E1F39"
+			]
+			description: [
+				"Слияние (Fusion Crafting, тир WYVERN, 1 000 000 энергии): катализатор, яйцо драконьей пчелы. Ингредиенты: 2 ядра драконита, 2 пыли драконита, 2 блока сот и 2 блока драконита. Получится яйцо пчелы драконита."
+				"Улей с этой пчелой даёт соты, из которых центрифуга достаёт 1–3 самородка драконита и воск. Это третий источник драконита после дракона Энда и кейса «Драконий»."
+				"Подробности про слияние: глава Draconic Evolution."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "BE5FD41B277442FE"
+			rewards: [
+				{
+					id: "4233E41BED004180"
+					type: "xp"
+					xp: 500
+				}
+				{
+					command: "/quest_reward coins {p} 8000"
+					icon: "minecraft:gold_nugget"
+					id: "EB787F009C6184C1"
+					title: "8 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "FD76F09BCBD7B0E0"
+				title: "Получить яйцо пчелы драконита"
+				type: "checkmark"
+			}]
+			title: "Пчела драконита"
+			x: 2.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["BE5FD41B277442FE"]
+			description: [
+				"Слияние (тир DRACONIC, 32 000 000 энергии): катализатор, яйцо пчелы драконита. Ингредиенты: 2 ядра пробуждения, сердце дракона, блок мёда, 2 блока сот и 2 слитка пробуждённого драконита."
+				"Соты этой пчелы дают 1–3 самородка пробуждённого драконита. Это главный путь к пробуждённому дракониту без постоянной охоты на дракона."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "B40AD64250835DD3"
+			rewards: [
+				{
+					id: "B75D3103D86C0BB1"
+					type: "xp"
+					xp: 800
+				}
+				{
+					command: "/quest_reward coins {p} 12000"
+					icon: "minecraft:gold_nugget"
+					id: "E7F4C0F3E5CB9D39"
+					title: "12 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "82C08A2A7FD53928"
+				title: "Получить яйцо пчелы пробуждения"
+				type: "checkmark"
+			}]
+			title: "Пчела пробуждения"
+			x: 4.0d
+			y: 16.0d
+		}
+		{
+			dependencies: [
+				"B40AD64250835DD3"
+				"34797EC98AE1BB6E"
+				"5E5277DFF3957C35"
+			]
+			description: [
+				"Слияние (тир CHAOTIC, 64 000 000 энергии): катализатор, яйцо пчелы пробуждения. Ингредиенты: 2 ядра пробуждения, нейтрониевый слиток, слиток кристаллической матрицы, блок мёда, 2 блока сот и слиток пробуждённого драконита. Нужен инжектор хаоса: его собирают из нейтрония и матрицы Avaritia."
+				"Мы сознательно убрали из рецепта осколки хаоса: Хранителя хаоса в мире нет, осколки даёт только эта пчела. Иначе рецепт замкнулся бы сам на себя."
+				"Соты пчелы хаоса в центрифуге дают 1–2 малых осколка хаоса и с шансом 15% средний осколок."
+			]
+			entity_vis_size: 1.0f
+			icon: "productivebees:spawn_egg_configurable_bee"
+			id: "4C101F211CC7E51B"
+			rewards: [
+				{
+					id: "DFE6D2AC243C9DFB"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					command: "/quest_reward coins {p} 20000"
+					icon: "minecraft:gold_nugget"
+					id: "566A8F419862CB3E"
+					title: "20 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "F8FC77E5F99C31D9"
+				title: "Получить яйцо пчелы хаоса"
+				type: "checkmark"
+			}]
+			title: "Пчела хаоса"
+			x: 6.0d
+			y: 16.0d
+		}
+		{
+			dependencies: [
+				"4C101F211CC7E51B"
+				"DC0A03D90F5445FD"
+			]
+			description: [
+				"Осколки хаоса нужны для ядра хаоса, энергоядра хаоса, реактора, посоха и всех модулей хаоса. Девять малых осколков складываются в средний, девять средних в большой, девять больших в осколок хаоса."
+				"Как собрать ферму: поставь пчёл хаоса в улучшенные улья с расширителями, добавь улучшения продуктивности и времени, подключи электрическую центрифугу и улучшение блока сот. Соты из улья идут в центрифугу, осколки в сундук."
+				"Чем лучше гены (продуктивность, любая погода), тем быстрее копятся осколки. Для одного ядра хаоса нужно четыре больших осколка, то есть 324 малых."
+			]
+			entity_vis_size: 1.0f
+			icon: "draconicevolution:small_chaos_frag"
+			id: "4E8BB02D9839A6C0"
+			rewards: [
+				{
+					id: "4C3E4B9ECB25CE3D"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					command: "/quest_reward coins {p} 15000"
+					icon: "minecraft:gold_nugget"
+					id: "2C216475133F53AC"
+					title: "15 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "0522338CA098F052"
+				item: "draconicevolution:small_chaos_frag"
+				type: "item"
+			}]
+			title: "Ферма осколков хаоса"
+			x: 8.0d
+			y: 16.0d
+		}
+		{
+			dependencies: [
+				"4E8BB02D9839A6C0"
+				"14CFAA636CBE119B"
+				"50B1E0DF32A47330"
+				"178BB1F4A26EACA0"
+			]
+			description: [
+				"Ты прошёл всю главу: клетки и гнёзда, улья и центрифуги, разведение, гены, пчёлы Botania, AE2 и Draconic Evolution."
+				"Дальше можно развивать пасеку без подсказок: выводить пчёл-металлы из JEI, улучшать гены и строить фермы сот."
+			]
+			entity_vis_size: 1.0f
+			icon: "minecraft:honey_block"
+			id: "7B6C0262EB462B64"
+			rewards: [
+				{
+					id: "B374E0A2C8D49BB7"
+					type: "xp"
+					xp: 2000
+				}
+				{
+					command: "/quest_reward coins {p} 20000"
+					icon: "minecraft:gold_nugget"
+					id: "87A486543ABE29F4"
+					title: "20 000 монет"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "2697F805253910D2"
+				title: "Закончить главу про пчёл"
+				type: "checkmark"
+			}]
+			title: "Мастер пасеки"
+			x: 4.0d
+			y: 18.0d
+		}
+	]
+	title: "Productive Bees"
+}
