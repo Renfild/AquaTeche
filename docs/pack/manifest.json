@@ -1,5 +1,5 @@
 {
-  "version": "2.9.454",
+  "version": "2.9.455",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -36,9 +36,9 @@
     },
     {
       "path": "mods/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
-      "md5": "0467d1655776421f21b4b1275929d291",
-      "size": 3111156,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.454/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
+      "md5": "e1249bc9a7e278e40009ee028902cdb8",
+      "size": 3111959,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/aqualumen-forge-1.20.1-0.3.74-alpha.jar",
       "asset": "aqualumen-forge-1.20.1-0.3.74-alpha.jar"
     },
     {
@@ -66,7 +66,7 @@
       "path": "mods/aquatech_ui-1.0.113.jar",
       "md5": "608bf039c4f6b6f109d838d502f18346",
       "size": 4192029,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.454/aquatech_ui-1.0.113.jar",
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/aquatech_ui-1.0.113.jar",
       "asset": "aquatech_ui-1.0.113.jar"
     },
     {
@@ -610,9 +610,9 @@
     },
     {
       "path": "config/aqualumen/hub.html",
-      "md5": "d4691eb40a1eeae20ed47a0bd6c203bb",
-      "size": 1209494,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.454/config__aqualumen__hub.html",
+      "md5": "522906c934568b261af6110645a6432d",
+      "size": 1210093,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/config__aqualumen__hub.html",
       "asset": "config__aqualumen__hub.html"
     },
     {
@@ -645,9 +645,9 @@
     },
     {
       "path": "config/aqualumen/html/hub.html",
-      "md5": "d4691eb40a1eeae20ed47a0bd6c203bb",
-      "size": 1209494,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.454/config__aqualumen__html__hub.html",
+      "md5": "522906c934568b261af6110645a6432d",
+      "size": 1210093,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/config__aqualumen__html__hub.html",
       "asset": "config__aqualumen__html__hub.html"
     },
     {
@@ -778,9 +778,9 @@
     },
     {
       "path": "config/ftbquests/quests/chapters/6D8025A12BB42355.snbt",
-      "md5": "6898d7e4225c7b75b8d1c1561b2a12ed",
-      "size": 6489,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.443/config__ftbquests__quests__chapters__6D8025A12BB42355.snbt",
+      "md5": "d6f49696df7fd4a0a0f4b4a6ce92279f",
+      "size": 6897,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/config__ftbquests__quests__chapters__6D8025A12BB42355.snbt",
       "asset": "config__ftbquests__quests__chapters__6D8025A12BB42355.snbt"
     },
     {
@@ -826,10 +826,17 @@
       "asset": "config__ftbquests__quests__chapters__botania_aquatech.snbt"
     },
     {
+      "path": "config/ftbquests/quests/chapters/draconic_aquatech.snbt",
+      "md5": "e95138868174e7cc52dda35d14dfe0c8",
+      "size": 50769,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/config__ftbquests__quests__chapters__draconic_aquatech.snbt",
+      "asset": "config__ftbquests__quests__chapters__draconic_aquatech.snbt"
+    },
+    {
       "path": "config/ftbquests/quests/chapters/endgame_aquatech.snbt",
-      "md5": "91ac9c8fdb53d7134a3dc238052129d9",
-      "size": 3902,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.443/config__ftbquests__quests__chapters__endgame_aquatech.snbt",
+      "md5": "7e3e59b6cf606b448eef361268626293",
+      "size": 3904,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/config__ftbquests__quests__chapters__endgame_aquatech.snbt",
       "asset": "config__ftbquests__quests__chapters__endgame_aquatech.snbt"
     },
     {
@@ -841,10 +848,17 @@
     },
     {
       "path": "config/ftbquests/quests/chapters/nachalo_aquatech.snbt",
-      "md5": "d0d9dce9ff0da056c0f4aab962f53d72",
-      "size": 27201,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.443/config__ftbquests__quests__chapters__nachalo_aquatech.snbt",
+      "md5": "e85b0889e8d8a3c0618fdce3cc517b67",
+      "size": 27703,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/config__ftbquests__quests__chapters__nachalo_aquatech.snbt",
       "asset": "config__ftbquests__quests__chapters__nachalo_aquatech.snbt"
+    },
+    {
+      "path": "config/ftbquests/quests/chapters/productivebees_aquatech.snbt",
+      "md5": "9ddd6b52d83e0574243d33a91fc90298",
+      "size": 60273,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/config__ftbquests__quests__chapters__productivebees_aquatech.snbt",
+      "asset": "config__ftbquests__quests__chapters__productivebees_aquatech.snbt"
     },
     {
       "path": "config/ftbquests/quests/chapters/secret_aquatech.snbt",
@@ -985,6 +999,13 @@
       "size": 14129,
       "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.404/kubejs__server_scripts__30_aquatech_crafting.js",
       "asset": "kubejs__server_scripts__30_aquatech_crafting.js"
+    },
+    {
+      "path": "kubejs/server_scripts/32_aquatech_draconic.js",
+      "md5": "7a73c999773689bfddced20dbf310706",
+      "size": 71680,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.455/kubejs__server_scripts__32_aquatech_draconic.js",
+      "asset": "kubejs__server_scripts__32_aquatech_draconic.js"
     },
     {
       "path": "kubejs/server_scripts/35_fun_crafts.js",
