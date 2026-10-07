@@ -26,10 +26,14 @@ import net.minecraft.world.item.Items;
  */
 public class FamePlaqueRenderer implements BlockEntityRenderer<FamePlaqueBlockEntity> {
 
-    private static final int TEXT_COLOR = 0xFF3A2614;
-    private static final float NAMEPLATE_FRONT_Z = -0.2625F;
-    private static final float TEXT_MAX_WIDTH = 0.74F;
+    private static final int TEXT_COLOR = 0xFF1E1206;
+    /** Передняя плоскость латунной таблички в модели на 12 единицах от стены плюс 0.1 запаса, чтобы буквы не мерцали. */
+    private static final float NAMEPLATE_FRONT_Z = -0.244F;
+    /** Внутри ободка таблички остаётся 11 единиц ширины. */
+    private static final float TEXT_MAX_WIDTH = 0.66F;
     private static final float TEXT_SCALE = 0.0095F;
+    /** Окно модели 11 на 8.5 единиц; спрайт 16 текселей при 0.5 блока даёт 8 единиц, то есть влезает целиком. */
+    private static final float FISH_SCALE = 0.5F;
 
     private final ItemRenderer items;
     private final Font font;
@@ -62,8 +66,8 @@ public class FamePlaqueRenderer implements BlockEntityRenderer<FamePlaqueBlockEn
         pose.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
 
         pose.pushPose();
-        pose.translate(0.0, 0.09, -0.32);
-        pose.scale(0.62F, 0.62F, 0.62F);
+        pose.translate(0.0, 0.08, -0.32);
+        pose.scale(FISH_SCALE, FISH_SCALE, FISH_SCALE);
         pose.mulPose(Axis.YP.rotationDegrees(180.0F));
         items.renderStatic(stack, ItemDisplayContext.FIXED, light, OverlayTexture.NO_OVERLAY, pose, buffer,
                 plaque.getLevel(), (int) plaque.getBlockPos().asLong());

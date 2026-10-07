@@ -225,6 +225,7 @@ public final class LeyService {
         }
         BlockPos water = findWater(level, BlockPos.containing(st.x, level.getSeaLevel(), st.z));
         if (water == null) {
+            AquaTechUI.LOGGER.warn("[ley] воды в радиусе {} блоков от {} {} нет, Лея не видно", WATER_SEARCH_RADIUS, (int) st.x, (int) st.z);
             return;
         }
         OldLeyEntity ley = ModEntities.OLD_LEY.get().create(level);
@@ -235,6 +236,7 @@ public final class LeyService {
         level.addFreshEntity(ley);
         entityId = ley.getUUID();
         entityLevel = level.dimension();
+        AquaTechUI.LOGGER.info("[ley] Лей появился в {} на {} {} {}", st.dimension, water.getX(), water.getY(), water.getZ());
     }
 
     /** Ближайшая к точке поверхность воды по расширяющемуся кольцу; null, если воды в радиусе нет. */

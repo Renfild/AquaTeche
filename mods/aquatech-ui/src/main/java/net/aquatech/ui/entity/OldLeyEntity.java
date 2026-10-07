@@ -1,5 +1,7 @@
 package net.aquatech.ui.entity;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
@@ -84,18 +86,32 @@ public class OldLeyEntity extends PathfinderMob implements GeoEntity {
         moveAlongCircle();
     }
 
+    /** Идёт по окружности, но только там, где вода: у берега и в маленьком пруду радиус сужается, иначе рыба плыла бы по суше. */
     private void moveAlongCircle() {
         double angle = phase * (2.0D * Math.PI / CIRCLE_TICKS);
-        double x = centerX + CIRCLE_RADIUS * Math.cos(angle);
-        double z = centerZ + CIRCLE_RADIUS * Math.sin(angle);
         double vx = -Math.sin(angle);
         double vz = Math.cos(angle);
+        double x = centerX;
+        double z = centerZ;
+        for (double radius = CIRCLE_RADIUS; radius > 0.0D; radius -= 1.0D) {
+            double tx = centerX + radius * Math.cos(angle);
+            double tz = centerZ + radius * Math.sin(angle);
+            if (isWater(tx, tz)) {
+                x = tx;
+                z = tz;
+                break;
+            }
+        }
         float yaw = (float) (Mth.atan2(-vx, vz) * Mth.RAD_TO_DEG);
         setPos(x, centerY, z);
         setYRot(yaw);
         setYBodyRot(yaw);
         setYHeadRot(yaw);
         yRotO = yaw;
+    }
+
+    private boolean isWater(double x, double z) {
+        return level().getFluidState(BlockPos.containing(x, centerY, z)).is(FluidTags.WATER);
     }
 
     @Override

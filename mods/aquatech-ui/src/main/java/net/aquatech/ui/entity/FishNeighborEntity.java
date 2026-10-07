@@ -1,5 +1,7 @@
 package net.aquatech.ui.entity;
 
+import net.aquatech.ui.network.NetworkHandler;
+import net.aquatech.ui.network.packet.C2SNeighborTalkPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -122,18 +124,28 @@ public class FishNeighborEntity extends PathfinderMob implements GeoEntity {
             return InteractionResult.PASS;
         }
         if (level().isClientSide) {
+            // сервер может не получить сам клик (защита региона), поэтому сообщаем о разговоре отдельным пакетом
+            NetworkHandler.CHANNEL.sendToServer(new C2SNeighborTalkPacket(getId()));
             return InteractionResult.SUCCESS;
         }
-        long now = level().getGameTime();
-        if (player instanceof ServerPlayer target && now >= nextTalkAt) {
-            nextTalkAt = now + TALK_COOLDOWN_TICKS;
-            lookAt(target);
-            triggerAnim(BODY, TRIG_TALK);
-            lastStory = FishNeighborLines.pickStory(FishNeighborLines.STORIES.size(), lastStory, random::nextInt);
-            target.sendSystemMessage(Component.literal(CHAT_PREFIX + FishNeighborLines.STORIES.get(lastStory)));
-            ticksToNextFidget = Math.max(ticksToNextFidget, MIN_FIDGET_GAP_TICKS / 2);
+        if (player instanceof ServerPlayer target) {
+            talkTo(target);
         }
         return InteractionResult.CONSUME;
+    }
+
+    /** Рассказывает игроку историю: голова к нему, анимация разговора, реплика в чат. Не чаще раза в 2.5 с. */
+    public void talkTo(ServerPlayer target) {
+        long now = level().getGameTime();
+        if (now < nextTalkAt) {
+            return;
+        }
+        nextTalkAt = now + TALK_COOLDOWN_TICKS;
+        lookAt(target);
+        triggerAnim(BODY, TRIG_TALK);
+        lastStory = FishNeighborLines.pickStory(FishNeighborLines.STORIES.size(), lastStory, random::nextInt);
+        target.sendSystemMessage(Component.literal(CHAT_PREFIX + FishNeighborLines.STORIES.get(lastStory)));
+        ticksToNextFidget = Math.max(ticksToNextFidget, MIN_FIDGET_GAP_TICKS / 2);
     }
 
     /** Реакция на событие: анимация и реплика всем игрокам рядом. Слишком частые вызовы игнорируются. */
