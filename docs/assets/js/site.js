@@ -2,7 +2,7 @@
   const IP = "g-pl-2.apexnodes.xyz:21924";
   const DOWNLOAD = "/dl/AquaTech.exe";
   const DOWNLOAD_ZIP = "/dl/AquaTechLauncher.zip";
-  const CLIENT_VERSION = "client-2.9.97";
+  const CLIENT_VERSION = "client-2.9.98";
   let launcherVersion = CLIENT_VERSION.replace(/^client-/i, "");
   function launcherBase() {
     return `/dl/${launcherVersion}`;
