@@ -31,6 +31,16 @@ AVA_MATRIX = "5E5277DFF3957C35"
 AVA_NEUTRON = "34797EC98AE1BB6E"
 ALEX_NEODYMIUM = "4099054A63F0A45C"
 ALEX_URANIUM_ROD = "60ADD93185D58FC2"
+AVA_EXTREME = "4B2004A1971F11D9"
+AVA_GEAR = "3B7A081B742E6FED"
+AVA_INFINITY_CATALYST = "74E6680AE224D41C"
+IU_PHOTONIY = "45EDE4D6196298DC"
+
+IU = "industrialupgrade:"
+C2 = IU + "crafting_elements/crafting_273_element"  # улучшенная электросхема
+C3 = IU + "crafting_elements/crafting_274_element"  # композит
+PHOTON = IU + "photoniy_ingot"
+OSMIRIDIUM = IU + "alloyingot/osmiridium"
 
 
 def pb(key):
@@ -57,6 +67,13 @@ def expect(rid, **counts):
         assert got == n, f"{rid}: expected {n}x {name}, recipe has {got} ({dict(have)})"
 
 
+def table9(rid):
+    """The part is crafted on the 9x9 Extreme Crafting Table."""
+    r = recipe(rid)
+    assert r.get("type") == "avaritia:shaped_table" and r.get("tier") == 4, f"{rid}: not an extreme table recipe"
+    assert all(len(row) == 9 for row in r["pattern"]) and len(r["pattern"]) == 9, f"{rid}: pattern is not 9x9"
+
+
 def tier(rid, expected_tier, energy=None):
     r = recipe(rid)
     assert r.get("tier") == expected_tier, f"{rid}: tier {r.get('tier')} != {expected_tier}"
@@ -71,37 +88,51 @@ expect("machines/basic_crafting_injector", **{"botania:mana_diamond": 2, "botani
 expect("machines/basic_relay_crystal", **{"ae2:fluix_crystal": 4, "draconicevolution:wyvern_energy_core": 1})
 expect("components/wyvern_core", **{"botania:terrasteel_ingot": 4, "draconicevolution:draconium_core": 4, "TAG_forge:nether_stars": 1})
 expect("components/wyvern_energy_core", **{"industrialupgrade:wiring_storage/mfe_iu": 4, "TAG_forge:ingots/draconium": 4, "draconicevolution:draconium_core": 1})
-expect("machines/wyvern_crafting_injector", **{"botania:dragonstone": 4, "draconicevolution:draconium_core": 2, "draconicevolution:wyvern_core": 1, "TAG_forge:storage_blocks/draconium": 1})
+expect("machines/wyvern_crafting_injector", **{"botania:dragonstone": 4, "draconicevolution:draconium_core": 2, "draconicevolution:wyvern_core": 1, "TAG_forge:storage_blocks/draconium": 1, C2: 2})
 tier("machines/wyvern_crafting_injector", "DRACONIUM", 32000)
-expect("tools/wyvern_pickaxe", **{"botania:terrasteel_ingot": 2, "draconicevolution:draconium_core": 1, "draconicevolution:basic_relay_crystal": 2, "draconicevolution:wyvern_energy_core": 1})
+expect("tools/wyvern_pickaxe", **{"botania:terrasteel_ingot": 2, "draconicevolution:draconium_core": 1, "draconicevolution:basic_relay_crystal": 2, "draconicevolution:wyvern_energy_core": 1, C2: 1, "avaritia:diamond_lattice": 1})
 tier("tools/wyvern_pickaxe", "WYVERN", 8000000)
-expect("tools/wyvern_capacitor", **{"botania:terrasteel_ingot": 2, "TAG_forge:ingots/draconium": 2, "draconicevolution:wyvern_energy_core": 4})
+expect("tools/wyvern_capacitor", **{"botania:terrasteel_ingot": 2, "TAG_forge:ingots/draconium": 2, "draconicevolution:wyvern_energy_core": 4, C2: 2})
 expect("awakened_draconium_block", **{"draconicevolution:draconium_core": 4, "mythicbotany:alfsteel_ingot": 2, "draconicevolution:dragon_heart": 1})
 tier("awakened_draconium_block", "WYVERN", 50000000)
-expect("components/awakened_core", **{"draconicevolution:wyvern_core": 4, "TAG_forge:ingots/draconium_awakened": 2, "mythicbotany:alfsteel_ingot": 2})
+expect("components/awakened_core", **{"draconicevolution:wyvern_core": 4, "TAG_forge:ingots/draconium_awakened": 2, "mythicbotany:alfsteel_ingot": 2, C3: 2})
 tier("components/awakened_core", "WYVERN", 1000000)
-expect("machines/awakened_crafting_injector", **{"avaritia:diamond_lattice": 4, "draconicevolution:wyvern_core": 2})
+expect("machines/awakened_crafting_injector", **{"avaritia:diamond_lattice": 4, "draconicevolution:wyvern_core": 2, OSMIRIDIUM: 2})
 tier("machines/awakened_crafting_injector", "WYVERN", 256000)
-expect("components/draconic_energy_core", **{"TAG_forge:ingots/draconium_awakened": 4, "draconicevolution:wyvern_energy_core": 4, "megacells:mega_energy_cell": 1})
+expect("components/draconic_energy_core", **{"TAG_forge:ingots/draconium_awakened": 4, "draconicevolution:wyvern_energy_core": 4, "megacells:mega_energy_cell": 1, "avaritia:neutron_ingot": 4, PHOTON: 4})
+table9("components/draconic_energy_core")
+expect("machines/energy_core", **{"TAG_forge:ingots/draconium": 6, "draconicevolution:wyvern_energy_core": 2, "megacells:accumulation_processor": 1, "avaritia:crystal_matrix_ingot": 4, C3: 4})
+table9("machines/energy_core")
+expect("machines/draconic_relay_crystal", **{"draconicevolution:wyvern_energy_core": 4, "avaritia:diamond_lattice": 4, "draconicevolution:wyvern_core": 1, C3: 2})
+expect("tools/draconic_staff", **{"avaritia:neutron_ingot": 2})
 expect("machines/basic_wireless_crystal", **{"ae2:wireless_receiver": 2, "minecraft:ender_pearl": 4})
 expect("machines/wyvern_wireless_crystal", **{"ae2:wireless_booster": 2})
 expect("machines/draconic_wireless_crystal", **{"ae2:wireless_booster": 2, "botania:pixie_dust": 4})
-expect("tools/draconic_pickaxe", **{"TAG_forge:ingots/netherite": 2, "mythicbotany:alfsteel_ingot": 2, "draconicevolution:wyvern_core": 1, "TAG_forge:ingots/draconium_awakened": 2, "draconicevolution:draconic_energy_core": 1})
+expect("tools/draconic_pickaxe", **{"TAG_forge:ingots/netherite": 2, "mythicbotany:alfsteel_ingot": 2, "draconicevolution:wyvern_core": 1, "TAG_forge:ingots/draconium_awakened": 2, "draconicevolution:draconic_energy_core": 1, "avaritia:neutron_ingot": 1, C3: 1})
 tier("tools/draconic_pickaxe", "DRACONIC", 32000000)
-expect("machines/reactor_prt_stab_frame", **{"alexscaves:scarlet_neodymium_ingot": 6, "draconicevolution:wyvern_core": 1, "TAG_forge:ingots/draconium_awakened": 1})
-expect("machines/reactor_prt_in_rotor", **{"TAG_forge:ingots/draconium_awakened": 3, "alexscaves:scarlet_neodymium_ingot": 2, "draconicevolution:draconium_core": 1})
-expect("machines/reactor_prt_out_rotor", **{"avaritia:diamond_lattice": 3, "alexscaves:azure_neodymium_ingot": 2, "draconicevolution:draconium_core": 1})
-expect("machines/reactor_prt_focus_ring", **{"botania:elementium_ingot": 4, "avaritia:diamond_lattice": 3, "draconicevolution:wyvern_core": 2})
-expect("machines/reactor_core", **{"alexscaves:uranium_rod": 3, "TAG_forge:ingots/draconium_awakened": 4, "draconicevolution:large_chaos_frag": 2})
+expect("machines/reactor_prt_stab_frame", **{"alexscaves:scarlet_neodymium_ingot": 6, "draconicevolution:wyvern_core": 1, "TAG_forge:ingots/draconium_awakened": 1, "avaritia:neutron_ingot": 4, OSMIRIDIUM: 4})
+expect("machines/reactor_prt_in_rotor", **{"TAG_forge:ingots/draconium_awakened": 3, "alexscaves:scarlet_neodymium_ingot": 2, "draconicevolution:draconium_core": 1, "avaritia:neutron_ingot": 4, OSMIRIDIUM: 4})
+expect("machines/reactor_prt_out_rotor", **{"avaritia:diamond_lattice": 3, "alexscaves:azure_neodymium_ingot": 2, "draconicevolution:draconium_core": 1, "avaritia:neutron_ingot": 4, OSMIRIDIUM: 4})
+expect("machines/reactor_prt_focus_ring", **{"botania:elementium_ingot": 4, "avaritia:diamond_lattice": 3, "draconicevolution:wyvern_core": 2, "avaritia:neutron_ingot": 4, OSMIRIDIUM: 4})
+for _part in ("reactor_prt_stab_frame", "reactor_prt_in_rotor", "reactor_prt_out_rotor", "reactor_prt_focus_ring"):
+    table9("machines/" + _part)
+expect("machines/reactor_stabilizer", **{OSMIRIDIUM: 2})
+expect("machines/reactor_injector", **{PHOTON: 2})
+expect("machines/reactor_core", **{"alexscaves:uranium_rod": 3, "TAG_forge:ingots/draconium_awakened": 4, "draconicevolution:large_chaos_frag": 2, "avaritia:neutron_ingot": 2})
 tier("machines/reactor_core", "CHAOTIC", 64000000)
-expect("machines/chaotic_crafting_injector", **{"avaritia:neutron_ingot": 4, "avaritia:crystal_matrix_ingot": 4, "minecraft:dragon_egg": 1})
+expect("machines/chaotic_crafting_injector", **{"avaritia:neutron_ingot": 4, "avaritia:crystal_matrix_ingot": 4, "minecraft:dragon_egg": 1, PHOTON: 2})
 tier("machines/chaotic_crafting_injector", "DRACONIC", 8000000)
-expect("components/chaotic_core", **{"avaritia:crystal_matrix_ingot": 2, "avaritia:neutron_ingot": 2, "draconicevolution:awakened_core": 4, "draconicevolution:large_chaos_frag": 4})
+expect("components/chaotic_core", **{"avaritia:crystal_matrix_ingot": 2, "avaritia:neutron_gear": 2, "draconicevolution:awakened_core": 4, "draconicevolution:large_chaos_frag": 4})
 tier("components/chaotic_core", "DRACONIC", 100000000)
-expect("components/chaotic_energy_core", **{"draconicevolution:medium_chaos_frag": 4, "draconicevolution:draconic_energy_core": 4, "industrialupgrade:wiring_storage/qua_mfsu": 1})
-expect("tools/chaotic_pickaxe", **{"TAG_forge:ingots/draconium_awakened": 3, "avaritia:crystal_matrix_ingot": 2, "avaritia:neutron_ingot": 1, "draconicevolution:chaotic_core": 1, "draconicevolution:chaotic_energy_core": 1})
+expect("components/chaotic_energy_core", **{"draconicevolution:medium_chaos_frag": 4, "draconicevolution:draconic_energy_core": 4, "industrialupgrade:wiring_storage/qua_mfsu": 1, "avaritia:neutron_gear": 4, PHOTON: 4})
+table9("components/chaotic_energy_core")
+expect("tools/chaotic_pickaxe", **{"TAG_forge:ingots/draconium_awakened": 3, "avaritia:crystal_matrix_ingot": 2, "avaritia:neutron_ingot": 1, "draconicevolution:chaotic_core": 1, "draconicevolution:chaotic_energy_core": 1, "avaritia:neutron_gear": 1, PHOTON: 2})
 tier("tools/chaotic_pickaxe", "CHAOTIC", 128000000)
 tier("tools/chaotic_staff", "CHAOTIC", 1024000000)
+expect("tools/chaotic_staff", **{"avaritia:eternal_singularity": 1, "avaritia:infinity_catalyst": 1})
+expect("tools/chaotic_staff_alt", **{"avaritia:eternal_singularity": 1, "avaritia:infinity_catalyst": 1})
+expect("modules/item_chaotic_damage", **{"avaritia:neutron_nugget": 4, C3: 4})
+table9("modules/item_chaotic_damage")
 expect("modules/module_core", **{"botania:manasteel_ingot": 4, "ae2:logic_processor": 2, "TAG_forge:ingots/gold": 2, "TAG_forge:ingots/draconium": 1})
 expect("tools/magnet", **{"ae2:fluix_pearl": 1, "botania:manasteel_ingot": 2})
 
@@ -120,6 +151,7 @@ def s(x, y):
 add("d01", "Draconic Evolution", DE + "draconic_chestpiece", *s(0, 0), [
     "Draconic Evolution строится на слиянии (Fusion Crafting): в центре стоит ядро слияния, вокруг него инжекторы. В инжекторы кладут ингредиенты, ядру подводят энергию, и через время получается результат.",
     "На AquaTech рецепты мода пересобраны под моды сервера. Вместо алмазов и золота нужны манасталь, террасталь и альфсталь из Botania и Mythic Botany, процессоры AE2 и MEGA, накопители IndustrialUpgrade, а в финале нейтроний и кристаллическая матрица Avaritia.",
+    "Это эндгейм: верхние тиры просят тяжёлые детали. Улучшенные электросхемы и композит, осмиридий и фотонные слитки IndustrialUpgrade, решётки алмаза, нейтроний и шестерни нейтрония Avaritia, а для посоха хаоса ещё вечная сингулярность и катализатор бесконечности. Самые дорогие части (энергоядра, детали реактора, модули хаоса) собираются на Экстремальном верстаке Avaritia 9×9.",
     "Тиры идут по порядку: драконит, виверна (Wyvern), дракон (Draconic, пробуждённый), хаос (Chaotic). Инжектор следующего тира собирают на инжекторах предыдущего.",
     "Энергия и время слияния остались как в моде, сложность идёт от материалов. Все рецепты смотри в JEI, а здесь они расписаны по шагам.",
     "Дислокаторы (телепорты) на сервере отключены. Магнит собирается без них.",
@@ -173,13 +205,13 @@ add("d10", "Ядро виверны", DE + "wyvern_core", *s(0, 1), [
 
 add("d11", "Инжектор виверны", DE + "wyvern_crafting_injector", *s(1, 1), [
     "Слияние тира DRACONIUM (32 000 энергии). Катализатор: базовый инжектор.",
-    "Ингредиенты: ядро виверны, 2 ядра драконита, 4 драконьих камня Botania (Elven Dragonstone) и блок драконита.",
+    "Ингредиенты: ядро виверны, 2 ядра драконита, 4 драконьих камня Botania (Elven Dragonstone), блок драконита и 2 улучшенные электросхемы IndustrialUpgrade.",
     "Драконьи камни получают у эльфов в Альфхейме (глава Botania).",
 ], ("item", DE + "wyvern_crafting_injector", 1), deps=["d10", "d06"], rewards=[xp(250), coins(3000)])
 
 add("d08", "Кристаллы-реле", DE + "basic_relay_crystal", *s(2, 1), [
     "Кристаллы-реле передают энергию от энергоядра к машинам и ядру слияния. Базовый: 4 кристалла флюкса AE2 вокруг энергоядра виверны. Из одного рецепта выходит 4 кристалла.",
-    "Старшие кристаллы: виверна (4 энергоядра виверны по углам, 4 базовых кристалла по сторонам и инженерный процессор AE2 в центре) и дракон (слияние тира DRACONIC на 128 000 энергии: 4 энергоядра виверны, ядро виверны и 4 решётки алмаза Avaritia).",
+    "Старшие кристаллы: виверна (4 энергоядра виверны по углам, 4 базовых кристалла по сторонам и инженерный процессор AE2 в центре) и дракон (слияние тира DRACONIC на 128 000 энергии: 4 энергоядра виверны, ядро виверны, 4 решётки алмаза Avaritia и 2 композита IndustrialUpgrade).",
     "Из реле делают входные и выходные кристаллы (IO), два одинаковых IO сливаются обратно в реле.",
 ], ("item", DE + "basic_relay_crystal", 1), deps=["d07", AE2_FLUIX], rewards=[xp(250), coins(3000)])
 
@@ -190,19 +222,19 @@ add("d09", "Энергоядро виверны", DE + "wyvern_energy_core", *s(
 ], ("item", DE + "wyvern_energy_core", 1), deps=["d08", "d10", IU_MFE], rewards=[xp(250), coins(4000)])
 
 add("d12", "Энергоядро (мультиблок)", DE + "energy_core", *s(4, 1), [
-    "Большое хранилище энергии из блоков. Рецепт ядра: 6 слитков драконита, 2 энергоядра виверны и процессор накопления MEGA в центре.",
+    "Большое хранилище энергии из блоков. Ядро собирается на Экстремальном верстаке Avaritia 9×9. В центре поле 3×3: 6 слитков драконита, 2 энергоядра виверны и процессор накопления MEGA. Вокруг него по диагоналям 4 слитка кристаллической матрицы, по осям 4 композита IndustrialUpgrade.",
     "Вокруг ядра ставят стабилизаторы (4 драконьих камня и генератор частиц), к ним подключаются энергопилоны и кристаллы-реле. Энергопилон: 4 слитка драконита, пыль пикси, 2 заряженных кристалла истинного кварца AE2, ядро драконита и алмаз маны (выходит 2 штуки).",
     "Ядро строится ступенями: чем выше тир блоков, тем больше ёмкость.",
-], ("item", DE + "energy_core", 1), deps=["d09"], rewards=[xp(300), coins(4000)])
+], ("item", DE + "energy_core", 1), deps=["d09", AVA_EXTREME], rewards=[xp(300), coins(4000)])
 
 add("d13", "Инструменты виверны", DE + "wyvern_pickaxe", *s(5, 1), [
     "Слияние тира WYVERN (8 000 000 энергии). Катализатор: алмазный инструмент того же вида.",
-    "Ингредиенты: ядро драконита, 2 слитка террастали, 2 базовых кристалла-реле и энергоядро виверны. Катализатор: алмазный инструмент того же вида (для лука обычный лук, для нагрудника алмазный нагрудник). Так собираются кирка, топор, лопата, мотыга, меч, лук и нагрудник виверны.",
+    "Ингредиенты: ядро драконита, 2 слитка террастали, 2 базовых кристалла-реле, энергоядро виверны, улучшенная электросхема IndustrialUpgrade и решётка алмаза Avaritia. Катализатор: алмазный инструмент того же вида (для лука обычный лук, для нагрудника алмазный нагрудник). Так собираются кирка, топор, лопата, мотыга, меч, лук и нагрудник виверны.",
     "Инструменты работают на энергии: заряжай их в энергоядре или зарядном блоке. Модули (отдельная ветка) дают им новые умения.",
 ], ("item", DE + "wyvern_pickaxe", 1), deps=["d11", "d09"], rewards=[xp(400), coins(5000)])
 
 add("d14", "Конденсатор виверны", DE + "wyvern_capacitor", *s(6, 1), [
-    "Слияние тира WYVERN (8 000 000 энергии). Катализатор: ядро виверны. Ингредиенты: 4 энергоядра виверны, 2 слитка террастали и 2 слитка драконита.",
+    "Слияние тира WYVERN (8 000 000 энергии). Катализатор: ядро виверны. Ингредиенты: 4 энергоядра виверны, 2 слитка террастали, 2 слитка драконита и 2 улучшенные электросхемы IndustrialUpgrade.",
     "Конденсатор (Capacitor) носят с собой, он подзаряжает вещи из инвентаря. Нагрудник виверны собирается слиянием на алмазном нагруднике так же, как инструменты.",
 ], ("item", DE + "wyvern_capacitor", 1), deps=["d13"], rewards=[xp(400), coins(6000)])
 
@@ -222,20 +254,20 @@ add("d16", "Пробуждённый драконит", DE + "awakened_draconium
 ], ("item", DE + "awakened_draconium_block", 1), deps=["d10", BOT_ALFSTEEL], rewards=[xp(500), coins(8000)])
 
 add("d17", "Ядро пробуждения", DE + "awakened_core", *s(1, 2), [
-    "Слияние тира WYVERN (1 000 000 энергии). Катализатор: звезда Незера. Ингредиенты: 4 ядра виверны, 2 слитка пробуждённого драконита и 2 слитка альфсталь.",
+    "Слияние тира WYVERN (1 000 000 энергии). Катализатор: звезда Незера. Ингредиенты: 4 ядра виверны, 2 слитка пробуждённого драконита, 2 слитка альфсталь и 2 композита IndustrialUpgrade.",
     "Ядро пробуждения нужно для инжектора пробуждения, энергоядра дракона и всех инструментов дракона.",
 ], ("item", DE + "awakened_core", 1), deps=["d16", "d11"], rewards=[xp(500), coins(8000)])
 
 add("d18", "Инжектор пробуждения", DE + "awakened_crafting_injector", *s(2, 2), [
-    "Слияние тира WYVERN (256 000 энергии). Катализатор: инжектор виверны. Ингредиенты: 4 решётки алмаза Avaritia, 2 ядра виверны и блок пробуждённого драконита.",
+    "Слияние тира WYVERN (256 000 энергии). Катализатор: инжектор виверны. Ингредиенты: 4 решётки алмаза Avaritia, 2 ядра виверны, блок пробуждённого драконита и 2 осмиридиевых слитка IndustrialUpgrade.",
     "Решётка алмаза открывает цепочку Avaritia: следуй главе про Avaritia, пока не получишь решётку.",
 ], ("item", DE + "awakened_crafting_injector", 1), deps=["d17", AVA_LATTICE], rewards=[xp(500), coins(8000)])
 
 add("d19", "Энергоядро дракона", DE + "draconic_energy_core", *s(3, 2), [
-    "Рецепт 3×3: 4 слитка пробуждённого драконита по углам, 4 энергоядра виверны по сторонам и энергоячейка MEGA в центре.",
+    "Экстремальный верстак Avaritia 9×9. В центре поле 3×3: 4 слитка пробуждённого драконита по углам, 4 энергоядра виверны по сторонам и энергоячейка MEGA в центре. Вокруг по диагоналям 4 нейтрониевых слитка, по осям 4 фотонных слитка IndustrialUpgrade.",
     "Энергоячейка MEGA собирается на основе плотной энергоячейки AE2 (см. главу AE2).",
     "Нужно для инструментов, брони и конденсатора дракона, а также для энергоядра хаоса.",
-], ("item", DE + "draconic_energy_core", 1), deps=["d17", "d09", AE2_DENSE_CELL], rewards=[xp(500), coins(9000)])
+], ("item", DE + "draconic_energy_core", 1), deps=["d17", "d09", AE2_DENSE_CELL, AVA_EXTREME, IU_PHOTONIY], rewards=[xp(500), coins(9000)])
 
 add("d20", "Беспроводные кристаллы", DE + "wyvern_wireless_crystal", *s(4, 2), [
     "Передают энергию без кабелей. Рецепт 3×3: 4 жемчужины Края по углам, генератор частиц сверху и снизу, беспроводной приёмник или усилитель AE2 слева и справа и кристалл-реле в центре.",
@@ -244,15 +276,17 @@ add("d20", "Беспроводные кристаллы", DE + "wyvern_wireless_
 
 add("d21", "Инструменты дракона", DE + "draconic_pickaxe", *s(5, 2), [
     "Слияние тира DRACONIC (32 000 000 энергии). Катализатор: инструмент виверны того же вида.",
-    "Ингредиенты: ядро виверны, 2 слитка незерита, 2 слитка альфсталь, 2 слитка пробуждённого драконита и энергоядро дракона.",
-    "Так собираются кирка, топор, лопата, мотыга, меч, лук и нагрудник дракона. Конденсатор и посох собираются отдельно.",
+    "Ингредиенты: ядро виверны, 2 слитка незерита, 2 слитка альфсталь, 2 слитка пробуждённого драконита, энергоядро дракона, нейтрониевый слиток и композит IndustrialUpgrade.",
+    "Так собираются кирка, топор, лопата, мотыга, меч, лук и нагрудник дракона. Конденсатор и посох собираются отдельно, посох дракона дополнительно просит 2 нейтрониевых слитка.",
 ], ("item", DE + "draconic_pickaxe", 1), deps=["d18", "d19"], rewards=[xp(800), coins(15000)])
 
 add("d22", "Детали реактора", DE + "reactor_prt_stab_frame", *s(6, 2), [
     "Реактор вырабатывает много энергии, но способен взорваться. Строй его вдали от базы, держи под рукой аварийное отключение и проверь стабилизацию по компаратору.",
-    "Каркас стабилизатора: 6 слитков алого неодима AlexsCaves, ядро виверны и слиток пробуждённого драконита. Входной ротор: 3 слитка пробуждённого драконита, 2 слитка алого неодима и ядро драконита.",
+    "Четыре детали собираются на Экстремальном верстаке Avaritia 9×9. В центре поле 3×3, вокруг по диагоналям 4 нейтрониевых слитка, по осям 4 осмиридиевых слитка IndustrialUpgrade.",
+    "Каркас стабилизатора, центр 3×3: 6 слитков алого неодима AlexsCaves, ядро виверны и слиток пробуждённого драконита. Входной ротор: 3 слитка пробуждённого драконита, 2 слитка алого неодима и ядро драконита.",
     "Выходной ротор: 3 решётки алмаза Avaritia, 2 слитка лазурного неодима и ядро драконита. Фокусирующее кольцо: 4 слитка элементиума, 3 решётки алмаза и 2 ядра виверны.",
-], ("item", DE + "reactor_prt_stab_frame", 1), deps=["d21", ALEX_NEODYMIUM], rewards=[xp(800), coins(15000)])
+    "Стабилизатор реактора дополнительно просит 2 осмиридиевых слитка, инжектор реактора 2 фотонных слитка.",
+], ("item", DE + "reactor_prt_stab_frame", 1), deps=["d21", ALEX_NEODYMIUM, AVA_EXTREME], rewards=[xp(800), coins(15000)])
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Хаос
@@ -264,7 +298,7 @@ add("d24", "Путь к хаосу", DE + "chaos_shard", *s(0, 3), [
 ], ("checkmark", "Составить план по хаосу"), deps=["d18", AVA_NEUTRON, AVA_MATRIX], rewards=[xp(800), coins(15000)])
 
 add("d25", "Инжектор хаоса", DE + "chaotic_crafting_injector", *s(1, 3), [
-    "Слияние тира DRACONIC (8 000 000 энергии). Катализатор: инжектор пробуждения. Ингредиенты: 4 нейтрониевых слитка, 4 слитка кристаллической матрицы и яйцо дракона.",
+    "Слияние тира DRACONIC (8 000 000 энергии). Катализатор: инжектор пробуждения. Ингредиенты: 4 нейтрониевых слитка, 4 слитка кристаллической матрицы, яйцо дракона и 2 фотонных слитка IndustrialUpgrade.",
     "Осколки хаоса в этом рецепте не нужны, это сознательное отличие от оригинального мода.",
 ], ("item", DE + "chaotic_crafting_injector", 1), deps=["d24"], rewards=[xp(1000), coins(20000)])
 
@@ -279,33 +313,34 @@ add("d27", "Осколки хаоса", DE + "small_chaos_frag", *s(3, 3), [
 ], ("item", DE + "small_chaos_frag", 1), deps=["d26", pb("i5")], rewards=[xp(1000), coins(20000)])
 
 add("d28", "Ядро хаоса", DE + "chaotic_core", *s(4, 3), [
-    "Слияние тира DRACONIC (100 000 000 энергии). Катализатор: большой осколок хаоса. Ингредиенты: 2 слитка кристаллической матрицы, 2 нейтрониевых слитка, 4 ядра пробуждения и ещё 4 больших осколка.",
+    "Слияние тира DRACONIC (100 000 000 энергии). Катализатор: большой осколок хаоса. Ингредиенты: 2 слитка кристаллической матрицы, 2 шестерни нейтрония, 4 ядра пробуждения и ещё 4 больших осколка.",
     "Всего на ядро уходит 5 больших осколков: 4 в ингредиентах и 1 катализатором, итого около 405 малых.",
 ], ("item", DE + "chaotic_core", 1), deps=["d27", "d17"], rewards=[xp(1500), coins(30000)])
 
 add("d29", "Энергоядро хаоса", DE + "chaotic_energy_core", *s(5, 3), [
-    "Рецепт 3×3: 4 средних осколка хаоса по углам, 4 энергоядра дракона по сторонам и накопитель Quantum MFSU IndustrialUpgrade в центре.",
+    "Экстремальный верстак Avaritia 9×9. В центре поле 3×3: 4 средних осколка хаоса по углам, 4 энергоядра дракона по сторонам и накопитель Quantum MFSU IndustrialUpgrade в центре. Вокруг по диагоналям 4 шестерни нейтрония, по осям 4 фотонных слитка.",
     "Хранит больше всего энергии и питает инструменты и броню хаоса.",
-], ("item", DE + "chaotic_energy_core", 1), deps=["d28", "d19"], rewards=[xp(1500), coins(30000)])
+], ("item", DE + "chaotic_energy_core", 1), deps=["d28", "d19", AVA_GEAR], rewards=[xp(1500), coins(30000)])
 
 add("d30", "Оружие хаоса", DE + "chaotic_pickaxe", *s(6, 3), [
     "Слияние тира CHAOTIC (128 000 000 энергии). Катализатор: инструмент дракона того же вида.",
-    "Ингредиенты: ядро хаоса, энергоядро хаоса, 3 слитка пробуждённого драконита, 2 слитка кристаллической матрицы и нейтрониевый слиток.",
+    "Ингредиенты: ядро хаоса, энергоядро хаоса, 3 слитка пробуждённого драконита, 2 слитка кристаллической матрицы, нейтрониевый слиток, шестерня нейтрония и 2 фотонных слитка IndustrialUpgrade.",
     "Так собираются кирка, топор, лопата, мотыга, меч, лук, нагрудник и конденсатор хаоса.",
 ], ("item", DE + "chaotic_pickaxe", 1), deps=["d29", "d21"], rewards=[xp(2000), coins(40000)])
 
 add("d31", "Посох хаоса", DE + "chaotic_staff", *s(7, 3), [
     "Универсальный инструмент: слияние тира CHAOTIC на 1 024 000 000 энергии.",
-    "Есть два рецепта: из кирки, меча и лопаты хаоса, либо на основе посоха дракона. Оба требуют большого числа осколков хаоса, энергоядро хаоса и ядро хаоса.",
-], ("item", DE + "chaotic_staff", 1), deps=["d30"], rewards=[xp(3000), coins(60000)])
+    "Есть два рецепта: из кирки, меча и лопаты хаоса, либо на основе посоха дракона. Оба требуют осколки хаоса, энергоядро хаоса и ядро хаоса.",
+    "В обоих рецептах есть вечная сингулярность и катализатор бесконечности Avaritia. Это самые тяжёлые детали на сервере: рецепты вечной сингулярности и катализатора смотри в JEI и в главе Avaritia.",
+], ("item", DE + "chaotic_staff", 1), deps=["d30", AVA_INFINITY_CATALYST], rewards=[xp(3000), coins(60000)])
 
 add("d32", "Модули хаоса", DE + "item_chaotic_damage", *s(8, 3), [
-    "Модули хаоса собираются из модулей дракона, ядра пробуждения и средних осколков хаоса. Вместо незерита в них идёт кристаллическая матрица Avaritia.",
+    "Модули хаоса собираются на Экстремальном верстаке Avaritia 9×9 из модулей дракона, ядра пробуждения и средних осколков хаоса. Вместо незерита в них идёт кристаллическая матрица Avaritia. Вокруг основного рецепта по диагоналям 4 нейтрониевых самородка, по осям 4 композита IndustrialUpgrade.",
     "Начни с урона, энергии и скорости: они самые простые. Модуль полёта требует большие осколки хаоса и зелья, модуль бессмертия чарованное золотое яблоко и модуль ёмкости щита.",
-], ("item", DE + "item_chaotic_damage", 1), deps=["d28", "d15"], rewards=[xp(2000), coins(40000)])
+], ("item", DE + "item_chaotic_damage", 1), deps=["d28", "d15", AVA_EXTREME], rewards=[xp(2000), coins(40000)])
 
 add("d23", "Реактор", DE + "reactor_core", *s(7, 2), [
-    "Слияние тира CHAOTIC (64 000 000 энергии). Катализатор: осколок хаоса. Ингредиенты: 4 слитка пробуждённого драконита, 3 урановых стержня AlexsCaves и 2 больших осколка хаоса.",
+    "Слияние тира CHAOTIC (64 000 000 энергии). Катализатор: осколок хаоса. Ингредиенты: 4 слитка пробуждённого драконита, 3 урановых стержня AlexsCaves, 2 больших осколка хаоса и 2 нейтрониевых слитка.",
     "Реактор жжёт драконит и хаос и даёт очень много энергии. Следи за температурой и насыщением: при перегреве реактор взрывается. Включи полуавтоматическое отключение (SAS), если нужно, чтобы он остановился сам.",
     "Построй реактор вдали от основной базы и от соседей: взрыв разрушает всё вокруг.",
 ], ("item", DE + "reactor_core", 1), deps=["d22", ALEX_URANIUM_ROD, "d27"], rewards=[xp(2000), coins(40000)])

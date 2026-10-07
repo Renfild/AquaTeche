@@ -70,6 +70,15 @@ IU_MFE = "industrialupgrade:wiring_storage/mfe_iu"
 IU_QUA = "industrialupgrade:wiring_storage/qua_mfsu"
 IU_NANO = "industrialupgrade:circuit/nanocircuit"
 IU_QUANTUM = "industrialupgrade:circuit/quantumcircuit"
+# IndustrialUpgrade endgame parts the pack itself already asks for (admin panel recipe, improved electric era chapter)
+IU_CIRCUIT2 = "industrialupgrade:crafting_elements/crafting_273_element"
+IU_CIRCUIT3 = "industrialupgrade:crafting_elements/crafting_274_element"
+IU_PHOTONIY = "industrialupgrade:photoniy_ingot"
+IU_OSMIRIDIUM = "industrialupgrade:alloyingot/osmiridium"
+NEUTRON_NUGGET = "avaritia:neutron_nugget"
+NEUTRON_GEAR = "avaritia:neutron_gear"
+ETERNAL = "avaritia:eternal_singularity"
+INF_CATALYST = "avaritia:infinity_catalyst"
 
 ABYSSAL = "aquamirae:abyssal_amethyst"
 
@@ -107,6 +116,9 @@ def label(i):
 #   ("all", old, new)                   replace every ingredient equal to `old` (keys, ingredients)
 #   ("some", old, new, n)               fusion: replace the first n ingredients equal to `old`
 #   ("cat", new)                        fusion: replace the catalyst
+#   ("add", [items])                    fusion: append ingredients (the core takes at most 12)
+#   ("extreme", corner, edge)           shaped: move to the Avaritia Extreme Crafting Table (9x9): the 3x3 sits in the middle,
+#                                       4 `corner` items on the diagonals and 4 `edge` items on the axes around it
 # ---------------------------------------------------------------------------------------------------------------------
 T0_GENERIC = [("all", T_IRON, MANASTEEL), ("all", T_DIAMOND, MANADIA), ("all", T_EMERALD, CHARGED)]
 GENERIC_OPS = set(T0_GENERIC)
@@ -119,7 +131,7 @@ SPEC = {
     "components/draconic_energy_core": [("key", "C", MEGA_CELL)],
     "components/chaotic_energy_core": [("key", "C", IU_QUA)],
     "components/awakened_core": [("some", T_AWAKENED, ALF, 2)],
-    "components/chaotic_core": [("some", T_AWAKENED, MATRIX, 2), ("some", T_AWAKENED, NEUTRON, 2)],
+    "components/chaotic_core": [("some", T_AWAKENED, MATRIX, 2), ("some", T_AWAKENED, NEUTRON_GEAR, 2)],
     "awakened_draconium_block": [("some", I_DRACONIUM_CORE, ALF, 2)],
     # --- machines --------------------------------------------------------------------------------------------------
     "machines/crafting_core": [("key", "A", ENG), ("key", "B", MANADIA)],
@@ -176,12 +188,46 @@ for tool in ("axe", "bow", "chestpiece", "hoe", "pickaxe", "shovel", "sword"):
     SPEC["tools/draconic_" + tool] = [("some", T_NETHERITE, ALF, 2)]
     SPEC["tools/chaotic_" + tool] = [("some", T_AWAKENED, MATRIX, 2), ("some", T_AWAKENED, NEUTRON, 1)]
 
+# --- endgame layer: heavier IndustrialUpgrade and Avaritia parts -----------------------------------------------------------
+# wyvern: circuits of the second IU tier, a diamond lattice; draconic: third-tier circuits and neutronium;
+# chaotic: neutronium gears, photoniy, the Extreme Crafting Table and, for the staff, the Infinity catalyst.
+
+
+def extend(rid, *ops):
+    SPEC[rid] = SPEC.get(rid, []) + list(ops)
+
+
+for tool in ("axe", "bow", "chestpiece", "hoe", "pickaxe", "shovel", "sword"):
+    extend("tools/wyvern_" + tool, ("add", [IU_CIRCUIT2, LATTICE]))
+    extend("tools/draconic_" + tool, ("add", [IU_CIRCUIT3, NEUTRON]))
+    extend("tools/chaotic_" + tool, ("add", [NEUTRON_GEAR, IU_PHOTONIY, IU_PHOTONIY]))
+extend("tools/wyvern_capacitor", ("add", [IU_CIRCUIT2, IU_CIRCUIT2]))
+extend("tools/draconic_capacitor", ("add", [IU_CIRCUIT3, NEUTRON]))
+extend("tools/chaotic_capacitor", ("add", [NEUTRON_GEAR, IU_PHOTONIY, IU_PHOTONIY]))
+extend("tools/draconic_staff", ("add", [NEUTRON, NEUTRON]))
+extend("tools/chaotic_staff", ("add", [ETERNAL, INF_CATALYST]))
+extend("tools/chaotic_staff_alt", ("add", [ETERNAL, INF_CATALYST]))
+extend("machines/wyvern_crafting_injector", ("add", [IU_CIRCUIT2, IU_CIRCUIT2]))
+extend("machines/awakened_crafting_injector", ("add", [IU_OSMIRIDIUM, IU_OSMIRIDIUM]))
+extend("machines/chaotic_crafting_injector", ("add", [IU_PHOTONIY, IU_PHOTONIY]))
+extend("machines/draconic_relay_crystal", ("add", [IU_CIRCUIT3, IU_CIRCUIT3]))
+extend("components/awakened_core", ("add", [IU_CIRCUIT3, IU_CIRCUIT3]))
+extend("machines/reactor_core", ("add", [NEUTRON, NEUTRON]))
+extend("machines/reactor_injector", ("add", [IU_PHOTONIY, IU_PHOTONIY]))
+extend("machines/reactor_stabilizer", ("add", [IU_OSMIRIDIUM, IU_OSMIRIDIUM]))
+# shaped parts of the top tiers move to the 9x9 Extreme Crafting Table
+extend("machines/energy_core", ("extreme", MATRIX, IU_CIRCUIT3))
+extend("components/draconic_energy_core", ("extreme", NEUTRON, IU_PHOTONIY))
+extend("components/chaotic_energy_core", ("extreme", NEUTRON_GEAR, IU_PHOTONIY))
+for part in ("reactor_prt_stab_frame", "reactor_prt_in_rotor", "reactor_prt_out_rotor", "reactor_prt_focus_ring"):
+    extend("machines/" + part, ("extreme", NEUTRON, IU_OSMIRIDIUM))
+
 # --- modules: tier token per module generation ------------------------------------------------------------------------
 SPEC["modules/module_core"] = [("all", T_IRON, MANASTEEL), ("all", "#forge:dusts/redstone", LOGIC)]
 MODULE_DRACONIUM = [("all", T_IRON, MANASTEEL)]
 MODULE_WYVERN = [("all", T_DRACONIUM, TERRA)]
 MODULE_DRACONIC = [("all", T_NETHERITE, ALF), ("all", T_EMERALD, DRAGONSTONE)]
-MODULE_CHAOTIC = [("all", T_NETHERITE, MATRIX)]
+MODULE_CHAOTIC = [("all", T_NETHERITE, MATRIX), ("extreme", NEUTRON_NUGGET, IU_CIRCUIT3)]
 GENERIC_OPS |= set(MODULE_DRACONIUM + MODULE_WYVERN + MODULE_DRACONIC + MODULE_CHAOTIC)
 
 
@@ -270,6 +316,31 @@ def apply_ops(recipe, ops, log):
             r["ingredients"] = out
         elif kind == "cat":
             r["catalyst"] = ing(op[1])
+        elif kind == "add":
+            r["ingredients"] = r["ingredients"] + [ing(x) for x in op[1]]
+            if len(r["ingredients"]) > 12:
+                raise SystemExit(f"fusion would need {len(r['ingredients'])} ingredients (max 12)")
+        elif kind == "extreme":
+            _, corner, edge = op
+            if "X" in r["key"] or "Y" in r["key"]:
+                raise SystemExit("keys X/Y are already used")
+            grid = [[" "] * 9 for _ in range(9)]
+            rows = r["pattern"]
+            if len(rows) > 3 or max(len(x) for x in rows) > 3:
+                raise SystemExit("only 3x3 recipes can be embedded")
+            for i, row in enumerate(rows):
+                for j, ch in enumerate(row):
+                    grid[3 + i][3 + j] = ch
+            for (i, j) in ((2, 2), (2, 6), (6, 2), (6, 6)):
+                grid[i][j] = "X"
+            for (i, j) in ((1, 4), (7, 4), (4, 1), (4, 7)):
+                grid[i][j] = "Y"
+            r["type"] = "avaritia:shaped_table"
+            r["tier"] = 4
+            r["category"] = "misc"
+            r["pattern"] = ["".join(row) for row in grid]
+            r["key"]["X"] = ing(corner)
+            r["key"]["Y"] = ing(edge)
     return r
 
 
@@ -336,7 +407,7 @@ def pb_recipes():
             new_ing.append({"item": I_AWAKENED_CORE})
         else:
             new_ing.append(x)
-    bee["ingredients"] = new_ing
+    bee["ingredients"] = new_ing + [ing(NEUTRON_GEAR), ing(IU_PHOTONIY)]
     comb["outputs"] = [
         {"item": {"item": "draconicevolution:small_chaos_frag"}, "min": 1, "max": 2},
         {"item": {"item": I_MEDIUM_FRAG}, "chance": 15},
