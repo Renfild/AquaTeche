@@ -1,5 +1,7 @@
 package net.aquatech.ui.block.entity;
 
+import net.aquatech.ui.block.KeepnetBlock;
+import net.aquatech.ui.block.KeepnetTier;
 import net.aquatech.ui.inventory.KeepnetMenu;
 import net.aquatech.ui.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -22,30 +24,36 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/** Садок: 27 ячеек, принимает только рыбу (тег minecraft:fishes, в него Starcatcher добавляет весь свой улов). */
+/** Садок: ячейки зависят от тира блока, принимает только рыбу (тег minecraft:fishes, в него Starcatcher добавляет весь свой улов). */
 public class KeepnetBlockEntity extends BlockEntity implements MenuProvider {
 
-    public static final int SLOTS = 27;
-
-    private final ItemStackHandler inventory = new ItemStackHandler(SLOTS) {
-        @Override
-        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return isFish(stack);
-        }
-
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-        }
-    };
-    private LazyOptional<ItemStackHandler> handlerCap = LazyOptional.of(() -> inventory);
+    private final KeepnetTier tier;
+    private final ItemStackHandler inventory;
+    private LazyOptional<ItemStackHandler> handlerCap;
 
     public KeepnetBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FISH_KEEPNET.get(), pos, state);
+        this.tier = ((KeepnetBlock) state.getBlock()).getTier();
+        this.inventory = new ItemStackHandler(tier.slots()) {
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                return isFish(stack);
+            }
+
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+            }
+        };
+        this.handlerCap = LazyOptional.of(() -> inventory);
     }
 
     public static boolean isFish(ItemStack stack) {
         return stack.is(ItemTags.FISHES);
+    }
+
+    public KeepnetTier getTier() {
+        return tier;
     }
 
     public ItemStackHandler getInventory() {
@@ -63,7 +71,7 @@ public class KeepnetBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.aquatech_ui.fish_keepnet");
+        return getBlockState().getBlock().getName();
     }
 
     @Nullable

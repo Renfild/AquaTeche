@@ -123,8 +123,8 @@ MACHINES = {
 
 # --- примитивы ---------------------------------------------------------------------------------------------------
 class Canvas:
-    def __init__(self):
-        self.im = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
+    def __init__(self, w=256, h=256):
+        self.im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
         self.d = ImageDraw.Draw(self.im)
 
     def r(self, x0, y0, x1, y1, c):
@@ -148,8 +148,8 @@ class Canvas:
         self.px(x, y, P["rivet"])
 
 
-def frame(c, rnd):
-    x0, y0, x1, y1 = FRAME
+def frame(c, rnd, dy=0):
+    x0, y0, x1, y1 = FRAME[0], FRAME[1], FRAME[2], FRAME[3] + dy
     c.r(x0, y0, x1, y1, P["out"])
     c.r(x0 + 1, y0 + 1, x1 - 1, y1 - 1, P["mid"])
     c.bevel(x0 + 1, y0 + 1, x1 - 1, y1 - 1, P["hi"], P["mid2"])
@@ -206,21 +206,22 @@ def plaque(c):
         c.r(x + 1, y0 + 3, x + 2, y1 - 3, P["mid"])
 
 
-def inventory(c):
-    x0, y0, x1, y1 = INV
+def inventory(c, dy=0):
+    x0, y0, x1, y1 = INV[0], INV[1] + dy, INV[2], INV[3] + dy
+    cy = 120 + dy
     for x in (x0 + 10, x1 - 16):  # клипсы к основной панели
-        c.r(x, 120, x + 5, 130, P["out"])
-        c.r(x + 1, 121, x + 4, 129, P["mid"])
-        c.r(x + 1, 121, x + 4, 122, P["hi"])
-        c.px(x + 2, 125, P["out"]); c.px(x + 3, 125, P["out"])
+        c.r(x, cy, x + 5, cy + 10, P["out"])
+        c.r(x + 1, cy + 1, x + 4, cy + 9, P["mid"])
+        c.r(x + 1, cy + 1, x + 4, cy + 2, P["hi"])
+        c.px(x + 2, cy + 5, P["out"]); c.px(x + 3, cy + 5, P["out"])
     c.r(x0, y0 + 4, x1, y1, P["inv_d"])
     c.r(x0 + 1, y0 + 5, x1 - 1, y1 - 1, P["inv_w"])
     c.r(x0 + 2, y0 + 6, x1 - 2, y1 - 2, P["inv"])
     for row in range(3):
         for col in range(9):
-            cell(c, PLAYER_X + 18 * col - 1, PLAYER_Y + 18 * row - 1)
+            cell(c, PLAYER_X + 18 * col - 1, PLAYER_Y + dy + 18 * row - 1)
     for col in range(9):
-        cell(c, PLAYER_X + 18 * col - 1, HOTBAR_Y - 1)
+        cell(c, PLAYER_X + 18 * col - 1, HOTBAR_Y + dy - 1)
 
 
 def cell(c, x, y):

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MSM",
+    "SKS",
+    "MSM"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:diamond"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "K": {
+      "item": "aquatech_ui:fish_keepnet_t3"
+    }
+  },
+  "result": {
+    "item": "aquatech_ui:fish_keepnet_t4"
+  }
+}

@@ -97,5 +97,10 @@
   "item.aquatech_ui.old_ley": "Старый Лей",
   "item.aquatech_ui.ley_rod": "Удочка Лея",
   "block.aquatech_ui.fish_keepnet": "Садок",
+  "block.aquatech_ui.fish_keepnet_t2": "Медный садок",
+  "block.aquatech_ui.fish_keepnet_t3": "Золотой садок",
+  "block.aquatech_ui.fish_keepnet_t4": "Алмазный садок",
+  "block.aquatech_ui.fish_keepnet_t5": "Изумрудный садок",
+  "block.aquatech_ui.fish_keepnet_t6": "Незеритовый садок",
   "block.aquatech_ui.fame_plaque": "Табличка славы"
 }

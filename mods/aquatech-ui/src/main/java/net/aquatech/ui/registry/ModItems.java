@@ -74,6 +74,21 @@ public class ModItems {
     public static final RegistryObject<Item> FISH_KEEPNET = ITEMS.register("fish_keepnet",
             () -> new BlockItem(ModBlocks.FISH_KEEPNET.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> FISH_KEEPNET_T2 = ITEMS.register("fish_keepnet_t2",
+            () -> new BlockItem(ModBlocks.FISH_KEEPNET_T2.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> FISH_KEEPNET_T3 = ITEMS.register("fish_keepnet_t3",
+            () -> new BlockItem(ModBlocks.FISH_KEEPNET_T3.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> FISH_KEEPNET_T4 = ITEMS.register("fish_keepnet_t4",
+            () -> new BlockItem(ModBlocks.FISH_KEEPNET_T4.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> FISH_KEEPNET_T5 = ITEMS.register("fish_keepnet_t5",
+            () -> new BlockItem(ModBlocks.FISH_KEEPNET_T5.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> FISH_KEEPNET_T6 = ITEMS.register("fish_keepnet_t6",
+            () -> new BlockItem(ModBlocks.FISH_KEEPNET_T6.get(), new Item.Properties()));
+
     /** Трофей «Старый Лей»: выдаётся только событием (см. LeyService), один на сервер в неделю. */
     public static final RegistryObject<Item> OLD_LEY = ITEMS.register("old_ley",
             () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)) {

@@ -50,6 +50,11 @@ public class ModCreativeTabs {
                         output.accept(ModItems.BAIT_ORE.get());
                         output.accept(ModItems.BAIT_ABYSS.get());
                         output.accept(ModItems.FISH_KEEPNET.get());
+                        output.accept(ModItems.FISH_KEEPNET_T2.get());
+                        output.accept(ModItems.FISH_KEEPNET_T3.get());
+                        output.accept(ModItems.FISH_KEEPNET_T4.get());
+                        output.accept(ModItems.FISH_KEEPNET_T5.get());
+                        output.accept(ModItems.FISH_KEEPNET_T6.get());
                         output.accept(ModItems.FAME_PLAQUE.get());
                         output.accept(ModItems.OLD_LEY.get());
                         output.accept(ModItems.LEY_ROD.get());

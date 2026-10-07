@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "aquatech_ui:fish_keepnet"
+    "aquatech_ui:fish_keepnet",
+    "aquatech_ui:fish_keepnet_t2",
+    "aquatech_ui:fish_keepnet_t3",
+    "aquatech_ui:fish_keepnet_t4",
+    "aquatech_ui:fish_keepnet_t5",
+    "aquatech_ui:fish_keepnet_t6"
   ]
 }

@@ -70,5 +70,10 @@
   "item.aquatech_ui.old_ley": "Old Ley",
   "item.aquatech_ui.ley_rod": "Ley's Rod",
   "block.aquatech_ui.fish_keepnet": "Fish Keepnet",
+  "block.aquatech_ui.fish_keepnet_t2": "Copper Keepnet",
+  "block.aquatech_ui.fish_keepnet_t3": "Gold Keepnet",
+  "block.aquatech_ui.fish_keepnet_t4": "Diamond Keepnet",
+  "block.aquatech_ui.fish_keepnet_t5": "Emerald Keepnet",
+  "block.aquatech_ui.fish_keepnet_t6": "Netherite Keepnet",
   "block.aquatech_ui.fame_plaque": "Hall of Fame Plaque"
 }

@@ -35,9 +35,16 @@ public class KeepnetBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.box(0.4, 0.0, 0.4, 15.6, 16.0, 15.6);
 
-    public KeepnetBlock() {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.5F).sound(SoundType.WOOD).noOcclusion());
+    private final KeepnetTier tier;
+
+    public KeepnetBlock(KeepnetTier tier, MapColor mapColor, SoundType sound, float strength) {
+        super(BlockBehaviour.Properties.of().mapColor(mapColor).strength(strength).sound(sound).noOcclusion());
+        this.tier = tier;
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
+    }
+
+    public KeepnetTier getTier() {
+        return tier;
     }
 
     @Override

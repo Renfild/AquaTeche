@@ -14,7 +14,9 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, AquaTechUI.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<KeepnetBlockEntity>> FISH_KEEPNET = BLOCK_ENTITIES.register("fish_keepnet",
-            () -> BlockEntityType.Builder.of(KeepnetBlockEntity::new, ModBlocks.FISH_KEEPNET.get()).build(null));
+            () -> BlockEntityType.Builder.of(KeepnetBlockEntity::new,
+                    ModBlocks.FISH_KEEPNET.get(), ModBlocks.FISH_KEEPNET_T2.get(), ModBlocks.FISH_KEEPNET_T3.get(),
+                    ModBlocks.FISH_KEEPNET_T4.get(), ModBlocks.FISH_KEEPNET_T5.get(), ModBlocks.FISH_KEEPNET_T6.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<FamePlaqueBlockEntity>> FAME_PLAQUE = BLOCK_ENTITIES.register("fame_plaque",
             () -> BlockEntityType.Builder.of(FamePlaqueBlockEntity::new, ModBlocks.FAME_PLAQUE.get()).build(null));

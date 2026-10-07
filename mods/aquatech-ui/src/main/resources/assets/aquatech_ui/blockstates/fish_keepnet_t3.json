@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aquatech_ui:block/fish_keepnet_t3"
+    },
+    "facing=east": {
+      "model": "aquatech_ui:block/fish_keepnet_t3",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "aquatech_ui:block/fish_keepnet_t3",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "aquatech_ui:block/fish_keepnet_t3",
+      "y": 270
+    }
+  }
+}

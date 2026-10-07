@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MSM",
+    "SKS",
+    "MSM"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:copper_ingot"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "K": {
+      "item": "aquatech_ui:fish_keepnet"
+    }
+  },
+  "result": {
+    "item": "aquatech_ui:fish_keepnet_t2"
+  }
+}
