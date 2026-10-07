@@ -1,6 +1,9 @@
 package net.aquatech.ui.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
@@ -24,6 +27,9 @@ import software.bernie.geckolib.util.GeckoLibUtil;
  */
 public class OldLeyEntity extends PathfinderMob implements GeoEntity {
 
+    /** Id игрока, который держит Лея на леске, или 0: по нему клиенты рисуют леску. */
+    private static final EntityDataAccessor<Integer> HOOKED_BY = SynchedEntityData.defineId(OldLeyEntity.class, EntityDataSerializers.INT);
+
     private static final String CTRL = "ley";
     private static final String TRIG_LEAP = "leap";
     private static final RawAnimation SWIM = RawAnimation.begin().thenLoop(OldLeyAnims.SWIM);
@@ -40,12 +46,49 @@ public class OldLeyEntity extends PathfinderMob implements GeoEntity {
     private double centerZ;
     private int phase;
     private int leapTicksLeft = -1;
+    /** Пока идёт схватка, место Лея задаёт сервис схватки, а не окружность. */
+    private boolean fightControlled;
 
     public OldLeyEntity(EntityType<? extends PathfinderMob> type, Level level) {
         super(type, level);
         setNoAi(true);
         setNoGravity(true);
         setInvulnerable(true);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        entityData.define(HOOKED_BY, 0);
+    }
+
+    public int hookedBy() {
+        return entityData.get(HOOKED_BY);
+    }
+
+    /** Лей на крючке: двигает его сервис схватки. */
+    public void hook(int playerId) {
+        fightControlled = true;
+        entityData.set(HOOKED_BY, playerId);
+    }
+
+    /** Ставит Лея в точку схватки и поворачивает мордой по ходу рывка. */
+    public void controlAt(double x, double y, double z, float yaw) {
+        setPos(x, y, z);
+        setYRot(yaw);
+        setYBodyRot(yaw);
+        setYHeadRot(yaw);
+        yRotO = yaw;
+    }
+
+    /** Леска порвалась или игрок бросил схватку: Лей продолжает кружить с того места, где он сейчас. */
+    public void release() {
+        fightControlled = false;
+        entityData.set(HOOKED_BY, 0);
+        double angle = phase * (2.0D * Math.PI / CIRCLE_TICKS);
+        centerX = getX() - CIRCLE_RADIUS * Math.cos(angle);
+        centerZ = getZ() - CIRCLE_RADIUS * Math.sin(angle);
+        centerY = getY();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -80,6 +123,9 @@ public class OldLeyEntity extends PathfinderMob implements GeoEntity {
             if (--leapTicksLeft == 0) {
                 discard();
             }
+            return;
+        }
+        if (fightControlled) {
             return;
         }
         phase = (phase + 1) % CIRCLE_TICKS;

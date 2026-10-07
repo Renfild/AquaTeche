@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DPD",
+    "DGD"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "G": {
+      "tag": "forge:ingots/gold"
+    }
+  },
+  "result": {
+    "item": "aquatech_ui:fame_plaque"
+  }
+}

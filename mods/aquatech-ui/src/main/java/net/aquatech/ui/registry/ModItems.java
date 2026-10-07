@@ -2,6 +2,7 @@ package net.aquatech.ui.registry;
 
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.item.AbyssalMagnetItem;
+import net.aquatech.ui.item.LeyRodItem;
 import net.aquatech.ui.item.RateModItem;
 import net.aquatech.ui.item.SonarGogglesItem;
 import net.minecraft.world.item.BlockItem;
@@ -81,6 +82,10 @@ public class ModItems {
                     return true;
                 }
             });
+
+    /** Удочка Лея: единственный способ взять Старого Лея, схватка в LeyFightService. */
+    public static final RegistryObject<Item> LEY_ROD = ITEMS.register("ley_rod",
+            () -> new LeyRodItem(new Item.Properties().stacksTo(1).durability(150).rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> FAME_PLAQUE = ITEMS.register("fame_plaque",
             () -> new BlockItem(ModBlocks.FAME_PLAQUE.get(), new Item.Properties()));

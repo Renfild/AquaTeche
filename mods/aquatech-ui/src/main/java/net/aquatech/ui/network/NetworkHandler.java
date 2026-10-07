@@ -115,6 +115,24 @@ public class NetworkHandler {
                 .decoder(net.aquatech.ui.network.packet.C2SNeighborTalkPacket::new)
                 .consumerMainThread(net.aquatech.ui.network.packet.C2SNeighborTalkPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(net.aquatech.ui.network.packet.S2CLeyFightPacket.class, id())
+                .encoder(net.aquatech.ui.network.packet.S2CLeyFightPacket::encode)
+                .decoder(net.aquatech.ui.network.packet.S2CLeyFightPacket::new)
+                .consumerMainThread(net.aquatech.ui.network.packet.S2CLeyFightPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(net.aquatech.ui.network.packet.C2SLeyCastPacket.class, id())
+                .encoder(net.aquatech.ui.network.packet.C2SLeyCastPacket::encode)
+                .decoder(net.aquatech.ui.network.packet.C2SLeyCastPacket::new)
+                .consumerMainThread(net.aquatech.ui.network.packet.C2SLeyCastPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(net.aquatech.ui.network.packet.C2SLeyFightInputPacket.class, id())
+                .encoder(net.aquatech.ui.network.packet.C2SLeyFightInputPacket::encode)
+                .decoder(net.aquatech.ui.network.packet.C2SLeyFightInputPacket::new)
+                .consumerMainThread(net.aquatech.ui.network.packet.C2SLeyFightInputPacket::handle)
+                .add();
     }
 
     public static void markJoined(ServerPlayer player) {

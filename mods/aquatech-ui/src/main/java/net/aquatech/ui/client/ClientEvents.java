@@ -64,6 +64,11 @@ public final class ClientEvents {
                         net.aquatech.ui.client.hud.RhythmHookOverlay.render(graphics, partialTick)
         );
         event.registerAboveAll(
+                "ley_fight",
+                (gui, graphics, partialTick, screenWidth, screenHeight) ->
+                        net.aquatech.ui.client.fishing.LeyFightClient.render(graphics, partialTick)
+        );
+        event.registerAboveAll(
                 "aqua_chat",
                 (gui, graphics, partialTick, screenWidth, screenHeight) ->
                         net.aquatech.ui.client.chat.AquaChatOverlay.render(graphics, partialTick)
@@ -91,6 +96,7 @@ public final class ClientEvents {
         } catch (Throwable ignored) {
         }
         net.aquatech.ui.client.hud.RhythmHookOverlay.tick();
+        net.aquatech.ui.client.fishing.LeyFightClient.tick();
         StarCatcherToastSuppressor.tick();
 
         Minecraft mc = Minecraft.getInstance();
@@ -140,6 +146,14 @@ public final class ClientEvents {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onMouseButton(InputEvent.MouseButton.Pre event) {
+        if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && event.getAction() == GLFW.GLFW_PRESS) {
+            net.aquatech.ui.client.fishing.LeyFightClient.onRightClick();
+        }
+        // Схватка с Леем читает ПКМ сама; в меню паузы и инвентаре клики остаются рабочими
+        if (net.aquatech.ui.client.fishing.LeyFightClient.isFighting() && Minecraft.getInstance().screen == null) {
+            event.setCanceled(true);
+            return;
+        }
         if (!RhythmHookOverlay.isActive()) return;
         // Cancel all mouse events so vanilla doesn't use/attack; overlay reads RMB via GLFW.
         event.setCanceled(true);
@@ -147,7 +161,7 @@ public final class ClientEvents {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onMouseScroll(InputEvent.MouseScrollingEvent event) {
-        if (RhythmHookOverlay.isActive()) {
+        if (RhythmHookOverlay.isActive() || net.aquatech.ui.client.fishing.LeyFightClient.isFighting()) {
             event.setCanceled(true);
             return;
         }
@@ -160,7 +174,7 @@ public final class ClientEvents {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onMovementInput(MovementInputUpdateEvent event) {
-        if (!RhythmHookOverlay.isActive()) return;
+        if (!RhythmHookOverlay.isActive() && !net.aquatech.ui.client.fishing.LeyFightClient.isFighting()) return;
         event.getInput().up = false;
         event.getInput().down = false;
         event.getInput().left = false;

@@ -9,9 +9,6 @@ public final class LeyLogic {
     /** Радиус зоны вокруг точки появления, в блоках. */
     public static final int RADIUS = 56;
     public static final long WINDOW_MS = 30L * 60_000L;
-    /** Лея можно вытянуть только чистым прохождением ритм-крючка. */
-    public static final int MIN_QUALITY = 85;
-    public static final double BITE_CHANCE = 0.20;
     public static final long REWARD_COINS = 50_000L;
 
     private static final long DAY_MS = 24L * 3600_000L;
@@ -92,9 +89,9 @@ public final class LeyLogic {
         return dx * dx + dz * dz <= (double) RADIUS * RADIUS;
     }
 
-    /** Клюнул ли Лей на этот улов: окно открыто, игрок в зоне, ритм пройден чисто и выпал шанс. */
-    public static boolean canBite(State s, long nowMs, String dimension, double x, double z, int quality, double roll01) {
-        return active(s, nowMs) && inZone(s, dimension, x, z) && quality >= MIN_QUALITY && roll01 < BITE_CHANCE;
+    /** Можно ли начать схватку: окно открыто, Лея ещё никто не поймал, игрок в зоне. */
+    public static boolean canFight(State s, long nowMs, String dimension, double x, double z) {
+        return active(s, nowMs) && inZone(s, dimension, x, z);
     }
 
     public static void markCaught(State s, String name, String uuid, int grams) {

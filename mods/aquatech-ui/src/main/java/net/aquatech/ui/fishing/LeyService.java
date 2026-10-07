@@ -45,7 +45,7 @@ import java.util.UUID;
 
 /**
  * Старый Лей на сервере: раз в неделю всплывает рядом со случайным игроком на полчаса, в зоне радиусом
- * {@link LeyLogic#RADIUS} его можно вытянуть чистым ритмом, и достаётся он ровно одному игроку.
+ * {@link LeyLogic#RADIUS} его можно взять на Удочку Лея, и достаётся он ровно одному игроку.
  * Состояние лежит в config/aquatech_ley.json. Работает в основном потоке сервера.
  */
 @Mod.EventBusSubscriber(modid = AquaTechUI.MOD_ID)
@@ -141,27 +141,26 @@ public final class LeyService {
         return "Ждёт: появится после " + java.time.Instant.ofEpochMilli(st.appearAtMs);
     }
 
-    /**
-     * Проверяет улов на Лея до того, как рыба попала в инвентарь; при успехе кладёт именной трофей прямо в {@code drops}.
-     *
-     * @param quality точность ритм-крючка, 0-100
-     */
-    public static void tryBite(ServerPlayer player, int quality, List<ItemStack> drops) {
+    /** Лей на воде и окно открыто: его можно брать на крючок. Иначе null. */
+    public static OldLeyEntity activeLey(MinecraftServer server) {
         LeyLogic.State st = state();
-        long now = System.currentTimeMillis();
-        String dimension = player.level().dimension().location().toString();
-        boolean inZone = LeyLogic.active(st, now) && LeyLogic.inZone(st, dimension, player.getX(), player.getZ());
-        if (!LeyLogic.canBite(st, now, dimension, player.getX(), player.getZ(), quality, player.getRandom().nextDouble())) {
-            if (inZone) {
-                player.displayClientMessage(Component.literal(quality < LeyLogic.MIN_QUALITY
-                        ? "§6[Старый Лей] §7Он рядом, но ритм не дотянул: нужно " + LeyLogic.MIN_QUALITY + "+, у вас " + quality + "."
-                        : "§6[Старый Лей] §7Что-то огромное сорвалось с крючка. Закидывайте ещё!"), true);
-            }
-            return;
+        if (!LeyLogic.active(st, System.currentTimeMillis()) || entityId == null || entityLevel == null) {
+            return null;
         }
+        ServerLevel level = server.getLevel(entityLevel);
+        Entity existing = level == null ? null : level.getEntity(entityId);
+        return existing instanceof OldLeyEntity ley && ley.isAlive() ? ley : null;
+    }
+
+    /** Игрок вымотал Лея: именной трофей в инвентарь, монеты, объявление, прыжок на прощание. */
+    public static void award(ServerPlayer player) {
+        LeyLogic.State st = state();
         int grams = LeyLogic.rollGrams(player.getRandom().nextDouble());
         int cm = LeyLogic.rollCm(player.getRandom().nextDouble());
-        drops.add(trophy(player, grams, cm));
+        ItemStack trophy = trophy(player, grams, cm);
+        if (!player.getInventory().add(trophy)) {
+            player.drop(trophy, false);
+        }
         LeyLogic.markCaught(st, player.getGameProfile().getName(), player.getUUID().toString(), grams);
         save();
         MinecraftServer server = player.server;
@@ -208,7 +207,7 @@ public final class LeyService {
         ensureEntity(server, st);
         broadcast(server, "§6[Старый Лей] §eИз глубины поднимается Старый Лей! Он кружит у §b" + anchor.getGameProfile().getName()
                 + " §7(около " + (int) st.x + " " + (int) st.z + ")§e. §fНа вылов 30 минут, зона " + LeyLogic.RADIUS
-                + " блоков: любой улов в зоне может оказаться Леем (шанс " + (int) (LeyLogic.BITE_CHANCE * 100) + "%). Достанется одному.");
+                + " блоков. Нужна Удочка Лея: ПКМ в сторону воды, потом держите леску. Достанется одному.");
     }
 
     private static void ensureEntity(MinecraftServer server, LeyLogic.State st) {

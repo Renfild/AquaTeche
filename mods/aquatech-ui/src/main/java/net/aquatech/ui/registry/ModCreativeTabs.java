@@ -52,6 +52,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.FISH_KEEPNET.get());
                         output.accept(ModItems.FAME_PLAQUE.get());
                         output.accept(ModItems.OLD_LEY.get());
+                        output.accept(ModItems.LEY_ROD.get());
                     })
                     .build());
 

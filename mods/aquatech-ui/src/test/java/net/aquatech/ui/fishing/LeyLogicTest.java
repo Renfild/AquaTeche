@@ -55,17 +55,15 @@ class LeyLogicTest {
     }
 
     @Test
-    void biteNeedsZoneCleanRhythmAndLuck() {
+    void fightNeedsOpenWindowAndZone() {
         LeyLogic.State s = week();
         long t = s.appearAtMs;
         LeyLogic.appear(s, t, DIM, 100, 100);
-        assertTrue(LeyLogic.canBite(s, t, DIM, 100, 100, 85, 0.19));
-        assertFalse(LeyLogic.canBite(s, t, DIM, 100, 100, 84, 0.0), "sloppy rhythm");
-        assertFalse(LeyLogic.canBite(s, t, DIM, 100, 100, 100, 0.20), "luck roll must be below the chance");
-        assertFalse(LeyLogic.canBite(s, t, DIM, 100 + LeyLogic.RADIUS + 1, 100, 100, 0.0), "outside the zone");
-        assertTrue(LeyLogic.canBite(s, t, DIM, 100 + LeyLogic.RADIUS, 100, 100, 0.0), "the border counts");
-        assertFalse(LeyLogic.canBite(s, t, "minecraft:the_nether", 100, 100, 100, 0.0), "wrong dimension");
-        assertFalse(LeyLogic.canBite(s, t + LeyLogic.WINDOW_MS, DIM, 100, 100, 100, 0.0), "window is over");
+        assertTrue(LeyLogic.canFight(s, t, DIM, 100, 100));
+        assertFalse(LeyLogic.canFight(s, t, DIM, 100 + LeyLogic.RADIUS + 1, 100), "outside the zone");
+        assertTrue(LeyLogic.canFight(s, t, DIM, 100 + LeyLogic.RADIUS, 100), "the border counts");
+        assertFalse(LeyLogic.canFight(s, t, "minecraft:the_nether", 100, 100), "wrong dimension");
+        assertFalse(LeyLogic.canFight(s, t + LeyLogic.WINDOW_MS, DIM, 100, 100), "window is over");
     }
 
     @Test
@@ -74,7 +72,7 @@ class LeyLogicTest {
         long t = s.appearAtMs;
         LeyLogic.appear(s, t, DIM, 0, 0);
         LeyLogic.markCaught(s, "Ann", "uuid-a", 250_000);
-        assertFalse(LeyLogic.canBite(s, t + 1, DIM, 0, 0, 100, 0.0));
+        assertFalse(LeyLogic.canFight(s, t + 1, DIM, 0, 0));
         assertFalse(LeyLogic.active(s, t + 1));
         assertFalse(LeyLogic.expired(s, t + LeyLogic.WINDOW_MS + 1), "a caught Ley is not 'expired'");
         assertEquals("Ann", s.caughtBy);

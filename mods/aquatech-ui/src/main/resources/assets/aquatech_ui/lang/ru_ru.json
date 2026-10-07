@@ -95,6 +95,7 @@
   "entity.aquatech_ui.fish_neighbor": "Рыбак-сосед",
   "entity.aquatech_ui.old_ley": "Старый Лей",
   "item.aquatech_ui.old_ley": "Старый Лей",
+  "item.aquatech_ui.ley_rod": "Удочка Лея",
   "block.aquatech_ui.fish_keepnet": "Садок",
   "block.aquatech_ui.fame_plaque": "Табличка славы"
 }

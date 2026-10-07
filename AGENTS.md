@@ -59,6 +59,7 @@
 - **Default for every user request (standing owner instruction, 2026-09-21): first scan available skills and subagent triggers for the task, then use them automatically — do not wait to be asked.** Skills via the `skill` tool (e.g. `minecraft-loliland-ui`, `web-design`, `aquatech-addon-kubejs`, `remember`), subagents via the Task tool (`general` for delegated multi-step work, `explore` for broad codebase fan-out).
 - User-scope subagents in `~/.zcode/agents/`: `pack-dev`, `pixel-art`, `portal-dev`, `launcher-dev`, `release`, `game-qa`, `media`, `security-audit`. Each `description` states triggers («Triggers») and boundaries («Not for») — route by them.
 - Delegate when the task matches an agent and is multi-step or parallelizable (publishes → `release`, audits → `security-audit`, icon batches → `pixel-art`, broad codebase fan-out → Explore). Send INDEPENDENT agent tasks in one message so they run concurrently.
+- **Рутина на лёгкой модели:** агент `routine` (`.claude/agents/routine.md`, `model: haiku`) берёт сборку и смоук-тесты с отчётом, `graphify update`, `git status`, поиск по коду, проверку md5 и CDN, запись в журнал по готовому тексту. Проектирование, правки Java, коммиты, деплой и всё, что трогает живой сервер, остаются за основным агентом.
 - Do directly (main agent): single-file edits, quick lookups, anything requiring computer-use or Browser Use (main-agent-only), and all deploy go/no-go decisions.
 - Subagents start without conversation context: hand them a self-contained prompt (paths, constraints, expected output) and relay their findings.
 
