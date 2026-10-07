@@ -208,7 +208,7 @@ public final class LeyService {
         ensureEntity(server, st);
         broadcast(server, "§6[Старый Лей] §eИз глубины поднимается Старый Лей! Он кружит у §b" + anchor.getGameProfile().getName()
                 + " §7(около " + (int) st.x + " " + (int) st.z + ")§e. §fНа вылов 30 минут, зона " + LeyLogic.RADIUS
-                + " блоков, нужен чистый ритм крючка (" + LeyLogic.MIN_QUALITY + "+). Достанется одному.");
+                + " блоков: любой улов в зоне может оказаться Леем (шанс " + (int) (LeyLogic.BITE_CHANCE * 100) + "%). Достанется одному.");
     }
 
     private static void ensureEntity(MinecraftServer server, LeyLogic.State st) {

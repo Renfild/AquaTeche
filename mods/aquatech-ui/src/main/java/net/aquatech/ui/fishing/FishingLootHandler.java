@@ -86,8 +86,9 @@ public class FishingLootHandler {
         if (rodType == null) return;
 
         // SC already ran minigame. Clear SC drops (do NOT cancel — cancel leaves ghost bob/cast).
+        // Мини-игру Starcatcher игрок уже прошёл, иначе улова бы не было. Для Лея это чистый улов: оценки ритма здесь нет.
         event.getDrops().clear();
-        awardCatch(serverPlayer, rodType, rodStack, 1.0f, 70);
+        awardCatch(serverPlayer, rodType, rodStack, 1.0f, 70, LeyLogic.MIN_QUALITY);
         // SC cleans bob after the event; force another pass next tick if attachment stuck.
         if (serverPlayer.getServer() != null) {
             serverPlayer.getServer().execute(() -> StarCatcherAttachments.forceReleaseBobber(serverPlayer));
@@ -241,6 +242,12 @@ public class FishingLootHandler {
 
     public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem.RodType type,
                                   ItemStack rodStack, float lootScale, int quality) {
+        awardCatch(player, type, rodStack, lootScale, quality, quality);
+    }
+
+    /** {@code leyQuality}: оценка для Старого Лея; бывает выше {@code quality}, когда ритм оценивает не Aquatech. */
+    public static void awardCatch(ServerPlayer player, AquaTechFishingRodItem.RodType type,
+                                  ItemStack rodStack, float lootScale, int quality, int leyQuality) {
         bumpCatchStat(player);
         RodDurability.wearOne(rodStack, player);
 
@@ -265,7 +272,7 @@ public class FishingLootHandler {
         maybeFirstCatchFanfare(player, customDrops);
 
         // Старый Лей: событие раз в неделю, шанс только при чистом ритме и в зоне
-        LeyService.tryBite(player, quality, customDrops);
+        LeyService.tryBite(player, leyQuality, customDrops);
 
         // Рекорд сервера по виду: рыба штампуется именной до того, как попадёт в инвентарь
         FameService.onCatch(player, customDrops);
