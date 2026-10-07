@@ -10,5 +10,7 @@ final class TournamentState {
     boolean awarded;
     boolean finalSent = true;
     List<TournamentLogic.Entry> top = new ArrayList<>();
+    /** Категория «по числу уловов»; в файле прежних недель поля нет, при загрузке станет пустым списком. */
+    List<TournamentLogic.CountEntry> counts = new ArrayList<>();
     List<TournamentLogic.Prize> pending = new ArrayList<>();
 }

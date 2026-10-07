@@ -50,6 +50,8 @@ public class ModCreativeTabs {
                         output.accept(ModItems.BAIT_ORE.get());
                         output.accept(ModItems.BAIT_ABYSS.get());
                         output.accept(ModItems.FISH_KEEPNET.get());
+                        output.accept(ModItems.FAME_PLAQUE.get());
+                        output.accept(ModItems.OLD_LEY.get());
                     })
                     .build());
 

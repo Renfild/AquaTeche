@@ -2,9 +2,9 @@
   "use strict";
 
   var PRIZES = [
-    { coins: 2500, key: "IV" },
-    { coins: 1000, key: "III" },
-    { coins: 500, key: "II" },
+    { coins: 25000, key: "IV" },
+    { coins: 10000, key: "III" },
+    { coins: 5000, key: "II" },
   ];
 
   function escapeHtml(value) {

@@ -92,5 +92,9 @@
   "aquatech_ui.guide.perks.ranks.p3": "Боевой Пропуск — 50 уровней сезонных наград. Прогресс капает за любую активность.",
   "entity.aquatech_ui.fish_merchant": "Торговец рыбой",
   "entity.aquatech_ui.bee_keeper": "Пчеловод",
-  "block.aquatech_ui.fish_keepnet": "Садок"
+  "entity.aquatech_ui.fish_neighbor": "Рыбак-сосед",
+  "entity.aquatech_ui.old_ley": "Старый Лей",
+  "item.aquatech_ui.old_ley": "Старый Лей",
+  "block.aquatech_ui.fish_keepnet": "Садок",
+  "block.aquatech_ui.fame_plaque": "Табличка славы"
 }

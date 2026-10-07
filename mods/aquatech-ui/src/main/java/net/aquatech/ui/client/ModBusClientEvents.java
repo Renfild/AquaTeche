@@ -2,7 +2,10 @@ package net.aquatech.ui.client;
 
 import net.aquatech.ui.AquaTechUI;
 import net.aquatech.ui.client.render.BeeKeeperRenderer;
+import net.aquatech.ui.client.render.FamePlaqueRenderer;
 import net.aquatech.ui.client.render.FishMerchantRenderer;
+import net.aquatech.ui.client.render.FishNeighborRenderer;
+import net.aquatech.ui.client.render.OldLeyRenderer;
 import net.aquatech.ui.registry.ModBlockEntities;
 import net.aquatech.ui.registry.ModEntities;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,6 +26,9 @@ public class ModBusClientEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.FISH_MERCHANT.get(), FishMerchantRenderer::new);
         event.registerEntityRenderer(ModEntities.BEE_KEEPER.get(), BeeKeeperRenderer::new);
+        event.registerEntityRenderer(ModEntities.FISH_NEIGHBOR.get(), FishNeighborRenderer::new);
+        event.registerEntityRenderer(ModEntities.OLD_LEY.get(), OldLeyRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.FAME_PLAQUE.get(), FamePlaqueRenderer::new);
     }
 }
 

@@ -17,8 +17,12 @@ import java.util.List;
 public final class TournamentLogic {
 
     public static final int TOP_LIMIT = 10;
-    public static final long[] PRIZE_COINS = {2500, 1000, 500};
+    public static final long[] PRIZE_COINS = {25000, 10000, 5000};
     public static final String[] PRIZE_CASES = {"flora", "steam", "smeltery"};
+    /** Призы категории «по числу уловов»: только монеты, без ключей и бустеров. */
+    public static final long[] PRIZE_COINS_COUNT = {12500, 5000, 2500};
+    public static final String CATEGORY_WEIGHT = "weight";
+    public static final String CATEGORY_COUNT = "count";
 
     public static final class Entry {
         public String name;
@@ -43,16 +47,45 @@ public final class TournamentLogic {
         public int place;
         public long coins;
         public String caseId;
+        /** {@link #CATEGORY_COUNT} или {@link #CATEGORY_WEIGHT}; у призов из старого файла поля нет (null = вес). */
+        public String category;
 
         public Prize() {
         }
 
         public Prize(String uuid, int week, int place, long coins, String caseId) {
+            this(uuid, week, place, coins, caseId, CATEGORY_WEIGHT);
+        }
+
+        public Prize(String uuid, int week, int place, long coins, String caseId, String category) {
             this.uuid = uuid;
             this.week = week;
             this.place = place;
             this.coins = coins;
             this.caseId = caseId;
+            this.category = category;
+        }
+
+        public boolean isCount() {
+            return CATEGORY_COUNT.equals(category);
+        }
+    }
+
+    /** Счётчик уловов игрока за выходные; {@code at} — время последнего улова, при равенстве выигрывает тот, кто дошёл раньше. */
+    public static final class CountEntry {
+        public String name;
+        public String uuid;
+        public int count;
+        public long at;
+
+        public CountEntry() {
+        }
+
+        public CountEntry(String name, String uuid, int count, long at) {
+            this.name = name;
+            this.uuid = uuid;
+            this.count = count;
+            this.at = at;
         }
     }
 
@@ -92,6 +125,43 @@ public final class TournamentLogic {
             top.remove(top.size() - 1);
         }
         return true;
+    }
+
+    /** Засчитывает один улов; доска упорядочена: больше уловов выше, при равенстве раньше дошедший выше. Возвращает новый счёт. */
+    public static int bump(List<CountEntry> board, String uuid, String name, long nowMs) {
+        CountEntry mine = null;
+        for (CountEntry e : board) {
+            if (e.uuid.equals(uuid)) {
+                mine = e;
+                break;
+            }
+        }
+        if (mine == null) {
+            mine = new CountEntry(name, uuid, 0, nowMs);
+            board.add(mine);
+        }
+        mine.name = name;
+        mine.count++;
+        mine.at = nowMs;
+        board.sort(Comparator.comparingInt((CountEntry e) -> e.count).reversed().thenComparingLong(e -> e.at));
+        return mine.count;
+    }
+
+    public static int placeOfCount(List<CountEntry> board, String uuid) {
+        for (int i = 0; i < board.size(); i++) {
+            if (board.get(i).uuid.equals(uuid)) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
+    public static List<Prize> countPrizesFor(List<CountEntry> board, int week) {
+        List<Prize> prizes = new ArrayList<>();
+        for (int i = 0; i < Math.min(PRIZE_COINS_COUNT.length, board.size()); i++) {
+            prizes.add(new Prize(board.get(i).uuid, week, i + 1, PRIZE_COINS_COUNT[i], null, CATEGORY_COUNT));
+        }
+        return prizes;
     }
 
     public static int placeOf(List<Entry> top, String uuid) {

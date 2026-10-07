@@ -361,6 +361,7 @@ public final class OceanEventsService {
             }
             if (tournament.top == null) tournament.top = new ArrayList<>();
             if (tournament.pending == null) tournament.pending = new ArrayList<>();
+            if (tournament.counts == null) tournament.counts = new ArrayList<>();
         }
         return tournament;
     }
@@ -389,17 +390,24 @@ public final class OceanEventsService {
         t.week = TournamentLogic.weekId(now.toLocalDate());
         t.endsAt = TournamentLogic.endOfWeekendMs(now);
         t.top = new ArrayList<>();
+        t.counts = new ArrayList<>();
         t.awarded = false;
         t.finalSent = true;
         startupSynced = true;
         saveTournament();
         syncTournament(t, "active");
-        broadcast(server, "§6[Турнир] §eНедельный турнир стартовал! §fСамая тяжёлая рыба субботы и воскресенья: "
-                + "призы топ-3 — §62500§f/§71000§f/§8500 монет и ключи кейсов. Топ-10 — на сайте, топ-3 — в Tab!");
+        broadcast(server, "§6[Турнир] §eНедельный турнир стартовал! §fДве категории. §bТяжеловес§f: самая тяжёлая рыба субботы и воскресенья, "
+                + "призы топ-3 — §625000§f/§710000§f/§85000 монет и ключи кейсов. §bРекордсмен улова§f: больше всего уловов, "
+                + "призы §612500§f/§75000§f/§82500 монет. Топ-10 тяжеловесов — на сайте, топ-3 — в Tab!");
     }
 
     private static void grantPrize(ServerPlayer player, TournamentLogic.Prize prize) {
         addCoins(player, prize.coins);
+        if (prize.isCount()) {
+            player.sendSystemMessage(Component.literal("§6[Турнир] §aПриз «Рекордсмен улова» за " + prize.place + " место (неделя "
+                    + prize.week + "): §6+" + prize.coins + " монет§a!"));
+            return;
+        }
         grantCaseKey(player, prize.caseId);
         String booster = TournamentLogic.boosterFor(prize.place);
         if (booster != null) grantBooster(player, booster);
@@ -419,23 +427,39 @@ public final class OceanEventsService {
         }
     }
 
+    private static void deliverPrize(MinecraftServer server, TournamentState t, String uuid, TournamentLogic.Prize prize) {
+        ServerPlayer online = server.getPlayerList().getPlayer(java.util.UUID.fromString(uuid));
+        if (online != null) {
+            grantPrize(online, prize);
+        } else {
+            t.pending.add(prize);
+        }
+    }
+
     private static void awardTournament(MinecraftServer server, TournamentState t) {
         t.awarded = true;
         List<TournamentLogic.Prize> prizes = TournamentLogic.prizesFor(t.top, t.week);
-        if (prizes.isEmpty()) {
+        List<TournamentLogic.Prize> countPrizes = TournamentLogic.countPrizesFor(t.counts, t.week);
+        if (prizes.isEmpty() && countPrizes.isEmpty()) {
             broadcast(server, "§6[Турнир] §7Турнир недели завершён — никто не поймал рыбу. Призовой фонд сгорел!");
         } else {
-            broadcast(server, "§6[Турнир] §eИтоги недели — самые тяжёлые уловы:");
-            for (TournamentLogic.Prize prize : prizes) {
-                TournamentLogic.Entry e = t.top.get(prize.place - 1);
-                broadcast(server, "  §f" + prize.place + ". " + e.name + " — §b" + e.fish
-                        + " §7(" + String.format("%.2f", e.weight) + " кг) §6+" + prize.coins
-                        + " монет §7+ ключ Кейса " + TournamentLogic.caseNumeral(prize.caseId));
-                ServerPlayer online = server.getPlayerList().getPlayer(java.util.UUID.fromString(e.uuid));
-                if (online != null) {
-                    grantPrize(online, prize);
-                } else {
-                    t.pending.add(prize);
+            if (!prizes.isEmpty()) {
+                broadcast(server, "§6[Турнир] §eИтоги недели, «Тяжеловес» — самые тяжёлые уловы:");
+                for (TournamentLogic.Prize prize : prizes) {
+                    TournamentLogic.Entry e = t.top.get(prize.place - 1);
+                    broadcast(server, "  §f" + prize.place + ". " + e.name + " — §b" + e.fish
+                            + " §7(" + String.format("%.2f", e.weight) + " кг) §6+" + prize.coins
+                            + " монет §7+ ключ Кейса " + TournamentLogic.caseNumeral(prize.caseId));
+                    deliverPrize(server, t, e.uuid, prize);
+                }
+            }
+            if (!countPrizes.isEmpty()) {
+                broadcast(server, "§6[Турнир] §eИтоги недели, «Рекордсмен улова» — больше всего уловов:");
+                for (TournamentLogic.Prize prize : countPrizes) {
+                    TournamentLogic.CountEntry e = t.counts.get(prize.place - 1);
+                    broadcast(server, "  §f" + prize.place + ". " + e.name + " — §b" + e.count
+                            + " §7уловов §6+" + prize.coins + " монет");
+                    deliverPrize(server, t, e.uuid, prize);
                 }
             }
         }
@@ -510,43 +534,8 @@ public final class OceanEventsService {
         }
         if (changed) saveQuestTag(player, st);
 
-        // 3. Турнир (вес: свой тег; StarCatcher 2.3.19 вес в NBT не пишет — проставляем при выдаче)
-        if (tournamentActive()) {
-            TournamentState t = tournament();
-            if (t.week != TournamentLogic.weekId(LocalDate.now())) {
-                beginTournamentWeek(player.getServer(), t);
-            }
-            double best = -1;
-            String fishName = "";
-            for (ItemStack stack : awarded) {
-                if (stack == null || stack.isEmpty()) continue;
-                double w;
-                if (stack.hasTag() && stack.getTag().contains(WEIGHT_TAG)) {
-                    w = stack.getTag().getDouble(WEIGHT_TAG);
-                } else if (stack.hasTag() && stack.getTag().contains("caught_fish_info")
-                        && stack.getTag().getCompound("caught_fish_info").contains("weight")) {
-                    w = stack.getTag().getCompound("caught_fish_info").getDouble("weight");
-                } else {
-                    var rnd = player.getRandom();
-                    w = Math.round((0.3 + rnd.nextDouble() * rnd.nextDouble() * 24.0) * 100) / 100.0;
-                    stack.getOrCreateTag().putDouble(WEIGHT_TAG, w);
-                }
-                if (w > best) {
-                    best = w;
-                    fishName = stack.getHoverName().getString();
-                }
-            }
-            String uuid = player.getUUID().toString();
-            if (best > 0 && TournamentLogic.record(t.top, uuid, player.getGameProfile().getName(), best, fishName)) {
-                saveTournament();
-                syncTournament(t, "active");
-                int place = TournamentLogic.placeOf(t.top, uuid);
-                if (place > 0) {
-                    player.sendSystemMessage(Component.literal("§6[Турнир] §aВы на " + place + " месте недели! §7("
-                            + String.format("%.2f", best) + " кг)"));
-                }
-            }
-        }
+        // 3. Турнир (вес из компонента Starcatcher, у рыбы Aquatech он проставляется при выдаче улова)
+        recordTournament(player, awarded);
 
         // 4. Косяк: бонусная рыба в радиусе события (приват не мешает — заброс удочки не гвардится)
         if (school != null && now < school.until()) {
@@ -566,6 +555,57 @@ public final class OceanEventsService {
                 }
             }
         }
+    }
+
+    /**
+     * Улов для рыбалки без Aquatech-лута (удочки sky/boner оставляют настоящий улов Starcatcher):
+     * в зачёт идут только турнир и стена славы, контракты и золотая рыба прежним путём не затрагиваются.
+     */
+    public static void onFishOnlyCatch(ServerPlayer player, List<ItemStack> drops) {
+        if (drops == null || drops.isEmpty()) return;
+        recordTournament(player, drops);
+    }
+
+    /**
+     * Недельный турнир: «Тяжеловес» (самая тяжёлая рыба) и «Рекордсмен улова» (число уловов).
+     * В зачёт веса идёт только рыба, у которой есть вес; руды и прочий лут не участвуют.
+     */
+    private static void recordTournament(ServerPlayer player, List<ItemStack> awarded) {
+        if (!tournamentActive()) return;
+        TournamentState t = tournament();
+        if (t.week != TournamentLogic.weekId(LocalDate.now())) {
+            beginTournamentWeek(player.getServer(), t);
+        }
+        var rnd = player.getRandom();
+        double bestKg = -1;
+        String fishName = "";
+        for (ItemStack stack : awarded) {
+            if (stack == null || stack.isEmpty()) continue;
+            FishCatchInfo.Info info = FishCatchInfo.ensure(stack, rnd);
+            if (info == null) continue;
+            double kg = info.grams() / 1000.0;
+            if (kg > bestKg) {
+                bestKg = kg;
+                fishName = FishCatchInfo.displayName(stack);
+            }
+        }
+        String uuid = player.getUUID().toString();
+        String name = player.getGameProfile().getName();
+        if (bestKg > 0 && TournamentLogic.record(t.top, uuid, name, bestKg, fishName)) {
+            syncTournament(t, "active");
+            int place = TournamentLogic.placeOf(t.top, uuid);
+            if (place > 0) {
+                player.sendSystemMessage(Component.literal("§6[Турнир] §aТяжеловес: вы на " + place + " месте недели! §7("
+                        + String.format("%.2f", bestKg) + " кг)"));
+            }
+        }
+        int caught = TournamentLogic.bump(t.counts, uuid, name, System.currentTimeMillis());
+        int countPlace = TournamentLogic.placeOfCount(t.counts, uuid);
+        if (caught % 10 == 0 || (countPlace > 0 && countPlace <= 3 && caught % 5 == 0)) {
+            player.sendSystemMessage(Component.literal("§6[Турнир] §fРекордсмен улова: §b" + caught
+                    + " §7уловов, место §f" + countPlace));
+        }
+        saveTournament();
     }
 
     // ─────────────────── hub-интеграция: доступ для вкладки F4 ───────────────────
@@ -995,7 +1035,7 @@ public final class OceanEventsService {
         ensureQuestDay(player);
         claimPendingPrizes(player);
         if (tournamentActive()) {
-            player.sendSystemMessage(Component.literal("§6[Турнир] §eИдёт недельный турнир! §fЛовите самую тяжёлую рыбу — топ-3 получат монеты и ключи кейсов, топ-10 виден на сайте."));
+            player.sendSystemMessage(Component.literal("§6[Турнир] §eИдёт недельный турнир! §fДве категории: самая тяжёлая рыба (топ-3: монеты и ключи кейсов, топ-10 на сайте) и больше всего уловов (топ-3: монеты)."));
         }
     }
 

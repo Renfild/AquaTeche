@@ -6,6 +6,8 @@ import net.aquatech.ui.item.RateModItem;
 import net.aquatech.ui.item.SonarGogglesItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -70,6 +72,18 @@ public class ModItems {
 
     public static final RegistryObject<Item> FISH_KEEPNET = ITEMS.register("fish_keepnet",
             () -> new BlockItem(ModBlocks.FISH_KEEPNET.get(), new Item.Properties()));
+
+    /** Трофей «Старый Лей»: выдаётся только событием (см. LeyService), один на сервер в неделю. */
+    public static final RegistryObject<Item> OLD_LEY = ITEMS.register("old_ley",
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)) {
+                @Override
+                public boolean isFoil(ItemStack stack) {
+                    return true;
+                }
+            });
+
+    public static final RegistryObject<Item> FAME_PLAQUE = ITEMS.register("fame_plaque",
+            () -> new BlockItem(ModBlocks.FAME_PLAQUE.get(), new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

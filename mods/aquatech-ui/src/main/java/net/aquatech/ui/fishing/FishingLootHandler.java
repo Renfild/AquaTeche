@@ -76,6 +76,8 @@ public class FishingLootHandler {
             FishingAtlasService.onManualCatch(serverPlayer, event.getDrops());
             FishingSpotService.stamp(serverPlayer, hook, event.getDrops());
             sendCatchFeedback(serverPlayer, rodStack, event.getDrops());
+            FameService.onCatch(serverPlayer, event.getDrops());
+            OceanEventsService.onFishOnlyCatch(serverPlayer, event.getDrops());
             bumpCatchStat(serverPlayer, false);
             RodDurability.wearOne(rodStack, serverPlayer);
             return;
@@ -244,6 +246,10 @@ public class FishingLootHandler {
 
         List<ItemStack> customDrops = generateLoot(type, player.getRandom(), rodStack, player);
         customDrops.removeIf(FishingLootHandler::isForbiddenLoot);
+        // Вес и размер рыбе, у которой их нет (Aquatech выдаёт лут сам, мимо Starcatcher)
+        for (ItemStack drop : customDrops) {
+            FishCatchInfo.ensure(drop, player.getRandom());
+        }
 
         if (lootScale < 0.99f || lootScale > 1.01f) {
             for (ItemStack drop : customDrops) {
@@ -257,6 +263,12 @@ public class FishingLootHandler {
         FishingSpotService.stamp(player, player.fishing, customDrops);
         FishingBait.consume(player, rodStack);
         maybeFirstCatchFanfare(player, customDrops);
+
+        // Старый Лей: событие раз в неделю, шанс только при чистом ритме и в зоне
+        LeyService.tryBite(player, quality, customDrops);
+
+        // Рекорд сервера по виду: рыба штампуется именной до того, как попадёт в инвентарь
+        FameService.onCatch(player, customDrops);
 
         // Copies for event (before inventory mutates stacks)
         List<ItemStack> awarded = new ArrayList<>(customDrops.size());
@@ -1204,7 +1216,7 @@ public class FishingLootHandler {
         for (ItemStack s : awarded) {
             if (isStarCatcherFishItem(s)) {
                 speciesCount++;
-                fishNames.add((s.getCount() > 1 ? s.getCount() + "× " : "") + s.getHoverName().getString());
+                fishNames.add((s.getCount() > 1 ? s.getCount() + "× " : "") + FishCatchInfo.displayName(s));
             }
         }
 

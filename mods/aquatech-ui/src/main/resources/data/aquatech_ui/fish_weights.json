@@ -1,0 +1,737 @@
+{
+ "starcatcher:agave_bream": {
+  "avgCm": 36,
+  "avgG": 2000,
+  "devCm": 12,
+  "devG": 1000,
+  "rarity": "rare"
+ },
+ "starcatcher:amethystback": {
+  "avgCm": 300,
+  "avgG": 16000,
+  "devCm": 150,
+  "devG": 7000,
+  "rarity": "epic"
+ },
+ "starcatcher:aquamarine_pike": {
+  "avgCm": 75,
+  "avgG": 5000,
+  "devCm": 20,
+  "devG": 3000,
+  "rarity": "common"
+ },
+ "starcatcher:aurora": {
+  "avgCm": 10,
+  "avgG": 120,
+  "devCm": 8,
+  "devG": 30,
+  "rarity": "legendary"
+ },
+ "starcatcher:azure_crystalback_minnow": {
+  "avgCm": 6,
+  "avgG": 5,
+  "devCm": 4,
+  "devG": 3,
+  "rarity": "legendary"
+ },
+ "starcatcher:bigeye_tuna": {
+  "avgCm": 150,
+  "avgG": 120000,
+  "devCm": 50,
+  "devG": 60000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:black_eel": {
+  "avgCm": 500,
+  "avgG": 6000,
+  "devCm": 150,
+  "devG": 2000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:blossomfish": {
+  "avgCm": 60,
+  "avgG": 6000,
+  "devCm": 20,
+  "devG": 4000,
+  "rarity": "common"
+ },
+ "starcatcher:blue_crystal_fin": {
+  "avgCm": 12,
+  "avgG": 70,
+  "devCm": 4,
+  "devG": 30,
+  "rarity": "uncommon"
+ },
+ "starcatcher:blue_herring": {
+  "avgCm": 40,
+  "avgG": 1600,
+  "devCm": 12,
+  "devG": 1100,
+  "rarity": "rare"
+ },
+ "starcatcher:bluegigi": {
+  "avgCm": 20,
+  "avgG": 400,
+  "devCm": 5,
+  "devG": 100,
+  "rarity": "common"
+ },
+ "starcatcher:boot": {
+  "avgCm": 41,
+  "avgG": 2001,
+  "devCm": 21,
+  "devG": 701,
+  "rarity": "trash"
+ },
+ "starcatcher:boreal": {
+  "avgCm": 30,
+  "avgG": 1000,
+  "devCm": 15,
+  "devG": 200,
+  "rarity": "legendary"
+ },
+ "starcatcher:bright_amethyst_snapper": {
+  "avgCm": 60,
+  "avgG": 7000,
+  "devCm": 20,
+  "devG": 2000,
+  "rarity": "epic"
+ },
+ "starcatcher:cactifish": {
+  "avgCm": 100,
+  "avgG": 10000,
+  "devCm": 50,
+  "devG": 3000,
+  "rarity": "common"
+ },
+ "starcatcher:carpenjoe": {
+  "avgCm": 178,
+  "avgG": 72000,
+  "devCm": 0,
+  "devG": 0,
+  "rarity": "epic"
+ },
+ "starcatcher:cerberay": {
+  "avgCm": 200,
+  "avgG": 4000,
+  "devCm": 53,
+  "devG": 300,
+  "rarity": "legendary"
+ },
+ "starcatcher:charfish": {
+  "avgCm": 135,
+  "avgG": 4000,
+  "devCm": 25,
+  "devG": 700,
+  "rarity": "rare"
+ },
+ "starcatcher:chorus_crab": {
+  "avgCm": 15,
+  "avgG": 700,
+  "devCm": 8,
+  "devG": 300,
+  "rarity": "epic"
+ },
+ "starcatcher:cinder_squid": {
+  "avgCm": 40,
+  "avgG": 1300,
+  "devCm": 20,
+  "devG": 700,
+  "rarity": "rare"
+ },
+ "starcatcher:clam": {
+  "avgCm": 20,
+  "avgG": 1000,
+  "devCm": 5,
+  "devG": 400,
+  "rarity": "trash"
+ },
+ "starcatcher:conch": {
+  "avgCm": 5,
+  "avgG": 100,
+  "devCm": 2,
+  "devG": 49,
+  "rarity": "trash"
+ },
+ "starcatcher:crystalback_boreal": {
+  "avgCm": 30,
+  "avgG": 6000,
+  "devCm": 15,
+  "devG": 2000,
+  "rarity": "common"
+ },
+ "starcatcher:crystalback_minnow": {
+  "avgCm": 6,
+  "avgG": 5,
+  "devCm": 4,
+  "devG": 3,
+  "rarity": "common"
+ },
+ "starcatcher:crystalback_sturgeon": {
+  "avgCm": 400,
+  "avgG": 100000,
+  "devCm": 200,
+  "devG": 50000,
+  "rarity": "common"
+ },
+ "starcatcher:crystalback_trout": {
+  "avgCm": 35,
+  "avgG": 1600,
+  "devCm": 8,
+  "devG": 1200,
+  "rarity": "common"
+ },
+ "starcatcher:dark_amethyst_snapper": {
+  "avgCm": 60,
+  "avgG": 7000,
+  "devCm": 20,
+  "devG": 2000,
+  "rarity": "epic"
+ },
+ "starcatcher:deepjaw_herring": {
+  "avgCm": 30,
+  "avgG": 300,
+  "devCm": 8,
+  "devG": 100,
+  "rarity": "common"
+ },
+ "starcatcher:deepslatefish": {
+  "avgCm": 420,
+  "avgG": 70000,
+  "devCm": 70,
+  "devG": 20000,
+  "rarity": "common"
+ },
+ "starcatcher:downfall_bream": {
+  "avgCm": 36,
+  "avgG": 2000,
+  "devCm": 12,
+  "devG": 1000,
+  "rarity": "common"
+ },
+ "starcatcher:dried_seaweed": {
+  "avgCm": 41,
+  "avgG": 2001,
+  "devCm": 21,
+  "devG": 701,
+  "rarity": "trash"
+ },
+ "starcatcher:driftfin": {
+  "avgCm": 16,
+  "avgG": 167,
+  "devCm": 3,
+  "devG": 70,
+  "rarity": "common"
+ },
+ "starcatcher:drifting_bream": {
+  "avgCm": 36,
+  "avgG": 2000,
+  "devCm": 12,
+  "devG": 1000,
+  "rarity": "common"
+ },
+ "starcatcher:dripfin": {
+  "avgCm": 300,
+  "avgG": 16000,
+  "devCm": 150,
+  "devG": 7000,
+  "rarity": "common"
+ },
+ "starcatcher:dusktail_snapper": {
+  "avgCm": 60,
+  "avgG": 7000,
+  "devCm": 20,
+  "devG": 2000,
+  "rarity": "common"
+ },
+ "starcatcher:elderscale": {
+  "avgCm": 160,
+  "avgG": 2300,
+  "devCm": 85,
+  "devG": 652,
+  "rarity": "uncommon"
+ },
+ "starcatcher:embergill": {
+  "avgCm": 220,
+  "avgG": 5700,
+  "devCm": 70,
+  "devG": 900,
+  "rarity": "common"
+ },
+ "starcatcher:end_glow": {
+  "avgCm": 235,
+  "avgG": 7000,
+  "devCm": 25,
+  "devG": 700,
+  "rarity": "uncommon"
+ },
+ "starcatcher:fossilized_angelfish": {
+  "avgCm": 700,
+  "avgG": 36000,
+  "devCm": 150,
+  "devG": 7000,
+  "rarity": "rare"
+ },
+ "starcatcher:frostgill_chub": {
+  "avgCm": 30,
+  "avgG": 1400,
+  "devCm": 10,
+  "devG": 600,
+  "rarity": "common"
+ },
+ "starcatcher:frostjaw_trout": {
+  "avgCm": 35,
+  "avgG": 1600,
+  "devCm": 8,
+  "devG": 1200,
+  "rarity": "common"
+ },
+ "starcatcher:garnet_mackerel": {
+  "avgCm": 40,
+  "avgG": 2000,
+  "devCm": 20,
+  "devG": 1500,
+  "rarity": "uncommon"
+ },
+ "starcatcher:geode_eel": {
+  "avgCm": 500,
+  "avgG": 10000,
+  "devCm": 150,
+  "devG": 2000,
+  "rarity": "epic"
+ },
+ "starcatcher:ghostly_pike": {
+  "avgCm": 75,
+  "avgG": 5000,
+  "devCm": 20,
+  "devG": 3000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:glowing_dark": {
+  "avgCm": 100,
+  "avgG": 3000,
+  "devCm": 10,
+  "devG": 600,
+  "rarity": "uncommon"
+ },
+ "starcatcher:glowstone_pufferfish": {
+  "avgCm": 35,
+  "avgG": 1000,
+  "devCm": 25,
+  "devG": 700,
+  "rarity": "rare"
+ },
+ "starcatcher:glowstone_seeker": {
+  "avgCm": 120,
+  "avgG": 3700,
+  "devCm": 40,
+  "devG": 900,
+  "rarity": "common"
+ },
+ "starcatcher:gold_fan": {
+  "avgCm": 70,
+  "avgG": 4000,
+  "devCm": 50,
+  "devG": 2000,
+  "rarity": "common"
+ },
+ "starcatcher:hollowbelly_darter": {
+  "avgCm": 6,
+  "avgG": 7,
+  "devCm": 2,
+  "devG": 6,
+  "rarity": "common"
+ },
+ "starcatcher:icetooth_sturgeon": {
+  "avgCm": 400,
+  "avgG": 100000,
+  "devCm": 200,
+  "devG": 50000,
+  "rarity": "common"
+ },
+ "starcatcher:ironjaw_herring": {
+  "avgCm": 30,
+  "avgG": 300,
+  "devCm": 8,
+  "devG": 100,
+  "rarity": "uncommon"
+ },
+ "starcatcher:joel": {
+  "avgCm": 69,
+  "avgG": 2000,
+  "devCm": 0,
+  "devG": 600,
+  "rarity": "legendary"
+ },
+ "starcatcher:lava_crab": {
+  "avgCm": 15,
+  "avgG": 700,
+  "devCm": 8,
+  "devG": 300,
+  "rarity": "epic"
+ },
+ "starcatcher:lava_crab_claw": {
+  "avgCm": 41,
+  "avgG": 2001,
+  "devCm": 21,
+  "devG": 701,
+  "rarity": "trash"
+ },
+ "starcatcher:lightning_bass": {
+  "avgCm": 40,
+  "avgG": 1300,
+  "devCm": 12,
+  "devG": 620,
+  "rarity": "rare"
+ },
+ "starcatcher:lily_snapper": {
+  "avgCm": 60,
+  "avgG": 7000,
+  "devCm": 20,
+  "devG": 2000,
+  "rarity": "rare"
+ },
+ "starcatcher:lush_pike": {
+  "avgCm": 75,
+  "avgG": 5000,
+  "devCm": 20,
+  "devG": 3000,
+  "rarity": "legendary"
+ },
+ "starcatcher:magma_fish": {
+  "avgCm": 120,
+  "avgG": 3700,
+  "devCm": 40,
+  "devG": 900,
+  "rarity": "uncommon"
+ },
+ "starcatcher:mirage_carp": {
+  "avgCm": 60,
+  "avgG": 6000,
+  "devCm": 20,
+  "devG": 4000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:mistback_chub": {
+  "avgCm": 30,
+  "avgG": 1400,
+  "devCm": 10,
+  "devG": 600,
+  "rarity": "common"
+ },
+ "starcatcher:molten_deepslate_crab": {
+  "avgCm": 15,
+  "avgG": 700,
+  "devCm": 8,
+  "devG": 300,
+  "rarity": "epic"
+ },
+ "starcatcher:molten_shrimp": {
+  "avgCm": 10,
+  "avgG": 20,
+  "devCm": 3,
+  "devG": 10,
+  "rarity": "rare"
+ },
+ "starcatcher:morganite": {
+  "avgCm": 120,
+  "avgG": 7000,
+  "devCm": 80,
+  "devG": 1000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:mossy_boot": {
+  "avgCm": 41,
+  "avgG": 2001,
+  "devCm": 21,
+  "devG": 701,
+  "rarity": "trash"
+ },
+ "starcatcher:obidontiee": {
+  "avgCm": 17,
+  "avgG": 1200,
+  "devCm": 5,
+  "devG": 200,
+  "rarity": "common"
+ },
+ "starcatcher:obsidian_crab": {
+  "avgCm": 15,
+  "avgG": 700,
+  "devCm": 8,
+  "devG": 300,
+  "rarity": "epic"
+ },
+ "starcatcher:obsidian_eel": {
+  "avgCm": 500,
+  "avgG": 70000,
+  "devCm": 150,
+  "devG": 13000,
+  "rarity": "legendary"
+ },
+ "starcatcher:pale_carp": {
+  "avgCm": 60,
+  "avgG": 6000,
+  "devCm": 20,
+  "devG": 4000,
+  "rarity": "common"
+ },
+ "starcatcher:pale_pinfish": {
+  "avgCm": 15,
+  "avgG": 150,
+  "devCm": 5,
+  "devG": 100,
+  "rarity": "rare"
+ },
+ "starcatcher:peakdweller": {
+  "avgCm": 100,
+  "avgG": 10000,
+  "devCm": 50,
+  "devG": 5000,
+  "rarity": "common"
+ },
+ "starcatcher:petaldrift_carp": {
+  "avgCm": 60,
+  "avgG": 6000,
+  "devCm": 20,
+  "devG": 4000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:pinfish": {
+  "avgCm": 15,
+  "avgG": 150,
+  "devCm": 5,
+  "devG": 100,
+  "rarity": "uncommon"
+ },
+ "starcatcher:pink_koi": {
+  "avgCm": 60,
+  "avgG": 3000,
+  "devCm": 20,
+  "devG": 2000,
+  "rarity": "common"
+ },
+ "starcatcher:pyrotrout": {
+  "avgCm": 40,
+  "avgG": 1200,
+  "devCm": 20,
+  "devG": 700,
+  "rarity": "uncommon"
+ },
+ "starcatcher:redscaled_tuna": {
+  "avgCm": 150,
+  "avgG": 120000,
+  "devCm": 50,
+  "devG": 60000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:rockgill": {
+  "avgCm": 100,
+  "avgG": 10000,
+  "devCm": 50,
+  "devG": 5000,
+  "rarity": "common"
+ },
+ "starcatcher:rose_siamese_fish": {
+  "avgCm": 30,
+  "avgG": 1000,
+  "devCm": 10,
+  "devG": 500,
+  "rarity": "epic"
+ },
+ "starcatcher:sage_catfish": {
+  "avgCm": 100,
+  "avgG": 10000,
+  "devCm": 50,
+  "devG": 3000,
+  "rarity": "epic"
+ },
+ "starcatcher:sandtail": {
+  "avgCm": 200,
+  "avgG": 1600,
+  "devCm": 100,
+  "devG": 1200,
+  "rarity": "common"
+ },
+ "starcatcher:scalding_pike": {
+  "avgCm": 75,
+  "avgG": 5000,
+  "devCm": 20,
+  "devG": 3000,
+  "rarity": "common"
+ },
+ "starcatcher:scorched_bloodsucker": {
+  "avgCm": 60,
+  "avgG": 1700,
+  "devCm": 30,
+  "devG": 300,
+  "rarity": "epic"
+ },
+ "starcatcher:scorchfish": {
+  "avgCm": 60,
+  "avgG": 6000,
+  "devCm": 20,
+  "devG": 4000,
+  "rarity": "common"
+ },
+ "starcatcher:sculkfish": {
+  "avgCm": 30,
+  "avgG": 2000,
+  "devCm": 10,
+  "devG": 600,
+  "rarity": "uncommon"
+ },
+ "starcatcher:sea_bass": {
+  "avgCm": 40,
+  "avgG": 1600,
+  "devCm": 12,
+  "devG": 1100,
+  "rarity": "common"
+ },
+ "starcatcher:shroomfish": {
+  "avgCm": 70,
+  "avgG": 4000,
+  "devCm": 50,
+  "devG": 2000,
+  "rarity": "legendary"
+ },
+ "starcatcher:silverfin_pike": {
+  "avgCm": 75,
+  "avgG": 5000,
+  "devCm": 20,
+  "devG": 3000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:silverveil_perch": {
+  "avgCm": 27,
+  "avgG": 500,
+  "devCm": 11,
+  "devG": 352,
+  "rarity": "uncommon"
+ },
+ "starcatcher:sludge_catfish": {
+  "avgCm": 100,
+  "avgG": 10000,
+  "devCm": 50,
+  "devG": 3000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:sporefish": {
+  "avgCm": 70,
+  "avgG": 4000,
+  "devCm": 50,
+  "devG": 2000,
+  "rarity": "rare"
+ },
+ "starcatcher:stonefish": {
+  "avgCm": 300,
+  "avgG": 26000,
+  "devCm": 150,
+  "devG": 7000,
+  "rarity": "legendary"
+ },
+ "starcatcher:sun_seeking_carp": {
+  "avgCm": 60,
+  "avgG": 6000,
+  "devCm": 20,
+  "devG": 4000,
+  "rarity": "rare"
+ },
+ "starcatcher:suneater": {
+  "avgCm": 100,
+  "avgG": 3000,
+  "devCm": 10,
+  "devG": 600,
+  "rarity": "rare"
+ },
+ "starcatcher:sunny_sturgeon": {
+  "avgCm": 400,
+  "avgG": 100000,
+  "devCm": 200,
+  "devG": 50000,
+  "rarity": "rare"
+ },
+ "starcatcher:the_quarrish": {
+  "avgCm": 620,
+  "avgG": 700000,
+  "devCm": 270,
+  "devG": 300000,
+  "rarity": "epic"
+ },
+ "starcatcher:thunder_bass": {
+  "avgCm": 40,
+  "avgG": 1200,
+  "devCm": 12,
+  "devG": 800,
+  "rarity": "rare"
+ },
+ "starcatcher:twilight_koi": {
+  "avgCm": 60,
+  "avgG": 3500,
+  "devCm": 13,
+  "devG": 731,
+  "rarity": "epic"
+ },
+ "starcatcher:vesani": {
+  "avgCm": 10,
+  "avgG": 67,
+  "devCm": 3,
+  "devG": 0,
+  "rarity": "legendary"
+ },
+ "starcatcher:vivid_moss": {
+  "avgCm": 120,
+  "avgG": 7000,
+  "devCm": 70,
+  "devG": 3000,
+  "rarity": "uncommon"
+ },
+ "starcatcher:voidbiter": {
+  "avgCm": 50,
+  "avgG": 2000,
+  "devCm": 15,
+  "devG": 200,
+  "rarity": "epic"
+ },
+ "starcatcher:ward": {
+  "avgCm": 50,
+  "avgG": 2600,
+  "devCm": 10,
+  "devG": 600,
+  "rarity": "legendary"
+ },
+ "starcatcher:whiteveil": {
+  "avgCm": 100,
+  "avgG": 3000,
+  "devCm": 30,
+  "devG": 2000,
+  "rarity": "common"
+ },
+ "starcatcher:willish": {
+  "avgCm": 75,
+  "avgG": 4000,
+  "devCm": 25,
+  "devG": 700,
+  "rarity": "uncommon"
+ },
+ "starcatcher:willow_bream": {
+  "avgCm": 36,
+  "avgG": 2000,
+  "devCm": 12,
+  "devG": 1000,
+  "rarity": "epic"
+ },
+ "starcatcher:wintery_pike": {
+  "avgCm": 75,
+  "avgG": 5000,
+  "devCm": 20,
+  "devG": 3000,
+  "rarity": "common"
+ },
+ "starcatcher:yellowstone_fish": {
+  "avgCm": 600,
+  "avgG": 22000,
+  "devCm": 150,
+  "devG": 7000,
+  "rarity": "uncommon"
+ }
+}

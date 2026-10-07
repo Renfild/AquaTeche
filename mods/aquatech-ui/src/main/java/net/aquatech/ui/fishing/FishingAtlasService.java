@@ -81,8 +81,9 @@ public final class FishingAtlasService {
                         rec.putLong("d", today);
                     }
                     rec.putInt("c", rec.getInt("c") + 1);
-                    String displayName = stack.getHoverName().getString();
-                    double weight = rollWeight(player);
+                    String displayName = FishCatchInfo.displayName(stack);
+                    FishCatchInfo.Info caught = FishCatchInfo.read(stack);
+                    double weight = caught != null ? caught.grams() / 1000.0 : rollWeight(player);
                     if (weight > rec.getDouble("w")) {
                         rec.putDouble("w", weight);
                     }

@@ -41,6 +41,10 @@
       + '<div class="mock mock--light"><i></i><b></b><u></u><span><em></em><em></em><em></em></span></div></div>';
   }
 
+  function imgArt(f) {
+    return '<div class="u-art u-art--img"><img src="' + esc(f.img) + '" alt="' + esc(f.alt || f.title) + '" loading="lazy" decoding="async" width="' + Number(f.w) + '" height="' + Number(f.h) + '"></div>';
+  }
+
   function feature(f) {
     var points = (f.points || []).map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("");
     var link = f.link ? '<a class="btn btn-secondary u-link" href="' + esc(f.link.href) + '">' + esc(f.link.label) + "</a>" : "";
@@ -49,7 +53,7 @@
       + "<h3>" + esc(f.title) + (f.titleAccent ? "<em>" + esc(f.titleAccent) + "</em>" : "") + "</h3>"
       + "<p>" + esc(f.text) + "</p>"
       + (points ? '<ul class="u-points">' + points + "</ul>" : "") + link + "</div>"
-      + art(f.art) + "</article>";
+      + (f.img ? imgArt(f) : art(f.art)) + "</article>";
   }
 
   function bold(text) {

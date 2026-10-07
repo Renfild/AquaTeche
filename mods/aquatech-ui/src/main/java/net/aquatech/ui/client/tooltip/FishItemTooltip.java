@@ -62,7 +62,7 @@ public final class FishItemTooltip {
                     + net.aquatech.ui.fishing.FishingSpotService.formatMult(spotMult) + "\u00a7b к цене"));
         }
         double weight = tag.getDouble("aquatech_tournament_weight");
-        if (weight > 0.0) {
+        if (weight > 0.0 && net.aquatech.ui.fishing.FishCatchInfo.read(stack) == null) {
             event.getToolTip().add(Component.literal(
                     "\u00a77Вес: \u00a7f" + String.format("%.2f", weight) + " кг"));
         }

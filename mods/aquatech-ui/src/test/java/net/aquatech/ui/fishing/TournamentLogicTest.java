@@ -70,9 +70,9 @@ class TournamentLogicTest {
         TournamentLogic.record(top, B, "b", 7, "f");
         List<TournamentLogic.Prize> prizes = TournamentLogic.prizesFor(top, 202639);
         assertEquals(2, prizes.size());
-        assertEquals(2500L, prizes.get(0).coins);
+        assertEquals(25000L, prizes.get(0).coins);
         assertEquals("flora", prizes.get(0).caseId);
-        assertEquals(1000L, prizes.get(1).coins);
+        assertEquals(10000L, prizes.get(1).coins);
         assertEquals("steam", prizes.get(1).caseId);
         assertEquals(202639, prizes.get(1).week);
         assertEquals(2, prizes.get(1).place);
@@ -148,5 +148,62 @@ class TournamentLogicTest {
         assertEquals("small", TournamentLogic.boosterFor(3));
         assertNull(TournamentLogic.boosterFor(4));
         assertNull(TournamentLogic.boosterFor(0));
+    }
+
+    @Test
+    void catchCountBoardOrdersByCountAndEarlierReachWinsTies() {
+        List<TournamentLogic.CountEntry> board = new ArrayList<>();
+        assertEquals(1, TournamentLogic.bump(board, A, "a", 1000));
+        assertEquals(1, TournamentLogic.bump(board, B, "b", 2000));
+        assertEquals(List.of(A, B), board.stream().map(e -> e.uuid).toList(), "same count: who got there first leads");
+        assertEquals(2, TournamentLogic.bump(board, B, "b", 3000));
+        assertEquals(List.of(B, A), board.stream().map(e -> e.uuid).toList());
+        assertEquals(2, TournamentLogic.bump(board, A, "a", 4000));
+        assertEquals(List.of(B, A), board.stream().map(e -> e.uuid).toList(), "tie goes to the one who reached it earlier");
+        assertEquals(1, TournamentLogic.placeOfCount(board, B));
+        assertEquals(2, TournamentLogic.placeOfCount(board, A));
+        assertEquals(0, TournamentLogic.placeOfCount(board, "nobody"));
+    }
+
+    @Test
+    void grinderWinsCountCategoryWhileHeavyFishWinsWeightCategory() {
+        List<TournamentLogic.Entry> top = new ArrayList<>();
+        List<TournamentLogic.CountEntry> board = new ArrayList<>();
+        TournamentLogic.record(top, B, "lucky", 40.0, "Тунец");
+        TournamentLogic.bump(board, B, "lucky", 100);
+        for (int i = 0; i < 50; i++) {
+            TournamentLogic.record(top, A, "grinder", 1.0 + i * 0.01, "Окунь");
+            TournamentLogic.bump(board, A, "grinder", 200 + i);
+        }
+        assertEquals(B, top.get(0).uuid, "heaviest single fish leads the weight board");
+        assertEquals(A, board.get(0).uuid, "most catches lead the count board");
+    }
+
+    @Test
+    void countPrizesAreCoinsOnlyAndMarkedAsCountCategory() {
+        List<TournamentLogic.CountEntry> board = new ArrayList<>();
+        TournamentLogic.bump(board, A, "a", 1);
+        TournamentLogic.bump(board, A, "a", 2);
+        TournamentLogic.bump(board, B, "b", 3);
+        List<TournamentLogic.Prize> prizes = TournamentLogic.countPrizesFor(board, 202639);
+        assertEquals(2, prizes.size());
+        assertEquals(12500L, prizes.get(0).coins);
+        assertEquals(5000L, prizes.get(1).coins);
+        assertNull(prizes.get(0).caseId);
+        assertTrue(prizes.get(0).isCount());
+        assertEquals(A, prizes.get(0).uuid);
+        assertTrue(TournamentLogic.countPrizesFor(new ArrayList<>(), 202639).isEmpty());
+    }
+
+    @Test
+    void legacyPendingPrizeWithoutCategoryIsAWeightPrize() {
+        TournamentState state = new Gson().fromJson(
+                "{\"week\":3912,\"pending\":[{\"uuid\":\"" + A + "\",\"week\":3912,\"place\":1,\"coins\":2500,\"caseId\":\"flora\"}]}",
+                TournamentState.class);
+        assertEquals(1, state.pending.size());
+        assertFalse(state.pending.get(0).isCount(), "old queued prizes keep granting key and booster");
+        assertNotNull(state.counts);
+        assertTrue(state.counts.isEmpty());
+        assertEquals(TournamentLogic.CATEGORY_WEIGHT, new TournamentLogic.Prize(A, 1, 1, 1, "x").category);
     }
 }

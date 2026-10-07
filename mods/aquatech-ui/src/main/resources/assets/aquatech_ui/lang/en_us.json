@@ -65,5 +65,9 @@
   "item.aquatech_ui.bait_abyss": "Abyssal Bait",
   "entity.aquatech_ui.fish_merchant": "Fish Merchant",
   "entity.aquatech_ui.bee_keeper": "Beekeeper",
-  "block.aquatech_ui.fish_keepnet": "Fish Keepnet"
+  "entity.aquatech_ui.fish_neighbor": "Fisher Neighbor",
+  "entity.aquatech_ui.old_ley": "Old Ley",
+  "item.aquatech_ui.old_ley": "Old Ley",
+  "block.aquatech_ui.fish_keepnet": "Fish Keepnet",
+  "block.aquatech_ui.fame_plaque": "Hall of Fame Plaque"
 }
