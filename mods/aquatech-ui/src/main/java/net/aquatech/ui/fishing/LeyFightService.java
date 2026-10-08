@@ -158,7 +158,7 @@ public final class LeyFightService {
             abort(player, ley, "§6[Старый Лей] §7Вы выпустили удочку, и Лей сорвался.");
             return;
         }
-        if (ley.level() != player.level() || ley.distanceTo(player) > MAX_FIGHT_DISTANCE) {
+        if (ley.level() != player.level() || flatDistance(player, ley) > MAX_FIGHT_DISTANCE) {
             abort(player, ley, "§6[Старый Лей] §7Лей утащил леску слишком далеко.");
             return;
         }
@@ -261,7 +261,7 @@ public final class LeyFightService {
         for (double d = Mth.clamp(s.distance, 4.0D, LeyFight.ESCAPE_DISTANCE); d >= 4.0D; d -= 2.0D) {
             double x = player.getX() + Math.cos(angle) * d;
             double z = player.getZ() + Math.sin(angle) * d;
-            BlockPos surface = waterSurface(level, x, z, player.getBlockY());
+            BlockPos surface = waterSurface(level, x, z, Mth.floor(fight.lastY));
             if (surface != null) {
                 fight.lastX = x;
                 fight.lastY = surface.getY() + 0.44D;
@@ -273,13 +273,20 @@ public final class LeyFightService {
         ley.controlAt(fight.lastX, fight.lastY, fight.lastZ, yaw);
     }
 
+    /** Расстояние по земле: игрок может стоять высоко над водой, высота на схватку не влияет. */
+    private static double flatDistance(ServerPlayer player, OldLeyEntity ley) {
+        double dx = ley.getX() - player.getX();
+        double dz = ley.getZ() - player.getZ();
+        return Math.sqrt(dx * dx + dz * dz);
+    }
+
     private static BlockPos waterSurface(ServerLevel level, double x, double z, int fromY) {
         int bx = Mth.floor(x);
         int bz = Mth.floor(z);
         if (!level.hasChunkAt(new BlockPos(bx, fromY, bz))) {
             return null;
         }
-        for (int y = fromY + 4; y >= fromY - 14; y--) {
+        for (int y = fromY + 6; y >= fromY - 16; y--) {
             BlockPos p = new BlockPos(bx, y, bz);
             if (level.getFluidState(p).is(FluidTags.WATER) && !level.getFluidState(p.above()).is(FluidTags.WATER)) {
                 return p;
@@ -295,6 +302,7 @@ public final class LeyFightService {
     }
 
     private static void abort(ServerPlayer player, OldLeyEntity ley, String message) {
+        AquaTechUI.LOGGER.info("[ley] схватка прервана: {}", message == null ? "игрок вышел или умер" : message);
         if (ley != null) {
             ley.release();
         }

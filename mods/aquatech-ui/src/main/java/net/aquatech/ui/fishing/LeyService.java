@@ -58,6 +58,7 @@ public final class LeyService {
     private static final Path FILE = FMLPaths.CONFIGDIR.get().resolve("aquatech_ley.json");
     private static final int CHECK_EVERY_TICKS = 100;
     private static final int WATER_SEARCH_RADIUS = 40;
+    private static boolean warnedNoWater;
     private static final long DAY_MS = 24L * 3600_000L;
 
     private static LeyLogic.State state;
@@ -203,6 +204,7 @@ public final class LeyService {
     private static void appear(MinecraftServer server, LeyLogic.State st, long now, ServerPlayer anchor) {
         String dimension = anchor.level().dimension().location().toString();
         LeyLogic.appear(st, now, dimension, anchor.getX(), anchor.getZ());
+        st.y = anchor.getY();
         save();
         ensureEntity(server, st);
         broadcast(server, "§6[Старый Лей] §eИз глубины поднимается Старый Лей! Он кружит у §b" + anchor.getGameProfile().getName()
@@ -222,11 +224,19 @@ public final class LeyService {
         if (level == null) {
             return;
         }
-        BlockPos water = findWater(level, BlockPos.containing(st.x, level.getSeaLevel(), st.z));
-        if (water == null) {
-            AquaTechUI.LOGGER.warn("[ley] воды в радиусе {} блоков от {} {} нет, Лея не видно", WATER_SEARCH_RADIUS, (int) st.x, (int) st.z);
+        BlockPos origin = BlockPos.containing(st.x, st.y == 0.0D ? level.getSeaLevel() : st.y, st.z);
+        if (!level.hasChunkAt(origin)) {
             return;
         }
+        BlockPos water = findWater(level, origin);
+        if (water == null) {
+            if (!warnedNoWater) {
+                warnedNoWater = true;
+                AquaTechUI.LOGGER.warn("[ley] воды в радиусе {} блоков от {} {} {} нет, Лея не видно", WATER_SEARCH_RADIUS, (int) st.x, origin.getY(), (int) st.z);
+            }
+            return;
+        }
+        warnedNoWater = false;
         OldLeyEntity ley = ModEntities.OLD_LEY.get().create(level);
         if (ley == null) {
             return;
@@ -249,12 +259,12 @@ public final class LeyService {
                 if (!level.hasChunkAt(new BlockPos(x, origin.getY(), z))) {
                     continue;
                 }
-                for (int y = Math.min(level.getMaxBuildHeight() - 1, origin.getY() + 40); y >= level.getMinBuildHeight(); y--) {
+                for (int y = Math.min(level.getMaxBuildHeight() - 1, origin.getY() + 16); y >= level.getMinBuildHeight(); y--) {
                     BlockPos p = new BlockPos(x, y, z);
                     if (level.getFluidState(p).is(FluidTags.WATER) && !level.getFluidState(p.above()).is(FluidTags.WATER)) {
                         return p;
                     }
-                    if (y < origin.getY() - 40) {
+                    if (y < origin.getY() - 64) {
                         break;
                     }
                 }

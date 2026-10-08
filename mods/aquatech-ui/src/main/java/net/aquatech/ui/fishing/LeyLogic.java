@@ -32,6 +32,8 @@ public final class LeyLogic {
         public long activeUntilMs;
         public String dimension = "";
         public double x;
+        /** Высота игрока в момент появления: вода ищется рядом с ней, а не по уровню моря. */
+        public double y;
         public double z;
     }
 
