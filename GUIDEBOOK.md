@@ -147,6 +147,7 @@
 **Живое на сервере сейчас:** пак 2.9.380, лаунчер 2.9.94, портал (обновлён 18.09), старая версия мода `aquatech_ui 1.0.93` / `aqualumen 0.3.48-alpha`.
 
 **Собрано и лежит локально, ждёт деплоя (Apex заблокирован):**
+- Центрифуги Productive Bees: три тира (`centrifuge`, `powered_centrifuge`, `heated_centrifuge`), новые модели idle/running и GUI, ресурсы в `kubejs/assets/productivebees/`. Не проверено в игре, в пак не выкачено.
 - `aquatech_ui 1.0.99`: атлас, грейды, наживки, фикс косяков/ажиотажа, контракты 2.0, вехи, рекорды видов, активный клёв, тултипы.
 - `aqualumen 0.3.53-alpha`: пити кейсов, вкладка «Атлас» в F4, множители цены за грейд, строка «Жор» в баннере событий.
 - Лаунчер: свежий UI-билд (сайдбар без иконок, спокойная карточка новостей) в `dist/AquaTechLauncher`.
@@ -167,6 +168,7 @@
 | Вид таблички славы (рама, окно, подложка под подпись) | `python tools/gen_fame_plaque.py`: рисует `fame_plaque.png` и модель с развёрткой, руками их не править; потом пересохранить `art/fame_plaque.bbmodel` из Blockbench. Подпись и рыбу рисует `FamePlaqueRenderer`, её масштаб и позиции должны совпадать с генератором |
 | Фичу по хабу/экономике | `mods/aqualumen-ui/src/.../`, сборка `./gradlew build` |
 | Машины | `mods/aquatech-machines/` + рецепты `97_machines_recipes.js` |
+| Вид центрифуг Productive Bees (3D и GUI трёх тиров) | исходники `mods/aquatech-machines/art/pb_centrifuge/` (`*.bbmodel`, `gui/*.png`), рантайм в `kubejs/assets/productivebees/` (`models/block/centrifuge/*.json`, `textures/`), логика PB не меняется |
 | Страницу сайта | `docs/*.html` (ручной HTML, генератор сайта не запускать) |
 | Выкатить портал | `python tools/deploy_to_cloudflare.py worker` + `python tools/portal/smoke_portal_and_versions.py` |
 | Выкатить пак | `python tools/publish_client_pack.py` → `python tools/upload_pack_release.py` → `docs/pack/manifest.json` |
