@@ -1,5 +1,5 @@
 {
-  "version": "2.9.462",
+  "version": "2.9.463",
   "mc_version": "1.20.1",
   "forge_version": "47.4.0",
   "server_ip": "g-pl-2.apexnodes.xyz",
@@ -64,9 +64,9 @@
     },
     {
       "path": "mods/aquatech_ui-1.0.113.jar",
-      "md5": "d1b3cc665efe01ca3df9d3b3d5ac6857",
-      "size": 4386780,
-      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.462/aquatech_ui-1.0.113.jar",
+      "md5": "d594a9becfe4a8981c4d9c17b9456db1",
+      "size": 4387115,
+      "url": "https://github.com/Renfild/AquaTeche/releases/download/pack-2.9.463/aquatech_ui-1.0.113.jar",
       "asset": "aquatech_ui-1.0.113.jar"
     },
     {
